@@ -1,0 +1,275 @@
+/**
+ */
+package org.bbaw.bts.btsmodel.impl;
+
+import org.bbaw.bts.btsmodel.BTSExternalReference;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
+
+import org.eclipse.emf.common.notify.Notification;
+
+import org.eclipse.emf.ecore.EClass;
+
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+/**
+ * <!-- begin-user-doc -->
+ * An implementation of the model object '<em><b>BTS External Reference</b></em>'.
+ * <!-- end-user-doc -->
+ * <p>
+ * The following features are implemented:
+ * <ul>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getProvider <em>Provider</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getType <em>Type</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @generated
+ */
+public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container implements BTSExternalReference {
+	/**
+	 * The default value of the '{@link #getReference() <em>Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String REFERENCE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getReference() <em>Reference</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReference()
+	 * @generated
+	 * @ordered
+	 */
+	protected String reference = REFERENCE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProvider() <em>Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProvider()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROVIDER_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProvider() <em>Provider</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProvider()
+	 * @generated
+	 * @ordered
+	 */
+	protected String provider = PROVIDER_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSExternalReferenceImpl() {
+		super();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EClass eStaticClass() {
+		return BtsmodelPackage.Literals.BTS_EXTERNAL_REFERENCE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getReference() {
+		return reference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReference(String newReference) {
+		String oldReference = reference;
+		reference = newReference;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE, oldReference, reference));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProvider() {
+		return provider;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProvider(String newProvider) {
+		String oldProvider = provider;
+		provider = newProvider;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER, oldProvider, provider));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eGet(int featureID, boolean resolve, boolean coreType) {
+		switch (featureID)
+		{
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
+				return getReference();
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
+				return getProvider();
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
+				return getType();
+		}
+		return super.eGet(featureID, resolve, coreType);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eSet(int featureID, Object newValue) {
+		switch (featureID)
+		{
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
+				setReference((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
+				setProvider((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
+				setType((String)newValue);
+				return;
+		}
+		super.eSet(featureID, newValue);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void eUnset(int featureID) {
+		switch (featureID)
+		{
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
+				setReference(REFERENCE_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
+				setProvider(PROVIDER_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+		}
+		super.eUnset(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean eIsSet(int featureID) {
+		switch (featureID)
+		{
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
+				return REFERENCE_EDEFAULT == null ? reference != null : !REFERENCE_EDEFAULT.equals(reference);
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
+				return PROVIDER_EDEFAULT == null ? provider != null : !PROVIDER_EDEFAULT.equals(provider);
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+		}
+		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (reference: ");
+		result.append(reference);
+		result.append(", provider: ");
+		result.append(provider);
+		result.append(", type: ");
+		result.append(type);
+		result.append(')');
+		return result.toString();
+	}
+
+} //BTSExternalReferenceImpl

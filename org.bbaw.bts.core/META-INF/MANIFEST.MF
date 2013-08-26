@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Core
+Bundle-SymbolicName: org.bbaw.bts.core
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BBAW
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7

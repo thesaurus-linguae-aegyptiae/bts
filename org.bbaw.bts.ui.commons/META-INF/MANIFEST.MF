@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: UICommons
+Bundle-SymbolicName: org.bbaw.bts.ui.commons
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BBAW
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ClassPath: .,
+ lib/opal-0.9.5.2.jar
+Export-Package: org.bbaw.bts.ui.commons.validator,
+ org.mihalis.opal,
+ org.mihalis.opal.itemSelector,
+ org.mihalis.opal.multiChoice
+Require-Bundle: org.eclipse.swt;bundle-version="3.102.0",
+ org.eclipse.core.databinding;bundle-version="1.4.1"
+Import-Package: org.eclipse.core.runtime;version="3.4.0"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="org.bbaw.bts.app" width="1000" height="750">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main" selectedElement="_lAwBoADxEeOpmPWG2KRhAA">
+      <children xsi:type="advanced:Perspective" xmi:id="_lAwBoADxEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspective.main" label="hhhhhhhhh">
+        <children xsi:type="basic:PartSashContainer" xmi:id="_1NBNMAD3EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partsashcontainer.left" horizontal="true">
+          <children xsi:type="basic:PartStack" xmi:id="_DjKeQAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partstack.left" containerData="25"/>
+          <children xsi:type="basic:PartSashContainer" xmi:id="_pbqVcANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.middle.horizontal" containerData="75" horizontal="true">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_yR59YANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.middle.vertical" containerData="65">
+              <children xsi:type="basic:PartStack" xmi:id="_8xzDsANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partstack.middle.top" containerData="60"/>
+              <children xsi:type="basic:PartStack" xmi:id="__gSqQANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partstack.middle.bottom" containerData="40"/>
+            </children>
+            <children xsi:type="basic:PartSashContainer" xmi:id="_uXkOwANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.right" containerData="35">
+              <children xsi:type="basic:PartStack" xmi:id="_A1-DwANdEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partstack.right.top"/>
+            </children>
+          </children>
+        </children>
+      </children>
+    </children>
+    <mainMenu xmi:id="_3KR2AAD1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.menu.0">
+      <children xsi:type="menu:Menu" xmi:id="_N6Q08AD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.file" label="File">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_f1DVMAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.4"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_Px66IAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.edit" label="Edit">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_cWRhMAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.0"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_Qq2GMAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.insert" label="Insert">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_c7hjUAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.1"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_pvfCcAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.preferences" label="Preferences">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_fAvjYAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.3"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_SBkokAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.help" label="Help">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_di3QIAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.2"/>
+      </children>
+    </mainMenu>
+    <trimBars xmi:id="_gMmj4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.trimbar.0">
+      <children xsi:type="menu:ToolBar" xmi:id="_g3q6IAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolbar.main">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_lVLAMAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.handledtoolitem.1" label="New"/>
+        <children xsi:type="menu:ToolBarSeparator" xmi:id="_jLCq8AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolbarseparator.0"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_jwJjIAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.handledtoolitem.0" label="Open"/>
+      </children>
+      <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>
+    </trimBars>
+  </children>
+  <addons xmi:id="_oEzH4gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
+  <addons xmi:id="_oEzH4wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
+  <addons xmi:id="_oEzH5AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
+  <addons xmi:id="_oEzH5QA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.commands.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.CommandProcessingAddon"/>
+  <addons xmi:id="_oEzH5gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
+  <addons xmi:id="_oEzH5wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
+  <addons xmi:id="_oEzH6AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <addons xmi:id="_fiJaAADoEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.addon.0" contributionURI="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.TestTCObjectService"/>
+</application:Application>

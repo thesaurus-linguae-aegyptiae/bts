@@ -1,0 +1,49 @@
+Label {
+  font: Verdana 8px;
+  color: black;
+}
+Composite Label {
+  color: black;
+}
+Text {
+  font: Verdana 8px;
+}
+/* Identifies only those SWT Text elements
+appearing within a Composite */
+Composite Text {
+  background-color: white;
+  color: black;
+}
+SashForm {
+  background-color: #c1d5ef;
+}
+/* background uses a gradient */
+.MTrimBar {
+  background-color: #e3efff #c1d5ef;
+  color: white;
+  font: Verdana 8px;
+}
+
+Shell {
+  background-color: #e3efff #c1d5ef 60%;
+} 
+
+Toolbar {
+	 background-color: #e3efff #c1d5ef 60%;
+}
+
+ToolBarElement {
+	 background-color: #e3efff #c1d5ef 60%;
+}
+
+.MTrimBar#org-eclipse-ui-main-toolbar {
+    background-collor:  red;
+}
+
+Button {
+	background-color: #e3efff;
+	border-color: red;
+	border-width: 6;
+	border-style: dotted;
+	color: #FF0000;
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.e4.ui.css.swt.theme">
+      <theme
+            basestylesheeturi="css/login.css"
+            id="org.bbaw.bts.ui.themes.login"
+            label="Login Theme">
+      </theme>
+   </extension>
+</plugin>
