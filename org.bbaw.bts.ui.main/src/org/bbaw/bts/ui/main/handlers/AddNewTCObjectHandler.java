@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.main.handlers;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -16,15 +15,10 @@ import org.eclipse.swt.widgets.Shell;
 public class AddNewTCObjectHandler
 {
 
-	@Inject
-	EventBroker eventBroker;
-	@Inject
-	private CorpusNavigatorController corpusNavigatorController;
-
-	@Inject
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection,
-			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell)
+			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, EventBroker eventBroker,
+			CorpusNavigatorController corpusNavigatorController)
 	{
 		final BTSTCObject object = corpusNavigatorController.createNewTCObject();
 

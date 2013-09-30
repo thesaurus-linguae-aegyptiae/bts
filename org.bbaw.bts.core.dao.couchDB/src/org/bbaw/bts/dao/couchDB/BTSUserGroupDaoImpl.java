@@ -24,18 +24,18 @@ public class BTSUserGroupDaoImpl extends CouchDBDao<BTSUserGroup, String> implem
 {
 
 	@Override
-	public boolean removeBTSUserGroup(BTSUserGroup userGroup)
+	public boolean removeBTSUserGroup(BTSUserGroup userGroup, String path)
 	{
 		// TODO Auto-generated method stub
-		super.remove(userGroup);
+		super.remove(userGroup, path);
 		return true;
 	}
 
 	@Override
-	public List<BTSUserGroup> list()
+	public List<BTSUserGroup> list(String path)
 	{
-		List<JsonObject> allDocs = dbClient.view(CouchDBConstants.VIEW_ALL_BTSUSERGROUPS).includeDocs(true)
-				.query(JsonObject.class);
+		List<JsonObject> allDocs = getCouchDBClient(path).view(CouchDBConstants.VIEW_ALL_BTSUSERGROUPS)
+				.includeDocs(true).query(JsonObject.class);
 		ArrayList<BTSUserGroup> results = new ArrayList<BTSUserGroup>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
@@ -45,8 +45,7 @@ public class BTSUserGroupDaoImpl extends CouchDBDao<BTSUserGroup, String> implem
 			System.out.println(jo.get(CouchDBConstants.ID_STRING).getAsString());
 			if (!jo.get(CouchDBConstants.ID_STRING).getAsString().startsWith("_"))
 			{
-				URI uri = URI.createURI(CouchDBConstants.BASEURL + CouchDBConstants.BASE_DB
-						+ jo.get(CouchDBConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(local_db_url + path + jo.get(CouchDBConstants.ID_STRING).getAsString());
 				Resource resource = resourceSet.getResource(uri, true);
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());

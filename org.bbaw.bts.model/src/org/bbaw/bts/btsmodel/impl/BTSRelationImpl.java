@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getComment <em>Comment</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getCertainty <em>Certainty</em>}</li>
  * </ul>
  * </p>
  *
@@ -108,6 +109,26 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @ordered
 	 */
 	protected String comment = COMMENT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getCertainty() <em>Certainty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCertainty()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CERTAINTY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getCertainty() <em>Certainty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCertainty()
+	 * @generated
+	 * @ordered
+	 */
+	protected String certainty = CERTAINTY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -217,6 +238,29 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getCertainty()
+	{
+		return certainty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setCertainty(String newCertainty)
+	{
+		String oldCertainty = certainty;
+		certainty = newCertainty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_RELATION__CERTAINTY, oldCertainty, certainty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
@@ -229,6 +273,8 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 				return getSubtype();
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				return getComment();
+			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
+				return getCertainty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -253,6 +299,9 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 				return;
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				setComment((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
+				setCertainty((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -279,6 +328,9 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
+				setCertainty(CERTAINTY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -300,6 +352,8 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
+			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
+				return CERTAINTY_EDEFAULT == null ? certainty != null : !CERTAINTY_EDEFAULT.equals(certainty);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -322,6 +376,8 @@ public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTS
 		result.append(subtype);
 		result.append(", comment: ");
 		result.append(comment);
+		result.append(", certainty: ");
+		result.append(certainty);
 		result.append(')');
 		return result.toString();
 	}

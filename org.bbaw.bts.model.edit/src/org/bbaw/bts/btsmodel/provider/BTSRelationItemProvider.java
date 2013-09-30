@@ -65,6 +65,7 @@ public class BTSRelationItemProvider
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
+			addCertaintyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -158,6 +159,29 @@ public class BTSRelationItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Certainty feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addCertaintyPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSRelation_certainty_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSRelation_certainty_feature", "_UI_BTSRelation_type"),
+				 BtsmodelPackage.Literals.BTS_RELATION__CERTAINTY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns BTSRelation.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -199,6 +223,7 @@ public class BTSRelationItemProvider
 			case BtsmodelPackage.BTS_RELATION__TYPE:
 			case BtsmodelPackage.BTS_RELATION__SUBTYPE:
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
+			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

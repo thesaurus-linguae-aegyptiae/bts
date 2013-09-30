@@ -20,18 +20,22 @@ import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import com.google.gson.JsonObject;
 
 @Creatable
-public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implements BTSTCObjectDao{
+public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implements BTSTCObjectDao
+{
 
 	@Override
-	public boolean removeBTSTCObject(BTSTCObject tcObject) {
+	public boolean removeBTSTCObject(BTSTCObject tcObject, String path)
+	{
 		// TODO Auto-generated method stub
-		super.remove(tcObject);
+		super.remove(tcObject, path);
 		return true;
 	}
 
 	@Override
-	public List<BTSTCObject> list() {
-		List<JsonObject> allDocs = dbClient.view(CouchDBConstants.VIEW_ALL_DOCS).includeDocs(true).query(JsonObject.class);
+	public List<BTSTCObject> list(String path)
+	{
+		List<JsonObject> allDocs = getCouchDBClient(path).view(CouchDBConstants.VIEW_ALL_DOCS).includeDocs(true)
+				.query(JsonObject.class);
 		ArrayList<BTSTCObject> results = new ArrayList<BTSTCObject>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
@@ -41,9 +45,10 @@ public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implemen
 			System.out.println(jo.get(CouchDBConstants.ID_STRING).getAsString());
 			if (!jo.get(CouchDBConstants.ID_STRING).getAsString().startsWith("_"))
 			{
-				URI uri = URI.createURI(CouchDBConstants.BASEURL + CouchDBConstants.BASE_DB + jo.get(CouchDBConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(local_db_url + path + jo.get(CouchDBConstants.ID_STRING).getAsString());
 				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()), new HashMap<Object, Object>());
+				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
+						new HashMap<Object, Object>());
 				loader.fillResource(resource);
 				if (resource.getContents().get(0) instanceof BTSTCObject)
 				{

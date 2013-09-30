@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.main.handlers;
 
-import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfiguration;
@@ -14,17 +13,12 @@ import org.eclipse.swt.widgets.Shell;
 
 public class NewConfigurationHandler
 {
-	@Inject
-	EventBroker eventBroker;
-	@Inject
-	private BTSConfigurationController configurationController;
 
-	@Inject
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
 			BTSConfigurationController configurationController, EventBroker eventBroker)
 	{
-		System.out.println("execute NewConfigurationHandler");
+		System.out.println("execute NewConfigurationHandler!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		final BTSConfiguration config = configurationController.createNew();
 
 		NewConfigurationDialog dialog = new NewConfigurationDialog(shell, new BTSConfiguration[] { config });

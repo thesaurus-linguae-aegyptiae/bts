@@ -13,11 +13,12 @@ public class IDServiceContextFunction extends ContextFunction
 	public Object compute(IEclipseContext context)
 	{
 		System.out.println("Intitialize IDService");
-		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
-
 		IDService idService = ContextInjectionFactory.make(IDServiceImpl.class, context);
-		ctx.set(IDService.class, idService);
+
+		MApplication application = context.get(MApplication.class);
+		// IEclipseContext ctx = application.getContext();
+
+		context.set(IDService.class, idService);
 
 		return idService;
 	}

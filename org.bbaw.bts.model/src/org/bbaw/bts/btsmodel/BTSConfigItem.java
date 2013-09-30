@@ -22,6 +22,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerType <em>Owner Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getReferencedType <em>Referenced Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getRules <em>Rules</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#isShowWidget <em>Show Widget</em>}</li>
  * </ul>
  * </p>
  *
@@ -269,5 +271,47 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject {
 	 * @generated
 	 */
 	EList<String> getReferencedType();
+
+	/**
+	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSWorkflowRuleItem}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Rules</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Rules</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_Rules()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSWorkflowRuleItem> getRules();
+
+	/**
+	 * Returns the value of the '<em><b>Show Widget</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Show Widget</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Show Widget</em>' attribute.
+	 * @see #setShowWidget(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_ShowWidget()
+	 * @model
+	 * @generated
+	 */
+	boolean isShowWidget();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#isShowWidget <em>Show Widget</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Show Widget</em>' attribute.
+	 * @see #isShowWidget()
+	 * @generated
+	 */
+	void setShowWidget(boolean value);
 
 } // BTSConfigItem

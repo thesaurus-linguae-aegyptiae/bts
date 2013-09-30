@@ -319,6 +319,51 @@ public interface BtsmodelFactory extends EFactory {
 	BTSListSubentry createBTSListSubentry();
 
 	/**
+	 * Returns a new object of class '<em>BTS Ths Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Ths Entry</em>'.
+	 * @generated
+	 */
+	BTSThsEntry createBTSThsEntry();
+
+	/**
+	 * Returns a new object of class '<em>BTS Project</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Project</em>'.
+	 * @generated
+	 */
+	BTSProject createBTSProject();
+
+	/**
+	 * Returns a new object of class '<em>BTSDB Connection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTSDB Connection</em>'.
+	 * @generated
+	 */
+	BTSDBConnection createBTSDBConnection();
+
+	/**
+	 * Returns a new object of class '<em>BTS Workflow Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Workflow Rule</em>'.
+	 * @generated
+	 */
+	BTSWorkflowRule createBTSWorkflowRule();
+
+	/**
+	 * Returns a new object of class '<em>BTS Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Operator</em>'.
+	 * @generated
+	 */
+	BTSOperator createBTSOperator();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

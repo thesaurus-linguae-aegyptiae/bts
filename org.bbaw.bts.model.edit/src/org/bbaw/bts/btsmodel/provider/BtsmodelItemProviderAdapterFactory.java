@@ -864,6 +864,131 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSThsEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSThsEntryItemProvider btsThsEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSThsEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSThsEntryAdapter()
+	{
+		if (btsThsEntryItemProvider == null)
+		{
+			btsThsEntryItemProvider = new BTSThsEntryItemProvider(this);
+		}
+
+		return btsThsEntryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSProject} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSProjectItemProvider btsProjectItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSProject}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSProjectAdapter()
+	{
+		if (btsProjectItemProvider == null)
+		{
+			btsProjectItemProvider = new BTSProjectItemProvider(this);
+		}
+
+		return btsProjectItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSDBConnection} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSDBConnectionItemProvider btsdbConnectionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSDBConnection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSDBConnectionAdapter()
+	{
+		if (btsdbConnectionItemProvider == null)
+		{
+			btsdbConnectionItemProvider = new BTSDBConnectionItemProvider(this);
+		}
+
+		return btsdbConnectionItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSWorkflowRule} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSWorkflowRuleItemProvider btsWorkflowRuleItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSWorkflowRule}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSWorkflowRuleAdapter()
+	{
+		if (btsWorkflowRuleItemProvider == null)
+		{
+			btsWorkflowRuleItemProvider = new BTSWorkflowRuleItemProvider(this);
+		}
+
+		return btsWorkflowRuleItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSOperator} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSOperatorItemProvider btsOperatorItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSOperator}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSOperatorAdapter()
+	{
+		if (btsOperatorItemProvider == null)
+		{
+			btsOperatorItemProvider = new BTSOperatorItemProvider(this);
+		}
+
+		return btsOperatorItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -998,6 +1123,11 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsListItemProvider != null) btsListItemProvider.dispose();
 		if (btsPpSubentryItemProvider != null) btsPpSubentryItemProvider.dispose();
 		if (btsListSubentryItemProvider != null) btsListSubentryItemProvider.dispose();
+		if (btsThsEntryItemProvider != null) btsThsEntryItemProvider.dispose();
+		if (btsProjectItemProvider != null) btsProjectItemProvider.dispose();
+		if (btsdbConnectionItemProvider != null) btsdbConnectionItemProvider.dispose();
+		if (btsWorkflowRuleItemProvider != null) btsWorkflowRuleItemProvider.dispose();
+		if (btsOperatorItemProvider != null) btsOperatorItemProvider.dispose();
 	}
 
 }

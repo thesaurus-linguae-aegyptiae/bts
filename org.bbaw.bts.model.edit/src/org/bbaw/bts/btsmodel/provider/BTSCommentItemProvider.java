@@ -64,6 +64,7 @@ public class BTSCommentItemProvider
 			addPropertyChangeSupportPropertyDescriptor(object);
 			add_idPropertyDescriptor(object);
 			add_revPropertyDescriptor(object);
+			addProjectPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 		}
@@ -106,6 +107,29 @@ public class BTSCommentItemProvider
 				 getString("_UI_BTSDBBaseObject__rev_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject__rev_feature", "_UI_BTSDBBaseObject_type"),
 				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__REV,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Project feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProjectPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_project_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_project_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__PROJECT,
 				 true,
 				 false,
 				 false,
@@ -253,6 +277,7 @@ public class BTSCommentItemProvider
 			case BtsmodelPackage.BTS_COMMENT__PROPERTY_CHANGE_SUPPORT:
 			case BtsmodelPackage.BTS_COMMENT__ID:
 			case BtsmodelPackage.BTS_COMMENT__REV:
+			case BtsmodelPackage.BTS_COMMENT__PROJECT:
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

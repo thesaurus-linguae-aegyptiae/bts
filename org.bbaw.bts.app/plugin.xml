@@ -17,11 +17,15 @@
          </property>
          <property
                name="appName"
-               value="org.bbaw.bts.app">
+               value="Berlin Text System 3.0">
          </property>
-         <property
+         <!--<property
                name="lifeCycleURI"
                value="bundleclass://org.bbaw.bts.app.login/org.bbaw.bts.app.login.Login">
+         </property>-->
+         <property
+               name="lifeCycleURI"
+               value="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.lifeCycle.ApplicationStartupController">
          </property>
       </product>
    </extension>

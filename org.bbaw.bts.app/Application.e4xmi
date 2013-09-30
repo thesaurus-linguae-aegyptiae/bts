@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="org.bbaw.bts.app" width="1000" height="750">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0" width="1000" height="750">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main" selectedElement="_lAwBoADxEeOpmPWG2KRhAA">
       <children xsi:type="advanced:Perspective" xmi:id="_lAwBoADxEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspective.main" label="hhhhhhhhh">
         <children xsi:type="basic:PartSashContainer" xmi:id="_1NBNMAD3EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partsashcontainer.left" horizontal="true">
@@ -43,6 +43,11 @@
       <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>
     </trimBars>
   </children>
+  <bindingTables xmi:id="_TbwLQA5iEeOBWNILjo7Jaw" elementId="org.bbaw.bts.app.bindingtable.main" bindingContext="_AyBQAA5iEeOBWNILjo7Jaw"/>
+  <rootContext xmi:id="_AyBQAA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
+    <children xmi:id="_IirI4A5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.window" name="In Window"/>
+    <children xmi:id="_NEpfQA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialog" name="In Dialog"/>
+  </rootContext>
   <addons xmi:id="_oEzH4gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_oEzH4wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_oEzH5AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -50,5 +55,4 @@
   <addons xmi:id="_oEzH5gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_oEzH5wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_oEzH6AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
-  <addons xmi:id="_fiJaAADoEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.addon.0" contributionURI="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.TestTCObjectService"/>
 </application:Application>

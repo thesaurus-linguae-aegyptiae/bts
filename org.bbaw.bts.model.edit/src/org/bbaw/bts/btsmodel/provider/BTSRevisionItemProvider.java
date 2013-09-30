@@ -64,6 +64,7 @@ public class BTSRevisionItemProvider
 			addRefPropertyDescriptor(object);
 			addUserIdPropertyDescriptor(object);
 			addTimeStampPropertyDescriptor(object);
+			addRightsRevokedPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -135,6 +136,29 @@ public class BTSRevisionItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Rights Revoked feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRightsRevokedPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSRevision_rightsRevoked_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSRevision_rightsRevoked_feature", "_UI_BTSRevision_type"),
+				 BtsmodelPackage.Literals.BTS_REVISION__RIGHTS_REVOKED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns BTSRevision.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -173,6 +197,7 @@ public class BTSRevisionItemProvider
 			case BtsmodelPackage.BTS_REVISION__REF:
 			case BtsmodelPackage.BTS_REVISION__USER_ID:
 			case BtsmodelPackage.BTS_REVISION__TIME_STAMP:
+			case BtsmodelPackage.BTS_REVISION__RIGHTS_REVOKED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

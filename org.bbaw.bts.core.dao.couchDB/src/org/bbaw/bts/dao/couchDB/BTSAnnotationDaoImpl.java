@@ -24,10 +24,10 @@ public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> impl
 {
 
 	@Override
-	public List<BTSAnnotation> list()
+	public List<BTSAnnotation> list(String path)
 	{
-		List<JsonObject> allDocs = dbClient.view(CouchDBConstants.VIEW_ALL_BTSANNOTATIONS).includeDocs(true)
-				.query(JsonObject.class);
+		List<JsonObject> allDocs = getCouchDBClient(path).view(CouchDBConstants.VIEW_ALL_BTSANNOTATIONS)
+				.includeDocs(true).query(JsonObject.class);
 		ArrayList<BTSAnnotation> results = new ArrayList<BTSAnnotation>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
@@ -37,8 +37,7 @@ public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> impl
 			System.out.println(jo.get(CouchDBConstants.ID_STRING).getAsString());
 			if (!jo.get(CouchDBConstants.ID_STRING).getAsString().startsWith("_"))
 			{
-				URI uri = URI.createURI(CouchDBConstants.BASEURL + CouchDBConstants.BASE_DB
-						+ jo.get(CouchDBConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(local_db_url + path + jo.get(CouchDBConstants.ID_STRING).getAsString());
 				Resource resource = resourceSet.getResource(uri, true);
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());
@@ -50,11 +49,11 @@ public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> impl
 	}
 
 	@Override
-	public boolean removeBTSAnnotation(BTSAnnotation annotation)
+	public boolean removeBTSAnnotation(BTSAnnotation annotation, String path)
 	{
 
 		// FIXME add logic and cache syncronisation
-		super.remove(annotation);
+		super.remove(annotation, path);
 		return true;
 	}
 

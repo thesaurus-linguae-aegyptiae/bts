@@ -22,7 +22,10 @@ Require-Bundle: org.eclipse.e4.core.di,
  org.eclipse.emf.common;bundle-version="2.9.0",
  org.eclipse.core.databinding.observable,
  org.bbaw.bts.ui.commons,
- org.bbaw.bts.core.commons
+ org.bbaw.bts.core.commons,
+ org.eclipse.e4.core.di.extensions,
+ org.eclipse.jface.databinding,
+ org.eclipse.swt
 Export-Package: org.bbaw.bts.core.controller.dialogControllers,
  org.bbaw.bts.core.controller.generalController,
  org.bbaw.bts.core.controller.handlerController,

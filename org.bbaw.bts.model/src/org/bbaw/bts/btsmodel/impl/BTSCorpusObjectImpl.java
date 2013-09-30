@@ -36,11 +36,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getLease <em>Lease</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#get_rev <em>rev</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getPassport <em>Passport</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getParentId <em>Parent Id</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getCorpusPrefix <em>Corpus Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getWorkPhase <em>Work Phase</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,6 +116,24 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected String _rev = _REV_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROJECT_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected String project = PROJECT_EDEFAULT;
+	/**
 	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getRelations()
@@ -141,23 +161,23 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected BTSCorpusObject parent;
 
 	/**
-	 * The default value of the '{@link #getParentId() <em>Parent Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getParentId()
+	 * The default value of the '{@link #getCorpusPrefix() <em>Corpus Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCorpusPrefix()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String PARENT_ID_EDEFAULT = null;
-
+	protected static final String CORPUS_PREFIX_EDEFAULT = null;
 	/**
-	 * The cached value of the '{@link #getParentId() <em>Parent Id</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getParentId()
+	 * The cached value of the '{@link #getCorpusPrefix() <em>Corpus Prefix</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCorpusPrefix()
 	 * @generated
 	 * @ordered
 	 */
-	protected String parentId = PARENT_ID_EDEFAULT;
-
+	protected String corpusPrefix = CORPUS_PREFIX_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -166,6 +186,25 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * @ordered
 	 */
 	protected EList<BTSCorpusObject> children;
+
+	/**
+	 * The default value of the '{@link #getWorkPhase() <em>Work Phase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWorkPhase()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String WORK_PHASE_EDEFAULT = null;
+	/**
+	 * The cached value of the '{@link #getWorkPhase() <em>Work Phase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWorkPhase()
+	 * @generated
+	 * @ordered
+	 */
+	protected String workPhase = WORK_PHASE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -271,6 +310,29 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		_rev = new_rev;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__REV, old_rev, _rev));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProject()
+	{
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProject(String newProject)
+	{
+		String oldProject = project;
+		project = newProject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT, oldProject, project));
 	}
 
 	/**
@@ -393,24 +455,26 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getParentId()
+	public String getCorpusPrefix()
 	{
-		return parentId;
+		return corpusPrefix;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setParentId(String newParentId)
+	public void setCorpusPrefix(String newCorpusPrefix)
 	{
-		String oldParentId = parentId;
-		parentId = newParentId;
+		String oldCorpusPrefix = corpusPrefix;
+		corpusPrefix = newCorpusPrefix;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT_ID, oldParentId, parentId));
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX, oldCorpusPrefix, corpusPrefix));
 	}
 
 	/**
@@ -431,11 +495,22 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getObjectType()
+	public String getWorkPhase()
 	{
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return workPhase;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setWorkPhase(String newWorkPhase)
+	{
+		String oldWorkPhase = workPhase;
+		workPhase = newWorkPhase;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE, oldWorkPhase, workPhase));
 	}
 
 	/**
@@ -498,6 +573,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return get_id();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 				return get_rev();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
+				return getProject();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return getRelations();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -505,10 +582,12 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT_ID:
-				return getParentId();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
+				return getCorpusPrefix();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
 				return getChildren();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
+				return getWorkPhase();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -535,6 +614,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 				set_rev((String)newValue);
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
+				setProject((String)newValue);
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
@@ -545,12 +627,15 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
 				setParent((BTSCorpusObject)newValue);
 				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT_ID:
-				setParentId((String)newValue);
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
+				setCorpusPrefix((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends BTSCorpusObject>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
+				setWorkPhase((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -577,6 +662,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 				set_rev(_REV_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
+				setProject(PROJECT_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				return;
@@ -586,11 +674,14 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
 				setParent((BTSCorpusObject)null);
 				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT_ID:
-				setParentId(PARENT_ID_EDEFAULT);
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
+				setCorpusPrefix(CORPUS_PREFIX_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
 				getChildren().clear();
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
+				setWorkPhase(WORK_PHASE_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -613,16 +704,20 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
+				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
 				return passport != null;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
 				return parent != null;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT_ID:
-				return PARENT_ID_EDEFAULT == null ? parentId != null : !PARENT_ID_EDEFAULT.equals(parentId);
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
+				return CORPUS_PREFIX_EDEFAULT == null ? corpusPrefix != null : !CORPUS_PREFIX_EDEFAULT.equals(corpusPrefix);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
 				return children != null && !children.isEmpty();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
+				return WORK_PHASE_EDEFAULT == null ? workPhase != null : !WORK_PHASE_EDEFAULT.equals(workPhase);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -649,6 +744,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE: return BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__ID: return BtsmodelPackage.BTSDB_BASE_OBJECT__ID;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
 				default: return -1;
 			}
 		}
@@ -677,6 +773,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE: return BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__ID: return BtsmodelPackage.BTS_CORPUS_OBJECT__ID;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_CORPUS_OBJECT__REV;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT;
 				default: return -1;
 			}
 		}
@@ -718,8 +815,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		switch (operationID)
 		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT___GET_OBJECT_TYPE:
-				return getObjectType();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
@@ -746,8 +841,12 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		result.append(_id);
 		result.append(", _rev: ");
 		result.append(_rev);
-		result.append(", parentId: ");
-		result.append(parentId);
+		result.append(", project: ");
+		result.append(project);
+		result.append(", corpusPrefix: ");
+		result.append(corpusPrefix);
+		result.append(", workPhase: ");
+		result.append(workPhase);
 		result.append(')');
 		return result.toString();
 	}

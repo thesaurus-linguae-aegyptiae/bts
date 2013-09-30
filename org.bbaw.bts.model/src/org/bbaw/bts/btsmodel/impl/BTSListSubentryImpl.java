@@ -2,17 +2,22 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.util.Collection;
 import org.bbaw.bts.btsmodel.BTSListSubentry;
 import org.bbaw.bts.btsmodel.BTSPassport;
+import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +27,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSListSubentryImpl#getPassport <em>Passport</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSListSubentryImpl#getWords <em>Words</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,6 +43,16 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 * @ordered
 	 */
 	protected BTSPassport passport;
+
+	/**
+	 * The cached value of the '{@link #getWords() <em>Words</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWords()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSWord> words;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -107,12 +123,28 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSWord> getWords()
+	{
+		if (words == null)
+		{
+			words = new EObjectContainmentEList<BTSWord>(BTSWord.class, this, BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS);
+		}
+		return words;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				return basicSetPassport(null, msgs);
+			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
+				return ((InternalEList<?>)getWords()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -128,6 +160,8 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 		{
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				return getPassport();
+			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
+				return getWords();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -137,12 +171,17 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				setPassport((BTSPassport)newValue);
+				return;
+			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
+				getWords().clear();
+				getWords().addAll((Collection<? extends BTSWord>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -160,6 +199,9 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				setPassport((BTSPassport)null);
 				return;
+			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
+				getWords().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -175,6 +217,8 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 		{
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				return passport != null;
+			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
+				return words != null && !words.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

@@ -16,39 +16,50 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
-
-import com.google.gson.JsonObject;
+import org.lightcouch.NoDocumentException;
+import org.lightcouch.View;
 
 @Creatable
 public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String> implements BTSConfigurationDao
 {
 
 	@Override
-	public boolean removeBTSConfiguration(BTSConfiguration btsConfiguration)
+	public boolean removeBTSConfiguration(BTSConfiguration btsConfiguration, String path)
 	{
 		// TODO Auto-generated method stub
-		super.remove(btsConfiguration);
+		super.remove(btsConfiguration, path);
 		return true;
 	}
 
 	@Override
-	public List<BTSConfiguration> list()
+	public List<BTSConfiguration> list(String path)
 	{
-		List<JsonObject> allDocs = dbClient.view(CouchDBConstants.VIEW_ALL_BTSCONFIGURATIONS).includeDocs(true)
-				.query(JsonObject.class);
+		List<String> allDocs = new ArrayList<String>(0);
+		View view;
+		try
+		{
+			view = getCouchDBClient(path).view(CouchDBConstants.VIEW_ALL_BTSCONFIGURATIONS);
+			allDocs = view.includeDocs(true).query();
+		} catch (NoDocumentException e)
+		{
+			e.printStackTrace();
+			createView(path, CouchDBConstants.PROJECT_ADMIN, CouchDBConstants.VIEW_ALL_BTSCONFIGURATIONS);
+			view = getCouchDBClient(path).view(CouchDBConstants.VIEW_ALL_BTSCONFIGURATIONS);
+			allDocs = view.includeDocs(true).query();
+		}
+
 		ArrayList<BTSConfiguration> results = new ArrayList<BTSConfiguration>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
 		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
-		for (JsonObject jo : allDocs)
+		for (String jo : allDocs)
 		{
-			System.out.println(jo.get(CouchDBConstants.ID_STRING).getAsString());
-			if (!jo.get(CouchDBConstants.ID_STRING).getAsString().startsWith("_"))
+			System.out.println(jo);
+			if (true)
 			{
-				URI uri = URI.createURI(CouchDBConstants.BASEURL + CouchDBConstants.BASE_DB
-						+ jo.get(CouchDBConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(local_db_url + "/" + path + "/" + extractIdFromObjectString(jo));
 				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
+				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
 				results.add((BTSConfiguration) resource.getContents().get(0));

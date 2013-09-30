@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSRelation#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSRelation#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSRelation#getComment <em>Comment</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSRelation#getCertainty <em>Certainty</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,5 +128,31 @@ public interface BTSRelation extends EObject {
 	 * @generated
 	 */
 	void setComment(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Certainty</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Certainty</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Certainty</em>' attribute.
+	 * @see #setCertainty(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSRelation_Certainty()
+	 * @model
+	 * @generated
+	 */
+	String getCertainty();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSRelation#getCertainty <em>Certainty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Certainty</em>' attribute.
+	 * @see #getCertainty()
+	 * @generated
+	 */
+	void setCertainty(String value);
 
 } // BTSRelation

@@ -14,6 +14,7 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getLease <em>Lease</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_rev <em>rev</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,5 +100,31 @@ public interface BTSDBBaseObject extends BTSObservableObject {
 	 * @generated
 	 */
 	void set_rev(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Project</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Project</em>' attribute.
+	 * @see #setProject(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Project()
+	 * @model
+	 * @generated
+	 */
+	String getProject();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getProject <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Project</em>' attribute.
+	 * @see #getProject()
+	 * @generated
+	 */
+	void setProject(String value);
 
 } // BTSDBBaseObject

@@ -55,24 +55,28 @@ public class CorpusNavigatorController
 		return o;
 	}
 
-	public void addChild(final BTSCorpusObject object, WritableList input, final BTSCorpusObject parent)
+	public void addRelation(final BTSCorpusObject subject, final String relationType, final BTSCorpusObject object,
+			WritableList input)
 	{
 		input.getRealm().asyncExec(new Runnable()
 		{
 			public void run()
 			{
 				System.out.println("run refresh");
-				if (parent != null)
+				if (subject != null)
 				{
 					System.out.println("selection is instance of BTSTextCorpus");
-					parent.getChildren().add(object);
 					BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
 					rel.setObjectId(object.get_id());
-					rel.setType("child");
-					parent.getRelations().add(rel);
-					object.setParent(parent);
-					tcObjectService.save((BTSTCObject) object);
-					corpusObjectService.save((BTSCorpusObject) parent);
+					rel.setType(relationType);
+					subject.getRelations().add(rel);
+					tcObjectService.save((BTSTCObject) subject);
+				}
+				if (relationType != null && relationType.equals("partOf"))
+				{
+					object.getChildren().add(subject);
+					subject.setParent(object);
+
 				}
 			}
 		});

@@ -77,6 +77,7 @@ public class BTSListSubentryItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_LIST_SUBENTRY__PASSPORT);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_LIST_SUBENTRY__WORDS);
 		}
 		return childrenFeatures;
 	}
@@ -133,6 +134,7 @@ public class BTSListSubentryItemProvider
 		switch (notification.getFeatureID(BTSListSubentry.class))
 		{
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
+			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -154,6 +156,11 @@ public class BTSListSubentryItemProvider
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_LIST_SUBENTRY__PASSPORT,
 				 BtsmodelFactory.eINSTANCE.createBTSPassport()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_LIST_SUBENTRY__WORDS,
+				 BtsmodelFactory.eINSTANCE.createBTSWord()));
 	}
 
 }

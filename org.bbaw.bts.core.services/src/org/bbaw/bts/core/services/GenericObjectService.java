@@ -4,7 +4,8 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 
-public interface GenericObjectService<E extends BTSDBBaseObject, K> {
+public interface GenericObjectService<E extends BTSDBBaseObject, K>
+{
 
 	E createNew();
 

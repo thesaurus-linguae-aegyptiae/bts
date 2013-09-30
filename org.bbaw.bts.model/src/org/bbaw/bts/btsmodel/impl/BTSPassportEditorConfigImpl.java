@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#isShowWidget <em>Show Widget</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getWidgetType <em>Widget Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#isRequired <em>Required</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#isAllowMultiple <em>Allow Multiple</em>}</li>
@@ -31,26 +30,6 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * @generated
  */
 public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container implements BTSPassportEditorConfig {
-	/**
-	 * The default value of the '{@link #isShowWidget() <em>Show Widget</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isShowWidget()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean SHOW_WIDGET_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isShowWidget() <em>Show Widget</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isShowWidget()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean showWidget = SHOW_WIDGET_EDEFAULT;
-
 	/**
 	 * The default value of the '{@link #getWidgetType() <em>Widget Type</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -175,27 +154,6 @@ public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isShowWidget() {
-		return showWidget;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setShowWidget(boolean newShowWidget) {
-		boolean oldShowWidget = showWidget;
-		showWidget = newShowWidget;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET, oldShowWidget, showWidget));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getWidgetType() {
 		return widgetType;
 	}
@@ -307,8 +265,6 @@ public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container im
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET:
-				return isShowWidget();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				return getWidgetType();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:
@@ -332,9 +288,6 @@ public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container im
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET:
-				setShowWidget((Boolean)newValue);
-				return;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				setWidgetType((String)newValue);
 				return;
@@ -363,9 +316,6 @@ public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container im
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET:
-				setShowWidget(SHOW_WIDGET_EDEFAULT);
-				return;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				setWidgetType(WIDGET_TYPE_EDEFAULT);
 				return;
@@ -394,8 +344,6 @@ public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container im
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET:
-				return showWidget != SHOW_WIDGET_EDEFAULT;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				return WIDGET_TYPE_EDEFAULT == null ? widgetType != null : !WIDGET_TYPE_EDEFAULT.equals(widgetType);
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:
@@ -420,9 +368,7 @@ public class BTSPassportEditorConfigImpl extends MinimalEObjectImpl.Container im
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (showWidget: ");
-		result.append(showWidget);
-		result.append(", widgetType: ");
+		result.append(" (widgetType: ");
 		result.append(widgetType);
 		result.append(", required: ");
 		result.append(required);

@@ -15,8 +15,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getPassport <em>Passport</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getParent <em>Parent</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getParentId <em>Parent Id</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getCorpusPrefix <em>Corpus Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getWorkPhase <em>Work Phase</em>}</li>
  * </ul>
  * </p>
  *
@@ -94,30 +95,30 @@ public interface BTSCorpusObject extends BTSObject, BTSDBBaseObject {
 	void setParent(BTSCorpusObject value);
 
 	/**
-	 * Returns the value of the '<em><b>Parent Id</b></em>' attribute.
+	 * Returns the value of the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Parent Id</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Corpus Prefix</em>' attribute isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parent Id</em>' attribute.
-	 * @see #setParentId(String)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSCorpusObject_ParentId()
-	 * @model
+	 * @return the value of the '<em>Corpus Prefix</em>' attribute.
+	 * @see #setCorpusPrefix(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSCorpusObject_CorpusPrefix()
+	 * @model transient="true"
 	 * @generated
 	 */
-	String getParentId();
+	String getCorpusPrefix();
 
 	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getParentId <em>Parent Id</em>}' attribute.
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getCorpusPrefix <em>Corpus Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parent Id</em>' attribute.
-	 * @see #getParentId()
+	 * @param value the new value of the '<em>Corpus Prefix</em>' attribute.
+	 * @see #getCorpusPrefix()
 	 * @generated
 	 */
-	void setParentId(String value);
+	void setCorpusPrefix(String value);
 
 	/**
 	 * Returns the value of the '<em><b>Children</b></em>' reference list.
@@ -136,11 +137,29 @@ public interface BTSCorpusObject extends BTSObject, BTSDBBaseObject {
 	EList<BTSCorpusObject> getChildren();
 
 	/**
+	 * Returns the value of the '<em><b>Work Phase</b></em>' attribute.
 	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Work Phase</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
 	 * <!-- end-user-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>Work Phase</em>' attribute.
+	 * @see #setWorkPhase(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSCorpusObject_WorkPhase()
+	 * @model
 	 * @generated
 	 */
-	String getObjectType();
+	String getWorkPhase();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getWorkPhase <em>Work Phase</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Work Phase</em>' attribute.
+	 * @see #getWorkPhase()
+	 * @generated
+	 */
+	void setWorkPhase(String value);
 
 } // BTSCorpusObject

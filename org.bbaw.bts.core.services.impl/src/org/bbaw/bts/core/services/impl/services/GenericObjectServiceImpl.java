@@ -12,6 +12,8 @@ import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K extends Serializable> implements
 		GenericObjectService<E, K>
@@ -21,6 +23,24 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	@Inject
 	protected IDService idService;
+
+	@Inject
+	@Preference(value = "active_projects", nodePath = "org.bbaw.bts.app")
+	protected String active_projects;
+
+	@Inject
+	@Preference(value = "main_project", nodePath = "org.bbaw.bts.app")
+	protected String main_project;
+
+	@Inject
+	@Optional
+	@Preference(value = "active_corpora", nodePath = "org.bbaw.bts.app")
+	protected String active_corpora;
+
+	@Inject
+	@Optional
+	@Preference(value = "main_corpus", nodePath = "org.bbaw.bts.app")
+	protected String main_corpus;
 
 	protected Class<? extends BTSDBBaseObject> daoType;
 
@@ -39,6 +59,11 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		if (entity instanceof BTSDBBaseObject)
 		{
 			((BTSDBBaseObject) entity).set_id(idService.createId());
+			entity.setProject(main_project);
+		}
+		if (entity instanceof BTSCorpusObject)
+		{
+			((BTSCorpusObject) entity).setCorpusPrefix(main_corpus);
 		}
 	}
 
@@ -65,32 +90,52 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Override
 	public abstract List<E> list();
 
-	protected void loadChildren(List<E> list)
-	{
-		for (E parent : list)
-		{
-			loadChildren(parent);
-		}
-
-	}
-
-	protected void loadChildren(E parent)
-	{
-		if (parent != null && parent instanceof BTSCorpusObject && !((BTSCorpusObject) parent).getRelations().isEmpty())
-		{
-			for (BTSRelation rel : ((BTSCorpusObject) parent).getRelations())
-			{
-				loadChild(((BTSCorpusObject) parent), rel);
-			}
-		}
-
-	}
-
 	private void loadChild(BTSCorpusObject parent, BTSRelation rel)
 	{
-		BTSCorpusObject child = corpusObjectDao.find(rel.getObjectId());
-		parent.getChildren().add(child);
+		// BTSCorpusObject child = corpusObjectDao.find(rel.getObjectId());
+		// parent.getChildren().add(child);
+
+		// FIXME umbauen auf view und suche nach related objects
 
 	}
 
+	// @Inject
+	// public void trackMainProject(@Preference(nodePath = "org.bbaw.bts.dao",
+	// value = "main_project") String main_project)
+	// {
+	// this.main_project = main_project;
+	// System.out.println("main_project changed " + main_project);
+	// Preferences preferences =
+	// ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.dao");
+	// this.main_project = preferences.get("main_project", "aaew");
+	// System.out.println(this.main_project);
+	// }
+	//
+	// @Inject
+	// public void trackActiveProjects(
+	// @Preference(nodePath = "org.bbaw.bts.dao", value = "active_projects")
+	// String active_projects)
+	// {
+	// this.active_projects = active_projects;
+	//
+	// }
+	//
+	// @Inject
+	// @Optional
+	// public void trackActiveCorpora(
+	// @Preference(nodePath = "org.bbaw.bts.dao", value = "active_corpora")
+	// String active_corpora)
+	// {
+	// this.active_corpora = active_corpora;
+	//
+	// }
+	//
+	// @Inject
+	// @Optional
+	// public void trackMainCorpus(@Preference(nodePath = "org.bbaw.bts.dao",
+	// value = "main_corpus") String main_corpus)
+	// {
+	// this.main_corpus = main_corpus;
+	//
+	// }
 }

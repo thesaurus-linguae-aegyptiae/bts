@@ -39,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getLease <em>Lease</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#get_rev <em>rev</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getTags <em>Tags</em>}</li>
@@ -117,6 +118,26 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 	 * @ordered
 	 */
 	protected String _rev = _REV_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROJECT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected String project = PROJECT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
@@ -269,6 +290,29 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getProject()
+	{
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProject(String newProject)
+	{
+		String oldProject = project;
+		project = newProject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_COMMENT__PROJECT, oldProject, project));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public PropertyChangeSupport getPropertyChangeSupport() {
 		return propertyChangeSupport;
 	}
@@ -388,6 +432,8 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 				return get_id();
 			case BtsmodelPackage.BTS_COMMENT__REV:
 				return get_rev();
+			case BtsmodelPackage.BTS_COMMENT__PROJECT:
+				return getProject();
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				return getComment();
 			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
@@ -419,6 +465,9 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 				return;
 			case BtsmodelPackage.BTS_COMMENT__REV:
 				set_rev((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_COMMENT__PROJECT:
+				setProject((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				setComment((String)newValue);
@@ -456,6 +505,9 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_COMMENT__REV:
 				set_rev(_REV_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_COMMENT__PROJECT:
+				setProject(PROJECT_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
@@ -486,6 +538,8 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_COMMENT__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
+			case BtsmodelPackage.BTS_COMMENT__PROJECT:
+				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
@@ -518,6 +572,7 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 				case BtsmodelPackage.BTS_COMMENT__LEASE: return BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE;
 				case BtsmodelPackage.BTS_COMMENT__ID: return BtsmodelPackage.BTSDB_BASE_OBJECT__ID;
 				case BtsmodelPackage.BTS_COMMENT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
+				case BtsmodelPackage.BTS_COMMENT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
 				default: return -1;
 			}
 		}
@@ -546,6 +601,7 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE: return BtsmodelPackage.BTS_COMMENT__LEASE;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__ID: return BtsmodelPackage.BTS_COMMENT__ID;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_COMMENT__REV;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_COMMENT__PROJECT;
 				default: return -1;
 			}
 		}
@@ -613,6 +669,8 @@ public class BTSCommentImpl extends AdministrativDataObjectImpl implements BTSCo
 		result.append(_id);
 		result.append(", _rev: ");
 		result.append(_rev);
+		result.append(", project: ");
+		result.append(project);
 		result.append(", comment: ");
 		result.append(comment);
 		result.append(", tags: ");

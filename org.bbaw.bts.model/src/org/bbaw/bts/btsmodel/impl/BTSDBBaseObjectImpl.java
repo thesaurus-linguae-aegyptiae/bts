@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getLease <em>Lease</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#get_rev <em>rev</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getProject <em>Project</em>}</li>
  * </ul>
  * </p>
  *
@@ -75,6 +76,26 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	 * @ordered
 	 */
 	protected String _rev = _REV_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROJECT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected String project = PROJECT_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -183,6 +204,29 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProject()
+	{
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProject(String newProject)
+	{
+		String oldProject = project;
+		project = newProject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT, oldProject, project));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -212,6 +256,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 				return get_id();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				return get_rev();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
+				return getProject();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -233,6 +279,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				set_rev((String)newValue);
+				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
+				setProject((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -256,6 +305,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				set_rev(_REV_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
+				setProject(PROJECT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -275,6 +327,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
+				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -293,6 +347,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 		result.append(_id);
 		result.append(", _rev: ");
 		result.append(_rev);
+		result.append(", project: ");
+		result.append(project);
 		result.append(')');
 		return result.toString();
 	}

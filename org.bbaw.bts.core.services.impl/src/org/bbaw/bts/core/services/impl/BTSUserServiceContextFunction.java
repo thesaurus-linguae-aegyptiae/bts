@@ -14,11 +14,12 @@ public class BTSUserServiceContextFunction extends ContextFunction
 	{
 		System.out.println("Intitialize BTSUserService");
 		// Add the new object to the application context
-		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
-
 		BTSUserService userService = ContextInjectionFactory.make(BTSUserServiceImpl.class, context);
-		ctx.set(BTSUserService.class, userService);
+
+		MApplication application = context.get(MApplication.class);
+		// IEclipseContext ctx = application.getContext();
+
+		context.set(BTSUserService.class, userService);
 
 		return userService;
 	}

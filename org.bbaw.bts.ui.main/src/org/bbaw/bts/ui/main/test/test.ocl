@@ -1,0 +1,11 @@
+import btsmodel : 'http://www.eclipse.org/emf/2002/Ecore#/'
+
+package btsmodel
+
+context btsmodel
+
+inv NameNotAAA: name <> 'aaa'
+
+
+endpackage
+

@@ -6,12 +6,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
-public class BTSConstants {
+public class BTSConstants
+{
 
-	
-	
 	private static Properties PROPERTIES;
-	private static String PROPERTIES_FILENAME;
+	private static String PROPERTIES_FILENAME = "btsConfig.properties";
+
+	/** file separator. */
+	public static final String FS = System.getProperty("file.separator");
+
+	private BTSConstants()
+	{
+	}
 
 	/* Initialisierung */
 	static
@@ -21,17 +27,19 @@ public class BTSConstants {
 		File file = new File(PROPERTIES_FILENAME);
 		// try {
 		// if (_i) _l.info("Lade: " + file.toURI().toString());
-		try
+
+		if (file.exists())
 		{
-			PROPERTIES.load(new FileInputStream(file));
-		}
-		catch (FileNotFoundException e)
-		{
-			e.printStackTrace();
-		}
-		catch (IOException e)
-		{
-			e.printStackTrace();
+			try
+			{
+				PROPERTIES.load(new FileInputStream(file));
+			} catch (FileNotFoundException e)
+			{
+				e.printStackTrace();
+			} catch (IOException e)
+			{
+				e.printStackTrace();
+			}
 		}
 	}
 }

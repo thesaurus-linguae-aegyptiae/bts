@@ -10,4 +10,6 @@ public class BTSPluginIDs
 
 	public static final String CMD_ID_NEW_CONFIGURATION = "org.bbaw.bts.ui.main.command.createNewConfiguration";
 
+	public static final String CMD_ID_NEW_PROJECT = "org.bbaw.bts.ui.main.command.createNewProject";
+
 }

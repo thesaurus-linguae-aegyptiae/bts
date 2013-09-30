@@ -1,7 +1,5 @@
 package org.bbaw.bts.ui.main.handlers;
 
-import javax.inject.Inject;
-
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.partController.CorpusNavigatorController;
@@ -13,13 +11,9 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 
 public class CreateNewTextCorpusHandler
 {
-	@Inject
-	EventBroker eventBroker;
-	@Inject
-	private CorpusNavigatorController corpusNavigatorController;
 
 	@Execute
-	public void execute(@Active MPart part)
+	public void execute(@Active MPart part, CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker)
 	{
 		BTSTextCorpus corpus = corpusNavigatorController.createNewTextCorpus();
 		corpus.setName("Corpus1");

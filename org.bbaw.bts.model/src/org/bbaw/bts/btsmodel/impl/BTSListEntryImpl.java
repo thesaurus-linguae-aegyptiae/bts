@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSListSubentry;
+import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl#isIgnore <em>Ignore</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl#getSubentries <em>Subentries</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl#getWords <em>Words</em>}</li>
  * </ul>
  * </p>
  *
@@ -65,6 +67,16 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 * @ordered
 	 */
 	protected EList<BTSListSubentry> subentries;
+
+	/**
+	 * The cached value of the '{@link #getWords() <em>Words</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getWords()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSWord> words;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -124,12 +136,28 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSWord> getWords()
+	{
+		if (words == null)
+		{
+			words = new EObjectContainmentEList<BTSWord>(BTSWord.class, this, BtsmodelPackage.BTS_LIST_ENTRY__WORDS);
+		}
+		return words;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
 				return ((InternalEList<?>)getSubentries()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
+				return ((InternalEList<?>)getWords()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -147,6 +175,8 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 				return isIgnore();
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
 				return getSubentries();
+			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
+				return getWords();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -168,6 +198,10 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 				getSubentries().clear();
 				getSubentries().addAll((Collection<? extends BTSListSubentry>)newValue);
 				return;
+			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
+				getWords().clear();
+				getWords().addAll((Collection<? extends BTSWord>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -187,6 +221,9 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
 				getSubentries().clear();
 				return;
+			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
+				getWords().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -204,6 +241,8 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 				return ignore != IGNORE_EDEFAULT;
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
 				return subentries != null && !subentries.isEmpty();
+			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
+				return words != null && !words.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

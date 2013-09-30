@@ -9,11 +9,8 @@ import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.core.commons.Backend2ClientUpdateListener;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
-import org.bbaw.bts.dao.couchDB.util.CouchDBConstants;
 import org.lightcouch.Changes;
-import org.lightcouch.ChangesResult;
 import org.lightcouch.ChangesResult.Row;
-import org.lightcouch.CouchDbInfo;
 
 public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 {
@@ -34,33 +31,34 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	private void tryRunnable()
 	{
-		CouchDbInfo dbInfo = corpusObjectDao.dbClient.context().info();
-		since = dbInfo.getUpdateSeq();
-		// feed type continuous
-		runnable = new Runnable()
-		{
-			public void run()
-			{
-				changes = corpusObjectDao.dbClient.changes().includeDocs(true).since(since)
-						.heartBeat(CouchDBConstants.CHANGES_HEARTBEAT)
-
-						.continuousChanges();
-				while (changes.hasNext())
-				{
-					System.out.println("check for changes");
-					ChangesResult.Row feed = changes.next();
-
-					if (feed != null)
-					{
-						String docId = feed.getId();
-						signalUpdate(feed, docId);
-						System.out.println("found change");
-					}
-
-				}
-			}
-
-		};
+		// CouchDbInfo dbInfo = corpusObjectDao.dbClient.context().info();
+		// since = dbInfo.getUpdateSeq();
+		// // feed type continuous
+		// runnable = new Runnable()
+		// {
+		// public void run()
+		// {
+		// changes =
+		// corpusObjectDao.dbClient.changes().includeDocs(true).since(since)
+		// .heartBeat(CouchDBConstants.CHANGES_HEARTBEAT)
+		//
+		// .continuousChanges();
+		// while (changes.hasNext())
+		// {
+		// System.out.println("check for changes");
+		// ChangesResult.Row feed = changes.next();
+		//
+		// if (feed != null)
+		// {
+		// String docId = feed.getId();
+		// signalUpdate(feed, docId);
+		// System.out.println("found change");
+		// }
+		//
+		// }
+		// }
+		//
+		// };
 		new Thread(runnable).start();
 
 		System.out.println("schedule UIJob");
@@ -72,7 +70,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		BTSCorpusObject object = null;
 		try
 		{
-			object = corpusObjectDao.reload(docId);
+			// object = corpusObjectDao.reload(docId);
 		} catch (Exception e)
 		{
 			// TODO Auto-generated catch block

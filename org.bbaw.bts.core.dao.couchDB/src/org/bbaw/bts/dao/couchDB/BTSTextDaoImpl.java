@@ -24,17 +24,17 @@ public class BTSTextDaoImpl extends CouchDBDao<BTSText, String> implements BTSTe
 {
 
 	@Override
-	public boolean removeBTSText(BTSText btsText)
+	public boolean removeBTSText(BTSText btsText, String path)
 	{
 		// TODO Auto-generated method stub
-		super.remove(btsText);
+		super.remove(btsText, path);
 		return true;
 	}
 
 	@Override
-	public List<BTSText> list()
+	public List<BTSText> list(String path)
 	{
-		List<JsonObject> allDocs = dbClient.view(CouchDBConstants.VIEW_ALL_BTSTEXTS).includeDocs(true)
+		List<JsonObject> allDocs = getCouchDBClient(path).view(CouchDBConstants.VIEW_ALL_BTSTEXTS).includeDocs(true)
 				.query(JsonObject.class);
 		ArrayList<BTSText> results = new ArrayList<BTSText>();
 		ResourceSet resourceSet = new ResourceSetImpl();
@@ -45,8 +45,7 @@ public class BTSTextDaoImpl extends CouchDBDao<BTSText, String> implements BTSTe
 			System.out.println(jo.get(CouchDBConstants.ID_STRING).getAsString());
 			if (!jo.get(CouchDBConstants.ID_STRING).getAsString().startsWith("_"))
 			{
-				URI uri = URI.createURI(CouchDBConstants.BASEURL + CouchDBConstants.BASE_DB
-						+ jo.get(CouchDBConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(local_db_url + path + jo.get(CouchDBConstants.ID_STRING).getAsString());
 				Resource resource = resourceSet.getResource(uri, true);
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());

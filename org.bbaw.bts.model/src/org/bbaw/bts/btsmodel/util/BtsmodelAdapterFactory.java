@@ -292,6 +292,36 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSObservableObjectAdapter();
 			}
 			@Override
+			public Adapter caseBTSThsEntry(BTSThsEntry object)
+			{
+				return createBTSThsEntryAdapter();
+			}
+			@Override
+			public Adapter caseBTSProject(BTSProject object)
+			{
+				return createBTSProjectAdapter();
+			}
+			@Override
+			public Adapter caseBTSDBConnection(BTSDBConnection object)
+			{
+				return createBTSDBConnectionAdapter();
+			}
+			@Override
+			public Adapter caseBTSWorkflowRule(BTSWorkflowRule object)
+			{
+				return createBTSWorkflowRuleAdapter();
+			}
+			@Override
+			public Adapter caseBTSOperator(BTSOperator object)
+			{
+				return createBTSOperatorAdapter();
+			}
+			@Override
+			public Adapter caseBTSWorkflowRuleItem(BTSWorkflowRuleItem object)
+			{
+				return createBTSWorkflowRuleItemAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -926,6 +956,96 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSObservableObjectAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSThsEntry <em>BTS Ths Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSThsEntry
+	 * @generated
+	 */
+	public Adapter createBTSThsEntryAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSProject <em>BTS Project</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSProject
+	 * @generated
+	 */
+	public Adapter createBTSProjectAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSDBConnection <em>BTSDB Connection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSDBConnection
+	 * @generated
+	 */
+	public Adapter createBTSDBConnectionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSWorkflowRule <em>BTS Workflow Rule</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSWorkflowRule
+	 * @generated
+	 */
+	public Adapter createBTSWorkflowRuleAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSOperator <em>BTS Operator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSOperator
+	 * @generated
+	 */
+	public Adapter createBTSOperatorAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSWorkflowRuleItem <em>BTS Workflow Rule Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSWorkflowRuleItem
+	 * @generated
+	 */
+	public Adapter createBTSWorkflowRuleItemAdapter()
 	{
 		return null;
 	}

@@ -468,6 +468,58 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BtsmodelPackage.BTS_THS_ENTRY:
+			{
+				BTSThsEntry btsThsEntry = (BTSThsEntry)theEObject;
+				T result = caseBTSThsEntry(btsThsEntry);
+				if (result == null) result = caseBTSCorpusObject(btsThsEntry);
+				if (result == null) result = caseBTSObject(btsThsEntry);
+				if (result == null) result = caseBTSDBBaseObject(btsThsEntry);
+				if (result == null) result = caseAdministrativDataObject(btsThsEntry);
+				if (result == null) result = caseBTSObservableObject(btsThsEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_PROJECT:
+			{
+				BTSProject btsProject = (BTSProject)theEObject;
+				T result = caseBTSProject(btsProject);
+				if (result == null) result = caseBTSDBBaseObject(btsProject);
+				if (result == null) result = caseBTSObservableObject(btsProject);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTSDB_CONNECTION:
+			{
+				BTSDBConnection btsdbConnection = (BTSDBConnection)theEObject;
+				T result = caseBTSDBConnection(btsdbConnection);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_WORKFLOW_RULE:
+			{
+				BTSWorkflowRule btsWorkflowRule = (BTSWorkflowRule)theEObject;
+				T result = caseBTSWorkflowRule(btsWorkflowRule);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_OPERATOR:
+			{
+				BTSOperator btsOperator = (BTSOperator)theEObject;
+				T result = caseBTSOperator(btsOperator);
+				if (result == null) result = caseBTSWorkflowRuleItem(btsOperator);
+				if (result == null) result = caseBTSObservableObject(btsOperator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM:
+			{
+				BTSWorkflowRuleItem btsWorkflowRuleItem = (BTSWorkflowRuleItem)theEObject;
+				T result = caseBTSWorkflowRuleItem(btsWorkflowRuleItem);
+				if (result == null) result = caseBTSObservableObject(btsWorkflowRuleItem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1130,6 +1182,102 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSObservableObject(BTSObservableObject object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Ths Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Ths Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSThsEntry(BTSThsEntry object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Project</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Project</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSProject(BTSProject object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTSDB Connection</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTSDB Connection</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSDBConnection(BTSDBConnection object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Workflow Rule</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Workflow Rule</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSWorkflowRule(BTSWorkflowRule object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Operator</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Operator</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSOperator(BTSOperator object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Workflow Rule Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Workflow Rule Item</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSWorkflowRuleItem(BTSWorkflowRuleItem object)
 	{
 		return null;
 	}

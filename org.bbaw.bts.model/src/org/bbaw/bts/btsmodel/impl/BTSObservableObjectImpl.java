@@ -22,12 +22,10 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.bbaw.bts.btsmodel.impl.BTSObservableObjectImpl#getPropertyChangeSupport
- * <em>Property Change Support</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObservableObjectImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Container implements BTSObservableObject
@@ -35,10 +33,9 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	private List<PropertyChangeListener> propertyChangeListeners = new ArrayList<PropertyChangeListener>();
 
 	/**
-	 * The default value of the '{@link #getPropertyChangeSupport()
-	 * <em>Property Change Support</em>}' attribute. <!-- begin-user-doc -->
+	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getPropertyChangeSupport()
 	 * @generated
 	 * @ordered
@@ -46,10 +43,9 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	protected static final PropertyChangeSupport PROPERTY_CHANGE_SUPPORT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPropertyChangeSupport()
-	 * <em>Property Change Support</em>}' attribute. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getPropertyChangeSupport()
 	 * @generated
 	 * @ordered
@@ -58,7 +54,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected BTSObservableObjectImpl()
@@ -68,7 +63,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -79,7 +73,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PropertyChangeSupport getPropertyChangeSupport()
@@ -89,16 +82,14 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setPropertyChangeSupport(PropertyChangeSupport newPropertyChangeSupport)
 	{
 		PropertyChangeSupport oldPropertyChangeSupport = propertyChangeSupport;
 		propertyChangeSupport = newPropertyChangeSupport;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport,
-				propertyChangeSupport));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport, propertyChangeSupport));
 	}
 
 	/**
@@ -129,7 +120,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -145,7 +135,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -154,7 +143,7 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
-				setPropertyChangeSupport((PropertyChangeSupport) newValue);
+				setPropertyChangeSupport((PropertyChangeSupport)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -162,7 +151,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -179,7 +167,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -188,15 +175,13 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
-				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null
-						: !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
+				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -205,10 +190,10 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 		switch (operationID)
 		{
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				addPropertyChangeListener((PropertyChangeListener) arguments.get(0));
+				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				removePropertyChangeListener((PropertyChangeListener) arguments.get(0));
+				removePropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
 		}
 		return super.eInvoke(operationID, arguments);
@@ -216,7 +201,6 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

@@ -36,6 +36,7 @@
     <genClasses ecoreClass="BTSModel.ecore#//BTSListEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSListEntry/ignore"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListEntry/subentries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListEntry/words"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSPassport">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/protocol"/>
@@ -123,6 +124,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/subtype"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/certainty"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSConfiguration">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfiguration/name"/>
@@ -132,6 +134,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSDBBaseObject/lease"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/_id"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/_rev"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/project"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTextCorpus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTextCorpus/header"/>
@@ -140,6 +143,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/ref"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/userId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/timeStamp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/rightsRevoked"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSLease">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSLease/leasingUserId"/>
@@ -163,9 +167,9 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/relations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/passport"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/parent"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/parentId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/corpusPrefix"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/children"/>
-      <genOperations ecoreOperation="BTSModel.ecore#//BTSCorpusObject/getObjectType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/workPhase"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSExternalReference">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSExternalReference/reference"/>
@@ -197,9 +201,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/subtype"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/ownerType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/referencedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/rules"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/showWidget"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSPassportEditorConfig">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/showWidget"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/widgetType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/required"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/allowMultiple"/>
@@ -227,6 +232,7 @@
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSListSubentry">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListSubentry/passport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListSubentry/words"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSConfig">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfig/children"/>
@@ -239,6 +245,33 @@
       <genOperations ecoreOperation="BTSModel.ecore#//BTSObservableObject/removePropertyChangeListener">
         <genParameters ecoreParameter="BTSModel.ecore#//BTSObservableObject/removePropertyChangeListener/propertyChangeListener"/>
       </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSThsEntry"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSProject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProject/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProject/prefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProject/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSProject/dbConnection"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSDBConnection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBConnection/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBConnection/masterServer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBConnection/dbPath"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSWorkflowRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSWorkflowRule/subRules"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/actions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/acceptMessage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/ocl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/oclSelfObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/denialMessage"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSOperator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSOperator/opperator"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSWorkflowRuleItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRuleItem/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRuleItem/ignore"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

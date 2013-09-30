@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.EList;
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSListEntry#isIgnore <em>Ignore</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSListEntry#getSubentries <em>Subentries</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSListEntry#getWords <em>Words</em>}</li>
  * </ul>
  * </p>
  *
@@ -63,5 +64,21 @@ public interface BTSListEntry extends BTSCorpusObject {
 	 * @generated
 	 */
 	EList<BTSListSubentry> getSubentries();
+
+	/**
+	 * Returns the value of the '<em><b>Words</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSWord}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Words</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Words</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSListEntry_Words()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSWord> getWords();
 
 } // BTSListEntry

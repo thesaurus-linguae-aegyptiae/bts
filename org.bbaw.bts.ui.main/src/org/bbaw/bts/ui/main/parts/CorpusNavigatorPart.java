@@ -17,6 +17,7 @@ import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.ui.main.parts.corpusNavigator.provider.CorpusNavigatorTreeLabelProvider;
 import org.bbaw.bts.ui.main.parts.corpusNavigator.provider.TreeFactoryImpl2;
 import org.bbaw.bts.ui.main.parts.corpusNavigator.provider.TreeStructureAdvisorImpl;
+import org.bbaw.bts.ui.main.test.OCLTest;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.map.IObservableMap;
 import org.eclipse.core.databinding.observable.masterdetail.IObservableFactory;
@@ -120,7 +121,7 @@ public class CorpusNavigatorPart
 		});
 
 		Button b3 = new Button(composite, SWT.PUSH);
-		b3.setText("Change");
+		b3.setText("CHECK");
 		b3.addSelectionListener(new SelectionListener()
 		{
 
@@ -135,6 +136,8 @@ public class CorpusNavigatorPart
 						// ((BTSCorpusObject) o).setName(((BTSCorpusObject)
 						// o).getName() + "#!");
 						// has to be accessed through emf
+						OCLTest test = new OCLTest();
+						test.validate((BTSCorpusObject) o);
 					}
 				}
 			}
@@ -246,8 +249,8 @@ public class CorpusNavigatorPart
 		} else if (object instanceof BTSTCObject && selection != null
 				&& selection.getFirstElement() instanceof BTSCorpusObject)
 		{
-			corpusNavigatorController.addChild((BTSCorpusObject) object, input,
-					(BTSCorpusObject) selection.getFirstElement());
+			corpusNavigatorController.addRelation((BTSCorpusObject) object, "partOf",
+					(BTSCorpusObject) selection.getFirstElement(), input);
 
 			refreshTreeViewer((BTSTCObject) object);
 		}
@@ -277,8 +280,8 @@ public class CorpusNavigatorPart
 		} else if (object instanceof BTSTCObject && selection != null
 				&& selection.getFirstElement() instanceof BTSCorpusObject)
 		{
-			corpusNavigatorController.addChild((BTSCorpusObject) object, input,
-					(BTSCorpusObject) selection.getFirstElement());
+			corpusNavigatorController.addRelation((BTSCorpusObject) object, "partOf",
+					(BTSCorpusObject) selection.getFirstElement(), input);
 
 			refreshTreeViewer((BTSTCObject) object);
 		}

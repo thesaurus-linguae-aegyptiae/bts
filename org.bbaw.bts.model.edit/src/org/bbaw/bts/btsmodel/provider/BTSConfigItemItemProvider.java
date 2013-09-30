@@ -66,6 +66,7 @@ public class BTSConfigItemItemProvider
 			addSubtypePropertyDescriptor(object);
 			addOwnerTypePropertyDescriptor(object);
 			addReferencedTypePropertyDescriptor(object);
+			addShowWidgetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -250,6 +251,29 @@ public class BTSConfigItemItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Show Widget feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addShowWidgetPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSConfigItem_showWidget_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfigItem_showWidget_feature", "_UI_BTSConfigItem_type"),
+				 BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SHOW_WIDGET,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
@@ -265,6 +289,7 @@ public class BTSConfigItemItemProvider
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__DESCRIPTION);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__RULES);
 		}
 		return childrenFeatures;
 	}
@@ -329,11 +354,13 @@ public class BTSConfigItemItemProvider
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE:
 			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE:
 			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
+			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
 			case BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION:
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG:
+			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -365,6 +392,11 @@ public class BTSConfigItemItemProvider
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
 				 BtsmodelFactory.eINSTANCE.createBTSPassportEditorConfig()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__RULES,
+				 BtsmodelFactory.eINSTANCE.createBTSOperator()));
 	}
 
 	/**

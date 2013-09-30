@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRevisionImpl#getRef <em>Ref</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRevisionImpl#getUserId <em>User Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRevisionImpl#getTimeStamp <em>Time Stamp</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRevisionImpl#isRightsRevoked <em>Rights Revoked</em>}</li>
  * </ul>
  * </p>
  *
@@ -89,6 +90,26 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @ordered
 	 */
 	protected Date timeStamp = TIME_STAMP_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isRightsRevoked() <em>Rights Revoked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRightsRevoked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean RIGHTS_REVOKED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isRightsRevoked() <em>Rights Revoked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isRightsRevoked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean rightsRevoked = RIGHTS_REVOKED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -177,6 +198,29 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isRightsRevoked()
+	{
+		return rightsRevoked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setRightsRevoked(boolean newRightsRevoked)
+	{
+		boolean oldRightsRevoked = rightsRevoked;
+		rightsRevoked = newRightsRevoked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_REVISION__RIGHTS_REVOKED, oldRightsRevoked, rightsRevoked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
@@ -187,6 +231,8 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 				return getUserId();
 			case BtsmodelPackage.BTS_REVISION__TIME_STAMP:
 				return getTimeStamp();
+			case BtsmodelPackage.BTS_REVISION__RIGHTS_REVOKED:
+				return isRightsRevoked();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -208,6 +254,9 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 				return;
 			case BtsmodelPackage.BTS_REVISION__TIME_STAMP:
 				setTimeStamp((Date)newValue);
+				return;
+			case BtsmodelPackage.BTS_REVISION__RIGHTS_REVOKED:
+				setRightsRevoked((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,6 +280,9 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 			case BtsmodelPackage.BTS_REVISION__TIME_STAMP:
 				setTimeStamp(TIME_STAMP_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_REVISION__RIGHTS_REVOKED:
+				setRightsRevoked(RIGHTS_REVOKED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -250,6 +302,8 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 				return USER_ID_EDEFAULT == null ? userId != null : !USER_ID_EDEFAULT.equals(userId);
 			case BtsmodelPackage.BTS_REVISION__TIME_STAMP:
 				return TIME_STAMP_EDEFAULT == null ? timeStamp != null : !TIME_STAMP_EDEFAULT.equals(timeStamp);
+			case BtsmodelPackage.BTS_REVISION__RIGHTS_REVOKED:
+				return rightsRevoked != RIGHTS_REVOKED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -270,6 +324,8 @@ public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTS
 		result.append(userId);
 		result.append(", timeStamp: ");
 		result.append(timeStamp);
+		result.append(", rightsRevoked: ");
+		result.append(rightsRevoked);
 		result.append(')');
 		return result.toString();
 	}

@@ -13,6 +13,7 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
 import org.bbaw.bts.btsmodel.BTSTranslations;
+import org.bbaw.bts.btsmodel.BTSWorkflowRuleItem;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -21,6 +22,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -28,42 +31,30 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <p>
  * The following features are implemented:
  * <ul>
- * <li>
- * {@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getPropertyChangeSupport
- * <em>Property Change Support</em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getValue <em>Value
- * </em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getLabel <em>Label
- * </em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getDescription <em>
- * Description</em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getSortKey <em>Sort
- * Key</em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#isIgnore <em>Ignore
- * </em>}</li>
- * <li>
- * {@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getPassportEditorConfig
- * <em>Passport Editor Config</em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getType <em>Type
- * </em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getSubtype <em>
- * Subtype</em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getOwnerType <em>
- * Owner Type</em>}</li>
- * <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getReferencedType
- * <em>Referenced Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getDescription <em>Description</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getSortKey <em>Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#isIgnore <em>Ignore</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getPassportEditorConfig <em>Passport Editor Config</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getSubtype <em>Subtype</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getOwnerType <em>Owner Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getReferencedType <em>Referenced Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getRules <em>Rules</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#isShowWidget <em>Show Widget</em>}</li>
  * </ul>
  * </p>
- * 
+ *
  * @generated
  */
 public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 {
 	/**
-	 * The default value of the '{@link #getPropertyChangeSupport()
-	 * <em>Property Change Support</em>}' attribute. <!-- begin-user-doc -->
+	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getPropertyChangeSupport()
 	 * @generated
 	 * @ordered
@@ -71,10 +62,9 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected static final PropertyChangeSupport PROPERTY_CHANGE_SUPPORT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPropertyChangeSupport()
-	 * <em>Property Change Support</em>}' attribute. <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
+	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * 
 	 * @see #getPropertyChangeSupport()
 	 * @generated
 	 * @ordered
@@ -84,7 +74,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -94,7 +83,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getValue()
 	 * @generated
 	 * @ordered
@@ -102,9 +90,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected String value = VALUE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getLabel() <em>Label</em>}' containment
-	 * reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getLabel()
 	 * @generated
 	 * @ordered
@@ -112,9 +99,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected BTSTranslations label;
 
 	/**
-	 * The cached value of the '{@link #getDescription() <em>Description</em>}'
-	 * containment reference. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getDescription() <em>Description</em>}' containment reference.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getDescription()
 	 * @generated
 	 * @ordered
@@ -122,9 +108,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected BTSTranslations description;
 
 	/**
-	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSortKey()
 	 * @generated
 	 * @ordered
@@ -132,9 +117,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected static final int SORT_KEY_EDEFAULT = 0;
 
 	/**
-	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSortKey()
 	 * @generated
 	 * @ordered
@@ -144,7 +128,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	/**
 	 * The default value of the '{@link #isIgnore() <em>Ignore</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #isIgnore()
 	 * @generated
 	 * @ordered
@@ -154,7 +137,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	/**
 	 * The cached value of the '{@link #isIgnore() <em>Ignore</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #isIgnore()
 	 * @generated
 	 * @ordered
@@ -175,7 +157,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -185,7 +166,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	/**
 	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @see #getType()
 	 * @generated
 	 * @ordered
@@ -193,9 +173,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected String type = TYPE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSubtype() <em>Subtype</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The default value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSubtype()
 	 * @generated
 	 * @ordered
@@ -203,9 +182,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected static final String SUBTYPE_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getSubtype() <em>Subtype</em>}'
-	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getSubtype()
 	 * @generated
 	 * @ordered
@@ -213,9 +191,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected String subtype = SUBTYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnerType() <em>Owner Type</em>}'
-	 * attribute list. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * The cached value of the '{@link #getOwnerType() <em>Owner Type</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getOwnerType()
 	 * @generated
 	 * @ordered
@@ -223,21 +200,49 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected EList<String> ownerType;
 
 	/**
-	 * The cached value of the '{@link #getReferencedType()
-	 * <em>Referenced Type</em>}' attribute list. <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #getReferencedType() <em>Referenced Type</em>}' attribute list.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @see #getReferencedType()
 	 * @generated
 	 * @ordered
 	 */
 	protected EList<String> referencedType;
 
+	/**
+	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRules()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSWorkflowRuleItem> rules;
+
+	/**
+	 * The default value of the '{@link #isShowWidget() <em>Show Widget</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isShowWidget()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean SHOW_WIDGET_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isShowWidget() <em>Show Widget</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isShowWidget()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean showWidget = SHOW_WIDGET_EDEFAULT;
+
 	private List<PropertyChangeListener> propertyChangeListeners = new ArrayList<PropertyChangeListener>();
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected BTSConfigItemImpl()
@@ -247,7 +252,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -258,7 +262,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PropertyChangeSupport getPropertyChangeSupport()
@@ -268,21 +271,18 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setPropertyChangeSupport(PropertyChangeSupport newPropertyChangeSupport)
 	{
 		PropertyChangeSupport oldPropertyChangeSupport = propertyChangeSupport;
 		propertyChangeSupport = newPropertyChangeSupport;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport,
-				propertyChangeSupport));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport, propertyChangeSupport));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getValue()
@@ -292,20 +292,18 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setValue(String newValue)
 	{
 		String oldValue = value;
 		value = newValue;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__VALUE, oldValue, value));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__VALUE, oldValue, value));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BTSTranslations getLabel()
@@ -315,7 +313,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetLabel(BTSTranslations newLabel, NotificationChain msgs)
@@ -324,18 +321,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		label = newLabel;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, oldLabel, newLabel);
-			if (msgs == null) msgs = notification;
-			else
-				msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, oldLabel, newLabel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setLabel(BTSTranslations newLabel)
@@ -343,19 +336,19 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		if (newLabel != label)
 		{
 			NotificationChain msgs = null;
-			if (label != null) msgs = ((InternalEObject) label).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, null, msgs);
-			if (newLabel != null) msgs = ((InternalEObject) newLabel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE
-					- BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, null, msgs);
+			if (label != null)
+				msgs = ((InternalEObject)label).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, null, msgs);
+			if (newLabel != null)
+				msgs = ((InternalEObject)newLabel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, null, msgs);
 			msgs = basicSetLabel(newLabel, msgs);
 			if (msgs != null) msgs.dispatch();
-		} else if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, newLabel, newLabel));
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, newLabel, newLabel));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BTSTranslations getDescription()
@@ -365,7 +358,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetDescription(BTSTranslations newDescription, NotificationChain msgs)
@@ -374,18 +366,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		description = newDescription;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, oldDescription, newDescription);
-			if (msgs == null) msgs = notification;
-			else
-				msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, oldDescription, newDescription);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setDescription(BTSTranslations newDescription)
@@ -393,19 +381,19 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		if (newDescription != description)
 		{
 			NotificationChain msgs = null;
-			if (description != null) msgs = ((InternalEObject) description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE
-					- BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, null, msgs);
-			if (newDescription != null) msgs = ((InternalEObject) newDescription).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, null, msgs);
+			if (description != null)
+				msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, null, msgs);
+			if (newDescription != null)
+				msgs = ((InternalEObject)newDescription).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, null, msgs);
 			msgs = basicSetDescription(newDescription, msgs);
 			if (msgs != null) msgs.dispatch();
-		} else if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, newDescription, newDescription));
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, newDescription, newDescription));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public int getSortKey()
@@ -415,20 +403,18 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setSortKey(int newSortKey)
 	{
 		int oldSortKey = sortKey;
 		sortKey = newSortKey;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__SORT_KEY, oldSortKey, sortKey));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__SORT_KEY, oldSortKey, sortKey));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public boolean isIgnore()
@@ -438,20 +424,18 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setIgnore(boolean newIgnore)
 	{
 		boolean oldIgnore = ignore;
 		ignore = newIgnore;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__IGNORE, oldIgnore, ignore));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__IGNORE, oldIgnore, ignore));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BTSPassportEditorConfig getPassportEditorConfig()
@@ -461,7 +445,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public NotificationChain basicSetPassportEditorConfig(BTSPassportEditorConfig newPassportEditorConfig,
@@ -471,19 +454,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		passportEditorConfig = newPassportEditorConfig;
 		if (eNotificationRequired())
 		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, oldPassportEditorConfig,
-					newPassportEditorConfig);
-			if (msgs == null) msgs = notification;
-			else
-				msgs.add(notification);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, oldPassportEditorConfig, newPassportEditorConfig);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setPassportEditorConfig(BTSPassportEditorConfig newPassportEditorConfig)
@@ -491,20 +469,19 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		if (newPassportEditorConfig != passportEditorConfig)
 		{
 			NotificationChain msgs = null;
-			if (passportEditorConfig != null) msgs = ((InternalEObject) passportEditorConfig).eInverseRemove(this,
-					EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, null, msgs);
-			if (newPassportEditorConfig != null) msgs = ((InternalEObject) newPassportEditorConfig).eInverseAdd(this,
-					EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, null, msgs);
+			if (passportEditorConfig != null)
+				msgs = ((InternalEObject)passportEditorConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, null, msgs);
+			if (newPassportEditorConfig != null)
+				msgs = ((InternalEObject)newPassportEditorConfig).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, null, msgs);
 			msgs = basicSetPassportEditorConfig(newPassportEditorConfig, msgs);
 			if (msgs != null) msgs.dispatch();
-		} else if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, newPassportEditorConfig,
-				newPassportEditorConfig));
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, newPassportEditorConfig, newPassportEditorConfig));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getType()
@@ -514,20 +491,18 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setType(String newType)
 	{
 		String oldType = type;
 		type = newType;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__TYPE, oldType, type));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__TYPE, oldType, type));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String getSubtype()
@@ -537,45 +512,77 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public void setSubtype(String newSubtype)
 	{
 		String oldSubtype = subtype;
 		subtype = newSubtype;
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE, oldSubtype, subtype));
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE, oldSubtype, subtype));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<String> getOwnerType()
 	{
 		if (ownerType == null)
 		{
-			ownerType = new EDataTypeUniqueEList<String>(String.class, this,
-					BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE);
+			ownerType = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE);
 		}
 		return ownerType;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public EList<String> getReferencedType()
 	{
 		if (referencedType == null)
 		{
-			referencedType = new EDataTypeUniqueEList<String>(String.class, this,
-					BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE);
+			referencedType = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE);
 		}
 		return referencedType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BTSWorkflowRuleItem> getRules()
+	{
+		if (rules == null)
+		{
+			rules = new EObjectContainmentEList<BTSWorkflowRuleItem>(BTSWorkflowRuleItem.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__RULES);
+		}
+		return rules;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isShowWidget()
+	{
+		return showWidget;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setShowWidget(boolean newShowWidget)
+	{
+		boolean oldShowWidget = showWidget;
+		showWidget = newShowWidget;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET, oldShowWidget, showWidget));
 	}
 
 	/**
@@ -604,7 +611,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -618,13 +624,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				return basicSetDescription(null, msgs);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG:
 				return basicSetPassportEditorConfig(null, msgs);
+			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
+				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -654,13 +661,16 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				return getOwnerType();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
 				return getReferencedType();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
+				return getRules();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
+				return isShowWidget();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -670,39 +680,46 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
-				setPropertyChangeSupport((PropertyChangeSupport) newValue);
+				setPropertyChangeSupport((PropertyChangeSupport)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
-				setValue((String) newValue);
+				setValue((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
-				setLabel((BTSTranslations) newValue);
+				setLabel((BTSTranslations)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION:
-				setDescription((BTSTranslations) newValue);
+				setDescription((BTSTranslations)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SORT_KEY:
-				setSortKey((Integer) newValue);
+				setSortKey((Integer)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__IGNORE:
-				setIgnore((Boolean) newValue);
+				setIgnore((Boolean)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG:
-				setPassportEditorConfig((BTSPassportEditorConfig) newValue);
+				setPassportEditorConfig((BTSPassportEditorConfig)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__TYPE:
-				setType((String) newValue);
+				setType((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE:
-				setSubtype((String) newValue);
+				setSubtype((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE:
 				getOwnerType().clear();
-				getOwnerType().addAll((Collection<? extends String>) newValue);
+				getOwnerType().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
 				getReferencedType().clear();
-				getReferencedType().addAll((Collection<? extends String>) newValue);
+				getReferencedType().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
+				getRules().clear();
+				getRules().addAll((Collection<? extends BTSWorkflowRuleItem>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
+				setShowWidget((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -710,7 +727,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -725,10 +741,10 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				setValue(VALUE_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
-				setLabel((BTSTranslations) null);
+				setLabel((BTSTranslations)null);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION:
-				setDescription((BTSTranslations) null);
+				setDescription((BTSTranslations)null);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SORT_KEY:
 				setSortKey(SORT_KEY_EDEFAULT);
@@ -737,7 +753,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				setIgnore(IGNORE_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG:
-				setPassportEditorConfig((BTSPassportEditorConfig) null);
+				setPassportEditorConfig((BTSPassportEditorConfig)null);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__TYPE:
 				setType(TYPE_EDEFAULT);
@@ -751,13 +767,18 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
 				getReferencedType().clear();
 				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
+				getRules().clear();
+				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
+				setShowWidget(SHOW_WIDGET_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -766,8 +787,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
-				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null
-						: !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
+				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
@@ -788,13 +808,16 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				return ownerType != null && !ownerType.isEmpty();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
 				return referencedType != null && !referencedType.isEmpty();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
+				return rules != null && !rules.isEmpty();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
+				return showWidget != SHOW_WIDGET_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -804,10 +827,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		{
 			switch (derivedFeatureID)
 			{
-				case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
-					return BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
-				default:
-					return -1;
+				case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+				default: return -1;
 			}
 		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
@@ -815,7 +836,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -825,10 +845,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		{
 			switch (baseFeatureID)
 			{
-				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
-					return BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT;
-				default:
-					return -1;
+				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT;
+				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
@@ -836,7 +854,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -846,12 +863,9 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		{
 			switch (baseOperationID)
 			{
-				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-					return BtsmodelPackage.BTS_CONFIG_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-					return BtsmodelPackage.BTS_CONFIG_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-				default:
-					return -1;
+				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIG_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIG_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+				default: return -1;
 			}
 		}
 		return super.eDerivedOperationID(baseOperationID, baseClass);
@@ -859,7 +873,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -868,10 +881,10 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		switch (operationID)
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				addPropertyChangeListener((PropertyChangeListener) arguments.get(0));
+				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
 			case BtsmodelPackage.BTS_CONFIG_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				removePropertyChangeListener((PropertyChangeListener) arguments.get(0));
+				removePropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
 		}
 		return super.eInvoke(operationID, arguments);
@@ -879,7 +892,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -904,6 +916,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		result.append(ownerType);
 		result.append(", referencedType: ");
 		result.append(referencedType);
+		result.append(", showWidget: ");
+		result.append(showWidget);
 		result.append(')');
 		return result.toString();
 	}

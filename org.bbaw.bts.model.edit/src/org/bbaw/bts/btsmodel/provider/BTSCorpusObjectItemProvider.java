@@ -64,9 +64,11 @@ public class BTSCorpusObjectItemProvider
 			addPropertyChangeSupportPropertyDescriptor(object);
 			add_idPropertyDescriptor(object);
 			add_revPropertyDescriptor(object);
+			addProjectPropertyDescriptor(object);
 			addParentPropertyDescriptor(object);
-			addParentIdPropertyDescriptor(object);
+			addCorpusPrefixPropertyDescriptor(object);
 			addChildrenPropertyDescriptor(object);
+			addWorkPhasePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -107,6 +109,29 @@ public class BTSCorpusObjectItemProvider
 				 getString("_UI_BTSDBBaseObject__rev_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject__rev_feature", "_UI_BTSDBBaseObject_type"),
 				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__REV,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Project feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addProjectPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_project_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_project_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__PROJECT,
 				 true,
 				 false,
 				 false,
@@ -160,19 +185,20 @@ public class BTSCorpusObjectItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Parent Id feature.
+	 * This adds a property descriptor for the Corpus Prefix feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addParentIdPropertyDescriptor(Object object) {
+	protected void addCorpusPrefixPropertyDescriptor(Object object)
+	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BTSCorpusObject_parentId_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSCorpusObject_parentId_feature", "_UI_BTSCorpusObject_type"),
-				 BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__PARENT_ID,
+				 getString("_UI_BTSCorpusObject_corpusPrefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSCorpusObject_corpusPrefix_feature", "_UI_BTSCorpusObject_type"),
+				 BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX,
 				 true,
 				 false,
 				 false,
@@ -200,6 +226,29 @@ public class BTSCorpusObjectItemProvider
 				 false,
 				 true,
 				 null,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Work Phase feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addWorkPhasePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSCorpusObject_workPhase_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSCorpusObject_workPhase_feature", "_UI_BTSCorpusObject_type"),
+				 BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__WORK_PHASE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -267,7 +316,9 @@ public class BTSCorpusObjectItemProvider
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT_ID:
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE:

@@ -12,7 +12,10 @@
 
 package org.bbaw.bts.app.login;
 
+import javax.inject.Inject;
+
 import org.bbaw.bts.app.login.internal.LoginDialog;
+import org.bbaw.bts.core.services.BTSUserService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.internal.workbench.E4Workbench;
 import org.eclipse.e4.ui.internal.workbench.swt.E4Application;
@@ -22,11 +25,17 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 
-public class Login {
+public class Login
+{
+	@Inject
+	BTSUserService uService;
+
 	@PostContextCreate
-	public void login(IEclipseContext context) {
+	public void login(IEclipseContext context)
+	{
+		System.out.println("login");
 		final Shell shell = new Shell(SWT.INHERIT_NONE);
-	    
+
 		final LoginDialog dialog = new LoginDialog(shell);
 		dialog.create();
 
@@ -37,7 +46,8 @@ public class Login {
 
 		PartRenderingEngine.initializeStyling(shell.getDisplay(), context);
 
-		if (dialog.open() != Window.OK) {
+		if (dialog.open() != Window.OK)
+		{
 			// we don't have a workbench yet...
 			System.exit(0);
 		}

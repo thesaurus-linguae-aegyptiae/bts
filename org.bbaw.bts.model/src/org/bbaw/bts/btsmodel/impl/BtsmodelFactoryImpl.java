@@ -94,6 +94,11 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTS_LIST: return createBTSList();
 			case BtsmodelPackage.BTS_PP_SUBENTRY: return createBTSPpSubentry();
 			case BtsmodelPackage.BTS_LIST_SUBENTRY: return createBTSListSubentry();
+			case BtsmodelPackage.BTS_THS_ENTRY: return createBTSThsEntry();
+			case BtsmodelPackage.BTS_PROJECT: return createBTSProject();
+			case BtsmodelPackage.BTSDB_CONNECTION: return createBTSDBConnection();
+			case BtsmodelPackage.BTS_WORKFLOW_RULE: return createBTSWorkflowRule();
+			case BtsmodelPackage.BTS_OPERATOR: return createBTSOperator();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -455,6 +460,61 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public BTSListSubentry createBTSListSubentry() {
 		BTSListSubentryImpl btsListSubentry = new BTSListSubentryImpl();
 		return btsListSubentry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSThsEntry createBTSThsEntry()
+	{
+		BTSThsEntryImpl btsThsEntry = new BTSThsEntryImpl();
+		return btsThsEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSProject createBTSProject()
+	{
+		BTSProjectImpl btsProject = new BTSProjectImpl();
+		return btsProject;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSDBConnection createBTSDBConnection()
+	{
+		BTSDBConnectionImpl btsdbConnection = new BTSDBConnectionImpl();
+		return btsdbConnection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSWorkflowRule createBTSWorkflowRule()
+	{
+		BTSWorkflowRuleImpl btsWorkflowRule = new BTSWorkflowRuleImpl();
+		return btsWorkflowRule;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSOperator createBTSOperator()
+	{
+		BTSOperatorImpl btsOperator = new BTSOperatorImpl();
+		return btsOperator;
 	}
 
 	/**

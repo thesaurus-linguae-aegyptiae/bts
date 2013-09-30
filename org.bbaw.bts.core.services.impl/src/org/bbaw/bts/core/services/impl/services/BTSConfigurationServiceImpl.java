@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -11,6 +12,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.services.BTSConfigurationService;
+import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -33,7 +35,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	{
 		if (entity != null)
 		{
-			configurationDao.add(entity);
+			configurationDao.add(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
 		}
 		return false;
 	}
@@ -41,27 +43,46 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public void update(BTSConfiguration entity)
 	{
-		configurationDao.update(entity);
+		configurationDao.update(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
 
 	}
 
 	@Override
 	public void remove(BTSConfiguration entity)
 	{
-		configurationDao.remove(entity);
+		configurationDao.remove(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
 
 	}
 
 	@Override
 	public BTSConfiguration find(String key)
 	{
-		return configurationDao.find(key);
+		BTSConfiguration config = null;
+		config = configurationDao.find(key, main_project + ServiceConstants.ADMIN_SUFFIX);
+		if (config != null)
+		{
+			return config;
+		}
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			config = configurationDao.find(key, p + ServiceConstants.ADMIN_SUFFIX);
+			if (config != null)
+			{
+				return config;
+			}
+		}
+		return null;
 	}
 
 	@Override
 	public List<BTSConfiguration> list()
 	{
-		return configurationDao.list();
+		List<BTSConfiguration> configs = new Vector<BTSConfiguration>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			configs.addAll(configurationDao.list(p + ServiceConstants.ADMIN_SUFFIX));
+		}
+		return configs;
 	}
 
 	@Override
@@ -99,6 +120,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public BTSConfiguration getActiveConfiguration()
 	{
 		// FIXME logic!!!
+		List<BTSConfiguration> list = list();
+		if (list == null || list.isEmpty())
+		{
+			BTSConfiguration config = createNew();
+			save(config);
+		}
 		return list().get(0);
 	}
 

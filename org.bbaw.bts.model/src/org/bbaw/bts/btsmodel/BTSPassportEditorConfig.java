@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#isShowWidget <em>Show Widget</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getWidgetType <em>Widget Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#isRequired <em>Required</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#isAllowMultiple <em>Allow Multiple</em>}</li>
@@ -26,32 +25,6 @@ import org.eclipse.emf.ecore.EObject;
  * @generated
  */
 public interface BTSPassportEditorConfig extends EObject {
-	/**
-	 * Returns the value of the '<em><b>Show Widget</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Show Widget</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Show Widget</em>' attribute.
-	 * @see #setShowWidget(boolean)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEditorConfig_ShowWidget()
-	 * @model
-	 * @generated
-	 */
-	boolean isShowWidget();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#isShowWidget <em>Show Widget</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Show Widget</em>' attribute.
-	 * @see #isShowWidget()
-	 * @generated
-	 */
-	void setShowWidget(boolean value);
-
 	/**
 	 * Returns the value of the '<em><b>Widget Type</b></em>' attribute.
 	 * <!-- begin-user-doc -->

@@ -61,7 +61,6 @@ public class BTSPassportEditorConfigItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addShowWidgetPropertyDescriptor(object);
 			addWidgetTypePropertyDescriptor(object);
 			addRequiredPropertyDescriptor(object);
 			addAllowMultiplePropertyDescriptor(object);
@@ -69,28 +68,6 @@ public class BTSPassportEditorConfigItemProvider
 			addRegexPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Show Widget feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addShowWidgetPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSPassportEditorConfig_showWidget_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassportEditorConfig_showWidget_feature", "_UI_BTSPassportEditorConfig_type"),
-				 BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -223,8 +200,10 @@ public class BTSPassportEditorConfigItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		BTSPassportEditorConfig btsPassportEditorConfig = (BTSPassportEditorConfig)object;
-		return getString("_UI_BTSPassportEditorConfig_type") + " " + btsPassportEditorConfig.isShowWidget();
+		String label = ((BTSPassportEditorConfig)object).getWidgetType();
+		return label == null || label.length() == 0 ?
+			getString("_UI_BTSPassportEditorConfig_type") :
+			getString("_UI_BTSPassportEditorConfig_type") + " " + label;
 	}
 
 	/**
@@ -240,7 +219,6 @@ public class BTSPassportEditorConfigItemProvider
 
 		switch (notification.getFeatureID(BTSPassportEditorConfig.class))
 		{
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET:
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE:

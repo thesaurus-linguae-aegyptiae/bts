@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -12,6 +14,7 @@ package org.bbaw.bts.btsmodel;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSListSubentry#getPassport <em>Passport</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSListSubentry#getWords <em>Words</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,5 +48,21 @@ public interface BTSListSubentry extends BTSReferencableItem {
 	 * @generated
 	 */
 	void setPassport(BTSPassport value);
+
+	/**
+	 * Returns the value of the '<em><b>Words</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSWord}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Words</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Words</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSListSubentry_Words()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSWord> getWords();
 
 } // BTSListSubentry

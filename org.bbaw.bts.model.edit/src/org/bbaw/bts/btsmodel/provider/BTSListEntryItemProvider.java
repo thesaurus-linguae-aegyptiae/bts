@@ -102,6 +102,7 @@ public class BTSListEntryItemProvider
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_LIST_ENTRY__SUBENTRIES);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_LIST_ENTRY__WORDS);
 		}
 		return childrenFeatures;
 	}
@@ -161,6 +162,7 @@ public class BTSListEntryItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
+			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -182,6 +184,11 @@ public class BTSListEntryItemProvider
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_LIST_ENTRY__SUBENTRIES,
 				 BtsmodelFactory.eINSTANCE.createBTSListSubentry()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_LIST_ENTRY__WORDS,
+				 BtsmodelFactory.eINSTANCE.createBTSWord()));
 	}
 
 }

@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -8,6 +9,7 @@ import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSTCObjectDao;
 import org.bbaw.bts.core.services.BTSTCObjectService;
+import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 @Creatable
@@ -19,19 +21,17 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 
 	public List<BTSTCObject> getRootTCObjects()
 	{
-		return bTSTCObjectDao.list();
+		return list();
 
 	}
 
 	@Override
 	public boolean save(BTSTCObject o)
 	{
-		if (o instanceof BTSTCObject)
-		{
-			bTSTCObjectDao.add((BTSTCObject) o);
-			return true;
-		}
-		return false;
+
+		bTSTCObjectDao.add(o, o.getProject() + ServiceConstants.CORPUS_INTERFIX + o.getCorpusPrefix());
+		return true;
+
 	}
 
 	@Override
@@ -47,27 +47,62 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 	@Override
 	public void update(BTSTCObject entity)
 	{
-		bTSTCObjectDao.update(entity);
+		bTSTCObjectDao
+				.update(entity, entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
 
 	}
 
 	@Override
 	public void remove(BTSTCObject entity)
 	{
-		bTSTCObjectDao.remove(entity);
+		bTSTCObjectDao
+				.remove(entity, entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
 
 	}
 
 	@Override
 	public BTSTCObject find(String key)
 	{
-		return bTSTCObjectDao.find(key);
+		BTSTCObject tcObject = null;
+		tcObject = bTSTCObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus);
+		if (tcObject != null)
+		{
+			return tcObject;
+		}
+		for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			tcObject = bTSTCObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c);
+			if (tcObject != null)
+			{
+				return tcObject;
+			}
+		}
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				tcObject = bTSTCObjectDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c);
+				if (tcObject != null)
+				{
+					return tcObject;
+				}
+			}
+		}
+		return tcObject;
 	}
 
 	@Override
 	public List<BTSTCObject> list()
 	{
-		return bTSTCObjectDao.list();
+		List<BTSTCObject> objects = new Vector<BTSTCObject>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				objects.addAll(bTSTCObjectDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return objects;
 	}
 
 }
