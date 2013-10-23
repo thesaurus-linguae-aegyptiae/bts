@@ -267,6 +267,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
@@ -344,7 +345,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public String toString()

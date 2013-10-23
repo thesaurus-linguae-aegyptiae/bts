@@ -3,16 +3,13 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSLease;
-import org.bbaw.bts.btsmodel.BTSObservableObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -23,7 +20,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -32,16 +28,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getLease <em>Lease</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getPassport <em>Passport</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getCorpusPrefix <em>Corpus Prefix</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getWorkPhase <em>Work Phase</em>}</li>
  * </ul>
  * </p>
@@ -52,33 +45,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 {
 
 	private List<PropertyChangeListener> propertyChangeListeners = new ArrayList<PropertyChangeListener>();
-	/**
-	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPropertyChangeSupport()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final PropertyChangeSupport PROPERTY_CHANGE_SUPPORT_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getPropertyChangeSupport()
-	 * @generated
-	 * @ordered
-	 */
-	protected PropertyChangeSupport propertyChangeSupport = PROPERTY_CHANGE_SUPPORT_EDEFAULT;
-	/**
-	 * The cached value of the '{@link #getLease() <em>Lease</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getLease()
-	 * @generated
-	 * @ordered
-	 */
-	protected BTSLease lease;
 	/**
 	 * The default value of the '{@link #get_id() <em>id</em>}' attribute. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -117,8 +83,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 
 	/**
 	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProject()
 	 * @generated
 	 * @ordered
@@ -126,13 +91,30 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected static final String PROJECT_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getProject()
 	 * @generated
 	 * @ordered
 	 */
 	protected String project = PROJECT_EDEFAULT;
+	/**
+	 * The default value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LOCKED_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean locked = LOCKED_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -152,18 +134,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected BTSPassport passport;
 
 	/**
-	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getParent()
-	 * @generated
-	 * @ordered
-	 */
-	protected BTSCorpusObject parent;
-
-	/**
 	 * The default value of the '{@link #getCorpusPrefix() <em>Corpus Prefix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getCorpusPrefix()
 	 * @generated
 	 * @ordered
@@ -171,26 +144,16 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected static final String CORPUS_PREFIX_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getCorpusPrefix() <em>Corpus Prefix</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getCorpusPrefix()
 	 * @generated
 	 * @ordered
 	 */
 	protected String corpusPrefix = CORPUS_PREFIX_EDEFAULT;
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSCorpusObject> children;
-
-	/**
 	 * The default value of the '{@link #getWorkPhase() <em>Work Phase</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkPhase()
 	 * @generated
 	 * @ordered
@@ -198,8 +161,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected static final String WORK_PHASE_EDEFAULT = null;
 	/**
 	 * The cached value of the '{@link #getWorkPhase() <em>Work Phase</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getWorkPhase()
 	 * @generated
 	 * @ordered
@@ -223,51 +185,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	protected EClass eStaticClass()
 	{
 		return BtsmodelPackage.Literals.BTS_CORPUS_OBJECT;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BTSLease getLease()
-	{
-		return lease;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetLease(BTSLease newLease, NotificationChain msgs)
-	{
-		BTSLease oldLease = lease;
-		lease = newLease;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE, oldLease, newLease);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLease(BTSLease newLease)
-	{
-		if (newLease != lease)
-		{
-			NotificationChain msgs = null;
-			if (lease != null)
-				msgs = ((InternalEObject)lease).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE, null, msgs);
-			if (newLease != null)
-				msgs = ((InternalEObject)newLease).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE, null, msgs);
-			msgs = basicSetLease(newLease, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE, newLease, newLease));
 	}
 
 	/**
@@ -313,8 +230,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getProject()
@@ -323,8 +239,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setProject(String newProject)
@@ -336,24 +251,26 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PropertyChangeSupport getPropertyChangeSupport()
+	public boolean isLocked()
 	{
-		return propertyChangeSupport;
+		return locked;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setPropertyChangeSupport(PropertyChangeSupport newPropertyChangeSupport)
+	public void setLocked(boolean newLocked)
 	{
-		PropertyChangeSupport oldPropertyChangeSupport = propertyChangeSupport;
-		propertyChangeSupport = newPropertyChangeSupport;
+		boolean oldLocked = locked;
+		locked = newLocked;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport, propertyChangeSupport));
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED, oldLocked, locked));
 	}
 
 	/**
@@ -418,55 +335,13 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BTSCorpusObject getParent()
-	{
-		if (parent != null && parent.eIsProxy())
-		{
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (BTSCorpusObject)eResolveProxy(oldParent);
-			if (parent != oldParent)
-			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT, oldParent, parent));
-			}
-		}
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BTSCorpusObject basicGetParent()
-	{
-		return parent;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParent(BTSCorpusObject newParent)
-	{
-		BTSCorpusObject oldParent = parent;
-		parent = newParent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT, oldParent, parent));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getCorpusPrefix()
 	{
 		return corpusPrefix;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCorpusPrefix(String newCorpusPrefix)
@@ -481,28 +356,13 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSCorpusObject> getChildren()
-	{
-		if (children == null)
-		{
-			children = new EObjectResolvingEList<BTSCorpusObject>(BTSCorpusObject.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN);
-		}
-		return children;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getWorkPhase()
 	{
 		return workPhase;
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setWorkPhase(String newWorkPhase)
@@ -546,8 +406,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE:
-				return basicSetLease(null, msgs);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -565,27 +423,20 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT:
-				return getPropertyChangeSupport();
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE:
-				return getLease();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				return get_id();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 				return get_rev();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
 				return getProject();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
+				return isLocked();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return getRelations();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
 				return getPassport();
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
-				if (resolve) return getParent();
-				return basicGetParent();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 				return getCorpusPrefix();
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
-				return getChildren();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				return getWorkPhase();
 		}
@@ -602,12 +453,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT:
-				setPropertyChangeSupport((PropertyChangeSupport)newValue);
-				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE:
-				setLease((BTSLease)newValue);
-				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				set_id((String)newValue);
 				return;
@@ -617,6 +462,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
 				setProject((String)newValue);
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
+				setLocked((Boolean)newValue);
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
@@ -624,15 +472,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
 				setPassport((BTSPassport)newValue);
 				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
-				setParent((BTSCorpusObject)newValue);
-				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 				setCorpusPrefix((String)newValue);
-				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends BTSCorpusObject>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				setWorkPhase((String)newValue);
@@ -650,12 +491,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT:
-				setPropertyChangeSupport(PROPERTY_CHANGE_SUPPORT_EDEFAULT);
-				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE:
-				setLease((BTSLease)null);
-				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				set_id(_ID_EDEFAULT);
 				return;
@@ -665,20 +500,17 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
 				setProject(PROJECT_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
+				setLocked(LOCKED_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
 				setPassport((BTSPassport)null);
 				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
-				setParent((BTSCorpusObject)null);
-				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 				setCorpusPrefix(CORPUS_PREFIX_EDEFAULT);
-				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
-				getChildren().clear();
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				setWorkPhase(WORK_PHASE_EDEFAULT);
@@ -696,26 +528,20 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT:
-				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE:
-				return lease != null;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:
 				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
+				return locked != LOCKED_EDEFAULT;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
 				return passport != null;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__PARENT:
-				return parent != null;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 				return CORPUS_PREFIX_EDEFAULT == null ? corpusPrefix != null : !CORPUS_PREFIX_EDEFAULT.equals(corpusPrefix);
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__CHILDREN:
-				return children != null && !children.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				return WORK_PHASE_EDEFAULT == null ? workPhase != null : !WORK_PHASE_EDEFAULT.equals(workPhase);
 		}
@@ -729,11 +555,11 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSObservableObject.class)
+		if (baseClass == BTSIdentifiableItem.class)
 		{
 			switch (derivedFeatureID)
 			{
-				case BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 				default: return -1;
 			}
 		}
@@ -741,10 +567,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		{
 			switch (derivedFeatureID)
 			{
-				case BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE: return BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE;
-				case BtsmodelPackage.BTS_CORPUS_OBJECT__ID: return BtsmodelPackage.BTSDB_BASE_OBJECT__ID;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
 				default: return -1;
 			}
 		}
@@ -758,11 +583,11 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSObservableObject.class)
+		if (baseClass == BTSIdentifiableItem.class)
 		{
 			switch (baseFeatureID)
 			{
-				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
+				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_CORPUS_OBJECT__ID;
 				default: return -1;
 			}
 		}
@@ -770,59 +595,13 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		{
 			switch (baseFeatureID)
 			{
-				case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE: return BtsmodelPackage.BTS_CORPUS_OBJECT__LEASE;
-				case BtsmodelPackage.BTSDB_BASE_OBJECT__ID: return BtsmodelPackage.BTS_CORPUS_OBJECT__ID;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_CORPUS_OBJECT__REV;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass)
-	{
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (baseOperationID)
-			{
-				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-				default: return -1;
-			}
-		}
-		if (baseClass == BTSDBBaseObject.class)
-		{
-			switch (baseOperationID)
-			{
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
-	{
-		switch (operationID)
-		{
-			case BtsmodelPackage.BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
-				return null;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				removePropertyChangeListener((PropertyChangeListener)arguments.get(0));
-				return null;
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -835,14 +614,14 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (propertyChangeSupport: ");
-		result.append(propertyChangeSupport);
-		result.append(", _id: ");
+		result.append(" (_id: ");
 		result.append(_id);
 		result.append(", _rev: ");
 		result.append(_rev);
 		result.append(", project: ");
 		result.append(project);
+		result.append(", locked: ");
+		result.append(locked);
 		result.append(", corpusPrefix: ");
 		result.append(corpusPrefix);
 		result.append(", workPhase: ");

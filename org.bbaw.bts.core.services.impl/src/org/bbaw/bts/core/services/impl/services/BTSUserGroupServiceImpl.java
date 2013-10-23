@@ -7,16 +7,17 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.dao.BTSUserGroupDao;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
-import org.bbaw.bts.dao.couchDB.BTSUserGroupDaoImpl;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGroup, String> implements
 		BTSUserGroupService
 {
 
 	@Inject
-	BTSUserGroupDaoImpl userGroupDao;
+	private BTSUserGroupDao userGroupDao;
 
 	@Override
 	public BTSUserGroup createNew()
@@ -76,7 +77,19 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 		{
 			userGroups.addAll(userGroupDao.list(p + ServiceConstants.ADMIN_SUFFIX));
 		}
-		return userGroups;
+		return filter(userGroups);
+	}
+
+	@Override
+	public List<BTSUserGroup> query(BTSQueryRequest query)
+	{
+		List<BTSUserGroup> objects = new Vector<BTSUserGroup>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			objects.addAll(userGroupDao.query(query, p + ServiceConstants.ADMIN_SUFFIX, p
+					+ ServiceConstants.ADMIN_SUFFIX));
+		}
+		return filter(objects);
 	}
 
 }

@@ -4,8 +4,6 @@ package org.bbaw.bts.btsmodel;
 
 import java.util.Date;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>BTS Revision</b></em>'.
@@ -25,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BTSRevision extends EObject {
+public interface BTSRevision extends BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>Ref</b></em>' attribute.
 	 * <!-- begin-user-doc -->

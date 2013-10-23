@@ -15,6 +15,8 @@ public class BTSConstants
 	/** file separator. */
 	public static final String FS = System.getProperty("file.separator");
 
+	public static final String ENCODING = "UTF-8";
+
 	private BTSConstants()
 	{
 	}

@@ -5,5 +5,9 @@ Bundle-SymbolicName: org.bbaw.bts.core.commons
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Export-Package: org.bbaw.bts.core.commons
+Export-Package: org.bbaw.bts.core.commons,
+ org.bbaw.bts.core.commons.exceptions
 Bundle-ActivationPolicy: lazy
+Import-Package: org.bbaw.bts.searchModel,
+ org.eclipse.jface.resource,
+ org.eclipse.swt.graphics

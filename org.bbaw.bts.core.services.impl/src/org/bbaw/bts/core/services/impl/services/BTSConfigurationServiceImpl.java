@@ -9,10 +9,13 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -20,6 +23,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 	@Inject
 	private BTSConfigurationDao configurationDao;
+	@Inject
+	private IEclipseContext context;
 
 	@Override
 	public BTSConfiguration createNew()
@@ -27,6 +32,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		BTSConfiguration config = BtsmodelFactory.eINSTANCE.createBTSConfiguration();
 		super.setId(config);
 		super.setRevision(config);
+
 		return config;
 	}
 
@@ -82,7 +88,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			configs.addAll(configurationDao.list(p + ServiceConstants.ADMIN_SUFFIX));
 		}
-		return configs;
+		return filter(configs);
 	}
 
 	@Override
@@ -119,14 +125,20 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public BTSConfiguration getActiveConfiguration()
 	{
-		// FIXME logic!!!
+		BTSConfiguration activeConfig = (BTSConfiguration) context.get(BTSPluginIDs.ACTIVE_CONFIGURATION);
+		if (activeConfig != null)
+		{
+			return (BTSConfiguration) activeConfig;
+		}
 		List<BTSConfiguration> list = list();
 		if (list == null || list.isEmpty())
 		{
 			BTSConfiguration config = createNew();
 			save(config);
 		}
-		return list().get(0);
+		activeConfig = list().get(0);
+		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, activeConfig);
+		return activeConfig;
 	}
 
 	@Override
@@ -148,6 +160,18 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public List<BTSConfiguration> query(BTSQueryRequest query)
+	{
+		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			objects.addAll(configurationDao.query(query, p + ServiceConstants.ADMIN_SUFFIX, p
+					+ ServiceConstants.ADMIN_SUFFIX));
+		}
+		return filter(objects);
 	}
 
 }

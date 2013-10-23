@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSListEntryDao;
 import org.bbaw.bts.core.services.BTSListEntryService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSListEntryServiceImpl extends GenericObjectServiceImpl<BTSListEntry, String> implements
 		BTSListEntryService
@@ -76,7 +77,20 @@ public class BTSListEntryServiceImpl extends GenericObjectServiceImpl<BTSListEnt
 		{
 			entries.addAll(listEntryDao.list(p + ServiceConstants.WLIST));
 		}
-		return entries;
+		return filter(entries);
+	}
+
+	@Override
+	public List<BTSListEntry> query(BTSQueryRequest query)
+	{
+		List<BTSListEntry> objects = new Vector<BTSListEntry>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+
+			objects.addAll(listEntryDao.query(query, p + ServiceConstants.WLIST, p + ServiceConstants.WLIST));
+
+		}
+		return filter(objects);
 	}
 
 }

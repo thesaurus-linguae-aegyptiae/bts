@@ -9,8 +9,8 @@ import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSTextCorpusDao;
 import org.bbaw.bts.core.services.BTSTextCorpusService;
-import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCorpus, String> implements
 		BTSTextCorpusService
@@ -18,9 +18,6 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 
 	@Inject
 	BTSTextCorpusDao textCorpusDao;
-
-	@Inject
-	private CorpusObjectService corpusObjectService;
 
 	@Override
 	public BTSTextCorpus createNew()
@@ -80,17 +77,20 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 		{
 			list.addAll(textCorpusDao.list(p + ServiceConstants.CORPUS));
 		}
-		loadChildren(list);
-		return list;
+		return filter(list);
 	}
 
-	private void loadChildren(List<BTSTextCorpus> list)
+	@Override
+	public List<BTSTextCorpus> query(BTSQueryRequest query)
 	{
-		for (BTSTextCorpus tc : list)
+		List<BTSTextCorpus> objects = new Vector<BTSTextCorpus>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-//			corpusObjectService.loadChildren(tc);
-		}
 
+			objects.addAll(textCorpusDao.query(query, p + ServiceConstants.CORPUS, p + ServiceConstants.CORPUS));
+
+		}
+		return filter(objects);
 	}
 
 }

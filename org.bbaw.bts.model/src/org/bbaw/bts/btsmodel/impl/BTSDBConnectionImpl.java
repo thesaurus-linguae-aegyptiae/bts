@@ -4,13 +4,9 @@ package org.bbaw.bts.btsmodel.impl;
 
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class BTSDBConnectionImpl extends MinimalEObjectImpl.Container implements BTSDBConnection
+public class BTSDBConnectionImpl extends BTSIdentifiableItemImpl implements BTSDBConnection
 {
 	/**
 	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.

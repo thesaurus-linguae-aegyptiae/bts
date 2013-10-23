@@ -25,7 +25,7 @@
          </property>-->
          <property
                name="lifeCycleURI"
-               value="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.lifeCycle.ApplicationStartupController">
+               value="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.lifeCycle.ApplicationLifeCyleManager">
          </property>
       </product>
    </extension>

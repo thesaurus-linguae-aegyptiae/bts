@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSAnnotationDao;
 import org.bbaw.bts.core.services.BTSAnnotationService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnotation, String> implements
 		BTSAnnotationService
@@ -90,7 +91,23 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 				annos.addAll(annotationDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return annos;
+		return filter(annos);
+	}
+
+	@Override
+	public List<BTSAnnotation> query(BTSQueryRequest query)
+	{
+		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				objects.addAll(annotationDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return filter(objects);
+
 	}
 
 }

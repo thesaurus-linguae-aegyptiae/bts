@@ -20,9 +20,9 @@ import org.bbaw.bts.btsmodel.BTSDate;
 import org.bbaw.bts.btsmodel.BTSDelimiter;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSGraphic;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
-import org.bbaw.bts.btsmodel.BTSLease;
 import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSList;
 import org.bbaw.bts.btsmodel.BTSListEntry;
@@ -35,6 +35,7 @@ import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSPpSubentry;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSReferencableItem;
 import org.bbaw.bts.btsmodel.BTSReference;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -57,14 +58,13 @@ import org.bbaw.bts.btsmodel.BTSWorkflowRule;
 import org.bbaw.bts.btsmodel.BTSWorkflowRuleItem;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
+import org.bbaw.bts.btsmodel.DBLease;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -268,13 +268,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass btsLeaseEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass btsImageEClass = null;
 
 	/**
@@ -423,6 +416,27 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	private EClass btsWorkflowRuleItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dbLeaseEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsProjectDBCollectionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsIdentifiableItemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1061,6 +1075,36 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSUser_Password()
+	{
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(12);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSUser_LoggedIn()
+	{
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSUser_Status()
+	{
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(14);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSComment() {
 		return btsCommentEClass;
 	}
@@ -1395,19 +1439,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSConfiguration_Name()
-	{
-		return (EAttribute)btsConfigurationEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBTSConfiguration_Provider()
 	{
-		return (EAttribute)btsConfigurationEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)btsConfigurationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1424,26 +1458,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSDBBaseObject_Lease() {
-		return (EReference)btsdbBaseObjectEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSDBBaseObject__id() {
-		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBTSDBBaseObject__rev() {
-		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1453,7 +1469,17 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSDBBaseObject_Project()
 	{
-		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSDBBaseObject_Locked()
+	{
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1518,33 +1544,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	public EAttribute getBTSRevision_RightsRevoked()
 	{
 		return (EAttribute)btsRevisionEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBTSLease() {
-		return btsLeaseEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSLease_LeasingUserId() {
-		return (EAttribute)btsLeaseEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSLease_LeaseTimeStamp() {
-		return (EAttribute)btsLeaseEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1678,28 +1677,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSCorpusObject_Parent() {
-		return (EReference)btsCorpusObjectEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBTSCorpusObject_CorpusPrefix()
 	{
-		return (EAttribute)btsCorpusObjectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBTSCorpusObject_Children()
-	{
-		return (EReference)btsCorpusObjectEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)btsCorpusObjectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1709,7 +1689,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSCorpusObject_WorkPhase()
 	{
-		return (EAttribute)btsCorpusObjectEClass.getEStructuralFeatures().get(5);
+		return (EAttribute)btsCorpusObjectEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1762,7 +1742,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSReferencableItem_Id() {
+	public EAttribute getBTSReferencableItem_Comment() {
 		return (EAttribute)btsReferencableItemEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1771,17 +1751,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSReferencableItem_Comment() {
-		return (EAttribute)btsReferencableItemEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getBTSReferencableItem_Parent() {
-		return (EReference)btsReferencableItemEClass.getEStructuralFeatures().get(2);
+		return (EReference)btsReferencableItemEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1790,7 +1761,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EAttribute getBTSReferencableItem_ParentId() {
-		return (EAttribute)btsReferencableItemEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)btsReferencableItemEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -1845,6 +1816,26 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EReference getBTSTranslations_Translations() {
 		return (EReference)btsTranslationsEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getBTSTranslations__GetTranslation__String()
+	{
+		return btsTranslationsEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getBTSTranslations__SetTranslation__String_String()
+	{
+		return btsTranslationsEClass.getEOperations().get(1);
 	}
 
 	/**
@@ -2289,7 +2280,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSProject_Name()
+	public EAttribute getBTSProject_Prefix()
 	{
 		return (EAttribute)btsProjectEClass.getEStructuralFeatures().get(0);
 	}
@@ -2299,7 +2290,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSProject_Prefix()
+	public EAttribute getBTSProject_Description()
 	{
 		return (EAttribute)btsProjectEClass.getEStructuralFeatures().get(1);
 	}
@@ -2309,9 +2300,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSProject_Description()
+	public EReference getBTSProject_DbConnection()
 	{
-		return (EAttribute)btsProjectEClass.getEStructuralFeatures().get(2);
+		return (EReference)btsProjectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2319,7 +2310,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSProject_DbConnection()
+	public EReference getBTSProject_DbCollections()
 	{
 		return (EReference)btsProjectEClass.getEStructuralFeatures().get(3);
 	}
@@ -2489,6 +2480,116 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDBLease()
+	{
+		return dbLeaseEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBLease_Path()
+	{
+		return (EAttribute)dbLeaseEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBLease_ObjectId()
+	{
+		return (EAttribute)dbLeaseEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBLease_UserId()
+	{
+		return (EAttribute)dbLeaseEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBLease_TimeStamp()
+	{
+		return (EAttribute)dbLeaseEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBTSProjectDBCollection()
+	{
+		return btsProjectDBCollectionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSProjectDBCollection_CollectionName()
+	{
+		return (EAttribute)btsProjectDBCollectionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSProjectDBCollection_Indexed()
+	{
+		return (EAttribute)btsProjectDBCollectionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSProjectDBCollection_Synchronized()
+	{
+		return (EAttribute)btsProjectDBCollectionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBTSIdentifiableItem()
+	{
+		return btsIdentifiableItemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSIdentifiableItem__id()
+	{
+		return (EAttribute)btsIdentifiableItemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPropertyChangeSupport() {
 		return propertyChangeSupportEDataType;
 	}
@@ -2613,6 +2714,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsUserEClass, BTS_USER__COMMENT);
 		createEReference(btsUserEClass, BTS_USER__EXTERNAL_REFERNECES);
 		createEAttribute(btsUserEClass, BTS_USER__ROLES);
+		createEAttribute(btsUserEClass, BTS_USER__PASSWORD);
+		createEAttribute(btsUserEClass, BTS_USER__LOGGED_IN);
+		createEAttribute(btsUserEClass, BTS_USER__STATUS);
 
 		btsCommentEClass = createEClass(BTS_COMMENT);
 		createEAttribute(btsCommentEClass, BTS_COMMENT__COMMENT);
@@ -2660,14 +2764,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsRelationEClass, BTS_RELATION__CERTAINTY);
 
 		btsConfigurationEClass = createEClass(BTS_CONFIGURATION);
-		createEAttribute(btsConfigurationEClass, BTS_CONFIGURATION__NAME);
 		createEAttribute(btsConfigurationEClass, BTS_CONFIGURATION__PROVIDER);
 
 		btsdbBaseObjectEClass = createEClass(BTSDB_BASE_OBJECT);
-		createEReference(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__LEASE);
-		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__ID);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__REV);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__PROJECT);
+		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__LOCKED);
 
 		btsTextCorpusEClass = createEClass(BTS_TEXT_CORPUS);
 		createEReference(btsTextCorpusEClass, BTS_TEXT_CORPUS__HEADER);
@@ -2677,10 +2779,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsRevisionEClass, BTS_REVISION__USER_ID);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__TIME_STAMP);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__RIGHTS_REVOKED);
-
-		btsLeaseEClass = createEClass(BTS_LEASE);
-		createEAttribute(btsLeaseEClass, BTS_LEASE__LEASING_USER_ID);
-		createEAttribute(btsLeaseEClass, BTS_LEASE__LEASE_TIME_STAMP);
 
 		btsImageEClass = createEClass(BTS_IMAGE);
 		createEAttribute(btsImageEClass, BTS_IMAGE__MEDIA_TYPE);
@@ -2699,9 +2797,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsCorpusObjectEClass = createEClass(BTS_CORPUS_OBJECT);
 		createEReference(btsCorpusObjectEClass, BTS_CORPUS_OBJECT__RELATIONS);
 		createEReference(btsCorpusObjectEClass, BTS_CORPUS_OBJECT__PASSPORT);
-		createEReference(btsCorpusObjectEClass, BTS_CORPUS_OBJECT__PARENT);
 		createEAttribute(btsCorpusObjectEClass, BTS_CORPUS_OBJECT__CORPUS_PREFIX);
-		createEReference(btsCorpusObjectEClass, BTS_CORPUS_OBJECT__CHILDREN);
 		createEAttribute(btsCorpusObjectEClass, BTS_CORPUS_OBJECT__WORK_PHASE);
 
 		btsExternalReferenceEClass = createEClass(BTS_EXTERNAL_REFERENCE);
@@ -2710,7 +2806,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsExternalReferenceEClass, BTS_EXTERNAL_REFERENCE__TYPE);
 
 		btsReferencableItemEClass = createEClass(BTS_REFERENCABLE_ITEM);
-		createEAttribute(btsReferencableItemEClass, BTS_REFERENCABLE_ITEM__ID);
 		createEAttribute(btsReferencableItemEClass, BTS_REFERENCABLE_ITEM__COMMENT);
 		createEReference(btsReferencableItemEClass, BTS_REFERENCABLE_ITEM__PARENT);
 		createEAttribute(btsReferencableItemEClass, BTS_REFERENCABLE_ITEM__PARENT_ID);
@@ -2722,6 +2817,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		btsTranslationsEClass = createEClass(BTS_TRANSLATIONS);
 		createEReference(btsTranslationsEClass, BTS_TRANSLATIONS__TRANSLATIONS);
+		createEOperation(btsTranslationsEClass, BTS_TRANSLATIONS___GET_TRANSLATION__STRING);
+		createEOperation(btsTranslationsEClass, BTS_TRANSLATIONS___SET_TRANSLATION__STRING_STRING);
 
 		btsConfigItemEClass = createEClass(BTS_CONFIG_ITEM);
 		createEAttribute(btsConfigItemEClass, BTS_CONFIG_ITEM__VALUE);
@@ -2779,10 +2876,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsThsEntryEClass = createEClass(BTS_THS_ENTRY);
 
 		btsProjectEClass = createEClass(BTS_PROJECT);
-		createEAttribute(btsProjectEClass, BTS_PROJECT__NAME);
 		createEAttribute(btsProjectEClass, BTS_PROJECT__PREFIX);
 		createEAttribute(btsProjectEClass, BTS_PROJECT__DESCRIPTION);
 		createEReference(btsProjectEClass, BTS_PROJECT__DB_CONNECTION);
+		createEReference(btsProjectEClass, BTS_PROJECT__DB_COLLECTIONS);
 
 		btsdbConnectionEClass = createEClass(BTSDB_CONNECTION);
 		createEAttribute(btsdbConnectionEClass, BTSDB_CONNECTION__TYPE);
@@ -2803,6 +2900,20 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsWorkflowRuleItemEClass = createEClass(BTS_WORKFLOW_RULE_ITEM);
 		createEAttribute(btsWorkflowRuleItemEClass, BTS_WORKFLOW_RULE_ITEM__PRIORITY);
 		createEAttribute(btsWorkflowRuleItemEClass, BTS_WORKFLOW_RULE_ITEM__IGNORE);
+
+		dbLeaseEClass = createEClass(DB_LEASE);
+		createEAttribute(dbLeaseEClass, DB_LEASE__PATH);
+		createEAttribute(dbLeaseEClass, DB_LEASE__OBJECT_ID);
+		createEAttribute(dbLeaseEClass, DB_LEASE__USER_ID);
+		createEAttribute(dbLeaseEClass, DB_LEASE__TIME_STAMP);
+
+		btsProjectDBCollectionEClass = createEClass(BTS_PROJECT_DB_COLLECTION);
+		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME);
+		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__INDEXED);
+		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED);
+
+		btsIdentifiableItemEClass = createEClass(BTS_IDENTIFIABLE_ITEM);
+		createEAttribute(btsIdentifiableItemEClass, BTS_IDENTIFIABLE_ITEM__ID);
 
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
@@ -2846,34 +2957,48 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsTextItemsEClass.getESuperTypes().add(this.getBTSReferencableItem());
 		btsSentenceItemsEClass.getESuperTypes().add(this.getBTSReferencableItem());
 		btsListEntryEClass.getESuperTypes().add(this.getBTSCorpusObject());
+		administrativDataObjectEClass.getESuperTypes().add(this.getBTSObservableObject());
 		btsObjectEClass.getESuperTypes().add(this.getAdministrativDataObject());
 		btsAmbivalenceEClass.getESuperTypes().add(this.getBTSTextSentenceItem());
 		btsUserEClass.getESuperTypes().add(this.getBTSDBBaseObject());
-		btsUserEClass.getESuperTypes().add(this.getAdministrativDataObject());
-		btsCommentEClass.getESuperTypes().add(this.getAdministrativDataObject());
+		btsUserEClass.getESuperTypes().add(this.getBTSObject());
 		btsCommentEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsCommentEClass.getESuperTypes().add(this.getBTSObject());
 		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSSentenceItems());
 		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSTextItems());
 		btsAnnotationEClass.getESuperTypes().add(this.getBTSCorpusObject());
+		btsPassportEntryEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		btsRelationEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSDBBaseObject());
-		btsConfigurationEClass.getESuperTypes().add(this.getAdministrativDataObject());
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSConfig());
-		btsdbBaseObjectEClass.getESuperTypes().add(this.getBTSObservableObject());
+		btsConfigurationEClass.getESuperTypes().add(this.getBTSObject());
+		btsdbBaseObjectEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsTextCorpusEClass.getESuperTypes().add(this.getBTSCorpusObject());
+		btsRevisionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsImageEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsCorpusObjectEClass.getESuperTypes().add(this.getBTSObject());
 		btsCorpusObjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsReferencableItemEClass.getESuperTypes().add(this.getBTSObject());
+		btsReferencableItemEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		btsGraphicEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsConfigItemEClass.getESuperTypes().add(this.getBTSConfig());
 		btsConfigItemEClass.getESuperTypes().add(this.getBTSObservableObject());
+		btsConfigItemEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		btsPassportEditorConfigEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsUserGroupEClass.getESuperTypes().add(this.getBTSDBBaseObject());
-		btsUserGroupEClass.getESuperTypes().add(this.getAdministrativDataObject());
+		btsUserGroupEClass.getESuperTypes().add(this.getBTSObject());
 		btsListEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsListSubentryEClass.getESuperTypes().add(this.getBTSReferencableItem());
 		btsThsEntryEClass.getESuperTypes().add(this.getBTSCorpusObject());
+		btsProjectEClass.getESuperTypes().add(this.getBTSObject());
 		btsProjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsdbConnectionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		btsWorkflowRuleEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsOperatorEClass.getESuperTypes().add(this.getBTSWorkflowRuleItem());
 		btsWorkflowRuleItemEClass.getESuperTypes().add(this.getBTSObservableObject());
+		btsWorkflowRuleItemEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		dbLeaseEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsProjectDBCollectionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(btstcObjectEClass, BTSTCObject.class, "BTSTCObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2950,6 +3075,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSUser_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSUser_ExternalReferneces(), this.getBTSExternalReference(), null, "externalReferneces", null, 0, -1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_Roles(), ecorePackage.getEString(), "roles", null, 0, -1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSUser_Password(), ecorePackage.getEString(), "password", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSUser_LoggedIn(), ecorePackage.getEBoolean(), "loggedIn", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSUser_Status(), ecorePackage.getEString(), "status", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsCommentEClass, BTSComment.class, "BTSComment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSComment_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSComment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2997,14 +3125,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSRelation_Certainty(), ecorePackage.getEString(), "certainty", null, 0, 1, BTSRelation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsConfigurationEClass, BTSConfiguration.class, "BTSConfiguration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSConfiguration_Name(), ecorePackage.getEString(), "name", null, 0, 1, BTSConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSConfiguration_Provider(), ecorePackage.getEString(), "provider", null, 0, 1, BTSConfiguration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsdbBaseObjectEClass, BTSDBBaseObject.class, "BTSDBBaseObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSDBBaseObject_Lease(), this.getBTSLease(), null, "lease", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSDBBaseObject__id(), ecorePackage.getEString(), "_id", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject__rev(), ecorePackage.getEString(), "_rev", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Project(), ecorePackage.getEString(), "project", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsTextCorpusEClass, BTSTextCorpus.class, "BTSTextCorpus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTextCorpus_Header(), this.getBTSCorpusHeader(), null, "header", null, 0, 1, BTSTextCorpus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3014,10 +3140,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSRevision_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSRevision_TimeStamp(), ecorePackage.getEDate(), "timeStamp", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSRevision_RightsRevoked(), ecorePackage.getEBoolean(), "rightsRevoked", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(btsLeaseEClass, BTSLease.class, "BTSLease", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSLease_LeasingUserId(), ecorePackage.getEString(), "leasingUserId", null, 0, 1, BTSLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSLease_LeaseTimeStamp(), ecorePackage.getEDate(), "leaseTimeStamp", null, 0, 1, BTSLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsImageEClass, BTSImage.class, "BTSImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSImage_MediaType(), ecorePackage.getEString(), "mediaType", null, 0, 1, BTSImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3037,9 +3159,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsCorpusObjectEClass, BTSCorpusObject.class, "BTSCorpusObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSCorpusObject_Relations(), this.getBTSRelation(), null, "relations", null, 0, -1, BTSCorpusObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSCorpusObject_Passport(), this.getBTSPassport(), null, "passport", null, 0, 1, BTSCorpusObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSCorpusObject_Parent(), this.getBTSCorpusObject(), null, "parent", null, 0, 1, BTSCorpusObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSCorpusObject_CorpusPrefix(), ecorePackage.getEString(), "corpusPrefix", null, 0, 1, BTSCorpusObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSCorpusObject_Children(), this.getBTSCorpusObject(), null, "children", null, 0, -1, BTSCorpusObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSCorpusObject_CorpusPrefix(), ecorePackage.getEString(), "corpusPrefix", null, 0, 1, BTSCorpusObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSCorpusObject_WorkPhase(), ecorePackage.getEString(), "workPhase", null, 0, 1, BTSCorpusObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsExternalReferenceEClass, BTSExternalReference.class, "BTSExternalReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3048,7 +3168,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSExternalReference_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSExternalReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsReferencableItemEClass, BTSReferencableItem.class, "BTSReferencableItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSReferencableItem_Id(), ecorePackage.getEString(), "id", null, 0, 1, BTSReferencableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSReferencableItem_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSReferencableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSReferencableItem_Parent(), this.getBTSObject(), null, "parent", null, 0, 1, BTSReferencableItem.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSReferencableItem_ParentId(), ecorePackage.getEString(), "parentId", null, 0, 1, BTSReferencableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3060,6 +3179,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		initEClass(btsTranslationsEClass, BTSTranslations.class, "BTSTranslations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTranslations_Translations(), this.getBTSTranslation(), null, "translations", null, 0, -1, BTSTranslations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = initEOperation(getBTSTranslations__GetTranslation__String(), ecorePackage.getEString(), "getTranslation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "language", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getBTSTranslations__SetTranslation__String_String(), ecorePackage.getEString(), "setTranslation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "translation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "language", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(btsConfigItemEClass, BTSConfigItem.class, "BTSConfigItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSConfigItem_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3112,7 +3238,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsObservableObjectEClass, BTSObservableObject.class, "BTSObservableObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSObservableObject_PropertyChangeSupport(), this.getPropertyChangeSupport(), "propertyChangeSupport", null, 0, 1, BTSObservableObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getBTSObservableObject__AddPropertyChangeListener__PropertyChangeListener(), null, "addPropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getBTSObservableObject__AddPropertyChangeListener__PropertyChangeListener(), null, "addPropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPropertyChangeListener(), "propertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getBTSObservableObject__RemovePropertyChangeListener__PropertyChangeListener(), null, "removePropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -3121,10 +3247,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsThsEntryEClass, BTSThsEntry.class, "BTSThsEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(btsProjectEClass, BTSProject.class, "BTSProject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSProject_Name(), ecorePackage.getEString(), "name", null, 1, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSProject_Prefix(), ecorePackage.getEString(), "prefix", null, 1, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSProject_Description(), ecorePackage.getEString(), "description", null, 0, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSProject_DbConnection(), this.getBTSDBConnection(), null, "dbConnection", null, 0, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSProject_DbCollections(), this.getBTSProjectDBCollection(), null, "dbCollections", null, 0, -1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsdbConnectionEClass, BTSDBConnection.class, "BTSDBConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSDBConnection_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSDBConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3145,6 +3271,20 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsWorkflowRuleItemEClass, BTSWorkflowRuleItem.class, "BTSWorkflowRuleItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSWorkflowRuleItem_Priority(), ecorePackage.getEInt(), "priority", null, 0, 1, BTSWorkflowRuleItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSWorkflowRuleItem_Ignore(), ecorePackage.getEBoolean(), "ignore", null, 0, 1, BTSWorkflowRuleItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dbLeaseEClass, DBLease.class, "DBLease", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDBLease_Path(), ecorePackage.getEString(), "path", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBLease_ObjectId(), ecorePackage.getEString(), "objectId", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBLease_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBLease_TimeStamp(), ecorePackage.getEDate(), "timeStamp", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsProjectDBCollectionEClass, BTSProjectDBCollection.class, "BTSProjectDBCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBTSProjectDBCollection_CollectionName(), ecorePackage.getEString(), "collectionName", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSProjectDBCollection_Indexed(), ecorePackage.getEBoolean(), "indexed", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSProjectDBCollection_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsIdentifiableItemEClass, BTSIdentifiableItem.class, "BTSIdentifiableItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBTSIdentifiableItem__id(), ecorePackage.getEString(), "_id", null, 0, 1, BTSIdentifiableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

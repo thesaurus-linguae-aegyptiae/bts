@@ -1,14 +1,12 @@
 package org.bbaw.bts.ui.main.dialogs;
 
 import org.bbaw.bts.btsmodel.BTSConfiguration;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.core.databinding.validation.IValidator;
-import org.eclipse.core.databinding.validation.ValidationStatus;
-import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
@@ -28,7 +26,6 @@ public class NewConfigurationDialog extends TitleAreaDialog
 {
 	private Text text;
 	private DataBindingContext bindingContext;
-	private WritableValue value;
 	private BTSConfiguration configuration;
 
 	/**
@@ -65,40 +62,23 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		text = new Text(container, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		value = new WritableValue();
 		bindingContext = initializeBindings();
-		value.setValue(configuration);
 		return area;
 	}
 
 	private DataBindingContext initializeBindings()
 	{
-		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
-		us.setBeforeSetValidator(new IValidator()
-		{
-
-			@Override
-			public IStatus validate(Object value)
-			{
-				if (value instanceof String)
-				{
-					if (value.toString().trim().length() > 0)
-					{
-						return ValidationStatus.ok();
-					}
-				}
-				return ValidationStatus.error("Not a number");
-			}
-		});
-
 		DataBindingContext bindingContext = new DataBindingContext();
-		IObservableValue model = BeanProperties.value("name").observeDetail(value);
+
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+		IObservableValue model = EMFProperties.value(BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(configuration);
 		Binding binding = bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(400, text), model,
 				us, null);
+		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 
 		bindingContext.addValidationStatusProvider(binding);
 
-		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 		return bindingContext;
 	}
 

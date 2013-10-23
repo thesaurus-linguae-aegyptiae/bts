@@ -22,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSComment extends AdministrativDataObject, BTSDBBaseObject {
+public interface BTSComment extends BTSDBBaseObject, BTSObject {
 	/**
 	 * Returns the value of the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->

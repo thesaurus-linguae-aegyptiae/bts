@@ -1,24 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-river-couchdb-1.1.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/jna-3.3.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/jts-1.12.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/log4j-1.2.17.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-analyzers-common-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-codecs-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-core-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-grouping-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-highlighter-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-join-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-memory-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-misc-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-queries-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-queryparser-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-sandbox-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-spatial-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-suggest-4.4.0.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/spatial4j-0.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-0.90.5.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>

@@ -207,11 +207,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSRevisionAdapter();
 			}
 			@Override
-			public Adapter caseBTSLease(BTSLease object)
-			{
-				return createBTSLeaseAdapter();
-			}
-			@Override
 			public Adapter caseBTSImage(BTSImage object)
 			{
 				return createBTSImageAdapter();
@@ -320,6 +315,21 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 			public Adapter caseBTSWorkflowRuleItem(BTSWorkflowRuleItem object)
 			{
 				return createBTSWorkflowRuleItemAdapter();
+			}
+			@Override
+			public Adapter caseDBLease(DBLease object)
+			{
+				return createDBLeaseAdapter();
+			}
+			@Override
+			public Adapter caseBTSProjectDBCollection(BTSProjectDBCollection object)
+			{
+				return createBTSProjectDBCollectionAdapter();
+			}
+			@Override
+			public Adapter caseBTSIdentifiableItem(BTSIdentifiableItem object)
+			{
+				return createBTSIdentifiableItemAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -721,20 +731,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSLease <em>BTS Lease</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSLease
-	 * @generated
-	 */
-	public Adapter createBTSLeaseAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSImage <em>BTS Image</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1046,6 +1042,51 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSWorkflowRuleItemAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.DBLease <em>DB Lease</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.DBLease
+	 * @generated
+	 */
+	public Adapter createDBLeaseAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection <em>BTS Project DB Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection
+	 * @generated
+	 */
+	public Adapter createBTSProjectDBCollectionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSIdentifiableItem <em>BTS Identifiable Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSIdentifiableItem
+	 * @generated
+	 */
+	public Adapter createBTSIdentifiableItemAdapter()
 	{
 		return null;
 	}

@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.services.impl.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -12,14 +11,17 @@ import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.services.BTSAnnotationService;
 import org.bbaw.bts.core.services.BTSImageService;
 import org.bbaw.bts.core.services.BTSListEntryService;
 import org.bbaw.bts.core.services.BTSTCObjectService;
+import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.BTSTextService;
 import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 
 public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusObject, String> implements
@@ -39,8 +41,8 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 	@Inject
 	private BTSTCObjectService tcObjectService;
 
-	// @Inject
-	// private BTSTextCorpusService textCorpusService;
+	@Inject
+	private BTSTextCorpusService textCorpusService;
 
 	@Inject
 	private BTSTextService textService;
@@ -74,9 +76,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		} else if (entity instanceof BTSTCObject)
 		{
 			tcObjectService.save((BTSTCObject) entity);
-			// } else if (entity instanceof BTSTextCorpus)
-			// {
-			// textCorpusService.save((BTSTextCorpus) entity);
+		} else if (entity instanceof BTSTextCorpus)
+		{
+			textCorpusService.save((BTSTextCorpus) entity);
 		} else if (entity instanceof BTSText)
 		{
 			textService.save((BTSText) entity);
@@ -99,9 +101,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		} else if (entity instanceof BTSTCObject)
 		{
 			tcObjectService.update((BTSTCObject) entity);
-			// } else if (entity instanceof BTSTextCorpus)
-			// {
-			// textCorpusService.update((BTSTextCorpus) entity);
+		} else if (entity instanceof BTSTextCorpus)
+		{
+			textCorpusService.update((BTSTextCorpus) entity);
 		} else if (entity instanceof BTSText)
 		{
 			textService.update((BTSText) entity);
@@ -124,9 +126,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		} else if (entity instanceof BTSTCObject)
 		{
 			tcObjectService.remove((BTSTCObject) entity);
-			// } else if (entity instanceof BTSTextCorpus)
-			// {
-			// textCorpusService.remove((BTSTextCorpus) entity);
+		} else if (entity instanceof BTSTextCorpus)
+		{
+			textCorpusService.remove((BTSTextCorpus) entity);
 		} else if (entity instanceof BTSText)
 		{
 			textService.remove((BTSText) entity);
@@ -176,7 +178,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 				objects.addAll(corpusObjectDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return objects;
+		return filter(objects);
 	}
 
 	public List<BTSCorpusObject> getRootBTSCorpusObjects()
@@ -189,36 +191,56 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 				objects.addAll(corpusObjectDao.getRootBTSCorpusObjects(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return objects;
+		return filter(objects);
 	}
 
-	public void loadChildren(BTSCorpusObject parent)
+	public List<BTSCorpusObject> findByQueryId(String searchId, String dbPath)
 	{
-		if (parent != null && parent instanceof BTSCorpusObject && !((BTSCorpusObject) parent).getRelations().isEmpty())
+		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
+
+		if (dbPath != null)
 		{
-			List<String> params = new ArrayList<String>();
-			params.add(parent.get_id());
-			List<BTSCorpusObject> children = find(ServiceConstants.SEARCH_RELATED_OBJECTS, params);
-			parent.getChildren().addAll(children);
-			for (BTSCorpusObject c : children)
+			objects.addAll(corpusObjectDao.findByQueryId(searchId, dbPath));
+		} else
+		{
+			for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				c.setParent(parent);
+				for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+				{
+					objects.addAll(corpusObjectDao.findByQueryId(searchId, p + ServiceConstants.CORPUS_INTERFIX + c));
+				}
 			}
 		}
-
+		return filter(objects);
 	}
 
-	@Override
-	public List<BTSCorpusObject> find(String searchId, List<String> parameter)
+	private List<BTSCorpusObject> find(BTSQueryRequest query)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				objects.addAll(corpusObjectDao.find(p + ServiceConstants.CORPUS_INTERFIX + c, searchId, parameter));
+				objects.addAll(corpusObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return objects;
+		return filter(objects);
+	}
+
+	@Override
+	public List<BTSCorpusObject> query(BTSQueryRequest query)
+	{
+		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				objects.addAll(corpusObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return filter(objects);
+
 	}
 }

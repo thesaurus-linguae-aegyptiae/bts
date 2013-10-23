@@ -20,12 +20,19 @@
     <mainMenu xmi:id="_3KR2AAD1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.menu.0">
       <children xsi:type="menu:Menu" xmi:id="_N6Q08AD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.file" label="File">
         <children xsi:type="menu:MenuSeparator" xmi:id="_f1DVMAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.4"/>
+        <children xsi:type="menu:Menu" xmi:id="_NDL1wDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menu.file.new" label="New"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_Px66IAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.edit" label="Edit">
         <children xsi:type="menu:MenuSeparator" xmi:id="_cWRhMAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.0"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_Qq2GMAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.insert" label="Insert">
         <children xsi:type="menu:MenuSeparator" xmi:id="_c7hjUAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.1"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_iCWMwDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menu.analyse" label="Analyse">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_r_EUkDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menuseparator.6"/>
+      </children>
+      <children xsi:type="menu:Menu" xmi:id="_6OZWgDVnEeOv7cfx0AHTtw" elementId="org.eclipse.ui.window" label="Window">
+        <children xsi:type="menu:MenuSeparator" xmi:id="_d7MKIDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menuseparator.5"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_pvfCcAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.preferences" label="Preferences">
         <children xsi:type="menu:MenuSeparator" xmi:id="_fAvjYAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.3"/>
@@ -41,6 +48,11 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_jwJjIAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.handledtoolitem.0" label="Open"/>
       </children>
       <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>
+    </trimBars>
+    <trimBars xmi:id="_jaPP8DVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.trimbar.1" side="Right">
+      <children xsi:type="menu:ToolBar" xmi:id="_mCUsgDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.toolbar.0">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_rwABADVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.handledtoolitem.2" label="New..."/>
+      </children>
     </trimBars>
   </children>
   <bindingTables xmi:id="_TbwLQA5iEeOBWNILjo7Jaw" elementId="org.bbaw.bts.app.bindingtable.main" bindingContext="_AyBQAA5iEeOBWNILjo7Jaw"/>

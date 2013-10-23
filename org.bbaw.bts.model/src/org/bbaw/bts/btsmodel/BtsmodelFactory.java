@@ -202,15 +202,6 @@ public interface BtsmodelFactory extends EFactory {
 	BTSRevision createBTSRevision();
 
 	/**
-	 * Returns a new object of class '<em>BTS Lease</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Lease</em>'.
-	 * @generated
-	 */
-	BTSLease createBTSLease();
-
-	/**
 	 * Returns a new object of class '<em>BTS Image</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -362,6 +353,24 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BTSOperator createBTSOperator();
+
+	/**
+	 * Returns a new object of class '<em>DB Lease</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>DB Lease</em>'.
+	 * @generated
+	 */
+	DBLease createDBLease();
+
+	/**
+	 * Returns a new object of class '<em>BTS Project DB Collection</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Project DB Collection</em>'.
+	 * @generated
+	 */
+	BTSProjectDBCollection createBTSProjectDBCollection();
 
 	/**
 	 * Returns the package supported by this factory.

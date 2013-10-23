@@ -22,13 +22,15 @@ public class NewProjectWizard extends Wizard
 	{
 		addPage(new ProjectNamePage(project));
 		addPage(new ProjectConnectionPage(project));
+		addPage(new ProjectCollectionPage(project));
 	}
 
 	@Override
 	public boolean performFinish()
 	{
 
-		return projectService.save(project);
+		projectService.save(project);
+		return true;
 	}
 
 }

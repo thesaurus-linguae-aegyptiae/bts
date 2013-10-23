@@ -69,60 +69,6 @@ public interface BtsmodelPackage extends EPackage {
 	int ADMINISTRATIV_DATA_OBJECT = 9;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT__REVISIONS = 0;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT__STATE = 1;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT__REVISION_STATE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT__VISIBILITY = 3;
-
-	/**
-	 * The number of structural features of the '<em>Administrativ Data Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT = 4;
-
-	/**
-	 * The number of operations of the '<em>Administrativ Data Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl <em>BTS Object</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -131,6 +77,291 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	int BTS_OBJECT = 10;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl <em>BTS Corpus Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSCorpusObject()
+	 * @generated
+	 */
+	int BTS_CORPUS_OBJECT = 30;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTCObjectImpl <em>BTSTC Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSTCObjectImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTCObject()
+	 * @generated
+	 */
+	int BTSTC_OBJECT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextImpl <em>BTS Text</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSTextImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSText()
+	 * @generated
+	 */
+	int BTS_TEXT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl <em>BTS Referencable Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSReferencableItem()
+	 * @generated
+	 */
+	int BTS_REFERENCABLE_ITEM = 32;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.BTSTextItems <em>BTS Text Items</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.BTSTextItems
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTextItems()
+	 * @generated
+	 */
+	int BTS_TEXT_ITEMS = 5;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSSenctenceImpl <em>BTS Senctence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSSenctenceImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSenctence()
+	 * @generated
+	 */
+	int BTS_SENCTENCE = 2;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl <em>BTS Sentence Items</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSentenceItems()
+	 * @generated
+	 */
+	int BTS_SENTENCE_ITEMS = 6;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSWordImpl <em>BTS Word</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSWordImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSWord()
+	 * @generated
+	 */
+	int BTS_WORD = 3;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextSentenceItemImpl <em>BTS Text Sentence Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSTextSentenceItemImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTextSentenceItem()
+	 * @generated
+	 */
+	int BTS_TEXT_SENTENCE_ITEM = 16;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl <em>BTS Delimiter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDelimiter()
+	 * @generated
+	 */
+	int BTS_DELIMITER = 4;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl <em>BTS List Entry</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSListEntryImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSListEntry()
+	 * @generated
+	 */
+	int BTS_LIST_ENTRY = 7;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl <em>BTS Passport</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSPassportImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPassport()
+	 * @generated
+	 */
+	int BTS_PASSPORT = 8;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSAmbivalenceImpl <em>BTS Ambivalence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSAmbivalenceImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSAmbivalence()
+	 * @generated
+	 */
+	int BTS_AMBIVALENCE = 11;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSLemmaCaseImpl <em>BTS Lemma Case</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSLemmaCaseImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSLemmaCase()
+	 * @generated
+	 */
+	int BTS_LEMMA_CASE = 12;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSObservableObjectImpl <em>BTS Observable Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSObservableObjectImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObservableObject()
+	 * @generated
+	 */
+	int BTS_OBSERVABLE_OBJECT = 42;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT = 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Observable Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBSERVABLE_OBJECT_FEATURE_COUNT = 1;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = 0;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = 1;
+
+	/**
+	 * The number of operations of the '<em>BTS Observable Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBSERVABLE_OBJECT_OPERATION_COUNT = 2;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT__PROPERTY_CHANGE_SUPPORT = BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT__REVISIONS = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT__STATE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT__REVISION_STATE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT__VISIBILITY = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>Administrativ Data Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The number of operations of the '<em>Administrativ Data Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT__PROPERTY_CHANGE_SUPPORT = ADMINISTRATIV_DATA_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -223,6 +454,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OBJECT_FEATURE_COUNT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 5;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = ADMINISTRATIV_DATA_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = ADMINISTRATIV_DATA_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -232,14 +481,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OBJECT_OPERATION_COUNT = ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl <em>BTS Corpus Object</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSCorpusObject()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT = 31;
+	int BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT = BTS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -323,31 +571,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__CODE = BTS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT = BTS_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__LEASE = BTS_OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__ID = BTS_OBJECT_FEATURE_COUNT + 2;
+	int BTS_CORPUS_OBJECT__ID = BTS_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -356,7 +586,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__REV = BTS_OBJECT_FEATURE_COUNT + 3;
+	int BTS_CORPUS_OBJECT__REV = BTS_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Project</b></em>' attribute.
@@ -365,7 +595,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__PROJECT = BTS_OBJECT_FEATURE_COUNT + 4;
+	int BTS_CORPUS_OBJECT__PROJECT = BTS_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__LOCKED = BTS_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -374,7 +613,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT_FEATURE_COUNT + 5;
+	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -383,16 +622,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__PASSPORT = BTS_OBJECT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__PARENT = BTS_OBJECT_FEATURE_COUNT + 7;
+	int BTS_CORPUS_OBJECT__PASSPORT = BTS_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
@@ -401,16 +631,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BTS_OBJECT_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__CHILDREN = BTS_OBJECT_FEATURE_COUNT + 9;
+	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BTS_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -419,7 +640,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__WORK_PHASE = BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_CORPUS_OBJECT__WORK_PHASE = BTS_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>BTS Corpus Object</em>' class.
@@ -428,7 +649,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 11;
+	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -437,7 +658,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT_OPERATION_COUNT + 0;
+	int BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -446,7 +667,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT_OPERATION_COUNT + 1;
+	int BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The number of operations of the '<em>BTS Corpus Object</em>' class.
@@ -455,17 +676,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 2;
+	int BTS_CORPUS_OBJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTCObjectImpl <em>BTSTC Object</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSTCObjectImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTCObject()
 	 * @generated
+	 * @ordered
 	 */
-	int BTSTC_OBJECT = 0;
+	int BTSTC_OBJECT__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -549,24 +769,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSTC_OBJECT__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -594,6 +796,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSTC_OBJECT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -612,15 +823,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSTC_OBJECT__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -628,15 +830,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -684,14 +877,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSTC_OBJECT_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextImpl <em>BTS Text</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSTextImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSText()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_TEXT = 1;
+	int BTS_TEXT__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -775,24 +967,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -820,6 +994,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -838,15 +1021,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -854,15 +1028,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -919,14 +1084,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl <em>BTS Referencable Item</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSReferencableItem()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_REFERENCABLE_ITEM = 33;
+	int BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1010,7 +1174,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCABLE_ITEM__CODE = BTS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1055,6 +1219,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCABLE_ITEM_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Referencable Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1064,14 +1246,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCABLE_ITEM_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.BTSTextItems <em>BTS Text Items</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.BTSTextItems
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTextItems()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS = 5;
+	int BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT = BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1155,7 +1336,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_ITEMS__CODE = BTS_REFERENCABLE_ITEM__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1200,6 +1381,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_ITEMS_FEATURE_COUNT = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Text Items</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1209,14 +1408,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_ITEMS_OPERATION_COUNT = BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSSenctenceImpl <em>BTS Senctence</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSSenctenceImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSenctence()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_SENCTENCE = 2;
+	int BTS_SENCTENCE__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1300,7 +1498,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENCTENCE__CODE = BTS_TEXT_ITEMS__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1363,6 +1561,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENCTENCE_FEATURE_COUNT = BTS_TEXT_ITEMS_FEATURE_COUNT + 2;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Senctence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1372,14 +1588,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENCTENCE_OPERATION_COUNT = BTS_TEXT_ITEMS_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl <em>BTS Sentence Items</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSentenceItems()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS = 6;
+	int BTS_SENTENCE_ITEMS__PROPERTY_CHANGE_SUPPORT = BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1463,7 +1678,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENTENCE_ITEMS__CODE = BTS_REFERENCABLE_ITEM__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1508,6 +1723,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENTENCE_ITEMS_FEATURE_COUNT = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Sentence Items</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1517,14 +1750,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENTENCE_ITEMS_OPERATION_COUNT = BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSWordImpl <em>BTS Word</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSWordImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSWord()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_WORD = 3;
+	int BTS_WORD__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEMS__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1608,7 +1840,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_WORD__CODE = BTS_SENTENCE_ITEMS__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1725,6 +1957,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_WORD_FEATURE_COUNT = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 8;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Word</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1734,14 +1984,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_WORD_OPERATION_COUNT = BTS_SENTENCE_ITEMS_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextSentenceItemImpl <em>BTS Text Sentence Item</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSTextSentenceItemImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTextSentenceItem()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM = 16;
+	int BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEMS__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1825,7 +2074,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM__CODE = BTS_SENTENCE_ITEMS__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -1870,6 +2119,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Text Sentence Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1879,14 +2146,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT = BTS_SENTENCE_ITEMS_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl <em>BTS Delimiter</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDelimiter()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_DELIMITER = 4;
+	int BTS_DELIMITER__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1970,7 +2236,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_DELIMITER__CODE = BTS_TEXT_SENTENCE_ITEM__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2024,6 +2290,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_DELIMITER_FEATURE_COUNT = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_DELIMITER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_DELIMITER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Delimiter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2033,14 +2317,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_DELIMITER_OPERATION_COUNT = BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl <em>BTS List Entry</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSListEntryImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSListEntry()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_LIST_ENTRY = 7;
+	int BTS_LIST_ENTRY__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -2124,24 +2407,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_ENTRY__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST_ENTRY__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST_ENTRY__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2169,6 +2434,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_ENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_ENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2187,15 +2461,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_ENTRY__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST_ENTRY__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2203,15 +2468,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST_ENTRY__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST_ENTRY__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -2284,16 +2540,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST_ENTRY_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl <em>BTS Passport</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSPassportImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPassport()
-	 * @generated
-	 */
-	int BTS_PASSPORT = 8;
 
 	/**
 	 * The feature id for the '<em><b>Protocol</b></em>' attribute.
@@ -2395,14 +2641,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PASSPORT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSAmbivalenceImpl <em>BTS Ambivalence</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSAmbivalenceImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSAmbivalence()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_AMBIVALENCE = 11;
+	int BTS_AMBIVALENCE__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -2486,7 +2731,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_AMBIVALENCE__CODE = BTS_TEXT_SENTENCE_ITEM__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -2540,6 +2785,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_AMBIVALENCE_FEATURE_COUNT = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS Ambivalence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2547,16 +2810,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_AMBIVALENCE_OPERATION_COUNT = BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSLemmaCaseImpl <em>BTS Lemma Case</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSLemmaCaseImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSLemmaCase()
-	 * @generated
-	 */
-	int BTS_LEMMA_CASE = 12;
 
 	/**
 	 * The feature id for the '<em><b>Scenario</b></em>' containment reference list.
@@ -2586,61 +2839,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LEMMA_CASE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSObservableObjectImpl <em>BTS Observable Object</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSObservableObjectImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObservableObject()
-	 * @generated
-	 */
-	int BTS_OBSERVABLE_OBJECT = 43;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT = 0;
-
-	/**
-	 * The number of structural features of the '<em>BTS Observable Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBSERVABLE_OBJECT_FEATURE_COUNT = 1;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = 0;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = 1;
-
-	/**
-	 * The number of operations of the '<em>BTS Observable Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBSERVABLE_OBJECT_OPERATION_COUNT = 2;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl <em>BTSDB Base Object</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2649,87 +2847,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	int BTSDB_BASE_OBJECT = 24;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT__PROPERTY_CHANGE_SUPPORT = BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT__LEASE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT__ID = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT__REV = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT__PROJECT = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The number of structural features of the '<em>BTSDB Base Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 4;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The number of operations of the '<em>BTSDB Base Object</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSDB_BASE_OBJECT_OPERATION_COUNT = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl <em>BTS User</em>}' class.
@@ -2742,22 +2859,155 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER = 13;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl <em>BTS Comment</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSCommentImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSComment()
 	 * @generated
-	 * @ordered
 	 */
-	int BTS_USER__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+	int BTS_COMMENT = 14;
 
 	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSInterTextReferenceImpl <em>BTS Inter Text Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSInterTextReferenceImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSInterTextReference()
+	 * @generated
+	 */
+	int BTS_INTER_TEXT_REFERENCE = 15;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSReferenceImpl <em>BTS Reference</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSReferenceImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSReference()
+	 * @generated
+	 */
+	int BTS_REFERENCE = 17;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSAnnotationImpl <em>BTS Annotation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSAnnotationImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSAnnotation()
+	 * @generated
+	 */
+	int BTS_ANNOTATION = 18;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTranslationImpl <em>BTS Translation</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSTranslationImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTranslation()
+	 * @generated
+	 */
+	int BTS_TRANSLATION = 19;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDateImpl <em>BTS Date</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSDateImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDate()
+	 * @generated
+	 */
+	int BTS_DATE = 20;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl <em>BTS Identifiable Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSIdentifiableItem()
+	 * @generated
+	 */
+	int BTS_IDENTIFIABLE_ITEM = 51;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__LEASE = BTSDB_BASE_OBJECT__LEASE;
+	int BTS_IDENTIFIABLE_ITEM__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Identifiable Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>BTS Identifiable Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT__REV = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT__PROJECT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT__LOCKED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>BTSDB Base Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>BTSDB Base Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -2787,230 +3037,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Group Ids</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__GROUP_IDS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Sigle</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__SIGLE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Web Description</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__WEB_DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>User Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__USER_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Fore Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__FORE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Sure Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__SURE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
-
-	/**
-	 * The feature id for the '<em><b>Mail</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__MAIL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
-
-	/**
-	 * The feature id for the '<em><b>Web URL</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__WEB_URL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
-
-	/**
-	 * The feature id for the '<em><b>External Referneces</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__EXTERNAL_REFERNECES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
-
-	/**
-	 * The feature id for the '<em><b>Roles</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__ROLES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 15;
-
-	/**
-	 * The number of structural features of the '<em>BTS User</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 16;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The number of operations of the '<em>BTS User</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl <em>BTS Comment</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSCommentImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSComment()
-	 * @generated
-	 */
-	int BTS_COMMENT = 14;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_COMMENT__REVISIONS = ADMINISTRATIV_DATA_OBJECT__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_COMMENT__STATE = ADMINISTRATIV_DATA_OBJECT__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_COMMENT__REVISION_STATE = ADMINISTRATIV_DATA_OBJECT__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_COMMENT__VISIBILITY = ADMINISTRATIV_DATA_OBJECT__VISIBILITY;
+	int BTS_USER__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3019,43 +3052,169 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__PROPERTY_CHANGE_SUPPORT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 0;
+	int BTS_USER__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
+	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__LEASE = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 1;
+	int BTS_USER__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__ID = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 2;
+	int BTS_USER__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
 
 	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__REV = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 3;
+	int BTS_USER__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__PROJECT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 4;
+	int BTS_USER__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__TYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__SUBTYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__CODE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Group Ids</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__GROUP_IDS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>Sigle</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__SIGLE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+
+	/**
+	 * The feature id for the '<em><b>Web Description</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__WEB_DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+
+	/**
+	 * The feature id for the '<em><b>User Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__USER_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
+
+	/**
+	 * The feature id for the '<em><b>Fore Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__FORE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Sure Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__SURE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 16;
+
+	/**
+	 * The feature id for the '<em><b>Mail</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__MAIL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 17;
+
+	/**
+	 * The feature id for the '<em><b>Web URL</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__WEB_URL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3064,34 +3223,61 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__COMMENT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 5;
+	int BTS_USER__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 19;
 
 	/**
-	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * The feature id for the '<em><b>External Referneces</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__REFERENCES = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 6;
+	int BTS_USER__EXTERNAL_REFERNECES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 20;
 
 	/**
-	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * The feature id for the '<em><b>Roles</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__TAGS = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 7;
+	int BTS_USER__ROLES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 21;
 
 	/**
-	 * The number of structural features of the '<em>BTS Comment</em>' class.
+	 * The feature id for the '<em><b>Password</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT_FEATURE_COUNT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 8;
+	int BTS_USER__PASSWORD = BTSDB_BASE_OBJECT_FEATURE_COUNT + 22;
+
+	/**
+	 * The feature id for the '<em><b>Logged In</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__LOGGED_IN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__STATUS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 24;
+
+	/**
+	 * The number of structural features of the '<em>BTS User</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 25;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -3100,7 +3286,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT + 0;
+	int BTS_USER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -3109,7 +3295,196 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT + 1;
+	int BTS_USER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>BTS User</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__ID = BTSDB_BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__REV = BTSDB_BASE_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__TYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__SUBTYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__CODE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
+
+	/**
+	 * The feature id for the '<em><b>References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__REFERENCES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+
+	/**
+	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__TAGS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+
+	/**
+	 * The number of structural features of the '<em>BTS Comment</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>BTS Comment</em>' class.
@@ -3118,17 +3493,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT_OPERATION_COUNT = ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT + 2;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSInterTextReferenceImpl <em>BTS Inter Text Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSInterTextReferenceImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSInterTextReference()
-	 * @generated
-	 */
-	int BTS_INTER_TEXT_REFERENCE = 15;
+	int BTS_COMMENT_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Begin Id</b></em>' attribute.
@@ -3167,16 +3532,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_INTER_TEXT_REFERENCE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSReferenceImpl <em>BTS Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSReferenceImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSReference()
-	 * @generated
-	 */
-	int BTS_REFERENCE = 17;
-
-	/**
 	 * The feature id for the '<em><b>Parts</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3213,14 +3568,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSAnnotationImpl <em>BTS Annotation</em>}' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSAnnotationImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSAnnotation()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_ANNOTATION = 18;
+	int BTS_ANNOTATION__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -3304,24 +3658,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_ANNOTATION__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3349,6 +3685,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_ANNOTATION__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3367,15 +3712,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_ANNOTATION__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3383,15 +3719,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -3448,16 +3775,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_ANNOTATION_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTranslationImpl <em>BTS Translation</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSTranslationImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTranslation()
-	 * @generated
-	 */
-	int BTS_TRANSLATION = 19;
-
-	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3501,16 +3818,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TRANSLATION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDateImpl <em>BTS Date</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSDateImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDate()
-	 * @generated
-	 */
-	int BTS_DATE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3586,13 +3893,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PASSPORT_ENTRY = 21;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PASSPORT_ENTRY__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
 	 * The feature id for the '<em><b>Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY__PROVIDER = 0;
+	int BTS_PASSPORT_ENTRY__PROVIDER = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3601,7 +3917,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY__COMMENT = 1;
+	int BTS_PASSPORT_ENTRY__COMMENT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3610,7 +3926,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY__TYPE = 2;
+	int BTS_PASSPORT_ENTRY__TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3619,7 +3935,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY__VALUE = 3;
+	int BTS_PASSPORT_ENTRY__VALUE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Category</b></em>' attribute.
@@ -3628,7 +3944,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY__CATEGORY = 4;
+	int BTS_PASSPORT_ENTRY__CATEGORY = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Subentries</b></em>' containment reference list.
@@ -3637,7 +3953,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY__SUBENTRIES = 5;
+	int BTS_PASSPORT_ENTRY__SUBENTRIES = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>BTS Passport Entry</em>' class.
@@ -3646,7 +3962,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY_FEATURE_COUNT = 6;
+	int BTS_PASSPORT_ENTRY_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>BTS Passport Entry</em>' class.
@@ -3655,7 +3971,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_ENTRY_OPERATION_COUNT = 0;
+	int BTS_PASSPORT_ENTRY_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl <em>BTS Relation</em>}' class.
@@ -3668,13 +3984,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_RELATION = 22;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_RELATION__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
 	 * The feature id for the '<em><b>Object Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION__OBJECT_ID = 0;
+	int BTS_RELATION__OBJECT_ID = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -3683,7 +4008,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION__TYPE = 1;
+	int BTS_RELATION__TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -3692,7 +4017,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION__SUBTYPE = 2;
+	int BTS_RELATION__SUBTYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3701,7 +4026,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION__COMMENT = 3;
+	int BTS_RELATION__COMMENT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Certainty</b></em>' attribute.
@@ -3710,7 +4035,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION__CERTAINTY = 4;
+	int BTS_RELATION__CERTAINTY = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>BTS Relation</em>' class.
@@ -3719,7 +4044,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION_FEATURE_COUNT = 5;
+	int BTS_RELATION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>BTS Relation</em>' class.
@@ -3728,7 +4053,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_RELATION_OPERATION_COUNT = 0;
+	int BTS_RELATION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl <em>BTS Configuration</em>}' class.
@@ -3739,24 +4064,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	int BTS_CONFIGURATION = 23;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__LEASE = BTSDB_BASE_OBJECT__LEASE;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3786,40 +4093,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+	int BTS_CONFIGURATION__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -3828,7 +4108,61 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__CHILDREN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+	int BTS_CONFIGURATION__CHILDREN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -3837,7 +4171,34 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+	int BTS_CONFIGURATION__NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__TYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__SUBTYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__CODE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Provider</b></em>' attribute.
@@ -3846,7 +4207,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__PROVIDER = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
+	int BTS_CONFIGURATION__PROVIDER = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>BTS Configuration</em>' class.
@@ -3855,7 +4216,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
+	int BTS_CONFIGURATION_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -3864,7 +4225,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -3873,7 +4234,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_CONFIGURATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>BTS Configuration</em>' class.
@@ -3882,7 +4243,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+	int BTS_CONFIGURATION_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextCorpusImpl <em>BTS Text Corpus</em>}' class.
@@ -3893,6 +4254,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	int BTS_TEXT_CORPUS = 25;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -3976,24 +4346,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4021,6 +4373,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4039,15 +4400,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4055,15 +4407,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -4130,13 +4473,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REVISION = 26;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REVISION__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
 	 * The feature id for the '<em><b>Ref</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION__REF = 0;
+	int BTS_REVISION__REF = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>User Id</b></em>' attribute.
@@ -4145,7 +4497,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION__USER_ID = 1;
+	int BTS_REVISION__USER_ID = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Time Stamp</b></em>' attribute.
@@ -4154,7 +4506,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION__TIME_STAMP = 2;
+	int BTS_REVISION__TIME_STAMP = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Rights Revoked</b></em>' attribute.
@@ -4163,7 +4515,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION__RIGHTS_REVOKED = 3;
+	int BTS_REVISION__RIGHTS_REVOKED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>BTS Revision</em>' class.
@@ -4172,7 +4524,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION_FEATURE_COUNT = 4;
+	int BTS_REVISION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>BTS Revision</em>' class.
@@ -4181,53 +4533,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION_OPERATION_COUNT = 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSLeaseImpl <em>BTS Lease</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSLeaseImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSLease()
-	 * @generated
-	 */
-	int BTS_LEASE = 27;
-
-	/**
-	 * The feature id for the '<em><b>Leasing User Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEASE__LEASING_USER_ID = 0;
-
-	/**
-	 * The feature id for the '<em><b>Lease Time Stamp</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEASE__LEASE_TIME_STAMP = 1;
-
-	/**
-	 * The number of structural features of the '<em>BTS Lease</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEASE_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>BTS Lease</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEASE_OPERATION_COUNT = 0;
+	int BTS_REVISION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSImageImpl <em>BTS Image</em>}' class.
@@ -4237,7 +4543,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSImage()
 	 * @generated
 	 */
-	int BTS_IMAGE = 28;
+	int BTS_IMAGE = 27;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -4321,24 +4636,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_IMAGE__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4366,6 +4663,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_IMAGE__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4384,15 +4690,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_IMAGE__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4400,15 +4697,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -4481,7 +4769,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSCorpusHeader()
 	 * @generated
 	 */
-	int BTS_CORPUS_HEADER = 29;
+	int BTS_CORPUS_HEADER = 28;
 
 	/**
 	 * The feature id for the '<em><b>Author Name</b></em>' attribute.
@@ -4536,7 +4824,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTimespan()
 	 * @generated
 	 */
-	int BTS_TIMESPAN = 30;
+	int BTS_TIMESPAN = 29;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -4591,7 +4879,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSExternalReference()
 	 * @generated
 	 */
-	int BTS_EXTERNAL_REFERENCE = 32;
+	int BTS_EXTERNAL_REFERENCE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -4646,7 +4934,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSGraphic()
 	 * @generated
 	 */
-	int BTS_GRAPHIC = 34;
+	int BTS_GRAPHIC = 33;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_GRAPHIC__ID = BTS_IDENTIFIABLE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Inner Sentence Order</b></em>' attribute.
@@ -4655,7 +4952,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_GRAPHIC__INNER_SENTENCE_ORDER = 0;
+	int BTS_GRAPHIC__INNER_SENTENCE_ORDER = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -4664,7 +4961,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_GRAPHIC__CODE = 1;
+	int BTS_GRAPHIC__CODE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Reference</b></em>' attribute.
@@ -4673,7 +4970,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_GRAPHIC__REFERENCE = 2;
+	int BTS_GRAPHIC__REFERENCE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTS Graphic</em>' class.
@@ -4682,7 +4979,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_GRAPHIC_FEATURE_COUNT = 3;
+	int BTS_GRAPHIC_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>BTS Graphic</em>' class.
@@ -4691,7 +4988,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_GRAPHIC_OPERATION_COUNT = 0;
+	int BTS_GRAPHIC_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTranslationsImpl <em>BTS Translations</em>}' class.
@@ -4701,7 +4998,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTranslations()
 	 * @generated
 	 */
-	int BTS_TRANSLATIONS = 35;
+	int BTS_TRANSLATIONS = 34;
 
 	/**
 	 * The feature id for the '<em><b>Translations</b></em>' containment reference list.
@@ -4722,13 +5019,31 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TRANSLATIONS_FEATURE_COUNT = 1;
 
 	/**
+	 * The operation id for the '<em>Get Translation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TRANSLATIONS___GET_TRANSLATION__STRING = 0;
+
+	/**
+	 * The operation id for the '<em>Set Translation</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TRANSLATIONS___SET_TRANSLATION__STRING_STRING = 1;
+
+	/**
 	 * The number of operations of the '<em>BTS Translations</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATIONS_OPERATION_COUNT = 0;
+	int BTS_TRANSLATIONS_OPERATION_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSConfigImpl <em>BTS Config</em>}' class.
@@ -4738,7 +5053,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSConfig()
 	 * @generated
 	 */
-	int BTS_CONFIG = 42;
+	int BTS_CONFIG = 41;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -4775,7 +5090,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSConfigItem()
 	 * @generated
 	 */
-	int BTS_CONFIG_ITEM = 36;
+	int BTS_CONFIG_ITEM = 35;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -4796,13 +5111,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_CONFIG_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIG_ITEM__ID = BTS_CONFIG_FEATURE_COUNT + 1;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__VALUE = BTS_CONFIG_FEATURE_COUNT + 1;
+	int BTS_CONFIG_ITEM__VALUE = BTS_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Label</b></em>' containment reference.
@@ -4811,7 +5135,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__LABEL = BTS_CONFIG_FEATURE_COUNT + 2;
+	int BTS_CONFIG_ITEM__LABEL = BTS_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' containment reference.
@@ -4820,7 +5144,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__DESCRIPTION = BTS_CONFIG_FEATURE_COUNT + 3;
+	int BTS_CONFIG_ITEM__DESCRIPTION = BTS_CONFIG_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -4829,7 +5153,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__SORT_KEY = BTS_CONFIG_FEATURE_COUNT + 4;
+	int BTS_CONFIG_ITEM__SORT_KEY = BTS_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Ignore</b></em>' attribute.
@@ -4838,7 +5162,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__IGNORE = BTS_CONFIG_FEATURE_COUNT + 5;
+	int BTS_CONFIG_ITEM__IGNORE = BTS_CONFIG_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Passport Editor Config</b></em>' containment reference.
@@ -4847,7 +5171,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG = BTS_CONFIG_FEATURE_COUNT + 6;
+	int BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG = BTS_CONFIG_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -4856,7 +5180,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__TYPE = BTS_CONFIG_FEATURE_COUNT + 7;
+	int BTS_CONFIG_ITEM__TYPE = BTS_CONFIG_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -4865,7 +5189,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__SUBTYPE = BTS_CONFIG_FEATURE_COUNT + 8;
+	int BTS_CONFIG_ITEM__SUBTYPE = BTS_CONFIG_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Owner Type</b></em>' attribute list.
@@ -4874,7 +5198,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__OWNER_TYPE = BTS_CONFIG_FEATURE_COUNT + 9;
+	int BTS_CONFIG_ITEM__OWNER_TYPE = BTS_CONFIG_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Referenced Type</b></em>' attribute list.
@@ -4883,7 +5207,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__REFERENCED_TYPE = BTS_CONFIG_FEATURE_COUNT + 10;
+	int BTS_CONFIG_ITEM__REFERENCED_TYPE = BTS_CONFIG_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Rules</b></em>' containment reference list.
@@ -4892,7 +5216,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__RULES = BTS_CONFIG_FEATURE_COUNT + 11;
+	int BTS_CONFIG_ITEM__RULES = BTS_CONFIG_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Show Widget</b></em>' attribute.
@@ -4901,7 +5225,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__SHOW_WIDGET = BTS_CONFIG_FEATURE_COUNT + 12;
+	int BTS_CONFIG_ITEM__SHOW_WIDGET = BTS_CONFIG_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>BTS Config Item</em>' class.
@@ -4910,7 +5234,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM_FEATURE_COUNT = BTS_CONFIG_FEATURE_COUNT + 13;
+	int BTS_CONFIG_ITEM_FEATURE_COUNT = BTS_CONFIG_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -4947,7 +5271,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPassportEditorConfig()
 	 * @generated
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG = 37;
+	int BTS_PASSPORT_EDITOR_CONFIG = 36;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PASSPORT_EDITOR_CONFIG__ID = BTS_IDENTIFIABLE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Widget Type</b></em>' attribute.
@@ -4956,7 +5289,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE = 0;
+	int BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Required</b></em>' attribute.
@@ -4965,7 +5298,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__REQUIRED = 1;
+	int BTS_PASSPORT_EDITOR_CONFIG__REQUIRED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Allow Multiple</b></em>' attribute.
@@ -4974,7 +5307,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE = 2;
+	int BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Horizontal Width</b></em>' attribute.
@@ -4983,7 +5316,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH = 3;
+	int BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Regex</b></em>' attribute.
@@ -4992,7 +5325,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__REGEX = 4;
+	int BTS_PASSPORT_EDITOR_CONFIG__REGEX = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>BTS Passport Editor Config</em>' class.
@@ -5001,7 +5334,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG_FEATURE_COUNT = 5;
+	int BTS_PASSPORT_EDITOR_CONFIG_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>BTS Passport Editor Config</em>' class.
@@ -5010,7 +5343,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG_OPERATION_COUNT = 0;
+	int BTS_PASSPORT_EDITOR_CONFIG_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl <em>BTS User Group</em>}' class.
@@ -5020,25 +5353,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSUserGroup()
 	 * @generated
 	 */
-	int BTS_USER_GROUP = 38;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER_GROUP__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER_GROUP__LEASE = BTSDB_BASE_OBJECT__LEASE;
+	int BTS_USER_GROUP = 37;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -5068,13 +5383,31 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+	int BTS_USER_GROUP__REVISIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -5083,7 +5416,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+	int BTS_USER_GROUP__STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -5092,7 +5425,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+	int BTS_USER_GROUP__REVISION_STATE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -5101,7 +5434,52 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+	int BTS_USER_GROUP__VISIBILITY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__TYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__SUBTYPE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 8;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__CODE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Category</b></em>' attribute.
@@ -5110,7 +5488,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__CATEGORY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+	int BTS_USER_GROUP__CATEGORY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -5119,7 +5497,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+	int BTS_USER_GROUP__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>BTS User Group</em>' class.
@@ -5128,7 +5506,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
+	int BTS_USER_GROUP_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -5137,7 +5515,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_USER_GROUP___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -5146,7 +5524,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_USER_GROUP___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>BTS User Group</em>' class.
@@ -5155,7 +5533,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+	int BTS_USER_GROUP_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSListImpl <em>BTS List</em>}' class.
@@ -5165,7 +5543,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSList()
 	 * @generated
 	 */
-	int BTS_LIST = 39;
+	int BTS_LIST = 38;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -5249,24 +5636,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5294,6 +5663,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5312,15 +5690,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5328,15 +5697,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LIST__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -5391,7 +5751,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPpSubentry()
 	 * @generated
 	 */
-	int BTS_PP_SUBENTRY = 40;
+	int BTS_PP_SUBENTRY = 39;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -5527,7 +5887,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSListSubentry()
 	 * @generated
 	 */
-	int BTS_LIST_SUBENTRY = 41;
+	int BTS_LIST_SUBENTRY = 40;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_SUBENTRY__PROPERTY_CHANGE_SUPPORT = BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -5611,7 +5980,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_SUBENTRY__CODE = BTS_REFERENCABLE_ITEM__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Id</b></em>' attribute.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5674,6 +6043,24 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_SUBENTRY_FEATURE_COUNT = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_SUBENTRY___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_SUBENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
 	 * The number of operations of the '<em>BTS List Subentry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5691,7 +6078,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSThsEntry()
 	 * @generated
 	 */
-	int BTS_THS_ENTRY = 44;
+	int BTS_THS_ENTRY = 43;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -5775,24 +6171,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_THS_ENTRY__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__LEASE = BTS_CORPUS_OBJECT__LEASE;
-
-	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5820,6 +6198,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_THS_ENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
 
 	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5838,15 +6225,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_THS_ENTRY__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
 
 	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__PARENT = BTS_CORPUS_OBJECT__PARENT;
-
-	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5854,15 +6232,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_THS_ENTRY__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__CHILDREN = BTS_CORPUS_OBJECT__CHILDREN;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -5917,7 +6286,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSProject()
 	 * @generated
 	 */
-	int BTS_PROJECT = 45;
+	int BTS_PROJECT = 44;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -5926,43 +6295,52 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__PROPERTY_CHANGE_SUPPORT = BTSDB_BASE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+	int BTS_PROJECT__PROPERTY_CHANGE_SUPPORT = BTS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
-	 * The feature id for the '<em><b>Lease</b></em>' containment reference.
+	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__LEASE = BTSDB_BASE_OBJECT__LEASE;
+	int BTS_PROJECT__REVISIONS = BTS_OBJECT__REVISIONS;
 
 	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__ID = BTSDB_BASE_OBJECT__ID;
+	int BTS_PROJECT__STATE = BTS_OBJECT__STATE;
 
 	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__REV = BTSDB_BASE_OBJECT__REV;
+	int BTS_PROJECT__REVISION_STATE = BTS_OBJECT__REVISION_STATE;
 
 	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
+	int BTS_PROJECT__VISIBILITY = BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__SORT_KEY = BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -5971,7 +6349,70 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+	int BTS_PROJECT__NAME = BTS_OBJECT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__TYPE = BTS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__SUBTYPE = BTS_OBJECT__SUBTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__CODE = BTS_OBJECT__CODE;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__ID = BTS_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__REV = BTS_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__PROJECT = BTS_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__LOCKED = BTS_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
@@ -5980,7 +6421,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__PREFIX = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+	int BTS_PROJECT__PREFIX = BTS_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -5989,7 +6430,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+	int BTS_PROJECT__DESCRIPTION = BTS_OBJECT_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Db Connection</b></em>' containment reference.
@@ -5998,7 +6439,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DB_CONNECTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+	int BTS_PROJECT__DB_CONNECTION = BTS_OBJECT_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Db Collections</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__DB_COLLECTIONS = BTS_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>BTS Project</em>' class.
@@ -6007,7 +6457,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+	int BTS_PROJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -6016,7 +6466,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_PROJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -6025,7 +6475,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTSDB_BASE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_PROJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The number of operations of the '<em>BTS Project</em>' class.
@@ -6034,7 +6484,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+	int BTS_PROJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBConnectionImpl <em>BTSDB Connection</em>}' class.
@@ -6044,7 +6494,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDBConnection()
 	 * @generated
 	 */
-	int BTSDB_CONNECTION = 46;
+	int BTSDB_CONNECTION = 45;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_CONNECTION__ID = BTS_IDENTIFIABLE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -6053,7 +6512,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_CONNECTION__TYPE = 0;
+	int BTSDB_CONNECTION__TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Master Server</b></em>' attribute.
@@ -6062,7 +6521,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_CONNECTION__MASTER_SERVER = 1;
+	int BTSDB_CONNECTION__MASTER_SERVER = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Db Path</b></em>' attribute.
@@ -6071,7 +6530,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_CONNECTION__DB_PATH = 2;
+	int BTSDB_CONNECTION__DB_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTSDB Connection</em>' class.
@@ -6080,7 +6539,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_CONNECTION_FEATURE_COUNT = 3;
+	int BTSDB_CONNECTION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>BTSDB Connection</em>' class.
@@ -6089,7 +6548,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_CONNECTION_OPERATION_COUNT = 0;
+	int BTSDB_CONNECTION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSWorkflowRuleImpl <em>BTS Workflow Rule</em>}' class.
@@ -6099,7 +6558,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSWorkflowRule()
 	 * @generated
 	 */
-	int BTS_WORKFLOW_RULE = 47;
+	int BTS_WORKFLOW_RULE = 46;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORKFLOW_RULE__ID = BTS_IDENTIFIABLE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Sub Rules</b></em>' containment reference list.
@@ -6108,7 +6576,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE__SUB_RULES = 0;
+	int BTS_WORKFLOW_RULE__SUB_RULES = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Actions</b></em>' attribute list.
@@ -6117,7 +6585,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE__ACTIONS = 1;
+	int BTS_WORKFLOW_RULE__ACTIONS = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Accept Message</b></em>' attribute.
@@ -6126,7 +6594,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE__ACCEPT_MESSAGE = 2;
+	int BTS_WORKFLOW_RULE__ACCEPT_MESSAGE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Ocl</b></em>' attribute.
@@ -6135,7 +6603,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE__OCL = 3;
+	int BTS_WORKFLOW_RULE__OCL = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Ocl Self Object</b></em>' attribute.
@@ -6144,7 +6612,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE__OCL_SELF_OBJECT = 4;
+	int BTS_WORKFLOW_RULE__OCL_SELF_OBJECT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Denial Message</b></em>' attribute.
@@ -6153,7 +6621,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE__DENIAL_MESSAGE = 5;
+	int BTS_WORKFLOW_RULE__DENIAL_MESSAGE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>BTS Workflow Rule</em>' class.
@@ -6162,7 +6630,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE_FEATURE_COUNT = 6;
+	int BTS_WORKFLOW_RULE_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>BTS Workflow Rule</em>' class.
@@ -6171,7 +6639,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE_OPERATION_COUNT = 0;
+	int BTS_WORKFLOW_RULE_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSWorkflowRuleItemImpl <em>BTS Workflow Rule Item</em>}' class.
@@ -6181,7 +6649,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSWorkflowRuleItem()
 	 * @generated
 	 */
-	int BTS_WORKFLOW_RULE_ITEM = 49;
+	int BTS_WORKFLOW_RULE_ITEM = 48;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -6193,13 +6661,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_WORKFLOW_RULE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORKFLOW_RULE_ITEM__ID = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE_ITEM__PRIORITY = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 0;
+	int BTS_WORKFLOW_RULE_ITEM__PRIORITY = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Ignore</b></em>' attribute.
@@ -6208,7 +6685,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE_ITEM__IGNORE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 1;
+	int BTS_WORKFLOW_RULE_ITEM__IGNORE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTS Workflow Rule Item</em>' class.
@@ -6217,7 +6694,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORKFLOW_RULE_ITEM_FEATURE_COUNT = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 2;
+	int BTS_WORKFLOW_RULE_ITEM_FEATURE_COUNT = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -6254,7 +6731,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSOperator()
 	 * @generated
 	 */
-	int BTS_OPERATOR = 48;
+	int BTS_OPERATOR = 47;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -6264,6 +6741,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_OPERATOR__PROPERTY_CHANGE_SUPPORT = BTS_WORKFLOW_RULE_ITEM__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OPERATOR__ID = BTS_WORKFLOW_RULE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Priority</b></em>' attribute.
@@ -6329,6 +6815,170 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OPERATOR_OPERATION_COUNT = BTS_WORKFLOW_RULE_ITEM_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl <em>DB Lease</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.DBLeaseImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getDBLease()
+	 * @generated
+	 */
+	int DB_LEASE = 49;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__ID = BTSDB_BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__REV = BTSDB_BASE_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Path</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__PATH = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Object Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__OBJECT_ID = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__USER_ID = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Time Stamp</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__TIME_STAMP = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>DB Lease</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>DB Lease</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl <em>BTS Project DB Collection</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSProjectDBCollection()
+	 * @generated
+	 */
+	int BTS_PROJECT_DB_COLLECTION = 50;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Collection Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Indexed</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__INDEXED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Synchronized</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>BTS Project DB Collection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>BTS Project DB Collection</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6336,7 +6986,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 50;
+	int PROPERTY_CHANGE_SUPPORT = 52;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -6346,7 +6996,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 51;
+	int PROPERTY_CHANGE_LISTENER = 53;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -6356,7 +7006,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 52;
+	int PROPERTY_CHANGE_EVENT = 54;
 
 
 	/**
@@ -7017,6 +7667,39 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSUser_Roles();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Password</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSUser#getPassword()
+	 * @see #getBTSUser()
+	 * @generated
+	 */
+	EAttribute getBTSUser_Password();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSUser#isLoggedIn <em>Logged In</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Logged In</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSUser#isLoggedIn()
+	 * @see #getBTSUser()
+	 * @generated
+	 */
+	EAttribute getBTSUser_LoggedIn();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSUser#getStatus <em>Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Status</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSUser#getStatus()
+	 * @see #getBTSUser()
+	 * @generated
+	 */
+	EAttribute getBTSUser_Status();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSComment <em>BTS Comment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7414,17 +8097,6 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getBTSConfiguration();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSConfiguration#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSConfiguration#getName()
-	 * @see #getBTSConfiguration()
-	 * @generated
-	 */
-	EAttribute getBTSConfiguration_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSConfiguration#getProvider <em>Provider</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7444,28 +8116,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBTSDBBaseObject();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getLease <em>Lease</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Lease</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSDBBaseObject#getLease()
-	 * @see #getBTSDBBaseObject()
-	 * @generated
-	 */
-	EReference getBTSDBBaseObject_Lease();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_id <em>id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>id</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSDBBaseObject#get_id()
-	 * @see #getBTSDBBaseObject()
-	 * @generated
-	 */
-	EAttribute getBTSDBBaseObject__id();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_rev <em>rev</em>}'.
@@ -7488,6 +8138,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSDBBaseObject_Project();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#isLocked <em>Locked</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Locked</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSDBBaseObject#isLocked()
+	 * @see #getBTSDBBaseObject()
+	 * @generated
+	 */
+	EAttribute getBTSDBBaseObject_Locked();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSTextCorpus <em>BTS Text Corpus</em>}'.
@@ -7563,38 +8224,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSRevision_RightsRevoked();
-
-	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSLease <em>BTS Lease</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Lease</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSLease
-	 * @generated
-	 */
-	EClass getBTSLease();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSLease#getLeasingUserId <em>Leasing User Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Leasing User Id</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSLease#getLeasingUserId()
-	 * @see #getBTSLease()
-	 * @generated
-	 */
-	EAttribute getBTSLease_LeasingUserId();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSLease#getLeaseTimeStamp <em>Lease Time Stamp</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Lease Time Stamp</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSLease#getLeaseTimeStamp()
-	 * @see #getBTSLease()
-	 * @generated
-	 */
-	EAttribute getBTSLease_LeaseTimeStamp();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSImage <em>BTS Image</em>}'.
@@ -7746,17 +8375,6 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSCorpusObject_Passport();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getParent <em>Parent</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Parent</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSCorpusObject#getParent()
-	 * @see #getBTSCorpusObject()
-	 * @generated
-	 */
-	EReference getBTSCorpusObject_Parent();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getCorpusPrefix <em>Corpus Prefix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7766,17 +8384,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSCorpusObject_CorpusPrefix();
-
-	/**
-	 * Returns the meta object for the reference list '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getChildren <em>Children</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Children</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSCorpusObject#getChildren()
-	 * @see #getBTSCorpusObject()
-	 * @generated
-	 */
-	EReference getBTSCorpusObject_Children();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getWorkPhase <em>Work Phase</em>}'.
@@ -7841,17 +8448,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBTSReferencableItem();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getId <em>Id</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Id</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSReferencableItem#getId()
-	 * @see #getBTSReferencableItem()
-	 * @generated
-	 */
-	EAttribute getBTSReferencableItem_Id();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getComment <em>Comment</em>}'.
@@ -7949,6 +8545,26 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBTSTranslations_Translations();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSTranslations#getTranslation(java.lang.String) <em>Get Translation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Translation</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSTranslations#getTranslation(java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSTranslations__GetTranslation__String();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSTranslations#setTranslation(java.lang.String, java.lang.String) <em>Set Translation</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Translation</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSTranslations#setTranslation(java.lang.String, java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSTranslations__SetTranslation__String_String();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSConfigItem <em>BTS Config Item</em>}'.
@@ -8456,17 +9072,6 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getBTSProject();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProject#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSProject#getName()
-	 * @see #getBTSProject()
-	 * @generated
-	 */
-	EAttribute getBTSProject_Name();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProject#getPrefix <em>Prefix</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8498,6 +9103,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBTSProject_DbConnection();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.BTSProject#getDbCollections <em>Db Collections</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Db Collections</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProject#getDbCollections()
+	 * @see #getBTSProject()
+	 * @generated
+	 */
+	EReference getBTSProject_DbCollections();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSDBConnection <em>BTSDB Connection</em>}'.
@@ -8670,6 +9286,124 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSWorkflowRuleItem_Ignore();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.DBLease <em>DB Lease</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>DB Lease</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease
+	 * @generated
+	 */
+	EClass getDBLease();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.DBLease#getPath <em>Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Path</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getPath()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EAttribute getDBLease_Path();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.DBLease#getObjectId <em>Object Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Object Id</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getObjectId()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EAttribute getDBLease_ObjectId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.DBLease#getUserId <em>User Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>User Id</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getUserId()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EAttribute getDBLease_UserId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.DBLease#getTimeStamp <em>Time Stamp</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Time Stamp</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getTimeStamp()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EAttribute getDBLease_TimeStamp();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection <em>BTS Project DB Collection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Project DB Collection</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection
+	 * @generated
+	 */
+	EClass getBTSProjectDBCollection();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getCollectionName <em>Collection Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Collection Name</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#getCollectionName()
+	 * @see #getBTSProjectDBCollection()
+	 * @generated
+	 */
+	EAttribute getBTSProjectDBCollection_CollectionName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isIndexed <em>Indexed</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Indexed</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#isIndexed()
+	 * @see #getBTSProjectDBCollection()
+	 * @generated
+	 */
+	EAttribute getBTSProjectDBCollection_Indexed();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isSynchronized <em>Synchronized</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Synchronized</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#isSynchronized()
+	 * @see #getBTSProjectDBCollection()
+	 * @generated
+	 */
+	EAttribute getBTSProjectDBCollection_Synchronized();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSIdentifiableItem <em>BTS Identifiable Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Identifiable Item</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSIdentifiableItem
+	 * @generated
+	 */
+	EClass getBTSIdentifiableItem();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSIdentifiableItem#get_id <em>id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>id</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSIdentifiableItem#get_id()
+	 * @see #getBTSIdentifiableItem()
+	 * @generated
+	 */
+	EAttribute getBTSIdentifiableItem__id();
 
 	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
@@ -9244,6 +9978,30 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTS_USER__ROLES = eINSTANCE.getBTSUser_Roles();
 
 		/**
+		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_USER__PASSWORD = eINSTANCE.getBTSUser_Password();
+
+		/**
+		 * The meta object literal for the '<em><b>Logged In</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_USER__LOGGED_IN = eINSTANCE.getBTSUser_LoggedIn();
+
+		/**
+		 * The meta object literal for the '<em><b>Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_USER__STATUS = eINSTANCE.getBTSUser_Status();
+
+		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl <em>BTS Comment</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9560,14 +10318,6 @@ public interface BtsmodelPackage extends EPackage {
 		EClass BTS_CONFIGURATION = eINSTANCE.getBTSConfiguration();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_CONFIGURATION__NAME = eINSTANCE.getBTSConfiguration_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Provider</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9586,22 +10336,6 @@ public interface BtsmodelPackage extends EPackage {
 		EClass BTSDB_BASE_OBJECT = eINSTANCE.getBTSDBBaseObject();
 
 		/**
-		 * The meta object literal for the '<em><b>Lease</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTSDB_BASE_OBJECT__LEASE = eINSTANCE.getBTSDBBaseObject_Lease();
-
-		/**
-		 * The meta object literal for the '<em><b>id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTSDB_BASE_OBJECT__ID = eINSTANCE.getBTSDBBaseObject__id();
-
-		/**
 		 * The meta object literal for the '<em><b>rev</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -9616,6 +10350,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTSDB_BASE_OBJECT__PROJECT = eINSTANCE.getBTSDBBaseObject_Project();
+
+		/**
+		 * The meta object literal for the '<em><b>Locked</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTSDB_BASE_OBJECT__LOCKED = eINSTANCE.getBTSDBBaseObject_Locked();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextCorpusImpl <em>BTS Text Corpus</em>}' class.
@@ -9676,32 +10418,6 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_REVISION__RIGHTS_REVOKED = eINSTANCE.getBTSRevision_RightsRevoked();
-
-		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSLeaseImpl <em>BTS Lease</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.BTSLeaseImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSLease()
-		 * @generated
-		 */
-		EClass BTS_LEASE = eINSTANCE.getBTSLease();
-
-		/**
-		 * The meta object literal for the '<em><b>Leasing User Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_LEASE__LEASING_USER_ID = eINSTANCE.getBTSLease_LeasingUserId();
-
-		/**
-		 * The meta object literal for the '<em><b>Lease Time Stamp</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_LEASE__LEASE_TIME_STAMP = eINSTANCE.getBTSLease_LeaseTimeStamp();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSImageImpl <em>BTS Image</em>}' class.
@@ -9824,28 +10540,12 @@ public interface BtsmodelPackage extends EPackage {
 		EReference BTS_CORPUS_OBJECT__PASSPORT = eINSTANCE.getBTSCorpusObject_Passport();
 
 		/**
-		 * The meta object literal for the '<em><b>Parent</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_CORPUS_OBJECT__PARENT = eINSTANCE.getBTSCorpusObject_Parent();
-
-		/**
 		 * The meta object literal for the '<em><b>Corpus Prefix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute BTS_CORPUS_OBJECT__CORPUS_PREFIX = eINSTANCE.getBTSCorpusObject_CorpusPrefix();
-
-		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_CORPUS_OBJECT__CHILDREN = eINSTANCE.getBTSCorpusObject_Children();
 
 		/**
 		 * The meta object literal for the '<em><b>Work Phase</b></em>' attribute feature.
@@ -9898,14 +10598,6 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BTS_REFERENCABLE_ITEM = eINSTANCE.getBTSReferencableItem();
-
-		/**
-		 * The meta object literal for the '<em><b>Id</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_REFERENCABLE_ITEM__ID = eINSTANCE.getBTSReferencableItem_Id();
 
 		/**
 		 * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
@@ -9982,6 +10674,22 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_TRANSLATIONS__TRANSLATIONS = eINSTANCE.getBTSTranslations_Translations();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Translation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_TRANSLATIONS___GET_TRANSLATION__STRING = eINSTANCE.getBTSTranslations__GetTranslation__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Translation</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_TRANSLATIONS___SET_TRANSLATION__STRING_STRING = eINSTANCE.getBTSTranslations__SetTranslation__String_String();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl <em>BTS Config Item</em>}' class.
@@ -10380,14 +11088,6 @@ public interface BtsmodelPackage extends EPackage {
 		EClass BTS_PROJECT = eINSTANCE.getBTSProject();
 
 		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PROJECT__NAME = eINSTANCE.getBTSProject_Name();
-
-		/**
 		 * The meta object literal for the '<em><b>Prefix</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -10410,6 +11110,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_PROJECT__DB_CONNECTION = eINSTANCE.getBTSProject_DbConnection();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Collections</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_PROJECT__DB_COLLECTIONS = eINSTANCE.getBTSProject_DbCollections();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBConnectionImpl <em>BTSDB Connection</em>}' class.
@@ -10546,6 +11254,100 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_WORKFLOW_RULE_ITEM__IGNORE = eINSTANCE.getBTSWorkflowRuleItem_Ignore();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl <em>DB Lease</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.DBLeaseImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getDBLease()
+		 * @generated
+		 */
+		EClass DB_LEASE = eINSTANCE.getDBLease();
+
+		/**
+		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_LEASE__PATH = eINSTANCE.getDBLease_Path();
+
+		/**
+		 * The meta object literal for the '<em><b>Object Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_LEASE__OBJECT_ID = eINSTANCE.getDBLease_ObjectId();
+
+		/**
+		 * The meta object literal for the '<em><b>User Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_LEASE__USER_ID = eINSTANCE.getDBLease_UserId();
+
+		/**
+		 * The meta object literal for the '<em><b>Time Stamp</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_LEASE__TIME_STAMP = eINSTANCE.getDBLease_TimeStamp();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl <em>BTS Project DB Collection</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSProjectDBCollection()
+		 * @generated
+		 */
+		EClass BTS_PROJECT_DB_COLLECTION = eINSTANCE.getBTSProjectDBCollection();
+
+		/**
+		 * The meta object literal for the '<em><b>Collection Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME = eINSTANCE.getBTSProjectDBCollection_CollectionName();
+
+		/**
+		 * The meta object literal for the '<em><b>Indexed</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_PROJECT_DB_COLLECTION__INDEXED = eINSTANCE.getBTSProjectDBCollection_Indexed();
+
+		/**
+		 * The meta object literal for the '<em><b>Synchronized</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED = eINSTANCE.getBTSProjectDBCollection_Synchronized();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl <em>BTS Identifiable Item</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSIdentifiableItem()
+		 * @generated
+		 */
+		EClass BTS_IDENTIFIABLE_ITEM = eINSTANCE.getBTSIdentifiableItem();
+
+		/**
+		 * The meta object literal for the '<em><b>id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_IDENTIFIABLE_ITEM__ID = eINSTANCE.getBTSIdentifiableItem__id();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

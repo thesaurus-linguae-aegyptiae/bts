@@ -15,7 +15,8 @@ Require-Bundle: javax.inject;bundle-version="1.0.0",
  javax.annotation,
  org.eclipse.e4.core.services,
  org.eclipse.e4.core.di.extensions,
- org.bbaw.bts.core.services
+ org.bbaw.bts.core.services,
+ org.bbaw.bts.core.controller
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.annotation;version="1.0.0"
 Bundle-ActivationPolicy: lazy

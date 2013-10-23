@@ -9,8 +9,4 @@ public interface CorpusObjectService extends GenericObjectService<BTSCorpusObjec
 
 	List<BTSCorpusObject> getRootBTSCorpusObjects();
 
-	List<BTSCorpusObject> find(String searchId, List<String> parameter);
-
-	void loadChildren(BTSCorpusObject parent);
-
 }

@@ -9,7 +9,19 @@ Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsmodel.impl,
- org.bbaw.bts.btsmodel.util
+ org.bbaw.bts.btsmodel.util,
+ org.bbaw.bts.btsviewmodel,
+ org.bbaw.bts.btsviewmodel.impl,
+ org.bbaw.bts.btsviewmodel.util,
+ org.bbaw.bts.modelUtils,
+ org.bbaw.bts.searchModel
 Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.emf.ecore
+ org.eclipse.emf.ecore,
+ org.bbaw.bts.commons.libs.elasticsearch,
+ org.apache.commons.codec
 Bundle-ActivationPolicy: lazy
+Import-Package: org.bbaw.bts.commons,
+ org.eclipse.emf.ecore.xmi.impl,
+ org.eclipse.jface.viewers,
+ org.eclipselabs.emfjson,
+ org.eclipselabs.emfjson.internal

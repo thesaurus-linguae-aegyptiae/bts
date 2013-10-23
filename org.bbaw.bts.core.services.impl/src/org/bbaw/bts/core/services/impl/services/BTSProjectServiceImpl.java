@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.List;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -9,6 +10,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, String> implements BTSProjectService
 {
@@ -54,7 +56,24 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public List<BTSProject> list()
 	{
-		return projectDao.list(ServiceConstants.ADMIN);
+		return filter(projectDao.list(ServiceConstants.ADMIN));
 	}
 
+	@Override
+	public List<BTSProject> query(BTSQueryRequest query)
+	{
+		List<BTSProject> objects = new Vector<BTSProject>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			objects.addAll(projectDao.query(query, ServiceConstants.ADMIN, ServiceConstants.ADMIN));
+		}
+		return filter(objects);
+	}
+
+	@Override
+	public List<BTSProject> listRemoteProjects(String url, String user, String password)
+	{
+		projectDao.
+		return null;
+	}
 }

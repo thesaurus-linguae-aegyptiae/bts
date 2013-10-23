@@ -7,15 +7,16 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
-import org.bbaw.bts.dao.couchDB.BTSUserDaoImpl;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService
 {
 
 	@Inject
-	BTSUserDaoImpl userDao;
+	private BTSUserDao userDao;
 
 	@Override
 	public BTSUser createNew()
@@ -75,7 +76,18 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		{
 			users.addAll(userDao.list(p + ServiceConstants.ADMIN_SUFFIX));
 		}
-		return users;
+		return filter(users);
+	}
+
+	@Override
+	public List<BTSUser> query(BTSQueryRequest query)
+	{
+		List<BTSUser> objects = new Vector<BTSUser>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			objects.addAll(userDao.query(query, p + ServiceConstants.ADMIN_SUFFIX, p + ServiceConstants.ADMIN_SUFFIX));
+		}
+		return filter(objects);
 	}
 
 }

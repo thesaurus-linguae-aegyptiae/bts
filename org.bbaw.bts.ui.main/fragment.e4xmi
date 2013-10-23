@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_XCflwADrEeOpmPWG2KRhAA" featurename="children" parentElementId="org.bbaw.bts.app.perspectivestack.main">
     <elements xsi:type="advanced:Perspective" xmi:id="_zrowcADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.ui.main.perspective.main" label="BTS Main Perspective">
       <children xsi:type="basic:PartStack" xmi:id="_7sFY0ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.ui.main.partstack.0"/>
@@ -15,8 +15,9 @@
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mjmYoANbEeO_KvSHBrHQXw" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.main">
-    <elements xsi:type="menu:DirectToolItem" xmi:id="_tJwNQANbEeO_KvSHBrHQXw" elementId="org.bbaw.bts.ui.main.directtoolitem.0" label="Delete"/>
     <elements xsi:type="menu:HandledToolItem" xmi:id="_vvgLwAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.handledtoolitem.Listen2Updates" label="Listen2Updates" tooltip="Listen2Updates" command="_XRryAAUBEeOv5rV0xfzB3w"/>
+    <elements xsi:type="menu:HandledToolItem" xmi:id="_cMpkEDDbEeOcKK6bB3llFg" elementId="org.bbaw.bts.ui.main.handledtoolitem.editProject" label="editProject" command="_hkOGsDDQEeOcKK6bB3llFg"/>
+    <elements xsi:type="menu:HandledToolItem" xmi:id="_kuZjUDpKEeOBQZ1FHdD7_g" elementId="TEST" label="TEST" command="_cn-10DpKEeOBQZ1FHdD7_g"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_z2hVUANdEeO_KvSHBrHQXw" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.top">
     <elements xsi:type="basic:Part" xmi:id="_4VqaIANdEeO_KvSHBrHQXw" elementId="org.bbaw.bts.ui.main.part.0" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
@@ -47,26 +48,48 @@
     <elements xsi:type="commands:Handler" xmi:id="_IMqzEAWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handler.editConfiguration" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.EditConfigurationHandler" command="_EXssoAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Handler" xmi:id="_XQGM8BCOEeOtC5jZTnesHw" elementId="org.bbaw.bts.ui.main.handler.insertTextModelElementHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.test.InsertTextModelElementHandler" command="_P6t60BCOEeOtC5jZTnesHw"/>
     <elements xsi:type="commands:Handler" xmi:id="_PUU4ICamEeOWXom3xTHUZA" elementId="org.bbaw.bts.ui.main.handler.createNewProject" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.CreateNewProjectHandler" command="_KXYdACamEeOWXom3xTHUZA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_mAihADDQEeOcKK6bB3llFg" elementId="org.bbaw.bts.ui.main.handler.editProject" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.EditProjectHandler" command="_hkOGsDDQEeOcKK6bB3llFg"/>
+    <elements xsi:type="commands:Handler" xmi:id="_fEvzMDpKEeOBQZ1FHdD7_g" elementId="TEST" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER" command="_cn-10DpKEeOBQZ1FHdD7_g"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
-    <elements xsi:type="commands:Command" xmi:id="_rufBgAP9EeOVO9L3NDWRFg" elementId="org.bbaw.bts.ui.main.command.createNewTextCorpus" commandName="createNewTextCorpus" category="_2-WzQAP9EeOVO9L3NDWRFg"/>
-    <elements xsi:type="commands:Command" xmi:id="_FOLU4AQzEeOpEJDlYlE8ag" elementId="org.bbaw.bts.ui.main.command.createNewTCObject" commandName="createNewTCObject" category="_2-WzQAP9EeOVO9L3NDWRFg"/>
-    <elements xsi:type="commands:Command" xmi:id="_JDv4QAQzEeOpEJDlYlE8ag" elementId="org.bbaw.bts.ui.main.command.addNewTCObject" commandName="addNewTCObject" category="_2-WzQAP9EeOVO9L3NDWRFg"/>
+    <elements xsi:type="commands:Command" xmi:id="_rufBgAP9EeOVO9L3NDWRFg" elementId="org.bbaw.bts.ui.main.command.createNewTextCorpus" commandName="createNewTextCorpus" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
+    <elements xsi:type="commands:Command" xmi:id="_FOLU4AQzEeOpEJDlYlE8ag" elementId="org.bbaw.bts.ui.main.command.createNewTCObject" commandName="createNewTCObject" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
+    <elements xsi:type="commands:Command" xmi:id="_JDv4QAQzEeOpEJDlYlE8ag" elementId="org.bbaw.bts.ui.main.command.addNewTCObject" commandName="addNewTCObject" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
-    <elements xsi:type="commands:Command" xmi:id="_3ajhwAWXEeOmY4VxFYomZg" elementId="org.bbaw.bts.ui.main.command.createNewConfiguration" commandName="createNewConfiguration" category="_2-WzQAP9EeOVO9L3NDWRFg"/>
+    <elements xsi:type="commands:Command" xmi:id="_3ajhwAWXEeOmY4VxFYomZg" elementId="org.bbaw.bts.ui.main.command.createNewConfiguration" commandName="createNewConfiguration" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_EXssoAWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.command.editConfiguration" commandName="editConfiguration" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_P6t60BCOEeOtC5jZTnesHw" elementId="org.bbaw.bts.ui.main.command.insertTextModelElement" commandName="insertTextModelElement" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
-    <elements xsi:type="commands:Command" xmi:id="_KXYdACamEeOWXom3xTHUZA" elementId="org.bbaw.bts.ui.main.command.createNewProject" commandName="createNewProject" category="_2-WzQAP9EeOVO9L3NDWRFg"/>
+    <elements xsi:type="commands:Command" xmi:id="_KXYdACamEeOWXom3xTHUZA" elementId="org.bbaw.bts.ui.main.command.createNewProject" commandName="createNewProject" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
+    <elements xsi:type="commands:Command" xmi:id="_hkOGsDDQEeOcKK6bB3llFg" elementId="org.bbaw.bts.ui.main.command.editProject" commandName="editProject" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
+    <elements xsi:type="commands:Command" xmi:id="_cn-10DpKEeOBQZ1FHdD7_g" elementId="TEST" commandName="TEST"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
-    <elements xsi:type="commands:Category" xmi:id="_2-WzQAP9EeOVO9L3NDWRFg" elementId="org.bbaw.bts.ui.main.command.category.create" name="Create"/>
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
-    <elements xsi:type="commands:Category" xmi:id="_CXsjwAWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.category.edit" name="Edit"/>
+    <elements xsi:type="commands:Category" xmi:id="_CXsjwAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.category.edit" name="Edit"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_lWcloAWjEeOJR9LhfOAE5w" featurename="children" parentElementId="org.eclipse.ui.preferences">
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." command="_EXssoAWjEeOJR9LhfOAE5w">
-      <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_E7D1wBS0EeOJHr7pWqmSDw"/>
-    </elements>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." command="_EXssoAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" label="TEST pref" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" label="New Configuration..." command="_3ajhwAWXEeOmY4VxFYomZg"/>
   </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_91RrsDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.edit">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_kXRK0DVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.2" label="Edit..."/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_JRhFgDVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.file">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_l0QGMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.3" label="Insert..."/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_NxQnQDVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.bbaw.bts.app.menu.file.new">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_QdhZMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.0" label="New Project..." command="_KXYdACamEeOWXom3xTHUZA"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_TefP0DVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.1" label="New Text Corpus..." command="_rufBgAP9EeOVO9L3NDWRFg"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_o7oG0DVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.bbaw.bts.app.menu.analyse">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_qXavYDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.4" label="Analyse Text..."/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uyGK8DVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.window">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_wI0tUDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.5" label="Open Perspective"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_fza6QDVsEeOv7cfx0AHTtw"/>
 </fragment:ModelFragments>

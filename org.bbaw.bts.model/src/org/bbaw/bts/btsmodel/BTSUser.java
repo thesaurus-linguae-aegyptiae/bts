@@ -24,6 +24,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getExternalReferneces <em>External Referneces</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getRoles <em>Roles</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#isLoggedIn <em>Logged In</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getStatus <em>Status</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,7 +34,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSUser extends BTSDBBaseObject, AdministrativDataObject {
+public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	/**
 	 * Returns the value of the '<em><b>Group Ids</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.
@@ -313,5 +316,83 @@ public interface BTSUser extends BTSDBBaseObject, AdministrativDataObject {
 	 * @generated
 	 */
 	EList<String> getRoles();
+
+	/**
+	 * Returns the value of the '<em><b>Password</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Password</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Password</em>' attribute.
+	 * @see #setPassword(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_Password()
+	 * @model
+	 * @generated
+	 */
+	String getPassword();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Password</em>' attribute.
+	 * @see #getPassword()
+	 * @generated
+	 */
+	void setPassword(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Logged In</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Logged In</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Logged In</em>' attribute.
+	 * @see #setLoggedIn(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_LoggedIn()
+	 * @model
+	 * @generated
+	 */
+	boolean isLoggedIn();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSUser#isLoggedIn <em>Logged In</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Logged In</em>' attribute.
+	 * @see #isLoggedIn()
+	 * @generated
+	 */
+	void setLoggedIn(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Status</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Status</em>' attribute.
+	 * @see #setStatus(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_Status()
+	 * @model
+	 * @generated
+	 */
+	String getStatus();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSUser#getStatus <em>Status</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Status</em>' attribute.
+	 * @see #getStatus()
+	 * @generated
+	 */
+	void setStatus(String value);
 
 } // BTSUser

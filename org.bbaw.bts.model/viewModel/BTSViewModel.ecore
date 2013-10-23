@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="btsviewmodel" nsURI="http://btsviewmodel/1.0" nsPrefix="btsviewmodel">
+  <eClassifiers xsi:type="ecore:EClass" name="TreeNodeWrapper">
+    <eOperations name="addPropertyChangeListener">
+      <eParameters name="propertyChangeListener" eType="#//PropertyChangeListener"/>
+    </eOperations>
+    <eOperations name="removePropertyChangeListener">
+      <eParameters name="propertyChangeListener" eType="#//PropertyChangeListener"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//TreeNodeWrapper"
+        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//TreeNodeWrapper" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="object" eType="#//BTSObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyChangeSupport"
+        eType="#//PropertyChangeSupport"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenLoaded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="label" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="BTSObject" instanceClassName="org.bbaw.bts.btsmodel.BTSObject"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeSupport" instanceClassName="java.beans.PropertyChangeSupport"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeListener" instanceClassName="java.beans.PropertyChangeListener"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeEvent" instanceClassName="java.beans.PropertyChangeEvent"/>
+</ecore:EPackage>

@@ -39,4 +39,20 @@ public interface BTSTranslations extends EObject {
 	 */
 	EList<BTSTranslation> getTranslations();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getTranslation(String language);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String setTranslation(String translation, String language);
+
 } // BTSTranslations

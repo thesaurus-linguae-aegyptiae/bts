@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated BTSModel -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="org.bbaw.bts.btsmodel.presentation.BtsmodelModelWizardID"
+            name="%_UI_BtsmodelModelWizard_label"
+            class="org.bbaw.bts.btsmodel.presentation.BtsmodelModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/BtsmodelModelFile.gif">
+         <description>%_UI_BtsmodelModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated BTSModel -->
+      <editor
+            id="org.bbaw.bts.btsmodel.presentation.BtsmodelEditorID"
+            name="%_UI_BtsmodelEditor_label"
+            icon="icons/full/obj16/BtsmodelModelFile.gif"
+            extensions="btsmodel"
+            class="org.bbaw.bts.btsmodel.presentation.BtsmodelEditor"
+            contributorClass="org.bbaw.bts.btsmodel.presentation.BtsmodelActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel;
 
 
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>BTSDB Base Object</b></em>'.
@@ -11,10 +12,9 @@ package org.bbaw.bts.btsmodel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getLease <em>Lease</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getProject <em>Project</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#isLocked <em>Locked</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,59 +22,7 @@ package org.bbaw.bts.btsmodel;
  * @model abstract="true"
  * @generated
  */
-public interface BTSDBBaseObject extends BTSObservableObject {
-	/**
-	 * Returns the value of the '<em><b>Lease</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Lease</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Lease</em>' containment reference.
-	 * @see #setLease(BTSLease)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Lease()
-	 * @model containment="true"
-	 * @generated
-	 */
-	BTSLease getLease();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getLease <em>Lease</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Lease</em>' containment reference.
-	 * @see #getLease()
-	 * @generated
-	 */
-	void setLease(BTSLease value);
-
-	/**
-	 * Returns the value of the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>id</em>' attribute.
-	 * @see #set_id(String)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject__id()
-	 * @model
-	 * @generated
-	 */
-	String get_id();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_id <em>id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>id</em>' attribute.
-	 * @see #get_id()
-	 * @generated
-	 */
-	void set_id(String value);
-
+public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>rev</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -126,5 +74,31 @@ public interface BTSDBBaseObject extends BTSObservableObject {
 	 * @generated
 	 */
 	void setProject(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Locked</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Locked</em>' attribute.
+	 * @see #setLocked(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Locked()
+	 * @model
+	 * @generated
+	 */
+	boolean isLocked();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#isLocked <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Locked</em>' attribute.
+	 * @see #isLocked()
+	 * @generated
+	 */
+	void setLocked(boolean value);
 
 } // BTSDBBaseObject

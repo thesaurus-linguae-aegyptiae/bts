@@ -4,13 +4,9 @@ package org.bbaw.bts.btsmodel.impl;
 
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +23,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class BTSGraphicImpl extends MinimalEObjectImpl.Container implements BTSGraphic {
+public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphic {
 	/**
 	 * The default value of the '{@link #getInnerSentenceOrder() <em>Inner Sentence Order</em>}' attribute.
 	 * <!-- begin-user-doc -->

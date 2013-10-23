@@ -3,12 +3,9 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSLease;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -17,46 +14,16 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getLease <em>Lease</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#isLocked <em>Locked</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implements BTSDBBaseObject
+public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implements BTSDBBaseObject
 {
-
-	/**
-	 * The cached value of the '{@link #getLease() <em>Lease</em>}' containment reference.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getLease()
-	 * @generated
-	 * @ordered
-	 */
-	protected BTSLease lease;
-
-	/**
-	 * The default value of the '{@link #get_id() <em>id</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #get_id()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String _ID_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #get_id() <em>id</em>}' attribute. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @see #get_id()
-	 * @generated
-	 * @ordered
-	 */
-	protected String _id = _ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #get_rev() <em>rev</em>}' attribute.
@@ -98,6 +65,26 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	protected String project = PROJECT_EDEFAULT;
 
 	/**
+	 * The default value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LOCKED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean locked = LOCKED_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -114,72 +101,6 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	protected EClass eStaticClass()
 	{
 		return BtsmodelPackage.Literals.BTSDB_BASE_OBJECT;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BTSLease getLease()
-	{
-		return lease;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetLease(BTSLease newLease, NotificationChain msgs)
-	{
-		BTSLease oldLease = lease;
-		lease = newLease;
-		if (eNotificationRequired())
-		{
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE, oldLease, newLease);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setLease(BTSLease newLease)
-	{
-		if (newLease != lease)
-		{
-			NotificationChain msgs = null;
-			if (lease != null)
-				msgs = ((InternalEObject)lease).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE, null, msgs);
-			if (newLease != null)
-				msgs = ((InternalEObject)newLease).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE, null, msgs);
-			msgs = basicSetLease(newLease, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE, newLease, newLease));
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String get_id()
-	{
-		return _id;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void set_id(String new_id)
-	{
-		String old_id = _id;
-		_id = new_id;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__ID, old_id, _id));
 	}
 
 	/**
@@ -227,18 +148,26 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	public boolean isLocked()
 	{
-		switch (featureID)
-		{
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE:
-				return basicSetLease(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+		return locked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocked(boolean newLocked)
+	{
+		boolean oldLocked = locked;
+		locked = newLocked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED, oldLocked, locked));
 	}
 
 	/**
@@ -250,14 +179,12 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE:
-				return getLease();
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__ID:
-				return get_id();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				return get_rev();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
 				return getProject();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
+				return isLocked();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -271,17 +198,14 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE:
-				setLease((BTSLease)newValue);
-				return;
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__ID:
-				set_id((String)newValue);
-				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				set_rev((String)newValue);
 				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
 				setProject((String)newValue);
+				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
+				setLocked((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -296,17 +220,14 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE:
-				setLease((BTSLease)null);
-				return;
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__ID:
-				set_id(_ID_EDEFAULT);
-				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				set_rev(_REV_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
 				setProject(PROJECT_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
+				setLocked(LOCKED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -321,14 +242,12 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 	{
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__LEASE:
-				return lease != null;
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__ID:
-				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
 				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
+				return locked != LOCKED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -343,12 +262,12 @@ public abstract class BTSDBBaseObjectImpl extends BTSObservableObjectImpl implem
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (_id: ");
-		result.append(_id);
-		result.append(", _rev: ");
+		result.append(" (_rev: ");
 		result.append(_rev);
 		result.append(", project: ");
 		result.append(project);
+		result.append(", locked: ");
+		result.append(locked);
 		result.append(')');
 		return result.toString();
 	}

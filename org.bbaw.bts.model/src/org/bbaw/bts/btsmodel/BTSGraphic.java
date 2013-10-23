@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.btsmodel;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BTSGraphic extends EObject {
+public interface BTSGraphic extends BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>Inner Sentence Order</b></em>' attribute.
 	 * <!-- begin-user-doc -->

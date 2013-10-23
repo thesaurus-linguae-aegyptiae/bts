@@ -20,6 +20,7 @@ import jsesh.editor.JMDCEditor;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
@@ -104,9 +105,9 @@ public class EgyptEditorPart
 
 							try
 							{
-								byte[] utf8 = text.getBytes("UTF-8");
+								byte[] utf8 = text.getBytes(BTSConstants.ENCODING);
 
-								return new String(utf8, "UTF-8");
+								return new String(utf8, BTSConstants.ENCODING);
 							} catch (UnsupportedEncodingException e)
 							{
 								// TODO Auto-generated catch block
@@ -409,8 +410,7 @@ public class EgyptEditorPart
 			WordOccurrence word = (WordOccurrence) object;
 			ElementOccurrence current = editorPanel.getCurrentWord();
 			int index = textModel.indexOf(current);
-			textModel.add(index, word);
-			editorPanel.setTextModel(textModel);
+			editorPanel.insert(word);
 			editorPanel.setCursorPosition(index + 1);
 
 		}

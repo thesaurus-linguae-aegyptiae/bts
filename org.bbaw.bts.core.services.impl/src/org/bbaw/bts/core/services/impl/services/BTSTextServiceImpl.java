@@ -7,15 +7,16 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.dao.BTSTextDao;
 import org.bbaw.bts.core.services.BTSTextService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
-import org.bbaw.bts.dao.couchDB.BTSTextDaoImpl;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String> implements BTSTextService
 {
 
 	@Inject
-	BTSTextDaoImpl textDao;
+	private BTSTextDao textDao;
 
 	@Override
 	public BTSText createNew()
@@ -89,7 +90,22 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 				texts.addAll(textDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return texts;
+		return filter(texts);
+	}
+
+	@Override
+	public List<BTSText> query(BTSQueryRequest query)
+	{
+		List<BTSText> objects = new Vector<BTSText>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				objects.addAll(textDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return filter(objects);
 	}
 
 }

@@ -11,7 +11,15 @@
       <package
             uri="http://btsmodel/1.0"
             class="org.bbaw.bts.btsmodel.BtsmodelPackage"
-            genModel="model2/BTSModel.genmodel"/>
+            genModel="model/BTSModel.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated BTSViewModel -->
+      <package
+            uri="http://btsviewmodel/1.0"
+            class="org.bbaw.bts.btsviewmodel.BtsviewmodelPackage"
+            genModel="viewModel/BTSViewModel.genmodel"/>
    </extension>
 
 </plugin>

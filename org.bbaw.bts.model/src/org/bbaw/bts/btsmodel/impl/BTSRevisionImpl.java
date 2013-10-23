@@ -3,16 +3,11 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Date;
-
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class BTSRevisionImpl extends MinimalEObjectImpl.Container implements BTSRevision {
+public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevision {
 	/**
 	 * The default value of the '{@link #getRef() <em>Ref</em>}' attribute.
 	 * <!-- begin-user-doc -->

@@ -5,22 +5,33 @@ package org.bbaw.bts.btsmodel.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import java.util.List;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.util.BtsmodelAdapterFactory;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 
+import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ChangeNotifier;
+import org.eclipse.emf.edit.provider.ChildCreationExtenderManager;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.provider.IChangeNotifier;
+import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IDisposable;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemColorProvider;
+import org.eclipse.emf.edit.provider.IItemFontProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemColorProvider;
+import org.eclipse.emf.edit.provider.ITableItemFontProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
@@ -32,7 +43,7 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
  * <!-- end-user-doc -->
  * @generated
  */
-public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
+public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable, IChildCreationExtender {
 	/**
 	 * This keeps track of the root adapter factory that delegates to this adapter factory.
 	 * <!-- begin-user-doc -->
@@ -48,6 +59,14 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 * @generated
 	 */
 	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+
+	/**
+	 * This helps manage the child creation extenders.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ChildCreationExtenderManager childCreationExtenderManager = new ChildCreationExtenderManager(BTSModelEditPlugin.INSTANCE, BtsmodelPackage.eNS_URI);
 
 	/**
 	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
@@ -69,6 +88,11 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		supportedTypes.add(ITreeItemContentProvider.class);
 		supportedTypes.add(IItemLabelProvider.class);
 		supportedTypes.add(IItemPropertySource.class);
+		supportedTypes.add(ITableItemLabelProvider.class);
+		supportedTypes.add(ITableItemColorProvider.class);
+		supportedTypes.add(ITableItemFontProvider.class);
+		supportedTypes.add(IItemColorProvider.class);
+		supportedTypes.add(IItemFontProvider.class);
 	}
 
 	/**
@@ -552,30 +576,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSLease} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSLeaseItemProvider btsLeaseItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSLease}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSLeaseAdapter() {
-		if (btsLeaseItemProvider == null)
-		{
-			btsLeaseItemProvider = new BTSLeaseItemProvider(this);
-		}
-
-		return btsLeaseItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSImage} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -989,6 +989,56 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.DBLease} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DBLeaseItemProvider dbLeaseItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.DBLease}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDBLeaseAdapter()
+	{
+		if (dbLeaseItemProvider == null)
+		{
+			dbLeaseItemProvider = new DBLeaseItemProvider(this);
+		}
+
+		return dbLeaseItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSProjectDBCollection} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSProjectDBCollectionItemProvider btsProjectDBCollectionItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSProjectDBCollection}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSProjectDBCollectionAdapter()
+	{
+		if (btsProjectDBCollectionItemProvider == null)
+		{
+			btsProjectDBCollectionItemProvider = new BTSProjectDBCollectionItemProvider(this);
+		}
+
+		return btsProjectDBCollectionItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1046,6 +1096,36 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		}
 
 		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public List<IChildCreationExtender> getChildCreationExtenders()
+	{
+		return childCreationExtenderManager.getChildCreationExtenders();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Collection<?> getNewChildDescriptors(Object object, EditingDomain editingDomain)
+	{
+		return childCreationExtenderManager.getNewChildDescriptors(object, editingDomain);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ResourceLocator getResourceLocator()
+	{
+		return childCreationExtenderManager;
 	}
 
 	/**
@@ -1110,7 +1190,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsConfigurationItemProvider != null) btsConfigurationItemProvider.dispose();
 		if (btsTextCorpusItemProvider != null) btsTextCorpusItemProvider.dispose();
 		if (btsRevisionItemProvider != null) btsRevisionItemProvider.dispose();
-		if (btsLeaseItemProvider != null) btsLeaseItemProvider.dispose();
 		if (btsImageItemProvider != null) btsImageItemProvider.dispose();
 		if (btsCorpusHeaderItemProvider != null) btsCorpusHeaderItemProvider.dispose();
 		if (btsTimespanItemProvider != null) btsTimespanItemProvider.dispose();
@@ -1128,6 +1207,8 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsdbConnectionItemProvider != null) btsdbConnectionItemProvider.dispose();
 		if (btsWorkflowRuleItemProvider != null) btsWorkflowRuleItemProvider.dispose();
 		if (btsOperatorItemProvider != null) btsOperatorItemProvider.dispose();
+		if (dbLeaseItemProvider != null) dbLeaseItemProvider.dispose();
+		if (btsProjectDBCollectionItemProvider != null) btsProjectDBCollectionItemProvider.dispose();
 	}
 
 }

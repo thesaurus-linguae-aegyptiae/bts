@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.btsmodel;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -24,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BTSRelation extends EObject {
+public interface BTSRelation extends BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>Object Id</b></em>' attribute.
 	 * <!-- begin-user-doc -->

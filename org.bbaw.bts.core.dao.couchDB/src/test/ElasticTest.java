@@ -32,10 +32,12 @@ public class ElasticTest
 	{
 		Node node = nodeBuilder().node();
 		Client client = node.client();
+
 		AdminClient ac = client.admin();
 
 		client = new TransportClient().addTransportAddress(new InetSocketTransportAddress("localhost", 9300));
 		ElasticTest t = new ElasticTest();
+		t.initRiver(client);
 		// t.initRiver(client);
 		// t.getContributionsByCandName(client, "aaew_corpus_aaew_full", 0);
 		t.search(client);
@@ -70,9 +72,10 @@ public class ElasticTest
 	{
 		String json = "{\r\n" + "    \"type\" : \"couchdb\",\r\n" + "    \"couchdb\" : {\r\n"
 				+ "        \"host\" : \"localhost\",\r\n" + "        \"port\" : 5985,\r\n"
-				+ "        \"db\" : \"aaew_corpus_aaew\",\r\n" + "        \"filter\" : null\r\n" + "    }\r\n}";
-		client.index(Requests.indexRequest("_river").type("aaew_corpus_aaew_full").id("_meta").source(json))
-				.actionGet();
+				+ "        \"db\" : \"aaew_corpus_aaew\",\r\n" + "        \"filter\" : null\r\n"
+				+ "    }, index: {\r\n" + "index: aaew_corpus_aaew\r\n" + "type: aaew_corpus_aaew\r\n"
+				+ "bulk_size: 100\r\n" + "bulk_timeout: 10ms\r\n" + "}\r\n}";
+		client.index(Requests.indexRequest("_river").type("aaew_corpus_aaew").id("_meta").source(json)).actionGet();
 	}
 
 	public void getContributionsByCandName(Client client, String candName, int i)

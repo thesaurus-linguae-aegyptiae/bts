@@ -11,28 +11,23 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSTranslation;
+import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.core.controller.dialogControllers.BTSConfigurationDialogController;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
-import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.BTSConfigurationTreeLabelProvider;
-import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.TreeFactoryImpl2;
-import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.TreeStructureAdvisorImpl;
+import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeanProperties;
-import org.eclipse.core.databinding.observable.list.WritableList;
-import org.eclipse.core.databinding.observable.map.IObservableMap;
-import org.eclipse.core.databinding.observable.masterdetail.IObservableFactory;
-import org.eclipse.core.databinding.observable.set.IObservableSet;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.core.databinding.validation.IValidator;
-import org.eclipse.core.databinding.validation.ValidationStatus;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -43,11 +38,12 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.FeaturePath;
-import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -59,6 +55,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -69,6 +67,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
@@ -107,7 +106,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 	private TreeViewer treeViewer;
 
-	private WritableList input;
 	private StructuredSelection selection;
 
 	private ArrayList<BTSConfiguration> configurations;
@@ -159,6 +157,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 	private String[] WIDGET_TYPES = new String[] { "text", "date", "combo", "reference" };
 
+	private TreeNodeWrapper root;
+
+	private Color BACKGROUND_COLOR;
+
 	/**
 	 * Create the dialog.
 	 * 
@@ -199,8 +201,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		Label availableConfigsLB = new Label(compLeftTop, SWT.NONE);
 		availableConfigsLB.setText("All available Configurations");
 
-		Button newConfigBTN = new Button(compLeftTop, SWT.NONE);
-		newConfigBTN.setText("Create New configuration");
+		Link newConfigBTN = new Link(compLeftTop, SWT.NONE);
+		newConfigBTN.setText("<a>Create New configuration</a>");
 		newConfigBTN.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -241,26 +243,21 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 		sashForm.setWeights(new int[] { 1, 1 });
 
+		BACKGROUND_COLOR = mainConfigRight.getBackground();
 		loadTree();
 		return area;
 	}
 
 	private void loadTree()
 	{
-		ObservableListTreeContentProvider contentProvider = new ObservableListTreeContentProvider(
-				(IObservableFactory) new TreeFactoryImpl2(), new TreeStructureAdvisorImpl());
+		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+		// BtsviewmodelAdapterFactory factory = new
+		// BtsviewmodelAdapterFactory();
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
+		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
 		treeViewer.setContentProvider(contentProvider);
-		IObservableSet knownElements = contentProvider.getKnownElements();
-
-		IObservableMap[] attributeMaps = new IObservableMap[3];
-		attributeMaps[0] = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_CONFIGURATION__NAME)
-				.observeDetail(knownElements);
-		attributeMaps[1] = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL)
-				.observeDetail(knownElements);
-		attributeMaps[2] = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE)
-				.observeDetail(knownElements);
-
-		treeViewer.setLabelProvider(new BTSConfigurationTreeLabelProvider(attributeMaps));
+		treeViewer.setLabelProvider(labelProvider);
 
 		treeViewer.addSelectionChangedListener(new ISelectionChangedListener()
 		{
@@ -281,19 +278,37 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		configurations = new ArrayList<BTSConfiguration>();
 
 		List<BTSConfiguration> list = configurationController.listConfigurations();
-		if (list != null) for (BTSConfiguration o : list)
+		root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		if (list != null)
 		{
-			configurations.add(o);
+			for (BTSConfiguration o : list)
+			{
+				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				child.setObject(o);
+				child.setChildrenLoaded(true);
+				root.getChildren().add(child);
+				root.setChildrenLoaded(true);
+				configurations.add(o);
+			}
 		}
-		input = new WritableList(configurations, BTSConfiguration.class);
+
 		// Set the writeableList as input for the viewer
-		treeViewer.setInput(input);
+		treeViewer.setInput(root);
 
 	}
 
 	private void handleTreeSelection(StructuredSelection selection)
 	{
-		if (selection.getFirstElement() instanceof BTSConfiguration)
+		if (selection.getFirstElement() instanceof TreeNodeWrapper)
+		{
+			TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
+			if (tn.getObject() instanceof BTSConfiguration)
+			{
+				BTSConfiguration configuration = (BTSConfiguration) tn.getObject();
+				selectedConfig = configuration;
+				loadConfigurationEditor(configuration);
+			}
+		} else if (selection.getFirstElement() instanceof BTSConfiguration)
 		{
 			BTSConfiguration configuration = (BTSConfiguration) selection.getFirstElement();
 			selectedConfig = configuration;
@@ -381,8 +396,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				BTSConfigItem ci = configurationController.createNewConfigItem();
-				ci.setValue(newCIText_ConfigurationEdit.getText());
+				BTSConfigItem ci = configurationController.createNewConfigItem(newCIText_ConfigurationEdit.getText());
 				selectedConfig.getChildren().add(ci);
 				treeViewer.refresh();
 
@@ -395,7 +409,27 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		activateBTN_CIEdit.setText("activate");
 		activateBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 
-		Group grpWidgetDescription = new Group(configItemEditComp, SWT.NONE);
+		final Group grpWidgetDescription = new Group(configItemEditComp, SWT.NONE);
+
+		activateBTN_CIEdit.addSelectionListener(new SelectionListener()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				grpWidgetDescription.setEnabled(activateBTN_CIEdit.getSelection());
+				setSelectedColor(grpWidgetDescription, activateBTN_CIEdit.getSelection());
+
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e)
+			{
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 		grpWidgetDescription.setText("Widget Description");
 		grpWidgetDescription.setLayout(new GridLayout(2, false));
 		grpWidgetDescription.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 2));
@@ -528,24 +562,23 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 			configItemEditBindings.dispose();
 		}
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
-		us.setBeforeSetValidator(new IValidator()
-		{
-
-			@Override
-			public IStatus validate(Object value)
-			{
-				if (value instanceof String)
-				{
-					if (value.toString().trim().length() > 0)
-					{
-						return ValidationStatus.ok();
-					}
-				}
-				return ValidationStatus.error("Not a number");
-			}
-		});
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
 
 		DataBindingContext bindingContext = new DataBindingContext();
+
+		// label
+		// FeaturePath feature0 =
+		// FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL,
+		// BtsmodelPackage.Literals.BTS_TRANSLATIONS__TRANSLATIONS,
+		// BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
+
+		BTSTranslations label = (BTSTranslations) configItem.eGet(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL);
+		String lang = "en";
+		BTSTranslation trans = label.getTranslations().get(0);
+
+		Binding binding0 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, labelText_CIEdit),
+				EMFProperties.value(BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE).observe(trans), us, null);
 
 		// value
 		Binding binding = bindingContext.bindValue(
@@ -572,10 +605,9 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__IGNORE).observe(configItem), null, null);
 
 		// show widget
-		FeaturePath feature = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
-				BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__SHOW_WIDGET);
-		Binding binding6 = bindingContext.bindValue(WidgetProperties.selection().observeDelayed(0, activeConfigCB),
-				EMFProperties.value(feature).observe(configItem), null, null);
+		Binding binding6 = bindingContext.bindValue(WidgetProperties.selection().observeDelayed(0, activateBTN_CIEdit),
+				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SHOW_WIDGET).observe(configItem), null,
+				null);
 
 		// allow multiple
 		FeaturePath feature2 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
@@ -660,7 +692,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				BTSConfigItem ci = configurationController.createNewConfigItem();
+				BTSConfigItem ci = configurationController.createNewConfigItem(newCIText_ConfigurationEdit.getText());
 				ci.setValue(newCIText_ConfigurationEdit.getText());
 				selectedConfig.getChildren().add(ci);
 				treeViewer.refresh();
@@ -668,43 +700,31 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 			}
 		});
 
-		configurationEditBindings = initializeConfigurationEditBindings();
+		configurationEditBindings = initializeConfigurationEditBindings(configuration);
 
 		value.setValue(configuration);
 		sashForm.setWeights(new int[] { 1, 1 });
 		sashForm.layout();
 	}
 
-	private DataBindingContext initializeConfigurationEditBindings()
+	private DataBindingContext initializeConfigurationEditBindings(BTSConfiguration configuration)
 	{
 		if (configurationEditBindings != null)
 		{
 			configurationEditBindings.dispose();
 		}
-		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
-		us.setBeforeSetValidator(new IValidator()
-		{
-
-			@Override
-			public IStatus validate(Object value)
-			{
-				if (value instanceof String)
-				{
-					if (value.toString().trim().length() > 0)
-					{
-						return ValidationStatus.ok();
-					}
-				}
-				return ValidationStatus.error("Not a number");
-			}
-		});
 
 		DataBindingContext bindingContext = new DataBindingContext();
-		IObservableValue model = BeanProperties.value("name").observeDetail(value);
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+		IObservableValue model = EMFProperties.value(BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(configuration);
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, nameText_ConfigurationEdit), model, us, null);
+		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		bindingContext.addValidationStatusProvider(binding);
 
-		IObservableValue model2 = BeanProperties.value("provider").observeDetail(value);
+		IObservableValue model2 = EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIGURATION__PROVIDER).observe(
+				configuration);
 		Binding binding2 = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, providerText), model2, us, null);
 
@@ -737,14 +757,43 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	private void saveInput()
 	{
 		System.out.println("saveInput");
-		for (Object o : input)
+		for (Object o : root.getChildren())
 		{
 			if (o instanceof BTSConfiguration)
 			{
 				configurationController.save((BTSConfiguration) o);
+			} else if (o instanceof TreeNodeWrapper)
+			{
+				TreeNodeWrapper tn = (TreeNodeWrapper) o;
+				configurationController.save((BTSConfiguration) tn.getObject());
 			}
 		}
 
+	}
+
+	private void setSelectedColor(Control control, boolean selection)
+	{
+		if (selection)
+		{
+			control.setForeground(control.getParent().getForeground());
+			if (!((control instanceof Text) || (control instanceof Combo) || (control instanceof MultiChoice<?>) || (control instanceof Spinner)))
+			{
+				control.setBackground(BACKGROUND_COLOR);
+			}
+		} else
+		{
+			control.setForeground(BTSUIConstants.VIEW_FOREGROUND_DESELECTED_COLOR);
+			control.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
+
+		}
+
+		if (control instanceof Composite)
+		{
+			for (Control child : ((Composite) control).getChildren())
+			{
+				setSelectedColor(child, selection);
+			}
+		}
 	}
 
 	/**
@@ -768,13 +817,9 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 	private void addObjectToInput(final BTSConfiguration object)
 	{
-		input.getRealm().asyncExec(new Runnable()
-		{
-			public void run()
-			{
-				input.add(object);
-			}
-		});
-
+		TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		tn.setObject(object);
+		root.getChildren().add(tn);
 	}
+
 }

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.bbaw.bts.model/src" modelPluginID="org.bbaw.bts.model"
+    modelName="BTSModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    tableProviders="true" colorProviders="true" fontProviders="true" operationReflection="true"
+    importOrganizing="true">
+  <foreignModel>BTSModel.ecore</foreignModel>
+  <genPackages prefix="Btsmodel" basePackage="org.bbaw.bts" disposableProviderFactory="true"
+      extensibleProviderFactory="true" ecorePackage="BTSModel.ecore#/">
+    <genDataTypes ecoreDataType="BTSModel.ecore#//PropertyChangeSupport"/>
+    <genDataTypes ecoreDataType="BTSModel.ecore#//PropertyChangeListener"/>
+    <genDataTypes ecoreDataType="BTSModel.ecore#//PropertyChangeEvent"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSTCObject"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSText">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSText/textItems"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSSenctence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSSenctence/sentenceItems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSSenctence/translation"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSWord">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSWord/translation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/wType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/lType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/lKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/flexCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/wChar"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSWord/graphics"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSDelimiter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDelimiter/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSTextItems"/>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSSentenceItems"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSListEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSListEntry/ignore"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListEntry/subentries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListEntry/words"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSPassport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/protocol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/bibliography"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassport/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/wbSlips"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/wbFolder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/provenance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassport/passportEntries"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassport/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassport/descriptions"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//AdministrativDataObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//AdministrativDataObject/revisions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//AdministrativDataObject/state"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//AdministrativDataObject/revisionState"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//AdministrativDataObject/visibility"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/subtype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/code"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSAmbivalence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSAmbivalence/cases"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSLemmaCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSLemmaCase/scenario"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSUser">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/groupIds"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/sigle"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/webDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/userName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/foreName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/sureName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/mail"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/webURL"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSUser/externalReferneces"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/roles"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/password"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/loggedIn"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/status"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSComment">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSComment/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSComment/references"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSComment/tags"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSInterTextReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSInterTextReference/beginId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSInterTextReference/endId"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSTextSentenceItem"/>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSReference">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSReference/parts"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSReference/objectId"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSAnnotation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSAnnotation/references"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSTranslation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTranslation/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTranslation/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTranslation/lang"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSDate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDate/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDate/year"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDate/month"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDate/day"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDate/relativeRef"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSPassportEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/provider"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/category"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEntry/subentries"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSRelation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/objectId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/subtype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/certainty"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSConfiguration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfiguration/provider"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSDBBaseObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/_rev"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/project"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/locked"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSTextCorpus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTextCorpus/header"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSRevision">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/ref"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/userId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/timeStamp"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/rightsRevoked"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSImage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSImage/mediaType"/>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSImage/getAttachement"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSCorpusHeader">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusHeader/authorName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusHeader/projectId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusHeader/projectName"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSTimespan">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTimespan/from"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTimespan/to"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTimespan/comment"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSCorpusObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/relations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/passport"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/corpusPrefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/workPhase"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSExternalReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSExternalReference/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSExternalReference/provider"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSExternalReference/type"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSReferencableItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSReferencableItem/comment"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSReferencableItem/parent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSReferencableItem/parentId"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSGraphic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/innerSentenceOrder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/reference"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSTranslations">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTranslations/translations"/>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSTranslations/getTranslation">
+        <genParameters ecoreParameter="BTSModel.ecore#//BTSTranslations/getTranslation/language"/>
+      </genOperations>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSTranslations/setTranslation">
+        <genParameters ecoreParameter="BTSModel.ecore#//BTSTranslations/setTranslation/translation"/>
+        <genParameters ecoreParameter="BTSModel.ecore#//BTSTranslations/setTranslation/language"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSConfigItem" labelFeature="#//btsmodel/BTSConfigItem/value">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/label"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/description"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/ignore"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/passportEditorConfig"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/subtype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/ownerType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/referencedType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/rules"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/showWidget"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSPassportEditorConfig">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/widgetType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/allowMultiple"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/horizontalWidth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/regex"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSUserGroup">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUserGroup/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUserGroup/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSList"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSPpSubentry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/subtype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/subValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/provider"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPpSubentry/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPpSubentry/externalReferences"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPpSubentry/timespan"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPpSubentry/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPpSubentry/translation"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSListSubentry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListSubentry/passport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListSubentry/words"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSConfig">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfig/children"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSObservableObject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObservableObject/propertyChangeSupport"/>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSObservableObject/addPropertyChangeListener">
+        <genParameters ecoreParameter="BTSModel.ecore#//BTSObservableObject/addPropertyChangeListener/propertyChangeListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSObservableObject/removePropertyChangeListener">
+        <genParameters ecoreParameter="BTSModel.ecore#//BTSObservableObject/removePropertyChangeListener/propertyChangeListener"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSThsEntry"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSProject">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProject/prefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProject/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSProject/dbConnection"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSProject/dbCollections"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSDBConnection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBConnection/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBConnection/masterServer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBConnection/dbPath"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSWorkflowRule">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSWorkflowRule/subRules"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/actions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/acceptMessage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/ocl"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/oclSelfObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRule/denialMessage"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSOperator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSOperator/opperator"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSWorkflowRuleItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRuleItem/priority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWorkflowRuleItem/ignore"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//DBLease">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/path"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/objectId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/userId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/timeStamp"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSProjectDBCollection">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/collectionName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/indexed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/synchronized"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSIdentifiableItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSIdentifiableItem/_id"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

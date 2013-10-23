@@ -20,7 +20,7 @@ package org.bbaw.bts.btsmodel;
  * @model
  * @generated
  */
-public interface BTSUserGroup extends BTSDBBaseObject, AdministrativDataObject {
+public interface BTSUserGroup extends BTSDBBaseObject, BTSObject {
 	/**
 	 * Returns the value of the '<em><b>Category</b></em>' attribute.
 	 * <!-- begin-user-doc -->

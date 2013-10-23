@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSImageDao;
 import org.bbaw.bts.core.services.BTSImageService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, String> implements BTSImageService
 {
@@ -89,7 +90,22 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 				images.addAll(imageDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return images;
+		return filter(images);
+	}
+
+	@Override
+	public List<BTSImage> query(BTSQueryRequest query)
+	{
+		List<BTSImage> objects = new Vector<BTSImage>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				objects.addAll(imageDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return filter(objects);
 	}
 
 }

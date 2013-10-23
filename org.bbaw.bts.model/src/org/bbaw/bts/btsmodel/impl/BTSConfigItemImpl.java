@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
 import org.bbaw.bts.btsmodel.BTSTranslations;
@@ -32,6 +33,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getLabel <em>Label</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getDescription <em>Description</em>}</li>
@@ -70,6 +72,26 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 * @ordered
 	 */
 	protected PropertyChangeSupport propertyChangeSupport = PROPERTY_CHANGE_SUPPORT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String _ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected String _id = _ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getValue() <em>Value</em>}' attribute.
@@ -279,6 +301,29 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		propertyChangeSupport = newPropertyChangeSupport;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport, propertyChangeSupport));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String get_id()
+	{
+		return _id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_id(String new_id)
+	{
+		String old_id = _id;
+		_id = new_id;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__ID, old_id, _id));
 	}
 
 	/**
@@ -641,6 +686,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				return getPropertyChangeSupport();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ID:
+				return get_id();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
 				return getValue();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
@@ -681,6 +728,9 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport((PropertyChangeSupport)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ID:
+				set_id((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
 				setValue((String)newValue);
@@ -737,6 +787,9 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport(PROPERTY_CHANGE_SUPPORT_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ID:
+				set_id(_ID_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -788,6 +841,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ID:
+				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
@@ -831,6 +886,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				default: return -1;
 			}
 		}
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case BtsmodelPackage.BTS_CONFIG_ITEM__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -846,6 +909,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 			switch (baseFeatureID)
 			{
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_CONFIG_ITEM__ID;
 				default: return -1;
 			}
 		}
@@ -865,6 +936,13 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 			{
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIG_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIG_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (baseOperationID)
+			{
 				default: return -1;
 			}
 		}
@@ -902,6 +980,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (propertyChangeSupport: ");
 		result.append(propertyChangeSupport);
+		result.append(", _id: ");
+		result.append(_id);
 		result.append(", value: ");
 		result.append(value);
 		result.append(", sortKey: ");

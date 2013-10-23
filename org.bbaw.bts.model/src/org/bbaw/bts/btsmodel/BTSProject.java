@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -11,10 +13,10 @@ package org.bbaw.bts.btsmodel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getDescription <em>Description</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getDbConnection <em>Db Connection</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getDbCollections <em>Db Collections</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,34 +24,8 @@ package org.bbaw.bts.btsmodel;
  * @model
  * @generated
  */
-public interface BTSProject extends BTSDBBaseObject
+public interface BTSProject extends BTSObject, BTSDBBaseObject
 {
-	/**
-	 * Returns the value of the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Name</em>' attribute.
-	 * @see #setName(String)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProject_Name()
-	 * @model required="true"
-	 * @generated
-	 */
-	String getName();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSProject#getName <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Name</em>' attribute.
-	 * @see #getName()
-	 * @generated
-	 */
-	void setName(String value);
-
 	/**
 	 * Returns the value of the '<em><b>Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
@@ -127,5 +103,21 @@ public interface BTSProject extends BTSDBBaseObject
 	 * @generated
 	 */
 	void setDbConnection(BTSDBConnection value);
+
+	/**
+	 * Returns the value of the '<em><b>Db Collections</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSProjectDBCollection}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Db Collections</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Db Collections</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProject_DbCollections()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSProjectDBCollection> getDbCollections();
 
 } // BTSProject

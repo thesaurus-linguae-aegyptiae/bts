@@ -21,7 +21,6 @@ Require-Bundle: javax.annotation,
  org.eclipse.emf.databinding,
  org.eclipse.emf.databinding.edit,
  org.eclipse.e4.tools.services,
- org.bbaw.bts.core.controller,
  org.eclipse.e4.ui.model.workbench;bundle-version="1.0.0",
  org.eclipse.e4.core.di;bundle-version="1.3.0",
  org.eclipse.osgi,
@@ -43,7 +42,11 @@ Require-Bundle: javax.annotation,
  org.eclipse.ocl.common;bundle-version="1.1.0",
  org.eclipse.ocl.common.ui;bundle-version="1.1.0",
  org.eclipse.ocl.doc;bundle-version="3.3.0",
- org.eclipse.ocl.ecore;bundle-version="3.3.0"
+ org.eclipse.ocl.ecore;bundle-version="3.3.0",
+ org.bbaw.bts.core.controller,
+ org.eclipse.core.jobs,
+ org.eclipse.emf.edit.ui;bundle-version="2.9.0",
+ org.bbaw.bts.core.commons
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: lib/ramses-20130515.jar,

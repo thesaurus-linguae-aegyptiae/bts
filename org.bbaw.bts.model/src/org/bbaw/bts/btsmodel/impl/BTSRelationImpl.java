@@ -4,13 +4,9 @@ package org.bbaw.bts.btsmodel.impl;
 
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,7 +25,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *
  * @generated
  */
-public class BTSRelationImpl extends MinimalEObjectImpl.Container implements BTSRelation {
+public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelation {
 	/**
 	 * The default value of the '{@link #getObjectId() <em>Object Id</em>}' attribute.
 	 * <!-- begin-user-doc -->

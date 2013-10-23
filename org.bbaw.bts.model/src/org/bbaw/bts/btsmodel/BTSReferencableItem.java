@@ -11,7 +11,6 @@ package org.bbaw.bts.btsmodel;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getId <em>Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getParent <em>Parent</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getParentId <em>Parent Id</em>}</li>
@@ -22,33 +21,7 @@ package org.bbaw.bts.btsmodel;
  * @model abstract="true"
  * @generated
  */
-public interface BTSReferencableItem extends BTSObject {
-	/**
-	 * Returns the value of the '<em><b>Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Id</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Id</em>' attribute.
-	 * @see #setId(String)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSReferencableItem_Id()
-	 * @model
-	 * @generated
-	 */
-	String getId();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSReferencableItem#getId <em>Id</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Id</em>' attribute.
-	 * @see #getId()
-	 * @generated
-	 */
-	void setId(String value);
-
+public interface BTSReferencableItem extends BTSObject, BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->

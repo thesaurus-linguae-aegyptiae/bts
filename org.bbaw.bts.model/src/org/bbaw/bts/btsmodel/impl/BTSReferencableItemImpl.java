@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSReferencableItem;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -20,7 +21,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl#getId <em>Id</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl#getParent <em>Parent</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl#getParentId <em>Parent Id</em>}</li>
@@ -31,24 +32,24 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements BTSReferencableItem {
 	/**
-	 * The default value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The default value of the '{@link #get_id() <em>id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #get_id()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String ID_EDEFAULT = null;
+	protected static final String _ID_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getId() <em>Id</em>}' attribute.
+	 * The cached value of the '{@link #get_id() <em>id</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getId()
+	 * @see #get_id()
 	 * @generated
 	 * @ordered
 	 */
-	protected String id = ID_EDEFAULT;
+	protected String _id = _ID_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
@@ -124,8 +125,9 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getId() {
-		return id;
+	public String get_id()
+	{
+		return _id;
 	}
 
 	/**
@@ -133,11 +135,12 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setId(String newId) {
-		String oldId = id;
-		id = newId;
+	public void set_id(String new_id)
+	{
+		String old_id = _id;
+		_id = new_id;
 		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID, oldId, id));
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID, old_id, _id));
 	}
 
 	/**
@@ -232,7 +235,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
-				return getId();
+				return get_id();
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
 				return getComment();
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT:
@@ -254,7 +257,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
-				setId((String)newValue);
+				set_id((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
 				setComment((String)newValue);
@@ -279,7 +282,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
-				setId(ID_EDEFAULT);
+				set_id(_ID_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
 				setComment(COMMENT_EDEFAULT);
@@ -304,7 +307,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 		switch (featureID)
 		{
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
-				return ID_EDEFAULT == null ? id != null : !ID_EDEFAULT.equals(id);
+				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT:
@@ -321,12 +324,50 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (id: ");
-		result.append(id);
+		result.append(" (_id: ");
+		result.append(_id);
 		result.append(", comment: ");
 		result.append(comment);
 		result.append(", parentId: ");

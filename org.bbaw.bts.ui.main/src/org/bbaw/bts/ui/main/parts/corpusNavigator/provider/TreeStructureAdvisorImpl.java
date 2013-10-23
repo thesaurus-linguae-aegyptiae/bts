@@ -28,6 +28,6 @@ public class TreeStructureAdvisorImpl extends TreeStructureAdvisor
 			}
 
 		}
-		return super.hasChildren(element);
+		return Boolean.FALSE;
 	}
 }

@@ -1,6 +1,7 @@
 package org.bbaw.bts.ui.main.wizards.newProject;
 
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -40,6 +41,10 @@ public class ProjectConnectionPage extends WizardPage
 		setTitle("Wizard Page title");
 		setDescription("Wizard Page description");
 		this.project = project;
+		if (project.getDbConnection() == null)
+		{
+			project.setDbConnection(BtsmodelFactory.eINSTANCE.createBTSDBConnection());
+		}
 	}
 
 	/**
@@ -75,6 +80,8 @@ public class ProjectConnectionPage extends WizardPage
 
 		textdbPath = new Text(container, SWT.BORDER);
 		textdbPath.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+
+		initializeBindings();
 	}
 
 	private DataBindingContext initializeBindings()
@@ -101,6 +108,7 @@ public class ProjectConnectionPage extends WizardPage
 
 		FeaturePath feature = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_PROJECT__DB_CONNECTION,
 				BtsmodelPackage.Literals.BTSDB_CONNECTION__TYPE);
+
 		IObservableValue model = EMFProperties.value(feature).observe(project);
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(400, txtConnectiontype), model, null, null);

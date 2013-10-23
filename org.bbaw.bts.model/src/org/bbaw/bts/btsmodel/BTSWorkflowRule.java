@@ -4,8 +4,6 @@ package org.bbaw.bts.btsmodel;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>BTS Workflow Rule</b></em>'.
@@ -27,7 +25,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BTSWorkflowRule extends EObject
+public interface BTSWorkflowRule extends BTSIdentifiableItem
 {
 	/**
 	 * Returns the value of the '<em><b>Sub Rules</b></em>' containment reference list.

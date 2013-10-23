@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSWorkflowRuleItem;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSWorkflowRuleItemImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSWorkflowRuleItemImpl#getPriority <em>Priority</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSWorkflowRuleItemImpl#isIgnore <em>Ignore</em>}</li>
  * </ul>
@@ -27,6 +29,26 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  */
 public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl implements BTSWorkflowRuleItem
 {
+	/**
+	 * The default value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String _ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected String _id = _ID_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getPriority() <em>Priority</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -93,6 +115,29 @@ public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl im
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String get_id()
+	{
+		return _id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_id(String new_id)
+	{
+		String old_id = _id;
+		_id = new_id;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID, old_id, _id));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public int getPriority()
 	{
 		return priority;
@@ -144,6 +189,8 @@ public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl im
 	{
 		switch (featureID)
 		{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID:
+				return get_id();
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__PRIORITY:
 				return getPriority();
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__IGNORE:
@@ -162,6 +209,9 @@ public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl im
 	{
 		switch (featureID)
 		{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID:
+				set_id((String)newValue);
+				return;
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__PRIORITY:
 				setPriority((Integer)newValue);
 				return;
@@ -182,6 +232,9 @@ public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl im
 	{
 		switch (featureID)
 		{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID:
+				set_id(_ID_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__PRIORITY:
 				setPriority(PRIORITY_EDEFAULT);
 				return;
@@ -202,6 +255,8 @@ public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl im
 	{
 		switch (featureID)
 		{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID:
+				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__PRIORITY:
 				return priority != PRIORITY_EDEFAULT;
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__IGNORE:
@@ -216,12 +271,52 @@ public abstract class BTSWorkflowRuleItemImpl extends BTSObservableObjectImpl im
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (derivedFeatureID)
+			{
+				case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
+	{
+		if (baseClass == BTSIdentifiableItem.class)
+		{
+			switch (baseFeatureID)
+			{
+				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString()
 	{
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (priority: ");
+		result.append(" (_id: ");
+		result.append(_id);
+		result.append(", priority: ");
 		result.append(priority);
 		result.append(", ignore: ");
 		result.append(ignore);

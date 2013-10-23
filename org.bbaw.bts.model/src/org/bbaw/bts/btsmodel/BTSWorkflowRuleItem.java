@@ -20,7 +20,7 @@ package org.bbaw.bts.btsmodel;
  * @model abstract="true"
  * @generated
  */
-public interface BTSWorkflowRuleItem extends BTSObservableObject
+public interface BTSWorkflowRuleItem extends BTSObservableObject, BTSIdentifiableItem
 {
 	/**
 	 * Returns the value of the '<em><b>Priority</b></em>' attribute.

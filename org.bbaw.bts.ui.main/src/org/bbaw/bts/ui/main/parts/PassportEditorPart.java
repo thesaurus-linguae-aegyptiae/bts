@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.partController.PassportEditorPartController;
@@ -22,8 +23,6 @@ import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -254,12 +253,11 @@ public class PassportEditorPart
 
 	@Inject
 	@Optional
-	void eventReceived(@EventTopic("viewcommunication/*") ISelection selection)
+	void eventReceived(@EventTopic("viewcommunication/*") BTSObject selection)
 	{
-		Object o = ((StructuredSelection) selection).getFirstElement();
-		if (o instanceof BTSCorpusObject)
+		if (selection instanceof BTSCorpusObject)
 		{
-			corpusObject = (BTSCorpusObject) o;
+			corpusObject = (BTSCorpusObject) selection;
 			loadInput(corpusObject);
 		}
 		System.out.println("Passport selection received");
@@ -276,8 +274,10 @@ public class PassportEditorPart
 				SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 		tabFolder.setSimple(false);
 		createMainTabItem(tabFolder);
-		typeCMB_Main.setItems(configurationController.getObjectTypes(configurationController
-				.findObjectType(corpusObject)));
+
+		// FIXME effizierter
+		// typeCMB_Main.setItems(configurationController.getObjectTypes(configurationController
+		// .findObjectType(corpusObject)));
 		databindingMain = initializeDatabindingMain(object);
 		createAdminTabItem(tabFolder);
 		databindingAdmin = initializeDatabindingAdmin(object);
@@ -328,6 +328,14 @@ public class PassportEditorPart
 	public void onFocus()
 	{
 		tabFolder.setFocus();
+
+		if (tabFolder.getItemCount() >= selectionIndex)
+		{
+			tabFolder.setSelection(selectionIndex);
+		} else
+		{
+			tabFolder.setSelection(0);
+		}
 	}
 
 	@Persist

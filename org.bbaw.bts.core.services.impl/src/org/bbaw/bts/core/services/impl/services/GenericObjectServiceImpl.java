@@ -8,10 +8,11 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
+import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
@@ -43,6 +44,9 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	protected String main_corpus;
 
 	protected Class<? extends BTSDBBaseObject> daoType;
+
+	@Inject
+	private BTSEvaluationService evaluationService;
 
 	@SuppressWarnings("unchecked")
 	public GenericObjectServiceImpl()
@@ -90,52 +94,18 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Override
 	public abstract List<E> list();
 
-	private void loadChild(BTSCorpusObject parent, BTSRelation rel)
-	{
-		// BTSCorpusObject child = corpusObjectDao.find(rel.getObjectId());
-		// parent.getChildren().add(child);
+	public abstract List<E> query(BTSQueryRequest query);
 
-		// FIXME umbauen auf view und suche nach related objects
+	public List<E> filter(List<E> objects)
+	{
+		return evaluationService.filter(objects);
 
 	}
 
-	// @Inject
-	// public void trackMainProject(@Preference(nodePath = "org.bbaw.bts.dao",
-	// value = "main_project") String main_project)
-	// {
-	// this.main_project = main_project;
-	// System.out.println("main_project changed " + main_project);
-	// Preferences preferences =
-	// ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.dao");
-	// this.main_project = preferences.get("main_project", "aaew");
-	// System.out.println(this.main_project);
-	// }
-	//
-	// @Inject
-	// public void trackActiveProjects(
-	// @Preference(nodePath = "org.bbaw.bts.dao", value = "active_projects")
-	// String active_projects)
-	// {
-	// this.active_projects = active_projects;
-	//
-	// }
-	//
-	// @Inject
-	// @Optional
-	// public void trackActiveCorpora(
-	// @Preference(nodePath = "org.bbaw.bts.dao", value = "active_corpora")
-	// String active_corpora)
-	// {
-	// this.active_corpora = active_corpora;
-	//
-	// }
-	//
-	// @Inject
-	// @Optional
-	// public void trackMainCorpus(@Preference(nodePath = "org.bbaw.bts.dao",
-	// value = "main_corpus") String main_corpus)
-	// {
-	// this.main_corpus = main_corpus;
-	//
-	// }
+	@Override
+	public List<E> list(String queryId, String dbPath)
+	{
+		return null;
+
+	}
 }

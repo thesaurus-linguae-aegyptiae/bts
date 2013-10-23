@@ -3,6 +3,7 @@ package org.bbaw.bts.core.services;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public interface GenericObjectService<E extends BTSDBBaseObject, K>
 {
@@ -18,5 +19,11 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	E find(K key);
 
 	List<E> list();
+
+	List<E> list(String dbPath, String queryId);
+
+	<T> List<T> query(BTSQueryRequest query);
+
+	List<E> filter(List<E> objects);
 
 }

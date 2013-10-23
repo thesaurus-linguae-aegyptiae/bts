@@ -4,22 +4,23 @@ package org.bbaw.bts.btsmodel.provider;
 
 
 import java.beans.PropertyChangeSupport;
-
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.BTSWorkflowRuleItem;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
+import org.eclipse.emf.edit.provider.IItemColorProvider;
+import org.eclipse.emf.edit.provider.IItemFontProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemColorProvider;
+import org.eclipse.emf.edit.provider.ITableItemFontProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
@@ -33,11 +34,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 public class BTSWorkflowRuleItemItemProvider
 	extends BTSObservableObjectItemProvider
 	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
 {
 	/**
 	 * This constructs an instance from a factory and a notifier.
@@ -63,10 +60,34 @@ public class BTSWorkflowRuleItemItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
+			add_idPropertyDescriptor(object);
 			addPriorityPropertyDescriptor(object);
 			addIgnorePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void add_idPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSIdentifiableItem__id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSIdentifiableItem__id_feature", "_UI_BTSIdentifiableItem_type"),
+				 BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -145,6 +166,7 @@ public class BTSWorkflowRuleItemItemProvider
 
 		switch (notification.getFeatureID(BTSWorkflowRuleItem.class))
 		{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID:
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__PRIORITY:
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__IGNORE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

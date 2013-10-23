@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" name="org.bbaw.bts.core.dao.BTSTCObjectDao">
-   <implementation class="org.bbaw.bts.dao.couchDB.BTSTCObjectDaoImpl"/>
+   <implementation class="org.bbaw.bts.dao.couchDB.impl.BTSTCObjectDaoImpl"/>
    <service>
       <provide interface="org.bbaw.bts.core.dao.BTSTCObjectDao"/>
    </service>

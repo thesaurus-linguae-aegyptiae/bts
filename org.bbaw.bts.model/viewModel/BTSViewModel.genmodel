@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.bbaw.bts.model/src" modelPluginID="org.bbaw.bts.model"
+    modelName="BTSViewModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    colorProviders="true" fontProviders="true" operationReflection="true" importOrganizing="true">
+  <foreignModel>BTSViewModel.ecore</foreignModel>
+  <genPackages prefix="Btsviewmodel" basePackage="org.bbaw.bts" disposableProviderFactory="true"
+      childCreationExtenders="true" ecorePackage="BTSViewModel.ecore#/">
+    <genDataTypes ecoreDataType="BTSViewModel.ecore#//BTSObject"/>
+    <genDataTypes ecoreDataType="BTSViewModel.ecore#//PropertyChangeSupport"/>
+    <genDataTypes ecoreDataType="BTSViewModel.ecore#//PropertyChangeListener"/>
+    <genDataTypes ecoreDataType="BTSViewModel.ecore#//PropertyChangeEvent"/>
+    <genClasses ecoreClass="BTSViewModel.ecore#//TreeNodeWrapper">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSViewModel.ecore#//TreeNodeWrapper/parent"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference BTSViewModel.ecore#//TreeNodeWrapper/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/object"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/propertyChangeSupport"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/childrenLoaded"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/label"/>
+      <genOperations ecoreOperation="BTSViewModel.ecore#//TreeNodeWrapper/addPropertyChangeListener">
+        <genParameters ecoreParameter="BTSViewModel.ecore#//TreeNodeWrapper/addPropertyChangeListener/propertyChangeListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="BTSViewModel.ecore#//TreeNodeWrapper/removePropertyChangeListener">
+        <genParameters ecoreParameter="BTSViewModel.ecore#//TreeNodeWrapper/removePropertyChangeListener/propertyChangeListener"/>
+      </genOperations>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

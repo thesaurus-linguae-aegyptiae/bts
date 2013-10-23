@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSTCObjectDao;
 import org.bbaw.bts.core.services.BTSTCObjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Creatable;
 
 @Creatable
@@ -102,7 +103,22 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 				objects.addAll(bTSTCObjectDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
 		}
-		return objects;
+		return filter(objects);
+	}
+
+	@Override
+	public List<BTSTCObject> query(BTSQueryRequest query)
+	{
+		List<BTSTCObject> objects = new Vector<BTSTCObject>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			{
+				objects.addAll(bTSTCObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return filter(objects);
 	}
 
 }

@@ -4,8 +4,6 @@ package org.bbaw.bts.btsmodel;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.emf.ecore.EObject;
-
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Administrativ Data Object</b></em>'.
@@ -25,7 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model abstract="true"
  * @generated
  */
-public interface AdministrativDataObject extends EObject {
+public interface AdministrativDataObject extends BTSObservableObject {
 	/**
 	 * Returns the value of the '<em><b>Revisions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSRevision}.
