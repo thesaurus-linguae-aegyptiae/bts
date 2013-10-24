@@ -39,13 +39,22 @@ public class DBInstallationSettingsPage extends WizardPage
 	private Link btnBrowseFileSystem;
 	private Label errorLabel;
 	private IObservableValue uiElement;
+	private String db_dir;
+	private String db_port;
 
 	/**
 	 * Create the wizard.
+	 * 
+	 * @param db_port
+	 * @param db_dir
 	 */
-	public DBInstallationSettingsPage()
+	public DBInstallationSettingsPage(String db_dir, String db_port)
 	{
 		super("wizardPage");
+		this.db_dir = db_dir;
+		this.db_port = db_port;
+		settings.setDir(db_dir);
+		settings.setPort(db_port);
 		setTitle("Database Installation Settings");
 		setDescription("BTS will install a CouchDB database and the required Erlang Runtime Environment. You can change the default installation directory.");
 	}

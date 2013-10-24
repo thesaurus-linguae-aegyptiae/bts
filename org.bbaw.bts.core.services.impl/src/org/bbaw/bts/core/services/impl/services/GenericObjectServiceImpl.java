@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
@@ -26,21 +27,21 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	protected IDService idService;
 
 	@Inject
-	@Preference(value = "active_projects", nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_ACITVE_PROJECTS, nodePath = "org.bbaw.bts.app")
 	protected String active_projects;
 
 	@Inject
-	@Preference(value = "main_project", nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_MAIN_PROJECT, nodePath = "org.bbaw.bts.app")
 	protected String main_project;
 
 	@Inject
 	@Optional
-	@Preference(value = "active_corpora", nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
 	protected String active_corpora;
 
 	@Inject
 	@Optional
-	@Preference(value = "main_corpus", nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS, nodePath = "org.bbaw.bts.app")
 	protected String main_corpus;
 
 	protected Class<? extends BTSDBBaseObject> daoType;

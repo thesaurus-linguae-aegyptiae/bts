@@ -1,18 +1,23 @@
 package org.bbaw.bts.ui.main.wizards.installation;
 
+import java.util.List;
+
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
 import org.bbaw.bts.ui.main.wizards.installation.support.Connection;
+import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.Wizard;
+import org.osgi.service.prefs.Preferences;
 
 public class InstallationWizard extends Wizard
 {
 
 	WelcomePage welcomePage = new WelcomePage();
-	ConnectToServerPage connectServerPage = new ConnectToServerPage();
-	SelectProjectsPage projectPage = new SelectProjectsPage();
-	DBInstallationSettingsPage dbPage = new DBInstallationSettingsPage();
+	ConnectToServerPage connectServerPage;
+	SelectProjectsPage projectPage;
+	DBInstallationSettingsPage dbPage;
 	LocalCreateUserPage createUserPage = new LocalCreateUserPage();
 	private ApplicationStartupController startupController;
 	private IEclipseContext context;
@@ -28,6 +33,16 @@ public class InstallationWizard extends Wizard
 	@Override
 	public void addPages()
 	{
+
+		Preferences preferences = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
+		connectServerPage = new ConnectToServerPage(preferences.get(BTSPluginIDs.PREF_REMOTE_DB_URL,
+				"http://127.0.0.1:5985"));
+
+		projectPage = new SelectProjectsPage(preferences.get(BTSPluginIDs.PREF_ACITVE_PROJECTS, null), preferences.get(
+				BTSPluginIDs.PREF_MAIN_PROJECT, null));
+
+		dbPage = new DBInstallationSettingsPage(startupController.getDBInstallationDir(), preferences.get(
+				BTSPluginIDs.PREF_DB_PORT, null));
 		addPage(welcomePage);
 		addPage(connectServerPage);
 		addPage(projectPage);
@@ -80,6 +95,18 @@ public class InstallationWizard extends Wizard
 	public Connection getRemoteConnection()
 	{
 		return this.remoteConnection;
+	}
+
+	public void setActiveProjects(List<String> activeProjectSelectionsAsStringList)
+	{
+		// TODO Auto-generated method stub
+
+	}
+
+	public void setMainProject(Object mainProject)
+	{
+		// TODO Auto-generated method stub
+
 	}
 
 }

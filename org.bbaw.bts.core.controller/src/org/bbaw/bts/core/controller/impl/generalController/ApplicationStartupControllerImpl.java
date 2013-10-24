@@ -8,6 +8,8 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.core.commons.InternetAccessTester;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
@@ -18,6 +20,8 @@ import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
 import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.runtime.preferences.DefaultScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -30,6 +34,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
+import org.osgi.service.prefs.Preferences;
 
 public class ApplicationStartupControllerImpl implements ApplicationStartupController
 {
@@ -80,6 +85,10 @@ public class ApplicationStartupControllerImpl implements ApplicationStartupContr
 
 	@Inject
 	private ISplashScreenController splashController;
+
+	@Inject
+	@Preference(nodePath = "org.bbaw.bts.dao")
+	private IEclipsePreferences prefs;
 
 	@Override
 	public void applicationStartup(IEclipseContext context, BTSProjectService projectService,
@@ -368,8 +377,31 @@ public class ApplicationStartupControllerImpl implements ApplicationStartupContr
 	}
 
 	@Override
-	public List<BTSProject> loadRemoteProjects(String url, String user, String password) throws MalformedURLException
+	public void setRemoteDBConnection(String url, String user, String password) throws MalformedURLException
 	{
-		return projectService.listRemoteProjects(url, user, password);
+		prefs.put(BTSPluginIDs.PREF_REMOTE_DB_URL, url);
+		prefs.put(BTSPluginIDs.PREF_AUTHENTICATED_USER, user);
+		prefs.put(BTSPluginIDs.PREF_AUTHENTICATED_USER_PASSWORD, password);
+	}
+
+	@Override
+	public List<BTSProject> loadRemoteProjects() throws MalformedURLException
+	{
+		return projectService.listRemoteProjects();
+	}
+
+	@Override
+	public String getDBInstallationDir()
+	{
+		Preferences preferences = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
+		Preferences installtionPrefs = preferences.node(BTSPluginIDs.PREF_NODE_INSTALLATION);
+		String dir = installtionPrefs.get(BTSPluginIDs.PREF_DB_DIR, null);
+		if (dir == null || dir.startsWith("./") || dir.startsWith(".\\"))
+		{
+			dir = BTSConstants.BTS_HOME + BTSConstants.FS + dir.substring(2, dir.length());
+			System.out.println(dir);
+
+		}
+		return dir;
 	}
 }

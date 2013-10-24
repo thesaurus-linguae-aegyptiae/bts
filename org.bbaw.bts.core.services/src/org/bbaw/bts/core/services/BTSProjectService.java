@@ -7,6 +7,6 @@ import org.bbaw.bts.btsmodel.BTSProject;
 public interface BTSProjectService extends GenericObjectService<BTSProject, String>
 {
 
-	List<BTSProject> listRemoteProjects(String url, String user, String password);
+	List<BTSProject> listRemoteProjects();
 
 }

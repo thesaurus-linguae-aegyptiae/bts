@@ -282,9 +282,6 @@ public class CorpusNavigatorPart
 	{
 		//
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-		// BtsviewmodelAdapterFactory factory = new
-		// BtsviewmodelAdapterFactory();
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
 		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
 

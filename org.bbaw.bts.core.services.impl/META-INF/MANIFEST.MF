@@ -24,6 +24,7 @@ Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
  org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"
 Import-Package: javax.inject,
  org.bbaw.bts.commons,
+ org.bbaw.bts.core.remote.dao,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.e4.core.di.extensions,
  org.eclipse.emf.common.util,

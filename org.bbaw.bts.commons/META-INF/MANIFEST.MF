@@ -6,3 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.commons
+Import-Package: org.eclipse.core.runtime,
+ org.eclipse.jface.resource,
+ org.eclipse.ui.plugin,
+ org.osgi.framework;version="1.7.0"
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.bbaw.bts.commons.BTSCommonsActivator

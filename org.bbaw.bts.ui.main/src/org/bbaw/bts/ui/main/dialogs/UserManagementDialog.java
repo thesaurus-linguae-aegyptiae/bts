@@ -1,11 +1,15 @@
 package org.bbaw.bts.ui.main.dialogs;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -33,6 +37,8 @@ import org.eclipse.swt.widgets.Tree;
 
 public class UserManagementDialog extends TitleAreaDialog
 {
+	@Inject
+	private UserManagerController userManagerController;
 	private Text textName_Group;
 	private Text textType_Group;
 	private Text textComment_Group;
@@ -50,7 +56,7 @@ public class UserManagementDialog extends TitleAreaDialog
 	private TreeViewer treeViewer;
 	private Composite composite_right;
 	protected StructuredSelection selection;
-	private ArrayList<BTSUserGroup> userGroups;
+	private List<BTSUserGroup> userGroups;
 	private TreeNodeWrapper root;
 	private BTSUser selectedUser;
 	private BTSUserGroup selectedGroup;

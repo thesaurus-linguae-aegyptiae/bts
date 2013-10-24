@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSProjectDao;
+import org.bbaw.bts.core.remote.dao.RemoteBTSProjectDao;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -16,6 +17,9 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 {
 	@Inject
 	private BTSProjectDao projectDao;
+
+	@Inject
+	private RemoteBTSProjectDao remoteprojectDao;
 
 	@Override
 	public BTSProject createNew()
@@ -71,9 +75,8 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	}
 
 	@Override
-	public List<BTSProject> listRemoteProjects(String url, String user, String password)
+	public List<BTSProject> listRemoteProjects()
 	{
-		projectDao.
-		return null;
+		return remoteprojectDao.list(ServiceConstants.ADMIN);
 	}
 }

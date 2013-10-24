@@ -33,7 +33,7 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 	@Override
 	public List<BTSTextCorpus> list(String path)
 	{
-		List<String> allDocs = new ArrayList<String>(0);
+		List<String> allDocs = new ArrayList<String>();
 		View view;
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		try

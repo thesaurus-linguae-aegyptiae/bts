@@ -6,8 +6,11 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ClassPath: .,
- lib/opal-0.9.5.2.jar
-Export-Package: org.bbaw.bts.ui.commons.controldecoration,
+ lib/opal-0.9.5.2.jar,
+ lib/rcptoolbox.1.0.10.jar
+Export-Package: com.richclientgui.toolbox.duallists,
+ com.richclientgui.toolbox.propagate,
+ org.bbaw.bts.ui.commons.controldecoration,
  org.bbaw.bts.ui.commons.validator,
  org.mihalis.opal,
  org.mihalis.opal.itemSelector,

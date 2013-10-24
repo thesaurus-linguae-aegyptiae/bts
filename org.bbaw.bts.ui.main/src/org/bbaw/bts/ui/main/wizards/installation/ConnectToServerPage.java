@@ -44,15 +44,18 @@ public class ConnectToServerPage extends WizardPage
 	private Label errorLabel;
 	private IObservableValue uiElement;
 	private ApplicationStartupController startupController;
+	private String remote_db_url;
 
 	/**
 	 * Create the wizard.
 	 */
-	public ConnectToServerPage()
+	public ConnectToServerPage(String remote_db_url)
 	{
 		super("wizardPage");
 		setTitle("Server Connection");
+		this.remote_db_url = remote_db_url;
 		setDescription("You stated that you have the URL for a shared collaboration server for BTS. Now, BTS will try to connect to it.");
+		connection.setUrl(remote_db_url);
 	}
 
 	/**
@@ -125,6 +128,7 @@ public class ConnectToServerPage extends WizardPage
 		lblRequired.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 1, 1));
 		lblRequired.setText("* = required");
 		m_bindingContext = initDataBindings();
+		setPageComplete(connectionOk);
 	}
 
 	private boolean validateConnection()
