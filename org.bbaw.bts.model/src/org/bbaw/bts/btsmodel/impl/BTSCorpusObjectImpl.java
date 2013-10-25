@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -32,6 +33,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getPassport <em>Passport</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getCorpusPrefix <em>Corpus Prefix</em>}</li>
@@ -115,6 +118,24 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * @ordered
 	 */
 	protected boolean locked = LOCKED_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getUpdaters() <em>Updaters</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpdaters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> updaters;
+	/**
+	 * The cached value of the '{@link #getReaders() <em>Readers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReaders()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> readers;
 	/**
 	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -271,6 +292,34 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		locked = newLocked;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED, oldLocked, locked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getUpdaters()
+	{
+		if (updaters == null)
+		{
+			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS);
+		}
+		return updaters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getReaders()
+	{
+		if (readers == null)
+		{
+			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__READERS);
+		}
+		return readers;
 	}
 
 	/**
@@ -431,6 +480,10 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return getProject();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
 				return isLocked();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS:
+				return getUpdaters();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
+				return getReaders();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return getRelations();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -464,6 +517,14 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
 				setLocked((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS:
+				getUpdaters().clear();
+				getUpdaters().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
+				getReaders().clear();
+				getReaders().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
@@ -503,6 +564,12 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
 				setLocked(LOCKED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS:
+				getUpdaters().clear();
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
+				getReaders().clear();
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				return;
@@ -536,6 +603,10 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
 				return locked != LOCKED_EDEFAULT;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS:
+				return updaters != null && !updaters.isEmpty();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
+				return readers != null && !readers.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -570,6 +641,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
 				default: return -1;
 			}
 		}
@@ -598,6 +671,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_CORPUS_OBJECT__REV;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_CORPUS_OBJECT__READERS;
 				default: return -1;
 			}
 		}
@@ -622,6 +697,10 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		result.append(project);
 		result.append(", locked: ");
 		result.append(locked);
+		result.append(", updaters: ");
+		result.append(updaters);
+		result.append(", readers: ");
+		result.append(readers);
 		result.append(", corpusPrefix: ");
 		result.append(corpusPrefix);
 		result.append(", workPhase: ");

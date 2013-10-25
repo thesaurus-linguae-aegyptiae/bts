@@ -15,6 +15,7 @@ import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusHeader;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSDate;
 import org.bbaw.bts.btsmodel.BTSDelimiter;
@@ -437,6 +438,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	private EClass btsIdentifiableItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsdbCollectionRoleDescEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1487,6 +1495,26 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSDBBaseObject_Updaters()
+	{
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSDBBaseObject_Readers()
+	{
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSTextCorpus() {
 		return btsTextCorpusEClass;
 	}
@@ -1534,16 +1562,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSRevision_TimeStamp() {
 		return (EAttribute)btsRevisionEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSRevision_RightsRevoked()
-	{
-		return (EAttribute)btsRevisionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2570,6 +2588,16 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBTSProjectDBCollection_RoleDescriptions()
+	{
+		return (EReference)btsProjectDBCollectionEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSIdentifiableItem()
 	{
 		return btsIdentifiableItemEClass;
@@ -2583,6 +2611,46 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	public EAttribute getBTSIdentifiableItem__id()
 	{
 		return (EAttribute)btsIdentifiableItemEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBTSDBCollectionRoleDesc()
+	{
+		return btsdbCollectionRoleDescEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSDBCollectionRoleDesc_RoleName()
+	{
+		return (EAttribute)btsdbCollectionRoleDescEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSDBCollectionRoleDesc_UserNames()
+	{
+		return (EAttribute)btsdbCollectionRoleDescEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSDBCollectionRoleDesc_UserRoles()
+	{
+		return (EAttribute)btsdbCollectionRoleDescEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -2770,6 +2838,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__REV);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__PROJECT);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__LOCKED);
+		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__UPDATERS);
+		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__READERS);
 
 		btsTextCorpusEClass = createEClass(BTS_TEXT_CORPUS);
 		createEReference(btsTextCorpusEClass, BTS_TEXT_CORPUS__HEADER);
@@ -2778,7 +2848,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsRevisionEClass, BTS_REVISION__REF);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__USER_ID);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__TIME_STAMP);
-		createEAttribute(btsRevisionEClass, BTS_REVISION__RIGHTS_REVOKED);
 
 		btsImageEClass = createEClass(BTS_IMAGE);
 		createEAttribute(btsImageEClass, BTS_IMAGE__MEDIA_TYPE);
@@ -2911,9 +2980,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME);
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__INDEXED);
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED);
+		createEReference(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS);
 
 		btsIdentifiableItemEClass = createEClass(BTS_IDENTIFIABLE_ITEM);
 		createEAttribute(btsIdentifiableItemEClass, BTS_IDENTIFIABLE_ITEM__ID);
+
+		btsdbCollectionRoleDescEClass = createEClass(BTSDB_COLLECTION_ROLE_DESC);
+		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME);
+		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__USER_NAMES);
+		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__USER_ROLES);
 
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
@@ -2999,6 +3074,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsWorkflowRuleItemEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		dbLeaseEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsProjectDBCollectionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		btsdbCollectionRoleDescEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(btstcObjectEClass, BTSTCObject.class, "BTSTCObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3131,6 +3207,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSDBBaseObject__rev(), ecorePackage.getEString(), "_rev", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Project(), ecorePackage.getEString(), "project", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_Updaters(), ecorePackage.getEString(), "updaters", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_Readers(), ecorePackage.getEString(), "readers", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsTextCorpusEClass, BTSTextCorpus.class, "BTSTextCorpus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTextCorpus_Header(), this.getBTSCorpusHeader(), null, "header", null, 0, 1, BTSTextCorpus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3139,7 +3217,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSRevision_Ref(), ecorePackage.getEInt(), "ref", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSRevision_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSRevision_TimeStamp(), ecorePackage.getEDate(), "timeStamp", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSRevision_RightsRevoked(), ecorePackage.getEBoolean(), "rightsRevoked", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsImageEClass, BTSImage.class, "BTSImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSImage_MediaType(), ecorePackage.getEString(), "mediaType", null, 0, 1, BTSImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3282,9 +3359,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSProjectDBCollection_CollectionName(), ecorePackage.getEString(), "collectionName", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSProjectDBCollection_Indexed(), ecorePackage.getEBoolean(), "indexed", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSProjectDBCollection_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSProjectDBCollection_RoleDescriptions(), this.getBTSDBCollectionRoleDesc(), null, "roleDescriptions", null, 0, -1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsIdentifiableItemEClass, BTSIdentifiableItem.class, "BTSIdentifiableItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSIdentifiableItem__id(), ecorePackage.getEString(), "_id", null, 0, 1, BTSIdentifiableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsdbCollectionRoleDescEClass, BTSDBCollectionRoleDesc.class, "BTSDBCollectionRoleDesc", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBTSDBCollectionRoleDesc_RoleName(), ecorePackage.getEString(), "roleName", null, 0, 1, BTSDBCollectionRoleDesc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBCollectionRoleDesc_UserNames(), ecorePackage.getEString(), "userNames", null, 0, -1, BTSDBCollectionRoleDesc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBCollectionRoleDesc_UserRoles(), ecorePackage.getEString(), "userRoles", null, 0, -1, BTSDBCollectionRoleDesc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

@@ -1039,6 +1039,31 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSDBCollectionRoleDescItemProvider btsdbCollectionRoleDescItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSDBCollectionRoleDescAdapter()
+	{
+		if (btsdbCollectionRoleDescItemProvider == null)
+		{
+			btsdbCollectionRoleDescItemProvider = new BTSDBCollectionRoleDescItemProvider(this);
+		}
+
+		return btsdbCollectionRoleDescItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1209,6 +1234,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsOperatorItemProvider != null) btsOperatorItemProvider.dispose();
 		if (dbLeaseItemProvider != null) dbLeaseItemProvider.dispose();
 		if (btsProjectDBCollectionItemProvider != null) btsProjectDBCollectionItemProvider.dispose();
+		if (btsdbCollectionRoleDescItemProvider != null) btsdbCollectionRoleDescItemProvider.dispose();
 	}
 
 }

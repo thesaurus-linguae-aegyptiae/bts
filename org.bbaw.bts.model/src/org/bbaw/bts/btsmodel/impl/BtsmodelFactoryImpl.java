@@ -5,6 +5,7 @@ package org.bbaw.bts.btsmodel.impl;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
+import org.bbaw.bts.btsmodel.*;
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
@@ -144,6 +145,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTS_OPERATOR: return createBTSOperator();
 			case BtsmodelPackage.DB_LEASE: return createDBLease();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION: return createBTSProjectDBCollection();
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: return createBTSDBCollectionRoleDesc();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -665,6 +667,17 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		BTSProjectDBCollectionImpl btsProjectDBCollection = new BTSProjectDBCollectionImpl();
 		setIdentifiableId(btsProjectDBCollection);
 		return btsProjectDBCollection;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSDBCollectionRoleDesc createBTSDBCollectionRoleDesc()
+	{
+		BTSDBCollectionRoleDescImpl btsdbCollectionRoleDesc = new BTSDBCollectionRoleDescImpl();
+		return btsdbCollectionRoleDesc;
 	}
 
 	/**

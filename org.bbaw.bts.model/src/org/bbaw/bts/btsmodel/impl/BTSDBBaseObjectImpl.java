@@ -2,11 +2,14 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.util.Collection;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -17,6 +20,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getReaders <em>Readers</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +88,26 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 * @ordered
 	 */
 	protected boolean locked = LOCKED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getUpdaters() <em>Updaters</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpdaters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> updaters;
+
+	/**
+	 * The cached value of the '{@link #getReaders() <em>Readers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReaders()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> readers;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -171,6 +196,34 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getUpdaters()
+	{
+		if (updaters == null)
+		{
+			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS);
+		}
+		return updaters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getReaders()
+	{
+		if (readers == null)
+		{
+			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_BASE_OBJECT__READERS);
+		}
+		return readers;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -185,6 +238,10 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return getProject();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
 				return isLocked();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS:
+				return getUpdaters();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
+				return getReaders();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -193,6 +250,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
@@ -206,6 +264,14 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
 				setLocked((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS:
+				getUpdaters().clear();
+				getUpdaters().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
+				getReaders().clear();
+				getReaders().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,6 +295,12 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
 				setLocked(LOCKED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS:
+				getUpdaters().clear();
+				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
+				getReaders().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -248,6 +320,10 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
 				return locked != LOCKED_EDEFAULT;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS:
+				return updaters != null && !updaters.isEmpty();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
+				return readers != null && !readers.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -268,6 +344,10 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 		result.append(project);
 		result.append(", locked: ");
 		result.append(locked);
+		result.append(", updaters: ");
+		result.append(updaters);
+		result.append(", readers: ");
+		result.append(readers);
 		result.append(')');
 		return result.toString();
 	}

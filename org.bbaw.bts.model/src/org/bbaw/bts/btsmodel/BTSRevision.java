@@ -15,7 +15,6 @@ import java.util.Date;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSRevision#getRef <em>Ref</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSRevision#getUserId <em>User Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSRevision#getTimeStamp <em>Time Stamp</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSRevision#isRightsRevoked <em>Rights Revoked</em>}</li>
  * </ul>
  * </p>
  *
@@ -101,31 +100,5 @@ public interface BTSRevision extends BTSIdentifiableItem {
 	 * @generated
 	 */
 	void setTimeStamp(Date value);
-
-	/**
-	 * Returns the value of the '<em><b>Rights Revoked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Rights Revoked</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Rights Revoked</em>' attribute.
-	 * @see #setRightsRevoked(boolean)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSRevision_RightsRevoked()
-	 * @model
-	 * @generated
-	 */
-	boolean isRightsRevoked();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSRevision#isRightsRevoked <em>Rights Revoked</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Rights Revoked</em>' attribute.
-	 * @see #isRightsRevoked()
-	 * @generated
-	 */
-	void setRightsRevoked(boolean value);
 
 } // BTSRevision

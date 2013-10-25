@@ -1,7 +1,6 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.List;
-import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -31,21 +30,21 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	@Override
 	public boolean save(BTSUserGroup entity)
 	{
-		userGroupDao.add(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
+		userGroupDao.add(entity, ServiceConstants.ADMIN);
 		return false;
 	}
 
 	@Override
 	public void update(BTSUserGroup entity)
 	{
-		userGroupDao.update(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
+		userGroupDao.update(entity, ServiceConstants.ADMIN);
 
 	}
 
 	@Override
 	public void remove(BTSUserGroup entity)
 	{
-		userGroupDao.remove(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
+		userGroupDao.remove(entity, ServiceConstants.ADMIN);
 
 	}
 
@@ -53,18 +52,10 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	public BTSUserGroup find(String key)
 	{
 		BTSUserGroup userGroup = null;
-		userGroup = userGroupDao.find(key, main_project + ServiceConstants.ADMIN_SUFFIX);
+		userGroup = userGroupDao.find(key, ServiceConstants.ADMIN);
 		if (userGroup != null)
 		{
 			return userGroup;
-		}
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			userGroup = userGroupDao.find(key, p + ServiceConstants.ADMIN_SUFFIX);
-			if (userGroup != null)
-			{
-				return userGroup;
-			}
 		}
 		return null;
 	}
@@ -72,23 +63,14 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	@Override
 	public List<BTSUserGroup> list()
 	{
-		List<BTSUserGroup> userGroups = new Vector<BTSUserGroup>();
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			userGroups.addAll(userGroupDao.list(p + ServiceConstants.ADMIN_SUFFIX));
-		}
+		List<BTSUserGroup> userGroups = userGroupDao.list(ServiceConstants.ADMIN);
 		return filter(userGroups);
 	}
 
 	@Override
 	public List<BTSUserGroup> query(BTSQueryRequest query)
 	{
-		List<BTSUserGroup> objects = new Vector<BTSUserGroup>();
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			objects.addAll(userGroupDao.query(query, p + ServiceConstants.ADMIN_SUFFIX, p
-					+ ServiceConstants.ADMIN_SUFFIX));
-		}
+		List<BTSUserGroup> objects = userGroupDao.query(query, ServiceConstants.ADMIN, ServiceConstants.ADMIN);
 		return filter(objects);
 	}
 

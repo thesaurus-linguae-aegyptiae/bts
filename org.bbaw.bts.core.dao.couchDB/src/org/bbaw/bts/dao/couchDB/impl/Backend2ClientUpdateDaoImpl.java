@@ -36,6 +36,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	@Inject
 	private IEclipseContext context;
+	@Inject
 	private GeneralPurposeDao generalPurposeDao;
 	private List<Backend2ClientUpdateListener> listeners = new Vector<Backend2ClientUpdateListener>(1);
 	private String since;
@@ -139,9 +140,41 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 	}
 
 	@Override
-	public void runAndListenToUpdates(CorpusObjectDao corpusObjectDao, String dbCollection)
+	public void runAndListenToUpdates(CorpusObjectDao corpusObjectDao, final String dbCollection)
 	{
+		final CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, dbCollection);
+		CouchDbInfo dbInfo = client.context().info();
+		since = dbInfo.getUpdateSeq();
+		// feed type continuous
+		Runnable runnable = new Runnable()
+		{
+			public void run()
+			{
+				Changes changes = client.changes().includeDocs(true).since(since)
+						.heartBeat(DaoConstants.CHANGES_HEARTBEAT)
 
+						.continuousChanges();
+				changesMap.put(dbCollection, changes);
+				while (changes.hasNext())
+				{
+					// System.out.println("check for changes");
+					ChangesResult.Row feed = changes.next();
+
+					if (feed != null)
+					{
+						String docId = feed.getId();
+						try
+						{
+							signalUpdate(feed, docId, dbCollection);
+						} catch (Exception e)
+						{
+							e.printStackTrace();
+						}
+					}
+				}
+			}
+		};
+		new Thread(runnable).start();
 	}
 
 	@Override

@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -14,6 +16,7 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getCollectionName <em>Collection Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isIndexed <em>Indexed</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isSynchronized <em>Synchronized</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getRoleDescriptions <em>Role Descriptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,5 +103,21 @@ public interface BTSProjectDBCollection extends BTSIdentifiableItem
 	 * @generated
 	 */
 	void setSynchronized(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Role Descriptions</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Role Descriptions</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Role Descriptions</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProjectDBCollection_RoleDescriptions()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSDBCollectionRoleDesc> getRoleDescriptions();
 
 } // BTSProjectDBCollection

@@ -137,6 +137,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/_rev"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/project"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/locked"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/updaters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/readers"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTextCorpus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTextCorpus/header"/>
@@ -145,7 +147,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/ref"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/userId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/timeStamp"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRevision/rightsRevoked"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSImage">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSImage/mediaType"/>
@@ -285,9 +286,15 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/collectionName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/indexed"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/synchronized"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSProjectDBCollection/roleDescriptions"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSIdentifiableItem">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSIdentifiableItem/_id"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSDBCollectionRoleDesc">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/roleName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/userNames"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/userRoles"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

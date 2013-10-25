@@ -299,22 +299,28 @@ public class CorpusNavigatorPart
 			{
 				selection = (StructuredSelection) event.getSelection();
 				System.out.println(event.getSelection());
-				TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
-				BTSObject o = (BTSObject) tn.getObject();
-				if (o instanceof BTSCorpusObject)
+				if (selection.getFirstElement() != null && selection.getFirstElement() instanceof TreeNodeWrapper)
 				{
-					selectedTreeObject = (BTSCorpusObject) o;
+					TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
+					if (tn.getObject() != null)
+					{
+						BTSObject o = (BTSObject) tn.getObject();
+						if (o instanceof BTSCorpusObject)
+						{
+							selectedTreeObject = (BTSCorpusObject) o;
+	
+						}
+						if (!tn.isChildrenLoaded())
+						{
+							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
+							parents.add(tn);
+							loadChildren(parents, false);
+						}
+						selectionService.setSelection(o);
+						eventBroker.send("viewcommunication/syncEvent", o);
+					}
 
 				}
-				if (!tn.isChildrenLoaded())
-				{
-					List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
-					parents.add(tn);
-					loadChildren(parents, false);
-				}
-				selectionService.setSelection(o);
-				eventBroker.send("viewcommunication/syncEvent", o);
-
 			}
 		};
 

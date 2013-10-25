@@ -50,6 +50,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_PUU4ICamEeOWXom3xTHUZA" elementId="org.bbaw.bts.ui.main.handler.createNewProject" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.CreateNewProjectHandler" command="_KXYdACamEeOWXom3xTHUZA"/>
     <elements xsi:type="commands:Handler" xmi:id="_mAihADDQEeOcKK6bB3llFg" elementId="org.bbaw.bts.ui.main.handler.editProject" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.EditProjectHandler" command="_hkOGsDDQEeOcKK6bB3llFg"/>
     <elements xsi:type="commands:Handler" xmi:id="_fEvzMDpKEeOBQZ1FHdD7_g" elementId="TEST" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER" command="_cn-10DpKEeOBQZ1FHdD7_g"/>
+    <elements xsi:type="commands:Handler" xmi:id="_Xit6EDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handler.OpenUserManager" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenUserManagerHandler" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_rufBgAP9EeOVO9L3NDWRFg" elementId="org.bbaw.bts.ui.main.command.createNewTextCorpus" commandName="createNewTextCorpus" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
@@ -62,6 +63,7 @@
     <elements xsi:type="commands:Command" xmi:id="_KXYdACamEeOWXom3xTHUZA" elementId="org.bbaw.bts.ui.main.command.createNewProject" commandName="createNewProject" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_hkOGsDDQEeOcKK6bB3llFg" elementId="org.bbaw.bts.ui.main.command.editProject" commandName="editProject" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_cn-10DpKEeOBQZ1FHdD7_g" elementId="TEST" commandName="TEST"/>
+    <elements xsi:type="commands:Command" xmi:id="_Qy4lADyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.command.OpenUserManager" commandName="OpenUserManager" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
@@ -71,6 +73,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." command="_EXssoAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" label="TEST pref" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" label="New Configuration..." command="_3ajhwAWXEeOmY4VxFYomZg"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_if9qwDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handledmenuitem.6" label="Open User Manager" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>

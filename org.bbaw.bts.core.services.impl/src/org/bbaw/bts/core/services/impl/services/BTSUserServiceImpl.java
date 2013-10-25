@@ -1,7 +1,6 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.List;
-import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -30,21 +29,21 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public boolean save(BTSUser entity)
 	{
-		userDao.add(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
+		userDao.add(entity, ServiceConstants.ADMIN);
 		return false;
 	}
 
 	@Override
 	public void update(BTSUser entity)
 	{
-		userDao.update(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
+		userDao.update(entity, ServiceConstants.ADMIN);
 
 	}
 
 	@Override
 	public void remove(BTSUser entity)
 	{
-		userDao.remove(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
+		userDao.remove(entity, ServiceConstants.ADMIN);
 
 	}
 
@@ -52,18 +51,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public BTSUser find(String key)
 	{
 		BTSUser user = null;
-		user = userDao.find(key, main_project + ServiceConstants.ADMIN_SUFFIX);
+		user = userDao.find(key, ServiceConstants.ADMIN);
 		if (user != null)
 		{
 			return user;
-		}
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			user = userDao.find(key, p + ServiceConstants.ADMIN_SUFFIX);
-			if (user != null)
-			{
-				return user;
-			}
 		}
 		return null;
 	}
@@ -71,23 +62,25 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public List<BTSUser> list()
 	{
-		List<BTSUser> users = new Vector<BTSUser>();
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			users.addAll(userDao.list(p + ServiceConstants.ADMIN_SUFFIX));
-		}
+		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN);
 		return filter(users);
 	}
 
 	@Override
 	public List<BTSUser> query(BTSQueryRequest query)
 	{
-		List<BTSUser> objects = new Vector<BTSUser>();
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			objects.addAll(userDao.query(query, p + ServiceConstants.ADMIN_SUFFIX, p + ServiceConstants.ADMIN_SUFFIX));
-		}
+		List<BTSUser> objects = userDao.query(query, ServiceConstants.ADMIN, ServiceConstants.ADMIN);
 		return filter(objects);
+	}
+
+	@Override
+	public BTSUser createNewUser(String userName)
+	{
+		BTSUser entity = BtsmodelFactory.eINSTANCE.createBTSUser();
+		super.setId(entity);
+		entity.setUserName(userName);
+		super.setRevision(entity);
+		return entity;
 	}
 
 }

@@ -373,6 +373,15 @@ public interface BtsmodelFactory extends EFactory {
 	BTSProjectDBCollection createBTSProjectDBCollection();
 
 	/**
+	 * Returns a new object of class '<em>BTSDB Collection Role Desc</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTSDB Collection Role Desc</em>'.
+	 * @generated
+	 */
+	BTSDBCollectionRoleDesc createBTSDBCollectionRoleDesc();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

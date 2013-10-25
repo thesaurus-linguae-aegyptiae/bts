@@ -332,6 +332,11 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSIdentifiableItemAdapter();
 			}
 			@Override
+			public Adapter caseBTSDBCollectionRoleDesc(BTSDBCollectionRoleDesc object)
+			{
+				return createBTSDBCollectionRoleDescAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -1087,6 +1092,21 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSIdentifiableItemAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc <em>BTSDB Collection Role Desc</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc
+	 * @generated
+	 */
+	public Adapter createBTSDBCollectionRoleDescAdapter()
 	{
 		return null;
 	}

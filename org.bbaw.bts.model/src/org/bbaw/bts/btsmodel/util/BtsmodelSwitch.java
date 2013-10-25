@@ -587,6 +587,14 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC:
+			{
+				BTSDBCollectionRoleDesc btsdbCollectionRoleDesc = (BTSDBCollectionRoleDesc)theEObject;
+				T result = caseBTSDBCollectionRoleDesc(btsdbCollectionRoleDesc);
+				if (result == null) result = caseBTSIdentifiableItem(btsdbCollectionRoleDesc);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -1378,6 +1386,22 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSIdentifiableItem(BTSIdentifiableItem object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTSDB Collection Role Desc</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTSDB Collection Role Desc</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSDBCollectionRoleDesc(BTSDBCollectionRoleDesc object)
 	{
 		return null;
 	}

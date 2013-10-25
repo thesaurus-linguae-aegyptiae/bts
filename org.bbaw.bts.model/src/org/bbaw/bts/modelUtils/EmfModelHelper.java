@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -283,6 +284,23 @@ public class EmfModelHelper
 			e.printStackTrace();
 		}
 		return string;
+	}
+
+	public static boolean listContainsNodeWrapperUsingEquals(List<EObject> sourceList, Object target)
+	{
+		if (sourceList.isEmpty() || target == null)
+		{
+			return false;
+		}
+		for (EObject o : sourceList)
+		{
+			if (o instanceof TreeNodeWrapper && ((TreeNodeWrapper) o).getObject() != null
+					&& ((TreeNodeWrapper) o).getObject().equals(target))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

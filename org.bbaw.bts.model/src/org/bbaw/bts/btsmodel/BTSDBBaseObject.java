@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import org.eclipse.emf.common.util.EList;
+
 
 
 /**
@@ -15,6 +17,8 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getReaders <em>Readers</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,5 +104,37 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * @generated
 	 */
 	void setLocked(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Updaters</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Updaters</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Updaters</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Updaters()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getUpdaters();
+
+	/**
+	 * Returns the value of the '<em><b>Readers</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Readers</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Readers</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Readers()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getReaders();
 
 } // BTSDBBaseObject

@@ -28,10 +28,9 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a
- * {@link org.bbaw.bts.btsmodel.BTSTranslation} object. <!-- begin-user-doc -->
+ * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSTranslation} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class BTSTranslationItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -77,53 +76,71 @@ public class BTSTranslationItemProvider extends ItemProviderAdapter implements I
 	 */
 	protected void addValuePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSTranslation_value_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSTranslation_value_feature",
-						"_UI_BTSTranslation_type"), BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSTranslation_value_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSTranslation_value_feature", "_UI_BTSTranslation_type"),
+				 BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addTypePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSTranslation_type_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSTranslation_type_feature",
-						"_UI_BTSTranslation_type"), BtsmodelPackage.Literals.BTS_TRANSLATION__TYPE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSTranslation_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSTranslation_type_feature", "_UI_BTSTranslation_type"),
+				 BtsmodelPackage.Literals.BTS_TRANSLATION__TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Lang feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Lang feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addLangPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSTranslation_lang_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSTranslation_lang_feature",
-						"_UI_BTSTranslation_type"), BtsmodelPackage.Literals.BTS_TRANSLATION__LANG, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSTranslation_lang_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSTranslation_lang_feature", "_UI_BTSTranslation_type"),
+				 BtsmodelPackage.Literals.BTS_TRANSLATION__LANG,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This returns BTSTranslation.gif. <!-- begin-user-doc --> <!--
+	 * This returns BTSTranslation.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -133,25 +150,25 @@ public class BTSTranslationItemProvider extends ItemProviderAdapter implements I
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((BTSTranslation) object).getValue();
-		return label == null || label.length() == 0 ? getString("_UI_BTSTranslation_type")
-				: getString("_UI_BTSTranslation_type") + " " + label;
+		String label = ((BTSTranslation)object).getValue();
+		return label == null || label.length() == 0 ?
+			getString("_UI_BTSTranslation_type") :
+			getString("_UI_BTSTranslation_type") + " " + label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -165,15 +182,6 @@ public class BTSTranslationItemProvider extends ItemProviderAdapter implements I
 			case BtsmodelPackage.BTS_TRANSLATION__TYPE:
 			case BtsmodelPackage.BTS_TRANSLATION__LANG:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				// if (notification.getNotifier() instanceof BTSTranslation)
-				// {
-				// EObject container = ((EObject)
-				// notification.getNotifier()).eClass().eContainer().eContainer();
-				// container.fireNotifyChanged(new
-				// ViewerNotification(notification, container, false, true));
-				//
-				// // container.eClass().eNotify(notification);
-				// }
 				return;
 		}
 		super.notifyChanged(notification);
@@ -201,7 +209,7 @@ public class BTSTranslationItemProvider extends ItemProviderAdapter implements I
 	@Override
 	public ResourceLocator getResourceLocator()
 	{
-		return ((IChildCreationExtender) adapterFactory).getResourceLocator();
+		return ((IChildCreationExtender)adapterFactory).getResourceLocator();
 	}
 
 }

@@ -14,13 +14,6 @@ import org.eclipse.swt.widgets.Shell;
 public class EditConfigurationHandler
 {
 
-	// @Inject
-	// private BTSConfigurationController configurationController;
-	// @Inject
-	// private ECommandService commandService;
-	// @Inject
-	// private EHandlerService handlerService;
-
 	@Optional
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, IEclipseContext context)

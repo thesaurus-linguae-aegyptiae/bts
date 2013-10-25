@@ -167,8 +167,8 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 					if (queryResultMap.containsKey(queryId))
 					{
 						BTSQueryResultAbstract queryAbstract = queryResultMap.get(queryId);
-						handleUpdate(queryAbstract, notification);
-						keepHolderMap.add(queryAbstract.getParentEObject());
+						TreeNodeWrapper holder = handleUpdateReturnHolder(queryAbstract, notification);
+						keepHolderMap.add(holder);
 					}
 				}
 			}
@@ -207,17 +207,33 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 	}
 
-	private void handleUpdate(BTSQueryResultAbstract resultAbstract, BTSModelUpdateNotification notification)
+	private TreeNodeWrapper handleUpdateReturnHolder(BTSQueryResultAbstract resultAbstract,
+			BTSModelUpdateNotification notification)
 	{
 		EObject parent = resultAbstract.getParentEObject();
 		Object feature = parent.eGet(resultAbstract.getReferenceName());
 		if (feature instanceof List<?>)
 		{
 			List<EObject> ref = (List<EObject>) feature;
+			if (ref.isEmpty() || notification.getObject() == null)
+			{
+				return null;
+			}
+			for (EObject o : ref)
+			{
+				if (o instanceof TreeNodeWrapper && ((TreeNodeWrapper) o).getObject() != null
+						&& ((TreeNodeWrapper) o).getObject().equals(notification.getObject()))
+				{
+					return (TreeNodeWrapper) o;
+				}
+			}
+
 			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 			tn.setObject((BTSObject) notification.getObject());
 			ref.add(tn);
+			return tn;
 		}
+		return null;
 
 	}
 

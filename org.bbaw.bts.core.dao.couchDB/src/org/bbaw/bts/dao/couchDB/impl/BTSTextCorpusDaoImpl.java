@@ -44,7 +44,7 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
-			createView(path, DaoConstants.CORPUS, DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
+			createView(path, path, DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
 			view = dbClient.view(DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
 			allDocs = view.includeDocs(true).query();
 		}

@@ -21,10 +21,9 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
 /**
- * This is the item provider adapter for a
- * {@link org.bbaw.bts.btsmodel.BTSTCObject} object. <!-- begin-user-doc -->
+ * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSTCObject} object.
+ * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
- * 
  * @generated
  */
 public class BTSTCObjectItemProvider extends BTSCorpusObjectItemProvider implements IEditingDomainItemProvider,
@@ -85,11 +84,10 @@ public class BTSTCObjectItemProvider extends BTSCorpusObjectItemProvider impleme
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

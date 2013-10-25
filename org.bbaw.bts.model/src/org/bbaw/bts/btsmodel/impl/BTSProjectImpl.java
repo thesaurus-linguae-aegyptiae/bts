@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -29,6 +30,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDbConnection <em>Db Connection</em>}</li>
@@ -119,6 +122,26 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * @ordered
 	 */
 	protected boolean locked = LOCKED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getUpdaters() <em>Updaters</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpdaters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> updaters;
+
+	/**
+	 * The cached value of the '{@link #getReaders() <em>Readers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReaders()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> readers;
 
 	/**
 	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
@@ -298,6 +321,34 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getUpdaters()
+	{
+		if (updaters == null)
+		{
+			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_PROJECT__UPDATERS);
+		}
+		return updaters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getReaders()
+	{
+		if (readers == null)
+		{
+			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_PROJECT__READERS);
+		}
+		return readers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPrefix()
 	{
 		return prefix;
@@ -437,6 +488,10 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return getProject();
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
 				return isLocked();
+			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
+				return getUpdaters();
+			case BtsmodelPackage.BTS_PROJECT__READERS:
+				return getReaders();
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				return getPrefix();
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
@@ -471,6 +526,14 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return;
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
 				setLocked((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
+				getUpdaters().clear();
+				getUpdaters().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_PROJECT__READERS:
+				getReaders().clear();
+				getReaders().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				setPrefix((String)newValue);
@@ -511,6 +574,12 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
 				setLocked(LOCKED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
+				getUpdaters().clear();
+				return;
+			case BtsmodelPackage.BTS_PROJECT__READERS:
+				getReaders().clear();
+				return;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
@@ -545,6 +614,10 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
 				return locked != LOCKED_EDEFAULT;
+			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
+				return updaters != null && !updaters.isEmpty();
+			case BtsmodelPackage.BTS_PROJECT__READERS:
+				return readers != null && !readers.isEmpty();
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
@@ -580,6 +653,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				case BtsmodelPackage.BTS_PROJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
 				case BtsmodelPackage.BTS_PROJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
 				case BtsmodelPackage.BTS_PROJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
+				case BtsmodelPackage.BTS_PROJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
+				case BtsmodelPackage.BTS_PROJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
 				default: return -1;
 			}
 		}
@@ -609,6 +684,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_PROJECT__REV;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_PROJECT__PROJECT;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_PROJECT__LOCKED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_PROJECT__UPDATERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_PROJECT__READERS;
 				default: return -1;
 			}
 		}
@@ -634,6 +711,10 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 		result.append(project);
 		result.append(", locked: ");
 		result.append(locked);
+		result.append(", updaters: ");
+		result.append(updaters);
+		result.append(", readers: ");
+		result.append(readers);
 		result.append(", prefix: ");
 		result.append(prefix);
 		result.append(", description: ");

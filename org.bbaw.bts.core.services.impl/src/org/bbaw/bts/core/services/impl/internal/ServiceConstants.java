@@ -24,6 +24,8 @@ public class ServiceConstants
 
 	public static final String SEARCH_RELATED_OBJECTS = "search_relatedObjects";
 
+	public static final String USERID_PREFIX = "org.couchdb.user:";
+
 	private ServiceConstants()
 	{
 

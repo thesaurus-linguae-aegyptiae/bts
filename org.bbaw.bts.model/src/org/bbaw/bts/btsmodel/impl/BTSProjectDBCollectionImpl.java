@@ -2,11 +2,18 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.util.Collection;
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getCollectionName <em>Collection Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#isIndexed <em>Indexed</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#isSynchronized <em>Synchronized</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getRoleDescriptions <em>Role Descriptions</em>}</li>
  * </ul>
  * </p>
  *
@@ -84,6 +92,16 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	 * @ordered
 	 */
 	protected boolean synchronized_ = SYNCHRONIZED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRoleDescriptions() <em>Role Descriptions</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRoleDescriptions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSDBCollectionRoleDesc> roleDescriptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,6 +198,36 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSDBCollectionRoleDesc> getRoleDescriptions()
+	{
+		if (roleDescriptions == null)
+		{
+			roleDescriptions = new EObjectContainmentEList<BTSDBCollectionRoleDesc>(BTSDBCollectionRoleDesc.class, this, BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS);
+		}
+		return roleDescriptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
+				return ((InternalEList<?>)getRoleDescriptions()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -191,6 +239,8 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return isIndexed();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED:
 				return isSynchronized();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
+				return getRoleDescriptions();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -200,6 +250,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
@@ -213,6 +264,10 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return;
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED:
 				setSynchronized((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
+				getRoleDescriptions().clear();
+				getRoleDescriptions().addAll((Collection<? extends BTSDBCollectionRoleDesc>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -237,6 +292,9 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED:
 				setSynchronized(SYNCHRONIZED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
+				getRoleDescriptions().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -257,6 +315,8 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return indexed != INDEXED_EDEFAULT;
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED:
 				return synchronized_ != SYNCHRONIZED_EDEFAULT;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
+				return roleDescriptions != null && !roleDescriptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

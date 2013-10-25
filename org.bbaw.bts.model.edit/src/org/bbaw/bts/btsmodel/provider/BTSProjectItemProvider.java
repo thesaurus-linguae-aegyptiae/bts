@@ -28,10 +28,9 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a
- * {@link org.bbaw.bts.btsmodel.BTSProject} object. <!-- begin-user-doc --> <!--
+ * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSProject} object.
+ * <!-- begin-user-doc --> <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEditingDomainItemProvider,
@@ -66,6 +65,8 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			add_revPropertyDescriptor(object);
 			addProjectPropertyDescriptor(object);
 			addLockedPropertyDescriptor(object);
+			addUpdatersPropertyDescriptor(object);
+			addReadersPropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 		}
@@ -73,37 +74,49 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	}
 
 	/**
-	 * This adds a property descriptor for the id feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the id feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void add_idPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSIdentifiableItem__id_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSIdentifiableItem__id_feature",
-						"_UI_BTSIdentifiableItem_type"), BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSIdentifiableItem__id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSIdentifiableItem__id_feature", "_UI_BTSIdentifiableItem_type"),
+				 BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the rev feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the rev feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void add_revPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSDBBaseObject__rev_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject__rev_feature",
-						"_UI_BTSDBBaseObject_type"), BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__REV, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject__rev_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject__rev_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__REV,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -114,13 +127,19 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	 */
 	protected void addProjectPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSDBBaseObject_project_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_project_feature",
-						"_UI_BTSDBBaseObject_type"), BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__PROJECT, true, false,
-				false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_project_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_project_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__PROJECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -131,13 +150,65 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	 */
 	protected void addLockedPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSDBBaseObject_locked_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_locked_feature",
-						"_UI_BTSDBBaseObject_type"), BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__LOCKED, true, false,
-				false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_locked_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_locked_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__LOCKED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Updaters feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addUpdatersPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_updaters_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_updaters_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Readers feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addReadersPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_readers_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_readers_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -148,14 +219,19 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	 */
 	protected void addPrefixPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors
-				.add(createItemPropertyDescriptor(
-						((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-						getResourceLocator(),
-						getString("_UI_BTSProject_prefix_feature"),
-						getString("_UI_PropertyDescriptor_description", "_UI_BTSProject_prefix_feature",
-								"_UI_BTSProject_type"), BtsmodelPackage.Literals.BTS_PROJECT__PREFIX, true, false,
-						false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSProject_prefix_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProject_prefix_feature", "_UI_BTSProject_type"),
+				 BtsmodelPackage.Literals.BTS_PROJECT__PREFIX,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -166,23 +242,26 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	 */
 	protected void addDescriptionPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSProject_description_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSProject_description_feature",
-						"_UI_BTSProject_type"), BtsmodelPackage.Literals.BTS_PROJECT__DESCRIPTION, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSProject_description_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProject_description_feature", "_UI_BTSProject_type"),
+				 BtsmodelPackage.Literals.BTS_PROJECT__DESCRIPTION,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -199,7 +278,6 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -224,28 +302,25 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	}
 
 	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((BTSProject) object).getName();
-		if (((BTSProject) object).getPrefix() != null)
-		{
-			label += "(" + ((BTSProject) object).getPrefix() + ")";
-		}
-		return label == null || label.length() == 0 ? getString("_UI_BTSProject_type") : label;
+		String label = ((BTSProject)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_BTSProject_type") :
+			getString("_UI_BTSProject_type") + " " + label;
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -259,6 +334,8 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			case BtsmodelPackage.BTS_PROJECT__REV:
 			case BtsmodelPackage.BTS_PROJECT__PROJECT:
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
+			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
+			case BtsmodelPackage.BTS_PROJECT__READERS:
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
@@ -283,11 +360,15 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(BtsmodelPackage.Literals.BTS_PROJECT__DB_CONNECTION,
-				BtsmodelFactory.eINSTANCE.createBTSDBConnection()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_PROJECT__DB_CONNECTION,
+				 BtsmodelFactory.eINSTANCE.createBTSDBConnection()));
 
-		newChildDescriptors.add(createChildParameter(BtsmodelPackage.Literals.BTS_PROJECT__DB_COLLECTIONS,
-				BtsmodelFactory.eINSTANCE.createBTSProjectDBCollection()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_PROJECT__DB_COLLECTIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSProjectDBCollection()));
 	}
 
 	@Override

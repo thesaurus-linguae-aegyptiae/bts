@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.main.wizards.installation.support.Connection;
 import org.eclipse.core.databinding.AggregateValidationStatus;
@@ -163,7 +164,7 @@ public class ConnectToServerPage extends WizardPage
 				DELAY, textServerURL);
 		IObservableValue bytesUrlObserveValue = PojoProperties.value("url").observe(connection);
 		UpdateValueStrategy strategy = new UpdateValueStrategy();
-		strategy.setAfterGetValidator(new StringNotEmptyValidator());
+		strategy.setAfterGetValidator(new StringHttp_s_URLValidator());
 		Binding binding0 = bindingContext.bindValue(observeTextTextServerURLObserveWidget, bytesUrlObserveValue,
 				strategy, null);
 		BackgroundControlDecorationSupport.create(binding0, SWT.TOP | SWT.LEFT);

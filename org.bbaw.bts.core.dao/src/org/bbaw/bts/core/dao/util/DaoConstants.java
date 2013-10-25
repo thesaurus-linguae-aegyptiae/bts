@@ -21,9 +21,9 @@ public class DaoConstants
 
 	public static final String VIEW_ALL_BTSTEXTS = "objects/all_btstexts";
 
-	public static final String VIEW_ALL_BTSUSERS = "objects/all_btsusers";
+	public static final String VIEW_ALL_BTSUSERS = "admin/all_btsusers";
 
-	public static final String VIEW_ALL_BTSUSERGROUPS = "objects/all_btsusergroups";
+	public static final String VIEW_ALL_BTSUSERGROUPS = "admin/all_btsusergroups";
 
 	public static final String VIEW_CORPUS_ROOT_OBJECTS = "objects/all_corpus_root_objects";
 

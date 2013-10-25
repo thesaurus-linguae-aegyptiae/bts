@@ -27,10 +27,9 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a
- * {@link org.bbaw.bts.btsmodel.BTSConfiguration} object. <!-- begin-user-doc
+ * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSConfiguration} object.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider implements IEditingDomainItemProvider,
@@ -78,19 +77,23 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	/**
 	 * This adds a property descriptor for the Property Change Support feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addPropertyChangeSupportPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSObservableObject_propertyChangeSupport_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_BTSObservableObject_propertyChangeSupport_feature", "_UI_BTSObservableObject_type"),
-				BtsmodelPackage.Literals.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObservableObject_propertyChangeSupport_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObservableObject_propertyChangeSupport_feature", "_UI_BTSObservableObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -101,13 +104,19 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	 */
 	protected void addStatePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AdministrativDataObject_state_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_state_feature",
-						"_UI_AdministrativDataObject_type"), BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__STATE,
-				true, false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AdministrativDataObject_state_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_state_feature", "_UI_AdministrativDataObject_type"),
+				 BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__STATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -118,14 +127,19 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	 */
 	protected void addRevisionStatePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AdministrativDataObject_revisionState_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_revisionState_feature",
-						"_UI_AdministrativDataObject_type"),
-				BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AdministrativDataObject_revisionState_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_revisionState_feature", "_UI_AdministrativDataObject_type"),
+				 BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -136,14 +150,19 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	 */
 	protected void addVisibilityPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_AdministrativDataObject_visibility_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_visibility_feature",
-						"_UI_AdministrativDataObject_type"),
-				BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__VISIBILITY, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AdministrativDataObject_visibility_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_visibility_feature", "_UI_AdministrativDataObject_type"),
+				 BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__VISIBILITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -154,44 +173,65 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	 */
 	protected void addSortKeyPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_BTSObject_sortKey_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_sortKey_feature", "_UI_BTSObject_type"),
-				BtsmodelPackage.Literals.BTS_OBJECT__SORT_KEY, true, false, false,
-				ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_sortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_sortKey_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__SORT_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Name feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addNamePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_BTSObject_name_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_name_feature", "_UI_BTSObject_type"),
-				BtsmodelPackage.Literals.BTS_OBJECT__NAME, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_name_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Type feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addTypePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_BTSObject_type_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_type_feature", "_UI_BTSObject_type"),
-				BtsmodelPackage.Literals.BTS_OBJECT__TYPE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_type_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -202,28 +242,42 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	 */
 	protected void addSubtypePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_BTSObject_subtype_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_subtype_feature", "_UI_BTSObject_type"),
-				BtsmodelPackage.Literals.BTS_OBJECT__SUBTYPE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_subtype_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_subtype_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__SUBTYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This adds a property descriptor for the Code feature. <!-- begin-user-doc
+	 * This adds a property descriptor for the Code feature.
+	 * <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addCodePropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(), getResourceLocator(),
-				getString("_UI_BTSObject_code_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_code_feature", "_UI_BTSObject_type"),
-				BtsmodelPackage.Literals.BTS_OBJECT__CODE, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_code_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_code_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__CODE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -234,13 +288,19 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	 */
 	protected void addProviderPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSConfiguration_provider_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_BTSConfiguration_provider_feature",
-						"_UI_BTSConfiguration_type"), BtsmodelPackage.Literals.BTS_CONFIGURATION__PROVIDER, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSConfiguration_provider_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfiguration_provider_feature", "_UI_BTSConfiguration_type"),
+				 BtsmodelPackage.Literals.BTS_CONFIGURATION__PROVIDER,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -266,23 +326,21 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child)
 	{
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns BTSConfiguration.gif. <!-- begin-user-doc --> <!--
+	 * This returns BTSConfiguration.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -349,14 +407,20 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
-				BtsmodelFactory.eINSTANCE.createBTSConfiguration()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+				 BtsmodelFactory.eINSTANCE.createBTSConfiguration()));
 
-		newChildDescriptors.add(createChildParameter(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
-				BtsmodelFactory.eINSTANCE.createBTSConfigItem()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+				 BtsmodelFactory.eINSTANCE.createBTSConfigItem()));
 
-		newChildDescriptors.add(createChildParameter(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
-				BtsmodelFactory.eINSTANCE.createBTSRevision()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
 	}
 
 }
