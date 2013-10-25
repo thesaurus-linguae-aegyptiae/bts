@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -23,15 +24,23 @@ import org.eclipse.emf.ecore.util.EObjectResolvingEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getParent <em>Parent</em>}</li>
- *   <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getChildren <em>Children</em>}</li>
- *   <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getObject <em>Object</em>}</li>
- *   <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
- *   <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#isChildrenLoaded <em>Children Loaded</em>}</li>
- *   <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getLabel <em>Label</em>}</li>
+ * <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getParent <em>
+ * Parent</em>}</li>
+ * <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getChildren
+ * <em>Children</em>}</li>
+ * <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getObject <em>
+ * Object</em>}</li>
+ * <li>
+ * {@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getPropertyChangeSupport
+ * <em>Property Change Support</em>}</li>
+ * <li>
+ * {@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#isChildrenLoaded
+ * <em>Children Loaded</em>}</li>
+ * <li>{@link org.bbaw.bts.btsviewmodel.impl.TreeNodeWrapperImpl#getLabel <em>
+ * Label</em>}</li>
  * </ul>
  * </p>
- *
+ * 
  * @generated
  */
 public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements TreeNodeWrapper
@@ -39,6 +48,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * The cached value of the '{@link #getParent() <em>Parent</em>}' reference.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getParent()
 	 * @generated
 	 * @ordered
@@ -46,8 +56,9 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	protected TreeNodeWrapper parent;
 
 	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' reference list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}'
+	 * reference list. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getChildren()
 	 * @generated
 	 * @ordered
@@ -55,8 +66,9 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	protected EList<TreeNodeWrapper> children;
 
 	/**
-	 * The default value of the '{@link #getObject() <em>Object</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * The default value of the '{@link #getObject() <em>Object</em>}'
+	 * attribute. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getObject()
 	 * @generated
 	 * @ordered
@@ -66,6 +78,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * The cached value of the '{@link #getObject() <em>Object</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getObject()
 	 * @generated
 	 * @ordered
@@ -73,9 +86,10 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	protected BTSObject object = OBJECT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
-	 * <!-- begin-user-doc -->
+	 * The default value of the '{@link #getPropertyChangeSupport()
+	 * <em>Property Change Support</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getPropertyChangeSupport()
 	 * @generated
 	 * @ordered
@@ -83,9 +97,10 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	protected static final PropertyChangeSupport PROPERTY_CHANGE_SUPPORT_EDEFAULT = null;
 
 	/**
-	 * The cached value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
-	 * <!-- begin-user-doc -->
+	 * The cached value of the '{@link #getPropertyChangeSupport()
+	 * <em>Property Change Support</em>}' attribute. <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * 
 	 * @see #getPropertyChangeSupport()
 	 * @generated
 	 * @ordered
@@ -93,9 +108,10 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	protected PropertyChangeSupport propertyChangeSupport = PROPERTY_CHANGE_SUPPORT_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #isChildrenLoaded() <em>Children Loaded</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The default value of the '{@link #isChildrenLoaded()
+	 * <em>Children Loaded</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #isChildrenLoaded()
 	 * @generated
 	 * @ordered
@@ -103,9 +119,10 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	protected static final boolean CHILDREN_LOADED_EDEFAULT = false;
 
 	/**
-	 * The cached value of the '{@link #isChildrenLoaded() <em>Children Loaded</em>}' attribute.
-	 * <!-- begin-user-doc --> <!--
+	 * The cached value of the '{@link #isChildrenLoaded()
+	 * <em>Children Loaded</em>}' attribute. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @see #isChildrenLoaded()
 	 * @generated
 	 * @ordered
@@ -115,6 +132,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * The default value of the '{@link #getLabel() <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLabel()
 	 * @generated
 	 * @ordered
@@ -124,6 +142,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * The cached value of the '{@link #getLabel() <em>Label</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getLabel()
 	 * @generated
 	 * @ordered
@@ -132,6 +151,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected TreeNodeWrapperImpl()
@@ -141,6 +161,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -151,18 +172,19 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TreeNodeWrapper getParent()
 	{
 		if (parent != null && parent.eIsProxy())
 		{
-			InternalEObject oldParent = (InternalEObject)parent;
-			parent = (TreeNodeWrapper)eResolveProxy(oldParent);
+			InternalEObject oldParent = (InternalEObject) parent;
+			parent = (TreeNodeWrapper) eResolveProxy(oldParent);
 			if (parent != oldParent)
 			{
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT, oldParent, parent));
+				if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.RESOLVE,
+						BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT, oldParent, parent));
 			}
 		}
 		return parent;
@@ -170,6 +192,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public TreeNodeWrapper basicGetParent()
@@ -179,31 +202,35 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setParent(TreeNodeWrapper newParent)
 	{
 		TreeNodeWrapper oldParent = parent;
 		parent = newParent;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT, oldParent, parent));
+		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
+				BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT, oldParent, parent));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public EList<TreeNodeWrapper> getChildren()
 	{
 		if (children == null)
 		{
-			children = new EObjectResolvingEList<TreeNodeWrapper>(TreeNodeWrapper.class, this, BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN);
+			children = new EObjectResolvingEList<TreeNodeWrapper>(TreeNodeWrapper.class, this,
+					BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN);
 		}
 		return children;
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public BTSObject getObject()
@@ -235,6 +262,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public PropertyChangeSupport getPropertyChangeSupport()
@@ -244,18 +272,21 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setPropertyChangeSupport(PropertyChangeSupport newPropertyChangeSupport)
 	{
 		PropertyChangeSupport oldPropertyChangeSupport = propertyChangeSupport;
 		propertyChangeSupport = newPropertyChangeSupport;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport, propertyChangeSupport));
+		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
+				BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport,
+				propertyChangeSupport));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public boolean isChildrenLoaded()
@@ -265,18 +296,20 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setChildrenLoaded(boolean newChildrenLoaded)
 	{
 		boolean oldChildrenLoaded = childrenLoaded;
 		childrenLoaded = newChildrenLoaded;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN_LOADED, oldChildrenLoaded, childrenLoaded));
+		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
+				BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN_LOADED, oldChildrenLoaded, childrenLoaded));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public String getLabel()
@@ -286,18 +319,20 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void setLabel(String newLabel)
 	{
 		String oldLabel = label;
 		label = newLabel;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsviewmodelPackage.TREE_NODE_WRAPPER__LABEL, oldLabel, label));
+		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
+				BtsviewmodelPackage.TREE_NODE_WRAPPER__LABEL, oldLabel, label));
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener propertyChangeListener)
@@ -309,6 +344,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public void removePropertyChangeListener(PropertyChangeListener propertyChangeListener)
@@ -320,6 +356,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -346,6 +383,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -355,23 +393,23 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID)
 		{
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT:
-				setParent((TreeNodeWrapper)newValue);
+				setParent((TreeNodeWrapper) newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN:
 				getChildren().clear();
-				getChildren().addAll((Collection<? extends TreeNodeWrapper>)newValue);
+				getChildren().addAll((Collection<? extends TreeNodeWrapper>) newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT:
-				setObject((BTSObject)newValue);
+				setObject((BTSObject) newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT:
-				setPropertyChangeSupport((PropertyChangeSupport)newValue);
+				setPropertyChangeSupport((PropertyChangeSupport) newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN_LOADED:
-				setChildrenLoaded((Boolean)newValue);
+				setChildrenLoaded((Boolean) newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__LABEL:
-				setLabel((String)newValue);
+				setLabel((String) newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -379,6 +417,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -387,7 +426,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 		switch (featureID)
 		{
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT:
-				setParent((TreeNodeWrapper)null);
+				setParent((TreeNodeWrapper) null);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN:
 				getChildren().clear();
@@ -410,6 +449,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -424,7 +464,8 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT:
 				return OBJECT_EDEFAULT == null ? object != null : !OBJECT_EDEFAULT.equals(object);
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT:
-				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
+				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null
+						: !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN_LOADED:
 				return childrenLoaded != CHILDREN_LOADED_EDEFAULT;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__LABEL:
@@ -435,6 +476,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -443,10 +485,10 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 		switch (operationID)
 		{
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
+				addPropertyChangeListener((PropertyChangeListener) arguments.get(0));
 				return null;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
-				removePropertyChangeListener((PropertyChangeListener)arguments.get(0));
+				removePropertyChangeListener((PropertyChangeListener) arguments.get(0));
 				return null;
 		}
 		return super.eInvoke(operationID, arguments);

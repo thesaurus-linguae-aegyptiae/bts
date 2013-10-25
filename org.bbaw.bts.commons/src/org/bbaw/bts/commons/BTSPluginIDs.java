@@ -36,4 +36,8 @@ public class BTSPluginIDs
 
 	public static final String PREF_DB_PORT = "db_port";
 
+	public static final String CMD_ID_NEW_USERGROUP = "org.bbaw.bts.ui.main.command.createNewUserGroup";
+
+	public static final String CMD_ID_NEW_USER = "org.bbaw.bts.ui.main.command.createNewUser";
+
 }

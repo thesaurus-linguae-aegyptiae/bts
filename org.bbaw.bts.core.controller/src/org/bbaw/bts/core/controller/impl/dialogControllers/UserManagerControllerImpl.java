@@ -59,4 +59,10 @@ public class UserManagerControllerImpl implements UserManagerController
 		return userService.createNewUser(userName);
 	}
 
+	@Override
+	public BTSUserGroup createNewUserGroup()
+	{
+		return usergroupService.createNew();
+	}
+
 }

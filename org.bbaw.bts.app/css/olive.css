@@ -87,4 +87,10 @@ Button {
 Link {
 	background-color: #FFFFFF;
 }
+ToolBar {
+	background-color: #FFFFFF;
+}
 
+ToolItem {
+	background-color: #FFFFFF;
+}

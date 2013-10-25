@@ -8,5 +8,5 @@
    
 
     <property name="service.context.key" type="String" 
-   value="org.bbaw.bts.core.controller.generalController.InitialProjectController"/>
+   value="org.bbaw.bts.core.controller.generalController.BTSProjectController"/>
 </scr:component>

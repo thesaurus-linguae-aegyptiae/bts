@@ -1,7 +1,7 @@
 package org.bbaw.bts.core.controller.impl;
 
-import org.bbaw.bts.core.controller.generalController.InitialProjectController;
-import org.bbaw.bts.core.controller.impl.generalController.InitialProjectControllerImpl;
+import org.bbaw.bts.core.controller.generalController.BTSProjectController;
+import org.bbaw.bts.core.controller.impl.generalController.BTSProjectControllerImpl;
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -17,8 +17,8 @@ public class InitialProjectControllerContextFunction extends ContextFunction
 		MApplication application = context.get(MApplication.class);
 		IEclipseContext ctx = application.getContext();
 
-		InitialProjectController controller = ContextInjectionFactory.make(InitialProjectControllerImpl.class, context);
-		ctx.set(InitialProjectController.class, controller);
+		BTSProjectController controller = ContextInjectionFactory.make(BTSProjectControllerImpl.class, context);
+		ctx.set(BTSProjectController.class, controller);
 
 		return controller;
 	}
