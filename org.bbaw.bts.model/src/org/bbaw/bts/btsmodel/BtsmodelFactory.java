@@ -58,13 +58,13 @@ public interface BtsmodelFactory extends EFactory {
 	BTSWord createBTSWord();
 
 	/**
-	 * Returns a new object of class '<em>BTS Delimiter</em>'.
+	 * Returns a new object of class '<em>BTS Marker</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Delimiter</em>'.
+	 * @return a new object of class '<em>BTS Marker</em>'.
 	 * @generated
 	 */
-	BTSDelimiter createBTSDelimiter();
+	BTSMarker createBTSMarker();
 
 	/**
 	 * Returns a new object of class '<em>BTS List Entry</em>'.
@@ -380,6 +380,15 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BTSDBCollectionRoleDesc createBTSDBCollectionRoleDesc();
+
+	/**
+	 * Returns a new object of class '<em>BTS Text Content</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Text Content</em>'.
+	 * @generated
+	 */
+	BTSTextContent createBTSTextContent();
 
 	/**
 	 * Returns the package supported by this factory.

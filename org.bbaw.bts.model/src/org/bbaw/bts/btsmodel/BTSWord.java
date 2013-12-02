@@ -27,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSWord extends BTSSentenceItems {
+public interface BTSWord extends BTSSentenceItem, BTSAmbivalenceItem, BTSReferencableItem {
 	/**
 	 * Returns the value of the '<em><b>Translation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

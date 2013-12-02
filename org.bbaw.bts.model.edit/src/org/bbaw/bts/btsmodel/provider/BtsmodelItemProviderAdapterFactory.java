@@ -192,27 +192,28 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSDelimiter} instances.
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSMarker} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BTSDelimiterItemProvider btsDelimiterItemProvider;
+	protected BTSMarkerItemProvider btsMarkerItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSDelimiter}.
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSMarker}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBTSDelimiterAdapter() {
-		if (btsDelimiterItemProvider == null)
+	public Adapter createBTSMarkerAdapter()
+	{
+		if (btsMarkerItemProvider == null)
 		{
-			btsDelimiterItemProvider = new BTSDelimiterItemProvider(this);
+			btsMarkerItemProvider = new BTSMarkerItemProvider(this);
 		}
 
-		return btsDelimiterItemProvider;
+		return btsMarkerItemProvider;
 	}
 
 	/**
@@ -1064,6 +1065,31 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSTextContent} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSTextContentItemProvider btsTextContentItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSTextContent}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSTextContentAdapter()
+	{
+		if (btsTextContentItemProvider == null)
+		{
+			btsTextContentItemProvider = new BTSTextContentItemProvider(this);
+		}
+
+		return btsTextContentItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1199,7 +1225,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsTextItemProvider != null) btsTextItemProvider.dispose();
 		if (btsSenctenceItemProvider != null) btsSenctenceItemProvider.dispose();
 		if (btsWordItemProvider != null) btsWordItemProvider.dispose();
-		if (btsDelimiterItemProvider != null) btsDelimiterItemProvider.dispose();
+		if (btsMarkerItemProvider != null) btsMarkerItemProvider.dispose();
 		if (btsListEntryItemProvider != null) btsListEntryItemProvider.dispose();
 		if (btsPassportItemProvider != null) btsPassportItemProvider.dispose();
 		if (btsAmbivalenceItemProvider != null) btsAmbivalenceItemProvider.dispose();
@@ -1235,6 +1261,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (dbLeaseItemProvider != null) dbLeaseItemProvider.dispose();
 		if (btsProjectDBCollectionItemProvider != null) btsProjectDBCollectionItemProvider.dispose();
 		if (btsdbCollectionRoleDescItemProvider != null) btsdbCollectionRoleDescItemProvider.dispose();
+		if (btsTextContentItemProvider != null) btsTextContentItemProvider.dispose();
 	}
 
 }

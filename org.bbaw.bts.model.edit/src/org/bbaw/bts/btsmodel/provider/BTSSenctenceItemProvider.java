@@ -161,7 +161,7 @@ public class BTSSenctenceItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS,
-				 BtsmodelFactory.eINSTANCE.createBTSDelimiter()));
+				 BtsmodelFactory.eINSTANCE.createBTSMarker()));
 
 		newChildDescriptors.add
 			(createChildParameter

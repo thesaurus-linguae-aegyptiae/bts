@@ -2,15 +2,17 @@ package org.bbaw.bts.ui.main.parts;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
@@ -32,10 +34,13 @@ import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
+import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
+import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeStructureAdvisor;
 import org.bbaw.bts.ui.main.wizards.newProject.EditDBCollectionDialog;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -46,9 +51,12 @@ import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
@@ -57,18 +65,25 @@ import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.FeaturePath;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
+import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
+import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -82,6 +97,8 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -177,8 +194,6 @@ public class UserManagementPart
 
 	private Link linkCreateNewUser_Group;
 	private Composite composite;
-	private ToolBar toolBar_1;
-
 	private SashForm roles_sashForm;
 
 	private Composite roles_composite_Left;
@@ -195,7 +210,7 @@ public class UserManagementPart
 
 	private List<BTSProject> projects;
 
-	private TreeNodeWrapper roles_root;
+	private WritableList roles_list;
 	private Label lblProject;
 	private Label lblProjectId;
 	private Text roles_project_id_text;
@@ -215,6 +230,78 @@ public class UserManagementPart
 
 	private Text roles_project_textdbPath;
 
+	private Set<BTSUser> dirtyUsers = new HashSet<>();
+
+	private Set<BTSUserGroup> dirtyUserGroups = new HashSet<>();
+
+	private Set<BTSProject> dirtyProjects = new HashSet<>();
+	private Label lblDatabaseCollection;
+	private Label lblDbCollectionName;
+	private Text roles_dbColl_name_text;
+	private Button roles_dbColl_sync_btn;
+	private Button roles_dbColl_index_btn;
+	private Link roles_dbColl_newRoles_link;
+	private Label lblCreateNewRoles;
+	private DataBindingContext dbColl_bindingContext;
+	private Label lblUserRoleDefinition;
+	private Label lblRoleName;
+	private Text roles_rolesDesc_name_text;
+	private Link roles_roleDesc_assignUser_link;
+	private Group grpAssignUserGroup;
+	private Label lblSelectUserGroup;
+	private ComboViewer roles_rolesDesc_group_comboViewer;
+	private Link roles_roleDesc_assignGroup_link;
+
+	private BTSDBCollectionRoleDesc selectedDBRoleDesc;
+
+	private DataBindingContext dbRoleDesc_bindingContext;
+
+	private ComboViewer roles_rolesDesc_users_comboViewer;
+
+	private ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+	private WritableList observableLisAllUsers;
+
+	private WritableList observableLisAllUserGroups;
+
+	private HashMap<String, BTSUser> userMap;
+
+	private HashMap<String, BTSUserGroup> userGroupMap;
+
+	private Combo roles_dbColl_newRoles_combo;
+
+	private static final String[] databaseRoles = new String[] { "admins", "editors", "researchers", "transliterators",
+			"guests" };
+
+	private static final String[] databaseRolesDescs = new String[] {
+			"admins = Administrator. Administrators may edit or delete all objects even if no special rights for a very objects were granted to them. Thus they can also clean up the database. Administrators are the only users who are allowed to manage other users, user group membershibs and roles. Administrators are also the only users who may edit the configuration.",
+			"editors = Editors. Editors may review and correct objects owned by other users even if no special rights for a very object were granted to them. Thus they can review and improve the quality of the data.",
+			"researchers = Researcher. Researcher may create new objects and edit or delete their own objects but only their own or objects for which they were granted editing rights.",
+			"transliterators = users who are allowed to transliterate a text. They may not create new objects and may not change anything except adding transliteration to text for which they are granted update rights.",
+			"guests = Guest. Guests may read data but not create new objects or edit or delete anything." };
+
+	private HashMap<String, String> roleDescMap;
+	private Label lblUser_1;
+	private Label lblForename_1;
+	private Text roles_user_forename_text;
+	private Label lblSurname;
+	private Text roles_user_surname_text;
+	private Label lblUserGroup_1;
+	private Label lblGroupName;
+	private Text text;
+	private Link roles_group_removeGroupfromRole_link;
+
+	private ToolItem roles_ToolcreateProject;
+
+	private ToolItem roles_ToolDeleteProject;
+
+	private ToolItem roles_ToolUndo;
+
+	private ToolItem roles_ToolRedo;
+
+	private Link roles_roleDesc_removeRoleDesc_link;
+
 	public UserManagementPart()
 	{
 	}
@@ -227,6 +314,7 @@ public class UserManagementPart
 	@PostConstruct
 	public void createControls(Composite parent)
 	{
+		init();
 
 		Composite container = new Composite(parent, SWT.NONE);
 		container.setLayoutData(new GridData(GridData.FILL_BOTH)); // ######## cp: aukommentiert für windowbuilder
@@ -324,7 +412,6 @@ public class UserManagementPart
 
 		composite_right = new Composite(user_sashForm, SWT.NONE);
 		composite_right.setLayout(new FillLayout(SWT.HORIZONTAL));
-
 		user_sashForm.setWeights(new int[] { 1, 1 });
 
 		////////////////roles
@@ -339,8 +426,65 @@ public class UserManagementPart
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		composite.setLayout(new RowLayout(SWT.HORIZONTAL));
 
-		toolBar_1 = new ToolBar(composite, SWT.FLAT | SWT.RIGHT);
+		ToolBar roles_toolbar = new ToolBar(composite, SWT.FLAT | SWT.RIGHT);
+		roles_ToolcreateProject = new ToolItem(roles_toolbar, SWT.NONE);
+		roles_ToolcreateProject.setText("New Project");
+		roles_ToolcreateProject.addSelectionListener(new SelectionAdapter()
+		{
 
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				//				Command command = commandService.getCommand(BTSPluginIDs.CMD_ID_NEW_USERGROUP);
+
+				// Activate Handler
+				handlerService.activateHandler(BTSPluginIDs.CMD_ID_NEW_USERGROUP, new CreateNewUserGroupHandler());
+
+				ParameterizedCommand cmd = commandService.createCommand(BTSPluginIDs.CMD_ID_NEW_USERGROUP, null);
+				//				command = commandService.getCommand(BTSPluginIDs.CMD_ID_NEW_USERGROUP);
+
+				handlerService.executeHandler(cmd);
+
+			}
+		});
+
+		roles_ToolDeleteProject = new ToolItem(roles_toolbar, SWT.NONE);
+		roles_ToolDeleteProject.setText("Delete");
+		roles_ToolDeleteProject.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+
+			}
+		});
+
+		roles_ToolUndo = new ToolItem(roles_toolbar, SWT.NONE);
+		roles_ToolUndo.setText("Undo");
+		roles_ToolUndo.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				getEditingDomain(selectedTreeObject).getCommandStack().undo();
+
+			}
+		});
+
+		roles_ToolRedo = new ToolItem(roles_toolbar, SWT.NONE);
+		roles_ToolRedo.setText("Redo");
+		roles_ToolRedo.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				getEditingDomain(selectedTreeObject).getCommandStack().redo();
+
+			}
+		});
 		roles_sashForm = new SashForm(roles_composite, SWT.NONE);
 		roles_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
@@ -360,64 +504,32 @@ public class UserManagementPart
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(2, false));
 
-		lblProject = new Label(roles_composite_right, SWT.NONE);
-		lblProject.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
-		lblProject.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
-		lblProject.setText("Project");
-
-		lblProjectId = new Label(roles_composite_right, SWT.NONE);
-		lblProjectId.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblProjectId.setText("Project ID");
-
-		roles_project_id_text = new Text(roles_composite_right, SWT.BORDER);
-		roles_project_id_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		roles_project_id_text.setEditable(false);
-
-		lblProjectName = new Label(roles_composite_right, SWT.NONE);
-		lblProjectName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblProjectName.setText("Project Name");
-
-		roles_project_name_text = new Text(roles_composite_right, SWT.BORDER);
-		roles_project_name_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		lblProjectPrefix = new Label(roles_composite_right, SWT.NONE);
-		lblProjectPrefix.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblProjectPrefix.setText("Project Prefix");
-
-		roles_project_prefix_text = new Text(roles_composite_right, SWT.BORDER);
-		roles_project_prefix_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		roles_project_prefix_text.setEditable(false);
-
-		lblDescription_1 = new Label(roles_composite_right, SWT.NONE);
-		lblDescription_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblDescription_1.setText("Description");
-
-		roles_project_desc_text = new Text(roles_composite_right, SWT.BORDER);
-		roles_project_desc_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		roles_project_addColl_link = new Link(roles_composite_right, SWT.NONE);
-		roles_project_addColl_link.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
-		roles_project_addColl_link.setText("<a>Add Database Collection</a>");
-		new Label(roles_composite_right, SWT.NONE);
 		roles_sashForm.setWeights(new int[] { 1, 1 });
 		loadUserTree();
 		loadRolesTree();
 	}
 
+	private void init()
+	{
+		roleDescMap = new HashMap<String, String>();
+		for (int i = 0; i < databaseRoles.length; i++)
+		{
+			roleDescMap.put(databaseRoles[i], databaseRolesDescs[i]);
+		}
+
+	}
+
 	private void loadUserTree()
 	{
-		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		// BtsviewmodelAdapterFactory factory = new
 		// BtsviewmodelAdapterFactory();
-		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
-		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(adapterFactory);
 		user_treeViewer.setContentProvider(contentProvider);
 		user_treeViewer.setLabelProvider(labelProvider);
 		user_selectionListener = new ISelectionChangedListener()
 		{
-
-			private BTSCorpusObject selectedTreeObject;
 
 			@Override
 			public void selectionChanged(SelectionChangedEvent event)
@@ -466,32 +578,35 @@ public class UserManagementPart
 			@Override
 			protected IStatus run(IProgressMonitor monitor)
 			{
-				final List<TreeNodeWrapper> grandChildren = new Vector<>();
+				new Vector<>();
 				for (final TreeNodeWrapper parent : parents)
 				{
-					final List<BTSUser> children = userManagerController.findGroupMembers(
-							(BTSUserGroup) parent.getObject(), queryResultMap, user_treeViewer, parent,
-							BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
-					// If you want to update the UI
-					sync.asyncExec(new Runnable()
+					if (!parent.isChildrenLoaded())
 					{
-
-						@Override
-						public void run()
+						final List<BTSUser> children = userManagerController.findGroupMembers(
+								(BTSUserGroup) parent.getObject(), queryResultMap, user_treeViewer, parent,
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+						// If you want to update the UI
+						sync.asyncExec(new Runnable()
 						{
-							System.out.println("add children" + children.size());
-							for (BTSObject o : children)
+
+							@Override
+							public void run()
 							{
-								TreeNodeWrapper tn = wrappObject(o);
-								tn.setParent(parent);
-								// grandChildren.add(tn);
-								parent.getChildren().add(tn);
+								System.out.println("add children" + children.size());
+								for (BTSObject o : children)
+								{
+									TreeNodeWrapper tn = wrappObject(o);
+									tn.setParent(parent);
+									// grandChildren.add(tn);
+									parent.getChildren().add(tn);
+								}
+								parent.setChildrenLoaded(true);
+
 							}
-							parent.setChildrenLoaded(true);
 
-						}
-
-					});
+						});
+					}
 				}
 				// loadChildren(grandChildren, false);
 
@@ -505,14 +620,31 @@ public class UserManagementPart
 
 	private void loadRolesTree()
 	{
-		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-
-		// BtsviewmodelAdapterFactory factory = new
-		// BtsviewmodelAdapterFactory();
-		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
-		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
-		roles_treeViewer.setContentProvider(contentProvider);
+		//
+		//		// BtsviewmodelAdapterFactory factory = new
+		//		// BtsviewmodelAdapterFactory();
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		//		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
+		//		roles_treeViewer.setContentProvider(contentProvider);
 		roles_treeViewer.setLabelProvider(labelProvider);
+		ObservableListTreeContentProvider contentProvider = new ObservableListTreeContentProvider(
+				new ProjectDBCollectionTreeFactory(), new ProjectDBCollectionTreeStructureAdvisor());
+		roles_treeViewer.setContentProvider(contentProvider);
+		//		roles_treeViewer.setLabelProvider(new ExplorerTreeLabelProvider());
+		roles_treeViewer.addFilter(new ViewerFilter()
+		{
+
+			@Override
+			public boolean select(Viewer viewer, Object parentElement, Object element)
+			{
+				if (element instanceof BTSDBCollectionRoleDesc
+						&& "members".equals(((BTSDBCollectionRoleDesc) element).getRoleName()))
+				{
+					return false;
+				}
+				return true;
+			}
+		});
 		roles_selectionListener = new ISelectionChangedListener()
 		{
 
@@ -537,21 +669,17 @@ public class UserManagementPart
 		// Create sample data
 		projects = projectController.listProjects();
 
-		roles_root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-		if (projects != null)
-		{
-			for (BTSProject o : projects)
-			{
-				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				child.setObject(o);
-				child.setChildrenLoaded(true);
-				roles_root.getChildren().add(child);
-				roles_root.setChildrenLoaded(true);
-			}
-		}
+		roles_list = new WritableList(projects, BTSProject.class);
+		//		if (projects != null)
+		//		{
+		//			for (BTSProject o : projects)
+		//			{
+		//				roles_list.add(o);
+		//			}
+		//		}
 
 		// Set the writeableList as input for the viewer
-		roles_treeViewer.setInput(roles_root);
+		roles_treeViewer.setInput(roles_list);
 
 	}
 
@@ -603,6 +731,7 @@ public class UserManagementPart
 				BTSIdentifiableItem oldSelection = selectedTreeObject;
 				selectedTreeObject = (BTSIdentifiableItem) tn.getObject();
 				manageDomainListeners(oldSelection, selectedTreeObject);
+				manageDirtyObjects(oldSelection, selectedTreeObject);
 			}
 		} else if (selection2.getFirstElement() instanceof BTSUser)
 		{
@@ -613,34 +742,592 @@ public class UserManagementPart
 
 	}
 
+	private void manageDirtyObjects(BTSIdentifiableItem oldSelection, BTSIdentifiableItem selectedTreeObject2)
+	{
+		if (getEditingDomain(oldSelection).getCommandStack().canUndo()) // object is dirty
+		{
+			if (oldSelection instanceof BTSUser)
+			{
+				dirtyUsers.add((BTSUser) oldSelection);
+			} else if (oldSelection instanceof BTSUserGroup)
+			{
+				dirtyUserGroups.add((BTSUserGroup) oldSelection);
+			} else if (oldSelection instanceof BTSProject)
+			{
+				dirtyProjects.add((BTSProject) oldSelection);
+			} else if (oldSelection instanceof BTSProjectDBCollection)
+			{
+				dirtyProjects.add((BTSProject) oldSelection.eContainer());
+			} else if (oldSelection instanceof BTSDBCollectionRoleDesc)
+			{
+				if (oldSelection.eContainer() != null)
+				{
+					dirtyProjects.add((BTSProject) oldSelection.eContainer().eContainer());
+				}
+			}
+		} else
+		// if not dirty then check if it was added to dirty list prior
+		{
+			if (dirtyUsers.contains(oldSelection))
+			{
+				dirtyUsers.remove(oldSelection);
+			} else if (dirtyUserGroups.contains(oldSelection))
+			{
+				dirtyUserGroups.remove(oldSelection);
+			} else if (dirtyProjects.contains(oldSelection))
+			{
+				dirtyProjects.remove(oldSelection);
+			} else if (oldSelection instanceof BTSProjectDBCollection)
+			{
+				dirtyProjects.remove((BTSProject) oldSelection.eContainer());
+			} else if (oldSelection instanceof BTSDBCollectionRoleDesc)
+			{
+				if (oldSelection.eContainer() != null)
+				{
+					dirtyProjects.remove((BTSProject) oldSelection.eContainer().eContainer());
+				}
+			}
+		}
+
+	}
+
 	private void handleRolesTreeSelection(IStructuredSelection selection, TreeViewer treeViewer)
 	{
-		if (selection.getFirstElement() instanceof TreeNodeWrapper)
+		if (selection.getFirstElement() instanceof BTSIdentifiableItem)
+		{
+			selectedTreeObject = (BTSIdentifiableItem) selection.getFirstElement();
+			if (selection.getFirstElement() instanceof BTSProject)
+			{
+				selectedProject = (BTSProject) selection.getFirstElement();
+				loadProjectEditComposite(selectedProject);
+				enableReolesUndoRedo(selectedProject);
+			} else if (selection.getFirstElement() instanceof BTSProjectDBCollection)
+			{
+				selectedDBCollection = (BTSProjectDBCollection) selection.getFirstElement();
+				loadDBCollectionEditComposite(selectedDBCollection);
+				enableReolesUndoRedo(selectedTreeObject);
+			} else if (selection.getFirstElement() instanceof BTSDBCollectionRoleDesc)
+			{
+				selectedDBRoleDesc = (BTSDBCollectionRoleDesc) selection.getFirstElement();
+				loadDBRoleDescEditComposite(selectedDBRoleDesc);
+				enableReolesUndoRedo(selectedTreeObject);
+			} else if (selectedTreeObject instanceof BTSUser)
+			{
+				loadDBRoleDescUserEditComposite((BTSUser) selectedTreeObject);
+				enableReolesUndoRedo(selectedTreeObject);
+			} else if (selection.getFirstElement() instanceof BTSUserGroup)
+			{
+				loadDBRoleDescUserGroupEditComposite((BTSUserGroup) selectedTreeObject);
+				enableReolesUndoRedo(selectedTreeObject);
+			}
+			if (selectedTreeObject == null || !selectedTreeObject.equals(selection.getFirstElement()))
+			{
+				BTSIdentifiableItem oldSelection = selectedTreeObject;
+				selectedTreeObject = (BTSIdentifiableItem) selection.getFirstElement();
+				manageDomainListeners(oldSelection, selectedTreeObject);
+				manageDirtyObjects(oldSelection, selectedTreeObject);
+			}
+		} else if (selection.getFirstElement() instanceof TreeNodeWrapper)
 		{
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
-
-			if (tn.getObject() instanceof BTSProject)
+			selectedTreeNode = tn;
+			if (tn.getObject() instanceof BTSUserGroup)
 			{
-
-				selectedProject = (BTSProject) tn.getObject();
-				loadProjectEditComposite(selectedProject);
-				enableUndoRedo(selectedProject);
+				if (!tn.isChildrenLoaded())
+				{
+					List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
+					parents.add(tn);
+					loadChildren(parents, treeViewer, false);
+				}
+				loadDBRoleDescUserGroupEditComposite((BTSUserGroup) tn.getObject());
+				enableReolesUndoRedo((BTSUserGroup) tn.getObject());
 			}
+			if (tn.getObject() instanceof BTSUser)
+			{
+				loadDBRoleDescUserEditComposite((BTSUser) tn.getObject());
+				enableReolesUndoRedo((BTSUser) tn.getObject());
+			}
+			if (selectedTreeObject == null || !selectedTreeObject.equals(tn.getObject()))
+			{
+				BTSIdentifiableItem oldSelection = selectedTreeObject;
+				selectedTreeObject = (BTSIdentifiableItem) tn.getObject();
+				manageDomainListeners(oldSelection, selectedTreeObject);
+				manageDirtyObjects(oldSelection, selectedTreeObject);
+			}
+		}
 
-		}
-		if (selection.getFirstElement() instanceof BTSProjectDBCollection)
+	}
+
+	private void loadDBRoleDescUserGroupEditComposite(final BTSUserGroup group)
+	{
+		if (roles_composite_right != null)
 		{
-			selectedDBCollection = (BTSProjectDBCollection) selection.getFirstElement();
-			loadUserEditComposite(selectedUser);
-			enableUndoRedo(selectedTreeObject);
+			roles_composite_right.dispose();
+			roles_composite_right = null;
 		}
-		if (selectedTreeObject == null || !selectedTreeObject.equals(selection.getFirstElement()))
+		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
+		roles_composite_right.setLayout(new GridLayout(2, false));
+
+		lblUserGroup_1 = new Label(roles_composite_right, SWT.NONE);
+		lblUserGroup_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
+		lblUserGroup_1.setText("User Group");
+
+		lblGroupName = new Label(roles_composite_right, SWT.NONE);
+		lblGroupName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblGroupName.setText("Group name");
+
+		text = new Text(roles_composite_right, SWT.BORDER);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text.setText(group.getName());
+		text.setEditable(false);
+
+		roles_group_removeGroupfromRole_link = new Link(roles_composite_right, SWT.NONE);
+		roles_group_removeGroupfromRole_link.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, true, true, 2, 1));
+		roles_group_removeGroupfromRole_link.setText("<a>Remove Group from role</a>");
+		roles_group_removeGroupfromRole_link.addSelectionListener(new SelectionAdapter()
 		{
-			BTSIdentifiableItem oldSelection = selectedTreeObject;
-			selectedTreeObject = (BTSIdentifiableItem) selection.getFirstElement();
-			manageDomainListeners(oldSelection, selectedTreeObject);
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				if (selectedTreeNode != null)
+				{
+					Object parent = selectedTreeNode.getParentObject();
+					if (parent instanceof BTSDBCollectionRoleDesc)
+					{
+						BTSDBCollectionRoleDesc parentRoleDesc = (BTSDBCollectionRoleDesc) parent;
+						BTSUserGroup u = (BTSUserGroup) selectedTreeNode.getObject();
+						CompoundCommand compoundCommand = new CompoundCommand();
+						Command c1 = RemoveCommand.create(getEditingDomain(selectedDBRoleDesc), parentRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN, selectedTreeNode);
+						compoundCommand.append(c1);
+						Command c2 = RemoveCommand.create(getEditingDomain(selectedDBRoleDesc), parentRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, u.getName());
+						compoundCommand.append(c2);
+						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						roles_treeViewer.refresh(parent);
+					}
+				}
+
+			}
+		});
+
+		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.layout();
+
+	}
+
+	private void loadDBRoleDescUserEditComposite(final BTSUser user)
+	{
+		if (roles_composite_right != null)
+		{
+			roles_composite_right.dispose();
+			roles_composite_right = null;
+		}
+		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
+		roles_composite_right.setLayout(new GridLayout(2, false));
+
+		lblUser_1 = new Label(roles_composite_right, SWT.NONE);
+		lblUser_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
+		lblUser_1.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
+		lblUser_1.setText("User");
+
+		lblForename_1 = new Label(roles_composite_right, SWT.NONE);
+		lblForename_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblForename_1.setText("Forename");
+
+		roles_user_forename_text = new Text(roles_composite_right, SWT.BORDER);
+		roles_user_forename_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		roles_user_forename_text.setEditable(false);
+		roles_user_forename_text.setText(user.getForeName());
+
+		lblSurname = new Label(roles_composite_right, SWT.NONE);
+		lblSurname.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblSurname.setText("Surname");
+
+		roles_user_surname_text = new Text(roles_composite_right, SWT.BORDER);
+		roles_user_surname_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		roles_user_surname_text.setEditable(false);
+		roles_user_surname_text.setText(user.getSureName());
+
+		Link roles_user_removeRolefromUser_link = new Link(roles_composite_right, SWT.NONE);
+		roles_user_removeRolefromUser_link.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
+		roles_user_removeRolefromUser_link.setText("<a>Remove Role from User</a>");
+		roles_user_removeRolefromUser_link.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				if (selectedTreeNode != null)
+				{
+					Object parent = selectedTreeNode.getParentObject();
+					if (parent instanceof BTSDBCollectionRoleDesc)
+					{
+						BTSDBCollectionRoleDesc parentRoleDesc = (BTSDBCollectionRoleDesc) parent;
+						BTSUser u = (BTSUser) selectedTreeNode.getObject();
+						CompoundCommand compoundCommand = new CompoundCommand();
+						Command c1 = RemoveCommand.create(getEditingDomain(selectedDBRoleDesc), parentRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN, selectedTreeNode);
+						compoundCommand.append(c1);
+						Command c2 = RemoveCommand.create(getEditingDomain(selectedDBRoleDesc), parentRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES, u.getUserName());
+						compoundCommand.append(c2);
+						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						roles_treeViewer.refresh(parent);
+					}
+				}
+			}
+		});
+
+		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.layout();
+
+	}
+
+	private void loadDBRoleDescEditComposite(BTSDBCollectionRoleDesc dBRoleDesc)
+	{
+		if (roles_composite_right != null)
+		{
+			roles_composite_right.dispose();
+			roles_composite_right = null;
+		}
+		if (observableLisAllUsers == null)
+		{
+			loadAllUsers();
+		}
+		if (observableLisAllUserGroups == null)
+		{
+			loadAllUserGroups();
+		}
+		checkAndLoadCache(dBRoleDesc);
+		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
+		roles_composite_right.setLayout(new GridLayout(2, false));
+		lblUserRoleDefinition = new Label(roles_composite_right, SWT.NONE);
+		lblUserRoleDefinition.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
+		lblUserRoleDefinition.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
+		lblUserRoleDefinition.setText("User Role Definition");
+
+		lblRoleName = new Label(roles_composite_right, SWT.NONE);
+		lblRoleName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblRoleName.setText("Role Name");
+
+		roles_rolesDesc_name_text = new Text(roles_composite_right, SWT.BORDER);
+		roles_rolesDesc_name_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		roles_rolesDesc_name_text.setEditable(false);
+
+		Label lblRoleDesc = new Label(roles_composite_right, SWT.NONE);
+		lblRoleDesc.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblRoleDesc.setText("Role Description");
+
+		Text txt_rolesDesc = new Text(roles_composite_right, SWT.BORDER | SWT.MULTI | SWT.WRAP);
+		txt_rolesDesc.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 2));
+		txt_rolesDesc.setEditable(false);
+		String desc = roleDescMap.get(dBRoleDesc.getRoleName());
+		if (desc != null)
+		{
+			txt_rolesDesc.setText(desc);
 		}
 
+		Group grpAssignUser = new Group(roles_composite_right, SWT.NONE);
+		grpAssignUser.setLayout(new GridLayout(1, false));
+		grpAssignUser.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		grpAssignUser.setText("Assign User");
+
+		Label lblSelectUser = new Label(grpAssignUser, SWT.NONE);
+		lblSelectUser.setText("Select User");
+
+		roles_rolesDesc_users_comboViewer = new ComboViewer(grpAssignUser, SWT.NONE | SWT.READ_ONLY);
+		roles_rolesDesc_users_comboViewer.getCombo().setLayoutData(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		roles_rolesDesc_users_comboViewer.setContentProvider(new ObservableListContentProvider());
+		roles_rolesDesc_users_comboViewer.setLabelProvider(labelProvider);
+		roles_rolesDesc_users_comboViewer.setInput(observableLisAllUsers);
+
+		roles_roleDesc_assignUser_link = new Link(grpAssignUser, SWT.NONE);
+		roles_roleDesc_assignUser_link.setText("<a>Assign role to user</a>");
+		roles_roleDesc_assignUser_link.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				if (roles_rolesDesc_users_comboViewer.getSelection() != null)
+				{
+					IStructuredSelection sel = (IStructuredSelection) roles_rolesDesc_users_comboViewer.getSelection();
+					if (sel.getFirstElement() != null)
+					{
+						BTSUser u = (BTSUser) sel.getFirstElement();
+						TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(u);
+						tn.setParentObject(selectedDBRoleDesc);
+						tn.setChildrenLoaded(true);
+						CompoundCommand compoundCommand = new CompoundCommand();
+						Command command = AddCommand.create(getEditingDomain(selectedDBRoleDesc), selectedDBRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN, tn);
+						compoundCommand.append(command);
+						Command command2 = AddCommand.create(getEditingDomain(selectedDBRoleDesc), selectedDBRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES, u.getUserName());
+						compoundCommand.append(command2);
+						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						roles_treeViewer.refresh(selectedDBRoleDesc);
+					}
+				}
+
+			}
+		});
+
+		grpAssignUserGroup = new Group(roles_composite_right, SWT.NONE);
+		grpAssignUserGroup.setLayout(new GridLayout(1, false));
+		grpAssignUserGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		grpAssignUserGroup.setText("Assign User Group");
+
+		lblSelectUserGroup = new Label(grpAssignUserGroup, SWT.NONE);
+		lblSelectUserGroup.setText("Select User Group");
+
+		roles_rolesDesc_group_comboViewer = new ComboViewer(grpAssignUserGroup, SWT.NONE | SWT.READ_ONLY);
+		roles_rolesDesc_group_comboViewer.getCombo().setLayoutData(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		roles_rolesDesc_group_comboViewer.setContentProvider(new ObservableListContentProvider());
+		roles_rolesDesc_group_comboViewer.setLabelProvider(labelProvider);
+		roles_rolesDesc_group_comboViewer.setInput(observableLisAllUserGroups);
+		roles_roleDesc_assignGroup_link = new Link(grpAssignUserGroup, SWT.NONE);
+		roles_roleDesc_assignGroup_link.setText("<a>Assign role to whole user group</a>");
+		roles_roleDesc_assignGroup_link.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				if (roles_rolesDesc_group_comboViewer.getSelection() != null)
+				{
+					IStructuredSelection sel = (IStructuredSelection) roles_rolesDesc_group_comboViewer.getSelection();
+					if (sel.getFirstElement() != null)
+					{
+						BTSUserGroup ug = (BTSUserGroup) sel.getFirstElement();
+						TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(ug);
+						tn.setParentObject(selectedDBRoleDesc);
+						tn.setChildrenLoaded(true);
+						CompoundCommand compoundCommand = new CompoundCommand();
+						Command command = AddCommand.create(getEditingDomain(selectedDBRoleDesc), selectedDBRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN, tn);
+						compoundCommand.append(command);
+						Command command2 = AddCommand.create(getEditingDomain(selectedDBRoleDesc), selectedDBRoleDesc,
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, ug.getName());
+						compoundCommand.append(command2);
+						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+
+						roles_treeViewer.refresh(selectedDBRoleDesc);
+					}
+				}
+
+			}
+		});
+
+		roles_roleDesc_removeRoleDesc_link = new Link(roles_composite_right, SWT.NONE);
+		roles_roleDesc_removeRoleDesc_link.setText("<a>Remove this Role and its members from DB collection</a>");
+		roles_roleDesc_removeRoleDesc_link.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				if (selectedDBRoleDesc != null && selectedDBRoleDesc.eContainer() instanceof BTSProjectDBCollection)
+				{
+					BTSProjectDBCollection coll = (BTSProjectDBCollection) selectedDBRoleDesc.eContainer();
+					Command command = RemoveCommand.create(getEditingDomain(coll), coll,
+							BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS, selectedDBRoleDesc);
+					getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(command);
+
+					roles_treeViewer.refresh(coll);
+
+				}
+
+			}
+		});
+		dbRoleDesc_bindingContext = initializeRoleDescBindings(dBRoleDesc);
+
+		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.layout();
+
+	}
+
+	private void checkAndLoadCache(BTSDBCollectionRoleDesc dBRoleDesc)
+	{
+		boolean uncached = dBRoleDesc.getCachedChildren().isEmpty();
+		if (!dBRoleDesc.getUserNames().isEmpty() && uncached)
+		{
+
+			for (String n : dBRoleDesc.getUserNames())
+			{
+				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(userMap.get(n));
+				tn.setParentObject(dBRoleDesc);
+				tn.setChildrenLoaded(true);
+				dBRoleDesc.getCachedChildren().add(tn);
+			}
+		}
+		if (!dBRoleDesc.getUserRoles().isEmpty() && uncached)
+		{
+			for (String n : dBRoleDesc.getUserRoles())
+			{
+				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(userGroupMap.get(n));
+				tn.setParentObject(dBRoleDesc);
+				tn.setChildrenLoaded(true);
+				dBRoleDesc.getCachedChildren().add(tn);
+			}
+		}
+		if (uncached)
+		{
+			roles_treeViewer.refresh(dBRoleDesc);
+		}
+
+	}
+
+	private void loadAllUserGroups()
+	{
+		List<BTSUserGroup> groups = userManagerController.listUserGroups();
+		observableLisAllUserGroups = new WritableList(groups, BTSUserGroup.class);
+		userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
+		for (BTSUserGroup u : groups)
+		{
+			userGroupMap.put(u.getName(), u);
+		}
+	}
+
+	private void loadAllUsers()
+	{
+		List<BTSUser> users = userManagerController.listUsers();
+		observableLisAllUsers = new WritableList(users, BTSUser.class);
+		userMap = new HashMap<String, BTSUser>(users.size());
+		for (BTSUser u : users)
+		{
+			userMap.put(u.getUserName(), u);
+		}
+
+	}
+
+	private DataBindingContext initializeRoleDescBindings(BTSDBCollectionRoleDesc dBRoleDesc)
+	{
+		getEditingDomain(dBRoleDesc);
+		if (dbRoleDesc_bindingContext != null)
+		{
+			dbRoleDesc_bindingContext.dispose();
+		}
+		DataBindingContext bindingContext = new DataBindingContext();
+
+		// db collection name - cannot be changed
+		IObservableValue model_na = EMFProperties.value(BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME)
+				.observe(dBRoleDesc);
+		bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_rolesDesc_name_text),
+				model_na, null, null);
+		return bindingContext;
+	}
+
+	private void loadDBCollectionEditComposite(BTSProjectDBCollection dbCollection)
+	{
+		if (roles_composite_right != null)
+		{
+			roles_composite_right.dispose();
+			roles_composite_right = null;
+		}
+		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
+		roles_composite_right.setLayout(new GridLayout(2, false));
+
+		lblDatabaseCollection = new Label(roles_composite_right, SWT.NONE);
+		lblDatabaseCollection.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		lblDatabaseCollection.setAlignment(SWT.CENTER);
+		lblDatabaseCollection.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
+		lblDatabaseCollection.setText("Database Collection");
+
+		lblDbCollectionName = new Label(roles_composite_right, SWT.NONE);
+		lblDbCollectionName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblDbCollectionName.setText("DB Collection Name");
+
+		roles_dbColl_name_text = new Text(roles_composite_right, SWT.BORDER);
+		roles_dbColl_name_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		roles_dbColl_name_text.setEditable(false);
+
+		roles_dbColl_sync_btn = new Button(roles_composite_right, SWT.CHECK);
+		roles_dbColl_sync_btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		roles_dbColl_sync_btn.setText("Syncronize with Server");
+
+		roles_dbColl_index_btn = new Button(roles_composite_right, SWT.CHECK);
+		roles_dbColl_index_btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		roles_dbColl_index_btn.setText("Index Collection");
+
+		lblCreateNewRoles = new Label(roles_composite_right, SWT.NONE);
+		lblCreateNewRoles.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
+		lblCreateNewRoles.setText("Create New Roles Description");
+
+		roles_dbColl_newRoles_combo = new Combo(roles_composite_right, SWT.BORDER | SWT.READ_ONLY);
+		roles_dbColl_newRoles_combo.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+		roles_dbColl_newRoles_combo.setItems(databaseRoles);
+
+		roles_dbColl_newRoles_link = new Link(roles_composite_right, SWT.NONE);
+		roles_dbColl_newRoles_link.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		roles_dbColl_newRoles_link.setText("<a>Add new User Roles Description</a>");
+		roles_dbColl_newRoles_link.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				//				FeaturePath feature3 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_PROJECT__DB_COLLECTIONS,
+				//						BtsmodelPackage.Literals.BTSDB_CONNECTION__DB_PATH);
+				BTSDBCollectionRoleDesc rolesDesc = BtsmodelFactory.eINSTANCE.createBTSDBCollectionRoleDesc();
+
+				CompoundCommand compound = new CompoundCommand();
+				Command c2 = SetCommand.create(getEditingDomain(selectedDBCollection), rolesDesc,
+						BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME,
+						roles_dbColl_newRoles_combo.getText());
+				compound.append(c2);
+
+				Command c1 = AddCommand.create(getEditingDomain(selectedDBCollection), selectedDBCollection,
+						BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS, rolesDesc);
+				compound.append(c1);
+
+				getEditingDomain(selectedDBCollection).getCommandStack().execute(compound);
+				roles_treeViewer.refresh();
+
+			}
+		});
+
+		dbColl_bindingContext = initializeDBCollectionBindings(dbCollection);
+
+		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.layout();
+	}
+
+	private DataBindingContext initializeDBCollectionBindings(BTSProjectDBCollection dbCollection)
+	{
+		EditingDomain editingDomain = getEditingDomain(dbCollection);
+		if (dbColl_bindingContext != null)
+		{
+			dbColl_bindingContext.dispose();
+		}
+		DataBindingContext bindingContext = new DataBindingContext();
+
+		// db collection name - cannot be changed
+		IObservableValue model_na = EMFProperties.value(
+				BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME).observe(dbCollection);
+		bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_dbColl_name_text),
+				model_na, null, null);
+
+		// sync
+		IObservableValue model_sy = EMFEditProperties.value(editingDomain,
+				BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED).observe(dbCollection);
+		Binding binding_sy = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(DELAY, roles_dbColl_sync_btn), model_sy, null, null);
+		bindingContext.addValidationStatusProvider(binding_sy);
+
+		// index
+		IObservableValue model_in = EMFEditProperties.value(editingDomain,
+				BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__INDEXED).observe(dbCollection);
+		Binding binding_in = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(DELAY, roles_dbColl_index_btn), model_in, null, null);
+		bindingContext.addValidationStatusProvider(binding_in);
+
+		return bindingContext;
 	}
 
 	private void loadProjectEditComposite(BTSProject project)
@@ -814,6 +1501,9 @@ public class UserManagementPart
 
 	private void manageDomainListeners(BTSIdentifiableItem oldSelection, BTSIdentifiableItem currentSelection)
 	{
+		// FIXME hier checken, ob der CommandStack von oldSelecton canUndo() ist, wenn ja, 
+		// dann zum Set dirtyUser/GroupObjects hinzufügen oder entfernen
+
 		Adapter changeListenerAdapter = getChangeListenerAdapter();
 		if (oldSelection != null)
 		{
@@ -837,6 +1527,7 @@ public class UserManagementPart
 				public void notifyChanged(Notification notification)
 				{
 					enableUndoRedo(selectedTreeObject);
+					enableReolesUndoRedo(selectedTreeObject);
 
 				}
 
@@ -851,6 +1542,14 @@ public class UserManagementPart
 
 		user_ToolUndo.setEnabled(getEditingDomain(object).getCommandStack().canUndo());
 		user_ToolRedo.setEnabled(getEditingDomain(object).getCommandStack().canRedo());
+
+	}
+
+	private void enableReolesUndoRedo(BTSIdentifiableItem object)
+	{
+
+		roles_ToolUndo.setEnabled(getEditingDomain(object).getCommandStack().canUndo());
+		roles_ToolRedo.setEnabled(getEditingDomain(object).getCommandStack().canRedo());
 
 	}
 
@@ -934,7 +1633,7 @@ public class UserManagementPart
 		textComment_User = new Text(composite_UserEdit, SWT.BORDER);
 		textComment_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		Label lblNewLabel = new Label(composite_UserEdit, SWT.NONE);
+		new Label(composite_UserEdit, SWT.NONE);
 		new Label(composite_UserEdit, SWT.NONE);
 
 		Group grpLogin = new Group(composite_UserEdit, SWT.NONE);
@@ -977,8 +1676,8 @@ public class UserManagementPart
 		DataBindingContext bindingContext = new DataBindingContext();
 
 		// group id
-		IObservableValue model_id = EMFEditProperties.value(editingDomain,
-				BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID).observe(user);
+		IObservableValue model_id = EMFProperties.value(BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID).observe(
+				user);
 		Binding binding_id = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, labelId_User), model_id, null, null);
 		bindingContext.addValidationStatusProvider(binding_id);
@@ -1061,17 +1760,29 @@ public class UserManagementPart
 		return bindingContext;
 	}
 
-	private EditingDomain getEditingDomain(BTSIdentifiableItem user)
+	private EditingDomain getEditingDomain(BTSIdentifiableItem item)
 	{
-		if (editingDomainMap.containsKey(user))
+		BTSIdentifiableItem object = item;
+		if (item instanceof BTSProjectDBCollection)
 		{
-			return editingDomainMap.get(user);
+			object = (BTSIdentifiableItem) item.eContainer();
+		} else if (item instanceof BTSDBCollectionRoleDesc)
+		{
+			if (item.eContainer() == null)
+			{
+				return null;
+			}
+			object = (BTSIdentifiableItem) item.eContainer().eContainer();
 		}
-		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
-		AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(factory, new BasicCommandStack());
+		if (editingDomainMap.containsKey(object))
+		{
+			return editingDomainMap.get(object);
+		}
+
+		AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(adapterFactory, new BasicCommandStack());
 		//		EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(user);
-		editingDomainMap.put(user, domain);
+		editingDomainMap.put(object, domain);
 		return domain;
 	}
 
@@ -1184,6 +1895,7 @@ public class UserManagementPart
 		tn.setObject(user);
 		tn.setParent(parentNodeWrapper);
 		parentNodeWrapper.getChildren().add(tn);
+		observableLisAllUsers.add(user);
 	}
 
 	private DataBindingContext initializeUserGoupBindings(BTSUserGroup group)
@@ -1250,6 +1962,46 @@ public class UserManagementPart
 		}
 	}
 
+	@Persist
+	public void save(MDirtyable dirty)
+	{
+		boolean internalDirty = dirty != null ? dirty.isDirty() : true;
+		if (!dirtyUsers.isEmpty())
+		{
+			if (!userManagerController.saveUsers(dirtyUsers))
+			{
+				internalDirty = true;
+			} else
+			{
+				dirtyUsers.clear();
+			}
+		}
+		if (!dirtyUserGroups.isEmpty())
+		{
+			if (!userManagerController.saveUserGroups(dirtyUserGroups))
+			{
+				internalDirty = true;
+			} else
+			{
+				dirtyUserGroups.clear();
+			}
+		}
+		if (!dirtyProjects.isEmpty())
+		{
+			if (!projectController.saveProjects(dirtyProjects))
+			{
+				internalDirty = true;
+			} else
+			{
+				dirtyProjects.clear();
+			}
+		}
+		if (dirty != null)
+		{
+			dirty.setDirty(internalDirty);
+		}
+	}
+
 	private void addObjectToInput(final BTSObject object)
 	{
 		sync.asyncExec(new Runnable()
@@ -1260,6 +2012,10 @@ public class UserManagementPart
 				TreeNodeWrapper tn = wrappObject(object);
 				tn.setParent(user_root);
 				user_root.getChildren().add(tn);
+				if (object instanceof BTSUserGroup)
+				{
+					observableLisAllUserGroups.add(object);
+				}
 			}
 		});
 

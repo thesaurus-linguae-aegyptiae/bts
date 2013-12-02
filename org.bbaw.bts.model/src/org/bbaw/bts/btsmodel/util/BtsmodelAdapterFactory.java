@@ -92,9 +92,9 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSWordAdapter();
 			}
 			@Override
-			public Adapter caseBTSDelimiter(BTSDelimiter object)
+			public Adapter caseBTSMarker(BTSMarker object)
 			{
-				return createBTSDelimiterAdapter();
+				return createBTSMarkerAdapter();
 			}
 			@Override
 			public Adapter caseBTSTextItems(BTSTextItems object)
@@ -102,9 +102,9 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSTextItemsAdapter();
 			}
 			@Override
-			public Adapter caseBTSSentenceItems(BTSSentenceItems object)
+			public Adapter caseBTSSentenceItem(BTSSentenceItem object)
 			{
-				return createBTSSentenceItemsAdapter();
+				return createBTSSentenceItemAdapter();
 			}
 			@Override
 			public Adapter caseBTSListEntry(BTSListEntry object)
@@ -337,6 +337,16 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSDBCollectionRoleDescAdapter();
 			}
 			@Override
+			public Adapter caseBTSTextContent(BTSTextContent object)
+			{
+				return createBTSTextContentAdapter();
+			}
+			@Override
+			public Adapter caseBTSAmbivalenceItem(BTSAmbivalenceItem object)
+			{
+				return createBTSAmbivalenceItemAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object)
 			{
 				return createEObjectAdapter();
@@ -414,16 +424,17 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSDelimiter <em>BTS Delimiter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSMarker <em>BTS Marker</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSDelimiter
+	 * @see org.bbaw.bts.btsmodel.BTSMarker
 	 * @generated
 	 */
-	public Adapter createBTSDelimiterAdapter() {
+	public Adapter createBTSMarkerAdapter()
+	{
 		return null;
 	}
 
@@ -442,16 +453,17 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSSentenceItems <em>BTS Sentence Items</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSSentenceItem <em>BTS Sentence Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSSentenceItems
+	 * @see org.bbaw.bts.btsmodel.BTSSentenceItem
 	 * @generated
 	 */
-	public Adapter createBTSSentenceItemsAdapter() {
+	public Adapter createBTSSentenceItemAdapter()
+	{
 		return null;
 	}
 
@@ -1107,6 +1119,36 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSDBCollectionRoleDescAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTextContent <em>BTS Text Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSTextContent
+	 * @generated
+	 */
+	public Adapter createBTSTextContentAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSAmbivalenceItem
+	 * @generated
+	 */
+	public Adapter createBTSAmbivalenceItemAdapter()
 	{
 		return null;
 	}

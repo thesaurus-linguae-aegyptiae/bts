@@ -18,4 +18,7 @@ Export-Package: org.bbaw.bts.core.dao,
  org.bbaw.bts.core.dao.util
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,
- org.eclipse.e4.ui.model.application
+ org.bbaw.bts.commons.interfaces,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.e4.ui.model.application,
+ org.eclipse.e4.ui.workbench.modeling

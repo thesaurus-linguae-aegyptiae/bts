@@ -5,11 +5,16 @@ import javax.inject.Inject;
 import org.bbaw.bts.ui.main.parts.UserManagementPart;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Event;
@@ -20,7 +25,10 @@ public class UserManagementDialog extends TitleAreaDialog
 {
 	@Inject
 	private IEclipseContext context;
+	@Inject
+	private EPartService partService;
 	private UserManagementPart part;
+	private Button saveButton;
 
 	@Override
 	public void create()
@@ -93,8 +101,51 @@ public class UserManagementDialog extends TitleAreaDialog
 	@Override
 	protected void createButtonsForButtonBar(Composite parent)
 	{
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		saveButton = createSaveButton(parent, IDialogConstants.OK_ID, "Save and Close", true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+	}
+
+	private Button createSaveButton(Composite parent, int id, String label, boolean defaultButton)
+	{
+		((GridLayout) parent.getLayout()).numColumns++;
+		Button button = new Button(parent, SWT.PUSH);
+		button.setText(label);
+		button.setFont(JFaceResources.getDialogFont());
+		button.setData(new Integer(id));
+		button.addSelectionListener(new SelectionAdapter()
+		{
+			public void widgetSelected(SelectionEvent event)
+			{
+				if (isValidInput())
+				{
+					saveInput();
+				}
+			}
+		});
+		if (defaultButton)
+		{
+			Shell shell = parent.getShell();
+			if (shell != null)
+			{
+				shell.setDefaultButton(button);
+			}
+		}
+
+		setButtonLayoutData(button);
+		return button;
+
+	}
+
+	private boolean saveInput()
+	{
+		part.save(null);
+		return true;
+
+	}
+
+	private boolean isValidInput()
+	{
+		return true;
 	}
 
 	/**
@@ -105,4 +156,19 @@ public class UserManagementDialog extends TitleAreaDialog
 	{
 		return new Point(785, 581);
 	}
+
+	@Override
+	protected boolean isResizable()
+	{
+		return true;
+	}
+
+	@Override
+	public boolean close()
+	{
+		part.dispose();
+		part = null;
+		return super.close();
+	}
+
 }

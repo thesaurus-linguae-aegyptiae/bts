@@ -42,7 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class BTSWordImpl extends BTSSentenceItemsImpl implements BTSWord {
+public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	/**
 	 * The cached value of the '{@link #getTranslation() <em>Translation</em>}' containment reference.
 	 * <!-- begin-user-doc -->

@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
+import org.bbaw.bts.btsmodel.BTSAmbivalenceItem;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfig;
@@ -18,7 +19,6 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSDate;
-import org.bbaw.bts.btsmodel.BTSDelimiter;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
@@ -28,6 +28,7 @@ import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSList;
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSListSubentry;
+import org.bbaw.bts.btsmodel.BTSMarker;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSOperator;
@@ -42,9 +43,10 @@ import org.bbaw.bts.btsmodel.BTSReference;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItems;
+import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.btsmodel.BTSTextContent;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSTextItems;
 import org.bbaw.bts.btsmodel.BTSTextSentenceItem;
@@ -108,7 +110,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass btsDelimiterEClass = null;
+	private EClass btsMarkerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,7 +124,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass btsSentenceItemsEClass = null;
+	private EClass btsSentenceItemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -451,6 +453,20 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass btsTextContentEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsAmbivalenceItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType propertyChangeSupportEDataType = null;
 
 	/**
@@ -551,7 +567,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSText_TextItems() {
+	public EReference getBTSText_TextContent()
+	{
 		return (EReference)btsTextEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -668,8 +685,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBTSDelimiter() {
-		return btsDelimiterEClass;
+	public EClass getBTSMarker()
+	{
+		return btsMarkerEClass;
 	}
 
 	/**
@@ -677,8 +695,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSDelimiter_Value() {
-		return (EAttribute)btsDelimiterEClass.getEStructuralFeatures().get(0);
+	public EAttribute getBTSMarker_Value()
+	{
+		return (EAttribute)btsMarkerEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -695,8 +714,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBTSSentenceItems() {
-		return btsSentenceItemsEClass;
+	public EClass getBTSSentenceItem()
+	{
+		return btsSentenceItemEClass;
 	}
 
 	/**
@@ -2658,6 +2678,46 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSDBCollectionRoleDesc_CachedChildren()
+	{
+		return (EAttribute)btsdbCollectionRoleDescEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBTSTextContent()
+	{
+		return btsTextContentEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBTSTextContent_TextItems()
+	{
+		return (EReference)btsTextContentEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBTSAmbivalenceItem()
+	{
+		return btsAmbivalenceItemEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPropertyChangeSupport() {
 		return propertyChangeSupportEDataType;
 	}
@@ -2711,7 +2771,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btstcObjectEClass = createEClass(BTSTC_OBJECT);
 
 		btsTextEClass = createEClass(BTS_TEXT);
-		createEReference(btsTextEClass, BTS_TEXT__TEXT_ITEMS);
+		createEReference(btsTextEClass, BTS_TEXT__TEXT_CONTENT);
 
 		btsSenctenceEClass = createEClass(BTS_SENCTENCE);
 		createEReference(btsSenctenceEClass, BTS_SENCTENCE__SENTENCE_ITEMS);
@@ -2727,12 +2787,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsWordEClass, BTS_WORD__VALUE);
 		createEReference(btsWordEClass, BTS_WORD__GRAPHICS);
 
-		btsDelimiterEClass = createEClass(BTS_DELIMITER);
-		createEAttribute(btsDelimiterEClass, BTS_DELIMITER__VALUE);
+		btsMarkerEClass = createEClass(BTS_MARKER);
+		createEAttribute(btsMarkerEClass, BTS_MARKER__VALUE);
 
 		btsTextItemsEClass = createEClass(BTS_TEXT_ITEMS);
 
-		btsSentenceItemsEClass = createEClass(BTS_SENTENCE_ITEMS);
+		btsSentenceItemEClass = createEClass(BTS_SENTENCE_ITEM);
 
 		btsListEntryEClass = createEClass(BTS_LIST_ENTRY);
 		createEAttribute(btsListEntryEClass, BTS_LIST_ENTRY__IGNORE);
@@ -2989,6 +3049,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME);
 		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__USER_NAMES);
 		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__USER_ROLES);
+		createEAttribute(btsdbCollectionRoleDescEClass, BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN);
+
+		btsTextContentEClass = createEClass(BTS_TEXT_CONTENT);
+		createEReference(btsTextContentEClass, BTS_TEXT_CONTENT__TEXT_ITEMS);
+
+		btsAmbivalenceItemEClass = createEClass(BTS_AMBIVALENCE_ITEM);
 
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
@@ -3027,19 +3093,30 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btstcObjectEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsTextEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsSenctenceEClass.getESuperTypes().add(this.getBTSTextItems());
-		btsWordEClass.getESuperTypes().add(this.getBTSSentenceItems());
-		btsDelimiterEClass.getESuperTypes().add(this.getBTSTextSentenceItem());
+		btsSenctenceEClass.getESuperTypes().add(this.getBTSReferencableItem());
+		btsWordEClass.getESuperTypes().add(this.getBTSSentenceItem());
+		btsWordEClass.getESuperTypes().add(this.getBTSAmbivalenceItem());
+		btsWordEClass.getESuperTypes().add(this.getBTSReferencableItem());
+		btsMarkerEClass.getESuperTypes().add(this.getBTSTextSentenceItem());
+		btsMarkerEClass.getESuperTypes().add(this.getBTSTextItems());
+		btsMarkerEClass.getESuperTypes().add(this.getBTSAmbivalenceItem());
+		btsMarkerEClass.getESuperTypes().add(this.getBTSSentenceItem());
+		btsMarkerEClass.getESuperTypes().add(this.getBTSReferencableItem());
 		btsTextItemsEClass.getESuperTypes().add(this.getBTSReferencableItem());
-		btsSentenceItemsEClass.getESuperTypes().add(this.getBTSReferencableItem());
+		btsSentenceItemEClass.getESuperTypes().add(this.getBTSReferencableItem());
 		btsListEntryEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		administrativDataObjectEClass.getESuperTypes().add(this.getBTSObservableObject());
 		btsObjectEClass.getESuperTypes().add(this.getAdministrativDataObject());
 		btsAmbivalenceEClass.getESuperTypes().add(this.getBTSTextSentenceItem());
+		btsAmbivalenceEClass.getESuperTypes().add(this.getBTSSentenceItem());
+		btsAmbivalenceEClass.getESuperTypes().add(this.getBTSTextItems());
+		btsAmbivalenceEClass.getESuperTypes().add(this.getBTSReferencableItem());
+		btsLemmaCaseEClass.getESuperTypes().add(this.getBTSReferencableItem());
 		btsUserEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsUserEClass.getESuperTypes().add(this.getBTSObject());
 		btsCommentEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsCommentEClass.getESuperTypes().add(this.getBTSObject());
-		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSSentenceItems());
+		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSSentenceItem());
 		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSTextItems());
 		btsAnnotationEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsPassportEntryEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
@@ -3080,10 +3157,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btstcObjectEClass, BTSTCObject.class, "BTSTCObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(btsTextEClass, BTSText.class, "BTSText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSText_TextItems(), this.getBTSTextItems(), null, "textItems", null, 0, -1, BTSText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSText_TextContent(), this.getBTSTextContent(), null, "textContent", null, 0, 1, BTSText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsSenctenceEClass, BTSSenctence.class, "BTSSenctence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSSenctence_SentenceItems(), this.getBTSSentenceItems(), null, "sentenceItems", null, 0, -1, BTSSenctence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSSenctence_SentenceItems(), this.getBTSSentenceItem(), null, "sentenceItems", null, 0, -1, BTSSenctence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSSenctence_Translation(), this.getBTSTranslations(), null, "translation", null, 0, 1, BTSSenctence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsWordEClass, BTSWord.class, "BTSWord", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3096,12 +3173,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSWord_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSWord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSWord_Graphics(), this.getBTSGraphic(), null, "graphics", null, 0, -1, BTSWord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(btsDelimiterEClass, BTSDelimiter.class, "BTSDelimiter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSDelimiter_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSDelimiter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(btsMarkerEClass, BTSMarker.class, "BTSMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBTSMarker_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSMarker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsTextItemsEClass, BTSTextItems.class, "BTSTextItems", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(btsSentenceItemsEClass, BTSSentenceItems.class, "BTSSentenceItems", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(btsSentenceItemEClass, BTSSentenceItem.class, "BTSSentenceItem", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(btsListEntryEClass, BTSListEntry.class, "BTSListEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSListEntry_Ignore(), ecorePackage.getEBoolean(), "ignore", null, 0, 1, BTSListEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3136,7 +3213,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEReference(getBTSAmbivalence_Cases(), this.getBTSLemmaCase(), null, "cases", null, 0, -1, BTSAmbivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsLemmaCaseEClass, BTSLemmaCase.class, "BTSLemmaCase", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSLemmaCase_Scenario(), this.getBTSTextSentenceItem(), null, "scenario", null, 0, -1, BTSLemmaCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSLemmaCase_Scenario(), this.getBTSAmbivalenceItem(), null, "scenario", null, 0, -1, BTSLemmaCase.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsUserEClass, BTSUser.class, "BTSUser", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSUser_GroupIds(), ecorePackage.getEString(), "groupIds", null, 0, -1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3368,6 +3445,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSDBCollectionRoleDesc_RoleName(), ecorePackage.getEString(), "roleName", null, 0, 1, BTSDBCollectionRoleDesc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBCollectionRoleDesc_UserNames(), ecorePackage.getEString(), "userNames", null, 0, -1, BTSDBCollectionRoleDesc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBCollectionRoleDesc_UserRoles(), ecorePackage.getEString(), "userRoles", null, 0, -1, BTSDBCollectionRoleDesc.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBCollectionRoleDesc_CachedChildren(), ecorePackage.getEJavaObject(), "cachedChildren", null, 0, -1, BTSDBCollectionRoleDesc.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsTextContentEClass, BTSTextContent.class, "BTSTextContent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBTSTextContent_TextItems(), this.getBTSTextItems(), null, "textItems", null, 0, -1, BTSTextContent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsAmbivalenceItemEClass, BTSAmbivalenceItem.class, "BTSAmbivalenceItem", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

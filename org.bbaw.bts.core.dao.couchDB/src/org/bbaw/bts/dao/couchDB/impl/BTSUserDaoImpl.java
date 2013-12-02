@@ -46,7 +46,8 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 			System.out.println(jo.get(DaoConstants.ID_STRING).getAsString());
 			if (!jo.get(DaoConstants.ID_STRING).getAsString().startsWith("_"))
 			{
-				URI uri = URI.createURI(getLocalDBURL() + path + jo.get(DaoConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
+						+ jo.get(DaoConstants.ID_STRING).getAsString());
 				Resource resource = resourceSet.getResource(uri, true);
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());

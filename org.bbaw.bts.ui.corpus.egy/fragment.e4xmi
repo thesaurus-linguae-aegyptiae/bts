@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:basic_1="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_b1neUD_oEeOYuPzWUW3h3g">
+  <imports xsi:type="basic:PartStack" xmi:id="_p1OfoECfEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.app.partstack.middle.top">
+    <children xsi:type="basic:Part" xmi:id="_gt8fMD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
+      <toolbar xmi:id="_j1eQ0D_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.0"/>
+    </children>
+  </imports>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q_x-IEChEeOsGJaKBBYPLQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.top">
+    <elements xsi:type="basic:Part" xmi:id="_RoAbwEChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
+      <toolbar xmi:id="_Vrll8EChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_jbc5cEt8EeO3HNJi0pp4Qg" featurename="commands" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Command" xmi:id="_l81REEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.command.insertTextModelElement" commandName="insertTextModelElement"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_n8FzEEt8EeO3HNJi0pp4Qg" featurename="handlers" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:Handler" xmi:id="_sw17gEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.egy.handler.insertTextModel" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.test.InsertTextModelElementHandler" command="_l81REEt8EeO3HNJi0pp4Qg"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_sc6yYFKtEeONtNt_OwxAsQ">
+    <elements xsi:type="basic_1:PartDescriptor" xmi:id="_stdv0FKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.partdescriptor.hierotw" label="Hieroglyph Type Writer" closeable="true" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter">
+      <toolbar xmi:id="_u6IbsFKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.2"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
+    <elements xsi:type="basic:Part" xmi:id="_28ER0FKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.part.hierotw" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter" label="Hieroglyph Type Writer" closeable="true">
+      <toolbar xmi:id="_6ea-QFKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.3"/>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

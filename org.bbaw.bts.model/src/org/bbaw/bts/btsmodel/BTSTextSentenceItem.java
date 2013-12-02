@@ -13,5 +13,5 @@ package org.bbaw.bts.btsmodel;
  * @model abstract="true"
  * @generated
  */
-public interface BTSTextSentenceItem extends BTSSentenceItems, BTSTextItems {
+public interface BTSTextSentenceItem extends BTSSentenceItem, BTSTextItems {
 } // BTSTextSentenceItem

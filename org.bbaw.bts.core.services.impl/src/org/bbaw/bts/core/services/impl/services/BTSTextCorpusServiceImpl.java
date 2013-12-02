@@ -93,4 +93,9 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSTextCorpus> list(String dbPath, String queryId)
+	{
+		return filter(textCorpusDao.findByQueryId(queryId, dbPath));
+	}
 }

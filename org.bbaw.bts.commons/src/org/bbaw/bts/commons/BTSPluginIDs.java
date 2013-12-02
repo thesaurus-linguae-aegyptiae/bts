@@ -6,7 +6,7 @@ public class BTSPluginIDs
 	{
 	};
 
-	public static final String PART_ID_CORPUS_NAVIGATOR = "org.bbaw.bts.ui.main.part.CorpusNavigatorPart";
+	public static final String PART_ID_CORPUS_NAVIGATOR = "org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart";
 
 	public static final String CMD_ID_NEW_CONFIGURATION = "org.bbaw.bts.ui.main.command.createNewConfiguration";
 
@@ -39,5 +39,7 @@ public class BTSPluginIDs
 	public static final String CMD_ID_NEW_USERGROUP = "org.bbaw.bts.ui.main.command.createNewUserGroup";
 
 	public static final String CMD_ID_NEW_USER = "org.bbaw.bts.ui.main.command.createNewUser";
+
+	public static final String PART_ID_USER_MANAGEMENT = "org.bbaw.bts.ui.main.parts.UserManagementPart";
 
 }

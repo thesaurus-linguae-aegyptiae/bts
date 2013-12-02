@@ -5,7 +5,10 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSGraphic;
+import org.bbaw.bts.btsmodel.BTSSenctence;
 import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSTextDao;
 import org.bbaw.bts.core.services.BTSTextService;
@@ -108,4 +111,27 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSText> list(String dbPath, String queryId)
+	{
+		return filter(textDao.findByQueryId(queryId, dbPath));
+	}
+
+	@Override
+	public BTSSenctence createNewSentence()
+	{
+		return BtsmodelFactory.eINSTANCE.createBTSSenctence();
+	}
+
+	@Override
+	public BTSWord createNewWord()
+	{
+		return BtsmodelFactory.eINSTANCE.createBTSWord();
+	}
+
+	@Override
+	public BTSGraphic createNewGraphic()
+	{
+		return BtsmodelFactory.eINSTANCE.createBTSGraphic();
+	}
 }

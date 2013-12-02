@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0" immediate="true" name="org.bbaw.bts.db.couchdb.CouchDBManagerContextFunction">
+     <implementation class="org.bbaw.bts.db.couchdb.CouchDBManagerContextFunction"/>
+  
+   <service>
+      <provide interface="org.eclipse.e4.core.contexts.IContextFunction"/>
+   </service> 
+   
+
+    <property name="service.context.key" type="String" 
+   value="org.bbaw.bts.db.DBManager"/>
+</scr:component>

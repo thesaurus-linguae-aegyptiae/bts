@@ -5,19 +5,12 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemFontProvider;
@@ -29,7 +22,6 @@ import org.eclipse.emf.edit.provider.ITableItemColorProvider;
 import org.eclipse.emf.edit.provider.ITableItemFontProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -39,7 +31,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BTSLemmaCaseItemProvider
-	extends ItemProviderAdapter
+	extends BTSReferencableItemItemProvider
 	implements
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider {
 	/**
@@ -118,7 +110,10 @@ public class BTSLemmaCaseItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_BTSLemmaCase_type");
+		String label = ((BTSLemmaCase)object).getName();
+		return label == null || label.length() == 0 ?
+			getString("_UI_BTSLemmaCase_type") :
+			getString("_UI_BTSLemmaCase_type") + " " + label;
 	}
 
 	/**
@@ -155,23 +150,12 @@ public class BTSLemmaCaseItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_LEMMA_CASE__SCENARIO,
-				 BtsmodelFactory.eINSTANCE.createBTSDelimiter()));
+				 BtsmodelFactory.eINSTANCE.createBTSWord()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_LEMMA_CASE__SCENARIO,
-				 BtsmodelFactory.eINSTANCE.createBTSAmbivalence()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return ((IChildCreationExtender)adapterFactory).getResourceLocator();
+				 BtsmodelFactory.eINSTANCE.createBTSMarker()));
 	}
 
 }

@@ -5,7 +5,7 @@ package org.bbaw.bts.btsmodel.impl;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
-import org.bbaw.bts.btsmodel.*;
+
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
@@ -13,9 +13,9 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusHeader;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSDate;
-import org.bbaw.bts.btsmodel.BTSDelimiter;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
@@ -25,6 +25,7 @@ import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSList;
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSListSubentry;
+import org.bbaw.bts.btsmodel.BTSMarker;
 import org.bbaw.bts.btsmodel.BTSOperator;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
@@ -37,6 +38,7 @@ import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSSenctence;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.btsmodel.BTSTextContent;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsmodel.BTSTimespan;
@@ -59,27 +61,28 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
+ * 
  * @generated
  */
 public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 {
 	/**
-	 * Creates the default factory implementation.
-	 * <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public static BtsmodelFactory init()
 	{
 		try
 		{
-			BtsmodelFactory theBtsmodelFactory = (BtsmodelFactory)EPackage.Registry.INSTANCE.getEFactory(BtsmodelPackage.eNS_URI);
+			BtsmodelFactory theBtsmodelFactory = (BtsmodelFactory) EPackage.Registry.INSTANCE
+					.getEFactory(BtsmodelPackage.eNS_URI);
 			if (theBtsmodelFactory != null)
 			{
 				return theBtsmodelFactory;
 			}
-		}
-		catch (Exception exception)
+		} catch (Exception exception)
 		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
@@ -87,9 +90,9 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	}
 
 	/**
-	 * Creates an instance of the factory.
-	 * <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public BtsmodelFactoryImpl()
@@ -99,6 +102,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -106,46 +110,88 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	{
 		switch (eClass.getClassifierID())
 		{
-			case BtsmodelPackage.BTSTC_OBJECT: return createBTSTCObject();
-			case BtsmodelPackage.BTS_TEXT: return createBTSText();
-			case BtsmodelPackage.BTS_SENCTENCE: return createBTSSenctence();
-			case BtsmodelPackage.BTS_WORD: return createBTSWord();
-			case BtsmodelPackage.BTS_DELIMITER: return createBTSDelimiter();
-			case BtsmodelPackage.BTS_LIST_ENTRY: return createBTSListEntry();
-			case BtsmodelPackage.BTS_PASSPORT: return createBTSPassport();
-			case BtsmodelPackage.BTS_AMBIVALENCE: return createBTSAmbivalence();
-			case BtsmodelPackage.BTS_LEMMA_CASE: return createBTSLemmaCase();
-			case BtsmodelPackage.BTS_USER: return createBTSUser();
-			case BtsmodelPackage.BTS_COMMENT: return createBTSComment();
-			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE: return createBTSInterTextReference();
-			case BtsmodelPackage.BTS_ANNOTATION: return createBTSAnnotation();
-			case BtsmodelPackage.BTS_TRANSLATION: return createBTSTranslation();
-			case BtsmodelPackage.BTS_DATE: return createBTSDate();
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY: return createBTSPassportEntry();
-			case BtsmodelPackage.BTS_RELATION: return createBTSRelation();
-			case BtsmodelPackage.BTS_CONFIGURATION: return createBTSConfiguration();
-			case BtsmodelPackage.BTS_TEXT_CORPUS: return createBTSTextCorpus();
-			case BtsmodelPackage.BTS_REVISION: return createBTSRevision();
-			case BtsmodelPackage.BTS_IMAGE: return createBTSImage();
-			case BtsmodelPackage.BTS_CORPUS_HEADER: return createBTSCorpusHeader();
-			case BtsmodelPackage.BTS_TIMESPAN: return createBTSTimespan();
-			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE: return createBTSExternalReference();
-			case BtsmodelPackage.BTS_GRAPHIC: return createBTSGraphic();
-			case BtsmodelPackage.BTS_TRANSLATIONS: return createBTSTranslations();
-			case BtsmodelPackage.BTS_CONFIG_ITEM: return createBTSConfigItem();
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG: return createBTSPassportEditorConfig();
-			case BtsmodelPackage.BTS_USER_GROUP: return createBTSUserGroup();
-			case BtsmodelPackage.BTS_LIST: return createBTSList();
-			case BtsmodelPackage.BTS_PP_SUBENTRY: return createBTSPpSubentry();
-			case BtsmodelPackage.BTS_LIST_SUBENTRY: return createBTSListSubentry();
-			case BtsmodelPackage.BTS_THS_ENTRY: return createBTSThsEntry();
-			case BtsmodelPackage.BTS_PROJECT: return createBTSProject();
-			case BtsmodelPackage.BTSDB_CONNECTION: return createBTSDBConnection();
-			case BtsmodelPackage.BTS_WORKFLOW_RULE: return createBTSWorkflowRule();
-			case BtsmodelPackage.BTS_OPERATOR: return createBTSOperator();
-			case BtsmodelPackage.DB_LEASE: return createDBLease();
-			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION: return createBTSProjectDBCollection();
-			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: return createBTSDBCollectionRoleDesc();
+			case BtsmodelPackage.BTSTC_OBJECT:
+				return createBTSTCObject();
+			case BtsmodelPackage.BTS_TEXT:
+				return createBTSText();
+			case BtsmodelPackage.BTS_SENCTENCE:
+				return createBTSSenctence();
+			case BtsmodelPackage.BTS_WORD:
+				return createBTSWord();
+			case BtsmodelPackage.BTS_MARKER:
+				return createBTSMarker();
+			case BtsmodelPackage.BTS_LIST_ENTRY:
+				return createBTSListEntry();
+			case BtsmodelPackage.BTS_PASSPORT:
+				return createBTSPassport();
+			case BtsmodelPackage.BTS_AMBIVALENCE:
+				return createBTSAmbivalence();
+			case BtsmodelPackage.BTS_LEMMA_CASE:
+				return createBTSLemmaCase();
+			case BtsmodelPackage.BTS_USER:
+				return createBTSUser();
+			case BtsmodelPackage.BTS_COMMENT:
+				return createBTSComment();
+			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE:
+				return createBTSInterTextReference();
+			case BtsmodelPackage.BTS_ANNOTATION:
+				return createBTSAnnotation();
+			case BtsmodelPackage.BTS_TRANSLATION:
+				return createBTSTranslation();
+			case BtsmodelPackage.BTS_DATE:
+				return createBTSDate();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY:
+				return createBTSPassportEntry();
+			case BtsmodelPackage.BTS_RELATION:
+				return createBTSRelation();
+			case BtsmodelPackage.BTS_CONFIGURATION:
+				return createBTSConfiguration();
+			case BtsmodelPackage.BTS_TEXT_CORPUS:
+				return createBTSTextCorpus();
+			case BtsmodelPackage.BTS_REVISION:
+				return createBTSRevision();
+			case BtsmodelPackage.BTS_IMAGE:
+				return createBTSImage();
+			case BtsmodelPackage.BTS_CORPUS_HEADER:
+				return createBTSCorpusHeader();
+			case BtsmodelPackage.BTS_TIMESPAN:
+				return createBTSTimespan();
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE:
+				return createBTSExternalReference();
+			case BtsmodelPackage.BTS_GRAPHIC:
+				return createBTSGraphic();
+			case BtsmodelPackage.BTS_TRANSLATIONS:
+				return createBTSTranslations();
+			case BtsmodelPackage.BTS_CONFIG_ITEM:
+				return createBTSConfigItem();
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG:
+				return createBTSPassportEditorConfig();
+			case BtsmodelPackage.BTS_USER_GROUP:
+				return createBTSUserGroup();
+			case BtsmodelPackage.BTS_LIST:
+				return createBTSList();
+			case BtsmodelPackage.BTS_PP_SUBENTRY:
+				return createBTSPpSubentry();
+			case BtsmodelPackage.BTS_LIST_SUBENTRY:
+				return createBTSListSubentry();
+			case BtsmodelPackage.BTS_THS_ENTRY:
+				return createBTSThsEntry();
+			case BtsmodelPackage.BTS_PROJECT:
+				return createBTSProject();
+			case BtsmodelPackage.BTSDB_CONNECTION:
+				return createBTSDBConnection();
+			case BtsmodelPackage.BTS_WORKFLOW_RULE:
+				return createBTSWorkflowRule();
+			case BtsmodelPackage.BTS_OPERATOR:
+				return createBTSOperator();
+			case BtsmodelPackage.DB_LEASE:
+				return createDBLease();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION:
+				return createBTSProjectDBCollection();
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC:
+				return createBTSDBCollectionRoleDesc();
+			case BtsmodelPackage.BTS_TEXT_CONTENT:
+				return createBTSTextContent();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -175,6 +221,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -183,12 +230,14 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		switch (eDataType.getClassifierID())
 		{
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName()
+						+ "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -197,7 +246,8 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		switch (eDataType.getClassifierID())
 		{
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName()
+						+ "' is not a valid classifier");
 		}
 	}
 
@@ -252,13 +302,13 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
-	 * @generatedNOT
+	 * @generated
 	 */
-	public BTSDelimiter createBTSDelimiter()
+	public BTSMarker createBTSMarker()
 	{
-		BTSDelimiterImpl btsDelimiter = new BTSDelimiterImpl();
-		setIdentifiableId(btsDelimiter);
-		return btsDelimiter;
+		BTSMarkerImpl btsMarker = new BTSMarkerImpl();
+		setIdentifiableId(btsMarker);
+		return btsMarker;
 	}
 
 	/**
@@ -670,14 +720,26 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generatedNOT
 	 */
 	public BTSDBCollectionRoleDesc createBTSDBCollectionRoleDesc()
 	{
 		BTSDBCollectionRoleDescImpl btsdbCollectionRoleDesc = new BTSDBCollectionRoleDescImpl();
+		setIdentifiableId(btsdbCollectionRoleDesc);
 		return btsdbCollectionRoleDesc;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generated
+	 */
+	public BTSTextContent createBTSTextContent()
+	{
+		BTSTextContentImpl btsTextContent = new BTSTextContentImpl();
+		return btsTextContent;
 	}
 
 	/**

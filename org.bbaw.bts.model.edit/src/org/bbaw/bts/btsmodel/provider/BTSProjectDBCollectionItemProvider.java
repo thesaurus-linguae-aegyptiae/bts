@@ -2,9 +2,9 @@
  */
 package org.bbaw.bts.btsmodel.provider;
 
-
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -27,29 +27,21 @@ import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSProjectDBCollection} object.
- * <!-- begin-user-doc -->
- * <!-- end-user-doc -->
+ * This is the item provider adapter for a
+ * {@link org.bbaw.bts.btsmodel.BTSProjectDBCollection} object. <!--
+ * begin-user-doc --> <!-- end-user-doc -->
+ * 
  * @generated
  */
-public class BTSProjectDBCollectionItemProvider
-	extends BTSIdentifiableItemItemProvider
-	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource,
-		ITableItemLabelProvider,
-		ITableItemColorProvider,
-		ITableItemFontProvider,
-		IItemColorProvider,
-		IItemFontProvider
+public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemProvider implements
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+		IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider,
+		IItemColorProvider, IItemFontProvider
 {
 	/**
-	 * This constructs an instance from a factory and a notifier.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This constructs an instance from a factory and a notifier. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	public BTSProjectDBCollectionItemProvider(AdapterFactory adapterFactory)
@@ -58,9 +50,9 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * This returns the property descriptors for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This returns the property descriptors for the adapted class. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override
@@ -78,9 +70,9 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Collection Name feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Collection Name feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addCollectionNamePropertyDescriptor(Object object)
@@ -101,9 +93,9 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Indexed feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Indexed feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addIndexedPropertyDescriptor(Object object)
@@ -124,9 +116,9 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Synchronized feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds a property descriptor for the Synchronized feature. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	protected void addSynchronizedPropertyDescriptor(Object object)
@@ -150,8 +142,7 @@ public class BTSProjectDBCollectionItemProvider
 	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
 	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
 	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -166,8 +157,7 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -181,8 +171,8 @@ public class BTSProjectDBCollectionItemProvider
 
 	/**
 	 * This returns BTSProjectDBCollection.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -192,25 +182,23 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
+	 * --> <!-- end-user-doc -->
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((BTSProjectDBCollection)object).getCollectionName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_BTSProjectDBCollection_type") :
-			getString("_UI_BTSProjectDBCollection_type") + " " + label;
+		String label = ((BTSProjectDBCollection) object).getCollectionName();
+		return label == null || label.length() == 0 ? getString("_UI_BTSProjectDBCollection_type") : label;
 	}
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
 	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -233,10 +221,10 @@ public class BTSProjectDBCollectionItemProvider
 	}
 
 	/**
-	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s describing the children
-	 * that can be created under this object.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * This adds {@link org.eclipse.emf.edit.command.CommandParameter}s
+	 * describing the children that can be created under this object. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @generated
 	 */
 	@Override

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry exported="true" kind="lib" path="lib/antlr-2.7.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/antlr-runtime-3.1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/bcmail-jdk14-1.38.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/bcprov-jdk14-1.38.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/bctsp-jdk14-1.38.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/cupruntime-1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/filters-2.0.235.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/forms-1.0.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/itext-1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/itextpdf-5.0.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jcommon-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jdom-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jfreereport-0.8.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jhotdrawfw-7.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jsesh-5.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jseshGlyphs-5.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jvectClipboard-1.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jxl-UNKNOWN.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/miglayout-3.7.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/mysql-connector-java-5.1.14.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/qenherkhopeshefUtils-5.5.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/quaqua-7.3.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/ramses-20130515.jar" sourcepath="/ramses/src"/>
+	<classpathentry exported="true" kind="lib" path="lib/stringtemplate-3.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/swing-layout-1.0.3.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/swing-worker-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/swingx-1.6.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/trove4j-2.0.2.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
+	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

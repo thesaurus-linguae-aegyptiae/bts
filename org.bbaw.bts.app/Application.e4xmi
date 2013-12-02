@@ -2,7 +2,7 @@
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0" width="1000" height="750">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main" selectedElement="_lAwBoADxEeOpmPWG2KRhAA">
-      <children xsi:type="advanced:Perspective" xmi:id="_lAwBoADxEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspective.main" label="hhhhhhhhh">
+      <children xsi:type="advanced:Perspective" xmi:id="_lAwBoADxEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspective.main" label="BTSPerspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_1NBNMAD3EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partsashcontainer.left" horizontal="true">
           <children xsi:type="basic:PartStack" xmi:id="_DjKeQAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partstack.left" containerData="25"/>
           <children xsi:type="basic:PartSashContainer" xmi:id="_pbqVcANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.middle.horizontal" containerData="75" horizontal="true">

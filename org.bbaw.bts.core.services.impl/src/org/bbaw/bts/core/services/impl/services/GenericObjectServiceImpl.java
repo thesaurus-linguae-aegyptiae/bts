@@ -3,6 +3,7 @@ package org.bbaw.bts.core.services.impl.services;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -84,6 +85,17 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	public abstract boolean save(E entity);
 
 	@Override
+	public boolean saveMultiple(Set<E> entities)
+	{
+		// FIXME optimize batch saving!!!
+		for (E entity : entities)
+		{
+			save(entity);
+		}
+		return true;
+	}
+
+	@Override
 	public abstract void update(E entity);
 
 	@Override
@@ -95,6 +107,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Override
 	public abstract List<E> list();
 
+	@Override
 	public abstract List<E> query(BTSQueryRequest query);
 
 	public List<E> filter(List<E> objects)
@@ -103,10 +116,4 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	}
 
-	@Override
-	public List<E> list(String queryId, String dbPath)
-	{
-		return null;
-
-	}
 }

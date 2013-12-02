@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -96,6 +97,18 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			e.printStackTrace();
 			throw new RuntimeException("Save Resource failed");
 		}
+	}
+
+	@Override
+	public boolean addMultiple(Set<E> entities, String path)
+	{
+
+		//FIXME optimize couchdb bath saving
+		for (E entity : entities)
+		{
+			add(entity, path);
+		}
+		return true;
 	}
 
 	@Override
@@ -323,7 +336,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			inputStream = new ByteArrayInputStream(sourceAsString.getBytes(BTSConstants.ENCODING));
 			final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
 			loader.fillResource(resource);
-			return ((E) resource.getContents().get(0));
+			if (resource.getContents().size() > 0)
+			{
+				return ((E) resource.getContents().get(0));
+			}
 		} catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();
@@ -389,4 +405,25 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		return connectionProvider.getLocalDBURL();
 	}
+
+	public boolean isAuthorizedUser(String userName, String passWord)
+	{
+		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.ADMIN, userName,
+				passWord);
+		try
+		{
+			Object o = client.find("test");
+			if (o != null)
+			{
+				return true;
+			}
+		} catch (NoDocumentException e)
+		{
+			return true; // authentication
+		}
+
+		return false;
+
+	}
+
 }

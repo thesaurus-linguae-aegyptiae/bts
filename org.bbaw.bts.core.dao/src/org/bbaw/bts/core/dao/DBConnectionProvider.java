@@ -7,6 +7,8 @@ public interface DBConnectionProvider
 
 	<T> T getDBClient(Class<T> clazz, String path);
 
+	<T> T getDBClient(Class<T> clazz, String path, String userName, String password);
+
 	<T> T getSearchClient(Class<T> clazz);
 
 	ResourceSet getEmfResourceSet();

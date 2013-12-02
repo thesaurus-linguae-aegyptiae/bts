@@ -3,18 +3,12 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
-
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 
 /**
@@ -27,6 +21,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBCollectionRoleDescImpl#getRoleName <em>Role Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBCollectionRoleDescImpl#getUserNames <em>User Names</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBCollectionRoleDescImpl#getUserRoles <em>User Roles</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBCollectionRoleDescImpl#getCachedChildren <em>Cached Children</em>}</li>
  * </ul>
  * </p>
  *
@@ -73,6 +68,16 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	 * @ordered
 	 */
 	protected EList<String> userRoles;
+
+	/**
+	 * The cached value of the '{@link #getCachedChildren() <em>Cached Children</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCachedChildren()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Object> cachedChildren;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,6 +156,20 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<Object> getCachedChildren()
+	{
+		if (cachedChildren == null)
+		{
+			cachedChildren = new EDataTypeUniqueEList<Object>(Object.class, this, BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN);
+		}
+		return cachedChildren;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -162,6 +181,8 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 				return getUserNames();
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES:
 				return getUserRoles();
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN:
+				return getCachedChildren();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -188,6 +209,10 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 				getUserRoles().clear();
 				getUserRoles().addAll((Collection<? extends String>)newValue);
 				return;
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN:
+				getCachedChildren().clear();
+				getCachedChildren().addAll((Collection<? extends Object>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -211,6 +236,9 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES:
 				getUserRoles().clear();
 				return;
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN:
+				getCachedChildren().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -231,6 +259,8 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 				return userNames != null && !userNames.isEmpty();
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES:
 				return userRoles != null && !userRoles.isEmpty();
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN:
+				return cachedChildren != null && !cachedChildren.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -252,6 +282,8 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 		result.append(userNames);
 		result.append(", userRoles: ");
 		result.append(userRoles);
+		result.append(", cachedChildren: ");
+		result.append(cachedChildren);
 		result.append(')');
 		return result.toString();
 	}

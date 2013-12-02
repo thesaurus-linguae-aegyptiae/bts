@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: CorpusController
+Bundle-SymbolicName: org.bbaw.bts.core.corpus.controller
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BBAW
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.bbaw.bts.core.corpus.controller.partController
+Import-Package: grammaticalBase.model.text,
+ org.bbaw.bts.btsmodel,
+ org.bbaw.bts.btsviewmodel,
+ org.bbaw.bts.searchModel,
+ org.eclipse.emf.ecore,
+ org.eclipse.jface.text,
+ org.eclipse.jface.text.source,
+ org.eclipse.jface.viewers

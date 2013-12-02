@@ -196,6 +196,12 @@ public class ApplicationStartupControllerImpl implements ApplicationStartupContr
 		//
 		//
 
+		//dev
+		userService.setAuthentication("admin", "admin");
+
+		//		Login login = ContextInjectionFactory.make(Login.class, context);
+		//		login.login(context, userService);
+
 		try
 		{
 			splashController.setMessage("Prepare Database...");
@@ -251,9 +257,6 @@ public class ApplicationStartupControllerImpl implements ApplicationStartupContr
 			{
 				splashController.close();
 
-				// Login login = ContextInjectionFactory.make(Login.class,
-				// context);
-				// login.login(context, userService);
 			}
 		}
 

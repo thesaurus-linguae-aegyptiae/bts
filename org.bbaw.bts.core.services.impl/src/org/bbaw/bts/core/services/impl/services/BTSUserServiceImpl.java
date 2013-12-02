@@ -10,10 +10,14 @@ import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService
 {
-
+	@Inject
+	@Preference(nodePath = "org.bbaw.bts.app")
+	private IEclipsePreferences prefs;
 	@Inject
 	private BTSUserDao userDao;
 
@@ -30,6 +34,9 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public boolean save(BTSUser entity)
 	{
 		userDao.add(entity, ServiceConstants.ADMIN);
+		//FIXME update user password if changed
+		// FIXME update user role memberships 
+		// beides in _user Object!!!!!!!!!!
 		return false;
 	}
 
@@ -83,4 +90,21 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		return entity;
 	}
 
+	@Override
+	public List<BTSUser> list(String dbPath, String queryId)
+	{
+		return filter(userDao.findByQueryId(queryId, dbPath));
+	}
+
+	@Override
+	public boolean setAuthentication(String userName, String passWord)
+	{
+		if (!userDao.isAuthorizedUser(userName, passWord))
+		{
+			return false;
+		}
+		prefs.put("username", userName);
+		prefs.put("password", passWord);
+		return true;
+	}
 }

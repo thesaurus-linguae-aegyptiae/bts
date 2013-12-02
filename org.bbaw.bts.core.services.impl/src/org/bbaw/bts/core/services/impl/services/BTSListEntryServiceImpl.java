@@ -93,4 +93,9 @@ public class BTSListEntryServiceImpl extends GenericObjectServiceImpl<BTSListEnt
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSListEntry> list(String dbPath, String queryId)
+	{
+		return filter(listEntryDao.findByQueryId(queryId, dbPath));
+	}
 }

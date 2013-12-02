@@ -1,11 +1,15 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSProjectDao;
@@ -33,8 +37,68 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public boolean save(BTSProject entity)
 	{
+		for (BTSProjectDBCollection coll : entity.getDbCollections())
+		{
+			saveAuthorisation(entity, coll);
+		}
 		projectDao.add(entity, ServiceConstants.ADMIN);
 		return false;
+	}
+
+	private void saveAuthorisation(BTSProject entity, BTSProjectDBCollection coll)
+	{
+
+		if (!coll.getRoleDescriptions().isEmpty())
+		{
+			Set<String> memberUsers = new HashSet<String>();
+			Set<String> memberRoles = new HashSet<String>();
+			BTSDBCollectionRoleDesc memberDesc = null;
+
+			for (BTSDBCollectionRoleDesc desc : coll.getRoleDescriptions())
+			{
+				if (!"admins".equals(desc.getRoleName()))
+				{
+					for (String s : desc.getUserNames())
+					{
+						memberUsers.add(s);
+					}
+					for (String s : desc.getUserRoles())
+					{
+						memberRoles.add(s);
+					}
+					if ("members".equals(desc.getRoleName()))
+					{
+						memberDesc = desc;
+					}
+				}
+
+			}
+			if (memberDesc == null)
+			{
+				memberDesc = BtsmodelFactory.eINSTANCE.createBTSDBCollectionRoleDesc();
+				memberDesc.setRoleName("members");
+				coll.getRoleDescriptions().add(memberDesc);
+			}
+			memberDesc.getUserNames().addAll(memberUsers);
+			memberDesc.getUserRoles().addAll(memberRoles);
+			remoteprojectDao.addAuthorisation(coll, entity.getPrefix());
+			projectDao.addAuthorisation(coll, entity.getPrefix());
+		} else
+		{
+			remoteprojectDao.addAuthorisation(coll, entity.getPrefix());
+			projectDao.addAuthorisation(coll, entity.getPrefix());
+		}
+
+	}
+
+	@Override
+	public boolean saveMultiple(Set<BTSProject> entities)
+	{
+		for (BTSProject p : entities)
+		{
+			save(p);
+		}
+		return true;
 	}
 
 	@Override
@@ -79,4 +143,11 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	{
 		return remoteprojectDao.list(ServiceConstants.ADMIN);
 	}
+
+	@Override
+	public List<BTSProject> list(String dbPath, String queryId)
+	{
+		return filter(projectDao.findByQueryId(queryId, dbPath));
+	}
+
 }

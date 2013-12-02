@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc#getRoleName <em>Role Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc#getUserNames <em>User Names</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc#getUserRoles <em>User Roles</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc#getCachedChildren <em>Cached Children</em>}</li>
  * </ul>
  * </p>
  *
@@ -81,5 +82,21 @@ public interface BTSDBCollectionRoleDesc extends BTSIdentifiableItem
 	 * @generated
 	 */
 	EList<String> getUserRoles();
+
+	/**
+	 * Returns the value of the '<em><b>Cached Children</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.Object}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Cached Children</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Cached Children</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBCollectionRoleDesc_CachedChildren()
+	 * @model transient="true"
+	 * @generated
+	 */
+	EList<Object> getCachedChildren();
 
 } // BTSDBCollectionRoleDesc

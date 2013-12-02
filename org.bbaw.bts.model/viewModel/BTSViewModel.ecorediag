@@ -7,6 +7,10 @@
         <element xmi:type="ecore:EAttribute" href="BTSViewModel.ecore#//TreeNodeWrapper/object"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_WaLnsStgEeOBScWExFTMXw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_ibf2sEIYEeORtfzs9PdCXw" type="2001">
+        <element xmi:type="ecore:EAttribute" href="BTSViewModel.ecore#//TreeNodeWrapper/parentObject"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ibf2sUIYEeORtfzs9PdCXw"/>
+      </children>
       <children xmi:type="notation:Node" xmi:id="_duKcIDDFEeOcKK6bB3llFg" type="2001">
         <element xmi:type="ecore:EAttribute" href="BTSViewModel.ecore#//TreeNodeWrapper/label"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_duKcITDFEeOcKK6bB3llFg"/>
@@ -38,7 +42,7 @@
     </children>
     <styles xmi:type="notation:ShapeStyle" xmi:id="_lGSCAStbEeOBScWExFTMXw" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="BTSViewModel.ecore#//TreeNodeWrapper"/>
-    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lGSCAitbEeOBScWExFTMXw" x="75" y="25" height="107"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lGSCAitbEeOBScWExFTMXw" x="75" y="25" width="353" height="153"/>
   </children>
   <children xmi:type="notation:Node" xmi:id="_MKBfICtjEeOBScWExFTMXw" type="1004">
     <children xmi:type="notation:Node" xmi:id="_MKBfIytjEeOBScWExFTMXw" type="4008"/>

@@ -13,7 +13,7 @@
     <genDataTypes ecoreDataType="BTSModel.ecore#//PropertyChangeEvent"/>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTCObject"/>
     <genClasses ecoreClass="BTSModel.ecore#//BTSText">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSText/textItems"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSText/textContent"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSSenctence">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSSenctence/sentenceItems"/>
@@ -29,11 +29,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSWord/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSWord/graphics"/>
     </genClasses>
-    <genClasses ecoreClass="BTSModel.ecore#//BTSDelimiter">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDelimiter/value"/>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSMarker">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSMarker/value"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSTextItems"/>
-    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSSentenceItems"/>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSSentenceItem"/>
     <genClasses ecoreClass="BTSModel.ecore#//BTSListEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSListEntry/ignore"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSListEntry/subentries"/>
@@ -295,6 +295,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/roleName"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/userNames"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/userRoles"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBCollectionRoleDesc/cachedChildren"/>
     </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSTextContent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTextContent/textItems"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSAmbivalenceItem"/>
   </genPackages>
 </genmodel:GenModel>

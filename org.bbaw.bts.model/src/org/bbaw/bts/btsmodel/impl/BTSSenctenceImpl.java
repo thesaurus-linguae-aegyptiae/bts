@@ -3,22 +3,16 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
-
 import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItems;
+import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -45,7 +39,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<BTSSentenceItems> sentenceItems;
+	protected EList<BTSSentenceItem> sentenceItems;
 
 	/**
 	 * The cached value of the '{@link #getTranslation() <em>Translation</em>}' containment reference.
@@ -81,10 +75,10 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSSentenceItems> getSentenceItems() {
+	public EList<BTSSentenceItem> getSentenceItems() {
 		if (sentenceItems == null)
 		{
-			sentenceItems = new EObjectContainmentEList<BTSSentenceItems>(BTSSentenceItems.class, this, BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS);
+			sentenceItems = new EObjectContainmentEList<BTSSentenceItem>(BTSSentenceItem.class, this, BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS);
 		}
 		return sentenceItems;
 	}
@@ -180,7 +174,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 		{
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 				getSentenceItems().clear();
-				getSentenceItems().addAll((Collection<? extends BTSSentenceItems>)newValue);
+				getSentenceItems().addAll((Collection<? extends BTSSentenceItem>)newValue);
 				return;
 			case BtsmodelPackage.BTS_SENCTENCE__TRANSLATION:
 				setTranslation((BTSTranslations)newValue);

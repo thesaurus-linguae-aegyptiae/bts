@@ -108,4 +108,9 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSImage> list(String dbPath, String queryId)
+	{
+		return filter(imageDao.findByQueryId(queryId, dbPath));
+	}
 }

@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.services;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -11,6 +12,8 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	E createNew();
 
 	boolean save(E entity);
+
+	boolean saveMultiple(Set<E> entitys);
 
 	void update(E entity);
 

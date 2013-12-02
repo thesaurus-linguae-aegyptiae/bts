@@ -202,6 +202,16 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getTreeNodeWrapper_ParentObject()
+	{
+		return (EAttribute)treeNodeWrapperEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getTreeNodeWrapper__AddPropertyChangeListener__PropertyChangeListener()
 	{
 		return treeNodeWrapperEClass.getEOperations().get(0);
@@ -294,6 +304,7 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		createEAttribute(treeNodeWrapperEClass, TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT);
 		createEAttribute(treeNodeWrapperEClass, TREE_NODE_WRAPPER__CHILDREN_LOADED);
 		createEAttribute(treeNodeWrapperEClass, TREE_NODE_WRAPPER__LABEL);
+		createEAttribute(treeNodeWrapperEClass, TREE_NODE_WRAPPER__PARENT_OBJECT);
 		createEOperation(treeNodeWrapperEClass, TREE_NODE_WRAPPER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER);
 		createEOperation(treeNodeWrapperEClass, TREE_NODE_WRAPPER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER);
 
@@ -342,6 +353,7 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		initEAttribute(getTreeNodeWrapper_PropertyChangeSupport(), this.getPropertyChangeSupport(), "propertyChangeSupport", null, 0, 1, TreeNodeWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTreeNodeWrapper_ChildrenLoaded(), ecorePackage.getEBoolean(), "childrenLoaded", null, 0, 1, TreeNodeWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getTreeNodeWrapper_Label(), ecorePackage.getEString(), "label", null, 0, 1, TreeNodeWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getTreeNodeWrapper_ParentObject(), ecorePackage.getEJavaObject(), "parentObject", null, 0, 1, TreeNodeWrapper.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		EOperation op = initEOperation(getTreeNodeWrapper__AddPropertyChangeListener__PropertyChangeListener(), null, "addPropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPropertyChangeListener(), "propertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);

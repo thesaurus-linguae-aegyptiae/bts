@@ -2,6 +2,7 @@ package org.bbaw.bts.core.controller.impl.dialogControllers;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.inject.Inject;
 
@@ -37,8 +38,8 @@ public class UserManagerControllerImpl implements UserManagerController
 			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName)
 	{
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.termQuery("groupsIds", group.get_id()));
-		query.setQueryId("groupsIds-" + group.get_id());
+		query.setQueryBuilder(QueryBuilders.termQuery("groupIds", group.get_id()));
+		query.setQueryId("groupIds-" + group.get_id());
 		System.out.println(query.getQueryId());
 		if (queryResultMap != null)
 		{
@@ -63,6 +64,25 @@ public class UserManagerControllerImpl implements UserManagerController
 	public BTSUserGroup createNewUserGroup()
 	{
 		return usergroupService.createNew();
+	}
+
+	@Override
+	public boolean saveUsers(Set<BTSUser> dirtyUsers)
+	{
+		return userService.saveMultiple(dirtyUsers);
+	}
+
+	@Override
+	public boolean saveUserGroups(Set<BTSUserGroup> dirtyUserGroups)
+	{
+		return usergroupService.saveMultiple(dirtyUserGroups);
+
+	}
+
+	@Override
+	public List<BTSUser> listUsers()
+	{
+		return userService.list();
 	}
 
 }

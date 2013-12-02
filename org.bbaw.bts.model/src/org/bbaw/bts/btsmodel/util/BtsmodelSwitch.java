@@ -111,7 +111,8 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			{
 				BTSWord btsWord = (BTSWord)theEObject;
 				T result = caseBTSWord(btsWord);
-				if (result == null) result = caseBTSSentenceItems(btsWord);
+				if (result == null) result = caseBTSSentenceItem(btsWord);
+				if (result == null) result = caseBTSAmbivalenceItem(btsWord);
 				if (result == null) result = caseBTSReferencableItem(btsWord);
 				if (result == null) result = caseBTSObject(btsWord);
 				if (result == null) result = caseBTSIdentifiableItem(btsWord);
@@ -120,18 +121,19 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_DELIMITER:
+			case BtsmodelPackage.BTS_MARKER:
 			{
-				BTSDelimiter btsDelimiter = (BTSDelimiter)theEObject;
-				T result = caseBTSDelimiter(btsDelimiter);
-				if (result == null) result = caseBTSTextSentenceItem(btsDelimiter);
-				if (result == null) result = caseBTSSentenceItems(btsDelimiter);
-				if (result == null) result = caseBTSTextItems(btsDelimiter);
-				if (result == null) result = caseBTSReferencableItem(btsDelimiter);
-				if (result == null) result = caseBTSObject(btsDelimiter);
-				if (result == null) result = caseBTSIdentifiableItem(btsDelimiter);
-				if (result == null) result = caseAdministrativDataObject(btsDelimiter);
-				if (result == null) result = caseBTSObservableObject(btsDelimiter);
+				BTSMarker btsMarker = (BTSMarker)theEObject;
+				T result = caseBTSMarker(btsMarker);
+				if (result == null) result = caseBTSTextSentenceItem(btsMarker);
+				if (result == null) result = caseBTSAmbivalenceItem(btsMarker);
+				if (result == null) result = caseBTSSentenceItem(btsMarker);
+				if (result == null) result = caseBTSTextItems(btsMarker);
+				if (result == null) result = caseBTSReferencableItem(btsMarker);
+				if (result == null) result = caseBTSObject(btsMarker);
+				if (result == null) result = caseBTSIdentifiableItem(btsMarker);
+				if (result == null) result = caseAdministrativDataObject(btsMarker);
+				if (result == null) result = caseBTSObservableObject(btsMarker);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -147,15 +149,15 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_SENTENCE_ITEMS:
+			case BtsmodelPackage.BTS_SENTENCE_ITEM:
 			{
-				BTSSentenceItems btsSentenceItems = (BTSSentenceItems)theEObject;
-				T result = caseBTSSentenceItems(btsSentenceItems);
-				if (result == null) result = caseBTSReferencableItem(btsSentenceItems);
-				if (result == null) result = caseBTSObject(btsSentenceItems);
-				if (result == null) result = caseBTSIdentifiableItem(btsSentenceItems);
-				if (result == null) result = caseAdministrativDataObject(btsSentenceItems);
-				if (result == null) result = caseBTSObservableObject(btsSentenceItems);
+				BTSSentenceItem btsSentenceItem = (BTSSentenceItem)theEObject;
+				T result = caseBTSSentenceItem(btsSentenceItem);
+				if (result == null) result = caseBTSReferencableItem(btsSentenceItem);
+				if (result == null) result = caseBTSObject(btsSentenceItem);
+				if (result == null) result = caseBTSIdentifiableItem(btsSentenceItem);
+				if (result == null) result = caseAdministrativDataObject(btsSentenceItem);
+				if (result == null) result = caseBTSObservableObject(btsSentenceItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -201,7 +203,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				BTSAmbivalence btsAmbivalence = (BTSAmbivalence)theEObject;
 				T result = caseBTSAmbivalence(btsAmbivalence);
 				if (result == null) result = caseBTSTextSentenceItem(btsAmbivalence);
-				if (result == null) result = caseBTSSentenceItems(btsAmbivalence);
+				if (result == null) result = caseBTSSentenceItem(btsAmbivalence);
 				if (result == null) result = caseBTSTextItems(btsAmbivalence);
 				if (result == null) result = caseBTSReferencableItem(btsAmbivalence);
 				if (result == null) result = caseBTSObject(btsAmbivalence);
@@ -215,6 +217,11 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			{
 				BTSLemmaCase btsLemmaCase = (BTSLemmaCase)theEObject;
 				T result = caseBTSLemmaCase(btsLemmaCase);
+				if (result == null) result = caseBTSReferencableItem(btsLemmaCase);
+				if (result == null) result = caseBTSObject(btsLemmaCase);
+				if (result == null) result = caseBTSIdentifiableItem(btsLemmaCase);
+				if (result == null) result = caseAdministrativDataObject(btsLemmaCase);
+				if (result == null) result = caseBTSObservableObject(btsLemmaCase);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -253,7 +260,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			{
 				BTSTextSentenceItem btsTextSentenceItem = (BTSTextSentenceItem)theEObject;
 				T result = caseBTSTextSentenceItem(btsTextSentenceItem);
-				if (result == null) result = caseBTSSentenceItems(btsTextSentenceItem);
+				if (result == null) result = caseBTSSentenceItem(btsTextSentenceItem);
 				if (result == null) result = caseBTSTextItems(btsTextSentenceItem);
 				if (result == null) result = caseBTSReferencableItem(btsTextSentenceItem);
 				if (result == null) result = caseBTSObject(btsTextSentenceItem);
@@ -595,6 +602,20 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BtsmodelPackage.BTS_TEXT_CONTENT:
+			{
+				BTSTextContent btsTextContent = (BTSTextContent)theEObject;
+				T result = caseBTSTextContent(btsTextContent);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_AMBIVALENCE_ITEM:
+			{
+				BTSAmbivalenceItem btsAmbivalenceItem = (BTSAmbivalenceItem)theEObject;
+				T result = caseBTSAmbivalenceItem(btsAmbivalenceItem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -660,17 +681,18 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Delimiter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Marker</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Delimiter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Marker</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBTSDelimiter(BTSDelimiter object) {
+	public T caseBTSMarker(BTSMarker object)
+	{
 		return null;
 	}
 
@@ -690,17 +712,18 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Sentence Items</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Sentence Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Sentence Items</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Sentence Item</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBTSSentenceItems(BTSSentenceItems object) {
+	public T caseBTSSentenceItem(BTSSentenceItem object)
+	{
 		return null;
 	}
 
@@ -1402,6 +1425,38 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSDBCollectionRoleDesc(BTSDBCollectionRoleDesc object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Text Content</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Text Content</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSTextContent(BTSTextContent object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Ambivalence Item</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Ambivalence Item</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSAmbivalenceItem(BTSAmbivalenceItem object)
 	{
 		return null;
 	}

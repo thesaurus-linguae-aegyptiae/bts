@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -16,9 +17,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
- * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>BTS Project DB Collection</b></em>'.
- * <!-- end-user-doc -->
+ * <!-- begin-user-doc --> An implementation of the model object '
+ * <em><b>BTS Project DB Collection</b></em>'. <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
@@ -35,8 +35,8 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 {
 	/**
 	 * The default value of the '{@link #getCollectionName() <em>Collection Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getCollectionName()
 	 * @generated
 	 * @ordered
@@ -45,8 +45,8 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 
 	/**
 	 * The cached value of the '{@link #getCollectionName() <em>Collection Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
 	 * @see #getCollectionName()
 	 * @generated
 	 * @ordered
@@ -55,8 +55,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 
 	/**
 	 * The default value of the '{@link #isIndexed() <em>Indexed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isIndexed()
 	 * @generated
 	 * @ordered
@@ -65,8 +64,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 
 	/**
 	 * The cached value of the '{@link #isIndexed() <em>Indexed</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isIndexed()
 	 * @generated
 	 * @ordered
@@ -75,8 +73,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 
 	/**
 	 * The default value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isSynchronized()
 	 * @generated
 	 * @ordered
@@ -85,8 +82,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 
 	/**
 	 * The cached value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #isSynchronized()
 	 * @generated
 	 * @ordered
@@ -94,9 +90,10 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	protected boolean synchronized_ = SYNCHRONIZED_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRoleDescriptions() <em>Role Descriptions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * The cached value of the '{@link #getRoleDescriptions()
+	 * <em>Role Descriptions</em>}' containment reference list. <!--
+	 * begin-user-doc --> <!-- end-user-doc -->
+	 * 
 	 * @see #getRoleDescriptions()
 	 * @generated
 	 * @ordered
@@ -104,8 +101,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	protected EList<BTSDBCollectionRoleDesc> roleDescriptions;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	protected BTSProjectDBCollectionImpl()
@@ -114,8 +110,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -125,8 +120,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public String getCollectionName()
@@ -135,8 +129,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setCollectionName(String newCollectionName)
@@ -148,8 +141,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isIndexed()
@@ -158,8 +150,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setIndexed(boolean newIndexed)
@@ -171,8 +162,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public boolean isSynchronized()
@@ -181,8 +171,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void setSynchronized(boolean newSynchronized)
@@ -194,8 +183,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	public EList<BTSDBCollectionRoleDesc> getRoleDescriptions()
@@ -208,8 +196,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -224,8 +211,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -246,8 +232,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@SuppressWarnings("unchecked")
@@ -274,8 +259,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -300,8 +284,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -322,9 +305,9 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public String toString()
@@ -334,10 +317,10 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (collectionName: ");
 		result.append(collectionName);
-		result.append(", indexed: ");
-		result.append(indexed);
-		result.append(", synchronized: ");
-		result.append(synchronized_);
+		//		result.append(", indexed: ");
+		//		result.append(indexed);
+		//		result.append(", synchronized: ");
+		//		result.append(synchronized_);
 		result.append(')');
 		return result.toString();
 	}

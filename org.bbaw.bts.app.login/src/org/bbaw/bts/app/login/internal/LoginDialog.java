@@ -249,13 +249,16 @@ public class LoginDialog extends Dialog
 	{
 		String userName = userText.getText().trim();
 		String passWord = passwortText.getText().trim();
-
+		if (!uService.setAuthentication(userName, passWord))
+		{
+			return false;
+		}
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.termQuery("userName", userName));
+		query.setQueryBuilder(QueryBuilders.boolQuery().must(QueryBuilders.termQuery("userName", userName)));
 		List<BTSUser> users = uService.query(query);
 		for (BTSUser u : users)
 		{
-			if (equalsPassword(u, passWord))
+			if (userName.equals(u.getUserName()) && equalsPassword(u, passWord))
 			{
 				validUser = u;
 				return true;

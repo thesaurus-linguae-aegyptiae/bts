@@ -139,16 +139,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENCTENCE = 2;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl <em>BTS Sentence Items</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSentenceItems()
-	 * @generated
-	 */
-	int BTS_SENTENCE_ITEMS = 6;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSWordImpl <em>BTS Word</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -167,16 +157,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	int BTS_TEXT_SENTENCE_ITEM = 16;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl <em>BTS Delimiter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDelimiter()
-	 * @generated
-	 */
-	int BTS_DELIMITER = 4;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl <em>BTS List Entry</em>}' class.
@@ -1093,13 +1073,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT__WORK_PHASE = BTS_CORPUS_OBJECT__WORK_PHASE;
 
 	/**
-	 * The feature id for the '<em><b>Text Items</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Text Content</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT__TEXT_ITEMS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
+	int BTS_TEXT__TEXT_CONTENT = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>BTS Text</em>' class.
@@ -1642,13 +1622,23 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENCTENCE_OPERATION_COUNT = BTS_TEXT_ITEMS_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.BTSSentenceItem <em>BTS Sentence Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.BTSSentenceItem
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSentenceItem()
+	 * @generated
+	 */
+	int BTS_SENTENCE_ITEM = 6;
+
+	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__PROPERTY_CHANGE_SUPPORT = BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
+	int BTS_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1657,7 +1647,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__REVISIONS = BTS_REFERENCABLE_ITEM__REVISIONS;
+	int BTS_SENTENCE_ITEM__REVISIONS = BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -1666,7 +1656,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__STATE = BTS_REFERENCABLE_ITEM__STATE;
+	int BTS_SENTENCE_ITEM__STATE = BTS_REFERENCABLE_ITEM__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -1675,7 +1665,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__REVISION_STATE = BTS_REFERENCABLE_ITEM__REVISION_STATE;
+	int BTS_SENTENCE_ITEM__REVISION_STATE = BTS_REFERENCABLE_ITEM__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1684,7 +1674,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__VISIBILITY = BTS_REFERENCABLE_ITEM__VISIBILITY;
+	int BTS_SENTENCE_ITEM__VISIBILITY = BTS_REFERENCABLE_ITEM__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -1693,7 +1683,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__SORT_KEY = BTS_REFERENCABLE_ITEM__SORT_KEY;
+	int BTS_SENTENCE_ITEM__SORT_KEY = BTS_REFERENCABLE_ITEM__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1702,7 +1692,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__NAME = BTS_REFERENCABLE_ITEM__NAME;
+	int BTS_SENTENCE_ITEM__NAME = BTS_REFERENCABLE_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1711,7 +1701,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__TYPE = BTS_REFERENCABLE_ITEM__TYPE;
+	int BTS_SENTENCE_ITEM__TYPE = BTS_REFERENCABLE_ITEM__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -1720,7 +1710,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__SUBTYPE = BTS_REFERENCABLE_ITEM__SUBTYPE;
+	int BTS_SENTENCE_ITEM__SUBTYPE = BTS_REFERENCABLE_ITEM__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -1729,7 +1719,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__CODE = BTS_REFERENCABLE_ITEM__CODE;
+	int BTS_SENTENCE_ITEM__CODE = BTS_REFERENCABLE_ITEM__CODE;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -1738,7 +1728,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__ID = BTS_REFERENCABLE_ITEM__ID;
+	int BTS_SENTENCE_ITEM__ID = BTS_REFERENCABLE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1747,7 +1737,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__COMMENT = BTS_REFERENCABLE_ITEM__COMMENT;
+	int BTS_SENTENCE_ITEM__COMMENT = BTS_REFERENCABLE_ITEM__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1756,7 +1746,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__PARENT = BTS_REFERENCABLE_ITEM__PARENT;
+	int BTS_SENTENCE_ITEM__PARENT = BTS_REFERENCABLE_ITEM__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
@@ -1765,16 +1755,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS__PARENT_ID = BTS_REFERENCABLE_ITEM__PARENT_ID;
+	int BTS_SENTENCE_ITEM__PARENT_ID = BTS_REFERENCABLE_ITEM__PARENT_ID;
 
 	/**
-	 * The number of structural features of the '<em>BTS Sentence Items</em>' class.
+	 * The number of structural features of the '<em>BTS Sentence Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS_FEATURE_COUNT = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_SENTENCE_ITEM_FEATURE_COUNT = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -1783,7 +1773,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -1792,16 +1782,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
-	 * The number of operations of the '<em>BTS Sentence Items</em>' class.
+	 * The number of operations of the '<em>BTS Sentence Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEMS_OPERATION_COUNT = BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_SENTENCE_ITEM_OPERATION_COUNT = BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -1810,7 +1800,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEMS__PROPERTY_CHANGE_SUPPORT;
+	int BTS_WORD__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -1819,7 +1809,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__REVISIONS = BTS_SENTENCE_ITEMS__REVISIONS;
+	int BTS_WORD__REVISIONS = BTS_SENTENCE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -1828,7 +1818,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__STATE = BTS_SENTENCE_ITEMS__STATE;
+	int BTS_WORD__STATE = BTS_SENTENCE_ITEM__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -1837,7 +1827,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__REVISION_STATE = BTS_SENTENCE_ITEMS__REVISION_STATE;
+	int BTS_WORD__REVISION_STATE = BTS_SENTENCE_ITEM__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1846,7 +1836,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__VISIBILITY = BTS_SENTENCE_ITEMS__VISIBILITY;
+	int BTS_WORD__VISIBILITY = BTS_SENTENCE_ITEM__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -1855,7 +1845,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__SORT_KEY = BTS_SENTENCE_ITEMS__SORT_KEY;
+	int BTS_WORD__SORT_KEY = BTS_SENTENCE_ITEM__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1864,7 +1854,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__NAME = BTS_SENTENCE_ITEMS__NAME;
+	int BTS_WORD__NAME = BTS_SENTENCE_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1873,7 +1863,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__TYPE = BTS_SENTENCE_ITEMS__TYPE;
+	int BTS_WORD__TYPE = BTS_SENTENCE_ITEM__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -1882,7 +1872,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__SUBTYPE = BTS_SENTENCE_ITEMS__SUBTYPE;
+	int BTS_WORD__SUBTYPE = BTS_SENTENCE_ITEM__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -1891,7 +1881,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__CODE = BTS_SENTENCE_ITEMS__CODE;
+	int BTS_WORD__CODE = BTS_SENTENCE_ITEM__CODE;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -1900,7 +1890,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__ID = BTS_SENTENCE_ITEMS__ID;
+	int BTS_WORD__ID = BTS_SENTENCE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1909,7 +1899,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__COMMENT = BTS_SENTENCE_ITEMS__COMMENT;
+	int BTS_WORD__COMMENT = BTS_SENTENCE_ITEM__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -1918,7 +1908,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__PARENT = BTS_SENTENCE_ITEMS__PARENT;
+	int BTS_WORD__PARENT = BTS_SENTENCE_ITEM__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
@@ -1927,7 +1917,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__PARENT_ID = BTS_SENTENCE_ITEMS__PARENT_ID;
+	int BTS_WORD__PARENT_ID = BTS_SENTENCE_ITEM__PARENT_ID;
 
 	/**
 	 * The feature id for the '<em><b>Translation</b></em>' containment reference.
@@ -1936,7 +1926,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__TRANSLATION = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 0;
+	int BTS_WORD__TRANSLATION = BTS_SENTENCE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>WType</b></em>' attribute.
@@ -1945,7 +1935,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__WTYPE = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 1;
+	int BTS_WORD__WTYPE = BTS_SENTENCE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>LType</b></em>' attribute.
@@ -1954,7 +1944,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__LTYPE = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 2;
+	int BTS_WORD__LTYPE = BTS_SENTENCE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>LKey</b></em>' attribute.
@@ -1963,7 +1953,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__LKEY = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 3;
+	int BTS_WORD__LKEY = BTS_SENTENCE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Flex Code</b></em>' attribute.
@@ -1972,7 +1962,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__FLEX_CODE = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 4;
+	int BTS_WORD__FLEX_CODE = BTS_SENTENCE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>WChar</b></em>' attribute.
@@ -1981,7 +1971,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__WCHAR = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 5;
+	int BTS_WORD__WCHAR = BTS_SENTENCE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1990,7 +1980,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__VALUE = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 6;
+	int BTS_WORD__VALUE = BTS_SENTENCE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Graphics</b></em>' containment reference list.
@@ -1999,7 +1989,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__GRAPHICS = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 7;
+	int BTS_WORD__GRAPHICS = BTS_SENTENCE_ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of structural features of the '<em>BTS Word</em>' class.
@@ -2008,7 +1998,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD_FEATURE_COUNT = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 8;
+	int BTS_WORD_FEATURE_COUNT = BTS_SENTENCE_ITEM_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -2017,7 +2007,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_WORD___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -2026,7 +2016,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_WORD___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The number of operations of the '<em>BTS Word</em>' class.
@@ -2035,7 +2025,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD_OPERATION_COUNT = BTS_SENTENCE_ITEMS_OPERATION_COUNT + 0;
+	int BTS_WORD_OPERATION_COUNT = BTS_SENTENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -2044,7 +2034,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEMS__PROPERTY_CHANGE_SUPPORT;
+	int BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -2053,7 +2043,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__REVISIONS = BTS_SENTENCE_ITEMS__REVISIONS;
+	int BTS_TEXT_SENTENCE_ITEM__REVISIONS = BTS_SENTENCE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -2062,7 +2052,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__STATE = BTS_SENTENCE_ITEMS__STATE;
+	int BTS_TEXT_SENTENCE_ITEM__STATE = BTS_SENTENCE_ITEM__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -2071,7 +2061,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__REVISION_STATE = BTS_SENTENCE_ITEMS__REVISION_STATE;
+	int BTS_TEXT_SENTENCE_ITEM__REVISION_STATE = BTS_SENTENCE_ITEM__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -2080,7 +2070,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__VISIBILITY = BTS_SENTENCE_ITEMS__VISIBILITY;
+	int BTS_TEXT_SENTENCE_ITEM__VISIBILITY = BTS_SENTENCE_ITEM__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -2089,7 +2079,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__SORT_KEY = BTS_SENTENCE_ITEMS__SORT_KEY;
+	int BTS_TEXT_SENTENCE_ITEM__SORT_KEY = BTS_SENTENCE_ITEM__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2098,7 +2088,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__NAME = BTS_SENTENCE_ITEMS__NAME;
+	int BTS_TEXT_SENTENCE_ITEM__NAME = BTS_SENTENCE_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -2107,7 +2097,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__TYPE = BTS_SENTENCE_ITEMS__TYPE;
+	int BTS_TEXT_SENTENCE_ITEM__TYPE = BTS_SENTENCE_ITEM__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2116,7 +2106,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__SUBTYPE = BTS_SENTENCE_ITEMS__SUBTYPE;
+	int BTS_TEXT_SENTENCE_ITEM__SUBTYPE = BTS_SENTENCE_ITEM__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -2125,7 +2115,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__CODE = BTS_SENTENCE_ITEMS__CODE;
+	int BTS_TEXT_SENTENCE_ITEM__CODE = BTS_SENTENCE_ITEM__CODE;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -2134,7 +2124,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__ID = BTS_SENTENCE_ITEMS__ID;
+	int BTS_TEXT_SENTENCE_ITEM__ID = BTS_SENTENCE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2143,7 +2133,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__COMMENT = BTS_SENTENCE_ITEMS__COMMENT;
+	int BTS_TEXT_SENTENCE_ITEM__COMMENT = BTS_SENTENCE_ITEM__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -2152,7 +2142,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__PARENT = BTS_SENTENCE_ITEMS__PARENT;
+	int BTS_TEXT_SENTENCE_ITEM__PARENT = BTS_SENTENCE_ITEM__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
@@ -2161,7 +2151,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__PARENT_ID = BTS_SENTENCE_ITEMS__PARENT_ID;
+	int BTS_TEXT_SENTENCE_ITEM__PARENT_ID = BTS_SENTENCE_ITEM__PARENT_ID;
 
 	/**
 	 * The number of structural features of the '<em>BTS Text Sentence Item</em>' class.
@@ -2170,7 +2160,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT = BTS_SENTENCE_ITEMS_FEATURE_COUNT + 0;
+	int BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT = BTS_SENTENCE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -2179,7 +2169,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -2188,7 +2178,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Sentence Item</em>' class.
@@ -2197,7 +2187,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT = BTS_SENTENCE_ITEMS_OPERATION_COUNT + 0;
+	int BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT = BTS_SENTENCE_ITEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSMarkerImpl <em>BTS Marker</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSMarkerImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSMarker()
+	 * @generated
+	 */
+	int BTS_MARKER = 4;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -2206,7 +2206,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
+	int BTS_MARKER__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -2215,7 +2215,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__REVISIONS = BTS_TEXT_SENTENCE_ITEM__REVISIONS;
+	int BTS_MARKER__REVISIONS = BTS_TEXT_SENTENCE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -2224,7 +2224,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__STATE = BTS_TEXT_SENTENCE_ITEM__STATE;
+	int BTS_MARKER__STATE = BTS_TEXT_SENTENCE_ITEM__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -2233,7 +2233,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__REVISION_STATE = BTS_TEXT_SENTENCE_ITEM__REVISION_STATE;
+	int BTS_MARKER__REVISION_STATE = BTS_TEXT_SENTENCE_ITEM__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -2242,7 +2242,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__VISIBILITY = BTS_TEXT_SENTENCE_ITEM__VISIBILITY;
+	int BTS_MARKER__VISIBILITY = BTS_TEXT_SENTENCE_ITEM__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -2251,7 +2251,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__SORT_KEY = BTS_TEXT_SENTENCE_ITEM__SORT_KEY;
+	int BTS_MARKER__SORT_KEY = BTS_TEXT_SENTENCE_ITEM__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2260,7 +2260,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__NAME = BTS_TEXT_SENTENCE_ITEM__NAME;
+	int BTS_MARKER__NAME = BTS_TEXT_SENTENCE_ITEM__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -2269,7 +2269,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__TYPE = BTS_TEXT_SENTENCE_ITEM__TYPE;
+	int BTS_MARKER__TYPE = BTS_TEXT_SENTENCE_ITEM__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2278,7 +2278,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__SUBTYPE = BTS_TEXT_SENTENCE_ITEM__SUBTYPE;
+	int BTS_MARKER__SUBTYPE = BTS_TEXT_SENTENCE_ITEM__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -2287,7 +2287,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__CODE = BTS_TEXT_SENTENCE_ITEM__CODE;
+	int BTS_MARKER__CODE = BTS_TEXT_SENTENCE_ITEM__CODE;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -2296,7 +2296,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__ID = BTS_TEXT_SENTENCE_ITEM__ID;
+	int BTS_MARKER__ID = BTS_TEXT_SENTENCE_ITEM__ID;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2305,7 +2305,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__COMMENT = BTS_TEXT_SENTENCE_ITEM__COMMENT;
+	int BTS_MARKER__COMMENT = BTS_TEXT_SENTENCE_ITEM__COMMENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent</b></em>' reference.
@@ -2314,7 +2314,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__PARENT = BTS_TEXT_SENTENCE_ITEM__PARENT;
+	int BTS_MARKER__PARENT = BTS_TEXT_SENTENCE_ITEM__PARENT;
 
 	/**
 	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
@@ -2323,7 +2323,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__PARENT_ID = BTS_TEXT_SENTENCE_ITEM__PARENT_ID;
+	int BTS_MARKER__PARENT_ID = BTS_TEXT_SENTENCE_ITEM__PARENT_ID;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -2332,16 +2332,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER__VALUE = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 0;
+	int BTS_MARKER__VALUE = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>BTS Delimiter</em>' class.
+	 * The number of structural features of the '<em>BTS Marker</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER_FEATURE_COUNT = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 1;
+	int BTS_MARKER_FEATURE_COUNT = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -2350,7 +2350,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_MARKER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -2359,16 +2359,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_MARKER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
-	 * The number of operations of the '<em>BTS Delimiter</em>' class.
+	 * The number of operations of the '<em>BTS Marker</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_DELIMITER_OPERATION_COUNT = BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT + 0;
+	int BTS_MARKER_OPERATION_COUNT = BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -2884,13 +2884,139 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_AMBIVALENCE_OPERATION_COUNT = BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__PROPERTY_CHANGE_SUPPORT = BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__REVISIONS = BTS_REFERENCABLE_ITEM__REVISIONS;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__STATE = BTS_REFERENCABLE_ITEM__STATE;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__REVISION_STATE = BTS_REFERENCABLE_ITEM__REVISION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__VISIBILITY = BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__SORT_KEY = BTS_REFERENCABLE_ITEM__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__NAME = BTS_REFERENCABLE_ITEM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__TYPE = BTS_REFERENCABLE_ITEM__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__SUBTYPE = BTS_REFERENCABLE_ITEM__SUBTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__CODE = BTS_REFERENCABLE_ITEM__CODE;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__ID = BTS_REFERENCABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Comment</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__COMMENT = BTS_REFERENCABLE_ITEM__COMMENT;
+
+	/**
+	 * The feature id for the '<em><b>Parent</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__PARENT = BTS_REFERENCABLE_ITEM__PARENT;
+
+	/**
+	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__PARENT_ID = BTS_REFERENCABLE_ITEM__PARENT_ID;
+
+	/**
 	 * The feature id for the '<em><b>Scenario</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE__SCENARIO = 0;
+	int BTS_LEMMA_CASE__SCENARIO = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>BTS Lemma Case</em>' class.
@@ -2899,7 +3025,25 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE_FEATURE_COUNT = 1;
+	int BTS_LEMMA_CASE_FEATURE_COUNT = BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
@@ -2908,7 +3052,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE_OPERATION_COUNT = 0;
+	int BTS_LEMMA_CASE_OPERATION_COUNT = BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl <em>BTSDB Base Object</em>}' class.
@@ -7313,13 +7457,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSDB_COLLECTION_ROLE_DESC__USER_ROLES = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Cached Children</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>BTSDB Collection Role Desc</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_COLLECTION_ROLE_DESC_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+	int BTSDB_COLLECTION_ROLE_DESC_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>BTSDB Collection Role Desc</em>' class.
@@ -7331,6 +7484,71 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSDB_COLLECTION_ROLE_DESC_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextContentImpl <em>BTS Text Content</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSTextContentImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTextContent()
+	 * @generated
+	 */
+	int BTS_TEXT_CONTENT = 53;
+
+	/**
+	 * The feature id for the '<em><b>Text Items</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CONTENT__TEXT_ITEMS = 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Text Content</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CONTENT_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>BTS Text Content</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CONTENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.BTSAmbivalenceItem
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSAmbivalenceItem()
+	 * @generated
+	 */
+	int BTS_AMBIVALENCE_ITEM = 54;
+
+	/**
+	 * The number of structural features of the '<em>BTS Ambivalence Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_ITEM_FEATURE_COUNT = 0;
+
+	/**
+	 * The number of operations of the '<em>BTS Ambivalence Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_ITEM_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7338,7 +7556,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 53;
+	int PROPERTY_CHANGE_SUPPORT = 55;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -7348,7 +7566,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 54;
+	int PROPERTY_CHANGE_LISTENER = 56;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -7358,7 +7576,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 55;
+	int PROPERTY_CHANGE_EVENT = 57;
 
 
 	/**
@@ -7382,15 +7600,15 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getBTSText();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.BTSText#getTextItems <em>Text Items</em>}'.
+	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsmodel.BTSText#getTextContent <em>Text Content</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Text Items</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSText#getTextItems()
+	 * @return the meta object for the reference '<em>Text Content</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSText#getTextContent()
 	 * @see #getBTSText()
 	 * @generated
 	 */
-	EReference getBTSText_TextItems();
+	EReference getBTSText_TextContent();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSSenctence <em>BTS Senctence</em>}'.
@@ -7523,25 +7741,25 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSWord_Graphics();
 
 	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSDelimiter <em>BTS Delimiter</em>}'.
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSMarker <em>BTS Marker</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Delimiter</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSDelimiter
+	 * @return the meta object for class '<em>BTS Marker</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSMarker
 	 * @generated
 	 */
-	EClass getBTSDelimiter();
+	EClass getBTSMarker();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSDelimiter#getValue <em>Value</em>}'.
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSMarker#getValue <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSDelimiter#getValue()
-	 * @see #getBTSDelimiter()
+	 * @see org.bbaw.bts.btsmodel.BTSMarker#getValue()
+	 * @see #getBTSMarker()
 	 * @generated
 	 */
-	EAttribute getBTSDelimiter_Value();
+	EAttribute getBTSMarker_Value();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSTextItems <em>BTS Text Items</em>}'.
@@ -7554,14 +7772,14 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getBTSTextItems();
 
 	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSSentenceItems <em>BTS Sentence Items</em>}'.
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSSentenceItem <em>BTS Sentence Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Sentence Items</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSSentenceItems
+	 * @return the meta object for class '<em>BTS Sentence Item</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSSentenceItem
 	 * @generated
 	 */
-	EClass getBTSSentenceItems();
+	EClass getBTSSentenceItem();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSListEntry <em>BTS List Entry</em>}'.
@@ -9823,6 +10041,48 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSDBCollectionRoleDesc_UserRoles();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc#getCachedChildren <em>Cached Children</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Cached Children</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc#getCachedChildren()
+	 * @see #getBTSDBCollectionRoleDesc()
+	 * @generated
+	 */
+	EAttribute getBTSDBCollectionRoleDesc_CachedChildren();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSTextContent <em>BTS Text Content</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Text Content</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSTextContent
+	 * @generated
+	 */
+	EClass getBTSTextContent();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.BTSTextContent#getTextItems <em>Text Items</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Text Items</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSTextContent#getTextItems()
+	 * @see #getBTSTextContent()
+	 * @generated
+	 */
+	EReference getBTSTextContent_TextItems();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Ambivalence Item</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSAmbivalenceItem
+	 * @generated
+	 */
+	EClass getBTSAmbivalenceItem();
+
+	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9899,12 +10159,12 @@ public interface BtsmodelPackage extends EPackage {
 		EClass BTS_TEXT = eINSTANCE.getBTSText();
 
 		/**
-		 * The meta object literal for the '<em><b>Text Items</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Text Content</b></em>' reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BTS_TEXT__TEXT_ITEMS = eINSTANCE.getBTSText_TextItems();
+		EReference BTS_TEXT__TEXT_CONTENT = eINSTANCE.getBTSText_TextContent();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSSenctenceImpl <em>BTS Senctence</em>}' class.
@@ -10007,14 +10267,14 @@ public interface BtsmodelPackage extends EPackage {
 		EReference BTS_WORD__GRAPHICS = eINSTANCE.getBTSWord_Graphics();
 
 		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl <em>BTS Delimiter</em>}' class.
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSMarkerImpl <em>BTS Marker</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.BTSDelimiterImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDelimiter()
+		 * @see org.bbaw.bts.btsmodel.impl.BTSMarkerImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSMarker()
 		 * @generated
 		 */
-		EClass BTS_DELIMITER = eINSTANCE.getBTSDelimiter();
+		EClass BTS_MARKER = eINSTANCE.getBTSMarker();
 
 		/**
 		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
@@ -10022,7 +10282,7 @@ public interface BtsmodelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute BTS_DELIMITER__VALUE = eINSTANCE.getBTSDelimiter_Value();
+		EAttribute BTS_MARKER__VALUE = eINSTANCE.getBTSMarker_Value();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.BTSTextItems <em>BTS Text Items</em>}' class.
@@ -10035,14 +10295,14 @@ public interface BtsmodelPackage extends EPackage {
 		EClass BTS_TEXT_ITEMS = eINSTANCE.getBTSTextItems();
 
 		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl <em>BTS Sentence Items</em>}' class.
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.BTSSentenceItem <em>BTS Sentence Item</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.BTSSentenceItemsImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSentenceItems()
+		 * @see org.bbaw.bts.btsmodel.BTSSentenceItem
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSSentenceItem()
 		 * @generated
 		 */
-		EClass BTS_SENTENCE_ITEMS = eINSTANCE.getBTSSentenceItems();
+		EClass BTS_SENTENCE_ITEM = eINSTANCE.getBTSSentenceItem();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSListEntryImpl <em>BTS List Entry</em>}' class.
@@ -11815,6 +12075,42 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTSDB_COLLECTION_ROLE_DESC__USER_ROLES = eINSTANCE.getBTSDBCollectionRoleDesc_UserRoles();
+
+		/**
+		 * The meta object literal for the '<em><b>Cached Children</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN = eINSTANCE.getBTSDBCollectionRoleDesc_CachedChildren();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextContentImpl <em>BTS Text Content</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.BTSTextContentImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSTextContent()
+		 * @generated
+		 */
+		EClass BTS_TEXT_CONTENT = eINSTANCE.getBTSTextContent();
+
+		/**
+		 * The meta object literal for the '<em><b>Text Items</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_TEXT_CONTENT__TEXT_ITEMS = eINSTANCE.getBTSTextContent_TextItems();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.BTSAmbivalenceItem
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSAmbivalenceItem()
+		 * @generated
+		 */
+		EClass BTS_AMBIVALENCE_ITEM = eINSTANCE.getBTSAmbivalenceItem();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

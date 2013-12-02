@@ -110,4 +110,10 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 
 	}
 
+	@Override
+	public List<BTSAnnotation> list(String dbPath, String queryId)
+	{
+		return filter(annotationDao.findByQueryId(queryId, dbPath));
+	}
+
 }

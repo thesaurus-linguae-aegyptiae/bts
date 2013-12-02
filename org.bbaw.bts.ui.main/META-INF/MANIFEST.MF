@@ -4,8 +4,7 @@ Bundle-Name: UIMain
 Bundle-SymbolicName: org.bbaw.bts.ui.main;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: BBAW
-Require-Bundle: javax.annotation,
- javax.inject,
+Require-Bundle: javax.inject,
  org.eclipse.e4.ui.di,
  org.eclipse.swt,
  org.eclipse.jface,
@@ -49,35 +48,7 @@ Require-Bundle: javax.annotation,
  org.bbaw.bts.core.commons
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: lib/ramses-20130515.jar,
- .,
- lib/antlr-2.7.7.jar,
- lib/antlr-runtime-3.1.1.jar,
- lib/bcmail-jdk14-1.38.jar,
- lib/bcprov-jdk14-1.38.jar,
- lib/bctsp-jdk14-1.38.jar,
- lib/cupruntime-1.jar,
- lib/filters-2.0.235.jar,
- lib/forms-1.0.7.jar,
- lib/itext-1.3.jar,
- lib/itextpdf-5.0.4.jar,
- lib/jcommon-1.0.1.jar,
- lib/jdom-1.1.jar,
- lib/jfreereport-0.8.7.jar,
- lib/jhotdrawfw-7.3.jar,
- lib/jsesh-5.5.jar,
- lib/jseshGlyphs-5.5.jar,
- lib/junit-4.8.2.jar,
- lib/jvectClipboard-1.3.jar,
- lib/jxl-UNKNOWN.jar,
- lib/miglayout-3.7.jar,
- lib/mysql-connector-java-5.1.14.jar,
- lib/qenherkhopeshefUtils-5.5.jar,
- lib/quaqua-7.3.4.jar,
- lib/stringtemplate-3.2.jar,
- lib/swing-layout-1.0.3.jar,
- lib/swing-worker-1.1.jar,
- lib/swingx-1.6.1.jar,
- lib/trove4j-2.0.2.jar
+Bundle-ClassPath: .
 Export-Package: org.bbaw.bts.ui.main.handlers,
  org.bbaw.bts.ui.main.wizards.newProject
+Import-Package: javax.annotation;version="1.0.0"

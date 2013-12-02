@@ -18,6 +18,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/propertyChangeSupport"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/childrenLoaded"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//TreeNodeWrapper/parentObject"/>
       <genOperations ecoreOperation="BTSViewModel.ecore#//TreeNodeWrapper/addPropertyChangeListener">
         <genParameters ecoreParameter="BTSViewModel.ecore#//TreeNodeWrapper/addPropertyChangeListener/propertyChangeListener"/>
       </genOperations>

@@ -174,4 +174,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSConfiguration> list(String dbPath, String queryId)
+	{
+		return filter(configurationDao.findByQueryId(queryId, dbPath));
+	}
 }

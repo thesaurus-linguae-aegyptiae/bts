@@ -121,4 +121,9 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSTCObject> list(String dbPath, String queryId)
+	{
+		return filter(bTSTCObjectDao.findByQueryId(queryId, dbPath));
+	}
 }

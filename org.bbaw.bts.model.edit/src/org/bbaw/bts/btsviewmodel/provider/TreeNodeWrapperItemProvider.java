@@ -8,10 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.provider.BTSConfigItemProvider;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -34,10 +32,9 @@ import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a
- * {@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper} object. <!-- begin-user-doc
+ * This is the item provider adapter for a {@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper} object.
+ * <!-- begin-user-doc
  * --> <!-- end-user-doc -->
- * 
  * @generated
  */
 public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
@@ -79,6 +76,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 			addPropertyChangeSupportPropertyDescriptor(object);
 			addChildrenLoadedPropertyDescriptor(object);
 			addLabelPropertyDescriptor(object);
+			addParentObjectPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -91,13 +89,19 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	 */
 	protected void addParentPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TreeNodeWrapper_parent_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_parent_feature",
-						"_UI_TreeNodeWrapper_type"), BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__PARENT, true,
-				false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_parent_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_parent_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__PARENT,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -108,13 +112,19 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	 */
 	protected void addChildrenPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TreeNodeWrapper_children_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_children_feature",
-						"_UI_TreeNodeWrapper_type"), BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, true,
-				false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_children_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_children_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -125,31 +135,41 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	 */
 	protected void addObjectPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TreeNodeWrapper_object_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_object_feature",
-						"_UI_TreeNodeWrapper_type"), BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__OBJECT, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_object_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_object_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__OBJECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
 	 * This adds a property descriptor for the Property Change Support feature.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	protected void addPropertyChangeSupportPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TreeNodeWrapper_propertyChangeSupport_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_propertyChangeSupport_feature",
-						"_UI_TreeNodeWrapper_type"),
-				BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT, true, false, false,
-				ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_propertyChangeSupport_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_propertyChangeSupport_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -160,13 +180,19 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	 */
 	protected void addChildrenLoadedPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TreeNodeWrapper_childrenLoaded_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_childrenLoaded_feature",
-						"_UI_TreeNodeWrapper_type"), BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN_LOADED,
-				true, false, false, ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_childrenLoaded_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_childrenLoaded_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN_LOADED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -177,23 +203,49 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	 */
 	protected void addLabelPropertyDescriptor(Object object)
 	{
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_TreeNodeWrapper_label_feature"),
-				getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_label_feature",
-						"_UI_TreeNodeWrapper_type"), BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__LABEL, true,
-				false, false, ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_label_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_label_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__LABEL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to
-	 * deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand},
-	 * {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in
-	 * {@link #createCommand}. <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
+	 * This adds a property descriptor for the Parent Object feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addParentObjectPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_TreeNodeWrapper_parentObject_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_TreeNodeWrapper_parentObject_feature", "_UI_TreeNodeWrapper_type"),
+				 BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__PARENT_OBJECT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -203,14 +255,6 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 		{
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
-			if (object != null && object instanceof BTSConfig)
-			{
-				TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
-				BTSObject realItem = ((TreeNodeWrapper) object).getObject();
-				IItemLabelProvider realItemItemprovider = getRealItemItemProvider(treeNodeWrapper, realItem);
-				childrenFeatures.addAll(((BTSConfigItemProvider) realItemItemprovider).getChildrenFeatures(realItem));
-
-			}
 		}
 		return childrenFeatures;
 	}
@@ -251,37 +295,27 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	protected EStructuralFeature getChildFeature(Object object, Object child)
 	{
-		// Check the type of the specified child object and return the proper
-		// feature to use for
+		// Check the type of the specified child object and return the proper feature to use for
 		// adding (see {@link AddCommand}) it as a child.
 
 		return super.getChildFeature(object, child);
 	}
 
 	/**
-	 * This returns TreeNodeWrapper.gif. <!-- begin-user-doc --> <!--
+	 * This returns TreeNodeWrapper.gif.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
-		BTSObject realItem = ((TreeNodeWrapper) object).getObject();
-		if (realItem == null)
-		{
-			return overlayImage(object, getResourceLocator().getImage("full/obj16/TreeNodeWrapper"));
-		}
-
-		IItemLabelProvider realItemItemprovider = getRealItemItemProvider(treeNodeWrapper, realItem);
-		return overlayImage(object, realItemItemprovider.getImage(realItem));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/TreeNodeWrapper"));
 	}
 
 	/**
@@ -355,11 +389,10 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -373,6 +406,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT:
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN_LOADED:
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__LABEL:
+			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT_OBJECT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN:
@@ -394,8 +428,10 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
 
-		newChildDescriptors.add(createChildParameter(BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-				BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper()));
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+				 BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper()));
 	}
 
 	/**

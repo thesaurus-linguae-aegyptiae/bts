@@ -21,10 +21,10 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSSenctence extends BTSTextItems {
+public interface BTSSenctence extends BTSTextItems, BTSReferencableItem {
 	/**
 	 * Returns the value of the '<em><b>Sentence Items</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSSentenceItems}.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSSentenceItem}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Sentence Items</em>' containment reference list isn't clear,
@@ -36,7 +36,7 @@ public interface BTSSenctence extends BTSTextItems {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<BTSSentenceItems> getSentenceItems();
+	EList<BTSSentenceItem> getSentenceItems();
 
 	/**
 	 * Returns the value of the '<em><b>Translation</b></em>' containment reference.

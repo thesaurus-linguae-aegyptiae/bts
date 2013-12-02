@@ -8,7 +8,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -23,6 +25,9 @@ import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.NoDocumentException;
 import org.lightcouch.View;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 @Creatable
 public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements BTSProjectDao
@@ -154,5 +159,38 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 			}
 		}
 		return null;
+	}
+
+	@Override
+	public void addAuthorisation(BTSProjectDBCollection coll, String prefix)
+	{
+		if (!coll.getRoleDescriptions().isEmpty())
+		{
+			CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, coll.getCollectionName());
+			Gson gson = dbClient.getGson();
+
+			String json = "{ ";
+			for (int i = 0; i < coll.getRoleDescriptions().size(); i++)
+			{
+				BTSDBCollectionRoleDesc desc = coll.getRoleDescriptions().get(i);
+				json += "\"" + desc.getRoleName() + "\": { \"names\" : " + gson.toJson(desc.getUserNames()) + ",";
+				json += " \"roles\" : " + gson.toJson(desc.getUserRoles()) + "}";
+				if (i < coll.getRoleDescriptions().size() - 1)
+				{
+					json += ",";
+				}
+			}
+			json += "}";
+			JsonObject jsonobj = dbClient.getGson().fromJson(json, JsonObject.class);
+			System.out.println(json);
+			dbClient.save(jsonobj);
+		} else
+		{
+			//remove _security
+			CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, coll.getCollectionName());
+			dbClient.remove("_security", null);
+
+		}
+
 	}
 }

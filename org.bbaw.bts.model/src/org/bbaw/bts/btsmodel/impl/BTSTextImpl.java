@@ -2,21 +2,13 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
-import java.util.Collection;
-
 import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextItems;
+import org.bbaw.bts.btsmodel.BTSTextContent;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
-import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +17,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSTextImpl#getTextItems <em>Text Items</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSTextImpl#getTextContent <em>Text Content</em>}</li>
  * </ul>
  * </p>
  *
@@ -33,15 +25,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	/**
-	 * The cached value of the '{@link #getTextItems() <em>Text Items</em>}' containment reference list.
+	 * The cached value of the '{@link #getTextContent() <em>Text Content</em>}' reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getTextItems()
+	 * @see #getTextContent()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<BTSTextItems> textItems;
-
+	protected BTSTextContent textContent;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -66,12 +57,19 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSTextItems> getTextItems() {
-		if (textItems == null)
+	public BTSTextContent getTextContent()
+	{
+		if (textContent != null && textContent.eIsProxy())
 		{
-			textItems = new EObjectContainmentEList<BTSTextItems>(BTSTextItems.class, this, BtsmodelPackage.BTS_TEXT__TEXT_ITEMS);
+			InternalEObject oldTextContent = (InternalEObject)textContent;
+			textContent = (BTSTextContent)eResolveProxy(oldTextContent);
+			if (textContent != oldTextContent)
+			{
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsmodelPackage.BTS_TEXT__TEXT_CONTENT, oldTextContent, textContent));
+			}
 		}
-		return textItems;
+		return textContent;
 	}
 
 	/**
@@ -79,14 +77,22 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
-			case BtsmodelPackage.BTS_TEXT__TEXT_ITEMS:
-				return ((InternalEList<?>)getTextItems()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
+	public BTSTextContent basicGetTextContent()
+	{
+		return textContent;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTextContent(BTSTextContent newTextContent)
+	{
+		BTSTextContent oldTextContent = textContent;
+		textContent = newTextContent;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_TEXT__TEXT_CONTENT, oldTextContent, textContent));
 	}
 
 	/**
@@ -98,8 +104,9 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_TEXT__TEXT_ITEMS:
-				return getTextItems();
+			case BtsmodelPackage.BTS_TEXT__TEXT_CONTENT:
+				if (resolve) return getTextContent();
+				return basicGetTextContent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -114,9 +121,8 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_TEXT__TEXT_ITEMS:
-				getTextItems().clear();
-				getTextItems().addAll((Collection<? extends BTSTextItems>)newValue);
+			case BtsmodelPackage.BTS_TEXT__TEXT_CONTENT:
+				setTextContent((BTSTextContent)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -131,8 +137,8 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	public void eUnset(int featureID) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_TEXT__TEXT_ITEMS:
-				getTextItems().clear();
+			case BtsmodelPackage.BTS_TEXT__TEXT_CONTENT:
+				setTextContent((BTSTextContent)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -147,8 +153,8 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	public boolean eIsSet(int featureID) {
 		switch (featureID)
 		{
-			case BtsmodelPackage.BTS_TEXT__TEXT_ITEMS:
-				return textItems != null && !textItems.isEmpty();
+			case BtsmodelPackage.BTS_TEXT__TEXT_CONTENT:
+				return textContent != null;
 		}
 		return super.eIsSet(featureID);
 	}

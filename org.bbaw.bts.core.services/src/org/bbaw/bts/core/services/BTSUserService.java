@@ -7,4 +7,6 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 
 	BTSUser createNewUser(String userName);
 
+	boolean setAuthentication(String userName, String passWord);
+
 }

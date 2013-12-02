@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.btsmodel;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSText#getTextItems <em>Text Items</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSText#getTextContent <em>Text Content</em>}</li>
  * </ul>
  * </p>
  *
@@ -22,19 +21,29 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface BTSText extends BTSCorpusObject {
 	/**
-	 * Returns the value of the '<em><b>Text Items</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSTextItems}.
+	 * Returns the value of the '<em><b>Text Content</b></em>' reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Text Items</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Text Content</em>' reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Text Items</em>' containment reference list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSText_TextItems()
-	 * @model containment="true"
+	 * @return the value of the '<em>Text Content</em>' reference.
+	 * @see #setTextContent(BTSTextContent)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSText_TextContent()
+	 * @model
 	 * @generated
 	 */
-	EList<BTSTextItems> getTextItems();
+	BTSTextContent getTextContent();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSText#getTextContent <em>Text Content</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Text Content</em>' reference.
+	 * @see #getTextContent()
+	 * @generated
+	 */
+	void setTextContent(BTSTextContent value);
 
 } // BTSText

@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
@@ -243,4 +244,18 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		return filter(objects);
 
 	}
+
+	@Override
+	public boolean saveMultiple(Set<BTSCorpusObject> entitys)
+	{
+		throw new UnsupportedOperationException("You have to implement saveMultiple Set... method!!!");
+	}
+
+	@Override
+	public List<BTSCorpusObject> list(String dbPath, String queryId)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

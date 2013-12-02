@@ -124,13 +124,22 @@ public interface BtsviewmodelPackage extends EPackage
 	int TREE_NODE_WRAPPER__LABEL = 5;
 
 	/**
+	 * The feature id for the '<em><b>Parent Object</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TREE_NODE_WRAPPER__PARENT_OBJECT = 6;
+
+	/**
 	 * The number of structural features of the '<em>Tree Node Wrapper</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TREE_NODE_WRAPPER_FEATURE_COUNT = 6;
+	int TREE_NODE_WRAPPER_FEATURE_COUNT = 7;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -277,6 +286,17 @@ public interface BtsviewmodelPackage extends EPackage
 	EAttribute getTreeNodeWrapper_Label();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper#getParentObject <em>Parent Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Parent Object</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.TreeNodeWrapper#getParentObject()
+	 * @see #getTreeNodeWrapper()
+	 * @generated
+	 */
+	EAttribute getTreeNodeWrapper_ParentObject();
+
+	/**
 	 * Returns the meta object for the '{@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper#addPropertyChangeListener(java.beans.PropertyChangeListener) <em>Add Property Change Listener</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -421,6 +441,14 @@ public interface BtsviewmodelPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute TREE_NODE_WRAPPER__LABEL = eINSTANCE.getTreeNodeWrapper_Label();
+
+		/**
+		 * The meta object literal for the '<em><b>Parent Object</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute TREE_NODE_WRAPPER__PARENT_OBJECT = eINSTANCE.getTreeNodeWrapper_ParentObject();
 
 		/**
 		 * The meta object literal for the '<em><b>Add Property Change Listener</b></em>' operation.

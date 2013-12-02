@@ -5,7 +5,6 @@ package org.bbaw.bts.btsviewmodel.impl;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
@@ -20,28 +19,27 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
- * 
  * @generated
  */
 public class BtsviewmodelFactoryImpl extends EFactoryImpl implements BtsviewmodelFactory
 {
 	/**
-	 * Creates the default factory implementation. <!-- begin-user-doc --> <!--
+	 * Creates the default factory implementation.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public static BtsviewmodelFactory init()
 	{
 		try
 		{
-			BtsviewmodelFactory theBtsviewmodelFactory = (BtsviewmodelFactory) EPackage.Registry.INSTANCE
-					.getEFactory(BtsviewmodelPackage.eNS_URI);
+			BtsviewmodelFactory theBtsviewmodelFactory = (BtsviewmodelFactory)EPackage.Registry.INSTANCE.getEFactory(BtsviewmodelPackage.eNS_URI);
 			if (theBtsviewmodelFactory != null)
 			{
 				return theBtsviewmodelFactory;
 			}
-		} catch (Exception exception)
+		}
+		catch (Exception exception)
 		{
 			EcorePlugin.INSTANCE.log(exception);
 		}
@@ -49,9 +47,9 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 	}
 
 	/**
-	 * Creates an instance of the factory. <!-- begin-user-doc --> <!--
+	 * Creates an instance of the factory.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BtsviewmodelFactoryImpl()
@@ -61,7 +59,6 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -69,8 +66,7 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 	{
 		switch (eClass.getClassifierID())
 		{
-			case BtsviewmodelPackage.TREE_NODE_WRAPPER:
-				return createTreeNodeWrapper();
+			case BtsviewmodelPackage.TREE_NODE_WRAPPER: return createTreeNodeWrapper();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -78,7 +74,6 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -95,14 +90,12 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 			case BtsviewmodelPackage.PROPERTY_CHANGE_EVENT:
 				return createPropertyChangeEventFromString(eDataType, initialValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName()
-						+ "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override
@@ -119,14 +112,12 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 			case BtsviewmodelPackage.PROPERTY_CHANGE_EVENT:
 				return convertPropertyChangeEventToString(eDataType, instanceValue);
 			default:
-				throw new IllegalArgumentException("The datatype '" + eDataType.getName()
-						+ "' is not a valid classifier");
+				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public TreeNodeWrapper createTreeNodeWrapper()
@@ -137,17 +128,15 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BTSObject createBTSObjectFromString(EDataType eDataType, String initialValue)
 	{
-		return (BTSObject) super.createFromString(eDataType, initialValue);
+		return (BTSObject)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertBTSObjectToString(EDataType eDataType, Object instanceValue)
@@ -157,17 +146,15 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PropertyChangeSupport createPropertyChangeSupportFromString(EDataType eDataType, String initialValue)
 	{
-		return (PropertyChangeSupport) super.createFromString(eDataType, initialValue);
+		return (PropertyChangeSupport)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertPropertyChangeSupportToString(EDataType eDataType, Object instanceValue)
@@ -177,17 +164,15 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PropertyChangeListener createPropertyChangeListenerFromString(EDataType eDataType, String initialValue)
 	{
-		return (PropertyChangeListener) super.createFromString(eDataType, initialValue);
+		return (PropertyChangeListener)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertPropertyChangeListenerToString(EDataType eDataType, Object instanceValue)
@@ -197,17 +182,15 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public PropertyChangeEvent createPropertyChangeEventFromString(EDataType eDataType, String initialValue)
 	{
-		return (PropertyChangeEvent) super.createFromString(eDataType, initialValue);
+		return (PropertyChangeEvent)super.createFromString(eDataType, initialValue);
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public String convertPropertyChangeEventToString(EDataType eDataType, Object instanceValue)
@@ -217,17 +200,15 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	public BtsviewmodelPackage getBtsviewmodelPackage()
 	{
-		return (BtsviewmodelPackage) getEPackage();
+		return (BtsviewmodelPackage)getEPackage();
 	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
 	 * @deprecated
 	 * @generated
 	 */

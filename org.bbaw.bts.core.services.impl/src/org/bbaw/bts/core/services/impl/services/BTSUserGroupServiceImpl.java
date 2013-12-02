@@ -74,4 +74,9 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 		return filter(objects);
 	}
 
+	@Override
+	public List<BTSUserGroup> list(String dbPath, String queryId)
+	{
+		return filter(userGroupDao.findByQueryId(queryId, dbPath));
+	}
 }

@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public abstract class BTSTextSentenceItemImpl extends BTSSentenceItemsImpl implements BTSTextSentenceItem {
+public abstract class BTSTextSentenceItemImpl extends BTSReferencableItemImpl implements BTSTextSentenceItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

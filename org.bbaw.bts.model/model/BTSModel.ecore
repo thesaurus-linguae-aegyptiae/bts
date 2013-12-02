@@ -3,16 +3,15 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="btsmodel" nsURI="http://btsmodel/1.0" nsPrefix="btsmodel">
   <eClassifiers xsi:type="ecore:EClass" name="BTSTCObject" eSuperTypes="#//BTSCorpusObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSText" eSuperTypes="#//BTSCorpusObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="textItems" upperBound="-1"
-        eType="#//BTSTextItems" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textContent" eType="#//BTSTextContent"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSSenctence" eSuperTypes="#//BTSTextItems">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSSenctence" eSuperTypes="#//BTSTextItems #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sentenceItems" upperBound="-1"
-        eType="#//BTSSentenceItems" containment="true"/>
+        eType="#//BTSSentenceItem" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="translation" eType="#//BTSTranslations"
         containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSWord" eSuperTypes="#//BTSSentenceItems">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSWord" eSuperTypes="#//BTSSentenceItem #//BTSAmbivalenceItem #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="translation" eType="#//BTSTranslations"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="wType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -24,12 +23,13 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="graphics" upperBound="-1"
         eType="#//BTSGraphic" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSDelimiter" eSuperTypes="#//BTSTextSentenceItem">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSMarker" eSuperTypes="#//BTSTextSentenceItem #//BTSTextItems #//BTSAmbivalenceItem #//BTSSentenceItem #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTextItems" abstract="true" interface="true"
       eSuperTypes="#//BTSReferencableItem"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSSentenceItems" abstract="true" eSuperTypes="#//BTSReferencableItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSSentenceItem" abstract="true" interface="true"
+      eSuperTypes="#//BTSReferencableItem"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSListEntry" eSuperTypes="#//BTSCorpusObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="subentries" upperBound="-1"
@@ -66,13 +66,13 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalence" eSuperTypes="#//BTSTextSentenceItem">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalence" eSuperTypes="#//BTSTextSentenceItem #//BTSSentenceItem #//BTSTextItems #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//BTSLemmaCase" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSLemmaCase">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSLemmaCase" eSuperTypes="#//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scenario" upperBound="-1"
-        eType="#//BTSTextSentenceItem" containment="true"/>
+        eType="#//BTSAmbivalenceItem" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSUser" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupIds" upperBound="-1"
@@ -105,7 +105,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="endId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTextSentenceItem" abstract="true"
-      eSuperTypes="#//BTSSentenceItems #//BTSTextItems"/>
+      eSuperTypes="#//BTSSentenceItem #//BTSTextItems"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSReference" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
         eType="#//BTSInterTextReference" containment="true"/>
@@ -347,5 +347,14 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="userRoles" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cachedChildren" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        transient="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSTextContent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textItems" upperBound="-1"
+        eType="#//BTSTextItems" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalenceItem" abstract="true"
+      interface="true"/>
 </ecore:EPackage>
