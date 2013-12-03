@@ -16,7 +16,7 @@ import jsesh.mdcDisplayer.preferences.DrawingSpecificationsImplementation;
 
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItems;
+import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextItems;
 import org.bbaw.bts.btsmodel.BTSWord;
@@ -249,14 +249,14 @@ public class TextSignEditorComposite extends Composite
 		container.add(cursor);
 		figureMap = new HashMap<Object, BTSWord>();
 		wordMap = new HashMap<BTSWord, IFigure>();
-		for (BTSTextItems item : text.getTextItems())
+		for (BTSTextItems item : text.getTextContent().getTextItems())
 		{
 			if (item instanceof BTSSenctence)
 			{
 				BTSSenctence sentence = (BTSSenctence) item;
 
 				//insert start Sentence
-				for (BTSSentenceItems senItem : sentence.getSentenceItems())
+				for (BTSSentenceItem senItem : sentence.getSentenceItems())
 				{
 					if (senItem instanceof BTSWord)
 					{

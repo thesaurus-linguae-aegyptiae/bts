@@ -16,11 +16,11 @@ import java.util.StringTokenizer;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSDelimiter;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSMarker;
 import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItems;
+import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextItems;
 import org.bbaw.bts.btsmodel.BTSWord;
@@ -48,17 +48,17 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model)
 	{
-		if (text == null)
+		if (text == null || text.getTextContent() == null)
 		{
 			return;
 		}
 		StringBuilder stringBuilder = new StringBuilder();
-		for (BTSTextItems textItems : text.getTextItems())
+		for (BTSTextItems textItems : text.getTextContent().getTextItems())
 		{
 			if (textItems instanceof BTSSenctence)
 			{
 				BTSSenctence sentence = (BTSSenctence) textItems;
-				for (BTSSentenceItems sentenceItems : sentence.getSentenceItems())
+				for (BTSSentenceItem sentenceItems : sentence.getSentenceItems())
 				{
 					appendToDoc(sentenceItems, doc, model, stringBuilder);
 				}
@@ -79,21 +79,21 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			BTSWord word = (BTSWord) item;
 			Position pos = appendWordToDoc(word, doc, stringBuilder);
 			appendWordToModel(word, model, pos);
-		} else if (item instanceof BTSDelimiter)
+		} else if (item instanceof BTSMarker)
 		{
-			BTSDelimiter del = (BTSDelimiter) item;
+			BTSMarker del = (BTSMarker) item;
 			Position pos = appendDelimiterToDoc(del, doc, stringBuilder);
 			appendDelimiterToModel(del, model, pos);
 		}
 	}
 
-	private void appendDelimiterToModel(BTSDelimiter del, IAnnotationModel model, Position pos)
+	private void appendDelimiterToModel(BTSMarker del, IAnnotationModel model, Position pos)
 	{
 		// TODO Auto-generated method stub
 
 	}
 
-	private Position appendDelimiterToDoc(BTSDelimiter del, Document doc, StringBuilder stringBuilder)
+	private Position appendDelimiterToDoc(BTSMarker del, Document doc, StringBuilder stringBuilder)
 	{
 		return null;
 		// TODO Auto-generated method stub
@@ -144,14 +144,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		LemmaAnnotation annotation = null;
 		BTSSenctence sentence;
 
-		if (!text.getTextItems().isEmpty())
+		if (!text.getTextContent().getTextItems().isEmpty())
 		{
-			sentence = (BTSSenctence) text.getTextItems().get(0);
+			sentence = (BTSSenctence) text.getTextContent().getTextItems().get(0);
 			sentence.getSentenceItems().clear();
 		} else
 		{
 			sentence = textService.createNewSentence();
-			text.getTextItems().add(sentence);
+			text.getTextContent().getTextItems().add(sentence);
 		}
 		BTSWord word = null;
 		int innerSentencePosition = 0;
@@ -267,11 +267,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	@Override
 	public TextModel transformToRamsesTextModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItems> ramsesTextModelMap)
+			Map<Object, BTSSentenceItem> ramsesTextModelMap)
 	{
 		ramsesTextModelMap.clear();
 		textModel.clear();
-		if (text != null && !text.getTextItems().isEmpty())
+		if (text != null && !text.getTextContent().getTextItems().isEmpty())
 		{
 			return transformToRamsesTextModelInteral(text, textModel, ramsesTextModelMap);
 		}
@@ -280,13 +280,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	}
 
 	private TextModel transformToRamsesTextModelInteral(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItems> ramsesTextModelMap)
+			Map<Object, BTSSentenceItem> ramsesTextModelMap)
 	{
-		for (BTSTextItems item : text.getTextItems())
+		for (BTSTextItems item : text.getTextContent().getTextItems())
 		{
 			if (item instanceof BTSSenctence && !((BTSSenctence) item).getSentenceItems().isEmpty())
 			{
-				for (BTSSentenceItems sentenceItem : ((BTSSenctence) item).getSentenceItems())
+				for (BTSSentenceItem sentenceItem : ((BTSSenctence) item).getSentenceItems())
 				{
 					addSentenceItemToTextModel(sentenceItem, textModel, ramsesTextModelMap);
 				}
@@ -295,8 +295,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		return textModel;
 	}
 
-	private void addSentenceItemToTextModel(BTSSentenceItems sentenceItem, TextModel textModel,
-			Map<Object, BTSSentenceItems> ramsesTextModelMap)
+	private void addSentenceItemToTextModel(BTSSentenceItem sentenceItem, TextModel textModel,
+			Map<Object, BTSSentenceItem> ramsesTextModelMap)
 	{
 		if (sentenceItem instanceof BTSWord)
 		{
@@ -339,11 +339,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	@Override
 	public BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItems> ramsesTextModelMap)
+			Map<Object, BTSSentenceItem> ramsesTextModelMap)
 	{
 		for (ElementOccurrence model : textModel.getText())
 		{
-			BTSSentenceItems item = ramsesTextModelMap.get(model.getElement());
+			BTSSentenceItem item = ramsesTextModelMap.get(model.getElement());
 			if (item != null)
 			{
 				if (item instanceof BTSWord)

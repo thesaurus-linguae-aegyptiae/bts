@@ -21,7 +21,7 @@ import jsesh.editor.JMDCEditor;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSSentenceItems;
+import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
@@ -120,7 +120,7 @@ public class EgyptEditorPart
 
 	private TextModel textModel;
 
-	private Map<Object, BTSSentenceItems> ramsesTextModelMap;
+	private Map<Object, BTSSentenceItem> ramsesTextModelMap;
 
 	private TextSignEditorComposite signTextEditor;
 
@@ -662,7 +662,7 @@ public class EgyptEditorPart
 
 		if (ramsesTextModelMap == null)
 		{
-			ramsesTextModelMap = new HashMap<Object, BTSSentenceItems>();
+			ramsesTextModelMap = new HashMap<Object, BTSSentenceItem>();
 		}
 		textEditorController.transformToRamsesTextModel(text, textModel, ramsesTextModelMap);
 		editorPanel.clear();
@@ -679,7 +679,7 @@ public class EgyptEditorPart
 		this.annotationModel = model;
 		textEditorController.transformToDocument(text, doc, model);
 		textViewer.setDocument(doc, model);
-		verticalRuler.setModel(model);
+		//		verticalRuler.setModel(model);
 
 	}
 

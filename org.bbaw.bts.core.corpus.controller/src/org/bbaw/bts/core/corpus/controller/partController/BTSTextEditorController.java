@@ -4,7 +4,7 @@ import grammaticalBase.model.text.TextModel;
 
 import java.util.Map;
 
-import org.bbaw.bts.btsmodel.BTSSentenceItems;
+import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.eclipse.jface.text.Document;
@@ -22,10 +22,9 @@ public interface BTSTextEditorController
 	boolean save(BTSText text);
 
 	TextModel transformToRamsesTextModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItems> ramsesTextModelMap);
+			Map<Object, BTSSentenceItem> ramsesTextModelMap);
 
-	BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItems> ramsesTextModelMap);
+	BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel, Map<Object, BTSSentenceItem> ramsesTextModelMap);
 
 	String transformWordToMdCString(BTSWord word);
 
