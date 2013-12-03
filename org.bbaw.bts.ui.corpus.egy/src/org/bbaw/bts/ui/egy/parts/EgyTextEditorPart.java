@@ -5,7 +5,6 @@ import grammaticalBase.model.text.TextModel;
 import grammaticalBase.model.text.WordOccurrence;
 import grammaticalBase.textEditor.view.textView.JTextAsWordsEditorPanel;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +19,8 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.corpus.text.btsdsl.ui.internal.BTSActivator;
+import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
 import org.bbaw.bts.ui.egy.textSign.TextSignEditorComposite;
 import org.bbaw.bts.ui.font.BTSFontManager;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -30,7 +31,6 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.text.Document;
-import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.VerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
@@ -48,9 +48,11 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Widget;
-import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
-import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+
+import com.google.inject.Injector;
 
 public class EgyTextEditorPart
 {
@@ -99,6 +101,20 @@ public class EgyTextEditorPart
 
 	private TextSignEditorComposite signTextEditor;
 
+	private Composite btsEditorComp;
+
+	private EmbeddedEditorFactory embeddedEditorFactory;
+
+	private Injector injector;
+
+	private BTSTextXtextEditedResourceProvider resourceProvider = new BTSTextXtextEditedResourceProvider();
+
+	private EmbeddedEditor embeddedEditor;
+
+	private Composite embeddedEditorComp;
+
+	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
+
 	/**
 	 * @param parent
 	 */
@@ -143,11 +159,6 @@ public class EgyTextEditorPart
 							}
 							case 2:
 							{
-								updateModelFromRamses();
-								break;
-							}
-							case 3:
-							{
 								updateModelFromJSesh();
 								break;
 							}
@@ -168,11 +179,6 @@ public class EgyTextEditorPart
 							}
 							case 2:
 							{
-								loadInputRamses(text);
-								break;
-							}
-							case 3:
-							{
 								loadInputJSesh(text);
 								break;
 							}
@@ -185,53 +191,20 @@ public class EgyTextEditorPart
 			tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(
 					SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 			{
-				//				CTabItem tbtm0 = new CTabItem(tabFolder, SWT.NONE);
-				//				tbtm0.setText("WrappedSourceViewer");
-				//				{
-				//					Composite plainTextComp = new Composite(tabFolder, SWT.NONE | SWT.BORDER);
-				//					plainTextComp.setLayout(new GridLayout(2, false));
-				//					tbtm0.setControl(plainTextComp);
-				//
-				//					WrappedSourceViewer wsv = new WrappedSourceViewer(plainTextComp);
-				//					plainTextComp.layout();
-				//					plainTextComp.pack();
-				//				}
+
 				CTabItem edTab = new CTabItem(tabFolder, SWT.NONE);
-				edTab.setText("Transcription");
+				edTab.setText("Transliteration");
 
 				{
-					Composite btsEditorComp = new Composite(tabFolder, SWT.BORDER);
+					btsEditorComp = new Composite(tabFolder, SWT.BORDER);
 					btsEditorComp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
 					btsEditorComp.setLayout(new FillLayout());
 					//					((FillLayout) btsEditorComp.getLayout()).
 					edTab.setControl(btsEditorComp);
-					IEditedResourceProvider resourceProvider = new IEditedResourceProvider()
-					{
 
-						@Override
-						public XtextResource createResource()
-						{
-							try
-							{
-								MyDslQueryStandaloneSetup.doSetup();
-								ResourceSet resourceSet = new ResourceSetImpl();
-								Resource resource = resourceSet.createResource(URI.createURI("somefile.MyDsl"));
-
-								return (XtextResource) resource;
-							} catch (Exception e)
-							{
-								return null;
-							}
-						}
-					};
-
-					MyDslActivator activator = MyDslActivator.getInstance();
-					Injector injector = activator.getInjector(MyDslActivator.QUERYNAME);
-					EmbeddedEditorFactory factory = injector.getInstance(EmbeddedEditorFactory.class);
-					handle = factory.newEditor(resourceProvider).withParent(parent);
-
-					// keep the partialEditor as instance var to read / write the edited text
-					partialEditor = handle.createPartialEditor(true);
+					BTSActivator activator = BTSActivator.getInstance();
+					injector = activator.getInjector(BTSActivator.ORG_BBAW_BTS_CORPUS_TEXT_BTSDSL_BTS);
+					embeddedEditorFactory = injector.getInstance(EmbeddedEditorFactory.class);
 
 				}
 
@@ -287,12 +260,6 @@ public class EgyTextEditorPart
 		});
 	}
 
-	protected void updateModelFromRamses()
-	{
-		this.text = textEditorController.updateTextFromRamsesModel(text, textModel, ramsesTextModelMap);
-
-	}
-
 	protected void updateModelFromTranscription()
 	{
 		this.text = textEditorController.updateTextFromDocument(text, document, annotationModel, textViewer);
@@ -305,29 +272,19 @@ public class EgyTextEditorPart
 
 	}
 
-	protected void loadInputRamses(BTSText text2)
-	{
-
-		if (ramsesTextModelMap == null)
-		{
-			ramsesTextModelMap = new HashMap<Object, BTSSentenceItem>();
-		}
-		textEditorController.transformToRamsesTextModel(text, textModel, ramsesTextModelMap);
-		editorPanel.clear();
-		editorPanel.setTextModel(textModel);
-
-	}
-
 	protected void loadInputTranscription(BTSText text)
 	{
-		Document doc = new Document();
-		this.document = doc;
+		if (embeddedEditorComp != null)
+		{
+			embeddedEditorComp.dispose();
+			embeddedEditorComp = null;
+		}
+		embeddedEditorComp = new Composite(btsEditorComp, SWT.None);
+		resourceProvider.setText(text);
+		embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider).withParent(embeddedEditorComp);
 
-		IAnnotationModel model = new AnnotationModel();
-		this.annotationModel = model;
-		textEditorController.transformToDocument(text, doc, model);
-		textViewer.setDocument(doc, model);
-		verticalRuler.setModel(model);
+		// keep the partialEditor as instance var to read / write the edited text
+		embeddedEditorModelAccess = embeddedEditor.createPartialEditor(true);
 
 	}
 
@@ -385,11 +342,6 @@ public class EgyTextEditorPart
 				}
 				case 2:
 				{
-					loadInputRamses(text);
-					break;
-				}
-				case 3:
-				{
 					loadInputJSesh(text);
 					break;
 				}
@@ -432,7 +384,7 @@ public class EgyTextEditorPart
 			}
 			case 1:
 			{
-				updateModelFromRamses();
+				updateModelFromSignText();
 				break;
 			}
 			case 2:
