@@ -1,6 +1,0 @@
-<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.1.0"  name="org.bbaw.bts.controller.splash">
-   <implementation class="org.bbaw.bts.core.controller.impl.generalController.SplashScreenControllerImpl"/>
-   <service>
-      <provide interface="org.bbaw.bts.core.controller.generalController.ISplashScreenController"/>
-   </service>
-</scr:component>
