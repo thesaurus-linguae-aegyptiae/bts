@@ -19,7 +19,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
-import org.bbaw.bts.corpus.text.btsdsl.ui.internal.BTSActivator;
+import org.bbaw.bts.corpus.text.dsl.ui.internal.BTSActivator;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
 import org.bbaw.bts.ui.egy.textSign.TextSignEditorComposite;
 import org.bbaw.bts.ui.font.BTSFontManager;
@@ -203,7 +203,7 @@ public class EgyTextEditorPart
 					edTab.setControl(btsEditorComp);
 
 					BTSActivator activator = BTSActivator.getInstance();
-					injector = activator.getInjector(BTSActivator.ORG_BBAW_BTS_CORPUS_TEXT_BTSDSL_BTS);
+					injector = activator.getInjector(BTSActivator.ORG_BBAW_BTS_CORPUS_TEXT_DSL_BTS);
 					embeddedEditorFactory = injector.getInstance(EmbeddedEditorFactory.class);
 
 				}

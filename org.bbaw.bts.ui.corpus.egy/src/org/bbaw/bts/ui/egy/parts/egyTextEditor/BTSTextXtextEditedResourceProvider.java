@@ -1,7 +1,7 @@
 package org.bbaw.bts.ui.egy.parts.egyTextEditor;
 
 import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.corpus.text.btsdsl.BTSStandaloneSetup;
+import org.bbaw.bts.corpus.text.dsl.BTSStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 
