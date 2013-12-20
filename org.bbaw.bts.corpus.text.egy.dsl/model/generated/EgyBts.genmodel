@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.bbaw.bts.corpus.text.egy.dsl/src-gen" editDirectory="/org.bbaw.bts.corpus.text.egy.dsl.edit/src"
+    editorDirectory="/org.bbaw.bts.corpus.text.egy.dsl.editor/src" modelPluginID="org.bbaw.bts.corpus.text.egy.dsl"
+    forceOverwrite="true" modelName="EgyBts" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.bbaw.bts.corpus.text.egy.dsl.edit"
+    editorPluginID="org.bbaw.bts.corpus.text.egy.dsl.editor" runtimeVersion="2.9">
+  <genPackages prefix="EgyBts" basePackage="org.bbaw.bts.corpus.text.egy.dsl" disposableProviderFactory="true"
+      fileExtensions="egybts" ecorePackage="EgyBts.ecore#/">
+    <genClasses ecoreClass="EgyBts.ecore#//TextContent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//TextContent/items"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//TextItem"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Sentence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Sentence/items"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//SentenceItem"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Marker">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Marker/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Marker/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//Word">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Word/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//WordMiddle"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Chars">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Chars/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//Interfix"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixLexical"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixFlexion"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixSuffixPronomLexical"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixPrefixNonLexical"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixPrefixLexical"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixCompountWords"/>
+    <genClasses ecoreClass="EgyBts.ecore#//InterfixConnectionSyllabicGroup"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Brackets"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Expanded">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Expanded/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoExpanded"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Emendation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Emendation/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoEmendation"/>
+    <genClasses ecoreClass="EgyBts.ecore#//DisputableReading">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//DisputableReading/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoDisputableReading"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Lacuna">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Lacuna/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoLacuna"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Deletion">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Deletion/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoDeletion"/>
+    <genClasses ecoreClass="EgyBts.ecore#//ExpandedColumn">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//ExpandedColumn/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoExpandedColumn"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Rasur">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Rasur/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoRasur"/>
+    <genClasses ecoreClass="EgyBts.ecore#//AncientExpanded">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//AncientExpanded/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoAncientExpanded"/>
+    <genClasses ecoreClass="EgyBts.ecore#//RestorationOverRasur">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//RestorationOverRasur/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoRestorationOverRasur"/>
+    <genClasses ecoreClass="EgyBts.ecore#//PartialDestruction">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//PartialDestruction/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//NoPartialDestruction"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Destruction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Destruction/comment"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

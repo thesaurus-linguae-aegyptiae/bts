@@ -1,17 +1,15 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
-import grammaticalBase.model.light.LightInflexion;
-import grammaticalBase.model.light.LightLemma;
-import grammaticalBase.model.light.LightSpelling;
-import grammaticalBase.model.text.ElementOccurrence;
-import grammaticalBase.model.text.TextModel;
-import grammaticalBase.model.text.WordAnalysis;
-import grammaticalBase.model.text.WordOccurrence;
+//import grammaticalBase.model.light.LightInflexion;
+//import grammaticalBase.model.light.LightLemma;
+//import grammaticalBase.model.light.LightSpelling;
+//import grammaticalBase.model.text.TextModel;
+//import grammaticalBase.model.text.WordAnalysis;
+//import grammaticalBase.model.text.WordOccurrence;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.inject.Inject;
@@ -265,64 +263,71 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		return textService.save(text);
 	}
 
-	@Override
-	public TextModel transformToRamsesTextModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItem> ramsesTextModelMap)
-	{
-		ramsesTextModelMap.clear();
-		textModel.clear();
-		if (text != null && !text.getTextContent().getTextItems().isEmpty())
-		{
-			return transformToRamsesTextModelInteral(text, textModel, ramsesTextModelMap);
-		}
-		return textModel;
+	// @Override
+	// public TextModel transformToRamsesTextModel(BTSText text, TextModel
+	// textModel,
+	// Map<Object, BTSSentenceItem> ramsesTextModelMap)
+	// {
+	// ramsesTextModelMap.clear();
+	// textModel.clear();
+	// if (text != null && !text.getTextContent().getTextItems().isEmpty())
+	// {
+	// return transformToRamsesTextModelInteral(text, textModel,
+	// ramsesTextModelMap);
+	// }
+	// return textModel;
+	//
+	// }
+	//
+	// private TextModel transformToRamsesTextModelInteral(BTSText text,
+	// TextModel textModel,
+	// Map<Object, BTSSentenceItem> ramsesTextModelMap)
+	// {
+	// for (BTSTextItems item : text.getTextContent().getTextItems())
+	// {
+	// if (item instanceof BTSSenctence && !((BTSSenctence)
+	// item).getSentenceItems().isEmpty())
+	// {
+	// for (BTSSentenceItem sentenceItem : ((BTSSenctence)
+	// item).getSentenceItems())
+	// {
+	// addSentenceItemToTextModel(sentenceItem, textModel, ramsesTextModelMap);
+	// }
+	// }
+	// }
+	// return textModel;
+	// }
 
-	}
-
-	private TextModel transformToRamsesTextModelInteral(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItem> ramsesTextModelMap)
-	{
-		for (BTSTextItems item : text.getTextContent().getTextItems())
-		{
-			if (item instanceof BTSSenctence && !((BTSSenctence) item).getSentenceItems().isEmpty())
-			{
-				for (BTSSentenceItem sentenceItem : ((BTSSenctence) item).getSentenceItems())
-				{
-					addSentenceItemToTextModel(sentenceItem, textModel, ramsesTextModelMap);
-				}
-			}
-		}
-		return textModel;
-	}
-
-	private void addSentenceItemToTextModel(BTSSentenceItem sentenceItem, TextModel textModel,
-			Map<Object, BTSSentenceItem> ramsesTextModelMap)
-	{
-		if (sentenceItem instanceof BTSWord)
-		{
-			BTSWord word = (BTSWord) sentenceItem;
-			WordOccurrence modelElement = new WordOccurrence();
-			LightSpelling ls = new LightSpelling(idcounter++, word.getWChar(), transformWordToMdCString(word));
-			//						ls.setEncodedOrder<ingTranslitteration(word.getWChar());
-
-			ls.setLabel(word.getWChar() + " " + idcounter);
-			ls.setTranslitteration(word.getWChar());
-			modelElement.setSpelling(ls);
-			modelElement.setFreeTranslitteration(word.getWChar());
-			WordAnalysis wordAnalysis = new WordAnalysis();
-			wordAnalysis.setSpelling(ls);
-			LightLemma lightLemma = new LightLemma();
-			lightLemma.setTranslitteration("hhhh");
-			LightInflexion lightInflexion = new LightInflexion();
-			lightInflexion.setInflexionName("hihihi");
-			wordAnalysis.addInflexion(lightLemma, lightInflexion);
-			modelElement.setWordAnalysis(wordAnalysis);
-			textModel.add(modelElement);
-
-			ramsesTextModelMap.put(modelElement, word);
-		}
-
-	}
+	// private void addSentenceItemToTextModel(BTSSentenceItem sentenceItem,
+	// TextModel textModel,
+	// Map<Object, BTSSentenceItem> ramsesTextModelMap)
+	// {
+	// if (sentenceItem instanceof BTSWord)
+	// {
+	// BTSWord word = (BTSWord) sentenceItem;
+	// WordOccurrence modelElement = new WordOccurrence();
+	// LightSpelling ls = new LightSpelling(idcounter++, word.getWChar(),
+	// transformWordToMdCString(word));
+	// // ls.setEncodedOrder<ingTranslitteration(word.getWChar());
+	//
+	// ls.setLabel(word.getWChar() + " " + idcounter);
+	// ls.setTranslitteration(word.getWChar());
+	// modelElement.setSpelling(ls);
+	// modelElement.setFreeTranslitteration(word.getWChar());
+	// WordAnalysis wordAnalysis = new WordAnalysis();
+	// wordAnalysis.setSpelling(ls);
+	// LightLemma lightLemma = new LightLemma();
+	// lightLemma.setTranslitteration("hhhh");
+	// LightInflexion lightInflexion = new LightInflexion();
+	// lightInflexion.setInflexionName("hihihi");
+	// wordAnalysis.addInflexion(lightLemma, lightInflexion);
+	// modelElement.setWordAnalysis(wordAnalysis);
+	// textModel.add(modelElement);
+	//
+	// ramsesTextModelMap.put(modelElement, word);
+	// }
+	//
+	// }
 
 	public String transformWordToMdCString(BTSWord word)
 	{
@@ -337,37 +342,40 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		return mdc;
 	}
 
-	@Override
-	public BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItem> ramsesTextModelMap)
-	{
-		for (ElementOccurrence model : textModel.getText())
-		{
-			BTSSentenceItem item = ramsesTextModelMap.get(model.getElement());
-			if (item != null)
-			{
-				if (item instanceof BTSWord)
-				{
-					BTSWord word = (BTSWord) item;
-					updateBTSWordFromElementOccurence(word, model);
-				}
-			}
-		}
-		return text;
-	}
-
-	private void updateBTSWordFromElementOccurence(BTSWord word, ElementOccurrence model)
-	{
-		if (model.getElement() != null && model.getElement() instanceof WordOccurrence)
-		{
-			WordOccurrence occ = (WordOccurrence) model.getElement();
-			LightSpelling spelling = occ.getSpelling();
-			String mdc = spelling.getMdC();
-			updateBTSWordFromMdCString(word, mdc);
-
-		}
-
-	}
+	// @Override
+	// public BTSText updateTextFromRamsesModel(BTSText text, TextModel
+	// textModel,
+	// Map<Object, BTSSentenceItem> ramsesTextModelMap)
+	// {
+	// for (ElementOccurrence model : textModel.getText())
+	// {
+	// BTSSentenceItem item = ramsesTextModelMap.get(model.getElement());
+	// if (item != null)
+	// {
+	// if (item instanceof BTSWord)
+	// {
+	// BTSWord word = (BTSWord) item;
+	// updateBTSWordFromElementOccurence(word, model);
+	// }
+	// }
+	// }
+	// return text;
+	// }
+	//
+	// private void updateBTSWordFromElementOccurence(BTSWord word,
+	// ElementOccurrence model)
+	// {
+	// if (model.getElement() != null && model.getElement() instanceof
+	// WordOccurrence)
+	// {
+	// WordOccurrence occ = (WordOccurrence) model.getElement();
+	// LightSpelling spelling = occ.getSpelling();
+	// String mdc = spelling.getMdC();
+	// updateBTSWordFromMdCString(word, mdc);
+	//
+	// }
+	//
+	// }
 
 	public void updateBTSWordFromMdCString(BTSWord word, String mdc)
 	{

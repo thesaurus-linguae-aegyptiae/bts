@@ -13,14 +13,15 @@ Require-Bundle: org.eclipse.e4.ui.workbench;bundle-version="0.10.2",
  org.eclipse.e4.core.services;bundle-version="1.0.0",
  org.eclipse.e4.ui.workbench.swt;bundle-version="0.10.1",
  org.eclipse.emf.common;bundle-version="2.9.0",
- org.eclipse.m2e.maven.runtime,
  org.bbaw.bts.core.services
-Import-Package: org.bbaw.bts.btsmodel,
+Import-Package: javax.inject,
+ org.bbaw.bts.btsmodel,
  org.bbaw.bts.commons,
  org.bbaw.bts.core.commons,
  org.bbaw.bts.modelUtils,
  org.bbaw.bts.searchModel,
  org.eclipse.equinox.app;version="1.1.0",
+ org.elasticsearch.common.recycler,
  org.elasticsearch.index.query,
  org.osgi.framework
 Export-Package: org.bbaw.bts.app.login

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="egyBts" nsURI="http://www.bbaw.org/bts/corpus/text/egy/dsl/EgyBts"
+    nsPrefix="egyBts">
+  <eClassifiers xsi:type="ecore:EClass" name="TextContent">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//TextItem" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TextItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sentence" eSuperTypes="#//TextItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="items" upperBound="-1"
+        eType="#//SentenceItem" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SentenceItem"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Marker" eSuperTypes="#//SentenceItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Word" eSuperTypes="#//SentenceItem">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//WordMiddle" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WordMiddle"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Chars" eSuperTypes="#//WordMiddle #//NoExpanded #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interfix" eSuperTypes="#//WordMiddle #//NoExpanded #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixLexical" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixFlexion" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixSuffixPronomLexical" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixPrefixNonLexical" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixPrefixLexical" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixCompountWords" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterfixConnectionSyllabicGroup" eSuperTypes="#//Interfix"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Brackets" eSuperTypes="#//WordMiddle"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expanded" eSuperTypes="#//Brackets #//NoEmendation #//NoDisputableReading #//NoLacuna">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoExpanded" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoExpanded"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Emendation" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoEmendation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoEmendation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DisputableReading" eSuperTypes="#//Brackets #//NoExpanded #//NoEmendation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoDisputableReading" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoDisputableReading"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Lacuna" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoLacuna" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoLacuna"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Deletion" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoDeletion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoDeletion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedColumn" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoExpandedColumn" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoExpandedColumn"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rasur" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoRasur" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoRasur"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoAncientExpanded" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoAncientExpanded"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RestorationOverRasur" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoRestorationOverRasur" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoRestorationOverRasur"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialDestruction" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoPartialDestruction" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NoPartialDestruction"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Destruction" eSuperTypes="#//Brackets">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="ASCII"?>
 <fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_A9NjYD_mEeOYuPzWUW3h3g">
+  <imports xsi:type="commands:Category" xmi:id="_pjLX4F2fEeOwE8UUrLWumA" elementId="org.bbaw.bts.ui.main.category.database"/>
+  <imports xsi:type="commands:Category" xmi:id="_u7sUsF2fEeOwE8UUrLWumA" elementId="org.eclipse.ui.category.edit"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart">
       <toolbar xmi:id="_Pg3koD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.toolbar.0">
@@ -9,24 +11,21 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_eOl9kEt9EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.addText" label="Add Text" command="_2I4eYEt7EeO3HNJi0pp4Qg"/>
       </toolbar>
     </elements>
-    <elements xsi:type="basic:Part" xmi:id="_YmgmUECeEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.part.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.Test" label="test" closeable="true">
-      <toolbar xmi:id="_auGk8ECeEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.toolbar.3"/>
-    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dlWMAD_nEeOYuPzWUW3h3g" featurename="commands" parentElementId="org.bbaw.bts.application">
-    <elements xsi:type="commands:Command" xmi:id="_gUujYD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.command.createNewTextCorpus" commandName="createNewTextCorpus"/>
-    <elements xsi:type="commands:Command" xmi:id="_pCoHoD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.command.createNewTCObject" commandName="createNewTCObject"/>
-    <elements xsi:type="commands:Command" xmi:id="_rAGg8D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.command.addNewTCObject" commandName="addNewTCObject"/>
-    <elements xsi:type="commands:Command" xmi:id="_2I4eYEt7EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.command.addNewText" commandName="addNewText"/>
+    <elements xsi:type="commands:Command" xmi:id="_gUujYD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.command.createNewTextCorpus" commandName="createNewTextCorpus" category="_u7sUsF2fEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_pCoHoD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.command.createNewTCObject" commandName="createNewTCObject" category="_u7sUsF2fEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_rAGg8D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.command.addNewTCObject" commandName="addNewTCObject" category="_u7sUsF2fEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_2I4eYEt7EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.command.addNewText" commandName="addNewText" category="_pjLX4F2fEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
     <elements xsi:type="basic:Part" xmi:id="__kd84D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.passportEditorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.PassportEditorPart" label="PassportEditorPart" closeable="true">
-      <toolbar xmi:id="_ED6jsD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.toolbar.1"/>
+      <toolbar xmi:id="_ED6jsD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.passportEditor.toolbar"/>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Fbrn4D_oEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.right.top">
     <elements xsi:type="basic:Part" xmi:id="_G9k4cD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.WordlistNavigator" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.WordListNavigator" label="WordlistNavigator" closeable="true">
-      <toolbar xmi:id="_KI-dcD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.toolbar.2"/>
+      <toolbar xmi:id="_KI-dcD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.wlistNavigator.toolbar"/>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Gm_PkEt8EeO3HNJi0pp4Qg" featurename="handlers" parentElementId="org.bbaw.bts.application">

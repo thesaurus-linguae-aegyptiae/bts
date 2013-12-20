@@ -1,11 +1,8 @@
 package org.bbaw.bts.ui.egy.handlers.test;
 
-import grammaticalBase.model.light.LightSpelling;
+//import grammaticalBase.model.light.LightSpelling;
 
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.PojoProperties;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
@@ -20,11 +17,16 @@ import org.eclipse.swt.widgets.Text;
 
 public class TestTextModelElementDialog extends Dialog
 {
+	protected TestTextModelElementDialog(Shell parentShell) {
+		super(parentShell);
+		// TODO Auto-generated constructor stub
+	}
+
 	private DataBindingContext m_bindingContext;
 	private Text text;
 	private Text text_1;
 
-	private LightSpelling spelling;
+	// private LightSpelling spelling;
 	private Label lblTransliteration;
 	private Label lblSpelling;
 
@@ -33,11 +35,12 @@ public class TestTextModelElementDialog extends Dialog
 	 * 
 	 * @param parentShell
 	 */
-	public TestTextModelElementDialog(Shell parentShell, LightSpelling spelling)
-	{
-		super(parentShell);
-		this.spelling = spelling;
-	}
+	// public TestTextModelElementDialog(Shell parentShell, LightSpelling
+	// spelling)
+	// {
+	// super(parentShell);
+	// this.spelling = spelling;
+	// }
 
 	/**
 	 * Create contents of the dialog.
@@ -94,14 +97,20 @@ public class TestTextModelElementDialog extends Dialog
 	{
 		DataBindingContext bindingContext = new DataBindingContext();
 		//
-		IObservableValue observeTextTextObserveWidget = WidgetProperties.text(SWT.Modify).observe(text);
-		IObservableValue mdCSpellingObserveValue = PojoProperties.value("mdC").observe(spelling);
-		bindingContext.bindValue(observeTextTextObserveWidget, mdCSpellingObserveValue, null, null);
-		//
-		IObservableValue observeTextText_1ObserveWidget = WidgetProperties.text(SWT.Modify).observe(text_1);
-		IObservableValue translitterationSpellingObserveValue = PojoProperties.value("translitteration").observe(
-				spelling);
-		bindingContext.bindValue(observeTextText_1ObserveWidget, translitterationSpellingObserveValue, null, null);
+		// IObservableValue observeTextTextObserveWidget =
+		// WidgetProperties.text(SWT.Modify).observe(text);
+		// IObservableValue mdCSpellingObserveValue =
+		// PojoProperties.value("mdC").observe(spelling);
+		// bindingContext.bindValue(observeTextTextObserveWidget,
+		// mdCSpellingObserveValue, null, null);
+		// //
+		// IObservableValue observeTextText_1ObserveWidget =
+		// WidgetProperties.text(SWT.Modify).observe(text_1);
+		// IObservableValue translitterationSpellingObserveValue =
+		// PojoProperties.value("translitteration").observe(
+		// spelling);
+		// bindingContext.bindValue(observeTextText_1ObserveWidget,
+		// translitterationSpellingObserveValue, null, null);
 		//
 		return bindingContext;
 	}

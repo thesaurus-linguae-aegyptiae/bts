@@ -38,11 +38,11 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 
 	@Inject
 	@Preference(value = "username", nodePath = "org.bbaw.bts.app")
-	private String username;
+	private String username = "admin";
 
 	@Inject
 	@Preference(value = "password", nodePath = "org.bbaw.bts.app")
-	private String password;
+	private String password = "admin";
 
 	private Client searchClient;
 	private String protocol;

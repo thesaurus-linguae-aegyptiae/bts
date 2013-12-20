@@ -17,7 +17,7 @@
          </property>
          <property
                name="appName"
-               value="Berlin Text System 3.0">
+               value="org.bbaw.bts.app">
          </property>
          <!--<property
                name="lifeCycleURI"

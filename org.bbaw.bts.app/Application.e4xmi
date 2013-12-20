@@ -42,24 +42,18 @@
       </children>
     </mainMenu>
     <trimBars xmi:id="_gMmj4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.trimbar.0">
-      <children xsi:type="menu:ToolBar" xmi:id="_g3q6IAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolbar.main">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_lVLAMAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.handledtoolitem.1" label="New"/>
-        <children xsi:type="menu:ToolBarSeparator" xmi:id="_jLCq8AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolbarseparator.0"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_jwJjIAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.handledtoolitem.0" label="Open"/>
-      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_g3q6IAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolbar.main"/>
       <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>
     </trimBars>
     <trimBars xmi:id="_jaPP8DVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.trimbar.1" side="Right">
-      <children xsi:type="menu:ToolBar" xmi:id="_mCUsgDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.toolbar.0">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_rwABADVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.handledtoolitem.2" label="New..."/>
-      </children>
+      <children xsi:type="menu:ToolBar" xmi:id="_mCUsgDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.toolbar.0"/>
     </trimBars>
   </children>
-  <bindingTables xmi:id="_TbwLQA5iEeOBWNILjo7Jaw" elementId="org.bbaw.bts.app.bindingtable.main" bindingContext="_AyBQAA5iEeOBWNILjo7Jaw"/>
   <rootContext xmi:id="_AyBQAA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_IirI4A5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.window" name="In Window"/>
     <children xmi:id="_NEpfQA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialog" name="In Dialog"/>
   </rootContext>
+  <commands xmi:id="_G1ujkF2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.edit.text.contentAssist.proposals" category="_KsMe0F2uEeOwE8UUrLWumA"/>
   <addons xmi:id="_oEzH4gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_oEzH4wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_oEzH5AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -67,4 +61,5 @@
   <addons xmi:id="_oEzH5gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.handler.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.HandlerProcessingAddon"/>
   <addons xmi:id="_oEzH5wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_oEzH6AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
+  <categories xmi:id="_KsMe0F2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.category.edit" name="edit"/>
 </application:Application>

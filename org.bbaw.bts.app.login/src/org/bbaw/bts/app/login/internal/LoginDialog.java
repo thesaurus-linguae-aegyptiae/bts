@@ -34,7 +34,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.*;
 
 public class LoginDialog extends Dialog
 {
@@ -253,17 +253,19 @@ public class LoginDialog extends Dialog
 		{
 			return false;
 		}
-		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.boolQuery().must(QueryBuilders.termQuery("userName", userName)));
-		List<BTSUser> users = uService.query(query);
-		for (BTSUser u : users)
-		{
-			if (userName.equals(u.getUserName()) && equalsPassword(u, passWord))
-			{
-				validUser = u;
-				return true;
-			}
-		}
+		QueryBuilder dd;
+		//FIXME wieder einkommentieren
+//		BTSQueryRequest query = new BTSQueryRequest();
+//		query.setQueryBuilder(QueryBuilders.boolQuery().must(QueryBuilders.termQuery("userName", userName)));
+//		List<BTSUser> users = uService.query(query);
+//		for (BTSUser u : users)
+//		{
+//			if (userName.equals(u.getUserName()) && equalsPassword(u, passWord))
+//			{
+//				validUser = u;
+//				return true;
+//			}
+//		}
 		return false;
 	}
 

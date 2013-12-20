@@ -45,10 +45,16 @@ Require-Bundle: javax.inject,
  org.bbaw.bts.core.controller,
  org.eclipse.core.jobs,
  org.eclipse.emf.edit.ui;bundle-version="2.9.0",
- org.bbaw.bts.core.commons
+ org.bbaw.bts.core.commons,
+ com.google.inject;bundle-version="3.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
 Export-Package: org.bbaw.bts.ui.main.handlers,
  org.bbaw.bts.ui.main.wizards.newProject
-Import-Package: javax.annotation;version="1.0.0"
+Import-Package: javax.annotation;version="1.0.0",
+ org.bbaw.bts.corpus.text.btsdsl.ui.internal,
+ org.eclipse.e4.core.services.contributions,
+ org.eclipse.e4.core.services.log,
+ org.eclipse.xtext.builder.preferences,
+ org.eclipse.xtext.ui.editor.templates

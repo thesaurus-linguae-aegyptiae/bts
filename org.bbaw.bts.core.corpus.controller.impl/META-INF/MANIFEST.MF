@@ -6,9 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/*.xml
-Import-Package: grammaticalBase.model.light,
- grammaticalBase.model.text,
- javax.inject,
+Import-Package: javax.inject,
  org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
  org.bbaw.bts.core.corpus.controller.partController,

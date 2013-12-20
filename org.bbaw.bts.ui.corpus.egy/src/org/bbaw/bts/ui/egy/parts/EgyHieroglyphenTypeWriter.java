@@ -1,9 +1,9 @@
 package org.bbaw.bts.ui.egy.parts;
 
-import grammaticalBase.model.light.LightSpelling;
-import grammaticalBase.model.text.ElementOccurrence;
-import grammaticalBase.model.text.WordOccurrence;
-import grammaticalBase.textEditor.view.textView.JTextAsWordsEditorPanel;
+//import grammaticalBase.model.light.LightSpelling;
+//import grammaticalBase.model.text.ElementOccurrence;
+//import grammaticalBase.model.text.WordOccurrence;
+//import grammaticalBase.textEditor.view.textView.JTextAsWordsEditorPanel;
 
 import java.awt.Dimension;
 import java.awt.Frame;
@@ -13,14 +13,15 @@ import java.util.StringTokenizer;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.swing.SwingUtilities;
 
 import jsesh.editor.JMDCEditor;
+import jsesh.hieroglyphs.CompositeHieroglyphsManager;
 import jsesh.hieroglyphs.DefaultHieroglyphicFontManager;
 import jsesh.hieroglyphs.HieroglyphicFontManager;
 import jsesh.hieroglyphs.HieroglyphsManager;
 import jsesh.hieroglyphs.ManuelDeCodage;
-import jsesh.hieroglyphs.ShapeChar;
+import jsesh.hieroglyphs.PossibilitiesList;
+import jsesh.hieroglyphs.Possibility;
 
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSWord;
@@ -55,7 +56,9 @@ public class EgyHieroglyphenTypeWriter
 	@Inject
 	private EPartService partService;
 	private Text hierotw_text;
-	private WordOccurrence wordOccurrence;
+	// private WordOccurrence wordOccurrence;
+	// private JTextAsWordsEditorPanel ramsesEditor;
+
 	private JMDCEditor jseshEditor;
 	private ManuelDeCodage basicManuelDeCodageManager = ManuelDeCodage.getInstance();
 	private HieroglyphsManager jSeshhieroglyphManager = new HieroglyphsManager(basicManuelDeCodageManager);
@@ -64,11 +67,13 @@ public class EgyHieroglyphenTypeWriter
 
 	private boolean loading = false;
 
-	private JTextAsWordsEditorPanel ramsesEditor;
 
 	private HieroglyphicFontManager fontManager = DefaultHieroglyphicFontManager.getInstance();
 
 	private ManuelDeCodage manuelDeCodage = ManuelDeCodage.instance;
+
+	private CompositeHieroglyphsManager hieroglyphManager = new CompositeHieroglyphsManager()
+			.getInstance();
 
 	public EgyHieroglyphenTypeWriter()
 	{
@@ -90,7 +95,7 @@ public class EgyHieroglyphenTypeWriter
 				if (p.getObject() instanceof EgyptEditorPart)
 				{
 					EgyptEditorPart editorPart = (EgyptEditorPart) p.getObject();
-					ramsesEditor = editorPart.getRamsesTextEditorPanel();
+					// ramsesEditor = editorPart.getRamsesTextEditorPanel();
 					break;
 
 				}
@@ -150,19 +155,32 @@ public class EgyHieroglyphenTypeWriter
 				if (!loading)
 				{
 					String suffix = "";
-					StringTokenizer tok = new StringTokenizer(hierotw_text.getText(), ":-<>");
-					while (tok.hasMoreTokens())
-					{
+					StringTokenizer tok = new StringTokenizer(hierotw_text
+							.getText(), ":-<>");
+					while (tok.hasMoreTokens()) {
 						suffix = tok.nextToken();
 					}
-					Collection<String> list = manuelDeCodage.getBasicGardinerCodesForFamily(suffix);
-					ShapeChar glyph = fontManager.get("A1");
 					jseshEditorProposals.clearText();
-					for (int i = 0; i < list.size(); i++)
-					{
-						String pos = list.iterator().next();
-						//					String prop = pos.getCode();// + "-\"" + i + "\"";
-						jseshEditorProposals.insert(pos);
+
+					if (suffix != null && !"".equals(suffix)) {
+						PossibilitiesList list = hieroglyphManager
+								.getCodesStartingWith(suffix);
+						String mdc = "";
+						for (int i = 0; i < list.asList().size() && i < 5; i++) {
+							Possibility pos = list.asList().get(i);
+							// String prop = pos.getCode();// + "-\"" + i +
+							// "\"";
+							if (pos != null && !"".equals(pos.getCode())) {
+								mdc += "-" + pos.getCode() + "-\""
+										+ pos.getCode() + "\"\"" + i
+										+ "\"\\red";
+							}
+						}
+						if (mdc.length() > 1) {
+							mdc = mdc.substring(1, mdc.length());
+							System.out.println(mdc);
+							jseshEditorProposals.setMDCText(mdc);
+						}
 					}
 					try
 					{
@@ -229,22 +247,23 @@ public class EgyHieroglyphenTypeWriter
 			if (selection == null)
 			{
 				/* implementation not shown */
-			} else if (selection instanceof ElementOccurrence)
-			{
-				ElementOccurrence element = (ElementOccurrence) selection;
-				if (element.getElement() != null && element.getElement() instanceof WordOccurrence)
-				{
-					WordOccurrence oldWord = wordOccurrence;
-					if (oldWord != null)
-					{
-						saveMdCstring(oldWord);
-					}
-					wordOccurrence = (WordOccurrence) element.getElement();
-					if (wordOccurrence.getSpelling() != null)
-					{
-						loadMdCString(wordOccurrence.getSpelling().getMdC());
-					}
-				}
+				// } else if (selection instanceof ElementOccurrence)
+				// {
+				// ElementOccurrence element = (ElementOccurrence) selection;
+				// if (element.getElement() != null && element.getElement()
+				// instanceof WordOccurrence)
+				// {
+				// WordOccurrence oldWord = wordOccurrence;
+				// if (oldWord != null)
+				// {
+				// saveMdCstring(oldWord);
+				// }
+				// wordOccurrence = (WordOccurrence) element.getElement();
+				// if (wordOccurrence.getSpelling() != null)
+				// {
+				// loadMdCString(wordOccurrence.getSpelling().getMdC());
+				// }
+				// }
 			} else if (selection instanceof BTSWord)
 			{
 				BTSWord oldWord = currentWord;
@@ -293,46 +312,48 @@ public class EgyHieroglyphenTypeWriter
 		}
 	}
 
-	private void saveMdCstring(final WordOccurrence word)
-	{
-		sync.asyncExec(new Runnable()
-		{
-			public void run()
-			{
-				if (word.getSpelling() == null)
-				{
-					word.setSpelling(new LightSpelling());
-				}
-				if (word.getSpelling().getMdC() != hierotw_text.getText() && !"".equals(hierotw_text.getText()))
-				{
-					//					word.getSpelling().setMdC();
-					final String text = hierotw_text.getText();
-
-					SwingUtilities.invokeLater(new Runnable()
-					{
-
-						@Override
-						public void run()
-						{
-							LightSpelling oldSpelling = word.getSpelling();
-							LightSpelling spelling = new LightSpelling(oldSpelling.getId() + 500, oldSpelling
-									.getLabel(), text);
-							word.setSpelling(spelling);
-							if (ramsesEditor != null)
-							{
-								//						RamsesWordEditionListener listener = ramsesEditor.g
-								ramsesEditor.changeWordData(word.getWordAnalysis());
-							}
-
-						}
-
-					});
-					//					hierotw_text.setText("");
-
-				}
-			}
-		});
-	}
+	// private void saveMdCstring(final WordOccurrence word)
+	// {
+	// sync.asyncExec(new Runnable()
+	// {
+	// public void run()
+	// {
+	// if (word.getSpelling() == null)
+	// {
+	// word.setSpelling(new LightSpelling());
+	// }
+	// if (word.getSpelling().getMdC() != hierotw_text.getText() &&
+	// !"".equals(hierotw_text.getText()))
+	// {
+	// // word.getSpelling().setMdC();
+	// final String text = hierotw_text.getText();
+	//
+	// SwingUtilities.invokeLater(new Runnable()
+	// {
+	//
+	// @Override
+	// public void run()
+	// {
+	// LightSpelling oldSpelling = word.getSpelling();
+	// LightSpelling spelling = new LightSpelling(oldSpelling.getId() + 500,
+	// oldSpelling
+	// .getLabel(), text);
+	// word.setSpelling(spelling);
+	// if (ramsesEditor != null)
+	// {
+	// // RamsesWordEditionListener listener = ramsesEditor.g
+	// ramsesEditor.changeWordData(word.getWordAnalysis());
+	// }
+	//
+	// }
+	//
+	// });
+	// // hierotw_text.setText("");
+	//
+	// }
+	// }
+	// });
+	// }
 
 	private void loadMdCString(final String mdC)
 	{

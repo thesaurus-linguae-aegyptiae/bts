@@ -1,10 +1,5 @@
 package org.bbaw.bts.core.corpus.controller.partController;
 
-import grammaticalBase.model.text.TextModel;
-
-import java.util.Map;
-
-import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.eclipse.jface.text.Document;
@@ -21,10 +16,11 @@ public interface BTSTextEditorController
 
 	boolean save(BTSText text);
 
-	TextModel transformToRamsesTextModel(BTSText text, TextModel textModel,
-			Map<Object, BTSSentenceItem> ramsesTextModelMap);
+	// TextModel transformToRamsesTextModel(BTSText text, TextModel textModel,
+	// Map<Object, BTSSentenceItem> ramsesTextModelMap);
 
-	BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel, Map<Object, BTSSentenceItem> ramsesTextModelMap);
+	// BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel,
+	// Map<Object, BTSSentenceItem> ramsesTextModelMap);
 
 	String transformWordToMdCString(BTSWord word);
 

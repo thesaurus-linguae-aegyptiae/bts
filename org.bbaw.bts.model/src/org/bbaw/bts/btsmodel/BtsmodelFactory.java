@@ -48,6 +48,8 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSSenctence createBTSSenctence();
 
+	BTSSenctence createBTSSenctence(boolean setId);
+
 	/**
 	 * Returns a new object of class '<em>BTS Word</em>'.
 	 * <!-- begin-user-doc -->
@@ -57,6 +59,7 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSWord createBTSWord();
 
+	BTSWord createBTSWord(boolean setId);
 	/**
 	 * Returns a new object of class '<em>BTS Marker</em>'.
 	 * <!-- begin-user-doc -->
@@ -66,6 +69,7 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSMarker createBTSMarker();
 
+	BTSMarker createBTSMarker(boolean setId);
 	/**
 	 * Returns a new object of class '<em>BTS List Entry</em>'.
 	 * <!-- begin-user-doc -->
@@ -93,6 +97,7 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSAmbivalence createBTSAmbivalence();
 
+	BTSAmbivalence createBTSAmbivalence(boolean setId);
 	/**
 	 * Returns a new object of class '<em>BTS Lemma Case</em>'.
 	 * <!-- begin-user-doc -->
@@ -102,6 +107,7 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSLemmaCase createBTSLemmaCase();
 
+	BTSLemmaCase createBTSLemmaCase(boolean setId);
 	/**
 	 * Returns a new object of class '<em>BTS User</em>'.
 	 * <!-- begin-user-doc -->
@@ -390,6 +396,7 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSTextContent createBTSTextContent();
 
+	BTSTextContent createBTSTextContent(boolean setId);
 	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->

@@ -1,16 +1,15 @@
 package org.bbaw.bts.ui.egy.parts;
 
-import grammaticalBase.model.text.ElementColor;
-import grammaticalBase.model.text.ElementOccurrence;
-import grammaticalBase.model.text.TextModel;
-import grammaticalBase.model.text.WordOccurrence;
-import grammaticalBase.textEditor.view.textView.JTextAsWordsEditorPanel;
-import grammaticalBase.textEditor.view.textView.RamsesWordEditionListener;
+//import grammaticalBase.model.text.ElementColor;
+//import grammaticalBase.model.text.ElementOccurrence;
+//import grammaticalBase.model.text.TextModel;
+//import grammaticalBase.model.text.WordOccurrence;
+//import grammaticalBase.textEditor.view.textView.JTextAsWordsEditorPanel;
+//import grammaticalBase.textEditor.view.textView.RamsesWordEditionListener;
 
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
@@ -100,7 +99,9 @@ public class EgyptEditorPart
 	private CTabItem tbtmBtseditor;
 	private CTabFolder tabFolder;
 	private StyledText plainTextEditor;
-	private JTextAsWordsEditorPanel editorPanel;
+	// private JTextAsWordsEditorPanel editorPanel;
+	// private TextModel textModel;
+
 	private Text codeBufferText;
 	private JMDCEditor jseshEditor;
 
@@ -118,7 +119,6 @@ public class EgyptEditorPart
 
 	protected int tabSelection;
 
-	private TextModel textModel;
 
 	private Map<Object, BTSSentenceItem> ramsesTextModelMap;
 
@@ -445,54 +445,55 @@ public class EgyptEditorPart
 				CTabItem tbtmPlaintext = new CTabItem(tabFolder, SWT.NONE);
 				tbtmPlaintext.setText("Ramses-Editor");
 				{
-					textModel = new TextModel();
+					// textModel = new TextModel();
 					Composite plainTextComp = new Composite(tabFolder, SWT.NONE | SWT.BORDER);
 					plainTextComp.setLayout(new GridLayout());
 					tbtmPlaintext.setControl(plainTextComp);
-
+					//
 					Composite comEmbeded = new Composite(plainTextComp, SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
 					comEmbeded.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-
-					// comEmbeded.setLayout(new FillLayout());
-					Frame frame = SWT_AWT.new_Frame(comEmbeded);
-
-					// JButton jbutton = new JButton("Testbutton AWT");
-					// frame.add(jbutton);
-					// jbutton.doLayout();
-
-					editorPanel = new JTextAsWordsEditorPanel();
-					editorPanel.setPreferredSize(new Dimension(500, 500));
-
-					//					editorPanel.addHighlight(2, 2);
-					//					editorPanel.setCurrentLineComment("Hallo Welt");
-					editorPanel.setElementColor(ElementColor.BLACK);
-					frame.add(editorPanel);
-					editorPanel.addRamsesWordEditionListener(new RamsesWordEditionListener()
-					{
-
-						@Override
-						public void update()
-						{
-							notifyRamsesWordSelection(editorPanel.getSelectedText());
-
-						}
-
-						@Override
-						public void readonlyViolation()
-						{
-							System.out.println();
-
-						}
-					});
-					// JMDCEditor editor = new JMDCEditor();
-					// editor.setMDCText("pt:p*t");
-					// editor.setPreferredSize(new Dimension(500, 500));
-					// frame.add(editor);
 					//
-					// JMDCField field = new JMDCField();
-					// frame.add(field);
-
-					// frame.doLayout();
+					// // comEmbeded.setLayout(new FillLayout());
+					// Frame frame = SWT_AWT.new_Frame(comEmbeded);
+					//
+					// // JButton jbutton = new JButton("Testbutton AWT");
+					// // frame.add(jbutton);
+					// // jbutton.doLayout();
+					//
+					// editorPanel = new JTextAsWordsEditorPanel();
+					// editorPanel.setPreferredSize(new Dimension(500, 500));
+					//
+					// // editorPanel.addHighlight(2, 2);
+					// // editorPanel.setCurrentLineComment("Hallo Welt");
+					// editorPanel.setElementColor(ElementColor.BLACK);
+					// frame.add(editorPanel);
+					// editorPanel.addRamsesWordEditionListener(new
+					// RamsesWordEditionListener()
+					// {
+					//
+					// @Override
+					// public void update()
+					// {
+					// notifyRamsesWordSelection(editorPanel.getSelectedText());
+					//
+					// }
+					//
+					// @Override
+					// public void readonlyViolation()
+					// {
+					// System.out.println();
+					//
+					// }
+					// });
+					// // JMDCEditor editor = new JMDCEditor();
+					// // editor.setMDCText("pt:p*t");
+					// // editor.setPreferredSize(new Dimension(500, 500));
+					// // frame.add(editor);
+					// //
+					// // JMDCField field = new JMDCField();
+					// // frame.add(field);
+					//
+					// // frame.doLayout();
 					comEmbeded.layout();
 
 					plainTextComp.layout();
@@ -607,41 +608,44 @@ public class EgyptEditorPart
 
 	}
 
-	private void notifyRamsesWordSelection(final List<ElementOccurrence> selectedElements)
+	private void notifyRamsesWordSelection(Object selectedElements)
 	{
-		sync.asyncExec(new Runnable()
-		{
-			private ElementOccurrence selection;
-
-			public void run()
-			{
-				if (selectedElements.size() == 1)
-				{
-					if (selection == null || !selection.equals(selectedElements.get(0)))
-					{
-						selection = selectedElements.get(0);
-						System.out.println("EgyptEditor notify RamsesWordSelection " + selection);
-
-						selectionService.setSelection(selection);
-						eventBroker.send("egywordSelection", selection);
-					}
-				} else if (editorPanel.getCurrentWord() != null)
-				{
-					if (selection == null || !selection.equals(selectedElements.get(0)))
-					{
-						selection = editorPanel.getCurrentWord();
-						System.out.println("EgyptEditor notify RamsesWordSelection " + selection);
-						selectionService.setSelection(selection);
-						eventBroker.send("egywordSelection", selection);
-					}
-				}
-			}
-		});
+		// sync.asyncExec(new Runnable()
+		// {
+		// private ElementOccurrence selection;
+		//
+		// public void run()
+		// {
+		// if (selectedElements.size() == 1)
+		// {
+		// if (selection == null || !selection.equals(selectedElements.get(0)))
+		// {
+		// selection = selectedElements.get(0);
+		// System.out.println("EgyptEditor notify RamsesWordSelection " +
+		// selection);
+		//
+		// selectionService.setSelection(selection);
+		// eventBroker.send("egywordSelection", selection);
+		// }
+		// } else if (editorPanel.getCurrentWord() != null)
+		// {
+		// if (selection == null || !selection.equals(selectedElements.get(0)))
+		// {
+		// selection = editorPanel.getCurrentWord();
+		// System.out.println("EgyptEditor notify RamsesWordSelection " +
+		// selection);
+		// selectionService.setSelection(selection);
+		// eventBroker.send("egywordSelection", selection);
+		// }
+		// }
+		// }
+		// });
 	}
 
 	protected void updateModelFromRamses()
 	{
-		this.text = textEditorController.updateTextFromRamsesModel(text, textModel, ramsesTextModelMap);
+		// this.text = textEditorController.updateTextFromRamsesModel(text,
+		// textModel, ramsesTextModelMap);
 
 	}
 
@@ -664,9 +668,10 @@ public class EgyptEditorPart
 		{
 			ramsesTextModelMap = new HashMap<Object, BTSSentenceItem>();
 		}
-		textEditorController.transformToRamsesTextModel(text, textModel, ramsesTextModelMap);
-		editorPanel.clear();
-		editorPanel.setTextModel(textModel);
+		// textEditorController.transformToRamsesTextModel(text, textModel,
+		// ramsesTextModelMap);
+		// editorPanel.clear();
+		// editorPanel.setTextModel(textModel);
 
 	}
 
@@ -687,15 +692,15 @@ public class EgyptEditorPart
 	@Optional
 	void eventReceivedNew(@EventTopic("model_new/BTSWord*") Object object)
 	{
-		if (object instanceof WordOccurrence)
-		{
-			WordOccurrence word = (WordOccurrence) object;
-			ElementOccurrence current = editorPanel.getCurrentWord();
-			int index = textModel.indexOf(current);
-			editorPanel.insert(word);
-			editorPanel.setCursorPosition(index + 1);
-
-		}
+		// if (object instanceof WordOccurrence)
+		// {
+		// WordOccurrence word = (WordOccurrence) object;
+		// ElementOccurrence current = editorPanel.getCurrentWord();
+		// int index = textModel.indexOf(current);
+		// editorPanel.insert(word);
+		// editorPanel.setCursorPosition(index + 1);
+		//
+		// }
 	}
 
 	@Inject
@@ -763,7 +768,7 @@ public class EgyptEditorPart
 
 	private void purgeCache()
 	{
-		textModel = new TextModel();
+		// textModel = new TextModel();
 
 	}
 
@@ -796,8 +801,5 @@ public class EgyptEditorPart
 		return textEditorController.save(this.text);
 	}
 
-	public JTextAsWordsEditorPanel getRamsesTextEditorPanel()
-	{
-		return editorPanel;
-	}
+
 }

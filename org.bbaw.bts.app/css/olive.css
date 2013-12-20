@@ -84,7 +84,10 @@ Button {
 	background-color: #FFFFFF;
 }
 
-Link {
+* {
+	font-size: 10px;
+}
+Text {
 	background-color: #FFFFFF;
 }
 ToolBar {

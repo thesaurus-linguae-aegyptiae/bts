@@ -85,7 +85,6 @@ public abstract class AbstractBTSSemanticSequencer extends AbstractDelegatingSem
 	/**
 	 * Constraint:
 	 *     (
-	 *         name=EString 
 	 *         state=EString? 
 	 *         revisionState=EString? 
 	 *         visibility=EString? 
@@ -137,20 +136,7 @@ public abstract class AbstractBTSSemanticSequencer extends AbstractDelegatingSem
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         name=EString 
-	 *         state=EString? 
-	 *         revisionState=EString? 
-	 *         visibility=EString? 
-	 *         sortKey=EInt? 
-	 *         type=EString? 
-	 *         subtype=EString? 
-	 *         code=EString? 
-	 *         _id=EString? 
-	 *         comment=EString? 
-	 *         parentId=EString? 
-	 *         value=EString?
-	 *     )
+	 *     (value=EString?)
 	 */
 	protected void sequence_BTSMarker(EObject context, BTSMarker semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -159,20 +145,7 @@ public abstract class AbstractBTSSemanticSequencer extends AbstractDelegatingSem
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         name=EString 
-	 *         state=EString? 
-	 *         revisionState=EString? 
-	 *         visibility=EString? 
-	 *         sortKey=EInt? 
-	 *         type=EString? 
-	 *         subtype=EString? 
-	 *         code=EString? 
-	 *         _id=EString? 
-	 *         comment=EString? 
-	 *         parentId=EString? 
-	 *         (sentenceItems+=BTSSentenceItem sentenceItems+=BTSSentenceItem*)?
-	 *     )
+	 *     ((sentenceItems+=BTSSentenceItem sentenceItems+=BTSSentenceItem*)?)
 	 */
 	protected void sequence_BTSSenctence(EObject context, BTSSenctence semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -181,7 +154,7 @@ public abstract class AbstractBTSSemanticSequencer extends AbstractDelegatingSem
 	
 	/**
 	 * Constraint:
-	 *     ((textItems+=BTSTextItems textItems+=BTSTextItems*)?)
+	 *     ((textItems+=BTSTextItems textItems+=BTSTextItems* textItems+=BTSTextItems*)*)
 	 */
 	protected void sequence_BTSTextContent(EObject context, BTSTextContent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -190,26 +163,7 @@ public abstract class AbstractBTSSemanticSequencer extends AbstractDelegatingSem
 	
 	/**
 	 * Constraint:
-	 *     (
-	 *         name=EString 
-	 *         state=EString? 
-	 *         revisionState=EString? 
-	 *         visibility=EString? 
-	 *         sortKey=EInt? 
-	 *         type=EString? 
-	 *         subtype=EString? 
-	 *         code=EString? 
-	 *         _id=EString? 
-	 *         comment=EString? 
-	 *         parentId=EString? 
-	 *         wType=EString? 
-	 *         lType=EString? 
-	 *         lKey=EString? 
-	 *         flexCode=EString? 
-	 *         wChar=EString? 
-	 *         value=EString? 
-	 *         (graphics+=BTSGraphic graphics+=BTSGraphic*)?
-	 *     )
+	 *     wChar=EString
 	 */
 	protected void sequence_BTSWord(EObject context, BTSWord semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

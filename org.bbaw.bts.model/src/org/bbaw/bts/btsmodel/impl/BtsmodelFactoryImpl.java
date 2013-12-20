@@ -343,7 +343,6 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public BTSAmbivalence createBTSAmbivalence()
 	{
 		BTSAmbivalenceImpl btsAmbivalence = new BTSAmbivalenceImpl();
-		setIdentifiableId(btsAmbivalence);
 		return btsAmbivalence;
 	}
 
@@ -762,6 +761,60 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public static BtsmodelPackage getPackage()
 	{
 		return BtsmodelPackage.eINSTANCE;
+	}
+
+	@Override
+	public BTSSenctence createBTSSenctence(boolean setId) {
+		BTSSenctence entity = createBTSSenctence();
+		if (setId) {
+			setIdentifiableId(entity);
+		}
+		return entity;
+	}
+
+	@Override
+	public BTSWord createBTSWord(boolean setId) {
+		BTSWord entity = createBTSWord();
+		if (setId) {
+			setIdentifiableId(entity);
+		}
+		return entity;
+	}
+
+	@Override
+	public BTSMarker createBTSMarker(boolean setId) {
+		BTSMarker entity = createBTSMarker();
+		if (setId) {
+			setIdentifiableId(entity);
+		}
+		return entity;
+	}
+
+	@Override
+	public BTSAmbivalence createBTSAmbivalence(boolean setId) {
+		BTSAmbivalence entity = createBTSAmbivalence();
+		if (setId) {
+			setIdentifiableId(entity);
+		}
+		return entity;
+	}
+
+	@Override
+	public BTSLemmaCase createBTSLemmaCase(boolean setId) {
+		BTSLemmaCase entity = createBTSLemmaCase();
+		if (setId) {
+			setIdentifiableId(entity);
+		}
+		return entity;
+	}
+
+	@Override
+	public BTSTextContent createBTSTextContent(boolean setId) {
+		BTSTextContent entity = createBTSTextContent();
+		if (setId) {
+			setIdentifiableId(entity);
+		}
+		return entity;
 	}
 
 } // BtsmodelFactoryImpl
