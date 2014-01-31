@@ -164,8 +164,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	 */
 	public EList<BTSWorkflowRuleItem> getSubRules()
 	{
-		if (subRules == null)
-		{
+		if (subRules == null) {
 			subRules = new EObjectContainmentEList<BTSWorkflowRuleItem>(BTSWorkflowRuleItem.class, this, BtsmodelPackage.BTS_WORKFLOW_RULE__SUB_RULES);
 		}
 		return subRules;
@@ -178,8 +177,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	 */
 	public EList<String> getActions()
 	{
-		if (actions == null)
-		{
+		if (actions == null) {
 			actions = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_WORKFLOW_RULE__ACTIONS);
 		}
 		return actions;
@@ -285,8 +283,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__SUB_RULES:
 				return ((InternalEList<?>)getSubRules()).basicRemove(otherEnd, msgs);
 		}
@@ -301,8 +298,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__SUB_RULES:
 				return getSubRules();
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__ACTIONS:
@@ -328,8 +324,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__SUB_RULES:
 				getSubRules().clear();
 				getSubRules().addAll((Collection<? extends BTSWorkflowRuleItem>)newValue);
@@ -362,8 +357,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__SUB_RULES:
 				getSubRules().clear();
 				return;
@@ -394,8 +388,7 @@ public class BTSWorkflowRuleImpl extends BTSIdentifiableItemImpl implements BTSW
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__SUB_RULES:
 				return subRules != null && !subRules.isEmpty();
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__ACTIONS:

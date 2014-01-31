@@ -74,6 +74,7 @@ public class PassportEditorPart
 	private Text text_1;
 	private Text txtLeidenRijksmuseumVan;
 	private Text text_2;
+	private boolean loaded;
 
 	@Inject
 	public PassportEditorPart()
@@ -103,7 +104,11 @@ public class PassportEditorPart
 
 		createGenericTabItems(tabFolder);
 
-		// TODO Your code here
+		loaded = true;
+		if (corpusObject != null) {
+			loadInput(corpusObject);
+		}
+
 	}
 
 	private void createGenericTabItems(CTabFolder folder)
@@ -263,7 +268,9 @@ public class PassportEditorPart
 			if (selection instanceof BTSCorpusObject)
 			{
 				corpusObject = (BTSCorpusObject) selection;
-				loadInput(corpusObject);
+				if (loaded) {
+					loadInput(corpusObject);
+				}
 			}
 			System.out.println("Passport selection received");
 		}

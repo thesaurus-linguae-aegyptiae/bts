@@ -125,8 +125,7 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
 				return getPropertyChangeSupport();
 		}
@@ -140,8 +139,7 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport((PropertyChangeSupport)newValue);
 				return;
@@ -156,8 +154,7 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport(PROPERTY_CHANGE_SUPPORT_EDEFAULT);
 				return;
@@ -172,8 +169,7 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
 				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 		}
@@ -187,8 +183,7 @@ public abstract class BTSObservableObjectImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
-		switch (operationID)
-		{
+		switch (operationID) {
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;

@@ -124,8 +124,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 * @generated
 	 */
 	public EList<BTSListSubentry> getSubentries() {
-		if (subentries == null)
-		{
+		if (subentries == null) {
 			subentries = new EObjectContainmentEList<BTSListSubentry>(BTSListSubentry.class, this, BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES);
 		}
 		return subentries;
@@ -138,8 +137,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 */
 	public EList<BTSWord> getWords()
 	{
-		if (words == null)
-		{
+		if (words == null) {
 			words = new EObjectContainmentEList<BTSWord>(BTSWord.class, this, BtsmodelPackage.BTS_LIST_ENTRY__WORDS);
 		}
 		return words;
@@ -152,8 +150,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
 				return ((InternalEList<?>)getSubentries()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_LIST_ENTRY__WORDS:
@@ -169,8 +166,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_ENTRY__IGNORE:
 				return isIgnore();
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:
@@ -189,8 +185,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_ENTRY__IGNORE:
 				setIgnore((Boolean)newValue);
 				return;
@@ -213,8 +208,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_ENTRY__IGNORE:
 				setIgnore(IGNORE_EDEFAULT);
 				return;
@@ -235,8 +229,7 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_ENTRY__IGNORE:
 				return ignore != IGNORE_EDEFAULT;
 			case BtsmodelPackage.BTS_LIST_ENTRY__SUBENTRIES:

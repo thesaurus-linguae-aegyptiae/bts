@@ -188,8 +188,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	 */
 	public EList<BTSDBCollectionRoleDesc> getRoleDescriptions()
 	{
-		if (roleDescriptions == null)
-		{
+		if (roleDescriptions == null) {
 			roleDescriptions = new EObjectContainmentEList<BTSDBCollectionRoleDesc>(BTSDBCollectionRoleDesc.class, this, BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS);
 		}
 		return roleDescriptions;
@@ -202,8 +201,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
 				return ((InternalEList<?>)getRoleDescriptions()).basicRemove(otherEnd, msgs);
 		}
@@ -217,8 +215,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME:
 				return getCollectionName();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__INDEXED:
@@ -239,8 +236,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME:
 				setCollectionName((String)newValue);
 				return;
@@ -265,8 +261,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME:
 				setCollectionName(COLLECTION_NAME_EDEFAULT);
 				return;
@@ -290,8 +285,7 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME:
 				return COLLECTION_NAME_EDEFAULT == null ? collectionName != null : !COLLECTION_NAME_EDEFAULT.equals(collectionName);
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__INDEXED:

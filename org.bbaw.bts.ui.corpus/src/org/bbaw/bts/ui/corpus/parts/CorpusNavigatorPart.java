@@ -157,6 +157,9 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 					Object o = ((TreeNodeWrapper) selection.getFirstElement()).getObject();
 					if (o instanceof BTSCorpusObject)
 					{
+						// System.out.println("Mock event");
+						// eventBroker.post("event_text_selection/next", o);
+
 						// ((BTSCorpusObject) o).setName(((BTSCorpusObject)
 						// o).getName() + "#!");
 						// has to be accessed through emf
@@ -415,7 +418,8 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 
 	@Inject
 	@Optional
-	void eventReceivedNew(@EventTopic("model_new/*") BTSObject object)
+	void eventReceivedNew(
+@EventTopic("model_new/*") BTSObject object)
 	{
 		if (object instanceof BTSTextCorpus)
 		{

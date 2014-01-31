@@ -62,8 +62,7 @@ public class BTSReferenceItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addObjectIdPropertyDescriptor(object);
@@ -103,8 +102,7 @@ public class BTSReferenceItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_REFERENCE__PARTS);
 		}
@@ -149,8 +147,7 @@ public class BTSReferenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSReference.class))
-		{
+		switch (notification.getFeatureID(BTSReference.class)) {
 			case BtsmodelPackage.BTS_REFERENCE__OBJECT_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

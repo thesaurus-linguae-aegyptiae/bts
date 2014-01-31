@@ -54,8 +54,7 @@ public class BTSTextCorpusItemProvider extends BTSCorpusObjectItemProvider imple
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,8 +71,7 @@ public class BTSTextCorpusItemProvider extends BTSCorpusObjectItemProvider imple
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_TEXT_CORPUS__HEADER);
 		}
@@ -130,8 +128,7 @@ public class BTSTextCorpusItemProvider extends BTSCorpusObjectItemProvider imple
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSTextCorpus.class))
-		{
+		switch (notification.getFeatureID(BTSTextCorpus.class)) {
 			case BtsmodelPackage.BTS_TEXT_CORPUS__HEADER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

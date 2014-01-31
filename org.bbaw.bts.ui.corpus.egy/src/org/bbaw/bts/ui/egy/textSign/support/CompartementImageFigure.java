@@ -23,7 +23,7 @@ public class CompartementImageFigure extends ImageFigure
 	{
 		public Insets getInsets(IFigure figure)
 		{
-			return new Insets(1, 0, 0, 0);
+			return new Insets(3, 3, 3, 3);
 		}
 
 		@Override
@@ -33,4 +33,5 @@ public class CompartementImageFigure extends ImageFigure
 
 		}
 	}
+
 }

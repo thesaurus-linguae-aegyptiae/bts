@@ -232,8 +232,7 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.DB_LEASE__PATH:
 				return getPath();
 			case BtsmodelPackage.DB_LEASE__OBJECT_ID:
@@ -254,8 +253,7 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.DB_LEASE__PATH:
 				setPath((String)newValue);
 				return;
@@ -280,8 +278,7 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.DB_LEASE__PATH:
 				setPath(PATH_EDEFAULT);
 				return;
@@ -306,8 +303,7 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.DB_LEASE__PATH:
 				return PATH_EDEFAULT == null ? path != null : !PATH_EDEFAULT.equals(path);
 			case BtsmodelPackage.DB_LEASE__OBJECT_ID:

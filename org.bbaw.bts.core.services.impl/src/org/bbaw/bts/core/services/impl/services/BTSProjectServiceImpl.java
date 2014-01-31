@@ -39,7 +39,11 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	{
 		for (BTSProjectDBCollection coll : entity.getDbCollections())
 		{
-			saveAuthorisation(entity, coll);
+			try {
+				saveAuthorisation(entity, coll);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		projectDao.add(entity, ServiceConstants.ADMIN);
 		return false;

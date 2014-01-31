@@ -174,8 +174,7 @@ public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevis
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REVISION__REF:
 				return getRef();
 			case BtsmodelPackage.BTS_REVISION__USER_ID:
@@ -193,8 +192,7 @@ public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevis
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REVISION__REF:
 				setRef((Integer)newValue);
 				return;
@@ -215,8 +213,7 @@ public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevis
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REVISION__REF:
 				setRef(REF_EDEFAULT);
 				return;
@@ -237,8 +234,7 @@ public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevis
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REVISION__REF:
 				return ref != REF_EDEFAULT;
 			case BtsmodelPackage.BTS_REVISION__USER_ID:

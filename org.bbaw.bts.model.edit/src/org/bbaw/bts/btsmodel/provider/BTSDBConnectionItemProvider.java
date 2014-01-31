@@ -55,8 +55,7 @@ public class BTSDBConnectionItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
@@ -174,8 +173,7 @@ public class BTSDBConnectionItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSDBConnection.class))
-		{
+		switch (notification.getFeatureID(BTSDBConnection.class)) {
 			case BtsmodelPackage.BTSDB_CONNECTION__TYPE:
 			case BtsmodelPackage.BTSDB_CONNECTION__MASTER_SERVER:
 			case BtsmodelPackage.BTSDB_CONNECTION__DB_PATH:

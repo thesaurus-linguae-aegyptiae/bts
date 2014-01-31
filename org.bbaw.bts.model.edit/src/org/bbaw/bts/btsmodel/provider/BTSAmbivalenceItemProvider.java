@@ -54,8 +54,7 @@ public class BTSAmbivalenceItemProvider extends BTSTextSentenceItemItemProvider 
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -72,8 +71,7 @@ public class BTSAmbivalenceItemProvider extends BTSTextSentenceItemItemProvider 
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_AMBIVALENCE__CASES);
 		}
@@ -130,8 +128,7 @@ public class BTSAmbivalenceItemProvider extends BTSTextSentenceItemItemProvider 
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSAmbivalence.class))
-		{
+		switch (notification.getFeatureID(BTSAmbivalence.class)) {
 			case BtsmodelPackage.BTS_AMBIVALENCE__CASES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

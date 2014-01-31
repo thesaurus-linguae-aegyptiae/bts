@@ -170,12 +170,10 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 * @generated
 	 */
 	public BTSObject getParent() {
-		if (parent != null && parent.eIsProxy())
-		{
+		if (parent != null && parent.eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject)parent;
 			parent = (BTSObject)eResolveProxy(oldParent);
-			if (parent != oldParent)
-			{
+			if (parent != oldParent) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT, oldParent, parent));
 			}
@@ -232,8 +230,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
 				return get_id();
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
@@ -254,8 +251,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
 				set_id((String)newValue);
 				return;
@@ -279,8 +275,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
 				set_id(_ID_EDEFAULT);
 				return;
@@ -304,8 +299,7 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
@@ -326,10 +320,8 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 				default: return -1;
 			}
@@ -345,10 +337,8 @@ public abstract class BTSReferencableItemImpl extends BTSObjectImpl implements B
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 				default: return -1;
 			}

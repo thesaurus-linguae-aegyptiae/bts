@@ -323,8 +323,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 */
 	public EList<String> getUpdaters()
 	{
-		if (updaters == null)
-		{
+		if (updaters == null) {
 			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_PROJECT__UPDATERS);
 		}
 		return updaters;
@@ -337,8 +336,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 */
 	public EList<String> getReaders()
 	{
-		if (readers == null)
-		{
+		if (readers == null) {
 			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_PROJECT__READERS);
 		}
 		return readers;
@@ -409,8 +407,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	{
 		BTSDBConnection oldDbConnection = dbConnection;
 		dbConnection = newDbConnection;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PROJECT__DB_CONNECTION, oldDbConnection, newDbConnection);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -424,8 +421,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 */
 	public void setDbConnection(BTSDBConnection newDbConnection)
 	{
-		if (newDbConnection != dbConnection)
-		{
+		if (newDbConnection != dbConnection) {
 			NotificationChain msgs = null;
 			if (dbConnection != null)
 				msgs = ((InternalEObject)dbConnection).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PROJECT__DB_CONNECTION, null, msgs);
@@ -445,8 +441,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 */
 	public EList<BTSProjectDBCollection> getDbCollections()
 	{
-		if (dbCollections == null)
-		{
+		if (dbCollections == null) {
 			dbCollections = new EObjectContainmentEList<BTSProjectDBCollection>(BTSProjectDBCollection.class, this, BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS);
 		}
 		return dbCollections;
@@ -460,8 +455,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT__DB_CONNECTION:
 				return basicSetDbConnection(null, msgs);
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
@@ -478,8 +472,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT__ID:
 				return get_id();
 			case BtsmodelPackage.BTS_PROJECT__REV:
@@ -513,8 +506,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT__ID:
 				set_id((String)newValue);
 				return;
@@ -560,8 +552,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT__ID:
 				set_id(_ID_EDEFAULT);
 				return;
@@ -604,8 +595,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PROJECT__ID:
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_PROJECT__REV:
@@ -638,18 +628,14 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_PROJECT__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSDBBaseObject.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_PROJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
 				case BtsmodelPackage.BTS_PROJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
 				case BtsmodelPackage.BTS_PROJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
@@ -669,18 +655,14 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_PROJECT__ID;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSDBBaseObject.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_PROJECT__REV;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_PROJECT__PROJECT;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_PROJECT__LOCKED;

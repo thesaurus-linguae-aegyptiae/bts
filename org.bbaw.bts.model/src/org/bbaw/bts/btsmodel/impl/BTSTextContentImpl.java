@@ -73,8 +73,7 @@ public class BTSTextContentImpl extends MinimalEObjectImpl.Container implements 
 	 */
 	public EList<BTSTextItems> getTextItems()
 	{
-		if (textItems == null)
-		{
+		if (textItems == null) {
 			textItems = new EObjectContainmentEList<BTSTextItems>(BTSTextItems.class, this, BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS);
 		}
 		return textItems;
@@ -88,8 +87,7 @@ public class BTSTextContentImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS:
 				return ((InternalEList<?>)getTextItems()).basicRemove(otherEnd, msgs);
 		}
@@ -104,8 +102,7 @@ public class BTSTextContentImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS:
 				return getTextItems();
 		}
@@ -121,8 +118,7 @@ public class BTSTextContentImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS:
 				getTextItems().clear();
 				getTextItems().addAll((Collection<? extends BTSTextItems>)newValue);
@@ -139,8 +135,7 @@ public class BTSTextContentImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS:
 				getTextItems().clear();
 				return;
@@ -156,8 +151,7 @@ public class BTSTextContentImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS:
 				return textItems != null && !textItems.isEmpty();
 		}

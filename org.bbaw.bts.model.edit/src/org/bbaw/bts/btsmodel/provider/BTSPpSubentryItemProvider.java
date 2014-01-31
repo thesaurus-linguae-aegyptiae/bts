@@ -62,8 +62,7 @@ public class BTSPpSubentryItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
@@ -264,8 +263,7 @@ public class BTSPpSubentryItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PP_SUBENTRY__EXTERNAL_REFERENCES);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PP_SUBENTRY__TIMESPAN);
@@ -324,8 +322,7 @@ public class BTSPpSubentryItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSPpSubentry.class))
-		{
+		switch (notification.getFeatureID(BTSPpSubentry.class)) {
 			case BtsmodelPackage.BTS_PP_SUBENTRY__TYPE:
 			case BtsmodelPackage.BTS_PP_SUBENTRY__SUBTYPE:
 			case BtsmodelPackage.BTS_PP_SUBENTRY__KEY:
@@ -393,8 +390,7 @@ public class BTSPpSubentryItemProvider
 			childFeature == BtsmodelPackage.Literals.BTS_PP_SUBENTRY__DESCRIPTION ||
 			childFeature == BtsmodelPackage.Literals.BTS_PP_SUBENTRY__TRANSLATION;
 
-		if (qualify)
-		{
+		if (qualify) {
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

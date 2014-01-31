@@ -177,8 +177,7 @@ public class BTSCorpusHeaderImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_HEADER__AUTHOR_NAME:
 				return getAuthorName();
 			case BtsmodelPackage.BTS_CORPUS_HEADER__PROJECT_ID:
@@ -196,8 +195,7 @@ public class BTSCorpusHeaderImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_HEADER__AUTHOR_NAME:
 				setAuthorName((String)newValue);
 				return;
@@ -218,8 +216,7 @@ public class BTSCorpusHeaderImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_HEADER__AUTHOR_NAME:
 				setAuthorName(AUTHOR_NAME_EDEFAULT);
 				return;
@@ -240,8 +237,7 @@ public class BTSCorpusHeaderImpl extends MinimalEObjectImpl.Container implements
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_HEADER__AUTHOR_NAME:
 				return AUTHOR_NAME_EDEFAULT == null ? authorName != null : !AUTHOR_NAME_EDEFAULT.equals(authorName);
 			case BtsmodelPackage.BTS_CORPUS_HEADER__PROJECT_ID:

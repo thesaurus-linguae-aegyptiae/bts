@@ -52,8 +52,7 @@ public class BTSRelationItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addObjectIdPropertyDescriptor(object);
@@ -212,8 +211,7 @@ public class BTSRelationItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSRelation.class))
-		{
+		switch (notification.getFeatureID(BTSRelation.class)) {
 			case BtsmodelPackage.BTS_RELATION__OBJECT_ID:
 			case BtsmodelPackage.BTS_RELATION__TYPE:
 			case BtsmodelPackage.BTS_RELATION__SUBTYPE:

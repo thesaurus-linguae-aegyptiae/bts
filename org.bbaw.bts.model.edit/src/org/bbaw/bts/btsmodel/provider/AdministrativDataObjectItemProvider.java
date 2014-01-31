@@ -59,8 +59,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addStatePropertyDescriptor(object);
@@ -149,8 +148,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 		}
@@ -198,8 +196,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(AdministrativDataObject.class))
-		{
+		switch (notification.getFeatureID(AdministrativDataObject.class)) {
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY:

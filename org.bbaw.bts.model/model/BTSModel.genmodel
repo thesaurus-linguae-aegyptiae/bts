@@ -182,6 +182,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/innerSentenceOrder"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/code"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSGraphic/ignored"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTranslations">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTranslations/translations"/>
@@ -301,5 +302,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTextContent/textItems"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSAmbivalenceItem"/>
+    <genClasses ecoreClass="BTSModel.ecore#//GraphicSelectionCounter">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//GraphicSelectionCounter/dateOfLastSelection"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//GraphicSelectionCounter/counter"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//GraphicSelectionCounter/suggest"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

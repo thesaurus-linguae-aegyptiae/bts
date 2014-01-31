@@ -1073,7 +1073,7 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT__WORK_PHASE = BTS_CORPUS_OBJECT__WORK_PHASE;
 
 	/**
-	 * The feature id for the '<em><b>Text Content</b></em>' reference.
+	 * The feature id for the '<em><b>Text Content</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -5306,13 +5306,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_GRAPHIC__REFERENCE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Ignored</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_GRAPHIC__IGNORED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>BTS Graphic</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_GRAPHIC_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+	int BTS_GRAPHIC_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>BTS Graphic</em>' class.
@@ -7549,6 +7558,115 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_AMBIVALENCE_ITEM_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl <em>Graphic Selection Counter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getGraphicSelectionCounter()
+	 * @generated
+	 */
+	int GRAPHIC_SELECTION_COUNTER = 55;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__ID = BTSDB_BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__REV = BTSDB_BASE_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__UPDATERS = BTSDB_BASE_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__READERS = BTSDB_BASE_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>Date Of Last Selection</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__DATE_OF_LAST_SELECTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Counter</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__COUNTER = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Suggest</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__SUGGEST = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>Graphic Selection Counter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>Graphic Selection Counter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7556,7 +7674,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 55;
+	int PROPERTY_CHANGE_SUPPORT = 56;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -7566,7 +7684,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 56;
+	int PROPERTY_CHANGE_LISTENER = 57;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -7576,7 +7694,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 57;
+	int PROPERTY_CHANGE_EVENT = 58;
 
 
 	/**
@@ -7600,10 +7718,10 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getBTSText();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsmodel.BTSText#getTextContent <em>Text Content</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSText#getTextContent <em>Text Content</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Text Content</em>'.
+	 * @return the meta object for the containment reference '<em>Text Content</em>'.
 	 * @see org.bbaw.bts.btsmodel.BTSText#getTextContent()
 	 * @see #getBTSText()
 	 * @generated
@@ -9107,6 +9225,17 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSGraphic_Reference();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSGraphic#isIgnored <em>Ignored</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Ignored</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSGraphic#isIgnored()
+	 * @see #getBTSGraphic()
+	 * @generated
+	 */
+	EAttribute getBTSGraphic_Ignored();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSTranslations <em>BTS Translations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10083,6 +10212,49 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getBTSAmbivalenceItem();
 
 	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter <em>Graphic Selection Counter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Graphic Selection Counter</em>'.
+	 * @see org.bbaw.bts.btsmodel.GraphicSelectionCounter
+	 * @generated
+	 */
+	EClass getGraphicSelectionCounter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getDateOfLastSelection <em>Date Of Last Selection</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Date Of Last Selection</em>'.
+	 * @see org.bbaw.bts.btsmodel.GraphicSelectionCounter#getDateOfLastSelection()
+	 * @see #getGraphicSelectionCounter()
+	 * @generated
+	 */
+	EAttribute getGraphicSelectionCounter_DateOfLastSelection();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getCounter <em>Counter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Counter</em>'.
+	 * @see org.bbaw.bts.btsmodel.GraphicSelectionCounter#getCounter()
+	 * @see #getGraphicSelectionCounter()
+	 * @generated
+	 */
+	EAttribute getGraphicSelectionCounter_Counter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getSuggest <em>Suggest</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Suggest</em>'.
+	 * @see org.bbaw.bts.btsmodel.GraphicSelectionCounter#getSuggest()
+	 * @see #getGraphicSelectionCounter()
+	 * @generated
+	 */
+	EAttribute getGraphicSelectionCounter_Suggest();
+
+	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10159,7 +10331,7 @@ public interface BtsmodelPackage extends EPackage {
 		EClass BTS_TEXT = eINSTANCE.getBTSText();
 
 		/**
-		 * The meta object literal for the '<em><b>Text Content</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Text Content</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
@@ -11343,6 +11515,14 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTS_GRAPHIC__REFERENCE = eINSTANCE.getBTSGraphic_Reference();
 
 		/**
+		 * The meta object literal for the '<em><b>Ignored</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_GRAPHIC__IGNORED = eINSTANCE.getBTSGraphic_Ignored();
+
+		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSTranslationsImpl <em>BTS Translations</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12111,6 +12291,40 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BTS_AMBIVALENCE_ITEM = eINSTANCE.getBTSAmbivalenceItem();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl <em>Graphic Selection Counter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getGraphicSelectionCounter()
+		 * @generated
+		 */
+		EClass GRAPHIC_SELECTION_COUNTER = eINSTANCE.getGraphicSelectionCounter();
+
+		/**
+		 * The meta object literal for the '<em><b>Date Of Last Selection</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAPHIC_SELECTION_COUNTER__DATE_OF_LAST_SELECTION = eINSTANCE.getGraphicSelectionCounter_DateOfLastSelection();
+
+		/**
+		 * The meta object literal for the '<em><b>Counter</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAPHIC_SELECTION_COUNTER__COUNTER = eINSTANCE.getGraphicSelectionCounter_Counter();
+
+		/**
+		 * The meta object literal for the '<em><b>Suggest</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute GRAPHIC_SELECTION_COUNTER__SUGGEST = eINSTANCE.getGraphicSelectionCounter_Suggest();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

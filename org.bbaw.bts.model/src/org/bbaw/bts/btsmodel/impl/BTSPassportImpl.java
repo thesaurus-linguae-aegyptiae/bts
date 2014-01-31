@@ -274,8 +274,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	public NotificationChain basicSetDate(BTSTimespan newDate, NotificationChain msgs) {
 		BTSTimespan oldDate = date;
 		date = newDate;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT__DATE, oldDate, newDate);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -288,8 +287,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @generated
 	 */
 	public void setDate(BTSTimespan newDate) {
-		if (newDate != date)
-		{
+		if (newDate != date) {
 			NotificationChain msgs = null;
 			if (date != null)
 				msgs = ((InternalEObject)date).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT__DATE, null, msgs);
@@ -371,8 +369,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @generated
 	 */
 	public EList<BTSPassportEntry> getPassportEntries() {
-		if (passportEntries == null)
-		{
+		if (passportEntries == null) {
 			passportEntries = new EObjectContainmentEList<BTSPassportEntry>(BTSPassportEntry.class, this, BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES);
 		}
 		return passportEntries;
@@ -405,8 +402,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @generated
 	 */
 	public EList<BTSTranslations> getDescriptions() {
-		if (descriptions == null)
-		{
+		if (descriptions == null) {
 			descriptions = new EObjectContainmentEList<BTSTranslations>(BTSTranslations.class, this, BtsmodelPackage.BTS_PASSPORT__DESCRIPTIONS);
 		}
 		return descriptions;
@@ -419,8 +415,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT__DATE:
 				return basicSetDate(null, msgs);
 			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
@@ -438,8 +433,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT__PROTOCOL:
 				return getProtocol();
 			case BtsmodelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
@@ -470,8 +464,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT__PROTOCOL:
 				setProtocol((String)newValue);
 				return;
@@ -512,8 +505,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT__PROTOCOL:
 				setProtocol(PROTOCOL_EDEFAULT);
 				return;
@@ -552,8 +544,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT__PROTOCOL:
 				return PROTOCOL_EDEFAULT == null ? protocol != null : !PROTOCOL_EDEFAULT.equals(protocol);
 			case BtsmodelPackage.BTS_PASSPORT__BIBLIOGRAPHY:

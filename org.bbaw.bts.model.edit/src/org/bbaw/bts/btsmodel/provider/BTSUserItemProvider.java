@@ -55,8 +55,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addPropertyChangeSupportPropertyDescriptor(object);
@@ -624,8 +623,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_USER__EXTERNAL_REFERNECES);
@@ -682,8 +680,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSUser.class))
-		{
+		switch (notification.getFeatureID(BTSUser.class)) {
 			case BtsmodelPackage.BTS_USER__PROPERTY_CHANGE_SUPPORT:
 			case BtsmodelPackage.BTS_USER__STATE:
 			case BtsmodelPackage.BTS_USER__REVISION_STATE:

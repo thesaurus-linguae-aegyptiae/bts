@@ -20,7 +20,7 @@ package org.bbaw.bts.corpus.text.egy.dsl.egyBts;
  * @model
  * @generated
  */
-public interface Marker extends SentenceItem
+public interface Marker extends AbstractMarker
 {
   /**
    * Returns the value of the '<em><b>Type</b></em>' attribute.

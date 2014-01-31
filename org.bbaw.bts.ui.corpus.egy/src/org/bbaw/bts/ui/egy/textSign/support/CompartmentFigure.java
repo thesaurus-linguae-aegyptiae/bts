@@ -34,4 +34,6 @@ public class CompartmentFigure extends Figure
 
 		}
 	}
+
+
 }

@@ -72,8 +72,7 @@ public abstract class BTSConfigImpl extends MinimalEObjectImpl.Container impleme
 	 */
 	public EList<BTSConfig> getChildren()
 	{
-		if (children == null)
-		{
+		if (children == null) {
 			children = new EObjectContainmentEList<BTSConfig>(BTSConfig.class, this, BtsmodelPackage.BTS_CONFIG__CHILDREN);
 		}
 		return children;
@@ -87,8 +86,7 @@ public abstract class BTSConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 		}
@@ -103,8 +101,7 @@ public abstract class BTSConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG__CHILDREN:
 				return getChildren();
 		}
@@ -120,8 +117,7 @@ public abstract class BTSConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends BTSConfig>)newValue);
@@ -138,8 +134,7 @@ public abstract class BTSConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG__CHILDREN:
 				getChildren().clear();
 				return;
@@ -155,8 +150,7 @@ public abstract class BTSConfigImpl extends MinimalEObjectImpl.Container impleme
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG__CHILDREN:
 				return children != null && !children.isEmpty();
 		}

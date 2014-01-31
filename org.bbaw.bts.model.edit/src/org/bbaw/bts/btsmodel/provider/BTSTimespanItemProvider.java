@@ -62,8 +62,7 @@ public class BTSTimespanItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addCommentPropertyDescriptor(object);
@@ -103,8 +102,7 @@ public class BTSTimespanItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_TIMESPAN__FROM);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_TIMESPAN__TO);
@@ -161,8 +159,7 @@ public class BTSTimespanItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSTimespan.class))
-		{
+		switch (notification.getFeatureID(BTSTimespan.class)) {
 			case BtsmodelPackage.BTS_TIMESPAN__COMMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
@@ -211,8 +208,7 @@ public class BTSTimespanItemProvider
 			childFeature == BtsmodelPackage.Literals.BTS_TIMESPAN__FROM ||
 			childFeature == BtsmodelPackage.Literals.BTS_TIMESPAN__TO;
 
-		if (qualify)
-		{
+		if (qualify) {
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

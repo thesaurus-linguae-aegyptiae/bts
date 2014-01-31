@@ -50,7 +50,9 @@
     </trimBars>
   </children>
   <rootContext xmi:id="_AyBQAA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
-    <children xmi:id="_IirI4A5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.window" name="In Window"/>
+    <children xmi:id="_IirI4A5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.window" name="In Window">
+      <children xmi:id="_AWj_QIjFEeOBD8Gt6rzlog" elementId="org.eclipse.ui.contexts.editors" name="In Editors"/>
+    </children>
     <children xmi:id="_NEpfQA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialog" name="In Dialog"/>
   </rootContext>
   <commands xmi:id="_G1ujkF2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.edit.text.contentAssist.proposals" category="_KsMe0F2uEeOwE8UUrLWumA"/>

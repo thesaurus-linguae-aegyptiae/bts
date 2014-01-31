@@ -14,8 +14,8 @@ Workflow {
 	bean = StandaloneSetup {
 		scanClassPath  = true
 		platformUri = "${runtimeProject}/.."
-		registerGeneratedEPackage = "org.bbaw.bts.btsmodel.BtsmodelPackage"
-		registerGenModelFile = "platform:/resource/org.bbaw.bts.model/model/BTSModel.genmodel"
+//		registerGeneratedEPackage = "org.bbaw.bts.btsmodel.BtsmodelPackage"
+//		registerGenModelFile = "platform:/resource/org.bbaw.bts.model/model/BTSModel.genmodel"
 	}
 
 	component = DirectoryCleaner {

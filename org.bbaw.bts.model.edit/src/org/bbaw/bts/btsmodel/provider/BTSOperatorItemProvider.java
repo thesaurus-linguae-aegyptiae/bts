@@ -56,8 +56,7 @@ public class BTSOperatorItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addOpperatorPropertyDescriptor(object);
@@ -128,8 +127,7 @@ public class BTSOperatorItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSOperator.class))
-		{
+		switch (notification.getFeatureID(BTSOperator.class)) {
 			case BtsmodelPackage.BTS_OPERATOR__OPPERATOR:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

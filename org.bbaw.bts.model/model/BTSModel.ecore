@@ -3,7 +3,8 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="btsmodel" nsURI="http://btsmodel/1.0" nsPrefix="btsmodel">
   <eClassifiers xsi:type="ecore:EClass" name="BTSTCObject" eSuperTypes="#//BTSCorpusObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSText" eSuperTypes="#//BTSCorpusObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="textContent" eType="#//BTSTextContent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="textContent" eType="#//BTSTextContent"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSSenctence" eSuperTypes="#//BTSTextItems #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="sentenceItems" upperBound="-1"
@@ -149,7 +150,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="BTSDBBaseObject" abstract="true" eSuperTypes="#//BTSIdentifiableItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="_rev" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="updaters" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readers" upperBound="-1"
@@ -204,6 +206,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="innerSentenceOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignored" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTranslations">
     <eOperations name="getTranslation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
@@ -357,4 +360,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalenceItem" abstract="true"
       interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphicSelectionCounter" eSuperTypes="#//BTSDBBaseObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfLastSelection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="counter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
 </ecore:EPackage>

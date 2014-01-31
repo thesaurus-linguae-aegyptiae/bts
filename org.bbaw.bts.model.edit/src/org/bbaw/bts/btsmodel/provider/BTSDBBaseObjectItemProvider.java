@@ -52,8 +52,7 @@ public class BTSDBBaseObjectItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			add_revPropertyDescriptor(object);
@@ -204,8 +203,7 @@ public class BTSDBBaseObjectItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSDBBaseObject.class))
-		{
+		switch (notification.getFeatureID(BTSDBBaseObject.class)) {
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:

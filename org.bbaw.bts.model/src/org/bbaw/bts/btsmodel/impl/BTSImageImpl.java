@@ -108,8 +108,7 @@ public class BTSImageImpl extends BTSCorpusObjectImpl implements BTSImage {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IMAGE__MEDIA_TYPE:
 				return getMediaType();
 		}
@@ -123,8 +122,7 @@ public class BTSImageImpl extends BTSCorpusObjectImpl implements BTSImage {
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IMAGE__MEDIA_TYPE:
 				setMediaType((String)newValue);
 				return;
@@ -139,8 +137,7 @@ public class BTSImageImpl extends BTSCorpusObjectImpl implements BTSImage {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IMAGE__MEDIA_TYPE:
 				setMediaType(MEDIA_TYPE_EDEFAULT);
 				return;
@@ -155,8 +152,7 @@ public class BTSImageImpl extends BTSCorpusObjectImpl implements BTSImage {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IMAGE__MEDIA_TYPE:
 				return MEDIA_TYPE_EDEFAULT == null ? mediaType != null : !MEDIA_TYPE_EDEFAULT.equals(mediaType);
 		}
@@ -170,8 +166,7 @@ public class BTSImageImpl extends BTSCorpusObjectImpl implements BTSImage {
 	 */
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID)
-		{
+		switch (operationID) {
 			case BtsmodelPackage.BTS_IMAGE___GET_ATTACHEMENT:
 				return getAttachement();
 		}

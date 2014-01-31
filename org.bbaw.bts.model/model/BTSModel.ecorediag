@@ -851,6 +851,10 @@
         <element xmi:type="ecore:EAttribute" href="BTSModel.ecore#//BTSGraphic/reference"/>
         <layoutConstraint xmi:type="notation:Location" xmi:id="_Qj_ssf9IEeKH1_tqUQLfBw"/>
       </children>
+      <children xmi:type="notation:Node" xmi:id="_18gCIINIEeOvyPQ3Eh_70g" type="2001">
+        <element xmi:type="ecore:EAttribute" href="BTSModel.ecore#//BTSGraphic/ignored"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_18gCIYNIEeOvyPQ3Eh_70g"/>
+      </children>
       <styles xmi:type="notation:DrawerStyle" xmi:id="_YFkz9fUlEeK4yakNX3yigw"/>
       <styles xmi:type="notation:SortingStyle" xmi:id="_YFkz9vUlEeK4yakNX3yigw"/>
       <styles xmi:type="notation:FilteringStyle" xmi:id="_YFkz9_UlEeK4yakNX3yigw"/>
@@ -1428,6 +1432,30 @@
     <styles xmi:type="notation:ShapeStyle" xmi:id="_GutbIVt1EeO5W9BF9PkDCw" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
     <element xmi:type="ecore:EClass" href="BTSModel.ecore#//BTSAmbivalenceItem"/>
     <layoutConstraint xmi:type="notation:Bounds" xmi:id="_GutbIlt1EeO5W9BF9PkDCw" x="370" y="935"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_UmlGgIc-EeOetKDdSSaGPQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_Umu3goc-EeOetKDdSSaGPQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_Um4ogIc-EeOetKDdSSaGPQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_h1uBUIc-EeOetKDdSSaGPQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="BTSModel.ecore#//GraphicSelectionCounter/dateOfLastSelection"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_h1uBUYc-EeOetKDdSSaGPQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_mtvgMIc-EeOetKDdSSaGPQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="BTSModel.ecore#//GraphicSelectionCounter/counter"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_mtvgMYc-EeOetKDdSSaGPQ"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Um4ogYc-EeOetKDdSSaGPQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Um4ogoc-EeOetKDdSSaGPQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Um4og4c-EeOetKDdSSaGPQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_Um4ohIc-EeOetKDdSSaGPQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_Um4ohYc-EeOetKDdSSaGPQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Um4ohoc-EeOetKDdSSaGPQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Um4oh4c-EeOetKDdSSaGPQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Umu3gIc-EeOetKDdSSaGPQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="BTSModel.ecore#//GraphicSelectionCounter"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Umu3gYc-EeOetKDdSSaGPQ" x="3500" y="-1226" width="193" height="79"/>
   </children>
   <styles xmi:type="notation:DiagramStyle" xmi:id="_RZ-8IfUZEeK4yakNX3yigw"/>
   <element xmi:type="ecore:EPackage" href="BTSModel.ecore#/"/>
@@ -2409,5 +2437,13 @@
     <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_RmVPg1t2EeO5W9BF9PkDCw" points="[2, -8, -327, 1503]$[330, -1495, 1, 16]"/>
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RmVPhFt2EeO5W9BF9PkDCw" id="(0.543859649122807,0.21428571428571427)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_RmVPhVt2EeO5W9BF9PkDCw" id="(0.16891891891891891,0.7538461538461538)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_fp-GAIc_EeOetKDdSSaGPQ" type="3003" source="_UmlGgIc-EeOetKDdSSaGPQ" target="_RalZTvUZEeK4yakNX3yigw">
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_fp-GAYc_EeOetKDdSSaGPQ" routing="Rectilinear" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_fp-GAoc_EeOetKDdSSaGPQ"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_fp-GA4c_EeOetKDdSSaGPQ" points="[-15, 3, 1072, -222]$[-1085, 207, 2, -18]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_fqH3AIc_EeOetKDdSSaGPQ" id="(0.10880829015544041,0.3924050632911392)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_fqH3AYc_EeOetKDdSSaGPQ" id="(0.9030898876404494,0.21238938053097345)"/>
   </edges>
 </notation:Diagram>

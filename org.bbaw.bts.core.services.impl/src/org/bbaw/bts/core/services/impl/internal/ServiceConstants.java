@@ -14,7 +14,7 @@ public class ServiceConstants
 
 	public static final String THS = "_ths";
 
-	public static final String LOCAL = "_local";
+	public static final String LOCAL = "local";
 
 	public static final String SPLIT_PATTERN = "\\|";
 

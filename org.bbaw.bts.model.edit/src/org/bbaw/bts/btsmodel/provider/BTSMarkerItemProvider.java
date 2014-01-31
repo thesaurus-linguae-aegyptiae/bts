@@ -67,8 +67,7 @@ public class BTSMarkerItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addValuePropertyDescriptor(object);
@@ -138,8 +137,7 @@ public class BTSMarkerItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSMarker.class))
-		{
+		switch (notification.getFeatureID(BTSMarker.class)) {
 			case BtsmodelPackage.BTS_MARKER__VALUE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

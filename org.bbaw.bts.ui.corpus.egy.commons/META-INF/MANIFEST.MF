@@ -23,5 +23,6 @@ Bundle-ClassPath: jseshlibs/bcmail-jdk14-138.jar,
 Export-Package: jsesh.editor,
  jsesh.hieroglyphs,
  jsesh.mdc,
+ jsesh.mdc.utils,
  jsesh.mdcDisplayer.draw,
  jsesh.mdcDisplayer.preferences

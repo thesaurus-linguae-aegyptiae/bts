@@ -67,8 +67,7 @@ public class BTSAnnotationImpl extends BTSCorpusObjectImpl implements BTSAnnotat
 	 * @generated
 	 */
 	public EList<BTSReference> getReferences() {
-		if (references == null)
-		{
+		if (references == null) {
 			references = new EObjectContainmentEList<BTSReference>(BTSReference.class, this, BtsmodelPackage.BTS_ANNOTATION__REFERENCES);
 		}
 		return references;
@@ -81,8 +80,7 @@ public class BTSAnnotationImpl extends BTSCorpusObjectImpl implements BTSAnnotat
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_ANNOTATION__REFERENCES:
 				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
 		}
@@ -96,8 +94,7 @@ public class BTSAnnotationImpl extends BTSCorpusObjectImpl implements BTSAnnotat
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_ANNOTATION__REFERENCES:
 				return getReferences();
 		}
@@ -112,8 +109,7 @@ public class BTSAnnotationImpl extends BTSCorpusObjectImpl implements BTSAnnotat
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_ANNOTATION__REFERENCES:
 				getReferences().clear();
 				getReferences().addAll((Collection<? extends BTSReference>)newValue);
@@ -129,8 +125,7 @@ public class BTSAnnotationImpl extends BTSCorpusObjectImpl implements BTSAnnotat
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_ANNOTATION__REFERENCES:
 				getReferences().clear();
 				return;
@@ -145,8 +140,7 @@ public class BTSAnnotationImpl extends BTSCorpusObjectImpl implements BTSAnnotat
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_ANNOTATION__REFERENCES:
 				return references != null && !references.isEmpty();
 		}

@@ -2,8 +2,11 @@
  */
 package org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl;
 
+import org.bbaw.bts.corpus.text.egy.dsl.egyBts.AbstractMarker;
+import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.AncientExpanded;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Brackets;
+import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Chars;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Deletion;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Destruction;
@@ -85,6 +88,27 @@ public class EgyBtsPackageImpl extends EPackageImpl implements EgyBtsPackage
    * @generated
    */
   private EClass sentenceItemEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass abstractMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ambivalenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass caseEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -445,6 +469,66 @@ public class EgyBtsPackageImpl extends EPackageImpl implements EgyBtsPackage
   public EClass getSentenceItem()
   {
     return sentenceItemEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAbstractMarker()
+  {
+    return abstractMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAmbivalence()
+  {
+    return ambivalenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAmbivalence_Cases()
+  {
+    return (EReference)ambivalenceEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCase()
+  {
+    return caseEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getCase_Name()
+  {
+    return (EAttribute)caseEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCase_Items()
+  {
+    return (EReference)caseEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -977,6 +1061,15 @@ public class EgyBtsPackageImpl extends EPackageImpl implements EgyBtsPackage
 
     sentenceItemEClass = createEClass(SENTENCE_ITEM);
 
+    abstractMarkerEClass = createEClass(ABSTRACT_MARKER);
+
+    ambivalenceEClass = createEClass(AMBIVALENCE);
+    createEReference(ambivalenceEClass, AMBIVALENCE__CASES);
+
+    caseEClass = createEClass(CASE);
+    createEAttribute(caseEClass, CASE__NAME);
+    createEReference(caseEClass, CASE__ITEMS);
+
     markerEClass = createEClass(MARKER);
     createEAttribute(markerEClass, MARKER__TYPE);
     createEAttribute(markerEClass, MARKER__NAME);
@@ -1091,7 +1184,9 @@ public class EgyBtsPackageImpl extends EPackageImpl implements EgyBtsPackage
 
     // Add supertypes to classes
     sentenceEClass.getESuperTypes().add(this.getTextItem());
-    markerEClass.getESuperTypes().add(this.getSentenceItem());
+    abstractMarkerEClass.getESuperTypes().add(this.getSentenceItem());
+    ambivalenceEClass.getESuperTypes().add(this.getSentenceItem());
+    markerEClass.getESuperTypes().add(this.getAbstractMarker());
     wordEClass.getESuperTypes().add(this.getSentenceItem());
     charsEClass.getESuperTypes().add(this.getWordMiddle());
     charsEClass.getESuperTypes().add(this.getNoExpanded());
@@ -1147,6 +1242,15 @@ public class EgyBtsPackageImpl extends EPackageImpl implements EgyBtsPackage
     initEReference(getSentence_Items(), this.getSentenceItem(), null, "items", null, 0, -1, Sentence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(sentenceItemEClass, SentenceItem.class, "SentenceItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(abstractMarkerEClass, AbstractMarker.class, "AbstractMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(ambivalenceEClass, Ambivalence.class, "Ambivalence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAmbivalence_Cases(), this.getCase(), null, "cases", null, 0, -1, Ambivalence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(caseEClass, Case.class, "Case", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getCase_Name(), ecorePackage.getEString(), "name", null, 0, 1, Case.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getCase_Items(), this.getSentenceItem(), null, "items", null, 0, -1, Case.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(markerEClass, Marker.class, "Marker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMarker_Type(), ecorePackage.getEString(), "type", null, 0, 1, Marker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

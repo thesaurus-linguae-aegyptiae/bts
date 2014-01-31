@@ -202,8 +202,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 */
 	public EList<String> getUpdaters()
 	{
-		if (updaters == null)
-		{
+		if (updaters == null) {
 			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS);
 		}
 		return updaters;
@@ -216,8 +215,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 */
 	public EList<String> getReaders()
 	{
-		if (readers == null)
-		{
+		if (readers == null) {
 			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_BASE_OBJECT__READERS);
 		}
 		return readers;
@@ -230,8 +228,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				return get_rev();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
@@ -254,8 +251,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				set_rev((String)newValue);
 				return;
@@ -284,8 +280,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				set_rev(_REV_EDEFAULT);
 				return;
@@ -312,8 +307,7 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:

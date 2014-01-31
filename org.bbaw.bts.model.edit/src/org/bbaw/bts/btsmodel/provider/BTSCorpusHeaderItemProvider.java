@@ -59,8 +59,7 @@ public class BTSCorpusHeaderItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addAuthorNamePropertyDescriptor(object);
@@ -172,8 +171,7 @@ public class BTSCorpusHeaderItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSCorpusHeader.class))
-		{
+		switch (notification.getFeatureID(BTSCorpusHeader.class)) {
 			case BtsmodelPackage.BTS_CORPUS_HEADER__AUTHOR_NAME:
 			case BtsmodelPackage.BTS_CORPUS_HEADER__PROJECT_ID:
 			case BtsmodelPackage.BTS_CORPUS_HEADER__PROJECT_NAME:

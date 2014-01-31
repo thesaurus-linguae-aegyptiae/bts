@@ -12,7 +12,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.corpus.text.btsdsl.ui.internal.BTSActivator;
+import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -101,10 +101,23 @@ public class ShowPreferenceDialogHandler {
 			}
 			if (elmt.getAttribute(ATTR_CLASS) != null) {
 				IPreferencePage page = null;
+				System.out.println(elmt.getAttribute(ATTR_CLASS));
 				try {
+					String classUri = elmt.getAttribute(ATTR_CLASS);
+					if (classUri
+							.startsWith("org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory")) {
+						classUri = classUri
+.substring(65, classUri.length());
+						System.out.println(classUri);
+					}
+ else if (classUri
+							.startsWith("org.eclipse.xtext.ui.XtextExecutableExtensionFactory")) {
+						classUri = classUri.substring(53, classUri.length());
+						System.out.println(classUri);
+					}
 					String prefPageURI = getClassURI(
-							elmt.getNamespaceIdentifier(),
-							elmt.getAttribute(ATTR_CLASS));
+							elmt.getNamespaceIdentifier(), classUri);
+
 					Object object = factory.create(prefPageURI, context);
 					if (!(object instanceof IPreferencePage)) {
 						logger.error(
@@ -122,11 +135,11 @@ public class ShowPreferenceDialogHandler {
 				}
 				ContextInjectionFactory.inject(page, context);
 				if (elmt.getNamespaceIdentifier().equals(
-						"org.bbaw.bts.corpus.text.btsdsl.ui")
+						"org.bbaw.bts.corpus.text.egy.egydsl.ui")
 						|| page instanceof XtextTemplatePreferencePage) {
-					BTSActivator activator = BTSActivator.getInstance();
+					EgyDslActivator activator = EgyDslActivator.getInstance();
 					injector = activator
-							.getInjector(BTSActivator.ORG_BBAW_BTS_CORPUS_TEXT_BTSDSL_BTS);
+							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
 					injector.injectMembers(page);
 				}
 				if ((page.getTitle() == null || page.getTitle().isEmpty())
@@ -181,6 +194,8 @@ public class ShowPreferenceDialogHandler {
 		suppressedPagesCache.add("org.eclipse.jdt.junit");
 		suppressedPagesCache.add("org.eclipse.search");
 		suppressedPagesCache.add("org.eclipse.equinox.security.ui");
+		suppressedPagesCache.add("org.eclipse.xtext.xtext.ui");
+
 	}
 
 	private IPreferenceNode findNode(PreferenceManager pm, String categoryId) {

@@ -130,8 +130,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	public EList<String> getUserNames()
 	{
-		if (userNames == null)
-		{
+		if (userNames == null) {
 			userNames = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES);
 		}
 		return userNames;
@@ -144,8 +143,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	public EList<String> getUserRoles()
 	{
-		if (userRoles == null)
-		{
+		if (userRoles == null) {
 			userRoles = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES);
 		}
 		return userRoles;
@@ -158,8 +156,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	public EList<Object> getCachedChildren()
 	{
-		if (cachedChildren == null)
-		{
+		if (cachedChildren == null) {
 			cachedChildren = new EDataTypeUniqueEList<Object>(Object.class, this, BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN);
 		}
 		return cachedChildren;
@@ -173,8 +170,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME:
 				return getRoleName();
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES:
@@ -196,8 +192,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME:
 				setRoleName((String)newValue);
 				return;
@@ -225,8 +220,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME:
 				setRoleName(ROLE_NAME_EDEFAULT);
 				return;
@@ -251,8 +245,7 @@ public class BTSDBCollectionRoleDescImpl extends BTSIdentifiableItemImpl impleme
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME:
 				return ROLE_NAME_EDEFAULT == null ? roleName != null : !ROLE_NAME_EDEFAULT.equals(roleName);
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES:

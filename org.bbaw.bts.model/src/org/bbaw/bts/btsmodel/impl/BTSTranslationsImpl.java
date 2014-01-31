@@ -68,8 +68,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public EList<BTSTranslation> getTranslations()
 	{
-		if (translations == null)
-		{
+		if (translations == null) {
 			translations = new EObjectContainmentEList<BTSTranslation>(BTSTranslation.class, this, BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS);
 		}
 		return translations;
@@ -135,12 +134,17 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 
 	private BTSTranslation getTranslationInternal(String language)
 	{
-		for (BTSTranslation tr : getTranslations())
+		if (language != null)
 		{
-			if (language.equals(tr.getValue()))
+			for (BTSTranslation tr : getTranslations())
 			{
-				return tr;
+				if (language.equals(tr.getLang())) {
+					return tr;
+				}
 			}
+		}
+ else if (getTranslations() != null && !getTranslations().isEmpty()) {
+			return getTranslations().get(0);
 		}
 		return null;
 	}
@@ -152,8 +156,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS:
 				return ((InternalEList<?>)getTranslations()).basicRemove(otherEnd, msgs);
 		}
@@ -167,8 +170,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS:
 				return getTranslations();
 		}
@@ -183,8 +185,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS:
 				getTranslations().clear();
 				getTranslations().addAll((Collection<? extends BTSTranslation>)newValue);
@@ -200,8 +201,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS:
 				getTranslations().clear();
 				return;
@@ -216,8 +216,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS:
 				return translations != null && !translations.isEmpty();
 		}
@@ -231,8 +230,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
-		switch (operationID)
-		{
+		switch (operationID) {
 			case BtsmodelPackage.BTS_TRANSLATIONS___GET_TRANSLATION__STRING:
 				return getTranslation((String)arguments.get(0));
 			case BtsmodelPackage.BTS_TRANSLATIONS___SET_TRANSLATION__STRING_STRING:

@@ -23,9 +23,21 @@ public class EgyBtsSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getVersMarkerRule())
+			return getVersMarkerToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * VersMarker:
+	 * 	VersbreakMarker | VersFrontierMarker
+	 * ;
+	 */
+	protected String getVersMarkerToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "@v";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {

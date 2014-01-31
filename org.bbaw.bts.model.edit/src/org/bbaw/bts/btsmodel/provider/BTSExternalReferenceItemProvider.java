@@ -59,8 +59,7 @@ public class BTSExternalReferenceItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addReferencePropertyDescriptor(object);
@@ -172,8 +171,7 @@ public class BTSExternalReferenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSExternalReference.class))
-		{
+		switch (notification.getFeatureID(BTSExternalReference.class)) {
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:

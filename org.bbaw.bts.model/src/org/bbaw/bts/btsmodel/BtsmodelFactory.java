@@ -396,6 +396,15 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSTextContent createBTSTextContent();
 
+	/**
+	 * Returns a new object of class '<em>Graphic Selection Counter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Graphic Selection Counter</em>'.
+	 * @generated
+	 */
+	GraphicSelectionCounter createGraphicSelectionCounter();
+
 	BTSTextContent createBTSTextContent(boolean setId);
 	/**
 	 * Returns the package supported by this factory.

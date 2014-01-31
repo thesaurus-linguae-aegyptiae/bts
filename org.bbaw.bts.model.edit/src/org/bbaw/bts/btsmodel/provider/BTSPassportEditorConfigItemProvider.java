@@ -52,8 +52,7 @@ public class BTSPassportEditorConfigItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addWidgetTypePropertyDescriptor(object);
@@ -212,8 +211,7 @@ public class BTSPassportEditorConfigItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSPassportEditorConfig.class))
-		{
+		switch (notification.getFeatureID(BTSPassportEditorConfig.class)) {
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE:

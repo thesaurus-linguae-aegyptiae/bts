@@ -127,8 +127,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 * @generated
 	 */
 	public EList<BTSRevision> getRevisions() {
-		if (revisions == null)
-		{
+		if (revisions == null) {
 			revisions = new EObjectContainmentEList<BTSRevision>(BTSRevision.class, this, BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 		}
 		return revisions;
@@ -204,8 +203,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
 		}
@@ -219,8 +217,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				return getRevisions();
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
@@ -241,8 +238,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				getRevisions().clear();
 				getRevisions().addAll((Collection<? extends BTSRevision>)newValue);
@@ -267,8 +263,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				getRevisions().clear();
 				return;
@@ -292,8 +287,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				return revisions != null && !revisions.isEmpty();
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:

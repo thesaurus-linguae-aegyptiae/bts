@@ -12,7 +12,7 @@ public class AbstractBTSValidator extends org.eclipse.xtext.validation.AbstractD
 	@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
-	    result.add(EPackage.Registry.INSTANCE.getEPackage("http://btsmodel/1.0"));
+	    result.add(org.bbaw.bts.corpus.text.dsl.bts.BtsPackage.eINSTANCE);
 		return result;
 	}
 }

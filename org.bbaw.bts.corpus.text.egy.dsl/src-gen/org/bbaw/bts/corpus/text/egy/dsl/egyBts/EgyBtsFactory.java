@@ -59,6 +59,33 @@ public interface EgyBtsFactory extends EFactory
   SentenceItem createSentenceItem();
 
   /**
+   * Returns a new object of class '<em>Abstract Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Abstract Marker</em>'.
+   * @generated
+   */
+  AbstractMarker createAbstractMarker();
+
+  /**
+   * Returns a new object of class '<em>Ambivalence</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ambivalence</em>'.
+   * @generated
+   */
+  Ambivalence createAmbivalence();
+
+  /**
+   * Returns a new object of class '<em>Case</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Case</em>'.
+   * @generated
+   */
+  Case createCase();
+
+  /**
    * Returns a new object of class '<em>Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

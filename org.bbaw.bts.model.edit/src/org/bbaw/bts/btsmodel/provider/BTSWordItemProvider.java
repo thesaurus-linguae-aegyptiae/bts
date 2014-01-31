@@ -58,8 +58,7 @@ public class BTSWordItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addWTypePropertyDescriptor(object);
@@ -214,8 +213,7 @@ public class BTSWordItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_WORD__TRANSLATION);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_WORD__GRAPHICS);
@@ -272,8 +270,7 @@ public class BTSWordItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSWord.class))
-		{
+		switch (notification.getFeatureID(BTSWord.class)) {
 			case BtsmodelPackage.BTS_WORD__WTYPE:
 			case BtsmodelPackage.BTS_WORD__LTYPE:
 			case BtsmodelPackage.BTS_WORD__LKEY:

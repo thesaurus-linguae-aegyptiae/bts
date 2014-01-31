@@ -56,8 +56,7 @@ public class BTSListEntryItemProvider extends BTSCorpusObjectItemProvider implem
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addIgnorePropertyDescriptor(object);
@@ -98,8 +97,7 @@ public class BTSListEntryItemProvider extends BTSCorpusObjectItemProvider implem
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_LIST_ENTRY__SUBENTRIES);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_LIST_ENTRY__WORDS);
@@ -157,8 +155,7 @@ public class BTSListEntryItemProvider extends BTSCorpusObjectItemProvider implem
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSListEntry.class))
-		{
+		switch (notification.getFeatureID(BTSListEntry.class)) {
 			case BtsmodelPackage.BTS_LIST_ENTRY__IGNORE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

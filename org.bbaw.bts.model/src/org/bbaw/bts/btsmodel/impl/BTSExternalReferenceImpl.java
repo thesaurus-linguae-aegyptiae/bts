@@ -177,8 +177,7 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
 				return getReference();
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
@@ -196,8 +195,7 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
 				setReference((String)newValue);
 				return;
@@ -218,8 +216,7 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
 				setReference(REFERENCE_EDEFAULT);
 				return;
@@ -240,8 +237,7 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
 				return REFERENCE_EDEFAULT == null ? reference != null : !REFERENCE_EDEFAULT.equals(reference);
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:

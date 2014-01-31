@@ -151,23 +151,61 @@ public interface EgyBtsPackage extends EPackage
   int SENTENCE_ITEM_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.MarkerImpl <em>Marker</em>}' class.
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AbstractMarkerImpl <em>Abstract Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.MarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getMarker()
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AbstractMarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getAbstractMarker()
    * @generated
    */
-  int MARKER = 4;
+  int ABSTRACT_MARKER = 4;
 
   /**
-   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * The number of structural features of the '<em>Abstract Marker</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MARKER__TYPE = SENTENCE_ITEM_FEATURE_COUNT + 0;
+  int ABSTRACT_MARKER_FEATURE_COUNT = SENTENCE_ITEM_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AmbivalenceImpl <em>Ambivalence</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AmbivalenceImpl
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getAmbivalence()
+   * @generated
+   */
+  int AMBIVALENCE = 5;
+
+  /**
+   * The feature id for the '<em><b>Cases</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AMBIVALENCE__CASES = SENTENCE_ITEM_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Ambivalence</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int AMBIVALENCE_FEATURE_COUNT = SENTENCE_ITEM_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.CaseImpl <em>Case</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.CaseImpl
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getCase()
+   * @generated
+   */
+  int CASE = 6;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -176,7 +214,53 @@ public interface EgyBtsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MARKER__NAME = SENTENCE_ITEM_FEATURE_COUNT + 1;
+  int CASE__NAME = 0;
+
+  /**
+   * The feature id for the '<em><b>Items</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CASE__ITEMS = 1;
+
+  /**
+   * The number of structural features of the '<em>Case</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CASE_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.MarkerImpl <em>Marker</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.MarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getMarker()
+   * @generated
+   */
+  int MARKER = 7;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MARKER__TYPE = ABSTRACT_MARKER_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MARKER__NAME = ABSTRACT_MARKER_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>Marker</em>' class.
@@ -185,7 +269,7 @@ public interface EgyBtsPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MARKER_FEATURE_COUNT = SENTENCE_ITEM_FEATURE_COUNT + 2;
+  int MARKER_FEATURE_COUNT = ABSTRACT_MARKER_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.WordImpl <em>Word</em>}' class.
@@ -195,7 +279,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getWord()
    * @generated
    */
-  int WORD = 5;
+  int WORD = 8;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -223,7 +307,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getWordMiddle()
    * @generated
    */
-  int WORD_MIDDLE = 6;
+  int WORD_MIDDLE = 9;
 
   /**
    * The number of structural features of the '<em>Word Middle</em>' class.
@@ -242,7 +326,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getChars()
    * @generated
    */
-  int CHARS = 7;
+  int CHARS = 10;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -270,7 +354,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfix()
    * @generated
    */
-  int INTERFIX = 8;
+  int INTERFIX = 11;
 
   /**
    * The number of structural features of the '<em>Interfix</em>' class.
@@ -289,7 +373,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixLexical()
    * @generated
    */
-  int INTERFIX_LEXICAL = 9;
+  int INTERFIX_LEXICAL = 12;
 
   /**
    * The number of structural features of the '<em>Interfix Lexical</em>' class.
@@ -308,7 +392,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixFlexion()
    * @generated
    */
-  int INTERFIX_FLEXION = 10;
+  int INTERFIX_FLEXION = 13;
 
   /**
    * The number of structural features of the '<em>Interfix Flexion</em>' class.
@@ -327,7 +411,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixSuffixPronomLexical()
    * @generated
    */
-  int INTERFIX_SUFFIX_PRONOM_LEXICAL = 11;
+  int INTERFIX_SUFFIX_PRONOM_LEXICAL = 14;
 
   /**
    * The number of structural features of the '<em>Interfix Suffix Pronom Lexical</em>' class.
@@ -346,7 +430,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixPrefixNonLexical()
    * @generated
    */
-  int INTERFIX_PREFIX_NON_LEXICAL = 12;
+  int INTERFIX_PREFIX_NON_LEXICAL = 15;
 
   /**
    * The number of structural features of the '<em>Interfix Prefix Non Lexical</em>' class.
@@ -365,7 +449,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixPrefixLexical()
    * @generated
    */
-  int INTERFIX_PREFIX_LEXICAL = 13;
+  int INTERFIX_PREFIX_LEXICAL = 16;
 
   /**
    * The number of structural features of the '<em>Interfix Prefix Lexical</em>' class.
@@ -384,7 +468,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixCompountWords()
    * @generated
    */
-  int INTERFIX_COMPOUNT_WORDS = 14;
+  int INTERFIX_COMPOUNT_WORDS = 17;
 
   /**
    * The number of structural features of the '<em>Interfix Compount Words</em>' class.
@@ -403,7 +487,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getInterfixConnectionSyllabicGroup()
    * @generated
    */
-  int INTERFIX_CONNECTION_SYLLABIC_GROUP = 15;
+  int INTERFIX_CONNECTION_SYLLABIC_GROUP = 18;
 
   /**
    * The number of structural features of the '<em>Interfix Connection Syllabic Group</em>' class.
@@ -422,7 +506,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getBrackets()
    * @generated
    */
-  int BRACKETS = 16;
+  int BRACKETS = 19;
 
   /**
    * The number of structural features of the '<em>Brackets</em>' class.
@@ -441,7 +525,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getExpanded()
    * @generated
    */
-  int EXPANDED = 17;
+  int EXPANDED = 20;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -469,7 +553,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoExpanded()
    * @generated
    */
-  int NO_EXPANDED = 18;
+  int NO_EXPANDED = 21;
 
   /**
    * The number of structural features of the '<em>No Expanded</em>' class.
@@ -488,7 +572,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getEmendation()
    * @generated
    */
-  int EMENDATION = 19;
+  int EMENDATION = 22;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -516,7 +600,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoEmendation()
    * @generated
    */
-  int NO_EMENDATION = 20;
+  int NO_EMENDATION = 23;
 
   /**
    * The number of structural features of the '<em>No Emendation</em>' class.
@@ -535,7 +619,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getDisputableReading()
    * @generated
    */
-  int DISPUTABLE_READING = 21;
+  int DISPUTABLE_READING = 24;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -563,7 +647,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoDisputableReading()
    * @generated
    */
-  int NO_DISPUTABLE_READING = 22;
+  int NO_DISPUTABLE_READING = 25;
 
   /**
    * The number of structural features of the '<em>No Disputable Reading</em>' class.
@@ -582,7 +666,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getLacuna()
    * @generated
    */
-  int LACUNA = 23;
+  int LACUNA = 26;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -610,7 +694,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoLacuna()
    * @generated
    */
-  int NO_LACUNA = 24;
+  int NO_LACUNA = 27;
 
   /**
    * The number of structural features of the '<em>No Lacuna</em>' class.
@@ -629,7 +713,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getDeletion()
    * @generated
    */
-  int DELETION = 25;
+  int DELETION = 28;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -657,7 +741,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoDeletion()
    * @generated
    */
-  int NO_DELETION = 26;
+  int NO_DELETION = 29;
 
   /**
    * The number of structural features of the '<em>No Deletion</em>' class.
@@ -676,7 +760,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getExpandedColumn()
    * @generated
    */
-  int EXPANDED_COLUMN = 27;
+  int EXPANDED_COLUMN = 30;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -704,7 +788,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoExpandedColumn()
    * @generated
    */
-  int NO_EXPANDED_COLUMN = 28;
+  int NO_EXPANDED_COLUMN = 31;
 
   /**
    * The number of structural features of the '<em>No Expanded Column</em>' class.
@@ -723,7 +807,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getRasur()
    * @generated
    */
-  int RASUR = 29;
+  int RASUR = 32;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -751,7 +835,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoRasur()
    * @generated
    */
-  int NO_RASUR = 30;
+  int NO_RASUR = 33;
 
   /**
    * The number of structural features of the '<em>No Rasur</em>' class.
@@ -770,7 +854,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getAncientExpanded()
    * @generated
    */
-  int ANCIENT_EXPANDED = 31;
+  int ANCIENT_EXPANDED = 34;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -798,7 +882,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoAncientExpanded()
    * @generated
    */
-  int NO_ANCIENT_EXPANDED = 32;
+  int NO_ANCIENT_EXPANDED = 35;
 
   /**
    * The number of structural features of the '<em>No Ancient Expanded</em>' class.
@@ -817,7 +901,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getRestorationOverRasur()
    * @generated
    */
-  int RESTORATION_OVER_RASUR = 33;
+  int RESTORATION_OVER_RASUR = 36;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -845,7 +929,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoRestorationOverRasur()
    * @generated
    */
-  int NO_RESTORATION_OVER_RASUR = 34;
+  int NO_RESTORATION_OVER_RASUR = 37;
 
   /**
    * The number of structural features of the '<em>No Restoration Over Rasur</em>' class.
@@ -864,7 +948,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getPartialDestruction()
    * @generated
    */
-  int PARTIAL_DESTRUCTION = 35;
+  int PARTIAL_DESTRUCTION = 38;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -892,7 +976,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getNoPartialDestruction()
    * @generated
    */
-  int NO_PARTIAL_DESTRUCTION = 36;
+  int NO_PARTIAL_DESTRUCTION = 39;
 
   /**
    * The number of structural features of the '<em>No Partial Destruction</em>' class.
@@ -911,7 +995,7 @@ public interface EgyBtsPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getDestruction()
    * @generated
    */
-  int DESTRUCTION = 37;
+  int DESTRUCTION = 40;
 
   /**
    * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -993,6 +1077,69 @@ public interface EgyBtsPackage extends EPackage
    * @generated
    */
   EClass getSentenceItem();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.AbstractMarker <em>Abstract Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Abstract Marker</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.AbstractMarker
+   * @generated
+   */
+  EClass getAbstractMarker();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence <em>Ambivalence</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Ambivalence</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence
+   * @generated
+   */
+  EClass getAmbivalence();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence#getCases <em>Cases</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Cases</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence#getCases()
+   * @see #getAmbivalence()
+   * @generated
+   */
+  EReference getAmbivalence_Cases();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case <em>Case</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Case</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case
+   * @generated
+   */
+  EClass getCase();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case#getName()
+   * @see #getCase()
+   * @generated
+   */
+  EAttribute getCase_Name();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case#getItems <em>Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Items</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case#getItems()
+   * @see #getCase()
+   * @generated
+   */
+  EReference getCase_Items();
 
   /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Marker <em>Marker</em>}'.
@@ -1577,6 +1724,60 @@ public interface EgyBtsPackage extends EPackage
      * @generated
      */
     EClass SENTENCE_ITEM = eINSTANCE.getSentenceItem();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AbstractMarkerImpl <em>Abstract Marker</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AbstractMarkerImpl
+     * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getAbstractMarker()
+     * @generated
+     */
+    EClass ABSTRACT_MARKER = eINSTANCE.getAbstractMarker();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AmbivalenceImpl <em>Ambivalence</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.AmbivalenceImpl
+     * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getAmbivalence()
+     * @generated
+     */
+    EClass AMBIVALENCE = eINSTANCE.getAmbivalence();
+
+    /**
+     * The meta object literal for the '<em><b>Cases</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference AMBIVALENCE__CASES = eINSTANCE.getAmbivalence_Cases();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.CaseImpl <em>Case</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.CaseImpl
+     * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.EgyBtsPackageImpl#getCase()
+     * @generated
+     */
+    EClass CASE = eINSTANCE.getCase();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CASE__NAME = eINSTANCE.getCase_Name();
+
+    /**
+     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CASE__ITEMS = eINSTANCE.getCase_Items();
 
     /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.impl.MarkerImpl <em>Marker</em>}' class.

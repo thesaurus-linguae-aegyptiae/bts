@@ -15,6 +15,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Sentence/items"/>
     </genClasses>
     <genClasses ecoreClass="EgyBts.ecore#//SentenceItem"/>
+    <genClasses ecoreClass="EgyBts.ecore#//AbstractMarker"/>
+    <genClasses ecoreClass="EgyBts.ecore#//Ambivalence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Ambivalence/cases"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyBts.ecore#//Case">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Case/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyBts.ecore#//Case/items"/>
+    </genClasses>
     <genClasses ecoreClass="EgyBts.ecore#//Marker">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Marker/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyBts.ecore#//Marker/name"/>

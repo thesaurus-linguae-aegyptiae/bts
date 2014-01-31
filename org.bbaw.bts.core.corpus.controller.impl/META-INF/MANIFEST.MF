@@ -9,6 +9,7 @@ Service-Component: OSGI-INF/*.xml
 Import-Package: javax.inject,
  org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
+ org.bbaw.bts.commons,
  org.bbaw.bts.core.corpus.controller.partController,
  org.bbaw.bts.core.dao.util,
  org.bbaw.bts.core.services,
@@ -20,6 +21,7 @@ Import-Package: javax.inject,
  org.eclipse.e4.ui.services.internal.events,
  org.eclipse.e4.ui.workbench,
  org.eclipse.emf.ecore,
+ org.eclipse.emf.ecore.resource,
  org.eclipse.equinox.app;version="1.1.0",
  org.eclipse.jface.text,
  org.eclipse.jface.text.source,
@@ -51,5 +53,6 @@ Require-Bundle: org.eclipse.e4.core.di,
  org.bbaw.bts.commons.libs.elasticsearch,
  org.eclipse.e4.ui.services,
  org.eclipse.equinox.preferences;bundle-version="3.5.100",
- org.eclipse.jface.text
+ org.eclipse.jface.text,
+ org.bbaw.bts.ui.corpus.egy.commons
 Bundle-ActivationPolicy: lazy

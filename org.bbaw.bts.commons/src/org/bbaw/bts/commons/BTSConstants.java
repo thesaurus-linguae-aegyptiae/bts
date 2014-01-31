@@ -20,6 +20,8 @@ public class BTSConstants
 	public static final String FS = System.getProperty("file.separator");
 
 	public static final String ENCODING = "UTF-8";
+	public static final String TEXT_VERS_BREAK_MARKER = "VersbreakMarker";
+	public static final String TEXT_VERS_FRONTIER_MARKER = "VersFrontierMarker";
 
 	private BTSConstants()
 	{

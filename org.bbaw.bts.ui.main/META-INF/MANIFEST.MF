@@ -53,7 +53,7 @@ Bundle-ClassPath: .
 Export-Package: org.bbaw.bts.ui.main.handlers,
  org.bbaw.bts.ui.main.wizards.newProject
 Import-Package: javax.annotation;version="1.0.0",
- org.bbaw.bts.corpus.text.btsdsl.ui.internal,
+ org.bbaw.bts.corpus.text.egy.ui.internal,
  org.eclipse.e4.core.services.contributions,
  org.eclipse.e4.core.services.log,
  org.eclipse.xtext.builder.preferences,

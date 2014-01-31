@@ -62,8 +62,7 @@ public class BTSPassportItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addProtocolPropertyDescriptor(object);
@@ -218,8 +217,7 @@ public class BTSPassportItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT__DATE);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT__PASSPORT_ENTRIES);
@@ -277,8 +275,7 @@ public class BTSPassportItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSPassport.class))
-		{
+		switch (notification.getFeatureID(BTSPassport.class)) {
 			case BtsmodelPackage.BTS_PASSPORT__PROTOCOL:
 			case BtsmodelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
 			case BtsmodelPackage.BTS_PASSPORT__WB_SLIPS:

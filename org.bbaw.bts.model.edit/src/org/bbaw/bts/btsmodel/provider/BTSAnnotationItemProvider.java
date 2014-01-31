@@ -53,8 +53,7 @@ public class BTSAnnotationItemProvider extends BTSCorpusObjectItemProvider imple
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -71,8 +70,7 @@ public class BTSAnnotationItemProvider extends BTSCorpusObjectItemProvider imple
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_ANNOTATION__REFERENCES);
 		}
@@ -131,8 +129,7 @@ public class BTSAnnotationItemProvider extends BTSCorpusObjectItemProvider imple
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSAnnotation.class))
-		{
+		switch (notification.getFeatureID(BTSAnnotation.class)) {
 			case BtsmodelPackage.BTS_ANNOTATION__REFERENCES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

@@ -183,8 +183,7 @@ public class BTSDBConnectionImpl extends BTSIdentifiableItemImpl implements BTSD
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_CONNECTION__TYPE:
 				return getType();
 			case BtsmodelPackage.BTSDB_CONNECTION__MASTER_SERVER:
@@ -203,8 +202,7 @@ public class BTSDBConnectionImpl extends BTSIdentifiableItemImpl implements BTSD
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_CONNECTION__TYPE:
 				setType((String)newValue);
 				return;
@@ -226,8 +224,7 @@ public class BTSDBConnectionImpl extends BTSIdentifiableItemImpl implements BTSD
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_CONNECTION__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -249,8 +246,7 @@ public class BTSDBConnectionImpl extends BTSIdentifiableItemImpl implements BTSD
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTSDB_CONNECTION__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case BtsmodelPackage.BTSDB_CONNECTION__MASTER_SERVER:

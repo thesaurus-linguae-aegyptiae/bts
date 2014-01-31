@@ -14,6 +14,7 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSGraphic#getInnerSentenceOrder <em>Inner Sentence Order</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSGraphic#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSGraphic#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSGraphic#isIgnored <em>Ignored</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,5 +100,31 @@ public interface BTSGraphic extends BTSIdentifiableItem {
 	 * @generated
 	 */
 	void setReference(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Ignored</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Ignored</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Ignored</em>' attribute.
+	 * @see #setIgnored(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSGraphic_Ignored()
+	 * @model
+	 * @generated
+	 */
+	boolean isIgnored();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSGraphic#isIgnored <em>Ignored</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Ignored</em>' attribute.
+	 * @see #isIgnored()
+	 * @generated
+	 */
+	void setIgnored(boolean value);
 
 } // BTSGraphic

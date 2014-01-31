@@ -68,6 +68,9 @@ public class EgyBtsFactoryImpl extends EFactoryImpl implements EgyBtsFactory
       case EgyBtsPackage.TEXT_ITEM: return createTextItem();
       case EgyBtsPackage.SENTENCE: return createSentence();
       case EgyBtsPackage.SENTENCE_ITEM: return createSentenceItem();
+      case EgyBtsPackage.ABSTRACT_MARKER: return createAbstractMarker();
+      case EgyBtsPackage.AMBIVALENCE: return createAmbivalence();
+      case EgyBtsPackage.CASE: return createCase();
       case EgyBtsPackage.MARKER: return createMarker();
       case EgyBtsPackage.WORD: return createWord();
       case EgyBtsPackage.WORD_MIDDLE: return createWordMiddle();
@@ -149,6 +152,39 @@ public class EgyBtsFactoryImpl extends EFactoryImpl implements EgyBtsFactory
   {
     SentenceItemImpl sentenceItem = new SentenceItemImpl();
     return sentenceItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AbstractMarker createAbstractMarker()
+  {
+    AbstractMarkerImpl abstractMarker = new AbstractMarkerImpl();
+    return abstractMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Ambivalence createAmbivalence()
+  {
+    AmbivalenceImpl ambivalence = new AmbivalenceImpl();
+    return ambivalence;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Case createCase()
+  {
+    CaseImpl case_ = new CaseImpl();
+    return case_;
   }
 
   /**

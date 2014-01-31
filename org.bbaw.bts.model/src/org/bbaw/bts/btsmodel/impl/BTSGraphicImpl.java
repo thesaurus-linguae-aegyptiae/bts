@@ -6,6 +6,7 @@ import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -18,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSGraphicImpl#getInnerSentenceOrder <em>Inner Sentence Order</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSGraphicImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSGraphicImpl#getReference <em>Reference</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSGraphicImpl#isIgnored <em>Ignored</em>}</li>
  * </ul>
  * </p>
  *
@@ -83,6 +85,26 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 	 * @ordered
 	 */
 	protected String reference = REFERENCE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isIgnored() <em>Ignored</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIgnored()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean IGNORED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isIgnored() <em>Ignored</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isIgnored()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean ignored = IGNORED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -171,16 +193,43 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isIgnored() {
+		return ignored;
+	}
+
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generatedNOT
+	 */
+	public void setIgnored(boolean newIgnored) {
+		boolean oldIgnored = ignored;
+		ignored = newIgnored;
+		EObject parent = this.eContainer;
+		if (parent != null) {
+			parent.eNotify(new ENotificationImpl(this, Notification.SET,
+					BtsmodelPackage.BTS_GRAPHIC__IGNORED, oldIgnored, ignored));
+		}
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_GRAPHIC__IGNORED, oldIgnored, ignored));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_GRAPHIC__INNER_SENTENCE_ORDER:
 				return getInnerSentenceOrder();
 			case BtsmodelPackage.BTS_GRAPHIC__CODE:
 				return getCode();
 			case BtsmodelPackage.BTS_GRAPHIC__REFERENCE:
 				return getReference();
+			case BtsmodelPackage.BTS_GRAPHIC__IGNORED:
+				return isIgnored();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -192,8 +241,7 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_GRAPHIC__INNER_SENTENCE_ORDER:
 				setInnerSentenceOrder((Integer)newValue);
 				return;
@@ -202,6 +250,9 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 				return;
 			case BtsmodelPackage.BTS_GRAPHIC__REFERENCE:
 				setReference((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_GRAPHIC__IGNORED:
+				setIgnored((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -214,8 +265,7 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_GRAPHIC__INNER_SENTENCE_ORDER:
 				setInnerSentenceOrder(INNER_SENTENCE_ORDER_EDEFAULT);
 				return;
@@ -224,6 +274,9 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 				return;
 			case BtsmodelPackage.BTS_GRAPHIC__REFERENCE:
 				setReference(REFERENCE_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_GRAPHIC__IGNORED:
+				setIgnored(IGNORED_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -236,14 +289,15 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_GRAPHIC__INNER_SENTENCE_ORDER:
 				return innerSentenceOrder != INNER_SENTENCE_ORDER_EDEFAULT;
 			case BtsmodelPackage.BTS_GRAPHIC__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case BtsmodelPackage.BTS_GRAPHIC__REFERENCE:
 				return REFERENCE_EDEFAULT == null ? reference != null : !REFERENCE_EDEFAULT.equals(reference);
+			case BtsmodelPackage.BTS_GRAPHIC__IGNORED:
+				return ignored != IGNORED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -264,6 +318,8 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 		result.append(code);
 		result.append(", reference: ");
 		result.append(reference);
+		result.append(", ignored: ");
+		result.append(ignored);
 		result.append(')');
 		return result.toString();
 	}

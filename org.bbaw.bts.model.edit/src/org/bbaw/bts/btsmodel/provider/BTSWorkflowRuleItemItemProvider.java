@@ -56,8 +56,7 @@ public class BTSWorkflowRuleItemItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			add_idPropertyDescriptor(object);
@@ -164,8 +163,7 @@ public class BTSWorkflowRuleItemItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSWorkflowRuleItem.class))
-		{
+		switch (notification.getFeatureID(BTSWorkflowRuleItem.class)) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__ID:
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__PRIORITY:
 			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM__IGNORE:

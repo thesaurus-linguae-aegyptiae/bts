@@ -292,8 +292,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * @generated
 	 */
 	public EList<BTSRevision> getRevisions() {
-		if (revisions == null)
-		{
+		if (revisions == null) {
 			revisions = new EObjectContainmentEList<BTSRevision>(BTSRevision.class, this, BtsmodelPackage.BTS_CONFIGURATION__REVISIONS);
 		}
 		return revisions;
@@ -391,8 +390,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * @generated
 	 */
 	public EList<BTSConfig> getChildren() {
-		if (children == null)
-		{
+		if (children == null) {
 			children = new EObjectContainmentEList<BTSConfig>(BTSConfig.class, this, BtsmodelPackage.BTS_CONFIGURATION__CHILDREN);
 		}
 		return children;
@@ -567,8 +565,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
@@ -584,8 +581,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
 				return getChildren();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT:
@@ -622,8 +618,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends BTSConfig>)newValue);
@@ -673,8 +668,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
 				getChildren().clear();
 				return;
@@ -722,8 +716,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
 				return children != null && !children.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT:
@@ -759,26 +752,20 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == BTSConfig.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSConfig.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN: return BtsmodelPackage.BTS_CONFIG__CHILDREN;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSObservableObject.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
 				default: return -1;
 			}
 		}
-		if (baseClass == AdministrativDataObject.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == AdministrativDataObject.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS;
 				case BtsmodelPackage.BTS_CONFIGURATION__STATE: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE;
 				case BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE;
@@ -786,10 +773,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSObject.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSObject.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY: return BtsmodelPackage.BTS_OBJECT__SORT_KEY;
 				case BtsmodelPackage.BTS_CONFIGURATION__NAME: return BtsmodelPackage.BTS_OBJECT__NAME;
 				case BtsmodelPackage.BTS_CONFIGURATION__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
@@ -808,26 +793,20 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == BTSConfig.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSConfig.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_CONFIG__CHILDREN: return BtsmodelPackage.BTS_CONFIGURATION__CHILDREN;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSObservableObject.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT;
 				default: return -1;
 			}
 		}
-		if (baseClass == AdministrativDataObject.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == AdministrativDataObject.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS: return BtsmodelPackage.BTS_CONFIGURATION__REVISIONS;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE: return BtsmodelPackage.BTS_CONFIGURATION__STATE;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE: return BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE;
@@ -835,10 +814,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSObject.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSObject.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_OBJECT__SORT_KEY: return BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY;
 				case BtsmodelPackage.BTS_OBJECT__NAME: return BtsmodelPackage.BTS_CONFIGURATION__NAME;
 				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_CONFIGURATION__TYPE;
@@ -858,33 +835,25 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass)
 	{
-		if (baseClass == BTSConfig.class)
-		{
-			switch (baseOperationID)
-			{
+		if (baseClass == BTSConfig.class) {
+			switch (baseOperationID) {
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (baseOperationID)
-			{
+		if (baseClass == BTSObservableObject.class) {
+			switch (baseOperationID) {
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIGURATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 				default: return -1;
 			}
 		}
-		if (baseClass == AdministrativDataObject.class)
-		{
-			switch (baseOperationID)
-			{
+		if (baseClass == AdministrativDataObject.class) {
+			switch (baseOperationID) {
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSObject.class)
-		{
-			switch (baseOperationID)
-			{
+		if (baseClass == BTSObject.class) {
+			switch (baseOperationID) {
 				default: return -1;
 			}
 		}
@@ -899,8 +868,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
-		switch (operationID)
-		{
+		switch (operationID) {
 			case BtsmodelPackage.BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;

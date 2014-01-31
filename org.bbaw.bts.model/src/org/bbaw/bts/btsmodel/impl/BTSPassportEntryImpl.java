@@ -274,8 +274,7 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	 * @generated
 	 */
 	public EList<BTSPpSubentry> getSubentries() {
-		if (subentries == null)
-		{
+		if (subentries == null) {
 			subentries = new EObjectContainmentEList<BTSPpSubentry>(BTSPpSubentry.class, this, BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES);
 		}
 		return subentries;
@@ -288,8 +287,7 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
 				return ((InternalEList<?>)getSubentries()).basicRemove(otherEnd, msgs);
 		}
@@ -303,8 +301,7 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
 				return getProvider();
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__COMMENT:
@@ -329,8 +326,7 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
 				setProvider((String)newValue);
 				return;
@@ -361,8 +357,7 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
 				setProvider(PROVIDER_EDEFAULT);
 				return;
@@ -392,8 +387,7 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
 				return PROVIDER_EDEFAULT == null ? provider != null : !PROVIDER_EDEFAULT.equals(provider);
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__COMMENT:

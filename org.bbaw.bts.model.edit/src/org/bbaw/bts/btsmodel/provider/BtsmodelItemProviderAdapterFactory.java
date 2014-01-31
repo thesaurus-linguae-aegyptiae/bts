@@ -111,8 +111,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSTCObjectAdapter() {
-		if (btstcObjectItemProvider == null)
-		{
+		if (btstcObjectItemProvider == null) {
 			btstcObjectItemProvider = new BTSTCObjectItemProvider(this);
 		}
 
@@ -135,8 +134,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSTextAdapter() {
-		if (btsTextItemProvider == null)
-		{
+		if (btsTextItemProvider == null) {
 			btsTextItemProvider = new BTSTextItemProvider(this);
 		}
 
@@ -159,8 +157,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSSenctenceAdapter() {
-		if (btsSenctenceItemProvider == null)
-		{
+		if (btsSenctenceItemProvider == null) {
 			btsSenctenceItemProvider = new BTSSenctenceItemProvider(this);
 		}
 
@@ -183,8 +180,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSWordAdapter() {
-		if (btsWordItemProvider == null)
-		{
+		if (btsWordItemProvider == null) {
 			btsWordItemProvider = new BTSWordItemProvider(this);
 		}
 
@@ -208,8 +204,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSMarkerAdapter()
 	{
-		if (btsMarkerItemProvider == null)
-		{
+		if (btsMarkerItemProvider == null) {
 			btsMarkerItemProvider = new BTSMarkerItemProvider(this);
 		}
 
@@ -232,8 +227,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSListEntryAdapter() {
-		if (btsListEntryItemProvider == null)
-		{
+		if (btsListEntryItemProvider == null) {
 			btsListEntryItemProvider = new BTSListEntryItemProvider(this);
 		}
 
@@ -256,8 +250,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSPassportAdapter() {
-		if (btsPassportItemProvider == null)
-		{
+		if (btsPassportItemProvider == null) {
 			btsPassportItemProvider = new BTSPassportItemProvider(this);
 		}
 
@@ -280,8 +273,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSAmbivalenceAdapter() {
-		if (btsAmbivalenceItemProvider == null)
-		{
+		if (btsAmbivalenceItemProvider == null) {
 			btsAmbivalenceItemProvider = new BTSAmbivalenceItemProvider(this);
 		}
 
@@ -304,8 +296,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSLemmaCaseAdapter() {
-		if (btsLemmaCaseItemProvider == null)
-		{
+		if (btsLemmaCaseItemProvider == null) {
 			btsLemmaCaseItemProvider = new BTSLemmaCaseItemProvider(this);
 		}
 
@@ -328,8 +319,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSUserAdapter() {
-		if (btsUserItemProvider == null)
-		{
+		if (btsUserItemProvider == null) {
 			btsUserItemProvider = new BTSUserItemProvider(this);
 		}
 
@@ -352,8 +342,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSCommentAdapter() {
-		if (btsCommentItemProvider == null)
-		{
+		if (btsCommentItemProvider == null) {
 			btsCommentItemProvider = new BTSCommentItemProvider(this);
 		}
 
@@ -376,8 +365,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSInterTextReferenceAdapter() {
-		if (btsInterTextReferenceItemProvider == null)
-		{
+		if (btsInterTextReferenceItemProvider == null) {
 			btsInterTextReferenceItemProvider = new BTSInterTextReferenceItemProvider(this);
 		}
 
@@ -400,8 +388,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSAnnotationAdapter() {
-		if (btsAnnotationItemProvider == null)
-		{
+		if (btsAnnotationItemProvider == null) {
 			btsAnnotationItemProvider = new BTSAnnotationItemProvider(this);
 		}
 
@@ -424,8 +411,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSTranslationAdapter() {
-		if (btsTranslationItemProvider == null)
-		{
+		if (btsTranslationItemProvider == null) {
 			btsTranslationItemProvider = new BTSTranslationItemProvider(this);
 		}
 
@@ -448,8 +434,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSDateAdapter() {
-		if (btsDateItemProvider == null)
-		{
+		if (btsDateItemProvider == null) {
 			btsDateItemProvider = new BTSDateItemProvider(this);
 		}
 
@@ -472,8 +457,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSPassportEntryAdapter() {
-		if (btsPassportEntryItemProvider == null)
-		{
+		if (btsPassportEntryItemProvider == null) {
 			btsPassportEntryItemProvider = new BTSPassportEntryItemProvider(this);
 		}
 
@@ -496,8 +480,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSRelationAdapter() {
-		if (btsRelationItemProvider == null)
-		{
+		if (btsRelationItemProvider == null) {
 			btsRelationItemProvider = new BTSRelationItemProvider(this);
 		}
 
@@ -520,8 +503,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSConfigurationAdapter() {
-		if (btsConfigurationItemProvider == null)
-		{
+		if (btsConfigurationItemProvider == null) {
 			btsConfigurationItemProvider = new BTSConfigurationItemProvider(this);
 		}
 
@@ -544,8 +526,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSTextCorpusAdapter() {
-		if (btsTextCorpusItemProvider == null)
-		{
+		if (btsTextCorpusItemProvider == null) {
 			btsTextCorpusItemProvider = new BTSTextCorpusItemProvider(this);
 		}
 
@@ -568,8 +549,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSRevisionAdapter() {
-		if (btsRevisionItemProvider == null)
-		{
+		if (btsRevisionItemProvider == null) {
 			btsRevisionItemProvider = new BTSRevisionItemProvider(this);
 		}
 
@@ -592,8 +572,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSImageAdapter() {
-		if (btsImageItemProvider == null)
-		{
+		if (btsImageItemProvider == null) {
 			btsImageItemProvider = new BTSImageItemProvider(this);
 		}
 
@@ -616,8 +595,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSCorpusHeaderAdapter() {
-		if (btsCorpusHeaderItemProvider == null)
-		{
+		if (btsCorpusHeaderItemProvider == null) {
 			btsCorpusHeaderItemProvider = new BTSCorpusHeaderItemProvider(this);
 		}
 
@@ -640,8 +618,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSTimespanAdapter() {
-		if (btsTimespanItemProvider == null)
-		{
+		if (btsTimespanItemProvider == null) {
 			btsTimespanItemProvider = new BTSTimespanItemProvider(this);
 		}
 
@@ -664,8 +641,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSExternalReferenceAdapter() {
-		if (btsExternalReferenceItemProvider == null)
-		{
+		if (btsExternalReferenceItemProvider == null) {
 			btsExternalReferenceItemProvider = new BTSExternalReferenceItemProvider(this);
 		}
 
@@ -688,8 +664,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSGraphicAdapter() {
-		if (btsGraphicItemProvider == null)
-		{
+		if (btsGraphicItemProvider == null) {
 			btsGraphicItemProvider = new BTSGraphicItemProvider(this);
 		}
 
@@ -712,8 +687,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSTranslationsAdapter() {
-		if (btsTranslationsItemProvider == null)
-		{
+		if (btsTranslationsItemProvider == null) {
 			btsTranslationsItemProvider = new BTSTranslationsItemProvider(this);
 		}
 
@@ -736,8 +710,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSConfigItemAdapter() {
-		if (btsConfigItemItemProvider == null)
-		{
+		if (btsConfigItemItemProvider == null) {
 			btsConfigItemItemProvider = new BTSConfigItemItemProvider(this);
 		}
 
@@ -760,8 +733,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSPassportEditorConfigAdapter() {
-		if (btsPassportEditorConfigItemProvider == null)
-		{
+		if (btsPassportEditorConfigItemProvider == null) {
 			btsPassportEditorConfigItemProvider = new BTSPassportEditorConfigItemProvider(this);
 		}
 
@@ -784,8 +756,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSUserGroupAdapter() {
-		if (btsUserGroupItemProvider == null)
-		{
+		if (btsUserGroupItemProvider == null) {
 			btsUserGroupItemProvider = new BTSUserGroupItemProvider(this);
 		}
 
@@ -808,8 +779,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSListAdapter() {
-		if (btsListItemProvider == null)
-		{
+		if (btsListItemProvider == null) {
 			btsListItemProvider = new BTSListItemProvider(this);
 		}
 
@@ -832,8 +802,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSPpSubentryAdapter() {
-		if (btsPpSubentryItemProvider == null)
-		{
+		if (btsPpSubentryItemProvider == null) {
 			btsPpSubentryItemProvider = new BTSPpSubentryItemProvider(this);
 		}
 
@@ -856,8 +825,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Adapter createBTSListSubentryAdapter() {
-		if (btsListSubentryItemProvider == null)
-		{
+		if (btsListSubentryItemProvider == null) {
 			btsListSubentryItemProvider = new BTSListSubentryItemProvider(this);
 		}
 
@@ -881,8 +849,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSThsEntryAdapter()
 	{
-		if (btsThsEntryItemProvider == null)
-		{
+		if (btsThsEntryItemProvider == null) {
 			btsThsEntryItemProvider = new BTSThsEntryItemProvider(this);
 		}
 
@@ -906,8 +873,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSProjectAdapter()
 	{
-		if (btsProjectItemProvider == null)
-		{
+		if (btsProjectItemProvider == null) {
 			btsProjectItemProvider = new BTSProjectItemProvider(this);
 		}
 
@@ -931,8 +897,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSDBConnectionAdapter()
 	{
-		if (btsdbConnectionItemProvider == null)
-		{
+		if (btsdbConnectionItemProvider == null) {
 			btsdbConnectionItemProvider = new BTSDBConnectionItemProvider(this);
 		}
 
@@ -956,8 +921,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSWorkflowRuleAdapter()
 	{
-		if (btsWorkflowRuleItemProvider == null)
-		{
+		if (btsWorkflowRuleItemProvider == null) {
 			btsWorkflowRuleItemProvider = new BTSWorkflowRuleItemProvider(this);
 		}
 
@@ -981,8 +945,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSOperatorAdapter()
 	{
-		if (btsOperatorItemProvider == null)
-		{
+		if (btsOperatorItemProvider == null) {
 			btsOperatorItemProvider = new BTSOperatorItemProvider(this);
 		}
 
@@ -1006,8 +969,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createDBLeaseAdapter()
 	{
-		if (dbLeaseItemProvider == null)
-		{
+		if (dbLeaseItemProvider == null) {
 			dbLeaseItemProvider = new DBLeaseItemProvider(this);
 		}
 
@@ -1031,8 +993,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSProjectDBCollectionAdapter()
 	{
-		if (btsProjectDBCollectionItemProvider == null)
-		{
+		if (btsProjectDBCollectionItemProvider == null) {
 			btsProjectDBCollectionItemProvider = new BTSProjectDBCollectionItemProvider(this);
 		}
 
@@ -1056,8 +1017,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSDBCollectionRoleDescAdapter()
 	{
-		if (btsdbCollectionRoleDescItemProvider == null)
-		{
+		if (btsdbCollectionRoleDescItemProvider == null) {
 			btsdbCollectionRoleDescItemProvider = new BTSDBCollectionRoleDescItemProvider(this);
 		}
 
@@ -1081,8 +1041,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	@Override
 	public Adapter createBTSTextContentAdapter()
 	{
-		if (btsTextContentItemProvider == null)
-		{
+		if (btsTextContentItemProvider == null) {
 			btsTextContentItemProvider = new BTSTextContentItemProvider(this);
 		}
 
@@ -1137,11 +1096,9 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 */
 	@Override
 	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type))
-		{
+		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
-			{
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -1208,8 +1165,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	public void fireNotifyChanged(Notification notification) {
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null)
-		{
+		if (parentAdapterFactory != null) {
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}

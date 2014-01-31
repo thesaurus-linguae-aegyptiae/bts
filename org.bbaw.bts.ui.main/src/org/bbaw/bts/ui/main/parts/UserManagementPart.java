@@ -317,7 +317,11 @@ public class UserManagementPart
 		init();
 
 		Composite container = new Composite(parent, SWT.NONE);
-		container.setLayoutData(new GridData(GridData.FILL_BOTH)); // ######## cp: aukommentiert für windowbuilder
+		container.setLayoutData(new GridData(GridData.FILL_BOTH)); // ########
+																	// cp:
+																	// aukommentiert
+																	// für
+																	// windowbuilder
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		tabFolder = new TabFolder(container, SWT.NONE);
@@ -1965,6 +1969,7 @@ public class UserManagementPart
 	@Persist
 	public void save(MDirtyable dirty)
 	{
+		manageDirtyObjects(selectedProject, null);
 		boolean internalDirty = dirty != null ? dirty.isDirty() : true;
 		if (!dirtyUsers.isEmpty())
 		{

@@ -154,6 +154,15 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key.toString());
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		Map<String, String> options = new HashMap<String, String>();
+		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
+		System.out.println(uri);
+		try {
+			resource.load(options);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (resource.getContents().size() > 0)
 		{
 			Object o = resource.getContents().get(0);

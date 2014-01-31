@@ -90,8 +90,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	public NotificationChain basicSetPassport(BTSPassport newPassport, NotificationChain msgs) {
 		BTSPassport oldPassport = passport;
 		passport = newPassport;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT, oldPassport, newPassport);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -104,8 +103,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 * @generated
 	 */
 	public void setPassport(BTSPassport newPassport) {
-		if (newPassport != passport)
-		{
+		if (newPassport != passport) {
 			NotificationChain msgs = null;
 			if (passport != null)
 				msgs = ((InternalEObject)passport).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT, null, msgs);
@@ -125,8 +123,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 */
 	public EList<BTSWord> getWords()
 	{
-		if (words == null)
-		{
+		if (words == null) {
 			words = new EObjectContainmentEList<BTSWord>(BTSWord.class, this, BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS);
 		}
 		return words;
@@ -139,8 +136,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				return basicSetPassport(null, msgs);
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
@@ -156,8 +152,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				return getPassport();
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:
@@ -174,8 +169,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				setPassport((BTSPassport)newValue);
 				return;
@@ -194,8 +188,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				setPassport((BTSPassport)null);
 				return;
@@ -213,8 +206,7 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__PASSPORT:
 				return passport != null;
 			case BtsmodelPackage.BTS_LIST_SUBENTRY__WORDS:

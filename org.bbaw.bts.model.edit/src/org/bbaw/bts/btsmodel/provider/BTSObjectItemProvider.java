@@ -54,8 +54,7 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addSortKeyPropertyDescriptor(object);
@@ -209,8 +208,7 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSObject.class))
-		{
+		switch (notification.getFeatureID(BTSObject.class)) {
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 			case BtsmodelPackage.BTS_OBJECT__NAME:
 			case BtsmodelPackage.BTS_OBJECT__TYPE:

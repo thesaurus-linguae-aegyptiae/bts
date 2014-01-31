@@ -55,8 +55,7 @@ public class BTSReferencableItemItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			add_idPropertyDescriptor(object);
@@ -181,8 +180,7 @@ public class BTSReferencableItemItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSReferencableItem.class))
-		{
+		switch (notification.getFeatureID(BTSReferencableItem.class)) {
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID:

@@ -54,8 +54,7 @@ public class BTSImageItemProvider extends BTSCorpusObjectItemProvider implements
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addMediaTypePropertyDescriptor(object);
@@ -122,8 +121,7 @@ public class BTSImageItemProvider extends BTSCorpusObjectItemProvider implements
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSImage.class))
-		{
+		switch (notification.getFeatureID(BTSImage.class)) {
 			case BtsmodelPackage.BTS_IMAGE__MEDIA_TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

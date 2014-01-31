@@ -38,8 +38,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public BtsmodelSwitch() {
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = BtsmodelPackage.eINSTANCE;
 		}
 	}
@@ -66,10 +65,8 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 */
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
-		switch (classifierID)
-		{
-			case BtsmodelPackage.BTSTC_OBJECT:
-			{
+		switch (classifierID) {
+			case BtsmodelPackage.BTSTC_OBJECT: {
 				BTSTCObject btstcObject = (BTSTCObject)theEObject;
 				T result = caseBTSTCObject(btstcObject);
 				if (result == null) result = caseBTSCorpusObject(btstcObject);
@@ -81,8 +78,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TEXT:
-			{
+			case BtsmodelPackage.BTS_TEXT: {
 				BTSText btsText = (BTSText)theEObject;
 				T result = caseBTSText(btsText);
 				if (result == null) result = caseBTSCorpusObject(btsText);
@@ -94,8 +90,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_SENCTENCE:
-			{
+			case BtsmodelPackage.BTS_SENCTENCE: {
 				BTSSenctence btsSenctence = (BTSSenctence)theEObject;
 				T result = caseBTSSenctence(btsSenctence);
 				if (result == null) result = caseBTSTextItems(btsSenctence);
@@ -107,8 +102,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_WORD:
-			{
+			case BtsmodelPackage.BTS_WORD: {
 				BTSWord btsWord = (BTSWord)theEObject;
 				T result = caseBTSWord(btsWord);
 				if (result == null) result = caseBTSSentenceItem(btsWord);
@@ -121,8 +115,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_MARKER:
-			{
+			case BtsmodelPackage.BTS_MARKER: {
 				BTSMarker btsMarker = (BTSMarker)theEObject;
 				T result = caseBTSMarker(btsMarker);
 				if (result == null) result = caseBTSTextSentenceItem(btsMarker);
@@ -137,8 +130,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TEXT_ITEMS:
-			{
+			case BtsmodelPackage.BTS_TEXT_ITEMS: {
 				BTSTextItems btsTextItems = (BTSTextItems)theEObject;
 				T result = caseBTSTextItems(btsTextItems);
 				if (result == null) result = caseBTSReferencableItem(btsTextItems);
@@ -149,8 +141,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_SENTENCE_ITEM:
-			{
+			case BtsmodelPackage.BTS_SENTENCE_ITEM: {
 				BTSSentenceItem btsSentenceItem = (BTSSentenceItem)theEObject;
 				T result = caseBTSSentenceItem(btsSentenceItem);
 				if (result == null) result = caseBTSReferencableItem(btsSentenceItem);
@@ -161,8 +152,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_LIST_ENTRY:
-			{
+			case BtsmodelPackage.BTS_LIST_ENTRY: {
 				BTSListEntry btsListEntry = (BTSListEntry)theEObject;
 				T result = caseBTSListEntry(btsListEntry);
 				if (result == null) result = caseBTSCorpusObject(btsListEntry);
@@ -174,23 +164,20 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PASSPORT:
-			{
+			case BtsmodelPackage.BTS_PASSPORT: {
 				BTSPassport btsPassport = (BTSPassport)theEObject;
 				T result = caseBTSPassport(btsPassport);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT:
-			{
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT: {
 				AdministrativDataObject administrativDataObject = (AdministrativDataObject)theEObject;
 				T result = caseAdministrativDataObject(administrativDataObject);
 				if (result == null) result = caseBTSObservableObject(administrativDataObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_OBJECT:
-			{
+			case BtsmodelPackage.BTS_OBJECT: {
 				BTSObject btsObject = (BTSObject)theEObject;
 				T result = caseBTSObject(btsObject);
 				if (result == null) result = caseAdministrativDataObject(btsObject);
@@ -198,8 +185,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_AMBIVALENCE:
-			{
+			case BtsmodelPackage.BTS_AMBIVALENCE: {
 				BTSAmbivalence btsAmbivalence = (BTSAmbivalence)theEObject;
 				T result = caseBTSAmbivalence(btsAmbivalence);
 				if (result == null) result = caseBTSTextSentenceItem(btsAmbivalence);
@@ -213,8 +199,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_LEMMA_CASE:
-			{
+			case BtsmodelPackage.BTS_LEMMA_CASE: {
 				BTSLemmaCase btsLemmaCase = (BTSLemmaCase)theEObject;
 				T result = caseBTSLemmaCase(btsLemmaCase);
 				if (result == null) result = caseBTSReferencableItem(btsLemmaCase);
@@ -225,8 +210,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_USER:
-			{
+			case BtsmodelPackage.BTS_USER: {
 				BTSUser btsUser = (BTSUser)theEObject;
 				T result = caseBTSUser(btsUser);
 				if (result == null) result = caseBTSDBBaseObject(btsUser);
@@ -237,8 +221,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_COMMENT:
-			{
+			case BtsmodelPackage.BTS_COMMENT: {
 				BTSComment btsComment = (BTSComment)theEObject;
 				T result = caseBTSComment(btsComment);
 				if (result == null) result = caseBTSDBBaseObject(btsComment);
@@ -249,15 +232,13 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE:
-			{
+			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE: {
 				BTSInterTextReference btsInterTextReference = (BTSInterTextReference)theEObject;
 				T result = caseBTSInterTextReference(btsInterTextReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TEXT_SENTENCE_ITEM:
-			{
+			case BtsmodelPackage.BTS_TEXT_SENTENCE_ITEM: {
 				BTSTextSentenceItem btsTextSentenceItem = (BTSTextSentenceItem)theEObject;
 				T result = caseBTSTextSentenceItem(btsTextSentenceItem);
 				if (result == null) result = caseBTSSentenceItem(btsTextSentenceItem);
@@ -270,15 +251,13 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_REFERENCE:
-			{
+			case BtsmodelPackage.BTS_REFERENCE: {
 				BTSReference btsReference = (BTSReference)theEObject;
 				T result = caseBTSReference(btsReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_ANNOTATION:
-			{
+			case BtsmodelPackage.BTS_ANNOTATION: {
 				BTSAnnotation btsAnnotation = (BTSAnnotation)theEObject;
 				T result = caseBTSAnnotation(btsAnnotation);
 				if (result == null) result = caseBTSCorpusObject(btsAnnotation);
@@ -290,38 +269,33 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TRANSLATION:
-			{
+			case BtsmodelPackage.BTS_TRANSLATION: {
 				BTSTranslation btsTranslation = (BTSTranslation)theEObject;
 				T result = caseBTSTranslation(btsTranslation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_DATE:
-			{
+			case BtsmodelPackage.BTS_DATE: {
 				BTSDate btsDate = (BTSDate)theEObject;
 				T result = caseBTSDate(btsDate);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY:
-			{
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY: {
 				BTSPassportEntry btsPassportEntry = (BTSPassportEntry)theEObject;
 				T result = caseBTSPassportEntry(btsPassportEntry);
 				if (result == null) result = caseBTSIdentifiableItem(btsPassportEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_RELATION:
-			{
+			case BtsmodelPackage.BTS_RELATION: {
 				BTSRelation btsRelation = (BTSRelation)theEObject;
 				T result = caseBTSRelation(btsRelation);
 				if (result == null) result = caseBTSIdentifiableItem(btsRelation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_CONFIGURATION:
-			{
+			case BtsmodelPackage.BTS_CONFIGURATION: {
 				BTSConfiguration btsConfiguration = (BTSConfiguration)theEObject;
 				T result = caseBTSConfiguration(btsConfiguration);
 				if (result == null) result = caseBTSDBBaseObject(btsConfiguration);
@@ -333,16 +307,14 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTSDB_BASE_OBJECT:
-			{
+			case BtsmodelPackage.BTSDB_BASE_OBJECT: {
 				BTSDBBaseObject btsdbBaseObject = (BTSDBBaseObject)theEObject;
 				T result = caseBTSDBBaseObject(btsdbBaseObject);
 				if (result == null) result = caseBTSIdentifiableItem(btsdbBaseObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TEXT_CORPUS:
-			{
+			case BtsmodelPackage.BTS_TEXT_CORPUS: {
 				BTSTextCorpus btsTextCorpus = (BTSTextCorpus)theEObject;
 				T result = caseBTSTextCorpus(btsTextCorpus);
 				if (result == null) result = caseBTSCorpusObject(btsTextCorpus);
@@ -354,16 +326,14 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_REVISION:
-			{
+			case BtsmodelPackage.BTS_REVISION: {
 				BTSRevision btsRevision = (BTSRevision)theEObject;
 				T result = caseBTSRevision(btsRevision);
 				if (result == null) result = caseBTSIdentifiableItem(btsRevision);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_IMAGE:
-			{
+			case BtsmodelPackage.BTS_IMAGE: {
 				BTSImage btsImage = (BTSImage)theEObject;
 				T result = caseBTSImage(btsImage);
 				if (result == null) result = caseBTSCorpusObject(btsImage);
@@ -375,22 +345,19 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_CORPUS_HEADER:
-			{
+			case BtsmodelPackage.BTS_CORPUS_HEADER: {
 				BTSCorpusHeader btsCorpusHeader = (BTSCorpusHeader)theEObject;
 				T result = caseBTSCorpusHeader(btsCorpusHeader);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TIMESPAN:
-			{
+			case BtsmodelPackage.BTS_TIMESPAN: {
 				BTSTimespan btsTimespan = (BTSTimespan)theEObject;
 				T result = caseBTSTimespan(btsTimespan);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_CORPUS_OBJECT:
-			{
+			case BtsmodelPackage.BTS_CORPUS_OBJECT: {
 				BTSCorpusObject btsCorpusObject = (BTSCorpusObject)theEObject;
 				T result = caseBTSCorpusObject(btsCorpusObject);
 				if (result == null) result = caseBTSObject(btsCorpusObject);
@@ -401,15 +368,13 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE:
-			{
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE: {
 				BTSExternalReference btsExternalReference = (BTSExternalReference)theEObject;
 				T result = caseBTSExternalReference(btsExternalReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_REFERENCABLE_ITEM:
-			{
+			case BtsmodelPackage.BTS_REFERENCABLE_ITEM: {
 				BTSReferencableItem btsReferencableItem = (BTSReferencableItem)theEObject;
 				T result = caseBTSReferencableItem(btsReferencableItem);
 				if (result == null) result = caseBTSObject(btsReferencableItem);
@@ -419,23 +384,20 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_GRAPHIC:
-			{
+			case BtsmodelPackage.BTS_GRAPHIC: {
 				BTSGraphic btsGraphic = (BTSGraphic)theEObject;
 				T result = caseBTSGraphic(btsGraphic);
 				if (result == null) result = caseBTSIdentifiableItem(btsGraphic);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TRANSLATIONS:
-			{
+			case BtsmodelPackage.BTS_TRANSLATIONS: {
 				BTSTranslations btsTranslations = (BTSTranslations)theEObject;
 				T result = caseBTSTranslations(btsTranslations);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_CONFIG_ITEM:
-			{
+			case BtsmodelPackage.BTS_CONFIG_ITEM: {
 				BTSConfigItem btsConfigItem = (BTSConfigItem)theEObject;
 				T result = caseBTSConfigItem(btsConfigItem);
 				if (result == null) result = caseBTSConfig(btsConfigItem);
@@ -444,16 +406,14 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG:
-			{
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG: {
 				BTSPassportEditorConfig btsPassportEditorConfig = (BTSPassportEditorConfig)theEObject;
 				T result = caseBTSPassportEditorConfig(btsPassportEditorConfig);
 				if (result == null) result = caseBTSIdentifiableItem(btsPassportEditorConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_USER_GROUP:
-			{
+			case BtsmodelPackage.BTS_USER_GROUP: {
 				BTSUserGroup btsUserGroup = (BTSUserGroup)theEObject;
 				T result = caseBTSUserGroup(btsUserGroup);
 				if (result == null) result = caseBTSDBBaseObject(btsUserGroup);
@@ -464,8 +424,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_LIST:
-			{
+			case BtsmodelPackage.BTS_LIST: {
 				BTSList btsList = (BTSList)theEObject;
 				T result = caseBTSList(btsList);
 				if (result == null) result = caseBTSCorpusObject(btsList);
@@ -477,15 +436,13 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PP_SUBENTRY:
-			{
+			case BtsmodelPackage.BTS_PP_SUBENTRY: {
 				BTSPpSubentry btsPpSubentry = (BTSPpSubentry)theEObject;
 				T result = caseBTSPpSubentry(btsPpSubentry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_LIST_SUBENTRY:
-			{
+			case BtsmodelPackage.BTS_LIST_SUBENTRY: {
 				BTSListSubentry btsListSubentry = (BTSListSubentry)theEObject;
 				T result = caseBTSListSubentry(btsListSubentry);
 				if (result == null) result = caseBTSReferencableItem(btsListSubentry);
@@ -496,22 +453,19 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_CONFIG:
-			{
+			case BtsmodelPackage.BTS_CONFIG: {
 				BTSConfig btsConfig = (BTSConfig)theEObject;
 				T result = caseBTSConfig(btsConfig);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT:
-			{
+			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT: {
 				BTSObservableObject btsObservableObject = (BTSObservableObject)theEObject;
 				T result = caseBTSObservableObject(btsObservableObject);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_THS_ENTRY:
-			{
+			case BtsmodelPackage.BTS_THS_ENTRY: {
 				BTSThsEntry btsThsEntry = (BTSThsEntry)theEObject;
 				T result = caseBTSThsEntry(btsThsEntry);
 				if (result == null) result = caseBTSCorpusObject(btsThsEntry);
@@ -523,8 +477,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PROJECT:
-			{
+			case BtsmodelPackage.BTS_PROJECT: {
 				BTSProject btsProject = (BTSProject)theEObject;
 				T result = caseBTSProject(btsProject);
 				if (result == null) result = caseBTSObject(btsProject);
@@ -535,24 +488,21 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTSDB_CONNECTION:
-			{
+			case BtsmodelPackage.BTSDB_CONNECTION: {
 				BTSDBConnection btsdbConnection = (BTSDBConnection)theEObject;
 				T result = caseBTSDBConnection(btsdbConnection);
 				if (result == null) result = caseBTSIdentifiableItem(btsdbConnection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_WORKFLOW_RULE:
-			{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE: {
 				BTSWorkflowRule btsWorkflowRule = (BTSWorkflowRule)theEObject;
 				T result = caseBTSWorkflowRule(btsWorkflowRule);
 				if (result == null) result = caseBTSIdentifiableItem(btsWorkflowRule);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_OPERATOR:
-			{
+			case BtsmodelPackage.BTS_OPERATOR: {
 				BTSOperator btsOperator = (BTSOperator)theEObject;
 				T result = caseBTSOperator(btsOperator);
 				if (result == null) result = caseBTSWorkflowRuleItem(btsOperator);
@@ -561,8 +511,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM:
-			{
+			case BtsmodelPackage.BTS_WORKFLOW_RULE_ITEM: {
 				BTSWorkflowRuleItem btsWorkflowRuleItem = (BTSWorkflowRuleItem)theEObject;
 				T result = caseBTSWorkflowRuleItem(btsWorkflowRuleItem);
 				if (result == null) result = caseBTSObservableObject(btsWorkflowRuleItem);
@@ -570,8 +519,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.DB_LEASE:
-			{
+			case BtsmodelPackage.DB_LEASE: {
 				DBLease dbLease = (DBLease)theEObject;
 				T result = caseDBLease(dbLease);
 				if (result == null) result = caseBTSDBBaseObject(dbLease);
@@ -579,40 +527,43 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION:
-			{
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION: {
 				BTSProjectDBCollection btsProjectDBCollection = (BTSProjectDBCollection)theEObject;
 				T result = caseBTSProjectDBCollection(btsProjectDBCollection);
 				if (result == null) result = caseBTSIdentifiableItem(btsProjectDBCollection);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM:
-			{
+			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM: {
 				BTSIdentifiableItem btsIdentifiableItem = (BTSIdentifiableItem)theEObject;
 				T result = caseBTSIdentifiableItem(btsIdentifiableItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC:
-			{
+			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: {
 				BTSDBCollectionRoleDesc btsdbCollectionRoleDesc = (BTSDBCollectionRoleDesc)theEObject;
 				T result = caseBTSDBCollectionRoleDesc(btsdbCollectionRoleDesc);
 				if (result == null) result = caseBTSIdentifiableItem(btsdbCollectionRoleDesc);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_TEXT_CONTENT:
-			{
+			case BtsmodelPackage.BTS_TEXT_CONTENT: {
 				BTSTextContent btsTextContent = (BTSTextContent)theEObject;
 				T result = caseBTSTextContent(btsTextContent);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_AMBIVALENCE_ITEM:
-			{
+			case BtsmodelPackage.BTS_AMBIVALENCE_ITEM: {
 				BTSAmbivalenceItem btsAmbivalenceItem = (BTSAmbivalenceItem)theEObject;
 				T result = caseBTSAmbivalenceItem(btsAmbivalenceItem);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER: {
+				GraphicSelectionCounter graphicSelectionCounter = (GraphicSelectionCounter)theEObject;
+				T result = caseGraphicSelectionCounter(graphicSelectionCounter);
+				if (result == null) result = caseBTSDBBaseObject(graphicSelectionCounter);
+				if (result == null) result = caseBTSIdentifiableItem(graphicSelectionCounter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1458,6 +1409,21 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 */
 	public T caseBTSAmbivalenceItem(BTSAmbivalenceItem object)
 	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Graphic Selection Counter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Graphic Selection Counter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGraphicSelectionCounter(GraphicSelectionCounter object) {
 		return null;
 	}
 

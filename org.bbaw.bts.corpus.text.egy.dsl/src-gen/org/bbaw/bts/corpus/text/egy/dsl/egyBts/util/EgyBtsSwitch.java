@@ -101,10 +101,34 @@ public class EgyBtsSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EgyBtsPackage.ABSTRACT_MARKER:
+      {
+        AbstractMarker abstractMarker = (AbstractMarker)theEObject;
+        T result = caseAbstractMarker(abstractMarker);
+        if (result == null) result = caseSentenceItem(abstractMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyBtsPackage.AMBIVALENCE:
+      {
+        Ambivalence ambivalence = (Ambivalence)theEObject;
+        T result = caseAmbivalence(ambivalence);
+        if (result == null) result = caseSentenceItem(ambivalence);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyBtsPackage.CASE:
+      {
+        Case case_ = (Case)theEObject;
+        T result = caseCase(case_);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case EgyBtsPackage.MARKER:
       {
         Marker marker = (Marker)theEObject;
         T result = caseMarker(marker);
+        if (result == null) result = caseAbstractMarker(marker);
         if (result == null) result = caseSentenceItem(marker);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -515,6 +539,54 @@ public class EgyBtsSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseSentenceItem(SentenceItem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Abstract Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Abstract Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAbstractMarker(AbstractMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ambivalence</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ambivalence</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAmbivalence(Ambivalence object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Case</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Case</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCase(Case object)
   {
     return null;
   }

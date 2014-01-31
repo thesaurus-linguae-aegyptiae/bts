@@ -59,8 +59,7 @@ public class BTSInterTextReferenceItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addBeginIdPropertyDescriptor(object);
@@ -149,8 +148,7 @@ public class BTSInterTextReferenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSInterTextReference.class))
-		{
+		switch (notification.getFeatureID(BTSInterTextReference.class)) {
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID:
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__END_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

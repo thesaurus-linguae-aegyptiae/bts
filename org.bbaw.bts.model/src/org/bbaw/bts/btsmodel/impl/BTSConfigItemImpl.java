@@ -364,8 +364,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	{
 		BTSTranslations oldLabel = label;
 		label = newLabel;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, oldLabel, newLabel);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -378,8 +377,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 */
 	public void setLabel(BTSTranslations newLabel)
 	{
-		if (newLabel != label)
-		{
+		if (newLabel != label) {
 			NotificationChain msgs = null;
 			if (label != null)
 				msgs = ((InternalEObject)label).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__LABEL, null, msgs);
@@ -409,8 +407,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	{
 		BTSTranslations oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, oldDescription, newDescription);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -423,8 +420,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 */
 	public void setDescription(BTSTranslations newDescription)
 	{
-		if (newDescription != description)
-		{
+		if (newDescription != description) {
 			NotificationChain msgs = null;
 			if (description != null)
 				msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION, null, msgs);
@@ -497,8 +493,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	{
 		BTSPassportEditorConfig oldPassportEditorConfig = passportEditorConfig;
 		passportEditorConfig = newPassportEditorConfig;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, oldPassportEditorConfig, newPassportEditorConfig);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -511,8 +506,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 */
 	public void setPassportEditorConfig(BTSPassportEditorConfig newPassportEditorConfig)
 	{
-		if (newPassportEditorConfig != passportEditorConfig)
-		{
+		if (newPassportEditorConfig != passportEditorConfig) {
 			NotificationChain msgs = null;
 			if (passportEditorConfig != null)
 				msgs = ((InternalEObject)passportEditorConfig).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG, null, msgs);
@@ -573,8 +567,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 */
 	public EList<String> getOwnerType()
 	{
-		if (ownerType == null)
-		{
+		if (ownerType == null) {
 			ownerType = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE);
 		}
 		return ownerType;
@@ -586,8 +579,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 */
 	public EList<String> getReferencedType()
 	{
-		if (referencedType == null)
-		{
+		if (referencedType == null) {
 			referencedType = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE);
 		}
 		return referencedType;
@@ -600,8 +592,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 */
 	public EList<BTSWorkflowRuleItem> getRules()
 	{
-		if (rules == null)
-		{
+		if (rules == null) {
 			rules = new EObjectContainmentEList<BTSWorkflowRuleItem>(BTSWorkflowRuleItem.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__RULES);
 		}
 		return rules;
@@ -661,8 +652,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG_ITEM__LABEL:
 				return basicSetLabel(null, msgs);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__DESCRIPTION:
@@ -682,8 +672,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				return getPropertyChangeSupport();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__ID:
@@ -724,8 +713,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport((PropertyChangeSupport)newValue);
 				return;
@@ -782,8 +770,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport(PROPERTY_CHANGE_SUPPORT_EDEFAULT);
 				return;
@@ -837,8 +824,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT:
 				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__ID:
@@ -878,18 +864,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSObservableObject.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIG_ITEM__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 				default: return -1;
 			}
@@ -904,18 +886,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSObservableObject.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_CONFIG_ITEM__PROPERTY_CHANGE_SUPPORT;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_CONFIG_ITEM__ID;
 				default: return -1;
 			}
@@ -930,19 +908,15 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass)
 	{
-		if (baseClass == BTSObservableObject.class)
-		{
-			switch (baseOperationID)
-			{
+		if (baseClass == BTSObservableObject.class) {
+			switch (baseOperationID) {
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIG_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIG_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (baseOperationID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseOperationID) {
 				default: return -1;
 			}
 		}
@@ -956,8 +930,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
-		switch (operationID)
-		{
+		switch (operationID) {
 			case BtsmodelPackage.BTS_CONFIG_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;

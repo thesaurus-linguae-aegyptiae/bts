@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmi:id="_b1neUD_oEeOYuPzWUW3h3g">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_b1neUD_oEeOYuPzWUW3h3g">
   <imports xsi:type="basic:PartStack" xmi:id="_p1OfoECfEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.app.partstack.middle.top">
     <children xsi:type="basic:Part" xmi:id="_gt8fMD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
       <toolbar xmi:id="_j1eQ0D_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.0"/>
     </children>
   </imports>
   <imports xsi:type="commands:Category" xmi:id="_O6qLsF2gEeOwE8UUrLWumA" elementId="org.eclipse.ui.category.edit"/>
+  <imports xsi:type="commands:Command" xmi:id="_bJS74IJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.docStart"/>
+  <imports xsi:type="commands:Command" xmi:id="_guxWoIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.docEnd"/>
+  <imports xsi:type="commands:Command" xmi:id="_k0JQkIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.lineStart"/>
+  <imports xsi:type="commands:Command" xmi:id="_mv-EEIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.lineEnd"/>
+  <imports xsi:type="commands:Command" xmi:id="_oitNAIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.previous"/>
+  <imports xsi:type="commands:Command" xmi:id="_qNsvMIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.next"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q_x-IEChEeOsGJaKBBYPLQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.top">
-    <elements xsi:type="basic:Part" xmi:id="_RoAbwEChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
+    <elements xsi:type="basic:Part" xmi:id="_RoAbwEChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
       <toolbar xmi:id="_Vrll8EChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
     </elements>
     <elements xsi:type="basic:Part" xmi:id="_DXXH8Fw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart" label="EgyTextEditor" closeable="true">
@@ -16,13 +22,68 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_jbc5cEt8EeO3HNJi0pp4Qg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_l81REEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.command.insertTextModelElement" commandName="insertTextModelElement" category="_O6qLsF2gEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_CBI1QIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.command.htw.shortcut" commandName="Hieroglyph Type Writer Shortcut" category="_O6qLsF2gEeOwE8UUrLWumA">
+      <parameters xmi:id="_Ik5dMIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" name="HTW Shortcut Command Parameter"/>
+    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_n8FzEEt8EeO3HNJi0pp4Qg" featurename="handlers" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Handler" xmi:id="_sw17gEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.egy.handler.insertTextModel" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.test.InsertTextModelElementHandler" command="_l81REEt8EeO3HNJi0pp4Qg"/>
+    <elements xsi:type="commands:Handler" xmi:id="_4lhZ8IjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.handler.htw.shortcut" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.HTWShortcutHandler" command="_CBI1QIjGEeOBD8Gt6rzlog"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
     <elements xsi:type="basic:Part" xmi:id="_28ER0FKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.part.hierotw" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter" label="Hieroglyph Type Writer" closeable="true">
-      <toolbar xmi:id="_6ea-QFKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.3"/>
+      <toolbar xmi:id="_6ea-QFKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.3">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_tmNjIIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0sjTsIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.1" label="|&lt;" tooltip="Move selection to start of line." command="_k0JQkIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_4bttEIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.2" label="&lt;" tooltip="Move selection to previous word." command="_oitNAIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7RgOcIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.3" label=">" tooltip="Move selection to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_9vTtoIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.4" label=">|" tooltip="Move selection to end of line." command="_mv-EEIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_AvPCcIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.5" label=">||" tooltip="Move selection to end of document." command="_guxWoIJ4EeOX95-b2sMk-w"/>
+      </toolbar>
+    </elements>
+    <elements xsi:type="basic:Part" xmi:id="_QSWNcH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.part.lemmatizer" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmatizerPart" label="Lemmatizer" closeable="true">
+      <toolbar xmi:id="_WC2McH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.2">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_GaYAUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_HoKpIIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.1" label="|&lt;" tooltip="Move selection to start of line." command="_k0JQkIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_IECFwIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.2" label="&lt;" tooltip="Move selection to previous word." command="_oitNAIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_IgCsUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.3" label=">" tooltip="Move selection to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JHOoIIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.4" label=">|" tooltip="Move selection to end of line." command="_mv-EEIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Jf0uUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.5" label=">||" tooltip="Move selection to end of document." command="_guxWoIJ4EeOX95-b2sMk-w"/>
+      </toolbar>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ct758IjEEeOBD8Gt6rzlog" featurename="bindingContexts" parentElementId="org.eclipse.ui.contexts.editors">
+    <elements xsi:type="commands:BindingContext" xmi:id="_nQ9z0IjEEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.bindingcontext.htw" name="Hieroglyphe Typewriter Binding Context"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5LKIgIjEEeOBD8Gt6rzlog" featurename="bindingTables" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="commands:BindingTable" xmi:id="_NASf4IjFEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.bindingtable.htw" bindingContext="_nQ9z0IjEEeOBD8Gt6rzlog">
+      <bindings xmi:id="_UYW5oIjFEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.1" keySequence="M1+1" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_RteLQIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.0" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="1"/>
+      </bindings>
+      <bindings xmi:id="_Vnqv8IjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.2" keySequence="M1+2" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_Vnqv8YjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.2" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="2"/>
+      </bindings>
+      <bindings xmi:id="_VyF3QIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.3" keySequence="M1+3" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_VyF3QYjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.3" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="3"/>
+      </bindings>
+      <bindings xmi:id="_V3dfcIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.4" keySequence="M1+4" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_V3dfcYjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.4" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="4"/>
+      </bindings>
+      <bindings xmi:id="_V6JAAIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.5" keySequence="M1+5" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_V6JAAYjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.5" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="5"/>
+      </bindings>
+      <bindings xmi:id="_V8hloIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.6" keySequence="M1+6" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_V8hloYjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.6" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="6"/>
+      </bindings>
+      <bindings xmi:id="_WA2E8IjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.7" keySequence="M1+7" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_WA2E8YjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.7" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="7"/>
+      </bindings>
+      <bindings xmi:id="_WD-RcIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.8" keySequence="M1+8" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_WD-RcYjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.8" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="8"/>
+      </bindings>
+      <bindings xmi:id="_zmyPEIjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.keybinding.htw.9" keySequence="M1+9" command="_CBI1QIjGEeOBD8Gt6rzlog">
+        <parameters xmi:id="_zmyPEYjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.parameter.9" name="org.bbaw.bts.ui.corpus.egy.commandparameter.htw.shortcut" value="9"/>
+      </bindings>
     </elements>
   </fragments>
 </fragment:ModelFragments>

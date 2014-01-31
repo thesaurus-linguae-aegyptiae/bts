@@ -442,8 +442,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 * @generated
 	 */
 	public EList<BTSExternalReference> getExternalReferences() {
-		if (externalReferences == null)
-		{
+		if (externalReferences == null) {
 			externalReferences = new EObjectContainmentEList<BTSExternalReference>(BTSExternalReference.class, this, BtsmodelPackage.BTS_PP_SUBENTRY__EXTERNAL_REFERENCES);
 		}
 		return externalReferences;
@@ -466,8 +465,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	public NotificationChain basicSetTimespan(BTSTimespan newTimespan, NotificationChain msgs) {
 		BTSTimespan oldTimespan = timespan;
 		timespan = newTimespan;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PP_SUBENTRY__TIMESPAN, oldTimespan, newTimespan);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -480,8 +478,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 * @generated
 	 */
 	public void setTimespan(BTSTimespan newTimespan) {
-		if (newTimespan != timespan)
-		{
+		if (newTimespan != timespan) {
 			NotificationChain msgs = null;
 			if (timespan != null)
 				msgs = ((InternalEObject)timespan).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PP_SUBENTRY__TIMESPAN, null, msgs);
@@ -511,8 +508,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	public NotificationChain basicSetDescription(BTSTranslations newDescription, NotificationChain msgs) {
 		BTSTranslations oldDescription = description;
 		description = newDescription;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PP_SUBENTRY__DESCRIPTION, oldDescription, newDescription);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -525,8 +521,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 * @generated
 	 */
 	public void setDescription(BTSTranslations newDescription) {
-		if (newDescription != description)
-		{
+		if (newDescription != description) {
 			NotificationChain msgs = null;
 			if (description != null)
 				msgs = ((InternalEObject)description).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PP_SUBENTRY__DESCRIPTION, null, msgs);
@@ -556,8 +551,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	public NotificationChain basicSetTranslation(BTSTranslations newTranslation, NotificationChain msgs) {
 		BTSTranslations oldTranslation = translation;
 		translation = newTranslation;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PP_SUBENTRY__TRANSLATION, oldTranslation, newTranslation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -570,8 +564,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 * @generated
 	 */
 	public void setTranslation(BTSTranslations newTranslation) {
-		if (newTranslation != translation)
-		{
+		if (newTranslation != translation) {
 			NotificationChain msgs = null;
 			if (translation != null)
 				msgs = ((InternalEObject)translation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PP_SUBENTRY__TRANSLATION, null, msgs);
@@ -591,8 +584,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PP_SUBENTRY__EXTERNAL_REFERENCES:
 				return ((InternalEList<?>)getExternalReferences()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_PP_SUBENTRY__TIMESPAN:
@@ -612,8 +604,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PP_SUBENTRY__TYPE:
 				return getType();
 			case BtsmodelPackage.BTS_PP_SUBENTRY__SUBTYPE:
@@ -650,8 +641,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PP_SUBENTRY__TYPE:
 				setType((String)newValue);
 				return;
@@ -700,8 +690,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PP_SUBENTRY__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -749,8 +738,7 @@ public class BTSPpSubentryImpl extends MinimalEObjectImpl.Container implements B
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PP_SUBENTRY__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case BtsmodelPackage.BTS_PP_SUBENTRY__SUBTYPE:

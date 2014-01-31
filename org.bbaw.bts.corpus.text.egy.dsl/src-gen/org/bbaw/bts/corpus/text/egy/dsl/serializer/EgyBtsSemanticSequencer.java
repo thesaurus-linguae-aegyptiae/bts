@@ -2,7 +2,9 @@ package org.bbaw.bts.corpus.text.egy.dsl.serializer;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.AncientExpanded;
+import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Chars;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Deletion;
 import org.bbaw.bts.corpus.text.egy.dsl.egyBts.Destruction;
@@ -47,11 +49,24 @@ public class EgyBtsSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == EgyBtsPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
+			case EgyBtsPackage.AMBIVALENCE:
+				if(context == grammarAccess.getAmbivalenceRule() ||
+				   context == grammarAccess.getSentenceItemRule()) {
+					sequence_Ambivalence(context, (Ambivalence) semanticObject); 
+					return; 
+				}
+				else break;
 			case EgyBtsPackage.ANCIENT_EXPANDED:
 				if(context == grammarAccess.getAncientExpandedRule() ||
 				   context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_AncientExpanded(context, (AncientExpanded) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyBtsPackage.CASE:
+				if(context == grammarAccess.getCaseRule()) {
+					sequence_Case(context, (Case) semanticObject); 
 					return; 
 				}
 				else break;
@@ -239,7 +254,8 @@ public class EgyBtsSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				}
 				else break;
 			case EgyBtsPackage.MARKER:
-				if(context == grammarAccess.getMarkerRule() ||
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getMarkerRule() ||
 				   context == grammarAccess.getSentenceItemRule()) {
 					sequence_Marker(context, (Marker) semanticObject); 
 					return; 
@@ -295,9 +311,27 @@ public class EgyBtsSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
+	 *     (cases+=Case cases+=Case*)
+	 */
+	protected void sequence_Ambivalence(EObject context, Ambivalence semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     wChar+=NoAncientExpanded
 	 */
 	protected void sequence_AncientExpanded(EObject context, AncientExpanded semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (name=EGYSTRING items+=SentenceItem items+=SentenceItem*)
+	 */
+	protected void sequence_Case(EObject context, Case semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -453,7 +487,7 @@ public class EgyBtsSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (type=ID name=EGYSTRING)
+	 *     (type=EGYSTRING name=EGYSTRING)
 	 */
 	protected void sequence_Marker(EObject context, Marker semanticObject) {
 		if(errorAcceptor != null) {
@@ -464,7 +498,7 @@ public class EgyBtsSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getMarkerAccess().getTypeIDTerminalRuleCall_1_0(), semanticObject.getType());
+		feeder.accept(grammarAccess.getMarkerAccess().getTypeEGYSTRINGTerminalRuleCall_1_0(), semanticObject.getType());
 		feeder.accept(grammarAccess.getMarkerAccess().getNameEGYSTRINGTerminalRuleCall_2_0(), semanticObject.getName());
 		feeder.finish();
 	}

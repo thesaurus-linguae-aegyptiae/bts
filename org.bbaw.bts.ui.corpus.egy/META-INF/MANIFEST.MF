@@ -3,8 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: CorpusUIEgyptian
 Bundle-SymbolicName: org.bbaw.bts.ui.corpus.egy;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .,
+ swing2swt.jar
+Bundle-Activator: org.bbaw.bts.ui.egy.internal.Activator
 Bundle-Vendor: BBAW
-Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.bbaw.bts.ui.egy.parts.support
 Require-Bundle: org.eclipse.swt,
  org.bbaw.bts.commons,
  org.eclipse.e4.core.di,
@@ -19,19 +22,31 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.e4.ui.model.workbench;bundle-version="1.0.0",
  org.bbaw.bts.ui.font,
  org.eclipse.text,
+ javax.inject,
  org.eclipse.jface.text;bundle-version="3.8.100",
  org.bbaw.bts.ui.corpus.egy.commons,
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.xtext.ui;bundle-version="2.4.3",
- org.eclipse.xtext.util
+ org.eclipse.xtext.util,
+ org.eclipse.e4.ui.workbench;bundle-version="1.0.0",
+ org.eclipse.osgi.services;bundle-version="3.3.100",
+ org.eclipse.e4.core.contexts;bundle-version="1.3.0",
+ javax.annotation
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Bundle-ActivationPolicy: lazy
 Import-Package: e4.test.helper,
  javax.annotation;version="1.0.0",
  javax.inject,
  jsesh.editor,
  jsesh.hieroglyphs,
+ org.bbaw.bts.core.commons,
  org.bbaw.bts.core.corpus.controller.partController,
- org.bbaw.bts.corpus.text.btsdsl,
- org.bbaw.bts.corpus.text.btsdsl.ui.internal,
+ org.bbaw.bts.core.services,
+ org.bbaw.bts.corpus.text.egy,
+ org.bbaw.bts.corpus.text.egy.egyDsl,
+ org.bbaw.bts.corpus.text.egy.ui.internal,
+ org.bbaw.bts.ui.commons.text,
+ org.bbaw.bts.ui.commons.utils,
  org.eclipse.core.databinding.beans,
  org.eclipse.core.databinding.property.value,
  org.eclipse.core.runtime;version="3.4.0",
@@ -52,8 +67,3 @@ Import-Package: e4.test.helper,
  org.eclipse.ui.texteditor.spelling,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.ui.editor.embedded
-Bundle-ClassPath: .,
- swing2swt.jar
-Bundle-ActivationPolicy: lazy
-Bundle-Activator: org.bbaw.bts.ui.egy.internal.Activator
-Export-Package: org.bbaw.bts.ui.egy.parts.support

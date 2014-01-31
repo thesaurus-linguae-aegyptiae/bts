@@ -95,6 +95,21 @@ public class EgyBtsAdapterFactory extends AdapterFactoryImpl
         return createSentenceItemAdapter();
       }
       @Override
+      public Adapter caseAbstractMarker(AbstractMarker object)
+      {
+        return createAbstractMarkerAdapter();
+      }
+      @Override
+      public Adapter caseAmbivalence(Ambivalence object)
+      {
+        return createAmbivalenceAdapter();
+      }
+      @Override
+      public Adapter caseCase(Case object)
+      {
+        return createCaseAdapter();
+      }
+      @Override
       public Adapter caseMarker(Marker object)
       {
         return createMarkerAdapter();
@@ -342,6 +357,51 @@ public class EgyBtsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSentenceItemAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.AbstractMarker <em>Abstract Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.AbstractMarker
+   * @generated
+   */
+  public Adapter createAbstractMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence <em>Ambivalence</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Ambivalence
+   * @generated
+   */
+  public Adapter createAmbivalenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case <em>Case</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.dsl.egyBts.Case
+   * @generated
+   */
+  public Adapter createCaseAdapter()
   {
     return null;
   }

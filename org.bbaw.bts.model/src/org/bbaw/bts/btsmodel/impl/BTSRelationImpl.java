@@ -259,8 +259,7 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_RELATION__OBJECT_ID:
 				return getObjectId();
 			case BtsmodelPackage.BTS_RELATION__TYPE:
@@ -282,8 +281,7 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_RELATION__OBJECT_ID:
 				setObjectId((String)newValue);
 				return;
@@ -310,8 +308,7 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_RELATION__OBJECT_ID:
 				setObjectId(OBJECT_ID_EDEFAULT);
 				return;
@@ -338,8 +335,7 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_RELATION__OBJECT_ID:
 				return OBJECT_ID_EDEFAULT == null ? objectId != null : !OBJECT_ID_EDEFAULT.equals(objectId);
 			case BtsmodelPackage.BTS_RELATION__TYPE:

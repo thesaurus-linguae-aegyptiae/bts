@@ -301,8 +301,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 */
 	public EList<String> getUpdaters()
 	{
-		if (updaters == null)
-		{
+		if (updaters == null) {
 			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS);
 		}
 		return updaters;
@@ -315,8 +314,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 */
 	public EList<String> getReaders()
 	{
-		if (readers == null)
-		{
+		if (readers == null) {
 			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__READERS);
 		}
 		return readers;
@@ -328,8 +326,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 */
 	public EList<BTSRelation> getRelations()
 	{
-		if (relations == null)
-		{
+		if (relations == null) {
 			relations = new EObjectContainmentEList<BTSRelation>(BTSRelation.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS);
 		}
 		return relations;
@@ -352,8 +349,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	{
 		BTSPassport oldPassport = passport;
 		passport = newPassport;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT, oldPassport, newPassport);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -366,8 +362,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 */
 	public void setPassport(BTSPassport newPassport)
 	{
-		if (newPassport != passport)
-		{
+		if (newPassport != passport) {
 			NotificationChain msgs = null;
 			if (passport != null)
 				msgs = ((InternalEObject)passport).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT, null, msgs);
@@ -453,8 +448,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -470,8 +464,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				return get_id();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
@@ -504,8 +497,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				set_id((String)newValue);
 				return;
@@ -550,8 +542,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				set_id(_ID_EDEFAULT);
 				return;
@@ -593,8 +584,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
@@ -626,18 +616,14 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSDBBaseObject.class)
-		{
-			switch (derivedFeatureID)
-			{
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
@@ -656,18 +642,14 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass)
 	{
-		if (baseClass == BTSIdentifiableItem.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_CORPUS_OBJECT__ID;
 				default: return -1;
 			}
 		}
-		if (baseClass == BTSDBBaseObject.class)
-		{
-			switch (baseFeatureID)
-			{
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseFeatureID) {
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_CORPUS_OBJECT__REV;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED;

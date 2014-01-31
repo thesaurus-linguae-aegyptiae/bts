@@ -63,8 +63,7 @@ public class BTSConfigItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -82,8 +81,7 @@ public class BTSConfigItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN);
 		}
@@ -140,8 +138,7 @@ public class BTSConfigItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSConfig.class))
-		{
+		switch (notification.getFeatureID(BTSConfig.class)) {
 			case BtsmodelPackage.BTS_CONFIG__CHILDREN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

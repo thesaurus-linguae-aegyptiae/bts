@@ -98,8 +98,7 @@ public class BTSOperatorImpl extends BTSWorkflowRuleItemImpl implements BTSOpera
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OPERATOR__OPPERATOR:
 				return getOpperator();
 		}
@@ -114,8 +113,7 @@ public class BTSOperatorImpl extends BTSWorkflowRuleItemImpl implements BTSOpera
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OPERATOR__OPPERATOR:
 				setOpperator((String)newValue);
 				return;
@@ -131,8 +129,7 @@ public class BTSOperatorImpl extends BTSWorkflowRuleItemImpl implements BTSOpera
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OPERATOR__OPPERATOR:
 				setOpperator(OPPERATOR_EDEFAULT);
 				return;
@@ -148,8 +145,7 @@ public class BTSOperatorImpl extends BTSWorkflowRuleItemImpl implements BTSOpera
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OPERATOR__OPPERATOR:
 				return OPPERATOR_EDEFAULT == null ? opperator != null : !OPPERATOR_EDEFAULT.equals(opperator);
 		}

@@ -57,8 +57,7 @@ public class BTSWorkflowRuleItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addActionsPropertyDescriptor(object);
@@ -196,8 +195,7 @@ public class BTSWorkflowRuleItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_WORKFLOW_RULE__SUB_RULES);
 		}
@@ -257,8 +255,7 @@ public class BTSWorkflowRuleItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSWorkflowRule.class))
-		{
+		switch (notification.getFeatureID(BTSWorkflowRule.class)) {
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__ACTIONS:
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__ACCEPT_MESSAGE:
 			case BtsmodelPackage.BTS_WORKFLOW_RULE__OCL:

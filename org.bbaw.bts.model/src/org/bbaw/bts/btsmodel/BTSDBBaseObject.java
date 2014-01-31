@@ -90,7 +90,7 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * @return the value of the '<em>Locked</em>' attribute.
 	 * @see #setLocked(boolean)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Locked()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	boolean isLocked();

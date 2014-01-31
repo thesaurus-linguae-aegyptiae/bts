@@ -261,8 +261,7 @@ public class BTSDateImpl extends MinimalEObjectImpl.Container implements BTSDate
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_DATE__TYPE:
 				return getType();
 			case BtsmodelPackage.BTS_DATE__YEAR:
@@ -284,8 +283,7 @@ public class BTSDateImpl extends MinimalEObjectImpl.Container implements BTSDate
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_DATE__TYPE:
 				setType((String)newValue);
 				return;
@@ -312,8 +310,7 @@ public class BTSDateImpl extends MinimalEObjectImpl.Container implements BTSDate
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_DATE__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
@@ -340,8 +337,7 @@ public class BTSDateImpl extends MinimalEObjectImpl.Container implements BTSDate
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_DATE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case BtsmodelPackage.BTS_DATE__YEAR:

@@ -90,8 +90,7 @@ public abstract class BTSIdentifiableItemImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID:
 				return get_id();
 		}
@@ -105,8 +104,7 @@ public abstract class BTSIdentifiableItemImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID:
 				set_id((String)newValue);
 				return;
@@ -121,8 +119,7 @@ public abstract class BTSIdentifiableItemImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID:
 				set_id(_ID_EDEFAULT);
 				return;
@@ -137,8 +134,7 @@ public abstract class BTSIdentifiableItemImpl extends MinimalEObjectImpl.Contain
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID:
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 		}

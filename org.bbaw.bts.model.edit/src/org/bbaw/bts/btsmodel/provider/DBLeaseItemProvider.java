@@ -67,8 +67,7 @@ public class DBLeaseItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addPathPropertyDescriptor(object);
@@ -210,8 +209,7 @@ public class DBLeaseItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(DBLease.class))
-		{
+		switch (notification.getFeatureID(DBLease.class)) {
 			case BtsmodelPackage.DB_LEASE__PATH:
 			case BtsmodelPackage.DB_LEASE__OBJECT_ID:
 			case BtsmodelPackage.DB_LEASE__USER_ID:

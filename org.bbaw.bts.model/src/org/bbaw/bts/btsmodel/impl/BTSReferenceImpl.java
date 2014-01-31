@@ -92,8 +92,7 @@ public abstract class BTSReferenceImpl extends MinimalEObjectImpl.Container impl
 	 * @generated
 	 */
 	public EList<BTSInterTextReference> getParts() {
-		if (parts == null)
-		{
+		if (parts == null) {
 			parts = new EObjectContainmentEList<BTSInterTextReference>(BTSInterTextReference.class, this, BtsmodelPackage.BTS_REFERENCE__PARTS);
 		}
 		return parts;
@@ -127,8 +126,7 @@ public abstract class BTSReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCE__PARTS:
 				return ((InternalEList<?>)getParts()).basicRemove(otherEnd, msgs);
 		}
@@ -142,8 +140,7 @@ public abstract class BTSReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCE__PARTS:
 				return getParts();
 			case BtsmodelPackage.BTS_REFERENCE__OBJECT_ID:
@@ -160,8 +157,7 @@ public abstract class BTSReferenceImpl extends MinimalEObjectImpl.Container impl
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCE__PARTS:
 				getParts().clear();
 				getParts().addAll((Collection<? extends BTSInterTextReference>)newValue);
@@ -180,8 +176,7 @@ public abstract class BTSReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCE__PARTS:
 				getParts().clear();
 				return;
@@ -199,8 +194,7 @@ public abstract class BTSReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_REFERENCE__PARTS:
 				return parts != null && !parts.isEmpty();
 			case BtsmodelPackage.BTS_REFERENCE__OBJECT_ID:

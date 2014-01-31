@@ -64,8 +64,7 @@ public class BTSObservableObjectItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addPropertyChangeSupportPropertyDescriptor(object);
@@ -124,8 +123,7 @@ public class BTSObservableObjectItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSObservableObject.class))
-		{
+		switch (notification.getFeatureID(BTSObservableObject.class)) {
 			case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

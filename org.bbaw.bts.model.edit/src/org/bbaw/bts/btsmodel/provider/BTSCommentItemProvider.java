@@ -58,8 +58,7 @@ public class BTSCommentItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addPropertyChangeSupportPropertyDescriptor(object);
@@ -337,8 +336,7 @@ public class BTSCommentItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_COMMENT__REFERENCES);
@@ -395,8 +393,7 @@ public class BTSCommentItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSComment.class))
-		{
+		switch (notification.getFeatureID(BTSComment.class)) {
 			case BtsmodelPackage.BTS_COMMENT__PROPERTY_CHANGE_SUPPORT:
 			case BtsmodelPackage.BTS_COMMENT__STATE:
 			case BtsmodelPackage.BTS_COMMENT__REVISION_STATE:

@@ -74,8 +74,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	public NotificationChain basicSetHeader(BTSCorpusHeader newHeader, NotificationChain msgs) {
 		BTSCorpusHeader oldHeader = header;
 		header = newHeader;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_TEXT_CORPUS__HEADER, oldHeader, newHeader);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -88,8 +87,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 * @generated
 	 */
 	public void setHeader(BTSCorpusHeader newHeader) {
-		if (newHeader != header)
-		{
+		if (newHeader != header) {
 			NotificationChain msgs = null;
 			if (header != null)
 				msgs = ((InternalEObject)header).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_TEXT_CORPUS__HEADER, null, msgs);
@@ -109,8 +107,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CORPUS__HEADER:
 				return basicSetHeader(null, msgs);
 		}
@@ -124,8 +121,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CORPUS__HEADER:
 				return getHeader();
 		}
@@ -139,8 +135,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CORPUS__HEADER:
 				setHeader((BTSCorpusHeader)newValue);
 				return;
@@ -155,8 +150,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CORPUS__HEADER:
 				setHeader((BTSCorpusHeader)null);
 				return;
@@ -171,8 +165,7 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TEXT_CORPUS__HEADER:
 				return header != null;
 		}

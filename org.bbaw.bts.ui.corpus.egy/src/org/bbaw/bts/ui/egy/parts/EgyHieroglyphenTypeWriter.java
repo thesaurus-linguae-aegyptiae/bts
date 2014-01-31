@@ -8,32 +8,49 @@ package org.bbaw.bts.ui.egy.parts;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import jsesh.editor.JMDCEditor;
-import jsesh.hieroglyphs.CompositeHieroglyphsManager;
 import jsesh.hieroglyphs.DefaultHieroglyphicFontManager;
 import jsesh.hieroglyphs.HieroglyphicFontManager;
 import jsesh.hieroglyphs.HieroglyphsManager;
 import jsesh.hieroglyphs.ManuelDeCodage;
-import jsesh.hieroglyphs.PossibilitiesList;
-import jsesh.hieroglyphs.Possibility;
+import jsesh.mdc.MDCSyntaxError;
+import jsesh.mdc.utils.MDCNormalizer;
 
 import org.bbaw.bts.btsmodel.BTSGraphic;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSWord;
+import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.services.EContextService;
+import org.eclipse.e4.ui.services.IServiceConstants;
+import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -42,19 +59,33 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventHandler;
 
-import swing2swt.layout.FlowLayout;
-
-public class EgyHieroglyphenTypeWriter
+public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
+		EventHandler
 {
+	private static final String MDC_MARKER = "\\red";
+	private static final String MDC_IGNORE = "\\\\i";
+	private static final String HTW_CONTEXT_ID = "org.bbaw.bts.ui.corpus.egy.bindingcontext.htw";
 	@Inject
 	private UISynchronize sync;
 	@Inject
 	private BTSTextEditorController textEditorController;
+	// @Inject
+	// GraphicSelectionCounterService service;
 	@Inject
 	private EPartService partService;
+	@Inject
+	private EventBroker eventBroker;
+	@Inject
+	private HieroglyphTypeWriterController htwController;
+	@Inject
+	private EContextService contextService;
 	private Text hierotw_text;
 	// private WordOccurrence wordOccurrence;
 	// private JTextAsWordsEditorPanel ramsesEditor;
@@ -72,8 +103,22 @@ public class EgyHieroglyphenTypeWriter
 
 	private ManuelDeCodage manuelDeCodage = ManuelDeCodage.instance;
 
-	private CompositeHieroglyphsManager hieroglyphManager = new CompositeHieroglyphsManager()
-			.getInstance();
+
+	private boolean selfSelecting;
+	private Button firstGlyph_Button;
+	private Button previousGlyph_Button;
+	private Button nextGlyph_Button;
+	private Button lastGlyph_Button;
+	private Spinner glyphOrder_spinner;
+	private Button ignoreGlyph_Button;
+	private EList<BTSGraphic> wordGraphics;
+	private MDCNormalizer mdcNormalizer;
+	private BTSGraphic selectedGlyphe;
+	private String beforeImageMdC;
+	private Map hieroglyphSelectionCounterCacheMap = new HashMap<URI, Object>();
+	private String htwProposals;
+	private BTSObject selectionObject;
+	private boolean loaded;
 
 	public EgyHieroglyphenTypeWriter()
 	{
@@ -85,59 +130,23 @@ public class EgyHieroglyphenTypeWriter
 	@PostConstruct
 	public void createControls(Composite parent)
 	{
+		eventBroker.subscribe(BTSUIConstants.EVENT_HTW_SHORTCUT, this);
+		mdcNormalizer = new MDCNormalizer();
 		parent.setLayout(new GridLayout(1, false));
 
 		if (partService != null)
 		{
 			Collection<MPart> parts = partService.getParts();
-			for (MPart p : parts)
-			{
-				if (p.getObject() instanceof EgyptEditorPart)
-				{
-					EgyptEditorPart editorPart = (EgyptEditorPart) p.getObject();
-					// ramsesEditor = editorPart.getRamsesTextEditorPanel();
-					break;
 
-				}
-			}
 		}
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(2, false));
+		((GridLayout) composite.getLayout()).marginHeight = 0;
+		((GridLayout) composite.getLayout()).marginWidth = 0;
+
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-		Composite composite_1 = new Composite(composite, SWT.NONE);
-		composite_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		composite_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-
-		Button button = new Button(composite_1, SWT.NONE);
-		button.setText("||<");
-
-		Button button_1 = new Button(composite_1, SWT.NONE);
-		button_1.setText("|<");
-
-		Button button_2 = new Button(composite_1, SWT.NONE);
-		button_2.setText("<");
-
-		Button button_toNextWord = new Button(composite_1, SWT.NONE);
-		button_toNextWord.setText(">");
-		button_toNextWord.addSelectionListener(new SelectionAdapter()
-		{
-
-			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-
-		Button button_4 = new Button(composite_1, SWT.NONE);
-		button_4.setText(">|");
-
-		Button button_5 = new Button(composite_1, SWT.NONE);
-		button_5.setText(">||");
 
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -161,21 +170,18 @@ public class EgyHieroglyphenTypeWriter
 						suffix = tok.nextToken();
 					}
 					jseshEditorProposals.clearText();
+					String normalizedMdC = suffix;
+					try {
+						normalizedMdC = mdcNormalizer.normalize(suffix);
+					} catch (MDCSyntaxError ee) {
+						// TODO Auto-generated catch block
+						ee.printStackTrace();
+					}
+					if (normalizedMdC != null && !"".equals(normalizedMdC)) {
 
-					if (suffix != null && !"".equals(suffix)) {
-						PossibilitiesList list = hieroglyphManager
-								.getCodesStartingWith(suffix);
 						String mdc = "";
-						for (int i = 0; i < list.asList().size() && i < 5; i++) {
-							Possibility pos = list.asList().get(i);
-							// String prop = pos.getCode();// + "-\"" + i +
-							// "\"";
-							if (pos != null && !"".equals(pos.getCode())) {
-								mdc += "-" + pos.getCode() + "-\""
-										+ pos.getCode() + "\"\"" + i
-										+ "\"\\red";
-							}
-						}
+						mdc = getHieroglypheProposals(normalizedMdC);
+
 						if (mdc.length() > 1) {
 							mdc = mdc.substring(1, mdc.length());
 							System.out.println(mdc);
@@ -184,7 +190,13 @@ public class EgyHieroglyphenTypeWriter
 					}
 					try
 					{
-						jseshEditor.setMDCText(hierotw_text.getText());
+						String mdc = hierotw_text.getText();
+						System.out.println(mdc);
+						if (!(mdc.endsWith(":") || mdc.endsWith("-")
+								|| mdc.endsWith("<") || mdc.endsWith("*") || mdc
+								.endsWith("["))) {
+							jseshEditor.setMDCText(mdc.toUpperCase());
+						}
 					} catch (Exception e1)
 					{
 						// TODO Auto-generated catch block
@@ -194,10 +206,98 @@ public class EgyHieroglyphenTypeWriter
 
 			}
 		});
-		new Label(composite, SWT.NONE);
+		hierotw_text.addKeyListener(new KeyListener() {
 
+			@Override
+			public void keyReleased(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.keyCode == SWT.CR) {
+					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT);
+				}
+
+			}
+		});
+		Group manageGlyphs_composite = new Group(parent, SWT.NONE);
+		manageGlyphs_composite.setLayout(new GridLayout(8, false));
+		manageGlyphs_composite.setLayoutData(new GridData(SWT.FILL, SWT.TOP,
+				true, false, 1, 1));
+
+		manageGlyphs_composite.setText("Select Single Glyphs");
+
+		firstGlyph_Button = new Button(manageGlyphs_composite, SWT.NONE);
+		firstGlyph_Button.setText("|<");
+		firstGlyph_Button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shiftGlyphSelection(-1000);
+
+			}
+		});
+
+		previousGlyph_Button = new Button(manageGlyphs_composite, SWT.NONE);
+		previousGlyph_Button.setText("<");
+		previousGlyph_Button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shiftGlyphSelection(-1);
+
+			}
+		});
+		nextGlyph_Button = new Button(manageGlyphs_composite, SWT.NONE);
+		nextGlyph_Button.setText(">");
+		nextGlyph_Button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shiftGlyphSelection(1);
+
+			}
+		});
+		lastGlyph_Button = new Button(manageGlyphs_composite, SWT.NONE);
+		lastGlyph_Button.setText(">|");
+		lastGlyph_Button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				shiftGlyphSelection(1000);
+
+			}
+		});
+		Label lblNewLabel_1 = new Label(manageGlyphs_composite, SWT.NONE);
+		lblNewLabel_1.setText("Order in Sentence");
+
+		glyphOrder_spinner = new Spinner(manageGlyphs_composite, SWT.BORDER);
+		glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (selectedGlyphe != null) {
+					selectedGlyphe.setInnerSentenceOrder(glyphOrder_spinner
+							.getSelection());
+				}
+
+			}
+		});
+		ignoreGlyph_Button = new Button(manageGlyphs_composite, SWT.CHECK);
+		ignoreGlyph_Button.setText("Ignore Glyph");
+		ignoreGlyph_Button.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				setSelectedGlypheIgnored(ignoreGlyph_Button.getSelection());
+
+			}
+		});
 		Composite comEmbededProposals = new Composite(composite, SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
-		comEmbededProposals.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
+		comEmbededProposals.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
+				true, 2, 1));
 		Frame frameProposals = SWT_AWT.new_Frame(comEmbededProposals);
 
 		jseshEditorProposals = new JMDCEditor();
@@ -210,7 +310,8 @@ public class EgyHieroglyphenTypeWriter
 		comEmbededProposals.layout();
 
 		Composite comEmbeded = new Composite(composite, SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
-		comEmbeded.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
+		comEmbeded.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
+				2, 1));
 
 		// comEmbeded.setLayout(new FillLayout());
 		Frame frame = SWT_AWT.new_Frame(comEmbeded);
@@ -223,6 +324,102 @@ public class EgyHieroglyphenTypeWriter
 		frame.add(jseshEditor);
 
 		comEmbeded.layout();
+		loaded = true;
+		if (selectionObject != null)
+		{
+			setSelection(selectionObject);
+		}
+	}
+
+	private String getHieroglypheProposals(String normalizedMdC) {
+
+		String proposals = htwController.getHieroglypheProposalsAsMdCString(
+				normalizedMdC,
+				hieroglyphSelectionCounterCacheMap);
+		htwProposals = proposals;
+		return proposals;
+
+	}
+
+	private void setSelectedGlypheIgnored(boolean selection) {
+		if (selectedGlyphe != null) {
+			selectedGlyphe.setIgnored(selection);
+			// String normalizedMdC = transformWordToMdCString(currentWord);
+			// MDCNormalizer d = new MDCNormalizer();
+			// try {
+			// normalizedMdC = d.normalize(normalizedMdC);
+			// } catch (MDCSyntaxError e) {
+			// // TODO Auto-generated catch block
+			// e.printStackTrace();
+			// }
+			// int selectedGlypheIndex = selectedGlyphe != null ? wordGraphics
+			// .indexOf(selectedGlyphe) : 0;
+			// String glypheSelectedMdC = setGlypheSelectionInMdC(normalizedMdC,
+			// selectedGlypheIndex);
+			//
+			// hierotw_text.setText(glypheSelectedMdC);
+			// hierotw_text.setSelection(hierotw_text.getText().length());
+			// jseshEditor.setMDCText(glypheSelectedMdC);
+		}
+		
+	}
+
+	private void shiftGlyphSelection(int i) {
+		BTSGraphic oldGlyphe = selectedGlyphe;
+		int selectedGlypheIndex = oldGlyphe != null ? wordGraphics
+				.indexOf(oldGlyphe) : 0;
+		int newSelectedGlypheIndex = selectedGlypheIndex;
+		if (i == 1000) // jump to end of line
+		{
+			newSelectedGlypheIndex = wordGraphics.size() - 1;
+		} else if (i == -1000) // jump to start of line
+		{
+			newSelectedGlypheIndex = 0;
+		} else if (oldGlyphe == null) {
+			newSelectedGlypheIndex = 0;
+		} else {
+			newSelectedGlypheIndex += i;
+			newSelectedGlypheIndex = newSelectedGlypheIndex > -1 ? newSelectedGlypheIndex
+					: 0;
+			newSelectedGlypheIndex = newSelectedGlypheIndex < wordGraphics
+					.size() ? newSelectedGlypheIndex : wordGraphics.size() - 1;
+		}
+		selectedGlyphe = wordGraphics.get(newSelectedGlypheIndex);
+
+		String glypheSelectedMdC = transformWordToMdCString(currentWord,
+				newSelectedGlypheIndex);
+
+		hierotw_text.setText(glypheSelectedMdC);
+		hierotw_text.setSelection(hierotw_text.getText().length());
+		jseshEditor.setMDCText(glypheSelectedMdC);
+		ignoreGlyph_Button.setSelection(selectedGlyphe.isIgnored());
+		glyphOrder_spinner.setSelection(selectedGlyphe.getInnerSentenceOrder());
+	}
+
+	private String setGlypheSelectionInMdC(String normalizedMdC,
+			int newSelectedGlypheIndex) {
+		String[] codes = textEditorController
+				.splitSignsKeepDelimeters(normalizedMdC);
+		if (codes.length > newSelectedGlypheIndex) {
+			String selectedCode = codes[newSelectedGlypheIndex];
+			codes[newSelectedGlypheIndex] = textEditorController
+					.insertMarkerBehindSingleCode(selectedCode, MDC_MARKER);
+		}
+		normalizedMdC = "";
+		for (String s : codes) {
+			normalizedMdC += s;
+		}
+		System.out.println(normalizedMdC);
+		return normalizedMdC;
+	}
+
+
+
+	private void shiftCaret(String eventTopic) {
+		System.out.println(eventTopic);
+		saveMdCstring(currentWord);
+		eventBroker.post(eventTopic, currentWord);
+
 	}
 
 	@PreDestroy
@@ -233,10 +430,44 @@ public class EgyHieroglyphenTypeWriter
 	@Focus
 	public void setFocus()
 	{
-		// TODO	Set the focus to control
+		if (hierotw_text != null) {
+			hierotw_text.setFocus();
+		}
+		contextService.activateContext(HTW_CONTEXT_ID);
 	}
 
-	void setSelection(Object selection)
+	@Inject
+	void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
+		if (!selfSelecting) {
+			if (selection == null) {
+				/* implementation not shown */
+			} else {
+
+				selectionObject = selection;
+				if (loaded)
+				{
+				if (selection instanceof BTSWord) {
+					
+						setSelectionInteral(selection);
+				}
+				}
+			}
+		} else {
+			selfSelecting = false;
+		}
+	}
+
+	private void purgeAll() {
+		selectedGlyphe = null;
+		wordGraphics = null;
+		currentWord = null;
+		glyphOrder_spinner.setSelection(0);
+		// hierotw_text.setText("");
+
+	}
+
+	private void setSelectionInteral(Object selection)
 	{
 		System.out.println("hieroglyph tw selection received: " + selection);
 
@@ -246,35 +477,22 @@ public class EgyHieroglyphenTypeWriter
 
 			if (selection == null)
 			{
-				/* implementation not shown */
-				// } else if (selection instanceof ElementOccurrence)
-				// {
-				// ElementOccurrence element = (ElementOccurrence) selection;
-				// if (element.getElement() != null && element.getElement()
-				// instanceof WordOccurrence)
-				// {
-				// WordOccurrence oldWord = wordOccurrence;
-				// if (oldWord != null)
-				// {
-				// saveMdCstring(oldWord);
-				// }
-				// wordOccurrence = (WordOccurrence) element.getElement();
-				// if (wordOccurrence.getSpelling() != null)
-				// {
-				// loadMdCString(wordOccurrence.getSpelling().getMdC());
-				// }
-				// }
 			} else if (selection instanceof BTSWord)
 			{
 				BTSWord oldWord = currentWord;
 				if (oldWord != null)
 				{
 					saveMdCstring(oldWord);
+					updateGraphicSelectionCounter();
 				}
+				purgeAll();
 				currentWord = (BTSWord) selection;
 				if (currentWord != null)
 				{
-					loadMdCString(transformWordToMdCString(currentWord));
+					wordGraphics = currentWord.getGraphics();
+					String mdc = transformWordToMdCString(currentWord, -1);
+					loadMdCString(mdc);
+					beforeImageMdC = mdc;
 				}
 			}
 		} finally
@@ -283,34 +501,114 @@ public class EgyHieroglyphenTypeWriter
 		}
 	}
 
-	private void saveMdCstring(BTSWord word)
-	{
-		textEditorController.updateBTSWordFromMdCString(word, hierotw_text.getText());
-
-	}
-
-	private String transformWordToMdCString(BTSWord word)
-	{
-		String mdc = "";
-		if (!word.getGraphics().isEmpty())
-		{
-			for (BTSGraphic graphic : word.getGraphics())
-			{
-				mdc += graphic.getCode();
-			}
+	private void updateGraphicSelectionCounter() {
+		String newMdC = hierotw_text.getText();
+		if (newMdC.equals(beforeImageMdC)) {
+			// no changes
+			return;
 		}
-		return mdc;
+		htwController.updateGraphicSelectionCounter(beforeImageMdC, newMdC);
+
 	}
 
 	@Inject
 	@Optional
-	void eventReceivedNew(@EventTopic("egywordSelection") Object selection)
-	{
-		if (!loading)
-		{
-			setSelection(selection);
+	void eventReceivedHTWShortcutEvents(
+			@EventTopic("event_htw_shortcut/*") Object event) {
+		if (event instanceof String && event != null) {
+			int index = new Integer((String) event);
+			selectHieroglypheShortcut(index);
+
 		}
 	}
+
+	private void selectHieroglypheShortcut(int index) {
+		String hiero = getProposedHieroglyphe(index);
+		String suffix = "";
+		StringTokenizer tok = new StringTokenizer(hierotw_text.getText(),
+				":-<>");
+		while (tok.hasMoreTokens()) {
+			suffix = tok.nextToken();
+		}
+		String codes = hierotw_text.getText().substring(0,
+				hierotw_text.getText().length() - suffix.length());
+		codes += hiero;
+		hierotw_text.setText(codes);
+		hierotw_text.setSelection(codes.length());
+		jseshEditorProposals.clearText();
+	}
+
+	private String getProposedHieroglyphe(int index) {
+		String code = "";
+		StringTokenizer tok = new StringTokenizer(htwProposals, "\\red-");
+		int i = 0;
+		while (tok.hasMoreTokens()) {
+
+			code = tok.nextToken().split("-")[0];
+			if (!code.startsWith("\"")) {
+				i++;
+			}
+			if (i == index) {
+				break;
+			}
+		}
+
+
+
+		return code;
+	}
+
+	private void saveMdCstring(BTSWord word)
+	{
+		if (word != null) {
+			String normalizedMdC = hierotw_text.getText();
+			try {
+				normalizedMdC = mdcNormalizer.normalize(hierotw_text.getText());
+			} catch (MDCSyntaxError e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			normalizedMdC = removeIgnoreMarker(normalizedMdC);
+			normalizedMdC = removeSelectionMarker(normalizedMdC);
+			System.out.println("htw saveMdCString " + normalizedMdC);
+			textEditorController
+					.updateBTSWordFromMdCString(word, normalizedMdC);
+		}
+
+	}
+
+	private String removeSelectionMarker(String normalizedMdC) {
+		Pattern p = Pattern.compile("\\" + MDC_MARKER);
+		Matcher m = p.matcher(normalizedMdC);
+		String result = m.replaceAll("");
+		return result;
+	}
+
+	private String removeIgnoreMarker(String normalizedMdC) {
+		Pattern p = Pattern.compile(MDC_IGNORE);
+		Matcher m = p.matcher(normalizedMdC);
+		String result = m.replaceAll("");
+		return result;
+	}
+
+	private String transformWordToMdCString(BTSWord word, int selectedGlyphIndex)
+	{
+		String mdc = "";
+		mdc = textEditorController.transformWordToMdCString(word,
+				selectedGlyphIndex);
+		return mdc;
+	}
+
+	// @Inject
+	// @Optional
+	// void eventReceivedNew(
+	// @UIEventTopic("egySentenceItemSelection/*") Object selection)
+	// {
+	// if (!loading)
+	// {
+	// setSelectionInteral(selection);
+	// }
+	// }
 
 	// private void saveMdCstring(final WordOccurrence word)
 	// {
@@ -361,9 +659,38 @@ public class EgyHieroglyphenTypeWriter
 		{
 			public void run()
 			{
-				hierotw_text.setText(mdC);
+				String normalizedMdC = mdC;
+				MDCNormalizer d = new MDCNormalizer();
+				try {
+					normalizedMdC = d.normalize(mdC);
+				} catch (MDCSyntaxError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				hierotw_text.setText(normalizedMdC);
+				hierotw_text.setSelection(hierotw_text.getText().length());
+				
+				String[] codes = textEditorController
+						.splitSignsKeepDelimeters(normalizedMdC);
+				for (String s : codes) {
+					System.out.println(s);
+				}
 			}
 		});
+
+	}
+
+	@Override
+	public List<Map> getScatteredCashMaps() {
+		final List<Map> maps = new Vector<Map>(1);
+		maps.add(hieroglyphSelectionCounterCacheMap);
+		return maps;
+	}
+
+	@Override
+	public void handleEvent(Event arg0) {
+
+		eventReceivedHTWShortcutEvents(arg0.getProperty("org.eclipse.e4.data"));
 
 	}
 }

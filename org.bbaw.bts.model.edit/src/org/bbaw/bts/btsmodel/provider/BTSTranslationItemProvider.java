@@ -57,8 +57,7 @@ public class BTSTranslationItemProvider extends ItemProviderAdapter implements I
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addValuePropertyDescriptor(object);
@@ -176,8 +175,7 @@ public class BTSTranslationItemProvider extends ItemProviderAdapter implements I
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSTranslation.class))
-		{
+		switch (notification.getFeatureID(BTSTranslation.class)) {
 			case BtsmodelPackage.BTS_TRANSLATION__VALUE:
 			case BtsmodelPackage.BTS_TRANSLATION__TYPE:
 			case BtsmodelPackage.BTS_TRANSLATION__LANG:

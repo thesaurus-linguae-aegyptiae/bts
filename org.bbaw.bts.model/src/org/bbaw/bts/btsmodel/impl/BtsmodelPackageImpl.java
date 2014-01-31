@@ -62,6 +62,7 @@ import org.bbaw.bts.btsmodel.BTSWorkflowRuleItem;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -461,6 +462,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	private EClass btsAmbivalenceItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass graphicSelectionCounterEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1843,6 +1851,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSGraphic_Ignored() {
+		return (EAttribute)btsGraphicEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSTranslations() {
 		return btsTranslationsEClass;
 	}
@@ -2718,6 +2735,42 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getGraphicSelectionCounter() {
+		return graphicSelectionCounterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGraphicSelectionCounter_DateOfLastSelection() {
+		return (EAttribute)graphicSelectionCounterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGraphicSelectionCounter_Counter() {
+		return (EAttribute)graphicSelectionCounterEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getGraphicSelectionCounter_Suggest() {
+		return (EAttribute)graphicSelectionCounterEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPropertyChangeSupport() {
 		return propertyChangeSupportEDataType;
 	}
@@ -2943,6 +2996,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsGraphicEClass, BTS_GRAPHIC__INNER_SENTENCE_ORDER);
 		createEAttribute(btsGraphicEClass, BTS_GRAPHIC__CODE);
 		createEAttribute(btsGraphicEClass, BTS_GRAPHIC__REFERENCE);
+		createEAttribute(btsGraphicEClass, BTS_GRAPHIC__IGNORED);
 
 		btsTranslationsEClass = createEClass(BTS_TRANSLATIONS);
 		createEReference(btsTranslationsEClass, BTS_TRANSLATIONS__TRANSLATIONS);
@@ -3056,6 +3110,11 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		btsAmbivalenceItemEClass = createEClass(BTS_AMBIVALENCE_ITEM);
 
+		graphicSelectionCounterEClass = createEClass(GRAPHIC_SELECTION_COUNTER);
+		createEAttribute(graphicSelectionCounterEClass, GRAPHIC_SELECTION_COUNTER__DATE_OF_LAST_SELECTION);
+		createEAttribute(graphicSelectionCounterEClass, GRAPHIC_SELECTION_COUNTER__COUNTER);
+		createEAttribute(graphicSelectionCounterEClass, GRAPHIC_SELECTION_COUNTER__SUGGEST);
+
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
 		propertyChangeListenerEDataType = createEDataType(PROPERTY_CHANGE_LISTENER);
@@ -3152,12 +3211,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		dbLeaseEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsProjectDBCollectionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsdbCollectionRoleDescEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		graphicSelectionCounterEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(btstcObjectEClass, BTSTCObject.class, "BTSTCObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(btsTextEClass, BTSText.class, "BTSText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSText_TextContent(), this.getBTSTextContent(), null, "textContent", null, 0, 1, BTSText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSText_TextContent(), this.getBTSTextContent(), null, "textContent", null, 0, 1, BTSText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsSenctenceEClass, BTSSenctence.class, "BTSSenctence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSSenctence_SentenceItems(), this.getBTSSentenceItem(), null, "sentenceItems", null, 0, -1, BTSSenctence.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3283,7 +3343,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsdbBaseObjectEClass, BTSDBBaseObject.class, "BTSDBBaseObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSDBBaseObject__rev(), ecorePackage.getEString(), "_rev", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Project(), ecorePackage.getEString(), "project", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSDBBaseObject_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Updaters(), ecorePackage.getEString(), "updaters", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Readers(), ecorePackage.getEString(), "readers", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -3330,6 +3390,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSGraphic_InnerSentenceOrder(), ecorePackage.getEInt(), "innerSentenceOrder", null, 0, 1, BTSGraphic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSGraphic_Code(), ecorePackage.getEString(), "code", null, 0, 1, BTSGraphic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSGraphic_Reference(), ecorePackage.getEString(), "reference", null, 0, 1, BTSGraphic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSGraphic_Ignored(), ecorePackage.getEBoolean(), "ignored", null, 0, 1, BTSGraphic.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsTranslationsEClass, BTSTranslations.class, "BTSTranslations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTranslations_Translations(), this.getBTSTranslation(), null, "translations", null, 0, -1, BTSTranslations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3451,6 +3512,11 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEReference(getBTSTextContent_TextItems(), this.getBTSTextItems(), null, "textItems", null, 0, -1, BTSTextContent.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsAmbivalenceItemEClass, BTSAmbivalenceItem.class, "BTSAmbivalenceItem", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(graphicSelectionCounterEClass, GraphicSelectionCounter.class, "GraphicSelectionCounter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getGraphicSelectionCounter_DateOfLastSelection(), ecorePackage.getEDate(), "dateOfLastSelection", null, 0, 1, GraphicSelectionCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGraphicSelectionCounter_Counter(), ecorePackage.getEInt(), "counter", null, 0, 1, GraphicSelectionCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getGraphicSelectionCounter_Suggest(), ecorePackage.getEString(), "suggest", null, 0, 1, GraphicSelectionCounter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

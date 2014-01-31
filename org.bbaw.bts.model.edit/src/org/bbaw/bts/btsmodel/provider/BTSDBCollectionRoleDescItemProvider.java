@@ -56,8 +56,7 @@ public class BTSDBCollectionRoleDescItemProvider extends BTSIdentifiableItemItem
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addRoleNamePropertyDescriptor(object);
@@ -197,8 +196,7 @@ public class BTSDBCollectionRoleDescItemProvider extends BTSIdentifiableItemItem
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSDBCollectionRoleDesc.class))
-		{
+		switch (notification.getFeatureID(BTSDBCollectionRoleDesc.class)) {
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME:
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES:
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES:

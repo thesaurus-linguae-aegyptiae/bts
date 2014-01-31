@@ -259,8 +259,7 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				return getWidgetType();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:
@@ -282,8 +281,7 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				setWidgetType((String)newValue);
 				return;
@@ -310,8 +308,7 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				setWidgetType(WIDGET_TYPE_EDEFAULT);
 				return;
@@ -338,8 +335,7 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
 				return WIDGET_TYPE_EDEFAULT == null ? widgetType != null : !WIDGET_TYPE_EDEFAULT.equals(widgetType);
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:

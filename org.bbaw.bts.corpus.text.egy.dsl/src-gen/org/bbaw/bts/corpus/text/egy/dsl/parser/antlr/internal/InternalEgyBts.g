@@ -251,15 +251,318 @@ ruleSentenceItem returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getSentenceItemAccess().getMarkerParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getSentenceItemAccess().getAbstractMarkerParserRuleCall_1()); 
     }
-    this_Marker_1=ruleMarker
+    this_AbstractMarker_1=ruleAbstractMarker
     { 
-        $current = $this_Marker_1.current; 
+        $current = $this_AbstractMarker_1.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getSentenceItemAccess().getAmbivalenceParserRuleCall_2()); 
+    }
+    this_Ambivalence_2=ruleAmbivalence
+    { 
+        $current = $this_Ambivalence_2.current; 
         afterParserOrEnumRuleCall();
     }
 )
 ;
+
+
+
+
+
+// Entry rule entryRuleAbstractMarker
+entryRuleAbstractMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAbstractMarkerRule()); }
+	 iv_ruleAbstractMarker=ruleAbstractMarker 
+	 { $current=$iv_ruleAbstractMarker.current; } 
+	 EOF 
+;
+
+// Rule AbstractMarker
+ruleAbstractMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getAbstractMarkerAccess().getMarkerParserRuleCall_0()); 
+    }
+    this_Marker_0=ruleMarker
+    { 
+        $current = $this_Marker_0.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getAbstractMarkerAccess().getVersMarkerParserRuleCall_1()); 
+    }
+ruleVersMarker
+    { 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAmbivalence
+entryRuleAmbivalence returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAmbivalenceRule()); }
+	 iv_ruleAmbivalence=ruleAmbivalence 
+	 { $current=$iv_ruleAmbivalence.current; } 
+	 EOF 
+;
+
+// Rule Ambivalence
+ruleAmbivalence returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='%' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_0());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAmbivalenceAccess().getCasesCaseParserRuleCall_1_0_0()); 
+	    }
+		lv_cases_1_0=ruleCase		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAmbivalenceRule());
+	        }
+       		add(
+       			$current, 
+       			"cases",
+        		lv_cases_1_0, 
+        		"Case");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_2='; ' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getAmbivalenceAccess().getSemicolonSpaceKeyword_1_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAmbivalenceAccess().getCasesCaseParserRuleCall_1_1_1_0()); 
+	    }
+		lv_cases_3_0=ruleCase		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAmbivalenceRule());
+	        }
+       		add(
+       			$current, 
+       			"cases",
+        		lv_cases_3_0, 
+        		"Case");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*)	otherlv_4='%' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_2());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleCase
+entryRuleCase returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getCaseRule()); }
+	 iv_ruleCase=ruleCase 
+	 { $current=$iv_ruleCase.current; } 
+	 EOF 
+;
+
+// Rule Case
+ruleCase returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='case ' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getCaseAccess().getCaseKeyword_0());
+    }
+(
+(
+		lv_name_1_0=RULE_EGYSTRING
+		{
+			newLeafNode(lv_name_1_0, grammarAccess.getCaseAccess().getNameEGYSTRINGTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getCaseRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"name",
+        		lv_name_1_0, 
+        		"EGYSTRING");
+	    }
+
+)
+)	otherlv_2=': ' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getCaseAccess().getColonSpaceKeyword_2());
+    }
+((
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCaseAccess().getItemsSentenceItemParserRuleCall_3_0_0()); 
+	    }
+		lv_items_3_0=ruleSentenceItem		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCaseRule());
+	        }
+       		add(
+       			$current, 
+       			"items",
+        		lv_items_3_0, 
+        		"SentenceItem");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)(	otherlv_4=' ' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getCaseAccess().getSpaceKeyword_3_1_0());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getCaseAccess().getItemsSentenceItemParserRuleCall_3_1_1_0()); 
+	    }
+		lv_items_5_0=ruleSentenceItem		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getCaseRule());
+	        }
+       		add(
+       			$current, 
+       			"items",
+        		lv_items_5_0, 
+        		"SentenceItem");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+))*))
+;
+
+
+
+
+
+// Entry rule entryRuleVersMarker
+entryRuleVersMarker returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getVersMarkerRule()); } 
+	 iv_ruleVersMarker=ruleVersMarker 
+	 { $current=$iv_ruleVersMarker.current.getText(); }  
+	 EOF 
+;
+
+// Rule VersMarker
+ruleVersMarker returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getVersbreakMarkerParserRuleCall_0()); 
+    }
+    this_VersbreakMarker_0=ruleVersbreakMarker    {
+		$current.merge(this_VersbreakMarker_0);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getVersFrontierMarkerParserRuleCall_1()); 
+    }
+    this_VersFrontierMarker_1=ruleVersFrontierMarker    {
+		$current.merge(this_VersFrontierMarker_1);
+    }
+
+    { 
+        afterParserOrEnumRuleCall();
+    }
+)
+    ;
+
+
+
+
+
+// Entry rule entryRuleVersFrontierMarker
+entryRuleVersFrontierMarker returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getVersFrontierMarkerRule()); } 
+	 iv_ruleVersFrontierMarker=ruleVersFrontierMarker 
+	 { $current=$iv_ruleVersFrontierMarker.current.getText(); }  
+	 EOF 
+;
+
+// Rule VersFrontierMarker
+ruleVersFrontierMarker returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+
+	kw='@mv' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getVersFrontierMarkerAccess().getMvKeyword()); 
+    }
+
+    ;
+
+
+
+
+
+// Entry rule entryRuleVersbreakMarker
+entryRuleVersbreakMarker returns [String current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getVersbreakMarkerRule()); } 
+	 iv_ruleVersbreakMarker=ruleVersbreakMarker 
+	 { $current=$iv_ruleVersbreakMarker.current.getText(); }  
+	 EOF 
+;
+
+// Rule VersbreakMarker
+ruleVersbreakMarker returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+
+	kw='@v' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getVersbreakMarkerAccess().getVKeyword()); 
+    }
+
+    ;
 
 
 
@@ -285,9 +588,9 @@ ruleMarker returns [EObject current=null]
     }
 (
 (
-		lv_type_1_0=RULE_ID
+		lv_type_1_0=RULE_EGYSTRING
 		{
-			newLeafNode(lv_type_1_0, grammarAccess.getMarkerAccess().getTypeIDTerminalRuleCall_1_0()); 
+			newLeafNode(lv_type_1_0, grammarAccess.getMarkerAccess().getTypeEGYSTRINGTerminalRuleCall_1_0()); 
 		}
 		{
 	        if ($current==null) {
@@ -297,7 +600,7 @@ ruleMarker returns [EObject current=null]
        			$current, 
        			"type",
         		lv_type_1_0, 
-        		"ID");
+        		"EGYSTRING");
 	    }
 
 )
@@ -1904,20 +2207,6 @@ ruleDestruction returns [EObject current=null]
 
 
 
-RULE_EGYSTRING : ~((' '|'\n'|'\t'|'\u00A7'|'#'|'.'|','|':'|'-'|'~'|'\u2261'|'\u22EE'|'('|')'|'<'|'>'|'?'|'{'|'}'|'\u2E22'|'\u2E23'))*;
-
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
-
-RULE_INT : ('0'..'9')+;
-
-RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'u'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
-
-RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
-
-RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
-
-RULE_WS : (' '|'\t'|'\r'|'\n')+;
-
-RULE_ANY_OTHER : .;
+RULE_EGYSTRING : ~((' '|'\n'|'\t'|'\u00A7'|'#'|'%'|';'|'.'|','|':'|'-'|'~'|'\u2261'|'\u22EE'|'('|')'|'<'|'>'|'?'|'{'|'}'|'\u2E22'|'\u2E23'))*;
 
 

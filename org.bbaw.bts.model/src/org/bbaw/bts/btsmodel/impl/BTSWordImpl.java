@@ -219,8 +219,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	public NotificationChain basicSetTranslation(BTSTranslations newTranslation, NotificationChain msgs) {
 		BTSTranslations oldTranslation = translation;
 		translation = newTranslation;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_WORD__TRANSLATION, oldTranslation, newTranslation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -233,8 +232,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	 * @generated
 	 */
 	public void setTranslation(BTSTranslations newTranslation) {
-		if (newTranslation != translation)
-		{
+		if (newTranslation != translation) {
 			NotificationChain msgs = null;
 			if (translation != null)
 				msgs = ((InternalEObject)translation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_WORD__TRANSLATION, null, msgs);
@@ -379,8 +377,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	 * @generated
 	 */
 	public EList<BTSGraphic> getGraphics() {
-		if (graphics == null)
-		{
+		if (graphics == null) {
 			graphics = new EObjectContainmentEList<BTSGraphic>(BTSGraphic.class, this, BtsmodelPackage.BTS_WORD__GRAPHICS);
 		}
 		return graphics;
@@ -393,8 +390,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORD__TRANSLATION:
 				return basicSetTranslation(null, msgs);
 			case BtsmodelPackage.BTS_WORD__GRAPHICS:
@@ -410,8 +406,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORD__TRANSLATION:
 				return getTranslation();
 			case BtsmodelPackage.BTS_WORD__WTYPE:
@@ -440,8 +435,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORD__TRANSLATION:
 				setTranslation((BTSTranslations)newValue);
 				return;
@@ -478,8 +472,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORD__TRANSLATION:
 				setTranslation((BTSTranslations)null);
 				return;
@@ -515,8 +508,7 @@ public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_WORD__TRANSLATION:
 				return translation != null;
 			case BtsmodelPackage.BTS_WORD__WTYPE:

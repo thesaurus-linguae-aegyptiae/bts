@@ -247,8 +247,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				return getSortKey();
 			case BtsmodelPackage.BTS_OBJECT__NAME:
@@ -271,8 +270,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				setSortKey((Integer)newValue);
 				return;
@@ -299,8 +297,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				setSortKey(SORT_KEY_EDEFAULT);
 				return;
@@ -327,8 +324,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_OBJECT__NAME:

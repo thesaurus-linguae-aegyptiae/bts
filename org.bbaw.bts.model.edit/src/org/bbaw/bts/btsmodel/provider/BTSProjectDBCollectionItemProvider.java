@@ -58,8 +58,7 @@ public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemP
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addCollectionNamePropertyDescriptor(object);
@@ -148,8 +147,7 @@ public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemP
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS);
 		}
@@ -206,8 +204,7 @@ public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemP
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSProjectDBCollection.class))
-		{
+		switch (notification.getFeatureID(BTSProjectDBCollection.class)) {
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME:
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__INDEXED:
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED:

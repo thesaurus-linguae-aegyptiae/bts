@@ -56,8 +56,7 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			add_idPropertyDescriptor(object);
@@ -266,8 +265,7 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__RELATIONS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__PASSPORT);
@@ -313,8 +311,7 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSCorpusObject.class))
-		{
+		switch (notification.getFeatureID(BTSCorpusObject.class)) {
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__ID:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__REV:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PROJECT:

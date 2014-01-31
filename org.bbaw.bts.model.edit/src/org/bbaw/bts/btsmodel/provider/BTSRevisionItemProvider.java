@@ -52,8 +52,7 @@ public class BTSRevisionItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addRefPropertyDescriptor(object);
@@ -165,8 +164,7 @@ public class BTSRevisionItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSRevision.class))
-		{
+		switch (notification.getFeatureID(BTSRevision.class)) {
 			case BtsmodelPackage.BTS_REVISION__REF:
 			case BtsmodelPackage.BTS_REVISION__USER_ID:
 			case BtsmodelPackage.BTS_REVISION__TIME_STAMP:

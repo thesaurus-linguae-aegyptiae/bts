@@ -68,8 +68,7 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addPropertyChangeSupportPropertyDescriptor(object);
@@ -483,8 +482,7 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 			childFeature == BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL ||
 			childFeature == BtsmodelPackage.Literals.BTS_CONFIG_ITEM__DESCRIPTION;
 
-		if (qualify)
-		{
+		if (qualify) {
 			return getString
 				("_UI_CreateChild_text2",
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });

@@ -54,8 +54,7 @@ public class BTSPassportEntryItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addProviderPropertyDescriptor(object);
@@ -187,8 +186,7 @@ public class BTSPassportEntryItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__SUBENTRIES);
 		}
@@ -244,8 +242,7 @@ public class BTSPassportEntryItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSPassportEntry.class))
-		{
+		switch (notification.getFeatureID(BTSPassportEntry.class)) {
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__COMMENT:
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__TYPE:

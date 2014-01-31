@@ -98,8 +98,7 @@ public class BTSMarkerImpl extends BTSTextSentenceItemImpl implements BTSMarker
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_MARKER__VALUE:
 				return getValue();
 		}
@@ -114,8 +113,7 @@ public class BTSMarkerImpl extends BTSTextSentenceItemImpl implements BTSMarker
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_MARKER__VALUE:
 				setValue((String)newValue);
 				return;
@@ -131,8 +129,7 @@ public class BTSMarkerImpl extends BTSTextSentenceItemImpl implements BTSMarker
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_MARKER__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -148,8 +145,7 @@ public class BTSMarkerImpl extends BTSTextSentenceItemImpl implements BTSMarker
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_MARKER__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 		}

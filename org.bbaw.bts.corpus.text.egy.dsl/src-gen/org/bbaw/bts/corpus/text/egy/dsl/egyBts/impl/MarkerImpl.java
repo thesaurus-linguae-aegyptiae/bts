@@ -25,7 +25,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *
  * @generated
  */
-public class MarkerImpl extends SentenceItemImpl implements Marker
+public class MarkerImpl extends AbstractMarkerImpl implements Marker
 {
   /**
    * The default value of the '{@link #getType() <em>Type</em>}' attribute.

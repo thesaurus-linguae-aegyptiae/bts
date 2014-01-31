@@ -76,8 +76,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 * @generated
 	 */
 	public EList<BTSSentenceItem> getSentenceItems() {
-		if (sentenceItems == null)
-		{
+		if (sentenceItems == null) {
 			sentenceItems = new EObjectContainmentEList<BTSSentenceItem>(BTSSentenceItem.class, this, BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS);
 		}
 		return sentenceItems;
@@ -100,8 +99,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	public NotificationChain basicSetTranslation(BTSTranslations newTranslation, NotificationChain msgs) {
 		BTSTranslations oldTranslation = translation;
 		translation = newTranslation;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_SENCTENCE__TRANSLATION, oldTranslation, newTranslation);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -114,8 +112,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 * @generated
 	 */
 	public void setTranslation(BTSTranslations newTranslation) {
-		if (newTranslation != translation)
-		{
+		if (newTranslation != translation) {
 			NotificationChain msgs = null;
 			if (translation != null)
 				msgs = ((InternalEObject)translation).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_SENCTENCE__TRANSLATION, null, msgs);
@@ -135,8 +132,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 				return ((InternalEList<?>)getSentenceItems()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_SENCTENCE__TRANSLATION:
@@ -152,8 +148,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 				return getSentenceItems();
 			case BtsmodelPackage.BTS_SENCTENCE__TRANSLATION:
@@ -170,8 +165,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 				getSentenceItems().clear();
 				getSentenceItems().addAll((Collection<? extends BTSSentenceItem>)newValue);
@@ -190,8 +184,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 				getSentenceItems().clear();
 				return;
@@ -209,8 +202,7 @@ public class BTSSenctenceImpl extends BTSReferencableItemImpl implements BTSSenc
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 				return sentenceItems != null && !sentenceItems.isEmpty();
 			case BtsmodelPackage.BTS_SENCTENCE__TRANSLATION:

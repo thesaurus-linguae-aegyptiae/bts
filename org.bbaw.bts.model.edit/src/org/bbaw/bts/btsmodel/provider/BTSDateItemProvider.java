@@ -59,8 +59,7 @@ public class BTSDateItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addTypePropertyDescriptor(object);
@@ -218,8 +217,7 @@ public class BTSDateItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSDate.class))
-		{
+		switch (notification.getFeatureID(BTSDate.class)) {
 			case BtsmodelPackage.BTS_DATE__TYPE:
 			case BtsmodelPackage.BTS_DATE__YEAR:
 			case BtsmodelPackage.BTS_DATE__MONTH:

@@ -78,6 +78,15 @@ Group {
 }
 Label {
 	background-color: #FFFFFF;
+	
+}
+TableItem {
+	font-family: FreeSerif;
+	font-size: 12px;
+}
+Table{
+	font-family: FreeSerif;
+	font-size: 12px;
 }
 
 Button {
@@ -86,9 +95,11 @@ Button {
 
 * {
 	font-size: 10px;
+	
 }
 Text {
 	background-color: #FFFFFF;
+	
 }
 ToolBar {
 	background-color: #FFFFFF;

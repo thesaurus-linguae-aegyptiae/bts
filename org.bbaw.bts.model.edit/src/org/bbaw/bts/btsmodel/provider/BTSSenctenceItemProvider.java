@@ -56,8 +56,7 @@ public class BTSSenctenceItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -74,8 +73,7 @@ public class BTSSenctenceItemProvider
 	 */
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_SENCTENCE__TRANSLATION);
@@ -132,8 +130,7 @@ public class BTSSenctenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSSenctence.class))
-		{
+		switch (notification.getFeatureID(BTSSenctence.class)) {
 			case BtsmodelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 			case BtsmodelPackage.BTS_SENCTENCE__TRANSLATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));

@@ -18,6 +18,7 @@ import org.bbaw.bts.core.dao.DAOFactory;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.DBLeaseDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
+import org.bbaw.bts.core.dao.GraphicSelectionCounterDao;
 import org.bbaw.bts.dao.couchDB.impl.BTSAnnotationDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.BTSCommentDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.BTSConfigurationDaoImpl;
@@ -35,6 +36,7 @@ import org.bbaw.bts.dao.couchDB.impl.CorpusObjectDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.DBConnectionProviderImpl;
 import org.bbaw.bts.dao.couchDB.impl.DBLeaseDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.GeneralPurposeDaoImpl;
+import org.bbaw.bts.dao.couchDB.impl.GraphicSelectionCounterDaoImpl;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 
@@ -108,7 +110,17 @@ public class DaoFactoryCouchDB implements DAOFactory
 		{
 			return (T) getDBConnectionProvider(context);
 		}
+ else if (clazz == GraphicSelectionCounterDao.class) {
+			return (T) getGraphicSelectionCounterDao(context);
+		}
 		return null;
+	}
+
+	private GraphicSelectionCounterDao getGraphicSelectionCounterDao(
+			IEclipseContext context) {
+		GraphicSelectionCounterDao dao = ContextInjectionFactory.make(
+				GraphicSelectionCounterDaoImpl.class, context);
+		return dao;
 	}
 
 	private DBConnectionProvider getDBConnectionProvider(IEclipseContext context)

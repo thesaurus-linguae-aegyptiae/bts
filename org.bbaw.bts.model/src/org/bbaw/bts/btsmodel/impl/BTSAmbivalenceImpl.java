@@ -67,8 +67,7 @@ public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAm
 	 * @generated
 	 */
 	public EList<BTSLemmaCase> getCases() {
-		if (cases == null)
-		{
+		if (cases == null) {
 			cases = new EObjectContainmentEList<BTSLemmaCase>(BTSLemmaCase.class, this, BtsmodelPackage.BTS_AMBIVALENCE__CASES);
 		}
 		return cases;
@@ -81,8 +80,7 @@ public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAm
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_AMBIVALENCE__CASES:
 				return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
 		}
@@ -96,8 +94,7 @@ public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAm
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_AMBIVALENCE__CASES:
 				return getCases();
 		}
@@ -112,8 +109,7 @@ public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAm
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_AMBIVALENCE__CASES:
 				getCases().clear();
 				getCases().addAll((Collection<? extends BTSLemmaCase>)newValue);
@@ -129,8 +125,7 @@ public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAm
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_AMBIVALENCE__CASES:
 				getCases().clear();
 				return;
@@ -145,8 +140,7 @@ public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAm
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_AMBIVALENCE__CASES:
 				return cases != null && !cases.isEmpty();
 		}

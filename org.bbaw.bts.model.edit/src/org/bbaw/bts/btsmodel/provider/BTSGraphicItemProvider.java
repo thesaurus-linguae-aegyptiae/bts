@@ -5,6 +5,7 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -52,13 +53,13 @@ public class BTSGraphicItemProvider
 	 */
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object) {
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addInnerSentenceOrderPropertyDescriptor(object);
 			addCodePropertyDescriptor(object);
 			addReferencePropertyDescriptor(object);
+			addIgnoredPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -130,6 +131,28 @@ public class BTSGraphicItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Ignored feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addIgnoredPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSGraphic_ignored_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSGraphic_ignored_feature", "_UI_BTSGraphic_type"),
+				 BtsmodelPackage.Literals.BTS_GRAPHIC__IGNORED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns BTSGraphic.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -165,11 +188,11 @@ public class BTSGraphicItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSGraphic.class))
-		{
+		switch (notification.getFeatureID(BTSGraphic.class)) {
 			case BtsmodelPackage.BTS_GRAPHIC__INNER_SENTENCE_ORDER:
 			case BtsmodelPackage.BTS_GRAPHIC__CODE:
 			case BtsmodelPackage.BTS_GRAPHIC__REFERENCE:
+			case BtsmodelPackage.BTS_GRAPHIC__IGNORED:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

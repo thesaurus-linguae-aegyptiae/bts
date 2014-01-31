@@ -22,7 +22,13 @@ public interface BTSTextEditorController
 	// BTSText updateTextFromRamsesModel(BTSText text, TextModel textModel,
 	// Map<Object, BTSSentenceItem> ramsesTextModelMap);
 
-	String transformWordToMdCString(BTSWord word);
+	String transformWordToMdCString(BTSWord word, int selectedGlypheIndex);
 
 	void updateBTSWordFromMdCString(BTSWord word, String mdc);
+
+	String transformTextToJSeshMdCString(BTSText text);
+
+	String[] splitSignsKeepDelimeters(String mdC);
+
+	String insertMarkerBehindSingleCode(String mdcString, String marker);
 }

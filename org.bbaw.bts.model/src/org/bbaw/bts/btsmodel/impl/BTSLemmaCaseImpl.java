@@ -62,8 +62,7 @@ public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemm
 	 * @generated
 	 */
 	public EList<BTSAmbivalenceItem> getScenario() {
-		if (scenario == null)
-		{
+		if (scenario == null) {
 			scenario = new EObjectContainmentEList<BTSAmbivalenceItem>(BTSAmbivalenceItem.class, this, BtsmodelPackage.BTS_LEMMA_CASE__SCENARIO);
 		}
 		return scenario;
@@ -76,8 +75,7 @@ public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemm
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LEMMA_CASE__SCENARIO:
 				return ((InternalEList<?>)getScenario()).basicRemove(otherEnd, msgs);
 		}
@@ -91,8 +89,7 @@ public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemm
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LEMMA_CASE__SCENARIO:
 				return getScenario();
 		}
@@ -107,8 +104,7 @@ public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemm
 	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LEMMA_CASE__SCENARIO:
 				getScenario().clear();
 				getScenario().addAll((Collection<? extends BTSAmbivalenceItem>)newValue);
@@ -124,8 +120,7 @@ public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemm
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LEMMA_CASE__SCENARIO:
 				getScenario().clear();
 				return;
@@ -140,8 +135,7 @@ public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemm
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_LEMMA_CASE__SCENARIO:
 				return scenario != null && !scenario.isEmpty();
 		}

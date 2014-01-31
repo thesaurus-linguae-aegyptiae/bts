@@ -135,8 +135,7 @@ public class BTSInterTextReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID:
 				return getBeginId();
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__END_ID:
@@ -152,8 +151,7 @@ public class BTSInterTextReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID:
 				setBeginId((String)newValue);
 				return;
@@ -171,8 +169,7 @@ public class BTSInterTextReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID:
 				setBeginId(BEGIN_ID_EDEFAULT);
 				return;
@@ -190,8 +187,7 @@ public class BTSInterTextReferenceImpl extends MinimalEObjectImpl.Container impl
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID:
 				return BEGIN_ID_EDEFAULT == null ? beginId != null : !BEGIN_ID_EDEFAULT.equals(beginId);
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__END_ID:

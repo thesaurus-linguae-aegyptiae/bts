@@ -57,8 +57,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			add_idPropertyDescriptor(object);
@@ -267,8 +266,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PROJECT__DB_CONNECTION);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PROJECT__DB_COLLECTIONS);
@@ -328,8 +326,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSProject.class))
-		{
+		switch (notification.getFeatureID(BTSProject.class)) {
 			case BtsmodelPackage.BTS_PROJECT__ID:
 			case BtsmodelPackage.BTS_PROJECT__REV:
 			case BtsmodelPackage.BTS_PROJECT__PROJECT:

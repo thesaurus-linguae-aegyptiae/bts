@@ -71,8 +71,7 @@ public class BTSIdentifiableItemItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			add_idPropertyDescriptor(object);
@@ -130,8 +129,7 @@ public class BTSIdentifiableItemItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSIdentifiableItem.class))
-		{
+		switch (notification.getFeatureID(BTSIdentifiableItem.class)) {
 			case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

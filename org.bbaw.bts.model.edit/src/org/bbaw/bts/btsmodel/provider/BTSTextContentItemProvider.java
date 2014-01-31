@@ -72,8 +72,7 @@ public class BTSTextContentItemProvider
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 		}
@@ -91,8 +90,7 @@ public class BTSTextContentItemProvider
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_TEXT_CONTENT__TEXT_ITEMS);
 		}
@@ -149,8 +147,7 @@ public class BTSTextContentItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSTextContent.class))
-		{
+		switch (notification.getFeatureID(BTSTextContent.class)) {
 			case BtsmodelPackage.BTS_TEXT_CONTENT__TEXT_ITEMS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

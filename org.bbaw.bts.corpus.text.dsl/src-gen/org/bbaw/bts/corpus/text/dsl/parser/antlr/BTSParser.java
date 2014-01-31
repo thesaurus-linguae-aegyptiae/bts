@@ -25,7 +25,7 @@ public class BTSParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParse
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "BTSTextContent";
+		return "TextContent";
 	}
 	
 	public BTSGrammarAccess getGrammarAccess() {

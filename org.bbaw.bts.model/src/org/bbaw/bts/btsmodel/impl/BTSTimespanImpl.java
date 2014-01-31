@@ -107,8 +107,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	public NotificationChain basicSetFrom(BTSDate newFrom, NotificationChain msgs) {
 		BTSDate oldFrom = from;
 		from = newFrom;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_TIMESPAN__FROM, oldFrom, newFrom);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -121,8 +120,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @generated
 	 */
 	public void setFrom(BTSDate newFrom) {
-		if (newFrom != from)
-		{
+		if (newFrom != from) {
 			NotificationChain msgs = null;
 			if (from != null)
 				msgs = ((InternalEObject)from).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_TIMESPAN__FROM, null, msgs);
@@ -152,8 +150,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	public NotificationChain basicSetTo(BTSDate newTo, NotificationChain msgs) {
 		BTSDate oldTo = to;
 		to = newTo;
-		if (eNotificationRequired())
-		{
+		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_TIMESPAN__TO, oldTo, newTo);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
@@ -166,8 +163,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @generated
 	 */
 	public void setTo(BTSDate newTo) {
-		if (newTo != to)
-		{
+		if (newTo != to) {
 			NotificationChain msgs = null;
 			if (to != null)
 				msgs = ((InternalEObject)to).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_TIMESPAN__TO, null, msgs);
@@ -208,8 +204,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TIMESPAN__FROM:
 				return basicSetFrom(null, msgs);
 			case BtsmodelPackage.BTS_TIMESPAN__TO:
@@ -225,8 +220,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TIMESPAN__FROM:
 				return getFrom();
 			case BtsmodelPackage.BTS_TIMESPAN__TO:
@@ -244,8 +238,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public void eSet(int featureID, Object newValue) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TIMESPAN__FROM:
 				setFrom((BTSDate)newValue);
 				return;
@@ -266,8 +259,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public void eUnset(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TIMESPAN__FROM:
 				setFrom((BTSDate)null);
 				return;
@@ -288,8 +280,7 @@ public class BTSTimespanImpl extends MinimalEObjectImpl.Container implements BTS
 	 */
 	@Override
 	public boolean eIsSet(int featureID) {
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TIMESPAN__FROM:
 				return from != null;
 			case BtsmodelPackage.BTS_TIMESPAN__TO:

@@ -96,7 +96,12 @@ public class CouchDBManager implements DBManager
 	private void checkAndAddAuthentication(BTSProjectDBCollection collection)
 	{
 		dbClient = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName());
-		JsonObject jsonObject = dbClient.find(JsonObject.class, "_design/auth");
+		JsonObject jsonObject = null;
+		try {
+			jsonObject = dbClient.find(JsonObject.class, "_design/auth");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		if (!collection.getRoleDescriptions().isEmpty()) // auth required
 		{

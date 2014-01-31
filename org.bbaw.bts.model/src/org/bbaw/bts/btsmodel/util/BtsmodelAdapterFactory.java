@@ -35,8 +35,7 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public BtsmodelAdapterFactory() {
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = BtsmodelPackage.eINSTANCE;
 		}
 	}
@@ -51,12 +50,10 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 */
 	@Override
 	public boolean isFactoryForType(Object object) {
-		if (object == modelPackage)
-		{
+		if (object == modelPackage) {
 			return true;
 		}
-		if (object instanceof EObject)
-		{
+		if (object instanceof EObject) {
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -69,286 +66,233 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	protected BtsmodelSwitch<Adapter> modelSwitch =
-		new BtsmodelSwitch<Adapter>()
-		{
+		new BtsmodelSwitch<Adapter>() {
 			@Override
-			public Adapter caseBTSTCObject(BTSTCObject object)
-			{
+			public Adapter caseBTSTCObject(BTSTCObject object) {
 				return createBTSTCObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSText(BTSText object)
-			{
+			public Adapter caseBTSText(BTSText object) {
 				return createBTSTextAdapter();
 			}
 			@Override
-			public Adapter caseBTSSenctence(BTSSenctence object)
-			{
+			public Adapter caseBTSSenctence(BTSSenctence object) {
 				return createBTSSenctenceAdapter();
 			}
 			@Override
-			public Adapter caseBTSWord(BTSWord object)
-			{
+			public Adapter caseBTSWord(BTSWord object) {
 				return createBTSWordAdapter();
 			}
 			@Override
-			public Adapter caseBTSMarker(BTSMarker object)
-			{
+			public Adapter caseBTSMarker(BTSMarker object) {
 				return createBTSMarkerAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextItems(BTSTextItems object)
-			{
+			public Adapter caseBTSTextItems(BTSTextItems object) {
 				return createBTSTextItemsAdapter();
 			}
 			@Override
-			public Adapter caseBTSSentenceItem(BTSSentenceItem object)
-			{
+			public Adapter caseBTSSentenceItem(BTSSentenceItem object) {
 				return createBTSSentenceItemAdapter();
 			}
 			@Override
-			public Adapter caseBTSListEntry(BTSListEntry object)
-			{
+			public Adapter caseBTSListEntry(BTSListEntry object) {
 				return createBTSListEntryAdapter();
 			}
 			@Override
-			public Adapter caseBTSPassport(BTSPassport object)
-			{
+			public Adapter caseBTSPassport(BTSPassport object) {
 				return createBTSPassportAdapter();
 			}
 			@Override
-			public Adapter caseAdministrativDataObject(AdministrativDataObject object)
-			{
+			public Adapter caseAdministrativDataObject(AdministrativDataObject object) {
 				return createAdministrativDataObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSObject(BTSObject object)
-			{
+			public Adapter caseBTSObject(BTSObject object) {
 				return createBTSObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSAmbivalence(BTSAmbivalence object)
-			{
+			public Adapter caseBTSAmbivalence(BTSAmbivalence object) {
 				return createBTSAmbivalenceAdapter();
 			}
 			@Override
-			public Adapter caseBTSLemmaCase(BTSLemmaCase object)
-			{
+			public Adapter caseBTSLemmaCase(BTSLemmaCase object) {
 				return createBTSLemmaCaseAdapter();
 			}
 			@Override
-			public Adapter caseBTSUser(BTSUser object)
-			{
+			public Adapter caseBTSUser(BTSUser object) {
 				return createBTSUserAdapter();
 			}
 			@Override
-			public Adapter caseBTSComment(BTSComment object)
-			{
+			public Adapter caseBTSComment(BTSComment object) {
 				return createBTSCommentAdapter();
 			}
 			@Override
-			public Adapter caseBTSInterTextReference(BTSInterTextReference object)
-			{
+			public Adapter caseBTSInterTextReference(BTSInterTextReference object) {
 				return createBTSInterTextReferenceAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextSentenceItem(BTSTextSentenceItem object)
-			{
+			public Adapter caseBTSTextSentenceItem(BTSTextSentenceItem object) {
 				return createBTSTextSentenceItemAdapter();
 			}
 			@Override
-			public Adapter caseBTSReference(BTSReference object)
-			{
+			public Adapter caseBTSReference(BTSReference object) {
 				return createBTSReferenceAdapter();
 			}
 			@Override
-			public Adapter caseBTSAnnotation(BTSAnnotation object)
-			{
+			public Adapter caseBTSAnnotation(BTSAnnotation object) {
 				return createBTSAnnotationAdapter();
 			}
 			@Override
-			public Adapter caseBTSTranslation(BTSTranslation object)
-			{
+			public Adapter caseBTSTranslation(BTSTranslation object) {
 				return createBTSTranslationAdapter();
 			}
 			@Override
-			public Adapter caseBTSDate(BTSDate object)
-			{
+			public Adapter caseBTSDate(BTSDate object) {
 				return createBTSDateAdapter();
 			}
 			@Override
-			public Adapter caseBTSPassportEntry(BTSPassportEntry object)
-			{
+			public Adapter caseBTSPassportEntry(BTSPassportEntry object) {
 				return createBTSPassportEntryAdapter();
 			}
 			@Override
-			public Adapter caseBTSRelation(BTSRelation object)
-			{
+			public Adapter caseBTSRelation(BTSRelation object) {
 				return createBTSRelationAdapter();
 			}
 			@Override
-			public Adapter caseBTSConfiguration(BTSConfiguration object)
-			{
+			public Adapter caseBTSConfiguration(BTSConfiguration object) {
 				return createBTSConfigurationAdapter();
 			}
 			@Override
-			public Adapter caseBTSDBBaseObject(BTSDBBaseObject object)
-			{
+			public Adapter caseBTSDBBaseObject(BTSDBBaseObject object) {
 				return createBTSDBBaseObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextCorpus(BTSTextCorpus object)
-			{
+			public Adapter caseBTSTextCorpus(BTSTextCorpus object) {
 				return createBTSTextCorpusAdapter();
 			}
 			@Override
-			public Adapter caseBTSRevision(BTSRevision object)
-			{
+			public Adapter caseBTSRevision(BTSRevision object) {
 				return createBTSRevisionAdapter();
 			}
 			@Override
-			public Adapter caseBTSImage(BTSImage object)
-			{
+			public Adapter caseBTSImage(BTSImage object) {
 				return createBTSImageAdapter();
 			}
 			@Override
-			public Adapter caseBTSCorpusHeader(BTSCorpusHeader object)
-			{
+			public Adapter caseBTSCorpusHeader(BTSCorpusHeader object) {
 				return createBTSCorpusHeaderAdapter();
 			}
 			@Override
-			public Adapter caseBTSTimespan(BTSTimespan object)
-			{
+			public Adapter caseBTSTimespan(BTSTimespan object) {
 				return createBTSTimespanAdapter();
 			}
 			@Override
-			public Adapter caseBTSCorpusObject(BTSCorpusObject object)
-			{
+			public Adapter caseBTSCorpusObject(BTSCorpusObject object) {
 				return createBTSCorpusObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSExternalReference(BTSExternalReference object)
-			{
+			public Adapter caseBTSExternalReference(BTSExternalReference object) {
 				return createBTSExternalReferenceAdapter();
 			}
 			@Override
-			public Adapter caseBTSReferencableItem(BTSReferencableItem object)
-			{
+			public Adapter caseBTSReferencableItem(BTSReferencableItem object) {
 				return createBTSReferencableItemAdapter();
 			}
 			@Override
-			public Adapter caseBTSGraphic(BTSGraphic object)
-			{
+			public Adapter caseBTSGraphic(BTSGraphic object) {
 				return createBTSGraphicAdapter();
 			}
 			@Override
-			public Adapter caseBTSTranslations(BTSTranslations object)
-			{
+			public Adapter caseBTSTranslations(BTSTranslations object) {
 				return createBTSTranslationsAdapter();
 			}
 			@Override
-			public Adapter caseBTSConfigItem(BTSConfigItem object)
-			{
+			public Adapter caseBTSConfigItem(BTSConfigItem object) {
 				return createBTSConfigItemAdapter();
 			}
 			@Override
-			public Adapter caseBTSPassportEditorConfig(BTSPassportEditorConfig object)
-			{
+			public Adapter caseBTSPassportEditorConfig(BTSPassportEditorConfig object) {
 				return createBTSPassportEditorConfigAdapter();
 			}
 			@Override
-			public Adapter caseBTSUserGroup(BTSUserGroup object)
-			{
+			public Adapter caseBTSUserGroup(BTSUserGroup object) {
 				return createBTSUserGroupAdapter();
 			}
 			@Override
-			public Adapter caseBTSList(BTSList object)
-			{
+			public Adapter caseBTSList(BTSList object) {
 				return createBTSListAdapter();
 			}
 			@Override
-			public Adapter caseBTSPpSubentry(BTSPpSubentry object)
-			{
+			public Adapter caseBTSPpSubentry(BTSPpSubentry object) {
 				return createBTSPpSubentryAdapter();
 			}
 			@Override
-			public Adapter caseBTSListSubentry(BTSListSubentry object)
-			{
+			public Adapter caseBTSListSubentry(BTSListSubentry object) {
 				return createBTSListSubentryAdapter();
 			}
 			@Override
-			public Adapter caseBTSConfig(BTSConfig object)
-			{
+			public Adapter caseBTSConfig(BTSConfig object) {
 				return createBTSConfigAdapter();
 			}
 			@Override
-			public Adapter caseBTSObservableObject(BTSObservableObject object)
-			{
+			public Adapter caseBTSObservableObject(BTSObservableObject object) {
 				return createBTSObservableObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSThsEntry(BTSThsEntry object)
-			{
+			public Adapter caseBTSThsEntry(BTSThsEntry object) {
 				return createBTSThsEntryAdapter();
 			}
 			@Override
-			public Adapter caseBTSProject(BTSProject object)
-			{
+			public Adapter caseBTSProject(BTSProject object) {
 				return createBTSProjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSDBConnection(BTSDBConnection object)
-			{
+			public Adapter caseBTSDBConnection(BTSDBConnection object) {
 				return createBTSDBConnectionAdapter();
 			}
 			@Override
-			public Adapter caseBTSWorkflowRule(BTSWorkflowRule object)
-			{
+			public Adapter caseBTSWorkflowRule(BTSWorkflowRule object) {
 				return createBTSWorkflowRuleAdapter();
 			}
 			@Override
-			public Adapter caseBTSOperator(BTSOperator object)
-			{
+			public Adapter caseBTSOperator(BTSOperator object) {
 				return createBTSOperatorAdapter();
 			}
 			@Override
-			public Adapter caseBTSWorkflowRuleItem(BTSWorkflowRuleItem object)
-			{
+			public Adapter caseBTSWorkflowRuleItem(BTSWorkflowRuleItem object) {
 				return createBTSWorkflowRuleItemAdapter();
 			}
 			@Override
-			public Adapter caseDBLease(DBLease object)
-			{
+			public Adapter caseDBLease(DBLease object) {
 				return createDBLeaseAdapter();
 			}
 			@Override
-			public Adapter caseBTSProjectDBCollection(BTSProjectDBCollection object)
-			{
+			public Adapter caseBTSProjectDBCollection(BTSProjectDBCollection object) {
 				return createBTSProjectDBCollectionAdapter();
 			}
 			@Override
-			public Adapter caseBTSIdentifiableItem(BTSIdentifiableItem object)
-			{
+			public Adapter caseBTSIdentifiableItem(BTSIdentifiableItem object) {
 				return createBTSIdentifiableItemAdapter();
 			}
 			@Override
-			public Adapter caseBTSDBCollectionRoleDesc(BTSDBCollectionRoleDesc object)
-			{
+			public Adapter caseBTSDBCollectionRoleDesc(BTSDBCollectionRoleDesc object) {
 				return createBTSDBCollectionRoleDescAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextContent(BTSTextContent object)
-			{
+			public Adapter caseBTSTextContent(BTSTextContent object) {
 				return createBTSTextContentAdapter();
 			}
 			@Override
-			public Adapter caseBTSAmbivalenceItem(BTSAmbivalenceItem object)
-			{
+			public Adapter caseBTSAmbivalenceItem(BTSAmbivalenceItem object) {
 				return createBTSAmbivalenceItemAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object)
-			{
+			public Adapter caseGraphicSelectionCounter(GraphicSelectionCounter object) {
+				return createGraphicSelectionCounterAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -1150,6 +1094,20 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 */
 	public Adapter createBTSAmbivalenceItemAdapter()
 	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter <em>Graphic Selection Counter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.GraphicSelectionCounter
+	 * @generated
+	 */
+	public Adapter createGraphicSelectionCounterAdapter() {
 		return null;
 	}
 

@@ -180,8 +180,7 @@ public class BTSTranslationImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATION__VALUE:
 				return getValue();
 			case BtsmodelPackage.BTS_TRANSLATION__TYPE:
@@ -199,8 +198,7 @@ public class BTSTranslationImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATION__VALUE:
 				setValue((String)newValue);
 				return;
@@ -221,8 +219,7 @@ public class BTSTranslationImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATION__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
@@ -243,8 +240,7 @@ public class BTSTranslationImpl extends MinimalEObjectImpl.Container implements 
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsmodelPackage.BTS_TRANSLATION__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
 			case BtsmodelPackage.BTS_TRANSLATION__TYPE:
