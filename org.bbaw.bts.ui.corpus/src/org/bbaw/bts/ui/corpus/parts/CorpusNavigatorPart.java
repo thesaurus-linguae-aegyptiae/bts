@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -18,7 +19,10 @@ import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -26,6 +30,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
@@ -46,11 +51,8 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -69,6 +71,12 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	@Inject
 	private ESelectionService selectionService;
 
+	@Inject
+	private IEclipseContext context;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController evaluationController;
+
 	private Label label;
 	private TreeViewer treeViewer;
 	private StructuredSelection selection;
@@ -80,6 +88,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	private Composite composite;
 
 	private Map<Control, Map> cachingMap = new HashMap<Control, Map>();
+
 
 	@Inject
 	public CorpusNavigatorPart()
@@ -94,8 +103,6 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout());
-		label = new Label(composite, SWT.NONE);
-		label.setText("Corpus-Navigator");
 
 		// Button b = new Button(composite, SWT.PUSH);
 		// b.setText("ADD");
@@ -114,68 +121,70 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		//
 		// }});
 
-		Button b2 = new Button(composite, SWT.PUSH);
-		b2.setText("SAVE");
-		b2.addSelectionListener(new SelectionListener()
-		{
-
-			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				if (selection != null)
-				{
-					Object o = ((TreeNodeWrapper) selection.getFirstElement()).getObject();
-					if (o instanceof BTSCorpusObject)
-					{
-						corpusNavigatorController.save((BTSCorpusObject) o);
-					}
-					if (o instanceof BTSTextCorpus)
-					{
-						treeViewer.refresh();
-					}
-				}
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e)
-			{
-				// TODO Auto-generated method stub
-
-			}
-		});
-
-		Button b3 = new Button(composite, SWT.PUSH);
-		b3.setText("CHECK");
-		b3.addSelectionListener(new SelectionListener()
-		{
-
-			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				if (selection != null)
-				{
-					Object o = ((TreeNodeWrapper) selection.getFirstElement()).getObject();
-					if (o instanceof BTSCorpusObject)
-					{
-						// System.out.println("Mock event");
-						// eventBroker.post("event_text_selection/next", o);
-
-						// ((BTSCorpusObject) o).setName(((BTSCorpusObject)
-						// o).getName() + "#!");
-						// has to be accessed through emf
-						//						OCLTest test = new OCLTest();
-						//						test.validate((BTSCorpusObject) o);
-					}
-				}
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e)
-			{
-				// TODO Auto-generated method stub
-
-			}
-		});
+		// Button b2 = new Button(composite, SWT.PUSH);
+		// b2.setText("SAVE");
+		// b2.addSelectionListener(new SelectionListener()
+		// {
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e)
+		// {
+		// if (selection != null)
+		// {
+		// Object o = ((TreeNodeWrapper)
+		// selection.getFirstElement()).getObject();
+		// if (o instanceof BTSCorpusObject)
+		// {
+		// corpusNavigatorController.save((BTSCorpusObject) o);
+		// }
+		// if (o instanceof BTSTextCorpus)
+		// {
+		// treeViewer.refresh();
+		// }
+		// }
+		// }
+		//
+		// @Override
+		// public void widgetDefaultSelected(SelectionEvent e)
+		// {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
+		//
+		// Button b3 = new Button(composite, SWT.PUSH);
+		// b3.setText("CHECK");
+		// b3.addSelectionListener(new SelectionListener()
+		// {
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e)
+		// {
+		// if (selection != null)
+		// {
+		// Object o = ((TreeNodeWrapper)
+		// selection.getFirstElement()).getObject();
+		// if (o instanceof BTSCorpusObject)
+		// {
+		// // System.out.println("Mock event");
+		// // eventBroker.post("event_text_selection/next", o);
+		//
+		// // ((BTSCorpusObject) o).setName(((BTSCorpusObject)
+		// // o).getName() + "#!");
+		// // has to be accessed through emf
+		// // OCLTest test = new OCLTest();
+		// // test.validate((BTSCorpusObject) o);
+		// }
+		// }
+		// }
+		//
+		// @Override
+		// public void widgetDefaultSelected(SelectionEvent e)
+		// {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
 
 		treeViewer = new TreeViewer(composite);
 		treeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -413,7 +422,8 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	@Focus
 	public void onFocus()
 	{
-		// TODO Your code here
+		evaluationController
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
 	}
 
 	@Inject
@@ -427,10 +437,26 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		} else if ((object instanceof BTSTCObject || object instanceof BTSText) && selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject)
 		{
-			corpusNavigatorController.addRelation((BTSCorpusObject) object, "partOf",
+			corpusNavigatorController.addRelation((BTSCorpusObject) object,
+					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
 					(TreeNodeWrapper) selection.getFirstElement());
 
 			//			refreshTreeViewer((BTSCorpusObject) object);
+
+		}
+	}
+
+	@Inject
+	@Optional
+	void eventReceivedAdd(@EventTopic("model_add/*") BTSObject object) {
+		if (object instanceof BTSAnnotation
+				&& selection != null
+				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
+			corpusNavigatorController.addRelation((BTSCorpusObject) object,
+					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
+					(TreeNodeWrapper) selection.getFirstElement());
+
+			// refreshTreeViewer((BTSCorpusObject) object);
 
 		}
 	}

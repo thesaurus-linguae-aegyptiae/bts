@@ -37,7 +37,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		//FIXME update user password if changed
 		// FIXME update user role memberships 
 		// beides in _user Object!!!!!!!!!!
-		return false;
+		return true;
 	}
 
 	@Override

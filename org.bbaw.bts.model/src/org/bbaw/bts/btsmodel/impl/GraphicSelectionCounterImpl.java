@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl#getDateOfLastSelection <em>Date Of Last Selection</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl#getCounter <em>Counter</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.GraphicSelectionCounterImpl#getSuggest <em>Suggest</em>}</li>
  * </ul>
  * </p>
  *
@@ -64,26 +63,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 	 * @ordered
 	 */
 	protected int counter = COUNTER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getSuggest() <em>Suggest</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSuggest()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String SUGGEST_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getSuggest() <em>Suggest</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSuggest()
-	 * @generated
-	 * @ordered
-	 */
-	protected String suggest = SUGGEST_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -151,27 +130,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getSuggest() {
-		return suggest;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSuggest(String newSuggest) {
-		String oldSuggest = suggest;
-		suggest = newSuggest;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__SUGGEST, oldSuggest, suggest));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -179,8 +137,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 				return getDateOfLastSelection();
 			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__COUNTER:
 				return getCounter();
-			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__SUGGEST:
-				return getSuggest();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -198,9 +154,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 				return;
 			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__COUNTER:
 				setCounter((Integer)newValue);
-				return;
-			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__SUGGEST:
-				setSuggest((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -220,9 +173,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__COUNTER:
 				setCounter(COUNTER_EDEFAULT);
 				return;
-			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__SUGGEST:
-				setSuggest(SUGGEST_EDEFAULT);
-				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -239,8 +189,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 				return DATE_OF_LAST_SELECTION_EDEFAULT == null ? dateOfLastSelection != null : !DATE_OF_LAST_SELECTION_EDEFAULT.equals(dateOfLastSelection);
 			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__COUNTER:
 				return counter != COUNTER_EDEFAULT;
-			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER__SUGGEST:
-				return SUGGEST_EDEFAULT == null ? suggest != null : !SUGGEST_EDEFAULT.equals(suggest);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -259,8 +207,6 @@ public class GraphicSelectionCounterImpl extends BTSDBBaseObjectImpl implements 
 		result.append(dateOfLastSelection);
 		result.append(", counter: ");
 		result.append(counter);
-		result.append(", suggest: ");
-		result.append(suggest);
 		result.append(')');
 		return result.toString();
 	}

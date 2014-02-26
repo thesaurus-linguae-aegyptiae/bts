@@ -14,7 +14,6 @@ import java.util.Date;
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getDateOfLastSelection <em>Date Of Last Selection</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getCounter <em>Counter</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getSuggest <em>Suggest</em>}</li>
  * </ul>
  * </p>
  *
@@ -74,31 +73,5 @@ public interface GraphicSelectionCounter extends BTSDBBaseObject {
 	 * @generated
 	 */
 	void setCounter(int value);
-
-	/**
-	 * Returns the value of the '<em><b>Suggest</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Suggest</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Suggest</em>' attribute.
-	 * @see #setSuggest(String)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getGraphicSelectionCounter_Suggest()
-	 * @model
-	 * @generated
-	 */
-	String getSuggest();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter#getSuggest <em>Suggest</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Suggest</em>' attribute.
-	 * @see #getSuggest()
-	 * @generated
-	 */
-	void setSuggest(String value);
 
 } // GraphicSelectionCounter

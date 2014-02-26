@@ -16,13 +16,15 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getValue <em>Value</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getCategory <em>Category</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getSubentries <em>Subentries</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getName <em>Name</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *
  * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface BTSPassportEntry extends BTSIdentifiableItem {
@@ -131,45 +133,97 @@ public interface BTSPassportEntry extends BTSIdentifiableItem {
 	void setValue(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Category</b></em>' attribute.
+	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSPassportEntry}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Category</em>' attribute isn't clear,
+	 * If the meaning of the '<em>Children</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Category</em>' attribute.
-	 * @see #setCategory(String)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry_Category()
-	 * @model
-	 * @generated
-	 */
-	String getCategory();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getCategory <em>Category</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Category</em>' attribute.
-	 * @see #getCategory()
-	 * @generated
-	 */
-	void setCategory(String value);
-
-	/**
-	 * Returns the value of the '<em><b>Subentries</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSPpSubentry}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Subentries</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Subentries</em>' containment reference list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry_Subentries()
+	 * @return the value of the '<em>Children</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry_Children()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<BTSPpSubentry> getSubentries();
+	EList<BTSPassportEntry> getChildren();
+
+	/**
+	 * Returns the value of the '<em><b>Label</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Label</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Label</em>' containment reference.
+	 * @see #setLabel(BTSTranslations)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry_Label()
+	 * @model containment="true"
+	 * @generated
+	 */
+	BTSTranslations getLabel();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getLabel <em>Label</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Label</em>' containment reference.
+	 * @see #getLabel()
+	 * @generated
+	 */
+	void setLabel(BTSTranslations value);
+
+	/**
+	 * Returns the value of the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Name</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Name</em>' attribute.
+	 * @see #setName(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry_Name()
+	 * @model
+	 * @generated
+	 */
+	String getName();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getName <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Name</em>' attribute.
+	 * @see #getName()
+	 * @generated
+	 */
+	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Key</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Key</em>' attribute.
+	 * @see #setKey(int)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEntry_Key()
+	 * @model
+	 * @generated
+	 */
+	int getKey();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEntry#getKey <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Key</em>' attribute.
+	 * @see #getKey()
+	 * @generated
+	 */
+	void setKey(int value);
 
 } // BTSPassportEntry

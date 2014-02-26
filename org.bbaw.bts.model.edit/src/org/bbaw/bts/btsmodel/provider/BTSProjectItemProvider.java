@@ -9,6 +9,7 @@ import java.util.Vector;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -26,6 +27,7 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSProject} object.
@@ -291,27 +293,28 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	 * This returns BTSProject.gif. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSProject"));
+		return overlayImage(object, resourceProvider.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_PROJECT));
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public String getText(Object object)
 	{
 		String label = ((BTSProject)object).getName();
 		return label == null || label.length() == 0 ?
-			getString("_UI_BTSProject_type") :
-			getString("_UI_BTSProject_type") + " " + label;
+ getString("_UI_BTSProject_type")
+				: label;
 	}
 
 	/**

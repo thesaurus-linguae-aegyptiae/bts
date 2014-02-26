@@ -2,10 +2,14 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -20,6 +24,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#isAllowMultiple <em>Allow Multiple</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getHorizontalWidth <em>Horizontal Width</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getRegex <em>Regex</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getReferencedTypesPath <em>Referenced Types Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -127,6 +132,16 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	protected String regex = REGEX_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getReferencedTypesPath() <em>Referenced Types Path</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedTypesPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected BTSObjectTypePathRoot referencedTypesPath;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -164,6 +179,12 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 		widgetType = newWidgetType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE, oldWidgetType, widgetType));
+		EObject container = this.eContainer();
+		if (container != null) {
+			container.eNotify(new ENotificationImpl(this, Notification.SET,
+					BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE,
+					oldWidgetType, newWidgetType));
+		}
 	}
 
 	/**
@@ -257,6 +278,63 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BTSObjectTypePathRoot getReferencedTypesPath() {
+		return referencedTypesPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReferencedTypesPath(BTSObjectTypePathRoot newReferencedTypesPath, NotificationChain msgs) {
+		BTSObjectTypePathRoot oldReferencedTypesPath = referencedTypesPath;
+		referencedTypesPath = newReferencedTypesPath;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, oldReferencedTypesPath, newReferencedTypesPath);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferencedTypesPath(BTSObjectTypePathRoot newReferencedTypesPath) {
+		if (newReferencedTypesPath != referencedTypesPath) {
+			NotificationChain msgs = null;
+			if (referencedTypesPath != null)
+				msgs = ((InternalEObject)referencedTypesPath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, null, msgs);
+			if (newReferencedTypesPath != null)
+				msgs = ((InternalEObject)newReferencedTypesPath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, null, msgs);
+			msgs = basicSetReferencedTypesPath(newReferencedTypesPath, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, newReferencedTypesPath, newReferencedTypesPath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
+				return basicSetReferencedTypesPath(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -270,6 +348,8 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 				return getHorizontalWidth();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				return getRegex();
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
+				return getReferencedTypesPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -296,6 +376,9 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 				return;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				setRegex((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
+				setReferencedTypesPath((BTSObjectTypePathRoot)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -324,6 +407,9 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				setRegex(REGEX_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
+				setReferencedTypesPath((BTSObjectTypePathRoot)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -346,6 +432,8 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 				return horizontalWidth != HORIZONTAL_WIDTH_EDEFAULT;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				return REGEX_EDEFAULT == null ? regex != null : !REGEX_EDEFAULT.equals(regex);
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
+				return referencedTypesPath != null;
 		}
 		return super.eIsSet(featureID);
 	}

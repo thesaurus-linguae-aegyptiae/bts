@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.core.commons.BTSUIConstants;
-import org.bbaw.bts.core.services.BTSUserService;
+import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.modelUtils.StringEncryption;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.Dialog;
@@ -19,6 +19,8 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -34,7 +36,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Monitor;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 
 public class LoginDialog extends Dialog
 {
@@ -49,7 +52,7 @@ public class LoginDialog extends Dialog
 
 	private IEclipseContext context;
 
-	private BTSUserService uService;
+	private BTSUserController userController;
 
 	private Text passwortText;
 
@@ -63,12 +66,13 @@ public class LoginDialog extends Dialog
 
 	private Label errorLabel;
 
-	public LoginDialog(Shell parentShell, IEclipseContext context, BTSUserService uService)
+	public LoginDialog(Shell parentShell, IEclipseContext context,
+			BTSUserController userController)
 	{
 		super(parentShell);
 		this.shell = parentShell;
 		this.context = context;
-		this.uService = uService;
+		this.userController = userController;
 	}
 
 	@Override
@@ -82,6 +86,7 @@ public class LoginDialog extends Dialog
 	protected Control createDialogArea(Composite parent)
 	{
 		parent.setBackgroundMode(SWT.INHERIT_DEFAULT);
+		parent.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		Composite control = createContentArea(parent);
 		control.setData("org.eclipse.e4.ui.css.id", "LoginDialog");
 		Rectangle controlRect = control.getBounds();
@@ -89,7 +94,7 @@ public class LoginDialog extends Dialog
 		// looks strange in multi monitor environments
 		// Rectangle displayBounds = shell.getDisplay().getBounds();
 
-		Monitor primary = shell.getDisplay().getPrimaryMonitor();
+		Monitor primary = shell.getDisplay().getDefault().getPrimaryMonitor();
 		Rectangle displayBounds = primary.getBounds();
 
 		int x = (displayBounds.width - controlRect.width) / 2;
@@ -103,6 +108,7 @@ public class LoginDialog extends Dialog
 	{
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setBackgroundMode(SWT.INHERIT_DEFAULT);
+		composite.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		GridLayout gridLayout = new GridLayout();
 		gridLayout.numColumns = 1;
 		gridLayout.marginHeight = 0;
@@ -118,7 +124,7 @@ public class LoginDialog extends Dialog
 		{
 			titleImage = imageDescriptor.createImage();
 			Label imageLabel = new Label(composite, SWT.NONE);
-
+			imageLabel.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 			GridData data = new GridData();
 			data.horizontalAlignment = GridData.FILL;
 			data.verticalAlignment = GridData.BEGINNING;
@@ -128,8 +134,9 @@ public class LoginDialog extends Dialog
 		}
 
 		Composite userPasswortComposite = new Composite(composite, SWT.NONE);
-
+		userPasswortComposite.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		errorLabel = new Label(userPasswortComposite, SWT.BOLD);
+		errorLabel.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		errorLabel.setText("");
 		GridData gd = new GridData();
 		gd.grabExcessHorizontalSpace = true;
@@ -149,8 +156,10 @@ public class LoginDialog extends Dialog
 		userPasswortComposite.setLayoutData(gridData);
 
 		Label userLabel = new Label(userPasswortComposite, SWT.RIGHT);
+		userLabel.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		userLabel.setText("User  ");
 		userText = new Text(userPasswortComposite, SWT.BORDER);
+		userText.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		gridData = new GridData();
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
@@ -165,10 +174,29 @@ public class LoginDialog extends Dialog
 
 			}
 		});
+		userText.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.keyCode == SWT.TAB) {
+					passwortText.setFocus();
+				}
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 		Label passwordLabel = new Label(userPasswortComposite, SWT.RIGHT);
+		passwordLabel.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		passwordLabel.setText("Password  ");
 		passwortText = new Text(userPasswortComposite, SWT.PASSWORD | SWT.BORDER);
+		passwortText
+				.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		gridData = new GridData();
 		gridData.grabExcessHorizontalSpace = true;
 		gridData.horizontalAlignment = GridData.FILL;
@@ -190,6 +218,7 @@ public class LoginDialog extends Dialog
 	@Override
 	protected void createButtonsForButtonBar(Composite parent)
 	{
+		parent.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		// create OK and Cancel buttons by default
 		parent.setBackgroundMode(SWT.INHERIT_DEFAULT);
 
@@ -202,7 +231,10 @@ public class LoginDialog extends Dialog
 		// EclipseContextFactory.getServiceContext(bundleContext);
 		// eclipseCtx.set("currentUser", user);
 		okButton = createOkButton(parent, IDialogConstants.OK_ID, "Login", true);
+		okButton.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 		cancelButton = createButton(parent, IDialogConstants.CANCEL_ID, "Cancel", false);
+		cancelButton
+				.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 	}
 
 	private Button createOkButton(Composite parent, int id, String label, boolean defaultButton)
@@ -249,24 +281,25 @@ public class LoginDialog extends Dialog
 	{
 		String userName = userText.getText().trim();
 		String passWord = passwortText.getText().trim();
-		if (!uService.setAuthentication(userName, passWord))
+		if (!userController.setAuthentication(userName, passWord))
 		{
 			return false;
 		}
 		QueryBuilder dd;
 		//FIXME wieder einkommentieren
-//		BTSQueryRequest query = new BTSQueryRequest();
-//		query.setQueryBuilder(QueryBuilders.boolQuery().must(QueryBuilders.termQuery("userName", userName)));
-//		List<BTSUser> users = uService.query(query);
-//		for (BTSUser u : users)
-//		{
-//			if (userName.equals(u.getUserName()) && equalsPassword(u, passWord))
-//			{
-//				validUser = u;
-//				return true;
-//			}
-//		}
-		return false;
+		BTSQueryRequest query = new BTSQueryRequest();
+		query.setQueryBuilder(QueryBuilders.boolQuery().must(
+				QueryBuilders.termQuery("userName", userName)));
+		List<BTSUser> users = userController.query(query);
+		for (BTSUser u : users) {
+			if (userName.equals(u.getUserName())) { // FIXME password checking
+													// && equalsPassword(u,
+													// passWord)) {
+				validUser = u;
+				return true;
+			}
+		}
+		return true;
 	}
 
 	private boolean equalsPassword(BTSUser u, String passWord)
@@ -288,7 +321,8 @@ public class LoginDialog extends Dialog
 	@Override
 	protected void buttonPressed(int buttonId)
 	{
-		context.set(BTSUIConstants.AUTHENTICATED_USER, validUser);
+		userController.setAuthenticatedUser(validUser);
+
 		super.buttonPressed(buttonId);
 	}
 

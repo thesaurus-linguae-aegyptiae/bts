@@ -378,6 +378,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			loadText();
 			this.layout();
 		}
+ else {
+			purgeAll();
+			this.layout();
+			parentComposite.layout();
+		}
 	}
 
 	private void loadText() {

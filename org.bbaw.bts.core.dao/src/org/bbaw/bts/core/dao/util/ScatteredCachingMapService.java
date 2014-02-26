@@ -1,13 +1,16 @@
 package org.bbaw.bts.core.dao.util;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
@@ -20,36 +23,50 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	@Optional
 	private EPartService partService;
 
+	private Map<URI, Resource> configurationMap = new HashMap<URI, Resource>();
+
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		configurationMap.clear();
 
 	}
 
 	@Override
 	public boolean containsKey(Object key) {
+		if (configurationMap.containsKey(key)) {
+			return true;
+		}
 		if (partService == null) {
 			return false;
 		}
-		Collection<MPart> parts = partService.getParts();
-		for (MPart part : parts) {
-			if (part.getObject() != null
-					&& part.getObject() instanceof ScatteredCachingPart) {
-				List<Map> maps = ((ScatteredCachingPart) part.getObject())
-						.getScatteredCashMaps();
-				for (Map map : maps) {
-					if (map != null && map.containsKey(key)) {
-						return true;
+
+		try {
+			Collection<MPart> parts = partService.getParts();
+			for (MPart part : parts) {
+				if (part.getObject() != null
+						&& part.getObject() instanceof ScatteredCachingPart) {
+					List<Map> maps = ((ScatteredCachingPart) part.getObject())
+							.getScatteredCashMaps();
+					for (Map map : maps) {
+						if (map != null && map.containsKey(key)) {
+							return true;
+						}
 					}
 				}
-			}
 
+			}
+		} catch (IllegalStateException e) {
+			System.err.println("Application does not have an active window");
+			return false;
 		}
 		return false;
 	}
 
 	@Override
 	public boolean containsValue(Object value) {
+		if (configurationMap.containsValue(value)) {
+			return true;
+		}
 		if (partService == null) {
 			return false;
 		} else if (partService.getActivePart() != null) {
@@ -73,14 +90,18 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	@Override
 	public Set<java.util.Map.Entry<URI, Resource>> entrySet() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException(
+				"ScatteredCachingMapService unsupported operation: keySet not implemented");
+
 	}
 
 	@Override
 	public Resource get(Object key) {
 		// FIXME dies setzt ein active window voraus - nicht gegeben, wenn parts
 		// im dialog geöffnet werden.
+		if (configurationMap.containsKey(key)) {
+			return configurationMap.get(key);
+		}
 		if (partService == null) {
 			return null;
 		}
@@ -103,7 +124,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 			}
 		} catch (IllegalStateException e) {
-			e.printStackTrace();
+			System.err.println("Application does not have an active window");
 		}
 		return null;
 	}
@@ -116,25 +137,36 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	@Override
 	public Set<URI> keySet() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException(
+				"ScatteredCachingMapService unsupported operation: keySet not implemented");
 	}
 
 	@Override
 	public Resource put(URI key, Resource value) {
-		// TODO Auto-generated method stub
+		if (value.getContents() != null && !value.getContents().isEmpty()
+				&& value.getContents().get(0) instanceof BTSConfiguration) {
+			configurationMap.put(key, value);
+		}
 		return value;
+
 	}
 
 	@Override
 	public void putAll(Map<? extends URI, ? extends Resource> m) {
-		// TODO Auto-generated method stub
+		Assert.isNotNull(m);
+		for (URI uri : m.keySet()) {
+			if (m.get(uri) instanceof BTSConfiguration) {
+				put(uri, m.get(uri));
+			}
+		}
 
 	}
 
 	@Override
 	public Resource remove(Object key) {
-		// TODO Auto-generated method stub
+		if (configurationMap.containsKey(key)) {
+			return configurationMap.remove(key);
+		}
 		return null;
 	}
 
@@ -161,8 +193,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	@Override
 	public Collection<Resource> values() {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException(
+				"ScatteredCachingMapService unsupported operation: keySet not implemented");
+
 	}
 
 }

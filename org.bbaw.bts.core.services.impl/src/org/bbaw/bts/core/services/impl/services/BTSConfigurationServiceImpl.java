@@ -5,17 +5,25 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSImage;
+import org.bbaw.bts.btsmodel.BTSListEntry;
+import org.bbaw.bts.btsmodel.BTSTCObject;
+import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSUIConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -25,7 +33,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	private BTSConfigurationDao configurationDao;
 	@Inject
 	private IEclipseContext context;
-
+	@Inject
+	@Preference(value = BTSPluginIDs.ACTIVE_CONFIGURATION, nodePath = "org.bbaw.bts.app")
+	protected String active_configuration_name;
 	@Override
 	public BTSConfiguration createNew()
 	{
@@ -43,7 +53,10 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			configurationDao.add(entity, entity.getProject() + ServiceConstants.ADMIN_SUFFIX);
 		}
-		return false;
+		if (active_configuration_name.equals(entity.getName())) {
+			context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, entity);
+		}
+		return true;
 	}
 
 	@Override
@@ -112,7 +125,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 				if (c instanceof BTSConfigItem)
 				{
 					BTSConfigItem ci = (BTSConfigItem) c;
-					if (ci.getValue() != null && ci.getValue().equals(BTSUIConstants.PASSPORT))
+					if (ci.getValue() != null && ci.getValue().equals(BTSCoreConstants.PASSPORT))
 					{
 						return ci;
 					}
@@ -137,6 +150,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			save(config);
 		}
 		activeConfig = list().get(0);
+
+		for (BTSConfiguration c : list) {
+			if (active_configuration_name.equals(c.getName())) {
+				activeConfig = c;
+			}
+		}
 		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, activeConfig);
 		return activeConfig;
 	}
@@ -152,7 +171,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 				if (c instanceof BTSConfigItem)
 				{
 					BTSConfigItem ci = (BTSConfigItem) c;
-					if (ci.getValue() != null && ci.getValue().equals(BTSUIConstants.OBJECT_TYPES))
+					if (ci.getValue() != null && ci.getValue().equals(BTSCoreConstants.OBJECT_TYPES))
 					{
 						return ci;
 					}
@@ -178,5 +197,61 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public List<BTSConfiguration> list(String dbPath, String queryId)
 	{
 		return filter(configurationDao.findByQueryId(queryId, dbPath));
+	}
+
+	@Override
+	public BTSConfigItem getConfigItemOfObjectType(BTSCorpusObject object,
+			boolean strict) {
+		BTSConfigItem objectTypesCI = getObjectTypesConfigItem();
+		String oClass = findObjectClass((BTSCorpusObject) object);
+		for (BTSConfig c : objectTypesCI.getChildren()) {
+			if (oClass.equals(((BTSConfigItem) c).getValue())) {
+				if (object.getType() == null || "".equals(object.getType())) {
+					return (BTSConfigItem) c;
+				} else {
+					for (BTSConfig cc : c.getChildren()) {
+						if (object.getType().equals(
+								((BTSConfigItem) cc).getValue())) {
+							if (object.getSubtype() != null
+									&& "".equals(object.getSubtype())) {
+								for (BTSConfig ccc : cc.getChildren()) {
+									if (object.getSubtype().equals(
+											((BTSConfigItem) ccc).getValue())) {
+										return (BTSConfigItem) ccc;
+									}
+
+								}
+								if (!strict) {
+									return (BTSConfigItem) cc;
+								}
+							} else {
+								return (BTSConfigItem) cc;
+							}
+						}
+
+					}
+				}
+			}
+
+		}
+		return null;
+	}
+
+	@Override
+	public String findObjectClass(BTSCorpusObject corpusObject) {
+		if (corpusObject instanceof BTSAnnotation) {
+			return BASIC_OBJECT_TYPES[0];
+		} else if (corpusObject instanceof BTSTCObject) {
+			return BASIC_OBJECT_TYPES[1];
+		} else if (corpusObject instanceof BTSImage) {
+			return BASIC_OBJECT_TYPES[2];
+		} else if (corpusObject instanceof BTSListEntry) {
+			return BASIC_OBJECT_TYPES[3];
+		} else if (corpusObject instanceof BTSText) {
+			return BASIC_OBJECT_TYPES[4];
+		} else if (corpusObject instanceof BTSTextCorpus) {
+			return BASIC_OBJECT_TYPES[5];
+		}
+		return null;
 	}
 }

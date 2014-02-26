@@ -3,15 +3,21 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
-import org.bbaw.bts.btsmodel.BTSPpSubentry;
+import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -26,14 +32,16 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getValue <em>Value</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getCategory <em>Category</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getSubentries <em>Subentries</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getLabel <em>Label</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl#getKey <em>Key</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTSPassportEntry {
+public abstract class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTSPassportEntry {
 	/**
 	 * The default value of the '{@link #getProvider() <em>Provider</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -115,34 +123,64 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	protected String value = VALUE_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getCategory() <em>Category</em>}' attribute.
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCategory()
+	 * @see #getChildren()
 	 * @generated
 	 * @ordered
 	 */
-	protected static final String CATEGORY_EDEFAULT = null;
+	protected EList<BTSPassportEntry> children;
 
 	/**
-	 * The cached value of the '{@link #getCategory() <em>Category</em>}' attribute.
+	 * The cached value of the '{@link #getLabel() <em>Label</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getCategory()
+	 * @see #getLabel()
 	 * @generated
 	 * @ordered
 	 */
-	protected String category = CATEGORY_EDEFAULT;
+	protected BTSTranslations label;
 
 	/**
-	 * The cached value of the '{@link #getSubentries() <em>Subentries</em>}' containment reference list.
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSubentries()
+	 * @see #getName()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<BTSPpSubentry> subentries;
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getKey() <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getKey() <em>Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int key = KEY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -252,32 +290,96 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getCategory() {
-		return category;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setCategory(String newCategory) {
-		String oldCategory = category;
-		category = newCategory;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_ENTRY__CATEGORY, oldCategory, category));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<BTSPpSubentry> getSubentries() {
-		if (subentries == null) {
-			subentries = new EObjectContainmentEList<BTSPpSubentry>(BTSPpSubentry.class, this, BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES);
+	public EList<BTSPassportEntry> getChildren() {
+		if (children == null) {
+			children = new EObjectContainmentEList<BTSPassportEntry>(BTSPassportEntry.class, this, BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN);
 		}
-		return subentries;
+		return children;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSTranslations getLabel() {
+		return label;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetLabel(BTSTranslations newLabel, NotificationChain msgs) {
+		BTSTranslations oldLabel = label;
+		label = newLabel;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL, oldLabel, newLabel);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLabel(BTSTranslations newLabel) {
+		if (newLabel != label) {
+			NotificationChain msgs = null;
+			if (label != null)
+				msgs = ((InternalEObject)label).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL, null, msgs);
+			if (newLabel != null)
+				msgs = ((InternalEObject)newLabel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL, null, msgs);
+			msgs = basicSetLabel(newLabel, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL, newLabel, newLabel));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getKey() {
+		return key;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setKey(int newKey) {
+		int oldKey = key;
+		key = newKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY, oldKey, key));
 	}
 
 	/**
@@ -288,8 +390,10 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
-				return ((InternalEList<?>)getSubentries()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
+				return basicSetLabel(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -310,10 +414,14 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 				return getType();
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE:
 				return getValue();
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CATEGORY:
-				return getCategory();
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
-				return getSubentries();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN:
+				return getChildren();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
+				return getLabel();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME:
+				return getName();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY:
+				return getKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -339,12 +447,18 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE:
 				setValue((String)newValue);
 				return;
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CATEGORY:
-				setCategory((String)newValue);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends BTSPassportEntry>)newValue);
 				return;
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
-				getSubentries().clear();
-				getSubentries().addAll((Collection<? extends BTSPpSubentry>)newValue);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
+				setLabel((BTSTranslations)newValue);
+				return;
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME:
+				setName((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY:
+				setKey((Integer)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -370,11 +484,17 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE:
 				setValue(VALUE_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CATEGORY:
-				setCategory(CATEGORY_EDEFAULT);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN:
+				getChildren().clear();
 				return;
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
-				getSubentries().clear();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
+				setLabel((BTSTranslations)null);
+				return;
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY:
+				setKey(KEY_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -396,10 +516,14 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE:
 				return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CATEGORY:
-				return CATEGORY_EDEFAULT == null ? category != null : !CATEGORY_EDEFAULT.equals(category);
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
-				return subentries != null && !subentries.isEmpty();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN:
+				return children != null && !children.isEmpty();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
+				return label != null;
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY:
+				return key != KEY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -422,8 +546,10 @@ public class BTSPassportEntryImpl extends BTSIdentifiableItemImpl implements BTS
 		result.append(type);
 		result.append(", value: ");
 		result.append(value);
-		result.append(", category: ");
-		result.append(category);
+		result.append(", name: ");
+		result.append(name);
+		result.append(", key: ");
+		result.append(key);
 		result.append(')');
 		return result.toString();
 	}

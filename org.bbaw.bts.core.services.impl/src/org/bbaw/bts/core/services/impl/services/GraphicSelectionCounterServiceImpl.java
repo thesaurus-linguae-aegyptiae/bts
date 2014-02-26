@@ -34,8 +34,6 @@ public class GraphicSelectionCounterServiceImpl extends
 	@Override
 	public boolean save(GraphicSelectionCounter entity) {
 		if (entity != null) {
-			entity.setSuggest(entity.get_id()); // XXX ordentlich machen, beim
-												// setzen der id
 			counterDao
 .add(entity, ServiceConstants.LOCAL);
 		}

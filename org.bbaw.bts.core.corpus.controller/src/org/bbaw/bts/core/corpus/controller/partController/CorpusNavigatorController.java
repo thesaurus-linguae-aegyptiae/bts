@@ -3,6 +3,7 @@ package org.bbaw.bts.core.corpus.controller.partController;
 import java.util.List;
 import java.util.Map;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
@@ -24,6 +25,8 @@ public interface CorpusNavigatorController
 	BTSTCObject createNewTCObject();
 
 	BTSText createNewText();
+
+	BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject);
 
 	void addRelation(BTSCorpusObject subject, String relationType, TreeNodeWrapper treeNodeWrapper);
 

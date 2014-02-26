@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -132,6 +133,36 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 		}
 	}
 
+	/**
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generatedNOT
+	 */
+	public BTSTranslation getBTSTranslation(String lang) {
+		return getTranslationInternal(lang);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList getLanguages() {
+		EList<String> langs = new BasicEList<String>();
+		if (translations == null) {
+			return langs;
+		}
+		for (BTSTranslation t : translations) {
+			if (t.getLang() != null && !"".equals(t.getLang())
+					&& t.getValue() != null && !"".equals(t.getValue()))
+			{
+				langs.add(t.getLang());
+			}
+
+		}
+		return langs;
+	}
+
 	private BTSTranslation getTranslationInternal(String language)
 	{
 		if (language != null)
@@ -235,6 +266,10 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 				return getTranslation((String)arguments.get(0));
 			case BtsmodelPackage.BTS_TRANSLATIONS___SET_TRANSLATION__STRING_STRING:
 				return setTranslation((String)arguments.get(0), (String)arguments.get(1));
+			case BtsmodelPackage.BTS_TRANSLATIONS___GET_BTS_TRANSLATION__STRING:
+				return getBTSTranslation((String)arguments.get(0));
+			case BtsmodelPackage.BTS_TRANSLATIONS___GET_LANGUAGES:
+				return getLanguages();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

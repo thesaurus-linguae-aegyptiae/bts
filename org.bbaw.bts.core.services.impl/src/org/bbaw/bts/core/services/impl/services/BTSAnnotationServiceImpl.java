@@ -6,7 +6,10 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSAnnotationDao;
 import org.bbaw.bts.core.services.BTSAnnotationService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
@@ -114,6 +117,16 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 	public List<BTSAnnotation> list(String dbPath, String queryId)
 	{
 		return filter(annotationDao.findByQueryId(queryId, dbPath));
+	}
+
+	@Override
+	public BTSAnnotation createNewAndRelate(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = createNew();
+		BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
+		rel.setObjectId(annotatedObject.get_id());
+		rel.setType(BTSCoreConstants.BASIC_RELATIONS_ANNOTATION_TARGET);
+		anno.getRelations().add(rel);
+		return anno;
 	}
 
 }

@@ -152,8 +152,8 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSDateAdapter();
 			}
 			@Override
-			public Adapter caseBTSPassportEntry(BTSPassportEntry object) {
-				return createBTSPassportEntryAdapter();
+			public Adapter caseBTSPassportEntryGroup(BTSPassportEntryGroup object) {
+				return createBTSPassportEntryGroupAdapter();
 			}
 			@Override
 			public Adapter caseBTSRelation(BTSRelation object) {
@@ -224,8 +224,8 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSListAdapter();
 			}
 			@Override
-			public Adapter caseBTSPpSubentry(BTSPpSubentry object) {
-				return createBTSPpSubentryAdapter();
+			public Adapter caseBTSPassportEntryItem(BTSPassportEntryItem object) {
+				return createBTSPassportEntryItemAdapter();
 			}
 			@Override
 			public Adapter caseBTSListSubentry(BTSListSubentry object) {
@@ -290,6 +290,22 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseGraphicSelectionCounter(GraphicSelectionCounter object) {
 				return createGraphicSelectionCounterAdapter();
+			}
+			@Override
+			public Adapter caseObjectTypePathEntry(ObjectTypePathEntry object) {
+				return createObjectTypePathEntryAdapter();
+			}
+			@Override
+			public Adapter caseBTSObjectTypePathRoot(BTSObjectTypePathRoot object) {
+				return createBTSObjectTypePathRootAdapter();
+			}
+			@Override
+			public Adapter caseBTSObjectTypePath(BTSObjectTypePath object) {
+				return createBTSObjectTypePathAdapter();
+			}
+			@Override
+			public Adapter caseBTSPassportEntry(BTSPassportEntry object) {
+				return createBTSPassportEntryAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -608,16 +624,16 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntry <em>BTS Passport Entry</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntryGroup <em>BTS Passport Entry Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntry
+	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryGroup
 	 * @generated
 	 */
-	public Adapter createBTSPassportEntryAdapter() {
+	public Adapter createBTSPassportEntryGroupAdapter() {
 		return null;
 	}
 
@@ -860,16 +876,16 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPpSubentry <em>BTS Pp Subentry</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem <em>BTS Passport Entry Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSPpSubentry
+	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem
 	 * @generated
 	 */
-	public Adapter createBTSPpSubentryAdapter() {
+	public Adapter createBTSPassportEntryItemAdapter() {
 		return null;
 	}
 
@@ -1108,6 +1124,62 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createGraphicSelectionCounterAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.ObjectTypePathEntry <em>Object Type Path Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.ObjectTypePathEntry
+	 * @generated
+	 */
+	public Adapter createObjectTypePathEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot <em>BTS Object Type Path Root</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePathRoot
+	 * @generated
+	 */
+	public Adapter createBTSObjectTypePathRootAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath <em>BTS Object Type Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePath
+	 * @generated
+	 */
+	public Adapter createBTSObjectTypePathAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntry <em>BTS Passport Entry</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSPassportEntry
+	 * @generated
+	 */
+	public Adapter createBTSPassportEntryAdapter() {
 		return null;
 	}
 

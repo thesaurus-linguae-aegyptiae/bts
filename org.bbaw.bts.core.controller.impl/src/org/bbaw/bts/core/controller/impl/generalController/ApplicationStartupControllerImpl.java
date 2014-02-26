@@ -7,13 +7,17 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.app.login.Login;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSUIConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.InternetAccessTester;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
+import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
@@ -22,6 +26,7 @@ import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -51,7 +56,7 @@ public class ApplicationStartupControllerImpl implements
 
 	@Inject
 	@Optional
-	@Preference(value = "main_project", nodePath = "org.bbaw.bts.app")
+	@Preference(value = "main_project_key", nodePath = "org.bbaw.bts.app")
 	private String main_project;
 
 	@Inject
@@ -89,12 +94,17 @@ public class ApplicationStartupControllerImpl implements
 	@Inject
 	private ISplashScreenController splashController;
 
+
+
 	@Inject
 	@Preference(nodePath = "org.bbaw.bts.dao")
 	private IEclipsePreferences prefs;
 
+	@Inject
+	private BTSUserController userController;
+
 	@Override
-	public void applicationStartup(IEclipseContext context,
+	public void applicationStartup(final IEclipseContext context,
 			BTSProjectService projectService, IApplicationContext appContext) {
 		this.context = context;
 
@@ -140,6 +150,11 @@ public class ApplicationStartupControllerImpl implements
 				new EventHandler() {
 					@Override
 					public void handleEvent(Event event) {
+						// inititae static access controller
+						StaticAccessController sa = context
+								.get(StaticAccessController.class);
+						PermissionsAndExpressionsEvaluationController permissionController = context
+								.get(PermissionsAndExpressionsEvaluationController.class);
 						splashController.close();
 						eventBroker.unsubscribe(this);
 					}
@@ -233,10 +248,10 @@ public class ApplicationStartupControllerImpl implements
 		//
 
 		// dev
-		userService.setAuthentication("admin", "admin");
+		// userService.setAuthentication("admin", "admin");
 
-		// Login login = ContextInjectionFactory.make(Login.class, context);
-		// login.login(context, userService);
+		Login login = ContextInjectionFactory.make(Login.class, context);
+		login.login(context, userController);
 
 		try {
 			splashController.setMessage("Prepare Database...");
@@ -265,6 +280,7 @@ public class ApplicationStartupControllerImpl implements
 				activeProjects.add(p);
 			}
 		}
+
 		if (projects != null && !projects.isEmpty()) {
 
 			splashController.setMessage("Check Project Settings ...");
@@ -276,7 +292,7 @@ public class ApplicationStartupControllerImpl implements
 
 			for (BTSProject p : projects) {
 				if (p.getPrefix().equals(main_project)) {
-					context.set(BTSUIConstants.MAIN_PROJECT, p);
+					context.set(BTSCoreConstants.MAIN_PROJECT, p);
 					mainProjectSet = true;
 					break;
 				}
@@ -338,6 +354,7 @@ public class ApplicationStartupControllerImpl implements
 
 			}
 			if (checkContains(projects, main_project)) {
+
 
 			} else {
 

@@ -39,7 +39,7 @@ public class InstallationWizard extends Wizard
 				"http://127.0.0.1:5985"));
 
 		projectPage = new SelectProjectsPage(preferences.get(BTSPluginIDs.PREF_ACITVE_PROJECTS, null), preferences.get(
-				BTSPluginIDs.PREF_MAIN_PROJECT, null));
+				BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
 
 		dbPage = new DBInstallationSettingsPage(startupController.getDBInstallationDir(), preferences.get(
 				BTSPluginIDs.PREF_DB_PORT, null));

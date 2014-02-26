@@ -220,7 +220,7 @@ public class BTSPassportItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT__DATE);
-			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT__PASSPORT_ENTRIES);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT__CHILDREN);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT__DESCRIPTIONS);
 		}
 		return childrenFeatures;
@@ -285,7 +285,7 @@ public class BTSPassportItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_PASSPORT__DATE:
-			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
+			case BtsmodelPackage.BTS_PASSPORT__CHILDREN:
 			case BtsmodelPackage.BTS_PASSPORT__DESCRIPTIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -311,8 +311,13 @@ public class BTSPassportItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BtsmodelPackage.Literals.BTS_PASSPORT__PASSPORT_ENTRIES,
-				 BtsmodelFactory.eINSTANCE.createBTSPassportEntry()));
+				(BtsmodelPackage.Literals.BTS_PASSPORT__CHILDREN,
+				 BtsmodelFactory.eINSTANCE.createBTSPassportEntryGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_PASSPORT__CHILDREN,
+				 BtsmodelFactory.eINSTANCE.createBTSPassportEntryItem()));
 
 		newChildDescriptors.add
 			(createChildParameter

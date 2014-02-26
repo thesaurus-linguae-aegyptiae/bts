@@ -31,7 +31,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 	public boolean save(BTSImage entity)
 	{
 		imageDao.add(entity, entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
-		return false;
+		return true;
 	}
 
 	@Override

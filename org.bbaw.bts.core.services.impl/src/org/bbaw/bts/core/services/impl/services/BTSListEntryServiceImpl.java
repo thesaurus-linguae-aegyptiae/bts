@@ -32,7 +32,7 @@ public class BTSListEntryServiceImpl extends GenericObjectServiceImpl<BTSListEnt
 	public boolean save(BTSListEntry entity)
 	{
 		listEntryDao.add(entity, entity.getProject() + ServiceConstants.WLIST);
-		return false;
+		return true;
 	}
 
 	@Override

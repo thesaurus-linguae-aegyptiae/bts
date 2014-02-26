@@ -46,7 +46,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			}
 		}
 		projectDao.add(entity, ServiceConstants.ADMIN);
-		return false;
+		return true;
 	}
 
 	private void saveAuthorisation(BTSProject entity, BTSProjectDBCollection coll)
@@ -85,11 +85,21 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			}
 			memberDesc.getUserNames().addAll(memberUsers);
 			memberDesc.getUserRoles().addAll(memberRoles);
-			remoteprojectDao.addAuthorisation(coll, entity.getPrefix());
+			try {
+				remoteprojectDao.addAuthorisation(coll, entity.getPrefix());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			projectDao.addAuthorisation(coll, entity.getPrefix());
 		} else
 		{
-			remoteprojectDao.addAuthorisation(coll, entity.getPrefix());
+			try {
+				remoteprojectDao.addAuthorisation(coll, entity.getPrefix());
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			projectDao.addAuthorisation(coll, entity.getPrefix());
 		}
 

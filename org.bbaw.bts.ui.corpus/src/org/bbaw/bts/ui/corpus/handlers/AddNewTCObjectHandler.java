@@ -2,6 +2,8 @@ package org.bbaw.bts.ui.corpus.handlers;
 
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
@@ -41,9 +43,9 @@ public class AddNewTCObjectHandler
 	}
 
 	@CanExecute
-	public boolean canExecute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection)
-	{
-		return true; // (selection instanceof BTSCorpusObject);
+	public boolean canExecute(
+			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection) {
+		return (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation));
 	}
 
 }

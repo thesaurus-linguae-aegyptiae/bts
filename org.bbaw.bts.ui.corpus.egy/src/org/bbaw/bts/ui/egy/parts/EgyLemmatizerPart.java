@@ -10,6 +10,8 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSWord;
+import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -41,6 +43,9 @@ public class EgyLemmatizerPart {
 	private EPartService partService;
 	@Inject
 	private EventBroker eventBroker;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController evaluationController;
 	private BTSWord currentWord;
 	private Text lemma_text;
 	private Text flex_text;
@@ -180,7 +185,8 @@ public class EgyLemmatizerPart {
 	
 	@Focus
 	public void onFocus() {
-		//TODO Your code here
+		evaluationController
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
 	}
 
 	private void shiftCaret(String eventTopic) {

@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -22,6 +23,7 @@ import org.eclipse.emf.edit.provider.ITableItemFontProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSAnnotation} object.
@@ -94,19 +96,22 @@ public class BTSAnnotationItemProvider extends BTSCorpusObjectItemProvider imple
 	 * This returns BTSAnnotation.gif. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSAnnotation"));
+		return overlayImage(object, resourceProvider.getImage(
+Display
+				.getDefault(), configurationController
+				.getIconStringOfObjectType((BTSCorpusObject) object)));
 	}
 
 	/**
-	 * This returns the label text for the adapted class.
-	 * <!-- begin-user-doc
+	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
-	 * @generated
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public String getText(Object object)
@@ -114,7 +119,7 @@ public class BTSAnnotationItemProvider extends BTSCorpusObjectItemProvider imple
 		String label = ((BTSAnnotation)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_BTSAnnotation_type") :
-			getString("_UI_BTSAnnotation_type") + " " + label;
+ label;
 	}
 
 	/**

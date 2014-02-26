@@ -16,7 +16,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.app.login.internal.LoginDialog;
-import org.bbaw.bts.core.services.BTSUserService;
+import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.window.Window;
@@ -28,8 +28,6 @@ import org.eclipse.swt.widgets.Shell;
 
 public class Login
 {
-	@Inject
-	private BTSUserService uService;
 
 	@Inject
 	private IEclipseContext context;
@@ -38,28 +36,32 @@ public class Login
 	@Named(IServiceConstants.ACTIVE_SHELL)
 	private Shell shell;
 
-	public void login(IEclipseContext context, BTSUserService userService)
+	@Inject
+	private BTSUserController userController;
+
+	public void login(IEclipseContext context, BTSUserController userController)
 	{
 		if (context == null)
 		{
 			this.context = context;
 		}
-		if (uService == null)
+		if (userController == null)
 		{
-			this.uService = userService;
+			this.userController = userController;
 		}
 		System.out.println("login");
 		if (shell == null)
 		{
-			shell = new Shell(SWT.TOOL | SWT.NO_TRIM);
+			shell = new Shell(SWT.NO_TRIM | SWT.ON_TOP);
 		}
 
-		final LoginDialog dialog = new LoginDialog(shell, context, uService);
+		final LoginDialog dialog = new LoginDialog(shell, context,
+				userController);
 		dialog.create();
 		// close the static splash screen
 
 		// position the shell
-		setLocation(shell.getDisplay(), shell);
+		setLocation(Display.getDefault(), shell);
 		// String cssTheme = "org.bbaw.bts.ui.themes.login";
 		// context.set(E4Application.THEME_ID, cssTheme);
 		// String cssURI = "css/login.css";

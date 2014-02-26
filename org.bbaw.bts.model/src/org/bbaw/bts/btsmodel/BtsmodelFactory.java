@@ -163,13 +163,13 @@ public interface BtsmodelFactory extends EFactory {
 	BTSDate createBTSDate();
 
 	/**
-	 * Returns a new object of class '<em>BTS Passport Entry</em>'.
+	 * Returns a new object of class '<em>BTS Passport Entry Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Passport Entry</em>'.
+	 * @return a new object of class '<em>BTS Passport Entry Group</em>'.
 	 * @generated
 	 */
-	BTSPassportEntry createBTSPassportEntry();
+	BTSPassportEntryGroup createBTSPassportEntryGroup();
 
 	/**
 	 * Returns a new object of class '<em>BTS Relation</em>'.
@@ -298,13 +298,13 @@ public interface BtsmodelFactory extends EFactory {
 	BTSList createBTSList();
 
 	/**
-	 * Returns a new object of class '<em>BTS Pp Subentry</em>'.
+	 * Returns a new object of class '<em>BTS Passport Entry Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Pp Subentry</em>'.
+	 * @return a new object of class '<em>BTS Passport Entry Item</em>'.
 	 * @generated
 	 */
-	BTSPpSubentry createBTSPpSubentry();
+	BTSPassportEntryItem createBTSPassportEntryItem();
 
 	/**
 	 * Returns a new object of class '<em>BTS List Subentry</em>'.
@@ -404,6 +404,24 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	GraphicSelectionCounter createGraphicSelectionCounter();
+
+	/**
+	 * Returns a new object of class '<em>Object Type Path Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Object Type Path Entry</em>'.
+	 * @generated
+	 */
+	ObjectTypePathEntry createObjectTypePathEntry();
+
+	/**
+	 * Returns a new object of class '<em>BTS Object Type Path Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Object Type Path Root</em>'.
+	 * @generated
+	 */
+	BTSObjectTypePathRoot createBTSObjectTypePathRoot();
 
 	BTSTextContent createBTSTextContent(boolean setId);
 	/**

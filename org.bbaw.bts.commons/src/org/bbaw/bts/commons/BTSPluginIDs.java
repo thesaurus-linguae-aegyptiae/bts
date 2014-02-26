@@ -24,7 +24,7 @@ public class BTSPluginIDs
 
 	public static final String PREF_ACITVE_PROJECTS = "active_projects";
 
-	public static final String PREF_MAIN_PROJECT = "main_project";
+	public static final String PREF_MAIN_PROJECT_KEY = "main_project_key";
 
 	public static final String PREF_ACTIVE_CORPORA = "active_corpora";
 

@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -307,15 +308,25 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	}
 
 	/**
-	 * This returns TreeNodeWrapper.gif.
-	 * <!-- begin-user-doc --> <!--
+	 * This returns TreeNodeWrapper.gif. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
+	 * 
+	 * @generatedNot
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/TreeNodeWrapper"));
+		TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
+		BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+		if (realItem == null) {
+			return overlayImage(object,
+					getResourceLocator().getImage("full/obj16/TreeNodeWrapper"));
+		}
+
+		IItemLabelProvider realItemItemprovider = getRealItemItemProvider(
+				treeNodeWrapper, realItem);
+		return realItemItemprovider.getImage(realItem);
+
 	}
 
 	/**

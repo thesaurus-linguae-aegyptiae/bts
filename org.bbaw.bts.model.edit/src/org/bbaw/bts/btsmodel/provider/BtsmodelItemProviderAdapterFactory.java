@@ -442,26 +442,26 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassportEntry} instances.
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassportEntryGroup} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BTSPassportEntryItemProvider btsPassportEntryItemProvider;
+	protected BTSPassportEntryGroupItemProvider btsPassportEntryGroupItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPassportEntry}.
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPassportEntryGroup}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBTSPassportEntryAdapter() {
-		if (btsPassportEntryItemProvider == null) {
-			btsPassportEntryItemProvider = new BTSPassportEntryItemProvider(this);
+	public Adapter createBTSPassportEntryGroupAdapter() {
+		if (btsPassportEntryGroupItemProvider == null) {
+			btsPassportEntryGroupItemProvider = new BTSPassportEntryGroupItemProvider(this);
 		}
 
-		return btsPassportEntryItemProvider;
+		return btsPassportEntryGroupItemProvider;
 	}
 
 	/**
@@ -787,26 +787,26 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPpSubentry} instances.
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassportEntryItem} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BTSPpSubentryItemProvider btsPpSubentryItemProvider;
+	protected BTSPassportEntryItemItemProvider btsPassportEntryItemItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPpSubentry}.
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPassportEntryItem}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBTSPpSubentryAdapter() {
-		if (btsPpSubentryItemProvider == null) {
-			btsPpSubentryItemProvider = new BTSPpSubentryItemProvider(this);
+	public Adapter createBTSPassportEntryItemAdapter() {
+		if (btsPassportEntryItemItemProvider == null) {
+			btsPassportEntryItemItemProvider = new BTSPassportEntryItemItemProvider(this);
 		}
 
-		return btsPpSubentryItemProvider;
+		return btsPassportEntryItemItemProvider;
 	}
 
 	/**
@@ -1049,6 +1049,75 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.GraphicSelectionCounter} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected GraphicSelectionCounterItemProvider graphicSelectionCounterItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.GraphicSelectionCounter}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createGraphicSelectionCounterAdapter() {
+		if (graphicSelectionCounterItemProvider == null) {
+			graphicSelectionCounterItemProvider = new GraphicSelectionCounterItemProvider(this);
+		}
+
+		return graphicSelectionCounterItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.ObjectTypePathEntry} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ObjectTypePathEntryItemProvider objectTypePathEntryItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.ObjectTypePathEntry}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createObjectTypePathEntryAdapter() {
+		if (objectTypePathEntryItemProvider == null) {
+			objectTypePathEntryItemProvider = new ObjectTypePathEntryItemProvider(this);
+		}
+
+		return objectTypePathEntryItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSObjectTypePathRootItemProvider btsObjectTypePathRootItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSObjectTypePathRootAdapter() {
+		if (btsObjectTypePathRootItemProvider == null) {
+			btsObjectTypePathRootItemProvider = new BTSObjectTypePathRootItemProvider(this);
+		}
+
+		return btsObjectTypePathRootItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1192,7 +1261,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsAnnotationItemProvider != null) btsAnnotationItemProvider.dispose();
 		if (btsTranslationItemProvider != null) btsTranslationItemProvider.dispose();
 		if (btsDateItemProvider != null) btsDateItemProvider.dispose();
-		if (btsPassportEntryItemProvider != null) btsPassportEntryItemProvider.dispose();
+		if (btsPassportEntryGroupItemProvider != null) btsPassportEntryGroupItemProvider.dispose();
 		if (btsRelationItemProvider != null) btsRelationItemProvider.dispose();
 		if (btsConfigurationItemProvider != null) btsConfigurationItemProvider.dispose();
 		if (btsTextCorpusItemProvider != null) btsTextCorpusItemProvider.dispose();
@@ -1207,7 +1276,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsPassportEditorConfigItemProvider != null) btsPassportEditorConfigItemProvider.dispose();
 		if (btsUserGroupItemProvider != null) btsUserGroupItemProvider.dispose();
 		if (btsListItemProvider != null) btsListItemProvider.dispose();
-		if (btsPpSubentryItemProvider != null) btsPpSubentryItemProvider.dispose();
+		if (btsPassportEntryItemItemProvider != null) btsPassportEntryItemItemProvider.dispose();
 		if (btsListSubentryItemProvider != null) btsListSubentryItemProvider.dispose();
 		if (btsThsEntryItemProvider != null) btsThsEntryItemProvider.dispose();
 		if (btsProjectItemProvider != null) btsProjectItemProvider.dispose();
@@ -1218,6 +1287,9 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsProjectDBCollectionItemProvider != null) btsProjectDBCollectionItemProvider.dispose();
 		if (btsdbCollectionRoleDescItemProvider != null) btsdbCollectionRoleDescItemProvider.dispose();
 		if (btsTextContentItemProvider != null) btsTextContentItemProvider.dispose();
+		if (graphicSelectionCounterItemProvider != null) graphicSelectionCounterItemProvider.dispose();
+		if (objectTypePathEntryItemProvider != null) objectTypePathEntryItemProvider.dispose();
+		if (btsObjectTypePathRootItemProvider != null) btsObjectTypePathRootItemProvider.dispose();
 	}
 
 }

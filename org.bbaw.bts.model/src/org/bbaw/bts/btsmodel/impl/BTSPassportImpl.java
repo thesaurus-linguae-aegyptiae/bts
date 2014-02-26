@@ -3,24 +3,18 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
-
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSTimespan;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -37,7 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getWbSlips <em>Wb Slips</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getWbFolder <em>Wb Folder</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getProvenance <em>Provenance</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getPassportEntries <em>Passport Entries</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportImpl#getDescriptions <em>Descriptions</em>}</li>
  * </ul>
@@ -157,14 +151,14 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	protected String provenance = PROVENANCE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getPassportEntries() <em>Passport Entries</em>}' containment reference list.
+	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getPassportEntries()
+	 * @see #getChildren()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<BTSPassportEntry> passportEntries;
+	protected EList<BTSPassportEntry> children;
 
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
@@ -368,11 +362,11 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSPassportEntry> getPassportEntries() {
-		if (passportEntries == null) {
-			passportEntries = new EObjectContainmentEList<BTSPassportEntry>(BTSPassportEntry.class, this, BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES);
+	public EList<BTSPassportEntry> getChildren() {
+		if (children == null) {
+			children = new EObjectContainmentEList<BTSPassportEntry>(BTSPassportEntry.class, this, BtsmodelPackage.BTS_PASSPORT__CHILDREN);
 		}
-		return passportEntries;
+		return children;
 	}
 
 	/**
@@ -418,8 +412,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 		switch (featureID) {
 			case BtsmodelPackage.BTS_PASSPORT__DATE:
 				return basicSetDate(null, msgs);
-			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
-				return ((InternalEList<?>)getPassportEntries()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_PASSPORT__CHILDREN:
+				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_PASSPORT__DESCRIPTIONS:
 				return ((InternalEList<?>)getDescriptions()).basicRemove(otherEnd, msgs);
 		}
@@ -446,8 +440,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 				return getWbFolder();
 			case BtsmodelPackage.BTS_PASSPORT__PROVENANCE:
 				return getProvenance();
-			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
-				return getPassportEntries();
+			case BtsmodelPackage.BTS_PASSPORT__CHILDREN:
+				return getChildren();
 			case BtsmodelPackage.BTS_PASSPORT__COMMENT:
 				return getComment();
 			case BtsmodelPackage.BTS_PASSPORT__DESCRIPTIONS:
@@ -483,9 +477,9 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 			case BtsmodelPackage.BTS_PASSPORT__PROVENANCE:
 				setProvenance((String)newValue);
 				return;
-			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
-				getPassportEntries().clear();
-				getPassportEntries().addAll((Collection<? extends BTSPassportEntry>)newValue);
+			case BtsmodelPackage.BTS_PASSPORT__CHILDREN:
+				getChildren().clear();
+				getChildren().addAll((Collection<? extends BTSPassportEntry>)newValue);
 				return;
 			case BtsmodelPackage.BTS_PASSPORT__COMMENT:
 				setComment((String)newValue);
@@ -524,8 +518,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 			case BtsmodelPackage.BTS_PASSPORT__PROVENANCE:
 				setProvenance(PROVENANCE_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
-				getPassportEntries().clear();
+			case BtsmodelPackage.BTS_PASSPORT__CHILDREN:
+				getChildren().clear();
 				return;
 			case BtsmodelPackage.BTS_PASSPORT__COMMENT:
 				setComment(COMMENT_EDEFAULT);
@@ -557,8 +551,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 				return WB_FOLDER_EDEFAULT == null ? wbFolder != null : !WB_FOLDER_EDEFAULT.equals(wbFolder);
 			case BtsmodelPackage.BTS_PASSPORT__PROVENANCE:
 				return PROVENANCE_EDEFAULT == null ? provenance != null : !PROVENANCE_EDEFAULT.equals(provenance);
-			case BtsmodelPackage.BTS_PASSPORT__PASSPORT_ENTRIES:
-				return passportEntries != null && !passportEntries.isEmpty();
+			case BtsmodelPackage.BTS_PASSPORT__CHILDREN:
+				return children != null && !children.isEmpty();
 			case BtsmodelPackage.BTS_PASSPORT__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case BtsmodelPackage.BTS_PASSPORT__DESCRIPTIONS:

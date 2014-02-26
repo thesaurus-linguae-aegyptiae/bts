@@ -4,18 +4,16 @@ package org.bbaw.bts.btsmodel.provider;
 
 
 import java.beans.PropertyChangeSupport;
-
 import java.util.Collection;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -44,6 +42,8 @@ public class BTSObservableObjectItemProvider
 	implements
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
 {
+	protected BTSResourceProvider resourceProvider = StaticAccessController
+			.getResourceProvider();
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

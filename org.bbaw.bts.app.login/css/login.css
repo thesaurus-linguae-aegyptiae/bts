@@ -63,3 +63,7 @@ CTabItem.highlighted {
 	font-weight: bold;
 }
 
+* {
+	background-color: #FFFFFF;
+}
+

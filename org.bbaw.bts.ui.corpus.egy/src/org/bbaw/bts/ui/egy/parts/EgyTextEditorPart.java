@@ -2,9 +2,12 @@ package org.bbaw.bts.ui.egy.parts;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.util.EventObject;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
@@ -22,6 +25,10 @@ import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
@@ -32,6 +39,7 @@ import org.bbaw.bts.ui.commons.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.text.IBTSEditor;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
@@ -53,16 +61,23 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EContextService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.DocumentEvent;
+import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationModel;
@@ -86,17 +101,13 @@ import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
@@ -109,13 +120,13 @@ import org.osgi.service.event.EventHandler;
 
 import com.google.inject.Injector;
 
-import e4.test.helper.StaticAccess;
-
 public class EgyTextEditorPart implements IBTSEditor, EventHandler
 {
 
 	@Inject
 	private BTSFontManager fontManager;
+	@Inject
+	private MDirtyable dirty;
 
 	@Inject
 	private BTSTextEditorController textEditorController;
@@ -137,22 +148,16 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	@Inject
 	private EHandlerService handlerService;
 
+	@Inject
+	private EditingDomainController editingDomainController;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController evaluationController;
 	private static final String FONT_NAME = "FreeSans";
 	private static final int SIZE = 10;
 
 	private static final int EDITOR_PREFIX_LENGTH = 1;
 
-	private static final Color COLOR_ANNOTATTION = new Color(
-			Display.getDefault(), 0, 0, 0);
-
-	private static final Color COLOR_COMMENT = new Color(Display.getDefault(),
-			255, 182, 0);
-
-	private static final Color COLOR_SUBTEXT = new Color(Display.getDefault(),
-			10, 30, 255);
-
-	private static final Color COLOR_LEMMA = new Color(Display.getDefault(),
-			228, 255, 255);
 
 	private static final int LINE_SPACE = 8;
 
@@ -205,8 +210,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private boolean selfSelecting;
 
-	private Text sentenceTranslate_text;
-
 	private BTSSenctence selectedSentence;
 
 	private BTSSentenceItem selectedSentenceItem;
@@ -219,6 +222,13 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private StyleRange[] preSelectionRanges;
 
+	protected boolean isDocUpdating;
+	private TranslationEditorComposite sentenceTranslate_Editor;
+	private EditingDomain editingDomain;
+	private CommandStackListener commandStackListener;
+	private Set<Command> localCommandCacheSet = new HashSet<Command>();
+
+
 	/**
 	 * @param parent
 	 */
@@ -226,7 +236,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	public void createComposite(Composite parent)
 	{
 		parent.setLayout(new GridLayout());
-		new Shell();
 		contextService
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
 		eventBroker.subscribe("event_text_selection/*", this);
@@ -314,7 +323,9 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 							SWT.NONE | SWT.BORDER);
 					embeddedEditorParentComp.setLayout(new GridLayout());
 					tbtmPlaintext2.setControl(embeddedEditorParentComp);
-					StaticAccess sa = context.get(StaticAccess.class);
+					// inititae static access controller
+					StaticAccessController sa = context
+							.get(StaticAccessController.class);
 					EgyDslActivator activator = EgyDslActivator.getInstance();
 					Injector injector = activator
 							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
@@ -429,9 +440,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		sentenceTranslateComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		sentenceTranslateComp.setLayout(new GridLayout());
 		sentenceTranslateComp.setText("Translation of Sentence");
-		sentenceTranslate_text = new Text(sentenceTranslateComp, SWT.WRAP
-				| SWT.MULTI | SWT.V_SCROLL | SWT.BORDER);
-		sentenceTranslate_text.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+		sentenceTranslate_Editor = new TranslationEditorComposite(
+				sentenceTranslateComp, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL
+						| SWT.BORDER, null, null, false);
+		sentenceTranslate_Editor.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
 				true, true));
 		sentenceTranslateComp.layout();
 		sashForm.setWeights(new int[] { 6, 1 });
@@ -478,8 +490,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	{
 		String jseshMdc = textEditorController
 				.transformTextToJSeshMdCString(text2);
-		System.out.println(jseshMdc);
-		jseshEditor.setMDCText("loadInputJSesh " + jseshMdc);
+		jseshEditor.setMDCText(jseshMdc);
 
 	}
 
@@ -496,39 +507,39 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		embeddedEditorComp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true));
 
-		Button b = new Button(embeddedEditorComp, SWT.NONE);
-		b.setText("Save");
-		b.addSelectionListener(new SelectionListener() {
-
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				save();
-
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		Button b2 = new Button(embeddedEditorComp, SWT.NONE);
-		b2.setText("Test");
-		b2.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				System.out.println("hhhh");
-				eventBroker.post("event_text_selection/next", e);
-
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-
-			}
-		});
+		// Button b = new Button(embeddedEditorComp, SWT.NONE);
+		// b.setText("Save");
+		// b.addSelectionListener(new SelectionListener() {
+		//
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// save();
+		//
+		// }
+		//
+		// @Override
+		// public void widgetDefaultSelected(SelectionEvent e) {
+		// // TODO Auto-generated method stub
+		//
+		// }
+		// });
+		// Button b2 = new Button(embeddedEditorComp, SWT.NONE);
+		// b2.setText("Test");
+		// b2.addSelectionListener(new SelectionListener() {
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// System.out.println("hhhh");
+		// eventBroker.post("event_text_selection/next", e);
+		//
+		// }
+		//
+		// @Override
+		// public void widgetDefaultSelected(SelectionEvent e) {
+		//
+		// }
+		// });
 		Document doc = new Document();
 		this.document = doc;
 
@@ -556,7 +567,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		configureEditorDrawingStrategies();
 		embeddedEditorParentComp.layout();
-		embeddedEditor.getViewer().getControl().setFocus();
+		// embeddedEditor.getViewer().getControl().setFocus();
 
 		ruler = embeddedEditorFactory.getCpAnnotationRuler();
 		ruler.setModel(am);
@@ -567,11 +578,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		oruler.addAnnotationType(BTSAnnotationAnnotation.TYPE);
 		oruler.setAnnotationTypeLayer(BTSAnnotationAnnotation.TYPE, 3);
 		oruler.setAnnotationTypeColor(BTSAnnotationAnnotation.TYPE,
-				COLOR_ANNOTATTION);
+				BTSUIConstants.COLOR_ANNOTATTION);
 
 		oruler.addAnnotationType(BTSCommentAnnotation.TYPE);
 		oruler.setAnnotationTypeLayer(BTSCommentAnnotation.TYPE, 2);
-		oruler.setAnnotationTypeColor(BTSCommentAnnotation.TYPE, COLOR_COMMENT);
+		oruler.setAnnotationTypeColor(BTSCommentAnnotation.TYPE,
+				BTSUIConstants.COLOR_COMMENT);
 
 		oruler.addAnnotationType("org.eclipse.xtext.ui.editor.error");
 		oruler.setAnnotationTypeLayer("org.eclipse.xtext.ui.editor.error", 10);
@@ -610,6 +622,24 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		lineNumberRulerColumn.setModel(am);
 		embeddedEditor.getViewer()
 				.addVerticalRulerColumn(lineNumberRulerColumn);
+		if (text != null) {
+			embeddedEditor.getDocument().addDocumentListener(
+					new IDocumentListener() {
+
+					@Override
+					public void documentChanged(DocumentEvent event) {
+						if (!dirty.isDirty()) {
+							dirty.setDirty(true);
+						}
+					}
+
+					@Override
+					public void documentAboutToBeChanged(DocumentEvent event) {
+						// TODO Auto-generated method stub
+
+					}
+				});
+		}
 
 	}
 
@@ -654,7 +684,8 @@ embeddedEditor.getViewer(),
 		//Lemma
 		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
 		painter.addTextStyleStrategy(LemmaAnnotation.TYPE, strategy);
-		painter.setAnnotationTypeColor(LemmaAnnotation.TYPE, COLOR_LEMMA);
+		painter.setAnnotationTypeColor(LemmaAnnotation.TYPE,
+				BTSUIConstants.COLOR_LEMMA);
 		painter.addAnnotationType(LemmaAnnotation.TYPE, LemmaAnnotation.TYPE);
 
 
@@ -662,14 +693,16 @@ embeddedEditor.getViewer(),
 		// comment
 		CommentDrawingStrategy commentStrategy = new CommentDrawingStrategy();
 		painter.addDrawingStrategy(CommentAnnotation.TYPE, commentStrategy);
-		painter.setAnnotationTypeColor(CommentAnnotation.TYPE, COLOR_COMMENT);
+		painter.setAnnotationTypeColor(CommentAnnotation.TYPE,
+				BTSUIConstants.COLOR_COMMENT);
 		painter.addAnnotationType(CommentAnnotation.TYPE,
 				CommentAnnotation.TYPE);
 
 		// subtext
 		SubtextdrawingStrategy subtextStrategy = new SubtextdrawingStrategy();
 		painter.addDrawingStrategy(SubtextAnnotation.TYPE, subtextStrategy);
-		painter.setAnnotationTypeColor(SubtextAnnotation.TYPE, COLOR_SUBTEXT);
+		painter.setAnnotationTypeColor(SubtextAnnotation.TYPE,
+				BTSUIConstants.COLOR_SUBTEXT);
 		painter.addAnnotationType(SubtextAnnotation.TYPE,
 				SubtextAnnotation.TYPE);
 		
@@ -678,7 +711,7 @@ embeddedEditor.getViewer(),
 		painter.addDrawingStrategy(AnnotationAnnotation.TYPE,
 				annotationStrategy);
 		painter.setAnnotationTypeColor(AnnotationAnnotation.TYPE,
-				COLOR_ANNOTATTION);
+				BTSUIConstants.COLOR_ANNOTATTION);
 		painter.addAnnotationType(AnnotationAnnotation.TYPE,
 				AnnotationAnnotation.TYPE);
 
@@ -687,7 +720,7 @@ embeddedEditor.getViewer(),
 		painter.addDrawingStrategy(AnnotationAnnotation.TYPE_RUBRUM,
 				rubrumStrategy);
 		painter.setAnnotationTypeColor(AnnotationAnnotation.TYPE_RUBRUM,
-				COLOR_ANNOTATTION);
+				BTSUIConstants.COLOR_ANNOTATTION);
 		painter.addAnnotationType(AnnotationAnnotation.TYPE_RUBRUM,
 				AnnotationAnnotation.TYPE_RUBRUM);
 
@@ -822,19 +855,42 @@ embeddedEditor.getViewer(),
 	}
 
 	@Inject
-	void setSelection(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection)
+	void setSelection(
+			@Optional
+			@Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection)
 	{
 		if (selection != null && !selection.equals(selectedTextItem)) {
+			if (selection instanceof BTSCorpusObject) {
+				purgeCache();
+				if (editingDomain != null) {
+					editingDomain.getCommandStack().removeCommandStackListener(
+							commandStackListener);
+				}
+				// TODO save configurable this is autosave!!!
+				save();
+				if (selection instanceof BTSText) {
+					loadInput((BTSCorpusObject) selection);
+				} else {
+					loadInput(null);
+				}
+			}
+			if ((selection instanceof BTSText)) {
+				selfSelecting = false;
+			}
+
 			selectedTextItem = selection;
+			if (editingDomain != null) {
+				editingDomain.getCommandStack().removeCommandStackListener(
+						commandStackListener);
+			}
+			editingDomain = editingDomainController
+					.getEditingDomain(selectedTextItem);
+			editingDomain.getCommandStack().addCommandStackListener(
+					getCommandStackListener());
 			if (!selfSelecting) {
 				if (selection == null) {
 					/* implementation not shown */
 				} else {
-					if (selection instanceof BTSText) {
-						loadInput((BTSCorpusObject) selection);
-					} else {
-						selfSelecting = false;
-					}
 
 				}
 			}
@@ -849,6 +905,42 @@ embeddedEditor.getViewer(),
 			// funktioniert daher nicht zuverlässig
 			// }
 		}
+	}
+
+
+	private CommandStackListener getCommandStackListener() {
+		if (commandStackListener == null) {
+			commandStackListener = new CommandStackListener() {
+
+				@Override
+				public void commandStackChanged(EventObject event) {
+					Command mostRecentCommand = editingDomain.getCommandStack()
+							.getMostRecentCommand();
+					if (mostRecentCommand != null) {
+						if (mostRecentCommand.equals(editingDomain
+								.getCommandStack().getUndoCommand())) {
+							// normal command or redo executed
+							localCommandCacheSet.add(mostRecentCommand);
+							if (localCommandCacheSet.isEmpty()) {
+								dirty.setDirty(false);
+							} else if (!dirty.isDirty()) {
+								dirty.setDirty(true);
+							}
+						} else {
+							// undo executed
+							if (localCommandCacheSet.remove(mostRecentCommand)
+									&& localCommandCacheSet.isEmpty()) {
+								dirty.setDirty(false);
+							} else if (!dirty.isDirty()) {
+								dirty.setDirty(true);
+							}
+						}
+					}
+
+				}
+			};
+		}
+		return commandStackListener;
 	}
 
 	private void setSentenceItemSelection(BTSSentenceItem sentenceItem) {
@@ -876,7 +968,8 @@ embeddedEditor.getViewer(),
 			int start = pos.getOffset() - 1;
 			int len = pos.getLength();
 			selectionRange = new StyleRange(start, len,
-					null, COLOR_SUBTEXT);
+ null,
+					BTSUIConstants.COLOR_SUBTEXT);
 			preSelectionRanges = embeddedEditor.getViewer().getTextWidget()
 					.getStyleRanges(start, len);
 			embeddedEditor.getViewer().getTextWidget()
@@ -898,26 +991,13 @@ embeddedEditor.getViewer(),
 	private void setSentenceTranslation(BTSSenctence sentence) {
 		if (sentence != null && !sentence.equals(selectedSentence)) {
 			BTSSenctence oldSentence = selectedSentence;
-			if (oldSentence != null) {
-				if (oldSentence.getTranslation() == null) {
-					oldSentence.setTranslation(BtsmodelFactory.eINSTANCE
-							.createBTSTranslations());
-				}
-				if (!sentenceTranslate_text.getText().equals(
-						oldSentence.getTranslation().getTranslation("en"))) {
-					oldSentence.getTranslation().setTranslation(
-							sentenceTranslate_text.getText(), "en");
-				}
-			}
 			selectedSentence = sentence;
 			if (selectedSentence.getTranslation() == null) {
 				selectedSentence.setTranslation(BtsmodelFactory.eINSTANCE
 						.createBTSTranslations());
 			}
-			if (selectedSentence.getTranslation().getTranslation("en") != null) {
-				sentenceTranslate_text.setText(selectedSentence
-						.getTranslation().getTranslation("en"));
-			}
+			sentenceTranslate_Editor.load(selectedSentence.getTranslation(),
+					editingDomain, false);
 		}
 
 	}
@@ -945,10 +1025,7 @@ embeddedEditor.getViewer(),
 	{
 		if (tabFolder != null && o instanceof BTSText)
 		{
-			if (!o.equals(text))
-			{
-				purgeCache();
-			}
+
 			this.text = (BTSText) o;
 
 			switch (tabFolder.getSelectionIndex())
@@ -971,18 +1048,34 @@ embeddedEditor.getViewer(),
 			}
 
 			//			plainTextEditor.setText(((BTSText) o).getCode());
-		} else
+		} else if (tabFolder != null && o == null)
 		{
-			// plainTextEditor.setText("");
+				purgeCache();
+			this.text = null;
+
+			switch (tabFolder.getSelectionIndex()) {
+			case 0: {
+				loadInputTranscription(text);
+				break;
+			}
+			case 1: {
+				loadInputSignText(text);
+				break;
+			}
+			case 2: {
+				loadInputJSesh(text);
+				break;
+			}
+			}
 		}
 
 	}
 
 	private void loadInputSignText(BTSText text2)
 	{
-		if (text2 == null || text2.getTextContent() == null
-				|| text2.getTextContent().getTextItems().isEmpty())
-			text2 = createMockUp(text2);
+		// if (text2 == null || text2.getTextContent() == null
+		// || text2.getTextContent().getTextItems().isEmpty())
+		// text2 = createMockUp(text2);
 		signTextEditor.setInput(text2);
 
 	}
@@ -1015,6 +1108,7 @@ embeddedEditor.getViewer(),
 
 		selectedSentence = null;
 		modelAnnotationMap = new HashMap<EObject, ModelAnnotation>();
+		localCommandCacheSet.clear();
 	}
 
 	@Focus
@@ -1033,30 +1127,36 @@ embeddedEditor.getViewer(),
 			break;
 		}
 		}
-		//
+		evaluationController
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
 	}
 
+	@Persist
 	public boolean save()
 	{
-		switch (tabFolder.getSelectionIndex())
+		if (text != null && dirty.isDirty())
 		{
-			case 0:
+			localCommandCacheSet.clear();
+			switch (tabFolder.getSelectionIndex())
 			{
+			case 0: {
 				updateModelFromTranscription();
 				break;
 			}
-			case 1:
-			{
+			case 1: {
 				updateModelFromSignText();
 				break;
 			}
-			case 2:
-			{
+			case 2: {
 				updateModelFromJSesh();
 				break;
 			}
+			}
+			boolean success = textEditorController.save(this.text);
+			dirty.setDirty(!success);
+			return success;
 		}
-		return textEditorController.save(this.text);
+		return true;
 	}
 
 	@Override

@@ -36,5 +36,7 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.btsviewmodel,
  org.bbaw.bts.core.commons,
  org.bbaw.bts.core.corpus.controller.partController,
- org.bbaw.bts.searchModel
+ org.bbaw.bts.searchModel,
+ org.bbaw.bts.ui.resources,
+ org.eclipse.e4.tools.services
 Bundle-ActivationPolicy: lazy

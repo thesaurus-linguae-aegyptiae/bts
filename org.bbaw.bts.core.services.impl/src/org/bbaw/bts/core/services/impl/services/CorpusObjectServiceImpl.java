@@ -10,10 +10,12 @@ import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.btsmodel.BTSListEntry;
+import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
+import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSAnnotationService;
 import org.bbaw.bts.core.services.BTSImageService;
 import org.bbaw.bts.core.services.BTSListEntryService;
@@ -51,6 +53,8 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 	@Inject
 	private CorpusObjectDao corpusObjectDao;
 
+	@Inject
+	private GeneralPurposeDao generalPurposeDao;
 	// services
 
 	private IEclipseContext eclipseCtx;
@@ -67,22 +71,22 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 	{
 		if (entity instanceof BTSImage)
 		{
-			imageService.save((BTSImage) entity);
+			return imageService.save((BTSImage) entity);
 		} else if (entity instanceof BTSAnnotation)
 		{
-			annotationService.save((BTSAnnotation) entity);
+			return annotationService.save((BTSAnnotation) entity);
 		} else if (entity instanceof BTSListEntry)
 		{
-			listEntryService.save((BTSListEntry) entity);
+			return listEntryService.save((BTSListEntry) entity);
 		} else if (entity instanceof BTSTCObject)
 		{
-			tcObjectService.save((BTSTCObject) entity);
+			return tcObjectService.save((BTSTCObject) entity);
 		} else if (entity instanceof BTSTextCorpus)
 		{
-			textCorpusService.save((BTSTextCorpus) entity);
+			return textCorpusService.save((BTSTextCorpus) entity);
 		} else if (entity instanceof BTSText)
 		{
-			textService.save((BTSText) entity);
+			return textService.save((BTSText) entity);
 		}
 		return false;
 	}
@@ -257,5 +261,22 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<BTSPassportEntry> getPassportEntryProposals(
+			BTSQueryRequest query) {
+		List<BTSPassportEntry> result = new Vector<BTSPassportEntry>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN)) {
+			for (String c : active_corpora
+					.split(ServiceConstants.SPLIT_PATTERN)) {
+				result.addAll(corpusObjectDao.getPassportEntryProposals(
+						query, p + ServiceConstants.CORPUS_INTERFIX + c, p
+								+ ServiceConstants.CORPUS_INTERFIX + c));
+			}
+		}
+		return result;
+	}
+
+
 
 }

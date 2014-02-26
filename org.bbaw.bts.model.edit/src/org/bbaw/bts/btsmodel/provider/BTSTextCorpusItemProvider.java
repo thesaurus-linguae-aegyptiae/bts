@@ -5,6 +5,7 @@ package org.bbaw.bts.btsmodel.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -23,6 +24,7 @@ import org.eclipse.emf.edit.provider.ITableItemFontProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSTextCorpus} object.
@@ -34,6 +36,8 @@ public class BTSTextCorpusItemProvider extends BTSCorpusObjectItemProvider imple
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource,
 		ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
 {
+
+
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -100,7 +104,10 @@ public class BTSTextCorpusItemProvider extends BTSCorpusObjectItemProvider imple
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/bts/rootIcon.ico"));
+		return overlayImage(object, resourceProvider.getImage(
+Display
+				.getDefault(), configurationController
+				.getIconStringOfObjectType((BTSCorpusObject) object)));
 	}
 
 	/**

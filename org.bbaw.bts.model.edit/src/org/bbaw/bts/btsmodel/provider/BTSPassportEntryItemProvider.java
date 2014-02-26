@@ -5,12 +5,16 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+
 import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
@@ -35,7 +39,16 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 public class BTSPassportEntryItemProvider
 	extends BTSIdentifiableItemItemProvider
 	implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider {
+		IEditingDomainItemProvider,
+		IStructuredItemContentProvider,
+		ITreeItemContentProvider,
+		IItemLabelProvider,
+		IItemPropertySource,
+		ITableItemLabelProvider,
+		ITableItemColorProvider,
+		ITableItemFontProvider,
+		IItemColorProvider,
+		IItemFontProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -61,7 +74,8 @@ public class BTSPassportEntryItemProvider
 			addCommentPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addValuePropertyDescriptor(object);
-			addCategoryPropertyDescriptor(object);
+			addNamePropertyDescriptor(object);
+			addKeyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -155,23 +169,45 @@ public class BTSPassportEntryItemProvider
 	}
 
 	/**
-	 * This adds a property descriptor for the Category feature.
+	 * This adds a property descriptor for the Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addCategoryPropertyDescriptor(Object object) {
+	protected void addNamePropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BTSPassportEntry_category_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassportEntry_category_feature", "_UI_BTSPassportEntry_type"),
-				 BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CATEGORY,
+				 getString("_UI_BTSPassportEntry_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassportEntry_name_feature", "_UI_BTSPassportEntry_type"),
+				 BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__NAME,
 				 true,
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSPassportEntry_key_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassportEntry_key_feature", "_UI_BTSPassportEntry_type"),
+				 BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -188,7 +224,8 @@ public class BTSPassportEntryItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__SUBENTRIES);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__LABEL);
 		}
 		return childrenFeatures;
 	}
@@ -207,17 +244,6 @@ public class BTSPassportEntryItemProvider
 	}
 
 	/**
-	 * This returns BTSPassportEntry.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSPassportEntry"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -225,7 +251,7 @@ public class BTSPassportEntryItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BTSPassportEntry)object).get_id();
+		String label = ((BTSPassportEntry)object).getName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_BTSPassportEntry_type") :
 			getString("_UI_BTSPassportEntry_type") + " " + label;
@@ -247,10 +273,12 @@ public class BTSPassportEntryItemProvider
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__COMMENT:
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__TYPE:
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE:
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CATEGORY:
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME:
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY__SUBENTRIES:
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__CHILDREN:
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -270,8 +298,18 @@ public class BTSPassportEntryItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__SUBENTRIES,
-				 BtsmodelFactory.eINSTANCE.createBTSPpSubentry()));
+				(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
+				 BtsmodelFactory.eINSTANCE.createBTSPassportEntryGroup()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
+				 BtsmodelFactory.eINSTANCE.createBTSPassportEntryItem()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__LABEL,
+				 BtsmodelFactory.eINSTANCE.createBTSTranslations()));
 	}
 
 }

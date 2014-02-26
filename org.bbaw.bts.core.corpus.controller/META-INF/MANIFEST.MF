@@ -10,6 +10,7 @@ Import-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
  org.bbaw.bts.searchModel,
  org.eclipse.emf.ecore,
+ org.eclipse.emf.edit.domain,
  org.eclipse.jface.text,
  org.eclipse.jface.text.source,
  org.eclipse.jface.viewers

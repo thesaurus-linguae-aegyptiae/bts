@@ -11,12 +11,15 @@ import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
+import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.client.Client;
 
 public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K extends Serializable> implements
 		GenericObjectService<E, K>
@@ -28,11 +31,14 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	protected IDService idService;
 
 	@Inject
+	protected DBConnectionProvider connectionProvider;
+
+	@Inject
 	@Preference(value = BTSPluginIDs.PREF_ACITVE_PROJECTS, nodePath = "org.bbaw.bts.app")
 	protected String active_projects;
 
 	@Inject
-	@Preference(value = BTSPluginIDs.PREF_MAIN_PROJECT, nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_MAIN_PROJECT_KEY, nodePath = "org.bbaw.bts.app")
 	protected String main_project;
 
 	@Inject
@@ -116,4 +122,8 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	}
 
+	public SearchRequestBuilder getSearchRequestBuilder() {
+		return new SearchRequestBuilder(
+				connectionProvider.getSearchClient(Client.class));
+	}
 }

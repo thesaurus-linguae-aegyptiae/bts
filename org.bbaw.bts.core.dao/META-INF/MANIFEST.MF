@@ -21,4 +21,5 @@ Import-Package: javax.inject,
  org.bbaw.bts.commons.interfaces,
  org.eclipse.e4.core.di.annotations,
  org.eclipse.e4.ui.model.application,
- org.eclipse.e4.ui.workbench.modeling
+ org.eclipse.e4.ui.workbench.modeling,
+ org.elasticsearch.search

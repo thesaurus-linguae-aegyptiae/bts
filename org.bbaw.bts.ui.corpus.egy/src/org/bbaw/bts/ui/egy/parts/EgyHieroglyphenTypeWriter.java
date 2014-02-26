@@ -8,9 +8,12 @@ package org.bbaw.bts.ui.egy.parts;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.util.Collection;
+import java.util.EventObject;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.StringTokenizer;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -29,24 +32,41 @@ import jsesh.hieroglyphs.ManuelDeCodage;
 import jsesh.mdc.MDCSyntaxError;
 import jsesh.mdc.utils.MDCNormalizer;
 
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
+import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.eclipse.core.databinding.Binding;
+import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
+import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EContextService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.edit.command.SetCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -86,6 +106,13 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private HieroglyphTypeWriterController htwController;
 	@Inject
 	private EContextService contextService;
+	@Inject
+	private MDirtyable dirty;
+	@Inject
+	private EditingDomainController editingDomainController;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController evaluationController;
 	private Text hierotw_text;
 	// private WordOccurrence wordOccurrence;
 	// private JTextAsWordsEditorPanel ramsesEditor;
@@ -119,6 +146,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private String htwProposals;
 	private BTSObject selectionObject;
 	private boolean loaded;
+	private EditingDomain editingDomain;
+	private Set<Command> localCommandCacheSet = new HashSet<Command>();
+	private BTSText currentText;
+	private DataBindingContext bindingContext = new DataBindingContext();
+	private CommandStackListener commandStackListener;
 
 	public EgyHieroglyphenTypeWriter()
 	{
@@ -274,27 +306,27 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		lblNewLabel_1.setText("Order in Sentence");
 
 		glyphOrder_spinner = new Spinner(manageGlyphs_composite, SWT.BORDER);
-		glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				if (selectedGlyphe != null) {
-					selectedGlyphe.setInnerSentenceOrder(glyphOrder_spinner
-							.getSelection());
-				}
-
-			}
-		});
+		// glyphOrder_spinner.addSelectionListener(new SelectionAdapter() {
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// if (selectedGlyphe != null) {
+		// selectedGlyphe.setInnerSentenceOrder(glyphOrder_spinner
+		// .getSelection());
+		// }
+		//
+		// }
+		// });
 		ignoreGlyph_Button = new Button(manageGlyphs_composite, SWT.CHECK);
 		ignoreGlyph_Button.setText("Ignore Glyph");
-		ignoreGlyph_Button.addSelectionListener(new SelectionAdapter() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				setSelectedGlypheIgnored(ignoreGlyph_Button.getSelection());
-
-			}
-		});
+		// ignoreGlyph_Button.addSelectionListener(new SelectionAdapter() {
+		//
+		// @Override
+		// public void widgetSelected(SelectionEvent e) {
+		// setSelectedGlypheIgnored(ignoreGlyph_Button.getSelection());
+		//
+		// }
+		// });
 		Composite comEmbededProposals = new Composite(composite, SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
 		comEmbededProposals.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
 				true, 2, 1));
@@ -343,7 +375,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	private void setSelectedGlypheIgnored(boolean selection) {
 		if (selectedGlyphe != null) {
-			selectedGlyphe.setIgnored(selection);
+			Command c = SetCommand.create(editingDomain, selectedGlyphe,
+					BtsmodelPackage.BTS_GRAPHIC__IGNORED,
+ selection);
+			editingDomain.getCommandStack().execute(c);
+			// selectedGlyphe.setIgnored(selection);
 			// String normalizedMdC = transformWordToMdCString(currentWord);
 			// MDCNormalizer d = new MDCNormalizer();
 			// try {
@@ -392,8 +428,22 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		hierotw_text.setText(glypheSelectedMdC);
 		hierotw_text.setSelection(hierotw_text.getText().length());
 		jseshEditor.setMDCText(glypheSelectedMdC);
-		ignoreGlyph_Button.setSelection(selectedGlyphe.isIgnored());
-		glyphOrder_spinner.setSelection(selectedGlyphe.getInnerSentenceOrder());
+		bindingContext = new DataBindingContext();
+
+		Binding binding0 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(
+						BTSUIConstants.DELAY, ignoreGlyph_Button),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_GRAPHIC__IGNORED).observe(
+						selectedGlyphe), null, null);
+		Binding binding1 = bindingContext
+				.bindValue(
+						WidgetProperties.selection().observeDelayed(
+								BTSUIConstants.DELAY, glyphOrder_spinner),
+						EMFEditProperties
+								.value(editingDomain,
+										BtsmodelPackage.Literals.BTS_GRAPHIC__INNER_SENTENCE_ORDER)
+								.observe(selectedGlyphe), null, null);
 	}
 
 	private String setGlypheSelectionInMdC(String normalizedMdC,
@@ -434,22 +484,43 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			hierotw_text.setFocus();
 		}
 		contextService.activateContext(HTW_CONTEXT_ID);
+		evaluationController
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
 	}
 
 	@Inject
 	void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
-		if (!selfSelecting) {
-			if (selection == null) {
-				/* implementation not shown */
+			@Optional
+			@Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
+		if (selection != null && selection instanceof BTSCorpusObject
+				&& !selection.equals(currentText)) {
+			if (loaded) {
+			if (currentText != null) {
+				saveMdCstring(currentWord);
+				saveText();
+			}
+			if (selection instanceof BTSText) {
+				currentText = (BTSText) selection;
 			} else {
+				currentText = null;
+			}
+			bindingContext.dispose();
+			ignoreGlyph_Button.setSelection(false);
+			}
+		}
+		if (!selfSelecting) {
 
-				selectionObject = selection;
+
+			if (selection != null && !selection.equals(selectionObject)) {
+
 				if (loaded)
 				{
 				if (selection instanceof BTSWord) {
-					
+
+						selectionObject = (BTSObject) selection;
 						setSelectionInteral(selection);
+						bindingContext.dispose();
+						ignoreGlyph_Button.setSelection(false);
 				}
 				}
 			}
@@ -463,7 +534,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		wordGraphics = null;
 		currentWord = null;
 		glyphOrder_spinner.setSelection(0);
-		// hierotw_text.setText("");
+		if (editingDomain != null) {
+			editingDomain.getCommandStack().removeCommandStackListener(
+					commandStackListener);
+		}
+		editingDomain = null;
 
 	}
 
@@ -487,6 +562,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				}
 				purgeAll();
 				currentWord = (BTSWord) selection;
+				editingDomain = getEditingDomain(currentWord);
+				editingDomain.getCommandStack().removeCommandStackListener(
+						commandStackListener);
+				editingDomain.getCommandStack().addCommandStackListener(
+						getCommandStackListener());
 				if (currentWord != null)
 				{
 					wordGraphics = currentWord.getGraphics();
@@ -499,6 +579,39 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		{
 			loading = false;
 		}
+	}
+
+	private CommandStackListener getCommandStackListener() {
+		if (commandStackListener == null) {
+			commandStackListener = new CommandStackListener() {
+
+				@Override
+				public void commandStackChanged(EventObject event) {
+					Command mostRecentCommand = editingDomain.getCommandStack()
+							.getMostRecentCommand();
+					if (mostRecentCommand != null) {
+						if (mostRecentCommand.equals(editingDomain
+								.getCommandStack().getUndoCommand())) {
+							localCommandCacheSet.add(mostRecentCommand);
+						} else {
+							localCommandCacheSet.remove(mostRecentCommand);
+						}
+					}
+					if (localCommandCacheSet.remove(mostRecentCommand)
+							&& localCommandCacheSet.isEmpty()) {
+						dirty.setDirty(false);
+					} else if (!dirty.isDirty()) {
+						dirty.setDirty(true);
+					}
+
+				}
+			};
+		}
+		return commandStackListener;
+	}
+
+	private EditingDomain getEditingDomain(EObject editingObject) {
+		return editingDomainController.getEditingDomain(editingObject);
 	}
 
 	private void updateGraphicSelectionCounter() {
@@ -558,6 +671,17 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		return code;
 	}
 
+	@Persist
+	public boolean saveText() {
+		if (dirty.isDirty()) {
+			textEditorController.save(currentText);
+			localCommandCacheSet.clear();
+
+			dirty.setDirty(false);
+		}
+		return true;
+	}
+
 	private void saveMdCstring(BTSWord word)
 	{
 		if (word != null) {
@@ -568,11 +692,17 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			normalizedMdC = removeIgnoreMarker(normalizedMdC);
 			normalizedMdC = removeSelectionMarker(normalizedMdC);
+			System.out.println("new mdc " + normalizedMdC + " ::: old "
+					+ beforeImageMdC);
+			if (!normalizedMdC.equals(beforeImageMdC))
+			{
+			normalizedMdC = removeIgnoreMarker(normalizedMdC);
 			System.out.println("htw saveMdCString " + normalizedMdC);
 			textEditorController
-					.updateBTSWordFromMdCString(word, normalizedMdC);
+.updateBTSWordFromMdCString(word,
+					normalizedMdC, editingDomain);
+			}
 		}
 
 	}

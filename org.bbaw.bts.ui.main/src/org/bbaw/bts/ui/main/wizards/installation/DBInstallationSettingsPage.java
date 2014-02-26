@@ -1,7 +1,7 @@
 package org.bbaw.bts.ui.main.wizards.installation;
 
-import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringIsIntegerValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.eclipse.core.databinding.AggregateValidationStatus;

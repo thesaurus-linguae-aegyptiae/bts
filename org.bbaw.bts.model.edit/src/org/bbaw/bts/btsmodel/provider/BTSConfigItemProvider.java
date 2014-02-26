@@ -9,14 +9,13 @@ import java.util.List;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
 import org.eclipse.emf.ecore.EStructuralFeature;
-
 import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
@@ -43,6 +42,10 @@ public class BTSConfigItemProvider
 	implements
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
 {
+	protected BTSResourceProvider resourceProvider = StaticAccessController
+			.getResourceProvider();
+	protected BTSConfigurationController configurationController = StaticAccessController
+			.getContext().get(BTSConfigurationController.class);
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

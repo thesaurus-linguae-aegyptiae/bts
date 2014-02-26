@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -20,6 +21,7 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.core.services.BTSAnnotationService;
 import org.bbaw.bts.core.services.BTSTCObjectService;
 import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.BTSTextService;
@@ -56,6 +58,9 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 	@Inject
 	private Backend2ClientUpdateService updateService;
+
+	@Inject
+	private BTSAnnotationService annotationService;
 
 	/*
 	 * (non-Javadoc)
@@ -269,5 +274,13 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	{
 		BTSText text = textService.createNew();
 		return text;
+	}
+
+	@Override
+	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = annotationService
+				.createNewAndRelate(annotatedObject);
+
+		return anno;
 	}
 }

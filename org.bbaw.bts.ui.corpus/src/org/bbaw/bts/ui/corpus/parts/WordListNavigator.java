@@ -5,12 +5,13 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -23,15 +24,15 @@ public class WordListNavigator
 	private TreeViewer treeViewer;
 	@Inject
 	private EventBroker eventBroker;
+
+	@Inject
+	private PermissionsAndExpressionsEvaluationController evaluationController;
 	private BTSTCObject root;
 
 	@PostConstruct
 	public void createComposite(Composite parent)
 	{
 		parent.setLayout(new GridLayout());
-
-		label = new Label(parent, SWT.NONE);
-		label.setText("Wordlist-Navigator");
 
 		treeViewer = new TreeViewer(parent);
 
@@ -74,9 +75,12 @@ public class WordListNavigator
 	@Focus
 	public void setFocus()
 	{
+		evaluationController
+				.activateDBCollectionContext(BTSCoreConstants.MAIN_WORD_LIST);
 		if (treeViewer != null)
 		{
 			treeViewer.getTree().setFocus();
 		}
 	}
+
 }

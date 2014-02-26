@@ -20,10 +20,9 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getPassportEditorConfig <em>Passport Editor Config</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getSubtype <em>Subtype</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerType <em>Owner Type</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getReferencedType <em>Referenced Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getRules <em>Rules</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#isShowWidget <em>Show Widget</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesPath <em>Owner Types Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -241,38 +240,6 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	void setSubtype(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Owner Type</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Owner Type</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owner Type</em>' attribute list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_OwnerType()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getOwnerType();
-
-	/**
-	 * Returns the value of the '<em><b>Referenced Type</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Referenced Type</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referenced Type</em>' attribute list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_ReferencedType()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getReferencedType();
-
-	/**
 	 * Returns the value of the '<em><b>Rules</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSWorkflowRuleItem}.
 	 * <!-- begin-user-doc -->
@@ -313,5 +280,31 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	 * @generated
 	 */
 	void setShowWidget(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Owner Types Path</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Owner Types Path</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Owner Types Path</em>' containment reference.
+	 * @see #setOwnerTypesPath(BTSObjectTypePathRoot)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_OwnerTypesPath()
+	 * @model containment="true"
+	 * @generated
+	 */
+	BTSObjectTypePathRoot getOwnerTypesPath();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesPath <em>Owner Types Path</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Owner Types Path</em>' containment reference.
+	 * @see #getOwnerTypesPath()
+	 * @generated
+	 */
+	void setOwnerTypesPath(BTSObjectTypePathRoot value);
 
 } // BTSConfigItem

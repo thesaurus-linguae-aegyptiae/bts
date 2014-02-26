@@ -2,6 +2,8 @@ package org.bbaw.bts.ui.corpus.handlers;
 
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
@@ -26,10 +28,9 @@ public class AddNewTextHandler
 	}
 
 	@CanExecute
-	public boolean canExecute()
-	{
-		//TODO Your code goes here
-		return true;
+	public boolean canExecute(
+			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection) {
+		return (selection instanceof BTSCorpusObject && !(selection instanceof BTSAnnotation));
 	}
 
 }

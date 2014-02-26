@@ -12,11 +12,12 @@
   <imports xsi:type="commands:Command" xmi:id="_mv-EEIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.lineEnd"/>
   <imports xsi:type="commands:Command" xmi:id="_oitNAIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.previous"/>
   <imports xsi:type="commands:Command" xmi:id="_qNsvMIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.next"/>
+  <imports xsi:type="commands:BindingContext" xmi:id="_2cGc4I_5EeO-sc3Y_v1Syg" elementId="org.eclipse.ui.contexts.editors"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q_x-IEChEeOsGJaKBBYPLQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.top">
     <elements xsi:type="basic:Part" xmi:id="_RoAbwEChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
       <toolbar xmi:id="_Vrll8EChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
     </elements>
-    <elements xsi:type="basic:Part" xmi:id="_DXXH8Fw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart" label="EgyTextEditor" closeable="true">
+    <elements xsi:type="basic:Part" xmi:id="_DXXH8Fw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart" label="EgyTextEditor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/texts.png" closeable="true">
       <toolbar xmi:id="_JTo5IFw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4"/>
     </elements>
   </fragments>
@@ -31,17 +32,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_4lhZ8IjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.handler.htw.shortcut" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.HTWShortcutHandler" command="_CBI1QIjGEeOBD8Gt6rzlog"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
-    <elements xsi:type="basic:Part" xmi:id="_28ER0FKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.part.hierotw" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter" label="Hieroglyph Type Writer" closeable="true">
-      <toolbar xmi:id="_6ea-QFKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.3">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_tmNjIIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_0sjTsIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.1" label="|&lt;" tooltip="Move selection to start of line." command="_k0JQkIJ4EeOX95-b2sMk-w"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_4bttEIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.2" label="&lt;" tooltip="Move selection to previous word." command="_oitNAIJ4EeOX95-b2sMk-w"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_7RgOcIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.3" label=">" tooltip="Move selection to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_9vTtoIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.4" label=">|" tooltip="Move selection to end of line." command="_mv-EEIJ4EeOX95-b2sMk-w"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_AvPCcIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.5" label=">||" tooltip="Move selection to end of document." command="_guxWoIJ4EeOX95-b2sMk-w"/>
-      </toolbar>
-    </elements>
-    <elements xsi:type="basic:Part" xmi:id="_QSWNcH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.part.lemmatizer" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmatizerPart" label="Lemmatizer" closeable="true">
+    <elements xsi:type="basic:Part" xmi:id="_QSWNcH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.part.lemmatizer" containerData="0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmatizerPart" label="Lemmatizer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmatizer.png" closeable="true">
       <toolbar xmi:id="_WC2McH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.2">
         <children xsi:type="menu:HandledToolItem" xmi:id="_GaYAUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_HoKpIIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.1" label="|&lt;" tooltip="Move selection to start of line." command="_k0JQkIJ4EeOX95-b2sMk-w"/>
@@ -49,6 +40,16 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_IgCsUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.3" label=">" tooltip="Move selection to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_JHOoIIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.4" label=">|" tooltip="Move selection to end of line." command="_mv-EEIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_Jf0uUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.5" label=">||" tooltip="Move selection to end of document." command="_guxWoIJ4EeOX95-b2sMk-w"/>
+      </toolbar>
+    </elements>
+    <elements xsi:type="basic:Part" xmi:id="_28ER0FKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.part.hierotw" containerData="5" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter" label="Hieroglyph Type Writer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/hieroglyphetw.png" closeable="true">
+      <toolbar xmi:id="_6ea-QFKtEeONtNt_OwxAsQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.3">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_tmNjIIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0sjTsIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.1" label="|&lt;" tooltip="Move selection to start of line." command="_k0JQkIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_4bttEIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.2" label="&lt;" tooltip="Move selection to previous word." command="_oitNAIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_7RgOcIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.3" label=">" tooltip="Move selection to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_9vTtoIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.4" label=">|" tooltip="Move selection to end of line." command="_mv-EEIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_AvPCcIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.5" label=">||" tooltip="Move selection to end of document." command="_guxWoIJ4EeOX95-b2sMk-w"/>
       </toolbar>
     </elements>
   </fragments>

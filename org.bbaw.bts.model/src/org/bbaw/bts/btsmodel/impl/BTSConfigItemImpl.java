@@ -8,9 +8,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
 import org.bbaw.bts.btsmodel.BTSTranslations;
@@ -22,7 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -42,10 +41,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getPassportEditorConfig <em>Passport Editor Config</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getSubtype <em>Subtype</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getOwnerType <em>Owner Type</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getReferencedType <em>Referenced Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#isShowWidget <em>Show Widget</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getOwnerTypesPath <em>Owner Types Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -213,25 +211,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	protected String subtype = SUBTYPE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getOwnerType() <em>Owner Type</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getOwnerType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> ownerType;
-
-	/**
-	 * The cached value of the '{@link #getReferencedType() <em>Referenced Type</em>}' attribute list.
-	 * <!-- begin-user-doc --> <!--
-	 * end-user-doc -->
-	 * @see #getReferencedType()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> referencedType;
-
-	/**
 	 * The cached value of the '{@link #getRules() <em>Rules</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -260,6 +239,16 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	 * @ordered
 	 */
 	protected boolean showWidget = SHOW_WIDGET_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getOwnerTypesPath() <em>Owner Types Path</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getOwnerTypesPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected BTSObjectTypePathRoot ownerTypesPath;
 
 	private List<PropertyChangeListener> propertyChangeListeners = new ArrayList<PropertyChangeListener>();
 
@@ -562,30 +551,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getOwnerType()
-	{
-		if (ownerType == null) {
-			ownerType = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE);
-		}
-		return ownerType;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<String> getReferencedType()
-	{
-		if (referencedType == null) {
-			referencedType = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE);
-		}
-		return referencedType;
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -619,6 +584,49 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		showWidget = newShowWidget;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET, oldShowWidget, showWidget));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSObjectTypePathRoot getOwnerTypesPath() {
+		return ownerTypesPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwnerTypesPath(BTSObjectTypePathRoot newOwnerTypesPath, NotificationChain msgs) {
+		BTSObjectTypePathRoot oldOwnerTypesPath = ownerTypesPath;
+		ownerTypesPath = newOwnerTypesPath;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH, oldOwnerTypesPath, newOwnerTypesPath);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwnerTypesPath(BTSObjectTypePathRoot newOwnerTypesPath) {
+		if (newOwnerTypesPath != ownerTypesPath) {
+			NotificationChain msgs = null;
+			if (ownerTypesPath != null)
+				msgs = ((InternalEObject)ownerTypesPath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH, null, msgs);
+			if (newOwnerTypesPath != null)
+				msgs = ((InternalEObject)newOwnerTypesPath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH, null, msgs);
+			msgs = basicSetOwnerTypesPath(newOwnerTypesPath, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH, newOwnerTypesPath, newOwnerTypesPath));
 	}
 
 	/**
@@ -661,6 +669,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				return basicSetPassportEditorConfig(null, msgs);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
 				return ((InternalEList<?>)getRules()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH:
+				return basicSetOwnerTypesPath(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -693,14 +703,12 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				return getType();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE:
 				return getSubtype();
-			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE:
-				return getOwnerType();
-			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
-				return getReferencedType();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
 				return getRules();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
 				return isShowWidget();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH:
+				return getOwnerTypesPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -744,20 +752,15 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE:
 				setSubtype((String)newValue);
 				return;
-			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE:
-				getOwnerType().clear();
-				getOwnerType().addAll((Collection<? extends String>)newValue);
-				return;
-			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
-				getReferencedType().clear();
-				getReferencedType().addAll((Collection<? extends String>)newValue);
-				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
 				getRules().clear();
 				getRules().addAll((Collection<? extends BTSWorkflowRuleItem>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
 				setShowWidget((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH:
+				setOwnerTypesPath((BTSObjectTypePathRoot)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -801,17 +804,14 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE:
 				setSubtype(SUBTYPE_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE:
-				getOwnerType().clear();
-				return;
-			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
-				getReferencedType().clear();
-				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
 				getRules().clear();
 				return;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
 				setShowWidget(SHOW_WIDGET_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH:
+				setOwnerTypesPath((BTSObjectTypePathRoot)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -845,14 +845,12 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SUBTYPE:
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
-			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPE:
-				return ownerType != null && !ownerType.isEmpty();
-			case BtsmodelPackage.BTS_CONFIG_ITEM__REFERENCED_TYPE:
-				return referencedType != null && !referencedType.isEmpty();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__RULES:
 				return rules != null && !rules.isEmpty();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__SHOW_WIDGET:
 				return showWidget != SHOW_WIDGET_EDEFAULT;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_TYPES_PATH:
+				return ownerTypesPath != null;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -965,10 +963,6 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem
 		result.append(type);
 		result.append(", subtype: ");
 		result.append(subtype);
-		result.append(", ownerType: ");
-		result.append(ownerType);
-		result.append(", referencedType: ");
-		result.append(referencedType);
 		result.append(", showWidget: ");
 		result.append(showWidget);
 		result.append(')');

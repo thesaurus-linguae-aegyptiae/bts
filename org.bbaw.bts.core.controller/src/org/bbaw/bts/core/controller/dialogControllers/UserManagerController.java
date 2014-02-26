@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -28,5 +29,7 @@ public interface UserManagerController
 	boolean saveUsers(Set<BTSUser> dirtyUsers);
 
 	boolean saveUserGroups(Set<BTSUserGroup> dirtyUserGroups);
+
+	boolean saveDBBaseObject(BTSDBBaseObject dbBaseObject);
 
 }

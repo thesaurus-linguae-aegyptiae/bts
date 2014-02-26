@@ -26,10 +26,13 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.controller.generalController.BTSProjectController;
+import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
@@ -37,6 +40,7 @@ import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeStructureAdvisor;
 import org.bbaw.bts.ui.main.wizards.newProject.EditDBCollectionDialog;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -54,7 +58,6 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
-import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
@@ -67,7 +70,6 @@ import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
@@ -100,6 +102,7 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
@@ -115,8 +118,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 public class UserManagementPart
 {
 
-	private static final int DELAY = 400;
-
 	@Inject
 	private UserManagerController userManagerController;
 
@@ -131,6 +132,12 @@ public class UserManagementPart
 
 	@Inject
 	private BTSProjectController projectController;
+
+	@Inject
+	private EditingDomainController editingDomainController;
+
+	@Inject
+	private BTSResourceProvider resourceProvider;
 
 	private Text textName_Group;
 	private Text textType_Group;
@@ -179,8 +186,6 @@ public class UserManagementPart
 	private DataBindingContext user_bindingContext;
 
 	private Text labelId_User;
-
-	private Map<BTSIdentifiableItem, EditingDomain> editingDomainMap = new HashMap<BTSIdentifiableItem, EditingDomain>();
 
 	private ToolItem user_ToolcreateGroup;
 
@@ -271,15 +276,24 @@ public class UserManagementPart
 
 	private Combo roles_dbColl_newRoles_combo;
 
-	private static final String[] databaseRoles = new String[] { "admins", "editors", "researchers", "transliterators",
-			"guests" };
+	private static final String[] databaseRoles = new String[] {
+			BTSCoreConstants.USER_ROLE_ADMINS,
+			BTSCoreConstants.USER_ROLE_EDITORS,
+			BTSCoreConstants.USER_ROLE_RESEARCHERS,
+			BTSCoreConstants.USER_ROLE_TRANSCRIBERS,
+			BTSCoreConstants.USER_ROLE_GUESTS };
 
 	private static final String[] databaseRolesDescs = new String[] {
-			"admins = Administrator. Administrators may edit or delete all objects even if no special rights for a very objects were granted to them. Thus they can also clean up the database. Administrators are the only users who are allowed to manage other users, user group membershibs and roles. Administrators are also the only users who may edit the configuration.",
-			"editors = Editors. Editors may review and correct objects owned by other users even if no special rights for a very object were granted to them. Thus they can review and improve the quality of the data.",
-			"researchers = Researcher. Researcher may create new objects and edit or delete their own objects but only their own or objects for which they were granted editing rights.",
-			"transliterators = users who are allowed to transliterate a text. They may not create new objects and may not change anything except adding transliteration to text for which they are granted update rights.",
-			"guests = Guest. Guests may read data but not create new objects or edit or delete anything." };
+			BTSCoreConstants.USER_ROLE_ADMINS
+					+ " = Administrator. Administrators may edit or delete all objects even if no special rights for a very objects were granted to them. Thus they can also clean up the database. Administrators are the only users who are allowed to manage other users, user group membershibs and roles. Administrators are also the only users who may edit the configuration.",
+			BTSCoreConstants.USER_ROLE_EDITORS
+					+ " = Editors. Editors may review and correct objects owned by other users even if no special rights for a very object were granted to them. Thus they can review and improve the quality of the data.",
+			BTSCoreConstants.USER_ROLE_RESEARCHERS
+					+ " = Researcher. Researcher may create new objects and edit or delete their own objects but only their own or objects for which they were granted editing rights.",
+			BTSCoreConstants.USER_ROLE_TRANSCRIBERS
+					+ " = users who are allowed to transcribe a text. They may not create new objects and may not change anything except adding transcribtion to text for which they are granted update rights.",
+			BTSCoreConstants.USER_ROLE_GUESTS
+					+ " = Guest. Guests may read data but not create new objects or edit or delete anything." };
 
 	private HashMap<String, String> roleDescMap;
 	private Label lblUser_1;
@@ -343,6 +357,8 @@ public class UserManagementPart
 		ToolBar toolBar = new ToolBar(user_composite, SWT.FLAT | SWT.RIGHT);
 		user_ToolcreateGroup = new ToolItem(toolBar, SWT.NONE);
 		user_ToolcreateGroup.setText("New Group");
+		user_ToolcreateGroup.setImage(resourceProvider.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_USERS_ADD));
 		user_ToolcreateGroup.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -364,6 +380,8 @@ public class UserManagementPart
 
 		user_ToolDeleteGroup = new ToolItem(toolBar, SWT.NONE);
 		user_ToolDeleteGroup.setText("Delete");
+		user_ToolDeleteGroup.setImage(resourceProvider.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
 		user_ToolDeleteGroup.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -376,6 +394,8 @@ public class UserManagementPart
 
 		user_ToolUndo = new ToolItem(toolBar, SWT.NONE);
 		user_ToolUndo.setText("Undo");
+		user_ToolUndo.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_UNDO));
 		user_ToolUndo.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -389,6 +409,8 @@ public class UserManagementPart
 
 		user_ToolRedo = new ToolItem(toolBar, SWT.NONE);
 		user_ToolRedo.setText("Redo");
+		user_ToolRedo.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_REDO));
 		user_ToolRedo.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -433,6 +455,8 @@ public class UserManagementPart
 		ToolBar roles_toolbar = new ToolBar(composite, SWT.FLAT | SWT.RIGHT);
 		roles_ToolcreateProject = new ToolItem(roles_toolbar, SWT.NONE);
 		roles_ToolcreateProject.setText("New Project");
+		roles_ToolcreateProject.setImage(resourceProvider.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_PROJECT_ADD));
 		roles_ToolcreateProject.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -454,6 +478,8 @@ public class UserManagementPart
 
 		roles_ToolDeleteProject = new ToolItem(roles_toolbar, SWT.NONE);
 		roles_ToolDeleteProject.setText("Delete");
+		roles_ToolDeleteProject.setImage(resourceProvider.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
 		roles_ToolDeleteProject.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -466,6 +492,8 @@ public class UserManagementPart
 
 		roles_ToolUndo = new ToolItem(roles_toolbar, SWT.NONE);
 		roles_ToolUndo.setText("Undo");
+		roles_ToolUndo.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_UNDO));
 		roles_ToolUndo.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -479,6 +507,8 @@ public class UserManagementPart
 
 		roles_ToolRedo = new ToolItem(roles_toolbar, SWT.NONE);
 		roles_ToolRedo.setText("Redo");
+		roles_ToolRedo.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_REDO));
 		roles_ToolRedo.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -490,7 +520,8 @@ public class UserManagementPart
 			}
 		});
 		roles_sashForm = new SashForm(roles_composite, SWT.NONE);
-		roles_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		roles_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				true, 1, 1));
 
 		roles_composite_Left = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_Left.setLayout(new GridLayout(1, false));
@@ -499,7 +530,8 @@ public class UserManagementPart
 		lblDatabaseCollectionsAnd.setText("Database collections and associated users and their editing rights");
 
 		Label lblFirstLevelProjects = new Label(roles_composite_Left, SWT.NONE);
-		lblFirstLevelProjects.setText("First Level: Projects, Second: DB Collections, Thrid: User Roles, Fourth: User");
+		lblFirstLevelProjects
+				.setText("1st Level: Projects, 2nd: DB Collections, 3rd: User Roles, 4th: User");
 
 		roles_treeViewer = new TreeViewer(roles_composite_Left, SWT.BORDER);
 		Tree roles_tree = roles_treeViewer.getTree();
@@ -748,7 +780,10 @@ public class UserManagementPart
 
 	private void manageDirtyObjects(BTSIdentifiableItem oldSelection, BTSIdentifiableItem selectedTreeObject2)
 	{
-		if (getEditingDomain(oldSelection).getCommandStack().canUndo()) // object is dirty
+		if (oldSelection != null
+				&& getEditingDomain(oldSelection).getCommandStack().canUndo()) // object
+																				// is
+																				// dirty
 		{
 			if (oldSelection instanceof BTSUser)
 			{
@@ -916,7 +951,7 @@ public class UserManagementPart
 			}
 		});
 
-		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.setWeights(new int[] { 10, 8 });
 		roles_sashForm.layout();
 
 	}
@@ -984,7 +1019,7 @@ public class UserManagementPart
 			}
 		});
 
-		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.setWeights(new int[] { 10, 8 });
 		roles_sashForm.layout();
 
 	}
@@ -1006,10 +1041,11 @@ public class UserManagementPart
 		}
 		checkAndLoadCache(dBRoleDesc);
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
-		roles_composite_right.setLayout(new GridLayout(2, false));
+		roles_composite_right.setLayout(new GridLayout(3, false));
 		lblUserRoleDefinition = new Label(roles_composite_right, SWT.NONE);
 		lblUserRoleDefinition.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
-		lblUserRoleDefinition.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
+		lblUserRoleDefinition.setLayoutData(new GridData(SWT.CENTER,
+				SWT.CENTER, true, false, 1, 1));
 		lblUserRoleDefinition.setText("User Role Definition");
 
 		lblRoleName = new Label(roles_composite_right, SWT.NONE);
@@ -1020,12 +1056,14 @@ public class UserManagementPart
 		roles_rolesDesc_name_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		roles_rolesDesc_name_text.setEditable(false);
 
-		Label lblRoleDesc = new Label(roles_composite_right, SWT.NONE);
-		lblRoleDesc.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblRoleDesc.setText("Role Description");
+		// Label lblRoleDesc = new Label(roles_composite_right, SWT.NONE);
+		// lblRoleDesc.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+		// false, 1, 1));
+		// lblRoleDesc.setText("Role Description");
 
 		Text txt_rolesDesc = new Text(roles_composite_right, SWT.BORDER | SWT.MULTI | SWT.WRAP);
-		txt_rolesDesc.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 2));
+		txt_rolesDesc.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 3, 2));
 		txt_rolesDesc.setEditable(false);
 		String desc = roleDescMap.get(dBRoleDesc.getRoleName());
 		if (desc != null)
@@ -1034,12 +1072,16 @@ public class UserManagementPart
 		}
 
 		Group grpAssignUser = new Group(roles_composite_right, SWT.NONE);
-		grpAssignUser.setLayout(new GridLayout(1, false));
-		grpAssignUser.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		grpAssignUser.setLayout(new GridLayout(2, false));
+		grpAssignUser.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 3, 1));
 		grpAssignUser.setText("Assign User");
 
 		Label lblSelectUser = new Label(grpAssignUser, SWT.NONE);
+		lblSelectUser.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblSelectUser.setText("Select User");
+		lblSelectUser.pack();
 
 		roles_rolesDesc_users_comboViewer = new ComboViewer(grpAssignUser, SWT.NONE | SWT.READ_ONLY);
 		roles_rolesDesc_users_comboViewer.getCombo().setLayoutData(
@@ -1051,6 +1093,8 @@ public class UserManagementPart
 
 		roles_roleDesc_assignUser_link = new Link(grpAssignUser, SWT.NONE);
 		roles_roleDesc_assignUser_link.setText("<a>Assign role to user</a>");
+		roles_roleDesc_assignUser_link.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 2, 1));
 		roles_roleDesc_assignUser_link.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -1082,12 +1126,16 @@ public class UserManagementPart
 		});
 
 		grpAssignUserGroup = new Group(roles_composite_right, SWT.NONE);
-		grpAssignUserGroup.setLayout(new GridLayout(1, false));
-		grpAssignUserGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
+		grpAssignUserGroup.setLayout(new GridLayout(2, false));
+		grpAssignUserGroup.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				false, false, 3, 1));
 		grpAssignUserGroup.setText("Assign User Group");
 
 		lblSelectUserGroup = new Label(grpAssignUserGroup, SWT.NONE);
-		lblSelectUserGroup.setText("Select User Group");
+		lblSelectUserGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1));
+		lblSelectUserGroup.setText("Select Group");
+		lblSelectUserGroup.pack();
 
 		roles_rolesDesc_group_comboViewer = new ComboViewer(grpAssignUserGroup, SWT.NONE | SWT.READ_ONLY);
 		roles_rolesDesc_group_comboViewer.getCombo().setLayoutData(
@@ -1097,6 +1145,8 @@ public class UserManagementPart
 		roles_rolesDesc_group_comboViewer.setInput(observableLisAllUserGroups);
 		roles_roleDesc_assignGroup_link = new Link(grpAssignUserGroup, SWT.NONE);
 		roles_roleDesc_assignGroup_link.setText("<a>Assign role to whole user group</a>");
+		roles_roleDesc_assignGroup_link.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 2, 1));
 		roles_roleDesc_assignGroup_link.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -1127,8 +1177,9 @@ public class UserManagementPart
 
 			}
 		});
-
 		roles_roleDesc_removeRoleDesc_link = new Link(roles_composite_right, SWT.NONE);
+		roles_roleDesc_removeRoleDesc_link.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, false, false, 3, 1));
 		roles_roleDesc_removeRoleDesc_link.setText("<a>Remove this Role and its members from DB collection</a>");
 		roles_roleDesc_removeRoleDesc_link.addSelectionListener(new SelectionAdapter()
 		{
@@ -1150,8 +1201,8 @@ public class UserManagementPart
 			}
 		});
 		dbRoleDesc_bindingContext = initializeRoleDescBindings(dBRoleDesc);
-
-		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_composite_right.layout();
+		roles_sashForm.setWeights(new int[] { 10, 8 });
 		roles_sashForm.layout();
 
 	}
@@ -1222,7 +1273,9 @@ public class UserManagementPart
 		// db collection name - cannot be changed
 		IObservableValue model_na = EMFProperties.value(BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__ROLE_NAME)
 				.observe(dBRoleDesc);
-		bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_rolesDesc_name_text),
+		bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_rolesDesc_name_text),
 				model_na, null, null);
 		return bindingContext;
 	}
@@ -1298,7 +1351,7 @@ public class UserManagementPart
 
 		dbColl_bindingContext = initializeDBCollectionBindings(dbCollection);
 
-		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.setWeights(new int[] { 10, 8 });
 		roles_sashForm.layout();
 	}
 
@@ -1314,21 +1367,26 @@ public class UserManagementPart
 		// db collection name - cannot be changed
 		IObservableValue model_na = EMFProperties.value(
 				BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME).observe(dbCollection);
-		bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_dbColl_name_text),
+		bindingContext.bindValue(WidgetProperties.text(SWT.Modify)
+				.observeDelayed(BTSUIConstants.DELAY, roles_dbColl_name_text),
 				model_na, null, null);
 
 		// sync
 		IObservableValue model_sy = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED).observe(dbCollection);
 		Binding binding_sy = bindingContext.bindValue(
-				WidgetProperties.selection().observeDelayed(DELAY, roles_dbColl_sync_btn), model_sy, null, null);
+				WidgetProperties.selection().observeDelayed(
+						BTSUIConstants.DELAY, roles_dbColl_sync_btn), model_sy,
+				null, null);
 		bindingContext.addValidationStatusProvider(binding_sy);
 
 		// index
 		IObservableValue model_in = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__INDEXED).observe(dbCollection);
 		Binding binding_in = bindingContext.bindValue(
-				WidgetProperties.selection().observeDelayed(DELAY, roles_dbColl_index_btn), model_in, null, null);
+				WidgetProperties.selection().observeDelayed(
+						BTSUIConstants.DELAY, roles_dbColl_index_btn),
+				model_in, null, null);
 		bindingContext.addValidationStatusProvider(binding_in);
 
 		return bindingContext;
@@ -1426,7 +1484,7 @@ public class UserManagementPart
 
 		project_bindingContext = initializeProjectBindings(project);
 
-		roles_sashForm.setWeights(new int[] { 1, 1 });
+		roles_sashForm.setWeights(new int[] { 10, 8 });
 		roles_sashForm.layout();
 
 	}
@@ -1444,7 +1502,9 @@ public class UserManagementPart
 		IObservableValue model_id = EMFProperties.value(BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID).observe(
 				project);
 		Binding binding_id = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_id_text), model_id, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_id_text), model_id,
+				null, null);
 		bindingContext.addValidationStatusProvider(binding_id);
 
 		// project name
@@ -1454,7 +1514,9 @@ public class UserManagementPart
 		IObservableValue model_n = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_OBJECT__NAME)
 				.observe(project);
 		Binding binding_n = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_name_text), model_n, us_n, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_name_text),
+				model_n, us_n, null);
 		bindingContext.addValidationStatusProvider(binding_n);
 		BackgroundControlDecorationSupport.create(binding_n, SWT.TOP | SWT.LEFT);
 
@@ -1462,7 +1524,10 @@ public class UserManagementPart
 
 		IObservableValue model_p = EMFProperties.value(BtsmodelPackage.Literals.BTS_PROJECT__PREFIX).observe(project);
 		Binding binding_p = bindingContext
-				.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_prefix_text), model_p,
+.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_prefix_text),
+				model_p,
 						null, null);
 		bindingContext.addValidationStatusProvider(binding_p);
 
@@ -1471,7 +1536,9 @@ public class UserManagementPart
 		IObservableValue model_ds = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_PROJECT__DESCRIPTION).observe(project);
 		Binding binding_ds = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_desc_text), model_ds, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_desc_text),
+				model_ds, null, null);
 		bindingContext.addValidationStatusProvider(binding_ds);
 
 		//project connection
@@ -1480,7 +1547,9 @@ public class UserManagementPart
 
 		IObservableValue model = EMFEditProperties.value(editingDomain, feature).observe(project);
 		Binding binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_Connectiontype), model, null,
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_Connectiontype),
+				model, null,
 				null);
 		bindingContext.addValidationStatusProvider(binding);
 
@@ -1491,14 +1560,18 @@ public class UserManagementPart
 				BtsmodelPackage.Literals.BTSDB_CONNECTION__MASTER_SERVER);
 		IObservableValue model2 = EMFEditProperties.value(editingDomain, feature2).observe(project);
 		Binding binding2 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_remote_url), model2, us_su, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_remote_url),
+				model2, us_su, null);
 		bindingContext.addValidationStatusProvider(binding2);
 
 		FeaturePath feature3 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_PROJECT__DB_CONNECTION,
 				BtsmodelPackage.Literals.BTSDB_CONNECTION__DB_PATH);
 		IObservableValue model3 = EMFEditProperties.value(editingDomain, feature3).observe(project);
 		Binding binding3 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, roles_project_textdbPath), model3, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, roles_project_textdbPath),
+				model3, null, null);
 		bindingContext.addValidationStatusProvider(binding3);
 		return bindingContext;
 	}
@@ -1530,11 +1603,11 @@ public class UserManagementPart
 				@Override
 				public void notifyChanged(Notification notification)
 				{
-					enableUndoRedo(selectedTreeObject);
-					enableReolesUndoRedo(selectedTreeObject);
+
+						enableUndoRedo(selectedTreeObject);
+						enableReolesUndoRedo(selectedTreeObject);
 
 				}
-
 			};
 
 		}
@@ -1543,18 +1616,25 @@ public class UserManagementPart
 
 	private void enableUndoRedo(BTSIdentifiableItem object)
 	{
-
+		if (object == null) {
+			user_ToolUndo.setEnabled(false);
+			user_ToolRedo.setEnabled(false);
+		} else {
 		user_ToolUndo.setEnabled(getEditingDomain(object).getCommandStack().canUndo());
 		user_ToolRedo.setEnabled(getEditingDomain(object).getCommandStack().canRedo());
+		}
 
 	}
 
 	private void enableReolesUndoRedo(BTSIdentifiableItem object)
 	{
-
+		if (object == null) {
+			roles_ToolUndo.setEnabled(false);
+			roles_ToolRedo.setEnabled(false);
+		} else {
 		roles_ToolUndo.setEnabled(getEditingDomain(object).getCommandStack().canUndo());
 		roles_ToolRedo.setEnabled(getEditingDomain(object).getCommandStack().canRedo());
-
+		}
 	}
 
 	private Composite loadUserEditComposite(BTSUser user)
@@ -1637,9 +1717,6 @@ public class UserManagementPart
 		textComment_User = new Text(composite_UserEdit, SWT.BORDER);
 		textComment_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		new Label(composite_UserEdit, SWT.NONE);
-		new Label(composite_UserEdit, SWT.NONE);
-
 		Group grpLogin = new Group(composite_UserEdit, SWT.NONE);
 		grpLogin.setLayout(new GridLayout(2, false));
 		grpLogin.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
@@ -1683,7 +1760,9 @@ public class UserManagementPart
 		IObservableValue model_id = EMFProperties.value(BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID).observe(
 				user);
 		Binding binding_id = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, labelId_User), model_id, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, labelId_User), model_id, null,
+				null);
 		bindingContext.addValidationStatusProvider(binding_id);
 
 		// forename
@@ -1693,7 +1772,9 @@ public class UserManagementPart
 		IObservableValue model_fn = EMFEditProperties
 				.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__FORE_NAME).observe(user);
 		Binding binding_fn = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textForeName_User), model_fn, us_fn, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textForeName_User), model_fn,
+				us_fn, null);
 		bindingContext.addValidationStatusProvider(binding_fn);
 		BackgroundControlDecorationSupport.create(binding_fn, SWT.TOP | SWT.LEFT);
 
@@ -1703,7 +1784,9 @@ public class UserManagementPart
 		IObservableValue model_sn = EMFEditProperties
 				.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__SURE_NAME).observe(user);
 		Binding binding_sn = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textSurName_User), model_sn, us_sn, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textSurName_User), model_sn,
+				us_sn, null);
 		bindingContext.addValidationStatusProvider(binding_sn);
 		BackgroundControlDecorationSupport.create(binding_sn, SWT.TOP | SWT.LEFT);
 
@@ -1713,7 +1796,9 @@ public class UserManagementPart
 		IObservableValue model_em = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__MAIL)
 				.observe(user);
 		Binding binding_em = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textEmail_User), model_em, us_em, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textEmail_User), model_em, us_em,
+				null);
 		bindingContext.addValidationStatusProvider(binding_em);
 		BackgroundControlDecorationSupport.create(binding_em, SWT.TOP | SWT.LEFT);
 
@@ -1723,7 +1808,9 @@ public class UserManagementPart
 		IObservableValue model_ws = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__WEB_URL)
 				.observe(user);
 		Binding binding_ws = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textWebsite_User), model_ws, us_ws, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textWebsite_User), model_ws,
+				us_ws, null);
 		bindingContext.addValidationStatusProvider(binding_ws);
 		BackgroundControlDecorationSupport.create(binding_ws, SWT.TOP | SWT.LEFT);
 
@@ -1731,63 +1818,52 @@ public class UserManagementPart
 		IObservableValue model_de = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_USER__DESCRIPTION).observe(user);
 		Binding binding_de = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textDesc_User), model_de, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textDesc_User), model_de, null,
+				null);
 		bindingContext.addValidationStatusProvider(binding_de);
 
 		//web description
 		IObservableValue model_wd = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_USER__WEB_DESCRIPTION).observe(user);
 		Binding binding_wd = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textWebDesc_User), model_wd, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textWebDesc_User), model_wd,
+				null, null);
 		bindingContext.addValidationStatusProvider(binding_wd);
 
 		// sigl
 		IObservableValue model_si = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__SIGLE)
 				.observe(user);
 		Binding binding_si = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textSigle_User), model_si, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textSigle_User), model_si, null,
+				null);
 		bindingContext.addValidationStatusProvider(binding_si);
 
 		// comment
 		IObservableValue model_co = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__COMMENT)
 				.observe(user);
 		Binding binding_co = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textComment_User), model_co, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textComment_User), model_co,
+				null, null);
 		bindingContext.addValidationStatusProvider(binding_co);
 
 		// comment
 		IObservableValue model_us = EMFEditProperties
 				.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__USER_NAME).observe(user);
 		Binding binding_us = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textUserName_User), model_us, null, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textUserName_User), model_us,
+				null, null);
 		bindingContext.addValidationStatusProvider(binding_us);
 		return bindingContext;
 	}
 
 	private EditingDomain getEditingDomain(BTSIdentifiableItem item)
 	{
-		BTSIdentifiableItem object = item;
-		if (item instanceof BTSProjectDBCollection)
-		{
-			object = (BTSIdentifiableItem) item.eContainer();
-		} else if (item instanceof BTSDBCollectionRoleDesc)
-		{
-			if (item.eContainer() == null)
-			{
-				return null;
-			}
-			object = (BTSIdentifiableItem) item.eContainer().eContainer();
-		}
-
-		if (editingDomainMap.containsKey(object))
-		{
-			return editingDomainMap.get(object);
-		}
-
-		AdapterFactoryEditingDomain domain = new AdapterFactoryEditingDomain(adapterFactory, new BasicCommandStack());
-		//		EditingDomain domain = AdapterFactoryEditingDomain.getEditingDomainFor(user);
-		editingDomainMap.put(object, domain);
-		return domain;
+		return editingDomainController.getEditingDomain(item);
 	}
 
 	private Composite loadGroupEditComposite(final BTSUserGroup group)
@@ -1899,6 +1975,13 @@ public class UserManagementPart
 		tn.setObject(user);
 		tn.setParent(parentNodeWrapper);
 		parentNodeWrapper.getChildren().add(tn);
+		dirtyUsers.add(user);
+		if (observableLisAllUsers == null) {
+			loadAllUsers();
+		}
+		if (observableLisAllUserGroups == null) {
+			loadAllUserGroups();
+		}
 		observableLisAllUsers.add(user);
 	}
 
@@ -1918,14 +2001,17 @@ public class UserManagementPart
 		IObservableValue model_id = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID).observe(group);
 		Binding binding_id = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, labelId_Group), model_id, us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, labelId_Group), model_id, us,
+				null);
 		bindingContext.addValidationStatusProvider(binding_id);
 
 		// name
 		IObservableValue model = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_OBJECT__NAME)
 				.observe(group);
 		Binding binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textName_Group), model, us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textName_Group), model, us, null);
 		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 		bindingContext.addValidationStatusProvider(binding);
 
@@ -1933,14 +2019,18 @@ public class UserManagementPart
 		IObservableValue model2 = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_OBJECT__TYPE)
 				.observe(group);
 		Binding binding2 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textType_Group), model2, us, null);
+						WidgetProperties.text(SWT.Modify).observeDelayed(
+								BTSUIConstants.DELAY, textType_Group), model2,
+						us, null);
 		bindingContext.addValidationStatusProvider(binding2);
 
 		// comment
 		IObservableValue model3 = EMFEditProperties.value(editingDomain,
 				BtsmodelPackage.Literals.BTS_USER_GROUP__COMMENT).observe(group);
 		Binding binding3 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, textComment_Group), model3, us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textComment_Group), model3, us,
+				null);
 		bindingContext.addValidationStatusProvider(binding3);
 		return bindingContext;
 	}
@@ -2019,6 +2109,9 @@ public class UserManagementPart
 				user_root.getChildren().add(tn);
 				if (object instanceof BTSUserGroup)
 				{
+					if (observableLisAllUserGroups == null) {
+						loadAllUserGroups();
+					}
 					observableLisAllUserGroups.add(object);
 				}
 			}

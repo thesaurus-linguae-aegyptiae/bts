@@ -17,7 +17,7 @@
     swt-unselected-tabs-color: #FFFFFF #FFFFFF #FFFFFF 100% 100%;
     swt-outer-keyline-color: #FFFFFF;
 	swt-inner-keyline-color: #FFFFFF;
-	font-size: 9;
+	font-size: 10;
 	swt-simple: false;
 	padding: 0px 10px 11px;
 	swt-mru-visible: false;
@@ -72,10 +72,21 @@ CTabItem.highlighted {
 Composite {
 	background-color: #FFFFFF;
 }
+ScrolledComposite {
+	background-color: #FFFFFF;
+}
 
 Group {
 	background-color: #FFFFFF;
 }
+
+PassportEntryItemEditor {
+	background-color: #FFFFFF;
+}
+PassportEntryGroupEditor {
+	background-color: #FFFFFF;
+}
+
 Label {
 	background-color: #FFFFFF;
 	
@@ -99,6 +110,9 @@ Button {
 }
 Text {
 	background-color: #FFFFFF;
+}
+Link {
+	background-color: #FFFFFF;
 	
 }
 ToolBar {
@@ -108,3 +122,5 @@ ToolBar {
 ToolItem {
 	background-color: #FFFFFF;
 }
+
+

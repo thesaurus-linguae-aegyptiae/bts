@@ -257,28 +257,55 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	public List<E> query(BTSQueryRequest query, String indexName, String indexType)
 	{
 
-		SearchResponse response = connectionProvider.getSearchClient(Client.class).prepareSearch(indexName)
-				.setTypes(indexType).setSearchType(SearchType.DFS_QUERY_THEN_FETCH).setQuery(query.getQueryBuilder()) // Query
-				// .setFilter(FilterBuilders.rangeFilter("age").from(12).to(18))
-				// // Filter
-				.setFrom(0).setSize(60).setExplain(true).execute().actionGet();
-		List<E> result = new Vector<E>();
-		for (SearchHit hit : response.getHits())
+		if (query.getSearchRequestBuilder() == null)
 		{
-			try
+			SearchResponse response = connectionProvider
+					.getSearchClient(Client.class)
+					.prepareSearch(indexName)
+					.setTypes(indexType)
+					.setSearchType(SearchType.QUERY_AND_FETCH)
+					.setQuery(query.getQueryBuilder())
+					// Query
+					// .setFilter(FilterBuilders.rangeFilter("age").from(12).to(18))
+					// // Filter
+					.setFrom(0).setSize(60).setExplain(true).execute()
+					.actionGet();
+			List<E> result = new Vector<E>();
+			for (SearchHit hit : response.getHits())
 			{
-				result.add(loadObjectFromHit(hit, indexName));
-			} catch (Exception e)
-			{
-				e.printStackTrace();
+				try {
+					result.add(loadObjectFromHit(hit, indexName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
-		}
-		if (!result.isEmpty())
-		{
-			registerQueryWithPercolator(query, indexName, indexType);
-		}
+			if (!result.isEmpty())
+			{
+				registerQueryWithPercolator(query, indexName, indexType);
+			}
 
-		return result;
+			return result;
+		}
+ else
+		{
+			SearchResponse response = query.getSearchRequestBuilder()
+					.setIndices(indexName).setTypes(indexType)
+					.setSearchType(SearchType.QUERY_AND_FETCH).execute()
+					.actionGet();
+			List<E> result = new Vector<E>();
+			for (SearchHit hit : response.getHits()) {
+				try {
+					result.add(loadObjectFromHit(hit, indexName));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (!result.isEmpty()) {
+				registerQueryWithPercolator(query, indexName, indexType);
+			}
+
+			return result;
+		}
 	}
 
 	protected void registerQueryWithPercolator(BTSQueryRequest query, String indexName, String indexType)

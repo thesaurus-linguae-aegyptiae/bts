@@ -29,6 +29,7 @@ import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextItems;
 import org.bbaw.bts.btsmodel.BTSWord;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.services.BTSTextService;
@@ -38,6 +39,11 @@ import org.bbaw.bts.ui.commons.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
+import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
+import org.eclipse.emf.edit.command.SetCommand;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.Position;
@@ -584,7 +590,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		}
 	}
 
-	public void updateBTSWordFromMdCString(BTSWord word, String mdc)
+	public void updateBTSWordFromMdCString(BTSWord word, String mdc,
+			EditingDomain editingDomain)
 	{
 		List<BTSGraphic> toDelete = new ArrayList<BTSGraphic>(1);
 		String[] tokens = splitSignsKeepDelimeters(mdc);
@@ -595,7 +602,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			BTSGraphic graphic = word.getGraphics().get(i);
 			if (i < tokens.length)
 			{
-				graphic.setCode(tokens[i].toUpperCase());
+				Command command = SetCommand.create(editingDomain, graphic,
+						BtsmodelPackage.Literals.BTS_GRAPHIC__CODE,
+						tokens[i].toUpperCase());
+				editingDomain.getCommandStack().execute(command);
 				innerSentenceOrder = graphic.getInnerSentenceOrder();
 			} else
 			{
@@ -614,12 +624,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				createdIndex++;
 				graphic.setCode(tokens[i].toUpperCase());
 				graphic.setInnerSentenceOrder(innerSentenceOrder + createdIndex);
-				word.getGraphics().add(graphic);
+				Command command = AddCommand.create(editingDomain, word,
+						BtsmodelPackage.Literals.BTS_WORD__GRAPHICS, graphic);
+				editingDomain.getCommandStack().execute(command);
 				i++;
 			}
 		} else if (!toDelete.isEmpty())
 		{
-			word.getGraphics().removeAll(toDelete);
+			Command command = RemoveCommand.create(editingDomain, word,
+					BtsmodelPackage.Literals.BTS_WORD__GRAPHICS, toDelete);
+			editingDomain.getCommandStack().execute(command);
 		}
 
 	}
@@ -689,7 +703,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public String transformTextToJSeshMdCString(BTSText text) {
 		String result = "";
-		if (text.getTextContent() == null
+		if (text == null || text.getTextContent() == null
 				|| text.getTextContent().getTextItems().isEmpty()) {
 			return result;
 		}

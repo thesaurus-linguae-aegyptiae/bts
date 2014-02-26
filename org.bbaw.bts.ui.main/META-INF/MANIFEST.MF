@@ -46,7 +46,9 @@ Require-Bundle: javax.inject,
  org.eclipse.core.jobs,
  org.eclipse.emf.edit.ui;bundle-version="2.9.0",
  org.bbaw.bts.core.commons,
- com.google.inject;bundle-version="3.0.0"
+ com.google.inject;bundle-version="3.0.0",
+ org.eclipse.jdt.annotation;bundle-version="1.1.0",
+ org.eclipse.xtext.util;bundle-version="2.4.3"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Bundle-ClassPath: .
@@ -56,5 +58,16 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.corpus.text.egy.ui.internal,
  org.eclipse.e4.core.services.contributions,
  org.eclipse.e4.core.services.log,
+ org.eclipse.jdt.annotation,
+ org.eclipse.jface.text,
+ org.eclipse.ocl.examples.pivot,
+ org.eclipse.ocl.examples.pivot.delegate,
+ org.eclipse.ocl.examples.pivot.model,
+ org.eclipse.ocl.examples.xtext.essentialocl,
+ org.eclipse.ocl.examples.xtext.essentialocl.ui.internal,
+ org.eclipse.ocl.examples.xtext.essentialocl.ui.model,
  org.eclipse.xtext.builder.preferences,
+ org.eclipse.xtext.resource,
+ org.eclipse.xtext.ui.editor.embedded,
+ org.eclipse.xtext.ui.editor.model,
  org.eclipse.xtext.ui.editor.templates

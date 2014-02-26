@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 
 public interface GenericObjectService<E extends BTSDBBaseObject, K>
 {
@@ -28,5 +29,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	<T> List<T> query(BTSQueryRequest query);
 
 	List<E> filter(List<E> objects);
+
+	SearchRequestBuilder getSearchRequestBuilder();
 
 }

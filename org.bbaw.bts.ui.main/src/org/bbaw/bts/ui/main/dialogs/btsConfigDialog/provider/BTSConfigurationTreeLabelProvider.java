@@ -91,10 +91,10 @@ public class BTSConfigurationTreeLabelProvider extends StyledCellLabelProvider
 	{
 		if (element instanceof BTSConfiguration && !((BTSConfiguration) element).getChildren().isEmpty())
 		{
-			return getImage(BTSResourceProvider.IMG_CAPTION_OBJECT);
+			return getImage(BTSResourceProvider.IMG_CAPTION);
 		} else if (element instanceof BTSConfigItem)
 		{
-			return getImage(BTSResourceProvider.IMG_TEXT_OBJECT);
+			return getImage(BTSResourceProvider.IMG_TEXT);
 		} else
 		{
 			return getImage(BTSResourceProvider.IMG_TCOBJECT);

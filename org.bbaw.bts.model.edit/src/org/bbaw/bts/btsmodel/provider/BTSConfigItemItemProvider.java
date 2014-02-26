@@ -8,10 +8,13 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
+import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
 import org.bbaw.bts.btsmodel.BTSTranslation;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -33,6 +36,8 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSConfigItem} object.
@@ -78,8 +83,6 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 			addIgnorePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
-			addOwnerTypePropertyDescriptor(object);
-			addReferencedTypePropertyDescriptor(object);
 			addShowWidgetPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -246,52 +249,6 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 	}
 
 	/**
-	 * This adds a property descriptor for the Owner Type feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addOwnerTypePropertyDescriptor(Object object)
-	{
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSConfigItem_ownerType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfigItem_ownerType_feature", "_UI_BTSConfigItem_type"),
-				 BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_TYPE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Referenced Type feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addReferencedTypePropertyDescriptor(Object object)
-	{
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSConfigItem_referencedType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfigItem_referencedType_feature", "_UI_BTSConfigItem_type"),
-				 BtsmodelPackage.Literals.BTS_CONFIG_ITEM__REFERENCED_TYPE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Show Widget feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -352,12 +309,100 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 	 * This returns BTSConfigItem.gif. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSConfigItem"));
+		Image image = null;
+		if (object instanceof BTSConfigItem) {
+
+			BTSConfigItem configItem = (BTSConfigItem) object;
+			if (BTSCoreConstants.PASSPORT.equals(configItem.getType())) {
+				image = resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_PASSPORT);
+			} else if (BTSCoreConstants.CATEGORIES.equals(configItem.getType())) {
+				image = resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_CATEGORIES);
+			} else if (BTSCoreConstants.PASSPORT_CATEGORY.equals(configItem
+					.getType())) {
+				image = resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_CATEGORY);
+			} else if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(configItem
+					.getType())) {
+				image = resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_WIDGET_GROUP);
+			} else if (BTSCoreConstants.OBJECT_TYPE
+					.equals(configItem.getType())
+					&& configItem.getSubtype() != null) {
+				image = resourceProvider.getImage(Display.getDefault(),
+						configItem.getSubtype());
+			} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM.equals(configItem
+					.getType())) {
+				if (configItem.getPassportEditorConfig() != null) {
+
+					// first check and load standard widget types
+					if (BTSCoreConstants.WIDGET_TYPE_TEXT.equals(configItem
+							.getPassportEditorConfig().getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_TEXT);
+					} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_TEXT);
+					} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_TEXT_AREA);
+					} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_COMBO);
+					} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_SPIN);
+					} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_THS
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_REFERENCE);
+					} else if (BTSCoreConstants.WIDGET_TYPE_BOOLEAN
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_CHECK_BOX);
+					} else if (BTSCoreConstants.WIDGET_TYPE_DATE
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_DATE);
+					} else if (BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL
+							.equals(configItem.getPassportEditorConfig()
+									.getWidgetType())) {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_WIDGET_REFERENCE);
+					}
+
+					else {
+						image = resourceProvider.getImage(Display.getDefault(),
+								BTSResourceProvider.IMG_CONFIG_ITEM);
+					}
+				} else {
+					image = resourceProvider.getImage(Display.getDefault(),
+							BTSResourceProvider.IMG_CONFIG_ITEM);
+				}
+
+			} else {
+				image = resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_CONFIG_ITEM);
+			}
+		}
+		return overlayImage(object, image);
 	}
 
 	/**
@@ -409,7 +454,20 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 					return;
 			}
 		}
-
+		// update label that is image if widget type was changed
+		else if (notification.getNotifier() instanceof BTSPassportEditorConfig) {
+			switch (notification.getFeatureID(BTSConfigItem.class)) {
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
+				EObject container = ((EObject) notification.getNotifier())
+						.eContainer();
+				if (container != null) {
+					fireNotifyChanged(new ViewerNotification(notification,
+							container, false, true));
+					return;
+				}
+				return;
+			}
+		}
 		switch (notification.getFeatureID(BTSConfigItem.class))
 		{
 			case BtsmodelPackage.BTS_CONFIG_ITEM__VALUE:
@@ -463,6 +521,11 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__RULES,
 				 BtsmodelFactory.eINSTANCE.createBTSOperator()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_TYPES_PATH,
+				 BtsmodelFactory.eINSTANCE.createBTSObjectTypePathRoot()));
 	}
 
 	/**

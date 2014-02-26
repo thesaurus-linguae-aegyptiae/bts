@@ -32,7 +32,7 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 	public boolean save(BTSTextCorpus entity)
 	{
 		textCorpusDao.add(entity, entity.getProject() + ServiceConstants.CORPUS);
-		return false;
+		return true;
 	}
 
 	@Override

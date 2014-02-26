@@ -16,6 +16,7 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#isAllowMultiple <em>Allow Multiple</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getHorizontalWidth <em>Horizontal Width</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getRegex <em>Regex</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getReferencedTypesPath <em>Referenced Types Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -153,5 +154,31 @@ public interface BTSPassportEditorConfig extends BTSIdentifiableItem {
 	 * @generated
 	 */
 	void setRegex(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Referenced Types Path</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referenced Types Path</em>' containment reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referenced Types Path</em>' containment reference.
+	 * @see #setReferencedTypesPath(BTSObjectTypePathRoot)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEditorConfig_ReferencedTypesPath()
+	 * @model containment="true"
+	 * @generated
+	 */
+	BTSObjectTypePathRoot getReferencedTypesPath();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getReferencedTypesPath <em>Referenced Types Path</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referenced Types Path</em>' containment reference.
+	 * @see #getReferencedTypesPath()
+	 * @generated
+	 */
+	void setReferencedTypesPath(BTSObjectTypePathRoot value);
 
 } // BTSPassportEditorConfig

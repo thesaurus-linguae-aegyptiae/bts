@@ -1,27 +1,39 @@
 package org.bbaw.bts.ui.main.dialogs;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSTranslation;
-import org.bbaw.bts.btsmodel.BTSTranslations;
+import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSUIConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.dialogControllers.BTSConfigurationDialogController;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.commons.validator.StringIsRegexPatternValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
+import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
+import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.CorpusObjectPivot;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
+import org.bbaw.bts.ui.main.objectTypeSelector.ObjectTypeSelectionTreeComposite;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
@@ -34,15 +46,26 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.ui.services.EContextService;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
+import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.FeaturePath;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.edit.command.AddCommand;
+import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -51,6 +74,10 @@ import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.ocl.examples.pivot.delegate.OCLDelegateDomain;
+import org.eclipse.ocl.examples.xtext.essentialocl.EssentialOCLStandaloneSetup;
+import org.eclipse.ocl.examples.xtext.essentialocl.ui.internal.EssentialOCLActivator;
+import org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocument;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -65,21 +92,28 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorFactory;
+import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditorModelAccess;
+import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.mihalis.opal.multiChoice.MultiChoice;
-import org.mihalis.opal.multiChoice.MultiChoiceSelectionListener;
+
+import com.google.inject.Injector;
 
 @Creatable
-public class BTSConfigurationDialog extends TitleAreaDialog
-{
-
-	private static final int DELAY = 400;
+public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	@Inject
 	private BTSConfigurationController configurationController;
@@ -94,10 +128,19 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	private EHandlerService handlerService;
 	@Inject
 	private EventBroker eventBroker;
-	private EditingDomain editingDomain;
+	@Inject
+	private EContextService contextService;
+	@Inject
+	private IEclipseContext context;
+	@Inject
+	@Optional
+	@Named(IServiceConstants.ACTIVE_SELECTION)
+	private BTSCorpusObject selectedCorpusObject;
+	@Inject
+	private EditingDomainController editingDomainController;
 
-	private Command newConfigCommand;
-
+	@Inject
+	private BTSResourceProvider resourceProvider;
 	private Combo activeConfigCB;
 
 	private Tree tree;
@@ -109,8 +152,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	private StructuredSelection selection;
 
 	private ArrayList<BTSConfiguration> configurations;
-	@Inject
-	private IEclipseContext context;
+
 	private Text nameText_ConfigurationEdit;
 	private Text providerText;
 
@@ -124,8 +166,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	private Text valueText_CIEdit;
 	private Text typeText_CIEdit;
 	private Text subtypeText_CIEdit;
-	private Text labelText_CIEdit;
-	private Text descText_CIEdit;
+	private TranslationEditorComposite labelText_CIEdit;
+	private TranslationEditorComposite descText_CIEdit;
 	private Text labelTextWidget_CIEdit;
 	private Text regexText_CIEdit;
 
@@ -155,19 +197,44 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 	private MultiChoice<String> mcReferenced;
 
-	private String[] WIDGET_TYPES = new String[] { "text", "date", "combo", "reference" };
-
 	private TreeNodeWrapper root;
 
 	private Color BACKGROUND_COLOR;
+
+	private Text newCGroupText_ConfigurationEdit;
+
+	private ToolItem config_ToolUndo;
+
+	private ToolItem config_ToolRedo;
+
+	private Map<BTSConfig, EditingDomain> editingDomainMap = new HashMap<BTSConfig, EditingDomain>();
+
+	private ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+
+	private ObjectTypeSelectionTreeComposite ownerTypeSelector;
+
+	private ObjectTypeSelectionTreeComposite referencedTypeSelector;
+
+	private ToolItem newConfig_Tool;
+
+	private ToolItem config_ToolDelete;
+
+	private Spinner hSpanSpinner_GroupIEdit;
+
+	private EmbeddedEditorFactory embeddedEditorFactory;
+
+	private EmbeddedEditor embeddedEditor;
+
+	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
+
 
 	/**
 	 * Create the dialog.
 	 * 
 	 * @param parentShell
 	 */
-	public BTSConfigurationDialog()
-	{
+	public BTSConfigurationDialog() {
 		super(new Shell());
 		System.out.println("construct BTSConfigurationDialog");
 
@@ -179,8 +246,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	 * @param parent
 	 */
 	@Override
-	protected Control createDialogArea(Composite parent)
-	{
+	protected Control createDialogArea(Composite parent) {
 		// initializeDIs();
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
@@ -196,44 +262,129 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 		Composite compLeftTop = new Composite(mainCompLeft, SWT.NONE);
 		compLeftTop.setLayout(new GridLayout(2, false));
-		compLeftTop.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+		compLeftTop.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
+				1, 1));
 
-		Label availableConfigsLB = new Label(compLeftTop, SWT.NONE);
-		availableConfigsLB.setText("All available Configurations");
+		ToolBar config_toolbar = new ToolBar(compLeftTop, SWT.FLAT | SWT.RIGHT);
+		config_toolbar.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true,
+				false, 2, 1));
 
-		Link newConfigBTN = new Link(compLeftTop, SWT.NONE);
-		newConfigBTN.setText("<a>Create New configuration</a>");
-		newConfigBTN.addSelectionListener(new SelectionAdapter()
-		{
+		config_ToolUndo = new ToolItem(config_toolbar, SWT.NONE);
+		config_ToolUndo.setText("Undo");
+		config_ToolUndo.setImage(resourceProvider
+.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_UNDO));
+		config_ToolUndo.addSelectionListener(new SelectionAdapter() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
+			public void widgetSelected(SelectionEvent e) {
+				org.eclipse.emf.common.command.Command command = getEditingDomain(
+						selectedConfig).getCommandStack()
+						.getMostRecentCommand();
+				boolean refreshRequired = command instanceof DeleteCommand;
+				getEditingDomain(selectedConfig).getCommandStack().undo();
+				if (refreshRequired) {
+					treeViewer.refresh();
+				}
+
+			}
+		});
+
+		config_ToolRedo = new ToolItem(config_toolbar, SWT.NONE);
+		config_ToolRedo.setText("Redo");
+		config_ToolRedo.setImage(resourceProvider.getImage(
+				Display.getDefault(), BTSResourceProvider.IMG_REDO));
+		config_ToolRedo.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				org.eclipse.emf.common.command.Command command = getEditingDomain(
+						selectedConfig).getCommandStack()
+						.getMostRecentCommand();
+				boolean refreshRequired = command instanceof DeleteCommand;
+				getEditingDomain(selectedConfig).getCommandStack().redo();
+				if (refreshRequired) {
+					treeViewer.refresh();
+				}
+			}
+		});
+
+		newConfig_Tool = new ToolItem(config_toolbar, SWT.NONE);
+		newConfig_Tool.setText("Create New configuration");
+		newConfig_Tool.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_CONFIGURATION_ADD));
+		newConfig_Tool.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
 				System.out.println("Button new pressed");
 
-				Command command = commandService.getCommand(BTSPluginIDs.CMD_ID_NEW_CONFIGURATION);
+				Command command = commandService
+						.getCommand(BTSPluginIDs.CMD_ID_NEW_CONFIGURATION);
 
 				// Activate Handler
-				handlerService.activateHandler(BTSPluginIDs.CMD_ID_NEW_CONFIGURATION, new NewConfigurationHandler());
+				handlerService.activateHandler(
+						BTSPluginIDs.CMD_ID_NEW_CONFIGURATION,
+						new NewConfigurationHandler());
 
-				ParameterizedCommand cmd = commandService.createCommand(BTSPluginIDs.CMD_ID_NEW_CONFIGURATION, null);
-				command = commandService.getCommand(BTSPluginIDs.CMD_ID_NEW_CONFIGURATION);
+				ParameterizedCommand cmd = commandService.createCommand(
+						BTSPluginIDs.CMD_ID_NEW_CONFIGURATION, null);
+				command = commandService
+						.getCommand(BTSPluginIDs.CMD_ID_NEW_CONFIGURATION);
 
 				handlerService.executeHandler(cmd);
 			}
 
 		});
+		config_ToolDelete = new ToolItem(config_toolbar, SWT.NONE);
+		config_ToolDelete.setText("Delete");
+		config_ToolDelete.setImage(resourceProvider.getImage(
+				Display.getDefault(),
+ BTSResourceProvider.IMG_DELETE));
+		config_ToolDelete.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				BTSConfig parent = null;
+				if (!(selectedConfig instanceof BTSConfiguration)) {
+					parent = (BTSConfig) selectedConfig.eContainer();
+				}
+				org.eclipse.emf.common.command.Command command = DeleteCommand
+						.create(getEditingDomain(selectedConfig),
+								selectedConfig);
+				getEditingDomain(selectedConfig).getCommandStack().execute(
+						command);
+				selectedConfig = parent;
+				treeViewer.refresh();
+				if (parent == null && root.getChildren().get(0) != null) {
+					parent = (BTSConfig) root.getChildren().get(0);
+				}
+				if (parent == null) {
+					treeViewer.setSelection(new StructuredSelection(parent));
+				}
+
+			}
+		});
+
 
 		Label activeConfigLB = new Label(compLeftTop, SWT.NONE);
-		activeConfigLB.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		activeConfigLB.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		activeConfigLB.setText("Currently active Configuration");
 
 		activeConfigCB = new Combo(compLeftTop, SWT.NONE);
-		activeConfigCB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		activeConfigCB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 1, 1));
+
+		Label availableConfigsLB = new Label(compLeftTop, SWT.NONE);
+		availableConfigsLB.setText("All available Configurations");
+		availableConfigsLB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 2, 1));
 
 		Composite compLeftTree = new Composite(mainCompLeft, SWT.NONE);
 		compLeftTree.setLayout(new FillLayout(SWT.HORIZONTAL));
-		compLeftTree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		compLeftTree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
+				1, 1));
 
 		tree = new Tree(compLeftTree, SWT.BORDER);
 		treeViewer = new TreeViewer(tree);
@@ -248,42 +399,45 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		return area;
 	}
 
-	private void loadTree()
-	{
-		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+	protected EditingDomain getEditingDomain(BTSConfig editingObject) {
+		return editingDomainController.getEditingDomain(editingObject);
+	}
+
+	private void loadTree() {
+		ComposedAdapterFactory factory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 
 		// BtsviewmodelAdapterFactory factory = new
 		// BtsviewmodelAdapterFactory();
-		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
-		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
+				factory);
+		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(
+				factory);
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
 
-		treeViewer.addSelectionChangedListener(new ISelectionChangedListener()
-		{
+		treeViewer.addSelectionChangedListener(new ISelectionChangedListener() {
 
 			@Override
-			public void selectionChanged(SelectionChangedEvent event)
-			{
+			public void selectionChanged(SelectionChangedEvent event) {
 				selection = (StructuredSelection) event.getSelection();
 				handleTreeSelection(selection);
 
 			}
 
 		});
-		treeViewer.setSorter(new ViewerSorter()
-		{
+		treeViewer.setSorter(new ViewerSorter() {
 		});
 		// Create sample data
 		configurations = new ArrayList<BTSConfiguration>();
 
-		List<BTSConfiguration> list = configurationController.listConfigurations();
+		List<BTSConfiguration> list = configurationController
+				.listConfigurations();
 		root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-		if (list != null)
-		{
-			for (BTSConfiguration o : list)
-			{
-				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		if (list != null) {
+			for (BTSConfiguration o : list) {
+				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE
+						.createTreeNodeWrapper();
 				child.setObject(o);
 				child.setChildrenLoaded(true);
 				root.getChildren().add(child);
@@ -297,33 +451,49 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 	}
 
-	private void handleTreeSelection(StructuredSelection selection)
-	{
-		if (selection.getFirstElement() instanceof TreeNodeWrapper)
-		{
+	private void handleTreeSelection(StructuredSelection selection) {
+		if (selection.getFirstElement() != null
+				&& !selection.getFirstElement().equals(selectedConfig)) {
+			saveOldSelection(selectedConfig);
+		}
+		if (selection.getFirstElement() instanceof TreeNodeWrapper) {
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
-			if (tn.getObject() instanceof BTSConfiguration)
-			{
-				BTSConfiguration configuration = (BTSConfiguration) tn.getObject();
+			if (tn.getObject() instanceof BTSConfiguration) {
+				BTSConfiguration configuration = (BTSConfiguration) tn
+						.getObject();
 				selectedConfig = configuration;
 				loadConfigurationEditor(configuration);
 			}
-		} else if (selection.getFirstElement() instanceof BTSConfiguration)
-		{
-			BTSConfiguration configuration = (BTSConfiguration) selection.getFirstElement();
+		} else if (selection.getFirstElement() instanceof BTSConfiguration) {
+			BTSConfiguration configuration = (BTSConfiguration) selection
+					.getFirstElement();
 			selectedConfig = configuration;
 			loadConfigurationEditor(configuration);
-		} else if (selection.getFirstElement() instanceof BTSConfigItem)
-		{
-			BTSConfigItem configItem = (BTSConfigItem) selection.getFirstElement();
+		} else if (selection.getFirstElement() instanceof BTSConfigItem) {
+			BTSConfigItem configItem = (BTSConfigItem) selection
+					.getFirstElement();
 			selectedConfig = configItem;
-			loadConfigItemEditor(configItem);
+			if (BTSCoreConstants.PASSPORT.equals(configItem.getType())) {
+				loadPassportEditor(configItem);
+			} else if (BTSCoreConstants.CATEGORIES.equals(configItem.getType())) {
+				loadPassportCategoriesEditor(configItem);
+			} else if (BTSCoreConstants.PASSPORT_CATEGORY.equals(configItem
+					.getType())) {
+				loadPassportEntryGroupEditor(configItem);
+			} else if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(configItem
+					.getType())) {
+				loadPassportEntryGroupEditor(configItem);
+			} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM.equals(configItem
+					.getType())) {
+				loadPassportEntryItemEditor(configItem);
+			} else {
+				loadConfigItemEditor(configItem);
+			}
 		}
 
 	}
 
-	private void loadConfigItemEditor(final BTSConfigItem configItem)
-	{
+	private void loadPassportEditor(BTSConfigItem configItem) {
 		mainConfigRight.dispose();
 		mainConfigRight = null;
 		mainConfigRight = new Composite(sashForm, SWT.NONE);
@@ -333,215 +503,364 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		configItemEditComp.setLayout(new GridLayout(3, false));
 
 		Label lblLabel_1 = new Label(configItemEditComp, SWT.NONE);
-		lblLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblLabel_1.setText("Label");
 
-		labelText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
-		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		labelText_CIEdit = new TranslationEditorComposite(configItemEditComp,
+				SWT.BORDER, null, null, true);
+		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 
 		Label lblDescription = new Label(configItemEditComp, SWT.NONE);
-		lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblDescription.setText("Description");
 
-		descText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
-		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		descText_CIEdit = new TranslationEditorComposite(configItemEditComp,
+				SWT.BORDER, null, null, false);
+		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 
 		Label lblValue = new Label(configItemEditComp, SWT.NONE);
-		lblValue.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblValue.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblValue.setText("Value");
 
 		valueText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
-		valueText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		valueText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 
 		Label lblType = new Label(configItemEditComp, SWT.NONE);
-		lblType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
 		lblType.setText("Type");
 
 		typeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
-		typeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		typeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 
 		Label lblSubtype = new Label(configItemEditComp, SWT.NONE);
-		lblSubtype.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblSubtype.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblSubtype.setText("Subtype");
 
 		subtypeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
-		subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-
-		Label lblSortkey = new Label(configItemEditComp, SWT.NONE);
-		lblSortkey.setText("SortKey");
-
-		sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
-		sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-
-		Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
-		lblIgnore.setText("Ignore");
-
-		ignoreBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
-		ignoreBTN_CIEdit.setText("ignore");
-		ignoreBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 2, 1));
 
 		Label newConfigItemLabel = new Label(configItemEditComp, SWT.NONE);
-		newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		newConfigItemLabel.setText("New ConfigItem");
+		newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1));
+		newConfigItemLabel.setText("New Passport Categories");
 
 		newCIText_ConfigurationEdit = new Text(configItemEditComp, SWT.BORDER);
-		newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 1, 1));
 
 		Button newCIBTN = new Button(configItemEditComp, SWT.PUSH);
-		newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		newCIBTN.setText("New ConfigItem");
-		newCIBTN.addSelectionListener(new SelectionAdapter()
-		{
+		newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
+		newCIBTN.setText("Add Category");
+		newCIBTN.addSelectionListener(new SelectionAdapter() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				BTSConfigItem ci = configurationController.createNewConfigItem(newCIText_ConfigurationEdit.getText());
-				selectedConfig.getChildren().add(ci);
-				treeViewer.refresh();
+			public void widgetSelected(SelectionEvent e) {
+				BTSConfigItem ci = configurationController
+						.createNewConfigItem(newCIText_ConfigurationEdit
+								.getText());
+				ci.setType(BTSCoreConstants.PASSPORT_CATEGORY);
+				BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
+						.getOwnerTypesPath();
+				ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
+						.copy(path));
+				CompoundCommand compoundCommand = new CompoundCommand();
+				org.eclipse.emf.common.command.Command command = AddCommand
+						.create(getEditingDomain(selectedConfig),
+								selectedConfig,
+								BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+								ci);
+				compoundCommand.append(command);
+				getEditingDomain(selectedConfig).getCommandStack().execute(
+						compoundCommand);
+				treeViewer.refresh(selectedConfig);
 
 			}
 		});
-		Label lblWidgetDefinition = new Label(configItemEditComp, SWT.NONE);
-		lblWidgetDefinition.setText("Widget Definition");
+		configItemEditBindings = initializePassportEditBindings(configItem);
 
-		activateBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
-		activateBTN_CIEdit.setText("activate");
-		activateBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		value.setValue(configItem);
+		sashForm.setWeights(new int[] { 1, 1 });
+		sashForm.layout();
 
-		final Group grpWidgetDescription = new Group(configItemEditComp, SWT.NONE);
+	}
 
-		activateBTN_CIEdit.addSelectionListener(new SelectionListener()
+	private DataBindingContext initializePassportEditBindings(
+			BTSConfigItem configItem) {
+		if (configItemEditBindings != null) {
+			configItemEditBindings.dispose();
+		}
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+
+		DataBindingContext bindingContext = new DataBindingContext();
+		EditingDomain editingDomain = getEditingDomain(configItem);
+		labelText_CIEdit.load(configItem.getLabel(), editingDomain, true);
+
+		descText_CIEdit.load(configItem.getDescription(), editingDomain, false);
+		// value
+		Binding binding = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, valueText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE)
+						.observe(configItem), us, null);
+
+		// type
+		Binding binding2 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, typeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__TYPE)
+						.observe(configItem), us, null);
+
+		// subtype
+		Binding binding3 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, subtypeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE)
+						.observe(configItem), us, null);
+
+		bindingContext.addValidationStatusProvider(binding);
+
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		return bindingContext;
+	}
+
+	private void saveOldSelection(BTSConfig selectedConfig2) {
+		if (ownerTypeSelector != null && !ownerTypeSelector.isDisposed()) {
+			ownerTypeSelector.save();
+		}
+		if (referencedTypeSelector != null
+				&& !referencedTypeSelector.isDisposed()) {
+			referencedTypeSelector.save();
+		}
+
+	}
+
+	private void loadConfigItemEditor(BTSConfigItem configItem) {
+		mainConfigRight.dispose();
+		mainConfigRight = null;
+		mainConfigRight = new Composite(sashForm, SWT.NONE);
+		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
+
+		final TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
+
+		{
+			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
+			configtabItem.setText("Configuration");
+
+			Composite configItemEditComp = new Composite(tabfolder, SWT.NONE);
+			configItemEditComp.setLayout(new GridLayout(3, false));
+			configtabItem.setControl(configItemEditComp);
+
+			Label lblLabel_1 = new Label(configItemEditComp, SWT.NONE);
+			lblLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblLabel_1.setText("Label");
+
+			labelText_CIEdit = new TranslationEditorComposite(
+					configItemEditComp, SWT.BORDER, true);
+			labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblDescription = new Label(configItemEditComp, SWT.NONE);
+			lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
+			lblDescription.setText("Description");
+
+			descText_CIEdit = new TranslationEditorComposite(
+					configItemEditComp, SWT.BORDER, true);
+			descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblValue = new Label(configItemEditComp, SWT.NONE);
+			lblValue.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblValue.setText("Value");
+
+			valueText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			valueText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblType = new Label(configItemEditComp, SWT.NONE);
+			lblType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblType.setText("Type");
+
+			typeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			typeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblSubtype = new Label(configItemEditComp, SWT.NONE);
+			lblSubtype.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblSubtype.setText("Subtype");
+
+			subtypeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblSortkey = new Label(configItemEditComp, SWT.NONE);
+			lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblSortkey.setText("SortKey");
+
+			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
+			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
+			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblIgnore.setText("Ignore");
+
+			ignoreBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
+			ignoreBTN_CIEdit.setText("ignore");
+			ignoreBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label newConfigItemLabel = new Label(configItemEditComp, SWT.NONE);
+			newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT,
+					SWT.CENTER, false, false, 1, 1));
+			newConfigItemLabel.setText("New ConfigItem");
+
+			newCIText_ConfigurationEdit = new Text(configItemEditComp,
+					SWT.BORDER);
+			newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL,
+					SWT.CENTER, true, false, 1, 1));
+
+			Button newCIBTN = new Button(configItemEditComp, SWT.PUSH);
+			newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+					false, 1, 1));
+			newCIBTN.setText("New ConfigItem");
+			newCIBTN.addSelectionListener(new SelectionAdapter() {
+
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+
+					BTSConfigItem ci = configurationController
+							.createNewConfigItem(newCIText_ConfigurationEdit
+									.getText());
+					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
+							.getOwnerTypesPath();
+					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
+							.copy(path));
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig,
+									BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+									ci);
+					compoundCommand.append(command);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							compoundCommand);
+					treeViewer.refresh(selectedConfig);
+
+				}
+			});
+		}// end configuration tabitem
+		{
+			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
+			ownerstabItem.setText("Owner Objects");
+
+			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
+			ownerEditComp.setLayout(new GridLayout(1, false));
+			ownerstabItem.setControl(ownerEditComp);
+			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
+					configurationController, ownerEditComp, SWT.NONE);
+			if (configItem.getOwnerTypesPath() == null) {
+				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
+						.createBTSObjectTypePathRoot());
+			}
+			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
+					getEditingDomain(configItem));
+		}
 		{
 
+			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
+			ownerstabItem.setText("OCL");
+			EssentialOCLStandaloneSetup.doSetup();
+
+			// inititae static access controller
+			StaticAccessController sa = context
+					.get(StaticAccessController.class);
+			EssentialOCLActivator activator = EssentialOCLActivator
+					.getInstance();
+			Injector injector = activator
+					.getInjector(EssentialOCLActivator.ORG_ECLIPSE_OCL_EXAMPLES_XTEXT_ESSENTIALOCL_ESSENTIALOCL);
+			embeddedEditorFactory = injector
+					.getInstance(EmbeddedEditorFactory.class);
+			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
+			ownerEditComp.setLayout(new GridLayout(1, false));
+			ownerstabItem.setControl(ownerEditComp);
+			OCLDelegateDomain.initialize(configItem.eResource()
+					.getResourceSet());
+			// MetaModelManager mmm =
+			// mmm.loadResource(configItem.eResource().getURI(), null, null);
+			IEditedResourceProvider resourceProvider = new IEditedResourceProvider() {
+
+				@Override
+				public XtextResource createResource() {
+					try {
+						ResourceSet resourceSet = new ResourceSetImpl();
+						Resource resource = resourceSet
+								.createResource(URI
+										.createURI("file://E:/AAEW/test/runtime-EclipseXtext/tt/btstest.essentialocl"));
+
+						return (XtextResource) resource;
+					} catch (Exception e) {
+						return null;
+					}
+				}
+			};
+
+			embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider)
+					.showErrorAndWarningAnnotations().withParent(ownerEditComp);
+			embeddedEditorModelAccess = embeddedEditor.createPartialEditor(
+					"\r", "hallo", "\r", false);
+			// TestPivot tp = new TestPivot();
+			if (selectedCorpusObject != null) {
+				CorpusObjectPivot cp = new CorpusObjectPivot(
+						selectedCorpusObject);
+				Map<String, EClassifier> map = new HashMap<String, EClassifier>();
+				map.put("second", selectedCorpusObject.eClass());
+				getEditorDocument().setContext(cp.getClassifierForContext(),
+						map);
+			}
+			getEditorDocument().set("self");
+			ownerEditComp.layout();
+		}
+		tabfolder.addSelectionListener(new SelectionListener() {
+
 			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				grpWidgetDescription.setEnabled(activateBTN_CIEdit.getSelection());
-				setSelectedColor(grpWidgetDescription, activateBTN_CIEdit.getSelection());
+			public void widgetSelected(SelectionEvent e) {
+				if (tabfolder.getSelectionIndex() == 2) {
+					contextService
+							.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
+				}
 
 			}
 
 			@Override
-			public void widgetDefaultSelected(SelectionEvent e)
-			{
+			public void widgetDefaultSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
 
 			}
 		});
 
-		grpWidgetDescription.setText("Widget Description");
-		grpWidgetDescription.setLayout(new GridLayout(2, false));
-		grpWidgetDescription.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 2));
-
-		Label lblWidgetType = new Label(grpWidgetDescription, SWT.NONE);
-		lblWidgetType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblWidgetType.setText("Widget Type");
-
-		widgetCB_CIEdit = new Combo(grpWidgetDescription, SWT.NONE);
-		widgetCB_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		widgetCB_CIEdit.setItems(WIDGET_TYPES);
-
-		Label lblLabel = new Label(grpWidgetDescription, SWT.NONE);
-		lblLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblLabel.setText("Label");
-
-		labelTextWidget_CIEdit = new Text(grpWidgetDescription, SWT.BORDER);
-		labelTextWidget_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		Label lblMultiple = new Label(grpWidgetDescription, SWT.NONE);
-		lblMultiple.setText("Multiple");
-
-		allowMultiBTN_CIEdit = new Button(grpWidgetDescription, SWT.CHECK);
-		allowMultiBTN_CIEdit.setText("allow multiple");
-
-		Label lblRequired = new Label(grpWidgetDescription, SWT.NONE);
-		lblRequired.setText("Required");
-
-		requiredBTN_CIEdit = new Button(grpWidgetDescription, SWT.CHECK);
-		requiredBTN_CIEdit.setText("required");
-
-		Label lblShowWidget = new Label(grpWidgetDescription, SWT.NONE);
-		lblShowWidget.setText("Show Widget");
-
-		showBTN_CIEdit = new Button(grpWidgetDescription, SWT.CHECK);
-		showBTN_CIEdit.setText("show");
-
-		Label lblHorizontalSpan = new Label(grpWidgetDescription, SWT.NONE);
-		lblHorizontalSpan.setText("Horizontal Span");
-
-		hSpanSpinner_CIEdit = new Spinner(grpWidgetDescription, SWT.BORDER);
-
-		Label lblRegex = new Label(grpWidgetDescription, SWT.NONE);
-		lblRegex.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblRegex.setText("Regex");
-
-		regexText_CIEdit = new Text(grpWidgetDescription, SWT.BORDER);
-		regexText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		Label lblOwners = new Label(grpWidgetDescription, SWT.NONE);
-		lblOwners.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblOwners.setText("Owner Types:");
-
-		mcOwners = new MultiChoice<String>(grpWidgetDescription, SWT.None);
-		mcOwners.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-		mcOwners.setSeparator("|");
-		mcOwners.addAll(getObjectTypes());
-		mcOwners.setSelectionListener(new MultiChoiceSelectionListener<String>(mcOwners)
-		{
-
-			@Override
-			public void handle(MultiChoice<String> parent, String receiver, boolean selected, Shell popup)
-			{
-				if ("Select All".equals(receiver.toString()))
-				{
-					if (selected)
-					{
-						parent.deselectAll();
-						parent.selectAll();
-					} else
-					{
-						parent.deselectAll();
-					}
-					popup.setVisible(false);
-				}
-				configItem.getOwnerType().clear();
-				configItem.getOwnerType().addAll(parent.getSelection());
-
-			}
-		});
-
-		Label lblReferenced = new Label(grpWidgetDescription, SWT.NONE);
-		lblReferenced.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblReferenced.setText("Referenced Types:");
-
-		mcReferenced = new MultiChoice<String>(grpWidgetDescription, SWT.None);
-		mcReferenced.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
-		mcReferenced.setSeparator("|");
-		mcReferenced.addAll(getObjectTypes());
-		mcReferenced.setSelectionListener(new MultiChoiceSelectionListener<String>(mcReferenced)
-		{
-
-			@Override
-			public void handle(MultiChoice<String> parent, String receiver, boolean selected, Shell popup)
-			{
-				if ("Select All".equals(receiver.toString()))
-				{
-					if (selected)
-					{
-						parent.deselectAll();
-						parent.selectAll();
-					} else
-					{
-						parent.deselectAll();
-					}
-					popup.setVisible(false);
-				}
-				configItem.getReferencedType().clear();
-				configItem.getReferencedType().addAll(parent.getSelection());
-
-			}
-		});
 		configItemEditBindings = initializeConfigItemEditBindings(configItem);
 
 		value.setValue(configItem);
@@ -549,16 +868,13 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		sashForm.layout();
 	}
 
-	private String[] getObjectTypes()
-	{
-		// TODO Auto-generated method stub
-		return new String[] { "Annotation", "CorpusObject", "Image", "ListEntry", "Text", "TextCorpus" };
+	public BaseDocument getEditorDocument() {
+		return (BaseDocument) embeddedEditor.getDocument();
 	}
 
-	private DataBindingContext initializeConfigItemEditBindings(BTSConfigItem configItem)
-	{
-		if (configItemEditBindings != null)
-		{
+	private DataBindingContext initializeConfigItemEditBindings(
+			BTSConfigItem configItem) {
+		if (configItemEditBindings != null) {
 			configItemEditBindings.dispose();
 		}
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
@@ -566,136 +882,979 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 		DataBindingContext bindingContext = new DataBindingContext();
 
-		// label
-		// FeaturePath feature0 =
-		// FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL,
-		// BtsmodelPackage.Literals.BTS_TRANSLATIONS__TRANSLATIONS,
-		// BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE);
+		EditingDomain editingDomain = getEditingDomain(configItem);
 
-		BTSTranslations label = (BTSTranslations) configItem.eGet(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__LABEL);
-		String lang = "en";
-		BTSTranslation trans = label.getTranslations().get(0);
+		labelText_CIEdit.load(configItem.getLabel(), editingDomain, true);
 
-		Binding binding0 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, labelText_CIEdit),
-				EMFProperties.value(BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE).observe(trans), us, null);
-
+		descText_CIEdit.load(configItem.getDescription(), editingDomain, false);
 		// value
 		Binding binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, valueText_CIEdit),
-				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE).observe(configItem), us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, valueText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE)
+						.observe(configItem), us, null);
 
 		// type
 		Binding binding2 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, typeText_CIEdit),
-				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__TYPE).observe(configItem), us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, typeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__TYPE)
+						.observe(configItem), us, null);
 
 		// subtype
 		Binding binding3 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, subtypeText_CIEdit),
-				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE).observe(configItem), us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, subtypeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE)
+						.observe(configItem), us, null);
 
 		// sortkey
-		Binding binding4 = bindingContext
-				.bindValue(WidgetProperties.selection().observeDelayed(400, sortSpinner_CIEdit),
-						EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SORT_KEY).observe(configItem),
-						null, null);
-		// ignore
-		Binding binding5 = bindingContext.bindValue(WidgetProperties.selection().observeDelayed(0, ignoreBTN_CIEdit),
-				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__IGNORE).observe(configItem), null, null);
-
-		// show widget
-		Binding binding6 = bindingContext.bindValue(WidgetProperties.selection().observeDelayed(0, activateBTN_CIEdit),
-				EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SHOW_WIDGET).observe(configItem), null,
-				null);
-
-		// allow multiple
-		FeaturePath feature2 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
-				BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE);
-		Binding binding7 = bindingContext
-				.bindValue(WidgetProperties.selection().observeDelayed(0, allowMultiBTN_CIEdit),
-						EMFProperties.value(feature2).observe(configItem), null, null);
-
-		// required
-		FeaturePath feature3 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
-				BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED);
-		Binding binding8 = bindingContext.bindValue(WidgetProperties.selection().observeDelayed(0, requiredBTN_CIEdit),
-				EMFProperties.value(feature3).observe(configItem), null, null);
-		// required
-		FeaturePath feature4 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
-				BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH);
-		Binding binding9 = bindingContext.bindValue(
-				WidgetProperties.selection().observeDelayed(0, hSpanSpinner_CIEdit), EMFProperties.value(feature4)
+		Binding binding4 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(400,
+						sortSpinner_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SORT_KEY)
 						.observe(configItem), null, null);
-		// regex
-		FeaturePath feature5 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
-				BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__REGEX);
-		Binding binding10 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, regexText_CIEdit), EMFProperties
-						.value(feature5).observe(configItem), null, null);
-		// widget type
-		FeaturePath feature6 = FeaturePath.fromList(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
-				BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE);
-		Binding binding11 = bindingContext.bindValue(WidgetProperties.selection()
-				.observeDelayed(DELAY, widgetCB_CIEdit), EMFProperties.value(feature6).observe(configItem), null, null);
-
-		// owner types
-		Set<String> owners = new HashSet<String>();
-		for (String s : configItem.getOwnerType())
-		{
-			owners.add(s);
-		}
-		mcOwners.setSelection(owners);
-
+		// ignore
+		Binding binding5 = bindingContext.bindValue(WidgetProperties
+				.selection().observeDelayed(0, ignoreBTN_CIEdit), EMFProperties
+				.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__IGNORE)
+				.observe(configItem), null, null);
 		bindingContext.addValidationStatusProvider(binding);
 
-		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 		return bindingContext;
 	}
 
-	private void loadConfigurationEditor(BTSConfiguration configuration)
-	{
+	private void loadPassportEntryGroupEditor(BTSConfigItem configItem) {
 		mainConfigRight.dispose();
 		mainConfigRight = null;
 		mainConfigRight = new Composite(sashForm, SWT.NONE);
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
-		Composite configurationEditComp = new Composite(mainConfigRight, SWT.NONE);
+
+		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
+
+		{
+			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
+			configtabItem.setText("Configuration");
+
+			Composite configItemEditComp = new Composite(tabfolder, SWT.NONE);
+			configItemEditComp.setLayout(new GridLayout(3, false));
+			configtabItem.setControl(configItemEditComp);
+
+			Label lblLabel_1 = new Label(configItemEditComp, SWT.NONE);
+			lblLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblLabel_1.setText("Label");
+
+			labelText_CIEdit = new TranslationEditorComposite(
+					configItemEditComp, SWT.BORDER, true);
+			labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblDescription = new Label(configItemEditComp, SWT.NONE);
+			lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
+			lblDescription.setText("Description");
+
+			descText_CIEdit = new TranslationEditorComposite(
+					configItemEditComp, SWT.BORDER, false);
+			descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblValue = new Label(configItemEditComp, SWT.NONE);
+			lblValue.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblValue.setText("Value");
+
+			valueText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			valueText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblType = new Label(configItemEditComp, SWT.NONE);
+			lblType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblType.setText("Type");
+
+			typeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			typeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblSubtype = new Label(configItemEditComp, SWT.NONE);
+			lblSubtype.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblSubtype.setText("Subtype");
+
+			subtypeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblSortkey = new Label(configItemEditComp, SWT.NONE);
+			lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblSortkey.setText("SortKey");
+
+			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
+			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
+			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblIgnore.setText("Ignore");
+
+			ignoreBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
+			ignoreBTN_CIEdit.setText("ignore");
+			ignoreBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+			Label lblHorizontalSpan = new Label(configItemEditComp, SWT.NONE);
+			lblHorizontalSpan.setText("Horizontal Span");
+			lblHorizontalSpan.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
+			hSpanSpinner_GroupIEdit = new Spinner(configItemEditComp,
+					SWT.BORDER);
+			hSpanSpinner_GroupIEdit.setMinimum(1);
+			hSpanSpinner_GroupIEdit
+					.setMaximum(BTSUIConstants.PASSPORT_COLUMN_NUMBER);
+			hSpanSpinner_GroupIEdit.setLayoutData(new GridData(SWT.LEFT,
+					SWT.CENTER, false, false, 1, 1));
+			allowMultiBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
+			allowMultiBTN_CIEdit.setText("Allow multiple");
+			Label newConfigGroupLabel = new Label(configItemEditComp, SWT.NONE);
+			newConfigGroupLabel.setLayoutData(new GridData(SWT.RIGHT,
+					SWT.CENTER, false, false, 1, 1));
+			newConfigGroupLabel.setText("New Group");
+
+			newCGroupText_ConfigurationEdit = new Text(configItemEditComp,
+					SWT.BORDER);
+			newCGroupText_ConfigurationEdit.setLayoutData(new GridData(
+					SWT.FILL, SWT.CENTER, true, false, 1, 1));
+
+			Button newCGroupBTN = new Button(configItemEditComp, SWT.PUSH);
+			newCGroupBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+					false, 1, 1));
+			newCGroupBTN.setText("Add Group");
+			newCGroupBTN.addSelectionListener(new SelectionAdapter() {
+
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					BTSConfigItem ci = configurationController
+							.createNewConfigItem(newCGroupText_ConfigurationEdit
+									.getText());
+					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
+							.getOwnerTypesPath();
+					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
+							.copy(path));
+					ci.setType(BTSCoreConstants.PASSPORT_ENTRY_GROUP);
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig,
+									BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+									ci);
+					compoundCommand.append(command);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							compoundCommand);
+					treeViewer.refresh(selectedConfig);
+				}
+			});
+
+			
+
+			Label newConfigItemLabel = new Label(configItemEditComp, SWT.NONE);
+			newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT,
+					SWT.CENTER, false, false, 1, 1));
+			newConfigItemLabel.setText("New Item");
+
+			newCIText_ConfigurationEdit = new Text(configItemEditComp,
+					SWT.BORDER);
+			newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL,
+					SWT.CENTER, true, false, 1, 1));
+
+			Button newCIBTN = new Button(configItemEditComp, SWT.PUSH);
+			newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+					false, 1, 1));
+			newCIBTN.setText("Add Item");
+			newCIBTN.addSelectionListener(new SelectionAdapter() {
+
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					BTSConfigItem ci = configurationController
+							.createNewConfigItem(newCIText_ConfigurationEdit
+									.getText());
+					ci.setType(BTSCoreConstants.PASSPORT_ENTRY_ITEM);
+					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
+							.getOwnerTypesPath();
+					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
+							.copy(path));
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig,
+									BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+									ci);
+					compoundCommand.append(command);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							compoundCommand);
+					treeViewer.refresh(selectedConfig);
+
+				}
+			});
+		}// end configuration tabitem
+		{
+			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
+			ownerstabItem.setText("Owner Objects");
+
+			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
+			ownerEditComp.setLayout(new GridLayout(1, false));
+			ownerstabItem.setControl(ownerEditComp);
+			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
+					configurationController, ownerEditComp, SWT.NONE);
+			if (configItem.getOwnerTypesPath() == null) {
+				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
+						.createBTSObjectTypePathRoot());
+			}
+			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
+					getEditingDomain(configItem));
+		}
+
+		configItemEditBindings = initializePassportEntryGroupEditBindings(configItem);
+
+		value.setValue(configItem);
+		sashForm.setWeights(new int[] { 1, 1 });
+		sashForm.layout();
+
+	}
+
+	private DataBindingContext initializePassportEntryGroupEditBindings(
+			BTSConfigItem configItem) {
+		if (configItemEditBindings != null) {
+			configItemEditBindings.dispose();
+		}
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+		if (configItem.getPassportEditorConfig() == null) {
+			configItem.setPassportEditorConfig(BtsmodelFactory.eINSTANCE
+					.createBTSPassportEditorConfig());
+		}
+		DataBindingContext bindingContext = new DataBindingContext();
+		EditingDomain editingDomain = getEditingDomain(configItem);
+		labelText_CIEdit.load(configItem.getLabel(), editingDomain, true);
+
+		descText_CIEdit.load(configItem.getDescription(), editingDomain, false);
+		// value
+		Binding binding = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, valueText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE)
+						.observe(configItem), us, null);
+
+		// type
+		Binding binding2 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, typeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__TYPE)
+						.observe(configItem), us, null);
+
+		// subtype
+		Binding binding3 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, subtypeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE)
+						.observe(configItem), us, null);
+
+		// sortkey
+		Binding binding4 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(400,
+						sortSpinner_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SORT_KEY)
+						.observe(configItem), null, null);
+		// ignore
+		Binding binding5 = bindingContext.bindValue(WidgetProperties
+				.selection().observeDelayed(0, ignoreBTN_CIEdit), EMFProperties
+				.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__IGNORE)
+				.observe(configItem), null, null);
+		bindingContext.addValidationStatusProvider(binding);
+
+		// allow multiple
+		FeaturePath feature2 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE);
+		Binding binding7 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(0,
+						allowMultiBTN_CIEdit),
+				EMFEditProperties.value(editingDomain, feature2).observe(
+						configItem), null, null);
+		// h width
+		FeaturePath feature4 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH);
+		Binding binding9 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(0,
+						hSpanSpinner_GroupIEdit),
+				EMFEditProperties.value(editingDomain, feature4).observe(
+						configItem), null, null);
+
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		return bindingContext;
+	}
+
+	private void loadPassportCategoriesEditor(BTSConfigItem configItem) {
+		mainConfigRight.dispose();
+		mainConfigRight = null;
+		mainConfigRight = new Composite(sashForm, SWT.NONE);
+		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
+
+		Composite configItemEditComp = new Composite(mainConfigRight, SWT.NONE);
+		configItemEditComp.setLayout(new GridLayout(3, false));
+
+		Label lblLabel_1 = new Label(configItemEditComp, SWT.NONE);
+		lblLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblLabel_1.setText("Label");
+
+		labelText_CIEdit = new TranslationEditorComposite(configItemEditComp,
+				SWT.BORDER, null, null, true);
+		labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+
+		Label lblDescription = new Label(configItemEditComp, SWT.NONE);
+		lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblDescription.setText("Description");
+
+		descText_CIEdit = new TranslationEditorComposite(configItemEditComp,
+				SWT.BORDER, null, null, false);
+		descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+
+		Label lblValue = new Label(configItemEditComp, SWT.NONE);
+		lblValue.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblValue.setText("Value");
+
+		valueText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+		valueText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+
+		Label lblType = new Label(configItemEditComp, SWT.NONE);
+		lblType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
+		lblType.setText("Type");
+
+		typeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+		typeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+
+		Label lblSubtype = new Label(configItemEditComp, SWT.NONE);
+		lblSubtype.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblSubtype.setText("Subtype");
+
+		subtypeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+		subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 2, 1));
+
+		Label lblSortkey = new Label(configItemEditComp, SWT.NONE);
+		lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblSortkey.setText("SortKey");
+
+		sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
+		sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+				true, false, 2, 1));
+
+		Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
+		lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblIgnore.setText("Ignore");
+
+		ignoreBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
+		ignoreBTN_CIEdit.setText("ignore");
+		ignoreBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+
+		Label newConfigItemLabel = new Label(configItemEditComp, SWT.NONE);
+		newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1));
+		newConfigItemLabel.setText("New Category");
+
+		newCIText_ConfigurationEdit = new Text(configItemEditComp, SWT.BORDER);
+		newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 1, 1));
+
+		Button newCIBTN = new Button(configItemEditComp, SWT.PUSH);
+		newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
+		newCIBTN.setText("Add Category");
+		newCIBTN.addSelectionListener(new SelectionAdapter() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				BTSConfigItem ci = configurationController
+						.createNewConfigItem(newCIText_ConfigurationEdit
+								.getText());
+				ci.setType(BTSCoreConstants.PASSPORT_CATEGORY);
+				BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
+						.getOwnerTypesPath();
+				ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
+						.copy(path));
+				CompoundCommand compoundCommand = new CompoundCommand();
+				org.eclipse.emf.common.command.Command command = AddCommand
+						.create(getEditingDomain(selectedConfig),
+								selectedConfig,
+								BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+								ci);
+				compoundCommand.append(command);
+				getEditingDomain(selectedConfig).getCommandStack().execute(
+						compoundCommand);
+				treeViewer.refresh(selectedConfig);
+
+			}
+		});
+		configItemEditBindings = initializePassportCategoriesEditBindings(configItem);
+
+		value.setValue(configItem);
+		sashForm.setWeights(new int[] { 1, 1 });
+		sashForm.layout();
+	}
+
+	private DataBindingContext initializePassportCategoriesEditBindings(
+			BTSConfigItem configItem) {
+		if (configItemEditBindings != null) {
+			configItemEditBindings.dispose();
+		}
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+
+		DataBindingContext bindingContext = new DataBindingContext();
+		EditingDomain editingDomain = getEditingDomain(configItem);
+		labelText_CIEdit.load(configItem.getLabel(), editingDomain, true);
+
+		descText_CIEdit.load(configItem.getDescription(), editingDomain, false);
+		// value
+		Binding binding = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, valueText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE)
+						.observe(configItem), us, null);
+
+		// type
+		Binding binding2 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, typeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__TYPE)
+						.observe(configItem), us, null);
+
+		// subtype
+		Binding binding3 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, subtypeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE)
+						.observe(configItem), us, null);
+
+		// sortkey
+		Binding binding4 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(400,
+						sortSpinner_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SORT_KEY)
+						.observe(configItem), null, null);
+		// ignore
+		Binding binding5 = bindingContext.bindValue(WidgetProperties
+				.selection().observeDelayed(0, ignoreBTN_CIEdit), EMFProperties
+				.value(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__IGNORE)
+				.observe(configItem), null, null);
+		bindingContext.addValidationStatusProvider(binding);
+
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		return bindingContext;
+	}
+
+	private void loadPassportEntryItemEditor(final BTSConfigItem configItem) {
+		mainConfigRight.dispose();
+		mainConfigRight = null;
+		mainConfigRight = new Composite(sashForm, SWT.NONE);
+		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
+
+		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
+
+		{
+			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
+			configtabItem.setText("Configuration");
+
+			Composite configItemEditComp = new Composite(tabfolder, SWT.NONE);
+			configItemEditComp.setLayout(new GridLayout(3, false));
+			configtabItem.setControl(configItemEditComp);
+			Label lblLabel_1 = new Label(configItemEditComp, SWT.NONE);
+			lblLabel_1.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblLabel_1.setText("Label");
+
+			labelText_CIEdit = new TranslationEditorComposite(
+					configItemEditComp, SWT.BORDER, false);
+			labelText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblDescription = new Label(configItemEditComp, SWT.NONE);
+			lblDescription.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
+			lblDescription.setText("Description");
+
+			descText_CIEdit = new TranslationEditorComposite(
+					configItemEditComp, SWT.BORDER, false);
+			descText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblValue = new Label(configItemEditComp, SWT.NONE);
+			lblValue.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblValue.setText("Value");
+
+			valueText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			valueText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblType = new Label(configItemEditComp, SWT.NONE);
+			lblType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblType.setText("Type");
+
+			typeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			typeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblSubtype = new Label(configItemEditComp, SWT.NONE);
+			lblSubtype.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblSubtype.setText("Subtype");
+
+			subtypeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblSortkey = new Label(configItemEditComp, SWT.NONE);
+			lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblSortkey.setText("SortKey");
+
+			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
+			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
+			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblIgnore.setText("Ignore");
+
+			ignoreBTN_CIEdit = new Button(configItemEditComp, SWT.CHECK);
+			ignoreBTN_CIEdit.setText("ignore");
+			ignoreBTN_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
+
+
+			final Group grpWidgetDescription = new Group(configItemEditComp,
+					SWT.NONE);
+
+
+			grpWidgetDescription.setText("Widget Description");
+			grpWidgetDescription.setLayout(new GridLayout(4, false));
+			grpWidgetDescription.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
+					true, true, 3, 2));
+
+			Label lblWidgetType = new Label(grpWidgetDescription, SWT.NONE);
+			lblWidgetType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
+			lblWidgetType.setText("Widget Type");
+
+			widgetCB_CIEdit = new Combo(grpWidgetDescription, SWT.READ_ONLY);
+			widgetCB_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 3, 1));
+			widgetCB_CIEdit.setItems(BTSCoreConstants.WIDGET_TYPES);
+
+
+			allowMultiBTN_CIEdit = new Button(grpWidgetDescription, SWT.CHECK);
+			allowMultiBTN_CIEdit.setText("Allow multiple");
+
+			requiredBTN_CIEdit = new Button(grpWidgetDescription, SWT.CHECK);
+			requiredBTN_CIEdit.setText("Required");
+
+			Label lblHorizontalSpan = new Label(grpWidgetDescription, SWT.NONE);
+			lblHorizontalSpan.setText("Horizontal Span");
+
+			hSpanSpinner_CIEdit = new Spinner(grpWidgetDescription, SWT.BORDER);
+			hSpanSpinner_CIEdit.setMinimum(1);
+			hSpanSpinner_CIEdit
+					.setMaximum(BTSUIConstants.PASSPORT_COLUMN_NUMBER);
+
+			Label lblRegex = new Label(grpWidgetDescription, SWT.NONE);
+			lblRegex.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblRegex.setText("Regex");
+
+			regexText_CIEdit = new Text(grpWidgetDescription, SWT.BORDER);
+			regexText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 3, 1));
+			grpWidgetDescription.layout();
+		}// end configuration tabitem
+		{
+			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
+			ownerstabItem.setText("Owner Objects");
+
+			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
+			ownerEditComp.setLayout(new GridLayout(1, false));
+			ownerstabItem.setControl(ownerEditComp);
+			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
+					configurationController, ownerEditComp, SWT.NONE);
+			if (configItem.getOwnerTypesPath() == null) {
+				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
+						.createBTSObjectTypePathRoot());
+			}
+			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
+					getEditingDomain(configItem));
+		}
+		{
+			TabItem referencedtabItem = new TabItem(tabfolder, SWT.NONE);
+			referencedtabItem.setText("Reference Objects");
+
+			loadReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem, configItem.getPassportEditorConfig()
+							.getWidgetType());
+
+
+		}
+
+		configItemEditBindings = initializePassportEntryItemEditBindings(configItem);
+
+		value.setValue(configItem);
+		sashForm.setWeights(new int[] { 1, 1 });
+		sashForm.layout();
+	}
+
+	private void loadReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem,
+			String widgetType) {
+
+		// purge old composite
+		referencedtabItem.setControl(null);
+		Composite referencedEditComp = new Composite(tabfolder, SWT.NONE);
+		referencedEditComp.setLayout(new GridLayout(1, false));
+		referencedtabItem.setControl(referencedEditComp);
+
+		// first check and load standard widget types
+		if (BTSCoreConstants.WIDGET_TYPE_TEXT.equals(widgetType)) {
+			loadTextReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST.equals(widgetType)) {
+			loadTextSuggestReferencedObjectsTabItem(tabfolder,
+					referencedtabItem, configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD.equals(widgetType)) {
+			loadTextFieldReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG
+				.equals(widgetType)) {
+			loadSelectConfigReferencedObjectsTabItem(tabfolder,
+					referencedtabItem, configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER
+				.equals(widgetType)) {
+			loadSelectIntegerReferencedObjectsTabItem(tabfolder,
+					referencedtabItem, configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_THS.equals(widgetType)) {
+			loadSelectTHSReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_BOOLEAN.equals(widgetType)) {
+			loadBooleanReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_DATE.equals(widgetType)) {
+			loadDateReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem);
+		} else if (BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL
+				.equals(widgetType)) {
+			loadReferenceReferencedObjectsTabItem(tabfolder, referencedtabItem,
+					configItem);
+		}
+
+	}
+
+	private void loadReferenceReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadDateReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadBooleanReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadSelectTHSReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadSelectIntegerReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadTextFieldReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadTextSuggestReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadTextReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void loadSelectConfigReferencedObjectsTabItem(TabFolder tabfolder,
+			TabItem referencedtabItem, BTSConfigItem configItem) {
+		Composite referencedEditComp = (Composite) referencedtabItem
+				.getControl();
+		referencedTypeSelector = new ObjectTypeSelectionTreeComposite(
+				configurationController, referencedEditComp, SWT.NONE);
+		if (configItem.getPassportEditorConfig() == null) {
+
+		} else {
+			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
+				configItem.getPassportEditorConfig()
+						.setReferencedTypesPath(
+								BtsmodelFactory.eINSTANCE
+										.createBTSObjectTypePathRoot());
+			}
+			referencedTypeSelector.setPathInput(configItem
+					.getPassportEditorConfig().getReferencedTypesPath(),
+					getEditingDomain(configItem), configurationController
+							.getActiveConfiguration());
+		}
+
+	}
+
+	private String[] getObjectTypes() {
+		// TODO Auto-generated method stub
+		return new String[] { "Annotation", "CorpusObject", "Image",
+				"ListEntry", "Text", "TextCorpus" };
+	}
+
+	private DataBindingContext initializePassportEntryItemEditBindings(
+			BTSConfigItem configItem) {
+		if (configItemEditBindings != null) {
+			configItemEditBindings.dispose();
+		}
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+
+		DataBindingContext bindingContext = new DataBindingContext();
+
+		EditingDomain editingDomain = getEditingDomain(configItem);
+		labelText_CIEdit.load(configItem.getLabel(), editingDomain, true);
+
+		descText_CIEdit.load(configItem.getDescription(), editingDomain, false);
+
+		// value
+		Binding binding = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, valueText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__VALUE)
+						.observe(configItem), us, null);
+
+		bindingContext.addValidationStatusProvider(binding);
+
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		// type
+		Binding binding2 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, typeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__TYPE)
+						.observe(configItem), us, null);
+
+		// subtype
+		Binding binding3 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, subtypeText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE)
+						.observe(configItem), us, null);
+
+		// sortkey
+		Binding binding4 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(400,
+						sortSpinner_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SORT_KEY)
+						.observe(configItem), null, null);
+		// ignore
+		Binding binding5 = bindingContext.bindValue(
+				WidgetProperties.selection()
+						.observeDelayed(0, ignoreBTN_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__IGNORE)
+						.observe(configItem), null, null);
+
+
+
+		// allow multiple
+		FeaturePath feature2 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE);
+		Binding binding7 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(0,
+						allowMultiBTN_CIEdit),
+				EMFEditProperties.value(editingDomain, feature2).observe(
+						configItem), null, null);
+
+		// required
+		FeaturePath feature3 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED);
+		Binding binding8 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(0,
+						requiredBTN_CIEdit),
+				EMFEditProperties.value(editingDomain, feature3).observe(
+						configItem), null, null);
+		// h width
+		FeaturePath feature4 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH);
+		Binding binding9 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(0,
+						hSpanSpinner_CIEdit),
+				EMFEditProperties.value(editingDomain, feature4).observe(
+						configItem), null, null);
+		// regex
+		EMFUpdateValueStrategy usReg = new EMFUpdateValueStrategy();
+		usReg.setBeforeSetValidator(new StringIsRegexPatternValidator());
+		FeaturePath feature5 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__REGEX);
+		Binding binding10 = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, regexText_CIEdit),
+				EMFEditProperties.value(editingDomain, feature5).observe(
+						configItem), usReg, null);
+		BackgroundControlDecorationSupport
+				.create(binding10, SWT.TOP | SWT.LEFT);
+		bindingContext.addValidationStatusProvider(binding10);
+
+		// widget type
+		FeaturePath feature6 = FeaturePath
+				.fromList(
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__PASSPORT_EDITOR_CONFIG,
+						BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE);
+		Binding binding11 = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(
+						BTSUIConstants.DELAY, widgetCB_CIEdit),
+				EMFEditProperties.value(editingDomain, feature6).observe(
+						configItem), null, null);
+
+		// owner types
+
+		return bindingContext;
+	}
+
+	private void loadConfigurationEditor(BTSConfiguration configuration) {
+		mainConfigRight.dispose();
+		mainConfigRight = null;
+		mainConfigRight = new Composite(sashForm, SWT.NONE);
+		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
+		Composite configurationEditComp = new Composite(mainConfigRight,
+				SWT.NONE);
 		configurationEditComp.setLayout(new GridLayout(3, false));
 
 		Label lblName = new Label(configurationEditComp, SWT.NONE);
-		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblName.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false,
+				1, 1));
 		lblName.setText("Name");
 
 		nameText_ConfigurationEdit = new Text(configurationEditComp, SWT.BORDER);
-		nameText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		nameText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 2, 1));
 
 		Label lblProvider = new Label(configurationEditComp, SWT.NONE);
-		lblProvider.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblProvider.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
 		lblProvider.setText("Provider");
 
 		providerText = new Text(configurationEditComp, SWT.BORDER);
-		providerText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		providerText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
 
 		Label newConfigItemLabel = new Label(configurationEditComp, SWT.NONE);
-		newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		newConfigItemLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1));
 		newConfigItemLabel.setText("New ConfigItem");
 
-		newCIText_ConfigurationEdit = new Text(configurationEditComp, SWT.BORDER);
-		newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		newCIText_ConfigurationEdit = new Text(configurationEditComp,
+				SWT.BORDER);
+		newCIText_ConfigurationEdit.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 1, 1));
 
 		Button newCIBTN = new Button(configurationEditComp, SWT.PUSH);
-		newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		newCIBTN.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false,
+				1, 1));
 		newCIBTN.setText("New ConfigItem");
-		newCIBTN.addSelectionListener(new SelectionAdapter()
-		{
+		newCIBTN.addSelectionListener(new SelectionAdapter() {
 
 			@Override
-			public void widgetSelected(SelectionEvent e)
-			{
-				BTSConfigItem ci = configurationController.createNewConfigItem(newCIText_ConfigurationEdit.getText());
+			public void widgetSelected(SelectionEvent e) {
+
+				BTSConfigItem ci = configurationController
+						.createNewConfigItem(newCIText_ConfigurationEdit
+								.getText());
 				ci.setValue(newCIText_ConfigurationEdit.getText());
-				selectedConfig.getChildren().add(ci);
-				treeViewer.refresh();
+				if (selectedConfig instanceof BTSConfigItem) {
+					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
+							.getOwnerTypesPath();
+					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
+							.copy(path));
+				}
+				CompoundCommand compoundCommand = new CompoundCommand();
+				org.eclipse.emf.common.command.Command command = AddCommand
+						.create(getEditingDomain(selectedConfig),
+								selectedConfig,
+								BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+								ci);
+				compoundCommand.append(command);
+				getEditingDomain(selectedConfig).getCommandStack().execute(
+						compoundCommand);
+				treeViewer.refresh(selectedConfig);
 
 			}
 		});
@@ -707,30 +1866,35 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 		sashForm.layout();
 	}
 
-	private DataBindingContext initializeConfigurationEditBindings(BTSConfiguration configuration)
-	{
-		if (configurationEditBindings != null)
-		{
+	private DataBindingContext initializeConfigurationEditBindings(
+			BTSConfiguration configuration) {
+		if (configurationEditBindings != null) {
 			configurationEditBindings.dispose();
 		}
-
+		EditingDomain editingDomain = getEditingDomain(configuration);
 		DataBindingContext bindingContext = new DataBindingContext();
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
 		us.setBeforeSetValidator(new StringNotEmptyValidator());
-		IObservableValue model = EMFProperties.value(BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(configuration);
+		IObservableValue model = EMFEditProperties.value(editingDomain,
+				BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(
+				configuration);
 		Binding binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, nameText_ConfigurationEdit), model, us, null);
-		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, nameText_ConfigurationEdit),
+				model, us, null);
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 		bindingContext.addValidationStatusProvider(binding);
 
-		IObservableValue model2 = EMFProperties.value(BtsmodelPackage.Literals.BTS_CONFIGURATION__PROVIDER).observe(
+		IObservableValue model2 = EMFEditProperties.value(editingDomain,
+				BtsmodelPackage.Literals.BTS_CONFIGURATION__PROVIDER).observe(
 				configuration);
 		Binding binding2 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, providerText), model2, us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, providerText), model2, us, null);
 
 		bindingContext.addValidationStatusProvider(binding2);
 
-		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 		return bindingContext;
 	}
 
@@ -740,30 +1904,27 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	 * @param parent
 	 */
 	@Override
-	protected void createButtonsForButtonBar(Composite parent)
-	{
-		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+	protected void createButtonsForButtonBar(Composite parent) {
+		okButton = createButton(parent, IDialogConstants.OK_ID,
+				IDialogConstants.OK_LABEL, true);
 
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		createButton(parent, IDialogConstants.CANCEL_ID,
+				IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	@Override
-	protected void okPressed()
-	{
+	protected void okPressed() {
 		saveInput();
 		super.okPressed();
 	}
 
-	private void saveInput()
-	{
+	private void saveInput() {
 		System.out.println("saveInput");
-		for (Object o : root.getChildren())
-		{
-			if (o instanceof BTSConfiguration)
-			{
+		saveOldSelection(selectedConfig);
+		for (Object o : root.getChildren()) {
+			if (o instanceof BTSConfiguration) {
 				configurationController.save((BTSConfiguration) o);
-			} else if (o instanceof TreeNodeWrapper)
-			{
+			} else if (o instanceof TreeNodeWrapper) {
 				TreeNodeWrapper tn = (TreeNodeWrapper) o;
 				configurationController.save((BTSConfiguration) tn.getObject());
 			}
@@ -771,26 +1932,21 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 
 	}
 
-	private void setSelectedColor(Control control, boolean selection)
-	{
-		if (selection)
-		{
+	private void setSelectedColor(Control control, boolean selection) {
+		if (selection) {
 			control.setForeground(control.getParent().getForeground());
-			if (!((control instanceof Text) || (control instanceof Combo) || (control instanceof MultiChoice<?>) || (control instanceof Spinner)))
-			{
+			if (!((control instanceof Text) || (control instanceof Combo)
+					|| (control instanceof MultiChoice<?>) || (control instanceof Spinner))) {
 				control.setBackground(BACKGROUND_COLOR);
 			}
-		} else
-		{
+		} else {
 			control.setForeground(BTSUIConstants.VIEW_FOREGROUND_DESELECTED_COLOR);
 			control.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 
 		}
 
-		if (control instanceof Composite)
-		{
-			for (Control child : ((Composite) control).getChildren())
-			{
+		if (control instanceof Composite) {
+			for (Control child : ((Composite) control).getChildren()) {
 				setSelectedColor(child, selection);
 			}
 		}
@@ -800,26 +1956,33 @@ public class BTSConfigurationDialog extends TitleAreaDialog
 	 * Return the initial size of the dialog.
 	 */
 	@Override
-	protected Point getInitialSize()
-	{
+	protected Point getInitialSize() {
 		return new Point(1100, 650);
 	}
 
 	@Inject
 	@Optional
-	void eventReceivedNew(@EventTopic("model_new/*") BTSObject object)
-	{
-		if (object instanceof BTSConfiguration)
-		{
+	void eventReceivedNew(@EventTopic("model_new/*") BTSObject object) {
+		if (object instanceof BTSConfiguration) {
 			addObjectToInput((BTSConfiguration) object);
 		}
 	}
 
-	private void addObjectToInput(final BTSConfiguration object)
-	{
-		TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+	private void addObjectToInput(final BTSConfiguration object) {
+		TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+				.createTreeNodeWrapper();
 		tn.setObject(object);
 		root.getChildren().add(tn);
 	}
 
+	@PreDestroy
+	public void preDestroy() {
+		editingDomainMap = null;
+	}
+
+	private void purgeAll() {
+		editingDomainMap.clear();
+		selectedConfig = null;
+		selection = null;
+	}
 }

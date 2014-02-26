@@ -5,7 +5,6 @@ package org.bbaw.bts.btsmodel.impl;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
-import org.bbaw.bts.btsmodel.*;
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
@@ -26,11 +25,12 @@ import org.bbaw.bts.btsmodel.BTSList;
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSListSubentry;
 import org.bbaw.bts.btsmodel.BTSMarker;
+import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
 import org.bbaw.bts.btsmodel.BTSOperator;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
-import org.bbaw.bts.btsmodel.BTSPpSubentry;
+import org.bbaw.bts.btsmodel.BTSPassportEntryGroup;
+import org.bbaw.bts.btsmodel.BTSPassportEntryItem;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -51,6 +51,8 @@ import org.bbaw.bts.btsmodel.BTSWorkflowRule;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
+import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -119,7 +121,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTS_ANNOTATION: return createBTSAnnotation();
 			case BtsmodelPackage.BTS_TRANSLATION: return createBTSTranslation();
 			case BtsmodelPackage.BTS_DATE: return createBTSDate();
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY: return createBTSPassportEntry();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY_GROUP: return createBTSPassportEntryGroup();
 			case BtsmodelPackage.BTS_RELATION: return createBTSRelation();
 			case BtsmodelPackage.BTS_CONFIGURATION: return createBTSConfiguration();
 			case BtsmodelPackage.BTS_TEXT_CORPUS: return createBTSTextCorpus();
@@ -134,7 +136,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG: return createBTSPassportEditorConfig();
 			case BtsmodelPackage.BTS_USER_GROUP: return createBTSUserGroup();
 			case BtsmodelPackage.BTS_LIST: return createBTSList();
-			case BtsmodelPackage.BTS_PP_SUBENTRY: return createBTSPpSubentry();
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM: return createBTSPassportEntryItem();
 			case BtsmodelPackage.BTS_LIST_SUBENTRY: return createBTSListSubentry();
 			case BtsmodelPackage.BTS_THS_ENTRY: return createBTSThsEntry();
 			case BtsmodelPackage.BTS_PROJECT: return createBTSProject();
@@ -146,6 +148,8 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: return createBTSDBCollectionRoleDesc();
 			case BtsmodelPackage.BTS_TEXT_CONTENT: return createBTSTextContent();
 			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER: return createGraphicSelectionCounter();
+			case BtsmodelPackage.OBJECT_TYPE_PATH_ENTRY: return createObjectTypePathEntry();
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH_ROOT: return createBTSObjectTypePathRoot();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -384,12 +388,13 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	 * 
 	 * @generatedNOT
 	 */
-	public BTSPassportEntry createBTSPassportEntry()
-	{
-		BTSPassportEntryImpl btsPassportEntry = new BTSPassportEntryImpl();
-		setIdentifiableId(btsPassportEntry);
-		return btsPassportEntry;
+	public BTSPassportEntryGroup createBTSPassportEntryGroup() {
+		BTSPassportEntryGroupImpl btsPassportEntryGroup = new BTSPassportEntryGroupImpl();
+		setIdentifiableId(btsPassportEntryGroup);
+		return btsPassportEntryGroup;
 	}
+
+
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -564,12 +569,14 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	 * 
 	 * @generatedNOT
 	 */
-	public BTSPpSubentry createBTSPpSubentry()
-	{
-		BTSPpSubentryImpl btsPpSubentry = new BTSPpSubentryImpl();
-		setIdentifiableId(btsPpSubentry);
-		return btsPpSubentry;
+	public BTSPassportEntryItem createBTSPassportEntryItem() {
+		BTSPassportEntryItemImpl btsPassportEntryItem = new BTSPassportEntryItemImpl();
+		setIdentifiableId(btsPassportEntryItem);
+
+		return btsPassportEntryItem;
 	}
+
+
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -697,6 +704,26 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public GraphicSelectionCounter createGraphicSelectionCounter() {
 		GraphicSelectionCounterImpl graphicSelectionCounter = new GraphicSelectionCounterImpl();
 		return graphicSelectionCounter;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ObjectTypePathEntry createObjectTypePathEntry() {
+		ObjectTypePathEntryImpl objectTypePathEntry = new ObjectTypePathEntryImpl();
+		return objectTypePathEntry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSObjectTypePathRoot createBTSObjectTypePathRoot() {
+		BTSObjectTypePathRootImpl btsObjectTypePathRoot = new BTSObjectTypePathRootImpl();
+		return btsObjectTypePathRoot;
 	}
 
 	/**

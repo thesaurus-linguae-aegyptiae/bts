@@ -5,10 +5,13 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
@@ -176,6 +179,36 @@ public class BTSPassportEditorConfigItemProvider
 	}
 
 	/**
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
+	}
+
+	/**
 	 * This returns BTSPassportEditorConfig.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -201,11 +234,12 @@ public class BTSPassportEditorConfigItemProvider
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * end-user-doc -->
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public void notifyChanged(Notification notification) {
@@ -213,11 +247,10 @@ public class BTSPassportEditorConfigItemProvider
 
 		switch (notification.getFeatureID(BTSPassportEditorConfig.class)) {
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__WIDGET_TYPE:
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REQUIRED:
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE:
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH:
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -233,6 +266,11 @@ public class BTSPassportEditorConfigItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH,
+				 BtsmodelFactory.eINSTANCE.createBTSObjectTypePathRoot()));
 	}
 
 }

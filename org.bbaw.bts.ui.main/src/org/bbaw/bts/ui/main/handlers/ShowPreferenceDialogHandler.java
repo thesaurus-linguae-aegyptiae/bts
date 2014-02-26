@@ -110,11 +110,12 @@ public class ShowPreferenceDialogHandler {
 .substring(65, classUri.length());
 						System.out.println(classUri);
 					}
- else if (classUri
-							.startsWith("org.eclipse.xtext.ui.XtextExecutableExtensionFactory")) {
-						classUri = classUri.substring(53, classUri.length());
-						System.out.println(classUri);
+ else if (classUri.contains(":")) {
+						classUri = classUri.substring(
+								classUri.indexOf(":") + 1, classUri.length());
+						System.out.println("cut uri " + classUri);
 					}
+
 					String prefPageURI = getClassURI(
 							elmt.getNamespaceIdentifier(), classUri);
 

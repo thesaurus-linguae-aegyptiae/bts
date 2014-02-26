@@ -15,7 +15,10 @@ public class BTSUserGroupServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSUserGroupService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null && application.getContext() != null) {
+			ctx = application.getContext();
+		}
 
 		BTSUserGroupService userGroupService = ContextInjectionFactory.make(BTSUserGroupServiceImpl.class, context);
 		ctx.set(BTSUserGroupService.class, userGroupService);

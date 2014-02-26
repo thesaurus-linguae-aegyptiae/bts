@@ -4,6 +4,8 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -20,6 +22,7 @@ import org.eclipse.emf.edit.provider.ITableItemColorProvider;
 import org.eclipse.emf.edit.provider.ITableItemFontProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSText} object.
@@ -82,14 +85,17 @@ public class BTSTextItemProvider extends BTSCorpusObjectItemProvider implements 
 	}
 
 	/**
-	 * This returns BTSText.gif.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
+	 * This returns BTSText.gif. <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSText"));
+		return overlayImage(object, resourceProvider.getImage(
+Display
+				.getDefault(), configurationController
+				.getIconStringOfObjectType((BTSCorpusObject) object)));
 	}
 
 	/**

@@ -2,9 +2,9 @@ package org.bbaw.bts.ui.main.wizards.installation;
 
 import java.net.MalformedURLException;
 
-import org.bbaw.bts.core.commons.BTSUIConstants;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.main.wizards.installation.support.Connection;

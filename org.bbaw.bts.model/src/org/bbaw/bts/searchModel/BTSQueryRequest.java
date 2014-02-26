@@ -3,6 +3,7 @@ package org.bbaw.bts.searchModel;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 
 public class BTSQueryRequest
@@ -12,6 +13,14 @@ public class BTSQueryRequest
 	private List<BTSCorpusObject> givenObjects;
 
 	private QueryBuilder queryBuilder;
+
+	private SearchRequestBuilder searchRequestBuilder;
+
+	private String requestField;
+
+	private String autocompletePrefix;
+
+	private String requestTypeFieldValue;
 
 	public List<BTSCorpusObject> getGivenObjects()
 	{
@@ -48,6 +57,39 @@ public class BTSQueryRequest
 	public void setQueryId(String queryId)
 	{
 		this.queryId = queryId;
+	}
+
+	public SearchRequestBuilder getSearchRequestBuilder() {
+		return searchRequestBuilder;
+	}
+
+	public void setSearchRequestBuilder(
+			SearchRequestBuilder searchRequestBuilder) {
+		this.searchRequestBuilder = searchRequestBuilder;
+	}
+
+	public String getRequestField() {
+		return requestField;
+	}
+
+	public void setRequestField(String requestField) {
+		this.requestField = requestField;
+	}
+
+	public String getAutocompletePrefix() {
+		return autocompletePrefix;
+	}
+
+	public void setAutocompletePrefix(String autocompletePrefix) {
+		this.autocompletePrefix = autocompletePrefix;
+	}
+
+	public String getRequestTypeFieldValue() {
+		return requestTypeFieldValue;
+	}
+
+	public void setRequestTypeFieldValue(String requestTypeFieldValue) {
+		this.requestTypeFieldValue = requestTypeFieldValue;
 	}
 
 }

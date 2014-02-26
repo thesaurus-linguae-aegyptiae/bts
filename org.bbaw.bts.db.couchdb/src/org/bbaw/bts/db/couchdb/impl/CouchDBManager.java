@@ -100,6 +100,9 @@ public class CouchDBManager implements DBManager
 		try {
 			jsonObject = dbClient.find(JsonObject.class, "_design/auth");
 		} catch (Exception e) {
+			System.err
+					.println("_design/auth JsonObject Not found for collection "
+							+ collection.getCollectionName());
 			e.printStackTrace();
 		}
 
@@ -309,6 +312,7 @@ public class CouchDBManager implements DBManager
 	{
 		boolean hasIndex = existsIndex(esClient, collection.getCollectionName());
 
+		// FIXME
 		if (false && hasIndex)
 		{
 			return true;

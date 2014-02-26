@@ -31,7 +31,7 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	public boolean save(BTSUserGroup entity)
 	{
 		userGroupDao.add(entity, ServiceConstants.ADMIN);
-		return false;
+		return true;
 	}
 
 	@Override

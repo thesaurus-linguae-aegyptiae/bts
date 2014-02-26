@@ -10,7 +10,7 @@
 
 package org.bbaw.bts.ui.commons.controldecoration.support;
 
-import org.bbaw.bts.core.commons.BTSUIConstants;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecoration;
@@ -112,10 +112,12 @@ public class BackgroundControlDecorationUpdater
 			Control control = (Control) target;
 			if (status == null || status.isOK())
 			{
-				setTargetBackground(control, BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
+				setTargetBackground(control,
+						BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
 			} else
 			{
-				setTargetBackground(control, BTSUIConstants.VIEW_BACKGROUND_INVALID_COLOR);
+				setTargetBackground(control,
+						BTSUIConstants.VIEW_BACKGROUND_INVALID_COLOR);
 			}
 		}
 

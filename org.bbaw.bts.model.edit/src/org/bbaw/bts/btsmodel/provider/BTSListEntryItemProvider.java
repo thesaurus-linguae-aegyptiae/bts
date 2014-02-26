@@ -5,6 +5,7 @@ package org.bbaw.bts.btsmodel.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -25,6 +26,7 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSListEntry} object.
@@ -122,12 +124,15 @@ public class BTSListEntryItemProvider extends BTSCorpusObjectItemProvider implem
 	 * This returns BTSListEntry.gif. <!-- begin-user-doc --> <!-- end-user-doc
 	 * -->
 	 * 
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSListEntry"));
+		return overlayImage(object, resourceProvider.getImage(
+Display
+				.getDefault(), configurationController
+				.getIconStringOfObjectType((BTSCorpusObject) object)));
 	}
 
 	/**

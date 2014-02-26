@@ -281,10 +281,11 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY: {
-				BTSPassportEntry btsPassportEntry = (BTSPassportEntry)theEObject;
-				T result = caseBTSPassportEntry(btsPassportEntry);
-				if (result == null) result = caseBTSIdentifiableItem(btsPassportEntry);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY_GROUP: {
+				BTSPassportEntryGroup btsPassportEntryGroup = (BTSPassportEntryGroup)theEObject;
+				T result = caseBTSPassportEntryGroup(btsPassportEntryGroup);
+				if (result == null) result = caseBTSPassportEntry(btsPassportEntryGroup);
+				if (result == null) result = caseBTSIdentifiableItem(btsPassportEntryGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -436,9 +437,11 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PP_SUBENTRY: {
-				BTSPpSubentry btsPpSubentry = (BTSPpSubentry)theEObject;
-				T result = caseBTSPpSubentry(btsPpSubentry);
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM: {
+				BTSPassportEntryItem btsPassportEntryItem = (BTSPassportEntryItem)theEObject;
+				T result = caseBTSPassportEntryItem(btsPassportEntryItem);
+				if (result == null) result = caseBTSPassportEntry(btsPassportEntryItem);
+				if (result == null) result = caseBTSIdentifiableItem(btsPassportEntryItem);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -564,6 +567,33 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				T result = caseGraphicSelectionCounter(graphicSelectionCounter);
 				if (result == null) result = caseBTSDBBaseObject(graphicSelectionCounter);
 				if (result == null) result = caseBTSIdentifiableItem(graphicSelectionCounter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.OBJECT_TYPE_PATH_ENTRY: {
+				ObjectTypePathEntry objectTypePathEntry = (ObjectTypePathEntry)theEObject;
+				T result = caseObjectTypePathEntry(objectTypePathEntry);
+				if (result == null) result = caseBTSObjectTypePath(objectTypePathEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH_ROOT: {
+				BTSObjectTypePathRoot btsObjectTypePathRoot = (BTSObjectTypePathRoot)theEObject;
+				T result = caseBTSObjectTypePathRoot(btsObjectTypePathRoot);
+				if (result == null) result = caseBTSObjectTypePath(btsObjectTypePathRoot);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH: {
+				BTSObjectTypePath btsObjectTypePath = (BTSObjectTypePath)theEObject;
+				T result = caseBTSObjectTypePath(btsObjectTypePath);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.BTS_PASSPORT_ENTRY: {
+				BTSPassportEntry btsPassportEntry = (BTSPassportEntry)theEObject;
+				T result = caseBTSPassportEntry(btsPassportEntry);
+				if (result == null) result = caseBTSIdentifiableItem(btsPassportEntry);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -889,17 +919,17 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Passport Entry</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Passport Entry Group</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Passport Entry</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Passport Entry Group</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBTSPassportEntry(BTSPassportEntry object) {
+	public T caseBTSPassportEntryGroup(BTSPassportEntryGroup object) {
 		return null;
 	}
 
@@ -1159,17 +1189,17 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Pp Subentry</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Passport Entry Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Pp Subentry</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Passport Entry Item</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBTSPpSubentry(BTSPpSubentry object) {
+	public T caseBTSPassportEntryItem(BTSPassportEntryItem object) {
 		return null;
 	}
 
@@ -1424,6 +1454,66 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseGraphicSelectionCounter(GraphicSelectionCounter object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Object Type Path Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Object Type Path Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseObjectTypePathEntry(ObjectTypePathEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Object Type Path Root</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Object Type Path Root</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSObjectTypePathRoot(BTSObjectTypePathRoot object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Object Type Path</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Object Type Path</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSObjectTypePath(BTSObjectTypePath object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Passport Entry</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Passport Entry</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSPassportEntry(BTSPassportEntry object) {
 		return null;
 	}
 

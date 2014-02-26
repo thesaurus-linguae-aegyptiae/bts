@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getWbSlips <em>Wb Slips</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getWbFolder <em>Wb Folder</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getProvenance <em>Provenance</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getPassportEntries <em>Passport Entries</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getChildren <em>Children</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassport#getDescriptions <em>Descriptions</em>}</li>
  * </ul>
@@ -188,20 +188,20 @@ public interface BTSPassport extends EObject {
 	void setProvenance(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Passport Entries</b></em>' containment reference list.
+	 * Returns the value of the '<em><b>Children</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSPassportEntry}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Passport Entries</em>' containment reference list isn't clear,
+	 * If the meaning of the '<em>Children</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Passport Entries</em>' containment reference list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassport_PassportEntries()
+	 * @return the value of the '<em>Children</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassport_Children()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<BTSPassportEntry> getPassportEntries();
+	EList<BTSPassportEntry> getChildren();
 
 	/**
 	 * Returns the value of the '<em><b>Comment</b></em>' attribute.
