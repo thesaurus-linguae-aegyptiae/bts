@@ -9,4 +9,6 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 
 	boolean setAuthentication(String userName, String passWord);
 
+	void setRememberedUser(BTSUser user);
+
 }

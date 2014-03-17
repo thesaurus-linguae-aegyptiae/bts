@@ -34,6 +34,7 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 	@Override
 	public boolean save(BTSAnnotation entity)
 	{
+		super.addRevisionStatement(entity);
 		annotationDao.add(entity, entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
 		return true;
 	}
@@ -84,21 +85,23 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 	}
 
 	@Override
-	public List<BTSAnnotation> list()
+	public List<BTSAnnotation> list(String objectState)
 	{
 		List<BTSAnnotation> annos = new Vector<BTSAnnotation>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				annos.addAll(annotationDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
+				annos.addAll(annotationDao.list(p
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState));
 			}
 		}
 		return filter(annos);
 	}
 
 	@Override
-	public List<BTSAnnotation> query(BTSQueryRequest query)
+	public List<BTSAnnotation> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
@@ -106,7 +109,8 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
 				objects.addAll(annotationDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
-						+ ServiceConstants.CORPUS_INTERFIX + c));
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
+						registerQuery));
 			}
 		}
 		return filter(objects);
@@ -114,9 +118,15 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 	}
 
 	@Override
-	public List<BTSAnnotation> list(String dbPath, String queryId)
+	public List<BTSAnnotation> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
+
+	}
+	@Override
+	public List<BTSAnnotation> list(String dbPath, String queryId,
+			String objectState)
 	{
-		return filter(annotationDao.findByQueryId(queryId, dbPath));
+		return filter(annotationDao.findByQueryId(queryId, dbPath, objectState));
 	}
 
 	@Override

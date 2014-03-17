@@ -35,11 +35,11 @@ public class RemoteDBConnectionProviderImpl implements RemoteDBConnectionProvide
 	private String remote_db_url;
 
 	@Inject
-	@Preference(value = BTSPluginIDs.PREF_AUTHENTICATED_USER, nodePath = "org.bbaw.bts.app")
+	@Preference(value = "username", nodePath = "org.bbaw.bts.app")
 	private String user;
 
 	@Inject
-	@Preference(value = BTSPluginIDs.PREF_AUTHENTICATED_USER_PASSWORD, nodePath = "org.bbaw.bts.app")
+	@Preference(value = "password", nodePath = "org.bbaw.bts.app")
 	private String password;
 
 	private Client searchClient;
@@ -67,6 +67,9 @@ public class RemoteDBConnectionProviderImpl implements RemoteDBConnectionProvide
 		CouchDbClient dbClient = clients.get(path);
 		if (dbClient == null)
 		{
+			// FIXME check if db is set to authentication otherwise do so
+			// if it is an admin party then creating a new db if not exist will
+			// lead to http exception
 			CouchDbProperties properties = new CouchDbProperties().setDbName(path).setCreateDbIfNotExist(true)
 					.setProtocol(protocol).setHost(host).setPort(port).setMaxConnections(100).setConnectionTimeout(0)
 					.setUsername(user).setPassword(password);

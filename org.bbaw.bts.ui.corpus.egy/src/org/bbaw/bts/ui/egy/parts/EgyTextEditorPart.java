@@ -236,6 +236,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	public void createComposite(Composite parent)
 	{
 		parent.setLayout(new GridLayout());
+		((GridLayout) parent.getLayout()).marginHeight = 0;
+		((GridLayout) parent.getLayout()).marginWidth = 0;
 		contextService
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
 		eventBroker.subscribe("event_text_selection/*", this);
@@ -243,14 +245,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
 		sashForm.setLayoutData(new GridData(GridData.FILL_BOTH));
-		sashForm.setLayout(new GridLayout());
 		Composite composite = new Composite(sashForm, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout());
+		((GridLayout) composite.getLayout()).marginHeight = 0;
+		((GridLayout) composite.getLayout()).marginWidth = 0;
 		{
 			tabFolder = new CTabFolder(composite, SWT.BORDER | SWT.BOTTOM);
 			tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
-			tabFolder.setLayout(new GridLayout());
 			tabFolder.addSelectionListener(new SelectionAdapter()
 			{
 
@@ -628,9 +630,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 					@Override
 					public void documentChanged(DocumentEvent event) {
-						if (!dirty.isDirty()) {
-							dirty.setDirty(true);
-						}
+							setDirtyInternal();
+
 					}
 
 					@Override
@@ -639,6 +640,13 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 					}
 				});
+		}
+
+	}
+
+	protected void setDirtyInternal() {
+		if (text != null && !dirty.isDirty()) {
+			dirty.setDirty(true);
 		}
 
 	}
@@ -924,7 +932,7 @@ embeddedEditor.getViewer(),
 							if (localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
 							} else if (!dirty.isDirty()) {
-								dirty.setDirty(true);
+								setDirtyInternal();
 							}
 						} else {
 							// undo executed
@@ -932,7 +940,7 @@ embeddedEditor.getViewer(),
 									&& localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
 							} else if (!dirty.isDirty()) {
-								dirty.setDirty(true);
+								setDirtyInternal();
 							}
 						}
 					}

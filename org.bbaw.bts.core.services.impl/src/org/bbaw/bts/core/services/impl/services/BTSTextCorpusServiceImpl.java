@@ -31,6 +31,7 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 	@Override
 	public boolean save(BTSTextCorpus entity)
 	{
+		super.addRevisionStatement(entity);
 		textCorpusDao.add(entity, entity.getProject() + ServiceConstants.CORPUS);
 		return true;
 	}
@@ -70,32 +71,41 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 	}
 
 	@Override
-	public List<BTSTextCorpus> list()
+	public List<BTSTextCorpus> list(String objectState)
 	{
 		List<BTSTextCorpus> list = new Vector<BTSTextCorpus>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			list.addAll(textCorpusDao.list(p + ServiceConstants.CORPUS));
+			list.addAll(textCorpusDao.list(p + ServiceConstants.CORPUS,
+					objectState));
 		}
 		return filter(list);
 	}
 
 	@Override
-	public List<BTSTextCorpus> query(BTSQueryRequest query)
+	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSTextCorpus> objects = new Vector<BTSTextCorpus>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 
-			objects.addAll(textCorpusDao.query(query, p + ServiceConstants.CORPUS, p + ServiceConstants.CORPUS));
+			objects.addAll(textCorpusDao.query(query, p
+					+ ServiceConstants.CORPUS, p + ServiceConstants.CORPUS,
+					objectState, registerQuery));
 
 		}
 		return filter(objects);
 	}
+	@Override
+	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
+	}
 
 	@Override
-	public List<BTSTextCorpus> list(String dbPath, String queryId)
+	public List<BTSTextCorpus> list(String dbPath, String queryId,
+			String objectState)
 	{
-		return filter(textCorpusDao.findByQueryId(queryId, dbPath));
+		return filter(textCorpusDao.findByQueryId(queryId, dbPath, objectState));
 	}
 }

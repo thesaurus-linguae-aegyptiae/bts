@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -193,8 +194,8 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	@Override
 	public Collection<Resource> values() {
-		throw new UnsupportedOperationException(
-				"ScatteredCachingMapService unsupported operation: keySet not implemented");
+		Collection<Resource> cols = new Vector<Resource>(0);
+		return cols;
 
 	}
 

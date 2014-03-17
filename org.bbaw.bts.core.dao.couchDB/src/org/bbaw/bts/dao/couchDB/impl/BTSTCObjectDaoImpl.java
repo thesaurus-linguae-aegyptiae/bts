@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSTCObject;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSTCObjectDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -33,10 +34,19 @@ public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implemen
 	}
 
 	@Override
-	public List<BTSTCObject> list(String path)
+	public List<BTSTCObject> list(String path, String objectState)
 	{
+		String viewId = DaoConstants.VIEW_ALL_DOCS;
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			viewId = DaoConstants.VIEW_ALL_ACTIVE_DOCS;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			viewId = DaoConstants.VIEW_ALL_TERMINATED_DOCS;
+		}
 		List<JsonObject> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path)
-				.view(DaoConstants.VIEW_ALL_DOCS).includeDocs(true).query(JsonObject.class);
+.view(viewId)
+				.includeDocs(true).query(JsonObject.class);
 		ArrayList<BTSTCObject> results = new ArrayList<BTSTCObject>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
@@ -59,7 +69,7 @@ public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implemen
 		}
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_DOCS, path);
+			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
 	}

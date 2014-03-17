@@ -5,13 +5,13 @@ package org.bbaw.bts.btsmodel.impl;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.UUID;
+import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusHeader;
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSDate;
@@ -53,6 +53,7 @@ import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
 import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -157,12 +158,14 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 
 	private void setIdentifiableId(EObject eObject)
 	{
-		if (eObject instanceof BTSDBBaseObject)
-		{
-			// do something
-		} else if (eObject instanceof BTSIdentifiableItem)
+		if (eObject instanceof BTSIdentifiableItem)
 		{
 			((BTSIdentifiableItem) eObject).set_id(getSidWithCalendar());
+		}
+		if (eObject instanceof AdministrativDataObject)
+		{
+			((AdministrativDataObject) eObject)
+					.setState(BTSConstants.OBJECT_STATE_ACITVE);
 		}
 	}
 

@@ -3,6 +3,7 @@
 
 <product name="org.bbaw.bts.app" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
+
    <configIni use="default">
    </configIni>
 
@@ -12,6 +13,18 @@
    </launcherArgs>
 
    <windowImages/>
+
+
+   <launcher name="BTS">
+      <solaris/>
+      <win useIco="false">
+         <bmp/>
+      </win>
+   </launcher>
+
+
+   <vm>
+   </vm>
 
 
    <plugins>

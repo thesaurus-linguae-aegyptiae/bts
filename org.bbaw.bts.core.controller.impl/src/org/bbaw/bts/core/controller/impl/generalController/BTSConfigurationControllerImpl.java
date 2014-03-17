@@ -23,6 +23,7 @@ import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.services.BTSConfigurationService;
@@ -62,7 +63,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	@Override
 	public List<BTSConfiguration> listConfigurations()
 	{
-		return configService.list();
+		return configService.list(BTSConstants.OBJECT_STATE_ACITVE);
 	}
 
 	/*
@@ -293,43 +294,23 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		BTSObjectTypePath root = BtsmodelFactory.eINSTANCE.createBTSObjectTypePathRoot();
 		for (BTSConfig c : parentConfig.getChildren())
 		{
-			ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE.createObjectTypePathEntry();
-			child.setValue(((BTSConfigItem) c).getValue());
-			child.setSelected(objectTypesPathContainsObject(selectionPath,
-					child.getValue(), null, null, 0));
-			root.getChildren().add(child);
-			for (BTSConfig cc : c.getChildren()) {
-				ObjectTypePathEntry grandChild = BtsmodelFactory.eINSTANCE
-						.createObjectTypePathEntry();
-				grandChild.setValue(((BTSConfigItem) cc).getValue());
-				grandChild.setSelected(objectTypesPathContainsObject(
-						selectionPath, child.getValue(), grandChild.getValue(),
-						null, 1));
-				child.getChildren().add(grandChild);
-				for (BTSConfig ccc : cc.getChildren()) {
-					ObjectTypePathEntry grandGrandChild = BtsmodelFactory.eINSTANCE
-							.createObjectTypePathEntry();
-					grandGrandChild.setValue(((BTSConfigItem) ccc).getValue());
-					grandGrandChild.setSelected(objectTypesPathContainsObject(
-							selectionPath, child.getValue(),
-							grandChild.getValue(), grandGrandChild.getValue(),
-							2));
-					grandChild.getChildren().add(grandGrandChild);
-					for (BTSConfig cccc : ccc.getChildren()) {
-						ObjectTypePathEntry greatGrandGrandChild = BtsmodelFactory.eINSTANCE
-								.createObjectTypePathEntry();
-						greatGrandGrandChild.setValue(((BTSConfigItem) cccc)
-								.getValue());
-						// greatGrandGrandChild.setSelected(objectTypesPathContainsObject(
-						// selectionPath, child.getValue(),
-						// grandChild.getValue(), grandGrandChild.getValue(),
-						// 2));
-						grandGrandChild.getChildren().add(greatGrandGrandChild);
-					}
-				}
-			}
+			processChild(c, root, selectionPath);
 		}
 		return root;
+	}
+
+	private void processChild(BTSConfig node, BTSObjectTypePath input,
+			BTSObjectTypePathRoot selectionPath) {
+		ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE
+				.createObjectTypePathEntry();
+		child.setValue(((BTSConfigItem) node).getValue());
+		child.setSelected(objectTypesPathContainsObject(selectionPath,
+				child.getValue(), null, null, 0));
+		input.getChildren().add(child);
+		for (BTSConfig cc : node.getChildren()) {
+			processChild(cc, child, selectionPath);
+		}
+
 	}
 
 	@Override
@@ -368,7 +349,6 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 			} else if (object instanceof BTSImage) {
 				return resourceProvider.IMG_IMAGE;
 			}
-
 		}
 		return typeCI.getSubtype();
 	}
@@ -657,8 +637,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	public BTSConfigItem getPathConfigItemProcessedClones(
 			BTSConfigItem itemConfig, BTSCorpusObject corpusObject) {
 		BTSConfiguration configuration = configService.getActiveConfiguration();
-		BTSObjectTypePathRoot rootpath = itemConfig.getPassportEditorConfig()
+		BTSObjectTypePathRoot rootpath = null;
+		if (itemConfig != null) {
+			rootpath = itemConfig.getPassportEditorConfig()
 				.getReferencedTypesPath();
+		}
 		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		calculateChildrenRecurcively(rootpath, configuration, pathClonesList,
@@ -670,6 +653,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	private void calculateChildrenRecurcively(BTSObjectTypePath rootpath,
 			BTSConfig config, BTSConfigItem pathClonesList,
 			BTSCorpusObject corpusObject) {
+		if (rootpath != null) {
 		for (BTSObjectTypePath pathEntry : rootpath.getChildren()) {
 			if (pathEntry instanceof ObjectTypePathEntry) {
 				for (BTSConfig c : config.getChildren()) {
@@ -697,6 +681,28 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 				}
 			}
 		}
+		} else {
+			for (BTSConfig c : config.getChildren()) {
+				if (c instanceof BTSConfigItem) {
+					BTSConfigItem l1CI = (BTSConfigItem) c;
+					if (!l1CI.isIgnore()
+							&& l1CI.getValue() != null
+							&& objectTypesPathsContainsObjectype(
+									l1CI.getOwnerTypesPath(), corpusObject)) {
+						int size = pathClonesList.getChildren().size();
+
+						calculateChildrenRecurcively(null, l1CI,
+								pathClonesList, corpusObject);
+						if (pathClonesList.getChildren().size() == size) {
+							// add this level if no children were added
+							pathClonesList.getChildren().add(
+									EcoreUtil.copy(l1CI));
+						}
+
+					}
+				}
+			}
+		}
 
 	}
 
@@ -705,7 +711,87 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return configService.getActiveConfiguration();
 	}
 
+	@Override
+	public BTSConfigItem getRelationsConfigItem() {
+		BTSConfigItem typesCI = configService.getRelationsConfigItem();
+		return typesCI;
+	}
 
+	@Override
+	public BTSConfigItem getRelationPathConfigItemProcessedClones(
+			BTSConfigItem itemConfig, BTSCorpusObject corpusObject) {
+		BTSConfigItem config = configService.getRelationsConfigItem();
+		BTSObjectTypePathRoot rootpath = null;
+		if (itemConfig != null) {
+			rootpath = itemConfig.getPassportEditorConfig()
+					.getReferencedTypesPath();
+		}
+		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
+				.createBTSConfigItem();
+		calculateChildrenReferncedObjectsRecurcively(rootpath, config,
+				pathClonesList,
+				corpusObject);
+
+		return pathClonesList;
+	}
+
+	private void calculateChildrenReferncedObjectsRecurcively(
+			BTSObjectTypePath rootpath, BTSConfig config,
+			BTSConfigItem pathClonesList, BTSCorpusObject corpusObject) {
+		if (rootpath != null) {
+			for (BTSObjectTypePath pathEntry : rootpath.getChildren()) {
+				if (pathEntry instanceof ObjectTypePathEntry) {
+					for (BTSConfig c : config.getChildren()) {
+						if (c instanceof BTSConfigItem) {
+							BTSConfigItem l1CI = (BTSConfigItem) c;
+							if (!l1CI.isIgnore() && l1CI.getValue() != null
+									// && l1CI.getValue().equals(
+									// ((ObjectTypePathEntry) pathEntry)
+									// .getValue())
+									&& objectTypesPathsContainsObjectype(l1CI
+											.getPassportEditorConfig()
+											.getReferencedTypesPath(),
+											corpusObject)) {
+								int size = pathClonesList.getChildren().size();
+
+								calculateChildrenReferncedObjectsRecurcively(
+										pathEntry, l1CI, pathClonesList,
+										corpusObject);
+								if (pathClonesList.getChildren().size() == size) {
+									// add this level if no children were added
+									pathClonesList.getChildren().add(
+											EcoreUtil.copy(l1CI));
+								}
+
+							}
+						}
+					}
+				}
+			}
+		} else {
+			for (BTSConfig c : config.getChildren()) {
+				if (c instanceof BTSConfigItem) {
+					BTSConfigItem l1CI = (BTSConfigItem) c;
+					if (!l1CI.isIgnore()
+							&& l1CI.getValue() != null
+							&& objectTypesPathsContainsObjectype(
+									l1CI.getOwnerTypesPath(), corpusObject)) {
+						int size = pathClonesList.getChildren().size();
+
+						calculateChildrenRecurcively(null, l1CI,
+								pathClonesList, corpusObject);
+						if (pathClonesList.getChildren().size() == size) {
+							// add this level if no children were added
+							pathClonesList.getChildren().add(
+									EcoreUtil.copy(l1CI));
+						}
+
+					}
+				}
+			}
+		}
+
+	}
 	// FIXME move to Service
 
 }

@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -45,21 +46,29 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 	}
 
 	@Override
-	public List<BTSProject> list(String path)
+	public List<BTSProject> list(String path, String objectState)
 	{
+		String viewId = DaoConstants.VIEW_ALL_BTSPROJECTS;
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
+		}
 		List<String> allDocs = new ArrayList<String>(0);
 		View view;
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		try
 		{
 
-			view = dbClient.view(DaoConstants.VIEW_ALL_BTSPROJECTS);
+			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(true).query();
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
-			createView(path, path, DaoConstants.VIEW_ALL_BTSPROJECTS);
-			view = dbClient.view(DaoConstants.VIEW_ALL_BTSPROJECTS);
+			createView(path, path, viewId);
+			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(true).query();
 		}
 
@@ -82,7 +91,7 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 		}
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_BTSPROJECTS, path);
+			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
 	}
@@ -170,6 +179,7 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 			Gson gson = dbClient.getGson();
 
 			String json = "{ ";
+			json += "\"_id\":\"_security\",";
 			for (int i = 0; i < coll.getRoleDescriptions().size(); i++)
 			{
 				BTSDBCollectionRoleDesc desc = coll.getRoleDescriptions().get(i);

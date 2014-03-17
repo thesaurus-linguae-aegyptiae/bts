@@ -61,7 +61,8 @@ public class EgyLemmatizerPart {
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout(1, false));
-
+		((GridLayout) parent.getLayout()).marginHeight = 0;
+		((GridLayout) parent.getLayout()).marginWidth = 0;
 		if (partService != null) {
 			Collection<MPart> parts = partService.getParts();
 
@@ -69,6 +70,8 @@ public class EgyLemmatizerPart {
 
 		Composite composite = new Composite(parent, SWT.NONE);
 		composite.setLayout(new GridLayout(3, false));
+		((GridLayout) composite.getLayout()).marginHeight = 0;
+		((GridLayout) composite.getLayout()).marginWidth = 0;
 		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
 				1));
 

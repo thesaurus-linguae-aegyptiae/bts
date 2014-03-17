@@ -42,6 +42,7 @@ import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.common.xcontent.XContentFactory;
+import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.DesignDocument;
@@ -115,7 +116,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	public void update(E entity, String path)
 	{
 		// FIXME implement Update
-		URI uri = URI.createURI(getLocalDBURL() + path + entity.get_id());
+		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
+				+ entity.get_id());
 		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		resource.getContents().add(entity);
 
@@ -133,7 +135,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public void remove(E entity, String path)
 	{
-		URI uri = URI.createURI(getLocalDBURL() + path + entity.get_id());
+		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
+				+ entity.get_id());
 		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		resource.getContents().add(entity);
 
@@ -146,6 +149,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			e.printStackTrace();
 			throw new RuntimeException("Delete Resource failed");
 		}
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, path);
+		dbClient.remove(entity.get_id(), entity.get_rev());
+
 	}
 
 	@SuppressWarnings("unchecked")
@@ -176,10 +183,19 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<E> list(String path)
+	public List<E> list(String path, String objectState)
 	{
+		String view = DaoConstants.VIEW_ALL_DOCS;
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			view = DaoConstants.VIEW_ALL_ACTIVE_DOCS;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			view = DaoConstants.VIEW_ALL_TERMINATED_DOCS;
+		}
 		List<JsonObject> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path)
-				.view(DaoConstants.VIEW_ALL_DOCS).includeDocs(true).query(JsonObject.class);
+.view(view)
+				.includeDocs(true).query(JsonObject.class);
 		ArrayList<BTSDBBaseObject> results = new ArrayList<BTSDBBaseObject>();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
 		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
@@ -254,22 +270,52 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 
 	@Override
-	public List<E> query(BTSQueryRequest query, String indexName, String indexType)
+	public List<E> query(BTSQueryRequest query, String indexName,
+			String indexType, String objectState, boolean registerQuery)
 	{
 
 		if (query.getSearchRequestBuilder() == null)
 		{
-			SearchResponse response = connectionProvider
+			SearchResponse response;
+			if (BTSConstants.OBJECT_STATE_ACITVE.equals(objectState)) {
+				response = connectionProvider
+						.getSearchClient(Client.class)
+						.prepareSearch(indexName)
+						.setTypes(indexType)
+						.setSearchType(SearchType.QUERY_AND_FETCH)
+						.setQuery(query.getQueryBuilder())
+						// Query
+						.setFilter(
+								FilterBuilders.termFilter("state",
+										BTSConstants.OBJECT_STATE_ACITVE))
+						// // Filter
+						.setFrom(0).setSize(60).setExplain(true).execute()
+						.actionGet();
+			} else if (BTSConstants.OBJECT_STATE_TERMINATED.equals(objectState)) {
+				response = connectionProvider
 					.getSearchClient(Client.class)
 					.prepareSearch(indexName)
 					.setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH)
 					.setQuery(query.getQueryBuilder())
 					// Query
-					// .setFilter(FilterBuilders.rangeFilter("age").from(12).to(18))
+						.setFilter(
+								FilterBuilders.termFilter("state",
+										BTSConstants.OBJECT_STATE_TERMINATED))
 					// // Filter
 					.setFrom(0).setSize(60).setExplain(true).execute()
 					.actionGet();
+			} else {
+				response = connectionProvider.getSearchClient(Client.class)
+						.prepareSearch(indexName)
+						.setTypes(indexType)
+						.setSearchType(SearchType.QUERY_AND_FETCH)
+						.setQuery(query.getQueryBuilder())
+						// Query
+						// // Filter
+						.setFrom(0).setSize(60).setExplain(true).execute()
+						.actionGet();
+			}
 			List<E> result = new Vector<E>();
 			for (SearchHit hit : response.getHits())
 			{
@@ -279,7 +325,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 					e.printStackTrace();
 				}
 			}
-			if (!result.isEmpty())
+			if (registerQuery && !result.isEmpty())
 			{
 				registerQueryWithPercolator(query, indexName, indexType);
 			}
@@ -397,11 +443,19 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 
 	@Override
-	public List<E> findByQueryId(String searchId, String path)
+	public List<E> findByQueryId(String searchId, String path,
+			String objectState)
 	{
 		List<String> allDocs = new ArrayList<String>(0);
 		View view;
 		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			searchId = getActiveSearchId(searchId);
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			searchId = getTerminatedSearchId(searchId);
+		}
 		try
 		{
 			view = client.view(searchId);
@@ -435,6 +489,60 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			registerQueryIdWithInternalRegistry(searchId, path);
 		}
 		return results;
+	}
+
+	protected String getTerminatedSearchId(String searchId) {
+		if (DaoConstants.VIEW_ALL_BTSANNOTATIONS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSANNOTATIONS;
+		} else if (DaoConstants.VIEW_ALL_BTSCONFIGURATIONS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSCONFIGURATIONS;
+		} else if (DaoConstants.VIEW_ALL_BTSIMAGESS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSIMAGESS;
+		} else if (DaoConstants.VIEW_ALL_BTSLISTENTRIES.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES;
+		} else if (DaoConstants.VIEW_ALL_BTSPROJECTS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
+		} else if (DaoConstants.VIEW_ALL_BTSTCOBJECTS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSTCOBJECTS;
+		} else if (DaoConstants.VIEW_ALL_BTSTEXTCORPUS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSTEXTCORPUS;
+		} else if (DaoConstants.VIEW_ALL_BTSTEXTS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSTEXTS;
+		} else if (DaoConstants.VIEW_ALL_BTSTHSENTRIES.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES;
+		} else if (DaoConstants.VIEW_ALL_BTSUSERGROUPS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSUSERGROUPS;
+		} else if (DaoConstants.VIEW_ALL_BTSUSERS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_TERMINATED_BTSUSERS;
+		}
+		return searchId;
+	}
+
+	protected String getActiveSearchId(String searchId) {
+		if (DaoConstants.VIEW_ALL_BTSANNOTATIONS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSANNOTATIONS;
+		} else if (DaoConstants.VIEW_ALL_BTSCONFIGURATIONS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
+		} else if (DaoConstants.VIEW_ALL_BTSIMAGESS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSIMAGESS;
+		} else if (DaoConstants.VIEW_ALL_BTSLISTENTRIES.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSLISTENTRIES;
+		} else if (DaoConstants.VIEW_ALL_BTSPROJECTS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
+		} else if (DaoConstants.VIEW_ALL_BTSTCOBJECTS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSTCOBJECTS;
+		} else if (DaoConstants.VIEW_ALL_BTSTEXTCORPUS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTCORPUS;
+		} else if (DaoConstants.VIEW_ALL_BTSTEXTS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTS;
+		} else if (DaoConstants.VIEW_ALL_BTSTHSENTRIES.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSTHSENTRIES;
+		} else if (DaoConstants.VIEW_ALL_BTSUSERGROUPS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSUSERGROUPS;
+		} else if (DaoConstants.VIEW_ALL_BTSUSERS.equals(searchId)) {
+			return DaoConstants.VIEW_ALL_ACTIVE_BTSUSERS;
+		}
+		return searchId;
 	}
 
 	protected String getLocalDBURL()

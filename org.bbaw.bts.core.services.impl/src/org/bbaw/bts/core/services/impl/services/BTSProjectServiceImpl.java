@@ -37,6 +37,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public boolean save(BTSProject entity)
 	{
+		super.addRevisionStatement(entity);
 		for (BTSProjectDBCollection coll : entity.getDbCollections())
 		{
 			try {
@@ -136,20 +137,27 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	}
 
 	@Override
-	public List<BTSProject> list()
+	public List<BTSProject> list(String objectState)
 	{
-		return filter(projectDao.list(ServiceConstants.ADMIN));
+		return filter(projectDao.list(ServiceConstants.ADMIN, objectState));
 	}
 
 	@Override
-	public List<BTSProject> query(BTSQueryRequest query)
+	public List<BTSProject> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSProject> objects = new Vector<BTSProject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			objects.addAll(projectDao.query(query, ServiceConstants.ADMIN, ServiceConstants.ADMIN));
+			objects.addAll(projectDao.query(query, ServiceConstants.ADMIN,
+					ServiceConstants.ADMIN, objectState, registerQuery));
 		}
 		return filter(objects);
+	}
+
+	@Override
+	public List<BTSProject> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
 	}
 
 	@Override
@@ -159,9 +167,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	}
 
 	@Override
-	public List<BTSProject> list(String dbPath, String queryId)
+	public List<BTSProject> list(String dbPath, String queryId,
+			String objectState)
 	{
-		return filter(projectDao.findByQueryId(queryId, dbPath));
+		return filter(projectDao.findByQueryId(queryId, dbPath, objectState));
 	}
 
 }

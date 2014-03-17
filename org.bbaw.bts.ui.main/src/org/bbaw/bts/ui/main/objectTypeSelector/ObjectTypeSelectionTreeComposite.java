@@ -183,39 +183,24 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 					.getInput();
 			inputPath.getChildren().clear();
 			for (ObjectTypePathEntry c : treePath.getChildren()) {
-				if (!c.isSelected()) {
+				processNodeAndChildrenSelection(c,
+						(BTSObjectTypePath) inputPath);
 
-				} else {
-					ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE
-							.createObjectTypePathEntry();
-					child.setValue(c.getValue());
-					inputPath.getChildren().add(child);
-					for (ObjectTypePathEntry cc : c.getChildren()) {
-						if (!cc.isSelected()) {
+			}
+		}
+	}
 
-						} else {
-							ObjectTypePathEntry grandChild = BtsmodelFactory.eINSTANCE
-									.createObjectTypePathEntry();
-							grandChild.setValue(cc.getValue());
-							child.getChildren().add(grandChild);
-							for (ObjectTypePathEntry ccc : cc.getChildren()) {
-								if (!ccc.isSelected()) {
+	private void processNodeAndChildrenSelection(ObjectTypePathEntry selectionNode,
+ BTSObjectTypePath inputNode) {
+		if (!selectionNode.isSelected()) {
 
-								} else {
-									ObjectTypePathEntry grandGrandChild = BtsmodelFactory.eINSTANCE
-											.createObjectTypePathEntry();
-									grandGrandChild.setValue(cc.getValue());
-									grandChild.getChildren().add(
-											grandGrandChild);
-
-								}
-
-							}
-						}
-
-					}
-				}
-
+		} else {
+			ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE
+					.createObjectTypePathEntry();
+			child.setValue(selectionNode.getValue());
+			inputPath.getChildren().add(child);
+			for (ObjectTypePathEntry cc : selectionNode.getChildren()) {
+				processNodeAndChildrenSelection(cc, child);
 			}
 		}
 	}

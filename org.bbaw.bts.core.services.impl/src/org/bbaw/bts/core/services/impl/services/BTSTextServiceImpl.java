@@ -33,6 +33,7 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 	@Override
 	public boolean save(BTSText entity)
 	{
+		super.addRevisionStatement(entity);
 		textDao.add(entity, entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
 		return true;
 	}
@@ -83,21 +84,23 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 	}
 
 	@Override
-	public List<BTSText> list()
+	public List<BTSText> list(String objectState)
 	{
 		List<BTSText> texts = new Vector<BTSText>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				texts.addAll(textDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
+				texts.addAll(textDao.list(p + ServiceConstants.CORPUS_INTERFIX
+						+ c, objectState));
 			}
 		}
 		return filter(texts);
 	}
 
 	@Override
-	public List<BTSText> query(BTSQueryRequest query)
+	public List<BTSText> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSText> objects = new Vector<BTSText>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
@@ -105,16 +108,22 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
 				objects.addAll(textDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
-						+ ServiceConstants.CORPUS_INTERFIX + c));
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
+						registerQuery));
 			}
 		}
 		return filter(objects);
 	}
 
 	@Override
-	public List<BTSText> list(String dbPath, String queryId)
+	public List<BTSText> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
+	}
+
+	@Override
+	public List<BTSText> list(String dbPath, String queryId, String objectState)
 	{
-		return filter(textDao.findByQueryId(queryId, dbPath));
+		return filter(textDao.findByQueryId(queryId, dbPath, objectState));
 	}
 
 	@Override

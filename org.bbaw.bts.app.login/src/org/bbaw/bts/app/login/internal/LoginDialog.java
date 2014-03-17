@@ -66,6 +66,8 @@ public class LoginDialog extends Dialog
 
 	private Label errorLabel;
 
+	private Button rememberMeButton;
+
 	public LoginDialog(Shell parentShell, IEclipseContext context,
 			BTSUserController userController)
 	{
@@ -212,6 +214,11 @@ public class LoginDialog extends Dialog
 			}
 		});
 
+		rememberMeButton = new Button(userPasswortComposite, SWT.CHECK);
+		rememberMeButton
+				.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
+		rememberMeButton.setText("Remember me");
+		rememberMeButton.setLayoutData(new GridData());
 		return composite;
 	}
 
@@ -299,7 +306,7 @@ public class LoginDialog extends Dialog
 				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	private boolean equalsPassword(BTSUser u, String passWord)
@@ -322,6 +329,11 @@ public class LoginDialog extends Dialog
 	protected void buttonPressed(int buttonId)
 	{
 		userController.setAuthenticatedUser(validUser);
+		if (rememberMeButton.getSelection()) {
+			userController.setRememberedUser(validUser);
+		} else {
+			userController.setRememberedUser(null);
+		}
 
 		super.buttonPressed(buttonId);
 	}

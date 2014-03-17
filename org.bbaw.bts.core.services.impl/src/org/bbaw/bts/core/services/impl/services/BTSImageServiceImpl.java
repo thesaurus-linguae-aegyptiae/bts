@@ -30,6 +30,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 	@Override
 	public boolean save(BTSImage entity)
 	{
+		super.addRevisionStatement(entity);
 		imageDao.add(entity, entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
 		return true;
 	}
@@ -80,21 +81,23 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 	}
 
 	@Override
-	public List<BTSImage> list()
+	public List<BTSImage> list(String objectState)
 	{
 		List<BTSImage> images = new Vector<BTSImage>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				images.addAll(imageDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
+				images.addAll(imageDao.list(p
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState));
 			}
 		}
 		return filter(images);
 	}
 
 	@Override
-	public List<BTSImage> query(BTSQueryRequest query)
+	public List<BTSImage> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSImage> objects = new Vector<BTSImage>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
@@ -102,15 +105,20 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
 				objects.addAll(imageDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
-						+ ServiceConstants.CORPUS_INTERFIX + c));
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
+						registerQuery));
 			}
 		}
 		return filter(objects);
 	}
+	@Override
+	public List<BTSImage> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
+	}
 
 	@Override
-	public List<BTSImage> list(String dbPath, String queryId)
+	public List<BTSImage> list(String dbPath, String queryId, String objectState)
 	{
-		return filter(imageDao.findByQueryId(queryId, dbPath));
+		return filter(imageDao.findByQueryId(queryId, dbPath, objectState));
 	}
 }

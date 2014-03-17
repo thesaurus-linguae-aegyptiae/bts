@@ -81,6 +81,8 @@ public class BTSCoreConstants
 	public static final String CURRENT_DB_COLLECTION_CONTEXT = "db_collection_context";
 	public static final String CORE_EXPRESSION_USER_CONTEXT_ROLE = "user_context_role";
 	public static final String MAIN_WORD_LIST = "main_word_list";
+	public static final String RELATION = "Relation";
+	public static final Object RELATIONS = "Relations";
 
 
 }

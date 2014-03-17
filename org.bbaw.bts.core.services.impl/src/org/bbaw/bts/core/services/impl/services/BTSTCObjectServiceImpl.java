@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSTCObjectDao;
 import org.bbaw.bts.core.services.BTSTCObjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
@@ -22,14 +23,14 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 
 	public List<BTSTCObject> getRootTCObjects()
 	{
-		return list();
+		return list(BTSConstants.OBJECT_STATE_ACITVE);
 
 	}
 
 	@Override
 	public boolean save(BTSTCObject o)
 	{
-
+		super.addRevisionStatement(o);
 		bTSTCObjectDao.add(o, o.getProject() + ServiceConstants.CORPUS_INTERFIX + o.getCorpusPrefix());
 		return true;
 
@@ -93,21 +94,22 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 	}
 
 	@Override
-	public List<BTSTCObject> list()
+	public List<BTSTCObject> list(String objectState)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				objects.addAll(bTSTCObjectDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
+				objects.addAll(bTSTCObjectDao.list(p + ServiceConstants.CORPUS_INTERFIX + c, objectState));
 			}
 		}
 		return filter(objects);
 	}
 
 	@Override
-	public List<BTSTCObject> query(BTSQueryRequest query)
+	public List<BTSTCObject> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
@@ -115,15 +117,20 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
 				objects.addAll(bTSTCObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
-						+ ServiceConstants.CORPUS_INTERFIX + c));
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
+						registerQuery));
 			}
 		}
 		return filter(objects);
 	}
+	@Override
+	public List<BTSTCObject> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
+	}
 
 	@Override
-	public List<BTSTCObject> list(String dbPath, String queryId)
+	public List<BTSTCObject> list(String dbPath, String queryId, String objectState)
 	{
-		return filter(bTSTCObjectDao.findByQueryId(queryId, dbPath));
+		return filter(bTSTCObjectDao.findByQueryId(queryId, dbPath, objectState));
 	}
 }

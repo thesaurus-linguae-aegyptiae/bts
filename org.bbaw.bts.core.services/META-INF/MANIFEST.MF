@@ -7,6 +7,7 @@ Bundle-Activator: org.bbaw.bts.core.services.internal.Activator
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.inject,
+ org.bbaw.bts.commons,
  org.eclipse.osgi.framework.console;version="1.0.0",
  org.elasticsearch.action.search,
  org.osgi.framework;version="1.3.0",

@@ -42,4 +42,8 @@ public class BTSPluginIDs
 
 	public static final String PART_ID_USER_MANAGEMENT = "org.bbaw.bts.ui.main.parts.UserManagementPart";
 
+	public static final String PART_ID_THS_NAVIGATOR = "org.bbaw.bts.ui.corpus.part.ThsNavigator";
+
+	public static final String POPMENU_THS_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.ths.popupmenu";
+
 }

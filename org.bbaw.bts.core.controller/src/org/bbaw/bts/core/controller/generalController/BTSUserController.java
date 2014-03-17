@@ -22,4 +22,7 @@ public interface BTSUserController {
 	BTSUserGroup findUserGroup(String id);
 
 	BTSObject findUserOrUserGroup(String id);
+
+	void setRememberedUser(BTSUser validUser);
+
 }

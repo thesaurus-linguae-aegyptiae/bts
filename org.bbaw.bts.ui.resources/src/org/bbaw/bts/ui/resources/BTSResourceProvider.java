@@ -361,4 +361,12 @@ public interface BTSResourceProvider extends IResourceProviderService {
 
 	public final static String IMG_EDIT_LOCKED = "IMG_EDIT_LOCKED"; //$NON-NLS-1$
 
+	public final static String IMG_THSS_ADD = "IMG_THSS_ADD"; //$NON-NLS-1$
+
+	public final static String IMG_THSS_DELETE = "IMG_THSS_DELETE"; //$NON-NLS-1$
+
+	public final static String IMG_THSS_EDIT = "IMG_THSS_EDIT"; //$NON-NLS-1$
+
+	public final static String IMG_BIN = "IMG_BIN"; //$NON-NLS-1$
+
 }

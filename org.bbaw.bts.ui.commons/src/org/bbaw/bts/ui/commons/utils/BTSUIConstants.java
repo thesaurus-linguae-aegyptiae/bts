@@ -64,5 +64,8 @@ public class BTSUIConstants {
 	public static final Color VIEW_BACKGROUND_LABEL_PRESSED = _resources
 			.createColor(new RGB(220, 217, 185));
 	public static final int DELAY = 400;
+	public static final String SELECTION_TYPE = "selectionType";
+	public static final Object SELECTION_TYPE_SECONDARY = "selectionType.secondary";
+	public static final Object SELECTION_TYPE_PRIMARY = "selectionType.primary";
 
 }

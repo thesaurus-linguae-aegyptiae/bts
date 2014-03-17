@@ -684,7 +684,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		Combo combo = new Combo(this, SWT.READ_ONLY);
+		Combo combo = new Combo(this, SWT.NONE); // SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) combo.getLayoutData()).horizontalIndent = 7;

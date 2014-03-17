@@ -58,7 +58,7 @@ public interface ObjectTypePathEntry extends BTSObjectTypePath {
 	 * @return the value of the '<em>Selected</em>' attribute.
 	 * @see #setSelected(boolean)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getObjectTypePathEntry_Selected()
-	 * @model transient="true"
+	 * @model
 	 * @generated
 	 */
 	boolean isSelected();

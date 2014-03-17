@@ -5824,13 +5824,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Predicate Path</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>BTS Passport Editor Config</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+	int BTS_PASSPORT_EDITOR_CONFIG_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The number of operations of the '<em>BTS Passport Editor Config</em>' class.
@@ -9750,6 +9759,17 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSPassportEditorConfig_ReferencedTypesPath();
 
 	/**
+	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath <em>Predicate Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Predicate Path</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath()
+	 * @see #getBTSPassportEditorConfig()
+	 * @generated
+	 */
+	EReference getBTSPassportEditorConfig_PredicatePath();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSUserGroup <em>BTS User Group</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12037,6 +12057,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH = eINSTANCE.getBTSPassportEditorConfig_ReferencedTypesPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Predicate Path</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH = eINSTANCE.getBTSPassportEditorConfig_PredicatePath();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl <em>BTS User Group</em>}' class.

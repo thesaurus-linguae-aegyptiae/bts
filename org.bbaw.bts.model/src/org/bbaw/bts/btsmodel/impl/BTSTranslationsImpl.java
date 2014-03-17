@@ -145,7 +145,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	public EList getLanguages() {
 		EList<String> langs = new BasicEList<String>();

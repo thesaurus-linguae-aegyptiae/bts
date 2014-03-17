@@ -12,6 +12,7 @@ import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService
 {
@@ -33,6 +34,8 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public boolean save(BTSUser entity)
 	{
+		super.addRevisionStatement(entity);
+
 		userDao.add(entity, ServiceConstants.ADMIN);
 		//FIXME update user password if changed
 		// FIXME update user role memberships 
@@ -67,17 +70,24 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public List<BTSUser> list()
+	public List<BTSUser> list(String objectState)
 	{
-		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN);
+		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN, objectState);
 		return filter(users);
 	}
 
 	@Override
-	public List<BTSUser> query(BTSQueryRequest query)
+	public List<BTSUser> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
-		List<BTSUser> objects = userDao.query(query, ServiceConstants.ADMIN, ServiceConstants.ADMIN);
+		List<BTSUser> objects = userDao.query(query, ServiceConstants.ADMIN,
+				ServiceConstants.ADMIN, objectState, registerQuery);
 		return filter(objects);
+	}
+
+	@Override
+	public List<BTSUser> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
 	}
 
 	@Override
@@ -91,9 +101,9 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public List<BTSUser> list(String dbPath, String queryId)
+	public List<BTSUser> list(String dbPath, String queryId, String objectState)
 	{
-		return filter(userDao.findByQueryId(queryId, dbPath));
+		return filter(userDao.findByQueryId(queryId, dbPath, objectState));
 	}
 
 	@Override
@@ -106,5 +116,19 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		prefs.put("username", userName);
 		prefs.put("password", passWord);
 		return true;
+	}
+
+	@Override
+	public void setRememberedUser(BTSUser user) {
+		prefs.put("rememberedUsername", user.getUserName());
+		prefs.put("remembered", prefs.get("password", ""));
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// prefs.put("password", passWord);
+
 	}
 }

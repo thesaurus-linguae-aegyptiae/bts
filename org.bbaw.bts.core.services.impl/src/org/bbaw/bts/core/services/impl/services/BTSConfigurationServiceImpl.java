@@ -15,7 +15,9 @@ import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
+import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
@@ -94,12 +96,13 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 
 	@Override
-	public List<BTSConfiguration> list()
+	public List<BTSConfiguration> list(String objectState)
 	{
 		List<BTSConfiguration> configs = new Vector<BTSConfiguration>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			configs.addAll(configurationDao.list(p + ServiceConstants.ADMIN_SUFFIX));
+			configs.addAll(configurationDao.list(p
+					+ ServiceConstants.ADMIN_SUFFIX, objectState));
 		}
 		return filter(configs);
 	}
@@ -143,13 +146,13 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			return (BTSConfiguration) activeConfig;
 		}
-		List<BTSConfiguration> list = list();
+		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACITVE);
 		if (list == null || list.isEmpty())
 		{
 			BTSConfiguration config = createNew();
 			save(config);
 		}
-		activeConfig = list().get(0);
+		activeConfig = list(BTSConstants.OBJECT_STATE_ACITVE).get(0);
 
 		for (BTSConfiguration c : list) {
 			if (active_configuration_name.equals(c.getName())) {
@@ -182,21 +185,30 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 
 	@Override
-	public List<BTSConfiguration> query(BTSQueryRequest query)
+	public List<BTSConfiguration> query(BTSQueryRequest query,
+			String objectState, boolean registerQuery)
 	{
 		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			objects.addAll(configurationDao.query(query, p + ServiceConstants.ADMIN_SUFFIX, p
-					+ ServiceConstants.ADMIN_SUFFIX));
+							+ ServiceConstants.ADMIN_SUFFIX, objectState,
+							registerQuery));
 		}
 		return filter(objects);
 	}
+	@Override
+	public List<BTSConfiguration> query(BTSQueryRequest query,
+			String objectState) {
+		return query(query, objectState, true);
+	}
 
 	@Override
-	public List<BTSConfiguration> list(String dbPath, String queryId)
+	public List<BTSConfiguration> list(String dbPath, String queryId,
+			String objectState)
 	{
-		return filter(configurationDao.findByQueryId(queryId, dbPath));
+		return filter(configurationDao.findByQueryId(queryId, dbPath,
+				objectState));
 	}
 
 	@Override
@@ -240,17 +252,36 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public String findObjectClass(BTSCorpusObject corpusObject) {
 		if (corpusObject instanceof BTSAnnotation) {
-			return BASIC_OBJECT_TYPES[0];
+			return BTSConstants.BASIC_OBJECT_TYPES[0];
 		} else if (corpusObject instanceof BTSTCObject) {
-			return BASIC_OBJECT_TYPES[1];
+			return BTSConstants.BASIC_OBJECT_TYPES[1];
 		} else if (corpusObject instanceof BTSImage) {
-			return BASIC_OBJECT_TYPES[2];
+			return BTSConstants.BASIC_OBJECT_TYPES[2];
 		} else if (corpusObject instanceof BTSListEntry) {
-			return BASIC_OBJECT_TYPES[3];
+			return BTSConstants.BASIC_OBJECT_TYPES[3];
 		} else if (corpusObject instanceof BTSText) {
-			return BASIC_OBJECT_TYPES[4];
+			return BTSConstants.BASIC_OBJECT_TYPES[4];
 		} else if (corpusObject instanceof BTSTextCorpus) {
-			return BASIC_OBJECT_TYPES[5];
+			return BTSConstants.BASIC_OBJECT_TYPES[5];
+		} else if (corpusObject instanceof BTSThsEntry) {
+			return BTSConstants.BASIC_OBJECT_TYPES[6];
+		}
+		return null;
+	}
+
+	@Override
+	public BTSConfigItem getRelationsConfigItem() {
+		BTSConfiguration configuration = getActiveConfiguration();
+		if (configuration != null && configuration.getChildren() != null) {
+			for (BTSConfig c : configuration.getChildren()) {
+				if (c instanceof BTSConfigItem) {
+					BTSConfigItem ci = (BTSConfigItem) c;
+					if (ci.getValue() != null
+							&& ci.getValue().equals(BTSCoreConstants.RELATIONS)) {
+						return ci;
+					}
+				}
+			}
 		}
 		return null;
 	}

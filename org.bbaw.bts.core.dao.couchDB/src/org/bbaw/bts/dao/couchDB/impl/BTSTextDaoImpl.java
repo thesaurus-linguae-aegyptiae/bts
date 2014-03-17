@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSTextDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -33,10 +34,19 @@ public class BTSTextDaoImpl extends CouchDBDao<BTSText, String> implements BTSTe
 	}
 
 	@Override
-	public List<BTSText> list(String path)
+	public List<BTSText> list(String path, String objectState)
 	{
+		String viewId = DaoConstants.VIEW_ALL_BTSTEXTS;
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTS;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSTEXTS;
+		}
 		List<JsonObject> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path)
-				.view(DaoConstants.VIEW_ALL_BTSTEXTS).includeDocs(true).query(JsonObject.class);
+.view(viewId)
+				.includeDocs(true).query(JsonObject.class);
 		ArrayList<BTSText> results = new ArrayList<BTSText>();
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
@@ -56,7 +66,7 @@ public class BTSTextDaoImpl extends CouchDBDao<BTSText, String> implements BTSTe
 		}
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_BTSTEXTS, path);
+			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
 	}

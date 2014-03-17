@@ -6,8 +6,7 @@ import org.bbaw.bts.btsmodel.BTSCorpusObject;
 
 public interface BTSConfigurationService extends GenericObjectService<BTSConfiguration, String>
 {
-	static String[] BASIC_OBJECT_TYPES = new String[] { "Annotation",
-			"CorpusObject", "Image", "ListEntry", "Text", "TextCorpus" };
+
 	BTSConfigItem createNewConfigItem();
 
 	BTSConfigItem getActivePassportConfigItem();
@@ -20,5 +19,7 @@ public interface BTSConfigurationService extends GenericObjectService<BTSConfigu
 			boolean strict);
 
 	String findObjectClass(BTSCorpusObject corpusObject);
+
+	BTSConfigItem getRelationsConfigItem();
 
 }

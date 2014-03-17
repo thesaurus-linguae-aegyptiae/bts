@@ -14,6 +14,7 @@ import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
+import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSAnnotationService;
@@ -22,6 +23,7 @@ import org.bbaw.bts.core.services.BTSListEntryService;
 import org.bbaw.bts.core.services.BTSTCObjectService;
 import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.BTSTextService;
+import org.bbaw.bts.core.services.BTSThsEntryService;
 import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -52,6 +54,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 
 	@Inject
 	private CorpusObjectDao corpusObjectDao;
+
+	@Inject
+	private BTSThsEntryService thsService;
 
 	@Inject
 	private GeneralPurposeDao generalPurposeDao;
@@ -88,6 +93,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		{
 			return textService.save((BTSText) entity);
 		}
+ else if (entity instanceof BTSThsEntry) {
+			return thsService.save((BTSThsEntry) entity);
+		}
 		return false;
 	}
 
@@ -113,6 +121,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		{
 			textService.update((BTSText) entity);
 		}
+ else if (entity instanceof BTSThsEntry) {
+			thsService.update((BTSThsEntry) entity);
+		}
 
 	}
 
@@ -137,6 +148,9 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		} else if (entity instanceof BTSText)
 		{
 			textService.remove((BTSText) entity);
+		}
+ else if (entity instanceof BTSThsEntry) {
+			thsService.remove((BTSThsEntry) entity);
 		}
 
 	}
@@ -173,14 +187,15 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 	}
 
 	@Override
-	public List<BTSCorpusObject> list()
+	public List<BTSCorpusObject> list(String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				objects.addAll(corpusObjectDao.list(p + ServiceConstants.CORPUS_INTERFIX + c));
+				objects.addAll(corpusObjectDao.list(p
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState));
 			}
 		}
 		return filter(objects);
@@ -199,27 +214,32 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		return filter(objects);
 	}
 
-	public List<BTSCorpusObject> findByQueryId(String searchId, String dbPath)
+	public List<BTSCorpusObject> findByQueryId(String searchId, String dbPath,
+			String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 
 		if (dbPath != null)
 		{
-			objects.addAll(corpusObjectDao.findByQueryId(searchId, dbPath));
+			objects.addAll(corpusObjectDao.findByQueryId(searchId, dbPath,
+					objectState));
 		} else
 		{
 			for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 			{
 				for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 				{
-					objects.addAll(corpusObjectDao.findByQueryId(searchId, p + ServiceConstants.CORPUS_INTERFIX + c));
+					objects.addAll(corpusObjectDao
+							.findByQueryId(searchId, p
+									+ ServiceConstants.CORPUS_INTERFIX + c,
+									objectState));
 				}
 			}
 		}
 		return filter(objects);
 	}
 
-	private List<BTSCorpusObject> find(BTSQueryRequest query)
+	private List<BTSCorpusObject> find(BTSQueryRequest query, String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
@@ -227,25 +247,17 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
 			{
 				objects.addAll(corpusObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
-						+ ServiceConstants.CORPUS_INTERFIX + c));
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
+						false));
 			}
 		}
 		return filter(objects);
 	}
 
 	@Override
-	public List<BTSCorpusObject> query(BTSQueryRequest query)
+	public List<BTSCorpusObject> query(BTSQueryRequest query, String objectState)
 	{
-		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
-		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
-			{
-				objects.addAll(corpusObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
-						+ ServiceConstants.CORPUS_INTERFIX + c));
-			}
-		}
-		return filter(objects);
+		return query(query, objectState, true);
 
 	}
 
@@ -256,10 +268,10 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 	}
 
 	@Override
-	public List<BTSCorpusObject> list(String dbPath, String queryId)
+	public List<BTSCorpusObject> list(String dbPath, String queryId,
+			String objectState)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -277,6 +289,22 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		return result;
 	}
 
+	@Override
+	public List<BTSCorpusObject> query(BTSQueryRequest query,
+			String objectState,
+			boolean registerQuery) {
+		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN)) {
+			for (String c : active_corpora
+					.split(ServiceConstants.SPLIT_PATTERN)) {
+				objects.addAll(corpusObjectDao.query(query, p
+						+ ServiceConstants.CORPUS_INTERFIX + c, p
+						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
+						registerQuery));
+			}
+		}
+		return filter(objects);
+	}
 
 
 }

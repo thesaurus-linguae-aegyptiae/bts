@@ -31,6 +31,7 @@ public class BTSListEntryServiceImpl extends GenericObjectServiceImpl<BTSListEnt
 	@Override
 	public boolean save(BTSListEntry entity)
 	{
+		super.addRevisionStatement(entity);
 		listEntryDao.add(entity, entity.getProject() + ServiceConstants.WLIST);
 		return true;
 	}
@@ -70,32 +71,41 @@ public class BTSListEntryServiceImpl extends GenericObjectServiceImpl<BTSListEnt
 	}
 
 	@Override
-	public List<BTSListEntry> list()
+	public List<BTSListEntry> list(String objectState)
 	{
 		List<BTSListEntry> entries = new Vector<BTSListEntry>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			entries.addAll(listEntryDao.list(p + ServiceConstants.WLIST));
+			entries.addAll(listEntryDao.list(p + ServiceConstants.WLIST,
+					objectState));
 		}
 		return filter(entries);
 	}
-
 	@Override
-	public List<BTSListEntry> query(BTSQueryRequest query)
+	public List<BTSListEntry> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery)
 	{
 		List<BTSListEntry> objects = new Vector<BTSListEntry>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
 
-			objects.addAll(listEntryDao.query(query, p + ServiceConstants.WLIST, p + ServiceConstants.WLIST));
+			objects.addAll(listEntryDao.query(query,
+					p + ServiceConstants.WLIST, p + ServiceConstants.WLIST,
+					objectState, registerQuery));
 
 		}
 		return filter(objects);
 	}
 
 	@Override
-	public List<BTSListEntry> list(String dbPath, String queryId)
+	public List<BTSListEntry> query(BTSQueryRequest query, String objectState) {
+		return query(query, objectState, true);
+	}
+
+	@Override
+	public List<BTSListEntry> list(String dbPath, String queryId,
+			String objectState)
 	{
-		return filter(listEntryDao.findByQueryId(queryId, dbPath));
+		return filter(listEntryDao.findByQueryId(queryId, dbPath, objectState));
 	}
 }

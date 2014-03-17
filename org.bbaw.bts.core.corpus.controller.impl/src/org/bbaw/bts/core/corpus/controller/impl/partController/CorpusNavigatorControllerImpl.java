@@ -19,12 +19,15 @@ import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.BTSAnnotationService;
+import org.bbaw.bts.core.services.BTSListEntryService;
 import org.bbaw.bts.core.services.BTSTCObjectService;
 import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.BTSTextService;
+import org.bbaw.bts.core.services.BTSThsEntryService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.core.services.IDService;
@@ -61,6 +64,12 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 	@Inject
 	private BTSAnnotationService annotationService;
+
+	@Inject
+	private BTSThsEntryService thsService;
+
+	@Inject
+	private BTSListEntryService wlistService;
 
 	/*
 	 * (non-Javadoc)
@@ -158,7 +167,8 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			qra.setQueryId(query.getQueryId());
 			queryResultMap.put(query.getQueryId(), qra);
 		}
-		List<BTSCorpusObject> children = corpusObjectService.query(query);
+		List<BTSCorpusObject> children = corpusObjectService.query(query,
+				BTSConstants.OBJECT_STATE_ACITVE);
 		return children;
 	}
 
@@ -260,7 +270,8 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			qra.setQueryId(DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
-		List<BTSTextCorpus> list = textCorpusService.list();
+		List<BTSTextCorpus> list = textCorpusService
+				.list(BTSConstants.OBJECT_STATE_ACITVE);
 		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
 		for (BTSTextCorpus t : list)
 		{
@@ -282,5 +293,40 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 				.createNewAndRelate(annotatedObject);
 
 		return anno;
+	}
+
+	@Override
+	public String getDisplayName(String id) {
+		BTSCorpusObject o = null;
+		try {
+			o = corpusObjectService.find(id);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (o != null) {
+			return o.getName();
+		} else {
+			try {
+				o = thsService.find(id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (o != null) {
+			return o.getName();
+		} else {
+			try {
+				o = wlistService.find(id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (o != null) {
+			return o.getName();
+		}
+		return id;
 	}
 }

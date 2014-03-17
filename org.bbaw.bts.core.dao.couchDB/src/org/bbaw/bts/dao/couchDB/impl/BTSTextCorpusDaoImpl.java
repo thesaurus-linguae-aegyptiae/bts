@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSTextCorpusDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.eclipse.emf.common.util.URI;
@@ -31,21 +32,29 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 	}
 
 	@Override
-	public List<BTSTextCorpus> list(String path)
+	public List<BTSTextCorpus> list(String path, String objectState)
 	{
+		String viewId = DaoConstants.VIEW_ALL_BTSTEXTCORPUS;
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTCORPUS;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSTEXTCORPUS;
+		}
 		List<String> allDocs = new ArrayList<String>();
 		View view;
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		try
 		{
 
-			view = dbClient.view(DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
+			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(true).query();
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
-			createView(path, path, DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
-			view = dbClient.view(DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
+			createView(path, "corpus", viewId);
+			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(true).query();
 		}
 
@@ -68,7 +77,7 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 		}
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_BTSTEXTCORPUS, path);
+			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
 	}

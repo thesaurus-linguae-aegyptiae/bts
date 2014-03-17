@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.services.BTSUserGroupService;
@@ -79,7 +80,7 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public List<BTSUser> query(BTSQueryRequest query) {
-		return userService.query(query);
+		return userService.query(query, BTSConstants.OBJECT_STATE_ACITVE);
 	}
 
 	@Override
@@ -99,6 +100,12 @@ public class BTSUserControllerImpl implements BTSUserController {
 			o = userGroupService.find(id);
 		}
 		return o;
+	}
+
+	@Override
+	public void setRememberedUser(BTSUser user) {
+		userService.setRememberedUser(user);
+
 	}
 
 }

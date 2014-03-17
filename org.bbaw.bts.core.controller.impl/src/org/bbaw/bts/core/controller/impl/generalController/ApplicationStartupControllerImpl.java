@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.app.login.Login;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -22,6 +23,7 @@ import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.db.DBManager;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.preferences.DefaultScope;
@@ -40,6 +42,7 @@ import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 import org.osgi.service.prefs.Preferences;
@@ -63,6 +66,16 @@ public class ApplicationStartupControllerImpl implements
 	@Optional
 	@Preference(value = "first_startup", nodePath = "org.bbaw.bts.app")
 	private String first_startup;
+
+	@Inject
+	@Optional
+	@Preference(value = "rememberedUsername", nodePath = "org.bbaw.bts.app")
+	private String rememberedUsername;
+
+	@Inject
+	@Optional
+	@Preference(value = "remembered", nodePath = "org.bbaw.bts.app")
+	private String remembered;
 
 	@Inject
 	@Preference(value = "remote_db_urls", nodePath = "org.bbaw.bts.app")
@@ -250,8 +263,30 @@ public class ApplicationStartupControllerImpl implements
 		// dev
 		// userService.setAuthentication("admin", "admin");
 
-		Login login = ContextInjectionFactory.make(Login.class, context);
-		login.login(context, userController);
+		if (rememberedUsername != null
+				&& !"".equals(rememberedUsername)
+				&& remembered != null
+				&& userService
+						.setAuthentication(rememberedUsername, remembered)) {
+			// remebemered
+			BTSQueryRequest query = new BTSQueryRequest();
+			query.setQueryBuilder(QueryBuilders.boolQuery().must(
+					QueryBuilders.termQuery("userName", rememberedUsername)));
+			List<BTSUser> users = userController.query(query);
+			for (BTSUser u : users) {
+				if (rememberedUsername.equals(u.getUserName())) { // FIXME
+																	// password
+																	// checking
+					// && equalsPassword(u,
+					// passWord)) {
+					userController.setAuthenticatedUser(u);
+					break;
+				}
+			}
+		} else {
+			Login login = ContextInjectionFactory.make(Login.class, context);
+			login.login(context, userController);
+		}
 
 		try {
 			splashController.setMessage("Prepare Database...");
@@ -263,7 +298,7 @@ public class ApplicationStartupControllerImpl implements
 		}
 		System.out.println("start up yyy");
 		try {
-			projects = projectService.list();
+			projects = projectService.list(BTSConstants.OBJECT_STATE_ACITVE);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -310,7 +345,8 @@ public class ApplicationStartupControllerImpl implements
 
 		if (createInitialProject()) {
 			try {
-				projects = projectService.list();
+				projects = projectService
+						.list(BTSConstants.OBJECT_STATE_ACITVE);
 			} catch (Exception e) {
 
 			}

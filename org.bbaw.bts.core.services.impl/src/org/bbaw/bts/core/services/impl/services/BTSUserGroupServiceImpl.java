@@ -30,6 +30,7 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	@Override
 	public boolean save(BTSUserGroup entity)
 	{
+		super.addRevisionStatement(entity);
 		userGroupDao.add(entity, ServiceConstants.ADMIN);
 		return true;
 	}
@@ -61,22 +62,31 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	}
 
 	@Override
-	public List<BTSUserGroup> list()
+	public List<BTSUserGroup> list(String objectState)
 	{
-		List<BTSUserGroup> userGroups = userGroupDao.list(ServiceConstants.ADMIN);
+		List<BTSUserGroup> userGroups = userGroupDao.list(
+				ServiceConstants.ADMIN, objectState);
 		return filter(userGroups);
 	}
 
 	@Override
-	public List<BTSUserGroup> query(BTSQueryRequest query)
+	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState)
 	{
-		List<BTSUserGroup> objects = userGroupDao.query(query, ServiceConstants.ADMIN, ServiceConstants.ADMIN);
-		return filter(objects);
+		return query(query, objectState, true);
 	}
 
 	@Override
-	public List<BTSUserGroup> list(String dbPath, String queryId)
+	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery) {
+		List<BTSUserGroup> objects = userGroupDao.query(query,
+				ServiceConstants.ADMIN, ServiceConstants.ADMIN, objectState,
+				registerQuery);
+		return filter(objects);
+	}
+	@Override
+	public List<BTSUserGroup> list(String dbPath, String queryId,
+			String objectState)
 	{
-		return filter(userGroupDao.findByQueryId(queryId, dbPath));
+		return filter(userGroupDao.findByQueryId(queryId, dbPath, objectState));
 	}
 }

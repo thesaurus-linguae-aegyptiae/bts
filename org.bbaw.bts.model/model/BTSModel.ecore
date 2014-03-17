@@ -244,6 +244,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="regex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="referencedTypesPath" eType="#//BTSObjectTypePathRoot"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="predicatePath" eType="#//BTSObjectTypePathRoot"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSUserGroup" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -359,8 +361,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ObjectTypePathEntry" eSuperTypes="#//BTSObjectTypePath">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSObjectTypePathRoot" eSuperTypes="#//BTSObjectTypePath"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSObjectTypePath" abstract="true">

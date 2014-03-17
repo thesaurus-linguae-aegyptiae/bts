@@ -22,6 +22,20 @@ public class BTSConstants
 	public static final String ENCODING = "UTF-8";
 	public static final String TEXT_VERS_BREAK_MARKER = "VersbreakMarker";
 	public static final String TEXT_VERS_FRONTIER_MARKER = "VersFrontierMarker";
+	public static final String OBJECT_STATE_ACITVE = "active";
+	public static final String OBJECT_STATE_TERMINATED = "terminated";
+	public static final String ANNOTATION = "Annotation";
+	public static final String CORPUS_OBJECT = "CorpusObject";
+	public static final String IMAGE = "Image";
+	public static final String WLIST_ENTRY = "ListEntry";
+	public static final String TEXT = "Text";
+	public static final String TEXT_CORPUS = "TextCorpus";
+	public static final String THS_ENTRY = "Thesaurus Entry";
+
+	public static final String[] BASIC_OBJECT_TYPES = new String[] {
+			BTSConstants.ANNOTATION, BTSConstants.CORPUS_OBJECT,
+			BTSConstants.IMAGE, BTSConstants.WLIST_ENTRY, BTSConstants.TEXT,
+			BTSConstants.TEXT_CORPUS, BTSConstants.THS_ENTRY };
 
 	private BTSConstants()
 	{

@@ -22,14 +22,19 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 
 	E find(K key);
 
-	List<E> list();
+	List<E> list(String objectState);
 
-	List<E> list(String dbPath, String queryId);
+	List<E> list(String dbPath, String queryId, String objectState);
 
-	<T> List<T> query(BTSQueryRequest query);
+	<T> List<T> query(BTSQueryRequest query, String objectState);
+
+	<T> List<T> query(BTSQueryRequest query, String objectState,
+			boolean registerQuery);
 
 	List<E> filter(List<E> objects);
 
 	SearchRequestBuilder getSearchRequestBuilder();
+
+	void addRevisionStatement(E entity);
 
 }

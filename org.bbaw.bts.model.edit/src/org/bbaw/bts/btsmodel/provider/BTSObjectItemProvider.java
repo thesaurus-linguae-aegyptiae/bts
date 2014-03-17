@@ -197,11 +197,12 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to update any cached
-	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
-	 * <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to
+	 * update any cached children and by creating a viewer notification, which
+	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * @generated
+	 * 
+	 * @generatedNOT
 	 */
 	@Override
 	public void notifyChanged(Notification notification)
@@ -216,6 +217,10 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 			case BtsmodelPackage.BTS_OBJECT__CODE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
+		case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
+			fireNotifyChanged(new ViewerNotification(notification,
+					notification.getNotifier(), true, true));
+			return;
 		}
 		super.notifyChanged(notification);
 	}

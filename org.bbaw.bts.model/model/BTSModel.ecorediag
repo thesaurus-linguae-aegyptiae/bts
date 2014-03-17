@@ -2587,4 +2587,18 @@
     <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGcOVI5IEeOpputRklhNyw" id="(0.07017543859649122,0.19753086419753085)"/>
     <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_JGcOVY5IEeOpputRklhNyw" id="(0.8157894736842105,0.625)"/>
   </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_L_aq4KoFEeOhUZK5_z3-Lw" type="3002" source="_bEAZUPU4EeK4yakNX3yigw" target="_Vw95IIzoEeOpputRklhNyw">
+    <children xmi:type="notation:Node" xmi:id="_L_j00KoFEeOhUZK5_z3-Lw" type="4011">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_L_j00aoFEeOhUZK5_z3-Lw" x="-10" y="-10"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_L_tl0KoFEeOhUZK5_z3-Lw" type="4012">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_L_tl0aoFEeOhUZK5_z3-Lw" x="10" y="10"/>
+    </children>
+    <styles xmi:type="notation:ConnectorStyle" xmi:id="_L_aq4aoFEeOhUZK5_z3-Lw" lineColor="4210752"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_L_aq4qoFEeOhUZK5_z3-Lw" fontColor="4210752" fontHeight="10"/>
+    <element xmi:type="ecore:EReference" href="BTSModel.ecore#//BTSPassportEditorConfig/predicatePath"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_L_aq46oFEeOhUZK5_z3-Lw" points="[-96, -1, 327, 1]$[-421, -9, 2, -7]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_L_tl0qoFEeOhUZK5_z3-Lw" id="(0.4725274725274725,0.9265536723163842)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_L_tl06oFEeOhUZK5_z3-Lw" id="(0.9326923076923077,0.23809523809523808)"/>
+  </edges>
 </notation:Diagram>

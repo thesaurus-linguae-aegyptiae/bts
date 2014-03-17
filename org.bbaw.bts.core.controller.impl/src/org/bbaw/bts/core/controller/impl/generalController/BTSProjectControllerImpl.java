@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSProjectController;
 import org.bbaw.bts.core.services.BTSProjectService;
 
@@ -36,7 +37,7 @@ public class BTSProjectControllerImpl implements BTSProjectController
 	@Override
 	public List<BTSProject> listProjects()
 	{
-		return projectService.list();
+		return projectService.list(BTSConstants.OBJECT_STATE_ACITVE);
 	}
 
 	@Override

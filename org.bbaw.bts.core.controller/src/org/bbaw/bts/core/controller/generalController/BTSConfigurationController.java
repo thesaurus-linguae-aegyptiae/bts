@@ -59,5 +59,9 @@ BTSConfig parentConfig,
 
 	BTSConfiguration getActiveConfiguration();
 
+	BTSConfigItem getRelationsConfigItem();
+
+	BTSConfigItem getRelationPathConfigItemProcessedClones(
+			BTSConfigItem itemConfig2, BTSCorpusObject corpusObject);
 
 }

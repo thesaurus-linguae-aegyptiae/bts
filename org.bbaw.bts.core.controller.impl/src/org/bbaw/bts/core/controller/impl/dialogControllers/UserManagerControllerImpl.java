@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
@@ -36,7 +37,7 @@ public class UserManagerControllerImpl implements UserManagerController
 	@Override
 	public List<BTSUserGroup> listUserGroups()
 	{
-		return usergroupService.list();
+		return usergroupService.list(BTSConstants.OBJECT_STATE_ACITVE);
 	}
 
 	@Override
@@ -56,7 +57,8 @@ public class UserManagerControllerImpl implements UserManagerController
 			qra.setQueryId(query.getQueryId());
 			queryResultMap.put(query.getQueryId(), qra);
 		}
-		List<BTSUser> children = userService.query(query);
+		List<BTSUser> children = userService.query(query,
+				BTSConstants.OBJECT_STATE_ACITVE);
 		return children;
 	}
 
@@ -88,7 +90,7 @@ public class UserManagerControllerImpl implements UserManagerController
 	@Override
 	public List<BTSUser> listUsers()
 	{
-		return userService.list();
+		return userService.list(BTSConstants.OBJECT_STATE_ACITVE);
 	}
 
 	@Override

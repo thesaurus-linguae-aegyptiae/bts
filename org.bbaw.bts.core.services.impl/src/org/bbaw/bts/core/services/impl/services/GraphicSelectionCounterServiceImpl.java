@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.GraphicSelectionCounterDao;
 import org.bbaw.bts.core.services.GraphicSelectionCounterService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
@@ -66,23 +67,31 @@ public class GraphicSelectionCounterServiceImpl extends
 	}
 
 	@Override
-	public List<GraphicSelectionCounter> list() {
+	public List<GraphicSelectionCounter> list(String objectState) {
 		List<GraphicSelectionCounter> counters = new Vector<GraphicSelectionCounter>();
-		counters.addAll(counterDao.list(ServiceConstants.LOCAL));
+		counters.addAll(counterDao.list(ServiceConstants.LOCAL, objectState));
 		return counters;
 	}
 
 	@Override
-	public List<GraphicSelectionCounter> list(String dbPath, String queryId) {
+	public List<GraphicSelectionCounter> list(String dbPath, String queryId,
+			String objectState) {
 		return null;
 	}
 
 
 	@Override
-	public List<GraphicSelectionCounter> query(BTSQueryRequest query) {
+	public List<GraphicSelectionCounter> query(BTSQueryRequest query,
+			String objectState) {
+		return query(query, objectState, false);
+	}
+
+	@Override
+	public List<GraphicSelectionCounter> query(BTSQueryRequest query,
+			String objectState, boolean registerQuery) {
 		List<GraphicSelectionCounter> counters = new Vector<GraphicSelectionCounter>();
 		counters.addAll(counterDao.query(query, ServiceConstants.LOCAL,
-				ServiceConstants.LOCAL));
+				ServiceConstants.LOCAL, objectState, registerQuery));
 		return counters;
 	}
 
@@ -93,7 +102,8 @@ public class GraphicSelectionCounterServiceImpl extends
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.prefixQuery("_id", code));
 		counters.addAll(counterDao.query(query, ServiceConstants.LOCAL,
-				ServiceConstants.LOCAL));
+ ServiceConstants.LOCAL,
+						BTSConstants.OBJECT_STATE_ACITVE, false));
 		return counters;
 	}
 

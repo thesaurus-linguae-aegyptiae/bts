@@ -21,11 +21,12 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 
 	E reload(K key, String path);
 
-	List<E> list(String path);
+	List<E> list(String path, String objectState);
 
-	List<E> findByQueryId(String searchId, String path);
+	List<E> findByQueryId(String searchId, String path, String objectState);
 
-	List<E> query(BTSQueryRequest query, String indexName, String indexType);
+	List<E> query(BTSQueryRequest query, String indexName, String indexType,
+			String objectState, boolean registerQuery);
 
 	boolean objectIsLoaded(String dbPath, String objectId);
 

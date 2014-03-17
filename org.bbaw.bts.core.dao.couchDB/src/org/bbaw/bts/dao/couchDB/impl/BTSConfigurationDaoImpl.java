@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSConfiguration;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -33,21 +34,29 @@ public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String
 	}
 
 	@Override
-	public List<BTSConfiguration> list(String path)
+	public List<BTSConfiguration> list(String path, String objectState)
 	{
+		String viewId = DaoConstants.VIEW_ALL_BTSCONFIGURATIONS;
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSCONFIGURATIONS;
+		}
 		List<String> allDocs = new ArrayList<String>(0);
 		View view;
 		try
 		{
-			view = connectionProvider.getDBClient(CouchDbClient.class, path).view(
-					DaoConstants.VIEW_ALL_BTSCONFIGURATIONS);
+			view = connectionProvider.getDBClient(CouchDbClient.class, path)
+					.view(viewId);
 			allDocs = view.includeDocs(true).query();
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
-			createView(path, DaoConstants.PROJECT_ADMIN, DaoConstants.VIEW_ALL_BTSCONFIGURATIONS);
+			createView(path, DaoConstants.PROJECT_ADMIN, viewId);
 			view = connectionProvider.getDBClient(CouchDbClient.class, path).view(
-					DaoConstants.VIEW_ALL_BTSCONFIGURATIONS);
+viewId);
 			allDocs = view.includeDocs(true).query();
 		}
 
@@ -70,7 +79,7 @@ public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String
 		}
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_BTSCONFIGURATIONS, path);
+			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
 	}

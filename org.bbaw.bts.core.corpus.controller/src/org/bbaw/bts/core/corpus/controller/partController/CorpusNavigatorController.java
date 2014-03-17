@@ -38,4 +38,6 @@ public interface CorpusNavigatorController
 	boolean handleModelUpdate(BTSModelUpdateNotification notification,
 			Map<String, BTSQueryResultAbstract> queryResultMap, Map<String, List<TreeNodeWrapper>> viewHolderMap);
 
+	String getDisplayName(String id);
+
 }

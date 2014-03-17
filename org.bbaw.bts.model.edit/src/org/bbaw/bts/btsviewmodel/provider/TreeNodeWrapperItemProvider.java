@@ -9,8 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -389,6 +391,18 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 						{
 							fireNotifyChanged(new ViewerNotification(notification, treeNodeWrapper, false, true));
 						}
+								switch (notification
+										.getFeatureID(AdministrativDataObject.class)) {
+								case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
+									TreeNodeWrapper parent = treeNodeWrapper
+											.getParent();
+									if (parent != null) {
+										fireNotifyChanged(new ViewerNotification(
+												notification, parent, true,
+												true));
+										return;
+									}
+								}
 					}
 				});
 

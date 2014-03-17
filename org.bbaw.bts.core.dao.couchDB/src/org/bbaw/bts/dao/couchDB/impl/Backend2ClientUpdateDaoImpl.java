@@ -211,6 +211,8 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		String objectAsString = EmfModelHelper.modelToString(object);
 		objectAsString = "{\r\n" + "\"doc\":" + objectAsString + "\r\n}";
 
+		System.out.println("dbCollection " + dbCollection
+				+ " doc string percolate: " + objectAsString);
 		PercolateResponse response = null;
 		try
 		{
