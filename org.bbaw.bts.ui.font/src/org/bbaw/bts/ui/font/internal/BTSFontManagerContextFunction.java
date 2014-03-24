@@ -17,8 +17,6 @@ public class BTSFontManagerContextFunction extends ContextFunction
 			context = application.getContext();
 		}
 		BTSFontManager fontManager;
-		context = application.getContext();
-
 		fontManager = ContextInjectionFactory.make(BTSFontManagerImpl.class, context);
 		context.set(BTSFontManager.class, fontManager);
 

@@ -543,6 +543,8 @@ public class UserManagementPart
 		roles_sashForm.setWeights(new int[] { 1, 1 });
 		loadUserTree();
 		loadRolesTree();
+		parent.layout();
+		parent.pack();
 	}
 
 	private void init()

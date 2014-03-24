@@ -12,8 +12,8 @@ public class WizardTest
 	{
 		// Wizard w = new InstallationWizard();
 		// WizardDialog dialog = new WizardDialog(new Shell(), w);
-		Composite t = new ObjectTypeSelectionTreeComposite(new Shell(),
-				SWT.BORDER);
+//		Composite t = new ObjectTypeSelectionTreeComposite(new Shell(),
+//				SWT.BORDER);
 		// if (dialog.open() == dialog.OK)
 		// {
 		// System.out.println("new project created.");

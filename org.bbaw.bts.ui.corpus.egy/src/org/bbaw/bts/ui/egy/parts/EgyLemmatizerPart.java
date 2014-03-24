@@ -177,6 +177,8 @@ public class EgyLemmatizerPart {
 		List list_2 = listViewer_2.getList();
 		list_2.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		constructed = true;
+		parent.layout();
+		parent.pack();
 	}
 	
 	

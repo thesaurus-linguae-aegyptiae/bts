@@ -108,4 +108,9 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	}
 
+	@Override
+	public List<BTSUser> listAll() {
+		return userService.list(BTSConstants.OBJECT_STATE_ACITVE);
+	}
+
 }

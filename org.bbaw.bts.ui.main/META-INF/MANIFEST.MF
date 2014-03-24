@@ -3,9 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: UIMain
 Bundle-SymbolicName: org.bbaw.bts.ui.main;singleton:=true
 Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
 Bundle-Vendor: BBAW
-Require-Bundle: javax.inject,
- org.eclipse.e4.ui.di,
+Export-Package: org.bbaw.bts.ui.main.handlers,
+ org.bbaw.bts.ui.main.wizards.newProject
+Require-Bundle: org.eclipse.e4.ui.di,
  org.eclipse.swt,
  org.eclipse.jface,
  org.eclipse.core.databinding,
@@ -35,8 +37,6 @@ Require-Bundle: javax.inject,
  org.eclipse.equinox.preferences,
  org.eclipse.emf.validation,
  org.eclipse.emf.ecore,
- org.eclipse.emf.query.ocl;bundle-version="2.0.0",
- org.eclipse.emf.validation.ocl;bundle-version="1.4.0",
  org.eclipse.ocl;bundle-version="3.3.0",
  org.eclipse.ocl.common;bundle-version="1.1.0",
  org.eclipse.ocl.common.ui;bundle-version="1.1.0",
@@ -48,13 +48,11 @@ Require-Bundle: javax.inject,
  org.bbaw.bts.core.commons,
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.jdt.annotation;bundle-version="1.1.0",
- org.eclipse.xtext.util;bundle-version="2.4.3"
+ org.eclipse.xtext.util;bundle-version="2.4.3",
+ javax.annotation
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: .
-Export-Package: org.bbaw.bts.ui.main.handlers,
- org.bbaw.bts.ui.main.wizards.newProject
 Import-Package: javax.annotation;version="1.0.0",
+ javax.inject,
  org.bbaw.bts.corpus.text.egy.ui.internal,
  org.eclipse.e4.core.services.contributions,
  org.eclipse.e4.core.services.log,
@@ -66,8 +64,10 @@ Import-Package: javax.annotation;version="1.0.0",
  org.eclipse.ocl.examples.xtext.essentialocl,
  org.eclipse.ocl.examples.xtext.essentialocl.ui.internal,
  org.eclipse.ocl.examples.xtext.essentialocl.ui.model,
+ org.eclipse.ui.texteditor.templates,
  org.eclipse.xtext.builder.preferences,
  org.eclipse.xtext.resource,
  org.eclipse.xtext.ui.editor.embedded,
  org.eclipse.xtext.ui.editor.model,
  org.eclipse.xtext.ui.editor.templates
+Bundle-ActivationPolicy: lazy

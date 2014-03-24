@@ -89,7 +89,8 @@ public class UserManagementDialog extends TitleAreaDialog
 		child.set(Composite.class, area);
 		part = ContextInjectionFactory.make(UserManagementPart.class, child);
 		//		area.layout();
-		//		parent.layout();
+				parent.layout();
+		area.layout();
 		return area;
 	}
 

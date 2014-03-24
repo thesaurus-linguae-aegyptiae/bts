@@ -20,4 +20,6 @@ public interface DBManager
 
 	boolean checkConnection(String url, String username, String password) throws MalformedURLException;
 
+	boolean prepareDBCollectionIndexing(String string);
+
 }

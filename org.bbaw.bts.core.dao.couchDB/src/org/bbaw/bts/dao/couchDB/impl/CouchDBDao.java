@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
@@ -54,6 +54,8 @@ import com.google.gson.JsonObject;
 @Creatable
 public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializable> implements GenericDao<E, K>
 {
+
+	private static final String PERCOLATOR = ".percolator";
 
 	protected Class<? extends BTSDBBaseObject> daoType;
 
@@ -277,6 +279,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		if (query.getSearchRequestBuilder() == null)
 		{
 			SearchResponse response;
+//			connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet(); 
 			if (BTSConstants.OBJECT_STATE_ACITVE.equals(objectState)) {
 				response = connectionProvider
 						.getSearchClient(Client.class)
@@ -285,7 +288,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 						.setSearchType(SearchType.QUERY_AND_FETCH)
 						.setQuery(query.getQueryBuilder())
 						// Query
-						.setFilter(
+						.setPostFilter(
 								FilterBuilders.termFilter("state",
 										BTSConstants.OBJECT_STATE_ACITVE))
 						// // Filter
@@ -299,7 +302,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 					.setSearchType(SearchType.QUERY_AND_FETCH)
 					.setQuery(query.getQueryBuilder())
 					// Query
-						.setFilter(
+						.setPostFilter(
 								FilterBuilders.termFilter("state",
 										BTSConstants.OBJECT_STATE_TERMINATED))
 					// // Filter
@@ -362,11 +365,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		{
 			connectionProvider
 					.getSearchClient(Client.class)
-					.prepareIndex("_percolator", indexName, query.getQueryId())
+					.prepareIndex(PERCOLATOR, indexName, query.getQueryId())
 					.setSource(
 							XContentFactory.jsonBuilder().startObject().field("query", query.getQueryBuilder())
 									.endObject()).setRefresh(true).execute().actionGet();
-		} catch (ElasticSearchException e)
+		} catch (ElasticsearchException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

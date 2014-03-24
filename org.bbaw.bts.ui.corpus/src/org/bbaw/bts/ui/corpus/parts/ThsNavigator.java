@@ -260,6 +260,7 @@ public class ThsNavigator implements ScatteredCachingPart {
 							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(
 									1);
 							parents.add(tn);
+							tn.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
 						}
 						selectionService.setSelection(o);
@@ -527,12 +528,15 @@ public class ThsNavigator implements ScatteredCachingPart {
 	private void refreshTreeViewer(final BTSCorpusObject btsCorpusObject) {
 		sync.asyncExec(new Runnable() {
 			public void run() {
-				mainTreeViewer
-						.removeSelectionChangedListener(selectionListener);
-				for (TreePath path : mainTreeViewer.getExpandedTreePaths())
-					System.out.println(path.getLastSegment());
-				mainTreeViewer.refresh();
-				mainTreeViewer.addSelectionChangedListener(selectionListener);
+				if (!mainTreeViewer.getTree().isDisposed())
+				{
+					mainTreeViewer
+							.removeSelectionChangedListener(selectionListener);
+					for (TreePath path : mainTreeViewer.getExpandedTreePaths())
+						System.out.println(path.getLastSegment());
+					mainTreeViewer.refresh();
+					mainTreeViewer.addSelectionChangedListener(selectionListener);
+				}
 			}
 		});
 

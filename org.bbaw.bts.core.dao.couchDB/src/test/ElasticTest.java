@@ -85,7 +85,7 @@ public class ElasticTest
 		StatisticalFacetBuilder facet = FacetBuilders.statisticalFacet("stat1").field("contbReceiptAmt");
 		SearchRequestBuilder request = client.prepareSearch("contributions")
 				.addSort(SortBuilders.fieldSort("contbReceiptAmt").order(SortOrder.DESC))
-				.setSearchType(SearchType.QUERY_THEN_FETCH).setQuery(matchQuery).setFilter(contribRangeFilter)
+				.setSearchType(SearchType.QUERY_THEN_FETCH).setQuery(matchQuery).setPostFilter(contribRangeFilter)
 				.addFacet(facet).setFrom(0).setSize(100)
 				.addFields("contbrNm", "candNm", "contbrEmployer", "contbReceiptAmt");
 		System.out.println("SEARCH QUERY: " + request.toString());

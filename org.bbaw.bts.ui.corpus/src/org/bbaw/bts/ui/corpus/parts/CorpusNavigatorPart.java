@@ -282,6 +282,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 						{
 							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
 							parents.add(tn);
+							tn.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
 						}
 						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY

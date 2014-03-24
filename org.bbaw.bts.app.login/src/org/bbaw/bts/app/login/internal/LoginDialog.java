@@ -294,10 +294,10 @@ public class LoginDialog extends Dialog
 		}
 		QueryBuilder dd;
 		//FIXME wieder einkommentieren
-		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.boolQuery().must(
-				QueryBuilders.termQuery("userName", userName)));
-		List<BTSUser> users = userController.query(query);
+//		BTSQueryRequest query = new BTSQueryRequest();
+//		query.setQueryBuilder(QueryBuilders.boolQuery().must(
+//				QueryBuilders.termQuery("userName", userName)));
+		List<BTSUser> users = userController.listAll();
 		for (BTSUser u : users) {
 			if (userName.equals(u.getUserName())) { // FIXME password checking
 													// && equalsPassword(u,

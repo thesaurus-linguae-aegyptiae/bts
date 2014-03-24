@@ -1122,6 +1122,8 @@ embeddedEditor.getViewer(),
 	@Focus
 	public void setFocus()
 	{
+		if (tabFolder != null)
+		{
 		switch (tabFolder.getSelectionIndex()) {
 		case 0: {
 			embeddedEditor.getViewer().getControl().setFocus();
@@ -1137,6 +1139,7 @@ embeddedEditor.getViewer(),
 		}
 		evaluationController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+		}
 	}
 
 	@Persist

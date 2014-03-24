@@ -18,9 +18,10 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.e4.core.contexts.IEclipseContext;
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.percolate.PercolateRequestBuilder;
 import org.elasticsearch.action.percolate.PercolateResponse;
+import org.elasticsearch.action.percolate.PercolateResponse.Match;
 import org.elasticsearch.client.Client;
 import org.lightcouch.Changes;
 import org.lightcouch.ChangesResult;
@@ -216,10 +217,10 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		PercolateResponse response = null;
 		try
 		{
-			PercolateRequestBuilder rqb = client.preparePercolate(dbCollection, dbCollection);
+			PercolateRequestBuilder rqb = client.preparePercolate().setIndices(dbCollection).setDocumentType(dbCollection);
 			rqb.setSource(objectAsString);
 			response = rqb.execute().actionGet();
-		} catch (ElasticSearchException e)
+		} catch (ElasticsearchException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -227,7 +228,10 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		List<String> queryIds = new Vector<String>(1);
 		if (response != null)
 		{
-			queryIds.addAll(response.getMatches());
+			for (Match m : response.getMatches())
+			{
+			queryIds.add(m.getId().toString());
+			}
 		}
 		Map<String, List<String>> map = (Map<String, List<String>>) context.get(DaoConstants.QUERY_ID_REGISTRY);
 		List<String> ids = null;

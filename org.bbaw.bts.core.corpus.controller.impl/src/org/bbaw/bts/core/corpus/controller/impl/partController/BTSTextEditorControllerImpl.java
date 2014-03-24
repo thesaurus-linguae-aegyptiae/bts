@@ -57,7 +57,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 {
 
 	private static final String MDC_DELIMETERS = ":-<>*";
-	private static final String SENTENCE_SIGN = "ง";
+	private static final String SENTENCE_SIGN = "ยง";
 	private static final String AMBIVALENCE_START_SIGN = "%";
 	private static final String AMBIVALENCE_END_SIGN = "%";
 	private static final String LEMMA_CASE_TERMIAL = "case";

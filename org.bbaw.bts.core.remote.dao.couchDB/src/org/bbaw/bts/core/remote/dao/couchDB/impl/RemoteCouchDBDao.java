@@ -36,7 +36,7 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
@@ -272,7 +272,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 					.setSource(
 							XContentFactory.jsonBuilder().startObject().field("query", query.getQueryBuilder())
 									.endObject()).setRefresh(true).execute().actionGet();
-		} catch (ElasticSearchException e)
+		} catch (ElasticsearchException e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();

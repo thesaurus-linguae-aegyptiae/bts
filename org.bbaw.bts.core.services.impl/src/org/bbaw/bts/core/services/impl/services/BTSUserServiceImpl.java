@@ -19,6 +19,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Inject
 	@Preference(nodePath = "org.bbaw.bts.app")
 	private IEclipsePreferences prefs;
+	
 	@Inject
 	private BTSUserDao userDao;
 
@@ -120,8 +121,16 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 
 	@Override
 	public void setRememberedUser(BTSUser user) {
-		prefs.put("rememberedUsername", user.getUserName());
-		prefs.put("remembered", prefs.get("password", ""));
+		if(user == null)
+		{
+			prefs.remove("rememberedUsername");
+			prefs.remove("remembered");
+		}
+		else
+		{
+			prefs.put("rememberedUsername", user.getUserName());
+			prefs.put("remembered", prefs.get("password", ""));
+		}
 		try {
 			prefs.flush();
 		} catch (BackingStoreException e) {

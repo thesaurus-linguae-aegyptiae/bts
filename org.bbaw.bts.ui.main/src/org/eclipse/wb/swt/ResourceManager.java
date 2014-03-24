@@ -422,11 +422,11 @@ public class ResourceManager extends SWTResourceManager
 	{
 		// try runtime plugins
 		{
-			Bundle bundle = Platform.getBundle(symbolicName);
-			if (bundle != null)
-			{
-				return bundle.getEntry(path);
-			}
+//			Bundle bundle = Platform.getBundle(symbolicName);
+//			if (bundle != null)
+//			{
+//				return bundle.getEntry(path);
+//			}
 		}
 		// try design time provider
 		if (m_designTimePluginResourceProvider != null)

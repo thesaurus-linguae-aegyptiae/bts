@@ -7,6 +7,8 @@ import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart;
+import org.bbaw.bts.ui.corpus.parts.ThsNavigator;
+import org.bbaw.bts.ui.corpus.parts.WordListNavigator;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -108,6 +110,8 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 		CorpusNavigatorPart editor = ContextInjectionFactory.make(
 				CorpusNavigatorPart.class, child);
 
+		
+		//wlist
 		CTabItem tbtmWList = new CTabItem(tabFolder, SWT.NONE);
 		tbtmWList.setText("Word List");
 		tbtmWList.setImage(resourceProvider.getImage(Display.getDefault(),
@@ -117,6 +121,28 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 		tbtmWList.setControl(composite_1);
 		composite_1.setLayout(new GridLayout(1, false));
 
+		IEclipseContext child_wlist = context
+				.createChild("searchselect:WlistNavigator");
+
+		Composite composite_wlistNavigator = new Composite(composite_1, SWT.NONE);
+		composite_wlistNavigator.setLayoutData(new GridData(SWT.FILL,
+				SWT.FILL,
+				true, true, 1, 1));
+		composite_wlistNavigator.setLayout(new GridLayout(1, true));
+		composite_wlistNavigator.setBackground(composite.getBackground());
+		((GridLayout) composite_wlistNavigator.getLayout()).marginWidth = 0;
+		((GridLayout) composite_wlistNavigator.getLayout()).marginHeight = 0;
+		((GridLayout) composite_wlistNavigator.getLayout()).horizontalSpacing = 0;
+		((GridLayout) composite_wlistNavigator.getLayout()).verticalSpacing = 0;
+
+		child_wlist.set(Composite.class, composite_wlistNavigator);
+		child_wlist.set(BTSConfigItem.class, relationConfig);
+		child_wlist.set(BTSUIConstants.SELECTION_TYPE,
+				BTSUIConstants.SELECTION_TYPE_SECONDARY);
+
+		WordListNavigator wlistNavigator = ContextInjectionFactory.make(
+				WordListNavigator.class, child_wlist);
+		//ths
 		CTabItem tbtmThs = new CTabItem(tabFolder, SWT.NONE);
 		tbtmThs.setText("Thesaurus");
 		tbtmThs.setImage(resourceProvider.getImage(Display.getDefault(),
@@ -125,7 +151,27 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 		tbtmThs.setControl(composite_2);
 
 		composite_2.setLayout(new GridLayout(1, false));
+		IEclipseContext child_ths = context
+				.createChild("searchselect:thsNavigator");
 
+		Composite composite_thsNavigator = new Composite(composite_2, SWT.NONE);
+		composite_thsNavigator.setLayoutData(new GridData(SWT.FILL,
+				SWT.FILL,
+				true, true, 1, 1));
+		composite_thsNavigator.setLayout(new GridLayout(1, true));
+		composite_thsNavigator.setBackground(composite.getBackground());
+		((GridLayout) composite_thsNavigator.getLayout()).marginWidth = 0;
+		((GridLayout) composite_thsNavigator.getLayout()).marginHeight = 0;
+		((GridLayout) composite_thsNavigator.getLayout()).horizontalSpacing = 0;
+		((GridLayout) composite_thsNavigator.getLayout()).verticalSpacing = 0;
+
+		child_ths.set(Composite.class, composite_thsNavigator);
+		child_ths.set(BTSConfigItem.class, relationConfig);
+		child_ths.set(BTSUIConstants.SELECTION_TYPE,
+				BTSUIConstants.SELECTION_TYPE_SECONDARY);
+
+		ThsNavigator thsNavigator = ContextInjectionFactory.make(
+				ThsNavigator.class, child_ths);
 
 		tabFolder.setSelection(0);
 		return area;

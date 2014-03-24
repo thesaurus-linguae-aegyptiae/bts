@@ -102,7 +102,7 @@ public class PassportEditorPartControllerImpl
 
 					FilterBuilder[] filterArray = filters
 							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setFilter(FilterBuilders.orFilter(filterArray));
+					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 
 					list.addAll((Collection<? extends BTSCorpusObject>) thsService
 							.query(query, BTSConstants.OBJECT_STATE_ACITVE,
@@ -124,7 +124,7 @@ public class PassportEditorPartControllerImpl
 
 					FilterBuilder[] filterArray = filters
 							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setFilter(FilterBuilders.orFilter(filterArray));
+					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 
 					list.addAll((Collection<? extends BTSCorpusObject>) corpusObjectService
 							.query(query, BTSConstants.OBJECT_STATE_ACITVE,

@@ -24,5 +24,7 @@ public interface BTSUserController {
 	BTSObject findUserOrUserGroup(String id);
 
 	void setRememberedUser(BTSUser validUser);
+	
+	List<BTSUser> listAll();
 
 }

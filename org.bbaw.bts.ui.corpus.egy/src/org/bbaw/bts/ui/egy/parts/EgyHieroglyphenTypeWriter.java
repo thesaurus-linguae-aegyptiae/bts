@@ -483,7 +483,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		if (hierotw_text != null) {
 			hierotw_text.setFocus();
 		}
-		contextService.activateContext(HTW_CONTEXT_ID);
+//		contextService.activateContext(HTW_CONTEXT_ID);
 		evaluationController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
 	}

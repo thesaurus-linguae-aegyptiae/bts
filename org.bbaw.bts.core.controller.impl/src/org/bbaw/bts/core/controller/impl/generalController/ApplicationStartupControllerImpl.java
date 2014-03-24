@@ -24,6 +24,7 @@ import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.ui.font.BTSFontManager;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.preferences.DefaultScope;
@@ -95,6 +96,9 @@ public class ApplicationStartupControllerImpl implements
 
 	@Inject
 	private IEventBroker eventBroker;
+	
+	@Inject
+	private BTSFontManager fontManager;
 
 	private List<BTSProject> projects;
 
@@ -123,31 +127,43 @@ public class ApplicationStartupControllerImpl implements
 
 		// load font
 		Font font = null;
-
-		// FIXME make dynamic
-		boolean isLoaded = Display
-				.getCurrent()
-				.loadFont(
-						"E:/AAEW/dev/ws_bts_v2/org.bbaw.bts.ui.font.egyFont/font/FreeSerif.ttf");
-		if (true) {
-			FontData[] fd = Display.getCurrent().getFontList(null, true);
-			FontData fontdata = null;
-			for (int i = 0; i < fd.length; i++) {
-				if (fd[i].getName().equals("FreeSerif")) {
-					fontdata = fd[i];
-					break;
-				}
-			}
-			if (fontdata != null) {
-				fontdata.setHeight(12);
-				JFaceResources.getFontRegistry().put(
-						JFaceResources.DEFAULT_FONT,
-						new FontData[] { fontdata });
-				Font f = JFaceResources.getFontRegistry().get(
-						JFaceResources.DEFAULT_FONT);
-				// Font f2 = JFaceResources.getDefaultFont();
-			}
+		
+		font = fontManager.getFont("FreeSerif");
+		if (font.getFontData() != null && font.getFontData()[0] != null) {
+			font.getFontData()[0].setHeight(12);
+			JFaceResources.getFontRegistry().put(
+					JFaceResources.DEFAULT_FONT,
+					new FontData[] {  font.getFontData()[0] });
+			Font f = JFaceResources.getFontRegistry().get(
+					JFaceResources.DEFAULT_FONT);
+			// Font f2 = JFaceResources.getDefaultFont();
 		}
+		
+
+//		// FIXME make dynamic
+//		boolean isLoaded = Display
+//				.getCurrent()
+//				.loadFont(
+//						"E:/AAEW/dev/ws_bts_v2/org.bbaw.bts.ui.font.egyFont/font/FreeSerif.ttf");
+//		if (true) {
+//			FontData[] fd = Display.getCurrent().getFontList(null, true);
+//			FontData fontdata = null;
+//			for (int i = 0; i < fd.length; i++) {
+//				if (fd[i].getName().equals("FreeSerif")) {
+//					fontdata = fd[i];
+//					break;
+//				}
+//			}
+//			if (fontdata != null) {
+//				fontdata.setHeight(12);
+//				JFaceResources.getFontRegistry().put(
+//						JFaceResources.DEFAULT_FONT,
+//						new FontData[] { fontdata });
+//				Font f = JFaceResources.getFontRegistry().get(
+//						JFaceResources.DEFAULT_FONT);
+//				// Font f2 = JFaceResources.getDefaultFont();
+//			}
+//		}
 
 		boolean dbPrepared = false;
 		boolean mainProjectSet = false;
@@ -259,9 +275,12 @@ public class ApplicationStartupControllerImpl implements
 		// splash schließen
 		//
 		//
-
-		// dev
-		// userService.setAuthentication("admin", "admin");
+//		 userService
+//			.setAuthentication(rememberedUsername, remembered);
+//		if(dbManager.prepareDBCollectionIndexing("admin"))
+//		{
+//			System.out.println("admin indexed");
+//		}
 
 		if (rememberedUsername != null
 				&& !"".equals(rememberedUsername)
@@ -269,19 +288,25 @@ public class ApplicationStartupControllerImpl implements
 				&& userService
 						.setAuthentication(rememberedUsername, remembered)) {
 			// remebemered
-			BTSQueryRequest query = new BTSQueryRequest();
-			query.setQueryBuilder(QueryBuilders.boolQuery().must(
-					QueryBuilders.termQuery("userName", rememberedUsername)));
-			List<BTSUser> users = userController.query(query);
-			for (BTSUser u : users) {
-				if (rememberedUsername.equals(u.getUserName())) { // FIXME
-																	// password
-																	// checking
-					// && equalsPassword(u,
-					// passWord)) {
-					userController.setAuthenticatedUser(u);
-					break;
+//			BTSQueryRequest query = new BTSQueryRequest();
+//			query.setQueryBuilder(QueryBuilders.boolQuery().must(
+//					QueryBuilders.termQuery("userName", rememberedUsername)));
+			
+			try {
+				List<BTSUser> users = userController.listAll();
+				for (BTSUser u : users) {
+					if (rememberedUsername.equals(u.getUserName())) { // FIXME
+																		// password
+																		// checking
+						// && equalsPassword(u,
+						// passWord)) {
+						userController.setAuthenticatedUser(u);
+						break;
+					}
 				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		} else {
 			Login login = ContextInjectionFactory.make(Login.class, context);

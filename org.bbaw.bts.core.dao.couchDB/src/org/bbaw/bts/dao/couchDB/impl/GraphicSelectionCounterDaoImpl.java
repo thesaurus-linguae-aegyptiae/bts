@@ -5,7 +5,7 @@ import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
 import org.bbaw.bts.core.dao.GraphicSelectionCounterDao;
-import org.elasticsearch.ElasticSearchException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.suggest.completion.CompletionSuggestionBuilder;
@@ -27,7 +27,7 @@ public class GraphicSelectionCounterDaoImpl extends
 							new CompletionSuggestionBuilder("").field("code")
 									.text(prefix).size(10)).execute()
 					.actionGet();
-		} catch (ElasticSearchException e) {
+		} catch (ElasticsearchException e) {
 			e.printStackTrace();
 		}
 		List<GraphicSelectionCounter> counters = new Vector<GraphicSelectionCounter>();

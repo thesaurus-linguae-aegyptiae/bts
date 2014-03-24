@@ -138,10 +138,10 @@ public class ShowPreferenceDialogHandler {
 				if (elmt.getNamespaceIdentifier().equals(
 						"org.bbaw.bts.corpus.text.egy.egydsl.ui")
 						|| page instanceof XtextTemplatePreferencePage) {
-					EgyDslActivator activator = EgyDslActivator.getInstance();
-					injector = activator
-							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
-					injector.injectMembers(page);
+//					EgyDslActivator activator = EgyDslActivator.getInstance();
+//					injector = activator
+//							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
+//					injector.injectMembers(page);
 				}
 				if ((page.getTitle() == null || page.getTitle().isEmpty())
 						&& elmt.getAttribute(ATTR_NAME) != null) {
