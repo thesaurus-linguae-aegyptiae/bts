@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
+  <imports xsi:type="commands:Command" xmi:id="_m2YhoL8fEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.exitApplication"/>
+  <imports xsi:type="commands:Command" xmi:id="_HO_yQL8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication"/>
+  <imports xsi:type="commands:Command" xmi:id="_3xuZsL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_XCflwADrEeOpmPWG2KRhAA" featurename="children" parentElementId="org.bbaw.bts.app.perspectivestack.main">
     <elements xsi:type="advanced:Perspective" xmi:id="_zrowcADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.ui.main.perspective.main" label="BTS Main Perspective">
       <children xsi:type="basic:PartStack" xmi:id="_7sFY0ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.ui.main.partstack.0"/>
@@ -35,6 +38,9 @@
     <elements xsi:type="commands:Handler" xmi:id="_1F6lcGcaEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handler.redo" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.RedoHandler" command="_0CuLcGcMEeOBmPSxTUuwxg"/>
     <elements xsi:type="commands:Handler" xmi:id="_7_H48GcaEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handler.new" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.NewObjectHandler" command="_6YlhUGcMEeOBmPSxTUuwxg"/>
     <elements xsi:type="commands:Handler" xmi:id="_xzleIJ01EeOZQMkw1CZ_PQ" elementId="org.bbaw.bts.ui.main.handler.editUpdatersReaders" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenUpdatersReadersEditorDialogHandler" command="_pJQyUJ01EeOZQMkw1CZ_PQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_jTBvoL8fEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handler.exitApplication" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.ExitApplicationHandler" command="_m2YhoL8fEeOwdasqUpZnTA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_JkEMML8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handler.updateApplication" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.UpdateApplicationHandler" command="_HO_yQL8hEeOwdasqUpZnTA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_6okrAL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handler.restart" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.RestartHandler" command="_3xuZsL8lEeOwdasqUpZnTA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -70,6 +76,7 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_XwpxQL8iEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.9" label="Update Application" command="_HO_yQL8hEeOwdasqUpZnTA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_91RrsDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.edit">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_kXRK0DVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.2" label="Edit..."/>
@@ -78,9 +85,12 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_JRhFgDVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.file">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_l0QGMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.3" label="Insert..."/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_BSbbQL8jEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.10" label="Exit BTS" command="_m2YhoL8fEeOwdasqUpZnTA"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_ERGEcL8mEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.11" label="Restart BTS" command="_3xuZsL8lEeOwdasqUpZnTA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_NxQnQDVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.bbaw.bts.app.menu.file.new">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_QdhZMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.0" label="New Project..." command="_KXYdACamEeOWXom3xTHUZA"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_Zy95ML8gEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.8" label="Exit Application" command="_m2YhoL8fEeOwdasqUpZnTA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_o7oG0DVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.bbaw.bts.app.menu.analyse">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_qXavYDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.4" label="Analyse Text..."/>

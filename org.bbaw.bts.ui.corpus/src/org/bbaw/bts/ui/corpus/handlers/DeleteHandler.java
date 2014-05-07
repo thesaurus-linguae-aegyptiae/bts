@@ -34,7 +34,7 @@ public class DeleteHandler {
 				ed.getCommandStack().execute(command);
 
 			}
- else {
+			else {
 				((AdministrativDataObject) selection)
 						.setState(BTSConstants.OBJECT_STATE_TERMINATED);
 			}

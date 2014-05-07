@@ -3,9 +3,8 @@
 <plugin
 >
    <extension
-         id="org.bbaw.bts.core.dao.daoFactory"
-         point="org.bbaw.bts.core.dao.org.bbaw.bts.core.dao.daoFactory">
-      <daoFactory
+         point="org.bbaw.bts.core.dao.daoFactory">
+         <daoFactory
             class="org.bbaw.bts.dao.couchDB.DaoFactoryCouchDB">
       </daoFactory>
    </extension>

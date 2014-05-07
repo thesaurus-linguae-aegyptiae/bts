@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.emf.common.util.URI;
 
 public interface GenericDao<E extends BTSDBBaseObject, K>
 {
@@ -18,6 +19,8 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	void remove(E entity, String path);
 
 	E find(K key, String path);
+	
+	E find(URI uri);
 
 	E reload(K key, String path);
 

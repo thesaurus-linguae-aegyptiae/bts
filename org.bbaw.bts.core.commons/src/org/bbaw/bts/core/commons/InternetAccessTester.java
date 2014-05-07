@@ -14,19 +14,15 @@ public class InternetAccessTester
 		{
 			if (url == null)
 			{
-				url = new URL("http://www.google.com");
+				url = new URL("http://www.bbaw.de");
 			}
 			URLConnection connection = url.openConnection();
 
-			if (connection.getContentLength() == -1)
-			{
-				return false;
-			}
+			return true;
 		} catch (IOException e)
 		{
 			return false;
 		}
-		return true;
 	}
 
 }

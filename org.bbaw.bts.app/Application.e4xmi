@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0" width="1000" height="750">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0.1" width="1000" height="750">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main" selectedElement="_lAwBoADxEeOpmPWG2KRhAA">
       <children xsi:type="advanced:Perspective" xmi:id="_lAwBoADxEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspective.main" label="BTSPerspective">
         <children xsi:type="basic:PartSashContainer" xmi:id="_1NBNMAD3EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partsashcontainer.left" horizontal="true">
@@ -56,6 +56,9 @@
     <children xmi:id="_NEpfQA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialog" name="In Dialog"/>
   </rootContext>
   <commands xmi:id="_G1ujkF2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.edit.text.contentAssist.proposals" category="_KsMe0F2uEeOwE8UUrLWumA"/>
+  <commands xmi:id="_wBOgkL8fEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.exitApplication" commandName="ExitApplication" category="_0JZP0L8fEeOwdasqUpZnTA"/>
+  <commands xmi:id="_ysk3EL8gEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication" commandName="Update Application" category="__KJyEL8gEeOwdasqUpZnTA"/>
+  <commands xmi:id="_05F_sL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart" commandName="Restart"/>
   <addons xmi:id="_oEzH4gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_oEzH4wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_oEzH5AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -64,4 +67,6 @@
   <addons xmi:id="_oEzH5wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.contexts.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench/org.eclipse.e4.ui.internal.workbench.addons.ContextProcessingAddon"/>
   <addons xmi:id="_oEzH6AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.workbench.bindings.model" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.swt/org.eclipse.e4.ui.workbench.swt.util.BindingProcessingAddon"/>
   <categories xmi:id="_KsMe0F2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.category.edit" name="edit"/>
+  <categories xmi:id="_0JZP0L8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.category.file" name="file"/>
+  <categories xmi:id="__KJyEL8gEeOwdasqUpZnTA" elementId="org.eclipse.ui.category.help" name="Help"/>
 </application:Application>

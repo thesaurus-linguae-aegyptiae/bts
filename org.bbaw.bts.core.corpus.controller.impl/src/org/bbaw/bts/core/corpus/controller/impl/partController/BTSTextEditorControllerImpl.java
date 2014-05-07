@@ -39,6 +39,7 @@ import org.bbaw.bts.ui.commons.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -57,24 +58,29 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 {
 
 	private static final String MDC_DELIMETERS = ":-<>*";
-	private static final String SENTENCE_SIGN = "§";
-	private static final String AMBIVALENCE_START_SIGN = "%";
-	private static final String AMBIVALENCE_END_SIGN = "%";
+	private static final String SENTENCE_SIGN = "\u00A7";
+	private static final String AMBIVALENCE_START_SIGN = "\u0025";
+	private static final String AMBIVALENCE_END_SIGN = "\u0025";
 	private static final String LEMMA_CASE_TERMIAL = "case";
 	private static final String LEMMA_CASE_SEPARATOR = "; ";
 	private static final String WS = " ";
 	private static final String LEMMA_CASE_INTERFIX = ": ";
-	private static final String MARKER_START_SIGN = "#";
-	private static final String MARKER_END_SIGN = "#";
+	private static final String MARKER_START_SIGN = "\u0023";
+	private static final String MARKER_END_SIGN = "\u0023";
 	private static final String VERS_FRONTER_MARKER = "mv";
 	private static final String VERS_BREAK_MARKER = "v";
 
-	private static final String MARKER_VERS_SIGN = "@";
+	private static final String MARKER_VERS_SIGN = "\u0040";
 	private static final String MARKER_INTERFIX = ": ";
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
 	@Inject
 	private BTSTextService textService;
+	
+	@Inject
+	private Logger logger;
+	
+	
 	private int idcounter = 0;
 	private Comparator<? super Object> glyphsStringComparator;
 
@@ -92,7 +98,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				BTSSenctence sentence = (BTSSenctence) textItems;
 				int start = stringBuilder.length();
+				logger.debug("BTSTextEditorController before sentence sign added: " + stringBuilder.toString());
+
 				stringBuilder.append(SENTENCE_SIGN);
+				logger.debug("BTSTextEditorController sentence sign: " + SENTENCE_SIGN);
+
+				logger.debug("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
+
 				BTSModelAnnotation ma = new BTSModelAnnotation(sentence);
 				
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
@@ -111,7 +123,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				appendToStringBuilder(textItems, model, stringBuilder);
 			}
 		}
-		System.out.println(stringBuilder.toString());
+		logger.debug("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
 		doc.set(stringBuilder.toString());
 
 	}
@@ -331,11 +343,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 			pos = scanner.getTokenOffset();
 			len = scanner.getTokenLength();
-			System.out.println(token);
 			Object o = token.getData();
 			//			annotationModel.
-			System.out.println(o);
-			System.out.println("token offset: " + pos + " token length: " + len);
+			logger.debug("BTSTextEditorController token " + token + " offset: " + pos + " token length: " + len);
 			try
 			{
 				content = document.get(pos, len);

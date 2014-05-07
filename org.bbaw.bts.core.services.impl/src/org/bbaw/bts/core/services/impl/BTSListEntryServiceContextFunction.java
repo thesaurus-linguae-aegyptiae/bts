@@ -15,7 +15,11 @@ public class BTSListEntryServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize services");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 
 		BTSListEntryService listEntryService = ContextInjectionFactory.make(BTSListEntryServiceImpl.class, context);
 		ctx.set(BTSListEntryService.class, listEntryService);

@@ -688,6 +688,11 @@ public class PassportEditorPart {
 						reloadGenericTabItem(ti);
 						ti.setData("reloaded", genericTabsReloadRequiredCounter);
 					}
+				} else if (ti.getData("relation") != null) {
+					loadRelationsTabItem(ti, tabFolder);
+					ScrolledComposite sc = (ScrolledComposite) ti.getControl();
+					Point p = sc.getSize();
+					sc.setSize(p.x, p.y + 1);
 				}
 
 			}

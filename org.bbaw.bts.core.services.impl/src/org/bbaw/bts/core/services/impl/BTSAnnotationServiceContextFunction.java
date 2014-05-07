@@ -15,7 +15,11 @@ public class BTSAnnotationServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSAnnotationService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 
 		BTSAnnotationService annotationService = ContextInjectionFactory.make(BTSAnnotationServiceImpl.class, context);
 		ctx.set(BTSAnnotationService.class, annotationService);

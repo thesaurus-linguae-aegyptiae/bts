@@ -15,7 +15,11 @@ public class BTSImageServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSImageService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 		//
 		BTSImageService imageService = ContextInjectionFactory.make(BTSImageServiceImpl.class, context);
 		ctx.set(BTSImageService.class, imageService);

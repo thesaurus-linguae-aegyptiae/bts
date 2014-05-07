@@ -16,7 +16,11 @@ public class BTSTextCorpusServiceContextFunction extends ContextFunction
 		BTSTextCorpusService service = ContextInjectionFactory.make(BTSTextCorpusServiceImpl.class, context);
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 		ctx.set(BTSTextCorpusService.class, service);
 
 		return service;

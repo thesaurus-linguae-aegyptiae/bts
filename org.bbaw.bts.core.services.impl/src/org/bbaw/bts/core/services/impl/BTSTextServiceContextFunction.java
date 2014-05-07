@@ -15,7 +15,11 @@ public class BTSTextServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSTextService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 
 		BTSTextService textService = ContextInjectionFactory.make(BTSTextServiceImpl.class, context);
 		ctx.set(BTSTextService.class, textService);

@@ -2,10 +2,11 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UIMain
 Bundle-SymbolicName: org.bbaw.bts.ui.main;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 0.0.2.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.main.handlers,
+ org.bbaw.bts.ui.main.wizards.installation,
  org.bbaw.bts.ui.main.wizards.newProject
 Require-Bundle: org.eclipse.e4.ui.di,
  org.eclipse.swt,
@@ -49,13 +50,18 @@ Require-Bundle: org.eclipse.e4.ui.di,
  com.google.inject;bundle-version="3.0.0",
  org.eclipse.jdt.annotation;bundle-version="1.1.0",
  org.eclipse.xtext.util;bundle-version="2.4.3",
- javax.annotation
+ javax.annotation,
+ javax.inject,
+ org.eclipse.equinox.p2.engine;bundle-version="2.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.annotation;version="1.0.0",
  javax.inject,
  org.bbaw.bts.corpus.text.egy.ui.internal,
+ org.bbaw.bts.e4.p2,
  org.eclipse.e4.core.services.contributions,
  org.eclipse.e4.core.services.log,
+ org.eclipse.equinox.p2.core;version="2.0.0",
+ org.eclipse.equinox.p2.operations;version="2.0.0",
  org.eclipse.jdt.annotation,
  org.eclipse.jface.text,
  org.eclipse.ocl.examples.pivot,

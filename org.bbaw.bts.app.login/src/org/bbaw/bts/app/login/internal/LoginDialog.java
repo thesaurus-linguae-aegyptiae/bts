@@ -6,6 +6,8 @@ import java.net.URL;
 import java.security.GeneralSecurityException;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
@@ -13,6 +15,7 @@ import org.bbaw.bts.modelUtils.StringEncryption;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -68,6 +71,8 @@ public class LoginDialog extends Dialog
 
 	private Button rememberMeButton;
 
+	private Logger logger;
+
 	public LoginDialog(Shell parentShell, IEclipseContext context,
 			BTSUserController userController)
 	{
@@ -75,6 +80,7 @@ public class LoginDialog extends Dialog
 		this.shell = parentShell;
 		this.context = context;
 		this.userController = userController;
+		this.logger = context.get(Logger.class);
 	}
 
 	@Override
@@ -258,6 +264,8 @@ public class LoginDialog extends Dialog
 			{
 				if (isValidLogin())
 				{
+					logger.info("Login successful");
+
 					buttonPressed(((Integer) event.widget.getData()).intValue());
 				} else
 				{
@@ -287,6 +295,8 @@ public class LoginDialog extends Dialog
 	private boolean isValidLogin()
 	{
 		String userName = userText.getText().trim();
+		logger.info("Trying to validate user with username: " + userName);
+
 		String passWord = passwortText.getText().trim();
 		if (!userController.setAuthentication(userName, passWord))
 		{
@@ -303,6 +313,8 @@ public class LoginDialog extends Dialog
 													// && equalsPassword(u,
 													// passWord)) {
 				validUser = u;
+				logger.info("User found: " + u.get_id() + " userName: " + u.getUserName());
+
 				return true;
 			}
 		}

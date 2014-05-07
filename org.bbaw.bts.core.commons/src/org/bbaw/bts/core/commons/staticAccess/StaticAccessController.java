@@ -7,6 +7,7 @@ import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.EContextService;
 import org.eclipse.jface.preference.IPreferenceStore;
 
@@ -23,6 +24,10 @@ public class StaticAccessController {
 	@Inject
 	@Preference
 	private static IEclipsePreferences preferenceStore;
+	
+	@Inject
+	private Logger logger;
+	
 	public static EHandlerService getService() {
 		return service;
 	}
@@ -50,6 +55,16 @@ public class StaticAccessController {
 
 	public static IPreferenceStore getPreferenceStore() {
 		return null;
+	}
+
+
+	public Logger getLogger() {
+		return logger;
+	}
+
+
+	public void setLogger(Logger logger) {
+		this.logger = logger;
 	}
 
 }

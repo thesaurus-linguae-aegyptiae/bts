@@ -190,14 +190,18 @@ public class SelectProjectsPage extends WizardPage
 		}
 	}
 
-	private String getMainProject()
+	String getMainProject()
 	{
 		return main_project;
 	}
 
-	private List<String> getActiveProjectSelectionsAsStringList()
+	List<String> getActiveProjectSelectionsAsStringList()
 	{
 		List<String> prefixes = new Vector<String>();
+		if (chrosenProvider == null)
+		{
+			return prefixes;
+		}
 		List<BTSProject> selections = chrosenProvider.getInputElements();
 		for (BTSProject project : selections)
 		{
@@ -207,6 +211,15 @@ public class SelectProjectsPage extends WizardPage
 			}
 		}
 		return prefixes;
+	}
+
+	public String getActiveProjectSelectionsAsString() {
+		String string = "";
+		for (String s : getActiveProjectSelectionsAsStringList())
+		{
+			string += s + "|";
+		}
+		return string.length() > 2 ? string.substring(0, string.length() - 1) : "";
 	}
 
 }

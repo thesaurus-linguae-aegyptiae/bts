@@ -14,7 +14,11 @@ public class BTSThsEntryServiceContextFunction extends ContextFunction {
 
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 
 		BTSThsEntryService service = ContextInjectionFactory.make(
 				BTSThsEntryServiceImpl.class, context);

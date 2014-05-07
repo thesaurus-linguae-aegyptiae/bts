@@ -46,7 +46,7 @@ public class DaoFactoryCouchDB implements DAOFactory
 	@Override
 	public String getFactoryName()
 	{
-		return "caouchdb.daofactory";
+		return "couchdb.daofactory";
 	}
 
 	@Override

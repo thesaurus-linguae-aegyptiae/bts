@@ -24,6 +24,10 @@ import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.URI;
@@ -55,8 +59,6 @@ import com.google.gson.JsonObject;
 public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializable> implements GenericDao<E, K>
 {
 
-	private static final String PERCOLATOR = ".percolator";
-
 	protected Class<? extends BTSDBBaseObject> daoType;
 
 	@Inject
@@ -81,16 +83,21 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public void add(E entity, String path)
 	{
-
-		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
-		System.out.println(uri);
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
 		Map<String, String> options = new HashMap<String, String>();
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING); // set
 																			// encoding
 																			// to
 		// UTF-8
+		Resource resource = entity.eResource();
+		// check if entity has resource, that is if it was newly created or not
+		if (resource == null)
+		{
+			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
+			System.out.println(uri);
+			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+			resource.getContents().add(entity);
+		}
+
 		try
 		{
 			resource.save(options);
@@ -117,18 +124,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public void update(E entity, String path)
 	{
-		// FIXME implement Update
-		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
-				+ entity.get_id());
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
-
 		try
 		{
-			resource.save(null);
+			entity.eResource().save(null);
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new RuntimeException("Save Resource failed");
 		}
@@ -137,17 +137,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public void remove(E entity, String path)
 	{
-		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
-				+ entity.get_id());
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
-
 		try
 		{
-			resource.delete(null);
+			entity.eResource().delete(null);
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			throw new RuntimeException("Delete Resource failed");
 		}
@@ -164,6 +158,33 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key.toString());
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		Map<String, String> options = new HashMap<String, String>();
+		
+		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
+		System.out.println(uri);
+		try {
+			resource.load(options);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (resource.getContents().size() > 0)
+		{
+			Object o = resource.getContents().get(0);
+			if (o instanceof BTSDBBaseObject)
+			{
+				return (E) o;
+			}
+		}
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public E find(URI uri)
+	{
+		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		Map<String, String> options = new HashMap<String, String>();
+		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
 		System.out.println(uri);
 		try {
@@ -226,23 +247,29 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key.toString());
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		EObject eObject = resource.getContents().get(0);
-		Copier copier = new Copier();
-		EClass eClass = eObject.eClass();
-
-		if (resource.getContents().size() > 0)
+		if (!resource.getContents().isEmpty())
 		{
-			ResourceSet tempResourceSet = new ResourceSetImpl();
-			tempResourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+			EObject eObject = resource.getContents().get(0);
+			Copier copier = new Copier();
+			EClass eClass = eObject.eClass();
 
-			Resource tempResource = tempResourceSet.getResource(uri, true);
-			EObject copyEObject = tempResource.getContents().get(0);
-			if (copyEObject instanceof BTSDBBaseObject)
-			{
+			if (resource.getContents().size() > 0) {
+				ResourceSet tempResourceSet = new ResourceSetImpl();
+				tempResourceSet.getURIConverter().getURIHandlers()
+						.add(0, new CouchDBHandler());
 
-				eObject = EmfModelHelper.mergeChanges(eObject, copyEObject);
-				return (E) eObject;
+				Resource tempResource = tempResourceSet.getResource(uri, true);
+				EObject copyEObject = tempResource.getContents().get(0);
+				if (copyEObject instanceof BTSDBBaseObject) {
+
+					eObject = EmfModelHelper.mergeChanges(eObject, copyEObject);
+					return (E) eObject;
+				}
 			}
+		}
+		else
+		{
+			return find(key, path);
 		}
 		return null;
 	}
@@ -328,7 +355,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 					e.printStackTrace();
 				}
 			}
-			if (registerQuery && !result.isEmpty())
+			if (registerQuery)
 			{
 				registerQueryWithPercolator(query, indexName, indexType);
 			}
@@ -357,27 +384,35 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 	}
 
-	protected void registerQueryWithPercolator(BTSQueryRequest query, String indexName, String indexType)
+	protected void registerQueryWithPercolator(final BTSQueryRequest query, final String indexName, String indexType)
 	{
 		// register query with percolator
 		// Index the query = register it in the percolator
-		try
-		{
-			connectionProvider
-					.getSearchClient(Client.class)
-					.prepareIndex(PERCOLATOR, indexName, query.getQueryId())
-					.setSource(
-							XContentFactory.jsonBuilder().startObject().field("query", query.getQueryBuilder())
-									.endObject()).setRefresh(true).execute().actionGet();
-		} catch (ElasticsearchException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
+		Job job = new Job("register with percolator"){
+			@Override
+			  protected IStatus run(IProgressMonitor monitor) {
+				try
+				{
+					connectionProvider
+							.getSearchClient(Client.class)
+							.prepareIndex(indexName, DaoConstants.PERCOLATOR, query.getQueryId())
+							.setSource(
+									XContentFactory.jsonBuilder().startObject().field("query", query.getQueryBuilder())
+											.endObject()).setRefresh(true).execute().actionGet();
+				} catch (ElasticsearchException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			    return Status.OK_STATUS;
+			  }
+		};
+		job.schedule();
 
 	}
 
@@ -393,12 +428,16 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		if (map.containsKey(path))
 		{
 			ids = map.get(path);
+			if (!ids.contains(queryId))
+			{
+				ids.add(queryId);
+			}
 		} else
 		{
 			ids = new Vector<String>(1);
+			ids.add(queryId);
+			map.put(path, ids);
 		}
-		ids.add(queryId);
-		map.put(path, ids);
 	}
 
 	private E loadObjectFromHit(SearchHit hit, String indexName)
@@ -418,13 +457,14 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		InputStream inputStream;
 		try
 		{
-			inputStream = new ByteArrayInputStream(sourceAsString.getBytes(BTSConstants.ENCODING));
-			final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
-			loader.fillResource(resource);
-			if (resource.getContents().size() > 0)
+
+			if (resource.getContents().isEmpty())
 			{
-				return ((E) resource.getContents().get(0));
+				inputStream = new ByteArrayInputStream(sourceAsString.getBytes(BTSConstants.ENCODING));
+				final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
+				loader.fillResource(resource);
 			}
+			return ((E) resource.getContents().get(0));
 		} catch (UnsupportedEncodingException e)
 		{
 			e.printStackTrace();

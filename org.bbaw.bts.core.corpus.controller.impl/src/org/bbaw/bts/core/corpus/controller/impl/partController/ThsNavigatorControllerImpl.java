@@ -121,7 +121,8 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 	public boolean handleModelUpdate(BTSModelUpdateNotification notification,
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			Map<String, List<TreeNodeWrapper>> viewHolderMap) {
-		if (notification.getObject() != null) {
+		boolean structualModfication = false;
+		if (notification.isLoaded() && notification.getObject() != null) {
 			Set<Object> keepHolderMap = new HashSet<Object>(1);
 			// Adds
 			if (queryResultMap != null && notification.getQueryIds() != null
@@ -131,7 +132,8 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 						BTSQueryResultAbstract queryAbstract = queryResultMap
 								.get(queryId);
 						TreeNodeWrapper holder = handleUpdateReturnHolder(
-								queryAbstract, notification);
+								queryAbstract, notification, viewHolderMap);
+						structualModfication =  true;
 						keepHolderMap.add(holder);
 					}
 				}
@@ -151,13 +153,13 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 					}
 					if (!removeHolderMap.isEmpty()) {
 						holders.removeAll(removeHolderMap);
-						return true;
+						structualModfication =  true;
 					}
 				}
 			}
 
 		}
-		return false;
+		return structualModfication;
 	}
 
 	private void removeObjectFromHolder(Object holder, BTSObject o) {
@@ -168,13 +170,20 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 
 	private TreeNodeWrapper handleUpdateReturnHolder(
 			BTSQueryResultAbstract resultAbstract,
-			BTSModelUpdateNotification notification) {
+			BTSModelUpdateNotification notification, Map<String, List<TreeNodeWrapper>> viewHolderMap) {
 		EObject parent = resultAbstract.getParentEObject();
 		Object feature = parent.eGet(resultAbstract.getReferenceName());
 		if (feature instanceof List<?>) {
 			List<EObject> ref = (List<EObject>) feature;
 			if (ref.isEmpty() || notification.getObject() == null) {
-				return null;
+				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+						.createTreeNodeWrapper();
+				tn.setObject((BTSObject) notification.getObject());
+				tn.setParent((TreeNodeWrapper) parent);
+				ref.add(tn);
+				addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
+
+				return tn;
 			}
 			for (EObject o : ref) {
 				if (o instanceof TreeNodeWrapper
@@ -184,17 +193,30 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 					return (TreeNodeWrapper) o;
 				}
 			}
-
 			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			tn.setObject((BTSObject) notification.getObject());
+			tn.setParent((TreeNodeWrapper) parent);
 			ref.add(tn);
+			addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
 			return tn;
+			
 		}
 		return null;
 
 	}
+	private void addTooHolderMap(BTSObject o, TreeNodeWrapper tn,Map<String, List<TreeNodeWrapper>> viewHolderMap) {
+		List<TreeNodeWrapper> list = viewHolderMap.get(((BTSDBBaseObject) o)
+				.get_id());
+		if (list == null) {
+			list = new Vector<TreeNodeWrapper>(1);
+		}
+		if (!list.contains(tn)) {
+			list.add(tn);
+		}
+		viewHolderMap.put(((BTSDBBaseObject) o).get_id(), list);
 
+	}
 	@Override
 	public BTSThsEntry createNew() {
 		return thsService.createNew();

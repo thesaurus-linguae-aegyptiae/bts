@@ -17,6 +17,7 @@ import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.percolate.PercolateRequestBuilder;
@@ -89,7 +90,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		if (feed.isDeleted())
 		{
 			notification.setDeleted(true);
-			if (generalPurposeDao.objectIsLoaded(dbCollection, docId))
+			if (true || generalPurposeDao.objectIsLoaded(dbCollection, docId))
 			{
 				notification.setLoaded(true);
 				try
@@ -103,7 +104,9 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		} else
 		// object not deleted
 		{
-			if (generalPurposeDao.objectIsLoaded(dbCollection, docId))
+			notification.setLoaded(true);
+
+			if (true || generalPurposeDao.objectIsLoaded(dbCollection, docId))
 			{
 				notification.setLoaded(true);
 				try
@@ -113,11 +116,13 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 				{
 					e.printStackTrace();
 				}
-			} else
+			} 
+			if (object == null)
 			{
 				object = generalPurposeDao.find(docId, dbCollection);
 			}
 		}
+		Assert.isNotNull(object);
 		if (object != null) // object either loaded and deleted or not deleted
 							// and loaded or notloaded
 		{
@@ -212,11 +217,12 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		String objectAsString = EmfModelHelper.modelToString(object);
 		objectAsString = "{\r\n" + "\"doc\":" + objectAsString + "\r\n}";
 
-		System.out.println("dbCollection " + dbCollection
-				+ " doc string percolate: " + objectAsString);
+//		System.out.println("dbCollection " + dbCollection
+//				+ " doc string percolate: " + objectAsString);
 		PercolateResponse response = null;
 		try
 		{
+			Match m = null;
 			PercolateRequestBuilder rqb = client.preparePercolate().setIndices(dbCollection).setDocumentType(dbCollection);
 			rqb.setSource(objectAsString);
 			response = rqb.execute().actionGet();

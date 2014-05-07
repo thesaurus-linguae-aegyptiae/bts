@@ -188,7 +188,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 					if (queryResultMap.containsKey(queryId))
 					{
 						BTSQueryResultAbstract queryAbstract = queryResultMap.get(queryId);
-						TreeNodeWrapper holder = handleUpdateReturnHolder(queryAbstract, notification);
+						TreeNodeWrapper holder = handleUpdateReturnHolder(queryAbstract, notification, viewHolderMap);
 						keepHolderMap.add(holder);
 					}
 				}
@@ -229,7 +229,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	}
 
 	private TreeNodeWrapper handleUpdateReturnHolder(BTSQueryResultAbstract resultAbstract,
-			BTSModelUpdateNotification notification)
+			BTSModelUpdateNotification notification,  Map<String, List<TreeNodeWrapper>> viewHolderMap)
 	{
 		EObject parent = resultAbstract.getParentEObject();
 		Object feature = parent.eGet(resultAbstract.getReferenceName());
@@ -238,7 +238,14 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			List<EObject> ref = (List<EObject>) feature;
 			if (ref.isEmpty() || notification.getObject() == null)
 			{
-				return null;
+				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+						.createTreeNodeWrapper();
+				tn.setObject((BTSObject) notification.getObject());
+				tn.setParent((TreeNodeWrapper) parent);
+				ref.add(tn);
+				addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
+
+				return tn;
 			}
 			for (EObject o : ref)
 			{
@@ -251,10 +258,26 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 			tn.setObject((BTSObject) notification.getObject());
+			tn.setObject((BTSObject) notification.getObject());
+			addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
+
 			ref.add(tn);
 			return tn;
 		}
 		return null;
+
+	}
+	
+	private void addTooHolderMap(BTSObject o, TreeNodeWrapper tn,Map<String, List<TreeNodeWrapper>> viewHolderMap) {
+		List<TreeNodeWrapper> list = viewHolderMap.get(((BTSDBBaseObject) o)
+				.get_id());
+		if (list == null) {
+			list = new Vector<TreeNodeWrapper>(1);
+		}
+		if (!list.contains(tn)) {
+			list.add(tn);
+		}
+		viewHolderMap.put(((BTSDBBaseObject) o).get_id(), list);
 
 	}
 
@@ -330,4 +353,6 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		}
 		return id;
 	}
+	
+	
 }

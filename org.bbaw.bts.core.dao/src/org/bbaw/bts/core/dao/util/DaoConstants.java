@@ -108,13 +108,13 @@ public class DaoConstants
 
 	public static final String REPLICATOR = "_replicator";
 
-	public static final String PERCOLATOR = "_percolator";
+	public static final String PERCOLATOR = ".percolator";
 
 	public static final String RESOURCE_SET = "resource_set";
 
 	public static final String DB_CLIENT_POOL_MAP = "db_client_pool_map";
 
-	public static final String DAO_FACTORY_EXTENSION_POINT_ID = "org.bbaw.bts.core.dao.org.bbaw.bts.core.dao.daoFactory";
+	public static final String DAO_FACTORY_EXTENSION_POINT_ID = "org.bbaw.bts.core.dao.daoFactory";
 
 	public static final String QUERY_ID_REGISTRY = "query_id_registry";
 

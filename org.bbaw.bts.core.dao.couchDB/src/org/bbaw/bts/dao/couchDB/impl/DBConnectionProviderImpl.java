@@ -1,12 +1,16 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
 import java.net.MalformedURLException;
+
+import static org.elasticsearch.node.NodeBuilder.*;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -21,6 +25,8 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
+import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
@@ -33,7 +39,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	private IEclipseContext context;
 
 	@Inject
-	@Preference(value = "local_db_url", nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL, nodePath = "org.bbaw.bts.app")
 	private String local_db_url = "http://127.0.0.1:5985";
 
 	@Inject
@@ -117,8 +123,29 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		{
 			if (searchClient == null)
 			{
-				searchClient = new TransportClient().addTransportAddress(new InetSocketTransportAddress("localhost",
-						9300));
+				//transport client
+//				Settings settings = ImmutableSettings.settingsBuilder()
+////				        .put("path.home",System.getProperty("user.home")+"/elasticSearch")
+//				        .put("number_of_shards",1)
+//				        .put("number_of_replicas",0)
+//				        .build();
+//
+//				searchClient = new TransportClient(settings).addTransportAddress(new InetSocketTransportAddress("localhost",
+//						9300));
+				
+				//node client
+				ImmutableSettings.Builder elasticsearchSettings = ImmutableSettings.settingsBuilder()
+		                .put("http.enabled", "true")
+		                .put("path.data", "D:/AAEW/elasticsearch/elasticsearch-1.0.1/data")
+		                .put("number_of_shards",0)
+				        .put("number_of_replicas",0)
+				        .put("index.routing.allocation.disable_allocation", "false");
+				
+				searchClient = nodeBuilder()
+		                .local(true)
+		                .settings(elasticsearchSettings.build())
+		                .node().client();
+
 			}
 			return (T) searchClient;
 
@@ -135,13 +162,13 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			set = new ResourceSetImpl();
 			set.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
 		}
-		// ScatterCachingMap can only be set if EPartService is available
 		if (((ResourceSetImpl) set).getURIResourceMap() == null)
 		{
 			try
 			{
 				Map<URI, Resource> uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
 						context);
+//				uriResourceMap = new HashMap<URI, Resource>();
 				((ResourceSetImpl) set).setURIResourceMap(uriResourceMap);
 				context.set(DaoConstants.RESOURCE_SET, set);
 			} catch (Exception e)
@@ -158,6 +185,10 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		//FIXME dyn.
 		if (username != null && !"".equals(username))
 		{
+			if (protocol == null || host == null || port == 0)
+			{
+				initDBHost();
+			}
 			return protocol + "://" + username + ":" + password + "@" + host + ":" + port;
 		}
 		return local_db_url;

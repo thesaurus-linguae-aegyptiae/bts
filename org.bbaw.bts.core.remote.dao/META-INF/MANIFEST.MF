@@ -18,4 +18,5 @@ Export-Package: org.bbaw.bts.core.remote.dao,
  org.bbaw.bts.core.remote.dao.util
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,
+ org.eclipse.e4.core.services.log,
  org.eclipse.e4.ui.model.application

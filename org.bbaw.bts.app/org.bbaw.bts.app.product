@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="org.bbaw.bts.app" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.0.qualifier" useFeatures="true" includeLaunchers="true">
-
+<product name="org.bbaw.bts.app" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.2.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
       <programArgs>-clearPersistedState</programArgs>
+      <vmArgs>-Dosgi.requiredJavaVersion=1.6 -Xms40m -Xmx256m -XX:MaxPermSize=128M</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
    <windowImages/>
-
 
    <launcher name="BTS">
       <solaris/>
@@ -22,10 +21,8 @@
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -119,10 +116,12 @@
    </plugins>
 
    <features>
-      <feature id="org.bbaw.bts.app.feature" version="1.0.0.qualifier"/>
       <feature id="org.eclipse.emf.ecore"/>
       <feature id="org.eclipse.emf.common"/>
       <feature id="org.eclipse.e4.rcp"/>
+      <feature id="org.bbaw.bts.app.development.feature" version="1.0.0.qualifier"/>
+      <feature id="org.eclipse.equinox.p2.core.feature" version="1.2.1.v20140221-1852"/>
+      <feature id="org.bbaw.bts.app.feature" version="0.0.2.qualifier"/>
    </features>
 
    <configurations>

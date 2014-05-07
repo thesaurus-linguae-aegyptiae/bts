@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-1.0.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-river-couchdb-2.0.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/jts-1.12.jar"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/log4j-1.2.17.jar"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-analyzers-common-4.6.1.jar"/>
@@ -17,7 +18,6 @@
 	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-spatial-4.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/lucene-suggest-4.6.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="elastic_lib/spatial4j-0.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="elastic_lib/elasticsearch-river-couchdb-1.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
 	<classpathentry kind="src" path="src"/>

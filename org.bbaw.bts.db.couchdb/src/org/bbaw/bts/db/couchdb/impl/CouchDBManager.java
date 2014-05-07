@@ -2,21 +2,39 @@ package org.bbaw.bts.db.couchdb.impl;
 
 import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.CopyDirectory;
+import org.bbaw.bts.commons.OSValidator;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.db.DBManager;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
@@ -30,6 +48,7 @@ import org.lightcouch.CouchDbProperties;
 import org.lightcouch.NoDocumentException;
 import org.lightcouch.Replicator;
 import org.lightcouch.ReplicatorDocument;
+import org.osgi.framework.Bundle;
 
 import com.google.gson.JsonObject;
 
@@ -42,9 +61,10 @@ public class CouchDBManager implements DBManager
 	
 //	private static final String VALIDATE_DOC_UPDATE = "function(newDoc,oldDoc,userCtx,secObj){if(!oldDoc){return;}else{if(userCtx.roles.indexOf('_admin')!==-1||userCtx.roles.indexOf('admin')!==-1){return;}else if(secObj&&secObj.admins&&secObj.admins.roles){for(var i=0,l=secObj.admins.roles.length;i<l;i++){if(userCtx.roles.indexOf(secObj.admins.roles[i])!==-1){return;}}}else{if(userCtx.roles.indexOf('editors')!==-1){return;} if(secObj&&secObj.editors&&secObj.editors.roles){for(var i=0,l=secObj.editors.roles.length;i<l;i++){if(userCtx.roles.indexOf(secObj.editors[i])!==-1){return;}}} for(var i=0,l=oldDoc.writers.length;i<l;i++){if(oldDoc.writers[i]==userCtx.name){return;} if(userCtx.roles.indexOf(oldDoc.writers[i])!==-1){return;}}} throw({forbidden:secObj.admins.names[0]+secObj.editors.names[0]+'name: '+userCtx.name+userCtx.roles[0]+' '+userCtx.roles[1]+' Only admins may edit the database. Hallo Welt22. writers: '+oldDoc.writers[0]});} throw({forbidden:secObj.admins.names[0]+' hallo '+secObj.editors.names[0]+' name: '+userCtx.name+userCtx.roles[0]+' '+userCtx.roles[1]+' Only admins may edit the database. Hallo Welt22. writers: '+oldDoc.writers[0]});}";
 
-	private static final String RIVER_HEART_BEAT = "2s";
+	private static final String RIVER_HEART_BEAT = "500ms";
 	
 	private static final int RIVER_READ_TIMEOUT = 15;
+	private static final String DB_ARCHIVE_NAME = "CouchDB";
 
 	@Inject
 	@Preference(value = "local_db_url", nodePath = "org.bbaw.bts.app")
@@ -65,6 +85,9 @@ public class CouchDBManager implements DBManager
 	@Preference(value = "password", nodePath = "org.bbaw.bts.app")
 	private String password;
 
+	@Inject
+	private Logger logger;
+	
 	private CouchDbClient dbClient;
 	private Client esClient;
 
@@ -287,10 +310,10 @@ public class CouchDBManager implements DBManager
 	public boolean prepareDBIndexing(BTSProject project) throws URISyntaxException
 	{
 		boolean success = true;
-
+		getClient();
 		for (BTSProjectDBCollection collection : project.getDbCollections())
 		{
-			if (collection.isIndexed() && !checkAndCreateIndex(collection.getCollectionName(), getClient()))
+			if (collection.isIndexed() && !checkAndCreateIndex(collection.getCollectionName(), esClient))
 			{
 				success = false;
 			}
@@ -303,11 +326,13 @@ public class CouchDBManager implements DBManager
 	{
 		if (esClient == null)
 		{
-			URI uri = new URI(local_elasticsearch_url);
-			esClient = new TransportClient().addTransportAddress(new InetSocketTransportAddress(uri.getHost(), uri
-					.getPort()));
-			Node node = nodeBuilder().node();
-			esClient = node.client();
+			esClient = connectionProvider
+					.getSearchClient(Client.class);
+//			URI uri = new URI(local_elasticsearch_url);
+//			esClient = new TransportClient().addTransportAddress(new InetSocketTransportAddress(uri.getHost(), uri
+//					.getPort()));
+//			Node node = nodeBuilder().node();
+//			esClient = node.client();
 		}
 		return esClient;
 	}
@@ -396,9 +421,8 @@ public class CouchDBManager implements DBManager
 	@Override
 	public boolean prepareDB() throws URISyntaxException
 	{
-		// TODO check if db is installed
-		// if yes: start up
-		// check if running
+		// database should be installed
+		// should be running
 
 		try
 		{
@@ -414,17 +438,167 @@ public class CouchDBManager implements DBManager
 	}
 
 	@Override
-	public boolean databaseIsInstalled()
+	public boolean databaseIsInstalled(String dbInstallationDir)
 	{
-		// TODO Auto-generated method stub
+		String dbdir = dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME;
+		File dir = new File(dbdir);
+		File ertsDir = null;
+		if (dir.exists() && dir.isDirectory())
+		{
+			for (File child : dir.listFiles())
+			{
+				if (child.isDirectory() && child.getName().startsWith("erts"))
+				{
+					ertsDir = child;
+					break;
+				}
+			}
+			if (ertsDir != null)
+			{
+				logger.info("ertsDir " + ertsDir.getAbsolutePath());
+				File erlIni = new File(ertsDir.getAbsolutePath() + BTSConstants.FS + "bin" + BTSConstants.FS + "erl.ini");
+				logger.info("erl.ini exists: " + erlIni.exists() + ", location: " + erlIni.getAbsolutePath());
+
+				return erlIni.exists();
+			}
+		}
 		return false;
 	}
 
 	@Override
-	public boolean installDatabase(String string)
+	public boolean installDatabase(String dbInstallationDir, int localPort, String localAdminName, String localAdminpassword) throws IOException, InterruptedException, URISyntaxException
 	{
-		// TODO Auto-generated method stub
-		return false;
+		if (databaseIsInstalled(dbInstallationDir))
+		{
+			return true;
+		}
+		File dir = new File(dbInstallationDir);
+
+		//load couchdb-setup
+		File setupFile = loadCouchBaseArchive();
+		logger.info("DB setup file: " + setupFile.getAbsolutePath());
+		
+		//unzip to installation dir
+		FileInputStream fis = new FileInputStream(setupFile);
+		CopyDirectory.unZipIt(fis, dbInstallationDir, null);
+		logger.info("DB setup file unzipped to: " + dbInstallationDir);
+
+		
+		File eRLInstaller = loadDBSetupFile(dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME + BTSConstants.FS);
+		logger.info("Erlang installer: " + eRLInstaller.getAbsolutePath());
+
+
+		String fileName = eRLInstaller.getAbsolutePath();
+		if (OSValidator.isWindows())
+		{
+			String[] commands = new String[]{"cmd",  "/c", fileName, "-s"}; //"runas",  "/profile",  "/user:Administrator",
+			Process process = Runtime.getRuntime().exec(commands);
+			process.waitFor();
+		}
+		else if (OSValidator.isMac())
+		{
+			//FIXME
+		}
+		else if (OSValidator.isUnix())
+		{
+		}
+		
+		// set local port and local admin
+		logger.info("CouchDB set local port " + localPort);
+
+		String localIni = dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME
+				+ BTSConstants.FS + "etc" + BTSConstants.FS + "couchdb"
+				+ BTSConstants.FS + "local.ini";
+		File localIniFile = new File(localIni);
+		if (localIniFile.exists()) {
+			Scanner scanner = new Scanner(localIniFile);
+			StringBuffer stringBufferOfData = new StringBuffer();
+			for (String line; scanner.hasNextLine()
+					&& (line = scanner.nextLine()) != null;) {
+				System.out.println(line);// print each line as its read
+				if (line.trim().startsWith(";port") || line.trim().startsWith("port") || line.trim().startsWith("; port")) {
+					stringBufferOfData.append("port=" + localPort).append(
+							"\r\n");
+				} if (line.trim().startsWith(";require_valid_user") || line.trim().startsWith("require_valid_user") || line.trim().startsWith("; require_valid_user")) {
+					stringBufferOfData.append("require_valid_user=true").append(
+							"\r\n");
+				}
+				if (line.trim().startsWith("[log]")) {
+					stringBufferOfData.append(localAdminName +"=" + localAdminpassword).append(
+							"\r\n");
+					stringBufferOfData.append("\r\n");
+					stringBufferOfData.append(line).append("\r\n");
+				}
+				else {
+					stringBufferOfData.append(line).append("\r\n");
+				}
+			}
+			scanner.close();// this is used to release the scanner from file
+			try {
+				BufferedWriter bufwriter = new BufferedWriter(new FileWriter(
+						localIni));
+				bufwriter.write(stringBufferOfData.toString());
+				bufwriter.close();// closes the file
+			} catch (Exception e) {// if an exception occurs
+				logger.info("Error occured while attempting to write to file: "
+								+ e.getMessage());
+			}
+		}
+		logger.info("CouchDB installed");
+
+		return true;
+	}
+
+	private File loadCouchBaseArchive() throws URISyntaxException, IOException {
+		URL entry = Platform.getBundle("org.bbaw.bts.db.couchdb").getEntry(
+				"/db/" + DB_ARCHIVE_NAME + ".zip");
+		if (entry != null) {
+			URLConnection connection;
+			connection = entry.openConnection();
+			URL fileURL = ((BundleURLConnection) connection).getFileURL();
+
+			URI uri = new URI(fileURL.toString());
+			File file = new File(uri);
+			return file;
+		} else {
+			throw new IOException("CouchDB Base Archive not found!");
+		}
+
+	}
+
+	private File loadDBSetupFile(String dir) {
+		
+		File file = null;
+		file = new File(dir);
+		File setupFile = null;
+		if (file.isDirectory())
+		{
+			for (File child : file.listFiles())
+			{
+				if (OSValidator.isWindows() && child.getName().equals("Install.exe"))
+				{
+					setupFile = child;
+					break;
+				}
+				else if (OSValidator.isMac() && child.getName().endsWith(".zip"))
+				{
+					//FIXME todo
+					setupFile = child;
+					break;
+				}
+				else if (OSValidator.isUnix() && child.getName().endsWith(".sh"))
+				{
+					//FIXME todo
+					setupFile = child;
+					break;
+				}
+			}
+		}
+		else
+		{
+			setupFile = file;
+		}
+		return setupFile;
 	}
 
 	@Override
@@ -453,5 +627,89 @@ public class CouchDBManager implements DBManager
 			return false;
 		}
 		
+	}
+
+	@Override
+	public boolean startDatabase(String dbInsallationDir) throws IOException, InterruptedException {
+		if (checkConnection(local_db_url, username, password))
+		{
+			return true;
+		}
+		
+		String runFileName = getOSCouchDBStartUpFileName(dbInsallationDir);
+		logger.info("DB Erlang startup file: " + runFileName);
+		String[] commands;
+		//FIXME
+		if (true || logger.isDebugEnabled())
+		{
+			commands = new String[]{runFileName};
+		}
+		else
+		{
+			commands = new String[]{runFileName, "-detached"};
+		}
+		Process process = Runtime.getRuntime().exec(commands);
+		
+		
+//		// get the error stream of the process and print it
+//        InputStream error = process.getErrorStream();
+//        for (int i = 0; i < error.available(); i++) {
+//        	logger.info("DB Erlang error: " + error.read());
+//        }
+		process.waitFor();
+		logger.info("DB Erlang started");
+
+		return true;
+	}
+
+	private String getOSCouchDBStartUpFileName(String dbInsallationDir) throws FileNotFoundException {
+		String runFileName = dbInsallationDir  + BTSConstants.FS + DB_ARCHIVE_NAME + BTSConstants.FS + "bin" + BTSConstants.FS;
+		if (OSValidator.isWindows())
+		{
+			return runFileName + "couchdb.bat";
+		}
+		else if (OSValidator.isMac())
+		{
+			//FIXME
+			return runFileName + "couchdb.bat";
+		}
+		else if (OSValidator.isUnix())
+		{
+			return runFileName + "couchdb.sh";
+		}
+		
+//		File dir = new File(runFileName);
+//		File ertsDir = null;
+//		if (dir.exists() && dir.isDirectory())
+//		{
+//			for (File child : dir.listFiles())
+//			{
+//				if (child.isDirectory() && child.getName().startsWith("erts"))
+//				{
+//					ertsDir = child;
+//					break;
+//				}
+//			}
+//			if (ertsDir != null)
+//			{
+//				logger.info("ertsDir " + ertsDir.getAbsolutePath());
+//				runFileName = ertsDir.getAbsolutePath() + BTSConstants.FS + "bin" + BTSConstants.FS;
+//				if (OSValidator.isWindows())
+//				{
+//					return runFileName + "erl.exe";
+//				}
+//				else if (OSValidator.isMac())
+//				{
+//					//FIXME
+//					return runFileName + "couchdb.bat";
+//				}
+//				else if (OSValidator.isUnix())
+//				{
+//					return runFileName + "couchdb.sh";
+//				}
+//			}
+//		}
+		
+		throw new FileNotFoundException("CouchDB Erlang startup executable not found");
 	}
 }

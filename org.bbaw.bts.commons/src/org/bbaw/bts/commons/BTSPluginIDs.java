@@ -32,7 +32,7 @@ public class BTSPluginIDs
 
 	public static final String PREF_NODE_INSTALLATION = "installation";
 
-	public static final String PREF_DB_DIR = "db_dir";
+	public static final String PREF_DB_DIR = "db_installation_dir";
 
 	public static final String PREF_DB_PORT = "db_port";
 
@@ -45,5 +45,7 @@ public class BTSPluginIDs
 	public static final String PART_ID_THS_NAVIGATOR = "org.bbaw.bts.ui.corpus.part.ThsNavigator";
 
 	public static final String POPMENU_THS_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.ths.popupmenu";
+
+	public static final String PREF_LOCAL_DB_URL = "local_db_url";
 
 }

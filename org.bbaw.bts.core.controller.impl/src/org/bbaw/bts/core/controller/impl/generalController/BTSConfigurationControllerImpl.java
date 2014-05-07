@@ -766,6 +766,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 							}
 						}
 					}
+					break;
 				}
 			}
 		} else {

@@ -4,9 +4,7 @@ Bundle-Name: Elasticsearch
 Bundle-SymbolicName: org.bbaw.bts.commons.libs.elasticsearch
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Bundle-ClassPath: elastic_lib/elasticsearch-river-couchdb-1.1.0.jar,
- .,
- elastic_lib/elasticsearch-1.0.1.jar,
+Bundle-ClassPath: .,
  elastic_lib/jts-1.12.jar,
  elastic_lib/log4j-1.2.17.jar,
  elastic_lib/lucene-analyzers-common-4.6.1.jar,
@@ -22,7 +20,9 @@ Bundle-ClassPath: elastic_lib/elasticsearch-river-couchdb-1.1.0.jar,
  elastic_lib/lucene-sandbox-4.6.1.jar,
  elastic_lib/lucene-spatial-4.6.1.jar,
  elastic_lib/lucene-suggest-4.6.1.jar,
- elastic_lib/spatial4j-0.3.jar
+ elastic_lib/spatial4j-0.3.jar,
+ elastic_lib/elasticsearch-river-couchdb-2.0.0.jar,
+ elastic_lib/elasticsearch-1.0.1.jar
 Export-Package: org.apache.lucene.util,
  org.elasticsearch,
  org.elasticsearch.action,
@@ -42,6 +42,7 @@ Export-Package: org.apache.lucene.util,
  org.elasticsearch.common.io.stream,
  org.elasticsearch.common.netty.buffer,
  org.elasticsearch.common.recycler,
+ org.elasticsearch.common.settings,
  org.elasticsearch.common.text,
  org.elasticsearch.common.transport,
  org.elasticsearch.common.xcontent,

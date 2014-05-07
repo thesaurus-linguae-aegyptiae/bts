@@ -46,7 +46,11 @@ public class EditingDomainControllerImpl implements EditingDomainController {
 
 	private void declareModifiableVariables(IEclipseContext ctx) {
 		MApplication application = ctx.get(MApplication.class);
-		workbenchContext = application.getContext();
+		workbenchContext = ctx;
+		if (application != null)
+		{
+			workbenchContext = application.getContext();
+		}
 		workbenchContext
 				.declareModifiable(BTSCoreConstants.CORE_EXPRESSION_CAN_UNDO);
 		workbenchContext

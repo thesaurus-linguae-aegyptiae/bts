@@ -233,4 +233,14 @@ public class DBInstallationSettingsPage extends WizardPage
 		}
 
 	}
+	
+	public String getDBInstallationDir()
+	{
+		return settings.dir;
+	}
+	
+	public int getDBLocalPort()
+	{
+		return new Integer(settings.port).intValue();
+	}
 }

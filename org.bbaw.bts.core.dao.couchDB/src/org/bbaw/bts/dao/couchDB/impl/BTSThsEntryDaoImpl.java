@@ -88,14 +88,24 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 			{
 				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
 						+ extractIdFromObjectString(jo));
-				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(
-						jo.getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				if (!resource.getContents().isEmpty()) {
-					results.add((BTSThsEntry) resource.getContents().get(0));
+				BTSThsEntry entry = find(uri);
+				if (entry != null)
+				{
+					System.out.println("uri found " + uri);
+					results.add(entry);
 				}
+				else
+				{
+					Resource resource = resourceSet.getResource(uri, true);
+					final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(
+							jo.getBytes()),
+							new HashMap<Object, Object>());
+					loader.fillResource(resource);
+					if (!resource.getContents().isEmpty()) {
+						results.add((BTSThsEntry) resource.getContents().get(0));
+					}
+				}
+				
 			}
 		}
 		if (!results.isEmpty())

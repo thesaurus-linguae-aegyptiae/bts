@@ -57,5 +57,6 @@ Require-Bundle: org.eclipse.e4.core.di,
  org.eclipse.e4.ui.services,
  org.eclipse.equinox.preferences;bundle-version="3.5.100",
  org.eclipse.jface.text,
- org.bbaw.bts.ui.corpus.egy.commons
+ org.bbaw.bts.ui.corpus.egy.commons,
+ org.eclipse.e4.core.services
 Bundle-ActivationPolicy: lazy

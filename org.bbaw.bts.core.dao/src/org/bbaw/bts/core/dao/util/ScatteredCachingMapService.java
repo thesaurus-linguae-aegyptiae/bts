@@ -12,9 +12,17 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindow;
+import org.eclipse.e4.ui.model.application.ui.basic.MWindowElement;
+import org.eclipse.e4.ui.workbench.UIEvents.TrimmedWindow;
+import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
+import org.eclipse.e4.ui.workbench.modeling.ModelService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -25,6 +33,20 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	private EPartService partService;
 
 	private Map<URI, Resource> configurationMap = new HashMap<URI, Resource>();
+
+	@Inject
+	private EModelService modelService;
+
+	@Inject
+	@Optional
+	private MWindow  workbenchWindow;
+
+	@Inject
+	@Optional
+	private MApplication application;
+
+	@Inject
+	private IEclipseContext context;
 
 	@Override
 	public void clear() {
@@ -49,7 +71,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
 							.getScatteredCashMaps();
 					for (Map map : maps) {
-						if (map != null && map.containsKey(key)) {
+						if (map != null && map.containsKey(key) && !((Resource) map.get(key)).getContents().isEmpty()) {
 							return true;
 						}
 					}
@@ -57,7 +79,22 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 			}
 		} catch (IllegalStateException e) {
-			System.err.println("Application does not have an active window");
+			Collection<MPart> parts = modelService.findElements(getWindow(), null, MPart.class, null,
+					EModelService.OUTSIDE_PERSPECTIVE | EModelService.IN_ACTIVE_PERSPECTIVE
+							| EModelService.IN_SHARED_AREA);
+			for (MPart part : parts) {
+				if (part.getObject() != null
+						&& part.getObject() instanceof ScatteredCachingPart) {
+					List<Map> maps = ((ScatteredCachingPart) part.getObject())
+							.getScatteredCashMaps();
+					for (Map map : maps) {
+						if (map != null && map.containsKey(key) && !((Resource) map.get(key)).getContents().isEmpty()) {
+							return true;
+						}
+					}
+				}
+
+			}
 			return false;
 		}
 		return false;
@@ -116,20 +153,54 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 						&& part.getObject() instanceof ScatteredCachingPart) {
 					List<Map> maps = ((ScatteredCachingPart) part.getObject())
 							.getScatteredCashMaps();
+					synchronized (maps)
+					{
 					for (Map map : maps) {
-						if (map != null && map.containsKey(key)) {
+						if (map != null && map.containsKey(key) && !((Resource) map.get(key)).getContents().isEmpty()) {
 							return (Resource) map.get(key);
 						}
+					}
 					}
 				}
 
 			}
 		} catch (IllegalStateException e) {
-			System.err.println("Application does not have an active window");
+			Collection<MPart> parts = modelService.findElements(getWindow(), null, MPart.class, null,
+					EModelService.OUTSIDE_PERSPECTIVE | EModelService.IN_ACTIVE_PERSPECTIVE
+							| EModelService.IN_SHARED_AREA);
+			for (MPart part : parts) {
+				if (part.getObject() != null
+						&& part.getObject() instanceof ScatteredCachingPart) {
+					List<Map> maps = ((ScatteredCachingPart) part.getObject())
+							.getScatteredCashMaps();
+					synchronized (maps)
+					{
+					for (Map map : maps) {
+						if (map != null && map.containsKey(key) && !((Resource) map.get(key)).getContents().isEmpty()) {
+							return (Resource) map.get(key);
+						}
+					}
+					}
+				}
+			}
+//			System.err.println("Application does not have an active window");
 		}
 		return null;
 	}
-
+	private MWindow getWindow() {
+		if (workbenchWindow != null)
+			return workbenchWindow;
+		if (application == null)
+		{
+			application = context.get(MApplication.class);
+		}
+		if (application.getSelectedElement() != null)
+			return application.getSelectedElement();
+		List<MWindow> windows = application.getChildren();
+		if (windows.size() != 0)
+			return windows.get(0);
+		return null;
+	}
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub

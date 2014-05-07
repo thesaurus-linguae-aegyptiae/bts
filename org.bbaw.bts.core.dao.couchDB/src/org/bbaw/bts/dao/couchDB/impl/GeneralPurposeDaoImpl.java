@@ -24,9 +24,6 @@ public class GeneralPurposeDaoImpl extends CouchDBDao<BTSDBBaseObject, String> i
 					.setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH)
 					.setQuery(query.getQueryBuilder())
-					// Query
-					// .setFilter(FilterBuilders.rangeFilter("age").from(12).to(18))
-					// // Filter
 					.setFrom(0).setSize(60).setExplain(true).execute()
 					.actionGet();
 			List<SearchHit> result = new Vector<SearchHit>();

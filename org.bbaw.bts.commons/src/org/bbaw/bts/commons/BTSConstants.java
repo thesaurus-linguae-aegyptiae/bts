@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Properties;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 
 public class BTSConstants
 {
@@ -36,6 +41,7 @@ public class BTSConstants
 			BTSConstants.ANNOTATION, BTSConstants.CORPUS_OBJECT,
 			BTSConstants.IMAGE, BTSConstants.WLIST_ENTRY, BTSConstants.TEXT,
 			BTSConstants.TEXT_CORPUS, BTSConstants.THS_ENTRY };
+	public static final String DB_DIR = "dbdir";
 
 	private BTSConstants()
 	{
@@ -55,35 +61,16 @@ public class BTSConstants
 
 		} else
 		{
-			//			 develop in eclipse
-			// String pdrHome = System.getenv("PDR_HOME");
-			// if (pdrHome != null)
-			// {
-			// AE_HOME = pdrHome;
-			// }
-			// else
-			{
-				if (System.getProperty("os.name").toLowerCase().contains("mac"))
-				{
-					BTS_HOME = actLoc.removeLastSegments(7).toOSString();// + FS +
-					// "workspace_ae8"+
-					// FS +
-					// "ArchivEditor";
-				} else
-				{
-					BTS_HOME = actLoc.removeLastSegments(4).toOSString();// + FS +
-					// "workspace_ae_ng";
-				}
-				// rap
-				//				AE_HOME = actLoc.removeLastSegments(8).toOSString();
-
-				// win pc export
-				// AE_HOME = actLoc.removeLastSegments(4).toOSString();// + FS +
-				// "workspace_ae6"+ FS + "ArchivEditor";
-				// mac export
-				// AE_HOME = actLoc.removeLastSegments(7).toOSString();// + FS +
-				// "workspace_ae6"+ FS + "ArchivEditor";
-			}
+			BTS_HOME = getInstallationDir();
+//			{
+//				if (System.getProperty("os.name").toLowerCase().contains("mac"))
+//				{
+//					BTS_HOME = actLoc.removeLastSegments(7).toOSString();// + FS +
+//				} else
+//				{
+//					BTS_HOME = actLoc.removeLastSegments(4).toOSString();// + FS +
+//				}
+//			}
 		}
 		/** Properties laden. */
 		PROPERTIES = new Properties();
@@ -104,5 +91,62 @@ public class BTSConstants
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public static String getInstallationDir() {
+		URL entry = Platform.getBundle("org.bbaw.bts.commons").getEntry("/META-INF");
+		if (entry != null)
+		{
+		URLConnection connection;
+		try {
+			connection = entry.openConnection();
+			URL fileURL = ((BundleURLConnection) connection).getFileURL();
+
+			URI uri = new URI(fileURL.toString());
+			File file = new File(uri);
+			File parent = file.getParentFile();
+			while(parent != null && !(parent.getName().equals("configuration") && !(parent.getName().equals("workspace"))))
+			{
+				parent = parent.getParentFile();
+			}
+			if (parent == null)
+			{
+				File dir = new File(System.getProperty("user.home") + BTSConstants.FS + "bts");
+				if (!dir.exists())
+				{
+					dir.mkdirs();
+				}
+				return dir.getAbsolutePath();
+			}
+			file = parent.getParentFile();
+	        String path = file.getAbsolutePath();
+			return path;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		
+		}
+		return System.getenv("user.home"); 
+	}
+
+	
+	/** Returns the Database Installation directory within the given btsInstallation directory. 
+	 * DBInstallationDir is the directory where the folder 'CouchDB' is located. 
+	 * Under an installation of CouchDB using e.g. msi-installer that would be the Programs/Apache Software...
+	 * In bts case it is the <btsInstallationDir>/dbdir
+	 * 
+	 * @param btsInsallationDir BTS Installation Directory
+	 * @return Database Installation Directory
+	 */
+	public static String getDBInstallationDir(String btsInsallationDir) {
+		if (btsInsallationDir == null)
+		{
+			btsInsallationDir = getInstallationDir();
+		}
+		String dbdir = btsInsallationDir + BTSConstants.FS + BTSConstants.DB_DIR;
+
+		return dbdir;
 	}
 }

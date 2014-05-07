@@ -15,7 +15,11 @@ public class CorpusObjectServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize CorpusObjectService");
 
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 
 		CorpusObjectService corpusObjectService = ContextInjectionFactory.make(CorpusObjectServiceImpl.class, context);
 		ctx.set(CorpusObjectService.class, corpusObjectService);

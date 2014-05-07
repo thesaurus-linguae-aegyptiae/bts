@@ -35,6 +35,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
@@ -82,6 +83,9 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	@Optional
 	@Named(BTSUIConstants.SELECTION_TYPE)
 	private String selectionType;
+	
+	@Inject
+	private Logger logger;
 
 	private TreeViewer treeViewer;
 	private StructuredSelection selection;
@@ -104,6 +108,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	@PostConstruct
 	public void postConstruct(Composite parent)
 	{
+		logger.debug("Calling postconstruct on CorpusNavigatorPart");
 		parent.setLayout(new GridLayout());
 		composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -138,6 +143,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);
 				root.getChildren().addAll(nodes);
+				logger.debug("CorpusNavigatorPart load Input, no of children " + nodes.size());
 
 				// If you want to update the UI
 				sync.asyncExec(new Runnable()

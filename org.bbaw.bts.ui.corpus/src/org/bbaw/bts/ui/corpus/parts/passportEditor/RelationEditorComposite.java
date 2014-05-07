@@ -8,6 +8,7 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
@@ -61,6 +62,7 @@ public class RelationEditorComposite extends Composite {
 	@Inject
 	@Optional
 	private BTSConfigItem itemConfig;
+	
 	@Inject
 	private IEclipseContext context;
 
@@ -75,12 +77,15 @@ public class RelationEditorComposite extends Composite {
 
 	private ObjectSelectionProposalProvider itemProposalProvider;
 	private boolean makingProposalProvider;
+	
 	@Inject
 	private BTSResourceProvider resourceProvider;
+	
 	@Inject
 	@Optional
 	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
 	private String lang;
+	
 	@Inject
 	private BTSCorpusObject corpusObject;
 
@@ -249,15 +254,23 @@ public class RelationEditorComposite extends Composite {
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				IEclipseContext child = context.createChild("searchselect");
+				context.set(BTSConstants.CORPUS_OBJECT, false);
+				context.set(BTSConstants.WLIST_ENTRY, false);
+				context.set(BTSConstants.THS_ENTRY, true);
 
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
 				if (dialog.open() == dialog.OK) {
 					BTSCorpusObject object = dialog.getObject();
-					Command command = SetCommand.create(getEditingDomain(),
+					System.out.println(object.get_id());
+					EditingDomain ed = getEditingDomain();
+					Command command = SetCommand.create(ed,
 							relation, BtsmodelPackage.BTS_RELATION__OBJECT_ID,
 							object.get_id());
-					getEditingDomain().getCommandStack().execute(command);
+					ed.getCommandStack().execute(command);
+					System.out.println("Relation with object id "
+							+ relation.getObjectId());
+					relation.setObjectId(object.get_id());
 					System.out.println("Relation with object id "
 							+ relation.getObjectId());
 					text.setText(object.getName());

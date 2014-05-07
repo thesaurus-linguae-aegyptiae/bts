@@ -9,6 +9,7 @@ import java.util.Vector;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
@@ -26,6 +27,7 @@ import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
 import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -88,6 +90,11 @@ public class ThsNavigator implements ScatteredCachingPart {
 
 	@Inject
 	private EMenuService menuService;
+	
+	@Inject
+	@Optional
+	@Named(BTSUIConstants.SELECTION_TYPE)
+	private String selectionType;
 
 	private TreeViewer mainTreeViewer;
 	private StructuredSelection selection;
@@ -263,8 +270,14 @@ public class ThsNavigator implements ScatteredCachingPart {
 							tn.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
 						}
-						selectionService.setSelection(o);
-						// eventBroker.send("viewcommunication/syncEvent", o);
+						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
+								.equals(selectionType)) {
+							selectionService.setSelection(o);
+						} else {
+							eventBroker.send(
+									"ui_secondarySelection/corpusNavigator", o);
+
+						}
 					}
 
 				}
@@ -410,22 +423,31 @@ public class ThsNavigator implements ScatteredCachingPart {
 
 	protected void storeIntoMap(final List<BTSThsEntry> children,
 			final Control parentControl) {
-		if (parentControl != null && children != null && !children.isEmpty()) {
-			Map map = null;
-			if (cachingMap.get(parentControl) != null
-					&& cachingMap.get(parentControl) instanceof Map) {
-				map = (Map) cachingMap.get(parentControl);
-			} else {
-				map = new HashMap<URI, Resource>();
-				cachingMap.put(parentControl, map);
-			}
-			if (map != null) {
-				for (BTSCorpusObject o : children) {
-					map.put(o.eResource().getURI(), o.eResource());
+		if (children.isEmpty())
+		{
+			return;
+		}
+		sync.asyncExec(new Runnable() {
+			public void run() {
+				if (parentControl != null && children != null
+						&& !children.isEmpty()) {
+					Map map = null;
+					if (cachingMap.get(parentControl) != null
+							&& cachingMap.get(parentControl) instanceof Map) {
+						map = (Map) cachingMap.get(parentControl);
+					} else {
+						map = new HashMap<URI, Resource>();
+						cachingMap.put(parentControl, map);
+					}
+					if (map != null) {
+						for (BTSCorpusObject o : children) {
+							map.put(o.eResource().getURI(), o.eResource());
+						}
+					}
+
 				}
 			}
-
-		}
+		});
 
 	}
 
@@ -555,21 +577,12 @@ public class ThsNavigator implements ScatteredCachingPart {
 	@Override
 	public List<Map> getScatteredCashMaps() {
 		final List<Map> maps = new Vector<Map>(1);
-		sync.asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				for (CTabItem ti : tabFolder.getItems()) {
-					Control c = ti.getControl();
-					if (c != null && cachingMap.containsKey(c)
-							&& cachingMap.get(c) instanceof Map) {
-						Map map = (Map) cachingMap.get(c);
-						maps.add(map);
+		for (Map map : cachingMap.values()) {
+			
+			maps.add(map);
 
-					}
-				}
+	}
 
-			}
-		});
 
 		return maps;
 	}

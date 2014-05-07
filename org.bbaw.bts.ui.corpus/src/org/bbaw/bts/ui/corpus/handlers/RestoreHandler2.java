@@ -38,17 +38,4 @@ public class RestoreHandler2 {
 		}
 	}
 	
-	
-	// public boolean canExecute(
-	// @Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
-	// if (selection != null
-	// && selection instanceof AdministrativDataObject
-	// && BTSConstants.OBJECT_STATE_TERMINATED
-	// .equals(((AdministrativDataObject) selection)
-	// .getState())) {
-	// return true;
-	// }
-	// return true;
-	// }
-		
 }

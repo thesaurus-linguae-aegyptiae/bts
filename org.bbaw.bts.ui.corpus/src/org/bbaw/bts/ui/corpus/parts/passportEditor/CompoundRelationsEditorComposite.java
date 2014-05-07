@@ -88,15 +88,23 @@ public class CompoundRelationsEditorComposite extends Composite {
 		if (relationConfigCache.containsKey(relation.getType())) {
 			return relationConfigCache.get(relation.getType());
 		} else {
+			BTSConfigItem last = null;
 			for (BTSConfigItem child : listAllRelationConfigs()) {
-				if (child.getValue() != null
+				
+				//if relation type not set
+				if (relation.getType() == null && child.getValue().equals("partOf"))
+				{
+					return child;
+				}
+				else if (child.getValue() != null
 						&& child.getValue().equals(relation.getType())) {
 					relationConfigCache.put(child.getType(), child);
 					return child;
 				}
+				last = child;
 			}
+			return last;
 		}
-		return null;
 	}
 
 	private List<BTSConfigItem> listAllRelationConfigs() {

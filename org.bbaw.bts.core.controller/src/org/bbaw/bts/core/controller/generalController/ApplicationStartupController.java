@@ -19,4 +19,12 @@ public interface ApplicationStartupController
 	void setRemoteDBConnection(String url, String user, String password) throws MalformedURLException;
 
 	String getDBInstallationDir();
+	
+	boolean installDB(String dbInstallationDir, int localPort, String localAdminName, String localAdminpassword);
+	
+	boolean requiresDBInstallation();
+		
+	boolean initializeLocalUser(String localAdminName, String localAdminPassword);
+	
+	boolean synchronizeRemoteProjects(String mainProject, List<String> projecsToSync);
 }

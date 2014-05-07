@@ -42,7 +42,7 @@ public class ConnectToServerPage extends WizardPage
 	private Link btnTestConnection;
 	private Connection connection = new Connection();
 	private boolean connectionOk;
-	private Label errorLabel;
+	private Label errorLabelServer;
 	private IObservableValue uiElement;
 	private ApplicationStartupController startupController;
 	private String remote_db_url;
@@ -74,8 +74,8 @@ public class ConnectToServerPage extends WizardPage
 		GridLayout gl_container = new GridLayout(1, false);
 		gl_container.marginWidth = 10;
 		container.setLayout(gl_container);
-		errorLabel = new Label(container, SWT.NONE);
-		errorLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		errorLabelServer = new Label(container, SWT.NONE);
+		errorLabelServer.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		Label lblPleaseEnterYou = new Label(container, SWT.NONE);
 		lblPleaseEnterYou.setText("Please enter you connection information, URL, username and password.");
 
@@ -189,7 +189,7 @@ public class ConnectToServerPage extends WizardPage
 		BackgroundControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 
 		//
-		uiElement = SWTObservables.observeText(errorLabel);
+		uiElement = SWTObservables.observeText(errorLabelServer);
 		// This one listenes to all changes
 		bindingContext.bindValue(uiElement, new AggregateValidationStatus(bindingContext.getBindings(),
 				AggregateValidationStatus.MAX_SEVERITY), null, null);
@@ -228,6 +228,18 @@ public class ConnectToServerPage extends WizardPage
 			control.setBackground(BTSUIConstants.VIEW_BACKGROUND_INVALID_COLOR);
 		}
 
+	}
+
+	public String getUserName() {
+		return connection.getUser();
+	}
+
+	public String getPassword() {
+		return connection.getPassword();
+	}
+
+	public String getServerURL() {
+		return connection.getUrl();
 	}
 
 }

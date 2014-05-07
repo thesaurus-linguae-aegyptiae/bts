@@ -15,7 +15,11 @@ public class BTSTCObjectServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSTCObjectService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null)
+		{
+			ctx= application.getContext();
+		}
 
 		BTSTCObjectService tcObjectService = ContextInjectionFactory.make(BTSTCObjectServiceImpl.class, context);
 		ctx.set(BTSTCObjectService.class, tcObjectService);
