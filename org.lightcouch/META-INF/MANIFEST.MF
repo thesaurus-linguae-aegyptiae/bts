@@ -16,4 +16,5 @@ Bundle-ClassPath: lib/commons-codec-1.7.jar,
  .
 Export-Package: org.lightcouch
 Import-Package: org.eclipse.core.runtime;version="3.4.0",
+ org.eclipse.osgi.framework.internal.core,
  org.osgi.framework

@@ -26,5 +26,5 @@ public interface ApplicationStartupController
 		
 	boolean initializeLocalUser(String localAdminName, String localAdminPassword);
 	
-	boolean synchronizeRemoteProjects(String mainProject, List<String> projecsToSync);
+	boolean synchronizeRemoteProjects(String mainProject, List<String> projecsToSync, String serverurl, String localDBUrl) throws Exception;
 }

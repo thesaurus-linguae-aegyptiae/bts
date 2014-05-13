@@ -103,13 +103,23 @@ public class SelectProjectsPage extends WizardPage
 		});
 
 		Group grpFurtherProjectsFrom = new Group(container, SWT.NONE);
-		grpFurtherProjectsFrom.setLayout(new GridLayout(1, false));
+		grpFurtherProjectsFrom.setLayout(new GridLayout(2, false));
 		grpFurtherProjectsFrom.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		grpFurtherProjectsFrom.setText("Further projects from which you want to load and read data");
+		
+		Label lblAvailableProjects = new Label(grpFurtherProjectsFrom, SWT.NONE);
+		lblAvailableProjects.setText("Available Projects (Not downloaded)");
+		
+		Label lblProjectsToBe = new Label(grpFurtherProjectsFrom, SWT.NONE);
+		lblProjectsToBe.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
+		lblProjectsToBe.setAlignment(SWT.RIGHT);
+		lblProjectsToBe.setText("Projects to be downloaded");
 
 		duallistcomposite = new DualListComposite<BTSProject>(grpFurtherProjectsFrom, SWT.NONE);
-		duallistcomposite.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true));
+		duallistcomposite.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true, 2, 1));
 		duallistcomposite.setBackground(grpFurtherProjectsFrom.getBackground());
+
+		setPageComplete(main_project != null);
 	}
 
 	private void loadListInput()

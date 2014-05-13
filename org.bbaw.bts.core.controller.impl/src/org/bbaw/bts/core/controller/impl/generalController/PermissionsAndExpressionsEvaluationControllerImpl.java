@@ -7,20 +7,29 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
+import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
+/** This Controller is "passively" listening to changes in active selection or authenticated user.
+ * If a change occurs, it processes all relevant core expressions and modifies them if need.
+ * @author plutte
+ *
+ */
 public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		PermissionsAndExpressionsEvaluationController {
 
@@ -62,11 +71,20 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Inject
 	@Optional
-	@Preference(value = "main_project_key", nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_MAIN_PROJECT_KEY, nodePath = "org.bbaw.bts.app")
 	private String main_project_key;
+	
+	@Inject
+	private BTSEvaluationService evaluationService;
+	
 	private IEclipseContext workbenchContext;
 
 	private String userContextRole;
+
+	private boolean otherLocked;
+
+	private boolean hasLock = false;
+
 
 	@Inject
 	public PermissionsAndExpressionsEvaluationControllerImpl(IEclipseContext ctx) {
@@ -110,9 +128,24 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
 		if (selection != null && selection instanceof BTSDBBaseObject
 				&& !selection.equals(this.selection)) {
+			processDeselection(this.selection);
 			this.selection = selection;
+			if (evaluationService.acquireLockOptimistic(selection))
+			{
+				otherLocked = false;
+			}
+			else
+			{
+				otherLocked = true;
+			}
+			hasLock = otherLocked;
 			evaluatePermissionsAndExpressions();
 		}
+	}
+
+	private void processDeselection(Object object) {
+		evaluationService.unlock(object);
+		
 	}
 
 	private void evaluatePermissionsAndExpressions() {
@@ -146,7 +179,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
 				if (c.getCollectionName() != null
 						&& c.getCollectionName().equals(dbCollectionContext)) {
-					userContextRole = highestUserRoleInDBCollection(c);
+					userContextRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
 					break;
 				}
 			}
@@ -156,44 +189,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 				userContextRole);
 	}
 
-	private String highestUserRoleInDBCollection(BTSProjectDBCollection c) {
-		String role = BTSCoreConstants.USER_ROLE_GUESTS;
-		int level = 0;
-		for (BTSDBCollectionRoleDesc r : c.getRoleDescriptions()) {
-			switch (r.getRoleName()) {
-			case BTSCoreConstants.USER_ROLE_ADMINS: {
-				if (userIsMember(r.getUserNames())) {
-					return BTSCoreConstants.USER_ROLE_ADMINS;
-				}
-				break;
-			}
-			case BTSCoreConstants.USER_ROLE_EDITORS: {
-				if (userIsMember(r.getUserNames())) {
-					role = BTSCoreConstants.USER_ROLE_EDITORS;
-					level = 4;
-				}
-				break;
-			}
-			case BTSCoreConstants.USER_ROLE_RESEARCHERS: {
-				if (level < 3 && userIsMember(r.getUserNames())) {
-					role = BTSCoreConstants.USER_ROLE_RESEARCHERS;
-					level = 3;
-				}
-				break;
-			}
-			case BTSCoreConstants.USER_ROLE_TRANSCRIBERS: {
-				if (level < 2 && userIsMember(r.getUserNames())) {
-					role = BTSCoreConstants.USER_ROLE_TRANSCRIBERS;
-					level = 2;
-				}
-				break;
-			}
-
-			}
-		}
-		return role;
-	}
-
+	
 	private boolean evaluateMayOpenFuton() {
 		return false;
 		// TODO Auto-generated method stub
@@ -238,12 +234,12 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayEdit() {
 		boolean may = false;
-		if (authenticatedUser == null || selection == null
+		if (otherLocked || authenticatedUser == null || selection == null
 				|| !(selection instanceof BTSDBBaseObject)) {
 			may = false;
 		} else {
 			if (userRoleMayEdit()
-					|| userIsMember(((BTSDBBaseObject) selection).getUpdaters())) {
+					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) selection).getUpdaters())) {
 				may = true;
 			}
 		}
@@ -259,27 +255,22 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 				.equals(BTSCoreConstants.USER_ROLE_EDITORS)));
 	}
 
-	private boolean userIsMember(List<String> userList) {
-		for (String userId : userList) {
-			if (userId.equals(authenticatedUser.get_id())
-					|| userId.equals(authenticatedUser.getUserName())) {
-				return true;
-			}
-			if (userGroups != null && !userGroups.isEmpty()) {
-				for (BTSUserGroup g : userGroups) {
-					if (userId.equals(g.get_id()) || userId.equals(g.getName())) {
-						return true;
-					}
-				}
-			}
-
-		}
-		return false;
-	}
+	
 
 	private boolean evaluateMayDelete() {
-		return false;
-		// TODO Auto-generated method stub
+		boolean may = false;
+		if (otherLocked || authenticatedUser == null || selection == null
+				|| !(selection instanceof BTSDBBaseObject)) {
+			may = false;
+		} else {
+			if (userRoleMayEdit()
+					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) selection).getUpdaters())) {
+				may = true;
+			}
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_DELETE,
+				new Boolean(may));
+		return may;
 
 	}
 
@@ -347,6 +338,37 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			}
 		}
 
+	}
+
+	/** Should be called if the locked satuts of an object locked by another user changes.
+	 * eg. when the object is unlocked by former lock owner.
+	 * Only if the given object is the ACTIVE_SELECTION this method will trigger the 
+	 * recalculation of core expressions - it will make the newly unlocked object editable to the user.
+	 * @param lease the given lease on the object or null if not locked.
+	 */
+	@Inject
+	@Optional
+	public void eventReceivedLockStatusUpdate(@EventTopic("locking_status_update/*") Object object)
+	{
+		if (object instanceof DBLease)
+		{
+			// object is locked
+			if (selection != null
+					&& selection.equals(((DBLease) object).getObject())
+					&& !hasLock) {
+				evaluatePermissionsAndExpressions();
+				hasLock = true;
+			}
+		} else {
+			// object is locked
+			if (selection != null
+					&& selection.equals(((DBLease) object).getObject())
+					&& hasLock) {
+				otherLocked = false;
+				evaluatePermissionsAndExpressions();
+				hasLock = false;
+			}
+		}
 	}
 
 }

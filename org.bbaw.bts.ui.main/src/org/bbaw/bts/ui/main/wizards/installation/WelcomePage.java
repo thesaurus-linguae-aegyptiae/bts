@@ -133,6 +133,8 @@ public class WelcomePage extends WizardPage
 
 		Label lblBtsCanRun = new Label(grpNo, SWT.NONE);
 		lblBtsCanRun.setText("BTS can run locally without any limitations other than collaboration.");
+		
+		setPageComplete(false);
 	}
 
 	/**

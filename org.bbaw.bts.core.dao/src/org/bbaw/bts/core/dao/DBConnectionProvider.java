@@ -1,5 +1,8 @@
 package org.bbaw.bts.core.dao;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
 public interface DBConnectionProvider
@@ -14,5 +17,10 @@ public interface DBConnectionProvider
 	ResourceSet getEmfResourceSet();
 
 	String getLocalDBURL();
+
+	<T> T getDBClient(Class<T> clazz, String localDBUrl,
+			String collectionName) throws MalformedURLException;
+
+	void setLocalDBUrl(URL url);
 
 }

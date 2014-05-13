@@ -55,8 +55,7 @@ public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String
 		{
 			e.printStackTrace();
 			createView(path, DaoConstants.PROJECT_ADMIN, viewId);
-			view = connectionProvider.getDBClient(CouchDbClient.class, path).view(
-viewId);
+			view = connectionProvider.getDBClient(CouchDbClient.class, path).view(viewId);
 			allDocs = view.includeDocs(true).query();
 		}
 

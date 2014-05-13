@@ -30,6 +30,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -66,6 +67,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	@Inject
 	private IEclipseContext context;
+	
+	@Inject
+	private Logger logger;
 
 	protected String protocol;
 	protected String host;
@@ -93,7 +97,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		if (resource == null)
 		{
 			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
-			System.out.println(uri);
+			logger.info(uri.path());
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 			resource.getContents().add(entity);
 		}
@@ -137,13 +141,23 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public void remove(E entity, String path)
 	{
-		try
+		if (entity == null) return;
+		if (entity.get_rev() == null)
 		{
-			entity.eResource().delete(null);
-		} catch (IOException e)
+			E entity2 = reload((K) entity.get_id(), path);
+			if (entity2 != null)
+			{
+				entity = entity2;
+			}
+		}
+		if (entity.eResource() != null)
 		{
-			e.printStackTrace();
-			throw new RuntimeException("Delete Resource failed");
+			try {
+				entity.eResource().delete(null);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Delete Resource failed");
+			}
 		}
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
@@ -160,7 +174,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<String, String> options = new HashMap<String, String>();
 		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
-		System.out.println(uri);
+		logger.info(uri.path());
 		try {
 			resource.load(options);
 		} catch (IOException e) {
@@ -186,7 +200,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<String, String> options = new HashMap<String, String>();
 		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
-		System.out.println(uri);
+		logger.info(uri.path());
 		try {
 			resource.load(options);
 		} catch (IOException e) {
@@ -224,7 +238,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
 		for (JsonObject jo : allDocs)
 		{
-			System.out.println(jo.get(DaoConstants.ID_STRING).getAsString());
+			logger.info(jo.get(DaoConstants.ID_STRING).getAsString());
 			if (!jo.get(DaoConstants.ID_STRING).getAsString().startsWith("_"))
 			{
 				URI uri = URI.createURI(getLocalDBURL() + path + jo.get(DaoConstants.ID_STRING).getAsString());
@@ -276,7 +290,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	public void createView(String path, String sourcePath, String viewName)
 	{
-		System.out.println("path " + path + " viewName " + viewName);
+		logger.info("path " + path + " viewName " + viewName);
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		// design documents stored on local .js files
 
@@ -293,7 +307,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 		if (m.find())
 		{
-			System.out.println(m.group(2));
+			logger.info(m.group(2));
 		}
 		return m.group(2);
 	}
@@ -347,12 +361,13 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 						.actionGet();
 			}
 			List<E> result = new Vector<E>();
+			logger.info("Query result size: " + result.size());
 			for (SearchHit hit : response.getHits())
 			{
 				try {
 					result.add(loadObjectFromHit(hit, indexName));
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.info("Query exception", e);
 				}
 			}
 			if (registerQuery)
@@ -362,18 +377,19 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 			return result;
 		}
- else
+		else
 		{
 			SearchResponse response = query.getSearchRequestBuilder()
 					.setIndices(indexName).setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH).execute()
 					.actionGet();
 			List<E> result = new Vector<E>();
+			logger.info("Query result size: " + result.size());
 			for (SearchHit hit : response.getHits()) {
 				try {
 					result.add(loadObjectFromHit(hit, indexName));
 				} catch (Exception e) {
-					e.printStackTrace();
+					logger.info("Query exception", e);
 				}
 			}
 			if (!result.isEmpty()) {
@@ -453,7 +469,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		URI uri = URI.createURI(getLocalDBURL() + "/" + indexName + "/" + id);
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		System.out.println(sourceAsString);
+		logger.info(sourceAsString);
 		InputStream inputStream;
 		try
 		{
@@ -516,7 +532,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
 		for (String jo : allDocs)
 		{
-			System.out.println(jo);
+			logger.info(jo);
 			if (true)
 			{
 				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));

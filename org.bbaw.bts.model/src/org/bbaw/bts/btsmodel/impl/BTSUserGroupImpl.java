@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
@@ -911,4 +912,8 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 		return result.toString();
 	}
 
+	@Override
+	public String getDBCollectionKey() {
+		return "admin";
+	}
 } //BTSUserGroupImpl

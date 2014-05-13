@@ -137,4 +137,12 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 */
 	EList<String> getReaders();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	String getDBCollectionKey();
+
 } // BTSDBBaseObject

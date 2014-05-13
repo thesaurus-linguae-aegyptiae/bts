@@ -59,7 +59,6 @@ public class BTSUserControllerImpl implements BTSUserController {
 				try {
 					g = userGroupService.find(id);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				if (g != null && !groups.contains(g)) {
@@ -112,5 +111,11 @@ public class BTSUserControllerImpl implements BTSUserController {
 	public List<BTSUser> listAll() {
 		return userService.list(BTSConstants.OBJECT_STATE_ACITVE);
 	}
+	
+	@Override
+	public List<BTSUser> listAll(String userName, String passWord) {
+		return userService.listAll(BTSConstants.OBJECT_STATE_ACITVE, userName, passWord);
+	}
+
 
 }

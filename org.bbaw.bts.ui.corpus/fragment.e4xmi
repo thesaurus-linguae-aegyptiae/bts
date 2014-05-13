@@ -5,6 +5,7 @@
   <imports xsi:type="commands:Command" xmi:id="_QRJZIKRPEeO1QoiwGMOm0Q" elementId="org.eclipse.ui.edit.delete"/>
   <imports xsi:type="commands:Command" xmi:id="_3DHYgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.restore"/>
   <imports xsi:type="commands:Command" xmi:id="_lOfkUKkGEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.deletePermanently"/>
+  <imports xsi:type="commands:Command" xmi:id="_0MnaMNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.main.command.editUpdatersReaders"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpora.png">
       <menus xmi:id="_NCyx4Jr7EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.menu.1" label="VL" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png">
@@ -56,6 +57,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_j7228KRUEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_dnddgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KJGZcKkIEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_2xdVgNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
       </menus>
       <toolbar xmi:id="_-h03AKL2EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.toolbar.2">
         <children xsi:type="menu:HandledToolItem" xmi:id="_ClMfMKOOEeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/thss_add.png" tooltip="Add Thesaurus Root Entry" command="_K0TWAKOLEeOuZIAmNo_Bng"/>

@@ -5,6 +5,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Set;
 
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.e4.p2.P2Util;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -14,7 +16,9 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.workbench.IWorkbench;
@@ -31,12 +35,12 @@ import org.eclipse.swt.widgets.Shell;
 
 
 public class UpdateApplicationHandler {
-	private static final String REPOSITORY_LOC =  "http://localhost:8080/bts/"; //telota.bbaw.de/ArchivEditorupdate/update-2.2/repository/";//
 		      
 
 		  @Execute
 		  public void execute(final IProvisioningAgent agent, final Shell parent,
-		      final UISynchronize sync, final IWorkbench workbench, final Logger logger) {
+		      final UISynchronize sync, final IWorkbench workbench, final Logger logger,
+		      final @Preference(nodePath = "org.bbaw.bts.app") IEclipsePreferences prefs) {
 		    Job j = new Job("Update Job") {
 		      private boolean doInstall = false;
 
@@ -49,9 +53,11 @@ public class UpdateApplicationHandler {
 		        final UpdateOperation operation = new UpdateOperation(session);
 
 		        // create uri
+		        String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE, BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
+		        logger.info("P2_UPDATE_SITE url " + urlString);
 		        URI uri = null;
 		        try {
-		          uri = new URI(REPOSITORY_LOC);
+		          uri = new URI(urlString);
 		        } catch (final URISyntaxException e) {
 		          sync.syncExec(new Runnable() {
 		            @Override
@@ -72,12 +78,12 @@ public class UpdateApplicationHandler {
 
 				SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(), "Checking for application updates...", 200);
 				IStatus status2 = operation.resolveModal(sub.newChild(100));
-		        logger.debug("P2 Update Status : " + status2.getCode());
+		        logger.info("P2 Update Status : " + status2.getCode());
 
 		        // run update checks causing I/O
 		        final IStatus status = operation.resolveModal(monitor);
 
-		        logger.debug("P2 Update Status : " + status.getCode());
+		        logger.info("P2 Update Status : " + status.getCode());
 		        // failed to find updates (inform user and exit)
 		        if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
 		          sync.syncExec(new Runnable() {

@@ -912,5 +912,10 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 		result.append(')');
 		return result.toString();
 	}
+	
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_admin";
+	}
 
 } //BTSConfigurationImpl

@@ -668,13 +668,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY = BTS_OBJECT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>BTS Corpus Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 0;
+	int BTS_CORPUS_OBJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -882,6 +891,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTSTC Object</em>' class.
@@ -1107,6 +1125,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text</em>' class.
@@ -2605,6 +2632,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_ENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_ENTRY___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS List Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3235,13 +3271,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>BTSDB Base Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_BASE_OBJECT_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+	int BTSDB_BASE_OBJECT_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3532,6 +3577,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 25;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER___GET_DB_COLLECTION_KEY = BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3737,6 +3791,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_COMMENT_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___GET_DB_COLLECTION_KEY = BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -4052,6 +4115,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Annotation</em>' class.
@@ -4661,6 +4733,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION___GET_DB_COLLECTION_KEY = BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4912,6 +4993,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Corpus</em>' class.
@@ -5211,6 +5301,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The operation id for the '<em>Get Attachement</em>' operation.
@@ -6032,6 +6131,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP___GET_DB_COLLECTION_KEY = BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6274,6 +6382,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS List</em>' class.
@@ -6856,6 +6973,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_THS_ENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Ths Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7082,13 +7208,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT___GET_DB_COLLECTION_KEY = BTS_OBJECT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>BTS Project</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 0;
+	int BTS_PROJECT_OPERATION_COUNT = BTS_OBJECT_OPERATION_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBConnectionImpl <em>BTSDB Connection</em>}' class.
@@ -7519,13 +7654,31 @@ public interface BtsmodelPackage extends EPackage {
 	int DB_LEASE__TIME_STAMP = BTSDB_BASE_OBJECT_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Object</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__OBJECT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+
+	/**
 	 * The number of structural features of the '<em>DB Lease</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DB_LEASE_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
+	int DB_LEASE_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE___GET_DB_COLLECTION_KEY = BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>DB Lease</em>' class.
@@ -7837,6 +7990,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int GRAPHIC_SELECTION_COUNTER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER___GET_DB_COLLECTION_KEY = BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>Graphic Selection Counter</em>' class.
@@ -9116,6 +9278,16 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSDBBaseObject_Readers();
 
 	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getDBCollectionKey() <em>Get DB Collection Key</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get DB Collection Key</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSDBBaseObject#getDBCollectionKey()
+	 * @generated
+	 */
+	EOperation getBTSDBBaseObject__GetDBCollectionKey();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSTextCorpus <em>BTS Text Corpus</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10270,6 +10442,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDBLease_TimeStamp();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsmodel.DBLease#getObject <em>Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Object</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getObject()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EReference getDBLease_Object();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection <em>BTS Project DB Collection</em>}'.
@@ -11555,6 +11738,14 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTSDB_BASE_OBJECT__READERS = eINSTANCE.getBTSDBBaseObject_Readers();
 
 		/**
+		 * The meta object literal for the '<em><b>Get DB Collection Key</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY = eINSTANCE.getBTSDBBaseObject__GetDBCollectionKey();
+
+		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSTextCorpusImpl <em>BTS Text Corpus</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12467,6 +12658,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DB_LEASE__TIME_STAMP = eINSTANCE.getDBLease_TimeStamp();
+
+		/**
+		 * The meta object literal for the '<em><b>Object</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference DB_LEASE__OBJECT = eINSTANCE.getDBLease_Object();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl <em>BTS Project DB Collection</em>}' class.

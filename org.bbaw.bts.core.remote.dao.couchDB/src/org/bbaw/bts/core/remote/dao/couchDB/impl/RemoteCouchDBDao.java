@@ -107,7 +107,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 	public void update(E entity, String path)
 	{
 		// FIXME implement Update
-		URI uri = URI.createURI(getRemoteDBURL() + path + entity.get_id());
+		URI uri = URI.createURI(getRemoteDBURL() + "/" +  path + "/" +  entity.get_id());
 		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		resource.getContents().add(entity);
 
@@ -125,18 +125,18 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 	@Override
 	public void remove(E entity, String path)
 	{
-		URI uri = URI.createURI(getRemoteDBURL() + path + entity.get_id());
+		if (entity == null) return;
+		URI uri = URI.createURI(getRemoteDBURL() + "/" +  path + "/" +  entity.get_id());
 		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		resource.getContents().add(entity);
 
-		try
-		{
-			resource.delete(null);
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Delete Resource failed");
+		if (resource != null) {
+			try {
+				resource.delete(null);
+			} catch (IOException e) {
+				e.printStackTrace();
+				throw new RuntimeException("Delete Resource failed");
+			}
 		}
 	}
 
@@ -171,7 +171,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 			System.out.println(jo.get(RemoteDaoConstants.ID_STRING).getAsString());
 			if (!jo.get(RemoteDaoConstants.ID_STRING).getAsString().startsWith("_"))
 			{
-				URI uri = URI.createURI(getRemoteDBURL() + path + jo.get(RemoteDaoConstants.ID_STRING).getAsString());
+				URI uri = URI.createURI(getRemoteDBURL() + "/" +  path + "/" +  jo.get(RemoteDaoConstants.ID_STRING).getAsString());
 				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());

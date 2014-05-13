@@ -20,8 +20,11 @@ public class BTSImageServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
-		//
-		BTSImageService imageService = ContextInjectionFactory.make(BTSImageServiceImpl.class, context);
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		BTSImageService imageService = ContextInjectionFactory.make(BTSImageServiceImpl.class, ctx);
 		ctx.set(BTSImageService.class, imageService);
 
 		return imageService;

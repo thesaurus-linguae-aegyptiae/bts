@@ -19,8 +19,11 @@ public class BTSUserGroupServiceContextFunction extends ContextFunction
 		if (application != null && application.getContext() != null) {
 			ctx = application.getContext();
 		}
-
-		BTSUserGroupService userGroupService = ContextInjectionFactory.make(BTSUserGroupServiceImpl.class, context);
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		BTSUserGroupService userGroupService = ContextInjectionFactory.make(BTSUserGroupServiceImpl.class, ctx);
 		ctx.set(BTSUserGroupService.class, userGroupService);
 
 		return userGroupService;

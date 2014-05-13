@@ -19,6 +19,7 @@ import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.services.log.Logger;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.percolate.PercolateRequestBuilder;
 import org.elasticsearch.action.percolate.PercolateResponse;
@@ -38,8 +39,13 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	@Inject
 	private IEclipseContext context;
+	
 	@Inject
 	private GeneralPurposeDao generalPurposeDao;
+	
+	@Inject
+	private Logger logger;
+
 	private List<Backend2ClientUpdateListener> listeners = new Vector<Backend2ClientUpdateListener>(1);
 	private String since;
 	private HashMap<String, Changes> changesMap = new HashMap<String, Changes>();
@@ -154,6 +160,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		// feed type continuous
 		Runnable runnable = new Runnable()
 		{
+
 			public void run()
 			{
 				Changes changes = client.changes().includeDocs(true).since(since)
@@ -161,22 +168,26 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 						.continuousChanges();
 				changesMap.put(dbCollection, changes);
-				while (changes.hasNext())
-				{
-					// System.out.println("check for changes");
-					ChangesResult.Row feed = changes.next();
-
-					if (feed != null)
+				try {
+					while (changes.hasNext())
 					{
-						String docId = feed.getId();
-						try
+						// System.out.println("check for changes");
+						ChangesResult.Row feed = changes.next();
+
+						if (feed != null)
 						{
-							signalUpdate(feed, docId, dbCollection);
-						} catch (Exception e)
-						{
-							e.printStackTrace();
+							String docId = feed.getId();
+							try
+							{
+								signalUpdate(feed, docId, dbCollection);
+							} catch (Exception e)
+							{
+								e.printStackTrace();
+							}
 						}
 					}
+				} catch (Exception e) {
+					logger.error(e);
 				}
 			}
 		};
@@ -195,7 +206,15 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 	{
 		for (String key : changesMap.keySet())
 		{
-			changesMap.get(key).stop();
+			Changes c = changesMap.get(key);
+			if (c != null)
+			{
+				try {
+					c.stop();
+				} catch (Exception e) {
+					logger.error("trying to stop changes. Change: " + c.toString(), e);
+				}
+			}
 		}
 
 	}

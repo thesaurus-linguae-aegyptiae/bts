@@ -118,5 +118,7 @@ public class DaoConstants
 
 	public static final String QUERY_ID_REGISTRY = "query_id_registry";
 
+	public static final String VIEW_ALL_DBLEASES = "notification/all_dbleases";
+
 
 }

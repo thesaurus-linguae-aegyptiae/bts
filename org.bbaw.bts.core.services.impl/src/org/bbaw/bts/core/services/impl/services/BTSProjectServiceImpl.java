@@ -139,7 +139,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public List<BTSProject> list(String objectState)
 	{
-		return filter(projectDao.list(ServiceConstants.ADMIN, objectState));
+		return projectDao.list(ServiceConstants.ADMIN, objectState);
 	}
 
 	@Override

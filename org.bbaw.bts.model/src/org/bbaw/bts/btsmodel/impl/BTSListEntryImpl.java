@@ -8,17 +8,12 @@ import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSListSubentry;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -256,4 +251,8 @@ public class BTSListEntryImpl extends BTSCorpusObjectImpl implements BTSListEntr
 		return result.toString();
 	}
 
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_wlist";
+	}
 } //BTSListEntryImpl

@@ -7,7 +7,6 @@
    </configIni>
 
    <launcherArgs>
-      <programArgs>-clearPersistedState</programArgs>
       <vmArgs>-Dosgi.requiredJavaVersion=1.6 -Xms40m -Xmx256m -XX:MaxPermSize=128M</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
@@ -71,7 +70,7 @@
       <plugin id="org.eclipse.e4.ui.widgets"/>
       <plugin id="org.eclipse.e4.ui.workbench"/>
       <plugin id="org.eclipse.e4.ui.workbench.renderers.swt"/>
-      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt.cocoa"/>
+      <plugin id="org.eclipse.e4.ui.workbench.renderers.swt.cocoa" fragment="true"/>
       <plugin id="org.eclipse.e4.ui.workbench.swt"/>
       <plugin id="org.eclipse.e4.ui.workbench3"/>
       <plugin id="org.eclipse.emf.common"/>
@@ -119,7 +118,6 @@
       <feature id="org.eclipse.emf.ecore"/>
       <feature id="org.eclipse.emf.common"/>
       <feature id="org.eclipse.e4.rcp"/>
-      <feature id="org.bbaw.bts.app.development.feature" version="1.0.0.qualifier"/>
       <feature id="org.eclipse.equinox.p2.core.feature" version="1.2.1.v20140221-1852"/>
       <feature id="org.bbaw.bts.app.feature" version="0.0.2.qualifier"/>
    </features>
@@ -128,6 +126,7 @@
       <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="2" />
       <plugin id="org.eclipse.equinox.ds" autoStart="true" startLevel="3" />
       <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="3" />
+      <property name="eclipse.log.level" value="INFO" />
    </configurations>
 
 </product>

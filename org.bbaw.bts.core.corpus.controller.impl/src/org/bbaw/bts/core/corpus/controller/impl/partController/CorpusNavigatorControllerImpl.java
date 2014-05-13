@@ -35,6 +35,7 @@ import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -71,6 +72,9 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 	@Inject
 	private BTSListEntryService wlistService;
+	
+	@Inject
+	private Logger logger;
 
 	/*
 	 * (non-Javadoc)
@@ -113,11 +117,11 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	public void addRelation(final BTSCorpusObject subject, final String relationType,
 			final TreeNodeWrapper objectTreeNode)
 	{
-		System.out.println("run refresh");
+		logger.info("run refresh");
 		BTSObject object = objectTreeNode.getObject();
 		if (subject != null)
 		{
-			System.out.println("selection is instance of BTSTextCorpus");
+			logger.info("selection is instance of BTSTextCorpus");
 			BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
 			rel.setObjectId(((BTSDBBaseObject) object).get_id());
 			rel.setType(relationType);
@@ -158,7 +162,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId", parent.get_id()));
 		query.setQueryId("relations.objectId-" + parent.get_id());
-		System.out.println(query.getQueryId());
+		logger.info(query.getQueryId());
 		if (queryResultMap != null)
 		{
 			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
@@ -170,6 +174,8 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		}
 		List<BTSCorpusObject> children = corpusObjectService.query(query,
 				BTSConstants.OBJECT_STATE_ACITVE);
+		logger.info("Number of children found: " + children.size());
+
 		return children;
 	}
 

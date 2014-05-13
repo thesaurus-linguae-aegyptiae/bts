@@ -86,6 +86,10 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		{
 			((BTSDBBaseObject) entity).set_id(idService.createId());
 			entity.setProject(main_project);
+			if (authenticatedUser != null)
+			{
+				entity.getUpdaters().add(authenticatedUser.getUserName());
+			}
 		}
 		if (entity instanceof BTSCorpusObject)
 		{

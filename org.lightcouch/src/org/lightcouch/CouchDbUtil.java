@@ -22,8 +22,10 @@ import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +41,7 @@ import java.util.jar.JarFile;
 import org.apache.http.HttpResponse;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 import org.osgi.framework.Bundle;
 
 import com.google.gson.Gson;
@@ -126,24 +129,21 @@ final class CouchDbUtil
 	 */
 	public static List<String> listResources(String path)
 	{
+		URL fileURL = null;
 		try
 		{
-			Class<CouchDbUtil> clazz = CouchDbUtil.class;
-			URL dirURL = clazz.getClassLoader().getResource(path);
-			Bundle bundle = Platform.getBundle("org.lightcouch");
-			URL fileURL = bundle.getEntry(path);
+			URL entry = Platform.getBundle("org.lightcouch").getEntry(path);
 			File file = null;
-			try
+			if (entry != null)
 			{
-				file = new File(FileLocator.resolve(fileURL).toURI());
-			} catch (URISyntaxException e1)
-			{
-				e1.printStackTrace();
-			} catch (IOException e1)
-			{
-				e1.printStackTrace();
+			URLConnection connection;
+				connection = entry.openConnection();
+				fileURL = ((BundleURLConnection) connection).getFileURL();
+
+				URI uri = new URI(fileURL.toString());
+				file = new File(uri);
 			}
-			dirURL = file.toPath().toUri().toURL();
+			URL dirURL = file.toPath().toUri().toURL();
 
 			if (dirURL != null && dirURL.getProtocol().equals("file"))
 			{
@@ -160,15 +160,15 @@ final class CouchDbUtil
 					String name = entries.nextElement().getName();
 					if (name.startsWith(path))
 					{
-						String entry = name.substring(path.length());
-						int checkSubdir = entry.indexOf("/");
+						String entry1 = name.substring(path.length());
+						int checkSubdir = entry1.indexOf("/");
 						if (checkSubdir >= 0)
 						{
-							entry = entry.substring(0, checkSubdir);
+							entry1 = entry1.substring(0, checkSubdir);
 						}
-						if (entry.length() > 0)
+						if (entry1.length() > 0)
 						{
-							result.add(entry);
+							result.add(entry1);
 						}
 					}
 				}
@@ -177,7 +177,7 @@ final class CouchDbUtil
 			return null;
 		} catch (Exception e)
 		{
-			throw new CouchDbException(e);
+			throw new CouchDbException("fileURL: " + fileURL, e);
 		}
 	}
 

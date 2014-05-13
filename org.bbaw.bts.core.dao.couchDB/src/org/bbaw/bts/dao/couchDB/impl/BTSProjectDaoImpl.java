@@ -66,7 +66,7 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 			allDocs = view.includeDocs(true).query();
 		} catch (NoDocumentException e)
 		{
-			e.printStackTrace();
+			System.out.println("create view with id: " + viewId);
 			createView(path, path, viewId);
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(true).query();
@@ -96,62 +96,62 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 		return results;
 	}
 
-	@Override
-	public void add(BTSProject entity, String path)
-	{
+//	@Override
+//	public void add(BTSProject entity, String path)
+//	{
+//
+//		URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + entity.get_id());
+//		System.out.println(uri);
+//		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+//		resource.getContents().add(entity);
+//
+//		try
+//		{
+//			resource.save(null);
+//		} catch (IOException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("Save Resource failed");
+//		}
+//	}
+//
+//	@Override
+//	public void update(BTSProject entity, String path)
+//	{
+//		// FIXME implement Update
+//		URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + entity.get_id());
+//		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+//		resource.getContents().add(entity);
+//
+//		try
+//		{
+//			resource.save(null);
+//		} catch (IOException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("Save Resource failed");
+//		}
+//	}
 
-		URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + entity.get_id());
-		System.out.println(uri);
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
-
-		try
-		{
-			resource.save(null);
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Save Resource failed");
-		}
-	}
-
-	@Override
-	public void update(BTSProject entity, String path)
-	{
-		// FIXME implement Update
-		URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + entity.get_id());
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
-
-		try
-		{
-			resource.save(null);
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Save Resource failed");
-		}
-	}
-
-	@Override
-	public void remove(BTSProject entity, String path)
-	{
-		URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + entity.get_id());
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
-
-		try
-		{
-			resource.delete(null);
-		} catch (IOException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Delete Resource failed");
-		}
-	}
+//	@Override
+//	public void remove(BTSProject entity, String path)
+//	{
+//		URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + entity.get_id());
+//		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+//		resource.getContents().add(entity);
+//
+//		try
+//		{
+//			resource.delete(null);
+//		} catch (IOException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			throw new RuntimeException("Delete Resource failed");
+//		}
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -198,7 +198,7 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 		{
 			//remove _security
 			CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, coll.getCollectionName());
-			dbClient.remove("_security", null);
+			dbClient.remove("_security", "0");
 
 		}
 

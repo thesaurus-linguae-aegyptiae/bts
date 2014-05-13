@@ -20,8 +20,12 @@ public class BTSAnnotationServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
+		if (ctx == null)
+		{
+			ctx = context;
+		}
 
-		BTSAnnotationService annotationService = ContextInjectionFactory.make(BTSAnnotationServiceImpl.class, context);
+		BTSAnnotationService annotationService = ContextInjectionFactory.make(BTSAnnotationServiceImpl.class, ctx);
 		ctx.set(BTSAnnotationService.class, annotationService);
 
 		return annotationService;

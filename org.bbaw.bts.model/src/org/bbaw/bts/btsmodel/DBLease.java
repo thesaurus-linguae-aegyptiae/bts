@@ -16,6 +16,7 @@ import java.util.Date;
  *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getObjectId <em>Object Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getUserId <em>User Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getTimeStamp <em>Time Stamp</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getObject <em>Object</em>}</li>
  * </ul>
  * </p>
  *
@@ -128,5 +129,31 @@ public interface DBLease extends BTSDBBaseObject
 	 * @generated
 	 */
 	void setTimeStamp(Date value);
+
+	/**
+	 * Returns the value of the '<em><b>Object</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Object</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Object</em>' reference.
+	 * @see #setObject(BTSDBBaseObject)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getDBLease_Object()
+	 * @model transient="true"
+	 * @generated
+	 */
+	BTSDBBaseObject getObject();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.DBLease#getObject <em>Object</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Object</em>' reference.
+	 * @see #getObject()
+	 * @generated
+	 */
+	void setObject(BTSDBBaseObject value);
 
 } // DBLease

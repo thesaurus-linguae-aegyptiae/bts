@@ -20,8 +20,11 @@ public class BTSListEntryServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
-
-		BTSListEntryService listEntryService = ContextInjectionFactory.make(BTSListEntryServiceImpl.class, context);
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		BTSListEntryService listEntryService = ContextInjectionFactory.make(BTSListEntryServiceImpl.class, ctx);
 		ctx.set(BTSListEntryService.class, listEntryService);
 
 		return listEntryService;

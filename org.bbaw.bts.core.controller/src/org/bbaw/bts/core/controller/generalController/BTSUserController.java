@@ -26,5 +26,7 @@ public interface BTSUserController {
 	void setRememberedUser(BTSUser validUser);
 	
 	List<BTSUser> listAll();
+	
+	List<BTSUser> listAll(String userName, String passWord);
 
 }

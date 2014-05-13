@@ -241,6 +241,17 @@ public class DBInstallationSettingsPage extends WizardPage
 	
 	public int getDBLocalPort()
 	{
-		return new Integer(settings.port).intValue();
+		System.out.println(settings.port);
+		String port = settings.port;
+		if (port == null)
+		{
+			port = db_port;
+		}
+		try {
+			return new Integer(port).intValue();
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 }

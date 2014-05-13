@@ -3,16 +3,20 @@
 package org.bbaw.bts.btsmodel.provider;
 
 import java.beans.PropertyChangeSupport;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.ComposedImage;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemFontProvider;
@@ -26,6 +30,7 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * This is the item provider adapter for a
@@ -226,5 +231,15 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
 				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
 	}
-
+	@Override
+	protected Object overlayImage(Object object, Object image) {
+		if (object instanceof BTSDBBaseObject && ((BTSDBBaseObject) object).isLocked())
+	    {
+	      List<Object> images = new ArrayList<Object>(2);
+	      images.add(image);
+	      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK)); 
+	      image = new ComposedImage(images);
+	    }
+		return super.overlayImage(object, image);
+	}
 }

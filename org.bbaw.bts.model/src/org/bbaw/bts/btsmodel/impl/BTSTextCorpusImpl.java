@@ -5,13 +5,10 @@ package org.bbaw.bts.btsmodel.impl;
 import org.bbaw.bts.btsmodel.BTSCorpusHeader;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -172,4 +169,8 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_corpus";
+	}
 } //BTSTextCorpusImpl

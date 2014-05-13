@@ -99,7 +99,7 @@ public class LocalCreateUserPage extends WizardPage
 		composite_UserEdit.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		 // this label displays all errors of all bindings
-	    Label descAllLabel = new Label(parent, SWT.NONE);
+	    Label descAllLabel = new Label(composite, SWT.NONE);
 	    descAllLabel.setText("All Validation Problems:");
 	    
 		errorLabel = new Text(composite, SWT.NONE);
@@ -385,6 +385,17 @@ public class LocalCreateUserPage extends WizardPage
 						BTSUIConstants.DELAY, textUserName_User), model_us,
 				null, null);
 		bindingContext.addValidationStatusProvider(binding_us);
+		
+		//password
+		IObservableValue model_pw = EMFEditProperties
+				.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__PASSWORD).observe(user);
+		EMFUpdateValueStrategy us_pw = new EMFUpdateValueStrategy();
+		us_pw.setBeforeSetValidator(new StringNotEmptyValidator("Password is required."));
+		Binding binding_pw = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, textPassword_User), model_pw,
+						us_pw, null);
+		bindingContext.addValidationStatusProvider(binding_pw);
 		
 		// listen to all errors via this binding
 	    // we do not need to listen to any SWT event on this label as it never

@@ -166,5 +166,14 @@ public abstract class BTSIdentifiableItemImpl extends MinimalEObjectImpl.Contain
 		}
 		return false;
 	}
+	
+	@Override
+	public int hashCode() {
+		if (_id != null)
+		{
+			return _id.hashCode();
+		}
+		return super.hashCode();
+	}
 
 } // BTSIdentifiableItemImpl

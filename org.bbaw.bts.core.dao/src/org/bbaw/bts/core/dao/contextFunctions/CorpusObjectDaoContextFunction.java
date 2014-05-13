@@ -63,7 +63,7 @@ public class CorpusObjectDaoContextFunction extends ContextFunction
 		{
 			logger = (Logger) context.get(Logger.class.getName());
 		}
-		logger.debug("extension registry " + registry);
+		logger.info("extension registry " + registry);
 
 		if (registry == null)
 		{
@@ -72,17 +72,17 @@ public class CorpusObjectDaoContextFunction extends ContextFunction
 		IExtensionPoint[] points = registry.getExtensionPoints();
 		for (IExtensionPoint p : points)
 		{
-			logger.debug(p.getUniqueIdentifier());
+			logger.info(p.getUniqueIdentifier());
 		}
 		IConfigurationElement[] config = registry
 				.getConfigurationElementsFor(DaoConstants.DAO_FACTORY_EXTENSION_POINT_ID);
 
-		logger.debug("extension registry number of elements " + config);
-		logger.debug("extension registry number of elements " + config.length);
+		logger.info("extension registry number of elements " + config);
+		logger.info("extension registry number of elements " + config.length);
 
 		for (IConfigurationElement e : config)
 		{
-			logger.debug("extension registry element " + e.getName());
+			logger.info("extension registry element " + e.getName());
 
 			final Object o = e.createExecutableExtension("class");
 			if (o instanceof DAOFactory

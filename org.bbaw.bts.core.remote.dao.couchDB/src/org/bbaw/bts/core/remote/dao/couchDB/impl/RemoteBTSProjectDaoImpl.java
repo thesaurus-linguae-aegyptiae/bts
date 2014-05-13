@@ -188,7 +188,7 @@ public class RemoteBTSProjectDaoImpl extends RemoteCouchDBDao<BTSProject, String
 		{
 			//remove _security
 			CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, coll.getCollectionName());
-			dbClient.remove("_security", "");
+			dbClient.remove("_security", null);
 
 		}
 

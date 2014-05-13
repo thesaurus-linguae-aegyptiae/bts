@@ -80,7 +80,7 @@ public class CopyDirectory {
 						+ fileName);
 				if (logger != null)
 				{
-					logger.debug( "file unzip : " + newFile.getAbsoluteFile());
+					logger.info( "file unzip : " + newFile.getAbsoluteFile());
 				}
 
 				// create all non exists folders

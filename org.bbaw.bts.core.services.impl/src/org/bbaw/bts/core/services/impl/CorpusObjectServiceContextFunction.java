@@ -20,8 +20,11 @@ public class CorpusObjectServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
-
-		CorpusObjectService corpusObjectService = ContextInjectionFactory.make(CorpusObjectServiceImpl.class, context);
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		CorpusObjectService corpusObjectService = ContextInjectionFactory.make(CorpusObjectServiceImpl.class, ctx);
 		ctx.set(CorpusObjectService.class, corpusObjectService);
 
 		return corpusObjectService;

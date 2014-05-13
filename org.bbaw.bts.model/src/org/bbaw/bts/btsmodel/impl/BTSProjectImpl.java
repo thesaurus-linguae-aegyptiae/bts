@@ -2,7 +2,9 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
@@ -450,6 +452,15 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public String getDBCollectionKey() {
+		return "admin";
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -680,6 +691,41 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseOperationID) {
+				case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY: return BtsmodelPackage.BTS_PROJECT___GET_DB_COLLECTION_KEY;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsmodelPackage.BTS_PROJECT___GET_DB_COLLECTION_KEY:
+				return getDBCollectionKey();
+		}
+		return super.eInvoke(operationID, arguments);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString()
 	{
 		if (eIsProxy()) return super.toString();
@@ -704,5 +750,4 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 		result.append(')');
 		return result.toString();
 	}
-
 } //BTSProjectImpl

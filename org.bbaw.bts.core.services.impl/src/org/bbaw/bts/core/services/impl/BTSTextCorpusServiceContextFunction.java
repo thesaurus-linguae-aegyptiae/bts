@@ -21,7 +21,14 @@ public class BTSTextCorpusServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
-		ctx.set(BTSTextCorpusService.class, service);
+		if (ctx != null)
+		{
+			ctx.set(BTSTextCorpusService.class, service);
+		}
+		else
+		{
+			context.set(BTSTextCorpusService.class, service);
+		}
 
 		return service;
 	}

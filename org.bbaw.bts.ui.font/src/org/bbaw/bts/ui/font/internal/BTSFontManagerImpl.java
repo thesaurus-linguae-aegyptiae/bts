@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.swt.graphics.Font;
 
 public class BTSFontManagerImpl implements BTSFontManager
@@ -18,14 +19,20 @@ public class BTSFontManagerImpl implements BTSFontManager
 
 	@Inject
 	private IEclipseContext context;
+	
+	@Inject
+	private Logger logger;
+	
 	private static final String FONT_PROVIDER_EXTENSION_POINT_ID = "org.bbaw.bts.ui.font.fontProvider";
 
 	@Override
 	public Font getFont(String fontName)
 	{
+		logger.info("FontManager load font, name: " + fontName);
 		IExtensionRegistry registry = ((IExtensionRegistry) context.get(IExtensionRegistry.class.getName()));
 
 		IConfigurationElement[] config = registry.getConfigurationElementsFor(FONT_PROVIDER_EXTENSION_POINT_ID);
+		logger.info("FontManager load extension, number of extensions: " + config.length);
 		for (IConfigurationElement e : config)
 		{
 			Object o = null;
@@ -34,12 +41,13 @@ public class BTSFontManagerImpl implements BTSFontManager
 				o = e.createExecutableExtension("class");
 			} catch (CoreException e1)
 			{
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				logger.error(e1);
 			}
 			if (o != null && o instanceof BTSFontProvider)
 			{
 				BTSFontProvider p = (BTSFontProvider) o;
+				logger.info("FontManager load extension, BTSFontProvider name: " + p.getFontName());
+
 				if (p.getFontName() != null && p.getFontName().equals(fontName))
 				{
 					return p.getFont();

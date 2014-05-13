@@ -20,8 +20,11 @@ public class BTSTCObjectServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
-
-		BTSTCObjectService tcObjectService = ContextInjectionFactory.make(BTSTCObjectServiceImpl.class, context);
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		BTSTCObjectService tcObjectService = ContextInjectionFactory.make(BTSTCObjectServiceImpl.class, ctx);
 		ctx.set(BTSTCObjectService.class, tcObjectService);
 
 		return tcObjectService;

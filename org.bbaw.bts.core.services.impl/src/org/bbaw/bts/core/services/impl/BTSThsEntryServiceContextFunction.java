@@ -19,9 +19,12 @@ public class BTSThsEntryServiceContextFunction extends ContextFunction {
 		{
 			ctx= application.getContext();
 		}
-
+		if (ctx == null)
+		{
+			ctx = context;
+		}
 		BTSThsEntryService service = ContextInjectionFactory.make(
-				BTSThsEntryServiceImpl.class, context);
+				BTSThsEntryServiceImpl.class, ctx);
 		ctx.set(BTSThsEntryService.class, service);
 
 		return service;

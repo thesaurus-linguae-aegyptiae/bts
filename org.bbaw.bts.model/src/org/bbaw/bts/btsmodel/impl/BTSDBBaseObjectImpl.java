@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -222,6 +223,17 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getDBCollectionKey() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -320,6 +332,20 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return readers != null && !readers.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY:
+				return getDBCollectionKey();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

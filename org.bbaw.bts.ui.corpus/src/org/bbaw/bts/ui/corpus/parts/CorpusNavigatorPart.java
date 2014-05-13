@@ -108,7 +108,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	@PostConstruct
 	public void postConstruct(Composite parent)
 	{
-		logger.debug("Calling postconstruct on CorpusNavigatorPart");
+		logger.info("Calling postconstruct on CorpusNavigatorPart");
 		parent.setLayout(new GridLayout());
 		composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -143,7 +143,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);
 				root.getChildren().addAll(nodes);
-				logger.debug("CorpusNavigatorPart load Input, no of children " + nodes.size());
+				logger.info("CorpusNavigatorPart load Input, no of children " + nodes.size());
 
 				// If you want to update the UI
 				sync.asyncExec(new Runnable()

@@ -303,18 +303,13 @@ public class LoginDialog extends Dialog
 			return false;
 		}
 		QueryBuilder dd;
-		//FIXME wieder einkommentieren
-//		BTSQueryRequest query = new BTSQueryRequest();
-//		query.setQueryBuilder(QueryBuilders.boolQuery().must(
-//				QueryBuilders.termQuery("userName", userName)));
-		List<BTSUser> users = userController.listAll();
+		List<BTSUser> users = userController.listAll(userName, passWord);
 		for (BTSUser u : users) {
 			if (userName.equals(u.getUserName())) { // FIXME password checking
 													// && equalsPassword(u,
 													// passWord)) {
 				validUser = u;
 				logger.info("User found: " + u.get_id() + " userName: " + u.getUserName());
-
 				return true;
 			}
 		}

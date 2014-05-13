@@ -4,6 +4,7 @@ package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Date;
 
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.DBLease;
 
@@ -11,6 +12,7 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 /**
@@ -24,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getObjectId <em>Object Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getUserId <em>User Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getTimeStamp <em>Time Stamp</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getObject <em>Object</em>}</li>
  * </ul>
  * </p>
  *
@@ -110,6 +113,16 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	 * @ordered
 	 */
 	protected Date timeStamp = TIME_STAMP_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getObject() <em>Object</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getObject()
+	 * @generated
+	 * @ordered
+	 */
+	protected BTSDBBaseObject object;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -229,6 +242,44 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BTSDBBaseObject getObject() {
+		if (object != null && object.eIsProxy()) {
+			InternalEObject oldObject = (InternalEObject)object;
+			object = (BTSDBBaseObject)eResolveProxy(oldObject);
+			if (object != oldObject) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsmodelPackage.DB_LEASE__OBJECT, oldObject, object));
+			}
+		}
+		return object;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSDBBaseObject basicGetObject() {
+		return object;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setObject(BTSDBBaseObject newObject) {
+		BTSDBBaseObject oldObject = object;
+		object = newObject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.DB_LEASE__OBJECT, oldObject, object));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -241,6 +292,9 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 				return getUserId();
 			case BtsmodelPackage.DB_LEASE__TIME_STAMP:
 				return getTimeStamp();
+			case BtsmodelPackage.DB_LEASE__OBJECT:
+				if (resolve) return getObject();
+				return basicGetObject();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -265,6 +319,9 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 				return;
 			case BtsmodelPackage.DB_LEASE__TIME_STAMP:
 				setTimeStamp((Date)newValue);
+				return;
+			case BtsmodelPackage.DB_LEASE__OBJECT:
+				setObject((BTSDBBaseObject)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -291,6 +348,9 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 			case BtsmodelPackage.DB_LEASE__TIME_STAMP:
 				setTimeStamp(TIME_STAMP_EDEFAULT);
 				return;
+			case BtsmodelPackage.DB_LEASE__OBJECT:
+				setObject((BTSDBBaseObject)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -312,6 +372,8 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 				return USER_ID_EDEFAULT == null ? userId != null : !USER_ID_EDEFAULT.equals(userId);
 			case BtsmodelPackage.DB_LEASE__TIME_STAMP:
 				return TIME_STAMP_EDEFAULT == null ? timeStamp != null : !TIME_STAMP_EDEFAULT.equals(timeStamp);
+			case BtsmodelPackage.DB_LEASE__OBJECT:
+				return object != null;
 		}
 		return super.eIsSet(featureID);
 	}

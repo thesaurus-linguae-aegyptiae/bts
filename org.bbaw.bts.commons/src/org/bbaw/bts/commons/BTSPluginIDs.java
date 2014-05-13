@@ -34,8 +34,6 @@ public class BTSPluginIDs
 
 	public static final String PREF_DB_DIR = "db_installation_dir";
 
-	public static final String PREF_DB_PORT = "db_port";
-
 	public static final String CMD_ID_NEW_USERGROUP = "org.bbaw.bts.ui.main.command.createNewUserGroup";
 
 	public static final String CMD_ID_NEW_USER = "org.bbaw.bts.ui.main.command.createNewUser";
@@ -47,5 +45,19 @@ public class BTSPluginIDs
 	public static final String POPMENU_THS_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.ths.popupmenu";
 
 	public static final String PREF_LOCAL_DB_URL = "local_db_url";
+
+	public static final String PREF_LOCAL_DB_URL_PROTOCOL = "local_db_url_protocol";
+
+	public static final String PREF_LOCAL_DB_URL_HOST = "local_db_url_host";
+
+	public static final String PREF_LOCAL_DB_URL_PORT = "local_db_url_port";
+
+	public static final String PREF_P2_UPDATE_SITE = "p2_update_site_url";
+
+	public static final String PREF_SEARCH_HTTP_ENABLED = "search_http_enabled";
+
+	public static final String PREF_LOCAL_SEARCH_CLUSTER_NAME = "search_local_cluster_name";
+
+	public static final String PREF_LOCK_TTL = "lock_ttl";
 
 }

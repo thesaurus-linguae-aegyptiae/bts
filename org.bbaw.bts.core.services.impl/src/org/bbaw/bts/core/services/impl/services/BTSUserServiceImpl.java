@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -12,6 +13,10 @@ import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.equinox.security.storage.ISecurePreferences;
+import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
+import org.eclipse.equinox.security.storage.StorageException;
 import org.osgi.service.prefs.BackingStoreException;
 
 public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService
@@ -22,6 +27,9 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	
 	@Inject
 	private BTSUserDao userDao;
+
+	@Inject
+	private Logger logger;
 
 	@Override
 	public BTSUser createNew()
@@ -114,30 +122,56 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		{
 			return false;
 		}
-		prefs.put("username", userName);
-		prefs.put("password", passWord);
-		return true;
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+		ISecurePreferences auth = secPrefs.node("auth");
+		try {
+			auth.put("username", userName, false);
+			auth.put("password", passWord, true);
+			auth.flush();
+			return true;
+		} catch (StorageException e) {
+			logger.error(e);
+		} catch (IOException e) {
+			logger.error(e);
+		}
+
+		return false;
 	}
 
 	@Override
 	public void setRememberedUser(BTSUser user) {
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+		ISecurePreferences rememberedMe = secPrefs.node("rememberedMe");
 		if(user == null)
 		{
-			prefs.remove("rememberedUsername");
-			prefs.remove("remembered");
+			rememberedMe.remove("rememberedUsername");
+			rememberedMe.remove("remembered");
 		}
 		else
 		{
-			prefs.put("rememberedUsername", user.getUserName());
-			prefs.put("remembered", prefs.get("password", ""));
+			ISecurePreferences auth = secPrefs.node("auth");
+			try {
+				String rememberedUsername = auth.get("username", null);
+				String rememberedPass = auth.get("password", null);
+				rememberedMe.put("rememberedUsername", rememberedUsername, false);
+				rememberedMe.put("remembered",rememberedPass, true);
+			} catch (StorageException e) {
+				logger.error(e);
+			}
 		}
 		try {
-			prefs.flush();
-		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			rememberedMe.flush();
+		} catch (IOException e) {
+			logger.error(e);
 		}
-		// prefs.put("password", passWord);
 
+	}
+
+
+	@Override
+	public List<BTSUser> listAll(String objectState, String userName,
+			String passWord) {
+		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN, objectState, userName, passWord);
+		return users;
 	}
 }

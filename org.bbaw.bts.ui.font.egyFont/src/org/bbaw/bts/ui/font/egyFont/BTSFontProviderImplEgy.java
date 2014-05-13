@@ -2,12 +2,15 @@ package org.bbaw.bts.ui.font.egyFont;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 
 import org.bbaw.bts.ui.font.BTSFontProvider;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -45,30 +48,25 @@ public class BTSFontProviderImplEgy implements BTSFontProvider
 
 	private FontData getFontData()
 	{
-		//		URL fontFile = YouClassName.class
-		//	            .getResource("/fonts/DS-DIGI.TTF");
-		Class<BTSFontProviderImplEgy> clazz = BTSFontProviderImplEgy.class;
-		URL dirURL = clazz.getClassLoader().getResource(FOLDER + FONT_FILE_NAME);
-		Bundle bundle = Platform.getBundle(BUNDLE_NAME);
-		URL fontFile = bundle.getEntry(FOLDER + FONT_FILE_NAME);
-		File file = null;
-		try
+		URL entry = Platform.getBundle("org.bbaw.bts.ui.font.egyFont").getEntry("/" + FOLDER + FONT_FILE_NAME);
+		String fontpath = null;
+		if (entry != null)
 		{
-			file = new File(FileLocator.resolve(fontFile).toURI());
-			fontFile = file.toPath().toUri().toURL();
-			System.out.println(fontFile);
-
-		} catch (URISyntaxException e1)
-		{
-			e1.printStackTrace();
-		} catch (IOException e1)
-		{
-			e1.printStackTrace();
+		URLConnection connection;
+			
+			try {
+				connection = entry.openConnection();
+				URL fileURL = ((BundleURLConnection) connection).getFileURL();
+				URI uri = null;
+				uri = new URI(fileURL.toString());
+				File file = new File(uri);
+				fontpath = file.getAbsolutePath();
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
-		String fontpath = fontFile.getPath();
-		System.out.println(fontpath);
-		fontpath = fontpath.substring(1, fontpath.length());
-		System.out.println(fontpath);
 		boolean isLoaded = Display.getCurrent().loadFont(fontpath);
 		FontData fontdata = null;
 

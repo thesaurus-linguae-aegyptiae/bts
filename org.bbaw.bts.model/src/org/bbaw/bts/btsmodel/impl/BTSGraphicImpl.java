@@ -323,5 +323,6 @@ public class BTSGraphicImpl extends BTSIdentifiableItemImpl implements BTSGraphi
 		result.append(')');
 		return result.toString();
 	}
+	
 
 } //BTSGraphicImpl

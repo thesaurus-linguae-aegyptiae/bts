@@ -3,6 +3,7 @@ package org.bbaw.bts.db;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSProject;
 
@@ -23,6 +24,13 @@ public interface DBManager
 
 	boolean prepareDBCollectionIndexing(String string);
 	
-	boolean startDatabase(String btsInstallationDir) throws Exception;
+	boolean startDatabase(String btsInstallationDir, String localDBUrl) throws Exception;
+
+	boolean synchronizeRemoteProjects(String mainProject,
+			List<String> projecsToSync, String serverurl, String localDBUrl) throws Exception;
+
+	void shutdown();
+
+	void setLocalDBUrl(String localDBUrl);
 
 }

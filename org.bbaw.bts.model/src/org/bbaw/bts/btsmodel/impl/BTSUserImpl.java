@@ -1571,4 +1571,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 		return result.toString();
 	}
 
+	@Override
+	public String getDBCollectionKey() {
+		return "admin";
+	}
 } //BTSUserImpl

@@ -3,18 +3,16 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSListSubentry;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
@@ -214,5 +212,4 @@ public class BTSListSubentryImpl extends BTSReferencableItemImpl implements BTSL
 		}
 		return super.eIsSet(featureID);
 	}
-
 } //BTSListSubentryImpl

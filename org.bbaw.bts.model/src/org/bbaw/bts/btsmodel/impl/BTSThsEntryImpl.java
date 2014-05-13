@@ -4,7 +4,6 @@ package org.bbaw.bts.btsmodel.impl;
 
 import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-
 import org.eclipse.emf.ecore.EClass;
 
 /**
@@ -38,5 +37,8 @@ public class BTSThsEntryImpl extends BTSCorpusObjectImpl implements BTSThsEntry
 	{
 		return BtsmodelPackage.Literals.BTS_THS_ENTRY;
 	}
-
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_ths";
+	}
 } //BTSThsEntryImpl

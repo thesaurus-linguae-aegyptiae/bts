@@ -59,6 +59,12 @@ public class BTSCoreConstants
 			WIDGET_TYPE_SELECT_CONFIG, WIDGET_TYPE_SELECT_INTEGER,
 			WIDGET_TYPE_REFERENCE_EXTERNAL };
 	public static final String VISIBILITY_CONFIG = "Visibility";
+	public static final String VISIBILITY_PUBLIC = "public";
+	public static final String VISIBILITY_ALL_AUTHENTICATED = "all_authenticated";
+	public static final String VISIBILITY_PROJECT = "project";
+	public static final String VISIBILITY_GROUP = "group";
+	public static final String VISIBILITY_USER = "user";
+
 
 	public static final String REVIEW_STATUS_CONFIG = "Review Status";
 	public static final String USERGROUPS_OF_AUTHENTICATED_USER = "groups_of_authenticated_user";
@@ -83,6 +89,7 @@ public class BTSCoreConstants
 	public static final String MAIN_WORD_LIST = "main_word_list";
 	public static final String RELATION = "Relation";
 	public static final Object RELATIONS = "Relations";
+	public static final String LOCKING_MAP_KEY = "locking_map_key";
 
 
 }

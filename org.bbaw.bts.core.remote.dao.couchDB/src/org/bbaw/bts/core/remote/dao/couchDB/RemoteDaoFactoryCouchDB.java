@@ -22,7 +22,7 @@ public class RemoteDaoFactoryCouchDB implements RemoteDAOFactory
 	@Override
 	public String getFactoryName()
 	{
-		return "caouchdb.daofactory";
+		return "couchdb.daofactory";
 	}
 
 	@Override

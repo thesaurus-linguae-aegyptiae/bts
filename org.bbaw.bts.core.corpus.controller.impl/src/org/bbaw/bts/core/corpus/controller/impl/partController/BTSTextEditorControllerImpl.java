@@ -98,12 +98,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				BTSSenctence sentence = (BTSSenctence) textItems;
 				int start = stringBuilder.length();
-				logger.debug("BTSTextEditorController before sentence sign added: " + stringBuilder.toString());
+				logger.info("BTSTextEditorController before sentence sign added: " + stringBuilder.toString());
 
 				stringBuilder.append(SENTENCE_SIGN);
-				logger.debug("BTSTextEditorController sentence sign: " + SENTENCE_SIGN);
+				logger.info("BTSTextEditorController sentence sign: " + SENTENCE_SIGN);
 
-				logger.debug("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
+				logger.info("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
 
 				BTSModelAnnotation ma = new BTSModelAnnotation(sentence);
 				
@@ -123,7 +123,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				appendToStringBuilder(textItems, model, stringBuilder);
 			}
 		}
-		logger.debug("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
+		logger.info("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
 		doc.set(stringBuilder.toString());
 
 	}
@@ -345,7 +345,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			len = scanner.getTokenLength();
 			Object o = token.getData();
 			//			annotationModel.
-			logger.debug("BTSTextEditorController token " + token + " offset: " + pos + " token length: " + len);
+			logger.info("BTSTextEditorController token " + token + " offset: " + pos + " token length: " + len);
 			try
 			{
 				content = document.get(pos, len);

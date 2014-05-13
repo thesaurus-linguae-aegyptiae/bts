@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.beans.PropertyChangeListener;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -418,6 +419,15 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public String getDBCollectionKey() {
+		return getProject() + "_corpus_" + getCorpusPrefix();
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 */
@@ -662,6 +672,41 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseOperationID) {
+				case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY: return BtsmodelPackage.BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsmodelPackage.BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY:
+				return getDBCollectionKey();
+		}
+		return super.eInvoke(operationID, arguments);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -705,4 +750,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		}
 		return false;
 	}
+	
+	
 } // BTSCorpusObjectImpl

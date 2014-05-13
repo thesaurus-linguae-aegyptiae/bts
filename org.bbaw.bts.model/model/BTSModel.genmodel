@@ -134,6 +134,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/locked"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/updaters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/readers"/>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSDBBaseObject/getDBCollectionKey"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTextCorpus">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSTextCorpus/header"/>
@@ -276,6 +277,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/objectId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/userId"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//DBLease/timeStamp"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//DBLease/object"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSProjectDBCollection">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSProjectDBCollection/collectionName"/>

@@ -60,12 +60,12 @@ public class RemoteBTSProjectDaoContextFunction extends ContextFunction
 		{
 			logger = (Logger) context.get(Logger.class.getName());
 		}
-		logger.debug("number of extension " + RemoteDaoConstants.REMOTE_DAO_FACTORY_EXTENSION_POINT_ID 
+		logger.info("number of extension " + RemoteDaoConstants.REMOTE_DAO_FACTORY_EXTENSION_POINT_ID 
 				+ "configuration elements : " + config.length);
 		IExtensionPoint[] points = registry.getExtensionPoints();
 		for (IExtensionPoint p : points)
 		{
-			logger.debug(p.getUniqueIdentifier());
+			logger.info(p.getUniqueIdentifier());
 		}
 		for (IConfigurationElement e : config)
 		{

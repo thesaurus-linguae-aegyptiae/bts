@@ -128,6 +128,7 @@ public class ObjectUpdaterReaderEditorDialog extends TitleAreaDialog {
 			public void widgetSelected(SelectionEvent event) {
 				if (isValidInput()) {
 					saveInput();
+					okPressed();
 				}
 			}
 		});

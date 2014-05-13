@@ -20,8 +20,11 @@ public class BTSTextServiceContextFunction extends ContextFunction
 		{
 			ctx= application.getContext();
 		}
-
-		BTSTextService textService = ContextInjectionFactory.make(BTSTextServiceImpl.class, context);
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		BTSTextService textService = ContextInjectionFactory.make(BTSTextServiceImpl.class, ctx);
 		ctx.set(BTSTextService.class, textService);
 
 		return textService;
