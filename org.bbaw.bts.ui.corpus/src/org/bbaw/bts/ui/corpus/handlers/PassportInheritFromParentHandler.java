@@ -43,6 +43,7 @@ public class PassportInheritFromParentHandler {
 				if (parent != null)
 				{
 					inheritPassportData(selection, parent);
+					break;
 				}
 			}
 		}
@@ -103,6 +104,7 @@ public class PassportInheritFromParentHandler {
 	private void mergeAttributeContent(BTSPassportEntryItem targetEntry,
 			BTSPassportEntryItem sourceEntry, EAttribute attr) {
 		Object value = sourceEntry.eGet(attr);
+		System.out.println("merge Attr. attr name: " + attr.getName() + ", val:  " + value);
 		if (forced)
 		{
 			targetEntry.eSet(attr, value);
