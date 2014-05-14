@@ -12,9 +12,11 @@ import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
+import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSBooleanToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
@@ -25,6 +27,7 @@ import org.bbaw.bts.ui.commons.converter.BTSStringToIntegerConverter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.commons.validator.StringRegexValidator;
+import org.bbaw.bts.ui.corpus.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -33,14 +36,17 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
@@ -52,6 +58,8 @@ import org.eclipse.jface.databinding.viewers.ViewersObservables;
 import org.eclipse.jface.fieldassist.ContentProposalAdapter;
 import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
+import org.eclipse.jface.fieldassist.IContentProposal;
+import org.eclipse.jface.fieldassist.IContentProposalListener;
 import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -114,6 +122,11 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private String lang;
 	@Inject
 	private BTSCorpusObject corpusObject;
+	private Text ths_select_text;
+	
+	@Inject
+	private ThsNavigatorController thsNavigatorController;
+	private ObjectSelectionProposalProvider thsItemProposalProvider;
 
 	@Inject
 	public PassportEntryItemEditor(Composite parent) {
@@ -499,10 +512,113 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	}
 
 	private void loadSelectTHSWidget(BTSConfigItem itemConfig2,
-			BTSPassportEntry entry) {
-		// TODO Auto-generated method stub
+			final BTSPassportEntry entry) {
+		Label label = new Label(this, SWT.NONE);
+		label.setText(itemConfig.getValue());
+		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
+				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
+		((GridData) label.getLayoutData()).verticalIndent = 2;
+		
+		
+		
+		ths_select_text = new Text(this, SWT.BORDER);
+		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		final char[] autoActivationCharacters = new char[] { '.', '#' };
+		ths_select_text.addFocusListener(new FocusAdapter() {
+
+			@Override
+			public void focusGained(FocusEvent e) {
+
+				try {
+					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
+					ContentProposalAdapter adapter = new ContentProposalAdapter(
+							ths_select_text, new TextContentAdapter(),
+							getObjectProposalProvider(itemConfig), keyStroke,
+							autoActivationCharacters);
+					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+					adapter.addContentProposalListener(new IContentProposalListener() {
+
+						@Override
+						public void proposalAccepted(IContentProposal proposal) {
+							System.out.println(proposal);
+							Command command = SetCommand.create(
+									editingDomain,
+									entry, BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE,
+									proposal.getContent());
+							editingDomain.getCommandStack().execute(
+									command);
+							entry.setValue(proposal.getContent());
+						}
+					});
+				} catch (ParseException e1) {
+					e1.printStackTrace();
+				}
+
+			}
+		});
+
+		if (entry.getValue() != null) {
+			ths_select_text.setText(thsNavigatorController.getDisplayName(entry.getValue()));
+		}
+
+		Label lblSearch = new Label(this, SWT.NONE);
+		lblSearch.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_SEARCH));
+		lblSearch.setToolTipText("Search Object");
+		lblSearch.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
+				1, 1));
+		((GridData) lblSearch.getLayoutData()).verticalIndent = 3;
+		lblSearch.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+				Label l = (Label) e.getSource();
+				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				// open search dialog
+				IEclipseContext child = context.createChild("searchselect");
+				context.set(BTSConstants.CORPUS_OBJECT, false);
+				context.set(BTSConstants.WLIST_ENTRY, false);
+				context.set(BTSConstants.THS_ENTRY, true);
+
+				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
+						SearchSelectObjectDialog.class, child);
+				if (dialog.open() == dialog.OK) {
+					BTSCorpusObject object = dialog.getObject();
+					System.out.println(object.get_id());
+					Command command = SetCommand.create(editingDomain,
+							entry, BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE,
+							object.get_id());
+					editingDomain.getCommandStack().execute(command);
+					System.out.println("Relation with object id "
+							+ entry.getValue());
+					entry.setValue(object.get_id());
+					System.out.println("Relation with object id "
+							+ entry.getValue());
+					ths_select_text.setText(object.getName());
+				}
+			}
+		});
+
 
 	}
+
+	protected IContentProposalProvider getObjectProposalProvider(
+			BTSConfigItem configItem) {
+		if (thsItemProposalProvider == null) {
+			thsItemProposalProvider = new ObjectSelectionProposalProvider(
+					passportEditorController, configItem);
+		}
+		thsItemProposalProvider.setConfigItem(configItem);
+		return thsItemProposalProvider;
+	}
+
 
 	private void loadSelectIntegerWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {

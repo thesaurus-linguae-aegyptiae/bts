@@ -101,6 +101,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 			resource.getContents().add(entity);
 		}
+		while (resource.getContents().size() > 1)
+		{
+			resource.getContents().remove(1);
+		}
 
 		try
 		{

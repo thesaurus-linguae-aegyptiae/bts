@@ -376,10 +376,12 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_rolesDesc_name_text.setLayoutData(new GridData(SWT.FILL,
 				SWT.CENTER, true, false, 1, 1));
 		roles_rolesDesc_name_text.setEditable(false);
-		roles_rolesDesc_name_text
-.setText(((TreeNodeWrapper) selectedTreeNode)
-				.getLabel());
-
+		if (selectedTreeNode.getLabel() != null)
+		{
+			roles_rolesDesc_name_text
+	.setText(((TreeNodeWrapper) selectedTreeNode)
+					.getLabel());
+		}
 		// Label lblRoleDesc = new Label(roles_composite_right, SWT.NONE);
 		// lblRoleDesc.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 		// false, 1, 1));

@@ -327,6 +327,16 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 	@Override
 	public String getDisplayName(String id) {
+		BTSCorpusObject o = findObject(id);
+		
+		if (o != null) {
+			return o.getName();
+		}
+		return id;
+	}
+
+	@Override
+	public BTSCorpusObject findObject(String id) {
 		BTSCorpusObject o = null;
 		try {
 			o = corpusObjectService.find(id);
@@ -335,7 +345,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			e.printStackTrace();
 		}
 		if (o != null) {
-			return o.getName();
+			return o;
 		} else {
 			try {
 				o = thsService.find(id);
@@ -345,7 +355,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			}
 		}
 		if (o != null) {
-			return o.getName();
+			return o;
 		} else {
 			try {
 				o = wlistService.find(id);
@@ -354,10 +364,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 				e.printStackTrace();
 			}
 		}
-		if (o != null) {
-			return o.getName();
-		}
-		return id;
+		return o;
 	}
 	
 	

@@ -25,6 +25,7 @@ public class BTSCoreConstants
 	public static final int LAST_SELECTED_LIST_SIZE = 50;
 	public static final String CORE_EXPRESSION_CAN_UNDO = "core_expression_can_undo";
 	public static final String CORE_EXPRESSION_CAN_REDO = "core_expression_can_redo";
+	
 	public static final String BASIC_RELATIONS_PARTOF = "partOf";
 	public static final String BASIC_RELATIONS_ANNOTATION_TARGET = "annotationTarget";
 	public static final String LANG_DE = "de";

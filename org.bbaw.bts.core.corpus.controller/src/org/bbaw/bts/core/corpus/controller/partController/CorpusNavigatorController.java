@@ -39,5 +39,7 @@ public interface CorpusNavigatorController
 			Map<String, BTSQueryResultAbstract> queryResultMap, Map<String, List<TreeNodeWrapper>> viewHolderMap);
 
 	String getDisplayName(String id);
+	
+	BTSCorpusObject findObject(String id);
 
 }

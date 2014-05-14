@@ -37,10 +37,13 @@
     <elements xsi:type="commands:Command" xmi:id="_iWpp8JV9EeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.command.addAnnotation" commandName="addAnnotation" category="_u7sUsF2fEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_K0TWAKOLEeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.command.addThsRootEntry" commandName="addThsRootEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_FHzOwKOiEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.command.addThsChildEntry" commandName="addThsChildEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_oMmZgNqxEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent" commandName="passportInheritFromParent" category="_u7sUsF2fEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
     <elements xsi:type="basic:Part" xmi:id="__kd84D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.passportEditorPart" containerData="10" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.PassportEditorPart" label="PassportEditorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/passport.png" closeable="true">
-      <toolbar xmi:id="_ED6jsD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.passportEditor.toolbar"/>
+      <toolbar xmi:id="_ED6jsD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.passportEditor.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_ASVqcNqyEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.6" label="Inherit" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/inherit.png" tooltip="Inherit Passport Data from Parent Object" command="_oMmZgNqxEeO-3cFwhVZ23Q"/>
+      </toolbar>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Fbrn4D_oEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.right.top">
@@ -82,6 +85,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_O9-CoKOiEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handler.addThsChildEntry" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddThsChildEntryHandler" command="_FHzOwKOiEeO1QoiwGMOm0Q"/>
     <elements xsi:type="commands:Handler" xmi:id="_0Xw1UKhdEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handler.restore" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.RestoreDeletedHandler" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
     <elements xsi:type="commands:Handler" xmi:id="_0ehY0KkGEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handler.deletePermanently" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeletePermanentlyHandler" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+    <elements xsi:type="commands:Handler" xmi:id="_uwvb8NqxEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handler.passportInheritFromParentHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.PassportInheritFromParentHandler" command="_oMmZgNqxEeO-3cFwhVZ23Q"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5YS8cJWEEeOpr8TW-P04BA" featurename="children" parentElementId="org.bbaw.bts.ui.main.handledtoolitem.new.menu">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_TIix8JWGEeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.0" label="New Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>

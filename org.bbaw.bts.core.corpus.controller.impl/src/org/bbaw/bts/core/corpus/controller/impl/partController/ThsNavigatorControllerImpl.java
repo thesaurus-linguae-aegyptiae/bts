@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -244,4 +245,30 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 		return result;
 	}
 
+	@Override
+	public String getDisplayName(String id) {
+		BTSCorpusObject o = null;
+
+			try {
+				o = thsService.find(id);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		if (o != null) {
+			return o.getName();
+		} 
+//		else {
+//			try {
+//				o = wlistService.find(id);
+//			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		if (o != null) {
+//			return o.getName();
+//		}
+		return id;
+	}
 }

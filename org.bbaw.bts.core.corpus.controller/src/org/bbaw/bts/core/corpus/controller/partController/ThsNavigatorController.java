@@ -38,4 +38,6 @@ public interface ThsNavigatorController {
 			Map<String, List<TreeNodeWrapper>> viewHolderMap);
 
 	BTSThsEntry createNew();
+	
+	String getDisplayName(String id);
 }
