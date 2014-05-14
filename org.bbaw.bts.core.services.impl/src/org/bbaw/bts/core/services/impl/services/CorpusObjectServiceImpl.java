@@ -1,5 +1,7 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -15,6 +17,7 @@ import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSThsEntry;
+import org.bbaw.bts.core.commons.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSAnnotationService;
@@ -285,8 +288,31 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 						query, p + ServiceConstants.CORPUS_INTERFIX + c, p
 								+ ServiceConstants.CORPUS_INTERFIX + c));
 			}
+			result.addAll(corpusObjectDao.getPassportEntryProposals(
+					query, p + ServiceConstants.THS, p
+							+ ServiceConstants.THS));
+			result.addAll(corpusObjectDao.getPassportEntryProposals(
+					query, p + ServiceConstants.WLIST, p
+							+ ServiceConstants.WLIST));
 		}
-		return result;
+		return selectDistinctValues(result);
+	}
+
+	private List<BTSPassportEntry> selectDistinctValues(
+			List<BTSPassportEntry> result) {
+		Set<String> selected = new HashSet<String>(result.size());
+		List<BTSPassportEntry> distinctResult = new Vector<BTSPassportEntry>();
+
+		for (BTSPassportEntry entry : result)
+		{
+			if(!selected.contains(entry.getValue()))
+			{
+				distinctResult.add(entry);
+				selected.add(entry.getValue());
+			}
+		}
+		Collections.sort(distinctResult, new BTSPassportEntryComparator());
+		return distinctResult;
 	}
 
 	@Override

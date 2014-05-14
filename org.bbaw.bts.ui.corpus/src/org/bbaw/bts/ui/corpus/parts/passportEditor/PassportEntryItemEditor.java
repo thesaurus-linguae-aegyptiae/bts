@@ -680,7 +680,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		makeContentProposalProviderThread(entry.getValue());
+		makeContentProposalProviderThread("");
 
 		final Text text = new Text(this, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
@@ -771,10 +771,10 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	}
 
 	protected IContentProposalProvider getItemProposalProvider(String prefix) {
-		if (true || itemProposalProvider == null) {
+		if (itemProposalProvider == null) {
 			try {
 				itemProposalProvider = new PassportEntryContentProposalProvider(
-						passportEditorController.getProposalsFor(entryPath, prefix));
+						passportEditorController.getProposalsFor(entryPath, ""));
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

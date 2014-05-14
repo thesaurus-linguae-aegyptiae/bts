@@ -7,10 +7,12 @@ Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/*.xml
 Export-Package: org.bbaw.bts.core.commons,
+ org.bbaw.bts.core.commons.comparator,
  org.bbaw.bts.core.commons.exceptions,
  org.bbaw.bts.core.commons.staticAccess
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,
+ org.bbaw.bts.btsmodel,
  org.bbaw.bts.searchModel,
  org.bbaw.bts.ui.resources,
  org.eclipse.core.runtime.preferences;version="3.3.0",

@@ -16,6 +16,7 @@ import org.bbaw.bts.core.services.BTSListEntryService;
 import org.bbaw.bts.core.services.BTSThsEntryService;
 import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.e4.core.services.log.Logger;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
@@ -33,12 +34,19 @@ public class PassportEditorPartControllerImpl
 
 	@Inject
 	private BTSListEntryService listService;
+	
+	@Inject
+	private Logger logger;
 
 	@Override
 	public List<BTSPassportEntry> getProposalsFor(
 			List<BTSPassportEntry> entryPath,
 			String text) {
 		String field = "passport";
+		if (text == null)
+		{
+			text = "";
+		}
 
 		List<FilterBuilder> filters = new ArrayList<FilterBuilder>(
 				entryPath.size());
@@ -48,7 +56,6 @@ public class PassportEditorPartControllerImpl
 					entryPath.get(i).getType()));
 
 		}
-//		String type = field + ".children.type";
 		field += ".children";
 		// TODO build es query
 		BTSQueryRequest query = new BTSQueryRequest();
@@ -60,20 +67,21 @@ public class PassportEditorPartControllerImpl
 		SearchRequestBuilder sqb = corpusObjectService
 				.getSearchRequestBuilder();
 		sqb.setQuery(qb);
-//		sqb.setSource("*.value");
 		// sqb.setFilter(FilterBuilders.andFilter(filterArray));
 //		sqb.setFilter(FilterBuilders.termFilter(type,
 		// entryPath.get(entryPath.size() - 1).getType()));
-//		sqb.addField(field + ".value");
+		sqb.setFetchSource(field, null);
+
 		query.setSearchRequestBuilder(sqb);
-		query.setRequestField(field + ".value");
+		query.setRequestField(field);
 		query.setAutocompletePrefix(text);
 		query.setRequestTypeFieldValue(entryPath.get(entryPath.size() - 1)
 				.getType());
 
 		List<BTSPassportEntry> proposals = corpusObjectService
 				.getPassportEntryProposals(query);
-		System.out.println("Number of proposals: " + proposals.size() + ", prefix " + text);
+		logger.info("Searching proposals: " + query.getSearchRequestBuilder().toString());
+		logger.info("Number of proposals: " + proposals.size() + ", prefix " + text);
 		return proposals;
 	}
 
