@@ -1,0 +1,227 @@
+grammar org.bbaw.bts.corpus.text.egy.EgyDsl with org.eclipse.xtext.common.Terminals
+
+generate egyDsl "http://www.bbaw.org/bts/corpus/text/egy/EgyDsl"
+
+TextContent:
+	{TextContent}
+	(items+=TextItem ((' ' | '\n' )* (items+=TextItem))*);
+
+
+TextItem:
+	Sentence;
+
+// sentence	
+Sentence:
+	'§' (items+=SentenceItem (' '  items+=SentenceItem)*) '§';
+
+SentenceItem:
+	 Word ('\n' | '\t')?| AbstractMarker ('\n' | '\t')? |  Ambivalence ('\n' | '\t')?
+;
+
+AbstractMarker:
+	Marker | VersMarker
+;
+
+
+
+Ambivalence:
+	'%' (cases+=Case ('; ' ('\n' | '\t')? cases+=Case)+) '%'
+;
+
+Case:
+	'case ' name=EGYSTRING ': ' ('\n' | '\t')? (items+=SentenceItemNoAmbivalence (' ' ('\n' | '\t')? items+=SentenceItemNoAmbivalence)*) 
+;
+
+SentenceItemNoAmbivalence:
+	Word | AbstractMarker
+;
+
+VersMarker:
+	VersbreakMarker | VersFrontierMarker
+;
+
+VersFrontierMarker:
+	{VersFrontierMarker}
+	'@mv'
+;
+
+VersbreakMarker:
+	{VersbreakMarker}
+	'@v'
+;
+
+Marker:
+	('#' (type=EGYSTRING (': ' ('\n' | '\t')? name=EGYSTRING)?) '#')
+;
+
+// word
+Word:
+	{Word}
+	
+	( wChar+=WordMiddle)*	
+;
+
+WordMiddle:
+//	{WordMiddle}
+	Interfix | Brackets | Chars 
+;
+
+// Chars...
+Chars:
+	name=EGYSTRING
+;
+
+terminal EGYSTRING: (!(' '|'\n'|'\t' | '§' | '#'|'%'|';'
+	// interfixes
+	|'.'|','|':'|'-'|'~'|'\u2261'|'\u22ee'
+	// brackets
+	|'('|')'|'<'|'>'|'?'
+	|'{' | '}'
+	|'\u2E22' | '\u2E23'
+	|'@'
+	
+))*;
+
+// textual criticism interfixes
+Interfix:
+	InterfixFlexion | InterfixLexical | InterfixSuffixPronomLexical |InterfixPrefixNonLexical |InterfixPrefixLexical
+	| InterfixCompountWords | InterfixConnectionSyllabicGroup
+;
+
+InterfixLexical:
+	{InterfixLexical}
+	','
+;
+
+InterfixFlexion:
+	{InterfixFlexion}
+	'.'
+;
+
+InterfixSuffixPronomLexical:
+	{InterfixSuffixPronomLexical}
+	'\u2261'
+;
+
+InterfixPrefixNonLexical:
+	{InterfixPrefixNonLexical}
+	':'
+;
+
+InterfixPrefixLexical:
+	{InterfixPrefixLexical}
+	'\u22ee'
+;
+
+InterfixCompountWords:
+	{InterfixCompountWords}
+	'-'
+;
+
+InterfixConnectionSyllabicGroup:
+	{InterfixConnectionSyllabicGroup}
+	'~'
+;
+
+// textual criticism brackets
+Brackets:
+	Rasur | AncientExpanded | RestorationOverRasur |
+	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | ExpandedColumn  
+	| PartialDestruction | Destruction
+;
+
+Expanded:
+	{Expanded}
+	'(' wChar+=NoExpanded+ ')'
+;
+
+NoExpanded:
+	Interfix | Chars
+;
+
+Emendation:
+	{Emendation}
+	'<' wChar+=NoEmendation+ '>'
+	;
+
+NoEmendation:
+	Interfix | Expanded  | Chars
+;
+
+DisputableReading:
+	{DisputableReading}
+	'?' wChar+=NoDisputableReading+ '?'
+;
+
+NoDisputableReading:
+	Interfix | Expanded | Chars
+;
+
+Lacuna:
+	{Lacuna}
+	'[' wChar+=NoLacuna+ ']'
+;
+
+NoLacuna:
+	Interfix | Expanded | Chars
+;
+
+Deletion:
+	{Deletion}
+	'{' wChar+=NoDeletion+ '}'
+;
+
+NoDeletion:
+	Interfix  | Chars | PartialDestruction | Expanded
+;
+
+ExpandedColumn:
+	{ExpandedColumn}
+	'<<' wChar+=NoExpandedColumn+ '>>'
+;
+
+NoExpandedColumn:
+	Interfix  | Chars | Expanded
+;
+
+Rasur:
+	{Rasur}
+	'{{' wChar+=NoRasur+ '}}'
+;
+
+NoRasur:
+	Interfix  | Chars | Expanded
+;
+
+AncientExpanded:
+	{AncientExpanded}
+	'((' wChar+=NoAncientExpanded+ '))'
+;
+
+NoAncientExpanded:
+	Chars | Expanded
+;
+
+RestorationOverRasur:
+	{RestorationOverRasur}
+	'[[' wChar+=NoRestorationOverRasur+ ']]'
+;
+
+NoRestorationOverRasur:
+	Chars | Expanded
+;
+
+PartialDestruction:
+	{PartialDestruction}
+	'\u2E22' wChar+=NoPartialDestruction+ '\u2E23'
+;
+
+NoPartialDestruction:
+	Chars | Deletion | Interfix | Expanded
+;
+
+Destruction:
+	{Destruction}
+	'--' comment=EGYSTRING '--'
+;
+

@@ -28,12 +28,19 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.swt.widgets.Shell;
 
 public class PassportInheritFromParentHandler {
-	private boolean forced;
+	private boolean forcedBoolean;
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
-			CorpusNavigatorController corpusNavigatorController) {
+			CorpusNavigatorController corpusNavigatorController, @Optional @Named("org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced")String forced) {
 		BTSCorpusObject parent = null;
-		
+		if (forced != null && "true".equals(forced))
+		{
+			forcedBoolean = true;
+		}
+		else
+		{
+			forcedBoolean = false;
+		}
 		for (BTSRelation rel : selection.getRelations())
 		{
 			if (rel.getObjectId() != null && !"".equals(rel.getObjectId()) && BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
@@ -101,7 +108,7 @@ public class PassportInheritFromParentHandler {
 	private void mergeReferenceContent(BTSPassportEntryItem targetEntry,
 			BTSPassportEntryItem sourceEntry, EReference ref) {
 		Object value = sourceEntry.eGet(ref);
-		if (forced)
+		if (forcedBoolean)
 		{
 			targetEntry.eSet(ref, value);
 		}
@@ -115,7 +122,7 @@ public class PassportInheritFromParentHandler {
 			BTSPassportEntryItem sourceEntry, EAttribute attr) {
 		Object value = sourceEntry.eGet(attr);
 		System.out.println("merge Attr. attr name: " + attr.getName() + ", val:  " + value);
-		if (forced)
+		if (forcedBoolean)
 		{
 			targetEntry.eSet(attr, value);
 		}
