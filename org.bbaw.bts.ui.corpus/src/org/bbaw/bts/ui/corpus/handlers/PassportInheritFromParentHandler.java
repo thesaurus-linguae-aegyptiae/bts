@@ -67,7 +67,7 @@ public class PassportInheritFromParentHandler {
 		for (BTSPassportEntry sourceSubEntry : sourceEntry.getChildren())
 		{
 			BTSPassportEntry targetSubEntry = getTargetEntry(targetEntry, sourceSubEntry);
-			inheritDataRecursivly(targetEntry, sourceSubEntry);
+			inheritDataRecursivly(targetSubEntry, sourceSubEntry);
 		}
 		if (sourceEntry instanceof BTSPassportEntryItem && targetEntry instanceof BTSPassportEntryItem)
 		{
@@ -79,7 +79,10 @@ public class PassportInheritFromParentHandler {
 			BTSPassportEntryItem sourceEntry) {
 		for (EAttribute attr : targetEntry.eClass().getEAllAttributes())
 		{
-			mergeAttributeContent(targetEntry, sourceEntry, attr);
+			if (filterAttributes(attr.getName()))
+			{
+				mergeAttributeContent(targetEntry, sourceEntry, attr);
+			}
 		}
 		
 		for (EReference ref : targetEntry.eClass().getEAllReferences())
@@ -87,6 +90,13 @@ public class PassportInheritFromParentHandler {
 			mergeReferenceContent(targetEntry, sourceEntry, ref);
 		}
 		
+	}
+	private boolean filterAttributes(String name) {
+		if ("_id".equals(name) || "_rev".equals(name))
+		{
+			return false;
+		}
+		return true;
 	}
 	private void mergeReferenceContent(BTSPassportEntryItem targetEntry,
 			BTSPassportEntryItem sourceEntry, EReference ref) {
