@@ -213,7 +213,7 @@ public class RelationEditorComposite extends Composite {
 							Command command = SetCommand.create(
 									getEditingDomain(),
 									relation,
-									BtsmodelPackage.BTS_RELATION__OBJECT_ID,
+									BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
 									proposal.getContent());
 							getEditingDomain().getCommandStack().execute(
 									command);
@@ -265,14 +265,14 @@ public class RelationEditorComposite extends Composite {
 					System.out.println(object.get_id());
 					EditingDomain ed = getEditingDomain();
 					Command command = SetCommand.create(ed,
-							relation, BtsmodelPackage.BTS_RELATION__OBJECT_ID,
+							relation, BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
 							object.get_id());
 					ed.getCommandStack().execute(command);
-					System.out.println("Relation with object id "
-							+ relation.getObjectId());
-					relation.setObjectId(object.get_id());
-					System.out.println("Relation with object id "
-							+ relation.getObjectId());
+//					System.out.println("Relation with object id "
+//							+ relation.getObjectId());
+//					relation.setObjectId(object.get_id());
+//					System.out.println("Relation with object id "
+//							+ relation.getObjectId());
 					text.setText(object.getName());
 				}
 			}

@@ -38,7 +38,7 @@
     <elements xsi:type="commands:Command" xmi:id="_K0TWAKOLEeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.command.addThsRootEntry" commandName="addThsRootEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_FHzOwKOiEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.command.addThsChildEntry" commandName="addThsChildEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_oMmZgNqxEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent" commandName="passportInheritFromParent" category="_u7sUsF2fEeOwE8UUrLWumA">
-      <parameters xmi:id="_3StlINtCEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" name="Inherit passport data from parent forced" typeId="java.lang.String"/>
+      <parameters xmi:id="_3StlINtCEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" name="Inherit passport data from parent forced" typeId=""/>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
@@ -47,7 +47,7 @@
         <tags>ViewMenu</tags>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_DyEeQNtCEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.12" label="Inherit Passport Data" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/inherit.png" tooltip="Inherit passport data from parent object" command="_oMmZgNqxEeO-3cFwhVZ23Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KlO0INtCEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.13" label="Inherit &amp; Overwrite Passport Data" tooltip="Inherit passport data from parent object and overwrites existing values." command="_oMmZgNqxEeO-3cFwhVZ23Q">
-          <parameters xmi:id="_Q1UcsNtDEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" name="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" value="true"/>
+          <parameters xmi:id="_Q1UcsNtDEeODTbKD0_l8Zw" elementId="parameter" name="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" value="true"/>
         </children>
       </menus>
       <toolbar xmi:id="_ED6jsD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.passportEditor.toolbar">

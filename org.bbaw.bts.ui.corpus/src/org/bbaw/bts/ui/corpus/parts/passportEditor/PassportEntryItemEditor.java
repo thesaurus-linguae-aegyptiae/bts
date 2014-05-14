@@ -543,7 +543,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							System.out.println(proposal);
 							Command command = SetCommand.create(
 									editingDomain,
-									entry, BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE,
+									entry, BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 									proposal.getContent());
 							editingDomain.getCommandStack().execute(
 									command);
@@ -593,14 +593,14 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					BTSCorpusObject object = dialog.getObject();
 					System.out.println(object.get_id());
 					Command command = SetCommand.create(editingDomain,
-							entry, BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE,
+							entry, BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							object.get_id());
 					editingDomain.getCommandStack().execute(command);
-					System.out.println("Relation with object id "
-							+ entry.getValue());
-					entry.setValue(object.get_id());
-					System.out.println("Relation with object id "
-							+ entry.getValue());
+//					System.out.println("Relation with object id "
+//							+ entry.getValue());
+//					entry.setValue(object.get_id());
+//					System.out.println("Relation with object id "
+//							+ entry.getValue());
 					ths_select_text.setText(object.getName());
 				}
 			}
