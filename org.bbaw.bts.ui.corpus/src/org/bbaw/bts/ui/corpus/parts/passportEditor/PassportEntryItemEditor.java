@@ -680,7 +680,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		makeContentProposalProviderThread();
+		makeContentProposalProviderThread(entry.getValue());
 
 		final Text text = new Text(this, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
@@ -712,7 +712,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
 					ContentProposalAdapter adapter = new ContentProposalAdapter(
 							text, new TextContentAdapter(),
-							getItemProposalProvider(),
+							getItemProposalProvider(text.getText()),
 							keyStroke, autoActivationCharacters);
 					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
 				} catch (ParseException e1) {
@@ -755,13 +755,13 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	}
 
-	private void makeContentProposalProviderThread() {
+	private void makeContentProposalProviderThread( final String text) {
 		if (!makingProposalProvider) {
 		Job job = new Job("contentProposal") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				getItemProposalProvider();
+				getItemProposalProvider(text);
 					makingProposalProvider = true;
 					return Status.OK_STATUS;
 			}
@@ -770,10 +770,15 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		}
 	}
 
-	protected IContentProposalProvider getItemProposalProvider() {
-		if (itemProposalProvider == null) {
-			itemProposalProvider = new PassportEntryContentProposalProvider(
-					passportEditorController.getProposalsFor(entryPath, ""));
+	protected IContentProposalProvider getItemProposalProvider(String prefix) {
+		if (true || itemProposalProvider == null) {
+			try {
+				itemProposalProvider = new PassportEntryContentProposalProvider(
+						passportEditorController.getProposalsFor(entryPath, prefix));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return itemProposalProvider;
 	}

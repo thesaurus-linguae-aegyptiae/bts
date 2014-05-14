@@ -48,7 +48,7 @@ public class PassportEditorPartControllerImpl
 					entryPath.get(i).getType()));
 
 		}
-		String type = field + ".children.type";
+//		String type = field + ".children.type";
 		field += ".children";
 		// TODO build es query
 		BTSQueryRequest query = new BTSQueryRequest();
@@ -60,18 +60,20 @@ public class PassportEditorPartControllerImpl
 		SearchRequestBuilder sqb = corpusObjectService
 				.getSearchRequestBuilder();
 		sqb.setQuery(qb);
+//		sqb.setSource("*.value");
 		// sqb.setFilter(FilterBuilders.andFilter(filterArray));
 //		sqb.setFilter(FilterBuilders.termFilter(type,
 		// entryPath.get(entryPath.size() - 1).getType()));
-		sqb.addField(field);
+//		sqb.addField(field + ".value");
 		query.setSearchRequestBuilder(sqb);
-		query.setRequestField(field);
+		query.setRequestField(field + ".value");
 		query.setAutocompletePrefix(text);
 		query.setRequestTypeFieldValue(entryPath.get(entryPath.size() - 1)
 				.getType());
 
 		List<BTSPassportEntry> proposals = corpusObjectService
 				.getPassportEntryProposals(query);
+		System.out.println("Number of proposals: " + proposals.size() + ", prefix " + text);
 		return proposals;
 	}
 
