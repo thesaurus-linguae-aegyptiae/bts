@@ -1,15 +1,28 @@
 package org.bbaw.bts.ui.corpus.dialogs;
 
+import javax.inject.Inject;
+
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSTextCorpus;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.UpdateValueStrategy;
 import org.eclipse.core.databinding.beans.BeanProperties;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
+import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -27,12 +40,18 @@ import org.eclipse.swt.widgets.Text;
 
 public class NewCorpusObjectDialog extends TitleAreaDialog
 {
-	private Text text;
+	private Text nameTxt;
 
 	private DataBindingContext bindingContext;
-	private WritableValue value;
 
 	private BTSCorpusObject object;
+	private Text corpusPrefixTxt;
+
+	private EditingDomain editingDomain;
+
+	private EditingDomainController editingDomainController;
+
+	private IEclipseContext context;
 
 	/**
 	 * Create the dialog.
@@ -49,6 +68,14 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	}
 
 	/**
+	 * @wbp.parser.constructor
+	 */
+	public NewCorpusObjectDialog(Shell parentShell, BTSCorpusObject object) {
+		super(parentShell);
+		this.object = object;
+	}
+
+	/**
 	 * Create contents of the dialog.
 	 * 
 	 * @param parent
@@ -58,74 +85,67 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	{
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
-		container.setLayout(new GridLayout(4, false));
+		container.setLayout(new GridLayout(3, false));
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 		new Label(container, SWT.NONE);
 
 		Label lblName = new Label(container, SWT.NONE);
-		lblName.setText("Name");
+		lblName.setText("Name*");
+
+		nameTxt = new Text(container, SWT.BORDER);
+		nameTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		new Label(container, SWT.NONE);
+		
+		Label lblNewLabel = new Label(container, SWT.NONE);
+		lblNewLabel.setText("Corpus Prefix*");
+		
+		corpusPrefixTxt = new Text(container, SWT.BORDER);
+		corpusPrefixTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		new Label(container, SWT.NONE);
 
-		text = new Text(container, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(container, SWT.NONE);
+//		Label lblType = new Label(container, SWT.NONE);
+//		lblType.setText("Type");
+//
+//		Combo combo = new Combo(container, SWT.NONE);
+//		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+//		new Label(container, SWT.NONE);
+//
+//		Label lblSubtype = new Label(container, SWT.NONE);
+//		lblSubtype.setText("Subtype");
+//
+//		Combo combo_1 = new Combo(container, SWT.NONE);
+//		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
-		Label lblType = new Label(container, SWT.NONE);
-		lblType.setText("Type");
-		new Label(container, SWT.NONE);
-
-		Combo combo = new Combo(container, SWT.NONE);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(container, SWT.NONE);
-
-		Label lblSubtype = new Label(container, SWT.NONE);
-		lblSubtype.setText("Subtype");
-		new Label(container, SWT.NONE);
-
-		Combo combo_1 = new Combo(container, SWT.NONE);
-		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
-		value = new WritableValue();
 		bindingContext = initializeBindings();
-		value.setValue(object);
 
 		return area;
 	}
 
 	private DataBindingContext initializeBindings()
 	{
-		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
-		us.setBeforeSetValidator(new IValidator()
-		{
-
-			@Override
-			public IStatus validate(Object value)
-			{
-				if (value instanceof String)
-				{
-					if (value.toString().trim().length() > 0)
-					{
-						return ValidationStatus.ok();
-					}
-				}
-				return ValidationStatus.error("Not a number");
-			}
-		});
-
+		context = StaticAccessController.getContext();
+		editingDomainController = context.get(EditingDomainController.class);
+		editingDomain = editingDomainController.getEditingDomain(object);
 		DataBindingContext bindingContext = new DataBindingContext();
-		IObservableValue model = BeanProperties.value("name").observeDetail(value);
-		Binding binding = bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observeDelayed(400, text), model,
-				us, null);
-
+		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		us.setBeforeSetValidator(new StringNotEmptyValidator());
+		Binding binding = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, nameTxt),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(
+						object), us, null);
 		bindingContext.addValidationStatusProvider(binding);
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+		
+		
+		Binding binding_pre = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, corpusPrefixTxt),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX).observe(
+						object), us, null);
+		bindingContext.addValidationStatusProvider(binding_pre);
+		BackgroundControlDecorationSupport.create(binding_pre, SWT.TOP | SWT.LEFT);
 
-		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
-
-		// FeaturePath feature =
-		// FeaturePath.fromList(CorpusPackage.Literals.PERSON__PHONE,
-		// CorpusPackage.Literals.PHONE__NUMBER);
-		// bindingContext.bindValue(WidgetProperties.text(SWT.Modify).observe(phoneNumber),
-		// EMFProperties.value(feature).observe(person));
 		return bindingContext;
 	}
 

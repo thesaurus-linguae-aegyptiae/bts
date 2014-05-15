@@ -41,5 +41,9 @@ public interface CorpusNavigatorController
 	String getDisplayName(String id);
 	
 	BTSCorpusObject findObject(String id);
+	
+	List<BTSTextCorpus> listTextCorpora();
+	
+	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus);
 
 }

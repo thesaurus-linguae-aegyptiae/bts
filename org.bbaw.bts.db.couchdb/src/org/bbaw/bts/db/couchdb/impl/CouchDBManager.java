@@ -101,7 +101,6 @@ public class CouchDBManager implements DBManager
 	@Inject
 	private Backend2ClientUpdateDao backend2ClientUpdateDao;
 	
-	private CouchDbClient dbClient;
 	private Client esClient;
 	private Process process;
 
@@ -136,7 +135,7 @@ public class CouchDBManager implements DBManager
 
 	private void checkAndAddAuthentication(BTSProjectDBCollection collection)
 	{
-		dbClient = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName());
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName());
 		JsonObject jsonObject = null;
 		try {
 			jsonObject = dbClient.find(JsonObject.class, "_design/auth");
@@ -663,7 +662,7 @@ public class CouchDBManager implements DBManager
 					.setCreateDbIfNotExist(false).setProtocol(url.getProtocol()).setHost(url.getHost())
 					.setPort(url.getPort()).setMaxConnections(1).setConnectionTimeout(0).setUsername(username)
 					.setPassword(password);
-			dbClient = new CouchDbClient(properties);
+			CouchDbClient dbClient = new CouchDbClient(properties);
 		} catch (Exception e)
 		{
 			logger.warn("malformed url: "+ urlString, e);
@@ -929,6 +928,8 @@ public class CouchDBManager implements DBManager
 
 	@Override
 	public void shutdown() {
+		
+		prepareShutdown();
 		try {
 			logger.info("Shutdown DB, process: " + process);
 			process = (Process) context.get(DB_RUNTIME_PROCESS);
@@ -965,6 +966,13 @@ public class CouchDBManager implements DBManager
 		
 	}
 
+	private void prepareShutdown() {
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.NOTIFICATION);
+		dbClient.context().compact();
+
+		
+	}
+
 	@Override
 	public void setLocalDBUrl(String localDBUrl) {
 		try {
@@ -973,6 +981,20 @@ public class CouchDBManager implements DBManager
 		} catch (MalformedURLException e) {
 			logger.error(e);
 		}
+		
+	}
+
+	@Override
+	public void checkAndCreateDBCollection(String dbCollectionName) {
+		
+		CouchDbClient dbClient = null;
+		try {
+			dbClient = connectionProvider.getDBClient(CouchDbClient.class, dbCollectionName);
+			dbClient.context().createDB(dbCollectionName);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+
 		
 	}
 }

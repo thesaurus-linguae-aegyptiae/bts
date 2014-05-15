@@ -6,9 +6,9 @@ import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
-import org.bbaw.bts.ui.main.wizards.installation.support.BTSProjectLabelProvider;
-import org.bbaw.bts.ui.main.wizards.installation.support.BTSProjectRemovableContentProvider;
-import org.bbaw.bts.ui.main.wizards.newProject.viewSupport.ListContentProvider;
+import org.bbaw.bts.ui.main.provider.BTSProjectLabelProvider;
+import org.bbaw.bts.ui.main.provider.BTSProjectRemovableContentProvider;
+import org.bbaw.bts.ui.main.provider.ListContentProvider;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.ComboViewer;

@@ -62,7 +62,7 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 		{
 			return anno;
 		}
-		for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+		for (String c : getActive_corpora())
 		{
 			anno = annotationDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c);
 			if (anno != null)
@@ -72,7 +72,7 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 		}
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				anno = annotationDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c);
 				if (anno != null)
@@ -90,7 +90,7 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 		List<BTSAnnotation> annos = new Vector<BTSAnnotation>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				annos.addAll(annotationDao.list(p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState));
@@ -106,7 +106,7 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				objects.addAll(annotationDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,

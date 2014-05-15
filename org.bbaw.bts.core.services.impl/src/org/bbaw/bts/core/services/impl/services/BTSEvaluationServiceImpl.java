@@ -294,6 +294,10 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	
 	public String highestRoleOfAuthenticatedUserInDBCollection(BTSProjectDBCollection c) {
 		String role = BTSCoreConstants.USER_ROLE_GUESTS;
+		if (c == null)
+		{
+			return role;
+		}
 		int level = 0;
 		for (BTSDBCollectionRoleDesc r : c.getRoleDescriptions()) {
 			switch (r.getRoleName()) {

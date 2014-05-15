@@ -97,7 +97,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		if (resource == null)
 		{
 			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
-			logger.info(uri.path());
+			logger.info("Resource was null, object was newly created and is persisted for the first time: " + uri.path());
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 			resource.getContents().add(entity);
 		}
@@ -111,9 +111,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			resource.save(options);
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("Save Resource failed");
+			logger.error("error trying to save: " + entity, e);
+//			throw new RuntimeException("Save Resource failed", e);
 		}
 	}
 
@@ -165,6 +164,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
+		if (entity.get_rev() == null)
+		{
+			System.out.println(entity);
+		}
 		dbClient.remove(entity.get_id(), entity.get_rev());
 
 	}

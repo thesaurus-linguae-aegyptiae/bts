@@ -167,7 +167,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		{
 			return tcObject;
 		}
-		for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+		for (String c : getActive_corpora())
 		{
 			tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c);
 			if (tcObject != null)
@@ -177,7 +177,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		}
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				tcObject = corpusObjectDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c);
 				if (tcObject != null)
@@ -195,7 +195,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				objects.addAll(corpusObjectDao.list(p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState));
@@ -209,7 +209,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				objects.addAll(corpusObjectDao.getRootBTSCorpusObjects(p + ServiceConstants.CORPUS_INTERFIX + c));
 			}
@@ -230,7 +230,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		{
 			for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 			{
-				for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+				for (String c : getActive_corpora())
 				{
 					objects.addAll(corpusObjectDao
 							.findByQueryId(searchId, p
@@ -247,7 +247,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				objects.addAll(corpusObjectDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,
@@ -282,8 +282,8 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 			BTSQueryRequest query) {
 		List<BTSPassportEntry> result = new Vector<BTSPassportEntry>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN)) {
-			for (String c : active_corpora
-					.split(ServiceConstants.SPLIT_PATTERN)) {
+			for (String c : getActive_corpora()
+					) {
 				result.addAll(corpusObjectDao.getPassportEntryProposals(
 						query, p + ServiceConstants.CORPUS_INTERFIX + c, p
 								+ ServiceConstants.CORPUS_INTERFIX + c));
@@ -321,8 +321,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 			boolean registerQuery) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN)) {
-			for (String c : active_corpora
-					.split(ServiceConstants.SPLIT_PATTERN)) {
+			for (String c : getActive_corpora()) {
 				objects.addAll(corpusObjectDao.query(query, p
 						+ ServiceConstants.CORPUS_INTERFIX + c, p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,

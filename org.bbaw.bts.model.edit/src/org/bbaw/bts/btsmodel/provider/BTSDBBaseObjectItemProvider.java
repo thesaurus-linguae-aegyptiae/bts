@@ -6,14 +6,11 @@ package org.bbaw.bts.btsmodel.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.edit.EMFEditPlugin;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.ComposedImage;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -213,12 +210,10 @@ public class BTSDBBaseObjectItemProvider
 		switch (notification.getFeatureID(BTSDBBaseObject.class)) {
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__REV:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT:
-				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
 		super.notifyChanged(notification);

@@ -57,7 +57,7 @@ public class UserToolcontrol {
 	@PostConstruct
 	public void postConstruct(Composite composite) {
 		this.composite = composite;
-		composite.setLayout(new GridLayout(3, false));
+		composite.setLayout(new GridLayout(6, false));
 		Label l = new Label(composite, SWT.None);
 		l.setImage(labelProvider.getImage(authenticatedUser));
 		l.setLayoutData(new GridData());

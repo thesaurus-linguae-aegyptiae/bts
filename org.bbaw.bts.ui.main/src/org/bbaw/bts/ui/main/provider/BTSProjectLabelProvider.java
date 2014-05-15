@@ -1,4 +1,4 @@
-package org.bbaw.bts.ui.main.wizards.installation.support;
+package org.bbaw.bts.ui.main.provider;
 
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.eclipse.jface.viewers.IBaseLabelProvider;

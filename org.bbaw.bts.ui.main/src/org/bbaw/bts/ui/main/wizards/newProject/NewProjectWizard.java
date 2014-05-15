@@ -22,6 +22,7 @@ public class NewProjectWizard extends Wizard
 	{
 		addPage(new ProjectNamePage(project));
 		addPage(new ProjectConnectionPage(project));
+		addPage(new ProjectGeneralCollectionPage(project));
 		addPage(new ProjectCollectionPage(project));
 	}
 

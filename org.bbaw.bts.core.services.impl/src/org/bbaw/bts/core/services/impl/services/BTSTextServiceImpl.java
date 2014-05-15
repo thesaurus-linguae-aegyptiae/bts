@@ -61,7 +61,7 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 		{
 			return text;
 		}
-		for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+		for (String c : getActive_corpora())
 		{
 			text = textDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c);
 			if (text != null)
@@ -71,7 +71,7 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 		}
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				text = textDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c);
 				if (text != null)
@@ -89,7 +89,7 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 		List<BTSText> texts = new Vector<BTSText>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				texts.addAll(textDao.list(p + ServiceConstants.CORPUS_INTERFIX
 						+ c, objectState));
@@ -105,7 +105,7 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 		List<BTSText> objects = new Vector<BTSText>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				objects.addAll(textDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,

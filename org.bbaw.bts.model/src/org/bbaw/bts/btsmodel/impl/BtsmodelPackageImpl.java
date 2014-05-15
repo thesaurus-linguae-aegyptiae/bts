@@ -2342,6 +2342,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBTSProject_SubProjects() {
+		return (EReference)btsProjectEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSDBConnection()
 	{
 		return btsdbConnectionEClass;
@@ -3158,6 +3167,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsProjectEClass, BTS_PROJECT__DESCRIPTION);
 		createEReference(btsProjectEClass, BTS_PROJECT__DB_CONNECTION);
 		createEReference(btsProjectEClass, BTS_PROJECT__DB_COLLECTIONS);
+		createEReference(btsProjectEClass, BTS_PROJECT__SUB_PROJECTS);
 
 		btsdbConnectionEClass = createEClass(BTSDB_CONNECTION);
 		createEAttribute(btsdbConnectionEClass, BTSDB_CONNECTION__TYPE);
@@ -3581,6 +3591,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSProject_Description(), ecorePackage.getEString(), "description", null, 0, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSProject_DbConnection(), this.getBTSDBConnection(), null, "dbConnection", null, 0, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSProject_DbCollections(), this.getBTSProjectDBCollection(), null, "dbCollections", null, 0, -1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSProject_SubProjects(), this.getBTSProject(), null, "subProjects", null, 0, -1, BTSProject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsdbConnectionEClass, BTSDBConnection.class, "BTSDBConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSDBConnection_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSDBConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

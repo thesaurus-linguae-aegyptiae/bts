@@ -70,6 +70,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			addReadersPropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
+			addSubProjectsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -254,6 +255,28 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Sub Projects feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSubProjectsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSProject_subProjects_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProject_subProjects_feature", "_UI_BTSProject_type"),
+				 BtsmodelPackage.Literals.BTS_PROJECT__SUB_PROJECTS,
+				 true,
+				 false,
+				 true,
+				 null,
 				 null,
 				 null));
 	}

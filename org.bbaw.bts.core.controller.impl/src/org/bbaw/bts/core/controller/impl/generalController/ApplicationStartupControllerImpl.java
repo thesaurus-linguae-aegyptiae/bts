@@ -55,6 +55,7 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.ECommandService;
@@ -102,7 +103,7 @@ public class ApplicationStartupControllerImpl implements
 
 	@Inject
 	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACITVE_PROJECTS, nodePath = PLUGIN_ID)
+	@Preference(value = BTSPluginIDs.PREF_ACTIVE_PROJECTS, nodePath = PLUGIN_ID)
 	private String active_projects;
 
 	@Inject
@@ -183,7 +184,7 @@ public class ApplicationStartupControllerImpl implements
 		logger.trace("Logging - trace");
 
 
-		
+		loadPreferences(context);
 
 		// load font
 		Font font = null;
@@ -483,6 +484,16 @@ public class ApplicationStartupControllerImpl implements
 
 	}
 
+	private void loadPreferences(IEclipseContext context2) {
+		IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
+//		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+	
+		prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
+	
+		prefs.put(BTSPluginIDs.PREF_MAIN_CORPUS, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS, null));
+		
+	}
+
 	private void checkAndInstallSoftwareUpdates(final IProvisioningAgent agent, final IWorkbench workbench) {
 		Job j = new Job("Update Job") {
 		      private boolean doInstall = false;
@@ -750,7 +761,7 @@ public class ApplicationStartupControllerImpl implements
 //			checkProjectsSelectionsSettings();
 //		}
 		prefs.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, main_project);
-		prefs.put(BTSPluginIDs.PREF_ACITVE_PROJECTS, active_projects);
+		prefs.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, active_projects);
 		try {
 			prefs.flush();
 		} catch (BackingStoreException e) {

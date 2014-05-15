@@ -15,10 +15,13 @@ public class InitialProjectControllerContextFunction extends ContextFunction
 		System.out.println("Intitialize InitialProjectController");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		if (application != null)
+		{
+			context = application.getContext();
+		}
 
 		BTSProjectController controller = ContextInjectionFactory.make(BTSProjectControllerImpl.class, context);
-		ctx.set(BTSProjectController.class, controller);
+		context.set(BTSProjectController.class, controller);
 
 		return controller;
 	}

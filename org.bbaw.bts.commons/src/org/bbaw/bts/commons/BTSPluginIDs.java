@@ -22,7 +22,7 @@ public class BTSPluginIDs
 
 	public static final String PREF_AUTHENTICATED_USER_PASSWORD = "authenticated_user_password";
 
-	public static final String PREF_ACITVE_PROJECTS = "active_projects";
+	public static final String PREF_ACTIVE_PROJECTS = "active_projects";
 
 	public static final String PREF_MAIN_PROJECT_KEY = "main_project_key";
 

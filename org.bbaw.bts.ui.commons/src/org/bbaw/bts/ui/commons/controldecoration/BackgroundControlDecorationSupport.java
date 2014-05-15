@@ -278,6 +278,8 @@ public class BackgroundControlDecorationSupport
 			TargetDecoration targetDecoration = (TargetDecoration) it.next();
 			ControlDecoration decoration = targetDecoration.decoration;
 			updater.update(decoration, status);
+			updater.updateBackground(findControl(targetDecoration.target), status);
+
 		}
 	}
 

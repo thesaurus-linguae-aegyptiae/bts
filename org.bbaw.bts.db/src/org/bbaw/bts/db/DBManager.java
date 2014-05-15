@@ -33,4 +33,6 @@ public interface DBManager
 
 	void setLocalDBUrl(String localDBUrl);
 
+	void checkAndCreateDBCollection(String string);
+
 }

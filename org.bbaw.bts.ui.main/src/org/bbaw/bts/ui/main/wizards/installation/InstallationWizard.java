@@ -72,7 +72,7 @@ public class InstallationWizard extends Wizard
 		connectServerPage = new ConnectToServerPage(preferences.get(BTSPluginIDs.PREF_REMOTE_DB_URL,
 				null));
 
-		projectPage = new SelectProjectsPage(preferences.get(BTSPluginIDs.PREF_ACITVE_PROJECTS, null), preferences.get(
+		projectPage = new SelectProjectsPage(preferences.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS, null), preferences.get(
 				BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
 
 		dbPage = new DBInstallationSettingsPage(startupController.getDBInstallationDir(), preferences.get(
@@ -167,7 +167,7 @@ public class InstallationWizard extends Wizard
 
 				preferences.put(BTSPluginIDs.PREF_REMOTE_DB_URL, serverURL);
 				preferences.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, mainProject);
-				preferences.put(BTSPluginIDs.PREF_ACITVE_PROJECTS, prefixes);
+				preferences.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, prefixes);
 				
 //				monitor.worked(2);
 

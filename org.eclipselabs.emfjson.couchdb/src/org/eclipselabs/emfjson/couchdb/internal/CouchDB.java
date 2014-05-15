@@ -290,8 +290,16 @@ public class CouchDB {
 
 			if (okNode.getBooleanValue()) {
 				JsonNode idNode = rootNode.findValue("id");
-
-				result = baseURI.appendSegment(idNode.getTextValue());
+				
+				//plutte added check if baseURI not already ends with id
+				if (!baseURI.path().endsWith(idNode.getTextValue()))
+				{
+					result = baseURI.appendSegment(idNode.getTextValue());
+				}
+				else
+				{
+					result = baseURI;
+				}
 			}
 		}
 		return result;

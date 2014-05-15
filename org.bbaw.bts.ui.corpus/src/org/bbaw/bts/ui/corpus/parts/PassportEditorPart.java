@@ -13,24 +13,37 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSPassportEntryGroup;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSRevision;
+import org.bbaw.bts.btsmodel.BTSTCObject;
+import org.bbaw.bts.btsmodel.BTSText;
+import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.core.controller.generalController.BTSProjectController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
+import org.bbaw.bts.ui.commons.converter.BTSProjectToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSStringToConfigItemConverter;
+import org.bbaw.bts.ui.commons.converter.BTSStringToProjectConverter;
+import org.bbaw.bts.ui.commons.converter.BTSStringToTextCorpusConverter;
+import org.bbaw.bts.ui.commons.converter.BTSTextCorpusToStringConverter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.CompoundRelationsEditorComposite;
@@ -100,7 +113,6 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 public class PassportEditorPart {
-	private static final int DELAY = 400;
 	@Inject
 	private BTSConfigurationController configurationController;
 	@Inject
@@ -124,6 +136,13 @@ public class PassportEditorPart {
 
 	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
+	
+	@Inject
+	private BTSProjectController projectController;
+
+	@Inject
+	private CorpusNavigatorController corpusNavigatorController;
+
 	private Text text;
 	private Text txtAuthortextadmin;
 	private Text txtDatetextadmin;
@@ -151,6 +170,10 @@ public class PassportEditorPart {
 	private ComboViewer visibility_viewer;
 	private ComboViewer reviewState_viewer;
 	protected boolean loading;
+	private Combo projectCMB;
+	private ComboViewer project_viewer;
+	private Combo corpusCMB;
+	private ComboViewer corpus_viewer;
 
 	@Inject
 	public PassportEditorPart() {
@@ -581,6 +604,67 @@ public class PassportEditorPart {
 		reviewState_viewer.setLabelProvider(labelProvider_rev);
 		reviewState_viewer.setInput(configurationController
 				.getReviewStateConfigItemProcessedClones(corpusObject));
+		
+		
+		// object project settings
+		Label lblProject = new Label(compTBTM_Main, SWT.NONE);
+		lblProject.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+				false, false, 1, 1));
+		lblProject.setText("Project");
+
+		projectCMB = new Combo(compTBTM_Main, SWT.READ_ONLY);
+		projectCMB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+					false, 3, 1));
+
+		project_viewer = new ComboViewer(projectCMB);
+
+		AdapterFactoryLabelProvider labelProvider_project = new AdapterFactoryLabelProvider(
+				factory);
+		AdapterFactoryContentProvider contentProvider_project = new AdapterFactoryContentProvider(
+				factory);
+
+		project_viewer.setContentProvider(contentProvider_project);
+		project_viewer.setLabelProvider(labelProvider_project);
+		TreeNodeWrapper treenodeProjects = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		for (BTSProject inputProject : projectController.listProjects())
+		{
+			TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+			child.setObject(inputProject);
+			child.setLabel(inputProject.getName());
+			child.setParent(treenodeProjects);
+			treenodeProjects.getChildren().add(child);
+		}
+		project_viewer.setInput(treenodeProjects);
+		
+		// corpus object corpus settings
+			Label lblCorpus = new Label(compTBTM_Main, SWT.NONE);
+			lblCorpus.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
+					false, false, 1, 1));
+			lblCorpus.setText("Corpus");
+
+			corpusCMB = new Combo(compTBTM_Main, SWT.NONE);
+			corpusCMB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+						false, 3, 1));
+
+			corpus_viewer = new ComboViewer(corpusCMB);
+
+			AdapterFactoryLabelProvider labelProvider_corpus = new AdapterFactoryLabelProvider(
+					factory);
+			AdapterFactoryContentProvider contentProvider_corpus = new AdapterFactoryContentProvider(
+					factory);
+
+			corpus_viewer.setContentProvider(contentProvider_corpus);
+			corpus_viewer.setLabelProvider(labelProvider_corpus);
+			TreeNodeWrapper treenode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+			for (BTSTextCorpus cor : corpusNavigatorController.listTextCorpora())
+			{
+				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				child.setObject(cor);
+				child.setLabel(cor.getName());
+				child.setParent(treenode);
+				treenode.getChildren().add(child);
+			}
+			corpus_viewer.setInput(treenode);
 
 		ExpandBar expandBar = new ExpandBar(compTBTM_Main, SWT.NONE);
 		expandBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 8,
@@ -877,7 +961,7 @@ public class PassportEditorPart {
 
 		// name
 		Binding binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, text),
+				WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, text),
 				EMFEditProperties.value(editingDomain,
 						BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(
 						object), us, null);
@@ -964,6 +1048,52 @@ public class PassportEditorPart {
 										BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE)
 								.observe(object), targetToModel_rev,
 						modelToTarget_rev);
+		
+		// project
+		EMFUpdateValueStrategy targetToModel_pro = new EMFUpdateValueStrategy();
+		targetToModel_pro.setConverter(new BTSProjectToStringConverter());
+		EMFUpdateValueStrategy modelToTarget_pro = new EMFUpdateValueStrategy();
+		modelToTarget_pro.setConverter(new BTSStringToProjectConverter(
+				project_viewer));
+		IObservableValue target_pro_viewer = ViewersObservables
+				.observeSingleSelection(project_viewer);
+		Binding binding_pro = bindingContext
+				.bindValue(
+						target_pro_viewer,
+						EMFEditProperties
+								.value(editingDomain,
+										BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__PROJECT)
+								.observe(object), targetToModel_pro,
+								modelToTarget_pro);
+		
+		// corpus
+		if (corpusObject instanceof BTSTextCorpus 
+				|| corpusObject instanceof BTSAnnotation
+				|| corpusObject instanceof BTSText
+				|| corpusObject instanceof BTSTCObject)
+		{
+			corpusCMB.setEnabled(true);
+
+			EMFUpdateValueStrategy targetToModel_cor = new EMFUpdateValueStrategy();
+			targetToModel_cor.setConverter(new BTSTextCorpusToStringConverter());
+			EMFUpdateValueStrategy modelToTarget_cor = new EMFUpdateValueStrategy();
+			modelToTarget_cor.setConverter(new BTSStringToTextCorpusConverter(
+					corpus_viewer));
+			IObservableValue target_cor_viewer = ViewersObservables
+					.observeSingleSelection(corpus_viewer);
+			Binding binding_cor = bindingContext
+					.bindValue(
+							target_cor_viewer,
+							EMFEditProperties
+									.value(editingDomain,
+											BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX)
+									.observe(object), targetToModel_cor,
+									modelToTarget_cor);
+		}
+		else
+		{
+			corpusCMB.setEnabled(false);
+		}
 
 		// review and creator
 		if (!object.getRevisions().isEmpty()) {

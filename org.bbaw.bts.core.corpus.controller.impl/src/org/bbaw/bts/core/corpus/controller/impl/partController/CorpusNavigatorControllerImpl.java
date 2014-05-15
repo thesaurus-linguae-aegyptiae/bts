@@ -366,6 +366,16 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		}
 		return o;
 	}
+
+	@Override
+	public List<BTSTextCorpus> listTextCorpora() {
+		return textCorpusService.list(BTSConstants.OBJECT_STATE_ACITVE);
+	}
+
+	@Override
+	public boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus) {
+		return textCorpusService.save(corpus);
+	}
 	
 	
 }

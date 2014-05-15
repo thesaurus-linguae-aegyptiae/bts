@@ -5,11 +5,14 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.dao.BTSTextCorpusDao;
 import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCorpus, String> implements
@@ -18,6 +21,9 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 
 	@Inject
 	BTSTextCorpusDao textCorpusDao;
+	
+	@Inject
+	private DBManager dbManager;
 
 	@Override
 	public BTSTextCorpus createNew()
@@ -31,6 +37,10 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 	@Override
 	public boolean save(BTSTextCorpus entity)
 	{
+		if (entity != null && entity.eResource() != null)
+		{
+			dbManager.checkAndCreateDBCollection(entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		}
 		super.addRevisionStatement(entity);
 		textCorpusDao.add(entity, entity.getProject() + ServiceConstants.CORPUS);
 		return true;

@@ -3,7 +3,7 @@ package org.bbaw.bts.ui.main.wizards.newProject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.ui.main.wizards.newProject.viewSupport.ListContentProvider;
+import org.bbaw.bts.ui.main.provider.ListContentProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -44,8 +44,8 @@ public class ProjectCollectionPage extends WizardPage
 	public ProjectCollectionPage(BTSProject project)
 	{
 		super("wizardPage");
-		setTitle("Wizard Page title");
-		setDescription("Wizard Page description");
+		setTitle("Project Database Collection");
+		setDescription("For experts only! Here you can edit database collections.");
 		this.project = project;
 	}
 
@@ -127,6 +127,15 @@ public class ProjectCollectionPage extends WizardPage
 		createColumns(grpDatabaseCollections, tableViewer);
 		loadInput();
 
+	}
+	
+	@Override
+	public void setVisible(boolean visible) {
+		if (visible)
+		{
+			loadInput();
+		}
+		super.setVisible(visible);
 	}
 
 	private void createColumns(Group grpDatabaseCollections, TableViewer tableViewer2)

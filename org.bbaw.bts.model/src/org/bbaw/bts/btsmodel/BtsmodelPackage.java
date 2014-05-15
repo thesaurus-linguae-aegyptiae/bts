@@ -7181,13 +7181,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT__DB_COLLECTIONS = BTS_OBJECT_FEATURE_COUNT + 9;
 
 	/**
+	 * The feature id for the '<em><b>Sub Projects</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__SUB_PROJECTS = BTS_OBJECT_FEATURE_COUNT + 10;
+
+	/**
 	 * The number of structural features of the '<em>BTS Project</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_PROJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -10218,6 +10227,17 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSProject_DbCollections();
 
 	/**
+	 * Returns the meta object for the reference list '{@link org.bbaw.bts.btsmodel.BTSProject#getSubProjects <em>Sub Projects</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Sub Projects</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProject#getSubProjects()
+	 * @see #getBTSProject()
+	 * @generated
+	 */
+	EReference getBTSProject_SubProjects();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSDBConnection <em>BTSDB Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -12480,6 +12500,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_PROJECT__DB_COLLECTIONS = eINSTANCE.getBTSProject_DbCollections();
+
+		/**
+		 * The meta object literal for the '<em><b>Sub Projects</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_PROJECT__SUB_PROJECTS = eINSTANCE.getBTSProject_SubProjects();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBConnectionImpl <em>BTSDB Connection</em>}' class.

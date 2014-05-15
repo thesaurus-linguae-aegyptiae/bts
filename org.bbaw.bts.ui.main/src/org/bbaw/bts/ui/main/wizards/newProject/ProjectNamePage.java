@@ -2,8 +2,12 @@ package org.bbaw.bts.ui.main.wizards.newProject;
 
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.eclipse.core.databinding.AggregateValidationStatus;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.ChangeEvent;
+import org.eclipse.core.databinding.observable.IChangeListener;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
@@ -11,6 +15,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
@@ -27,6 +32,8 @@ public class ProjectNamePage extends WizardPage
 
 	private BTSProject project;
 	private Text txtDescription;
+	private Label errorLabelServer;
+	private IObservableValue uiElement;
 
 	/**
 	 * Create the wizard.
@@ -36,9 +43,13 @@ public class ProjectNamePage extends WizardPage
 	public ProjectNamePage(BTSProject project)
 	{
 		super("wizardPage");
-		setTitle("Wizard Page title");
-		setDescription("Wizard Page description");
+		setTitle("Edit Project Name");
+		setDescription("You can modify the name and description of the project.");
 		this.project = project;
+		if(project.eResource() == null)
+		{
+			setDescription("You can modify the name and description of the project. Project prefix may not be modified after initial creation.");
+		}
 	}
 
 	/**
@@ -77,6 +88,8 @@ public class ProjectNamePage extends WizardPage
 		txtDescription.setText("description");
 		txtDescription.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
+		errorLabelServer = new Label(container, SWT.NONE);
+		errorLabelServer.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		initializeBindings();
 	}
 
@@ -100,19 +113,20 @@ public class ProjectNamePage extends WizardPage
 			}
 		});
 
-		DataBindingContext bindingContext = new DataBindingContext();
+		final DataBindingContext bindingContext = new DataBindingContext();
 
 		IObservableValue model = EMFProperties.value(BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(project);
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(400, txtProjectnametext), model, us, null);
-		bindingContext.addValidationStatusProvider(binding);
-		ControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
+//		bindingContext.addValidationStatusProvider(binding);
+		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 
 		IObservableValue model2 = EMFProperties.value(BtsmodelPackage.Literals.BTS_PROJECT__PREFIX).observe(project);
 		Binding binding2 = bindingContext.bindValue(WidgetProperties.text(SWT.Modify)
 				.observeDelayed(400, txtPrefixtext), model2, us, null);
-		bindingContext.addValidationStatusProvider(binding2);
-		ControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
+//		bindingContext.addValidationStatusProvider(binding2);
+		BackgroundControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
+		txtPrefixtext.setEnabled((project.eResource() == null));
 
 		IObservableValue model3 = EMFProperties.value(BtsmodelPackage.Literals.BTS_PROJECT__DESCRIPTION).observe(
 				project);
@@ -121,6 +135,33 @@ public class ProjectNamePage extends WizardPage
 		bindingContext.addValidationStatusProvider(binding3);
 		ControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 
+		//
+		uiElement = SWTObservables.observeText(errorLabelServer);
+		// This one listenes to all changes
+		bindingContext.bindValue(uiElement, new AggregateValidationStatus(bindingContext.getBindings(),
+				AggregateValidationStatus.MAX_SEVERITY), null, null);
+		// Lets change the color of the field lastName
+		uiElement.addChangeListener(new IChangeListener()
+		{
+			@Override
+			public void handleChange(ChangeEvent event)
+			{
+				boolean allcomplete = true;
+				for (Object o : bindingContext.getBindings())
+				{
+					Binding binding = (Binding) o;
+					IStatus status = (IStatus) binding.getValidationStatus().getValue();
+
+					if (!status.isOK())
+					{
+						allcomplete = false;
+					}
+				}
+//				setPageComplete(allcomplete);
+
+			}
+		});
+		uiElement.setValue("");
 		return bindingContext;
 	}
 }

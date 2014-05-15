@@ -96,17 +96,17 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		if (feed.isDeleted())
 		{
 			notification.setDeleted(true);
-			if (true || generalPurposeDao.objectIsLoaded(dbCollection, docId))
-			{
-				notification.setLoaded(true);
-				try
-				{
-					object = generalPurposeDao.reload(docId, dbCollection);
-				} catch (Exception e)
-				{
-					e.printStackTrace();
-				}
-			}
+//			if (true || generalPurposeDao.objectIsLoaded(dbCollection, docId))
+//			{
+//				notification.setLoaded(true);
+//				try
+//				{
+//					object = generalPurposeDao.reload(docId, dbCollection);
+//				} catch (Exception e)
+//				{
+//					e.printStackTrace();
+//				}
+//			}
 		} else
 		// object not deleted
 		{
@@ -128,7 +128,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 				object = generalPurposeDao.find(docId, dbCollection);
 			}
 		}
-		Assert.isNotNull(object);
+//		Assert.isNotNull(object);
 		if (object != null) // object either loaded and deleted or not deleted
 							// and loaded or notloaded
 		{

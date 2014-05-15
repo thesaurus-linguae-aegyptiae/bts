@@ -2,7 +2,7 @@
  * Copyright 2004-2006 IFS, TU Wien. All rights reserved.
  * Use is subject to license terms.
  */
-package org.bbaw.bts.ui.main.wizards.newProject.viewSupport;
+package org.bbaw.bts.ui.main.provider;
 
 import java.util.List;
 

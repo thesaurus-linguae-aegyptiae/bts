@@ -120,5 +120,7 @@ public class DaoConstants
 
 	public static final String VIEW_ALL_DBLEASES = "notification/all_dbleases";
 
+	public static final String NOTIFICATION = "notification";
+
 
 }

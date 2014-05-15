@@ -58,7 +58,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 		{
 			return image;
 		}
-		for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+		for (String c : getActive_corpora())
 		{
 			image = imageDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c);
 			if (image != null)
@@ -68,7 +68,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 		}
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				image = imageDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c);
 				if (image != null)
@@ -86,7 +86,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 		List<BTSImage> images = new Vector<BTSImage>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				images.addAll(imageDao.list(p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState));
@@ -102,7 +102,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 		List<BTSImage> objects = new Vector<BTSImage>();
 		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
 		{
-			for (String c : active_corpora.split(ServiceConstants.SPLIT_PATTERN))
+			for (String c : getActive_corpora())
 			{
 				objects.addAll(imageDao.query(query, p + ServiceConstants.CORPUS_INTERFIX + c, p
 						+ ServiceConstants.CORPUS_INTERFIX + c, objectState,

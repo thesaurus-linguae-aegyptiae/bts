@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getDescription <em>Description</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getDbConnection <em>Db Connection</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getDbCollections <em>Db Collections</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSProject#getSubProjects <em>Sub Projects</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,5 +120,21 @@ public interface BTSProject extends BTSObject, BTSDBBaseObject
 	 * @generated
 	 */
 	EList<BTSProjectDBCollection> getDbCollections();
+
+	/**
+	 * Returns the value of the '<em><b>Sub Projects</b></em>' reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSProject}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Sub Projects</em>' reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Sub Projects</em>' reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProject_SubProjects()
+	 * @model transient="true"
+	 * @generated
+	 */
+	EList<BTSProject> getSubProjects();
 
 } // BTSProject

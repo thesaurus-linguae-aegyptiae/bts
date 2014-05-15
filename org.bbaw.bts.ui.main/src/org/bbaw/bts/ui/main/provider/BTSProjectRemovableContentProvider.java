@@ -1,4 +1,4 @@
-package org.bbaw.bts.ui.main.wizards.installation.support;
+package org.bbaw.bts.ui.main.provider;
 
 import java.util.List;
 import java.util.Vector;

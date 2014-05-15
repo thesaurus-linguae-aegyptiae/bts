@@ -24,6 +24,7 @@ import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
+import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -43,7 +44,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	protected DBConnectionProvider connectionProvider;
 
 	@Inject
-	@Preference(value = BTSPluginIDs.PREF_ACITVE_PROJECTS, nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_ACTIVE_PROJECTS, nodePath = "org.bbaw.bts.app")
 	protected String active_projects;
 
 	@Inject
@@ -53,7 +54,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Inject
 	@Optional
 	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
-	protected String active_corpora;
+	private String active_corpora;
 
 	@Inject
 	@Optional
@@ -180,5 +181,13 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 			rev.setUserId(authenticatedUser.get_id());
 			entity.getRevisions().add(rev);
 		}
+	}
+
+	protected String[] getActive_corpora() {
+		return active_corpora.split(ServiceConstants.SPLIT_PATTERN);
+	}
+
+	protected void setActive_corpora(String active_corpora) {
+		this.active_corpora = active_corpora;
 	}
 }

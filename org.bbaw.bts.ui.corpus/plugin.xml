@@ -3,4 +3,13 @@
 	<extension id="id" point="org.eclipse.e4.workbench.model">
 		<fragment uri="fragment.e4xmi"></fragment>
 	</extension>
+ <extension
+       point="com.opcoach.e4.preferences.e4PreferencePages">
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.corpus.preferences.CorpusSettingsPage"
+          id="org.bbaw.bts.ui.corpus.corpussettings.page"
+          name="Corpus Settings">
+    </page>
+ </extension>
 </plugin>

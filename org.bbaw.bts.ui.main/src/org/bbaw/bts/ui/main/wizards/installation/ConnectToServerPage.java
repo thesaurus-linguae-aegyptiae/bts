@@ -34,7 +34,6 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 public class ConnectToServerPage extends WizardPage
 {
-	private static final int DELAY = 600;
 	private DataBindingContext m_bindingContext;
 	private Text textServerURL;
 	private Text text;
@@ -161,7 +160,7 @@ public class ConnectToServerPage extends WizardPage
 		final DataBindingContext bindingContext = new DataBindingContext();
 		//
 		IObservableValue observeTextTextServerURLObserveWidget = WidgetProperties.text(SWT.Modify).observeDelayed(
-				DELAY, textServerURL);
+				BTSUIConstants.DELAY, textServerURL);
 		IObservableValue bytesUrlObserveValue = PojoProperties.value("url").observe(connection);
 		UpdateValueStrategy strategy = new UpdateValueStrategy();
 		strategy.setAfterGetValidator(new StringHttp_s_URLValidator());
@@ -170,7 +169,7 @@ public class ConnectToServerPage extends WizardPage
 		BackgroundControlDecorationSupport.create(binding0, SWT.TOP | SWT.LEFT);
 
 		//
-		IObservableValue observeTextTextObserveWidget = WidgetProperties.text(SWT.Modify).observeDelayed(DELAY, text);
+		IObservableValue observeTextTextObserveWidget = WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, text);
 		IObservableValue bytesUsernameObserveValue = PojoProperties.value("user").observe(connection);
 		UpdateValueStrategy strategy_1 = new UpdateValueStrategy();
 		strategy_1.setAfterGetValidator(new StringNotEmptyValidator());
@@ -179,7 +178,7 @@ public class ConnectToServerPage extends WizardPage
 		BackgroundControlDecorationSupport.create(binding1, SWT.TOP | SWT.LEFT);
 
 		//
-		IObservableValue observeTextText_1ObserveWidget = WidgetProperties.text(SWT.Modify).observeDelayed(DELAY,
+		IObservableValue observeTextText_1ObserveWidget = WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY,
 				text_1);
 		IObservableValue bytesPasswordObserveValue = PojoProperties.value("password").observe(connection);
 		UpdateValueStrategy strategy_2 = new UpdateValueStrategy();

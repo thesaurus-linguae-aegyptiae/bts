@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -38,6 +39,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDbConnection <em>Db Connection</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDbCollections <em>Db Collections</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getSubProjects <em>Sub Projects</em>}</li>
  * </ul>
  * </p>
  *
@@ -204,6 +206,16 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * @ordered
 	 */
 	protected EList<BTSProjectDBCollection> dbCollections;
+
+	/**
+	 * The cached value of the '{@link #getSubProjects() <em>Sub Projects</em>}' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubProjects()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSProject> subProjects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -452,6 +464,18 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BTSProject> getSubProjects() {
+		if (subProjects == null) {
+			subProjects = new EObjectResolvingEList<BTSProject>(BTSProject.class, this, BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS);
+		}
+		return subProjects;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generatedNOT
 	 */
 	public String getDBCollectionKey() {
@@ -504,6 +528,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return getDbConnection();
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				return getDbCollections();
+			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
+				return getSubProjects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -551,6 +577,10 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				getDbCollections().clear();
 				getDbCollections().addAll((Collection<? extends BTSProjectDBCollection>)newValue);
 				return;
+			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
+				getSubProjects().clear();
+				getSubProjects().addAll((Collection<? extends BTSProject>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -594,6 +624,9 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				getDbCollections().clear();
 				return;
+			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
+				getSubProjects().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -627,6 +660,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return dbConnection != null;
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				return dbCollections != null && !dbCollections.isEmpty();
+			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
+				return subProjects != null && !subProjects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

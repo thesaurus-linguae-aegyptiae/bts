@@ -38,8 +38,8 @@ public class ProjectConnectionPage extends WizardPage
 	public ProjectConnectionPage(BTSProject project)
 	{
 		super("wizardPage");
-		setTitle("Wizard Page title");
-		setDescription("Wizard Page description");
+		setTitle("Project Connection Settings");
+		setDescription("If you have a connection to a central BTS Database, please enter the URL here.");
 		this.project = project;
 		if (project.getDbConnection() == null)
 		{

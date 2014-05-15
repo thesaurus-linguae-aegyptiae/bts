@@ -245,9 +245,10 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		{
 			try
 			{
-				Map<URI, Resource> uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
-						context);
-//				uriResourceMap = new HashMap<URI, Resource>();
+				Map<URI, Resource> uriResourceMap;
+//				uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
+//						context);
+				uriResourceMap = new HashMap<URI, Resource>();
 				((ResourceSetImpl) set).setURIResourceMap(uriResourceMap);
 				context.set(DaoConstants.RESOURCE_SET, set);
 			} catch (Exception e)
