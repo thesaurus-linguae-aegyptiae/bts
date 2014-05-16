@@ -27,12 +27,12 @@ public class RestoreHandler2 {
 			if (ed != null) {
 				Command command = SetCommand.create(ed, selection,
 						BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE,
-						BTSConstants.OBJECT_STATE_ACITVE);
+						BTSConstants.OBJECT_STATE_ACTIVE);
 				ed.getCommandStack().execute(command);
 
 			} else {
 				((AdministrativDataObject) selection)
-						.setState(BTSConstants.OBJECT_STATE_ACITVE);
+						.setState(BTSConstants.OBJECT_STATE_ACTIVE);
 			}
 			// General Command Controller... save!
 		}

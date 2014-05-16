@@ -38,7 +38,7 @@ public class BTSListEntryDaoImpl extends CouchDBDao<BTSListEntry, String> implem
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSLISTENTRIES;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSLISTENTRIES;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

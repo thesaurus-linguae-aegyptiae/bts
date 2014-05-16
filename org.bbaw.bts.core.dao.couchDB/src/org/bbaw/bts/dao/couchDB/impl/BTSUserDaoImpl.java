@@ -41,7 +41,7 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSUSERS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSUSERS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
@@ -109,7 +109,7 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 			String userName, String passWord) {
 		String viewId = DaoConstants.VIEW_ALL_BTSUSERS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSUSERS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

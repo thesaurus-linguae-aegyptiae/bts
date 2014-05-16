@@ -165,7 +165,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		if (eObject instanceof AdministrativDataObject)
 		{
 			((AdministrativDataObject) eObject)
-					.setState(BTSConstants.OBJECT_STATE_ACITVE);
+					.setState(BTSConstants.OBJECT_STATE_ACTIVE);
 		}
 	}
 

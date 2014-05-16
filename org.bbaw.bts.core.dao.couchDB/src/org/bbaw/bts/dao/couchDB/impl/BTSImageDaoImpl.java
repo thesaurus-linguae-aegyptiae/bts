@@ -30,7 +30,7 @@ public class BTSImageDaoImpl extends CouchDBDao<BTSImage, String> implements BTS
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSIMAGESS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSIMAGESS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

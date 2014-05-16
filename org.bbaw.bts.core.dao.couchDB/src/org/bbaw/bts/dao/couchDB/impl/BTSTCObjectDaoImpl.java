@@ -38,7 +38,7 @@ public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implemen
 	{
 		String viewId = DaoConstants.VIEW_ALL_DOCS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_DOCS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

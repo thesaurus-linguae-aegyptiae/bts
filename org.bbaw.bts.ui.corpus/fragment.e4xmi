@@ -41,7 +41,7 @@
       <parameters xmi:id="_3StlINtCEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" name="Inherit passport data from parent forced" typeId=""/>
     </elements>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="__kd84D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.passportEditorPart" containerData="10" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.PassportEditorPart" label="PassportEditorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/passport.png" closeable="true">
       <menus xmi:id="_39_zQNtBEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.passporteditor.viewmenu" label="VL">
         <tags>ViewMenu</tags>
@@ -117,5 +117,9 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_0pFswKL1EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.addAnnotation" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
       </toolbar>
     </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dbLssNzSEeO5ZuJa34ojEQ" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.main" positionInList="after:org.bbaw.bts.ui.main.usertoolcontrol">
+    <elements xsi:type="menu:ToolBarSeparator" xmi:id="_hdTeUNzSEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.corpus.toolbarseparator.0"/>
+    <elements xsi:type="menu:ToolControl" xmi:id="_iVeccNzSEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.corpus.toolcontrol.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.toolcontrol.CorpusToolControl"/>
   </fragments>
 </fragment:ModelFragments>

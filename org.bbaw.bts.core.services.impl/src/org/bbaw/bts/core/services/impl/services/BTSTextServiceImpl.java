@@ -56,7 +56,7 @@ public class BTSTextServiceImpl extends GenericObjectServiceImpl<BTSText, String
 	public BTSText find(String key)
 	{
 		BTSText text = null;
-		text = textDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus);
+		text = textDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key);
 		if (text != null)
 		{
 			return text;

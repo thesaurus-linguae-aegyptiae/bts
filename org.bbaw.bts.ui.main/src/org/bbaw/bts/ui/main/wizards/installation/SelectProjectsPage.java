@@ -78,7 +78,7 @@ public class SelectProjectsPage extends WizardPage
 		lblSelectYourMain.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblSelectYourMain.setText("Select your main working project");
 
-		comboViewer = new ComboViewer(grpYourMainWorking, SWT.None);
+		comboViewer = new ComboViewer(grpYourMainWorking, SWT.READ_ONLY);
 		comboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);

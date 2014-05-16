@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.app.login.Login;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
@@ -34,6 +35,7 @@ import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.services.BTSProjectService;
+import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.db.DBManager;
@@ -58,6 +60,7 @@ import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
@@ -101,28 +104,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private static final String PLUGIN_ID = "org.bbaw.bts.app";
 
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACTIVE_PROJECTS, nodePath = PLUGIN_ID)
-	private String active_projects;
 
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_PROJECT_KEY, nodePath = PLUGIN_ID)
-	private String main_project;
-
-	@Inject
-	@Optional
-	@Preference(value = "first_startup", nodePath = PLUGIN_ID)
-	private String first_startup;
-
-	@Inject
-	@Preference(value = "remote_db_urls", nodePath = PLUGIN_ID)
-	protected String remote_db_urls;
-	
-	@Inject
-	@Preference(value = BTSPluginIDs.PREF_DB_DIR, nodePath = PLUGIN_ID)
-	protected String db_installation_dir;
 
 	@Inject
 	private BTSProjectService projectService;
@@ -159,18 +141,32 @@ public class ApplicationStartupControllerImpl implements
 	@Inject
 	private ISplashScreenController splashController;
 
-	@Inject
-	@Preference(nodePath = PLUGIN_ID)
-	private IEclipsePreferences prefs;
+	// configurationscope preferences
+	private IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID);
 
+	private String main_project_key;
+	private String active_projects;
+	private String first_startup;
+	protected String remote_db_urls;
+	protected String db_installation_dir;
+	
+	
 	@Inject
 	private BTSUserController userController;
+
+	@Inject
+	private BTSTextCorpusService textCorpusService;
 
 	private boolean dbPrepared;
 
 	private boolean mainProjectSet;
 
 	private String localDBUrl;
+
+	private BTSProject main_project;
+
+	private String main_corpus_key;
+
 
 
 	@Override
@@ -371,7 +367,7 @@ public class ApplicationStartupControllerImpl implements
 		}
 
 		try {
-			projects = projectService.list(BTSConstants.OBJECT_STATE_ACITVE);
+			projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -380,7 +376,7 @@ public class ApplicationStartupControllerImpl implements
 		// ConfigurationScope.INSTANCE.getNode(PLUGIN_ID);
 		// prefs.
 		System.out.println("active: " + active_projects + " main: "
-				+ main_project);
+				+ main_project_key);
 		if (active_projects != null) // active_projects are set
 		{
 			activeProjects = new Vector<String>();
@@ -398,18 +394,22 @@ public class ApplicationStartupControllerImpl implements
 
 			checkProjectDBCollections(projects);
 
+			 
 			for (BTSProject p : projects) {
-				if (p.getPrefix().equals(main_project)) {
+				if (p.getPrefix().equals(main_project_key)) {
 					context.set(BTSCoreConstants.MAIN_PROJECT, p);
 					mainProjectSet = true;
+					main_project = p;
 					break;
 				}
 			}
-			// login
-			if (mainProjectSet) {
-				splashController.close();
-
-			}
+//			// login
+//			if (mainProjectSet) {
+//				splashController.close();
+//
+//			}
+			
+			checkCorpusSelectionSettings();
 		}
 		
 		
@@ -484,13 +484,40 @@ public class ApplicationStartupControllerImpl implements
 
 	}
 
+	private void checkCorpusSelectionSettings() {
+		main_corpus_key = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
+		if (main_corpus_key == null && "".equals(main_corpus_key)) return;
+		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		for (BTSTextCorpus cor : corpora)
+		{
+			if (main_project_key.equals(cor.getProject()) && main_corpus_key.equals(cor.getCorpusPrefix()))
+			{
+				BTSTextCorpus main_corpus = cor;
+				context.set(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);
+				break;
+			}
+		}
+		
+	}
+
 	private void loadPreferences(IEclipseContext context2) {
+		if (prefs == null) return;
+
 		IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
-//		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+		IEclipsePreferences instance = InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
 	
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
-	
-		prefs.put(BTSPluginIDs.PREF_MAIN_CORPUS, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS, null));
+		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
+		
+		active_projects = prefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS,defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS, null));
+
+		first_startup = prefs.get("first_startup", defaultPrefs.get("first_startup", null));;
+		remote_db_urls = prefs.get("remote_db_urls", defaultPrefs.get("remote_db_urls", null));
+
+		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR, defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
+		
+		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
+		String mck = defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 		
 	}
 
@@ -664,16 +691,16 @@ public class ApplicationStartupControllerImpl implements
 				}
 			}
 		}
-		if (main_project != null && main_project.trim().length() > 0) {
+		if (main_project_key != null && main_project_key.trim().length() > 0) {
 			if (activeProjects == null)
 			{
 				activeProjects = new Vector<String>();
 			}
-			if (activeProjects != null && !activeProjects.contains(main_project)) {
-				activeProjects.add(main_project);
+			if (activeProjects != null && !activeProjects.contains(main_project_key)) {
+				activeProjects.add(main_project_key);
 
 			}
-			if (checkContains(projects, main_project)) {
+			if (checkContains(projects, main_project_key)) {
 
 
 			} else {
@@ -712,14 +739,14 @@ public class ApplicationStartupControllerImpl implements
 		}
 		
 		// continue with setting project settings
-		main_project = project.getPrefix();
+		main_project_key = project.getPrefix();
 		if (activeProjects == null)
 		{
 			activeProjects = new Vector<String>();
 		}
-		if (!activeProjects.contains(main_project))
+		if (!activeProjects.contains(main_project_key))
 		{
-			activeProjects.add(main_project);
+			activeProjects.add(main_project_key);
 		}
 		
 		if (active_projects == null || "".equals(active_projects))
@@ -753,14 +780,14 @@ public class ApplicationStartupControllerImpl implements
 		
 		try {
 			projects = projectService
-					.list(BTSConstants.OBJECT_STATE_ACITVE);
+					.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		} catch (Exception e) {
 
 		}
 //		if (projects != null) {
 //			checkProjectsSelectionsSettings();
 //		}
-		prefs.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, main_project);
+		prefs.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, main_project_key);
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, active_projects);
 		try {
 			prefs.flush();

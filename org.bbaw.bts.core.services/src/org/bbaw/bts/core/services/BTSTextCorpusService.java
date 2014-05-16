@@ -5,4 +5,7 @@ import org.bbaw.bts.btsmodel.BTSTextCorpus;
 public interface BTSTextCorpusService extends
 		GenericObjectService<BTSTextCorpus, String> {
 
+	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus,
+			boolean synchronizeCorpus);
+
 }

@@ -114,7 +114,7 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<BTSThsEntry> children = thsService.query(query,
-				BTSConstants.OBJECT_STATE_ACITVE);
+				BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
 	}
 

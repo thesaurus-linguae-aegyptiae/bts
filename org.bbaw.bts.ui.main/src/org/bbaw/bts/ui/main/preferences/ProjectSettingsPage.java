@@ -74,7 +74,7 @@ public class ProjectSettingsPage extends FieldEditorPreferencePage {
 		lblSelectYourMain.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		lblSelectYourMain.setText("Select your main working project");
 
-		comboViewer = new ComboViewer(container, SWT.None);
+		comboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		comboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -225,6 +225,7 @@ public class ProjectSettingsPage extends FieldEditorPreferencePage {
 		}
 		if (saveRequired)
 		{
+
 			try {
 				prefs.flush();
 			} catch (BackingStoreException e) {

@@ -22,7 +22,7 @@ public class RestoreDeletedHandler {
 		System.out.println("restore");
 		if (selection instanceof EObject) {
 			((AdministrativDataObject) selection)
-					.setState(BTSConstants.OBJECT_STATE_ACITVE);
+					.setState(BTSConstants.OBJECT_STATE_ACTIVE);
 			// General Command Controller... save!
 			commandController.save((BTSDBBaseObject) selection);
 

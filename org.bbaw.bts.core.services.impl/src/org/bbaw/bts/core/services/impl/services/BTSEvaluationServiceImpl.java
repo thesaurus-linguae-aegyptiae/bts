@@ -255,7 +255,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	private void loadDBCollectionCache() {
 		dbCollectionCache = new HashMap<String, BTSProjectDBCollection>();
 		projectService = context.get(BTSProjectService.class);
-		List<BTSProject> projects = projectService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		List<BTSProject> projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		for (BTSProject project : projects)
 		{
 			for (BTSProjectDBCollection coll : project.getDbCollections())
@@ -462,7 +462,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	 * @param map map to fill
 	 */
 	private void fillLockingMap(Map<String, DBLease> map) {
-		List<DBLease> leases = dbLeaseDao.list(NOTIFICATION, BTSConstants.OBJECT_STATE_ACITVE);
+		List<DBLease> leases = dbLeaseDao.list(NOTIFICATION, BTSConstants.OBJECT_STATE_ACTIVE);
 		for (DBLease lease : leases)
 		{
 			if (checkAndProcessLeaseTTL(lease, null))

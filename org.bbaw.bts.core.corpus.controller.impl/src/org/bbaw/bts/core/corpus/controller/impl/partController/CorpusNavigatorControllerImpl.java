@@ -173,7 +173,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<BTSCorpusObject> children = corpusObjectService.query(query,
-				BTSConstants.OBJECT_STATE_ACITVE);
+				BTSConstants.OBJECT_STATE_ACTIVE);
 		logger.info("Number of children found: " + children.size());
 
 		return children;
@@ -301,7 +301,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
 		List<BTSTextCorpus> list = textCorpusService
-				.list(BTSConstants.OBJECT_STATE_ACITVE);
+				.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
 		for (BTSTextCorpus t : list)
 		{
@@ -369,12 +369,12 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 	@Override
 	public List<BTSTextCorpus> listTextCorpora() {
-		return textCorpusService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		return textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 
 	@Override
-	public boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus) {
-		return textCorpusService.save(corpus);
+	public boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus, boolean synchronizeCorpus) {
+		return textCorpusService.makeAndSaveNewTextCorpus(corpus, synchronizeCorpus);
 	}
 	
 	

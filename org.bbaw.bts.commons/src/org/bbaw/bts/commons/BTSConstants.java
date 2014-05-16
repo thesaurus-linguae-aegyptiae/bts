@@ -27,7 +27,7 @@ public class BTSConstants
 	public static final String ENCODING = "UTF-8";
 	public static final String TEXT_VERS_BREAK_MARKER = "VersbreakMarker";
 	public static final String TEXT_VERS_FRONTIER_MARKER = "VersFrontierMarker";
-	public static final String OBJECT_STATE_ACITVE = "active";
+	public static final String OBJECT_STATE_ACTIVE = "active";
 	public static final String OBJECT_STATE_TERMINATED = "terminated";
 	public static final String ANNOTATION = "Annotation";
 	public static final String CORPUS_OBJECT = "CorpusObject";
@@ -52,6 +52,7 @@ public class BTSConstants
 	 * default time to live of lock in milliseconds.
 	 */
 	public static final int DEFAULT_LOCK_TTL = 500000;
+	public static final String DEFAULT_LOCALE_LANG = "en";
 
 	private BTSConstants()
 	{

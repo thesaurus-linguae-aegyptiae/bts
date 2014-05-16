@@ -355,7 +355,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	public void onFocus()
 	{
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
 	@Inject
@@ -365,7 +365,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	{
 		if (object instanceof BTSTextCorpus)
 		{
-			addObjectToInput(object);
+			addObjectToInput((BTSCorpusObject) object);
 		} else if ((object instanceof BTSTCObject || object instanceof BTSText) && selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject)
 		{
@@ -452,14 +452,18 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 
 	}
 
-	private void addObjectToInput(final BTSObject object)
+	private void addObjectToInput(final BTSCorpusObject object)
 	{
 		sync.asyncExec(new Runnable()
 		{
 			@Override
 			public void run()
 			{
-				// input.add(object);
+				List<BTSCorpusObject> obs = new Vector<BTSCorpusObject>(1);
+				obs.add(object);
+				storeIntoMap(obs, composite);
+				List<TreeNodeWrapper> nodes = loadNodes(obs);
+				((TreeNodeWrapper) treeViewer.getInput()).getChildren().addAll(nodes);
 			}
 		});
 

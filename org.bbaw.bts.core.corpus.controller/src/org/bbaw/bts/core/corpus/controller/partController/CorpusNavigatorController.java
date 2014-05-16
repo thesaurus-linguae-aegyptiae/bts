@@ -44,6 +44,6 @@ public interface CorpusNavigatorController
 	
 	List<BTSTextCorpus> listTextCorpora();
 	
-	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus);
+	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus, boolean synchronizeCorpus);
 
 }

@@ -36,7 +36,7 @@ public class DefaultValuesInitializer extends AbstractPreferenceInitializer
 		store.setDefault(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
 	
-		store.setDefault(BTSPluginIDs.PREF_MAIN_CORPUS, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS, null));
+		store.setDefault(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
 
 

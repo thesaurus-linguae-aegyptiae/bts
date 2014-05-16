@@ -53,7 +53,7 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 	public BTSImage find(String key)
 	{
 		BTSImage image = null;
-		image = imageDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus);
+		image = imageDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key);
 		if (image != null)
 		{
 			return image;

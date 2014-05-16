@@ -146,13 +146,13 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			return (BTSConfiguration) activeConfig;
 		}
-		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACITVE);
+		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACTIVE);
 		if (list == null || list.isEmpty())
 		{
 			BTSConfiguration config = createNew();
 			save(config);
 		}
-		activeConfig = list(BTSConstants.OBJECT_STATE_ACITVE).get(0);
+		activeConfig = list(BTSConstants.OBJECT_STATE_ACTIVE).get(0);
 
 		for (BTSConfiguration c : list) {
 			if (active_configuration_name.equals(c.getName())) {

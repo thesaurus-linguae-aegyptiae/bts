@@ -50,7 +50,7 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSPROJECTS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

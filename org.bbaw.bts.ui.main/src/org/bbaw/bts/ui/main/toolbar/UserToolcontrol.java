@@ -22,14 +22,8 @@ public class UserToolcontrol {
 	@Inject
 	private BTSResourceProvider resourceProvider;
 
-	// @Inject
-	// @Optional
-	// @Named(BTSCoreConstants.AUTHENTICATED_USER)
 	private BTSUser authenticatedUser;
 
-	// @Inject
-	// @Optional
-	// @Named(BTSCoreConstants.CORE_EXPRESSION_USER_CONTEXT_ROLE)
 	private String userContextRole;
 
 	private ComposedAdapterFactory factory = new ComposedAdapterFactory(
@@ -43,15 +37,9 @@ public class UserToolcontrol {
 	private Label mayEditLabel;
 
 	private Label roleLabel;
-
-	// @Inject
-	// @Optional
-	// @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	
 	private Boolean userMayEdit;
 
-	// @Inject
-	// @Optional
-	// @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_TRANSCRIBE)
 	private Boolean userMayTranscribe;
 
 	@PostConstruct
@@ -62,10 +50,6 @@ public class UserToolcontrol {
 		l.setImage(labelProvider.getImage(authenticatedUser));
 		l.setLayoutData(new GridData());
 		l.pack();
-		// Label l2 = new Label(composite, SWT.None);
-		// l2.setText("Current User");
-		// l2.setLayoutData(new GridData());
-		// l2.pack();
 
 		userLabel = new Label(composite, SWT.None);
 		userLabel.setLayoutData(new GridData());

@@ -78,7 +78,7 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 	public List<BTSCorpusObject> list(String path, String objectState) {
 		String viewId = DaoConstants.VIEW_ALL_CORPUS_OBJECTS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_CORPUS_OBJECTS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
@@ -128,7 +128,7 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 	public List<BTSCorpusObject> findByQueryId(String searchId, String path,
 			String objectState) {
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			searchId = getActiveSearchId(searchId);
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

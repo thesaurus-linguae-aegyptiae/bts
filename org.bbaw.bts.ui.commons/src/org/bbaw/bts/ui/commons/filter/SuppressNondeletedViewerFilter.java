@@ -16,7 +16,7 @@ public class SuppressNondeletedViewerFilter extends ViewerFilter {
 			object = ((TreeNodeWrapper) element).getObject();
 		}
 		if (object instanceof AdministrativDataObject
-				&& !BTSConstants.OBJECT_STATE_ACITVE
+				&& !BTSConstants.OBJECT_STATE_ACTIVE
 						.equals(((AdministrativDataObject) object).getState())) {
 			return true;
 		}

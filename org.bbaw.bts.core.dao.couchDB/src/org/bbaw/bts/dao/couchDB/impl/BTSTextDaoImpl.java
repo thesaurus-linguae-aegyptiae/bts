@@ -38,7 +38,7 @@ public class BTSTextDaoImpl extends CouchDBDao<BTSText, String> implements BTSTe
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSTEXTS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

@@ -23,7 +23,7 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 
 	public List<BTSTCObject> getRootTCObjects()
 	{
-		return list(BTSConstants.OBJECT_STATE_ACITVE);
+		return list(BTSConstants.OBJECT_STATE_ACTIVE);
 
 	}
 
@@ -66,7 +66,7 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 	public BTSTCObject find(String key)
 	{
 		BTSTCObject tcObject = null;
-		tcObject = bTSTCObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus);
+		tcObject = bTSTCObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key);
 		if (tcObject != null)
 		{
 			return tcObject;

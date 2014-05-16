@@ -39,7 +39,7 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSTHSENTRIES;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSTHSENTRIES;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

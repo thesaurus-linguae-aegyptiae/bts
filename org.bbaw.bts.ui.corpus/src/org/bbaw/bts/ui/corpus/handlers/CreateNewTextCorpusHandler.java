@@ -18,15 +18,16 @@ public class CreateNewTextCorpusHandler
 {
 
 	@Execute
-	public void execute(@Active MPart part, CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell)
+	public void execute(CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell)
 	{
 		BTSTextCorpus corpus = corpusNavigatorController.createNewTextCorpus();
 		corpus.setCorpusPrefix(null);
 		NewCorpusObjectDialog dialog = new NewCorpusObjectDialog(shell, corpus);
 		if (dialog.open() == NewCorpusObjectDialog.OK)
 		{
+			corpusNavigatorController.makeAndSaveNewTextCorpus(corpus, dialog.isCorpusSynchronized());
+
 			eventBroker.post("model_new/asyncEvent", corpus);
-			corpusNavigatorController.makeAndSaveNewTextCorpus(corpus);
 		}
 	}
 

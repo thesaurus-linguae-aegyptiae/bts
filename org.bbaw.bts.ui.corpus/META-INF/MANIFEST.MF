@@ -42,6 +42,7 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.core.corpus.controller.partController,
  org.bbaw.bts.searchModel,
  org.bbaw.bts.ui.resources,
+ org.eclipse.e4.core.commands,
  org.eclipse.e4.core.services.log,
  org.eclipse.e4.tools.services,
  org.eclipse.e4.ui.workbench.swt.modeling

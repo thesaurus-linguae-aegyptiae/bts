@@ -985,15 +985,33 @@ public class CouchDBManager implements DBManager
 	}
 
 	@Override
-	public void checkAndCreateDBCollection(String dbCollectionName) {
+	public boolean checkAndCreateDBCollection(BTSProject project, BTSProjectDBCollection collection, String dbCollectionName, boolean index, boolean synchronize) {
 		
 		CouchDbClient dbClient = null;
+		boolean success = true;
 		try {
 			dbClient = connectionProvider.getDBClient(CouchDbClient.class, dbCollectionName);
 			dbClient.context().createDB(dbCollectionName);
+			if (synchronize && project != null && collection != null)
+			{
+				if (checkAndSetSyncToRemote(collection, project.getDbConnection())
+						&& checkAndSetSyncFromRemote(collection, project.getDbConnection()))
+				{
+				}
+				else 
+				{
+					success = false;
+				}
+			}
+			if (index && !checkAndCreateIndex(dbCollectionName, esClient))
+			{
+				success = false;
+			}
+			checkAndAddAuthentication(collection);
 		} catch (Exception e) {
 			logger.error(e);
 		}
+		return success;
 
 		
 	}

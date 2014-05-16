@@ -103,7 +103,7 @@ public class GraphicSelectionCounterServiceImpl extends
 		query.setQueryBuilder(QueryBuilders.prefixQuery("_id", code));
 		counters.addAll(counterDao.query(query, ServiceConstants.LOCAL,
  ServiceConstants.LOCAL,
-						BTSConstants.OBJECT_STATE_ACITVE, false));
+						BTSConstants.OBJECT_STATE_ACTIVE, false));
 		return counters;
 	}
 

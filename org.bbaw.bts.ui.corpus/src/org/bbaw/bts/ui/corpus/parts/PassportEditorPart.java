@@ -1137,7 +1137,7 @@ public class PassportEditorPart {
 			}
 		}
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
 	@Persist

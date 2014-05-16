@@ -30,7 +30,7 @@ public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> impl
 	{
 		String view = DaoConstants.VIEW_ALL_BTSANNOTATIONS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			view = DaoConstants.VIEW_ALL_ACTIVE_BTSANNOTATIONS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

@@ -36,7 +36,7 @@ public class DBLeaseDaoImpl extends CouchDBDao<DBLease, String> implements DBLea
 	{
 		String viewId = DaoConstants.VIEW_ALL_DBLEASES;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_DBLEASES;
 		} 
 		List<String> allDocs = new ArrayList<String>(0);

@@ -492,7 +492,7 @@ public class ThsNavigator implements ScatteredCachingPart {
 	@Focus
 	public void onFocus() {
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+				.activateDBCollectionContext("ths");
 	}
 
 	@Inject

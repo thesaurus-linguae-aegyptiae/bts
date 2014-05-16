@@ -191,7 +191,7 @@ public class EgyLemmatizerPart {
 	@Focus
 	public void onFocus() {
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
 	private void shiftCaret(String eventTopic) {

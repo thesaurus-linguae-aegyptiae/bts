@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 
 public interface DBManager
 {
@@ -33,6 +34,6 @@ public interface DBManager
 
 	void setLocalDBUrl(String localDBUrl);
 
-	void checkAndCreateDBCollection(String string);
+	boolean checkAndCreateDBCollection(BTSProject project, BTSProjectDBCollection collection, String string, boolean index, boolean synchronize);
 
 }

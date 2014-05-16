@@ -7,9 +7,14 @@ import javax.inject.Inject;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSTextCorpusDao;
+import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.db.DBManager;
@@ -20,10 +25,13 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 {
 
 	@Inject
-	BTSTextCorpusDao textCorpusDao;
+	private BTSTextCorpusDao textCorpusDao;
 	
 	@Inject
 	private DBManager dbManager;
+
+	@Inject
+	private BTSProjectService projectService;
 
 	@Override
 	public BTSTextCorpus createNew()
@@ -37,10 +45,7 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 	@Override
 	public boolean save(BTSTextCorpus entity)
 	{
-		if (entity != null && entity.eResource() != null)
-		{
-			dbManager.checkAndCreateDBCollection(entity.getProject() + ServiceConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
-		}
+		
 		super.addRevisionStatement(entity);
 		textCorpusDao.add(entity, entity.getProject() + ServiceConstants.CORPUS);
 		return true;
@@ -117,5 +122,20 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 			String objectState)
 	{
 		return filter(textCorpusDao.findByQueryId(queryId, dbPath, objectState));
+	}
+
+
+
+	@Override
+	public boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus,
+			boolean synchronizeCorpus) {
+		if (corpus != null && corpus.eResource() == null)
+		{
+			BTSProject project = projectService.findByProjectPrefix(corpus.getProject());
+			BTSProjectDBCollection coll = projectService.checkAndAddDBCollection(project, project.getPrefix() + ServiceConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);
+
+			dbManager.checkAndCreateDBCollection(project, coll, corpus.getProject() + ServiceConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);
+		}
+		return save(corpus);
 	}
 }

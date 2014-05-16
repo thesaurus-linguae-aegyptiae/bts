@@ -66,7 +66,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Inject
 	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS, nodePath = "org.bbaw.bts.app")
+	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
 	private String main_corpus_key;
 
 	@Inject
@@ -315,7 +315,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (key != null) {
 			String localDBCollContext = null;
 			switch (key) {
-			case BTSPluginIDs.PREF_MAIN_CORPUS: {
+			case BTSPluginIDs.PREF_MAIN_CORPUS_KEY: {
 				localDBCollContext = main_project_key + "_corpus_"
 						+ main_corpus_key;
 				break;

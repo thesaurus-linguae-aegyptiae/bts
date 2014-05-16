@@ -162,7 +162,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 	public BTSCorpusObject find(String key)
 	{
 		BTSCorpusObject tcObject = null;
-		tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus);
+		tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key);
 		if (tcObject != null)
 		{
 			return tcObject;

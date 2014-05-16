@@ -30,7 +30,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_sw17gEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.egy.handler.insertTextModel" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.test.InsertTextModelElementHandler" command="_l81REEt8EeO3HNJi0pp4Qg"/>
     <elements xsi:type="commands:Handler" xmi:id="_4lhZ8IjGEeOBD8Gt6rzlog" elementId="org.bbaw.bts.ui.corpus.egy.handler.htw.shortcut" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.HTWShortcutHandler" command="_CBI1QIjGEeOBD8Gt6rzlog"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom" positionInList="after:org.bbaw.bts.ui.corpus.part.passportEditorPart">
     <elements xsi:type="basic:Part" xmi:id="_QSWNcH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.part.lemmatizer" containerData="0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmatizerPart" label="Lemmatizer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmatizer.png" closeable="true">
       <toolbar xmi:id="_WC2McH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.2">
         <children xsi:type="menu:HandledToolItem" xmi:id="_GaYAUIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>

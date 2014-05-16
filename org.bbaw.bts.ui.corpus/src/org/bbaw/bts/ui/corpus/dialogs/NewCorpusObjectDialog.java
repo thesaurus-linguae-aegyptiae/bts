@@ -28,6 +28,9 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -37,6 +40,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
 
 public class NewCorpusObjectDialog extends TitleAreaDialog
 {
@@ -52,6 +56,10 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	private EditingDomainController editingDomainController;
 
 	private IEclipseContext context;
+
+	private Button btnCheckButton;
+
+	protected boolean synchronize;
 
 	/**
 	 * Create the dialog.
@@ -102,19 +110,18 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		corpusPrefixTxt = new Text(container, SWT.BORDER);
 		corpusPrefixTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		new Label(container, SWT.NONE);
-
-//		Label lblType = new Label(container, SWT.NONE);
-//		lblType.setText("Type");
-//
-//		Combo combo = new Combo(container, SWT.NONE);
-//		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-//		new Label(container, SWT.NONE);
-//
-//		Label lblSubtype = new Label(container, SWT.NONE);
-//		lblSubtype.setText("Subtype");
-//
-//		Combo combo_1 = new Combo(container, SWT.NONE);
-//		combo_1.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		new Label(container, SWT.NONE);
+		
+		btnCheckButton = new Button(container, SWT.CHECK);
+		btnCheckButton.setText("Synchronize Corpus With Central Database");
+		btnCheckButton.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				synchronize = btnCheckButton.getSelection();
+				
+			}
+		});
 
 		bindingContext = initializeBindings();
 
@@ -168,6 +175,11 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	protected Point getInitialSize()
 	{
 		return new Point(450, 300);
+	}
+	
+	public boolean isCorpusSynchronized()
+	{
+		return (synchronize);
 	}
 
 }

@@ -38,7 +38,7 @@ public class BTSUserGroupDaoImpl extends CouchDBDao<BTSUserGroup, String> implem
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSUSERGROUPS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSUSERGROUPS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

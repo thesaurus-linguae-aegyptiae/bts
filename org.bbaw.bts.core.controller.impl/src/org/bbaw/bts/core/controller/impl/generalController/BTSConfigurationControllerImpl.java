@@ -63,7 +63,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	@Override
 	public List<BTSConfiguration> listConfigurations()
 	{
-		return configService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		return configService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 
 	/*

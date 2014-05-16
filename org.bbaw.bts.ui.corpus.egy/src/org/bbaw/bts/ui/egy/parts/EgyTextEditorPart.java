@@ -858,7 +858,7 @@ embeddedEditor.getViewer(),
 
 	private void shiftSelection(int i) {
 		int caret = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
-		// ohne über annotationmodel zu gehen!!!!!
+		// ohne ï¿½ber annotationmodel zu gehen!!!!!
 
 	}
 
@@ -909,8 +909,8 @@ embeddedEditor.getViewer(),
 			}
 			// if (selection instanceof BTSSentenceItem) {
 			// setSentenceItemSelection((BTSSentenceItem) selection);
-			// FIXME direkt über editor, nicht über annotationmodel,
-			// funktioniert daher nicht zuverlässig
+			// FIXME direkt ï¿½ber editor, nicht ï¿½ber annotationmodel,
+			// funktioniert daher nicht zuverlï¿½ssig
 			// }
 		}
 	}
@@ -1138,7 +1138,7 @@ embeddedEditor.getViewer(),
 		}
 		}
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 		}
 	}
 

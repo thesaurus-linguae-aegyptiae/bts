@@ -29,6 +29,8 @@ public class BTSPluginIDs
 	public static final String PREF_ACTIVE_CORPORA = "active_corpora";
 
 	public static final String PREF_MAIN_CORPUS = "main_corpus";
+	
+	public static final String PREF_MAIN_CORPUS_KEY = "main_corpus_key";
 
 	public static final String PREF_NODE_INSTALLATION = "installation";
 
@@ -59,5 +61,7 @@ public class BTSPluginIDs
 	public static final String PREF_LOCAL_SEARCH_CLUSTER_NAME = "search_local_cluster_name";
 
 	public static final String PREF_LOCK_TTL = "lock_ttl";
+
+	public static final String CMD_ID_EDIT_PREFERENCE = "org.eclipse.ui.window.preferences";
 
 }

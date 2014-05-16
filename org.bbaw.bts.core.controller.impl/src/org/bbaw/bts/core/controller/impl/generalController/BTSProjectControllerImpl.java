@@ -37,7 +37,7 @@ public class BTSProjectControllerImpl implements BTSProjectController
 	@Override
 	public List<BTSProject> listProjects()
 	{
-		return projectService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		return projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 
 	@Override

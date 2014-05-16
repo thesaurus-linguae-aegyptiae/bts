@@ -3,6 +3,7 @@ package org.bbaw.bts.core.commons.staticAccess;
 import javax.inject.Inject;
 
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -21,9 +22,8 @@ public class StaticAccessController {
 	private static BTSResourceProvider resourceProvider;
 	@Inject
 	private static IEclipseContext context;
-	@Inject
-	@Preference
-	private static IEclipsePreferences preferenceStore;
+
+	private static IEclipsePreferences preferenceStore = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
 	
 	@Inject
 	private Logger logger;

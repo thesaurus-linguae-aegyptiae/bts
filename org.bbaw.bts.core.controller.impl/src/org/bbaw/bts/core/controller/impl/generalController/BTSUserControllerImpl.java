@@ -79,7 +79,7 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public List<BTSUser> query(BTSQueryRequest query) {
-		return userService.query(query, BTSConstants.OBJECT_STATE_ACITVE);
+		return userService.query(query, BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 
 	@Override
@@ -109,12 +109,12 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public List<BTSUser> listAll() {
-		return userService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 	
 	@Override
 	public List<BTSUser> listAll(String userName, String passWord) {
-		return userService.listAll(BTSConstants.OBJECT_STATE_ACITVE, userName, passWord);
+		return userService.listAll(BTSConstants.OBJECT_STATE_ACTIVE, userName, passWord);
 	}
 
 

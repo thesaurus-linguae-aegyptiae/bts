@@ -37,7 +37,7 @@ public class UserManagerControllerImpl implements UserManagerController
 	@Override
 	public List<BTSUserGroup> listUserGroups()
 	{
-		return usergroupService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		return usergroupService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class UserManagerControllerImpl implements UserManagerController
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<BTSUser> children = userService.query(query,
-				BTSConstants.OBJECT_STATE_ACITVE);
+				BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
 	}
 
@@ -90,7 +90,7 @@ public class UserManagerControllerImpl implements UserManagerController
 	@Override
 	public List<BTSUser> listUsers()
 	{
-		return userService.list(BTSConstants.OBJECT_STATE_ACITVE);
+		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 	}
 
 	@Override

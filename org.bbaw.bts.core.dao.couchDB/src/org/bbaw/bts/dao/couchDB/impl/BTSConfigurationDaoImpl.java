@@ -38,7 +38,7 @@ public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String
 	{
 		String viewId = DaoConstants.VIEW_ALL_BTSCONFIGURATIONS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

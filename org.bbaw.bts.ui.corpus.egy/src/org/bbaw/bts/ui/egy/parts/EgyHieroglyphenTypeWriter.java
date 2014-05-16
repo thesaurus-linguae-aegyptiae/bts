@@ -485,7 +485,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		}
 //		contextService.activateContext(HTW_CONTEXT_ID);
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS);
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
 	@Inject

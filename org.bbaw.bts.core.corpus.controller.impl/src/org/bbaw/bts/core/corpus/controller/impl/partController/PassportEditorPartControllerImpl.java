@@ -115,7 +115,7 @@ public class PassportEditorPartControllerImpl
 					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 
 					list.addAll((Collection<? extends BTSCorpusObject>) thsService
-							.query(query, BTSConstants.OBJECT_STATE_ACITVE,
+							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 									false));
 				} else if (BTSConstants.WLIST_ENTRY
 						.equals(pathEntry.getValue())) {
@@ -137,7 +137,7 @@ public class PassportEditorPartControllerImpl
 					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 
 					list.addAll((Collection<? extends BTSCorpusObject>) corpusObjectService
-							.query(query, BTSConstants.OBJECT_STATE_ACITVE,
+							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 									false));
 					corpus = true;
 				}

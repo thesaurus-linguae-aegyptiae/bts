@@ -231,7 +231,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		String view = DaoConstants.VIEW_ALL_DOCS;
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			view = DaoConstants.VIEW_ALL_ACTIVE_DOCS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
@@ -328,7 +328,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		{
 			SearchResponse response;
 //			connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet(); 
-			if (BTSConstants.OBJECT_STATE_ACITVE.equals(objectState)) {
+			if (BTSConstants.OBJECT_STATE_ACTIVE.equals(objectState)) {
 				response = connectionProvider
 						.getSearchClient(Client.class)
 						.prepareSearch(indexName)
@@ -338,7 +338,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 						// Query
 						.setPostFilter(
 								FilterBuilders.termFilter("state",
-										BTSConstants.OBJECT_STATE_ACITVE))
+										BTSConstants.OBJECT_STATE_ACTIVE))
 						// // Filter
 						.setFrom(0).setSize(60).setExplain(true).execute()
 						.actionGet();
@@ -516,7 +516,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		View view;
 		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
 		if (objectState != null
-				&& objectState.equals(BTSConstants.OBJECT_STATE_ACITVE)) {
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
 			searchId = getActiveSearchId(searchId);
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {

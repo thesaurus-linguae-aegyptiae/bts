@@ -26,6 +26,7 @@ import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -34,6 +35,9 @@ import org.elasticsearch.client.Client;
 public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K extends Serializable> implements
 		GenericObjectService<E, K>
 {
+	@Inject
+	protected IEclipseContext context;
+	
 	@Inject
 	protected CorpusObjectDao corpusObjectDao;
 
@@ -58,8 +62,8 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	@Inject
 	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS, nodePath = "org.bbaw.bts.app")
-	protected String main_corpus;
+	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
+	protected String main_corpus_key;
 
 	@Inject
 	@Optional
@@ -94,7 +98,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		}
 		if (entity instanceof BTSCorpusObject)
 		{
-			((BTSCorpusObject) entity).setCorpusPrefix(main_corpus);
+			((BTSCorpusObject) entity).setCorpusPrefix(main_corpus_key);
 		}
 	}
 

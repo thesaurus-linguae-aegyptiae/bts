@@ -39,7 +39,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 
 	private ComboViewer comboViewer;
 	private BTSTextCorpus selectedTextCorpus;
-	private String main_corpus;
+	private String main_corpus_key;
 	private DualListComposite<BTSCorpusObject> duallistcomposite;
 	private IEclipseContext context;
 	private CorpusNavigatorController corpusController;
@@ -70,7 +70,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		lblSelectYourMain.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
 		lblSelectYourMain.setText("Select your main working project");
 
-		comboViewer = new ComboViewer(container, SWT.None);
+		comboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		comboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -92,15 +92,15 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		Group grpFurtherProjectsFrom = new Group(container, SWT.NONE);
 		grpFurtherProjectsFrom.setLayout(new GridLayout(2, false));
 		grpFurtherProjectsFrom.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		grpFurtherProjectsFrom.setText("Further projects from which you want to load and read data");
+		grpFurtherProjectsFrom.setText("Further corpora from which you want to load and read data");
 		
 		Label lblAvailableProjects = new Label(grpFurtherProjectsFrom, SWT.NONE);
-		lblAvailableProjects.setText("Available Projects (Not downloaded)");
+		lblAvailableProjects.setText("Available Corpora (Not activated)");
 		
 		Label lblProjectsToBe = new Label(grpFurtherProjectsFrom, SWT.NONE);
 		lblProjectsToBe.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, true, false, 1, 1));
 		lblProjectsToBe.setAlignment(SWT.RIGHT);
-		lblProjectsToBe.setText("Projects to be downloaded");
+		lblProjectsToBe.setText("Active Corpora");
 
 		duallistcomposite = new DualListComposite<BTSCorpusObject>(grpFurtherProjectsFrom, SWT.NONE);
 		duallistcomposite.setLayoutData(new GridData(GridData.FILL, GridData.FILL, true, true, 2, 1));
@@ -119,7 +119,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
 		IEclipsePreferences defaultpref = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
 
-		main_corpus = prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS, defaultpref.get(BTSPluginIDs.PREF_MAIN_CORPUS, null));
+		main_corpus_key = prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultpref.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
 		active_corpora = prefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultpref.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
 		logger = context.get(Logger.class);
 		
@@ -139,7 +139,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 
 		if (active_corpora == null || active_corpora.trim().length() == 0)
 		{
-			active_corpora = main_corpus;
+			active_corpora = main_corpus_key;
 		}
 		if (active_corpora != null && active_corpora.trim().length() > 0)
 		{
@@ -149,7 +149,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 			{
 
 				boolean found = false;
-				if (main_corpus != null && main_corpus.equals(corpus.getCorpusPrefix()))
+				if (main_corpus_key != null && main_corpus_key.equals(corpus.getCorpusPrefix()))
 				{
 					selectedTextCorpus = corpus;
 					comboViewer.setSelection(new StructuredSelection(corpus));
@@ -214,9 +214,10 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 			return super.performOk();
 		}
 		boolean saveRequired = false;
-		if (selectedTextCorpus != null && selectedTextCorpus.getCorpusPrefix() != null && main_corpus != null && !main_corpus.equals(selectedTextCorpus.getCorpusPrefix()))
+		if (selectedTextCorpus != null && selectedTextCorpus.getCorpusPrefix() != null && (main_corpus_key == null || !main_corpus_key.equals(selectedTextCorpus.getCorpusPrefix())))
 		{
-			prefs.put(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus.getCorpusPrefix());
+			prefs.put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
+			context.set(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
 			saveRequired = true;
 		}
 		String selectedProjetsString = getActiveProjectSelectionsAsString();

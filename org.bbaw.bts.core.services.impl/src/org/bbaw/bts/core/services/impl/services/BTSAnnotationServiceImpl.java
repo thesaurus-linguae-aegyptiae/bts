@@ -57,7 +57,7 @@ public class BTSAnnotationServiceImpl extends GenericObjectServiceImpl<BTSAnnota
 	public BTSAnnotation find(String key)
 	{
 		BTSAnnotation anno = null;
-		anno = annotationDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus);
+		anno = annotationDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key);
 		if (anno != null)
 		{
 			return anno;

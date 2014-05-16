@@ -11,6 +11,8 @@ import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSProjectDao;
 import org.bbaw.bts.core.services.BTSProjectService;
@@ -171,6 +173,49 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			String objectState)
 	{
 		return filter(projectDao.findByQueryId(queryId, dbPath, objectState));
+	}
+
+	@Override
+	public BTSProject findByProjectPrefix(String project) {
+		if (main_project.equals(project))
+		{
+			return (BTSProject) context.get(BTSCoreConstants.MAIN_PROJECT);
+		}
+		List<BTSProject> projects = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		for (BTSProject pro : projects)
+		{
+			if (pro.getPrefix() != null && pro.getPrefix().equals(project))
+			{
+				return pro;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public BTSProjectDBCollection checkAndAddDBCollection(BTSProject project, String collName,
+			boolean index, boolean synchronize) {
+		BTSProjectDBCollection collection = null;
+		for (BTSProjectDBCollection coll : project.getDbCollections())
+		{
+			if (project.getPrefix() != null)
+			{
+				if (collName.equals(coll.getCollectionName()))
+				{
+					collection = coll;
+					break;
+				}
+			}
+		}
+		if (collection == null)
+		{
+			collection = BtsmodelFactory.eINSTANCE.createBTSProjectDBCollection();
+			collection.setCollectionName(collName);
+			project.getDbCollections().add(collection);
+		}
+		collection.setIndexed(index);
+		collection.setSynchronized(synchronize);
+		return collection;
 	}
 
 }
