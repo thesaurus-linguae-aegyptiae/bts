@@ -23,5 +23,4 @@ Bundle-ActivationPolicy: lazy
 Import-Package: org.bbaw.bts.commons,
  org.eclipse.emf.ecore.xmi.impl,
  org.eclipse.jface.viewers,
- org.eclipselabs.emfjson,
- org.eclipselabs.emfjson.internal
+ org.eclipselabs.emfjson

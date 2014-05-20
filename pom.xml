@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.bbaw.bts</groupId>
+  <artifactId>aaew-bts</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <modules>
+  <module>com.opcoach.e4.preferences</module>
+    <module>org.bbaw.bts.app</module>
+    <module>org.bbaw.bts.app.feature</module>
+    <module>org.bbaw.bts.app.login</module>
+    <module>org.bbaw.bts.commons</module>
+    <module>org.bbaw.bts.commons.libs.elasticsearch</module>
+    <module>org.bbaw.bts.core</module>
+    <module>org.bbaw.bts.core.commons</module>
+    <module>org.bbaw.bts.core.controller</module>
+    <module>org.bbaw.bts.core.controller.impl</module>
+    <module>org.bbaw.bts.core.corpus.controller</module>
+    <module>org.bbaw.bts.core.corpus.controller.impl</module>
+    <module>org.bbaw.bts.core.dao</module>
+    <module>org.bbaw.bts.core.dao.couchDB</module>
+    <module>org.bbaw.bts.core.remote.dao</module>
+    <module>org.bbaw.bts.core.remote.dao.couchDB</module>
+    <module>org.bbaw.bts.core.services</module>
+    <module>org.bbaw.bts.core.services.impl</module>
+    <module>org.bbaw.bts.corpus.text.egy.egydsl</module>
+    <module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>
+    <!--<module>org.bbaw.bts.corpus.text.egy.egydsl.tests</module>-->
+    <module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
+    <module>org.bbaw.bts.db</module>
+    <module>org.bbaw.bts.db.couchdb</module>
+    <module>org.bbaw.bts.e4.p2</module>
+    <module>org.bbaw.bts.e4.p2.feature</module>
+    <module>org.bbaw.bts.model</module>
+    <module>org.bbaw.bts.model.edit</module>
+    <module>org.bbaw.bts.model.editor</module>
+    <module>org.bbaw.bts.ui.commons</module>
+    <module>org.bbaw.bts.ui.corpus</module>
+    <module>org.bbaw.bts.ui.corpus.egy</module>
+    <module>org.bbaw.bts.ui.corpus.egy.commons</module>
+    <module>org.bbaw.bts.ui.font</module>
+    <module>org.bbaw.bts.ui.font.egyFont</module>
+    <module>org.bbaw.bts.ui.main</module>
+    <module>org.bbaw.bts.ui.resources</module>
+    <module>org.eclipse.xtext.ui</module>
+	
+
+    <module>org.eclipselabs.emfjson</module>
+
+    <module>org.eclipselabs.emfjson.feature</module>
+
+	<module>org.eclipselabs.emfjson.couchdb</module>
+    <module>org.eclipselabs.emfjson.couchdb.feature</module>
+    <module>org.eclipselabs.emfjson.couchdb.ui</module>
+
+    <module>org.lightcouch</module>
+  </modules>
+  
+  <properties>
+    <tycho.version>0.19.0</tycho.version>
+
+    <kepler-repo.url>http://download.eclipse.org/releases/kepler</kepler-repo.url>
+  </properties>
+  
+  <repositories>
+    <repository>
+      <id>kepler</id>
+      <url>${kepler-repo.url}</url>
+      <layout>p2</layout>
+    </repository>
+	
+	<repository>
+		<id>e4-tools</id>
+		<url>http://download.vogella.com/kepler/e4tools</url>
+		<layout>p2</layout>
+	</repository>
+
+	<repository>
+		<id>emfjson-repository</id>
+		<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
+	</repository>
+	
+	<repository>
+      <id>local</id>
+      <name>BTS Maven local Rep</name>
+      <url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
+	  <layout>p2</layout>
+    </repository>
+	<!--
+	<repository>
+		<id>emfjson-couch</id>
+		<layout>p2</layout>
+		<url>http://ghillairet.github.com/p2</url>
+	</repository>
+	
+	<repository>
+		<id>xtext-p2</id>
+		<layout>p2</layout>
+		<url>http://www.eclipse.org/modeling/updates/releases</url>
+		<url>https://hera.uni.lu/update-site/xtext-2.4.3/plugins/</url>
+		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>
+	</repository>
+	-->
+	<repository>
+		<id>jackson-p2</id>
+		<layout>p2</layout>
+		<url>http://ghillairet.github.com/p2/releases/jackson/2.3.1</url>
+	</repository>
+	
+	
+	
+
+  </repositories>
+  
+ 
+  
+  
+  <build>
+  
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>target-platform-configuration</artifactId>
+        <configuration>
+          <environments>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86</arch>
+            </environment>
+            <environment>
+              <os>linux</os>
+              <ws>gtk</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86</arch>
+            </environment>
+            <environment>
+              <os>win32</os>
+              <ws>win32</ws>
+              <arch>x86_64</arch>
+            </environment>
+            <environment>
+              <os>macosx</os>
+              <ws>cocoa</ws>
+              <arch>x86_64</arch>
+            </environment>
+          </environments>
+        </configuration>
+      </plugin>
+    </plugins>
+
+  </build>
+
+  <!--
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.sonatype.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>0.11.1</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+  -->
+</project> 
+

@@ -17,11 +17,14 @@ Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
 Export-Package: org.bbaw.bts.core.dao,
  org.bbaw.bts.core.dao.util
 Bundle-ActivationPolicy: lazy
-Import-Package: javax.inject,
+Import-Package: com.google.gson;version="2.1.0",
+ javax.inject,
  org.bbaw.bts.commons.interfaces,
  org.eclipse.e4.core.di.annotations,
  org.eclipse.e4.core.services.log,
  org.eclipse.e4.ui.model.application,
  org.eclipse.e4.ui.workbench,
  org.eclipse.e4.ui.workbench.modeling,
+ org.eclipselabs.emfjson.common,
+ org.elasticsearch.common.jackson.core,
  org.elasticsearch.search

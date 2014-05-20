@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import javax.naming.OperationNotSupportedException;
+
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.ecore.EAttribute;
@@ -19,7 +21,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.eclipselabs.emfjson.internal.JSONSave;
 
 public class EmfModelHelper
 {
@@ -269,21 +270,22 @@ public class EmfModelHelper
 
 	public static String modelToString(Object object)
 	{
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
-		Map options = new HashMap<Object, Object>();
-		// options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
-		JSONSave js = new JSONSave(options);
-		js.writeValue(os, object);
-		String string = null;
-		try
-		{
-			string = os.toString(BTSConstants.ENCODING);
-		} catch (UnsupportedEncodingException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return string;
+		throw new UnsupportedOperationException();
+//		ByteArrayOutputStream os = new ByteArrayOutputStream();
+//		Map options = new HashMap<Object, Object>();
+//		// options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
+////		JSONSave js = new JSONSave(options);
+////		js.writeValue(os, object);
+//		String string = null;
+//		try
+//		{
+//			string = os.toString(BTSConstants.ENCODING);
+//		} catch (UnsupportedEncodingException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return string;
 	}
 
 	public static boolean listContainsNodeWrapperUsingEquals(List<EObject> sourceList, Object target)

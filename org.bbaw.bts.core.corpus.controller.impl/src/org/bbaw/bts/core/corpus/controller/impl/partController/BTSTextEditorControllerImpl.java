@@ -48,11 +48,11 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.text.source.SourceViewer;
 
 public class BTSTextEditorControllerImpl implements BTSTextEditorController
 {
@@ -304,7 +304,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	@Override
 	public BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
-			SourceViewer textViewer)
+			TextViewer textViewer)
 	{
 		BTSEgySourceViewerConfiguration configuration = new BTSEgySourceViewerConfiguration();
 		RuleBasedScanner scanner = configuration.getScanner();

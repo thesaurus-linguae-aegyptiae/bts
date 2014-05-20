@@ -4,8 +4,8 @@ import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.text.source.SourceViewer;
 
 public interface BTSTextEditorController
 {
@@ -13,7 +13,7 @@ public interface BTSTextEditorController
 	void transformToDocument(BTSText text, Document doc, IAnnotationModel model);
 
 	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
-			SourceViewer textViewer);
+			TextViewer textViewer);
 
 	boolean save(BTSText text);
 

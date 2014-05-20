@@ -244,20 +244,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipselabs.emfjson.couchdb"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.eclipselabs.emfjson.couchdb.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.lightcouch"
          download-size="0"
          install-size="0"
@@ -273,20 +259,6 @@
 
    <plugin
          id="org.bbaw.bts.corpus.text.egy.egydsl.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.codehaus.jackson.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.codehaus.jackson.mapper"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -382,13 +354,6 @@
          install-size="0"
          version="0.0.0"
          unpack="false"/>
-
-   <plugin
-         id="org.bbaw.bts.db.couchdb.win32"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         fragment="true"/>
 
    <plugin
          id="org.eclipse.emf.edit"
@@ -811,13 +776,6 @@
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.xtext.junit4"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
          id="org.hamcrest.core"
          download-size="0"
          install-size="0"
@@ -987,6 +945,20 @@
 
    <plugin
          id="org.eclipse.ocl.examples.xtext.markup.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.opcoach.e4.preferences"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipselabs.emfjson.couchdb"
          download-size="0"
          install-size="0"
          version="0.0.0"

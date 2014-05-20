@@ -2,9 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lightcouch
 Bundle-SymbolicName: org.lightcouch
-Bundle-Version: 0.6
+Bundle-Version: 0.6.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Require-Bundle: com.google.gson
+Require-Bundle: com.google.gson,
+ org.eclipse.core.runtime;bundle-version="3.9.100"
 Bundle-ClassPath: lib/commons-codec-1.7.jar,
  lib/commons-logging-1.1.3.jar,
  lib/gson-2.2.4.jar,
@@ -15,6 +16,5 @@ Bundle-ClassPath: lib/commons-codec-1.7.jar,
  lib/slf4j-api-1.7.5.jar,
  .
 Export-Package: org.lightcouch
-Import-Package: org.eclipse.core.runtime;version="3.4.0",
- org.eclipse.osgi.framework.internal.core,
+Import-Package: org.eclipse.osgi.framework.internal.core,
  org.osgi.framework
