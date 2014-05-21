@@ -36,6 +36,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getReaders <em>Readers</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getPassport <em>Passport</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getCorpusPrefix <em>Corpus Prefix</em>}</li>
@@ -137,6 +138,24 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * @ordered
 	 */
 	protected EList<String> readers;
+	/**
+	 * The default value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean _DELETED_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean _deleted = _DELETED_EDEFAULT;
 	/**
 	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -322,6 +341,27 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean is_deleted() {
+		return _deleted;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_deleted(boolean new_deleted) {
+		boolean old_deleted = _deleted;
+		_deleted = new_deleted;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED, old_deleted, _deleted));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -487,6 +527,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return getUpdaters();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
 				return getReaders();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
+				return is_deleted();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return getRelations();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -527,6 +569,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
 				getReaders().clear();
 				getReaders().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
+				set_deleted((Boolean)newValue);
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
@@ -571,6 +616,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
 				getReaders().clear();
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
+				set_deleted(_DELETED_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				return;
@@ -607,6 +655,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return updaters != null && !updaters.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
 				return readers != null && !readers.isEmpty();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
+				return _deleted != _DELETED_EDEFAULT;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -639,6 +689,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
 				default: return -1;
 			}
 		}
@@ -665,6 +716,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_CORPUS_OBJECT__READERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED;
 				default: return -1;
 			}
 		}
@@ -728,6 +780,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		result.append(updaters);
 		result.append(", readers: ");
 		result.append(readers);
+		result.append(", _deleted: ");
+		result.append(_deleted);
 		result.append(", corpusPrefix: ");
 		result.append(corpusPrefix);
 		result.append(", workPhase: ");

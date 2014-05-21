@@ -24,6 +24,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.CopyDirectory;
@@ -108,6 +109,7 @@ public class CouchDBManager implements DBManager
 	public boolean prepareDBSynchronization(BTSProject project) throws MalformedURLException
 	{
 		boolean success = true;
+		boolean notificationCollFound = false;
 
 		for (BTSProjectDBCollection collection : project.getDbCollections())
 		{
@@ -126,8 +128,23 @@ public class CouchDBManager implements DBManager
 				checkAndRemoveReplication(collection, project.getDbConnection());
 			}
 			checkAndAddAuthentication(collection);
+			if (DaoConstants.NOTIFICATION.equals(collection.getCollectionName()))
+			{
+				notificationCollFound = true;
+			}
 
 			//TODO check and set _desing/auth docs with custom function
+		}
+		if (!notificationCollFound)
+		{
+			BTSProjectDBCollection coll = BtsmodelFactory.eINSTANCE.createBTSProjectDBCollection();
+			coll.setCollectionName(DaoConstants.NOTIFICATION);
+			coll.setIndexed(true);
+			coll.setSynchronized(true);
+			project.getDbCollections().add(coll);
+			checkAndSetSyncToRemote(coll, project.getDbConnection());
+			checkAndSetSyncFromRemote(coll, project.getDbConnection());
+			checkAndAddAuthentication(coll);
 		}
 
 		return success;
@@ -234,15 +251,60 @@ public class CouchDBManager implements DBManager
 			Replicator replicator2 = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
 					.replicator();
 			replicator2.target(collection.getCollectionName());
-			replicator2.source(dbConnection.getMasterServer() + "/" + collection.getCollectionName());
+			replicator2.source(processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName()));
 			replicator2.continuous(true);
 			replicator2.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
 			replicator2.save(); // triggers a replication
 		} catch (Exception e) {
 			logger.error(e);
 		}
-
+ 
 		return true;
+	}
+
+	private String processServerAuthURL(String masterServer,
+			String collectionName) {
+		if (username == null || password == null)
+		{
+			URL url = null;
+			try {
+				url = new URL(connectionProvider.getLocalDBURL());
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			if (url != null && url.getUserInfo() != null && !"".equals(url.getUserInfo()) && (username == null || "".equals(username)))
+			{
+				String userInfo = url.getUserInfo();
+				if (userInfo != null && userInfo.contains(":"))
+				{
+					username = userInfo.split(":")[0];
+					password = userInfo.split(":")[1];
+				}
+			}
+		}
+		URL server = null;
+		try {
+			server = new URL(masterServer);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String su = server.getProtocol() + "://";  
+
+		if (username != null && password != null)
+		{
+			
+			su += username + ":" + password + "@";
+		}
+		su += server.getHost();
+		if (server.getPort()  > -1)
+		{ 
+			su += ":" + server.getPort();
+		}
+		su += "/" + server.getPath();
+		su += "/" + collectionName;
+		logger.info("Masterserver replicator " + su);
+		return su;
 	}
 
 	private boolean checkAndSetSyncToRemote(BTSProjectDBCollection collection, BTSDBConnection dbConnection)
@@ -272,7 +334,7 @@ public class CouchDBManager implements DBManager
 			Replicator replicator = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
 					.replicator();
 			replicator.source(collection.getCollectionName());
-			replicator.target(dbConnection.getMasterServer() + "/" + collection.getCollectionName());
+			replicator.target(processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName()));
 			replicator.continuous(true);
 			replicator.createTarget(true);
 			replicator.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);

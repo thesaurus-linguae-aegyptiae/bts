@@ -68,9 +68,9 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			addLockedPropertyDescriptor(object);
 			addUpdatersPropertyDescriptor(object);
 			addReadersPropertyDescriptor(object);
+			add_deletedPropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
-			addSubProjectsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -214,6 +214,28 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	}
 
 	/**
+	 * This adds a property descriptor for the deleted feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void add_deletedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject__deleted_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject__deleted_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__DELETED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Prefix feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -255,28 +277,6 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Sub Projects feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addSubProjectsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSProject_subProjects_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProject_subProjects_feature", "_UI_BTSProject_type"),
-				 BtsmodelPackage.Literals.BTS_PROJECT__SUB_PROJECTS,
-				 true,
-				 false,
-				 true,
-				 null,
 				 null,
 				 null));
 	}
@@ -359,6 +359,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
 			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
 			case BtsmodelPackage.BTS_PROJECT__READERS:
+			case BtsmodelPackage.BTS_PROJECT__DELETED:
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

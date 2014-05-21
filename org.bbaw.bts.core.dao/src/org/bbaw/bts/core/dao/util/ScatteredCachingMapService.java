@@ -10,6 +10,7 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSConfiguration;
+import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -48,6 +49,8 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	@Inject
 	private IEclipseContext context;
 
+	private Map<URI, Resource> notificationMap = new HashMap<URI, Resource>();
+
 	@Override
 	public void clear() {
 		configurationMap.clear();
@@ -57,6 +60,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	@Override
 	public boolean containsKey(Object key) {
 		if (configurationMap.containsKey(key)) {
+			return true;
+		}
+		if (notificationMap.containsKey(key)) {
 			return true;
 		}
 		if (partService == null) {
@@ -105,6 +111,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		if (configurationMap.containsValue(value)) {
 			return true;
 		}
+		if (notificationMap.containsValue(value)) {
+			return true;
+		}
 		if (partService == null) {
 			return false;
 		} else if (partService.getActivePart() != null) {
@@ -139,6 +148,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		// im dialog geöffnet werden.
 		if (configurationMap.containsKey(key)) {
 			return configurationMap.get(key);
+		}
+		if (notificationMap.containsKey(key)) {
+			return notificationMap.get(key);
 		}
 		if (partService == null) {
 			return null;
@@ -219,6 +231,10 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 				&& value.getContents().get(0) instanceof BTSConfiguration) {
 			configurationMap.put(key, value);
 		}
+		else if (value.getContents() != null && !value.getContents().isEmpty()
+				&& value.getContents().get(0) instanceof DBLease) {
+			notificationMap.put(key, value);
+		}
 		return value;
 
 	}
@@ -238,6 +254,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	public Resource remove(Object key) {
 		if (configurationMap.containsKey(key)) {
 			return configurationMap.remove(key);
+		}
+		if (notificationMap.containsKey(key)) {
+			return notificationMap.remove(key);
 		}
 		return null;
 	}

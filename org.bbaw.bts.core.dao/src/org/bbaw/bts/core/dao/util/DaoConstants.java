@@ -98,7 +98,7 @@ public class DaoConstants
 
 	public static final String CORPUS = "/corpus/";
 
-	public static final String PROJECT_ADMIN = "/project_admin/";
+	public static final String PROJECT_ADMIN = "project_admin";
 
 	public static final String PROJECT_CORPUS = "/project_corpus/";
 

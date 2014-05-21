@@ -636,4 +636,38 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	}
 
+	public void setDeleted(E entity, String path, boolean deleted) {
+		if (entity == null)
+			return;
+		entity.set_deleted(deleted);
+		Map<String, String> options = new HashMap<String, String>();
+		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING); // set
+																			// encoding
+																			// to
+		// UTF-8
+		Resource resource = entity.eResource();
+		// check if entity has resource, that is if it was newly created or not
+		if (resource == null) {
+			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
+					+ entity.get_id());
+			logger.info("Resource was null, object was newly created and is persisted for the first time: "
+					+ uri.path());
+			resource = connectionProvider.getEmfResourceSet().createResource(
+					uri);
+			resource.getContents().add(entity);
+		}
+		while (resource.getContents().size() > 1) {
+			resource.getContents().remove(1);
+		}
+
+		try {
+			resource.save(options);
+		} catch (IOException e) {
+			logger.error("error trying to save: " + entity, e);
+			// throw new RuntimeException("Save Resource failed", e);
+		}
+	}
+	
+
+	
 }

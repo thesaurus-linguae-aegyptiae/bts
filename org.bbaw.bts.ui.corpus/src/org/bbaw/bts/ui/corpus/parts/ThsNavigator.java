@@ -36,6 +36,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
@@ -96,6 +97,9 @@ public class ThsNavigator implements ScatteredCachingPart {
 	@Named(BTSUIConstants.SELECTION_TYPE)
 	private String selectionType;
 
+	@Inject
+	private Logger logger;
+	
 	private TreeViewer mainTreeViewer;
 	private StructuredSelection selection;
 	private Map<String, BTSQueryResultAbstract> queryResultMap = new HashMap<String, BTSQueryResultAbstract>();
@@ -114,6 +118,8 @@ public class ThsNavigator implements ScatteredCachingPart {
 	private Composite binTabItemComp;
 	private TreeViewer bintreeViewer;
 	private SuppressDeletedViewerFilter deletedFilter;
+	
+	
 
 	@Inject
 	public ThsNavigator() {
@@ -527,6 +533,8 @@ public class ThsNavigator implements ScatteredCachingPart {
 	@Inject
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
+		logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
+
 		if (object instanceof BTSThsEntry && selection != null
 				&& selection.getFirstElement() instanceof BTSThsEntry) {
 			// corpusNavigatorController.addRelation((BTSCorpusObject) object,

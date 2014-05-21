@@ -150,6 +150,13 @@ public class InstallationWizard extends Wizard
 
 				String mainProject = projectPage.getMainProject();
 				String prefixes = projectPage.getActiveProjectSelectionsAsString();
+				
+				if (mainProject == null || "".equals(mainProject) || prefixes == null || "".equals(prefixes))
+				{
+					projectPage.loadProjects();
+				}
+				mainProject = projectPage.getMainProject();
+				prefixes = projectPage.getActiveProjectSelectionsAsString();
 //				monitor.worked(2);
 				// save new settings
 				preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
@@ -166,6 +173,8 @@ public class InstallationWizard extends Wizard
 //				preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL, localUrl);
 
 				preferences.put(BTSPluginIDs.PREF_REMOTE_DB_URL, serverURL);
+				
+				
 				preferences.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, mainProject);
 				preferences.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, prefixes);
 				

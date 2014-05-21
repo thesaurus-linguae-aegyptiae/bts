@@ -395,8 +395,10 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 
 	@Inject
 	@Optional
-	void eventReceivedUpdates(@EventTopic("model_update/async") Object object)
+	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification object)
 	{
+		logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
+
 		if (object instanceof BTSTextCorpus)
 		{
 			sync.asyncExec(new Runnable()

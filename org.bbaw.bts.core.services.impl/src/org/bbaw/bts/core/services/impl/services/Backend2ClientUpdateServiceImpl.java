@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.DBLease;
@@ -15,6 +16,7 @@ import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 
 public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateService, Backend2ClientUpdateListener
@@ -30,12 +32,15 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 	private IEclipseContext context;
 	@Inject
 	private BTSEvaluationService evaluationService;
+	
+	@Inject
+	private Logger logger;
 
 	@Override
 	public void handleUpdate(BTSModelUpdateNotification notification)
 	{
 
-		System.out.println(notification.getObject());
+		logger.info("Notify Listener about change: " + ", Changed object id: " + notification.getObject());
 		if (notification.getObject() instanceof DBLease)
 		{
 			eventBroker.post("lease_update/async", notification);
@@ -51,7 +56,19 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 					List<String> queryIds = updateDao.fingQueryIds(notification.getObject(),
 							((BTSDBBaseObject) notification.getObject()).get_id(), notification.getDbCollection());
 					notification.setQueryIds(queryIds);
+					logger.info("Notify Listener about change. size of found queryIds: " + queryIds.size());
+
 				}
+				if (notification.getObject() != null && notification.getObject() instanceof BTSObject)
+				{
+					logger.info("Notify eventBroker about change. Object name: " + ((BTSObject) notification.getObject()).getName());
+				}
+				else
+				{
+					logger.info("Notify eventBroker about change. Object null or not BTSObject: " + (notification.getObject()));
+
+				}
+
 				eventBroker.post("model_update/async", notification);
 
 			}

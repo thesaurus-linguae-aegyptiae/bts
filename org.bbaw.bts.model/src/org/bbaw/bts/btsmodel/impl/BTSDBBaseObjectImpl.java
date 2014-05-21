@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getReaders <em>Readers</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#is_deleted <em>deleted</em>}</li>
  * </ul>
  * </p>
  *
@@ -109,6 +110,26 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 * @ordered
 	 */
 	protected EList<String> readers;
+
+	/**
+	 * The default value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean _DELETED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean _deleted = _DELETED_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -227,6 +248,27 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean is_deleted() {
+		return _deleted;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_deleted(boolean new_deleted) {
+		boolean old_deleted = _deleted;
+		_deleted = new_deleted;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED, old_deleted, _deleted));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDBCollectionKey() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
@@ -251,6 +293,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return getUpdaters();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
 				return getReaders();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
+				return is_deleted();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -281,6 +325,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				getReaders().clear();
 				getReaders().addAll((Collection<? extends String>)newValue);
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
+				set_deleted((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -308,6 +355,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
 				getReaders().clear();
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
+				set_deleted(_DELETED_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -330,6 +380,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return updaters != null && !updaters.isEmpty();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
 				return readers != null && !readers.isEmpty();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
+				return _deleted != _DELETED_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -368,6 +420,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 		result.append(updaters);
 		result.append(", readers: ");
 		result.append(readers);
+		result.append(", _deleted: ");
+		result.append(_deleted);
 		result.append(')');
 		return result.toString();
 	}

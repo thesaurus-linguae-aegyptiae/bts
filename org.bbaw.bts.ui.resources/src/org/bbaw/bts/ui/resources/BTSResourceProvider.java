@@ -371,4 +371,6 @@ public interface BTSResourceProvider extends IResourceProviderService {
 	
 	public final static String IMG_OVR_LOCK = "IMG_OVR_LOCK";
 
+	public static final String IMG_OVR_PEN = "IMG_OVR_PEN";
+
 }

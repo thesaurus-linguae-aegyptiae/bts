@@ -1,6 +1,7 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,4 +74,6 @@ public class DBLeaseDaoImpl extends CouchDBDao<DBLease, String> implements DBLea
 		}
 		return results;
 	}
+
+	
 }

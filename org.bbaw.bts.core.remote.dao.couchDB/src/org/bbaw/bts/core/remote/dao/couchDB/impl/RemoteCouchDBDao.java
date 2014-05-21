@@ -404,4 +404,31 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 		return false;
 
 	}
+	
+	public void setDeleted(E entity, String path, boolean deleted) {
+		if (entity == null)
+			return;
+		entity.set_deleted(deleted);
+		Map<String, String> options = new HashMap<String, String>();
+		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING); // set
+																			// encoding
+																			// to
+		// UTF-8
+		Resource resource = entity.eResource();
+		if (resource == null)
+		{
+			URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + entity.get_id());
+			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+			resource.getContents().add(entity);
+		}
+		try
+		{
+			resource.save(options);
+		} catch (IOException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("Save Resource failed");
+		}
+	}
 }

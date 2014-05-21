@@ -23,6 +23,7 @@ Import-Package: javax.inject,
  org.bbaw.bts.core.commons,
  org.bbaw.bts.core.commons.staticAccess,
  org.bbaw.bts.core.controller.generalController,
+ org.bbaw.bts.core.services,
  org.bbaw.bts.ui.resources,
  org.eclipse.swt.graphics,
  org.eclipse.swt.widgets

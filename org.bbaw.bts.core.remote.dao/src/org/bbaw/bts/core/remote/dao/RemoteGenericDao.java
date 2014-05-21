@@ -13,6 +13,9 @@ public interface RemoteGenericDao<E extends BTSDBBaseObject, K>
 	void update(E entity, String path);
 
 	void remove(E entity, String path);
+	
+	void setDeleted(E entity, String path, boolean deleted);
+
 
 	E find(K key, String path);
 

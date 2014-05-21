@@ -78,8 +78,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	@Inject
 	private Logger logger;
 
-	@Inject
-	@Preference(value = BTSPluginIDs.PREF_LOCAL_SEARCH_CLUSTER_NAME, nodePath = "org.bbaw.bts.app")
+//	@Inject
+//	@Preference(value = BTSPluginIDs.PREF_LOCAL_SEARCH_CLUSTER_NAME, nodePath = "org.bbaw.bts.app")
 	private Object esClustername = BTSConstants.DEFAULT_LOCAL_SEARCH_CLUSTER_NAME;
 
 	@Override
@@ -215,7 +215,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				ImmutableSettings.Builder elasticsearchSettings = ImmutableSettings.settingsBuilder()
 		                .put("http.enabled", ("true".equals(search_http_enabled)))
 		                .put("cluster.name", esClustername)
-		                .put("path.data", dbdir)
+		                .put("path.home", dbdir + BTSConstants.FS + esClustername)
+		                .put("path.data", dbdir + BTSConstants.FS + esClustername)
 		                .put("number_of_shards",0)
 				        .put("number_of_replicas",0)
 				        .put("index.routing.allocation.disable_allocation", "false");
@@ -246,9 +247,9 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			try
 			{
 				Map<URI, Resource> uriResourceMap;
-//				uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
-//						context);
-				uriResourceMap = new HashMap<URI, Resource>();
+				uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
+						context);
+//				uriResourceMap = new HashMap<URI, Resource>();
 				((ResourceSetImpl) set).setURIResourceMap(uriResourceMap);
 				context.set(DaoConstants.RESOURCE_SET, set);
 			} catch (Exception e)

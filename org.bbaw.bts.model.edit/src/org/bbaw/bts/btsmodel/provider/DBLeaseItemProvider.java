@@ -75,6 +75,8 @@ public class DBLeaseItemProvider
 			addUserIdPropertyDescriptor(object);
 			addTimeStampPropertyDescriptor(object);
 			addObjectPropertyDescriptor(object);
+			addActivePropertyDescriptor(object);
+			addBtsUUIDPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -194,6 +196,50 @@ public class DBLeaseItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Active feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DBLease_active_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DBLease_active_feature", "_UI_DBLease_type"),
+				 BtsmodelPackage.Literals.DB_LEASE__ACTIVE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Bts UUID feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addBtsUUIDPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_DBLease_btsUUID_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_DBLease_btsUUID_feature", "_UI_DBLease_type"),
+				 BtsmodelPackage.Literals.DB_LEASE__BTS_UUID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns DBLease.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,6 +283,8 @@ public class DBLeaseItemProvider
 			case BtsmodelPackage.DB_LEASE__OBJECT_ID:
 			case BtsmodelPackage.DB_LEASE__USER_ID:
 			case BtsmodelPackage.DB_LEASE__TIME_STAMP:
+			case BtsmodelPackage.DB_LEASE__ACTIVE:
+			case BtsmodelPackage.DB_LEASE__BTS_UUID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

@@ -17,6 +17,8 @@ import java.util.Date;
  *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getUserId <em>User Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getTimeStamp <em>Time Stamp</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getObject <em>Object</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getActive <em>Active</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.DBLease#getBtsUUID <em>Bts UUID</em>}</li>
  * </ul>
  * </p>
  *
@@ -155,5 +157,57 @@ public interface DBLease extends BTSDBBaseObject
 	 * @generated
 	 */
 	void setObject(BTSDBBaseObject value);
+
+	/**
+	 * Returns the value of the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active</em>' attribute.
+	 * @see #setActive(Boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getDBLease_Active()
+	 * @model
+	 * @generated
+	 */
+	Boolean getActive();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.DBLease#getActive <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Active</em>' attribute.
+	 * @see #getActive()
+	 * @generated
+	 */
+	void setActive(Boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Bts UUID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Bts UUID</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Bts UUID</em>' attribute.
+	 * @see #setBtsUUID(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getDBLease_BtsUUID()
+	 * @model
+	 * @generated
+	 */
+	String getBtsUUID();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.DBLease#getBtsUUID <em>Bts UUID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Bts UUID</em>' attribute.
+	 * @see #getBtsUUID()
+	 * @generated
+	 */
+	void setBtsUUID(String value);
 
 } // DBLease

@@ -9,6 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
@@ -181,6 +182,20 @@ public class ApplicationStartupControllerImpl implements
 
 
 		loadPreferences(context);
+		
+		//check and set application uuid
+		if (prefs.get(BTSConstants.BTS_UUID, null) == null)
+		{
+			Calendar now = Calendar.getInstance();
+			String uuid = new Long(now.getTimeInMillis()).toString();
+			prefs.put(BTSConstants.BTS_UUID, uuid);
+			try {
+				prefs.flush();
+			} catch (BackingStoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 		// load font
 		Font font = null;
@@ -486,11 +501,14 @@ public class ApplicationStartupControllerImpl implements
 
 	private void checkCorpusSelectionSettings() {
 		main_corpus_key = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
-		if (main_corpus_key == null && "".equals(main_corpus_key)) return;
+		logger.info("checkCorpusSelectionSettings: main_project_key : " + main_project_key + ", main_corpus_key: " + main_corpus_key);
+		if (main_project_key == null || "".equals(main_project_key)) return;
+
+		if (main_corpus_key == null || "".equals(main_corpus_key)) return;
 		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		for (BTSTextCorpus cor : corpora)
 		{
-			if (main_project_key.equals(cor.getProject()) && main_corpus_key.equals(cor.getCorpusPrefix()))
+			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.equals(cor.getCorpusPrefix()))
 			{
 				BTSTextCorpus main_corpus = cor;
 				context.set(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);

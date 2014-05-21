@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipselabs.emfjson.EMFJs;
+import org.eclipselabs.emfjson.internal.JSONSave;
 
 public class EmfModelHelper
 {
@@ -270,22 +272,22 @@ public class EmfModelHelper
 
 	public static String modelToString(Object object)
 	{
-		throw new UnsupportedOperationException();
-//		ByteArrayOutputStream os = new ByteArrayOutputStream();
-//		Map options = new HashMap<Object, Object>();
-//		// options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
-////		JSONSave js = new JSONSave(options);
-////		js.writeValue(os, object);
-//		String string = null;
-//		try
-//		{
-//			string = os.toString(BTSConstants.ENCODING);
-//		} catch (UnsupportedEncodingException e)
-//		{
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return string;
+//		throw new UnsupportedOperationException();
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		Map options = new HashMap<Object, Object>();
+		 options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
+		JSONSave js = new JSONSave(options);
+		js.writeValue(os, object);
+		String string = null;
+		try
+		{
+			string = os.toString(BTSConstants.ENCODING);
+		} catch (UnsupportedEncodingException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return string;
 	}
 
 	public static boolean listContainsNodeWrapperUsingEquals(List<EObject> sourceList, Object target)

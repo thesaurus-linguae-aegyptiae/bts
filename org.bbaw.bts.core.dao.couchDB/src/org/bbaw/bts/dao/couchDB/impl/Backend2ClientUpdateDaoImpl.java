@@ -31,6 +31,8 @@ import org.lightcouch.ChangesResult.Row;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbInfo;
 
+import com.google.gson.JsonObject;
+
 public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 {
 
@@ -73,6 +75,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 					if (feed != null)
 					{
 						String docId = feed.getId();
+						logger.info("Backend2DB listener has changes. Changed object id: " + docId);
 						try
 						{
 							signalUpdate(feed, docId, dbCollection);
@@ -90,12 +93,16 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	private void signalUpdate(Row feed, String docId, String dbCollection)
 	{
+		logger.info("Backend2DB listener on dbCollection: " + dbCollection + ", Changed object id: " + docId);
+
 		BTSDBBaseObject object = null;
 		BTSModelUpdateNotification notification = new BTSModelUpdateNotification();
 		notification.setDbCollection(dbCollection);
 		if (feed.isDeleted())
 		{
 			notification.setDeleted(true);
+			logger.info("Notify Listener object is deleted. object id: " + docId);
+
 //			if (true || generalPurposeDao.objectIsLoaded(dbCollection, docId))
 //			{
 //				notification.setLoaded(true);
@@ -112,20 +119,32 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		{
 			notification.setLoaded(true);
 
-			if (true || generalPurposeDao.objectIsLoaded(dbCollection, docId))
+			if (generalPurposeDao.objectIsLoaded(dbCollection, docId))
 			{
 				notification.setLoaded(true);
 				try
 				{
+					logger.info("Notify Listener object before reload.");
+
 					object = generalPurposeDao.reload(docId, dbCollection);
+					logger.info("Notify Listener object after reload: " + object);
+
+					logger.info("Notify Listener object successfully reloaded. object id: " + docId);
+
 				} catch (Exception e)
 				{
-					e.printStackTrace();
+					logger.error(e);
 				}
 			} 
 			if (object == null)
 			{
-				object = generalPurposeDao.find(docId, dbCollection);
+				try {
+					object = generalPurposeDao.find(docId, dbCollection);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					object = loadFromFeed(feed);
+				}
 			}
 		}
 //		Assert.isNotNull(object);
@@ -135,10 +154,18 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 			notification.setObject(object);
 			for (Backend2ClientUpdateListener l : listeners)
 			{
+				logger.info("Notify Listener about change: " + dbCollection + ", Changed object id: " + docId);
+
 				l.handleUpdate(notification);
 			}
 		}
 
+	}
+
+	private BTSDBBaseObject loadFromFeed(Row feed) {
+		JsonObject jso = feed.getDoc();
+		logger.info("Object not found, feed object: " + jso);
+		return null;
 	}
 
 	@Override

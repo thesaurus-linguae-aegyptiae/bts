@@ -27,6 +27,8 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getUserId <em>User Id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getTimeStamp <em>Time Stamp</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getObject <em>Object</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getActive <em>Active</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.DBLeaseImpl#getBtsUUID <em>Bts UUID</em>}</li>
  * </ul>
  * </p>
  *
@@ -123,6 +125,46 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	 * @ordered
 	 */
 	protected BTSDBBaseObject object;
+
+	/**
+	 * The default value of the '{@link #getActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Boolean ACTIVE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected Boolean active = ACTIVE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getBtsUUID() <em>Bts UUID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBtsUUID()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String BTS_UUID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getBtsUUID() <em>Bts UUID</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getBtsUUID()
+	 * @generated
+	 * @ordered
+	 */
+	protected String btsUUID = BTS_UUID_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -280,6 +322,48 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public Boolean getActive() {
+		return active;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActive(Boolean newActive) {
+		Boolean oldActive = active;
+		active = newActive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.DB_LEASE__ACTIVE, oldActive, active));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getBtsUUID() {
+		return btsUUID;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setBtsUUID(String newBtsUUID) {
+		String oldBtsUUID = btsUUID;
+		btsUUID = newBtsUUID;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.DB_LEASE__BTS_UUID, oldBtsUUID, btsUUID));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
@@ -295,6 +379,10 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 			case BtsmodelPackage.DB_LEASE__OBJECT:
 				if (resolve) return getObject();
 				return basicGetObject();
+			case BtsmodelPackage.DB_LEASE__ACTIVE:
+				return getActive();
+			case BtsmodelPackage.DB_LEASE__BTS_UUID:
+				return getBtsUUID();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -322,6 +410,12 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 				return;
 			case BtsmodelPackage.DB_LEASE__OBJECT:
 				setObject((BTSDBBaseObject)newValue);
+				return;
+			case BtsmodelPackage.DB_LEASE__ACTIVE:
+				setActive((Boolean)newValue);
+				return;
+			case BtsmodelPackage.DB_LEASE__BTS_UUID:
+				setBtsUUID((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -351,6 +445,12 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 			case BtsmodelPackage.DB_LEASE__OBJECT:
 				setObject((BTSDBBaseObject)null);
 				return;
+			case BtsmodelPackage.DB_LEASE__ACTIVE:
+				setActive(ACTIVE_EDEFAULT);
+				return;
+			case BtsmodelPackage.DB_LEASE__BTS_UUID:
+				setBtsUUID(BTS_UUID_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -374,6 +474,10 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 				return TIME_STAMP_EDEFAULT == null ? timeStamp != null : !TIME_STAMP_EDEFAULT.equals(timeStamp);
 			case BtsmodelPackage.DB_LEASE__OBJECT:
 				return object != null;
+			case BtsmodelPackage.DB_LEASE__ACTIVE:
+				return ACTIVE_EDEFAULT == null ? active != null : !ACTIVE_EDEFAULT.equals(active);
+			case BtsmodelPackage.DB_LEASE__BTS_UUID:
+				return BTS_UUID_EDEFAULT == null ? btsUUID != null : !BTS_UUID_EDEFAULT.equals(btsUUID);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -397,6 +501,10 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 		result.append(userId);
 		result.append(", timeStamp: ");
 		result.append(timeStamp);
+		result.append(", active: ");
+		result.append(active);
+		result.append(", btsUUID: ");
+		result.append(btsUUID);
 		result.append(')');
 		return result.toString();
 	}

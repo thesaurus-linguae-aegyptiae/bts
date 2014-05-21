@@ -4,7 +4,6 @@ package org.bbaw.bts.btsmodel.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
-
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
@@ -19,7 +18,6 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
@@ -35,11 +33,11 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getReaders <em>Readers</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDbConnection <em>Db Connection</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDbCollections <em>Db Collections</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getSubProjects <em>Sub Projects</em>}</li>
  * </ul>
  * </p>
  *
@@ -148,6 +146,26 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	protected EList<String> readers;
 
 	/**
+	 * The default value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean _DELETED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean _deleted = _DELETED_EDEFAULT;
+
+	/**
 	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -206,16 +224,6 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * @ordered
 	 */
 	protected EList<BTSProjectDBCollection> dbCollections;
-
-	/**
-	 * The cached value of the '{@link #getSubProjects() <em>Sub Projects</em>}' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubProjects()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSProject> subProjects;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -361,6 +369,27 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean is_deleted() {
+		return _deleted;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_deleted(boolean new_deleted) {
+		boolean old_deleted = _deleted;
+		_deleted = new_deleted;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PROJECT__DELETED, old_deleted, _deleted));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPrefix()
 	{
 		return prefix;
@@ -464,18 +493,6 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<BTSProject> getSubProjects() {
-		if (subProjects == null) {
-			subProjects = new EObjectResolvingEList<BTSProject>(BTSProject.class, this, BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS);
-		}
-		return subProjects;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generatedNOT
 	 */
 	public String getDBCollectionKey() {
@@ -520,6 +537,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return getUpdaters();
 			case BtsmodelPackage.BTS_PROJECT__READERS:
 				return getReaders();
+			case BtsmodelPackage.BTS_PROJECT__DELETED:
+				return is_deleted();
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				return getPrefix();
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
@@ -528,8 +547,6 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return getDbConnection();
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				return getDbCollections();
-			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
-				return getSubProjects();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -564,6 +581,9 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				getReaders().clear();
 				getReaders().addAll((Collection<? extends String>)newValue);
 				return;
+			case BtsmodelPackage.BTS_PROJECT__DELETED:
+				set_deleted((Boolean)newValue);
+				return;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				setPrefix((String)newValue);
 				return;
@@ -576,10 +596,6 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				getDbCollections().clear();
 				getDbCollections().addAll((Collection<? extends BTSProjectDBCollection>)newValue);
-				return;
-			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
-				getSubProjects().clear();
-				getSubProjects().addAll((Collection<? extends BTSProject>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -612,6 +628,9 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 			case BtsmodelPackage.BTS_PROJECT__READERS:
 				getReaders().clear();
 				return;
+			case BtsmodelPackage.BTS_PROJECT__DELETED:
+				set_deleted(_DELETED_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
@@ -623,9 +642,6 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return;
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				getDbCollections().clear();
-				return;
-			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
-				getSubProjects().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -652,6 +668,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return updaters != null && !updaters.isEmpty();
 			case BtsmodelPackage.BTS_PROJECT__READERS:
 				return readers != null && !readers.isEmpty();
+			case BtsmodelPackage.BTS_PROJECT__DELETED:
+				return _deleted != _DELETED_EDEFAULT;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
@@ -660,8 +678,6 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return dbConnection != null;
 			case BtsmodelPackage.BTS_PROJECT__DB_COLLECTIONS:
 				return dbCollections != null && !dbCollections.isEmpty();
-			case BtsmodelPackage.BTS_PROJECT__SUB_PROJECTS:
-				return subProjects != null && !subProjects.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -687,6 +703,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				case BtsmodelPackage.BTS_PROJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
 				case BtsmodelPackage.BTS_PROJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
 				case BtsmodelPackage.BTS_PROJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
+				case BtsmodelPackage.BTS_PROJECT__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
 				default: return -1;
 			}
 		}
@@ -714,6 +731,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_PROJECT__LOCKED;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_PROJECT__UPDATERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_PROJECT__READERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_PROJECT__DELETED;
 				default: return -1;
 			}
 		}
@@ -778,6 +796,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 		result.append(updaters);
 		result.append(", readers: ");
 		result.append(readers);
+		result.append(", _deleted: ");
+		result.append(_deleted);
 		result.append(", prefix: ");
 		result.append(prefix);
 		result.append(", description: ");

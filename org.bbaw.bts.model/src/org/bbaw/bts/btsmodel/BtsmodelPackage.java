@@ -605,13 +605,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__READERS = BTS_OBJECT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__DELETED = BTS_OBJECT_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT_FEATURE_COUNT + 6;
+	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -620,7 +629,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__PASSPORT = BTS_OBJECT_FEATURE_COUNT + 7;
+	int BTS_CORPUS_OBJECT__PASSPORT = BTS_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
@@ -629,7 +638,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BTS_OBJECT_FEATURE_COUNT + 8;
+	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BTS_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -638,7 +647,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__WORK_PHASE = BTS_OBJECT_FEATURE_COUNT + 9;
+	int BTS_CORPUS_OBJECT__WORK_PHASE = BTS_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>BTS Corpus Object</em>' class.
@@ -647,7 +656,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -828,6 +837,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -1053,6 +1071,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -2542,6 +2569,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_ENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3262,13 +3298,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSDB_BASE_OBJECT__READERS = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT__DELETED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>BTSDB Base Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
+	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -3341,6 +3386,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_USER__READERS = BTSDB_BASE_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__DELETED = BTSDB_BASE_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3665,6 +3719,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_COMMENT__READERS = BTSDB_BASE_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__DELETED = BTSDB_BASE_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -4043,6 +4106,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -4616,6 +4688,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION__READERS = BTSDB_BASE_OBJECT__READERS;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4921,6 +5002,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -5229,6 +5319,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -6014,6 +6113,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP__READERS = BTSDB_BASE_OBJECT__READERS;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6319,6 +6427,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -6910,6 +7027,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_THS_ENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7145,13 +7271,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT__READERS = BTS_OBJECT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__DELETED = BTS_OBJECT_FEATURE_COUNT + 6;
+
+	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__PREFIX = BTS_OBJECT_FEATURE_COUNT + 6;
+	int BTS_PROJECT__PREFIX = BTS_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -7160,7 +7295,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DESCRIPTION = BTS_OBJECT_FEATURE_COUNT + 7;
+	int BTS_PROJECT__DESCRIPTION = BTS_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Db Connection</b></em>' containment reference.
@@ -7169,7 +7304,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DB_CONNECTION = BTS_OBJECT_FEATURE_COUNT + 8;
+	int BTS_PROJECT__DB_CONNECTION = BTS_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Db Collections</b></em>' containment reference list.
@@ -7178,16 +7313,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DB_COLLECTIONS = BTS_OBJECT_FEATURE_COUNT + 9;
-
-	/**
-	 * The feature id for the '<em><b>Sub Projects</b></em>' reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PROJECT__SUB_PROJECTS = BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_PROJECT__DB_COLLECTIONS = BTS_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The number of structural features of the '<em>BTS Project</em>' class.
@@ -7627,6 +7753,15 @@ public interface BtsmodelPackage extends EPackage {
 	int DB_LEASE__READERS = BTSDB_BASE_OBJECT__READERS;
 
 	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7672,13 +7807,31 @@ public interface BtsmodelPackage extends EPackage {
 	int DB_LEASE__OBJECT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 4;
 
 	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__ACTIVE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Bts UUID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__BTS_UUID = BTSDB_BASE_OBJECT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>DB Lease</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DB_LEASE_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 5;
+	int DB_LEASE_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -7972,6 +8125,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int GRAPHIC_SELECTION_COUNTER__READERS = BTSDB_BASE_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__DELETED = BTSDB_BASE_OBJECT__DELETED;
 
 	/**
 	 * The feature id for the '<em><b>Date Of Last Selection</b></em>' attribute.
@@ -9287,6 +9449,17 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSDBBaseObject_Readers();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#is_deleted <em>deleted</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>deleted</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSDBBaseObject#is_deleted()
+	 * @see #getBTSDBBaseObject()
+	 * @generated
+	 */
+	EAttribute getBTSDBBaseObject__deleted();
+
+	/**
 	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getDBCollectionKey() <em>Get DB Collection Key</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10227,17 +10400,6 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSProject_DbCollections();
 
 	/**
-	 * Returns the meta object for the reference list '{@link org.bbaw.bts.btsmodel.BTSProject#getSubProjects <em>Sub Projects</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference list '<em>Sub Projects</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSProject#getSubProjects()
-	 * @see #getBTSProject()
-	 * @generated
-	 */
-	EReference getBTSProject_SubProjects();
-
-	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSDBConnection <em>BTSDB Connection</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -10473,6 +10635,28 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getDBLease_Object();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.DBLease#getActive <em>Active</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getActive()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EAttribute getDBLease_Active();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.DBLease#getBtsUUID <em>Bts UUID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bts UUID</em>'.
+	 * @see org.bbaw.bts.btsmodel.DBLease#getBtsUUID()
+	 * @see #getDBLease()
+	 * @generated
+	 */
+	EAttribute getDBLease_BtsUUID();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection <em>BTS Project DB Collection</em>}'.
@@ -11758,6 +11942,14 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTSDB_BASE_OBJECT__READERS = eINSTANCE.getBTSDBBaseObject_Readers();
 
 		/**
+		 * The meta object literal for the '<em><b>deleted</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTSDB_BASE_OBJECT__DELETED = eINSTANCE.getBTSDBBaseObject__deleted();
+
+		/**
 		 * The meta object literal for the '<em><b>Get DB Collection Key</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12502,14 +12694,6 @@ public interface BtsmodelPackage extends EPackage {
 		EReference BTS_PROJECT__DB_COLLECTIONS = eINSTANCE.getBTSProject_DbCollections();
 
 		/**
-		 * The meta object literal for the '<em><b>Sub Projects</b></em>' reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_PROJECT__SUB_PROJECTS = eINSTANCE.getBTSProject_SubProjects();
-
-		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBConnectionImpl <em>BTSDB Connection</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -12694,6 +12878,22 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference DB_LEASE__OBJECT = eINSTANCE.getDBLease_Object();
+
+		/**
+		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_LEASE__ACTIVE = eINSTANCE.getDBLease_Active();
+
+		/**
+		 * The meta object literal for the '<em><b>Bts UUID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_LEASE__BTS_UUID = eINSTANCE.getDBLease_BtsUUID();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl <em>BTS Project DB Collection</em>}' class.

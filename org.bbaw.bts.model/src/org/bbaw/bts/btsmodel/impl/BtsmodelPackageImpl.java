@@ -1530,6 +1530,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSDBBaseObject__deleted() {
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getBTSDBBaseObject__GetDBCollectionKey() {
 		return btsdbBaseObjectEClass.getEOperations().get(0);
 	}
@@ -2342,15 +2351,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSProject_SubProjects() {
-		return (EReference)btsProjectEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBTSDBConnection()
 	{
 		return btsdbConnectionEClass;
@@ -2563,6 +2563,24 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EReference getDBLease_Object() {
 		return (EReference)dbLeaseEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBLease_Active() {
+		return (EAttribute)dbLeaseEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBLease_BtsUUID() {
+		return (EAttribute)dbLeaseEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -3059,6 +3077,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__LOCKED);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__UPDATERS);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__READERS);
+		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__DELETED);
 		createEOperation(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY);
 
 		btsTextCorpusEClass = createEClass(BTS_TEXT_CORPUS);
@@ -3167,7 +3186,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsProjectEClass, BTS_PROJECT__DESCRIPTION);
 		createEReference(btsProjectEClass, BTS_PROJECT__DB_CONNECTION);
 		createEReference(btsProjectEClass, BTS_PROJECT__DB_COLLECTIONS);
-		createEReference(btsProjectEClass, BTS_PROJECT__SUB_PROJECTS);
 
 		btsdbConnectionEClass = createEClass(BTSDB_CONNECTION);
 		createEAttribute(btsdbConnectionEClass, BTSDB_CONNECTION__TYPE);
@@ -3195,6 +3213,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(dbLeaseEClass, DB_LEASE__USER_ID);
 		createEAttribute(dbLeaseEClass, DB_LEASE__TIME_STAMP);
 		createEReference(dbLeaseEClass, DB_LEASE__OBJECT);
+		createEAttribute(dbLeaseEClass, DB_LEASE__ACTIVE);
+		createEAttribute(dbLeaseEClass, DB_LEASE__BTS_UUID);
 
 		btsProjectDBCollectionEClass = createEClass(BTS_PROJECT_DB_COLLECTION);
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME);
@@ -3469,6 +3489,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSDBBaseObject_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Updaters(), ecorePackage.getEString(), "updaters", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Readers(), ecorePackage.getEString(), "readers", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject__deleted(), ecorePackage.getEBoolean(), "_deleted", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getBTSDBBaseObject__GetDBCollectionKey(), ecorePackage.getEString(), "getDBCollectionKey", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -3591,7 +3612,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSProject_Description(), ecorePackage.getEString(), "description", null, 0, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSProject_DbConnection(), this.getBTSDBConnection(), null, "dbConnection", null, 0, 1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSProject_DbCollections(), this.getBTSProjectDBCollection(), null, "dbCollections", null, 0, -1, BTSProject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSProject_SubProjects(), this.getBTSProject(), null, "subProjects", null, 0, -1, BTSProject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsdbConnectionEClass, BTSDBConnection.class, "BTSDBConnection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSDBConnection_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSDBConnection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3619,6 +3639,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getDBLease_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getDBLease_TimeStamp(), ecorePackage.getEDate(), "timeStamp", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDBLease_Object(), this.getBTSDBBaseObject(), null, "object", null, 0, 1, DBLease.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBLease_Active(), ecorePackage.getEBooleanObject(), "active", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBLease_BtsUUID(), ecorePackage.getEString(), "btsUUID", null, 0, 1, DBLease.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsProjectDBCollectionEClass, BTSProjectDBCollection.class, "BTSProjectDBCollection", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSProjectDBCollection_CollectionName(), ecorePackage.getEString(), "collectionName", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

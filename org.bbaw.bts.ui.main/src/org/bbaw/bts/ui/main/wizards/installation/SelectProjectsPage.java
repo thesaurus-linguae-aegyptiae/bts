@@ -229,7 +229,39 @@ public class SelectProjectsPage extends WizardPage
 		{
 			string += s + "|";
 		}
-		return string.length() > 2 ? string.substring(0, string.length() - 1) : "";
+		String result = string.length() > 2 ? string.substring(0, string.length() - 1) : "";
+		if (result == null || "".equals(result))
+		{
+			if (active_projects != null && !"".equals(active_projects))
+			{
+				result = main_project;
+			}
+			else
+			{
+				result = main_project;
+			}
+		}
+		return result;
+	}
+
+	public void loadProjects() {
+		loadListInput();
+		if (main_project == null || "".equals(main_project))
+		{
+			if (projects != null && !projects.isEmpty())
+			{
+				main_project = projects.get(0).getPrefix();
+				
+			}
+		}
+		if (active_projects == null || "".equals(active_projects))
+		{
+			if (projects != null && !projects.isEmpty())
+			{
+				active_projects = projects.get(0).getPrefix();
+				
+			}
+		}
 	}
 
 }

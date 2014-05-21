@@ -11,6 +11,8 @@ import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -30,6 +32,7 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -44,6 +47,8 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 		IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider,
 		IItemColorProvider, IItemFontProvider
 {
+	protected BTSEvaluationService evaluationService = StaticAccessController.getContext().get(BTSEvaluationService.class);
+
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -235,9 +240,21 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 	protected Object overlayImage(Object object, Object image) {
 		if (object instanceof BTSDBBaseObject && ((BTSDBBaseObject) object).isLocked())
 	    {
-	      List<Object> images = new ArrayList<Object>(2);
-	      images.add(image);
-	      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK)); 
+			 List<Object> images = new ArrayList<Object>(2);
+		      images.add(image);
+			if(evaluationService.authenticatedUserHasLock(object))
+			{
+				Image i = resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_PEN);
+				if (i != null)
+			    {
+					images.add(i); 
+			    }
+			}
+			else
+			{
+			      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK)); 
+			}
+	     
 	      image = new ComposedImage(images);
 	    }
 		return super.overlayImage(object, image);

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#isLocked <em>Locked</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getReaders <em>Readers</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#is_deleted <em>deleted</em>}</li>
  * </ul>
  * </p>
  *
@@ -136,6 +137,32 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * @generated
 	 */
 	EList<String> getReaders();
+
+	/**
+	 * Returns the value of the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>deleted</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>deleted</em>' attribute.
+	 * @see #set_deleted(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject__deleted()
+	 * @model
+	 * @generated
+	 */
+	boolean is_deleted();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#is_deleted <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>deleted</em>' attribute.
+	 * @see #is_deleted()
+	 * @generated
+	 */
+	void set_deleted(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

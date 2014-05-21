@@ -54,4 +54,6 @@ public interface BTSEvaluationService
 	 * @return if user is member.
 	 */
 	boolean authenticatedUserIsMember(List<String> readerORUpdatersList);
+
+	boolean authenticatedUserHasLock(Object object);
 }

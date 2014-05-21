@@ -40,6 +40,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
@@ -95,6 +97,10 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	private long lock_ttl = -1;
 
 	private long renewal_dif =  BTSConstants.DEFAULT_LOCK_TTL;
+
+	private IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+
+	private String btsUUID = prefs.get(BTSConstants.BTS_UUID, null);
 	
 	@Override
 	public boolean filter(Object object)
@@ -117,7 +123,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 
 	private void processIfLocked(BTSDBBaseObject object) {
 		DBLease lease = findLockingMap().get(object.get_id());
-		if (lease != null && checkAndProcessLeaseTTL(lease, object))
+		if (lease != null && lease.getActive() &&  checkAndProcessLeaseTTL(lease, object))
 		{
 			object.setLocked(true);
 		}
@@ -127,7 +133,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	private boolean checkAndProcessLeaseTTL(DBLease lease, BTSIdentifiableItem item) {
 		if (lockIsAlive(lease))
 		{
-			return true;
+			return lease.getActive();
 		}
 		else
 		{
@@ -355,7 +361,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			setLock(item);
 			
 		}
-		else if(authenticatedUser.get_id().equals(lease.getUserId())) // authenticated user leases already
+		else if(lockIsOwnedByAuthUser(lease)) // authenticated user leases already
 		{
 			checkAndRenewLease(lease);
 		}
@@ -367,9 +373,10 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	}
 
 	private void checkAndRenewLease(DBLease lease) {
-		if (getCurrentTimeStamp().getTime() - renewal_dif > lease.getTimeStamp().getTime())
+		if (!lease.getActive() || getCurrentTimeStamp().getTime() - renewal_dif > lease.getTimeStamp().getTime())
 		{
 			lease.setTimeStamp(getCurrentTimeStamp());
+			lease.setActive(true);
 			saveLease(lease);
 		}
 		
@@ -426,6 +433,8 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		lease.setObjectId(item.get_id());
 		lease.setUserId(authenticatedUser.get_id());
 		lease.setTimeStamp(getCurrentTimeStamp());
+		lease.setActive(true);
+		lease.setBtsUUID(btsUUID);
 		if (item instanceof BTSDBBaseObject)
 		{
 			lease.setPath(((BTSDBBaseObject) item).getDBCollectionKey());
@@ -493,7 +502,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			// try to submit lock in central db
 			acquired = setLockRemote(item);
 		}
-		else if(authenticatedUser.get_id().equals(lease.getUserId())) // authenticated user leases already
+		else if(lockIsOwnedByAuthUser(lease)) // authenticated user leases already
 		{
 			checkAndRenewLease(lease);
 			acquired = true;
@@ -553,7 +562,43 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		
 		// remove lease from local db
 		// try to remove leases from central db
-		removeLease(lease, (BTSIdentifiableItem) object);
+		deactivateLease(lease, (BTSIdentifiableItem) object);
+		
+	}
+
+	private void deactivateLease(final DBLease lease, final BTSIdentifiableItem item) {
+		lease.setActive(false);
+		Job job = new Job("Locking " + lease.get_id())
+		{
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				
+				try {
+					dbLeaseDao.add(lease, NOTIFICATION);
+				} catch (Exception e) {
+					logger.error(e);
+					return Status.CANCEL_STATUS;
+				}
+				try {
+					remoteDBLeaseDao.add(lease, NOTIFICATION);
+				} catch (Exception e) {
+					logger.error(e);
+				}
+				// remove lease from lease map
+//				final Map<String, DBLease> lockingMap = findLockingMap();
+//				lockingMap.remove(lease.get_id());
+				if (item != null)
+				{
+					// set object locked = false
+					updateItemLockStatus(item, false);
+				}
+				
+				return Status.OK_STATUS;
+			}
+			
+		};
+		job.schedule();
 		
 	}
 
@@ -607,20 +652,20 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		{
 			DBLease lease = (DBLease) notification.getObject();
 			BTSIdentifiableItem item = findLockedItem(lease);
-			if (notification.isDeleted())
+			if (notification.isDeleted() || !lease.getActive())
 			{
-				try {
-					dbLeaseDao.remove(lease, NOTIFICATION);
-				} catch (Exception e) {
-					logger.error(e);
-				}
-				try {
-					remoteDBLeaseDao.remove(lease, NOTIFICATION);
-				} catch (Exception e) {
-					logger.error(e);
-				}
-				final Map<String, DBLease> lockingMap = findLockingMap();
-				lockingMap.remove(lease.get_id());
+//				try {
+//					dbLeaseDao.remove(lease, NOTIFICATION);
+//				} catch (Exception e) {
+//					logger.error(e);
+//				}
+//				try {
+//					remoteDBLeaseDao.remove(lease, NOTIFICATION);
+//				} catch (Exception e) {
+//					logger.error(e);
+//				}
+//				final Map<String, DBLease> lockingMap = findLockingMap();
+//				lockingMap.remove(lease.get_id());
 				if (item != null)
 				{
 					updateItemLockStatus(item, false);
@@ -631,12 +676,35 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			else
 			{
 				DBLease cached = findLockingMap().get(lease.get_id());
+				if (!lease.getActive() && item != null)
+				{
+					updateItemLockStatus(item, false);
+					// if object == ACTIVE_Selection -> trigger permissionEvalService to recalculate mayEdit-Settings
+					eventBroker.post("locking_status_update/unlocked", item);
+					// lease already exists
+					if (cached != null)
+					{
+						if (cached != lease)
+						{
+							System.out.println("Different Lock objects");
+							cached.setActive(false);
+						}
+						updateItemLockStatus(item, false);
+						// if object == ACTIVE_Selection -> trigger permissionEvalService to recalculate mayEdit-Settings
+						eventBroker.post("locking_status_update/unlocked", item);
+					}
+				}
 				
 				// lease already exists
 				if (cached != null)
 				{
+					if (cached != lease)
+					{
+						System.out.println("Different Lock objects");
+					}
 					if (cached.getUserId() != null && cached.getUserId().equals(lease.getUserId()))
 					{
+						checkAndProcessLeaseTTL(lease, item);
 						// nothing to do
 					}
 					else
@@ -669,5 +737,33 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			}
 		} 
 		return null;
+	}
+
+	@Override
+	public boolean authenticatedUserHasLock(Object object) {
+		if (object == null)
+			return false;
+		if (!(object instanceof BTSIdentifiableItem))
+			return false;
+		// get locking map
+		Map<String, DBLease> lockingMap = findLockingMap();
+
+		// look up in map if lock exists
+		DBLease lease = lockingMap.get(((BTSIdentifiableItem) object).get_id());
+		if (lease == null) // no lease
+		{
+			return false;
+
+		} else {
+			return lockIsOwnedByAuthUser(lease);
+		}
+	}
+
+	private boolean lockIsOwnedByAuthUser(DBLease lease) {
+		if (lease.getBtsUUID() != null && lease.getBtsUUID().equals(btsUUID)
+				&& authenticatedUser.get_id().equals(lease.getUserId())) {
+			return true;
+		}
+		return false;
 	}
 }

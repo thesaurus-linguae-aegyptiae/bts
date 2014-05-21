@@ -69,6 +69,7 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 			addLockedPropertyDescriptor(object);
 			addUpdatersPropertyDescriptor(object);
 			addReadersPropertyDescriptor(object);
+			add_deletedPropertyDescriptor(object);
 			addCorpusPrefixPropertyDescriptor(object);
 			addWorkPhasePropertyDescriptor(object);
 		}
@@ -214,6 +215,28 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 	}
 
 	/**
+	 * This adds a property descriptor for the deleted feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void add_deletedPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject__deleted_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject__deleted_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__DELETED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Corpus Prefix feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -322,6 +345,7 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__LOCKED:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS:
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
