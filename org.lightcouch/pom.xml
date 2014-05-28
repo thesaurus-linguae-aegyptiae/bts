@@ -9,6 +9,6 @@
   </parent>
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.lightcouch</artifactId>
-  <version>0.6.0</version>
+  <version>0.6.1</version>
   <packaging>eclipse-plugin</packaging>
 </project>

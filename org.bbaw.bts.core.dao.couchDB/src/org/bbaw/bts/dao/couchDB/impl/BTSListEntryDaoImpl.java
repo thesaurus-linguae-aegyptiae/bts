@@ -61,7 +61,9 @@ public class BTSListEntryDaoImpl extends CouchDBDao<BTSListEntry, String> implem
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((BTSListEntry) resource.getContents().get(0));
+				BTSListEntry en = (BTSListEntry) resource.getContents().get(0);
+				checkForConflicts(en, path);
+				results.add(en);
 			}
 		}
 		if (!results.isEmpty())

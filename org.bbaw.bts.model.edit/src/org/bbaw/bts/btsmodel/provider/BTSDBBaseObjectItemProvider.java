@@ -6,9 +6,13 @@ package org.bbaw.bts.btsmodel.provider;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
@@ -65,6 +69,7 @@ public class BTSDBBaseObjectItemProvider
 			addUpdatersPropertyDescriptor(object);
 			addReadersPropertyDescriptor(object);
 			add_deletedPropertyDescriptor(object);
+			addConflictingRevsPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -206,6 +211,28 @@ public class BTSDBBaseObjectItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Conflicting Revs feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addConflictingRevsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_conflictingRevs_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_conflictingRevs_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__CONFLICTING_REVS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -237,6 +264,7 @@ public class BTSDBBaseObjectItemProvider
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}
@@ -257,21 +285,41 @@ public class BTSDBBaseObjectItemProvider
 
 	@Override
 	protected Object overlayImage(Object object, Object image) {
-		if (object instanceof BTSDBBaseObject && ((BTSDBBaseObject) object).isLocked())
-	    {
-			 List<Object> images = new ArrayList<Object>(2);
-		      images.add(image);
-			if(evaluationService.authenticatedUserHasLock(object))
-			{
-			      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK)); 
+		if (object instanceof BTSDBBaseObject
+				&& ((BTSDBBaseObject) object).isLocked()) {
+			List<Object> images = new ArrayList<Object>(2);
+			images.add(image);
+			if (getEvaluationService() != null
+					&& !getEvaluationService().authenticatedUserHasLock(object)) {
+				images.add(resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_OVR_PEN));
+			} else {
+				images.add(resourceProvider.getImage(Display.getDefault(),
+						BTSResourceProvider.IMG_OVR_LOCK));
 			}
-			else
-			{
-			      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_PEN)); 
-			}
-	     
-	      image = new ComposedImage(images);
-	    }
+
+			image = new ComposedImage(images);
+		}
+		if (object instanceof BTSDBBaseObject
+				&& !((BTSDBBaseObject) object).getConflictingRevs().isEmpty()) {
+			List<Object> images = new ArrayList<Object>(2);
+			images.add(image);
+			images.add(resourceProvider.getImage(Display.getDefault(),
+					BTSResourceProvider.IMG_OVR_CONFLICTS));
+			image = new ComposedImage(images);
+		}
 		return super.overlayImage(object, image);
+	}
+	
+	protected BTSEvaluationService getEvaluationService() {
+		if (evaluationService == null)
+		{
+			IEclipseContext context = StaticAccessController.getContext();
+			if (context != null)
+			{
+				evaluationService = context.get(BTSEvaluationService.class);
+			}
+		}
+		return evaluationService;
 	}
 }

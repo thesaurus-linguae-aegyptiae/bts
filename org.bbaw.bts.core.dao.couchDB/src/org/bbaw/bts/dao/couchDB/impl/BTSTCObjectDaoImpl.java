@@ -63,7 +63,9 @@ public class BTSTCObjectDaoImpl extends CouchDBDao<BTSTCObject, String> implemen
 				loader.fillResource(resource);
 				if (resource.getContents().get(0) instanceof BTSTCObject)
 				{
-					results.add((BTSTCObject) resource.getContents().get(0));
+					BTSTCObject pr = (BTSTCObject) resource.getContents().get(0);
+					checkForConflicts(pr, path);
+					results.add(pr);
 				}
 			}
 		}

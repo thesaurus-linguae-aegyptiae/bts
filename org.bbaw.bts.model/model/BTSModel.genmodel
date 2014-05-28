@@ -135,6 +135,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/updaters"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/readers"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/_deleted"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSDBBaseObject/conflictingRevs"/>
       <genOperations ecoreOperation="BTSModel.ecore#//BTSDBBaseObject/getDBCollectionKey"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTextCorpus">

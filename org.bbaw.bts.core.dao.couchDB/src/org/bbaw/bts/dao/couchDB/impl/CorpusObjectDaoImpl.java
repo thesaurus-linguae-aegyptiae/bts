@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSPassportEntryItem;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -63,6 +64,7 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 				loader.fillResource(resource);
 				Object o = resource.getContents().get(0);
 				if (o instanceof BTSCorpusObject) {
+					checkForConflicts((BTSCorpusObject) o, path);
 					results.add((BTSCorpusObject) o);
 				}
 			}

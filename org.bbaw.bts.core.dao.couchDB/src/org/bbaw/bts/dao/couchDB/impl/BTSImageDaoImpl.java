@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSImageDao;
@@ -53,7 +54,9 @@ public class BTSImageDaoImpl extends CouchDBDao<BTSImage, String> implements BTS
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((BTSImage) resource.getContents().get(0));
+				BTSImage im = (BTSImage) resource.getContents().get(0);
+				checkForConflicts((BTSCorpusObject) im, path);
+				results.add(im);
 			}
 		}
 		if (!results.isEmpty())

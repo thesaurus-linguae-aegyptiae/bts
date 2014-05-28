@@ -23,12 +23,26 @@ import static org.lightcouch.CouchDbUtil.getElement;
 import static org.lightcouch.CouchDbUtil.streamToString;
 import static org.lightcouch.URIBuilder.builder;
 
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.ParseException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -89,6 +103,7 @@ import com.google.gson.JsonObject;
  */
 public final class CouchDbClient extends CouchDbClientBase {
 
+	 Pattern conflictPattern = Pattern.compile("(\"_conflicts\":)(\\[(.*?)\\])");
 	// -------------------------------------------------------------------------- Constructors
 	/**
 	 * Constructs a new instance of this class, expects a configuration file named 
@@ -467,5 +482,106 @@ public final class CouchDbClient extends CouchDbClientBase {
 	@Override
 	public void shutdown() {
 		super.shutdown();
+	}
+	//FIXME
+	//cplutte method added
+	public Response purge(String databaseName, String id, String[] revs)
+	{
+		assertNotEmpty(id, "id");
+		assertNotEmpty(revs, "rev");
+		String string = "{\"" + id + "\" : [";
+		if (revs != null && revs.length > 0)
+		{
+			for (String rev : revs)
+			{
+				string += "\"" + rev + "\", ";
+			}
+			string = string.substring(0, string.length() - 2);
+		}
+		string += "]}";
+		HttpResponse response = null;
+		try {
+			HttpPost post = new HttpPost(builder(getDBUri()).path("_purge").build());
+			HttpEntity body = new ByteArrayEntity(string.getBytes("UTF-8"));
+
+			post.setEntity(body);
+			post.setHeader("Content-Type", "application/json");
+
+			response = executeRequest(post); 
+			return getResponse(response);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(response);
+		}
+
+		return null;
+		
+	}
+	
+	//FIXME
+		//cplutte method added
+		public List<String> listConflictingRevs(String databaseName, String id)
+		{
+			assertNotEmpty(id, "id");
+//			String string = "{\"" + id + "\" : [";
+//			string += "]}";
+			Params params = new Params();
+			params.addParam("conflicts", "true");
+
+			HttpResponse response = null;
+			try {
+				HttpGet get = new HttpGet(builder(getDBUri()).path(id).query(params).build());
+//				HttpEntity body = new ByteArrayEntity(string.getBytes("UTF-8"));
+//
+//				post.setEntity(body);
+				get.setHeader("Content-Type", "application/json");
+
+				response = executeRequest(get);
+				HttpEntity entity = response.getEntity();
+
+				return getConflictsList(response);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				close(response);
+			}
+			return Collections.EMPTY_LIST;
+			
+		}
+
+		//cplutte method added
+	private List<String> getConflictsList(HttpResponse response) {
+		List<String> conflicts = new Vector<String>(3);
+		String responseString = null;
+		try {
+			responseString = EntityUtils
+					.toString(response.getEntity(), "UTF-8");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (responseString != null) {
+			Matcher m = conflictPattern.matcher(responseString);
+			if (m.find())
+			{
+			String cons = m.group(2);
+			if (cons != null && !"".equals(conflicts)) {
+				System.out.println(cons);
+
+				cons = cons.substring(1, cons.length() - 1);
+				String[] cs = cons.split(",");
+				for (String s : cs) {
+					conflicts.add(s.substring(1, s.length() - 1));
+				}
+			}
+			}
+		}
+		return conflicts;
 	}
 }

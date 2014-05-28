@@ -169,9 +169,9 @@ public class DBLeaseImpl extends BTSDBBaseObjectImpl implements DBLease
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNot
 	 */
-	protected DBLeaseImpl()
+	public DBLeaseImpl()
 	{
 		super();
 	}

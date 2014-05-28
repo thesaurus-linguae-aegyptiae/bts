@@ -1,6 +1,8 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -18,6 +20,10 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.services.BTSEvaluationService;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
@@ -36,6 +42,8 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	private static final String FALSE = "false";
 
 	private static final String TRUE = "true";
+
+	private static final long LOCKING_DELAY = 600;
 
 	// @Inject
 	// @Optional
@@ -77,6 +85,8 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	@Inject
 	private BTSEvaluationService evaluationService;
 	
+	private Object loadedObject;
+
 	private IEclipseContext workbenchContext;
 
 	private String userContextRole;
@@ -84,6 +94,8 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	private boolean otherLocked;
 
 	private boolean hasLock = false;
+
+	private Set<Object> deselectedQueue = new HashSet<Object>();
 
 
 	@Inject
@@ -125,22 +137,52 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	@Inject
 	void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
-		if (selection != null && selection instanceof BTSDBBaseObject
-				&& !selection.equals(this.selection)) {
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Object sel) {
+		if (sel != null && sel instanceof BTSDBBaseObject
+				&& !sel.equals(this.selection)) {
 			processDeselection(this.selection);
-			this.selection = selection;
-			if (evaluationService.acquireLockOptimistic(selection))
-			{
-				otherLocked = false;
-			}
-			else
-			{
-				otherLocked = true;
-			}
-			hasLock = otherLocked;
-			evaluatePermissionsAndExpressions();
+			this.selection = sel;
+			delayedSetSelection(selection);
+			
+			
 		}
+	}
+
+	private void delayedSetSelection(final Object jobSelection) {
+		Job job = new Job("Acquire Lock") {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				if (selection != null) {
+					synchronized (selection) {
+
+						if (selection.equals(jobSelection)) {
+							internalSetSelection(jobSelection);
+						}
+					}
+				}
+
+				return Status.OK_STATUS;
+			}
+
+		};
+		job.schedule(LOCKING_DELAY);
+
+	}
+
+	protected void internalSetSelection(Object internalSelection) {
+
+		if (evaluationService.acquireLockOptimistic(internalSelection))
+		{
+			otherLocked = false;
+		}
+		else
+		{
+			otherLocked = true;
+		}
+		hasLock = otherLocked;
+		evaluatePermissionsAndExpressions();
+		
 	}
 
 	private void processDeselection(Object object) {

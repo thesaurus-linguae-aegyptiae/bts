@@ -61,7 +61,9 @@ public class BTSTextDaoImpl extends CouchDBDao<BTSText, String> implements BTSTe
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((BTSText) resource.getContents().get(0));
+				BTSText pr = (BTSText) resource.getContents().get(0);
+				checkForConflicts(pr, path);
+				results.add(pr);
 			}
 		}
 		if (!results.isEmpty())

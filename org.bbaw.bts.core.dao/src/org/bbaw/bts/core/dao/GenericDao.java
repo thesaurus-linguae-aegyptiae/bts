@@ -11,15 +11,17 @@ import org.eclipse.emf.common.util.URI;
 public interface GenericDao<E extends BTSDBBaseObject, K>
 {
 
-	void add(E entity, String path);
+	E add(E entity, String path);
 
 	boolean addMultiple(Set<E> entitys, String path);
 
-	void update(E entity, String path);
+	E update(E entity, String path);
 
 	void remove(E entity, String path);
 	
-	void setDeleted(E entity, String path, boolean deleted);
+	void purge(E entity, String path);
+	
+	E setDeleted(E entity, String path, boolean deleted);
 
 	E find(K key, String path);
 	

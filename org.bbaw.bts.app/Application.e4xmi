@@ -56,7 +56,7 @@
     <children xmi:id="_NEpfQA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialog" name="In Dialog"/>
   </rootContext>
   <commands xmi:id="_G1ujkF2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.edit.text.contentAssist.proposals" category="_KsMe0F2uEeOwE8UUrLWumA"/>
-  <commands xmi:id="_wBOgkL8fEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.exitApplication" commandName="ExitApplication" category="_0JZP0L8fEeOwdasqUpZnTA"/>
+  <commands xmi:id="_wBOgkL8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.file.exit" commandName="ExitApplication" category="_0JZP0L8fEeOwdasqUpZnTA"/>
   <commands xmi:id="_ysk3EL8gEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication" commandName="Update Application" category="__KJyEL8gEeOwdasqUpZnTA"/>
   <commands xmi:id="_05F_sL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart" commandName="Restart"/>
   <addons xmi:id="_oEzH4gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>

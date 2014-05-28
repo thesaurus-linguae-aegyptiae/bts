@@ -298,8 +298,13 @@ public class LoginDialog extends Dialog
 		logger.info("Trying to validate user with username: " + userName);
 
 		String passWord = passwortText.getText().trim();
-		if (!userController.setAuthentication(userName, passWord))
-		{
+		try {
+			if (!userController.setAuthentication(userName, passWord))
+			{
+				return false;
+			}
+		} catch (Exception e) {
+			logger.info(e);
 			return false;
 		}
 		QueryBuilder dd;

@@ -54,7 +54,7 @@ public class BTSIdentifiableItemItemProvider
 	protected BTSResourceProvider resourceProvider = StaticAccessController
 			.getResourceProvider();
 	
-	protected BTSEvaluationService evaluationService = StaticAccessController.getContext().get(BTSEvaluationService.class);
+	protected BTSEvaluationService evaluationService;
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

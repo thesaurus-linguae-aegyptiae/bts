@@ -373,4 +373,6 @@ public interface BTSResourceProvider extends IResourceProviderService {
 
 	public static final String IMG_OVR_PEN = "IMG_OVR_PEN";
 
+	public static final String IMG_OVR_CONFLICTS = "IMG_OVR_CONFLICTS";
+
 }

@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URI;
@@ -73,7 +74,13 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
+import org.eclipse.emf.ecore.EObject;
 
+import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -191,13 +198,30 @@ abstract class CouchDbClientBase {
 	 * Performs a HTTP PUT request, saves or updates a document.
 	 * @return {@link Response}
 	 */
+	
+	//cplutte integrated eObject handling
 	Response put(URI uri, Object object, boolean newEntity) {
 		assertNotEmpty(object, "object");
 		HttpResponse response = null;
-		try {  
-			JsonObject json = getGson().toJsonTree(object).getAsJsonObject();
-			String id = getElement(json, "_id");
-			String rev = getElement(json, "_rev");
+		try {
+			String jsonString = null;
+			String id = null;
+			String rev = null;
+			if (object instanceof BTSIdentifiableItem)
+			{
+				jsonString = EmfModelHelper.modelToString(object);
+				id = ((BTSIdentifiableItem) object).get_id();
+				
+				rev = ((BTSDBBaseObject) object).get_rev();
+			}
+			else
+			{
+				JsonObject json = getGson().toJsonTree(object).getAsJsonObject();
+				id = getElement(json, "_id");
+				rev = getElement(json, "_rev");
+
+				jsonString = json.toString();
+			}
 			if(newEntity) { // save
 				assertNull(rev, "revision");
 				id = (id == null) ? generateUUID() : id;
@@ -206,7 +230,7 @@ abstract class CouchDbClientBase {
 				assertNotEmpty(rev, "revision");
 			}
 			HttpPut put = new HttpPut(builder(uri).path(id).build());
-			setEntity(put, json.toString());
+			setEntity(put, jsonString);
 			response = executeRequest(put); 
 			return getResponse(response);
 		} finally {
@@ -262,7 +286,7 @@ abstract class CouchDbClientBase {
 	 * @param request The HTTP request to execute.
 	 * @return {@link HttpResponse}
 	 */
-	protected HttpResponse executeRequest(HttpRequestBase request) {
+	public HttpResponse executeRequest(HttpRequestBase request) {
 		HttpResponse response = null;
 		try {
 			response = httpClient.execute(host, request, context);
@@ -431,8 +455,18 @@ abstract class CouchDbClientBase {
 		}
 	}
 	
+	//cplutte branch inserted
 	<T> T deserialize(InputStream instream, Class<T> classType) {
 		Reader reader = new InputStreamReader(instream);
+		//FIXME check dynamically eobject
+		if (classType.isAssignableFrom(EObject.class))
+		{
+			try {
+				return EmfModelHelper.loadFromString(CharStreams.toString(reader), classType);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return getGson().fromJson(reader, classType);
 	}
 	

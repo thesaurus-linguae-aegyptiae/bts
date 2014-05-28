@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Vector;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
@@ -335,5 +336,44 @@ public class JSONLoad {
 			}
 		}
 		return eReferenceType;
+	}
+	
+	// cplutte added
+	public Collection<EObject> loadObjects() { 
+		final Collection<EObject> result = new Vector<EObject>();
+
+		if (this.rootNode.isArray()) {
+
+			for (Iterator<JsonNode> it = this.rootNode.getElements(); it.hasNext();) {
+				JsonNode node = it.next();
+				EClass eClass = null;
+				try {
+					eClass = getEClass(node, true);
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+
+				if (eClass != null) {
+					final EObject rootObject = EcoreUtil.create(eClass);
+					result.add(rootObject);
+
+					fillEAttribute(rootObject, eClass, node);
+					fillEReference(rootObject, eClass, node, null);
+
+					result.add(rootObject);
+				}
+			}
+
+		} else {
+			if (rootClass != null) {
+				final EObject rootObject = EcoreUtil.create(rootClass);
+				result.add(rootObject);
+
+				fillEAttribute(rootObject, rootClass, this.rootNode);
+				fillEReference(rootObject, rootClass, this.rootNode, null);
+			}
+		}
+
+		return result;
 	}
 }

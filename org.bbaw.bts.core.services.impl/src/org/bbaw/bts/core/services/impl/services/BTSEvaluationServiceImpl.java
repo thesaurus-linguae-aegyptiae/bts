@@ -1,15 +1,24 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.SocketException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Vector;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.net.ntp.NTPUDPClient;
+import org.apache.commons.net.ntp.NtpV3Packet;
+import org.apache.commons.net.ntp.TimeInfo;
+import org.apache.commons.net.ntp.TimeStamp;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
@@ -31,10 +40,12 @@ import org.bbaw.bts.core.commons.exceptions.BTSLockingException;
 import org.bbaw.bts.core.dao.DBLeaseDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.GenericDao;
+import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.PermissionsAndExpressionsEvaluationService;
+import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -48,6 +59,7 @@ import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.emf.common.util.DiagnosticException;
 
 /** This Service is actively used to request information about the visibility or lock status of an object.
  * @author plutte
@@ -57,6 +69,8 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 {
 
 	protected static final String NOTIFICATION = "notification";
+
+	private static final long TIME_CHECK_INFERVAL = 3000000;
 
 	@Inject
 	@Optional
@@ -101,6 +115,15 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	private IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
 
 	private String btsUUID = prefs.get(BTSConstants.BTS_UUID, null);
+
+	private Long systemClockDifferenceLong;
+
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_SYSTEM_CLOCK_DIFFERENCE, nodePath = "org.bbaw.bts.app")
+	private String systemClockDifference;
+
+	private Date lastTimeCheck;
 	
 	@Override
 	public boolean filter(Object object)
@@ -130,6 +153,11 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		
 	}
 
+	/** returns true if lease is alive. else false and lease is deleted.
+	 * @param lease
+	 * @param item
+	 * @return
+	 */
 	private boolean checkAndProcessLeaseTTL(DBLease lease, BTSIdentifiableItem item) {
 		if (lockIsAlive(lease))
 		{
@@ -137,6 +165,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		}
 		else
 		{
+			logger.info("checkAndProcessLeaseTTL, lease not alive, remove old lease: " + lease.get_id() + ", leased object id " + lease.getObjectId());
 			removeLease(lease, item);
 			return false;
 		}
@@ -144,8 +173,10 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 
 	private boolean lockIsAlive(DBLease lease) {
 		Date now = getCurrentTimeStamp();
+		logger.info("Lease is alive. now: " + now + ", leaseTimestamp " + lease.getTimeStamp());
 		if(now.getTime() - getLockTTL() <= 	lease.getTimeStamp().getTime())
 		{
+			logger.info("Lease is alive. false");
 			return true;
 		}
 		return false;
@@ -359,15 +390,43 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		{
 			// try to set lease in local and central database -> use separate thread!
 			setLock(item);
-			
-		}
-		else if(lockIsOwnedByAuthUser(lease)) // authenticated user leases already
-		{
-			checkAndRenewLease(lease);
-		}
-		else if (checkAndProcessLeaseTTL(lease, item)) // locked
-		{
 			locked = true;
+		}
+		else if (!lease.getActive())
+		{
+			lease.setUserId(authenticatedUser.get_id());
+			lease.setBtsUUID(btsUUID);
+			checkAndRenewLease(lease);
+			saveLease(lease);
+			locked = true;
+		}
+		else 
+		{
+			if(lockIsOwnedByAuthUser(lease)) // authenticated user leases already
+			{
+				checkAndRenewLease(lease);
+				saveLease(lease);
+				locked = true;
+			}
+			else // locked by other
+			{
+				if (lockIsAlive(lease)) // locked by other and lock alive
+				{
+					locked = false;
+				}
+				else // lock not alive, renew lock and use
+				{
+					lease.setUserId(authenticatedUser.get_id());
+					lease.setBtsUUID(btsUUID);
+					checkAndRenewLease(lease);
+					saveLease(lease);
+					locked = true;
+				}
+			}
+		}
+		if (locked)
+		{
+			updateItemLockStatus(item, true);
 		}
 		return locked;
 	}
@@ -377,7 +436,9 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		{
 			lease.setTimeStamp(getCurrentTimeStamp());
 			lease.setActive(true);
-			saveLease(lease);
+			addLeaseToMap(lease);
+			
+			
 		}
 		
 	}
@@ -404,21 +465,21 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	}
 
 	private void setLock(final BTSIdentifiableItem item) {
+		final DBLease lease = prepareLease(item);
+		addLeaseToMap(lease);
+
 		Job job = new Job("Locking " + item.get_id())
 		{
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				
-				DBLease lease = prepareLease(item);
 				try {
 					dbLeaseDao.add(lease, NOTIFICATION);
 				} catch (Exception e) {
 					logger.error(e);
 					return Status.CANCEL_STATUS;
 				}
-				addLeaseToMap(lease);
-				updateItemLockStatus(item, true);
 				return Status.OK_STATUS;
 			}
 			
@@ -428,8 +489,16 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	}
 
 	protected DBLease prepareLease(BTSIdentifiableItem item) {
-		DBLease lease = BtsmodelFactory.eINSTANCE.createDBLease();
-		lease.set_id(item.get_id());
+		DBLease lease = null;
+//		try {
+//			lease = dbLeaseDao.find(item.get_id(), NOTIFICATION);
+//		} catch (Exception e) {
+//		}
+		if (lease == null)
+		{
+			lease = BtsmodelFactory.eINSTANCE.createDBLease();
+		}
+		
 		lease.setObjectId(item.get_id());
 		lease.setUserId(authenticatedUser.get_id());
 		lease.setTimeStamp(getCurrentTimeStamp());
@@ -447,7 +516,94 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	}
 
 	protected Date getCurrentTimeStamp() {
-		return Calendar.getInstance().getTime();
+		Date local = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTime();
+		Long difference = getSystemClockDifference(local);
+		long system = local.getTime();
+		Date now = new Date(system + difference);
+		return now;
+	}
+
+	private Long getSystemClockDifference(Date local) {
+		if (lastTimeCheck == null || local.after(new Date(lastTimeCheck.getTime() + TIME_CHECK_INFERVAL)))
+		{
+			systemClockDifferenceLong = null;
+			systemClockDifference = null;
+		}
+		if (systemClockDifferenceLong == null)
+		{
+			if (systemClockDifference == null && !"".equals(systemClockDifference))
+			{
+				systemClockDifference = checkAndCalculateClockDifference();
+			}
+			try {
+				systemClockDifferenceLong = new Long(systemClockDifference);
+			} catch (NumberFormatException e) {
+				systemClockDifferenceLong = null;
+				e.printStackTrace();
+			}
+		}
+		return systemClockDifferenceLong;
+	}
+
+	private String checkAndCalculateClockDifference() {
+		long ntp = 0;
+		String servers = ConfigurationScope.INSTANCE
+				.getNode("org.bbaw.bts.app").get("ntp_servers",
+						BTSConstants.DEFAULT_NTP_SERVERS);
+		logger.info("NTP servers: " + servers);
+		if (servers == null) {
+			return new Long(ntp).toString();
+		}
+		String[] serverArray = servers.split(ServiceConstants.SPLIT_PATTERN);
+		NTPUDPClient client = new NTPUDPClient();
+		// We want to timeout if a response takes longer than 7 seconds
+		client.setDefaultTimeout(7000);
+		TimeInfo info = null;
+		try {
+			client.open();
+			for (String arg : serverArray) {
+				try {
+					InetAddress hostAddr = InetAddress.getByName(arg);
+					logger.info("> " + hostAddr.getHostName() + "/"
+							+ hostAddr.getHostAddress());
+					info = client.getTime(hostAddr);
+					break;
+				} catch (IOException ioe) {
+					logger.error(ioe);
+				}
+			}
+		} catch (SocketException e) {
+			logger.error(e);
+		}
+		client.close();
+
+		if (info == null)
+		{
+			return new Long(ntp).toString();
+		}
+        NtpV3Packet message = info.getMessage();
+
+		 // Transmit time is time reply sent by server (t3)
+        TimeStamp xmitNtpTime = message.getTransmitTimeStamp();
+        logger.info(" Transmit Timestamp:\t" + xmitNtpTime + "  " + xmitNtpTime.toDateString());
+
+        info.computeDetails(); // compute offset/delay if not already done
+        Long offsetValue = info.getOffset();
+        Long delayValue = info.getDelay();
+        String delay = (delayValue == null) ? "N/A" : delayValue.toString();
+        String offset = (offsetValue == null) ? "N/A" : offsetValue.toString();
+
+        logger.info(" Roundtrip delay(ms)=" + delay
+                + ", clock offset(ms)=" + offset); // offset in ms
+        ntp = xmitNtpTime.getTime();
+		logger.info("NTP: " + ntp);
+		Date d = Calendar.getInstance(TimeZone.getTimeZone("UTC")).getTime();
+		lastTimeCheck = d;
+		long system = d.getTime();
+		long diff = ntp - system;
+		logger.info("Difference NTP - system: " + diff);
+
+		return new Long(diff).toString();
 	}
 
 	private Map<String, DBLease> findLockingMap() {
@@ -472,11 +628,19 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	 */
 	private void fillLockingMap(Map<String, DBLease> map) {
 		List<DBLease> leases = dbLeaseDao.list(NOTIFICATION, BTSConstants.OBJECT_STATE_ACTIVE);
+		logger.info("fill locking map, locking map size: " + leases.size());
 		for (DBLease lease : leases)
 		{
-			if (checkAndProcessLeaseTTL(lease, null))
+			if (lockIsOwnedByAuthUser(lease))
 			{
-				map.put(lease.get_id(), lease);
+				// assuming that locking map is filed when user first tries to acquire the first lock
+				// all existing locks by given user and bts-UUID are outdated
+				logger.info("fill locking map, remove old lease: " + lease.get_id() + ", leased object id " + lease.getObjectId());
+				removeLease(lease, null);
+			}
+			else if (checkAndProcessLeaseTTL(lease, null))
+			{
+				map.put(lease.getObjectId(), lease);
 			}
 		}
 		
@@ -538,7 +702,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 
 	private void addLeaseToMap(DBLease lease) {
 		Map<String, DBLease> lockingMap = findLockingMap();
-		lockingMap.put(lease.get_id(), lease);
+		lockingMap.put(lease.getObjectId(), lease);
 	}
 
 	@Override
@@ -560,69 +724,73 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		}
 		
 		
-		// remove lease from local db
-		// try to remove leases from central db
-		deactivateLease(lease, (BTSIdentifiableItem) object);
-		
+		if (lockIsOwnedByAuthUser(lease))
+		{
+
+			deactivateLease(lease, (BTSIdentifiableItem) object);
+		}
+//		removeLease(lease, (BTSIdentifiableItem) object);
+
 	}
 
 	private void deactivateLease(final DBLease lease, final BTSIdentifiableItem item) {
-		lease.setActive(false);
-		Job job = new Job("Locking " + lease.get_id())
+		Job job = new Job("Deactivate " + lease.get_id())
 		{
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				
 				try {
+					lease.setActive(false);
+
+
 					dbLeaseDao.add(lease, NOTIFICATION);
+					logger.info("deactivateLease, leased object id: " + lease.getObjectId());
+//					findLockingMap().remove(lease.getObjectId());
+
+					if (item != null)
+					{
+						// set object locked = false
+						updateItemLockStatus(item, false);
+					}
+				
+
 				} catch (Exception e) {
 					logger.error(e);
 					return Status.CANCEL_STATUS;
 				}
-				try {
-					remoteDBLeaseDao.add(lease, NOTIFICATION);
-				} catch (Exception e) {
-					logger.error(e);
-				}
-				// remove lease from lease map
-//				final Map<String, DBLease> lockingMap = findLockingMap();
-//				lockingMap.remove(lease.get_id());
-				if (item != null)
-				{
-					// set object locked = false
-					updateItemLockStatus(item, false);
-				}
-				
 				return Status.OK_STATUS;
 			}
 			
 		};
-		job.schedule();
+		job.schedule(1000);
+		
+		
 		
 	}
 
 	private void removeLease(final DBLease lease, final BTSIdentifiableItem item) {
-		Job job = new Job("Locking " + lease.get_id())
+		Job job = new Job("Locking " + lease.getObjectId())
 		{
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				
+
 				try {
-					dbLeaseDao.remove(lease, NOTIFICATION);
+					dbLeaseDao.removeDBLease(lease, NOTIFICATION);
+					logger.info("remove lease, lease id " + lease.get_id() + ", leased object id: " + lease.getObjectId());
 				} catch (Exception e) {
 					logger.error(e);
 					return Status.CANCEL_STATUS;
 				}
-				try {
-					remoteDBLeaseDao.remove(lease, NOTIFICATION);
-				} catch (Exception e) {
-					logger.error(e);
-				}
+//				try {
+//					remoteDBLeaseDao.remove(lease, NOTIFICATION);
+//				} catch (Exception e) {
+//					logger.error(e);
+//				}
 				// remove lease from lease map
 				final Map<String, DBLease> lockingMap = findLockingMap();
-				lockingMap.remove(lease.get_id());
+				lockingMap.remove(lease.getObjectId());
 				if (item != null)
 				{
 					// set object locked = false
@@ -654,18 +822,8 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			BTSIdentifiableItem item = findLockedItem(lease);
 			if (notification.isDeleted() || !lease.getActive())
 			{
-//				try {
-//					dbLeaseDao.remove(lease, NOTIFICATION);
-//				} catch (Exception e) {
-//					logger.error(e);
-//				}
-//				try {
-//					remoteDBLeaseDao.remove(lease, NOTIFICATION);
-//				} catch (Exception e) {
-//					logger.error(e);
-//				}
-//				final Map<String, DBLease> lockingMap = findLockingMap();
-//				lockingMap.remove(lease.get_id());
+				final Map<String, DBLease> lockingMap = findLockingMap();
+				lockingMap.put(lease.getObjectId(), lease);
 				if (item != null)
 				{
 					updateItemLockStatus(item, false);
@@ -675,7 +833,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			}
 			else
 			{
-				DBLease cached = findLockingMap().get(lease.get_id());
+				DBLease cached = findLockingMap().get(lease.getObjectId());
 				if (!lease.getActive() && item != null)
 				{
 					updateItemLockStatus(item, false);
@@ -705,6 +863,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 					if (cached.getUserId() != null && cached.getUserId().equals(lease.getUserId()))
 					{
 						checkAndProcessLeaseTTL(lease, item);
+						updateItemLockStatus(item, true);
 						// nothing to do
 					}
 					else
@@ -721,8 +880,9 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 						lease.setObject((BTSDBBaseObject) item);
 						eventBroker.post("locking_status_update/locked", lease);
 					}
-					addLeaseToMap(lease);
+					
 				}
+				addLeaseToMap(lease);
 			}			
 		}
 	}

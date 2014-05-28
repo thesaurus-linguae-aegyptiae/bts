@@ -92,7 +92,7 @@ public class JSONSave extends AbstractJSONSave {
 		return genJson(resource, Collections.emptyMap());
 	}
 	
-	protected JsonNode writeEObject(EObject object, Resource resource) {
+	public JsonNode writeEObject(EObject object, Resource resource) {
 		final ObjectNode node = mapper.createObjectNode();
 		
 		writeEObjectAttributes(object, node);

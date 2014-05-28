@@ -1539,6 +1539,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSDBBaseObject_ConflictingRevs() {
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getBTSDBBaseObject__GetDBCollectionKey() {
 		return btsdbBaseObjectEClass.getEOperations().get(0);
 	}
@@ -3078,6 +3087,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__UPDATERS);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__READERS);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__DELETED);
+		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__CONFLICTING_REVS);
 		createEOperation(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY);
 
 		btsTextCorpusEClass = createEClass(BTS_TEXT_CORPUS);
@@ -3490,6 +3500,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSDBBaseObject_Updaters(), ecorePackage.getEString(), "updaters", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Readers(), ecorePackage.getEString(), "readers", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject__deleted(), ecorePackage.getEBoolean(), "_deleted", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_ConflictingRevs(), ecorePackage.getEString(), "conflictingRevs", "", 0, -1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getBTSDBBaseObject__GetDBCollectionKey(), ecorePackage.getEString(), "getDBCollectionKey", 0, 1, IS_UNIQUE, IS_ORDERED);
 

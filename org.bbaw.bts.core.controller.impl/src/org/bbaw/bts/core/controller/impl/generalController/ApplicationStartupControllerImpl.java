@@ -175,7 +175,7 @@ public class ApplicationStartupControllerImpl implements
 			final BTSProjectService projectService, IApplicationContext appContext) {
 		this.context = context;
 		logger.info("Logging - debug, debug enabled: " + logger.isDebugEnabled());
-		logger.info("Logging - info");
+		logger.info("Logging - info, info enabled: " + logger.isInfoEnabled());
 		logger.error("Logging - error");
 		logger.warn("Logging - warn");
 		logger.trace("Logging - trace");

@@ -247,11 +247,17 @@ public class CouchDBManager implements DBManager
 				}
 			}
 		}
+		String source = processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName());
+
+		if (source == null)
+		{
+			return false;
+		}
 		try {
 			Replicator replicator2 = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
 					.replicator();
 			replicator2.target(collection.getCollectionName());
-			replicator2.source(processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName()));
+			replicator2.source(source);
 			replicator2.continuous(true);
 			replicator2.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
 			replicator2.save(); // triggers a replication
@@ -286,8 +292,11 @@ public class CouchDBManager implements DBManager
 		try {
 			server = new URL(masterServer);
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.error("processServerAuthURL malformed url: " + masterServer + ", collection: " + collectionName, e);
+		}
+		if (server == null)
+		{
+			return null;
 		}
 		String su = server.getProtocol() + "://";  
 
@@ -329,12 +338,17 @@ public class CouchDBManager implements DBManager
 				}
 			}
 		}
+		String target = processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName());
 
+		if (target == null)
+		{
+			return false;
+		}
 		try {
 			Replicator replicator = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
 					.replicator();
 			replicator.source(collection.getCollectionName());
-			replicator.target(processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName()));
+			replicator.target(target);
 			replicator.continuous(true);
 			replicator.createTarget(true);
 			replicator.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
@@ -764,6 +778,7 @@ public class CouchDBManager implements DBManager
 		logger.info("DB Erlang startup file: " + runFileName);
 		String[] commands;
 		//FIXME
+		logger.error("Start Database, show Console: " + logger.isInfoEnabled());
 		if (logger.isInfoEnabled())
 		{
 			commands = new String[]{runFileName};
@@ -1031,7 +1046,7 @@ public class CouchDBManager implements DBManager
 	private void prepareShutdown() {
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.NOTIFICATION);
 		dbClient.context().compact();
-
+		dbClient.shutdown();
 		
 	}
 

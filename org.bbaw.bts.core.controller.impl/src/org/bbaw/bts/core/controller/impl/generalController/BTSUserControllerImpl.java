@@ -41,7 +41,13 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public String getUserDisplayName(String userId) {
-		BTSUser user = userService.find(userId);
+		BTSUser user = null;
+		try {
+			user = userService.find(userId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (user != null) {
 			return user.getName();
 		}

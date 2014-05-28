@@ -39,6 +39,7 @@ import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
@@ -593,6 +594,19 @@ public class ThsNavigator implements ScatteredCachingPart {
 
 
 		return maps;
+	}
+	
+	@Inject
+	void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
+		if (selection == null) {
+			/* implementation not shown */
+		} else {
+			if (!(selection instanceof BTSThsEntry)) {
+				mainTreeViewer.setSelection(null);
+			}
+			System.out.println("CorpusNavigator selection received");
+		}
 	}
 
 }

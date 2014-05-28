@@ -1,16 +1,19 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
+import java.lang.reflect.Type;
 import java.net.MalformedURLException;
 
 import static org.elasticsearch.node.NodeBuilder.*;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSUser;
+import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -27,6 +30,7 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -41,6 +45,15 @@ import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
+
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
 
 // TODO integrate user authentication, authenticated_user, reload dbclient pool
 // when user change
@@ -114,9 +127,75 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 						+ " p not null: " + (properties.getPassword() != null));
 				e.printStackTrace();
 			}
+			registerGSONBuilder(dbClient);
 			clients.put(path, dbClient);
 		}
 		return (T) dbClient;
+	}
+
+	private void registerGSONBuilder(CouchDbClient dbClient) {
+		GsonBuilder gsonBuilder = new GsonBuilder();
+
+		gsonBuilder.registerTypeAdapter(EObject.class, new JsonSerializer<EObject>() {
+
+			@Override
+			public JsonElement serialize(EObject arg0, Type arg1,
+					JsonSerializationContext arg2) {
+				System.out.println(arg0 + ", arg1 " + arg1);
+				return null;
+			}
+		});
+				
+		gsonBuilder.registerTypeAdapter(EObject.class, new JsonDeserializer<EObject>() {
+
+			@Override
+			public EObject deserialize(JsonElement arg0, Type arg1,
+					JsonDeserializationContext arg2) throws JsonParseException {
+				System.out.println(arg0 + ", arg1 " + arg1);
+
+				return null;
+			}
+		});
+		
+
+		gsonBuilder.registerTypeAdapter(DBLease.class, new JsonSerializer<DBLease>() {
+
+			@Override
+			public JsonElement serialize(DBLease arg0, Type arg1,
+					JsonSerializationContext arg2) {
+				System.out.println(arg0 + ", arg1 " + arg1);
+				return null;
+			}
+		});
+				
+		gsonBuilder.registerTypeAdapter(DBLease.class, new JsonDeserializer<DBLease>() {
+
+			@Override
+			public DBLease deserialize(JsonElement arg0, Type arg1,
+					JsonDeserializationContext arg2) throws JsonParseException {
+				System.out.println(arg0 + ", arg1 " + arg1);
+
+				return null;
+			}
+		});
+		
+		gsonBuilder.registerTypeAdapter(Date.class, new JsonSerializer<Date>() {
+		    public JsonElement serialize(Date src, Type typeOfSrc, 
+		    JsonSerializationContext context) {
+		        return new JsonPrimitive(src.toString());
+		    }
+		});
+				
+		gsonBuilder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+		    public Date deserialize(JsonElement json, Type typeOfT, 
+		    JsonDeserializationContext context) throws JsonParseException {
+		        return new Date(json.getAsJsonPrimitive().getAsString());
+		    }
+		});
+
+
+//		dbClient.setGsonBuilder(gsonBuilder);
+		
 	}
 
 	private CouchDbProperties createDBProperties(String path)
@@ -306,6 +385,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 					.setProtocol(protocol).setHost(host).setPort(getPort()).setMaxConnections(100).setConnectionTimeout(0)
 					.setUsername(userName).setPassword(password);
 			dbClient = new CouchDbClient(properties);
+			registerGSONBuilder(dbClient);
+
 			clients.put(path, dbClient);
 		}
 		return (T) dbClient;
@@ -331,6 +412,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			properties.setPassword(p);
 		}
 		CouchDbClient dbClient = new CouchDbClient(properties);
+		registerGSONBuilder(dbClient);
+
 		return (T) dbClient;
 	}
 	

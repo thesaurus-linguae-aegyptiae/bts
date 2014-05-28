@@ -64,4 +64,6 @@ public class BTSPluginIDs
 
 	public static final String CMD_ID_EDIT_PREFERENCE = "org.eclipse.ui.window.preferences";
 
+	public static final String PREF_SYSTEM_CLOCK_DIFFERENCE = "system_clock_difference";
+
 }

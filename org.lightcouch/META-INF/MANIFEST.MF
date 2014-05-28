@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Lightcouch
 Bundle-SymbolicName: org.lightcouch
-Bundle-Version: 0.6.0
+Bundle-Version: 0.6.1
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: com.google.gson,
  org.eclipse.core.runtime;bundle-version="3.9.100"
@@ -15,6 +15,12 @@ Bundle-ClassPath: lib/commons-codec-1.7.jar,
  lib/sardine-5.0.jar,
  lib/slf4j-api-1.7.5.jar,
  .
-Export-Package: org.lightcouch
-Import-Package: org.eclipse.osgi.framework.internal.core,
+Export-Package: org.apache.http.client.utils,
+ org.lightcouch
+Import-Package: com.google.common.io;version="10.0.1",
+ org.apache.lucene.util,
+ org.bbaw.bts.btsmodel,
+ org.bbaw.bts.modelUtils,
+ org.eclipse.emf.ecore,
+ org.eclipse.osgi.framework.internal.core,
  org.osgi.framework

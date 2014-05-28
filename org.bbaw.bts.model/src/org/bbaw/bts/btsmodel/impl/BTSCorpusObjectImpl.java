@@ -37,6 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#is_deleted <em>deleted</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getPassport <em>Passport</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCorpusObjectImpl#getCorpusPrefix <em>Corpus Prefix</em>}</li>
@@ -156,6 +157,15 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	 * @ordered
 	 */
 	protected boolean _deleted = _DELETED_EDEFAULT;
+	/**
+	 * The cached value of the '{@link #getConflictingRevs() <em>Conflicting Revs</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConflictingRevs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> conflictingRevs;
 	/**
 	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -362,6 +372,18 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getConflictingRevs() {
+		if (conflictingRevs == null) {
+			conflictingRevs = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS);
+		}
+		return conflictingRevs;
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -529,6 +551,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return getReaders();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
 				return is_deleted();
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS:
+				return getConflictingRevs();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return getRelations();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -572,6 +596,10 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
 				set_deleted((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				getConflictingRevs().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
@@ -619,6 +647,9 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
 				set_deleted(_DELETED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				return;
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				getRelations().clear();
 				return;
@@ -657,6 +688,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				return readers != null && !readers.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED:
 				return _deleted != _DELETED_EDEFAULT;
+			case BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS:
+				return conflictingRevs != null && !conflictingRevs.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
@@ -690,6 +723,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
 				case BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
+				case BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS;
 				default: return -1;
 			}
 		}
@@ -717,6 +751,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_CORPUS_OBJECT__UPDATERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_CORPUS_OBJECT__READERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_CORPUS_OBJECT__DELETED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 				default: return -1;
 			}
 		}
@@ -782,6 +817,8 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 		result.append(readers);
 		result.append(", _deleted: ");
 		result.append(_deleted);
+		result.append(", conflictingRevs: ");
+		result.append(conflictingRevs);
 		result.append(", corpusPrefix: ");
 		result.append(corpusPrefix);
 		result.append(", workPhase: ");

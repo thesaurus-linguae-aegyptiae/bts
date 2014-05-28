@@ -3,19 +3,26 @@ package org.bbaw.bts.core.services.impl.services;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.Backend2ClientUpdateListener;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 
@@ -35,6 +42,15 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 	
 	@Inject
 	private Logger logger;
+	
+	private IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+
+	private String btsUUID = prefs.get(BTSConstants.BTS_UUID, null);
+	
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.AUTHENTICATED_USER)
+	private BTSUser authenticatedUser;
 
 	@Override
 	public void handleUpdate(BTSModelUpdateNotification notification)
@@ -43,7 +59,12 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 		logger.info("Notify Listener about change: " + ", Changed object id: " + notification.getObject());
 		if (notification.getObject() instanceof DBLease)
 		{
-			eventBroker.post("lease_update/async", notification);
+				DBLease lease = (DBLease) notification.getObject();
+				if (!(lease.getBtsUUID() != null && lease.getBtsUUID().equals(btsUUID)
+						&& authenticatedUser.get_id().equals(lease.getUserId()))) {
+					eventBroker.post("lease_update/async", notification);
+				}
+			
 		} else
 		{
 			// filter

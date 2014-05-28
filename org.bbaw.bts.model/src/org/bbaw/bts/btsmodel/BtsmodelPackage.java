@@ -614,13 +614,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__DELETED = BTS_OBJECT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__CONFLICTING_REVS = BTS_OBJECT_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT_FEATURE_COUNT + 7;
+	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -629,7 +638,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__PASSPORT = BTS_OBJECT_FEATURE_COUNT + 8;
+	int BTS_CORPUS_OBJECT__PASSPORT = BTS_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
@@ -638,7 +647,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BTS_OBJECT_FEATURE_COUNT + 9;
+	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BTS_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -647,7 +656,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__WORK_PHASE = BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_CORPUS_OBJECT__WORK_PHASE = BTS_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>BTS Corpus Object</em>' class.
@@ -656,7 +665,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 11;
+	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -846,6 +855,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -1080,6 +1098,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -2578,6 +2605,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3307,13 +3343,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSDB_BASE_OBJECT__DELETED = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSDB_BASE_OBJECT__CONFLICTING_REVS = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>BTSDB Base Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+	int BTSDB_BASE_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -3395,6 +3440,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_USER__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3728,6 +3782,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_COMMENT__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -4115,6 +4178,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -4697,6 +4769,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION__DELETED = BTSDB_BASE_OBJECT__DELETED;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5011,6 +5092,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -5328,6 +5418,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -6122,6 +6221,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP__DELETED = BTSDB_BASE_OBJECT__DELETED;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6436,6 +6544,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -7036,6 +7153,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_THS_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7280,13 +7406,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT__DELETED = BTS_OBJECT_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__CONFLICTING_REVS = BTS_OBJECT_FEATURE_COUNT + 7;
+
+	/**
 	 * The feature id for the '<em><b>Prefix</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__PREFIX = BTS_OBJECT_FEATURE_COUNT + 7;
+	int BTS_PROJECT__PREFIX = BTS_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -7295,7 +7430,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DESCRIPTION = BTS_OBJECT_FEATURE_COUNT + 8;
+	int BTS_PROJECT__DESCRIPTION = BTS_OBJECT_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Db Connection</b></em>' containment reference.
@@ -7304,7 +7439,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DB_CONNECTION = BTS_OBJECT_FEATURE_COUNT + 9;
+	int BTS_PROJECT__DB_CONNECTION = BTS_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Db Collections</b></em>' containment reference list.
@@ -7313,7 +7448,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT__DB_COLLECTIONS = BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_PROJECT__DB_COLLECTIONS = BTS_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>BTS Project</em>' class.
@@ -7322,7 +7457,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 11;
+	int BTS_PROJECT_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -7762,6 +7897,15 @@ public interface BtsmodelPackage extends EPackage {
 	int DB_LEASE__DELETED = BTSDB_BASE_OBJECT__DELETED;
 
 	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_LEASE__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -8134,6 +8278,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int GRAPHIC_SELECTION_COUNTER__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int GRAPHIC_SELECTION_COUNTER__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Date Of Last Selection</b></em>' attribute.
@@ -9458,6 +9611,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSDBBaseObject__deleted();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getConflictingRevs <em>Conflicting Revs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Conflicting Revs</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSDBBaseObject#getConflictingRevs()
+	 * @see #getBTSDBBaseObject()
+	 * @generated
+	 */
+	EAttribute getBTSDBBaseObject_ConflictingRevs();
 
 	/**
 	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getDBCollectionKey() <em>Get DB Collection Key</em>}' operation.
@@ -11948,6 +12112,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTSDB_BASE_OBJECT__DELETED = eINSTANCE.getBTSDBBaseObject__deleted();
+
+		/**
+		 * The meta object literal for the '<em><b>Conflicting Revs</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTSDB_BASE_OBJECT__CONFLICTING_REVS = eINSTANCE.getBTSDBBaseObject_ConflictingRevs();
 
 		/**
 		 * The meta object literal for the '<em><b>Get DB Collection Key</b></em>' operation.

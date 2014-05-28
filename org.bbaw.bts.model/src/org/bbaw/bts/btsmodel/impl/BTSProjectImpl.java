@@ -34,6 +34,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#is_deleted <em>deleted</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getPrefix <em>Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDescription <em>Description</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl#getDbConnection <em>Db Connection</em>}</li>
@@ -164,6 +165,16 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * @ordered
 	 */
 	protected boolean _deleted = _DELETED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConflictingRevs() <em>Conflicting Revs</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConflictingRevs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> conflictingRevs;
 
 	/**
 	 * The default value of the '{@link #getPrefix() <em>Prefix</em>}' attribute.
@@ -390,6 +401,18 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getConflictingRevs() {
+		if (conflictingRevs == null) {
+			conflictingRevs = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS);
+		}
+		return conflictingRevs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getPrefix()
 	{
 		return prefix;
@@ -539,6 +562,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return getReaders();
 			case BtsmodelPackage.BTS_PROJECT__DELETED:
 				return is_deleted();
+			case BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS:
+				return getConflictingRevs();
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				return getPrefix();
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
@@ -583,6 +608,10 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return;
 			case BtsmodelPackage.BTS_PROJECT__DELETED:
 				set_deleted((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				getConflictingRevs().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				setPrefix((String)newValue);
@@ -631,6 +660,9 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 			case BtsmodelPackage.BTS_PROJECT__DELETED:
 				set_deleted(_DELETED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				return;
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				setPrefix(PREFIX_EDEFAULT);
 				return;
@@ -670,6 +702,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				return readers != null && !readers.isEmpty();
 			case BtsmodelPackage.BTS_PROJECT__DELETED:
 				return _deleted != _DELETED_EDEFAULT;
+			case BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS:
+				return conflictingRevs != null && !conflictingRevs.isEmpty();
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 				return PREFIX_EDEFAULT == null ? prefix != null : !PREFIX_EDEFAULT.equals(prefix);
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
@@ -704,6 +738,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				case BtsmodelPackage.BTS_PROJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
 				case BtsmodelPackage.BTS_PROJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
 				case BtsmodelPackage.BTS_PROJECT__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
+				case BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS: return BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS;
 				default: return -1;
 			}
 		}
@@ -732,6 +767,7 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_PROJECT__UPDATERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_PROJECT__READERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_PROJECT__DELETED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS;
 				default: return -1;
 			}
 		}
@@ -798,6 +834,8 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 		result.append(readers);
 		result.append(", _deleted: ");
 		result.append(_deleted);
+		result.append(", conflictingRevs: ");
+		result.append(conflictingRevs);
 		result.append(", prefix: ");
 		result.append(prefix);
 		result.append(", description: ");

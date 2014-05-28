@@ -1,5 +1,8 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +12,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.Backend2ClientUpdateListener;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
@@ -18,8 +22,15 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.percolate.PercolateRequestBuilder;
 import org.elasticsearch.action.percolate.PercolateResponse;
@@ -30,11 +41,14 @@ import org.lightcouch.ChangesResult;
 import org.lightcouch.ChangesResult.Row;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbInfo;
+import org.lightcouch.Response;
 
 import com.google.gson.JsonObject;
 
 public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 {
+
+	protected static final String CHANGES_STYLE = "all_docs";
 
 	@Inject
 	private DBConnectionProvider connectionProvider;
@@ -81,7 +95,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 							signalUpdate(feed, docId, dbCollection);
 						} catch (Exception e)
 						{
-							e.printStackTrace();
+							logger.error("Backend2DB listener has Exception: ", e);
 						}
 					}
 				}
@@ -117,6 +131,8 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		} else
 		// object not deleted
 		{
+			//check for conflicts
+
 			notification.setLoaded(true);
 
 			if (generalPurposeDao.objectIsLoaded(dbCollection, docId))
@@ -141,14 +157,18 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 				try {
 					object = generalPurposeDao.find(docId, dbCollection);
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					object = loadFromFeed(feed);
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+					object = loadFromFeed(feed, dbCollection);
 				}
+			}
+			if (object == null)
+			{
+					object = loadFromFeed(feed, dbCollection);
 			}
 		}
 //		Assert.isNotNull(object);
-		if (object != null) // object either loaded and deleted or not deleted
+		if (object != null || notification.isDeleted()) // object either loaded and deleted or not deleted
 							// and loaded or notloaded
 		{
 			notification.setObject(object);
@@ -162,8 +182,34 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	}
 
-	private BTSDBBaseObject loadFromFeed(Row feed) {
+
+	private BTSDBBaseObject loadFromFeed(Row feed, String dbCollection) {
 		JsonObject jso = feed.getDoc();
+		URI uri = URI.createURI(connectionProvider.getLocalDBURL() + "/" + dbCollection + "/" + feed.getId());
+		System.out.println("loadFromFeed " + uri);
+		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		
+		logger.info(jso.toString());
+		InputStream inputStream;
+		try
+		{
+
+			if (resource.getContents().isEmpty())
+			{
+//				EmfModelHelper.loadFromString(jso.toString(), classType)
+
+				inputStream = new ByteArrayInputStream(jso.toString().getBytes(BTSConstants.ENCODING));
+				final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
+				loader.fillResource(resource);
+			}
+			if (!resource.getContents().isEmpty())
+			{
+				return ((BTSDBBaseObject) resource.getContents().get(0));
+			}
+		} catch (UnsupportedEncodingException e)
+		{
+			e.printStackTrace();
+		}
 		logger.info("Object not found, feed object: " + jso);
 		return null;
 	}
@@ -192,6 +238,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 			{
 				Changes changes = client.changes().includeDocs(true).since(since)
 						.heartBeat(DaoConstants.CHANGES_HEARTBEAT)
+						.style(CHANGES_STYLE)
 
 						.continuousChanges();
 				changesMap.put(dbCollection, changes);

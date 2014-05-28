@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#is_deleted <em>deleted</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  * </ul>
  * </p>
  *
@@ -130,6 +131,16 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 * @ordered
 	 */
 	protected boolean _deleted = _DELETED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConflictingRevs() <em>Conflicting Revs</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConflictingRevs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> conflictingRevs;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -269,10 +280,22 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getConflictingRevs() {
+		if (conflictingRevs == null) {
+			conflictingRevs = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS);
+		}
+		return conflictingRevs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNot
+	 */
 	public String getDBCollectionKey() {
 		// TODO: implement this method
 		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return null;
 	}
 
 	/**
@@ -295,6 +318,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return getReaders();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
 				return is_deleted();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
+				return getConflictingRevs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -328,6 +353,10 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
 				set_deleted((Boolean)newValue);
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				getConflictingRevs().addAll((Collection<? extends String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -358,6 +387,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
 				set_deleted(_DELETED_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -382,6 +414,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return readers != null && !readers.isEmpty();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
 				return _deleted != _DELETED_EDEFAULT;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
+				return conflictingRevs != null && !conflictingRevs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
@@ -422,6 +456,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 		result.append(readers);
 		result.append(", _deleted: ");
 		result.append(_deleted);
+		result.append(", conflictingRevs: ");
+		result.append(conflictingRevs);
 		result.append(')');
 		return result.toString();
 	}

@@ -69,6 +69,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			addUpdatersPropertyDescriptor(object);
 			addReadersPropertyDescriptor(object);
 			add_deletedPropertyDescriptor(object);
+			addConflictingRevsPropertyDescriptor(object);
 			addPrefixPropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
 		}
@@ -236,6 +237,28 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 	}
 
 	/**
+	 * This adds a property descriptor for the Conflicting Revs feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addConflictingRevsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_conflictingRevs_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_conflictingRevs_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__CONFLICTING_REVS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Prefix feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -360,6 +383,7 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			case BtsmodelPackage.BTS_PROJECT__UPDATERS:
 			case BtsmodelPackage.BTS_PROJECT__READERS:
 			case BtsmodelPackage.BTS_PROJECT__DELETED:
+			case BtsmodelPackage.BTS_PROJECT__CONFLICTING_REVS:
 			case BtsmodelPackage.BTS_PROJECT__PREFIX:
 			case BtsmodelPackage.BTS_PROJECT__DESCRIPTION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

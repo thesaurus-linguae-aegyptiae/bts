@@ -14,6 +14,7 @@ import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -47,7 +48,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 		IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider,
 		IItemColorProvider, IItemFontProvider
 {
-	protected BTSEvaluationService evaluationService = StaticAccessController.getContext().get(BTSEvaluationService.class);
+	private BTSEvaluationService evaluationService;
 
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
@@ -210,6 +211,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY:
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
@@ -242,9 +244,9 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 	    {
 			 List<Object> images = new ArrayList<Object>(2);
 		      images.add(image);
-			if(evaluationService.authenticatedUserHasLock(object))
+			if(getEvaluationService() != null && !getEvaluationService().authenticatedUserHasLock(object))
 			{
-				Image i = resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_PEN);
+				Image i = resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK);
 				if (i != null)
 			    {
 					images.add(i); 
@@ -252,11 +254,31 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 			}
 			else
 			{
-			      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK)); 
+			      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_PEN)); 
 			}
 	     
 	      image = new ComposedImage(images);
 	    }
+		if (object instanceof BTSDBBaseObject
+				&& !((BTSDBBaseObject) object).getConflictingRevs().isEmpty()) {
+			List<Object> images = new ArrayList<Object>(2);
+			images.add(image);
+			images.add(resourceProvider.getImage(Display.getDefault(),
+					BTSResourceProvider.IMG_OVR_CONFLICTS));
+			image = new ComposedImage(images);
+		}
 		return super.overlayImage(object, image);
+	}
+
+	protected BTSEvaluationService getEvaluationService() {
+		if (evaluationService == null)
+		{
+			IEclipseContext context = StaticAccessController.getContext();
+			if (context != null)
+			{
+				evaluationService = context.get(BTSEvaluationService.class);
+			}
+		}
+		return evaluationService;
 	}
 }

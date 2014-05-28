@@ -1,8 +1,10 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
@@ -17,6 +19,17 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ByteArrayEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
@@ -52,6 +65,7 @@ import org.elasticsearch.search.SearchHit;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.DesignDocument;
 import org.lightcouch.NoDocumentException;
+import org.lightcouch.Response;
 import org.lightcouch.View;
 
 import com.google.gson.JsonObject;
@@ -69,7 +83,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	private IEclipseContext context;
 	
 	@Inject
-	private Logger logger;
+	protected Logger logger;
 
 	protected String protocol;
 	protected String host;
@@ -85,7 +99,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 
 	@Override
-	public void add(E entity, String path)
+	public E add(E entity, String path)
 	{
 		Map<String, String> options = new HashMap<String, String>();
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING); // set
@@ -114,6 +128,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			logger.error("error trying to save: " + entity, e);
 //			throw new RuntimeException("Save Resource failed", e);
 		}
+		if (!resource.getContents().isEmpty())
+		{
+			return (E) resource.getContents().remove(0);
+		}
+		return entity;
 	}
 
 	@Override
@@ -129,7 +148,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 
 	@Override
-	public void update(E entity, String path)
+	public E update(E entity, String path)
 	{
 		try
 		{
@@ -139,6 +158,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			e.printStackTrace();
 			throw new RuntimeException("Save Resource failed");
 		}
+		return entity;
 	}
 
 	@Override
@@ -158,19 +178,100 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			try {
 				entity.eResource().delete(null);
 			} catch (IOException e) {
-				e.printStackTrace();
-				throw new RuntimeException("Delete Resource failed");
+//				e.printStackTrace();
+//				throw new RuntimeException("Delete Resource failed");
+				E entity2 = reload((K) entity.get_id(), path);
+				if (entity2 != null)
+				{
+					entity = entity2;
+					try {
+						entity.eResource().delete(null);
+					} catch (IOException e1) {
+						e.printStackTrace();
+						throw new RuntimeException("Delete Resource failed");
+					}
+				}
 			}
 		}
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
-		if (entity.get_rev() == null)
+		if (entity.get_rev() != null)
 		{
-			System.out.println(entity);
+			try {
+				dbClient.remove(entity.get_id(), entity.get_rev());
+			} catch (Exception e) {
+				E entity2 = reload((K) entity.get_id(), path);
+				if (entity2 != null)
+				{
+					entity = entity2;
+					dbClient.remove(entity.get_id(), entity.get_rev());
+				}
+			}
 		}
-		dbClient.remove(entity.get_id(), entity.get_rev());
 
 	}
+	
+	public void purge(E entity, String path) {
+		if (entity == null)
+			return;
+		if (entity.get_rev() == null) {
+			E entity2 = reload((K) entity.get_id(), path);
+			if (entity2 != null) {
+				entity = entity2;
+			}
+		}
+		
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, path);
+		String[] revs = new String[1];
+		revs[0] = entity.get_rev();
+		Response resp = dbClient.purge(path, entity.get_id(), revs);
+		System.out.println("purged object : " + entity.get_id() + ", repsonse: " + resp);
+		
+//		HttpClient client = new DefaultHttpClient();
+//		HttpPost post = new HttpPost(connectionProvider.getLocalDBURL() + "/"
+//				+ path + "/_purge");
+//
+//		post.setHeader("Content-Type", "application/json");
+//
+//		try {
+//
+//			List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(1);
+//
+//			String string = "{\"" + entity.get_id() + "\" : [\""
+//					+ entity.get_rev() + "\"  ]}";
+//			HttpEntity body = new ByteArrayEntity(string.getBytes("UTF-8"));
+//			System.out.println(string);
+//			// nameValuePairs.add(new BasicNameValuePair("i", "youremail"));
+//			// nameValuePairs
+//			// .add(new BasicNameValuePair("Passwd", "yourpassword"));
+//			// nameValuePairs.add(new BasicNameValuePair("accountType",
+//			// "GOOGLE"));
+//			// nameValuePairs.add(new BasicNameValuePair("source",
+//			// "Google-cURL-Example"));
+//			// nameValuePairs.add(new BasicNameValuePair("service", "ac2dm"));
+//
+//			post.setEntity(body);
+//			HttpResponse response = client.execute(post);
+//			BufferedReader rd = new BufferedReader(new InputStreamReader(
+//					response.getEntity().getContent()));
+//
+//			String line = "";
+//			while ((line = rd.readLine()) != null) {
+//				System.out.println(line);
+//				if (line.startsWith("Auth=")) {
+//					String key = line.substring(5);
+//					// do something with the key
+//				}
+//
+//			}
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+
+	}
+
+	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -193,6 +294,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			Object o = resource.getContents().get(0);
 			if (o instanceof BTSDBBaseObject)
 			{
+				checkForConflicts((BTSDBBaseObject) o, path);
 				return (E) o;
 			}
 		}
@@ -219,6 +321,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			Object o = resource.getContents().get(0);
 			if (o instanceof BTSDBBaseObject)
 			{
+				//FIXME check for conflicts , get path from uri
+//				checkForConflicts((BTSCorpusObject) o, path);
 				return (E) o;
 			}
 		}
@@ -253,7 +357,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((BTSDBBaseObject) resource.getContents().get(0));
+				E o = (E) resource.getContents().get(0);
+				if (o instanceof BTSDBBaseObject)
+				{
+					checkForConflicts((BTSDBBaseObject) o, path);
+				}
+				results.add(o);
 			}
 		}
 		if (!results.isEmpty())
@@ -267,9 +376,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	public E reload(K key, String path)
 	{
 		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key.toString());
-		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		if (!resource.getContents().isEmpty())
+//		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//		URI uri = URI.createURI(getLocalDBURL() + "/" + dbPath + "/" + objectId);
+		Map map = ((ResourceSetImpl) connectionProvider.getEmfResourceSet()).getURIResourceMap();
+		if (map.containsKey(uri))
 		{
+			Resource resource = (Resource) map.get(uri);
 			EObject eObject = resource.getContents().get(0);
 			Copier copier = new Copier();
 			EClass eClass = eObject.eClass();
@@ -284,6 +396,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				if (copyEObject instanceof BTSDBBaseObject) {
 
 					eObject = EmfModelHelper.mergeChanges(eObject, copyEObject);
+					checkForConflicts((BTSDBBaseObject) eObject, path);
 					return (E) eObject;
 				}
 			}
@@ -293,6 +406,14 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			return find(key, path);
 		}
 		return null;
+	}
+
+	protected void checkForConflicts(BTSDBBaseObject object, String path) {
+		if (object == null) return;
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, path != null ? path : object.getDBCollectionKey());
+		List<String> conflicts = dbClient.listConflictingRevs(path, object.get_id());
+		object.getConflictingRevs().addAll(conflicts);
 	}
 
 	public void createView(String path, String sourcePath, String viewName)
@@ -372,7 +493,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			for (SearchHit hit : response.getHits())
 			{
 				try {
-					result.add(loadObjectFromHit(hit, indexName));
+					Object o = loadObjectFromHit(hit, indexName);
+					if (o instanceof BTSDBBaseObject)
+					{
+						checkForConflicts((BTSDBBaseObject) o,indexName);
+					}
+					result.add((E) o);
 				} catch (Exception e) {
 					logger.info("Query exception", e);
 				}
@@ -394,7 +520,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			logger.info("Query result size: " + result.size());
 			for (SearchHit hit : response.getHits()) {
 				try {
-					result.add(loadObjectFromHit(hit, indexName));
+					Object o = loadObjectFromHit(hit, indexName);
+					if (o instanceof BTSDBBaseObject)
+					{
+						checkForConflicts((BTSDBBaseObject) o, indexName);
+					}
+					result.add((E) o);
 				} catch (Exception e) {
 					logger.info("Query exception", e);
 				}
@@ -547,7 +678,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((E) resource.getContents().get(0));
+				E o = (E) resource.getContents().get(0);
+				if (o instanceof BTSDBBaseObject)
+				{
+					checkForConflicts((BTSDBBaseObject) o, path);
+				}
+				results.add(o);
 			}
 		}
 		if (!results.isEmpty())
@@ -636,9 +772,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	}
 
-	public void setDeleted(E entity, String path, boolean deleted) {
+	public E setDeleted(E entity, String path, boolean deleted) {
 		if (entity == null)
-			return;
+			return entity;
 		entity.set_deleted(deleted);
 		Map<String, String> options = new HashMap<String, String>();
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING); // set
@@ -666,6 +802,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			logger.error("error trying to save: " + entity, e);
 			// throw new RuntimeException("Save Resource failed", e);
 		}
+		if (!resource.getContents().isEmpty())
+		{
+			return (E) resource.getContents().get(0);
+		}
+		return entity;
 	}
 	
 

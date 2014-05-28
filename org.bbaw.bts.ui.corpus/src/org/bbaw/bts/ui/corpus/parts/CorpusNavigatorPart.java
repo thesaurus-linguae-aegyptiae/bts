@@ -13,10 +13,12 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
+import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -38,6 +40,7 @@ import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.common.util.URI;
@@ -110,10 +113,13 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	{
 		logger.info("Calling postconstruct on CorpusNavigatorPart");
 		parent.setLayout(new GridLayout());
+		((GridLayout) parent.getLayout()).marginHeight = 0;
+		((GridLayout) parent.getLayout()).marginWidth = 0;
 		composite = new Composite(parent, SWT.NONE);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new GridLayout());
-
+		((GridLayout) composite.getLayout()).marginHeight = 0;
+		((GridLayout) composite.getLayout()).marginWidth = 0;
 
 		treeViewer = new TreeViewer(composite);
 		treeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -484,4 +490,17 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		return maps;
 	}
 
+	@Inject
+	void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
+		if (selection == null) {
+			/* implementation not shown */
+		} else {
+			if ((selection instanceof BTSCorpusObject) && ((selection instanceof BTSThsEntry)
+					|| (selection instanceof BTSListEntry))) {
+				treeViewer.setSelection(null);
+			}
+			System.out.println("CorpusNavigator selection received");
+		}
+	}
 }

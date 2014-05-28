@@ -113,6 +113,7 @@ import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 
 public class PassportEditorPart {
+	private static final long LOADING_DELAY = 1000;
 	@Inject
 	private BTSConfigurationController configurationController;
 	@Inject
@@ -183,9 +184,11 @@ public class PassportEditorPart {
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		GridLayout gl_parent = new GridLayout(1, false);
+
 		gl_parent.horizontalSpacing = 1;
 		parent.setLayout(gl_parent);
-
+		((GridLayout) parent.getLayout()).marginHeight = 0;
+		((GridLayout) parent.getLayout()).marginWidth = 0;
 		mainComposite = new Composite(parent, SWT.NONE);
 		mainComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
 		GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, true, true, 1,
@@ -719,13 +722,38 @@ public class PassportEditorPart {
 					// TODO make save configurable this is autosave!!!
 					save();
 					corpusObject = (BTSCorpusObject) selection;
-					if (loaded) {
-						loadInput(corpusObject);
-					}
+					delayedSetSeletction((BTSCorpusObject) selection);
+					
 				}
 			}
 			System.out.println("Passport selection received");
 		}
+	}
+
+	private void delayedSetSeletction(final BTSCorpusObject jobSelection) {
+		Job job = new Job("Delay Set Selection") {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				synchronized (corpusObject) {
+					if (loaded && corpusObject != null) {
+
+						if (corpusObject.equals(jobSelection)) {
+							sync.asyncExec(new Runnable() {
+
+								@Override
+								public void run() {
+									loadInput(corpusObject);
+								}
+							});
+						}
+					}
+				}
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule(LOADING_DELAY);
+
 	}
 
 	private void loadInput(BTSCorpusObject object) {

@@ -53,7 +53,9 @@ public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> impl
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((BTSAnnotation) resource.getContents().get(0));
+				BTSAnnotation an =(BTSAnnotation) resource.getContents().get(0);
+				checkForConflicts(an, path);
+				results.add(an);
 			}
 		}
 		if (!results.isEmpty())

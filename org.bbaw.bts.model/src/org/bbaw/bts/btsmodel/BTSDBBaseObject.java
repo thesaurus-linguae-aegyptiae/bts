@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getUpdaters <em>Updaters</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#is_deleted <em>deleted</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getConflictingRevs <em>Conflicting Revs</em>}</li>
  * </ul>
  * </p>
  *
@@ -163,6 +164,22 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * @generated
 	 */
 	void set_deleted(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Conflicting Revs</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Conflicting Revs</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_ConflictingRevs()
+	 * @model default="" transient="true"
+	 * @generated
+	 */
+	EList<String> getConflictingRevs();
 
 	/**
 	 * <!-- begin-user-doc -->

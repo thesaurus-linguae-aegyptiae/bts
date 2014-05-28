@@ -72,7 +72,9 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
 						new HashMap<Object, Object>());
 				loader.fillResource(resource);
-				results.add((BTSTextCorpus) resource.getContents().get(0));
+				BTSTextCorpus tc = (BTSTextCorpus) resource.getContents().get(0);
+				checkForConflicts(tc, path);
+				results.add(tc);
 			}
 		}
 		if (!results.isEmpty())

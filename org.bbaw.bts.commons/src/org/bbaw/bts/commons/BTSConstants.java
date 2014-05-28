@@ -54,6 +54,7 @@ public class BTSConstants
 	public static final int DEFAULT_LOCK_TTL = 500000;
 	public static final String DEFAULT_LOCALE_LANG = "en";
 	public static final String BTS_UUID = "bts_uuid";
+	public static final String DEFAULT_NTP_SERVERS = "time.bbaw.de|times.tubit.tu-berlin.de";
 
 	private BTSConstants()
 	{

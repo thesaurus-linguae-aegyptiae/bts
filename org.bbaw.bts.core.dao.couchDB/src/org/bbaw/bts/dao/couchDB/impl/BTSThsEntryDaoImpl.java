@@ -102,7 +102,9 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 							new HashMap<Object, Object>());
 					loader.fillResource(resource);
 					if (!resource.getContents().isEmpty()) {
-						results.add((BTSThsEntry) resource.getContents().get(0));
+						BTSThsEntry ths = (BTSThsEntry) resource.getContents().get(0);
+						checkForConflicts(ths, path);
+						results.add(ths);
 					}
 				}
 				
