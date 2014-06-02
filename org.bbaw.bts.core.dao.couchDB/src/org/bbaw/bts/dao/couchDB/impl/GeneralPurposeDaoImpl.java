@@ -1,15 +1,23 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
+import org.lightcouch.CouchDbClient;
 
 public class GeneralPurposeDaoImpl extends CouchDBDao<BTSDBBaseObject, String> implements GeneralPurposeDao
 {
@@ -45,4 +53,5 @@ public class GeneralPurposeDaoImpl extends CouchDBDao<BTSDBBaseObject, String> i
 			return result;
 		}
 	}
+
 }

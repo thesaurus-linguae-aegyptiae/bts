@@ -837,7 +837,7 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			{
 				return false;
 			}
-			return this.get_id().equals(o.get_id());
+			return super.equals(obj);
 		}
 		return false;
 	}

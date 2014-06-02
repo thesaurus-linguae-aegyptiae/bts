@@ -331,5 +331,39 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		return filter(objects);
 	}
 
+	@Override
+	public BTSCorpusObject find(String key, String path, String revision) {
+		if (path != null && !"".equals(path))
+		{
+			return corpusObjectDao.find(key, path, revision);
+		}
+		BTSCorpusObject tcObject = null;
+		tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key, revision);
+		if (tcObject != null)
+		{
+			return tcObject;
+		}
+		for (String c : getActive_corpora())
+		{
+			tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c, revision);
+			if (tcObject != null)
+			{
+				return tcObject;
+			}
+		}
+		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		{
+			for (String c : getActive_corpora())
+			{
+				tcObject = corpusObjectDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c, revision);
+				if (tcObject != null)
+				{
+					return tcObject;
+				}
+			}
+		}
+		return tcObject;
+	}
+
 
 }

@@ -67,5 +67,6 @@ public class BTSUIConstants {
 	public static final String SELECTION_TYPE = "selectionType";
 	public static final Object SELECTION_TYPE_SECONDARY = "selectionType.secondary";
 	public static final Object SELECTION_TYPE_PRIMARY = "selectionType.primary";
+	public static final String PART_SAVE_ON_DESELCTION = "save.on.deselection";
 
 }

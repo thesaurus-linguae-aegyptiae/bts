@@ -18,6 +18,8 @@ public interface RemoteGenericDao<E extends BTSDBBaseObject, K>
 
 
 	E find(K key, String path);
+	
+	E find(K key, String path, String revision);
 
 	E reload(K key, String path);
 

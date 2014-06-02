@@ -119,6 +119,7 @@ public class ThsNavigator implements ScatteredCachingPart {
 	private Composite binTabItemComp;
 	private TreeViewer bintreeViewer;
 	private SuppressDeletedViewerFilter deletedFilter;
+	private boolean loaded;
 	
 	
 
@@ -235,6 +236,7 @@ public class ThsNavigator implements ScatteredCachingPart {
 
 		tabFolder.setSelection(mainTabItem);
 		parent.layout();
+		loaded = true;
 		// parent.pack();
 		// tryRunnable();
 	}
@@ -603,7 +605,10 @@ public class ThsNavigator implements ScatteredCachingPart {
 			/* implementation not shown */
 		} else {
 			if (!(selection instanceof BTSThsEntry)) {
-				mainTreeViewer.setSelection(null);
+				if (loaded)
+				{
+					mainTreeViewer.setSelection(null);
+				}
 			}
 			System.out.println("CorpusNavigator selection received");
 		}

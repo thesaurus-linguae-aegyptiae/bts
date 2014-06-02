@@ -6,12 +6,18 @@
   <imports xsi:type="commands:Command" xmi:id="_3DHYgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.restore"/>
   <imports xsi:type="commands:Command" xmi:id="_lOfkUKkGEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.deletePermanently"/>
   <imports xsi:type="commands:Command" xmi:id="_0MnaMNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.main.command.editUpdatersReaders"/>
+  <imports xsi:type="commands:Command" xmi:id="_LECdIOpCEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.main.command.openConflictsDialog"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpora.png">
       <menus xmi:id="_NCyx4Jr7EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.corpusNavigator.viewmenu" label="VL" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png">
         <tags>ViewMenu</tags>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_MQirAJr6EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.4" label="Create New Text Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="__HK5oJr8EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.5" label="Present"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_A_T4wOpWEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
+      </menus>
+      <menus xsi:type="menu:PopupMenu" xmi:id="_qnO8IOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.corpusnavigator.popupmenu">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_spRFUOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.4" label="Create New Text Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_tDTV8OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
       </menus>
       <toolbar xmi:id="_Pg3koD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.toolbar.0">
         <children xsi:type="menu:HandledToolItem" xmi:id="_Ur-XkD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" tooltip="New Corpus" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -70,6 +76,14 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_dnddgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KJGZcKkIEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_2xdVgNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_RGkAQOpCEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
+      </menus>
+      <menus xmi:id="_x-s48OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.menu.0">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_15Yl0OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_2YeVkOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.8" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_27b4sOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_3X_44OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_35VEUOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
       </menus>
       <toolbar xmi:id="_-h03AKL2EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.toolbar.2">
         <children xsi:type="menu:HandledToolItem" xmi:id="_ClMfMKOOEeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/thss_add.png" tooltip="Add Thesaurus Root Entry" command="_K0TWAKOLEeOuZIAmNo_Bng"/>

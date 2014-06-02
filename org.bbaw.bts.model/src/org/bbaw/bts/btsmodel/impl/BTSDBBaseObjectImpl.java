@@ -4,7 +4,9 @@ package org.bbaw.bts.btsmodel.impl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
@@ -472,9 +474,24 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			{
 				return false;
 			}
-			return this.get_id().equals(o.get_id());
+			else if(this.get_id().equals(o.get_id()))
+			{
+				return get_rev().equals(((BTSDBBaseObject) obj).get_rev());
+
+			}
 		}
 		return false;
 	}
+
+	
+	@Override
+	public int hashCode() {
+		if (_id != null)
+		{
+			return (_id + _rev).hashCode();
+		}
+		return super.hashCode();
+	}
+
 
 } // BTSDBBaseObjectImpl

@@ -19,15 +19,22 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 
 	void remove(E entity, String path);
 	
+	boolean remove(E entity, String path, String revision);
+
+	
 	void purge(E entity, String path);
 	
 	E setDeleted(E entity, String path, boolean deleted);
 
 	E find(K key, String path);
 	
+	E find(K key, String path, String revision);
+	
 	E find(URI uri);
 
 	E reload(K key, String path);
+	
+	void reloadConflicts(E entity);
 
 	List<E> list(String path, String objectState);
 

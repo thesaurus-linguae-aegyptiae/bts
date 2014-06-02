@@ -15,6 +15,7 @@ public class StringIsRegexPatternValidator implements IValidator {
 	public IStatus validate(Object value) {
 		if (value instanceof String && !"".equals(value)) {
 			try {
+				@SuppressWarnings("unused")
 				Pattern p = Pattern.compile((String) value);
 				return ValidationStatus.ok();
 			} catch (PatternSyntaxException e) {

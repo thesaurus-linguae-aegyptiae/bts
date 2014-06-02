@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,6 +156,27 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 			}
 		}
 		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public E find(K key, String path, String revision)
+	{
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, path);
+		InputStream is = dbClient.find((String)key, revision);
+		final JSONLoad loader = new JSONLoad(is, new HashMap<Object, Object>());
+		Collection<EObject> objects = loader.loadObjects(connectionProvider.getEmfResourceSet());
+		if (!objects.isEmpty())
+		{
+			Object o =  objects.iterator().next();
+			if (o instanceof BTSDBBaseObject)
+			{
+				return (E)o;
+			}
+		}
+		return null;
+		
 	}
 
 	@SuppressWarnings("unchecked")

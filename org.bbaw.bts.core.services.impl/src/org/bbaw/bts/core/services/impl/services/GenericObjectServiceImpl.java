@@ -21,6 +21,7 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
+import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
@@ -40,6 +41,10 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	
 	@Inject
 	protected CorpusObjectDao corpusObjectDao;
+	
+	@Inject
+	protected GeneralPurposeDao generalPurposeDao;
+
 
 	@Inject
 	protected IDService idService;
@@ -109,6 +114,11 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 			// FIXME fill out!
 		}
 	}
+	
+	public void reloadConflicts(E entity)
+	{
+		 generalPurposeDao.reloadConflicts(entity);
+	}
 
 	@Override
 	public abstract boolean save(E entity);
@@ -130,8 +140,48 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Override
 	public abstract void remove(E entity);
 
+	public boolean removeRevision(E entity, String revision) {
+		return generalPurposeDao.remove(entity, entity.getDBCollectionKey(), revision);
+
+		}
+		
 	@Override
 	public abstract E find(K key);
+
+	@Override
+	public E find(K key, String path, String revision) {
+		if (path != null && !"".equals(path))
+		{
+			return (E) generalPurposeDao.find((String)key, path, revision);
+		}
+//		BTSCorpusObject tcObject = null;
+//		tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + main_corpus_key, revision);
+//		if (tcObject != null)
+//		{
+//			return tcObject;
+//		}
+//		for (String c : getActive_corpora())
+//		{
+//			tcObject = corpusObjectDao.find(key, main_project + ServiceConstants.CORPUS_INTERFIX + c, revision);
+//			if (tcObject != null)
+//			{
+//				return tcObject;
+//			}
+//		}
+//		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+//		{
+//			for (String c : getActive_corpora())
+//			{
+//				tcObject = corpusObjectDao.find(key, p + ServiceConstants.CORPUS_INTERFIX + c, revision);
+//				if (tcObject != null)
+//				{
+//					return tcObject;
+//				}
+//			}
+//		}
+//		return tcObject;
+		return null;
+	}
 
 	@Override
 	public abstract List<E> list(String objectState);

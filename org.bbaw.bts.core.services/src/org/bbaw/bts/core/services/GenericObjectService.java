@@ -19,8 +19,13 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	void update(E entity);
 
 	void remove(E entity);
+	
+	boolean removeRevision(E entity, String revision);
+
 
 	E find(K key);
+	
+	E find(K key, String path, String revision);
 
 	List<E> list(String objectState);
 
@@ -36,5 +41,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	SearchRequestBuilder getSearchRequestBuilder();
 
 	void addRevisionStatement(E entity);
+	
+	void reloadConflicts(E object);
 
 }

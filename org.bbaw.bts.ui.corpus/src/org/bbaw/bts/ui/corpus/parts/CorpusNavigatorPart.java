@@ -43,6 +43,7 @@ import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -89,6 +90,10 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	
 	@Inject
 	private Logger logger;
+	
+
+	@Inject
+	private EMenuService menuService;
 
 	private TreeViewer treeViewer;
 	private StructuredSelection selection;
@@ -126,7 +131,10 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		treeViewer.getTree().setLayout(new GridLayout());
 
 		loadInput(composite);
-
+		// register context menu on the table
+		menuService.registerContextMenu(
+				treeViewer.getControl(),
+				BTSPluginIDs.POPMENU_CORPUS_NAVIGATOR_TREE_MENU);
 		parent.layout();
 		// parent.pack();
 		// tryRunnable();

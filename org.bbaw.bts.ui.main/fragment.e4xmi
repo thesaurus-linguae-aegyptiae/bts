@@ -55,6 +55,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_JkEMML8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handler.updateApplication" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.UpdateApplicationHandler" command="_HO_yQL8hEeOwdasqUpZnTA"/>
     <elements xsi:type="commands:Handler" xmi:id="_6okrAL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handler.restart" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.RestartHandler" command="_3xuZsL8lEeOwdasqUpZnTA"/>
     <elements xsi:type="commands:Handler" xmi:id="_TwYboNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handler.0" contributionURI="bundleclass://com.opcoach.e4.preferences/com.opcoach.e4.preferences.handlers.E4PreferencesHandler" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_gkduIOpBEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.main.handler.openConflictsDialogHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenConflictsDialog" command="_YmLB4OpBEeO86qCMpbd0dw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -79,6 +80,7 @@
     <elements xsi:type="commands:Command" xmi:id="_NRDnwNtvEeODTbKD0_l8Zw" elementId="org.eclipse.ui.window.preferences" commandName="Preferences">
       <parameters xmi:id="_3mhuUNzJEeO5ZuJa34ojEQ" elementId="preferencePageId" name="Preferences Page ID"/>
     </elements>
+    <elements xsi:type="commands:Command" xmi:id="_YmLB4OpBEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.main.command.openConflictsDialog" commandName="openConflictsDialog" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>

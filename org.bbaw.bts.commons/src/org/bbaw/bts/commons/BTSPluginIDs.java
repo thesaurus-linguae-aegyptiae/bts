@@ -66,4 +66,6 @@ public class BTSPluginIDs
 
 	public static final String PREF_SYSTEM_CLOCK_DIFFERENCE = "system_clock_difference";
 
+	public static final String POPMENU_CORPUS_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.corpusnavigator.popupmenu";
+
 }

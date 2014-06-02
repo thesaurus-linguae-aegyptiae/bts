@@ -12,4 +12,10 @@
           name="Corpus Settings">
     </page>
  </extension>
+ <extension
+       point="org.bbaw.bts.ui.commons.compareViewerFactory">
+    <compareViewerFactory
+          class="org.bbaw.bts.ui.corpus.compare.CompareViewerFactoryPassportImpl">
+    </compareViewerFactory>
+ </extension>
 </plugin>

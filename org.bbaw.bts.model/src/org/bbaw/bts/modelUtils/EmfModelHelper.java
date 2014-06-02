@@ -341,7 +341,7 @@ public class EmfModelHelper
 		try {
 			loader = new JSONLoad(new ByteArrayInputStream(inputString.getBytes("UTF-8")),
 					new HashMap<Object, Object>());
-			Collection<EObject> ts =  loader.loadObjects();
+			Collection<EObject> ts =  loader.loadObjects(null);
 			if (!ts.isEmpty())
 			{
 				EObject o = ts.iterator().next();

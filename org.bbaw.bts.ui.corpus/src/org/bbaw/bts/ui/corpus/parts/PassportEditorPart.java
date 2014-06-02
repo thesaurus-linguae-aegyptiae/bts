@@ -143,6 +143,11 @@ public class PassportEditorPart {
 
 	@Inject
 	private CorpusNavigatorController corpusNavigatorController;
+	
+	@Inject
+	@Optional
+	@Named(BTSUIConstants.PART_SAVE_ON_DESELCTION)
+	private boolean save_on_deselection = true;
 
 	private Text text;
 	private Text txtAuthortextadmin;
@@ -711,7 +716,7 @@ public class PassportEditorPart {
 	}
 
 	@Inject
-	void setSelection(
+	public void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
 		if (selection == null) {
 			/* implementation not shown */
@@ -720,7 +725,10 @@ public class PassportEditorPart {
 				if (selection != null && !selection.equals(corpusObject)) {
 					System.out.println("old selection " + corpusObject);
 					// TODO make save configurable this is autosave!!!
-					save();
+					if (save_on_deselection)
+					{
+						save();
+					}
 					corpusObject = (BTSCorpusObject) selection;
 					delayedSetSeletction((BTSCorpusObject) selection);
 					

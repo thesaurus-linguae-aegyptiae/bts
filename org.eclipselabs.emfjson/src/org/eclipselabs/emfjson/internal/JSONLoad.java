@@ -24,6 +24,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Vector;
 
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.node.ObjectNode;
@@ -339,7 +340,11 @@ public class JSONLoad {
 	}
 	
 	// cplutte added
-	public Collection<EObject> loadObjects() { 
+	public Collection<EObject> loadObjects(ResourceSet resourceSet) {
+		if (this.resourceSet == null)
+		{
+			this.resourceSet = resourceSet;
+		}
 		final Collection<EObject> result = new Vector<EObject>();
 
 		if (this.rootNode.isArray()) {
