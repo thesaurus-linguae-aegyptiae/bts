@@ -863,7 +863,7 @@ embeddedEditor.getViewer(),
 	}
 
 	@Inject
-	void setSelection(
+	public void setSelection(
 			@Optional
 			@Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection)
 	{

@@ -231,7 +231,8 @@ public class ConflictsPart {
 		for (CompareViewerFactory cvf : compareViewerFactories)
 		{
 			CTabItem tabItem = new CTabItem(tabFolder, SWT.None);
-			tabItem.setText("Compare");
+			tabItem.setText(cvf.getCompareViewerName());
+			tabItem.setImage(cvf.getCompareViewerIcon());
 			Composite c = new Composite(tabFolder, SWT.NONE);
 			tabItem.setControl(c);
 			CompareViewer viewer = cvf.createViewer(c, SWT.NONE);

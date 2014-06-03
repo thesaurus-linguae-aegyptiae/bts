@@ -3,4 +3,10 @@
 	<extension id="id" point="org.eclipse.e4.workbench.model">
 		<fragment uri="fragment.e4xmi"></fragment>
 	</extension>
+ <extension
+       point="org.bbaw.bts.ui.commons.compareViewerFactory">
+    <compareViewerFactory
+          class="org.bbaw.bts.ui.egy.compare.CompareViewerFactoryEgyTextImpl">
+    </compareViewerFactory>
+ </extension>
 </plugin>

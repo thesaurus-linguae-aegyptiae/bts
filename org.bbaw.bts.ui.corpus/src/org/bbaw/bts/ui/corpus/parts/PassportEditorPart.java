@@ -90,6 +90,8 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ExpandEvent;
+import org.eclipse.swt.events.ExpandListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -180,6 +182,7 @@ public class PassportEditorPart {
 	private ComboViewer project_viewer;
 	private Combo corpusCMB;
 	private ComboViewer corpus_viewer;
+	private Composite parent;
 
 	@Inject
 	public PassportEditorPart() {
@@ -188,6 +191,7 @@ public class PassportEditorPart {
 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
+		this.parent = parent;
 		GridLayout gl_parent = new GridLayout(1, false);
 
 		gl_parent.horizontalSpacing = 1;
@@ -678,6 +682,44 @@ public class PassportEditorPart {
 		expandBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 8,
 				1));
 		expandBar.setLayout(new GridLayout(1, false));
+		expandBar.addExpandListener(new ExpandListener() {
+			
+			@Override
+			public void itemExpanded(ExpandEvent e) {
+				// review and creator
+				if (historyTable_Admin.getItemCount() == 0 && corpusObject != null
+						&& !corpusObject.getRevisions().isEmpty()) {
+					for (int i = corpusObject.getRevisions().size() - 1; i >= 0; i--) {
+						BTSRevision rev = corpusObject.getRevisions().get(i);
+						TableItem item1 = new TableItem(historyTable_Admin,
+								SWT.NONE);
+						item1.setText(new String[] {
+								new Integer(rev.getRef()).toString(),
+								userController.getUserDisplayName(rev
+										.getUserId()),
+								configurationController
+										.getDisplayPresentationOfDate(rev
+												.getTimeStamp()) });
+					}
+					Rectangle r = scrollComposite.getClientArea();
+					Point p = compTBTM_Main.getSize();
+					p = compTBTM_Main.getSize();
+
+					if (r.height < p.y)
+					{
+						scrollComposite.setMinSize(compTBTM_Main.computeSize(r.width,
+							Math.max(p.y +90, r.height)));
+					}
+					compTBTM_Main.setSize(p.x, p.y + 1);
+				}
+			}
+			
+			@Override
+			public void itemCollapsed(ExpandEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		ExpandItem xpndtmHistory = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmHistory.setExpanded(false);
@@ -770,6 +812,15 @@ public class PassportEditorPart {
 		if (object.getPassport() == null) {
 			object.setPassport(BtsmodelFactory.eINSTANCE.createBTSPassport());
 			setDirty(true);
+		}
+		if (mainComposite == null || mainComposite.isDisposed())
+		{
+			mainComposite = new Composite(parent, SWT.NONE);
+			mainComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+			GridData gd_composite = new GridData(SWT.FILL, SWT.FILL, true, true, 1,
+					1);
+			gd_composite.widthHint = 436;
+			mainComposite.setLayoutData(gd_composite);
 		}
 
 		// FIXME get global editing domain!!!!!!!!!
@@ -1134,24 +1185,27 @@ public class PassportEditorPart {
 		// review and creator
 		if (!object.getRevisions().isEmpty()) {
 		BTSRevision first_revision = object.getRevisions().get(0);
-		if (first_revision != null) {
+			if (first_revision != null) 
+			{
 				txtAuthortextadmin.setText(userController
 						.getUserDisplayName(first_revision.getUserId()));
-			txtDatetextadmin
-					.setText(configurationController
-							.getDisplayPresentationOfDate(first_revision
-									.getTimeStamp()));
-				for (BTSRevision rev : object.getRevisions()) {
-					TableItem item1 = new TableItem(historyTable_Admin,
-							SWT.NONE);
-					item1.setText(new String[] {
-							new Integer(rev.getRef()).toString(),
-							userController.getUserDisplayName(rev.getUserId()),
-							configurationController
-									.getDisplayPresentationOfDate(rev
-											.getTimeStamp()) });
-				}
-		}
+				txtDatetextadmin.setText(configurationController
+						.getDisplayPresentationOfDate(first_revision
+								.getTimeStamp()));
+//				for (int i = object.getRevisions().size() - 1; i >= 0; i--) 
+//				{
+//					BTSRevision rev = object.getRevisions().get(i);
+//					TableItem item1 = new TableItem(historyTable_Admin,
+//							SWT.NONE);
+//					item1.setText(new String[] {
+//							new Integer(rev.getRef()).toString(),
+//							userController.getUserDisplayName(rev.getUserId()),
+//							configurationController
+//									.getDisplayPresentationOfDate(rev
+//											.getTimeStamp()) });
+//				}
+//				historyTable_Admin.layout();
+			}
 		}
 		return null;
 	}

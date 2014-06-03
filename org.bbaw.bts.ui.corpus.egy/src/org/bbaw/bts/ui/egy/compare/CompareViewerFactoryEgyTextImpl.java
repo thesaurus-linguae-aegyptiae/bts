@@ -1,32 +1,45 @@
-package org.bbaw.bts.ui.main.compare;
+package org.bbaw.bts.ui.egy.compare;
 
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.compare.CompareViewerFactory;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 
-public class CompareViewerFactoryGeneralImpl implements CompareViewerFactory {
+public class CompareViewerFactoryEgyTextImpl implements CompareViewerFactory {
+
+	private CompareViewer compareViewer;
+	private IEclipseContext context;
 
 	protected BTSResourceProvider resourceProvider = StaticAccessController
 			.getResourceProvider();
 	@Override
 	public <T> boolean hasViewerForObject(Class<T> clazz) {
-		return BTSDBBaseObject.class.isAssignableFrom(clazz);
+		return BTSText.class.isAssignableFrom(clazz);
 	}
 
 	@Override
 	public CompareViewer createViewer(Composite parent, int style) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if (context == null)
+		{
+			context = StaticAccessController.getContext();
+		}
+		IEclipseContext child = context.createChild();
+		child.set(Composite.class, parent);
+		compareViewer = ContextInjectionFactory.make(
+				CompareViewerEgyTextImpl.class, child);
+		return compareViewer;
 	}
 
 	@Override
 	public String getCompareViewerName() {
-		return "Json";
+		return "Egyptian Text Editor";
 	}
 
 	@Override
@@ -34,4 +47,5 @@ public class CompareViewerFactoryGeneralImpl implements CompareViewerFactory {
 		Image i = resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_TEXTS);
 		return i;
 	}
+
 }
