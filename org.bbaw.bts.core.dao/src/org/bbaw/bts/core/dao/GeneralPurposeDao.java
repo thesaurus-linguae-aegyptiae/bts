@@ -10,4 +10,5 @@ public interface GeneralPurposeDao extends GenericDao<BTSDBBaseObject, String>
 {
 	List<SearchHit> queryNonBTSObjects(BTSQueryRequest query, String indexName,
 			String indexType);
+
 }

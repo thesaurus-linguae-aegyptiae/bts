@@ -15,4 +15,5 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 	
 	List<BTSUser> listAll(String objectState, String userName, String passWord);
 
+
 }

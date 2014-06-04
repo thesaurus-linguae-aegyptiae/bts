@@ -476,8 +476,11 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			}
 			else if(this.get_id().equals(o.get_id()))
 			{
-				return get_rev().equals(((BTSDBBaseObject) obj).get_rev());
-
+				if (get_rev() != null)
+				{
+					return get_rev().equals(((BTSDBBaseObject) obj).get_rev());
+				}
+				return (((BTSDBBaseObject) obj).get_rev() == null);
 			}
 		}
 		return false;

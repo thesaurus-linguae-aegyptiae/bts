@@ -23,4 +23,22 @@
   <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeSupport" instanceClassName="java.beans.PropertyChangeSupport"/>
   <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeListener" instanceClassName="java.beans.PropertyChangeListener"/>
   <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeEvent" instanceClassName="java.beans.PropertyChangeEvent"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StatusMessage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="message" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creationTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageType" eType="#//MessageType"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//StatusMessage"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MessageType">
+    <eLiterals name="ERROR"/>
+    <eLiterals name="WARNING" value="1"/>
+    <eLiterals name="NO_EDITING_RIGHTS" value="2"/>
+    <eLiterals name="LOCKED" value="3"/>
+    <eLiterals name="FILTERED" value="4"/>
+    <eLiterals name="UPDATE" value="5"/>
+    <eLiterals name="INFORMATION" value="6"/>
+  </eClassifiers>
 </ecore:EPackage>

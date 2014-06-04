@@ -41,12 +41,15 @@
         <children xsi:type="menu:MenuSeparator" xmi:id="_di3QIAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.2"/>
       </children>
     </mainMenu>
-    <trimBars xmi:id="_gMmj4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.trimbar.0">
+    <trimBars xmi:id="_gMmj4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.trimbar.main">
       <children xsi:type="menu:ToolBar" xmi:id="_g3q6IAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolbar.main"/>
       <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>
     </trimBars>
-    <trimBars xmi:id="_jaPP8DVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.trimbar.1" toBeRendered="false" visible="false" side="Right">
-      <children xsi:type="menu:ToolBar" xmi:id="_mCUsgDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.toolbar.0"/>
+    <trimBars xmi:id="_jaPP8DVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.trimbar.main.second">
+      <children xsi:type="menu:ToolBar" xmi:id="_mCUsgDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.toolbar.top.second"/>
+    </trimBars>
+    <trimBars xmi:id="_HIaB0OuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.app.trimbar.bottom" side="Bottom">
+      <children xsi:type="menu:ToolBar" xmi:id="_UTgxMOuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.app.toolbar.bottom.main"/>
     </trimBars>
   </children>
   <rootContext xmi:id="_AyBQAA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
@@ -69,4 +72,6 @@
   <categories xmi:id="_KsMe0F2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.category.edit" name="edit"/>
   <categories xmi:id="_0JZP0L8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.category.file" name="file"/>
   <categories xmi:id="__KJyEL8gEeOwdasqUpZnTA" elementId="org.eclipse.ui.category.help" name="Help"/>
+  <categories xmi:id="_wiqboOu_EeOLEqD8tMK6Eg" elementId="org.eclipse.ui.category.help" name="Help"/>
+  <categories xmi:id="_zLEoUOu_EeOLEqD8tMK6Eg" elementId="org.eclipse.ui.category.preferences"/>
 </application:Application>

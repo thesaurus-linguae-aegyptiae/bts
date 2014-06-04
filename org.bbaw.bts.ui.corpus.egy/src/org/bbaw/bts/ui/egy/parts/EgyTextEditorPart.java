@@ -227,6 +227,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private EditingDomain editingDomain;
 	private CommandStackListener commandStackListener;
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
+	private Composite parent;
 
 
 	/**
@@ -235,6 +236,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	@PostConstruct
 	public void createComposite(Composite parent)
 	{
+		this.parent = parent;
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
@@ -864,10 +866,11 @@ embeddedEditor.getViewer(),
 
 	@Inject
 	public void setSelection(
-			@Optional
-			@Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection)
-	{
-		if (selection != null && !selection.equals(selectedTextItem)) {
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
+		if (selection == null || parent == null || parent.isDisposed()) {
+			// do nothing
+			return;
+		} else if (selection != null && !selection.equals(selectedTextItem)) {
 			if (selection instanceof BTSCorpusObject) {
 				purgeCache();
 				if (editingDomain != null) {
@@ -914,7 +917,6 @@ embeddedEditor.getViewer(),
 			// }
 		}
 	}
-
 
 	private CommandStackListener getCommandStackListener() {
 		if (commandStackListener == null) {

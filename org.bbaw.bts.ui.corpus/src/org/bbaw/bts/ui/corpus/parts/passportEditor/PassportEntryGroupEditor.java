@@ -87,8 +87,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 	public void postConstruct() {
 		int hwidth = BTSUIConstants.PASSPORT_COLUMN_NUMBER;
 		if (isGroup && groupConfig.getPassportEditorConfig() != null) {
-			hwidth = groupConfig.getPassportEditorConfig()
-					.getHorizontalWidth();
+			hwidth = groupConfig.getPassportEditorConfig().getHorizontalWidth();
 		}
 		this.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, hwidth,
 				1));
@@ -96,7 +95,6 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 				false));
 		((GridLayout) this.getLayout()).marginWidth = 0;
 		((GridLayout) this.getLayout()).marginHeight = 0;
-
 
 		// draw group onto this
 
@@ -107,8 +105,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 	private void makeContent(boolean resize, boolean relayout) {
 		if (isGroup) {
 			makeGroupContent();
-		}
-		else {
+		} else {
 			makeCategoryContent();
 
 		}
@@ -135,24 +132,23 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 					&& !((BTSConfigItem) child).isIgnore()) {
 				BTSConfigItem childConfig = (BTSConfigItem) child;
 
-			if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(childConfig
-					.getType())) {
+				if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(childConfig
+						.getType())) {
 
-
-				List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
-						entry, childConfig, null, passport, true,
-						BTSCoreConstants.PASSPORT_ENTRY_GROUP);
-				loadPassportEntryGroupComposite(childConfig, childEntryGroups,
-						this, entry, entryPath);
-			} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM.equals(childConfig
-					.getType())) {
-				List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
-						entry, childConfig, null, passport, true,
-						BTSCoreConstants.PASSPORT_ENTRY_ITEM);
-				loadPassportEntryItemComposite(childConfig, childEntryGroups,
-						this, entry, entryPath);
+					List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
+							entry, childConfig, null, passport, true,
+							BTSCoreConstants.PASSPORT_ENTRY_GROUP);
+					loadPassportEntryGroupComposite(childConfig,
+							childEntryGroups, this, entry, entryPath);
+				} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM
+						.equals(childConfig.getType())) {
+					List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
+							entry, childConfig, null, passport, true,
+							BTSCoreConstants.PASSPORT_ENTRY_ITEM);
+					loadPassportEntryItemComposite(childConfig,
+							childEntryGroups, this, entry, entryPath);
+				}
 			}
-		}
 		}
 
 	}
@@ -187,22 +183,22 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 			for (BTSConfig child : filteredChildren) {
 				if (child instanceof BTSConfigItem
 						&& !((BTSConfigItem) child).isIgnore()) {
-				BTSConfigItem childConfig = (BTSConfigItem) child;
-				if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(childConfig
-						.getType())) {
-					List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
-							entry, childConfig, parentEntry, passport, true,
-							BTSCoreConstants.PASSPORT_ENTRY_GROUP);
-					loadPassportEntryGroupComposite(childConfig,
-							childEntryGroups, composite, entry, path);
-				} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM
-						.equals(childConfig.getType())) {
-					List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
-							entry, childConfig, parentEntry, passport, true,
-							BTSCoreConstants.PASSPORT_ENTRY_ITEM);
-					loadPassportEntryItemComposite(childConfig,
-							childEntryGroups, composite, entry, path);
-				}
+					BTSConfigItem childConfig = (BTSConfigItem) child;
+					if (BTSCoreConstants.PASSPORT_ENTRY_GROUP
+							.equals(childConfig.getType())) {
+						List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
+								entry, childConfig, parentEntry, passport,
+								true, BTSCoreConstants.PASSPORT_ENTRY_GROUP);
+						loadPassportEntryGroupComposite(childConfig,
+								childEntryGroups, composite, entry, path);
+					} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM
+							.equals(childConfig.getType())) {
+						List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
+								entry, childConfig, parentEntry, passport,
+								true, BTSCoreConstants.PASSPORT_ENTRY_ITEM);
+						loadPassportEntryItemComposite(childConfig,
+								childEntryGroups, composite, entry, path);
+					}
 				}
 			}
 			if (groupConfig.getPassportEditorConfig().isAllowMultiple()
@@ -223,31 +219,35 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 							Display.getDefault(),
 							BTSResourceProvider.IMG_WIDGET_GROUP_ADD));
 					addButton.setLayoutData(new GridData(SWT.RIGHT,
-							SWT.BEGINNING,
-							false, false, 1, 1));
+							SWT.BEGINNING, false, false, 1, 1));
 					addButton.addMouseListener(new MouseAdapter() {
 
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if (PassportEntryGroupEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+							}
 						}
 
 						@Override
 						public void mouseUp(MouseEvent e) {
-							Label l = (Label) e.getSource();
-							l.setBackground(l.getParent().getBackground());
-							BTSPassportEntry addEntry = makeAdditionalEntry();
-							CompoundCommand compoundCommand = new CompoundCommand();
-							org.eclipse.emf.common.command.Command command = AddCommand
-									.create(editingDomain,
-											parentEntry,
-											BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
-											addEntry);
-							compoundCommand.append(command);
-							editingDomain.getCommandStack().execute(
-									compoundCommand);
+							if (PassportEntryGroupEditor.this.userMayEdit)
+							{
+								Label l = (Label) e.getSource();
+								l.setBackground(l.getParent().getBackground());
+								BTSPassportEntry addEntry = makeAdditionalEntry();
+								CompoundCommand compoundCommand = new CompoundCommand();
+								org.eclipse.emf.common.command.Command command = AddCommand
+										.create(editingDomain,
+												parentEntry,
+												BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
+												addEntry);
+								compoundCommand.append(command);
+								editingDomain.getCommandStack().execute(
+										compoundCommand);
+							}
 
 						}
 
@@ -264,23 +264,28 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if (PassportEntryGroupEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+							}
 						}
 
 						@Override
 						public void mouseUp(MouseEvent e) {
-							Label l = (Label) e.getSource();
-							l.setBackground(l.getParent().getBackground());
-							System.out.println("entry group editor delete");
-
-							CompoundCommand compoundCommand = new CompoundCommand();
-							org.eclipse.emf.common.command.Command command = DeleteCommand
-									.create(editingDomain, entry);
-							compoundCommand.append(command);
-							editingDomain.getCommandStack().execute(
-									compoundCommand);
+							if (PassportEntryGroupEditor.this.userMayEdit)
+							{
+								Label l = (Label) e.getSource();
+								l.setBackground(l.getParent().getBackground());
+								System.out.println("entry group editor delete");
+	
+								CompoundCommand compoundCommand = new CompoundCommand();
+								org.eclipse.emf.common.command.Command command = DeleteCommand
+										.create(editingDomain, entry);
+								compoundCommand.append(command);
+								editingDomain.getCommandStack().execute(
+										compoundCommand);
+							}
 						}
 					});
 
@@ -291,40 +296,41 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 							Display.getDefault(),
 							BTSResourceProvider.IMG_WIDGET_GROUP_DELETE));
 					delButton.setLayoutData(new GridData(SWT.RIGHT,
-							SWT.BEGINNING,
-							false, false, 1, 1));
+							SWT.BEGINNING, false, false, 1, 1));
 					delButton.addMouseListener(new MouseAdapter() {
 
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if (PassportEntryGroupEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+							}
 						}
 
 						@Override
 						public void mouseUp(MouseEvent e) {
-							Label l = (Label) e.getSource();
-							l.setBackground(l.getParent().getBackground());
-							System.out.println("entry group editor delete");
-
-							CompoundCommand compoundCommand = new CompoundCommand();
-							org.eclipse.emf.common.command.Command command = DeleteCommand
-									.create(editingDomain, entry);
-							compoundCommand.append(command);
-							editingDomain.getCommandStack().execute(
-									compoundCommand);
+							if (PassportEntryGroupEditor.this.userMayEdit)
+							{
+								Label l = (Label) e.getSource();
+								l.setBackground(l.getParent().getBackground());
+								System.out.println("entry group editor delete");
+	
+								CompoundCommand compoundCommand = new CompoundCommand();
+								org.eclipse.emf.common.command.Command command = DeleteCommand
+										.create(editingDomain, entry);
+								compoundCommand.append(command);
+								editingDomain.getCommandStack().execute(
+										compoundCommand);
+							}
 						}
 					});
 				}
-			}
-			else
-			{
+			} else {
 				new Label(group, SWT.None);
 			}
 		}
 	}
-
 
 	protected BTSPassportEntry makeAdditionalEntry() {
 		BTSPassportEntry entry = BtsmodelFactory.eINSTANCE
@@ -390,5 +396,10 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 
 	}
 
+	@Override
+	protected void setUserMayEditInteral(boolean mayEdit) {
+		this.userMayEdit = mayEdit;
+
+	}
 
 }

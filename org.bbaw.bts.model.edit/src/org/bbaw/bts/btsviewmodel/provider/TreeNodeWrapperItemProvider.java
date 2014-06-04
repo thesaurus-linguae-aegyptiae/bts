@@ -69,8 +69,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	@Override
 	public List<IItemPropertyDescriptor> getPropertyDescriptors(Object object)
 	{
-		if (itemPropertyDescriptors == null)
-		{
+		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
 			addParentPropertyDescriptor(object);
@@ -254,8 +253,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	@Override
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
 	{
-		if (childrenFeatures == null)
-		{
+		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
 		}
@@ -425,8 +423,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(TreeNodeWrapper.class))
-		{
+		switch (notification.getFeatureID(TreeNodeWrapper.class)) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT:
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT:
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN_LOADED:

@@ -104,6 +104,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	{
 		BTSUser entity = BtsmodelFactory.eINSTANCE.createBTSUser();
 		super.setId(entity);
+		entity.set_id(userName);
 		entity.setUserName(userName);
 		super.setRevision(entity);
 		return entity;

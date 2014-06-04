@@ -37,8 +37,7 @@ public class BtsviewmodelAdapterFactory extends AdapterFactoryImpl
 	 */
 	public BtsviewmodelAdapterFactory()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = BtsviewmodelPackage.eINSTANCE;
 		}
 	}
@@ -54,12 +53,10 @@ public class BtsviewmodelAdapterFactory extends AdapterFactoryImpl
 	@Override
 	public boolean isFactoryForType(Object object)
 	{
-		if (object == modelPackage)
-		{
+		if (object == modelPackage) {
 			return true;
 		}
-		if (object instanceof EObject)
-		{
+		if (object instanceof EObject) {
 			return ((EObject)object).eClass().getEPackage() == modelPackage;
 		}
 		return false;
@@ -72,16 +69,17 @@ public class BtsviewmodelAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	protected BtsviewmodelSwitch<Adapter> modelSwitch =
-		new BtsviewmodelSwitch<Adapter>()
-		{
+		new BtsviewmodelSwitch<Adapter>() {
 			@Override
-			public Adapter caseTreeNodeWrapper(TreeNodeWrapper object)
-			{
+			public Adapter caseTreeNodeWrapper(TreeNodeWrapper object) {
 				return createTreeNodeWrapperAdapter();
 			}
 			@Override
-			public Adapter defaultCase(EObject object)
-			{
+			public Adapter caseStatusMessage(StatusMessage object) {
+				return createStatusMessageAdapter();
+			}
+			@Override
+			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
 		};
@@ -113,6 +111,20 @@ public class BtsviewmodelAdapterFactory extends AdapterFactoryImpl
 	 */
 	public Adapter createTreeNodeWrapperAdapter()
 	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsviewmodel.StatusMessage <em>Status Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage
+	 * @generated
+	 */
+	public Adapter createStatusMessageAdapter() {
 		return null;
 	}
 

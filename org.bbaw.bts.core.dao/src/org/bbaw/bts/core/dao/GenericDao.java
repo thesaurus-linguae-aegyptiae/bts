@@ -6,6 +6,7 @@ import java.util.Set;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.emf.common.util.URI;
 
 public interface GenericDao<E extends BTSDBBaseObject, K>
@@ -37,6 +38,9 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	void reloadConflicts(E entity);
 
 	List<E> list(String path, String objectState);
+	
+	List<DBRevision> listAvailableRevisions(K id, String path);
+
 
 	List<E> findByQueryId(String searchId, String path, String objectState);
 

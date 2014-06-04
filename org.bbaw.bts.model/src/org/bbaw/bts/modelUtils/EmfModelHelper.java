@@ -1,7 +1,10 @@
 package org.bbaw.bts.modelUtils;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,6 +14,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
+
+
+
+
 
 
 
@@ -37,6 +44,8 @@ import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipselabs.emfjson.EMFJs;
 import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.internal.JSONSave;
+
+import com.google.gson.Gson;
 
 public class EmfModelHelper
 {
@@ -335,7 +344,7 @@ public class EmfModelHelper
 
 	public static <T> T loadFromString(String inputString, Class<T> classType)
 	{
-		System.out.println("##################### " + inputString);
+//		System.out.println("##################### " + inputString);
 
 		JSONLoad loader;
 		try {
@@ -348,12 +357,24 @@ public class EmfModelHelper
 				return (T) o;
 			}
 		} catch (UnsupportedEncodingException e) {
-System.out.println("##################### " + inputString);
-e.printStackTrace();
+//System.out.println("##################### " + inputString);
+//e.printStackTrace();
 		}
 		
 		return null;
 
 		
 	}
+	
+	 public static <T> T load(final InputStream inputStream, final Class<T> clazz) {
+	        try {
+	            if (inputStream != null) {
+	                final Gson gson = new Gson();
+	                final BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+	                return gson.fromJson(reader, clazz);
+	            }
+	        } catch (final Exception e) {
+	        }
+	        return null;
+	    }
 }

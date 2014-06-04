@@ -4,6 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import org.apache.http.client.methods.HttpHead;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.btsmodel.impl.DBLeaseImpl;
@@ -195,4 +196,5 @@ public class DBLeaseDaoImpl extends CouchDBDao<DBLease, String> implements DBLea
 //		}
 //		return entity;
 	}
+
 }

@@ -26,6 +26,10 @@ public class ServiceConstants
 
 	public static final String USERID_PREFIX = "org.couchdb.user:";
 
+	public static final String STATUS_MESSAGE_LIST = "status_message_list";
+
+	public static final int STATUS_MESSAGE_LIST_SIZE = 25;
+
 	private ServiceConstants()
 	{
 

@@ -687,7 +687,7 @@ public class ApplicationStartupControllerImpl implements
 			if (project.getDbConnection() != null) {
 				try {
 					dbManager.prepareDBSynchronization(project);
-				} catch (MalformedURLException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}

@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsviewmodel;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.DBLease;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
@@ -31,6 +32,20 @@ public interface BtsviewmodelFactory extends EFactory
 	 */
 	TreeNodeWrapper createTreeNodeWrapper();
 
+	/**
+	 * Returns a new object of class '<em>Status Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Status Message</em>'.
+	 * @generated
+	 */
+	StatusMessage createStatusMessage();
+
+	StatusMessage createFilteredMessage(int suppressed);
+	
+	StatusMessage createNotEditingRightsMessage();
+	
+	StatusMessage createLockedMessage(DBLease lease, String userId);
 	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->

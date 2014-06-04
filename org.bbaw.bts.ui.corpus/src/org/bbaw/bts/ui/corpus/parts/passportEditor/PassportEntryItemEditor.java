@@ -127,6 +127,12 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	@Inject
 	private ThsNavigatorController thsNavigatorController;
 	private ObjectSelectionProposalProvider thsItemProposalProvider;
+	private Text textField;
+	private Button checkBox;
+	private Spinner spinner;
+	private Text textSuggest;
+	private Combo combo;
+	private Text text;
 
 	@Inject
 	public PassportEntryItemEditor(Composite parent) {
@@ -181,13 +187,17 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if (PassportEntryItemEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+							}
 						}
 
 						@Override
 						public void mouseUp(MouseEvent e) {
+							if (PassportEntryItemEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(l.getParent().getBackground());
 							CompoundCommand compoundCommand = new CompoundCommand();
@@ -196,6 +206,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							compoundCommand.append(command);
 							editingDomain.getCommandStack().execute(
 									compoundCommand);
+							}
 						}
 					});
 					Label addButton = new Label(this, SWT.PUSH);
@@ -209,13 +220,18 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if (PassportEntryItemEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+							}
 
 						}
 
 						@Override
 						public void mouseUp(MouseEvent e) {
+							if (PassportEntryItemEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(l.getParent().getBackground());
 							BTSPassportEntry addEntry = makeAdditionalEntry();
@@ -228,7 +244,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							compoundCommand.append(command);
 							editingDomain.getCommandStack().execute(
 									compoundCommand);
-
+							}
 						}
 					});
 				} else {
@@ -243,12 +259,17 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 						@Override
 						public void mouseDown(MouseEvent e) {
+							if (PassportEntryItemEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+							}
 						}
 
 						@Override
 						public void mouseUp(MouseEvent e) {
+							if (PassportEntryItemEditor.this.userMayEdit)
+							{
 							Label l = (Label) e.getSource();
 							l.setBackground(l.getParent().getBackground());
 							CompoundCommand compoundCommand = new CompoundCommand();
@@ -257,6 +278,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							compoundCommand.append(command);
 							editingDomain.getCommandStack().execute(
 									compoundCommand);
+							}
 
 						}
 					});
@@ -416,13 +438,13 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, 1));
 
 		// label.pack();
-		Text text = new Text(this, SWT.BORDER | SWT.MULTI | SWT.WRAP);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true,
+		textField = new Text(this, SWT.BORDER | SWT.MULTI | SWT.WRAP);
+		textField.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, 4));
-		((GridData) text.getLayoutData()).minimumHeight = 60;
+		((GridData) textField.getLayoutData()).minimumHeight = 60;
 		if (itemConfig2.getDescription() != null
 				&& !itemConfig2.getDescription().getLanguages().isEmpty()) {
-			final ControlDecoration deco = new ControlDecoration(text,
+			final ControlDecoration deco = new ControlDecoration(textField,
 					SWT.BOTTOM | SWT.LEFT);
 
 			// re-use an existing image
@@ -454,7 +476,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		}
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
-						BTSUIConstants.DELAY, text),
+						BTSUIConstants.DELAY, textField),
 				EMFEditProperties.value(editingDomain,
 						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), us, null);
@@ -480,7 +502,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	private void loadBooleanWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {
-		Button checkBox = new Button(this, SWT.CHECK);
+		checkBox = new Button(this, SWT.CHECK);
 		checkBox.setText(itemConfig.getValue());
 		checkBox.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, 1));
@@ -528,7 +550,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 			@Override
 			public void focusGained(FocusEvent e) {
-
+				if (PassportEntryItemEditor.this.userMayEdit)
+				{
 				try {
 					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
 					ContentProposalAdapter adapter = new ContentProposalAdapter(
@@ -553,7 +576,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				} catch (ParseException e1) {
 					e1.printStackTrace();
 				}
-
+				}
 			}
 		});
 
@@ -572,13 +595,17 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
+				if (PassportEntryItemEditor.this.userMayEdit)
+				{
 				Label l = (Label) e.getSource();
 				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+				}
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
+				if (PassportEntryItemEditor.this.userMayEdit)
+				{
 				Label l = (Label) e.getSource();
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
@@ -602,6 +629,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 //					System.out.println("Relation with object id "
 //							+ entry.getValue());
 					ths_select_text.setText(object.getName());
+				}
 				}
 			}
 		});
@@ -628,7 +656,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		Spinner spinner = new Spinner(this, SWT.BORDER);
+		spinner = new Spinner(this, SWT.BORDER);
 		spinner.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2,
 				1));
@@ -682,13 +710,13 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		// label.pack();
 		makeContentProposalProviderThread("");
 
-		final Text text = new Text(this, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
+		textSuggest = new Text(this, SWT.BORDER);
+		textSuggest.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
-		((GridData) text.getLayoutData()).horizontalIndent = 7;
+		((GridData) textSuggest.getLayoutData()).horizontalIndent = 7;
 		if (itemConfig2.getDescription() != null
 				&& !itemConfig2.getDescription().getLanguages().isEmpty()) {
-			final ControlDecoration deco = new ControlDecoration(text,
+			final ControlDecoration deco = new ControlDecoration(textSuggest,
 					SWT.BOTTOM | SWT.LEFT);
 
 			// re-use an existing image
@@ -703,7 +731,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		}
 		// "." and "#" activate the content proposals
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
-		text.addFocusListener(new FocusAdapter() {
+		textSuggest.addFocusListener(new FocusAdapter() {
 
 			@Override
 			public void focusGained(FocusEvent e) {
@@ -711,8 +739,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				try {
 					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
 					ContentProposalAdapter adapter = new ContentProposalAdapter(
-							text, new TextContentAdapter(),
-							getItemProposalProvider(text.getText()),
+							textSuggest, new TextContentAdapter(),
+							getItemProposalProvider(textSuggest.getText()),
 							keyStroke, autoActivationCharacters);
 					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
 				} catch (ParseException e1) {
@@ -742,7 +770,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
-						BTSUIConstants.DELAY, text),
+						BTSUIConstants.DELAY, textSuggest),
 				EMFEditProperties.value(editingDomain,
 						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), us, null);
@@ -805,7 +833,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		Combo combo = new Combo(this, SWT.NONE); // SWT.READ_ONLY);
+		combo = new Combo(this, SWT.NONE); // SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) combo.getLayoutData()).horizontalIndent = 7;
@@ -871,7 +899,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		Text text = new Text(this, SWT.BORDER);
+		text = new Text(this, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) text.getLayoutData()).horizontalIndent = 7;
@@ -921,5 +949,16 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					| SWT.LEFT);
 		}
 
+	}
+
+	@Override
+	protected void setUserMayEditInteral(boolean mayEdit) {
+		textField.setEditable(mayEdit);
+		checkBox.setEnabled(mayEdit);
+		ths_select_text.setEditable(mayEdit);
+		text.setEditable(mayEdit);
+		textSuggest.setEditable(mayEdit);
+		combo.setEnabled(mayEdit);
+		spinner.setEnabled(mayEdit);
 	}
 }

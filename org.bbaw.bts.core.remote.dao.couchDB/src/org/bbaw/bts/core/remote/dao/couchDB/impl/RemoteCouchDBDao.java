@@ -24,6 +24,7 @@ import org.bbaw.bts.core.remote.dao.RemoteGenericDao;
 import org.bbaw.bts.core.remote.dao.util.RemoteDaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.URI;
@@ -46,8 +47,10 @@ import org.elasticsearch.search.SearchHit;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.DesignDocument;
 import org.lightcouch.NoDocumentException;
+import org.lightcouch.Params;
 import org.lightcouch.View;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 @Creatable
@@ -453,4 +456,34 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 			throw new RuntimeException("Save Resource failed");
 		}
 	}
+	
+	@Override
+	public List<DBRevision> listAvailableRevisions(K key, String path) {
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, path);
+		Params params = new Params();
+		params.addParam("revs_info", "true");
+		List<DBRevision> revisions = new Vector<DBRevision>();
+		JsonObject jsonObject = dbClient.find(JsonObject.class, (String) key,
+				params);
+		for (JsonElement rev : jsonObject.getAsJsonArray("_revs_info")) {
+			JsonElement rev_info = rev.getAsJsonObject().get("rev");
+			String docRev = rev_info.getAsString();
+			JsonElement rev_av = rev.getAsJsonObject().get("status");
+			String rev_av_str = rev_av.getAsString();
+			DBRevision r = new DBRevision();
+			r.setRevision(docRev);
+			if ("available".equals(rev_av_str))
+			{
+				r.setLocation(DBRevision.REMOTE);
+			}
+			else
+			{
+				r.setLocation(DBRevision.NOT_AVAILABLE);
+			}
+			revisions.add(r);
+		}
+		return revisions;
+	}
+
 }

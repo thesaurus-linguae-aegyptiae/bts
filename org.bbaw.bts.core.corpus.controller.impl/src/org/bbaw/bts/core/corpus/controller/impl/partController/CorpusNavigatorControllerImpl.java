@@ -341,8 +341,18 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		try {
 			o = corpusObjectService.find(id);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+		}
+		if (o != null) {
+			return o;
+		} else {
+			try {
+				o = textCorpusService.find(id);
+			} catch (Exception e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+			}
 		}
 		if (o != null) {
 			return o;
@@ -350,8 +360,8 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			try {
 				o = thsService.find(id);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
 			}
 		}
 		if (o != null) {
@@ -360,8 +370,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			try {
 				o = wlistService.find(id);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
 		}
 		return o;

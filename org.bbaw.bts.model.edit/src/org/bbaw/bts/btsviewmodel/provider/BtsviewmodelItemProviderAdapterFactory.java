@@ -94,12 +94,34 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	@Override
 	public Adapter createTreeNodeWrapperAdapter()
 	{
-		if (treeNodeWrapperItemProvider == null)
-		{
+		if (treeNodeWrapperItemProvider == null) {
 			treeNodeWrapperItemProvider = new TreeNodeWrapperItemProvider(this);
 		}
 
 		return treeNodeWrapperItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsviewmodel.StatusMessage} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StatusMessageItemProvider statusMessageItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsviewmodel.StatusMessage}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStatusMessageAdapter() {
+		if (statusMessageItemProvider == null) {
+			statusMessageItemProvider = new StatusMessageItemProvider(this);
+		}
+
+		return statusMessageItemProvider;
 	}
 
 	/**
@@ -155,11 +177,9 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	@Override
 	public Object adapt(Object object, Object type)
 	{
-		if (isFactoryForType(type))
-		{
+		if (isFactoryForType(type)) {
 			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
-			{
+			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
 				return adapter;
 			}
 		}
@@ -199,8 +219,7 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	{
 		changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null)
-		{
+		if (parentAdapterFactory != null) {
 			parentAdapterFactory.fireNotifyChanged(notification);
 		}
 	}
@@ -214,6 +233,7 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	public void dispose()
 	{
 		if (treeNodeWrapperItemProvider != null) treeNodeWrapperItemProvider.dispose();
+		if (statusMessageItemProvider != null) statusMessageItemProvider.dispose();
 	}
 
 }

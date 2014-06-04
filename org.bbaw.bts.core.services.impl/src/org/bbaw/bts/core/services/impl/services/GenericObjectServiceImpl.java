@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -14,6 +16,7 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -22,11 +25,13 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
+import org.bbaw.bts.core.remote.dao.RemoteGeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -45,6 +50,8 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	@Inject
 	protected GeneralPurposeDao generalPurposeDao;
 
+	@Inject
+	protected RemoteGeneralPurposeDao remoteGeneralPurposeDao;
 
 	@Inject
 	protected IDService idService;
@@ -182,6 +189,22 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 //		return tcObject;
 		return null;
 	}
+	
+	@Override
+	public E find(K key, String path, String revision, boolean fromRemote) {
+		if (path != null && !"".equals(path))
+		{
+			if (fromRemote)
+			{
+				return (E) remoteGeneralPurposeDao.find((String)key, path, revision);
+			}
+			else
+			{
+				return find(key, path, revision);
+			}
+		}
+		return null;
+	}
 
 	@Override
 	public abstract List<E> list(String objectState);
@@ -244,4 +267,47 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	protected void setActive_corpora(String active_corpora) {
 		this.active_corpora = active_corpora;
 	}
+	
+
+	@Override
+	public List<DBRevision> listAvailableRevisions(BTSDBBaseObject object,
+			boolean fetchFromRemote) {
+		if (!fetchFromRemote)
+		{
+			return generalPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey());
+		}
+		else
+		{
+			List<DBRevision> revisions = generalPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey());
+			Map<String, DBRevision> localRevs = new HashMap<String, DBRevision>(revisions.size());
+			for (DBRevision rev : revisions)
+			{
+				localRevs.put(rev.getRevision(), rev);
+			}
+			for (DBRevision rev : remoteGeneralPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey()))
+			{
+				DBRevision local = localRevs.get(rev.getRevision());
+				if (local == null || local.getLocation() == DBRevision.NOT_AVAILABLE)
+				{
+					revisions.add(rev);
+				}
+			}
+			return revisions;
+		}
+	}
+	
+	public String getDisplayName(String userId)
+	{
+		BTSObject o = null;
+		try {
+			o = (BTSObject) find((K) userId);
+		} catch (Exception e) {
+		}
+		if (o != null) {
+			return o.getName();
+		}
+		return userId;
+		
+	}
+
 }

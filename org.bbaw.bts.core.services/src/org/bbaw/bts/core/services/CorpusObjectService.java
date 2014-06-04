@@ -14,4 +14,6 @@ public interface CorpusObjectService extends GenericObjectService<BTSCorpusObjec
 
 	List<BTSPassportEntry> getPassportEntryProposals(BTSQueryRequest query);
 
+
+
 }

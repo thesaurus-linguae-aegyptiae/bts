@@ -5,6 +5,7 @@ package org.bbaw.bts.btsviewmodel;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -169,6 +170,89 @@ public interface BtsviewmodelPackage extends EPackage
 	int TREE_NODE_WRAPPER_OPERATION_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsviewmodel.impl.StatusMessageImpl <em>Status Message</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsviewmodel.impl.StatusMessageImpl
+	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getStatusMessage()
+	 * @generated
+	 */
+	int STATUS_MESSAGE = 1;
+
+	/**
+	 * The feature id for the '<em><b>Message</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE__MESSAGE = 0;
+
+	/**
+	 * The feature id for the '<em><b>Creation Time</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE__CREATION_TIME = 1;
+
+	/**
+	 * The feature id for the '<em><b>User Id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE__USER_ID = 2;
+
+	/**
+	 * The feature id for the '<em><b>Message Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE__MESSAGE_TYPE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE__CHILDREN = 4;
+
+	/**
+	 * The number of structural features of the '<em>Status Message</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE_FEATURE_COUNT = 5;
+
+	/**
+	 * The number of operations of the '<em>Status Message</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STATUS_MESSAGE_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}' enum.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsviewmodel.MessageType
+	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getMessageType()
+	 * @generated
+	 */
+	int MESSAGE_TYPE = 2;
+
+	/**
 	 * The meta object id for the '<em>BTS Object</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -176,7 +260,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getBTSObject()
 	 * @generated
 	 */
-	int BTS_OBJECT = 1;
+	int BTS_OBJECT = 3;
 
 	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
@@ -186,7 +270,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 2;
+	int PROPERTY_CHANGE_SUPPORT = 4;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -196,7 +280,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 3;
+	int PROPERTY_CHANGE_LISTENER = 5;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -206,7 +290,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 4;
+	int PROPERTY_CHANGE_EVENT = 6;
 
 
 	/**
@@ -315,6 +399,81 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @generated
 	 */
 	EOperation getTreeNodeWrapper__RemovePropertyChangeListener__PropertyChangeListener();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsviewmodel.StatusMessage <em>Status Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Status Message</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage
+	 * @generated
+	 */
+	EClass getStatusMessage();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.StatusMessage#getMessage <em>Message</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage#getMessage()
+	 * @see #getStatusMessage()
+	 * @generated
+	 */
+	EAttribute getStatusMessage_Message();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.StatusMessage#getCreationTime <em>Creation Time</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Creation Time</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage#getCreationTime()
+	 * @see #getStatusMessage()
+	 * @generated
+	 */
+	EAttribute getStatusMessage_CreationTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.StatusMessage#getUserId <em>User Id</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>User Id</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage#getUserId()
+	 * @see #getStatusMessage()
+	 * @generated
+	 */
+	EAttribute getStatusMessage_UserId();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.StatusMessage#getMessageType <em>Message Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Message Type</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage#getMessageType()
+	 * @see #getStatusMessage()
+	 * @generated
+	 */
+	EAttribute getStatusMessage_MessageType();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.bbaw.bts.btsviewmodel.StatusMessage#getChildren <em>Children</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Children</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.StatusMessage#getChildren()
+	 * @see #getStatusMessage()
+	 * @generated
+	 */
+	EReference getStatusMessage_Children();
+
+	/**
+	 * Returns the meta object for enum '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for enum '<em>Message Type</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.MessageType
+	 * @generated
+	 */
+	EEnum getMessageType();
 
 	/**
 	 * Returns the meta object for data type '{@link org.bbaw.bts.btsmodel.BTSObject <em>BTS Object</em>}'.
@@ -465,6 +624,66 @@ public interface BtsviewmodelPackage extends EPackage
 		 * @generated
 		 */
 		EOperation TREE_NODE_WRAPPER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = eINSTANCE.getTreeNodeWrapper__RemovePropertyChangeListener__PropertyChangeListener();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsviewmodel.impl.StatusMessageImpl <em>Status Message</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsviewmodel.impl.StatusMessageImpl
+		 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getStatusMessage()
+		 * @generated
+		 */
+		EClass STATUS_MESSAGE = eINSTANCE.getStatusMessage();
+
+		/**
+		 * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATUS_MESSAGE__MESSAGE = eINSTANCE.getStatusMessage_Message();
+
+		/**
+		 * The meta object literal for the '<em><b>Creation Time</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATUS_MESSAGE__CREATION_TIME = eINSTANCE.getStatusMessage_CreationTime();
+
+		/**
+		 * The meta object literal for the '<em><b>User Id</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATUS_MESSAGE__USER_ID = eINSTANCE.getStatusMessage_UserId();
+
+		/**
+		 * The meta object literal for the '<em><b>Message Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STATUS_MESSAGE__MESSAGE_TYPE = eINSTANCE.getStatusMessage_MessageType();
+
+		/**
+		 * The meta object literal for the '<em><b>Children</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference STATUS_MESSAGE__CHILDREN = eINSTANCE.getStatusMessage_Children();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}' enum.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsviewmodel.MessageType
+		 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getMessageType()
+		 * @generated
+		 */
+		EEnum MESSAGE_TYPE = eINSTANCE.getMessageType();
 
 		/**
 		 * The meta object literal for the '<em>BTS Object</em>' data type.

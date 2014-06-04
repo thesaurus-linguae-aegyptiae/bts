@@ -32,11 +32,14 @@ import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSLockingException;
+import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.dao.DBLeaseDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.GenericDao;
@@ -44,6 +47,8 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.BTSProjectService;
+import org.bbaw.bts.core.services.BTSUserService;
+import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.PermissionsAndExpressionsEvaluationService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
@@ -124,6 +129,9 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	private String systemClockDifference;
 
 	private Date lastTimeCheck;
+
+	@Inject
+	private BTSUserDao userDao;
 	
 	@Override
 	public boolean filter(Object object)
@@ -214,6 +222,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	public <T extends BTSDBBaseObject> List<T> filter(List<T> objects) {
 		if (objects == null) return null;
 		List<T> filtered = new Vector<T>(objects.size());
+		int suppressed = 0;
 		for (T o : objects)
 		{
 			if (isVisibleToUser(o))
@@ -221,8 +230,17 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 				filtered.add(o);
 				processIfLocked(o);
 			}
+			else
+			{
+				suppressed++;
+			}
 		}
 		logger.info("Filtered objects size: " + filtered.size());
+		if (suppressed > 0)
+		{
+			StatusMessage m = BtsviewmodelFactory.eINSTANCE.createFilteredMessage(suppressed);
+			eventBroker.post("status_info/filtered", m);
+		}
 		return filtered;
 	}
 
@@ -428,7 +446,17 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		{
 			updateItemLockStatus(item, true);
 		}
+		else
+		{
+			StatusMessage m = BtsviewmodelFactory.eINSTANCE.createLockedMessage(lease, lease.getUserId());
+			eventBroker.post("status_info/filtered", m);
+		}
 		return locked;
+	}
+
+	private BTSUser getUser(String userId) {
+		BTSUser user = userDao.find(userId, "admin");
+		return user;
 	}
 
 	private void checkAndRenewLease(DBLease lease) {

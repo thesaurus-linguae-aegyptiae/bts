@@ -38,6 +38,7 @@ import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -66,9 +67,11 @@ import org.elasticsearch.search.SearchHit;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.DesignDocument;
 import org.lightcouch.NoDocumentException;
+import org.lightcouch.Params;
 import org.lightcouch.Response;
 import org.lightcouch.View;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 @Creatable
@@ -404,6 +407,35 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_DOCS, path);
 		}
 		return (List<E>) results;
+	}
+	
+	@Override
+	public List<DBRevision> listAvailableRevisions(K key, String path) {
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, path);
+		Params params = new Params();
+		params.addParam("revs_info", "true");
+		List<DBRevision> revisions = new Vector<DBRevision>();
+		JsonObject jsonObject = dbClient.find(JsonObject.class, (String) key,
+				params);
+		for (JsonElement rev : jsonObject.getAsJsonArray("_revs_info")) {
+			JsonElement rev_info = rev.getAsJsonObject().get("rev");
+			String docRev = rev_info.getAsString();
+			JsonElement rev_av = rev.getAsJsonObject().get("status");
+			String rev_av_str = rev_av.getAsString();
+			DBRevision r = new DBRevision();
+			r.setRevision(docRev);
+			if ("available".equals(rev_av_str))
+			{
+				r.setLocation(DBRevision.LOCAL);
+			}
+			else
+			{
+				r.setLocation(DBRevision.NOT_AVAILABLE);
+			}
+			revisions.add(r);
+		}
+		return revisions;
 	}
 
 	@Override

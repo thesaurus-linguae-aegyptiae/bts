@@ -6,4 +6,6 @@ public interface CompareViewer {
 	
 	boolean save();
 
+	void dispose();
+
 }

@@ -47,7 +47,7 @@ public class CompareDialog extends TitleAreaDialog
 				}
 			}
 		});
-		setTitle("User Management");
+		setTitle("Revision History");
 
 	}
 
@@ -59,7 +59,7 @@ public class CompareDialog extends TitleAreaDialog
 	public CompareDialog()
 	{
 		super(new Shell());
-		System.out.println("construct UserManagementDialog");
+		System.out.println("construct compareObjectsDialog");
 
 	}
 
@@ -86,7 +86,7 @@ public class CompareDialog extends TitleAreaDialog
 		area.setLayout(new GridLayout());
 		((GridLayout) area.getLayout()).marginWidth = 0;
 		((GridLayout) area.getLayout()).marginHeight = 0;
-		IEclipseContext child = context.createChild("userManagementDialog");
+		IEclipseContext child = context.createChild("compareObjectsDialog");
 		child.set(Composite.class, area);
 		part = ContextInjectionFactory.make(ComparePart.class, child);
 		//		area.layout();

@@ -25,11 +25,13 @@ import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
+import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.BTSProjectController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
@@ -183,6 +185,7 @@ public class PassportEditorPart {
 	private Combo corpusCMB;
 	private ComboViewer corpus_viewer;
 	private Composite parent;
+	private boolean userMayEdit;
 
 	@Inject
 	public PassportEditorPart() {
@@ -772,7 +775,10 @@ public class PassportEditorPart {
 						save();
 					}
 					corpusObject = (BTSCorpusObject) selection;
-					delayedSetSeletction((BTSCorpusObject) selection);
+					if (parent != null && !parent.isDisposed())
+					{
+						delayedSetSeletction((BTSCorpusObject) selection);
+					}
 					
 				}
 			}
@@ -1242,5 +1248,37 @@ public class PassportEditorPart {
 			return success;
 		}
 		return true;
+	}
+	
+	@Inject
+	@Optional
+	public void setUserMayEdit(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) final boolean userMayEdit) {
+		if(userMayEdit != this.userMayEdit)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayEditInteral(userMayEdit);
+				}
+			});
+			
+		}
+	}
+
+	private void setUserMayEditInteral(boolean mayEdit) {
+		this.userMayEdit = mayEdit;
+		if (loaded && parent != null && !parent.isDisposed())
+		{
+			text.setEditable(mayEdit);
+			corpusCMB.setEnabled(mayEdit);
+			projectCMB.setEnabled(mayEdit);
+			reviewCMB_Admin.setEnabled(mayEdit);
+			sortKey_Spin.setEnabled(mayEdit);
+			subtypeCMB_Main.setEnabled(mayEdit);
+			typeCMB_Main.setEnabled(mayEdit);
+			visibilityCMB_Admin.setEnabled(mayEdit);
+		}
+		
 	}
 }

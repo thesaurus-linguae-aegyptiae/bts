@@ -40,8 +40,7 @@ public class BtsviewmodelSwitch<T> extends Switch<T>
 	 */
 	public BtsviewmodelSwitch()
 	{
-		if (modelPackage == null)
-		{
+		if (modelPackage == null) {
 			modelPackage = BtsviewmodelPackage.eINSTANCE;
 		}
 	}
@@ -70,12 +69,16 @@ public class BtsviewmodelSwitch<T> extends Switch<T>
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject)
 	{
-		switch (classifierID)
-		{
-			case BtsviewmodelPackage.TREE_NODE_WRAPPER:
-			{
+		switch (classifierID) {
+			case BtsviewmodelPackage.TREE_NODE_WRAPPER: {
 				TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper)theEObject;
 				T result = caseTreeNodeWrapper(treeNodeWrapper);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsviewmodelPackage.STATUS_MESSAGE: {
+				StatusMessage statusMessage = (StatusMessage)theEObject;
+				T result = caseStatusMessage(statusMessage);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -96,6 +99,21 @@ public class BtsviewmodelSwitch<T> extends Switch<T>
 	 */
 	public T caseTreeNodeWrapper(TreeNodeWrapper object)
 	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Status Message</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Status Message</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStatusMessage(StatusMessage object) {
 		return null;
 	}
 

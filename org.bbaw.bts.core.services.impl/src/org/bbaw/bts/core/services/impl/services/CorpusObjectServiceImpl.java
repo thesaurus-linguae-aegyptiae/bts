@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
@@ -364,6 +365,7 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		}
 		return tcObject;
 	}
+
 
 
 }

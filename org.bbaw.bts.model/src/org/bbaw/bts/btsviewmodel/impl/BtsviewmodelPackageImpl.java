@@ -10,11 +10,14 @@ import org.bbaw.bts.btsmodel.BTSObject;
 
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
+import org.bbaw.bts.btsviewmodel.MessageType;
+import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -35,6 +38,20 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * @generated
 	 */
 	private EClass treeNodeWrapperEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statusMessageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EEnum messageTypeEEnum = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -232,6 +249,69 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getStatusMessage() {
+		return statusMessageEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatusMessage_Message() {
+		return (EAttribute)statusMessageEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatusMessage_CreationTime() {
+		return (EAttribute)statusMessageEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatusMessage_UserId() {
+		return (EAttribute)statusMessageEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStatusMessage_MessageType() {
+		return (EAttribute)statusMessageEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getStatusMessage_Children() {
+		return (EReference)statusMessageEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EEnum getMessageType() {
+		return messageTypeEEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getBTSObject()
 	{
 		return btsObjectEDataType;
@@ -308,6 +388,16 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		createEOperation(treeNodeWrapperEClass, TREE_NODE_WRAPPER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER);
 		createEOperation(treeNodeWrapperEClass, TREE_NODE_WRAPPER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER);
 
+		statusMessageEClass = createEClass(STATUS_MESSAGE);
+		createEAttribute(statusMessageEClass, STATUS_MESSAGE__MESSAGE);
+		createEAttribute(statusMessageEClass, STATUS_MESSAGE__CREATION_TIME);
+		createEAttribute(statusMessageEClass, STATUS_MESSAGE__USER_ID);
+		createEAttribute(statusMessageEClass, STATUS_MESSAGE__MESSAGE_TYPE);
+		createEReference(statusMessageEClass, STATUS_MESSAGE__CHILDREN);
+
+		// Create enums
+		messageTypeEEnum = createEEnum(MESSAGE_TYPE);
+
 		// Create data types
 		btsObjectEDataType = createEDataType(BTS_OBJECT);
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
@@ -360,6 +450,23 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 
 		op = initEOperation(getTreeNodeWrapper__RemovePropertyChangeListener__PropertyChangeListener(), null, "removePropertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getPropertyChangeListener(), "propertyChangeListener", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(statusMessageEClass, StatusMessage.class, "StatusMessage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStatusMessage_Message(), ecorePackage.getEString(), "message", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatusMessage_CreationTime(), ecorePackage.getEDate(), "creationTime", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatusMessage_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatusMessage_MessageType(), this.getMessageType(), "messageType", "", 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getStatusMessage_Children(), this.getStatusMessage(), null, "children", null, 0, -1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		// Initialize enums and add enum literals
+		initEEnum(messageTypeEEnum, MessageType.class, "MessageType");
+		addEEnumLiteral(messageTypeEEnum, MessageType.ERROR);
+		addEEnumLiteral(messageTypeEEnum, MessageType.WARNING);
+		addEEnumLiteral(messageTypeEEnum, MessageType.NO_EDITING_RIGHTS);
+		addEEnumLiteral(messageTypeEEnum, MessageType.LOCKED);
+		addEEnumLiteral(messageTypeEEnum, MessageType.FILTERED);
+		addEEnumLiteral(messageTypeEEnum, MessageType.UPDATE);
+		addEEnumLiteral(messageTypeEEnum, MessageType.INFORMATION);
 
 		// Initialize data types
 		initEDataType(btsObjectEDataType, BTSObject.class, "BTSObject", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

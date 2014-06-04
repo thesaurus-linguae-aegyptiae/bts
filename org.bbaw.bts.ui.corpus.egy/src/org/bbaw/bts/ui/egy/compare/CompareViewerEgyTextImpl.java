@@ -35,6 +35,8 @@ public class CompareViewerEgyTextImpl implements CompareViewer{
 
 	private EgyTextEditorPart rightTextEditor;
 
+	private Composite parent;
+
 
 	@Override
 	public boolean load(Object leftObject, boolean leftEditable,
@@ -59,6 +61,7 @@ public class CompareViewerEgyTextImpl implements CompareViewer{
 	
 	@PostConstruct
 	public void postConstruct(Composite parent) {
+		this.parent = parent;
 		GridLayout gl_parent = new GridLayout(1, false);
 		gl_parent.horizontalSpacing = 0;
 		gl_parent.verticalSpacing = 0;
@@ -114,5 +117,12 @@ public class CompareViewerEgyTextImpl implements CompareViewer{
 	public boolean save() {
 		return false;
 		//TODO Your code here
+	}
+	
+	@Override
+	public void dispose() {
+		parent.dispose();
+		parent = null;
+		
 	}
 }

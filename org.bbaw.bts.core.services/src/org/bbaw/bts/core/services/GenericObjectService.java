@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.tempmodel.DBRevision;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 
 public interface GenericObjectService<E extends BTSDBBaseObject, K>
@@ -26,6 +27,9 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	E find(K key);
 	
 	E find(K key, String path, String revision);
+	
+	E find(K key, String path,
+			String revision, boolean fromRemote);
 
 	List<E> list(String objectState);
 
@@ -43,5 +47,10 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	void addRevisionStatement(E entity);
 	
 	void reloadConflicts(E object);
+
+	List<DBRevision> listAvailableRevisions(BTSDBBaseObject object,
+			boolean fetchFromRemote);
+
+	String getDisplayName(String userId);
 
 }

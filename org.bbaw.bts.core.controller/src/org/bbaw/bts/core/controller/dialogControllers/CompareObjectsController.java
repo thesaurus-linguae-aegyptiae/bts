@@ -7,6 +7,9 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 public interface CompareObjectsController {
 	
 	List<BTSDBBaseObject> listConflictingVersions(BTSDBBaseObject object);
+	
+	List<BTSDBBaseObject> listAvailableVersions(BTSDBBaseObject object, boolean fetchFromRemote);
+
 
 	boolean removeRevision(BTSDBBaseObject object, String revision);
 	

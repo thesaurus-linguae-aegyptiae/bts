@@ -14,13 +14,15 @@ Export-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel.impl,
  org.bbaw.bts.btsviewmodel.util,
  org.bbaw.bts.modelUtils,
- org.bbaw.bts.searchModel
+ org.bbaw.bts.searchModel,
+ org.bbaw.bts.tempmodel
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore,
  org.bbaw.bts.commons.libs.elasticsearch,
  org.apache.commons.codec
 Bundle-ActivationPolicy: lazy
-Import-Package: org.bbaw.bts.commons,
+Import-Package: com.google.gson;version="2.1.0",
+ org.bbaw.bts.commons,
  org.codehaus.jackson;version="1.9.5",
  org.codehaus.jackson.node;version="1.9.5",
  org.eclipse.emf.ecore.xmi.impl,

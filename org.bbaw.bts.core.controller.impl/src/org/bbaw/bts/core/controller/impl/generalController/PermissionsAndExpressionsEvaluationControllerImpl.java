@@ -15,6 +15,8 @@ import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
@@ -28,6 +30,7 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.services.IServiceConstants;
 
@@ -39,6 +42,9 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		PermissionsAndExpressionsEvaluationController {
 
+	@Inject
+	private IEventBroker eventBroker;
+	
 	private static final String FALSE = "false";
 
 	private static final String TRUE = "true";
@@ -287,6 +293,11 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		}
 		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT,
 				new Boolean(may));
+		if (!may)
+		{
+			StatusMessage m = BtsviewmodelFactory.eINSTANCE.createNotEditingRightsMessage();
+			eventBroker.post("status_info/filtered", m);
+		}
 		return may;
 
 	}
@@ -390,13 +401,13 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	 */
 	@Inject
 	@Optional
-	public void eventReceivedLockStatusUpdate(@EventTopic("locking_status_update/*") Object object)
+	public void eventReceivedLockStatusUpdate(@EventTopic("locking_status_update/*") DBLease lease)
 	{
-		if (object instanceof DBLease)
+		if (lease instanceof DBLease)
 		{
 			// object is locked
 			if (selection != null
-					&& selection.equals(((DBLease) object).getObject())
+					&& selection.equals(((DBLease) lease).getObject())
 					&& !hasLock) {
 				evaluatePermissionsAndExpressions();
 				hasLock = true;
@@ -404,7 +415,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		} else {
 			// object is locked
 			if (selection != null
-					&& selection.equals(((DBLease) object).getObject())
+					&& selection.equals(((DBLease) lease).getObject())
 					&& hasLock) {
 				otherLocked = false;
 				evaluatePermissionsAndExpressions();

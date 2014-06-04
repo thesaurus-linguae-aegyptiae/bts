@@ -3,16 +3,28 @@ package org.bbaw.bts.ui.corpus.parts.passportEditor;
 import java.util.List;
 import java.util.Vector;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 
-public class PassportEntryEditorComposite extends Composite {
+public abstract class PassportEntryEditorComposite extends Composite {
+
+	protected boolean userMayEdit;
+	
+	// get UISynchronize injected as field
+		@Inject
+		private UISynchronize sync;
+
 
 	public PassportEntryEditorComposite(Composite parent, int style) {
 		super(parent, style);
@@ -82,4 +94,21 @@ public class PassportEntryEditorComposite extends Composite {
 			composite.setSize(p.x, p.y + 1);
 		}
 	}
+	
+	@Inject
+	@Optional
+	public void setUserMayEdit(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) final boolean userMayEdit) {
+		if(userMayEdit != this.userMayEdit)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayEditInteral(userMayEdit);
+				}
+			});
+		}
+	}
+
+	protected abstract void setUserMayEditInteral(boolean mayEdit);
 }

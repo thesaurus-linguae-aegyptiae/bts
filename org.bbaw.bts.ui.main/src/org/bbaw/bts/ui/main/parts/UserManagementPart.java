@@ -316,6 +316,8 @@ public class UserManagementPart
 
 	private Link roles_roleDesc_removeRoleDesc_link;
 
+	private Text textCreateNewUserPassword_Group;
+
 	public UserManagementPart()
 	{
 	}
@@ -1917,34 +1919,39 @@ public class UserManagementPart
 		textComment_Group = new Text(composite_GroupEdit, SWT.BORDER);
 		textComment_Group.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 
-		new Label(composite_GroupEdit, SWT.NONE);
-		new Label(composite_GroupEdit, SWT.NONE);
-
 		Label lblcreateUser_Group = new Label(composite_GroupEdit, SWT.NONE);
 		lblcreateUser_Group.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
 		lblcreateUser_Group.setText("Create new User: Enter Username");
 
 		textCreateNewUser_Group = new Text(composite_GroupEdit, SWT.BORDER);
 		textCreateNewUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
-		textCreateNewUser_Group.addKeyListener(new KeyAdapter()
+		
+		Label lblcreateUserPassword_Group = new Label(composite_GroupEdit, SWT.NONE);
+		lblcreateUserPassword_Group.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
+		lblcreateUserPassword_Group.setText("Password of New User");
+
+		textCreateNewUserPassword_Group = new Text(composite_GroupEdit, SWT.BORDER | SWT.PASSWORD);
+		textCreateNewUserPassword_Group.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+
+		textCreateNewUserPassword_Group.addModifyListener(new ModifyListener()
 		{
 
 			@Override
-			public void keyPressed(KeyEvent e)
+			public void modifyText(ModifyEvent e)
 			{
-				if (e.keyCode == SWT.CR)
-				{
-					createNewUser(selectedTreeNode, group, textCreateNewUser_Group.getText());
-				}
+				linkCreateNewUser_Group.setEnabled((textCreateNewUser_Group.getText().trim().length() > 0)
+						&& (textCreateNewUserPassword_Group.getText().trim().length() > 0));
 			}
 		});
+		
 		textCreateNewUser_Group.addModifyListener(new ModifyListener()
 		{
 
 			@Override
 			public void modifyText(ModifyEvent e)
 			{
-				linkCreateNewUser_Group.setEnabled((textCreateNewUser_Group.getText().trim().length() > 0));
+				linkCreateNewUser_Group.setEnabled((textCreateNewUser_Group.getText().trim().length() > 0)
+						&& (textCreateNewUserPassword_Group.getText().trim().length() > 0));
 			}
 		});
 
@@ -1956,10 +1963,12 @@ public class UserManagementPart
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
-				createNewUser(selectedTreeNode, group, textCreateNewUser_Group.getText());
+				createNewUser(selectedTreeNode, group, textCreateNewUser_Group.getText().trim(),
+						textCreateNewUserPassword_Group.getText().trim());
 			}
 		});
-		linkCreateNewUser_Group.setEnabled((textCreateNewUser_Group.getText().trim().length() > 0));
+		linkCreateNewUser_Group.setEnabled((textCreateNewUser_Group.getText().trim().length() > 0)
+				&& (textCreateNewUserPassword_Group.getText().trim().length() > 0));
 
 		user_sashForm.setWeights(new int[] { 1, 1 });
 		user_sashForm.layout();
@@ -1969,10 +1978,11 @@ public class UserManagementPart
 		return composite_GroupEdit;
 	}
 
-	private void createNewUser(TreeNodeWrapper parentNodeWrapper, BTSUserGroup group, String userName)
+	private void createNewUser(TreeNodeWrapper parentNodeWrapper, BTSUserGroup group, String userName, String password)
 	{
 		BTSUser user = userManagerController.createNewUser(userName);
 		user.getGroupIds().add(group.get_id());
+		user.setPassword(password);
 		TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 		tn.setObject(user);
 		tn.setParent(parentNodeWrapper);

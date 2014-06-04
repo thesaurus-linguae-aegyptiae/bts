@@ -177,12 +177,10 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public TreeNodeWrapper getParent()
 	{
-		if (parent != null && parent.eIsProxy())
-		{
+		if (parent != null && parent.eIsProxy()) {
 			InternalEObject oldParent = (InternalEObject)parent;
 			parent = (TreeNodeWrapper)eResolveProxy(oldParent);
-			if (parent != oldParent)
-			{
+			if (parent != oldParent) {
 				if (eNotificationRequired())
 					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT, oldParent, parent));
 			}
@@ -217,8 +215,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	 */
 	public EList<TreeNodeWrapper> getChildren()
 	{
-		if (children == null)
-		{
+		if (children == null) {
 			children = new EObjectResolvingEList<TreeNodeWrapper>(TreeNodeWrapper.class, this, BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN);
 		}
 		return children;
@@ -370,8 +367,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT:
 				if (resolve) return getParent();
 				return basicGetParent();
@@ -399,8 +395,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT:
 				setParent((TreeNodeWrapper)newValue);
 				return;
@@ -434,8 +429,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public void eUnset(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT:
 				setParent((TreeNodeWrapper)null);
 				return;
@@ -468,8 +462,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public boolean eIsSet(int featureID)
 	{
-		switch (featureID)
-		{
+		switch (featureID) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PARENT:
 				return parent != null;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN:
@@ -495,8 +488,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
-		switch (operationID)
-		{
+		switch (operationID) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;

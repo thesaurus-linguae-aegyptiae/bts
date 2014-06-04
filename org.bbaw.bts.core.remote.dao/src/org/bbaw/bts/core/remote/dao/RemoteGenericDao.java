@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.tempmodel.DBRevision;
 
 public interface RemoteGenericDao<E extends BTSDBBaseObject, K>
 {
@@ -24,6 +25,8 @@ public interface RemoteGenericDao<E extends BTSDBBaseObject, K>
 	E reload(K key, String path);
 
 	List<E> list(String path);
+
+	List<DBRevision> listAvailableRevisions(K key, String path);
 
 	List<E> findByQueryId(String searchId, String path);
 

@@ -18,6 +18,7 @@ public class CompareViewerGeneralImpl implements CompareViewer{
 
 	private Composite leftComposite;
 	private Composite rightComposite;
+	private Composite parent;
 
 
 	@Override
@@ -34,6 +35,7 @@ public class CompareViewerGeneralImpl implements CompareViewer{
 	
 	@PostConstruct
 	public void postConstruct(Composite parent) {
+		this.parent = parent;
 		GridLayout gl_parent = new GridLayout(1, false);
 		gl_parent.horizontalSpacing = 0;
 		gl_parent.verticalSpacing = 0;
@@ -67,5 +69,12 @@ public class CompareViewerGeneralImpl implements CompareViewer{
 	public boolean save() {
 		return false;
 		//TODO Your code here
+	}
+
+	@Override
+	public void dispose() {
+		parent.dispose();
+		parent = null;
+		
 	}
 }

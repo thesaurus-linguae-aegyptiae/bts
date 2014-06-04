@@ -8,8 +8,9 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 public class ExitApplicationHandler {
 	@Execute
 	  public void execute(IWorkbench workbench, DBManager dbManager) {
-	    workbench.close();
 	    dbManager.shutdown();
+	    workbench.close();
+
 	  }
 		
 }
