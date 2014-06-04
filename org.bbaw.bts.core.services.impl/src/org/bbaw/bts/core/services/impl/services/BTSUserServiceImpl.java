@@ -82,7 +82,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public List<BTSUser> list(String objectState)
 	{
 		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN, objectState);
-		return filter(users);
+		return users;
 	}
 
 	@Override

@@ -2,6 +2,7 @@ package org.bbaw.bts.ui.corpus.parts.passportEditor;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
@@ -9,6 +10,7 @@ import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
@@ -25,6 +27,7 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
@@ -95,7 +98,20 @@ public class RelationEditorComposite extends Composite {
 	@Inject
 	private CorpusNavigatorController corpusNavigatorController;
 
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	protected boolean userMayEdit;
+	
+	// get UISynchronize injected as field
+	@Inject
+	private UISynchronize sync;
+	
 	private Text text;
+
+	private boolean loaded;
+
+	private ComboViewer selectComboViewer;
 
 	/**
 	 * Create the composite.
@@ -147,7 +163,7 @@ public class RelationEditorComposite extends Composite {
 					.getTranslation(lang));
 			deco.setImage(image);
 		}
-		ComboViewer selectComboViewer = new ComboViewer(combo);
+		selectComboViewer = new ComboViewer(combo);
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(
 				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
@@ -198,6 +214,8 @@ public class RelationEditorComposite extends Composite {
 			@Override
 			public void focusGained(FocusEvent e) {
 
+				if (RelationEditorComposite.this.userMayEdit)
+				{
 				try {
 					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
 					ContentProposalAdapter adapter = new ContentProposalAdapter(
@@ -225,6 +243,7 @@ public class RelationEditorComposite extends Composite {
 				}
 
 			}
+			}
 		});
 
 		if (relation.getObjectId() != null) {
@@ -243,13 +262,17 @@ public class RelationEditorComposite extends Composite {
 
 			@Override
 			public void mouseDown(MouseEvent e) {
+				if (RelationEditorComposite.this.userMayEdit)
+				{
 				Label l = (Label) e.getSource();
 				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+				}
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
+				if (RelationEditorComposite.this.userMayEdit)
+				{
 				Label l = (Label) e.getSource();
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
@@ -275,9 +298,11 @@ public class RelationEditorComposite extends Composite {
 //							+ relation.getObjectId());
 					text.setText(object.getName());
 				}
+				}
 			}
 		});
-
+		loaded = true;
+		setUserMayEditInteral(userMayEdit);
 	}
 
 	private EditingDomain getEditingDomain() {
@@ -297,5 +322,29 @@ public class RelationEditorComposite extends Composite {
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	@Inject
+	@Optional
+	public void setUserMayEdit(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) final boolean userMayEdit) {
+		if(userMayEdit != this.userMayEdit)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayEditInteral(userMayEdit);
+				}
+			});
+		}
+	}
+
+	private void setUserMayEditInteral(boolean mayEdit) {
+		this.userMayEdit = mayEdit;
+		if (loaded && !this.isDisposed())
+		{
+			text.setEditable(mayEdit);
+			selectComboViewer.getCombo().setEnabled(mayEdit);
+		}
+		
 	}
 }

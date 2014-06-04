@@ -152,6 +152,11 @@ public class PassportEditorPart {
 	@Optional
 	@Named(BTSUIConstants.PART_SAVE_ON_DESELCTION)
 	private boolean save_on_deselection = true;
+	
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	public boolean userMayEdit;
 
 	private Text text;
 	private Text txtAuthortextadmin;
@@ -185,7 +190,6 @@ public class PassportEditorPart {
 	private Combo corpusCMB;
 	private ComboViewer corpus_viewer;
 	private Composite parent;
-	private boolean userMayEdit;
 
 	@Inject
 	public PassportEditorPart() {
@@ -884,6 +888,7 @@ public class PassportEditorPart {
 			CTabItem ti = tabFolder.getItem(0);
 			reloadGenericTabItem(ti);
 		}
+		setUserMayEditInteral(userMayEdit);
 
 	}
 

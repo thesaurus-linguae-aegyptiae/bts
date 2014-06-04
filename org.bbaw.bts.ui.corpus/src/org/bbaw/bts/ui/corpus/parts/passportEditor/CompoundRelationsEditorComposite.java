@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
@@ -21,6 +22,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
@@ -51,6 +53,11 @@ public class CompoundRelationsEditorComposite extends Composite {
 	@Inject
 	private BTSCorpusObject corpusObject;
 
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	protected boolean userMayEdit;
+	
 	private Map<String, BTSConfigItem> relationConfigCache = new HashMap<String, BTSConfigItem>();
 
 	private List<BTSConfigItem> cachedRelationConfigs;
@@ -167,13 +174,17 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 				@Override
 				public void mouseDown(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+					}
 				}
 
 				@Override
 				public void mouseUp(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					CompoundCommand compoundCommand = new CompoundCommand();
@@ -181,6 +192,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 							.create(editingDomain, relation);
 					compoundCommand.append(command);
 					editingDomain.getCommandStack().execute(compoundCommand);
+					}
 				}
 			});
 			Label addButton = new Label(this, SWT.PUSH);
@@ -193,13 +205,17 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 				@Override
 				public void mouseDown(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
+					}
 				}
 
 				@Override
 				public void mouseUp(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					BTSRelation rel = makeAdditionalRelation();
@@ -211,7 +227,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 									rel);
 					compoundCommand.append(command);
 					editingDomain.getCommandStack().execute(compoundCommand);
-
+					}
 				}
 			});
 		} else {
@@ -228,12 +244,17 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 				@Override
 				public void mouseDown(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+					}
 				}
 
 				@Override
 				public void mouseUp(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					CompoundCommand compoundCommand = new CompoundCommand();
@@ -241,7 +262,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 							.create(editingDomain, relation);
 					compoundCommand.append(command);
 					editingDomain.getCommandStack().execute(compoundCommand);
-
+					}
 				}
 			});
 		}

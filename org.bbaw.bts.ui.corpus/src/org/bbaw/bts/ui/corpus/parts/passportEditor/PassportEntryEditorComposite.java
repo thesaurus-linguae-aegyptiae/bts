@@ -18,12 +18,14 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 
 public abstract class PassportEntryEditorComposite extends Composite {
-
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	protected boolean userMayEdit;
 	
 	// get UISynchronize injected as field
-		@Inject
-		private UISynchronize sync;
+	@Inject
+	private UISynchronize sync;
 
 
 	public PassportEntryEditorComposite(Composite parent, int style) {

@@ -258,7 +258,7 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	public StatusMessage createFilteredMessage(int suppressed) {
 		StatusMessage m = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
-		m.setMessage(suppressed + " number of objects not visible.");
+		m.setMessage(suppressed + " objects are not shown.");
 		m.setMessageType(MessageType.FILTERED);
 		m.setCreationTime(getTimeStamp());
 		return m;
@@ -270,7 +270,7 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	public StatusMessage createNotEditingRightsMessage() {
 		StatusMessage m = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
-		m.setMessage("No editing rights for selected object.");
+		m.setMessage("You are not allowed to edit the selected object.");
 		m.setMessageType(MessageType.NO_EDITING_RIGHTS);
 		m.setCreationTime(getTimeStamp());
 		return m;

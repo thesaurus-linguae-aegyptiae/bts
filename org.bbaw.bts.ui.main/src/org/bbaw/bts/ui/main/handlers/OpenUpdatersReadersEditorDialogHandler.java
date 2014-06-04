@@ -3,6 +3,7 @@ package org.bbaw.bts.ui.main.handlers;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -29,7 +30,12 @@ public class OpenUpdatersReadersEditorDialogHandler {
 
 	@CanExecute
 	public boolean canExecute(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSDBBaseObject selection) {
-		return selection != null;
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSDBBaseObject selection,
+			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) Boolean mayEdit) {
+		if (mayEdit != null && mayEdit.booleanValue())
+		{
+			return selection != null;
+		}
+		return false;
 	}
 }

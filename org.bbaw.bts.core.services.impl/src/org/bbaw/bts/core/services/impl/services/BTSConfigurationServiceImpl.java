@@ -104,7 +104,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			configs.addAll(configurationDao.list(p
 					+ ServiceConstants.ADMIN_SUFFIX, objectState));
 		}
-		return filter(configs);
+		return configs;
 	}
 
 	@Override
@@ -207,8 +207,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public List<BTSConfiguration> list(String dbPath, String queryId,
 			String objectState)
 	{
-		return filter(configurationDao.findByQueryId(queryId, dbPath,
-				objectState));
+		return configurationDao.findByQueryId(queryId, dbPath,
+				objectState);
 	}
 
 	@Override

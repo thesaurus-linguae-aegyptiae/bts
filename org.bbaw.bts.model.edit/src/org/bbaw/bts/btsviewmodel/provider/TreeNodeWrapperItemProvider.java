@@ -15,6 +15,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
+import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -29,6 +30,9 @@ import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
+import org.eclipse.emf.edit.provider.ITableItemColorProvider;
+import org.eclipse.emf.edit.provider.ITableItemFontProvider;
+import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
@@ -40,9 +44,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * --> <!-- end-user-doc -->
  * @generated
  */
-public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider,
-		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource,
-		IItemColorProvider, IItemFontProvider
+public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
 {
 
 	// EcoreItemProviderAdapterFactory factory = new
@@ -505,5 +507,23 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 		}
 		return null;
 	}
-
+	@Override
+	public String getColumnText(Object object, int columnIndex) {
+		switch (columnIndex)
+		{
+		case 0 : return getText(object);
+		case 1 : return new Integer(((TreeNodeWrapper)object).getChildren().size()).toString();
+		}
+		
+		
+		return super.getColumnText(object, columnIndex);
+	}
+	@Override
+	public Object getColumnImage(Object object, int columnIndex) {
+		switch (columnIndex)
+		{
+		case 0 : return getImage(object);
+		}
+		return super.getColumnImage(object, columnIndex);
+	}
 }

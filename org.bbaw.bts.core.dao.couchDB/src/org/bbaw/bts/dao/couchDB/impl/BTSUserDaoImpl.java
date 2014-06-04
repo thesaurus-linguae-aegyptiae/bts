@@ -222,31 +222,8 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 			return user;
 		}
 		jso = updateOrMakeNewDBUser(jso, entity, dbClient);
-		String string = dbClient.getGson().toJson(jso);
-		System.out.println(string);
-		System.out.println(jso);
 		Response response = dbClient.save(jso);
 		user.set_rev(response.getRev());
-//		// save jso
-//		HttpPost head = new HttpPost(dbClient.getDBUri() + COUCHDB_USERS_PREFIX + entity.getUserName());
-////		HttpPost post = new HttpPost(builder(dbClient.getDBUri()).path("_purge").build());
-//		HttpEntity body;
-//		try {
-//			body = new ByteArrayEntity(string.getBytes("UTF-8"));
-//			head.setEntity(body);
-//			head.setHeader("Content-Type", "application/json");
-//
-//			HttpResponse response = dbClient.executeRequest(head); 
-//			String revision = response.getFirstHeader("ETAG").getValue();
-//		} catch (UnsupportedEncodingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		
-
-//		HttpClientUtils.closeQuietly(response); // closes the response
-		// update password
 		return user;
 	}
 

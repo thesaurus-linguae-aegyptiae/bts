@@ -3,7 +3,8 @@
     xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.bbaw.bts.model/src" modelPluginID="org.bbaw.bts.model"
     modelName="BTSViewModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
-    colorProviders="true" fontProviders="true" operationReflection="true" importOrganizing="true">
+    tableProviders="true" colorProviders="true" fontProviders="true" operationReflection="true"
+    importOrganizing="true">
   <foreignModel>BTSViewModel.ecore</foreignModel>
   <genPackages prefix="Btsviewmodel" basePackage="org.bbaw.bts" disposableProviderFactory="true"
       childCreationExtenders="true" ecorePackage="BTSViewModel.ecore#/">

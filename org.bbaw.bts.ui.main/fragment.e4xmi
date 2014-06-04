@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
   <imports xsi:type="commands:Command" xmi:id="_m2YhoL8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.file.exit"/>
   <imports xsi:type="commands:Command" xmi:id="_HO_yQL8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication"/>
   <imports xsi:type="commands:Command" xmi:id="_3xuZsL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart"/>
@@ -16,23 +16,6 @@
     <elements xsi:type="menu:HandledToolItem" xmi:id="_ZNwscGcSEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.save_all" label="Save All" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/save_all.png" command="_tAcbgGcMEeOBmPSxTUuwxg"/>
     <elements xsi:type="menu:HandledToolItem" xmi:id="_gu5ioGcSEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.undo" label="Undo" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/undo.png" command="_w81_oGcMEeOBmPSxTUuwxg"/>
     <elements xsi:type="menu:HandledToolItem" xmi:id="_jlt-wGcSEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.redo" label="Redo" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/redo.png" command="_0CuLcGcMEeOBmPSxTUuwxg"/>
-    <elements xsi:type="menu:HandledToolItem" xmi:id="_vvgLwAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.handledtoolitem.Listen2Updates" toBeRendered="false" visible="false" label="Listen2Updates" tooltip="Listen2Updates" enabled="false" command="_XRryAAUBEeOv5rV0xfzB3w"/>
-    <elements xsi:type="menu:HandledToolItem" xmi:id="_cMpkEDDbEeOcKK6bB3llFg" elementId="org.bbaw.bts.ui.main.handledtoolitem.editProject" toBeRendered="false" visible="false" label="editProject" command="_hkOGsDDQEeOcKK6bB3llFg"/>
-    <elements xsi:type="menu:HandledToolItem" xmi:id="_kuZjUDpKEeOBQZ1FHdD7_g" elementId="TEST" toBeRendered="false" visible="false" label="Test" enabled="false" command="_cn-10DpKEeOBQZ1FHdD7_g">
-      <visibleWhen xsi:type="ui:CoreExpression" xmi:id="_ae3OUNxKEeODTbKD0_l8Zw"/>
-    </elements>
-    <elements xsi:type="menu:ToolControl" xmi:id="_i6_xsOszEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolcontrol.1" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.EmptyToolControl">
-      <tags>stretch</tags>
-    </elements>
-    <elements xsi:type="menu:ToolBarSeparator" xmi:id="_jX-ooOszEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolbarseparator.0" toBeRendered="false" visible="false">
-      <tags>stretch</tags>
-    </elements>
-    <elements xsi:type="menu:ToolControl" xmi:id="_kACHIOszEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.usertoolcontrol" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.ProjectToolControl"/>
-    <elements xsi:type="menu:ToolBarSeparator" xmi:id="_kmkisOszEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolbarseparator.1" toBeRendered="false" visible="false"/>
-    <elements xsi:type="menu:ToolControl" xmi:id="_lHSqIOszEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolcontrol.0" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.UserToolcontrol">
-      <tags>stretch</tags>
-      <tags>draggable</tags>
-    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_1nJlMAP8EeOVO9L3NDWRFg" featurename="handlers" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Handler" xmi:id="_eQ3xsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.handler.startBackendUpdateListening" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.StartBackendUpdateListeningHandler" command="_XRryAAUBEeOv5rV0xfzB3w"/>

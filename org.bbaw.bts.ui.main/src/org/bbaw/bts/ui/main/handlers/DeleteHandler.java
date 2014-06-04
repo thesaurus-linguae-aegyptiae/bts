@@ -6,7 +6,9 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -37,5 +39,8 @@ public class DeleteHandler {
 			}
 		}
 	}
-		
+	@CanExecute
+	public boolean canExecute(@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_DELETE) Boolean mayDelete) {
+		return mayDelete.booleanValue();
+	}	
 }

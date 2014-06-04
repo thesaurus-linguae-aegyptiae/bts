@@ -4,6 +4,7 @@ package org.bbaw.bts.ui.corpus.handlers;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BTSPassportEntryGroup;
@@ -233,12 +234,11 @@ public class PassportInheritFromParentHandler {
 	}
 	@CanExecute
 	public boolean canExecute(
-			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection) {
-		if (selection != null && selection instanceof BTSCorpusObject && !selection.getRelations().isEmpty()) {
+			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
+			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) Boolean mayEdit) {
+		if (mayEdit != null && mayEdit.booleanValue() && selection != null && selection instanceof BTSCorpusObject && !selection.getRelations().isEmpty()) {
 			return true;
 		}
 		return false;
 	}
-	
-	
 }

@@ -25,8 +25,9 @@ public class UndoHandler {
 	@CanExecute
 	public boolean canExecute(
 			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_CAN_UNDO) String canUndo,
-			IEclipseContext context) {
-		boolean can = (canUndo != null && canUndo.equals("true"));
+			IEclipseContext context,
+			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) Boolean mayEdit) {
+		boolean can = (canUndo != null && canUndo.equals("true") && mayEdit != null && mayEdit.booleanValue());
 		return can;
 	}
 }

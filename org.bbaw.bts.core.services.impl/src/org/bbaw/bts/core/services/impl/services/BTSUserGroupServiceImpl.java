@@ -66,7 +66,7 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	{
 		List<BTSUserGroup> userGroups = userGroupDao.list(
 				ServiceConstants.ADMIN, objectState);
-		return filter(userGroups);
+		return userGroups;
 	}
 
 	@Override

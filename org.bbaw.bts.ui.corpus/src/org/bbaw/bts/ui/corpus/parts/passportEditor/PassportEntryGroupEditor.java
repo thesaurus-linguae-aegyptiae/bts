@@ -99,7 +99,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 		// draw group onto this
 
 		makeContent(false, false);
-
+		setUserMayEditInteral(userMayEdit);
 	}
 
 	private void makeContent(boolean resize, boolean relayout) {

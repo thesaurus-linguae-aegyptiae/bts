@@ -160,7 +160,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		((GridLayout) this.getLayout()).horizontalSpacing = 0;
 
 		loadContent(false);
-
+		setUserMayEditInteral(userMayEdit);
 	}
 
 	private void loadContent(boolean b) {
@@ -953,12 +953,34 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	@Override
 	protected void setUserMayEditInteral(boolean mayEdit) {
-		textField.setEditable(mayEdit);
-		checkBox.setEnabled(mayEdit);
-		ths_select_text.setEditable(mayEdit);
-		text.setEditable(mayEdit);
-		textSuggest.setEditable(mayEdit);
-		combo.setEnabled(mayEdit);
-		spinner.setEnabled(mayEdit);
+		if (this.isDisposed()) return;
+		// first check and load standard widget types
+		if (BTSCoreConstants.WIDGET_TYPE_TEXT.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+			text.setEditable(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_SUGGEST.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+			textSuggest.setEditable(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_TEXT_FIELD.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+			textField.setEditable(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_CONFIG.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+			combo.setEnabled(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_INTEGER
+				.equals(itemConfig.getPassportEditorConfig().getWidgetType())) {
+			spinner.setEnabled(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_SELECT_THS.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+			ths_select_text.setEditable(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_BOOLEAN.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+			checkBox.setEnabled(mayEdit);
+		} else if (BTSCoreConstants.WIDGET_TYPE_DATE.equals(itemConfig
+				.getPassportEditorConfig().getWidgetType())) {
+		} else if (BTSCoreConstants.WIDGET_TYPE_REFERENCE_EXTERNAL
+				.equals(itemConfig.getPassportEditorConfig().getWidgetType())) {
+		}
+
 	}
 }

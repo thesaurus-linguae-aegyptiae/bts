@@ -230,7 +230,10 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	private void removeObjectFromHolder(Object holder, BTSObject o)
 	{
 		TreeNodeWrapper parent = ((TreeNodeWrapper) holder).getParent();
-		parent.getChildren().remove(holder);
+		if (parent != null)
+		{
+			parent.getChildren().remove(holder);
+		}
 
 	}
 
