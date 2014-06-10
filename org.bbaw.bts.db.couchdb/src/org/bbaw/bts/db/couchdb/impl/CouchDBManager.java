@@ -1092,4 +1092,29 @@ public class CouchDBManager implements DBManager
 
 		
 	}
+
+	@Override
+	public boolean checkUserIsDBAdmin(String userName, String password) {
+		CouchDbClient dbClient = null;
+		boolean success = true;
+		try {
+			dbClient = connectionProvider.getDBClient(CouchDbClient.class, "_users");
+			dbClient.design().getFromDb("_all_docs");
+		} catch (Exception e) {
+			success = false;
+		}
+		return success;
+	}
+
+	@Override
+	public boolean dbCollectionExists(String dbCollectionName) {
+		CouchDbClient dbClient = null;
+		boolean exists = true;
+		try {
+			dbClient = connectionProvider.getDBClient(CouchDbClient.class, dbCollectionName);
+		} catch (Exception e) {
+			exists = false;
+		}
+		return exists;
+	}
 }

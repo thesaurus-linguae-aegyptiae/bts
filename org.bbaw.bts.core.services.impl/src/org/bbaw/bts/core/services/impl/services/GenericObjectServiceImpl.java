@@ -16,7 +16,9 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -96,6 +98,21 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	@Override
 	public abstract E createNew();
+	
+	@Override
+	public E createNewRelationPartOf(BTSIdentifiableItem parentObject)
+	{
+		E entity = createNew();
+		if (parentObject != null && entity instanceof BTSCorpusObject)
+		{
+			BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
+			rel.setObjectId(parentObject.get_id());
+			rel.setType(BTSCoreConstants.BASIC_RELATIONS_PARTOF);
+			((BTSCorpusObject) entity).getRelations().add(rel);
+		}
+		return entity;
+		
+	}
 
 	public void setId(E entity)
 	{

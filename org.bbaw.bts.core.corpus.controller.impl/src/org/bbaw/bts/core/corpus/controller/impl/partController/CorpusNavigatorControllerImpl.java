@@ -21,6 +21,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.BTSAnnotationService;
@@ -76,13 +77,6 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	@Inject
 	private Logger logger;
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.bbaw.bts.core.controller.impl.partController.CorpusNavigatorController
-	 * #createNewTextCorpus()
-	 */
 	@Override
 	public BTSTextCorpus createNewTextCorpus()
 	{
@@ -90,17 +84,11 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		return corpus;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.bbaw.bts.core.controller.impl.partController.CorpusNavigatorController
-	 * #createNewTCObject()
-	 */
 	@Override
-	public BTSTCObject createNewTCObject()
+	public BTSTCObject createNewTCObject(BTSCorpusObject parentObject)
 	{
-		BTSTCObject o = tcObjectService.createNew();
+		BTSTCObject o = tcObjectService.createNewRelationPartOf(parentObject);
+
 		return o;
 	}
 
@@ -314,7 +302,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	}
 
 	@Override
-	public BTSText createNewText()
+	public BTSText createNewText(BTSCorpusObject parentObject)
 	{
 		BTSText text = textService.createNew();
 		return text;
@@ -323,7 +311,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	@Override
 	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
 		BTSAnnotation anno = annotationService
-				.createNewAndRelate(annotatedObject);
+				.createNewRelationPartOf(annotatedObject);
 
 		return anno;
 	}

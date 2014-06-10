@@ -383,29 +383,29 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		} else if ((object instanceof BTSTCObject || object instanceof BTSText) && selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject)
 		{
-			corpusNavigatorController.addRelation((BTSCorpusObject) object,
-					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
-					(TreeNodeWrapper) selection.getFirstElement());
+//			corpusNavigatorController.addRelation((BTSCorpusObject) object,
+//					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
+//					(TreeNodeWrapper) selection.getFirstElement());
 
 			//			refreshTreeViewer((BTSCorpusObject) object);
 
 		}
 	}
 
-	@Inject
-	@Optional
-	void eventReceivedAdd(@EventTopic("model_add/*") BTSObject object) {
-		if (object instanceof BTSAnnotation
-				&& selection != null
-				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
-			corpusNavigatorController.addRelation((BTSCorpusObject) object,
-					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
-					(TreeNodeWrapper) selection.getFirstElement());
-
-			// refreshTreeViewer((BTSCorpusObject) object);
-
-		}
-	}
+//	@Inject
+//	@Optional
+//	void eventReceivedAdd(@EventTopic("model_add/*") BTSObject object) {
+////		if (object instanceof BTSAnnotation
+////				&& selection != null
+////				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
+////			corpusNavigatorController.addRelation((BTSCorpusObject) object,
+////					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
+////					(TreeNodeWrapper) selection.getFirstElement());
+////
+////			// refreshTreeViewer((BTSCorpusObject) object);
+////
+////		}
+//	}
 
 	@Inject
 	@Optional

@@ -91,6 +91,8 @@ public class BTSCoreConstants
 	public static final String RELATION = "Relation";
 	public static final Object RELATIONS = "Relations";
 	public static final String LOCKING_MAP_KEY = "locking_map_key";
+	public static final String CORE_EXPRESSION_MAY_CREATE_DBCOLLECTION = "core_expression_may_create_dbCollection";
+	public static final String CORE_EXPRESSION_MAY_EDIT_PROJECTS = "core_expression_may_edit_projects";
 
 
 }

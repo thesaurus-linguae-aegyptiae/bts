@@ -11,8 +11,8 @@
     <genEnums typeSafeEnumCompatible="false" ecoreEnum="BTSViewModel.ecore#//MessageType">
       <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/ERROR"/>
       <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/WARNING"/>
-      <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/NO_EDITING_RIGHTS"/>
       <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/LOCKED"/>
+      <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/NO_EDITING_RIGHTS"/>
       <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/FILTERED"/>
       <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/UPDATE"/>
       <genEnumLiterals ecoreEnumLiteral="BTSViewModel.ecore#//MessageType/INFORMATION"/>

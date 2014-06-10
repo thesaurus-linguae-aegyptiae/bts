@@ -60,10 +60,10 @@ public class EmfModelHelper
 			{
 				if (eStructuralFeature instanceof EAttribute)
 				{
-					if (eStructuralFeature.getName().equals("name"))
-					{
-						System.out.println("name");
-					}
+//					if (eStructuralFeature.getName().equals("name"))
+//					{
+//						System.out.println("name");
+//					}
 					copyAttribute((EAttribute) eStructuralFeature, objectWithChanges, target, copier);
 				} else
 				{

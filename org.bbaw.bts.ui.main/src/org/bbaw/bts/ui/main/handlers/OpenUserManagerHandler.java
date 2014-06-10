@@ -2,6 +2,8 @@ package org.bbaw.bts.ui.main.handlers;
 
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.main.dialogs.UserManagementDialog;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -26,10 +28,9 @@ public class OpenUserManagerHandler
 	}
 
 	@CanExecute
-	public boolean canExecute()
-	{
-		//TODO Your code goes here
-		return true;
-	}
+	public boolean canExecute(
+			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_USERS) Boolean mayEdit) {
+		return (mayEdit != null && mayEdit.booleanValue());
+	}	
 
 }

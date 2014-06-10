@@ -4,6 +4,7 @@ package org.bbaw.bts.ui.main.handlers;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
 import org.bbaw.bts.ui.main.dialogs.ConflictsDialog;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
@@ -33,8 +34,9 @@ public class OpenConflictsDialog {
 	
 	
 	@CanExecute
-	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
-		if (selection instanceof BTSDBBaseObject)
+	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) Object selection,
+			@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) Boolean mayEdit) {
+		if (mayEdit != null && mayEdit.booleanValue() && selection instanceof BTSDBBaseObject)
 		{
 			if (!((BTSDBBaseObject)selection).getConflictingRevs().isEmpty())
 			{

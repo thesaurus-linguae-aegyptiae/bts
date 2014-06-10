@@ -462,8 +462,8 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		initEEnum(messageTypeEEnum, MessageType.class, "MessageType");
 		addEEnumLiteral(messageTypeEEnum, MessageType.ERROR);
 		addEEnumLiteral(messageTypeEEnum, MessageType.WARNING);
-		addEEnumLiteral(messageTypeEEnum, MessageType.NO_EDITING_RIGHTS);
 		addEEnumLiteral(messageTypeEEnum, MessageType.LOCKED);
+		addEEnumLiteral(messageTypeEEnum, MessageType.NO_EDITING_RIGHTS);
 		addEEnumLiteral(messageTypeEEnum, MessageType.FILTERED);
 		addEEnumLiteral(messageTypeEEnum, MessageType.UPDATE);
 		addEEnumLiteral(messageTypeEEnum, MessageType.INFORMATION);

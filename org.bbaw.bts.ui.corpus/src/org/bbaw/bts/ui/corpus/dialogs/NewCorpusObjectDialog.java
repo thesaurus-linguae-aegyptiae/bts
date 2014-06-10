@@ -1,12 +1,17 @@
 package org.bbaw.bts.ui.corpus.dialogs;
 
+import java.util.List;
+import java.util.Vector;
+
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
@@ -18,8 +23,12 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.domain.EditingDomain;
@@ -28,6 +37,8 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -60,6 +71,10 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	private Button btnCheckButton;
 
 	protected boolean synchronize;
+
+	private PermissionsAndExpressionsEvaluationController permisionsController;
+
+	private UISynchronize sync;
 
 	/**
 	 * Create the dialog.
@@ -109,6 +124,40 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		
 		corpusPrefixTxt = new Text(container, SWT.BORDER);
 		corpusPrefixTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
+		corpusPrefixTxt.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (corpusPrefixTxt.getText().trim().length() > 0)
+				{
+					final boolean enabled = btnCheckButton.isEnabled();
+					final String dbColl = corpusPrefixTxt.getText();
+					Job j = new Job("check may sync"){
+	
+						@Override
+						protected IStatus run(IProgressMonitor monitor) {
+							final boolean may = permisionsController.authenticatedUserMaySyncDBColl(dbColl);
+							
+							if (may != enabled)
+							{
+								sync.asyncExec(new Runnable()
+								{
+									@Override
+									public void run()
+									{
+										btnCheckButton.setEnabled(may);
+									}
+								});
+							}
+							return Status.OK_STATUS;
+						}
+						
+					};
+					j.schedule();
+				}
+			}
+		});
 		new Label(container, SWT.NONE);
 		new Label(container, SWT.NONE);
 		
@@ -124,14 +173,16 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		});
 
 		bindingContext = initializeBindings();
-
+		
 		return area;
 	}
 
 	private DataBindingContext initializeBindings()
 	{
 		context = StaticAccessController.getContext();
+		sync = context.get(UISynchronize.class);
 		editingDomainController = context.get(EditingDomainController.class);
+		permisionsController = context.get(PermissionsAndExpressionsEvaluationController.class);
 		editingDomain = editingDomainController.getEditingDomain(object);
 		DataBindingContext bindingContext = new DataBindingContext();
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
@@ -153,6 +204,8 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		bindingContext.addValidationStatusProvider(binding_pre);
 		BackgroundControlDecorationSupport.create(binding_pre, SWT.TOP | SWT.LEFT);
 
+		btnCheckButton.setEnabled(permisionsController.authenticatedUserMaySyncDBColl(corpusPrefixTxt.getText()));
+		
 		return bindingContext;
 	}
 

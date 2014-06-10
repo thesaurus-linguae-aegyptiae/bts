@@ -2,12 +2,20 @@ package org.bbaw.bts.ui.main.wizards.newProject;
 
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.validation.IValidator;
 import org.eclipse.core.databinding.validation.ValidationStatus;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.emf.databinding.EMFProperties;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
@@ -15,6 +23,8 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -31,6 +41,10 @@ public class EditDBCollectionDialog extends TitleAreaDialog
 	private BTSProjectDBCollection collection;
 	private Button btnSyncronizeCollection;
 	private Button btnIndexCollectionFor;
+	private IEclipseContext context;
+	private UISynchronize sync;
+	private PermissionsAndExpressionsEvaluationController permisionsController;
+	private EditingDomainController editingDomainController;
 
 	/**
 	 * Create the dialog.
@@ -62,7 +76,39 @@ public class EditDBCollectionDialog extends TitleAreaDialog
 
 		text = new Text(container, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
+		text.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (text.getText().trim().length() > 0)
+				{
+					final boolean enabled = btnSyncronizeCollection.isEnabled();
+					final String dbColl = text.getText();
+					Job j = new Job("check may sync"){
+	
+						@Override
+						protected IStatus run(IProgressMonitor monitor) {
+							final boolean may = permisionsController.authenticatedUserMaySyncDBColl(dbColl);
+							
+							if (may != enabled)
+							{
+								sync.asyncExec(new Runnable()
+								{
+									@Override
+									public void run()
+									{
+										btnSyncronizeCollection.setEnabled(may);
+									}
+								});
+							}
+							return Status.OK_STATUS;
+						}
+						
+					};
+					j.schedule();
+				}
+			}
+		});
 		btnSyncronizeCollection = new Button(container, SWT.CHECK);
 		btnSyncronizeCollection.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		btnSyncronizeCollection.setText("Syncronize Collection");
@@ -78,6 +124,10 @@ public class EditDBCollectionDialog extends TitleAreaDialog
 	private DataBindingContext initializeBindings()
 	{
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
+		context = StaticAccessController.getContext();
+		sync = context.get(UISynchronize.class);
+		editingDomainController = context.get(EditingDomainController.class);
+		permisionsController = context.get(PermissionsAndExpressionsEvaluationController.class);
 		us.setBeforeSetValidator(new IValidator()
 		{
 
@@ -117,6 +167,8 @@ public class EditDBCollectionDialog extends TitleAreaDialog
 				WidgetProperties.selection().observeDelayed(0, btnIndexCollectionFor), model3, null, null);
 		bindingContext.addValidationStatusProvider(binding3);
 		ControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
+
+		btnSyncronizeCollection.setEnabled(permisionsController.authenticatedUserMaySyncDBColl(text.getText()));
 
 		return bindingContext;
 	}

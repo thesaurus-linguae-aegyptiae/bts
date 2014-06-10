@@ -6,12 +6,14 @@ import org.bbaw.bts.core.remote.dao.RemoteBTSUserGroupDao;
 import org.bbaw.bts.core.remote.dao.RemoteDAOFactory;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
+import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.core.remote.dao.RemoteGeneralPurposeDao;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSProjectDaoImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSUserDaoImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSUserGroupDaoImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteDBConnectionProviderImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteDBLeaseDaoImpl;
+import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteDBManagerImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteGeneralPurposeDaoImpl;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -52,8 +54,16 @@ public class RemoteDaoFactoryCouchDB implements RemoteDAOFactory
 		} else if (clazz == RemoteDBConnectionProvider.class)
 		{
 			return (T) getDBConnectionProvider(context);
+		}else if (clazz == RemoteDBManager.class)
+		{
+			return (T) getDBManager(context);
 		}
 		return null;
+	}
+
+	private RemoteDBManager getDBManager(IEclipseContext context) {
+		RemoteDBManager manager = ContextInjectionFactory.make(RemoteDBManagerImpl.class, context);
+		return manager;
 	}
 
 	private RemoteDBConnectionProvider getDBConnectionProvider(IEclipseContext context)

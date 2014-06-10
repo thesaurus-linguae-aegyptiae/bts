@@ -56,4 +56,12 @@ public interface BTSEvaluationService
 	boolean authenticatedUserIsMember(List<String> readerORUpdatersList);
 
 	boolean authenticatedUserHasLock(Object object);
+
+	/** returns true if authenticated user is technically admin of database.
+	 * @param remoteDBAdmin true to request if user is admin of remote database.
+	 * @return true if authenticated user is admin of database.
+	 */
+	boolean authenticatedUserIsDBAdmin(boolean remoteDBAdmin);
+
+	boolean authenticatedUserMaySyncDBColl(String dbCollectionName);
 }

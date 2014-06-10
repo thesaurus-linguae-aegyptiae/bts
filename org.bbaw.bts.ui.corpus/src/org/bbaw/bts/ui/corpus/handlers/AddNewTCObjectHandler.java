@@ -18,26 +18,11 @@ public class AddNewTCObjectHandler
 {
 
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection,
+	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, EventBroker eventBroker,
 			CorpusNavigatorController corpusNavigatorController)
 	{
-		final BTSTCObject object = corpusNavigatorController.createNewTCObject();
-
-		// Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()),
-		// new Runnable()
-		// {
-		// public void run()
-		// {
-		// NewCorpusObjectDialog dialog = new NewCorpusObjectDialog(shell, new
-		// BTSCorpusObject[] { object });
-		// if (dialog.open() == dialog.OK)
-		// {
-		//
-		// }
-		//
-		// }
-		// });
+		final BTSTCObject object = corpusNavigatorController.createNewTCObject(selection);
 		corpusNavigatorController.save(object);
 		eventBroker.post("model_new/BTSTCObject", object);
 	}

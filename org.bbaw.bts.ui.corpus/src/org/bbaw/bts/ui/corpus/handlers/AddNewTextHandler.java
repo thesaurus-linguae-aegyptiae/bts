@@ -17,11 +17,11 @@ import org.eclipse.swt.widgets.Shell;
 public class AddNewTextHandler
 {
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection,
+	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, EventBroker eventBroker,
 			CorpusNavigatorController corpusNavigatorController)
 	{
-		final BTSText object = corpusNavigatorController.createNewText();
+		final BTSText object = corpusNavigatorController.createNewText(selection);
 
 		corpusNavigatorController.save(object);
 		eventBroker.post("model_new/BTSText", object);

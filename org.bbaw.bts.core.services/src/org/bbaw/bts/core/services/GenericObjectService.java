@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -12,6 +14,8 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 {
 
 	E createNew();
+	
+	E createNewRelationPartOf(BTSIdentifiableItem parentObject);
 
 	boolean save(E entity);
 

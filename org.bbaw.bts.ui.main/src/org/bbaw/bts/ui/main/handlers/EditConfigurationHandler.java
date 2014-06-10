@@ -2,6 +2,7 @@ package org.bbaw.bts.ui.main.handlers;
 
 import javax.inject.Named;
 
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.main.dialogs.BTSConfigurationDialog;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -27,10 +28,8 @@ public class EditConfigurationHandler
 	}
 
 	@CanExecute
-	public boolean canExecute()
-	{
-		// TODO Your code goes here
-		return true;
+	public boolean canExecute(@Optional @Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_CONFIG) Boolean mayEdit) {
+		return (mayEdit != null && mayEdit.booleanValue());
 	}
 
 }

@@ -45,12 +45,14 @@ import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
+import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.PermissionsAndExpressionsEvaluationService;
 import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -132,6 +134,12 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 
 	@Inject
 	private BTSUserDao userDao;
+
+	@Inject
+	private DBManager dBManager;
+	
+	@Inject
+	private RemoteDBManager remoteDBManager;
 	
 	@Override
 	public boolean filter(Object object)
@@ -590,14 +598,15 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		try {
 			client.open();
 			for (String arg : serverArray) {
+				InetAddress hostAddr = null;
 				try {
-					InetAddress hostAddr = InetAddress.getByName(arg);
+					hostAddr = InetAddress.getByName(arg);
 					logger.info("> " + hostAddr.getHostName() + "/"
 							+ hostAddr.getHostAddress());
 					info = client.getTime(hostAddr);
 					break;
 				} catch (IOException ioe) {
-					logger.error(ioe);
+					logger.error(ioe, "Inaccessable host address: " + hostAddr);
 				}
 			}
 		} catch (SocketException e) {
@@ -953,5 +962,33 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public boolean authenticatedUserIsDBAdmin(boolean remoteDBAdmin) {
+		boolean localAdmin = dBManager.checkUserIsDBAdmin(authenticatedUser.getUserName(), authenticatedUser.getPassword());
+		if (remoteDBAdmin)
+		{
+			boolean remoteAdmin = remoteDBManager.checkUserIsDBAdmin(authenticatedUser.getUserName(), authenticatedUser.getPassword());
+			return (localAdmin && remoteAdmin);
+		}
+		return localAdmin;
+	}
+
+	@Override
+	public boolean authenticatedUserMaySyncDBColl(String dbCollectionName) {
+		if (authenticatedUserIsDBAdmin(true))
+		{
+			return true;
+		}
+		return dbCollectionExists(dbCollectionName, true);
+	}
+
+	private boolean dbCollectionExists(String dbCollectionName, boolean dbCollectionExistsRemote) {
+		if (dbCollectionExistsRemote)
+		{
+			return remoteDBManager.dbCollectionExists(dbCollectionName);
+		}
+		return dBManager.dbCollectionExists(dbCollectionName);
 	}
 }

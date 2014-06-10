@@ -35,8 +35,8 @@
   <eClassifiers xsi:type="ecore:EEnum" name="MessageType">
     <eLiterals name="ERROR"/>
     <eLiterals name="WARNING" value="1"/>
-    <eLiterals name="NO_EDITING_RIGHTS" value="2"/>
-    <eLiterals name="LOCKED" value="3"/>
+    <eLiterals name="LOCKED" value="2"/>
+    <eLiterals name="NO_EDITING_RIGHTS" value="3"/>
     <eLiterals name="FILTERED" value="4"/>
     <eLiterals name="UPDATE" value="5"/>
     <eLiterals name="INFORMATION" value="6"/>

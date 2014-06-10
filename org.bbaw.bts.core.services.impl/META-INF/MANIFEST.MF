@@ -6,8 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.bbaw.bts.core.services.impl.internal.Activator
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Service-Component: OSGI-INF/*.xml,
- OSGI-INF/component.xml
+Service-Component: OSGI-INF/*.xml
 Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
  org.bbaw.bts.core.dao,
  org.eclipse.e4.core.di,

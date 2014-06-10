@@ -36,4 +36,8 @@ public interface DBManager
 
 	boolean checkAndCreateDBCollection(BTSProject project, BTSProjectDBCollection collection, String string, boolean index, boolean synchronize);
 
+	boolean checkUserIsDBAdmin(String userName, String password);
+
+	boolean dbCollectionExists(String dbCollectionName);
+
 }

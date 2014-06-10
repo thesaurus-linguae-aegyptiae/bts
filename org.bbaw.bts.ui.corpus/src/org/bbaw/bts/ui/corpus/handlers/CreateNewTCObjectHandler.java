@@ -17,12 +17,13 @@ public class CreateNewTCObjectHandler
 {
 
 	@Execute
-	public void execute(CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker)
+	public void execute(CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker, 
+			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSCorpusObject selection)
 	{
-		BTSTCObject object = corpusNavigatorController.createNewTCObject();
+		BTSTCObject object = corpusNavigatorController.createNewTCObject(selection);
 		object.setName("Object1");
 		eventBroker.post("model_new/asyncEvent", object);
-		System.out.println("CreateNewTCObjectHandler executed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//		System.out.println("CreateNewTCObjectHandler executed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 
 	@CanExecute

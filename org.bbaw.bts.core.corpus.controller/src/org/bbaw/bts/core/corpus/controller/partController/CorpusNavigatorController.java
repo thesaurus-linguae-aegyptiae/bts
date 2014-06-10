@@ -22,9 +22,9 @@ public interface CorpusNavigatorController
 
 	BTSTextCorpus createNewTextCorpus();
 
-	BTSTCObject createNewTCObject();
+	BTSTCObject createNewTCObject(BTSCorpusObject parentObject);
 
-	BTSText createNewText();
+	BTSText createNewText(BTSCorpusObject parentObject);
 
 	BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject);
 

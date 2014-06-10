@@ -187,7 +187,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			otherLocked = true;
 		}
 		hasLock = otherLocked;
-		evaluatePermissionsAndExpressions();
+		evaluateSelectionPermissionsAndExpressions();
 		
 	}
 
@@ -196,7 +196,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		
 	}
 
-	private void evaluatePermissionsAndExpressions() {
+	private void evaluateSelectionPermissionsAndExpressions() {
 		evaluateUserContextRole();
 
 		evaluateMayAdd();
@@ -205,18 +205,47 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		evaluateMayTranscribe();
 		evaluateMayAnnotate();
 		evaluateMayComment();
-		evaluateMayEditConfig();
+		
+
+	}
+
+
+	private void evaluateUserPermissionsAndExpressions() {
 		evaluateMayMasterEditConfig();
 		evaluateMayEditUsers();
 		evaluateMayEditPermissions();
 		evaluateMayOpenFuton();
+		evaluateMayCreateDBCollection();
+		evaluateMayEditProjects();
+	}
+	
+	private boolean evaluateMayEditProjects() {
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else {
+			may = evaluationService.authenticatedUserIsDBAdmin(false);
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_PROJECTS,
+				new Boolean(may));
+		return may;
+	}
 
+	private boolean evaluateMayCreateDBCollection() {
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else {
+			may = evaluationService.authenticatedUserIsDBAdmin(false);
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_CREATE_DBCOLLECTION,
+				new Boolean(may));
+		return may;
 	}
 
 	private boolean evaluateMayTranscribe() {
+		//FIXME evaluate may transcribe
 		return false;
-		// TODO Auto-generated method stub
-
 	}
 
 	private void evaluateUserContextRole() {
@@ -239,44 +268,126 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	
 	private boolean evaluateMayOpenFuton() {
-		return false;
-		// TODO Auto-generated method stub
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else {
+			may = evaluationService.authenticatedUserIsDBAdmin(true);
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_USERS,
+				new Boolean(may));
+		return may;
 
 	}
 
 	private boolean evaluateMayEditPermissions() {
-		return false;
-		// TODO Auto-generated method stub
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
+			may = true;
+		} else {
+			String userAdminDBRole = null;
+			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
+				if (c.getCollectionName() != null
+						&& c.getCollectionName().equals("admin")) {
+					userAdminDBRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
+					break;
+				}
+			}
+			if ("admins".equals(userAdminDBRole)) {
+				may = true;
+			}
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_USERS,
+				new Boolean(may));
+		return may;
 
 	}
 
 	private boolean evaluateMayEditUsers() {
-		return false;
-		// TODO Auto-generated method stub
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
+			may = true;
+		} else {
+			String userAdminDBRole = null;
+			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
+				if (c.getCollectionName() != null
+						&& c.getCollectionName().equals("admin")) {
+					userAdminDBRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
+					break;
+				}
+			}
+			if ("admins".equals(userAdminDBRole)) {
+				may = true;
+			}
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_USERS,
+				new Boolean(may));
+		return may;
 
 	}
 
 	private boolean evaluateMayMasterEditConfig() {
-		return false;
-		// TODO Auto-generated method stub
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
+			may = true;
+		} else {
+			String userAdminDBRole = null;
+			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
+				if (c.getCollectionName() != null
+						&& c.getCollectionName().equals(mainProject.getPrefix() + "_admin")) {
+					userAdminDBRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
+					break;
+				}
+			}
+			if ("admins".equals(userAdminDBRole)) {
+				may = true;
+			}
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_MASTER_EDIT_CONFIG,
+				new Boolean(may));
+		return may;
 
 	}
 
 	private boolean evaluateMayEditConfig() {
-		return false;
-		// TODO Auto-generated method stub
+		boolean may = false;
+		if (authenticatedUser == null) {
+			may = false;
+		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
+			may = true;
+		} else {
+			String userAdminDBRole = null;
+			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
+				if (c.getCollectionName() != null
+						&& c.getCollectionName().equals(mainProject.getPrefix() + "_admin")) {
+					userAdminDBRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
+					break;
+				}
+			}
+			if ("admins".equals(userAdminDBRole) || "editors".equals(userAdminDBRole)) {
+				may = true;
+			}
+		}
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT_CONFIG,
+				new Boolean(may));
+		return may;
 
 	}
 
 	private boolean evaluateMayComment() {
 		return false;
-		// TODO Auto-generated method stub
-
+		//FIXME evaluate may comment
 	}
 
 	private boolean evaluateMayAnnotate() {
 		return false;
-		// TODO Auto-generated method stub
+		//FIXME evaluate may annotate
 
 	}
 
@@ -329,7 +440,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayAdd() {
 		return false;
-		// TODO Auto-generated method stub
+		//FIXME evaluate may add
 
 	}
 
@@ -343,7 +454,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			@Named(BTSCoreConstants.MAIN_PROJECT) BTSProject mainProject) {
 		if (this.mainProject != null && !this.mainProject.equals(mainProject)) {
 			this.mainProject = mainProject;
-			evaluatePermissionsAndExpressions();
+			evaluateSelectionPermissionsAndExpressions();
 		}
 	}
 
@@ -358,10 +469,12 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (authenticatedUser != null
 				&& !authenticatedUser.equals(this.authenticatedUser)) {
 			this.authenticatedUser = authenticatedUser;
-			evaluatePermissionsAndExpressions();
+			evaluateSelectionPermissionsAndExpressions();
+			evaluateUserPermissionsAndExpressions();
 		}
 
 	}
+
 
 	@Override
 	public void activateDBCollectionContext(String key) {
@@ -387,7 +500,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 				workbenchContext.modify(
 						BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT,
 						dbCollectionContext);
-				evaluatePermissionsAndExpressions();
+				evaluateSelectionPermissionsAndExpressions();
 			}
 		}
 
@@ -409,7 +522,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			if (selection != null
 					&& selection.equals(((DBLease) lease).getObject())
 					&& !hasLock) {
-				evaluatePermissionsAndExpressions();
+				evaluateSelectionPermissionsAndExpressions();
 				hasLock = true;
 			}
 		} else {
@@ -418,10 +531,20 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 					&& selection.equals(((DBLease) lease).getObject())
 					&& hasLock) {
 				otherLocked = false;
-				evaluatePermissionsAndExpressions();
+				evaluateSelectionPermissionsAndExpressions();
 				hasLock = false;
 			}
 		}
+	}
+
+	@Override
+	public boolean authenticatedUserIsDBAdmin(boolean remoteDBAdmin) {
+		return evaluationService.authenticatedUserIsDBAdmin(remoteDBAdmin);
+	}
+
+	@Override
+	public boolean authenticatedUserMaySyncDBColl(String dbCollectionName) {
+		return evaluationService.authenticatedUserMaySyncDBColl(dbCollectionName);
 	}
 
 }
