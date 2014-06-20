@@ -14,7 +14,6 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -604,10 +603,11 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 							.createNewConfigItem(newCIText_ConfigurationEdit
 									.getText());
 					ci.setType(BTSCoreConstants.RELATION);
-					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-							.getOwnerTypesPath();
-					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-							.copy(path));
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
+					
 					CompoundCommand compoundCommand = new CompoundCommand();
 					org.eclipse.emf.common.command.Command command = AddCommand
 							.create(getEditingDomain(selectedConfig),
@@ -786,10 +786,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 						.createNewConfigItem(newCIText_ConfigurationEdit
 								.getText());
 				ci.setType(BTSCoreConstants.PASSPORT_CATEGORY);
-				BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-						.getOwnerTypesPath();
-				ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-						.copy(path));
+				for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+				{
+					ci.getOwnerReferencedTypesStringList().add(s);
+				}
 				CompoundCommand compoundCommand = new CompoundCommand();
 				org.eclipse.emf.common.command.Command command = AddCommand
 						.create(getEditingDomain(selectedConfig),
@@ -976,10 +976,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 					BTSConfigItem ci = configurationController
 							.createNewConfigItem(newCIText_ConfigurationEdit
 									.getText());
-					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-							.getOwnerTypesPath();
-					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-							.copy(path));
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
 					CompoundCommand compoundCommand = new CompoundCommand();
 					org.eclipse.emf.common.command.Command command = AddCommand
 							.create(getEditingDomain(selectedConfig),
@@ -1003,12 +1003,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			ownerstabItem.setControl(ownerEditComp);
 			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
 					configurationController, ownerEditComp, SWT.NONE);
-			if (configItem.getOwnerTypesPath() == null) {
-				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
-						.createBTSObjectTypePathRoot());
-			}
-			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
-					getEditingDomain(configItem));
+			ownerTypeSelector.setPathInput(configItem,
+					getEditingDomain(configItem), null, false);
 		}
 		{
 
@@ -1266,10 +1262,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 					BTSConfigItem ci = configurationController
 							.createNewConfigItem(newCGroupText_ConfigurationEdit
 									.getText());
-					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-							.getOwnerTypesPath();
-					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-							.copy(path));
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
 					ci.setType(BTSCoreConstants.PASSPORT_ENTRY_GROUP);
 					CompoundCommand compoundCommand = new CompoundCommand();
 					org.eclipse.emf.common.command.Command command = AddCommand
@@ -1308,10 +1304,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 							.createNewConfigItem(newCIText_ConfigurationEdit
 									.getText());
 					ci.setType(BTSCoreConstants.PASSPORT_ENTRY_ITEM);
-					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-							.getOwnerTypesPath();
-					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-							.copy(path));
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
 					CompoundCommand compoundCommand = new CompoundCommand();
 					org.eclipse.emf.common.command.Command command = AddCommand
 							.create(getEditingDomain(selectedConfig),
@@ -1335,12 +1331,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			ownerstabItem.setControl(ownerEditComp);
 			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
 					configurationController, ownerEditComp, SWT.NONE);
-			if (configItem.getOwnerTypesPath() == null) {
-				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
-						.createBTSObjectTypePathRoot());
-			}
-			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
-					getEditingDomain(configItem));
+			ownerTypeSelector.setPathInput(configItem,
+					getEditingDomain(configItem), null, false);
 		}
 
 		configItemEditBindings = initializePassportEntryGroupEditBindings(configItem);
@@ -1526,10 +1518,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 						.createNewConfigItem(newCIText_ConfigurationEdit
 								.getText());
 				ci.setType(BTSCoreConstants.PASSPORT_CATEGORY);
-				BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-						.getOwnerTypesPath();
-				ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-						.copy(path));
+				for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+				{
+					ci.getOwnerReferencedTypesStringList().add(s);
+				}
 				CompoundCommand compoundCommand = new CompoundCommand();
 				org.eclipse.emf.common.command.Command command = AddCommand
 						.create(getEditingDomain(selectedConfig),
@@ -1739,12 +1731,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			ownerstabItem.setControl(ownerEditComp);
 			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
 					configurationController, ownerEditComp, SWT.NONE);
-			if (configItem.getOwnerTypesPath() == null) {
-				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
-						.createBTSObjectTypePathRoot());
-			}
-			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
-					getEditingDomain(configItem));
+			ownerTypeSelector.setPathInput(configItem,
+					getEditingDomain(configItem), null, false);
 		}
 		{
 			TabItem referencedtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -2131,10 +2119,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 								.getText());
 				ci.setValue(newCIText_ConfigurationEdit.getText());
 				if (selectedConfig instanceof BTSConfigItem) {
-					BTSObjectTypePathRoot path = ((BTSConfigItem) selectedConfig)
-							.getOwnerTypesPath();
-					ci.setOwnerTypesPath((BTSObjectTypePathRoot) new EcoreUtil.Copier()
-							.copy(path));
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
 				}
 				CompoundCommand compoundCommand = new CompoundCommand();
 				org.eclipse.emf.common.command.Command command = AddCommand

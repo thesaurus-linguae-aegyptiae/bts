@@ -24,12 +24,15 @@ public class ObjectSelectionProposalProvider implements
 	private BTSConfig configItem;
 	private List<BTSCorpusObject> list;
 	private Comparator<IContentProposal> comparator;
+	private BTSCorpusObject corpusObject;
 
 	public ObjectSelectionProposalProvider(
 			PassportEditorPartController passportEditorController,
-			BTSConfig configItem) {
+			BTSConfig configItem,
+			BTSCorpusObject corpusObject) {
 		this.passportController = passportEditorController;
 		this.setConfigItem(configItem);
+		this.corpusObject = corpusObject;
 	}
 
 	@Override
@@ -74,10 +77,11 @@ public class ObjectSelectionProposalProvider implements
 	private void loadList() {
 		Job job = new Job("loading") {
 
+
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				list = passportController.getObjectProposalsFor(
-						(BTSConfigItem) configItem, "");
+						(BTSConfigItem) configItem, "", corpusObject);
 
 				return Status.OK_STATUS;
 			}

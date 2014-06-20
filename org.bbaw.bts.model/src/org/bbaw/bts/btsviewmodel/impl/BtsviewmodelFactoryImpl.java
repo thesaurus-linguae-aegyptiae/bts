@@ -65,6 +65,7 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 		switch (eClass.getClassifierID()) {
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER: return createTreeNodeWrapper();
 			case BtsviewmodelPackage.STATUS_MESSAGE: return createStatusMessage();
+			case BtsviewmodelPackage.BTS_OBJECT_TYPE_TREE_NODE: return createBTSObjectTypeTreeNode();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -134,6 +135,16 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 	public StatusMessage createStatusMessage() {
 		StatusMessageImpl statusMessage = new StatusMessageImpl();
 		return statusMessage;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSObjectTypeTreeNode createBTSObjectTypeTreeNode() {
+		BTSObjectTypeTreeNodeImpl btsObjectTypeTreeNode = new BTSObjectTypeTreeNodeImpl();
+		return btsObjectTypeTreeNode;
 	}
 
 	/**

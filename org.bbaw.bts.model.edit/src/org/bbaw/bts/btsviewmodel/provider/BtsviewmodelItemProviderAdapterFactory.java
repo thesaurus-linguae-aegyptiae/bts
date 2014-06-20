@@ -131,6 +131,29 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSObjectTypeTreeNodeItemProvider btsObjectTypeTreeNodeItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSObjectTypeTreeNodeAdapter() {
+		if (btsObjectTypeTreeNodeItemProvider == null) {
+			btsObjectTypeTreeNodeItemProvider = new BTSObjectTypeTreeNodeItemProvider(this);
+		}
+
+		return btsObjectTypeTreeNodeItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -240,6 +263,7 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	{
 		if (treeNodeWrapperItemProvider != null) treeNodeWrapperItemProvider.dispose();
 		if (statusMessageItemProvider != null) statusMessageItemProvider.dispose();
+		if (btsObjectTypeTreeNodeItemProvider != null) btsObjectTypeTreeNodeItemProvider.dispose();
 	}
 
 }

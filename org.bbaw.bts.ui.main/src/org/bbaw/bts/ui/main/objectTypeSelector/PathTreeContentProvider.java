@@ -1,6 +1,6 @@
 package org.bbaw.bts.ui.main.objectTypeSelector;
 
-import org.bbaw.bts.btsmodel.BTSObjectTypePath;
+import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.Viewer;
@@ -24,18 +24,18 @@ public class PathTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public Object[] getChildren(Object parentElement) {
-		if (parentElement != null && parentElement instanceof BTSObjectTypePath)
+		if (parentElement != null && parentElement instanceof BTSObjectTypeTreeNode)
 		{
-			return ((BTSObjectTypePath) parentElement).getChildren().toArray(
-					new BTSObjectTypePath[((BTSObjectTypePath) parentElement)
+			return ((BTSObjectTypeTreeNode) parentElement).getChildren().toArray(
+					new BTSObjectTypeTreeNode[((BTSObjectTypeTreeNode) parentElement)
 							.getChildren().size()]);
 		}
-		return new BTSObjectTypePath[] {};
+		return new BTSObjectTypeTreeNode[] {};
 	}
 
 	@Override
 	public Object getParent(Object element) {
-		if (element != null && element instanceof BTSObjectTypePath) {
+		if (element != null && element instanceof BTSObjectTypeTreeNode) {
 			return ((EObject) element).eContainer();
 		}
 		return null;
@@ -43,8 +43,8 @@ public class PathTreeContentProvider implements ITreeContentProvider {
 
 	@Override
 	public boolean hasChildren(Object element) {
-		if (element != null && element instanceof BTSObjectTypePath) {
-			return !((BTSObjectTypePath) element).getChildren().isEmpty();
+		if (element != null && element instanceof BTSObjectTypeTreeNode) {
+			return !((BTSObjectTypeTreeNode) element).getChildren().isEmpty();
 		}
 		return false;
 	}

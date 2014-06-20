@@ -7,11 +7,12 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSObjectTypePath;
-import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
+import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.runtime.Assert;
@@ -27,8 +28,13 @@ import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Tree;
 
@@ -38,9 +44,11 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	private BTSConfigurationController configurationController;
 	private Tree tree;
 	private CheckboxTreeViewer treeViewer;
-	private BTSObjectTypePath inputPath;
+	private BTSObjectTypeTreeNode inputPath;
 	private EditingDomain editingDomain;
 	private boolean dirty;
+	private BTSConfigItem inputConfigItem;
+	private Button allbutton;
 
 	public ObjectTypeSelectionTreeComposite(
 			BTSConfigurationController configurationController,
@@ -52,8 +60,31 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 
 	private void createContent() {
 		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		TreeColumnLayout tcl_compositeExample = new TreeColumnLayout();
-		this.setLayout(tcl_compositeExample);
+		this.setLayout(new GridLayout(1, false));
+		
+		allbutton = new Button(this, SWT.CHECK);
+		allbutton.setText("Select all");
+		allbutton.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if(allbutton.getSelection())
+				{
+					if (treeViewer != null && !treeViewer.getTree().isDisposed())
+					{
+						treeViewer.getTree().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+					}
+				}
+				else
+				{
+					if (treeViewer != null && !treeViewer.getTree().isDisposed())
+					{
+						treeViewer.getTree().setBackground(BTSUIConstants.COLOR_WIHTE);
+					}
+				}
+			}
+			
+		});
 
 		treeViewer = new CheckboxTreeViewer(this);
 		treeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -66,20 +97,10 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 
 		treeViewer.setContentProvider(contentProvider);
 		treeViewer.setLabelProvider(labelProvider);
-		// treeViewer.setContentProvider(new PathTreeContentProvider());
-		// treeViewer.setLabelProvider(new PathTreeLabelProvider());
-
-		// TreeViewerColumn treeViewerColumnName = new TreeViewerColumn(
-		// treeViewer, SWT.NONE);
-		// TreeColumn trclmnName = treeViewerColumnName.getColumn();
-		// tcl_compositeExample.setColumnData(trclmnName, new ColumnWeightData(
-		// 100, ColumnWeightData.MINIMUM_WIDTH, true));
-		// trclmnName.setText("Name");
-		// When user checks a checkbox in the tree, check all its children
 		treeViewer.addCheckStateListener(new ICheckStateListener() {
 			public void checkStateChanged(CheckStateChangedEvent event) {
 				setDirty(true);
-				ObjectTypePathEntry entry = (ObjectTypePathEntry) event
+				BTSObjectTypeTreeNode entry = (BTSObjectTypeTreeNode) event
 						.getElement();
 				setEntrySelected(entry, event.getChecked());
 
@@ -95,14 +116,14 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 
 	}
 
-	protected void setEntrySelected(ObjectTypePathEntry entry, boolean checked) {
+	protected void setEntrySelected(BTSObjectTypeTreeNode entry, boolean checked) {
 		CompoundCommand compoundCommand = new CompoundCommand();
 		org.eclipse.emf.common.command.Command command = SetCommand.create(
 				editingDomain, entry,
-				BtsmodelPackage.Literals.OBJECT_TYPE_PATH_ENTRY__SELECTED,
+				BtsviewmodelPackage.Literals.BTS_OBJECT_TYPE_TREE_NODE__SELECTED,
 				checked);
-		for (BTSObjectTypePath child : entry.getChildren()) {
-			setChildEntrySelected((ObjectTypePathEntry) child, checked,
+		for (BTSObjectTypeTreeNode child : entry.getChildren()) {
+			setChildEntrySelected((BTSObjectTypeTreeNode) child, checked,
 					compoundCommand);
 		}
 
@@ -111,14 +132,14 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 
 	}
 
-	private void setChildEntrySelected(ObjectTypePathEntry entry,
+	private void setChildEntrySelected(BTSObjectTypeTreeNode entry,
 			boolean checked, CompoundCommand compoundCommand) {
 		org.eclipse.emf.common.command.Command command = SetCommand.create(
 				editingDomain, entry,
-				BtsmodelPackage.Literals.OBJECT_TYPE_PATH_ENTRY__SELECTED,
+				BtsviewmodelPackage.Literals.BTS_OBJECT_TYPE_TREE_NODE__SELECTED,
 				checked);
-		for (BTSObjectTypePath child : entry.getChildren()) {
-			setChildEntrySelected((ObjectTypePathEntry) child, checked,
+		for (BTSObjectTypeTreeNode child : entry.getChildren()) {
+			setChildEntrySelected((BTSObjectTypeTreeNode) child, checked,
 					compoundCommand);
 		}
 
@@ -126,55 +147,52 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 
 	}
 
-	public void setPathInput(BTSObjectTypePathRoot path,
-			EditingDomain editingDomain) {
-		Assert.isNotNull(path);
-		inputPath = path;
+	public void setPathInput(BTSConfigItem input,
+			EditingDomain editingDomain, BTSConfig objectTypesConfig, boolean includeReferencedObjectTree) {
+		Assert.isNotNull(input);
+		inputConfigItem = input;
 		this.editingDomain = editingDomain;
-		BTSConfigItem objectTypesConfig = configurationController
+		if (objectTypesConfig == null){
+		objectTypesConfig = configurationController
 				.getObjectTypesConfigItem();
+		}
 		if (objectTypesConfig != null) {
-			BTSObjectTypePath processedPath = configurationController
+			inputPath = configurationController
 					.processTreeSelectorInputPath(objectTypesConfig,
-							(BTSObjectTypePathRoot) path);
-			treeViewer.setInput(processedPath);
-			treeViewer.setCheckedElements(getSelectedElements(processedPath));
+							inputConfigItem.getOwnerTypesMap(), includeReferencedObjectTree);
+			treeViewer.setInput(inputPath);
+			treeViewer.setCheckedElements(getSelectedElements(inputPath));
 		}
 	}
 
-	public void setPathInput(BTSObjectTypePath path,
+	public void setPathInput(BTSObjectTypeTreeNode path,
 			EditingDomain editingDomain, BTSConfig objectTypesConfig) {
 		Assert.isNotNull(path);
 		inputPath = path;
 		this.editingDomain = editingDomain;
-		if (objectTypesConfig != null) {
-			BTSObjectTypePath processedPath = configurationController
-					.processTreeSelectorInputPath(objectTypesConfig,
-							(BTSObjectTypePathRoot) path);
-			treeViewer.setInput(processedPath);
-			treeViewer.setCheckedElements(getSelectedElements(processedPath));
-		}
+		treeViewer.setInput(inputPath);
+		treeViewer.setCheckedElements(getSelectedElements(inputPath));
 	}
 
-	private Object[] getSelectedElements(BTSObjectTypePath processedPath) {
-		List<BTSObjectTypePath> checked = new ArrayList<BTSObjectTypePath>();
-		for (BTSObjectTypePath c : processedPath.getChildren()) {
+	private Object[] getSelectedElements(BTSObjectTypeTreeNode processedPath) {
+		List<BTSObjectTypeTreeNode> checked = new ArrayList<BTSObjectTypeTreeNode>();
+		for (BTSObjectTypeTreeNode c : processedPath.getChildren()) {
 			addChildrenToList(c, checked);
 		}
 		return checked.toArray(new Object[checked.size()]);
 	}
 
-	private void addChildrenToList(BTSObjectTypePath c,
-			List<BTSObjectTypePath> checked) {
-		if (c instanceof ObjectTypePathEntry) {
-			ObjectTypePathEntry entry = (ObjectTypePathEntry) c;
+	private void addChildrenToList(BTSObjectTypeTreeNode c,
+			List<BTSObjectTypeTreeNode> checked) {
+		if (c instanceof BTSObjectTypeTreeNode) {
+			BTSObjectTypeTreeNode entry = (BTSObjectTypeTreeNode) c;
 			if (entry.isSelected()) {
 				checked.add(entry);
-				for (BTSObjectTypePath cc : entry.getChildren()) {
-					addChildrenToList(cc, checked);
-				}
+				
 			}
-
+			for (BTSObjectTypeTreeNode cc : entry.getChildren()) {
+				addChildrenToList(cc, checked);
+			}
 		}
 
 	}
@@ -182,29 +200,24 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	public void save() {
 
 		if (dirty) {
-			BTSObjectTypePathRoot treePath = (BTSObjectTypePathRoot) treeViewer
+			BTSObjectTypeTreeNode treePath = (BTSObjectTypeTreeNode) treeViewer
 					.getInput();
-			inputPath.getChildren().clear();
-			for (ObjectTypePathEntry c : treePath.getChildren()) {
-				processNodeAndChildrenSelection(c,
-						(BTSObjectTypePath) inputPath);
-
+			if (inputConfigItem != null)
+			{
+				inputConfigItem.clearOwnerTypesMap();
+				if (allbutton.getSelection())
+				{
+					inputConfigItem.getOwnerReferencedTypesStringList().add(BTSConstants.OWNER_REFERENCED_TYPES_ALL);
+				}
+				else
+				{
+				inputConfigItem.getOwnerReferencedTypesStringList().addAll(configurationController
+					.processTreePathToList(treePath));
+				}
 			}
-		}
-	}
-
-	private void processNodeAndChildrenSelection(ObjectTypePathEntry selectionNode,
-			BTSObjectTypePath inputNode) {
-		if (!selectionNode.isSelected()) {
-
-		} else {
-			ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE
-					.createObjectTypePathEntry();
-			child.setValue(selectionNode.getValue());
-			child.setReferencedTypesPath(selectionNode.getReferencedTypesPath());
-			inputNode.getChildren().add(child);
-			for (ObjectTypePathEntry cc : selectionNode.getChildren()) {
-				processNodeAndChildrenSelection(cc, child);
+			else if (inputPath != null)
+			{
+				inputPath.setSelected(allbutton.getSelection());
 			}
 		}
 	}
@@ -239,16 +252,8 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 		}
 	}
 	
-	public BTSObjectTypePath getPathInput()
+	public BTSObjectTypeTreeNode getPathInput()
 	{
-		BTSObjectTypePathRoot treePath = (BTSObjectTypePathRoot) treeViewer
-				.getInput();
-		inputPath.getChildren().clear();
-		for (ObjectTypePathEntry c : treePath.getChildren()) {
-			processNodeAndChildrenSelection(c,
-					(BTSObjectTypePath) inputPath);
-
-		}
 		return inputPath;
 	}
 }

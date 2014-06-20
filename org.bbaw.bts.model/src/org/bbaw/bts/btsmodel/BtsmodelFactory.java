@@ -405,24 +405,6 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	GraphicSelectionCounter createGraphicSelectionCounter();
 
-	/**
-	 * Returns a new object of class '<em>Object Type Path Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Object Type Path Entry</em>'.
-	 * @generated
-	 */
-	ObjectTypePathEntry createObjectTypePathEntry();
-
-	/**
-	 * Returns a new object of class '<em>BTS Object Type Path Root</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Object Type Path Root</em>'.
-	 * @generated
-	 */
-	BTSObjectTypePathRoot createBTSObjectTypePathRoot();
-
 	BTSTextContent createBTSTextContent(boolean setId);
 	/**
 	 * Returns the package supported by this factory.

@@ -277,9 +277,7 @@ public class RelationEditorComposite extends Composite {
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				IEclipseContext child = context.createChild("searchselect");
-				context.set(BTSConstants.CORPUS_OBJECT, false);
-				context.set(BTSConstants.WLIST_ENTRY, false);
-				context.set(BTSConstants.THS_ENTRY, true);
+				context.set(BTSConfigItem.class, itemConfig);
 
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
@@ -313,7 +311,7 @@ public class RelationEditorComposite extends Composite {
 			BTSConfig configItem) {
 		if (itemProposalProvider == null) {
 			itemProposalProvider = new ObjectSelectionProposalProvider(
-					passportEditorController, configItem);
+					passportEditorController, configItem, corpusObject);
 		}
 		itemProposalProvider.setConfigItem(configItem);
 		return itemProposalProvider;

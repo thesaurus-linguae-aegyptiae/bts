@@ -243,6 +243,70 @@ public interface BtsviewmodelPackage extends EPackage
 	int STATUS_MESSAGE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsviewmodel.impl.BTSObjectTypeTreeNodeImpl <em>BTS Object Type Tree Node</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsviewmodel.impl.BTSObjectTypeTreeNodeImpl
+	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getBTSObjectTypeTreeNode()
+	 * @generated
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE__CHILDREN = 0;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE__REFERENCED_TYPES_PATH = 1;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE__VALUE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Selected</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE__SELECTED = 3;
+
+	/**
+	 * The number of structural features of the '<em>BTS Object Type Tree Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE_FEATURE_COUNT = 4;
+
+	/**
+	 * The number of operations of the '<em>BTS Object Type Tree Node</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_TREE_NODE_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -250,7 +314,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getMessageType()
 	 * @generated
 	 */
-	int MESSAGE_TYPE = 2;
+	int MESSAGE_TYPE = 3;
 
 	/**
 	 * The meta object id for the '<em>BTS Object</em>' data type.
@@ -260,7 +324,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getBTSObject()
 	 * @generated
 	 */
-	int BTS_OBJECT = 3;
+	int BTS_OBJECT = 4;
 
 	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
@@ -270,7 +334,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 4;
+	int PROPERTY_CHANGE_SUPPORT = 5;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -280,7 +344,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 5;
+	int PROPERTY_CHANGE_LISTENER = 6;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -290,7 +354,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 6;
+	int PROPERTY_CHANGE_EVENT = 7;
 
 
 	/**
@@ -464,6 +528,60 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @generated
 	 */
 	EReference getStatusMessage_Children();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode <em>BTS Object Type Tree Node</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Object Type Tree Node</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode
+	 * @generated
+	 */
+	EClass getBTSObjectTypeTreeNode();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#getChildren <em>Children</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Children</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#getChildren()
+	 * @see #getBTSObjectTypeTreeNode()
+	 * @generated
+	 */
+	EReference getBTSObjectTypeTreeNode_Children();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#getReferencedTypesPath <em>Referenced Types Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referenced Types Path</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#getReferencedTypesPath()
+	 * @see #getBTSObjectTypeTreeNode()
+	 * @generated
+	 */
+	EReference getBTSObjectTypeTreeNode_ReferencedTypesPath();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#getValue()
+	 * @see #getBTSObjectTypeTreeNode()
+	 * @generated
+	 */
+	EAttribute getBTSObjectTypeTreeNode_Value();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#isSelected <em>Selected</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Selected</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode#isSelected()
+	 * @see #getBTSObjectTypeTreeNode()
+	 * @generated
+	 */
+	EAttribute getBTSObjectTypeTreeNode_Selected();
 
 	/**
 	 * Returns the meta object for enum '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}'.
@@ -674,6 +792,48 @@ public interface BtsviewmodelPackage extends EPackage
 		 * @generated
 		 */
 		EReference STATUS_MESSAGE__CHILDREN = eINSTANCE.getStatusMessage_Children();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsviewmodel.impl.BTSObjectTypeTreeNodeImpl <em>BTS Object Type Tree Node</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsviewmodel.impl.BTSObjectTypeTreeNodeImpl
+		 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getBTSObjectTypeTreeNode()
+		 * @generated
+		 */
+		EClass BTS_OBJECT_TYPE_TREE_NODE = eINSTANCE.getBTSObjectTypeTreeNode();
+
+		/**
+		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_OBJECT_TYPE_TREE_NODE__CHILDREN = eINSTANCE.getBTSObjectTypeTreeNode_Children();
+
+		/**
+		 * The meta object literal for the '<em><b>Referenced Types Path</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_OBJECT_TYPE_TREE_NODE__REFERENCED_TYPES_PATH = eINSTANCE.getBTSObjectTypeTreeNode_ReferencedTypesPath();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_OBJECT_TYPE_TREE_NODE__VALUE = eINSTANCE.getBTSObjectTypeTreeNode_Value();
+
+		/**
+		 * The meta object literal for the '<em><b>Selected</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_OBJECT_TYPE_TREE_NODE__SELECTED = eINSTANCE.getBTSObjectTypeTreeNode_Selected();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}' enum.

@@ -41,4 +41,11 @@
     <eLiterals name="UPDATE" value="5"/>
     <eLiterals name="INFORMATION" value="6"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSObjectTypeTreeNode">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//BTSObjectTypeTreeNode" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referencedTypesPath" eType="#//BTSObjectTypeTreeNode"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
 </ecore:EPackage>

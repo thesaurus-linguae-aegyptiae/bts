@@ -13,7 +13,7 @@ public interface PassportEditorPartController
 			String text);
 
 	List<BTSCorpusObject> getObjectProposalsFor(BTSConfigItem configItem,
-			String text);
+			String text, BTSCorpusObject object);
 
 	boolean save(BTSCorpusObject object);
 

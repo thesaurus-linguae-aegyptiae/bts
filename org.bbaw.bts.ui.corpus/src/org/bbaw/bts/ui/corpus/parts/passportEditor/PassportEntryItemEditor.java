@@ -641,7 +641,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			BTSConfigItem configItem) {
 		if (thsItemProposalProvider == null) {
 			thsItemProposalProvider = new ObjectSelectionProposalProvider(
-					passportEditorController, configItem);
+					passportEditorController, configItem, corpusObject);
 		}
 		thsItemProposalProvider.setConfigItem(configItem);
 		return thsItemProposalProvider;

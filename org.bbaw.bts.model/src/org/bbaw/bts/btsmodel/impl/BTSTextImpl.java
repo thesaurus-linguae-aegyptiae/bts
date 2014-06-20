@@ -131,7 +131,6 @@ public class BTSTextImpl extends BTSCorpusObjectImpl implements BTSText {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {

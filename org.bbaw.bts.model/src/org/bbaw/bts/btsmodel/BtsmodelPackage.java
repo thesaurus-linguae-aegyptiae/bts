@@ -4394,7 +4394,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPassportEntry()
 	 * @generated
 	 */
-	int BTS_PASSPORT_ENTRY = 59;
+	int BTS_PASSPORT_ENTRY = 56;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -6003,13 +6003,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIG_ITEM__SHOW_WIDGET = BTS_CONFIG_FEATURE_COUNT + 11;
 
 	/**
-	 * The feature id for the '<em><b>Owner Types Path</b></em>' containment reference.
+	 * The feature id for the '<em><b>Owner Referenced Types String List</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM__OWNER_TYPES_PATH = BTS_CONFIG_FEATURE_COUNT + 12;
+	int BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST = BTS_CONFIG_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of structural features of the '<em>BTS Config Item</em>' class.
@@ -6039,13 +6039,31 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIG_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CONFIG_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Get Owner Types Map</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIG_ITEM___GET_OWNER_TYPES_MAP = BTS_CONFIG_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Clear Owner Types Map</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIG_ITEM___CLEAR_OWNER_TYPES_MAP = BTS_CONFIG_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>BTS Config Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM_OPERATION_COUNT = BTS_CONFIG_OPERATION_COUNT + 2;
+	int BTS_CONFIG_ITEM_OPERATION_COUNT = BTS_CONFIG_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl <em>BTS Passport Editor Config</em>}' class.
@@ -6112,13 +6130,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PASSPORT_EDITOR_CONFIG__REGEX = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Predicate Path</b></em>' containment reference.
+	 * The feature id for the '<em><b>Predicate List</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
+	int BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_LIST = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>BTS Passport Editor Config</em>' class.
@@ -8325,88 +8343,23 @@ public interface BtsmodelPackage extends EPackage {
 	int GRAPHIC_SELECTION_COUNTER_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.ObjectTypePathEntryImpl <em>Object Type Path Entry</em>}' class.
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.StringToStringListMapImpl <em>String To String List Map</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.ObjectTypePathEntryImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getObjectTypePathEntry()
+	 * @see org.bbaw.bts.btsmodel.impl.StringToStringListMapImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getStringToStringListMap()
 	 * @generated
 	 */
-	int OBJECT_TYPE_PATH_ENTRY = 56;
+	int STRING_TO_STRING_LIST_MAP = 57;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSObjectTypePathRootImpl <em>BTS Object Type Path Root</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSObjectTypePathRootImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObjectTypePathRoot()
-	 * @generated
-	 */
-	int BTS_OBJECT_TYPE_PATH_ROOT = 57;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSObjectTypePathImpl <em>BTS Object Type Path</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSObjectTypePathImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObjectTypePath()
-	 * @generated
-	 */
-	int BTS_OBJECT_TYPE_PATH = 58;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_OBJECT_TYPE_PATH__CHILDREN = 0;
-
-	/**
-	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH = 1;
-
-	/**
-	 * The number of structural features of the '<em>BTS Object Type Path</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH_FEATURE_COUNT = 2;
-
-	/**
-	 * The number of operations of the '<em>BTS Object Type Path</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH_OPERATION_COUNT = 0;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_PATH_ENTRY__CHILDREN = BTS_OBJECT_TYPE_PATH__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_PATH_ENTRY__REFERENCED_TYPES_PATH = BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH;
+	int STRING_TO_STRING_LIST_MAP__KEY = 0;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8415,70 +8368,25 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TYPE_PATH_ENTRY__VALUE = BTS_OBJECT_TYPE_PATH_FEATURE_COUNT + 0;
+	int STRING_TO_STRING_LIST_MAP__VALUE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Selected</b></em>' attribute.
+	 * The number of structural features of the '<em>String To String List Map</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TYPE_PATH_ENTRY__SELECTED = BTS_OBJECT_TYPE_PATH_FEATURE_COUNT + 1;
+	int STRING_TO_STRING_LIST_MAP_FEATURE_COUNT = 2;
 
 	/**
-	 * The number of structural features of the '<em>Object Type Path Entry</em>' class.
+	 * The number of operations of the '<em>String To String List Map</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OBJECT_TYPE_PATH_ENTRY_FEATURE_COUNT = BTS_OBJECT_TYPE_PATH_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>Object Type Path Entry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OBJECT_TYPE_PATH_ENTRY_OPERATION_COUNT = BTS_OBJECT_TYPE_PATH_OPERATION_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH_ROOT__CHILDREN = BTS_OBJECT_TYPE_PATH__CHILDREN;
-
-	/**
-	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH_ROOT__REFERENCED_TYPES_PATH = BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH;
-
-	/**
-	 * The number of structural features of the '<em>BTS Object Type Path Root</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH_ROOT_FEATURE_COUNT = BTS_OBJECT_TYPE_PATH_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>BTS Object Type Path Root</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT_TYPE_PATH_ROOT_OPERATION_COUNT = BTS_OBJECT_TYPE_PATH_OPERATION_COUNT + 0;
+	int STRING_TO_STRING_LIST_MAP_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
@@ -8488,7 +8396,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 60;
+	int PROPERTY_CHANGE_SUPPORT = 58;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -8498,7 +8406,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 61;
+	int PROPERTY_CHANGE_LISTENER = 59;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -8508,7 +8416,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 62;
+	int PROPERTY_CHANGE_EVENT = 60;
 
 
 	/**
@@ -10208,15 +10116,35 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSConfigItem_ShowWidget();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesPath <em>Owner Types Path</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerReferencedTypesStringList <em>Owner Referenced Types String List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Owner Types Path</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesPath()
+	 * @return the meta object for the attribute list '<em>Owner Referenced Types String List</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerReferencedTypesStringList()
 	 * @see #getBTSConfigItem()
 	 * @generated
 	 */
-	EReference getBTSConfigItem_OwnerTypesPath();
+	EAttribute getBTSConfigItem_OwnerReferencedTypesStringList();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesMap() <em>Get Owner Types Map</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Owner Types Map</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesMap()
+	 * @generated
+	 */
+	EOperation getBTSConfigItem__GetOwnerTypesMap();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#clearOwnerTypesMap() <em>Clear Owner Types Map</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Clear Owner Types Map</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSConfigItem#clearOwnerTypesMap()
+	 * @generated
+	 */
+	EOperation getBTSConfigItem__ClearOwnerTypesMap();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig <em>BTS Passport Editor Config</em>}'.
@@ -10284,15 +10212,15 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSPassportEditorConfig_Regex();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath <em>Predicate Path</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicateList <em>Predicate List</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Predicate Path</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath()
+	 * @return the meta object for the attribute list '<em>Predicate List</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicateList()
 	 * @see #getBTSPassportEditorConfig()
 	 * @generated
 	 */
-	EReference getBTSPassportEditorConfig_PredicatePath();
+	EAttribute getBTSPassportEditorConfig_PredicateList();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSUserGroup <em>BTS User Group</em>}'.
@@ -11022,80 +10950,6 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getGraphicSelectionCounter_Counter();
 
 	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.ObjectTypePathEntry <em>Object Type Path Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Object Type Path Entry</em>'.
-	 * @see org.bbaw.bts.btsmodel.ObjectTypePathEntry
-	 * @generated
-	 */
-	EClass getObjectTypePathEntry();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.ObjectTypePathEntry#getValue <em>Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Value</em>'.
-	 * @see org.bbaw.bts.btsmodel.ObjectTypePathEntry#getValue()
-	 * @see #getObjectTypePathEntry()
-	 * @generated
-	 */
-	EAttribute getObjectTypePathEntry_Value();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.ObjectTypePathEntry#isSelected <em>Selected</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Selected</em>'.
-	 * @see org.bbaw.bts.btsmodel.ObjectTypePathEntry#isSelected()
-	 * @see #getObjectTypePathEntry()
-	 * @generated
-	 */
-	EAttribute getObjectTypePathEntry_Selected();
-
-	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot <em>BTS Object Type Path Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Object Type Path Root</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePathRoot
-	 * @generated
-	 */
-	EClass getBTSObjectTypePathRoot();
-
-	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath <em>BTS Object Type Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Object Type Path</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePath
-	 * @generated
-	 */
-	EClass getBTSObjectTypePath();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath#getChildren <em>Children</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Children</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePath#getChildren()
-	 * @see #getBTSObjectTypePath()
-	 * @generated
-	 */
-	EReference getBTSObjectTypePath_Children();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath#getReferencedTypesPath <em>Referenced Types Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Referenced Types Path</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePath#getReferencedTypesPath()
-	 * @see #getBTSObjectTypePath()
-	 * @generated
-	 */
-	EReference getBTSObjectTypePath_ReferencedTypesPath();
-
-	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSPassportEntry <em>BTS Passport Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11192,6 +11046,40 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSPassportEntry_Key();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map.Entry <em>String To String List Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String To String List Map</em>'.
+	 * @see java.util.Map.Entry
+	 * @model keyDataType="org.eclipse.emf.ecore.EString"
+	 *        valueDataType="org.eclipse.emf.ecore.EEList<org.eclipse.emf.ecore.EString>" valueMany="false" valueTransient="true"
+	 * @generated
+	 */
+	EClass getStringToStringListMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToStringListMap()
+	 * @generated
+	 */
+	EAttribute getStringToStringListMap_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map.Entry <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map.Entry
+	 * @see #getStringToStringListMap()
+	 * @generated
+	 */
+	EAttribute getStringToStringListMap_Value();
 
 	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
@@ -12586,12 +12474,28 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTS_CONFIG_ITEM__SHOW_WIDGET = eINSTANCE.getBTSConfigItem_ShowWidget();
 
 		/**
-		 * The meta object literal for the '<em><b>Owner Types Path</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Owner Referenced Types String List</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BTS_CONFIG_ITEM__OWNER_TYPES_PATH = eINSTANCE.getBTSConfigItem_OwnerTypesPath();
+		EAttribute BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST = eINSTANCE.getBTSConfigItem_OwnerReferencedTypesStringList();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Owner Types Map</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_CONFIG_ITEM___GET_OWNER_TYPES_MAP = eINSTANCE.getBTSConfigItem__GetOwnerTypesMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Clear Owner Types Map</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_CONFIG_ITEM___CLEAR_OWNER_TYPES_MAP = eINSTANCE.getBTSConfigItem__ClearOwnerTypesMap();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl <em>BTS Passport Editor Config</em>}' class.
@@ -12644,12 +12548,12 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTS_PASSPORT_EDITOR_CONFIG__REGEX = eINSTANCE.getBTSPassportEditorConfig_Regex();
 
 		/**
-		 * The meta object literal for the '<em><b>Predicate Path</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Predicate List</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH = eINSTANCE.getBTSPassportEditorConfig_PredicatePath();
+		EAttribute BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_LIST = eINSTANCE.getBTSPassportEditorConfig_PredicateList();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl <em>BTS User Group</em>}' class.
@@ -13234,68 +13138,6 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute GRAPHIC_SELECTION_COUNTER__COUNTER = eINSTANCE.getGraphicSelectionCounter_Counter();
 
 		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.ObjectTypePathEntryImpl <em>Object Type Path Entry</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.ObjectTypePathEntryImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getObjectTypePathEntry()
-		 * @generated
-		 */
-		EClass OBJECT_TYPE_PATH_ENTRY = eINSTANCE.getObjectTypePathEntry();
-
-		/**
-		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OBJECT_TYPE_PATH_ENTRY__VALUE = eINSTANCE.getObjectTypePathEntry_Value();
-
-		/**
-		 * The meta object literal for the '<em><b>Selected</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute OBJECT_TYPE_PATH_ENTRY__SELECTED = eINSTANCE.getObjectTypePathEntry_Selected();
-
-		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSObjectTypePathRootImpl <em>BTS Object Type Path Root</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.BTSObjectTypePathRootImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObjectTypePathRoot()
-		 * @generated
-		 */
-		EClass BTS_OBJECT_TYPE_PATH_ROOT = eINSTANCE.getBTSObjectTypePathRoot();
-
-		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSObjectTypePathImpl <em>BTS Object Type Path</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.BTSObjectTypePathImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObjectTypePath()
-		 * @generated
-		 */
-		EClass BTS_OBJECT_TYPE_PATH = eINSTANCE.getBTSObjectTypePath();
-
-		/**
-		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_OBJECT_TYPE_PATH__CHILDREN = eINSTANCE.getBTSObjectTypePath_Children();
-
-		/**
-		 * The meta object literal for the '<em><b>Referenced Types Path</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH = eINSTANCE.getBTSObjectTypePath_ReferencedTypesPath();
-
-		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl <em>BTS Passport Entry</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13368,6 +13210,32 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_PASSPORT_ENTRY__KEY = eINSTANCE.getBTSPassportEntry_Key();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.StringToStringListMapImpl <em>String To String List Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.StringToStringListMapImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getStringToStringListMap()
+		 * @generated
+		 */
+		EClass STRING_TO_STRING_LIST_MAP = eINSTANCE.getStringToStringListMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_STRING_LIST_MAP__KEY = eINSTANCE.getStringToStringListMap_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_STRING_LIST_MAP__VALUE = eINSTANCE.getStringToStringListMap_Value();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

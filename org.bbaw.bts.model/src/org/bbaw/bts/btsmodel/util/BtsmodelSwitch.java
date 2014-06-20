@@ -2,8 +2,10 @@
  */
 package org.bbaw.bts.btsmodel.util;
 
+import java.util.Map;
 import org.bbaw.bts.btsmodel.*;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -570,30 +572,16 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.OBJECT_TYPE_PATH_ENTRY: {
-				ObjectTypePathEntry objectTypePathEntry = (ObjectTypePathEntry)theEObject;
-				T result = caseObjectTypePathEntry(objectTypePathEntry);
-				if (result == null) result = caseBTSObjectTypePath(objectTypePathEntry);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH_ROOT: {
-				BTSObjectTypePathRoot btsObjectTypePathRoot = (BTSObjectTypePathRoot)theEObject;
-				T result = caseBTSObjectTypePathRoot(btsObjectTypePathRoot);
-				if (result == null) result = caseBTSObjectTypePath(btsObjectTypePathRoot);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH: {
-				BTSObjectTypePath btsObjectTypePath = (BTSObjectTypePath)theEObject;
-				T result = caseBTSObjectTypePath(btsObjectTypePath);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY: {
 				BTSPassportEntry btsPassportEntry = (BTSPassportEntry)theEObject;
 				T result = caseBTSPassportEntry(btsPassportEntry);
 				if (result == null) result = caseBTSIdentifiableItem(btsPassportEntry);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsmodelPackage.STRING_TO_STRING_LIST_MAP: {
+				@SuppressWarnings("unchecked") Map.Entry<String, EList<String>> stringToStringListMap = (Map.Entry<String, EList<String>>)theEObject;
+				T result = caseStringToStringListMap(stringToStringListMap);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -1458,51 +1446,6 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Object Type Path Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Object Type Path Entry</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseObjectTypePathEntry(ObjectTypePathEntry object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Object Type Path Root</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Object Type Path Root</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBTSObjectTypePathRoot(BTSObjectTypePathRoot object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Object Type Path</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Object Type Path</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBTSObjectTypePath(BTSObjectTypePath object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>BTS Passport Entry</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -1514,6 +1457,21 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSPassportEntry(BTSPassportEntry object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>String To String List Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>String To String List Map</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseStringToStringListMap(Map.Entry<String, EList<String>> object) {
 		return null;
 	}
 

@@ -3,7 +3,7 @@ package org.bbaw.bts.ui.main.objectTypeSelector;
 import java.util.List;
 import java.util.Vector;
 
-import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
+import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.swt.graphics.Image;
@@ -44,8 +44,8 @@ public class PathTreeLabelProvider implements ILabelProvider {
 
 	@Override
 	public String getText(Object element) {
-		if (element instanceof ObjectTypePathEntry) {
-			return ((ObjectTypePathEntry) element).getValue();
+		if (element instanceof BTSObjectTypeTreeNode) {
+			return ((BTSObjectTypeTreeNode) element).getValue();
 		}
 		return element.toString();
 	}

@@ -5,15 +5,13 @@ package org.bbaw.bts.btsviewmodel.impl;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-
 import org.bbaw.bts.btsmodel.BTSObject;
-
+import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.MessageType;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
-
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -21,7 +19,6 @@ import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 /**
@@ -45,6 +42,13 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * @generated
 	 */
 	private EClass statusMessageEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsObjectTypeTreeNodeEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -303,6 +307,51 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBTSObjectTypeTreeNode() {
+		return btsObjectTypeTreeNodeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBTSObjectTypeTreeNode_Children() {
+		return (EReference)btsObjectTypeTreeNodeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBTSObjectTypeTreeNode_ReferencedTypesPath() {
+		return (EReference)btsObjectTypeTreeNodeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSObjectTypeTreeNode_Value() {
+		return (EAttribute)btsObjectTypeTreeNodeEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSObjectTypeTreeNode_Selected() {
+		return (EAttribute)btsObjectTypeTreeNodeEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getMessageType() {
 		return messageTypeEEnum;
 	}
@@ -395,6 +444,12 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		createEAttribute(statusMessageEClass, STATUS_MESSAGE__MESSAGE_TYPE);
 		createEReference(statusMessageEClass, STATUS_MESSAGE__CHILDREN);
 
+		btsObjectTypeTreeNodeEClass = createEClass(BTS_OBJECT_TYPE_TREE_NODE);
+		createEReference(btsObjectTypeTreeNodeEClass, BTS_OBJECT_TYPE_TREE_NODE__CHILDREN);
+		createEReference(btsObjectTypeTreeNodeEClass, BTS_OBJECT_TYPE_TREE_NODE__REFERENCED_TYPES_PATH);
+		createEAttribute(btsObjectTypeTreeNodeEClass, BTS_OBJECT_TYPE_TREE_NODE__VALUE);
+		createEAttribute(btsObjectTypeTreeNodeEClass, BTS_OBJECT_TYPE_TREE_NODE__SELECTED);
+
 		// Create enums
 		messageTypeEEnum = createEEnum(MESSAGE_TYPE);
 
@@ -457,6 +512,12 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		initEAttribute(getStatusMessage_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStatusMessage_MessageType(), this.getMessageType(), "messageType", "", 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStatusMessage_Children(), this.getStatusMessage(), null, "children", null, 0, -1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsObjectTypeTreeNodeEClass, BTSObjectTypeTreeNode.class, "BTSObjectTypeTreeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBTSObjectTypeTreeNode_Children(), this.getBTSObjectTypeTreeNode(), null, "children", null, 0, -1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSObjectTypeTreeNode_ReferencedTypesPath(), this.getBTSObjectTypeTreeNode(), null, "referencedTypesPath", null, 0, 1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSObjectTypeTreeNode_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSObjectTypeTreeNode_Selected(), ecorePackage.getEBoolean(), "selected", null, 0, 1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(messageTypeEEnum, MessageType.class, "MessageType");

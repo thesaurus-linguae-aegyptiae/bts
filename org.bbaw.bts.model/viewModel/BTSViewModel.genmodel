@@ -43,5 +43,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//StatusMessage/messageType"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSViewModel.ecore#//StatusMessage/children"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="BTSViewModel.ecore#//BTSObjectTypeTreeNode">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSViewModel.ecore#//BTSObjectTypeTreeNode/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSViewModel.ecore#//BTSObjectTypeTreeNode/referencedTypesPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//BTSObjectTypeTreeNode/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSViewModel.ecore#//BTSObjectTypeTreeNode/selected"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

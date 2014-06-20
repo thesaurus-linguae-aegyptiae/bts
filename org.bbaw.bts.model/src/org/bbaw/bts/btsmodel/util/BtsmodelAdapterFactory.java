@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.btsmodel.util;
 
+import java.util.Map;
 import org.bbaw.bts.btsmodel.*;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -9,6 +10,7 @@ import org.eclipse.emf.common.notify.Notifier;
 
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -292,20 +294,12 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createGraphicSelectionCounterAdapter();
 			}
 			@Override
-			public Adapter caseObjectTypePathEntry(ObjectTypePathEntry object) {
-				return createObjectTypePathEntryAdapter();
-			}
-			@Override
-			public Adapter caseBTSObjectTypePathRoot(BTSObjectTypePathRoot object) {
-				return createBTSObjectTypePathRootAdapter();
-			}
-			@Override
-			public Adapter caseBTSObjectTypePath(BTSObjectTypePath object) {
-				return createBTSObjectTypePathAdapter();
-			}
-			@Override
 			public Adapter caseBTSPassportEntry(BTSPassportEntry object) {
 				return createBTSPassportEntryAdapter();
+			}
+			@Override
+			public Adapter caseStringToStringListMap(Map.Entry<String, EList<String>> object) {
+				return createStringToStringListMapAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -1128,48 +1122,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.ObjectTypePathEntry <em>Object Type Path Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.ObjectTypePathEntry
-	 * @generated
-	 */
-	public Adapter createObjectTypePathEntryAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot <em>BTS Object Type Path Root</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePathRoot
-	 * @generated
-	 */
-	public Adapter createBTSObjectTypePathRootAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath <em>BTS Object Type Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePath
-	 * @generated
-	 */
-	public Adapter createBTSObjectTypePathAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntry <em>BTS Passport Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -1180,6 +1132,20 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSPassportEntryAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link java.util.Map.Entry <em>String To String List Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see java.util.Map.Entry
+	 * @generated
+	 */
+	public Adapter createStringToStringListMapAdapter() {
 		return null;
 	}
 

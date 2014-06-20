@@ -84,6 +84,7 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addShowWidgetPropertyDescriptor(object);
+			addOwnerReferencedTypesStringListPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -267,6 +268,28 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 				 false,
 				 false,
 				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Owner Referenced Types String List feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addOwnerReferencedTypesStringListPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSConfigItem_ownerReferencedTypesStringList_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfigItem_ownerReferencedTypesStringList_feature", "_UI_BTSConfigItem_type"),
+				 BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -521,11 +544,6 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider implements 
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__RULES,
 				 BtsmodelFactory.eINSTANCE.createBTSOperator()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_TYPES_PATH,
-				 BtsmodelFactory.eINSTANCE.createBTSObjectTypePathRoot()));
 	}
 
 	/**

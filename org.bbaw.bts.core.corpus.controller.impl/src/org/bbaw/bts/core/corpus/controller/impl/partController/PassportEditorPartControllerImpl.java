@@ -3,6 +3,7 @@ package org.bbaw.bts.core.corpus.controller.impl.partController;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
@@ -10,8 +11,8 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
-import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.services.BTSListEntryService;
 import org.bbaw.bts.core.services.BTSThsEntryService;
 import org.bbaw.bts.core.services.CorpusObjectService;
@@ -34,6 +35,9 @@ public class PassportEditorPartControllerImpl
 
 	@Inject
 	private BTSListEntryService listService;
+	
+	@Inject
+	private BTSConfigurationController configurationController;
 	
 	@Inject
 	private Logger logger;
@@ -92,13 +96,15 @@ public class PassportEditorPartControllerImpl
 
 	@Override
 	public List<BTSCorpusObject> getObjectProposalsFor(
-			BTSConfigItem configItem, String text) {
+			BTSConfigItem configItem, String text, BTSCorpusObject object) {
 		List<BTSCorpusObject> list = new Vector<BTSCorpusObject>();
-		if (configItem != null && configItem.getOwnerTypesPath() != null) {
+		
+		//FIXME aktualisieren und auf map umstellen
+		
+		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
 			boolean corpus = false;
-			for (ObjectTypePathEntry pathEntry : configItem.getOwnerTypesPath()
-					.getChildren()) {
-				if (BTSConstants.THS_ENTRY.equals(pathEntry.getValue())) {
+
+				if (configurationController.objectMayReferenceToThs(object, configItem)) {
 					// load
 					BTSQueryRequest query = new BTSQueryRequest();
 					QueryBuilder qb = QueryBuilders.termQuery("eClass",
@@ -108,7 +114,7 @@ public class PassportEditorPartControllerImpl
 					SearchRequestBuilder sqb = thsService
 							.getSearchRequestBuilder();
 					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(pathEntry);
+					List<FilterBuilder> filters = makeFilterList(configItem, object);
 
 					FilterBuilder[] filterArray = filters
 							.toArray(new FilterBuilder[filters.size()]);
@@ -117,20 +123,16 @@ public class PassportEditorPartControllerImpl
 					list.addAll((Collection<? extends BTSCorpusObject>) thsService
 							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 									false));
-				} else if (BTSConstants.WLIST_ENTRY
-						.equals(pathEntry.getValue())) {
+				} else if (configurationController.objectMayReferenceToWList(object, configItem)) {
 
-				} else if (BTSConstants.TEXT_CORPUS
-						.equals(pathEntry.getValue())) {
-
-				} else if (!corpus) {
+				} else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
 					BTSQueryRequest query = new BTSQueryRequest();
 					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
 
 					SearchRequestBuilder sqb = corpusObjectService
 							.getSearchRequestBuilder();
 					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(pathEntry);
+					List<FilterBuilder> filters = makeFilterList(configItem, object);
 
 					FilterBuilder[] filterArray = filters
 							.toArray(new FilterBuilder[filters.size()]);
@@ -140,30 +142,46 @@ public class PassportEditorPartControllerImpl
 							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 									false));
 					corpus = true;
-				}
+				} else if (!corpus) {
+					BTSQueryRequest query = new BTSQueryRequest();
+					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
+
+					SearchRequestBuilder sqb = corpusObjectService
+							.getSearchRequestBuilder();
+					sqb.setQuery(qb);
+
+
+					list.addAll((Collection<? extends BTSCorpusObject>) corpusObjectService
+							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
+									false));
+					corpus = true;
+				
 			}
 		}
 
 		return list;
 	}
 
-	private List<FilterBuilder> makeFilterList(ObjectTypePathEntry pathEntry) {
+	private List<FilterBuilder> makeFilterList(BTSConfigItem configItem, BTSCorpusObject object) {
 
+		Set<String> referenceTypes = configurationController.getReferenceTypesSet(object, configItem);
+		
 		List<FilterBuilder> filters = new ArrayList<FilterBuilder>();
-		for (int i = 0; i < pathEntry.getChildren().size() - 1; i++) {
-			ObjectTypePathEntry child = pathEntry.getChildren().get(i);
-			filters.add(FilterBuilders.termFilter(new String("type"),
-					child.getValue()));
-			for (int j = 0; j < child.getChildren().size() - 1; j++) {
-				ObjectTypePathEntry grandchild = child.getChildren().get(j);
-				filters.add(FilterBuilders.termFilter(new String("subtype"),
-						grandchild.getValue()));
+		for (String ref : referenceTypes) {
+			if (ref.contains(BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR)) {
+				String[] split = ref.split("\\.");
+				if (split.length == 2) {
+					filters.add(FilterBuilders.termFilter(new String("type"),
+							ref));
+				} else if (split.length == 3) {
+					filters.add(FilterBuilders.termFilter(
+							new String("subtype"), ref));
+				}
 
 			}
 
 		}
 		return filters;
-
 
 	}
 }

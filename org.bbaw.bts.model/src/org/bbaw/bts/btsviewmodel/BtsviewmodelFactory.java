@@ -41,6 +41,15 @@ public interface BtsviewmodelFactory extends EFactory
 	 */
 	StatusMessage createStatusMessage();
 
+	/**
+	 * Returns a new object of class '<em>BTS Object Type Tree Node</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Object Type Tree Node</em>'.
+	 * @generated
+	 */
+	BTSObjectTypeTreeNode createBTSObjectTypeTreeNode();
+
 	StatusMessage createFilteredMessage(int suppressed);
 	
 	StatusMessage createNotEditingRightsMessage();

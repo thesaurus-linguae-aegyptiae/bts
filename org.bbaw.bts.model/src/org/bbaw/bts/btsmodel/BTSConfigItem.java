@@ -2,7 +2,11 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import java.util.List;
+import java.util.Map;
+
 import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -22,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getRules <em>Rules</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#isShowWidget <em>Show Widget</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesPath <em>Owner Types Path</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerReferencedTypesStringList <em>Owner Referenced Types String List</em>}</li>
  * </ul>
  * </p>
  *
@@ -253,7 +257,7 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<BTSWorkflowRuleItem> getRules();
+	List<BTSWorkflowRuleItem> getRules();
 
 	/**
 	 * Returns the value of the '<em><b>Show Widget</b></em>' attribute.
@@ -282,29 +286,35 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	void setShowWidget(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Owner Types Path</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Owner Referenced Types String List</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Owner Types Path</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Owner Referenced Types String List</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Owner Types Path</em>' containment reference.
-	 * @see #setOwnerTypesPath(BTSObjectTypePathRoot)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_OwnerTypesPath()
-	 * @model containment="true"
+	 * @return the value of the '<em>Owner Referenced Types String List</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_OwnerReferencedTypesStringList()
+	 * @model
 	 * @generated
 	 */
-	BTSObjectTypePathRoot getOwnerTypesPath();
+	EList<String> getOwnerReferencedTypesStringList();
 
 	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesPath <em>Owner Types Path</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Owner Types Path</em>' containment reference.
-	 * @see #getOwnerTypesPath()
+	 * @model kind="operation" mapType="org.bbaw.bts.btsmodel.StringToStringListMap<org.eclipse.emf.ecore.EString, org.eclipse.emf.ecore.EEList<org.eclipse.emf.ecore.EString>>"
+	 * @generatedNOT
+	 */
+	Map<String, List<String>> getOwnerTypesMap();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
 	 * @generated
 	 */
-	void setOwnerTypesPath(BTSObjectTypePathRoot value);
+	void clearOwnerTypesMap();
 
 } // BTSConfigItem

@@ -1072,49 +1072,26 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.ObjectTypePathEntry} instances.
+	 * This keeps track of the one adapter used for all {@link java.util.Map.Entry} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ObjectTypePathEntryItemProvider objectTypePathEntryItemProvider;
+	protected StringToStringListMapItemProvider stringToStringListMapItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.ObjectTypePathEntry}.
+	 * This creates an adapter for a {@link java.util.Map.Entry}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createObjectTypePathEntryAdapter() {
-		if (objectTypePathEntryItemProvider == null) {
-			objectTypePathEntryItemProvider = new ObjectTypePathEntryItemProvider(this);
+	public Adapter createStringToStringListMapAdapter() {
+		if (stringToStringListMapItemProvider == null) {
+			stringToStringListMapItemProvider = new StringToStringListMapItemProvider(this);
 		}
 
-		return objectTypePathEntryItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSObjectTypePathRootItemProvider btsObjectTypePathRootItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSObjectTypePathRoot}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSObjectTypePathRootAdapter() {
-		if (btsObjectTypePathRootItemProvider == null) {
-			btsObjectTypePathRootItemProvider = new BTSObjectTypePathRootItemProvider(this);
-		}
-
-		return btsObjectTypePathRootItemProvider;
+		return stringToStringListMapItemProvider;
 	}
 
 	/**
@@ -1288,8 +1265,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsdbCollectionRoleDescItemProvider != null) btsdbCollectionRoleDescItemProvider.dispose();
 		if (btsTextContentItemProvider != null) btsTextContentItemProvider.dispose();
 		if (graphicSelectionCounterItemProvider != null) graphicSelectionCounterItemProvider.dispose();
-		if (objectTypePathEntryItemProvider != null) objectTypePathEntryItemProvider.dispose();
-		if (btsObjectTypePathRootItemProvider != null) btsObjectTypePathRootItemProvider.dispose();
+		if (stringToStringListMapItemProvider != null) stringToStringListMapItemProvider.dispose();
 	}
 
 }

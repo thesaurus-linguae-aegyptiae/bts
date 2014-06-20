@@ -4,56 +4,11 @@ package org.bbaw.bts.btsmodel.impl;
 
 import java.text.DecimalFormat;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.UUID;
-import org.bbaw.bts.btsmodel.AdministrativDataObject;
-import org.bbaw.bts.btsmodel.BTSAmbivalence;
-import org.bbaw.bts.btsmodel.BTSAnnotation;
-import org.bbaw.bts.btsmodel.BTSComment;
-import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSConfiguration;
-import org.bbaw.bts.btsmodel.BTSCorpusHeader;
-import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
-import org.bbaw.bts.btsmodel.BTSDBConnection;
-import org.bbaw.bts.btsmodel.BTSDate;
-import org.bbaw.bts.btsmodel.BTSExternalReference;
-import org.bbaw.bts.btsmodel.BTSGraphic;
-import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BTSImage;
-import org.bbaw.bts.btsmodel.BTSInterTextReference;
-import org.bbaw.bts.btsmodel.BTSLemmaCase;
-import org.bbaw.bts.btsmodel.BTSList;
-import org.bbaw.bts.btsmodel.BTSListEntry;
-import org.bbaw.bts.btsmodel.BTSListSubentry;
-import org.bbaw.bts.btsmodel.BTSMarker;
-import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
-import org.bbaw.bts.btsmodel.BTSOperator;
-import org.bbaw.bts.btsmodel.BTSPassport;
-import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
-import org.bbaw.bts.btsmodel.BTSPassportEntryGroup;
-import org.bbaw.bts.btsmodel.BTSPassportEntryItem;
-import org.bbaw.bts.btsmodel.BTSProject;
-import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
-import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsmodel.BTSRevision;
-import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSTCObject;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextContent;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
-import org.bbaw.bts.btsmodel.BTSThsEntry;
-import org.bbaw.bts.btsmodel.BTSTimespan;
-import org.bbaw.bts.btsmodel.BTSTranslation;
-import org.bbaw.bts.btsmodel.BTSTranslations;
-import org.bbaw.bts.btsmodel.BTSUser;
-import org.bbaw.bts.btsmodel.BTSUserGroup;
-import org.bbaw.bts.btsmodel.BTSWord;
-import org.bbaw.bts.btsmodel.BTSWorkflowRule;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.btsmodel.DBLease;
-import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
-import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
+import org.bbaw.bts.btsmodel.*;
 import org.bbaw.bts.commons.BTSConstants;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
@@ -149,8 +104,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: return createBTSDBCollectionRoleDesc();
 			case BtsmodelPackage.BTS_TEXT_CONTENT: return createBTSTextContent();
 			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER: return createGraphicSelectionCounter();
-			case BtsmodelPackage.OBJECT_TYPE_PATH_ENTRY: return createObjectTypePathEntry();
-			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH_ROOT: return createBTSObjectTypePathRoot();
+			case BtsmodelPackage.STRING_TO_STRING_LIST_MAP: return (EObject)createStringToStringListMap();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -714,19 +668,9 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ObjectTypePathEntry createObjectTypePathEntry() {
-		ObjectTypePathEntryImpl objectTypePathEntry = new ObjectTypePathEntryImpl();
-		return objectTypePathEntry;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BTSObjectTypePathRoot createBTSObjectTypePathRoot() {
-		BTSObjectTypePathRootImpl btsObjectTypePathRoot = new BTSObjectTypePathRootImpl();
-		return btsObjectTypePathRoot;
+	public Map.Entry<String, EList<String>> createStringToStringListMap() {
+		StringToStringListMapImpl stringToStringListMap = new StringToStringListMapImpl();
+		return stringToStringListMap;
 	}
 
 	/**

@@ -7,6 +7,7 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart;
 import org.bbaw.bts.ui.corpus.parts.ThsNavigator;
@@ -43,19 +44,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 	private BTSCorpusObject selectionObject;
 	
 	@Inject
-	@Optional
-	@Named(BTSConstants.CORPUS_OBJECT)
-	private Boolean showCorpusObjects;
-	
-	@Inject
-	@Optional
-	@Named(BTSConstants.WLIST_ENTRY)
-	private Boolean showWordList;
-
-	@Inject
-	@Optional
-	@Named(BTSConstants.THS_ENTRY)
-	private Boolean showThs;
+	private BTSConfigurationController configurationController;
 	
 	private Text text;
 
@@ -97,7 +86,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 
 		tabFolder.setSimple(false);
 		
-		if (showCorpusObjects.booleanValue())
+		if (configurationController.objectMayReferenceToCorpus(selectionObject, relationConfig))
 		{
 			CTabItem tbtmCorpusObjects = new CTabItem(tabFolder, SWT.NONE);
 			tbtmCorpusObjects.setText("Corpus Objects");
@@ -132,7 +121,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 		}
 
 		//wlist
-		if (showWordList.booleanValue())
+		if (configurationController.objectMayReferenceToWList(selectionObject, relationConfig))
 		{
 			CTabItem tbtmWList = new CTabItem(tabFolder, SWT.NONE);
 			tbtmWList.setText("Word List");
@@ -167,7 +156,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 		}
 		
 		//ths
-		if (showThs.booleanValue())
+		if (configurationController.objectMayReferenceToThs(selectionObject, relationConfig))
 		{
 			CTabItem tbtmThs = new CTabItem(tabFolder, SWT.NONE);
 			tbtmThs.setText("Thesaurus");

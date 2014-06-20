@@ -207,7 +207,9 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/subtype"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/rules"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/showWidget"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfigItem/ownerTypesPath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSConfigItem/ownerReferencedTypesStringList"/>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSConfigItem/getOwnerTypesMap"/>
+      <genOperations ecoreOperation="BTSModel.ecore#//BTSConfigItem/clearOwnerTypesMap"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSPassportEditorConfig">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/widgetType"/>
@@ -215,7 +217,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/allowMultiple"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/horizontalWidth"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/regex"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEditorConfig/predicatePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/predicateList"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSUserGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUserGroup/category"/>
@@ -305,15 +307,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//GraphicSelectionCounter/dateOfLastSelection"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//GraphicSelectionCounter/counter"/>
     </genClasses>
-    <genClasses ecoreClass="BTSModel.ecore#//ObjectTypePathEntry">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//ObjectTypePathEntry/value"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//ObjectTypePathEntry/selected"/>
-    </genClasses>
-    <genClasses ecoreClass="BTSModel.ecore#//BTSObjectTypePathRoot"/>
-    <genClasses ecoreClass="BTSModel.ecore#//BTSObjectTypePath">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSObjectTypePath/children"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSObjectTypePath/referencedTypesPath"/>
-    </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSPassportEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/provider"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/comment"/>
@@ -323,6 +316,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEntry/label"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/key"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//StringToStringListMap">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//StringToStringListMap/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//StringToStringListMap/value"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

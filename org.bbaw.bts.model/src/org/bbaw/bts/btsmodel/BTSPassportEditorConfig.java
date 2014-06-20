@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc -->
@@ -16,7 +18,7 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#isAllowMultiple <em>Allow Multiple</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getHorizontalWidth <em>Horizontal Width</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getRegex <em>Regex</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath <em>Predicate Path</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicateList <em>Predicate List</em>}</li>
  * </ul>
  * </p>
  *
@@ -156,29 +158,19 @@ public interface BTSPassportEditorConfig extends BTSIdentifiableItem {
 	void setRegex(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Predicate Path</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Predicate List</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Predicate Path</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Predicate List</em>' attribute list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Predicate Path</em>' containment reference.
-	 * @see #setPredicatePath(BTSObjectTypePathRoot)
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEditorConfig_PredicatePath()
-	 * @model containment="true"
+	 * @return the value of the '<em>Predicate List</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSPassportEditorConfig_PredicateList()
+	 * @model
 	 * @generated
 	 */
-	BTSObjectTypePathRoot getPredicatePath();
-
-	/**
-	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath <em>Predicate Path</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Predicate Path</em>' containment reference.
-	 * @see #getPredicatePath()
-	 * @generated
-	 */
-	void setPredicatePath(BTSObjectTypePathRoot value);
+	EList<String> getPredicateList();
 
 } // BTSPassportEditorConfig
