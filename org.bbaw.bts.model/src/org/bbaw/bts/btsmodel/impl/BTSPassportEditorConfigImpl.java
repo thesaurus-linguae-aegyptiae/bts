@@ -23,7 +23,6 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#isAllowMultiple <em>Allow Multiple</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getHorizontalWidth <em>Horizontal Width</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getRegex <em>Regex</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getReferencedTypesPath <em>Referenced Types Path</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSPassportEditorConfigImpl#getPredicatePath <em>Predicate Path</em>}</li>
  * </ul>
  * </p>
@@ -130,16 +129,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 * @ordered
 	 */
 	protected String regex = REGEX_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getReferencedTypesPath() <em>Referenced Types Path</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferencedTypesPath()
-	 * @generated
-	 * @ordered
-	 */
-	protected BTSObjectTypePathRoot referencedTypesPath;
 
 	/**
 	 * The cached value of the '{@link #getPredicatePath() <em>Predicate Path</em>}' containment reference.
@@ -282,49 +271,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BTSObjectTypePathRoot getReferencedTypesPath() {
-		return referencedTypesPath;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetReferencedTypesPath(BTSObjectTypePathRoot newReferencedTypesPath, NotificationChain msgs) {
-		BTSObjectTypePathRoot oldReferencedTypesPath = referencedTypesPath;
-		referencedTypesPath = newReferencedTypesPath;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, oldReferencedTypesPath, newReferencedTypesPath);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReferencedTypesPath(BTSObjectTypePathRoot newReferencedTypesPath) {
-		if (newReferencedTypesPath != referencedTypesPath) {
-			NotificationChain msgs = null;
-			if (referencedTypesPath != null)
-				msgs = ((InternalEObject)referencedTypesPath).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, null, msgs);
-			if (newReferencedTypesPath != null)
-				msgs = ((InternalEObject)newReferencedTypesPath).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, null, msgs);
-			msgs = basicSetReferencedTypesPath(newReferencedTypesPath, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH, newReferencedTypesPath, newReferencedTypesPath));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public BTSObjectTypePathRoot getPredicatePath() {
 		return predicatePath;
 	}
@@ -371,8 +317,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
-				return basicSetReferencedTypesPath(null, msgs);
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH:
 				return basicSetPredicatePath(null, msgs);
 		}
@@ -397,8 +341,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 				return getHorizontalWidth();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				return getRegex();
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
-				return getReferencedTypesPath();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH:
 				return getPredicatePath();
 		}
@@ -427,9 +369,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 				return;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				setRegex((String)newValue);
-				return;
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
-				setReferencedTypesPath((BTSObjectTypePathRoot)newValue);
 				return;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH:
 				setPredicatePath((BTSObjectTypePathRoot)newValue);
@@ -461,9 +400,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				setRegex(REGEX_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
-				setReferencedTypesPath((BTSObjectTypePathRoot)null);
-				return;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH:
 				setPredicatePath((BTSObjectTypePathRoot)null);
 				return;
@@ -489,8 +425,6 @@ public class BTSPassportEditorConfigImpl extends BTSIdentifiableItemImpl impleme
 				return horizontalWidth != HORIZONTAL_WIDTH_EDEFAULT;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REGEX:
 				return REGEX_EDEFAULT == null ? regex != null : !REGEX_EDEFAULT.equals(regex);
-			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH:
-				return referencedTypesPath != null;
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH:
 				return predicatePath != null;
 		}

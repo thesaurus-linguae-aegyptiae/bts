@@ -212,6 +212,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private void evaluateUserPermissionsAndExpressions() {
 		evaluateMayMasterEditConfig();
+		evaluateMayEditConfig();
 		evaluateMayEditUsers();
 		evaluateMayEditPermissions();
 		evaluateMayOpenFuton();

@@ -52,6 +52,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		return true;
 	}
 
+
 	private void saveAuthorisation(BTSProject entity, BTSProjectDBCollection coll)
 	{
 
@@ -78,6 +79,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 						memberDesc = desc;
 					}
 				}
+
 
 			}
 			if (memberDesc == null)

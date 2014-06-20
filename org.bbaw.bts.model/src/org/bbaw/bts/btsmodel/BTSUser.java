@@ -23,10 +23,10 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getWebURL <em>Web URL</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getExternalReferneces <em>External Referneces</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#isLoggedIn <em>Logged In</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#isDbAdmin <em>Db Admin</em>}</li>
  * </ul>
  * </p>
  *
@@ -302,22 +302,6 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	EList<BTSExternalReference> getExternalReferneces();
 
 	/**
-	 * Returns the value of the '<em><b>Roles</b></em>' attribute list.
-	 * The list contents are of type {@link java.lang.String}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Roles</em>' attribute list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Roles</em>' attribute list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_Roles()
-	 * @model
-	 * @generated
-	 */
-	EList<String> getRoles();
-
-	/**
 	 * Returns the value of the '<em><b>Password</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -328,7 +312,7 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * @return the value of the '<em>Password</em>' attribute.
 	 * @see #setPassword(String)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_Password()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getPassword();
@@ -354,7 +338,7 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * @return the value of the '<em>Logged In</em>' attribute.
 	 * @see #setLoggedIn(boolean)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_LoggedIn()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	boolean isLoggedIn();
@@ -394,5 +378,31 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * @generated
 	 */
 	void setStatus(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Db Admin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Db Admin</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Db Admin</em>' attribute.
+	 * @see #setDbAdmin(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_DbAdmin()
+	 * @model
+	 * @generated
+	 */
+	boolean isDbAdmin();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSUser#isDbAdmin <em>Db Admin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Db Admin</em>' attribute.
+	 * @see #isDbAdmin()
+	 * @generated
+	 */
+	void setDbAdmin(boolean value);
 
 } // BTSUser

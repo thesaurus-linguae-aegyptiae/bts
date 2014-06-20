@@ -8,4 +8,5 @@ public interface BTSProjectDao extends GenericDao<BTSProject, String>
 	boolean removeBTSProject(BTSProject btsProject);
 
 	void addAuthorisation(BTSProjectDBCollection coll, String prefix);
+
 }

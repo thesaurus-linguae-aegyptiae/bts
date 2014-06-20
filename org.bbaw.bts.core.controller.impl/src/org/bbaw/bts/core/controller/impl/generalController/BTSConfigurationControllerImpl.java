@@ -218,7 +218,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 
 	private boolean objectTypesPathContainsObject(
-			BTSObjectTypePathRoot btsObjectTypePathRoot, String oClass,
+			BTSObjectTypePath btsObjectTypePathRoot, String oClass,
 			String oType, String oSubtype, int level) {
 		for (ObjectTypePathEntry entry : btsObjectTypePathRoot.getChildren()) {
 			if (oClass.equals(entry.getValue())) {
@@ -294,23 +294,55 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		BTSObjectTypePath root = BtsmodelFactory.eINSTANCE.createBTSObjectTypePathRoot();
 		for (BTSConfig c : parentConfig.getChildren())
 		{
-			processChild(c, root, selectionPath);
+			processChild(c, root, selectionPath, selectionPath);
 		}
 		return root;
 	}
 
 	private void processChild(BTSConfig node, BTSObjectTypePath input,
-			BTSObjectTypePathRoot selectionPath) {
+			BTSObjectTypePath selectionPath, BTSObjectTypePath orignialPathEntry) {
 		ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE
 				.createObjectTypePathEntry();
 		child.setValue(((BTSConfigItem) node).getValue());
 		child.setSelected(objectTypesPathContainsObject(selectionPath,
 				child.getValue(), null, null, 0));
+		ObjectTypePathEntry orignialPathEntryChild = null;
+		for (ObjectTypePathEntry selectionPathChild : selectionPath.getChildren())
+		{
+			if (selectionPathChild.getValue() != null && selectionPathChild.getValue().equals(child.getValue()))
+			{
+				orignialPathEntryChild = selectionPathChild;
+			}
+		}
+		cloneReferencePathEntries(child, orignialPathEntry);
 		input.getChildren().add(child);
 		for (BTSConfig cc : node.getChildren()) {
-			processChild(cc, child, selectionPath);
+			
+			processChild(cc, child, selectionPath, orignialPathEntryChild);
 		}
 
+	}
+
+	private void cloneReferencePathEntries(ObjectTypePathEntry child,
+			BTSObjectTypePath selectionPath) {
+		if (selectionPath != null && selectionPath.getReferencedTypesPath() != null)
+		{
+			child.setReferencedTypesPath(selectionPath.getReferencedTypesPath());
+		}
+		
+		
+	}
+
+	private void processPathChildren(BTSObjectTypePath parent,
+			ObjectTypePathEntry originalChild) {
+		ObjectTypePathEntry child = BtsmodelFactory.eINSTANCE
+				.createObjectTypePathEntry();
+		child.setValue(originalChild.getValue());
+		parent.getChildren().add(child);
+		for (ObjectTypePathEntry cc : originalChild.getChildren()) {
+			processPathChildren(child, cc);
+		}
+		
 	}
 
 	@Override
@@ -638,10 +670,12 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 			BTSConfigItem itemConfig, BTSCorpusObject corpusObject) {
 		BTSConfiguration configuration = configService.getActiveConfiguration();
 		BTSObjectTypePathRoot rootpath = null;
-		if (itemConfig != null) {
-			rootpath = itemConfig.getPassportEditorConfig()
-				.getReferencedTypesPath();
-		}
+		
+		//FIXME update
+//		if (itemConfig != null) {
+//			rootpath = itemConfig.getPassportEditorConfig()
+//				.getReferencedTypesPath();
+//		}
 		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		calculateChildrenRecurcively(rootpath, configuration, pathClonesList,
@@ -723,8 +757,9 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		BTSConfigItem config = configService.getRelationsConfigItem();
 		BTSObjectTypePathRoot rootpath = null;
 		if (itemConfig != null) {
-			rootpath = itemConfig.getPassportEditorConfig()
-					.getReferencedTypesPath();
+			//FIXME update
+//			rootpath = itemConfig.getPassportEditorConfig()
+//					.getReferencedTypesPath();
 		}
 		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
@@ -748,10 +783,12 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 									// && l1CI.getValue().equals(
 									// ((ObjectTypePathEntry) pathEntry)
 									// .getValue())
-									&& objectTypesPathsContainsObjectype(l1CI
-											.getPassportEditorConfig()
-											.getReferencedTypesPath(),
-											corpusObject)) {
+//									//FIXME update
+//									&& objectTypesPathsContainsObjectype(l1CI
+//											.getPassportEditorConfig()
+//											.getReferencedTypesPath(),
+//											corpusObject)) {
+									){
 								int size = pathClonesList.getChildren().size();
 
 								calculateChildrenReferncedObjectsRecurcively(

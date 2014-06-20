@@ -79,10 +79,10 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 			addMailPropertyDescriptor(object);
 			addWebURLPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
-			addRolesPropertyDescriptor(object);
 			addPasswordPropertyDescriptor(object);
 			addLoggedInPropertyDescriptor(object);
 			addStatusPropertyDescriptor(object);
+			addDbAdminPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -524,29 +524,6 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 	}
 
 	/**
-	 * This adds a property descriptor for the Roles feature. <!--
-	 * begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generated
-	 */
-	protected void addRolesPropertyDescriptor(Object object)
-	{
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSUser_roles_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSUser_roles_feature", "_UI_BTSUser_type"),
-				 BtsmodelPackage.Literals.BTS_USER__ROLES,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
 	 * This adds a property descriptor for the Password feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -611,6 +588,28 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Db Admin feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDbAdminPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSUser_dbAdmin_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSUser_dbAdmin_feature", "_UI_BTSUser_type"),
+				 BtsmodelPackage.Literals.BTS_USER__DB_ADMIN,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -703,10 +702,10 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 			case BtsmodelPackage.BTS_USER__MAIL:
 			case BtsmodelPackage.BTS_USER__WEB_URL:
 			case BtsmodelPackage.BTS_USER__COMMENT:
-			case BtsmodelPackage.BTS_USER__ROLES:
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 			case BtsmodelPackage.BTS_USER__LOGGED_IN:
 			case BtsmodelPackage.BTS_USER__STATUS:
+			case BtsmodelPackage.BTS_USER__DB_ADMIN:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_USER__REVISIONS:

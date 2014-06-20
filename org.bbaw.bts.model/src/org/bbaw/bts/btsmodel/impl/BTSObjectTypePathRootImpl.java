@@ -36,4 +36,11 @@ public class BTSObjectTypePathRootImpl extends BTSObjectTypePathImpl implements 
 		return BtsmodelPackage.Literals.BTS_OBJECT_TYPE_PATH_ROOT;
 	}
 
+	@Override
+	public void setReferencedTypesPath(
+			BTSObjectTypePathRoot btsObjectTypePathRoot) {
+		// TODO Auto-generated method stub
+		
+	}
+
 } //BTSObjectTypePathRootImpl

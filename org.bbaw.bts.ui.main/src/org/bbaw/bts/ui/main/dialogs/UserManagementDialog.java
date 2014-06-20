@@ -155,7 +155,7 @@ public class UserManagementDialog extends TitleAreaDialog
 	@Override
 	protected Point getInitialSize()
 	{
-		return new Point(785, 600);
+		return new Point(735, 700);
 	}
 
 	@Override

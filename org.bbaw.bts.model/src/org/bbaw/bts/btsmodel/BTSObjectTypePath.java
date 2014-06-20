@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObjectTypePath#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSObjectTypePath#getReferencedTypesPath <em>Referenced Types Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -38,5 +39,31 @@ public interface BTSObjectTypePath extends EObject {
 	 * @generated
 	 */
 	EList<ObjectTypePathEntry> getChildren();
+
+	/**
+	 * Returns the value of the '<em><b>Referenced Types Path</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Referenced Types Path</em>' reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Referenced Types Path</em>' reference.
+	 * @see #setReferencedTypesPath(BTSObjectTypePathRoot)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSObjectTypePath_ReferencedTypesPath()
+	 * @model
+	 * @generated
+	 */
+	BTSObjectTypePathRoot getReferencedTypesPath();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath#getReferencedTypesPath <em>Referenced Types Path</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Referenced Types Path</em>' reference.
+	 * @see #getReferencedTypesPath()
+	 * @generated
+	 */
+	void setReferencedTypesPath(BTSObjectTypePathRoot value);
 
 } // BTSObjectTypePath

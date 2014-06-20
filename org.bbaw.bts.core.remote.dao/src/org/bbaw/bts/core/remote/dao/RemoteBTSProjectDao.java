@@ -8,4 +8,5 @@ public interface RemoteBTSProjectDao extends RemoteGenericDao<BTSProject, String
 	boolean removeBTSProject(BTSProject btsProject);
 
 	void addAuthorisation(BTSProjectDBCollection coll, String path);
+
 }

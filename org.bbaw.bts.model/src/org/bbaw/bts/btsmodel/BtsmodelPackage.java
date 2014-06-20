@@ -3640,22 +3640,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER__EXTERNAL_REFERNECES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 20;
 
 	/**
-	 * The feature id for the '<em><b>Roles</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__ROLES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 21;
-
-	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__PASSWORD = BTSDB_BASE_OBJECT_FEATURE_COUNT + 22;
+	int BTS_USER__PASSWORD = BTSDB_BASE_OBJECT_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>Logged In</b></em>' attribute.
@@ -3664,7 +3655,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__LOGGED_IN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 23;
+	int BTS_USER__LOGGED_IN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3673,7 +3664,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__STATUS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 24;
+	int BTS_USER__STATUS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 23;
+
+	/**
+	 * The feature id for the '<em><b>Db Admin</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__DB_ADMIN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 24;
 
 	/**
 	 * The number of structural features of the '<em>BTS User</em>' class.
@@ -6112,22 +6112,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PASSPORT_EDITOR_CONFIG__REGEX = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
 
 	/**
-	 * The feature id for the '<em><b>Referenced Types Path</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Predicate Path</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+	int BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>BTS Passport Editor Config</em>' class.
@@ -6136,7 +6127,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_EDITOR_CONFIG_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 7;
+	int BTS_PASSPORT_EDITOR_CONFIG_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of operations of the '<em>BTS Passport Editor Config</em>' class.
@@ -8373,13 +8364,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OBJECT_TYPE_PATH__CHILDREN = 0;
 
 	/**
+	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH = 1;
+
+	/**
 	 * The number of structural features of the '<em>BTS Object Type Path</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_OBJECT_TYPE_PATH_FEATURE_COUNT = 1;
+	int BTS_OBJECT_TYPE_PATH_FEATURE_COUNT = 2;
 
 	/**
 	 * The number of operations of the '<em>BTS Object Type Path</em>' class.
@@ -8398,6 +8398,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int OBJECT_TYPE_PATH_ENTRY__CHILDREN = BTS_OBJECT_TYPE_PATH__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int OBJECT_TYPE_PATH_ENTRY__REFERENCED_TYPES_PATH = BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -8443,6 +8452,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_OBJECT_TYPE_PATH_ROOT__CHILDREN = BTS_OBJECT_TYPE_PATH__CHILDREN;
+
+	/**
+	 * The feature id for the '<em><b>Referenced Types Path</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT_TYPE_PATH_ROOT__REFERENCED_TYPES_PATH = BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH;
 
 	/**
 	 * The number of structural features of the '<em>BTS Object Type Path Root</em>' class.
@@ -9140,17 +9158,6 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSUser_ExternalReferneces();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.BTSUser#getRoles <em>Roles</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute list '<em>Roles</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSUser#getRoles()
-	 * @see #getBTSUser()
-	 * @generated
-	 */
-	EAttribute getBTSUser_Roles();
-
-	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -9182,6 +9189,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSUser_Status();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSUser#isDbAdmin <em>Db Admin</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Admin</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSUser#isDbAdmin()
+	 * @see #getBTSUser()
+	 * @generated
+	 */
+	EAttribute getBTSUser_DbAdmin();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSComment <em>BTS Comment</em>}'.
@@ -10266,17 +10284,6 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSPassportEditorConfig_Regex();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getReferencedTypesPath <em>Referenced Types Path</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Referenced Types Path</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getReferencedTypesPath()
-	 * @see #getBTSPassportEditorConfig()
-	 * @generated
-	 */
-	EReference getBTSPassportEditorConfig_ReferencedTypesPath();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEditorConfig#getPredicatePath <em>Predicate Path</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11078,6 +11085,17 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSObjectTypePath_Children();
 
 	/**
+	 * Returns the meta object for the reference '{@link org.bbaw.bts.btsmodel.BTSObjectTypePath#getReferencedTypesPath <em>Referenced Types Path</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Referenced Types Path</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSObjectTypePath#getReferencedTypesPath()
+	 * @see #getBTSObjectTypePath()
+	 * @generated
+	 */
+	EReference getBTSObjectTypePath_ReferencedTypesPath();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSPassportEntry <em>BTS Passport Entry</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -11740,14 +11758,6 @@ public interface BtsmodelPackage extends EPackage {
 		EReference BTS_USER__EXTERNAL_REFERNECES = eINSTANCE.getBTSUser_ExternalReferneces();
 
 		/**
-		 * The meta object literal for the '<em><b>Roles</b></em>' attribute list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_USER__ROLES = eINSTANCE.getBTSUser_Roles();
-
-		/**
 		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -11770,6 +11780,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_USER__STATUS = eINSTANCE.getBTSUser_Status();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Admin</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_USER__DB_ADMIN = eINSTANCE.getBTSUser_DbAdmin();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl <em>BTS Comment</em>}' class.
@@ -12626,14 +12644,6 @@ public interface BtsmodelPackage extends EPackage {
 		EAttribute BTS_PASSPORT_EDITOR_CONFIG__REGEX = eINSTANCE.getBTSPassportEditorConfig_Regex();
 
 		/**
-		 * The meta object literal for the '<em><b>Referenced Types Path</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH = eINSTANCE.getBTSPassportEditorConfig_ReferencedTypesPath();
-
-		/**
 		 * The meta object literal for the '<em><b>Predicate Path</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -13276,6 +13286,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_OBJECT_TYPE_PATH__CHILDREN = eINSTANCE.getBTSObjectTypePath_Children();
+
+		/**
+		 * The meta object literal for the '<em><b>Referenced Types Path</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH = eINSTANCE.getBTSObjectTypePath_ReferencedTypesPath();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryImpl <em>BTS Passport Entry</em>}' class.

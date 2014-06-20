@@ -214,6 +214,7 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 		boolean valid = false;
 		if (is != null)
 		{
+			System.out.println(is.toString());
 			jso = EmfModelHelper.load(is, JsonObject.class);
 			valid = checkDBUserBTSUser(jso, entity);		
 		}
@@ -246,8 +247,20 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 		// roles == groups
 		// for collection framework objects
 		JsonArray array = new JsonArray();
+		boolean hasAdmin = false;
 		for (String group : entity.getGroupIds()) {
+			if ("_admin".equals(group))
+			{
+				hasAdmin = true;
+			}
 			JsonPrimitive element = new JsonPrimitive(group);
+			array.add(element);
+		}
+		
+		//add _admin if user is dbAdmin 
+		if (entity.isDbAdmin() && !hasAdmin)
+		{
+			JsonPrimitive element = new JsonPrimitive("_admin");
 			array.add(element);
 		}
 		jso.add("roles", array);
@@ -261,6 +274,11 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 		{
 			return false;
 		}
+		if (jso.get("type") == null || jso.get("name") == null || jso.getAsJsonArray("roles") == null)
+		{
+			return false;
+		}
+
 		// type
 		String type = jso.get("type").getAsString();
 		if (type == null || !"user".equals(type)) return false;

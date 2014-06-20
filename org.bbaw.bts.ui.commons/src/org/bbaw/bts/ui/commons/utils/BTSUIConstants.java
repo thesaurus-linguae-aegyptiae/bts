@@ -68,5 +68,9 @@ public class BTSUIConstants {
 	public static final Object SELECTION_TYPE_SECONDARY = "selectionType.secondary";
 	public static final Object SELECTION_TYPE_PRIMARY = "selectionType.primary";
 	public static final String PART_SAVE_ON_DESELCTION = "save.on.deselection";
+	public static final Color COLOR_WIHTE  = _resources.createColor(new RGB(
+			255, 255, 255));
+	public static final Color COLOR_BACKGROUND_DISABLED  = _resources.createColor(new RGB(
+			205, 205, 205));
 
 }

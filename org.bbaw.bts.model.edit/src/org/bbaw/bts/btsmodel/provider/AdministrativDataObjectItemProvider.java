@@ -211,7 +211,6 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY:
-			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:

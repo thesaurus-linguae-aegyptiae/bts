@@ -318,6 +318,8 @@ public class UserManagementPart
 
 	private Text textCreateNewUserPassword_Group;
 
+	private Button btnDBAdmin_User;
+
 	public UserManagementPart()
 	{
 	}
@@ -1623,7 +1625,7 @@ public class UserManagementPart
 		if (object == null) {
 			user_ToolUndo.setEnabled(false);
 			user_ToolRedo.setEnabled(false);
-		} else {
+		} else if (!user_ToolUndo.isDisposed()){
 		user_ToolUndo.setEnabled(getEditingDomain(object).getCommandStack().canUndo());
 		user_ToolRedo.setEnabled(getEditingDomain(object).getCommandStack().canRedo());
 		}
@@ -1635,7 +1637,7 @@ public class UserManagementPart
 		if (object == null) {
 			roles_ToolUndo.setEnabled(false);
 			roles_ToolRedo.setEnabled(false);
-		} else {
+		} else if (!roles_ToolUndo.isDisposed()){
 		roles_ToolUndo.setEnabled(getEditingDomain(object).getCommandStack().canUndo());
 		roles_ToolRedo.setEnabled(getEditingDomain(object).getCommandStack().canRedo());
 		}
@@ -1741,6 +1743,10 @@ public class UserManagementPart
 		textPassword_User = new Text(grpLogin, SWT.BORDER);
 		textPassword_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
+		btnDBAdmin_User = new Button(grpLogin, SWT.CHECK);
+		btnDBAdmin_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		btnDBAdmin_User.setText("User is Database Administrator");
+		
 		Label lblRequired = new Label(composite_UserEdit, SWT.NONE);
 		lblRequired.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 1, 1));
 		lblRequired.setText("* = required");
@@ -1862,6 +1868,15 @@ public class UserManagementPart
 						BTSUIConstants.DELAY, textUserName_User), model_us,
 				null, null);
 		bindingContext.addValidationStatusProvider(binding_us);
+		
+		// dbAdmin
+		IObservableValue model_db = EMFEditProperties
+				.value(editingDomain, BtsmodelPackage.Literals.BTS_USER__DB_ADMIN).observe(user);
+		Binding binding_db = bindingContext.bindValue(
+				WidgetProperties.selection().observeDelayed(
+						BTSUIConstants.DELAY, btnDBAdmin_User), model_db,
+				null, null);
+		bindingContext.addValidationStatusProvider(binding_db);
 		return bindingContext;
 	}
 

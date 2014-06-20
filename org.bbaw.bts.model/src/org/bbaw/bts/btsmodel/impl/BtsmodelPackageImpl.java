@@ -1134,18 +1134,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSUser_Roles() {
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(11);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBTSUser_Password()
 	{
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -1155,7 +1146,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSUser_LoggedIn()
 	{
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(13);
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -1165,6 +1156,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSUser_Status()
 	{
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(13);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSUser_DbAdmin() {
 		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(14);
 	}
 
@@ -2095,17 +2095,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSPassportEditorConfig_ReferencedTypesPath() {
-		return (EReference)btsPassportEditorConfigEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getBTSPassportEditorConfig_PredicatePath() {
-		return (EReference)btsPassportEditorConfigEClass.getEStructuralFeatures().get(6);
+		return (EReference)btsPassportEditorConfigEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -2828,6 +2819,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getBTSObjectTypePath_ReferencedTypesPath() {
+		return (EReference)btsObjectTypePathEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSPassportEntry() {
 		return btsPassportEntryEClass;
 	}
@@ -3032,10 +3032,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsUserEClass, BTS_USER__WEB_URL);
 		createEAttribute(btsUserEClass, BTS_USER__COMMENT);
 		createEReference(btsUserEClass, BTS_USER__EXTERNAL_REFERNECES);
-		createEAttribute(btsUserEClass, BTS_USER__ROLES);
 		createEAttribute(btsUserEClass, BTS_USER__PASSWORD);
 		createEAttribute(btsUserEClass, BTS_USER__LOGGED_IN);
 		createEAttribute(btsUserEClass, BTS_USER__STATUS);
+		createEAttribute(btsUserEClass, BTS_USER__DB_ADMIN);
 
 		btsCommentEClass = createEClass(BTS_COMMENT);
 		createEAttribute(btsCommentEClass, BTS_COMMENT__COMMENT);
@@ -3160,7 +3160,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsPassportEditorConfigEClass, BTS_PASSPORT_EDITOR_CONFIG__ALLOW_MULTIPLE);
 		createEAttribute(btsPassportEditorConfigEClass, BTS_PASSPORT_EDITOR_CONFIG__HORIZONTAL_WIDTH);
 		createEAttribute(btsPassportEditorConfigEClass, BTS_PASSPORT_EDITOR_CONFIG__REGEX);
-		createEReference(btsPassportEditorConfigEClass, BTS_PASSPORT_EDITOR_CONFIG__REFERENCED_TYPES_PATH);
 		createEReference(btsPassportEditorConfigEClass, BTS_PASSPORT_EDITOR_CONFIG__PREDICATE_PATH);
 
 		btsUserGroupEClass = createEClass(BTS_USER_GROUP);
@@ -3258,6 +3257,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		btsObjectTypePathEClass = createEClass(BTS_OBJECT_TYPE_PATH);
 		createEReference(btsObjectTypePathEClass, BTS_OBJECT_TYPE_PATH__CHILDREN);
+		createEReference(btsObjectTypePathEClass, BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH);
 
 		btsPassportEntryEClass = createEClass(BTS_PASSPORT_ENTRY);
 		createEAttribute(btsPassportEntryEClass, BTS_PASSPORT_ENTRY__PROVIDER);
@@ -3445,10 +3445,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSUser_WebURL(), ecorePackage.getEString(), "webURL", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSUser_ExternalReferneces(), this.getBTSExternalReference(), null, "externalReferneces", null, 0, -1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSUser_Roles(), ecorePackage.getEString(), "roles", null, 0, -1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSUser_Password(), ecorePackage.getEString(), "password", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSUser_LoggedIn(), ecorePackage.getEBoolean(), "loggedIn", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSUser_Password(), ecorePackage.getEString(), "password", null, 0, 1, BTSUser.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSUser_LoggedIn(), ecorePackage.getEBoolean(), "loggedIn", null, 0, 1, BTSUser.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_Status(), ecorePackage.getEString(), "status", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSUser_DbAdmin(), ecorePackage.getEBoolean(), "dbAdmin", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsCommentEClass, BTSComment.class, "BTSComment", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSComment_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSComment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -3583,7 +3583,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSPassportEditorConfig_AllowMultiple(), ecorePackage.getEBoolean(), "allowMultiple", null, 0, 1, BTSPassportEditorConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSPassportEditorConfig_HorizontalWidth(), ecorePackage.getEInt(), "horizontalWidth", null, 0, 1, BTSPassportEditorConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSPassportEditorConfig_Regex(), ecorePackage.getEString(), "regex", null, 0, 1, BTSPassportEditorConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSPassportEditorConfig_ReferencedTypesPath(), this.getBTSObjectTypePathRoot(), null, "referencedTypesPath", null, 0, 1, BTSPassportEditorConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSPassportEditorConfig_PredicatePath(), this.getBTSObjectTypePathRoot(), null, "predicatePath", null, 0, 1, BTSPassportEditorConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsUserGroupEClass, BTSUserGroup.class, "BTSUserGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -3685,6 +3684,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		initEClass(btsObjectTypePathEClass, BTSObjectTypePath.class, "BTSObjectTypePath", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSObjectTypePath_Children(), this.getObjectTypePathEntry(), null, "children", null, 0, -1, BTSObjectTypePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSObjectTypePath_ReferencedTypesPath(), this.getBTSObjectTypePathRoot(), null, "referencedTypesPath", null, 0, 1, BTSObjectTypePath.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsPassportEntryEClass, BTSPassportEntry.class, "BTSPassportEntry", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSPassportEntry_Provider(), ecorePackage.getEString(), "provider", null, 0, 1, BTSPassportEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

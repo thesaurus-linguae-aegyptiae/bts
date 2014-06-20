@@ -65,7 +65,7 @@ public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String
 		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
 		for (String jo : allDocs)
 		{
-			System.out.println(jo);
+//			System.out.println(jo);
 			if (true)
 			{
 				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));

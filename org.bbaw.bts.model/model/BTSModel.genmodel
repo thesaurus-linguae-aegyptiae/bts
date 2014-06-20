@@ -81,10 +81,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/webURL"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/comment"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSUser/externalReferneces"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/roles"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/password"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/loggedIn"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUser/dbAdmin"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSComment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSComment/comment"/>
@@ -215,7 +215,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/allowMultiple"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/horizontalWidth"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEditorConfig/regex"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEditorConfig/referencedTypesPath"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEditorConfig/predicatePath"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSUserGroup">
@@ -313,6 +312,7 @@
     <genClasses ecoreClass="BTSModel.ecore#//BTSObjectTypePathRoot"/>
     <genClasses ecoreClass="BTSModel.ecore#//BTSObjectTypePath">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSObjectTypePath/children"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSObjectTypePath/referencedTypesPath"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSPassportEntry">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntry/provider"/>

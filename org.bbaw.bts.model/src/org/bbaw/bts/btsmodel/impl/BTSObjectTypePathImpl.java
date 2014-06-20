@@ -3,20 +3,17 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
-
 import org.bbaw.bts.btsmodel.BTSObjectTypePath;
+import org.bbaw.bts.btsmodel.BTSObjectTypePathRoot;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.ObjectTypePathEntry;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
-
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -28,6 +25,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectTypePathImpl#getChildren <em>Children</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectTypePathImpl#getReferencedTypesPath <em>Referenced Types Path</em>}</li>
  * </ul>
  * </p>
  *
@@ -43,6 +41,16 @@ public abstract class BTSObjectTypePathImpl extends MinimalEObjectImpl.Container
 	 * @ordered
 	 */
 	protected EList<ObjectTypePathEntry> children;
+
+	/**
+	 * The cached value of the '{@link #getReferencedTypesPath() <em>Referenced Types Path</em>}' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReferencedTypesPath()
+	 * @generated
+	 * @ordered
+	 */
+	protected BTSObjectTypePathRoot referencedTypesPath;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -80,6 +88,44 @@ public abstract class BTSObjectTypePathImpl extends MinimalEObjectImpl.Container
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BTSObjectTypePathRoot getReferencedTypesPath() {
+		if (referencedTypesPath != null && referencedTypesPath.eIsProxy()) {
+			InternalEObject oldReferencedTypesPath = (InternalEObject)referencedTypesPath;
+			referencedTypesPath = (BTSObjectTypePathRoot)eResolveProxy(oldReferencedTypesPath);
+			if (referencedTypesPath != oldReferencedTypesPath) {
+				if (eNotificationRequired())
+					eNotify(new ENotificationImpl(this, Notification.RESOLVE, BtsmodelPackage.BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH, oldReferencedTypesPath, referencedTypesPath));
+			}
+		}
+		return referencedTypesPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSObjectTypePathRoot basicGetReferencedTypesPath() {
+		return referencedTypesPath;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReferencedTypesPath(BTSObjectTypePathRoot newReferencedTypesPath) {
+		BTSObjectTypePathRoot oldReferencedTypesPath = referencedTypesPath;
+		referencedTypesPath = newReferencedTypesPath;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH, oldReferencedTypesPath, referencedTypesPath));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -99,6 +145,9 @@ public abstract class BTSObjectTypePathImpl extends MinimalEObjectImpl.Container
 		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__CHILDREN:
 				return getChildren();
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH:
+				if (resolve) return getReferencedTypesPath();
+				return basicGetReferencedTypesPath();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -116,6 +165,9 @@ public abstract class BTSObjectTypePathImpl extends MinimalEObjectImpl.Container
 				getChildren().clear();
 				getChildren().addAll((Collection<? extends ObjectTypePathEntry>)newValue);
 				return;
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH:
+				setReferencedTypesPath((BTSObjectTypePathRoot)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -131,6 +183,9 @@ public abstract class BTSObjectTypePathImpl extends MinimalEObjectImpl.Container
 			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__CHILDREN:
 				getChildren().clear();
 				return;
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH:
+				setReferencedTypesPath((BTSObjectTypePathRoot)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -145,6 +200,8 @@ public abstract class BTSObjectTypePathImpl extends MinimalEObjectImpl.Container
 		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__CHILDREN:
 				return children != null && !children.isEmpty();
+			case BtsmodelPackage.BTS_OBJECT_TYPE_PATH__REFERENCED_TYPES_PATH:
+				return referencedTypesPath != null;
 		}
 		return super.eIsSet(featureID);
 	}

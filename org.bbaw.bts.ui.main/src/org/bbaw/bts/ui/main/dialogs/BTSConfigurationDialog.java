@@ -33,6 +33,7 @@ import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.CorpusObjectPivot;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
 import org.bbaw.bts.ui.main.objectTypeSelector.ObjectTypeSelectionTreeComposite;
+import org.bbaw.bts.ui.main.objectTypeSelector.RelationSubjectObjectTypesSelectionComposite;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
@@ -42,6 +43,7 @@ import org.eclipse.core.databinding.observable.value.IObservableValue;
 import org.eclipse.core.databinding.observable.value.WritableValue;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -229,6 +231,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
 
 	private ObjectTypeSelectionTreeComposite predicateSelector;
+
+	private RelationSubjectObjectTypesSelectionComposite relationSubjectObjectTypesEditor;
 
 
 	/**
@@ -504,7 +508,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
-		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
 
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -622,46 +625,20 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		}// end configuration tabitem
 		{
 			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
-			ownerstabItem.setText("Owner Objects");
+			ownerstabItem.setText("Owner and Related Objects");
 
 			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
 			ownerEditComp.setLayout(new GridLayout(1, false));
 			ownerstabItem.setControl(ownerEditComp);
-			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
-					configurationController, ownerEditComp, SWT.NONE);
-			if (configItem.getOwnerTypesPath() == null) {
-				configItem.setOwnerTypesPath(BtsmodelFactory.eINSTANCE
-						.createBTSObjectTypePathRoot());
-			}
-			ownerTypeSelector.setPathInput(configItem.getOwnerTypesPath(),
-					getEditingDomain(configItem));
-		}
-		{
-			TabItem referencedtabItem = new TabItem(tabfolder, SWT.NONE);
-			referencedtabItem.setText("Reference Objects");
+			
+			context.set(Composite.class, ownerEditComp);
+			context.set(BTSConfigItem.class, configItem);
+			context.set(Integer.class, SWT.None);
+			relationSubjectObjectTypesEditor = ContextInjectionFactory.make(RelationSubjectObjectTypesSelectionComposite.class, context);
+			relationSubjectObjectTypesEditor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
-			Composite referencedEditComp = new Composite(tabfolder, SWT.NONE);
-			referencedEditComp.setLayout(new GridLayout(1, false));
-			referencedtabItem.setControl(referencedEditComp);
-			referencedTypeSelector = new ObjectTypeSelectionTreeComposite(
-					configurationController, referencedEditComp, SWT.NONE);
-			if (configItem.getPassportEditorConfig() == null) {
-				configItem.setPassportEditorConfig(BtsmodelFactory.eINSTANCE
-						.createBTSPassportEditorConfig());
-			} else {
-				if (configItem.getPassportEditorConfig()
-						.getReferencedTypesPath() == null) {
-					configItem.getPassportEditorConfig()
-							.setReferencedTypesPath(
-									BtsmodelFactory.eINSTANCE
-											.createBTSObjectTypePathRoot());
-				}
-				referencedTypeSelector.setPathInput(configItem
-						.getPassportEditorConfig().getReferencedTypesPath(),
-						getEditingDomain(configItem), configurationController
-								.getObjectTypesConfigItem());
-			}
 		}
+
 
 		configItemEditBindings = initializeRelationEditBindings(configItem);
 
@@ -888,6 +865,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		if (predicateSelector != null && !predicateSelector.isDisposed()) {
 			predicateSelector.save();
 		}
+		if (relationSubjectObjectTypesEditor != null && ! relationSubjectObjectTypesEditor.isDisposed())
+		{
+			relationSubjectObjectTypesEditor.save();
+		}
 
 	}
 
@@ -898,7 +879,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		final TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
-		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
 
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -1178,7 +1158,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
-		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
 
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -1633,8 +1612,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
-		tabfolder.setLayoutData(new FillLayout(SWT.HORIZONTAL));
-
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
 			configtabItem.setText("Configuration");
@@ -1832,70 +1809,75 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	}
 
-	private void loadRelationSelectReferencedObjectsTabItem(
-			TabFolder tabfolder, TabItem referencedtabItem,
-			BTSConfigItem configItem) {
-		Composite referencedEditComp = (Composite) referencedtabItem
-				.getControl();
-		referencedTypeSelector = new ObjectTypeSelectionTreeComposite(
-				configurationController, referencedEditComp, SWT.NONE);
-		if (configItem.getPassportEditorConfig() == null) {
+	
+	//FIXME update
+//	private void loadRelationSelectReferencedObjectsTabItem(
+//			TabFolder tabfolder, TabItem referencedtabItem,
+//			BTSConfigItem configItem) {
+//		Composite referencedEditComp = (Composite) referencedtabItem
+//				.getControl();
+//		referencedTypeSelector = new ObjectTypeSelectionTreeComposite(
+//				configurationController, referencedEditComp, SWT.NONE);
+//		if (configItem.getPassportEditorConfig() == null) {
+//
+//		} else {
+//			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
+//				configItem.getPassportEditorConfig()
+//						.setReferencedTypesPath(
+//								BtsmodelFactory.eINSTANCE
+//										.createBTSObjectTypePathRoot());
+//			}
+//			referencedTypeSelector.setPathInput(configItem
+//					.getPassportEditorConfig().getReferencedTypesPath(),
+//					getEditingDomain(configItem), configurationController
+//							.getObjectTypesConfigItem());
+//		}
+//		Label relLabel = new Label(referencedEditComp, SWT.NONE);
+//		relLabel.setText("Select Relations");
+//		relLabel.setLayoutData(new GridData());
+//		predicateSelector = new ObjectTypeSelectionTreeComposite(
+//				configurationController, referencedEditComp, SWT.NONE);
+//		if (configItem.getPassportEditorConfig() == null) {
+//
+//		} else {
+//			if (configItem.getPassportEditorConfig().getPredicatePath() == null) {
+//				configItem.getPassportEditorConfig()
+//						.setPredicatePath(
+//								BtsmodelFactory.eINSTANCE
+//										.createBTSObjectTypePathRoot());
+//			}
+//			BTSConfigItem ci = configurationController.getRelationsConfigItem();
+//			predicateSelector.setPathInput(configItem.getPassportEditorConfig()
+//					.getPredicatePath(), getEditingDomain(configItem), ci);
+//		}
+//	}
 
-		} else {
-			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
-				configItem.getPassportEditorConfig()
-						.setReferencedTypesPath(
-								BtsmodelFactory.eINSTANCE
-										.createBTSObjectTypePathRoot());
-			}
-			referencedTypeSelector.setPathInput(configItem
-					.getPassportEditorConfig().getReferencedTypesPath(),
-					getEditingDomain(configItem), configurationController
-							.getObjectTypesConfigItem());
-		}
-		Label relLabel = new Label(referencedEditComp, SWT.NONE);
-		relLabel.setText("Select Relations");
-		relLabel.setLayoutData(new GridData());
-		predicateSelector = new ObjectTypeSelectionTreeComposite(
-				configurationController, referencedEditComp, SWT.NONE);
-		if (configItem.getPassportEditorConfig() == null) {
-
-		} else {
-			if (configItem.getPassportEditorConfig().getPredicatePath() == null) {
-				configItem.getPassportEditorConfig()
-						.setPredicatePath(
-								BtsmodelFactory.eINSTANCE
-										.createBTSObjectTypePathRoot());
-			}
-			BTSConfigItem ci = configurationController.getRelationsConfigItem();
-			predicateSelector.setPathInput(configItem.getPassportEditorConfig()
-					.getPredicatePath(), getEditingDomain(configItem), ci);
-		}
-	}
-
-	private void loadRelationPreselectedReferencedObjectsTabItem(
-			TabFolder tabfolder, TabItem referencedtabItem,
-			BTSConfigItem configItem) {
-		Composite referencedEditComp = (Composite) referencedtabItem
-				.getControl();
-		referencedTypeSelector = new ObjectTypeSelectionTreeComposite(
-				configurationController, referencedEditComp, SWT.NONE);
-		if (configItem.getPassportEditorConfig() == null) {
-
-		} else {
-			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
-				configItem.getPassportEditorConfig()
-						.setReferencedTypesPath(
-								BtsmodelFactory.eINSTANCE
-										.createBTSObjectTypePathRoot());
-			}
-			referencedTypeSelector.setPathInput(configItem
-					.getPassportEditorConfig().getReferencedTypesPath(),
-					getEditingDomain(configItem), configurationController
-							.getObjectTypesConfigItem());
-		}
-
-	}
+	
+	
+	//FIXME update
+//	private void loadRelationPreselectedReferencedObjectsTabItem(
+//			TabFolder tabfolder, TabItem referencedtabItem,
+//			BTSConfigItem configItem) {
+//		Composite referencedEditComp = (Composite) referencedtabItem
+//				.getControl();
+//		referencedTypeSelector = new ObjectTypeSelectionTreeComposite(
+//				configurationController, referencedEditComp, SWT.NONE);
+//		if (configItem.getPassportEditorConfig() == null) {
+//
+//		} else {
+//			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
+//				configItem.getPassportEditorConfig()
+//						.setReferencedTypesPath(
+//								BtsmodelFactory.eINSTANCE
+//										.createBTSObjectTypePathRoot());
+//			}
+//			referencedTypeSelector.setPathInput(configItem
+//					.getPassportEditorConfig().getReferencedTypesPath(),
+//					getEditingDomain(configItem), configurationController
+//							.getObjectTypesConfigItem());
+//		}
+//
+//	}
 
 	private void loadReferenceReferencedObjectsTabItem(TabFolder tabfolder,
 			TabItem referencedtabItem, BTSConfigItem configItem) {
@@ -1953,18 +1935,20 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				configurationController, referencedEditComp, SWT.NONE);
 		if (configItem.getPassportEditorConfig() == null) {
 
-		} else {
-			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
-				configItem.getPassportEditorConfig()
-						.setReferencedTypesPath(
-								BtsmodelFactory.eINSTANCE
-										.createBTSObjectTypePathRoot());
-			}
-			referencedTypeSelector.setPathInput(configItem
-					.getPassportEditorConfig().getReferencedTypesPath(),
-					getEditingDomain(configItem), configurationController
-							.getActiveConfiguration());
-		}
+		} 
+		//FIXME update
+//		else {
+//			if (configItem.getPassportEditorConfig().getReferencedTypesPath() == null) {
+//				configItem.getPassportEditorConfig()
+//						.setReferencedTypesPath(
+//								BtsmodelFactory.eINSTANCE
+//										.createBTSObjectTypePathRoot());
+//			}
+//			referencedTypeSelector.setPathInput(configItem
+//					.getPassportEditorConfig().getReferencedTypesPath(),
+//					getEditingDomain(configItem), configurationController
+//							.getActiveConfiguration());
+//		}
 
 	}
 
@@ -2291,5 +2275,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		editingDomainMap.clear();
 		selectedConfig = null;
 		selection = null;
+	}
+	
+	@Override
+	protected boolean isResizable() {
+		return true;
 	}
 }

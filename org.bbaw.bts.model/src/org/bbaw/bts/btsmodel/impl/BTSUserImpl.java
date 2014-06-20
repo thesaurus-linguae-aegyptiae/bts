@@ -52,10 +52,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getWebURL <em>Web URL</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getExternalReferneces <em>External Referneces</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getRoles <em>Roles</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#isLoggedIn <em>Logged In</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getStatus <em>Status</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#isDbAdmin <em>Db Admin</em>}</li>
  * </ul>
  * </p>
  *
@@ -453,16 +453,6 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	protected EList<BTSExternalReference> externalReferneces;
 
 	/**
-	 * The cached value of the '{@link #getRoles() <em>Roles</em>}' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRoles()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<String> roles;
-
-	/**
 	 * The default value of the '{@link #getPassword() <em>Password</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -521,6 +511,26 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * @ordered
 	 */
 	protected String status = STATUS_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isDbAdmin() <em>Db Admin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDbAdmin()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DB_ADMIN_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDbAdmin() <em>Db Admin</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDbAdmin()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dbAdmin = DB_ADMIN_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -975,18 +985,6 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<String> getRoles() {
-		if (roles == null) {
-			roles = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_USER__ROLES);
-		}
-		return roles;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getPassword()
 	{
 		return password;
@@ -1049,6 +1047,27 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 		status = newStatus;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_USER__STATUS, oldStatus, status));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDbAdmin() {
+		return dbAdmin;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDbAdmin(boolean newDbAdmin) {
+		boolean oldDbAdmin = dbAdmin;
+		dbAdmin = newDbAdmin;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_USER__DB_ADMIN, oldDbAdmin, dbAdmin));
 	}
 
 	/**
@@ -1141,14 +1160,14 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return getComment();
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				return getExternalReferneces();
-			case BtsmodelPackage.BTS_USER__ROLES:
-				return getRoles();
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				return getPassword();
 			case BtsmodelPackage.BTS_USER__LOGGED_IN:
 				return isLoggedIn();
 			case BtsmodelPackage.BTS_USER__STATUS:
 				return getStatus();
+			case BtsmodelPackage.BTS_USER__DB_ADMIN:
+				return isDbAdmin();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -1228,10 +1247,6 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				getExternalReferneces().clear();
 				getExternalReferneces().addAll((Collection<? extends BTSExternalReference>)newValue);
 				return;
-			case BtsmodelPackage.BTS_USER__ROLES:
-				getRoles().clear();
-				getRoles().addAll((Collection<? extends String>)newValue);
-				return;
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				setPassword((String)newValue);
 				return;
@@ -1240,6 +1255,9 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return;
 			case BtsmodelPackage.BTS_USER__STATUS:
 				setStatus((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_USER__DB_ADMIN:
+				setDbAdmin((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -1316,9 +1334,6 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				getExternalReferneces().clear();
 				return;
-			case BtsmodelPackage.BTS_USER__ROLES:
-				getRoles().clear();
-				return;
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				setPassword(PASSWORD_EDEFAULT);
 				return;
@@ -1327,6 +1342,9 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return;
 			case BtsmodelPackage.BTS_USER__STATUS:
 				setStatus(STATUS_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_USER__DB_ADMIN:
+				setDbAdmin(DB_ADMIN_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -1382,14 +1400,14 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				return externalReferneces != null && !externalReferneces.isEmpty();
-			case BtsmodelPackage.BTS_USER__ROLES:
-				return roles != null && !roles.isEmpty();
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 			case BtsmodelPackage.BTS_USER__LOGGED_IN:
 				return loggedIn != LOGGED_IN_EDEFAULT;
 			case BtsmodelPackage.BTS_USER__STATUS:
 				return STATUS_EDEFAULT == null ? status != null : !STATUS_EDEFAULT.equals(status);
+			case BtsmodelPackage.BTS_USER__DB_ADMIN:
+				return dbAdmin != DB_ADMIN_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -1559,14 +1577,14 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 		result.append(webURL);
 		result.append(", comment: ");
 		result.append(comment);
-		result.append(", roles: ");
-		result.append(roles);
 		result.append(", password: ");
 		result.append(password);
 		result.append(", loggedIn: ");
 		result.append(loggedIn);
 		result.append(", status: ");
 		result.append(status);
+		result.append(", dbAdmin: ");
+		result.append(dbAdmin);
 		result.append(')');
 		return result.toString();
 	}
