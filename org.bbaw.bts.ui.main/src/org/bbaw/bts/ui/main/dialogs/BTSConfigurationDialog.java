@@ -233,6 +233,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	private RelationSubjectObjectTypesSelectionComposite relationSubjectObjectTypesEditor;
 
+	private TabFolder tabfolder;
+
+	private int tabFolderSelectionIndex;
+
 
 	/**
 	 * Create the dialog.
@@ -461,6 +465,11 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				&& !selection.getFirstElement().equals(selectedConfig)) {
 			saveOldSelection(selectedConfig);
 		}
+		if (tabfolder != null && !tabfolder.isDisposed())
+		{
+			tabFolderSelectionIndex = tabfolder.getSelectionIndex();
+			tabfolder = null;
+		}
 		if (selection.getFirstElement() instanceof TreeNodeWrapper) {
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
 			if (tn.getObject() instanceof BTSConfiguration) {
@@ -497,7 +506,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				loadConfigItemEditor(configItem);
 			}
 		}
-
+		if (tabfolder != null && !tabfolder.isDisposed())
+		{
+			tabfolder.setSelection(tabFolderSelectionIndex);
+		}
 	}
 
 	private void loadRelationEditor(BTSConfigItem configItem) {
@@ -506,7 +518,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight = new Composite(sashForm, SWT.NONE);
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
 
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -878,7 +890,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight = new Composite(sashForm, SWT.NONE);
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		final TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
 
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -1153,7 +1165,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight = new Composite(sashForm, SWT.NONE);
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
 
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
@@ -1603,7 +1615,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		mainConfigRight = new Composite(sashForm, SWT.NONE);
 		mainConfigRight.setLayout(new FillLayout(SWT.HORIZONTAL));
 
-		TabFolder tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
+		tabfolder = new TabFolder(mainConfigRight, SWT.NONE);
 		{
 			TabItem configtabItem = new TabItem(tabfolder, SWT.NONE);
 			configtabItem.setText("Configuration");
@@ -1724,27 +1736,19 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		}// end configuration tabitem
 		{
 			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
-			ownerstabItem.setText("Owner Objects");
+			ownerstabItem.setText("Owner and Related Objects");
 
 			Composite ownerEditComp = new Composite(tabfolder, SWT.NONE);
 			ownerEditComp.setLayout(new GridLayout(1, false));
 			ownerstabItem.setControl(ownerEditComp);
-			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
-					configurationController, ownerEditComp, SWT.NONE);
-			ownerTypeSelector.setPathInput(configItem,
-					getEditingDomain(configItem), null, false);
-		}
-		{
-			TabItem referencedtabItem = new TabItem(tabfolder, SWT.NONE);
-			referencedtabItem.setText("Reference Objects");
-
-			loadReferencedObjectsTabItem(tabfolder, referencedtabItem,
-					configItem, configItem.getPassportEditorConfig()
-							.getWidgetType());
-
+			
+			context.set(Composite.class, ownerEditComp);
+			context.set(BTSConfigItem.class, configItem);
+			context.set(Integer.class, SWT.None);
+			relationSubjectObjectTypesEditor = ContextInjectionFactory.make(RelationSubjectObjectTypesSelectionComposite.class, context);
+			relationSubjectObjectTypesEditor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		}
-
 		configItemEditBindings = initializePassportEntryItemEditBindings(configItem);
 
 		value.setValue(configItem);

@@ -578,7 +578,7 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 	 * @generatedNOT
 	 */
 	public Map<String, List<String>> getOwnerTypesMap() {
-		if (ownerTypesMap == null || ownerTypesMap.isEmpty()) {
+		if (ownerTypesMap == null || ownerTypesMap.isEmpty() || ownerTypesMap.size() != ownerReferencedTypesStringList.size()) {
 			ownerTypesMap = new HashMap<String, List<String>>();
 			fillOwnerTypesMap();
 		}

@@ -132,10 +132,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			logger.error("error trying to save: " + entity, e);
 //			throw new RuntimeException("Save Resource failed", e);
 		}
-		if (!resource.getContents().isEmpty())
-		{
-			return (E) resource.getContents().remove(0);
-		}
+		
+		// FIXME was sollte das?
+//		if (!resource.getContents().isEmpty())
+//		{
+//			return (E) resource.getContents().remove(0);
+//		}
 		return entity;
 	}
 

@@ -421,7 +421,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		else if (!lease.getActive())
 		{
 			lease.setUserId(authenticatedUser.get_id());
-			lease.setBtsUUID(btsUUID);
+			lease.setBtsUUID(getBtsUUID());
 			checkAndRenewLease(lease);
 			saveLease(lease);
 			locked = true;
@@ -443,7 +443,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 				else // lock not alive, renew lock and use
 				{
 					lease.setUserId(authenticatedUser.get_id());
-					lease.setBtsUUID(btsUUID);
+					lease.setBtsUUID(getBtsUUID());
 					checkAndRenewLease(lease);
 					saveLease(lease);
 					locked = true;
@@ -460,6 +460,14 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			eventBroker.post("status_info/filtered", m);
 		}
 		return locked;
+	}
+
+	private String getBtsUUID() {
+		if (btsUUID == null)
+		{
+			btsUUID = prefs.get(BTSConstants.BTS_UUID, null);
+		}
+		return btsUUID;
 	}
 
 	private BTSUser getUser(String userId) {
@@ -539,7 +547,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		lease.setUserId(authenticatedUser.get_id());
 		lease.setTimeStamp(getCurrentTimeStamp());
 		lease.setActive(true);
-		lease.setBtsUUID(btsUUID);
+		lease.setBtsUUID(getBtsUUID());
 		if (item instanceof BTSDBBaseObject)
 		{
 			lease.setPath(((BTSDBBaseObject) item).getDBCollectionKey());
@@ -957,7 +965,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	}
 
 	private boolean lockIsOwnedByAuthUser(DBLease lease) {
-		if (lease.getBtsUUID() != null && lease.getBtsUUID().equals(btsUUID)
+		if (lease.getBtsUUID() != null && lease.getBtsUUID().equals(getBtsUUID())
 				&& authenticatedUser.get_id().equals(lease.getUserId())) {
 			return true;
 		}

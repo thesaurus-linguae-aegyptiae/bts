@@ -8,7 +8,9 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
@@ -52,6 +54,7 @@ public class EgyLemmatizerPart {
 	private boolean selfSelecting;
 	private Text transl_text;
 	private boolean constructed;
+	private MPart part;
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -179,6 +182,9 @@ public class EgyLemmatizerPart {
 		constructed = true;
 		parent.layout();
 		parent.pack();
+		
+		part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
+
 	}
 	
 	
@@ -206,6 +212,17 @@ public class EgyLemmatizerPart {
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
 		if (constructed) {
 		if (!selfSelecting) {
+			if (selection instanceof BTSCorpusObject)
+			{
+				if (selection instanceof BTSText)
+				{
+					part.setLabel(selection.getName());
+				}
+				else
+				{
+					part.setLabel("Lemmatizer");
+				}
+			}
 			if (selection == null) {
 				/* implementation not shown */
 			} else {

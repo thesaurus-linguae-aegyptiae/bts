@@ -66,6 +66,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//BTSRelation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalence" eSuperTypes="#//BTSTextSentenceItem #//BTSSentenceItem #//BTSTextItems #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
@@ -98,8 +100,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSComment" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-        eType="#//BTSReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSInterTextReference">
@@ -108,15 +108,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTextSentenceItem" abstract="true"
       eSuperTypes="#//BTSSentenceItem #//BTSTextItems"/>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSReference" abstract="true">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
-        eType="#//BTSInterTextReference" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSAnnotation" eSuperTypes="#//BTSCorpusObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
-        eType="#//BTSReference" containment="true"/>
-  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSAnnotation" eSuperTypes="#//BTSCorpusObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTranslation">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -138,6 +130,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
+        eType="#//BTSInterTextReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="certainty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSConfiguration" eSuperTypes="#//BTSDBBaseObject #//BTSConfig #//BTSObject">
@@ -184,8 +178,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSCorpusObject" abstract="true" eSuperTypes="#//BTSObject #//BTSDBBaseObject">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
-        eType="#//BTSRelation" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="passport" eType="#//BTSPassport"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="corpusPrefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

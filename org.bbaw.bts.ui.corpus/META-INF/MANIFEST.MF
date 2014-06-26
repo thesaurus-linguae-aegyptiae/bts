@@ -32,7 +32,9 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.e4.ui.workbench,
  javax.annotation,
  com.opcoach.e4.preferences;bundle-version="1.0.0",
- org.eclipse.text;bundle-version="3.5.300"
+ org.eclipse.text;bundle-version="3.5.300",
+ org.eclipse.e4.ui.css.swt;bundle-version="0.11.0",
+ org.eclipse.e4.ui.css.core;bundle-version="0.10.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.btsmodel,

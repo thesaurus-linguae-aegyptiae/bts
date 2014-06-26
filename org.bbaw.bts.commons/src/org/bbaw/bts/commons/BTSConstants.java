@@ -58,7 +58,7 @@ public class BTSConstants
 	public static final String OWNER_REFERENCED_TYPES_SEPERATOR = ">>";
 	public static final String OWNER_REFERENCED_TYPES_PATH_SEPERATOR = ".";
 	public static final String OWNER_REFERENCED_TYPES_LIST_SEPERATOR = ",";
-	public static final String OWNER_REFERENCED_TYPES_ALL = "ALL";
+	public static final String OWNER_REFERENCED_TYPES_ANY = "ANY";
 
 	private BTSConstants()
 	{

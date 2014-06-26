@@ -67,6 +67,7 @@ import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
+import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.emf.common.command.Command;
@@ -190,6 +191,7 @@ public class PassportEditorPart {
 	private Combo corpusCMB;
 	private ComboViewer corpus_viewer;
 	private Composite parent;
+	private MPart part;
 
 	@Inject
 	public PassportEditorPart() {
@@ -227,6 +229,8 @@ public class PassportEditorPart {
 		}
 		partService.bringToTop(partService
 				.findPart(BTSUIConstants.PART_ID_PASSPORT_EDITOR_PART));
+		part = partService.findPart(BTSUIConstants.PART_ID_PASSPORT_EDITOR_PART);
+
 
 	}
 
@@ -804,6 +808,8 @@ public class PassportEditorPart {
 								@Override
 								public void run() {
 									loadInput(corpusObject);
+									part.setLabel(corpusObject.getName());
+
 								}
 							});
 						}

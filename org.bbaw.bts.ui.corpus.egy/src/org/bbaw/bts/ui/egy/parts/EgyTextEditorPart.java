@@ -70,6 +70,7 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
+import org.eclipse.e4.ui.workbench.swt.modeling.EMenuService;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.EList;
@@ -153,6 +154,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
+	
+	@Inject
+	private EMenuService menuService;
+	
 	private static final String FONT_NAME = "FreeSans";
 	private static final int SIZE = 10;
 
@@ -228,6 +233,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private CommandStackListener commandStackListener;
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
 	private Composite parent;
+	private MPart part;
 
 
 	/**
@@ -336,6 +342,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 					loadInputTranscription(null);
+					
 				}
 				CTabItem signTextTab = new CTabItem(tabFolder, SWT.NONE);
 				signTextTab.setText("Sign-Text-Editor");
@@ -452,6 +459,9 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		sentenceTranslateComp.layout();
 		sashForm.setWeights(new int[] { 6, 1 });
 		parent.layout();
+		
+		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
+
 	}
 
 	protected void updateModelFromSignText()
@@ -558,7 +568,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						"org.eclipse.xtext.ui.editor.warning")
 				.withParent(embeddedEditorComp);
 		embeddedEditor.getViewer().getTextWidget().setLineSpacing(LINE_SPACE);
-
+		
 		// embeddedEditor.getViewer().getTextWidget().setFont(font);
 		// keep the partialEditor as instance var to read / write the edited
 		// text
@@ -643,6 +653,9 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					}
 				});
 		}
+		menuService.registerContextMenu(
+				embeddedEditor.getViewer(),
+				BTSPluginIDs.POPMENU_EGY_TEXT_EDITOR_XTEXT_MENU);
 
 	}
 
@@ -881,8 +894,12 @@ embeddedEditor.getViewer(),
 				save();
 				if (selection instanceof BTSText) {
 					loadInput((BTSCorpusObject) selection);
+					part.setLabel(selection.getName());
+
 				} else {
 					loadInput(null);
+					part.setLabel("EgyTextEditor");
+
 				}
 			}
 			if ((selection instanceof BTSText)) {

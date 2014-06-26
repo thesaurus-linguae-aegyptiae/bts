@@ -124,4 +124,16 @@ ToolItem {
 	background-color: #FFFFFF;
 }
 
+/* for AnnotationPart */
+Group.unselected {
+	background-color: #FFFFFF;
+}
+
+Group.selected.comment {
+	background-color: #E6E3C3;
+}
+
+Group.selected.annotation {
+	background-color: #E6E3C3;
+}
 

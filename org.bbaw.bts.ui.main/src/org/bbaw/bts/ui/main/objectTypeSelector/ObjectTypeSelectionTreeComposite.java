@@ -16,7 +16,9 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -68,20 +70,11 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if(allbutton.getSelection())
-				{
-					if (treeViewer != null && !treeViewer.getTree().isDisposed())
-					{
-						treeViewer.getTree().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
-					}
-				}
-				else
-				{
-					if (treeViewer != null && !treeViewer.getTree().isDisposed())
-					{
-						treeViewer.getTree().setBackground(BTSUIConstants.COLOR_WIHTE);
-					}
-				}
+				setAllSelected(allbutton.getSelection());
+
+				BTSObjectTypeTreeNode root = (BTSObjectTypeTreeNode) treeViewer.getInput();
+				root.setSelected(allbutton.getSelection());
+				setDirty(true);
 			}
 			
 		});
@@ -111,7 +104,25 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 		});
 	}
 	
-	private void setDirty(boolean dirty) {
+	private void setAllSelected(boolean selection) {
+		if(selection)
+		{
+			if (treeViewer != null && !treeViewer.getTree().isDisposed())
+			{
+				treeViewer.getTree().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+			}
+		}
+		else
+		{
+			if (treeViewer != null && !treeViewer.getTree().isDisposed())
+			{
+				treeViewer.getTree().setBackground(BTSUIConstants.COLOR_WIHTE);
+			}
+		}
+		
+	}
+
+	public void setDirty(boolean dirty) {
 		this.dirty = dirty;
 
 	}
@@ -162,6 +173,11 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 							inputConfigItem.getOwnerTypesMap(), includeReferencedObjectTree);
 			treeViewer.setInput(inputPath);
 			treeViewer.setCheckedElements(getSelectedElements(inputPath));
+			if (inputPath.isSelected())
+			{
+				allbutton.setSelection(inputPath.isSelected());
+				setAllSelected(inputPath.isSelected());
+			}
 		}
 	}
 
@@ -207,12 +223,23 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 				inputConfigItem.clearOwnerTypesMap();
 				if (allbutton.getSelection())
 				{
-					inputConfigItem.getOwnerReferencedTypesStringList().add(BTSConstants.OWNER_REFERENCED_TYPES_ALL);
+					Command command = AddCommand.create(
+							editingDomain, inputConfigItem,
+							BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
+							BTSConstants.OWNER_REFERENCED_TYPES_ANY);
+					editingDomain.getCommandStack().execute(command);
+//					inputConfigItem.getOwnerReferencedTypesStringList().add(BTSConstants.OWNER_REFERENCED_TYPES_ALL);
 				}
 				else
 				{
-				inputConfigItem.getOwnerReferencedTypesStringList().addAll(configurationController
-					.processTreePathToList(treePath));
+					Command command = AddCommand.create(
+							editingDomain, inputConfigItem,
+							BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
+							configurationController
+							.processTreePathToList(treePath));
+					editingDomain.getCommandStack().execute(command);
+//				inputConfigItem.getOwnerReferencedTypesStringList().addAll(configurationController
+//					.processTreePathToList(treePath));
 				}
 			}
 			else if (inputPath != null)
@@ -255,5 +282,9 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	public BTSObjectTypeTreeNode getPathInput()
 	{
 		return inputPath;
+	}
+
+	public boolean isDirty() {
+		return dirty;
 	}
 }

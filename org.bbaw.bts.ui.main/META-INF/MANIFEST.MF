@@ -7,7 +7,8 @@ Bundle-ClassPath: .
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.main.handlers,
  org.bbaw.bts.ui.main.wizards.installation,
- org.bbaw.bts.ui.main.wizards.newProject
+ org.bbaw.bts.ui.main.wizards.newProject,
+ org.eclipse.wb.swt
 Require-Bundle: org.eclipse.e4.ui.di,
  org.eclipse.swt,
  org.eclipse.jface,

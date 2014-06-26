@@ -30,10 +30,15 @@ import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorControl
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
@@ -95,6 +100,12 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 	@Inject
 	private EMenuService menuService;
 
+	@Inject
+	private ECommandService commandService;
+
+	@Inject
+	private EHandlerService handlerService;
+	
 	private TreeViewer treeViewer;
 	private StructuredSelection selection;
 	private Map<String, BTSQueryResultAbstract> queryResultMap = new HashMap<String, BTSQueryResultAbstract>();
@@ -286,33 +297,33 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 			public void selectionChanged(SelectionChangedEvent event)
 			{
 				selection = (StructuredSelection) event.getSelection();
-				System.out.println(event.getSelection());
 				if (selection.getFirstElement() != null && selection.getFirstElement() instanceof TreeNodeWrapper)
 				{
 					TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
 					if (tn.getObject() != null)
 					{
 						BTSObject o = (BTSObject) tn.getObject();
-						if (o instanceof BTSCorpusObject)
+						if (o instanceof BTSCorpusObject || !o.equals(selectedTreeObject))
 						{
+							executeSaveAllCommand();
 							selectedTreeObject = (BTSCorpusObject) o;
+							if (!tn.isChildrenLoaded())
+							{
+								List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
+								parents.add(tn);
+								tn.setChildrenLoaded(true);
+								loadChildren(parents, false, parentControl);
+							}
+							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
+									.equals(selectionType)) {
+								selectionService.setSelection(o);
+							} else {
+								eventBroker.send(
+										"ui_secondarySelection/corpusNavigator", o);
 
+							}
 						}
-						if (!tn.isChildrenLoaded())
-						{
-							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
-							parents.add(tn);
-							tn.setChildrenLoaded(true);
-							loadChildren(parents, false, parentControl);
-						}
-						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
-								.equals(selectionType)) {
-							selectionService.setSelection(o);
-						} else {
-							eventBroker.send(
-									"ui_secondarySelection/corpusNavigator", o);
-
-						}
+						
 					}
 
 				}
@@ -345,6 +356,15 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		treeViewer.setInput(root);
 		treeViewer.addSelectionChangedListener(selectionListener);
 
+	}
+
+	private void executeSaveAllCommand() {
+
+		ParameterizedCommand cmd = commandService.createCommand(
+				"org.eclipse.ui.file.saveAll", null);
+
+		handlerService.executeHandler(cmd);
+		
 	}
 
 	private List<TreeNodeWrapper> loadNodes(List<BTSCorpusObject> obs)
@@ -458,11 +478,14 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 		{
 			public void run()
 			{
-				treeViewer.removeSelectionChangedListener(selectionListener);
-				for (TreePath path : treeViewer.getExpandedTreePaths())
-					System.out.println(path.getLastSegment());
-				treeViewer.refresh();
-				treeViewer.addSelectionChangedListener(selectionListener);
+				if (treeViewer != null && !treeViewer.getTree().isDisposed())
+				{
+					treeViewer.removeSelectionChangedListener(selectionListener);
+					for (TreePath path : treeViewer.getExpandedTreePaths())
+						System.out.println(path.getLastSegment());
+					treeViewer.refresh();
+					treeViewer.addSelectionChangedListener(selectionListener);
+				}
 			}
 		});
 

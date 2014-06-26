@@ -68,4 +68,12 @@ public class BTSPluginIDs
 
 	public static final String POPMENU_CORPUS_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.corpusnavigator.popupmenu";
 
+	public static final String PART_ID_EGY_TEXTEDITOR = "org.bbaw.bts.ui.corpus.egy.part.textEditor";
+
+	public static final String PART_ID_HIEROGLYPH_TW = "org.bbaw.bts.ui.corpus.egy.part.hierotw";
+
+	public static final String PART_ID_LEMMATIZER = "org.bbaw.bts.ui.corpus.egy.part.lemmatizer";
+
+	public static final String POPMENU_EGY_TEXT_EDITOR_XTEXT_MENU = "org.bbaw.bts.ui.corpus.egy.part.textEditor.xtext.popupmenu";
+
 }

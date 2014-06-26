@@ -23,8 +23,17 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 		List<BTSDBBaseObject> conflictObjects = new Vector<BTSDBBaseObject>();
 		for (String rev : conflicts)
 		{
-			BTSDBBaseObject o = corpusObjectService.find(object.get_id(), object.getDBCollectionKey(), rev);
-			conflictObjects.add(o);
+			BTSDBBaseObject o = null;
+			try {
+				o = corpusObjectService.find(object.get_id(), object.getDBCollectionKey(), rev);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (o != null)
+			{
+				conflictObjects.add(o);
+			}
 		}
 		return conflictObjects;
 	}

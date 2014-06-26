@@ -5,6 +5,7 @@ package org.bbaw.bts.ui.egy.parts;
 //import grammaticalBase.model.text.WordOccurrence;
 //import grammaticalBase.textEditor.view.textView.JTextAsWordsEditorPanel;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.util.Collection;
@@ -151,6 +152,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private BTSText currentText;
 	private DataBindingContext bindingContext = new DataBindingContext();
 	private CommandStackListener commandStackListener;
+	private MPart part;
 
 	public EgyHieroglyphenTypeWriter()
 	{
@@ -361,6 +363,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		{
 			setSelection(selectionObject);
 		}
+		part = partService.findPart(BTSPluginIDs.PART_ID_HIEROGLYPH_TW);
+
 	}
 
 	private String getHieroglypheProposals(String normalizedMdC) {
@@ -501,8 +505,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			}
 			if (selection instanceof BTSText) {
 				currentText = (BTSText) selection;
+				part.setLabel(((BTSText) selection).getName());
+
 			} else {
 				currentText = null;
+				part.setLabel("Hieroglyph Type Writer");
 			}
 			bindingContext.dispose();
 			ignoreGlyph_Button.setSelection(false);

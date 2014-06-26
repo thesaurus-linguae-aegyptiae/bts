@@ -110,6 +110,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		if (clients == null)
 		{
 			clients = new HashMap<String, CouchDbClient>(10);
+			context.set(DaoConstants.DB_CLIENT_POOL_MAP, clients);
 		}
 		CouchDbClient dbClient = clients.get(path);
 		if (dbClient == null)
@@ -377,6 +378,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		if (clients == null)
 		{
 			clients = new HashMap<String, CouchDbClient>(10);
+			context.set(DaoConstants.DB_CLIENT_POOL_MAP, clients);
 		}
 		CouchDbClient dbClient = clients.get(path);
 		if (dbClient == null)
@@ -399,6 +401,15 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		{
 			throw new BTSDBException("No supported DBClient type: " + clazz.getName());
 		}
+		Map<String, CouchDbClient> clients = (Map<String, CouchDbClient>) context.get(DaoConstants.DB_CLIENT_POOL_MAP);
+		if (clients == null)
+		{
+			clients = new HashMap<String, CouchDbClient>(10);
+			context.set(DaoConstants.DB_CLIENT_POOL_MAP, clients);
+		}
+		CouchDbClient dbClient = clients.get(path);
+		if (dbClient == null)
+		{
 		URL url = new URL(localDBUrl);
 		logger.info("getDBClient " + url + ", localDBURL as String " + localDBUrl);
 		CouchDbProperties properties = new CouchDbProperties().setDbName(path).setCreateDbIfNotExist(true)
@@ -411,8 +422,10 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			properties.setUsername(user);
 			properties.setPassword(p);
 		}
-		CouchDbClient dbClient = new CouchDbClient(properties);
+		dbClient = new CouchDbClient(properties);
 		registerGSONBuilder(dbClient);
+		clients.put(path, dbClient);
+		}
 
 		return (T) dbClient;
 	}

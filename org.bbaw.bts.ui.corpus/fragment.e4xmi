@@ -8,7 +8,7 @@
   <imports xsi:type="commands:Command" xmi:id="_0MnaMNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.main.command.editUpdatersReaders"/>
   <imports xsi:type="commands:Command" xmi:id="_LECdIOpCEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.main.command.openConflictsDialog"/>
   <imports xsi:type="commands:Command" xmi:id="_YDmDwOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.command.openCompareDialog"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpora.png">
       <menus xmi:id="_NCyx4Jr7EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.corpusNavigator.viewmenu" label="VL" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png">
         <tags>ViewMenu</tags>
@@ -66,7 +66,7 @@
       </toolbar>
     </elements>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Fbrn4D_oEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.right.top">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Fbrn4D_oEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left">
     <elements xsi:type="basic:Part" xmi:id="_G9k4cD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.WordlistNavigator" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.WordListNavigator" label="WordlistNavigator" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmata.png" closeable="true">
       <toolbar xmi:id="_KI-dcD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.wlistNavigator.toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_HkeHcKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.5" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" tooltip="Delete" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
@@ -144,5 +144,10 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dbLssNzSEeO5ZuJa34ojEQ" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second" positionInList="after:org.bbaw.bts.ui.main.projecttoolcontrol">
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_hdTeUNzSEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.corpus.toolbarseparator.0"/>
     <elements xsi:type="menu:ToolControl" xmi:id="_iVeccNzSEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.corpus.toolcontrol.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.toolcontrol.CorpusToolControl"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_pr3zUPxwEeOKcob4rpjigA" featurename="children" parentElementId="org.bbaw.bts.app.partstack.right.top" positionInList="index:0">
+    <elements xsi:type="basic:Part" xmi:id="_4dLEcPxwEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.part.AnnotationsPart" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.AnnotationsPart" label="AnnotationsPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotations.png" closeable="true">
+      <toolbar xmi:id="_BpjUcPxxEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.toolbar.3"/>
+    </elements>
   </fragments>
 </fragment:ModelFragments>
