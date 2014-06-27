@@ -2,11 +2,18 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.util.Collection;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc --> An implementation of the model object '
@@ -19,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getCode <em>Code</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getRelations <em>Relations</em>}</li>
  * </ul>
  * </p>
  *
@@ -115,6 +123,16 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * @ordered
 	 */
 	protected String code = CODE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSRelation> relations;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -241,6 +259,32 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<BTSRelation> getRelations() {
+		if (relations == null) {
+			relations = new EObjectContainmentEList<BTSRelation>(BTSRelation.class, this, BtsmodelPackage.BTS_OBJECT__RELATIONS);
+		}
+		return relations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
+				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -258,6 +302,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return getSubtype();
 			case BtsmodelPackage.BTS_OBJECT__CODE:
 				return getCode();
+			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
+				return getRelations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -266,6 +312,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
@@ -284,6 +331,10 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return;
 			case BtsmodelPackage.BTS_OBJECT__CODE:
 				setCode((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
+				getRelations().clear();
+				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -312,6 +363,9 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__CODE:
 				setCode(CODE_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
+				getRelations().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -334,6 +388,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_OBJECT__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
+			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
+				return relations != null && !relations.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

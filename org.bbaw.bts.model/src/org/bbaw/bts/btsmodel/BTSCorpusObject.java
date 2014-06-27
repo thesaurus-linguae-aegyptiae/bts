@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.btsmodel;
 
-import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -12,7 +11,6 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getPassport <em>Passport</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getCorpusPrefix <em>Corpus Prefix</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSCorpusObject#getWorkPhase <em>Work Phase</em>}</li>
@@ -24,22 +22,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface BTSCorpusObject extends BTSObject, BTSDBBaseObject {
-	/**
-	 * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSRelation}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Relations</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Relations</em>' containment reference list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSCorpusObject_Relations()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<BTSRelation> getRelations();
-
 	/**
 	 * Returns the value of the '<em><b>Passport</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

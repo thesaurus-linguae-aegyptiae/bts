@@ -59,7 +59,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.wb.swt.SWTResourceManager;
 
 public class ObjectUpdaterReaderEditorPart extends Composite {
 
@@ -361,8 +360,6 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(3, false));
 		lblUserRoleDefinition = new Label(roles_composite_right, SWT.NONE);
-		lblUserRoleDefinition.setFont(SWTResourceManager.getFont("Tahoma", 8,
-				SWT.BOLD));
 		lblUserRoleDefinition.setLayoutData(new GridData(SWT.CENTER,
 				SWT.CENTER, true, false, 1, 1));
 		lblUserRoleDefinition.setText("User Role Definition");
@@ -639,7 +636,6 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		lblUser_1 = new Label(roles_composite_right, SWT.NONE);
 		lblUser_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true,
 				false, 2, 1));
-		lblUser_1.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 		lblUser_1.setText("User");
 
 		lblForename_1 = new Label(roles_composite_right, SWT.NONE);

@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSComment#getComment <em>Comment</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSComment#getReferences <em>References</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSComment#getTags <em>Tags</em>}</li>
  * </ul>
  * </p>
@@ -48,22 +47,6 @@ public interface BTSComment extends BTSDBBaseObject, BTSObject {
 	 * @generated
 	 */
 	void setComment(String value);
-
-	/**
-	 * Returns the value of the '<em><b>References</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSReference}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>References</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>References</em>' containment reference list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSComment_References()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<BTSReference> getReferences();
 
 	/**
 	 * Returns the value of the '<em><b>Tags</b></em>' attribute list.

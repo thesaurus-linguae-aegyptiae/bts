@@ -10,7 +10,10 @@ import org.eclipse.xtext.validation.Issue;
 public class CommentAnnotation extends ModelAnnotation {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation.comment";
+	public static final String TYPE_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.comment.highlighted";
+
 	private BTSComment comment;
+	
 
 	public CommentAnnotation(IXtextDocument document, Issue issue,
 			Object modelObject, BTSComment btsComment) {
@@ -20,9 +23,12 @@ public class CommentAnnotation extends ModelAnnotation {
 
 	@Override
 	public String getType() {
-		return TYPE;
+		if (super.getType() == null)
+		{
+			return TYPE;
+		}
+		return super.getType();
 	}
-
 	public BTSComment getComment() {
 		return comment;
 	}
@@ -36,4 +42,19 @@ public class CommentAnnotation extends ModelAnnotation {
 		// // TODO Auto-generated method stub
 		// super.paint(gc, canvas, bounds);
 	}
+
+	@Override
+	public void setHighlighted(boolean highlighted) {
+		if (highlighted)
+		{
+			cachedType = this.type;
+			setType(TYPE_HIGHLIGHTED);
+		}
+		else
+		{
+			setType(cachedType);
+		}
+		
+	}
+
 }

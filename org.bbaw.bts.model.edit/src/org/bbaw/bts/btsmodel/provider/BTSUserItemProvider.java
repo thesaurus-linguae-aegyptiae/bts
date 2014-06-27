@@ -627,6 +627,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_USER__EXTERNAL_REFERNECES);
 		}
 		return childrenFeatures;
@@ -709,6 +710,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_USER__REVISIONS:
+			case BtsmodelPackage.BTS_USER__RELATIONS:
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -732,6 +734,11 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 			(createChildParameter
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
 				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSRelation()));
 
 		newChildDescriptors.add
 			(createChildParameter

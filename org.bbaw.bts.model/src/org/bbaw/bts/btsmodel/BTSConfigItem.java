@@ -257,7 +257,7 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	 * @model containment="true"
 	 * @generated
 	 */
-	List<BTSWorkflowRuleItem> getRules();
+	EList<BTSWorkflowRuleItem> getRules();
 
 	/**
 	 * Returns the value of the '<em><b>Show Widget</b></em>' attribute.

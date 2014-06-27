@@ -4,6 +4,7 @@ package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.AdministrativDataObjectImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.AdministrativDataObjectImpl#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.AdministrativDataObjectImpl#getState <em>State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.AdministrativDataObjectImpl#getRevisionState <em>Revision State</em>}</li>
@@ -32,6 +34,26 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImpl implements AdministrativDataObject {
+	/**
+	 * The default value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String _ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected String _id = _ID_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -119,6 +141,27 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	@Override
 	protected EClass eStaticClass() {
 		return BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String get_id() {
+		return _id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_id(String new_id) {
+		String old_id = _id;
+		_id = new_id;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID, old_id, _id));
 	}
 
 	/**
@@ -218,6 +261,8 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID:
+				return get_id();
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				return getRevisions();
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
@@ -239,6 +284,9 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID:
+				set_id((String)newValue);
+				return;
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				getRevisions().clear();
 				getRevisions().addAll((Collection<? extends BTSRevision>)newValue);
@@ -264,6 +312,9 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID:
+				set_id(_ID_EDEFAULT);
+				return;
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				getRevisions().clear();
 				return;
@@ -288,6 +339,8 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID:
+				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS:
 				return revisions != null && !revisions.isEmpty();
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
@@ -306,11 +359,45 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (derivedFeatureID) {
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (state: ");
+		result.append(" (_id: ");
+		result.append(_id);
+		result.append(", state: ");
 		result.append(state);
 		result.append(", revisionState: ");
 		result.append(revisionState);

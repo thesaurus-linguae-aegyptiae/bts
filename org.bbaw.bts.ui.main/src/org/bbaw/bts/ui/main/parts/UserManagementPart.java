@@ -113,7 +113,6 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.swt.widgets.Tree;
-import org.eclipse.wb.swt.SWTResourceManager;
 
 public class UserManagementPart
 {
@@ -974,7 +973,6 @@ public class UserManagementPart
 
 		lblUser_1 = new Label(roles_composite_right, SWT.NONE);
 		lblUser_1.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
-		lblUser_1.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 		lblUser_1.setText("User");
 
 		lblForename_1 = new Label(roles_composite_right, SWT.NONE);
@@ -1049,7 +1047,6 @@ public class UserManagementPart
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(3, false));
 		lblUserRoleDefinition = new Label(roles_composite_right, SWT.NONE);
-		lblUserRoleDefinition.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 		lblUserRoleDefinition.setLayoutData(new GridData(SWT.CENTER,
 				SWT.CENTER, true, false, 1, 1));
 		lblUserRoleDefinition.setText("User Role Definition");
@@ -1299,7 +1296,6 @@ public class UserManagementPart
 		lblDatabaseCollection = new Label(roles_composite_right, SWT.NONE);
 		lblDatabaseCollection.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		lblDatabaseCollection.setAlignment(SWT.CENTER);
-		lblDatabaseCollection.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 		lblDatabaseCollection.setText("Database Collection");
 
 		lblDbCollectionName = new Label(roles_composite_right, SWT.NONE);
@@ -1409,7 +1405,6 @@ public class UserManagementPart
 		roles_composite_right.setLayout(new GridLayout(2, false));
 
 		lblProject = new Label(roles_composite_right, SWT.NONE);
-		lblProject.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 		lblProject.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false, 2, 1));
 		lblProject.setText("Project");
 
@@ -1657,7 +1652,6 @@ public class UserManagementPart
 		Label lblUser = new Label(composite_UserEdit, SWT.NONE);
 		lblUser.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 2, 1));
 		lblUser.setText("User");
-		lblUser.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 
 		Label idOfGroup = new Label(composite_UserEdit, SWT.NONE);
 		idOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -1900,7 +1894,6 @@ public class UserManagementPart
 		lblUserGroup.setAlignment(SWT.CENTER);
 		lblUserGroup.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 2, 1));
 		lblUserGroup.setText("User Group");
-		lblUserGroup.setFont(SWTResourceManager.getFont("Tahoma", 8, SWT.BOLD));
 
 		Label idOfGroup = new Label(composite_GroupEdit, SWT.NONE);
 		idOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));

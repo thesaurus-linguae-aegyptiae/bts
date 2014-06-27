@@ -12,15 +12,25 @@
   <imports xsi:type="commands:Command" xmi:id="_mv-EEIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.lineEnd"/>
   <imports xsi:type="commands:Command" xmi:id="_oitNAIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.previous"/>
   <imports xsi:type="commands:Command" xmi:id="_qNsvMIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.next"/>
+  <imports xsi:type="commands:Command" xmi:id="_ogEtgP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.command.addAnnotation"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q_x-IEChEeOsGJaKBBYPLQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.top">
     <elements xsi:type="basic:Part" xmi:id="_RoAbwEChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
       <toolbar xmi:id="_Vrll8EChEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
     </elements>
     <elements xsi:type="basic:Part" xmi:id="_DXXH8Fw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart" label="EgyTextEditor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/texts.png" closeable="true">
-      <menus xsi:type="menu:PopupMenu" xmi:id="_1SXM8Px-EeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor.xtext.popupmenu">
+      <handlers xmi:id="_kYl6wP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.handler.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddAnnotationHandler" command="_ogEtgP0_EeOsAKche49RIg"/>
+      <menus xsi:type="menu:PopupMenu" xmi:id="_1SXM8Px-EeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor.xtext.popupmenu" toBeRendered="false" visible="false">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_Noj7wPx_EeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.0" label="Test" command="_l81REEt8EeO3HNJi0pp4Qg"/>
       </menus>
-      <toolbar xmi:id="_JTo5IFw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4"/>
+      <menus xmi:id="_0qdU0P1BEeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.menu.0">
+        <tags>ViewMenu</tags>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1oLhUP1BEeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.1" label="Add Annotatino" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_ogEtgP0_EeOsAKche49RIg"/>
+      </menus>
+      <toolbar xmi:id="_JTo5IFw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_aQhekP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.egy.texteditor.handledtoolitem.addAnnotation" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png">
+          <command href="../org.bbaw.bts.ui.corpus/fragment.e4xmi#_iWpp8JV9EeOpr8TW-P04BA"/>
+        </children>
+      </toolbar>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_jbc5cEt8EeO3HNJi0pp4Qg" featurename="commands" parentElementId="org.bbaw.bts.application">

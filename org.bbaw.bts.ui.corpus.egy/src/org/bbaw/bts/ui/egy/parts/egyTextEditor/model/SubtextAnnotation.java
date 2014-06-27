@@ -10,6 +10,8 @@ import org.eclipse.xtext.validation.Issue;
 public class SubtextAnnotation extends ModelAnnotation {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation.subtext";
+	public static final String TYPE_HIGHLIGHTED = TYPE + ".highlighted";;
+
 	private BTSText subtext;
 
 	public SubtextAnnotation(IXtextDocument document, Issue issue,
@@ -17,10 +19,13 @@ public class SubtextAnnotation extends ModelAnnotation {
 		super(TYPE, document, issue, modelObject);
 		this.setSubtext(subtext);
 	}
-
 	@Override
 	public String getType() {
-		return TYPE;
+		if (super.getType() == null)
+		{
+			return TYPE;
+		}
+		return super.getType();
 	}
 
 	public BTSText getSubtext() {
@@ -35,5 +40,18 @@ public class SubtextAnnotation extends ModelAnnotation {
 	public void paint(GC gc, Canvas canvas, Rectangle bounds) {
 		// // TODO Auto-generated method stub
 		// super.paint(gc, canvas, bounds);
+	}
+	@Override
+	public void setHighlighted(boolean highlighted) {
+		if (highlighted)
+		{
+			cachedType = this.type;
+			setType(TYPE_HIGHLIGHTED);
+		}
+		else
+		{
+			setType(cachedType);
+		}
+		
 	}
 }

@@ -10,7 +10,7 @@ import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
-import org.bbaw.bts.btsmodel.BTSReference;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -40,8 +40,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getCode <em>Code</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getComment <em>Comment</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getReferences <em>References</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getTags <em>Tags</em>}</li>
  * </ul>
  * </p>
@@ -240,6 +240,16 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 	protected String code = CODE_EDEFAULT;
 
 	/**
+	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSRelation> relations;
+
+	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -258,16 +268,6 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 	 * @ordered
 	 */
 	protected String comment = COMMENT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getReferences() <em>References</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getReferences()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSReference> references;
 
 	/**
 	 * The cached value of the '{@link #getTags() <em>Tags</em>}' attribute list.
@@ -521,6 +521,18 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSRelation> getRelations() {
+		if (relations == null) {
+			relations = new EObjectContainmentEList<BTSRelation>(BTSRelation.class, this, BtsmodelPackage.BTS_COMMENT__RELATIONS);
+		}
+		return relations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getComment() {
 		return comment;
 	}
@@ -535,18 +547,6 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 		comment = newComment;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_COMMENT__COMMENT, oldComment, comment));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<BTSReference> getReferences() {
-		if (references == null) {
-			references = new EObjectContainmentEList<BTSReference>(BTSReference.class, this, BtsmodelPackage.BTS_COMMENT__REFERENCES);
-		}
-		return references;
 	}
 
 	/**
@@ -593,8 +593,8 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 		switch (featureID) {
 			case BtsmodelPackage.BTS_COMMENT__REVISIONS:
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
-			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
-				return ((InternalEList<?>)getReferences()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
+				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -627,10 +627,10 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				return getSubtype();
 			case BtsmodelPackage.BTS_COMMENT__CODE:
 				return getCode();
+			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
+				return getRelations();
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				return getComment();
-			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
-				return getReferences();
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
 				return getTags();
 		}
@@ -677,12 +677,12 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 			case BtsmodelPackage.BTS_COMMENT__CODE:
 				setCode((String)newValue);
 				return;
+			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
+				getRelations().clear();
+				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
+				return;
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				setComment((String)newValue);
-				return;
-			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
-				getReferences().clear();
-				getReferences().addAll((Collection<? extends BTSReference>)newValue);
 				return;
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
 				getTags().clear();
@@ -730,11 +730,11 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 			case BtsmodelPackage.BTS_COMMENT__CODE:
 				setCode(CODE_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
+				getRelations().clear();
+				return;
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				setComment(COMMENT_EDEFAULT);
-				return;
-			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
-				getReferences().clear();
 				return;
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
 				getTags().clear();
@@ -771,10 +771,10 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_COMMENT__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
+			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
+				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
-			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
-				return references != null && !references.isEmpty();
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
 				return tags != null && !tags.isEmpty();
 		}
@@ -810,6 +810,7 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				case BtsmodelPackage.BTS_COMMENT__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
 				case BtsmodelPackage.BTS_COMMENT__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_COMMENT__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
+				case BtsmodelPackage.BTS_COMMENT__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				default: return -1;
 			}
 		}
@@ -845,6 +846,7 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_COMMENT__TYPE;
 				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_COMMENT__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_COMMENT__CODE;
+				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_COMMENT__RELATIONS;
 				default: return -1;
 			}
 		}

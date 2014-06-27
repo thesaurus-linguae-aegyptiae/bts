@@ -62,6 +62,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/subtype"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSObject/code"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSObject/relations"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSAmbivalence">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSAmbivalence/cases"/>
@@ -88,7 +89,6 @@
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSComment">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSComment/comment"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSComment/references"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSComment/tags"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSInterTextReference">
@@ -96,13 +96,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSInterTextReference/endId"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSTextSentenceItem"/>
-    <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSReference">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSReference/parts"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSReference/objectId"/>
-    </genClasses>
-    <genClasses ecoreClass="BTSModel.ecore#//BTSAnnotation">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSAnnotation/references"/>
-    </genClasses>
+    <genClasses ecoreClass="BTSModel.ecore#//BTSAnnotation"/>
     <genClasses ecoreClass="BTSModel.ecore#//BTSTranslation">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTranslation/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTranslation/type"/>
@@ -123,6 +117,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/subtype"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSRelation/parts"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSRelation/certainty"/>
     </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSConfiguration">
@@ -161,7 +156,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSTimespan/comment"/>
     </genClasses>
     <genClasses image="false" ecoreClass="BTSModel.ecore#//BTSCorpusObject">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/relations"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSCorpusObject/passport"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/corpusPrefix"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSCorpusObject/workPhase"/>

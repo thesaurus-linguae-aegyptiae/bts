@@ -72,5 +72,9 @@ public class BTSUIConstants {
 			255, 255, 255));
 	public static final Color COLOR_BACKGROUND_DISABLED  = _resources.createColor(new RGB(
 			205, 205, 205));
+	public static final String EVENT_TEXT_RELATING_OBJECTS_LOADED = "event_text_relating_objects/loaded";
+	public static final String CSS_UNSELECTED_CLASS_NAME = "unselected";
+	public static final String CSS_SELECTED_CLASS_NAME = "selected";
+	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
 
 }

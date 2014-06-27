@@ -338,7 +338,7 @@ public class BTSCommentItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
-			childrenFeatures.add(BtsmodelPackage.Literals.BTS_COMMENT__REFERENCES);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -408,7 +408,7 @@ public class BTSCommentItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_COMMENT__REVISIONS:
-			case BtsmodelPackage.BTS_COMMENT__REFERENCES:
+			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -430,6 +430,11 @@ public class BTSCommentItemProvider
 			(createChildParameter
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
 				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSRelation()));
 	}
 
 }

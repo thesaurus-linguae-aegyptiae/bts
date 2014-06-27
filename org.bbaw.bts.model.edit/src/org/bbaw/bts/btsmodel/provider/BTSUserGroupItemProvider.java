@@ -341,6 +341,7 @@ public class BTSUserGroupItemProvider extends BTSDBBaseObjectItemProvider implem
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -411,6 +412,7 @@ public class BTSUserGroupItemProvider extends BTSDBBaseObjectItemProvider implem
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_USER_GROUP__REVISIONS:
+			case BtsmodelPackage.BTS_USER_GROUP__RELATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -433,6 +435,11 @@ public class BTSUserGroupItemProvider extends BTSDBBaseObjectItemProvider implem
 			(createChildParameter
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
 				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSRelation()));
 	}
 
 }

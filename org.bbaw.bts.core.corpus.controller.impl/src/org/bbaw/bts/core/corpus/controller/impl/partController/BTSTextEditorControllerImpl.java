@@ -10,8 +10,10 @@ package org.bbaw.bts.core.corpus.controller.impl.partController;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,19 +22,30 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAmbivalenceItem;
+import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSMarker;
+import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSSenctence;
 import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextItems;
+import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.services.BTSTextService;
+import org.bbaw.bts.core.services.CorpusObjectService;
+import org.bbaw.bts.core.services.GenericObjectService;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSLemmaAnnotation;
@@ -41,6 +54,7 @@ import org.bbaw.bts.ui.commons.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -53,6 +67,8 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.viewers.ContentViewer;
+import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSTextEditorControllerImpl implements BTSTextEditorController
 {
@@ -83,14 +99,23 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	
 	private int idcounter = 0;
 	private Comparator<? super Object> glyphsStringComparator;
+	
+	@Inject
+	private CorpusObjectService corpusObjectService;
 
 	@Override
-	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model)
+	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects)
 	{
 		if (text == null || text.getTextContent() == null)
 		{
 			return;
 		}
+		HashMap<String, List<BTSInterTextReference>> relatingObjectsMap = new HashMap<String,  List<BTSInterTextReference>>();
+		if (relatingObjects != null && ! relatingObjects.isEmpty())
+		{
+			fillRelatingObjectsMap(relatingObjects, relatingObjectsMap);
+		}
+			
 		StringBuilder stringBuilder = new StringBuilder();
 		for (BTSTextItems textItems : text.getTextContent().getTextItems())
 		{
@@ -109,7 +134,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
 				{
-					appendToStringBuilder(sentenceItem, model, stringBuilder);
+					appendToStringBuilder(sentenceItem, model, stringBuilder, relatingObjects, relatingObjectsMap);
 					stringBuilder.append(WS);
 				}
 				stringBuilder.replace(stringBuilder.length() - 1,
@@ -120,7 +145,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				model.addAnnotation(ma, pos);
 			} else
 			{
-				appendToStringBuilder(textItems, model, stringBuilder);
+				appendToStringBuilder(textItems, model, stringBuilder, relatingObjects, relatingObjectsMap);
 			}
 		}
 		logger.info("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
@@ -128,26 +153,39 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	}
 
-	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder)
+	private void fillRelatingObjectsMap(List<BTSObject> relatingObjects,
+			HashMap<String, List<BTSInterTextReference>> relatingObjectsMap) {
+		for (BTSObject o : relatingObjects)
+		{
+			for (BTSRelation rel : o.getRelations())
+			{
+				for (BTSInterTextReference part : rel.getParts())
+				{
+					if (part.getBeginId() != null)
+					{
+						List<BTSInterTextReference> parts = relatingObjectsMap.get(part.getBeginId());
+						if (parts == null)
+						{
+							parts = new Vector<BTSInterTextReference>(4);
+							relatingObjectsMap.put(part.getBeginId(), parts);
+						}
+						parts.add(part);
+					}
+				}
+			}
+		}
+		
+	}
+
+	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder, List<BTSObject> relatingObjects, HashMap<String, List<BTSInterTextReference>> relatingObjectsMap)
 	{
-		Position pos;
+		Position pos = null;
 		if (item instanceof BTSWord)
 		{
 			BTSWord word = (BTSWord) item;
 			pos = appendWordToStringBuilder(word, stringBuilder);
 			appendWordToModel(word, model, pos);
 
-			// mock annotation
-			BTSAnnotationAnnotation aa = new BTSAnnotationAnnotation(item, null);
-			model.addAnnotation(aa, pos);
-
-			// mock comment
-			BTSCommentAnnotation ca = new BTSCommentAnnotation(item, null);
-			model.addAnnotation(ca, pos);
-
-			// mock subtext
-			BTSSubtextAnnotation sa = new BTSSubtextAnnotation(item, null);
-			model.addAnnotation(sa, pos);
 		} else if (item instanceof BTSMarker)
 		{
 			BTSMarker marker = (BTSMarker) item;
@@ -158,11 +196,57 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			pos = appendAmbivalenceToStringBuilder(ambivalence, stringBuilder,
 					model);
 			appendAmbivalenceToModel(ambivalence, model, pos);
+
 		}
 		// check if there are comments, annotations or subtext pointing to this
 		// item
 		// pointer can either be start or end positions!
+		if (pos != null && relatingObjectsMap.containsKey(item.get_id()))
+		{
+			createAnnotations(item, model, pos, relatingObjectsMap.get(item.get_id()));
+		}
 
+
+	}
+
+	private void createAnnotations(BTSIdentifiableItem item, IAnnotationModel model, Position pos, List<BTSInterTextReference> list) {
+		// FIXME ende einer annotation berechnen!!!!!!!!
+		for (BTSInterTextReference ref : list)
+		{
+			createAnnotation(item, model, pos, ref);
+		}
+
+		
+	}
+
+	private void createAnnotation(BTSIdentifiableItem item, IAnnotationModel model,
+			Position pos, BTSInterTextReference reference) {
+		if (reference.eContainer() != null && reference.eContainer() instanceof BTSRelation && reference.eContainer().eContainer() != null)
+		{
+			if (reference.eContainer().eContainer() instanceof BTSAnnotation)
+			{
+				// annotation
+				BTSAnnotation anno = (BTSAnnotation) reference.eContainer().eContainer();
+				BTSAnnotationAnnotation aa = new BTSAnnotationAnnotation(item, anno);
+				model.addAnnotation(aa, pos);
+
+			}
+			else if (reference.eContainer().eContainer() instanceof BTSText)
+			{
+				// subtext
+				BTSText text = (BTSText) reference.eContainer().eContainer();
+				BTSSubtextAnnotation sa = new BTSSubtextAnnotation(item, text);
+				model.addAnnotation(sa, pos);
+			}
+			else if (reference.eContainer().eContainer() instanceof BTSComment)
+			{
+				// comment
+				BTSComment comment = (BTSComment) reference.eContainer().eContainer();
+				BTSCommentAnnotation ca = new BTSCommentAnnotation(item, comment);
+				model.addAnnotation(ca, pos);
+			}
+		}
+		
 	}
 
 	private void appendAmbivalenceToModel(BTSAmbivalence ambivalence,
@@ -819,5 +903,17 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	public String[] splitSignsKeepDelimeters(String mdCString) {
 		return splitAndKeep(mdCString, 1);
+	}
+
+	@Override
+	public List<BTSObject> getRelatingObjects(BTSText text) {
+		BTSQueryRequest query = new BTSQueryRequest();
+		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId",
+				text.get_id()));
+		query.setQueryId("relations.objectId-" + text.get_id());
+		System.out.println(query.getQueryId());
+		List<BTSObject> children = corpusObjectService.query(query,
+				BTSConstants.OBJECT_STATE_ACTIVE);
+		return children;
 	}
 }

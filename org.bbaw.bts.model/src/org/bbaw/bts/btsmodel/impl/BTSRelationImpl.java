@@ -2,11 +2,18 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.util.Collection;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -19,6 +26,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getComment <em>Comment</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getParts <em>Parts</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl#getCertainty <em>Certainty</em>}</li>
  * </ul>
  * </p>
@@ -105,6 +113,16 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 * @ordered
 	 */
 	protected String comment = COMMENT_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getParts() <em>Parts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getParts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSInterTextReference> parts;
 
 	/**
 	 * The default value of the '{@link #getCertainty() <em>Certainty</em>}' attribute.
@@ -234,6 +252,18 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSInterTextReference> getParts() {
+		if (parts == null) {
+			parts = new EObjectContainmentEList<BTSInterTextReference>(BTSInterTextReference.class, this, BtsmodelPackage.BTS_RELATION__PARTS);
+		}
+		return parts;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getCertainty()
 	{
 		return certainty;
@@ -258,6 +288,20 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case BtsmodelPackage.BTS_RELATION__PARTS:
+				return ((InternalEList<?>)getParts()).basicRemove(otherEnd, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BtsmodelPackage.BTS_RELATION__OBJECT_ID:
@@ -268,6 +312,8 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 				return getSubtype();
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				return getComment();
+			case BtsmodelPackage.BTS_RELATION__PARTS:
+				return getParts();
 			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
 				return getCertainty();
 		}
@@ -279,6 +325,7 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
@@ -293,6 +340,10 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 				return;
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				setComment((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_RELATION__PARTS:
+				getParts().clear();
+				getParts().addAll((Collection<? extends BTSInterTextReference>)newValue);
 				return;
 			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
 				setCertainty((String)newValue);
@@ -321,6 +372,9 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_RELATION__PARTS:
+				getParts().clear();
+				return;
 			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
 				setCertainty(CERTAINTY_EDEFAULT);
 				return;
@@ -344,6 +398,8 @@ public class BTSRelationImpl extends BTSIdentifiableItemImpl implements BTSRelat
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_RELATION__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
+			case BtsmodelPackage.BTS_RELATION__PARTS:
+				return parts != null && !parts.isEmpty();
 			case BtsmodelPackage.BTS_RELATION__CERTAINTY:
 				return CERTAINTY_EDEFAULT == null ? certainty != null : !CERTAINTY_EDEFAULT.equals(certainty);
 		}

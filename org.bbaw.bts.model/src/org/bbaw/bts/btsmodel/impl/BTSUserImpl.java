@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -41,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getCode <em>Code</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getGroupIds <em>Group Ids</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getSigle <em>Sigle</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getDescription <em>Description</em>}</li>
@@ -251,6 +253,16 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * @ordered
 	 */
 	protected String code = CODE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSRelation> relations;
 
 	/**
 	 * The cached value of the '{@link #getGroupIds() <em>Group Ids</em>}' attribute list.
@@ -772,6 +784,18 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSRelation> getRelations() {
+		if (relations == null) {
+			relations = new EObjectContainmentEList<BTSRelation>(BTSRelation.class, this, BtsmodelPackage.BTS_USER__RELATIONS);
+		}
+		return relations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<String> getGroupIds() {
 		if (groupIds == null) {
 			groupIds = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_USER__GROUP_IDS);
@@ -1104,6 +1128,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 		switch (featureID) {
 			case BtsmodelPackage.BTS_USER__REVISIONS:
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_USER__RELATIONS:
+				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				return ((InternalEList<?>)getExternalReferneces()).basicRemove(otherEnd, msgs);
 		}
@@ -1138,6 +1164,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return getSubtype();
 			case BtsmodelPackage.BTS_USER__CODE:
 				return getCode();
+			case BtsmodelPackage.BTS_USER__RELATIONS:
+				return getRelations();
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				return getGroupIds();
 			case BtsmodelPackage.BTS_USER__SIGLE:
@@ -1211,6 +1239,10 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return;
 			case BtsmodelPackage.BTS_USER__CODE:
 				setCode((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_USER__RELATIONS:
+				getRelations().clear();
+				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
 				return;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				getGroupIds().clear();
@@ -1301,6 +1333,9 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 			case BtsmodelPackage.BTS_USER__CODE:
 				setCode(CODE_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_USER__RELATIONS:
+				getRelations().clear();
+				return;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				getGroupIds().clear();
 				return;
@@ -1378,6 +1413,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_USER__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
+			case BtsmodelPackage.BTS_USER__RELATIONS:
+				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				return groupIds != null && !groupIds.isEmpty();
 			case BtsmodelPackage.BTS_USER__SIGLE:
@@ -1441,6 +1478,7 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				case BtsmodelPackage.BTS_USER__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
 				case BtsmodelPackage.BTS_USER__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_USER__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
+				case BtsmodelPackage.BTS_USER__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				default: return -1;
 			}
 		}
@@ -1476,6 +1514,7 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_USER__TYPE;
 				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_USER__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_USER__CODE;
+				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_USER__RELATIONS;
 				default: return -1;
 			}
 		}

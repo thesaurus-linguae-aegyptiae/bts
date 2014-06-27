@@ -223,7 +223,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 					org.eclipse.emf.common.command.Command command = AddCommand
 							.create(editingDomain,
 									corpusObject,
-									BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__RELATIONS,
+									BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
 									rel);
 					compoundCommand.append(command);
 					editingDomain.getCommandStack().execute(compoundCommand);

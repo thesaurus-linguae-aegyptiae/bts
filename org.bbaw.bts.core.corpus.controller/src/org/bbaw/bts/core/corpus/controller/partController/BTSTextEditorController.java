@@ -1,16 +1,24 @@
 package org.bbaw.bts.core.corpus.controller.partController;
 
+import java.util.List;
+import java.util.Map;
+
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.source.IAnnotationModel;
+import org.eclipse.jface.viewers.ContentViewer;
 
 public interface BTSTextEditorController
 {
 
-	void transformToDocument(BTSText text, Document doc, IAnnotationModel model);
+	void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects);
 
 	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
 			TextViewer textViewer);
@@ -33,4 +41,6 @@ public interface BTSTextEditorController
 	String[] splitSignsKeepDelimeters(String mdC);
 
 	String insertMarkerBehindSingleCode(String mdcString, String marker);
+	
+	List<BTSObject> getRelatingObjects(BTSText text);
 }

@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface AdministrativDataObject extends BTSObservableObject {
+public interface AdministrativDataObject extends BTSObservableObject, BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>Revisions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSRevision}.

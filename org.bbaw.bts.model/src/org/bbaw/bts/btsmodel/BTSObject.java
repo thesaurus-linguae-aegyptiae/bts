@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import org.eclipse.emf.common.util.EList;
+
 
 /**
  * <!-- begin-user-doc --> A representation of the model object '
@@ -15,6 +17,7 @@ package org.bbaw.bts.btsmodel;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getCode <em>Code</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getRelations <em>Relations</em>}</li>
  * </ul>
  * </p>
  *
@@ -159,5 +162,21 @@ public interface BTSObject extends AdministrativDataObject
 	 * @generated
 	 */
 	void setCode(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Relations</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSRelation}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Relations</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Relations</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSObject_Relations()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSRelation> getRelations();
 
 } // BTSObject

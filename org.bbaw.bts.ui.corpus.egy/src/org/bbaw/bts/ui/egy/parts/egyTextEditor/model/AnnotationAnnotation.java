@@ -13,8 +13,12 @@ public class AnnotationAnnotation extends ModelAnnotation {
 
 	public static final String TYPE_RUBRUM = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum";
 
+	public static final String TYPE_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.highlighted";;
+
 	private String type = TYPE;
 	private BTSAnnotation annotation;
+
+	private String cachedType;
 
 	public AnnotationAnnotation(IXtextDocument document, Issue issue,
 			Object modelObject, BTSAnnotation btsAnnotation) {
@@ -30,11 +34,11 @@ public class AnnotationAnnotation extends ModelAnnotation {
 
 	@Override
 	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+		if (super.getType() == null)
+		{
+			return TYPE_RUBRUM;
+		}
+		return super.getType();
 	}
 
 	public BTSAnnotation getAnnotation() {
@@ -49,5 +53,19 @@ public class AnnotationAnnotation extends ModelAnnotation {
 	public void paint(GC gc, Canvas canvas, Rectangle bounds) {
 		// // TODO Auto-generated method stub
 		// super.paint(gc, canvas, bounds);
+	}
+
+	@Override
+	public void setHighlighted(boolean highlighted) {
+		if (highlighted)
+		{
+			cachedType = this.type;
+			setType(TYPE_HIGHLIGHTED);
+		}
+		else
+		{
+			setType(cachedType);
+		}
+		
 	}
 }

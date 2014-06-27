@@ -307,7 +307,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 						{
 							executeSaveAllCommand();
 							selectedTreeObject = (BTSCorpusObject) o;
-							if (!tn.isChildrenLoaded())
+							if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty())
 							{
 								List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
 								parents.add(tn);

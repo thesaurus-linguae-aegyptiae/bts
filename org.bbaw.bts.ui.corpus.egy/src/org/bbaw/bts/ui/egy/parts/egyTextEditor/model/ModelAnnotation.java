@@ -4,12 +4,14 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
 
-public class ModelAnnotation extends XtextAnnotation {
+public abstract class ModelAnnotation extends XtextAnnotation {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation";
 
 	private Object modelObject;
-
+	protected String cachedType;
+	protected String type;
+	
 	public ModelAnnotation(String type, boolean isPersistent,
 			IXtextDocument document, Issue issue, boolean isQuickfixable,
 			Object modelObject) {
@@ -18,6 +20,10 @@ public class ModelAnnotation extends XtextAnnotation {
 
 	}
 
+
+	public void setType(String type) {
+		this.type = type;
+	}
 	public ModelAnnotation(IXtextDocument document, Issue issue,
 			Object modelObject) {
 		super(TYPE, false, document, issue, false);
@@ -39,4 +45,5 @@ public class ModelAnnotation extends XtextAnnotation {
 		this.modelObject = modelObject;
 	}
 
+	public abstract void setHighlighted(boolean highlighted);
 }

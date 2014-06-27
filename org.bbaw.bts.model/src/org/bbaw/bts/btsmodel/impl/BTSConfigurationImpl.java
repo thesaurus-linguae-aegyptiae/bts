@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -40,6 +41,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getCode <em>Code</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getProvider <em>Provider</em>}</li>
  * </ul>
  * </p>
@@ -246,6 +248,16 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * @ordered
 	 */
 	protected String code = CODE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSRelation> relations;
 
 	/**
 	 * The default value of the '{@link #getProvider() <em>Provider</em>}' attribute.
@@ -516,6 +528,18 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSRelation> getRelations() {
+		if (relations == null) {
+			relations = new EObjectContainmentEList<BTSRelation>(BTSRelation.class, this, BtsmodelPackage.BTS_CONFIGURATION__RELATIONS);
+		}
+		return relations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getProvider()
 	{
 		return provider;
@@ -570,6 +594,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
+				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -604,6 +630,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return getSubtype();
 			case BtsmodelPackage.BTS_CONFIGURATION__CODE:
 				return getCode();
+			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
+				return getRelations();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				return getProvider();
 		}
@@ -654,6 +682,10 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 			case BtsmodelPackage.BTS_CONFIGURATION__CODE:
 				setCode((String)newValue);
 				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
+				getRelations().clear();
+				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
+				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				setProvider((String)newValue);
 				return;
@@ -702,6 +734,9 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 			case BtsmodelPackage.BTS_CONFIGURATION__CODE:
 				setCode(CODE_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
+				getRelations().clear();
+				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				setProvider(PROVIDER_EDEFAULT);
 				return;
@@ -739,6 +774,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_CONFIGURATION__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
+			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
+				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				return PROVIDER_EDEFAULT == null ? provider != null : !PROVIDER_EDEFAULT.equals(provider);
 		}
@@ -780,6 +817,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				case BtsmodelPackage.BTS_CONFIGURATION__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
 				case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_CONFIGURATION__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
+				case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				default: return -1;
 			}
 		}
@@ -821,6 +859,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_CONFIGURATION__TYPE;
 				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_CONFIGURATION__CODE;
+				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_CONFIGURATION__RELATIONS;
 				default: return -1;
 			}
 		}

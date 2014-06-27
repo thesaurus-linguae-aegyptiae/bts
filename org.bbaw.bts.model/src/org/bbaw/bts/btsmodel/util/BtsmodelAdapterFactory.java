@@ -138,10 +138,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSTextSentenceItemAdapter();
 			}
 			@Override
-			public Adapter caseBTSReference(BTSReference object) {
-				return createBTSReferenceAdapter();
-			}
-			@Override
 			public Adapter caseBTSAnnotation(BTSAnnotation object) {
 				return createBTSAnnotationAdapter();
 			}
@@ -558,20 +554,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSTextSentenceItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSReference <em>BTS Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSReference
-	 * @generated
-	 */
-	public Adapter createBTSReferenceAdapter() {
 		return null;
 	}
 

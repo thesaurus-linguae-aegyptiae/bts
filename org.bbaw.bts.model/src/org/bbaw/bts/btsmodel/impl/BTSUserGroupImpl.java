@@ -10,6 +10,7 @@ import java.util.Collection;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -39,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl#getType <em>Type</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl#getCode <em>Code</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl#getCategory <em>Category</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserGroupImpl#getComment <em>Comment</em>}</li>
  * </ul>
@@ -236,6 +238,16 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 	 * @ordered
 	 */
 	protected String code = CODE_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRelations() <em>Relations</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRelations()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSRelation> relations;
 
 	/**
 	 * The default value of the '{@link #getCategory() <em>Category</em>}' attribute.
@@ -514,6 +526,18 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSRelation> getRelations() {
+		if (relations == null) {
+			relations = new EObjectContainmentEList<BTSRelation>(BTSRelation.class, this, BtsmodelPackage.BTS_USER_GROUP__RELATIONS);
+		}
+		return relations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getCategory() {
 		return category;
 	}
@@ -585,6 +609,8 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 		switch (featureID) {
 			case BtsmodelPackage.BTS_USER_GROUP__REVISIONS:
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_USER_GROUP__RELATIONS:
+				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -617,6 +643,8 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 				return getSubtype();
 			case BtsmodelPackage.BTS_USER_GROUP__CODE:
 				return getCode();
+			case BtsmodelPackage.BTS_USER_GROUP__RELATIONS:
+				return getRelations();
 			case BtsmodelPackage.BTS_USER_GROUP__CATEGORY:
 				return getCategory();
 			case BtsmodelPackage.BTS_USER_GROUP__COMMENT:
@@ -664,6 +692,10 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 				return;
 			case BtsmodelPackage.BTS_USER_GROUP__CODE:
 				setCode((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_USER_GROUP__RELATIONS:
+				getRelations().clear();
+				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
 				return;
 			case BtsmodelPackage.BTS_USER_GROUP__CATEGORY:
 				setCategory((String)newValue);
@@ -713,6 +745,9 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 			case BtsmodelPackage.BTS_USER_GROUP__CODE:
 				setCode(CODE_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_USER_GROUP__RELATIONS:
+				getRelations().clear();
+				return;
 			case BtsmodelPackage.BTS_USER_GROUP__CATEGORY:
 				setCategory(CATEGORY_EDEFAULT);
 				return;
@@ -751,6 +786,8 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_USER_GROUP__CODE:
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
+			case BtsmodelPackage.BTS_USER_GROUP__RELATIONS:
+				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_USER_GROUP__CATEGORY:
 				return CATEGORY_EDEFAULT == null ? category != null : !CATEGORY_EDEFAULT.equals(category);
 			case BtsmodelPackage.BTS_USER_GROUP__COMMENT:
@@ -788,6 +825,7 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 				case BtsmodelPackage.BTS_USER_GROUP__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
 				case BtsmodelPackage.BTS_USER_GROUP__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_USER_GROUP__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
+				case BtsmodelPackage.BTS_USER_GROUP__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				default: return -1;
 			}
 		}
@@ -823,6 +861,7 @@ public class BTSUserGroupImpl extends BTSDBBaseObjectImpl implements BTSUserGrou
 				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_USER_GROUP__TYPE;
 				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_USER_GROUP__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_USER_GROUP__CODE;
+				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_USER_GROUP__RELATIONS;
 				default: return -1;
 			}
 		}

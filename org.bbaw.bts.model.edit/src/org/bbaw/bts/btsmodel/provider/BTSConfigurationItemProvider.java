@@ -423,6 +423,11 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 			(createChildParameter
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
 				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSRelation()));
 	}
 
 }

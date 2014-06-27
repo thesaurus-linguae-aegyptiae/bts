@@ -317,7 +317,6 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 	{
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__RELATIONS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__PASSPORT);
 		}
 		return childrenFeatures;
@@ -374,7 +373,6 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case BtsmodelPackage.BTS_CORPUS_OBJECT__RELATIONS:
 			case BtsmodelPackage.BTS_CORPUS_OBJECT__PASSPORT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -393,11 +391,6 @@ public class BTSCorpusObjectItemProvider extends BTSObjectItemProvider implement
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object)
 	{
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__RELATIONS,
-				 BtsmodelFactory.eINSTANCE.createBTSRelation()));
 
 		newChildDescriptors.add
 			(createChildParameter

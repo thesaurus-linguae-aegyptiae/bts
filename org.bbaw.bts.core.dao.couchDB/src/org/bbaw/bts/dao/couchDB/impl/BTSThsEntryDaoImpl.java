@@ -83,11 +83,12 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 		// }
 		for (String jo : allDocs)
 		{
-			System.out.println(jo);
 			if (true)
 			{
 				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
 						+ extractIdFromObjectString(jo));
+				System.out.println(uri);
+
 				BTSThsEntry entry = find(uri);
 				if (entry != null)
 				{
