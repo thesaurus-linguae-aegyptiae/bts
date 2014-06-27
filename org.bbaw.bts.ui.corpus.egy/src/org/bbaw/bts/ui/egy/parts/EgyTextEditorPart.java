@@ -54,6 +54,7 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.TextModelHelper;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.AnnotationAnnotation;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.CommentAnnotation;
+import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.InvisibleAnnotation;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.LemmaAnnotation;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.ModelAnnotation;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.SubtextAnnotation;
@@ -250,6 +251,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	@Inject
 	private Logger logger;
 	private List<ModelAnnotation> highlightedAnnotations = new Vector<ModelAnnotation>(4);
+	private Map<EObject, ModelAnnotation> relatingObjectsAnnotationMap;
 
 
 	/**
@@ -265,6 +267,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		contextService
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
 		eventBroker.subscribe("event_text_selection/*", this);
+		eventBroker.subscribe("event_relating_objects/*", this);
+		
 		System.out.println("EgyEditor postconstruct");
 
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
@@ -599,13 +603,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		embeddedEditor.getViewer().getTextWidget()
 				.addCaretListener(new CaretListener() {
 
-
 					@Override
 					public void caretMoved(CaretEvent event) {
-						System.out.println(event);
 						List<ModelAnnotation> annotations = getModelAnnotationAtCaretOffset(event.caretOffset);
-						processSelection(annotations);
-						
+						processSelection(annotations, true);
 					}
 				});
 		LineNumberRulerColumn lineNumberRulerColumn = new EgyLineNumberRulerColumn(
@@ -638,7 +639,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	}
 
-	protected void processSelection(List<ModelAnnotation> annotations) {
+	protected void processSelection(List<ModelAnnotation> annotations, boolean postSelection) {
 		List<ModelAnnotation> relatingObjectsAnnotations = new Vector<ModelAnnotation>(annotations.size());
 		for (ModelAnnotation ma : annotations) {
 			if (ma != null && ma instanceof LemmaAnnotation && ma.getModelObject() != null
@@ -671,20 +672,28 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			{
 				relSelObjects.add((BTSObject) ((AnnotationAnnotation) a).getAnnotation());
 			}
-			eventBroker.post(
+			if (postSelection){
+				eventBroker.post(
 					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
 					relSelObjects);
+			}
 			highlightedAnnotations.addAll(relatingObjectsAnnotations);
 		}
+		else if (postSelection)
+		{
+			eventBroker.post(
+					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
+					null);
+		}
+		painter.modelChanged(annotationModel);
 	}
 
 	private void highlightAnnotations(
-			List<ModelAnnotation> relatingObjectsAnnotations, boolean highlighted) {
-			for (ModelAnnotation a : relatingObjectsAnnotations)
-			{
-				a.setHighlighted(highlighted);
-			}
-		
+		List<ModelAnnotation> relatingObjectsAnnotations, boolean highlighted) {
+		for (ModelAnnotation a : relatingObjectsAnnotations)
+		{
+			a.setHighlighted(highlighted);
+		}
 	}
 
 	protected void setDirtyInternal() {
@@ -767,14 +776,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		painter.addAnnotationType(AnnotationAnnotation.TYPE,
 				AnnotationAnnotation.TYPE);
 		
-//		// Annotation highlighted
-//		AnnotationHighlightedDrawingStrategy annotationHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
-//		painter.addDrawingStrategy(AnnotationAnnotation.TYPE_HIGHLIGHTED,
-//				annotationHighlightedStrategy);
-//		painter.setAnnotationTypeColor(AnnotationAnnotation.TYPE_HIGHLIGHTED,
-//				BTSUIConstants.COLOR_ANNOTATTION);
-//		painter.addAnnotationType(AnnotationAnnotation.TYPE_HIGHLIGHTED,
-//				AnnotationAnnotation.TYPE_HIGHLIGHTED);
+		// Annotation highlighted
+		AnnotationHighlightedDrawingStrategy annotationHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
+		painter.addDrawingStrategy(AnnotationAnnotation.TYPE_HIGHLIGHTED,
+				annotationHighlightedStrategy);
+		painter.setAnnotationTypeColor(AnnotationAnnotation.TYPE_HIGHLIGHTED,
+				BTSUIConstants.COLOR_ANNOTATTION);
+		painter.addAnnotationType(AnnotationAnnotation.TYPE_HIGHLIGHTED,
+				AnnotationAnnotation.TYPE_HIGHLIGHTED);
 
 		// Annotation
 		RubrumDrawingStrategy rubrumStrategy = new RubrumDrawingStrategy();
@@ -821,6 +830,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					Position pos2 = new Position(pos.getOffset()
 							+ EDITOR_PREFIX_LENGTH, pos.getLength());
 					editorModel.addAnnotation((Annotation) ta, pos2);
+					relatingObjectsAnnotationMap.put((EObject) ta.getAnnotation(), ta);
 				}
 				AnnotationAnnotation ta = new AnnotationAnnotation(
 						embeddedEditor.getDocument(), issue,
@@ -830,6 +840,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				Position pos2 = new Position(pos.getOffset()
 						+ EDITOR_PREFIX_LENGTH, pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
+				relatingObjectsAnnotationMap.put((EObject) ta.getAnnotation(), ta);
+
 
 			} else if (a instanceof BTSCommentAnnotation) {
 				CommentAnnotation ta = new CommentAnnotation(
@@ -841,6 +853,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				Position pos2 = new Position(pos.getOffset()
 						+ EDITOR_PREFIX_LENGTH, pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
+				relatingObjectsAnnotationMap.put((EObject) ta.getComment(), ta);
+
 
 			} else if (a instanceof BTSSubtextAnnotation) {
 				SubtextAnnotation ta = new SubtextAnnotation(
@@ -851,11 +865,13 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				Position pos2 = new Position(pos.getOffset()
 						+ EDITOR_PREFIX_LENGTH, pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
+				relatingObjectsAnnotationMap.put((EObject) ta.getSubtext(), ta);
+
 
 			} else if (a instanceof BTSModelAnnotation) {
-				ModelAnnotation ta = new AnnotationAnnotation(
+				ModelAnnotation ta = new InvisibleAnnotation(
 						embeddedEditor.getDocument(), issue,
-						((BTSModelAnnotation) a).getModel(), null);
+						((BTSModelAnnotation) a).getModel());
 				Position pos = model.getPosition((Annotation) a);
 				Position pos2 = new Position(pos.getOffset(), pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
@@ -1193,6 +1209,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		selectedSentence = null;
 		modelAnnotationMap = new HashMap<EObject, ModelAnnotation>();
+		relatingObjectsAnnotationMap = new HashMap<EObject, ModelAnnotation>();
 		localCommandCacheSet.clear();
 	}
 
@@ -1275,10 +1292,50 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	}
 
 	@Override
-	public void handleEvent(Event arg0) {
+	public void handleEvent(Event event) {
 		// System.out.println(arg0);
-		eventReceivedCaretEvents(arg0.getTopic());
+		if (event.getTopic().startsWith("event_text_selection/"))
+		{
+			eventReceivedCaretEvents(event.getTopic());
+			return;
+		}
+		switch(event.getTopic())
+		{
+		case "event_text_relating_objects/loaded" :
+		{
+			break;
+		}
+		case "event_relating_objects/selected" :
+		{
+			eventReceivedRelatingObjectsLoadedEvents(event.getProperty("org.eclipse.e4.data"));
+			break;
+		}
+		}
+		
 
 	}
+	@Inject
+	@Optional
+	void eventReceivedRelatingObjectsLoadedEvents(
+			@EventTopic("event_relating_objects/*") Object event) {
 
+		if (event != null && event instanceof List) {
+			List<ModelAnnotation> annotations = new Vector<ModelAnnotation>(((List)event).size());
+			for (Object o : (List)event)
+			{
+				if (o instanceof BTSObject)
+				{
+					ModelAnnotation a = relatingObjectsAnnotationMap.get(o);
+					if (a != null)
+					{
+						annotations.add(a);
+					}
+				}
+			}
+			if (!annotations.isEmpty())
+			{
+				processSelection(annotations, false);
+			}
+		}
+	}
 }

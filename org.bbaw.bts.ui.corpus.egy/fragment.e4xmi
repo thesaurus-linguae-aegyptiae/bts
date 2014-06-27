@@ -24,10 +24,10 @@
       </menus>
       <menus xmi:id="_0qdU0P1BEeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.menu.0">
         <tags>ViewMenu</tags>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_1oLhUP1BEeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.1" label="Add Annotatino" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_ogEtgP0_EeOsAKche49RIg"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1oLhUP1BEeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.1" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_ogEtgP0_EeOsAKche49RIg"/>
       </menus>
       <toolbar xmi:id="_JTo5IFw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_aQhekP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.egy.texteditor.handledtoolitem.addAnnotation" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_aQhekP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.egy.texteditor.handledtoolitem.addAnnotation" label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" tooltip="Add Annotation">
           <command href="../org.bbaw.bts.ui.corpus/fragment.e4xmi#_iWpp8JV9EeOpr8TW-P04BA"/>
         </children>
       </toolbar>

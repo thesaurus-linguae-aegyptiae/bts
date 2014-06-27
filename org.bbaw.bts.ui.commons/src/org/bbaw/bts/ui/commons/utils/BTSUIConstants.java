@@ -76,5 +76,6 @@ public class BTSUIConstants {
 	public static final String CSS_UNSELECTED_CLASS_NAME = "unselected";
 	public static final String CSS_SELECTED_CLASS_NAME = "selected";
 	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
+	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";;
 
 }

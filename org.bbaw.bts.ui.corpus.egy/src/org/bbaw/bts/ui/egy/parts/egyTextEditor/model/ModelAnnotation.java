@@ -10,7 +10,6 @@ public abstract class ModelAnnotation extends XtextAnnotation {
 
 	private Object modelObject;
 	protected String cachedType;
-	protected String type;
 	
 	public ModelAnnotation(String type, boolean isPersistent,
 			IXtextDocument document, Issue issue, boolean isQuickfixable,
@@ -20,10 +19,6 @@ public abstract class ModelAnnotation extends XtextAnnotation {
 
 	}
 
-
-	public void setType(String type) {
-		this.type = type;
-	}
 	public ModelAnnotation(IXtextDocument document, Issue issue,
 			Object modelObject) {
 		super(TYPE, false, document, issue, false);

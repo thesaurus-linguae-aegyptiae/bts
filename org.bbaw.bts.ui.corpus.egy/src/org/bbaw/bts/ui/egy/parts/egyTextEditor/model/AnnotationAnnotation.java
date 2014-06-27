@@ -36,7 +36,7 @@ public class AnnotationAnnotation extends ModelAnnotation {
 	public String getType() {
 		if (super.getType() == null)
 		{
-			return TYPE_RUBRUM;
+			return TYPE;
 		}
 		return super.getType();
 	}

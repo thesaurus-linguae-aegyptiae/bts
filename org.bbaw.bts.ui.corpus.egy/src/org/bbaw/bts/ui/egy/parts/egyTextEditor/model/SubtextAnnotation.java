@@ -45,7 +45,7 @@ public class SubtextAnnotation extends ModelAnnotation {
 	public void setHighlighted(boolean highlighted) {
 		if (highlighted)
 		{
-			cachedType = this.type;
+			cachedType = getType();
 			setType(TYPE_HIGHLIGHTED);
 		}
 		else
