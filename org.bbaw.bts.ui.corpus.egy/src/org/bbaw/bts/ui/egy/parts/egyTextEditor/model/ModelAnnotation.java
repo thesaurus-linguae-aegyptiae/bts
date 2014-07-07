@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.egy.parts.egyTextEditor.model;
 
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
@@ -10,6 +11,8 @@ public abstract class ModelAnnotation extends XtextAnnotation {
 
 	private Object modelObject;
 	protected String cachedType;
+	
+	private BTSInterTextReference interTextReference;
 	
 	public ModelAnnotation(String type, boolean isPersistent,
 			IXtextDocument document, Issue issue, boolean isQuickfixable,
@@ -38,6 +41,14 @@ public abstract class ModelAnnotation extends XtextAnnotation {
 
 	public void setModelObject(Object modelObject) {
 		this.modelObject = modelObject;
+	}
+
+	public BTSInterTextReference getInterTextReference() {
+		return interTextReference;
+	}
+
+	public void setInterTextReference(BTSInterTextReference interTextReference) {
+		this.interTextReference = interTextReference;
 	}
 
 	public abstract void setHighlighted(boolean highlighted);

@@ -4,5 +4,5 @@
       <service>
       <provide interface="org.bbaw.bts.ui.resources.BTSResourceProvider"/>
    </service>
-   <properties entry="OSGI-INF/resources.properties"/>
+   <properties entry="OSGI-INF/bts-resources.properties"/>
 </scr:component>

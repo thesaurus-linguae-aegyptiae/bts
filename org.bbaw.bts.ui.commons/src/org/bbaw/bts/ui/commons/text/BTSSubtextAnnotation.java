@@ -1,6 +1,7 @@
 package org.bbaw.bts.ui.commons.text;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSText;
 
 public class BTSSubtextAnnotation extends BTSModelAnnotation {
@@ -9,8 +10,8 @@ public class BTSSubtextAnnotation extends BTSModelAnnotation {
 
 	private BTSText subtext;
 
-	public BTSSubtextAnnotation(BTSIdentifiableItem model, BTSText subtext) {
-		super(model);
+	public BTSSubtextAnnotation(BTSIdentifiableItem model, BTSText subtext, BTSInterTextReference interTextReference) {
+		super(model, interTextReference);
 		this.setSubtext(subtext);
 	}
 

@@ -304,7 +304,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	@Override
 	public BTSText createNewText(BTSCorpusObject parentObject)
 	{
-		BTSText text = textService.createNew();
+		BTSText text = textService.createNewRelationPartOf(parentObject);
 		return text;
 	}
 

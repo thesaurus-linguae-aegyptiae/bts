@@ -375,4 +375,10 @@ public interface BTSResourceProvider extends IResourceProviderService {
 
 	public static final String IMG_OVR_CONFLICTS = "IMG_OVR_CONFLICTS";
 
+	
+	public static final String IMG_RELATION = "IMG_RELATION";
+	public static final String IMG_RELATION_ADD = "IMG_RELATION_ADD";
+	public static final String IMG_RELATION_EDIT = "IMG_RELATION_EDIT";
+	public static final String IMG_RELATION_DELETE = "IMG_RELATION_DELETE";
+
 }

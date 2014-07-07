@@ -227,7 +227,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				// annotation
 				BTSAnnotation anno = (BTSAnnotation) reference.eContainer().eContainer();
-				BTSAnnotationAnnotation aa = new BTSAnnotationAnnotation(item, anno);
+				BTSAnnotationAnnotation aa = new BTSAnnotationAnnotation(item, anno, reference);
 				model.addAnnotation(aa, pos);
 
 			}
@@ -235,14 +235,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				// subtext
 				BTSText text = (BTSText) reference.eContainer().eContainer();
-				BTSSubtextAnnotation sa = new BTSSubtextAnnotation(item, text);
+				BTSSubtextAnnotation sa = new BTSSubtextAnnotation(item, text, reference);
 				model.addAnnotation(sa, pos);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
 				// comment
 				BTSComment comment = (BTSComment) reference.eContainer().eContainer();
-				BTSCommentAnnotation ca = new BTSCommentAnnotation(item, comment);
+				BTSCommentAnnotation ca = new BTSCommentAnnotation(item, comment, reference);
 				model.addAnnotation(ca, pos);
 			}
 		}
@@ -369,7 +369,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			annotation = new BTSLemmaAnnotation(word);
 		} else {
 			annotation = new BTSModelAnnotation(
-(BTSIdentifiableItem) word);
+					(BTSIdentifiableItem) word);
 		}
 		model.addAnnotation(annotation, position);
 

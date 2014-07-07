@@ -187,7 +187,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			otherLocked = true;
 		}
 		hasLock = otherLocked;
-		evaluateSelectionPermissionsAndExpressions();
+		evaluateSelectionPermissionsAndExpressions(internalSelection);
 		
 	}
 
@@ -196,15 +196,15 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		
 	}
 
-	private void evaluateSelectionPermissionsAndExpressions() {
-		evaluateUserContextRole();
+	private void evaluateSelectionPermissionsAndExpressions(Object internalSelection) {
+		evaluateUserContextRole(internalSelection);
 
-		evaluateMayAdd();
-		evaluateMayDelete();
-		evaluateMayEdit();
-		evaluateMayTranscribe();
-		evaluateMayAnnotate();
-		evaluateMayComment();
+		evaluateMayAdd(internalSelection);
+		evaluateMayDelete(internalSelection);
+		evaluateMayEdit(internalSelection);
+		evaluateMayTranscribe(internalSelection);
+		evaluateMayAnnotate(internalSelection);
+		evaluateMayComment(internalSelection);
 		
 
 	}
@@ -244,12 +244,12 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		return may;
 	}
 
-	private boolean evaluateMayTranscribe() {
+	private boolean evaluateMayTranscribe(Object internalSelection) {
 		//FIXME evaluate may transcribe
 		return false;
 	}
 
-	private void evaluateUserContextRole() {
+	private void evaluateUserContextRole(Object internalSelection) {
 		userContextRole = BTSCoreConstants.USER_ROLE_GUESTS;
 		if (authenticatedUser == null || mainProject == null) {
 
@@ -381,28 +381,24 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	}
 
-	private boolean evaluateMayComment() {
+	private boolean evaluateMayComment(Object internalSelection) {
 		return false;
 		//FIXME evaluate may comment
 	}
 
-	private boolean evaluateMayAnnotate() {
+	private boolean evaluateMayAnnotate(Object internalSelection) {
 		return false;
 		//FIXME evaluate may annotate
 
 	}
 
-	private boolean evaluateMayEdit() {
-		boolean may = false;
-		if (otherLocked || authenticatedUser == null || selection == null
-				|| !(selection instanceof BTSDBBaseObject)) {
-			may = false;
-		} else {
-			if (userRoleMayEdit()
-					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) selection).getUpdaters())) {
-				may = true;
-			}
+	private boolean evaluateMayEdit(Object internalSelection) {
+		boolean may = !otherLocked;
+		if (may)
+		{
+			may = evaluateMayEditInteral(internalSelection);
 		}
+
 		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT,
 				new Boolean(may));
 		if (!may)
@@ -414,6 +410,25 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	}
 
+	private boolean evaluateMayEditInteral(Object internalSelection) {
+		if (authenticatedUser == null || internalSelection == null
+				|| !(internalSelection instanceof BTSDBBaseObject)) {
+			return false;
+		} else {
+			if (userRoleMayEdit()
+					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) internalSelection).getUpdaters())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean authenticatedUserMayEditObeject(BTSObject object) {
+
+		//FIXME check if object is locked
+		return evaluateMayEditInteral(object);
+	}
 	private boolean userRoleMayEdit() {
 		return (userContextRole != null && (userContextRole
 				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || userContextRole
@@ -422,14 +437,14 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	
 
-	private boolean evaluateMayDelete() {
+	private boolean evaluateMayDelete(Object internalSelection) {
 		boolean may = false;
-		if (otherLocked || authenticatedUser == null || selection == null
-				|| !(selection instanceof BTSDBBaseObject)) {
+		if (otherLocked || authenticatedUser == null || internalSelection == null
+				|| !(internalSelection instanceof BTSDBBaseObject)) {
 			may = false;
 		} else {
 			if (userRoleMayEdit()
-					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) selection).getUpdaters())) {
+					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) internalSelection).getUpdaters())) {
 				may = true;
 			}
 		}
@@ -439,7 +454,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	}
 
-	private boolean evaluateMayAdd() {
+	private boolean evaluateMayAdd(Object internalSelection) {
 		return false;
 		//FIXME evaluate may add
 
@@ -455,7 +470,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			@Named(BTSCoreConstants.MAIN_PROJECT) BTSProject mainProject) {
 		if (this.mainProject != null && !this.mainProject.equals(mainProject)) {
 			this.mainProject = mainProject;
-			evaluateSelectionPermissionsAndExpressions();
+			evaluateSelectionPermissionsAndExpressions(selection);
 		}
 	}
 
@@ -470,7 +485,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (authenticatedUser != null
 				&& !authenticatedUser.equals(this.authenticatedUser)) {
 			this.authenticatedUser = authenticatedUser;
-			evaluateSelectionPermissionsAndExpressions();
+			evaluateSelectionPermissionsAndExpressions(selection);
 			evaluateUserPermissionsAndExpressions();
 		}
 
@@ -501,7 +516,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 				workbenchContext.modify(
 						BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT,
 						dbCollectionContext);
-				evaluateSelectionPermissionsAndExpressions();
+				evaluateSelectionPermissionsAndExpressions(selection);
 			}
 		}
 
@@ -523,7 +538,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			if (selection != null
 					&& selection.equals(((DBLease) lease).getObject())
 					&& !hasLock) {
-				evaluateSelectionPermissionsAndExpressions();
+				evaluateSelectionPermissionsAndExpressions(selection);
 				hasLock = true;
 			}
 		} else {
@@ -532,7 +547,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 					&& selection.equals(((DBLease) lease).getObject())
 					&& hasLock) {
 				otherLocked = false;
-				evaluateSelectionPermissionsAndExpressions();
+				evaluateSelectionPermissionsAndExpressions(selection);
 				hasLock = false;
 			}
 		}
@@ -547,5 +562,6 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	public boolean authenticatedUserMaySyncDBColl(String dbCollectionName) {
 		return evaluationService.authenticatedUserMaySyncDBColl(dbCollectionName);
 	}
+
 
 }

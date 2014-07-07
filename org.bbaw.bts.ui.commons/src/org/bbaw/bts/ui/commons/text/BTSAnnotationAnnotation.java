@@ -2,6 +2,7 @@ package org.bbaw.bts.ui.commons.text;
 
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 
 public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 
@@ -10,8 +11,8 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 	private BTSAnnotation annotation;
 
 	public BTSAnnotationAnnotation(BTSIdentifiableItem model,
-			BTSAnnotation annotation) {
-		super(model);
+			BTSAnnotation annotation, BTSInterTextReference interTextReference) {
+		super(model, interTextReference);
 		this.annotation = annotation;
 	}
 
