@@ -102,6 +102,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	
 	@Inject
 	private CorpusObjectService corpusObjectService;
+	private Map<BTSInterTextReference, AnnotationCache> annotationRangeMap;
 
 	@Override
 	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects)
@@ -110,6 +111,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		{
 			return;
 		}
+		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
 		HashMap<String, List<BTSInterTextReference>> relatingObjectsMap = new HashMap<String,  List<BTSInterTextReference>>();
 		if (relatingObjects != null && ! relatingObjects.isEmpty())
 		{
@@ -171,6 +173,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						}
 						parts.add(part);
 					}
+					if (part.getEndId() != null && !part.getEndId().equals(part.getBeginId()))
+					{
+						List<BTSInterTextReference> parts = relatingObjectsMap.get(part.getEndId());
+						if (parts == null)
+						{
+							parts = new Vector<BTSInterTextReference>(4);
+							relatingObjectsMap.put(part.getEndId(), parts);
+						}
+						parts.add(part);
+					}
 				}
 			}
 		}
@@ -213,39 +225,64 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		// FIXME ende einer annotation berechnen!!!!!!!!
 		for (BTSInterTextReference ref : list)
 		{
-			createAnnotation(item, model, pos, ref);
+			if (ref.getBeginId() == null || ref.getEndId() == null || ref.getBeginId().equals(ref.getEndId()))
+			{
+				//1) ref referenziert nur ein Item
+				BTSModelAnnotation modelAnnotation = createAnnotation(item, model, pos, ref);
+				model.addAnnotation(modelAnnotation, pos);
+
+			}
+			else if (ref.getBeginId().equals(item.get_id())) {
+			// 2) ref ist start
+			// annotation erzeugen
+				BTSModelAnnotation modelAnnotation = createAnnotation(item, model, pos, ref);
+				AnnotationCache cache = new AnnotationCache(modelAnnotation, pos.getOffset());
+				annotationRangeMap.put(ref, cache);
+			// annotation und start position cachen
+			
+			}
+			else if (ref.getEndId().equals(item.get_id())){
+			// 3) ref ist end
+			// annotation aus cache holen - wie?
+				AnnotationCache cache = annotationRangeMap.get(ref);
+				if (cache == null) continue;
+				Position pos2 = new Position(cache.getStart());
+				pos2.setLength((pos.offset - pos2.getOffset()) + pos.getLength());
+			// end position
+			// position und anno zu modell adden
+				model.addAnnotation(cache.getAnnotation(), pos2);
+				annotationRangeMap.remove(ref);
+			}
 		}
 
 		
 	}
 
-	private void createAnnotation(BTSIdentifiableItem item, IAnnotationModel model,
+	private BTSModelAnnotation createAnnotation(BTSIdentifiableItem item, IAnnotationModel model,
 			Position pos, BTSInterTextReference reference) {
+		BTSModelAnnotation modelAnnotation = null;
 		if (reference.eContainer() != null && reference.eContainer() instanceof BTSRelation && reference.eContainer().eContainer() != null)
 		{
 			if (reference.eContainer().eContainer() instanceof BTSAnnotation)
 			{
 				// annotation
 				BTSAnnotation anno = (BTSAnnotation) reference.eContainer().eContainer();
-				BTSAnnotationAnnotation aa = new BTSAnnotationAnnotation(item, anno, reference);
-				model.addAnnotation(aa, pos);
-
+				modelAnnotation = new BTSAnnotationAnnotation(item, anno, reference);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSText)
 			{
 				// subtext
 				BTSText text = (BTSText) reference.eContainer().eContainer();
-				BTSSubtextAnnotation sa = new BTSSubtextAnnotation(item, text, reference);
-				model.addAnnotation(sa, pos);
+				modelAnnotation = new BTSSubtextAnnotation(item, text, reference);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
 				// comment
 				BTSComment comment = (BTSComment) reference.eContainer().eContainer();
-				BTSCommentAnnotation ca = new BTSCommentAnnotation(item, comment, reference);
-				model.addAnnotation(ca, pos);
+				modelAnnotation = new BTSCommentAnnotation(item, comment, reference);
 			}
 		}
+		return modelAnnotation;
 		
 	}
 
@@ -915,5 +952,45 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		List<BTSObject> children = corpusObjectService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
+	}
+	
+	private class AnnotationCache {
+		
+		public AnnotationCache(BTSModelAnnotation modelAnnotation, int start) {
+			this.setAnnotation(modelAnnotation);
+			this.setStart(start);
+		}
+
+		public BTSModelAnnotation getAnnotation() {
+			return annotation;
+		}
+
+		public void setAnnotation(BTSModelAnnotation annotation) {
+			this.annotation = annotation;
+		}
+
+		public int getStart() {
+			return start;
+		}
+
+		public void setStart(int start) {
+			this.start = start;
+		}
+
+		public int getEnd() {
+			return end;
+		}
+
+		public void setEnd(int end) {
+			this.end = end;
+		}
+
+		private BTSModelAnnotation annotation;
+		
+		private int start;
+		
+		private int end;
+		
+		
 	}
 }

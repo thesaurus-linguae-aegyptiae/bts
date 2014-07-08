@@ -13,6 +13,7 @@ Import-Package: org.bbaw.bts.btsmodel,
  org.eclipse.emf.ecore,
  org.eclipse.emf.edit.domain,
  org.eclipse.jface.text,
- org.eclipse.jface.viewers
+ org.eclipse.jface.viewers,
+ org.eclipse.swt.widgets
 Require-Bundle: org.eclipse.text;bundle-version="3.5.300",
  org.eclipse.jface.text;bundle-version="3.8.101"

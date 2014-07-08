@@ -37,6 +37,7 @@ import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsE
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
+import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.text.BTSCommentAnnotation;
@@ -256,6 +257,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private Logger logger;
 	private List<ModelAnnotation> highlightedAnnotations = new Vector<ModelAnnotation>(4);
 	private Map<EObject, List<ModelAnnotation>> relatingObjectsAnnotationMap;
+	protected String queryId;
 
 
 	/**
@@ -660,7 +662,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
-		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
+//		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
 		btsEvent.data = text;
 		List<ModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
 		btsEvent.getTextAnnotations().addAll(annotations);
@@ -756,7 +758,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			if (a instanceof ModelAnnotation) {
 				Position pos = embeddedEditor.getViewer().getAnnotationModel()
 						.getPosition(a);
-				System.out.println("pos " + pos.getOffset() + " " +  pos.getOffset() + pos.getLength());
+//				System.out.println("pos " + pos.getOffset() + " " +  pos.getOffset() + pos.getLength());
 				if ((pos.getOffset() <= start
 						&& start <= pos.getOffset() + pos.getLength()) || (pos.getOffset() >= start && pos.getOffset() <= end)) {
 					annotations.add((ModelAnnotation) a);
@@ -1210,10 +1212,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			this.text = (BTSText) o;
 			Job job = new Job("load children")
 			{
+
 				@Override
 				protected IStatus run(IProgressMonitor monitor)
 				{
 					relatingObjects = textEditorController.getRelatingObjects(text);
+					queryId = "relations.objectId-" + text.get_id();
 					return Status.OK_STATUS;
 				}
 			};
@@ -1437,5 +1441,71 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				processSelection(annotations, false, null);
 			}
 		}
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification notification)
+	{
+		logger.info("EgyTextEditorPart eventReceivedUpdates. object: " + notification);
+		if (notification.getQueryIds() != null){
+			for (String id : notification.getQueryIds())
+			{
+				if (id.equals(queryId))
+				{
+					processModelUpdate(notification, id);
+				}
+			}
+		}
+		
+		
+	}
+
+	private void processModelUpdate(BTSModelUpdateNotification notification,
+			String id) {
+		if (!relatingObjects.contains(notification.getObject()))
+		{
+			relatingObjects.add((BTSObject) notification.getObject());
+		}
+		else
+		{
+		}
+		switch (tabFolder.getSelectionIndex())
+		{
+			case 0:
+			{
+				addAnnotationToTranscription(notification);
+				break;
+			}
+			case 1:
+			{
+//				addAnnotationToSignText(notification);
+				break;
+			}
+			case 2:
+			{
+//				addAnnotationToJSesh(notification);
+				break;
+			}
+		}
+		
+	}
+
+	private void addAnnotationToTranscription(
+			BTSModelUpdateNotification notification) {
+		List<ModelAnnotation> mas = relatingObjectsAnnotationMap.get(notification.getObject());
+		if (mas == null)
+		{
+			// relObject ist neu
+			// erzeuge neue intertextreferences und modelAnnotations
+		}
+		else
+		{
+			// vergleiche relations.parts und mas
+			// update alle intertextreferences
+			// bzw. erzeuge neue
+		}
+		
+//		7
 	}
 }
