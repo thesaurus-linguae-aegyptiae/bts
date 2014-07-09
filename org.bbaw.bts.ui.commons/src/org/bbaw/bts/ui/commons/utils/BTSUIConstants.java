@@ -53,7 +53,10 @@ public class BTSUIConstants {
 
 	public static final Color COLOR_LEMMA = _resources.createColor(new RGB(228,
 			255, 255));
-
+	public static final Color COLOR_RUBRUM= _resources
+			.createColor(new RGB(255, 106, 106));
+	
+	
 	public static final int PASSPORT_COLUMN_NUMBER = 6;
 	public static final String PASSPORT_PARENT_ENTRY_GROUP = "passport.parent.entry.group";
 	public static final String PASSPORT_ENTRIES = "passport.entries";

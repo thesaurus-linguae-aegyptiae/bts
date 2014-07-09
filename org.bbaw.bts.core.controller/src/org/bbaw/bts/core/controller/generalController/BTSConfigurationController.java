@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 
 public interface BTSConfigurationController
@@ -28,8 +29,6 @@ public interface BTSConfigurationController
 	// List<BTSConfigItem> getObjectTypes(BTSCorpusObject corpusObject);
 
 	BTSConfigItem getObjectTypesConfigItem();
-
-	String findObjectClass(BTSCorpusObject corpusObject);
 
 	String[] getObjectSubtypes(BTSCorpusObject corpusObject);
 
@@ -64,21 +63,23 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 	BTSConfigItem getRelationsConfigItem();
 
 	BTSConfigItem getRelationPathConfigItemProcessedClones(
-			BTSConfigItem itemConfig2, BTSCorpusObject corpusObject);
+			BTSConfigItem itemConfig2, BTSObject object);
 
 	List<String> processTreePathToList(
 			BTSObjectTypeTreeNode treePath);
 
-	boolean objectMayReferenceToCorpus(BTSCorpusObject selectionObject,
+	boolean objectMayReferenceToCorpus(BTSObject selectionObject,
 			BTSConfigItem relationConfig);
 
-	boolean objectMayReferenceToThs(BTSCorpusObject selectionObject,
+	boolean objectMayReferenceToThs(BTSObject selectionObject,
 			BTSConfigItem relationConfig);
 
-	boolean objectMayReferenceToWList(BTSCorpusObject selectionObject,
+	boolean objectMayReferenceToWList(BTSObject selectionObject,
 			BTSConfigItem relationConfig);
 	
-	Set<String> getReferenceTypesSet(BTSCorpusObject object,
+	Set<String> getReferenceTypesSet(BTSObject object,
 			BTSConfigItem relationConfig);
+
+	String findObjectClass(BTSObject object);
 
 }

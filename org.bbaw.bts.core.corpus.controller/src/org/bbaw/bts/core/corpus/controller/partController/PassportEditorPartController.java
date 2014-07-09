@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 
 public interface PassportEditorPartController
@@ -13,7 +14,7 @@ public interface PassportEditorPartController
 			String text);
 
 	List<BTSCorpusObject> getObjectProposalsFor(BTSConfigItem configItem,
-			String text, BTSCorpusObject object);
+			String text, BTSObject object);
 
 	boolean save(BTSCorpusObject object);
 

@@ -7,6 +7,10 @@ package org.bbaw.bts.core.corpus.controller.impl.partController;
 //import grammaticalBase.model.text.WordAnalysis;
 //import grammaticalBase.model.text.WordOccurrence;
 
+import java.awt.image.BufferedImage;
+import java.awt.image.DirectColorModel;
+import java.awt.image.IndexColorModel;
+import java.awt.image.WritableRaster;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,10 +24,16 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import jsesh.mdc.MDCSyntaxError;
+import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
+import jsesh.mdcDisplayer.preferences.DrawingSpecification;
+import jsesh.mdcDisplayer.preferences.DrawingSpecificationsImplementation;
+
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAmbivalenceItem;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
@@ -41,6 +51,7 @@ import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.BTSTextService;
 import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.core.services.GenericObjectService;
@@ -68,6 +79,11 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.PaletteData;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSTextEditorControllerImpl implements BTSTextEditorController
@@ -90,6 +106,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String MARKER_INTERFIX = ": ";
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
+	
+	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
+	
 	@Inject
 	private BTSTextService textService;
 	
@@ -103,6 +122,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Inject
 	private CorpusObjectService corpusObjectService;
 	private Map<BTSInterTextReference, AnnotationCache> annotationRangeMap;
+	
+	@Inject
+	private BTSCommentService commentService;
 
 	@Override
 	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects)
@@ -268,6 +290,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				// annotation
 				BTSAnnotation anno = (BTSAnnotation) reference.eContainer().eContainer();
 				modelAnnotation = new BTSAnnotationAnnotation(item, anno, reference);
+				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
+				{
+					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
+				}
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSText)
 			{
@@ -862,7 +888,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						} else {
 							mdc = (String) o;
 						}
-						result += mdc;
+						if (result.length() == 0 || result.endsWith("-") || mdc.startsWith("-") || mdc.startsWith(":"))
+						{
+							result += mdc;
+						}
+						else
+						{
+							result += "-" + mdc;
+						}
 						// if (!"".equals(mdc) && !mdc.endsWith(":")
 						// && !mdc.endsWith("*") && !mdc.endsWith("<")
 						// && !mdc.endsWith("[")) {
@@ -871,7 +904,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					}
 
 				}
-				result += "O-";
+				result += "-O-";
 			}
 		}
 		return result;
@@ -949,8 +982,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				text.get_id()));
 		query.setQueryId("relations.objectId-" + text.get_id());
 		System.out.println(query.getQueryId());
-		List<BTSObject> children = corpusObjectService.query(query,
+		List<BTSObject> children = new Vector<BTSObject>();
+		List<BTSCorpusObject> obs = corpusObjectService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE);
+		for (BTSCorpusObject o : obs)
+		{
+			children.add(o);
+		}
+		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true));
 		return children;
 	}
 	
@@ -992,5 +1031,89 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		private int end;
 		
 		
+	}
+	
+	@Override
+	public BTSText createNewText(BTSCorpusObject parentObject)
+	{
+		BTSText text = textService.createNewRelationPartOf(parentObject);
+		return text;
+	}
+
+	@Override
+	public Image transformToSWT(BufferedImage bufferedImage)
+	{
+
+		if (bufferedImage.getColorModel() instanceof DirectColorModel)
+		{
+			DirectColorModel colorModel = (DirectColorModel) bufferedImage.getColorModel();
+			PaletteData palette = new PaletteData(colorModel.getRedMask(), colorModel.getGreenMask(),
+					colorModel.getBlueMask());
+			ImageData data = new ImageData(bufferedImage.getWidth(), bufferedImage.getHeight(),
+					colorModel.getPixelSize(), palette);
+			for (int y = 0; y < data.height; y++)
+			{
+				for (int x = 0; x < data.width; x++)
+				{
+					int rgb = bufferedImage.getRGB(x, y);
+					int pixel = palette.getPixel(new RGB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF));
+					data.setPixel(x, y, pixel);
+					if (colorModel.hasAlpha())
+					{
+						data.setAlpha(x, y, (rgb >> 24) & 0xFF);
+					}
+				}
+			}
+			return new Image(Display.getCurrent(), data);
+		} else if (bufferedImage.getColorModel() instanceof IndexColorModel)
+		{
+			IndexColorModel colorModel = (IndexColorModel) bufferedImage.getColorModel();
+			int size = colorModel.getMapSize();
+			byte[] reds = new byte[size];
+			byte[] greens = new byte[size];
+			byte[] blues = new byte[size];
+			colorModel.getReds(reds);
+			colorModel.getGreens(greens);
+			colorModel.getBlues(blues);
+			RGB[] rgbs = new RGB[size];
+			for (int i = 0; i < rgbs.length; i++)
+			{
+				rgbs[i] = new RGB(reds[i] & 0xFF, greens[i] & 0xFF, blues[i] & 0xFF);
+			}
+			PaletteData palette = new PaletteData(rgbs);
+			ImageData data = new ImageData(bufferedImage.getWidth(), bufferedImage.getHeight(),
+					colorModel.getPixelSize(), palette);
+			data.transparentPixel = colorModel.getTransparentPixel();
+			WritableRaster raster = bufferedImage.getRaster();
+			int[] pixelArray = new int[1];
+			for (int y = 0; y < data.height; y++)
+			{
+				for (int x = 0; x < data.width; x++)
+				{
+					raster.getPixel(x, y, pixelArray);
+					data.setPixel(x, y, pixelArray[0]);
+				}
+			}
+			return new Image(Display.getCurrent(), data);
+		}
+		return null;
+
+	}
+	public BufferedImage getImageData(String topItemList, int height, int width) throws MDCSyntaxError
+	{
+		BufferedImage result;
+		{
+			MDCDrawingFacade facade = new MDCDrawingFacade();
+			facade.setDrawingSpecifications(drawingSpecifications);
+			facade.setMaxSize(200, 45);
+			facade.setCadratHeight(30);
+			result = facade.createImage(topItemList);
+		}
+		return result;
+	}
+	
+	public BufferedImage getImageData(String topItemList) throws MDCSyntaxError
+	{
+		return getImageData(topItemList, 200, 45);
 	}
 }

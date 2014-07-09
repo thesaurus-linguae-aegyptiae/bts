@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -24,15 +25,15 @@ public class ObjectSelectionProposalProvider implements
 	private BTSConfig configItem;
 	private List<BTSCorpusObject> list;
 	private Comparator<IContentProposal> comparator;
-	private BTSCorpusObject corpusObject;
+	private BTSObject object;
 
 	public ObjectSelectionProposalProvider(
 			PassportEditorPartController passportEditorController,
 			BTSConfig configItem,
-			BTSCorpusObject corpusObject) {
+			BTSObject object) {
 		this.passportController = passportEditorController;
 		this.setConfigItem(configItem);
-		this.corpusObject = corpusObject;
+		this.object = object;
 	}
 
 	@Override
@@ -81,7 +82,7 @@ public class ObjectSelectionProposalProvider implements
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				list = passportController.getObjectProposalsFor(
-						(BTSConfigItem) configItem, "", corpusObject);
+						(BTSConfigItem) configItem, "", object);
 
 				return Status.OK_STATUS;
 			}

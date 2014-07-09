@@ -19,10 +19,15 @@ import jsesh.editor.JMDCEditor;
 
 import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSGraphic;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSReferencableItem;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSSenctence;
 import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
@@ -51,8 +56,10 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
+import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
+import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.TextModelHelper;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.AnnotationAnnotation;
@@ -236,7 +243,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private BTSSentenceItem selectedSentenceItem;
 
-	private Map<EObject, ModelAnnotation> modelAnnotationMap;
+	private Map<String, ModelAnnotation> modelAnnotationMap;
 
 	private StyleRange selectionRange;
 
@@ -550,9 +557,9 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		Document doc = new Document();
 		this.document = doc;
 
-		IAnnotationModel model = new AnnotationModel();
-		this.annotationModel = model;
-		textEditorController.transformToDocument(text, doc, model, localRelatingObjects);
+		AnnotationModel tempAnnotationModel = new AnnotationModel();
+//		this.annotationModel = model;
+		textEditorController.transformToDocument(text, doc, tempAnnotationModel, localRelatingObjects);
 
 		embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider)
 				.showAnnotations(BTSAnnotationAnnotation.TYPE,
@@ -568,41 +575,53 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		embeddedEditorModelAccess = embeddedEditor.createPartialEditor(
 "\r",
 				doc.get(), "\r", false);
-		IAnnotationModel am = embeddedEditor.getViewer().getAnnotationModel();
+		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
-		loadAnnotations2Editor(am, model);
+		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
 
 		configureEditorDrawingStrategies();
 		embeddedEditorParentComp.layout();
 		// embeddedEditor.getViewer().getControl().setFocus();
 
 		ruler = embeddedEditorFactory.getCpAnnotationRuler();
-		ruler.setModel(am);
+		ruler.setModel(annotationModel);
 		ruler.update();
 		ruler.relayout();
 
 		oruler = embeddedEditorFactory.getOverViewRuler();
-		oruler.addAnnotationType(BTSAnnotationAnnotation.TYPE);
-		oruler.setAnnotationTypeLayer(BTSAnnotationAnnotation.TYPE, 3);
-		oruler.setAnnotationTypeColor(BTSAnnotationAnnotation.TYPE,
+		oruler.addAnnotationType(AnnotationAnnotation.TYPE);
+		oruler.setAnnotationTypeLayer(AnnotationAnnotation.TYPE, 3);
+		oruler.setAnnotationTypeColor(AnnotationAnnotation.TYPE,
 				BTSUIConstants.COLOR_ANNOTATTION);
+		oruler.addAnnotationType(AnnotationAnnotation.TYPE_HIGHLIGHTED);
+		oruler.setAnnotationTypeLayer(AnnotationAnnotation.TYPE_HIGHLIGHTED, 5);
+		oruler.setAnnotationTypeColor(AnnotationAnnotation.TYPE_HIGHLIGHTED,
+				BTSUIConstants.COLOR_ANNOTATTION);
+		oruler.addAnnotationType(AnnotationAnnotation.TYPE_RUBRUM);
+		oruler.setAnnotationTypeLayer(AnnotationAnnotation.TYPE_RUBRUM, 3);
+		oruler.setAnnotationTypeColor(AnnotationAnnotation.TYPE_RUBRUM,
+				BTSUIConstants.COLOR_RUBRUM);
 
-		oruler.addAnnotationType(BTSCommentAnnotation.TYPE);
-		oruler.setAnnotationTypeLayer(BTSCommentAnnotation.TYPE, 2);
-		oruler.setAnnotationTypeColor(BTSCommentAnnotation.TYPE,
+		oruler.addAnnotationType(CommentAnnotation.TYPE);
+		oruler.setAnnotationTypeLayer(CommentAnnotation.TYPE, 2);
+		oruler.setAnnotationTypeColor(CommentAnnotation.TYPE,
+				BTSUIConstants.COLOR_COMMENT);
+		oruler.addAnnotationType(CommentAnnotation.TYPE_HIGHLIGHTED);
+		oruler.setAnnotationTypeLayer(CommentAnnotation.TYPE_HIGHLIGHTED, 4);
+		oruler.setAnnotationTypeColor(CommentAnnotation.TYPE_HIGHLIGHTED,
 				BTSUIConstants.COLOR_COMMENT);
 
 		oruler.addAnnotationType("org.eclipse.xtext.ui.editor.error");
-		oruler.setAnnotationTypeLayer("org.eclipse.xtext.ui.editor.error", 10);
+		oruler.setAnnotationTypeLayer("org.eclipse.xtext.ui.editor.error", 30);
 		oruler.setAnnotationTypeColor("org.eclipse.xtext.ui.editor.error",
 				new Color(Display.getDefault(), new RGB(255, 0, 0)));
 
 		oruler.addAnnotationType("org.eclipse.xtext.ui.editor.warning");
-		oruler.setAnnotationTypeLayer("org.eclipse.xtext.ui.editor.warning", 1);
+		oruler.setAnnotationTypeLayer("org.eclipse.xtext.ui.editor.warning", 10);
 		oruler.setAnnotationTypeColor("org.eclipse.xtext.ui.editor.warning",
 				new Color(Display.getDefault(), new RGB(235, 235, 10)));
 
-		oruler.setModel(am);
+		oruler.setModel(annotationModel);
 		oruler.update();
 
 		embeddedEditorParentComp.layout();
@@ -632,7 +651,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		});
 		LineNumberRulerColumn lineNumberRulerColumn = new EgyLineNumberRulerColumn(
 				LINE_SPACE);
-		lineNumberRulerColumn.setModel(am);
+		lineNumberRulerColumn.setModel(annotationModel);
 		embeddedEditor.getViewer()
 				.addVerticalRulerColumn(lineNumberRulerColumn);
 		if (text != null) {
@@ -690,6 +709,18 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				{
 					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
 				}
+			} else if (ma instanceof CommentAnnotation) {
+				relatingObjectsAnnotations.add(ma);
+				if (btsEvent != null)
+				{
+					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
+				}
+			} else if (ma instanceof SubtextAnnotation) {
+				relatingObjectsAnnotations.add(ma);
+				if (btsEvent != null)
+				{
+					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
+				}
 			}
 			
 		}
@@ -707,7 +738,16 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			List<BTSObject> relSelObjects = new Vector<BTSObject>(annotations.size());
 			for (ModelAnnotation a : relatingObjectsAnnotations)
 			{
-				relSelObjects.add((BTSObject) ((AnnotationAnnotation) a).getAnnotation());
+				if (a instanceof AnnotationAnnotation)
+				{
+					relSelObjects.add((BTSObject) ((AnnotationAnnotation) a).getAnnotation());
+				} else if (a instanceof CommentAnnotation)
+				{
+					relSelObjects.add((BTSObject) ((CommentAnnotation) a).getComment());
+				}else if (a instanceof SubtextAnnotation)
+				{
+					relSelObjects.add((BTSObject) ((SubtextAnnotation) a).getSubtext());
+				}
 			}
 			if (btsEvent != null)
 			{
@@ -836,6 +876,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				BTSUIConstants.COLOR_COMMENT);
 		painter.addAnnotationType(CommentAnnotation.TYPE,
 				CommentAnnotation.TYPE);
+		
+		// comment highlighted
+		CommentHighlightedDrawingStrategy commenthighStrategy = new CommentHighlightedDrawingStrategy();
+		painter.addDrawingStrategy(CommentAnnotation.TYPE_HIGHLIGHTED, commenthighStrategy);
+		painter.setAnnotationTypeColor(CommentAnnotation.TYPE_HIGHLIGHTED,
+				BTSUIConstants.COLOR_COMMENT);
+		painter.addAnnotationType(CommentAnnotation.TYPE_HIGHLIGHTED,
+				CommentAnnotation.TYPE_HIGHLIGHTED);
 
 		// subtext
 		SubtextdrawingStrategy subtextStrategy = new SubtextdrawingStrategy();
@@ -844,6 +892,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				BTSUIConstants.COLOR_SUBTEXT);
 		painter.addAnnotationType(SubtextAnnotation.TYPE,
 				SubtextAnnotation.TYPE);
+		
+		// subtext
+		SubtextHighlightedDrawingStrategy subtexthighStrategy = new SubtextHighlightedDrawingStrategy();
+		painter.addDrawingStrategy(SubtextAnnotation.TYPE_HIGHLIGHTED, subtexthighStrategy);
+		painter.setAnnotationTypeColor(SubtextAnnotation.TYPE_HIGHLIGHTED,
+				BTSUIConstants.COLOR_SUBTEXT);
+		painter.addAnnotationType(SubtextAnnotation.TYPE_HIGHLIGHTED,
+				SubtextAnnotation.TYPE_HIGHLIGHTED);
 		
 		// Annotation
 		AnnotationDrawingStrategy annotationStrategy = new AnnotationDrawingStrategy();
@@ -865,10 +921,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		// Annotation
 		RubrumDrawingStrategy rubrumStrategy = new RubrumDrawingStrategy();
-		painter.addDrawingStrategy(AnnotationAnnotation.TYPE_RUBRUM,
+		painter.addTextStyleStrategy(AnnotationAnnotation.TYPE_RUBRUM,
 				rubrumStrategy);
 		painter.setAnnotationTypeColor(AnnotationAnnotation.TYPE_RUBRUM,
-				BTSUIConstants.COLOR_ANNOTATTION);
+				BTSUIConstants.COLOR_RUBRUM);
 		painter.addAnnotationType(AnnotationAnnotation.TYPE_RUBRUM,
 				AnnotationAnnotation.TYPE_RUBRUM);
 
@@ -885,91 +941,98 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		issue = new Issue.IssueImpl();
 		while (i.hasNext()) {
 			Object a = i.next();
-			if (a instanceof BTSLemmaAnnotation) {
-				if (((BTSLemmaAnnotation) a).getModel() instanceof BTSWord) {
-					LemmaAnnotation ta = new LemmaAnnotation(
-							embeddedEditor.getDocument(), issue,
-							((BTSLemmaAnnotation) a).getModel());
-					Position pos = model.getPosition((Annotation) a);
-					Position pos2 = new Position(pos.getOffset()
-							+ EDITOR_PREFIX_LENGTH, pos.getLength());
-					editorModel.addAnnotation((Annotation) ta, pos2);
-					modelAnnotationMap.put((EObject) ta.getModelObject(), ta);
-				}
-			} else if (a instanceof BTSAnnotationAnnotation) {
-				if (((BTSAnnotationAnnotation) a).getType().equals(
-						AnnotationAnnotation.TYPE_RUBRUM)) {
-					AnnotationAnnotation ta = new AnnotationAnnotation(
-							embeddedEditor.getDocument(),
-							((BTSAnnotationAnnotation) a).getType(), issue,
-							((BTSAnnotationAnnotation) a).getModel(),
-							((BTSAnnotationAnnotation) a).getAnnotation());
-					ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+			Position pos = model.getPosition((Annotation) a);
+			loadSingleAnnotation2Editor(editorModel, a, pos, issue);
+			
+		}
 
-					Position pos = model.getPosition((Annotation) a);
-					Position pos2 = new Position(pos.getOffset()
-							+ EDITOR_PREFIX_LENGTH, pos.getLength());
-					editorModel.addAnnotation((Annotation) ta, pos2);
-					addToRelatingObjectAnnotationMap((EObject) ta.getAnnotation(), ta);
-				}
-				AnnotationAnnotation ta = new AnnotationAnnotation(
+	}
+
+	private void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
+			Object a, Position pos, Issue issue) {
+		if (a instanceof BTSLemmaAnnotation) {
+			if (((BTSLemmaAnnotation) a).getModel() instanceof BTSWord) {
+				LemmaAnnotation ta = new LemmaAnnotation(
 						embeddedEditor.getDocument(), issue,
+						((BTSLemmaAnnotation) a).getModel());
+				
+				Position pos2 = new Position(pos.getOffset()
+						+ EDITOR_PREFIX_LENGTH, pos.getLength());
+				editorModel.addAnnotation((Annotation) ta, pos2);
+				modelAnnotationMap.put(((BTSIdentifiableItem) ta.getModelObject()).get_id(), ta);
+			}
+		} else if (a instanceof BTSAnnotationAnnotation) {
+			if (((BTSAnnotationAnnotation) a).getAnnotation() != null 
+					&& ((BTSAnnotationAnnotation) a).getAnnotation().getType() != null
+					&& ((BTSAnnotationAnnotation) a).getAnnotation().getType().equalsIgnoreCase("rubrum")) {
+				AnnotationAnnotation ta = new AnnotationAnnotation(
+						embeddedEditor.getDocument(),
+						AnnotationAnnotation.TYPE_RUBRUM, issue,
 						((BTSAnnotationAnnotation) a).getModel(),
 						((BTSAnnotationAnnotation) a).getAnnotation());
-				Position pos = model.getPosition((Annotation) a);
 				ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
 
+//				Position pos = model.getPosition((Annotation) a);
 				Position pos2 = new Position(pos.getOffset()
 						+ EDITOR_PREFIX_LENGTH, pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
 				addToRelatingObjectAnnotationMap((EObject) ta.getAnnotation(), ta);
-
-
-			} else if (a instanceof BTSCommentAnnotation) {
-				CommentAnnotation ta = new CommentAnnotation(
-						embeddedEditor.getDocument(), issue,
-						((BTSCommentAnnotation) a).getModel(),
-						((BTSCommentAnnotation) a).getComment());
-				ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
-
-
-				ta.setText("Comment Annotation --> here is a comment on this word.");
-				Position pos = model.getPosition((Annotation) a);
-				Position pos2 = new Position(pos.getOffset()
-						+ EDITOR_PREFIX_LENGTH, pos.getLength());
-				editorModel.addAnnotation((Annotation) ta, pos2);
-				addToRelatingObjectAnnotationMap((EObject) ta.getComment(), ta);
-
-
-			} else if (a instanceof BTSSubtextAnnotation) {
-				SubtextAnnotation ta = new SubtextAnnotation(
-						embeddedEditor.getDocument(), issue,
-						((BTSSubtextAnnotation) a).getModel(),
-						((BTSSubtextAnnotation) a).getSubtext());
-				ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
-
-
-				Position pos = model.getPosition((Annotation) a);
-				Position pos2 = new Position(pos.getOffset()
-						+ EDITOR_PREFIX_LENGTH, pos.getLength());
-				editorModel.addAnnotation((Annotation) ta, pos2);
-				addToRelatingObjectAnnotationMap((EObject) ta.getSubtext(), ta);
-
-
-			} else if (a instanceof BTSModelAnnotation) {
-				ModelAnnotation ta = new InvisibleAnnotation(
-						embeddedEditor.getDocument(), issue,
-						((BTSModelAnnotation) a).getModel());
-				ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
-
-
-				Position pos = model.getPosition((Annotation) a);
-				Position pos2 = new Position(pos.getOffset(), pos.getLength());
-				editorModel.addAnnotation((Annotation) ta, pos2);
-				modelAnnotationMap.put((EObject) ta.getModelObject(), ta);
 			}
-		}
+			AnnotationAnnotation ta = new AnnotationAnnotation(
+					embeddedEditor.getDocument(), issue,
+					((BTSAnnotationAnnotation) a).getModel(),
+					((BTSAnnotationAnnotation) a).getAnnotation());
+//			Position pos = model.getPosition((Annotation) a);
+			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
 
+			Position pos2 = new Position(pos.getOffset()
+					+ EDITOR_PREFIX_LENGTH, pos.getLength());
+			editorModel.addAnnotation((Annotation) ta, pos2);
+			addToRelatingObjectAnnotationMap((EObject) ta.getAnnotation(), ta);
+
+
+		} else if (a instanceof BTSCommentAnnotation) {
+			CommentAnnotation ta = new CommentAnnotation(
+					embeddedEditor.getDocument(), issue,
+					((BTSCommentAnnotation) a).getModel(),
+					((BTSCommentAnnotation) a).getComment());
+			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+
+
+			Position pos2 = new Position(pos.getOffset()
+					+ EDITOR_PREFIX_LENGTH, pos.getLength());
+			editorModel.addAnnotation((Annotation) ta, pos2);
+			addToRelatingObjectAnnotationMap((EObject) ta.getComment(), ta);
+
+
+		} else if (a instanceof BTSSubtextAnnotation) {
+			SubtextAnnotation ta = new SubtextAnnotation(
+					embeddedEditor.getDocument(), issue,
+					((BTSSubtextAnnotation) a).getModel(),
+					((BTSSubtextAnnotation) a).getSubtext());
+			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+
+
+//			Position pos = model.getPosition((Annotation) a);
+			Position pos2 = new Position(pos.getOffset()
+					+ EDITOR_PREFIX_LENGTH, pos.getLength());
+			editorModel.addAnnotation((Annotation) ta, pos2);
+			addToRelatingObjectAnnotationMap((EObject) ta.getSubtext(), ta);
+
+
+		} else if (a instanceof BTSModelAnnotation) {
+			ModelAnnotation ta = new InvisibleAnnotation(
+					embeddedEditor.getDocument(), issue,
+					((BTSModelAnnotation) a).getModel());
+			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+
+
+//			Position pos = model.getPosition((Annotation) a);
+			Position pos2 = new Position(pos.getOffset(), pos.getLength());
+			editorModel.addAnnotation((Annotation) ta, pos2);
+			modelAnnotationMap.put(((BTSIdentifiableItem) ta.getModelObject()).get_id(), ta);
+		}
+		
 	}
 
 	private void addToRelatingObjectAnnotationMap(EObject object,
@@ -1163,7 +1226,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private ModelAnnotation getModelAnnotationAtModelObject(
 			BTSSentenceItem selectedItem) {
-		return modelAnnotationMap.get(selectedItem);
+		return modelAnnotationMap.get(selectedItem.get_id());
 	}
 
 	private void setSentenceItemDeselected(BTSSentenceItem oldSelectedItem) {
@@ -1312,7 +1375,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	{
 
 		selectedSentence = null;
-		modelAnnotationMap = new HashMap<EObject, ModelAnnotation>();
+		modelAnnotationMap = new HashMap<String, ModelAnnotation>();
 		relatingObjectsAnnotationMap = new HashMap<EObject, List<ModelAnnotation>>();
 		localCommandCacheSet.clear();
 	}
@@ -1463,7 +1526,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private void processModelUpdate(BTSModelUpdateNotification notification,
 			String id) {
-		if (!relatingObjects.contains(notification.getObject()))
+		if (relatingObjects != null && !relatingObjects.contains(notification.getObject()))
 		{
 			relatingObjects.add((BTSObject) notification.getObject());
 		}
@@ -1493,19 +1556,126 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private void addAnnotationToTranscription(
 			BTSModelUpdateNotification notification) {
-		List<ModelAnnotation> mas = relatingObjectsAnnotationMap.get(notification.getObject());
-		if (mas == null)
-		{
-			// relObject ist neu
-			// erzeuge neue intertextreferences und modelAnnotations
+		List<ModelAnnotation> mas = relatingObjectsAnnotationMap
+				.get(notification.getObject());
+//		Map<BTSInterTextReference, ModelAnnotation> refAnnotationMap = new HashMap<BTSInterTextReference, ModelAnnotation>();
+
+		// IAnnotationModel am =
+		// textEditorController.transformRelatingObject(notification.getObject(),
+		// annotationModel, mas);
+		BTSObject object = (BTSObject) notification.getObject();
+//		boolean isnew = false;
+//		if (mas == null) {
+//			isnew = true;
+//		} else {
+//			for (ModelAnnotation ma : mas) {
+//				refAnnotationMap.put(ma.getInterTextReference(), ma);
+//			}
+//		}
+		// remove old annotations
+		if (mas != null) {
+			for (ModelAnnotation ma : mas)
+			{
+				annotationModel.removeAnnotation(ma);
+			}
 		}
-		else
-		{
-			// vergleiche relations.parts und mas
-			// update alle intertextreferences
-			// bzw. erzeuge neue
+			
+		// relObject ist neu
+		for (BTSRelation rel : object.getRelations()) {
+			if (rel.getObjectId() != null
+					&& rel.getObjectId().equals(text.get_id())) {
+				for (BTSInterTextReference ref : rel.getParts()) {
+//					if (!isnew && refAnnotationMap.containsKey(ref)) {
+//						ModelAnnotation a = refAnnotationMap.get(ref);
+//
+//						// vergleiche relations.parts und mas
+//						// update alle intertextreferences
+//						// bzw. erzeuge neue
+//					} else {
+						// erzeuge neue intertextreferences und modelAnnotations
+						// lauf über alle relations und alle intertextreferences
+						// laufe über alle modelannotations und suche die
+						// referenzierten Items
+						// bestimme die Position zu den referenzen
+						// erstelle Annotatins und füge sie dem editor-model
+						// hinzu
+						Position pos = null;
+						if (ref.getBeginId() != null
+								&& ref.getBeginId().equals(ref.getEndId())) {
+							ModelAnnotation ma1 = modelAnnotationMap.get(ref
+									.getBeginId());
+							pos = annotationModel.getPosition(ma1);
+						} else {
+							ModelAnnotation ma1 = modelAnnotationMap.get(ref
+									.getBeginId());
+							ModelAnnotation ma2 = modelAnnotationMap.get(ref
+									.getEndId());
+							pos = annotationModel.getPosition(ma1);
+							Position pos2 = annotationModel.getPosition(ma2);
+							pos.setLength((pos2.getOffset() - pos.getOffset())
+									+ pos2.getLength());
+						}
+						Issue issue;
+						issue = new Issue.IssueImpl();
+						Annotation annotation = makeAnnotation(object, issue,
+								ref);
+						if (annotation != null)
+						{
+							annotationModel.addAnnotation(annotation, pos);
+						}
+//					}
+				}
+			}
 		}
-		
-//		7
+
+		painter.modelChanged(annotationModel);
+	}
+
+	private Annotation makeAnnotation(BTSObject object, Issue issue, BTSInterTextReference ref) {
+		ModelAnnotation ta = null;
+		if (object instanceof BTSAnnotation) {
+			if (((BTSAnnotation) object).getType() != null && ((BTSAnnotation) object).getType().equalsIgnoreCase(
+					"rubrum")) {
+				ta = new AnnotationAnnotation(
+						embeddedEditor.getDocument(),
+						AnnotationAnnotation.TYPE_RUBRUM, issue,
+						object,
+						(BTSAnnotation) object);
+			ta.setInterTextReference(ref);
+				addToRelatingObjectAnnotationMap(object, ta);
+			}
+			ta = new AnnotationAnnotation(
+					embeddedEditor.getDocument(),
+					AnnotationAnnotation.TYPE, issue,
+					object,
+					(BTSAnnotation) object);
+			ta.setInterTextReference(ref);
+			addToRelatingObjectAnnotationMap(object, ta);
+
+
+		} else if (object instanceof BTSComment) {
+			ta = new CommentAnnotation(
+					embeddedEditor.getDocument(), issue,
+					object,
+					(BTSComment) object);
+			ta.setInterTextReference(ref);
+
+
+			ta.setText("Comment Annotation --> here is a comment on this word.");
+			addToRelatingObjectAnnotationMap(object, ta);
+
+
+		} else if (object instanceof BTSText) {
+			if (((BTSText) object).getType().equalsIgnoreCase(
+					"subtext")) {
+			ta = new SubtextAnnotation(
+					embeddedEditor.getDocument(), issue,
+					object,
+					(BTSText) object);
+			ta.setInterTextReference(ref);
+			addToRelatingObjectAnnotationMap(object, ta);
+			}
+		}
+		return ta;
 	}
 }

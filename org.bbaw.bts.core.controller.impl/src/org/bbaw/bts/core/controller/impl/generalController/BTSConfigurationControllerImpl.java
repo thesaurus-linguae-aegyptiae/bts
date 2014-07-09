@@ -19,6 +19,7 @@ import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.btsmodel.BTSListEntry;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
@@ -160,8 +161,8 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	private boolean objectTypesPathsContainsObjectype(
 			Map<String, List<String>> ownerTypesMap,
-			BTSCorpusObject corpusObject) {
-		if (corpusObject == null) {
+			BTSObject object) {
+		if (object == null) {
 			return false;
 		}
 		if (ownerTypesMap == null)
@@ -170,9 +171,9 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		}
 		else
 		{
-			String oClass = findObjectClass(corpusObject);
-			String oType = corpusObject.getType();
-			String oSubtype = corpusObject.getSubtype();
+			String oClass = findObjectClass(object);
+			String oType = object.getType();
+			String oSubtype = object.getSubtype();
 			return objectTypesPathContainsObject(ownerTypesMap, oClass,
 					oType, oSubtype, 2);
 
@@ -258,8 +259,8 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	 * #findObjectType(org.bbaw.bts.btsmodel.BTSCorpusObject)
 	 */
 	@Override
-	public String findObjectClass(BTSCorpusObject corpusObject) {
-		return configService.findObjectClass(corpusObject);
+	public String findObjectClass(BTSObject object) {
+		return configService.findObjectClass(object);
 	}
 	@Override
 	public String[] getObjectSubtypes(BTSCorpusObject corpusObject)
@@ -819,7 +820,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	private void calculateChildrenRecurcively(BTSObjectTypeTreeNode rootpath,
 			BTSConfig config, BTSConfigItem pathClonesList,
-			BTSCorpusObject corpusObject) {
+			BTSObject object) {
 		if (rootpath != null) {
 		for (BTSObjectTypeTreeNode pathEntry : rootpath.getChildren()) {
 			if (pathEntry instanceof BTSObjectTypeTreeNode) {
@@ -832,11 +833,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 										((BTSObjectTypeTreeNode) pathEntry)
 												.getValue())
 								&& objectTypesPathsContainsObjectype(
-										l1CI.getOwnerTypesMap(), corpusObject)) {
+										l1CI.getOwnerTypesMap(), object)) {
 							int size = pathClonesList.getChildren().size();
 
 							calculateChildrenRecurcively(pathEntry, l1CI,
-									pathClonesList, corpusObject);
+									pathClonesList, object);
 							if (pathClonesList.getChildren().size() == size) {
 								// add this level if no children were added
 								pathClonesList.getChildren().add(
@@ -855,11 +856,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 					if (!l1CI.isIgnore()
 							&& l1CI.getValue() != null
 							&& objectTypesPathsContainsObjectype(
-									l1CI.getOwnerTypesMap(), corpusObject)) {
+									l1CI.getOwnerTypesMap(), object)) {
 						int size = pathClonesList.getChildren().size();
 
 						calculateChildrenRecurcively(null, l1CI,
-								pathClonesList, corpusObject);
+								pathClonesList, object);
 						if (pathClonesList.getChildren().size() == size) {
 							// add this level if no children were added
 							pathClonesList.getChildren().add(
@@ -886,7 +887,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	@Override
 	public BTSConfigItem getRelationPathConfigItemProcessedClones(
-			BTSConfigItem itemConfig, BTSCorpusObject corpusObject) {
+			BTSConfigItem itemConfig, BTSObject object) {
 		BTSConfigItem config = configService.getRelationsConfigItem();
 		BTSObjectTypeTreeNode rootpath = null;
 		if (itemConfig != null) {
@@ -898,14 +899,14 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 				.createBTSConfigItem();
 		calculateChildrenReferncedObjectsRecurcively(rootpath, config,
 				pathClonesList,
-				corpusObject);
+				object);
 
 		return pathClonesList;
 	}
 
 	private void calculateChildrenReferncedObjectsRecurcively(
 			BTSObjectTypeTreeNode rootpath, BTSConfig config,
-			BTSConfigItem pathClonesList, BTSCorpusObject corpusObject) {
+			BTSConfigItem pathClonesList, BTSObject object) {
 		if (rootpath != null) {
 			for (BTSObjectTypeTreeNode pathEntry : rootpath.getChildren()) {
 				if (pathEntry instanceof BTSObjectTypeTreeNode) {
@@ -926,7 +927,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 								calculateChildrenReferncedObjectsRecurcively(
 										pathEntry, l1CI, pathClonesList,
-										corpusObject);
+										object);
 								if (pathClonesList.getChildren().size() == size) {
 									// add this level if no children were added
 									pathClonesList.getChildren().add(
@@ -946,11 +947,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 					if (!l1CI.isIgnore()
 							&& l1CI.getValue() != null
 							&& objectTypesPathsContainsObjectype(
-									l1CI.getOwnerTypesMap(), corpusObject)) {
+									l1CI.getOwnerTypesMap(), object)) {
 						int size = pathClonesList.getChildren().size();
 
 						calculateChildrenRecurcively(null, l1CI,
-								pathClonesList, corpusObject);
+								pathClonesList, object);
 						if (pathClonesList.getChildren().size() == size) {
 							// add this level if no children were added
 							pathClonesList.getChildren().add(
@@ -966,14 +967,14 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	// FIXME move to Service
 
 	@Override
-	public boolean objectMayReferenceToCorpus(BTSCorpusObject object,
+	public boolean objectMayReferenceToCorpus(BTSObject object,
 			BTSConfigItem relationConfig) {
 		return objectMayReferenceToElementName(object, relationConfig,
 				BTSConstants.CORPUS_OBJECT, BTSConstants.TEXT_CORPUS, BTSConstants.TEXT);
 		
 	}
 
-	private boolean objectMayReferenceToElementName(BTSCorpusObject object,
+	private boolean objectMayReferenceToElementName(BTSObject object,
 			BTSConfigItem relationConfig, String... elementNames) {
 		
 
@@ -1001,7 +1002,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return false;
 	}
 
-	public Set<String> getReferenceTypesSet(BTSCorpusObject object,
+	public Set<String> getReferenceTypesSet(BTSObject object,
 			BTSConfigItem relationConfig) {
 		String oClass = findObjectClass(object);
 		String oType = object.getType();
@@ -1066,18 +1067,19 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	}
 
 	@Override
-	public boolean objectMayReferenceToThs(BTSCorpusObject object,
+	public boolean objectMayReferenceToThs(BTSObject object,
 			BTSConfigItem relationConfig) {
 		return objectMayReferenceToElementName(object, relationConfig, BTSConstants.THS_ENTRY);
 
 	}
 
 	@Override
-	public boolean objectMayReferenceToWList(BTSCorpusObject object,
+	public boolean objectMayReferenceToWList(BTSObject object,
 			BTSConfigItem relationConfig) {
 		return objectMayReferenceToElementName(object, relationConfig, BTSConstants.WLIST_ENTRY);
 
 	}
+
 
 
 }

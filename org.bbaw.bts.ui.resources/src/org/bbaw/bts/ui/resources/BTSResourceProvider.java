@@ -242,6 +242,8 @@ public interface BTSResourceProvider extends IResourceProviderService {
 	public final static String IMG_SPELLINGS = "IMG_SPELLINGS"; //$NON-NLS-1$
 
 	public final static String IMG_SUBTEXT = "IMG_SUBTEXT"; //$NON-NLS-1$
+	
+	public final static String IMG_SUBTEXT_ADD = "IMG_SUBTEXT_ADD"; //$NON-NLS-1$
 
 	public final static String IMG_TCOBJECT_ADD = "IMG_TCOBJECT_ADD"; //$NON-NLS-1$
 
@@ -380,5 +382,8 @@ public interface BTSResourceProvider extends IResourceProviderService {
 	public static final String IMG_RELATION_ADD = "IMG_RELATION_ADD";
 	public static final String IMG_RELATION_EDIT = "IMG_RELATION_EDIT";
 	public static final String IMG_RELATION_DELETE = "IMG_RELATION_DELETE";
+	
+	public static final String IMG_RUBRUM = "IMG_RUBRUM";
+	public static final String IMG_RUBRUM_ADD = "IMG_RUBRUM_ADD";
 
 }

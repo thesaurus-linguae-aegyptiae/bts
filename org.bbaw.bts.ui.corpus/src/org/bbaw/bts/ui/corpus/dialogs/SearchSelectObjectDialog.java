@@ -1,12 +1,10 @@
 package org.bbaw.bts.ui.corpus.dialogs;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart;

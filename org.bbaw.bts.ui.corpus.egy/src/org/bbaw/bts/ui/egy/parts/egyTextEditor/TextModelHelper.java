@@ -355,9 +355,9 @@ public class TextModelHelper {
 		System.out.println("word " + node.getText() + " node offset "
 				+ node.getOffset() + " node length " + node.getLength());
 		ModelAnnotation ma = (ModelAnnotation) annotationMap
-.get(new Position(
+				.get(new Position(
 				node.getOffset(), node.getLength()));
-		if (ma != null) {
+		if (ma != null && ma.getModelObject() instanceof BTSWord) {
 			modelWord = (BTSWord) ma.getModelObject();
 		}
 		if (modelWord == null) {

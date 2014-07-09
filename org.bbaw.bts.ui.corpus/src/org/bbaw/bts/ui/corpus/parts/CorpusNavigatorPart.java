@@ -303,17 +303,9 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 					if (tn.getObject() != null)
 					{
 						BTSObject o = (BTSObject) tn.getObject();
-						if (o instanceof BTSCorpusObject || !o.equals(selectedTreeObject))
+						if (!o.equals(selectedTreeObject))
 						{
 							executeSaveAllCommand();
-							selectedTreeObject = (BTSCorpusObject) o;
-							if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty())
-							{
-								List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
-								parents.add(tn);
-								tn.setChildrenLoaded(true);
-								loadChildren(parents, false, parentControl);
-							}
 							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 									.equals(selectionType)) {
 								selectionService.setSelection(o);
@@ -321,6 +313,18 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 								eventBroker.send(
 										"ui_secondarySelection/corpusNavigator", o);
 
+							}
+							if (o instanceof BTSCorpusObject)
+							{
+								selectedTreeObject = (BTSCorpusObject) o;
+								if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty())
+								{
+									List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
+									parents.add(tn);
+									tn.setChildrenLoaded(true);
+									loadChildren(parents, false, parentControl);
+								}
+								
 							}
 						}
 						

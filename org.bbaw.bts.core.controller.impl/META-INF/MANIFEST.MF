@@ -6,8 +6,7 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.bbaw.bts.core.controller.impl.internal.Activator
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Service-Component: OSGI-INF/*.xml,
- OSGI-INF/component.xml
+Service-Component: OSGI-INF/*.xml
 Import-Package: javax.inject,
  org.bbaw.bts.app.login,
  org.bbaw.bts.commons,

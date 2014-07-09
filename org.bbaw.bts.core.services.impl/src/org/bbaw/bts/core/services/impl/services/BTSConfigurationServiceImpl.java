@@ -12,6 +12,7 @@ import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSImage;
 import org.bbaw.bts.btsmodel.BTSListEntry;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextCorpus;
@@ -250,7 +251,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 
 	@Override
-	public String findObjectClass(BTSCorpusObject corpusObject) {
+	public String findObjectClass(BTSObject corpusObject) {
 		if (corpusObject instanceof BTSAnnotation) {
 			return BTSConstants.BASIC_OBJECT_TYPES[0];
 		} else if (corpusObject instanceof BTSTCObject) {

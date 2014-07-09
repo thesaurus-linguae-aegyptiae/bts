@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
@@ -96,7 +97,7 @@ public class PassportEditorPartControllerImpl
 
 	@Override
 	public List<BTSCorpusObject> getObjectProposalsFor(
-			BTSConfigItem configItem, String text, BTSCorpusObject object) {
+			BTSConfigItem configItem, String text, BTSObject object) {
 		List<BTSCorpusObject> list = new Vector<BTSCorpusObject>();
 		
 		//FIXME aktualisieren und auf map umstellen
@@ -162,7 +163,7 @@ public class PassportEditorPartControllerImpl
 		return list;
 	}
 
-	private List<FilterBuilder> makeFilterList(BTSConfigItem configItem, BTSCorpusObject object) {
+	private List<FilterBuilder> makeFilterList(BTSConfigItem configItem, BTSObject object) {
 
 		Set<String> referenceTypes = configurationController.getReferenceTypesSet(object, configItem);
 		

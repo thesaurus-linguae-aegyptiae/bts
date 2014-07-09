@@ -45,13 +45,23 @@ public class SubtextAnnotation extends ModelAnnotation {
 	public void setHighlighted(boolean highlighted) {
 		if (highlighted)
 		{
-			cachedType = getType();
+			if (!getType().equals(TYPE_HIGHLIGHTED))
+			{cachedType = getType();
 			setType(TYPE_HIGHLIGHTED);
+			}
 		}
 		else
 		{
 			setType(cachedType);
 		}
 		
+	}
+	
+	@Override
+	public String getText() {
+		if (subtext.getName() != null && !"".equals(subtext.getName())){
+			return (subtext.getName());
+		}
+		return super.getText();
 	}
 }

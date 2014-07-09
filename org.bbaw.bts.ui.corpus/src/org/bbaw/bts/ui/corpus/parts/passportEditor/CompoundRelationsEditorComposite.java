@@ -13,6 +13,7 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -51,7 +52,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 	private BTSResourceProvider resourceProvider;
 
 	@Inject
-	private BTSCorpusObject corpusObject;
+	private BTSObject object;
 
 	@Inject
 	@Optional
@@ -82,8 +83,8 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 	private void createWidgets() {
 		// if (corpusObject.getRelations() )
-		for (int i = 0; i < corpusObject.getRelations().size(); i++) {
-			BTSRelation relation = corpusObject.getRelations().get(i);
+		for (int i = 0; i < object.getRelations().size(); i++) {
+			BTSRelation relation = object.getRelations().get(i);
 			BTSConfigItem relationConfig = getRelationConfig(relation);
 				createWidget(relation, i, relationConfig);
 
@@ -156,7 +157,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 		child.set(EditingDomain.class, editingDomain);
 		child.set(BTSRelation.class, relation);
 
-		child.set(BTSCorpusObject.class, corpusObject);
+		child.set(BTSObject.class, object);
 		child.set(BTSResourceProvider.class, resourceProvider);
 		RelationEditorComposite editor = ContextInjectionFactory.make(
 				RelationEditorComposite.class, child);
@@ -222,7 +223,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 					CompoundCommand compoundCommand = new CompoundCommand();
 					org.eclipse.emf.common.command.Command command = AddCommand
 							.create(editingDomain,
-									corpusObject,
+									object,
 									BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
 									rel);
 					compoundCommand.append(command);

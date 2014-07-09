@@ -39,9 +39,9 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 
 	List<E> list(String dbPath, String queryId, String objectState);
 
-	<T> List<T> query(BTSQueryRequest query, String objectState);
+	List<E> query(BTSQueryRequest query, String objectState);
 
-	<T> List<T> query(BTSQueryRequest query, String objectState,
+	List<E> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery);
 
 	List<E> filter(List<E> objects);

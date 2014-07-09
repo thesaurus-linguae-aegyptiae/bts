@@ -1,8 +1,12 @@
 package org.bbaw.bts.core.corpus.controller.partController;
 
+import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.Map;
 
+
+
+import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
@@ -14,6 +18,7 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.swt.graphics.Image;
 
 public interface BTSTextEditorController
 {
@@ -43,4 +48,12 @@ public interface BTSTextEditorController
 	String insertMarkerBehindSingleCode(String mdcString, String marker);
 	
 	List<BTSObject> getRelatingObjects(BTSText text);
+	
+	BTSText createNewText(BTSCorpusObject parentObject);
+	
+	Image transformToSWT(BufferedImage bufferedImage);
+	
+	BufferedImage getImageData(String topItemList) throws Exception;
+	
+	BufferedImage getImageData(String topItemList, int height, int width) throws Exception;
 }

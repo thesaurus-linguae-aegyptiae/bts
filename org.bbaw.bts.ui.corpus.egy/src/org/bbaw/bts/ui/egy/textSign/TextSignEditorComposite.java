@@ -65,7 +65,7 @@ public class TextSignEditorComposite extends Composite
 	private FlowLayout layout;
 	private BTSText text;
 	private Figure container;
-	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
+	
 	private GridLayout gridLayout;
 	private RectangleFigure cursor;
 	private Map<Object, BTSWord> figureMap;
@@ -214,9 +214,12 @@ public class TextSignEditorComposite extends Composite
 				String mdc = transformWordToMdCString(word);
 				try
 				{
-					imf.setImage(transformToSWT(getImageData(mdc)));
+					imf.setImage(textEditorController.transformToSWT(textEditorController.getImageData(mdc)));
 				} catch (MDCSyntaxError e)
 				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -302,9 +305,12 @@ public class TextSignEditorComposite extends Composite
 		String mdc = transformWordToMdCString(word);
 		try
 		{
-			imageFigure.setImage(transformToSWT(getImageData(mdc)));
+			imageFigure.setImage(textEditorController.transformToSWT(textEditorController.getImageData(mdc)));
 		} catch (MDCSyntaxError e)
 		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -390,77 +396,8 @@ public class TextSignEditorComposite extends Composite
 
 	}
 
-	private Image transformToSWT(BufferedImage bufferedImage)
-	{
-
-		if (bufferedImage.getColorModel() instanceof DirectColorModel)
-		{
-			DirectColorModel colorModel = (DirectColorModel) bufferedImage.getColorModel();
-			PaletteData palette = new PaletteData(colorModel.getRedMask(), colorModel.getGreenMask(),
-					colorModel.getBlueMask());
-			ImageData data = new ImageData(bufferedImage.getWidth(), bufferedImage.getHeight(),
-					colorModel.getPixelSize(), palette);
-			for (int y = 0; y < data.height; y++)
-			{
-				for (int x = 0; x < data.width; x++)
-				{
-					int rgb = bufferedImage.getRGB(x, y);
-					int pixel = palette.getPixel(new RGB((rgb >> 16) & 0xFF, (rgb >> 8) & 0xFF, rgb & 0xFF));
-					data.setPixel(x, y, pixel);
-					if (colorModel.hasAlpha())
-					{
-						data.setAlpha(x, y, (rgb >> 24) & 0xFF);
-					}
-				}
-			}
-			return new Image(Display.getCurrent(), data);
-		} else if (bufferedImage.getColorModel() instanceof IndexColorModel)
-		{
-			IndexColorModel colorModel = (IndexColorModel) bufferedImage.getColorModel();
-			int size = colorModel.getMapSize();
-			byte[] reds = new byte[size];
-			byte[] greens = new byte[size];
-			byte[] blues = new byte[size];
-			colorModel.getReds(reds);
-			colorModel.getGreens(greens);
-			colorModel.getBlues(blues);
-			RGB[] rgbs = new RGB[size];
-			for (int i = 0; i < rgbs.length; i++)
-			{
-				rgbs[i] = new RGB(reds[i] & 0xFF, greens[i] & 0xFF, blues[i] & 0xFF);
-			}
-			PaletteData palette = new PaletteData(rgbs);
-			ImageData data = new ImageData(bufferedImage.getWidth(), bufferedImage.getHeight(),
-					colorModel.getPixelSize(), palette);
-			data.transparentPixel = colorModel.getTransparentPixel();
-			WritableRaster raster = bufferedImage.getRaster();
-			int[] pixelArray = new int[1];
-			for (int y = 0; y < data.height; y++)
-			{
-				for (int x = 0; x < data.width; x++)
-				{
-					raster.getPixel(x, y, pixelArray);
-					data.setPixel(x, y, pixelArray[0]);
-				}
-			}
-			return new Image(Display.getCurrent(), data);
-		}
-		return null;
-
-	}
-
-	private BufferedImage getImageData(String topItemList) throws MDCSyntaxError
-	{
-		BufferedImage result;
-		{
-			MDCDrawingFacade facade = new MDCDrawingFacade();
-			facade.setDrawingSpecifications(drawingSpecifications);
-			facade.setMaxSize(200, 45);
-			facade.setCadratHeight(30);
-			result = facade.createImage(topItemList);
-		}
-		return result;
-	}
+	
+	
 
 	private String transformWordToMdCString(BTSWord word)
 	{

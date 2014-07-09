@@ -15,7 +15,7 @@ public class AnnotationAnnotation extends ModelAnnotation {
 
 	public static final String TYPE_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.highlighted";;
 
-	private String type = TYPE;
+//	private String type = TYPE;
 	private BTSAnnotation annotation;
 
 	private String cachedType;
@@ -59,13 +59,27 @@ public class AnnotationAnnotation extends ModelAnnotation {
 	public void setHighlighted(boolean highlighted) {
 		if (highlighted)
 		{
-			cachedType = this.type;
-			setType(TYPE_HIGHLIGHTED);
+			if (!getType().equals(TYPE_HIGHLIGHTED))
+			{
+				cachedType = getType();
+				setType(TYPE_HIGHLIGHTED);
+			}
 		}
 		else
 		{
 			setType(cachedType);
 		}
 		
+	}
+	
+	@Override
+	public String getText() {
+		if (annotation.getName() != null && !"".equals(annotation.getName())){
+			return (annotation.getName());
+		}
+		else
+		{
+			return annotation.getType();
+		}
 	}
 }

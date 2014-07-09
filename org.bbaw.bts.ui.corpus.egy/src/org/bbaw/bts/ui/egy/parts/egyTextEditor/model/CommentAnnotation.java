@@ -47,8 +47,10 @@ public class CommentAnnotation extends ModelAnnotation {
 	public void setHighlighted(boolean highlighted) {
 		if (highlighted)
 		{
-			cachedType = getType();
+			if (!getType().equals(TYPE_HIGHLIGHTED))
+			{cachedType = getType();
 			setType(TYPE_HIGHLIGHTED);
+			}
 		}
 		else
 		{
@@ -57,4 +59,14 @@ public class CommentAnnotation extends ModelAnnotation {
 		
 	}
 
+	@Override
+	public String getText() {
+		if (comment.getName() != null && !"".equals(comment.getName())){
+			return (comment.getName());
+		}
+		else
+		{
+			return (comment.getComment().substring(0, 23));
+		}
+	}
 }

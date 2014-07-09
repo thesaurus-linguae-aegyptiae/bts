@@ -7,9 +7,9 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
@@ -90,7 +90,7 @@ public class RelationEditorComposite extends Composite {
 	private String lang;
 	
 	@Inject
-	private BTSCorpusObject corpusObject;
+	private BTSObject corpusObject;
 
 	@Inject
 	private PassportEditorPartController passportEditorController;

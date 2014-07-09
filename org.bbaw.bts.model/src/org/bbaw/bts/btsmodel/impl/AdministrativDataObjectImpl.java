@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSRevision;
@@ -407,4 +408,22 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 		return result.toString();
 	}
 
+	@Override
+	public boolean equals(Object object)
+	{
+		if (object instanceof BTSIdentifiableItem && get_id() != null)
+		{
+			return get_id().equals(((BTSIdentifiableItem) object).get_id());
+		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		if (_id != null)
+		{
+			return _id.hashCode();
+		}
+		return super.hashCode();
+	}
 } //AdministrativDataObjectImpl

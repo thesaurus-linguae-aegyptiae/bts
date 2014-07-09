@@ -68,6 +68,7 @@
     <elements xsi:type="commands:Command" xmi:id="_YmLB4OpBEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.main.command.openConflictsDialog" commandName="openConflictsDialog" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_wVCq4OsFEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.command.openCompareDialog" commandName="openCompareDialog" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_lH4aYOu_EeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.command.openStatusMessagesDialog" commandName="openStatusMessagesDialog" category="__zwJgGcMEeOBmPSxTUuwxg"/>
+    <elements xsi:type="commands:Command" xmi:id="_9-yAgAawEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.main.command.addComment" commandName="Add Comment" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>

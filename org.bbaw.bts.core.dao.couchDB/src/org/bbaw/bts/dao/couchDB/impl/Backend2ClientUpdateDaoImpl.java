@@ -187,8 +187,18 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		JsonObject jso = feed.getDoc();
 		URI uri = URI.createURI(connectionProvider.getLocalDBURL() + "/" + dbCollection + "/" + feed.getId());
 		System.out.println("loadFromFeed " + uri);
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		Resource resource = null;
+		try {
+			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		if (resource != null && !resource.getContents().isEmpty())
+		{
+			return ((BTSDBBaseObject) resource.getContents().get(0));
+		}
 		
+		resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		logger.info(jso.toString());
 		InputStream inputStream;
 		try
