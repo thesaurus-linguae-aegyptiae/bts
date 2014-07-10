@@ -689,6 +689,18 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		selectionService.setSelection(btsEvent);
 		
 	}
+	
+	protected void processEditorSelection(Object item) {
+		TypedEvent event = new TypedEvent(item);
+		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
+//		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
+		btsEvent.data = text;
+		List<ModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
+		btsEvent.getTextAnnotations().addAll(annotations);
+		processSelection(annotations, false, btsEvent);
+		selectionService.setSelection(btsEvent);
+		
+	}
 
 	protected void processSelection(List<ModelAnnotation> annotations, boolean postSelection, BTSTextSelectionEvent btsEvent) {
 		List<ModelAnnotation> relatingObjectsAnnotations = new Vector<ModelAnnotation>(annotations.size());
@@ -1344,7 +1356,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		// if (text2 == null || text2.getTextContent() == null
 		// || text2.getTextContent().getTextItems().isEmpty())
 		// text2 = createMockUp(text2);
-		signTextEditor.setInput(text2);
+		signTextEditor.setInput(text2, localRelatingObjects);
 
 	}
 
@@ -1448,7 +1460,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						workaround = true;
 						partService.activate(p);
 					}
-					selectionService.setSelection(selection);
+					processEditorSelection(selection);
 					if (workaround) {
 						partService.activate(activePart);
 					}
@@ -1619,7 +1631,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						issue = new Issue.IssueImpl();
 						Annotation annotation = makeAnnotation(object, issue,
 								ref);
-						if (annotation != null)
+						if (annotation != null && pos != null)
 						{
 							annotationModel.addAnnotation(annotation, pos);
 						}

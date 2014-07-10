@@ -452,13 +452,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OBJECT__RELATIONS = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT__TEMP_SORT_KEY = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>BTS Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_OBJECT_FEATURE_COUNT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 6;
+	int BTS_OBJECT_FEATURE_COUNT = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -594,6 +603,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_CORPUS_OBJECT__RELATIONS = BTS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__TEMP_SORT_KEY = BTS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -839,6 +857,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSTC_OBJECT__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1080,6 +1107,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -1334,6 +1370,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCABLE_ITEM__RELATIONS = BTS_OBJECT__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY = BTS_OBJECT__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1505,6 +1550,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_ITEMS__RELATIONS = BTS_REFERENCABLE_ITEM__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__TEMP_SORT_KEY = BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1674,6 +1728,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_SENCTENCE__RELATIONS = BTS_TEXT_ITEMS__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__TEMP_SORT_KEY = BTS_TEXT_ITEMS__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1875,6 +1938,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_SENTENCE_ITEM__RELATIONS = BTS_REFERENCABLE_ITEM__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__TEMP_SORT_KEY = BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2044,6 +2116,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_WORD__RELATIONS = BTS_SENTENCE_ITEM__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__TEMP_SORT_KEY = BTS_SENTENCE_ITEM__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -2289,6 +2370,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM__RELATIONS = BTS_SENTENCE_ITEM__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__TEMP_SORT_KEY = BTS_SENTENCE_ITEM__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2470,6 +2560,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_MARKER__RELATIONS = BTS_TEXT_SENTENCE_ITEM__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__TEMP_SORT_KEY = BTS_TEXT_SENTENCE_ITEM__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2648,6 +2747,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST_ENTRY__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_ENTRY__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -3019,6 +3127,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_AMBIVALENCE__RELATIONS = BTS_TEXT_SENTENCE_ITEM__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__TEMP_SORT_KEY = BTS_TEXT_SENTENCE_ITEM__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3197,6 +3314,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_CASE__RELATIONS = BTS_REFERENCABLE_ITEM__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__TEMP_SORT_KEY = BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3648,13 +3774,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER__RELATIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__TEMP_SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+
+	/**
 	 * The feature id for the '<em><b>Group Ids</b></em>' attribute list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__GROUP_IDS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+	int BTS_USER__GROUP_IDS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Sigle</b></em>' attribute.
@@ -3663,7 +3798,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__SIGLE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+	int BTS_USER__SIGLE = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -3672,7 +3807,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+	int BTS_USER__DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Web Description</b></em>' attribute.
@@ -3681,7 +3816,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__WEB_DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
+	int BTS_USER__WEB_DESCRIPTION = BTSDB_BASE_OBJECT_FEATURE_COUNT + 15;
 
 	/**
 	 * The feature id for the '<em><b>User Name</b></em>' attribute.
@@ -3690,7 +3825,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__USER_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 15;
+	int BTS_USER__USER_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Fore Name</b></em>' attribute.
@@ -3699,7 +3834,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__FORE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 16;
+	int BTS_USER__FORE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 17;
 
 	/**
 	 * The feature id for the '<em><b>Sure Name</b></em>' attribute.
@@ -3708,7 +3843,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__SURE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 17;
+	int BTS_USER__SURE_NAME = BTSDB_BASE_OBJECT_FEATURE_COUNT + 18;
 
 	/**
 	 * The feature id for the '<em><b>Mail</b></em>' attribute.
@@ -3717,7 +3852,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__MAIL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 18;
+	int BTS_USER__MAIL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 19;
 
 	/**
 	 * The feature id for the '<em><b>Web URL</b></em>' attribute.
@@ -3726,7 +3861,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__WEB_URL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 19;
+	int BTS_USER__WEB_URL = BTSDB_BASE_OBJECT_FEATURE_COUNT + 20;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -3735,7 +3870,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 20;
+	int BTS_USER__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 21;
 
 	/**
 	 * The feature id for the '<em><b>External Referneces</b></em>' containment reference list.
@@ -3744,7 +3879,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__EXTERNAL_REFERNECES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 21;
+	int BTS_USER__EXTERNAL_REFERNECES = BTSDB_BASE_OBJECT_FEATURE_COUNT + 22;
 
 	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
@@ -3753,7 +3888,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__PASSWORD = BTSDB_BASE_OBJECT_FEATURE_COUNT + 22;
+	int BTS_USER__PASSWORD = BTSDB_BASE_OBJECT_FEATURE_COUNT + 23;
 
 	/**
 	 * The feature id for the '<em><b>Logged In</b></em>' attribute.
@@ -3762,7 +3897,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__LOGGED_IN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 23;
+	int BTS_USER__LOGGED_IN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 24;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -3771,7 +3906,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__STATUS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 24;
+	int BTS_USER__STATUS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 25;
 
 	/**
 	 * The feature id for the '<em><b>Db Admin</b></em>' attribute.
@@ -3780,7 +3915,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__DB_ADMIN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 25;
+	int BTS_USER__DB_ADMIN = BTSDB_BASE_OBJECT_FEATURE_COUNT + 26;
 
 	/**
 	 * The number of structural features of the '<em>BTS User</em>' class.
@@ -3789,7 +3924,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 26;
+	int BTS_USER_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 27;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -3999,13 +4134,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_COMMENT__RELATIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__TEMP_SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+	int BTS_COMMENT__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Tags</b></em>' attribute list.
@@ -4014,7 +4158,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT__TAGS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+	int BTS_COMMENT__TAGS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>BTS Comment</em>' class.
@@ -4023,7 +4167,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+	int BTS_COMMENT_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -4204,6 +4348,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -4957,13 +5110,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION__RELATIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__TEMP_SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+
+	/**
 	 * The feature id for the '<em><b>Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__PROVIDER = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+	int BTS_CONFIGURATION__PROVIDER = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>BTS Configuration</em>' class.
@@ -4972,7 +5134,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+	int BTS_CONFIGURATION_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -5127,6 +5289,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -5453,6 +5624,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -6418,13 +6598,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP__RELATIONS = BTSDB_BASE_OBJECT_FEATURE_COUNT + 10;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__TEMP_SORT_KEY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+
+	/**
 	 * The feature id for the '<em><b>Category</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__CATEGORY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 11;
+	int BTS_USER_GROUP__CATEGORY = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -6433,7 +6622,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 12;
+	int BTS_USER_GROUP__COMMENT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>BTS User Group</em>' class.
@@ -6442,7 +6631,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 13;
+	int BTS_USER_GROUP_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
@@ -6597,6 +6786,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LIST__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -7015,6 +7213,15 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_LIST_SUBENTRY__RELATIONS = BTS_REFERENCABLE_ITEM__RELATIONS;
 
 	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LIST_SUBENTRY__TEMP_SORT_KEY = BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7213,6 +7420,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_THS_ENTRY__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -7466,6 +7682,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_PROJECT__RELATIONS = BTS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__TEMP_SORT_KEY = BTS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -9009,6 +9234,17 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBTSObject_Relations();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSObject#getTempSortKey <em>Temp Sort Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Temp Sort Key</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSObject#getTempSortKey()
+	 * @see #getBTSObject()
+	 * @generated
+	 */
+	EAttribute getBTSObject_TempSortKey();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSAmbivalence <em>BTS Ambivalence</em>}'.
@@ -11582,6 +11818,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_OBJECT__RELATIONS = eINSTANCE.getBTSObject_Relations();
+
+		/**
+		 * The meta object literal for the '<em><b>Temp Sort Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_OBJECT__TEMP_SORT_KEY = eINSTANCE.getBTSObject_TempSortKey();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSAmbivalenceImpl <em>BTS Ambivalence</em>}' class.

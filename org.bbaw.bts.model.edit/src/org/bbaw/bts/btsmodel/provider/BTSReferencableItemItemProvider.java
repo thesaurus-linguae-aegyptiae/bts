@@ -58,35 +58,11 @@ public class BTSReferencableItemItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			add_idPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 			addParentPropertyDescriptor(object);
 			addParentIdPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the id feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void add_idPropertyDescriptor(Object object)
-	{
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSIdentifiableItem__id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSIdentifiableItem__id_feature", "_UI_BTSIdentifiableItem_type"),
-				 BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -181,7 +157,6 @@ public class BTSReferencableItemItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSReferencableItem.class)) {
-			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID:
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT:
 			case BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

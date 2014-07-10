@@ -69,6 +69,7 @@ public class BTSCommentItemProvider
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addCodePropertyDescriptor(object);
+			addTempSortKeyPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 			addTagsPropertyDescriptor(object);
 		}
@@ -282,6 +283,28 @@ public class BTSCommentItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Temp Sort Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTempSortKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_tempSortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_tempSortKey_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__TEMP_SORT_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Comment feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -403,6 +426,7 @@ public class BTSCommentItemProvider
 			case BtsmodelPackage.BTS_COMMENT__TYPE:
 			case BtsmodelPackage.BTS_COMMENT__SUBTYPE:
 			case BtsmodelPackage.BTS_COMMENT__CODE:
+			case BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY:
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

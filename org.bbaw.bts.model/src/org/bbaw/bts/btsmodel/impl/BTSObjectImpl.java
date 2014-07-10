@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getRelations <em>Relations</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getTempSortKey <em>Temp Sort Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,6 +134,26 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * @ordered
 	 */
 	protected EList<BTSRelation> relations;
+
+	/**
+	 * The default value of the '{@link #getTempSortKey() <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTempSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TEMP_SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getTempSortKey() <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTempSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int tempSortKey = TEMP_SORT_KEY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -275,6 +296,27 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getTempSortKey() {
+		return tempSortKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTempSortKey(int newTempSortKey) {
+		int oldTempSortKey = tempSortKey;
+		tempSortKey = newTempSortKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY, oldTempSortKey, tempSortKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -304,6 +346,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return getCode();
 			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
 				return getRelations();
+			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
+				return getTempSortKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -336,6 +380,9 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				getRelations().clear();
 				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
 				return;
+			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
+				setTempSortKey((Integer)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -366,6 +413,9 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
 				getRelations().clear();
 				return;
+			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
+				setTempSortKey(TEMP_SORT_KEY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -390,6 +440,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
 				return relations != null && !relations.isEmpty();
+			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
+				return tempSortKey != TEMP_SORT_KEY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

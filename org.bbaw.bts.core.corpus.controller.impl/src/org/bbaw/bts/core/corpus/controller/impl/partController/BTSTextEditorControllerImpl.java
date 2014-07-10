@@ -106,6 +106,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String MARKER_INTERFIX = ": ";
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
+	private static final int GAP = 10;
 	
 	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
 	
@@ -125,6 +126,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	
 	@Inject
 	private BTSCommentService commentService;
+	private int counter;
 
 	@Override
 	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects)
@@ -179,8 +181,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void fillRelatingObjectsMap(List<BTSObject> relatingObjects,
 			HashMap<String, List<BTSInterTextReference>> relatingObjectsMap) {
+		counter = 0;
 		for (BTSObject o : relatingObjects)
 		{
+			o.setTempSortKey(-1);
 			for (BTSRelation rel : o.getRelations())
 			{
 				for (BTSInterTextReference part : rel.getParts())
@@ -289,6 +293,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				// annotation
 				BTSAnnotation anno = (BTSAnnotation) reference.eContainer().eContainer();
+				if (anno.getTempSortKey() < 0)
+				{
+					anno.setTempSortKey(counter + GAP);
+				}
 				modelAnnotation = new BTSAnnotationAnnotation(item, anno, reference);
 				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
 				{
@@ -299,14 +307,23 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				// subtext
 				BTSText text = (BTSText) reference.eContainer().eContainer();
+				if (text.getTempSortKey() < 0)
+				{
+					text.setTempSortKey(counter + GAP);
+				}
 				modelAnnotation = new BTSSubtextAnnotation(item, text, reference);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
 				// comment
 				BTSComment comment = (BTSComment) reference.eContainer().eContainer();
+				if (comment.getTempSortKey() < 0)
+				{
+					comment.setTempSortKey(counter + GAP);
+				}
 				modelAnnotation = new BTSCommentAnnotation(item, comment, reference);
 			}
+			counter = counter + GAP;
 		}
 		return modelAnnotation;
 		

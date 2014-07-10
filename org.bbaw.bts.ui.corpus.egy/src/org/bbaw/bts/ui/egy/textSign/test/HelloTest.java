@@ -92,7 +92,7 @@ public class HelloTest {
 			BTSText text = makeMockup();
 
 			editor = new SignTextComposite(edComposite);
-			editor.setInput(text);
+			editor.setInput(text, null);
 
 			edComposite.layout();
 			c3.layout();
@@ -107,7 +107,7 @@ public class HelloTest {
 				if (t.getSelectionIndex() == 0) {
 					loadContent(can);
 				} else if (t.getSelectionIndex() == 2) {
-					editor.setInput(makeMockup());
+					editor.setInput(makeMockup(), null);
 				}
 
 			}

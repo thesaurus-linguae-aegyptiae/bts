@@ -69,6 +69,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addCodePropertyDescriptor(object);
+			addTempSortKeyPropertyDescriptor(object);
 			addGroupIdsPropertyDescriptor(object);
 			addSiglePropertyDescriptor(object);
 			addDescriptionPropertyDescriptor(object);
@@ -289,6 +290,28 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Temp Sort Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTempSortKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_tempSortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_tempSortKey_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__TEMP_SORT_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -693,6 +716,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 			case BtsmodelPackage.BTS_USER__TYPE:
 			case BtsmodelPackage.BTS_USER__SUBTYPE:
 			case BtsmodelPackage.BTS_USER__CODE:
+			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 			case BtsmodelPackage.BTS_USER__SIGLE:
 			case BtsmodelPackage.BTS_USER__DESCRIPTION:

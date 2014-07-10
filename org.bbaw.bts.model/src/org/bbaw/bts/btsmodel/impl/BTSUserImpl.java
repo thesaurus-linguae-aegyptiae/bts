@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getRelations <em>Relations</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getTempSortKey <em>Temp Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getGroupIds <em>Group Ids</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getSigle <em>Sigle</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getDescription <em>Description</em>}</li>
@@ -263,6 +264,26 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * @ordered
 	 */
 	protected EList<BTSRelation> relations;
+
+	/**
+	 * The default value of the '{@link #getTempSortKey() <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTempSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TEMP_SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getTempSortKey() <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTempSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int tempSortKey = TEMP_SORT_KEY_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getGroupIds() <em>Group Ids</em>}' attribute list.
@@ -796,6 +817,27 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getTempSortKey() {
+		return tempSortKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTempSortKey(int newTempSortKey) {
+		int oldTempSortKey = tempSortKey;
+		tempSortKey = newTempSortKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_USER__TEMP_SORT_KEY, oldTempSortKey, tempSortKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<String> getGroupIds() {
 		if (groupIds == null) {
 			groupIds = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_USER__GROUP_IDS);
@@ -1166,6 +1208,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return getCode();
 			case BtsmodelPackage.BTS_USER__RELATIONS:
 				return getRelations();
+			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
+				return getTempSortKey();
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				return getGroupIds();
 			case BtsmodelPackage.BTS_USER__SIGLE:
@@ -1243,6 +1287,9 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 			case BtsmodelPackage.BTS_USER__RELATIONS:
 				getRelations().clear();
 				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
+				return;
+			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
+				setTempSortKey((Integer)newValue);
 				return;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				getGroupIds().clear();
@@ -1336,6 +1383,9 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 			case BtsmodelPackage.BTS_USER__RELATIONS:
 				getRelations().clear();
 				return;
+			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
+				setTempSortKey(TEMP_SORT_KEY_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				getGroupIds().clear();
 				return;
@@ -1415,6 +1465,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case BtsmodelPackage.BTS_USER__RELATIONS:
 				return relations != null && !relations.isEmpty();
+			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
+				return tempSortKey != TEMP_SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				return groupIds != null && !groupIds.isEmpty();
 			case BtsmodelPackage.BTS_USER__SIGLE:
@@ -1479,6 +1531,7 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				case BtsmodelPackage.BTS_USER__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_USER__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
 				case BtsmodelPackage.BTS_USER__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
+				case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY: return BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY;
 				default: return -1;
 			}
 		}
@@ -1515,6 +1568,7 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_USER__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_USER__CODE;
 				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_USER__RELATIONS;
+				case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY: return BtsmodelPackage.BTS_USER__TEMP_SORT_KEY;
 				default: return -1;
 			}
 		}
@@ -1596,6 +1650,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 		result.append(subtype);
 		result.append(", code: ");
 		result.append(code);
+		result.append(", tempSortKey: ");
+		result.append(tempSortKey);
 		result.append(", groupIds: ");
 		result.append(groupIds);
 		result.append(", sigle: ");

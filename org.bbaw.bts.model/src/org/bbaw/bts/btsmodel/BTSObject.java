@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getRelations <em>Relations</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getTempSortKey <em>Temp Sort Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -178,5 +179,31 @@ public interface BTSObject extends AdministrativDataObject
 	 * @generated
 	 */
 	EList<BTSRelation> getRelations();
+
+	/**
+	 * Returns the value of the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Temp Sort Key</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Temp Sort Key</em>' attribute.
+	 * @see #setTempSortKey(int)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSObject_TempSortKey()
+	 * @model transient="true"
+	 * @generated
+	 */
+	int getTempSortKey();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSObject#getTempSortKey <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Temp Sort Key</em>' attribute.
+	 * @see #getTempSortKey()
+	 * @generated
+	 */
+	void setTempSortKey(int value);
 
 } // BTSObject

@@ -70,6 +70,7 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addCodePropertyDescriptor(object);
+			addTempSortKeyPropertyDescriptor(object);
 			addProviderPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
@@ -277,6 +278,28 @@ public class BTSConfigurationItemProvider extends BTSDBBaseObjectItemProvider im
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Temp Sort Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTempSortKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_tempSortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_tempSortKey_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__TEMP_SORT_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}

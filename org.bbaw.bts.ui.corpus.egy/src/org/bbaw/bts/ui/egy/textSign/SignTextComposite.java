@@ -5,6 +5,7 @@ import java.awt.image.DirectColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -20,6 +21,7 @@ import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSMarker;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSSenctence;
 import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
@@ -113,6 +115,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private FigureCanvas canvas;
 	private LightweightSystem lightWeightSystem;
 	private int figureCounter;
+	private List<BTSObject> relatingObjects;
 
 	@Inject
 	public SignTextComposite(Composite parent) {
@@ -372,18 +375,20 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 	}
 
-	public void setInput(BTSText text) {
+	public void setInput(BTSText text, List<BTSObject> relatingObjects) {
 		this.text = text;
+		this.relatingObjects = relatingObjects;
 		if (text != null) {
 			loadText();
 			this.layout();
 		}
- else {
+		else {
 			purgeAll();
 			this.layout();
 			parentComposite.layout();
 		}
 	}
+
 
 	private void loadText() {
 		purgeAll();
@@ -423,19 +428,20 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						itemFigure = makeWordFigure(word);
 						// appendWord(word);
 					}
- else if (senItem instanceof BTSMarker) {
+					else if (senItem instanceof BTSMarker) {
 						BTSMarker marker = (BTSMarker) senItem;
 						itemFigure = makeMarkerFigure(marker);
 						appendFigure(itemFigure);
 
 					}
- else if (senItem instanceof BTSAmbivalence) {
+					else if (senItem instanceof BTSAmbivalence) {
 						BTSAmbivalence ambivalence = (BTSAmbivalence) senItem;
 						itemFigure = makeAmbivalenceFigure(ambivalence);
 
 					}
 					if (itemFigure != null) {
 					}
+					// process relating Objects
 
 				}
 				ElementFigure sentenceEnd = makeSentenceEndFigure(sentence);
@@ -672,7 +678,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	private ElementFigure makeSentenceStartFigure(BTSSenctence sentence) {
-		MarkerFigure fig = new MarkerFigure("§");
+		MarkerFigure fig = new MarkerFigure("ï¿½");
 		fig.setModelObject(sentence);
 		fig.setType(ElementFigure.SENTENCE_START);
 		fig.setSize(15, 90);
@@ -681,7 +687,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	private ElementFigure makeSentenceEndFigure(BTSSenctence sentence) {
-		MarkerFigure fig = new MarkerFigure("§");
+		MarkerFigure fig = new MarkerFigure("ï¿½");
 		fig.setModelObject(sentence);
 		fig.setType(ElementFigure.SENTENCE_END);
 		fig.setSize(15, 90);

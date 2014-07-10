@@ -73,11 +73,34 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			add_idPropertyDescriptor(object);
 			addStatePropertyDescriptor(object);
 			addRevisionStatePropertyDescriptor(object);
 			addVisibilityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the id feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void add_idPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSIdentifiableItem__id_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSIdentifiableItem__id_feature", "_UI_BTSIdentifiableItem_type"),
+				 BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -208,6 +231,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(AdministrativDataObject.class)) {
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE:
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY:

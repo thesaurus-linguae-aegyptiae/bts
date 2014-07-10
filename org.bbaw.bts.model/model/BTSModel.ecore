@@ -68,6 +68,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
         eType="#//BTSRelation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempSortKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalence" eSuperTypes="#//BTSTextSentenceItem #//BTSSentenceItem #//BTSTextItems #//BTSReferencableItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"

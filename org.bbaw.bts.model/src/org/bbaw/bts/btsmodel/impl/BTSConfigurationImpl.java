@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRelations <em>Relations</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getTempSortKey <em>Temp Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getProvider <em>Provider</em>}</li>
  * </ul>
  * </p>
@@ -258,6 +259,26 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * @ordered
 	 */
 	protected EList<BTSRelation> relations;
+
+	/**
+	 * The default value of the '{@link #getTempSortKey() <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTempSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int TEMP_SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getTempSortKey() <em>Temp Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTempSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int tempSortKey = TEMP_SORT_KEY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getProvider() <em>Provider</em>}' attribute.
@@ -540,6 +561,27 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public int getTempSortKey() {
+		return tempSortKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTempSortKey(int newTempSortKey) {
+		int oldTempSortKey = tempSortKey;
+		tempSortKey = newTempSortKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY, oldTempSortKey, tempSortKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getProvider()
 	{
 		return provider;
@@ -632,6 +674,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return getCode();
 			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
 				return getRelations();
+			case BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY:
+				return getTempSortKey();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				return getProvider();
 		}
@@ -686,6 +730,9 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				getRelations().clear();
 				getRelations().addAll((Collection<? extends BTSRelation>)newValue);
 				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY:
+				setTempSortKey((Integer)newValue);
+				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				setProvider((String)newValue);
 				return;
@@ -737,6 +784,9 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
 				getRelations().clear();
 				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY:
+				setTempSortKey(TEMP_SORT_KEY_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				setProvider(PROVIDER_EDEFAULT);
 				return;
@@ -776,6 +826,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return CODE_EDEFAULT == null ? code != null : !CODE_EDEFAULT.equals(code);
 			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
 				return relations != null && !relations.isEmpty();
+			case BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY:
+				return tempSortKey != TEMP_SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROVIDER:
 				return PROVIDER_EDEFAULT == null ? provider != null : !PROVIDER_EDEFAULT.equals(provider);
 		}
@@ -818,6 +870,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_CONFIGURATION__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
 				case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
+				case BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY: return BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY;
 				default: return -1;
 			}
 		}
@@ -860,6 +913,7 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_CONFIGURATION__CODE;
 				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_CONFIGURATION__RELATIONS;
+				case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY: return BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY;
 				default: return -1;
 			}
 		}
@@ -946,6 +1000,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 		result.append(subtype);
 		result.append(", code: ");
 		result.append(code);
+		result.append(", tempSortKey: ");
+		result.append(tempSortKey);
 		result.append(", provider: ");
 		result.append(provider);
 		result.append(')');

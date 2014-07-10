@@ -70,6 +70,7 @@ public class BTSUserGroupItemProvider extends BTSDBBaseObjectItemProvider implem
 			addTypePropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addCodePropertyDescriptor(object);
+			addTempSortKeyPropertyDescriptor(object);
 			addCategoryPropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 		}
@@ -283,6 +284,28 @@ public class BTSUserGroupItemProvider extends BTSDBBaseObjectItemProvider implem
 	}
 
 	/**
+	 * This adds a property descriptor for the Temp Sort Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTempSortKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObject_tempSortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_tempSortKey_feature", "_UI_BTSObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBJECT__TEMP_SORT_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Category feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -407,6 +430,7 @@ public class BTSUserGroupItemProvider extends BTSDBBaseObjectItemProvider implem
 			case BtsmodelPackage.BTS_USER_GROUP__TYPE:
 			case BtsmodelPackage.BTS_USER_GROUP__SUBTYPE:
 			case BtsmodelPackage.BTS_USER_GROUP__CODE:
+			case BtsmodelPackage.BTS_USER_GROUP__TEMP_SORT_KEY:
 			case BtsmodelPackage.BTS_USER_GROUP__CATEGORY:
 			case BtsmodelPackage.BTS_USER_GROUP__COMMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));

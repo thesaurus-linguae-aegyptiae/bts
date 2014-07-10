@@ -62,7 +62,6 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			add_idPropertyDescriptor(object);
 			add_revPropertyDescriptor(object);
 			addProjectPropertyDescriptor(object);
 			addLockedPropertyDescriptor(object);
@@ -74,29 +73,6 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 			addDescriptionPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the id feature.
-	 * <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void add_idPropertyDescriptor(Object object)
-	{
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSIdentifiableItem__id_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSIdentifiableItem__id_feature", "_UI_BTSIdentifiableItem_type"),
-				 BtsmodelPackage.Literals.BTS_IDENTIFIABLE_ITEM__ID,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -376,7 +352,6 @@ public class BTSProjectItemProvider extends BTSObjectItemProvider implements IEd
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSProject.class)) {
-			case BtsmodelPackage.BTS_PROJECT__ID:
 			case BtsmodelPackage.BTS_PROJECT__REV:
 			case BtsmodelPackage.BTS_PROJECT__PROJECT:
 			case BtsmodelPackage.BTS_PROJECT__LOCKED:
