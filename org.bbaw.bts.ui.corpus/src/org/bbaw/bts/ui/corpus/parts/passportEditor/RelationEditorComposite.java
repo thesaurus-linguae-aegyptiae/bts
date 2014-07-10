@@ -282,7 +282,7 @@ public class RelationEditorComposite extends Composite {
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
 				if (dialog.open() == dialog.OK) {
-					BTSCorpusObject object = dialog.getObject();
+					BTSObject object = dialog.getObject();
 					System.out.println(object.get_id());
 					EditingDomain ed = getEditingDomain();
 					Command command = SetCommand.create(ed,

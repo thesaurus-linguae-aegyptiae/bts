@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSPassport;
 import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -617,7 +618,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
 				if (dialog.open() == dialog.OK) {
-					BTSCorpusObject object = dialog.getObject();
+					BTSObject object = dialog.getObject();
 					System.out.println(object.get_id());
 					Command command = SetCommand.create(editingDomain,
 							entry, BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Value(),

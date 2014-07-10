@@ -15,6 +15,7 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -29,8 +30,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
+import org.osgi.service.event.Event;
+import org.osgi.service.event.EventHandler;
 
-public class SearchSelectObjectDialog extends TitleAreaDialog {
+public class SearchSelectObjectDialog extends TitleAreaDialog implements EventHandler {
 
 	@Inject
 	private IEclipseContext context;
@@ -39,7 +42,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 	private BTSConfigItem relationConfig;
 
 	@Inject
-	private BTSCorpusObject selectionObject;
+	private BTSObject selectionObject;
 	
 	@Inject
 	private BTSConfigurationController configurationController;
@@ -48,6 +51,9 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 
 	@Inject
 	private BTSResourceProvider resourceProvider;
+
+	@Inject
+	private EventBroker eventBroker;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -187,6 +193,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 					ThsNavigator.class, child_ths);
 		}
 
+		eventBroker.subscribe("ui_secondarySelection/corpusNavigator", this);
 		tabFolder.setSelection(0);
 		return area;
 	}
@@ -220,8 +227,8 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 	@Optional
 	void eventReceivedSecondarySelection(
 			@EventTopic("ui_secondarySelection/*") BTSObject object) {
-		if (object instanceof BTSCorpusObject) {
-			selectionObject = (BTSCorpusObject) object;
+		if (object instanceof BTSObject) {
+			selectionObject = (BTSObject) object;
 			if (text != null && !text.isDisposed()) {
 				text.setText(object.getName());
 			}
@@ -230,8 +237,29 @@ public class SearchSelectObjectDialog extends TitleAreaDialog {
 		}
 	}
 
-	public BTSCorpusObject getObject() {
+	public BTSObject getObject() {
 		return selectionObject;
+	}
+
+	@Override
+	public void handleEvent(Event event) {
+		switch(event.getTopic())
+		{
+		case "event_text_relating_objects/loaded" :
+		{
+//			eventReceivedRelatingObjectsLoadedEvents(event.getProperty("org.eclipse.e4.data"));
+			break;
+		}
+		case "ui_secondarySelection/corpusNavigator" :
+		{
+			Object o = event.getProperty("org.eclipse.e4.data");
+			if (o instanceof BTSObject)
+			{
+				eventReceivedSecondarySelection((BTSObject) o);
+			}
+			break;
+		}
+		}
 	}
 
 }

@@ -66,7 +66,7 @@ public class CommentAnnotation extends ModelAnnotation {
 		}
 		else
 		{
-			return (comment.getComment().substring(0, 23));
+			return (comment.getComment().substring(0, Math.min(comment.getComment().length(), 23)));
 		}
 	}
 }

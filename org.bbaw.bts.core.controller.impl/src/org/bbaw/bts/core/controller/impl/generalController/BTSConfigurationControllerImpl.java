@@ -2,6 +2,7 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -1011,7 +1012,15 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 		if (relationConfig.getOwnerTypesMap().containsKey(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
 		{
-			references.addAll(relationConfig.getOwnerTypesMap().get(BTSConstants.OWNER_REFERENCED_TYPES_ANY));
+			Object o = relationConfig.getOwnerTypesMap().get(BTSConstants.OWNER_REFERENCED_TYPES_ANY);
+			if (o == null)
+			{
+				references.add(BTSConstants.OWNER_REFERENCED_TYPES_ANY);
+			}
+			else
+			{
+				references.addAll((Collection<String>) o);
+			}
 			return references;
 		}
 		List<String> refs = relationConfig.getOwnerTypesMap().get(oClass);

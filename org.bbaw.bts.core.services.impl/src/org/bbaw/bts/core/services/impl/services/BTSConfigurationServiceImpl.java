@@ -6,6 +6,7 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
@@ -266,6 +267,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			return BTSConstants.BASIC_OBJECT_TYPES[5];
 		} else if (corpusObject instanceof BTSThsEntry) {
 			return BTSConstants.BASIC_OBJECT_TYPES[6];
+		} else if (corpusObject instanceof BTSComment) {
+			return BTSConstants.BASIC_OBJECT_TYPES[7];
 		}
 		return null;
 	}

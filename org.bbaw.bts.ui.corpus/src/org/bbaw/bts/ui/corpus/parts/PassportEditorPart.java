@@ -1019,7 +1019,7 @@ public class PassportEditorPart {
 		IEclipseContext child = context.createChild("relations");
 		child.set(Composite.class, relationsComp);
 		child.set(EditingDomain.class, editingDomain);
-		child.set(BTSCorpusObject.class, corpusObject);
+		child.set(BTSObject.class, corpusObject);
 		child.set(BTSResourceProvider.class, resourceProvider);
 
 		// scrollComposite.layout();

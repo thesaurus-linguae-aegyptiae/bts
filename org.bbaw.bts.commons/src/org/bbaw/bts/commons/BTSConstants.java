@@ -36,11 +36,12 @@ public class BTSConstants
 	public static final String TEXT = "Text";
 	public static final String TEXT_CORPUS = "TextCorpus";
 	public static final String THS_ENTRY = "Thesaurus Entry";
+	private static final String COMMENT = "Comment";
 
 	public static final String[] BASIC_OBJECT_TYPES = new String[] {
 			BTSConstants.ANNOTATION, BTSConstants.CORPUS_OBJECT,
 			BTSConstants.IMAGE, BTSConstants.WLIST_ENTRY, BTSConstants.TEXT,
-			BTSConstants.TEXT_CORPUS, BTSConstants.THS_ENTRY };
+			BTSConstants.TEXT_CORPUS, BTSConstants.THS_ENTRY , BTSConstants.COMMENT};
 	public static final String DB_DIR = "dbdir";
 	public static final String DEFAULT_LOCAL_DB_URL_PORT = "9086";
 	public static final String DEFAULT_LOCAL_DB_URL_HOST = "127.0.0.1";

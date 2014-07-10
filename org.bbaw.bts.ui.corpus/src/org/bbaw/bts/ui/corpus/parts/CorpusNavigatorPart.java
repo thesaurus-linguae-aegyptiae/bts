@@ -305,12 +305,12 @@ public class CorpusNavigatorPart implements ScatteredCachingPart
 						BTSObject o = (BTSObject) tn.getObject();
 						if (!o.equals(selectedTreeObject))
 						{
-							executeSaveAllCommand();
 							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 									.equals(selectionType)) {
+								executeSaveAllCommand();
 								selectionService.setSelection(o);
 							} else {
-								eventBroker.send(
+								eventBroker.post(
 										"ui_secondarySelection/corpusNavigator", o);
 
 							}
