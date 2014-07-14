@@ -15,6 +15,7 @@ import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
@@ -209,7 +210,7 @@ public class EgyLemmatizerPart {
 
 	@Inject
 	void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSText selection) {
 		if (constructed) {
 		if (!selfSelecting) {
 			if (selection instanceof BTSCorpusObject)
@@ -223,11 +224,22 @@ public class EgyLemmatizerPart {
 					part.setLabel("Lemmatizer");
 				}
 			}
+		} else {
+			selfSelecting = false;
+		}
+		}
+	}
+	
+	@Inject
+	void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
+		if (constructed) {
+		if (!selfSelecting) {
 			if (selection == null) {
 				/* implementation not shown */
-			} else {
-				if (selection instanceof BTSWord) {
-					setSelectionInteral((BTSWord) selection);
+			} else if (!selection.getSelectedItems().isEmpty()){
+				if (selection.getSelectedItems().get(0) instanceof BTSWord) {
+					setSelectionInteral((BTSWord) selection.getSelectedItems().get(0));
 				}
 			}
 		} else {

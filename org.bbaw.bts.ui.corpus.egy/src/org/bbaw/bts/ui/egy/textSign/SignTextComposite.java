@@ -7,6 +7,7 @@ import java.awt.image.WritableRaster;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -19,17 +20,22 @@ import org.bbaw.bts.btsmodel.BTSAmbivalence;
 import org.bbaw.bts.btsmodel.BTSAmbivalenceItem;
 import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSMarker;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSSenctence;
 import org.bbaw.bts.btsmodel.BTSSentenceItem;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextItems;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.text.IBTSEditor;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.ModelAnnotation;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceEndFigure;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceStartFigure;
 import org.bbaw.bts.ui.egy.textSign.support.CompartementImageFigure;
@@ -61,7 +67,10 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.jface.text.Position;
+import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
@@ -70,6 +79,8 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.xtext.validation.Issue;
 
 public class SignTextComposite extends Composite implements IBTSEditor {
 
@@ -102,7 +113,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private BTSText text;
 	private Figure container;
 	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
-	private Map<BTSIdentifiableItem, IFigure> wordMap;
+	private Map<String, IFigure> wordMap;
 	protected int selectedIndex;
 	private Adapter notifier;
 	private LineFigure currentLineFigure;
@@ -116,6 +127,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private LightweightSystem lightWeightSystem;
 	private int figureCounter;
 	private List<BTSObject> relatingObjects;
+	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
+	private List<BTSObject> continuingRelatingObjects;
+	private HashMap<String, List<ElementFigure>> relatingObjectFigureMap;
 
 	@Inject
 	public SignTextComposite(Composite parent) {
@@ -353,7 +367,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					.eContainer();
 		}
 		if (word != null) {
-		IFigure rect = (IFigure) wordMap.get(word);
+		IFigure rect = (IFigure) wordMap.get(word.get_id());
 		if (rect != null) {
 		for (Object fig : rect.getChildren()) {
 			if (fig instanceof ImageFigure) {
@@ -375,9 +389,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 	}
 
-	public void setInput(BTSText text, List<BTSObject> relatingObjects) {
+	public void setInput(BTSText text, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
 		this.text = text;
 		this.relatingObjects = relatingObjects;
+		this.relatingObjectsMap = relatingObjectsMap;
 		if (text != null) {
 			loadText();
 			this.layout();
@@ -393,6 +408,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private void loadText() {
 		purgeAll();
 		max_line_length = canvas.getViewport().getBounds().width / 2;
+		continuingRelatingObjects = new Vector<BTSObject>();
 		// canvas = new FigureCanvas(this);
 		// canvas.setBackground(COLOR_CANVAS_BACKGROUND);
 		// canvas.setLayout(new FillLayout());
@@ -413,7 +429,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 
 
-		wordMap = new HashMap<BTSIdentifiableItem, IFigure>();
+		wordMap = new HashMap<String, IFigure>();
 		for (BTSTextItems item : text.getTextContent().getTextItems()) {
 			if (item instanceof BTSSenctence) {
 				BTSSenctence sentence = (BTSSenctence) item;
@@ -441,6 +457,20 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					}
 					if (itemFigure != null) {
 					}
+					if (relatingObjectsMap.containsKey(senItem.get_id()))
+					{
+						List<BTSInterTextReference> list = relatingObjectsMap.get(senItem.get_id());
+						processReferences(itemFigure, list, senItem);
+					}
+					if (!continuingRelatingObjects.isEmpty())
+					{
+						for (BTSObject o : continuingRelatingObjects)
+						{
+							itemFigure.addRelatingObject(o);
+							updateRelatingObjectFigureMap(o.get_id(), itemFigure);
+						}
+						//add continuing relating objects to figure!
+					}
 					// process relating Objects
 
 				}
@@ -463,6 +493,65 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		container.setFocusTraversable(true);
 		this.layout();
 		parentComposite.layout();
+	}
+
+	private void processReferences(ElementFigure itemFigure,
+			List<BTSInterTextReference> list, BTSSentenceItem senItem) {
+			// FIXME ende einer annotation berechnen!!!!!!!!
+			for (BTSInterTextReference ref : list)
+			{
+				BTSObject relatingObject = null;
+				if (ref.eContainer() != null && ref.eContainer() instanceof BTSRelation && ref.eContainer().eContainer() != null)
+				{
+					relatingObject = (BTSObject) ref.eContainer().eContainer();
+				}
+				else
+				{
+					continue;
+				}
+				if (ref.getBeginId() == null || ref.getEndId() == null || ref.getBeginId().equals(ref.getEndId()))
+				{
+					//1) ref referenziert nur ein Item
+					itemFigure.addRelatingObject(relatingObject);
+					updateRelatingObjectFigureMap(relatingObject.get_id(), itemFigure);
+
+				}
+				else if (ref.getBeginId().equals(senItem.get_id())) {
+				// 2) ref ist start
+				// annotation erzeugen
+					itemFigure.addRelatingObject(relatingObject);
+					continuingRelatingObjects.add(relatingObject);
+					updateRelatingObjectFigureMap(relatingObject.get_id(), itemFigure);
+				// annotation und start position cachen
+				
+				}
+				else if (ref.getEndId().equals(senItem.get_id())){
+				// 3) ref ist end
+				// annotation aus cache holen - wie?
+					itemFigure.addRelatingObject(relatingObject);
+					continuingRelatingObjects.remove(relatingObject);
+					updateRelatingObjectFigureMap(relatingObject.get_id(), itemFigure);
+				}
+			}
+		
+	}
+
+	private void updateRelatingObjectFigureMap(String relatingObjectID,
+			ElementFigure itemFigure) {
+		if (relatingObjectFigureMap == null)
+		{
+			relatingObjectFigureMap = new HashMap<String, List<ElementFigure>>();
+		}
+		List<ElementFigure> list = relatingObjectFigureMap.get(relatingObjectID);
+		if (list == null)
+		{
+			list = new Vector<ElementFigure>(4);
+			relatingObjectFigureMap.put(relatingObjectID, list);
+		}
+		if (!list.contains(itemFigure))
+		{
+			list.add(itemFigure);
+		}
 	}
 
 	private ElementFigure makeAmbivalenceFigure(BTSAmbivalence ambivalence) {
@@ -566,7 +655,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		if (currentLineFigure != null) {
 			currentLineFigure = null;
 		}
-
+		relatingObjectFigureMap = null;
 	}
 
 	private ElementFigure makeWordFigure(BTSWord word) {
@@ -577,7 +666,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		rect.setModelObject(word);
 		rect.setType(ElementFigure.WORD);
 
-		wordMap.put(word, rect);
+		wordMap.put(word.get_id(), rect);
 		// gridLayout = new GridLayout();
 		// gridLayout.numColumns = 1;
 		// gridLayout.makeColumnsEqualWidth = false;
@@ -846,7 +935,22 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// }
 
 		if (parentEditor != null) {
-			parentEditor.setEditorSelection((figure).getModelObject());
+			
+			Event e = new Event();
+			e.widget = this;
+			TypedEvent ev = new TypedEvent(e);
+			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev);
+			event.data = text;
+			event.getRelatingObjects().addAll(((ElementFigure)figure).getRelatingObjects());
+			BTSIdentifiableItem item = (BTSIdentifiableItem) figure.getModelObject();
+			event.setEndId(item.get_id());
+			event.setStartId(item.get_id());
+			if (item instanceof BTSSentenceItem)
+			{
+				event.getSelectedItems().add( (BTSSentenceItem) item);
+			}
+			event.getInterTextReferences().addAll(((ElementFigure)figure).getInterTextReferences());
+			parentEditor.setEditorSelection(event);
 		}
 	}
 
@@ -1015,6 +1119,44 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// loadText();
 		// canvas.layout();
 		return true;
+	}
+
+	public void addRelatingObjectNotification(
+			BTSModelUpdateNotification notification) {
+		if (notification.getObject() instanceof BTSObject)
+		{
+			BTSObject object = (BTSObject) notification.getObject();
+			List<ElementFigure> figures = relatingObjectFigureMap.get(object.get_id());
+			// remove old annotations
+			if (figures != null) {
+				for (ElementFigure fig : figures)
+				{
+					fig.getRelatingObjects().remove(object);
+				}
+			}
+				
+			// relObject ist neu
+			for (BTSRelation rel : object.getRelations()) {
+				if (rel.getObjectId() != null
+						&& rel.getObjectId().equals(text.get_id())) {
+					for (BTSInterTextReference ref : rel.getParts()) {
+							Position pos = null;
+							if (ref.getBeginId() != null
+									&& ref.getBeginId().equals(ref.getEndId())) {
+								ElementFigure fig = (ElementFigure) wordMap.get(ref.getBeginId());
+								fig.addRelatingObject(object);
+								updateRelatingObjectFigureMap(object.get_id(), fig);
+							} else {
+								
+							}
+							
+//						}
+					}
+				}
+			}
+
+		}
+		
 	}
 
 }

@@ -819,6 +819,7 @@ public class PassportEditorPart {
 			}
 		};
 		job.schedule(LOADING_DELAY);
+		return;
 
 	}
 

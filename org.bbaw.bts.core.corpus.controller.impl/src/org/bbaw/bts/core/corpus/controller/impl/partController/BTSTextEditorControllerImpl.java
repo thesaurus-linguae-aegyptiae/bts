@@ -129,17 +129,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private int counter;
 
 	@Override
-	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects)
+	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
 	{
 		if (text == null || text.getTextContent() == null)
 		{
 			return;
 		}
 		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
-		HashMap<String, List<BTSInterTextReference>> relatingObjectsMap = new HashMap<String,  List<BTSInterTextReference>>();
-		if (relatingObjects != null && ! relatingObjects.isEmpty())
+		if (relatingObjects != null && ! relatingObjects.isEmpty() && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
 		{
-			fillRelatingObjectsMap(relatingObjects, relatingObjectsMap);
+			relatingObjectsMap = fillRelatingObjectsMap(relatingObjects);
 		}
 			
 		StringBuilder stringBuilder = new StringBuilder();
@@ -179,8 +178,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	}
 
-	private void fillRelatingObjectsMap(List<BTSObject> relatingObjects,
-			HashMap<String, List<BTSInterTextReference>> relatingObjectsMap) {
+	public HashMap<String, List<BTSInterTextReference>> fillRelatingObjectsMap(List<BTSObject> relatingObjects) {
+		HashMap<String, List<BTSInterTextReference>> relatingObjectsMap = new HashMap<String, List<BTSInterTextReference>>();
 		counter = 0;
 		for (BTSObject o : relatingObjects)
 		{
@@ -212,10 +211,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				}
 			}
 		}
+		return relatingObjectsMap;
 		
 	}
 
-	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder, List<BTSObject> relatingObjects, HashMap<String, List<BTSInterTextReference>> relatingObjectsMap)
+	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
 	{
 		Position pos = null;
 		if (item instanceof BTSWord)
@@ -239,7 +239,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		// check if there are comments, annotations or subtext pointing to this
 		// item
 		// pointer can either be start or end positions!
-		if (pos != null && relatingObjectsMap.containsKey(item.get_id()))
+		if (item != null && relatingObjectsMap != null && pos != null && relatingObjectsMap.containsKey(item.get_id()))
 		{
 			createAnnotations(item, model, pos, relatingObjectsMap.get(item.get_id()));
 		}

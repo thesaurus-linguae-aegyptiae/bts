@@ -1,12 +1,16 @@
 package org.bbaw.bts.core.corpus.controller.partController;
 
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
 
+
+
 import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSWord;
@@ -23,7 +27,7 @@ import org.eclipse.swt.graphics.Image;
 public interface BTSTextEditorController
 {
 
-	void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects);
+	void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap);
 
 	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
 			TextViewer textViewer);
@@ -56,4 +60,6 @@ public interface BTSTextEditorController
 	BufferedImage getImageData(String topItemList) throws Exception;
 	
 	BufferedImage getImageData(String topItemList, int height, int width) throws Exception;
+	
+	HashMap<String, List<BTSInterTextReference>> fillRelatingObjectsMap(List<BTSObject> relatingObjects);
 }

@@ -45,6 +45,7 @@ import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
+import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -515,27 +516,34 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			ignoreGlyph_Button.setSelection(false);
 			}
 		}
-		if (!selfSelecting) {
-
-
-			if (selection != null && !selection.equals(selectionObject)) {
-
-				if (loaded)
-				{
-				if (selection instanceof BTSWord) {
-
-						selectionObject = (BTSObject) selection;
-						setSelectionInteral(selection);
-						bindingContext.dispose();
-						ignoreGlyph_Button.setSelection(false);
-				}
-				}
-			}
-		} else {
-			selfSelecting = false;
-		}
+		
 	}
+	@Inject
+	void setSelection(
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
+			if (!selfSelecting) {
 
+
+				if (selection != null) {
+
+					if (loaded)
+					{
+					if (!selection.getSelectedItems().isEmpty() 
+							&& !selection.getSelectedItems().get(0).equals(selectionObject) 
+							&& selection.getSelectedItems().get(0) instanceof BTSWord) {
+
+							selectionObject = (BTSObject) selection.getSelectedItems().get(0);
+							setSelectionInteral(selection.getSelectedItems().get(0));
+							bindingContext.dispose();
+							ignoreGlyph_Button.setSelection(false);
+					}
+					}
+				}
+			} else {
+				selfSelecting = false;
+			}
+	}
+	
 	private void purgeAll() {
 		selectedGlyphe = null;
 		wordGraphics = null;

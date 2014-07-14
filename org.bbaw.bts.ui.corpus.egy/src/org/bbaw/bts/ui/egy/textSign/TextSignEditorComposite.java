@@ -21,7 +21,9 @@ import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.btsmodel.BTSTextItems;
 import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.egy.textSign.support.CompartementImageFigure;
+import org.bbaw.bts.ui.egy.textSign.support.ElementFigure;
 import org.bbaw.bts.ui.egy.textSign.support.WordFigure;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
@@ -43,6 +45,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
@@ -50,6 +53,7 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Shell;
 
 public class TextSignEditorComposite extends Composite
@@ -391,9 +395,21 @@ public class TextSignEditorComposite extends Composite
 
 	private void setSelected(Figure rect)
 	{
+		if (rect instanceof ElementFigure){
+		Event e = new Event();
+		TypedEvent ev = new TypedEvent(e);
+		BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev);
+		event.data = text;
+		event.widget = this;
+		event.getRelatingObjects().addAll(((ElementFigure)rect).getRelatingObjects());
 		BTSWord word = figureMap.get(rect);
-		eventBroker.send("egywordSelection", word);
+		event.setEndId(word.get_id());
+		event.setStartId(word.get_id());
+		event.getSelectedItems().add(word);
+		event.getInterTextReferences().addAll(((ElementFigure)rect).getInterTextReferences());
 
+		eventBroker.send("egywordSelection", event);
+		}
 	}
 
 	

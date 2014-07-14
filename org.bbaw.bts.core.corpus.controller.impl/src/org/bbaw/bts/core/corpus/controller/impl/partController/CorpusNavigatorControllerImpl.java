@@ -320,7 +320,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	public String getDisplayName(String id) {
 		BTSCorpusObject o = findObject(id);
 		
-		if (o != null) {
+		if (o != null && o.getName() != null) {
 			return o.getName();
 		}
 		return id;

@@ -265,6 +265,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private List<ModelAnnotation> highlightedAnnotations = new Vector<ModelAnnotation>(4);
 	private Map<EObject, List<ModelAnnotation>> relatingObjectsAnnotationMap;
 	protected String queryId;
+	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 
 
 	/**
@@ -341,7 +342,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 							case 1:
 							{
 							
-								loadInputSignText(text, relatingObjects);
+								loadInputSignText(text, relatingObjects, relatingObjectsMap);
 								break;
 							}
 							case 2:
@@ -559,7 +560,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 //		this.annotationModel = model;
-		textEditorController.transformToDocument(text, doc, tempAnnotationModel, localRelatingObjects);
+		textEditorController.transformToDocument(text, doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
 
 		embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider)
 				.showAnnotations(BTSAnnotationAnnotation.TYPE,
@@ -1292,6 +1293,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				protected IStatus run(IProgressMonitor monitor)
 				{
 					relatingObjects = textEditorController.getRelatingObjects(text);
+					relatingObjectsMap = textEditorController.fillRelatingObjectsMap(relatingObjects);
 					queryId = "relations.objectId-" + text.get_id();
 					return Status.OK_STATUS;
 				}
@@ -1317,7 +1319,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				}
 				case 1:
 				{
-					loadInputSignText(text, relatingObjects);
+					loadInputSignText(text, relatingObjects, relatingObjectsMap);
 					break;
 				}
 				case 2:
@@ -1339,7 +1341,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				break;
 			}
 			case 1: {
-				loadInputSignText(text, relatingObjects);
+				loadInputSignText(text, relatingObjects, relatingObjectsMap);
 				break;
 			}
 			case 2: {
@@ -1351,12 +1353,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	}
 
-	private void loadInputSignText(BTSText text2, List<BTSObject> localRelatingObjects)
+	private void loadInputSignText(BTSText text2, List<BTSObject> localRelatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap2)
 	{
 		// if (text2 == null || text2.getTextContent() == null
 		// || text2.getTextContent().getTextItems().isEmpty())
 		// text2 = createMockUp(text2);
-		signTextEditor.setInput(text2, localRelatingObjects);
+		signTextEditor.setInput(text2, localRelatingObjects, relatingObjectsMap2);
 
 	}
 
@@ -1390,6 +1392,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		modelAnnotationMap = new HashMap<String, ModelAnnotation>();
 		relatingObjectsAnnotationMap = new HashMap<EObject, List<ModelAnnotation>>();
 		localCommandCacheSet.clear();
+		if (relatingObjectsMap != null)
+		{
+			relatingObjectsMap.clear();
+		}
 	}
 
 	@Focus
@@ -1460,7 +1466,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						workaround = true;
 						partService.activate(p);
 					}
-					processEditorSelection(selection);
+					selectionService.setSelection(selection);
+//					processEditorSelection(selection);
 					if (workaround) {
 						partService.activate(activePart);
 					}
@@ -1554,7 +1561,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			}
 			case 1:
 			{
-//				addAnnotationToSignText(notification);
+				addAnnotationToSignText(notification);
 				break;
 			}
 			case 2:
@@ -1566,24 +1573,16 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		
 	}
 
+	private void addAnnotationToSignText(BTSModelUpdateNotification notification) {
+		signTextEditor.addRelatingObjectNotification(notification);
+		
+	}
+
 	private void addAnnotationToTranscription(
 			BTSModelUpdateNotification notification) {
 		List<ModelAnnotation> mas = relatingObjectsAnnotationMap
 				.get(notification.getObject());
-//		Map<BTSInterTextReference, ModelAnnotation> refAnnotationMap = new HashMap<BTSInterTextReference, ModelAnnotation>();
-
-		// IAnnotationModel am =
-		// textEditorController.transformRelatingObject(notification.getObject(),
-		// annotationModel, mas);
 		BTSObject object = (BTSObject) notification.getObject();
-//		boolean isnew = false;
-//		if (mas == null) {
-//			isnew = true;
-//		} else {
-//			for (ModelAnnotation ma : mas) {
-//				refAnnotationMap.put(ma.getInterTextReference(), ma);
-//			}
-//		}
 		// remove old annotations
 		if (mas != null) {
 			for (ModelAnnotation ma : mas)
@@ -1597,20 +1596,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			if (rel.getObjectId() != null
 					&& rel.getObjectId().equals(text.get_id())) {
 				for (BTSInterTextReference ref : rel.getParts()) {
-//					if (!isnew && refAnnotationMap.containsKey(ref)) {
-//						ModelAnnotation a = refAnnotationMap.get(ref);
-//
-//						// vergleiche relations.parts und mas
-//						// update alle intertextreferences
-//						// bzw. erzeuge neue
-//					} else {
-						// erzeuge neue intertextreferences und modelAnnotations
-						// lauf über alle relations und alle intertextreferences
-						// laufe über alle modelannotations und suche die
-						// referenzierten Items
-						// bestimme die Position zu den referenzen
-						// erstelle Annotatins und füge sie dem editor-model
-						// hinzu
 						Position pos = null;
 						if (ref.getBeginId() != null
 								&& ref.getBeginId().equals(ref.getEndId())) {

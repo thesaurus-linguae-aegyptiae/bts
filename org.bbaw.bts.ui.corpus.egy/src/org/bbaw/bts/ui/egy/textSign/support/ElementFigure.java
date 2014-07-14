@@ -1,5 +1,10 @@
 package org.bbaw.bts.ui.egy.textSign.support;
 
+import java.util.Collection;
+import java.util.List;
+
+import org.bbaw.bts.btsmodel.BTSInterTextReference;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.eclipse.draw2d.IFigure;
 
 public interface ElementFigure extends IFigure {
@@ -27,4 +32,10 @@ public interface ElementFigure extends IFigure {
 	public String getType();
 
 	void setType(String type);
+	
+	List<BTSObject> getRelatingObjects();
+	
+	void addRelatingObject(BTSObject relatingObject);
+
+	List<BTSInterTextReference> getInterTextReferences();
 }

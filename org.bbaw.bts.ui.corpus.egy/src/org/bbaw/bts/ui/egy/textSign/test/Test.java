@@ -31,7 +31,7 @@ public class Test {
 
 		SignTextComposite editor = new SignTextComposite(
 edComposite);
-		editor.setInput(text, null);
+		editor.setInput(text, null, null);
 
 		edComposite.layout();
 		// edComposite.pack();
