@@ -4,6 +4,8 @@ package org.bbaw.bts.btsmodel;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>BTS Passport Entry Item</b></em>'.
@@ -25,7 +27,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSPassportEntryItem extends BTSPassportEntry {
+public interface BTSPassportEntryItem extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Subtype</b></em>' attribute.
 	 * <!-- begin-user-doc -->

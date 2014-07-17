@@ -3,8 +3,8 @@ package org.bbaw.bts.ui.corpus.provider;
 import java.util.List;
 import java.util.Vector;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.eclipse.jface.viewers.Viewer;
 
 import com.richclientgui.toolbox.duallists.IRemovableContentProvider;

@@ -7,10 +7,11 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSPassport;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -63,7 +64,7 @@ public abstract class PassportEntryEditorComposite extends Composite {
 		BTSPassportEntry defaultInput = null;
 		if (localEntries.isEmpty() || localEntries.size() <= 1) {
 			if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(type)) {
-				defaultInput = BtsmodelFactory.eINSTANCE
+				defaultInput = BtsCorpusModelFactory.eINSTANCE
 						.createBTSPassportEntryGroup();
 				defaultInput.setType(configItem.getValue());
 				// make default input
@@ -73,7 +74,7 @@ public abstract class PassportEntryEditorComposite extends Composite {
 					passport.getChildren().add(defaultInput);
 				}
 			} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM.equals(type)) {
-				defaultInput = BtsmodelFactory.eINSTANCE
+				defaultInput = BtsCorpusModelFactory.eINSTANCE
 						.createBTSPassportEntryItem();
 				defaultInput.setType(configItem.getValue());
 				// make default input

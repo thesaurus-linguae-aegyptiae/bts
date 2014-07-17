@@ -23,20 +23,21 @@ import javax.inject.Inject;
 import org.bbaw.bts.app.login.Login;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.InternetAccessTester;
+import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
+import org.bbaw.bts.core.controller.generalController.ExtensionStartUpController;
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.BTSProjectService;
-import org.bbaw.bts.core.services.BTSTextCorpusService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.db.DBManager;
@@ -48,7 +49,10 @@ import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
@@ -155,8 +159,8 @@ public class ApplicationStartupControllerImpl implements
 	@Inject
 	private BTSUserController userController;
 
-	@Inject
-	private BTSTextCorpusService textCorpusService;
+//	@Inject
+//	private BTSTextCorpusService textCorpusService;
 
 	private boolean dbPrepared;
 
@@ -424,7 +428,21 @@ public class ApplicationStartupControllerImpl implements
 //
 //			}
 			
-			checkCorpusSelectionSettings();
+			// extension specific startup routines
+			ExtensionStartUpController[] conrollers = null;
+			try {
+				conrollers = loadExtensionStartUpControllers(context);
+			} catch (CoreException e) {
+				logger.error(e);
+			}
+			if (conrollers != null)
+			{
+				for (ExtensionStartUpController c : conrollers)
+				{
+					c.startup();
+				}
+			}
+//			checkCorpusSelectionSettings();
 		}
 		
 		
@@ -499,24 +517,24 @@ public class ApplicationStartupControllerImpl implements
 
 	}
 
-	private void checkCorpusSelectionSettings() {
-		main_corpus_key = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
-		logger.info("checkCorpusSelectionSettings: main_project_key : " + main_project_key + ", main_corpus_key: " + main_corpus_key);
-		if (main_project_key == null || "".equals(main_project_key)) return;
-
-		if (main_corpus_key == null || "".equals(main_corpus_key)) return;
-		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
-		for (BTSTextCorpus cor : corpora)
-		{
-			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.equals(cor.getCorpusPrefix()))
-			{
-				BTSTextCorpus main_corpus = cor;
-				context.set(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);
-				break;
-			}
-		}
-		
-	}
+//	private void checkCorpusSelectionSettings() {
+//		main_corpus_key = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
+//		logger.info("checkCorpusSelectionSettings: main_project_key : " + main_project_key + ", main_corpus_key: " + main_corpus_key);
+//		if (main_project_key == null || "".equals(main_project_key)) return;
+//
+//		if (main_corpus_key == null || "".equals(main_corpus_key)) return;
+//		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+//		for (BTSTextCorpus cor : corpora)
+//		{
+//			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.equals(cor.getCorpusPrefix()))
+//			{
+//				BTSTextCorpus main_corpus = cor;
+//				context.set(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);
+//				break;
+//			}
+//		}
+//		
+//	}
 
 	private void loadPreferences(IEclipseContext context2) {
 		if (prefs == null) return;
@@ -881,5 +899,25 @@ public class ApplicationStartupControllerImpl implements
 		dbManager.startDatabase(db_installation_dir, localDBUrl);
 		return dbManager.synchronizeRemoteProjects(mainProject, projecsToSync, serverurl, localDBUrl);
 		 
+	}
+	
+	protected ExtensionStartUpController[] loadExtensionStartUpControllers(IEclipseContext context) throws CoreException
+	{
+		IConfigurationElement[] config = ((IExtensionRegistry) context.get(IExtensionRegistry.class.getName()))
+				.getConfigurationElementsFor(BTSPluginIDs.EXTENSION_POINT_STARTUP_CONTROLLER);
+		List<ExtensionStartUpController> controllers = new Vector<ExtensionStartUpController>(4);
+		for (IConfigurationElement e : config)
+		{
+			final Object o = e.createExecutableExtension("class");
+			if (o instanceof ExtensionStartUpController)
+			{
+				controllers.add((ExtensionStartUpController) o);
+			}
+		}
+		if (!controllers.isEmpty())
+		{
+			return controllers.toArray(new ExtensionStartUpController[controllers.size()]);
+		}
+		return null;
 	}
 }

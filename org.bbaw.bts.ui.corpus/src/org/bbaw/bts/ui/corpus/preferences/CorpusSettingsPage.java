@@ -3,11 +3,11 @@ package org.bbaw.bts.ui.corpus.preferences;
 import java.util.List;
 import java.util.Vector;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.ui.corpus.provider.BTSCorpusLabelProvider;
 import org.bbaw.bts.ui.corpus.provider.BTSCorpusRemovableContentProvider;
 import org.bbaw.bts.ui.corpus.provider.ListContentProvider;

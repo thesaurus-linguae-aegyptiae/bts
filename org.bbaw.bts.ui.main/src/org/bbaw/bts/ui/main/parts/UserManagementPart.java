@@ -17,7 +17,6 @@ import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
-import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -729,7 +728,7 @@ public class UserManagementPart
 		return BtsviewmodelFactory.eINSTANCE.wrappObject(o);
 	}
 
-	private void refreshTreeViewer(final TreeViewer treeviewer, final BTSTCObject object)
+	private void refreshTreeViewer(final TreeViewer treeviewer, final BTSObject object)
 	{
 		sync.asyncExec(new Runnable()
 		{

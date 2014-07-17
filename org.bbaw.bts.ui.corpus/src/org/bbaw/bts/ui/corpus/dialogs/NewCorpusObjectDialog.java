@@ -5,13 +5,13 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
@@ -199,7 +199,7 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		Binding binding_pre = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, corpusPrefixTxt),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX).observe(
+						BtsCorpusModelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX).observe(
 						object), us, null);
 		bindingContext.addValidationStatusProvider(binding_pre);
 		BackgroundControlDecorationSupport.create(binding_pre, SWT.TOP | SWT.LEFT);

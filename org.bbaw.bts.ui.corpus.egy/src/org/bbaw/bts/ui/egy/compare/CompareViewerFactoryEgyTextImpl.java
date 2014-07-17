@@ -1,7 +1,7 @@
 package org.bbaw.bts.ui.egy.compare;
 
-import org.bbaw.bts.btsmodel.BTSText;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.compare.CompareViewerFactory;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;

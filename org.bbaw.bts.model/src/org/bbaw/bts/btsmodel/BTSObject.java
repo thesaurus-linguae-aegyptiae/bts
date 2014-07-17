@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getTempSortKey <em>Temp Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSObject#getExternalReferences <em>External References</em>}</li>
  * </ul>
  * </p>
  *
@@ -205,5 +206,21 @@ public interface BTSObject extends AdministrativDataObject
 	 * @generated
 	 */
 	void setTempSortKey(int value);
+
+	/**
+	 * Returns the value of the '<em><b>External References</b></em>' containment reference list.
+	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSExternalReference}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>External References</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>External References</em>' containment reference list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSObject_ExternalReferences()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<BTSExternalReference> getExternalReferences();
 
 } // BTSObject

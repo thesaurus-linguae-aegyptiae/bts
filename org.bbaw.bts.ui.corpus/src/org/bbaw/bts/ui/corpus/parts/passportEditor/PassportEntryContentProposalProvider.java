@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Vector;
 
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.eclipse.jface.fieldassist.ContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposalProvider;

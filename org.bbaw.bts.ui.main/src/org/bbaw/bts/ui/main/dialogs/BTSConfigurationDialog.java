@@ -12,7 +12,6 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -29,7 +28,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringIsRegexPatternValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.CorpusObjectPivot;
+import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.BTSObjectPivot;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
 import org.bbaw.bts.ui.main.objectTypeSelector.ObjectTypeSelectionTreeComposite;
 import org.bbaw.bts.ui.main.objectTypeSelector.RelationSubjectObjectTypesSelectionComposite;
@@ -136,7 +135,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	@Inject
 	@Optional
 	@Named(IServiceConstants.ACTIVE_SELECTION)
-	private BTSCorpusObject selectedCorpusObject;
+	private BTSObject selectedCorpusObject;
 	@Inject
 	private EditingDomainController editingDomainController;
 
@@ -1063,7 +1062,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 					"\r", "hallo", "\r", false);
 			// TestPivot tp = new TestPivot();
 			if (selectedCorpusObject != null) {
-				CorpusObjectPivot cp = new CorpusObjectPivot(
+				BTSObjectPivot cp = new BTSObjectPivot(
 						selectedCorpusObject);
 				Map<String, EClassifier> map = new HashMap<String, EClassifier>();
 				map.put("second", selectedCorpusObject.eClass());

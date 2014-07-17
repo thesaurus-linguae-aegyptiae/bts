@@ -2,11 +2,11 @@ package org.bbaw.bts.ui.corpus.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSAnnotation;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSTCObject;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -23,7 +23,6 @@ public class CreateNewTCObjectHandler
 		BTSTCObject object = corpusNavigatorController.createNewTCObject(selection);
 		object.setName("Object1");
 		eventBroker.post("model_new/asyncEvent", object);
-//		System.out.println("CreateNewTCObjectHandler executed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 	}
 
 	@CanExecute

@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSComment;
+import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -42,6 +43,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getTempSortKey <em>Temp Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getExternalReferences <em>External References</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSCommentImpl#getTags <em>Tags</em>}</li>
  * </ul>
@@ -269,6 +271,16 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 	 * @ordered
 	 */
 	protected int tempSortKey = TEMP_SORT_KEY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExternalReferences() <em>External References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExternalReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSExternalReference> externalReferences;
 
 	/**
 	 * The default value of the '{@link #getComment() <em>Comment</em>}' attribute.
@@ -575,6 +587,18 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSExternalReference> getExternalReferences() {
+		if (externalReferences == null) {
+			externalReferences = new EObjectContainmentEList<BTSExternalReference>(BTSExternalReference.class, this, BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES);
+		}
+		return externalReferences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getComment() {
 		return comment;
 	}
@@ -637,6 +661,8 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_COMMENT__RELATIONS:
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES:
+				return ((InternalEList<?>)getExternalReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -673,6 +699,8 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				return getRelations();
 			case BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY:
 				return getTempSortKey();
+			case BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES:
+				return getExternalReferences();
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				return getComment();
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
@@ -727,6 +755,10 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				return;
 			case BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY:
 				setTempSortKey((Integer)newValue);
+				return;
+			case BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES:
+				getExternalReferences().clear();
+				getExternalReferences().addAll((Collection<? extends BTSExternalReference>)newValue);
 				return;
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				setComment((String)newValue);
@@ -783,6 +815,9 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 			case BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY:
 				setTempSortKey(TEMP_SORT_KEY_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES:
+				getExternalReferences().clear();
+				return;
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
@@ -825,6 +860,8 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY:
 				return tempSortKey != TEMP_SORT_KEY_EDEFAULT;
+			case BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES:
+				return externalReferences != null && !externalReferences.isEmpty();
 			case BtsmodelPackage.BTS_COMMENT__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
 			case BtsmodelPackage.BTS_COMMENT__TAGS:
@@ -864,6 +901,7 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				case BtsmodelPackage.BTS_COMMENT__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
 				case BtsmodelPackage.BTS_COMMENT__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				case BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY: return BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY;
+				case BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES: return BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES;
 				default: return -1;
 			}
 		}
@@ -901,6 +939,7 @@ public class BTSCommentImpl extends BTSDBBaseObjectImpl implements BTSComment {
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_COMMENT__CODE;
 				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_COMMENT__RELATIONS;
 				case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY: return BtsmodelPackage.BTS_COMMENT__TEMP_SORT_KEY;
+				case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES: return BtsmodelPackage.BTS_COMMENT__EXTERNAL_REFERENCES;
 				default: return -1;
 			}
 		}

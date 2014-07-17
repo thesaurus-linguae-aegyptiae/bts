@@ -29,43 +29,38 @@ import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
 import jsesh.mdcDisplayer.preferences.DrawingSpecification;
 import jsesh.mdcDisplayer.preferences.DrawingSpecificationsImplementation;
 
-import org.bbaw.bts.btsmodel.BTSAmbivalence;
-import org.bbaw.bts.btsmodel.BTSAmbivalenceItem;
-import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
-import org.bbaw.bts.btsmodel.BTSLemmaCase;
-import org.bbaw.bts.btsmodel.BTSMarker;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItem;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextItems;
-import org.bbaw.bts.btsmodel.BTSThsEntry;
-import org.bbaw.bts.btsmodel.BTSWord;
-import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.services.BTSCommentService;
-import org.bbaw.bts.core.services.BTSTextService;
-import org.bbaw.bts.core.services.CorpusObjectService;
-import org.bbaw.bts.core.services.GenericObjectService;
+import org.bbaw.bts.core.services.corpus.BTSTextService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
-import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
-import org.bbaw.bts.ui.commons.text.BTSAnnotationAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSCommentAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSLemmaAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSModelAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSSubtextAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -78,7 +73,6 @@ import org.eclipse.jface.text.rules.IToken;
 import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
@@ -297,7 +291,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					anno.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSAnnotationAnnotation(item, anno, reference);
+				modelAnnotation = new BTSAnnotationAnnotation(item, reference, anno);
 				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
 				{
 					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
@@ -311,7 +305,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					text.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSSubtextAnnotation(item, text, reference);
+				modelAnnotation = new BTSSubtextAnnotation(item, reference, text);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
@@ -777,7 +771,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			if (i < tokens.length)
 			{
 				Command command = SetCommand.create(editingDomain, graphic,
-						BtsmodelPackage.Literals.BTS_GRAPHIC__CODE,
+						BtsCorpusModelPackage.Literals.BTS_GRAPHIC__CODE,
 						tokens[i].toUpperCase());
 				editingDomain.getCommandStack().execute(command);
 				innerSentenceOrder = graphic.getInnerSentenceOrder();
@@ -799,14 +793,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				graphic.setCode(tokens[i].toUpperCase());
 				graphic.setInnerSentenceOrder(innerSentenceOrder + createdIndex);
 				Command command = AddCommand.create(editingDomain, word,
-						BtsmodelPackage.Literals.BTS_WORD__GRAPHICS, graphic);
+						BtsCorpusModelPackage.Literals.BTS_WORD__GRAPHICS, graphic);
 				editingDomain.getCommandStack().execute(command);
 				i++;
 			}
 		} else if (!toDelete.isEmpty())
 		{
 			Command command = RemoveCommand.create(editingDomain, word,
-					BtsmodelPackage.Literals.BTS_WORD__GRAPHICS, toDelete);
+					BtsCorpusModelPackage.Literals.BTS_WORD__GRAPHICS, toDelete);
 			editingDomain.getCommandStack().execute(command);
 		}
 

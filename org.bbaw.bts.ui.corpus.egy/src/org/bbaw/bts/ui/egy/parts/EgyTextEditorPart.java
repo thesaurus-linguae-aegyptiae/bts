@@ -17,22 +17,12 @@ import javax.inject.Named;
 
 import jsesh.editor.JMDCEditor;
 
-import org.bbaw.bts.btsmodel.BTSAmbivalence;
-import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSComment;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
-import org.bbaw.bts.btsmodel.BTSLemmaCase;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSReferencableItem;
 import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItem;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextSentenceItem;
-import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.commons.BTSPluginIDs;
@@ -40,16 +30,26 @@ import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
-import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
-import org.bbaw.bts.ui.commons.text.BTSAnnotationAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSCommentAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSLemmaAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSModelAnnotation;
-import org.bbaw.bts.ui.commons.text.BTSSubtextAnnotation;
-import org.bbaw.bts.ui.commons.text.IBTSEditor;
+import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
+import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
+import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
@@ -975,14 +975,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				modelAnnotationMap.put(((BTSIdentifiableItem) ta.getModelObject()).get_id(), ta);
 			}
 		} else if (a instanceof BTSAnnotationAnnotation) {
-			if (((BTSAnnotationAnnotation) a).getAnnotation() != null 
-					&& ((BTSAnnotationAnnotation) a).getAnnotation().getType() != null
-					&& ((BTSAnnotationAnnotation) a).getAnnotation().getType().equalsIgnoreCase("rubrum")) {
+			if (((BTSAnnotationAnnotation) a).getRelatingObject() != null 
+					&& ((BTSAnnotationAnnotation) a).getRelatingObject().getType() != null
+					&& ((BTSAnnotationAnnotation) a).getRelatingObject().getType().equalsIgnoreCase("rubrum")) {
 				AnnotationAnnotation ta = new AnnotationAnnotation(
 						embeddedEditor.getDocument(),
 						AnnotationAnnotation.TYPE_RUBRUM, issue,
 						((BTSAnnotationAnnotation) a).getModel(),
-						((BTSAnnotationAnnotation) a).getAnnotation());
+						(BTSAnnotation) ((BTSAnnotationAnnotation) a).getRelatingObject());
 				ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
 
 //				Position pos = model.getPosition((Annotation) a);
@@ -994,7 +994,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			AnnotationAnnotation ta = new AnnotationAnnotation(
 					embeddedEditor.getDocument(), issue,
 					((BTSAnnotationAnnotation) a).getModel(),
-					((BTSAnnotationAnnotation) a).getAnnotation());
+					(BTSAnnotation) ((BTSAnnotationAnnotation) a).getRelatingObject());
 //			Position pos = model.getPosition((Annotation) a);
 			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
 
@@ -1022,7 +1022,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			SubtextAnnotation ta = new SubtextAnnotation(
 					embeddedEditor.getDocument(), issue,
 					((BTSSubtextAnnotation) a).getModel(),
-					((BTSSubtextAnnotation) a).getSubtext());
+					(BTSText) ((BTSSubtextAnnotation) a).getRelatingObject());
 			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
 
 
@@ -1364,18 +1364,18 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private BTSText createMockUp(BTSText text2) {
 		if (text2 == null) {
-			text2 = BtsmodelFactory.eINSTANCE.createBTSText();
+			text2 = BtsCorpusModelFactory.eINSTANCE.createBTSText();
 		}
 		if (text2.getTextContent() == null) {
-			text2.setTextContent(BtsmodelFactory.eINSTANCE
+			text2.setTextContent(BtsCorpusModelFactory.eINSTANCE
 					.createBTSTextContent());
 		}
-		BTSSenctence sentence = BtsmodelFactory.eINSTANCE.createBTSSenctence();
+		BTSSenctence sentence = BtsCorpusModelFactory.eINSTANCE.createBTSSenctence();
 
 		for (int i = 0; i < 20; i++) {
-			BTSWord w = BtsmodelFactory.eINSTANCE.createBTSWord();
+			BTSWord w = BtsCorpusModelFactory.eINSTANCE.createBTSWord();
 			w.setWChar(i + "hh");
-			BTSGraphic g = BtsmodelFactory.eINSTANCE.createBTSGraphic();
+			BTSGraphic g = BtsCorpusModelFactory.eINSTANCE.createBTSGraphic();
 			g.setCode("n-s-t");
 			w.getGraphics().add(g);
 			sentence.getSentenceItems().add(w);

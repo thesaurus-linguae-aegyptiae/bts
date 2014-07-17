@@ -19,31 +19,31 @@ import jsesh.hieroglyphs.Possibility;
 import jsesh.mdc.MDCSyntaxError;
 import jsesh.mdc.utils.MDCNormalizer;
 
-import org.bbaw.bts.btsmodel.GraphicSelectionCounter;
+import org.bbaw.bts.btsmodel.UserActionCounter;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
-import org.bbaw.bts.core.services.GraphicSelectionCounterService;
+import org.bbaw.bts.core.services.UserActionCounterService;
 
 public class HieroglyphTypeWriterControllerImpl implements
 		HieroglyphTypeWriterController {
 
 	@Inject
-	private GraphicSelectionCounterService selectionCounterService;
+	private UserActionCounterService actionCounterService;
 
 	private CompositeHieroglyphsManager hieroglyphManager = new CompositeHieroglyphsManager()
 			.getInstance();
-	private Comparator<GraphicSelectionCounter> counterComparator;
+	private Comparator<UserActionCounter> counterComparator;
 
 	private MDCNormalizer mdcNormalizer = new MDCNormalizer();
 
 	@Override
 	public String getHieroglypheProposalsAsMdCString(String code,
 			Map counterCacheMap) {
-		List<GraphicSelectionCounter> counters = selectionCounterService
+		List<UserActionCounter> counters = actionCounterService
 				.getCountersForPrefix(code);
 		// due to scattered cache map system loaded resources are not cached
 		// when loaded through emf
 		if (counterCacheMap != null) {
-			for (GraphicSelectionCounter c : counters) {
+			for (UserActionCounter c : counters) {
 				if (!counterCacheMap.containsKey(c.eResource().getURI())) {
 
 					counterCacheMap.put(c.eResource().getURI(), c.eResource());
@@ -77,10 +77,10 @@ public class HieroglyphTypeWriterControllerImpl implements
 		return mdc;
 	}
 
-	private boolean countersContain(List<GraphicSelectionCounter> counters,
+	private boolean countersContain(List<UserActionCounter> counters,
 			String code) {
 		if (counters != null) {
-			for (GraphicSelectionCounter c : counters) {
+			for (UserActionCounter c : counters) {
 				if (c.get_id() != null && c.get_id().equals(code)) {
 					return true;
 				}
@@ -90,11 +90,11 @@ public class HieroglyphTypeWriterControllerImpl implements
 	}
 
 	private String transformProposalsToString(
-			List<GraphicSelectionCounter> counters) {
+			List<UserActionCounter> counters) {
 		String mdc = "";
 
 		for (int i = 0; i < counters.size() && i < 10; i++) {
-			GraphicSelectionCounter counter = counters.get(i);
+			UserActionCounter counter = counters.get(i);
 			// String prop = pos.getCode();// + "-\"" + i +
 			// "\"";
 			if (counter != null && !"".equals(counter.get_id())) {
@@ -107,15 +107,15 @@ public class HieroglyphTypeWriterControllerImpl implements
 		return mdc;
 	}
 
-	private Comparator<? super GraphicSelectionCounter> getComparator() {
+	private Comparator<? super UserActionCounter> getComparator() {
 		if (counterComparator == null)
 		{
-			counterComparator = new Comparator<GraphicSelectionCounter>(){
+			counterComparator = new Comparator<UserActionCounter>(){
 
 				private Date now = Calendar.getInstance().getTime();
 				@Override
-				public int compare(GraphicSelectionCounter o1,
-						GraphicSelectionCounter o2) {
+				public int compare(UserActionCounter o1,
+						UserActionCounter o2) {
 					if (o1 != null && o2 != null)
 					{
 						int di1 = 5;
@@ -207,6 +207,6 @@ public class HieroglyphTypeWriterControllerImpl implements
 				toAdd.add(normalized);
 			}
 		}
-		selectionCounterService.updateCounters(toAdd);
+		actionCounterService.updateCounters(toAdd);
 	}
 }

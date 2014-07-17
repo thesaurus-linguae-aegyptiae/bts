@@ -2,10 +2,10 @@ package org.bbaw.bts.ui.corpus.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.ui.corpus.dialogs.NewCorpusObjectDialog;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.CanExecute;

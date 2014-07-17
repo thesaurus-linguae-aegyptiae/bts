@@ -1,10 +1,11 @@
 package org.bbaw.bts.ui.egy.textSign.test;
 
-import org.bbaw.bts.btsmodel.BTSMarker;
-import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -46,16 +47,16 @@ edComposite);
 	}
 
 	private static BTSText makeMockup() {
-		BTSText text = BtsmodelFactory.eINSTANCE.createBTSText();
-		text.setTextContent(BtsmodelFactory.eINSTANCE.createBTSTextContent());
+		BTSText text = BtsCorpusModelFactory.eINSTANCE.createBTSText();
+		text.setTextContent(BtsCorpusModelFactory.eINSTANCE.createBTSTextContent());
 
-		BTSSenctence s = BtsmodelFactory.eINSTANCE.createBTSSenctence();
+		BTSSenctence s = BtsCorpusModelFactory.eINSTANCE.createBTSSenctence();
 		for (int i = 0; i < 5; i++) {
-			BTSWord w = BtsmodelFactory.eINSTANCE.createBTSWord();
+			BTSWord w = BtsCorpusModelFactory.eINSTANCE.createBTSWord();
 			w.setWChar("abc");
 			w.setLKey("LKey" + i);
 			s.getSentenceItems().add(w);
-			BTSMarker m = BtsmodelFactory.eINSTANCE.createBTSMarker();
+			BTSMarker m = BtsCorpusModelFactory.eINSTANCE.createBTSMarker();
 			m.setType("mno");
 			m.setName("hlkllj");
 			s.getSentenceItems().add(m);

@@ -33,11 +33,7 @@ import jsesh.hieroglyphs.ManuelDeCodage;
 import jsesh.mdc.MDCSyntaxError;
 import jsesh.mdc.utils.MDCNormalizer;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSGraphic;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
@@ -45,7 +41,12 @@ import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
-import org.bbaw.bts.ui.commons.events.BTSTextSelectionEvent;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -381,7 +382,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private void setSelectedGlypheIgnored(boolean selection) {
 		if (selectedGlyphe != null) {
 			Command c = SetCommand.create(editingDomain, selectedGlyphe,
-					BtsmodelPackage.BTS_GRAPHIC__IGNORED,
+					BtsCorpusModelPackage.BTS_GRAPHIC__IGNORED,
  selection);
 			editingDomain.getCommandStack().execute(c);
 			// selectedGlyphe.setIgnored(selection);
@@ -439,7 +440,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				WidgetProperties.selection().observeDelayed(
 						BTSUIConstants.DELAY, ignoreGlyph_Button),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_GRAPHIC__IGNORED).observe(
+						BtsCorpusModelPackage.Literals.BTS_GRAPHIC__IGNORED).observe(
 						selectedGlyphe), null, null);
 		Binding binding1 = bindingContext
 				.bindValue(
@@ -447,7 +448,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 								BTSUIConstants.DELAY, glyphOrder_spinner),
 						EMFEditProperties
 								.value(editingDomain,
-										BtsmodelPackage.Literals.BTS_GRAPHIC__INNER_SENTENCE_ORDER)
+										BtsCorpusModelPackage.Literals.BTS_GRAPHIC__INNER_SENTENCE_ORDER)
 								.observe(selectedGlyphe), null, null);
 	}
 

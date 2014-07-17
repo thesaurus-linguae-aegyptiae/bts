@@ -76,4 +76,6 @@ public class BTSPluginIDs
 
 	public static final String POPMENU_EGY_TEXT_EDITOR_XTEXT_MENU = "org.bbaw.bts.ui.corpus.egy.part.textEditor.xtext.popupmenu";
 
+	public static final String EXTENSION_POINT_STARTUP_CONTROLLER = "org.bbaw.bts.core.controller.extensionStartUpController";
+
 }

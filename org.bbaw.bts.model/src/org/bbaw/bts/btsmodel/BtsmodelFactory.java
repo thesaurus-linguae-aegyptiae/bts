@@ -21,93 +21,7 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BtsmodelFactory eINSTANCE = org.bbaw.bts.btsmodel.impl.BtsmodelFactoryImpl.init();
 
-	/**
-	 * Returns a new object of class '<em>BTSTC Object</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTSTC Object</em>'.
-	 * @generated
-	 */
-	BTSTCObject createBTSTCObject();
 
-	/**
-	 * Returns a new object of class '<em>BTS Text</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Text</em>'.
-	 * @generated
-	 */
-	BTSText createBTSText();
-
-	/**
-	 * Returns a new object of class '<em>BTS Senctence</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Senctence</em>'.
-	 * @generated
-	 */
-	BTSSenctence createBTSSenctence();
-
-	BTSSenctence createBTSSenctence(boolean setId);
-
-	/**
-	 * Returns a new object of class '<em>BTS Word</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Word</em>'.
-	 * @generated
-	 */
-	BTSWord createBTSWord();
-
-	BTSWord createBTSWord(boolean setId);
-	/**
-	 * Returns a new object of class '<em>BTS Marker</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Marker</em>'.
-	 * @generated
-	 */
-	BTSMarker createBTSMarker();
-
-	BTSMarker createBTSMarker(boolean setId);
-	/**
-	 * Returns a new object of class '<em>BTS List Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS List Entry</em>'.
-	 * @generated
-	 */
-	BTSListEntry createBTSListEntry();
-
-	/**
-	 * Returns a new object of class '<em>BTS Passport</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Passport</em>'.
-	 * @generated
-	 */
-	BTSPassport createBTSPassport();
-
-	/**
-	 * Returns a new object of class '<em>BTS Ambivalence</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Ambivalence</em>'.
-	 * @generated
-	 */
-	BTSAmbivalence createBTSAmbivalence();
-
-	BTSAmbivalence createBTSAmbivalence(boolean setId);
-	/**
-	 * Returns a new object of class '<em>BTS Lemma Case</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Lemma Case</em>'.
-	 * @generated
-	 */
-	BTSLemmaCase createBTSLemmaCase();
-
-	BTSLemmaCase createBTSLemmaCase(boolean setId);
 	/**
 	 * Returns a new object of class '<em>BTS User</em>'.
 	 * <!-- begin-user-doc -->
@@ -136,15 +50,6 @@ public interface BtsmodelFactory extends EFactory {
 	BTSInterTextReference createBTSInterTextReference();
 
 	/**
-	 * Returns a new object of class '<em>BTS Annotation</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Annotation</em>'.
-	 * @generated
-	 */
-	BTSAnnotation createBTSAnnotation();
-
-	/**
 	 * Returns a new object of class '<em>BTS Translation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -161,15 +66,6 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BTSDate createBTSDate();
-
-	/**
-	 * Returns a new object of class '<em>BTS Passport Entry Group</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Passport Entry Group</em>'.
-	 * @generated
-	 */
-	BTSPassportEntryGroup createBTSPassportEntryGroup();
 
 	/**
 	 * Returns a new object of class '<em>BTS Relation</em>'.
@@ -190,15 +86,6 @@ public interface BtsmodelFactory extends EFactory {
 	BTSConfiguration createBTSConfiguration();
 
 	/**
-	 * Returns a new object of class '<em>BTS Text Corpus</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Text Corpus</em>'.
-	 * @generated
-	 */
-	BTSTextCorpus createBTSTextCorpus();
-
-	/**
 	 * Returns a new object of class '<em>BTS Revision</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -206,24 +93,6 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BTSRevision createBTSRevision();
-
-	/**
-	 * Returns a new object of class '<em>BTS Image</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Image</em>'.
-	 * @generated
-	 */
-	BTSImage createBTSImage();
-
-	/**
-	 * Returns a new object of class '<em>BTS Corpus Header</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Corpus Header</em>'.
-	 * @generated
-	 */
-	BTSCorpusHeader createBTSCorpusHeader();
 
 	/**
 	 * Returns a new object of class '<em>BTS Timespan</em>'.
@@ -242,15 +111,6 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BTSExternalReference createBTSExternalReference();
-
-	/**
-	 * Returns a new object of class '<em>BTS Graphic</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Graphic</em>'.
-	 * @generated
-	 */
-	BTSGraphic createBTSGraphic();
 
 	/**
 	 * Returns a new object of class '<em>BTS Translations</em>'.
@@ -289,15 +149,6 @@ public interface BtsmodelFactory extends EFactory {
 	BTSUserGroup createBTSUserGroup();
 
 	/**
-	 * Returns a new object of class '<em>BTS List</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS List</em>'.
-	 * @generated
-	 */
-	BTSList createBTSList();
-
-	/**
 	 * Returns a new object of class '<em>BTS Passport Entry Item</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -305,24 +156,6 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BTSPassportEntryItem createBTSPassportEntryItem();
-
-	/**
-	 * Returns a new object of class '<em>BTS List Subentry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS List Subentry</em>'.
-	 * @generated
-	 */
-	BTSListSubentry createBTSListSubentry();
-
-	/**
-	 * Returns a new object of class '<em>BTS Ths Entry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Ths Entry</em>'.
-	 * @generated
-	 */
-	BTSThsEntry createBTSThsEntry();
 
 	/**
 	 * Returns a new object of class '<em>BTS Project</em>'.
@@ -388,24 +221,14 @@ public interface BtsmodelFactory extends EFactory {
 	BTSDBCollectionRoleDesc createBTSDBCollectionRoleDesc();
 
 	/**
-	 * Returns a new object of class '<em>BTS Text Content</em>'.
+	 * Returns a new object of class '<em>User Action Counter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Text Content</em>'.
+	 * @return a new object of class '<em>User Action Counter</em>'.
 	 * @generated
 	 */
-	BTSTextContent createBTSTextContent();
+	UserActionCounter createUserActionCounter();
 
-	/**
-	 * Returns a new object of class '<em>Graphic Selection Counter</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Graphic Selection Counter</em>'.
-	 * @generated
-	 */
-	GraphicSelectionCounter createGraphicSelectionCounter();
-
-	BTSTextContent createBTSTextContent(boolean setId);
 	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->

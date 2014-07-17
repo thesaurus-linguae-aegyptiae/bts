@@ -16,7 +16,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSProjectDao;
 import org.bbaw.bts.core.services.BTSProjectService;
-import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, String> implements BTSProjectService
@@ -48,7 +48,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 				e.printStackTrace();
 			}
 		}
-		projectDao.add(entity, ServiceConstants.ADMIN);
+		projectDao.add(entity, BTSCoreConstants.ADMIN);
 		return true;
 	}
 
@@ -123,27 +123,27 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public void update(BTSProject entity)
 	{
-		projectDao.update(entity, ServiceConstants.ADMIN);
+		projectDao.update(entity, BTSCoreConstants.ADMIN);
 
 	}
 
 	@Override
 	public void remove(BTSProject entity)
 	{
-		projectDao.remove(entity, ServiceConstants.ADMIN);
+		projectDao.remove(entity, BTSCoreConstants.ADMIN);
 
 	}
 
 	@Override
 	public BTSProject find(String key)
 	{
-		return projectDao.find(key, ServiceConstants.ADMIN);
+		return projectDao.find(key, BTSCoreConstants.ADMIN);
 	}
 
 	@Override
 	public List<BTSProject> list(String objectState)
 	{
-		return projectDao.list(ServiceConstants.ADMIN, objectState);
+		return projectDao.list(BTSCoreConstants.ADMIN, objectState);
 	}
 
 	@Override
@@ -151,10 +151,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			boolean registerQuery)
 	{
 		List<BTSProject> objects = new Vector<BTSProject>();
-		for (String p : active_projects.split(ServiceConstants.SPLIT_PATTERN))
+		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
 		{
-			objects.addAll(projectDao.query(query, ServiceConstants.ADMIN,
-					ServiceConstants.ADMIN, objectState, registerQuery));
+			objects.addAll(projectDao.query(query, BTSCoreConstants.ADMIN,
+					BTSCoreConstants.ADMIN, objectState, registerQuery));
 		}
 		return filter(objects);
 	}
@@ -167,7 +167,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public List<BTSProject> listRemoteProjects()
 	{
-		return remoteprojectDao.list(ServiceConstants.ADMIN);
+		return remoteprojectDao.list(BTSCoreConstants.ADMIN);
 	}
 
 	@Override

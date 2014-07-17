@@ -1,6 +1,6 @@
 package org.bbaw.bts.ui.egy.parts.egyTextEditor.model;
 
-import org.bbaw.bts.btsmodel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Canvas;

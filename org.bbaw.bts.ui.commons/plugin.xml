@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin>
    <extension-point id="compareViewerFactory" name="compareViewerFactory" schema="schema/compareViewerFactory.exsd"/>
+   <extension-point id="searchViewerFactory" name="Search Viewer Factory" schema="schema/searchViewerFactory.exsd"/>
 
 
 </plugin>

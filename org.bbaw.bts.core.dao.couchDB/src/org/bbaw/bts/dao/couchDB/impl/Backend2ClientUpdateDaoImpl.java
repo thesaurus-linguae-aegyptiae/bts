@@ -15,17 +15,11 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.Backend2ClientUpdateListener;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
-import org.bbaw.bts.core.dao.CorpusObjectDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
-import org.eclipse.core.runtime.Assert;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
@@ -41,7 +35,6 @@ import org.lightcouch.ChangesResult;
 import org.lightcouch.ChangesResult.Row;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbInfo;
-import org.lightcouch.Response;
 
 import com.google.gson.JsonObject;
 
@@ -235,7 +228,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 	}
 
 	@Override
-	public void runAndListenToUpdates(CorpusObjectDao corpusObjectDao, final String dbCollection)
+	public void runAndListenToUpdates(GeneralPurposeDao generalPurposeDao, final String dbCollection)
 	{
 		final CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, dbCollection);
 		CouchDbInfo dbInfo = client.context().info();

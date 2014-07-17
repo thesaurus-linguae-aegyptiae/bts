@@ -1,8 +1,7 @@
 package org.bbaw.bts.ui.corpus.compare;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.compare.CompareViewerFactory;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;

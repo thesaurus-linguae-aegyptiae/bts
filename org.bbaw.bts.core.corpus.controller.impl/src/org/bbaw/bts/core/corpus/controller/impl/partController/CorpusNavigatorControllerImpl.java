@@ -9,14 +9,9 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSAnnotation;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsmodel.BTSTCObject;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -24,15 +19,20 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
-import org.bbaw.bts.core.services.BTSAnnotationService;
-import org.bbaw.bts.core.services.BTSListEntryService;
-import org.bbaw.bts.core.services.BTSTCObjectService;
-import org.bbaw.bts.core.services.BTSTextCorpusService;
-import org.bbaw.bts.core.services.BTSTextService;
-import org.bbaw.bts.core.services.BTSThsEntryService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
-import org.bbaw.bts.core.services.CorpusObjectService;
 import org.bbaw.bts.core.services.IDService;
+import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
+import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.BTSTCObjectService;
+import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
+import org.bbaw.bts.core.services.corpus.BTSTextService;
+import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -72,7 +72,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	private BTSThsEntryService thsService;
 
 	@Inject
-	private BTSListEntryService wlistService;
+	private BTSLemmaEntryService wlistService;
 	
 	@Inject
 	private Logger logger;
@@ -316,15 +316,6 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		return anno;
 	}
 
-	@Override
-	public String getDisplayName(String id) {
-		BTSCorpusObject o = findObject(id);
-		
-		if (o != null && o.getName() != null) {
-			return o.getName();
-		}
-		return id;
-	}
 
 	@Override
 	public BTSCorpusObject findObject(String id) {

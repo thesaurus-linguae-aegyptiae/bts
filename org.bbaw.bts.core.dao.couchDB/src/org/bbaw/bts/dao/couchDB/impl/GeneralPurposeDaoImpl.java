@@ -9,6 +9,7 @@ import java.util.Vector;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
+import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;

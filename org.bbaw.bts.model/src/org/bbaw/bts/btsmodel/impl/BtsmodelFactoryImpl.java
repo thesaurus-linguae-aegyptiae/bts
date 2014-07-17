@@ -2,10 +2,7 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
-import java.text.DecimalFormat;
-import java.util.Calendar;
 import java.util.Map;
-import java.util.UUID;
 import org.bbaw.bts.btsmodel.*;
 import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.common.util.EList;
@@ -62,39 +59,21 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public EObject create(EClass eClass)
 	{
 		switch (eClass.getClassifierID()) {
-			case BtsmodelPackage.BTSTC_OBJECT: return createBTSTCObject();
-			case BtsmodelPackage.BTS_TEXT: return createBTSText();
-			case BtsmodelPackage.BTS_SENCTENCE: return createBTSSenctence();
-			case BtsmodelPackage.BTS_WORD: return createBTSWord();
-			case BtsmodelPackage.BTS_MARKER: return createBTSMarker();
-			case BtsmodelPackage.BTS_LIST_ENTRY: return createBTSListEntry();
-			case BtsmodelPackage.BTS_PASSPORT: return createBTSPassport();
-			case BtsmodelPackage.BTS_AMBIVALENCE: return createBTSAmbivalence();
-			case BtsmodelPackage.BTS_LEMMA_CASE: return createBTSLemmaCase();
 			case BtsmodelPackage.BTS_USER: return createBTSUser();
 			case BtsmodelPackage.BTS_COMMENT: return createBTSComment();
 			case BtsmodelPackage.BTS_INTER_TEXT_REFERENCE: return createBTSInterTextReference();
-			case BtsmodelPackage.BTS_ANNOTATION: return createBTSAnnotation();
 			case BtsmodelPackage.BTS_TRANSLATION: return createBTSTranslation();
 			case BtsmodelPackage.BTS_DATE: return createBTSDate();
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY_GROUP: return createBTSPassportEntryGroup();
 			case BtsmodelPackage.BTS_RELATION: return createBTSRelation();
 			case BtsmodelPackage.BTS_CONFIGURATION: return createBTSConfiguration();
-			case BtsmodelPackage.BTS_TEXT_CORPUS: return createBTSTextCorpus();
 			case BtsmodelPackage.BTS_REVISION: return createBTSRevision();
-			case BtsmodelPackage.BTS_IMAGE: return createBTSImage();
-			case BtsmodelPackage.BTS_CORPUS_HEADER: return createBTSCorpusHeader();
 			case BtsmodelPackage.BTS_TIMESPAN: return createBTSTimespan();
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE: return createBTSExternalReference();
-			case BtsmodelPackage.BTS_GRAPHIC: return createBTSGraphic();
 			case BtsmodelPackage.BTS_TRANSLATIONS: return createBTSTranslations();
 			case BtsmodelPackage.BTS_CONFIG_ITEM: return createBTSConfigItem();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG: return createBTSPassportEditorConfig();
 			case BtsmodelPackage.BTS_USER_GROUP: return createBTSUserGroup();
-			case BtsmodelPackage.BTS_LIST: return createBTSList();
 			case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM: return createBTSPassportEntryItem();
-			case BtsmodelPackage.BTS_LIST_SUBENTRY: return createBTSListSubentry();
-			case BtsmodelPackage.BTS_THS_ENTRY: return createBTSThsEntry();
 			case BtsmodelPackage.BTS_PROJECT: return createBTSProject();
 			case BtsmodelPackage.BTSDB_CONNECTION: return createBTSDBConnection();
 			case BtsmodelPackage.BTS_WORKFLOW_RULE: return createBTSWorkflowRule();
@@ -102,8 +81,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.DB_LEASE: return createDBLease();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION: return createBTSProjectDBCollection();
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: return createBTSDBCollectionRoleDesc();
-			case BtsmodelPackage.BTS_TEXT_CONTENT: return createBTSTextContent();
-			case BtsmodelPackage.GRAPHIC_SELECTION_COUNTER: return createGraphicSelectionCounter();
+			case BtsmodelPackage.USER_ACTION_COUNTER: return createUserActionCounter();
 			case BtsmodelPackage.STRING_TO_STRING_LIST_MAP: return (EObject)createStringToStringListMap();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -114,24 +92,13 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	{
 		if (eObject instanceof BTSIdentifiableItem)
 		{
-			((BTSIdentifiableItem) eObject).set_id(getSidWithCalendar());
+			((BTSIdentifiableItem) eObject).set_id(BTSConstants.getSidWithCalendar());
 		}
 		if (eObject instanceof AdministrativDataObject)
 		{
 			((AdministrativDataObject) eObject)
 					.setState(BTSConstants.OBJECT_STATE_ACTIVE);
 		}
-	}
-
-	private static final DecimalFormat timeFormat4 = new DecimalFormat("0000;0000");
-
-	public static String getSidWithCalendar()
-	{
-		Calendar cal = Calendar.getInstance();
-		String val = String.valueOf(cal.get(Calendar.YEAR));
-		val += timeFormat4.format(cal.get(Calendar.DAY_OF_YEAR));
-		val += UUID.randomUUID().toString().replaceAll("-", "");
-		return val;
 	}
 
 	/**
@@ -160,113 +127,15 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		}
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSTCObject createBTSTCObject()
-	{
-		BTSTCObjectImpl btstcObject = new BTSTCObjectImpl();
-		setIdentifiableId(btstcObject);
-		return btstcObject;
-	}
+	
+	
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSText createBTSText()
-	{
-		BTSTextImpl btsText = new BTSTextImpl();
-		setIdentifiableId(btsText);
-		return btsText;
-	}
+	
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSSenctence createBTSSenctence()
-	{
-		BTSSenctenceImpl btsSenctence = new BTSSenctenceImpl();
-		setIdentifiableId(btsSenctence);
-		return btsSenctence;
-	}
+	
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSWord createBTSWord()
-	{
-		BTSWordImpl btsWord = new BTSWordImpl();
-		setIdentifiableId(btsWord);
-		return btsWord;
-	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSMarker createBTSMarker()
-	{
-		BTSMarkerImpl btsMarker = new BTSMarkerImpl();
-		setIdentifiableId(btsMarker);
-		return btsMarker;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSListEntry createBTSListEntry()
-	{
-		BTSListEntryImpl btsListEntry = new BTSListEntryImpl();
-		setIdentifiableId(btsListEntry);
-		return btsListEntry;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSPassport createBTSPassport()
-	{
-		BTSPassportImpl btsPassport = new BTSPassportImpl();
-		setIdentifiableId(btsPassport);
-		return btsPassport;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSAmbivalence createBTSAmbivalence()
-	{
-		BTSAmbivalenceImpl btsAmbivalence = new BTSAmbivalenceImpl();
-		setIdentifiableId(btsAmbivalence);
-		return btsAmbivalence;
-	}
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSLemmaCase createBTSLemmaCase()
-	{
-		BTSLemmaCaseImpl btsLemmaCase = new BTSLemmaCaseImpl();
-		setIdentifiableId(btsLemmaCase);
-		return btsLemmaCase;
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -304,17 +173,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return btsInterTextReference;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSAnnotation createBTSAnnotation()
-	{
-		BTSAnnotationImpl btsAnnotation = new BTSAnnotationImpl();
-		setIdentifiableId(btsAnnotation);
-		return btsAnnotation;
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -340,16 +199,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return btsDate;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSPassportEntryGroup createBTSPassportEntryGroup() {
-		BTSPassportEntryGroupImpl btsPassportEntryGroup = new BTSPassportEntryGroupImpl();
-		setIdentifiableId(btsPassportEntryGroup);
-		return btsPassportEntryGroup;
-	}
+	
 
 
 
@@ -377,17 +227,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return btsConfiguration;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSTextCorpus createBTSTextCorpus()
-	{
-		BTSTextCorpusImpl btsTextCorpus = new BTSTextCorpusImpl();
-		setIdentifiableId(btsTextCorpus);
-		return btsTextCorpus;
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -401,29 +241,9 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return btsRevision;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSImage createBTSImage()
-	{
-		BTSImageImpl btsImage = new BTSImageImpl();
-		setIdentifiableId(btsImage);
-		return btsImage;
-	}
+	
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSCorpusHeader createBTSCorpusHeader()
-	{
-		BTSCorpusHeaderImpl btsCorpusHeader = new BTSCorpusHeaderImpl();
-		setIdentifiableId(btsCorpusHeader);
-		return btsCorpusHeader;
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -449,17 +269,6 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return btsExternalReference;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSGraphic createBTSGraphic()
-	{
-		BTSGraphicImpl btsGraphic = new BTSGraphicImpl();
-		setIdentifiableId(btsGraphic);
-		return btsGraphic;
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -509,17 +318,6 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return btsUserGroup;
 	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSList createBTSList()
-	{
-		BTSListImpl btsList = new BTSListImpl();
-		setIdentifiableId(btsList);
-		return btsList;
-	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -535,29 +333,8 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 
 
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSListSubentry createBTSListSubentry()
-	{
-		BTSListSubentryImpl btsListSubentry = new BTSListSubentryImpl();
-		setIdentifiableId(btsListSubentry);
-		return btsListSubentry;
-	}
 
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSThsEntry createBTSThsEntry()
-	{
-		BTSThsEntryImpl btsThsEntry = new BTSThsEntryImpl();
-		setIdentifiableId(btsThsEntry);
-		return btsThsEntry;
-	}
+	
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -644,23 +421,13 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @generated
-	 */
-	public BTSTextContent createBTSTextContent()
-	{
-		BTSTextContentImpl btsTextContent = new BTSTextContentImpl();
-		return btsTextContent;
-	}
-
-	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GraphicSelectionCounter createGraphicSelectionCounter() {
-		GraphicSelectionCounterImpl graphicSelectionCounter = new GraphicSelectionCounterImpl();
-		return graphicSelectionCounter;
+	public UserActionCounter createUserActionCounter() {
+		UserActionCounterImpl userActionCounter = new UserActionCounterImpl();
+		return userActionCounter;
 	}
 
 	/**
@@ -695,58 +462,6 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		return BtsmodelPackage.eINSTANCE;
 	}
 
-	@Override
-	public BTSSenctence createBTSSenctence(boolean setId) {
-		BTSSenctence entity = createBTSSenctence();
-		if (setId) {
-			setIdentifiableId(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public BTSWord createBTSWord(boolean setId) {
-		BTSWord entity = createBTSWord();
-		if (setId) {
-			setIdentifiableId(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public BTSMarker createBTSMarker(boolean setId) {
-		BTSMarker entity = createBTSMarker();
-		if (setId) {
-			setIdentifiableId(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public BTSAmbivalence createBTSAmbivalence(boolean setId) {
-		BTSAmbivalence entity = createBTSAmbivalence();
-		if (setId) {
-			setIdentifiableId(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public BTSLemmaCase createBTSLemmaCase(boolean setId) {
-		BTSLemmaCase entity = createBTSLemmaCase();
-		if (setId) {
-			setIdentifiableId(entity);
-		}
-		return entity;
-	}
-
-	@Override
-	public BTSTextContent createBTSTextContent(boolean setId) {
-		BTSTextContent entity = createBTSTextContent();
-		if (setId) {
-			setIdentifiableId(entity);
-		}
-		return entity;
-	}
+	
 
 } // BtsmodelFactoryImpl

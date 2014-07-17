@@ -6,8 +6,8 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -15,7 +15,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
-import org.bbaw.bts.core.services.CorpusObjectService;
+import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;
@@ -32,7 +32,7 @@ public class UserManagerControllerImpl implements UserManagerController
 	private BTSUserService userService;
 
 	@Inject
-	private CorpusObjectService corpusObjectService;
+	private GeneralBTSObjectService objectService;
 
 	@Override
 	public List<BTSUserGroup> listUserGroups()
@@ -95,14 +95,14 @@ public class UserManagerControllerImpl implements UserManagerController
 
 	@Override
 	public boolean saveDBBaseObject(BTSDBBaseObject dbBaseObject) {
-		if (dbBaseObject instanceof BTSCorpusObject) {
-			return corpusObjectService.save((BTSCorpusObject) dbBaseObject);
-		} else if (dbBaseObject instanceof BTSUser) {
-			return userService.save((BTSUser) dbBaseObject);
-		} else if (dbBaseObject instanceof BTSUserGroup) {
-			return usergroupService.save((BTSUserGroup) dbBaseObject);
-		}
-		return false;
+		return objectService.save((BTSDBBaseObject) dbBaseObject);
+//		if (dbBaseObject instanceof BTSObject) {
+//			
+//		} else if (dbBaseObject instanceof BTSUser) {
+//			return userService.save((BTSUser) dbBaseObject);
+//		} else if (dbBaseObject instanceof BTSUserGroup) {
+//			return usergroupService.save((BTSUserGroup) dbBaseObject);
+//		}
 	}
 
 }

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.core.corpus.controller.impl.partController.HieroglyphTypeWriterControllerImpl;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
-import org.bbaw.bts.core.services.GraphicSelectionCounterService;
+import org.bbaw.bts.core.services.UserActionCounterService;
 import org.eclipse.e4.core.contexts.ContextFunction;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -13,7 +13,7 @@ import org.eclipse.e4.ui.model.application.MApplication;
 public class HieroglypheTypeWriterControllerContextFunction extends
 		ContextFunction {
 	@Inject
-	GraphicSelectionCounterService service;
+	UserActionCounterService service;
 	@Override
 	public Object compute(IEclipseContext context) {
 		System.out.println("Intitialize HieroglypheTypeWriterController");

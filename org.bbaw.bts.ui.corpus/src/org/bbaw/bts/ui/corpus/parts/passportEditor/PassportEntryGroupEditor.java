@@ -11,13 +11,16 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSPassport;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
@@ -68,10 +71,13 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 	private List<BTSPassportEntry> entryPath;
 	@Inject
 	private BTSCorpusObject corpusObject;
-	@Inject
-	private BTSConfigurationController configurationController;
+	
 	@Inject
 	private BTSResourceProvider resourceProvider;
+	
+	@Inject
+	private PassportConfigurationController passportConfigurationController;
+
 
 	private boolean isGroup;
 	private Map<BTSConfigItem, PassportEntryEditorComposite> groupMap = new HashMap<BTSConfigItem, PassportEntryEditorComposite>();
@@ -125,7 +131,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 		BTSPassportEntry entry = entries.get(0);
 		entryPath.add(entry);
 
-		List<BTSConfig> filteredChildren = configurationController
+		List<BTSConfig> filteredChildren = passportConfigurationController
 				.getFilteredChildren(groupConfig, corpusObject);
 		for (BTSConfig child : filteredChildren) {
 			if (child instanceof BTSConfigItem
@@ -178,7 +184,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 			((GridLayout) composite.getLayout()).marginHeight = 0;
 			((GridLayout) group.getLayout()).horizontalSpacing = 7;
 			((GridLayout) group.getLayout()).verticalSpacing = 0;
-			List<BTSConfig> filteredChildren = configurationController
+			List<BTSConfig> filteredChildren = passportConfigurationController
 					.getFilteredChildren(groupConfig, corpusObject);
 			for (BTSConfig child : filteredChildren) {
 				if (child instanceof BTSConfigItem
@@ -242,7 +248,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 								org.eclipse.emf.common.command.Command command = AddCommand
 										.create(editingDomain,
 												parentEntry,
-												BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
+												BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
 												addEntry);
 								compoundCommand.append(command);
 								editingDomain.getCommandStack().execute(
@@ -333,7 +339,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 	}
 
 	protected BTSPassportEntry makeAdditionalEntry() {
-		BTSPassportEntry entry = BtsmodelFactory.eINSTANCE
+		BTSPassportEntry entry = BtsCorpusModelFactory.eINSTANCE
 				.createBTSPassportEntryGroup();
 		entry.setType(groupConfig.getValue());
 		return entry;

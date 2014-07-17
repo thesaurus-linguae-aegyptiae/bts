@@ -18,6 +18,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;

@@ -18,4 +18,10 @@
           class="org.bbaw.bts.ui.corpus.compare.CompareViewerFactoryPassportImpl">
     </compareViewerFactory>
  </extension>
+ <extension
+       point="org.bbaw.bts.ui.commons.searchViewerFactory">
+    <searchViewerFactory
+          class="org.bbaw.bts.ui.corpus.search.SearchViewerFactoryCorpus">
+    </searchViewerFactory>
+ </extension>
 </plugin>

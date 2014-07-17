@@ -13,18 +13,10 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSImage;
-import org.bbaw.bts.btsmodel.BTSListEntry;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSTCObject;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
-import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -113,74 +105,9 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return config;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.bbaw.bts.core.controller.impl.generalController.
-	 * BTSConfigurationController
-	 * #getPassportCategories(org.bbaw.bts.btsmodel.BTSCorpusObject)
-	 */
-	@Override
-	public List<BTSConfigItem> getPassportCategories(BTSCorpusObject corpusObject)
-	{
-		BTSConfigItem passportCI = configService.getActivePassportConfigItem();
-		List<BTSConfigItem> categories = new ArrayList<BTSConfigItem>();
-		if (passportCI != null && passportCI.getChildren() != null)
-		{
-			for (BTSConfig c : passportCI.getChildren())
-			{
-				if (c instanceof BTSConfigItem)
-				{
-					BTSConfigItem categoriesCI = (BTSConfigItem) c;
-					if (!categoriesCI.isIgnore()
-							&& categoriesCI.getValue() != null
-							&& categoriesCI.getValue().equals(
-									BTSCoreConstants.CATEGORIES)
-							&& categoriesCI.getChildren() != null)
-					{
-						for (BTSConfig cc : categoriesCI.getChildren())
-						{
-							if (cc instanceof BTSConfigItem)
-							{
-								BTSConfigItem ci = (BTSConfigItem) cc;
-								if (!ci.isIgnore()
-										&& objectTypesPathsContainsObjectype(
-										ci.getOwnerTypesMap(), corpusObject))
-								{
-									categories.add(ci);
-								}
-							}
-						}
-						return categories;
-					}
-				}
-			}
-		}
+	
 
-		return categories;
-	}
-
-	private boolean objectTypesPathsContainsObjectype(
-			Map<String, List<String>> ownerTypesMap,
-			BTSObject object) {
-		if (object == null) {
-			return false;
-		}
-		if (ownerTypesMap == null)
-		{
-			return true;
-		}
-		else
-		{
-			String oClass = findObjectClass(object);
-			String oType = object.getType();
-			String oSubtype = object.getSubtype();
-			return objectTypesPathContainsObject(ownerTypesMap, oClass,
-					oType, oSubtype, 2);
-
-		}
-	}
-
+	
 	// /*
 	// * (non-Javadoc)
 	// *
@@ -223,34 +150,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	// }
 
 
-	private boolean objectTypesPathContainsObject(
-			Map<String, List<String>> ownerTypesMap, String oClass,
-			String oType, String oSubtype, int level) {
-		if (ownerTypesMap.containsKey(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
-		{
-			return true;
-		}
-		else if (ownerTypesMap.containsKey(oClass))
-		{
-			return true;
-		}
-		else if (oType != null && !"".equals(oType.trim()))
-				
-		{
-			if (ownerTypesMap.containsKey(oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType))
-			{
-				return true;
-			}
-			else if (oSubtype != null && !"".equals(oSubtype.trim()) 
-					&&ownerTypesMap.containsKey(oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType
-							+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oSubtype))
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
+	
 
 	/*
 	 * (non-Javadoc)
@@ -263,12 +163,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	public String findObjectClass(BTSObject object) {
 		return configService.findObjectClass(object);
 	}
-	@Override
-	public String[] getObjectSubtypes(BTSCorpusObject corpusObject)
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public BTSConfigItem getObjectTypesConfigItem() {
@@ -450,71 +345,31 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		
 	}
 
-	private boolean objectTypesMapContainsObject(
-			Map<String, List<String>> ownerTypesMap, BTSConfig root,
-			BTSConfig child, BTSConfig grandChild, BTSConfig grandGrandChild) {
-		if (root != null)
-		{
-			if (child != null)
-			{
-				if (grandChild != null)
-				{
-					if (grandGrandChild != null)
-					{
-						return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
-								((BTSConfigItem) child).getValue(), 
-								((BTSConfigItem) grandChild).getValue(), 3);
-					}
-					return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
-							((BTSConfigItem) child).getValue(), 
-							((BTSConfigItem) grandChild).getValue(), 3);
-				}
-				return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
-						((BTSConfigItem) child).getValue(), 
-						null, 2);
-			}
-			return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
-					null, 
-					null, 1);
-		}
-		return false;
-	}
+	
+
+	
 
 	@Override
-	public List<BTSConfig> getFilteredChildren(BTSConfigItem configItem,
-			BTSCorpusObject corpusObject) {
-		List<BTSConfig> filteredChildren = new Vector<BTSConfig>();
-		for (BTSConfig child : configItem.getChildren()) {
-			if (child instanceof BTSConfigItem) {
-				if (objectTypesPathsContainsObjectype(
-						((BTSConfigItem) child).getOwnerTypesMap(),
-						corpusObject)) {
-					filteredChildren.add(child);
-				}
-			}
-		}
-		return filteredChildren;
-	}
-
-	@Override
-	public String getIconStringOfObjectType(BTSCorpusObject object) {
+	public String getIconStringOfObjectType(BTSObject object) {
 		BTSConfigItem typeCI = configService.getConfigItemOfObjectType(object,
 				false);
 		if (typeCI == null || typeCI.getSubtype() == null || "".equals(typeCI.getSubtype())) {
-			if (object instanceof BTSAnnotation) {
+			if (object.eClass().getName().startsWith("BTSAnnotation")) {
 				return resourceProvider.IMG_ANNOTATION;
-			} else if (object instanceof BTSText) {
-				return resourceProvider.IMG_TEXT;
-			} else if (object instanceof BTSTextCorpus) {
-				return resourceProvider.IMG_CORPUS;
-			} else if (object instanceof BTSTCObject) {
+			} else if (object.eClass().getName().startsWith("BTSTCObject")) {
 				return resourceProvider.IMG_TCOBJECT;
-			} else if (object instanceof BTSListEntry) {
-				return resourceProvider.IMG_LEMMA;
-			} else if (object instanceof BTSThsEntry) {
-				return resourceProvider.IMG_THS;
-			} else if (object instanceof BTSImage) {
+			} else if (object.eClass().getName().startsWith("BTSImage")) {
 				return resourceProvider.IMG_IMAGE;
+			} else if (object.eClass().getName().startsWith("BTSLemmaEntry")) {
+				return resourceProvider.IMG_LEMMA;
+			} else if (object.eClass().getName().startsWith("BTSText")) {
+				return resourceProvider.IMG_TEXT;
+			} else if (object.eClass().getName().startsWith("BTSTextCorpus")) {
+				return resourceProvider.IMG_CORPUS;
+			} else if (object.eClass().getName().startsWith("BTSThsEntry")) {
+				return resourceProvider.IMG_THS;
+			} else if (object.eClass().getName().startsWith("BTSComment")) {
+				return resourceProvider.IMG_COMMENT;
 			}
 		}
 		return typeCI.getSubtype();
@@ -554,327 +409,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return timeStamp.toString();
 	}
 
-	@Override
-	public BTSConfigItem getObjectTypeConfigItemProcessedClones(
-			BTSCorpusObject corpusObject) {
-		BTSConfigItem typesCI = getObjectTypesConfigItem();
-		String className = findObjectClass(corpusObject);
-		BTSConfigItem typeClone = BtsmodelFactory.eINSTANCE
-				.createBTSConfigItem();
-		boolean found = false;
-		if (typesCI != null && typesCI.getChildren() != null) {
-			for (BTSConfig c : typesCI.getChildren()) {
-				if (c instanceof BTSConfigItem) {
-					BTSConfigItem typeCI = (BTSConfigItem) c;
-					if (!typeCI.isIgnore() && typeCI.getValue() != null
-							&& typeCI.getValue().equals(className)) {
-						for (BTSConfig cc : typeCI.getChildren()) {
-							if (cc instanceof BTSConfigItem) {
-								BTSConfigItem ci = (BTSConfigItem) cc;
-								if (!ci.isIgnore()
-) {
-									typeClone.getChildren().add(
-											EcoreUtil.copy(ci));
-									if (corpusObject.getType() != null
-											&& !"".equals(corpusObject
-													.getType())
-											&& ci.getValue() != null
-											&& ci.getValue().equals(
-													corpusObject.getType())) {
-										found = true;
-									}
-								}
-							}
-						}
-						if (!found && corpusObject.getType() != null
-								&& !"".equals(corpusObject.getType())) {
-							BTSConfigItem ci = BtsmodelFactory.eINSTANCE
-									.createBTSConfigItem();
-							ci.setLabel(BtsmodelFactory.eINSTANCE
-									.createBTSTranslations());
-							ci.getLabel().setTranslation(
-									corpusObject.getType(), lang);
-							ci.setValue(corpusObject.getType());
-							typeClone.getChildren().add(ci);
-						}
-						return typeClone;
-					}
-				}
-			}
-		}
+	
 
-		return typeClone;
-	}
-
-	@Override
-	public BTSConfigItem getObjectSubtypeConfigItemProcessedClones(
-			BTSCorpusObject corpusObject) {
-		BTSConfigItem typesCI = getObjectTypesConfigItem();
-		String className = findObjectClass(corpusObject);
-		BTSConfigItem subtypeClone = BtsmodelFactory.eINSTANCE
-				.createBTSConfigItem();
-		boolean found = false;
-		if (typesCI != null && typesCI.getChildren() != null) {
-			for (BTSConfig c : typesCI.getChildren()) {
-				if (c instanceof BTSConfigItem) {
-					BTSConfigItem typeCI = (BTSConfigItem) c;
-					if (!typeCI.isIgnore() && typeCI.getValue() != null
-							&& typeCI.getValue().equals(className)) {
-						for (BTSConfig cc : typeCI.getChildren()) {
-							if (cc instanceof BTSConfigItem) {
-								BTSConfigItem ci = (BTSConfigItem) cc;
-								if (!ci.isIgnore()
-										&& ci.getValue() != null
-										&& ci.getValue().equals(
-												corpusObject.getType())) {
-									for (BTSConfig ccc : ci.getChildren()) {
-										if (cc instanceof BTSConfigItem) {
-											BTSConfigItem cci = (BTSConfigItem) ccc;
-											if (!cci.isIgnore()) {
-												subtypeClone.getChildren().add(
-														EcoreUtil
-														.copy(cci));
-												if (corpusObject.getSubtype() != null
-														&& !"".equals(corpusObject
-																.getSubtype())
-														&& cci.getValue() != null
-														&& cci.getValue()
-																.equals(corpusObject
-																		.getSubtype())) {
-													found = true;
-												}
-											}
-										}
-									}
-									if (!found
-											&& corpusObject.getSubtype() != null
-											&& !"".equals(corpusObject
-													.getSubtype())) {
-										BTSConfigItem cci = BtsmodelFactory.eINSTANCE
-												.createBTSConfigItem();
-										cci.setLabel(BtsmodelFactory.eINSTANCE
-												.createBTSTranslations());
-
-										cci.getLabel()
-												.setTranslation(
-														corpusObject
-																.getSubtype(),
-														lang);
-										cci.setValue(corpusObject.getSubtype());
-										subtypeClone.getChildren().add(cci);
-									}
-									BTSConfigItem ci2 = BtsmodelFactory.eINSTANCE
-											.createBTSConfigItem();
-									ci2.setLabel(BtsmodelFactory.eINSTANCE
-											.createBTSTranslations());
-									ci2.getLabel().setTranslation("", lang);
-									ci2.setValue(null);
-									subtypeClone.getChildren().add(ci2);
-									return subtypeClone;
-								}
-							}
-						}
-					}
-
-				}
-			}
-		}
-
-		return subtypeClone;
-	}
-
-	@Override
-	public BTSConfigItem getVisibilityConfigItemProcessedClones(
-			BTSCorpusObject corpusObject) {
-		BTSConfigItem visibilityCI = getVisibilityConfigItem();
-
-		BTSConfigItem visibilityClone = BtsmodelFactory.eINSTANCE
-				.createBTSConfigItem();
-		if (corpusObject == null) {
-			return visibilityClone;
-		}
-		boolean found = false;
-		if (visibilityCI != null && visibilityCI.getChildren() != null) {
-			for (BTSConfig c : visibilityCI.getChildren()) {
-				if (c instanceof BTSConfigItem) {
-					BTSConfigItem visCI = (BTSConfigItem) c;
-					if (!visCI.isIgnore()
-							&& objectTypesPathsContainsObjectype(
-									visCI.getOwnerTypesMap(), corpusObject)
-							&& visCI.getValue() != null) {
-						visibilityClone.getChildren()
-								.add(EcoreUtil.copy(visCI));
-						if (corpusObject.getVisibility() != null
-								&& !"".equals(corpusObject.getVisibility())
-								&& visCI.getValue() != null
-								&& visCI.getValue().equals(
-										corpusObject.getVisibility())) {
-							found = true;
-						}
-
-					}
-				}
-			}
-			if (corpusObject != null && !found
-					&& corpusObject.getVisibility() != null
-					&& !"".equals(corpusObject.getVisibility())) {
-				BTSConfigItem ci = BtsmodelFactory.eINSTANCE
-						.createBTSConfigItem();
-				ci.setLabel(BtsmodelFactory.eINSTANCE.createBTSTranslations());
-				ci.getLabel()
-						.setTranslation(corpusObject.getVisibility(), lang);
-				ci.setValue(corpusObject.getVisibility());
-				visibilityClone.getChildren().add(ci);
-			}
-			return visibilityClone;
-		}
-
-		return visibilityClone;
-	}
-
-	private BTSConfigItem getVisibilityConfigItem() {
-		BTSConfiguration config = configService.getActiveConfiguration();
-		for (BTSConfig c : config.getChildren()) {
-			if (BTSCoreConstants.VISIBILITY_CONFIG.equals(((BTSConfigItem) c)
-					.getValue())) {
-				return (BTSConfigItem) c;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public BTSConfigItem getReviewStateConfigItemProcessedClones(
-			BTSCorpusObject corpusObject) {
-		BTSConfigItem reviewStatusCI = getReviewStatusConfigItem();
-		BTSConfigItem reviewStatusClone = BtsmodelFactory.eINSTANCE
-				.createBTSConfigItem();
-		boolean found = false;
-		if (reviewStatusCI != null && reviewStatusCI.getChildren() != null) {
-			for (BTSConfig c : reviewStatusCI.getChildren()) {
-				if (c instanceof BTSConfigItem) {
-					BTSConfigItem visCI = (BTSConfigItem) c;
-					if (!visCI.isIgnore()
-							&& objectTypesPathsContainsObjectype(
-									visCI.getOwnerTypesMap(), corpusObject)
-							&& visCI.getValue() != null) {
-						reviewStatusClone.getChildren().add(
-								EcoreUtil.copy(visCI));
-						if (corpusObject.getRevisionState() != null
-								&& !"".equals(corpusObject.getRevisionState())
-								&& visCI.getValue() != null
-								&& visCI.getValue().equals(
-										corpusObject.getRevisionState())) {
-							found = true;
-						}
-
-					}
-				}
-			}
-			if (corpusObject != null && !found
-					&& corpusObject.getRevisionState() != null
-					&& !"".equals(corpusObject.getRevisionState())) {
-				BTSConfigItem ci = BtsmodelFactory.eINSTANCE
-						.createBTSConfigItem();
-				ci.setLabel(BtsmodelFactory.eINSTANCE.createBTSTranslations());
-				ci.getLabel().setTranslation(corpusObject.getRevisionState(),
-						lang);
-				ci.setValue(corpusObject.getRevisionState());
-				reviewStatusClone.getChildren().add(ci);
-			}
-
-			return reviewStatusClone;
-		}
-
-		return reviewStatusClone;
-	}
-
-	private BTSConfigItem getReviewStatusConfigItem() {
-		BTSConfiguration config = configService.getActiveConfiguration();
-		for (BTSConfig c : config.getChildren()) {
-			if (BTSCoreConstants.REVIEW_STATUS_CONFIG
-					.equals(((BTSConfigItem) c).getValue())) {
-				return (BTSConfigItem) c;
-			}
-		}
-		return null;
-	}
-
-	@Override
-	public BTSConfigItem getPathConfigItemProcessedClones(
-			BTSConfigItem itemConfig, BTSCorpusObject corpusObject) {
-		BTSConfiguration configuration = configService.getActiveConfiguration();
-		BTSObjectTypeTreeNode rootpath = null;
-		
-		//FIXME update
-//		if (itemConfig != null) {
-//			rootpath = itemConfig.getPassportEditorConfig()
-//				.getReferencedTypesPath();
-//		}
-		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
-				.createBTSConfigItem();
-		calculateChildrenRecurcively(rootpath, configuration, pathClonesList,
-				corpusObject);
-
-		return pathClonesList;
-	}
-
-	private void calculateChildrenRecurcively(BTSObjectTypeTreeNode rootpath,
-			BTSConfig config, BTSConfigItem pathClonesList,
-			BTSObject object) {
-		if (rootpath != null) {
-		for (BTSObjectTypeTreeNode pathEntry : rootpath.getChildren()) {
-			if (pathEntry instanceof BTSObjectTypeTreeNode) {
-				for (BTSConfig c : config.getChildren()) {
-					if (c instanceof BTSConfigItem) {
-						BTSConfigItem l1CI = (BTSConfigItem) c;
-						if (!l1CI.isIgnore()
-								&& l1CI.getValue() != null
-								&& l1CI.getValue().equals(
-										((BTSObjectTypeTreeNode) pathEntry)
-												.getValue())
-								&& objectTypesPathsContainsObjectype(
-										l1CI.getOwnerTypesMap(), object)) {
-							int size = pathClonesList.getChildren().size();
-
-							calculateChildrenRecurcively(pathEntry, l1CI,
-									pathClonesList, object);
-							if (pathClonesList.getChildren().size() == size) {
-								// add this level if no children were added
-								pathClonesList.getChildren().add(
-										EcoreUtil.copy(l1CI));
-							}
-
-						}
-					}
-				}
-			}
-		}
-		} else {
-			for (BTSConfig c : config.getChildren()) {
-				if (c instanceof BTSConfigItem) {
-					BTSConfigItem l1CI = (BTSConfigItem) c;
-					if (!l1CI.isIgnore()
-							&& l1CI.getValue() != null
-							&& objectTypesPathsContainsObjectype(
-									l1CI.getOwnerTypesMap(), object)) {
-						int size = pathClonesList.getChildren().size();
-
-						calculateChildrenRecurcively(null, l1CI,
-								pathClonesList, object);
-						if (pathClonesList.getChildren().size() == size) {
-							// add this level if no children were added
-							pathClonesList.getChildren().add(
-									EcoreUtil.copy(l1CI));
-						}
-
-					}
-				}
-			}
-		}
-
-	}
-
+	
+	
+	
 	@Override
 	public BTSConfiguration getActiveConfiguration() {
 		return configService.getActiveConfiguration();
@@ -898,74 +437,14 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		}
 		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
-		calculateChildrenReferncedObjectsRecurcively(rootpath, config,
+		configService.calculateChildrenReferncedObjectsRecurcively(rootpath, config,
 				pathClonesList,
 				object);
 
 		return pathClonesList;
 	}
 
-	private void calculateChildrenReferncedObjectsRecurcively(
-			BTSObjectTypeTreeNode rootpath, BTSConfig config,
-			BTSConfigItem pathClonesList, BTSObject object) {
-		if (rootpath != null) {
-			for (BTSObjectTypeTreeNode pathEntry : rootpath.getChildren()) {
-				if (pathEntry instanceof BTSObjectTypeTreeNode) {
-					for (BTSConfig c : config.getChildren()) {
-						if (c instanceof BTSConfigItem) {
-							BTSConfigItem l1CI = (BTSConfigItem) c;
-							if (!l1CI.isIgnore() && l1CI.getValue() != null
-									// && l1CI.getValue().equals(
-									// ((ObjectTypePathEntry) pathEntry)
-									// .getValue())
-//									//FIXME update
-//									&& objectTypesPathsContainsObjectype(l1CI
-//											.getPassportEditorConfig()
-//											.getReferencedTypesPath(),
-//											corpusObject)) {
-									){
-								int size = pathClonesList.getChildren().size();
-
-								calculateChildrenReferncedObjectsRecurcively(
-										pathEntry, l1CI, pathClonesList,
-										object);
-								if (pathClonesList.getChildren().size() == size) {
-									// add this level if no children were added
-									pathClonesList.getChildren().add(
-											EcoreUtil.copy(l1CI));
-								}
-
-							}
-						}
-					}
-					break;
-				}
-			}
-		} else {
-			for (BTSConfig c : config.getChildren()) {
-				if (c instanceof BTSConfigItem) {
-					BTSConfigItem l1CI = (BTSConfigItem) c;
-					if (!l1CI.isIgnore()
-							&& l1CI.getValue() != null
-							&& objectTypesPathsContainsObjectype(
-									l1CI.getOwnerTypesMap(), object)) {
-						int size = pathClonesList.getChildren().size();
-
-						calculateChildrenRecurcively(null, l1CI,
-								pathClonesList, object);
-						if (pathClonesList.getChildren().size() == size) {
-							// add this level if no children were added
-							pathClonesList.getChildren().add(
-									EcoreUtil.copy(l1CI));
-						}
-
-					}
-				}
-			}
-		}
-
-	}
-	// FIXME move to Service
+	
 
 	@Override
 	public boolean objectMayReferenceToCorpus(BTSObject object,
@@ -1059,21 +538,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return references;
 	}
 
-	private String determineTypesPathByObject(BTSCorpusObject object) {
-		String oClass = findObjectClass(object);
-		String oType = object.getType();
-		String oSubtype = object.getSubtype();
-		if (oType != null && !"".equals(oType.trim()))
-		{
-			oClass += BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType;
-			if (oSubtype != null && !"".equals(oSubtype.trim()))
-			{
-				oClass += BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oSubtype;
-						
-			}		
-		}
-		return oClass;
-	}
+	
 
 	@Override
 	public boolean objectMayReferenceToThs(BTSObject object,

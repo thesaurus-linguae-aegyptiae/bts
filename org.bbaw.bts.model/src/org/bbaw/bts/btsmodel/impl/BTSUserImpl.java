@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getTempSortKey <em>Temp Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getExternalReferences <em>External References</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getGroupIds <em>Group Ids</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getSigle <em>Sigle</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getDescription <em>Description</em>}</li>
@@ -284,6 +285,16 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * @ordered
 	 */
 	protected int tempSortKey = TEMP_SORT_KEY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExternalReferences() <em>External References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExternalReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSExternalReference> externalReferences;
 
 	/**
 	 * The cached value of the '{@link #getGroupIds() <em>Group Ids</em>}' attribute list.
@@ -838,6 +849,18 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSExternalReference> getExternalReferences() {
+		if (externalReferences == null) {
+			externalReferences = new EObjectContainmentEList<BTSExternalReference>(BTSExternalReference.class, this, BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES);
+		}
+		return externalReferences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EList<String> getGroupIds() {
 		if (groupIds == null) {
 			groupIds = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_USER__GROUP_IDS);
@@ -1172,6 +1195,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_USER__RELATIONS:
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES:
+				return ((InternalEList<?>)getExternalReferences()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				return ((InternalEList<?>)getExternalReferneces()).basicRemove(otherEnd, msgs);
 		}
@@ -1210,6 +1235,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return getRelations();
 			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
 				return getTempSortKey();
+			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES:
+				return getExternalReferences();
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				return getGroupIds();
 			case BtsmodelPackage.BTS_USER__SIGLE:
@@ -1290,6 +1317,10 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return;
 			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
 				setTempSortKey((Integer)newValue);
+				return;
+			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES:
+				getExternalReferences().clear();
+				getExternalReferences().addAll((Collection<? extends BTSExternalReference>)newValue);
 				return;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				getGroupIds().clear();
@@ -1386,6 +1417,9 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
 				setTempSortKey(TEMP_SORT_KEY_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES:
+				getExternalReferences().clear();
+				return;
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				getGroupIds().clear();
 				return;
@@ -1467,6 +1501,8 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY:
 				return tempSortKey != TEMP_SORT_KEY_EDEFAULT;
+			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES:
+				return externalReferences != null && !externalReferences.isEmpty();
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
 				return groupIds != null && !groupIds.isEmpty();
 			case BtsmodelPackage.BTS_USER__SIGLE:
@@ -1532,6 +1568,7 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				case BtsmodelPackage.BTS_USER__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
 				case BtsmodelPackage.BTS_USER__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				case BtsmodelPackage.BTS_USER__TEMP_SORT_KEY: return BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY;
+				case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES: return BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES;
 				default: return -1;
 			}
 		}
@@ -1569,6 +1606,7 @@ public class BTSUserImpl extends BTSDBBaseObjectImpl implements BTSUser {
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_USER__CODE;
 				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_USER__RELATIONS;
 				case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY: return BtsmodelPackage.BTS_USER__TEMP_SORT_KEY;
+				case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES: return BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES;
 				default: return -1;
 			}
 		}

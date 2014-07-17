@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -28,6 +29,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getRelations <em>Relations</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getTempSortKey <em>Temp Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getExternalReferences <em>External References</em>}</li>
  * </ul>
  * </p>
  *
@@ -154,6 +156,16 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * @ordered
 	 */
 	protected int tempSortKey = TEMP_SORT_KEY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getExternalReferences() <em>External References</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getExternalReferences()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<BTSExternalReference> externalReferences;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -317,11 +329,25 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<BTSExternalReference> getExternalReferences() {
+		if (externalReferences == null) {
+			externalReferences = new EObjectContainmentEList<BTSExternalReference>(BTSExternalReference.class, this, BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES);
+		}
+		return externalReferences;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT__RELATIONS:
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
+			case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES:
+				return ((InternalEList<?>)getExternalReferences()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -348,6 +374,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return getRelations();
 			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
 				return getTempSortKey();
+			case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES:
+				return getExternalReferences();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -383,6 +411,10 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
 				setTempSortKey((Integer)newValue);
 				return;
+			case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES:
+				getExternalReferences().clear();
+				getExternalReferences().addAll((Collection<? extends BTSExternalReference>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -416,6 +448,9 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
 				setTempSortKey(TEMP_SORT_KEY_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES:
+				getExternalReferences().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -442,6 +477,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return relations != null && !relations.isEmpty();
 			case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY:
 				return tempSortKey != TEMP_SORT_KEY_EDEFAULT;
+			case BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES:
+				return externalReferences != null && !externalReferences.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

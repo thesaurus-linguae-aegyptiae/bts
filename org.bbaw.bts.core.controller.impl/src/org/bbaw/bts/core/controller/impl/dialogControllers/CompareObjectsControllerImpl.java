@@ -5,17 +5,18 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
-import org.bbaw.bts.core.services.CorpusObjectService;
+import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.tempmodel.DBRevision;
+import org.eclipse.emf.ecore.EClass;
 
 public class CompareObjectsControllerImpl implements CompareObjectsController {
 
 	
 	@Inject
-	private CorpusObjectService corpusObjectService;
+	private GeneralBTSObjectService objectService;
 
 	@Override
 	public List<BTSDBBaseObject> listConflictingVersions(BTSDBBaseObject object) {
@@ -25,7 +26,8 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 		{
 			BTSDBBaseObject o = null;
 			try {
-				o = corpusObjectService.find(object.get_id(), object.getDBCollectionKey(), rev);
+				String className = getSuperTypeName(object);
+				o = objectService.find(object.get_id(), object.getDBCollectionKey(), className, rev);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -38,21 +40,25 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 		return conflictObjects;
 	}
 
+	private String getSuperTypeName(BTSDBBaseObject object) {
+		return object.getClass().getSuperclass().getName();
+	}
+
 	@Override
 	public boolean removeRevision(BTSDBBaseObject object, String revision) {
-		return corpusObjectService.removeRevision((BTSCorpusObject) object, revision);
+		return objectService.removeRevision(object, revision);
 	}
 
 	@Override
 	public void reloadConflicts(BTSDBBaseObject object) {
-		corpusObjectService.reloadConflicts((BTSCorpusObject) object);
+		objectService.reloadConflicts(object);
 		
 	}
 
 	@Override
 	public List<BTSDBBaseObject> listAvailableVersions(BTSDBBaseObject object,
 			boolean fetchFromRemote) {
-		List<DBRevision> revisions = corpusObjectService.listAvailableRevisions(object, fetchFromRemote);
+		List<DBRevision> revisions = objectService.listAvailableRevisions(object, fetchFromRemote);
 		List<BTSDBBaseObject> availableRevisions = new Vector<BTSDBBaseObject>();
 		for (DBRevision rev : revisions)
 		{
@@ -62,7 +68,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 				case DBRevision.LOCAL:
 				{
 					try {
-						o = corpusObjectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision());
+						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), getSuperTypeName(object));
 						if (o != null)
 						{
 							availableRevisions.add(o);
@@ -75,7 +81,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 				case DBRevision.REMOTE:
 				{
 					try {
-						o = corpusObjectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), true);
+						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), getSuperTypeName(object), true);
 						if (o != null)
 						{
 							availableRevisions.add(o);

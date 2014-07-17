@@ -93,6 +93,28 @@ public class BTSCoreConstants
 	public static final String LOCKING_MAP_KEY = "locking_map_key";
 	public static final String CORE_EXPRESSION_MAY_CREATE_DBCOLLECTION = "core_expression_may_create_dbCollection";
 	public static final String CORE_EXPRESSION_MAY_EDIT_PROJECTS = "core_expression_may_edit_projects";
+	
+	public static final String ADMIN_SUFFIX = "_admin";
+
+	public static final String COMMENT = "_comment";
+
+	public static final String LOCAL = "local";
+
+	public static final String SPLIT_PATTERN = "\\|";
+
+	public static final String ADMIN = "admin";
+
+	public static final String SEARCH_RELATION_PARTOF = "search_relation_partOf";
+
+	public static final String SEARCH_RELATED_OBJECTS = "search_relatedObjects";
+
+	public static final String USERID_PREFIX = "org.couchdb.user:";
+
+	public static final String STATUS_MESSAGE_LIST = "status_message_list";
+
+	public static final int STATUS_MESSAGE_LIST_SIZE = 25;
+	public static final String EXTENSION_POINT_SEARCH_SERVICE = "org.bbaw.bts.core.services.searchServices";
+	public static final String EXTENSION_SEARCH_SERVICE_MAP = "extension_search_service_map";
 
 
 }

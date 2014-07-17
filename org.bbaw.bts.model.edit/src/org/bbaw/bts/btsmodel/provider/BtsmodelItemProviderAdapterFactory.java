@@ -96,214 +96,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSTCObject} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSTCObjectItemProvider btstcObjectItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSTCObject}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSTCObjectAdapter() {
-		if (btstcObjectItemProvider == null) {
-			btstcObjectItemProvider = new BTSTCObjectItemProvider(this);
-		}
-
-		return btstcObjectItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSText} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSTextItemProvider btsTextItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSText}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSTextAdapter() {
-		if (btsTextItemProvider == null) {
-			btsTextItemProvider = new BTSTextItemProvider(this);
-		}
-
-		return btsTextItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSSenctence} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSSenctenceItemProvider btsSenctenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSSenctence}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSSenctenceAdapter() {
-		if (btsSenctenceItemProvider == null) {
-			btsSenctenceItemProvider = new BTSSenctenceItemProvider(this);
-		}
-
-		return btsSenctenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSWord} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSWordItemProvider btsWordItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSWord}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSWordAdapter() {
-		if (btsWordItemProvider == null) {
-			btsWordItemProvider = new BTSWordItemProvider(this);
-		}
-
-		return btsWordItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSMarker} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSMarkerItemProvider btsMarkerItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSMarker}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSMarkerAdapter()
-	{
-		if (btsMarkerItemProvider == null) {
-			btsMarkerItemProvider = new BTSMarkerItemProvider(this);
-		}
-
-		return btsMarkerItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSListEntry} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSListEntryItemProvider btsListEntryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSListEntry}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSListEntryAdapter() {
-		if (btsListEntryItemProvider == null) {
-			btsListEntryItemProvider = new BTSListEntryItemProvider(this);
-		}
-
-		return btsListEntryItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassport} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSPassportItemProvider btsPassportItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPassport}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSPassportAdapter() {
-		if (btsPassportItemProvider == null) {
-			btsPassportItemProvider = new BTSPassportItemProvider(this);
-		}
-
-		return btsPassportItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSAmbivalence} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSAmbivalenceItemProvider btsAmbivalenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSAmbivalence}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSAmbivalenceAdapter() {
-		if (btsAmbivalenceItemProvider == null) {
-			btsAmbivalenceItemProvider = new BTSAmbivalenceItemProvider(this);
-		}
-
-		return btsAmbivalenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSLemmaCase} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSLemmaCaseItemProvider btsLemmaCaseItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSLemmaCase}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSLemmaCaseAdapter() {
-		if (btsLemmaCaseItemProvider == null) {
-			btsLemmaCaseItemProvider = new BTSLemmaCaseItemProvider(this);
-		}
-
-		return btsLemmaCaseItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSUser} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -373,29 +165,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSAnnotation} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSAnnotationItemProvider btsAnnotationItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSAnnotation}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSAnnotationAdapter() {
-		if (btsAnnotationItemProvider == null) {
-			btsAnnotationItemProvider = new BTSAnnotationItemProvider(this);
-		}
-
-		return btsAnnotationItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSTranslation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -439,29 +208,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		}
 
 		return btsDateItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassportEntryGroup} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSPassportEntryGroupItemProvider btsPassportEntryGroupItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPassportEntryGroup}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSPassportEntryGroupAdapter() {
-		if (btsPassportEntryGroupItemProvider == null) {
-			btsPassportEntryGroupItemProvider = new BTSPassportEntryGroupItemProvider(this);
-		}
-
-		return btsPassportEntryGroupItemProvider;
 	}
 
 	/**
@@ -511,29 +257,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSTextCorpus} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSTextCorpusItemProvider btsTextCorpusItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSTextCorpus}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSTextCorpusAdapter() {
-		if (btsTextCorpusItemProvider == null) {
-			btsTextCorpusItemProvider = new BTSTextCorpusItemProvider(this);
-		}
-
-		return btsTextCorpusItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSRevision} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -554,52 +277,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		}
 
 		return btsRevisionItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSImage} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSImageItemProvider btsImageItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSImage}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSImageAdapter() {
-		if (btsImageItemProvider == null) {
-			btsImageItemProvider = new BTSImageItemProvider(this);
-		}
-
-		return btsImageItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSCorpusHeader} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSCorpusHeaderItemProvider btsCorpusHeaderItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSCorpusHeader}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSCorpusHeaderAdapter() {
-		if (btsCorpusHeaderItemProvider == null) {
-			btsCorpusHeaderItemProvider = new BTSCorpusHeaderItemProvider(this);
-		}
-
-		return btsCorpusHeaderItemProvider;
 	}
 
 	/**
@@ -646,29 +323,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		}
 
 		return btsExternalReferenceItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSGraphic} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSGraphicItemProvider btsGraphicItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSGraphic}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSGraphicAdapter() {
-		if (btsGraphicItemProvider == null) {
-			btsGraphicItemProvider = new BTSGraphicItemProvider(this);
-		}
-
-		return btsGraphicItemProvider;
 	}
 
 	/**
@@ -764,29 +418,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSList} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSListItemProvider btsListItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSList}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSListAdapter() {
-		if (btsListItemProvider == null) {
-			btsListItemProvider = new BTSListItemProvider(this);
-		}
-
-		return btsListItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassportEntryItem} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -807,53 +438,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		}
 
 		return btsPassportEntryItemItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSListSubentry} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSListSubentryItemProvider btsListSubentryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSListSubentry}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSListSubentryAdapter() {
-		if (btsListSubentryItemProvider == null) {
-			btsListSubentryItemProvider = new BTSListSubentryItemProvider(this);
-		}
-
-		return btsListSubentryItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSThsEntry} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSThsEntryItemProvider btsThsEntryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSThsEntry}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSThsEntryAdapter()
-	{
-		if (btsThsEntryItemProvider == null) {
-			btsThsEntryItemProvider = new BTSThsEntryItemProvider(this);
-		}
-
-		return btsThsEntryItemProvider;
 	}
 
 	/**
@@ -1025,50 +609,26 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSTextContent} instances.
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.UserActionCounter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected BTSTextContentItemProvider btsTextContentItemProvider;
+	protected UserActionCounterItemProvider userActionCounterItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSTextContent}.
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.UserActionCounter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createBTSTextContentAdapter()
-	{
-		if (btsTextContentItemProvider == null) {
-			btsTextContentItemProvider = new BTSTextContentItemProvider(this);
+	public Adapter createUserActionCounterAdapter() {
+		if (userActionCounterItemProvider == null) {
+			userActionCounterItemProvider = new UserActionCounterItemProvider(this);
 		}
 
-		return btsTextContentItemProvider;
-	}
-
-	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.GraphicSelectionCounter} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected GraphicSelectionCounterItemProvider graphicSelectionCounterItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.GraphicSelectionCounter}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createGraphicSelectionCounterAdapter() {
-		if (graphicSelectionCounterItemProvider == null) {
-			graphicSelectionCounterItemProvider = new GraphicSelectionCounterItemProvider(this);
-		}
-
-		return graphicSelectionCounterItemProvider;
+		return userActionCounterItemProvider;
 	}
 
 	/**
@@ -1223,39 +783,21 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	 * @generated
 	 */
 	public void dispose() {
-		if (btstcObjectItemProvider != null) btstcObjectItemProvider.dispose();
-		if (btsTextItemProvider != null) btsTextItemProvider.dispose();
-		if (btsSenctenceItemProvider != null) btsSenctenceItemProvider.dispose();
-		if (btsWordItemProvider != null) btsWordItemProvider.dispose();
-		if (btsMarkerItemProvider != null) btsMarkerItemProvider.dispose();
-		if (btsListEntryItemProvider != null) btsListEntryItemProvider.dispose();
-		if (btsPassportItemProvider != null) btsPassportItemProvider.dispose();
-		if (btsAmbivalenceItemProvider != null) btsAmbivalenceItemProvider.dispose();
-		if (btsLemmaCaseItemProvider != null) btsLemmaCaseItemProvider.dispose();
 		if (btsUserItemProvider != null) btsUserItemProvider.dispose();
 		if (btsCommentItemProvider != null) btsCommentItemProvider.dispose();
 		if (btsInterTextReferenceItemProvider != null) btsInterTextReferenceItemProvider.dispose();
-		if (btsAnnotationItemProvider != null) btsAnnotationItemProvider.dispose();
 		if (btsTranslationItemProvider != null) btsTranslationItemProvider.dispose();
 		if (btsDateItemProvider != null) btsDateItemProvider.dispose();
-		if (btsPassportEntryGroupItemProvider != null) btsPassportEntryGroupItemProvider.dispose();
 		if (btsRelationItemProvider != null) btsRelationItemProvider.dispose();
 		if (btsConfigurationItemProvider != null) btsConfigurationItemProvider.dispose();
-		if (btsTextCorpusItemProvider != null) btsTextCorpusItemProvider.dispose();
 		if (btsRevisionItemProvider != null) btsRevisionItemProvider.dispose();
-		if (btsImageItemProvider != null) btsImageItemProvider.dispose();
-		if (btsCorpusHeaderItemProvider != null) btsCorpusHeaderItemProvider.dispose();
 		if (btsTimespanItemProvider != null) btsTimespanItemProvider.dispose();
 		if (btsExternalReferenceItemProvider != null) btsExternalReferenceItemProvider.dispose();
-		if (btsGraphicItemProvider != null) btsGraphicItemProvider.dispose();
 		if (btsTranslationsItemProvider != null) btsTranslationsItemProvider.dispose();
 		if (btsConfigItemItemProvider != null) btsConfigItemItemProvider.dispose();
 		if (btsPassportEditorConfigItemProvider != null) btsPassportEditorConfigItemProvider.dispose();
 		if (btsUserGroupItemProvider != null) btsUserGroupItemProvider.dispose();
-		if (btsListItemProvider != null) btsListItemProvider.dispose();
 		if (btsPassportEntryItemItemProvider != null) btsPassportEntryItemItemProvider.dispose();
-		if (btsListSubentryItemProvider != null) btsListSubentryItemProvider.dispose();
-		if (btsThsEntryItemProvider != null) btsThsEntryItemProvider.dispose();
 		if (btsProjectItemProvider != null) btsProjectItemProvider.dispose();
 		if (btsdbConnectionItemProvider != null) btsdbConnectionItemProvider.dispose();
 		if (btsWorkflowRuleItemProvider != null) btsWorkflowRuleItemProvider.dispose();
@@ -1263,8 +805,7 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (dbLeaseItemProvider != null) dbLeaseItemProvider.dispose();
 		if (btsProjectDBCollectionItemProvider != null) btsProjectDBCollectionItemProvider.dispose();
 		if (btsdbCollectionRoleDescItemProvider != null) btsdbCollectionRoleDescItemProvider.dispose();
-		if (btsTextContentItemProvider != null) btsTextContentItemProvider.dispose();
-		if (graphicSelectionCounterItemProvider != null) graphicSelectionCounterItemProvider.dispose();
+		if (userActionCounterItemProvider != null) userActionCounterItemProvider.dispose();
 		if (stringToStringListMapItemProvider != null) stringToStringListMapItemProvider.dispose();
 	}
 

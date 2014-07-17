@@ -3,7 +3,6 @@ package org.bbaw.bts.ui.commons.converter;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSProject;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;

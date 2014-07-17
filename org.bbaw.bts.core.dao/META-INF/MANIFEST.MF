@@ -13,8 +13,10 @@ Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
  org.eclipse.equinox.registry,
  org.eclipse.e4.ui.model.workbench,
  org.eclipse.e4.core.di.extensions,
- org.eclipse.osgi
+ org.eclipse.osgi,
+ org.eclipse.equinox.common
 Export-Package: org.bbaw.bts.core.dao,
+ org.bbaw.bts.core.dao.contextFunctions,
  org.bbaw.bts.core.dao.util
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.gson;version="2.1.0",

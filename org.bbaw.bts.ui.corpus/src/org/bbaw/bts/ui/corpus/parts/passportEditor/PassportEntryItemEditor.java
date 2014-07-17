@@ -7,17 +7,21 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSPassport;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
+import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController;
+import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSBooleanToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
@@ -28,7 +32,8 @@ import org.bbaw.bts.ui.commons.converter.BTSStringToIntegerConverter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.commons.validator.StringRegexValidator;
-import org.bbaw.bts.ui.corpus.dialogs.SearchSelectObjectDialog;
+import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
+import org.bbaw.bts.ui.main.widgets.ObjectSelectionProposalProvider;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -109,9 +114,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	@Inject
 	@Named(BTSUIConstants.PASSPORT_ENTRY_PATH)
 	private List<BTSPassportEntry> entryPath;
-
 	@Inject
-	private BTSConfigurationController configurationController;
+	private GeneralBTSObjectController generalObjectController;
 
 	private IContentProposalProvider itemProposalProvider;
 	private boolean makingProposalProvider;
@@ -134,6 +138,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private Text textSuggest;
 	private Combo combo;
 	private Text text;
+	@Inject
+	private PassportConfigurationController passportConfigurationController;
 
 	@Inject
 	public PassportEntryItemEditor(Composite parent) {
@@ -240,7 +246,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							org.eclipse.emf.common.command.Command command = AddCommand
 									.create(editingDomain,
 											parentEntry,
-											BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
+											BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__CHILDREN,
 											addEntry);
 							compoundCommand.append(command);
 							editingDomain.getCommandStack().execute(
@@ -479,7 +485,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, textField),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
+						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), us, null);
 
 		if (itemConfig.getPassportEditorConfig().isRequired() || regex) {
@@ -522,7 +528,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				WidgetProperties.selection().observeDelayed(
 						BTSUIConstants.DELAY, checkBox),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
+						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), targetToModel, modelToTarget);
 
 		if (itemConfig.getPassportEditorConfig().isRequired()) {
@@ -567,7 +573,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							System.out.println(proposal);
 							Command command = SetCommand.create(
 									editingDomain,
-									entry, BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+									entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 									proposal.getContent());
 							editingDomain.getCommandStack().execute(
 									command);
@@ -621,7 +627,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					BTSObject object = dialog.getObject();
 					System.out.println(object.get_id());
 					Command command = SetCommand.create(editingDomain,
-							entry, BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							object.get_id());
 					editingDomain.getCommandStack().execute(command);
 //					System.out.println("Relation with object id "
@@ -642,7 +648,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			BTSConfigItem configItem) {
 		if (thsItemProposalProvider == null) {
 			thsItemProposalProvider = new ObjectSelectionProposalProvider(
-					passportEditorController, configItem, corpusObject);
+					generalObjectController, configItem, corpusObject);
 		}
 		thsItemProposalProvider.setConfigItem(configItem);
 		return thsItemProposalProvider;
@@ -690,7 +696,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				WidgetProperties.selection().observeDelayed(
 						BTSUIConstants.DELAY, spinner),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
+						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), targetToModel, modelToTarget);
 
 		if (itemConfig.getPassportEditorConfig().isRequired()) {
@@ -773,7 +779,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, textSuggest),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
+						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), us, null);
 
 		if (itemConfig.getPassportEditorConfig().isRequired() || regex) {
@@ -820,7 +826,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	}
 
 	protected BTSPassportEntry makeAdditionalEntry() {
-		BTSPassportEntry entry = BtsmodelFactory.eINSTANCE
+		BTSPassportEntry entry = BtsCorpusModelFactory.eINSTANCE
 				.createBTSPassportEntryItem();
 		entry.setType(itemConfig.getValue());
 		return entry;
@@ -863,7 +869,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 		selectComboViewer.setContentProvider(contentProvider);
 		selectComboViewer.setLabelProvider(labelProvider);
-		selectComboViewer.setInput(configurationController
+		selectComboViewer.setInput(passportConfigurationController
 				.getPathConfigItemProcessedClones(itemConfig2, corpusObject));
 
 		DataBindingContext bindingContext = new DataBindingContext();
@@ -881,7 +887,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		Binding binding = bindingContext.bindValue(
 				target_type_viewer,
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
+						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), targetToModel, modelToTarget);
 
 		if (itemConfig.getPassportEditorConfig().isRequired()) {
@@ -941,7 +947,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, text),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
+						BtsCorpusModelPackage.Literals.BTS_PASSPORT_ENTRY__VALUE)
 						.observe(entry), us, null);
 
 		if (itemConfig.getPassportEditorConfig().isRequired() || regex) {

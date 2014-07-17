@@ -1,6 +1,6 @@
 package org.bbaw.bts.ui.main.test;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.ecore.EClass;
@@ -30,58 +30,59 @@ public class OCLTest
 		t.validate(null);
 	}
 
-	public boolean validate(BTSCorpusObject object2)
+	public boolean validate(BTSObject object2)
 	{
-		BTSCorpusObject object = BtsmodelFactory.eINSTANCE.createBTSTextCorpus();
-		object.setName("aaa");
-		boolean valid;
-		OCLExpression<EClassifier> query = null;
-		Constraint invariant = null;
-		try
-		{
-			// create an OCL instance for Ecore
-			OCL<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, org.eclipse.ocl.ecore.Constraint, EClass, EObject> ocl;
-			// ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
-			ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
+//		BTSObject object = BtsmodelFactory.eINSTANCE.createBTSTextCorpus();
+//		object.setName("aaa");
+//		boolean valid;
+//		OCLExpression<EClassifier> query = null;
+//		Constraint invariant = null;
+//		try
+//		{
+//			// create an OCL instance for Ecore
+//			OCL<EPackage, EClassifier, EOperation, EStructuralFeature, EEnumLiteral, EParameter, EObject, CallOperationAction, SendSignalAction, org.eclipse.ocl.ecore.Constraint, EClass, EObject> ocl;
+//			// ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
+//			ocl = OCL.newInstance(EcoreEnvironmentFactory.INSTANCE);
+//
+//			// create an OCL helper object
+//			OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
+//
+//			// set the OCL context classifier
+//			helper.setContext(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT);
+//
+//			String var1 = "self.name <> 'aaa'";
+//			String var2 = "not self.children->isEmpty()";
+//			query = helper.createQuery(var2);
+//
+//			// record success
+//			valid = true;
+//
+//			try
+//			{
+//				// // set the OCL context classifier
+//				// helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
+//
+//				invariant = helper.createInvariant(var2);
+//			} catch (ParserException e)
+//			{
+//				// record failure to parse
+//				System.err.println(e.getLocalizedMessage());
+//			}
+//
+//			// use the query expression parsed before to create a Query
+//			Query<EClassifier, EClass, EObject> eval = ocl.createQuery(query);
+//
+//			// Collection<?> result = (Collection<?>) eval.evaluate(object);
+//			boolean ok = eval.check(object);
+//			System.out.println(ok);
+//		} catch (ParserException e)
+//		{
+//			// record failure to parse
+//			valid = false;
+//			System.err.println(e.getLocalizedMessage());
+//		}
 
-			// create an OCL helper object
-			OCLHelper<EClassifier, EOperation, EStructuralFeature, Constraint> helper = ocl.createOCLHelper();
-
-			// set the OCL context classifier
-			helper.setContext(BtsmodelPackage.Literals.BTS_CORPUS_OBJECT);
-
-			String var1 = "self.name <> 'aaa'";
-			String var2 = "not self.children->isEmpty()";
-			query = helper.createQuery(var2);
-
-			// record success
-			valid = true;
-
-			try
-			{
-				// // set the OCL context classifier
-				// helper.setContext(EXTLibraryPackage.Literals.LIBRARY);
-
-				invariant = helper.createInvariant(var2);
-			} catch (ParserException e)
-			{
-				// record failure to parse
-				System.err.println(e.getLocalizedMessage());
-			}
-
-			// use the query expression parsed before to create a Query
-			Query<EClassifier, EClass, EObject> eval = ocl.createQuery(query);
-
-			// Collection<?> result = (Collection<?>) eval.evaluate(object);
-			boolean ok = eval.check(object);
-			System.out.println(ok);
-		} catch (ParserException e)
-		{
-			// record failure to parse
-			valid = false;
-			System.err.println(e.getLocalizedMessage());
-		}
-
+		boolean valid = false;
 		return valid;
 
 	}

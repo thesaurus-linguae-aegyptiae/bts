@@ -21,6 +21,7 @@ import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.e4.core.di.annotations.Creatable;

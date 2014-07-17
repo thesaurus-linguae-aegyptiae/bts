@@ -14,7 +14,7 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.model.application.MApplication;
 
-public class BTSCommentDaoContextFunction extends ContextFunction
+public class BTSCommentDaoContextFunction extends AbstractDaoFactoryContextFunction
 {
 	@Inject
 	@Preference(value = "daoFactoryName", nodePath = "org.bbaw.bts.app")
@@ -33,7 +33,7 @@ public class BTSCommentDaoContextFunction extends ContextFunction
 		BTSCommentDao dao;
 		try
 		{
-			dao = loadDaoFactory(context).createDao(BTSCommentDao.class, context);
+			dao = loadDao(context, daoFactoryName, BTSCommentDao.class);
 		} catch (CoreException e)
 		{
 			e.printStackTrace();
@@ -45,20 +45,5 @@ public class BTSCommentDaoContextFunction extends ContextFunction
 		return dao;
 	}
 
-	private DAOFactory loadDaoFactory(IEclipseContext context) throws CoreException
-	{
-		IConfigurationElement[] config = ((IExtensionRegistry) context.get(IExtensionRegistry.class.getName()))
-				.getConfigurationElementsFor(DaoConstants.DAO_FACTORY_EXTENSION_POINT_ID);
-		for (IConfigurationElement e : config)
-		{
-			final Object o = e.createExecutableExtension("class");
-			if (o instanceof DAOFactory
-					&& (daoFactoryName == null || daoFactoryName.equals(((DAOFactory) o).getFactoryName())))
-			{
-				return (DAOFactory) o;
-			}
-		}
-		throw new BTSDBException("No DaoFactory found for BTSCommentDao and factory name: " + daoFactoryName);
-
-	}
+	
 }

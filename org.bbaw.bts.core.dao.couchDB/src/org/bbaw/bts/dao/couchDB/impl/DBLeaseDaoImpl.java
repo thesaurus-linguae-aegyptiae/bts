@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.impl.DBLeaseImpl;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.DBLeaseDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;

@@ -7,9 +7,11 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.services.BTSUserService;
-import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
+import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -19,7 +21,7 @@ import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
 import org.osgi.service.prefs.BackingStoreException;
 
-public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService
+public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService, BTSObjectSearchService
 {
 	@Inject
 	@Preference(nodePath = "org.bbaw.bts.app")
@@ -45,7 +47,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	{
 		super.addRevisionStatement(entity);
 
-		userDao.add(entity, ServiceConstants.ADMIN);
+		userDao.add(entity, BTSCoreConstants.ADMIN);
 		//FIXME update user password if changed
 		// FIXME update user role memberships 
 		// beides in _user Object!!!!!!!!!!
@@ -55,14 +57,14 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public void update(BTSUser entity)
 	{
-		userDao.update(entity, ServiceConstants.ADMIN);
+		userDao.update(entity, BTSCoreConstants.ADMIN);
 
 	}
 
 	@Override
 	public void remove(BTSUser entity)
 	{
-		userDao.remove(entity, ServiceConstants.ADMIN);
+		userDao.remove(entity, BTSCoreConstants.ADMIN);
 
 	}
 
@@ -70,7 +72,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public BTSUser find(String key)
 	{
 		BTSUser user = null;
-		user = userDao.find(key, ServiceConstants.ADMIN);
+		user = userDao.find(key, BTSCoreConstants.ADMIN);
 		if (user != null)
 		{
 			return user;
@@ -81,7 +83,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public List<BTSUser> list(String objectState)
 	{
-		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN, objectState);
+		List<BTSUser> users = userDao.list(BTSCoreConstants.ADMIN, objectState);
 		return users;
 	}
 
@@ -89,8 +91,8 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public List<BTSUser> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery)
 	{
-		List<BTSUser> objects = userDao.query(query, ServiceConstants.ADMIN,
-				ServiceConstants.ADMIN, objectState, registerQuery);
+		List<BTSUser> objects = userDao.query(query, BTSCoreConstants.ADMIN,
+				BTSCoreConstants.ADMIN, objectState, registerQuery);
 		return filter(objects);
 	}
 
@@ -172,7 +174,17 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public List<BTSUser> listAll(String objectState, String userName,
 			String passWord) {
-		List<BTSUser> users = userDao.list(ServiceConstants.ADMIN, objectState, userName, passWord);
+		List<BTSUser> users = userDao.list(BTSCoreConstants.ADMIN, objectState, userName, passWord);
 		return users;
+	}
+
+	@Override
+	public String getNameOfServedClass() {
+		return "BTSUser";
+	}
+
+	@Override
+	public <T> Class<T> getServedClass() {
+		return (Class<T>) BTSUser.class;
 	}
 }

@@ -1,22 +1,12 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.Vector;
-
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
-import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
-import org.bbaw.bts.core.services.BTSListEntryService;
-import org.bbaw.bts.core.services.BTSThsEntryService;
-import org.bbaw.bts.core.services.CorpusObjectService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.services.log.Logger;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -31,14 +21,6 @@ public class PassportEditorPartControllerImpl
 	@Inject
 	private CorpusObjectService corpusObjectService;
 
-	@Inject
-	private BTSThsEntryService thsService;
-
-	@Inject
-	private BTSListEntryService listService;
-	
-	@Inject
-	private BTSConfigurationController configurationController;
 	
 	@Inject
 	private Logger logger;
@@ -95,94 +77,7 @@ public class PassportEditorPartControllerImpl
 		return corpusObjectService.save(object);
 	}
 
-	@Override
-	public List<BTSCorpusObject> getObjectProposalsFor(
-			BTSConfigItem configItem, String text, BTSObject object) {
-		List<BTSCorpusObject> list = new Vector<BTSCorpusObject>();
-		
-		//FIXME aktualisieren und auf map umstellen
-		
-		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
-			boolean corpus = false;
+	
 
-				if (configurationController.objectMayReferenceToThs(object, configItem)) {
-					// load
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.termQuery("eClass",
-							"http://btsmodel/1.0#//BTSThsEntry"); // prefixQuery("name",
-																	// text);
-
-					SearchRequestBuilder sqb = thsService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(configItem, object);
-
-					FilterBuilder[] filterArray = filters
-							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
-
-					list.addAll((Collection<? extends BTSCorpusObject>) thsService
-							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-									false));
-				} else if (configurationController.objectMayReferenceToWList(object, configItem)) {
-
-				} else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
-
-					SearchRequestBuilder sqb = corpusObjectService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(configItem, object);
-
-					FilterBuilder[] filterArray = filters
-							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
-
-					list.addAll((Collection<? extends BTSCorpusObject>) corpusObjectService
-							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-									false));
-					corpus = true;
-				} else if (!corpus) {
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.prefixQuery("name", text);
-
-					SearchRequestBuilder sqb = corpusObjectService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-
-
-					list.addAll((Collection<? extends BTSCorpusObject>) corpusObjectService
-							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-									false));
-					corpus = true;
-				
-			}
-		}
-
-		return list;
-	}
-
-	private List<FilterBuilder> makeFilterList(BTSConfigItem configItem, BTSObject object) {
-
-		Set<String> referenceTypes = configurationController.getReferenceTypesSet(object, configItem);
-		
-		List<FilterBuilder> filters = new ArrayList<FilterBuilder>();
-		for (String ref : referenceTypes) {
-			if (ref.contains(BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR)) {
-				String[] split = ref.split("\\.");
-				if (split.length == 2) {
-					filters.add(FilterBuilders.termFilter(new String("type"),
-							ref));
-				} else if (split.length == 3) {
-					filters.add(FilterBuilders.termFilter(
-							new String("subtype"), ref));
-				}
-
-			}
-
-		}
-		return filters;
-
-	}
+	
 }

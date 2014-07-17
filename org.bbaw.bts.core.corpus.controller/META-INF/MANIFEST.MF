@@ -9,6 +9,7 @@ Export-Package: org.bbaw.bts.core.corpus.controller.generalController,
  org.bbaw.bts.core.corpus.controller.partController
 Import-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
+ org.bbaw.bts.corpus.btsCorpusModel,
  org.bbaw.bts.searchModel,
  org.eclipse.emf.ecore,
  org.eclipse.emf.edit.domain,

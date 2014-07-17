@@ -3,18 +3,17 @@ package org.bbaw.bts.ui.corpus.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSPassport;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
-import org.bbaw.bts.btsmodel.BTSPassportEntryGroup;
 import org.bbaw.bts.btsmodel.BTSPassportEntryItem;
 import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -159,36 +158,36 @@ public class PassportInheritFromParentHandler {
 		
 		switch (featureID)
 		{
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__KEY:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Key();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__COMMENT:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Comment();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__LABEL:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Label();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__NAME:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Name();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Provider();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__TYPE:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Type();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY__VALUE:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Value();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__KEY:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Key();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__COMMENT:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Comment();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__LABEL:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Label();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__NAME:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Name();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__PROVIDER:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Provider();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__TYPE:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Type();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY__VALUE:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value();
 
 			
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM__SUBTYPE:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntryItem_Subtype();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM__SUB_VALUE:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntryItem_SubValue();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM__SUBTYPE:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntryItem_Subtype();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM__SUB_VALUE:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntryItem_SubValue();
 			
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntryItem_Description();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM__EXTERNAL_REFERENCES:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntryItem_ExternalReferences();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntryItem_Description();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM__EXTERNAL_REFERENCES:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntryItem_ExternalReferences();
 			
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM__TIMESPAN:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntryItem_Timespan();
-		case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM__TRANSLATION:
-			return BtsmodelPackage.eINSTANCE.getBTSPassportEntryItem_Translation();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM__TIMESPAN:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntryItem_Timespan();
+		case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM__TRANSLATION:
+			return BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntryItem_Translation();
 		}
 		return null;
 	}
@@ -204,14 +203,14 @@ public class PassportInheritFromParentHandler {
 		}
 		if (sourceSubEntry instanceof BTSPassportEntryGroup)
 		{
-			targetSubEntry = BtsmodelFactory.eINSTANCE.createBTSPassportEntryGroup();
+			targetSubEntry = BtsCorpusModelFactory.eINSTANCE.createBTSPassportEntryGroup();
 		}
 		else
 		{
-			targetSubEntry = BtsmodelFactory.eINSTANCE.createBTSPassportEntryItem();
+			targetSubEntry = BtsCorpusModelFactory.eINSTANCE.createBTSPassportEntryItem();
 		}
 		targetSubEntry.setType(sourceSubEntry.getType());
-		Command addCommand = AddCommand.create(editingDomain, targetEntry, BtsmodelPackage.eINSTANCE.getBTSPassportEntry_Children(), targetSubEntry);
+		Command addCommand = AddCommand.create(editingDomain, targetEntry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Children(), targetSubEntry);
 		compoundCommand.append(addCommand);
 		return targetSubEntry;
 	}
@@ -226,9 +225,9 @@ public class PassportInheritFromParentHandler {
 				return e;
 			}
 		}
-		targetEntry = BtsmodelFactory.eINSTANCE.createBTSPassportEntryGroup();
+		targetEntry = BtsCorpusModelFactory.eINSTANCE.createBTSPassportEntryGroup();
 		targetEntry.setType(sourceEntry.getType());
-		Command addCommand = AddCommand.create(editingDomain, target, BtsmodelPackage.eINSTANCE.getBTSPassport_Children(), targetEntry);
+		Command addCommand = AddCommand.create(editingDomain, target, BtsCorpusModelPackage.eINSTANCE.getBTSPassport_Children(), targetEntry);
 		compoundCommand.append(addCommand);
 		return targetEntry;
 	}

@@ -8,7 +8,10 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.text.DecimalFormat;
+import java.util.Calendar;
 import java.util.Properties;
+import java.util.UUID;
 
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
@@ -16,6 +19,7 @@ import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 
 public class BTSConstants
 {
+	private static final DecimalFormat timeFormat4 = new DecimalFormat("0000;0000");
 
 	private static Properties PROPERTIES;
 	private static String PROPERTIES_FILENAME = "btsConfig.properties";
@@ -167,5 +171,15 @@ public class BTSConstants
 		String dbdir = btsInsallationDir + BTSConstants.FS + BTSConstants.DB_DIR;
 
 		return dbdir;
+	}
+
+
+	public static String getSidWithCalendar()
+	{
+		Calendar cal = Calendar.getInstance();
+		String val = String.valueOf(cal.get(Calendar.YEAR));
+		val += timeFormat4.format(cal.get(Calendar.DAY_OF_YEAR));
+		val += UUID.randomUUID().toString().replaceAll("-", "");
+		return val;
 	}
 }

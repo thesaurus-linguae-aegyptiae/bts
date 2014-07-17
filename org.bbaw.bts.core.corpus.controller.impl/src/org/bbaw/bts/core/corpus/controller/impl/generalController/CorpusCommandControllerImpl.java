@@ -2,10 +2,10 @@ package org.bbaw.bts.core.corpus.controller.impl.generalController;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.core.corpus.controller.generalController.CorpusCommandController;
-import org.bbaw.bts.core.services.CorpusObjectService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 
 public class CorpusCommandControllerImpl implements CorpusCommandController {
 

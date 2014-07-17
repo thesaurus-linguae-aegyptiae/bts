@@ -15,7 +15,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.Backend2ClientUpdateListener;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
-import org.bbaw.bts.core.dao.CorpusObjectDao;
+import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
@@ -30,7 +30,7 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 {
 
 	@Inject
-	private CorpusObjectDao corpusObjectDao;
+	private GeneralPurposeDao generalPurposeDao;
 	@Inject
 	private Backend2ClientUpdateDao updateDao;
 	@Inject
@@ -105,7 +105,7 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 		{
 			if (collection.isSynchronized())
 			{
-				updateDao.runAndListenToUpdates(corpusObjectDao, collection.getCollectionName());
+				updateDao.runAndListenToUpdates(generalPurposeDao, collection.getCollectionName());
 			}
 		}
 

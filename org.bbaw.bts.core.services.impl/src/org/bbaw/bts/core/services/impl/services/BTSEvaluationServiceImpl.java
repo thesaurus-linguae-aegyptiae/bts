@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.services.impl.services;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -20,12 +19,9 @@ import org.apache.commons.net.ntp.NtpV3Packet;
 import org.apache.commons.net.ntp.TimeInfo;
 import org.apache.commons.net.ntp.TimeStamp;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
-import org.bbaw.bts.btsmodel.BTSAnnotation;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSUser;
@@ -34,7 +30,6 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
-import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -42,16 +37,10 @@ import org.bbaw.bts.core.commons.exceptions.BTSLockingException;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.dao.DBLeaseDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
-import org.bbaw.bts.core.dao.GenericDao;
-import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
 import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.BTSProjectService;
-import org.bbaw.bts.core.services.BTSUserService;
-import org.bbaw.bts.core.services.GenericObjectService;
-import org.bbaw.bts.core.services.PermissionsAndExpressionsEvaluationService;
-import org.bbaw.bts.core.services.impl.internal.ServiceConstants;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -66,7 +55,6 @@ import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.events.IEventBroker;
 import org.eclipse.e4.core.services.log.Logger;
-import org.eclipse.emf.common.util.DiagnosticException;
 
 /** This Service is actively used to request information about the visibility or lock status of an object.
  * @author plutte
@@ -598,7 +586,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		if (servers == null) {
 			return new Long(ntp).toString();
 		}
-		String[] serverArray = servers.split(ServiceConstants.SPLIT_PATTERN);
+		String[] serverArray = servers.split(BTSCoreConstants.SPLIT_PATTERN);
 		NTPUDPClient client = new NTPUDPClient();
 		// We want to timeout if a response takes longer than 7 seconds
 		client.setDefaultTimeout(7000);

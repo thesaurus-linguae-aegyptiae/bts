@@ -70,56 +70,12 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	protected BtsmodelSwitch<Adapter> modelSwitch =
 		new BtsmodelSwitch<Adapter>() {
 			@Override
-			public Adapter caseBTSTCObject(BTSTCObject object) {
-				return createBTSTCObjectAdapter();
-			}
-			@Override
-			public Adapter caseBTSText(BTSText object) {
-				return createBTSTextAdapter();
-			}
-			@Override
-			public Adapter caseBTSSenctence(BTSSenctence object) {
-				return createBTSSenctenceAdapter();
-			}
-			@Override
-			public Adapter caseBTSWord(BTSWord object) {
-				return createBTSWordAdapter();
-			}
-			@Override
-			public Adapter caseBTSMarker(BTSMarker object) {
-				return createBTSMarkerAdapter();
-			}
-			@Override
-			public Adapter caseBTSTextItems(BTSTextItems object) {
-				return createBTSTextItemsAdapter();
-			}
-			@Override
-			public Adapter caseBTSSentenceItem(BTSSentenceItem object) {
-				return createBTSSentenceItemAdapter();
-			}
-			@Override
-			public Adapter caseBTSListEntry(BTSListEntry object) {
-				return createBTSListEntryAdapter();
-			}
-			@Override
-			public Adapter caseBTSPassport(BTSPassport object) {
-				return createBTSPassportAdapter();
-			}
-			@Override
 			public Adapter caseAdministrativDataObject(AdministrativDataObject object) {
 				return createAdministrativDataObjectAdapter();
 			}
 			@Override
 			public Adapter caseBTSObject(BTSObject object) {
 				return createBTSObjectAdapter();
-			}
-			@Override
-			public Adapter caseBTSAmbivalence(BTSAmbivalence object) {
-				return createBTSAmbivalenceAdapter();
-			}
-			@Override
-			public Adapter caseBTSLemmaCase(BTSLemmaCase object) {
-				return createBTSLemmaCaseAdapter();
 			}
 			@Override
 			public Adapter caseBTSUser(BTSUser object) {
@@ -134,24 +90,12 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSInterTextReferenceAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextSentenceItem(BTSTextSentenceItem object) {
-				return createBTSTextSentenceItemAdapter();
-			}
-			@Override
-			public Adapter caseBTSAnnotation(BTSAnnotation object) {
-				return createBTSAnnotationAdapter();
-			}
-			@Override
 			public Adapter caseBTSTranslation(BTSTranslation object) {
 				return createBTSTranslationAdapter();
 			}
 			@Override
 			public Adapter caseBTSDate(BTSDate object) {
 				return createBTSDateAdapter();
-			}
-			@Override
-			public Adapter caseBTSPassportEntryGroup(BTSPassportEntryGroup object) {
-				return createBTSPassportEntryGroupAdapter();
 			}
 			@Override
 			public Adapter caseBTSRelation(BTSRelation object) {
@@ -166,28 +110,12 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSDBBaseObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextCorpus(BTSTextCorpus object) {
-				return createBTSTextCorpusAdapter();
-			}
-			@Override
 			public Adapter caseBTSRevision(BTSRevision object) {
 				return createBTSRevisionAdapter();
 			}
 			@Override
-			public Adapter caseBTSImage(BTSImage object) {
-				return createBTSImageAdapter();
-			}
-			@Override
-			public Adapter caseBTSCorpusHeader(BTSCorpusHeader object) {
-				return createBTSCorpusHeaderAdapter();
-			}
-			@Override
 			public Adapter caseBTSTimespan(BTSTimespan object) {
 				return createBTSTimespanAdapter();
-			}
-			@Override
-			public Adapter caseBTSCorpusObject(BTSCorpusObject object) {
-				return createBTSCorpusObjectAdapter();
 			}
 			@Override
 			public Adapter caseBTSExternalReference(BTSExternalReference object) {
@@ -196,10 +124,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBTSReferencableItem(BTSReferencableItem object) {
 				return createBTSReferencableItemAdapter();
-			}
-			@Override
-			public Adapter caseBTSGraphic(BTSGraphic object) {
-				return createBTSGraphicAdapter();
 			}
 			@Override
 			public Adapter caseBTSTranslations(BTSTranslations object) {
@@ -218,16 +142,8 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSUserGroupAdapter();
 			}
 			@Override
-			public Adapter caseBTSList(BTSList object) {
-				return createBTSListAdapter();
-			}
-			@Override
 			public Adapter caseBTSPassportEntryItem(BTSPassportEntryItem object) {
 				return createBTSPassportEntryItemAdapter();
-			}
-			@Override
-			public Adapter caseBTSListSubentry(BTSListSubentry object) {
-				return createBTSListSubentryAdapter();
 			}
 			@Override
 			public Adapter caseBTSConfig(BTSConfig object) {
@@ -236,10 +152,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBTSObservableObject(BTSObservableObject object) {
 				return createBTSObservableObjectAdapter();
-			}
-			@Override
-			public Adapter caseBTSThsEntry(BTSThsEntry object) {
-				return createBTSThsEntryAdapter();
 			}
 			@Override
 			public Adapter caseBTSProject(BTSProject object) {
@@ -278,20 +190,8 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSDBCollectionRoleDescAdapter();
 			}
 			@Override
-			public Adapter caseBTSTextContent(BTSTextContent object) {
-				return createBTSTextContentAdapter();
-			}
-			@Override
-			public Adapter caseBTSAmbivalenceItem(BTSAmbivalenceItem object) {
-				return createBTSAmbivalenceItemAdapter();
-			}
-			@Override
-			public Adapter caseGraphicSelectionCounter(GraphicSelectionCounter object) {
-				return createGraphicSelectionCounterAdapter();
-			}
-			@Override
-			public Adapter caseBTSPassportEntry(BTSPassportEntry object) {
-				return createBTSPassportEntryAdapter();
+			public Adapter caseUserActionCounter(UserActionCounter object) {
+				return createUserActionCounterAdapter();
 			}
 			@Override
 			public Adapter caseStringToStringListMap(Map.Entry<String, EList<String>> object) {
@@ -318,134 +218,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTCObject <em>BTSTC Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSTCObject
-	 * @generated
-	 */
-	public Adapter createBTSTCObjectAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSText <em>BTS Text</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSText
-	 * @generated
-	 */
-	public Adapter createBTSTextAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSSenctence <em>BTS Senctence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSSenctence
-	 * @generated
-	 */
-	public Adapter createBTSSenctenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSWord <em>BTS Word</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSWord
-	 * @generated
-	 */
-	public Adapter createBTSWordAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSMarker <em>BTS Marker</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSMarker
-	 * @generated
-	 */
-	public Adapter createBTSMarkerAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTextItems <em>BTS Text Items</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSTextItems
-	 * @generated
-	 */
-	public Adapter createBTSTextItemsAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSSentenceItem <em>BTS Sentence Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSSentenceItem
-	 * @generated
-	 */
-	public Adapter createBTSSentenceItemAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSListEntry <em>BTS List Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSListEntry
-	 * @generated
-	 */
-	public Adapter createBTSListEntryAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassport <em>BTS Passport</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSPassport
-	 * @generated
-	 */
-	public Adapter createBTSPassportAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.AdministrativDataObject <em>Administrativ Data Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -470,34 +242,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSObjectAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSAmbivalence <em>BTS Ambivalence</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSAmbivalence
-	 * @generated
-	 */
-	public Adapter createBTSAmbivalenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSLemmaCase <em>BTS Lemma Case</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSLemmaCase
-	 * @generated
-	 */
-	public Adapter createBTSLemmaCaseAdapter() {
 		return null;
 	}
 
@@ -544,34 +288,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTextSentenceItem <em>BTS Text Sentence Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSTextSentenceItem
-	 * @generated
-	 */
-	public Adapter createBTSTextSentenceItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSAnnotation <em>BTS Annotation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSAnnotation
-	 * @generated
-	 */
-	public Adapter createBTSAnnotationAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTranslation <em>BTS Translation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -596,20 +312,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSDateAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntryGroup <em>BTS Passport Entry Group</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryGroup
-	 * @generated
-	 */
-	public Adapter createBTSPassportEntryGroupAdapter() {
 		return null;
 	}
 
@@ -656,20 +358,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTextCorpus <em>BTS Text Corpus</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSTextCorpus
-	 * @generated
-	 */
-	public Adapter createBTSTextCorpusAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSRevision <em>BTS Revision</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -684,34 +372,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSImage <em>BTS Image</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSImage
-	 * @generated
-	 */
-	public Adapter createBTSImageAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSCorpusHeader <em>BTS Corpus Header</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSCorpusHeader
-	 * @generated
-	 */
-	public Adapter createBTSCorpusHeaderAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTimespan <em>BTS Timespan</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -722,20 +382,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSTimespanAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSCorpusObject <em>BTS Corpus Object</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSCorpusObject
-	 * @generated
-	 */
-	public Adapter createBTSCorpusObjectAdapter() {
 		return null;
 	}
 
@@ -764,20 +410,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSReferencableItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSGraphic <em>BTS Graphic</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSGraphic
-	 * @generated
-	 */
-	public Adapter createBTSGraphicAdapter() {
 		return null;
 	}
 
@@ -838,20 +470,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSList <em>BTS List</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSList
-	 * @generated
-	 */
-	public Adapter createBTSListAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem <em>BTS Passport Entry Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -862,20 +480,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSPassportEntryItemAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSListSubentry <em>BTS List Subentry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSListSubentry
-	 * @generated
-	 */
-	public Adapter createBTSListSubentryAdapter() {
 		return null;
 	}
 
@@ -905,21 +509,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSObservableObjectAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSThsEntry <em>BTS Ths Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSThsEntry
-	 * @generated
-	 */
-	public Adapter createBTSThsEntryAdapter()
 	{
 		return null;
 	}
@@ -1060,60 +649,16 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSTextContent <em>BTS Text Content</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.UserActionCounter <em>User Action Counter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSTextContent
+	 * @see org.bbaw.bts.btsmodel.UserActionCounter
 	 * @generated
 	 */
-	public Adapter createBTSTextContentAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSAmbivalenceItem
-	 * @generated
-	 */
-	public Adapter createBTSAmbivalenceItemAdapter()
-	{
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.GraphicSelectionCounter <em>Graphic Selection Counter</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.GraphicSelectionCounter
-	 * @generated
-	 */
-	public Adapter createGraphicSelectionCounterAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntry <em>BTS Passport Entry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntry
-	 * @generated
-	 */
-	public Adapter createBTSPassportEntryAdapter() {
+	public Adapter createUserActionCounterAdapter() {
 		return null;
 	}
 

@@ -10,8 +10,10 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+import org.eclipse.emf.edit.provider.IChildCreationExtender;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemFontProvider;
@@ -24,6 +26,7 @@ import org.eclipse.emf.edit.provider.ITableItemFontProvider;
 import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemProviderAdapter;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -33,7 +36,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BTSPassportEntryItemItemProvider
-	extends BTSPassportEntryItemProvider
+	extends ItemProviderAdapter
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -168,7 +171,7 @@ public class BTSPassportEntryItemItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((BTSPassportEntryItem)object).getName();
+		String label = ((BTSPassportEntryItem)object).getSubtype();
 		return label == null || label.length() == 0 ?
 			getString("_UI_BTSPassportEntryItem_type") :
 			getString("_UI_BTSPassportEntryItem_type") + " " + label;
@@ -244,7 +247,6 @@ public class BTSPassportEntryItemItemProvider
 		Object childObject = child;
 
 		boolean qualify =
-			childFeature == BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY__LABEL ||
 			childFeature == BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION ||
 			childFeature == BtsmodelPackage.Literals.BTS_PASSPORT_ENTRY_ITEM__TRANSLATION;
 
@@ -254,6 +256,17 @@ public class BTSPassportEntryItemItemProvider
 				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
 		}
 		return super.getCreateChildText(owner, feature, child, selection);
+	}
+
+	/**
+	 * Return the resource locator for this item provider's resources.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ResourceLocator getResourceLocator() {
+		return ((IChildCreationExtender)adapterFactory).getResourceLocator();
 	}
 
 }

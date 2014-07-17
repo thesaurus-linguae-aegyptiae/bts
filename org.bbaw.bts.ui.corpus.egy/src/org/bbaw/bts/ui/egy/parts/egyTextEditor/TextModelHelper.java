@@ -3,18 +3,19 @@ package org.bbaw.bts.ui.egy.parts.egyTextEditor;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.bbaw.bts.btsmodel.BTSAmbivalence;
-import org.bbaw.bts.btsmodel.BTSAmbivalenceItem;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BTSLemmaCase;
-import org.bbaw.bts.btsmodel.BTSMarker;
-import org.bbaw.bts.btsmodel.BTSSenctence;
-import org.bbaw.bts.btsmodel.BTSSentenceItem;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextContent;
-import org.bbaw.bts.btsmodel.BTSWord;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AbstractMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
@@ -47,7 +48,7 @@ public class TextModelHelper {
 			loadAnnotationMapping(eo, am);
 		}
 		if (text.getTextContent() == null) {
-			text.setTextContent(BtsmodelFactory.eINSTANCE
+			text.setTextContent(BtsCorpusModelFactory.eINSTANCE
 					.createBTSTextContent());
 
 		}
@@ -102,7 +103,7 @@ public class TextModelHelper {
 
 	private BTSSenctence makeNewModelSentence(Sentence sentence,
 			BTSSenctence lastModelSentence, BTSText text) {
-		BTSSenctence newModelSentence = BtsmodelFactory.eINSTANCE
+		BTSSenctence newModelSentence = BtsCorpusModelFactory.eINSTANCE
 				.createBTSSenctence();
 
 		return newModelSentence;
@@ -268,14 +269,14 @@ public class TextModelHelper {
 
 	private BTSLemmaCase makeNewModelCase(Ambivalence ambivalence,
 			BTSLemmaCase lastModelCase) {
-		BTSLemmaCase newModelLemmaCase = BtsmodelFactory.eINSTANCE
+		BTSLemmaCase newModelLemmaCase = BtsCorpusModelFactory.eINSTANCE
 				.createBTSLemmaCase();
 		return newModelLemmaCase;
 	}
 
 	private BTSAmbivalence makeNewModelAmbivalence(Ambivalence ambivalence,
 			BTSIdentifiableItem lastItem, BTSSenctence modelSentence) {
-		BTSAmbivalence newModelAmbivalence = BtsmodelFactory.eINSTANCE
+		BTSAmbivalence newModelAmbivalence = BtsCorpusModelFactory.eINSTANCE
 				.createBTSAmbivalence();
 		return newModelAmbivalence;
 	}
@@ -342,7 +343,7 @@ public class TextModelHelper {
 
 	private BTSMarker makeNewModelMarker(Sentence sentence,
 			BTSIdentifiableItem lastItem, BTSSenctence modelSentence) {
-		BTSMarker newModelMarker = BtsmodelFactory.eINSTANCE.createBTSMarker();
+		BTSMarker newModelMarker = BtsCorpusModelFactory.eINSTANCE.createBTSMarker();
 
 		return newModelMarker;
 	}
@@ -380,7 +381,7 @@ public class TextModelHelper {
 
 	private BTSWord makeNewModelWord(Sentence sentence,
 			BTSIdentifiableItem lastItem, BTSSenctence modelSentence) {
-		BTSWord newModelWord = BtsmodelFactory.eINSTANCE.createBTSWord();
+		BTSWord newModelWord = BtsCorpusModelFactory.eINSTANCE.createBTSWord();
 		newModelWord.setWChar("");
 
 		return newModelWord;

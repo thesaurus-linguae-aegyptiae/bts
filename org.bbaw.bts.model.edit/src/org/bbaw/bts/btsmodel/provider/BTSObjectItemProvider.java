@@ -4,7 +4,6 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -36,6 +35,7 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 		IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource,
 		ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
 {
+
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -219,6 +219,7 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__EXTERNAL_REFERENCES);
 		}
 		return childrenFeatures;
 	}
@@ -296,6 +297,11 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider i
 			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
 				 BtsmodelFactory.eINSTANCE.createBTSRelation()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_OBJECT__EXTERNAL_REFERENCES,
+				 BtsmodelFactory.eINSTANCE.createBTSExternalReference()));
 	}
 
 }

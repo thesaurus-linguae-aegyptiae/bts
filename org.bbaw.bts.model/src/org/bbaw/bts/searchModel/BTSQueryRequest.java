@@ -2,7 +2,7 @@ package org.bbaw.bts.searchModel;
 
 import java.util.List;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 
@@ -10,7 +10,7 @@ public class BTSQueryRequest
 {
 	private String queryId;
 
-	private List<BTSCorpusObject> givenObjects;
+	private List<BTSObject> givenObjects;
 
 	private QueryBuilder queryBuilder;
 
@@ -22,12 +22,12 @@ public class BTSQueryRequest
 
 	private String requestTypeFieldValue;
 
-	public List<BTSCorpusObject> getGivenObjects()
+	public List<BTSObject> getGivenObjects()
 	{
 		return givenObjects;
 	}
 
-	public void setGivenObjects(List<BTSCorpusObject> givenObjects)
+	public void setGivenObjects(List<BTSObject> givenObjects)
 	{
 		this.givenObjects = givenObjects;
 	}

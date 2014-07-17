@@ -3,8 +3,8 @@ package org.bbaw.bts.core.corpus.controller.partController;
 import java.util.List;
 import java.util.Map;
 
-import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;

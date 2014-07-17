@@ -13,18 +13,10 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSAnnotation;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSPassport;
-import org.bbaw.bts.btsmodel.BTSPassportEntry;
-import org.bbaw.bts.btsmodel.BTSPassportEntryGroup;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSRevision;
-import org.bbaw.bts.btsmodel.BTSTCObject;
-import org.bbaw.bts.btsmodel.BTSText;
-import org.bbaw.bts.btsmodel.BTSTextCorpus;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -37,20 +29,31 @@ import org.bbaw.bts.core.controller.generalController.BTSProjectController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.corpus.controller.partController.PassportEditorPartController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.converter.BTSConfigItemToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSProjectToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSStringToConfigItemConverter;
 import org.bbaw.bts.ui.commons.converter.BTSStringToProjectConverter;
-import org.bbaw.bts.ui.commons.converter.BTSStringToTextCorpusConverter;
-import org.bbaw.bts.ui.commons.converter.BTSTextCorpusToStringConverter;
+import org.bbaw.bts.ui.commons.corpus.converter.BTSStringToTextCorpusConverter;
+import org.bbaw.bts.ui.commons.corpus.converter.BTSTextCorpusToStringConverter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.bbaw.bts.ui.corpus.parts.passportEditor.CompoundRelationsEditorComposite;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryEditorComposite;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryGroupEditor;
+import org.bbaw.bts.ui.main.widgets.CompoundRelationsEditorComposite;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -158,6 +161,10 @@ public class PassportEditorPart {
 	@Optional
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	public boolean userMayEdit;
+	
+	
+	@Inject
+	private PassportConfigurationController passportConfigurationController;
 
 	private Text text;
 	private Text txtAuthortextadmin;
@@ -192,6 +199,7 @@ public class PassportEditorPart {
 	private ComboViewer corpus_viewer;
 	private Composite parent;
 	private MPart part;
+
 
 	@Inject
 	public PassportEditorPart() {
@@ -268,7 +276,7 @@ public class PassportEditorPart {
 	}
 
 	private void createGenericTabItems(CTabFolder folder) {
-		List<BTSConfigItem> configItems = configurationController
+		List<BTSConfigItem> configItems = passportConfigurationController
 				.getPassportCategories(corpusObject);
 		for (BTSConfigItem category : configItems) {
 			BTSPassportEntry entryGroup = findMatchingEntryGroup(
@@ -290,7 +298,7 @@ public class PassportEditorPart {
 				return group;
 			}
 		}
-		BTSPassportEntryGroup defaultInput = BtsmodelFactory.eINSTANCE
+		BTSPassportEntryGroup defaultInput = BtsCorpusModelFactory.eINSTANCE
 				.createBTSPassportEntryGroup();
 		defaultInput.setType(category.getValue());
 		passport.getChildren().add(defaultInput);
@@ -478,8 +486,10 @@ public class PassportEditorPart {
 
 		typeCMB_Main_viewer.setContentProvider(contentProvider);
 		typeCMB_Main_viewer.setLabelProvider(labelProvider);
-		typeCMB_Main_viewer.setInput(configurationController
+		if (corpusObject != null){
+		typeCMB_Main_viewer.setInput(passportConfigurationController
 				.getObjectTypeConfigItemProcessedClones(corpusObject));
+		}
 		typeCMB_Main_viewer
 				.addSelectionChangedListener(new ISelectionChangedListener() {
 
@@ -497,7 +507,7 @@ public class PassportEditorPart {
 									@Override
 									public void run() {
 										subtypeCMB_Main_viewer
-												.setInput(configurationController
+												.setInput(passportConfigurationController
 														.getObjectSubtypeConfigItemProcessedClones(corpusObject));
 										subtypeCMB_Main_viewer.refresh();
 									}
@@ -536,9 +546,10 @@ public class PassportEditorPart {
 
 		subtypeCMB_Main_viewer.setContentProvider(contentProvider2);
 		subtypeCMB_Main_viewer.setLabelProvider(labelProvider2);
-		subtypeCMB_Main_viewer.setInput(configurationController
+		if (corpusObject != null){
+		subtypeCMB_Main_viewer.setInput(passportConfigurationController
 				.getObjectSubtypeConfigItemProcessedClones(corpusObject));
-
+		}
 		Label lblSortkey = new Label(compTBTM_Main, SWT.NONE);
 		lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 				false, 1, 1));
@@ -605,9 +616,10 @@ public class PassportEditorPart {
 
 		visibility_viewer.setContentProvider(contentProvider_vis);
 		visibility_viewer.setLabelProvider(labelProvider_vis);
-		visibility_viewer.setInput(configurationController
+		if (corpusObject != null){
+		visibility_viewer.setInput(passportConfigurationController
 				.getVisibilityConfigItemProcessedClones(corpusObject));
-
+		}
 		Label lblRevisionState = new Label(compTBTM_Main, SWT.NONE);
 		lblRevisionState.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
 				false, false, 1, 1));
@@ -625,9 +637,10 @@ public class PassportEditorPart {
 
 		reviewState_viewer.setContentProvider(contentProvider_rev);
 		reviewState_viewer.setLabelProvider(labelProvider_rev);
-		reviewState_viewer.setInput(configurationController
+		if (corpusObject != null){
+		reviewState_viewer.setInput(passportConfigurationController
 				.getReviewStateConfigItemProcessedClones(corpusObject));
-		
+		}
 		
 		// object project settings
 		Label lblProject = new Label(compTBTM_Main, SWT.NONE);
@@ -827,7 +840,7 @@ public class PassportEditorPart {
 
 		purgeAll();
 		if (object.getPassport() == null) {
-			object.setPassport(BtsmodelFactory.eINSTANCE.createBTSPassport());
+			object.setPassport(BtsCorpusModelFactory.eINSTANCE.createBTSPassport());
 			setDirty(true);
 		}
 		if (mainComposite == null || mainComposite.isDisposed())
@@ -1191,7 +1204,7 @@ public class PassportEditorPart {
 							target_cor_viewer,
 							EMFEditProperties
 									.value(editingDomain,
-											BtsmodelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX)
+											BtsCorpusModelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX)
 									.observe(object), targetToModel_cor,
 									modelToTarget_cor);
 		}

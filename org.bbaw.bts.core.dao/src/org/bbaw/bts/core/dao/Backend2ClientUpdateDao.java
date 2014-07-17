@@ -9,7 +9,7 @@ public interface Backend2ClientUpdateDao
 
 	void addUpdateListener(Backend2ClientUpdateListener listener);
 
-	void runAndListenToUpdates(CorpusObjectDao corpusObjectDao, String dbCollection);
+	void runAndListenToUpdates(GeneralPurposeDao generalPurposeDao, String dbCollection);
 
 	void removeUpdateListener(Backend2ClientUpdateListener listener);
 

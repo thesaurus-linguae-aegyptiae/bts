@@ -651,6 +651,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS);
+			childrenFeatures.add(BtsmodelPackage.Literals.BTS_OBJECT__EXTERNAL_REFERENCES);
 			childrenFeatures.add(BtsmodelPackage.Literals.BTS_USER__EXTERNAL_REFERNECES);
 		}
 		return childrenFeatures;
@@ -735,6 +736,7 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 				return;
 			case BtsmodelPackage.BTS_USER__REVISIONS:
 			case BtsmodelPackage.BTS_USER__RELATIONS:
+			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERENCES:
 			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -766,8 +768,36 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider implements 
 
 		newChildDescriptors.add
 			(createChildParameter
+				(BtsmodelPackage.Literals.BTS_OBJECT__EXTERNAL_REFERENCES,
+				 BtsmodelFactory.eINSTANCE.createBTSExternalReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
 				(BtsmodelPackage.Literals.BTS_USER__EXTERNAL_REFERNECES,
 				 BtsmodelFactory.eINSTANCE.createBTSExternalReference()));
+	}
+
+	/**
+	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
+		Object childFeature = feature;
+		Object childObject = child;
+
+		boolean qualify =
+			childFeature == BtsmodelPackage.Literals.BTS_OBJECT__EXTERNAL_REFERENCES ||
+			childFeature == BtsmodelPackage.Literals.BTS_USER__EXTERNAL_REFERNECES;
+
+		if (qualify) {
+			return getString
+				("_UI_CreateChild_text2",
+				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
+		}
+		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

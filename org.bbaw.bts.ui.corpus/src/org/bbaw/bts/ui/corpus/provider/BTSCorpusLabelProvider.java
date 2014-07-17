@@ -1,7 +1,7 @@
 package org.bbaw.bts.ui.corpus.provider;
 
-import org.bbaw.bts.btsmodel.BTSCorpusObject;
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.ITableLabelProvider;

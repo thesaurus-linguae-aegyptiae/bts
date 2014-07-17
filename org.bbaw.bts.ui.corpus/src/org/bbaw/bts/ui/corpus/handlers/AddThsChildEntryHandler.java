@@ -4,9 +4,9 @@ package org.bbaw.bts.ui.corpus.handlers;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSThsEntry;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
