@@ -146,14 +146,6 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUserGroup/category"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSUserGroup/comment"/>
     </genClasses>
-    <genClasses ecoreClass="BTSModel.ecore#//BTSPassportEntryItem">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntryItem/subtype"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSModel.ecore#//BTSPassportEntryItem/subValue"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEntryItem/externalReferences"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEntryItem/timespan"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEntryItem/description"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSPassportEntryItem/translation"/>
-    </genClasses>
     <genClasses ecoreClass="BTSModel.ecore#//BTSConfig">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSModel.ecore#//BTSConfig/children"/>
     </genClasses>

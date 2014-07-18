@@ -418,29 +418,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSPassportEntryItem} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSPassportEntryItemItemProvider btsPassportEntryItemItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSPassportEntryItem}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSPassportEntryItemAdapter() {
-		if (btsPassportEntryItemItemProvider == null) {
-			btsPassportEntryItemItemProvider = new BTSPassportEntryItemItemProvider(this);
-		}
-
-		return btsPassportEntryItemItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSProject} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -797,7 +774,6 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsConfigItemItemProvider != null) btsConfigItemItemProvider.dispose();
 		if (btsPassportEditorConfigItemProvider != null) btsPassportEditorConfigItemProvider.dispose();
 		if (btsUserGroupItemProvider != null) btsUserGroupItemProvider.dispose();
-		if (btsPassportEntryItemItemProvider != null) btsPassportEntryItemItemProvider.dispose();
 		if (btsProjectItemProvider != null) btsProjectItemProvider.dispose();
 		if (btsdbConnectionItemProvider != null) btsdbConnectionItemProvider.dispose();
 		if (btsWorkflowRuleItemProvider != null) btsWorkflowRuleItemProvider.dispose();

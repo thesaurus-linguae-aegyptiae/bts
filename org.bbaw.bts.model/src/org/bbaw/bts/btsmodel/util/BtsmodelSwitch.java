@@ -213,12 +213,6 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM: {
-				BTSPassportEntryItem btsPassportEntryItem = (BTSPassportEntryItem)theEObject;
-				T result = caseBTSPassportEntryItem(btsPassportEntryItem);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case BtsmodelPackage.BTS_CONFIG: {
 				BTSConfig btsConfig = (BTSConfig)theEObject;
 				T result = caseBTSConfig(btsConfig);
@@ -586,21 +580,6 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSUserGroup(BTSUserGroup object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Passport Entry Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Passport Entry Item</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBTSPassportEntryItem(BTSPassportEntryItem object) {
 		return null;
 	}
 

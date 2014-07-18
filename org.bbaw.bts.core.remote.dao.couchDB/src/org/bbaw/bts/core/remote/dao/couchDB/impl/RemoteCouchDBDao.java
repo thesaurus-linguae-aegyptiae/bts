@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,6 +19,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteGenericDao;
@@ -35,8 +37,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
-import org.eclipselabs.emfjson.internal.JSONLoad;
+import org.eclipselabs.couchemf.emfjson.CouchDBHandler;
+import org.eclipselabs.emfjson.map.EObjectMapper;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.search.SearchResponse;
@@ -167,18 +169,41 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 	{
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
-		InputStream is = dbClient.find((String)key, revision);
-		final JSONLoad loader = new JSONLoad(is, new HashMap<Object, Object>());
-		Collection<EObject> objects = loader.loadObjects(connectionProvider.getEmfResourceSet());
-		if (!objects.isEmpty())
+		URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + key + "?rev=" + revision);
+		Resource tempResource = connectionProvider.getEmfResourceSet().createResource(uri);
+		InputStream stream = dbClient.find((String)key, revision);
+		EObjectMapper objectMapper = new EObjectMapper();
+		Object o = objectMapper.from(stream, tempResource, null);
+//		String content = CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
+//		Closeables.closeQuietly(stream);
+//		loadResourceFromString(key + revision, content, indexName)
+//		EObject objects = loadObjectFromHit(hit, indexName)sFromInputStream(connectionProvider.getEmfResourceSet(), content);
+		if (!tempResource.getContents().isEmpty())
 		{
-			Object o =  objects.iterator().next();
+			Object oo =  tempResource.getContents().iterator().next();
 			if (o instanceof BTSDBBaseObject)
 			{
-				return (E)o;
+				return (E)oo;
 			}
 		}
 		return null;
+		
+	}
+	
+//	protected EObject loadObjectFromInputStream(
+//			ResourceSet emfResourceSet, InputStream is) {
+//		final JSONLoad loader = new JSONLoad(is, new HashMap<Object, Object>());
+//
+//		return loader.loadObjects(connectionProvider.getEmfResourceSet());;
+//	}
+	
+	public void fillResource(Resource resource, String objectAsString) {
+		EObjectMapper objectMapper = new EObjectMapper();
+		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
+		Object o = objectMapper.from(stream, resource, null);
+//		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
+//				new HashMap<Object, Object>());
+//		loader.fillResource(resource);
 		
 	}
 
@@ -186,29 +211,76 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 	@Override
 	public List<E> list(String path)
 	{
-		List<JsonObject> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path)
-				.view(RemoteDaoConstants.VIEW_ALL_DOCS).includeDocs(true).query(JsonObject.class);
-		ArrayList<BTSDBBaseObject> results = new ArrayList<BTSDBBaseObject>();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
-		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
-		for (JsonObject jo : allDocs)
-		{
-			System.out.println(jo.get(RemoteDaoConstants.ID_STRING).getAsString());
-			if (!jo.get(RemoteDaoConstants.ID_STRING).getAsString().startsWith("_"))
-			{
-				URI uri = URI.createURI(getRemoteDBURL() + "/" +  path + "/" +  jo.get(RemoteDaoConstants.ID_STRING).getAsString());
-				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.toString().getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				results.add((BTSDBBaseObject) resource.getContents().get(0));
-			}
-		}
+		List<String> allDocs = loadDocsFromView(RemoteDaoConstants.VIEW_ALL_DOCS, path, path);
+		List<E> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(RemoteDaoConstants.VIEW_ALL_DOCS, path);
 		}
-		return (List<E>) results;
+		return results;
+//		List<String> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path)
+//				.view(RemoteDaoConstants.VIEW_ALL_DOCS).includeDocs(true).query();
+//		ArrayList<BTSDBBaseObject> results = new ArrayList<BTSDBBaseObject>();
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
+//		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+//		for (JsonObject jo : allDocs)
+//		{
+//			System.out.println(jo.get(RemoteDaoConstants.ID_STRING).getAsString());
+//			if (!jo.get(RemoteDaoConstants.ID_STRING).getAsString().startsWith("_"))
+//			{
+//				URI uri = URI.createURI(getRemoteDBURL() + "/" +  path + "/" +  jo.get(RemoteDaoConstants.ID_STRING).getAsString());
+//				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//				fillResource(resource, jo);
+//				results.add((BTSDBBaseObject) resource.getContents().get(0));
+//			}
+//		}
+//		if (!results.isEmpty())
+//		{
+//			registerQueryIdWithInternalRegistry(RemoteDaoConstants.VIEW_ALL_DOCS, path);
+//		}
+//		return (List<E>) results;
+	}
+
+	protected List<E> loadObjectsFromStrings(
+			List<String> allDocs, String path) {
+		List<E> results = new Vector<E>(allDocs.size());
+		for (String jo : allDocs)
+		{
+			System.out.println(jo);
+			if (true)
+			{
+				URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
+				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+				fillResource(resource, jo);
+
+				if (!resource.getContents().isEmpty())
+				{
+					E o = (E) resource.getContents().get(0);
+					results.add(o);
+				}
+			}
+		}
+		
+		return results;
+	}
+
+	protected List<String> loadDocsFromView(String viewId, String path, String sourcePath) {
+		View view;
+		List<String> allDocs = new Vector<String>();
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
+		try
+		{
+
+			view = dbClient.view(viewId);
+			allDocs = view.includeDocs(true).query();
+		} catch (NoDocumentException e)
+		{
+			e.printStackTrace();
+			createView(path, sourcePath, viewId);
+			view = dbClient.view(viewId);
+			allDocs = view.includeDocs(true).query();
+		}
+		return allDocs;
 	}
 
 	@Override
@@ -347,16 +419,10 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 		URI uri = URI.createURI(getRemoteDBURL() + "/" + indexName + "/" + id);
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		System.out.println(sourceAsString);
-		InputStream inputStream;
-		try
+		fillResource(resource, sourceAsString);
+		if (!resource.getContents().isEmpty())
 		{
-			inputStream = new ByteArrayInputStream(sourceAsString.getBytes(BTSConstants.ENCODING));
-			final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
-			loader.fillResource(resource);
 			return ((E) resource.getContents().get(0));
-		} catch (UnsupportedEncodingException e)
-		{
-			e.printStackTrace();
 		}
 		return find((K) id, "/" + indexName + "/");
 	}
@@ -377,42 +443,49 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 	@Override
 	public List<E> findByQueryId(String searchId, String path)
 	{
-		List<String> allDocs = new ArrayList<String>(0);
-		View view;
-		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
-		try
-		{
-			view = client.view(searchId);
-			allDocs = view.includeDocs(true).query();
-		} catch (NoDocumentException e)
-		{
-			e.printStackTrace();
-			createView(path, path, searchId);
-			view = client.view(searchId);
-			allDocs = view.includeDocs(true).query();
-		}
-
-		ArrayList<E> results = new ArrayList<E>();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
-		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
-		for (String jo : allDocs)
-		{
-			System.out.println(jo);
-			if (true)
-			{
-				URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
-				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				results.add((E) resource.getContents().get(0));
-			}
-		}
+		List<String> allDocs = loadDocsFromView(searchId, path, path);
+		List<E> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(searchId, path);
 		}
 		return results;
+//		List<String> allDocs = new ArrayList<String>(0);
+//		View view;
+//		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, path);
+//		try
+//		{
+//			view = client.view(searchId);
+//			allDocs = view.includeDocs(true).query();
+//		} catch (NoDocumentException e)
+//		{
+//			e.printStackTrace();
+//			createView(path, path, searchId);
+//			view = client.view(searchId);
+//			allDocs = view.includeDocs(true).query();
+//		}
+//
+//		ArrayList<E> results = new ArrayList<E>();
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
+//		connectionProvider.getEmfResourceSet().getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+//		for (String jo : allDocs)
+//		{
+//			System.out.println(jo);
+//			if (true)
+//			{
+//				URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
+//				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
+//						new HashMap<Object, Object>());
+//				loader.fillResource(resource);
+//				results.add((E) resource.getContents().get(0));
+//			}
+//		}
+//		if (!results.isEmpty())
+//		{
+//			registerQueryIdWithInternalRegistry(searchId, path);
+//		}
+//		return results;
 	}
 
 	protected String getRemoteDBURL()

@@ -166,18 +166,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSPassportEntryItem">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="externalReferences" upperBound="-1"
-        eType="#//BTSExternalReference" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="timespan" eType="#//BTSTimespan"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="description" eType="#//BTSTranslations"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="translation" eType="#//BTSTranslations"
-        containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeSupport" instanceClassName="java.beans.PropertyChangeSupport"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeListener" instanceClassName="java.beans.PropertyChangeListener"

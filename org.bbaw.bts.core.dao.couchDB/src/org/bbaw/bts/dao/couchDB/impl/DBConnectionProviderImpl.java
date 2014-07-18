@@ -1,10 +1,9 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
+import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
+
 import java.lang.reflect.Type;
 import java.net.MalformedURLException;
-
-import static org.elasticsearch.node.NodeBuilder.*;
-
 import java.net.URL;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,16 +11,13 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.dao.util.ScatteredCachingMapService;
-import org.eclipse.core.runtime.Preferences;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
@@ -37,12 +33,9 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
-import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
+import org.eclipselabs.couchemf.emfjson.CouchDBHandler;
 import org.elasticsearch.client.Client;
-import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.ImmutableSettings;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 

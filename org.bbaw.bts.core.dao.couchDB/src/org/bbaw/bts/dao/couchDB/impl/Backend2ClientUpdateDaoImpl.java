@@ -24,7 +24,6 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.percolate.PercolateRequestBuilder;
 import org.elasticsearch.action.percolate.PercolateResponse;
@@ -192,26 +191,20 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		}
 		
 		resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		logger.info(jso.toString());
+		logger.info(jso.getAsString());
 		InputStream inputStream;
-		try
+		if (resource.getContents().isEmpty())
 		{
-
-			if (resource.getContents().isEmpty())
-			{
 //				EmfModelHelper.loadFromString(jso.toString(), classType)
 
-				inputStream = new ByteArrayInputStream(jso.toString().getBytes(BTSConstants.ENCODING));
-				final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
-				loader.fillResource(resource);
-			}
-			if (!resource.getContents().isEmpty())
-			{
-				return ((BTSDBBaseObject) resource.getContents().get(0));
-			}
-		} catch (UnsupportedEncodingException e)
+//				inputStream = new ByteArrayInputStream(jso.toString().getBytes(BTSConstants.ENCODING));
+			generalPurposeDao.fillResource(resource, jso.getAsString());
+//				final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
+//				loader.fillResource(resource);
+		}
+		if (!resource.getContents().isEmpty())
 		{
-			e.printStackTrace();
+			return ((BTSDBBaseObject) resource.getContents().get(0));
 		}
 		logger.info("Object not found, feed object: " + jso);
 		return null;

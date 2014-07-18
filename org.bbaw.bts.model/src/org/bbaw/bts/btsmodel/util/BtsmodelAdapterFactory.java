@@ -142,10 +142,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSUserGroupAdapter();
 			}
 			@Override
-			public Adapter caseBTSPassportEntryItem(BTSPassportEntryItem object) {
-				return createBTSPassportEntryItemAdapter();
-			}
-			@Override
 			public Adapter caseBTSConfig(BTSConfig object) {
 				return createBTSConfigAdapter();
 			}
@@ -466,20 +462,6 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSUserGroupAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem <em>BTS Passport Entry Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem
-	 * @generated
-	 */
-	public Adapter createBTSPassportEntryItemAdapter() {
 		return null;
 	}
 

@@ -149,15 +149,6 @@ public interface BtsmodelFactory extends EFactory {
 	BTSUserGroup createBTSUserGroup();
 
 	/**
-	 * Returns a new object of class '<em>BTS Passport Entry Item</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Passport Entry Item</em>'.
-	 * @generated
-	 */
-	BTSPassportEntryItem createBTSPassportEntryItem();
-
-	/**
 	 * Returns a new object of class '<em>BTS Project</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

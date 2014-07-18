@@ -239,7 +239,8 @@ public class ApplicationStartupControllerImpl implements
 						IWorkbench workbench = context.get(IWorkbench.class);
 						logger.info("IProvisioningAgent loaded: " + (agent != null) + ", IWorkbench loaded: " + (workbench != null));
 						//automated software update
-						checkAndInstallSoftwareUpdates(agent, workbench);
+						//FIXME
+// 						checkAndInstallSoftwareUpdates(agent, workbench);
 
 						
 						splashController.close();

@@ -1,9 +1,6 @@
 package org.bbaw.bts.core.remote.dao.couchDB.impl;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,14 +14,7 @@ import org.bbaw.bts.core.remote.dao.util.RemoteDaoConstants;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
-import org.eclipselabs.emfjson.internal.JSONLoad;
-import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.lightcouch.CouchDbClient;
-import org.lightcouch.NoDocumentException;
-import org.lightcouch.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -47,44 +37,51 @@ public class RemoteBTSProjectDaoImpl extends RemoteCouchDBDao<BTSProject, String
 	@Override
 	public List<BTSProject> list(String path)
 	{
-		List<String> allDocs = new ArrayList<String>(0);
-		View view;
-		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
-		try
-		{
-
-			view = dbClient.view(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS);
-			allDocs = view.includeDocs(true).query();
-		} catch (NoDocumentException e)
-		{
-			e.printStackTrace();
-			createView(path, path, RemoteDaoConstants.VIEW_ALL_BTSPROJECTS);
-			view = dbClient.view(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS);
-			allDocs = view.includeDocs(true).query();
-		}
-
-		ArrayList<BTSProject> results = new ArrayList<BTSProject>();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
-		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
-		for (String jo : allDocs)
-		{
-			System.out.println(jo);
-			if (true)
-			{
-				URI uri = URI.createURI(getRemoteDBURL() + RemoteDaoConstants.ADMIN + extractIdFromObjectString(jo));
-				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				results.add((BTSProject) resource.getContents().get(0));
-			}
-		}
+		List<String> allDocs = loadDocsFromView(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS, path, path);
+		List<BTSProject> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS, path);
 		}
 		return results;
+//		List<String> allDocs = new ArrayList<String>(0);
+//		View view;
+//		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
+//		try
+//		{
+//
+//			view = dbClient.view(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS);
+//			allDocs = view.includeDocs(true).query();
+//		} catch (NoDocumentException e)
+//		{
+//			e.printStackTrace();
+//			createView(path, path, RemoteDaoConstants.VIEW_ALL_BTSPROJECTS);
+//			view = dbClient.view(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS);
+//			allDocs = view.includeDocs(true).query();
+//		}
+//
+//		ArrayList<BTSProject> results = new ArrayList<BTSProject>();
+//		ResourceSet resourceSet = new ResourceSetImpl();
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
+//		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+//		for (String jo : allDocs)
+//		{
+//			System.out.println(jo);
+//			if (true)
+//			{
+//				URI uri = URI.createURI(getRemoteDBURL() + RemoteDaoConstants.ADMIN + extractIdFromObjectString(jo));
+//				Resource resource = resourceSet.getResource(uri, true);
+//				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
+//						new HashMap<Object, Object>());
+//				loader.fillResource(resource);
+//				results.add((BTSProject) resource.getContents().get(0));
+//			}
+//		}
+//		if (!results.isEmpty())
+//		{
+//			registerQueryIdWithInternalRegistry(RemoteDaoConstants.VIEW_ALL_BTSPROJECTS, path);
+//		}
+//		return results;
 	}
 
 	@Override

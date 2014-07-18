@@ -96,7 +96,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSObservableObject()
 	 * @generated
 	 */
-	int BTS_OBSERVABLE_OBJECT = 20;
+	int BTS_OBSERVABLE_OBJECT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -463,7 +463,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSIdentifiableItem()
 	 * @generated
 	 */
-	int BTS_IDENTIFIABLE_ITEM = 28;
+	int BTS_IDENTIFIABLE_ITEM = 27;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -2153,7 +2153,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSConfig()
 	 * @generated
 	 */
-	int BTS_CONFIG = 19;
+	int BTS_CONFIG = 18;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -2726,88 +2726,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryItemImpl <em>BTS Passport Entry Item</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.btsmodel.impl.BTSPassportEntryItemImpl
-	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPassportEntryItem()
-	 * @generated
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM = 18;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM__SUBTYPE = 0;
-
-	/**
-	 * The feature id for the '<em><b>Sub Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM__SUB_VALUE = 1;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM__EXTERNAL_REFERENCES = 2;
-
-	/**
-	 * The feature id for the '<em><b>Timespan</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM__TIMESPAN = 3;
-
-	/**
-	 * The feature id for the '<em><b>Description</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION = 4;
-
-	/**
-	 * The feature id for the '<em><b>Translation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM__TRANSLATION = 5;
-
-	/**
-	 * The number of structural features of the '<em>BTS Passport Entry Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM_FEATURE_COUNT = 6;
-
-	/**
-	 * The number of operations of the '<em>BTS Passport Entry Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT_ENTRY_ITEM_OPERATION_COUNT = 0;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSProjectImpl <em>BTS Project</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2815,7 +2733,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSProject()
 	 * @generated
 	 */
-	int BTS_PROJECT = 21;
+	int BTS_PROJECT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3095,7 +3013,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDBConnection()
 	 * @generated
 	 */
-	int BTSDB_CONNECTION = 22;
+	int BTSDB_CONNECTION = 21;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3159,7 +3077,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSWorkflowRule()
 	 * @generated
 	 */
-	int BTS_WORKFLOW_RULE = 23;
+	int BTS_WORKFLOW_RULE = 22;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3250,7 +3168,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSWorkflowRuleItem()
 	 * @generated
 	 */
-	int BTS_WORKFLOW_RULE_ITEM = 25;
+	int BTS_WORKFLOW_RULE_ITEM = 24;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3332,7 +3250,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSOperator()
 	 * @generated
 	 */
-	int BTS_OPERATOR = 24;
+	int BTS_OPERATOR = 23;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3423,7 +3341,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getDBLease()
 	 * @generated
 	 */
-	int DB_LEASE = 26;
+	int DB_LEASE = 25;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3595,7 +3513,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSProjectDBCollection()
 	 * @generated
 	 */
-	int BTS_PROJECT_DB_COLLECTION = 27;
+	int BTS_PROJECT_DB_COLLECTION = 26;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3668,7 +3586,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSDBCollectionRoleDesc()
 	 * @generated
 	 */
-	int BTSDB_COLLECTION_ROLE_DESC = 29;
+	int BTSDB_COLLECTION_ROLE_DESC = 28;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3741,7 +3659,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getUserActionCounter()
 	 * @generated
 	 */
-	int USER_ACTION_COUNTER = 30;
+	int USER_ACTION_COUNTER = 29;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3868,7 +3786,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getStringToStringListMap()
 	 * @generated
 	 */
-	int STRING_TO_STRING_LIST_MAP = 31;
+	int STRING_TO_STRING_LIST_MAP = 30;
 
 	/**
 	 * The feature id for the '<em><b>Key</b></em>' attribute.
@@ -3914,7 +3832,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 32;
+	int PROPERTY_CHANGE_SUPPORT = 31;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -3924,7 +3842,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 33;
+	int PROPERTY_CHANGE_LISTENER = 32;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -3934,7 +3852,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 34;
+	int PROPERTY_CHANGE_EVENT = 33;
 
 
 	/**
@@ -5121,82 +5039,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSUserGroup_Comment();
-
-	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem <em>BTS Passport Entry Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Passport Entry Item</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem
-	 * @generated
-	 */
-	EClass getBTSPassportEntryItem();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem#getSubtype <em>Subtype</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Subtype</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem#getSubtype()
-	 * @see #getBTSPassportEntryItem()
-	 * @generated
-	 */
-	EAttribute getBTSPassportEntryItem_Subtype();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem#getSubValue <em>Sub Value</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Sub Value</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem#getSubValue()
-	 * @see #getBTSPassportEntryItem()
-	 * @generated
-	 */
-	EAttribute getBTSPassportEntryItem_SubValue();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem#getExternalReferences <em>External References</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>External References</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem#getExternalReferences()
-	 * @see #getBTSPassportEntryItem()
-	 * @generated
-	 */
-	EReference getBTSPassportEntryItem_ExternalReferences();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem#getTimespan <em>Timespan</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Timespan</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem#getTimespan()
-	 * @see #getBTSPassportEntryItem()
-	 * @generated
-	 */
-	EReference getBTSPassportEntryItem_Timespan();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem#getDescription <em>Description</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Description</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem#getDescription()
-	 * @see #getBTSPassportEntryItem()
-	 * @generated
-	 */
-	EReference getBTSPassportEntryItem_Description();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.btsmodel.BTSPassportEntryItem#getTranslation <em>Translation</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Translation</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSPassportEntryItem#getTranslation()
-	 * @see #getBTSPassportEntryItem()
-	 * @generated
-	 */
-	EReference getBTSPassportEntryItem_Translation();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSConfig <em>BTS Config</em>}'.
@@ -6739,64 +6581,6 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_USER_GROUP__COMMENT = eINSTANCE.getBTSUserGroup_Comment();
-
-		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSPassportEntryItemImpl <em>BTS Passport Entry Item</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.btsmodel.impl.BTSPassportEntryItemImpl
-		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSPassportEntryItem()
-		 * @generated
-		 */
-		EClass BTS_PASSPORT_ENTRY_ITEM = eINSTANCE.getBTSPassportEntryItem();
-
-		/**
-		 * The meta object literal for the '<em><b>Subtype</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT_ENTRY_ITEM__SUBTYPE = eINSTANCE.getBTSPassportEntryItem_Subtype();
-
-		/**
-		 * The meta object literal for the '<em><b>Sub Value</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT_ENTRY_ITEM__SUB_VALUE = eINSTANCE.getBTSPassportEntryItem_SubValue();
-
-		/**
-		 * The meta object literal for the '<em><b>External References</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_PASSPORT_ENTRY_ITEM__EXTERNAL_REFERENCES = eINSTANCE.getBTSPassportEntryItem_ExternalReferences();
-
-		/**
-		 * The meta object literal for the '<em><b>Timespan</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_PASSPORT_ENTRY_ITEM__TIMESPAN = eINSTANCE.getBTSPassportEntryItem_Timespan();
-
-		/**
-		 * The meta object literal for the '<em><b>Description</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION = eINSTANCE.getBTSPassportEntryItem_Description();
-
-		/**
-		 * The meta object literal for the '<em><b>Translation</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_PASSPORT_ENTRY_ITEM__TRANSLATION = eINSTANCE.getBTSPassportEntryItem_Translation();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSConfigImpl <em>BTS Config</em>}' class.

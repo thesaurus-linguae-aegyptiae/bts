@@ -1,37 +1,23 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
 
-import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.methods.HttpHead;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ByteArrayEntity;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
-import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
-import org.eclipselabs.emfjson.internal.JSONLoad;
-import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.DesignDocument;
 import org.lightcouch.NoDocumentException;
@@ -69,61 +55,68 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSUSERS;
 		}
-		// List<JsonObject> allDocs =
-		// connectionProvider.getDBClient(CouchDbClient.class, path)
-		// .view(viewId).includeDocs(true).query(JsonObject.class);
-		List<String> allDocs = new ArrayList<String>(0);
-		View view;
-		try {
-			view = connectionProvider.getDBClient(CouchDbClient.class, path)
-					.view(viewId);
-			allDocs = view.includeDocs(true).query();
-		} catch (NoDocumentException e) {
-			e.printStackTrace();
-			createView(path, path, viewId);
-			view = connectionProvider.getDBClient(CouchDbClient.class, path)
-					.view(viewId);
-			allDocs = view.includeDocs(true).query();
-		}
-		ArrayList<BTSUser> results = new ArrayList<BTSUser>();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
-		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
-		for (String jo : allDocs)
-		{
-			System.out.println(jo);
-			if (true)
-			{
-				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
-						+ extractIdFromObjectString(jo));
-				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(
-						jo.getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				results.add((BTSUser) resource.getContents().get(0));
-			}
-		}
-		// for (JsonObject jo : allDocs)
-		// {
-		// System.out.println(jo.get(DaoConstants.ID_STRING).getAsString());
-		// if (!jo.get(DaoConstants.ID_STRING).getAsString().startsWith("_"))
-		// {
-		// URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
-		// + jo.get(DaoConstants.ID_STRING).getAsString());
-		// Resource resource = resourceSet.getResource(uri, true);
-		// final JSONLoad loader = new JSONLoad(new
-		// ByteArrayInputStream(jo.toString().getBytes()),
-		// new HashMap<Object, Object>());
-		// loader.fillResource(resource);
-		// results.add((BTSUser) resource.getContents().get(0));
-		// }
-		// }
+		List<String> allDocs = loadDocsFromView(viewId, path, path);
+		List<BTSUser> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
+		// List<JsonObject> allDocs =
+		// connectionProvider.getDBClient(CouchDbClient.class, path)
+		// .view(viewId).includeDocs(true).query(JsonObject.class);
+//		List<String> allDocs = new ArrayList<String>(0);
+//		View view;
+//		try {
+//			view = connectionProvider.getDBClient(CouchDbClient.class, path)
+//					.view(viewId);
+//			allDocs = view.includeDocs(true).query();
+//		} catch (NoDocumentException e) {
+//			e.printStackTrace();
+//			createView(path, path, viewId);
+//			view = connectionProvider.getDBClient(CouchDbClient.class, path)
+//					.view(viewId);
+//			allDocs = view.includeDocs(true).query();
+//		}
+//		ArrayList<BTSUser> results = new ArrayList<BTSUser>();
+//		ResourceSet resourceSet = new ResourceSetImpl();
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
+//		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+//		for (String jo : allDocs)
+//		{
+//			System.out.println(jo);
+//			if (true)
+//			{
+//				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
+//						+ extractIdFromObjectString(jo));
+//				Resource resource = resourceSet.getResource(uri, true);
+//				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(
+//						jo.getBytes()),
+//						new HashMap<Object, Object>());
+//				loader.fillResource(resource);
+//				results.add((BTSUser) resource.getContents().get(0));
+//			}
+//		}
+//		// for (JsonObject jo : allDocs)
+//		// {
+//		// System.out.println(jo.get(DaoConstants.ID_STRING).getAsString());
+//		// if (!jo.get(DaoConstants.ID_STRING).getAsString().startsWith("_"))
+//		// {
+//		// URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/"
+//		// + jo.get(DaoConstants.ID_STRING).getAsString());
+//		// Resource resource = resourceSet.getResource(uri, true);
+//		// final JSONLoad loader = new JSONLoad(new
+//		// ByteArrayInputStream(jo.toString().getBytes()),
+//		// new HashMap<Object, Object>());
+//		// loader.fillResource(resource);
+//		// results.add((BTSUser) resource.getContents().get(0));
+//		// }
+//		// }
+//		if (!results.isEmpty())
+//		{
+//			registerQueryIdWithInternalRegistry(viewId, path);
+//		}
+//		return results;
 	}
 
 	@Override
@@ -137,6 +130,7 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSUSERS;
 		}
+		
 		// List<JsonObject> allDocs =
 		// connectionProvider.getDBClient(CouchDbClient.class, path)
 		// .view(viewId).includeDocs(true).query(JsonObject.class);
@@ -156,22 +150,21 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 			allDocs = view.includeDocs(true).query();
 		}
 		ArrayList<BTSUser> results = new ArrayList<BTSUser>();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
-		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
 		for (String jo : allDocs)
 		{
-			System.out.println(jo);
+//			System.out.println(jo);
 			if (true)
 			{
-				URI uri = URI.createURI(getLocalDBURL(userName, passWord) + "/" + path + "/"
-						+ extractIdFromObjectString(jo));
-				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(
-						jo.getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				results.add((BTSUser) resource.getContents().get(0));
+				
+				try {
+					URI uri = URI.createURI(getLocalDBURL(userName, passWord) + "/" + path + "/"
+							+ extractIdFromObjectString(jo));
+					Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+					fillResource(resource, jo);
+					results.add((BTSUser) resource.getContents().get(0));
+				} catch (Exception e) {
+					logger.error(e);
+				}
 			}
 		}
 		if (!results.isEmpty())

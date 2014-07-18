@@ -15,23 +15,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
-
-
-
-
-
-
-
-
-
-
-
-
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.node.ObjectNode;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -42,9 +28,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipselabs.emfjson.EMFJs;
-import org.eclipselabs.emfjson.internal.JSONLoad;
-import org.eclipselabs.emfjson.internal.JSONSave;
-
 import com.google.gson.Gson;
 
 public class EmfModelHelper
@@ -297,31 +280,33 @@ public class EmfModelHelper
 	{
 //		throw new UnsupportedOperationException();
 		String string = null;
-		Map options = new HashMap<Object, Object>();
-		 options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
-		JSONSave js = new JSONSave(options);
-		if (object instanceof EObject)
-		{
-			EObject eo = (EObject) object;
-			JsonNode node = js.writeEObject(eo, eo.eResource());
-			string = node.toString();
-		}
-		else
-		{
-		ByteArrayOutputStream os = new ByteArrayOutputStream();
 		
-		js.writeValue(os, object);
-		
-		try
-		{
-			string = os.toString(BTSConstants.ENCODING);
-		} catch (UnsupportedEncodingException e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		}
+		//FIXME
+//		Map options = new HashMap<Object, Object>();
+//		 options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
+//		JSONSave js = new JSONSave(options);
+//		if (object instanceof EObject)
+//		{
+//			EObject eo = (EObject) object;
+//			JsonNode node = js.writeEObject(eo, eo.eResource());
+//			string = node.toString();
+//		}
+//		else
+//		{
+//		ByteArrayOutputStream os = new ByteArrayOutputStream();
+//		
+//		js.writeValue(os, object);
+//		
+//		try
+//		{
+//			string = os.toString(BTSConstants.ENCODING);
+//		} catch (UnsupportedEncodingException e)
+//		{
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		}
 		return string;
 	}
 
@@ -345,21 +330,21 @@ public class EmfModelHelper
 	public static <T> T loadFromString(String inputString, Class<T> classType)
 	{
 //		System.out.println("##################### " + inputString);
-
-		JSONLoad loader;
-		try {
-			loader = new JSONLoad(new ByteArrayInputStream(inputString.getBytes("UTF-8")),
-					new HashMap<Object, Object>());
-			Collection<EObject> ts =  loader.loadObjects(null);
-			if (!ts.isEmpty())
-			{
-				EObject o = ts.iterator().next();
-				return (T) o;
-			}
-		} catch (UnsupportedEncodingException e) {
-//System.out.println("##################### " + inputString);
-//e.printStackTrace();
-		}
+		//FIXME
+//		JSONLoad loader;
+//		try {
+//			loader = new JSONLoad(new ByteArrayInputStream(inputString.getBytes("UTF-8")),
+//					new HashMap<Object, Object>());
+//			Collection<EObject> ts =  loader.loadObjects(null);
+//			if (!ts.isEmpty())
+//			{
+//				EObject o = ts.iterator().next();
+//				return (T) o;
+//			}
+//		} catch (UnsupportedEncodingException e) {
+////System.out.println("##################### " + inputString);
+////e.printStackTrace();
+//		}
 		
 		return null;
 

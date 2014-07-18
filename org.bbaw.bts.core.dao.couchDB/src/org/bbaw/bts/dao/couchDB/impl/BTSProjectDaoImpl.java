@@ -1,13 +1,6 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -22,14 +15,7 @@ import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.eclipse.e4.core.di.annotations.Creatable;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
-import org.eclipselabs.emfjson.internal.JSONLoad;
-import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.lightcouch.CouchDbClient;
-import org.lightcouch.NoDocumentException;
-import org.lightcouch.View;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -44,7 +30,6 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 	@Override
 	public boolean removeBTSProject(BTSProject btsProject)
 	{
-		// TODO Auto-generated method stub
 		super.remove(btsProject, DaoConstants.ADMIN);
 		return true;
 	}
@@ -60,44 +45,51 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
 		}
-		List<String> allDocs = new ArrayList<String>(0);
-		View view;
-		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
-		try
-		{
-
-			view = dbClient.view(viewId);
-			allDocs = view.includeDocs(true).query();
-		} catch (NoDocumentException e)
-		{
-			System.out.println("create view with id: " + viewId);
-			createView(path, path, viewId);
-			view = dbClient.view(viewId);
-			allDocs = view.includeDocs(true).query();
-		}
-
-		ArrayList<BTSProject> results = new ArrayList<BTSProject>();
-		ResourceSet resourceSet = new ResourceSetImpl();
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
-		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
-		for (String jo : allDocs)
-		{
-			System.out.println(jo);
-			if (true)
-			{
-				URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + extractIdFromObjectString(jo));
-				Resource resource = resourceSet.getResource(uri, true);
-				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
-						new HashMap<Object, Object>());
-				loader.fillResource(resource);
-				results.add((BTSProject) resource.getContents().get(0));
-			}
-		}
+		List<String> allDocs = loadDocsFromView(viewId, path, path);
+		List<BTSProject> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
 		}
 		return results;
+//		List<String> allDocs = new ArrayList<String>(0);
+//		View view;
+//		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
+//		try
+//		{
+//
+//			view = dbClient.view(viewId);
+//			allDocs = view.includeDocs(true).query();
+//		} catch (NoDocumentException e)
+//		{
+//			System.out.println("create view with id: " + viewId);
+//			createView(path, path, viewId);
+//			view = dbClient.view(viewId);
+//			allDocs = view.includeDocs(true).query();
+//		}
+//
+//		ArrayList<BTSProject> results = new ArrayList<BTSProject>();
+//		ResourceSet resourceSet = new ResourceSetImpl();
+//		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
+//		resourceSet.getURIConverter().getURIHandlers().add(0, new CouchDBHandler());
+//		for (String jo : allDocs)
+//		{
+//			System.out.println(jo);
+//			if (true)
+//			{
+//				URI uri = URI.createURI(getLocalDBURL() + DaoConstants.ADMIN + extractIdFromObjectString(jo));
+//				Resource resource = resourceSet.getResource(uri, true);
+//				final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
+//						new HashMap<Object, Object>());
+//				loader.fillResource(resource);
+//				results.add((BTSProject) resource.getContents().get(0));
+//			}
+//		}
+//		if (!results.isEmpty())
+//		{
+//			registerQueryIdWithInternalRegistry(viewId, path);
+//		}
+//		return results;
 	}
 
 //	@Override

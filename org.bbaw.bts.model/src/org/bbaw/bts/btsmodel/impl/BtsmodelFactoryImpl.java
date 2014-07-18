@@ -73,7 +73,6 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTS_CONFIG_ITEM: return createBTSConfigItem();
 			case BtsmodelPackage.BTS_PASSPORT_EDITOR_CONFIG: return createBTSPassportEditorConfig();
 			case BtsmodelPackage.BTS_USER_GROUP: return createBTSUserGroup();
-			case BtsmodelPackage.BTS_PASSPORT_ENTRY_ITEM: return createBTSPassportEntryItem();
 			case BtsmodelPackage.BTS_PROJECT: return createBTSProject();
 			case BtsmodelPackage.BTSDB_CONNECTION: return createBTSDBConnection();
 			case BtsmodelPackage.BTS_WORKFLOW_RULE: return createBTSWorkflowRule();
@@ -316,19 +315,6 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		BTSUserGroupImpl btsUserGroup = new BTSUserGroupImpl();
 		setIdentifiableId(btsUserGroup);
 		return btsUserGroup;
-	}
-
-
-	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	public BTSPassportEntryItem createBTSPassportEntryItem() {
-		BTSPassportEntryItemImpl btsPassportEntryItem = new BTSPassportEntryItemImpl();
-		setIdentifiableId(btsPassportEntryItem);
-
-		return btsPassportEntryItem;
 	}
 
 

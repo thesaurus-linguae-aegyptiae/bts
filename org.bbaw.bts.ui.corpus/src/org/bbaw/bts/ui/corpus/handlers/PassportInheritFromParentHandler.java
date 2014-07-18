@@ -3,7 +3,6 @@ package org.bbaw.bts.ui.corpus.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSPassportEntryItem;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
@@ -12,6 +11,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.e4.core.di.annotations.CanExecute;

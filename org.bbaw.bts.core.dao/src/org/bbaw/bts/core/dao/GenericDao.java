@@ -8,6 +8,7 @@ import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 
 public interface GenericDao<E extends BTSDBBaseObject, K>
 {
@@ -53,5 +54,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	// for each object
 
 	boolean isAuthorizedUser(String userName, String passWord);
+	
+	void fillResource(Resource resource, String objectAsString);
 
 }

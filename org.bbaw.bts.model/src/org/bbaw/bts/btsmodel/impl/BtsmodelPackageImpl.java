@@ -22,7 +22,6 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSOperator;
 import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
-import org.bbaw.bts.btsmodel.BTSPassportEntryItem;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSReferencableItem;
@@ -180,13 +179,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	private EClass btsUserGroupEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass btsPassportEntryItemEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -1370,69 +1362,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getBTSPassportEntryItem() {
-		return btsPassportEntryItemEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSPassportEntryItem_Subtype() {
-		return (EAttribute)btsPassportEntryItemEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSPassportEntryItem_SubValue() {
-		return (EAttribute)btsPassportEntryItemEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBTSPassportEntryItem_ExternalReferences() {
-		return (EReference)btsPassportEntryItemEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBTSPassportEntryItem_Timespan() {
-		return (EReference)btsPassportEntryItemEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBTSPassportEntryItem_Description() {
-		return (EReference)btsPassportEntryItemEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBTSPassportEntryItem_Translation() {
-		return (EReference)btsPassportEntryItemEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getBTSConfig()
 	{
 		return btsConfigEClass;
@@ -2132,14 +2061,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsUserGroupEClass, BTS_USER_GROUP__CATEGORY);
 		createEAttribute(btsUserGroupEClass, BTS_USER_GROUP__COMMENT);
 
-		btsPassportEntryItemEClass = createEClass(BTS_PASSPORT_ENTRY_ITEM);
-		createEAttribute(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__SUBTYPE);
-		createEAttribute(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__SUB_VALUE);
-		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__EXTERNAL_REFERENCES);
-		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__TIMESPAN);
-		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION);
-		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__TRANSLATION);
-
 		btsConfigEClass = createEClass(BTS_CONFIG);
 		createEReference(btsConfigEClass, BTS_CONFIG__CHILDREN);
 
@@ -2416,14 +2337,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsUserGroupEClass, BTSUserGroup.class, "BTSUserGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSUserGroup_Category(), ecorePackage.getEString(), "category", null, 0, 1, BTSUserGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUserGroup_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSUserGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(btsPassportEntryItemEClass, BTSPassportEntryItem.class, "BTSPassportEntryItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSPassportEntryItem_Subtype(), ecorePackage.getEString(), "subtype", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSPassportEntryItem_SubValue(), ecorePackage.getEString(), "subValue", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSPassportEntryItem_ExternalReferences(), this.getBTSExternalReference(), null, "externalReferences", null, 0, -1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSPassportEntryItem_Timespan(), this.getBTSTimespan(), null, "timespan", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSPassportEntryItem_Description(), this.getBTSTranslations(), null, "description", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSPassportEntryItem_Translation(), this.getBTSTranslations(), null, "translation", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsConfigEClass, BTSConfig.class, "BTSConfig", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSConfig_Children(), this.getBTSConfig(), null, "children", null, 0, -1, BTSConfig.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
