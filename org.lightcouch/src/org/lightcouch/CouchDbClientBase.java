@@ -31,6 +31,7 @@ import java.net.URI;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.List;
+import java.util.Map;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocket;
@@ -77,9 +78,14 @@ import org.apache.http.util.EntityUtils;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.DBLease;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipselabs.emfjson.map.EObjectMapper;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -209,7 +215,10 @@ abstract class CouchDbClientBase {
 			String rev = null;
 			if (object instanceof BTSIdentifiableItem)
 			{
-				jsonString = EmfModelHelper.modelToString(object);
+				EObjectMapper mapper = getEObjectMapper();
+				Resource resource = ((EObject) object).eResource();
+				ObjectNode node = mapper.to((EObject) object, resource);
+				jsonString = node.toString();
 				id = ((BTSIdentifiableItem) object).get_id();
 				
 				rev = ((BTSDBBaseObject) object).get_rev();
@@ -505,5 +514,15 @@ abstract class CouchDbClientBase {
 	 */
 	protected void shutdown() {
 		this.httpClient.getConnectionManager().shutdown();
+	}
+	
+	private EObjectMapper getEObjectMapper() {
+		EObjectMapper mapper = StaticAccessController.getContext().get(EObjectMapper.class);
+		if (mapper == null)
+		{
+			mapper = new EObjectMapper();
+			StaticAccessController.getContext().set(EObjectMapper.class, mapper);
+		}
+		return mapper;
 	}
 }

@@ -113,7 +113,7 @@ public class BTSCoreConstants
 	public static final String STATUS_MESSAGE_LIST = "status_message_list";
 
 	public static final int STATUS_MESSAGE_LIST_SIZE = 25;
-	public static final String EXTENSION_POINT_SEARCH_SERVICE = "org.bbaw.bts.core.services.searchServices";
+	public static final String EXTENSION_POINT_SEARCH_SERVICE_FACTORY = "org.bbaw.bts.core.services.searchServiceFactory";
 	public static final String EXTENSION_SEARCH_SERVICE_MAP = "extension_search_service_map";
 
 

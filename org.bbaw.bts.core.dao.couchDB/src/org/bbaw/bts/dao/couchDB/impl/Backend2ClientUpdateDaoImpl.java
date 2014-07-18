@@ -191,14 +191,14 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		}
 		
 		resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		logger.info(jso.getAsString());
+		logger.info(jso.toString());
 		InputStream inputStream;
 		if (resource.getContents().isEmpty())
 		{
 //				EmfModelHelper.loadFromString(jso.toString(), classType)
 
 //				inputStream = new ByteArrayInputStream(jso.toString().getBytes(BTSConstants.ENCODING));
-			generalPurposeDao.fillResource(resource, jso.getAsString());
+			generalPurposeDao.fillResource(resource, jso.toString());
 //				final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
 //				loader.fillResource(resource);
 		}

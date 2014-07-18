@@ -343,13 +343,23 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	
 	
 	public void fillResource(Resource resource, String objectAsString) {
-		EObjectMapper objectMapper = new EObjectMapper();
+		EObjectMapper objectMapper = getEObjectMapper();
 		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
 		Object o = objectMapper.from(stream, resource, null);
 //		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
 //				new HashMap<Object, Object>());
 //		loader.fillResource(resource);
 		
+	}
+
+	private EObjectMapper getEObjectMapper() {
+		EObjectMapper mapper = context.get(EObjectMapper.class);
+		if (mapper == null)
+		{
+			mapper = new EObjectMapper();
+			context.set(EObjectMapper.class, mapper);
+		}
+		return mapper;
 	}
 
 	@SuppressWarnings("unchecked")

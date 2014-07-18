@@ -146,12 +146,13 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	public Resource get(Object key) {
 		// FIXME dies setzt ein active window voraus - nicht gegeben, wenn parts
 		// im dialog geöffnet werden.
-		if (configurationMap.containsKey(key)) {
-			return configurationMap.get(key);
-		}
 		if (notificationMap.containsKey(key)) {
 			return notificationMap.get(key);
 		}
+		if (configurationMap.containsKey(key)) {
+			return configurationMap.get(key);
+		}
+
 		if (partService == null) {
 			return null;
 		}
