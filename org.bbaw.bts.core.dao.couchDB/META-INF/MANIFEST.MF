@@ -46,7 +46,8 @@ Import-Package: com.fasterxml.jackson.core;version="2.3.1",
  org.eclipse.emf.ecore.resource,
  org.eclipse.emf.ecore.resource.impl,
  org.eclipse.equinox.security.storage;version="1.0.0",
- org.eclipselabs.emfjson.map,
+ org.eclipselabs.emfjson.couchdb,
+ org.eclipselabs.emfjson.internal,
  org.eclipselabs.emfjson.resource,
  org.lightcouch
 Export-Package: org.bbaw.bts.dao.couchDB

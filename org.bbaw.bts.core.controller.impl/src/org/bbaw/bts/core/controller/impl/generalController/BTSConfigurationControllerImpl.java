@@ -362,10 +362,10 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 				return resourceProvider.IMG_IMAGE;
 			} else if (object.eClass().getName().startsWith("BTSLemmaEntry")) {
 				return resourceProvider.IMG_LEMMA;
-			} else if (object.eClass().getName().startsWith("BTSText")) {
-				return resourceProvider.IMG_TEXT;
 			} else if (object.eClass().getName().startsWith("BTSTextCorpus")) {
 				return resourceProvider.IMG_CORPUS;
+			} else if (object.eClass().getName().startsWith("BTSText")) {
+				return resourceProvider.IMG_TEXT;
 			} else if (object.eClass().getName().startsWith("BTSThsEntry")) {
 				return resourceProvider.IMG_THS;
 			} else if (object.eClass().getName().startsWith("BTSComment")) {

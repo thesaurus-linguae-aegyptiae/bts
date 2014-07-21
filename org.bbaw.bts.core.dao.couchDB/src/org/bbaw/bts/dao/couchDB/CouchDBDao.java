@@ -3,14 +3,10 @@ package org.bbaw.bts.dao.couchDB;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.Serializable;
-import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,9 +17,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import org.apache.lucene.util.IOUtils;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GenericDao;
@@ -46,8 +40,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipselabs.couchemf.emfjson.CouchDBHandler;
-import org.eclipselabs.emfjson.map.EObjectMapper;
+import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
+import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.search.SearchResponse;
@@ -63,9 +57,6 @@ import org.lightcouch.Params;
 import org.lightcouch.Response;
 import org.lightcouch.View;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
-import com.google.common.io.Closeables;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -323,18 +314,21 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key + "?rev=" + revision);
 		Resource tempResource = connectionProvider.getEmfResourceSet().createResource(uri);
 		InputStream stream = dbClient.find((String)key, revision);
-		EObjectMapper objectMapper = new EObjectMapper();
-		Object o = objectMapper.from(stream, tempResource, null);
+		final JSONLoad loader = new JSONLoad(stream,
+				new HashMap<Object, Object>());
+		loader.fillResource(tempResource);
+//		EObjectMapper objectMapper = new EObjectMapper();
+//		Object o = objectMapper.from(stream, tempResource, null);
 //		String content = CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
 //		Closeables.closeQuietly(stream);
 //		loadResourceFromString(key + revision, content, indexName)
 //		EObject objects = loadObjectFromHit(hit, indexName)sFromInputStream(connectionProvider.getEmfResourceSet(), content);
 		if (!tempResource.getContents().isEmpty())
 		{
-			Object oo =  tempResource.getContents().iterator().next();
+			Object o =  tempResource.getContents().iterator().next();
 			if (o instanceof BTSDBBaseObject)
 			{
-				return (E)oo;
+				return (E)o;
 			}
 		}
 		return null;
@@ -343,24 +337,24 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	
 	
 	public void fillResource(Resource resource, String objectAsString) {
-		EObjectMapper objectMapper = getEObjectMapper();
-		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
-		Object o = objectMapper.from(stream, resource, null);
-//		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
-//				new HashMap<Object, Object>());
-//		loader.fillResource(resource);
+//		EObjectMapper objectMapper = getEObjectMapper();
+//		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
+//		Object o = objectMapper.from(stream, resource, null);
+		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8)),
+				new HashMap<Object, Object>());
+		loader.fillResource(resource);
 		
 	}
 
-	private EObjectMapper getEObjectMapper() {
-		EObjectMapper mapper = context.get(EObjectMapper.class);
-		if (mapper == null)
-		{
-			mapper = new EObjectMapper();
-			context.set(EObjectMapper.class, mapper);
-		}
-		return mapper;
-	}
+//	private EObjectMapper getEObjectMapper() {
+//		EObjectMapper mapper = context.get(EObjectMapper.class);
+//		if (mapper == null)
+//		{
+//			mapper = new EObjectMapper();
+//			context.set(EObjectMapper.class, mapper);
+//		}
+//		return mapper;
+//	}
 
 	@SuppressWarnings("unchecked")
 	@Override

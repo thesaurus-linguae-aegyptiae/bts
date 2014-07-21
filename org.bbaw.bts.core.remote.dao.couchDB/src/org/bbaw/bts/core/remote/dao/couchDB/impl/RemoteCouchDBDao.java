@@ -4,11 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.ParameterizedType;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +15,6 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteGenericDao;
@@ -37,9 +32,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipselabs.couchemf.emfjson.CouchDBHandler;
-import org.eclipselabs.emfjson.map.EObjectMapper;
-import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
+import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
+import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
@@ -172,18 +166,23 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 		URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + key + "?rev=" + revision);
 		Resource tempResource = connectionProvider.getEmfResourceSet().createResource(uri);
 		InputStream stream = dbClient.find((String)key, revision);
-		EObjectMapper objectMapper = new EObjectMapper();
-		Object o = objectMapper.from(stream, tempResource, null);
+		
+		final JSONLoad loader = new JSONLoad(stream,
+				new HashMap<Object, Object>());
+		loader.fillResource(tempResource);
+		
+//		EObjectMapper objectMapper = new EObjectMapper();
+//		Object o = objectMapper.from(stream, tempResource, null);
 //		String content = CharStreams.toString(new InputStreamReader(stream, Charsets.UTF_8));
 //		Closeables.closeQuietly(stream);
 //		loadResourceFromString(key + revision, content, indexName)
 //		EObject objects = loadObjectFromHit(hit, indexName)sFromInputStream(connectionProvider.getEmfResourceSet(), content);
 		if (!tempResource.getContents().isEmpty())
 		{
-			Object oo =  tempResource.getContents().iterator().next();
+			Object o =  tempResource.getContents().iterator().next();
 			if (o instanceof BTSDBBaseObject)
 			{
-				return (E)oo;
+				return (E)o;
 			}
 		}
 		return null;
@@ -198,12 +197,12 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 //	}
 	
 	public void fillResource(Resource resource, String objectAsString) {
-		EObjectMapper objectMapper = new EObjectMapper();
-		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
-		Object o = objectMapper.from(stream, resource, null);
-//		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(jo.getBytes()),
-//				new HashMap<Object, Object>());
-//		loader.fillResource(resource);
+//		EObjectMapper objectMapper = new EObjectMapper();
+//		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
+//		Object o = objectMapper.from(stream, resource, null);
+		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes()),
+				new HashMap<Object, Object>());
+		loader.fillResource(resource);
 		
 	}
 

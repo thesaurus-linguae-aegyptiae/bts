@@ -259,10 +259,10 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			return BTSConstants.BASIC_OBJECT_TYPES[2];
 		} else if (corpusObject.eClass().getName().startsWith("BTSLemmaEntry")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[3];
-		} else if (corpusObject.eClass().getName().startsWith("BTSText")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[4];
 		} else if (corpusObject.eClass().getName().startsWith("BTSTextCorpus")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[5];
+		} else if (corpusObject.eClass().getName().startsWith("BTSText")) {
+			return BTSConstants.BASIC_OBJECT_TYPES[4];
 		} else if (corpusObject.eClass().getName().startsWith("BTSThsEntry")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[6];
 		} else if (corpusObject.eClass().getName().startsWith("BTSComment")) {

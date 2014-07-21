@@ -17,19 +17,24 @@
 package org.lightcouch;
 
 import static java.lang.String.format;
-import static org.lightcouch.CouchDbUtil.*;
+import static org.lightcouch.CouchDbUtil.assertNotEmpty;
+import static org.lightcouch.CouchDbUtil.assertNull;
+import static org.lightcouch.CouchDbUtil.close;
+import static org.lightcouch.CouchDbUtil.generateUUID;
+import static org.lightcouch.CouchDbUtil.getElement;
 import static org.lightcouch.URIBuilder.builder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,15 +82,12 @@ import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.DBLease;
-import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipselabs.emfjson.map.EObjectMapper;
+import org.eclipselabs.emfjson.EMFJs;
+import org.eclipselabs.emfjson.internal.JSONSave;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -204,7 +206,38 @@ abstract class CouchDbClientBase {
 	 * Performs a HTTP PUT request, saves or updates a document.
 	 * @return {@link Response}
 	 */
-	
+	public static String modelToString(Object object)
+	{
+//		throw new UnsupportedOperationException();
+		String string = null;
+		Map options = new HashMap<Object, Object>();
+		 options.put(EMFJs.OPTION_INDENT_OUTPUT, false);
+		JSONSave js = new JSONSave(options);
+		if (object instanceof EObject)
+		{
+			EObject eo = (EObject) object;
+			org.codehaus.jackson.JsonNode node = js.writeEObject(eo, eo.eResource());
+			string = node.toString();
+		}
+		else
+		{
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		
+		js.writeValue(os, object);
+		
+		try
+		{
+			string = os.toString(BTSConstants.ENCODING);
+		} catch (UnsupportedEncodingException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		return string;
+	}
+
 	//cplutte integrated eObject handling
 	Response put(URI uri, Object object, boolean newEntity) {
 		assertNotEmpty(object, "object");
@@ -215,10 +248,13 @@ abstract class CouchDbClientBase {
 			String rev = null;
 			if (object instanceof BTSIdentifiableItem)
 			{
-				EObjectMapper mapper = getEObjectMapper();
-				Resource resource = ((EObject) object).eResource();
-				ObjectNode node = mapper.to((EObject) object, resource);
-				jsonString = node.toString();
+//				EObjectMapper mapper = getEObjectMapper();
+//				Resource resource = ((EObject) object).eResource();
+//				final JSONSave loader = new JSONSave(new HashMap<Object, Object>());
+//				loader.
+//				loader.fillResource(resource);
+//				ObjectNode node = mapper.to((EObject) object, resource);
+				jsonString = modelToString(object);
 				id = ((BTSIdentifiableItem) object).get_id();
 				
 				rev = ((BTSDBBaseObject) object).get_rev();
@@ -516,13 +552,13 @@ abstract class CouchDbClientBase {
 		this.httpClient.getConnectionManager().shutdown();
 	}
 	
-	private EObjectMapper getEObjectMapper() {
-		EObjectMapper mapper = StaticAccessController.getContext().get(EObjectMapper.class);
-		if (mapper == null)
-		{
-			mapper = new EObjectMapper();
-			StaticAccessController.getContext().set(EObjectMapper.class, mapper);
-		}
-		return mapper;
-	}
+//	private EObjectMapper getEObjectMapper() {
+//		EObjectMapper mapper = StaticAccessController.getContext().get(EObjectMapper.class);
+//		if (mapper == null)
+//		{
+//			mapper = new EObjectMapper();
+//			StaticAccessController.getContext().set(EObjectMapper.class, mapper);
+//		}
+//		return mapper;
+//	}
 }

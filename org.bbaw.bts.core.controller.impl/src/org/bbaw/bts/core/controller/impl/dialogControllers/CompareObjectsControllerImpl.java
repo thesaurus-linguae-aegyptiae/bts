@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 public class CompareObjectsControllerImpl implements CompareObjectsController {
 
 	
+	private static final int MAX_REV_COUNTS = 25;
 	@Inject
 	private GeneralBTSObjectService objectService;
 
@@ -26,8 +27,8 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 		{
 			BTSDBBaseObject o = null;
 			try {
-				String className = getSuperTypeName(object);
-				o = objectService.find(object.get_id(), object.getDBCollectionKey(), className, rev);
+//				String className = getSuperTypeName(object);
+				o = objectService.find(object.get_id(), object.getDBCollectionKey(), object, rev);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -40,9 +41,19 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 		return conflictObjects;
 	}
 
-	private String getSuperTypeName(BTSDBBaseObject object) {
-		return object.getClass().getSuperclass().getName();
-	}
+//	//FIXME classname managing fixing
+//	private String getSuperTypeName(BTSDBBaseObject object) {
+//		String name = object.getClass().getName();
+//		if (name.contains(".")){
+//		String[] ss = name.split("\\.");
+//		name = ss[ss.length-1];
+//		if (name.contains("Impl"))
+//		{
+//			name = name.replace("Impl", "");
+//		}
+//		}
+//		return name;
+//	}
 
 	@Override
 	public boolean removeRevision(BTSDBBaseObject object, String revision) {
@@ -60,6 +71,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 			boolean fetchFromRemote) {
 		List<DBRevision> revisions = objectService.listAvailableRevisions(object, fetchFromRemote);
 		List<BTSDBBaseObject> availableRevisions = new Vector<BTSDBBaseObject>();
+		int counter = 0;
 		for (DBRevision rev : revisions)
 		{
 			BTSDBBaseObject o = null;
@@ -68,10 +80,11 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 				case DBRevision.LOCAL:
 				{
 					try {
-						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), getSuperTypeName(object));
+						o = objectService.find(object.get_id(), object.getDBCollectionKey(), object, rev.getRevision());
 						if (o != null)
 						{
 							availableRevisions.add(o);
+							counter++;
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -81,10 +94,11 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 				case DBRevision.REMOTE:
 				{
 					try {
-						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), getSuperTypeName(object), true);
+						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), object, true);
 						if (o != null)
 						{
 							availableRevisions.add(o);
+							counter++;
 						}
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -92,7 +106,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 					break;
 				}
 			}
-			
+			if (counter > MAX_REV_COUNTS) break;
 		}
 		return availableRevisions;
 	}

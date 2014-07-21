@@ -72,6 +72,15 @@ public class JSONLoad {
 		if (!root.isArray()) {
 			if (root.has(EJS_TYPE_KEYWORD)) {
 				this.rootClass = getEClass(URI.createURI(root.get(EJS_TYPE_KEYWORD).getValueAsText()));
+				
+				//FIXME rename eClass uri, added cplutte
+				if (this.rootClass == null)
+				{
+					String ur = root.get(EJS_TYPE_KEYWORD).asText();
+					ur = ur.replace("btsmodel", "btsCorpusModel");
+					this.rootClass = getEClass(URI.createURI(ur));
+
+				}
 			}
 		}
 
@@ -327,7 +336,15 @@ public class JSONLoad {
 				}
 				else {
 					final EObject o = this.resourceSet.getEObject(typeURI, false);
-					final EClass found = o != null && o instanceof EClass ? (EClass)o : null;
+					EClass found = o != null && o instanceof EClass ? (EClass)o : null;
+					//FIXME rename eClass uri, added cplutte
+					if (found == null)
+					{
+						String ur = node.get(EJS_TYPE_KEYWORD).asText();
+						ur = ur.replace("btsmodel", "btsCorpusModel");
+						found = getEClass(URI.createURI(ur));
+
+					}
 					if (found != null) {
 						return found;
 					} else {
