@@ -108,7 +108,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 	{
 		// FIXME implement Update
 		URI uri = URI.createURI(getRemoteDBURL() + "/" +  path + "/" +  entity.get_id());
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		resource.getContents().add(entity);
 
 		try

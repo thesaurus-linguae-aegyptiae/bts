@@ -24,4 +24,16 @@
           class="org.bbaw.bts.ui.corpus.search.SearchViewerFactoryCorpus">
     </searchViewerFactory>
  </extension>
+ <extension
+       point="org.bbaw.bts.ui.commons.searchViewerFactory">
+    <searchViewerFactory
+          class="org.bbaw.bts.ui.corpus.search.SearchViewerFactoryLemma">
+    </searchViewerFactory>
+ </extension>
+ <extension
+       point="org.bbaw.bts.ui.commons.searchViewerFactory">
+    <searchViewerFactory
+          class="org.bbaw.bts.ui.corpus.search.SearchViewerFactoryThs">
+    </searchViewerFactory>
+ </extension>
 </plugin>

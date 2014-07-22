@@ -530,7 +530,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
 		if (selection == null) {
 			/* implementation not shown */
-		} else {
+		} else if (treeViewer != null){
 			if ((selection instanceof BTSCorpusObject) && ((selection instanceof BTSThsEntry)
 					|| (selection instanceof BTSLemmaEntry))) {
 				treeViewer.setSelection(null);

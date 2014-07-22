@@ -61,6 +61,7 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -765,6 +766,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		String[] tokens = splitSignsKeepDelimeters(mdc);
 		int i = 0;
 		int innerSentenceOrder = -1;
+		CompoundCommand compoundCommand = new CompoundCommand();
 		for (i = 0; i < word.getGraphics().size(); i++)
 		{
 			BTSGraphic graphic = word.getGraphics().get(i);
@@ -773,7 +775,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				Command command = SetCommand.create(editingDomain, graphic,
 						BtsCorpusModelPackage.Literals.BTS_GRAPHIC__CODE,
 						tokens[i].toUpperCase());
-				editingDomain.getCommandStack().execute(command);
+				compoundCommand.append(command);
 				innerSentenceOrder = graphic.getInnerSentenceOrder();
 			} else
 			{
@@ -794,16 +796,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				graphic.setInnerSentenceOrder(innerSentenceOrder + createdIndex);
 				Command command = AddCommand.create(editingDomain, word,
 						BtsCorpusModelPackage.Literals.BTS_WORD__GRAPHICS, graphic);
-				editingDomain.getCommandStack().execute(command);
+				compoundCommand.append(command);
 				i++;
 			}
 		} else if (!toDelete.isEmpty())
 		{
 			Command command = RemoveCommand.create(editingDomain, word,
 					BtsCorpusModelPackage.Literals.BTS_WORD__GRAPHICS, toDelete);
-			editingDomain.getCommandStack().execute(command);
+			compoundCommand.append(command);
 		}
-
+		editingDomain.getCommandStack().execute(compoundCommand);
 	}
 
 	private int calculateSentenceOrder(BTSWord word) {

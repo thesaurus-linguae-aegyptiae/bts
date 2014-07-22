@@ -219,7 +219,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private Injector injector;
 
-	private BTSTextXtextEditedResourceProvider resourceProvider = new BTSTextXtextEditedResourceProvider();
+	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
 
 	private EmbeddedEditor embeddedEditor;
 
@@ -538,7 +538,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	{
 		String jseshMdc = textEditorController
 				.transformTextToJSeshMdCString(text2);
-		jseshEditor.setMDCText(jseshMdc);
+		System.out.println(jseshMdc);
+		try {
+			jseshEditor.setMDCText(jseshMdc);
+		} catch (Exception e) {
+			logger.error(e);
+		}
 
 	}
 
@@ -562,7 +567,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 //		this.annotationModel = model;
 		textEditorController.transformToDocument(text, doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
 
-		embeddedEditor = embeddedEditorFactory.newEditor(resourceProvider)
+		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
 				.showAnnotations(BTSAnnotationAnnotation.TYPE,
 						BTSCommentAnnotation.TYPE,
 						"org.eclipse.xtext.ui.editor.error",

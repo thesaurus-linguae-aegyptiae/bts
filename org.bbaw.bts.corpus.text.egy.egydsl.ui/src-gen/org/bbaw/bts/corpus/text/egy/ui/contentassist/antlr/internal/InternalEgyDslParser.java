@@ -22,7 +22,7 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EGYSTRING", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "' '", "'\\n'", "'\\t'", "'\\u00A7'", "'%'", "'; '", "'case '", "': '", "'@mv'", "'@v'", "'#'", "','", "'.'", "'\\u2261'", "':'", "'\\u22EE'", "'-'", "'~'", "'('", "')'", "'<'", "'>'", "'?'", "'['", "']'", "'{'", "'}'", "'<<'", "'>>'", "'{{'", "'}}'", "'(('", "'))'", "'[['", "']]'", "'\\u2E22'", "'\\u2E23'", "'--'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_EGYSTRING", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "' '", "'\\t'", "'\\n'", "'\\r'", "'\\u00A7'", "'%'", "'; '", "'case '", "': '", "'@mv'", "'@v'", "'#'", "','", "'.'", "'\\u2261'", "':'", "'\\u22EE'", "'-'", "'~'", "'('", "')'", "'<'", "'>'", "'?'", "'['", "']'", "'{'", "'}'", "'<<'", "'>>'", "'{{'", "'}}'", "'(('", "'))'", "'[['", "']]'", "'\\u2E22'", "'\\u2E23'", "'--'"
     };
     public static final int RULE_ID=5;
     public static final int T__29=29;
@@ -46,6 +46,7 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
     public static final int T__14=14;
     public static final int T__13=13;
     public static final int RULE_INT=6;
+    public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;
     public static final int T__40=40;
@@ -68,8 +69,8 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
     public static final int T__36=36;
     public static final int T__37=37;
     public static final int T__38=38;
-    public static final int T__39=39;
     public static final int RULE_EGYSTRING=4;
+    public static final int T__39=39;
     public static final int RULE_WS=10;
 
     // delegates
@@ -3569,28 +3570,42 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Alternatives_1_1_0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1320:1: rule__TextContent__Alternatives_1_1_0 : ( ( ' ' ) | ( '\\n' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1320:1: rule__TextContent__Alternatives_1_1_0 : ( ( ' ' ) | ( '\\t' ) | ( '\\n' ) | ( '\\r' ) );
     public final void rule__TextContent__Alternatives_1_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1324:1: ( ( ' ' ) | ( '\\n' ) )
-            int alt1=2;
-            int LA1_0 = input.LA(1);
-
-            if ( (LA1_0==12) ) {
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1324:1: ( ( ' ' ) | ( '\\t' ) | ( '\\n' ) | ( '\\r' ) )
+            int alt1=4;
+            switch ( input.LA(1) ) {
+            case 12:
+                {
                 alt1=1;
-            }
-            else if ( (LA1_0==13) ) {
+                }
+                break;
+            case 13:
+                {
                 alt1=2;
-            }
-            else {
+                }
+                break;
+            case 14:
+                {
+                alt1=3;
+                }
+                break;
+            case 15:
+                {
+                alt1=4;
+                }
+                break;
+            default:
                 NoViableAltException nvae =
                     new NoViableAltException("", 1, 0, input);
 
                 throw nvae;
             }
+
             switch (alt1) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1325:1: ( ' ' )
@@ -3608,14 +3623,44 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1333:6: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1333:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1333:6: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1334:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1333:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1334:1: '\\t'
                     {
-                     before(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_1()); 
+                     before(grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1()); 
                     match(input,13,FOLLOW_13_in_rule__TextContent__Alternatives_1_1_02790); 
-                     after(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_1()); 
+                     after(grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1341:6: ( '\\n' )
+                    {
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1341:6: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1342:1: '\\n'
+                    {
+                     before(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2()); 
+                    match(input,14,FOLLOW_14_in_rule__TextContent__Alternatives_1_1_02810); 
+                     after(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2()); 
+
+                    }
+
+
+                    }
+                    break;
+                case 4 :
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1349:6: ( '\\r' )
+                    {
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1349:6: ( '\\r' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1350:1: '\\r'
+                    {
+                     before(grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3()); 
+                    match(input,15,FOLLOW_15_in_rule__TextContent__Alternatives_1_1_02830); 
+                     after(grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3()); 
 
                     }
 
@@ -3640,13 +3685,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1346:1: rule__SentenceItem__Alternatives : ( ( ( rule__SentenceItem__Group_0__0 ) ) | ( ( rule__SentenceItem__Group_1__0 ) ) | ( ( rule__SentenceItem__Group_2__0 ) ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1362:1: rule__SentenceItem__Alternatives : ( ( ( rule__SentenceItem__Group_0__0 ) ) | ( ( rule__SentenceItem__Group_1__0 ) ) | ( ( rule__SentenceItem__Group_2__0 ) ) );
     public final void rule__SentenceItem__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1350:1: ( ( ( rule__SentenceItem__Group_0__0 ) ) | ( ( rule__SentenceItem__Group_1__0 ) ) | ( ( rule__SentenceItem__Group_2__0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1366:1: ( ( ( rule__SentenceItem__Group_0__0 ) ) | ( ( rule__SentenceItem__Group_1__0 ) ) | ( ( rule__SentenceItem__Group_2__0 ) ) )
             int alt2=3;
             switch ( input.LA(1) ) {
             case EOF:
@@ -3654,8 +3699,7 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             case 12:
             case 13:
             case 14:
-            case 15:
-            case 23:
+            case 16:
             case 24:
             case 25:
             case 26:
@@ -3663,28 +3707,29 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             case 28:
             case 29:
             case 30:
-            case 32:
-            case 34:
+            case 31:
+            case 33:
             case 35:
-            case 37:
-            case 39:
-            case 41:
-            case 43:
-            case 45:
-            case 47:
-            case 49:
+            case 36:
+            case 38:
+            case 40:
+            case 42:
+            case 44:
+            case 46:
+            case 48:
+            case 50:
                 {
                 alt2=1;
                 }
                 break;
-            case 20:
             case 21:
             case 22:
+            case 23:
                 {
                 alt2=2;
                 }
                 break;
-            case 16:
+            case 17:
                 {
                 alt2=3;
                 }
@@ -3698,16 +3743,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt2) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1351:1: ( ( rule__SentenceItem__Group_0__0 ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1367:1: ( ( rule__SentenceItem__Group_0__0 ) )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1351:1: ( ( rule__SentenceItem__Group_0__0 ) )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1352:1: ( rule__SentenceItem__Group_0__0 )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1367:1: ( ( rule__SentenceItem__Group_0__0 ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1368:1: ( rule__SentenceItem__Group_0__0 )
                     {
                      before(grammarAccess.getSentenceItemAccess().getGroup_0()); 
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1353:1: ( rule__SentenceItem__Group_0__0 )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1353:2: rule__SentenceItem__Group_0__0
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1369:1: ( rule__SentenceItem__Group_0__0 )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1369:2: rule__SentenceItem__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__SentenceItem__Group_0__0_in_rule__SentenceItem__Alternatives2824);
+                    pushFollow(FOLLOW_rule__SentenceItem__Group_0__0_in_rule__SentenceItem__Alternatives2864);
                     rule__SentenceItem__Group_0__0();
 
                     state._fsp--;
@@ -3723,16 +3768,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1357:6: ( ( rule__SentenceItem__Group_1__0 ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1373:6: ( ( rule__SentenceItem__Group_1__0 ) )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1357:6: ( ( rule__SentenceItem__Group_1__0 ) )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1358:1: ( rule__SentenceItem__Group_1__0 )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1373:6: ( ( rule__SentenceItem__Group_1__0 ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1374:1: ( rule__SentenceItem__Group_1__0 )
                     {
                      before(grammarAccess.getSentenceItemAccess().getGroup_1()); 
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1359:1: ( rule__SentenceItem__Group_1__0 )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1359:2: rule__SentenceItem__Group_1__0
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1375:1: ( rule__SentenceItem__Group_1__0 )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1375:2: rule__SentenceItem__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__SentenceItem__Group_1__0_in_rule__SentenceItem__Alternatives2842);
+                    pushFollow(FOLLOW_rule__SentenceItem__Group_1__0_in_rule__SentenceItem__Alternatives2882);
                     rule__SentenceItem__Group_1__0();
 
                     state._fsp--;
@@ -3748,16 +3793,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1363:6: ( ( rule__SentenceItem__Group_2__0 ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1379:6: ( ( rule__SentenceItem__Group_2__0 ) )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1363:6: ( ( rule__SentenceItem__Group_2__0 ) )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1364:1: ( rule__SentenceItem__Group_2__0 )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1379:6: ( ( rule__SentenceItem__Group_2__0 ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1380:1: ( rule__SentenceItem__Group_2__0 )
                     {
                      before(grammarAccess.getSentenceItemAccess().getGroup_2()); 
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1365:1: ( rule__SentenceItem__Group_2__0 )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1365:2: rule__SentenceItem__Group_2__0
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1381:1: ( rule__SentenceItem__Group_2__0 )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1381:2: rule__SentenceItem__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__SentenceItem__Group_2__0_in_rule__SentenceItem__Alternatives2860);
+                    pushFollow(FOLLOW_rule__SentenceItem__Group_2__0_in_rule__SentenceItem__Alternatives2900);
                     rule__SentenceItem__Group_2__0();
 
                     state._fsp--;
@@ -3790,20 +3835,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Alternatives_0_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1374:1: rule__SentenceItem__Alternatives_0_1 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1390:1: rule__SentenceItem__Alternatives_0_1 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__SentenceItem__Alternatives_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1378:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1394:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
-            if ( (LA3_0==13) ) {
+            if ( (LA3_0==14) ) {
                 alt3=1;
             }
-            else if ( (LA3_0==14) ) {
+            else if ( (LA3_0==13) ) {
                 alt3=2;
             }
             else {
@@ -3814,13 +3859,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1379:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1395:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1379:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1380:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1395:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1396:1: '\\n'
                     {
                      before(grammarAccess.getSentenceItemAccess().getControl000aKeyword_0_1_0()); 
-                    match(input,13,FOLLOW_13_in_rule__SentenceItem__Alternatives_0_12894); 
+                    match(input,14,FOLLOW_14_in_rule__SentenceItem__Alternatives_0_12934); 
                      after(grammarAccess.getSentenceItemAccess().getControl000aKeyword_0_1_0()); 
 
                     }
@@ -3829,13 +3874,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1387:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1403:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1387:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1388:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1403:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1404:1: '\\t'
                     {
                      before(grammarAccess.getSentenceItemAccess().getControl0009Keyword_0_1_1()); 
-                    match(input,14,FOLLOW_14_in_rule__SentenceItem__Alternatives_0_12914); 
+                    match(input,13,FOLLOW_13_in_rule__SentenceItem__Alternatives_0_12954); 
                      after(grammarAccess.getSentenceItemAccess().getControl0009Keyword_0_1_1()); 
 
                     }
@@ -3861,20 +3906,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Alternatives_1_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1400:1: rule__SentenceItem__Alternatives_1_1 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1416:1: rule__SentenceItem__Alternatives_1_1 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__SentenceItem__Alternatives_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1404:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1420:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( (LA4_0==13) ) {
+            if ( (LA4_0==14) ) {
                 alt4=1;
             }
-            else if ( (LA4_0==14) ) {
+            else if ( (LA4_0==13) ) {
                 alt4=2;
             }
             else {
@@ -3885,13 +3930,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1405:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1421:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1405:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1406:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1421:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1422:1: '\\n'
                     {
                      before(grammarAccess.getSentenceItemAccess().getControl000aKeyword_1_1_0()); 
-                    match(input,13,FOLLOW_13_in_rule__SentenceItem__Alternatives_1_12949); 
+                    match(input,14,FOLLOW_14_in_rule__SentenceItem__Alternatives_1_12989); 
                      after(grammarAccess.getSentenceItemAccess().getControl000aKeyword_1_1_0()); 
 
                     }
@@ -3900,13 +3945,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1413:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1429:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1413:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1414:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1429:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1430:1: '\\t'
                     {
                      before(grammarAccess.getSentenceItemAccess().getControl0009Keyword_1_1_1()); 
-                    match(input,14,FOLLOW_14_in_rule__SentenceItem__Alternatives_1_12969); 
+                    match(input,13,FOLLOW_13_in_rule__SentenceItem__Alternatives_1_13009); 
                      after(grammarAccess.getSentenceItemAccess().getControl0009Keyword_1_1_1()); 
 
                     }
@@ -3932,20 +3977,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Alternatives_2_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1426:1: rule__SentenceItem__Alternatives_2_1 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1442:1: rule__SentenceItem__Alternatives_2_1 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__SentenceItem__Alternatives_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1430:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1446:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( (LA5_0==13) ) {
+            if ( (LA5_0==14) ) {
                 alt5=1;
             }
-            else if ( (LA5_0==14) ) {
+            else if ( (LA5_0==13) ) {
                 alt5=2;
             }
             else {
@@ -3956,13 +4001,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1431:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1447:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1431:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1432:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1447:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1448:1: '\\n'
                     {
                      before(grammarAccess.getSentenceItemAccess().getControl000aKeyword_2_1_0()); 
-                    match(input,13,FOLLOW_13_in_rule__SentenceItem__Alternatives_2_13004); 
+                    match(input,14,FOLLOW_14_in_rule__SentenceItem__Alternatives_2_13044); 
                      after(grammarAccess.getSentenceItemAccess().getControl000aKeyword_2_1_0()); 
 
                     }
@@ -3971,13 +4016,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1439:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1455:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1439:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1440:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1455:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1456:1: '\\t'
                     {
                      before(grammarAccess.getSentenceItemAccess().getControl0009Keyword_2_1_1()); 
-                    match(input,14,FOLLOW_14_in_rule__SentenceItem__Alternatives_2_13024); 
+                    match(input,13,FOLLOW_13_in_rule__SentenceItem__Alternatives_2_13064); 
                      after(grammarAccess.getSentenceItemAccess().getControl0009Keyword_2_1_1()); 
 
                     }
@@ -4003,20 +4048,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AbstractMarker__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1452:1: rule__AbstractMarker__Alternatives : ( ( ruleMarker ) | ( ruleVersMarker ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1468:1: rule__AbstractMarker__Alternatives : ( ( ruleMarker ) | ( ruleVersMarker ) );
     public final void rule__AbstractMarker__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1456:1: ( ( ruleMarker ) | ( ruleVersMarker ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1472:1: ( ( ruleMarker ) | ( ruleVersMarker ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
-            if ( (LA6_0==22) ) {
+            if ( (LA6_0==23) ) {
                 alt6=1;
             }
-            else if ( ((LA6_0>=20 && LA6_0<=21)) ) {
+            else if ( ((LA6_0>=21 && LA6_0<=22)) ) {
                 alt6=2;
             }
             else {
@@ -4027,13 +4072,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1457:1: ( ruleMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1473:1: ( ruleMarker )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1457:1: ( ruleMarker )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1458:1: ruleMarker
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1473:1: ( ruleMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1474:1: ruleMarker
                     {
                      before(grammarAccess.getAbstractMarkerAccess().getMarkerParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleMarker_in_rule__AbstractMarker__Alternatives3058);
+                    pushFollow(FOLLOW_ruleMarker_in_rule__AbstractMarker__Alternatives3098);
                     ruleMarker();
 
                     state._fsp--;
@@ -4046,13 +4091,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1463:6: ( ruleVersMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1479:6: ( ruleVersMarker )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1463:6: ( ruleVersMarker )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1464:1: ruleVersMarker
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1479:6: ( ruleVersMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1480:1: ruleVersMarker
                     {
                      before(grammarAccess.getAbstractMarkerAccess().getVersMarkerParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleVersMarker_in_rule__AbstractMarker__Alternatives3075);
+                    pushFollow(FOLLOW_ruleVersMarker_in_rule__AbstractMarker__Alternatives3115);
                     ruleVersMarker();
 
                     state._fsp--;
@@ -4082,20 +4127,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Alternatives_1_1_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1474:1: rule__Ambivalence__Alternatives_1_1_1 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1490:1: rule__Ambivalence__Alternatives_1_1_1 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__Ambivalence__Alternatives_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1478:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1494:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
-            if ( (LA7_0==13) ) {
+            if ( (LA7_0==14) ) {
                 alt7=1;
             }
-            else if ( (LA7_0==14) ) {
+            else if ( (LA7_0==13) ) {
                 alt7=2;
             }
             else {
@@ -4106,13 +4151,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1479:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1495:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1479:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1480:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1495:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1496:1: '\\n'
                     {
                      before(grammarAccess.getAmbivalenceAccess().getControl000aKeyword_1_1_1_0()); 
-                    match(input,13,FOLLOW_13_in_rule__Ambivalence__Alternatives_1_1_13108); 
+                    match(input,14,FOLLOW_14_in_rule__Ambivalence__Alternatives_1_1_13148); 
                      after(grammarAccess.getAmbivalenceAccess().getControl000aKeyword_1_1_1_0()); 
 
                     }
@@ -4121,13 +4166,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1487:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1503:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1487:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1488:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1503:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1504:1: '\\t'
                     {
                      before(grammarAccess.getAmbivalenceAccess().getControl0009Keyword_1_1_1_1()); 
-                    match(input,14,FOLLOW_14_in_rule__Ambivalence__Alternatives_1_1_13128); 
+                    match(input,13,FOLLOW_13_in_rule__Ambivalence__Alternatives_1_1_13168); 
                      after(grammarAccess.getAmbivalenceAccess().getControl0009Keyword_1_1_1_1()); 
 
                     }
@@ -4153,20 +4198,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Alternatives_3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1500:1: rule__Case__Alternatives_3 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1516:1: rule__Case__Alternatives_3 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__Case__Alternatives_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1504:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1520:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
-            if ( (LA8_0==13) ) {
+            if ( (LA8_0==14) ) {
                 alt8=1;
             }
-            else if ( (LA8_0==14) ) {
+            else if ( (LA8_0==13) ) {
                 alt8=2;
             }
             else {
@@ -4177,13 +4222,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1505:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1521:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1505:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1506:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1521:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1522:1: '\\n'
                     {
                      before(grammarAccess.getCaseAccess().getControl000aKeyword_3_0()); 
-                    match(input,13,FOLLOW_13_in_rule__Case__Alternatives_33163); 
+                    match(input,14,FOLLOW_14_in_rule__Case__Alternatives_33203); 
                      after(grammarAccess.getCaseAccess().getControl000aKeyword_3_0()); 
 
                     }
@@ -4192,13 +4237,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1513:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1529:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1513:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1514:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1529:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1530:1: '\\t'
                     {
                      before(grammarAccess.getCaseAccess().getControl0009Keyword_3_1()); 
-                    match(input,14,FOLLOW_14_in_rule__Case__Alternatives_33183); 
+                    match(input,13,FOLLOW_13_in_rule__Case__Alternatives_33223); 
                      after(grammarAccess.getCaseAccess().getControl0009Keyword_3_1()); 
 
                     }
@@ -4224,20 +4269,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Alternatives_4_1_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1526:1: rule__Case__Alternatives_4_1_1 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1542:1: rule__Case__Alternatives_4_1_1 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__Case__Alternatives_4_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1530:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1546:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
-            if ( (LA9_0==13) ) {
+            if ( (LA9_0==14) ) {
                 alt9=1;
             }
-            else if ( (LA9_0==14) ) {
+            else if ( (LA9_0==13) ) {
                 alt9=2;
             }
             else {
@@ -4248,13 +4293,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1531:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1547:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1531:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1532:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1547:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1548:1: '\\n'
                     {
                      before(grammarAccess.getCaseAccess().getControl000aKeyword_4_1_1_0()); 
-                    match(input,13,FOLLOW_13_in_rule__Case__Alternatives_4_1_13218); 
+                    match(input,14,FOLLOW_14_in_rule__Case__Alternatives_4_1_13258); 
                      after(grammarAccess.getCaseAccess().getControl000aKeyword_4_1_1_0()); 
 
                     }
@@ -4263,13 +4308,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1539:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1555:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1539:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1540:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1555:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1556:1: '\\t'
                     {
                      before(grammarAccess.getCaseAccess().getControl0009Keyword_4_1_1_1()); 
-                    match(input,14,FOLLOW_14_in_rule__Case__Alternatives_4_1_13238); 
+                    match(input,13,FOLLOW_13_in_rule__Case__Alternatives_4_1_13278); 
                      after(grammarAccess.getCaseAccess().getControl0009Keyword_4_1_1_1()); 
 
                     }
@@ -4295,20 +4340,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItemNoAmbivalence__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1552:1: rule__SentenceItemNoAmbivalence__Alternatives : ( ( ruleWord ) | ( ruleAbstractMarker ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1568:1: rule__SentenceItemNoAmbivalence__Alternatives : ( ( ruleWord ) | ( ruleAbstractMarker ) );
     public final void rule__SentenceItemNoAmbivalence__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1556:1: ( ( ruleWord ) | ( ruleAbstractMarker ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1572:1: ( ( ruleWord ) | ( ruleAbstractMarker ) )
             int alt10=2;
             int LA10_0 = input.LA(1);
 
-            if ( (LA10_0==EOF||LA10_0==RULE_EGYSTRING||(LA10_0>=12 && LA10_0<=17)||(LA10_0>=23 && LA10_0<=30)||LA10_0==32||(LA10_0>=34 && LA10_0<=35)||LA10_0==37||LA10_0==39||LA10_0==41||LA10_0==43||LA10_0==45||LA10_0==47||LA10_0==49) ) {
+            if ( (LA10_0==EOF||LA10_0==RULE_EGYSTRING||(LA10_0>=12 && LA10_0<=14)||(LA10_0>=16 && LA10_0<=18)||(LA10_0>=24 && LA10_0<=31)||LA10_0==33||(LA10_0>=35 && LA10_0<=36)||LA10_0==38||LA10_0==40||LA10_0==42||LA10_0==44||LA10_0==46||LA10_0==48||LA10_0==50) ) {
                 alt10=1;
             }
-            else if ( ((LA10_0>=20 && LA10_0<=22)) ) {
+            else if ( ((LA10_0>=21 && LA10_0<=23)) ) {
                 alt10=2;
             }
             else {
@@ -4319,13 +4364,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1557:1: ( ruleWord )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1573:1: ( ruleWord )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1557:1: ( ruleWord )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1558:1: ruleWord
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1573:1: ( ruleWord )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1574:1: ruleWord
                     {
                      before(grammarAccess.getSentenceItemNoAmbivalenceAccess().getWordParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleWord_in_rule__SentenceItemNoAmbivalence__Alternatives3272);
+                    pushFollow(FOLLOW_ruleWord_in_rule__SentenceItemNoAmbivalence__Alternatives3312);
                     ruleWord();
 
                     state._fsp--;
@@ -4338,13 +4383,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1563:6: ( ruleAbstractMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1579:6: ( ruleAbstractMarker )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1563:6: ( ruleAbstractMarker )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1564:1: ruleAbstractMarker
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1579:6: ( ruleAbstractMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1580:1: ruleAbstractMarker
                     {
                      before(grammarAccess.getSentenceItemNoAmbivalenceAccess().getAbstractMarkerParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleAbstractMarker_in_rule__SentenceItemNoAmbivalence__Alternatives3289);
+                    pushFollow(FOLLOW_ruleAbstractMarker_in_rule__SentenceItemNoAmbivalence__Alternatives3329);
                     ruleAbstractMarker();
 
                     state._fsp--;
@@ -4374,20 +4419,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersMarker__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1574:1: rule__VersMarker__Alternatives : ( ( ruleVersbreakMarker ) | ( ruleVersFrontierMarker ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1590:1: rule__VersMarker__Alternatives : ( ( ruleVersbreakMarker ) | ( ruleVersFrontierMarker ) );
     public final void rule__VersMarker__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1578:1: ( ( ruleVersbreakMarker ) | ( ruleVersFrontierMarker ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1594:1: ( ( ruleVersbreakMarker ) | ( ruleVersFrontierMarker ) )
             int alt11=2;
             int LA11_0 = input.LA(1);
 
-            if ( (LA11_0==21) ) {
+            if ( (LA11_0==22) ) {
                 alt11=1;
             }
-            else if ( (LA11_0==20) ) {
+            else if ( (LA11_0==21) ) {
                 alt11=2;
             }
             else {
@@ -4398,13 +4443,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1579:1: ( ruleVersbreakMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1595:1: ( ruleVersbreakMarker )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1579:1: ( ruleVersbreakMarker )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1580:1: ruleVersbreakMarker
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1595:1: ( ruleVersbreakMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1596:1: ruleVersbreakMarker
                     {
                      before(grammarAccess.getVersMarkerAccess().getVersbreakMarkerParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleVersbreakMarker_in_rule__VersMarker__Alternatives3321);
+                    pushFollow(FOLLOW_ruleVersbreakMarker_in_rule__VersMarker__Alternatives3361);
                     ruleVersbreakMarker();
 
                     state._fsp--;
@@ -4417,13 +4462,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1585:6: ( ruleVersFrontierMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1601:6: ( ruleVersFrontierMarker )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1585:6: ( ruleVersFrontierMarker )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1586:1: ruleVersFrontierMarker
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1601:6: ( ruleVersFrontierMarker )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1602:1: ruleVersFrontierMarker
                     {
                      before(grammarAccess.getVersMarkerAccess().getVersFrontierMarkerParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleVersFrontierMarker_in_rule__VersMarker__Alternatives3338);
+                    pushFollow(FOLLOW_ruleVersFrontierMarker_in_rule__VersMarker__Alternatives3378);
                     ruleVersFrontierMarker();
 
                     state._fsp--;
@@ -4453,20 +4498,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Alternatives_1_1_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1596:1: rule__Marker__Alternatives_1_1_1 : ( ( '\\n' ) | ( '\\t' ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1612:1: rule__Marker__Alternatives_1_1_1 : ( ( '\\n' ) | ( '\\t' ) );
     public final void rule__Marker__Alternatives_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1600:1: ( ( '\\n' ) | ( '\\t' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1616:1: ( ( '\\n' ) | ( '\\t' ) )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
-            if ( (LA12_0==13) ) {
+            if ( (LA12_0==14) ) {
                 alt12=1;
             }
-            else if ( (LA12_0==14) ) {
+            else if ( (LA12_0==13) ) {
                 alt12=2;
             }
             else {
@@ -4477,13 +4522,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1601:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1617:1: ( '\\n' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1601:1: ( '\\n' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1602:1: '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1617:1: ( '\\n' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1618:1: '\\n'
                     {
                      before(grammarAccess.getMarkerAccess().getControl000aKeyword_1_1_1_0()); 
-                    match(input,13,FOLLOW_13_in_rule__Marker__Alternatives_1_1_13371); 
+                    match(input,14,FOLLOW_14_in_rule__Marker__Alternatives_1_1_13411); 
                      after(grammarAccess.getMarkerAccess().getControl000aKeyword_1_1_1_0()); 
 
                     }
@@ -4492,13 +4537,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1609:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1625:6: ( '\\t' )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1609:6: ( '\\t' )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1610:1: '\\t'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1625:6: ( '\\t' )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1626:1: '\\t'
                     {
                      before(grammarAccess.getMarkerAccess().getControl0009Keyword_1_1_1_1()); 
-                    match(input,14,FOLLOW_14_in_rule__Marker__Alternatives_1_1_13391); 
+                    match(input,13,FOLLOW_13_in_rule__Marker__Alternatives_1_1_13431); 
                      after(grammarAccess.getMarkerAccess().getControl0009Keyword_1_1_1_1()); 
 
                     }
@@ -4524,37 +4569,37 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__WordMiddle__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1622:1: rule__WordMiddle__Alternatives : ( ( ruleInterfix ) | ( ruleBrackets ) | ( ruleChars ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1638:1: rule__WordMiddle__Alternatives : ( ( ruleInterfix ) | ( ruleBrackets ) | ( ruleChars ) );
     public final void rule__WordMiddle__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1626:1: ( ( ruleInterfix ) | ( ruleBrackets ) | ( ruleChars ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1642:1: ( ( ruleInterfix ) | ( ruleBrackets ) | ( ruleChars ) )
             int alt13=3;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt13=1;
                 }
                 break;
-            case 30:
-            case 32:
-            case 34:
+            case 31:
+            case 33:
             case 35:
-            case 37:
-            case 39:
-            case 41:
-            case 43:
-            case 45:
-            case 47:
-            case 49:
+            case 36:
+            case 38:
+            case 40:
+            case 42:
+            case 44:
+            case 46:
+            case 48:
+            case 50:
                 {
                 alt13=2;
                 }
@@ -4573,13 +4618,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt13) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1627:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1643:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1627:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1628:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1643:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1644:1: ruleInterfix
                     {
                      before(grammarAccess.getWordMiddleAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__WordMiddle__Alternatives3425);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__WordMiddle__Alternatives3465);
                     ruleInterfix();
 
                     state._fsp--;
@@ -4592,13 +4637,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1633:6: ( ruleBrackets )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1649:6: ( ruleBrackets )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1633:6: ( ruleBrackets )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1634:1: ruleBrackets
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1649:6: ( ruleBrackets )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1650:1: ruleBrackets
                     {
                      before(grammarAccess.getWordMiddleAccess().getBracketsParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleBrackets_in_rule__WordMiddle__Alternatives3442);
+                    pushFollow(FOLLOW_ruleBrackets_in_rule__WordMiddle__Alternatives3482);
                     ruleBrackets();
 
                     state._fsp--;
@@ -4611,13 +4656,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1639:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1655:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1639:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1640:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1655:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1656:1: ruleChars
                     {
                      before(grammarAccess.getWordMiddleAccess().getCharsParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__WordMiddle__Alternatives3459);
+                    pushFollow(FOLLOW_ruleChars_in_rule__WordMiddle__Alternatives3499);
                     ruleChars();
 
                     state._fsp--;
@@ -4647,46 +4692,46 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Interfix__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1650:1: rule__Interfix__Alternatives : ( ( ruleInterfixFlexion ) | ( ruleInterfixLexical ) | ( ruleInterfixSuffixPronomLexical ) | ( ruleInterfixPrefixNonLexical ) | ( ruleInterfixPrefixLexical ) | ( ruleInterfixCompountWords ) | ( ruleInterfixConnectionSyllabicGroup ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1666:1: rule__Interfix__Alternatives : ( ( ruleInterfixFlexion ) | ( ruleInterfixLexical ) | ( ruleInterfixSuffixPronomLexical ) | ( ruleInterfixPrefixNonLexical ) | ( ruleInterfixPrefixLexical ) | ( ruleInterfixCompountWords ) | ( ruleInterfixConnectionSyllabicGroup ) );
     public final void rule__Interfix__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1654:1: ( ( ruleInterfixFlexion ) | ( ruleInterfixLexical ) | ( ruleInterfixSuffixPronomLexical ) | ( ruleInterfixPrefixNonLexical ) | ( ruleInterfixPrefixLexical ) | ( ruleInterfixCompountWords ) | ( ruleInterfixConnectionSyllabicGroup ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1670:1: ( ( ruleInterfixFlexion ) | ( ruleInterfixLexical ) | ( ruleInterfixSuffixPronomLexical ) | ( ruleInterfixPrefixNonLexical ) | ( ruleInterfixPrefixLexical ) | ( ruleInterfixCompountWords ) | ( ruleInterfixConnectionSyllabicGroup ) )
             int alt14=7;
             switch ( input.LA(1) ) {
-            case 24:
+            case 25:
                 {
                 alt14=1;
                 }
                 break;
-            case 23:
+            case 24:
                 {
                 alt14=2;
                 }
                 break;
-            case 25:
+            case 26:
                 {
                 alt14=3;
                 }
                 break;
-            case 26:
+            case 27:
                 {
                 alt14=4;
                 }
                 break;
-            case 27:
+            case 28:
                 {
                 alt14=5;
                 }
                 break;
-            case 28:
+            case 29:
                 {
                 alt14=6;
                 }
                 break;
-            case 29:
+            case 30:
                 {
                 alt14=7;
                 }
@@ -4700,13 +4745,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt14) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1655:1: ( ruleInterfixFlexion )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1671:1: ( ruleInterfixFlexion )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1655:1: ( ruleInterfixFlexion )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1656:1: ruleInterfixFlexion
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1671:1: ( ruleInterfixFlexion )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1672:1: ruleInterfixFlexion
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixFlexionParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfixFlexion_in_rule__Interfix__Alternatives3491);
+                    pushFollow(FOLLOW_ruleInterfixFlexion_in_rule__Interfix__Alternatives3531);
                     ruleInterfixFlexion();
 
                     state._fsp--;
@@ -4719,13 +4764,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1661:6: ( ruleInterfixLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1677:6: ( ruleInterfixLexical )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1661:6: ( ruleInterfixLexical )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1662:1: ruleInterfixLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1677:6: ( ruleInterfixLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1678:1: ruleInterfixLexical
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixLexicalParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleInterfixLexical_in_rule__Interfix__Alternatives3508);
+                    pushFollow(FOLLOW_ruleInterfixLexical_in_rule__Interfix__Alternatives3548);
                     ruleInterfixLexical();
 
                     state._fsp--;
@@ -4738,13 +4783,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1667:6: ( ruleInterfixSuffixPronomLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1683:6: ( ruleInterfixSuffixPronomLexical )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1667:6: ( ruleInterfixSuffixPronomLexical )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1668:1: ruleInterfixSuffixPronomLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1683:6: ( ruleInterfixSuffixPronomLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1684:1: ruleInterfixSuffixPronomLexical
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixSuffixPronomLexicalParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleInterfixSuffixPronomLexical_in_rule__Interfix__Alternatives3525);
+                    pushFollow(FOLLOW_ruleInterfixSuffixPronomLexical_in_rule__Interfix__Alternatives3565);
                     ruleInterfixSuffixPronomLexical();
 
                     state._fsp--;
@@ -4757,13 +4802,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1673:6: ( ruleInterfixPrefixNonLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1689:6: ( ruleInterfixPrefixNonLexical )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1673:6: ( ruleInterfixPrefixNonLexical )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1674:1: ruleInterfixPrefixNonLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1689:6: ( ruleInterfixPrefixNonLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1690:1: ruleInterfixPrefixNonLexical
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixPrefixNonLexicalParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleInterfixPrefixNonLexical_in_rule__Interfix__Alternatives3542);
+                    pushFollow(FOLLOW_ruleInterfixPrefixNonLexical_in_rule__Interfix__Alternatives3582);
                     ruleInterfixPrefixNonLexical();
 
                     state._fsp--;
@@ -4776,13 +4821,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 5 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1679:6: ( ruleInterfixPrefixLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1695:6: ( ruleInterfixPrefixLexical )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1679:6: ( ruleInterfixPrefixLexical )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1680:1: ruleInterfixPrefixLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1695:6: ( ruleInterfixPrefixLexical )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1696:1: ruleInterfixPrefixLexical
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixPrefixLexicalParserRuleCall_4()); 
-                    pushFollow(FOLLOW_ruleInterfixPrefixLexical_in_rule__Interfix__Alternatives3559);
+                    pushFollow(FOLLOW_ruleInterfixPrefixLexical_in_rule__Interfix__Alternatives3599);
                     ruleInterfixPrefixLexical();
 
                     state._fsp--;
@@ -4795,13 +4840,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 6 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1685:6: ( ruleInterfixCompountWords )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1701:6: ( ruleInterfixCompountWords )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1685:6: ( ruleInterfixCompountWords )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1686:1: ruleInterfixCompountWords
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1701:6: ( ruleInterfixCompountWords )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1702:1: ruleInterfixCompountWords
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixCompountWordsParserRuleCall_5()); 
-                    pushFollow(FOLLOW_ruleInterfixCompountWords_in_rule__Interfix__Alternatives3576);
+                    pushFollow(FOLLOW_ruleInterfixCompountWords_in_rule__Interfix__Alternatives3616);
                     ruleInterfixCompountWords();
 
                     state._fsp--;
@@ -4814,13 +4859,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 7 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1691:6: ( ruleInterfixConnectionSyllabicGroup )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1707:6: ( ruleInterfixConnectionSyllabicGroup )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1691:6: ( ruleInterfixConnectionSyllabicGroup )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1692:1: ruleInterfixConnectionSyllabicGroup
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1707:6: ( ruleInterfixConnectionSyllabicGroup )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1708:1: ruleInterfixConnectionSyllabicGroup
                     {
                      before(grammarAccess.getInterfixAccess().getInterfixConnectionSyllabicGroupParserRuleCall_6()); 
-                    pushFollow(FOLLOW_ruleInterfixConnectionSyllabicGroup_in_rule__Interfix__Alternatives3593);
+                    pushFollow(FOLLOW_ruleInterfixConnectionSyllabicGroup_in_rule__Interfix__Alternatives3633);
                     ruleInterfixConnectionSyllabicGroup();
 
                     state._fsp--;
@@ -4850,66 +4895,66 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Brackets__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1702:1: rule__Brackets__Alternatives : ( ( ruleRasur ) | ( ruleAncientExpanded ) | ( ruleRestorationOverRasur ) | ( ruleExpanded ) | ( ruleDisputableReading ) | ( ruleEmendation ) | ( ruleLacuna ) | ( ruleDeletion ) | ( ruleExpandedColumn ) | ( rulePartialDestruction ) | ( ruleDestruction ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1718:1: rule__Brackets__Alternatives : ( ( ruleRasur ) | ( ruleAncientExpanded ) | ( ruleRestorationOverRasur ) | ( ruleExpanded ) | ( ruleDisputableReading ) | ( ruleEmendation ) | ( ruleLacuna ) | ( ruleDeletion ) | ( ruleExpandedColumn ) | ( rulePartialDestruction ) | ( ruleDestruction ) );
     public final void rule__Brackets__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1706:1: ( ( ruleRasur ) | ( ruleAncientExpanded ) | ( ruleRestorationOverRasur ) | ( ruleExpanded ) | ( ruleDisputableReading ) | ( ruleEmendation ) | ( ruleLacuna ) | ( ruleDeletion ) | ( ruleExpandedColumn ) | ( rulePartialDestruction ) | ( ruleDestruction ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1722:1: ( ( ruleRasur ) | ( ruleAncientExpanded ) | ( ruleRestorationOverRasur ) | ( ruleExpanded ) | ( ruleDisputableReading ) | ( ruleEmendation ) | ( ruleLacuna ) | ( ruleDeletion ) | ( ruleExpandedColumn ) | ( rulePartialDestruction ) | ( ruleDestruction ) )
             int alt15=11;
             switch ( input.LA(1) ) {
-            case 41:
+            case 42:
                 {
                 alt15=1;
                 }
                 break;
-            case 43:
+            case 44:
                 {
                 alt15=2;
                 }
                 break;
-            case 45:
+            case 46:
                 {
                 alt15=3;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt15=4;
                 }
                 break;
-            case 34:
+            case 35:
                 {
                 alt15=5;
                 }
                 break;
-            case 32:
+            case 33:
                 {
                 alt15=6;
                 }
                 break;
-            case 35:
+            case 36:
                 {
                 alt15=7;
                 }
                 break;
-            case 37:
+            case 38:
                 {
                 alt15=8;
                 }
                 break;
-            case 39:
+            case 40:
                 {
                 alt15=9;
                 }
                 break;
-            case 47:
+            case 48:
                 {
                 alt15=10;
                 }
                 break;
-            case 49:
+            case 50:
                 {
                 alt15=11;
                 }
@@ -4923,13 +4968,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt15) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1707:1: ( ruleRasur )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1723:1: ( ruleRasur )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1707:1: ( ruleRasur )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1708:1: ruleRasur
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1723:1: ( ruleRasur )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1724:1: ruleRasur
                     {
                      before(grammarAccess.getBracketsAccess().getRasurParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleRasur_in_rule__Brackets__Alternatives3625);
+                    pushFollow(FOLLOW_ruleRasur_in_rule__Brackets__Alternatives3665);
                     ruleRasur();
 
                     state._fsp--;
@@ -4942,13 +4987,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1713:6: ( ruleAncientExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1729:6: ( ruleAncientExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1713:6: ( ruleAncientExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1714:1: ruleAncientExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1729:6: ( ruleAncientExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1730:1: ruleAncientExpanded
                     {
                      before(grammarAccess.getBracketsAccess().getAncientExpandedParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleAncientExpanded_in_rule__Brackets__Alternatives3642);
+                    pushFollow(FOLLOW_ruleAncientExpanded_in_rule__Brackets__Alternatives3682);
                     ruleAncientExpanded();
 
                     state._fsp--;
@@ -4961,13 +5006,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1719:6: ( ruleRestorationOverRasur )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1735:6: ( ruleRestorationOverRasur )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1719:6: ( ruleRestorationOverRasur )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1720:1: ruleRestorationOverRasur
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1735:6: ( ruleRestorationOverRasur )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1736:1: ruleRestorationOverRasur
                     {
                      before(grammarAccess.getBracketsAccess().getRestorationOverRasurParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_rule__Brackets__Alternatives3659);
+                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_rule__Brackets__Alternatives3699);
                     ruleRestorationOverRasur();
 
                     state._fsp--;
@@ -4980,13 +5025,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1725:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1741:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1725:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1726:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1741:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1742:1: ruleExpanded
                     {
                      before(grammarAccess.getBracketsAccess().getExpandedParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__Brackets__Alternatives3676);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__Brackets__Alternatives3716);
                     ruleExpanded();
 
                     state._fsp--;
@@ -4999,13 +5044,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 5 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1731:6: ( ruleDisputableReading )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1747:6: ( ruleDisputableReading )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1731:6: ( ruleDisputableReading )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1732:1: ruleDisputableReading
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1747:6: ( ruleDisputableReading )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1748:1: ruleDisputableReading
                     {
                      before(grammarAccess.getBracketsAccess().getDisputableReadingParserRuleCall_4()); 
-                    pushFollow(FOLLOW_ruleDisputableReading_in_rule__Brackets__Alternatives3693);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_rule__Brackets__Alternatives3733);
                     ruleDisputableReading();
 
                     state._fsp--;
@@ -5018,13 +5063,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 6 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1737:6: ( ruleEmendation )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1753:6: ( ruleEmendation )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1737:6: ( ruleEmendation )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1738:1: ruleEmendation
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1753:6: ( ruleEmendation )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1754:1: ruleEmendation
                     {
                      before(grammarAccess.getBracketsAccess().getEmendationParserRuleCall_5()); 
-                    pushFollow(FOLLOW_ruleEmendation_in_rule__Brackets__Alternatives3710);
+                    pushFollow(FOLLOW_ruleEmendation_in_rule__Brackets__Alternatives3750);
                     ruleEmendation();
 
                     state._fsp--;
@@ -5037,13 +5082,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 7 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1743:6: ( ruleLacuna )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1759:6: ( ruleLacuna )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1743:6: ( ruleLacuna )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1744:1: ruleLacuna
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1759:6: ( ruleLacuna )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1760:1: ruleLacuna
                     {
                      before(grammarAccess.getBracketsAccess().getLacunaParserRuleCall_6()); 
-                    pushFollow(FOLLOW_ruleLacuna_in_rule__Brackets__Alternatives3727);
+                    pushFollow(FOLLOW_ruleLacuna_in_rule__Brackets__Alternatives3767);
                     ruleLacuna();
 
                     state._fsp--;
@@ -5056,13 +5101,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 8 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1749:6: ( ruleDeletion )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1765:6: ( ruleDeletion )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1749:6: ( ruleDeletion )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1750:1: ruleDeletion
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1765:6: ( ruleDeletion )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1766:1: ruleDeletion
                     {
                      before(grammarAccess.getBracketsAccess().getDeletionParserRuleCall_7()); 
-                    pushFollow(FOLLOW_ruleDeletion_in_rule__Brackets__Alternatives3744);
+                    pushFollow(FOLLOW_ruleDeletion_in_rule__Brackets__Alternatives3784);
                     ruleDeletion();
 
                     state._fsp--;
@@ -5075,13 +5120,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 9 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1755:6: ( ruleExpandedColumn )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1771:6: ( ruleExpandedColumn )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1755:6: ( ruleExpandedColumn )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1756:1: ruleExpandedColumn
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1771:6: ( ruleExpandedColumn )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1772:1: ruleExpandedColumn
                     {
                      before(grammarAccess.getBracketsAccess().getExpandedColumnParserRuleCall_8()); 
-                    pushFollow(FOLLOW_ruleExpandedColumn_in_rule__Brackets__Alternatives3761);
+                    pushFollow(FOLLOW_ruleExpandedColumn_in_rule__Brackets__Alternatives3801);
                     ruleExpandedColumn();
 
                     state._fsp--;
@@ -5094,13 +5139,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 10 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1761:6: ( rulePartialDestruction )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1777:6: ( rulePartialDestruction )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1761:6: ( rulePartialDestruction )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1762:1: rulePartialDestruction
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1777:6: ( rulePartialDestruction )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1778:1: rulePartialDestruction
                     {
                      before(grammarAccess.getBracketsAccess().getPartialDestructionParserRuleCall_9()); 
-                    pushFollow(FOLLOW_rulePartialDestruction_in_rule__Brackets__Alternatives3778);
+                    pushFollow(FOLLOW_rulePartialDestruction_in_rule__Brackets__Alternatives3818);
                     rulePartialDestruction();
 
                     state._fsp--;
@@ -5113,13 +5158,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 11 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1767:6: ( ruleDestruction )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1783:6: ( ruleDestruction )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1767:6: ( ruleDestruction )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1768:1: ruleDestruction
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1783:6: ( ruleDestruction )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1784:1: ruleDestruction
                     {
                      before(grammarAccess.getBracketsAccess().getDestructionParserRuleCall_10()); 
-                    pushFollow(FOLLOW_ruleDestruction_in_rule__Brackets__Alternatives3795);
+                    pushFollow(FOLLOW_ruleDestruction_in_rule__Brackets__Alternatives3835);
                     ruleDestruction();
 
                     state._fsp--;
@@ -5149,17 +5194,17 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoExpanded__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1778:1: rule__NoExpanded__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1794:1: rule__NoExpanded__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) );
     public final void rule__NoExpanded__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1782:1: ( ( ruleInterfix ) | ( ruleChars ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1798:1: ( ( ruleInterfix ) | ( ruleChars ) )
             int alt16=2;
             int LA16_0 = input.LA(1);
 
-            if ( ((LA16_0>=23 && LA16_0<=29)) ) {
+            if ( ((LA16_0>=24 && LA16_0<=30)) ) {
                 alt16=1;
             }
             else if ( (LA16_0==RULE_EGYSTRING) ) {
@@ -5173,13 +5218,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt16) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1783:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1799:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1783:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1784:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1799:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1800:1: ruleInterfix
                     {
                      before(grammarAccess.getNoExpandedAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoExpanded__Alternatives3827);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoExpanded__Alternatives3867);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5192,13 +5237,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1789:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1805:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1789:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1790:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1805:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1806:1: ruleChars
                     {
                      before(grammarAccess.getNoExpandedAccess().getCharsParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoExpanded__Alternatives3844);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoExpanded__Alternatives3884);
                     ruleChars();
 
                     state._fsp--;
@@ -5228,27 +5273,27 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoEmendation__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1800:1: rule__NoEmendation__Alternatives : ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1816:1: rule__NoEmendation__Alternatives : ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) );
     public final void rule__NoEmendation__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1804:1: ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1820:1: ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) )
             int alt17=3;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt17=1;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt17=2;
                 }
@@ -5267,13 +5312,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt17) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1805:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1821:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1805:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1806:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1821:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1822:1: ruleInterfix
                     {
                      before(grammarAccess.getNoEmendationAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoEmendation__Alternatives3876);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoEmendation__Alternatives3916);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5286,13 +5331,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1811:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1827:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1811:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1812:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1827:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1828:1: ruleExpanded
                     {
                      before(grammarAccess.getNoEmendationAccess().getExpandedParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoEmendation__Alternatives3893);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoEmendation__Alternatives3933);
                     ruleExpanded();
 
                     state._fsp--;
@@ -5305,13 +5350,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1817:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1833:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1817:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1818:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1833:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1834:1: ruleChars
                     {
                      before(grammarAccess.getNoEmendationAccess().getCharsParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoEmendation__Alternatives3910);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoEmendation__Alternatives3950);
                     ruleChars();
 
                     state._fsp--;
@@ -5341,27 +5386,27 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoDisputableReading__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1828:1: rule__NoDisputableReading__Alternatives : ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1844:1: rule__NoDisputableReading__Alternatives : ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) );
     public final void rule__NoDisputableReading__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1832:1: ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1848:1: ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) )
             int alt18=3;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt18=1;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt18=2;
                 }
@@ -5380,13 +5425,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt18) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1833:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1849:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1833:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1834:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1849:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1850:1: ruleInterfix
                     {
                      before(grammarAccess.getNoDisputableReadingAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoDisputableReading__Alternatives3942);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoDisputableReading__Alternatives3982);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5399,13 +5444,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1839:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1855:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1839:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1840:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1855:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1856:1: ruleExpanded
                     {
                      before(grammarAccess.getNoDisputableReadingAccess().getExpandedParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoDisputableReading__Alternatives3959);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoDisputableReading__Alternatives3999);
                     ruleExpanded();
 
                     state._fsp--;
@@ -5418,13 +5463,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1845:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1861:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1845:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1846:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1861:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1862:1: ruleChars
                     {
                      before(grammarAccess.getNoDisputableReadingAccess().getCharsParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoDisputableReading__Alternatives3976);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoDisputableReading__Alternatives4016);
                     ruleChars();
 
                     state._fsp--;
@@ -5454,27 +5499,27 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoLacuna__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1856:1: rule__NoLacuna__Alternatives : ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1872:1: rule__NoLacuna__Alternatives : ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) );
     public final void rule__NoLacuna__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1860:1: ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1876:1: ( ( ruleInterfix ) | ( ruleExpanded ) | ( ruleChars ) )
             int alt19=3;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt19=1;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt19=2;
                 }
@@ -5493,13 +5538,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt19) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1861:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1877:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1861:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1862:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1877:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1878:1: ruleInterfix
                     {
                      before(grammarAccess.getNoLacunaAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoLacuna__Alternatives4008);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoLacuna__Alternatives4048);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5512,13 +5557,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1867:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1883:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1867:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1868:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1883:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1884:1: ruleExpanded
                     {
                      before(grammarAccess.getNoLacunaAccess().getExpandedParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoLacuna__Alternatives4025);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoLacuna__Alternatives4065);
                     ruleExpanded();
 
                     state._fsp--;
@@ -5531,13 +5576,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1873:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1889:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1873:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1874:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1889:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1890:1: ruleChars
                     {
                      before(grammarAccess.getNoLacunaAccess().getCharsParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoLacuna__Alternatives4042);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoLacuna__Alternatives4082);
                     ruleChars();
 
                     state._fsp--;
@@ -5567,22 +5612,22 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoDeletion__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1884:1: rule__NoDeletion__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) | ( rulePartialDestruction ) | ( ruleExpanded ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1900:1: rule__NoDeletion__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) | ( rulePartialDestruction ) | ( ruleExpanded ) );
     public final void rule__NoDeletion__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1888:1: ( ( ruleInterfix ) | ( ruleChars ) | ( rulePartialDestruction ) | ( ruleExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1904:1: ( ( ruleInterfix ) | ( ruleChars ) | ( rulePartialDestruction ) | ( ruleExpanded ) )
             int alt20=4;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt20=1;
                 }
@@ -5592,12 +5637,12 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                 alt20=2;
                 }
                 break;
-            case 47:
+            case 48:
                 {
                 alt20=3;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt20=4;
                 }
@@ -5611,13 +5656,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt20) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1889:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1905:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1889:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1890:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1905:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1906:1: ruleInterfix
                     {
                      before(grammarAccess.getNoDeletionAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoDeletion__Alternatives4074);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoDeletion__Alternatives4114);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5630,13 +5675,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1895:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1911:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1895:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1896:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1911:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1912:1: ruleChars
                     {
                      before(grammarAccess.getNoDeletionAccess().getCharsParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoDeletion__Alternatives4091);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoDeletion__Alternatives4131);
                     ruleChars();
 
                     state._fsp--;
@@ -5649,13 +5694,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1901:6: ( rulePartialDestruction )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1917:6: ( rulePartialDestruction )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1901:6: ( rulePartialDestruction )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1902:1: rulePartialDestruction
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1917:6: ( rulePartialDestruction )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1918:1: rulePartialDestruction
                     {
                      before(grammarAccess.getNoDeletionAccess().getPartialDestructionParserRuleCall_2()); 
-                    pushFollow(FOLLOW_rulePartialDestruction_in_rule__NoDeletion__Alternatives4108);
+                    pushFollow(FOLLOW_rulePartialDestruction_in_rule__NoDeletion__Alternatives4148);
                     rulePartialDestruction();
 
                     state._fsp--;
@@ -5668,13 +5713,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1907:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1923:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1907:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1908:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1923:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1924:1: ruleExpanded
                     {
                      before(grammarAccess.getNoDeletionAccess().getExpandedParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoDeletion__Alternatives4125);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoDeletion__Alternatives4165);
                     ruleExpanded();
 
                     state._fsp--;
@@ -5704,22 +5749,22 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoExpandedColumn__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1918:1: rule__NoExpandedColumn__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1934:1: rule__NoExpandedColumn__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) );
     public final void rule__NoExpandedColumn__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1922:1: ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1938:1: ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) )
             int alt21=3;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt21=1;
                 }
@@ -5729,7 +5774,7 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                 alt21=2;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt21=3;
                 }
@@ -5743,13 +5788,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt21) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1923:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1939:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1923:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1924:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1939:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1940:1: ruleInterfix
                     {
                      before(grammarAccess.getNoExpandedColumnAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoExpandedColumn__Alternatives4157);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoExpandedColumn__Alternatives4197);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5762,13 +5807,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1929:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1945:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1929:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1930:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1945:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1946:1: ruleChars
                     {
                      before(grammarAccess.getNoExpandedColumnAccess().getCharsParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoExpandedColumn__Alternatives4174);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoExpandedColumn__Alternatives4214);
                     ruleChars();
 
                     state._fsp--;
@@ -5781,13 +5826,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1935:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1951:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1935:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1936:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1951:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1952:1: ruleExpanded
                     {
                      before(grammarAccess.getNoExpandedColumnAccess().getExpandedParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoExpandedColumn__Alternatives4191);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoExpandedColumn__Alternatives4231);
                     ruleExpanded();
 
                     state._fsp--;
@@ -5817,22 +5862,22 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoRasur__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1946:1: rule__NoRasur__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1962:1: rule__NoRasur__Alternatives : ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) );
     public final void rule__NoRasur__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1950:1: ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1966:1: ( ( ruleInterfix ) | ( ruleChars ) | ( ruleExpanded ) )
             int alt22=3;
             switch ( input.LA(1) ) {
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt22=1;
                 }
@@ -5842,7 +5887,7 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                 alt22=2;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt22=3;
                 }
@@ -5856,13 +5901,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt22) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1951:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1967:1: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1951:1: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1952:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1967:1: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1968:1: ruleInterfix
                     {
                      before(grammarAccess.getNoRasurAccess().getInterfixParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoRasur__Alternatives4223);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoRasur__Alternatives4263);
                     ruleInterfix();
 
                     state._fsp--;
@@ -5875,13 +5920,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1957:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1973:6: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1957:6: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1958:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1973:6: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1974:1: ruleChars
                     {
                      before(grammarAccess.getNoRasurAccess().getCharsParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoRasur__Alternatives4240);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoRasur__Alternatives4280);
                     ruleChars();
 
                     state._fsp--;
@@ -5894,13 +5939,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1963:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1979:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1963:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1964:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1979:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1980:1: ruleExpanded
                     {
                      before(grammarAccess.getNoRasurAccess().getExpandedParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoRasur__Alternatives4257);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoRasur__Alternatives4297);
                     ruleExpanded();
 
                     state._fsp--;
@@ -5930,20 +5975,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoAncientExpanded__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1974:1: rule__NoAncientExpanded__Alternatives : ( ( ruleChars ) | ( ruleExpanded ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1990:1: rule__NoAncientExpanded__Alternatives : ( ( ruleChars ) | ( ruleExpanded ) );
     public final void rule__NoAncientExpanded__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1978:1: ( ( ruleChars ) | ( ruleExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1994:1: ( ( ruleChars ) | ( ruleExpanded ) )
             int alt23=2;
             int LA23_0 = input.LA(1);
 
             if ( (LA23_0==RULE_EGYSTRING) ) {
                 alt23=1;
             }
-            else if ( (LA23_0==30) ) {
+            else if ( (LA23_0==31) ) {
                 alt23=2;
             }
             else {
@@ -5954,13 +5999,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt23) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1979:1: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1995:1: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1979:1: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1980:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1995:1: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1996:1: ruleChars
                     {
                      before(grammarAccess.getNoAncientExpandedAccess().getCharsParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoAncientExpanded__Alternatives4289);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoAncientExpanded__Alternatives4329);
                     ruleChars();
 
                     state._fsp--;
@@ -5973,13 +6018,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1985:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2001:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1985:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1986:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2001:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2002:1: ruleExpanded
                     {
                      before(grammarAccess.getNoAncientExpandedAccess().getExpandedParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoAncientExpanded__Alternatives4306);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoAncientExpanded__Alternatives4346);
                     ruleExpanded();
 
                     state._fsp--;
@@ -6009,20 +6054,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoRestorationOverRasur__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1996:1: rule__NoRestorationOverRasur__Alternatives : ( ( ruleChars ) | ( ruleExpanded ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2012:1: rule__NoRestorationOverRasur__Alternatives : ( ( ruleChars ) | ( ruleExpanded ) );
     public final void rule__NoRestorationOverRasur__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2000:1: ( ( ruleChars ) | ( ruleExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2016:1: ( ( ruleChars ) | ( ruleExpanded ) )
             int alt24=2;
             int LA24_0 = input.LA(1);
 
             if ( (LA24_0==RULE_EGYSTRING) ) {
                 alt24=1;
             }
-            else if ( (LA24_0==30) ) {
+            else if ( (LA24_0==31) ) {
                 alt24=2;
             }
             else {
@@ -6033,13 +6078,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt24) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2001:1: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2017:1: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2001:1: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2002:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2017:1: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2018:1: ruleChars
                     {
                      before(grammarAccess.getNoRestorationOverRasurAccess().getCharsParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoRestorationOverRasur__Alternatives4338);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoRestorationOverRasur__Alternatives4378);
                     ruleChars();
 
                     state._fsp--;
@@ -6052,13 +6097,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2007:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2023:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2007:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2008:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2023:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2024:1: ruleExpanded
                     {
                      before(grammarAccess.getNoRestorationOverRasurAccess().getExpandedParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoRestorationOverRasur__Alternatives4355);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoRestorationOverRasur__Alternatives4395);
                     ruleExpanded();
 
                     state._fsp--;
@@ -6088,13 +6133,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__NoPartialDestruction__Alternatives"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2018:1: rule__NoPartialDestruction__Alternatives : ( ( ruleChars ) | ( ruleDeletion ) | ( ruleInterfix ) | ( ruleExpanded ) );
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2034:1: rule__NoPartialDestruction__Alternatives : ( ( ruleChars ) | ( ruleDeletion ) | ( ruleInterfix ) | ( ruleExpanded ) );
     public final void rule__NoPartialDestruction__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2022:1: ( ( ruleChars ) | ( ruleDeletion ) | ( ruleInterfix ) | ( ruleExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2038:1: ( ( ruleChars ) | ( ruleDeletion ) | ( ruleInterfix ) | ( ruleExpanded ) )
             int alt25=4;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
@@ -6102,23 +6147,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                 alt25=1;
                 }
                 break;
-            case 37:
+            case 38:
                 {
                 alt25=2;
                 }
                 break;
-            case 23:
             case 24:
             case 25:
             case 26:
             case 27:
             case 28:
             case 29:
+            case 30:
                 {
                 alt25=3;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt25=4;
                 }
@@ -6132,13 +6177,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             switch (alt25) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2023:1: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2039:1: ( ruleChars )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2023:1: ( ruleChars )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2024:1: ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2039:1: ( ruleChars )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2040:1: ruleChars
                     {
                      before(grammarAccess.getNoPartialDestructionAccess().getCharsParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleChars_in_rule__NoPartialDestruction__Alternatives4387);
+                    pushFollow(FOLLOW_ruleChars_in_rule__NoPartialDestruction__Alternatives4427);
                     ruleChars();
 
                     state._fsp--;
@@ -6151,13 +6196,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2029:6: ( ruleDeletion )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2045:6: ( ruleDeletion )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2029:6: ( ruleDeletion )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2030:1: ruleDeletion
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2045:6: ( ruleDeletion )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2046:1: ruleDeletion
                     {
                      before(grammarAccess.getNoPartialDestructionAccess().getDeletionParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleDeletion_in_rule__NoPartialDestruction__Alternatives4404);
+                    pushFollow(FOLLOW_ruleDeletion_in_rule__NoPartialDestruction__Alternatives4444);
                     ruleDeletion();
 
                     state._fsp--;
@@ -6170,13 +6215,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2035:6: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2051:6: ( ruleInterfix )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2035:6: ( ruleInterfix )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2036:1: ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2051:6: ( ruleInterfix )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2052:1: ruleInterfix
                     {
                      before(grammarAccess.getNoPartialDestructionAccess().getInterfixParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoPartialDestruction__Alternatives4421);
+                    pushFollow(FOLLOW_ruleInterfix_in_rule__NoPartialDestruction__Alternatives4461);
                     ruleInterfix();
 
                     state._fsp--;
@@ -6189,13 +6234,13 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2041:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2057:6: ( ruleExpanded )
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2041:6: ( ruleExpanded )
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2042:1: ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2057:6: ( ruleExpanded )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2058:1: ruleExpanded
                     {
                      before(grammarAccess.getNoPartialDestructionAccess().getExpandedParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoPartialDestruction__Alternatives4438);
+                    pushFollow(FOLLOW_ruleExpanded_in_rule__NoPartialDestruction__Alternatives4478);
                     ruleExpanded();
 
                     state._fsp--;
@@ -6225,21 +6270,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2054:1: rule__TextContent__Group__0 : rule__TextContent__Group__0__Impl rule__TextContent__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2070:1: rule__TextContent__Group__0 : rule__TextContent__Group__0__Impl rule__TextContent__Group__1 ;
     public final void rule__TextContent__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2058:1: ( rule__TextContent__Group__0__Impl rule__TextContent__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2059:2: rule__TextContent__Group__0__Impl rule__TextContent__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2074:1: ( rule__TextContent__Group__0__Impl rule__TextContent__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2075:2: rule__TextContent__Group__0__Impl rule__TextContent__Group__1
             {
-            pushFollow(FOLLOW_rule__TextContent__Group__0__Impl_in_rule__TextContent__Group__04468);
+            pushFollow(FOLLOW_rule__TextContent__Group__0__Impl_in_rule__TextContent__Group__04508);
             rule__TextContent__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__TextContent__Group__1_in_rule__TextContent__Group__04471);
+            pushFollow(FOLLOW_rule__TextContent__Group__1_in_rule__TextContent__Group__04511);
             rule__TextContent__Group__1();
 
             state._fsp--;
@@ -6263,21 +6308,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2066:1: rule__TextContent__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2082:1: rule__TextContent__Group__0__Impl : ( () ) ;
     public final void rule__TextContent__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2070:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2071:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2086:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2087:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2071:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2072:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2087:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2088:1: ()
             {
              before(grammarAccess.getTextContentAccess().getTextContentAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2073:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2075:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2089:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2091:1: 
             {
             }
 
@@ -6300,16 +6345,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2085:1: rule__TextContent__Group__1 : rule__TextContent__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2101:1: rule__TextContent__Group__1 : rule__TextContent__Group__1__Impl ;
     public final void rule__TextContent__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2089:1: ( rule__TextContent__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2090:2: rule__TextContent__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2105:1: ( rule__TextContent__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2106:2: rule__TextContent__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__TextContent__Group__1__Impl_in_rule__TextContent__Group__14529);
+            pushFollow(FOLLOW_rule__TextContent__Group__1__Impl_in_rule__TextContent__Group__14569);
             rule__TextContent__Group__1__Impl();
 
             state._fsp--;
@@ -6333,23 +6378,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2096:1: rule__TextContent__Group__1__Impl : ( ( rule__TextContent__Group_1__0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2112:1: rule__TextContent__Group__1__Impl : ( ( rule__TextContent__Group_1__0 ) ) ;
     public final void rule__TextContent__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2100:1: ( ( ( rule__TextContent__Group_1__0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2101:1: ( ( rule__TextContent__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2116:1: ( ( ( rule__TextContent__Group_1__0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2117:1: ( ( rule__TextContent__Group_1__0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2101:1: ( ( rule__TextContent__Group_1__0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2102:1: ( rule__TextContent__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2117:1: ( ( rule__TextContent__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2118:1: ( rule__TextContent__Group_1__0 )
             {
              before(grammarAccess.getTextContentAccess().getGroup_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2103:1: ( rule__TextContent__Group_1__0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2103:2: rule__TextContent__Group_1__0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2119:1: ( rule__TextContent__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2119:2: rule__TextContent__Group_1__0
             {
-            pushFollow(FOLLOW_rule__TextContent__Group_1__0_in_rule__TextContent__Group__1__Impl4556);
+            pushFollow(FOLLOW_rule__TextContent__Group_1__0_in_rule__TextContent__Group__1__Impl4596);
             rule__TextContent__Group_1__0();
 
             state._fsp--;
@@ -6380,21 +6425,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2117:1: rule__TextContent__Group_1__0 : rule__TextContent__Group_1__0__Impl rule__TextContent__Group_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2133:1: rule__TextContent__Group_1__0 : rule__TextContent__Group_1__0__Impl rule__TextContent__Group_1__1 ;
     public final void rule__TextContent__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2121:1: ( rule__TextContent__Group_1__0__Impl rule__TextContent__Group_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2122:2: rule__TextContent__Group_1__0__Impl rule__TextContent__Group_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2137:1: ( rule__TextContent__Group_1__0__Impl rule__TextContent__Group_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2138:2: rule__TextContent__Group_1__0__Impl rule__TextContent__Group_1__1
             {
-            pushFollow(FOLLOW_rule__TextContent__Group_1__0__Impl_in_rule__TextContent__Group_1__04590);
+            pushFollow(FOLLOW_rule__TextContent__Group_1__0__Impl_in_rule__TextContent__Group_1__04630);
             rule__TextContent__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__TextContent__Group_1__1_in_rule__TextContent__Group_1__04593);
+            pushFollow(FOLLOW_rule__TextContent__Group_1__1_in_rule__TextContent__Group_1__04633);
             rule__TextContent__Group_1__1();
 
             state._fsp--;
@@ -6418,23 +6463,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2129:1: rule__TextContent__Group_1__0__Impl : ( ( rule__TextContent__ItemsAssignment_1_0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2145:1: rule__TextContent__Group_1__0__Impl : ( ( rule__TextContent__ItemsAssignment_1_0 ) ) ;
     public final void rule__TextContent__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2133:1: ( ( ( rule__TextContent__ItemsAssignment_1_0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2134:1: ( ( rule__TextContent__ItemsAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2149:1: ( ( ( rule__TextContent__ItemsAssignment_1_0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2150:1: ( ( rule__TextContent__ItemsAssignment_1_0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2134:1: ( ( rule__TextContent__ItemsAssignment_1_0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2135:1: ( rule__TextContent__ItemsAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2150:1: ( ( rule__TextContent__ItemsAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2151:1: ( rule__TextContent__ItemsAssignment_1_0 )
             {
              before(grammarAccess.getTextContentAccess().getItemsAssignment_1_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2136:1: ( rule__TextContent__ItemsAssignment_1_0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2136:2: rule__TextContent__ItemsAssignment_1_0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2152:1: ( rule__TextContent__ItemsAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2152:2: rule__TextContent__ItemsAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__TextContent__ItemsAssignment_1_0_in_rule__TextContent__Group_1__0__Impl4620);
+            pushFollow(FOLLOW_rule__TextContent__ItemsAssignment_1_0_in_rule__TextContent__Group_1__0__Impl4660);
             rule__TextContent__ItemsAssignment_1_0();
 
             state._fsp--;
@@ -6465,16 +6510,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2146:1: rule__TextContent__Group_1__1 : rule__TextContent__Group_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2162:1: rule__TextContent__Group_1__1 : rule__TextContent__Group_1__1__Impl ;
     public final void rule__TextContent__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2150:1: ( rule__TextContent__Group_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2151:2: rule__TextContent__Group_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2166:1: ( rule__TextContent__Group_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2167:2: rule__TextContent__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__TextContent__Group_1__1__Impl_in_rule__TextContent__Group_1__14650);
+            pushFollow(FOLLOW_rule__TextContent__Group_1__1__Impl_in_rule__TextContent__Group_1__14690);
             rule__TextContent__Group_1__1__Impl();
 
             state._fsp--;
@@ -6498,35 +6543,35 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2157:1: rule__TextContent__Group_1__1__Impl : ( ( rule__TextContent__Group_1_1__0 )* ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2173:1: rule__TextContent__Group_1__1__Impl : ( ( rule__TextContent__Group_1_1__0 )* ) ;
     public final void rule__TextContent__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2161:1: ( ( ( rule__TextContent__Group_1_1__0 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2162:1: ( ( rule__TextContent__Group_1_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2177:1: ( ( ( rule__TextContent__Group_1_1__0 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2178:1: ( ( rule__TextContent__Group_1_1__0 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2162:1: ( ( rule__TextContent__Group_1_1__0 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2163:1: ( rule__TextContent__Group_1_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2178:1: ( ( rule__TextContent__Group_1_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2179:1: ( rule__TextContent__Group_1_1__0 )*
             {
              before(grammarAccess.getTextContentAccess().getGroup_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2164:1: ( rule__TextContent__Group_1_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2180:1: ( rule__TextContent__Group_1_1__0 )*
             loop26:
             do {
                 int alt26=2;
                 int LA26_0 = input.LA(1);
 
-                if ( ((LA26_0>=12 && LA26_0<=13)||LA26_0==15) ) {
+                if ( ((LA26_0>=12 && LA26_0<=16)) ) {
                     alt26=1;
                 }
 
 
                 switch (alt26) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2164:2: rule__TextContent__Group_1_1__0
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2180:2: rule__TextContent__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__TextContent__Group_1_1__0_in_rule__TextContent__Group_1__1__Impl4677);
+            	    pushFollow(FOLLOW_rule__TextContent__Group_1_1__0_in_rule__TextContent__Group_1__1__Impl4717);
             	    rule__TextContent__Group_1_1__0();
 
             	    state._fsp--;
@@ -6563,21 +6608,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2178:1: rule__TextContent__Group_1_1__0 : rule__TextContent__Group_1_1__0__Impl rule__TextContent__Group_1_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2194:1: rule__TextContent__Group_1_1__0 : rule__TextContent__Group_1_1__0__Impl rule__TextContent__Group_1_1__1 ;
     public final void rule__TextContent__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2182:1: ( rule__TextContent__Group_1_1__0__Impl rule__TextContent__Group_1_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2183:2: rule__TextContent__Group_1_1__0__Impl rule__TextContent__Group_1_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2198:1: ( rule__TextContent__Group_1_1__0__Impl rule__TextContent__Group_1_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2199:2: rule__TextContent__Group_1_1__0__Impl rule__TextContent__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__TextContent__Group_1_1__0__Impl_in_rule__TextContent__Group_1_1__04712);
+            pushFollow(FOLLOW_rule__TextContent__Group_1_1__0__Impl_in_rule__TextContent__Group_1_1__04752);
             rule__TextContent__Group_1_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__TextContent__Group_1_1__1_in_rule__TextContent__Group_1_1__04715);
+            pushFollow(FOLLOW_rule__TextContent__Group_1_1__1_in_rule__TextContent__Group_1_1__04755);
             rule__TextContent__Group_1_1__1();
 
             state._fsp--;
@@ -6601,35 +6646,35 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2190:1: rule__TextContent__Group_1_1__0__Impl : ( ( rule__TextContent__Alternatives_1_1_0 )* ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2206:1: rule__TextContent__Group_1_1__0__Impl : ( ( rule__TextContent__Alternatives_1_1_0 )* ) ;
     public final void rule__TextContent__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2194:1: ( ( ( rule__TextContent__Alternatives_1_1_0 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2195:1: ( ( rule__TextContent__Alternatives_1_1_0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2210:1: ( ( ( rule__TextContent__Alternatives_1_1_0 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2211:1: ( ( rule__TextContent__Alternatives_1_1_0 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2195:1: ( ( rule__TextContent__Alternatives_1_1_0 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2196:1: ( rule__TextContent__Alternatives_1_1_0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2211:1: ( ( rule__TextContent__Alternatives_1_1_0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2212:1: ( rule__TextContent__Alternatives_1_1_0 )*
             {
              before(grammarAccess.getTextContentAccess().getAlternatives_1_1_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2197:1: ( rule__TextContent__Alternatives_1_1_0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2213:1: ( rule__TextContent__Alternatives_1_1_0 )*
             loop27:
             do {
                 int alt27=2;
                 int LA27_0 = input.LA(1);
 
-                if ( ((LA27_0>=12 && LA27_0<=13)) ) {
+                if ( ((LA27_0>=12 && LA27_0<=15)) ) {
                     alt27=1;
                 }
 
 
                 switch (alt27) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2197:2: rule__TextContent__Alternatives_1_1_0
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2213:2: rule__TextContent__Alternatives_1_1_0
             	    {
-            	    pushFollow(FOLLOW_rule__TextContent__Alternatives_1_1_0_in_rule__TextContent__Group_1_1__0__Impl4742);
+            	    pushFollow(FOLLOW_rule__TextContent__Alternatives_1_1_0_in_rule__TextContent__Group_1_1__0__Impl4782);
             	    rule__TextContent__Alternatives_1_1_0();
 
             	    state._fsp--;
@@ -6666,16 +6711,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2207:1: rule__TextContent__Group_1_1__1 : rule__TextContent__Group_1_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2223:1: rule__TextContent__Group_1_1__1 : rule__TextContent__Group_1_1__1__Impl ;
     public final void rule__TextContent__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2211:1: ( rule__TextContent__Group_1_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2212:2: rule__TextContent__Group_1_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2227:1: ( rule__TextContent__Group_1_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2228:2: rule__TextContent__Group_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__TextContent__Group_1_1__1__Impl_in_rule__TextContent__Group_1_1__14773);
+            pushFollow(FOLLOW_rule__TextContent__Group_1_1__1__Impl_in_rule__TextContent__Group_1_1__14813);
             rule__TextContent__Group_1_1__1__Impl();
 
             state._fsp--;
@@ -6699,23 +6744,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__Group_1_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2218:1: rule__TextContent__Group_1_1__1__Impl : ( ( rule__TextContent__ItemsAssignment_1_1_1 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2234:1: rule__TextContent__Group_1_1__1__Impl : ( ( rule__TextContent__ItemsAssignment_1_1_1 ) ) ;
     public final void rule__TextContent__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2222:1: ( ( ( rule__TextContent__ItemsAssignment_1_1_1 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2223:1: ( ( rule__TextContent__ItemsAssignment_1_1_1 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2238:1: ( ( ( rule__TextContent__ItemsAssignment_1_1_1 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2239:1: ( ( rule__TextContent__ItemsAssignment_1_1_1 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2223:1: ( ( rule__TextContent__ItemsAssignment_1_1_1 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2224:1: ( rule__TextContent__ItemsAssignment_1_1_1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2239:1: ( ( rule__TextContent__ItemsAssignment_1_1_1 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2240:1: ( rule__TextContent__ItemsAssignment_1_1_1 )
             {
              before(grammarAccess.getTextContentAccess().getItemsAssignment_1_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2225:1: ( rule__TextContent__ItemsAssignment_1_1_1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2225:2: rule__TextContent__ItemsAssignment_1_1_1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2241:1: ( rule__TextContent__ItemsAssignment_1_1_1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2241:2: rule__TextContent__ItemsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__TextContent__ItemsAssignment_1_1_1_in_rule__TextContent__Group_1_1__1__Impl4800);
+            pushFollow(FOLLOW_rule__TextContent__ItemsAssignment_1_1_1_in_rule__TextContent__Group_1_1__1__Impl4840);
             rule__TextContent__ItemsAssignment_1_1_1();
 
             state._fsp--;
@@ -6746,21 +6791,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2239:1: rule__Sentence__Group__0 : rule__Sentence__Group__0__Impl rule__Sentence__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2255:1: rule__Sentence__Group__0 : rule__Sentence__Group__0__Impl rule__Sentence__Group__1 ;
     public final void rule__Sentence__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2243:1: ( rule__Sentence__Group__0__Impl rule__Sentence__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2244:2: rule__Sentence__Group__0__Impl rule__Sentence__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2259:1: ( rule__Sentence__Group__0__Impl rule__Sentence__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2260:2: rule__Sentence__Group__0__Impl rule__Sentence__Group__1
             {
-            pushFollow(FOLLOW_rule__Sentence__Group__0__Impl_in_rule__Sentence__Group__04834);
+            pushFollow(FOLLOW_rule__Sentence__Group__0__Impl_in_rule__Sentence__Group__04874);
             rule__Sentence__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Sentence__Group__1_in_rule__Sentence__Group__04837);
+            pushFollow(FOLLOW_rule__Sentence__Group__1_in_rule__Sentence__Group__04877);
             rule__Sentence__Group__1();
 
             state._fsp--;
@@ -6784,20 +6829,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2251:1: rule__Sentence__Group__0__Impl : ( '\\u00A7' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2267:1: rule__Sentence__Group__0__Impl : ( '\\u00A7' ) ;
     public final void rule__Sentence__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2255:1: ( ( '\\u00A7' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2256:1: ( '\\u00A7' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2271:1: ( ( '\\u00A7' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2272:1: ( '\\u00A7' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2256:1: ( '\\u00A7' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2257:1: '\\u00A7'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2272:1: ( '\\u00A7' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2273:1: '\\u00A7'
             {
              before(grammarAccess.getSentenceAccess().getSectionSignKeyword_0()); 
-            match(input,15,FOLLOW_15_in_rule__Sentence__Group__0__Impl4865); 
+            match(input,16,FOLLOW_16_in_rule__Sentence__Group__0__Impl4905); 
              after(grammarAccess.getSentenceAccess().getSectionSignKeyword_0()); 
 
             }
@@ -6821,21 +6866,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2270:1: rule__Sentence__Group__1 : rule__Sentence__Group__1__Impl rule__Sentence__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2286:1: rule__Sentence__Group__1 : rule__Sentence__Group__1__Impl rule__Sentence__Group__2 ;
     public final void rule__Sentence__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2274:1: ( rule__Sentence__Group__1__Impl rule__Sentence__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2275:2: rule__Sentence__Group__1__Impl rule__Sentence__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2290:1: ( rule__Sentence__Group__1__Impl rule__Sentence__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2291:2: rule__Sentence__Group__1__Impl rule__Sentence__Group__2
             {
-            pushFollow(FOLLOW_rule__Sentence__Group__1__Impl_in_rule__Sentence__Group__14896);
+            pushFollow(FOLLOW_rule__Sentence__Group__1__Impl_in_rule__Sentence__Group__14936);
             rule__Sentence__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Sentence__Group__2_in_rule__Sentence__Group__14899);
+            pushFollow(FOLLOW_rule__Sentence__Group__2_in_rule__Sentence__Group__14939);
             rule__Sentence__Group__2();
 
             state._fsp--;
@@ -6859,23 +6904,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2282:1: rule__Sentence__Group__1__Impl : ( ( rule__Sentence__Group_1__0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2298:1: rule__Sentence__Group__1__Impl : ( ( rule__Sentence__Group_1__0 ) ) ;
     public final void rule__Sentence__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2286:1: ( ( ( rule__Sentence__Group_1__0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2287:1: ( ( rule__Sentence__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2302:1: ( ( ( rule__Sentence__Group_1__0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2303:1: ( ( rule__Sentence__Group_1__0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2287:1: ( ( rule__Sentence__Group_1__0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2288:1: ( rule__Sentence__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2303:1: ( ( rule__Sentence__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2304:1: ( rule__Sentence__Group_1__0 )
             {
              before(grammarAccess.getSentenceAccess().getGroup_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2289:1: ( rule__Sentence__Group_1__0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2289:2: rule__Sentence__Group_1__0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2305:1: ( rule__Sentence__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2305:2: rule__Sentence__Group_1__0
             {
-            pushFollow(FOLLOW_rule__Sentence__Group_1__0_in_rule__Sentence__Group__1__Impl4926);
+            pushFollow(FOLLOW_rule__Sentence__Group_1__0_in_rule__Sentence__Group__1__Impl4966);
             rule__Sentence__Group_1__0();
 
             state._fsp--;
@@ -6906,16 +6951,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2299:1: rule__Sentence__Group__2 : rule__Sentence__Group__2__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2315:1: rule__Sentence__Group__2 : rule__Sentence__Group__2__Impl ;
     public final void rule__Sentence__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2303:1: ( rule__Sentence__Group__2__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2304:2: rule__Sentence__Group__2__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2319:1: ( rule__Sentence__Group__2__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2320:2: rule__Sentence__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Sentence__Group__2__Impl_in_rule__Sentence__Group__24956);
+            pushFollow(FOLLOW_rule__Sentence__Group__2__Impl_in_rule__Sentence__Group__24996);
             rule__Sentence__Group__2__Impl();
 
             state._fsp--;
@@ -6939,20 +6984,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2310:1: rule__Sentence__Group__2__Impl : ( '\\u00A7' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2326:1: rule__Sentence__Group__2__Impl : ( '\\u00A7' ) ;
     public final void rule__Sentence__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2314:1: ( ( '\\u00A7' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2315:1: ( '\\u00A7' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2330:1: ( ( '\\u00A7' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2331:1: ( '\\u00A7' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2315:1: ( '\\u00A7' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2316:1: '\\u00A7'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2331:1: ( '\\u00A7' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2332:1: '\\u00A7'
             {
              before(grammarAccess.getSentenceAccess().getSectionSignKeyword_2()); 
-            match(input,15,FOLLOW_15_in_rule__Sentence__Group__2__Impl4984); 
+            match(input,16,FOLLOW_16_in_rule__Sentence__Group__2__Impl5024); 
              after(grammarAccess.getSentenceAccess().getSectionSignKeyword_2()); 
 
             }
@@ -6976,21 +7021,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2335:1: rule__Sentence__Group_1__0 : rule__Sentence__Group_1__0__Impl rule__Sentence__Group_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2351:1: rule__Sentence__Group_1__0 : rule__Sentence__Group_1__0__Impl rule__Sentence__Group_1__1 ;
     public final void rule__Sentence__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2339:1: ( rule__Sentence__Group_1__0__Impl rule__Sentence__Group_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2340:2: rule__Sentence__Group_1__0__Impl rule__Sentence__Group_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2355:1: ( rule__Sentence__Group_1__0__Impl rule__Sentence__Group_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2356:2: rule__Sentence__Group_1__0__Impl rule__Sentence__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Sentence__Group_1__0__Impl_in_rule__Sentence__Group_1__05021);
+            pushFollow(FOLLOW_rule__Sentence__Group_1__0__Impl_in_rule__Sentence__Group_1__05061);
             rule__Sentence__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Sentence__Group_1__1_in_rule__Sentence__Group_1__05024);
+            pushFollow(FOLLOW_rule__Sentence__Group_1__1_in_rule__Sentence__Group_1__05064);
             rule__Sentence__Group_1__1();
 
             state._fsp--;
@@ -7014,23 +7059,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2347:1: rule__Sentence__Group_1__0__Impl : ( ( rule__Sentence__ItemsAssignment_1_0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2363:1: rule__Sentence__Group_1__0__Impl : ( ( rule__Sentence__ItemsAssignment_1_0 ) ) ;
     public final void rule__Sentence__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2351:1: ( ( ( rule__Sentence__ItemsAssignment_1_0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2352:1: ( ( rule__Sentence__ItemsAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2367:1: ( ( ( rule__Sentence__ItemsAssignment_1_0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2368:1: ( ( rule__Sentence__ItemsAssignment_1_0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2352:1: ( ( rule__Sentence__ItemsAssignment_1_0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2353:1: ( rule__Sentence__ItemsAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2368:1: ( ( rule__Sentence__ItemsAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2369:1: ( rule__Sentence__ItemsAssignment_1_0 )
             {
              before(grammarAccess.getSentenceAccess().getItemsAssignment_1_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2354:1: ( rule__Sentence__ItemsAssignment_1_0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2354:2: rule__Sentence__ItemsAssignment_1_0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2370:1: ( rule__Sentence__ItemsAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2370:2: rule__Sentence__ItemsAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__Sentence__ItemsAssignment_1_0_in_rule__Sentence__Group_1__0__Impl5051);
+            pushFollow(FOLLOW_rule__Sentence__ItemsAssignment_1_0_in_rule__Sentence__Group_1__0__Impl5091);
             rule__Sentence__ItemsAssignment_1_0();
 
             state._fsp--;
@@ -7061,16 +7106,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2364:1: rule__Sentence__Group_1__1 : rule__Sentence__Group_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2380:1: rule__Sentence__Group_1__1 : rule__Sentence__Group_1__1__Impl ;
     public final void rule__Sentence__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2368:1: ( rule__Sentence__Group_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2369:2: rule__Sentence__Group_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2384:1: ( rule__Sentence__Group_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2385:2: rule__Sentence__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Sentence__Group_1__1__Impl_in_rule__Sentence__Group_1__15081);
+            pushFollow(FOLLOW_rule__Sentence__Group_1__1__Impl_in_rule__Sentence__Group_1__15121);
             rule__Sentence__Group_1__1__Impl();
 
             state._fsp--;
@@ -7094,20 +7139,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2375:1: rule__Sentence__Group_1__1__Impl : ( ( rule__Sentence__Group_1_1__0 )* ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2391:1: rule__Sentence__Group_1__1__Impl : ( ( rule__Sentence__Group_1_1__0 )* ) ;
     public final void rule__Sentence__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2379:1: ( ( ( rule__Sentence__Group_1_1__0 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2380:1: ( ( rule__Sentence__Group_1_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2395:1: ( ( ( rule__Sentence__Group_1_1__0 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2396:1: ( ( rule__Sentence__Group_1_1__0 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2380:1: ( ( rule__Sentence__Group_1_1__0 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2381:1: ( rule__Sentence__Group_1_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2396:1: ( ( rule__Sentence__Group_1_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2397:1: ( rule__Sentence__Group_1_1__0 )*
             {
              before(grammarAccess.getSentenceAccess().getGroup_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2382:1: ( rule__Sentence__Group_1_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2398:1: ( rule__Sentence__Group_1_1__0 )*
             loop28:
             do {
                 int alt28=2;
@@ -7120,9 +7165,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
                 switch (alt28) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2382:2: rule__Sentence__Group_1_1__0
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2398:2: rule__Sentence__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Sentence__Group_1_1__0_in_rule__Sentence__Group_1__1__Impl5108);
+            	    pushFollow(FOLLOW_rule__Sentence__Group_1_1__0_in_rule__Sentence__Group_1__1__Impl5148);
             	    rule__Sentence__Group_1_1__0();
 
             	    state._fsp--;
@@ -7159,21 +7204,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2396:1: rule__Sentence__Group_1_1__0 : rule__Sentence__Group_1_1__0__Impl rule__Sentence__Group_1_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2412:1: rule__Sentence__Group_1_1__0 : rule__Sentence__Group_1_1__0__Impl rule__Sentence__Group_1_1__1 ;
     public final void rule__Sentence__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2400:1: ( rule__Sentence__Group_1_1__0__Impl rule__Sentence__Group_1_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2401:2: rule__Sentence__Group_1_1__0__Impl rule__Sentence__Group_1_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2416:1: ( rule__Sentence__Group_1_1__0__Impl rule__Sentence__Group_1_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2417:2: rule__Sentence__Group_1_1__0__Impl rule__Sentence__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__Sentence__Group_1_1__0__Impl_in_rule__Sentence__Group_1_1__05143);
+            pushFollow(FOLLOW_rule__Sentence__Group_1_1__0__Impl_in_rule__Sentence__Group_1_1__05183);
             rule__Sentence__Group_1_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Sentence__Group_1_1__1_in_rule__Sentence__Group_1_1__05146);
+            pushFollow(FOLLOW_rule__Sentence__Group_1_1__1_in_rule__Sentence__Group_1_1__05186);
             rule__Sentence__Group_1_1__1();
 
             state._fsp--;
@@ -7197,20 +7242,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2408:1: rule__Sentence__Group_1_1__0__Impl : ( ' ' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2424:1: rule__Sentence__Group_1_1__0__Impl : ( ' ' ) ;
     public final void rule__Sentence__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2412:1: ( ( ' ' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2413:1: ( ' ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2428:1: ( ( ' ' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2429:1: ( ' ' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2413:1: ( ' ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2414:1: ' '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2429:1: ( ' ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2430:1: ' '
             {
              before(grammarAccess.getSentenceAccess().getSpaceKeyword_1_1_0()); 
-            match(input,12,FOLLOW_12_in_rule__Sentence__Group_1_1__0__Impl5174); 
+            match(input,12,FOLLOW_12_in_rule__Sentence__Group_1_1__0__Impl5214); 
              after(grammarAccess.getSentenceAccess().getSpaceKeyword_1_1_0()); 
 
             }
@@ -7234,16 +7279,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2427:1: rule__Sentence__Group_1_1__1 : rule__Sentence__Group_1_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2443:1: rule__Sentence__Group_1_1__1 : rule__Sentence__Group_1_1__1__Impl ;
     public final void rule__Sentence__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2431:1: ( rule__Sentence__Group_1_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2432:2: rule__Sentence__Group_1_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2447:1: ( rule__Sentence__Group_1_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2448:2: rule__Sentence__Group_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Sentence__Group_1_1__1__Impl_in_rule__Sentence__Group_1_1__15205);
+            pushFollow(FOLLOW_rule__Sentence__Group_1_1__1__Impl_in_rule__Sentence__Group_1_1__15245);
             rule__Sentence__Group_1_1__1__Impl();
 
             state._fsp--;
@@ -7267,23 +7312,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__Group_1_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2438:1: rule__Sentence__Group_1_1__1__Impl : ( ( rule__Sentence__ItemsAssignment_1_1_1 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2454:1: rule__Sentence__Group_1_1__1__Impl : ( ( rule__Sentence__ItemsAssignment_1_1_1 ) ) ;
     public final void rule__Sentence__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2442:1: ( ( ( rule__Sentence__ItemsAssignment_1_1_1 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2443:1: ( ( rule__Sentence__ItemsAssignment_1_1_1 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2458:1: ( ( ( rule__Sentence__ItemsAssignment_1_1_1 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2459:1: ( ( rule__Sentence__ItemsAssignment_1_1_1 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2443:1: ( ( rule__Sentence__ItemsAssignment_1_1_1 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2444:1: ( rule__Sentence__ItemsAssignment_1_1_1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2459:1: ( ( rule__Sentence__ItemsAssignment_1_1_1 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2460:1: ( rule__Sentence__ItemsAssignment_1_1_1 )
             {
              before(grammarAccess.getSentenceAccess().getItemsAssignment_1_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2445:1: ( rule__Sentence__ItemsAssignment_1_1_1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2445:2: rule__Sentence__ItemsAssignment_1_1_1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2461:1: ( rule__Sentence__ItemsAssignment_1_1_1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2461:2: rule__Sentence__ItemsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__Sentence__ItemsAssignment_1_1_1_in_rule__Sentence__Group_1_1__1__Impl5232);
+            pushFollow(FOLLOW_rule__Sentence__ItemsAssignment_1_1_1_in_rule__Sentence__Group_1_1__1__Impl5272);
             rule__Sentence__ItemsAssignment_1_1_1();
 
             state._fsp--;
@@ -7314,21 +7359,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_0__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2459:1: rule__SentenceItem__Group_0__0 : rule__SentenceItem__Group_0__0__Impl rule__SentenceItem__Group_0__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2475:1: rule__SentenceItem__Group_0__0 : rule__SentenceItem__Group_0__0__Impl rule__SentenceItem__Group_0__1 ;
     public final void rule__SentenceItem__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2463:1: ( rule__SentenceItem__Group_0__0__Impl rule__SentenceItem__Group_0__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2464:2: rule__SentenceItem__Group_0__0__Impl rule__SentenceItem__Group_0__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2479:1: ( rule__SentenceItem__Group_0__0__Impl rule__SentenceItem__Group_0__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2480:2: rule__SentenceItem__Group_0__0__Impl rule__SentenceItem__Group_0__1
             {
-            pushFollow(FOLLOW_rule__SentenceItem__Group_0__0__Impl_in_rule__SentenceItem__Group_0__05266);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_0__0__Impl_in_rule__SentenceItem__Group_0__05306);
             rule__SentenceItem__Group_0__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__SentenceItem__Group_0__1_in_rule__SentenceItem__Group_0__05269);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_0__1_in_rule__SentenceItem__Group_0__05309);
             rule__SentenceItem__Group_0__1();
 
             state._fsp--;
@@ -7352,20 +7397,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_0__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2471:1: rule__SentenceItem__Group_0__0__Impl : ( ruleWord ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2487:1: rule__SentenceItem__Group_0__0__Impl : ( ruleWord ) ;
     public final void rule__SentenceItem__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2475:1: ( ( ruleWord ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2476:1: ( ruleWord )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2491:1: ( ( ruleWord ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2492:1: ( ruleWord )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2476:1: ( ruleWord )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2477:1: ruleWord
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2492:1: ( ruleWord )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2493:1: ruleWord
             {
              before(grammarAccess.getSentenceItemAccess().getWordParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleWord_in_rule__SentenceItem__Group_0__0__Impl5296);
+            pushFollow(FOLLOW_ruleWord_in_rule__SentenceItem__Group_0__0__Impl5336);
             ruleWord();
 
             state._fsp--;
@@ -7393,16 +7438,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_0__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2488:1: rule__SentenceItem__Group_0__1 : rule__SentenceItem__Group_0__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2504:1: rule__SentenceItem__Group_0__1 : rule__SentenceItem__Group_0__1__Impl ;
     public final void rule__SentenceItem__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2492:1: ( rule__SentenceItem__Group_0__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2493:2: rule__SentenceItem__Group_0__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2508:1: ( rule__SentenceItem__Group_0__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2509:2: rule__SentenceItem__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__SentenceItem__Group_0__1__Impl_in_rule__SentenceItem__Group_0__15325);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_0__1__Impl_in_rule__SentenceItem__Group_0__15365);
             rule__SentenceItem__Group_0__1__Impl();
 
             state._fsp--;
@@ -7426,20 +7471,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_0__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2499:1: rule__SentenceItem__Group_0__1__Impl : ( ( rule__SentenceItem__Alternatives_0_1 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2515:1: rule__SentenceItem__Group_0__1__Impl : ( ( rule__SentenceItem__Alternatives_0_1 )? ) ;
     public final void rule__SentenceItem__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2503:1: ( ( ( rule__SentenceItem__Alternatives_0_1 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2504:1: ( ( rule__SentenceItem__Alternatives_0_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2519:1: ( ( ( rule__SentenceItem__Alternatives_0_1 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2520:1: ( ( rule__SentenceItem__Alternatives_0_1 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2504:1: ( ( rule__SentenceItem__Alternatives_0_1 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2505:1: ( rule__SentenceItem__Alternatives_0_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2520:1: ( ( rule__SentenceItem__Alternatives_0_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2521:1: ( rule__SentenceItem__Alternatives_0_1 )?
             {
              before(grammarAccess.getSentenceItemAccess().getAlternatives_0_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2506:1: ( rule__SentenceItem__Alternatives_0_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2522:1: ( rule__SentenceItem__Alternatives_0_1 )?
             int alt29=2;
             int LA29_0 = input.LA(1);
 
@@ -7448,9 +7493,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt29) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2506:2: rule__SentenceItem__Alternatives_0_1
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2522:2: rule__SentenceItem__Alternatives_0_1
                     {
-                    pushFollow(FOLLOW_rule__SentenceItem__Alternatives_0_1_in_rule__SentenceItem__Group_0__1__Impl5352);
+                    pushFollow(FOLLOW_rule__SentenceItem__Alternatives_0_1_in_rule__SentenceItem__Group_0__1__Impl5392);
                     rule__SentenceItem__Alternatives_0_1();
 
                     state._fsp--;
@@ -7484,21 +7529,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2520:1: rule__SentenceItem__Group_1__0 : rule__SentenceItem__Group_1__0__Impl rule__SentenceItem__Group_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2536:1: rule__SentenceItem__Group_1__0 : rule__SentenceItem__Group_1__0__Impl rule__SentenceItem__Group_1__1 ;
     public final void rule__SentenceItem__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2524:1: ( rule__SentenceItem__Group_1__0__Impl rule__SentenceItem__Group_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2525:2: rule__SentenceItem__Group_1__0__Impl rule__SentenceItem__Group_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2540:1: ( rule__SentenceItem__Group_1__0__Impl rule__SentenceItem__Group_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2541:2: rule__SentenceItem__Group_1__0__Impl rule__SentenceItem__Group_1__1
             {
-            pushFollow(FOLLOW_rule__SentenceItem__Group_1__0__Impl_in_rule__SentenceItem__Group_1__05387);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_1__0__Impl_in_rule__SentenceItem__Group_1__05427);
             rule__SentenceItem__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__SentenceItem__Group_1__1_in_rule__SentenceItem__Group_1__05390);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_1__1_in_rule__SentenceItem__Group_1__05430);
             rule__SentenceItem__Group_1__1();
 
             state._fsp--;
@@ -7522,20 +7567,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2532:1: rule__SentenceItem__Group_1__0__Impl : ( ruleAbstractMarker ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2548:1: rule__SentenceItem__Group_1__0__Impl : ( ruleAbstractMarker ) ;
     public final void rule__SentenceItem__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2536:1: ( ( ruleAbstractMarker ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2537:1: ( ruleAbstractMarker )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2552:1: ( ( ruleAbstractMarker ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2553:1: ( ruleAbstractMarker )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2537:1: ( ruleAbstractMarker )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2538:1: ruleAbstractMarker
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2553:1: ( ruleAbstractMarker )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2554:1: ruleAbstractMarker
             {
              before(grammarAccess.getSentenceItemAccess().getAbstractMarkerParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleAbstractMarker_in_rule__SentenceItem__Group_1__0__Impl5417);
+            pushFollow(FOLLOW_ruleAbstractMarker_in_rule__SentenceItem__Group_1__0__Impl5457);
             ruleAbstractMarker();
 
             state._fsp--;
@@ -7563,16 +7608,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2549:1: rule__SentenceItem__Group_1__1 : rule__SentenceItem__Group_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2565:1: rule__SentenceItem__Group_1__1 : rule__SentenceItem__Group_1__1__Impl ;
     public final void rule__SentenceItem__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2553:1: ( rule__SentenceItem__Group_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2554:2: rule__SentenceItem__Group_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2569:1: ( rule__SentenceItem__Group_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2570:2: rule__SentenceItem__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__SentenceItem__Group_1__1__Impl_in_rule__SentenceItem__Group_1__15446);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_1__1__Impl_in_rule__SentenceItem__Group_1__15486);
             rule__SentenceItem__Group_1__1__Impl();
 
             state._fsp--;
@@ -7596,20 +7641,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2560:1: rule__SentenceItem__Group_1__1__Impl : ( ( rule__SentenceItem__Alternatives_1_1 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2576:1: rule__SentenceItem__Group_1__1__Impl : ( ( rule__SentenceItem__Alternatives_1_1 )? ) ;
     public final void rule__SentenceItem__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2564:1: ( ( ( rule__SentenceItem__Alternatives_1_1 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2565:1: ( ( rule__SentenceItem__Alternatives_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2580:1: ( ( ( rule__SentenceItem__Alternatives_1_1 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2581:1: ( ( rule__SentenceItem__Alternatives_1_1 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2565:1: ( ( rule__SentenceItem__Alternatives_1_1 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2566:1: ( rule__SentenceItem__Alternatives_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2581:1: ( ( rule__SentenceItem__Alternatives_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2582:1: ( rule__SentenceItem__Alternatives_1_1 )?
             {
              before(grammarAccess.getSentenceItemAccess().getAlternatives_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2567:1: ( rule__SentenceItem__Alternatives_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2583:1: ( rule__SentenceItem__Alternatives_1_1 )?
             int alt30=2;
             int LA30_0 = input.LA(1);
 
@@ -7618,9 +7663,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt30) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2567:2: rule__SentenceItem__Alternatives_1_1
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2583:2: rule__SentenceItem__Alternatives_1_1
                     {
-                    pushFollow(FOLLOW_rule__SentenceItem__Alternatives_1_1_in_rule__SentenceItem__Group_1__1__Impl5473);
+                    pushFollow(FOLLOW_rule__SentenceItem__Alternatives_1_1_in_rule__SentenceItem__Group_1__1__Impl5513);
                     rule__SentenceItem__Alternatives_1_1();
 
                     state._fsp--;
@@ -7654,21 +7699,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_2__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2581:1: rule__SentenceItem__Group_2__0 : rule__SentenceItem__Group_2__0__Impl rule__SentenceItem__Group_2__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2597:1: rule__SentenceItem__Group_2__0 : rule__SentenceItem__Group_2__0__Impl rule__SentenceItem__Group_2__1 ;
     public final void rule__SentenceItem__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2585:1: ( rule__SentenceItem__Group_2__0__Impl rule__SentenceItem__Group_2__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2586:2: rule__SentenceItem__Group_2__0__Impl rule__SentenceItem__Group_2__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2601:1: ( rule__SentenceItem__Group_2__0__Impl rule__SentenceItem__Group_2__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2602:2: rule__SentenceItem__Group_2__0__Impl rule__SentenceItem__Group_2__1
             {
-            pushFollow(FOLLOW_rule__SentenceItem__Group_2__0__Impl_in_rule__SentenceItem__Group_2__05508);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_2__0__Impl_in_rule__SentenceItem__Group_2__05548);
             rule__SentenceItem__Group_2__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__SentenceItem__Group_2__1_in_rule__SentenceItem__Group_2__05511);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_2__1_in_rule__SentenceItem__Group_2__05551);
             rule__SentenceItem__Group_2__1();
 
             state._fsp--;
@@ -7692,20 +7737,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_2__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2593:1: rule__SentenceItem__Group_2__0__Impl : ( ruleAmbivalence ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2609:1: rule__SentenceItem__Group_2__0__Impl : ( ruleAmbivalence ) ;
     public final void rule__SentenceItem__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2597:1: ( ( ruleAmbivalence ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2598:1: ( ruleAmbivalence )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2613:1: ( ( ruleAmbivalence ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2614:1: ( ruleAmbivalence )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2598:1: ( ruleAmbivalence )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2599:1: ruleAmbivalence
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2614:1: ( ruleAmbivalence )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2615:1: ruleAmbivalence
             {
              before(grammarAccess.getSentenceItemAccess().getAmbivalenceParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleAmbivalence_in_rule__SentenceItem__Group_2__0__Impl5538);
+            pushFollow(FOLLOW_ruleAmbivalence_in_rule__SentenceItem__Group_2__0__Impl5578);
             ruleAmbivalence();
 
             state._fsp--;
@@ -7733,16 +7778,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_2__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2610:1: rule__SentenceItem__Group_2__1 : rule__SentenceItem__Group_2__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2626:1: rule__SentenceItem__Group_2__1 : rule__SentenceItem__Group_2__1__Impl ;
     public final void rule__SentenceItem__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2614:1: ( rule__SentenceItem__Group_2__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2615:2: rule__SentenceItem__Group_2__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2630:1: ( rule__SentenceItem__Group_2__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2631:2: rule__SentenceItem__Group_2__1__Impl
             {
-            pushFollow(FOLLOW_rule__SentenceItem__Group_2__1__Impl_in_rule__SentenceItem__Group_2__15567);
+            pushFollow(FOLLOW_rule__SentenceItem__Group_2__1__Impl_in_rule__SentenceItem__Group_2__15607);
             rule__SentenceItem__Group_2__1__Impl();
 
             state._fsp--;
@@ -7766,20 +7811,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__SentenceItem__Group_2__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2621:1: rule__SentenceItem__Group_2__1__Impl : ( ( rule__SentenceItem__Alternatives_2_1 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2637:1: rule__SentenceItem__Group_2__1__Impl : ( ( rule__SentenceItem__Alternatives_2_1 )? ) ;
     public final void rule__SentenceItem__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2625:1: ( ( ( rule__SentenceItem__Alternatives_2_1 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2626:1: ( ( rule__SentenceItem__Alternatives_2_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2641:1: ( ( ( rule__SentenceItem__Alternatives_2_1 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2642:1: ( ( rule__SentenceItem__Alternatives_2_1 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2626:1: ( ( rule__SentenceItem__Alternatives_2_1 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2627:1: ( rule__SentenceItem__Alternatives_2_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2642:1: ( ( rule__SentenceItem__Alternatives_2_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2643:1: ( rule__SentenceItem__Alternatives_2_1 )?
             {
              before(grammarAccess.getSentenceItemAccess().getAlternatives_2_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2628:1: ( rule__SentenceItem__Alternatives_2_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2644:1: ( rule__SentenceItem__Alternatives_2_1 )?
             int alt31=2;
             int LA31_0 = input.LA(1);
 
@@ -7788,9 +7833,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt31) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2628:2: rule__SentenceItem__Alternatives_2_1
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2644:2: rule__SentenceItem__Alternatives_2_1
                     {
-                    pushFollow(FOLLOW_rule__SentenceItem__Alternatives_2_1_in_rule__SentenceItem__Group_2__1__Impl5594);
+                    pushFollow(FOLLOW_rule__SentenceItem__Alternatives_2_1_in_rule__SentenceItem__Group_2__1__Impl5634);
                     rule__SentenceItem__Alternatives_2_1();
 
                     state._fsp--;
@@ -7824,21 +7869,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2642:1: rule__Ambivalence__Group__0 : rule__Ambivalence__Group__0__Impl rule__Ambivalence__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2658:1: rule__Ambivalence__Group__0 : rule__Ambivalence__Group__0__Impl rule__Ambivalence__Group__1 ;
     public final void rule__Ambivalence__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2646:1: ( rule__Ambivalence__Group__0__Impl rule__Ambivalence__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2647:2: rule__Ambivalence__Group__0__Impl rule__Ambivalence__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2662:1: ( rule__Ambivalence__Group__0__Impl rule__Ambivalence__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2663:2: rule__Ambivalence__Group__0__Impl rule__Ambivalence__Group__1
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group__0__Impl_in_rule__Ambivalence__Group__05629);
+            pushFollow(FOLLOW_rule__Ambivalence__Group__0__Impl_in_rule__Ambivalence__Group__05669);
             rule__Ambivalence__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Ambivalence__Group__1_in_rule__Ambivalence__Group__05632);
+            pushFollow(FOLLOW_rule__Ambivalence__Group__1_in_rule__Ambivalence__Group__05672);
             rule__Ambivalence__Group__1();
 
             state._fsp--;
@@ -7862,20 +7907,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2654:1: rule__Ambivalence__Group__0__Impl : ( '%' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2670:1: rule__Ambivalence__Group__0__Impl : ( '%' ) ;
     public final void rule__Ambivalence__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2658:1: ( ( '%' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2659:1: ( '%' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2674:1: ( ( '%' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2675:1: ( '%' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2659:1: ( '%' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2660:1: '%'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2675:1: ( '%' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2676:1: '%'
             {
              before(grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_0()); 
-            match(input,16,FOLLOW_16_in_rule__Ambivalence__Group__0__Impl5660); 
+            match(input,17,FOLLOW_17_in_rule__Ambivalence__Group__0__Impl5700); 
              after(grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_0()); 
 
             }
@@ -7899,21 +7944,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2673:1: rule__Ambivalence__Group__1 : rule__Ambivalence__Group__1__Impl rule__Ambivalence__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2689:1: rule__Ambivalence__Group__1 : rule__Ambivalence__Group__1__Impl rule__Ambivalence__Group__2 ;
     public final void rule__Ambivalence__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2677:1: ( rule__Ambivalence__Group__1__Impl rule__Ambivalence__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2678:2: rule__Ambivalence__Group__1__Impl rule__Ambivalence__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2693:1: ( rule__Ambivalence__Group__1__Impl rule__Ambivalence__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2694:2: rule__Ambivalence__Group__1__Impl rule__Ambivalence__Group__2
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group__1__Impl_in_rule__Ambivalence__Group__15691);
+            pushFollow(FOLLOW_rule__Ambivalence__Group__1__Impl_in_rule__Ambivalence__Group__15731);
             rule__Ambivalence__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Ambivalence__Group__2_in_rule__Ambivalence__Group__15694);
+            pushFollow(FOLLOW_rule__Ambivalence__Group__2_in_rule__Ambivalence__Group__15734);
             rule__Ambivalence__Group__2();
 
             state._fsp--;
@@ -7937,23 +7982,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2685:1: rule__Ambivalence__Group__1__Impl : ( ( rule__Ambivalence__Group_1__0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2701:1: rule__Ambivalence__Group__1__Impl : ( ( rule__Ambivalence__Group_1__0 ) ) ;
     public final void rule__Ambivalence__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2689:1: ( ( ( rule__Ambivalence__Group_1__0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2690:1: ( ( rule__Ambivalence__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2705:1: ( ( ( rule__Ambivalence__Group_1__0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2706:1: ( ( rule__Ambivalence__Group_1__0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2690:1: ( ( rule__Ambivalence__Group_1__0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2691:1: ( rule__Ambivalence__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2706:1: ( ( rule__Ambivalence__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2707:1: ( rule__Ambivalence__Group_1__0 )
             {
              before(grammarAccess.getAmbivalenceAccess().getGroup_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2692:1: ( rule__Ambivalence__Group_1__0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2692:2: rule__Ambivalence__Group_1__0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2708:1: ( rule__Ambivalence__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2708:2: rule__Ambivalence__Group_1__0
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1__0_in_rule__Ambivalence__Group__1__Impl5721);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1__0_in_rule__Ambivalence__Group__1__Impl5761);
             rule__Ambivalence__Group_1__0();
 
             state._fsp--;
@@ -7984,16 +8029,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2702:1: rule__Ambivalence__Group__2 : rule__Ambivalence__Group__2__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2718:1: rule__Ambivalence__Group__2 : rule__Ambivalence__Group__2__Impl ;
     public final void rule__Ambivalence__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2706:1: ( rule__Ambivalence__Group__2__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2707:2: rule__Ambivalence__Group__2__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2722:1: ( rule__Ambivalence__Group__2__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2723:2: rule__Ambivalence__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group__2__Impl_in_rule__Ambivalence__Group__25751);
+            pushFollow(FOLLOW_rule__Ambivalence__Group__2__Impl_in_rule__Ambivalence__Group__25791);
             rule__Ambivalence__Group__2__Impl();
 
             state._fsp--;
@@ -8017,20 +8062,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2713:1: rule__Ambivalence__Group__2__Impl : ( '%' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2729:1: rule__Ambivalence__Group__2__Impl : ( '%' ) ;
     public final void rule__Ambivalence__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2717:1: ( ( '%' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2718:1: ( '%' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2733:1: ( ( '%' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2734:1: ( '%' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2718:1: ( '%' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2719:1: '%'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2734:1: ( '%' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2735:1: '%'
             {
              before(grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_2()); 
-            match(input,16,FOLLOW_16_in_rule__Ambivalence__Group__2__Impl5779); 
+            match(input,17,FOLLOW_17_in_rule__Ambivalence__Group__2__Impl5819); 
              after(grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_2()); 
 
             }
@@ -8054,21 +8099,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2738:1: rule__Ambivalence__Group_1__0 : rule__Ambivalence__Group_1__0__Impl rule__Ambivalence__Group_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2754:1: rule__Ambivalence__Group_1__0 : rule__Ambivalence__Group_1__0__Impl rule__Ambivalence__Group_1__1 ;
     public final void rule__Ambivalence__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2742:1: ( rule__Ambivalence__Group_1__0__Impl rule__Ambivalence__Group_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2743:2: rule__Ambivalence__Group_1__0__Impl rule__Ambivalence__Group_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2758:1: ( rule__Ambivalence__Group_1__0__Impl rule__Ambivalence__Group_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2759:2: rule__Ambivalence__Group_1__0__Impl rule__Ambivalence__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1__0__Impl_in_rule__Ambivalence__Group_1__05816);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1__0__Impl_in_rule__Ambivalence__Group_1__05856);
             rule__Ambivalence__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1__1_in_rule__Ambivalence__Group_1__05819);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1__1_in_rule__Ambivalence__Group_1__05859);
             rule__Ambivalence__Group_1__1();
 
             state._fsp--;
@@ -8092,23 +8137,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2750:1: rule__Ambivalence__Group_1__0__Impl : ( ( rule__Ambivalence__CasesAssignment_1_0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2766:1: rule__Ambivalence__Group_1__0__Impl : ( ( rule__Ambivalence__CasesAssignment_1_0 ) ) ;
     public final void rule__Ambivalence__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2754:1: ( ( ( rule__Ambivalence__CasesAssignment_1_0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2755:1: ( ( rule__Ambivalence__CasesAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2770:1: ( ( ( rule__Ambivalence__CasesAssignment_1_0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2771:1: ( ( rule__Ambivalence__CasesAssignment_1_0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2755:1: ( ( rule__Ambivalence__CasesAssignment_1_0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2756:1: ( rule__Ambivalence__CasesAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2771:1: ( ( rule__Ambivalence__CasesAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2772:1: ( rule__Ambivalence__CasesAssignment_1_0 )
             {
              before(grammarAccess.getAmbivalenceAccess().getCasesAssignment_1_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2757:1: ( rule__Ambivalence__CasesAssignment_1_0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2757:2: rule__Ambivalence__CasesAssignment_1_0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2773:1: ( rule__Ambivalence__CasesAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2773:2: rule__Ambivalence__CasesAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__Ambivalence__CasesAssignment_1_0_in_rule__Ambivalence__Group_1__0__Impl5846);
+            pushFollow(FOLLOW_rule__Ambivalence__CasesAssignment_1_0_in_rule__Ambivalence__Group_1__0__Impl5886);
             rule__Ambivalence__CasesAssignment_1_0();
 
             state._fsp--;
@@ -8139,16 +8184,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2767:1: rule__Ambivalence__Group_1__1 : rule__Ambivalence__Group_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2783:1: rule__Ambivalence__Group_1__1 : rule__Ambivalence__Group_1__1__Impl ;
     public final void rule__Ambivalence__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2771:1: ( rule__Ambivalence__Group_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2772:2: rule__Ambivalence__Group_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2787:1: ( rule__Ambivalence__Group_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2788:2: rule__Ambivalence__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1__1__Impl_in_rule__Ambivalence__Group_1__15876);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1__1__Impl_in_rule__Ambivalence__Group_1__15916);
             rule__Ambivalence__Group_1__1__Impl();
 
             state._fsp--;
@@ -8172,26 +8217,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2778:1: rule__Ambivalence__Group_1__1__Impl : ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2794:1: rule__Ambivalence__Group_1__1__Impl : ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) ) ;
     public final void rule__Ambivalence__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2782:1: ( ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2783:1: ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2798:1: ( ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2799:1: ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2783:1: ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2784:1: ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2799:1: ( ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2800:1: ( ( rule__Ambivalence__Group_1_1__0 ) ) ( ( rule__Ambivalence__Group_1_1__0 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2784:1: ( ( rule__Ambivalence__Group_1_1__0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2785:1: ( rule__Ambivalence__Group_1_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2800:1: ( ( rule__Ambivalence__Group_1_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2801:1: ( rule__Ambivalence__Group_1_1__0 )
             {
              before(grammarAccess.getAmbivalenceAccess().getGroup_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2786:1: ( rule__Ambivalence__Group_1_1__0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2786:2: rule__Ambivalence__Group_1_1__0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2802:1: ( rule__Ambivalence__Group_1_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2802:2: rule__Ambivalence__Group_1_1__0
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5905);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5945);
             rule__Ambivalence__Group_1_1__0();
 
             state._fsp--;
@@ -8203,26 +8248,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2789:1: ( ( rule__Ambivalence__Group_1_1__0 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2790:1: ( rule__Ambivalence__Group_1_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2805:1: ( ( rule__Ambivalence__Group_1_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2806:1: ( rule__Ambivalence__Group_1_1__0 )*
             {
              before(grammarAccess.getAmbivalenceAccess().getGroup_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2791:1: ( rule__Ambivalence__Group_1_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2807:1: ( rule__Ambivalence__Group_1_1__0 )*
             loop32:
             do {
                 int alt32=2;
                 int LA32_0 = input.LA(1);
 
-                if ( (LA32_0==17) ) {
+                if ( (LA32_0==18) ) {
                     alt32=1;
                 }
 
 
                 switch (alt32) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2791:2: rule__Ambivalence__Group_1_1__0
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2807:2: rule__Ambivalence__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5917);
+            	    pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5957);
             	    rule__Ambivalence__Group_1_1__0();
 
             	    state._fsp--;
@@ -8262,21 +8307,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2806:1: rule__Ambivalence__Group_1_1__0 : rule__Ambivalence__Group_1_1__0__Impl rule__Ambivalence__Group_1_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2822:1: rule__Ambivalence__Group_1_1__0 : rule__Ambivalence__Group_1_1__0__Impl rule__Ambivalence__Group_1_1__1 ;
     public final void rule__Ambivalence__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2810:1: ( rule__Ambivalence__Group_1_1__0__Impl rule__Ambivalence__Group_1_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2811:2: rule__Ambivalence__Group_1_1__0__Impl rule__Ambivalence__Group_1_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2826:1: ( rule__Ambivalence__Group_1_1__0__Impl rule__Ambivalence__Group_1_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2827:2: rule__Ambivalence__Group_1_1__0__Impl rule__Ambivalence__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__0__Impl_in_rule__Ambivalence__Group_1_1__05954);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__0__Impl_in_rule__Ambivalence__Group_1_1__05994);
             rule__Ambivalence__Group_1_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__1_in_rule__Ambivalence__Group_1_1__05957);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__1_in_rule__Ambivalence__Group_1_1__05997);
             rule__Ambivalence__Group_1_1__1();
 
             state._fsp--;
@@ -8300,20 +8345,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2818:1: rule__Ambivalence__Group_1_1__0__Impl : ( '; ' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2834:1: rule__Ambivalence__Group_1_1__0__Impl : ( '; ' ) ;
     public final void rule__Ambivalence__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2822:1: ( ( '; ' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2823:1: ( '; ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2838:1: ( ( '; ' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2839:1: ( '; ' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2823:1: ( '; ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2824:1: '; '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2839:1: ( '; ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2840:1: '; '
             {
              before(grammarAccess.getAmbivalenceAccess().getSemicolonSpaceKeyword_1_1_0()); 
-            match(input,17,FOLLOW_17_in_rule__Ambivalence__Group_1_1__0__Impl5985); 
+            match(input,18,FOLLOW_18_in_rule__Ambivalence__Group_1_1__0__Impl6025); 
              after(grammarAccess.getAmbivalenceAccess().getSemicolonSpaceKeyword_1_1_0()); 
 
             }
@@ -8337,21 +8382,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2837:1: rule__Ambivalence__Group_1_1__1 : rule__Ambivalence__Group_1_1__1__Impl rule__Ambivalence__Group_1_1__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2853:1: rule__Ambivalence__Group_1_1__1 : rule__Ambivalence__Group_1_1__1__Impl rule__Ambivalence__Group_1_1__2 ;
     public final void rule__Ambivalence__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2841:1: ( rule__Ambivalence__Group_1_1__1__Impl rule__Ambivalence__Group_1_1__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2842:2: rule__Ambivalence__Group_1_1__1__Impl rule__Ambivalence__Group_1_1__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2857:1: ( rule__Ambivalence__Group_1_1__1__Impl rule__Ambivalence__Group_1_1__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2858:2: rule__Ambivalence__Group_1_1__1__Impl rule__Ambivalence__Group_1_1__2
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__1__Impl_in_rule__Ambivalence__Group_1_1__16016);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__1__Impl_in_rule__Ambivalence__Group_1_1__16056);
             rule__Ambivalence__Group_1_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__2_in_rule__Ambivalence__Group_1_1__16019);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__2_in_rule__Ambivalence__Group_1_1__16059);
             rule__Ambivalence__Group_1_1__2();
 
             state._fsp--;
@@ -8375,20 +8420,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2849:1: rule__Ambivalence__Group_1_1__1__Impl : ( ( rule__Ambivalence__Alternatives_1_1_1 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2865:1: rule__Ambivalence__Group_1_1__1__Impl : ( ( rule__Ambivalence__Alternatives_1_1_1 )? ) ;
     public final void rule__Ambivalence__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2853:1: ( ( ( rule__Ambivalence__Alternatives_1_1_1 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2854:1: ( ( rule__Ambivalence__Alternatives_1_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2869:1: ( ( ( rule__Ambivalence__Alternatives_1_1_1 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2870:1: ( ( rule__Ambivalence__Alternatives_1_1_1 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2854:1: ( ( rule__Ambivalence__Alternatives_1_1_1 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2855:1: ( rule__Ambivalence__Alternatives_1_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2870:1: ( ( rule__Ambivalence__Alternatives_1_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2871:1: ( rule__Ambivalence__Alternatives_1_1_1 )?
             {
              before(grammarAccess.getAmbivalenceAccess().getAlternatives_1_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2856:1: ( rule__Ambivalence__Alternatives_1_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2872:1: ( rule__Ambivalence__Alternatives_1_1_1 )?
             int alt33=2;
             int LA33_0 = input.LA(1);
 
@@ -8397,9 +8442,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt33) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2856:2: rule__Ambivalence__Alternatives_1_1_1
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2872:2: rule__Ambivalence__Alternatives_1_1_1
                     {
-                    pushFollow(FOLLOW_rule__Ambivalence__Alternatives_1_1_1_in_rule__Ambivalence__Group_1_1__1__Impl6046);
+                    pushFollow(FOLLOW_rule__Ambivalence__Alternatives_1_1_1_in_rule__Ambivalence__Group_1_1__1__Impl6086);
                     rule__Ambivalence__Alternatives_1_1_1();
 
                     state._fsp--;
@@ -8433,16 +8478,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1_1__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2866:1: rule__Ambivalence__Group_1_1__2 : rule__Ambivalence__Group_1_1__2__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2882:1: rule__Ambivalence__Group_1_1__2 : rule__Ambivalence__Group_1_1__2__Impl ;
     public final void rule__Ambivalence__Group_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2870:1: ( rule__Ambivalence__Group_1_1__2__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2871:2: rule__Ambivalence__Group_1_1__2__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2886:1: ( rule__Ambivalence__Group_1_1__2__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2887:2: rule__Ambivalence__Group_1_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__2__Impl_in_rule__Ambivalence__Group_1_1__26077);
+            pushFollow(FOLLOW_rule__Ambivalence__Group_1_1__2__Impl_in_rule__Ambivalence__Group_1_1__26117);
             rule__Ambivalence__Group_1_1__2__Impl();
 
             state._fsp--;
@@ -8466,23 +8511,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__Group_1_1__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2877:1: rule__Ambivalence__Group_1_1__2__Impl : ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2893:1: rule__Ambivalence__Group_1_1__2__Impl : ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) ) ;
     public final void rule__Ambivalence__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2881:1: ( ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2882:1: ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2897:1: ( ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2898:1: ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2882:1: ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2883:1: ( rule__Ambivalence__CasesAssignment_1_1_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2898:1: ( ( rule__Ambivalence__CasesAssignment_1_1_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2899:1: ( rule__Ambivalence__CasesAssignment_1_1_2 )
             {
              before(grammarAccess.getAmbivalenceAccess().getCasesAssignment_1_1_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2884:1: ( rule__Ambivalence__CasesAssignment_1_1_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2884:2: rule__Ambivalence__CasesAssignment_1_1_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2900:1: ( rule__Ambivalence__CasesAssignment_1_1_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2900:2: rule__Ambivalence__CasesAssignment_1_1_2
             {
-            pushFollow(FOLLOW_rule__Ambivalence__CasesAssignment_1_1_2_in_rule__Ambivalence__Group_1_1__2__Impl6104);
+            pushFollow(FOLLOW_rule__Ambivalence__CasesAssignment_1_1_2_in_rule__Ambivalence__Group_1_1__2__Impl6144);
             rule__Ambivalence__CasesAssignment_1_1_2();
 
             state._fsp--;
@@ -8513,21 +8558,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2900:1: rule__Case__Group__0 : rule__Case__Group__0__Impl rule__Case__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2916:1: rule__Case__Group__0 : rule__Case__Group__0__Impl rule__Case__Group__1 ;
     public final void rule__Case__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2904:1: ( rule__Case__Group__0__Impl rule__Case__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2905:2: rule__Case__Group__0__Impl rule__Case__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2920:1: ( rule__Case__Group__0__Impl rule__Case__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2921:2: rule__Case__Group__0__Impl rule__Case__Group__1
             {
-            pushFollow(FOLLOW_rule__Case__Group__0__Impl_in_rule__Case__Group__06140);
+            pushFollow(FOLLOW_rule__Case__Group__0__Impl_in_rule__Case__Group__06180);
             rule__Case__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group__1_in_rule__Case__Group__06143);
+            pushFollow(FOLLOW_rule__Case__Group__1_in_rule__Case__Group__06183);
             rule__Case__Group__1();
 
             state._fsp--;
@@ -8551,20 +8596,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2912:1: rule__Case__Group__0__Impl : ( 'case ' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2928:1: rule__Case__Group__0__Impl : ( 'case ' ) ;
     public final void rule__Case__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2916:1: ( ( 'case ' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2917:1: ( 'case ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2932:1: ( ( 'case ' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2933:1: ( 'case ' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2917:1: ( 'case ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2918:1: 'case '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2933:1: ( 'case ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2934:1: 'case '
             {
              before(grammarAccess.getCaseAccess().getCaseKeyword_0()); 
-            match(input,18,FOLLOW_18_in_rule__Case__Group__0__Impl6171); 
+            match(input,19,FOLLOW_19_in_rule__Case__Group__0__Impl6211); 
              after(grammarAccess.getCaseAccess().getCaseKeyword_0()); 
 
             }
@@ -8588,21 +8633,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2931:1: rule__Case__Group__1 : rule__Case__Group__1__Impl rule__Case__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2947:1: rule__Case__Group__1 : rule__Case__Group__1__Impl rule__Case__Group__2 ;
     public final void rule__Case__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2935:1: ( rule__Case__Group__1__Impl rule__Case__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2936:2: rule__Case__Group__1__Impl rule__Case__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2951:1: ( rule__Case__Group__1__Impl rule__Case__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2952:2: rule__Case__Group__1__Impl rule__Case__Group__2
             {
-            pushFollow(FOLLOW_rule__Case__Group__1__Impl_in_rule__Case__Group__16202);
+            pushFollow(FOLLOW_rule__Case__Group__1__Impl_in_rule__Case__Group__16242);
             rule__Case__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group__2_in_rule__Case__Group__16205);
+            pushFollow(FOLLOW_rule__Case__Group__2_in_rule__Case__Group__16245);
             rule__Case__Group__2();
 
             state._fsp--;
@@ -8626,23 +8671,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2943:1: rule__Case__Group__1__Impl : ( ( rule__Case__NameAssignment_1 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2959:1: rule__Case__Group__1__Impl : ( ( rule__Case__NameAssignment_1 ) ) ;
     public final void rule__Case__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2947:1: ( ( ( rule__Case__NameAssignment_1 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2948:1: ( ( rule__Case__NameAssignment_1 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2963:1: ( ( ( rule__Case__NameAssignment_1 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2964:1: ( ( rule__Case__NameAssignment_1 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2948:1: ( ( rule__Case__NameAssignment_1 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2949:1: ( rule__Case__NameAssignment_1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2964:1: ( ( rule__Case__NameAssignment_1 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2965:1: ( rule__Case__NameAssignment_1 )
             {
              before(grammarAccess.getCaseAccess().getNameAssignment_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2950:1: ( rule__Case__NameAssignment_1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2950:2: rule__Case__NameAssignment_1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2966:1: ( rule__Case__NameAssignment_1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2966:2: rule__Case__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Case__NameAssignment_1_in_rule__Case__Group__1__Impl6232);
+            pushFollow(FOLLOW_rule__Case__NameAssignment_1_in_rule__Case__Group__1__Impl6272);
             rule__Case__NameAssignment_1();
 
             state._fsp--;
@@ -8673,21 +8718,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2960:1: rule__Case__Group__2 : rule__Case__Group__2__Impl rule__Case__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2976:1: rule__Case__Group__2 : rule__Case__Group__2__Impl rule__Case__Group__3 ;
     public final void rule__Case__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2964:1: ( rule__Case__Group__2__Impl rule__Case__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2965:2: rule__Case__Group__2__Impl rule__Case__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2980:1: ( rule__Case__Group__2__Impl rule__Case__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2981:2: rule__Case__Group__2__Impl rule__Case__Group__3
             {
-            pushFollow(FOLLOW_rule__Case__Group__2__Impl_in_rule__Case__Group__26262);
+            pushFollow(FOLLOW_rule__Case__Group__2__Impl_in_rule__Case__Group__26302);
             rule__Case__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group__3_in_rule__Case__Group__26265);
+            pushFollow(FOLLOW_rule__Case__Group__3_in_rule__Case__Group__26305);
             rule__Case__Group__3();
 
             state._fsp--;
@@ -8711,20 +8756,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2972:1: rule__Case__Group__2__Impl : ( ': ' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2988:1: rule__Case__Group__2__Impl : ( ': ' ) ;
     public final void rule__Case__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2976:1: ( ( ': ' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2977:1: ( ': ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2992:1: ( ( ': ' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2993:1: ( ': ' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2977:1: ( ': ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2978:1: ': '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2993:1: ( ': ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2994:1: ': '
             {
              before(grammarAccess.getCaseAccess().getColonSpaceKeyword_2()); 
-            match(input,19,FOLLOW_19_in_rule__Case__Group__2__Impl6293); 
+            match(input,20,FOLLOW_20_in_rule__Case__Group__2__Impl6333); 
              after(grammarAccess.getCaseAccess().getColonSpaceKeyword_2()); 
 
             }
@@ -8748,21 +8793,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2991:1: rule__Case__Group__3 : rule__Case__Group__3__Impl rule__Case__Group__4 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3007:1: rule__Case__Group__3 : rule__Case__Group__3__Impl rule__Case__Group__4 ;
     public final void rule__Case__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2995:1: ( rule__Case__Group__3__Impl rule__Case__Group__4 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:2996:2: rule__Case__Group__3__Impl rule__Case__Group__4
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3011:1: ( rule__Case__Group__3__Impl rule__Case__Group__4 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3012:2: rule__Case__Group__3__Impl rule__Case__Group__4
             {
-            pushFollow(FOLLOW_rule__Case__Group__3__Impl_in_rule__Case__Group__36324);
+            pushFollow(FOLLOW_rule__Case__Group__3__Impl_in_rule__Case__Group__36364);
             rule__Case__Group__3__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group__4_in_rule__Case__Group__36327);
+            pushFollow(FOLLOW_rule__Case__Group__4_in_rule__Case__Group__36367);
             rule__Case__Group__4();
 
             state._fsp--;
@@ -8786,20 +8831,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3003:1: rule__Case__Group__3__Impl : ( ( rule__Case__Alternatives_3 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3019:1: rule__Case__Group__3__Impl : ( ( rule__Case__Alternatives_3 )? ) ;
     public final void rule__Case__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3007:1: ( ( ( rule__Case__Alternatives_3 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3008:1: ( ( rule__Case__Alternatives_3 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3023:1: ( ( ( rule__Case__Alternatives_3 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3024:1: ( ( rule__Case__Alternatives_3 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3008:1: ( ( rule__Case__Alternatives_3 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3009:1: ( rule__Case__Alternatives_3 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3024:1: ( ( rule__Case__Alternatives_3 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3025:1: ( rule__Case__Alternatives_3 )?
             {
              before(grammarAccess.getCaseAccess().getAlternatives_3()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3010:1: ( rule__Case__Alternatives_3 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3026:1: ( rule__Case__Alternatives_3 )?
             int alt34=2;
             int LA34_0 = input.LA(1);
 
@@ -8808,9 +8853,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt34) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3010:2: rule__Case__Alternatives_3
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3026:2: rule__Case__Alternatives_3
                     {
-                    pushFollow(FOLLOW_rule__Case__Alternatives_3_in_rule__Case__Group__3__Impl6354);
+                    pushFollow(FOLLOW_rule__Case__Alternatives_3_in_rule__Case__Group__3__Impl6394);
                     rule__Case__Alternatives_3();
 
                     state._fsp--;
@@ -8844,16 +8889,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__4"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3020:1: rule__Case__Group__4 : rule__Case__Group__4__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3036:1: rule__Case__Group__4 : rule__Case__Group__4__Impl ;
     public final void rule__Case__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3024:1: ( rule__Case__Group__4__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3025:2: rule__Case__Group__4__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3040:1: ( rule__Case__Group__4__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3041:2: rule__Case__Group__4__Impl
             {
-            pushFollow(FOLLOW_rule__Case__Group__4__Impl_in_rule__Case__Group__46385);
+            pushFollow(FOLLOW_rule__Case__Group__4__Impl_in_rule__Case__Group__46425);
             rule__Case__Group__4__Impl();
 
             state._fsp--;
@@ -8877,23 +8922,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group__4__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3031:1: rule__Case__Group__4__Impl : ( ( rule__Case__Group_4__0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3047:1: rule__Case__Group__4__Impl : ( ( rule__Case__Group_4__0 ) ) ;
     public final void rule__Case__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3035:1: ( ( ( rule__Case__Group_4__0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3036:1: ( ( rule__Case__Group_4__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3051:1: ( ( ( rule__Case__Group_4__0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3052:1: ( ( rule__Case__Group_4__0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3036:1: ( ( rule__Case__Group_4__0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3037:1: ( rule__Case__Group_4__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3052:1: ( ( rule__Case__Group_4__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3053:1: ( rule__Case__Group_4__0 )
             {
              before(grammarAccess.getCaseAccess().getGroup_4()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3038:1: ( rule__Case__Group_4__0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3038:2: rule__Case__Group_4__0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3054:1: ( rule__Case__Group_4__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3054:2: rule__Case__Group_4__0
             {
-            pushFollow(FOLLOW_rule__Case__Group_4__0_in_rule__Case__Group__4__Impl6412);
+            pushFollow(FOLLOW_rule__Case__Group_4__0_in_rule__Case__Group__4__Impl6452);
             rule__Case__Group_4__0();
 
             state._fsp--;
@@ -8924,21 +8969,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3058:1: rule__Case__Group_4__0 : rule__Case__Group_4__0__Impl rule__Case__Group_4__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3074:1: rule__Case__Group_4__0 : rule__Case__Group_4__0__Impl rule__Case__Group_4__1 ;
     public final void rule__Case__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3062:1: ( rule__Case__Group_4__0__Impl rule__Case__Group_4__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3063:2: rule__Case__Group_4__0__Impl rule__Case__Group_4__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3078:1: ( rule__Case__Group_4__0__Impl rule__Case__Group_4__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3079:2: rule__Case__Group_4__0__Impl rule__Case__Group_4__1
             {
-            pushFollow(FOLLOW_rule__Case__Group_4__0__Impl_in_rule__Case__Group_4__06452);
+            pushFollow(FOLLOW_rule__Case__Group_4__0__Impl_in_rule__Case__Group_4__06492);
             rule__Case__Group_4__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group_4__1_in_rule__Case__Group_4__06455);
+            pushFollow(FOLLOW_rule__Case__Group_4__1_in_rule__Case__Group_4__06495);
             rule__Case__Group_4__1();
 
             state._fsp--;
@@ -8962,23 +9007,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3070:1: rule__Case__Group_4__0__Impl : ( ( rule__Case__ItemsAssignment_4_0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3086:1: rule__Case__Group_4__0__Impl : ( ( rule__Case__ItemsAssignment_4_0 ) ) ;
     public final void rule__Case__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3074:1: ( ( ( rule__Case__ItemsAssignment_4_0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3075:1: ( ( rule__Case__ItemsAssignment_4_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3090:1: ( ( ( rule__Case__ItemsAssignment_4_0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3091:1: ( ( rule__Case__ItemsAssignment_4_0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3075:1: ( ( rule__Case__ItemsAssignment_4_0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3076:1: ( rule__Case__ItemsAssignment_4_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3091:1: ( ( rule__Case__ItemsAssignment_4_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3092:1: ( rule__Case__ItemsAssignment_4_0 )
             {
              before(grammarAccess.getCaseAccess().getItemsAssignment_4_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3077:1: ( rule__Case__ItemsAssignment_4_0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3077:2: rule__Case__ItemsAssignment_4_0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3093:1: ( rule__Case__ItemsAssignment_4_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3093:2: rule__Case__ItemsAssignment_4_0
             {
-            pushFollow(FOLLOW_rule__Case__ItemsAssignment_4_0_in_rule__Case__Group_4__0__Impl6482);
+            pushFollow(FOLLOW_rule__Case__ItemsAssignment_4_0_in_rule__Case__Group_4__0__Impl6522);
             rule__Case__ItemsAssignment_4_0();
 
             state._fsp--;
@@ -9009,16 +9054,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3087:1: rule__Case__Group_4__1 : rule__Case__Group_4__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3103:1: rule__Case__Group_4__1 : rule__Case__Group_4__1__Impl ;
     public final void rule__Case__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3091:1: ( rule__Case__Group_4__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3092:2: rule__Case__Group_4__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3107:1: ( rule__Case__Group_4__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3108:2: rule__Case__Group_4__1__Impl
             {
-            pushFollow(FOLLOW_rule__Case__Group_4__1__Impl_in_rule__Case__Group_4__16512);
+            pushFollow(FOLLOW_rule__Case__Group_4__1__Impl_in_rule__Case__Group_4__16552);
             rule__Case__Group_4__1__Impl();
 
             state._fsp--;
@@ -9042,20 +9087,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3098:1: rule__Case__Group_4__1__Impl : ( ( rule__Case__Group_4_1__0 )* ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3114:1: rule__Case__Group_4__1__Impl : ( ( rule__Case__Group_4_1__0 )* ) ;
     public final void rule__Case__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3102:1: ( ( ( rule__Case__Group_4_1__0 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3103:1: ( ( rule__Case__Group_4_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3118:1: ( ( ( rule__Case__Group_4_1__0 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3119:1: ( ( rule__Case__Group_4_1__0 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3103:1: ( ( rule__Case__Group_4_1__0 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3104:1: ( rule__Case__Group_4_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3119:1: ( ( rule__Case__Group_4_1__0 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3120:1: ( rule__Case__Group_4_1__0 )*
             {
              before(grammarAccess.getCaseAccess().getGroup_4_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3105:1: ( rule__Case__Group_4_1__0 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3121:1: ( rule__Case__Group_4_1__0 )*
             loop35:
             do {
                 int alt35=2;
@@ -9068,9 +9113,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
                 switch (alt35) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3105:2: rule__Case__Group_4_1__0
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3121:2: rule__Case__Group_4_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Case__Group_4_1__0_in_rule__Case__Group_4__1__Impl6539);
+            	    pushFollow(FOLLOW_rule__Case__Group_4_1__0_in_rule__Case__Group_4__1__Impl6579);
             	    rule__Case__Group_4_1__0();
 
             	    state._fsp--;
@@ -9107,21 +9152,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3119:1: rule__Case__Group_4_1__0 : rule__Case__Group_4_1__0__Impl rule__Case__Group_4_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3135:1: rule__Case__Group_4_1__0 : rule__Case__Group_4_1__0__Impl rule__Case__Group_4_1__1 ;
     public final void rule__Case__Group_4_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3123:1: ( rule__Case__Group_4_1__0__Impl rule__Case__Group_4_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3124:2: rule__Case__Group_4_1__0__Impl rule__Case__Group_4_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3139:1: ( rule__Case__Group_4_1__0__Impl rule__Case__Group_4_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3140:2: rule__Case__Group_4_1__0__Impl rule__Case__Group_4_1__1
             {
-            pushFollow(FOLLOW_rule__Case__Group_4_1__0__Impl_in_rule__Case__Group_4_1__06574);
+            pushFollow(FOLLOW_rule__Case__Group_4_1__0__Impl_in_rule__Case__Group_4_1__06614);
             rule__Case__Group_4_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group_4_1__1_in_rule__Case__Group_4_1__06577);
+            pushFollow(FOLLOW_rule__Case__Group_4_1__1_in_rule__Case__Group_4_1__06617);
             rule__Case__Group_4_1__1();
 
             state._fsp--;
@@ -9145,20 +9190,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3131:1: rule__Case__Group_4_1__0__Impl : ( ' ' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3147:1: rule__Case__Group_4_1__0__Impl : ( ' ' ) ;
     public final void rule__Case__Group_4_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3135:1: ( ( ' ' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3136:1: ( ' ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3151:1: ( ( ' ' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3152:1: ( ' ' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3136:1: ( ' ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3137:1: ' '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3152:1: ( ' ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3153:1: ' '
             {
              before(grammarAccess.getCaseAccess().getSpaceKeyword_4_1_0()); 
-            match(input,12,FOLLOW_12_in_rule__Case__Group_4_1__0__Impl6605); 
+            match(input,12,FOLLOW_12_in_rule__Case__Group_4_1__0__Impl6645); 
              after(grammarAccess.getCaseAccess().getSpaceKeyword_4_1_0()); 
 
             }
@@ -9182,21 +9227,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3150:1: rule__Case__Group_4_1__1 : rule__Case__Group_4_1__1__Impl rule__Case__Group_4_1__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3166:1: rule__Case__Group_4_1__1 : rule__Case__Group_4_1__1__Impl rule__Case__Group_4_1__2 ;
     public final void rule__Case__Group_4_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3154:1: ( rule__Case__Group_4_1__1__Impl rule__Case__Group_4_1__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3155:2: rule__Case__Group_4_1__1__Impl rule__Case__Group_4_1__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3170:1: ( rule__Case__Group_4_1__1__Impl rule__Case__Group_4_1__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3171:2: rule__Case__Group_4_1__1__Impl rule__Case__Group_4_1__2
             {
-            pushFollow(FOLLOW_rule__Case__Group_4_1__1__Impl_in_rule__Case__Group_4_1__16636);
+            pushFollow(FOLLOW_rule__Case__Group_4_1__1__Impl_in_rule__Case__Group_4_1__16676);
             rule__Case__Group_4_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Case__Group_4_1__2_in_rule__Case__Group_4_1__16639);
+            pushFollow(FOLLOW_rule__Case__Group_4_1__2_in_rule__Case__Group_4_1__16679);
             rule__Case__Group_4_1__2();
 
             state._fsp--;
@@ -9220,20 +9265,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3162:1: rule__Case__Group_4_1__1__Impl : ( ( rule__Case__Alternatives_4_1_1 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3178:1: rule__Case__Group_4_1__1__Impl : ( ( rule__Case__Alternatives_4_1_1 )? ) ;
     public final void rule__Case__Group_4_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3166:1: ( ( ( rule__Case__Alternatives_4_1_1 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3167:1: ( ( rule__Case__Alternatives_4_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3182:1: ( ( ( rule__Case__Alternatives_4_1_1 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3183:1: ( ( rule__Case__Alternatives_4_1_1 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3167:1: ( ( rule__Case__Alternatives_4_1_1 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3168:1: ( rule__Case__Alternatives_4_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3183:1: ( ( rule__Case__Alternatives_4_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3184:1: ( rule__Case__Alternatives_4_1_1 )?
             {
              before(grammarAccess.getCaseAccess().getAlternatives_4_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3169:1: ( rule__Case__Alternatives_4_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3185:1: ( rule__Case__Alternatives_4_1_1 )?
             int alt36=2;
             int LA36_0 = input.LA(1);
 
@@ -9242,9 +9287,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt36) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3169:2: rule__Case__Alternatives_4_1_1
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3185:2: rule__Case__Alternatives_4_1_1
                     {
-                    pushFollow(FOLLOW_rule__Case__Alternatives_4_1_1_in_rule__Case__Group_4_1__1__Impl6666);
+                    pushFollow(FOLLOW_rule__Case__Alternatives_4_1_1_in_rule__Case__Group_4_1__1__Impl6706);
                     rule__Case__Alternatives_4_1_1();
 
                     state._fsp--;
@@ -9278,16 +9323,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4_1__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3179:1: rule__Case__Group_4_1__2 : rule__Case__Group_4_1__2__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3195:1: rule__Case__Group_4_1__2 : rule__Case__Group_4_1__2__Impl ;
     public final void rule__Case__Group_4_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3183:1: ( rule__Case__Group_4_1__2__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3184:2: rule__Case__Group_4_1__2__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3199:1: ( rule__Case__Group_4_1__2__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3200:2: rule__Case__Group_4_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Case__Group_4_1__2__Impl_in_rule__Case__Group_4_1__26697);
+            pushFollow(FOLLOW_rule__Case__Group_4_1__2__Impl_in_rule__Case__Group_4_1__26737);
             rule__Case__Group_4_1__2__Impl();
 
             state._fsp--;
@@ -9311,23 +9356,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__Group_4_1__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3190:1: rule__Case__Group_4_1__2__Impl : ( ( rule__Case__ItemsAssignment_4_1_2 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3206:1: rule__Case__Group_4_1__2__Impl : ( ( rule__Case__ItemsAssignment_4_1_2 ) ) ;
     public final void rule__Case__Group_4_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3194:1: ( ( ( rule__Case__ItemsAssignment_4_1_2 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3195:1: ( ( rule__Case__ItemsAssignment_4_1_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3210:1: ( ( ( rule__Case__ItemsAssignment_4_1_2 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3211:1: ( ( rule__Case__ItemsAssignment_4_1_2 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3195:1: ( ( rule__Case__ItemsAssignment_4_1_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3196:1: ( rule__Case__ItemsAssignment_4_1_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3211:1: ( ( rule__Case__ItemsAssignment_4_1_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3212:1: ( rule__Case__ItemsAssignment_4_1_2 )
             {
              before(grammarAccess.getCaseAccess().getItemsAssignment_4_1_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3197:1: ( rule__Case__ItemsAssignment_4_1_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3197:2: rule__Case__ItemsAssignment_4_1_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3213:1: ( rule__Case__ItemsAssignment_4_1_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3213:2: rule__Case__ItemsAssignment_4_1_2
             {
-            pushFollow(FOLLOW_rule__Case__ItemsAssignment_4_1_2_in_rule__Case__Group_4_1__2__Impl6724);
+            pushFollow(FOLLOW_rule__Case__ItemsAssignment_4_1_2_in_rule__Case__Group_4_1__2__Impl6764);
             rule__Case__ItemsAssignment_4_1_2();
 
             state._fsp--;
@@ -9358,21 +9403,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersFrontierMarker__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3213:1: rule__VersFrontierMarker__Group__0 : rule__VersFrontierMarker__Group__0__Impl rule__VersFrontierMarker__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3229:1: rule__VersFrontierMarker__Group__0 : rule__VersFrontierMarker__Group__0__Impl rule__VersFrontierMarker__Group__1 ;
     public final void rule__VersFrontierMarker__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3217:1: ( rule__VersFrontierMarker__Group__0__Impl rule__VersFrontierMarker__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3218:2: rule__VersFrontierMarker__Group__0__Impl rule__VersFrontierMarker__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3233:1: ( rule__VersFrontierMarker__Group__0__Impl rule__VersFrontierMarker__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3234:2: rule__VersFrontierMarker__Group__0__Impl rule__VersFrontierMarker__Group__1
             {
-            pushFollow(FOLLOW_rule__VersFrontierMarker__Group__0__Impl_in_rule__VersFrontierMarker__Group__06760);
+            pushFollow(FOLLOW_rule__VersFrontierMarker__Group__0__Impl_in_rule__VersFrontierMarker__Group__06800);
             rule__VersFrontierMarker__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__VersFrontierMarker__Group__1_in_rule__VersFrontierMarker__Group__06763);
+            pushFollow(FOLLOW_rule__VersFrontierMarker__Group__1_in_rule__VersFrontierMarker__Group__06803);
             rule__VersFrontierMarker__Group__1();
 
             state._fsp--;
@@ -9396,21 +9441,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersFrontierMarker__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3225:1: rule__VersFrontierMarker__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3241:1: rule__VersFrontierMarker__Group__0__Impl : ( () ) ;
     public final void rule__VersFrontierMarker__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3229:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3230:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3245:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3246:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3230:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3231:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3246:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3247:1: ()
             {
              before(grammarAccess.getVersFrontierMarkerAccess().getVersFrontierMarkerAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3232:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3234:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3248:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3250:1: 
             {
             }
 
@@ -9433,16 +9478,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersFrontierMarker__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3244:1: rule__VersFrontierMarker__Group__1 : rule__VersFrontierMarker__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3260:1: rule__VersFrontierMarker__Group__1 : rule__VersFrontierMarker__Group__1__Impl ;
     public final void rule__VersFrontierMarker__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3248:1: ( rule__VersFrontierMarker__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3249:2: rule__VersFrontierMarker__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3264:1: ( rule__VersFrontierMarker__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3265:2: rule__VersFrontierMarker__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__VersFrontierMarker__Group__1__Impl_in_rule__VersFrontierMarker__Group__16821);
+            pushFollow(FOLLOW_rule__VersFrontierMarker__Group__1__Impl_in_rule__VersFrontierMarker__Group__16861);
             rule__VersFrontierMarker__Group__1__Impl();
 
             state._fsp--;
@@ -9466,20 +9511,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersFrontierMarker__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3255:1: rule__VersFrontierMarker__Group__1__Impl : ( '@mv' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3271:1: rule__VersFrontierMarker__Group__1__Impl : ( '@mv' ) ;
     public final void rule__VersFrontierMarker__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3259:1: ( ( '@mv' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3260:1: ( '@mv' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3275:1: ( ( '@mv' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3276:1: ( '@mv' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3260:1: ( '@mv' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3261:1: '@mv'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3276:1: ( '@mv' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3277:1: '@mv'
             {
              before(grammarAccess.getVersFrontierMarkerAccess().getMvKeyword_1()); 
-            match(input,20,FOLLOW_20_in_rule__VersFrontierMarker__Group__1__Impl6849); 
+            match(input,21,FOLLOW_21_in_rule__VersFrontierMarker__Group__1__Impl6889); 
              after(grammarAccess.getVersFrontierMarkerAccess().getMvKeyword_1()); 
 
             }
@@ -9503,21 +9548,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersbreakMarker__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3278:1: rule__VersbreakMarker__Group__0 : rule__VersbreakMarker__Group__0__Impl rule__VersbreakMarker__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3294:1: rule__VersbreakMarker__Group__0 : rule__VersbreakMarker__Group__0__Impl rule__VersbreakMarker__Group__1 ;
     public final void rule__VersbreakMarker__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3282:1: ( rule__VersbreakMarker__Group__0__Impl rule__VersbreakMarker__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3283:2: rule__VersbreakMarker__Group__0__Impl rule__VersbreakMarker__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3298:1: ( rule__VersbreakMarker__Group__0__Impl rule__VersbreakMarker__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3299:2: rule__VersbreakMarker__Group__0__Impl rule__VersbreakMarker__Group__1
             {
-            pushFollow(FOLLOW_rule__VersbreakMarker__Group__0__Impl_in_rule__VersbreakMarker__Group__06884);
+            pushFollow(FOLLOW_rule__VersbreakMarker__Group__0__Impl_in_rule__VersbreakMarker__Group__06924);
             rule__VersbreakMarker__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__VersbreakMarker__Group__1_in_rule__VersbreakMarker__Group__06887);
+            pushFollow(FOLLOW_rule__VersbreakMarker__Group__1_in_rule__VersbreakMarker__Group__06927);
             rule__VersbreakMarker__Group__1();
 
             state._fsp--;
@@ -9541,21 +9586,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersbreakMarker__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3290:1: rule__VersbreakMarker__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3306:1: rule__VersbreakMarker__Group__0__Impl : ( () ) ;
     public final void rule__VersbreakMarker__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3294:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3295:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3310:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3311:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3295:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3296:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3311:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3312:1: ()
             {
              before(grammarAccess.getVersbreakMarkerAccess().getVersbreakMarkerAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3297:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3299:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3313:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3315:1: 
             {
             }
 
@@ -9578,16 +9623,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersbreakMarker__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3309:1: rule__VersbreakMarker__Group__1 : rule__VersbreakMarker__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3325:1: rule__VersbreakMarker__Group__1 : rule__VersbreakMarker__Group__1__Impl ;
     public final void rule__VersbreakMarker__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3313:1: ( rule__VersbreakMarker__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3314:2: rule__VersbreakMarker__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3329:1: ( rule__VersbreakMarker__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3330:2: rule__VersbreakMarker__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__VersbreakMarker__Group__1__Impl_in_rule__VersbreakMarker__Group__16945);
+            pushFollow(FOLLOW_rule__VersbreakMarker__Group__1__Impl_in_rule__VersbreakMarker__Group__16985);
             rule__VersbreakMarker__Group__1__Impl();
 
             state._fsp--;
@@ -9611,20 +9656,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__VersbreakMarker__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3320:1: rule__VersbreakMarker__Group__1__Impl : ( '@v' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3336:1: rule__VersbreakMarker__Group__1__Impl : ( '@v' ) ;
     public final void rule__VersbreakMarker__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3324:1: ( ( '@v' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3325:1: ( '@v' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3340:1: ( ( '@v' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3341:1: ( '@v' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3325:1: ( '@v' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3326:1: '@v'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3341:1: ( '@v' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3342:1: '@v'
             {
              before(grammarAccess.getVersbreakMarkerAccess().getVKeyword_1()); 
-            match(input,21,FOLLOW_21_in_rule__VersbreakMarker__Group__1__Impl6973); 
+            match(input,22,FOLLOW_22_in_rule__VersbreakMarker__Group__1__Impl7013); 
              after(grammarAccess.getVersbreakMarkerAccess().getVKeyword_1()); 
 
             }
@@ -9648,21 +9693,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3343:1: rule__Marker__Group__0 : rule__Marker__Group__0__Impl rule__Marker__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3359:1: rule__Marker__Group__0 : rule__Marker__Group__0__Impl rule__Marker__Group__1 ;
     public final void rule__Marker__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3347:1: ( rule__Marker__Group__0__Impl rule__Marker__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3348:2: rule__Marker__Group__0__Impl rule__Marker__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3363:1: ( rule__Marker__Group__0__Impl rule__Marker__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3364:2: rule__Marker__Group__0__Impl rule__Marker__Group__1
             {
-            pushFollow(FOLLOW_rule__Marker__Group__0__Impl_in_rule__Marker__Group__07008);
+            pushFollow(FOLLOW_rule__Marker__Group__0__Impl_in_rule__Marker__Group__07048);
             rule__Marker__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Marker__Group__1_in_rule__Marker__Group__07011);
+            pushFollow(FOLLOW_rule__Marker__Group__1_in_rule__Marker__Group__07051);
             rule__Marker__Group__1();
 
             state._fsp--;
@@ -9686,20 +9731,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3355:1: rule__Marker__Group__0__Impl : ( '#' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3371:1: rule__Marker__Group__0__Impl : ( '#' ) ;
     public final void rule__Marker__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3359:1: ( ( '#' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3360:1: ( '#' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3375:1: ( ( '#' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3376:1: ( '#' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3360:1: ( '#' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3361:1: '#'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3376:1: ( '#' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3377:1: '#'
             {
              before(grammarAccess.getMarkerAccess().getNumberSignKeyword_0()); 
-            match(input,22,FOLLOW_22_in_rule__Marker__Group__0__Impl7039); 
+            match(input,23,FOLLOW_23_in_rule__Marker__Group__0__Impl7079); 
              after(grammarAccess.getMarkerAccess().getNumberSignKeyword_0()); 
 
             }
@@ -9723,21 +9768,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3374:1: rule__Marker__Group__1 : rule__Marker__Group__1__Impl rule__Marker__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3390:1: rule__Marker__Group__1 : rule__Marker__Group__1__Impl rule__Marker__Group__2 ;
     public final void rule__Marker__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3378:1: ( rule__Marker__Group__1__Impl rule__Marker__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3379:2: rule__Marker__Group__1__Impl rule__Marker__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3394:1: ( rule__Marker__Group__1__Impl rule__Marker__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3395:2: rule__Marker__Group__1__Impl rule__Marker__Group__2
             {
-            pushFollow(FOLLOW_rule__Marker__Group__1__Impl_in_rule__Marker__Group__17070);
+            pushFollow(FOLLOW_rule__Marker__Group__1__Impl_in_rule__Marker__Group__17110);
             rule__Marker__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Marker__Group__2_in_rule__Marker__Group__17073);
+            pushFollow(FOLLOW_rule__Marker__Group__2_in_rule__Marker__Group__17113);
             rule__Marker__Group__2();
 
             state._fsp--;
@@ -9761,23 +9806,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3386:1: rule__Marker__Group__1__Impl : ( ( rule__Marker__Group_1__0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3402:1: rule__Marker__Group__1__Impl : ( ( rule__Marker__Group_1__0 ) ) ;
     public final void rule__Marker__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3390:1: ( ( ( rule__Marker__Group_1__0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3391:1: ( ( rule__Marker__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3406:1: ( ( ( rule__Marker__Group_1__0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3407:1: ( ( rule__Marker__Group_1__0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3391:1: ( ( rule__Marker__Group_1__0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3392:1: ( rule__Marker__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3407:1: ( ( rule__Marker__Group_1__0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3408:1: ( rule__Marker__Group_1__0 )
             {
              before(grammarAccess.getMarkerAccess().getGroup_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3393:1: ( rule__Marker__Group_1__0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3393:2: rule__Marker__Group_1__0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3409:1: ( rule__Marker__Group_1__0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3409:2: rule__Marker__Group_1__0
             {
-            pushFollow(FOLLOW_rule__Marker__Group_1__0_in_rule__Marker__Group__1__Impl7100);
+            pushFollow(FOLLOW_rule__Marker__Group_1__0_in_rule__Marker__Group__1__Impl7140);
             rule__Marker__Group_1__0();
 
             state._fsp--;
@@ -9808,16 +9853,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3403:1: rule__Marker__Group__2 : rule__Marker__Group__2__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3419:1: rule__Marker__Group__2 : rule__Marker__Group__2__Impl ;
     public final void rule__Marker__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3407:1: ( rule__Marker__Group__2__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3408:2: rule__Marker__Group__2__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3423:1: ( rule__Marker__Group__2__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3424:2: rule__Marker__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Marker__Group__2__Impl_in_rule__Marker__Group__27130);
+            pushFollow(FOLLOW_rule__Marker__Group__2__Impl_in_rule__Marker__Group__27170);
             rule__Marker__Group__2__Impl();
 
             state._fsp--;
@@ -9841,20 +9886,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3414:1: rule__Marker__Group__2__Impl : ( '#' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3430:1: rule__Marker__Group__2__Impl : ( '#' ) ;
     public final void rule__Marker__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3418:1: ( ( '#' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3419:1: ( '#' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3434:1: ( ( '#' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3435:1: ( '#' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3419:1: ( '#' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3420:1: '#'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3435:1: ( '#' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3436:1: '#'
             {
              before(grammarAccess.getMarkerAccess().getNumberSignKeyword_2()); 
-            match(input,22,FOLLOW_22_in_rule__Marker__Group__2__Impl7158); 
+            match(input,23,FOLLOW_23_in_rule__Marker__Group__2__Impl7198); 
              after(grammarAccess.getMarkerAccess().getNumberSignKeyword_2()); 
 
             }
@@ -9878,21 +9923,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3439:1: rule__Marker__Group_1__0 : rule__Marker__Group_1__0__Impl rule__Marker__Group_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3455:1: rule__Marker__Group_1__0 : rule__Marker__Group_1__0__Impl rule__Marker__Group_1__1 ;
     public final void rule__Marker__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3443:1: ( rule__Marker__Group_1__0__Impl rule__Marker__Group_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3444:2: rule__Marker__Group_1__0__Impl rule__Marker__Group_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3459:1: ( rule__Marker__Group_1__0__Impl rule__Marker__Group_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3460:2: rule__Marker__Group_1__0__Impl rule__Marker__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Marker__Group_1__0__Impl_in_rule__Marker__Group_1__07195);
+            pushFollow(FOLLOW_rule__Marker__Group_1__0__Impl_in_rule__Marker__Group_1__07235);
             rule__Marker__Group_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Marker__Group_1__1_in_rule__Marker__Group_1__07198);
+            pushFollow(FOLLOW_rule__Marker__Group_1__1_in_rule__Marker__Group_1__07238);
             rule__Marker__Group_1__1();
 
             state._fsp--;
@@ -9916,23 +9961,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3451:1: rule__Marker__Group_1__0__Impl : ( ( rule__Marker__TypeAssignment_1_0 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3467:1: rule__Marker__Group_1__0__Impl : ( ( rule__Marker__TypeAssignment_1_0 ) ) ;
     public final void rule__Marker__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3455:1: ( ( ( rule__Marker__TypeAssignment_1_0 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3456:1: ( ( rule__Marker__TypeAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3471:1: ( ( ( rule__Marker__TypeAssignment_1_0 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3472:1: ( ( rule__Marker__TypeAssignment_1_0 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3456:1: ( ( rule__Marker__TypeAssignment_1_0 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3457:1: ( rule__Marker__TypeAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3472:1: ( ( rule__Marker__TypeAssignment_1_0 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3473:1: ( rule__Marker__TypeAssignment_1_0 )
             {
              before(grammarAccess.getMarkerAccess().getTypeAssignment_1_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3458:1: ( rule__Marker__TypeAssignment_1_0 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3458:2: rule__Marker__TypeAssignment_1_0
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3474:1: ( rule__Marker__TypeAssignment_1_0 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3474:2: rule__Marker__TypeAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__Marker__TypeAssignment_1_0_in_rule__Marker__Group_1__0__Impl7225);
+            pushFollow(FOLLOW_rule__Marker__TypeAssignment_1_0_in_rule__Marker__Group_1__0__Impl7265);
             rule__Marker__TypeAssignment_1_0();
 
             state._fsp--;
@@ -9963,16 +10008,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3468:1: rule__Marker__Group_1__1 : rule__Marker__Group_1__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3484:1: rule__Marker__Group_1__1 : rule__Marker__Group_1__1__Impl ;
     public final void rule__Marker__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3472:1: ( rule__Marker__Group_1__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3473:2: rule__Marker__Group_1__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3488:1: ( rule__Marker__Group_1__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3489:2: rule__Marker__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Marker__Group_1__1__Impl_in_rule__Marker__Group_1__17255);
+            pushFollow(FOLLOW_rule__Marker__Group_1__1__Impl_in_rule__Marker__Group_1__17295);
             rule__Marker__Group_1__1__Impl();
 
             state._fsp--;
@@ -9996,31 +10041,31 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3479:1: rule__Marker__Group_1__1__Impl : ( ( rule__Marker__Group_1_1__0 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3495:1: rule__Marker__Group_1__1__Impl : ( ( rule__Marker__Group_1_1__0 )? ) ;
     public final void rule__Marker__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3483:1: ( ( ( rule__Marker__Group_1_1__0 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3484:1: ( ( rule__Marker__Group_1_1__0 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3499:1: ( ( ( rule__Marker__Group_1_1__0 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3500:1: ( ( rule__Marker__Group_1_1__0 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3484:1: ( ( rule__Marker__Group_1_1__0 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3485:1: ( rule__Marker__Group_1_1__0 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3500:1: ( ( rule__Marker__Group_1_1__0 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3501:1: ( rule__Marker__Group_1_1__0 )?
             {
              before(grammarAccess.getMarkerAccess().getGroup_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3486:1: ( rule__Marker__Group_1_1__0 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3502:1: ( rule__Marker__Group_1_1__0 )?
             int alt37=2;
             int LA37_0 = input.LA(1);
 
-            if ( (LA37_0==19) ) {
+            if ( (LA37_0==20) ) {
                 alt37=1;
             }
             switch (alt37) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3486:2: rule__Marker__Group_1_1__0
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3502:2: rule__Marker__Group_1_1__0
                     {
-                    pushFollow(FOLLOW_rule__Marker__Group_1_1__0_in_rule__Marker__Group_1__1__Impl7282);
+                    pushFollow(FOLLOW_rule__Marker__Group_1_1__0_in_rule__Marker__Group_1__1__Impl7322);
                     rule__Marker__Group_1_1__0();
 
                     state._fsp--;
@@ -10054,21 +10099,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1_1__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3500:1: rule__Marker__Group_1_1__0 : rule__Marker__Group_1_1__0__Impl rule__Marker__Group_1_1__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3516:1: rule__Marker__Group_1_1__0 : rule__Marker__Group_1_1__0__Impl rule__Marker__Group_1_1__1 ;
     public final void rule__Marker__Group_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3504:1: ( rule__Marker__Group_1_1__0__Impl rule__Marker__Group_1_1__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3505:2: rule__Marker__Group_1_1__0__Impl rule__Marker__Group_1_1__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3520:1: ( rule__Marker__Group_1_1__0__Impl rule__Marker__Group_1_1__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3521:2: rule__Marker__Group_1_1__0__Impl rule__Marker__Group_1_1__1
             {
-            pushFollow(FOLLOW_rule__Marker__Group_1_1__0__Impl_in_rule__Marker__Group_1_1__07317);
+            pushFollow(FOLLOW_rule__Marker__Group_1_1__0__Impl_in_rule__Marker__Group_1_1__07357);
             rule__Marker__Group_1_1__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Marker__Group_1_1__1_in_rule__Marker__Group_1_1__07320);
+            pushFollow(FOLLOW_rule__Marker__Group_1_1__1_in_rule__Marker__Group_1_1__07360);
             rule__Marker__Group_1_1__1();
 
             state._fsp--;
@@ -10092,20 +10137,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1_1__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3512:1: rule__Marker__Group_1_1__0__Impl : ( ': ' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3528:1: rule__Marker__Group_1_1__0__Impl : ( ': ' ) ;
     public final void rule__Marker__Group_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3516:1: ( ( ': ' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3517:1: ( ': ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3532:1: ( ( ': ' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3533:1: ( ': ' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3517:1: ( ': ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3518:1: ': '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3533:1: ( ': ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3534:1: ': '
             {
              before(grammarAccess.getMarkerAccess().getColonSpaceKeyword_1_1_0()); 
-            match(input,19,FOLLOW_19_in_rule__Marker__Group_1_1__0__Impl7348); 
+            match(input,20,FOLLOW_20_in_rule__Marker__Group_1_1__0__Impl7388); 
              after(grammarAccess.getMarkerAccess().getColonSpaceKeyword_1_1_0()); 
 
             }
@@ -10129,21 +10174,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1_1__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3531:1: rule__Marker__Group_1_1__1 : rule__Marker__Group_1_1__1__Impl rule__Marker__Group_1_1__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3547:1: rule__Marker__Group_1_1__1 : rule__Marker__Group_1_1__1__Impl rule__Marker__Group_1_1__2 ;
     public final void rule__Marker__Group_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3535:1: ( rule__Marker__Group_1_1__1__Impl rule__Marker__Group_1_1__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3536:2: rule__Marker__Group_1_1__1__Impl rule__Marker__Group_1_1__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3551:1: ( rule__Marker__Group_1_1__1__Impl rule__Marker__Group_1_1__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3552:2: rule__Marker__Group_1_1__1__Impl rule__Marker__Group_1_1__2
             {
-            pushFollow(FOLLOW_rule__Marker__Group_1_1__1__Impl_in_rule__Marker__Group_1_1__17379);
+            pushFollow(FOLLOW_rule__Marker__Group_1_1__1__Impl_in_rule__Marker__Group_1_1__17419);
             rule__Marker__Group_1_1__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Marker__Group_1_1__2_in_rule__Marker__Group_1_1__17382);
+            pushFollow(FOLLOW_rule__Marker__Group_1_1__2_in_rule__Marker__Group_1_1__17422);
             rule__Marker__Group_1_1__2();
 
             state._fsp--;
@@ -10167,20 +10212,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1_1__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3543:1: rule__Marker__Group_1_1__1__Impl : ( ( rule__Marker__Alternatives_1_1_1 )? ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3559:1: rule__Marker__Group_1_1__1__Impl : ( ( rule__Marker__Alternatives_1_1_1 )? ) ;
     public final void rule__Marker__Group_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3547:1: ( ( ( rule__Marker__Alternatives_1_1_1 )? ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3548:1: ( ( rule__Marker__Alternatives_1_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3563:1: ( ( ( rule__Marker__Alternatives_1_1_1 )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3564:1: ( ( rule__Marker__Alternatives_1_1_1 )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3548:1: ( ( rule__Marker__Alternatives_1_1_1 )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3549:1: ( rule__Marker__Alternatives_1_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3564:1: ( ( rule__Marker__Alternatives_1_1_1 )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3565:1: ( rule__Marker__Alternatives_1_1_1 )?
             {
              before(grammarAccess.getMarkerAccess().getAlternatives_1_1_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3550:1: ( rule__Marker__Alternatives_1_1_1 )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3566:1: ( rule__Marker__Alternatives_1_1_1 )?
             int alt38=2;
             int LA38_0 = input.LA(1);
 
@@ -10189,9 +10234,9 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt38) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3550:2: rule__Marker__Alternatives_1_1_1
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3566:2: rule__Marker__Alternatives_1_1_1
                     {
-                    pushFollow(FOLLOW_rule__Marker__Alternatives_1_1_1_in_rule__Marker__Group_1_1__1__Impl7409);
+                    pushFollow(FOLLOW_rule__Marker__Alternatives_1_1_1_in_rule__Marker__Group_1_1__1__Impl7449);
                     rule__Marker__Alternatives_1_1_1();
 
                     state._fsp--;
@@ -10225,16 +10270,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1_1__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3560:1: rule__Marker__Group_1_1__2 : rule__Marker__Group_1_1__2__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3576:1: rule__Marker__Group_1_1__2 : rule__Marker__Group_1_1__2__Impl ;
     public final void rule__Marker__Group_1_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3564:1: ( rule__Marker__Group_1_1__2__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3565:2: rule__Marker__Group_1_1__2__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3580:1: ( rule__Marker__Group_1_1__2__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3581:2: rule__Marker__Group_1_1__2__Impl
             {
-            pushFollow(FOLLOW_rule__Marker__Group_1_1__2__Impl_in_rule__Marker__Group_1_1__27440);
+            pushFollow(FOLLOW_rule__Marker__Group_1_1__2__Impl_in_rule__Marker__Group_1_1__27480);
             rule__Marker__Group_1_1__2__Impl();
 
             state._fsp--;
@@ -10258,23 +10303,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__Group_1_1__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3571:1: rule__Marker__Group_1_1__2__Impl : ( ( rule__Marker__NameAssignment_1_1_2 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3587:1: rule__Marker__Group_1_1__2__Impl : ( ( rule__Marker__NameAssignment_1_1_2 ) ) ;
     public final void rule__Marker__Group_1_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3575:1: ( ( ( rule__Marker__NameAssignment_1_1_2 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3576:1: ( ( rule__Marker__NameAssignment_1_1_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3591:1: ( ( ( rule__Marker__NameAssignment_1_1_2 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3592:1: ( ( rule__Marker__NameAssignment_1_1_2 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3576:1: ( ( rule__Marker__NameAssignment_1_1_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3577:1: ( rule__Marker__NameAssignment_1_1_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3592:1: ( ( rule__Marker__NameAssignment_1_1_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3593:1: ( rule__Marker__NameAssignment_1_1_2 )
             {
              before(grammarAccess.getMarkerAccess().getNameAssignment_1_1_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3578:1: ( rule__Marker__NameAssignment_1_1_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3578:2: rule__Marker__NameAssignment_1_1_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3594:1: ( rule__Marker__NameAssignment_1_1_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3594:2: rule__Marker__NameAssignment_1_1_2
             {
-            pushFollow(FOLLOW_rule__Marker__NameAssignment_1_1_2_in_rule__Marker__Group_1_1__2__Impl7467);
+            pushFollow(FOLLOW_rule__Marker__NameAssignment_1_1_2_in_rule__Marker__Group_1_1__2__Impl7507);
             rule__Marker__NameAssignment_1_1_2();
 
             state._fsp--;
@@ -10305,21 +10350,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Word__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3594:1: rule__Word__Group__0 : rule__Word__Group__0__Impl rule__Word__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3610:1: rule__Word__Group__0 : rule__Word__Group__0__Impl rule__Word__Group__1 ;
     public final void rule__Word__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3598:1: ( rule__Word__Group__0__Impl rule__Word__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3599:2: rule__Word__Group__0__Impl rule__Word__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3614:1: ( rule__Word__Group__0__Impl rule__Word__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3615:2: rule__Word__Group__0__Impl rule__Word__Group__1
             {
-            pushFollow(FOLLOW_rule__Word__Group__0__Impl_in_rule__Word__Group__07503);
+            pushFollow(FOLLOW_rule__Word__Group__0__Impl_in_rule__Word__Group__07543);
             rule__Word__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Word__Group__1_in_rule__Word__Group__07506);
+            pushFollow(FOLLOW_rule__Word__Group__1_in_rule__Word__Group__07546);
             rule__Word__Group__1();
 
             state._fsp--;
@@ -10343,21 +10388,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Word__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3606:1: rule__Word__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3622:1: rule__Word__Group__0__Impl : ( () ) ;
     public final void rule__Word__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3610:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3611:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3626:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3627:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3611:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3612:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3627:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3628:1: ()
             {
              before(grammarAccess.getWordAccess().getWordAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3613:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3615:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3629:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3631:1: 
             {
             }
 
@@ -10380,16 +10425,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Word__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3625:1: rule__Word__Group__1 : rule__Word__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3641:1: rule__Word__Group__1 : rule__Word__Group__1__Impl ;
     public final void rule__Word__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3629:1: ( rule__Word__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3630:2: rule__Word__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3645:1: ( rule__Word__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3646:2: rule__Word__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Word__Group__1__Impl_in_rule__Word__Group__17564);
+            pushFollow(FOLLOW_rule__Word__Group__1__Impl_in_rule__Word__Group__17604);
             rule__Word__Group__1__Impl();
 
             state._fsp--;
@@ -10413,35 +10458,35 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Word__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3636:1: rule__Word__Group__1__Impl : ( ( rule__Word__WCharAssignment_1 )* ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3652:1: rule__Word__Group__1__Impl : ( ( rule__Word__WCharAssignment_1 )* ) ;
     public final void rule__Word__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3640:1: ( ( ( rule__Word__WCharAssignment_1 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3641:1: ( ( rule__Word__WCharAssignment_1 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3656:1: ( ( ( rule__Word__WCharAssignment_1 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3657:1: ( ( rule__Word__WCharAssignment_1 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3641:1: ( ( rule__Word__WCharAssignment_1 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3642:1: ( rule__Word__WCharAssignment_1 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3657:1: ( ( rule__Word__WCharAssignment_1 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3658:1: ( rule__Word__WCharAssignment_1 )*
             {
              before(grammarAccess.getWordAccess().getWCharAssignment_1()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3643:1: ( rule__Word__WCharAssignment_1 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3659:1: ( rule__Word__WCharAssignment_1 )*
             loop39:
             do {
                 int alt39=2;
                 int LA39_0 = input.LA(1);
 
-                if ( (LA39_0==RULE_EGYSTRING||(LA39_0>=23 && LA39_0<=30)||LA39_0==32||(LA39_0>=34 && LA39_0<=35)||LA39_0==37||LA39_0==39||LA39_0==41||LA39_0==43||LA39_0==45||LA39_0==47||LA39_0==49) ) {
+                if ( (LA39_0==RULE_EGYSTRING||(LA39_0>=24 && LA39_0<=31)||LA39_0==33||(LA39_0>=35 && LA39_0<=36)||LA39_0==38||LA39_0==40||LA39_0==42||LA39_0==44||LA39_0==46||LA39_0==48||LA39_0==50) ) {
                     alt39=1;
                 }
 
 
                 switch (alt39) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3643:2: rule__Word__WCharAssignment_1
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3659:2: rule__Word__WCharAssignment_1
             	    {
-            	    pushFollow(FOLLOW_rule__Word__WCharAssignment_1_in_rule__Word__Group__1__Impl7591);
+            	    pushFollow(FOLLOW_rule__Word__WCharAssignment_1_in_rule__Word__Group__1__Impl7631);
             	    rule__Word__WCharAssignment_1();
 
             	    state._fsp--;
@@ -10478,21 +10523,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixLexical__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3657:1: rule__InterfixLexical__Group__0 : rule__InterfixLexical__Group__0__Impl rule__InterfixLexical__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3673:1: rule__InterfixLexical__Group__0 : rule__InterfixLexical__Group__0__Impl rule__InterfixLexical__Group__1 ;
     public final void rule__InterfixLexical__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3661:1: ( rule__InterfixLexical__Group__0__Impl rule__InterfixLexical__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3662:2: rule__InterfixLexical__Group__0__Impl rule__InterfixLexical__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3677:1: ( rule__InterfixLexical__Group__0__Impl rule__InterfixLexical__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3678:2: rule__InterfixLexical__Group__0__Impl rule__InterfixLexical__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixLexical__Group__0__Impl_in_rule__InterfixLexical__Group__07626);
+            pushFollow(FOLLOW_rule__InterfixLexical__Group__0__Impl_in_rule__InterfixLexical__Group__07666);
             rule__InterfixLexical__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixLexical__Group__1_in_rule__InterfixLexical__Group__07629);
+            pushFollow(FOLLOW_rule__InterfixLexical__Group__1_in_rule__InterfixLexical__Group__07669);
             rule__InterfixLexical__Group__1();
 
             state._fsp--;
@@ -10516,21 +10561,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixLexical__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3669:1: rule__InterfixLexical__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3685:1: rule__InterfixLexical__Group__0__Impl : ( () ) ;
     public final void rule__InterfixLexical__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3673:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3674:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3689:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3690:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3674:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3675:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3690:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3691:1: ()
             {
              before(grammarAccess.getInterfixLexicalAccess().getInterfixLexicalAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3676:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3678:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3692:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3694:1: 
             {
             }
 
@@ -10553,16 +10598,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixLexical__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3688:1: rule__InterfixLexical__Group__1 : rule__InterfixLexical__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3704:1: rule__InterfixLexical__Group__1 : rule__InterfixLexical__Group__1__Impl ;
     public final void rule__InterfixLexical__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3692:1: ( rule__InterfixLexical__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3693:2: rule__InterfixLexical__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3708:1: ( rule__InterfixLexical__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3709:2: rule__InterfixLexical__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixLexical__Group__1__Impl_in_rule__InterfixLexical__Group__17687);
+            pushFollow(FOLLOW_rule__InterfixLexical__Group__1__Impl_in_rule__InterfixLexical__Group__17727);
             rule__InterfixLexical__Group__1__Impl();
 
             state._fsp--;
@@ -10586,20 +10631,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixLexical__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3699:1: rule__InterfixLexical__Group__1__Impl : ( ',' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3715:1: rule__InterfixLexical__Group__1__Impl : ( ',' ) ;
     public final void rule__InterfixLexical__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3703:1: ( ( ',' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3704:1: ( ',' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3719:1: ( ( ',' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3720:1: ( ',' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3704:1: ( ',' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3705:1: ','
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3720:1: ( ',' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3721:1: ','
             {
              before(grammarAccess.getInterfixLexicalAccess().getCommaKeyword_1()); 
-            match(input,23,FOLLOW_23_in_rule__InterfixLexical__Group__1__Impl7715); 
+            match(input,24,FOLLOW_24_in_rule__InterfixLexical__Group__1__Impl7755); 
              after(grammarAccess.getInterfixLexicalAccess().getCommaKeyword_1()); 
 
             }
@@ -10623,21 +10668,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixFlexion__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3722:1: rule__InterfixFlexion__Group__0 : rule__InterfixFlexion__Group__0__Impl rule__InterfixFlexion__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3738:1: rule__InterfixFlexion__Group__0 : rule__InterfixFlexion__Group__0__Impl rule__InterfixFlexion__Group__1 ;
     public final void rule__InterfixFlexion__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3726:1: ( rule__InterfixFlexion__Group__0__Impl rule__InterfixFlexion__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3727:2: rule__InterfixFlexion__Group__0__Impl rule__InterfixFlexion__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3742:1: ( rule__InterfixFlexion__Group__0__Impl rule__InterfixFlexion__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3743:2: rule__InterfixFlexion__Group__0__Impl rule__InterfixFlexion__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixFlexion__Group__0__Impl_in_rule__InterfixFlexion__Group__07750);
+            pushFollow(FOLLOW_rule__InterfixFlexion__Group__0__Impl_in_rule__InterfixFlexion__Group__07790);
             rule__InterfixFlexion__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixFlexion__Group__1_in_rule__InterfixFlexion__Group__07753);
+            pushFollow(FOLLOW_rule__InterfixFlexion__Group__1_in_rule__InterfixFlexion__Group__07793);
             rule__InterfixFlexion__Group__1();
 
             state._fsp--;
@@ -10661,21 +10706,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixFlexion__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3734:1: rule__InterfixFlexion__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3750:1: rule__InterfixFlexion__Group__0__Impl : ( () ) ;
     public final void rule__InterfixFlexion__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3738:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3739:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3754:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3755:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3739:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3740:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3755:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3756:1: ()
             {
              before(grammarAccess.getInterfixFlexionAccess().getInterfixFlexionAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3741:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3743:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3757:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3759:1: 
             {
             }
 
@@ -10698,16 +10743,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixFlexion__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3753:1: rule__InterfixFlexion__Group__1 : rule__InterfixFlexion__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3769:1: rule__InterfixFlexion__Group__1 : rule__InterfixFlexion__Group__1__Impl ;
     public final void rule__InterfixFlexion__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3757:1: ( rule__InterfixFlexion__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3758:2: rule__InterfixFlexion__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3773:1: ( rule__InterfixFlexion__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3774:2: rule__InterfixFlexion__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixFlexion__Group__1__Impl_in_rule__InterfixFlexion__Group__17811);
+            pushFollow(FOLLOW_rule__InterfixFlexion__Group__1__Impl_in_rule__InterfixFlexion__Group__17851);
             rule__InterfixFlexion__Group__1__Impl();
 
             state._fsp--;
@@ -10731,20 +10776,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixFlexion__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3764:1: rule__InterfixFlexion__Group__1__Impl : ( '.' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3780:1: rule__InterfixFlexion__Group__1__Impl : ( '.' ) ;
     public final void rule__InterfixFlexion__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3768:1: ( ( '.' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3769:1: ( '.' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3784:1: ( ( '.' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3785:1: ( '.' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3769:1: ( '.' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3770:1: '.'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3785:1: ( '.' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3786:1: '.'
             {
              before(grammarAccess.getInterfixFlexionAccess().getFullStopKeyword_1()); 
-            match(input,24,FOLLOW_24_in_rule__InterfixFlexion__Group__1__Impl7839); 
+            match(input,25,FOLLOW_25_in_rule__InterfixFlexion__Group__1__Impl7879); 
              after(grammarAccess.getInterfixFlexionAccess().getFullStopKeyword_1()); 
 
             }
@@ -10768,21 +10813,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixSuffixPronomLexical__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3787:1: rule__InterfixSuffixPronomLexical__Group__0 : rule__InterfixSuffixPronomLexical__Group__0__Impl rule__InterfixSuffixPronomLexical__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3803:1: rule__InterfixSuffixPronomLexical__Group__0 : rule__InterfixSuffixPronomLexical__Group__0__Impl rule__InterfixSuffixPronomLexical__Group__1 ;
     public final void rule__InterfixSuffixPronomLexical__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3791:1: ( rule__InterfixSuffixPronomLexical__Group__0__Impl rule__InterfixSuffixPronomLexical__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3792:2: rule__InterfixSuffixPronomLexical__Group__0__Impl rule__InterfixSuffixPronomLexical__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3807:1: ( rule__InterfixSuffixPronomLexical__Group__0__Impl rule__InterfixSuffixPronomLexical__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3808:2: rule__InterfixSuffixPronomLexical__Group__0__Impl rule__InterfixSuffixPronomLexical__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixSuffixPronomLexical__Group__0__Impl_in_rule__InterfixSuffixPronomLexical__Group__07874);
+            pushFollow(FOLLOW_rule__InterfixSuffixPronomLexical__Group__0__Impl_in_rule__InterfixSuffixPronomLexical__Group__07914);
             rule__InterfixSuffixPronomLexical__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixSuffixPronomLexical__Group__1_in_rule__InterfixSuffixPronomLexical__Group__07877);
+            pushFollow(FOLLOW_rule__InterfixSuffixPronomLexical__Group__1_in_rule__InterfixSuffixPronomLexical__Group__07917);
             rule__InterfixSuffixPronomLexical__Group__1();
 
             state._fsp--;
@@ -10806,21 +10851,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixSuffixPronomLexical__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3799:1: rule__InterfixSuffixPronomLexical__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3815:1: rule__InterfixSuffixPronomLexical__Group__0__Impl : ( () ) ;
     public final void rule__InterfixSuffixPronomLexical__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3803:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3804:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3819:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3820:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3804:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3805:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3820:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3821:1: ()
             {
              before(grammarAccess.getInterfixSuffixPronomLexicalAccess().getInterfixSuffixPronomLexicalAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3806:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3808:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3822:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3824:1: 
             {
             }
 
@@ -10843,16 +10888,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixSuffixPronomLexical__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3818:1: rule__InterfixSuffixPronomLexical__Group__1 : rule__InterfixSuffixPronomLexical__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3834:1: rule__InterfixSuffixPronomLexical__Group__1 : rule__InterfixSuffixPronomLexical__Group__1__Impl ;
     public final void rule__InterfixSuffixPronomLexical__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3822:1: ( rule__InterfixSuffixPronomLexical__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3823:2: rule__InterfixSuffixPronomLexical__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3838:1: ( rule__InterfixSuffixPronomLexical__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3839:2: rule__InterfixSuffixPronomLexical__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixSuffixPronomLexical__Group__1__Impl_in_rule__InterfixSuffixPronomLexical__Group__17935);
+            pushFollow(FOLLOW_rule__InterfixSuffixPronomLexical__Group__1__Impl_in_rule__InterfixSuffixPronomLexical__Group__17975);
             rule__InterfixSuffixPronomLexical__Group__1__Impl();
 
             state._fsp--;
@@ -10876,20 +10921,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixSuffixPronomLexical__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3829:1: rule__InterfixSuffixPronomLexical__Group__1__Impl : ( '\\u2261' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3845:1: rule__InterfixSuffixPronomLexical__Group__1__Impl : ( '\\u2261' ) ;
     public final void rule__InterfixSuffixPronomLexical__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3833:1: ( ( '\\u2261' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3834:1: ( '\\u2261' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3849:1: ( ( '\\u2261' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3850:1: ( '\\u2261' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3834:1: ( '\\u2261' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3835:1: '\\u2261'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3850:1: ( '\\u2261' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3851:1: '\\u2261'
             {
              before(grammarAccess.getInterfixSuffixPronomLexicalAccess().getIdenticalToKeyword_1()); 
-            match(input,25,FOLLOW_25_in_rule__InterfixSuffixPronomLexical__Group__1__Impl7963); 
+            match(input,26,FOLLOW_26_in_rule__InterfixSuffixPronomLexical__Group__1__Impl8003); 
              after(grammarAccess.getInterfixSuffixPronomLexicalAccess().getIdenticalToKeyword_1()); 
 
             }
@@ -10913,21 +10958,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixNonLexical__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3852:1: rule__InterfixPrefixNonLexical__Group__0 : rule__InterfixPrefixNonLexical__Group__0__Impl rule__InterfixPrefixNonLexical__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3868:1: rule__InterfixPrefixNonLexical__Group__0 : rule__InterfixPrefixNonLexical__Group__0__Impl rule__InterfixPrefixNonLexical__Group__1 ;
     public final void rule__InterfixPrefixNonLexical__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3856:1: ( rule__InterfixPrefixNonLexical__Group__0__Impl rule__InterfixPrefixNonLexical__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3857:2: rule__InterfixPrefixNonLexical__Group__0__Impl rule__InterfixPrefixNonLexical__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3872:1: ( rule__InterfixPrefixNonLexical__Group__0__Impl rule__InterfixPrefixNonLexical__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3873:2: rule__InterfixPrefixNonLexical__Group__0__Impl rule__InterfixPrefixNonLexical__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixPrefixNonLexical__Group__0__Impl_in_rule__InterfixPrefixNonLexical__Group__07998);
+            pushFollow(FOLLOW_rule__InterfixPrefixNonLexical__Group__0__Impl_in_rule__InterfixPrefixNonLexical__Group__08038);
             rule__InterfixPrefixNonLexical__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixPrefixNonLexical__Group__1_in_rule__InterfixPrefixNonLexical__Group__08001);
+            pushFollow(FOLLOW_rule__InterfixPrefixNonLexical__Group__1_in_rule__InterfixPrefixNonLexical__Group__08041);
             rule__InterfixPrefixNonLexical__Group__1();
 
             state._fsp--;
@@ -10951,21 +10996,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixNonLexical__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3864:1: rule__InterfixPrefixNonLexical__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3880:1: rule__InterfixPrefixNonLexical__Group__0__Impl : ( () ) ;
     public final void rule__InterfixPrefixNonLexical__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3868:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3869:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3884:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3885:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3869:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3870:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3885:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3886:1: ()
             {
              before(grammarAccess.getInterfixPrefixNonLexicalAccess().getInterfixPrefixNonLexicalAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3871:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3873:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3887:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3889:1: 
             {
             }
 
@@ -10988,16 +11033,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixNonLexical__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3883:1: rule__InterfixPrefixNonLexical__Group__1 : rule__InterfixPrefixNonLexical__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3899:1: rule__InterfixPrefixNonLexical__Group__1 : rule__InterfixPrefixNonLexical__Group__1__Impl ;
     public final void rule__InterfixPrefixNonLexical__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3887:1: ( rule__InterfixPrefixNonLexical__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3888:2: rule__InterfixPrefixNonLexical__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3903:1: ( rule__InterfixPrefixNonLexical__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3904:2: rule__InterfixPrefixNonLexical__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixPrefixNonLexical__Group__1__Impl_in_rule__InterfixPrefixNonLexical__Group__18059);
+            pushFollow(FOLLOW_rule__InterfixPrefixNonLexical__Group__1__Impl_in_rule__InterfixPrefixNonLexical__Group__18099);
             rule__InterfixPrefixNonLexical__Group__1__Impl();
 
             state._fsp--;
@@ -11021,20 +11066,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixNonLexical__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3894:1: rule__InterfixPrefixNonLexical__Group__1__Impl : ( ':' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3910:1: rule__InterfixPrefixNonLexical__Group__1__Impl : ( ':' ) ;
     public final void rule__InterfixPrefixNonLexical__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3898:1: ( ( ':' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3899:1: ( ':' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3914:1: ( ( ':' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3915:1: ( ':' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3899:1: ( ':' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3900:1: ':'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3915:1: ( ':' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3916:1: ':'
             {
              before(grammarAccess.getInterfixPrefixNonLexicalAccess().getColonKeyword_1()); 
-            match(input,26,FOLLOW_26_in_rule__InterfixPrefixNonLexical__Group__1__Impl8087); 
+            match(input,27,FOLLOW_27_in_rule__InterfixPrefixNonLexical__Group__1__Impl8127); 
              after(grammarAccess.getInterfixPrefixNonLexicalAccess().getColonKeyword_1()); 
 
             }
@@ -11058,21 +11103,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixLexical__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3917:1: rule__InterfixPrefixLexical__Group__0 : rule__InterfixPrefixLexical__Group__0__Impl rule__InterfixPrefixLexical__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3933:1: rule__InterfixPrefixLexical__Group__0 : rule__InterfixPrefixLexical__Group__0__Impl rule__InterfixPrefixLexical__Group__1 ;
     public final void rule__InterfixPrefixLexical__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3921:1: ( rule__InterfixPrefixLexical__Group__0__Impl rule__InterfixPrefixLexical__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3922:2: rule__InterfixPrefixLexical__Group__0__Impl rule__InterfixPrefixLexical__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3937:1: ( rule__InterfixPrefixLexical__Group__0__Impl rule__InterfixPrefixLexical__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3938:2: rule__InterfixPrefixLexical__Group__0__Impl rule__InterfixPrefixLexical__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixPrefixLexical__Group__0__Impl_in_rule__InterfixPrefixLexical__Group__08122);
+            pushFollow(FOLLOW_rule__InterfixPrefixLexical__Group__0__Impl_in_rule__InterfixPrefixLexical__Group__08162);
             rule__InterfixPrefixLexical__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixPrefixLexical__Group__1_in_rule__InterfixPrefixLexical__Group__08125);
+            pushFollow(FOLLOW_rule__InterfixPrefixLexical__Group__1_in_rule__InterfixPrefixLexical__Group__08165);
             rule__InterfixPrefixLexical__Group__1();
 
             state._fsp--;
@@ -11096,21 +11141,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixLexical__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3929:1: rule__InterfixPrefixLexical__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3945:1: rule__InterfixPrefixLexical__Group__0__Impl : ( () ) ;
     public final void rule__InterfixPrefixLexical__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3933:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3934:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3949:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3950:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3934:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3935:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3950:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3951:1: ()
             {
              before(grammarAccess.getInterfixPrefixLexicalAccess().getInterfixPrefixLexicalAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3936:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3938:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3952:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3954:1: 
             {
             }
 
@@ -11133,16 +11178,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixLexical__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3948:1: rule__InterfixPrefixLexical__Group__1 : rule__InterfixPrefixLexical__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3964:1: rule__InterfixPrefixLexical__Group__1 : rule__InterfixPrefixLexical__Group__1__Impl ;
     public final void rule__InterfixPrefixLexical__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3952:1: ( rule__InterfixPrefixLexical__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3953:2: rule__InterfixPrefixLexical__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3968:1: ( rule__InterfixPrefixLexical__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3969:2: rule__InterfixPrefixLexical__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixPrefixLexical__Group__1__Impl_in_rule__InterfixPrefixLexical__Group__18183);
+            pushFollow(FOLLOW_rule__InterfixPrefixLexical__Group__1__Impl_in_rule__InterfixPrefixLexical__Group__18223);
             rule__InterfixPrefixLexical__Group__1__Impl();
 
             state._fsp--;
@@ -11166,20 +11211,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixPrefixLexical__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3959:1: rule__InterfixPrefixLexical__Group__1__Impl : ( '\\u22EE' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3975:1: rule__InterfixPrefixLexical__Group__1__Impl : ( '\\u22EE' ) ;
     public final void rule__InterfixPrefixLexical__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3963:1: ( ( '\\u22EE' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3964:1: ( '\\u22EE' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3979:1: ( ( '\\u22EE' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3980:1: ( '\\u22EE' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3964:1: ( '\\u22EE' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3965:1: '\\u22EE'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3980:1: ( '\\u22EE' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3981:1: '\\u22EE'
             {
              before(grammarAccess.getInterfixPrefixLexicalAccess().getVerticalEllipsisKeyword_1()); 
-            match(input,27,FOLLOW_27_in_rule__InterfixPrefixLexical__Group__1__Impl8211); 
+            match(input,28,FOLLOW_28_in_rule__InterfixPrefixLexical__Group__1__Impl8251); 
              after(grammarAccess.getInterfixPrefixLexicalAccess().getVerticalEllipsisKeyword_1()); 
 
             }
@@ -11203,21 +11248,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixCompountWords__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3982:1: rule__InterfixCompountWords__Group__0 : rule__InterfixCompountWords__Group__0__Impl rule__InterfixCompountWords__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3998:1: rule__InterfixCompountWords__Group__0 : rule__InterfixCompountWords__Group__0__Impl rule__InterfixCompountWords__Group__1 ;
     public final void rule__InterfixCompountWords__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3986:1: ( rule__InterfixCompountWords__Group__0__Impl rule__InterfixCompountWords__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3987:2: rule__InterfixCompountWords__Group__0__Impl rule__InterfixCompountWords__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4002:1: ( rule__InterfixCompountWords__Group__0__Impl rule__InterfixCompountWords__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4003:2: rule__InterfixCompountWords__Group__0__Impl rule__InterfixCompountWords__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixCompountWords__Group__0__Impl_in_rule__InterfixCompountWords__Group__08246);
+            pushFollow(FOLLOW_rule__InterfixCompountWords__Group__0__Impl_in_rule__InterfixCompountWords__Group__08286);
             rule__InterfixCompountWords__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixCompountWords__Group__1_in_rule__InterfixCompountWords__Group__08249);
+            pushFollow(FOLLOW_rule__InterfixCompountWords__Group__1_in_rule__InterfixCompountWords__Group__08289);
             rule__InterfixCompountWords__Group__1();
 
             state._fsp--;
@@ -11241,21 +11286,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixCompountWords__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3994:1: rule__InterfixCompountWords__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4010:1: rule__InterfixCompountWords__Group__0__Impl : ( () ) ;
     public final void rule__InterfixCompountWords__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3998:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3999:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4014:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4015:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:3999:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4000:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4015:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4016:1: ()
             {
              before(grammarAccess.getInterfixCompountWordsAccess().getInterfixCompountWordsAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4001:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4003:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4017:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4019:1: 
             {
             }
 
@@ -11278,16 +11323,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixCompountWords__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4013:1: rule__InterfixCompountWords__Group__1 : rule__InterfixCompountWords__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4029:1: rule__InterfixCompountWords__Group__1 : rule__InterfixCompountWords__Group__1__Impl ;
     public final void rule__InterfixCompountWords__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4017:1: ( rule__InterfixCompountWords__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4018:2: rule__InterfixCompountWords__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4033:1: ( rule__InterfixCompountWords__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4034:2: rule__InterfixCompountWords__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixCompountWords__Group__1__Impl_in_rule__InterfixCompountWords__Group__18307);
+            pushFollow(FOLLOW_rule__InterfixCompountWords__Group__1__Impl_in_rule__InterfixCompountWords__Group__18347);
             rule__InterfixCompountWords__Group__1__Impl();
 
             state._fsp--;
@@ -11311,20 +11356,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixCompountWords__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4024:1: rule__InterfixCompountWords__Group__1__Impl : ( '-' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4040:1: rule__InterfixCompountWords__Group__1__Impl : ( '-' ) ;
     public final void rule__InterfixCompountWords__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4028:1: ( ( '-' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4029:1: ( '-' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4044:1: ( ( '-' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4045:1: ( '-' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4029:1: ( '-' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4030:1: '-'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4045:1: ( '-' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4046:1: '-'
             {
              before(grammarAccess.getInterfixCompountWordsAccess().getHyphenMinusKeyword_1()); 
-            match(input,28,FOLLOW_28_in_rule__InterfixCompountWords__Group__1__Impl8335); 
+            match(input,29,FOLLOW_29_in_rule__InterfixCompountWords__Group__1__Impl8375); 
              after(grammarAccess.getInterfixCompountWordsAccess().getHyphenMinusKeyword_1()); 
 
             }
@@ -11348,21 +11393,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixConnectionSyllabicGroup__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4047:1: rule__InterfixConnectionSyllabicGroup__Group__0 : rule__InterfixConnectionSyllabicGroup__Group__0__Impl rule__InterfixConnectionSyllabicGroup__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4063:1: rule__InterfixConnectionSyllabicGroup__Group__0 : rule__InterfixConnectionSyllabicGroup__Group__0__Impl rule__InterfixConnectionSyllabicGroup__Group__1 ;
     public final void rule__InterfixConnectionSyllabicGroup__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4051:1: ( rule__InterfixConnectionSyllabicGroup__Group__0__Impl rule__InterfixConnectionSyllabicGroup__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4052:2: rule__InterfixConnectionSyllabicGroup__Group__0__Impl rule__InterfixConnectionSyllabicGroup__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4067:1: ( rule__InterfixConnectionSyllabicGroup__Group__0__Impl rule__InterfixConnectionSyllabicGroup__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4068:2: rule__InterfixConnectionSyllabicGroup__Group__0__Impl rule__InterfixConnectionSyllabicGroup__Group__1
             {
-            pushFollow(FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__0__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__08370);
+            pushFollow(FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__0__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__08410);
             rule__InterfixConnectionSyllabicGroup__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1_in_rule__InterfixConnectionSyllabicGroup__Group__08373);
+            pushFollow(FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1_in_rule__InterfixConnectionSyllabicGroup__Group__08413);
             rule__InterfixConnectionSyllabicGroup__Group__1();
 
             state._fsp--;
@@ -11386,21 +11431,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixConnectionSyllabicGroup__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4059:1: rule__InterfixConnectionSyllabicGroup__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4075:1: rule__InterfixConnectionSyllabicGroup__Group__0__Impl : ( () ) ;
     public final void rule__InterfixConnectionSyllabicGroup__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4063:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4064:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4079:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4080:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4064:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4065:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4080:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4081:1: ()
             {
              before(grammarAccess.getInterfixConnectionSyllabicGroupAccess().getInterfixConnectionSyllabicGroupAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4066:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4068:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4082:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4084:1: 
             {
             }
 
@@ -11423,16 +11468,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixConnectionSyllabicGroup__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4078:1: rule__InterfixConnectionSyllabicGroup__Group__1 : rule__InterfixConnectionSyllabicGroup__Group__1__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4094:1: rule__InterfixConnectionSyllabicGroup__Group__1 : rule__InterfixConnectionSyllabicGroup__Group__1__Impl ;
     public final void rule__InterfixConnectionSyllabicGroup__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4082:1: ( rule__InterfixConnectionSyllabicGroup__Group__1__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4083:2: rule__InterfixConnectionSyllabicGroup__Group__1__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4098:1: ( rule__InterfixConnectionSyllabicGroup__Group__1__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4099:2: rule__InterfixConnectionSyllabicGroup__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__18431);
+            pushFollow(FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__18471);
             rule__InterfixConnectionSyllabicGroup__Group__1__Impl();
 
             state._fsp--;
@@ -11456,20 +11501,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__InterfixConnectionSyllabicGroup__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4089:1: rule__InterfixConnectionSyllabicGroup__Group__1__Impl : ( '~' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4105:1: rule__InterfixConnectionSyllabicGroup__Group__1__Impl : ( '~' ) ;
     public final void rule__InterfixConnectionSyllabicGroup__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4093:1: ( ( '~' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4094:1: ( '~' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4109:1: ( ( '~' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4110:1: ( '~' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4094:1: ( '~' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4095:1: '~'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4110:1: ( '~' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4111:1: '~'
             {
              before(grammarAccess.getInterfixConnectionSyllabicGroupAccess().getTildeKeyword_1()); 
-            match(input,29,FOLLOW_29_in_rule__InterfixConnectionSyllabicGroup__Group__1__Impl8459); 
+            match(input,30,FOLLOW_30_in_rule__InterfixConnectionSyllabicGroup__Group__1__Impl8499); 
              after(grammarAccess.getInterfixConnectionSyllabicGroupAccess().getTildeKeyword_1()); 
 
             }
@@ -11493,21 +11538,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4112:1: rule__Expanded__Group__0 : rule__Expanded__Group__0__Impl rule__Expanded__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4128:1: rule__Expanded__Group__0 : rule__Expanded__Group__0__Impl rule__Expanded__Group__1 ;
     public final void rule__Expanded__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4116:1: ( rule__Expanded__Group__0__Impl rule__Expanded__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4117:2: rule__Expanded__Group__0__Impl rule__Expanded__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4132:1: ( rule__Expanded__Group__0__Impl rule__Expanded__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4133:2: rule__Expanded__Group__0__Impl rule__Expanded__Group__1
             {
-            pushFollow(FOLLOW_rule__Expanded__Group__0__Impl_in_rule__Expanded__Group__08494);
+            pushFollow(FOLLOW_rule__Expanded__Group__0__Impl_in_rule__Expanded__Group__08534);
             rule__Expanded__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Expanded__Group__1_in_rule__Expanded__Group__08497);
+            pushFollow(FOLLOW_rule__Expanded__Group__1_in_rule__Expanded__Group__08537);
             rule__Expanded__Group__1();
 
             state._fsp--;
@@ -11531,21 +11576,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4124:1: rule__Expanded__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4140:1: rule__Expanded__Group__0__Impl : ( () ) ;
     public final void rule__Expanded__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4128:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4129:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4144:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4145:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4129:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4130:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4145:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4146:1: ()
             {
              before(grammarAccess.getExpandedAccess().getExpandedAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4131:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4133:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4147:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4149:1: 
             {
             }
 
@@ -11568,21 +11613,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4143:1: rule__Expanded__Group__1 : rule__Expanded__Group__1__Impl rule__Expanded__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4159:1: rule__Expanded__Group__1 : rule__Expanded__Group__1__Impl rule__Expanded__Group__2 ;
     public final void rule__Expanded__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4147:1: ( rule__Expanded__Group__1__Impl rule__Expanded__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4148:2: rule__Expanded__Group__1__Impl rule__Expanded__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4163:1: ( rule__Expanded__Group__1__Impl rule__Expanded__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4164:2: rule__Expanded__Group__1__Impl rule__Expanded__Group__2
             {
-            pushFollow(FOLLOW_rule__Expanded__Group__1__Impl_in_rule__Expanded__Group__18555);
+            pushFollow(FOLLOW_rule__Expanded__Group__1__Impl_in_rule__Expanded__Group__18595);
             rule__Expanded__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Expanded__Group__2_in_rule__Expanded__Group__18558);
+            pushFollow(FOLLOW_rule__Expanded__Group__2_in_rule__Expanded__Group__18598);
             rule__Expanded__Group__2();
 
             state._fsp--;
@@ -11606,20 +11651,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4155:1: rule__Expanded__Group__1__Impl : ( '(' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4171:1: rule__Expanded__Group__1__Impl : ( '(' ) ;
     public final void rule__Expanded__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4159:1: ( ( '(' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4160:1: ( '(' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4175:1: ( ( '(' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4176:1: ( '(' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4160:1: ( '(' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4161:1: '('
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4176:1: ( '(' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4177:1: '('
             {
              before(grammarAccess.getExpandedAccess().getLeftParenthesisKeyword_1()); 
-            match(input,30,FOLLOW_30_in_rule__Expanded__Group__1__Impl8586); 
+            match(input,31,FOLLOW_31_in_rule__Expanded__Group__1__Impl8626); 
              after(grammarAccess.getExpandedAccess().getLeftParenthesisKeyword_1()); 
 
             }
@@ -11643,21 +11688,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4174:1: rule__Expanded__Group__2 : rule__Expanded__Group__2__Impl rule__Expanded__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4190:1: rule__Expanded__Group__2 : rule__Expanded__Group__2__Impl rule__Expanded__Group__3 ;
     public final void rule__Expanded__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4178:1: ( rule__Expanded__Group__2__Impl rule__Expanded__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4179:2: rule__Expanded__Group__2__Impl rule__Expanded__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4194:1: ( rule__Expanded__Group__2__Impl rule__Expanded__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4195:2: rule__Expanded__Group__2__Impl rule__Expanded__Group__3
             {
-            pushFollow(FOLLOW_rule__Expanded__Group__2__Impl_in_rule__Expanded__Group__28617);
+            pushFollow(FOLLOW_rule__Expanded__Group__2__Impl_in_rule__Expanded__Group__28657);
             rule__Expanded__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Expanded__Group__3_in_rule__Expanded__Group__28620);
+            pushFollow(FOLLOW_rule__Expanded__Group__3_in_rule__Expanded__Group__28660);
             rule__Expanded__Group__3();
 
             state._fsp--;
@@ -11681,26 +11726,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4186:1: rule__Expanded__Group__2__Impl : ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4202:1: rule__Expanded__Group__2__Impl : ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) ) ;
     public final void rule__Expanded__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4190:1: ( ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4191:1: ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4206:1: ( ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4207:1: ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4191:1: ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4192:1: ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4207:1: ( ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4208:1: ( ( rule__Expanded__WCharAssignment_2 ) ) ( ( rule__Expanded__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4192:1: ( ( rule__Expanded__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4193:1: ( rule__Expanded__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4208:1: ( ( rule__Expanded__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4209:1: ( rule__Expanded__WCharAssignment_2 )
             {
              before(grammarAccess.getExpandedAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4194:1: ( rule__Expanded__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4194:2: rule__Expanded__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4210:1: ( rule__Expanded__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4210:2: rule__Expanded__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8649);
+            pushFollow(FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8689);
             rule__Expanded__WCharAssignment_2();
 
             state._fsp--;
@@ -11712,26 +11757,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4197:1: ( ( rule__Expanded__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4198:1: ( rule__Expanded__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4213:1: ( ( rule__Expanded__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4214:1: ( rule__Expanded__WCharAssignment_2 )*
             {
              before(grammarAccess.getExpandedAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4199:1: ( rule__Expanded__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4215:1: ( rule__Expanded__WCharAssignment_2 )*
             loop40:
             do {
                 int alt40=2;
                 int LA40_0 = input.LA(1);
 
-                if ( (LA40_0==RULE_EGYSTRING||(LA40_0>=23 && LA40_0<=29)) ) {
+                if ( (LA40_0==RULE_EGYSTRING||(LA40_0>=24 && LA40_0<=30)) ) {
                     alt40=1;
                 }
 
 
                 switch (alt40) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4199:2: rule__Expanded__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4215:2: rule__Expanded__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8661);
+            	    pushFollow(FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8701);
             	    rule__Expanded__WCharAssignment_2();
 
             	    state._fsp--;
@@ -11771,16 +11816,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4210:1: rule__Expanded__Group__3 : rule__Expanded__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4226:1: rule__Expanded__Group__3 : rule__Expanded__Group__3__Impl ;
     public final void rule__Expanded__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4214:1: ( rule__Expanded__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4215:2: rule__Expanded__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4230:1: ( rule__Expanded__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4231:2: rule__Expanded__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Expanded__Group__3__Impl_in_rule__Expanded__Group__38694);
+            pushFollow(FOLLOW_rule__Expanded__Group__3__Impl_in_rule__Expanded__Group__38734);
             rule__Expanded__Group__3__Impl();
 
             state._fsp--;
@@ -11804,20 +11849,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4221:1: rule__Expanded__Group__3__Impl : ( ')' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4237:1: rule__Expanded__Group__3__Impl : ( ')' ) ;
     public final void rule__Expanded__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4225:1: ( ( ')' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4226:1: ( ')' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4241:1: ( ( ')' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4242:1: ( ')' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4226:1: ( ')' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4227:1: ')'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4242:1: ( ')' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4243:1: ')'
             {
              before(grammarAccess.getExpandedAccess().getRightParenthesisKeyword_3()); 
-            match(input,31,FOLLOW_31_in_rule__Expanded__Group__3__Impl8722); 
+            match(input,32,FOLLOW_32_in_rule__Expanded__Group__3__Impl8762); 
              after(grammarAccess.getExpandedAccess().getRightParenthesisKeyword_3()); 
 
             }
@@ -11841,21 +11886,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4248:1: rule__Emendation__Group__0 : rule__Emendation__Group__0__Impl rule__Emendation__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4264:1: rule__Emendation__Group__0 : rule__Emendation__Group__0__Impl rule__Emendation__Group__1 ;
     public final void rule__Emendation__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4252:1: ( rule__Emendation__Group__0__Impl rule__Emendation__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4253:2: rule__Emendation__Group__0__Impl rule__Emendation__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4268:1: ( rule__Emendation__Group__0__Impl rule__Emendation__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4269:2: rule__Emendation__Group__0__Impl rule__Emendation__Group__1
             {
-            pushFollow(FOLLOW_rule__Emendation__Group__0__Impl_in_rule__Emendation__Group__08761);
+            pushFollow(FOLLOW_rule__Emendation__Group__0__Impl_in_rule__Emendation__Group__08801);
             rule__Emendation__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Emendation__Group__1_in_rule__Emendation__Group__08764);
+            pushFollow(FOLLOW_rule__Emendation__Group__1_in_rule__Emendation__Group__08804);
             rule__Emendation__Group__1();
 
             state._fsp--;
@@ -11879,21 +11924,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4260:1: rule__Emendation__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4276:1: rule__Emendation__Group__0__Impl : ( () ) ;
     public final void rule__Emendation__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4264:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4265:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4280:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4281:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4265:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4266:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4281:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4282:1: ()
             {
              before(grammarAccess.getEmendationAccess().getEmendationAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4267:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4269:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4283:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4285:1: 
             {
             }
 
@@ -11916,21 +11961,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4279:1: rule__Emendation__Group__1 : rule__Emendation__Group__1__Impl rule__Emendation__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4295:1: rule__Emendation__Group__1 : rule__Emendation__Group__1__Impl rule__Emendation__Group__2 ;
     public final void rule__Emendation__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4283:1: ( rule__Emendation__Group__1__Impl rule__Emendation__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4284:2: rule__Emendation__Group__1__Impl rule__Emendation__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4299:1: ( rule__Emendation__Group__1__Impl rule__Emendation__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4300:2: rule__Emendation__Group__1__Impl rule__Emendation__Group__2
             {
-            pushFollow(FOLLOW_rule__Emendation__Group__1__Impl_in_rule__Emendation__Group__18822);
+            pushFollow(FOLLOW_rule__Emendation__Group__1__Impl_in_rule__Emendation__Group__18862);
             rule__Emendation__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Emendation__Group__2_in_rule__Emendation__Group__18825);
+            pushFollow(FOLLOW_rule__Emendation__Group__2_in_rule__Emendation__Group__18865);
             rule__Emendation__Group__2();
 
             state._fsp--;
@@ -11954,20 +11999,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4291:1: rule__Emendation__Group__1__Impl : ( '<' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4307:1: rule__Emendation__Group__1__Impl : ( '<' ) ;
     public final void rule__Emendation__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4295:1: ( ( '<' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4296:1: ( '<' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4311:1: ( ( '<' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4312:1: ( '<' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4296:1: ( '<' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4297:1: '<'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4312:1: ( '<' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4313:1: '<'
             {
              before(grammarAccess.getEmendationAccess().getLessThanSignKeyword_1()); 
-            match(input,32,FOLLOW_32_in_rule__Emendation__Group__1__Impl8853); 
+            match(input,33,FOLLOW_33_in_rule__Emendation__Group__1__Impl8893); 
              after(grammarAccess.getEmendationAccess().getLessThanSignKeyword_1()); 
 
             }
@@ -11991,21 +12036,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4310:1: rule__Emendation__Group__2 : rule__Emendation__Group__2__Impl rule__Emendation__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4326:1: rule__Emendation__Group__2 : rule__Emendation__Group__2__Impl rule__Emendation__Group__3 ;
     public final void rule__Emendation__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4314:1: ( rule__Emendation__Group__2__Impl rule__Emendation__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4315:2: rule__Emendation__Group__2__Impl rule__Emendation__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4330:1: ( rule__Emendation__Group__2__Impl rule__Emendation__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4331:2: rule__Emendation__Group__2__Impl rule__Emendation__Group__3
             {
-            pushFollow(FOLLOW_rule__Emendation__Group__2__Impl_in_rule__Emendation__Group__28884);
+            pushFollow(FOLLOW_rule__Emendation__Group__2__Impl_in_rule__Emendation__Group__28924);
             rule__Emendation__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Emendation__Group__3_in_rule__Emendation__Group__28887);
+            pushFollow(FOLLOW_rule__Emendation__Group__3_in_rule__Emendation__Group__28927);
             rule__Emendation__Group__3();
 
             state._fsp--;
@@ -12029,26 +12074,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4322:1: rule__Emendation__Group__2__Impl : ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4338:1: rule__Emendation__Group__2__Impl : ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) ) ;
     public final void rule__Emendation__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4326:1: ( ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4327:1: ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4342:1: ( ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4343:1: ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4327:1: ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4328:1: ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4343:1: ( ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4344:1: ( ( rule__Emendation__WCharAssignment_2 ) ) ( ( rule__Emendation__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4328:1: ( ( rule__Emendation__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4329:1: ( rule__Emendation__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4344:1: ( ( rule__Emendation__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4345:1: ( rule__Emendation__WCharAssignment_2 )
             {
              before(grammarAccess.getEmendationAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4330:1: ( rule__Emendation__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4330:2: rule__Emendation__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4346:1: ( rule__Emendation__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4346:2: rule__Emendation__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8916);
+            pushFollow(FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8956);
             rule__Emendation__WCharAssignment_2();
 
             state._fsp--;
@@ -12060,26 +12105,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4333:1: ( ( rule__Emendation__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4334:1: ( rule__Emendation__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4349:1: ( ( rule__Emendation__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4350:1: ( rule__Emendation__WCharAssignment_2 )*
             {
              before(grammarAccess.getEmendationAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4335:1: ( rule__Emendation__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4351:1: ( rule__Emendation__WCharAssignment_2 )*
             loop41:
             do {
                 int alt41=2;
                 int LA41_0 = input.LA(1);
 
-                if ( (LA41_0==RULE_EGYSTRING||(LA41_0>=23 && LA41_0<=30)) ) {
+                if ( (LA41_0==RULE_EGYSTRING||(LA41_0>=24 && LA41_0<=31)) ) {
                     alt41=1;
                 }
 
 
                 switch (alt41) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4335:2: rule__Emendation__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4351:2: rule__Emendation__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8928);
+            	    pushFollow(FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8968);
             	    rule__Emendation__WCharAssignment_2();
 
             	    state._fsp--;
@@ -12119,16 +12164,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4346:1: rule__Emendation__Group__3 : rule__Emendation__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4362:1: rule__Emendation__Group__3 : rule__Emendation__Group__3__Impl ;
     public final void rule__Emendation__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4350:1: ( rule__Emendation__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4351:2: rule__Emendation__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4366:1: ( rule__Emendation__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4367:2: rule__Emendation__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Emendation__Group__3__Impl_in_rule__Emendation__Group__38961);
+            pushFollow(FOLLOW_rule__Emendation__Group__3__Impl_in_rule__Emendation__Group__39001);
             rule__Emendation__Group__3__Impl();
 
             state._fsp--;
@@ -12152,20 +12197,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4357:1: rule__Emendation__Group__3__Impl : ( '>' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4373:1: rule__Emendation__Group__3__Impl : ( '>' ) ;
     public final void rule__Emendation__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4361:1: ( ( '>' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4362:1: ( '>' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4377:1: ( ( '>' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4378:1: ( '>' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4362:1: ( '>' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4363:1: '>'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4378:1: ( '>' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4379:1: '>'
             {
              before(grammarAccess.getEmendationAccess().getGreaterThanSignKeyword_3()); 
-            match(input,33,FOLLOW_33_in_rule__Emendation__Group__3__Impl8989); 
+            match(input,34,FOLLOW_34_in_rule__Emendation__Group__3__Impl9029); 
              after(grammarAccess.getEmendationAccess().getGreaterThanSignKeyword_3()); 
 
             }
@@ -12189,21 +12234,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4384:1: rule__DisputableReading__Group__0 : rule__DisputableReading__Group__0__Impl rule__DisputableReading__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4400:1: rule__DisputableReading__Group__0 : rule__DisputableReading__Group__0__Impl rule__DisputableReading__Group__1 ;
     public final void rule__DisputableReading__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4388:1: ( rule__DisputableReading__Group__0__Impl rule__DisputableReading__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4389:2: rule__DisputableReading__Group__0__Impl rule__DisputableReading__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4404:1: ( rule__DisputableReading__Group__0__Impl rule__DisputableReading__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4405:2: rule__DisputableReading__Group__0__Impl rule__DisputableReading__Group__1
             {
-            pushFollow(FOLLOW_rule__DisputableReading__Group__0__Impl_in_rule__DisputableReading__Group__09028);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__0__Impl_in_rule__DisputableReading__Group__09068);
             rule__DisputableReading__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DisputableReading__Group__1_in_rule__DisputableReading__Group__09031);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__1_in_rule__DisputableReading__Group__09071);
             rule__DisputableReading__Group__1();
 
             state._fsp--;
@@ -12227,21 +12272,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4396:1: rule__DisputableReading__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4412:1: rule__DisputableReading__Group__0__Impl : ( () ) ;
     public final void rule__DisputableReading__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4400:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4401:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4416:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4417:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4401:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4402:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4417:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4418:1: ()
             {
              before(grammarAccess.getDisputableReadingAccess().getDisputableReadingAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4403:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4405:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4419:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4421:1: 
             {
             }
 
@@ -12264,21 +12309,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4415:1: rule__DisputableReading__Group__1 : rule__DisputableReading__Group__1__Impl rule__DisputableReading__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4431:1: rule__DisputableReading__Group__1 : rule__DisputableReading__Group__1__Impl rule__DisputableReading__Group__2 ;
     public final void rule__DisputableReading__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4419:1: ( rule__DisputableReading__Group__1__Impl rule__DisputableReading__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4420:2: rule__DisputableReading__Group__1__Impl rule__DisputableReading__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4435:1: ( rule__DisputableReading__Group__1__Impl rule__DisputableReading__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4436:2: rule__DisputableReading__Group__1__Impl rule__DisputableReading__Group__2
             {
-            pushFollow(FOLLOW_rule__DisputableReading__Group__1__Impl_in_rule__DisputableReading__Group__19089);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__1__Impl_in_rule__DisputableReading__Group__19129);
             rule__DisputableReading__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DisputableReading__Group__2_in_rule__DisputableReading__Group__19092);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__2_in_rule__DisputableReading__Group__19132);
             rule__DisputableReading__Group__2();
 
             state._fsp--;
@@ -12302,20 +12347,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4427:1: rule__DisputableReading__Group__1__Impl : ( '?' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4443:1: rule__DisputableReading__Group__1__Impl : ( '?' ) ;
     public final void rule__DisputableReading__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4431:1: ( ( '?' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4432:1: ( '?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4447:1: ( ( '?' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4448:1: ( '?' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4432:1: ( '?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4433:1: '?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4448:1: ( '?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4449:1: '?'
             {
              before(grammarAccess.getDisputableReadingAccess().getQuestionMarkKeyword_1()); 
-            match(input,34,FOLLOW_34_in_rule__DisputableReading__Group__1__Impl9120); 
+            match(input,35,FOLLOW_35_in_rule__DisputableReading__Group__1__Impl9160); 
              after(grammarAccess.getDisputableReadingAccess().getQuestionMarkKeyword_1()); 
 
             }
@@ -12339,21 +12384,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4446:1: rule__DisputableReading__Group__2 : rule__DisputableReading__Group__2__Impl rule__DisputableReading__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4462:1: rule__DisputableReading__Group__2 : rule__DisputableReading__Group__2__Impl rule__DisputableReading__Group__3 ;
     public final void rule__DisputableReading__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4450:1: ( rule__DisputableReading__Group__2__Impl rule__DisputableReading__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4451:2: rule__DisputableReading__Group__2__Impl rule__DisputableReading__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4466:1: ( rule__DisputableReading__Group__2__Impl rule__DisputableReading__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4467:2: rule__DisputableReading__Group__2__Impl rule__DisputableReading__Group__3
             {
-            pushFollow(FOLLOW_rule__DisputableReading__Group__2__Impl_in_rule__DisputableReading__Group__29151);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__2__Impl_in_rule__DisputableReading__Group__29191);
             rule__DisputableReading__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__DisputableReading__Group__3_in_rule__DisputableReading__Group__29154);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__3_in_rule__DisputableReading__Group__29194);
             rule__DisputableReading__Group__3();
 
             state._fsp--;
@@ -12377,26 +12422,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4458:1: rule__DisputableReading__Group__2__Impl : ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4474:1: rule__DisputableReading__Group__2__Impl : ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) ) ;
     public final void rule__DisputableReading__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4462:1: ( ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4463:1: ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4478:1: ( ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4479:1: ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4463:1: ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4464:1: ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4479:1: ( ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4480:1: ( ( rule__DisputableReading__WCharAssignment_2 ) ) ( ( rule__DisputableReading__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4464:1: ( ( rule__DisputableReading__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4465:1: ( rule__DisputableReading__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4480:1: ( ( rule__DisputableReading__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4481:1: ( rule__DisputableReading__WCharAssignment_2 )
             {
              before(grammarAccess.getDisputableReadingAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4466:1: ( rule__DisputableReading__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4466:2: rule__DisputableReading__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4482:1: ( rule__DisputableReading__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4482:2: rule__DisputableReading__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9183);
+            pushFollow(FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9223);
             rule__DisputableReading__WCharAssignment_2();
 
             state._fsp--;
@@ -12408,26 +12453,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4469:1: ( ( rule__DisputableReading__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4470:1: ( rule__DisputableReading__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4485:1: ( ( rule__DisputableReading__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4486:1: ( rule__DisputableReading__WCharAssignment_2 )*
             {
              before(grammarAccess.getDisputableReadingAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4471:1: ( rule__DisputableReading__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4487:1: ( rule__DisputableReading__WCharAssignment_2 )*
             loop42:
             do {
                 int alt42=2;
                 int LA42_0 = input.LA(1);
 
-                if ( (LA42_0==RULE_EGYSTRING||(LA42_0>=23 && LA42_0<=30)) ) {
+                if ( (LA42_0==RULE_EGYSTRING||(LA42_0>=24 && LA42_0<=31)) ) {
                     alt42=1;
                 }
 
 
                 switch (alt42) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4471:2: rule__DisputableReading__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4487:2: rule__DisputableReading__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9195);
+            	    pushFollow(FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9235);
             	    rule__DisputableReading__WCharAssignment_2();
 
             	    state._fsp--;
@@ -12467,16 +12512,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4482:1: rule__DisputableReading__Group__3 : rule__DisputableReading__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4498:1: rule__DisputableReading__Group__3 : rule__DisputableReading__Group__3__Impl ;
     public final void rule__DisputableReading__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4486:1: ( rule__DisputableReading__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4487:2: rule__DisputableReading__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4502:1: ( rule__DisputableReading__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4503:2: rule__DisputableReading__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__DisputableReading__Group__3__Impl_in_rule__DisputableReading__Group__39228);
+            pushFollow(FOLLOW_rule__DisputableReading__Group__3__Impl_in_rule__DisputableReading__Group__39268);
             rule__DisputableReading__Group__3__Impl();
 
             state._fsp--;
@@ -12500,20 +12545,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4493:1: rule__DisputableReading__Group__3__Impl : ( '?' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4509:1: rule__DisputableReading__Group__3__Impl : ( '?' ) ;
     public final void rule__DisputableReading__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4497:1: ( ( '?' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4498:1: ( '?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4513:1: ( ( '?' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4514:1: ( '?' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4498:1: ( '?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4499:1: '?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4514:1: ( '?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4515:1: '?'
             {
              before(grammarAccess.getDisputableReadingAccess().getQuestionMarkKeyword_3()); 
-            match(input,34,FOLLOW_34_in_rule__DisputableReading__Group__3__Impl9256); 
+            match(input,35,FOLLOW_35_in_rule__DisputableReading__Group__3__Impl9296); 
              after(grammarAccess.getDisputableReadingAccess().getQuestionMarkKeyword_3()); 
 
             }
@@ -12537,21 +12582,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4520:1: rule__Lacuna__Group__0 : rule__Lacuna__Group__0__Impl rule__Lacuna__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4536:1: rule__Lacuna__Group__0 : rule__Lacuna__Group__0__Impl rule__Lacuna__Group__1 ;
     public final void rule__Lacuna__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4524:1: ( rule__Lacuna__Group__0__Impl rule__Lacuna__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4525:2: rule__Lacuna__Group__0__Impl rule__Lacuna__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4540:1: ( rule__Lacuna__Group__0__Impl rule__Lacuna__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4541:2: rule__Lacuna__Group__0__Impl rule__Lacuna__Group__1
             {
-            pushFollow(FOLLOW_rule__Lacuna__Group__0__Impl_in_rule__Lacuna__Group__09295);
+            pushFollow(FOLLOW_rule__Lacuna__Group__0__Impl_in_rule__Lacuna__Group__09335);
             rule__Lacuna__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Lacuna__Group__1_in_rule__Lacuna__Group__09298);
+            pushFollow(FOLLOW_rule__Lacuna__Group__1_in_rule__Lacuna__Group__09338);
             rule__Lacuna__Group__1();
 
             state._fsp--;
@@ -12575,21 +12620,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4532:1: rule__Lacuna__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4548:1: rule__Lacuna__Group__0__Impl : ( () ) ;
     public final void rule__Lacuna__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4536:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4537:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4552:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4553:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4537:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4538:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4553:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4554:1: ()
             {
              before(grammarAccess.getLacunaAccess().getLacunaAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4539:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4541:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4555:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4557:1: 
             {
             }
 
@@ -12612,21 +12657,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4551:1: rule__Lacuna__Group__1 : rule__Lacuna__Group__1__Impl rule__Lacuna__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4567:1: rule__Lacuna__Group__1 : rule__Lacuna__Group__1__Impl rule__Lacuna__Group__2 ;
     public final void rule__Lacuna__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4555:1: ( rule__Lacuna__Group__1__Impl rule__Lacuna__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4556:2: rule__Lacuna__Group__1__Impl rule__Lacuna__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4571:1: ( rule__Lacuna__Group__1__Impl rule__Lacuna__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4572:2: rule__Lacuna__Group__1__Impl rule__Lacuna__Group__2
             {
-            pushFollow(FOLLOW_rule__Lacuna__Group__1__Impl_in_rule__Lacuna__Group__19356);
+            pushFollow(FOLLOW_rule__Lacuna__Group__1__Impl_in_rule__Lacuna__Group__19396);
             rule__Lacuna__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Lacuna__Group__2_in_rule__Lacuna__Group__19359);
+            pushFollow(FOLLOW_rule__Lacuna__Group__2_in_rule__Lacuna__Group__19399);
             rule__Lacuna__Group__2();
 
             state._fsp--;
@@ -12650,20 +12695,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4563:1: rule__Lacuna__Group__1__Impl : ( '[' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4579:1: rule__Lacuna__Group__1__Impl : ( '[' ) ;
     public final void rule__Lacuna__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4567:1: ( ( '[' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4568:1: ( '[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4583:1: ( ( '[' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4584:1: ( '[' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4568:1: ( '[' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4569:1: '['
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4584:1: ( '[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4585:1: '['
             {
              before(grammarAccess.getLacunaAccess().getLeftSquareBracketKeyword_1()); 
-            match(input,35,FOLLOW_35_in_rule__Lacuna__Group__1__Impl9387); 
+            match(input,36,FOLLOW_36_in_rule__Lacuna__Group__1__Impl9427); 
              after(grammarAccess.getLacunaAccess().getLeftSquareBracketKeyword_1()); 
 
             }
@@ -12687,21 +12732,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4582:1: rule__Lacuna__Group__2 : rule__Lacuna__Group__2__Impl rule__Lacuna__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4598:1: rule__Lacuna__Group__2 : rule__Lacuna__Group__2__Impl rule__Lacuna__Group__3 ;
     public final void rule__Lacuna__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4586:1: ( rule__Lacuna__Group__2__Impl rule__Lacuna__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4587:2: rule__Lacuna__Group__2__Impl rule__Lacuna__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4602:1: ( rule__Lacuna__Group__2__Impl rule__Lacuna__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4603:2: rule__Lacuna__Group__2__Impl rule__Lacuna__Group__3
             {
-            pushFollow(FOLLOW_rule__Lacuna__Group__2__Impl_in_rule__Lacuna__Group__29418);
+            pushFollow(FOLLOW_rule__Lacuna__Group__2__Impl_in_rule__Lacuna__Group__29458);
             rule__Lacuna__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Lacuna__Group__3_in_rule__Lacuna__Group__29421);
+            pushFollow(FOLLOW_rule__Lacuna__Group__3_in_rule__Lacuna__Group__29461);
             rule__Lacuna__Group__3();
 
             state._fsp--;
@@ -12725,26 +12770,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4594:1: rule__Lacuna__Group__2__Impl : ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4610:1: rule__Lacuna__Group__2__Impl : ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) ) ;
     public final void rule__Lacuna__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4598:1: ( ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4599:1: ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4614:1: ( ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4615:1: ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4599:1: ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4600:1: ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4615:1: ( ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4616:1: ( ( rule__Lacuna__WCharAssignment_2 ) ) ( ( rule__Lacuna__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4600:1: ( ( rule__Lacuna__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4601:1: ( rule__Lacuna__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4616:1: ( ( rule__Lacuna__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4617:1: ( rule__Lacuna__WCharAssignment_2 )
             {
              before(grammarAccess.getLacunaAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4602:1: ( rule__Lacuna__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4602:2: rule__Lacuna__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4618:1: ( rule__Lacuna__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4618:2: rule__Lacuna__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9450);
+            pushFollow(FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9490);
             rule__Lacuna__WCharAssignment_2();
 
             state._fsp--;
@@ -12756,26 +12801,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4605:1: ( ( rule__Lacuna__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4606:1: ( rule__Lacuna__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4621:1: ( ( rule__Lacuna__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4622:1: ( rule__Lacuna__WCharAssignment_2 )*
             {
              before(grammarAccess.getLacunaAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4607:1: ( rule__Lacuna__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4623:1: ( rule__Lacuna__WCharAssignment_2 )*
             loop43:
             do {
                 int alt43=2;
                 int LA43_0 = input.LA(1);
 
-                if ( (LA43_0==RULE_EGYSTRING||(LA43_0>=23 && LA43_0<=30)) ) {
+                if ( (LA43_0==RULE_EGYSTRING||(LA43_0>=24 && LA43_0<=31)) ) {
                     alt43=1;
                 }
 
 
                 switch (alt43) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4607:2: rule__Lacuna__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4623:2: rule__Lacuna__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9462);
+            	    pushFollow(FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9502);
             	    rule__Lacuna__WCharAssignment_2();
 
             	    state._fsp--;
@@ -12815,16 +12860,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4618:1: rule__Lacuna__Group__3 : rule__Lacuna__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4634:1: rule__Lacuna__Group__3 : rule__Lacuna__Group__3__Impl ;
     public final void rule__Lacuna__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4622:1: ( rule__Lacuna__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4623:2: rule__Lacuna__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4638:1: ( rule__Lacuna__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4639:2: rule__Lacuna__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Lacuna__Group__3__Impl_in_rule__Lacuna__Group__39495);
+            pushFollow(FOLLOW_rule__Lacuna__Group__3__Impl_in_rule__Lacuna__Group__39535);
             rule__Lacuna__Group__3__Impl();
 
             state._fsp--;
@@ -12848,20 +12893,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4629:1: rule__Lacuna__Group__3__Impl : ( ']' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4645:1: rule__Lacuna__Group__3__Impl : ( ']' ) ;
     public final void rule__Lacuna__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4633:1: ( ( ']' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4634:1: ( ']' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4649:1: ( ( ']' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4650:1: ( ']' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4634:1: ( ']' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4635:1: ']'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4650:1: ( ']' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4651:1: ']'
             {
              before(grammarAccess.getLacunaAccess().getRightSquareBracketKeyword_3()); 
-            match(input,36,FOLLOW_36_in_rule__Lacuna__Group__3__Impl9523); 
+            match(input,37,FOLLOW_37_in_rule__Lacuna__Group__3__Impl9563); 
              after(grammarAccess.getLacunaAccess().getRightSquareBracketKeyword_3()); 
 
             }
@@ -12885,21 +12930,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4656:1: rule__Deletion__Group__0 : rule__Deletion__Group__0__Impl rule__Deletion__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4672:1: rule__Deletion__Group__0 : rule__Deletion__Group__0__Impl rule__Deletion__Group__1 ;
     public final void rule__Deletion__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4660:1: ( rule__Deletion__Group__0__Impl rule__Deletion__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4661:2: rule__Deletion__Group__0__Impl rule__Deletion__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4676:1: ( rule__Deletion__Group__0__Impl rule__Deletion__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4677:2: rule__Deletion__Group__0__Impl rule__Deletion__Group__1
             {
-            pushFollow(FOLLOW_rule__Deletion__Group__0__Impl_in_rule__Deletion__Group__09562);
+            pushFollow(FOLLOW_rule__Deletion__Group__0__Impl_in_rule__Deletion__Group__09602);
             rule__Deletion__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Deletion__Group__1_in_rule__Deletion__Group__09565);
+            pushFollow(FOLLOW_rule__Deletion__Group__1_in_rule__Deletion__Group__09605);
             rule__Deletion__Group__1();
 
             state._fsp--;
@@ -12923,21 +12968,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4668:1: rule__Deletion__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4684:1: rule__Deletion__Group__0__Impl : ( () ) ;
     public final void rule__Deletion__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4672:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4673:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4688:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4689:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4673:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4674:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4689:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4690:1: ()
             {
              before(grammarAccess.getDeletionAccess().getDeletionAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4675:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4677:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4691:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4693:1: 
             {
             }
 
@@ -12960,21 +13005,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4687:1: rule__Deletion__Group__1 : rule__Deletion__Group__1__Impl rule__Deletion__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4703:1: rule__Deletion__Group__1 : rule__Deletion__Group__1__Impl rule__Deletion__Group__2 ;
     public final void rule__Deletion__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4691:1: ( rule__Deletion__Group__1__Impl rule__Deletion__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4692:2: rule__Deletion__Group__1__Impl rule__Deletion__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4707:1: ( rule__Deletion__Group__1__Impl rule__Deletion__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4708:2: rule__Deletion__Group__1__Impl rule__Deletion__Group__2
             {
-            pushFollow(FOLLOW_rule__Deletion__Group__1__Impl_in_rule__Deletion__Group__19623);
+            pushFollow(FOLLOW_rule__Deletion__Group__1__Impl_in_rule__Deletion__Group__19663);
             rule__Deletion__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Deletion__Group__2_in_rule__Deletion__Group__19626);
+            pushFollow(FOLLOW_rule__Deletion__Group__2_in_rule__Deletion__Group__19666);
             rule__Deletion__Group__2();
 
             state._fsp--;
@@ -12998,20 +13043,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4699:1: rule__Deletion__Group__1__Impl : ( '{' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4715:1: rule__Deletion__Group__1__Impl : ( '{' ) ;
     public final void rule__Deletion__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4703:1: ( ( '{' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4704:1: ( '{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4719:1: ( ( '{' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4720:1: ( '{' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4704:1: ( '{' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4705:1: '{'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4720:1: ( '{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4721:1: '{'
             {
              before(grammarAccess.getDeletionAccess().getLeftCurlyBracketKeyword_1()); 
-            match(input,37,FOLLOW_37_in_rule__Deletion__Group__1__Impl9654); 
+            match(input,38,FOLLOW_38_in_rule__Deletion__Group__1__Impl9694); 
              after(grammarAccess.getDeletionAccess().getLeftCurlyBracketKeyword_1()); 
 
             }
@@ -13035,21 +13080,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4718:1: rule__Deletion__Group__2 : rule__Deletion__Group__2__Impl rule__Deletion__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4734:1: rule__Deletion__Group__2 : rule__Deletion__Group__2__Impl rule__Deletion__Group__3 ;
     public final void rule__Deletion__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4722:1: ( rule__Deletion__Group__2__Impl rule__Deletion__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4723:2: rule__Deletion__Group__2__Impl rule__Deletion__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4738:1: ( rule__Deletion__Group__2__Impl rule__Deletion__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4739:2: rule__Deletion__Group__2__Impl rule__Deletion__Group__3
             {
-            pushFollow(FOLLOW_rule__Deletion__Group__2__Impl_in_rule__Deletion__Group__29685);
+            pushFollow(FOLLOW_rule__Deletion__Group__2__Impl_in_rule__Deletion__Group__29725);
             rule__Deletion__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Deletion__Group__3_in_rule__Deletion__Group__29688);
+            pushFollow(FOLLOW_rule__Deletion__Group__3_in_rule__Deletion__Group__29728);
             rule__Deletion__Group__3();
 
             state._fsp--;
@@ -13073,26 +13118,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4730:1: rule__Deletion__Group__2__Impl : ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4746:1: rule__Deletion__Group__2__Impl : ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) ) ;
     public final void rule__Deletion__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4734:1: ( ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4735:1: ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4750:1: ( ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4751:1: ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4735:1: ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4736:1: ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4751:1: ( ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4752:1: ( ( rule__Deletion__WCharAssignment_2 ) ) ( ( rule__Deletion__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4736:1: ( ( rule__Deletion__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4737:1: ( rule__Deletion__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4752:1: ( ( rule__Deletion__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4753:1: ( rule__Deletion__WCharAssignment_2 )
             {
              before(grammarAccess.getDeletionAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4738:1: ( rule__Deletion__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4738:2: rule__Deletion__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4754:1: ( rule__Deletion__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4754:2: rule__Deletion__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9717);
+            pushFollow(FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9757);
             rule__Deletion__WCharAssignment_2();
 
             state._fsp--;
@@ -13104,26 +13149,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4741:1: ( ( rule__Deletion__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4742:1: ( rule__Deletion__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4757:1: ( ( rule__Deletion__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4758:1: ( rule__Deletion__WCharAssignment_2 )*
             {
              before(grammarAccess.getDeletionAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4743:1: ( rule__Deletion__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4759:1: ( rule__Deletion__WCharAssignment_2 )*
             loop44:
             do {
                 int alt44=2;
                 int LA44_0 = input.LA(1);
 
-                if ( (LA44_0==RULE_EGYSTRING||(LA44_0>=23 && LA44_0<=30)||LA44_0==47) ) {
+                if ( (LA44_0==RULE_EGYSTRING||(LA44_0>=24 && LA44_0<=31)||LA44_0==48) ) {
                     alt44=1;
                 }
 
 
                 switch (alt44) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4743:2: rule__Deletion__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4759:2: rule__Deletion__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9729);
+            	    pushFollow(FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9769);
             	    rule__Deletion__WCharAssignment_2();
 
             	    state._fsp--;
@@ -13163,16 +13208,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4754:1: rule__Deletion__Group__3 : rule__Deletion__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4770:1: rule__Deletion__Group__3 : rule__Deletion__Group__3__Impl ;
     public final void rule__Deletion__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4758:1: ( rule__Deletion__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4759:2: rule__Deletion__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4774:1: ( rule__Deletion__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4775:2: rule__Deletion__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Deletion__Group__3__Impl_in_rule__Deletion__Group__39762);
+            pushFollow(FOLLOW_rule__Deletion__Group__3__Impl_in_rule__Deletion__Group__39802);
             rule__Deletion__Group__3__Impl();
 
             state._fsp--;
@@ -13196,20 +13241,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4765:1: rule__Deletion__Group__3__Impl : ( '}' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4781:1: rule__Deletion__Group__3__Impl : ( '}' ) ;
     public final void rule__Deletion__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4769:1: ( ( '}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4770:1: ( '}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4785:1: ( ( '}' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4786:1: ( '}' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4770:1: ( '}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4771:1: '}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4786:1: ( '}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4787:1: '}'
             {
              before(grammarAccess.getDeletionAccess().getRightCurlyBracketKeyword_3()); 
-            match(input,38,FOLLOW_38_in_rule__Deletion__Group__3__Impl9790); 
+            match(input,39,FOLLOW_39_in_rule__Deletion__Group__3__Impl9830); 
              after(grammarAccess.getDeletionAccess().getRightCurlyBracketKeyword_3()); 
 
             }
@@ -13233,21 +13278,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4792:1: rule__ExpandedColumn__Group__0 : rule__ExpandedColumn__Group__0__Impl rule__ExpandedColumn__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4808:1: rule__ExpandedColumn__Group__0 : rule__ExpandedColumn__Group__0__Impl rule__ExpandedColumn__Group__1 ;
     public final void rule__ExpandedColumn__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4796:1: ( rule__ExpandedColumn__Group__0__Impl rule__ExpandedColumn__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4797:2: rule__ExpandedColumn__Group__0__Impl rule__ExpandedColumn__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4812:1: ( rule__ExpandedColumn__Group__0__Impl rule__ExpandedColumn__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4813:2: rule__ExpandedColumn__Group__0__Impl rule__ExpandedColumn__Group__1
             {
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__0__Impl_in_rule__ExpandedColumn__Group__09829);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__0__Impl_in_rule__ExpandedColumn__Group__09869);
             rule__ExpandedColumn__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__1_in_rule__ExpandedColumn__Group__09832);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__1_in_rule__ExpandedColumn__Group__09872);
             rule__ExpandedColumn__Group__1();
 
             state._fsp--;
@@ -13271,21 +13316,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4804:1: rule__ExpandedColumn__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4820:1: rule__ExpandedColumn__Group__0__Impl : ( () ) ;
     public final void rule__ExpandedColumn__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4808:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4809:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4824:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4825:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4809:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4810:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4825:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4826:1: ()
             {
              before(grammarAccess.getExpandedColumnAccess().getExpandedColumnAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4811:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4813:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4827:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4829:1: 
             {
             }
 
@@ -13308,21 +13353,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4823:1: rule__ExpandedColumn__Group__1 : rule__ExpandedColumn__Group__1__Impl rule__ExpandedColumn__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4839:1: rule__ExpandedColumn__Group__1 : rule__ExpandedColumn__Group__1__Impl rule__ExpandedColumn__Group__2 ;
     public final void rule__ExpandedColumn__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4827:1: ( rule__ExpandedColumn__Group__1__Impl rule__ExpandedColumn__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4828:2: rule__ExpandedColumn__Group__1__Impl rule__ExpandedColumn__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4843:1: ( rule__ExpandedColumn__Group__1__Impl rule__ExpandedColumn__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4844:2: rule__ExpandedColumn__Group__1__Impl rule__ExpandedColumn__Group__2
             {
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__1__Impl_in_rule__ExpandedColumn__Group__19890);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__1__Impl_in_rule__ExpandedColumn__Group__19930);
             rule__ExpandedColumn__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__2_in_rule__ExpandedColumn__Group__19893);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__2_in_rule__ExpandedColumn__Group__19933);
             rule__ExpandedColumn__Group__2();
 
             state._fsp--;
@@ -13346,20 +13391,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4835:1: rule__ExpandedColumn__Group__1__Impl : ( '<<' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4851:1: rule__ExpandedColumn__Group__1__Impl : ( '<<' ) ;
     public final void rule__ExpandedColumn__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4839:1: ( ( '<<' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4840:1: ( '<<' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4855:1: ( ( '<<' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4856:1: ( '<<' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4840:1: ( '<<' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4841:1: '<<'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4856:1: ( '<<' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4857:1: '<<'
             {
              before(grammarAccess.getExpandedColumnAccess().getLessThanSignLessThanSignKeyword_1()); 
-            match(input,39,FOLLOW_39_in_rule__ExpandedColumn__Group__1__Impl9921); 
+            match(input,40,FOLLOW_40_in_rule__ExpandedColumn__Group__1__Impl9961); 
              after(grammarAccess.getExpandedColumnAccess().getLessThanSignLessThanSignKeyword_1()); 
 
             }
@@ -13383,21 +13428,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4854:1: rule__ExpandedColumn__Group__2 : rule__ExpandedColumn__Group__2__Impl rule__ExpandedColumn__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4870:1: rule__ExpandedColumn__Group__2 : rule__ExpandedColumn__Group__2__Impl rule__ExpandedColumn__Group__3 ;
     public final void rule__ExpandedColumn__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4858:1: ( rule__ExpandedColumn__Group__2__Impl rule__ExpandedColumn__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4859:2: rule__ExpandedColumn__Group__2__Impl rule__ExpandedColumn__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4874:1: ( rule__ExpandedColumn__Group__2__Impl rule__ExpandedColumn__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4875:2: rule__ExpandedColumn__Group__2__Impl rule__ExpandedColumn__Group__3
             {
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__2__Impl_in_rule__ExpandedColumn__Group__29952);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__2__Impl_in_rule__ExpandedColumn__Group__29992);
             rule__ExpandedColumn__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__3_in_rule__ExpandedColumn__Group__29955);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__3_in_rule__ExpandedColumn__Group__29995);
             rule__ExpandedColumn__Group__3();
 
             state._fsp--;
@@ -13421,26 +13466,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4866:1: rule__ExpandedColumn__Group__2__Impl : ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4882:1: rule__ExpandedColumn__Group__2__Impl : ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) ) ;
     public final void rule__ExpandedColumn__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4870:1: ( ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4871:1: ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4886:1: ( ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4887:1: ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4871:1: ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4872:1: ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4887:1: ( ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4888:1: ( ( rule__ExpandedColumn__WCharAssignment_2 ) ) ( ( rule__ExpandedColumn__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4872:1: ( ( rule__ExpandedColumn__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4873:1: ( rule__ExpandedColumn__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4888:1: ( ( rule__ExpandedColumn__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4889:1: ( rule__ExpandedColumn__WCharAssignment_2 )
             {
              before(grammarAccess.getExpandedColumnAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4874:1: ( rule__ExpandedColumn__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4874:2: rule__ExpandedColumn__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4890:1: ( rule__ExpandedColumn__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4890:2: rule__ExpandedColumn__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl9984);
+            pushFollow(FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl10024);
             rule__ExpandedColumn__WCharAssignment_2();
 
             state._fsp--;
@@ -13452,26 +13497,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4877:1: ( ( rule__ExpandedColumn__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4878:1: ( rule__ExpandedColumn__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4893:1: ( ( rule__ExpandedColumn__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4894:1: ( rule__ExpandedColumn__WCharAssignment_2 )*
             {
              before(grammarAccess.getExpandedColumnAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4879:1: ( rule__ExpandedColumn__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4895:1: ( rule__ExpandedColumn__WCharAssignment_2 )*
             loop45:
             do {
                 int alt45=2;
                 int LA45_0 = input.LA(1);
 
-                if ( (LA45_0==RULE_EGYSTRING||(LA45_0>=23 && LA45_0<=30)) ) {
+                if ( (LA45_0==RULE_EGYSTRING||(LA45_0>=24 && LA45_0<=31)) ) {
                     alt45=1;
                 }
 
 
                 switch (alt45) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4879:2: rule__ExpandedColumn__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4895:2: rule__ExpandedColumn__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl9996);
+            	    pushFollow(FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl10036);
             	    rule__ExpandedColumn__WCharAssignment_2();
 
             	    state._fsp--;
@@ -13511,16 +13556,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4890:1: rule__ExpandedColumn__Group__3 : rule__ExpandedColumn__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4906:1: rule__ExpandedColumn__Group__3 : rule__ExpandedColumn__Group__3__Impl ;
     public final void rule__ExpandedColumn__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4894:1: ( rule__ExpandedColumn__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4895:2: rule__ExpandedColumn__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4910:1: ( rule__ExpandedColumn__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4911:2: rule__ExpandedColumn__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__ExpandedColumn__Group__3__Impl_in_rule__ExpandedColumn__Group__310029);
+            pushFollow(FOLLOW_rule__ExpandedColumn__Group__3__Impl_in_rule__ExpandedColumn__Group__310069);
             rule__ExpandedColumn__Group__3__Impl();
 
             state._fsp--;
@@ -13544,20 +13589,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4901:1: rule__ExpandedColumn__Group__3__Impl : ( '>>' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4917:1: rule__ExpandedColumn__Group__3__Impl : ( '>>' ) ;
     public final void rule__ExpandedColumn__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4905:1: ( ( '>>' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4906:1: ( '>>' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4921:1: ( ( '>>' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4922:1: ( '>>' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4906:1: ( '>>' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4907:1: '>>'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4922:1: ( '>>' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4923:1: '>>'
             {
              before(grammarAccess.getExpandedColumnAccess().getGreaterThanSignGreaterThanSignKeyword_3()); 
-            match(input,40,FOLLOW_40_in_rule__ExpandedColumn__Group__3__Impl10057); 
+            match(input,41,FOLLOW_41_in_rule__ExpandedColumn__Group__3__Impl10097); 
              after(grammarAccess.getExpandedColumnAccess().getGreaterThanSignGreaterThanSignKeyword_3()); 
 
             }
@@ -13581,21 +13626,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4928:1: rule__Rasur__Group__0 : rule__Rasur__Group__0__Impl rule__Rasur__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4944:1: rule__Rasur__Group__0 : rule__Rasur__Group__0__Impl rule__Rasur__Group__1 ;
     public final void rule__Rasur__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4932:1: ( rule__Rasur__Group__0__Impl rule__Rasur__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4933:2: rule__Rasur__Group__0__Impl rule__Rasur__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4948:1: ( rule__Rasur__Group__0__Impl rule__Rasur__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4949:2: rule__Rasur__Group__0__Impl rule__Rasur__Group__1
             {
-            pushFollow(FOLLOW_rule__Rasur__Group__0__Impl_in_rule__Rasur__Group__010096);
+            pushFollow(FOLLOW_rule__Rasur__Group__0__Impl_in_rule__Rasur__Group__010136);
             rule__Rasur__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Rasur__Group__1_in_rule__Rasur__Group__010099);
+            pushFollow(FOLLOW_rule__Rasur__Group__1_in_rule__Rasur__Group__010139);
             rule__Rasur__Group__1();
 
             state._fsp--;
@@ -13619,21 +13664,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4940:1: rule__Rasur__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4956:1: rule__Rasur__Group__0__Impl : ( () ) ;
     public final void rule__Rasur__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4944:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4945:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4960:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4961:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4945:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4946:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4961:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4962:1: ()
             {
              before(grammarAccess.getRasurAccess().getRasurAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4947:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4949:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4963:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4965:1: 
             {
             }
 
@@ -13656,21 +13701,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4959:1: rule__Rasur__Group__1 : rule__Rasur__Group__1__Impl rule__Rasur__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4975:1: rule__Rasur__Group__1 : rule__Rasur__Group__1__Impl rule__Rasur__Group__2 ;
     public final void rule__Rasur__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4963:1: ( rule__Rasur__Group__1__Impl rule__Rasur__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4964:2: rule__Rasur__Group__1__Impl rule__Rasur__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4979:1: ( rule__Rasur__Group__1__Impl rule__Rasur__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4980:2: rule__Rasur__Group__1__Impl rule__Rasur__Group__2
             {
-            pushFollow(FOLLOW_rule__Rasur__Group__1__Impl_in_rule__Rasur__Group__110157);
+            pushFollow(FOLLOW_rule__Rasur__Group__1__Impl_in_rule__Rasur__Group__110197);
             rule__Rasur__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Rasur__Group__2_in_rule__Rasur__Group__110160);
+            pushFollow(FOLLOW_rule__Rasur__Group__2_in_rule__Rasur__Group__110200);
             rule__Rasur__Group__2();
 
             state._fsp--;
@@ -13694,20 +13739,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4971:1: rule__Rasur__Group__1__Impl : ( '{{' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4987:1: rule__Rasur__Group__1__Impl : ( '{{' ) ;
     public final void rule__Rasur__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4975:1: ( ( '{{' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4976:1: ( '{{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4991:1: ( ( '{{' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4992:1: ( '{{' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4976:1: ( '{{' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4977:1: '{{'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4992:1: ( '{{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4993:1: '{{'
             {
              before(grammarAccess.getRasurAccess().getLeftCurlyBracketLeftCurlyBracketKeyword_1()); 
-            match(input,41,FOLLOW_41_in_rule__Rasur__Group__1__Impl10188); 
+            match(input,42,FOLLOW_42_in_rule__Rasur__Group__1__Impl10228); 
              after(grammarAccess.getRasurAccess().getLeftCurlyBracketLeftCurlyBracketKeyword_1()); 
 
             }
@@ -13731,21 +13776,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4990:1: rule__Rasur__Group__2 : rule__Rasur__Group__2__Impl rule__Rasur__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5006:1: rule__Rasur__Group__2 : rule__Rasur__Group__2__Impl rule__Rasur__Group__3 ;
     public final void rule__Rasur__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4994:1: ( rule__Rasur__Group__2__Impl rule__Rasur__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:4995:2: rule__Rasur__Group__2__Impl rule__Rasur__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5010:1: ( rule__Rasur__Group__2__Impl rule__Rasur__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5011:2: rule__Rasur__Group__2__Impl rule__Rasur__Group__3
             {
-            pushFollow(FOLLOW_rule__Rasur__Group__2__Impl_in_rule__Rasur__Group__210219);
+            pushFollow(FOLLOW_rule__Rasur__Group__2__Impl_in_rule__Rasur__Group__210259);
             rule__Rasur__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Rasur__Group__3_in_rule__Rasur__Group__210222);
+            pushFollow(FOLLOW_rule__Rasur__Group__3_in_rule__Rasur__Group__210262);
             rule__Rasur__Group__3();
 
             state._fsp--;
@@ -13769,26 +13814,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5002:1: rule__Rasur__Group__2__Impl : ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5018:1: rule__Rasur__Group__2__Impl : ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) ) ;
     public final void rule__Rasur__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5006:1: ( ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5007:1: ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5022:1: ( ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5023:1: ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5007:1: ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5008:1: ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5023:1: ( ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5024:1: ( ( rule__Rasur__WCharAssignment_2 ) ) ( ( rule__Rasur__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5008:1: ( ( rule__Rasur__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5009:1: ( rule__Rasur__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5024:1: ( ( rule__Rasur__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5025:1: ( rule__Rasur__WCharAssignment_2 )
             {
              before(grammarAccess.getRasurAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5010:1: ( rule__Rasur__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5010:2: rule__Rasur__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5026:1: ( rule__Rasur__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5026:2: rule__Rasur__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10251);
+            pushFollow(FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10291);
             rule__Rasur__WCharAssignment_2();
 
             state._fsp--;
@@ -13800,26 +13845,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5013:1: ( ( rule__Rasur__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5014:1: ( rule__Rasur__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5029:1: ( ( rule__Rasur__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5030:1: ( rule__Rasur__WCharAssignment_2 )*
             {
              before(grammarAccess.getRasurAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5015:1: ( rule__Rasur__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5031:1: ( rule__Rasur__WCharAssignment_2 )*
             loop46:
             do {
                 int alt46=2;
                 int LA46_0 = input.LA(1);
 
-                if ( (LA46_0==RULE_EGYSTRING||(LA46_0>=23 && LA46_0<=30)) ) {
+                if ( (LA46_0==RULE_EGYSTRING||(LA46_0>=24 && LA46_0<=31)) ) {
                     alt46=1;
                 }
 
 
                 switch (alt46) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5015:2: rule__Rasur__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5031:2: rule__Rasur__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10263);
+            	    pushFollow(FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10303);
             	    rule__Rasur__WCharAssignment_2();
 
             	    state._fsp--;
@@ -13859,16 +13904,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5026:1: rule__Rasur__Group__3 : rule__Rasur__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5042:1: rule__Rasur__Group__3 : rule__Rasur__Group__3__Impl ;
     public final void rule__Rasur__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5030:1: ( rule__Rasur__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5031:2: rule__Rasur__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5046:1: ( rule__Rasur__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5047:2: rule__Rasur__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Rasur__Group__3__Impl_in_rule__Rasur__Group__310296);
+            pushFollow(FOLLOW_rule__Rasur__Group__3__Impl_in_rule__Rasur__Group__310336);
             rule__Rasur__Group__3__Impl();
 
             state._fsp--;
@@ -13892,20 +13937,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5037:1: rule__Rasur__Group__3__Impl : ( '}}' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5053:1: rule__Rasur__Group__3__Impl : ( '}}' ) ;
     public final void rule__Rasur__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5041:1: ( ( '}}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5042:1: ( '}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5057:1: ( ( '}}' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5058:1: ( '}}' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5042:1: ( '}}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5043:1: '}}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5058:1: ( '}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5059:1: '}}'
             {
              before(grammarAccess.getRasurAccess().getRightCurlyBracketRightCurlyBracketKeyword_3()); 
-            match(input,42,FOLLOW_42_in_rule__Rasur__Group__3__Impl10324); 
+            match(input,43,FOLLOW_43_in_rule__Rasur__Group__3__Impl10364); 
              after(grammarAccess.getRasurAccess().getRightCurlyBracketRightCurlyBracketKeyword_3()); 
 
             }
@@ -13929,21 +13974,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5064:1: rule__AncientExpanded__Group__0 : rule__AncientExpanded__Group__0__Impl rule__AncientExpanded__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5080:1: rule__AncientExpanded__Group__0 : rule__AncientExpanded__Group__0__Impl rule__AncientExpanded__Group__1 ;
     public final void rule__AncientExpanded__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5068:1: ( rule__AncientExpanded__Group__0__Impl rule__AncientExpanded__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5069:2: rule__AncientExpanded__Group__0__Impl rule__AncientExpanded__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5084:1: ( rule__AncientExpanded__Group__0__Impl rule__AncientExpanded__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5085:2: rule__AncientExpanded__Group__0__Impl rule__AncientExpanded__Group__1
             {
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__0__Impl_in_rule__AncientExpanded__Group__010363);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__0__Impl_in_rule__AncientExpanded__Group__010403);
             rule__AncientExpanded__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__1_in_rule__AncientExpanded__Group__010366);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__1_in_rule__AncientExpanded__Group__010406);
             rule__AncientExpanded__Group__1();
 
             state._fsp--;
@@ -13967,21 +14012,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5076:1: rule__AncientExpanded__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5092:1: rule__AncientExpanded__Group__0__Impl : ( () ) ;
     public final void rule__AncientExpanded__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5080:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5081:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5096:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5097:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5081:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5082:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5097:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5098:1: ()
             {
              before(grammarAccess.getAncientExpandedAccess().getAncientExpandedAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5083:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5085:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5099:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5101:1: 
             {
             }
 
@@ -14004,21 +14049,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5095:1: rule__AncientExpanded__Group__1 : rule__AncientExpanded__Group__1__Impl rule__AncientExpanded__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5111:1: rule__AncientExpanded__Group__1 : rule__AncientExpanded__Group__1__Impl rule__AncientExpanded__Group__2 ;
     public final void rule__AncientExpanded__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5099:1: ( rule__AncientExpanded__Group__1__Impl rule__AncientExpanded__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5100:2: rule__AncientExpanded__Group__1__Impl rule__AncientExpanded__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5115:1: ( rule__AncientExpanded__Group__1__Impl rule__AncientExpanded__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5116:2: rule__AncientExpanded__Group__1__Impl rule__AncientExpanded__Group__2
             {
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__1__Impl_in_rule__AncientExpanded__Group__110424);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__1__Impl_in_rule__AncientExpanded__Group__110464);
             rule__AncientExpanded__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__2_in_rule__AncientExpanded__Group__110427);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__2_in_rule__AncientExpanded__Group__110467);
             rule__AncientExpanded__Group__2();
 
             state._fsp--;
@@ -14042,20 +14087,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5107:1: rule__AncientExpanded__Group__1__Impl : ( '((' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5123:1: rule__AncientExpanded__Group__1__Impl : ( '((' ) ;
     public final void rule__AncientExpanded__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5111:1: ( ( '((' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5112:1: ( '((' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5127:1: ( ( '((' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5128:1: ( '((' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5112:1: ( '((' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5113:1: '(('
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5128:1: ( '((' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5129:1: '(('
             {
              before(grammarAccess.getAncientExpandedAccess().getLeftParenthesisLeftParenthesisKeyword_1()); 
-            match(input,43,FOLLOW_43_in_rule__AncientExpanded__Group__1__Impl10455); 
+            match(input,44,FOLLOW_44_in_rule__AncientExpanded__Group__1__Impl10495); 
              after(grammarAccess.getAncientExpandedAccess().getLeftParenthesisLeftParenthesisKeyword_1()); 
 
             }
@@ -14079,21 +14124,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5126:1: rule__AncientExpanded__Group__2 : rule__AncientExpanded__Group__2__Impl rule__AncientExpanded__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5142:1: rule__AncientExpanded__Group__2 : rule__AncientExpanded__Group__2__Impl rule__AncientExpanded__Group__3 ;
     public final void rule__AncientExpanded__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5130:1: ( rule__AncientExpanded__Group__2__Impl rule__AncientExpanded__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5131:2: rule__AncientExpanded__Group__2__Impl rule__AncientExpanded__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5146:1: ( rule__AncientExpanded__Group__2__Impl rule__AncientExpanded__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5147:2: rule__AncientExpanded__Group__2__Impl rule__AncientExpanded__Group__3
             {
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__2__Impl_in_rule__AncientExpanded__Group__210486);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__2__Impl_in_rule__AncientExpanded__Group__210526);
             rule__AncientExpanded__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__3_in_rule__AncientExpanded__Group__210489);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__3_in_rule__AncientExpanded__Group__210529);
             rule__AncientExpanded__Group__3();
 
             state._fsp--;
@@ -14117,26 +14162,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5138:1: rule__AncientExpanded__Group__2__Impl : ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5154:1: rule__AncientExpanded__Group__2__Impl : ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) ) ;
     public final void rule__AncientExpanded__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5142:1: ( ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5143:1: ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5158:1: ( ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5159:1: ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5143:1: ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5144:1: ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5159:1: ( ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5160:1: ( ( rule__AncientExpanded__WCharAssignment_2 ) ) ( ( rule__AncientExpanded__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5144:1: ( ( rule__AncientExpanded__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5145:1: ( rule__AncientExpanded__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5160:1: ( ( rule__AncientExpanded__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5161:1: ( rule__AncientExpanded__WCharAssignment_2 )
             {
              before(grammarAccess.getAncientExpandedAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5146:1: ( rule__AncientExpanded__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5146:2: rule__AncientExpanded__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5162:1: ( rule__AncientExpanded__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5162:2: rule__AncientExpanded__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10518);
+            pushFollow(FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10558);
             rule__AncientExpanded__WCharAssignment_2();
 
             state._fsp--;
@@ -14148,26 +14193,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5149:1: ( ( rule__AncientExpanded__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5150:1: ( rule__AncientExpanded__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5165:1: ( ( rule__AncientExpanded__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5166:1: ( rule__AncientExpanded__WCharAssignment_2 )*
             {
              before(grammarAccess.getAncientExpandedAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5151:1: ( rule__AncientExpanded__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5167:1: ( rule__AncientExpanded__WCharAssignment_2 )*
             loop47:
             do {
                 int alt47=2;
                 int LA47_0 = input.LA(1);
 
-                if ( (LA47_0==RULE_EGYSTRING||LA47_0==30) ) {
+                if ( (LA47_0==RULE_EGYSTRING||LA47_0==31) ) {
                     alt47=1;
                 }
 
 
                 switch (alt47) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5151:2: rule__AncientExpanded__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5167:2: rule__AncientExpanded__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10530);
+            	    pushFollow(FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10570);
             	    rule__AncientExpanded__WCharAssignment_2();
 
             	    state._fsp--;
@@ -14207,16 +14252,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5162:1: rule__AncientExpanded__Group__3 : rule__AncientExpanded__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5178:1: rule__AncientExpanded__Group__3 : rule__AncientExpanded__Group__3__Impl ;
     public final void rule__AncientExpanded__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5166:1: ( rule__AncientExpanded__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5167:2: rule__AncientExpanded__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5182:1: ( rule__AncientExpanded__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5183:2: rule__AncientExpanded__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__AncientExpanded__Group__3__Impl_in_rule__AncientExpanded__Group__310563);
+            pushFollow(FOLLOW_rule__AncientExpanded__Group__3__Impl_in_rule__AncientExpanded__Group__310603);
             rule__AncientExpanded__Group__3__Impl();
 
             state._fsp--;
@@ -14240,20 +14285,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5173:1: rule__AncientExpanded__Group__3__Impl : ( '))' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5189:1: rule__AncientExpanded__Group__3__Impl : ( '))' ) ;
     public final void rule__AncientExpanded__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5177:1: ( ( '))' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5178:1: ( '))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5193:1: ( ( '))' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5194:1: ( '))' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5178:1: ( '))' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5179:1: '))'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5194:1: ( '))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5195:1: '))'
             {
              before(grammarAccess.getAncientExpandedAccess().getRightParenthesisRightParenthesisKeyword_3()); 
-            match(input,44,FOLLOW_44_in_rule__AncientExpanded__Group__3__Impl10591); 
+            match(input,45,FOLLOW_45_in_rule__AncientExpanded__Group__3__Impl10631); 
              after(grammarAccess.getAncientExpandedAccess().getRightParenthesisRightParenthesisKeyword_3()); 
 
             }
@@ -14277,21 +14322,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5200:1: rule__RestorationOverRasur__Group__0 : rule__RestorationOverRasur__Group__0__Impl rule__RestorationOverRasur__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5216:1: rule__RestorationOverRasur__Group__0 : rule__RestorationOverRasur__Group__0__Impl rule__RestorationOverRasur__Group__1 ;
     public final void rule__RestorationOverRasur__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5204:1: ( rule__RestorationOverRasur__Group__0__Impl rule__RestorationOverRasur__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5205:2: rule__RestorationOverRasur__Group__0__Impl rule__RestorationOverRasur__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5220:1: ( rule__RestorationOverRasur__Group__0__Impl rule__RestorationOverRasur__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5221:2: rule__RestorationOverRasur__Group__0__Impl rule__RestorationOverRasur__Group__1
             {
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__0__Impl_in_rule__RestorationOverRasur__Group__010630);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__0__Impl_in_rule__RestorationOverRasur__Group__010670);
             rule__RestorationOverRasur__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__1_in_rule__RestorationOverRasur__Group__010633);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__1_in_rule__RestorationOverRasur__Group__010673);
             rule__RestorationOverRasur__Group__1();
 
             state._fsp--;
@@ -14315,21 +14360,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5212:1: rule__RestorationOverRasur__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5228:1: rule__RestorationOverRasur__Group__0__Impl : ( () ) ;
     public final void rule__RestorationOverRasur__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5216:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5217:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5232:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5233:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5217:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5218:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5233:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5234:1: ()
             {
              before(grammarAccess.getRestorationOverRasurAccess().getRestorationOverRasurAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5219:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5221:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5235:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5237:1: 
             {
             }
 
@@ -14352,21 +14397,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5231:1: rule__RestorationOverRasur__Group__1 : rule__RestorationOverRasur__Group__1__Impl rule__RestorationOverRasur__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5247:1: rule__RestorationOverRasur__Group__1 : rule__RestorationOverRasur__Group__1__Impl rule__RestorationOverRasur__Group__2 ;
     public final void rule__RestorationOverRasur__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5235:1: ( rule__RestorationOverRasur__Group__1__Impl rule__RestorationOverRasur__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5236:2: rule__RestorationOverRasur__Group__1__Impl rule__RestorationOverRasur__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5251:1: ( rule__RestorationOverRasur__Group__1__Impl rule__RestorationOverRasur__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5252:2: rule__RestorationOverRasur__Group__1__Impl rule__RestorationOverRasur__Group__2
             {
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__1__Impl_in_rule__RestorationOverRasur__Group__110691);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__1__Impl_in_rule__RestorationOverRasur__Group__110731);
             rule__RestorationOverRasur__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__2_in_rule__RestorationOverRasur__Group__110694);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__2_in_rule__RestorationOverRasur__Group__110734);
             rule__RestorationOverRasur__Group__2();
 
             state._fsp--;
@@ -14390,20 +14435,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5243:1: rule__RestorationOverRasur__Group__1__Impl : ( '[[' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5259:1: rule__RestorationOverRasur__Group__1__Impl : ( '[[' ) ;
     public final void rule__RestorationOverRasur__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5247:1: ( ( '[[' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5248:1: ( '[[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5263:1: ( ( '[[' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5264:1: ( '[[' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5248:1: ( '[[' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5249:1: '[['
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5264:1: ( '[[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5265:1: '[['
             {
              before(grammarAccess.getRestorationOverRasurAccess().getLeftSquareBracketLeftSquareBracketKeyword_1()); 
-            match(input,45,FOLLOW_45_in_rule__RestorationOverRasur__Group__1__Impl10722); 
+            match(input,46,FOLLOW_46_in_rule__RestorationOverRasur__Group__1__Impl10762); 
              after(grammarAccess.getRestorationOverRasurAccess().getLeftSquareBracketLeftSquareBracketKeyword_1()); 
 
             }
@@ -14427,21 +14472,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5262:1: rule__RestorationOverRasur__Group__2 : rule__RestorationOverRasur__Group__2__Impl rule__RestorationOverRasur__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5278:1: rule__RestorationOverRasur__Group__2 : rule__RestorationOverRasur__Group__2__Impl rule__RestorationOverRasur__Group__3 ;
     public final void rule__RestorationOverRasur__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5266:1: ( rule__RestorationOverRasur__Group__2__Impl rule__RestorationOverRasur__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5267:2: rule__RestorationOverRasur__Group__2__Impl rule__RestorationOverRasur__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5282:1: ( rule__RestorationOverRasur__Group__2__Impl rule__RestorationOverRasur__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5283:2: rule__RestorationOverRasur__Group__2__Impl rule__RestorationOverRasur__Group__3
             {
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__2__Impl_in_rule__RestorationOverRasur__Group__210753);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__2__Impl_in_rule__RestorationOverRasur__Group__210793);
             rule__RestorationOverRasur__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__3_in_rule__RestorationOverRasur__Group__210756);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__3_in_rule__RestorationOverRasur__Group__210796);
             rule__RestorationOverRasur__Group__3();
 
             state._fsp--;
@@ -14465,26 +14510,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5274:1: rule__RestorationOverRasur__Group__2__Impl : ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5290:1: rule__RestorationOverRasur__Group__2__Impl : ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) ) ;
     public final void rule__RestorationOverRasur__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5278:1: ( ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5279:1: ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5294:1: ( ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5295:1: ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5279:1: ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5280:1: ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5295:1: ( ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5296:1: ( ( rule__RestorationOverRasur__WCharAssignment_2 ) ) ( ( rule__RestorationOverRasur__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5280:1: ( ( rule__RestorationOverRasur__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5281:1: ( rule__RestorationOverRasur__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5296:1: ( ( rule__RestorationOverRasur__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5297:1: ( rule__RestorationOverRasur__WCharAssignment_2 )
             {
              before(grammarAccess.getRestorationOverRasurAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5282:1: ( rule__RestorationOverRasur__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5282:2: rule__RestorationOverRasur__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5298:1: ( rule__RestorationOverRasur__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5298:2: rule__RestorationOverRasur__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10785);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10825);
             rule__RestorationOverRasur__WCharAssignment_2();
 
             state._fsp--;
@@ -14496,26 +14541,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5285:1: ( ( rule__RestorationOverRasur__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5286:1: ( rule__RestorationOverRasur__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5301:1: ( ( rule__RestorationOverRasur__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5302:1: ( rule__RestorationOverRasur__WCharAssignment_2 )*
             {
              before(grammarAccess.getRestorationOverRasurAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5287:1: ( rule__RestorationOverRasur__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5303:1: ( rule__RestorationOverRasur__WCharAssignment_2 )*
             loop48:
             do {
                 int alt48=2;
                 int LA48_0 = input.LA(1);
 
-                if ( (LA48_0==RULE_EGYSTRING||LA48_0==30) ) {
+                if ( (LA48_0==RULE_EGYSTRING||LA48_0==31) ) {
                     alt48=1;
                 }
 
 
                 switch (alt48) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5287:2: rule__RestorationOverRasur__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5303:2: rule__RestorationOverRasur__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10797);
+            	    pushFollow(FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10837);
             	    rule__RestorationOverRasur__WCharAssignment_2();
 
             	    state._fsp--;
@@ -14555,16 +14600,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5298:1: rule__RestorationOverRasur__Group__3 : rule__RestorationOverRasur__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5314:1: rule__RestorationOverRasur__Group__3 : rule__RestorationOverRasur__Group__3__Impl ;
     public final void rule__RestorationOverRasur__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5302:1: ( rule__RestorationOverRasur__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5303:2: rule__RestorationOverRasur__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5318:1: ( rule__RestorationOverRasur__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5319:2: rule__RestorationOverRasur__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__3__Impl_in_rule__RestorationOverRasur__Group__310830);
+            pushFollow(FOLLOW_rule__RestorationOverRasur__Group__3__Impl_in_rule__RestorationOverRasur__Group__310870);
             rule__RestorationOverRasur__Group__3__Impl();
 
             state._fsp--;
@@ -14588,20 +14633,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5309:1: rule__RestorationOverRasur__Group__3__Impl : ( ']]' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5325:1: rule__RestorationOverRasur__Group__3__Impl : ( ']]' ) ;
     public final void rule__RestorationOverRasur__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5313:1: ( ( ']]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5314:1: ( ']]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5329:1: ( ( ']]' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5330:1: ( ']]' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5314:1: ( ']]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5315:1: ']]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5330:1: ( ']]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5331:1: ']]'
             {
              before(grammarAccess.getRestorationOverRasurAccess().getRightSquareBracketRightSquareBracketKeyword_3()); 
-            match(input,46,FOLLOW_46_in_rule__RestorationOverRasur__Group__3__Impl10858); 
+            match(input,47,FOLLOW_47_in_rule__RestorationOverRasur__Group__3__Impl10898); 
              after(grammarAccess.getRestorationOverRasurAccess().getRightSquareBracketRightSquareBracketKeyword_3()); 
 
             }
@@ -14625,21 +14670,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5336:1: rule__PartialDestruction__Group__0 : rule__PartialDestruction__Group__0__Impl rule__PartialDestruction__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5352:1: rule__PartialDestruction__Group__0 : rule__PartialDestruction__Group__0__Impl rule__PartialDestruction__Group__1 ;
     public final void rule__PartialDestruction__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5340:1: ( rule__PartialDestruction__Group__0__Impl rule__PartialDestruction__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5341:2: rule__PartialDestruction__Group__0__Impl rule__PartialDestruction__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5356:1: ( rule__PartialDestruction__Group__0__Impl rule__PartialDestruction__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5357:2: rule__PartialDestruction__Group__0__Impl rule__PartialDestruction__Group__1
             {
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__0__Impl_in_rule__PartialDestruction__Group__010897);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__0__Impl_in_rule__PartialDestruction__Group__010937);
             rule__PartialDestruction__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__1_in_rule__PartialDestruction__Group__010900);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__1_in_rule__PartialDestruction__Group__010940);
             rule__PartialDestruction__Group__1();
 
             state._fsp--;
@@ -14663,21 +14708,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5348:1: rule__PartialDestruction__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5364:1: rule__PartialDestruction__Group__0__Impl : ( () ) ;
     public final void rule__PartialDestruction__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5352:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5353:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5368:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5369:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5353:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5354:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5369:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5370:1: ()
             {
              before(grammarAccess.getPartialDestructionAccess().getPartialDestructionAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5355:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5357:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5371:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5373:1: 
             {
             }
 
@@ -14700,21 +14745,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5367:1: rule__PartialDestruction__Group__1 : rule__PartialDestruction__Group__1__Impl rule__PartialDestruction__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5383:1: rule__PartialDestruction__Group__1 : rule__PartialDestruction__Group__1__Impl rule__PartialDestruction__Group__2 ;
     public final void rule__PartialDestruction__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5371:1: ( rule__PartialDestruction__Group__1__Impl rule__PartialDestruction__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5372:2: rule__PartialDestruction__Group__1__Impl rule__PartialDestruction__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5387:1: ( rule__PartialDestruction__Group__1__Impl rule__PartialDestruction__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5388:2: rule__PartialDestruction__Group__1__Impl rule__PartialDestruction__Group__2
             {
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__1__Impl_in_rule__PartialDestruction__Group__110958);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__1__Impl_in_rule__PartialDestruction__Group__110998);
             rule__PartialDestruction__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__2_in_rule__PartialDestruction__Group__110961);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__2_in_rule__PartialDestruction__Group__111001);
             rule__PartialDestruction__Group__2();
 
             state._fsp--;
@@ -14738,20 +14783,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5379:1: rule__PartialDestruction__Group__1__Impl : ( '\\u2E22' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5395:1: rule__PartialDestruction__Group__1__Impl : ( '\\u2E22' ) ;
     public final void rule__PartialDestruction__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5383:1: ( ( '\\u2E22' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5384:1: ( '\\u2E22' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5399:1: ( ( '\\u2E22' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5400:1: ( '\\u2E22' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5384:1: ( '\\u2E22' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5385:1: '\\u2E22'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5400:1: ( '\\u2E22' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5401:1: '\\u2E22'
             {
              before(grammarAccess.getPartialDestructionAccess().getTopLeftHalfBracketKeyword_1()); 
-            match(input,47,FOLLOW_47_in_rule__PartialDestruction__Group__1__Impl10989); 
+            match(input,48,FOLLOW_48_in_rule__PartialDestruction__Group__1__Impl11029); 
              after(grammarAccess.getPartialDestructionAccess().getTopLeftHalfBracketKeyword_1()); 
 
             }
@@ -14775,21 +14820,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5398:1: rule__PartialDestruction__Group__2 : rule__PartialDestruction__Group__2__Impl rule__PartialDestruction__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5414:1: rule__PartialDestruction__Group__2 : rule__PartialDestruction__Group__2__Impl rule__PartialDestruction__Group__3 ;
     public final void rule__PartialDestruction__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5402:1: ( rule__PartialDestruction__Group__2__Impl rule__PartialDestruction__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5403:2: rule__PartialDestruction__Group__2__Impl rule__PartialDestruction__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5418:1: ( rule__PartialDestruction__Group__2__Impl rule__PartialDestruction__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5419:2: rule__PartialDestruction__Group__2__Impl rule__PartialDestruction__Group__3
             {
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__2__Impl_in_rule__PartialDestruction__Group__211020);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__2__Impl_in_rule__PartialDestruction__Group__211060);
             rule__PartialDestruction__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__3_in_rule__PartialDestruction__Group__211023);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__3_in_rule__PartialDestruction__Group__211063);
             rule__PartialDestruction__Group__3();
 
             state._fsp--;
@@ -14813,26 +14858,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5410:1: rule__PartialDestruction__Group__2__Impl : ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5426:1: rule__PartialDestruction__Group__2__Impl : ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) ) ;
     public final void rule__PartialDestruction__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5414:1: ( ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5415:1: ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5430:1: ( ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5431:1: ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5415:1: ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5416:1: ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5431:1: ( ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5432:1: ( ( rule__PartialDestruction__WCharAssignment_2 ) ) ( ( rule__PartialDestruction__WCharAssignment_2 )* )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5416:1: ( ( rule__PartialDestruction__WCharAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5417:1: ( rule__PartialDestruction__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5432:1: ( ( rule__PartialDestruction__WCharAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5433:1: ( rule__PartialDestruction__WCharAssignment_2 )
             {
              before(grammarAccess.getPartialDestructionAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5418:1: ( rule__PartialDestruction__WCharAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5418:2: rule__PartialDestruction__WCharAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5434:1: ( rule__PartialDestruction__WCharAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5434:2: rule__PartialDestruction__WCharAssignment_2
             {
-            pushFollow(FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11052);
+            pushFollow(FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11092);
             rule__PartialDestruction__WCharAssignment_2();
 
             state._fsp--;
@@ -14844,26 +14889,26 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5421:1: ( ( rule__PartialDestruction__WCharAssignment_2 )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5422:1: ( rule__PartialDestruction__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5437:1: ( ( rule__PartialDestruction__WCharAssignment_2 )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5438:1: ( rule__PartialDestruction__WCharAssignment_2 )*
             {
              before(grammarAccess.getPartialDestructionAccess().getWCharAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5423:1: ( rule__PartialDestruction__WCharAssignment_2 )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5439:1: ( rule__PartialDestruction__WCharAssignment_2 )*
             loop49:
             do {
                 int alt49=2;
                 int LA49_0 = input.LA(1);
 
-                if ( (LA49_0==RULE_EGYSTRING||(LA49_0>=23 && LA49_0<=30)||LA49_0==37) ) {
+                if ( (LA49_0==RULE_EGYSTRING||(LA49_0>=24 && LA49_0<=31)||LA49_0==38) ) {
                     alt49=1;
                 }
 
 
                 switch (alt49) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5423:2: rule__PartialDestruction__WCharAssignment_2
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5439:2: rule__PartialDestruction__WCharAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11064);
+            	    pushFollow(FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11104);
             	    rule__PartialDestruction__WCharAssignment_2();
 
             	    state._fsp--;
@@ -14903,16 +14948,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5434:1: rule__PartialDestruction__Group__3 : rule__PartialDestruction__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5450:1: rule__PartialDestruction__Group__3 : rule__PartialDestruction__Group__3__Impl ;
     public final void rule__PartialDestruction__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5438:1: ( rule__PartialDestruction__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5439:2: rule__PartialDestruction__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5454:1: ( rule__PartialDestruction__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5455:2: rule__PartialDestruction__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__PartialDestruction__Group__3__Impl_in_rule__PartialDestruction__Group__311097);
+            pushFollow(FOLLOW_rule__PartialDestruction__Group__3__Impl_in_rule__PartialDestruction__Group__311137);
             rule__PartialDestruction__Group__3__Impl();
 
             state._fsp--;
@@ -14936,20 +14981,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5445:1: rule__PartialDestruction__Group__3__Impl : ( '\\u2E23' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5461:1: rule__PartialDestruction__Group__3__Impl : ( '\\u2E23' ) ;
     public final void rule__PartialDestruction__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5449:1: ( ( '\\u2E23' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5450:1: ( '\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5465:1: ( ( '\\u2E23' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5466:1: ( '\\u2E23' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5450:1: ( '\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5451:1: '\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5466:1: ( '\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5467:1: '\\u2E23'
             {
              before(grammarAccess.getPartialDestructionAccess().getTopRightHalfBracketKeyword_3()); 
-            match(input,48,FOLLOW_48_in_rule__PartialDestruction__Group__3__Impl11125); 
+            match(input,49,FOLLOW_49_in_rule__PartialDestruction__Group__3__Impl11165); 
              after(grammarAccess.getPartialDestructionAccess().getTopRightHalfBracketKeyword_3()); 
 
             }
@@ -14973,21 +15018,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5472:1: rule__Destruction__Group__0 : rule__Destruction__Group__0__Impl rule__Destruction__Group__1 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5488:1: rule__Destruction__Group__0 : rule__Destruction__Group__0__Impl rule__Destruction__Group__1 ;
     public final void rule__Destruction__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5476:1: ( rule__Destruction__Group__0__Impl rule__Destruction__Group__1 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5477:2: rule__Destruction__Group__0__Impl rule__Destruction__Group__1
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5492:1: ( rule__Destruction__Group__0__Impl rule__Destruction__Group__1 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5493:2: rule__Destruction__Group__0__Impl rule__Destruction__Group__1
             {
-            pushFollow(FOLLOW_rule__Destruction__Group__0__Impl_in_rule__Destruction__Group__011164);
+            pushFollow(FOLLOW_rule__Destruction__Group__0__Impl_in_rule__Destruction__Group__011204);
             rule__Destruction__Group__0__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Destruction__Group__1_in_rule__Destruction__Group__011167);
+            pushFollow(FOLLOW_rule__Destruction__Group__1_in_rule__Destruction__Group__011207);
             rule__Destruction__Group__1();
 
             state._fsp--;
@@ -15011,21 +15056,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__0__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5484:1: rule__Destruction__Group__0__Impl : ( () ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5500:1: rule__Destruction__Group__0__Impl : ( () ) ;
     public final void rule__Destruction__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5488:1: ( ( () ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5489:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5504:1: ( ( () ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5505:1: ( () )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5489:1: ( () )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5490:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5505:1: ( () )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5506:1: ()
             {
              before(grammarAccess.getDestructionAccess().getDestructionAction_0()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5491:1: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5493:1: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5507:1: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5509:1: 
             {
             }
 
@@ -15048,21 +15093,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5503:1: rule__Destruction__Group__1 : rule__Destruction__Group__1__Impl rule__Destruction__Group__2 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5519:1: rule__Destruction__Group__1 : rule__Destruction__Group__1__Impl rule__Destruction__Group__2 ;
     public final void rule__Destruction__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5507:1: ( rule__Destruction__Group__1__Impl rule__Destruction__Group__2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5508:2: rule__Destruction__Group__1__Impl rule__Destruction__Group__2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5523:1: ( rule__Destruction__Group__1__Impl rule__Destruction__Group__2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5524:2: rule__Destruction__Group__1__Impl rule__Destruction__Group__2
             {
-            pushFollow(FOLLOW_rule__Destruction__Group__1__Impl_in_rule__Destruction__Group__111225);
+            pushFollow(FOLLOW_rule__Destruction__Group__1__Impl_in_rule__Destruction__Group__111265);
             rule__Destruction__Group__1__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Destruction__Group__2_in_rule__Destruction__Group__111228);
+            pushFollow(FOLLOW_rule__Destruction__Group__2_in_rule__Destruction__Group__111268);
             rule__Destruction__Group__2();
 
             state._fsp--;
@@ -15086,20 +15131,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__1__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5515:1: rule__Destruction__Group__1__Impl : ( '--' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5531:1: rule__Destruction__Group__1__Impl : ( '--' ) ;
     public final void rule__Destruction__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5519:1: ( ( '--' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5520:1: ( '--' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5535:1: ( ( '--' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5536:1: ( '--' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5520:1: ( '--' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5521:1: '--'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5536:1: ( '--' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5537:1: '--'
             {
              before(grammarAccess.getDestructionAccess().getHyphenMinusHyphenMinusKeyword_1()); 
-            match(input,49,FOLLOW_49_in_rule__Destruction__Group__1__Impl11256); 
+            match(input,50,FOLLOW_50_in_rule__Destruction__Group__1__Impl11296); 
              after(grammarAccess.getDestructionAccess().getHyphenMinusHyphenMinusKeyword_1()); 
 
             }
@@ -15123,21 +15168,21 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5534:1: rule__Destruction__Group__2 : rule__Destruction__Group__2__Impl rule__Destruction__Group__3 ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5550:1: rule__Destruction__Group__2 : rule__Destruction__Group__2__Impl rule__Destruction__Group__3 ;
     public final void rule__Destruction__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5538:1: ( rule__Destruction__Group__2__Impl rule__Destruction__Group__3 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5539:2: rule__Destruction__Group__2__Impl rule__Destruction__Group__3
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5554:1: ( rule__Destruction__Group__2__Impl rule__Destruction__Group__3 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5555:2: rule__Destruction__Group__2__Impl rule__Destruction__Group__3
             {
-            pushFollow(FOLLOW_rule__Destruction__Group__2__Impl_in_rule__Destruction__Group__211287);
+            pushFollow(FOLLOW_rule__Destruction__Group__2__Impl_in_rule__Destruction__Group__211327);
             rule__Destruction__Group__2__Impl();
 
             state._fsp--;
 
-            pushFollow(FOLLOW_rule__Destruction__Group__3_in_rule__Destruction__Group__211290);
+            pushFollow(FOLLOW_rule__Destruction__Group__3_in_rule__Destruction__Group__211330);
             rule__Destruction__Group__3();
 
             state._fsp--;
@@ -15161,23 +15206,23 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__2__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5546:1: rule__Destruction__Group__2__Impl : ( ( rule__Destruction__CommentAssignment_2 ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5562:1: rule__Destruction__Group__2__Impl : ( ( rule__Destruction__CommentAssignment_2 ) ) ;
     public final void rule__Destruction__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5550:1: ( ( ( rule__Destruction__CommentAssignment_2 ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5551:1: ( ( rule__Destruction__CommentAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5566:1: ( ( ( rule__Destruction__CommentAssignment_2 ) ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5567:1: ( ( rule__Destruction__CommentAssignment_2 ) )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5551:1: ( ( rule__Destruction__CommentAssignment_2 ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5552:1: ( rule__Destruction__CommentAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5567:1: ( ( rule__Destruction__CommentAssignment_2 ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5568:1: ( rule__Destruction__CommentAssignment_2 )
             {
              before(grammarAccess.getDestructionAccess().getCommentAssignment_2()); 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5553:1: ( rule__Destruction__CommentAssignment_2 )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5553:2: rule__Destruction__CommentAssignment_2
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5569:1: ( rule__Destruction__CommentAssignment_2 )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5569:2: rule__Destruction__CommentAssignment_2
             {
-            pushFollow(FOLLOW_rule__Destruction__CommentAssignment_2_in_rule__Destruction__Group__2__Impl11317);
+            pushFollow(FOLLOW_rule__Destruction__CommentAssignment_2_in_rule__Destruction__Group__2__Impl11357);
             rule__Destruction__CommentAssignment_2();
 
             state._fsp--;
@@ -15208,16 +15253,16 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__3"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5563:1: rule__Destruction__Group__3 : rule__Destruction__Group__3__Impl ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5579:1: rule__Destruction__Group__3 : rule__Destruction__Group__3__Impl ;
     public final void rule__Destruction__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5567:1: ( rule__Destruction__Group__3__Impl )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5568:2: rule__Destruction__Group__3__Impl
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5583:1: ( rule__Destruction__Group__3__Impl )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5584:2: rule__Destruction__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Destruction__Group__3__Impl_in_rule__Destruction__Group__311347);
+            pushFollow(FOLLOW_rule__Destruction__Group__3__Impl_in_rule__Destruction__Group__311387);
             rule__Destruction__Group__3__Impl();
 
             state._fsp--;
@@ -15241,20 +15286,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__Group__3__Impl"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5574:1: rule__Destruction__Group__3__Impl : ( '--' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5590:1: rule__Destruction__Group__3__Impl : ( '--' ) ;
     public final void rule__Destruction__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5578:1: ( ( '--' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5579:1: ( '--' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5594:1: ( ( '--' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5595:1: ( '--' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5579:1: ( '--' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5580:1: '--'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5595:1: ( '--' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5596:1: '--'
             {
              before(grammarAccess.getDestructionAccess().getHyphenMinusHyphenMinusKeyword_3()); 
-            match(input,49,FOLLOW_49_in_rule__Destruction__Group__3__Impl11375); 
+            match(input,50,FOLLOW_50_in_rule__Destruction__Group__3__Impl11415); 
              after(grammarAccess.getDestructionAccess().getHyphenMinusHyphenMinusKeyword_3()); 
 
             }
@@ -15278,20 +15323,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__ItemsAssignment_1_0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5602:1: rule__TextContent__ItemsAssignment_1_0 : ( ruleTextItem ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5618:1: rule__TextContent__ItemsAssignment_1_0 : ( ruleTextItem ) ;
     public final void rule__TextContent__ItemsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5606:1: ( ( ruleTextItem ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5607:1: ( ruleTextItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5622:1: ( ( ruleTextItem ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5623:1: ( ruleTextItem )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5607:1: ( ruleTextItem )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5608:1: ruleTextItem
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5623:1: ( ruleTextItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5624:1: ruleTextItem
             {
              before(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_0_0()); 
-            pushFollow(FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_011419);
+            pushFollow(FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_011459);
             ruleTextItem();
 
             state._fsp--;
@@ -15319,20 +15364,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__TextContent__ItemsAssignment_1_1_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5617:1: rule__TextContent__ItemsAssignment_1_1_1 : ( ruleTextItem ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5633:1: rule__TextContent__ItemsAssignment_1_1_1 : ( ruleTextItem ) ;
     public final void rule__TextContent__ItemsAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5621:1: ( ( ruleTextItem ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5622:1: ( ruleTextItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5637:1: ( ( ruleTextItem ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5638:1: ( ruleTextItem )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5622:1: ( ruleTextItem )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5623:1: ruleTextItem
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5638:1: ( ruleTextItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5639:1: ruleTextItem
             {
              before(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_1_111450);
+            pushFollow(FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_1_111490);
             ruleTextItem();
 
             state._fsp--;
@@ -15360,20 +15405,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__ItemsAssignment_1_0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5632:1: rule__Sentence__ItemsAssignment_1_0 : ( ruleSentenceItem ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5648:1: rule__Sentence__ItemsAssignment_1_0 : ( ruleSentenceItem ) ;
     public final void rule__Sentence__ItemsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5636:1: ( ( ruleSentenceItem ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5637:1: ( ruleSentenceItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5652:1: ( ( ruleSentenceItem ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5653:1: ( ruleSentenceItem )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5637:1: ( ruleSentenceItem )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5638:1: ruleSentenceItem
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5653:1: ( ruleSentenceItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5654:1: ruleSentenceItem
             {
              before(grammarAccess.getSentenceAccess().getItemsSentenceItemParserRuleCall_1_0_0()); 
-            pushFollow(FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_011481);
+            pushFollow(FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_011521);
             ruleSentenceItem();
 
             state._fsp--;
@@ -15401,20 +15446,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Sentence__ItemsAssignment_1_1_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5647:1: rule__Sentence__ItemsAssignment_1_1_1 : ( ruleSentenceItem ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5663:1: rule__Sentence__ItemsAssignment_1_1_1 : ( ruleSentenceItem ) ;
     public final void rule__Sentence__ItemsAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5651:1: ( ( ruleSentenceItem ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5652:1: ( ruleSentenceItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5667:1: ( ( ruleSentenceItem ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5668:1: ( ruleSentenceItem )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5652:1: ( ruleSentenceItem )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5653:1: ruleSentenceItem
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5668:1: ( ruleSentenceItem )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5669:1: ruleSentenceItem
             {
              before(grammarAccess.getSentenceAccess().getItemsSentenceItemParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_1_111512);
+            pushFollow(FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_1_111552);
             ruleSentenceItem();
 
             state._fsp--;
@@ -15442,20 +15487,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__CasesAssignment_1_0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5662:1: rule__Ambivalence__CasesAssignment_1_0 : ( ruleCase ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5678:1: rule__Ambivalence__CasesAssignment_1_0 : ( ruleCase ) ;
     public final void rule__Ambivalence__CasesAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5666:1: ( ( ruleCase ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5667:1: ( ruleCase )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5682:1: ( ( ruleCase ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5683:1: ( ruleCase )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5667:1: ( ruleCase )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5668:1: ruleCase
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5683:1: ( ruleCase )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5684:1: ruleCase
             {
              before(grammarAccess.getAmbivalenceAccess().getCasesCaseParserRuleCall_1_0_0()); 
-            pushFollow(FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_011543);
+            pushFollow(FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_011583);
             ruleCase();
 
             state._fsp--;
@@ -15483,20 +15528,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Ambivalence__CasesAssignment_1_1_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5677:1: rule__Ambivalence__CasesAssignment_1_1_2 : ( ruleCase ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5693:1: rule__Ambivalence__CasesAssignment_1_1_2 : ( ruleCase ) ;
     public final void rule__Ambivalence__CasesAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5681:1: ( ( ruleCase ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5682:1: ( ruleCase )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5697:1: ( ( ruleCase ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5698:1: ( ruleCase )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5682:1: ( ruleCase )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5683:1: ruleCase
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5698:1: ( ruleCase )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5699:1: ruleCase
             {
              before(grammarAccess.getAmbivalenceAccess().getCasesCaseParserRuleCall_1_1_2_0()); 
-            pushFollow(FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_1_211574);
+            pushFollow(FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_1_211614);
             ruleCase();
 
             state._fsp--;
@@ -15524,20 +15569,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__NameAssignment_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5692:1: rule__Case__NameAssignment_1 : ( RULE_EGYSTRING ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5708:1: rule__Case__NameAssignment_1 : ( RULE_EGYSTRING ) ;
     public final void rule__Case__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5696:1: ( ( RULE_EGYSTRING ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5697:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5712:1: ( ( RULE_EGYSTRING ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5713:1: ( RULE_EGYSTRING )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5697:1: ( RULE_EGYSTRING )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5698:1: RULE_EGYSTRING
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5713:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5714:1: RULE_EGYSTRING
             {
              before(grammarAccess.getCaseAccess().getNameEGYSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Case__NameAssignment_111605); 
+            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Case__NameAssignment_111645); 
              after(grammarAccess.getCaseAccess().getNameEGYSTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -15561,20 +15606,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__ItemsAssignment_4_0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5707:1: rule__Case__ItemsAssignment_4_0 : ( ruleSentenceItemNoAmbivalence ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5723:1: rule__Case__ItemsAssignment_4_0 : ( ruleSentenceItemNoAmbivalence ) ;
     public final void rule__Case__ItemsAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5711:1: ( ( ruleSentenceItemNoAmbivalence ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5712:1: ( ruleSentenceItemNoAmbivalence )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5727:1: ( ( ruleSentenceItemNoAmbivalence ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5728:1: ( ruleSentenceItemNoAmbivalence )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5712:1: ( ruleSentenceItemNoAmbivalence )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5713:1: ruleSentenceItemNoAmbivalence
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5728:1: ( ruleSentenceItemNoAmbivalence )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5729:1: ruleSentenceItemNoAmbivalence
             {
              before(grammarAccess.getCaseAccess().getItemsSentenceItemNoAmbivalenceParserRuleCall_4_0_0()); 
-            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_011636);
+            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_011676);
             ruleSentenceItemNoAmbivalence();
 
             state._fsp--;
@@ -15602,20 +15647,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Case__ItemsAssignment_4_1_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5722:1: rule__Case__ItemsAssignment_4_1_2 : ( ruleSentenceItemNoAmbivalence ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5738:1: rule__Case__ItemsAssignment_4_1_2 : ( ruleSentenceItemNoAmbivalence ) ;
     public final void rule__Case__ItemsAssignment_4_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5726:1: ( ( ruleSentenceItemNoAmbivalence ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5727:1: ( ruleSentenceItemNoAmbivalence )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5742:1: ( ( ruleSentenceItemNoAmbivalence ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5743:1: ( ruleSentenceItemNoAmbivalence )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5727:1: ( ruleSentenceItemNoAmbivalence )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5728:1: ruleSentenceItemNoAmbivalence
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5743:1: ( ruleSentenceItemNoAmbivalence )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5744:1: ruleSentenceItemNoAmbivalence
             {
              before(grammarAccess.getCaseAccess().getItemsSentenceItemNoAmbivalenceParserRuleCall_4_1_2_0()); 
-            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_1_211667);
+            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_1_211707);
             ruleSentenceItemNoAmbivalence();
 
             state._fsp--;
@@ -15643,20 +15688,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__TypeAssignment_1_0"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5737:1: rule__Marker__TypeAssignment_1_0 : ( RULE_EGYSTRING ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5753:1: rule__Marker__TypeAssignment_1_0 : ( RULE_EGYSTRING ) ;
     public final void rule__Marker__TypeAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5741:1: ( ( RULE_EGYSTRING ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5742:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5757:1: ( ( RULE_EGYSTRING ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5758:1: ( RULE_EGYSTRING )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5742:1: ( RULE_EGYSTRING )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5743:1: RULE_EGYSTRING
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5758:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5759:1: RULE_EGYSTRING
             {
              before(grammarAccess.getMarkerAccess().getTypeEGYSTRINGTerminalRuleCall_1_0_0()); 
-            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Marker__TypeAssignment_1_011698); 
+            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Marker__TypeAssignment_1_011738); 
              after(grammarAccess.getMarkerAccess().getTypeEGYSTRINGTerminalRuleCall_1_0_0()); 
 
             }
@@ -15680,20 +15725,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Marker__NameAssignment_1_1_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5752:1: rule__Marker__NameAssignment_1_1_2 : ( RULE_EGYSTRING ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5768:1: rule__Marker__NameAssignment_1_1_2 : ( RULE_EGYSTRING ) ;
     public final void rule__Marker__NameAssignment_1_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5756:1: ( ( RULE_EGYSTRING ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5757:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5772:1: ( ( RULE_EGYSTRING ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5773:1: ( RULE_EGYSTRING )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5757:1: ( RULE_EGYSTRING )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5758:1: RULE_EGYSTRING
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5773:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5774:1: RULE_EGYSTRING
             {
              before(grammarAccess.getMarkerAccess().getNameEGYSTRINGTerminalRuleCall_1_1_2_0()); 
-            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Marker__NameAssignment_1_1_211729); 
+            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Marker__NameAssignment_1_1_211769); 
              after(grammarAccess.getMarkerAccess().getNameEGYSTRINGTerminalRuleCall_1_1_2_0()); 
 
             }
@@ -15717,20 +15762,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Word__WCharAssignment_1"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5767:1: rule__Word__WCharAssignment_1 : ( ruleWordMiddle ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5783:1: rule__Word__WCharAssignment_1 : ( ruleWordMiddle ) ;
     public final void rule__Word__WCharAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5771:1: ( ( ruleWordMiddle ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5772:1: ( ruleWordMiddle )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5787:1: ( ( ruleWordMiddle ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5788:1: ( ruleWordMiddle )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5772:1: ( ruleWordMiddle )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5773:1: ruleWordMiddle
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5788:1: ( ruleWordMiddle )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5789:1: ruleWordMiddle
             {
              before(grammarAccess.getWordAccess().getWCharWordMiddleParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleWordMiddle_in_rule__Word__WCharAssignment_111760);
+            pushFollow(FOLLOW_ruleWordMiddle_in_rule__Word__WCharAssignment_111800);
             ruleWordMiddle();
 
             state._fsp--;
@@ -15758,20 +15803,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Chars__NameAssignment"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5782:1: rule__Chars__NameAssignment : ( RULE_EGYSTRING ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5798:1: rule__Chars__NameAssignment : ( RULE_EGYSTRING ) ;
     public final void rule__Chars__NameAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5786:1: ( ( RULE_EGYSTRING ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5787:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5802:1: ( ( RULE_EGYSTRING ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5803:1: ( RULE_EGYSTRING )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5787:1: ( RULE_EGYSTRING )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5788:1: RULE_EGYSTRING
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5803:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5804:1: RULE_EGYSTRING
             {
              before(grammarAccess.getCharsAccess().getNameEGYSTRINGTerminalRuleCall_0()); 
-            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Chars__NameAssignment11791); 
+            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Chars__NameAssignment11831); 
              after(grammarAccess.getCharsAccess().getNameEGYSTRINGTerminalRuleCall_0()); 
 
             }
@@ -15795,20 +15840,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Expanded__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5797:1: rule__Expanded__WCharAssignment_2 : ( ruleNoExpanded ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5813:1: rule__Expanded__WCharAssignment_2 : ( ruleNoExpanded ) ;
     public final void rule__Expanded__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5801:1: ( ( ruleNoExpanded ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5802:1: ( ruleNoExpanded )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5817:1: ( ( ruleNoExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5818:1: ( ruleNoExpanded )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5802:1: ( ruleNoExpanded )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5803:1: ruleNoExpanded
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5818:1: ( ruleNoExpanded )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5819:1: ruleNoExpanded
             {
              before(grammarAccess.getExpandedAccess().getWCharNoExpandedParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoExpanded_in_rule__Expanded__WCharAssignment_211822);
+            pushFollow(FOLLOW_ruleNoExpanded_in_rule__Expanded__WCharAssignment_211862);
             ruleNoExpanded();
 
             state._fsp--;
@@ -15836,20 +15881,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Emendation__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5812:1: rule__Emendation__WCharAssignment_2 : ( ruleNoEmendation ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5828:1: rule__Emendation__WCharAssignment_2 : ( ruleNoEmendation ) ;
     public final void rule__Emendation__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5816:1: ( ( ruleNoEmendation ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5817:1: ( ruleNoEmendation )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5832:1: ( ( ruleNoEmendation ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5833:1: ( ruleNoEmendation )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5817:1: ( ruleNoEmendation )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5818:1: ruleNoEmendation
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5833:1: ( ruleNoEmendation )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5834:1: ruleNoEmendation
             {
              before(grammarAccess.getEmendationAccess().getWCharNoEmendationParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoEmendation_in_rule__Emendation__WCharAssignment_211853);
+            pushFollow(FOLLOW_ruleNoEmendation_in_rule__Emendation__WCharAssignment_211893);
             ruleNoEmendation();
 
             state._fsp--;
@@ -15877,20 +15922,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__DisputableReading__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5827:1: rule__DisputableReading__WCharAssignment_2 : ( ruleNoDisputableReading ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5843:1: rule__DisputableReading__WCharAssignment_2 : ( ruleNoDisputableReading ) ;
     public final void rule__DisputableReading__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5831:1: ( ( ruleNoDisputableReading ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5832:1: ( ruleNoDisputableReading )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5847:1: ( ( ruleNoDisputableReading ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5848:1: ( ruleNoDisputableReading )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5832:1: ( ruleNoDisputableReading )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5833:1: ruleNoDisputableReading
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5848:1: ( ruleNoDisputableReading )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5849:1: ruleNoDisputableReading
             {
              before(grammarAccess.getDisputableReadingAccess().getWCharNoDisputableReadingParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoDisputableReading_in_rule__DisputableReading__WCharAssignment_211884);
+            pushFollow(FOLLOW_ruleNoDisputableReading_in_rule__DisputableReading__WCharAssignment_211924);
             ruleNoDisputableReading();
 
             state._fsp--;
@@ -15918,20 +15963,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Lacuna__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5842:1: rule__Lacuna__WCharAssignment_2 : ( ruleNoLacuna ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5858:1: rule__Lacuna__WCharAssignment_2 : ( ruleNoLacuna ) ;
     public final void rule__Lacuna__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5846:1: ( ( ruleNoLacuna ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5847:1: ( ruleNoLacuna )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5862:1: ( ( ruleNoLacuna ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5863:1: ( ruleNoLacuna )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5847:1: ( ruleNoLacuna )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5848:1: ruleNoLacuna
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5863:1: ( ruleNoLacuna )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5864:1: ruleNoLacuna
             {
              before(grammarAccess.getLacunaAccess().getWCharNoLacunaParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoLacuna_in_rule__Lacuna__WCharAssignment_211915);
+            pushFollow(FOLLOW_ruleNoLacuna_in_rule__Lacuna__WCharAssignment_211955);
             ruleNoLacuna();
 
             state._fsp--;
@@ -15959,20 +16004,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Deletion__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5857:1: rule__Deletion__WCharAssignment_2 : ( ruleNoDeletion ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5873:1: rule__Deletion__WCharAssignment_2 : ( ruleNoDeletion ) ;
     public final void rule__Deletion__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5861:1: ( ( ruleNoDeletion ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5862:1: ( ruleNoDeletion )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5877:1: ( ( ruleNoDeletion ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5878:1: ( ruleNoDeletion )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5862:1: ( ruleNoDeletion )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5863:1: ruleNoDeletion
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5878:1: ( ruleNoDeletion )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5879:1: ruleNoDeletion
             {
              before(grammarAccess.getDeletionAccess().getWCharNoDeletionParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoDeletion_in_rule__Deletion__WCharAssignment_211946);
+            pushFollow(FOLLOW_ruleNoDeletion_in_rule__Deletion__WCharAssignment_211986);
             ruleNoDeletion();
 
             state._fsp--;
@@ -16000,20 +16045,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__ExpandedColumn__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5872:1: rule__ExpandedColumn__WCharAssignment_2 : ( ruleNoExpandedColumn ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5888:1: rule__ExpandedColumn__WCharAssignment_2 : ( ruleNoExpandedColumn ) ;
     public final void rule__ExpandedColumn__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5876:1: ( ( ruleNoExpandedColumn ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5877:1: ( ruleNoExpandedColumn )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5892:1: ( ( ruleNoExpandedColumn ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5893:1: ( ruleNoExpandedColumn )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5877:1: ( ruleNoExpandedColumn )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5878:1: ruleNoExpandedColumn
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5893:1: ( ruleNoExpandedColumn )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5894:1: ruleNoExpandedColumn
             {
              before(grammarAccess.getExpandedColumnAccess().getWCharNoExpandedColumnParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoExpandedColumn_in_rule__ExpandedColumn__WCharAssignment_211977);
+            pushFollow(FOLLOW_ruleNoExpandedColumn_in_rule__ExpandedColumn__WCharAssignment_212017);
             ruleNoExpandedColumn();
 
             state._fsp--;
@@ -16041,20 +16086,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Rasur__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5887:1: rule__Rasur__WCharAssignment_2 : ( ruleNoRasur ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5903:1: rule__Rasur__WCharAssignment_2 : ( ruleNoRasur ) ;
     public final void rule__Rasur__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5891:1: ( ( ruleNoRasur ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5892:1: ( ruleNoRasur )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5907:1: ( ( ruleNoRasur ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5908:1: ( ruleNoRasur )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5892:1: ( ruleNoRasur )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5893:1: ruleNoRasur
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5908:1: ( ruleNoRasur )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5909:1: ruleNoRasur
             {
              before(grammarAccess.getRasurAccess().getWCharNoRasurParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoRasur_in_rule__Rasur__WCharAssignment_212008);
+            pushFollow(FOLLOW_ruleNoRasur_in_rule__Rasur__WCharAssignment_212048);
             ruleNoRasur();
 
             state._fsp--;
@@ -16082,20 +16127,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__AncientExpanded__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5902:1: rule__AncientExpanded__WCharAssignment_2 : ( ruleNoAncientExpanded ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5918:1: rule__AncientExpanded__WCharAssignment_2 : ( ruleNoAncientExpanded ) ;
     public final void rule__AncientExpanded__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5906:1: ( ( ruleNoAncientExpanded ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5907:1: ( ruleNoAncientExpanded )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5922:1: ( ( ruleNoAncientExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5923:1: ( ruleNoAncientExpanded )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5907:1: ( ruleNoAncientExpanded )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5908:1: ruleNoAncientExpanded
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5923:1: ( ruleNoAncientExpanded )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5924:1: ruleNoAncientExpanded
             {
              before(grammarAccess.getAncientExpandedAccess().getWCharNoAncientExpandedParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoAncientExpanded_in_rule__AncientExpanded__WCharAssignment_212039);
+            pushFollow(FOLLOW_ruleNoAncientExpanded_in_rule__AncientExpanded__WCharAssignment_212079);
             ruleNoAncientExpanded();
 
             state._fsp--;
@@ -16123,20 +16168,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__RestorationOverRasur__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5917:1: rule__RestorationOverRasur__WCharAssignment_2 : ( ruleNoRestorationOverRasur ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5933:1: rule__RestorationOverRasur__WCharAssignment_2 : ( ruleNoRestorationOverRasur ) ;
     public final void rule__RestorationOverRasur__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5921:1: ( ( ruleNoRestorationOverRasur ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5922:1: ( ruleNoRestorationOverRasur )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5937:1: ( ( ruleNoRestorationOverRasur ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5938:1: ( ruleNoRestorationOverRasur )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5922:1: ( ruleNoRestorationOverRasur )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5923:1: ruleNoRestorationOverRasur
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5938:1: ( ruleNoRestorationOverRasur )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5939:1: ruleNoRestorationOverRasur
             {
              before(grammarAccess.getRestorationOverRasurAccess().getWCharNoRestorationOverRasurParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoRestorationOverRasur_in_rule__RestorationOverRasur__WCharAssignment_212070);
+            pushFollow(FOLLOW_ruleNoRestorationOverRasur_in_rule__RestorationOverRasur__WCharAssignment_212110);
             ruleNoRestorationOverRasur();
 
             state._fsp--;
@@ -16164,20 +16209,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__PartialDestruction__WCharAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5932:1: rule__PartialDestruction__WCharAssignment_2 : ( ruleNoPartialDestruction ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5948:1: rule__PartialDestruction__WCharAssignment_2 : ( ruleNoPartialDestruction ) ;
     public final void rule__PartialDestruction__WCharAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5936:1: ( ( ruleNoPartialDestruction ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5937:1: ( ruleNoPartialDestruction )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5952:1: ( ( ruleNoPartialDestruction ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5953:1: ( ruleNoPartialDestruction )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5937:1: ( ruleNoPartialDestruction )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5938:1: ruleNoPartialDestruction
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5953:1: ( ruleNoPartialDestruction )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5954:1: ruleNoPartialDestruction
             {
              before(grammarAccess.getPartialDestructionAccess().getWCharNoPartialDestructionParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleNoPartialDestruction_in_rule__PartialDestruction__WCharAssignment_212101);
+            pushFollow(FOLLOW_ruleNoPartialDestruction_in_rule__PartialDestruction__WCharAssignment_212141);
             ruleNoPartialDestruction();
 
             state._fsp--;
@@ -16205,20 +16250,20 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__Destruction__CommentAssignment_2"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5947:1: rule__Destruction__CommentAssignment_2 : ( RULE_EGYSTRING ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5963:1: rule__Destruction__CommentAssignment_2 : ( RULE_EGYSTRING ) ;
     public final void rule__Destruction__CommentAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5951:1: ( ( RULE_EGYSTRING ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5952:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5967:1: ( ( RULE_EGYSTRING ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5968:1: ( RULE_EGYSTRING )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5952:1: ( RULE_EGYSTRING )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5953:1: RULE_EGYSTRING
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5968:1: ( RULE_EGYSTRING )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:1: RULE_EGYSTRING
             {
              before(grammarAccess.getDestructionAccess().getCommentEGYSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Destruction__CommentAssignment_212132); 
+            match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_rule__Destruction__CommentAssignment_212172); 
              after(grammarAccess.getDestructionAccess().getCommentEGYSTRINGTerminalRuleCall_2_0()); 
 
             }
@@ -16382,379 +16427,381 @@ public class InternalEgyDslParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Destruction__Group__0_in_ruleDestruction2733 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_12_in_rule__TextContent__Alternatives_1_1_02770 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_13_in_rule__TextContent__Alternatives_1_1_02790 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__0_in_rule__SentenceItem__Alternatives2824 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__0_in_rule__SentenceItem__Alternatives2842 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__0_in_rule__SentenceItem__Alternatives2860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__SentenceItem__Alternatives_0_12894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__SentenceItem__Alternatives_0_12914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__SentenceItem__Alternatives_1_12949 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__SentenceItem__Alternatives_1_12969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__SentenceItem__Alternatives_2_13004 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__SentenceItem__Alternatives_2_13024 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMarker_in_rule__AbstractMarker__Alternatives3058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersMarker_in_rule__AbstractMarker__Alternatives3075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Ambivalence__Alternatives_1_1_13108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Ambivalence__Alternatives_1_1_13128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Case__Alternatives_33163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Case__Alternatives_33183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Case__Alternatives_4_1_13218 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Case__Alternatives_4_1_13238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWord_in_rule__SentenceItemNoAmbivalence__Alternatives3272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMarker_in_rule__SentenceItemNoAmbivalence__Alternatives3289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersbreakMarker_in_rule__VersMarker__Alternatives3321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_rule__VersMarker__Alternatives3338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Marker__Alternatives_1_1_13371 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Marker__Alternatives_1_1_13391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__WordMiddle__Alternatives3425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBrackets_in_rule__WordMiddle__Alternatives3442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__WordMiddle__Alternatives3459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixFlexion_in_rule__Interfix__Alternatives3491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixLexical_in_rule__Interfix__Alternatives3508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixSuffixPronomLexical_in_rule__Interfix__Alternatives3525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPrefixNonLexical_in_rule__Interfix__Alternatives3542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPrefixLexical_in_rule__Interfix__Alternatives3559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixCompountWords_in_rule__Interfix__Alternatives3576 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixConnectionSyllabicGroup_in_rule__Interfix__Alternatives3593 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasur_in_rule__Brackets__Alternatives3625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpanded_in_rule__Brackets__Alternatives3642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_rule__Brackets__Alternatives3659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__Brackets__Alternatives3676 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_rule__Brackets__Alternatives3693 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEmendation_in_rule__Brackets__Alternatives3710 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLacuna_in_rule__Brackets__Alternatives3727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_rule__Brackets__Alternatives3744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpandedColumn_in_rule__Brackets__Alternatives3761 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_rule__Brackets__Alternatives3778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestruction_in_rule__Brackets__Alternatives3795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoExpanded__Alternatives3827 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoExpanded__Alternatives3844 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoEmendation__Alternatives3876 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoEmendation__Alternatives3893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoEmendation__Alternatives3910 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoDisputableReading__Alternatives3942 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoDisputableReading__Alternatives3959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoDisputableReading__Alternatives3976 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoLacuna__Alternatives4008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoLacuna__Alternatives4025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoLacuna__Alternatives4042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoDeletion__Alternatives4074 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoDeletion__Alternatives4091 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_rule__NoDeletion__Alternatives4108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoDeletion__Alternatives4125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoExpandedColumn__Alternatives4157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoExpandedColumn__Alternatives4174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoExpandedColumn__Alternatives4191 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoRasur__Alternatives4223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoRasur__Alternatives4240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoRasur__Alternatives4257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoAncientExpanded__Alternatives4289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoAncientExpanded__Alternatives4306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoRestorationOverRasur__Alternatives4338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoRestorationOverRasur__Alternatives4355 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_rule__NoPartialDestruction__Alternatives4387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_rule__NoPartialDestruction__Alternatives4404 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoPartialDestruction__Alternatives4421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoPartialDestruction__Alternatives4438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group__0__Impl_in_rule__TextContent__Group__04468 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_rule__TextContent__Group__1_in_rule__TextContent__Group__04471 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group__1__Impl_in_rule__TextContent__Group__14529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1__0_in_rule__TextContent__Group__1__Impl4556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1__0__Impl_in_rule__TextContent__Group_1__04590 = new BitSet(new long[]{0x000000000000B000L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1__1_in_rule__TextContent__Group_1__04593 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__ItemsAssignment_1_0_in_rule__TextContent__Group_1__0__Impl4620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1__1__Impl_in_rule__TextContent__Group_1__14650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__0_in_rule__TextContent__Group_1__1__Impl4677 = new BitSet(new long[]{0x000000000000B002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__0__Impl_in_rule__TextContent__Group_1_1__04712 = new BitSet(new long[]{0x000000000000B000L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__1_in_rule__TextContent__Group_1_1__04715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__Alternatives_1_1_0_in_rule__TextContent__Group_1_1__0__Impl4742 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__1__Impl_in_rule__TextContent__Group_1_1__14773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TextContent__ItemsAssignment_1_1_1_in_rule__TextContent__Group_1_1__1__Impl4800 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group__0__Impl_in_rule__Sentence__Group__04834 = new BitSet(new long[]{0x0002AAAD7FF10010L});
-    public static final BitSet FOLLOW_rule__Sentence__Group__1_in_rule__Sentence__Group__04837 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Sentence__Group__0__Impl4865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group__1__Impl_in_rule__Sentence__Group__14896 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_rule__Sentence__Group__2_in_rule__Sentence__Group__14899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1__0_in_rule__Sentence__Group__1__Impl4926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group__2__Impl_in_rule__Sentence__Group__24956 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Sentence__Group__2__Impl4984 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1__0__Impl_in_rule__Sentence__Group_1__05021 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1__1_in_rule__Sentence__Group_1__05024 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__ItemsAssignment_1_0_in_rule__Sentence__Group_1__0__Impl5051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1__1__Impl_in_rule__Sentence__Group_1__15081 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__0_in_rule__Sentence__Group_1__1__Impl5108 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__0__Impl_in_rule__Sentence__Group_1_1__05143 = new BitSet(new long[]{0x0002AAAD7FF10010L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__1_in_rule__Sentence__Group_1_1__05146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__Sentence__Group_1_1__0__Impl5174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__1__Impl_in_rule__Sentence__Group_1_1__15205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Sentence__ItemsAssignment_1_1_1_in_rule__Sentence__Group_1_1__1__Impl5232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__0__Impl_in_rule__SentenceItem__Group_0__05266 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__1_in_rule__SentenceItem__Group_0__05269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWord_in_rule__SentenceItem__Group_0__0__Impl5296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__1__Impl_in_rule__SentenceItem__Group_0__15325 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Alternatives_0_1_in_rule__SentenceItem__Group_0__1__Impl5352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__0__Impl_in_rule__SentenceItem__Group_1__05387 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__1_in_rule__SentenceItem__Group_1__05390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMarker_in_rule__SentenceItem__Group_1__0__Impl5417 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__1__Impl_in_rule__SentenceItem__Group_1__15446 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Alternatives_1_1_in_rule__SentenceItem__Group_1__1__Impl5473 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__0__Impl_in_rule__SentenceItem__Group_2__05508 = new BitSet(new long[]{0x0000000000006000L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__1_in_rule__SentenceItem__Group_2__05511 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAmbivalence_in_rule__SentenceItem__Group_2__0__Impl5538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__1__Impl_in_rule__SentenceItem__Group_2__15567 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SentenceItem__Alternatives_2_1_in_rule__SentenceItem__Group_2__1__Impl5594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group__0__Impl_in_rule__Ambivalence__Group__05629 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group__1_in_rule__Ambivalence__Group__05632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Ambivalence__Group__0__Impl5660 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group__1__Impl_in_rule__Ambivalence__Group__15691 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group__2_in_rule__Ambivalence__Group__15694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__0_in_rule__Ambivalence__Group__1__Impl5721 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group__2__Impl_in_rule__Ambivalence__Group__25751 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Ambivalence__Group__2__Impl5779 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__0__Impl_in_rule__Ambivalence__Group_1__05816 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__1_in_rule__Ambivalence__Group_1__05819 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__CasesAssignment_1_0_in_rule__Ambivalence__Group_1__0__Impl5846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__1__Impl_in_rule__Ambivalence__Group_1__15876 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5905 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5917 = new BitSet(new long[]{0x0000000000020002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__0__Impl_in_rule__Ambivalence__Group_1_1__05954 = new BitSet(new long[]{0x0000000000046000L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__1_in_rule__Ambivalence__Group_1_1__05957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Ambivalence__Group_1_1__0__Impl5985 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__1__Impl_in_rule__Ambivalence__Group_1_1__16016 = new BitSet(new long[]{0x0000000000046000L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__2_in_rule__Ambivalence__Group_1_1__16019 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Alternatives_1_1_1_in_rule__Ambivalence__Group_1_1__1__Impl6046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__2__Impl_in_rule__Ambivalence__Group_1_1__26077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Ambivalence__CasesAssignment_1_1_2_in_rule__Ambivalence__Group_1_1__2__Impl6104 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group__0__Impl_in_rule__Case__Group__06140 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Case__Group__1_in_rule__Case__Group__06143 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__Case__Group__0__Impl6171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group__1__Impl_in_rule__Case__Group__16202 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__Case__Group__2_in_rule__Case__Group__16205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__NameAssignment_1_in_rule__Case__Group__1__Impl6232 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group__2__Impl_in_rule__Case__Group__26262 = new BitSet(new long[]{0x0002AAAD7FF06010L});
-    public static final BitSet FOLLOW_rule__Case__Group__3_in_rule__Case__Group__26265 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__Case__Group__2__Impl6293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group__3__Impl_in_rule__Case__Group__36324 = new BitSet(new long[]{0x0002AAAD7FF06010L});
-    public static final BitSet FOLLOW_rule__Case__Group__4_in_rule__Case__Group__36327 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Alternatives_3_in_rule__Case__Group__3__Impl6354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group__4__Impl_in_rule__Case__Group__46385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4__0_in_rule__Case__Group__4__Impl6412 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4__0__Impl_in_rule__Case__Group_4__06452 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_rule__Case__Group_4__1_in_rule__Case__Group_4__06455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__ItemsAssignment_4_0_in_rule__Case__Group_4__0__Impl6482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4__1__Impl_in_rule__Case__Group_4__16512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4_1__0_in_rule__Case__Group_4__1__Impl6539 = new BitSet(new long[]{0x0000000000001002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4_1__0__Impl_in_rule__Case__Group_4_1__06574 = new BitSet(new long[]{0x0002AAAD7FF06010L});
-    public static final BitSet FOLLOW_rule__Case__Group_4_1__1_in_rule__Case__Group_4_1__06577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__Case__Group_4_1__0__Impl6605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4_1__1__Impl_in_rule__Case__Group_4_1__16636 = new BitSet(new long[]{0x0002AAAD7FF06010L});
-    public static final BitSet FOLLOW_rule__Case__Group_4_1__2_in_rule__Case__Group_4_1__16639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Alternatives_4_1_1_in_rule__Case__Group_4_1__1__Impl6666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__Group_4_1__2__Impl_in_rule__Case__Group_4_1__26697 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Case__ItemsAssignment_4_1_2_in_rule__Case__Group_4_1__2__Impl6724 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersFrontierMarker__Group__0__Impl_in_rule__VersFrontierMarker__Group__06760 = new BitSet(new long[]{0x0000000000700000L});
-    public static final BitSet FOLLOW_rule__VersFrontierMarker__Group__1_in_rule__VersFrontierMarker__Group__06763 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersFrontierMarker__Group__1__Impl_in_rule__VersFrontierMarker__Group__16821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__VersFrontierMarker__Group__1__Impl6849 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersbreakMarker__Group__0__Impl_in_rule__VersbreakMarker__Group__06884 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__VersbreakMarker__Group__1_in_rule__VersbreakMarker__Group__06887 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__VersbreakMarker__Group__1__Impl_in_rule__VersbreakMarker__Group__16945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__VersbreakMarker__Group__1__Impl6973 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group__0__Impl_in_rule__Marker__Group__07008 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Marker__Group__1_in_rule__Marker__Group__07011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Marker__Group__0__Impl7039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group__1__Impl_in_rule__Marker__Group__17070 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__Marker__Group__2_in_rule__Marker__Group__17073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1__0_in_rule__Marker__Group__1__Impl7100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group__2__Impl_in_rule__Marker__Group__27130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Marker__Group__2__Impl7158 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1__0__Impl_in_rule__Marker__Group_1__07195 = new BitSet(new long[]{0x0000000000080000L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1__1_in_rule__Marker__Group_1__07198 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__TypeAssignment_1_0_in_rule__Marker__Group_1__0__Impl7225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1__1__Impl_in_rule__Marker__Group_1__17255 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1_1__0_in_rule__Marker__Group_1__1__Impl7282 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1_1__0__Impl_in_rule__Marker__Group_1_1__07317 = new BitSet(new long[]{0x0000000000006010L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1_1__1_in_rule__Marker__Group_1_1__07320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__Marker__Group_1_1__0__Impl7348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1_1__1__Impl_in_rule__Marker__Group_1_1__17379 = new BitSet(new long[]{0x0000000000006010L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1_1__2_in_rule__Marker__Group_1_1__17382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Alternatives_1_1_1_in_rule__Marker__Group_1_1__1__Impl7409 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__Group_1_1__2__Impl_in_rule__Marker__Group_1_1__27440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Marker__NameAssignment_1_1_2_in_rule__Marker__Group_1_1__2__Impl7467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Word__Group__0__Impl_in_rule__Word__Group__07503 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__Word__Group__1_in_rule__Word__Group__07506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Word__Group__1__Impl_in_rule__Word__Group__17564 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Word__WCharAssignment_1_in_rule__Word__Group__1__Impl7591 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__InterfixLexical__Group__0__Impl_in_rule__InterfixLexical__Group__07626 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__InterfixLexical__Group__1_in_rule__InterfixLexical__Group__07629 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixLexical__Group__1__Impl_in_rule__InterfixLexical__Group__17687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__InterfixLexical__Group__1__Impl7715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixFlexion__Group__0__Impl_in_rule__InterfixFlexion__Group__07750 = new BitSet(new long[]{0x0000000001000000L});
-    public static final BitSet FOLLOW_rule__InterfixFlexion__Group__1_in_rule__InterfixFlexion__Group__07753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixFlexion__Group__1__Impl_in_rule__InterfixFlexion__Group__17811 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__InterfixFlexion__Group__1__Impl7839 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixSuffixPronomLexical__Group__0__Impl_in_rule__InterfixSuffixPronomLexical__Group__07874 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_rule__InterfixSuffixPronomLexical__Group__1_in_rule__InterfixSuffixPronomLexical__Group__07877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixSuffixPronomLexical__Group__1__Impl_in_rule__InterfixSuffixPronomLexical__Group__17935 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__InterfixSuffixPronomLexical__Group__1__Impl7963 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixPrefixNonLexical__Group__0__Impl_in_rule__InterfixPrefixNonLexical__Group__07998 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__InterfixPrefixNonLexical__Group__1_in_rule__InterfixPrefixNonLexical__Group__08001 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixPrefixNonLexical__Group__1__Impl_in_rule__InterfixPrefixNonLexical__Group__18059 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__InterfixPrefixNonLexical__Group__1__Impl8087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixPrefixLexical__Group__0__Impl_in_rule__InterfixPrefixLexical__Group__08122 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__InterfixPrefixLexical__Group__1_in_rule__InterfixPrefixLexical__Group__08125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixPrefixLexical__Group__1__Impl_in_rule__InterfixPrefixLexical__Group__18183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__InterfixPrefixLexical__Group__1__Impl8211 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixCompountWords__Group__0__Impl_in_rule__InterfixCompountWords__Group__08246 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__InterfixCompountWords__Group__1_in_rule__InterfixCompountWords__Group__08249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixCompountWords__Group__1__Impl_in_rule__InterfixCompountWords__Group__18307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__InterfixCompountWords__Group__1__Impl8335 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__0__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__08370 = new BitSet(new long[]{0x000000003F800000L});
-    public static final BitSet FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1_in_rule__InterfixConnectionSyllabicGroup__Group__08373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__18431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__InterfixConnectionSyllabicGroup__Group__1__Impl8459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__0__Impl_in_rule__Expanded__Group__08494 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__1_in_rule__Expanded__Group__08497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__1__Impl_in_rule__Expanded__Group__18555 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__2_in_rule__Expanded__Group__18558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__Expanded__Group__1__Impl8586 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__2__Impl_in_rule__Expanded__Group__28617 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__3_in_rule__Expanded__Group__28620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8649 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8661 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Expanded__Group__3__Impl_in_rule__Expanded__Group__38694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Expanded__Group__3__Impl8722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__0__Impl_in_rule__Emendation__Group__08761 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__1_in_rule__Emendation__Group__08764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__1__Impl_in_rule__Emendation__Group__18822 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__2_in_rule__Emendation__Group__18825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__Emendation__Group__1__Impl8853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__2__Impl_in_rule__Emendation__Group__28884 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__3_in_rule__Emendation__Group__28887 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8916 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8928 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Emendation__Group__3__Impl_in_rule__Emendation__Group__38961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__Emendation__Group__3__Impl8989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__0__Impl_in_rule__DisputableReading__Group__09028 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__1_in_rule__DisputableReading__Group__09031 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__1__Impl_in_rule__DisputableReading__Group__19089 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__2_in_rule__DisputableReading__Group__19092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__DisputableReading__Group__1__Impl9120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__2__Impl_in_rule__DisputableReading__Group__29151 = new BitSet(new long[]{0x0000000400000000L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__3_in_rule__DisputableReading__Group__29154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9183 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9195 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__DisputableReading__Group__3__Impl_in_rule__DisputableReading__Group__39228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__DisputableReading__Group__3__Impl9256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__0__Impl_in_rule__Lacuna__Group__09295 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__1_in_rule__Lacuna__Group__09298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__1__Impl_in_rule__Lacuna__Group__19356 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__2_in_rule__Lacuna__Group__19359 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__Lacuna__Group__1__Impl9387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__2__Impl_in_rule__Lacuna__Group__29418 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__3_in_rule__Lacuna__Group__29421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9450 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9462 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Lacuna__Group__3__Impl_in_rule__Lacuna__Group__39495 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__Lacuna__Group__3__Impl9523 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__0__Impl_in_rule__Deletion__Group__09562 = new BitSet(new long[]{0x0000002000000000L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__1_in_rule__Deletion__Group__09565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__1__Impl_in_rule__Deletion__Group__19623 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__2_in_rule__Deletion__Group__19626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__Deletion__Group__1__Impl9654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__2__Impl_in_rule__Deletion__Group__29685 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__3_in_rule__Deletion__Group__29688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9717 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9729 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Deletion__Group__3__Impl_in_rule__Deletion__Group__39762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_rule__Deletion__Group__3__Impl9790 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__0__Impl_in_rule__ExpandedColumn__Group__09829 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__1_in_rule__ExpandedColumn__Group__09832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__1__Impl_in_rule__ExpandedColumn__Group__19890 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__2_in_rule__ExpandedColumn__Group__19893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__ExpandedColumn__Group__1__Impl9921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__2__Impl_in_rule__ExpandedColumn__Group__29952 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__3_in_rule__ExpandedColumn__Group__29955 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl9984 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl9996 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__3__Impl_in_rule__ExpandedColumn__Group__310029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__ExpandedColumn__Group__3__Impl10057 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__0__Impl_in_rule__Rasur__Group__010096 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__1_in_rule__Rasur__Group__010099 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__1__Impl_in_rule__Rasur__Group__110157 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__2_in_rule__Rasur__Group__110160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__Rasur__Group__1__Impl10188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__2__Impl_in_rule__Rasur__Group__210219 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__3_in_rule__Rasur__Group__210222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10251 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10263 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__Rasur__Group__3__Impl_in_rule__Rasur__Group__310296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__Rasur__Group__3__Impl10324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__0__Impl_in_rule__AncientExpanded__Group__010363 = new BitSet(new long[]{0x0000080000000000L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__1_in_rule__AncientExpanded__Group__010366 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__1__Impl_in_rule__AncientExpanded__Group__110424 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__2_in_rule__AncientExpanded__Group__110427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__AncientExpanded__Group__1__Impl10455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__2__Impl_in_rule__AncientExpanded__Group__210486 = new BitSet(new long[]{0x0000100000000000L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__3_in_rule__AncientExpanded__Group__210489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10518 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10530 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__AncientExpanded__Group__3__Impl_in_rule__AncientExpanded__Group__310563 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__AncientExpanded__Group__3__Impl10591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__0__Impl_in_rule__RestorationOverRasur__Group__010630 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__1_in_rule__RestorationOverRasur__Group__010633 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__1__Impl_in_rule__RestorationOverRasur__Group__110691 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__2_in_rule__RestorationOverRasur__Group__110694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__RestorationOverRasur__Group__1__Impl10722 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__2__Impl_in_rule__RestorationOverRasur__Group__210753 = new BitSet(new long[]{0x0000400000000000L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__3_in_rule__RestorationOverRasur__Group__210756 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10785 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10797 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__3__Impl_in_rule__RestorationOverRasur__Group__310830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__RestorationOverRasur__Group__3__Impl10858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__0__Impl_in_rule__PartialDestruction__Group__010897 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__1_in_rule__PartialDestruction__Group__010900 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__1__Impl_in_rule__PartialDestruction__Group__110958 = new BitSet(new long[]{0x0002AAAD7F800010L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__2_in_rule__PartialDestruction__Group__110961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__PartialDestruction__Group__1__Impl10989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__2__Impl_in_rule__PartialDestruction__Group__211020 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__3_in_rule__PartialDestruction__Group__211023 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11052 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11064 = new BitSet(new long[]{0x0002AAAD7F800012L});
-    public static final BitSet FOLLOW_rule__PartialDestruction__Group__3__Impl_in_rule__PartialDestruction__Group__311097 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__PartialDestruction__Group__3__Impl11125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__0__Impl_in_rule__Destruction__Group__011164 = new BitSet(new long[]{0x0002AAAD40000000L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__1_in_rule__Destruction__Group__011167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__1__Impl_in_rule__Destruction__Group__111225 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__2_in_rule__Destruction__Group__111228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rule__Destruction__Group__1__Impl11256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__2__Impl_in_rule__Destruction__Group__211287 = new BitSet(new long[]{0x0002000000000000L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__3_in_rule__Destruction__Group__211290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Destruction__CommentAssignment_2_in_rule__Destruction__Group__2__Impl11317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Destruction__Group__3__Impl_in_rule__Destruction__Group__311347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rule__Destruction__Group__3__Impl11375 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_011419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_1_111450 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_011481 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_1_111512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_011543 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_1_211574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Case__NameAssignment_111605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_011636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_1_211667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Marker__TypeAssignment_1_011698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Marker__NameAssignment_1_1_211729 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWordMiddle_in_rule__Word__WCharAssignment_111760 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Chars__NameAssignment11791 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoExpanded_in_rule__Expanded__WCharAssignment_211822 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoEmendation_in_rule__Emendation__WCharAssignment_211853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoDisputableReading_in_rule__DisputableReading__WCharAssignment_211884 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoLacuna_in_rule__Lacuna__WCharAssignment_211915 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoDeletion_in_rule__Deletion__WCharAssignment_211946 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoExpandedColumn_in_rule__ExpandedColumn__WCharAssignment_211977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoRasur_in_rule__Rasur__WCharAssignment_212008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoAncientExpanded_in_rule__AncientExpanded__WCharAssignment_212039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoRestorationOverRasur_in_rule__RestorationOverRasur__WCharAssignment_212070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoPartialDestruction_in_rule__PartialDestruction__WCharAssignment_212101 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Destruction__CommentAssignment_212132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__TextContent__Alternatives_1_1_02810 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__TextContent__Alternatives_1_1_02830 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__0_in_rule__SentenceItem__Alternatives2864 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__0_in_rule__SentenceItem__Alternatives2882 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__0_in_rule__SentenceItem__Alternatives2900 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__SentenceItem__Alternatives_0_12934 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__SentenceItem__Alternatives_0_12954 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__SentenceItem__Alternatives_1_12989 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__SentenceItem__Alternatives_1_13009 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__SentenceItem__Alternatives_2_13044 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__SentenceItem__Alternatives_2_13064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMarker_in_rule__AbstractMarker__Alternatives3098 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersMarker_in_rule__AbstractMarker__Alternatives3115 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Ambivalence__Alternatives_1_1_13148 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Ambivalence__Alternatives_1_1_13168 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Case__Alternatives_33203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Case__Alternatives_33223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Case__Alternatives_4_1_13258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Case__Alternatives_4_1_13278 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWord_in_rule__SentenceItemNoAmbivalence__Alternatives3312 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAbstractMarker_in_rule__SentenceItemNoAmbivalence__Alternatives3329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersbreakMarker_in_rule__VersMarker__Alternatives3361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_rule__VersMarker__Alternatives3378 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Marker__Alternatives_1_1_13411 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Marker__Alternatives_1_1_13431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__WordMiddle__Alternatives3465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBrackets_in_rule__WordMiddle__Alternatives3482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__WordMiddle__Alternatives3499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixFlexion_in_rule__Interfix__Alternatives3531 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixLexical_in_rule__Interfix__Alternatives3548 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixSuffixPronomLexical_in_rule__Interfix__Alternatives3565 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPrefixNonLexical_in_rule__Interfix__Alternatives3582 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPrefixLexical_in_rule__Interfix__Alternatives3599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixCompountWords_in_rule__Interfix__Alternatives3616 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixConnectionSyllabicGroup_in_rule__Interfix__Alternatives3633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasur_in_rule__Brackets__Alternatives3665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpanded_in_rule__Brackets__Alternatives3682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_rule__Brackets__Alternatives3699 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__Brackets__Alternatives3716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_rule__Brackets__Alternatives3733 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEmendation_in_rule__Brackets__Alternatives3750 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLacuna_in_rule__Brackets__Alternatives3767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_rule__Brackets__Alternatives3784 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpandedColumn_in_rule__Brackets__Alternatives3801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_rule__Brackets__Alternatives3818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestruction_in_rule__Brackets__Alternatives3835 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoExpanded__Alternatives3867 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoExpanded__Alternatives3884 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoEmendation__Alternatives3916 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoEmendation__Alternatives3933 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoEmendation__Alternatives3950 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoDisputableReading__Alternatives3982 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoDisputableReading__Alternatives3999 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoDisputableReading__Alternatives4016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoLacuna__Alternatives4048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoLacuna__Alternatives4065 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoLacuna__Alternatives4082 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoDeletion__Alternatives4114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoDeletion__Alternatives4131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_rule__NoDeletion__Alternatives4148 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoDeletion__Alternatives4165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoExpandedColumn__Alternatives4197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoExpandedColumn__Alternatives4214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoExpandedColumn__Alternatives4231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoRasur__Alternatives4263 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoRasur__Alternatives4280 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoRasur__Alternatives4297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoAncientExpanded__Alternatives4329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoAncientExpanded__Alternatives4346 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoRestorationOverRasur__Alternatives4378 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoRestorationOverRasur__Alternatives4395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_rule__NoPartialDestruction__Alternatives4427 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_rule__NoPartialDestruction__Alternatives4444 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_rule__NoPartialDestruction__Alternatives4461 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_rule__NoPartialDestruction__Alternatives4478 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group__0__Impl_in_rule__TextContent__Group__04508 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_rule__TextContent__Group__1_in_rule__TextContent__Group__04511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group__1__Impl_in_rule__TextContent__Group__14569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1__0_in_rule__TextContent__Group__1__Impl4596 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1__0__Impl_in_rule__TextContent__Group_1__04630 = new BitSet(new long[]{0x000000000001F000L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1__1_in_rule__TextContent__Group_1__04633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__ItemsAssignment_1_0_in_rule__TextContent__Group_1__0__Impl4660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1__1__Impl_in_rule__TextContent__Group_1__14690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__0_in_rule__TextContent__Group_1__1__Impl4717 = new BitSet(new long[]{0x000000000001F002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__0__Impl_in_rule__TextContent__Group_1_1__04752 = new BitSet(new long[]{0x000000000001F000L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__1_in_rule__TextContent__Group_1_1__04755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__Alternatives_1_1_0_in_rule__TextContent__Group_1_1__0__Impl4782 = new BitSet(new long[]{0x000000000000F002L});
+    public static final BitSet FOLLOW_rule__TextContent__Group_1_1__1__Impl_in_rule__TextContent__Group_1_1__14813 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__TextContent__ItemsAssignment_1_1_1_in_rule__TextContent__Group_1_1__1__Impl4840 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group__0__Impl_in_rule__Sentence__Group__04874 = new BitSet(new long[]{0x0005555AFFE20010L});
+    public static final BitSet FOLLOW_rule__Sentence__Group__1_in_rule__Sentence__Group__04877 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__Sentence__Group__0__Impl4905 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group__1__Impl_in_rule__Sentence__Group__14936 = new BitSet(new long[]{0x0000000000010000L});
+    public static final BitSet FOLLOW_rule__Sentence__Group__2_in_rule__Sentence__Group__14939 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1__0_in_rule__Sentence__Group__1__Impl4966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group__2__Impl_in_rule__Sentence__Group__24996 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__Sentence__Group__2__Impl5024 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1__0__Impl_in_rule__Sentence__Group_1__05061 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1__1_in_rule__Sentence__Group_1__05064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__ItemsAssignment_1_0_in_rule__Sentence__Group_1__0__Impl5091 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1__1__Impl_in_rule__Sentence__Group_1__15121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__0_in_rule__Sentence__Group_1__1__Impl5148 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__0__Impl_in_rule__Sentence__Group_1_1__05183 = new BitSet(new long[]{0x0005555AFFE20010L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__1_in_rule__Sentence__Group_1_1__05186 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__Sentence__Group_1_1__0__Impl5214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__Group_1_1__1__Impl_in_rule__Sentence__Group_1_1__15245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Sentence__ItemsAssignment_1_1_1_in_rule__Sentence__Group_1_1__1__Impl5272 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__0__Impl_in_rule__SentenceItem__Group_0__05306 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__1_in_rule__SentenceItem__Group_0__05309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWord_in_rule__SentenceItem__Group_0__0__Impl5336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_0__1__Impl_in_rule__SentenceItem__Group_0__15365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Alternatives_0_1_in_rule__SentenceItem__Group_0__1__Impl5392 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__0__Impl_in_rule__SentenceItem__Group_1__05427 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__1_in_rule__SentenceItem__Group_1__05430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAbstractMarker_in_rule__SentenceItem__Group_1__0__Impl5457 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_1__1__Impl_in_rule__SentenceItem__Group_1__15486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Alternatives_1_1_in_rule__SentenceItem__Group_1__1__Impl5513 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__0__Impl_in_rule__SentenceItem__Group_2__05548 = new BitSet(new long[]{0x0000000000006000L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__1_in_rule__SentenceItem__Group_2__05551 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAmbivalence_in_rule__SentenceItem__Group_2__0__Impl5578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Group_2__1__Impl_in_rule__SentenceItem__Group_2__15607 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SentenceItem__Alternatives_2_1_in_rule__SentenceItem__Group_2__1__Impl5634 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group__0__Impl_in_rule__Ambivalence__Group__05669 = new BitSet(new long[]{0x0000000000080000L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group__1_in_rule__Ambivalence__Group__05672 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Ambivalence__Group__0__Impl5700 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group__1__Impl_in_rule__Ambivalence__Group__15731 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group__2_in_rule__Ambivalence__Group__15734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__0_in_rule__Ambivalence__Group__1__Impl5761 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group__2__Impl_in_rule__Ambivalence__Group__25791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__Ambivalence__Group__2__Impl5819 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__0__Impl_in_rule__Ambivalence__Group_1__05856 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__1_in_rule__Ambivalence__Group_1__05859 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__CasesAssignment_1_0_in_rule__Ambivalence__Group_1__0__Impl5886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1__1__Impl_in_rule__Ambivalence__Group_1__15916 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5945 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__0_in_rule__Ambivalence__Group_1__1__Impl5957 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__0__Impl_in_rule__Ambivalence__Group_1_1__05994 = new BitSet(new long[]{0x0000000000086000L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__1_in_rule__Ambivalence__Group_1_1__05997 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__Ambivalence__Group_1_1__0__Impl6025 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__1__Impl_in_rule__Ambivalence__Group_1_1__16056 = new BitSet(new long[]{0x0000000000086000L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__2_in_rule__Ambivalence__Group_1_1__16059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Alternatives_1_1_1_in_rule__Ambivalence__Group_1_1__1__Impl6086 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__Group_1_1__2__Impl_in_rule__Ambivalence__Group_1_1__26117 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Ambivalence__CasesAssignment_1_1_2_in_rule__Ambivalence__Group_1_1__2__Impl6144 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group__0__Impl_in_rule__Case__Group__06180 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Case__Group__1_in_rule__Case__Group__06183 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__Case__Group__0__Impl6211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group__1__Impl_in_rule__Case__Group__16242 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__Case__Group__2_in_rule__Case__Group__16245 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__NameAssignment_1_in_rule__Case__Group__1__Impl6272 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group__2__Impl_in_rule__Case__Group__26302 = new BitSet(new long[]{0x0005555AFFE06010L});
+    public static final BitSet FOLLOW_rule__Case__Group__3_in_rule__Case__Group__26305 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__Case__Group__2__Impl6333 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group__3__Impl_in_rule__Case__Group__36364 = new BitSet(new long[]{0x0005555AFFE06010L});
+    public static final BitSet FOLLOW_rule__Case__Group__4_in_rule__Case__Group__36367 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Alternatives_3_in_rule__Case__Group__3__Impl6394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group__4__Impl_in_rule__Case__Group__46425 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4__0_in_rule__Case__Group__4__Impl6452 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4__0__Impl_in_rule__Case__Group_4__06492 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_rule__Case__Group_4__1_in_rule__Case__Group_4__06495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__ItemsAssignment_4_0_in_rule__Case__Group_4__0__Impl6522 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4__1__Impl_in_rule__Case__Group_4__16552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4_1__0_in_rule__Case__Group_4__1__Impl6579 = new BitSet(new long[]{0x0000000000001002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4_1__0__Impl_in_rule__Case__Group_4_1__06614 = new BitSet(new long[]{0x0005555AFFE06010L});
+    public static final BitSet FOLLOW_rule__Case__Group_4_1__1_in_rule__Case__Group_4_1__06617 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__Case__Group_4_1__0__Impl6645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4_1__1__Impl_in_rule__Case__Group_4_1__16676 = new BitSet(new long[]{0x0005555AFFE06010L});
+    public static final BitSet FOLLOW_rule__Case__Group_4_1__2_in_rule__Case__Group_4_1__16679 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Alternatives_4_1_1_in_rule__Case__Group_4_1__1__Impl6706 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__Group_4_1__2__Impl_in_rule__Case__Group_4_1__26737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Case__ItemsAssignment_4_1_2_in_rule__Case__Group_4_1__2__Impl6764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersFrontierMarker__Group__0__Impl_in_rule__VersFrontierMarker__Group__06800 = new BitSet(new long[]{0x0000000000E00000L});
+    public static final BitSet FOLLOW_rule__VersFrontierMarker__Group__1_in_rule__VersFrontierMarker__Group__06803 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersFrontierMarker__Group__1__Impl_in_rule__VersFrontierMarker__Group__16861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__VersFrontierMarker__Group__1__Impl6889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersbreakMarker__Group__0__Impl_in_rule__VersbreakMarker__Group__06924 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_rule__VersbreakMarker__Group__1_in_rule__VersbreakMarker__Group__06927 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__VersbreakMarker__Group__1__Impl_in_rule__VersbreakMarker__Group__16985 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__VersbreakMarker__Group__1__Impl7013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group__0__Impl_in_rule__Marker__Group__07048 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Marker__Group__1_in_rule__Marker__Group__07051 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Marker__Group__0__Impl7079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group__1__Impl_in_rule__Marker__Group__17110 = new BitSet(new long[]{0x0000000000800000L});
+    public static final BitSet FOLLOW_rule__Marker__Group__2_in_rule__Marker__Group__17113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1__0_in_rule__Marker__Group__1__Impl7140 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group__2__Impl_in_rule__Marker__Group__27170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Marker__Group__2__Impl7198 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1__0__Impl_in_rule__Marker__Group_1__07235 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1__1_in_rule__Marker__Group_1__07238 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__TypeAssignment_1_0_in_rule__Marker__Group_1__0__Impl7265 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1__1__Impl_in_rule__Marker__Group_1__17295 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1_1__0_in_rule__Marker__Group_1__1__Impl7322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1_1__0__Impl_in_rule__Marker__Group_1_1__07357 = new BitSet(new long[]{0x0000000000006010L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1_1__1_in_rule__Marker__Group_1_1__07360 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__Marker__Group_1_1__0__Impl7388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1_1__1__Impl_in_rule__Marker__Group_1_1__17419 = new BitSet(new long[]{0x0000000000006010L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1_1__2_in_rule__Marker__Group_1_1__17422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Alternatives_1_1_1_in_rule__Marker__Group_1_1__1__Impl7449 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__Group_1_1__2__Impl_in_rule__Marker__Group_1_1__27480 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Marker__NameAssignment_1_1_2_in_rule__Marker__Group_1_1__2__Impl7507 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Word__Group__0__Impl_in_rule__Word__Group__07543 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__Word__Group__1_in_rule__Word__Group__07546 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Word__Group__1__Impl_in_rule__Word__Group__17604 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Word__WCharAssignment_1_in_rule__Word__Group__1__Impl7631 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__InterfixLexical__Group__0__Impl_in_rule__InterfixLexical__Group__07666 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_rule__InterfixLexical__Group__1_in_rule__InterfixLexical__Group__07669 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixLexical__Group__1__Impl_in_rule__InterfixLexical__Group__17727 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_rule__InterfixLexical__Group__1__Impl7755 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixFlexion__Group__0__Impl_in_rule__InterfixFlexion__Group__07790 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_rule__InterfixFlexion__Group__1_in_rule__InterfixFlexion__Group__07793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixFlexion__Group__1__Impl_in_rule__InterfixFlexion__Group__17851 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_rule__InterfixFlexion__Group__1__Impl7879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixSuffixPronomLexical__Group__0__Impl_in_rule__InterfixSuffixPronomLexical__Group__07914 = new BitSet(new long[]{0x0000000004000000L});
+    public static final BitSet FOLLOW_rule__InterfixSuffixPronomLexical__Group__1_in_rule__InterfixSuffixPronomLexical__Group__07917 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixSuffixPronomLexical__Group__1__Impl_in_rule__InterfixSuffixPronomLexical__Group__17975 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__InterfixSuffixPronomLexical__Group__1__Impl8003 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixPrefixNonLexical__Group__0__Impl_in_rule__InterfixPrefixNonLexical__Group__08038 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_rule__InterfixPrefixNonLexical__Group__1_in_rule__InterfixPrefixNonLexical__Group__08041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixPrefixNonLexical__Group__1__Impl_in_rule__InterfixPrefixNonLexical__Group__18099 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__InterfixPrefixNonLexical__Group__1__Impl8127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixPrefixLexical__Group__0__Impl_in_rule__InterfixPrefixLexical__Group__08162 = new BitSet(new long[]{0x0000000010000000L});
+    public static final BitSet FOLLOW_rule__InterfixPrefixLexical__Group__1_in_rule__InterfixPrefixLexical__Group__08165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixPrefixLexical__Group__1__Impl_in_rule__InterfixPrefixLexical__Group__18223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__InterfixPrefixLexical__Group__1__Impl8251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixCompountWords__Group__0__Impl_in_rule__InterfixCompountWords__Group__08286 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_rule__InterfixCompountWords__Group__1_in_rule__InterfixCompountWords__Group__08289 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixCompountWords__Group__1__Impl_in_rule__InterfixCompountWords__Group__18347 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__InterfixCompountWords__Group__1__Impl8375 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__0__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__08410 = new BitSet(new long[]{0x000000007F000000L});
+    public static final BitSet FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1_in_rule__InterfixConnectionSyllabicGroup__Group__08413 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__InterfixConnectionSyllabicGroup__Group__1__Impl_in_rule__InterfixConnectionSyllabicGroup__Group__18471 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__InterfixConnectionSyllabicGroup__Group__1__Impl8499 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__0__Impl_in_rule__Expanded__Group__08534 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__1_in_rule__Expanded__Group__08537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__1__Impl_in_rule__Expanded__Group__18595 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__2_in_rule__Expanded__Group__18598 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Expanded__Group__1__Impl8626 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__2__Impl_in_rule__Expanded__Group__28657 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__3_in_rule__Expanded__Group__28660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8689 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Expanded__WCharAssignment_2_in_rule__Expanded__Group__2__Impl8701 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Expanded__Group__3__Impl_in_rule__Expanded__Group__38734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__Expanded__Group__3__Impl8762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__0__Impl_in_rule__Emendation__Group__08801 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__1_in_rule__Emendation__Group__08804 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__1__Impl_in_rule__Emendation__Group__18862 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__2_in_rule__Emendation__Group__18865 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__Emendation__Group__1__Impl8893 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__2__Impl_in_rule__Emendation__Group__28924 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__3_in_rule__Emendation__Group__28927 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8956 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Emendation__WCharAssignment_2_in_rule__Emendation__Group__2__Impl8968 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Emendation__Group__3__Impl_in_rule__Emendation__Group__39001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__Emendation__Group__3__Impl9029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__0__Impl_in_rule__DisputableReading__Group__09068 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__1_in_rule__DisputableReading__Group__09071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__1__Impl_in_rule__DisputableReading__Group__19129 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__2_in_rule__DisputableReading__Group__19132 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__DisputableReading__Group__1__Impl9160 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__2__Impl_in_rule__DisputableReading__Group__29191 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__3_in_rule__DisputableReading__Group__29194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9223 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__DisputableReading__WCharAssignment_2_in_rule__DisputableReading__Group__2__Impl9235 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__DisputableReading__Group__3__Impl_in_rule__DisputableReading__Group__39268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__DisputableReading__Group__3__Impl9296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__0__Impl_in_rule__Lacuna__Group__09335 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__1_in_rule__Lacuna__Group__09338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__1__Impl_in_rule__Lacuna__Group__19396 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__2_in_rule__Lacuna__Group__19399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__Lacuna__Group__1__Impl9427 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__2__Impl_in_rule__Lacuna__Group__29458 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__3_in_rule__Lacuna__Group__29461 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9490 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Lacuna__WCharAssignment_2_in_rule__Lacuna__Group__2__Impl9502 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Lacuna__Group__3__Impl_in_rule__Lacuna__Group__39535 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_rule__Lacuna__Group__3__Impl9563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__0__Impl_in_rule__Deletion__Group__09602 = new BitSet(new long[]{0x0000004000000000L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__1_in_rule__Deletion__Group__09605 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__1__Impl_in_rule__Deletion__Group__19663 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__2_in_rule__Deletion__Group__19666 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_38_in_rule__Deletion__Group__1__Impl9694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__2__Impl_in_rule__Deletion__Group__29725 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__3_in_rule__Deletion__Group__29728 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9757 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Deletion__WCharAssignment_2_in_rule__Deletion__Group__2__Impl9769 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Deletion__Group__3__Impl_in_rule__Deletion__Group__39802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_rule__Deletion__Group__3__Impl9830 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__0__Impl_in_rule__ExpandedColumn__Group__09869 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__1_in_rule__ExpandedColumn__Group__09872 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__1__Impl_in_rule__ExpandedColumn__Group__19930 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__2_in_rule__ExpandedColumn__Group__19933 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_rule__ExpandedColumn__Group__1__Impl9961 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__2__Impl_in_rule__ExpandedColumn__Group__29992 = new BitSet(new long[]{0x0000020000000000L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__3_in_rule__ExpandedColumn__Group__29995 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl10024 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__WCharAssignment_2_in_rule__ExpandedColumn__Group__2__Impl10036 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__ExpandedColumn__Group__3__Impl_in_rule__ExpandedColumn__Group__310069 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_rule__ExpandedColumn__Group__3__Impl10097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__0__Impl_in_rule__Rasur__Group__010136 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__1_in_rule__Rasur__Group__010139 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__1__Impl_in_rule__Rasur__Group__110197 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__2_in_rule__Rasur__Group__110200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__Rasur__Group__1__Impl10228 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__2__Impl_in_rule__Rasur__Group__210259 = new BitSet(new long[]{0x0000080000000000L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__3_in_rule__Rasur__Group__210262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10291 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Rasur__WCharAssignment_2_in_rule__Rasur__Group__2__Impl10303 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__Rasur__Group__3__Impl_in_rule__Rasur__Group__310336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__Rasur__Group__3__Impl10364 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__0__Impl_in_rule__AncientExpanded__Group__010403 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__1_in_rule__AncientExpanded__Group__010406 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__1__Impl_in_rule__AncientExpanded__Group__110464 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__2_in_rule__AncientExpanded__Group__110467 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__AncientExpanded__Group__1__Impl10495 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__2__Impl_in_rule__AncientExpanded__Group__210526 = new BitSet(new long[]{0x0000200000000000L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__3_in_rule__AncientExpanded__Group__210529 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10558 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__WCharAssignment_2_in_rule__AncientExpanded__Group__2__Impl10570 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__AncientExpanded__Group__3__Impl_in_rule__AncientExpanded__Group__310603 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__AncientExpanded__Group__3__Impl10631 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__0__Impl_in_rule__RestorationOverRasur__Group__010670 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__1_in_rule__RestorationOverRasur__Group__010673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__1__Impl_in_rule__RestorationOverRasur__Group__110731 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__2_in_rule__RestorationOverRasur__Group__110734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__RestorationOverRasur__Group__1__Impl10762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__2__Impl_in_rule__RestorationOverRasur__Group__210793 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__3_in_rule__RestorationOverRasur__Group__210796 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10825 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__WCharAssignment_2_in_rule__RestorationOverRasur__Group__2__Impl10837 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__RestorationOverRasur__Group__3__Impl_in_rule__RestorationOverRasur__Group__310870 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__RestorationOverRasur__Group__3__Impl10898 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__0__Impl_in_rule__PartialDestruction__Group__010937 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__1_in_rule__PartialDestruction__Group__010940 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__1__Impl_in_rule__PartialDestruction__Group__110998 = new BitSet(new long[]{0x0005555AFF000010L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__2_in_rule__PartialDestruction__Group__111001 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__PartialDestruction__Group__1__Impl11029 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__2__Impl_in_rule__PartialDestruction__Group__211060 = new BitSet(new long[]{0x0002000000000000L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__3_in_rule__PartialDestruction__Group__211063 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11092 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__WCharAssignment_2_in_rule__PartialDestruction__Group__2__Impl11104 = new BitSet(new long[]{0x0005555AFF000012L});
+    public static final BitSet FOLLOW_rule__PartialDestruction__Group__3__Impl_in_rule__PartialDestruction__Group__311137 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_rule__PartialDestruction__Group__3__Impl11165 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__0__Impl_in_rule__Destruction__Group__011204 = new BitSet(new long[]{0x0005555A80000000L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__1_in_rule__Destruction__Group__011207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__1__Impl_in_rule__Destruction__Group__111265 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__2_in_rule__Destruction__Group__111268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_rule__Destruction__Group__1__Impl11296 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__2__Impl_in_rule__Destruction__Group__211327 = new BitSet(new long[]{0x0004000000000000L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__3_in_rule__Destruction__Group__211330 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Destruction__CommentAssignment_2_in_rule__Destruction__Group__2__Impl11357 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Destruction__Group__3__Impl_in_rule__Destruction__Group__311387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_rule__Destruction__Group__3__Impl11415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_011459 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTextItem_in_rule__TextContent__ItemsAssignment_1_1_111490 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_011521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentenceItem_in_rule__Sentence__ItemsAssignment_1_1_111552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_011583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCase_in_rule__Ambivalence__CasesAssignment_1_1_211614 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Case__NameAssignment_111645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_011676 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_rule__Case__ItemsAssignment_4_1_211707 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Marker__TypeAssignment_1_011738 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Marker__NameAssignment_1_1_211769 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWordMiddle_in_rule__Word__WCharAssignment_111800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Chars__NameAssignment11831 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoExpanded_in_rule__Expanded__WCharAssignment_211862 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoEmendation_in_rule__Emendation__WCharAssignment_211893 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoDisputableReading_in_rule__DisputableReading__WCharAssignment_211924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoLacuna_in_rule__Lacuna__WCharAssignment_211955 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoDeletion_in_rule__Deletion__WCharAssignment_211986 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoExpandedColumn_in_rule__ExpandedColumn__WCharAssignment_212017 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoRasur_in_rule__Rasur__WCharAssignment_212048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoAncientExpanded_in_rule__AncientExpanded__WCharAssignment_212079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoRestorationOverRasur_in_rule__RestorationOverRasur__WCharAssignment_212110 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoPartialDestruction_in_rule__PartialDestruction__WCharAssignment_212141 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EGYSTRING_in_rule__Destruction__CommentAssignment_212172 = new BitSet(new long[]{0x0000000000000002L});
 
 }

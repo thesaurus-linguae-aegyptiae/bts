@@ -25,7 +25,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q;
 	protected AbstractElementAlias match_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q;
 	protected AbstractElementAlias match_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q;
-	protected AbstractElementAlias match_TextContent___Control000aKeyword_1_1_0_1_or_SpaceKeyword_1_1_0_0__a;
+	protected AbstractElementAlias match_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -37,7 +37,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl0009Keyword_0_1_1()), new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl000aKeyword_0_1_0()));
 		match_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl0009Keyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl000aKeyword_1_1_0()));
 		match_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl0009Keyword_2_1_1()), new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl000aKeyword_2_1_0()));
-		match_TextContent___Control000aKeyword_1_1_0_1_or_SpaceKeyword_1_1_0_0__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_1()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0()));
+		match_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0()));
 	}
 	
 	@Override
@@ -66,8 +66,8 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q.equals(syntax))
 				emit_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_TextContent___Control000aKeyword_1_1_0_1_or_SpaceKeyword_1_1_0_0__a.equals(syntax))
-				emit_TextContent___Control000aKeyword_1_1_0_1_or_SpaceKeyword_1_1_0_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a.equals(syntax))
+				emit_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -99,9 +99,9 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     '	' | 
 	     '
-	     '
+	     ' | 
+	     '	'
 	 )?
 	 */
 	protected void emit_Case___Control0009Keyword_4_1_1_1_or_Control000aKeyword_4_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -111,9 +111,9 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     '	' | 
 	     '
-	     '
+	     ' | 
+	     '	'
 	 )?
 	 */
 	protected void emit_Marker___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -123,9 +123,9 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
+	     '	' | 
 	     '
-	     ' | 
-	     '	'
+	     '
 	 )?
 	 */
 	protected void emit_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -147,9 +147,9 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
-	     '	' | 
 	     '
-	     '
+	     ' | 
+	     '	'
 	 )?
 	 */
 	protected void emit_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -159,12 +159,15 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * Syntax:
 	 *     (
+	     '	' | 
 	     '
 	     ' | 
-	     ' '
+	     ' ' | 
+	     '
+	 '
 	 )*
 	 */
-	protected void emit_TextContent___Control000aKeyword_1_1_0_1_or_SpaceKeyword_1_1_0_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

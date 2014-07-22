@@ -5,6 +5,7 @@ package org.bbaw.bts.btsmodel.impl;
 import java.util.Collection;
 
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -409,10 +410,20 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	}
 
 	@Override
-	public boolean equals(Object object)
-	{
-		if (object instanceof BTSIdentifiableItem && get_id() != null)
-		{
+	public boolean equals(Object object) {
+		if (this instanceof BTSDBBaseObject
+				&& object instanceof BTSDBBaseObject) {
+			BTSDBBaseObject o = (BTSDBBaseObject) object;
+			if (o.get_id() == null || this.get_id() == null) {
+				return false;
+			} else if (this.get_id().equals(o.get_id())) {
+				if (((BTSDBBaseObject) this).get_rev() != null) {
+					return ((BTSDBBaseObject) this).get_rev().equals(
+							((BTSDBBaseObject) o).get_rev());
+				}
+				return (((BTSDBBaseObject) o).get_rev() == null);
+			}
+		} else if (object instanceof BTSIdentifiableItem && get_id() != null) {
 			return get_id().equals(((BTSIdentifiableItem) object).get_id());
 		}
 		return false;

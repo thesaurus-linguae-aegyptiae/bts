@@ -340,6 +340,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 //		EObjectMapper objectMapper = getEObjectMapper();
 //		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
 //		Object o = objectMapper.from(stream, resource, null);
+		if (!resource.getContents().isEmpty())
+		{
+			return;
+		}
 		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8)),
 				new HashMap<Object, Object>());
 		loader.fillResource(resource);
@@ -816,8 +820,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			{
 				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
 				// FIXME
-				Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-//				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//				Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 				fillResource(resource, jo);
 
 				if (!resource.getContents().isEmpty())

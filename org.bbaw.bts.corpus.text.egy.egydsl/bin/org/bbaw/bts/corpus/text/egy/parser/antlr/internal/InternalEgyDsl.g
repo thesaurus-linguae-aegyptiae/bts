@@ -106,23 +106,33 @@ ruleTextContent returns [EObject current=null]
     	newLeafNode(otherlv_2, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0());
     }
 
-    |	otherlv_3='\n' 
+    |	otherlv_3='\t' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_1());
+    	newLeafNode(otherlv_3, grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1());
+    }
+
+    |	otherlv_4='\n' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2());
+    }
+
+    |	otherlv_5='\r' 
+    {
+    	newLeafNode(otherlv_5, grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3());
     }
 )*(
 (
 		{ 
 	        newCompositeNode(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_1_1_0()); 
 	    }
-		lv_items_4_0=ruleTextItem		{
+		lv_items_6_0=ruleTextItem		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getTextContentRule());
 	        }
        		add(
        			$current, 
        			"items",
-        		lv_items_4_0, 
+        		lv_items_6_0, 
         		"TextItem");
 	        afterParserOrEnumRuleCall();
 	    }

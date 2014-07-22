@@ -42,7 +42,9 @@ import org.bbaw.bts.ui.egy.textSign.support.CompartementImageFigure;
 import org.bbaw.bts.ui.egy.textSign.support.ElementFigure;
 import org.bbaw.bts.ui.egy.textSign.support.LineFigure;
 import org.bbaw.bts.ui.egy.textSign.support.MarkerFigure;
+import org.bbaw.bts.ui.egy.textSign.support.TypedLabel;
 import org.bbaw.bts.ui.egy.textSign.support.WordFigure;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.FigureCanvas;
@@ -80,6 +82,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.xtext.ui.editor.model.ResourceAwareXtextDocumentProvider;
 import org.eclipse.xtext.validation.Issue;
 
 public class SignTextComposite extends Composite implements IBTSEditor {
@@ -105,6 +108,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private EventBroker eventBroker;
 	@Inject
 	private IBTSEditor parentEditor;
+	
+	@Inject
+	private BTSResourceProvider resourceProvider;
 
 	private ElementFigure selectedElement;
 
@@ -367,25 +373,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					.eContainer();
 		}
 		if (word != null) {
-		IFigure rect = (IFigure) wordMap.get(word.get_id());
-		if (rect != null) {
-		for (Object fig : rect.getChildren()) {
-			if (fig instanceof ImageFigure) {
-				ImageFigure imf = (ImageFigure) fig;
-				String mdc = transformWordToMdCString(word);
-				try {
-					imf.setImage(transformToSWT(getImageData(mdc)));
-				} catch (MDCSyntaxError e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if (fig instanceof Label) {
-				Label l = (Label) fig;
-				l.setText(word.getWChar());
-			}
-		}
-		}
+			IFigure rect = (IFigure) wordMap.get(word.get_id());
+			refreshFigureFromModel(rect, word);
+			
 		}
 	}
 
@@ -696,15 +686,18 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// add lemma key
 		// FIXME load lemma object and show lemma transliteration
 		if (word.getLKey() != null && !"".equals(word.getLKey())) {
-			org.eclipse.draw2d.Label l = new org.eclipse.draw2d.Label();
+			TypedLabel l = new TypedLabel();
 			l.setText(word.getLKey());
+			l.setIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_LEMMA));
+			l.setType(TypedLabel.LEMMA);
 			rect.add(l);
 		}
 
 		// add flexion code
 		if (word.getFlexCode() != null && !"".equals(word.getFlexCode())) {
-			org.eclipse.draw2d.Label l = new org.eclipse.draw2d.Label();
+			TypedLabel l = new TypedLabel();
 			l.setText(word.getFlexCode());
+			l.setType(TypedLabel.FLEXION);
 			rect.add(l);
 		}
 
@@ -1079,16 +1072,19 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	public void setTextSelectionEvent(String event) {
+		int currentIndex = currentLineFigure.getChildren().indexOf(
+				selectedElement);
+		refreshFigureFromModel(selectedElement, null);
 		if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_ALL_START)) {
 
 			lineIndex = 0;
 			shiftLineSelection(-1);
-			int currentIndex = currentLineFigure.getChildren().indexOf(
-					selectedElement);
+//			int currentIndex = currentLineFigure.getChildren().indexOf(
+//					selectedElement);
 			shiftSelection(-currentIndex);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_LINE_START)) {
-			int currentIndex = currentLineFigure.getChildren().indexOf(
-					selectedElement);
+//			int currentIndex = currentLineFigure.getChildren().indexOf(
+//					selectedElement);
 			shiftSelection(-currentIndex);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_PREVIOUS)) {
 			shiftSelection(-1);
@@ -1096,21 +1092,63 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT)) {
 			shiftSelection(1);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_LINE_END)) {
-			int currentIndex = currentLineFigure.getChildren().indexOf(
-					selectedElement);
+//			int currentIndex = currentLineFigure.getChildren().indexOf(
+//					selectedElement);
 			int shift = currentLineFigure.getChildren().size() - currentIndex
 					- 1;
 			shiftSelection(shift);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_ALL_END)) {
 			int lshift = container.getChildren().size() - lineIndex - 1;
 			shiftLineSelection(lshift);
-			int currentIndex = currentLineFigure.getChildren().indexOf(
-					selectedElement);
+//			int currentIndex = currentLineFigure.getChildren().indexOf(
+//					selectedElement);
 			int shift = currentLineFigure.getChildren().size() - currentIndex
 					- 1;
 			shiftSelection(shift);
 		}
+		
 
+	}
+
+	private void refreshFigureFromModel(IFigure figure, BTSWord word) {
+		if (figure instanceof WordFigure)
+		{
+			WordFigure wf = (WordFigure) figure;
+			Object o = wf.getModelObject();
+			if (word == null && o instanceof BTSWord)
+			{
+				word = (BTSWord) o;
+			}
+			for (Object fig : wf.getChildren()) {
+				if (fig instanceof ImageFigure) {
+					ImageFigure imf = (ImageFigure) fig;
+					String mdc = transformWordToMdCString(word);
+					try {
+						imf.setImage(transformToSWT(getImageData(mdc)));
+					} catch (MDCSyntaxError e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else if (fig instanceof TypedLabel) {
+					TypedLabel l = (TypedLabel) fig;
+					switch (l.getType()) {
+					case TypedLabel.LEMMA :
+						l.setText(word.getLKey());
+						break;
+					case TypedLabel.FLEXION :
+						l.setText(word.getFlexCode());
+						break;
+					case TypedLabel.TRANSLITATION :
+						l.setText(word.getWChar());
+						break;
+					}
+					
+					
+				}
+			}
+		}
+		
 	}
 
 	@Override

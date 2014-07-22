@@ -34,6 +34,7 @@ public class InternalEgyDslLexer extends Lexer {
     public static final int T__14=14;
     public static final int T__13=13;
     public static final int RULE_INT=6;
+    public static final int T__50=50;
     public static final int T__42=42;
     public static final int T__43=43;
     public static final int T__40=40;
@@ -56,8 +57,8 @@ public class InternalEgyDslLexer extends Lexer {
     public static final int T__36=36;
     public static final int T__37=37;
     public static final int T__38=38;
-    public static final int RULE_EGYSTRING=4;
     public static final int T__39=39;
+    public static final int RULE_EGYSTRING=4;
     public static final int RULE_WS=10;
 
     // delegates
@@ -98,10 +99,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:12:7: ( '\\n' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:12:9: '\\n'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:12:7: ( '\\t' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:12:9: '\\t'
             {
-            match('\n'); 
+            match('\t'); 
 
             }
 
@@ -118,10 +119,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:13:7: ( '\\t' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:13:9: '\\t'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:13:7: ( '\\n' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:13:9: '\\n'
             {
-            match('\t'); 
+            match('\n'); 
 
             }
 
@@ -138,10 +139,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:14:7: ( '\\u00A7' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:14:9: '\\u00A7'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:14:7: ( '\\r' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:14:9: '\\r'
             {
-            match('\u00A7'); 
+            match('\r'); 
 
             }
 
@@ -158,10 +159,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:15:7: ( '%' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:15:9: '%'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:15:7: ( '\\u00A7' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:15:9: '\\u00A7'
             {
-            match('%'); 
+            match('\u00A7'); 
 
             }
 
@@ -178,11 +179,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:16:7: ( '; ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:16:9: '; '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:16:7: ( '%' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:16:9: '%'
             {
-            match("; "); 
-
+            match('%'); 
 
             }
 
@@ -199,10 +199,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:17:7: ( 'case ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:17:9: 'case '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:17:7: ( '; ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:17:9: '; '
             {
-            match("case "); 
+            match("; "); 
 
 
             }
@@ -220,10 +220,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:18:7: ( ': ' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:18:9: ': '
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:18:7: ( 'case ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:18:9: 'case '
             {
-            match(": "); 
+            match("case "); 
 
 
             }
@@ -241,10 +241,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:19:7: ( '@mv' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:19:9: '@mv'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:19:7: ( ': ' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:19:9: ': '
             {
-            match("@mv"); 
+            match(": "); 
 
 
             }
@@ -262,10 +262,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:20:7: ( '@v' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:20:9: '@v'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:20:7: ( '@mv' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:20:9: '@mv'
             {
-            match("@v"); 
+            match("@mv"); 
 
 
             }
@@ -283,10 +283,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:21:7: ( '#' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:21:9: '#'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:21:7: ( '@v' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:21:9: '@v'
             {
-            match('#'); 
+            match("@v"); 
+
 
             }
 
@@ -303,10 +304,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:22:7: ( ',' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:22:9: ','
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:22:7: ( '#' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:22:9: '#'
             {
-            match(','); 
+            match('#'); 
 
             }
 
@@ -323,10 +324,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:23:7: ( '.' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:23:9: '.'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:23:7: ( ',' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:23:9: ','
             {
-            match('.'); 
+            match(','); 
 
             }
 
@@ -343,10 +344,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:24:7: ( '\\u2261' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:24:9: '\\u2261'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:24:7: ( '.' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:24:9: '.'
             {
-            match('\u2261'); 
+            match('.'); 
 
             }
 
@@ -363,10 +364,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:25:7: ( ':' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:25:9: ':'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:25:7: ( '\\u2261' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:25:9: '\\u2261'
             {
-            match(':'); 
+            match('\u2261'); 
 
             }
 
@@ -383,10 +384,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:26:7: ( '\\u22EE' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:26:9: '\\u22EE'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:26:7: ( ':' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:26:9: ':'
             {
-            match('\u22EE'); 
+            match(':'); 
 
             }
 
@@ -403,10 +404,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:27:7: ( '-' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:27:9: '-'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:27:7: ( '\\u22EE' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:27:9: '\\u22EE'
             {
-            match('-'); 
+            match('\u22EE'); 
 
             }
 
@@ -423,10 +424,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:28:7: ( '~' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:28:9: '~'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:28:7: ( '-' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:28:9: '-'
             {
-            match('~'); 
+            match('-'); 
 
             }
 
@@ -443,10 +444,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:29:7: ( '(' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:29:9: '('
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:29:7: ( '~' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:29:9: '~'
             {
-            match('('); 
+            match('~'); 
 
             }
 
@@ -463,10 +464,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:30:7: ( ')' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:30:9: ')'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:30:7: ( '(' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:30:9: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -483,10 +484,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:31:7: ( '<' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:31:9: '<'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:31:7: ( ')' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:31:9: ')'
             {
-            match('<'); 
+            match(')'); 
 
             }
 
@@ -503,10 +504,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:32:7: ( '>' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:32:9: '>'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:32:7: ( '<' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:32:9: '<'
             {
-            match('>'); 
+            match('<'); 
 
             }
 
@@ -523,10 +524,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:33:7: ( '?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:33:9: '?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:33:7: ( '>' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:33:9: '>'
             {
-            match('?'); 
+            match('>'); 
 
             }
 
@@ -543,10 +544,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:34:7: ( '[' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:34:9: '['
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:34:7: ( '?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:34:9: '?'
             {
-            match('['); 
+            match('?'); 
 
             }
 
@@ -563,10 +564,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:35:7: ( ']' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:35:9: ']'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:35:7: ( '[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:35:9: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -583,10 +584,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:36:7: ( '{' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:36:9: '{'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:36:7: ( ']' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:36:9: ']'
             {
-            match('{'); 
+            match(']'); 
 
             }
 
@@ -603,10 +604,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:37:7: ( '}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:37:9: '}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:37:7: ( '{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:37:9: '{'
             {
-            match('}'); 
+            match('{'); 
 
             }
 
@@ -623,11 +624,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:38:7: ( '<<' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:38:9: '<<'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:38:7: ( '}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:38:9: '}'
             {
-            match("<<"); 
-
+            match('}'); 
 
             }
 
@@ -644,10 +644,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:39:7: ( '>>' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:39:9: '>>'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:39:7: ( '<<' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:39:9: '<<'
             {
-            match(">>"); 
+            match("<<"); 
 
 
             }
@@ -665,10 +665,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:40:7: ( '{{' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:40:9: '{{'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:40:7: ( '>>' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:40:9: '>>'
             {
-            match("{{"); 
+            match(">>"); 
 
 
             }
@@ -686,10 +686,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:41:7: ( '}}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:41:9: '}}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:41:7: ( '{{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:41:9: '{{'
             {
-            match("}}"); 
+            match("{{"); 
 
 
             }
@@ -707,10 +707,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:42:7: ( '((' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:42:9: '(('
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:42:7: ( '}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:42:9: '}}'
             {
-            match("(("); 
+            match("}}"); 
 
 
             }
@@ -728,10 +728,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:43:7: ( '))' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:43:9: '))'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:43:7: ( '((' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:43:9: '(('
             {
-            match("))"); 
+            match("(("); 
 
 
             }
@@ -749,10 +749,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:44:7: ( '[[' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:44:9: '[['
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:44:7: ( '))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:44:9: '))'
             {
-            match("[["); 
+            match("))"); 
 
 
             }
@@ -770,10 +770,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:45:7: ( ']]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:45:9: ']]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:45:7: ( '[[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:45:9: '[['
             {
-            match("]]"); 
+            match("[["); 
 
 
             }
@@ -791,10 +791,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:46:7: ( '\\u2E22' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:46:9: '\\u2E22'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:46:7: ( ']]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:46:9: ']]'
             {
-            match('\u2E22'); 
+            match("]]"); 
+
 
             }
 
@@ -811,10 +812,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:47:7: ( '\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:47:9: '\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:47:7: ( '\\u2E22' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:47:9: '\\u2E22'
             {
-            match('\u2E23'); 
+            match('\u2E22'); 
 
             }
 
@@ -831,8 +832,28 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:48:7: ( '--' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:48:9: '--'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:48:7: ( '\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:48:9: '\\u2E23'
+            {
+            match('\u2E23'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__49"
+
+    // $ANTLR start "T__50"
+    public final void mT__50() throws RecognitionException {
+        try {
+            int _type = T__50;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:49:7: ( '--' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:49:9: '--'
             {
             match("--"); 
 
@@ -845,17 +866,17 @@ public class InternalEgyDslLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "T__49"
+    // $ANTLR end "T__50"
 
     // $ANTLR start "RULE_EGYSTRING"
     public final void mRULE_EGYSTRING() throws RecognitionException {
         try {
             int _type = RULE_EGYSTRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5963:16: ( (~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) ) )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5963:18: (~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) ) )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5979:16: ( (~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) ) )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5979:18: (~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) ) )*
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5963:18: (~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) ) )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5979:18: (~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) ) )*
             loop1:
             do {
                 int alt1=2;
@@ -868,7 +889,7 @@ public class InternalEgyDslLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5963:18: ~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5979:18: ~ ( ( ' ' | '\\n' | '\\t' | '\\u00A7' | '#' | '%' | ';' | '.' | ',' | ':' | '-' | '~' | '\\u2261' | '\\u22EE' | '(' | ')' | '<' | '>' | '?' | '{' | '}' | '\\u2E22' | '\\u2E23' | '@' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\b')||(input.LA(1)>='\u000B' && input.LA(1)<='\u001F')||(input.LA(1)>='!' && input.LA(1)<='\"')||input.LA(1)=='$'||(input.LA(1)>='&' && input.LA(1)<='\'')||(input.LA(1)>='*' && input.LA(1)<='+')||(input.LA(1)>='/' && input.LA(1)<='9')||input.LA(1)=='='||(input.LA(1)>='A' && input.LA(1)<='z')||input.LA(1)=='|'||(input.LA(1)>='\u007F' && input.LA(1)<='\u00A6')||(input.LA(1)>='\u00A8' && input.LA(1)<='\u2260')||(input.LA(1)>='\u2262' && input.LA(1)<='\u22ED')||(input.LA(1)>='\u22EF' && input.LA(1)<='\u2E21')||(input.LA(1)>='\u2E24' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -904,10 +925,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5965:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5965:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5981:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5981:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5965:11: ( '^' )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5981:11: ( '^' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -916,7 +937,7 @@ public class InternalEgyDslLexer extends Lexer {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5965:11: '^'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5981:11: '^'
                     {
                     match('^'); 
 
@@ -934,7 +955,7 @@ public class InternalEgyDslLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5965:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5981:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -983,10 +1004,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_INT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5967:10: ( ( '0' .. '9' )+ )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5967:12: ( '0' .. '9' )+
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5983:10: ( ( '0' .. '9' )+ )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5983:12: ( '0' .. '9' )+
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5967:12: ( '0' .. '9' )+
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5983:12: ( '0' .. '9' )+
             int cnt4=0;
             loop4:
             do {
@@ -1000,7 +1021,7 @@ public class InternalEgyDslLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5967:13: '0' .. '9'
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5983:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1032,10 +1053,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt7=2;
             int LA7_0 = input.LA(1);
 
@@ -1053,10 +1074,10 @@ public class InternalEgyDslLexer extends Lexer {
             }
             switch (alt7) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1072,7 +1093,7 @@ public class InternalEgyDslLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1088,7 +1109,7 @@ public class InternalEgyDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:66: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1113,10 +1134,10 @@ public class InternalEgyDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop6:
                     do {
                         int alt6=3;
@@ -1132,7 +1153,7 @@ public class InternalEgyDslLexer extends Lexer {
 
                         switch (alt6) {
                     	case 1 :
-                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
@@ -1148,7 +1169,7 @@ public class InternalEgyDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5969:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5985:137: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1191,12 +1212,12 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5971:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5971:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5987:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5987:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5971:24: ( options {greedy=false; } : . )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5987:24: ( options {greedy=false; } : . )*
             loop8:
             do {
                 int alt8=2;
@@ -1221,7 +1242,7 @@ public class InternalEgyDslLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5971:52: .
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5987:52: .
             	    {
             	    matchAny(); 
 
@@ -1251,12 +1272,12 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop9:
             do {
                 int alt9=2;
@@ -1269,7 +1290,7 @@ public class InternalEgyDslLexer extends Lexer {
 
                 switch (alt9) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -1289,7 +1310,7 @@ public class InternalEgyDslLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:40: ( ( '\\r' )? '\\n' )?
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:40: ( ( '\\r' )? '\\n' )?
             int alt11=2;
             int LA11_0 = input.LA(1);
 
@@ -1298,9 +1319,9 @@ public class InternalEgyDslLexer extends Lexer {
             }
             switch (alt11) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:41: ( '\\r' )? '\\n'
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:41: ( '\\r' )?
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:41: ( '\\r' )?
                     int alt10=2;
                     int LA10_0 = input.LA(1);
 
@@ -1309,7 +1330,7 @@ public class InternalEgyDslLexer extends Lexer {
                     }
                     switch (alt10) {
                         case 1 :
-                            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5973:41: '\\r'
+                            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5989:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1341,10 +1362,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5975:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5975:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5991:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5991:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5975:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5991:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt12=0;
             loop12:
             do {
@@ -1398,8 +1419,8 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_ANY_OTHER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5977:16: ( . )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5977:18: .
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5993:16: ( . )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:5993:18: .
             {
             matchAny(); 
 
@@ -1414,8 +1435,8 @@ public class InternalEgyDslLexer extends Lexer {
     // $ANTLR end "RULE_ANY_OTHER"
 
     public void mTokens() throws RecognitionException {
-        // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | RULE_EGYSTRING | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt13=46;
+        // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:8: ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | RULE_EGYSTRING | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt13=47;
         alt13 = dfa13.predict(input);
         switch (alt13) {
             case 1 :
@@ -1685,56 +1706,63 @@ public class InternalEgyDslLexer extends Lexer {
                 }
                 break;
             case 39 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:238: RULE_EGYSTRING
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:238: T__50
+                {
+                mT__50(); 
+
+                }
+                break;
+            case 40 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:244: RULE_EGYSTRING
                 {
                 mRULE_EGYSTRING(); 
 
                 }
                 break;
-            case 40 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:253: RULE_ID
+            case 41 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:259: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 41 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:261: RULE_INT
+            case 42 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:267: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 42 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:270: RULE_STRING
+            case 43 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:276: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 43 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:282: RULE_ML_COMMENT
+            case 44 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:288: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 44 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:298: RULE_SL_COMMENT
+            case 45 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:304: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 45 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:314: RULE_WS
+            case 46 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:320: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 46 :
-                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:322: RULE_ANY_OTHER
+            case 47 :
+                // ../org.bbaw.bts.corpus.text.egy.egydsl.ui/src-gen/org/bbaw/bts/corpus/text/egy/ui/contentassist/antlr/internal/InternalEgyDsl.g:1:328: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -1748,107 +1776,107 @@ public class InternalEgyDslLexer extends Lexer {
 
     protected DFA13 dfa13 = new DFA13(this);
     static final String DFA13_eotS =
-        "\1\35\1\45\1\47\1\50\2\uffff\1\54\1\35\1\60\1\54\5\uffff\1\71\1"+
-        "\uffff\1\74\1\76\1\100\1\102\1\uffff\1\105\1\107\1\111\1\113\2\uffff"+
-        "\1\35\1\uffff\6\35\11\uffff\2\35\25\uffff\1\133\1\uffff\1\134\7"+
-        "\uffff\4\35\2\uffff\2\35\1\uffff\4\35\2\uffff\3\35\1\uffff\3\35"+
-        "\1\uffff\2\35\1\uffff";
+        "\1\36\1\45\1\47\1\50\1\51\2\uffff\1\56\1\36\1\62\1\56\5\uffff\1"+
+        "\73\1\uffff\1\76\1\100\1\102\1\104\1\uffff\1\107\1\111\1\113\1\115"+
+        "\2\uffff\1\36\1\uffff\5\36\6\uffff\1\36\4\uffff\2\36\25\uffff\1"+
+        "\134\1\uffff\1\135\7\uffff\4\36\2\uffff\2\36\1\uffff\3\36\2\uffff"+
+        "\4\36\1\uffff\2\36\1\uffff\2\36\1\uffff";
     static final String DFA13_eofS =
-        "\150\uffff";
+        "\151\uffff";
     static final String DFA13_minS =
-        "\1\0\3\11\2\uffff\1\40\1\60\1\40\1\155\5\uffff\1\55\1\uffff\1\50"+
-        "\1\51\1\74\1\76\1\uffff\2\0\1\173\1\175\2\uffff\1\101\1\uffff\2"+
-        "\60\2\0\1\52\1\11\11\uffff\2\60\25\uffff\1\0\1\uffff\1\0\7\uffff"+
-        "\2\60\1\42\1\0\2\uffff\1\42\1\0\1\uffff\2\0\1\11\1\60\2\uffff\3"+
-        "\0\1\uffff\2\0\1\12\1\uffff\1\40\1\0\1\uffff";
+        "\1\0\3\11\1\0\2\uffff\1\40\1\60\1\40\1\155\5\uffff\1\55\1\uffff"+
+        "\1\50\1\51\1\74\1\76\1\uffff\2\0\1\173\1\175\2\uffff\1\101\1\uffff"+
+        "\2\60\2\0\1\52\6\uffff\1\11\4\uffff\2\60\25\uffff\1\0\1\uffff\1"+
+        "\0\7\uffff\2\60\1\42\1\0\2\uffff\1\42\1\0\1\uffff\2\0\1\60\2\uffff"+
+        "\4\0\1\uffff\1\0\1\12\1\uffff\1\40\1\0\1\uffff";
     static final String DFA13_maxS =
-        "\1\uffff\3\40\2\uffff\1\40\1\172\1\40\1\166\5\uffff\1\55\1\uffff"+
-        "\1\50\1\51\1\74\1\76\1\uffff\2\uffff\1\173\1\175\2\uffff\1\172\1"+
-        "\uffff\1\172\1\71\2\uffff\1\57\1\40\11\uffff\2\172\25\uffff\1\uffff"+
-        "\1\uffff\1\uffff\7\uffff\1\172\1\71\1\165\1\uffff\2\uffff\1\165"+
-        "\1\uffff\1\uffff\2\uffff\1\40\1\172\2\uffff\3\uffff\1\uffff\2\uffff"+
-        "\1\12\1\uffff\1\172\1\uffff\1\uffff";
+        "\1\uffff\3\40\1\uffff\2\uffff\1\40\1\172\1\40\1\166\5\uffff\1\55"+
+        "\1\uffff\1\50\1\51\1\74\1\76\1\uffff\2\uffff\1\173\1\175\2\uffff"+
+        "\1\172\1\uffff\1\172\1\71\2\uffff\1\57\6\uffff\1\40\4\uffff\2\172"+
+        "\25\uffff\1\uffff\1\uffff\1\uffff\7\uffff\1\172\1\71\1\165\1\uffff"+
+        "\2\uffff\1\165\1\uffff\1\uffff\2\uffff\1\172\2\uffff\4\uffff\1\uffff"+
+        "\1\uffff\1\12\1\uffff\1\172\1\uffff\1\uffff";
     static final String DFA13_acceptS =
-        "\4\uffff\1\4\1\5\4\uffff\1\13\1\14\1\15\1\16\1\20\1\uffff\1\22"+
-        "\4\uffff\1\27\4\uffff\1\44\1\45\1\uffff\1\47\6\uffff\1\47\1\1\1"+
-        "\55\1\2\1\3\1\4\1\5\1\6\1\56\2\uffff\1\10\1\17\1\11\1\12\1\13\1"+
-        "\14\1\15\1\16\1\20\1\46\1\21\1\22\1\40\1\23\1\41\1\24\1\34\1\25"+
-        "\1\35\1\26\1\27\1\uffff\1\30\1\uffff\1\31\1\36\1\32\1\37\1\33\1"+
-        "\44\1\45\4\uffff\1\47\1\52\2\uffff\1\47\4\uffff\1\42\1\43\3\uffff"+
-        "\1\53\3\uffff\1\54\2\uffff\1\7";
+        "\5\uffff\1\5\1\6\4\uffff\1\14\1\15\1\16\1\17\1\21\1\uffff\1\23"+
+        "\4\uffff\1\30\4\uffff\1\45\1\46\1\uffff\1\50\5\uffff\1\50\1\1\1"+
+        "\56\1\2\1\3\1\4\1\uffff\1\5\1\6\1\7\1\57\2\uffff\1\11\1\20\1\12"+
+        "\1\13\1\14\1\15\1\16\1\17\1\21\1\47\1\22\1\23\1\41\1\24\1\42\1\25"+
+        "\1\35\1\26\1\36\1\27\1\30\1\uffff\1\31\1\uffff\1\32\1\37\1\33\1"+
+        "\40\1\34\1\45\1\46\4\uffff\1\50\1\53\2\uffff\1\50\3\uffff\1\43\1"+
+        "\44\4\uffff\1\54\2\uffff\1\55\2\uffff\1\10";
     static final String DFA13_specialS =
-        "\1\4\25\uffff\1\7\1\3\10\uffff\1\5\1\2\42\uffff\1\14\1\uffff\1"+
-        "\13\12\uffff\1\12\3\uffff\1\17\1\uffff\1\1\1\16\4\uffff\1\11\1\20"+
-        "\1\10\1\uffff\1\15\1\6\3\uffff\1\0\1\uffff}>";
+        "\1\3\3\uffff\1\4\22\uffff\1\20\1\17\10\uffff\1\16\1\14\43\uffff"+
+        "\1\10\1\uffff\1\7\12\uffff\1\12\3\uffff\1\2\1\uffff\1\6\1\5\3\uffff"+
+        "\1\13\1\1\1\0\1\11\1\uffff\1\21\3\uffff\1\15\1\uffff}>";
     static final String[] DFA13_transitionS = {
-            "\11\44\1\3\1\2\2\44\1\43\22\44\1\1\1\44\1\40\1\12\1\44\1\5"+
-            "\1\44\1\41\1\21\1\22\2\44\1\13\1\17\1\14\1\42\12\37\1\10\1\6"+
-            "\1\23\1\44\1\24\1\25\1\11\32\36\1\26\1\44\1\27\1\34\1\36\1\44"+
-            "\2\36\1\7\27\36\1\30\1\44\1\31\1\20\50\44\1\4\u21b9\44\1\15"+
-            "\u008c\44\1\16\u0b33\44\1\32\1\33\ud1dc\44",
+            "\11\44\1\2\1\3\2\44\1\4\22\44\1\1\1\44\1\41\1\13\1\44\1\6\1"+
+            "\44\1\42\1\22\1\23\2\44\1\14\1\20\1\15\1\43\12\40\1\11\1\7\1"+
+            "\24\1\44\1\25\1\26\1\12\32\37\1\27\1\44\1\30\1\35\1\37\1\44"+
+            "\2\37\1\10\27\37\1\31\1\44\1\32\1\21\50\44\1\5\u21b9\44\1\16"+
+            "\u008c\44\1\17\u0b33\44\1\33\1\34\ud1dc\44",
             "\2\46\2\uffff\1\46\22\uffff\1\46",
             "\2\46\2\uffff\1\46\22\uffff\1\46",
             "\2\46\2\uffff\1\46\22\uffff\1\46",
+            "\11\36\2\46\2\36\1\52\22\36\1\46\2\36\1\uffff\1\36\1\uffff"+
+            "\2\36\2\uffff\2\36\3\uffff\13\36\3\uffff\1\36\3\uffff\72\36"+
+            "\1\uffff\1\36\2\uffff\50\36\1\uffff\u21b9\36\1\uffff\u008c\36"+
+            "\1\uffff\u0b33\36\2\uffff\ud1dc\36",
             "",
             "",
-            "\1\53",
-            "\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\1\55\31\56",
-            "\1\57",
-            "\1\61\10\uffff\1\62",
+            "\1\55",
+            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\1\57\31\60",
+            "\1\61",
+            "\1\63\10\uffff\1\64",
             "",
             "",
             "",
             "",
             "",
-            "\1\70",
+            "\1\72",
             "",
-            "\1\73",
             "\1\75",
             "\1\77",
             "\1\101",
+            "\1\103",
             "",
-            "\11\35\2\uffff\25\35\1\uffff\2\35\1\uffff\1\35\1\uffff\2\35"+
-            "\2\uffff\2\35\3\uffff\13\35\3\uffff\1\35\3\uffff\32\35\1\104"+
-            "\37\35\1\uffff\1\35\2\uffff\50\35\1\uffff\u21b9\35\1\uffff\u008c"+
-            "\35\1\uffff\u0b33\35\2\uffff\ud1dc\35",
-            "\11\35\2\uffff\25\35\1\uffff\2\35\1\uffff\1\35\1\uffff\2\35"+
-            "\2\uffff\2\35\3\uffff\13\35\3\uffff\1\35\3\uffff\34\35\1\106"+
-            "\35\35\1\uffff\1\35\2\uffff\50\35\1\uffff\u21b9\35\1\uffff\u008c"+
-            "\35\1\uffff\u0b33\35\2\uffff\ud1dc\35",
-            "\1\110",
+            "\11\36\2\uffff\25\36\1\uffff\2\36\1\uffff\1\36\1\uffff\2\36"+
+            "\2\uffff\2\36\3\uffff\13\36\3\uffff\1\36\3\uffff\32\36\1\106"+
+            "\37\36\1\uffff\1\36\2\uffff\50\36\1\uffff\u21b9\36\1\uffff\u008c"+
+            "\36\1\uffff\u0b33\36\2\uffff\ud1dc\36",
+            "\11\36\2\uffff\25\36\1\uffff\2\36\1\uffff\1\36\1\uffff\2\36"+
+            "\2\uffff\2\36\3\uffff\13\36\3\uffff\1\36\3\uffff\34\36\1\110"+
+            "\35\36\1\uffff\1\36\2\uffff\50\36\1\uffff\u21b9\36\1\uffff\u008c"+
+            "\36\1\uffff\u0b33\36\2\uffff\ud1dc\36",
             "\1\112",
+            "\1\114",
             "",
             "",
-            "\32\116\4\uffff\1\116\1\uffff\32\116",
+            "\32\120\4\uffff\1\120\1\uffff\32\120",
             "",
-            "\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\32\56",
-            "\12\117",
-            "\11\121\2\123\25\121\1\123\1\121\1\122\1\123\1\121\1\123\2"+
-            "\121\2\123\2\121\3\123\13\121\3\123\1\121\3\123\33\121\1\120"+
-            "\36\121\1\123\1\121\2\123\50\121\1\123\u21b9\121\1\123\u008c"+
-            "\121\1\123\u0b33\121\2\123\ud1dc\121",
-            "\11\125\2\123\25\125\1\123\2\125\1\123\1\125\1\123\1\125\1"+
-            "\126\2\123\2\125\3\123\13\125\3\123\1\125\3\123\33\125\1\124"+
-            "\36\125\1\123\1\125\2\123\50\125\1\123\u21b9\125\1\123\u008c"+
-            "\125\1\123\u0b33\125\2\123\ud1dc\125",
-            "\1\127\4\uffff\1\130",
-            "\2\46\2\uffff\1\131\22\uffff\1\46",
-            "",
-            "",
-            "",
+            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\121",
+            "\11\123\2\125\25\123\1\125\1\123\1\124\1\125\1\123\1\125\2"+
+            "\123\2\125\2\123\3\125\13\123\3\125\1\123\3\125\33\123\1\122"+
+            "\36\123\1\125\1\123\2\125\50\123\1\125\u21b9\123\1\125\u008c"+
+            "\123\1\125\u0b33\123\2\125\ud1dc\123",
+            "\11\127\2\125\25\127\1\125\2\127\1\125\1\127\1\125\1\127\1"+
+            "\130\2\125\2\127\3\125\13\127\3\125\1\127\3\125\33\127\1\126"+
+            "\36\127\1\125\1\127\2\125\50\127\1\125\u21b9\127\1\125\u008c"+
+            "\127\1\125\u0b33\127\2\125\ud1dc\127",
+            "\1\131\4\uffff\1\132",
             "",
             "",
             "",
             "",
             "",
             "",
-            "\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\22\56\1\132\7\56",
-            "\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\32\56",
+            "\2\46\2\uffff\1\52\22\uffff\1\46",
             "",
             "",
             "",
             "",
-            "",
+            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\22\60\1\133\7\60",
+            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
             "",
             "",
             "",
@@ -1865,80 +1893,84 @@ public class InternalEgyDslLexer extends Lexer {
             "",
             "",
             "",
-            "\11\35\2\uffff\25\35\1\uffff\2\35\1\uffff\1\35\1\uffff\2\35"+
-            "\2\uffff\2\35\3\uffff\13\35\3\uffff\1\35\3\uffff\72\35\1\uffff"+
-            "\1\35\2\uffff\50\35\1\uffff\u21b9\35\1\uffff\u008c\35\1\uffff"+
-            "\u0b33\35\2\uffff\ud1dc\35",
-            "",
-            "\11\35\2\uffff\25\35\1\uffff\2\35\1\uffff\1\35\1\uffff\2\35"+
-            "\2\uffff\2\35\3\uffff\13\35\3\uffff\1\35\3\uffff\72\35\1\uffff"+
-            "\1\35\2\uffff\50\35\1\uffff\u21b9\35\1\uffff\u008c\35\1\uffff"+
-            "\u0b33\35\2\uffff\ud1dc\35",
             "",
             "",
             "",
             "",
             "",
+            "\11\36\2\uffff\25\36\1\uffff\2\36\1\uffff\1\36\1\uffff\2\36"+
+            "\2\uffff\2\36\3\uffff\13\36\3\uffff\1\36\3\uffff\72\36\1\uffff"+
+            "\1\36\2\uffff\50\36\1\uffff\u21b9\36\1\uffff\u008c\36\1\uffff"+
+            "\u0b33\36\2\uffff\ud1dc\36",
+            "",
+            "\11\36\2\uffff\25\36\1\uffff\2\36\1\uffff\1\36\1\uffff\2\36"+
+            "\2\uffff\2\36\3\uffff\13\36\3\uffff\1\36\3\uffff\72\36\1\uffff"+
+            "\1\36\2\uffff\50\36\1\uffff\u21b9\36\1\uffff\u008c\36\1\uffff"+
+            "\u0b33\36\2\uffff\ud1dc\36",
             "",
             "",
-            "\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\32\56",
-            "\12\117",
-            "\1\135\4\uffff\1\135\64\uffff\1\135\5\uffff\1\135\3\uffff"+
-            "\1\135\7\uffff\1\135\3\uffff\1\135\1\uffff\2\135",
-            "\11\121\2\123\25\121\1\123\1\121\1\122\1\123\1\121\1\123\2"+
-            "\121\2\123\2\121\3\123\13\121\3\123\1\121\3\123\33\121\1\120"+
-            "\36\121\1\123\1\121\2\123\50\121\1\123\u21b9\121\1\123\u008c"+
-            "\121\1\123\u0b33\121\2\123\ud1dc\121",
             "",
             "",
+            "",
+            "",
+            "",
+            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32\60",
+            "\12\121",
             "\1\136\4\uffff\1\136\64\uffff\1\136\5\uffff\1\136\3\uffff"+
             "\1\136\7\uffff\1\136\3\uffff\1\136\1\uffff\2\136",
-            "\11\125\2\123\25\125\1\123\2\125\1\123\1\125\1\123\1\125\1"+
-            "\126\2\123\2\125\3\123\13\125\3\123\1\125\3\123\33\125\1\124"+
-            "\36\125\1\123\1\125\2\123\50\125\1\123\u21b9\125\1\123\u008c"+
-            "\125\1\123\u0b33\125\2\123\ud1dc\125",
-            "",
-            "\11\141\2\140\25\141\1\140\2\141\1\140\1\141\1\140\2\141\2"+
-            "\140\1\137\1\141\3\140\13\141\3\140\1\141\3\140\72\141\1\140"+
-            "\1\141\2\140\50\141\1\140\u21b9\141\1\140\u008c\141\1\140\u0b33"+
-            "\141\2\140\ud1dc\141",
-            "\11\142\2\144\2\142\1\143\22\142\1\144\2\142\1\144\1\142\1"+
-            "\144\2\142\2\144\2\142\3\144\13\142\3\144\1\142\3\144\72\142"+
-            "\1\144\1\142\2\144\50\142\1\144\u21b9\142\1\144\u008c\142\1"+
-            "\144\u0b33\142\2\144\ud1dc\142",
-            "\2\46\2\uffff\1\131\22\uffff\1\46",
-            "\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\4\56\1\145\25\56",
+            "\11\123\2\125\25\123\1\125\1\123\1\124\1\125\1\123\1\125\2"+
+            "\123\2\125\2\123\3\125\13\123\3\125\1\123\3\125\33\123\1\122"+
+            "\36\123\1\125\1\123\2\125\50\123\1\125\u21b9\123\1\125\u008c"+
+            "\123\1\125\u0b33\123\2\125\ud1dc\123",
             "",
             "",
-            "\11\121\2\123\25\121\1\123\1\121\1\122\1\123\1\121\1\123\2"+
-            "\121\2\123\2\121\3\123\13\121\3\123\1\121\3\123\33\121\1\120"+
-            "\36\121\1\123\1\121\2\123\50\121\1\123\u21b9\121\1\123\u008c"+
-            "\121\1\123\u0b33\121\2\123\ud1dc\121",
-            "\11\125\2\123\25\125\1\123\2\125\1\123\1\125\1\123\1\125\1"+
-            "\126\2\123\2\125\3\123\13\125\3\123\1\125\3\123\33\125\1\124"+
-            "\36\125\1\123\1\125\2\123\50\125\1\123\u21b9\125\1\123\u008c"+
-            "\125\1\123\u0b33\125\2\123\ud1dc\125",
-            "\11\141\2\140\25\141\1\140\2\141\1\140\1\141\1\140\2\141\2"+
-            "\140\1\137\1\141\3\140\1\146\12\141\3\140\1\141\3\140\72\141"+
-            "\1\140\1\141\2\140\50\141\1\140\u21b9\141\1\140\u008c\141\1"+
-            "\140\u0b33\141\2\140\ud1dc\141",
+            "\1\137\4\uffff\1\137\64\uffff\1\137\5\uffff\1\137\3\uffff"+
+            "\1\137\7\uffff\1\137\3\uffff\1\137\1\uffff\2\137",
+            "\11\127\2\125\25\127\1\125\2\127\1\125\1\127\1\125\1\127\1"+
+            "\130\2\125\2\127\3\125\13\127\3\125\1\127\3\125\33\127\1\126"+
+            "\36\127\1\125\1\127\2\125\50\127\1\125\u21b9\127\1\125\u008c"+
+            "\127\1\125\u0b33\127\2\125\ud1dc\127",
             "",
-            "\11\141\2\140\25\141\1\140\2\141\1\140\1\141\1\140\2\141\2"+
-            "\140\1\137\1\141\3\140\13\141\3\140\1\141\3\140\72\141\1\140"+
-            "\1\141\2\140\50\141\1\140\u21b9\141\1\140\u008c\141\1\140\u0b33"+
-            "\141\2\140\ud1dc\141",
-            "\11\142\2\144\2\142\1\143\22\142\1\144\2\142\1\144\1\142\1"+
-            "\144\2\142\2\144\2\142\3\144\13\142\3\144\1\142\3\144\72\142"+
-            "\1\144\1\142\2\144\50\142\1\144\u21b9\142\1\144\u008c\142\1"+
-            "\144\u0b33\142\2\144\ud1dc\142",
-            "\1\144",
+            "\11\141\2\142\25\141\1\142\2\141\1\142\1\141\1\142\2\141\2"+
+            "\142\1\140\1\141\3\142\13\141\3\142\1\141\3\142\72\141\1\142"+
+            "\1\141\2\142\50\141\1\142\u21b9\141\1\142\u008c\141\1\142\u0b33"+
+            "\141\2\142\ud1dc\141",
+            "\11\143\2\145\2\143\1\144\22\143\1\145\2\143\1\145\1\143\1"+
+            "\145\2\143\2\145\2\143\3\145\13\143\3\145\1\143\3\145\72\143"+
+            "\1\145\1\143\2\145\50\143\1\145\u21b9\143\1\145\u008c\143\1"+
+            "\145\u0b33\143\2\145\ud1dc\143",
+            "\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\4\60\1\146\25\60",
             "",
-            "\1\147\17\uffff\12\56\7\uffff\32\56\4\uffff\1\56\1\uffff\32"+
-            "\56",
-            "\11\141\2\140\25\141\1\140\2\141\1\140\1\141\1\140\2\141\2"+
-            "\140\1\137\1\141\3\140\13\141\3\140\1\141\3\140\72\141\1\140"+
-            "\1\141\2\140\50\141\1\140\u21b9\141\1\140\u008c\141\1\140\u0b33"+
-            "\141\2\140\ud1dc\141",
+            "",
+            "\11\123\2\125\25\123\1\125\1\123\1\124\1\125\1\123\1\125\2"+
+            "\123\2\125\2\123\3\125\13\123\3\125\1\123\3\125\33\123\1\122"+
+            "\36\123\1\125\1\123\2\125\50\123\1\125\u21b9\123\1\125\u008c"+
+            "\123\1\125\u0b33\123\2\125\ud1dc\123",
+            "\11\127\2\125\25\127\1\125\2\127\1\125\1\127\1\125\1\127\1"+
+            "\130\2\125\2\127\3\125\13\127\3\125\1\127\3\125\33\127\1\126"+
+            "\36\127\1\125\1\127\2\125\50\127\1\125\u21b9\127\1\125\u008c"+
+            "\127\1\125\u0b33\127\2\125\ud1dc\127",
+            "\11\141\2\142\25\141\1\142\2\141\1\142\1\141\1\142\2\141\2"+
+            "\142\1\140\1\141\3\142\1\147\12\141\3\142\1\141\3\142\72\141"+
+            "\1\142\1\141\2\142\50\141\1\142\u21b9\141\1\142\u008c\141\1"+
+            "\142\u0b33\141\2\142\ud1dc\141",
+            "\11\141\2\142\25\141\1\142\2\141\1\142\1\141\1\142\2\141\2"+
+            "\142\1\140\1\141\3\142\13\141\3\142\1\141\3\142\72\141\1\142"+
+            "\1\141\2\142\50\141\1\142\u21b9\141\1\142\u008c\141\1\142\u0b33"+
+            "\141\2\142\ud1dc\141",
+            "",
+            "\11\143\2\145\2\143\1\144\22\143\1\145\2\143\1\145\1\143\1"+
+            "\145\2\143\2\145\2\143\3\145\13\143\3\145\1\143\3\145\72\143"+
+            "\1\145\1\143\2\145\50\143\1\145\u21b9\143\1\145\u008c\143\1"+
+            "\145\u0b33\143\2\145\ud1dc\143",
+            "\1\145",
+            "",
+            "\1\150\17\uffff\12\60\7\uffff\32\60\4\uffff\1\60\1\uffff\32"+
+            "\60",
+            "\11\141\2\142\25\141\1\142\2\141\1\142\1\141\1\142\2\141\2"+
+            "\142\1\140\1\141\3\142\13\141\3\142\1\141\3\142\72\141\1\142"+
+            "\1\141\2\142\50\141\1\142\u21b9\141\1\142\u008c\141\1\142\u0b33"+
+            "\141\2\142\ud1dc\141",
             ""
     };
 
@@ -1972,313 +2004,327 @@ public class InternalEgyDslLexer extends Lexer {
             this.transition = DFA13_transition;
         }
         public String getDescription() {
-            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | RULE_EGYSTRING | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
+            return "1:1: Tokens : ( T__12 | T__13 | T__14 | T__15 | T__16 | T__17 | T__18 | T__19 | T__20 | T__21 | T__22 | T__23 | T__24 | T__25 | T__26 | T__27 | T__28 | T__29 | T__30 | T__31 | T__32 | T__33 | T__34 | T__35 | T__36 | T__37 | T__38 | T__39 | T__40 | T__41 | T__42 | T__43 | T__44 | T__45 | T__46 | T__47 | T__48 | T__49 | T__50 | RULE_EGYSTRING | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );";
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
         	int _s = s;
             switch ( s ) {
                     case 0 : 
-                        int LA13_102 = input.LA(1);
+                        int LA13_96 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_102=='*') ) {s = 95;}
+                        if ( (LA13_96=='/') ) {s = 103;}
 
-                        else if ( ((LA13_102>='\u0000' && LA13_102<='\b')||(LA13_102>='\u000B' && LA13_102<='\u001F')||(LA13_102>='!' && LA13_102<='\"')||LA13_102=='$'||(LA13_102>='&' && LA13_102<='\'')||LA13_102=='+'||(LA13_102>='/' && LA13_102<='9')||LA13_102=='='||(LA13_102>='A' && LA13_102<='z')||LA13_102=='|'||(LA13_102>='\u007F' && LA13_102<='\u00A6')||(LA13_102>='\u00A8' && LA13_102<='\u2260')||(LA13_102>='\u2262' && LA13_102<='\u22ED')||(LA13_102>='\u22EF' && LA13_102<='\u2E21')||(LA13_102>='\u2E24' && LA13_102<='\uFFFF')) ) {s = 97;}
+                        else if ( (LA13_96=='*') ) {s = 96;}
 
-                        else if ( ((LA13_102>='\t' && LA13_102<='\n')||LA13_102==' '||LA13_102=='#'||LA13_102=='%'||(LA13_102>='(' && LA13_102<=')')||(LA13_102>=',' && LA13_102<='.')||(LA13_102>=':' && LA13_102<='<')||(LA13_102>='>' && LA13_102<='@')||LA13_102=='{'||(LA13_102>='}' && LA13_102<='~')||LA13_102=='\u00A7'||LA13_102=='\u2261'||LA13_102=='\u22EE'||(LA13_102>='\u2E22' && LA13_102<='\u2E23')) ) {s = 96;}
+                        else if ( ((LA13_96>='\u0000' && LA13_96<='\b')||(LA13_96>='\u000B' && LA13_96<='\u001F')||(LA13_96>='!' && LA13_96<='\"')||LA13_96=='$'||(LA13_96>='&' && LA13_96<='\'')||LA13_96=='+'||(LA13_96>='0' && LA13_96<='9')||LA13_96=='='||(LA13_96>='A' && LA13_96<='z')||LA13_96=='|'||(LA13_96>='\u007F' && LA13_96<='\u00A6')||(LA13_96>='\u00A8' && LA13_96<='\u2260')||(LA13_96>='\u2262' && LA13_96<='\u22ED')||(LA13_96>='\u22EF' && LA13_96<='\u2E21')||(LA13_96>='\u2E24' && LA13_96<='\uFFFF')) ) {s = 97;}
 
-                        else s = 29;
+                        else if ( ((LA13_96>='\t' && LA13_96<='\n')||LA13_96==' '||LA13_96=='#'||LA13_96=='%'||(LA13_96>='(' && LA13_96<=')')||(LA13_96>=',' && LA13_96<='.')||(LA13_96>=':' && LA13_96<='<')||(LA13_96>='>' && LA13_96<='@')||LA13_96=='{'||(LA13_96>='}' && LA13_96<='~')||LA13_96=='\u00A7'||LA13_96=='\u2261'||LA13_96=='\u22EE'||(LA13_96>='\u2E22' && LA13_96<='\u2E23')) ) {s = 98;}
+
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 1 : 
-                        int LA13_87 = input.LA(1);
+                        int LA13_95 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_87=='*') ) {s = 95;}
+                        if ( (LA13_95=='\'') ) {s = 88;}
 
-                        else if ( ((LA13_87>='\t' && LA13_87<='\n')||LA13_87==' '||LA13_87=='#'||LA13_87=='%'||(LA13_87>='(' && LA13_87<=')')||(LA13_87>=',' && LA13_87<='.')||(LA13_87>=':' && LA13_87<='<')||(LA13_87>='>' && LA13_87<='@')||LA13_87=='{'||(LA13_87>='}' && LA13_87<='~')||LA13_87=='\u00A7'||LA13_87=='\u2261'||LA13_87=='\u22EE'||(LA13_87>='\u2E22' && LA13_87<='\u2E23')) ) {s = 96;}
+                        else if ( (LA13_95=='\\') ) {s = 86;}
 
-                        else if ( ((LA13_87>='\u0000' && LA13_87<='\b')||(LA13_87>='\u000B' && LA13_87<='\u001F')||(LA13_87>='!' && LA13_87<='\"')||LA13_87=='$'||(LA13_87>='&' && LA13_87<='\'')||LA13_87=='+'||(LA13_87>='/' && LA13_87<='9')||LA13_87=='='||(LA13_87>='A' && LA13_87<='z')||LA13_87=='|'||(LA13_87>='\u007F' && LA13_87<='\u00A6')||(LA13_87>='\u00A8' && LA13_87<='\u2260')||(LA13_87>='\u2262' && LA13_87<='\u22ED')||(LA13_87>='\u22EF' && LA13_87<='\u2E21')||(LA13_87>='\u2E24' && LA13_87<='\uFFFF')) ) {s = 97;}
+                        else if ( ((LA13_95>='\u0000' && LA13_95<='\b')||(LA13_95>='\u000B' && LA13_95<='\u001F')||(LA13_95>='!' && LA13_95<='\"')||LA13_95=='$'||LA13_95=='&'||(LA13_95>='*' && LA13_95<='+')||(LA13_95>='/' && LA13_95<='9')||LA13_95=='='||(LA13_95>='A' && LA13_95<='[')||(LA13_95>=']' && LA13_95<='z')||LA13_95=='|'||(LA13_95>='\u007F' && LA13_95<='\u00A6')||(LA13_95>='\u00A8' && LA13_95<='\u2260')||(LA13_95>='\u2262' && LA13_95<='\u22ED')||(LA13_95>='\u22EF' && LA13_95<='\u2E21')||(LA13_95>='\u2E24' && LA13_95<='\uFFFF')) ) {s = 87;}
 
-                        else s = 29;
+                        else if ( ((LA13_95>='\t' && LA13_95<='\n')||LA13_95==' '||LA13_95=='#'||LA13_95=='%'||(LA13_95>='(' && LA13_95<=')')||(LA13_95>=',' && LA13_95<='.')||(LA13_95>=':' && LA13_95<='<')||(LA13_95>='>' && LA13_95<='@')||LA13_95=='{'||(LA13_95>='}' && LA13_95<='~')||LA13_95=='\u00A7'||LA13_95=='\u2261'||LA13_95=='\u22EE'||(LA13_95>='\u2E22' && LA13_95<='\u2E23')) ) {s = 85;}
+
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 2 : 
-                        int LA13_33 = input.LA(1);
+                        int LA13_87 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_33=='\\') ) {s = 84;}
+                        if ( (LA13_87=='\'') ) {s = 88;}
 
-                        else if ( ((LA13_33>='\u0000' && LA13_33<='\b')||(LA13_33>='\u000B' && LA13_33<='\u001F')||(LA13_33>='!' && LA13_33<='\"')||LA13_33=='$'||LA13_33=='&'||(LA13_33>='*' && LA13_33<='+')||(LA13_33>='/' && LA13_33<='9')||LA13_33=='='||(LA13_33>='A' && LA13_33<='[')||(LA13_33>=']' && LA13_33<='z')||LA13_33=='|'||(LA13_33>='\u007F' && LA13_33<='\u00A6')||(LA13_33>='\u00A8' && LA13_33<='\u2260')||(LA13_33>='\u2262' && LA13_33<='\u22ED')||(LA13_33>='\u22EF' && LA13_33<='\u2E21')||(LA13_33>='\u2E24' && LA13_33<='\uFFFF')) ) {s = 85;}
+                        else if ( (LA13_87=='\\') ) {s = 86;}
 
-                        else if ( (LA13_33=='\'') ) {s = 86;}
+                        else if ( ((LA13_87>='\u0000' && LA13_87<='\b')||(LA13_87>='\u000B' && LA13_87<='\u001F')||(LA13_87>='!' && LA13_87<='\"')||LA13_87=='$'||LA13_87=='&'||(LA13_87>='*' && LA13_87<='+')||(LA13_87>='/' && LA13_87<='9')||LA13_87=='='||(LA13_87>='A' && LA13_87<='[')||(LA13_87>=']' && LA13_87<='z')||LA13_87=='|'||(LA13_87>='\u007F' && LA13_87<='\u00A6')||(LA13_87>='\u00A8' && LA13_87<='\u2260')||(LA13_87>='\u2262' && LA13_87<='\u22ED')||(LA13_87>='\u22EF' && LA13_87<='\u2E21')||(LA13_87>='\u2E24' && LA13_87<='\uFFFF')) ) {s = 87;}
 
-                        else if ( ((LA13_33>='\t' && LA13_33<='\n')||LA13_33==' '||LA13_33=='#'||LA13_33=='%'||(LA13_33>='(' && LA13_33<=')')||(LA13_33>=',' && LA13_33<='.')||(LA13_33>=':' && LA13_33<='<')||(LA13_33>='>' && LA13_33<='@')||LA13_33=='{'||(LA13_33>='}' && LA13_33<='~')||LA13_33=='\u00A7'||LA13_33=='\u2261'||LA13_33=='\u22EE'||(LA13_33>='\u2E22' && LA13_33<='\u2E23')) ) {s = 83;}
+                        else if ( ((LA13_87>='\t' && LA13_87<='\n')||LA13_87==' '||LA13_87=='#'||LA13_87=='%'||(LA13_87>='(' && LA13_87<=')')||(LA13_87>=',' && LA13_87<='.')||(LA13_87>=':' && LA13_87<='<')||(LA13_87>='>' && LA13_87<='@')||LA13_87=='{'||(LA13_87>='}' && LA13_87<='~')||LA13_87=='\u00A7'||LA13_87=='\u2261'||LA13_87=='\u22EE'||(LA13_87>='\u2E22' && LA13_87<='\u2E23')) ) {s = 85;}
 
-                        else s = 29;
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 3 : 
-                        int LA13_23 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA13_23==']') ) {s = 70;}
-
-                        else if ( ((LA13_23>='\u0000' && LA13_23<='\b')||(LA13_23>='\u000B' && LA13_23<='\u001F')||(LA13_23>='!' && LA13_23<='\"')||LA13_23=='$'||(LA13_23>='&' && LA13_23<='\'')||(LA13_23>='*' && LA13_23<='+')||(LA13_23>='/' && LA13_23<='9')||LA13_23=='='||(LA13_23>='A' && LA13_23<='\\')||(LA13_23>='^' && LA13_23<='z')||LA13_23=='|'||(LA13_23>='\u007F' && LA13_23<='\u00A6')||(LA13_23>='\u00A8' && LA13_23<='\u2260')||(LA13_23>='\u2262' && LA13_23<='\u22ED')||(LA13_23>='\u22EF' && LA13_23<='\u2E21')||(LA13_23>='\u2E24' && LA13_23<='\uFFFF')) ) {s = 29;}
-
-                        else s = 71;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 4 : 
                         int LA13_0 = input.LA(1);
 
                         s = -1;
                         if ( (LA13_0==' ') ) {s = 1;}
 
-                        else if ( (LA13_0=='\n') ) {s = 2;}
+                        else if ( (LA13_0=='\t') ) {s = 2;}
 
-                        else if ( (LA13_0=='\t') ) {s = 3;}
+                        else if ( (LA13_0=='\n') ) {s = 3;}
 
-                        else if ( (LA13_0=='\u00A7') ) {s = 4;}
+                        else if ( (LA13_0=='\r') ) {s = 4;}
 
-                        else if ( (LA13_0=='%') ) {s = 5;}
+                        else if ( (LA13_0=='\u00A7') ) {s = 5;}
 
-                        else if ( (LA13_0==';') ) {s = 6;}
+                        else if ( (LA13_0=='%') ) {s = 6;}
 
-                        else if ( (LA13_0=='c') ) {s = 7;}
+                        else if ( (LA13_0==';') ) {s = 7;}
 
-                        else if ( (LA13_0==':') ) {s = 8;}
+                        else if ( (LA13_0=='c') ) {s = 8;}
 
-                        else if ( (LA13_0=='@') ) {s = 9;}
+                        else if ( (LA13_0==':') ) {s = 9;}
 
-                        else if ( (LA13_0=='#') ) {s = 10;}
+                        else if ( (LA13_0=='@') ) {s = 10;}
 
-                        else if ( (LA13_0==',') ) {s = 11;}
+                        else if ( (LA13_0=='#') ) {s = 11;}
 
-                        else if ( (LA13_0=='.') ) {s = 12;}
+                        else if ( (LA13_0==',') ) {s = 12;}
 
-                        else if ( (LA13_0=='\u2261') ) {s = 13;}
+                        else if ( (LA13_0=='.') ) {s = 13;}
 
-                        else if ( (LA13_0=='\u22EE') ) {s = 14;}
+                        else if ( (LA13_0=='\u2261') ) {s = 14;}
 
-                        else if ( (LA13_0=='-') ) {s = 15;}
+                        else if ( (LA13_0=='\u22EE') ) {s = 15;}
 
-                        else if ( (LA13_0=='~') ) {s = 16;}
+                        else if ( (LA13_0=='-') ) {s = 16;}
 
-                        else if ( (LA13_0=='(') ) {s = 17;}
+                        else if ( (LA13_0=='~') ) {s = 17;}
 
-                        else if ( (LA13_0==')') ) {s = 18;}
+                        else if ( (LA13_0=='(') ) {s = 18;}
 
-                        else if ( (LA13_0=='<') ) {s = 19;}
+                        else if ( (LA13_0==')') ) {s = 19;}
 
-                        else if ( (LA13_0=='>') ) {s = 20;}
+                        else if ( (LA13_0=='<') ) {s = 20;}
 
-                        else if ( (LA13_0=='?') ) {s = 21;}
+                        else if ( (LA13_0=='>') ) {s = 21;}
 
-                        else if ( (LA13_0=='[') ) {s = 22;}
+                        else if ( (LA13_0=='?') ) {s = 22;}
 
-                        else if ( (LA13_0==']') ) {s = 23;}
+                        else if ( (LA13_0=='[') ) {s = 23;}
 
-                        else if ( (LA13_0=='{') ) {s = 24;}
+                        else if ( (LA13_0==']') ) {s = 24;}
 
-                        else if ( (LA13_0=='}') ) {s = 25;}
+                        else if ( (LA13_0=='{') ) {s = 25;}
 
-                        else if ( (LA13_0=='\u2E22') ) {s = 26;}
+                        else if ( (LA13_0=='}') ) {s = 26;}
 
-                        else if ( (LA13_0=='\u2E23') ) {s = 27;}
+                        else if ( (LA13_0=='\u2E22') ) {s = 27;}
 
-                        else if ( (LA13_0=='^') ) {s = 28;}
+                        else if ( (LA13_0=='\u2E23') ) {s = 28;}
 
-                        else if ( ((LA13_0>='A' && LA13_0<='Z')||LA13_0=='_'||(LA13_0>='a' && LA13_0<='b')||(LA13_0>='d' && LA13_0<='z')) ) {s = 30;}
+                        else if ( (LA13_0=='^') ) {s = 29;}
 
-                        else if ( ((LA13_0>='0' && LA13_0<='9')) ) {s = 31;}
+                        else if ( ((LA13_0>='A' && LA13_0<='Z')||LA13_0=='_'||(LA13_0>='a' && LA13_0<='b')||(LA13_0>='d' && LA13_0<='z')) ) {s = 31;}
 
-                        else if ( (LA13_0=='\"') ) {s = 32;}
+                        else if ( ((LA13_0>='0' && LA13_0<='9')) ) {s = 32;}
 
-                        else if ( (LA13_0=='\'') ) {s = 33;}
+                        else if ( (LA13_0=='\"') ) {s = 33;}
 
-                        else if ( (LA13_0=='/') ) {s = 34;}
+                        else if ( (LA13_0=='\'') ) {s = 34;}
 
-                        else if ( (LA13_0=='\r') ) {s = 35;}
+                        else if ( (LA13_0=='/') ) {s = 35;}
 
                         else if ( ((LA13_0>='\u0000' && LA13_0<='\b')||(LA13_0>='\u000B' && LA13_0<='\f')||(LA13_0>='\u000E' && LA13_0<='\u001F')||LA13_0=='!'||LA13_0=='$'||LA13_0=='&'||(LA13_0>='*' && LA13_0<='+')||LA13_0=='='||LA13_0=='\\'||LA13_0=='`'||LA13_0=='|'||(LA13_0>='\u007F' && LA13_0<='\u00A6')||(LA13_0>='\u00A8' && LA13_0<='\u2260')||(LA13_0>='\u2262' && LA13_0<='\u22ED')||(LA13_0>='\u22EF' && LA13_0<='\u2E21')||(LA13_0>='\u2E24' && LA13_0<='\uFFFF')) ) {s = 36;}
 
-                        else s = 29;
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 4 : 
+                        int LA13_4 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA13_4=='\r') ) {s = 42;}
+
+                        else if ( ((LA13_4>='\t' && LA13_4<='\n')||LA13_4==' ') ) {s = 38;}
+
+                        else if ( ((LA13_4>='\u0000' && LA13_4<='\b')||(LA13_4>='\u000B' && LA13_4<='\f')||(LA13_4>='\u000E' && LA13_4<='\u001F')||(LA13_4>='!' && LA13_4<='\"')||LA13_4=='$'||(LA13_4>='&' && LA13_4<='\'')||(LA13_4>='*' && LA13_4<='+')||(LA13_4>='/' && LA13_4<='9')||LA13_4=='='||(LA13_4>='A' && LA13_4<='z')||LA13_4=='|'||(LA13_4>='\u007F' && LA13_4<='\u00A6')||(LA13_4>='\u00A8' && LA13_4<='\u2260')||(LA13_4>='\u2262' && LA13_4<='\u22ED')||(LA13_4>='\u22EF' && LA13_4<='\u2E21')||(LA13_4>='\u2E24' && LA13_4<='\uFFFF')) ) {s = 30;}
+
+                        else s = 41;
 
                         if ( s>=0 ) return s;
                         break;
                     case 5 : 
-                        int LA13_32 = input.LA(1);
+                        int LA13_90 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_32=='\\') ) {s = 80;}
+                        if ( ((LA13_90>='\u0000' && LA13_90<='\b')||(LA13_90>='\u000B' && LA13_90<='\f')||(LA13_90>='\u000E' && LA13_90<='\u001F')||(LA13_90>='!' && LA13_90<='\"')||LA13_90=='$'||(LA13_90>='&' && LA13_90<='\'')||(LA13_90>='*' && LA13_90<='+')||(LA13_90>='/' && LA13_90<='9')||LA13_90=='='||(LA13_90>='A' && LA13_90<='z')||LA13_90=='|'||(LA13_90>='\u007F' && LA13_90<='\u00A6')||(LA13_90>='\u00A8' && LA13_90<='\u2260')||(LA13_90>='\u2262' && LA13_90<='\u22ED')||(LA13_90>='\u22EF' && LA13_90<='\u2E21')||(LA13_90>='\u2E24' && LA13_90<='\uFFFF')) ) {s = 99;}
 
-                        else if ( ((LA13_32>='\u0000' && LA13_32<='\b')||(LA13_32>='\u000B' && LA13_32<='\u001F')||LA13_32=='!'||LA13_32=='$'||(LA13_32>='&' && LA13_32<='\'')||(LA13_32>='*' && LA13_32<='+')||(LA13_32>='/' && LA13_32<='9')||LA13_32=='='||(LA13_32>='A' && LA13_32<='[')||(LA13_32>=']' && LA13_32<='z')||LA13_32=='|'||(LA13_32>='\u007F' && LA13_32<='\u00A6')||(LA13_32>='\u00A8' && LA13_32<='\u2260')||(LA13_32>='\u2262' && LA13_32<='\u22ED')||(LA13_32>='\u22EF' && LA13_32<='\u2E21')||(LA13_32>='\u2E24' && LA13_32<='\uFFFF')) ) {s = 81;}
+                        else if ( (LA13_90=='\r') ) {s = 100;}
 
-                        else if ( (LA13_32=='\"') ) {s = 82;}
+                        else if ( ((LA13_90>='\t' && LA13_90<='\n')||LA13_90==' '||LA13_90=='#'||LA13_90=='%'||(LA13_90>='(' && LA13_90<=')')||(LA13_90>=',' && LA13_90<='.')||(LA13_90>=':' && LA13_90<='<')||(LA13_90>='>' && LA13_90<='@')||LA13_90=='{'||(LA13_90>='}' && LA13_90<='~')||LA13_90=='\u00A7'||LA13_90=='\u2261'||LA13_90=='\u22EE'||(LA13_90>='\u2E22' && LA13_90<='\u2E23')) ) {s = 101;}
 
-                        else if ( ((LA13_32>='\t' && LA13_32<='\n')||LA13_32==' '||LA13_32=='#'||LA13_32=='%'||(LA13_32>='(' && LA13_32<=')')||(LA13_32>=',' && LA13_32<='.')||(LA13_32>=':' && LA13_32<='<')||(LA13_32>='>' && LA13_32<='@')||LA13_32=='{'||(LA13_32>='}' && LA13_32<='~')||LA13_32=='\u00A7'||LA13_32=='\u2261'||LA13_32=='\u22EE'||(LA13_32>='\u2E22' && LA13_32<='\u2E23')) ) {s = 83;}
-
-                        else s = 29;
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 6 : 
-                        int LA13_98 = input.LA(1);
+                        int LA13_89 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_98=='\r') ) {s = 99;}
+                        if ( (LA13_89=='*') ) {s = 96;}
 
-                        else if ( ((LA13_98>='\t' && LA13_98<='\n')||LA13_98==' '||LA13_98=='#'||LA13_98=='%'||(LA13_98>='(' && LA13_98<=')')||(LA13_98>=',' && LA13_98<='.')||(LA13_98>=':' && LA13_98<='<')||(LA13_98>='>' && LA13_98<='@')||LA13_98=='{'||(LA13_98>='}' && LA13_98<='~')||LA13_98=='\u00A7'||LA13_98=='\u2261'||LA13_98=='\u22EE'||(LA13_98>='\u2E22' && LA13_98<='\u2E23')) ) {s = 100;}
+                        else if ( ((LA13_89>='\u0000' && LA13_89<='\b')||(LA13_89>='\u000B' && LA13_89<='\u001F')||(LA13_89>='!' && LA13_89<='\"')||LA13_89=='$'||(LA13_89>='&' && LA13_89<='\'')||LA13_89=='+'||(LA13_89>='/' && LA13_89<='9')||LA13_89=='='||(LA13_89>='A' && LA13_89<='z')||LA13_89=='|'||(LA13_89>='\u007F' && LA13_89<='\u00A6')||(LA13_89>='\u00A8' && LA13_89<='\u2260')||(LA13_89>='\u2262' && LA13_89<='\u22ED')||(LA13_89>='\u22EF' && LA13_89<='\u2E21')||(LA13_89>='\u2E24' && LA13_89<='\uFFFF')) ) {s = 97;}
 
-                        else if ( ((LA13_98>='\u0000' && LA13_98<='\b')||(LA13_98>='\u000B' && LA13_98<='\f')||(LA13_98>='\u000E' && LA13_98<='\u001F')||(LA13_98>='!' && LA13_98<='\"')||LA13_98=='$'||(LA13_98>='&' && LA13_98<='\'')||(LA13_98>='*' && LA13_98<='+')||(LA13_98>='/' && LA13_98<='9')||LA13_98=='='||(LA13_98>='A' && LA13_98<='z')||LA13_98=='|'||(LA13_98>='\u007F' && LA13_98<='\u00A6')||(LA13_98>='\u00A8' && LA13_98<='\u2260')||(LA13_98>='\u2262' && LA13_98<='\u22ED')||(LA13_98>='\u22EF' && LA13_98<='\u2E21')||(LA13_98>='\u2E24' && LA13_98<='\uFFFF')) ) {s = 98;}
+                        else if ( ((LA13_89>='\t' && LA13_89<='\n')||LA13_89==' '||LA13_89=='#'||LA13_89=='%'||(LA13_89>='(' && LA13_89<=')')||(LA13_89>=',' && LA13_89<='.')||(LA13_89>=':' && LA13_89<='<')||(LA13_89>='>' && LA13_89<='@')||LA13_89=='{'||(LA13_89>='}' && LA13_89<='~')||LA13_89=='\u00A7'||LA13_89=='\u2261'||LA13_89=='\u22EE'||(LA13_89>='\u2E22' && LA13_89<='\u2E23')) ) {s = 98;}
 
-                        else s = 29;
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 7 : 
-                        int LA13_22 = input.LA(1);
+                        int LA13_72 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_22=='[') ) {s = 68;}
+                        if ( ((LA13_72>='\u0000' && LA13_72<='\b')||(LA13_72>='\u000B' && LA13_72<='\u001F')||(LA13_72>='!' && LA13_72<='\"')||LA13_72=='$'||(LA13_72>='&' && LA13_72<='\'')||(LA13_72>='*' && LA13_72<='+')||(LA13_72>='/' && LA13_72<='9')||LA13_72=='='||(LA13_72>='A' && LA13_72<='z')||LA13_72=='|'||(LA13_72>='\u007F' && LA13_72<='\u00A6')||(LA13_72>='\u00A8' && LA13_72<='\u2260')||(LA13_72>='\u2262' && LA13_72<='\u22ED')||(LA13_72>='\u22EF' && LA13_72<='\u2E21')||(LA13_72>='\u2E24' && LA13_72<='\uFFFF')) ) {s = 30;}
 
-                        else if ( ((LA13_22>='\u0000' && LA13_22<='\b')||(LA13_22>='\u000B' && LA13_22<='\u001F')||(LA13_22>='!' && LA13_22<='\"')||LA13_22=='$'||(LA13_22>='&' && LA13_22<='\'')||(LA13_22>='*' && LA13_22<='+')||(LA13_22>='/' && LA13_22<='9')||LA13_22=='='||(LA13_22>='A' && LA13_22<='Z')||(LA13_22>='\\' && LA13_22<='z')||LA13_22=='|'||(LA13_22>='\u007F' && LA13_22<='\u00A6')||(LA13_22>='\u00A8' && LA13_22<='\u2260')||(LA13_22>='\u2262' && LA13_22<='\u22ED')||(LA13_22>='\u22EF' && LA13_22<='\u2E21')||(LA13_22>='\u2E24' && LA13_22<='\uFFFF')) ) {s = 29;}
-
-                        else s = 69;
+                        else s = 93;
 
                         if ( s>=0 ) return s;
                         break;
                     case 8 : 
-                        int LA13_95 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA13_95=='/') ) {s = 102;}
-
-                        else if ( (LA13_95=='*') ) {s = 95;}
-
-                        else if ( ((LA13_95>='\u0000' && LA13_95<='\b')||(LA13_95>='\u000B' && LA13_95<='\u001F')||(LA13_95>='!' && LA13_95<='\"')||LA13_95=='$'||(LA13_95>='&' && LA13_95<='\'')||LA13_95=='+'||(LA13_95>='0' && LA13_95<='9')||LA13_95=='='||(LA13_95>='A' && LA13_95<='z')||LA13_95=='|'||(LA13_95>='\u007F' && LA13_95<='\u00A6')||(LA13_95>='\u00A8' && LA13_95<='\u2260')||(LA13_95>='\u2262' && LA13_95<='\u22ED')||(LA13_95>='\u22EF' && LA13_95<='\u2E21')||(LA13_95>='\u2E24' && LA13_95<='\uFFFF')) ) {s = 97;}
-
-                        else if ( ((LA13_95>='\t' && LA13_95<='\n')||LA13_95==' '||LA13_95=='#'||LA13_95=='%'||(LA13_95>='(' && LA13_95<=')')||(LA13_95>=',' && LA13_95<='.')||(LA13_95>=':' && LA13_95<='<')||(LA13_95>='>' && LA13_95<='@')||LA13_95=='{'||(LA13_95>='}' && LA13_95<='~')||LA13_95=='\u00A7'||LA13_95=='\u2261'||LA13_95=='\u22EE'||(LA13_95>='\u2E22' && LA13_95<='\u2E23')) ) {s = 96;}
-
-                        else s = 29;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 9 : 
-                        int LA13_93 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA13_93=='\"') ) {s = 82;}
-
-                        else if ( (LA13_93=='\\') ) {s = 80;}
-
-                        else if ( ((LA13_93>='\u0000' && LA13_93<='\b')||(LA13_93>='\u000B' && LA13_93<='\u001F')||LA13_93=='!'||LA13_93=='$'||(LA13_93>='&' && LA13_93<='\'')||(LA13_93>='*' && LA13_93<='+')||(LA13_93>='/' && LA13_93<='9')||LA13_93=='='||(LA13_93>='A' && LA13_93<='[')||(LA13_93>=']' && LA13_93<='z')||LA13_93=='|'||(LA13_93>='\u007F' && LA13_93<='\u00A6')||(LA13_93>='\u00A8' && LA13_93<='\u2260')||(LA13_93>='\u2262' && LA13_93<='\u22ED')||(LA13_93>='\u22EF' && LA13_93<='\u2E21')||(LA13_93>='\u2E24' && LA13_93<='\uFFFF')) ) {s = 81;}
-
-                        else if ( ((LA13_93>='\t' && LA13_93<='\n')||LA13_93==' '||LA13_93=='#'||LA13_93=='%'||(LA13_93>='(' && LA13_93<=')')||(LA13_93>=',' && LA13_93<='.')||(LA13_93>=':' && LA13_93<='<')||(LA13_93>='>' && LA13_93<='@')||LA13_93=='{'||(LA13_93>='}' && LA13_93<='~')||LA13_93=='\u00A7'||LA13_93=='\u2261'||LA13_93=='\u22EE'||(LA13_93>='\u2E22' && LA13_93<='\u2E23')) ) {s = 83;}
-
-                        else s = 29;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 10 : 
-                        int LA13_81 = input.LA(1);
-
-                        s = -1;
-                        if ( (LA13_81=='\"') ) {s = 82;}
-
-                        else if ( (LA13_81=='\\') ) {s = 80;}
-
-                        else if ( ((LA13_81>='\u0000' && LA13_81<='\b')||(LA13_81>='\u000B' && LA13_81<='\u001F')||LA13_81=='!'||LA13_81=='$'||(LA13_81>='&' && LA13_81<='\'')||(LA13_81>='*' && LA13_81<='+')||(LA13_81>='/' && LA13_81<='9')||LA13_81=='='||(LA13_81>='A' && LA13_81<='[')||(LA13_81>=']' && LA13_81<='z')||LA13_81=='|'||(LA13_81>='\u007F' && LA13_81<='\u00A6')||(LA13_81>='\u00A8' && LA13_81<='\u2260')||(LA13_81>='\u2262' && LA13_81<='\u22ED')||(LA13_81>='\u22EF' && LA13_81<='\u2E21')||(LA13_81>='\u2E24' && LA13_81<='\uFFFF')) ) {s = 81;}
-
-                        else if ( ((LA13_81>='\t' && LA13_81<='\n')||LA13_81==' '||LA13_81=='#'||LA13_81=='%'||(LA13_81>='(' && LA13_81<=')')||(LA13_81>=',' && LA13_81<='.')||(LA13_81>=':' && LA13_81<='<')||(LA13_81>='>' && LA13_81<='@')||LA13_81=='{'||(LA13_81>='}' && LA13_81<='~')||LA13_81=='\u00A7'||LA13_81=='\u2261'||LA13_81=='\u22EE'||(LA13_81>='\u2E22' && LA13_81<='\u2E23')) ) {s = 83;}
-
-                        else s = 29;
-
-                        if ( s>=0 ) return s;
-                        break;
-                    case 11 : 
                         int LA13_70 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA13_70>='\u0000' && LA13_70<='\b')||(LA13_70>='\u000B' && LA13_70<='\u001F')||(LA13_70>='!' && LA13_70<='\"')||LA13_70=='$'||(LA13_70>='&' && LA13_70<='\'')||(LA13_70>='*' && LA13_70<='+')||(LA13_70>='/' && LA13_70<='9')||LA13_70=='='||(LA13_70>='A' && LA13_70<='z')||LA13_70=='|'||(LA13_70>='\u007F' && LA13_70<='\u00A6')||(LA13_70>='\u00A8' && LA13_70<='\u2260')||(LA13_70>='\u2262' && LA13_70<='\u22ED')||(LA13_70>='\u22EF' && LA13_70<='\u2E21')||(LA13_70>='\u2E24' && LA13_70<='\uFFFF')) ) {s = 29;}
+                        if ( ((LA13_70>='\u0000' && LA13_70<='\b')||(LA13_70>='\u000B' && LA13_70<='\u001F')||(LA13_70>='!' && LA13_70<='\"')||LA13_70=='$'||(LA13_70>='&' && LA13_70<='\'')||(LA13_70>='*' && LA13_70<='+')||(LA13_70>='/' && LA13_70<='9')||LA13_70=='='||(LA13_70>='A' && LA13_70<='z')||LA13_70=='|'||(LA13_70>='\u007F' && LA13_70<='\u00A6')||(LA13_70>='\u00A8' && LA13_70<='\u2260')||(LA13_70>='\u2262' && LA13_70<='\u22ED')||(LA13_70>='\u22EF' && LA13_70<='\u2E21')||(LA13_70>='\u2E24' && LA13_70<='\uFFFF')) ) {s = 30;}
 
                         else s = 92;
 
                         if ( s>=0 ) return s;
                         break;
-                    case 12 : 
-                        int LA13_68 = input.LA(1);
+                    case 9 : 
+                        int LA13_97 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA13_68>='\u0000' && LA13_68<='\b')||(LA13_68>='\u000B' && LA13_68<='\u001F')||(LA13_68>='!' && LA13_68<='\"')||LA13_68=='$'||(LA13_68>='&' && LA13_68<='\'')||(LA13_68>='*' && LA13_68<='+')||(LA13_68>='/' && LA13_68<='9')||LA13_68=='='||(LA13_68>='A' && LA13_68<='z')||LA13_68=='|'||(LA13_68>='\u007F' && LA13_68<='\u00A6')||(LA13_68>='\u00A8' && LA13_68<='\u2260')||(LA13_68>='\u2262' && LA13_68<='\u22ED')||(LA13_68>='\u22EF' && LA13_68<='\u2E21')||(LA13_68>='\u2E24' && LA13_68<='\uFFFF')) ) {s = 29;}
+                        if ( (LA13_97=='*') ) {s = 96;}
 
-                        else s = 91;
+                        else if ( ((LA13_97>='\u0000' && LA13_97<='\b')||(LA13_97>='\u000B' && LA13_97<='\u001F')||(LA13_97>='!' && LA13_97<='\"')||LA13_97=='$'||(LA13_97>='&' && LA13_97<='\'')||LA13_97=='+'||(LA13_97>='/' && LA13_97<='9')||LA13_97=='='||(LA13_97>='A' && LA13_97<='z')||LA13_97=='|'||(LA13_97>='\u007F' && LA13_97<='\u00A6')||(LA13_97>='\u00A8' && LA13_97<='\u2260')||(LA13_97>='\u2262' && LA13_97<='\u22ED')||(LA13_97>='\u22EF' && LA13_97<='\u2E21')||(LA13_97>='\u2E24' && LA13_97<='\uFFFF')) ) {s = 97;}
+
+                        else if ( ((LA13_97>='\t' && LA13_97<='\n')||LA13_97==' '||LA13_97=='#'||LA13_97=='%'||(LA13_97>='(' && LA13_97<=')')||(LA13_97>=',' && LA13_97<='.')||(LA13_97>=':' && LA13_97<='<')||(LA13_97>='>' && LA13_97<='@')||LA13_97=='{'||(LA13_97>='}' && LA13_97<='~')||LA13_97=='\u00A7'||LA13_97=='\u2261'||LA13_97=='\u22EE'||(LA13_97>='\u2E22' && LA13_97<='\u2E23')) ) {s = 98;}
+
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 10 : 
+                        int LA13_83 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA13_83=='\"') ) {s = 84;}
+
+                        else if ( (LA13_83=='\\') ) {s = 82;}
+
+                        else if ( ((LA13_83>='\u0000' && LA13_83<='\b')||(LA13_83>='\u000B' && LA13_83<='\u001F')||LA13_83=='!'||LA13_83=='$'||(LA13_83>='&' && LA13_83<='\'')||(LA13_83>='*' && LA13_83<='+')||(LA13_83>='/' && LA13_83<='9')||LA13_83=='='||(LA13_83>='A' && LA13_83<='[')||(LA13_83>=']' && LA13_83<='z')||LA13_83=='|'||(LA13_83>='\u007F' && LA13_83<='\u00A6')||(LA13_83>='\u00A8' && LA13_83<='\u2260')||(LA13_83>='\u2262' && LA13_83<='\u22ED')||(LA13_83>='\u22EF' && LA13_83<='\u2E21')||(LA13_83>='\u2E24' && LA13_83<='\uFFFF')) ) {s = 83;}
+
+                        else if ( ((LA13_83>='\t' && LA13_83<='\n')||LA13_83==' '||LA13_83=='#'||LA13_83=='%'||(LA13_83>='(' && LA13_83<=')')||(LA13_83>=',' && LA13_83<='.')||(LA13_83>=':' && LA13_83<='<')||(LA13_83>='>' && LA13_83<='@')||LA13_83=='{'||(LA13_83>='}' && LA13_83<='~')||LA13_83=='\u00A7'||LA13_83=='\u2261'||LA13_83=='\u22EE'||(LA13_83>='\u2E22' && LA13_83<='\u2E23')) ) {s = 85;}
+
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 11 : 
+                        int LA13_94 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA13_94=='\"') ) {s = 84;}
+
+                        else if ( (LA13_94=='\\') ) {s = 82;}
+
+                        else if ( ((LA13_94>='\u0000' && LA13_94<='\b')||(LA13_94>='\u000B' && LA13_94<='\u001F')||LA13_94=='!'||LA13_94=='$'||(LA13_94>='&' && LA13_94<='\'')||(LA13_94>='*' && LA13_94<='+')||(LA13_94>='/' && LA13_94<='9')||LA13_94=='='||(LA13_94>='A' && LA13_94<='[')||(LA13_94>=']' && LA13_94<='z')||LA13_94=='|'||(LA13_94>='\u007F' && LA13_94<='\u00A6')||(LA13_94>='\u00A8' && LA13_94<='\u2260')||(LA13_94>='\u2262' && LA13_94<='\u22ED')||(LA13_94>='\u22EF' && LA13_94<='\u2E21')||(LA13_94>='\u2E24' && LA13_94<='\uFFFF')) ) {s = 83;}
+
+                        else if ( ((LA13_94>='\t' && LA13_94<='\n')||LA13_94==' '||LA13_94=='#'||LA13_94=='%'||(LA13_94>='(' && LA13_94<=')')||(LA13_94>=',' && LA13_94<='.')||(LA13_94>=':' && LA13_94<='<')||(LA13_94>='>' && LA13_94<='@')||LA13_94=='{'||(LA13_94>='}' && LA13_94<='~')||LA13_94=='\u00A7'||LA13_94=='\u2261'||LA13_94=='\u22EE'||(LA13_94>='\u2E22' && LA13_94<='\u2E23')) ) {s = 85;}
+
+                        else s = 30;
+
+                        if ( s>=0 ) return s;
+                        break;
+                    case 12 : 
+                        int LA13_34 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA13_34=='\\') ) {s = 86;}
+
+                        else if ( ((LA13_34>='\u0000' && LA13_34<='\b')||(LA13_34>='\u000B' && LA13_34<='\u001F')||(LA13_34>='!' && LA13_34<='\"')||LA13_34=='$'||LA13_34=='&'||(LA13_34>='*' && LA13_34<='+')||(LA13_34>='/' && LA13_34<='9')||LA13_34=='='||(LA13_34>='A' && LA13_34<='[')||(LA13_34>=']' && LA13_34<='z')||LA13_34=='|'||(LA13_34>='\u007F' && LA13_34<='\u00A6')||(LA13_34>='\u00A8' && LA13_34<='\u2260')||(LA13_34>='\u2262' && LA13_34<='\u22ED')||(LA13_34>='\u22EF' && LA13_34<='\u2E21')||(LA13_34>='\u2E24' && LA13_34<='\uFFFF')) ) {s = 87;}
+
+                        else if ( (LA13_34=='\'') ) {s = 88;}
+
+                        else if ( ((LA13_34>='\t' && LA13_34<='\n')||LA13_34==' '||LA13_34=='#'||LA13_34=='%'||(LA13_34>='(' && LA13_34<=')')||(LA13_34>=',' && LA13_34<='.')||(LA13_34>=':' && LA13_34<='<')||(LA13_34>='>' && LA13_34<='@')||LA13_34=='{'||(LA13_34>='}' && LA13_34<='~')||LA13_34=='\u00A7'||LA13_34=='\u2261'||LA13_34=='\u22EE'||(LA13_34>='\u2E22' && LA13_34<='\u2E23')) ) {s = 85;}
+
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 13 : 
-                        int LA13_97 = input.LA(1);
+                        int LA13_103 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_97=='*') ) {s = 95;}
+                        if ( (LA13_103=='*') ) {s = 96;}
 
-                        else if ( ((LA13_97>='\u0000' && LA13_97<='\b')||(LA13_97>='\u000B' && LA13_97<='\u001F')||(LA13_97>='!' && LA13_97<='\"')||LA13_97=='$'||(LA13_97>='&' && LA13_97<='\'')||LA13_97=='+'||(LA13_97>='/' && LA13_97<='9')||LA13_97=='='||(LA13_97>='A' && LA13_97<='z')||LA13_97=='|'||(LA13_97>='\u007F' && LA13_97<='\u00A6')||(LA13_97>='\u00A8' && LA13_97<='\u2260')||(LA13_97>='\u2262' && LA13_97<='\u22ED')||(LA13_97>='\u22EF' && LA13_97<='\u2E21')||(LA13_97>='\u2E24' && LA13_97<='\uFFFF')) ) {s = 97;}
+                        else if ( ((LA13_103>='\u0000' && LA13_103<='\b')||(LA13_103>='\u000B' && LA13_103<='\u001F')||(LA13_103>='!' && LA13_103<='\"')||LA13_103=='$'||(LA13_103>='&' && LA13_103<='\'')||LA13_103=='+'||(LA13_103>='/' && LA13_103<='9')||LA13_103=='='||(LA13_103>='A' && LA13_103<='z')||LA13_103=='|'||(LA13_103>='\u007F' && LA13_103<='\u00A6')||(LA13_103>='\u00A8' && LA13_103<='\u2260')||(LA13_103>='\u2262' && LA13_103<='\u22ED')||(LA13_103>='\u22EF' && LA13_103<='\u2E21')||(LA13_103>='\u2E24' && LA13_103<='\uFFFF')) ) {s = 97;}
 
-                        else if ( ((LA13_97>='\t' && LA13_97<='\n')||LA13_97==' '||LA13_97=='#'||LA13_97=='%'||(LA13_97>='(' && LA13_97<=')')||(LA13_97>=',' && LA13_97<='.')||(LA13_97>=':' && LA13_97<='<')||(LA13_97>='>' && LA13_97<='@')||LA13_97=='{'||(LA13_97>='}' && LA13_97<='~')||LA13_97=='\u00A7'||LA13_97=='\u2261'||LA13_97=='\u22EE'||(LA13_97>='\u2E22' && LA13_97<='\u2E23')) ) {s = 96;}
+                        else if ( ((LA13_103>='\t' && LA13_103<='\n')||LA13_103==' '||LA13_103=='#'||LA13_103=='%'||(LA13_103>='(' && LA13_103<=')')||(LA13_103>=',' && LA13_103<='.')||(LA13_103>=':' && LA13_103<='<')||(LA13_103>='>' && LA13_103<='@')||LA13_103=='{'||(LA13_103>='}' && LA13_103<='~')||LA13_103=='\u00A7'||LA13_103=='\u2261'||LA13_103=='\u22EE'||(LA13_103>='\u2E22' && LA13_103<='\u2E23')) ) {s = 98;}
 
-                        else s = 29;
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 14 : 
-                        int LA13_88 = input.LA(1);
+                        int LA13_33 = input.LA(1);
 
                         s = -1;
-                        if ( ((LA13_88>='\u0000' && LA13_88<='\b')||(LA13_88>='\u000B' && LA13_88<='\f')||(LA13_88>='\u000E' && LA13_88<='\u001F')||(LA13_88>='!' && LA13_88<='\"')||LA13_88=='$'||(LA13_88>='&' && LA13_88<='\'')||(LA13_88>='*' && LA13_88<='+')||(LA13_88>='/' && LA13_88<='9')||LA13_88=='='||(LA13_88>='A' && LA13_88<='z')||LA13_88=='|'||(LA13_88>='\u007F' && LA13_88<='\u00A6')||(LA13_88>='\u00A8' && LA13_88<='\u2260')||(LA13_88>='\u2262' && LA13_88<='\u22ED')||(LA13_88>='\u22EF' && LA13_88<='\u2E21')||(LA13_88>='\u2E24' && LA13_88<='\uFFFF')) ) {s = 98;}
+                        if ( (LA13_33=='\\') ) {s = 82;}
 
-                        else if ( (LA13_88=='\r') ) {s = 99;}
+                        else if ( ((LA13_33>='\u0000' && LA13_33<='\b')||(LA13_33>='\u000B' && LA13_33<='\u001F')||LA13_33=='!'||LA13_33=='$'||(LA13_33>='&' && LA13_33<='\'')||(LA13_33>='*' && LA13_33<='+')||(LA13_33>='/' && LA13_33<='9')||LA13_33=='='||(LA13_33>='A' && LA13_33<='[')||(LA13_33>=']' && LA13_33<='z')||LA13_33=='|'||(LA13_33>='\u007F' && LA13_33<='\u00A6')||(LA13_33>='\u00A8' && LA13_33<='\u2260')||(LA13_33>='\u2262' && LA13_33<='\u22ED')||(LA13_33>='\u22EF' && LA13_33<='\u2E21')||(LA13_33>='\u2E24' && LA13_33<='\uFFFF')) ) {s = 83;}
 
-                        else if ( ((LA13_88>='\t' && LA13_88<='\n')||LA13_88==' '||LA13_88=='#'||LA13_88=='%'||(LA13_88>='(' && LA13_88<=')')||(LA13_88>=',' && LA13_88<='.')||(LA13_88>=':' && LA13_88<='<')||(LA13_88>='>' && LA13_88<='@')||LA13_88=='{'||(LA13_88>='}' && LA13_88<='~')||LA13_88=='\u00A7'||LA13_88=='\u2261'||LA13_88=='\u22EE'||(LA13_88>='\u2E22' && LA13_88<='\u2E23')) ) {s = 100;}
+                        else if ( (LA13_33=='\"') ) {s = 84;}
 
-                        else s = 29;
+                        else if ( ((LA13_33>='\t' && LA13_33<='\n')||LA13_33==' '||LA13_33=='#'||LA13_33=='%'||(LA13_33>='(' && LA13_33<=')')||(LA13_33>=',' && LA13_33<='.')||(LA13_33>=':' && LA13_33<='<')||(LA13_33>='>' && LA13_33<='@')||LA13_33=='{'||(LA13_33>='}' && LA13_33<='~')||LA13_33=='\u00A7'||LA13_33=='\u2261'||LA13_33=='\u22EE'||(LA13_33>='\u2E22' && LA13_33<='\u2E23')) ) {s = 85;}
+
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;
                     case 15 : 
-                        int LA13_85 = input.LA(1);
+                        int LA13_24 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_85=='\'') ) {s = 86;}
+                        if ( (LA13_24==']') ) {s = 72;}
 
-                        else if ( (LA13_85=='\\') ) {s = 84;}
+                        else if ( ((LA13_24>='\u0000' && LA13_24<='\b')||(LA13_24>='\u000B' && LA13_24<='\u001F')||(LA13_24>='!' && LA13_24<='\"')||LA13_24=='$'||(LA13_24>='&' && LA13_24<='\'')||(LA13_24>='*' && LA13_24<='+')||(LA13_24>='/' && LA13_24<='9')||LA13_24=='='||(LA13_24>='A' && LA13_24<='\\')||(LA13_24>='^' && LA13_24<='z')||LA13_24=='|'||(LA13_24>='\u007F' && LA13_24<='\u00A6')||(LA13_24>='\u00A8' && LA13_24<='\u2260')||(LA13_24>='\u2262' && LA13_24<='\u22ED')||(LA13_24>='\u22EF' && LA13_24<='\u2E21')||(LA13_24>='\u2E24' && LA13_24<='\uFFFF')) ) {s = 30;}
 
-                        else if ( ((LA13_85>='\u0000' && LA13_85<='\b')||(LA13_85>='\u000B' && LA13_85<='\u001F')||(LA13_85>='!' && LA13_85<='\"')||LA13_85=='$'||LA13_85=='&'||(LA13_85>='*' && LA13_85<='+')||(LA13_85>='/' && LA13_85<='9')||LA13_85=='='||(LA13_85>='A' && LA13_85<='[')||(LA13_85>=']' && LA13_85<='z')||LA13_85=='|'||(LA13_85>='\u007F' && LA13_85<='\u00A6')||(LA13_85>='\u00A8' && LA13_85<='\u2260')||(LA13_85>='\u2262' && LA13_85<='\u22ED')||(LA13_85>='\u22EF' && LA13_85<='\u2E21')||(LA13_85>='\u2E24' && LA13_85<='\uFFFF')) ) {s = 85;}
-
-                        else if ( ((LA13_85>='\t' && LA13_85<='\n')||LA13_85==' '||LA13_85=='#'||LA13_85=='%'||(LA13_85>='(' && LA13_85<=')')||(LA13_85>=',' && LA13_85<='.')||(LA13_85>=':' && LA13_85<='<')||(LA13_85>='>' && LA13_85<='@')||LA13_85=='{'||(LA13_85>='}' && LA13_85<='~')||LA13_85=='\u00A7'||LA13_85=='\u2261'||LA13_85=='\u22EE'||(LA13_85>='\u2E22' && LA13_85<='\u2E23')) ) {s = 83;}
-
-                        else s = 29;
+                        else s = 73;
 
                         if ( s>=0 ) return s;
                         break;
                     case 16 : 
-                        int LA13_94 = input.LA(1);
+                        int LA13_23 = input.LA(1);
 
                         s = -1;
-                        if ( (LA13_94=='\'') ) {s = 86;}
+                        if ( (LA13_23=='[') ) {s = 70;}
 
-                        else if ( (LA13_94=='\\') ) {s = 84;}
+                        else if ( ((LA13_23>='\u0000' && LA13_23<='\b')||(LA13_23>='\u000B' && LA13_23<='\u001F')||(LA13_23>='!' && LA13_23<='\"')||LA13_23=='$'||(LA13_23>='&' && LA13_23<='\'')||(LA13_23>='*' && LA13_23<='+')||(LA13_23>='/' && LA13_23<='9')||LA13_23=='='||(LA13_23>='A' && LA13_23<='Z')||(LA13_23>='\\' && LA13_23<='z')||LA13_23=='|'||(LA13_23>='\u007F' && LA13_23<='\u00A6')||(LA13_23>='\u00A8' && LA13_23<='\u2260')||(LA13_23>='\u2262' && LA13_23<='\u22ED')||(LA13_23>='\u22EF' && LA13_23<='\u2E21')||(LA13_23>='\u2E24' && LA13_23<='\uFFFF')) ) {s = 30;}
 
-                        else if ( ((LA13_94>='\u0000' && LA13_94<='\b')||(LA13_94>='\u000B' && LA13_94<='\u001F')||(LA13_94>='!' && LA13_94<='\"')||LA13_94=='$'||LA13_94=='&'||(LA13_94>='*' && LA13_94<='+')||(LA13_94>='/' && LA13_94<='9')||LA13_94=='='||(LA13_94>='A' && LA13_94<='[')||(LA13_94>=']' && LA13_94<='z')||LA13_94=='|'||(LA13_94>='\u007F' && LA13_94<='\u00A6')||(LA13_94>='\u00A8' && LA13_94<='\u2260')||(LA13_94>='\u2262' && LA13_94<='\u22ED')||(LA13_94>='\u22EF' && LA13_94<='\u2E21')||(LA13_94>='\u2E24' && LA13_94<='\uFFFF')) ) {s = 85;}
+                        else s = 71;
 
-                        else if ( ((LA13_94>='\t' && LA13_94<='\n')||LA13_94==' '||LA13_94=='#'||LA13_94=='%'||(LA13_94>='(' && LA13_94<=')')||(LA13_94>=',' && LA13_94<='.')||(LA13_94>=':' && LA13_94<='<')||(LA13_94>='>' && LA13_94<='@')||LA13_94=='{'||(LA13_94>='}' && LA13_94<='~')||LA13_94=='\u00A7'||LA13_94=='\u2261'||LA13_94=='\u22EE'||(LA13_94>='\u2E22' && LA13_94<='\u2E23')) ) {s = 83;}
+                        if ( s>=0 ) return s;
+                        break;
+                    case 17 : 
+                        int LA13_99 = input.LA(1);
 
-                        else s = 29;
+                        s = -1;
+                        if ( (LA13_99=='\r') ) {s = 100;}
+
+                        else if ( ((LA13_99>='\t' && LA13_99<='\n')||LA13_99==' '||LA13_99=='#'||LA13_99=='%'||(LA13_99>='(' && LA13_99<=')')||(LA13_99>=',' && LA13_99<='.')||(LA13_99>=':' && LA13_99<='<')||(LA13_99>='>' && LA13_99<='@')||LA13_99=='{'||(LA13_99>='}' && LA13_99<='~')||LA13_99=='\u00A7'||LA13_99=='\u2261'||LA13_99=='\u22EE'||(LA13_99>='\u2E22' && LA13_99<='\u2E23')) ) {s = 101;}
+
+                        else if ( ((LA13_99>='\u0000' && LA13_99<='\b')||(LA13_99>='\u000B' && LA13_99<='\f')||(LA13_99>='\u000E' && LA13_99<='\u001F')||(LA13_99>='!' && LA13_99<='\"')||LA13_99=='$'||(LA13_99>='&' && LA13_99<='\'')||(LA13_99>='*' && LA13_99<='+')||(LA13_99>='/' && LA13_99<='9')||LA13_99=='='||(LA13_99>='A' && LA13_99<='z')||LA13_99=='|'||(LA13_99>='\u007F' && LA13_99<='\u00A6')||(LA13_99>='\u00A8' && LA13_99<='\u2260')||(LA13_99>='\u2262' && LA13_99<='\u22ED')||(LA13_99>='\u22EF' && LA13_99<='\u2E21')||(LA13_99>='\u2E24' && LA13_99<='\uFFFF')) ) {s = 99;}
+
+                        else s = 30;
 
                         if ( s>=0 ) return s;
                         break;

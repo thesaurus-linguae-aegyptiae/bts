@@ -320,6 +320,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			try
 			{
 				Map<URI, Resource> uriResourceMap;
+				context.set(ResourceSet.class, set);
 				uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
 						context);
 //				uriResourceMap = new HashMap<URI, Resource>();

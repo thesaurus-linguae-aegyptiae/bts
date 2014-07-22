@@ -28,21 +28,23 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Alternatives cAlternatives_1_1_0 = (Alternatives)cGroup_1_1.eContents().get(0);
 		private final Keyword cSpaceKeyword_1_1_0_0 = (Keyword)cAlternatives_1_1_0.eContents().get(0);
-		private final Keyword cControl000aKeyword_1_1_0_1 = (Keyword)cAlternatives_1_1_0.eContents().get(1);
+		private final Keyword cControl0009Keyword_1_1_0_1 = (Keyword)cAlternatives_1_1_0.eContents().get(1);
+		private final Keyword cControl000aKeyword_1_1_0_2 = (Keyword)cAlternatives_1_1_0.eContents().get(2);
+		private final Keyword cControl000dKeyword_1_1_0_3 = (Keyword)cAlternatives_1_1_0.eContents().get(3);
 		private final Assignment cItemsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cItemsTextItemParserRuleCall_1_1_1_0 = (RuleCall)cItemsAssignment_1_1_1.eContents().get(0);
 		
 		//TextContent:
-		//	{TextContent} (items+=TextItem ((" " | "\n")* items+=TextItem)*);
+		//	{TextContent} (items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*);
 		public ParserRule getRule() { return rule; }
 
-		//{TextContent} (items+=TextItem ((" " | "\n")* items+=TextItem)*)
+		//{TextContent} (items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*)
 		public Group getGroup() { return cGroup; }
 
 		//{TextContent}
 		public Action getTextContentAction_0() { return cTextContentAction_0; }
 
-		//items+=TextItem ((" " | "\n")* items+=TextItem)*
+		//items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//items+=TextItem
@@ -51,17 +53,23 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//TextItem
 		public RuleCall getItemsTextItemParserRuleCall_1_0_0() { return cItemsTextItemParserRuleCall_1_0_0; }
 
-		//((" " | "\n")* items+=TextItem)*
+		//((" " | "\t" | "\n" | "\r")* items+=TextItem)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//(" " | "\n")*
+		//(" " | "\t" | "\n" | "\r")*
 		public Alternatives getAlternatives_1_1_0() { return cAlternatives_1_1_0; }
 
 		//" "
 		public Keyword getSpaceKeyword_1_1_0_0() { return cSpaceKeyword_1_1_0_0; }
 
+		//"\t"
+		public Keyword getControl0009Keyword_1_1_0_1() { return cControl0009Keyword_1_1_0_1; }
+
 		//"\n"
-		public Keyword getControl000aKeyword_1_1_0_1() { return cControl000aKeyword_1_1_0_1; }
+		public Keyword getControl000aKeyword_1_1_0_2() { return cControl000aKeyword_1_1_0_2; }
+
+		//"\r"
+		public Keyword getControl000dKeyword_1_1_0_3() { return cControl000dKeyword_1_1_0_3; }
 
 		//items+=TextItem
 		public Assignment getItemsAssignment_1_1_1() { return cItemsAssignment_1_1_1; }
@@ -1490,7 +1498,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TextContent:
-	//	{TextContent} (items+=TextItem ((" " | "\n")* items+=TextItem)*);
+	//	{TextContent} (items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*);
 	public TextContentElements getTextContentAccess() {
 		return (pTextContent != null) ? pTextContent : (pTextContent = new TextContentElements());
 	}

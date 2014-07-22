@@ -26,6 +26,7 @@ import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.e4.ui.workbench.modeling.ModelService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 public class ScatteredCachingMapService implements Map<URI, Resource> {
 
@@ -48,6 +49,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	@Inject
 	private IEclipseContext context;
+	
+	@Inject
+	private ResourceSet resourceSet;
 
 	private Map<URI, Resource> notificationMap = new HashMap<URI, Resource>();
 
@@ -146,6 +150,14 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	public Resource get(Object key) {
 		// FIXME dies setzt ein active window voraus - nicht gegeben, wenn parts
 		// im dialog geöffnet werden.
+		if (key instanceof URI) // eClass 
+		{
+			URI uri = (URI) key;
+			if (uri.toString().startsWith("http://bts"))
+			{
+				return null;//(Resource) resourceSet.getEObject(uri, false);
+			}
+		}
 		if (notificationMap.containsKey(key)) {
 			return notificationMap.get(key);
 		}

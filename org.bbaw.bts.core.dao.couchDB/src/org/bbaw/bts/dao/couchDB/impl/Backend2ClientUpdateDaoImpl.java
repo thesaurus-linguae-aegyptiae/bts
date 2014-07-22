@@ -1,6 +1,7 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -20,10 +21,13 @@ import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.codehaus.jackson.JsonNode;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipselabs.emfjson.internal.JSONSave;
 import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.percolate.PercolateRequestBuilder;
 import org.elasticsearch.action.percolate.PercolateResponse;
@@ -31,6 +35,7 @@ import org.elasticsearch.action.percolate.PercolateResponse.Match;
 import org.elasticsearch.client.Client;
 import org.lightcouch.Changes;
 import org.lightcouch.ChangesResult;
+import org.lightcouch.Response;
 import org.lightcouch.ChangesResult.Row;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbInfo;
@@ -154,10 +159,10 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 					object = loadFromFeed(feed, dbCollection);
 				}
 			}
-			if (object == null)
-			{
-					object = loadFromFeed(feed, dbCollection);
-			}
+//			if (object == null)
+//			{
+//					object = loadFromFeed(feed, dbCollection);
+//			}
 		}
 //		Assert.isNotNull(object);
 		if (object != null || notification.isDeleted()) // object either loaded and deleted or not deleted
@@ -303,7 +308,7 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 	public List<String> fingQueryIds(Object object, String id, String dbCollection)
 	{
 		Client client = connectionProvider.getSearchClient(Client.class);
-		String objectAsString = EmfModelHelper.modelToString(object);
+		String objectAsString = modelToString(object);
 		objectAsString = "{\r\n" + "\"doc\":" + objectAsString + "\r\n}";
 
 //		System.out.println("dbCollection " + dbCollection
@@ -338,5 +343,40 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 			}
 		}
 		return queryIds;
+	}
+	/**
+	 * Performs a HTTP PUT request, saves or updates a document.
+	 * @return {@link Response}
+	 */
+	public static String modelToString(Object object)
+	{
+//		throw new UnsupportedOperationException();
+		String string = null;
+		Map options = new HashMap<Object, Object>();
+		 options.put("OPTION_INDENT_OUTPUT", false);
+		JSONSave js = new JSONSave(options);
+		if (object instanceof EObject)
+		{
+			EObject eo = (EObject) object;
+			JsonNode node = js.writeEObject(eo, eo.eResource());
+			string = node.toString();
+		}
+		else
+		{
+		ByteArrayOutputStream os = new ByteArrayOutputStream();
+		
+		js.writeValue(os, object);
+		
+		try
+		{
+			string = os.toString(BTSConstants.ENCODING);
+		} catch (UnsupportedEncodingException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		}
+		return string;
 	}
 }

@@ -1331,11 +1331,27 @@ rule__TextContent__Alternatives_1_1_0
 )
 
     |(
-{ before(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_1()); }
+{ before(grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1()); }
+
+	'\t' 
+
+{ after(grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1()); }
+)
+
+    |(
+{ before(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2()); }
 
 	'\n' 
 
-{ after(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_1()); }
+{ after(grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2()); }
+)
+
+    |(
+{ before(grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3()); }
+
+	'\r' 
+
+{ after(grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3()); }
 )
 
 ;
