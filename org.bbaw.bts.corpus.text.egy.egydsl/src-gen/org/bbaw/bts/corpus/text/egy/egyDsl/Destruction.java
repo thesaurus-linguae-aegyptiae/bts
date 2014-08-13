@@ -19,7 +19,7 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  * @model
  * @generated
  */
-public interface Destruction extends Brackets
+public interface Destruction extends Brackets, NoCartouche
 {
   /**
    * Returns the value of the '<em><b>Comment</b></em>' attribute.

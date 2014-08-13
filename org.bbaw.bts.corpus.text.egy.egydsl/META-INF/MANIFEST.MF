@@ -19,6 +19,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.xtext.common.types,
  org.eclipse.emf.mwe2.runtime;bundle-version="2.4.1"
 Import-Package: org.apache.log4j,
+ org.bbaw.bts.corpus.text.egy.validation,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.bbaw.bts.corpus.text.egy,

@@ -7,6 +7,8 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexion;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Interfix Flexion</b></em>'.
@@ -16,7 +18,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class InterfixFlexionImpl extends InterfixImpl implements InterfixFlexion
+public class InterfixFlexionImpl extends MinimalEObjectImpl.Container implements InterfixFlexion
 {
   /**
    * <!-- begin-user-doc -->

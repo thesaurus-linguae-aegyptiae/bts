@@ -54,6 +54,8 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 	private ResourceSet resourceSet;
 
 	private Map<URI, Resource> notificationMap = new HashMap<URI, Resource>();
+	
+	private Map<URI, Resource> eclassmap = new HashMap<URI, Resource>();
 
 	@Override
 	public void clear() {
@@ -155,7 +157,7 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 			URI uri = (URI) key;
 			if (uri.toString().startsWith("http://bts"))
 			{
-				return null;//(Resource) resourceSet.getEObject(uri, false);
+				return eclassmap.get(key);//(Resource) resourceSet.getEObject(uri, false);
 			}
 		}
 		if (notificationMap.containsKey(key)) {
@@ -240,7 +242,11 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	@Override
 	public Resource put(URI key, Resource value) {
-		if (value.getContents() != null && !value.getContents().isEmpty()
+		if (key.toString().startsWith("http://btsmodel") || key.toString().startsWith("http://btsCorpusModel"))
+		{
+			eclassmap.put(key, value);
+		}
+		else if (value.getContents() != null && !value.getContents().isEmpty()
 				&& value.getContents().get(0) instanceof BTSConfiguration) {
 			configurationMap.put(key, value);
 		}

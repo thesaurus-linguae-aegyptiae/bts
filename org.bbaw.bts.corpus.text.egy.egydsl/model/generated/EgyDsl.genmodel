@@ -27,6 +27,7 @@
     <genClasses ecoreClass="EgyDsl.ecore#//VersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersFrontierMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersbreakMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//BrokenVersbreakMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Marker">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//Marker/type"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//Marker/name"/>
@@ -34,9 +35,38 @@
     <genClasses ecoreClass="EgyDsl.ecore#//Word">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Word/wChar"/>
     </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//WordPart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//WordPart/wChar"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//WordEnding"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DualEnding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//DualEnding/interfix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//DualEnding/chars"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//DualChars">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//DualChars/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//PluralChars">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//PluralChars/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//PluralEnding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//PluralEnding/interfix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//PluralEnding/chars"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//InterfixFlexionEding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixFlexionEding/interfix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixFlexionEding/chars"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//InterfixLexicalEnding">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixLexicalEnding/interfix"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixLexicalEnding/chars"/>
+    </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//WordMiddle"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Chars">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//Chars/name"/>
+    </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//SuffixChars">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//SuffixChars/name"/>
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//Interfix"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixLexical"/>
@@ -44,9 +74,9 @@
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixSuffixPronomLexical"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixPrefixNonLexical"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixPrefixLexical"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixCompountWords"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixConnectionSyllabicGroup"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Brackets"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//NoCartouche"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Expanded">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Expanded/wChar"/>
     </genClasses>

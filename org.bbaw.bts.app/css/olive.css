@@ -92,11 +92,11 @@ Label {
 	
 }
 TableItem {
-	font-family: FreeSerif;
+	font-family: BBAWLibertine;
 	font-size: 12px;
 }
 Table{
-	font-family: FreeSerif;
+	font-family: BBAWLibertine;
 	font-size: 12px;
 }
 
@@ -106,7 +106,7 @@ Button {
 
 * {
 	font-size: 12px;
-	font-family: FreeSerif;
+	font-family: BBAWLibertine; /*FreeSerif;*/
 	
 }
 Text {

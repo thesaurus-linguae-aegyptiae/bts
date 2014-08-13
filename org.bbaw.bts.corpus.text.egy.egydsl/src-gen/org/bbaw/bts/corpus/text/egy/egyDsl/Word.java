@@ -24,7 +24,7 @@ public interface Word extends SentenceItem, SentenceItemNoAmbivalence
 {
   /**
    * Returns the value of the '<em><b>WChar</b></em>' containment reference list.
-   * The list contents are of type {@link org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle}.
+   * The list contents are of type {@link org.bbaw.bts.corpus.text.egy.egyDsl.WordPart}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>WChar</em>' containment reference list isn't clear,
@@ -36,6 +36,6 @@ public interface Word extends SentenceItem, SentenceItemNoAmbivalence
    * @model containment="true"
    * @generated
    */
-  EList<WordMiddle> getWChar();
+  EList<WordPart> getWChar();
 
 } // Word

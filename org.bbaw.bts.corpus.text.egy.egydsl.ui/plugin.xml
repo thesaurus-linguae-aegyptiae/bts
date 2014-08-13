@@ -101,6 +101,35 @@
         </page>
     </extension>
     <extension
+          point="com.opcoach.e4.preferences.e4PreferencePages">
+       <page
+             class="org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+             id="org.bbaw.bts.corpus.text.egy.EgyDsl"
+             name="EgyDsl">
+             <keywordReference
+                id="org.bbaw.bts.corpus.text.egy.ui.keyword_EgyDsl">
+          </keywordReference>
+       </page>
+       <page
+             category="org.bbaw.bts.corpus.text.egy.EgyDsl"
+             class="org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+             id="org.bbaw.bts.corpus.text.egy.EgyDsl.coloring"
+             name="Syntax Coloring">
+          <keywordReference
+                id="org.bbaw.bts.corpus.text.egy.ui.keyword_EgyDsl">
+          </keywordReference>
+       </page>
+       <page
+             category="org.bbaw.bts.corpus.text.egy.EgyDsl"
+             class="org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+             id="org.bbaw.bts.corpus.text.egy.EgyDsl.templates"
+             name="Templates">
+          <keywordReference
+                id="org.bbaw.bts.corpus.text.egy.ui.keyword_EgyDsl">
+          </keywordReference>
+       </page>
+    </extension>
+    <extension
             point="org.eclipse.ui.propertyPages">
         <page
             class="org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"

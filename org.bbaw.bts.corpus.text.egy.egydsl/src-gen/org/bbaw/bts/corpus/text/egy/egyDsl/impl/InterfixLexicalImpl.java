@@ -7,6 +7,8 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexical;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 /**
  * <!-- begin-user-doc -->
  * An implementation of the model object '<em><b>Interfix Lexical</b></em>'.
@@ -16,7 +18,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class InterfixLexicalImpl extends InterfixImpl implements InterfixLexical
+public class InterfixLexicalImpl extends MinimalEObjectImpl.Container implements InterfixLexical
 {
   /**
    * <!-- begin-user-doc -->

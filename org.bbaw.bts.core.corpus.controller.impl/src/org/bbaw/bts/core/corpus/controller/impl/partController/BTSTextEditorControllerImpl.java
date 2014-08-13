@@ -94,14 +94,15 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String LEMMA_CASE_INTERFIX = ": ";
 	private static final String MARKER_START_SIGN = "\u0023";
 	private static final String MARKER_END_SIGN = "\u0023";
-	private static final String VERS_FRONTER_MARKER = "mv";
-	private static final String VERS_BREAK_MARKER = "v";
+	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
+	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
 
-	private static final String MARKER_VERS_SIGN = "\u0040";
+//	private static final String MARKER_VERS_SIGN = "\u0040";
 	private static final String MARKER_INTERFIX = ": ";
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
 	private static final int GAP = 10;
+	private static final Object BROKEN_VERS_MARKER = "\uDB80\uDC82";
 	
 	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
 	
@@ -414,13 +415,18 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		Position pos = new Position(stringBuilder.length());
 		if (marker.getType() != null) {
 			if (marker.getType().equals(BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
-				stringBuilder.append(MARKER_VERS_SIGN);
+//				stringBuilder.append(MARKER_VERS_SIGN);
 				stringBuilder.append(VERS_FRONTER_MARKER);
 			} else if (marker.getType().equals(
 					BTSConstants.TEXT_VERS_BREAK_MARKER)) {
-				stringBuilder.append(MARKER_VERS_SIGN);
+//				stringBuilder.append(MARKER_VERS_SIGN);
 				stringBuilder.append(VERS_BREAK_MARKER);
+			} else if (marker.getType().equals(
+					BTSConstants.BROKEN_VERS_MARKER)) {
+//				stringBuilder.append(MARKER_VERS_SIGN);
+				stringBuilder.append(BROKEN_VERS_MARKER);
 			} else {
+				pos.setOffset(pos.getOffset() +1);
 				stringBuilder.append(MARKER_START_SIGN);
 				stringBuilder.append(marker.getType());
 				if (marker.getName() != null && !"".equals(marker.getName())) {

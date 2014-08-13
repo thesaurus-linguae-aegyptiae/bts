@@ -130,6 +130,11 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createVersbreakMarkerAdapter();
       }
       @Override
+      public Adapter caseBrokenVersbreakMarker(BrokenVersbreakMarker object)
+      {
+        return createBrokenVersbreakMarkerAdapter();
+      }
+      @Override
       public Adapter caseMarker(Marker object)
       {
         return createMarkerAdapter();
@@ -140,6 +145,46 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createWordAdapter();
       }
       @Override
+      public Adapter caseWordPart(WordPart object)
+      {
+        return createWordPartAdapter();
+      }
+      @Override
+      public Adapter caseWordEnding(WordEnding object)
+      {
+        return createWordEndingAdapter();
+      }
+      @Override
+      public Adapter caseDualEnding(DualEnding object)
+      {
+        return createDualEndingAdapter();
+      }
+      @Override
+      public Adapter caseDualChars(DualChars object)
+      {
+        return createDualCharsAdapter();
+      }
+      @Override
+      public Adapter casePluralChars(PluralChars object)
+      {
+        return createPluralCharsAdapter();
+      }
+      @Override
+      public Adapter casePluralEnding(PluralEnding object)
+      {
+        return createPluralEndingAdapter();
+      }
+      @Override
+      public Adapter caseInterfixFlexionEding(InterfixFlexionEding object)
+      {
+        return createInterfixFlexionEdingAdapter();
+      }
+      @Override
+      public Adapter caseInterfixLexicalEnding(InterfixLexicalEnding object)
+      {
+        return createInterfixLexicalEndingAdapter();
+      }
+      @Override
       public Adapter caseWordMiddle(WordMiddle object)
       {
         return createWordMiddleAdapter();
@@ -148,6 +193,11 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseChars(Chars object)
       {
         return createCharsAdapter();
+      }
+      @Override
+      public Adapter caseSuffixChars(SuffixChars object)
+      {
+        return createSuffixCharsAdapter();
       }
       @Override
       public Adapter caseInterfix(Interfix object)
@@ -180,11 +230,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createInterfixPrefixLexicalAdapter();
       }
       @Override
-      public Adapter caseInterfixCompountWords(InterfixCompountWords object)
-      {
-        return createInterfixCompountWordsAdapter();
-      }
-      @Override
       public Adapter caseInterfixConnectionSyllabicGroup(InterfixConnectionSyllabicGroup object)
       {
         return createInterfixConnectionSyllabicGroupAdapter();
@@ -193,6 +238,11 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBrackets(Brackets object)
       {
         return createBracketsAdapter();
+      }
+      @Override
+      public Adapter caseNoCartouche(NoCartouche object)
+      {
+        return createNoCartoucheAdapter();
       }
       @Override
       public Adapter caseExpanded(Expanded object)
@@ -487,6 +537,21 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker <em>Broken Versbreak Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker
+   * @generated
+   */
+  public Adapter createBrokenVersbreakMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Marker <em>Marker</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -517,6 +582,126 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordPart <em>Word Part</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.WordPart
+   * @generated
+   */
+  public Adapter createWordPartAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordEnding <em>Word Ending</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.WordEnding
+   * @generated
+   */
+  public Adapter createWordEndingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DualEnding <em>Dual Ending</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DualEnding
+   * @generated
+   */
+  public Adapter createDualEndingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DualChars <em>Dual Chars</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DualChars
+   * @generated
+   */
+  public Adapter createDualCharsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PluralChars <em>Plural Chars</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PluralChars
+   * @generated
+   */
+  public Adapter createPluralCharsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PluralEnding <em>Plural Ending</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PluralEnding
+   * @generated
+   */
+  public Adapter createPluralEndingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexionEding <em>Interfix Flexion Eding</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexionEding
+   * @generated
+   */
+  public Adapter createInterfixFlexionEdingAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexicalEnding <em>Interfix Lexical Ending</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexicalEnding
+   * @generated
+   */
+  public Adapter createInterfixLexicalEndingAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle <em>Word Middle</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -542,6 +727,21 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCharsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.SuffixChars <em>Suffix Chars</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.SuffixChars
+   * @generated
+   */
+  public Adapter createSuffixCharsAdapter()
   {
     return null;
   }
@@ -637,21 +837,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixCompountWords <em>Interfix Compount Words</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixCompountWords
-   * @generated
-   */
-  public Adapter createInterfixCompountWordsAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixConnectionSyllabicGroup <em>Interfix Connection Syllabic Group</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -677,6 +862,21 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBracketsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche <em>No Cartouche</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche
+   * @generated
+   */
+  public Adapter createNoCartoucheAdapter()
   {
     return null;
   }

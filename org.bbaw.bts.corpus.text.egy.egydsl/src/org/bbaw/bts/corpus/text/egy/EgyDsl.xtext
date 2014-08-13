@@ -2,9 +2,11 @@ grammar org.bbaw.bts.corpus.text.egy.EgyDsl with org.eclipse.xtext.common.Termin
 
 generate egyDsl "http://www.bbaw.org/bts/corpus/text/egy/EgyDsl"
 
+
+    
 TextContent:
 	{TextContent}
-	(items+=TextItem ((' ' | '\t' | '\n' | '\r')*  (items+=TextItem))*);
+	(items+=TextItem ((' ' | NEWLINE)?  (items+=TextItem))*);
 
 
 TextItem:
@@ -12,24 +14,26 @@ TextItem:
 
 // sentence	
 Sentence:
-	'§' (items+=SentenceItem (' '  items+=SentenceItem)*) '§';
+	'§' (items+=SentenceItem (' ' (NEWLINE)? items+=SentenceItem)*) '§';
 
 SentenceItem:
-	 Word ('\n' | '\t')?| AbstractMarker ('\n' | '\t')? |  Ambivalence ('\n' | '\t')?
+	 Word | AbstractMarker |  Ambivalence
 ;
 
 AbstractMarker:
 	Marker | VersMarker
 ;
-
-
+terminal WS			: (' '|'\t');
+terminal NEWLINE:
+// New line on DOS or Unix 
+    ('\r'|'\n'|'\r\n'|'\t');
 
 Ambivalence:
-	'%' (cases+=Case ('; ' ('\n' | '\t')? cases+=Case)+) '%'
+	'%' (cases+=Case ('; ' (NEWLINE)? cases+=Case)+) '%'
 ;
 
 Case:
-	'case ' name=EGYSTRING ': ' ('\n' | '\t')? (items+=SentenceItemNoAmbivalence (' ' ('\n' | '\t')? items+=SentenceItemNoAmbivalence)*) 
+	'case ' name=EGYSTRING ': ' (NEWLINE)? (items+=SentenceItemNoAmbivalence (' ' (NEWLINE)? items+=SentenceItemNoAmbivalence)*) 
 ;
 
 SentenceItemNoAmbivalence:
@@ -37,33 +41,70 @@ SentenceItemNoAmbivalence:
 ;
 
 VersMarker:
-	VersbreakMarker | VersFrontierMarker
+	VersbreakMarker | VersFrontierMarker |BrokenVersbreakMarker
 ;
 
 VersFrontierMarker:
 	{VersFrontierMarker}
-	'@mv'
+	'\uDB80\uDC81'//'@mv'
 ;
 
 VersbreakMarker:
 	{VersbreakMarker}
-	'@v'
+	'\uDB80\uDC80'//'@v'
+;
+
+BrokenVersbreakMarker:
+	{BrokenVersbreakMarker}
+	'\uDB80\uDC82'//'@v'
 ;
 
 Marker:
-	('#' (type=EGYSTRING (': ' ('\n' | '\t')? name=EGYSTRING)?) '#')
+	('#' (type=EGYSTRING (': ' (NEWLINE)? name=EGYSTRING)?) '#')
 ;
 
 // word
 Word:
 	{Word}
 	
-	( wChar+=WordMiddle)*	
+	( wChar+=WordPart (('-')wChar+=WordPart)*)	
+;
+
+WordPart:
+	('=')? ( wChar+= WordMiddle (wChar+=WordMiddle)* (wChar+=WordEnding)? (wChar+=WordEnding)?)	
+;
+
+WordEnding:
+	(InterfixLexicalEnding | InterfixFlexionEding|PluralEnding|DualEnding) 
+;
+
+DualEnding:
+	interfix=InterfixFlexion chars=DualChars
+;
+
+DualChars:
+	name=DUALSTRING
+;
+
+PluralChars:
+	name=PLURALSTRING
+;
+
+PluralEnding:
+	interfix=InterfixFlexion chars=PluralChars
+;
+
+InterfixFlexionEding:
+	interfix=InterfixFlexion chars=SuffixChars
+;
+
+InterfixLexicalEnding:
+	interfix=InterfixLexical chars=SuffixChars
 ;
 
 WordMiddle:
 //	{WordMiddle}
-	Interfix | Brackets | Chars 
+	Brackets | Chars 
 ;
 
 // Chars...
@@ -71,21 +112,48 @@ Chars:
 	name=EGYSTRING
 ;
 
-terminal EGYSTRING: (!(' '|'\n'|'\t' | '§' | '#'|'%'|';'
-	// interfixes
-	|'.'|','|':'|'-'|'~'|'\u2261'|'\u22ee'
-	// brackets
-	|'('|')'|'<'|'>'|'?'
-	|'{' | '}'
-	|'\u2E22' | '\u2E23'
-	|'@'
+// Chars...
+SuffixChars:
+	name=SUFFIXSTRING
+;
+
+terminal DUALSTRING :('du');
+
+terminal PLURALSTRING :('pl');
+
+
+terminal SUFFIXSTRING : ('Ꜣ'|'j'|'y'|'w'|'n'|'s'|'k'|'t'|'ṯ'|'ı͗'|'ś'|'ı̯͗'|'ï'|'u̯'|'č'|'ṱ'|'a'|'ꜣ')+;
+
+terminal EGYSTRING:('\uA722'|'j'|'y'|'Ꜥ'|'w'|'b'|'p'|'f'|'m'|'n'|'r'|'l'|'h'|'ḥ'|'ḫ'|'ẖ'|'z'|'s'|'š'|'q'|'k'|'g'|'t'|'ṯ'|'d'|'ḏ'|'ʾ'|'ı͗'|'ś'|'ḳ'|'ı̯͗'|'ï'|'u̯'|'č'|'č̣'|'ṭ'|'h̭'|'ṱ'|'a'|'i̭'|'ꜣ'|'J'|'Y'|'ꜥ'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'H'|'Ḥ'|'Ḫ'|'H̱'|'Z'|'S'|'Š'|'Q'|'K'|'G'|'T'|'Ṯ'|'D'|'Ḏ'|'I͗'|'Ś'|'Ḳ'|'Č'|'Č̣'|'Ṭ'|'H̭'|'Ṱ'|'A'|'I'
+// coptic
+//	|  'Ⲁ''|''ⲁ''|''Ⲃ'|'ⲃ'|'Ⲅ'|'ⲅ'|'Ⲇ'|'ⲇ'|'Ⲉ'|'ⲉ'|'Ⲋ'|'ⲋ'|'Ⲍ'|'ⲍ'|'Ⲏ'|'ⲏ'|'Ⲑ'|'ⲑ'|'Ⲓ'|'ⲓ'|'Ⲕ'|'ⲕ'|'Ⲗ'|'ⲗ'|'Ⲙ'|'ⲙ'|'Ⲛ'|'ⲛ'|'Ⲝ'|'ⲝ'|'Ⲟ'|'ⲟ'|'Ⲡ'|'ⲡ'|'Ⲣ'|'ⲣ'|'Ⲥ'|'ⲥ'|'Ⲧ'|'ⲧ'|'Ⲩ'|'ⲩ'|'Ⲫ'|'ⲫ'|'Ⲭ'|'ⲭ'|'Ⲯ'|'ⲯ'|'Ⲱ'|'ⲱ'|'Ⲳ'|'ⲳ'|'Ⲵ'|'ⲵ'|'Ⲷ'|'ⲷ'|'Ⲹ'|'ⲹ'|'Ⲻ'|'ⲻ'|'Ⲽ'|'ⲽ'|'Ⲿ'|'ⲿ'|'Ⳁ'|'ⳁ'|'Ⳃ'|'ⳃ'|'Ⳅ'|'ⳅ'|'Ⳇ'|'ⳇ'|'Ⳉ'|'ⳉ'|'Ⳋ'|'ⳋ'|'Ⳍ'|'ⳍ'|'Ⳏ'|'ⳏ'|'Ⳑ'|'ⳑ'|'Ⳓ'|'ⳓ'|'Ⳕ'|'ⳕ'|'Ⳗ'|'ⳗ'|'Ⳙ'|'ⳙ'|'Ⳛ'|'ⳛ'|'Ⳝ'|'ⳝ'|'Ⳟ'|'ⳟ'|'Ⳡ'|'ⳡ'|'Ⳣ'|'ⳣ'|'ⳤ'|'⳥'|'⳦'|'⳧'|'⳨'|'⳩'|'⳪'|'Ⳬ'|'ⳬ'|'Ⳮ'|'ⳮ'|'⳯'|'⳰'|'⳱'|'Ⳳ'|'ⳳ'|'⳴'|'⳵'|'⳶'|'⳷'|'⳸'|'⳹'|'⳺'|'⳻'|'⳼'|'⳽'|'⳾'|'⳿'|'Ϡ'|'ϡ'|'Ϣ'|'ϣ'|'Ϥ'|'ϥ'|'Ϧ'|'ϧ'|'Ϩ'|'ϩ'|'Ϫ'|'ϫ'|'Ϭ'|'ϭ'|'Ϯ'|'ϯ'
+	|'\u2C80'..'\u2CFF'
+	//oval
+	| '\uD80C\uDE86' |'\uD80C\uDE87'
 	
-))*;
+	//cartouche
+	|'\uD80C\uDF79' |'\uD80C\uDF7A'
+	
+	//serech
+	|'\uD80C\uDE58' | '\uD80C\uDE82'
+)+;
+
+//terminal EGYSTRING: (!(' '|'\n'|'\t'|'\r'| '§' | '#'|'%'|';'
+//	// interfixes
+//	|'.'|','|':'|'-'|'~'|'\u2261'|'\u22ee'
+//	// brackets
+//	|'('|')'|'<'|'>'|'?'
+//	|'{' | '}'
+//	|'\u2E22' | '\u2E23'
+//	|'@'
+//	
+//))+;
 
 // textual criticism interfixes
 Interfix:
-	InterfixFlexion | InterfixLexical | InterfixSuffixPronomLexical |InterfixPrefixNonLexical |InterfixPrefixLexical
-	| InterfixCompountWords | InterfixConnectionSyllabicGroup
+//	InterfixFlexion | InterfixLexical |
+	 InterfixSuffixPronomLexical |InterfixPrefixNonLexical |InterfixPrefixLexical
+	 | InterfixConnectionSyllabicGroup
 ;
 
 InterfixLexical:
@@ -113,10 +181,10 @@ InterfixPrefixLexical:
 	'\u22ee'
 ;
 
-InterfixCompountWords:
-	{InterfixCompountWords}
-	'-'
-;
+//InterfixCompountWords:
+//	{InterfixCompountWords}
+//	'-'
+//;
 
 InterfixConnectionSyllabicGroup:
 	{InterfixConnectionSyllabicGroup}
@@ -128,6 +196,29 @@ Brackets:
 	Rasur | AncientExpanded | RestorationOverRasur |
 	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | ExpandedColumn  
 	| PartialDestruction | Destruction
+	// | Cartouche | Serech 
+	//|Oval
+;
+
+//Cartouche:
+//	{Expanded}
+//	'\uD80C\uDF79' wChar+=NoCartouche+ '\uD80C\uDF7A' //'\uD80C\uDF7A'
+//;
+//
+//Serech:
+//	{Serech}
+//	'\uD80C\uDE58' wChar+=Chars+ '\uD80C\uDE82' //'\uD80C\uDE82'
+//;
+
+//Oval:
+//	{Oval}
+//	'\uD80C\uDE86' wChar+=Chars+ '\uD80C\uDE86' //\uD80C\uDE87
+//;
+
+NoCartouche:
+	Interfix | Rasur | AncientExpanded | RestorationOverRasur |
+	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | ExpandedColumn  
+	| PartialDestruction | Destruction | Chars
 ;
 
 Expanded:
@@ -150,7 +241,7 @@ NoEmendation:
 
 DisputableReading:
 	{DisputableReading}
-	'?' wChar+=NoDisputableReading+ '?'
+	'\u2E2E' wChar+=NoDisputableReading+ '?'
 ;
 
 NoDisputableReading:
@@ -224,4 +315,3 @@ Destruction:
 	{Destruction}
 	'--' comment=EGYSTRING '--'
 ;
-

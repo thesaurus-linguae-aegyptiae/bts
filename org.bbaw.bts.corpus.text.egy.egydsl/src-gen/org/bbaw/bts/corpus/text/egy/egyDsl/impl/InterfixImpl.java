@@ -16,7 +16,7 @@ import org.eclipse.emf.ecore.EClass;
  *
  * @generated
  */
-public class InterfixImpl extends WordMiddleImpl implements Interfix
+public class InterfixImpl extends NoCartoucheImpl implements Interfix
 {
   /**
    * <!-- begin-user-doc -->

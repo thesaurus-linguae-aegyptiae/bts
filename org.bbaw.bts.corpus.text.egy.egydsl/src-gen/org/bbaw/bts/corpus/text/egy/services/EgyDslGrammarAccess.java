@@ -28,23 +28,21 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Alternatives cAlternatives_1_1_0 = (Alternatives)cGroup_1_1.eContents().get(0);
 		private final Keyword cSpaceKeyword_1_1_0_0 = (Keyword)cAlternatives_1_1_0.eContents().get(0);
-		private final Keyword cControl0009Keyword_1_1_0_1 = (Keyword)cAlternatives_1_1_0.eContents().get(1);
-		private final Keyword cControl000aKeyword_1_1_0_2 = (Keyword)cAlternatives_1_1_0.eContents().get(2);
-		private final Keyword cControl000dKeyword_1_1_0_3 = (Keyword)cAlternatives_1_1_0.eContents().get(3);
+		private final RuleCall cNEWLINETerminalRuleCall_1_1_0_1 = (RuleCall)cAlternatives_1_1_0.eContents().get(1);
 		private final Assignment cItemsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
 		private final RuleCall cItemsTextItemParserRuleCall_1_1_1_0 = (RuleCall)cItemsAssignment_1_1_1.eContents().get(0);
 		
 		//TextContent:
-		//	{TextContent} (items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*);
+		//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*);
 		public ParserRule getRule() { return rule; }
 
-		//{TextContent} (items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*)
+		//{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)
 		public Group getGroup() { return cGroup; }
 
 		//{TextContent}
 		public Action getTextContentAction_0() { return cTextContentAction_0; }
 
-		//items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*
+		//items+=TextItem ((" " | NEWLINE)? items+=TextItem)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//items+=TextItem
@@ -53,23 +51,17 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//TextItem
 		public RuleCall getItemsTextItemParserRuleCall_1_0_0() { return cItemsTextItemParserRuleCall_1_0_0; }
 
-		//((" " | "\t" | "\n" | "\r")* items+=TextItem)*
+		//((" " | NEWLINE)? items+=TextItem)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
-		//(" " | "\t" | "\n" | "\r")*
+		//(" " | NEWLINE)?
 		public Alternatives getAlternatives_1_1_0() { return cAlternatives_1_1_0; }
 
 		//" "
 		public Keyword getSpaceKeyword_1_1_0_0() { return cSpaceKeyword_1_1_0_0; }
 
-		//"\t"
-		public Keyword getControl0009Keyword_1_1_0_1() { return cControl0009Keyword_1_1_0_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_1_1_0_2() { return cControl000aKeyword_1_1_0_2; }
-
-		//"\r"
-		public Keyword getControl000dKeyword_1_1_0_3() { return cControl000dKeyword_1_1_0_3; }
+		//NEWLINE
+		public RuleCall getNEWLINETerminalRuleCall_1_1_0_1() { return cNEWLINETerminalRuleCall_1_1_0_1; }
 
 		//items+=TextItem
 		public Assignment getItemsAssignment_1_1_1() { return cItemsAssignment_1_1_1; }
@@ -99,22 +91,23 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cItemsSentenceItemParserRuleCall_1_0_0 = (RuleCall)cItemsAssignment_1_0.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cSpaceKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cItemsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cItemsSentenceItemParserRuleCall_1_1_1_0 = (RuleCall)cItemsAssignment_1_1_1.eContents().get(0);
+		private final RuleCall cNEWLINETerminalRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
+		private final Assignment cItemsAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cItemsSentenceItemParserRuleCall_1_1_2_0 = (RuleCall)cItemsAssignment_1_1_2.eContents().get(0);
 		private final Keyword cSectionSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//// sentence	
 		//Sentence:
-		//	"§" (items+=SentenceItem (" " items+=SentenceItem)*) "§";
+		//	"§" (items+=SentenceItem (" " NEWLINE? items+=SentenceItem)*) "§";
 		public ParserRule getRule() { return rule; }
 
-		//"§" (items+=SentenceItem (" " items+=SentenceItem)*) "§"
+		//"§" (items+=SentenceItem (" " NEWLINE? items+=SentenceItem)*) "§"
 		public Group getGroup() { return cGroup; }
 
 		//"§"
 		public Keyword getSectionSignKeyword_0() { return cSectionSignKeyword_0; }
 
-		//items+=SentenceItem (" " items+=SentenceItem)*
+		//items+=SentenceItem (" " NEWLINE? items+=SentenceItem)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//items+=SentenceItem
@@ -123,17 +116,20 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//SentenceItem
 		public RuleCall getItemsSentenceItemParserRuleCall_1_0_0() { return cItemsSentenceItemParserRuleCall_1_0_0; }
 
-		//(" " items+=SentenceItem)*
+		//(" " NEWLINE? items+=SentenceItem)*
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//" "
 		public Keyword getSpaceKeyword_1_1_0() { return cSpaceKeyword_1_1_0; }
 
+		//NEWLINE?
+		public RuleCall getNEWLINETerminalRuleCall_1_1_1() { return cNEWLINETerminalRuleCall_1_1_1; }
+
 		//items+=SentenceItem
-		public Assignment getItemsAssignment_1_1_1() { return cItemsAssignment_1_1_1; }
+		public Assignment getItemsAssignment_1_1_2() { return cItemsAssignment_1_1_2; }
 
 		//SentenceItem
-		public RuleCall getItemsSentenceItemParserRuleCall_1_1_1_0() { return cItemsSentenceItemParserRuleCall_1_1_1_0; }
+		public RuleCall getItemsSentenceItemParserRuleCall_1_1_2_0() { return cItemsSentenceItemParserRuleCall_1_1_2_0; }
 
 		//"§"
 		public Keyword getSectionSignKeyword_2() { return cSectionSignKeyword_2; }
@@ -142,73 +138,25 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	public class SentenceItemElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SentenceItem");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final Group cGroup_0 = (Group)cAlternatives.eContents().get(0);
-		private final RuleCall cWordParserRuleCall_0_0 = (RuleCall)cGroup_0.eContents().get(0);
-		private final Alternatives cAlternatives_0_1 = (Alternatives)cGroup_0.eContents().get(1);
-		private final Keyword cControl000aKeyword_0_1_0 = (Keyword)cAlternatives_0_1.eContents().get(0);
-		private final Keyword cControl0009Keyword_0_1_1 = (Keyword)cAlternatives_0_1.eContents().get(1);
-		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
-		private final RuleCall cAbstractMarkerParserRuleCall_1_0 = (RuleCall)cGroup_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1 = (Alternatives)cGroup_1.eContents().get(1);
-		private final Keyword cControl000aKeyword_1_1_0 = (Keyword)cAlternatives_1_1.eContents().get(0);
-		private final Keyword cControl0009Keyword_1_1_1 = (Keyword)cAlternatives_1_1.eContents().get(1);
-		private final Group cGroup_2 = (Group)cAlternatives.eContents().get(2);
-		private final RuleCall cAmbivalenceParserRuleCall_2_0 = (RuleCall)cGroup_2.eContents().get(0);
-		private final Alternatives cAlternatives_2_1 = (Alternatives)cGroup_2.eContents().get(1);
-		private final Keyword cControl000aKeyword_2_1_0 = (Keyword)cAlternatives_2_1.eContents().get(0);
-		private final Keyword cControl0009Keyword_2_1_1 = (Keyword)cAlternatives_2_1.eContents().get(1);
+		private final RuleCall cWordParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cAbstractMarkerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cAmbivalenceParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//SentenceItem:
-		//	Word ("\n" | "\t")? | AbstractMarker ("\n" | "\t")? | Ambivalence ("\n" | "\t")?;
+		//	Word | AbstractMarker | Ambivalence;
 		public ParserRule getRule() { return rule; }
 
-		//Word ("\n" | "\t")? | AbstractMarker ("\n" | "\t")? | Ambivalence ("\n" | "\t")?
+		//Word | AbstractMarker | Ambivalence
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//Word ("\n" | "\t")?
-		public Group getGroup_0() { return cGroup_0; }
-
 		//Word
-		public RuleCall getWordParserRuleCall_0_0() { return cWordParserRuleCall_0_0; }
-
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_0_1() { return cAlternatives_0_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_0_1_0() { return cControl000aKeyword_0_1_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_0_1_1() { return cControl0009Keyword_0_1_1; }
-
-		//AbstractMarker ("\n" | "\t")?
-		public Group getGroup_1() { return cGroup_1; }
+		public RuleCall getWordParserRuleCall_0() { return cWordParserRuleCall_0; }
 
 		//AbstractMarker
-		public RuleCall getAbstractMarkerParserRuleCall_1_0() { return cAbstractMarkerParserRuleCall_1_0; }
-
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_1_1() { return cAlternatives_1_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_1_1_0() { return cControl000aKeyword_1_1_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_1_1_1() { return cControl0009Keyword_1_1_1; }
-
-		//Ambivalence ("\n" | "\t")?
-		public Group getGroup_2() { return cGroup_2; }
+		public RuleCall getAbstractMarkerParserRuleCall_1() { return cAbstractMarkerParserRuleCall_1; }
 
 		//Ambivalence
-		public RuleCall getAmbivalenceParserRuleCall_2_0() { return cAmbivalenceParserRuleCall_2_0; }
-
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_2_1() { return cAlternatives_2_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_2_1_0() { return cControl000aKeyword_2_1_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_2_1_1() { return cControl0009Keyword_2_1_1; }
+		public RuleCall getAmbivalenceParserRuleCall_2() { return cAmbivalenceParserRuleCall_2; }
 	}
 
 	public class AbstractMarkerElements extends AbstractParserRuleElementFinder {
@@ -240,24 +188,22 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCasesCaseParserRuleCall_1_0_0 = (RuleCall)cCasesAssignment_1_0.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cSemicolonSpaceKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1_1 = (Alternatives)cGroup_1_1.eContents().get(1);
-		private final Keyword cControl000aKeyword_1_1_1_0 = (Keyword)cAlternatives_1_1_1.eContents().get(0);
-		private final Keyword cControl0009Keyword_1_1_1_1 = (Keyword)cAlternatives_1_1_1.eContents().get(1);
+		private final RuleCall cNEWLINETerminalRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
 		private final Assignment cCasesAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
 		private final RuleCall cCasesCaseParserRuleCall_1_1_2_0 = (RuleCall)cCasesAssignment_1_1_2.eContents().get(0);
 		private final Keyword cPercentSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Ambivalence:
-		//	"%" (cases+=Case ("; " ("\n" | "\t")? cases+=Case)+) "%";
+		//	"%" (cases+=Case ("; " NEWLINE? cases+=Case)+) "%";
 		public ParserRule getRule() { return rule; }
 
-		//"%" (cases+=Case ("; " ("\n" | "\t")? cases+=Case)+) "%"
+		//"%" (cases+=Case ("; " NEWLINE? cases+=Case)+) "%"
 		public Group getGroup() { return cGroup; }
 
 		//"%"
 		public Keyword getPercentSignKeyword_0() { return cPercentSignKeyword_0; }
 
-		//cases+=Case ("; " ("\n" | "\t")? cases+=Case)+
+		//cases+=Case ("; " NEWLINE? cases+=Case)+
 		public Group getGroup_1() { return cGroup_1; }
 
 		//cases+=Case
@@ -266,20 +212,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//Case
 		public RuleCall getCasesCaseParserRuleCall_1_0_0() { return cCasesCaseParserRuleCall_1_0_0; }
 
-		//("; " ("\n" | "\t")? cases+=Case)+
+		//("; " NEWLINE? cases+=Case)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"; "
 		public Keyword getSemicolonSpaceKeyword_1_1_0() { return cSemicolonSpaceKeyword_1_1_0; }
 
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_1_1_1() { return cAlternatives_1_1_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_1_1_1_0() { return cControl000aKeyword_1_1_1_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_1_1_1_1() { return cControl0009Keyword_1_1_1_1; }
+		//NEWLINE?
+		public RuleCall getNEWLINETerminalRuleCall_1_1_1() { return cNEWLINETerminalRuleCall_1_1_1; }
 
 		//cases+=Case
 		public Assignment getCasesAssignment_1_1_2() { return cCasesAssignment_1_1_2; }
@@ -298,27 +238,22 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cNameEGYSTRINGTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Keyword cColonSpaceKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
-		private final Keyword cControl000aKeyword_3_0 = (Keyword)cAlternatives_3.eContents().get(0);
-		private final Keyword cControl0009Keyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
+		private final RuleCall cNEWLINETerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
 		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
 		private final Assignment cItemsAssignment_4_0 = (Assignment)cGroup_4.eContents().get(0);
 		private final RuleCall cItemsSentenceItemNoAmbivalenceParserRuleCall_4_0_0 = (RuleCall)cItemsAssignment_4_0.eContents().get(0);
 		private final Group cGroup_4_1 = (Group)cGroup_4.eContents().get(1);
 		private final Keyword cSpaceKeyword_4_1_0 = (Keyword)cGroup_4_1.eContents().get(0);
-		private final Alternatives cAlternatives_4_1_1 = (Alternatives)cGroup_4_1.eContents().get(1);
-		private final Keyword cControl000aKeyword_4_1_1_0 = (Keyword)cAlternatives_4_1_1.eContents().get(0);
-		private final Keyword cControl0009Keyword_4_1_1_1 = (Keyword)cAlternatives_4_1_1.eContents().get(1);
+		private final RuleCall cNEWLINETerminalRuleCall_4_1_1 = (RuleCall)cGroup_4_1.eContents().get(1);
 		private final Assignment cItemsAssignment_4_1_2 = (Assignment)cGroup_4_1.eContents().get(2);
 		private final RuleCall cItemsSentenceItemNoAmbivalenceParserRuleCall_4_1_2_0 = (RuleCall)cItemsAssignment_4_1_2.eContents().get(0);
 		
 		//Case:
-		//	"case " name=EGYSTRING ": " ("\n" | "\t")? (items+=SentenceItemNoAmbivalence (" " ("\n" | "\t")?
+		//	"case " name=EGYSTRING ": " NEWLINE? (items+=SentenceItemNoAmbivalence (" " NEWLINE?
 		//	items+=SentenceItemNoAmbivalence)*);
 		public ParserRule getRule() { return rule; }
 
-		//"case " name=EGYSTRING ": " ("\n" | "\t")? (items+=SentenceItemNoAmbivalence (" " ("\n" | "\t")?
-		//items+=SentenceItemNoAmbivalence)*)
+		//"case " name=EGYSTRING ": " NEWLINE? (items+=SentenceItemNoAmbivalence (" " NEWLINE? items+=SentenceItemNoAmbivalence)*)
 		public Group getGroup() { return cGroup; }
 
 		//"case "
@@ -333,16 +268,10 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//": "
 		public Keyword getColonSpaceKeyword_2() { return cColonSpaceKeyword_2; }
 
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+		//NEWLINE?
+		public RuleCall getNEWLINETerminalRuleCall_3() { return cNEWLINETerminalRuleCall_3; }
 
-		//"\n"
-		public Keyword getControl000aKeyword_3_0() { return cControl000aKeyword_3_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_3_1() { return cControl0009Keyword_3_1; }
-
-		//items+=SentenceItemNoAmbivalence (" " ("\n" | "\t")? items+=SentenceItemNoAmbivalence)*
+		//items+=SentenceItemNoAmbivalence (" " NEWLINE? items+=SentenceItemNoAmbivalence)*
 		public Group getGroup_4() { return cGroup_4; }
 
 		//items+=SentenceItemNoAmbivalence
@@ -351,20 +280,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//SentenceItemNoAmbivalence
 		public RuleCall getItemsSentenceItemNoAmbivalenceParserRuleCall_4_0_0() { return cItemsSentenceItemNoAmbivalenceParserRuleCall_4_0_0; }
 
-		//(" " ("\n" | "\t")? items+=SentenceItemNoAmbivalence)*
+		//(" " NEWLINE? items+=SentenceItemNoAmbivalence)*
 		public Group getGroup_4_1() { return cGroup_4_1; }
 
 		//" "
 		public Keyword getSpaceKeyword_4_1_0() { return cSpaceKeyword_4_1_0; }
 
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_4_1_1() { return cAlternatives_4_1_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_4_1_1_0() { return cControl000aKeyword_4_1_1_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_4_1_1_1() { return cControl0009Keyword_4_1_1_1; }
+		//NEWLINE?
+		public RuleCall getNEWLINETerminalRuleCall_4_1_1() { return cNEWLINETerminalRuleCall_4_1_1; }
 
 		//items+=SentenceItemNoAmbivalence
 		public Assignment getItemsAssignment_4_1_2() { return cItemsAssignment_4_1_2; }
@@ -398,12 +321,13 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cVersbreakMarkerParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cVersFrontierMarkerParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cBrokenVersbreakMarkerParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//VersMarker:
-		//	VersbreakMarker | VersFrontierMarker;
+		//	VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker;
 		public ParserRule getRule() { return rule; }
 
-		//VersbreakMarker | VersFrontierMarker
+		//VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//VersbreakMarker
@@ -411,46 +335,78 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//VersFrontierMarker
 		public RuleCall getVersFrontierMarkerParserRuleCall_1() { return cVersFrontierMarkerParserRuleCall_1; }
+
+		//BrokenVersbreakMarker
+		public RuleCall getBrokenVersbreakMarkerParserRuleCall_2() { return cBrokenVersbreakMarkerParserRuleCall_2; }
 	}
 
 	public class VersFrontierMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VersFrontierMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVersFrontierMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cMvKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeadSurrogateDb80TrailSurrogateDc81Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//VersFrontierMarker:
-		//	{VersFrontierMarker} "@mv";
+		//	{VersFrontierMarker} //'@mv'
+		//	"󰂁";
 		public ParserRule getRule() { return rule; }
 
-		//{VersFrontierMarker} "@mv"
+		//{VersFrontierMarker} //'@mv'
+		//"󰂁"
 		public Group getGroup() { return cGroup; }
 
 		//{VersFrontierMarker}
 		public Action getVersFrontierMarkerAction_0() { return cVersFrontierMarkerAction_0; }
 
-		//"@mv"
-		public Keyword getMvKeyword_1() { return cMvKeyword_1; }
+		////'@mv'
+		//"󰂁"
+		public Keyword getLeadSurrogateDb80TrailSurrogateDc81Keyword_1() { return cLeadSurrogateDb80TrailSurrogateDc81Keyword_1; }
 	}
 
 	public class VersbreakMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VersbreakMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVersbreakMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cVKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeadSurrogateDb80TrailSurrogateDc80Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
 		//VersbreakMarker:
-		//	{VersbreakMarker} "@v";
+		//	{VersbreakMarker} //'@v'
+		//	"󰂀";
 		public ParserRule getRule() { return rule; }
 
-		//{VersbreakMarker} "@v"
+		//{VersbreakMarker} //'@v'
+		//"󰂀"
 		public Group getGroup() { return cGroup; }
 
 		//{VersbreakMarker}
 		public Action getVersbreakMarkerAction_0() { return cVersbreakMarkerAction_0; }
 
-		//"@v"
-		public Keyword getVKeyword_1() { return cVKeyword_1; }
+		////'@v'
+		//"󰂀"
+		public Keyword getLeadSurrogateDb80TrailSurrogateDc80Keyword_1() { return cLeadSurrogateDb80TrailSurrogateDc80Keyword_1; }
+	}
+
+	public class BrokenVersbreakMarkerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "BrokenVersbreakMarker");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cBrokenVersbreakMarkerAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeadSurrogateDb80TrailSurrogateDc82Keyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//BrokenVersbreakMarker:
+		//	{BrokenVersbreakMarker} //'@v'
+		//	"󰂂";
+		public ParserRule getRule() { return rule; }
+
+		//{BrokenVersbreakMarker} //'@v'
+		//"󰂂"
+		public Group getGroup() { return cGroup; }
+
+		//{BrokenVersbreakMarker}
+		public Action getBrokenVersbreakMarkerAction_0() { return cBrokenVersbreakMarkerAction_0; }
+
+		////'@v'
+		//"󰂂"
+		public Keyword getLeadSurrogateDb80TrailSurrogateDc82Keyword_1() { return cLeadSurrogateDb80TrailSurrogateDc82Keyword_1; }
 	}
 
 	public class MarkerElements extends AbstractParserRuleElementFinder {
@@ -462,24 +418,22 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cTypeEGYSTRINGTerminalRuleCall_1_0_0 = (RuleCall)cTypeAssignment_1_0.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cColonSpaceKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Alternatives cAlternatives_1_1_1 = (Alternatives)cGroup_1_1.eContents().get(1);
-		private final Keyword cControl000aKeyword_1_1_1_0 = (Keyword)cAlternatives_1_1_1.eContents().get(0);
-		private final Keyword cControl0009Keyword_1_1_1_1 = (Keyword)cAlternatives_1_1_1.eContents().get(1);
+		private final RuleCall cNEWLINETerminalRuleCall_1_1_1 = (RuleCall)cGroup_1_1.eContents().get(1);
 		private final Assignment cNameAssignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
 		private final RuleCall cNameEGYSTRINGTerminalRuleCall_1_1_2_0 = (RuleCall)cNameAssignment_1_1_2.eContents().get(0);
 		private final Keyword cNumberSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//Marker:
-		//	"#" (type=EGYSTRING (": " ("\n" | "\t")? name=EGYSTRING)?) "#";
+		//	"#" (type=EGYSTRING (": " NEWLINE? name=EGYSTRING)?) "#";
 		public ParserRule getRule() { return rule; }
 
-		//"#" (type=EGYSTRING (": " ("\n" | "\t")? name=EGYSTRING)?) "#"
+		//"#" (type=EGYSTRING (": " NEWLINE? name=EGYSTRING)?) "#"
 		public Group getGroup() { return cGroup; }
 
 		//"#"
 		public Keyword getNumberSignKeyword_0() { return cNumberSignKeyword_0; }
 
-		//type=EGYSTRING (": " ("\n" | "\t")? name=EGYSTRING)?
+		//type=EGYSTRING (": " NEWLINE? name=EGYSTRING)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//type=EGYSTRING
@@ -488,20 +442,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//EGYSTRING
 		public RuleCall getTypeEGYSTRINGTerminalRuleCall_1_0_0() { return cTypeEGYSTRINGTerminalRuleCall_1_0_0; }
 
-		//(": " ("\n" | "\t")? name=EGYSTRING)?
+		//(": " NEWLINE? name=EGYSTRING)?
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//": "
 		public Keyword getColonSpaceKeyword_1_1_0() { return cColonSpaceKeyword_1_1_0; }
 
-		//("\n" | "\t")?
-		public Alternatives getAlternatives_1_1_1() { return cAlternatives_1_1_1; }
-
-		//"\n"
-		public Keyword getControl000aKeyword_1_1_1_0() { return cControl000aKeyword_1_1_1_0; }
-
-		//"\t"
-		public Keyword getControl0009Keyword_1_1_1_1() { return cControl0009Keyword_1_1_1_1; }
+		//NEWLINE?
+		public RuleCall getNEWLINETerminalRuleCall_1_1_1() { return cNEWLINETerminalRuleCall_1_1_1; }
 
 		//name=EGYSTRING
 		public Assignment getNameAssignment_1_1_2() { return cNameAssignment_1_1_2; }
@@ -517,51 +465,291 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Word");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cWordAction_0 = (Action)cGroup.eContents().get(0);
-		private final Assignment cWCharAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cWCharWordMiddleParserRuleCall_1_0 = (RuleCall)cWCharAssignment_1.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cWCharAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cWCharWordPartParserRuleCall_1_0_0 = (RuleCall)cWCharAssignment_1_0.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cWCharAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cWCharWordPartParserRuleCall_1_1_1_0 = (RuleCall)cWCharAssignment_1_1_1.eContents().get(0);
 		
 		//// word
 		//Word:
-		//	{Word} wChar+=WordMiddle*;
+		//	{Word} (wChar+=WordPart ("-" wChar+=WordPart)*);
 		public ParserRule getRule() { return rule; }
 
-		//{Word} wChar+=WordMiddle*
+		//{Word} (wChar+=WordPart ("-" wChar+=WordPart)*)
 		public Group getGroup() { return cGroup; }
 
 		//{Word}
 		public Action getWordAction_0() { return cWordAction_0; }
 
-		//wChar+=WordMiddle*
-		public Assignment getWCharAssignment_1() { return cWCharAssignment_1; }
+		//wChar+=WordPart ("-" wChar+=WordPart)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//wChar+=WordPart
+		public Assignment getWCharAssignment_1_0() { return cWCharAssignment_1_0; }
+
+		//WordPart
+		public RuleCall getWCharWordPartParserRuleCall_1_0_0() { return cWCharWordPartParserRuleCall_1_0_0; }
+
+		//("-" wChar+=WordPart)*
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"-"
+		public Keyword getHyphenMinusKeyword_1_1_0() { return cHyphenMinusKeyword_1_1_0; }
+
+		//wChar+=WordPart
+		public Assignment getWCharAssignment_1_1_1() { return cWCharAssignment_1_1_1; }
+
+		//WordPart
+		public RuleCall getWCharWordPartParserRuleCall_1_1_1_0() { return cWCharWordPartParserRuleCall_1_1_1_0; }
+	}
+
+	public class WordPartElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WordPart");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cWCharAssignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cWCharWordMiddleParserRuleCall_1_0_0 = (RuleCall)cWCharAssignment_1_0.eContents().get(0);
+		private final Assignment cWCharAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cWCharWordMiddleParserRuleCall_1_1_0 = (RuleCall)cWCharAssignment_1_1.eContents().get(0);
+		private final Assignment cWCharAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cWCharWordEndingParserRuleCall_1_2_0 = (RuleCall)cWCharAssignment_1_2.eContents().get(0);
+		private final Assignment cWCharAssignment_1_3 = (Assignment)cGroup_1.eContents().get(3);
+		private final RuleCall cWCharWordEndingParserRuleCall_1_3_0 = (RuleCall)cWCharAssignment_1_3.eContents().get(0);
+		
+		//WordPart:
+		//	"="? (wChar+=WordMiddle wChar+=WordMiddle* wChar+=WordEnding? wChar+=WordEnding?);
+		public ParserRule getRule() { return rule; }
+
+		//"="? (wChar+=WordMiddle wChar+=WordMiddle* wChar+=WordEnding? wChar+=WordEnding?)
+		public Group getGroup() { return cGroup; }
+
+		//"="?
+		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
+
+		//wChar+=WordMiddle wChar+=WordMiddle* wChar+=WordEnding? wChar+=WordEnding?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//wChar+=WordMiddle
+		public Assignment getWCharAssignment_1_0() { return cWCharAssignment_1_0; }
 
 		//WordMiddle
-		public RuleCall getWCharWordMiddleParserRuleCall_1_0() { return cWCharWordMiddleParserRuleCall_1_0; }
+		public RuleCall getWCharWordMiddleParserRuleCall_1_0_0() { return cWCharWordMiddleParserRuleCall_1_0_0; }
+
+		//wChar+=WordMiddle*
+		public Assignment getWCharAssignment_1_1() { return cWCharAssignment_1_1; }
+
+		//WordMiddle
+		public RuleCall getWCharWordMiddleParserRuleCall_1_1_0() { return cWCharWordMiddleParserRuleCall_1_1_0; }
+
+		//wChar+=WordEnding?
+		public Assignment getWCharAssignment_1_2() { return cWCharAssignment_1_2; }
+
+		//WordEnding
+		public RuleCall getWCharWordEndingParserRuleCall_1_2_0() { return cWCharWordEndingParserRuleCall_1_2_0; }
+
+		//wChar+=WordEnding?
+		public Assignment getWCharAssignment_1_3() { return cWCharAssignment_1_3; }
+
+		//WordEnding
+		public RuleCall getWCharWordEndingParserRuleCall_1_3_0() { return cWCharWordEndingParserRuleCall_1_3_0; }
+	}
+
+	public class WordEndingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WordEnding");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cInterfixLexicalEndingParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cInterfixFlexionEdingParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cPluralEndingParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cDualEndingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		
+		//WordEnding:
+		//	InterfixLexicalEnding | InterfixFlexionEding | PluralEnding | DualEnding;
+		public ParserRule getRule() { return rule; }
+
+		//InterfixLexicalEnding | InterfixFlexionEding | PluralEnding | DualEnding
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//InterfixLexicalEnding
+		public RuleCall getInterfixLexicalEndingParserRuleCall_0() { return cInterfixLexicalEndingParserRuleCall_0; }
+
+		//InterfixFlexionEding
+		public RuleCall getInterfixFlexionEdingParserRuleCall_1() { return cInterfixFlexionEdingParserRuleCall_1; }
+
+		//PluralEnding
+		public RuleCall getPluralEndingParserRuleCall_2() { return cPluralEndingParserRuleCall_2; }
+
+		//DualEnding
+		public RuleCall getDualEndingParserRuleCall_3() { return cDualEndingParserRuleCall_3; }
+	}
+
+	public class DualEndingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DualEnding");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cInterfixAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cInterfixInterfixFlexionParserRuleCall_0_0 = (RuleCall)cInterfixAssignment_0.eContents().get(0);
+		private final Assignment cCharsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cCharsDualCharsParserRuleCall_1_0 = (RuleCall)cCharsAssignment_1.eContents().get(0);
+		
+		//DualEnding:
+		//	interfix=InterfixFlexion chars=DualChars;
+		public ParserRule getRule() { return rule; }
+
+		//interfix=InterfixFlexion chars=DualChars
+		public Group getGroup() { return cGroup; }
+
+		//interfix=InterfixFlexion
+		public Assignment getInterfixAssignment_0() { return cInterfixAssignment_0; }
+
+		//InterfixFlexion
+		public RuleCall getInterfixInterfixFlexionParserRuleCall_0_0() { return cInterfixInterfixFlexionParserRuleCall_0_0; }
+
+		//chars=DualChars
+		public Assignment getCharsAssignment_1() { return cCharsAssignment_1; }
+
+		//DualChars
+		public RuleCall getCharsDualCharsParserRuleCall_1_0() { return cCharsDualCharsParserRuleCall_1_0; }
+	}
+
+	public class DualCharsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DualChars");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameDUALSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//DualChars:
+		//	name=DUALSTRING;
+		public ParserRule getRule() { return rule; }
+
+		//name=DUALSTRING
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//DUALSTRING
+		public RuleCall getNameDUALSTRINGTerminalRuleCall_0() { return cNameDUALSTRINGTerminalRuleCall_0; }
+	}
+
+	public class PluralCharsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PluralChars");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNamePLURALSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//PluralChars:
+		//	name=PLURALSTRING;
+		public ParserRule getRule() { return rule; }
+
+		//name=PLURALSTRING
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//PLURALSTRING
+		public RuleCall getNamePLURALSTRINGTerminalRuleCall_0() { return cNamePLURALSTRINGTerminalRuleCall_0; }
+	}
+
+	public class PluralEndingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PluralEnding");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cInterfixAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cInterfixInterfixFlexionParserRuleCall_0_0 = (RuleCall)cInterfixAssignment_0.eContents().get(0);
+		private final Assignment cCharsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cCharsPluralCharsParserRuleCall_1_0 = (RuleCall)cCharsAssignment_1.eContents().get(0);
+		
+		//PluralEnding:
+		//	interfix=InterfixFlexion chars=PluralChars;
+		public ParserRule getRule() { return rule; }
+
+		//interfix=InterfixFlexion chars=PluralChars
+		public Group getGroup() { return cGroup; }
+
+		//interfix=InterfixFlexion
+		public Assignment getInterfixAssignment_0() { return cInterfixAssignment_0; }
+
+		//InterfixFlexion
+		public RuleCall getInterfixInterfixFlexionParserRuleCall_0_0() { return cInterfixInterfixFlexionParserRuleCall_0_0; }
+
+		//chars=PluralChars
+		public Assignment getCharsAssignment_1() { return cCharsAssignment_1; }
+
+		//PluralChars
+		public RuleCall getCharsPluralCharsParserRuleCall_1_0() { return cCharsPluralCharsParserRuleCall_1_0; }
+	}
+
+	public class InterfixFlexionEdingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InterfixFlexionEding");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cInterfixAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cInterfixInterfixFlexionParserRuleCall_0_0 = (RuleCall)cInterfixAssignment_0.eContents().get(0);
+		private final Assignment cCharsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cCharsSuffixCharsParserRuleCall_1_0 = (RuleCall)cCharsAssignment_1.eContents().get(0);
+		
+		//InterfixFlexionEding:
+		//	interfix=InterfixFlexion chars=SuffixChars;
+		public ParserRule getRule() { return rule; }
+
+		//interfix=InterfixFlexion chars=SuffixChars
+		public Group getGroup() { return cGroup; }
+
+		//interfix=InterfixFlexion
+		public Assignment getInterfixAssignment_0() { return cInterfixAssignment_0; }
+
+		//InterfixFlexion
+		public RuleCall getInterfixInterfixFlexionParserRuleCall_0_0() { return cInterfixInterfixFlexionParserRuleCall_0_0; }
+
+		//chars=SuffixChars
+		public Assignment getCharsAssignment_1() { return cCharsAssignment_1; }
+
+		//SuffixChars
+		public RuleCall getCharsSuffixCharsParserRuleCall_1_0() { return cCharsSuffixCharsParserRuleCall_1_0; }
+	}
+
+	public class InterfixLexicalEndingElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InterfixLexicalEnding");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cInterfixAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cInterfixInterfixLexicalParserRuleCall_0_0 = (RuleCall)cInterfixAssignment_0.eContents().get(0);
+		private final Assignment cCharsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cCharsSuffixCharsParserRuleCall_1_0 = (RuleCall)cCharsAssignment_1.eContents().get(0);
+		
+		//InterfixLexicalEnding:
+		//	interfix=InterfixLexical chars=SuffixChars;
+		public ParserRule getRule() { return rule; }
+
+		//interfix=InterfixLexical chars=SuffixChars
+		public Group getGroup() { return cGroup; }
+
+		//interfix=InterfixLexical
+		public Assignment getInterfixAssignment_0() { return cInterfixAssignment_0; }
+
+		//InterfixLexical
+		public RuleCall getInterfixInterfixLexicalParserRuleCall_0_0() { return cInterfixInterfixLexicalParserRuleCall_0_0; }
+
+		//chars=SuffixChars
+		public Assignment getCharsAssignment_1() { return cCharsAssignment_1; }
+
+		//SuffixChars
+		public RuleCall getCharsSuffixCharsParserRuleCall_1_0() { return cCharsSuffixCharsParserRuleCall_1_0; }
 	}
 
 	public class WordMiddleElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WordMiddle");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cInterfixParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cBracketsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cCharsParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cBracketsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cCharsParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//WordMiddle: //	{WordMiddle}
-		//	Interfix | Brackets | Chars;
+		//	Brackets | Chars;
 		public ParserRule getRule() { return rule; }
 
 		////	{WordMiddle}
-		//Interfix | Brackets | Chars
+		//Brackets | Chars
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		////	{WordMiddle}
-		//Interfix
-		public RuleCall getInterfixParserRuleCall_0() { return cInterfixParserRuleCall_0; }
-
 		//Brackets
-		public RuleCall getBracketsParserRuleCall_1() { return cBracketsParserRuleCall_1; }
+		public RuleCall getBracketsParserRuleCall_0() { return cBracketsParserRuleCall_0; }
 
 		//Chars
-		public RuleCall getCharsParserRuleCall_2() { return cCharsParserRuleCall_2; }
+		public RuleCall getCharsParserRuleCall_1() { return cCharsParserRuleCall_1; }
 	}
 
 	public class CharsElements extends AbstractParserRuleElementFinder {
@@ -581,47 +769,62 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getNameEGYSTRINGTerminalRuleCall_0() { return cNameEGYSTRINGTerminalRuleCall_0; }
 	}
 
+	public class SuffixCharsElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SuffixChars");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameSUFFIXSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//// Chars...
+		//SuffixChars:
+		//	name=SUFFIXSTRING;
+		public ParserRule getRule() { return rule; }
+
+		//name=SUFFIXSTRING
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//SUFFIXSTRING
+		public RuleCall getNameSUFFIXSTRINGTerminalRuleCall_0() { return cNameSUFFIXSTRINGTerminalRuleCall_0; }
+	}
+
 	public class InterfixElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Interfix");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cInterfixFlexionParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cInterfixLexicalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cInterfixSuffixPronomLexicalParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cInterfixPrefixNonLexicalParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cInterfixPrefixLexicalParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cInterfixCompountWordsParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cInterfixConnectionSyllabicGroupParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cInterfixSuffixPronomLexicalParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cInterfixPrefixNonLexicalParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cInterfixPrefixLexicalParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cInterfixConnectionSyllabicGroupParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
+		////terminal EGYSTRING: (!(' '|'\n'|'\t'|'\r'| '§' | '#'|'%'|';'
+		////	// interfixes
+		////	|'.'|','|':'|'-'|'~'|'\u2261'|'\u22ee'
+		////	// brackets
+		////	|'('|')'|'<'|'>'|'?'
+		////	|'{' | '}'
+		////	|'\u2E22' | '\u2E23'
+		////	|'@'
+		////	
+		////))+;
 		//// textual criticism interfixes
-		//Interfix:
-		//	InterfixFlexion | InterfixLexical | InterfixSuffixPronomLexical | InterfixPrefixNonLexical | InterfixPrefixLexical |
-		//	InterfixCompountWords | InterfixConnectionSyllabicGroup;
+		//Interfix: //	InterfixFlexion | InterfixLexical |
+		//	InterfixSuffixPronomLexical | InterfixPrefixNonLexical | InterfixPrefixLexical | InterfixConnectionSyllabicGroup;
 		public ParserRule getRule() { return rule; }
 
-		//InterfixFlexion | InterfixLexical | InterfixSuffixPronomLexical | InterfixPrefixNonLexical | InterfixPrefixLexical |
-		//InterfixCompountWords | InterfixConnectionSyllabicGroup
+		////	InterfixFlexion | InterfixLexical |
+		//InterfixSuffixPronomLexical | InterfixPrefixNonLexical | InterfixPrefixLexical | InterfixConnectionSyllabicGroup
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//InterfixFlexion
-		public RuleCall getInterfixFlexionParserRuleCall_0() { return cInterfixFlexionParserRuleCall_0; }
-
-		//InterfixLexical
-		public RuleCall getInterfixLexicalParserRuleCall_1() { return cInterfixLexicalParserRuleCall_1; }
-
+		////	InterfixFlexion | InterfixLexical |
 		//InterfixSuffixPronomLexical
-		public RuleCall getInterfixSuffixPronomLexicalParserRuleCall_2() { return cInterfixSuffixPronomLexicalParserRuleCall_2; }
+		public RuleCall getInterfixSuffixPronomLexicalParserRuleCall_0() { return cInterfixSuffixPronomLexicalParserRuleCall_0; }
 
 		//InterfixPrefixNonLexical
-		public RuleCall getInterfixPrefixNonLexicalParserRuleCall_3() { return cInterfixPrefixNonLexicalParserRuleCall_3; }
+		public RuleCall getInterfixPrefixNonLexicalParserRuleCall_1() { return cInterfixPrefixNonLexicalParserRuleCall_1; }
 
 		//InterfixPrefixLexical
-		public RuleCall getInterfixPrefixLexicalParserRuleCall_4() { return cInterfixPrefixLexicalParserRuleCall_4; }
-
-		//InterfixCompountWords
-		public RuleCall getInterfixCompountWordsParserRuleCall_5() { return cInterfixCompountWordsParserRuleCall_5; }
+		public RuleCall getInterfixPrefixLexicalParserRuleCall_2() { return cInterfixPrefixLexicalParserRuleCall_2; }
 
 		//InterfixConnectionSyllabicGroup
-		public RuleCall getInterfixConnectionSyllabicGroupParserRuleCall_6() { return cInterfixConnectionSyllabicGroupParserRuleCall_6; }
+		public RuleCall getInterfixConnectionSyllabicGroupParserRuleCall_3() { return cInterfixConnectionSyllabicGroupParserRuleCall_3; }
 	}
 
 	public class InterfixLexicalElements extends AbstractParserRuleElementFinder {
@@ -724,32 +927,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getVerticalEllipsisKeyword_1() { return cVerticalEllipsisKeyword_1; }
 	}
 
-	public class InterfixCompountWordsElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InterfixCompountWords");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cInterfixCompountWordsAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cHyphenMinusKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//InterfixCompountWords:
-		//	{InterfixCompountWords} "-";
-		public ParserRule getRule() { return rule; }
-
-		//{InterfixCompountWords} "-"
-		public Group getGroup() { return cGroup; }
-
-		//{InterfixCompountWords}
-		public Action getInterfixCompountWordsAction_0() { return cInterfixCompountWordsAction_0; }
-
-		//"-"
-		public Keyword getHyphenMinusKeyword_1() { return cHyphenMinusKeyword_1; }
-	}
-
 	public class InterfixConnectionSyllabicGroupElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "InterfixConnectionSyllabicGroup");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cInterfixConnectionSyllabicGroupAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cTildeKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
+		////InterfixCompountWords:
+		////	{InterfixCompountWords}
+		////	'-'
+		////;
 		//InterfixConnectionSyllabicGroup:
 		//	{InterfixConnectionSyllabicGroup} "~";
 		public ParserRule getRule() { return rule; }
@@ -780,6 +967,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDestructionParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
 		
 		//// textual criticism brackets
+		//// | Cartouche | Serech 
+		////|Oval
 		//Brackets:
 		//	Rasur | AncientExpanded | RestorationOverRasur | Expanded | DisputableReading | Emendation | Lacuna | Deletion |
 		//	ExpandedColumn | PartialDestruction | Destruction;
@@ -821,6 +1010,85 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Destruction
 		public RuleCall getDestructionParserRuleCall_10() { return cDestructionParserRuleCall_10; }
+	}
+
+	public class NoCartoucheElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NoCartouche");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cInterfixParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cRasurParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cAncientExpandedParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cRestorationOverRasurParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cExpandedParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cDisputableReadingParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cEmendationParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cLacunaParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cDeletionParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
+		private final RuleCall cExpandedColumnParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
+		private final RuleCall cPartialDestructionParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
+		private final RuleCall cDestructionParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
+		private final RuleCall cCharsParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
+		
+		////Cartouche:
+		////	{Expanded}
+		////	'\uD80C\uDF79' wChar+=NoCartouche+ '\uD80C\uDF7A' //'\uD80C\uDF7A'
+		////;
+		////
+		////Serech:
+		////	{Serech}
+		////	'\uD80C\uDE58' wChar+=Chars+ '\uD80C\uDE82' //'\uD80C\uDE82'
+		////;
+		////Oval:
+		////	{Oval}
+		////	'\uD80C\uDE86' wChar+=Chars+ '\uD80C\uDE86' //\uD80C\uDE87
+		////;
+		//NoCartouche:
+		//	Interfix | Rasur | AncientExpanded | RestorationOverRasur | Expanded | DisputableReading | Emendation | Lacuna |
+		//	Deletion | ExpandedColumn | PartialDestruction | Destruction | Chars;
+		public ParserRule getRule() { return rule; }
+
+		//Interfix | Rasur | AncientExpanded | RestorationOverRasur | Expanded | DisputableReading | Emendation | Lacuna |
+		//Deletion | ExpandedColumn | PartialDestruction | Destruction | Chars
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//Interfix
+		public RuleCall getInterfixParserRuleCall_0() { return cInterfixParserRuleCall_0; }
+
+		//Rasur
+		public RuleCall getRasurParserRuleCall_1() { return cRasurParserRuleCall_1; }
+
+		//AncientExpanded
+		public RuleCall getAncientExpandedParserRuleCall_2() { return cAncientExpandedParserRuleCall_2; }
+
+		//RestorationOverRasur
+		public RuleCall getRestorationOverRasurParserRuleCall_3() { return cRestorationOverRasurParserRuleCall_3; }
+
+		//Expanded
+		public RuleCall getExpandedParserRuleCall_4() { return cExpandedParserRuleCall_4; }
+
+		//DisputableReading
+		public RuleCall getDisputableReadingParserRuleCall_5() { return cDisputableReadingParserRuleCall_5; }
+
+		//Emendation
+		public RuleCall getEmendationParserRuleCall_6() { return cEmendationParserRuleCall_6; }
+
+		//Lacuna
+		public RuleCall getLacunaParserRuleCall_7() { return cLacunaParserRuleCall_7; }
+
+		//Deletion
+		public RuleCall getDeletionParserRuleCall_8() { return cDeletionParserRuleCall_8; }
+
+		//ExpandedColumn
+		public RuleCall getExpandedColumnParserRuleCall_9() { return cExpandedColumnParserRuleCall_9; }
+
+		//PartialDestruction
+		public RuleCall getPartialDestructionParserRuleCall_10() { return cPartialDestructionParserRuleCall_10; }
+
+		//Destruction
+		public RuleCall getDestructionParserRuleCall_11() { return cDestructionParserRuleCall_11; }
+
+		//Chars
+		public RuleCall getCharsParserRuleCall_12() { return cCharsParserRuleCall_12; }
 	}
 
 	public class ExpandedElements extends AbstractParserRuleElementFinder {
@@ -935,23 +1203,23 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DisputableReading");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDisputableReadingAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cQuestionMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cReversedQuestionMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cWCharAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cWCharNoDisputableReadingParserRuleCall_2_0 = (RuleCall)cWCharAssignment_2.eContents().get(0);
 		private final Keyword cQuestionMarkKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//DisputableReading:
-		//	{DisputableReading} "?" wChar+=NoDisputableReading+ "?";
+		//	{DisputableReading} "⸮" wChar+=NoDisputableReading+ "?";
 		public ParserRule getRule() { return rule; }
 
-		//{DisputableReading} "?" wChar+=NoDisputableReading+ "?"
+		//{DisputableReading} "⸮" wChar+=NoDisputableReading+ "?"
 		public Group getGroup() { return cGroup; }
 
 		//{DisputableReading}
 		public Action getDisputableReadingAction_0() { return cDisputableReadingAction_0; }
 
-		//"?"
-		public Keyword getQuestionMarkKeyword_1() { return cQuestionMarkKeyword_1; }
+		//"⸮"
+		public Keyword getReversedQuestionMarkKeyword_1() { return cReversedQuestionMarkKeyword_1; }
 
 		//wChar+=NoDisputableReading+
 		public Assignment getWCharAssignment_2() { return cWCharAssignment_2; }
@@ -1417,16 +1685,31 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private SentenceElements pSentence;
 	private SentenceItemElements pSentenceItem;
 	private AbstractMarkerElements pAbstractMarker;
+	private TerminalRule tWS;
+	private TerminalRule tNEWLINE;
 	private AmbivalenceElements pAmbivalence;
 	private CaseElements pCase;
 	private SentenceItemNoAmbivalenceElements pSentenceItemNoAmbivalence;
 	private VersMarkerElements pVersMarker;
 	private VersFrontierMarkerElements pVersFrontierMarker;
 	private VersbreakMarkerElements pVersbreakMarker;
+	private BrokenVersbreakMarkerElements pBrokenVersbreakMarker;
 	private MarkerElements pMarker;
 	private WordElements pWord;
+	private WordPartElements pWordPart;
+	private WordEndingElements pWordEnding;
+	private DualEndingElements pDualEnding;
+	private DualCharsElements pDualChars;
+	private PluralCharsElements pPluralChars;
+	private PluralEndingElements pPluralEnding;
+	private InterfixFlexionEdingElements pInterfixFlexionEding;
+	private InterfixLexicalEndingElements pInterfixLexicalEnding;
 	private WordMiddleElements pWordMiddle;
 	private CharsElements pChars;
+	private SuffixCharsElements pSuffixChars;
+	private TerminalRule tDUALSTRING;
+	private TerminalRule tPLURALSTRING;
+	private TerminalRule tSUFFIXSTRING;
 	private TerminalRule tEGYSTRING;
 	private InterfixElements pInterfix;
 	private InterfixLexicalElements pInterfixLexical;
@@ -1434,9 +1717,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private InterfixSuffixPronomLexicalElements pInterfixSuffixPronomLexical;
 	private InterfixPrefixNonLexicalElements pInterfixPrefixNonLexical;
 	private InterfixPrefixLexicalElements pInterfixPrefixLexical;
-	private InterfixCompountWordsElements pInterfixCompountWords;
 	private InterfixConnectionSyllabicGroupElements pInterfixConnectionSyllabicGroup;
 	private BracketsElements pBrackets;
+	private NoCartoucheElements pNoCartouche;
 	private ExpandedElements pExpanded;
 	private NoExpandedElements pNoExpanded;
 	private EmendationElements pEmendation;
@@ -1498,7 +1781,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TextContent:
-	//	{TextContent} (items+=TextItem ((" " | "\t" | "\n" | "\r")* items+=TextItem)*);
+	//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*);
 	public TextContentElements getTextContentAccess() {
 		return (pTextContent != null) ? pTextContent : (pTextContent = new TextContentElements());
 	}
@@ -1519,7 +1802,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// sentence	
 	//Sentence:
-	//	"§" (items+=SentenceItem (" " items+=SentenceItem)*) "§";
+	//	"§" (items+=SentenceItem (" " NEWLINE? items+=SentenceItem)*) "§";
 	public SentenceElements getSentenceAccess() {
 		return (pSentence != null) ? pSentence : (pSentence = new SentenceElements());
 	}
@@ -1529,7 +1812,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//SentenceItem:
-	//	Word ("\n" | "\t")? | AbstractMarker ("\n" | "\t")? | Ambivalence ("\n" | "\t")?;
+	//	Word | AbstractMarker | Ambivalence;
 	public SentenceItemElements getSentenceItemAccess() {
 		return (pSentenceItem != null) ? pSentenceItem : (pSentenceItem = new SentenceItemElements());
 	}
@@ -1548,8 +1831,21 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractMarkerAccess().getRule();
 	}
 
+	//terminal WS:
+	//	" " | "\t";
+	public TerminalRule getWSRule() {
+		return (tWS != null) ? tWS : (tWS = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "WS"));
+	} 
+
+	//terminal NEWLINE:
+	//	"\r" // New line on DOS or Unix 
+	//	| "\n" | "\r\n" | "\t";
+	public TerminalRule getNEWLINERule() {
+		return (tNEWLINE != null) ? tNEWLINE : (tNEWLINE = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "NEWLINE"));
+	} 
+
 	//Ambivalence:
-	//	"%" (cases+=Case ("; " ("\n" | "\t")? cases+=Case)+) "%";
+	//	"%" (cases+=Case ("; " NEWLINE? cases+=Case)+) "%";
 	public AmbivalenceElements getAmbivalenceAccess() {
 		return (pAmbivalence != null) ? pAmbivalence : (pAmbivalence = new AmbivalenceElements());
 	}
@@ -1559,7 +1855,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Case:
-	//	"case " name=EGYSTRING ": " ("\n" | "\t")? (items+=SentenceItemNoAmbivalence (" " ("\n" | "\t")?
+	//	"case " name=EGYSTRING ": " NEWLINE? (items+=SentenceItemNoAmbivalence (" " NEWLINE?
 	//	items+=SentenceItemNoAmbivalence)*);
 	public CaseElements getCaseAccess() {
 		return (pCase != null) ? pCase : (pCase = new CaseElements());
@@ -1580,7 +1876,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VersMarker:
-	//	VersbreakMarker | VersFrontierMarker;
+	//	VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker;
 	public VersMarkerElements getVersMarkerAccess() {
 		return (pVersMarker != null) ? pVersMarker : (pVersMarker = new VersMarkerElements());
 	}
@@ -1590,7 +1886,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VersFrontierMarker:
-	//	{VersFrontierMarker} "@mv";
+	//	{VersFrontierMarker} //'@mv'
+	//	"󰂁";
 	public VersFrontierMarkerElements getVersFrontierMarkerAccess() {
 		return (pVersFrontierMarker != null) ? pVersFrontierMarker : (pVersFrontierMarker = new VersFrontierMarkerElements());
 	}
@@ -1600,7 +1897,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//VersbreakMarker:
-	//	{VersbreakMarker} "@v";
+	//	{VersbreakMarker} //'@v'
+	//	"󰂀";
 	public VersbreakMarkerElements getVersbreakMarkerAccess() {
 		return (pVersbreakMarker != null) ? pVersbreakMarker : (pVersbreakMarker = new VersbreakMarkerElements());
 	}
@@ -1609,8 +1907,19 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getVersbreakMarkerAccess().getRule();
 	}
 
+	//BrokenVersbreakMarker:
+	//	{BrokenVersbreakMarker} //'@v'
+	//	"󰂂";
+	public BrokenVersbreakMarkerElements getBrokenVersbreakMarkerAccess() {
+		return (pBrokenVersbreakMarker != null) ? pBrokenVersbreakMarker : (pBrokenVersbreakMarker = new BrokenVersbreakMarkerElements());
+	}
+	
+	public ParserRule getBrokenVersbreakMarkerRule() {
+		return getBrokenVersbreakMarkerAccess().getRule();
+	}
+
 	//Marker:
-	//	"#" (type=EGYSTRING (": " ("\n" | "\t")? name=EGYSTRING)?) "#";
+	//	"#" (type=EGYSTRING (": " NEWLINE? name=EGYSTRING)?) "#";
 	public MarkerElements getMarkerAccess() {
 		return (pMarker != null) ? pMarker : (pMarker = new MarkerElements());
 	}
@@ -1621,7 +1930,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//// word
 	//Word:
-	//	{Word} wChar+=WordMiddle*;
+	//	{Word} (wChar+=WordPart ("-" wChar+=WordPart)*);
 	public WordElements getWordAccess() {
 		return (pWord != null) ? pWord : (pWord = new WordElements());
 	}
@@ -1630,8 +1939,88 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getWordAccess().getRule();
 	}
 
+	//WordPart:
+	//	"="? (wChar+=WordMiddle wChar+=WordMiddle* wChar+=WordEnding? wChar+=WordEnding?);
+	public WordPartElements getWordPartAccess() {
+		return (pWordPart != null) ? pWordPart : (pWordPart = new WordPartElements());
+	}
+	
+	public ParserRule getWordPartRule() {
+		return getWordPartAccess().getRule();
+	}
+
+	//WordEnding:
+	//	InterfixLexicalEnding | InterfixFlexionEding | PluralEnding | DualEnding;
+	public WordEndingElements getWordEndingAccess() {
+		return (pWordEnding != null) ? pWordEnding : (pWordEnding = new WordEndingElements());
+	}
+	
+	public ParserRule getWordEndingRule() {
+		return getWordEndingAccess().getRule();
+	}
+
+	//DualEnding:
+	//	interfix=InterfixFlexion chars=DualChars;
+	public DualEndingElements getDualEndingAccess() {
+		return (pDualEnding != null) ? pDualEnding : (pDualEnding = new DualEndingElements());
+	}
+	
+	public ParserRule getDualEndingRule() {
+		return getDualEndingAccess().getRule();
+	}
+
+	//DualChars:
+	//	name=DUALSTRING;
+	public DualCharsElements getDualCharsAccess() {
+		return (pDualChars != null) ? pDualChars : (pDualChars = new DualCharsElements());
+	}
+	
+	public ParserRule getDualCharsRule() {
+		return getDualCharsAccess().getRule();
+	}
+
+	//PluralChars:
+	//	name=PLURALSTRING;
+	public PluralCharsElements getPluralCharsAccess() {
+		return (pPluralChars != null) ? pPluralChars : (pPluralChars = new PluralCharsElements());
+	}
+	
+	public ParserRule getPluralCharsRule() {
+		return getPluralCharsAccess().getRule();
+	}
+
+	//PluralEnding:
+	//	interfix=InterfixFlexion chars=PluralChars;
+	public PluralEndingElements getPluralEndingAccess() {
+		return (pPluralEnding != null) ? pPluralEnding : (pPluralEnding = new PluralEndingElements());
+	}
+	
+	public ParserRule getPluralEndingRule() {
+		return getPluralEndingAccess().getRule();
+	}
+
+	//InterfixFlexionEding:
+	//	interfix=InterfixFlexion chars=SuffixChars;
+	public InterfixFlexionEdingElements getInterfixFlexionEdingAccess() {
+		return (pInterfixFlexionEding != null) ? pInterfixFlexionEding : (pInterfixFlexionEding = new InterfixFlexionEdingElements());
+	}
+	
+	public ParserRule getInterfixFlexionEdingRule() {
+		return getInterfixFlexionEdingAccess().getRule();
+	}
+
+	//InterfixLexicalEnding:
+	//	interfix=InterfixLexical chars=SuffixChars;
+	public InterfixLexicalEndingElements getInterfixLexicalEndingAccess() {
+		return (pInterfixLexicalEnding != null) ? pInterfixLexicalEnding : (pInterfixLexicalEnding = new InterfixLexicalEndingElements());
+	}
+	
+	public ParserRule getInterfixLexicalEndingRule() {
+		return getInterfixLexicalEndingAccess().getRule();
+	}
+
 	//WordMiddle: //	{WordMiddle}
-	//	Interfix | Brackets | Chars;
+	//	Brackets | Chars;
 	public WordMiddleElements getWordMiddleAccess() {
 		return (pWordMiddle != null) ? pWordMiddle : (pWordMiddle = new WordMiddleElements());
 	}
@@ -1651,19 +2040,63 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getCharsAccess().getRule();
 	}
 
+	//// Chars...
+	//SuffixChars:
+	//	name=SUFFIXSTRING;
+	public SuffixCharsElements getSuffixCharsAccess() {
+		return (pSuffixChars != null) ? pSuffixChars : (pSuffixChars = new SuffixCharsElements());
+	}
+	
+	public ParserRule getSuffixCharsRule() {
+		return getSuffixCharsAccess().getRule();
+	}
+
+	//terminal DUALSTRING:
+	//	"du";
+	public TerminalRule getDUALSTRINGRule() {
+		return (tDUALSTRING != null) ? tDUALSTRING : (tDUALSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "DUALSTRING"));
+	} 
+
+	//terminal PLURALSTRING:
+	//	"pl";
+	public TerminalRule getPLURALSTRINGRule() {
+		return (tPLURALSTRING != null) ? tPLURALSTRING : (tPLURALSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "PLURALSTRING"));
+	} 
+
+	//terminal SUFFIXSTRING:
+	//	("Ꜣ" | "j" | "y" | "w" | "n" | "s" | "k" | "t" | "ṯ" | "ı͗" | "ś" | "ı̯͗" | "ï" | "u̯" | "č" | "ṱ" | "a" | "ꜣ")+;
+	public TerminalRule getSUFFIXSTRINGRule() {
+		return (tSUFFIXSTRING != null) ? tSUFFIXSTRING : (tSUFFIXSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SUFFIXSTRING"));
+	} 
+
 	//terminal EGYSTRING:
-	//	!(" " // interfixes
-	//	// brackets
-	//	| "\n" | "\t" | "§" | "#" | "%" | ";" | "." | "," | ":" | "-" | "~" | "≡" | "⋮" | "(" | ")" | "<" | ">" | "?" | "{" |
-	//	"}" | "⸢" | "⸣" | "@")*;
+	//	("Ꜣ" // coptic
+	//	//	|  'Ⲁ''|''ⲁ''|''Ⲃ'|'ⲃ'|'Ⲅ'|'ⲅ'|'Ⲇ'|'ⲇ'|'Ⲉ'|'ⲉ'|'Ⲋ'|'ⲋ'|'Ⲍ'|'ⲍ'|'Ⲏ'|'ⲏ'|'Ⲑ'|'ⲑ'|'Ⲓ'|'ⲓ'|'Ⲕ'|'ⲕ'|'Ⲗ'|'ⲗ'|'Ⲙ'|'ⲙ'|'Ⲛ'|'ⲛ'|'Ⲝ'|'ⲝ'|'Ⲟ'|'ⲟ'|'Ⲡ'|'ⲡ'|'Ⲣ'|'ⲣ'|'Ⲥ'|'ⲥ'|'Ⲧ'|'ⲧ'|'Ⲩ'|'ⲩ'|'Ⲫ'|'ⲫ'|'Ⲭ'|'ⲭ'|'Ⲯ'|'ⲯ'|'Ⲱ'|'ⲱ'|'Ⲳ'|'ⲳ'|'Ⲵ'|'ⲵ'|'Ⲷ'|'ⲷ'|'Ⲹ'|'ⲹ'|'Ⲻ'|'ⲻ'|'Ⲽ'|'ⲽ'|'Ⲿ'|'ⲿ'|'Ⳁ'|'ⳁ'|'Ⳃ'|'ⳃ'|'Ⳅ'|'ⳅ'|'Ⳇ'|'ⳇ'|'Ⳉ'|'ⳉ'|'Ⳋ'|'ⳋ'|'Ⳍ'|'ⳍ'|'Ⳏ'|'ⳏ'|'Ⳑ'|'ⳑ'|'Ⳓ'|'ⳓ'|'Ⳕ'|'ⳕ'|'Ⳗ'|'ⳗ'|'Ⳙ'|'ⳙ'|'Ⳛ'|'ⳛ'|'Ⳝ'|'ⳝ'|'Ⳟ'|'ⳟ'|'Ⳡ'|'ⳡ'|'Ⳣ'|'ⳣ'|'ⳤ'|'⳥'|'⳦'|'⳧'|'⳨'|'⳩'|'⳪'|'Ⳬ'|'ⳬ'|'Ⳮ'|'ⳮ'|'⳯'|'⳰'|'⳱'|'Ⳳ'|'ⳳ'|'⳴'|'⳵'|'⳶'|'⳷'|'⳸'|'⳹'|'⳺'|'⳻'|'⳼'|'⳽'|'⳾'|'⳿'|'Ϡ'|'ϡ'|'Ϣ'|'ϣ'|'Ϥ'|'ϥ'|'Ϧ'|'ϧ'|'Ϩ'|'ϩ'|'Ϫ'|'ϫ'|'Ϭ'|'ϭ'|'Ϯ'|'ϯ'
+	//	//oval
+	//	//cartouche
+	//	//serech
+	//	| "j" | "y" | "Ꜥ" | "w" | "b" | "p" | "f" | "m" | "n" | "r" | "l" | "h" | "ḥ" | "ḫ" | "ẖ" | "z" | "s" | "š" | "q" | "k"
+	//	| "g" | "t" | "ṯ" | "d" | "ḏ" | "ʾ" | "ı͗" | "ś" | "ḳ" | "ı̯͗" | "ï" | "u̯" | "č" | "č̣" | "ṭ" | "h̭" | "ṱ" | "a" |
+	//	"i̭" | "ꜣ" | "J" | "Y" | "ꜥ" | "W" | "B" | "P" | "F" | "M" | "N" | "R" | "L" | "H" | "Ḥ" | "Ḫ" | "H̱" | "Z" | "S" |
+	//	"Š" | "Q" | "K" | "G" | "T" | "Ṯ" | "D" | "Ḏ" | "I͗" | "Ś" | "Ḳ" | "Č" | "Č̣" | "Ṭ" | "H̭" | "Ṱ" | "A" | "I" |
+	//	"Ⲁ".."⳿" | "𓊆" | "𓊇" | "𓍹" | "𓍺" | "𓉘" | "𓊂")+;
 	public TerminalRule getEGYSTRINGRule() {
 		return (tEGYSTRING != null) ? tEGYSTRING : (tEGYSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EGYSTRING"));
 	} 
 
+	////terminal EGYSTRING: (!(' '|'\n'|'\t'|'\r'| '§' | '#'|'%'|';'
+	////	// interfixes
+	////	|'.'|','|':'|'-'|'~'|'\u2261'|'\u22ee'
+	////	// brackets
+	////	|'('|')'|'<'|'>'|'?'
+	////	|'{' | '}'
+	////	|'\u2E22' | '\u2E23'
+	////	|'@'
+	////	
+	////))+;
 	//// textual criticism interfixes
-	//Interfix:
-	//	InterfixFlexion | InterfixLexical | InterfixSuffixPronomLexical | InterfixPrefixNonLexical | InterfixPrefixLexical |
-	//	InterfixCompountWords | InterfixConnectionSyllabicGroup;
+	//Interfix: //	InterfixFlexion | InterfixLexical |
+	//	InterfixSuffixPronomLexical | InterfixPrefixNonLexical | InterfixPrefixLexical | InterfixConnectionSyllabicGroup;
 	public InterfixElements getInterfixAccess() {
 		return (pInterfix != null) ? pInterfix : (pInterfix = new InterfixElements());
 	}
@@ -1722,16 +2155,10 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getInterfixPrefixLexicalAccess().getRule();
 	}
 
-	//InterfixCompountWords:
-	//	{InterfixCompountWords} "-";
-	public InterfixCompountWordsElements getInterfixCompountWordsAccess() {
-		return (pInterfixCompountWords != null) ? pInterfixCompountWords : (pInterfixCompountWords = new InterfixCompountWordsElements());
-	}
-	
-	public ParserRule getInterfixCompountWordsRule() {
-		return getInterfixCompountWordsAccess().getRule();
-	}
-
+	////InterfixCompountWords:
+	////	{InterfixCompountWords}
+	////	'-'
+	////;
 	//InterfixConnectionSyllabicGroup:
 	//	{InterfixConnectionSyllabicGroup} "~";
 	public InterfixConnectionSyllabicGroupElements getInterfixConnectionSyllabicGroupAccess() {
@@ -1743,6 +2170,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//// textual criticism brackets
+	//// | Cartouche | Serech 
+	////|Oval
 	//Brackets:
 	//	Rasur | AncientExpanded | RestorationOverRasur | Expanded | DisputableReading | Emendation | Lacuna | Deletion |
 	//	ExpandedColumn | PartialDestruction | Destruction;
@@ -1752,6 +2181,30 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getBracketsRule() {
 		return getBracketsAccess().getRule();
+	}
+
+	////Cartouche:
+	////	{Expanded}
+	////	'\uD80C\uDF79' wChar+=NoCartouche+ '\uD80C\uDF7A' //'\uD80C\uDF7A'
+	////;
+	////
+	////Serech:
+	////	{Serech}
+	////	'\uD80C\uDE58' wChar+=Chars+ '\uD80C\uDE82' //'\uD80C\uDE82'
+	////;
+	////Oval:
+	////	{Oval}
+	////	'\uD80C\uDE86' wChar+=Chars+ '\uD80C\uDE86' //\uD80C\uDE87
+	////;
+	//NoCartouche:
+	//	Interfix | Rasur | AncientExpanded | RestorationOverRasur | Expanded | DisputableReading | Emendation | Lacuna |
+	//	Deletion | ExpandedColumn | PartialDestruction | Destruction | Chars;
+	public NoCartoucheElements getNoCartoucheAccess() {
+		return (pNoCartouche != null) ? pNoCartouche : (pNoCartouche = new NoCartoucheElements());
+	}
+	
+	public ParserRule getNoCartoucheRule() {
+		return getNoCartoucheAccess().getRule();
 	}
 
 	//Expanded:
@@ -1795,7 +2248,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//DisputableReading:
-	//	{DisputableReading} "?" wChar+=NoDisputableReading+ "?";
+	//	{DisputableReading} "⸮" wChar+=NoDisputableReading+ "?";
 	public DisputableReadingElements getDisputableReadingAccess() {
 		return (pDisputableReading != null) ? pDisputableReading : (pDisputableReading = new DisputableReadingElements());
 	}
@@ -1993,12 +2446,6 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	"//" !("\n" | "\r")* ("\r"? "\n")?;
 	public TerminalRule getSL_COMMENTRule() {
 		return gaTerminals.getSL_COMMENTRule();
-	} 
-
-	//terminal WS:
-	//	(" " | "\t" | "\r" | "\n")+;
-	public TerminalRule getWSRule() {
-		return gaTerminals.getWSRule();
 	} 
 
 	//terminal ANY_OTHER:

@@ -65,6 +65,7 @@ import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -108,7 +109,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private EventBroker eventBroker;
 	@Inject
 	private IBTSEditor parentEditor;
-	
+	@Inject
+	private UISynchronize sync;
 	@Inject
 	private BTSResourceProvider resourceProvider;
 
@@ -159,9 +161,16 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			}
 
 			@Override
-			public void notifyChanged(Notification notification) {
+			public void notifyChanged(final Notification notification) {
 				System.out.println(" notifyChanged " + notification);
-				updateFigureFromWord(notification);
+				
+				sync.asyncExec(new Runnable()
+				{
+					public void run()
+					{
+						updateFigureFromWord(notification);
+					}
+				});
 
 			}
 

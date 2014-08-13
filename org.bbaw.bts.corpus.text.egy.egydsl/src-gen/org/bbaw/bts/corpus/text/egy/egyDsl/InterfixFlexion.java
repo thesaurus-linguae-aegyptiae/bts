@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.corpus.text.egy.egyDsl;
 
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -13,6 +14,6 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  * @model
  * @generated
  */
-public interface InterfixFlexion extends Interfix
+public interface InterfixFlexion extends EObject
 {
 } // InterfixFlexion

@@ -12,6 +12,7 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
@@ -118,8 +119,8 @@ public class ShowPreferenceDialogHandler {
 
 					String prefPageURI = getClassURI(
 							elmt.getNamespaceIdentifier(), classUri);
-
 					Object object = factory.create(prefPageURI, context);
+					
 					if (!(object instanceof IPreferencePage)) {
 						logger.error(
 								"Expected instance of IPreferencePage: {0}",

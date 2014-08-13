@@ -18,33 +18,42 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected EgyDslGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_Ambivalence___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q;
-	protected AbstractElementAlias match_Case___Control0009Keyword_3_1_or_Control000aKeyword_3_0__q;
-	protected AbstractElementAlias match_Case___Control0009Keyword_4_1_1_1_or_Control000aKeyword_4_1_1_0__q;
-	protected AbstractElementAlias match_Marker___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q;
-	protected AbstractElementAlias match_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q;
-	protected AbstractElementAlias match_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q;
-	protected AbstractElementAlias match_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q;
-	protected AbstractElementAlias match_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a;
+	protected AbstractElementAlias match_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q;
+	protected AbstractElementAlias match_Case_NEWLINETerminalRuleCall_3_q;
+	protected AbstractElementAlias match_Case_NEWLINETerminalRuleCall_4_1_1_q;
+	protected AbstractElementAlias match_Marker_NEWLINETerminalRuleCall_1_1_1_q;
+	protected AbstractElementAlias match_Sentence_NEWLINETerminalRuleCall_1_1_1_q;
+	protected AbstractElementAlias match_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q;
+	protected AbstractElementAlias match_WordPart_EqualsSignKeyword_0_q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (EgyDslGrammarAccess) access;
-		match_Ambivalence___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getAmbivalenceAccess().getControl0009Keyword_1_1_1_1()), new TokenAlias(false, false, grammarAccess.getAmbivalenceAccess().getControl000aKeyword_1_1_1_0()));
-		match_Case___Control0009Keyword_3_1_or_Control000aKeyword_3_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getCaseAccess().getControl0009Keyword_3_1()), new TokenAlias(false, false, grammarAccess.getCaseAccess().getControl000aKeyword_3_0()));
-		match_Case___Control0009Keyword_4_1_1_1_or_Control000aKeyword_4_1_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getCaseAccess().getControl0009Keyword_4_1_1_1()), new TokenAlias(false, false, grammarAccess.getCaseAccess().getControl000aKeyword_4_1_1_0()));
-		match_Marker___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getMarkerAccess().getControl0009Keyword_1_1_1_1()), new TokenAlias(false, false, grammarAccess.getMarkerAccess().getControl000aKeyword_1_1_1_0()));
-		match_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl0009Keyword_0_1_1()), new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl000aKeyword_0_1_0()));
-		match_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl0009Keyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl000aKeyword_1_1_0()));
-		match_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl0009Keyword_2_1_1()), new TokenAlias(false, false, grammarAccess.getSentenceItemAccess().getControl000aKeyword_2_1_0()));
-		match_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a = new AlternativeAlias(true, true, new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl0009Keyword_1_1_0_1()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl000aKeyword_1_1_0_2()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getControl000dKeyword_1_1_0_3()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0()));
+		match_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q = new TokenAlias(false, true, grammarAccess.getAmbivalenceAccess().getNEWLINETerminalRuleCall_1_1_1());
+		match_Case_NEWLINETerminalRuleCall_3_q = new TokenAlias(false, true, grammarAccess.getCaseAccess().getNEWLINETerminalRuleCall_3());
+		match_Case_NEWLINETerminalRuleCall_4_1_1_q = new TokenAlias(false, true, grammarAccess.getCaseAccess().getNEWLINETerminalRuleCall_4_1_1());
+		match_Marker_NEWLINETerminalRuleCall_1_1_1_q = new TokenAlias(false, true, grammarAccess.getMarkerAccess().getNEWLINETerminalRuleCall_1_1_1());
+		match_Sentence_NEWLINETerminalRuleCall_1_1_1_q = new TokenAlias(false, true, grammarAccess.getSentenceAccess().getNEWLINETerminalRuleCall_1_1_1());
+		match_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getTextContentAccess().getNEWLINETerminalRuleCall_1_1_0_1()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0()));
+		match_WordPart_EqualsSignKeyword_0_q = new TokenAlias(false, true, grammarAccess.getWordPartAccess().getEqualsSignKeyword_0());
 	}
 	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if(ruleCall.getRule() == grammarAccess.getNEWLINERule())
+			return getNEWLINEToken(semanticObject, ruleCall, node);
 		return "";
 	}
 	
+	/**
+	 * terminal NEWLINE:
+	 *     ('\r'|'\n'|'\r\n'|'\t');
+	 */
+	protected String getNEWLINEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
+		if (node != null)
+			return getTokenText(node);
+		return "\r";
+	}
 	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
@@ -52,122 +61,77 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if(match_Ambivalence___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q.equals(syntax))
-				emit_Ambivalence___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Case___Control0009Keyword_3_1_or_Control000aKeyword_3_0__q.equals(syntax))
-				emit_Case___Control0009Keyword_3_1_or_Control000aKeyword_3_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Case___Control0009Keyword_4_1_1_1_or_Control000aKeyword_4_1_1_0__q.equals(syntax))
-				emit_Case___Control0009Keyword_4_1_1_1_or_Control000aKeyword_4_1_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Marker___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q.equals(syntax))
-				emit_Marker___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q.equals(syntax))
-				emit_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q.equals(syntax))
-				emit_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q.equals(syntax))
-				emit_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a.equals(syntax))
-				emit_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			if(match_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q.equals(syntax))
+				emit_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Case_NEWLINETerminalRuleCall_3_q.equals(syntax))
+				emit_Case_NEWLINETerminalRuleCall_3_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Case_NEWLINETerminalRuleCall_4_1_1_q.equals(syntax))
+				emit_Case_NEWLINETerminalRuleCall_4_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Marker_NEWLINETerminalRuleCall_1_1_1_q.equals(syntax))
+				emit_Marker_NEWLINETerminalRuleCall_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Sentence_NEWLINETerminalRuleCall_1_1_1_q.equals(syntax))
+				emit_Sentence_NEWLINETerminalRuleCall_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q.equals(syntax))
+				emit_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_WordPart_EqualsSignKeyword_0_q.equals(syntax))
+				emit_WordPart_EqualsSignKeyword_0_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
 
 	/**
 	 * Syntax:
-	 *     (
-	     '	' | 
-	     '
-	     '
-	 )?
+	 *     NEWLINE?
 	 */
-	protected void emit_Ambivalence___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     '
-	     ' | 
-	     '	'
-	 )?
+	 *     NEWLINE?
 	 */
-	protected void emit_Case___Control0009Keyword_3_1_or_Control000aKeyword_3_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Case_NEWLINETerminalRuleCall_3_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     '
-	     ' | 
-	     '	'
-	 )?
+	 *     NEWLINE?
 	 */
-	protected void emit_Case___Control0009Keyword_4_1_1_1_or_Control000aKeyword_4_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Case_NEWLINETerminalRuleCall_4_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     '
-	     ' | 
-	     '	'
-	 )?
+	 *     NEWLINE?
 	 */
-	protected void emit_Marker___Control0009Keyword_1_1_1_1_or_Control000aKeyword_1_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Marker_NEWLINETerminalRuleCall_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     '	' | 
-	     '
-	     '
-	 )?
+	 *     NEWLINE?
 	 */
-	protected void emit_SentenceItem___Control0009Keyword_0_1_1_or_Control000aKeyword_0_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Sentence_NEWLINETerminalRuleCall_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     '	' | 
-	     '
-	     '
-	 )?
+	 *     (NEWLINE | ' ')?
 	 */
-	protected void emit_SentenceItem___Control0009Keyword_1_1_1_or_Control000aKeyword_1_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
 	 * Syntax:
-	 *     (
-	     '
-	     ' | 
-	     '	'
-	 )?
+	 *     '='?
 	 */
-	protected void emit_SentenceItem___Control0009Keyword_2_1_1_or_Control000aKeyword_2_1_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
-		acceptNodes(transition, nodes);
-	}
-	
-	/**
-	 * Syntax:
-	 *     (
-	     '	' | 
-	     '
-	     ' | 
-	     ' ' | 
-	     '
-	 '
-	 )*
-	 */
-	protected void emit_TextContent___Control0009Keyword_1_1_0_1_or_Control000aKeyword_1_1_0_2_or_Control000dKeyword_1_1_0_3_or_SpaceKeyword_1_1_0_0__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_WordPart_EqualsSignKeyword_0_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

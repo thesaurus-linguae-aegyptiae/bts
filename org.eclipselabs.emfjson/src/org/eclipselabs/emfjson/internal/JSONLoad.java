@@ -193,7 +193,7 @@ public class JSONLoad {
 
 					if (node.isArray()) {
 						for (Iterator<JsonNode> it = node.getElements(); it.hasNext();) {
-							JsonNode current = it.next(); 
+							JsonNode current = it.next();
 							EClass eClass = findEClass(reference.getEReferenceType(), current, root, resource);
 							EObject obj = createEObject(resource, eClass, current);
 

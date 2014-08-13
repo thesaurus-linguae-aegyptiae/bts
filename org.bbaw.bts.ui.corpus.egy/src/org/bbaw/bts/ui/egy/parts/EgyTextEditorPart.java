@@ -584,7 +584,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
-
+//		annotationModel.connect(doc);
 		configureEditorDrawingStrategies();
 		embeddedEditorParentComp.layout();
 		// embeddedEditor.getViewer().getControl().setFocus();
@@ -739,7 +739,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				{
 					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
 				}
-			}
+			} 
 			
 		}
 		List<ModelAnnotation> deHighlightedAnnotations = new Vector<ModelAnnotation>(highlightedAnnotations.size());
@@ -771,19 +771,19 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			{
 				btsEvent.setRelatingObjects(relSelObjects);
 			}
-			if (postSelection){
-				eventBroker.post(
-					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
-					relSelObjects);
-			}
+//			if (postSelection){
+//				eventBroker.post(
+//					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
+//					relSelObjects);
+//			}
 			highlightedAnnotations.addAll(relatingObjectsAnnotations);
 		}
-		else if (postSelection)
-		{
-			eventBroker.post(
-					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
-					null);
-		}
+//		else if (postSelection)
+//		{
+//			eventBroker.post(
+//					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
+//					null);
+//		}
 		painter.modelChanged(annotationModel);
 	}
 
@@ -818,7 +818,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						.getPosition(a);
 //				System.out.println("pos " + pos.getOffset() + " " +  pos.getOffset() + pos.getLength());
 				if ((pos.getOffset() <= start
-						&& start <= pos.getOffset() + pos.getLength()) || (pos.getOffset() >= start && pos.getOffset() <= end)) {
+						&& start < pos.getOffset() + pos.getLength()) || (pos.getOffset() >= start && pos.getOffset() <= end)) {
 					annotations.add((ModelAnnotation) a);
 					if (((ModelAnnotation)a).getModelObject() instanceof BTSSentenceItem)
 					{

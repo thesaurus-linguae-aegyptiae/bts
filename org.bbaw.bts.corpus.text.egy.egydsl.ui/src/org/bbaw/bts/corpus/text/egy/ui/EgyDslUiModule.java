@@ -4,6 +4,7 @@
 package org.bbaw.bts.corpus.text.egy.ui;
 
 import org.bbaw.bts.corpus.text.egy.formatting.EgyDslFormatter;
+import org.bbaw.bts.corpus.text.egy.ui.contentassist.AbstractEgyDslProposalProvider;
 import org.bbaw.bts.corpus.text.egy.ui.contentassist.EgyDslProposalProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectDocumentationProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEncodingProvider;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
@@ -66,4 +68,12 @@ public class EgyDslUiModule extends org.bbaw.bts.corpus.text.egy.ui.AbstractEgyD
 	public Class<? extends AbstractDeclarativeFormatter> createFormatter() {
 		return EgyDslFormatter.class;
 	}
+	
+    
+
+    public Class<? extends AbstractEgyDslProposalProvider> bindContentProposalProvider() {
+    	// TODO Auto-generated method stub
+    	return EgyDslProposalProvider.class;
+    }
+	
 }

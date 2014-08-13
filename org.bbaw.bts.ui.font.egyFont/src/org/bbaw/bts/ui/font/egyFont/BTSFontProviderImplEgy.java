@@ -48,7 +48,7 @@ public class BTSFontProviderImplEgy implements BTSFontProvider
 
 	private FontData getFontData()
 	{
-		URL entry = Platform.getBundle("org.bbaw.bts.ui.font.egyFont").getEntry("/" + FOLDER + FONT_FILE_NAME);
+		URL entry = Platform.getBundle(BUNDLE_NAME).getEntry("/" + FOLDER + FONT_FILE_NAME);
 		String fontpath = null;
 		if (entry != null)
 		{

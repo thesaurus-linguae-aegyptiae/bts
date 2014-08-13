@@ -18,6 +18,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -106,7 +107,18 @@ public class E4PreferenceRegistry
 					if (!(object instanceof PreferencePage))
 					{
 						logger.error("Expected instance of PreferencePage: {0}", elmt.getAttribute(ATTR_CLASS));
-						continue;
+						try
+						{
+							object = elmt.createExecutableExtension("class");
+						} catch (CoreException e1)
+						{
+							logger.error(e1);
+						}
+						if (!(object instanceof PreferencePage))
+						{
+							logger.error("Expected instance of PreferencePage: {0}", elmt.getAttribute(ATTR_CLASS));
+							continue;
+						}
 					}
 					page = (PreferencePage) object;
 					setPreferenceStore(bundleId, page);
@@ -114,6 +126,7 @@ public class E4PreferenceRegistry
 				} catch (ClassNotFoundException e)
 				{
 					logger.error(e);
+					
 					continue;
 				}
 				ContextInjectionFactory.inject(page, context);

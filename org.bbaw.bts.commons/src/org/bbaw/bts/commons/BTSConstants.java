@@ -31,6 +31,8 @@ public class BTSConstants
 	public static final String ENCODING = "UTF-8";
 	public static final String TEXT_VERS_BREAK_MARKER = "VersbreakMarker";
 	public static final String TEXT_VERS_FRONTIER_MARKER = "VersFrontierMarker";
+	public static final Object BROKEN_VERS_MARKER = "BrokenVersbreakMarker";
+
 	public static final String OBJECT_STATE_ACTIVE = "active";
 	public static final String OBJECT_STATE_TERMINATED = "terminated";
 	public static final String ANNOTATION = "Annotation";
@@ -65,6 +67,7 @@ public class BTSConstants
 	public static final String OWNER_REFERENCED_TYPES_LIST_SEPERATOR = ",";
 	public static final String OWNER_REFERENCED_TYPES_ANY = "ANY";
 	public static final String ANNOTATION_RUBRUM = "Rubrum";
+
 
 	private BTSConstants()
 	{

@@ -6,7 +6,7 @@ import java.util.Collection;
 
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Word;
-import org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle;
+import org.bbaw.bts.corpus.text.egy.egyDsl.WordPart;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
@@ -41,7 +41,7 @@ public class WordImpl extends SentenceItemImpl implements Word
    * @generated
    * @ordered
    */
-  protected EList<WordMiddle> wChar;
+  protected EList<WordPart> wChar;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,11 +69,11 @@ public class WordImpl extends SentenceItemImpl implements Word
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<WordMiddle> getWChar()
+  public EList<WordPart> getWChar()
   {
     if (wChar == null)
     {
-      wChar = new EObjectContainmentEList<WordMiddle>(WordMiddle.class, this, EgyDslPackage.WORD__WCHAR);
+      wChar = new EObjectContainmentEList<WordPart>(WordPart.class, this, EgyDslPackage.WORD__WCHAR);
     }
     return wChar;
   }
@@ -123,7 +123,7 @@ public class WordImpl extends SentenceItemImpl implements Word
     {
       case EgyDslPackage.WORD__WCHAR:
         getWChar().clear();
-        getWChar().addAll((Collection<? extends WordMiddle>)newValue);
+        getWChar().addAll((Collection<? extends WordPart>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

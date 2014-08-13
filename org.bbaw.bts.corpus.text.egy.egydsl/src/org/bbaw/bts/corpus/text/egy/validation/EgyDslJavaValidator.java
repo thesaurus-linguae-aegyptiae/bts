@@ -18,6 +18,8 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Word;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.validation.Check;
 
 /**
@@ -39,6 +41,26 @@ public class EgyDslJavaValidator extends
 							"org.bbaw.bts.corpus.text.egy.egyDsl.impl.Interfix")) {
 				error("Interfix may not be at the beginning of a word!", word,
 						EgyDslPackage.Literals.WORD__WCHAR, 0);
+			}
+			INode node = NodeModelUtils.getNode(word);
+			String text = node.getText();
+			System.out.println(text);
+
+			if (text.contains("  "))
+			{
+				int i = text.indexOf("  ");
+				error("Only single withespace allowed!", word,
+						EgyDslPackage.Literals.WORD__WCHAR, i);
+			} else if (text.contains("\n"))
+			{
+				int i = text.indexOf("\n");
+				error("Only linebreak allowed inside a word!", word,
+						EgyDslPackage.Literals.WORD__WCHAR, i);
+			}else if (text.contains("\r"))
+			{
+				int i = text.indexOf("\r");
+				error("No linebreak allowed inside a word!", word,
+						EgyDslPackage.Literals.WORD__WCHAR, i);
 			}
 			EObject last = null;
 			int index = 0;

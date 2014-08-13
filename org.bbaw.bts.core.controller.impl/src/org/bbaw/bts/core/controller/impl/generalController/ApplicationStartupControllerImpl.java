@@ -204,19 +204,55 @@ public class ApplicationStartupControllerImpl implements
 		// load font
 		Font font = null;
 		
-		font = fontManager.getFont("FreeSerif");
+		font = fontManager.getFont("BBAWLibertine");//"BBAWLibertine");
 		logger.info("Font loadded - font: " + font);
 		if (font != null && font.getFontData() != null && font.getFontData()[0] != null) {
 			font.getFontData()[0].setHeight(12);
 			JFaceResources.getFontRegistry().put(
 					JFaceResources.DEFAULT_FONT,
 					new FontData[] {  font.getFontData()[0] });
-			Font f = JFaceResources.getFontRegistry().get(
-					JFaceResources.DEFAULT_FONT);
-			// Font f2 = JFaceResources.getDefaultFont();
+//			Font f = JFaceResources.getFontRegistry().get(
+//					JFaceResources.DEFAULT_FONT);
+//			 Font f2 = JFaceResources.getDefaultFont();
+//			 Font f3 = JFaceResources.getFont("BBAWLibertine");
+//			 System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
+//			 for (Object s : JFaceResources.getFontRegistry().getKeySet())
+//			 {
+//				 System.out.println(s);
+//			 }
 		}
 		
-
+		System.out.println("Test sonderzeichen string: \uF0080 \uF0081 \uF0082 \u13379 \u13379a" );
+//		else
+//		{
+//			font = JFaceResources.getFontRegistry().get("Times New Roman");
+//			JFaceResources.getFontRegistry().put(
+//					JFaceResources.DEFAULT_FONT,
+//					new FontData[] {  font.getFontData()[0] });
+//			Font f = JFaceResources.getFontRegistry().get(
+//					JFaceResources.DEFAULT_FONT);
+//			 Font f2 = JFaceResources.getDefaultFont();
+//			 Font f3 = JFaceResources.getFont("BBAWLibertine");
+//			 System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
+//			 for (Object s : JFaceResources.getFontRegistry().getKeySet())
+//			 {
+//				 System.out.println(s);
+//			 }
+//		}
+//		FontData[] fds = Display.getCurrent().getFontList(null, true);
+//		{
+//			for (FontData f : fds)
+//			{
+//				System.out.println(f.toString());
+//				if (f.toString().startsWith("BBAWLibertine"))
+//				{
+//					JFaceResources.getFontRegistry().put(
+//							JFaceResources.DEFAULT_FONT,
+//							new FontData[] {  f });
+//				}
+//			}
+//		}
+		System.out.println(font);
 		dbPrepared = false;
 		mainProjectSet = false;
 		splashController.setSplashPluginId(PLUGIN_ID);

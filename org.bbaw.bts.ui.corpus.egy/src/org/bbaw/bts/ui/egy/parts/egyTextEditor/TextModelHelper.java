@@ -2,6 +2,8 @@ package org.bbaw.bts.ui.egy.parts.egyTextEditor;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -39,7 +41,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 public class TextModelHelper {
 
-	private HashMap<Position, Annotation> annotationMap;
+	private HashMap<Position, List<Annotation>> annotationMap;
 	private BTSTextContent oldTextContent;
 
 	public void updateModelFromTextContent(BTSText text, EObject eo,
@@ -64,9 +66,8 @@ public class TextModelHelper {
 					Sentence sentence = (Sentence) item;
 					BTSSenctence modelSentence = null;
 					INode node = NodeModelUtils.getNode(sentence);
-					ModelAnnotation ma = (ModelAnnotation) annotationMap
-							.get(new Position(node.getOffset(), node
-									.getLength()));
+					
+					ModelAnnotation ma =getModelAnnotationFromMap(node, BTSSenctence.class);
 					if (ma != null) {
 						modelSentence = (BTSSenctence) ma.getModelObject();
 					}
@@ -99,6 +100,25 @@ public class TextModelHelper {
 			}
 		}
 
+	}
+
+	private <E> ModelAnnotation getModelAnnotationFromMap(INode node,
+			Class<E> clazz) {
+		List<Annotation> list =  annotationMap
+				.get(new Position(node.getOffset(), node
+						.getLength()));
+		if (list == null)
+		{
+			return null;
+		}
+		for (Annotation an : list)
+		{
+			if (an instanceof ModelAnnotation && clazz.isInstance(((ModelAnnotation)an).getModelObject()))
+			{
+				return (ModelAnnotation) an;
+			}
+		}
+		return null;
 	}
 
 	private BTSSenctence makeNewModelSentence(Sentence sentence,
@@ -134,11 +154,11 @@ public class TextModelHelper {
 			BTSSenctence modelSentence) {
 		BTSAmbivalence modelAmbivalence = null;
 		INode node = NodeModelUtils.getNode(ambivalence);
-		ModelAnnotation ma = (ModelAnnotation) annotationMap.get(new Position(
-				node.getOffset() - 1, node.getLength()));
-		if (ma != null) {
-			modelAmbivalence = (BTSAmbivalence) ma.getModelObject();
+		ModelAnnotation ma = getModelAnnotationFromMap(node, BTSAmbivalence.class);
+		if (ma == null || !( ma.getModelObject() instanceof BTSAmbivalence)) {
+			return null;
 		}
+		modelAmbivalence = (BTSAmbivalence) ma.getModelObject();
 		if (modelAmbivalence == null) {
 			modelAmbivalence = makeNewModelAmbivalence(ambivalence, lastItem,
 					modelSentence);
@@ -157,9 +177,7 @@ public class TextModelHelper {
 		for (Case item : ambivalence.getCases()) {
 			BTSLemmaCase modelCase = null;
 			INode nodeCase = NodeModelUtils.getNode(item);
-			ModelAnnotation maCase = (ModelAnnotation) annotationMap
-					.get(new Position(nodeCase.getOffset() - 1, nodeCase
-							.getLength()));
+			ModelAnnotation maCase =getModelAnnotationFromMap(nodeCase, BTSLemmaCase.class);
 			if (maCase != null) {
 				modelCase = (BTSLemmaCase) maCase.getModelObject();
 			}
@@ -210,8 +228,7 @@ public class TextModelHelper {
 			BTSLemmaCase modelCase) {
 		BTSMarker modelMarker = null;
 		INode node = NodeModelUtils.getNode(marker);
-		ModelAnnotation ma = (ModelAnnotation) annotationMap.get(new Position(
-				node.getOffset(), node.getLength()));
+		ModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class);
 		if (ma != null) {
 			modelMarker = (BTSMarker) ma.getModelObject();
 		}
@@ -244,8 +261,7 @@ public class TextModelHelper {
 		INode node = NodeModelUtils.getNode(word);
 		// System.out.println("word " + node.getText() + " node offset "
 		// + node.getOffset() + " node length " + node.getLength());
-		ModelAnnotation ma = (ModelAnnotation) annotationMap.get(new Position(
-				node.getOffset(), node.getLength()));
+		ModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class);
 		if (ma != null) {
 			modelWord = (BTSWord) ma.getModelObject();
 		}
@@ -286,18 +302,18 @@ public class TextModelHelper {
 			BTSSenctence modelSentence) {
 		BTSMarker modelMarker = null;
 		INode node = NodeModelUtils.getNode(si);
-		ModelAnnotation ma = (ModelAnnotation) annotationMap.get(new Position(
-				node.getOffset() - 1, node.getLength()));
+		ModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class);
+		System.out.println(ma);
 		if (ma != null) {
 			modelMarker = (BTSMarker) ma.getModelObject();
 		}
- else if (modelMarker == null) {
-			ma = (ModelAnnotation) annotationMap.get(new Position(node
-					.getOffset() - 1, node.getLength() + 1));
-			if (ma != null) {
-				modelMarker = (BTSMarker) ma.getModelObject();
-			}
-		}
+//		else if (modelMarker == null) {
+//			ma = (ModelAnnotation) annotationMap.get(new Position(node
+//					.getOffset() - 1, node.getLength() + 1));
+//			if (ma != null) {
+//				modelMarker = (BTSMarker) ma.getModelObject();
+//			}
+//		}
 		if (modelMarker == null) {
 			modelMarker = makeNewModelMarker(sentence, lastItem, modelSentence);
 		}
@@ -355,9 +371,7 @@ public class TextModelHelper {
 		INode node = NodeModelUtils.getNode(word);
 		System.out.println("word " + node.getText() + " node offset "
 				+ node.getOffset() + " node length " + node.getLength());
-		ModelAnnotation ma = (ModelAnnotation) annotationMap
-				.get(new Position(
-				node.getOffset(), node.getLength()));
+		ModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class);
 		if (ma != null && ma.getModelObject() instanceof BTSWord) {
 			modelWord = (BTSWord) ma.getModelObject();
 		}
@@ -388,14 +402,20 @@ public class TextModelHelper {
 	}
 
 	private void loadAnnotationMapping(EObject TextContent, IAnnotationModel am) {
-		annotationMap = new HashMap<Position, Annotation>();
+		annotationMap = new HashMap<Position, List<Annotation>>();
 		Iterator it = am.getAnnotationIterator();
 		while (it.hasNext()) {
 			Annotation an = (Annotation) it.next();
 			if (an instanceof ModelAnnotation) {
 				if (((ModelAnnotation) an).getModelObject() != null) {
 					Position pos = am.getPosition(an);
-					annotationMap.put(pos, an);
+					List<Annotation> list = annotationMap.get(pos);
+					if (list == null)
+					{
+						list = new Vector<Annotation>(4);
+						annotationMap.put(pos, list);
+					}
+					list.add(an);
 				}
 			}
 		}

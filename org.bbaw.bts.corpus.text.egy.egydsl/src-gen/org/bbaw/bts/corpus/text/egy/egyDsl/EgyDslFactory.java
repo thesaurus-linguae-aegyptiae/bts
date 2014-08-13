@@ -122,6 +122,15 @@ public interface EgyDslFactory extends EFactory
   VersbreakMarker createVersbreakMarker();
 
   /**
+   * Returns a new object of class '<em>Broken Versbreak Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Broken Versbreak Marker</em>'.
+   * @generated
+   */
+  BrokenVersbreakMarker createBrokenVersbreakMarker();
+
+  /**
    * Returns a new object of class '<em>Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -140,6 +149,78 @@ public interface EgyDslFactory extends EFactory
   Word createWord();
 
   /**
+   * Returns a new object of class '<em>Word Part</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Word Part</em>'.
+   * @generated
+   */
+  WordPart createWordPart();
+
+  /**
+   * Returns a new object of class '<em>Word Ending</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Word Ending</em>'.
+   * @generated
+   */
+  WordEnding createWordEnding();
+
+  /**
+   * Returns a new object of class '<em>Dual Ending</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dual Ending</em>'.
+   * @generated
+   */
+  DualEnding createDualEnding();
+
+  /**
+   * Returns a new object of class '<em>Dual Chars</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Dual Chars</em>'.
+   * @generated
+   */
+  DualChars createDualChars();
+
+  /**
+   * Returns a new object of class '<em>Plural Chars</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plural Chars</em>'.
+   * @generated
+   */
+  PluralChars createPluralChars();
+
+  /**
+   * Returns a new object of class '<em>Plural Ending</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Plural Ending</em>'.
+   * @generated
+   */
+  PluralEnding createPluralEnding();
+
+  /**
+   * Returns a new object of class '<em>Interfix Flexion Eding</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Flexion Eding</em>'.
+   * @generated
+   */
+  InterfixFlexionEding createInterfixFlexionEding();
+
+  /**
+   * Returns a new object of class '<em>Interfix Lexical Ending</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Lexical Ending</em>'.
+   * @generated
+   */
+  InterfixLexicalEnding createInterfixLexicalEnding();
+
+  /**
    * Returns a new object of class '<em>Word Middle</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -156,6 +237,15 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   Chars createChars();
+
+  /**
+   * Returns a new object of class '<em>Suffix Chars</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Suffix Chars</em>'.
+   * @generated
+   */
+  SuffixChars createSuffixChars();
 
   /**
    * Returns a new object of class '<em>Interfix</em>'.
@@ -212,15 +302,6 @@ public interface EgyDslFactory extends EFactory
   InterfixPrefixLexical createInterfixPrefixLexical();
 
   /**
-   * Returns a new object of class '<em>Interfix Compount Words</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Interfix Compount Words</em>'.
-   * @generated
-   */
-  InterfixCompountWords createInterfixCompountWords();
-
-  /**
    * Returns a new object of class '<em>Interfix Connection Syllabic Group</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -237,6 +318,15 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   Brackets createBrackets();
+
+  /**
+   * Returns a new object of class '<em>No Cartouche</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>No Cartouche</em>'.
+   * @generated
+   */
+  NoCartouche createNoCartouche();
 
   /**
    * Returns a new object of class '<em>Expanded</em>'.
