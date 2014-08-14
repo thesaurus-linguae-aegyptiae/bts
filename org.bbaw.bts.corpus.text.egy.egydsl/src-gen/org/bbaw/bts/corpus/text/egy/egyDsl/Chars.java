@@ -19,7 +19,7 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  * @model
  * @generated
  */
-public interface Chars extends WordMiddle, NoCartouche, NoExpanded, NoEmendation, NoDisputableReading, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur, NoPartialDestruction
+public interface Chars extends WordMiddle, NoExpanded, NoEmendation, NoDisputableReading, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur, NoPartialDestruction
 {
   /**
    * Returns the value of the '<em><b>Name</b></em>' attribute.

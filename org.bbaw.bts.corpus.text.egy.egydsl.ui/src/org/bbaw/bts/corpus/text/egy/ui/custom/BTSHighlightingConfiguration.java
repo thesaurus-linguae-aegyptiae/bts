@@ -33,8 +33,8 @@ public class BTSHighlightingConfiguration implements IHighlightingConfiguration 
 	// that will appear in the preference page and the initial text style
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
 		addType(acceptor, WORD, 50, 0, 0, SWT.NORMAL);
-		addType(acceptor, MARKER, 50, 50, 0, SWT.BOLD);
-		addType(acceptor, SENTENCE, 50, 50, 100, SWT.BOLD);
+		addType(acceptor, MARKER, 50, 50, 0, SWT.NORMAL);
+		addType(acceptor, SENTENCE, 50, 50, 100, SWT.NORMAL);
 		addType(acceptor, AMBIVALENCE, 00, 0, 0, NORMAL);
 		addType(acceptor, LEMMA_CASE, 50, 0, 0, NORMAL);
 

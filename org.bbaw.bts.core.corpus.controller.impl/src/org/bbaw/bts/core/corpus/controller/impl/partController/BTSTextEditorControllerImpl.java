@@ -102,7 +102,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
 	private static final int GAP = 10;
-	private static final Object BROKEN_VERS_MARKER = "\uDB80\uDC82";
+	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
 	
 	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
 	

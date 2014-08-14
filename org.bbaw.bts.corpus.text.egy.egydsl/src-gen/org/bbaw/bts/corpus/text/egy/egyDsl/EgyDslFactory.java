@@ -167,6 +167,15 @@ public interface EgyDslFactory extends EFactory
   WordEnding createWordEnding();
 
   /**
+   * Returns a new object of class '<em>Ending</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ending</em>'.
+   * @generated
+   */
+  Ending createEnding();
+
+  /**
    * Returns a new object of class '<em>Dual Ending</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -174,24 +183,6 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   DualEnding createDualEnding();
-
-  /**
-   * Returns a new object of class '<em>Dual Chars</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Dual Chars</em>'.
-   * @generated
-   */
-  DualChars createDualChars();
-
-  /**
-   * Returns a new object of class '<em>Plural Chars</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Plural Chars</em>'.
-   * @generated
-   */
-  PluralChars createPluralChars();
 
   /**
    * Returns a new object of class '<em>Plural Ending</em>'.
@@ -318,15 +309,6 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   Brackets createBrackets();
-
-  /**
-   * Returns a new object of class '<em>No Cartouche</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>No Cartouche</em>'.
-   * @generated
-   */
-  NoCartouche createNoCartouche();
 
   /**
    * Returns a new object of class '<em>Expanded</em>'.

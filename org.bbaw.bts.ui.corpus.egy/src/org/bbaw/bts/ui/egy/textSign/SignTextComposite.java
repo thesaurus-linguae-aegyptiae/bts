@@ -20,6 +20,7 @@ import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
@@ -138,6 +139,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 	private List<BTSObject> continuingRelatingObjects;
 	private HashMap<String, List<ElementFigure>> relatingObjectFigureMap;
+
+	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
+	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
+	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
 
 	@Inject
 	public SignTextComposite(Composite parent) {
@@ -619,7 +624,17 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	private ElementFigure makeMarkerFigure(BTSMarker marker) {
-		MarkerFigure fig = new MarkerFigure(marker.getType());
+		String mType = marker.getType();
+		if (marker.getType().equals(BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
+			mType = VERS_FRONTER_MARKER;
+		} else if (marker.getType().equals(
+				BTSConstants.TEXT_VERS_BREAK_MARKER)) {
+			mType = VERS_BREAK_MARKER;
+		} else if (marker.getType().equals(
+				BTSConstants.BROKEN_VERS_MARKER)) {
+			mType = BROKEN_VERS_MARKER;
+		} 
+		MarkerFigure fig = new MarkerFigure(mType);
 		// add name
 		if (marker.getName() != null && !"".equals(marker.getName())) {
 			org.eclipse.draw2d.Label l = new org.eclipse.draw2d.Label();

@@ -41,9 +41,9 @@ public class BTSSemanticHighlightingCalculator implements
 			} else if (element instanceof Sentence) {
 				highlightAsDataType(element,
 						EgyDslPackage.Literals.SENTENCE__ITEMS, acceptor);
-			} else if (element instanceof Marker) {
-				highlightAsDataType(element,
-						EgyDslPackage.Literals.MARKER__NAME, acceptor);
+//			} else if (element instanceof Marker) {
+//				highlightAsDataType(element,
+//						EgyDslPackage.Literals.MARKER__NAME, acceptor);
 			} else if (element instanceof Case) {
 				highlightAsDataType(element, EgyDslPackage.Literals.CASE__NAME,
 						acceptor);

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -20,6 +22,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AbstractMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
+import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
@@ -43,6 +46,7 @@ public class TextModelHelper {
 
 	private HashMap<Position, List<Annotation>> annotationMap;
 	private BTSTextContent oldTextContent;
+	private Pattern lemmaPattern = Pattern.compile("(case\\w)([^:]+)(:)");
 
 	public void updateModelFromTextContent(BTSText text, EObject eo,
 			IAnnotationModel am) {
@@ -155,10 +159,9 @@ public class TextModelHelper {
 		BTSAmbivalence modelAmbivalence = null;
 		INode node = NodeModelUtils.getNode(ambivalence);
 		ModelAnnotation ma = getModelAnnotationFromMap(node, BTSAmbivalence.class);
-		if (ma == null || !( ma.getModelObject() instanceof BTSAmbivalence)) {
-			return null;
+		if (ma != null &&  ma.getModelObject() instanceof BTSAmbivalence) {
+			modelAmbivalence = (BTSAmbivalence) ma.getModelObject();
 		}
-		modelAmbivalence = (BTSAmbivalence) ma.getModelObject();
 		if (modelAmbivalence == null) {
 			modelAmbivalence = makeNewModelAmbivalence(ambivalence, lastItem,
 					modelSentence);
@@ -192,7 +195,7 @@ public class TextModelHelper {
 			} else {
 				modelAmbivalence.getCases().add(0, modelCase);
 			}
-			modelCase.setName(item.getName());
+			modelCase.setName(extractLemmaCaseName(item.getName()));
 			BTSAmbivalenceItem lastAmbivalenceItem = null;
 			EList<BTSAmbivalenceItem> oldAmbivalenceItems = modelCase
 					.getScenario();
@@ -207,6 +210,15 @@ public class TextModelHelper {
 		}
 		return modelAmbivalence;
 
+	}
+
+	private String extractLemmaCaseName(String name) {
+		Matcher m = lemmaPattern.matcher(name.trim());
+		if (m.matches())
+		{
+			return m.group(2);
+		}
+		return name.trim();
 	}
 
 	private BTSAmbivalenceItem updateAmbivalenceItemFromTextContent(
@@ -327,19 +339,30 @@ public class TextModelHelper {
 		if (si instanceof Marker) {
 			Marker m = (Marker) si;
 			if (m.getType() != null) {
-				if (!m.getType().equals(modelMarker.getType())) {
-					modelMarker.setType(m.getType());
+				String basetype = m.getType();
+				basetype = basetype.substring(1, basetype.length() -1);
+				String type = basetype;
+				if (basetype.contains(":"))
+				{
+					String[] arr = basetype.split(":");
+					type = arr[0];
+					String name = arr[1].trim();
+					if (name != null) {
+						if (!name.equals(modelMarker.getName())) {
+							modelMarker.setName(name);
+						}
+					} else {
+						modelMarker.setName(null);
+					}
+				}
+				
+				if (!type.equals(modelMarker.getType())) {
+					modelMarker.setType(type);
 				}
 			} else {
 				modelMarker.setType(null);
 			}
-			if (m.getName() != null) {
-				if (!m.getName().equals(modelMarker.getName())) {
-					modelMarker.setName(m.getName());
-				}
-			} else {
-				modelMarker.setName(null);
-			}
+			
 		} else if (si instanceof VersbreakMarker) {
 			if (modelMarker.getType() == null
 					|| !modelMarker.getType().equals(
@@ -351,6 +374,12 @@ public class TextModelHelper {
 					|| !modelMarker.getType().equals(
 							BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
 				modelMarker.setType(BTSConstants.TEXT_VERS_FRONTIER_MARKER);
+			}
+		} else if (si instanceof BrokenVersbreakMarker) {
+			if (modelMarker.getType() == null
+					|| !modelMarker.getType().equals(
+							BTSConstants.BROKEN_VERS_MARKER)) {
+				modelMarker.setType(BTSConstants.BROKEN_VERS_MARKER);
 			}
 		}
 		return modelMarker;

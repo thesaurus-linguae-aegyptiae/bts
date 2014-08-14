@@ -80,7 +80,7 @@
     <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" label="TEST pref" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" label="New Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-add.png" command="_3ajhwAWXEeOmY4VxFYomZg"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_if9qwDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handledmenuitem.openUserManager" label="Open User Manager" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/users.png" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="E4 Preferences" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="Preferences..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>
@@ -108,7 +108,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_wI0tUDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.5" label="Open Perspective"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_fza6QDVsEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.preferences">
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_LaH0gGHPEeOopJSr4SFGCw" elementId="org.bbaw.bts.ui.main.handledmenuitem.preferences" label="Preferences..." command="_4iiDcGHOEeOopJSr4SFGCw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_LaH0gGHPEeOopJSr4SFGCw" elementId="org.bbaw.bts.ui.main.handledmenuitem.preferences" toBeRendered="false" visible="false" label="Preferences..." command="_4iiDcGHOEeOopJSr4SFGCw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2i1JYOsyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_qiDCMOutEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/preferences_32.png" tooltip="Open Preferences" command="_NRDnwNtvEeODTbKD0_l8Zw"/>

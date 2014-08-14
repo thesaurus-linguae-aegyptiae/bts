@@ -12,11 +12,11 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Destruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DualChars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DualEnding;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
+import org.bbaw.bts.corpus.text.egy.egyDsl.Ending;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.ExpandedColumn;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Interfix;
@@ -31,7 +31,6 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Lacuna;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoAncientExpanded;
-import org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoDeletion;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoDisputableReading;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoEmendation;
@@ -42,7 +41,6 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.NoPartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoRestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
-import org.bbaw.bts.corpus.text.egy.egyDsl.PluralChars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PluralEnding;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasur;
@@ -192,21 +190,14 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass endingEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass dualEndingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass dualCharsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass pluralCharsEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -305,13 +296,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass bracketsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass noCartoucheEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -718,16 +702,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getMarker_Name()
-  {
-    return (EAttribute)markerEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getWord()
   {
     return wordEClass;
@@ -778,6 +752,26 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getEnding()
+  {
+    return endingEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getEnding_Chars()
+  {
+    return (EReference)endingEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getDualEnding()
   {
     return dualEndingEClass;
@@ -788,59 +782,9 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getDualEnding_Interfix()
+  public EAttribute getDualEnding_Chars()
   {
-    return (EReference)dualEndingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getDualEnding_Chars()
-  {
-    return (EReference)dualEndingEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDualChars()
-  {
-    return dualCharsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getDualChars_Name()
-  {
-    return (EAttribute)dualCharsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getPluralChars()
-  {
-    return pluralCharsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getPluralChars_Name()
-  {
-    return (EAttribute)pluralCharsEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)dualEndingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -858,19 +802,9 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getPluralEnding_Interfix()
+  public EAttribute getPluralEnding_Chars()
   {
-    return (EReference)pluralEndingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getPluralEnding_Chars()
-  {
-    return (EReference)pluralEndingEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)pluralEndingEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1061,16 +995,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
   public EClass getBrackets()
   {
     return bracketsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getNoCartouche()
-  {
-    return noCartoucheEClass;
   }
 
   /**
@@ -1454,7 +1378,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     markerEClass = createEClass(MARKER);
     createEAttribute(markerEClass, MARKER__TYPE);
-    createEAttribute(markerEClass, MARKER__NAME);
 
     wordEClass = createEClass(WORD);
     createEReference(wordEClass, WORD__WCHAR);
@@ -1464,19 +1387,14 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     wordEndingEClass = createEClass(WORD_ENDING);
 
+    endingEClass = createEClass(ENDING);
+    createEReference(endingEClass, ENDING__CHARS);
+
     dualEndingEClass = createEClass(DUAL_ENDING);
-    createEReference(dualEndingEClass, DUAL_ENDING__INTERFIX);
-    createEReference(dualEndingEClass, DUAL_ENDING__CHARS);
-
-    dualCharsEClass = createEClass(DUAL_CHARS);
-    createEAttribute(dualCharsEClass, DUAL_CHARS__NAME);
-
-    pluralCharsEClass = createEClass(PLURAL_CHARS);
-    createEAttribute(pluralCharsEClass, PLURAL_CHARS__NAME);
+    createEAttribute(dualEndingEClass, DUAL_ENDING__CHARS);
 
     pluralEndingEClass = createEClass(PLURAL_ENDING);
-    createEReference(pluralEndingEClass, PLURAL_ENDING__INTERFIX);
-    createEReference(pluralEndingEClass, PLURAL_ENDING__CHARS);
+    createEAttribute(pluralEndingEClass, PLURAL_ENDING__CHARS);
 
     interfixFlexionEdingEClass = createEClass(INTERFIX_FLEXION_EDING);
     createEReference(interfixFlexionEdingEClass, INTERFIX_FLEXION_EDING__INTERFIX);
@@ -1509,8 +1427,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     interfixConnectionSyllabicGroupEClass = createEClass(INTERFIX_CONNECTION_SYLLABIC_GROUP);
 
     bracketsEClass = createEClass(BRACKETS);
-
-    noCartoucheEClass = createEClass(NO_CARTOUCHE);
 
     expandedEClass = createEClass(EXPANDED);
     createEReference(expandedEClass, EXPANDED__WCHAR);
@@ -1606,12 +1522,10 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     markerEClass.getESuperTypes().add(this.getAbstractMarker());
     wordEClass.getESuperTypes().add(this.getSentenceItem());
     wordEClass.getESuperTypes().add(this.getSentenceItemNoAmbivalence());
+    endingEClass.getESuperTypes().add(this.getWordEnding());
     dualEndingEClass.getESuperTypes().add(this.getWordEnding());
     pluralEndingEClass.getESuperTypes().add(this.getWordEnding());
-    interfixFlexionEdingEClass.getESuperTypes().add(this.getWordEnding());
-    interfixLexicalEndingEClass.getESuperTypes().add(this.getWordEnding());
     charsEClass.getESuperTypes().add(this.getWordMiddle());
-    charsEClass.getESuperTypes().add(this.getNoCartouche());
     charsEClass.getESuperTypes().add(this.getNoExpanded());
     charsEClass.getESuperTypes().add(this.getNoEmendation());
     charsEClass.getESuperTypes().add(this.getNoDisputableReading());
@@ -1622,7 +1536,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     charsEClass.getESuperTypes().add(this.getNoAncientExpanded());
     charsEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
     charsEClass.getESuperTypes().add(this.getNoPartialDestruction());
-    interfixEClass.getESuperTypes().add(this.getNoCartouche());
     interfixEClass.getESuperTypes().add(this.getNoExpanded());
     interfixEClass.getESuperTypes().add(this.getNoEmendation());
     interfixEClass.getESuperTypes().add(this.getNoDisputableReading());
@@ -1637,7 +1550,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     interfixConnectionSyllabicGroupEClass.getESuperTypes().add(this.getInterfix());
     bracketsEClass.getESuperTypes().add(this.getWordMiddle());
     expandedEClass.getESuperTypes().add(this.getBrackets());
-    expandedEClass.getESuperTypes().add(this.getNoCartouche());
     expandedEClass.getESuperTypes().add(this.getNoEmendation());
     expandedEClass.getESuperTypes().add(this.getNoDisputableReading());
     expandedEClass.getESuperTypes().add(this.getNoLacuna());
@@ -1648,27 +1560,17 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     expandedEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
     expandedEClass.getESuperTypes().add(this.getNoPartialDestruction());
     emendationEClass.getESuperTypes().add(this.getBrackets());
-    emendationEClass.getESuperTypes().add(this.getNoCartouche());
     disputableReadingEClass.getESuperTypes().add(this.getBrackets());
-    disputableReadingEClass.getESuperTypes().add(this.getNoCartouche());
     lacunaEClass.getESuperTypes().add(this.getBrackets());
-    lacunaEClass.getESuperTypes().add(this.getNoCartouche());
     deletionEClass.getESuperTypes().add(this.getBrackets());
-    deletionEClass.getESuperTypes().add(this.getNoCartouche());
     deletionEClass.getESuperTypes().add(this.getNoPartialDestruction());
     expandedColumnEClass.getESuperTypes().add(this.getBrackets());
-    expandedColumnEClass.getESuperTypes().add(this.getNoCartouche());
     rasurEClass.getESuperTypes().add(this.getBrackets());
-    rasurEClass.getESuperTypes().add(this.getNoCartouche());
     ancientExpandedEClass.getESuperTypes().add(this.getBrackets());
-    ancientExpandedEClass.getESuperTypes().add(this.getNoCartouche());
     restorationOverRasurEClass.getESuperTypes().add(this.getBrackets());
-    restorationOverRasurEClass.getESuperTypes().add(this.getNoCartouche());
     partialDestructionEClass.getESuperTypes().add(this.getBrackets());
-    partialDestructionEClass.getESuperTypes().add(this.getNoCartouche());
     partialDestructionEClass.getESuperTypes().add(this.getNoDeletion());
     destructionEClass.getESuperTypes().add(this.getBrackets());
-    destructionEClass.getESuperTypes().add(this.getNoCartouche());
 
     // Initialize classes and features; add operations and parameters
     initEClass(textContentEClass, TextContent.class, "TextContent", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1702,7 +1604,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     initEClass(markerEClass, Marker.class, "Marker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMarker_Type(), ecorePackage.getEString(), "type", null, 0, 1, Marker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getMarker_Name(), ecorePackage.getEString(), "name", null, 0, 1, Marker.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(wordEClass, Word.class, "Word", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getWord_WChar(), this.getWordPart(), null, "wChar", null, 0, -1, Word.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1712,19 +1613,14 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     initEClass(wordEndingEClass, WordEnding.class, "WordEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
+    initEClass(endingEClass, Ending.class, "Ending", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getEnding_Chars(), this.getSuffixChars(), null, "chars", null, 0, 1, Ending.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(dualEndingEClass, DualEnding.class, "DualEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getDualEnding_Interfix(), this.getInterfixFlexion(), null, "interfix", null, 0, 1, DualEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getDualEnding_Chars(), this.getDualChars(), null, "chars", null, 0, 1, DualEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(dualCharsEClass, DualChars.class, "DualChars", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDualChars_Name(), ecorePackage.getEString(), "name", null, 0, 1, DualChars.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(pluralCharsEClass, PluralChars.class, "PluralChars", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPluralChars_Name(), ecorePackage.getEString(), "name", null, 0, 1, PluralChars.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getDualEnding_Chars(), ecorePackage.getEString(), "chars", null, 0, 1, DualEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(pluralEndingEClass, PluralEnding.class, "PluralEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getPluralEnding_Interfix(), this.getInterfixFlexion(), null, "interfix", null, 0, 1, PluralEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getPluralEnding_Chars(), this.getPluralChars(), null, "chars", null, 0, 1, PluralEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getPluralEnding_Chars(), ecorePackage.getEString(), "chars", null, 0, 1, PluralEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(interfixFlexionEdingEClass, InterfixFlexionEding.class, "InterfixFlexionEding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getInterfixFlexionEding_Interfix(), this.getInterfixFlexion(), null, "interfix", null, 0, 1, InterfixFlexionEding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1757,8 +1653,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEClass(interfixConnectionSyllabicGroupEClass, InterfixConnectionSyllabicGroup.class, "InterfixConnectionSyllabicGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(bracketsEClass, Brackets.class, "Brackets", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(noCartoucheEClass, NoCartouche.class, "NoCartouche", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(expandedEClass, Expanded.class, "Expanded", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getExpanded_WChar(), this.getNoExpanded(), null, "wChar", null, 0, -1, Expanded.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

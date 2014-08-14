@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface AncientExpanded extends Brackets, NoCartouche
+public interface AncientExpanded extends Brackets
 {
   /**
    * Returns the value of the '<em><b>WChar</b></em>' containment reference list.

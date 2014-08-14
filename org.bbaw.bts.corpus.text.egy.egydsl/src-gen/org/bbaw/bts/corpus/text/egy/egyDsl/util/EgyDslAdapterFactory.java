@@ -155,19 +155,14 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createWordEndingAdapter();
       }
       @Override
+      public Adapter caseEnding(Ending object)
+      {
+        return createEndingAdapter();
+      }
+      @Override
       public Adapter caseDualEnding(DualEnding object)
       {
         return createDualEndingAdapter();
-      }
-      @Override
-      public Adapter caseDualChars(DualChars object)
-      {
-        return createDualCharsAdapter();
-      }
-      @Override
-      public Adapter casePluralChars(PluralChars object)
-      {
-        return createPluralCharsAdapter();
       }
       @Override
       public Adapter casePluralEnding(PluralEnding object)
@@ -238,11 +233,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseBrackets(Brackets object)
       {
         return createBracketsAdapter();
-      }
-      @Override
-      public Adapter caseNoCartouche(NoCartouche object)
-      {
-        return createNoCartoucheAdapter();
       }
       @Override
       public Adapter caseExpanded(Expanded object)
@@ -612,6 +602,21 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Ending <em>Ending</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Ending
+   * @generated
+   */
+  public Adapter createEndingAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DualEnding <em>Dual Ending</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -622,36 +627,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDualEndingAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DualChars <em>Dual Chars</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DualChars
-   * @generated
-   */
-  public Adapter createDualCharsAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PluralChars <em>Plural Chars</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PluralChars
-   * @generated
-   */
-  public Adapter createPluralCharsAdapter()
   {
     return null;
   }
@@ -862,21 +837,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createBracketsAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche <em>No Cartouche</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche
-   * @generated
-   */
-  public Adapter createNoCartoucheAdapter()
   {
     return null;
   }

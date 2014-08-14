@@ -13,6 +13,6 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  * @model
  * @generated
  */
-public interface Interfix extends NoCartouche, NoExpanded, NoEmendation, NoDisputableReading, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoPartialDestruction
+public interface Interfix extends NoExpanded, NoEmendation, NoDisputableReading, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoPartialDestruction
 {
 } // Interfix

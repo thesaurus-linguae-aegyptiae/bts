@@ -80,9 +80,8 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.WORD: return createWord();
       case EgyDslPackage.WORD_PART: return createWordPart();
       case EgyDslPackage.WORD_ENDING: return createWordEnding();
+      case EgyDslPackage.ENDING: return createEnding();
       case EgyDslPackage.DUAL_ENDING: return createDualEnding();
-      case EgyDslPackage.DUAL_CHARS: return createDualChars();
-      case EgyDslPackage.PLURAL_CHARS: return createPluralChars();
       case EgyDslPackage.PLURAL_ENDING: return createPluralEnding();
       case EgyDslPackage.INTERFIX_FLEXION_EDING: return createInterfixFlexionEding();
       case EgyDslPackage.INTERFIX_LEXICAL_ENDING: return createInterfixLexicalEnding();
@@ -97,7 +96,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.INTERFIX_PREFIX_LEXICAL: return createInterfixPrefixLexical();
       case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP: return createInterfixConnectionSyllabicGroup();
       case EgyDslPackage.BRACKETS: return createBrackets();
-      case EgyDslPackage.NO_CARTOUCHE: return createNoCartouche();
       case EgyDslPackage.EXPANDED: return createExpanded();
       case EgyDslPackage.NO_EXPANDED: return createNoExpanded();
       case EgyDslPackage.EMENDATION: return createEmendation();
@@ -305,32 +303,21 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public Ending createEnding()
+  {
+    EndingImpl ending = new EndingImpl();
+    return ending;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DualEnding createDualEnding()
   {
     DualEndingImpl dualEnding = new DualEndingImpl();
     return dualEnding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DualChars createDualChars()
-  {
-    DualCharsImpl dualChars = new DualCharsImpl();
-    return dualChars;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PluralChars createPluralChars()
-  {
-    PluralCharsImpl pluralChars = new PluralCharsImpl();
-    return pluralChars;
   }
 
   /**
@@ -485,17 +472,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     BracketsImpl brackets = new BracketsImpl();
     return brackets;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public NoCartouche createNoCartouche()
-  {
-    NoCartoucheImpl noCartouche = new NoCartoucheImpl();
-    return noCartouche;
   }
 
   /**
