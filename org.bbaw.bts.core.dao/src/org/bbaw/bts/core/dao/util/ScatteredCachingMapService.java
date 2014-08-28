@@ -1,3 +1,32 @@
+/**
+ * This file is part of Berlin Text System.
+ * 
+ * The software Berlin Text System serves as a client user interface for working with
+ * text corpus data. See: aaew.bbaw.de
+ * 
+ * The software Berlin Text System was developed at the Berlin-Brandenburg Academy
+ * of Sciences and Humanities, Jägerstr. 22/23, D-10117 Berlin.
+ * www.bbaw.de
+ * 
+ * Copyright (C) 2013-2014  Berlin-Brandenburg Academy
+ * of Sciences and Humanities
+ * 
+ * The software Berlin Text System was developed by @author: Christoph Plutte.
+ * 
+ * Berlin Text System is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Berlin Text System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Berlin Text System.  
+ * If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ */
 package org.bbaw.bts.core.dao.util;
 
 import java.util.Collection;
@@ -28,41 +57,62 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 
+/**
+ * The Class ScatteredCachingMapService implements hashmap customize caching of EMF-Resources in ResourceSet.
+ * The service does not actually store the cached objects but looks for Parts that cache their locally stored data locally.
+ *
+ * @author Christoph Plutte
+ */
 public class ScatteredCachingMapService implements Map<URI, Resource> {
 
+	/** The part service. */
 	@Inject
 	@Optional
 	private EPartService partService;
 
+	/** The configuration map. */
 	private Map<URI, Resource> configurationMap = new HashMap<URI, Resource>();
 
+	/** The model service. */
 	@Inject
 	private EModelService modelService;
 
+	/** The workbench window. */
 	@Inject
 	@Optional
 	private MWindow  workbenchWindow;
 
+	/** The application. */
 	@Inject
 	@Optional
 	private MApplication application;
 
+	/** The context. */
 	@Inject
 	private IEclipseContext context;
 	
+	/** The resource set. */
 	@Inject
 	private ResourceSet resourceSet;
 
+	/** The notification map. */
 	private Map<URI, Resource> notificationMap = new HashMap<URI, Resource>();
 	
+	/** The eclassmap. */
 	private Map<URI, Resource> eclassmap = new HashMap<URI, Resource>();
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#clear()
+	 */
 	@Override
 	public void clear() {
 		configurationMap.clear();
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#containsKey(java.lang.Object)
+	 */
 	@Override
 	public boolean containsKey(Object key) {
 		if (configurationMap.containsKey(key)) {
@@ -112,6 +162,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#containsValue(java.lang.Object)
+	 */
 	@Override
 	public boolean containsValue(Object value) {
 		if (configurationMap.containsValue(value)) {
@@ -141,6 +194,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#entrySet()
+	 */
 	@Override
 	public Set<java.util.Map.Entry<URI, Resource>> entrySet() {
 		throw new UnsupportedOperationException(
@@ -148,6 +204,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#get(java.lang.Object)
+	 */
 	@Override
 	public Resource get(Object key) {
 		// FIXME dies setzt ein active window voraus - nicht gegeben, wenn parts
@@ -214,6 +273,12 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		}
 		return null;
 	}
+	
+	/**
+	 * Gets the window.
+	 *
+	 * @return the window
+	 */
 	private MWindow getWindow() {
 		if (workbenchWindow != null)
 			return workbenchWindow;
@@ -228,18 +293,28 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 			return windows.get(0);
 		return null;
 	}
+	
+	/* (non-Javadoc)
+	 * @see java.util.Map#isEmpty()
+	 */
 	@Override
 	public boolean isEmpty() {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#keySet()
+	 */
 	@Override
 	public Set<URI> keySet() {
 		throw new UnsupportedOperationException(
 				"ScatteredCachingMapService unsupported operation: keySet not implemented");
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#put(java.lang.Object, java.lang.Object)
+	 */
 	@Override
 	public Resource put(URI key, Resource value) {
 		if (key.toString().startsWith("http://btsmodel") || key.toString().startsWith("http://btsCorpusModel"))
@@ -258,6 +333,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#putAll(java.util.Map)
+	 */
 	@Override
 	public void putAll(Map<? extends URI, ? extends Resource> m) {
 		Assert.isNotNull(m);
@@ -269,6 +347,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#remove(java.lang.Object)
+	 */
 	@Override
 	public Resource remove(Object key) {
 		if (configurationMap.containsKey(key)) {
@@ -280,6 +361,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#size()
+	 */
 	@Override
 	public int size() {
 		if (partService == null) {
@@ -301,6 +385,9 @@ public class ScatteredCachingMapService implements Map<URI, Resource> {
 		return size;
 	}
 
+	/* (non-Javadoc)
+	 * @see java.util.Map#values()
+	 */
 	@Override
 	public Collection<Resource> values() {
 		Collection<Resource> cols = new Vector<Resource>(0);

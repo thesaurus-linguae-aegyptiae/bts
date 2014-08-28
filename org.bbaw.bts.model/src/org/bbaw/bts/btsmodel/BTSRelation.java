@@ -10,6 +10,12 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>BTS Relation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSRelation-objects describe relations between BTSObject-objects to objects that extend BTSIdentifiableItem.
+ * 
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -140,6 +146,12 @@ public interface BTSRelation extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The list parts holds references inside the related object.
+	 * 
+	 * E.g.: A relation references a text-object by referencing its id in objectId. Parts can 
+	 * then contain references into the text-object itself, e.g. certain words.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Parts</em>' containment reference list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSRelation_Parts()
 	 * @model containment="true"

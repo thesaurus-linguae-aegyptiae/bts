@@ -46,7 +46,7 @@ public class TextModelHelper {
 
 	private HashMap<Position, List<Annotation>> annotationMap;
 	private BTSTextContent oldTextContent;
-	private Pattern lemmaPattern = Pattern.compile("(case\\w)([^:]+)(:)");
+	private Pattern lemmaPattern = Pattern.compile("(?:case\\s+)([^:]+)(?::\\s*)");
 
 	public void updateModelFromTextContent(BTSText text, EObject eo,
 			IAnnotationModel am) {
@@ -216,7 +216,7 @@ public class TextModelHelper {
 		Matcher m = lemmaPattern.matcher(name.trim());
 		if (m.matches())
 		{
-			return m.group(2);
+			return m.group(1);
 		}
 		return name.trim();
 	}

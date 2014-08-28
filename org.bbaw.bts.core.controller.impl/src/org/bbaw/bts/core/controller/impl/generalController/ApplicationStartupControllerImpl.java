@@ -589,7 +589,7 @@ public class ApplicationStartupControllerImpl implements
 
 		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR, defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
 		
-		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
+		main_corpus_key = prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
 		String mck = defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 		
 	}

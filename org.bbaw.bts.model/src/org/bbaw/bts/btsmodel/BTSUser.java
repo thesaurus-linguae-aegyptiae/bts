@@ -9,6 +9,12 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>BTS User</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the user-object with user details.
+ * 
+ * user credentials such as password should not be persisted in this object.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -44,6 +50,11 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * contains ids of BTSUserGroup-objects of which this user is a member.
+	 * 
+	 * Used for rights management based on group membership.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Group Ids</em>' attribute list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_GroupIds()
 	 * @model
@@ -137,6 +148,9 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * username - used for authentication.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>User Name</em>' attribute.
 	 * @see #setUserName(String)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_UserName()
@@ -309,6 +323,11 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * password is transient! It only serves to temporally cache credentials.
+	 * 
+	 * Use secure storage mechanisms to persist password information!
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Password</em>' attribute.
 	 * @see #setPassword(String)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_Password()
@@ -335,6 +354,9 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * transient! Used to cache status if user is logged in or not.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Logged In</em>' attribute.
 	 * @see #setLoggedIn(boolean)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_LoggedIn()
@@ -387,6 +409,9 @@ public interface BTSUser extends BTSDBBaseObject, BTSObject {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Shows whether user is database administrator or not.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Db Admin</em>' attribute.
 	 * @see #setDbAdmin(boolean)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_DbAdmin()

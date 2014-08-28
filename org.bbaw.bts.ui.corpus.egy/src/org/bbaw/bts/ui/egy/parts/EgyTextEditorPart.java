@@ -824,12 +824,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					{
 						BTSSentenceItem item = (BTSSentenceItem) ((ModelAnnotation)a).getModelObject();
 						textItems.add(item);
-						if (startItem == null || pos.getOffset() < startItemOffeset)
+						if (startItem == null || pos.getOffset() > startItemOffeset)
 						{
 							startItem = item;
 							startItemOffeset = pos.getOffset();
 						}
-						if (endItem == null || pos.getOffset() + pos.getLength() > endItemOffeset)
+						if (endItem == null || pos.getOffset() + pos.getLength() < endItemOffeset)
 						{
 							endItem = item;
 							endItemOffeset = pos.getOffset() + pos.getLength();

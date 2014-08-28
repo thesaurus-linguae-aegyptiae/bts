@@ -9,6 +9,12 @@ import java.util.Date;
  * A representation of the model object '<em><b>BTS Revision</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSRevision-objects hold information about user revisions.
+ * This includes user id, timestamp when changes were persisted,
+ * revision number.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

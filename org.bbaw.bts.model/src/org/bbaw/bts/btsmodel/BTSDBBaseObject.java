@@ -11,6 +11,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>BTSDB Base Object</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the superclass of all database object. Each object that can be stored in the database 
+ * on its own and is not contained by any other object has to extend this abstract class.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -37,6 +42,9 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * holds the id of the revision of the object.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>rev</em>' attribute.
 	 * @see #set_rev(String)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject__rev()
@@ -63,6 +71,10 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * The prefix of the project to which this object belongs. That means also the root path
+	 * where the object is stored in the database if the database supports collections.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Project</em>' attribute.
 	 * @see #setProject(String)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Project()
@@ -89,6 +101,10 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Transient! Allows to cache locking status information and propagate locking status information to 
+	 * UI and other top layers.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Locked</em>' attribute.
 	 * @see #setLocked(boolean)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Locked()
@@ -116,6 +132,10 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Used by rights management.
+	 * Holds ids of user objects and usergroups that are allowed to modify the object.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Updaters</em>' attribute list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Updaters()
 	 * @model
@@ -132,6 +152,10 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * Used by rights management.
+	 * Holds ids of user objects and usergroups that are allowed to read the object.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Readers</em>' attribute list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Readers()
 	 * @model
@@ -174,6 +198,9 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * holds revision ids of revisions which cause conflicts.
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Conflicting Revs</em>' attribute list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_ConflictingRevs()
 	 * @model default="" transient="true"
@@ -184,6 +211,10 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This method returns the name of the actual database collection where the object
+	 * is stored. Subclasses have to implement this accordingly.
+	 * <!-- end-model-doc -->
 	 * @model kind="operation"
 	 * @generated
 	 */

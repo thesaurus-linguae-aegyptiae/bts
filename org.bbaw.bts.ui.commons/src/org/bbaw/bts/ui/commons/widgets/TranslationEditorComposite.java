@@ -1,3 +1,32 @@
+/**
+ * This file is part of Berlin Text System.
+ * 
+ * The software Berlin Text System serves as a client user interface for working with
+ * text corpus data. See: aaew.bbaw.de
+ * 
+ * The software Berlin Text System was developed at the Berlin-Brandenburg Academy
+ * of Sciences and Humanities, Jägerstr. 22/23, D-10117 Berlin.
+ * www.bbaw.de
+ * 
+ * Copyright (C) 2013-2014  Berlin-Brandenburg Academy
+ * of Sciences and Humanities
+ * 
+ * The software Berlin Text System was developed by @author: Christoph Plutte.
+ * 
+ * Berlin Text System is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * Berlin Text System is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with Berlin Text System.  
+ * If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ */
 package org.bbaw.bts.ui.commons.widgets;
 
 import java.util.List;
@@ -31,26 +60,50 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
+/**
+ * The Class TranslationEditorComposite provides a GUI component for editing a BTSTranslation object.
+ *
+ * @author Christoph Plutte
+ */
 public class TranslationEditorComposite extends Composite {
+	
+	/** The text. */
 	private Text text;
 
+	/** The resource provider. */
 	private BTSResourceProvider resourceProvider = StaticAccessController
 			.getResourceProvider();
 
+	/** The translations. */
 	private BTSTranslations translations;
 
+	/** The domain. */
 	private EditingDomain domain;
 
+	/** The required. */
 	private boolean required;
 
+	/** The custom style. */
 	private int customStyle;
 
+	/** The combo. */
 	private Combo combo;
 
+	/** The binding context. */
 	private DataBindingContext bindingContext;
 
+	/** The lang. */
 	private String lang;
 
+	/**
+	 * Instantiates a new translation editor composite.
+	 *
+	 * @param parent the parent
+	 * @param style the style
+	 * @param translations the translations
+	 * @param domain the domain
+	 * @param required the required
+	 */
 	public TranslationEditorComposite(Composite parent, int style,
 			BTSTranslations translations, EditingDomain domain, boolean required) {
 		super(parent, SWT.NONE);
@@ -64,6 +117,13 @@ public class TranslationEditorComposite extends Composite {
 		}
 	}
 
+	/**
+	 * Instantiates a new translation editor composite.
+	 *
+	 * @param parent the parent
+	 * @param style the style
+	 * @param required the required
+	 */
 	public TranslationEditorComposite(Composite parent, int style,
 			boolean required) {
 		super(parent, SWT.NONE);
@@ -74,6 +134,14 @@ public class TranslationEditorComposite extends Composite {
 			load(translations, domain, required);
 		}
 	}
+	
+	/**
+	 * Load.
+	 *
+	 * @param translations2 the translations2
+	 * @param editingDomain the editing domain
+	 * @param required the required
+	 */
 	public void load(BTSTranslations translations2,
 			EditingDomain editingDomain, boolean required) {
 		Assert.isNotNull(translations2);
@@ -143,6 +211,9 @@ public class TranslationEditorComposite extends Composite {
 
 	}
 
+	/**
+	 * Post construct.
+	 */
 	private void postConstruct() {
 		setLayout(new GridLayout(3, false));
 		setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
@@ -176,6 +247,11 @@ public class TranslationEditorComposite extends Composite {
 
 	}
 
+	/**
+	 * Load translation.
+	 *
+	 * @param lang the lang
+	 */
 	private void loadTranslation(String lang) {
 
 		this.lang = lang;

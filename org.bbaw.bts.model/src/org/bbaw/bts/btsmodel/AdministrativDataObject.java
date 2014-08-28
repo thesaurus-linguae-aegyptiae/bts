@@ -9,6 +9,11 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>Administrativ Data Object</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This object is the basic object with administrativ data allowing to track revisions,
+ * status, revisionState and visibility.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

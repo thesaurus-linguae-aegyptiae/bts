@@ -49,7 +49,7 @@ public class BTSConstants
 			BTSConstants.IMAGE, BTSConstants.WLIST_ENTRY, BTSConstants.TEXT,
 			BTSConstants.TEXT_CORPUS, BTSConstants.THS_ENTRY , BTSConstants.COMMENT};
 	public static final String DB_DIR = "dbdir";
-	public static final String DEFAULT_LOCAL_DB_URL_PORT = "9086";
+	public static final String DEFAULT_LOCAL_DB_URL_PORT = "9086";//"6984";//
 	public static final String DEFAULT_LOCAL_DB_URL_HOST = "127.0.0.1";
 	public static final String DEFAULT_LOCAL_DB_URL_PROTOCOL = "http";
 	public static final String DEFAULT_PREF_P2_UPDATE_SITE =  "http://telota.bbaw.de/bts-update/update-3.x/repository/";//

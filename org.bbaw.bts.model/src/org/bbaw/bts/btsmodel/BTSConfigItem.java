@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>BTS Config Item</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSConfigItem hold configuration details. They are organized as a tree.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
@@ -294,6 +298,13 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
+	 * <!-- begin-model-doc -->
+	 * This list of Strings hold information of possible types allowed as owners of this configuration detail and 
+	 * possible types allowed as referenced object.
+	 * 
+	 * E.g. an object of type 'corpus' may own the relation 'contains' and reference another
+	 * object of type 'text'. The string representation should look like: corpus>text
+	 * <!-- end-model-doc -->
 	 * @return the value of the '<em>Owner Referenced Types String List</em>' attribute list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_OwnerReferencedTypesStringList()
 	 * @model

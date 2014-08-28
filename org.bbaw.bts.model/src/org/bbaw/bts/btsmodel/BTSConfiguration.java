@@ -8,6 +8,11 @@ package org.bbaw.bts.btsmodel;
  * A representation of the model object '<em><b>BTS Configuration</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSConfiguration is the parent object used to hold project configuration.
+ * All configuration details are stored in the children list inherited from BTSConfig.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

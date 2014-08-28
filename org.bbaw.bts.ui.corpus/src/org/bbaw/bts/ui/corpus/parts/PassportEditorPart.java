@@ -673,12 +673,13 @@ public class PassportEditorPart {
 		project_viewer.setInput(treenodeProjects);
 		
 		// corpus object corpus settings
+		
 			Label lblCorpus = new Label(compTBTM_Main, SWT.NONE);
 			lblCorpus.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
 					false, false, 1, 1));
 			lblCorpus.setText("Corpus");
 
-			corpusCMB = new Combo(compTBTM_Main, SWT.NONE);
+			corpusCMB = new Combo(compTBTM_Main, SWT.READ_ONLY);
 			corpusCMB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 						false, 3, 1));
 

@@ -228,7 +228,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		} else if (item instanceof BTSAmbivalence) {
 			BTSAmbivalence ambivalence = (BTSAmbivalence) item;
 			pos = appendAmbivalenceToStringBuilder(ambivalence, stringBuilder,
-					model);
+					model, relatingObjectsMap);
 			appendAmbivalenceToModel(ambivalence, model, pos);
 
 		}
@@ -336,12 +336,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private Position appendAmbivalenceToStringBuilder(
 			BTSAmbivalence ambivalence, StringBuilder stringBuilder,
-			IAnnotationModel model) {
+			IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
 		Position pos = new Position(stringBuilder.length());
 		stringBuilder.append(AMBIVALENCE_START_SIGN);
 		if (ambivalence.getCases() != null) {
 			for (BTSLemmaCase amCase : ambivalence.getCases()) {
-				appendLemmaCase(amCase, ambivalence, stringBuilder, model);
+				appendLemmaCase(amCase, ambivalence, stringBuilder, model, relatingObjectsMap);
 				stringBuilder.append(LEMMA_CASE_SEPARATOR);
 			}
 		}
@@ -355,7 +355,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void appendLemmaCase(BTSLemmaCase amCase,
 			BTSAmbivalence ambivalence, StringBuilder stringBuilder,
-			IAnnotationModel model) {
+			IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
 		Position pos = new Position(stringBuilder.length());
 		stringBuilder.append(LEMMA_CASE_TERMIAL + WS);
 		if (amCase.getName() != null) {
@@ -365,8 +365,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 		if (amCase.getScenario() != null) {
 			for (BTSAmbivalenceItem item : amCase.getScenario()) {
-				appendAmbivalenceItem(item, amCase, ambivalence, stringBuilder,
-						model);
+				appendAmbivalenceItem((BTSIdentifiableItem) item, amCase, ambivalence, stringBuilder,
+						model, relatingObjectsMap);
 				stringBuilder.append(WS);
 			}
 		}
@@ -383,10 +383,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	}
 
-	private void appendAmbivalenceItem(BTSAmbivalenceItem item,
+	private void appendAmbivalenceItem(BTSIdentifiableItem item,
 			BTSLemmaCase amCase, BTSAmbivalence ambivalence,
-			StringBuilder stringBuilder, IAnnotationModel model) {
-		Position pos;
+			StringBuilder stringBuilder, IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
+		Position pos = null;
 		if (item instanceof BTSWord) {
 			BTSWord word = (BTSWord) item;
 			pos = appendWordToStringBuilder(word, stringBuilder);
@@ -395,6 +395,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			BTSMarker marker = (BTSMarker) item;
 			pos = appendMarkerToStringBuilder(marker, stringBuilder);
 			appendMarkerToModel(marker, model, pos);
+		}
+		if (item != null && relatingObjectsMap != null && pos != null && relatingObjectsMap.containsKey(item.get_id()))
+		{
+			createAnnotations(item, model, pos, relatingObjectsMap.get(item.get_id()));
 		}
 
 	}

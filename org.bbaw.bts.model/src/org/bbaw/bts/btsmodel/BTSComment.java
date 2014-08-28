@@ -9,6 +9,13 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>BTS Comment</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSComment is used for user comments of objects in the BTS.
+ * Users should be able to comment other objects that extend BTSObject.
+ * 
+ * References to BTSComment-objects to commented BTSObject-objects are described as relations -> see BTSObject.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

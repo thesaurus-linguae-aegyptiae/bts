@@ -8,6 +8,10 @@ package org.bbaw.bts.btsmodel;
  * A representation of the model object '<em><b>BTSDB Connection</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * describes the connection details to connect to a remote database.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

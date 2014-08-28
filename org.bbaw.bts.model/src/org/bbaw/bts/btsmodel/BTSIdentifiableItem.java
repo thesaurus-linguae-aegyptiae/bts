@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>BTS Identifiable Item</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the superclass of all objects that have an id. This is extended not only 
+ * by database objects but also by all other objects that are referencable through
+ * their id.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

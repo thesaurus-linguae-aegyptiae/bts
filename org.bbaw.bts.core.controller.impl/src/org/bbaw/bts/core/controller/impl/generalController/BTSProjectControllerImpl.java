@@ -16,11 +16,6 @@ public class BTSProjectControllerImpl implements BTSProjectController
 	@Inject
 	private BTSProjectService projectService;
 
-	@Override
-	public void createInitialProject()
-	{
-
-	}
 
 	@Override
 	public BTSProject createNewProject()

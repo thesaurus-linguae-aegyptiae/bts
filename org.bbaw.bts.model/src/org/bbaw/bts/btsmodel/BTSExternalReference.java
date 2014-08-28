@@ -9,6 +9,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>BTS External Reference</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSExternalRefernce-objects are used to describe references of BTSObjects
+ * to external identification systems e.g. authority files, repositories etc.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

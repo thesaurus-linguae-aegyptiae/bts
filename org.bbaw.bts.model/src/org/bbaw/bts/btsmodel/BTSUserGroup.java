@@ -8,6 +8,11 @@ package org.bbaw.bts.btsmodel;
  * A representation of the model object '<em><b>BTS User Group</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * User group are part of rights management system. Users can reference user groups
+ * and be part of user groups and thus inherite the editing rights of the user group.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

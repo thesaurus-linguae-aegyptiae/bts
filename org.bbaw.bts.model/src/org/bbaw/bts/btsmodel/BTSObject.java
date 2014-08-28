@@ -9,6 +9,14 @@ import org.eclipse.emf.common.util.EList;
  * <!-- begin-user-doc --> A representation of the model object '
  * <em><b>BTS Object</b></em>'. <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This is the basic managed object in BTS.
+ * It has basic properties such as name, type etc.
+ * It also has typed relations.
+ * 
+ * All primary objects should extend BTSObject.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

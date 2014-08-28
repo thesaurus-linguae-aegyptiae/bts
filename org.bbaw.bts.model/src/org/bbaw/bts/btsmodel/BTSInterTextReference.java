@@ -9,6 +9,11 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>BTS Inter Text Reference</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * This class serves to describe references within a text by refering to the ID of 
+ * the starting element and to the ID of the ending element.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

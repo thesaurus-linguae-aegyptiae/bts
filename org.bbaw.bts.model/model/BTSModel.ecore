@@ -3,6 +3,9 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="btsmodel" nsURI="http://btsmodel/1.0" nsPrefix="btsmodel">
   <eClassifiers xsi:type="ecore:EClass" name="AdministrativDataObject" abstract="true"
       eSuperTypes="#//BTSObservableObject #//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This object is the basic object with administrativ data allowing to track revisions,&#xD;&#xA;status, revisionState and visibility."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="revisions" upperBound="-1"
         eType="#//BTSRevision" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -10,6 +13,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSObject" abstract="true" eSuperTypes="#//AdministrativDataObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel" references="#//BTSObject">
+      <details key="documentation" value="This is the basic managed object in BTS.&#xD;&#xA;It has basic properties such as name, type etc.&#xD;&#xA;It also has typed relations.&#xD;&#xA;&#xD;&#xA;All primary objects should extend BTSObject."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -23,12 +29,23 @@
         eType="#//BTSExternalReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSUser" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel" references="#//BTSUser">
+      <details key="documentation" value="This is the user-object with user details.&#xD;&#xA;&#xD;&#xA;user credentials such as password should not be persisted in this object."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupIds" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="contains ids of BTSUserGroup-objects of which this user is a member.&#xD;&#xA;&#xD;&#xA;Used for rights management based on group membership."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sigle" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="webDescription" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="userName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="username - used for authentication."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="foreName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sureName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="mail" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -37,21 +54,42 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="externalReferneces" upperBound="-1"
         eType="#//BTSExternalReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="password" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
-        transient="true"/>
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="password is transient! It only serves to temporally cache credentials.&#xD;&#xA;&#xD;&#xA;Use secure storage mechanisms to persist password information!"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="loggedIn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        transient="true"/>
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="transient! Used to cache status if user is logged in or not."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbAdmin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbAdmin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Shows whether user is database administrator or not."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSComment" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSComment is used for user comments of objects in the BTS.&#xD;&#xA;Users should be able to comment other objects that extend BTSObject.&#xD;&#xA;&#xD;&#xA;References to BTSComment-objects to commented BTSObject-objects are described as relations -> see BTSObject."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="tags" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSInterTextReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This class serves to describe references within a text by refering to the ID of &#xD;&#xA;the starting element and to the ID of the ending element."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="endId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTranslation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSTranslation-objects are used in all places where labels should be translated.&#xD;&#xA;Value holds the actual translation, lang the language code.&#xD;&#xA;type is used if further specification is needed, optional."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="lang" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -64,33 +102,77 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="relativeRef" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSRelation" eSuperTypes="#//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSRelation-objects describe relations between BTSObject-objects to objects that extend BTSIdentifiableItem.&#xD;&#xA;&#xD;&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parts" upperBound="-1"
-        eType="#//BTSInterTextReference" containment="true"/>
+        eType="#//BTSInterTextReference" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The list parts holds references inside the related object.&#xD;&#xA;&#xD;&#xA;E.g.: A relation references a text-object by referencing its id in objectId. Parts can &#xD;&#xA;then contain references into the text-object itself, e.g. certain words."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="certainty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSConfiguration" eSuperTypes="#//BTSDBBaseObject #//BTSConfig #//BTSObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSConfiguration is the parent object used to hold project configuration.&#xD;&#xA;All configuration details are stored in the children list inherited from BTSConfig."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSDBBaseObject" abstract="true" eSuperTypes="#//BTSIdentifiableItem">
-    <eOperations name="getDBCollectionKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_rev" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is the superclass of all database object. Each object that can be stored in the database &#xD;&#xA;on its own and is not contained by any other object has to extend this abstract class."/>
+    </eAnnotations>
+    <eOperations name="getDBCollectionKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method returns the name of the actual database collection where the object&#xD;&#xA;is stored. Subclasses have to implement this accordingly."/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="_rev" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="holds the id of the revision of the object."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="project" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The prefix of the project to which this object belongs. That means also the root path&#xD;&#xA;where the object is stored in the database if the database supports collections."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="locked" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
-        transient="true"/>
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Transient! Allows to cache locking status information and propagate locking status information to &#xD;&#xA;UI and other top layers."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="updaters" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Used by rights management.&#xD;&#xA;Holds ids of user objects and usergroups that are allowed to modify the object."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="readers" upperBound="-1"
-        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Used by rights management.&#xD;&#xA;Holds ids of user objects and usergroups that are allowed to read the object."/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="_deleted" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="conflictingRevs" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true"
-        defaultValueLiteral=""/>
+        defaultValueLiteral="">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="holds revision ids of revisions which cause conflicts."/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSRevision" eSuperTypes="#//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSRevision-objects hold information about user revisions.&#xD;&#xA;This includes user id, timestamp when changes were persisted,&#xD;&#xA;revision number."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="userId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
@@ -103,18 +185,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSExternalReference">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSExternalRefernce-objects are used to describe references of BTSObjects&#xD;&#xA;to external identification systems e.g. authority files, repositories etc."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSReferencableItem" abstract="true"
       eSuperTypes="#//BTSObject #//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//BTSObject"
         transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="parentId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTranslations">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSTranslations hold BTSTranslation-objects and provide convenient methods&#xD;&#xA;to set and get Translation-objects by language name."/>
+    </eAnnotations>
     <eOperations name="getTranslation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eParameters name="language" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </eOperations>
@@ -134,6 +225,9 @@
         eType="#//BTSTranslation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSConfigItem" eSuperTypes="#//BTSConfig #//BTSObservableObject #//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSConfigItem hold configuration details. They are organized as a tree."/>
+    </eAnnotations>
     <eOperations name="getOwnerTypesMap" eType="#//StringToStringListMap"/>
     <eOperations name="clearOwnerTypesMap"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -144,16 +238,27 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="passportEditorConfig" eType="#//BTSPassportEditorConfig"
-        containment="true"/>
+        containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation"/>
+      </eAnnotations>
+    </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="rules" upperBound="-1"
         eType="#//BTSWorkflowRuleItem" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="showWidget" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ownerReferencedTypesStringList"
-        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This list of Strings hold information of possible types allowed as owners of this configuration detail and &#xD;&#xA;possible types allowed as referenced object.&#xD;&#xA;&#xD;&#xA;E.g. an object of type 'corpus' may own the relation 'contains' and reference another&#xD;&#xA;object of type 'text'. The string representation should look like: corpus>text"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSPassportEditorConfig" eSuperTypes="#//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This class contains details fo passportEditor configuration that is configuration of &#xD;&#xA;GUI elements."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="widgetType" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="allowMultiple" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -163,6 +268,9 @@
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSUserGroup" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="User group are part of rights management system. Users can reference user groups&#xD;&#xA;and be part of user groups and thus inherite the editing rights of the user group."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="comment" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
@@ -173,6 +281,9 @@
   <eClassifiers xsi:type="ecore:EDataType" name="PropertyChangeEvent" instanceClassName="java.beans.PropertyChangeEvent"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSConfig" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="superclass of configuration treenodes."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//BTSConfig" containment="true"/>
   </eClassifiers>
@@ -187,6 +298,9 @@
         eType="#//PropertyChangeSupport" transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSProject" eSuperTypes="#//BTSObject #//BTSDBBaseObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="BTSProject is the root container organizing the structure of data in the database&#xD;&#xA;and its distribution on remote databases. A database may contain several projects,&#xD;&#xA;but no project may be distributed over serveral databases (local or remote).&#xD;&#xA;&#xD;&#xA;projects contain information about their database collections and their connection &#xD;&#xA;to a remote database with which they should be synchronized."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" lowerBound="1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -196,6 +310,9 @@
         eType="#//BTSProjectDBCollection" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSDBConnection" eSuperTypes="#//BTSIdentifiableItem">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="describes the connection details to connect to a remote database."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="masterServer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dbPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -219,6 +336,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DBLease" eSuperTypes="#//BTSDBBaseObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="DBLease used to implement locking of objects. Locks are leases with timestamp.&#xD;&#xA;"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="objectId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="userId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -236,6 +356,9 @@
         eType="#//BTSDBCollectionRoleDesc" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSIdentifiableItem" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is the superclass of all objects that have an id. This is extended not only &#xD;&#xA;by database objects but also by all other objects that are referencable through&#xD;&#xA;their id."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="_id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSDBCollectionRoleDesc" eSuperTypes="#//BTSIdentifiableItem">
@@ -249,6 +372,9 @@
         transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UserActionCounter" eSuperTypes="#//BTSDBBaseObject">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Used to record user actions such as selections and provide proposals based on&#xD;&#xA;frequency users select this action."/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="dateOfLastSelection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="counter" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>

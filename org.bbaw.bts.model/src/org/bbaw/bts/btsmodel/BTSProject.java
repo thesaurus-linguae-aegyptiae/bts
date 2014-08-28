@@ -10,6 +10,15 @@ import org.eclipse.emf.common.util.EList;
  * A representation of the model object '<em><b>BTS Project</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSProject is the root container organizing the structure of data in the database
+ * and its distribution on remote databases. A database may contain several projects,
+ * but no project may be distributed over serveral databases (local or remote).
+ * 
+ * projects contain information about their database collections and their connection 
+ * to a remote database with which they should be synchronized.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

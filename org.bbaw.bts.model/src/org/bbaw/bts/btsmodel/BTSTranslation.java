@@ -9,6 +9,12 @@ import org.eclipse.emf.ecore.EObject;
  * A representation of the model object '<em><b>BTS Translation</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * BTSTranslation-objects are used in all places where labels should be translated.
+ * Value holds the actual translation, lang the language code.
+ * type is used if further specification is needed, optional.
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>

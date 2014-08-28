@@ -44,6 +44,10 @@ import org.eclipse.swt.widgets.Widget;
  * the current validation status. Only those target observables which implement
  * {@link ISWTObservable} or {@link IViewerObservable} are decorated.
  * 
+ * This add coloring the widgets background according to validation status.
+ * Invalid = red background
+ * valid = white background
+ * 
  * @since 1.4
  */
 public class BackgroundControlDecorationSupport
@@ -129,13 +133,22 @@ public class BackgroundControlDecorationSupport
 		return new BackgroundControlDecorationSupport(validationStatusProvider, position, composite, updater);
 	}
 
+	/** The position. */
 	private final int position;
+	
+	/** The composite. */
 	private final Composite composite;
+	
+	/** The updater. */
 	private final BackgroundControlDecorationUpdater updater;
 
+	/** The validation status. */
 	private IObservableValue validationStatus;
+	
+	/** The targets. */
 	private IObservableList targets;
 
+	/** The dispose listener. */
 	private IDisposeListener disposeListener = new IDisposeListener()
 	{
 		public void handleDispose(DisposeEvent staleEvent)
@@ -144,6 +157,7 @@ public class BackgroundControlDecorationSupport
 		}
 	};
 
+	/** The status change listener. */
 	private IValueChangeListener statusChangeListener = new IValueChangeListener()
 	{
 		public void handleValueChange(ValueChangeEvent event)
@@ -152,6 +166,7 @@ public class BackgroundControlDecorationSupport
 		}
 	};
 
+	/** The targets change listener. */
 	private IListChangeListener targetsChangeListener = new IListChangeListener()
 	{
 		public void handleListChange(ListChangeEvent event)
@@ -172,11 +187,26 @@ public class BackgroundControlDecorationSupport
 		}
 	};
 
+	/**
+	 * The Class TargetDecoration.
+	 *
+	 * @author Christoph Plutte
+	 */
 	private static class TargetDecoration
 	{
+		
+		/** The target. */
 		public final IObservable target;
+		
+		/** The decoration. */
 		public final ControlDecoration decoration;
 
+		/**
+		 * Instantiates a new target decoration.
+		 *
+		 * @param target the target
+		 * @param decoration the decoration
+		 */
 		TargetDecoration(IObservable target, ControlDecoration decoration)
 		{
 			this.target = target;
@@ -184,8 +214,17 @@ public class BackgroundControlDecorationSupport
 		}
 	}
 
+	/** The target decorations. */
 	private List targetDecorations;
 
+	/**
+	 * Instantiates a new background control decoration support.
+	 *
+	 * @param validationStatusProvider the validation status provider
+	 * @param position the position
+	 * @param composite the composite
+	 * @param updater the updater
+	 */
 	private BackgroundControlDecorationSupport(ValidationStatusProvider validationStatusProvider, int position,
 			Composite composite, BackgroundControlDecorationUpdater updater)
 	{
@@ -213,6 +252,11 @@ public class BackgroundControlDecorationSupport
 		statusChanged((IStatus) validationStatus.getValue());
 	}
 
+	/**
+	 * Target added.
+	 *
+	 * @param target the target
+	 */
 	private void targetAdded(IObservable target)
 	{
 		Control control = findControl(target);
@@ -223,6 +267,11 @@ public class BackgroundControlDecorationSupport
 		}
 	}
 
+	/**
+	 * Target removed.
+	 *
+	 * @param target the target
+	 */
 	private void targetRemoved(IObservable target)
 	{
 		for (Iterator it = targetDecorations.iterator(); it.hasNext();)
@@ -236,6 +285,12 @@ public class BackgroundControlDecorationSupport
 		}
 	}
 
+	/**
+	 * Find control.
+	 *
+	 * @param target the target
+	 * @return the control
+	 */
 	private Control findControl(IObservable target)
 	{
 		if (target instanceof ISWTObservable)
@@ -266,6 +321,11 @@ public class BackgroundControlDecorationSupport
 		return null;
 	}
 
+	/**
+	 * Status changed.
+	 *
+	 * @param status the status
+	 */
 	private void statusChanged(IStatus status)
 	{
 		for (Iterator it = targets.iterator(); it.hasNext();)

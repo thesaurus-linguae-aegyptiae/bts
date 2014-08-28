@@ -9,6 +9,11 @@ import java.util.Date;
  * A representation of the model object '<em><b>DB Lease</b></em>'.
  * <!-- end-user-doc -->
  *
+ * <!-- begin-model-doc -->
+ * DBLease used to implement locking of objects. Locks are leases with timestamp.
+ * 
+ * <!-- end-model-doc -->
+ *
  * <p>
  * The following features are supported:
  * <ul>
