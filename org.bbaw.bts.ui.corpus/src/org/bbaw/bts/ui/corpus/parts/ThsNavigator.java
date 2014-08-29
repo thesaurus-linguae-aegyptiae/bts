@@ -13,6 +13,7 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -122,7 +123,6 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
 	
-	
 
 	@Inject
 	public ThsNavigator() {
@@ -210,7 +210,8 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 		mainTabItemComp.setData("tv", mainTreeViewer);
 
 		mainTabItemComp.layout();
-
+				
+		
 		// create bin tab item
 		binTabItem = new CTabItem(tabFolder, SWT.NONE);
 		binTabItem.setText("Bin");
@@ -241,6 +242,8 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 		// parent.pack();
 		// tryRunnable();
 	}
+
+	
 
 	private void prepareTreeViewer(TreeViewer treeViewer,
 			final Composite parentControl) {

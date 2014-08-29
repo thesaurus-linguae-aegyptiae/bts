@@ -364,10 +364,10 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 						command);
 				selectedConfig = parent;
 				treeViewer.refresh();
-				if (parent == null && root.getChildren().get(0) != null) {
+				if (parent == null && root.getChildren().get(0) != null && root.getChildren().get(0) instanceof BTSConfig) {
 					parent = (BTSConfig) root.getChildren().get(0);
 				}
-				if (parent == null) {
+				if (parent != null) {
 					treeViewer.setSelection(new StructuredSelection(parent));
 				}
 
