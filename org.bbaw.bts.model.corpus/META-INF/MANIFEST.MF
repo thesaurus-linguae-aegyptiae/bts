@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.bbaw.bts.model.corpus;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Export-Package: org.bbaw.bts.corpus.btsCorpusModel,
+ org.bbaw.bts.corpus.btsCorpusModel.impl,
+ org.bbaw.bts.corpus.btsCorpusModel.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.bbaw.bts.model;visibility:=reexport
+Bundle-ActivationPolicy: lazy
+Import-Package: org.bbaw.bts.commons

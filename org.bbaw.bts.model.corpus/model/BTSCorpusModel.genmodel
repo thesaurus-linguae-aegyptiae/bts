@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.bbaw.bts.model.corpus/src" modelPluginID="org.bbaw.bts.model.corpus"
+    modelName="BTSCorpusModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
+    tableProviders="true" colorProviders="true" fontProviders="true" usedGenPackages="../../org.bbaw.bts.model/model/BTSModel.genmodel#//btsmodel"
+    classNamePattern="" operationReflection="true" importOrganizing="true">
+  <foreignModel>BTSCorpusModel.ecore</foreignModel>
+  <genPackages prefix="BtsCorpusModel" basePackage="org.bbaw.bts.corpus" disposableProviderFactory="true"
+      ecorePackage="BTSCorpusModel.ecore#/">
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSCorpusObject">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSCorpusObject/passport"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSCorpusObject/corpusPrefix"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSCorpusObject/workPhase"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSTCObject"/>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSText">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSText/textContent"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSLemmaEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSLemmaEntry/ignore"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSLemmaEntry/subentries"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSLemmaEntry/words"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSPassport">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassport/protocol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassport/bibliography"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassport/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassport/wbSlips"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassport/wbFolder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassport/provenance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassport/children"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassport/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassport/descriptions"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSAnnotation"/>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSPassportEntryGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntryGroup/items"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSTextCorpus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSTextCorpus/header"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSImage">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSImage/mediaType"/>
+      <genOperations ecoreOperation="BTSCorpusModel.ecore#//BTSImage/getAttachement"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSCorpusHeader">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSCorpusHeader/authorName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSCorpusHeader/projectId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSCorpusHeader/projectName"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSThsEntry"/>
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSTextContent">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSTextContent/textItems"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSPassportEntry">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntry/provider"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntry/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntry/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntry/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntry/children"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntry/label"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntry/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntry/key"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSLemmaSubentry">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSLemmaSubentry/passport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSLemmaSubentry/words"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSWord">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSWord/translation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSWord/wType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSWord/lType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSWord/lKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSWord/flexCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSWord/wChar"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSWord/value"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSWord/graphics"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSTextItems"/>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSGraphic">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSGraphic/innerSentenceOrder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSGraphic/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSGraphic/reference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSGraphic/ignored"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSSenctence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSSenctence/sentenceItems"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSSenctence/translation"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSMarker">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSMarker/value"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSSentenceItem"/>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSAmbivalence">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSAmbivalence/cases"/>
+    </genClasses>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSLemmaCase">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSLemmaCase/scenario"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSTextSentenceItem"/>
+    <genClasses image="false" ecoreClass="BTSCorpusModel.ecore#//BTSAmbivalenceItem"/>
+    <genClasses ecoreClass="BTSCorpusModel.ecore#//BTSPassportEntryItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntryItem/subtype"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute BTSCorpusModel.ecore#//BTSPassportEntryItem/subValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntryItem/externalReferences"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntryItem/timespan"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntryItem/description"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference BTSCorpusModel.ecore#//BTSPassportEntryItem/translation"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

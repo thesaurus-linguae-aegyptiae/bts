@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AcademyFont
+Bundle-SymbolicName: org.bbaw.bts.ui.font.academy;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: BBAW
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.bbaw.bts.ui.font
+Require-Bundle: org.eclipse.swt;bundle-version="3.102.1",
+ org.eclipse.equinox.common,
+ org.eclipse.osgi,
+ org.eclipse.core.runtime;bundle-version="3.9.100"

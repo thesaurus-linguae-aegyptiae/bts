@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+>
+   <extension
+         point="org.bbaw.bts.core.dao.daoFactory">
+         <daoFactory
+            class="org.bbaw.bts.core.dao.corpus.couchdb.CorpusDaoFactoryCouchDB">
+      </daoFactory>
+   </extension>
+</plugin>
