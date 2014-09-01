@@ -17,6 +17,7 @@ import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Holger Schill - Add IInformationControlCreatorProvider2
  */
 @ImplementedBy(DefaultEObjectHoverProvider.class)
 public interface IEObjectHoverProvider {
@@ -45,5 +46,17 @@ public interface IEObjectHoverProvider {
 		 * The information to be used by the {@link IInformationControlCreator}.
 		 */
 		Object getInfo();
+	}
+
+	/**
+	 * @since 2.6
+	 */
+	public interface IInformationControlCreatorProvider2 extends IInformationControlCreatorProvider{
+		/**
+		 * an {@link IInformationControlCreator} capable of creating an
+		 * {@link org.eclipse.jface.text.IInformationControl} for the information provided by {@link IInformationControlCreatorProvider#getInfo()}.
+		 * Used to get the InformationPresenterControlCreator to show tooltip description (F2) on an element in the editor.
+		 */
+		IInformationControlCreator getInformationPresenterControlCreator();
 	}
 }

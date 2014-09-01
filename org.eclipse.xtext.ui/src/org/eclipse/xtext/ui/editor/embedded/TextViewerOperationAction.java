@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.e4.core.di.annotations.Execute;
+
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextViewer;
 
@@ -102,7 +102,6 @@ public class TextViewerOperationAction extends TextViewerAction {
 	 * the current operation code.
 	 */
 	@Override
-	@Execute
 	public void run() {
 		if (fOperationCode == -1 || fOperationTarget == null)
 			return;
@@ -156,5 +155,4 @@ public class TextViewerOperationAction extends TextViewerAction {
 		super.setViewer(viewer);
 		fOperationTarget = null;
 	}
-	
 }

@@ -19,6 +19,7 @@ import org.eclipse.emf.edit.provider.IItemColorProvider;
 import org.eclipse.emf.edit.provider.IItemFontProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemColorProvider;
@@ -77,6 +78,7 @@ public class BtsCorpusModelItemProviderAdapterFactory extends BtsCorpusModelAdap
 		supportedTypes.add(ITableItemFontProvider.class);
 		supportedTypes.add(IItemColorProvider.class);
 		supportedTypes.add(IItemFontProvider.class);
+		supportedTypes.add(IItemStyledLabelProvider.class);
 	}
 
 	/**

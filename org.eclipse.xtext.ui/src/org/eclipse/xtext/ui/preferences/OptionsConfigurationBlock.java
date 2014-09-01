@@ -234,6 +234,10 @@ public abstract class OptionsConfigurationBlock {
 	protected void setShell(Shell shell) {
 		this.shell = shell;
 	}
+	
+	protected Shell getShell() {
+		return shell;
+	}
 
 	public final Control createContents(Composite parent) {
 		Control content = doCreateContents(parent);
@@ -445,6 +449,16 @@ public abstract class OptionsConfigurationBlock {
 			return disabledProjectSettings.put(key, value);
 		}
 		String oldValue = getValue(key);
+		preferenceStore.putValue(key, value);
+		return oldValue;
+	}
+	
+	protected String setToDefault(String key) {
+		String value = preferenceStore.getDefaultString(key);
+		if (disabledProjectSettings != null) {
+			return disabledProjectSettings.put(key, value);
+		}
+		String oldValue = getValue(key);
 		preferenceStore.setValue(key, value);
 		return oldValue;
 	}
@@ -559,8 +573,7 @@ public abstract class OptionsConfigurationBlock {
 	public void performDefaults() {
 		for (int i = 0; i < keys.length; i++) {
 			String curr = keys[i];
-			String defValue = preferenceStore.getDefaultString(curr);
-			setValue(curr, defValue);
+			setToDefault(curr);
 		}
 		updateControls();
 		validateSettings(null, null, null);

@@ -12,7 +12,6 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -29,6 +28,13 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 
 	@Inject
 	private IStorage2UriMapper storageToUriMapper;
+	
+	/**
+	 * @since 2.5
+	 */
+	public IStorage2UriMapper getStorageToUriMapper() {
+		return storageToUriMapper;
+	}
 
 	@Override
 	protected Resource createResource(IStorage storage) throws CoreException {
@@ -43,8 +49,19 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = createResource(resourceSet, uri);
-		resource.setValidationDisabled(isValidationDisabled(storage));
+		resource.setValidationDisabled(isValidationDisabled(uri, storage));
 		return resource;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	@Override
+	protected boolean isValidationDisabled(URI uri, IStorage storage) {
+		if (storage instanceof IJarEntryResource) {
+			return true;
+		}
+		return super.isValidationDisabled(uri, storage);
 	}
 	
 	/**
@@ -52,14 +69,11 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 	 */
 	@Override
 	protected boolean isValidationDisabled(IStorage storage) {
-		if (storage instanceof IJarEntryResource) {
-			return true;
-		}
-		return super.isValidationDisabled(storage);
+		return isValidationDisabled(null, storage);
 	}
 
 	@Override
-	protected ResourceSet getResourceSet(@Nullable IStorage storage) {
+	protected ResourceSet getResourceSet(/* @Nullable */ IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
 			if (root != null) {

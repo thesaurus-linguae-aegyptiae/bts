@@ -5,7 +5,6 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.provider.BTSReferencableItemItemProvider;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
@@ -16,18 +15,10 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
-import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
-import org.eclipse.emf.edit.provider.IItemColorProvider;
-import org.eclipse.emf.edit.provider.IItemFontProvider;
-import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemPropertySource;
-import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
-import org.eclipse.emf.edit.provider.ITableItemColorProvider;
-import org.eclipse.emf.edit.provider.ITableItemFontProvider;
-import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
-import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
+import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -39,16 +30,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 public class BTSWordItemProvider
 	extends BTSReferencableItemItemProvider
 	implements
-		IEditingDomainItemProvider,
-		IStructuredItemContentProvider,
-		ITreeItemContentProvider,
-		IItemLabelProvider,
-		IItemPropertySource,
-		ITableItemLabelProvider,
-		ITableItemColorProvider,
-		ITableItemFontProvider,
-		IItemColorProvider,
-		IItemFontProvider {
+		IItemStyledLabelProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -262,10 +244,25 @@ public class BTSWordItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
+		return ((StyledString)getStyledText(object)).getString();
+	}
+
+	/**
+	 * This returns the label styled text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object getStyledText(Object object) {
 		String label = ((BTSWord)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_BTSWord_type") :
-			getString("_UI_BTSWord_type") + " " + label;
+    	StyledString styledLabel = new StyledString();
+		if (label == null || label.length() == 0) {
+			styledLabel.append(getString("_UI_BTSWord_type"), StyledString.Style.QUALIFIER_STYLER); 
+		} else {
+			styledLabel.append(getString("_UI_BTSWord_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+		}
+		return styledLabel;
 	}
 
 	/**

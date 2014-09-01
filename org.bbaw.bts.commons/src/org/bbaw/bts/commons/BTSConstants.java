@@ -13,9 +13,9 @@ import java.util.Calendar;
 import java.util.Properties;
 import java.util.UUID;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 
 public class BTSConstants
 {
@@ -120,39 +120,35 @@ public class BTSConstants
 	}
 
 	public static String getInstallationDir() {
-		URL entry = Platform.getBundle("org.bbaw.bts.commons").getEntry("/META-INF");
-		if (entry != null)
-		{
-		URLConnection connection;
-		try {
-			connection = entry.openConnection();
-			URL fileURL = ((BundleURLConnection) connection).getFileURL();
-
-			URI uri = new URI(fileURL.toString());
-			File file = new File(uri);
-			File parent = file.getParentFile();
-			while(parent != null && !(parent.getName().equals("configuration") && !(parent.getName().equals("workspace"))))
-			{
-				parent = parent.getParentFile();
-			}
-			if (parent == null)
-			{
-				File dir = new File(System.getProperty("user.home") + BTSConstants.FS + "bts");
-				if (!dir.exists())
-				{
-					dir.mkdirs();
+		URL entry = Platform.getBundle("org.bbaw.bts.commons").getEntry(
+				"/META-INF");
+		if (entry != null) {
+			String fileURL = null;
+			try {
+				fileURL = FileLocator.toFileURL(entry).getPath();
+				fileURL = fileURL.substring(1, fileURL.length());
+				File file = new File(fileURL);
+				File parent = file.getParentFile();
+				while (parent != null
+						&& !(parent.getName().equals("configuration") && !(parent
+								.getName().equals("workspace")))) {
+					parent = parent.getParentFile();
 				}
-				return dir.getAbsolutePath();
+				if (parent == null) {
+					File dir = new File(System.getProperty("user.home")
+							+ BTSConstants.FS + "bts");
+					if (!dir.exists()) {
+						dir.mkdirs();
+					}
+					return dir.getAbsolutePath();
+				}
+				file = parent.getParentFile();
+				String path = file.getAbsolutePath();
+				return path;
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-			file = parent.getParentFile();
-	        String path = file.getAbsolutePath();
-			return path;
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-		
+
 		}
 		return System.getenv("user.home"); 
 	}

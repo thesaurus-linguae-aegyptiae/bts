@@ -10,7 +10,6 @@ import java.net.URLConnection;
 import org.bbaw.bts.ui.font.BTSFontProvider;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
@@ -52,20 +51,13 @@ public class BTSFontProviderImplEgy implements BTSFontProvider
 		String fontpath = null;
 		if (entry != null)
 		{
-		URLConnection connection;
-			
 			try {
-				connection = entry.openConnection();
-				URL fileURL = ((BundleURLConnection) connection).getFileURL();
-				URI uri = null;
-				uri = new URI(fileURL.toString());
-				File file = new File(uri);
-				fontpath = file.getAbsolutePath();
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
+				fontpath = FileLocator.toFileURL(entry).getPath();
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			fontpath = fontpath.substring(1, fontpath.length());
 		}
 		boolean isLoaded = Display.getCurrent().loadFont(fontpath);
 		FontData fontdata = null;

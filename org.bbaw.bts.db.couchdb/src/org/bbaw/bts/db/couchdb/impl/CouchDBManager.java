@@ -45,7 +45,6 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
-import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
@@ -674,7 +673,7 @@ public class CouchDBManager implements DBManager
 		if (entry != null) {
 			URLConnection connection;
 			connection = entry.openConnection();
-			URL fileURL = ((BundleURLConnection) connection).getFileURL();
+			URL fileURL = ((URLConnection) connection).getURL();
 
 			URI uri = new URI(fileURL.toString());
 			File file = new File(uri);

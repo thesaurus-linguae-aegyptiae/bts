@@ -19,7 +19,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
+import org.eclipse.xtext.generator.trace.TraceURIHelper;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
@@ -28,31 +28,37 @@ import org.eclipse.xtext.util.Pair;
 import com.google.inject.Inject;
 
 /**
+ * A contribution that is aware of Java projects and therefore returns
+ * the source folder relative path of resources that reside in {@link IJavaProject java projects}.
+ * 
  * @author Moritz Eysholdt - Initial contribution and API
- * @author Holger Schill
+ * @author Sebastian Zarnekow
  */
-public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
+public class JavaProjectAwareTraceContribution implements ITraceURIConverterContribution {
 
-	private final static Logger LOG = Logger.getLogger(DefaultUITraceURIConverter.class);
-
+	private final static Logger LOG = Logger.getLogger(JavaProjectAwareTraceContribution.class);
+	
 	@Inject
 	private IStorage2UriMapper mapper;
-
-	@Override
+	
+	@Inject
+	private TraceURIHelper traceURIHelper;
+	
+	/* @Nullable */
 	public URI getURIForTrace(XtextResource context) {
 		ResourceSet rs = context.getResourceSet();
 		if (!(rs instanceof XtextResourceSet && ((XtextResourceSet) rs).getClasspathURIContext() instanceof IJavaProject))
-			return super.getURIForTrace(context);
+			return null;
 		IJavaProject javaProject = (IJavaProject) ((XtextResourceSet) rs).getClasspathURIContext();
 		try {
 			return computeTraceURI(context.getURI(), javaProject);
 		} catch (JavaModelException e) {
 			LOG.error(e);
 		}
-		return super.getURIForTrace(context);
+		return null;
 	}
-
-	@Override
+	
+	/* @Nullable */
 	public URI getURIForTrace(URI uri) {
 		if (uri.isPlatform() && uri.segmentCount() > 1) {
 			Iterator<Pair<IStorage, IProject>> storagesIterator = mapper.getStorages(uri).iterator();
@@ -74,16 +80,19 @@ public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
 				}
 			}
 		}
-		return super.getURIForTrace(uri);
+		return null;
 	}
-
+	
+	/* @Nullable */
 	protected URI computeTraceURI(URI uri, IJavaProject javaProject) throws JavaModelException {
-		for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots())
+		for (IPackageFragmentRoot root : javaProject.getPackageFragmentRoots()) {
 			if (root.getKind() == IPackageFragmentRoot.K_SOURCE) {
 				URI prefix = URI.createPlatformResourceURI(root.getResource().getFullPath().addTrailingSeparator().toString(), true);
-				if (isPrefix(prefix, uri))
+				if (traceURIHelper.isPrefix(prefix, uri))
 					return uri.deresolve(prefix).trimFragment().trimQuery();
 			}
-		return super.getURIForTrace(uri);
+		}
+		return null;
 	}
+	
 }

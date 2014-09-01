@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-	<extension id="id" point="org.eclipse.e4.workbench.model">
-		<fragment uri="fragment.e4xmi"></fragment>
-	</extension>
    <extension-point id="searchFilter" name="Xtext EObject Search Filter" schema="schema/searchFilter.exsd"/>
    <extension point="org.eclipse.ui.keywords">
       <keyword
@@ -289,6 +286,20 @@
       <persistent value="true"/>
    </extension>
    <extension
+         id="org.eclipse.xtext.ui.marker"
+         name="Xtext Marker"
+         point="org.eclipse.core.resources.markers">
+      <persistent value="true"/>
+   </extension>
+   <extension
+         id="org.eclipse.xtext.ui.task"
+         name="Xtext Task"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.marker"/>
+      <super type="org.eclipse.core.resources.taskmarker"/>
+      <persistent value="true"/>
+   </extension>
+   <extension
       point="org.eclipse.ui.editors.annotationTypes">
       <type
       	name="org.eclipse.xtext.ui.editor.error"
@@ -307,7 +318,7 @@
       	markerType="org.eclipse.emf.ecore.diagnostic"
       	markerSeverity="0"
         super="org.eclipse.ui.workbench.texteditor.info">
-      </type>a
+      </type>
    </extension>
    <extension
          point="org.eclipse.ui.editors.markerAnnotationSpecification">
@@ -1139,5 +1150,11 @@
           type="xtextbin">
     </parser>
  </extension>
-	
+	<extension point="org.eclipse.e4.ui.css.swt.theme">	
+      <stylesheet uri="css/e4-dark_xtext_syntaxhighlighting.css">	
+         <themeid	
+               refid="org.eclipse.e4.ui.css.theme.e4_dark">	
+         </themeid>	
+	  </stylesheet>	
+   </extension>
 </plugin>

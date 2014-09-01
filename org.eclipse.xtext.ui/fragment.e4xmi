@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_SXe6QF3UEeOUZqqPhI-RDw">
-  <imports xsi:type="commands:Command" xmi:id="_ugcWwF3ZEeOUZqqPhI-RDw" elementId="org.eclipse.ui.edit.text.contentAssist.proposals.e4"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_TIp4gF3UEeOUZqqPhI-RDw" featurename="commands" parentElementId="org.eclipse.e4.ide.application"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_j-5c4F3UEeOUZqqPhI-RDw" featurename="handlers" parentElementId="org.eclipse.e4.ide.application"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_6R3TMF3VEeOUZqqPhI-RDw" featurename="children" parentElementId="e4.test.toolbar.0">
-    <elements xsi:type="menu:HandledToolItem" xmi:id="_JdkoYF3WEeOUZqqPhI-RDw" elementId="org.eclipse.xtext.ui.handledtoolitem.0" label="bbbb"/>
-  </fragments>
-</fragment:ModelFragments>

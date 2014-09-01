@@ -18,7 +18,6 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IURIEditorInput;
@@ -99,15 +98,23 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		}
 		XtextResource resource = (XtextResource) resourceFactory.createResource(uriForResource);
 		resourceSet.getResources().add(resource);
-		resource.setValidationDisabled(isValidationDisabled(storage));
+		resource.setValidationDisabled(isValidationDisabled(uri, storage));
 		return resource;
+	}
+
+	/**
+	 * @param uri 
+	 * @since 2.5
+	 */
+	protected boolean isValidationDisabled(URI uri, IStorage storage) {
+		return false;
 	}
 
 	/**
 	 * @since 2.4
 	 */
 	protected boolean isValidationDisabled(IStorage storage) {
-		return false;
+		return isValidationDisabled(null, storage);
 	}
 
 	protected XtextResource createResource(ResourceSet resourceSet, URI uri) {
@@ -119,7 +126,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		return (XtextResource) aResource;
 	}
 
-	protected ResourceSet getResourceSet(@Nullable IStorage storage) {
+	protected ResourceSet getResourceSet(/* @Nullable */ IStorage storage) {
 		if (storage instanceof IFile) {
 			return resourceSetProvider.get(((IFile) storage).getProject());
 		}

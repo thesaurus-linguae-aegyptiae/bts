@@ -30,7 +30,6 @@ Import-Package: com.fasterxml.jackson.databind;version="2.3.1",
  org.codehaus.jackson;version="1.9.5",
  org.eclipse.emf.ecore,
  org.eclipse.emf.ecore.resource,
- org.eclipse.osgi.framework.internal.core,
  org.eclipselabs.emfjson,
  org.eclipselabs.emfjson.internal,
  org.osgi.framework

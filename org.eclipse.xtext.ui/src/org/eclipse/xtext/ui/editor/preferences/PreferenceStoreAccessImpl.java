@@ -70,20 +70,32 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 	@SuppressWarnings("deprecation")
 	public IPreferenceStore getWritablePreferenceStore(Object context) {
 		lazyInitialize();
+		IProject project = getProject(context);
+		if (project == null) {
+			return getWritablePreferenceStore();
+		}
+		ProjectScope projectScope = new ProjectScope(project);
+		FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(projectScope, getQualifier());
+		result.setSearchContexts(new IScopeContext[] {
+			projectScope,
+			new InstanceScope(),
+			new ConfigurationScope()
+		});
+		return result;
+	}
+	
+	/**
+	 * @since 2.6
+	 */
+	/* @Nullable */
+	protected IProject getProject(Object context) {
 		if (context instanceof IFileEditorInput) {
-			context = ((IFileEditorInput) context).getFile().getProject();
+			return ((IFileEditorInput) context).getFile().getProject();
 		}
 		if (context instanceof IProject) {
-			ProjectScope projectScope = new ProjectScope((IProject) context);
-			FixedScopedPreferenceStore result = new FixedScopedPreferenceStore(projectScope, getQualifier());
-			result.setSearchContexts(new IScopeContext[] {
-				projectScope,
-				new InstanceScope(),
-				new ConfigurationScope()
-			});
-			return result;
+			return (IProject) context;
 		}
-		return getWritablePreferenceStore();
+		return null;
 	}
 
 	private String qualifier;

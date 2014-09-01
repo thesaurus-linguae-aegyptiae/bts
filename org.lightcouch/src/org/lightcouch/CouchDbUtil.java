@@ -20,10 +20,8 @@ import static java.lang.String.format;
 
 import java.io.Closeable;
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLDecoder;
@@ -41,8 +39,6 @@ import java.util.jar.JarFile;
 import org.apache.http.HttpResponse;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.osgi.framework.internal.core.BundleURLConnection;
-import org.osgi.framework.Bundle;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -129,19 +125,16 @@ final class CouchDbUtil
 	 */
 	public static List<String> listResources(String path)
 	{
-		URL fileURL = null;
+		String fileURL = null;
 		try
 		{
 			URL entry = Platform.getBundle("org.lightcouch").getEntry(path);
 			File file = null;
 			if (entry != null)
 			{
-			URLConnection connection;
-				connection = entry.openConnection();
-				fileURL = ((BundleURLConnection) connection).getFileURL();
-
-				URI uri = new URI(fileURL.toString());
-				file = new File(uri);
+				fileURL = FileLocator.toFileURL(entry).getPath();
+				fileURL = fileURL.substring(1, fileURL.length());
+				file = new File(fileURL);
 			}
 			URL dirURL = file.toPath().toUri().toURL();
 

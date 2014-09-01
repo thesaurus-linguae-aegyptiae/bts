@@ -12,7 +12,8 @@ Import-Package: javax.annotation,
  org.eclipse.core.runtime,
  org.eclipse.core.runtime.preferences;version="3.3.0",
  org.eclipse.jface.resource,
- org.eclipse.osgi.framework.internal.core,
+ org.eclipse.osgi.storage.bundlefile,
+ org.eclipse.osgi.storage.url.reference,
  org.eclipse.ui.plugin,
  org.osgi.framework;version="1.7.0"
 Bundle-ActivationPolicy: lazy

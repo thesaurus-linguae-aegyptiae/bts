@@ -86,5 +86,4 @@ public class EmbeddedEditor {
 	public EmbeddedEditorModelAccess createPartialEditor() {
 		return createPartialEditor("", "", "", false);
 	}
-	
 }

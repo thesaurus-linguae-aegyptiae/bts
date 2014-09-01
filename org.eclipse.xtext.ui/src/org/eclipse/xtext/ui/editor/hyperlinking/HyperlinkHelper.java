@@ -20,6 +20,7 @@ import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.Iterables;
@@ -47,7 +48,8 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		
 	}
 	
-	@Inject@HyperlinkLabelProvider
+	@Inject
+	@HyperlinkLabelProvider
 	private ILabelProvider labelProvider;
 
 	@Inject
@@ -62,6 +64,13 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	
 	protected ILabelProvider getLabelProvider() {
 		return labelProvider;
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	protected EObjectAtOffsetHelper getEObjectAtOffsetHelper() {
+		return eObjectAtOffsetHelper;
 	}
 	
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
@@ -93,7 +102,8 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	 * @since 2.4
 	 */
 	protected void createHyperlinksTo(XtextResource resource, INode node, EObject target, IHyperlinkAcceptor acceptor) {
-		Region region = new Region(node.getOffset(), node.getLength());
+		ITextRegion textRegion = node.getTextRegion();
+		Region region = new Region(textRegion.getOffset(), textRegion.getLength());
 		createHyperlinksTo(resource, region, target, acceptor);
 	}
 	
