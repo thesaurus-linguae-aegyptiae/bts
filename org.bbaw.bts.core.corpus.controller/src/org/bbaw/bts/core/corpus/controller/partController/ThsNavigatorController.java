@@ -10,6 +10,7 @@ import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 
 public interface ThsNavigatorController {
 
@@ -40,4 +41,6 @@ public interface ThsNavigatorController {
 	BTSThsEntry createNew();
 	
 	String getDisplayName(String id);
+
+	List<BTSThsEntry> getOrphanThsEntries(Map map, ViewerFilter[] filters);
 }

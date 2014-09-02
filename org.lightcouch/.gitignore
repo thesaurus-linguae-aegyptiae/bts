@@ -1,8 +1,3 @@
-.project
-.settings
-.classpath
-target
-*.log
-*.log.*
+
 /bin
 /target

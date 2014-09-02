@@ -1,5 +1,5 @@
 function(doc){
-	if (doc.state == 'active'){
+	if (doc.state == 'terminated'){
 		emit(null, doc);
 	}
 }

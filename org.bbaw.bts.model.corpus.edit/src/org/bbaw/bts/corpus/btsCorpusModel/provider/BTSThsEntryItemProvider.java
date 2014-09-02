@@ -62,19 +62,22 @@ Display
 				.getIconStringOfObjectType((BTSCorpusObject) object)));
 	}
 
-	/**
-	 * This returns the label text for the adapted class. <!-- begin-user-doc
-	 * --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
-	 */
-	@Override
-	public String getText(Object object) {
-		String label = ((BTSThsEntry)object).getName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_BTSThsEntry_type") :
-			label;
-	}
+//	/**
+//	 * This returns the label text for the adapted class. <!-- begin-user-doc
+//	 * --> <!-- end-user-doc -->
+//	 * 
+//	 * @generatedNOT
+//	 */
+//	@Override
+//	public String getText(Object object) {
+//		String label = ((BTSThsEntry)object).getName();
+////		Integer i = null;
+////		System.out.println(i.toString());
+//		return label == null || label.length() == 0 ?
+//			getString("_UI_BTSThsEntry_type") :
+//			label;
+//			
+//	}
 
 	/**
 	 * This returns the label styled text for the adapted class.
@@ -89,8 +92,9 @@ Display
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSThsEntry_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_BTSThsEntry_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
+		styledLabel.append(" [" + ((BTSThsEntry)object).getProject() + "]", GREY);
 		return styledLabel;
 	}
 

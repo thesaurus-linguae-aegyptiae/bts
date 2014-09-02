@@ -15,6 +15,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
@@ -30,6 +31,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class ThsNavigatorControllerImpl implements ThsNavigatorController {
@@ -270,5 +272,22 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 //			return o.getName();
 //		}
 		return id;
+	}
+
+	@Override
+	public List<BTSThsEntry> getOrphanThsEntries(Map map, ViewerFilter[] filters) {
+		List<BTSFilter> btsFilters = null;
+		if (filters.length > 0)
+		{
+			btsFilters = new Vector<BTSFilter>(filters.length);
+			for (ViewerFilter f : filters)
+			{
+				if (f instanceof BTSFilter)
+				{
+					btsFilters.add((BTSFilter) f);
+				}
+			}
+		}
+		return thsService.getOrphanThsEntries(map, btsFilters);
 	}
 }

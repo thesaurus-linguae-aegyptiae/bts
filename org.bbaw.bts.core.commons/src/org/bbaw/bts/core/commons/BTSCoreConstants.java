@@ -97,6 +97,8 @@ public class BTSCoreConstants
 	/** The Constant BASIC_RELATIONS_ANNOTATION_TARGET. */
 	public static final String BASIC_RELATIONS_ANNOTATION_TARGET = "annotationTarget";
 	
+	public static final String BASIC_RELATIONS_CONTAINS = "contains";
+
 	/** The Constant LANG_DE. */
 	public static final String LANG_DE = "de";
 	
@@ -282,6 +284,7 @@ public class BTSCoreConstants
 	
 	/** The Constant EXTENSION_SEARCH_SERVICE_MAP. */
 	public static final String EXTENSION_SEARCH_SERVICE_MAP = "extension_search_service_map";
+
 
 
 }

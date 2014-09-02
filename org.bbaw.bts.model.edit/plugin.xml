@@ -21,7 +21,8 @@
                org.eclipse.emf.edit.provider.ITableItemColorProvider
                org.eclipse.emf.edit.provider.ITableItemFontProvider
                org.eclipse.emf.edit.provider.IItemColorProvider
-               org.eclipse.emf.edit.provider.IItemFontProvider"/>
+               org.eclipse.emf.edit.provider.IItemFontProvider
+               org.eclipse.emf.edit.provider.IItemStyledLabelProvider"/>
    </extension>
 
    <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
@@ -39,7 +40,8 @@
                org.eclipse.emf.edit.provider.ITableItemColorProvider
                org.eclipse.emf.edit.provider.ITableItemFontProvider
                org.eclipse.emf.edit.provider.IItemColorProvider
-               org.eclipse.emf.edit.provider.IItemFontProvider"/>
+               org.eclipse.emf.edit.provider.IItemFontProvider
+               org.eclipse.emf.edit.provider.IItemStyledLabelProvider"/>
    </extension>
 
 </plugin>

@@ -4,7 +4,7 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.bbaw.bts.model.edit;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-ClassPath: .
-Bundle-Activator: org.bbaw.bts.btsmodel.provider.BTSModelEditPlugin$Implementation
+Bundle-Activator: org.bbaw.bts.btsviewmodel.provider.BTSViewModelEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

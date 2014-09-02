@@ -19,6 +19,9 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Import-Package: org.bbaw.bts.core.commons.staticAccess,
  org.bbaw.bts.core.controller.generalController,
+ org.bbaw.bts.ui.commons.utils,
  org.bbaw.bts.ui.resources,
+ org.eclipse.jface.resource,
+ org.eclipse.jface.viewers,
  org.eclipse.swt.graphics,
  org.eclipse.swt.widgets

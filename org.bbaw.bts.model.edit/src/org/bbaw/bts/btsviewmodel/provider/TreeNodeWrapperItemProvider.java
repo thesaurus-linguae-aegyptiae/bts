@@ -8,6 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.swing.text.StyledEditorKit.StyledTextAction;
+
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -18,6 +21,7 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -26,6 +30,7 @@ import org.eclipse.emf.edit.provider.IItemFontProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
+import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.INotifyChangedListener;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITableItemColorProvider;
@@ -34,7 +39,9 @@ import org.eclipse.emf.edit.provider.ITableItemLabelProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemProviderAdapter;
+import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.emf.edit.provider.StyledString.Style;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper} object.
@@ -42,13 +49,17 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * --> <!-- end-user-doc -->
  * @generated
  */
-public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider
+public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider, IItemStyledLabelProvider
 {
 
 	// EcoreItemProviderAdapterFactory factory = new
 	// EcoreItemProviderAdapterFactory();
 	private Map<BTSObject, Set<TreeNodeWrapper>> realItemMap = new HashMap<BTSObject, Set<TreeNodeWrapper>>();
-
+	protected Style CHILDREN_NUM_STYLE = StyledString.Style.newBuilder()
+			.setForegroundColor(URI.createURI("color://rgb/150/150/150"))
+//			.setBorderColor(URI.createURI("color://rgb/100/100/100"))
+//			.setStrikedout(true)
+			.toStyle();
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -349,6 +360,38 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 		String suffix = treeNodeWrapper.isChildrenLoaded() ? " (" + getChildren(object).size() + ")" : " (?)";
 		String label = realItemItemprovider.getText(realItem) + suffix;
 		return label;
+	}
+
+	/**
+	 * This returns the label styled text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	@Override
+	public Object getStyledText(Object object) {
+		StyledString styledLabel = new StyledString();
+		TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
+		BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+		if (realItem == null)
+		{
+			return treeNodeWrapper.getLabel();
+		}
+
+		IItemLabelProvider realItemItemprovider = getRealItemItemProvider(treeNodeWrapper, realItem);
+		String suffix = treeNodeWrapper.isChildrenLoaded() ? " (" + getChildren(object).size() + ")" : " (?)";
+
+		if (realItemItemprovider instanceof IItemStyledLabelProvider)
+		{
+			styledLabel = (StyledString) ((IItemStyledLabelProvider) realItemItemprovider).getStyledText(realItem);
+			styledLabel.append(suffix, CHILDREN_NUM_STYLE);
+		}
+		else
+		{
+			styledLabel.append(realItemItemprovider.getText(realItem), StyledString.Style.NO_STYLE);
+			styledLabel.append(suffix, CHILDREN_NUM_STYLE);
+		}
+		return styledLabel;
 	}
 
 	private IItemLabelProvider getRealItemItemProvider(final TreeNodeWrapper treeNodeWrapper, final BTSObject realItem)

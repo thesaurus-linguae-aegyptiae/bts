@@ -1002,7 +1002,7 @@ public class PassportEditorPart {
 			tabItem.setControl(composite);
 		} else {
 			Control c = tabItem.getControl();
-			c.dispose();
+			if (!c.isDisposed()) c.dispose();
 			tabItem.setControl(null);
 
 			composite = new ScrolledComposite(folder, SWT.V_SCROLL

@@ -4,7 +4,8 @@ Bundle-Name: CorpusServices
 Bundle-SymbolicName: org.bbaw.bts.core.services.corpus
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: org.bbaw.bts.core.services,
+Import-Package: org.bbaw.bts.core.commons.filter,
+ org.bbaw.bts.core.services,
  org.bbaw.bts.corpus.btsCorpusModel,
  org.bbaw.bts.searchModel
 Require-Bundle: org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"

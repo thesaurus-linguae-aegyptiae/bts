@@ -4,7 +4,7 @@
     modelName="BTSModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="7.0" copyrightFields="false"
     tableProviders="true" colorProviders="true" fontProviders="true" operationReflection="true"
-    importOrganizing="true">
+    importOrganizing="true" styleProviders="true">
   <foreignModel>BTSModel.ecore</foreignModel>
   <genPackages prefix="Btsmodel" basePackage="org.bbaw.bts" disposableProviderFactory="true"
       extensibleProviderFactory="true" ecorePackage="BTSModel.ecore#/">

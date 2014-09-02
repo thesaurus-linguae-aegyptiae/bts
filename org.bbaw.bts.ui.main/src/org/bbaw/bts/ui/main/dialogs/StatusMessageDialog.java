@@ -54,7 +54,6 @@ public class StatusMessageDialog extends TitleAreaDialog {
 	 * Create contents of the dialog.
 	 * @param parent
 	 */
-	@PostConstruct
 	protected Control createDialogArea(Composite parent) {
 
 		Composite area = (Composite) super.createDialogArea(parent);

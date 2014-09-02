@@ -5,6 +5,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.provider.BTSObjectItemProvider;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
@@ -12,9 +13,11 @@ import org.bbaw.bts.core.controller.generalController.BTSConfigurationController
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -22,6 +25,9 @@ import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.emf.edit.provider.StyledString.Style;
+import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.graphics.TextStyle;
 
 /**
  * This is the item provider adapter for a {@link org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject} object.
@@ -36,6 +42,20 @@ public class BTSCorpusObjectItemProvider
 	
 	private BTSConfigurationController configurationController = StaticAccessController
 			.getContext().get(BTSConfigurationController.class);
+	
+	protected Styler grey = new Styler() {
+
+		@Override
+		public void applyStyles(TextStyle textStyle) {
+			textStyle.foreground = BTSUIConstants.VIEW_FOREGROUND_DESELECTED_COLOR;
+			
+		}
+	};
+	
+	protected Style GREY = StyledString.Style.newBuilder()
+			.setForegroundColor(URI.createURI("color://rgb/200/197/185"))
+			.toStyle();
+	
 	
 	protected BTSConfigurationController getConfigurationController()
 	{
@@ -332,7 +352,7 @@ public class BTSCorpusObjectItemProvider
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSCorpusObject_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_BTSCorpusObject_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
 		return styledLabel;
 	}

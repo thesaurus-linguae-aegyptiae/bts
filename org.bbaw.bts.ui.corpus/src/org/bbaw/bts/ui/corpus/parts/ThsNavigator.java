@@ -51,6 +51,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -122,6 +123,7 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 	private TreeViewer bintreeViewer;
 	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
+	protected TreeNodeWrapper orphanNode;
 	
 
 	@Inject
@@ -245,17 +247,18 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 
 	
 
-	private void prepareTreeViewer(TreeViewer treeViewer,
+	private void prepareTreeViewer(final TreeViewer treeViewer,
 			final Composite parentControl) {
 		ComposedAdapterFactory factory = new ComposedAdapterFactory(
 				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
-				factory);
+		AdapterFactoryLabelProvider.StyledLabelProvider labelProvider = new AdapterFactoryLabelProvider.StyledLabelProvider(
+				factory, treeViewer);
 		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(
 				factory);
 
 		treeViewer.setContentProvider(contentProvider);
-		treeViewer.setLabelProvider(labelProvider);
+		treeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(
+labelProvider));
 
 		treeViewer.setUseHashlookup(true);
 		selectionListener = new ISelectionChangedListener() {
@@ -292,6 +295,14 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 
 						}
 					}
+					else if (tn.equals(orphanNode))
+					{
+						if (true || !tn.isChildrenLoaded())
+						{
+							tn.setChildrenLoaded(true);
+							loadOrphans(parentControl, treeViewer);
+						}
+					}
 
 				}
 			}
@@ -317,6 +328,50 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 		});
 		treeViewer.addSelectionChangedListener(selectionListener);
 
+	}
+
+	protected void loadOrphans(final Control parentControl,
+			final TreeViewer treeViewer) {
+		
+		Job job = new Job("load input") {
+			Map map;
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				
+
+				sync.asyncExec(new Runnable() {
+					public void run() {
+						if (parentControl != null && cachingMap.get(parentControl) != null
+									&& cachingMap.get(parentControl) instanceof Map) {
+							map = (Map) cachingMap.get(parentControl);
+						}
+						else
+						{
+							map = null;
+						}
+					}
+				});
+				List<BTSThsEntry> obs;
+				obs = thsNavigatorController
+						.getOrphanThsEntries(map,
+								treeViewer.getFilters());
+				storeIntoMap(obs, parentControl);
+				final List<TreeNodeWrapper> nodes = loadNodes(obs);
+				
+				// If you want to update the UI
+				sync.asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						orphanNode.getChildren().clear();
+						orphanNode.getChildren().addAll(nodes);
+					}
+				});
+				return Status.OK_STATUS;
+			}
+		};
+
+		// Start the Job
+		job.schedule();
 	}
 
 	private void loadInput(final Control parentControl,
@@ -351,6 +406,11 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);
 				rootNode.getChildren().addAll(nodes);
+				
+				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				orphanNode.setLabel("Orphans");
+				
+				rootNode.getChildren().add(orphanNode);
 
 				// If you want to update the UI
 				sync.asyncExec(new Runnable() {

@@ -11,6 +11,7 @@ Export-Package: org.apache.commons.net,
  org.bbaw.bts.core.commons,
  org.bbaw.bts.core.commons.comparator,
  org.bbaw.bts.core.commons.exceptions,
+ org.bbaw.bts.core.commons.filter,
  org.bbaw.bts.core.commons.staticAccess
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,

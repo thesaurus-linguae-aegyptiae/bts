@@ -32,6 +32,7 @@ package org.bbaw.bts.ui.commons.filter;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
@@ -42,13 +43,18 @@ import org.eclipse.jface.viewers.ViewerFilter;
  *
  * @author Christoph Plutte
  */
-public class SuppressNondeletedViewerFilter extends ViewerFilter {
+public class SuppressNondeletedViewerFilter extends ViewerFilter implements BTSFilter{
 
 	/* (non-Javadoc)
 	 * @see org.eclipse.jface.viewers.ViewerFilter#select(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
 	 */
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
+		return select(element);
+	}
+
+	@Override
+	public boolean select(Object element) {
 		Object object = element;
 		if (element instanceof TreeNodeWrapper
 				&& ((TreeNodeWrapper) element).getObject() != null) {
