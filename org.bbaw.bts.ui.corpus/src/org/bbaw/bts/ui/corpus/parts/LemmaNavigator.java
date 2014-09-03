@@ -6,6 +6,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
@@ -83,6 +84,12 @@ public class LemmaNavigator implements SearchViewer
 
 	@Override
 	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void search(BTSQueryRequest query, String queryName) {
 		// TODO Auto-generated method stub
 		
 	}

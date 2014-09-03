@@ -17,11 +17,13 @@ import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.services.BTSEvaluationService;
+import org.bbaw.bts.core.services.BTSProjectService;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -102,6 +104,11 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	private boolean hasLock = false;
 
 	private Set<Object> deselectedQueue = new HashSet<Object>();
+
+	@Inject
+	private BTSProjectService projecService;
+
+	private List<BTSProject> allProjects;
 
 
 	@Inject
@@ -564,4 +571,50 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 
+	@Override
+	public boolean userMayEditObject(BTSUser user, Object object) {
+		if (user == null || object == null
+				|| !(object instanceof BTSDBBaseObject)) {
+			return false;
+		} else {
+			if (userRoleMayEdit(user, (BTSDBBaseObject) object)
+					|| evaluationService.userIsMember(user, ((BTSDBBaseObject) object).getUpdaters())) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+
+	private boolean userRoleMayEdit(BTSUser user, BTSDBBaseObject object) {
+		String localUserContextRole = BTSCoreConstants.USER_ROLE_GUESTS;
+		if (user == null || object == null) {
+
+		} else {
+			for (BTSProject project : getAllProjects())
+			{
+				if (project.getPrefix() != null && project.getPrefix().equals(object.getProject()))
+				{
+					for (BTSProjectDBCollection c : project.getDbCollections()) {
+						if (c.getCollectionName() != null
+								&& c.getCollectionName().equals(object.getDBCollectionKey())) {
+							localUserContextRole = evaluationService.highestRoleOfUserInDBCollection(user, c);
+							break;
+						}
+					}
+				}
+			}
+		}
+		return (localUserContextRole != null && (localUserContextRole
+				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || localUserContextRole
+				.equals(BTSCoreConstants.USER_ROLE_EDITORS)));
+	}
+
+	private List<BTSProject> getAllProjects() {
+		if (allProjects == null)
+		{
+			allProjects = projecService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		}
+		return allProjects;
+	}
 }

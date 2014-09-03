@@ -7,7 +7,6 @@ import java.beans.PropertyChangeSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.eclipse.emf.common.notify.Notification;
@@ -63,7 +62,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected static final BTSObject OBJECT_EDEFAULT = null;
+	protected static final Object OBJECT_EDEFAULT = null;
 
 	/**
 	 * The cached value of the '{@link #getObject() <em>Object</em>}' attribute.
@@ -72,7 +71,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	 * @generated
 	 * @ordered
 	 */
-	protected BTSObject object = OBJECT_EDEFAULT;
+	protected Object object = OBJECT_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
@@ -225,32 +224,44 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BTSObject getObject()
+	public Object getObject()
 	{
 		return object;
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * 
-	 * @generatedNOT
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
 	 */
-	public void setObject(BTSObject newObject)
-	{
-		// if (object != null && object instanceof BTSObject)
-		// {
-		// object.getViewObjectHolder().remove(this);
-		// }
-		BTSObject oldObject = object;
+	public void setObject(Object newObject) {
+		Object oldObject = object;
 		object = newObject;
-
-		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
-				BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT, oldObject, object));
-		// if (object != null && object instanceof BTSObject)
-		// {
-		// object.getViewObjectHolder().add(this);
-		// }
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT, oldObject, object));
 	}
+
+//	/**
+//	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+//	 * 
+//	 * @generatedNOT
+//	 */
+//	public void setObject(BTSObject newObject)
+//	{
+//		// if (object != null && object instanceof BTSObject)
+//		// {
+//		// object.getViewObjectHolder().remove(this);
+//		// }
+//		BTSObject oldObject = object;
+//		object = newObject;
+//
+//		if (eNotificationRequired()) eNotify(new ENotificationImpl(this, Notification.SET,
+//				BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT, oldObject, object));
+//		// if (object != null && object instanceof BTSObject)
+//		// {
+//		// object.getViewObjectHolder().add(this);
+//		// }
+//	}
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -404,7 +415,7 @@ public class TreeNodeWrapperImpl extends MinimalEObjectImpl.Container implements
 				getChildren().addAll((Collection<? extends TreeNodeWrapper>)newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__OBJECT:
-				setObject((BTSObject)newValue);
+				setObject(newValue);
 				return;
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport((PropertyChangeSupport)newValue);

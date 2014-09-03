@@ -25,11 +25,14 @@ import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
 import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
+import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -55,6 +58,7 @@ import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
@@ -71,7 +75,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 
-public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
+public class ThsNavigator implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
 
 	@Inject
 	private EventBroker eventBroker;
@@ -209,7 +213,7 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer {
 		prepareTreeViewer(mainTreeViewer, mainTabItemComp);
 		loadInput(mainTabItemComp, mainTreeViewer, mainRootNode, false);
 
-		mainTabItemComp.setData("tv", mainTreeViewer);
+		mainTabItem.setData("tv", mainTreeViewer);
 
 		mainTabItemComp.layout();
 				
@@ -277,11 +281,9 @@ labelProvider));
 						BTSObject o = (BTSObject) tn.getObject();
 						if (o instanceof BTSCorpusObject) {
 							selectedTreeObject = (BTSCorpusObject) o;
-
 						}
-						if (!tn.isChildrenLoaded()) {
-							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(
-									1);
+						if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
+							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
 							parents.add(tn);
 							tn.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
@@ -295,12 +297,12 @@ labelProvider));
 
 						}
 					}
-					else if (tn.equals(orphanNode))
+					else if (tn.getLabel().equals("_Orphans"))
 					{
 						if (true || !tn.isChildrenLoaded())
 						{
 							tn.setChildrenLoaded(true);
-							loadOrphans(parentControl, treeViewer);
+							loadOrphans(parentControl, treeViewer, tn);
 						}
 					}
 
@@ -308,30 +310,12 @@ labelProvider));
 			}
 		};
 
-		treeViewer.setSorter(new ViewerSorter() {
-			@Override
-			public int compare(Viewer viewer, Object e1, Object e2) {
-				if (e1 instanceof BTSObject && e2 instanceof BTSObject) {
-					BTSObject b1 = (BTSObject) e1;
-					BTSObject b2 = (BTSObject) e2;
-					if (b1.getName() != null) {
-						if (b2.getName() != null) {
-							return ((BTSObject) e1).getName().compareTo(
-									((BTSObject) e2).getName());
-						} else
-							return -1;
-					}
-
-				}
-				return 0;
-			}
-		});
+		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
 		treeViewer.addSelectionChangedListener(selectionListener);
-
 	}
 
 	protected void loadOrphans(final Control parentControl,
-			final TreeViewer treeViewer) {
+			final TreeViewer treeViewer, final TreeNodeWrapper localOrphanNode) {
 		
 		Job job = new Job("load input") {
 			Map map;
@@ -362,8 +346,8 @@ labelProvider));
 				sync.asyncExec(new Runnable() {
 					@Override
 					public void run() {
-						orphanNode.getChildren().clear();
-						orphanNode.getChildren().addAll(nodes);
+						localOrphanNode.getChildren().clear();
+						localOrphanNode.getChildren().addAll(nodes);
 					}
 				});
 				return Status.OK_STATUS;
@@ -408,7 +392,7 @@ labelProvider));
 				rootNode.getChildren().addAll(nodes);
 				
 				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				orphanNode.setLabel("Orphans");
+				orphanNode.setLabel("_Orphans");
 				
 				rootNode.getChildren().add(orphanNode);
 
@@ -420,7 +404,7 @@ labelProvider));
 						if (!deleted) {
 							treeViewer.addFilter(getDeletedFilter());
 						}
- else {
+						else {
 							treeViewer
 									.addFilter(new SuppressNondeletedViewerFilter());
 						}
@@ -428,7 +412,6 @@ labelProvider));
 						menuService.registerContextMenu(
 								treeViewer.getControl(),
 								BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
-
 					}
 				});
 				return Status.OK_STATUS;
@@ -469,6 +452,7 @@ labelProvider));
 						@Override
 						public void run() {
 							System.out.println("add children" + children.size());
+							parent.getChildren().clear();
 							for (BTSObject o : children) {
 								TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 										.createTreeNodeWrapper();
@@ -479,13 +463,9 @@ labelProvider));
 								parent.getChildren().add(tn);
 							}
 							parent.setChildrenLoaded(true);
-
 						}
-
 					});
 				}
-				// loadChildren(grandChildren, false);
-
 				return Status.OK_STATUS;
 			}
 		};
@@ -517,7 +497,6 @@ labelProvider));
 							map.put(o.eResource().getURI(), o.eResource());
 						}
 					}
-
 				}
 			}
 		});
@@ -539,11 +518,7 @@ labelProvider));
 
 	private void loadTree(TreeViewer treeViewer, TreeNodeWrapper root,
 			final Control parentControl) {
-		//
-
-
 		treeViewer.setInput(root);
-
 	}
 
 	private List<TreeNodeWrapper> loadNodes(List<BTSThsEntry> obs) {
@@ -578,7 +553,6 @@ labelProvider));
 			mainRootNode.getChildren().add(tn);
 			tn.setParentObject(mainRootNode);
 			// refreshTreeViewer((BTSCorpusObject) object);
-
 		}
 	}
 
@@ -591,9 +565,7 @@ labelProvider));
 			thsNavigatorController.addRelation((BTSThsEntry) object,
 					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
 					(TreeNodeWrapper) selection.getFirstElement());
-
 			// refreshTreeViewer((BTSCorpusObject) object);
-
 		}
 	}
 
@@ -627,23 +599,14 @@ labelProvider));
 			public void run() {
 				if (!mainTreeViewer.getTree().isDisposed())
 				{
-					mainTreeViewer
-							.removeSelectionChangedListener(selectionListener);
+					
+//					mainTreeViewer
+//							.removeSelectionChangedListener(selectionListener);
 					for (TreePath path : mainTreeViewer.getExpandedTreePaths())
 						System.out.println(path.getLastSegment());
 					mainTreeViewer.refresh();
-					mainTreeViewer.addSelectionChangedListener(selectionListener);
+//					mainTreeViewer.addSelectionChangedListener(selectionListener);
 				}
-			}
-		});
-
-	}
-
-	private void addObjectToInput(final BTSObject object) {
-		sync.asyncExec(new Runnable() {
-			@Override
-			public void run() {
-				// input.add(object);
 			}
 		});
 
@@ -653,12 +616,8 @@ labelProvider));
 	public List<Map> getScatteredCashMaps() {
 		final List<Map> maps = new Vector<Map>(1);
 		for (Map map : cachingMap.values()) {
-			
 			maps.add(map);
-
-	}
-
-
+		}
 		return maps;
 	}
 	
@@ -681,6 +640,119 @@ labelProvider));
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public StructuredViewer getActiveStructuredViewer() {
+		CTabItem item = tabFolder.getSelection();
+		if (item != null)
+		{
+			Object o = item.getData("tv");
+			if (o instanceof StructuredViewer)
+			{
+				return (StructuredViewer) o;
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public void search(BTSQueryRequest query, String queryName) {
+		if (query == null)
+		{
+			return;
+		}
+		
+		// make new tab, with queryName if name != null
+		createNewSearchTab(query, queryName);
+	}
+
+	private void createNewSearchTab(BTSQueryRequest query, String queryName) {
+		// create main tab item
+		CTabItem searchTab = new CTabItem(tabFolder, SWT.NONE);
+		searchTab.setShowClose(true);
+		searchTab.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_SEARCH));
+		if (queryName != null && queryName.trim().length() > 0)
+		{
+			searchTab.setText(queryName);
+		}
+		else
+		{
+			searchTab.setText("Search:" + new Integer(tabFolder.getChildren().length - 2));
+		}
+		searchTab.setData("key", query.getQueryId());
+
+		Composite searchTabItemComp = new Composite(tabFolder, SWT.NONE);
+		searchTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchTabItemComp.setLayout(new GridLayout());
+		((GridLayout) searchTabItemComp.getLayout()).marginHeight = 0;
+		((GridLayout) searchTabItemComp.getLayout()).marginWidth = 0;
+
+		searchTab.setControl(searchTabItemComp);
+
+		TreeViewer searchTreeViewer = new TreeViewer(searchTabItemComp);
+		searchTreeViewer.getTree()
+				.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchTreeViewer.getTree().setLayout(new GridLayout());
+		searchTab.setData("tv", searchTreeViewer);
+		searchTabItemComp.layout();
+		tabFolder.setSelection(searchTab);
+		
+		TreeNodeWrapper searchRootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		prepareTreeViewer(searchTreeViewer, searchTabItemComp);
+		
+		// search
+		searchInput(searchTabItemComp, searchTreeViewer, searchRootNode, query, searchTab);
+
+	}
+
+	private void searchInput(final Composite parentControl,
+			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
+			final BTSQueryRequest query, final CTabItem searchTab) {
+
+		// // in new job, search
+		Job job = new Job("load input") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+
+				List<BTSThsEntry> obs;
+				obs = thsNavigatorController
+						.getSearchBTSThsEntries(query,
+								queryResultMap,
+								treeViewer,
+								rootNode,
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+				if (obs != null && obs.size() > 0)
+				{
+					storeIntoMap(obs, parentControl);
+					List<TreeNodeWrapper> nodes = loadNodes(obs);
+					rootNode.getChildren().addAll(nodes);
+				}
+				else
+				{
+					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+					emptyNode.setLabel("Nothing found that matches your query");
+					rootNode.getChildren().add(emptyNode);
+				}
+				// If you want to update the UI
+				sync.asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						loadTree(treeViewer, rootNode, parentControl);
+						treeViewer.addFilter(getDeletedFilter());
+						// register context menu on the table
+						menuService.registerContextMenu(
+								treeViewer.getControl(),
+								BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
+					}
+				});
+				return Status.OK_STATUS;
+			}
+		};
+
+		// Start the Job
+		job.schedule();
 		
 	}
 

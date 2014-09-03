@@ -515,6 +515,14 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		BTSConfigItem reviewStatusCI = getReviewStatusConfigItem();
 		BTSConfigItem reviewStatusClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
+		if (corpusObject == null)
+		{
+			for (BTSConfig c : reviewStatusCI.getChildren()) {
+				reviewStatusClone.getChildren().add(
+						EcoreUtil.copy(c));
+			}
+			return reviewStatusClone;
+		}
 		boolean found = false;
 		if (reviewStatusCI != null && reviewStatusCI.getChildren() != null) {
 			for (BTSConfig c : reviewStatusCI.getChildren()) {

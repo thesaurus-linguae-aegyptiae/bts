@@ -106,7 +106,16 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 			final TreeNodeWrapper objectTreeNode)
 	{
 		logger.info("run refresh");
-		BTSObject object = objectTreeNode.getObject();
+		Object o = objectTreeNode.getObject();
+		BTSObject object = null;
+		if (o instanceof BTSObject)
+		{
+			object = (BTSObject) o;
+		}
+		else
+		{
+			return;
+		}
 		if (subject != null)
 		{
 			logger.info("selection is instance of BTSTextCorpus");

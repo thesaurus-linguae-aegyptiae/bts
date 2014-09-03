@@ -28,6 +28,8 @@
  */
 package org.bbaw.bts.ui.commons.search;
 
+import org.bbaw.bts.searchModel.BTSQueryRequest;
+
 /**
  * The Interface SearchViewer.
  *
@@ -39,5 +41,7 @@ public interface SearchViewer {
 	 * Dispose.
 	 */
 	void dispose();
+	
 
+	void search(BTSQueryRequest query, String queryName);
 }

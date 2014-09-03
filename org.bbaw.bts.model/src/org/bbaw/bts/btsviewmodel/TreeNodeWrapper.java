@@ -95,20 +95,17 @@ public interface TreeNodeWrapper extends EObject
 	 * @model dataType="org.bbaw.bts.btsviewmodel.BTSObject"
 	 * @generated
 	 */
-	BTSObject getObject();
+	Object getObject();
 
 	/**
-	 * Sets the value of the '
-	 * {@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper#getObject
-	 * <em>Object</em>}' attribute. <!-- begin-user-doc --> <!-- end-user-doc
-	 * -->
-	 * 
-	 * @param value
-	 *            the new value of the '<em>Object</em>' attribute.
+	 * Sets the value of the '{@link org.bbaw.bts.btsviewmodel.TreeNodeWrapper#getObject <em>Object</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Object</em>' attribute.
 	 * @see #getObject()
 	 * @generated
 	 */
-	void setObject(BTSObject value);
+	void setObject(Object value);
 
 	/**
 	 * Returns the value of the '<em><b>Property Change Support</b></em>' attribute.

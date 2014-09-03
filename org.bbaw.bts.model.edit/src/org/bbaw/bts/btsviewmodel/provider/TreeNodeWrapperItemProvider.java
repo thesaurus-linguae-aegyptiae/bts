@@ -8,12 +8,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import javax.swing.text.StyledEditorKit.StyledTextAction;
-
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSConfig;
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
@@ -54,7 +50,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 
 	// EcoreItemProviderAdapterFactory factory = new
 	// EcoreItemProviderAdapterFactory();
-	private Map<BTSObject, Set<TreeNodeWrapper>> realItemMap = new HashMap<BTSObject, Set<TreeNodeWrapper>>();
+	private Map<Object, Set<TreeNodeWrapper>> realItemMap = new HashMap<Object, Set<TreeNodeWrapper>>();
 	protected Style CHILDREN_NUM_STYLE = StyledString.Style.newBuilder()
 			.setForegroundColor(URI.createURI("color://rgb/150/150/150"))
 //			.setBorderColor(URI.createURI("color://rgb/100/100/100"))
@@ -279,7 +275,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 			TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
 			if (treeNodeWrapper.getObject() != null && treeNodeWrapper.getObject() instanceof BTSConfig)
 			{
-				BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+				Object realItem = ((TreeNodeWrapper) object).getObject();
 				IItemLabelProvider realItemItemprovider = getRealItemItemProvider(treeNodeWrapper, realItem);
 				return ((IStructuredItemContentProvider) realItemItemprovider).getElements(realItem);
 			}
@@ -296,7 +292,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 			TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
 			if (treeNodeWrapper.getObject() != null && treeNodeWrapper.getObject() instanceof BTSConfig)
 			{
-				BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+				Object realItem = ((TreeNodeWrapper) object).getObject();
 				IItemLabelProvider realItemItemprovider = getRealItemItemProvider(treeNodeWrapper, realItem);
 				return ((ItemProviderAdapter) realItemItemprovider).hasChildren(realItem);
 			}
@@ -328,7 +324,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	public Object getImage(Object object)
 	{
 		TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
-		BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+		Object realItem = ((TreeNodeWrapper) object).getObject();
 		if (realItem == null) {
 			return overlayImage(object,
 					getResourceLocator().getImage("full/obj16/TreeNodeWrapper"));
@@ -350,7 +346,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	public String getText(Object object)
 	{
 		TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
-		BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+		Object realItem = ((TreeNodeWrapper) object).getObject();
 		if (realItem == null)
 		{
 			return treeNodeWrapper.getLabel();
@@ -372,7 +368,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 	public Object getStyledText(Object object) {
 		StyledString styledLabel = new StyledString();
 		TreeNodeWrapper treeNodeWrapper = (TreeNodeWrapper) object;
-		BTSObject realItem = ((TreeNodeWrapper) object).getObject();
+		Object realItem = ((TreeNodeWrapper) object).getObject();
 		if (realItem == null)
 		{
 			return treeNodeWrapper.getLabel();
@@ -394,7 +390,7 @@ public class TreeNodeWrapperItemProvider extends ItemProviderAdapter implements 
 		return styledLabel;
 	}
 
-	private IItemLabelProvider getRealItemItemProvider(final TreeNodeWrapper treeNodeWrapper, final BTSObject realItem)
+	private IItemLabelProvider getRealItemItemProvider(final TreeNodeWrapper treeNodeWrapper, final Object realItem)
 	{
 		IStructuredItemContentProvider realItemItemprovider = null;
 		if (adapterFactory.isFactoryForType(IStructuredItemContentProvider.class))

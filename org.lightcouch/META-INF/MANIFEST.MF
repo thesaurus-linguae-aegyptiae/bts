@@ -19,9 +19,7 @@ Bundle-ClassPath: lib/commons-codec-1.7.jar,
  .
 Export-Package: org.apache.http.client.utils,
  org.lightcouch
-Import-Package: com.fasterxml.jackson.databind;version="2.3.1",
- com.fasterxml.jackson.databind.node;version="2.3.1",
- com.google.common.io;version="10.0.1",
+Import-Package: com.google.common.io;version="10.0.1",
  org.apache.lucene.util,
  org.bbaw.bts.btsmodel,
  org.bbaw.bts.commons,

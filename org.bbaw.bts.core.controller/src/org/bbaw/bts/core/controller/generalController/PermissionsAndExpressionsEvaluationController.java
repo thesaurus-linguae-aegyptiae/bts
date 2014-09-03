@@ -30,6 +30,7 @@
 package org.bbaw.bts.core.controller.generalController;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSUser;
 
 /**
  * The PermissionsAndExpressionsEvaluationController manages the user editing and reading permissions and the core-expressions.
@@ -73,4 +74,7 @@ public interface PermissionsAndExpressionsEvaluationController {
 	 * @return true, if successful
 	 */
 	boolean authenticatedUserMayEditObeject(BTSObject object);
+	
+	boolean userMayEditObject(BTSUser user, Object object);
+
 }

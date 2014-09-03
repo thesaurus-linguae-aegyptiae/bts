@@ -27,9 +27,11 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
@@ -334,29 +336,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 			}
 		};
 
-		treeViewer.setSorter(new ViewerSorter()
-		{
-			@Override
-			public int compare(Viewer viewer, Object e1, Object e2)
-			{
-				if (e1 instanceof BTSObject && e2 instanceof BTSObject)
-				{
-					BTSObject b1 = (BTSObject) e1;
-					BTSObject b2 = (BTSObject) e2;
-					if (b1.getName() != null)
-					{
-						if (b2.getName() != null)
-						{
-							return ((BTSObject) e1).getName().compareTo(((BTSObject) e2).getName());
-						} else
-							return -1;
-					}
-
-				}
-				return 0;
-			}
-		});
-
+		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
 		treeViewer.setInput(root);
 		treeViewer.addSelectionChangedListener(selectionListener);
 
@@ -541,6 +521,12 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 
 	@Override
 	public void dispose() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void search(BTSQueryRequest query, String queryName) {
 		// TODO Auto-generated method stub
 		
 	}

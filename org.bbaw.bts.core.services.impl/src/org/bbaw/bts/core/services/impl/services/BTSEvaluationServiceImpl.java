@@ -37,10 +37,12 @@ import org.bbaw.bts.core.commons.exceptions.BTSLockingException;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.dao.DBLeaseDao;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
+import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
 import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.BTSProjectService;
+import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -128,6 +130,9 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	
 	@Inject
 	private RemoteDBManager remoteDBManager;
+
+	
+	private BTSUserGroupService userGroupService;
 	
 	@Override
 	public boolean filter(Object object)
@@ -342,7 +347,48 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		}
 		return false;
 	}
+	public boolean userIsMember(BTSUser user, List<String> userList) {
+		for (String userId : userList) {
+			if (userId.equals(user.get_id())
+					|| userId.equals(user.getUserName())) {
+				return true;
+			}
+			List<BTSUserGroup> localGroups = getUserGroupsOfUser(user);
+			if (localGroups != null && !localGroups.isEmpty()) {
+				for (BTSUserGroup g : localGroups) {
+					if (userId.equals(g.get_id()) || userId.equals(g.getName())) {
+						return true;
+					}
+				}
+			}
+
+		}
+		return false;
+	}
 	
+	private List<BTSUserGroup> getUserGroupsOfUser(BTSUser user) {
+		List<BTSUserGroup> groups = new Vector<BTSUserGroup>(4);
+
+		if (userGroupService == null)
+		{
+			userGroupService = context.get(BTSUserGroupService.class);
+		}
+		if (user != null) {
+			for (String id : user.getGroupIds()) {
+				BTSUserGroup g = null;
+				try {
+					g = userGroupService.find(id);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (g != null && !groups.contains(g)) {
+					groups.add(g);
+				}
+			}
+		}
+		return groups;
+	}
+
 	public String highestRoleOfAuthenticatedUserInDBCollection(BTSProjectDBCollection c) {
 		String role = BTSCoreConstants.USER_ROLE_GUESTS;
 		if (c == null)
@@ -987,4 +1033,50 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		}
 		return dBManager.dbCollectionExists(dbCollectionName);
 	}
+
+	@Override
+	public String highestRoleOfUserInDBCollection(BTSUser user,
+			BTSProjectDBCollection projectDBCollection) {
+		String role = BTSCoreConstants.USER_ROLE_GUESTS;
+		if (projectDBCollection == null)
+		{
+			return role;
+		}
+		int level = 0;
+		for (BTSDBCollectionRoleDesc r : projectDBCollection.getRoleDescriptions()) {
+			switch (r.getRoleName()) {
+			case BTSCoreConstants.USER_ROLE_ADMINS: {
+				if (userIsMember(user, r.getUserNames())) {
+					return BTSCoreConstants.USER_ROLE_ADMINS;
+				}
+				break;
+			}
+			case BTSCoreConstants.USER_ROLE_EDITORS: {
+				if (userIsMember(user, r.getUserNames())) {
+					role = BTSCoreConstants.USER_ROLE_EDITORS;
+					level = 4;
+				}
+				break;
+			}
+			case BTSCoreConstants.USER_ROLE_RESEARCHERS: {
+				if (level < 3 && userIsMember(user, r.getUserNames())) {
+					role = BTSCoreConstants.USER_ROLE_RESEARCHERS;
+					level = 3;
+				}
+				break;
+			}
+			case BTSCoreConstants.USER_ROLE_TRANSCRIBERS: {
+				if (level < 2 && userIsMember(user, r.getUserNames())) {
+					role = BTSCoreConstants.USER_ROLE_TRANSCRIBERS;
+					level = 2;
+				}
+				break;
+			}
+
+			}
+		}
+		return role;
+	}
+
+	
 }

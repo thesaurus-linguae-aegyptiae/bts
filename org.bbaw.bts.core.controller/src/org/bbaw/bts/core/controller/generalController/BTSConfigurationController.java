@@ -142,4 +142,8 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 	 */
 	String getIconStringOfObjectType(BTSObject object);
 
+	BTSConfigItem getReviewStatusConfigItem();
+
+	BTSConfigItem getVisibilityConfigItem();
+
 }

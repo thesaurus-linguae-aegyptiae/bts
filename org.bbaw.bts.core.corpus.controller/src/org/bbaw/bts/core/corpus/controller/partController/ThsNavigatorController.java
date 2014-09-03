@@ -6,6 +6,7 @@ import java.util.Map;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
@@ -43,4 +44,9 @@ public interface ThsNavigatorController {
 	String getDisplayName(String id);
 
 	List<BTSThsEntry> getOrphanThsEntries(Map map, ViewerFilter[] filters);
+
+	List<BTSThsEntry> getSearchBTSThsEntries(
+			BTSQueryRequest query, Map<String, BTSQueryResultAbstract> queryResultMap,
+			TreeViewer treeViewer, TreeNodeWrapper rootNode,
+			EReference treeNodeWrapperChildren);
 }

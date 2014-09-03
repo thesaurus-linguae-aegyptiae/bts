@@ -71,7 +71,16 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 	@Override
 	public void addRelation(BTSThsEntry subject, String relationType,
 			TreeNodeWrapper treeNodeWrapper) {
-		BTSObject object = treeNodeWrapper.getObject();
+		Object o = treeNodeWrapper.getObject();
+		BTSObject object = null;
+		if (o instanceof BTSObject)
+		{
+			object = (BTSObject) o;
+		}
+		else
+		{
+			return;
+		}
 		if (subject != null) {
 			BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
 			rel.setObjectId(((BTSDBBaseObject) object).get_id());
@@ -289,5 +298,25 @@ public class ThsNavigatorControllerImpl implements ThsNavigatorController {
 			}
 		}
 		return thsService.getOrphanThsEntries(map, btsFilters);
+	}
+
+	@Override
+	public List<BTSThsEntry> getSearchBTSThsEntries(BTSQueryRequest query, 
+			Map<String, BTSQueryResultAbstract> queryResultMap,
+			TreeViewer viewer, TreeNodeWrapper parentHolder,
+			EReference referenceName) {
+		System.out.println(query.getQueryId());
+		if (queryResultMap != null) {
+			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
+			qra.setViewer(viewer);
+			qra.setParentEObject(parentHolder);
+			qra.setReferenceName(referenceName);
+			qra.setQueryId(query.getQueryId());
+			queryResultMap.put(query.getQueryId(), qra);
+		}
+		System.out.println(query);
+		List<BTSThsEntry> children = thsService.query(query,
+				BTSConstants.OBJECT_STATE_ACTIVE);
+		return children;
 	}
 }

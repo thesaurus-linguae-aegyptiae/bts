@@ -31,8 +31,11 @@ package org.bbaw.bts.core.services;
 
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.btsmodel.BTSUser;
+import org.eclipse.emf.common.util.EList;
 
 /**
  * The Interface BTSEvaluationService.
@@ -118,4 +121,15 @@ public interface BTSEvaluationService
 	 * @return true, if successful
 	 */
 	boolean authenticatedUserMaySyncDBColl(String dbCollectionName);
+
+	/** returns highest user role the given user holds in the given projectDBCollection.
+	 * @param projectDBCollection requested dbCollection.
+	 * @param user given user
+	 * @return highest userrole in given context.
+	 */
+	String highestRoleOfUserInDBCollection(BTSUser user,
+			BTSProjectDBCollection projectDBCollection);
+
+	boolean userIsMember(BTSUser user, List<String> updaters);
+
 }

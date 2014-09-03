@@ -145,7 +145,14 @@ public class BTSThsEntryServiceImpl extends
 	public List<BTSThsEntry> getOrphanThsEntries(Map map,
 			List<BTSFilter> btsFilters) {
 		List<BTSThsEntry> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE);
-		allEntries = filter(allEntries);
+		List<BTSThsEntry> allFilteredEntries = new Vector<BTSThsEntry>();
+		for (BTSThsEntry e : allEntries)
+		{
+			if (isVisible(e, btsFilters))
+			{
+				allFilteredEntries.add(e);
+			}
+		}
 		
 		// load and cache root entries
 		List<BTSThsEntry> allRootEntries = listRootEntries();
@@ -159,21 +166,21 @@ public class BTSThsEntryServiceImpl extends
 		}
 		
 		// init caches
+		
+		// potential root nodes
 		Map<String, CacheTreeNode> roots = new HashMap<String, CacheTreeNode>();
+		// all nodes
 		Map<String, CacheTreeNode> allNodes = new HashMap<String, CacheTreeNode>();
+		// nodes that await a holder, key = id of holder
 		Map<String, List<CacheTreeNode>> awaitingHolder = new HashMap<String, List<CacheTreeNode>>();
+		// nodes that provide hold to children, key = id of child
 		Map<String, List<CacheTreeNode>> providingHold = new HashMap<String, List<CacheTreeNode>>();
 		
 		// iterate over all entries
-		for (BTSThsEntry e : allEntries)
+		for (BTSThsEntry e : allFilteredEntries)
 		{
 			if (isVisible(e, btsFilters))
 			{
-				System.out.println(e.getName());
-				if ("orph4".equals(e.getName())) {
-					System.out.println(e.getName());
-
-				}
 				CacheTreeNode tn = new CacheTreeNode(e.get_id(), e);
 				allNodes.put(tn.getId(), tn);
 				boolean held = false;
@@ -234,12 +241,6 @@ public class BTSThsEntryServiceImpl extends
 		List<BTSThsEntry> orphans = new Vector<BTSThsEntry>();
 		for (CacheTreeNode tn : roots.values())
 		{
-//			URI uri = null;
-//			if (tn.getObject() != null && tn.getObject() instanceof EObject)
-//			{
-//				EObject eo = (EObject) tn.getObject();
-//				uri = eo.eResource().getURI();
-//			}
 			if (allRootEntriesSet != null && allRootEntriesSet.contains(tn.getId()))
 			{
 				// tn is rootnode and shown in viewer
@@ -266,12 +267,12 @@ public class BTSThsEntryServiceImpl extends
 		{
 			for (BTSFilter f : btsFilters)
 			{
-				if (f.select(e))
+				if (!f.select(e))
 				{
-					return true;
+					return false;
 				}
 			}
-			return false;
+			return true;
 		}
 		return true;
 	}

@@ -12,7 +12,7 @@
         transient="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
         eType="#//TreeNodeWrapper" transient="true"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="object" eType="#//BTSObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyChangeSupport"
         eType="#//PropertyChangeSupport"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="childrenLoaded" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>

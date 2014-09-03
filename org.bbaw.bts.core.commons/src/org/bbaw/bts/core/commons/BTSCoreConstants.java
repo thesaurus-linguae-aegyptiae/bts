@@ -285,6 +285,18 @@ public class BTSCoreConstants
 	/** The Constant EXTENSION_SEARCH_SERVICE_MAP. */
 	public static final String EXTENSION_SEARCH_SERVICE_MAP = "extension_search_service_map";
 
+	public static final String OBJECTS_FILTER_BY_PARAM_ID = "objects_filter_by_param";
+	
+	public static final String OBJECTS_FILTER_PARAM_BY_PROJECTS = "filter_by_projects";
+
+	public static final String OBJECTS_FILTER_PARAM_BY_CREATORS = "filter_by_creators";
+
+	public static final String OBJECTS_FILTER_PARAM_BY_UPDATERS = "filter_by_updaters";
+
+	public static final String OBJECTS_FILTER_PARAM_BY_VISIBILITY = "filter_by_visibility";
+
+	public static final String OBJECTS_FILTER_PARAM_BY_REVIEWSTATUS = "filter_by_reviewStatus";
+
 
 
 }

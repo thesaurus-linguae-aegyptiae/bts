@@ -554,6 +554,16 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	}
 
+	@Override
+	public BTSConfigItem getReviewStatusConfigItem() {
+		return configService.getReviewStatusConfigItem();
+	}
+
+	@Override
+	public BTSConfigItem getVisibilityConfigItem() {
+		return configService.getVisibilityConfigItem();
+	}
+
 
 
 }
