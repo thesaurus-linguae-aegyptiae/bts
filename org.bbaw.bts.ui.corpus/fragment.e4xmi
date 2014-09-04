@@ -99,7 +99,7 @@
           </children>
         </children>
       </menus>
-      <menus xsi:type="menu:PopupMenu" xmi:id="_S9SSQDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.lemma.popupmenu">
+      <menus xsi:type="menu:PopupMenu" xmi:id="_S9SSQDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.lemmanavigator.popupmenu">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSQTQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.8" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSQjQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.9" label="Add Lemma Child Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma-add.png" command="_4O0rkDQ4EeSUHvWJHIXOXA"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_S9SSQzQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menuseparator.0"/>
@@ -120,7 +120,7 @@
     </elements>
     <elements xsi:type="basic:Part" xmi:id="_hnP-EKL2EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.part.ThsNavigator" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.ThsNavigator" label="Thesaurus Navigator" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/thss.png">
       <handlers xmi:id="_M_CvMKRPEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handler.delete" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-      <menus xsi:type="menu:PopupMenu" xmi:id="_cnPWoKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.lemmanavigator.popupmenu">
+      <menus xsi:type="menu:PopupMenu" xmi:id="_cnPWoKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.ths.popupmenu">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_tqUToKhiEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.addAnnotation" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_7jK50KhiEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.addChildEntry" label="Add Child Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/ths-add.png" command="_FHzOwKOiEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_sSTLIOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.lemma.3"/>

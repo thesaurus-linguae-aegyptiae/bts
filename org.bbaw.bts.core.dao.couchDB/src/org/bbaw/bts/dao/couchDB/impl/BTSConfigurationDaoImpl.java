@@ -23,13 +23,13 @@ public class BTSConfigurationDaoImpl extends CouchDBDao<BTSConfiguration, String
 	@Override
 	public List<BTSConfiguration> list(String path, String objectState)
 	{
-		String viewId = DaoConstants.VIEW_ALL_BTSCONFIGURATIONS;
+		String viewId = BTSConstants.VIEW_ALL_BTSCONFIGURATIONS;
 		if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
-			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
+			viewId = BTSConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
-			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSCONFIGURATIONS;
+			viewId = BTSConstants.VIEW_ALL_TERMINATED_BTSCONFIGURATIONS;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, DaoConstants.PROJECT_ADMIN);
 		List<BTSConfiguration> results = loadObjectsFromStrings(allDocs, path);

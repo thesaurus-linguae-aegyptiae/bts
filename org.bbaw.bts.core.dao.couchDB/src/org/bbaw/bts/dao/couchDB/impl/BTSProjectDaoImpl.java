@@ -37,13 +37,13 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 	@Override
 	public List<BTSProject> list(String path, String objectState)
 	{
-		String viewId = DaoConstants.VIEW_ALL_BTSPROJECTS;
+		String viewId = BTSConstants.VIEW_ALL_BTSPROJECTS;
 		if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
-			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
+			viewId = BTSConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
-			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
+			viewId = BTSConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, path);
 		List<BTSProject> results = loadObjectsFromStrings(allDocs, path);

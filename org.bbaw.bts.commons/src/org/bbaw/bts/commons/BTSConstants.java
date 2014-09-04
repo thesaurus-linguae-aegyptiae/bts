@@ -68,6 +68,55 @@ public class BTSConstants
 	public static final String OWNER_REFERENCED_TYPES_ANY = "ANY";
 	public static final String ANNOTATION_RUBRUM = "Rubrum";
 
+	/** The Constant VIEW_ALL_DOCS. */
+	public static final String VIEW_ALL_DOCS = "objects/all_docs";
+
+	/** The Constant VIEW_ALL_BTSCONFIGURATIONS. */
+	public static final String VIEW_ALL_BTSCONFIGURATIONS = "project_admin/all_btsconfigurations";
+
+	/** The Constant VIEW_ALL_BTSTCOBJECTS. */
+	public static final String VIEW_ALL_BTSTCOBJECTS = "objects/all_btstcobjects";
+
+	/** The Constant VIEW_ALL_BTSUSERS. */
+	public static final String VIEW_ALL_BTSUSERS = "admin/all_btsusers";
+
+	/** The Constant VIEW_ALL_BTSUSERGROUPS. */
+	public static final String VIEW_ALL_BTSUSERGROUPS = "admin/all_btsusergroups";
+
+	
+	/** The Constant VIEW_ALL_BTSPROJECTS. */
+	public static final String VIEW_ALL_BTSPROJECTS = "admin/all_projects";
+
+	/** The Constant VIEW_ALL_ACTIVE_DOCS. */
+	public static final String VIEW_ALL_ACTIVE_DOCS = "objects/all_active_docs";
+
+	/** The Constant VIEW_ALL_ACTIVE_BTSCONFIGURATIONS. */
+	public static final String VIEW_ALL_ACTIVE_BTSCONFIGURATIONS = "project_admin/all_active_btsconfigurations";
+
+	/** The Constant VIEW_ALL_ACTIVE_BTSUSERS. */
+	public static final String VIEW_ALL_ACTIVE_BTSUSERS = "admin/all_active_btsusers";
+
+	/** The Constant VIEW_ALL_ACTIVE_BTSUSERGROUPS. */
+	public static final String VIEW_ALL_ACTIVE_BTSUSERGROUPS = "admin/all_active_btsusergroups";
+
+	/** The Constant VIEW_ALL_ACTIVE_BTSPROJECTS. */
+	public static final String VIEW_ALL_ACTIVE_BTSPROJECTS = "admin/all_active_projects";
+
+	/** The Constant VIEW_ALL_TERMINATED_DOCS. */
+	public static final String VIEW_ALL_TERMINATED_DOCS = "objects/all_terminated_docs";
+
+	/** The Constant VIEW_ALL_TERMINATED_BTSCONFIGURATIONS. */
+	public static final String VIEW_ALL_TERMINATED_BTSCONFIGURATIONS = "project_admin/all_terminated_btsconfigurations";
+
+	/** The Constant VIEW_ALL_TERMINATED_BTSUSERS. */
+	public static final String VIEW_ALL_TERMINATED_BTSUSERS = "admin/all_terminated_btsusers";
+
+	/** The Constant VIEW_ALL_TERMINATED_BTSUSERGROUPS. */
+	public static final String VIEW_ALL_TERMINATED_BTSUSERGROUPS = "admin/all_terminated_btsusergroups";
+
+	/** The Constant VIEW_ALL_TERMINATED_BTSPROJECTS. */
+	public static final String VIEW_ALL_TERMINATED_BTSPROJECTS = "admin/all_terminated_projects";
+
 
 	private BTSConstants()
 	{

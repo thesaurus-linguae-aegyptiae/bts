@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
@@ -392,16 +393,21 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public List<E> list(String path, String objectState)
 	{
-		String view = DaoConstants.VIEW_ALL_DOCS;
+		String view = BTSConstants.VIEW_ALL_DOCS;
 		if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
-			view = DaoConstants.VIEW_ALL_ACTIVE_DOCS;
+			view = BTSConstants.VIEW_ALL_ACTIVE_DOCS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
-			view = DaoConstants.VIEW_ALL_TERMINATED_DOCS;
+			view = BTSConstants.VIEW_ALL_TERMINATED_DOCS;
 		}
-		List<String> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path)
-.view(view)
+		return list(path, view, objectState);
+	}
+	
+	@Override
+	public List<E> list(String path, String staticQueryId,
+			String objectState) {
+		List<String> allDocs = connectionProvider.getDBClient(CouchDbClient.class, path).view(staticQueryId)
 				.includeDocs(true).query();
 		ArrayList<BTSDBBaseObject> results = new ArrayList<BTSDBBaseObject>();
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("json", new JsResourceFactoryImpl());
@@ -425,7 +431,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_DOCS, path);
+			registerQueryIdWithInternalRegistry(BTSConstants.VIEW_ALL_DOCS, path);
 		}
 		return (List<E>) results;
 	}
@@ -843,15 +849,15 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	protected String getTerminatedSearchId(String searchId) {
 		if (DaoConstants.VIEW_ALL_BTSANNOTATIONS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSANNOTATIONS;
-		} else if (DaoConstants.VIEW_ALL_BTSCONFIGURATIONS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_TERMINATED_BTSCONFIGURATIONS;
+		} else if (BTSConstants.VIEW_ALL_BTSCONFIGURATIONS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_TERMINATED_BTSCONFIGURATIONS;
 		} else if (DaoConstants.VIEW_ALL_BTSIMAGESS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSIMAGESS;
 		} else if (DaoConstants.VIEW_ALL_BTSLISTENTRIES.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES;
-		} else if (DaoConstants.VIEW_ALL_BTSPROJECTS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
-		} else if (DaoConstants.VIEW_ALL_BTSTCOBJECTS.equals(searchId)) {
+		} else if (BTSConstants.VIEW_ALL_BTSPROJECTS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_TERMINATED_BTSPROJECTS;
+		} else if (BTSConstants.VIEW_ALL_BTSTCOBJECTS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSTCOBJECTS;
 		} else if (DaoConstants.VIEW_ALL_BTSTEXTCORPUS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSTEXTCORPUS;
@@ -859,10 +865,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSTEXTS;
 		} else if (DaoConstants.VIEW_ALL_BTSTHSENTRIES.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES;
-		} else if (DaoConstants.VIEW_ALL_BTSUSERGROUPS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_TERMINATED_BTSUSERGROUPS;
-		} else if (DaoConstants.VIEW_ALL_BTSUSERS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_TERMINATED_BTSUSERS;
+		} else if (BTSConstants.VIEW_ALL_BTSUSERGROUPS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_TERMINATED_BTSUSERGROUPS;
+		} else if (BTSConstants.VIEW_ALL_BTSUSERS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_TERMINATED_BTSUSERS;
 		}
 		return searchId;
 	}
@@ -870,15 +876,15 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	protected String getActiveSearchId(String searchId) {
 		if (DaoConstants.VIEW_ALL_BTSANNOTATIONS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSANNOTATIONS;
-		} else if (DaoConstants.VIEW_ALL_BTSCONFIGURATIONS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
+		} else if (BTSConstants.VIEW_ALL_BTSCONFIGURATIONS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_ACTIVE_BTSCONFIGURATIONS;
 		} else if (DaoConstants.VIEW_ALL_BTSIMAGESS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSIMAGESS;
 		} else if (DaoConstants.VIEW_ALL_BTSLISTENTRIES.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSLISTENTRIES;
-		} else if (DaoConstants.VIEW_ALL_BTSPROJECTS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
-		} else if (DaoConstants.VIEW_ALL_BTSTCOBJECTS.equals(searchId)) {
+		} else if (BTSConstants.VIEW_ALL_BTSPROJECTS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_ACTIVE_BTSPROJECTS;
+		} else if (BTSConstants.VIEW_ALL_BTSTCOBJECTS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSTCOBJECTS;
 		} else if (DaoConstants.VIEW_ALL_BTSTEXTCORPUS.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTCORPUS;
@@ -886,10 +892,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSTEXTS;
 		} else if (DaoConstants.VIEW_ALL_BTSTHSENTRIES.equals(searchId)) {
 			return DaoConstants.VIEW_ALL_ACTIVE_BTSTHSENTRIES;
-		} else if (DaoConstants.VIEW_ALL_BTSUSERGROUPS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_ACTIVE_BTSUSERGROUPS;
-		} else if (DaoConstants.VIEW_ALL_BTSUSERS.equals(searchId)) {
-			return DaoConstants.VIEW_ALL_ACTIVE_BTSUSERS;
+		} else if (BTSConstants.VIEW_ALL_BTSUSERGROUPS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_ACTIVE_BTSUSERGROUPS;
+		} else if (BTSConstants.VIEW_ALL_BTSUSERS.equals(searchId)) {
+			return BTSConstants.VIEW_ALL_ACTIVE_BTSUSERS;
 		}
 		return searchId;
 	}

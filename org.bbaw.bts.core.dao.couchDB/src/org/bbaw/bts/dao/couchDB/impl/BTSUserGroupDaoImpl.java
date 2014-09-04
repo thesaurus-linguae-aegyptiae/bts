@@ -24,13 +24,13 @@ public class BTSUserGroupDaoImpl extends CouchDBDao<BTSUserGroup, String> implem
 	@Override
 	public List<BTSUserGroup> list(String path, String objectState)
 	{
-		String viewId = DaoConstants.VIEW_ALL_BTSUSERGROUPS;
+		String viewId = BTSConstants.VIEW_ALL_BTSUSERGROUPS;
 		if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
-			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSUSERGROUPS;
+			viewId = BTSConstants.VIEW_ALL_ACTIVE_BTSUSERGROUPS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
-			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSUSERGROUPS;
+			viewId = BTSConstants.VIEW_ALL_TERMINATED_BTSUSERGROUPS;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, path);
 		List<BTSUserGroup> results = loadObjectsFromStrings(allDocs, path);

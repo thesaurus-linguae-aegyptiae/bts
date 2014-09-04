@@ -25,11 +25,11 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 
 	@Override
 	public List<BTSCorpusObject> getRootBTSCorpusObjects(String path) {
-		List<String> allDocs = loadDocsFromView(DaoConstants.VIEW_ALL_DOCS, path, path);
+		List<String> allDocs = loadDocsFromView(BTSConstants.VIEW_ALL_DOCS, path, path);
 		List<BTSCorpusObject> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
-			registerQueryIdWithInternalRegistry(DaoConstants.VIEW_ALL_DOCS, path);
+			registerQueryIdWithInternalRegistry(BTSConstants.VIEW_ALL_DOCS, path);
 		}
 		return results;
 		

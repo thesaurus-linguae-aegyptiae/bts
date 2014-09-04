@@ -17,6 +17,7 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -351,14 +352,15 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 								queryResultMap,
 								treeViewer,
 								rootNode,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+								BTSCorpusConstants.VIEW_LEMMA_ROOT_ENTRIES);
 				} else {
 					obs = lemmaNavigatorController
 							.getDeletedEntries(
 									queryResultMap,
 									treeViewer,
 									rootNode,
-									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, );
+									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES);
 				}
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);

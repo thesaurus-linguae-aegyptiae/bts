@@ -260,7 +260,7 @@ GenericCorpusObjectNavigatorController<E, K>
 			qra.setQueryId(queryID);
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
-		List<E> list = typedListEntries(BTSConstants.OBJECT_STATE_ACTIVE); //thsService.list(BTSConstants.OBJECT_STATE_TERMINATED);
+		List<E> list = typedListEntries(BTSConstants.OBJECT_STATE_TERMINATED); //thsService.list(BTSConstants.OBJECT_STATE_TERMINATED);
 		List<E> result = new Vector<E>(list.size());
 		for (E t : list) {
 			result.add(t);

@@ -19,6 +19,7 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -360,14 +361,16 @@ labelProvider));
 								queryResultMap,
 								treeViewer,
 								rootNode,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+								BTSCorpusConstants.VIEW_THS_ROOT_ENTRIES);
 				} else {
 					obs = thsNavigatorController
 							.getDeletedEntries(
 									queryResultMap,
 									treeViewer,
 									rootNode,
-									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES);
 				}
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);

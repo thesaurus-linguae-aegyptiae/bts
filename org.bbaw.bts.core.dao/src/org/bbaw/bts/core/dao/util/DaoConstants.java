@@ -37,14 +37,10 @@ package org.bbaw.bts.core.dao.util;
 public class DaoConstants
 {
 
-	/** The Constant VIEW_ALL_DOCS. */
-	public static final String VIEW_ALL_DOCS = "objects/all_docs";
 
 	/** The Constant VIEW_ALL_BTSANNOTATIONS. */
 	public static final String VIEW_ALL_BTSANNOTATIONS = "objects/all_btsannotations";
 
-	/** The Constant VIEW_ALL_BTSCONFIGURATIONS. */
-	public static final String VIEW_ALL_BTSCONFIGURATIONS = "project_admin/all_btsconfigurations";
 
 	/** The Constant VIEW_ALL_BTSIMAGESS. */
 	public static final String VIEW_ALL_BTSIMAGESS = "objects/all_btsimages";
@@ -61,11 +57,6 @@ public class DaoConstants
 	/** The Constant VIEW_ALL_BTSTEXTS. */
 	public static final String VIEW_ALL_BTSTEXTS = "objects/all_btstexts";
 
-	/** The Constant VIEW_ALL_BTSUSERS. */
-	public static final String VIEW_ALL_BTSUSERS = "admin/all_btsusers";
-
-	/** The Constant VIEW_ALL_BTSUSERGROUPS. */
-	public static final String VIEW_ALL_BTSUSERGROUPS = "admin/all_btsusergroups";
 
 	/** The Constant VIEW_CORPUS_ROOT_OBJECTS. */
 	public static final String VIEW_CORPUS_ROOT_OBJECTS = "objects/all_corpus_root_objects";
@@ -73,23 +64,16 @@ public class DaoConstants
 	/** The Constant VIEW_ALL_CORPUS_OBJECTS. */
 	public static final String VIEW_ALL_CORPUS_OBJECTS = "objects/all_corpus_objects";
 
-	/** The Constant VIEW_ALL_BTSPROJECTS. */
-	public static final String VIEW_ALL_BTSPROJECTS = "admin/all_projects";
-
 	/** The Constant VIEW_ALL_BTSTHSENTRIES. */
 	public static final String VIEW_ALL_BTSTHSENTRIES = "ths/all_thsentry_objects";
 
 	/** The Constant VIEW_THS_ROOT_ENTRIES. */
 	public static final String VIEW_THS_ROOT_ENTRIES = "ths/root_entries";
 
-	/** The Constant VIEW_ALL_ACTIVE_DOCS. */
-	public static final String VIEW_ALL_ACTIVE_DOCS = "objects/all_active_docs";
 
 	/** The Constant VIEW_ALL_ACTIVE_BTSANNOTATIONS. */
 	public static final String VIEW_ALL_ACTIVE_BTSANNOTATIONS = "objects/all_active_btsannotations";
 
-	/** The Constant VIEW_ALL_ACTIVE_BTSCONFIGURATIONS. */
-	public static final String VIEW_ALL_ACTIVE_BTSCONFIGURATIONS = "project_admin/all_active_btsconfigurations";
 
 	/** The Constant VIEW_ALL_ACTIVE_BTSIMAGESS. */
 	public static final String VIEW_ALL_ACTIVE_BTSIMAGESS = "objects/all_active_btsimages";
@@ -106,29 +90,16 @@ public class DaoConstants
 	/** The Constant VIEW_ALL_ACTIVE_BTSTEXTS. */
 	public static final String VIEW_ALL_ACTIVE_BTSTEXTS = "objects/all_active_btstexts";
 
-	/** The Constant VIEW_ALL_ACTIVE_BTSUSERS. */
-	public static final String VIEW_ALL_ACTIVE_BTSUSERS = "admin/all_active_btsusers";
-
-	/** The Constant VIEW_ALL_ACTIVE_BTSUSERGROUPS. */
-	public static final String VIEW_ALL_ACTIVE_BTSUSERGROUPS = "admin/all_active_btsusergroups";
 
 	/** The Constant VIEW_ALL_ACTIVE_CORPUS_OBJECTS. */
 	public static final String VIEW_ALL_ACTIVE_CORPUS_OBJECTS = "objects/all_active_corpus_objects";
 
-	/** The Constant VIEW_ALL_ACTIVE_BTSPROJECTS. */
-	public static final String VIEW_ALL_ACTIVE_BTSPROJECTS = "admin/all_active_projects";
-
 	/** The Constant VIEW_ALL_ACTIVE_BTSTHSENTRIES. */
 	public static final String VIEW_ALL_ACTIVE_BTSTHSENTRIES = "ths/all_active_thsentry_objects";
 
-	/** The Constant VIEW_ALL_TERMINATED_DOCS. */
-	public static final String VIEW_ALL_TERMINATED_DOCS = "objects/all_terminated_docs";
 
 	/** The Constant VIEW_ALL_TERMINATED_BTSANNOTATIONS. */
 	public static final String VIEW_ALL_TERMINATED_BTSANNOTATIONS = "objects/all_terminated_btsannotations";
-
-	/** The Constant VIEW_ALL_TERMINATED_BTSCONFIGURATIONS. */
-	public static final String VIEW_ALL_TERMINATED_BTSCONFIGURATIONS = "project_admin/all_terminated_btsconfigurations";
 
 	/** The Constant VIEW_ALL_TERMINATED_BTSIMAGESS. */
 	public static final String VIEW_ALL_TERMINATED_BTSIMAGESS = "objects/all_terminated_btsimages";
@@ -145,17 +116,8 @@ public class DaoConstants
 	/** The Constant VIEW_ALL_TERMINATED_BTSTEXTS. */
 	public static final String VIEW_ALL_TERMINATED_BTSTEXTS = "objects/all_terminated_btstexts";
 
-	/** The Constant VIEW_ALL_TERMINATED_BTSUSERS. */
-	public static final String VIEW_ALL_TERMINATED_BTSUSERS = "admin/all_terminated_btsusers";
-
-	/** The Constant VIEW_ALL_TERMINATED_BTSUSERGROUPS. */
-	public static final String VIEW_ALL_TERMINATED_BTSUSERGROUPS = "admin/all_terminated_btsusergroups";
-
 	/** The Constant VIEW_ALL_TERMINATED_CORPUS_OBJECTS. */
 	public static final String VIEW_ALL_TERMINATED_CORPUS_OBJECTS = "objects/all_terminated_corpus_objects";
-
-	/** The Constant VIEW_ALL_TERMINATED_BTSPROJECTS. */
-	public static final String VIEW_ALL_TERMINATED_BTSPROJECTS = "admin/all_terminated_projects";
 
 	/** The Constant VIEW_ALL_TERMINATED_BTSTHSENTRIES. */
 	public static final String VIEW_ALL_TERMINATED_BTSTHSENTRIES = "ths/terminated_entries";

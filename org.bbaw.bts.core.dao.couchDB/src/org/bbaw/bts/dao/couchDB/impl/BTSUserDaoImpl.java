@@ -12,7 +12,6 @@ import java.util.Set;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.BTSUserDao;
-import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.e4.core.di.annotations.Creatable;
@@ -47,13 +46,13 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 	@Override
 	public List<BTSUser> list(String path, String objectState)
 	{
-		String viewId = DaoConstants.VIEW_ALL_BTSUSERS;
+		String viewId = BTSConstants.VIEW_ALL_BTSUSERS;
 		if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
-			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSUSERS;
+			viewId = BTSConstants.VIEW_ALL_ACTIVE_BTSUSERS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
-			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSUSERS;
+			viewId = BTSConstants.VIEW_ALL_TERMINATED_BTSUSERS;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, path);
 		List<BTSUser> results = loadObjectsFromStrings(allDocs, path);
@@ -122,13 +121,13 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 	@Override
 	public List<BTSUser> list(String path, String objectState,
 			String userName, String passWord) {
-		String viewId = DaoConstants.VIEW_ALL_BTSUSERS;
+		String viewId = BTSConstants.VIEW_ALL_BTSUSERS;
 		if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
-			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSUSERS;
+			viewId = BTSConstants.VIEW_ALL_ACTIVE_BTSUSERS;
 		} else if (objectState != null
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
-			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSUSERS;
+			viewId = BTSConstants.VIEW_ALL_TERMINATED_BTSUSERS;
 		}
 		
 		// List<JsonObject> allDocs =
