@@ -17,6 +17,7 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
@@ -33,6 +34,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -41,9 +43,13 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.elasticsearch.index.query.QueryBuilders;
 
-public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
+public class CorpusNavigatorControllerImpl 
+extends AbstractCorpusObjectNavigatorControllerImpl<BTSCorpusObject, String> 
+implements CorpusNavigatorController
 {
 	@Inject
 	private EventBroker eventBroker;
@@ -92,50 +98,50 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		return o;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * org.bbaw.bts.core.controller.impl.partController.CorpusNavigatorController
-	 * #addRelation(org.bbaw.bts.btsmodel.BTSCorpusObject, java.lang.String,
-	 * org.bbaw.bts.btsmodel.BTSCorpusObject,
-	 * org.eclipse.core.databinding.observable.list.WritableList)
-	 */
-	@Override
-	public void addRelation(final BTSCorpusObject subject, final String relationType,
-			final TreeNodeWrapper objectTreeNode)
-	{
-		logger.info("run refresh");
-		Object o = objectTreeNode.getObject();
-		BTSObject object = null;
-		if (o instanceof BTSObject)
-		{
-			object = (BTSObject) o;
-		}
-		else
-		{
-			return;
-		}
-		if (subject != null)
-		{
-			logger.info("selection is instance of BTSTextCorpus");
-			BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
-			rel.setObjectId(((BTSDBBaseObject) object).get_id());
-			rel.setType(relationType);
-			subject.getRelations().add(rel);
-			corpusObjectService.save((BTSCorpusObject) subject);
-		}
-		if (relationType != null && relationType.equals("partOf"))
-		{
-			TreeNodeWrapper childNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-			childNode.setParent(objectTreeNode);
-			childNode.setObject(subject);
-			objectTreeNode.getChildren().add(childNode);
-
-		}
-		eventBroker.post("model_update/async", "Hallo");
-
-	}
+//	/*
+//	 * (non-Javadoc)
+//	 * 
+//	 * @see
+//	 * org.bbaw.bts.core.controller.impl.partController.CorpusNavigatorController
+//	 * #addRelation(org.bbaw.bts.btsmodel.BTSCorpusObject, java.lang.String,
+//	 * org.bbaw.bts.btsmodel.BTSCorpusObject,
+//	 * org.eclipse.core.databinding.observable.list.WritableList)
+//	 */
+//	@Override
+//	public void addRelation(final BTSCorpusObject subject, final String relationType,
+//			final TreeNodeWrapper objectTreeNode)
+//	{
+//		logger.info("run refresh");
+//		Object o = objectTreeNode.getObject();
+//		BTSObject object = null;
+//		if (o instanceof BTSObject)
+//		{
+//			object = (BTSObject) o;
+//		}
+//		else
+//		{
+//			return;
+//		}
+//		if (subject != null)
+//		{
+//			logger.info("selection is instance of BTSTextCorpus");
+//			BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
+//			rel.setObjectId(((BTSDBBaseObject) object).get_id());
+//			rel.setType(relationType);
+//			subject.getRelations().add(rel);
+//			corpusObjectService.save((BTSCorpusObject) subject);
+//		}
+//		if (relationType != null && relationType.equals("partOf"))
+//		{
+//			TreeNodeWrapper childNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+//			childNode.setParent(objectTreeNode);
+//			childNode.setObject(subject);
+//			objectTreeNode.getChildren().add(childNode);
+//
+//		}
+//		eventBroker.post("model_update/async", "Hallo");
+//
+//	}
 
 	/*
 	 * (non-Javadoc)
@@ -176,139 +182,140 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 		return children;
 	}
 
-	@Override
-	public boolean handleModelUpdate(BTSModelUpdateNotification notification,
-			Map<String, BTSQueryResultAbstract> queryResultMap, Map<String, List<TreeNodeWrapper>> viewHolderMap)
-	{
-		if (notification.getObject() != null)
-		{
-			Set<Object> keepHolderMap = new HashSet<Object>(1);
-			// Adds
-			if (queryResultMap != null && notification.getQueryIds() != null && !notification.getQueryIds().isEmpty())
-			{
-				for (String queryId : notification.getQueryIds())
-				{
-					if (queryResultMap.containsKey(queryId))
-					{
-						BTSQueryResultAbstract queryAbstract = queryResultMap.get(queryId);
-						TreeNodeWrapper holder = handleUpdateReturnHolder(queryAbstract, notification, viewHolderMap);
-						keepHolderMap.add(holder);
-					}
-				}
-			}
-			// removals
-			if (notification.getObject() instanceof BTSObject)
-			{
-				BTSObject o = (BTSObject) notification.getObject();
-				List<TreeNodeWrapper> holders = viewHolderMap.get(((BTSDBBaseObject) o).get_id());
-				Set<Object> removeHolderMap = new HashSet<Object>(1);
-				if (holders != null)
-				{
-					for (Object holder : holders)
-					{
-						if (!keepHolderMap.contains(holder))
-						{
-							removeHolderMap.add(holder);
-							removeObjectFromHolder(holder, o);
-						}
-					}
-					if (!removeHolderMap.isEmpty())
-					{
-						holders.removeAll(removeHolderMap);
-						return true;
-					}
-				}
-			}
+//	@Override
+//	public boolean handleModelUpdate(BTSModelUpdateNotification notification,
+//			Map<String, BTSQueryResultAbstract> queryResultMap, Map<String, List<TreeNodeWrapper>> viewHolderMap)
+//	{
+//		if (notification.getObject() != null)
+//		{
+//			Set<Object> keepHolderMap = new HashSet<Object>(1);
+//			// Adds
+//			if (queryResultMap != null && notification.getQueryIds() != null && !notification.getQueryIds().isEmpty())
+//			{
+//				for (String queryId : notification.getQueryIds())
+//				{
+//					if (queryResultMap.containsKey(queryId))
+//					{
+//						BTSQueryResultAbstract queryAbstract = queryResultMap.get(queryId);
+//						TreeNodeWrapper holder = handleUpdateReturnHolder(queryAbstract, notification, viewHolderMap);
+//						keepHolderMap.add(holder);
+//					}
+//				}
+//			}
+//			// removals
+//			if (notification.getObject() instanceof BTSObject)
+//			{
+//				BTSObject o = (BTSObject) notification.getObject();
+//				List<TreeNodeWrapper> holders = viewHolderMap.get(((BTSDBBaseObject) o).get_id());
+//				Set<Object> removeHolderMap = new HashSet<Object>(1);
+//				if (holders != null)
+//				{
+//					for (Object holder : holders)
+//					{
+//						if (!keepHolderMap.contains(holder))
+//						{
+//							removeHolderMap.add(holder);
+//							removeObjectFromHolder(holder, o);
+//						}
+//					}
+//					if (!removeHolderMap.isEmpty())
+//					{
+//						holders.removeAll(removeHolderMap);
+//						return true;
+//					}
+//				}
+//			}
+//
+//		}
+//		return false;
+//	}
 
-		}
-		return false;
-	}
+//	private void removeObjectFromHolder(Object holder, BTSObject o)
+//	{
+//		TreeNodeWrapper parent = ((TreeNodeWrapper) holder).getParent();
+//		if (parent != null)
+//		{
+//			parent.getChildren().remove(holder);
+//		}
+//
+//	}
+//
+//	private TreeNodeWrapper handleUpdateReturnHolder(BTSQueryResultAbstract resultAbstract,
+//			BTSModelUpdateNotification notification,  Map<String, List<TreeNodeWrapper>> viewHolderMap)
+//	{
+//		EObject parent = resultAbstract.getParentEObject();
+//		Object feature = parent.eGet(resultAbstract.getReferenceName());
+//		if (feature instanceof List<?>)
+//		{
+//			List<EObject> ref = (List<EObject>) feature;
+//			if (ref.isEmpty() || notification.getObject() == null)
+//			{
+//				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+//						.createTreeNodeWrapper();
+//				tn.setObject((BTSObject) notification.getObject());
+//				tn.setParent((TreeNodeWrapper) parent);
+//				ref.add(tn);
+//				addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
+//
+//				return tn;
+//			}
+//			for (EObject o : ref)
+//			{
+//				if (o instanceof TreeNodeWrapper && ((TreeNodeWrapper) o).getObject() != null
+//						&& ((TreeNodeWrapper) o).getObject().equals(notification.getObject()))
+//				{
+//					return (TreeNodeWrapper) o;
+//				}
+//			}
+//
+//			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+//			tn.setObject((BTSObject) notification.getObject());
+//			tn.setObject((BTSObject) notification.getObject());
+//			addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
+//
+//			ref.add(tn);
+//			return tn;
+//		}
+//		return null;
+//
+//	}
+//	
+//	private void addTooHolderMap(BTSObject o, TreeNodeWrapper tn,Map<String, List<TreeNodeWrapper>> viewHolderMap) {
+//		List<TreeNodeWrapper> list = viewHolderMap.get(((BTSDBBaseObject) o)
+//				.get_id());
+//		if (list == null) {
+//			list = new Vector<TreeNodeWrapper>(1);
+//		}
+//		if (!list.contains(tn)) {
+//			list.add(tn);
+//		}
+//		viewHolderMap.put(((BTSDBBaseObject) o).get_id(), list);
+//
+//	}
 
-	private void removeObjectFromHolder(Object holder, BTSObject o)
-	{
-		TreeNodeWrapper parent = ((TreeNodeWrapper) holder).getParent();
-		if (parent != null)
-		{
-			parent.getChildren().remove(holder);
-		}
-
-	}
-
-	private TreeNodeWrapper handleUpdateReturnHolder(BTSQueryResultAbstract resultAbstract,
-			BTSModelUpdateNotification notification,  Map<String, List<TreeNodeWrapper>> viewHolderMap)
-	{
-		EObject parent = resultAbstract.getParentEObject();
-		Object feature = parent.eGet(resultAbstract.getReferenceName());
-		if (feature instanceof List<?>)
-		{
-			List<EObject> ref = (List<EObject>) feature;
-			if (ref.isEmpty() || notification.getObject() == null)
-			{
-				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-						.createTreeNodeWrapper();
-				tn.setObject((BTSObject) notification.getObject());
-				tn.setParent((TreeNodeWrapper) parent);
-				ref.add(tn);
-				addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
-
-				return tn;
-			}
-			for (EObject o : ref)
-			{
-				if (o instanceof TreeNodeWrapper && ((TreeNodeWrapper) o).getObject() != null
-						&& ((TreeNodeWrapper) o).getObject().equals(notification.getObject()))
-				{
-					return (TreeNodeWrapper) o;
-				}
-			}
-
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-			tn.setObject((BTSObject) notification.getObject());
-			tn.setObject((BTSObject) notification.getObject());
-			addTooHolderMap((BTSObject) notification.getObject(), tn, viewHolderMap);
-
-			ref.add(tn);
-			return tn;
-		}
-		return null;
-
-	}
-	
-	private void addTooHolderMap(BTSObject o, TreeNodeWrapper tn,Map<String, List<TreeNodeWrapper>> viewHolderMap) {
-		List<TreeNodeWrapper> list = viewHolderMap.get(((BTSDBBaseObject) o)
-				.get_id());
-		if (list == null) {
-			list = new Vector<TreeNodeWrapper>(1);
-		}
-		if (!list.contains(tn)) {
-			list.add(tn);
-		}
-		viewHolderMap.put(((BTSDBBaseObject) o).get_id(), list);
-
-	}
-
-	@Override
-	public List<BTSCorpusObject> getRootBTSCorpusObjects(Map<String, BTSQueryResultAbstract> queryResultMap,
-			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName)
-	{
-		if (queryResultMap != null)
-		{
-			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
-			qra.setViewer(viewer);
-			qra.setParentEObject(parentHolder);
-			qra.setReferenceName(referenceName);
-			qra.setQueryId(DaoConstants.VIEW_ALL_BTSTEXTCORPUS);
-			queryResultMap.put(qra.getQueryId(), qra);
-		}
-		List<BTSTextCorpus> list = textCorpusService
-				.list(BTSConstants.OBJECT_STATE_ACTIVE);
-		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
-		for (BTSTextCorpus t : list)
-		{
-			result.add(t);
-		}
-		return result;
-	}
+//	@Override
+//	public List<BTSCorpusObject> getRootEntries(
+//			Map<String, BTSQueryResultAbstract> queryResultMap,
+//			TreeViewer viewer, TreeNodeWrapper parentHolder,
+//			EReference referenceName, String queryId) {
+//		if (queryResultMap != null)
+//		{
+//			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
+//			qra.setViewer(viewer);
+//			qra.setParentEObject(parentHolder);
+//			qra.setReferenceName(referenceName);
+//			qra.setQueryId(queryId);
+//			queryResultMap.put(qra.getQueryId(), qra);
+//		}
+//		List<BTSTextCorpus> list = textCorpusService
+//				.list(BTSConstants.OBJECT_STATE_ACTIVE);
+//		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
+//		for (BTSTextCorpus t : list)
+//		{
+//			result.add(t);
+//		}
+//		return result;
+//	}
 
 	@Override
 	public BTSText createNewText(BTSCorpusObject parentObject)
@@ -327,7 +334,7 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 
 
 	@Override
-	public BTSCorpusObject findObject(String id) {
+	public BTSCorpusObject find(String id) {
 		BTSCorpusObject o = null;
 		try {
 			o = corpusObjectService.find(id);
@@ -375,6 +382,53 @@ public class CorpusNavigatorControllerImpl implements CorpusNavigatorController
 	@Override
 	public boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus, boolean synchronizeCorpus) {
 		return textCorpusService.makeAndSaveNewTextCorpus(corpus, synchronizeCorpus);
+	}
+
+
+	@Override
+	public BTSCorpusObject createNew() {
+		return createNewTextCorpus();
+	}
+
+	@Override
+	public String getDisplayName(String id) {
+		return corpusObjectService.getDisplayName(id);
+	}
+
+	
+
+	@Override
+	protected List<BTSCorpusObject> retrieveTypedRootEntries() {
+		List<BTSTextCorpus> list = textCorpusService
+				.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
+		for (BTSTextCorpus t : list)
+		{
+			result.add(t);
+		}
+		return result;
+	}
+
+	@Override
+	protected List<BTSCorpusObject> executeTypedQuery(BTSQueryRequest query,
+			String objectState) {
+		return corpusObjectService.query(query, objectState);
+	}
+
+	@Override
+	protected BTSCorpusObject typedCreateNew() {
+		return createNewTextCorpus();
+	}
+
+	@Override
+	protected List<BTSCorpusObject> typedListEntries(String objectState) {
+		return corpusObjectService.list(objectState);
+	}
+
+	@Override
+	protected List<BTSCorpusObject> retrieveTypedOrphandEntries(Map map,
+			List<BTSFilter> btsFilters) {
+		return corpusObjectService.getOrphanEntries(map, btsFilters);
 	}
 	
 	

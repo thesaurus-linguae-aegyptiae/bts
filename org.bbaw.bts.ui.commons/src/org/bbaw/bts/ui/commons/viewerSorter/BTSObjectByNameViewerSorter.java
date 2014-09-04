@@ -2,6 +2,7 @@ package org.bbaw.bts.ui.commons.viewerSorter;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
@@ -42,6 +43,11 @@ public class BTSObjectByNameViewerSorter extends ViewerSorter {
 			}
 
 		}
+		
+		// sort _Orphans node in tree at bottom 
+		if (BTSConstants.ORPHANS_NODE_LABEL.equals(s1)) return 1;
+		else if (BTSConstants.ORPHANS_NODE_LABEL.equals(s2)) return -1;
+		
 		if (s1 != null) {
 			if (s2 != null) {
 				return s1.compareTo(s2);

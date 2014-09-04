@@ -1967,8 +1967,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//terminal SUFFIXSTRING:
-	//	("." | ",") ("Ꜣ" | "j" | "y" | "w" | "n" | "s" | "k" | "t" | "ṯ" | "ı͗" | "ś" | "ı̯͗" | "ï" | "u̯" | "č" | "ṱ" | "a"
-	//	| "ꜣ")+;
+	//	("." | ",") (EGYSTRING //('Ꜣ'|'j'|'y'|'w'|'n'|'s'|'k'|'t'|'ṯ'|'ı͗'|'ś'|'ı̯͗'|'ï'|'u̯'|'č'|'ṱ'|'a'|'ꜣ')+
+	//	| "{" | "}")+;
 	public TerminalRule getSUFFIXSTRINGRule() {
 		return (tSUFFIXSTRING != null) ? tSUFFIXSTRING : (tSUFFIXSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "SUFFIXSTRING"));
 	} 

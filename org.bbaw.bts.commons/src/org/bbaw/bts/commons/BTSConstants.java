@@ -117,7 +117,7 @@ public class BTSConstants
 	/** The Constant VIEW_ALL_TERMINATED_BTSPROJECTS. */
 	public static final String VIEW_ALL_TERMINATED_BTSPROJECTS = "admin/all_terminated_projects";
 
-
+	public static final String ORPHANS_NODE_LABEL = "_Orphans";
 	private BTSConstants()
 	{
 	}

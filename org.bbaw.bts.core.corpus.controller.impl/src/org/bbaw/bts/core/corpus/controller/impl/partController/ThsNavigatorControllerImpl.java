@@ -45,9 +45,10 @@ implements ThsNavigatorController {
 	}
 
 	@Override
-	protected BTSThsEntry typedFind(String id) {
+	public BTSThsEntry find(String id) {
 		return thsService.find(id);
 	}
+
 
 
 }

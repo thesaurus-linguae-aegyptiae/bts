@@ -45,7 +45,7 @@ implements LemmaNavigatorController{
 	}
 
 	@Override
-	protected BTSLemmaEntry typedFind(String id) {
+	public BTSLemmaEntry find(String id) {
 		return lemmaService.find(id);
 	}
 

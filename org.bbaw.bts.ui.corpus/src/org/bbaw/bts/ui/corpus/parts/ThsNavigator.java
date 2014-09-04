@@ -16,6 +16,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -285,7 +286,7 @@ labelProvider));
 
 						}
 					}
-					else if (tn.getLabel().equals("_Orphans"))
+					else if (tn.getLabel().equals(BTSConstants.ORPHANS_NODE_LABEL))
 					{
 						if (true || !tn.isChildrenLoaded())
 						{
@@ -377,7 +378,7 @@ labelProvider));
 				rootNode.getChildren().addAll(nodes);
 				
 				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				orphanNode.setLabel("_Orphans");
+				orphanNode.setLabel(BTSConstants.ORPHANS_NODE_LABEL);
 				
 				rootNode.getChildren().add(orphanNode);
 
