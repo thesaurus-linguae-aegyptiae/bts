@@ -143,7 +143,7 @@ public class BTSRevisionItemProvider
 	 * This returns the label styled text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getStyledText(Object object) {
@@ -152,7 +152,7 @@ public class BTSRevisionItemProvider
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSRevision_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_BTSRevision_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
 		return styledLabel;
 	}

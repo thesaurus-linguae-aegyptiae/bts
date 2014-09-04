@@ -59,13 +59,13 @@ GenericCorpusObjectNavigatorController<E, K>
 	public List<E> getRootEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName) {
+			EReference referenceName, String queryID) {
 		if (queryResultMap != null) {
 			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
 			qra.setViewer(viewer);
 			qra.setParentEObject(parentHolder);
 			qra.setReferenceName(referenceName);
-			qra.setQueryId(DaoConstants.VIEW_THS_ROOT_ENTRIES);
+			qra.setQueryId(queryID);
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
 		List<E> list = retrieveTypedRootEntries();//thsService.listRootEntries();
@@ -251,13 +251,13 @@ GenericCorpusObjectNavigatorController<E, K>
 	public List<E> getDeletedEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName) {
+			EReference referenceName, String queryID) {
 		if (queryResultMap != null) {
 			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
 			qra.setViewer(viewer);
 			qra.setParentEObject(parentHolder);
 			qra.setReferenceName(referenceName);
-			qra.setQueryId(DaoConstants.VIEW_THS_ROOT_ENTRIES);
+			qra.setQueryId(queryID);
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
 		List<E> list = typedListEntries(BTSConstants.OBJECT_STATE_ACTIVE); //thsService.list(BTSConstants.OBJECT_STATE_TERMINATED);

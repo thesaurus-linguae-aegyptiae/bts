@@ -9,6 +9,7 @@ import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 
@@ -46,6 +47,12 @@ implements LemmaNavigatorController{
 	@Override
 	protected BTSLemmaEntry typedFind(String id) {
 		return lemmaService.find(id);
+	}
+
+	@Override
+	public BTSLemmaSubentry createNewSubEntry() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

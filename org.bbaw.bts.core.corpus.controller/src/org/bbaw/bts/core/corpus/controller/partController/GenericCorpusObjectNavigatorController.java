@@ -18,12 +18,12 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	List<E> getRootEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer treeViewer, TreeNodeWrapper root,
-			EReference treeNodeWrapperChildren);
+			EReference treeNodeWrapperChildren, String queryID);
 
 	List<E> getDeletedEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer treeViewer, TreeNodeWrapper root,
-			EReference treeNodeWrapperChildren);
+			EReference treeNodeWrapperChildren, String queryID);
 
 	void addRelation(E subject, String relationType,
 			TreeNodeWrapper treeNodeWrapper);

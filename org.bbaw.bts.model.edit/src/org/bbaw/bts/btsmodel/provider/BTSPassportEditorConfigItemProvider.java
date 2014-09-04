@@ -213,7 +213,7 @@ public class BTSPassportEditorConfigItemProvider
 	 * This returns the label styled text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getStyledText(Object object) {
@@ -222,7 +222,7 @@ public class BTSPassportEditorConfigItemProvider
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSPassportEditorConfig_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_BTSPassportEditorConfig_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
 		return styledLabel;
 	}

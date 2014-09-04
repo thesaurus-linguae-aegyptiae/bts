@@ -78,4 +78,8 @@ public class BTSPluginIDs
 
 	public static final String EXTENSION_POINT_STARTUP_CONTROLLER = "org.bbaw.bts.core.controller.extensionStartUpController";
 
+	public static final Object PART_ID_LEMMA_NAVIGATOR = "org.bbaw.bts.ui.corpus.part.lemmaNavigator";
+
+	public static final String POPMENU_LEMMA_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.lemmanavigator.popupmenu";
+
 }

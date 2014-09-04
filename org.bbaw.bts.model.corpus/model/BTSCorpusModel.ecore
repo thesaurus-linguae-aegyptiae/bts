@@ -69,9 +69,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSLemmaSubentry" eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSReferencableItem">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="passport" eType="#//BTSPassport"
-        containment="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSLemmaSubentry" eSuperTypes="#//BTSCorpusObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="words" upperBound="-1"
         eType="#//BTSWord" containment="true"/>
   </eClassifiers>

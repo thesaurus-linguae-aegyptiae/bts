@@ -687,16 +687,16 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider
 	 * This returns the label styled text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSUser)object).getName();
+		String label = ((BTSUser) object).getForeName() + " " + ((BTSUser) object).getSureName();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSUser_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_BTSUser_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
 		return styledLabel;
 	}

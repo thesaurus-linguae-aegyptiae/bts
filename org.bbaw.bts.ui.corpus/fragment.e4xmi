@@ -53,6 +53,8 @@
     <elements xsi:type="commands:Command" xmi:id="_oMmZgNqxEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent" commandName="passportInheritFromParent" category="_u7sUsF2fEeOwE8UUrLWumA">
       <parameters xmi:id="_3StlINtCEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.corpus.command.passportInheritFromParent.forced" name="Inherit passport data from parent forced" typeId=""/>
     </elements>
+    <elements xsi:type="commands:Command" xmi:id="_yldPUDQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.command.addNewLemmaRootEntry" commandName="addNewLemmaRootEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_4O0rkDQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.command.addNewLemmaChildEntry" commandName="addNewLemmaChildEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="__kd84D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.passportEditorPart" containerData="10" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.PassportEditorPart" label="PassportEditorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/passport.png" closeable="true">
@@ -69,24 +71,66 @@
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Fbrn4D_oEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left">
-    <elements xsi:type="basic:Part" xmi:id="_G9k4cD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.WordlistNavigator" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.LemmaNavigator" label="LemmaNavigator" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmata.png" closeable="true">
+    <elements xsi:type="basic:Part" xmi:id="_G9k4cD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.lemmaNavigator" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.LemmaNavigator" label="LemmaNavigator" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmata.png" closeable="true">
+      <handlers xmi:id="_Q8QHQDQ8EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handler.delete" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+      <menus xmi:id="_KEXw0DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menu.view.lemmaNavigator">
+        <tags>ViewMenu</tags>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw0TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw0jQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.8" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw0zQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw1DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw1TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw1jQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
+        <children xsi:type="menu:Menu" xmi:id="_KEXw1zQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menu.filter" label="Filter">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw2DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByProject" label="Filter by Project..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_KEXw2TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_projects"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw2jQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByCreator" label="Filter by Creator..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_KEXw2zQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_creators"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw3DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByUpdaters" label="Filter by Updaters..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_KEXw3TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_updaters"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw3jQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_KEXw3zQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw4DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_KEXw4TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
+          </children>
+        </children>
+      </menus>
+      <menus xsi:type="menu:PopupMenu" xmi:id="_S9SSQDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.lemma.popupmenu">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSQTQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.8" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSQjQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.9" label="Add Lemma Child Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma-add.png" command="_4O0rkDQ4EeSUHvWJHIXOXA"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_S9SSQzQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menuseparator.0"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRTQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRjQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_S9SSRzQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menuseparator.1"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSSDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSSTQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSSjQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
+      </menus>
       <toolbar xmi:id="_KI-dcD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.wlistNavigator.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_j7bq4DQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.7" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmata.png" tooltip="Add Lemma Root Entry" command="_yldPUDQ4EeSUHvWJHIXOXA"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_By5C0DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.8" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma-add.png" tooltip="Add Lemma Child Entry" command="_4O0rkDQ4EeSUHvWJHIXOXA"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_HkeHcKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.5" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" tooltip="Delete" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_IJCskDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.openSearchDialog" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/search.png" tooltip="Open Simple Search Dialog" command="_AbJi8DNsEeSLt-NtQ3Vu3A"/>
       </toolbar>
     </elements>
     <elements xsi:type="basic:Part" xmi:id="_hnP-EKL2EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.part.ThsNavigator" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.ThsNavigator" label="Thesaurus Navigator" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/thss.png">
       <handlers xmi:id="_M_CvMKRPEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handler.delete" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-      <menus xsi:type="menu:PopupMenu" xmi:id="_cnPWoKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.ths.popupmenu">
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_tqUToKhiEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.8" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_7jK50KhiEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.9" label="Add Child Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/ths-add.png" command="_FHzOwKOiEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:MenuSeparator" xmi:id="_sSTLIOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.0"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_j7228KRUEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_dnddgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_KJGZcKkIEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+      <menus xsi:type="menu:PopupMenu" xmi:id="_cnPWoKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.lemmanavigator.popupmenu">
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_tqUToKhiEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.addAnnotation" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_7jK50KhiEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.addChildEntry" label="Add Child Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/ths-add.png" command="_FHzOwKOiEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_sSTLIOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.lemma.3"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_j7228KRUEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_dnddgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.restore" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KJGZcKkIEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.deletePermanently" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_ukZJkOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.1"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_2xdVgNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_RGkAQOpCEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_JPe0kOsZEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_2xdVgNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_RGkAQOpCEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.openConflict" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_JPe0kOsZEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.revision" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
       </menus>
       <menus xmi:id="_zvoC4DK4EeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.corpus.menu.2">
         <tags>ViewMenu</tags>
@@ -139,6 +183,8 @@
     <elements xsi:type="commands:Handler" xmi:id="_0Xw1UKhdEeO9r6Fx0h7lnQ" elementId="org.bbaw.bts.ui.corpus.handler.restore" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.RestoreDeletedHandler" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
     <elements xsi:type="commands:Handler" xmi:id="_0ehY0KkGEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handler.deletePermanently" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeletePermanentlyHandler" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
     <elements xsi:type="commands:Handler" xmi:id="_uwvb8NqxEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handler.passportInheritFromParentHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.PassportInheritFromParentHandler" command="_oMmZgNqxEeO-3cFwhVZ23Q"/>
+    <elements xsi:type="commands:Handler" xmi:id="_8M7f4DQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handler.3" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddNewRootLemmaHandler" command="_yldPUDQ4EeSUHvWJHIXOXA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_-tUZADQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handler.4" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddNewLemmaSubEntryHandler" command="_4O0rkDQ4EeSUHvWJHIXOXA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5YS8cJWEEeOpr8TW-P04BA" featurename="children" parentElementId="org.bbaw.bts.ui.main.handledtoolitem.new.menu">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_TIix8JWGEeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.0" label="New Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -171,4 +217,5 @@
       <toolbar xmi:id="_BpjUcPxxEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.toolbar.3"/>
     </elements>
   </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x7kvYDQ5EeSUHvWJHIXOXA"/>
 </fragment:ModelFragments>

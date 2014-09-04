@@ -358,7 +358,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 									queryResultMap,
 									treeViewer,
 									rootNode,
-									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, );
 				}
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);
@@ -384,7 +384,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 						// register context menu on the table
 						menuService.registerContextMenu(
 								treeViewer.getControl(),
-								BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
+								BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
 					}
 				});
 				return Status.OK_STATUS;
@@ -512,7 +512,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 
 	@Inject
 	@Optional
-	void eventReceivedNew(@EventTopic("model_ths_new_root/*") BTSObject object) {
+	void eventReceivedNew(@EventTopic("model_lemma_new_root/*") BTSObject object) {
 		if ((object instanceof BTSLemmaEntry)) {
 			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
@@ -524,7 +524,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	}
 	@Inject
 	@Optional
-	void eventReceivedAdd(@EventTopic("model_ths_add/*") BTSObject object) {
+	void eventReceivedAdd(@EventTopic("model_lemma_add/*") BTSObject object) {
 		if ((object instanceof BTSLemmaEntry)
 				&& selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSLemmaEntry) {
@@ -709,7 +709,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 						// register context menu on the table
 						menuService.registerContextMenu(
 								treeViewer.getControl(),
-								BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
+								BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
 					}
 				});
 				return Status.OK_STATUS;
