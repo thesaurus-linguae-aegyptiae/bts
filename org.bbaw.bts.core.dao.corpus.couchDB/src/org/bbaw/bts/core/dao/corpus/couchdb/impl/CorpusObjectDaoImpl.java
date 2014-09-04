@@ -8,6 +8,7 @@ import java.util.Vector;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem;
@@ -254,6 +255,18 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 		}
 		
 		return result;
+	}
+
+	@Override
+	public List<BTSCorpusObject> list(String dbPath, String staticQueryId,
+			String objectState) {
+		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "corpus");
+		List<BTSCorpusObject> results = loadObjectsFromStrings(allDocs, dbPath);
+		if (!results.isEmpty())
+		{
+			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
+		}
+		return results;
 	}
 
 }

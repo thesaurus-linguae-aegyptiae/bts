@@ -5,6 +5,7 @@ import java.util.List;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSTextCorpusDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 
@@ -34,6 +35,18 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
+		}
+		return results;
+	}
+
+	@Override
+	public List<BTSTextCorpus> list(String dbPath, String staticQueryId,
+			String objectState) {
+		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "corpus");
+		List<BTSTextCorpus> results = loadObjectsFromStrings(allDocs, dbPath);
+		if (!results.isEmpty())
+		{
+			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
 		}
 		return results;
 	}

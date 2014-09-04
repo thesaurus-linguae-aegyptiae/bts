@@ -8,14 +8,17 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSTextCorpusDao;
+import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
@@ -24,19 +27,10 @@ import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
-public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCorpus, String> implements
+public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BTSTextCorpus, String> implements
 		BTSTextCorpusService, BTSObjectSearchService
 {
 
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
-	private String active_corpora;
-
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
-	protected String main_corpus_key;
 	@Inject
 	private BTSTextCorpusDao textCorpusDao;
 	
@@ -162,4 +156,10 @@ public class BTSTextCorpusServiceImpl extends GenericObjectServiceImpl<BTSTextCo
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSTextCorpus.class;
 	}
+
+	@Override
+	public List<BTSTextCorpus> listRootEntries() {
+		throw new UnsupportedOperationException();
+	}
+	
 }

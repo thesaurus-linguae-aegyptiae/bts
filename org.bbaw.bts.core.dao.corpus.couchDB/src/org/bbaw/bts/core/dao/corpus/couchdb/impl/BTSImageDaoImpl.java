@@ -5,6 +5,7 @@ import java.util.List;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSImageDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 
@@ -37,6 +38,18 @@ public class BTSImageDaoImpl extends CouchDBDao<BTSImage, String> implements BTS
 		// TODO Auto-generated method stub
 		super.remove(btsImage, path);
 		return false;
+	}
+
+	@Override
+	public List<BTSImage> list(String dbPath, String staticQueryId,
+			String objectState) {
+		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "corpus");
+		List<BTSImage> results = loadObjectsFromStrings(allDocs, dbPath);
+		if (!results.isEmpty())
+		{
+			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
+		}
+		return results;
 	}
 
 }

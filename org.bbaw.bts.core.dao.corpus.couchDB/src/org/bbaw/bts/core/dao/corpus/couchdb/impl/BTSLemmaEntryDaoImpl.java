@@ -5,6 +5,7 @@ import java.util.List;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 
@@ -29,11 +30,23 @@ public class BTSLemmaEntryDaoImpl extends CouchDBDao<BTSLemmaEntry, String> impl
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES;
 		}
-		List<String> allDocs = loadDocsFromView(viewId, path, "corpus");
+		List<String> allDocs = loadDocsFromView(viewId, path, "lemma");
 		List<BTSLemmaEntry> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
+		}
+		return results;
+	}
+
+	@Override
+	public List<BTSLemmaEntry> list(String dbPath, String staticQueryId,
+			String objectState) {
+		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "lemma");
+		List<BTSLemmaEntry> results = loadObjectsFromStrings(allDocs, dbPath);
+		if (!results.isEmpty())
+		{
+			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
 		}
 		return results;
 	}

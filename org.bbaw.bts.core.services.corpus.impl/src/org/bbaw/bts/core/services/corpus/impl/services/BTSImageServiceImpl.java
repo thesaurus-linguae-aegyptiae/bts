@@ -5,33 +5,19 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSImageDao;
+import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSImageService;
-import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.di.extensions.Preference;
 
-public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, String> implements BTSImageService, BTSObjectSearchService
+public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImage, String> implements BTSImageService, BTSObjectSearchService
 {
-
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
-	private String active_corpora;
-
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
-	protected String main_corpus_key;
 	@Inject
 	BTSImageDao imageDao;
 
@@ -152,5 +138,20 @@ public class BTSImageServiceImpl extends GenericObjectServiceImpl<BTSImage, Stri
 	@Override
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSImage.class;
+	}
+	
+
+	@Override
+	public List<BTSImage> listRootEntries() {
+		List<BTSImage> objects = new Vector<BTSImage>();
+		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		{
+			for (String c : getActive_corpora())
+			{
+				objects.addAll(imageDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX + c, 
+						DaoConstants.VIEW_IMAGE_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
+			}
+		}
+		return filter(objects);
 	}
 }

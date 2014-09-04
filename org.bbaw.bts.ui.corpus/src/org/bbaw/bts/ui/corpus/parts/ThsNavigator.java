@@ -13,7 +13,6 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -38,7 +37,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
@@ -50,7 +48,6 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
@@ -61,9 +58,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -89,9 +84,6 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	private ESelectionService selectionService;
 
 	@Inject
-	private IEclipseContext context;
-
-	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
 
 	@Inject
@@ -113,7 +105,6 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	private Map<String, BTSQueryResultAbstract> queryResultMap = new HashMap<String, BTSQueryResultAbstract>();
 	private Map<String, List<TreeNodeWrapper>> viewHolderMap = new HashMap<String, List<TreeNodeWrapper>>();
 
-	private EditingDomain editingDomain;
 	private ISelectionChangedListener selectionListener;
 	private Composite composite;
 
@@ -132,7 +123,6 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 
 	@Inject
 	public ThsNavigator() {
-		//TODO Your code here
 	}
 	
 	@PostConstruct
@@ -267,8 +257,6 @@ labelProvider));
 		treeViewer.setUseHashlookup(true);
 		selectionListener = new ISelectionChangedListener() {
 
-			private BTSCorpusObject selectedTreeObject;
-
 			@Override
 			public void selectionChanged(SelectionChangedEvent event) {
 				selection = (StructuredSelection) event.getSelection();
@@ -280,7 +268,6 @@ labelProvider));
 					if (tn.getObject() != null) {
 						BTSObject o = (BTSObject) tn.getObject();
 						if (o instanceof BTSCorpusObject) {
-							selectedTreeObject = (BTSCorpusObject) o;
 						}
 						if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
 							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
@@ -293,7 +280,7 @@ labelProvider));
 							selectionService.setSelection(o);
 						} else {
 							eventBroker.send(
-									"ui_secondarySelection/corpusNavigator", o);
+									"ui_secondarySelection/thsNavigator", o);
 
 						}
 					}
@@ -317,7 +304,7 @@ labelProvider));
 	protected void loadOrphans(final Control parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper localOrphanNode) {
 		
-		Job job = new Job("load input") {
+		Job job = new Job("load orphans") {
 			Map map;
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -337,7 +324,7 @@ labelProvider));
 				});
 				List<BTSThsEntry> obs;
 				obs = thsNavigatorController
-						.getOrphanThsEntries(map,
+						.getOrphanEntries(map,
 								treeViewer.getFilters());
 				storeIntoMap(obs, parentControl);
 				final List<TreeNodeWrapper> nodes = loadNodes(obs);
@@ -366,22 +353,17 @@ labelProvider));
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 
-
-				// input = new WritableList(nodes, TreeNodeWrapper.class);
-				// Set the writeableList as input for the viewer
-				// Create sample data
-
 				List<BTSThsEntry> obs;
 				if (!deleted) {
 					obs = thsNavigatorController
-						.getRootBTSThsEntries(
+						.getRootEntries(
 								queryResultMap,
 								treeViewer,
 								rootNode,
 								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
 				} else {
 					obs = thsNavigatorController
-							.getDeletedThsEntries(
+							.getDeletedEntries(
 									queryResultMap,
 									treeViewer,
 									rootNode,
@@ -435,7 +417,7 @@ labelProvider));
 		Job job = new Job("load children") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				final List<TreeNodeWrapper> grandChildren = new Vector<>();
+				new Vector<>();
 				for (final TreeNodeWrapper parent : parents) {
 					final List<BTSThsEntry> children = thsNavigatorController
 							.findChildren(
@@ -534,7 +516,6 @@ labelProvider));
 
 	@PreDestroy
 	public void preDestroy() {
-		// TODO Your code here
 	}
 
 	@Focus
@@ -639,7 +620,6 @@ labelProvider));
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -718,7 +698,7 @@ labelProvider));
 
 				List<BTSThsEntry> obs;
 				obs = thsNavigatorController
-						.getSearchBTSThsEntries(query,
+						.getSearchEntries(query,
 								queryResultMap,
 								treeViewer,
 								rootNode,

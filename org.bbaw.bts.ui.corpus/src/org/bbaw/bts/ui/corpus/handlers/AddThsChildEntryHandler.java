@@ -22,7 +22,7 @@ public class AddThsChildEntryHandler {
 		BTSThsEntry entry = thsController.createNew();
 		entry.setName("Thesaurus Child");
 		eventBroker.post("model_ths_add/asyncEvent", entry);
-		thsController.getRootBTSThsEntries(null, null, null, null);
+		thsController.getRootEntries(null, null, null, null);
 	}
 
 	@CanExecute

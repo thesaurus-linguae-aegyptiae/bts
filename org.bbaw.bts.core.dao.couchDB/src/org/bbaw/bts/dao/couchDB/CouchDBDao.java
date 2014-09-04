@@ -803,6 +803,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
+			System.out.println("create view, view id: " + viewId);
 			createView(path, sourcePath, viewId);
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(true).query();

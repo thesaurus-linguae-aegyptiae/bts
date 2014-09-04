@@ -5,34 +5,19 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSTCObjectDao;
 import org.bbaw.bts.core.services.corpus.BTSTCObjectService;
-import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.di.extensions.Preference;
 
-public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject, String> implements BTSTCObjectService, BTSObjectSearchService
+public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTSTCObject, String> implements BTSTCObjectService, BTSObjectSearchService
 {
 
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
-	private String active_corpora;
-
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
-	protected String main_corpus_key;
 	@Inject
 	BTSTCObjectDao bTSTCObjectDao;
 
@@ -163,4 +148,10 @@ public class BTSTCObjectServiceImpl extends GenericObjectServiceImpl<BTSTCObject
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSTCObject.class;
 	}
+
+	@Override
+	public List<BTSTCObject> listRootEntries() {
+		throw new UnsupportedOperationException();
+	}
+	
 }

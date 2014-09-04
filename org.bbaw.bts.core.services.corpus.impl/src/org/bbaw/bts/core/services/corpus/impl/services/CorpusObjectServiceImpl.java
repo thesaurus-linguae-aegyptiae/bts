@@ -8,6 +8,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
@@ -15,6 +16,7 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
+import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSImageService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
@@ -38,19 +40,12 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
-public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusObject, String> implements
-		CorpusObjectService, BTSObjectSearchService
+public class CorpusObjectServiceImpl 
+extends AbstractCorpusObjectServiceImpl<BTSCorpusObject, String> 
+implements 	CorpusObjectService, BTSObjectSearchService
 {
 
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
-	private String active_corpora;
 
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
-	protected String main_corpus_key;
 	// daos
 	@Inject
 	private BTSAnnotationService annotationService;
@@ -407,6 +402,12 @@ public class CorpusObjectServiceImpl extends GenericObjectServiceImpl<BTSCorpusO
 		return (Class<T>) BTSCorpusObject.class;
 	}
 
+	
 
+
+	@Override
+	public List<BTSCorpusObject> listRootEntries() {
+		throw new UnsupportedOperationException();
+	}
 
 }

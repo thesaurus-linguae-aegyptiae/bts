@@ -6,6 +6,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSAnnotationDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 
 public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> implements BTSAnnotationDao
@@ -38,6 +39,18 @@ public class BTSAnnotationDaoImpl extends CouchDBDao<BTSAnnotation, String> impl
 		// FIXME add logic and cache syncronisation
 		super.remove(annotation, path);
 		return true;
+	}
+
+	@Override
+	public List<BTSAnnotation> list(String dbPath, String staticQueryId,
+			String objectState) {
+		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "corpus");
+		List<BTSAnnotation> results = loadObjectsFromStrings(allDocs, dbPath);
+		if (!results.isEmpty())
+		{
+			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
+		}
+		return results;
 	}
 
 }

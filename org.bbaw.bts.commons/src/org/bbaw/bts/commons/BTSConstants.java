@@ -38,7 +38,7 @@ public class BTSConstants
 	public static final String ANNOTATION = "Annotation";
 	public static final String CORPUS_OBJECT = "CorpusObject";
 	public static final String IMAGE = "Image";
-	public static final String WLIST_ENTRY = "ListEntry";
+	public static final String WLIST_ENTRY = "Lemma";
 	public static final String TEXT = "Text";
 	public static final String TEXT_CORPUS = "TextCorpus";
 	public static final String THS_ENTRY = "Thesaurus Entry";

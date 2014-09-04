@@ -33,7 +33,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.emf.common.util.URI;
@@ -166,6 +165,8 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 */
 	List<E> list(String path, String objectState);
 	
+	List<E> list(String dbPath, String staticQueryId,
+			String objectState);
 	/**
 	 * List available revisions of object by id.
 	 *

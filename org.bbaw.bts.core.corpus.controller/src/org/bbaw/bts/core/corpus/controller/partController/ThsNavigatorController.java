@@ -12,41 +12,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.w3c.dom.views.AbstractView;
 
-public interface ThsNavigatorController {
+public interface ThsNavigatorController extends GenericCorpusObjectNavigatorController<BTSThsEntry, String>{
 
-	List<BTSThsEntry> getRootBTSThsEntries(
-			Map<String, BTSQueryResultAbstract> queryResultMap,
-			TreeViewer treeViewer, TreeNodeWrapper root,
-			EReference treeNodeWrapperChildren);
-
-	List<BTSThsEntry> getDeletedThsEntries(
-			Map<String, BTSQueryResultAbstract> queryResultMap,
-			TreeViewer treeViewer, TreeNodeWrapper root,
-			EReference treeNodeWrapperChildren);
-
-	void addRelation(BTSThsEntry subject, String relationType,
-			TreeNodeWrapper treeNodeWrapper);
-
-	void save(BTSThsEntry o);
-
-	List<BTSThsEntry> findChildren(BTSThsEntry parent,
-			Map<String, BTSQueryResultAbstract> queryResultMap,
-			ContentViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName);
-
-	boolean handleModelUpdate(BTSModelUpdateNotification notification,
-			Map<String, BTSQueryResultAbstract> queryResultMap,
-			Map<String, List<TreeNodeWrapper>> viewHolderMap);
-
-	BTSThsEntry createNew();
 	
-	String getDisplayName(String id);
-
-	List<BTSThsEntry> getOrphanThsEntries(Map map, ViewerFilter[] filters);
-
-	List<BTSThsEntry> getSearchBTSThsEntries(
-			BTSQueryRequest query, Map<String, BTSQueryResultAbstract> queryResultMap,
-			TreeViewer treeViewer, TreeNodeWrapper rootNode,
-			EReference treeNodeWrapperChildren);
 }

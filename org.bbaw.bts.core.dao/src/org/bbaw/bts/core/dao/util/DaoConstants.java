@@ -50,7 +50,7 @@ public class DaoConstants
 	public static final String VIEW_ALL_BTSIMAGESS = "objects/all_btsimages";
 
 	/** The Constant VIEW_ALL_BTSLISTENTRIES. */
-	public static final String VIEW_ALL_BTSLISTENTRIES = "objects/all_btslistentries";
+	public static final String VIEW_ALL_BTSLISTENTRIES = "lemma/all_lemmaentry_objects";;
 
 	/** The Constant VIEW_ALL_BTSTCOBJECTS. */
 	public static final String VIEW_ALL_BTSTCOBJECTS = "objects/all_btstcobjects";
@@ -95,7 +95,7 @@ public class DaoConstants
 	public static final String VIEW_ALL_ACTIVE_BTSIMAGESS = "objects/all_active_btsimages";
 
 	/** The Constant VIEW_ALL_ACTIVE_BTSLISTENTRIES. */
-	public static final String VIEW_ALL_ACTIVE_BTSLISTENTRIES = "objects/all_active_btslistentries";
+	public static final String VIEW_ALL_ACTIVE_BTSLISTENTRIES =  "lemma/all_active_lemmaentry_objects";
 
 	/** The Constant VIEW_ALL_ACTIVE_BTSTCOBJECTS. */
 	public static final String VIEW_ALL_ACTIVE_BTSTCOBJECTS = "objects/all_active_btstcobjects";
@@ -134,7 +134,7 @@ public class DaoConstants
 	public static final String VIEW_ALL_TERMINATED_BTSIMAGESS = "objects/all_terminated_btsimages";
 
 	/** The Constant VIEW_ALL_TERMINATED_BTSLISTENTRIES. */
-	public static final String VIEW_ALL_TERMINATED_BTSLISTENTRIES = "objects/all_terminated_btslistentries";
+	public static final String VIEW_ALL_TERMINATED_BTSLISTENTRIES = "lemma/all_terminated_lemmaentry_objects";
 
 	/** The Constant VIEW_ALL_TERMINATED_BTSTCOBJECTS. */
 	public static final String VIEW_ALL_TERMINATED_BTSTCOBJECTS = "objects/all_terminated_btstcobjects";
@@ -214,6 +214,10 @@ public class DaoConstants
 
 	/** The Constant NOTIFICATION. */
 	public static final String NOTIFICATION = "notification";
+
+	public static final String VIEW_LEMMA_ROOT_ENTRIES = "lemma/root_entries";
+
+	public static final String VIEW_IMAGE_ROOT_ENTRIES = "image/root_entries";;
 
 
 }

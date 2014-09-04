@@ -1,17 +1,12 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
@@ -19,37 +14,21 @@ import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.dao.corpus.BTSThsEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
-import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
-import org.bbaw.bts.tempmodel.CacheTreeNode;
-import org.eclipse.e4.core.di.annotations.Optional;
-import org.eclipse.e4.core.di.extensions.Preference;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 
-public class BTSThsEntryServiceImpl extends
-		GenericObjectServiceImpl<BTSThsEntry, String> implements
-		BTSThsEntryService, BTSObjectSearchService {
-
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_ACTIVE_CORPORA, nodePath = "org.bbaw.bts.app")
-	private String active_corpora;
-
-	@Inject
-	@Optional
-	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
-	protected String main_corpus_key;
+public class BTSThsEntryServiceImpl 
+extends AbstractCorpusObjectServiceImpl<BTSThsEntry, String> 
+implements BTSThsEntryService, BTSObjectSearchService {
 	@Inject
 	private BTSThsEntryDao thsEntryDao;
 
 	@Override
 	public List<BTSThsEntry> list(String dbPath, String queryId,
 			String objectState) {
-		// TODO Auto-generated method stub
-		return null;
+		return thsEntryDao.list(dbPath, queryId,
+				objectState);
 	}
 	@Override
 	public BTSThsEntry createNew() {
@@ -142,138 +121,9 @@ public class BTSThsEntryServiceImpl extends
 		return (Class<T>) BTSThsEntry.class;
 	}
 	@Override
-	public List<BTSThsEntry> getOrphanThsEntries(Map map,
+	public List<BTSThsEntry> getOrphanEntries(Map map,
 			List<BTSFilter> btsFilters) {
-		List<BTSThsEntry> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE);
-		List<BTSThsEntry> allFilteredEntries = new Vector<BTSThsEntry>();
-		for (BTSThsEntry e : allEntries)
-		{
-			if (isVisible(e, btsFilters))
-			{
-				allFilteredEntries.add(e);
-			}
-		}
-		
-		// load and cache root entries
-		List<BTSThsEntry> allRootEntries = listRootEntries();
-		Set<String> allRootEntriesSet = new HashSet<String>(allRootEntries.size());
-		for (BTSThsEntry e : allRootEntries)
-		{
-			if (isVisible(e, btsFilters))
-			{
-				allRootEntriesSet.add(e.get_id());
-			}
-		}
-		
-		// init caches
-		
-		// potential root nodes
-		Map<String, CacheTreeNode> roots = new HashMap<String, CacheTreeNode>();
-		// all nodes
-		Map<String, CacheTreeNode> allNodes = new HashMap<String, CacheTreeNode>();
-		// nodes that await a holder, key = id of holder
-		Map<String, List<CacheTreeNode>> awaitingHolder = new HashMap<String, List<CacheTreeNode>>();
-		// nodes that provide hold to children, key = id of child
-		Map<String, List<CacheTreeNode>> providingHold = new HashMap<String, List<CacheTreeNode>>();
-		
-		// iterate over all entries
-		for (BTSThsEntry e : allFilteredEntries)
-		{
-			if (isVisible(e, btsFilters))
-			{
-				CacheTreeNode tn = new CacheTreeNode(e.get_id(), e);
-				allNodes.put(tn.getId(), tn);
-				boolean held = false;
-				List<CacheTreeNode> localHolders = providingHold.get(tn.getId());
-				if (localHolders != null)
-				{
-					for (CacheTreeNode holder : localHolders)
-					{
-						holder.getChildren().add(tn);
-						held = true;
-					}
-				}
-				List<CacheTreeNode> localAwaiting = awaitingHolder.get(tn.getId());
-				if (localAwaiting != null)
-				{
-					for (CacheTreeNode awaiting : localAwaiting)
-					{
-						tn.getChildren().add(awaiting);
-						roots.remove(awaiting.getId());
-					}
-				}
-				
-				for (BTSRelation rel : e.getRelations())
-				{
-					if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
-					{
-						CacheTreeNode holder = allNodes.get(rel.getObjectId());
-						if (holder != null)
-						{
-							holder.getChildren().add(tn);
-							held = true;
-						}
-						else
-						{
-							addToMap(tn, rel.getObjectId(), awaitingHolder);
-						}
-					}
-					else if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType()))
-					{
-						CacheTreeNode contained = allNodes.get(rel.getObjectId());
-						if (contained != null)
-						{
-							tn.getChildren().add(contained);
-							roots.remove(contained.getId());
-						}
-						else
-						{
-							addToMap(tn, rel.getObjectId(), providingHold);
-						}
-					}
-				}
-				if (!held)
-				{
-					roots.put(tn.getId(), tn);
-				}
-			}
-		}
-		List<BTSThsEntry> orphans = new Vector<BTSThsEntry>();
-		for (CacheTreeNode tn : roots.values())
-		{
-			if (allRootEntriesSet != null && allRootEntriesSet.contains(tn.getId()))
-			{
-				// tn is rootnode and shown in viewer
-			}
-			else
-			{
-				orphans.add((BTSThsEntry) tn.getObject());
-			}
-		}
-		return orphans;
+		return super.getOrphanEntries(map, btsFilters);
 	}
-	private void addToMap(CacheTreeNode tn,
-			String key, Map<String, List<CacheTreeNode>> map) {
-		List<CacheTreeNode> list = map.get(key);
-		if (list == null)
-		{
-			list = new Vector<CacheTreeNode>(4);
-			map.put(key, list);
-		}
-		list.add(tn);
-	}
-	private boolean isVisible(BTSThsEntry e, List<BTSFilter> btsFilters) {
-		if (btsFilters != null)
-		{
-			for (BTSFilter f : btsFilters)
-			{
-				if (!f.select(e))
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-		return true;
-	}
+	
 }
