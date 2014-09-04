@@ -86,9 +86,8 @@ WordEnding:
 ;
 
 Ending:
-//	{Ending}
-//	chars+=(SuffixChars|Deletion)*;
-chars=SuffixChars;
+	chars=SuffixChars
+;
 
 DualEnding:
 //	{DualEnding}
@@ -133,7 +132,10 @@ terminal PLURALSTRING_DOT :('.pl');
 terminal PLURALSTRING_COMMA :(',pl');
 
 
-terminal SUFFIXSTRING : ('.'|',')('Ꜣ'|'j'|'y'|'w'|'n'|'s'|'k'|'t'|'ṯ'|'ı͗'|'ś'|'ı̯͗'|'ï'|'u̯'|'č'|'ṱ'|'a'|'ꜣ')+;
+terminal SUFFIXSTRING : ('.'|',')
+	//('Ꜣ'|'j'|'y'|'w'|'n'|'s'|'k'|'t'|'ṯ'|'ı͗'|'ś'|'ı̯͗'|'ï'|'u̯'|'č'|'ṱ'|'a'|'ꜣ')+
+	(EGYSTRING | '{' | '}')+
+;
 
 terminal EGYSTRING:(
  '\uA722'|'j'|'y'|'Ꜥ'|'w'|'b'|'f'|'m'|'n'|'r'|'h'|'ḥ'|'ḫ'|'ẖ'|'z'|'s'|'š'|'q'|'k'|'g'|'t'|'ṯ'|'d'|'ḏ'|'ʾ'|'ı͗'|'ś'|'ḳ'|'ı̯͗'|'ï'|'u̯'|'č'|'č̣'|'ṭ'|'h̭'|'ṱ'|'a'|'i̭'|'ꜣ'|'J'|'Y'|'ꜥ'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'H'|'Ḥ'|'Ḫ'|'H̱'|'Z'|'S'|'Š'|'Q'|'K'|'G'|'T'|'Ṯ'|'D'|'Ḏ'|'I͗'|'Ś'|'Ḳ'|'Č'|'Č̣'|'Ṭ'|'H̭'|'Ṱ'|'A'|'I'

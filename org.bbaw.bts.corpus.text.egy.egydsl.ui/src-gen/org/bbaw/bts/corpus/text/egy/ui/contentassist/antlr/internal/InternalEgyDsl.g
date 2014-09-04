@@ -5987,7 +5987,7 @@ RULE_PLURALSTRING_DOT : '.pl';
 
 RULE_PLURALSTRING_COMMA : ',pl';
 
-RULE_SUFFIXSTRING : ('.'|',') ('\uA722'|'j'|'y'|'w'|'n'|'s'|'k'|'t'|'\u1E6F'|'\u0131\u0357'|'\u015B'|'\u0131\u0357\u032F'|'\u00EF'|'u\u032F'|'\u010D'|'\u1E71'|'a'|'\uA723')+;
+RULE_SUFFIXSTRING : ('.'|',') (RULE_EGYSTRING|'{'|'}')+;
 
 RULE_EGYSTRING : ('\uA722'|'j'|'y'|'\uA724'|'w'|'b'|'f'|'m'|'n'|'r'|'h'|'\u1E25'|'\u1E2B'|'\u1E96'|'z'|'s'|'\u0161'|'q'|'k'|'g'|'t'|'\u1E6F'|'d'|'\u1E0F'|'\u02BE'|'\u0131\u0357'|'\u015B'|'\u1E33'|'\u0131\u0357\u032F'|'\u00EF'|'u\u032F'|'\u010D'|'\u010D\u0323'|'\u1E6D'|'h\u032D'|'\u1E71'|'a'|'i\u032D'|'\uA723'|'J'|'Y'|'\uA725'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'H'|'\u1E24'|'\u1E2A'|'H\u0331'|'Z'|'S'|'\u0160'|'Q'|'K'|'G'|'T'|'\u1E6E'|'D'|'\u1E0E'|'I\u0357'|'\u015A'|'\u1E32'|'\u010C'|'\u010C\u0323'|'\u1E6C'|'H\u032D'|'\u1E70'|'A'|'I'|'\u2C80'..'\u2CFF'|'\uD80C\uDE86'|'\uD80C\uDE87'|'\uD80C\uDF79'|'\uD80C\uDF7A'|'\uD80C\uDE58'|'\uD80C\uDE82'|'p'|'l')+;
 

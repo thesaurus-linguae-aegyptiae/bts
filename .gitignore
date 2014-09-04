@@ -1,2 +1,10 @@
 /*/bin
 /*/target
+org.bbaw.bts.corpus.text.btsdsl
+org.bbaw.bts.corpus.text.btsdsl.tests
+org.bbaw.bts.corpus.text.btsdsl.ui
+org.bbaw.bts.corpus.text.dsl
+org.bbaw.bts.corpus.text.dsl.tests
+org.bbaw.bts.corpus.text.dsl.ui
+org.bbaw.bts.corpus.text.egy.dsl
+org.bbaw.bts.corpus.text.egy.dsl.tests

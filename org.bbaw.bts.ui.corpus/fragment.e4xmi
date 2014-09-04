@@ -18,6 +18,25 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="__HK5oJr8EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.5" label="Present"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_A_T4wOpWEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_bzRagOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_YKBa4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_apef4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.corpus.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:Menu" xmi:id="_fufR4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menu.filter" label="Filter">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR4TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByProject" label="Filter by Project..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_fufR4jRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_projects"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR4zRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByCreator" label="Filter by Creator..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_fufR5DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_creators"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR5TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByUpdaters" label="Filter by Updaters..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_fufR5jRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_updaters"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR5zRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_fufR6DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
+          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR6TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+            <parameters xmi:id="_fufR6jRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
+          </children>
+        </children>
       </menus>
       <menus xsi:type="menu:PopupMenu" xmi:id="_qnO8IOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.corpusnavigator.popupmenu">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_spRFUOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.4" label="Create New Text Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -25,6 +44,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_jzkrUOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.17" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_tDTV8OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_fU0OoOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.16" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_1YDbUDRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
       </menus>
       <toolbar xmi:id="_Pg3koD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.toolbar.0">
         <children xsi:type="menu:HandledToolItem" xmi:id="_Ur-XkD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" tooltip="New Corpus" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -33,6 +53,7 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_eOl9kEt9EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.addText" label="Add Text" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/text-add.png" command="_2I4eYEt7EeO3HNJi0pp4Qg"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_yQ2c0JV9EeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.addAnnotation" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_DhL4MKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.4" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" tooltip="Delete" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_QGCWUDRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.corpus.openSearchDialog" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/search.png" tooltip="Open Simple Search Dialog" command="_AbJi8DNsEeSLt-NtQ3Vu3A"/>
       </toolbar>
     </elements>
   </fragments>
