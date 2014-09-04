@@ -86,8 +86,9 @@ WordEnding:
 ;
 
 Ending:
-	{Ending}
-	chars+=(SuffixChars|Deletion)*;
+//	{Ending}
+//	chars+=(SuffixChars|Deletion)*;
+chars=SuffixChars;
 
 DualEnding:
 //	{DualEnding}

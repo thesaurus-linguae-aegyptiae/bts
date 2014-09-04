@@ -1,3 +1,4 @@
+ 
 package org.bbaw.bts.ui.corpus.parts;
 
 import java.util.HashMap;
@@ -18,22 +19,21 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
+import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
+import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
-import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
-import org.eclipse.core.commands.Command;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -41,7 +41,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
@@ -53,25 +52,29 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 
-public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
-{
+public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
 
 	@Inject
 	private EventBroker eventBroker;
@@ -85,51 +88,55 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 	private ESelectionService selectionService;
 
 	@Inject
-	private IEclipseContext context;
-
-	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
 
+	@Inject
+	private BTSResourceProvider resourceProvider;
+
+	@Inject
+	private EMenuService menuService;
+	
 	@Inject
 	@Optional
 	@Named(BTSUIConstants.SELECTION_TYPE)
 	private String selectionType;
-	
+
 	@Inject
 	private Logger logger;
 	
-
-	@Inject
-	private EMenuService menuService;
-
 	@Inject
 	private ECommandService commandService;
 
 	@Inject
 	private EHandlerService handlerService;
 	
-	private TreeViewer treeViewer;
+	private TreeViewer mainTreeViewer;
 	private StructuredSelection selection;
 	private Map<String, BTSQueryResultAbstract> queryResultMap = new HashMap<String, BTSQueryResultAbstract>();
 	private Map<String, List<TreeNodeWrapper>> viewHolderMap = new HashMap<String, List<TreeNodeWrapper>>();
 
-	private EditingDomain editingDomain;
 	private ISelectionChangedListener selectionListener;
 	private Composite composite;
 
 	private Map<Control, Map> cachingMap = new HashMap<Control, Map>();
-
+	private TreeNodeWrapper mainRootNode;
+	private CTabFolder tabFolder;
+	private CTabItem mainTabItem;
+	private Composite mainTabItemComp;
+	private CTabItem binTabItem;
+	private Composite binTabItemComp;
+	private TreeViewer bintreeViewer;
+	private SuppressDeletedViewerFilter deletedFilter;
+	private boolean loaded;
+	protected TreeNodeWrapper orphanNode;
+	
 
 	@Inject
-	public CorpusNavigatorPart()
-	{
-		// TODO Your code here
+	public CorpusNavigatorPart() {
 	}
-
+	
 	@PostConstruct
-	public void postConstruct(Composite parent)
-	{
-		logger.info("Calling postconstruct on CorpusNavigatorPart");
+	public void postConstruct(Composite parent) {
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
@@ -139,46 +146,273 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 		((GridLayout) composite.getLayout()).marginHeight = 0;
 		((GridLayout) composite.getLayout()).marginWidth = 0;
 
-		treeViewer = new TreeViewer(composite);
-		treeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
-		treeViewer.getTree().setLayout(new GridLayout());
+		tabFolder = new CTabFolder(composite, SWT.None);
+		tabFolder.setSimple(false);
+		tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
+		
+		tabFolder.addSelectionListener(new SelectionAdapter() {
+			
+			private TreeNodeWrapper binRootNode;
 
-		loadInput(composite);
-		// register context menu on the table
-		menuService.registerContextMenu(
-				treeViewer.getControl(),
-				BTSPluginIDs.POPMENU_CORPUS_NAVIGATOR_TREE_MENU);
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				CTabItem ti = tabFolder.getSelection();
+				Object o = ti.getData("key");
+				Object o2 = ti.getData("loaded");
+				Object tv = ti.getData("tv");
+				TreeViewer treeViewer;
+				if (tv != null && tv instanceof TreeViewer) {
+					treeViewer = (TreeViewer) tv;
+					treeViewer.refresh();
+				}
+				boolean loaded = false;
+				if (o2 != null && (boolean) o2)
+				{
+					loaded = true;
+				}
+				if (o != null && o instanceof String)
+				{
+					if (((String)o).equals("bin"))
+					{
+						if (!loaded)
+						{
+							binRootNode = BtsviewmodelFactory.eINSTANCE
+									.createTreeNodeWrapper();
+							loadInput(binTabItemComp, bintreeViewer,
+									binRootNode, true);
+							// ti.setData("loaded", true);
+						}
+						
+					}
+				}
+				
+			}
+		});
+
+		// create main tab item
+		mainTabItem = new CTabItem(tabFolder, SWT.NONE);
+		mainTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_THSS));
+		mainTabItem.setText("Corpora");
+		mainTabItem.setData("key", "main");
+
+		mainTabItemComp = new Composite(tabFolder, SWT.NONE);
+		mainTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+		mainTabItemComp.setLayout(new GridLayout());
+		((GridLayout) mainTabItemComp.getLayout()).marginHeight = 0;
+		((GridLayout) mainTabItemComp.getLayout()).marginWidth = 0;
+
+		mainTabItem.setControl(mainTabItemComp);
+
+		mainTreeViewer = new TreeViewer(mainTabItemComp);
+		mainTreeViewer.getTree()
+				.setLayoutData(new GridData(GridData.FILL_BOTH));
+		mainTreeViewer.getTree().setLayout(new GridLayout());
+
+		mainRootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		prepareTreeViewer(mainTreeViewer, mainTabItemComp);
+		loadInput(mainTabItemComp, mainTreeViewer, mainRootNode, false);
+
+		mainTabItem.setData("tv", mainTreeViewer);
+
+		mainTabItemComp.layout();
+				
+		
+		// create bin tab item
+		binTabItem = new CTabItem(tabFolder, SWT.NONE);
+		binTabItem.setText("Bin");
+		binTabItem.setData("key", "bin");
+		binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_BIN));
+
+		binTabItemComp = new Composite(tabFolder, SWT.NONE);
+		binTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+		binTabItemComp.setLayout(new GridLayout());
+		((GridLayout) binTabItemComp.getLayout()).marginHeight = 0;
+		((GridLayout) binTabItemComp.getLayout()).marginWidth = 0;
+
+		binTabItem.setControl(binTabItemComp);
+
+		bintreeViewer = new TreeViewer(binTabItemComp);
+		bintreeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
+		bintreeViewer.getTree().setLayout(new GridLayout());
+		binTabItem.setData("tv", bintreeViewer);
+		prepareTreeViewer(bintreeViewer, binTabItemComp);
+
+		binTabItemComp.layout();
+		// loadInput(mainTabItemComp);
+
+		tabFolder.setSelection(mainTabItem);
 		parent.layout();
+		loaded = true;
 		// parent.pack();
 		// tryRunnable();
 	}
 
-	private void loadInput(final Control parentControl)
-	{
-		Job job = new Job("load input")
-		{
-			@Override
-			protected IStatus run(IProgressMonitor monitor)
-			{
-				final TreeNodeWrapper root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+	
 
-				// input = new WritableList(nodes, TreeNodeWrapper.class);
-				// Set the writeableList as input for the viewer
-				// Create sample data
-				final List<BTSCorpusObject> obs = corpusNavigatorController.getRootBTSCorpusObjects(queryResultMap,
-						treeViewer, root, BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+	private void prepareTreeViewer(final TreeViewer treeViewer,
+			final Composite parentControl) {
+		ComposedAdapterFactory factory = new ComposedAdapterFactory(
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		AdapterFactoryLabelProvider.StyledLabelProvider labelProvider = new AdapterFactoryLabelProvider.StyledLabelProvider(
+				factory, treeViewer);
+		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(
+				factory);
+
+		treeViewer.setContentProvider(contentProvider);
+		treeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(
+labelProvider));
+
+		treeViewer.setUseHashlookup(true);
+		selectionListener = new ISelectionChangedListener() {
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event) {
+				selection = (StructuredSelection) event.getSelection();
+				System.out.println(event.getSelection());
+				if (selection.getFirstElement() != null
+						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
+					TreeNodeWrapper tn = (TreeNodeWrapper) selection
+							.getFirstElement();
+					if (tn.getObject() != null) {
+						BTSObject o = (BTSObject) tn.getObject();
+						if (o instanceof BTSCorpusObject) {
+						}
+						if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
+							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
+							parents.add(tn);
+							tn.setChildrenLoaded(true);
+							loadChildren(parents, false, parentControl);
+						}
+						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
+								.equals(selectionType)) {
+							selectionService.setSelection(o);
+						} else {
+							eventBroker.send(
+									"ui_secondarySelection/corpusNavigator", o);
+
+						}
+					}
+					else if (tn.getLabel().equals("_Orphans"))
+					{
+						if (true || !tn.isChildrenLoaded())
+						{
+							tn.setChildrenLoaded(true);
+							loadOrphans(parentControl, treeViewer, tn);
+						}
+					}
+
+				}
+			}
+		};
+
+		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+		treeViewer.addSelectionChangedListener(selectionListener);
+	}
+
+	protected void loadOrphans(final Control parentControl,
+			final TreeViewer treeViewer, final TreeNodeWrapper localOrphanNode) {
+		
+		Job job = new Job("load orphans") {
+			Map map;
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				
+
+				sync.asyncExec(new Runnable() {
+					public void run() {
+						if (parentControl != null && cachingMap.get(parentControl) != null
+									&& cachingMap.get(parentControl) instanceof Map) {
+							map = (Map) cachingMap.get(parentControl);
+						}
+						else
+						{
+							map = null;
+						}
+					}
+				});
+				List<BTSCorpusObject> obs;
+				obs = corpusNavigatorController
+						.getOrphanEntries(map,
+								treeViewer.getFilters());
+				storeIntoMap(obs, parentControl);
+				final List<TreeNodeWrapper> nodes = loadNodes(obs);
+				
+				// If you want to update the UI
+				sync.asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						localOrphanNode.getChildren().clear();
+						localOrphanNode.getChildren().addAll(nodes);
+					}
+				});
+				return Status.OK_STATUS;
+			}
+		};
+
+		// Start the Job
+		job.schedule();
+	}
+	private void executeSaveAllCommand() {
+
+		ParameterizedCommand cmd = commandService.createCommand(
+				"org.eclipse.ui.file.saveAll", null);
+
+		handlerService.executeHandler(cmd);
+		
+	}
+	private void loadInput(final Control parentControl,
+			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
+			final boolean deleted) {
+
+		Job job = new Job("load input") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+
+				List<BTSCorpusObject> obs;
+				if (!deleted) {
+					obs = corpusNavigatorController
+						.getRootEntries(
+								queryResultMap,
+								treeViewer,
+								rootNode,
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+								BTSCorpusConstants.VIEW_THS_ROOT_ENTRIES);
+				} else {
+					obs = corpusNavigatorController
+							.getDeletedEntries(
+									queryResultMap,
+									treeViewer,
+									rootNode,
+									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES);
+				}
 				storeIntoMap(obs, parentControl);
 				List<TreeNodeWrapper> nodes = loadNodes(obs);
-				root.getChildren().addAll(nodes);
-				logger.info("CorpusNavigatorPart load Input, no of children " + nodes.size());
+				rootNode.getChildren().addAll(nodes);
+				
+				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				orphanNode.setLabel("_Orphans");
+				
+				rootNode.getChildren().add(orphanNode);
 
 				// If you want to update the UI
-				sync.asyncExec(new Runnable()
-				{
+				sync.asyncExec(new Runnable() {
 					@Override
-					public void run()
-					{
-						loadTree(root, parentControl);
+					public void run() {
+						loadTree(treeViewer, rootNode, parentControl);
+						if (!deleted) {
+							treeViewer.addFilter(getDeletedFilter());
+						}
+						else {
+							treeViewer
+									.addFilter(new SuppressNondeletedViewerFilter());
+						}
+						// register context menu on the table
+						menuService.registerContextMenu(
+								treeViewer.getControl(),
+								BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
 					}
 				});
 				return Status.OK_STATUS;
@@ -190,33 +424,39 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 
 	}
 
-	private void loadChildren(final List<TreeNodeWrapper> parents, boolean includeGrandChildren,
-			final Control parentControl)
-	{
-		Job job = new Job("load children")
-		{
+	private ViewerFilter getDeletedFilter() {
+		if (deletedFilter == null) {
+			deletedFilter = new SuppressDeletedViewerFilter();
+		}
+		return deletedFilter;
+	}
+
+	private void loadChildren(final List<TreeNodeWrapper> parents,
+			boolean includeGrandChildren, final Control parentControl) {
+		Job job = new Job("load children") {
 			@Override
-			protected IStatus run(IProgressMonitor monitor)
-			{
-				final List<TreeNodeWrapper> grandChildren = new Vector<>();
-				for (final TreeNodeWrapper parent : parents)
-				{
-					final List<BTSCorpusObject> children = corpusNavigatorController.findChildren(
-							(BTSCorpusObject) parent.getObject(), queryResultMap, treeViewer, parent,
-							BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+			protected IStatus run(IProgressMonitor monitor) {
+				new Vector<>();
+				for (final TreeNodeWrapper parent : parents) {
+					final List<BTSCorpusObject> children = corpusNavigatorController
+							.findChildren(
+									(BTSCorpusObject) parent.getObject(),
+									queryResultMap,
+									mainTreeViewer,
+									parent,
+									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
 
 					storeIntoMap(children, parentControl);
 					// If you want to update the UI
-					sync.asyncExec(new Runnable()
-					{
+					sync.asyncExec(new Runnable() {
 
 						@Override
-						public void run()
-						{
+						public void run() {
 							System.out.println("add children" + children.size());
-							for (BTSObject o : children)
-							{
-								TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+							parent.getChildren().clear();
+							for (BTSObject o : children) {
+								TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+										.createTreeNodeWrapper();
 								tn.setObject(o);
 								addTooHolderMap(o, tn);
 								tn.setParent(parent);
@@ -224,13 +464,9 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 								parent.getChildren().add(tn);
 							}
 							parent.setChildrenLoaded(true);
-
 						}
-
 					});
 				}
-				// loadChildren(grandChildren, false);
-
 				return Status.OK_STATUS;
 			}
 		};
@@ -239,124 +475,58 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 		refreshTreeViewer(null);
 	}
 
-	protected void storeIntoMap(final List<BTSCorpusObject> children, final Control parentControl)
-	{
-		if (parentControl != null && children != null && !children.isEmpty())
+	protected void storeIntoMap(final List<BTSCorpusObject> children,
+			final Control parentControl) {
+		if (children.isEmpty())
 		{
-			Map map = null;
-			if (cachingMap.get(parentControl) != null && cachingMap.get(parentControl) instanceof Map)
-			{
-				map = (Map) cachingMap.get(parentControl);
-			} else
-			{
-				map = new HashMap<URI, Resource>();
-				cachingMap.put(parentControl, map);
-			}
-			if (map != null)
-			{
-				for (BTSCorpusObject o : children)
-				{
-					map.put(o.eResource().getURI(), o.eResource());
+			return;
+		}
+		sync.asyncExec(new Runnable() {
+			public void run() {
+				if (parentControl != null && children != null
+						&& !children.isEmpty()) {
+					Map map = null;
+					if (cachingMap.get(parentControl) != null
+							&& cachingMap.get(parentControl) instanceof Map) {
+						map = (Map) cachingMap.get(parentControl);
+					} else {
+						map = new HashMap<URI, Resource>();
+						cachingMap.put(parentControl, map);
+					}
+					if (map != null) {
+						for (BTSCorpusObject o : children) {
+							map.put(o.eResource().getURI(), o.eResource());
+						}
+					}
 				}
 			}
-
-		}
+		});
 
 	}
 
-	private void addTooHolderMap(BTSObject o, TreeNodeWrapper tn)
-	{
-		List<TreeNodeWrapper> list = viewHolderMap.get(((BTSDBBaseObject) o).get_id());
-		if (list == null)
-		{
+	private void addTooHolderMap(BTSObject o, TreeNodeWrapper tn) {
+		List<TreeNodeWrapper> list = viewHolderMap.get(((BTSDBBaseObject) o)
+				.get_id());
+		if (list == null) {
 			list = new Vector<TreeNodeWrapper>(1);
 		}
-		if (!list.contains(tn))
-		{
+		if (!list.contains(tn)) {
 			list.add(tn);
 		}
 		viewHolderMap.put(((BTSDBBaseObject) o).get_id(), list);
 
 	}
 
-	private void loadTree(TreeNodeWrapper root, final Control parentControl)
-	{
-		//
-		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
-		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
-		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(factory);
-
-		treeViewer.setContentProvider(contentProvider);
-		treeViewer.setLabelProvider(labelProvider);
-
-		treeViewer.setUseHashlookup(true);
-		selectionListener = new ISelectionChangedListener()
-		{
-
-			private BTSCorpusObject selectedTreeObject;
-
-			@Override
-			public void selectionChanged(SelectionChangedEvent event)
-			{
-				selection = (StructuredSelection) event.getSelection();
-				if (selection.getFirstElement() != null && selection.getFirstElement() instanceof TreeNodeWrapper)
-				{
-					TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
-					if (tn.getObject() != null)
-					{
-						BTSObject o = (BTSObject) tn.getObject();
-						if (!o.equals(selectedTreeObject))
-						{
-							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
-									.equals(selectionType)) {
-								executeSaveAllCommand();
-								selectionService.setSelection(o);
-							} else {
-								eventBroker.post(
-										"ui_secondarySelection/corpusNavigator", o);
-
-							}
-							if (o instanceof BTSCorpusObject)
-							{
-								selectedTreeObject = (BTSCorpusObject) o;
-								if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty())
-								{
-									List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
-									parents.add(tn);
-									tn.setChildrenLoaded(true);
-									loadChildren(parents, false, parentControl);
-								}
-								
-							}
-						}
-						
-					}
-
-				}
-			}
-		};
-
-		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+	private void loadTree(TreeViewer treeViewer, TreeNodeWrapper root,
+			final Control parentControl) {
 		treeViewer.setInput(root);
-		treeViewer.addSelectionChangedListener(selectionListener);
-
 	}
 
-	private void executeSaveAllCommand() {
-
-		ParameterizedCommand cmd = commandService.createCommand(
-				"org.eclipse.ui.file.saveAll", null);
-
-		handlerService.executeHandler(cmd);
-		
-	}
-
-	private List<TreeNodeWrapper> loadNodes(List<BTSCorpusObject> obs)
-	{
+	private List<TreeNodeWrapper> loadNodes(List<BTSCorpusObject> obs) {
 		List<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>(obs.size());
-		for (BTSObject o : obs)
-		{
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		for (BTSObject o : obs) {
+			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+					.createTreeNodeWrapper();
 			tn.setObject(o);
 			nodes.add(tn);
 		}
@@ -364,156 +534,104 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 	}
 
 	@PreDestroy
-	public void preDestroy()
-	{
-		// TODO Your code here
+	public void preDestroy() {
 	}
 
 	@Focus
-	public void onFocus()
-	{
+	public void onFocus() {
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
+				.activateDBCollectionContext("ths");
 	}
 
 	@Inject
 	@Optional
-	void eventReceivedNew(
-@EventTopic("model_new/*") BTSObject object)
-	{
-		if (object instanceof BTSTextCorpus)
-		{
-			addObjectToInput((BTSCorpusObject) object);
-		} else if ((object instanceof BTSTCObject || object instanceof BTSText) && selection != null
-				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject)
-		{
-//			corpusNavigatorController.addRelation((BTSCorpusObject) object,
-//					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
-//					(TreeNodeWrapper) selection.getFirstElement());
-
-			//			refreshTreeViewer((BTSCorpusObject) object);
-
+	void eventReceivedNew(@EventTopic("model_ths_new_root/*") BTSObject object) {
+		if ((object instanceof BTSThsEntry)) {
+			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+					.createTreeNodeWrapper();
+			tn.setObject(object);
+			mainRootNode.getChildren().add(tn);
+			tn.setParentObject(mainRootNode);
+			// refreshTreeViewer((BTSCorpusObject) object);
 		}
 	}
 
-//	@Inject
-//	@Optional
-//	void eventReceivedAdd(@EventTopic("model_add/*") BTSObject object) {
-////		if (object instanceof BTSAnnotation
-////				&& selection != null
-////				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
-////			corpusNavigatorController.addRelation((BTSCorpusObject) object,
-////					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
-////					(TreeNodeWrapper) selection.getFirstElement());
-////
-////			// refreshTreeViewer((BTSCorpusObject) object);
-////
-////		}
-//	}
+	@Inject
+	@Optional
+	void eventReceivedAdd(@EventTopic("model_ths_add/*") BTSObject object) {
+		if ((object instanceof BTSCorpusObject)
+				&& selection != null
+				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
+			corpusNavigatorController.addRelation((BTSCorpusObject) object,
+					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
+					(TreeNodeWrapper) selection.getFirstElement());
+			// refreshTreeViewer((BTSCorpusObject) object);
+		}
+	}
 
 	@Inject
 	@Optional
-	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification object)
-	{
+	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
 		logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
 
-		if (object instanceof BTSTextCorpus)
-		{
-			sync.asyncExec(new Runnable()
-			{
-				public void run()
-				{
-					// if (input.contains(object))
-					// {
-					// input.remove(object);
-					// input.add(object);
-					//
-					// } else
-					// {
-					// input.add(object);
-					// }
-				}
-			});
-		} else if (object instanceof BTSTCObject && selection != null
-				&& selection.getFirstElement() instanceof BTSCorpusObject)
-		{
+		if (object instanceof BTSCorpusObject && selection != null
+				&& selection.getFirstElement() instanceof BTSCorpusObject) {
 			// corpusNavigatorController.addRelation((BTSCorpusObject) object,
 			// "partOf",
 			// (BTSCorpusObject) selection.getFirstElement(), input);
 
-			refreshTreeViewer((BTSTCObject) object);
-		} else if (object instanceof BTSTCObject)
-		{
-			refreshTreeViewer((BTSTCObject) object);
-		} else if (object instanceof BTSModelUpdateNotification)
-		{
-			if (corpusNavigatorController.handleModelUpdate((BTSModelUpdateNotification) object, queryResultMap,
-					viewHolderMap))
-			{
-				refreshTreeViewer((BTSCorpusObject) ((BTSModelUpdateNotification) object).getObject());
+			refreshTreeViewer((BTSCorpusObject) object);
+		} else if (object instanceof BTSCorpusObject) {
+			refreshTreeViewer((BTSCorpusObject) object);
+		} else if (object instanceof BTSModelUpdateNotification) {
+			if (corpusNavigatorController.handleModelUpdate(
+					(BTSModelUpdateNotification) object, queryResultMap,
+					viewHolderMap)) {
+				refreshTreeViewer((BTSCorpusObject) ((BTSModelUpdateNotification) object)
+						.getObject());
 			}
 
 		}
 	}
 
-	private void refreshTreeViewer(final BTSCorpusObject btsCorpusObject)
-	{
-		sync.asyncExec(new Runnable()
-		{
-			public void run()
-			{
-				if (treeViewer != null && !treeViewer.getTree().isDisposed())
+	private void refreshTreeViewer(final BTSCorpusObject btsCorpusObject) {
+		sync.asyncExec(new Runnable() {
+			public void run() {
+				if (!mainTreeViewer.getTree().isDisposed())
 				{
-					treeViewer.removeSelectionChangedListener(selectionListener);
-					for (TreePath path : treeViewer.getExpandedTreePaths())
+					
+//					mainTreeViewer
+//							.removeSelectionChangedListener(selectionListener);
+					for (TreePath path : mainTreeViewer.getExpandedTreePaths())
 						System.out.println(path.getLastSegment());
-					treeViewer.refresh();
-					treeViewer.addSelectionChangedListener(selectionListener);
+					mainTreeViewer.refresh();
+//					mainTreeViewer.addSelectionChangedListener(selectionListener);
 				}
-			}
-		});
-
-	}
-
-	private void addObjectToInput(final BTSCorpusObject object)
-	{
-		sync.asyncExec(new Runnable()
-		{
-			@Override
-			public void run()
-			{
-				List<BTSCorpusObject> obs = new Vector<BTSCorpusObject>(1);
-				obs.add(object);
-				storeIntoMap(obs, composite);
-				List<TreeNodeWrapper> nodes = loadNodes(obs);
-				((TreeNodeWrapper) treeViewer.getInput()).getChildren().addAll(nodes);
 			}
 		});
 
 	}
 
 	@Override
-	public List<Map> getScatteredCashMaps()
-	{
+	public List<Map> getScatteredCashMaps() {
 		final List<Map> maps = new Vector<Map>(1);
-		if (composite != null && cachingMap.containsKey(composite) && cachingMap.get(composite) instanceof Map)
-		{
-			Map map = (Map) cachingMap.get(composite);
+		for (Map map : cachingMap.values()) {
 			maps.add(map);
-
 		}
 		return maps;
 	}
-
+	
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
 		if (selection == null) {
 			/* implementation not shown */
-		} else if (treeViewer != null){
-			if ((selection instanceof BTSCorpusObject) && ((selection instanceof BTSThsEntry)
-					|| (selection instanceof BTSLemmaEntry))) {
-				treeViewer.setSelection(null);
+		} else {
+			if (!(selection instanceof BTSCorpusObject)) {
+				if (loaded)
+				{
+					mainTreeViewer.setSelection(null);
+				}
 			}
 			System.out.println("CorpusNavigator selection received");
 		}
@@ -521,13 +639,120 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
+	public StructuredViewer getActiveStructuredViewer() {
+		CTabItem item = tabFolder.getSelection();
+		if (item != null)
+		{
+			Object o = item.getData("tv");
+			if (o instanceof StructuredViewer)
+			{
+				return (StructuredViewer) o;
+			}
+		}
+		return null;
+	}
+
+	@Override
 	public void search(BTSQueryRequest query, String queryName) {
-		// TODO Auto-generated method stub
+		if (query == null)
+		{
+			return;
+		}
+		
+		// make new tab, with queryName if name != null
+		createNewSearchTab(query, queryName);
+	}
+
+	private void createNewSearchTab(BTSQueryRequest query, String queryName) {
+		// create main tab item
+		CTabItem searchTab = new CTabItem(tabFolder, SWT.NONE);
+		searchTab.setShowClose(true);
+		searchTab.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_SEARCH));
+		if (queryName != null && queryName.trim().length() > 0)
+		{
+			searchTab.setText(queryName);
+		}
+		else
+		{
+			searchTab.setText("Search:" + new Integer(tabFolder.getChildren().length - 2));
+		}
+		searchTab.setData("key", query.getQueryId());
+
+		Composite searchTabItemComp = new Composite(tabFolder, SWT.NONE);
+		searchTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchTabItemComp.setLayout(new GridLayout());
+		((GridLayout) searchTabItemComp.getLayout()).marginHeight = 0;
+		((GridLayout) searchTabItemComp.getLayout()).marginWidth = 0;
+
+		searchTab.setControl(searchTabItemComp);
+
+		TreeViewer searchTreeViewer = new TreeViewer(searchTabItemComp);
+		searchTreeViewer.getTree()
+				.setLayoutData(new GridData(GridData.FILL_BOTH));
+		searchTreeViewer.getTree().setLayout(new GridLayout());
+		searchTab.setData("tv", searchTreeViewer);
+		searchTabItemComp.layout();
+		tabFolder.setSelection(searchTab);
+		
+		TreeNodeWrapper searchRootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		prepareTreeViewer(searchTreeViewer, searchTabItemComp);
+		
+		// search
+		searchInput(searchTabItemComp, searchTreeViewer, searchRootNode, query, searchTab);
+
+	}
+
+	private void searchInput(final Composite parentControl,
+			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
+			final BTSQueryRequest query, final CTabItem searchTab) {
+
+		// // in new job, search
+		Job job = new Job("load input") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+
+				List<BTSCorpusObject> obs;
+				obs = corpusNavigatorController
+						.getSearchEntries(query,
+								queryResultMap,
+								treeViewer,
+								rootNode,
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+				if (obs != null && obs.size() > 0)
+				{
+					storeIntoMap(obs, parentControl);
+					List<TreeNodeWrapper> nodes = loadNodes(obs);
+					rootNode.getChildren().addAll(nodes);
+				}
+				else
+				{
+					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+					emptyNode.setLabel("Nothing found that matches your query");
+					rootNode.getChildren().add(emptyNode);
+				}
+				// If you want to update the UI
+				sync.asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						loadTree(treeViewer, rootNode, parentControl);
+						treeViewer.addFilter(getDeletedFilter());
+						// register context menu on the table
+						menuService.registerContextMenu(
+								treeViewer.getControl(),
+								BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
+					}
+				});
+				return Status.OK_STATUS;
+			}
+		};
+
+		// Start the Job
+		job.schedule();
 		
 	}
+
 }

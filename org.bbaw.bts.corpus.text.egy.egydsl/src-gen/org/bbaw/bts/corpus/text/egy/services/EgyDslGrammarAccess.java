@@ -543,10 +543,13 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cCharsAssignment = (Assignment)rule.eContents().get(1);
 		private final RuleCall cCharsSuffixCharsParserRuleCall_0 = (RuleCall)cCharsAssignment.eContents().get(0);
 		
-		//Ending:
+		//Ending: //	{Ending}
+		////	chars+=(SuffixChars|Deletion)*;
 		//	chars=SuffixChars;
 		public ParserRule getRule() { return rule; }
 
+		////	{Ending}
+		////	chars+=(SuffixChars|Deletion)*;
 		//chars=SuffixChars
 		public Assignment getCharsAssignment() { return cCharsAssignment; }
 
@@ -1860,7 +1863,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getWordEndingAccess().getRule();
 	}
 
-	//Ending:
+	//Ending: //	{Ending}
+	////	chars+=(SuffixChars|Deletion)*;
 	//	chars=SuffixChars;
 	public EndingElements getEndingAccess() {
 		return (pEnding != null) ? pEnding : (pEnding = new EndingElements());

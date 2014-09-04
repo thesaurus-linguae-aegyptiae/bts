@@ -41,7 +41,9 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 
 	E createNew();
 	
-	String getDisplayName(String id);
+	E find(K id);
+	
+	String getDisplayName(K id);
 
 	List<E> getOrphanEntries(Map map, ViewerFilter[] filters);
 

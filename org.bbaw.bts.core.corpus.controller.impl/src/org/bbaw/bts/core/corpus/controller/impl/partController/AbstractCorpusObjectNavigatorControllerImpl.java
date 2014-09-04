@@ -271,11 +271,11 @@ GenericCorpusObjectNavigatorController<E, K>
 	protected abstract List<E> typedListEntries(String objectState);
 
 	@Override
-	public String getDisplayName(String id) {
+	public String getDisplayName(K id) {
 		BTSCorpusObject o = null;
 
 			try {
-				o = typedFind(id); //thsService.find(id);
+				o = find(id); //thsService.find(id);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -294,10 +294,10 @@ GenericCorpusObjectNavigatorController<E, K>
 //		if (o != null) {
 //			return o.getName();
 //		}
-		return id;
+		return id.toString();
 	}
 
-	protected abstract E typedFind(String id);
+	public abstract E find(K id);
 
 	@Override
 	public List<E> getOrphanEntries(Map map, ViewerFilter[] filters) {

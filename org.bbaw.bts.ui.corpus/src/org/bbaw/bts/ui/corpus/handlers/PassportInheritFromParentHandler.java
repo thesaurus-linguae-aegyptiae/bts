@@ -56,7 +56,7 @@ public class PassportInheritFromParentHandler {
 			if (rel.getObjectId() != null && !"".equals(rel.getObjectId()) && BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
 			{
 				String id = rel.getObjectId();
-				parent = corpusNavigatorController.findObject(id);
+				parent = corpusNavigatorController.find(id);
 				if (parent != null)
 				{
 					inheritPassportData(selection, parent);
