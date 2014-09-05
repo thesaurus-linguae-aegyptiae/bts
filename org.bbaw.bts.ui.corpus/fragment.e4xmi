@@ -10,6 +10,7 @@
   <imports xsi:type="commands:Command" xmi:id="_YDmDwOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.command.openCompareDialog"/>
   <imports xsi:type="commands:Command" xmi:id="_-xZjsDK3EeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.main.command.openObjectsListEntrySelectionFilterDialog"/>
   <imports xsi:type="commands:Command" xmi:id="_AbJi8DNsEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.main.command.search"/>
+  <imports xsi:type="commands:Command" xmi:id="_DoUHkDTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpora.png">
       <menus xmi:id="_NCyx4Jr7EeOVuZuSvlPBxg" elementId="org.bbaw.bts.ui.corpus.corpusNavigator.viewmenu" label="VL" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png">
@@ -37,6 +38,8 @@
             <parameters xmi:id="_fufR6jRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
           </children>
         </children>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_9VxLcDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_KwSP0DTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.menuseparator.4"/>
       </menus>
       <menus xsi:type="menu:PopupMenu" xmi:id="_qnO8IOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.corpusnavigator.popupmenu">
         <children xsi:type="menu:HandledMenuItem" xmi:id="_spRFUOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.4" label="Create New Text Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -45,6 +48,8 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_tDTV8OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_fU0OoOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.16" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_1YDbUDRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_J97l0DTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.menuseparator.3"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_QQgXIDTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
       </menus>
       <toolbar xmi:id="_Pg3koD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.toolbar.0">
         <children xsi:type="menu:HandledToolItem" xmi:id="_Ur-XkD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpus-add.png" tooltip="New Corpus" command="_gUujYD_nEeOYuPzWUW3h3g"/>

@@ -7,4 +7,10 @@
             class="org.bbaw.bts.core.services.corpus.impl.BTSObjectSearchServiceFactoryCorpus">
       </searchServiceFactory>
    </extension>
+   <extension
+         point="org.bbaw.bts.core.services.moveObjectsAmongProjectDBCollectionServiceFactory">
+      <moveObjectsAmongProjectDBCollectionServiceFactory
+            class="org.bbaw.bts.core.services.corpus.impl.MoveObjectsAmongProjectDBCollectionsServiceFactoryCorpus">
+      </moveObjectsAmongProjectDBCollectionServiceFactory>
+   </extension>
 </plugin>

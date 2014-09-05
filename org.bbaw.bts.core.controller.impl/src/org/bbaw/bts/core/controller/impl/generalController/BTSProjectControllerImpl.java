@@ -41,4 +41,9 @@ public class BTSProjectControllerImpl implements BTSProjectController
 		return projectService.saveMultiple(dirtyProjects);
 	}
 
+	@Override
+	public BTSProject findProjectByProjectPrefix(String project) {
+		return projectService.findByProjectPrefix(project);
+	}
+
 }

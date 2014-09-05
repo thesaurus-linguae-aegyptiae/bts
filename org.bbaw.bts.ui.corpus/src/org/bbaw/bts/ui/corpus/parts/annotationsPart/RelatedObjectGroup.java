@@ -303,7 +303,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected boolean mayEdit() {
-		return permissionsController.authenticatedUserMayEditObeject(object);
+		return permissionsController.authenticatedUserMayEditObject(object);
 	}
 
 	protected void editReference() {

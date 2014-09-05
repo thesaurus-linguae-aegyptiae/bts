@@ -30,6 +30,7 @@
 package org.bbaw.bts.core.controller.generalController;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BTSUser;
 
 /**
@@ -73,8 +74,10 @@ public interface PermissionsAndExpressionsEvaluationController {
 	 * @param object the object
 	 * @return true, if successful
 	 */
-	boolean authenticatedUserMayEditObeject(BTSObject object);
+	boolean authenticatedUserMayEditObject(BTSObject object);
 	
 	boolean userMayEditObject(BTSUser user, Object object);
+
+	boolean authenticatedUserMayAddToDBCollection(BTSProjectDBCollection dbCollection);
 
 }

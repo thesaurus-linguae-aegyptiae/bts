@@ -73,4 +73,5 @@ public interface BTSProjectService extends GenericObjectService<BTSProject, Stri
 	BTSProjectDBCollection checkAndAddDBCollection(BTSProject project, String corpusPrefix,
 			boolean b, boolean synchronizeCorpus);
 
+
 }

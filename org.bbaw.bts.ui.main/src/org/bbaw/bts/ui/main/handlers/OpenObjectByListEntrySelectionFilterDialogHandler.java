@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.main.handlers;
 
-import java.beans.Visibility;
 import java.util.List;
 import java.util.Vector;
 
@@ -15,7 +14,6 @@ import org.bbaw.bts.core.commons.filter.BTSObjectsByListEntryFilter;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserService;
-import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.ui.commons.filter.CreatorViewerFilter;
 import org.bbaw.bts.ui.commons.filter.ProjectPrefixViewerFilter;
 import org.bbaw.bts.ui.commons.filter.ReviewStatusViewerFilter;
@@ -28,10 +26,7 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
-import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
-import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Shell;

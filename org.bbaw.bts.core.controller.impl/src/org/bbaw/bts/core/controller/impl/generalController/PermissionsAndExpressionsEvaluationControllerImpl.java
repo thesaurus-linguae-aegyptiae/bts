@@ -431,7 +431,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	@Override
-	public boolean authenticatedUserMayEditObeject(BTSObject object) {
+	public boolean authenticatedUserMayEditObject(BTSObject object) {
 
 		//FIXME check if object is locked
 		return evaluateMayEditInteral(object);
@@ -616,5 +616,14 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			allProjects = projecService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		}
 		return allProjects;
+	}
+
+	@Override
+	public boolean authenticatedUserMayAddToDBCollection(
+			BTSProjectDBCollection dbCollection) {
+		String localUserContextRole = evaluationService.highestRoleOfUserInDBCollection(authenticatedUser, dbCollection);
+		return (localUserContextRole != null && (localUserContextRole
+				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || localUserContextRole
+				.equals(BTSCoreConstants.USER_ROLE_EDITORS)));
 	}
 }

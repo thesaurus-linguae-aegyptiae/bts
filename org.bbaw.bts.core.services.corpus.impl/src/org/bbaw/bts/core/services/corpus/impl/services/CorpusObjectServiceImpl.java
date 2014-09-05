@@ -8,10 +8,12 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
+import org.bbaw.bts.core.commons.MoveObjectAmongProjectDBCollectionsService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.corpus.comparator.BTSPassportEntryComparator;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
@@ -42,7 +44,7 @@ import org.eclipse.e4.core.di.extensions.Preference;
 
 public class CorpusObjectServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSCorpusObject, String> 
-implements 	CorpusObjectService, BTSObjectSearchService
+implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectDBCollectionsService
 {
 
 
@@ -407,6 +409,13 @@ implements 	CorpusObjectService, BTSObjectSearchService
 
 	@Override
 	public List<BTSCorpusObject> listRootEntries() {
+		throw new UnsupportedOperationException();
+	}
+
+
+	@Override
+	public boolean move(BTSDBBaseObject object, String targetDBCollectionPath) {
+		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException();
 	}
 

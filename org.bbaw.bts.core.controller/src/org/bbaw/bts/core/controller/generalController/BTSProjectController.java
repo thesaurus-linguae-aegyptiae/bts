@@ -63,4 +63,6 @@ public interface BTSProjectController
 	 */
 	boolean saveProjects(Set<BTSProject> dirtyProjects);
 
+	BTSProject findProjectByProjectPrefix(String project);
+
 }
