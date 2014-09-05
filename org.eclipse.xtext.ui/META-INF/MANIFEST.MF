@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui;singleton:=true
-Bundle-Version: 2.6.2.qualifier
+Bundle-Version: 2.6.3
 Bundle-Localization: plugin
 Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.4.0";visibility:=reexport,
@@ -43,7 +43,7 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.editor.contentassist.antlr.internal,
  org.eclipse.xtext.ui.editor.copyqualifiedname;x-internal:=true,
  org.eclipse.xtext.ui.editor.doubleClicking,
- org.eclipse.xtext.ui.editor.embedded;x-friends:="org.eclipse.xtext.ui.codetemplates.ui",
+ org.eclipse.xtext.ui.editor.embedded,
  org.eclipse.xtext.ui.editor.findrefs;x-friends:="org.eclipse.xtext.ui.tests,org.eclipse.xtext.ui.shared",
  org.eclipse.xtext.ui.editor.folding,
  org.eclipse.xtext.ui.editor.formatting,
@@ -74,6 +74,7 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.generator.trace;x-internal:=true,
  org.eclipse.xtext.ui.guice,
  org.eclipse.xtext.ui.label,
+ org.eclipse.xtext.ui.markers;x-internal:=true,
  org.eclipse.xtext.ui.notification,
  org.eclipse.xtext.ui.preferences;x-internal:=true,
  org.eclipse.xtext.ui.refactoring;x-internal:=true,
@@ -83,14 +84,13 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.resource.generic,
  org.eclipse.xtext.ui.search,
  org.eclipse.xtext.ui.shared.contribution,
- org.eclipse.xtext.ui.util,
- org.eclipse.xtext.ui.validation,
  org.eclipse.xtext.ui.tasks;x-internal:=true,
  org.eclipse.xtext.ui.tasks.preferences;x-internal:=true,
- org.eclipse.xtext.ui.markers;x-internal:=true,
+ org.eclipse.xtext.ui.util,
+ org.eclipse.xtext.ui.validation,
  org.eclipse.xtext.ui.views,
  org.eclipse.xtext.ui.wizard
-Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Import-Package: com.ibm.icu.text;version="4.0.0",

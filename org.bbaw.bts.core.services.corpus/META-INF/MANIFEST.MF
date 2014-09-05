@@ -8,5 +8,5 @@ Import-Package: org.bbaw.bts.core.commons.filter,
  org.bbaw.bts.core.services,
  org.bbaw.bts.corpus.btsCorpusModel,
  org.bbaw.bts.searchModel
-Require-Bundle: org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"
 Export-Package: org.bbaw.bts.core.services.corpus
+Require-Bundle: org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"

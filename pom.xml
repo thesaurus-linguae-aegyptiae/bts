@@ -7,7 +7,14 @@
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
-  <module>com.opcoach.e4.preferences</module>
+		<module>org.eclipse.xtext.ui</module>
+		<!--<module>org.eclipse.xtext.util</module>
+		<module>org.eclipse.xtext.common.types.ui</module>
+		<module>org.eclipse.xtext.ecore</module>
+		<module>org.eclipse.xtext.codetemplates.ui</module>
+		<module>org.eclipse.xtext.util</module>-->
+
+	<module>com.opcoach.e4.preferences</module>
     <module>org.bbaw.bts.app</module>
     <module>org.bbaw.bts.app.feature</module>
     <module>org.bbaw.bts.app.login</module>
@@ -45,13 +52,14 @@
     <module>org.bbaw.bts.model.corpus.edit</module>
     <module>org.bbaw.bts.ui.commons</module>
     <module>org.bbaw.bts.ui.corpus</module>
+	<module>org.bbaw.bts.ui.commons.corpus</module>
+
     <module>org.bbaw.bts.ui.corpus.egy</module>
     <module>org.bbaw.bts.ui.corpus.egy.commons</module>
     <module>org.bbaw.bts.ui.font</module>
     <module>org.bbaw.bts.ui.font.egyFont</module>
     <module>org.bbaw.bts.ui.main</module>
     <module>org.bbaw.bts.ui.resources</module>
-    <module>org.eclipse.xtext.ui</module>
 	
 
     <module>org.eclipselabs.emfjson</module>
@@ -65,12 +73,17 @@
     <module>org.lightcouch</module>
 	
 	 <module>org.bbaw.bts.app.product</module>
+	 
+	 <module>org.bbaw.bts.corpus.egy.feature</module>
+		<module>org.bbaw.bts.ui.font.academy</module>
+		
+		<module>org.bbaw.bts.updatesite</module>
   </modules>
   
   <properties>
     <tycho.version>0.19.0</tycho.version>
 	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <kepler-repo.url>http://download.eclipse.org/releases/kepler</kepler-repo.url>
+    <kepler-repo.url>http://download.eclipse.org/releases/luna</kepler-repo.url>
   </properties>
   
   <repositories>
@@ -82,7 +95,7 @@
 	
 	<repository>
 		<id>e4-tools</id>
-		<url>http://download.vogella.com/kepler/e4tools</url>
+		<url>http://download.vogella.com/luna/e4tools</url>
 		<layout>p2</layout>
 	</repository>
 
@@ -97,7 +110,15 @@
       <url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
 	  <layout>p2</layout>
     </repository>
+	
+	
 	<!--
+	<repository>
+		<id>xtext-p2</id>
+		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>
+		<layout>p2</layout>
+	</repository>
+	
 	<repository>
 		<id>emfjson-couch</id>
 		<layout>p2</layout>
@@ -111,13 +132,13 @@
 		<url>https://hera.uni.lu/update-site/xtext-2.4.3/plugins/</url>
 		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>
 	</repository>
-	-->
+
 	<repository>
 		<id>jackson-p2</id>
 		<layout>p2</layout>
 		<url>http://ghillairet.github.com/p2/releases/jackson/2.3.1</url>
 	</repository>
-	
+	-->
 	
 	
 
