@@ -116,7 +116,7 @@ public class CorpusToolControl {
 	@Inject
 	@Optional
 	public void setMainCorpus(
-			@Named("main_corpus") Object corpus) {
+			@Named(BTSPluginIDs.PREF_MAIN_CORPUS) Object corpus) {
 		
 		if (corpus instanceof BTSTextCorpus && corpus != null
 				&& !corpus.equals(this.mainCorpus)) {

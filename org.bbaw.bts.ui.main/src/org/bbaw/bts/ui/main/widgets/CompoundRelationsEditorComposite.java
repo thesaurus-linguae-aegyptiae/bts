@@ -82,11 +82,54 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 	private void createWidgets() {
 		// if (corpusObject.getRelations() )
-		for (int i = 0; i < object.getRelations().size(); i++) {
-			BTSRelation relation = object.getRelations().get(i);
-			BTSConfigItem relationConfig = getRelationConfig(relation);
-				createWidget(relation, i, relationConfig);
+		if (!object.getRelations().isEmpty())
+		{
+			for (int i = 0; i < object.getRelations().size(); i++) {
+				BTSRelation relation = object.getRelations().get(i);
+				BTSConfigItem relationConfig = getRelationConfig(relation);
+					createWidget(relation, i, relationConfig);
+	
+			}
+		}
+		else
+		{
+			// create add buttons
+			Label addButton = new Label(this, SWT.PUSH);
+			addButton.setImage(resourceProvider.getImage(Display.getDefault(),
+					BTSResourceProvider.IMG_ADD));
+			addButton.setToolTipText("Add Relation");
+			addButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
+					false, 1, 1));
+			((GridData) addButton.getLayoutData()).verticalIndent = 2;
+			addButton.addMouseListener(new MouseAdapter() {
 
+				@Override
+				public void mouseDown(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
+					Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+					}
+				}
+
+				@Override
+				public void mouseUp(MouseEvent e) {
+					if (CompoundRelationsEditorComposite.this.userMayEdit)
+					{
+					Label l = (Label) e.getSource();
+					l.setBackground(l.getParent().getBackground());
+					BTSRelation rel = makeAdditionalRelation();
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(editingDomain,
+									object,
+									BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
+									rel);
+					compoundCommand.append(command);
+					editingDomain.getCommandStack().execute(compoundCommand);
+					}
+				}
+			});
 		}
 
 	}

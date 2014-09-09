@@ -222,6 +222,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
 			}
 		}
+		objects.addAll(textCorpusService.list(objectState));
 		return filter(objects);
 	}
 
@@ -409,14 +410,60 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 
 	@Override
 	public List<BTSCorpusObject> listRootEntries() {
-		throw new UnsupportedOperationException();
+		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSCorpusObject> roots = new Vector<BTSCorpusObject>(corpora.size());
+		for (BTSTextCorpus tc : corpora)
+		{
+			roots.add(tc);
+		}
+		return roots;
 	}
 
 
 	@Override
-	public boolean move(BTSDBBaseObject object, String targetDBCollectionPath) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException();
+	public boolean move(BTSDBBaseObject entity, String targetDBCollectionPath, String sourceDBCollectionPath) {
+		String oldrev = entity.get_rev();
+		String corpusPrefix = null;
+		if (targetDBCollectionPath.contains("_corpus_"))
+		{
+			corpusPrefix = targetDBCollectionPath.split("_corpus_")[1];
+		}
+		((BTSCorpusObject)entity).setCorpusPrefix(corpusPrefix);
+		
+		// check if object with this id already exists in new target collection
+		BTSCorpusObject potentialPredecessor = null;
+		try {
+			potentialPredecessor = find(entity.get_id(), targetDBCollectionPath, null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (potentialPredecessor != null)
+		{
+			System.out.println("potentialPredecessor " + potentialPredecessor);
+		}
+		
+		// if yes, get it, update it with current entity, keep revision of existing object
+		entity.eResource().setURI(null);
+		
+		// else remove revision from entity
+		boolean successful = save((BTSCorpusObject) entity);
+		if (successful)
+		{
+			remove((BTSCorpusObject) entity, sourceDBCollectionPath, oldrev);
+		}
+
+		if (entity instanceof BTSTextCorpus)
+		{
+			throw new UnsupportedOperationException();
+
+		}
+		return successful;
+	}
+
+
+	private void remove(BTSCorpusObject entity, String sourceDBCollectionPath, String revision) {
+		corpusObjectDao.setDeleted(entity, sourceDBCollectionPath, true);
+		
 	}
 
 }

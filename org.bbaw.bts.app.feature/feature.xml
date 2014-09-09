@@ -22,10 +22,6 @@
    </url>
 
    <includes
-         id="org.bbaw.bts.e4.p2.feature"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipse.e4.rcp"
          version="0.0.0"/>
 

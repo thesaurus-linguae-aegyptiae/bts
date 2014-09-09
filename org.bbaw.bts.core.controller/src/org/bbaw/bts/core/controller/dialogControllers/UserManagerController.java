@@ -34,6 +34,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -112,5 +114,6 @@ public interface UserManagerController
 	 * @return true, if successful
 	 */
 	boolean saveDBBaseObject(BTSDBBaseObject dbBaseObject);
+
 
 }

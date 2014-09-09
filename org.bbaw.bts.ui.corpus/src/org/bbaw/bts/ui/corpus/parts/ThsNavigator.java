@@ -663,7 +663,7 @@ labelProvider));
 		}
 		else
 		{
-			searchTab.setText("Search:" + new Integer(tabFolder.getChildren().length - 2));
+			searchTab.setText(new Integer(tabFolder.getChildren().length - 2).toString());
 		}
 		searchTab.setData("key", query.getQueryId());
 

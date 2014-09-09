@@ -8,6 +8,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -104,5 +105,7 @@ public class UserManagerControllerImpl implements UserManagerController
 //			return usergroupService.save((BTSUserGroup) dbBaseObject);
 //		}
 	}
+
+	
 
 }

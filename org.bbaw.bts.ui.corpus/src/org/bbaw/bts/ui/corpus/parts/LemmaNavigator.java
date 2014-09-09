@@ -493,6 +493,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 
 	private void loadTree(TreeViewer treeViewer, TreeNodeWrapper root,
 			final Control parentControl) {
+		if (treeViewer.getTree().isDisposed()) return;
 		treeViewer.setInput(root);
 	}
 	private List<TreeNodeWrapper> loadNodes(List<BTSLemmaEntry> obs) {
@@ -539,7 +540,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	}
 	@Inject
 	@Optional
-	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
+	void eventReceivedUpdates(@EventTopic("model_lemma_update/async") Object object) {
 		logger.info("LemmaNavigatorPart eventReceivedUpdates. object: " + object);
 
 		if (object instanceof BTSLemmaEntry && selection != null
@@ -647,7 +648,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		}
 		else
 		{
-			searchTab.setText("Search:" + new Integer(tabFolder.getChildren().length - 2));
+			searchTab.setText(new Integer(tabFolder.getChildren().length - 2).toString());
 		}
 		searchTab.setData("key", query.getQueryId());
 

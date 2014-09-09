@@ -430,6 +430,11 @@ implements CorpusNavigatorController
 			List<BTSFilter> btsFilters) {
 		return corpusObjectService.getOrphanEntries(map, btsFilters);
 	}
+
+	@Override
+	public BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix) {
+		return textCorpusService.findTextCorpusByPrefix(corpusPrefix);
+	}
 	
 	
 }

@@ -20,7 +20,8 @@ public class CreateNewTextCorpusHandler
 {
 
 	@Execute
-	public void execute(CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker, @Named(IServiceConstants.ACTIVE_SHELL) Shell shell)
+	public void execute(CorpusNavigatorController corpusNavigatorController, EventBroker eventBroker, 
+			@Named(IServiceConstants.ACTIVE_SHELL) Shell shell)
 	{
 		BTSTextCorpus corpus = corpusNavigatorController.createNewTextCorpus();
 		corpus.setCorpusPrefix(null);
@@ -29,7 +30,7 @@ public class CreateNewTextCorpusHandler
 		{
 			corpusNavigatorController.makeAndSaveNewTextCorpus(corpus, dialog.isCorpusSynchronized());
 
-			eventBroker.post("model_new/asyncEvent", corpus);
+			eventBroker.post("model_corpus_new_root/asyncEvent", corpus);
 		}
 	}
 

@@ -299,7 +299,7 @@ public class BTSCoreConstants
 
 	public static final String EXTENSION_POINT_MOVE_OBJECT_SERVICE_FACTORY = "org.bbaw.bts.core.services.moveObjectsAmongProjectDBCollectionServiceFactory";
 
-	public static final String PARAM_ID_MOVE_OBEJECT_AMONG_PROJECT_DBCOLLECTIONS = "org.bbaw.bts.ui.main.commandparameter.targetDBCollectionKey";
+	public static final String PARAM_ID_MOVE_OBEJECT_AMONG_PROJECT_TARGET_DBCOLLECTIONS = "org.bbaw.bts.ui.main.commandparameter.targetDBCollectionKey";
 
 
 }

@@ -46,4 +46,10 @@ public class BTSProjectControllerImpl implements BTSProjectController
 		return projectService.findByProjectPrefix(project);
 	}
 
+	@Override
+	public boolean remove(BTSProject project) {
+		projectService.remove(project);
+		return true;
+	}
+
 }

@@ -99,7 +99,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		// UTF-8
 		Resource resource = entity.eResource();
 		// check if entity has resource, that is if it was newly created or not
-		if (resource == null)
+		if (resource == null || resource.getURI() == null)
 		{
 			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
 			logger.info("Resource was null, object was newly created and is persisted for the first time: " + uri.path());
@@ -312,9 +312,19 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path);
-		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key + "?rev=" + revision);
+		InputStream stream = null;
+		URI uri = null;
+		if (revision == null)
+		{
+			uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key);
+			stream = dbClient.find((String)key);
+		}
+		else
+		{
+			uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key + "?rev=" + revision);
+			stream = dbClient.find((String)key, revision);
+		}
 		Resource tempResource = connectionProvider.getEmfResourceSet().createResource(uri);
-		InputStream stream = dbClient.find((String)key, revision);
 		final JSONLoad loader = new JSONLoad(stream,
 				new HashMap<Object, Object>());
 		loader.fillResource(tempResource);
@@ -823,21 +833,25 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		for (String jo : allDocs)
 		{
 			System.out.println(jo);
-			if (true)
-			{
-				URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
-				// FIXME
+			
+				try {
+					URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
+					// FIXME
 //				Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-				fillResource(resource, jo);
+					Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+					fillResource(resource, jo);
 
-				if (!resource.getContents().isEmpty())
-				{
-					E o = (E) resource.getContents().get(0);
-					checkForConflicts(o, path);
-					results.add(o);
+					if (!resource.getContents().isEmpty())
+					{
+						E o = (E) resource.getContents().get(0);
+						checkForConflicts(o, path);
+						results.add(o);
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			}
+			
 		}
 		
 		return results;

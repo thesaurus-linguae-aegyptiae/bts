@@ -55,21 +55,26 @@ public class GeneralMoveObjectAmongProjectsServiceImpl implements
 	}
 
 	@Override
-	public boolean move(BTSDBBaseObject object, String targetDBCollectionPath) {
+	public boolean move(BTSDBBaseObject object, String targetDBCollectionPath, String sourceDBCollectionPath) {
 		MoveObjectAmongProjectDBCollectionsService service = getMoveService(object);
-		
+		String projectPrefix = targetDBCollectionPath;
+		if (targetDBCollectionPath.contains("_"))
+		{
+			projectPrefix = targetDBCollectionPath.split("_")[0];
+		}
+		object.setProject(projectPrefix);
 		if (service != null)
 		{
-			return service.move(object, targetDBCollectionPath);
+			return service.move(object, targetDBCollectionPath, sourceDBCollectionPath);
 		}
 		else
 		{
-			return generalMove(object, targetDBCollectionPath);
+			return generalMove(object, targetDBCollectionPath, sourceDBCollectionPath);
 		}
 	}
 
 	private boolean generalMove(BTSDBBaseObject object,
-			String targetDBCollectionPath) {
+			String targetDBCollectionPath, String sourceDBCollectionPath) {
 		// TODO Auto-generated method stub
 		return false;
 	}

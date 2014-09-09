@@ -6,11 +6,13 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
+import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -26,6 +28,9 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Inject
 	private BTSUserGroupService userGroupService;
+
+	@Inject
+	private BTSProjectService projectService;
 
 	@Inject
 	public BTSUserControllerImpl(IEclipseContext ctx) {
@@ -114,5 +119,18 @@ public class BTSUserControllerImpl implements BTSUserController {
 		return userService.listAll(BTSConstants.OBJECT_STATE_ACTIVE, userName, passWord);
 	}
 
-
+	@Override
+	public boolean removeUserUserGroup(BTSObject object,
+			List<BTSProject> projects) {
+		if (object instanceof BTSUser)
+		{
+			userService.remove((BTSUser) object);
+		}
+		else if (object instanceof BTSUserGroup)
+		{
+			userGroupService.remove((BTSUserGroup) object);
+		}
+		projectService.removeUserUserGroupFromAuthorization(object, projects);
+		return true;
+	}
 }

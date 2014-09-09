@@ -120,7 +120,7 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_fza6QDVsEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.preferences">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_LaH0gGHPEeOopJSr4SFGCw" elementId="org.bbaw.bts.ui.main.handledmenuitem.preferences" toBeRendered="false" visible="false" label="Preferences..." command="_4iiDcGHOEeOopJSr4SFGCw"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2i1JYOsyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2i1JYOsyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second" positionInList="1">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_qiDCMOutEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/preferences_32.png" tooltip="Open Preferences" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_oK_AENxKEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.toolbarseparator.02">
       <tags>stretch</tags>

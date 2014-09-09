@@ -15,6 +15,7 @@ import org.bbaw.bts.ui.main.provider.ListContentProvider;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
@@ -214,13 +215,17 @@ public class ProjectSettingsPage extends FieldEditorPreferencePage {
 		if (selectedProject != null && main_project != null && !main_project.equals(selectedProject.getPrefix()))
 		{
 			prefs.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, selectedProject.getPrefix());
-			context.set(BTSCoreConstants.MAIN_PROJECT, selectedProject);
+			// update instance scope so that new value is injected
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, selectedProject.getPrefix());
+			context.modify(BTSCoreConstants.MAIN_PROJECT, selectedProject);
 			saveRequired = true;
 		}
 		String selectedProjetsString = getActiveProjectSelectionsAsString();
 		if (selectedProjetsString != null && !selectedProjetsString.equals(active_projects))
 		{
 			prefs.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, selectedProjetsString);
+			// update instance scope so that new value is injected
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, selectedProjetsString);
 			saveRequired = true;
 		}
 		if (saveRequired)

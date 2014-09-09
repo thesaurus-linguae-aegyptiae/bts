@@ -55,11 +55,13 @@ public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 							.createTreeNodeWrapper();
 					tn2.setObject(coll);
 					tn.getChildren().add(tn2);
+					tn2.setParent(tn);
 				}
 			}
 			if (add)
 			{
 				rootNode.getChildren().add(tn);
+				tn.setParent(rootNode);
 			}
 
 		}
@@ -67,8 +69,8 @@ public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 	}
 
 	@Override
-	public boolean move(BTSDBBaseObject object, String targetDBCollectionPath) {
-		return generalMoveService.move(object, targetDBCollectionPath);
+	public boolean move(BTSDBBaseObject object, String targetDBCollectionPath, String sourceDBCollectionPath) {
+		return generalMoveService.move(object, targetDBCollectionPath, sourceDBCollectionPath);
 	}
 
 	@Override

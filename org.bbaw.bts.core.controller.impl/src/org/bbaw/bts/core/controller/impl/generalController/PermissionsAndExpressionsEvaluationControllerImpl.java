@@ -626,4 +626,24 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 				.equals(BTSCoreConstants.USER_ROLE_ADMINS) || localUserContextRole
 				.equals(BTSCoreConstants.USER_ROLE_EDITORS)));
 	}
+
+	@Override
+	public boolean authenticatedUserMayDeleteProject(BTSProject project) {
+		if (!authenticatedUserIsDBAdmin(true))
+		{
+			return false;
+		}
+		// TODO more rights logic 
+		return (evaluateMayEditInteral(project));
+	}
+
+	@Override
+	public boolean authenticatedUserMayDeleteUserOrUserGroup(BTSObject object) {
+		if (!authenticatedUserIsDBAdmin(true))
+		{
+			return false;
+		}
+		// TODO more rights logic 
+		return (evaluateMayEditInteral(object));
+	}
 }

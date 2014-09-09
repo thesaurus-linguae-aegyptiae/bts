@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/org.bbaw.bts.app.feature_0.0.2.qualifier.jar" id="org.bbaw.bts.app.feature" version="0.0.2.qualifier">
+      <category name="org.bbaw.bts"/>
+   </feature>
+   <feature url="features/org.bbaw.bts.corpus.egy.feature_0.0.2.qualifier.jar" id="org.bbaw.bts.corpus.egy.feature" version="0.0.2.qualifier">
+      <category name="org.bbaw.bts"/>
+   </feature>
+   <feature url="features/org.bbaw.bts.corpus.text.egy.egydsl.sdk_1.0.0.qualifier.jar" id="org.bbaw.bts.corpus.text.egy.egydsl.sdk" version="1.0.0.qualifier">
+      <category name="org.bbaw.bts"/>
+   </feature>
+   <category-def name="org.bbaw.bts" label="Berlin Text System"/>
+</site>

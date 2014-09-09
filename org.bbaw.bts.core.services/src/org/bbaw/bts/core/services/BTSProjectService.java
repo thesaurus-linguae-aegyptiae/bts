@@ -31,6 +31,7 @@ package org.bbaw.bts.core.services;
 
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 
@@ -72,6 +73,9 @@ public interface BTSProjectService extends GenericObjectService<BTSProject, Stri
 	 */
 	BTSProjectDBCollection checkAndAddDBCollection(BTSProject project, String corpusPrefix,
 			boolean b, boolean synchronizeCorpus);
+
+	boolean removeUserUserGroupFromAuthorization(BTSObject object,
+			List<BTSProject> projects);
 
 
 }

@@ -65,4 +65,6 @@ public interface BTSProjectController
 
 	BTSProject findProjectByProjectPrefix(String project);
 
+	boolean remove(BTSProject project);
+
 }

@@ -45,4 +45,5 @@ public interface CorpusNavigatorController extends GenericCorpusObjectNavigatorC
 	
 	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus, boolean synchronizeCorpus);
 
+	BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix);
 }

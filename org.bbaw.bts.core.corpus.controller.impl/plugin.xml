@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+   <extension
+         point="org.bbaw.bts.core.controller.extensionStartUpController">
+      <extensionStartUpController
+            class="org.bbaw.bts.core.corpus.controller.impl.generalController.CorpusStartUpController">
+      </extensionStartUpController>
+   </extension>
+	
+</plugin>

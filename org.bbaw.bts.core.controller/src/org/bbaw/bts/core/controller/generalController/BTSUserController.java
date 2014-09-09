@@ -32,6 +32,7 @@ package org.bbaw.bts.core.controller.generalController;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -102,5 +103,8 @@ public interface BTSUserController {
 	 * @return
 	 */
 	List<BTSUser> listAll(String userName, String passWord);
+	
+	
+	boolean removeUserUserGroup(BTSObject object, List<BTSProject> projects);
 
 }

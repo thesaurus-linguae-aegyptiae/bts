@@ -14,6 +14,7 @@ import org.bbaw.bts.ui.corpus.provider.ListContentProvider;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.workbench.IWorkbench;
@@ -217,13 +218,17 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		if (selectedTextCorpus != null && selectedTextCorpus.getCorpusPrefix() != null && (main_corpus_key == null || !main_corpus_key.equals(selectedTextCorpus.getCorpusPrefix())))
 		{
 			prefs.put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
-			context.set(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+			// update instance scope so that new value is injected
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
+			context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
 			saveRequired = true;
 		}
 		String selectedProjetsString = getActiveProjectSelectionsAsString();
 		if (selectedProjetsString != null && !selectedProjetsString.equals(active_corpora))
 		{
 			prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
+			// update instance scope so that new value is injected
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
 			saveRequired = true;
 		}
 		if (saveRequired)

@@ -12,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -28,13 +29,16 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.controller.generalController.BTSProjectController;
+import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
+import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeStructureAdvisor;
@@ -51,12 +55,16 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
+import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.common.notify.Adapter;
@@ -77,6 +85,7 @@ import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -136,7 +145,21 @@ public class UserManagementPart
 
 	@Inject
 	private BTSResourceProvider resourceProvider;
+	
+	@Inject
+	private BTSUserController userController;
 
+	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionController;
+
+	@Inject
+	private IEclipseContext context;
+	
+	@Inject
+	@Active
+	private Shell shell;
+
+	
 	private Text textName_Group;
 	private Text textType_Group;
 	private Text textComment_Group;
@@ -318,6 +341,16 @@ public class UserManagementPart
 
 	private Button btnDBAdmin_User;
 
+	private ToolItem user_ToolUpdaters;
+
+	private ToolItem roles_ToolUpdaters;
+
+	private ComboViewer users_groupMembers_groups_comboViewer;
+
+	private Link users_addGroupMembers_groups_link;
+
+
+
 	public UserManagementPart()
 	{
 	}
@@ -390,6 +423,12 @@ public class UserManagementPart
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
+				selection = (StructuredSelection) user_treeViewer.getSelection();
+				if (selection.getFirstElement() instanceof TreeNodeWrapper)
+				{
+					TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
+					deleteUserOrGroup(tn);
+				}
 
 			}
 		});
@@ -420,6 +459,30 @@ public class UserManagementPart
 			public void widgetSelected(SelectionEvent e)
 			{
 				getEditingDomain(selectedTreeObject).getCommandStack().redo();
+
+			}
+		});
+		
+		user_ToolUpdaters = new ToolItem(toolBar, SWT.NONE);
+		user_ToolUpdaters.setToolTipText("Edit updaters of selected database object.");
+		user_ToolUpdaters.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_USERROLE_EDIT));
+		user_ToolUpdaters.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				selection = (StructuredSelection) user_treeViewer.getSelection();
+				if (selection.getFirstElement() instanceof TreeNodeWrapper)
+				{
+					TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
+					if (tn.getObject() != null && tn.getObject() instanceof BTSDBBaseObject)
+					{
+						editUpdaters((BTSDBBaseObject) tn.getObject());
+					}
+				}
+				
 
 			}
 		});
@@ -488,7 +551,13 @@ public class UserManagementPart
 			@Override
 			public void widgetSelected(SelectionEvent e)
 			{
+				StructuredSelection sel = (StructuredSelection) roles_treeViewer.getSelection();
+				if (sel.getFirstElement() instanceof TreeNodeWrapper)
+				{
+					TreeNodeWrapper tn = (TreeNodeWrapper) sel.getFirstElement();
+					deleteRolesTreeObject(tn);
 
+				}
 			}
 		});
 
@@ -521,6 +590,31 @@ public class UserManagementPart
 
 			}
 		});
+		
+		roles_ToolUpdaters = new ToolItem(roles_toolbar, SWT.NONE);
+		roles_ToolUpdaters.setToolTipText("Edit updaters of selected database object.");
+		roles_ToolUpdaters.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_USERROLE_EDIT));
+		roles_ToolUpdaters.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				StructuredSelection sel = (StructuredSelection) roles_treeViewer.getSelection();
+				if (sel.getFirstElement() instanceof TreeNodeWrapper)
+				{
+					TreeNodeWrapper tn = (TreeNodeWrapper) sel.getFirstElement();
+					if (tn.getObject() != null && tn.getObject() instanceof BTSDBBaseObject)
+					{
+						editUpdaters((BTSDBBaseObject) tn.getObject());
+					}
+				}
+				
+
+			}
+		});
+		
 		roles_sashForm = new SashForm(roles_composite, SWT.NONE);
 		roles_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				true, 1, 1));
@@ -547,6 +641,98 @@ public class UserManagementPart
 		loadRolesTree();
 		parent.layout();
 		parent.pack();
+	}
+
+	protected void editUpdaters(BTSDBBaseObject object) {
+		// TODO Auto-generated method stub
+		IEclipseContext child = context.createChild();
+		child.set(IServiceConstants.ACTIVE_SELECTION, object);
+		ObjectUpdaterReaderEditorDialog dialog = ContextInjectionFactory.make(
+				ObjectUpdaterReaderEditorDialog.class, child);
+		// context.set(UserManagementDialog.class, dialog);
+
+		if (dialog.open() == dialog.OK) {
+		}
+	}
+
+	protected void deleteRolesTreeObject(TreeNodeWrapper treeNode) {
+		if (treeNode.getObject() == null)
+		{
+			return;
+		}
+		Object object = treeNode.getObject();
+
+		String dialogTitle;
+		String dialogMessage;
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		if (object instanceof BTSProject)
+		{
+			if (!permissionController.authenticatedUserMayDeleteProject((BTSProject)object))
+			{
+				dialogTitle = "Deletion Not Allowed";
+				dialogMessage = "You are not allowed to delete the selected project: " + labelProvider.getText(object);
+				MessageDialog dialog = new MessageDialog(shell, dialogTitle, null,
+					    dialogMessage, MessageDialog.INFORMATION, new String[] { "OK" }, 0);
+				dialog.open();
+				return;
+			}
+			dialogTitle = "Delete Project";
+			dialogMessage = "Delete selected project: " + labelProvider.getText(object);
+			MessageDialog dialog = new MessageDialog(shell, dialogTitle, null,
+				    dialogMessage, MessageDialog.WARNING, new String[] { "Delete",
+				  "Cancel" }, 1);
+			int result = dialog.open();
+			if (result == MessageDialog.OK)
+			{
+				projectController.remove((BTSProject)object);
+				treeNode.getParent().getChildren().remove(treeNode);
+			}	
+		}
+		else
+		{
+			return;
+		}
+			
+	}
+
+	private void deleteUserOrGroup(TreeNodeWrapper treeNode) {
+		if (!(treeNode.getObject() instanceof BTSObject))
+		{
+			return;
+		}
+		BTSObject object = (BTSObject) treeNode.getObject();
+		
+		String dialogTitle;
+		String dialogMessage;
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		if (object instanceof BTSUser)
+		{
+			dialogTitle = "Delete User";
+			dialogMessage = "Delete selected user: " + labelProvider.getText(object);
+		}
+		else
+		{
+			dialogTitle = "Delete Usergroup";
+			dialogMessage = "Delete selected usergroup: " + labelProvider.getText(object);
+		}
+		if (!permissionController.authenticatedUserMayDeleteUserOrUserGroup((BTSObject)object))
+		{
+			dialogTitle = "Deletion Not Allowed";
+			dialogMessage = "You are not allowed to delete the selected user or usergroup: " + labelProvider.getText(object);
+			MessageDialog dialog = new MessageDialog(shell, dialogTitle, null,
+				    dialogMessage, MessageDialog.INFORMATION, new String[] { "OK" }, 0);
+			dialog.open();
+			return;
+		}
+		MessageDialog dialog = new MessageDialog(shell, dialogTitle, null,
+			    dialogMessage, MessageDialog.WARNING, new String[] { "Delete",
+			  "Cancel" }, 1);
+		int result = dialog.open();
+		if (result == MessageDialog.OK)
+		{
+			userController.removeUserUserGroup(object, projects);
+			treeNode.getParent().getChildren().remove(treeNode);
+		}		
 	}
 
 	private void init()
@@ -1217,20 +1403,28 @@ public class UserManagementPart
 
 			for (String n : dBRoleDesc.getUserNames())
 			{
-				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(userMap.get(n));
-				tn.setParentObject(dBRoleDesc);
-				tn.setChildrenLoaded(true);
-				dBRoleDesc.getCachedChildren().add(tn);
+				BTSObject user = userMap.get(n);
+				if (user != null)
+				{
+					TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(user);
+					tn.setParentObject(dBRoleDesc);
+					tn.setChildrenLoaded(true);
+					dBRoleDesc.getCachedChildren().add(tn);
+				}
 			}
 		}
 		if (!dBRoleDesc.getUserRoles().isEmpty() && uncached)
 		{
 			for (String n : dBRoleDesc.getUserRoles())
 			{
-				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(userGroupMap.get(n));
+				BTSObject userGroup = userGroupMap.get(n);
+				if (userGroup != null)
+				{
+				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(userGroup);
 				tn.setParentObject(dBRoleDesc);
 				tn.setChildrenLoaded(true);
 				dBRoleDesc.getCachedChildren().add(tn);
+				}
 			}
 		}
 		if (uncached)
@@ -1880,6 +2074,10 @@ public class UserManagementPart
 
 	private Composite loadGroupEditComposite(final BTSUserGroup group)
 	{
+		if (observableLisAllUsers == null)
+		{
+			loadAllUsers();
+		}
 		composite_right.dispose();
 		composite_right = null;
 		composite_right = new Composite(user_sashForm, SWT.NONE);
@@ -1891,32 +2089,30 @@ public class UserManagementPart
 
 		Label lblUserGroup = new Label(composite_GroupEdit, SWT.NONE);
 		lblUserGroup.setAlignment(SWT.CENTER);
-		lblUserGroup.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, false, false, 2, 1));
+		lblUserGroup.setLayoutData(new GridData(SWT.CENTER, SWT.TOP, false, false, 2, 1));
 		lblUserGroup.setText("User Group");
 
 		Label idOfGroup = new Label(composite_GroupEdit, SWT.NONE);
-		idOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		idOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		idOfGroup.setText("ID of Group");
 
 		labelId_Group = new Text(composite_GroupEdit, SWT.BORDER);
-		labelId_Group.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		labelId_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		labelId_Group.setEditable(false);
 
 		Label lblNameOfGroup = new Label(composite_GroupEdit, SWT.NONE);
-		lblNameOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblNameOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		lblNameOfGroup.setText("Name of Group");
 
 		textName_Group = new Text(composite_GroupEdit, SWT.BORDER);
-		textName_Group.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		textName_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 		Label lblTypeOfGroup = new Label(composite_GroupEdit, SWT.NONE);
-		lblTypeOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblTypeOfGroup.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		lblTypeOfGroup.setText("Type of Group");
 
 		textType_Group = new Text(composite_GroupEdit, SWT.BORDER);
-		textType_Group.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		new Label(composite_GroupEdit, SWT.NONE);
-		new Label(composite_GroupEdit, SWT.NONE);
+		textType_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 		Label lblComment = new Label(composite_GroupEdit, SWT.NONE);
 		lblComment.setText("Comment");
@@ -1924,21 +2120,25 @@ public class UserManagementPart
 		new Label(composite_GroupEdit, SWT.NONE);
 
 		textComment_Group = new Text(composite_GroupEdit, SWT.BORDER);
-		textComment_Group.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		textComment_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
 
-		Label lblcreateUser_Group = new Label(composite_GroupEdit, SWT.NONE);
-		lblcreateUser_Group.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
-		lblcreateUser_Group.setText("Create new User: Enter Username");
+		Group groupCreateUser_Group = new Group(composite_GroupEdit, SWT.NONE);
+		groupCreateUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		groupCreateUser_Group.setLayout(new GridLayout(2, false));
+		groupCreateUser_Group.setText("Create new User");
 
-		textCreateNewUser_Group = new Text(composite_GroupEdit, SWT.BORDER);
-		textCreateNewUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+		Label lblcreateUserName_Group = new Label(groupCreateUser_Group, SWT.NONE);
+		lblcreateUserName_Group.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
+		lblcreateUserName_Group.setText("Enter Username");
+		textCreateNewUser_Group = new Text(groupCreateUser_Group, SWT.BORDER);
+		textCreateNewUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		
-		Label lblcreateUserPassword_Group = new Label(composite_GroupEdit, SWT.NONE);
-		lblcreateUserPassword_Group.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
+		Label lblcreateUserPassword_Group = new Label(groupCreateUser_Group, SWT.NONE);
+		lblcreateUserPassword_Group.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
 		lblcreateUserPassword_Group.setText("Password of New User");
 
-		textCreateNewUserPassword_Group = new Text(composite_GroupEdit, SWT.BORDER | SWT.PASSWORD);
-		textCreateNewUserPassword_Group.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+		textCreateNewUserPassword_Group = new Text(groupCreateUser_Group, SWT.BORDER | SWT.PASSWORD);
+		textCreateNewUserPassword_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 
 		textCreateNewUserPassword_Group.addModifyListener(new ModifyListener()
 		{
@@ -1962,7 +2162,7 @@ public class UserManagementPart
 			}
 		});
 
-		linkCreateNewUser_Group = new Link(composite_GroupEdit, SWT.NONE);
+		linkCreateNewUser_Group = new Link(groupCreateUser_Group, SWT.NONE);
 		linkCreateNewUser_Group.setText("<a>Create new User</a>");
 		linkCreateNewUser_Group.addSelectionListener(new SelectionAdapter()
 		{
@@ -1976,7 +2176,66 @@ public class UserManagementPart
 		});
 		linkCreateNewUser_Group.setEnabled((textCreateNewUser_Group.getText().trim().length() > 0)
 				&& (textCreateNewUserPassword_Group.getText().trim().length() > 0));
+		
+		
+		Group groupSelectUser_Group = new Group(composite_GroupEdit, SWT.NONE);
+		groupSelectUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
+		groupSelectUser_Group.setLayout(new GridLayout(2, false));
 
+		groupSelectUser_Group.setText("Select User");
+
+		users_groupMembers_groups_comboViewer = new ComboViewer(groupSelectUser_Group, SWT.NONE | SWT.READ_ONLY);
+		users_groupMembers_groups_comboViewer.getCombo().setLayoutData(
+				new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		users_groupMembers_groups_comboViewer.setContentProvider(new ObservableListContentProvider());
+		users_groupMembers_groups_comboViewer.setLabelProvider(labelProvider);
+		users_groupMembers_groups_comboViewer.setInput(observableLisAllUsers);
+
+		users_addGroupMembers_groups_link = new Link(groupSelectUser_Group, SWT.NONE);
+		users_addGroupMembers_groups_link.setText("<a>Add User to Group</a>");
+		users_addGroupMembers_groups_link.setLayoutData(new GridData(SWT.FILL,
+				SWT.CENTER, true, false, 2, 1));
+		users_addGroupMembers_groups_link.addSelectionListener(new SelectionAdapter()
+		{
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				
+				if (permissionController.authenticatedUserIsDBAdmin(true) && users_groupMembers_groups_comboViewer.getSelection() != null)
+				{
+					IStructuredSelection sel = (IStructuredSelection) users_groupMembers_groups_comboViewer.getSelection();
+					if (sel.getFirstElement() != null)
+					{
+						BTSUser user = (BTSUser) sel.getFirstElement();
+						IStructuredSelection groupSelection = (IStructuredSelection) user_treeViewer.getSelection();
+						if (groupSelection.getFirstElement() != null && groupSelection.getFirstElement() instanceof TreeNodeWrapper)
+						{
+							TreeNodeWrapper groupTreeNode = (TreeNodeWrapper) groupSelection.getFirstElement();
+							if (selectedGroup != null)
+							{
+								TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.wrappObject(user);
+								tn.setParentObject(selectedGroup);
+								tn.setParent(groupTreeNode);
+								tn.setChildrenLoaded(true);
+								
+								CompoundCommand compoundCommand = new CompoundCommand();
+								Command command = AddCommand.create(getEditingDomain(user), user,
+										BtsmodelPackage.Literals.BTS_USER__GROUP_IDS, selectedGroup.get_id());
+								compoundCommand.append(command);
+								groupTreeNode.getChildren().add(tn);
+								getEditingDomain(user).getCommandStack().execute(compoundCommand);
+								dirtyUsers.add(user);
+								user_treeViewer.refresh(groupTreeNode);
+							}
+						}
+						
+						
+					}
+				}
+
+			}
+		});
 		user_sashForm.setWeights(new int[] { 1, 1 });
 		user_sashForm.layout();
 		user_composite.layout();

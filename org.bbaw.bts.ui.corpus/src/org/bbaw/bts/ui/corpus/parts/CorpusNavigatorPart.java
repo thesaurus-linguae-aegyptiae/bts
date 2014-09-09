@@ -24,6 +24,7 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -130,6 +131,8 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
+	protected TreeNodeWrapper selectedTreeNode;
+	protected BTSObject selectedCorpusObject;
 	
 
 	@Inject
@@ -274,33 +277,33 @@ labelProvider));
 				System.out.println(event.getSelection());
 				if (selection.getFirstElement() != null
 						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
-					TreeNodeWrapper tn = (TreeNodeWrapper) selection
+					selectedTreeNode = (TreeNodeWrapper) selection
 							.getFirstElement();
-					if (tn.getObject() != null) {
-						BTSObject o = (BTSObject) tn.getObject();
-						if (o instanceof BTSCorpusObject) {
+					if (selectedTreeNode.getObject() != null) {
+						selectedCorpusObject = (BTSObject) selectedTreeNode.getObject();
+						if (selectedCorpusObject instanceof BTSCorpusObject) {
 						}
-						if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
+						if (!selectedTreeNode.isChildrenLoaded() || selectedTreeNode.getChildren().isEmpty()) {
 							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
-							parents.add(tn);
-							tn.setChildrenLoaded(true);
+							parents.add(selectedTreeNode);
+							selectedTreeNode.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
 						}
 						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 								.equals(selectionType)) {
-							selectionService.setSelection(o);
+							selectionService.setSelection(selectedCorpusObject);
 						} else {
 							eventBroker.send(
-									"ui_secondarySelection/corpusNavigator", o);
+									"ui_secondarySelection/corpusNavigator", selectedCorpusObject);
 
 						}
 					}
-					else if (tn.getLabel().equals(BTSConstants.ORPHANS_NODE_LABEL))
+					else if (selectedTreeNode.getLabel().equals(BTSConstants.ORPHANS_NODE_LABEL))
 					{
-						if (true || !tn.isChildrenLoaded())
+						if (!selectedTreeNode.isChildrenLoaded())
 						{
-							tn.setChildrenLoaded(true);
-							loadOrphans(parentControl, treeViewer, tn);
+							selectedTreeNode.setChildrenLoaded(true);
+							loadOrphans(parentControl, treeViewer, selectedTreeNode);
 						}
 					}
 
@@ -541,25 +544,49 @@ labelProvider));
 	@Focus
 	public void onFocus() {
 		evaluationController
-				.activateDBCollectionContext("ths");
+				.activateDBCollectionContext("corpus");
 	}
 
 	@Inject
 	@Optional
-	void eventReceivedNew(@EventTopic("model_ths_new_root/*") BTSObject object) {
-		if ((object instanceof BTSThsEntry)) {
+	void eventReceivedNew(@EventTopic("model_corpus_new_root/*") BTSObject object) {
+		if ((object instanceof BTSTextCorpus)) {
 			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			tn.setObject(object);
 			mainRootNode.getChildren().add(tn);
-			tn.setParentObject(mainRootNode);
+			tn.setParent(mainRootNode);
 			// refreshTreeViewer((BTSCorpusObject) object);
+		}
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedViewRefresh(@EventTopic("view_refresh/*") BTSObject selectionObject) {
+		if ((selectionObject instanceof BTSCorpusObject) && selectionObject.equals(selectedCorpusObject)) {
+			final List<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>(1);
+			nodes.add(selectedTreeNode);
+			
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					final CTabItem ti = tabFolder.getSelection();
+					TreeViewer tv = (TreeViewer) ti.getData("tv");
+					if (BTSConstants.ORPHANS_NODE_LABEL.equals(selectedTreeNode.getLabel()))
+					{
+						loadOrphans(tv.getControl(), tv, selectedTreeNode);
+					}
+					else
+					{
+						loadChildren(nodes, true, tv.getControl());
+					}
+				}
+			});
 		}
 	}
 
 	@Inject
 	@Optional
-	void eventReceivedAdd(@EventTopic("model_ths_add/*") BTSObject object) {
+	void eventReceivedAdd(@EventTopic("model_corpus_add/*") BTSObject object) {
 		if ((object instanceof BTSCorpusObject)
 				&& selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
@@ -679,7 +706,7 @@ labelProvider));
 		}
 		else
 		{
-			searchTab.setText("Search:" + new Integer(tabFolder.getChildren().length - 2));
+			searchTab.setText(new Integer(tabFolder.getChildren().length - 2).toString());
 		}
 		searchTab.setData("key", query.getQueryId());
 

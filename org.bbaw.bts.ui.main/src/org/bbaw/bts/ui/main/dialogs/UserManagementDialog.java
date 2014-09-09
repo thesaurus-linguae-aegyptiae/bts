@@ -120,6 +120,7 @@ public class UserManagementDialog extends TitleAreaDialog
 				if (isValidInput())
 				{
 					saveInput();
+					okPressed();
 				}
 			}
 		});

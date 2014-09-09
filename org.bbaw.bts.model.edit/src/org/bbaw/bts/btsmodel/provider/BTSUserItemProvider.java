@@ -674,13 +674,12 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
 	 * --> <!-- end-user-doc -->
 	 * 
-	 * @generatedNOT
+	 * @generated
 	 */
 	@Override
 	public String getText(Object object)
 	{
-		String label = ((BTSUser) object).getForeName() + " " + ((BTSUser) object).getSureName();
-		return label == null || label.length() == 0 ? getString("_UI_BTSUser_type") : label;
+		return ((StyledString)getStyledText(object)).getString();
 	}
 
 	/**
@@ -691,7 +690,31 @@ public class BTSUserItemProvider extends BTSDBBaseObjectItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSUser) object).getForeName() + " " + ((BTSUser) object).getSureName();
+		BTSUser user = (BTSUser) object;
+		String label = "";
+		if (user.getForeName() != null && !"".equals(user.getForeName().trim()))
+		{
+			label = user.getForeName();
+		}
+		if (user.getSureName() != null && !"".equals(user.getSureName().trim()))
+		{
+			if ("".equals(label))
+			{
+				label = user.getSureName();
+			}
+			else
+			{
+				label += " " + user.getSureName();
+			}
+		}
+		if ("".equals(label))
+		{
+			label = user.getUserName();
+		}
+		else
+		{
+			label += " (" + user.getUserName() + ")";
+		}
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSUser_type"), StyledString.Style.QUALIFIER_STYLER); 

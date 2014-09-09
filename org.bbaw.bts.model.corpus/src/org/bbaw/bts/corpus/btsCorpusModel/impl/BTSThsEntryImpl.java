@@ -34,5 +34,10 @@ public class BTSThsEntryImpl extends BTSCorpusObjectImpl implements BTSThsEntry 
 	protected EClass eStaticClass() {
 		return BtsCorpusModelPackage.Literals.BTS_THS_ENTRY;
 	}
+	
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_ths";
+	}
 
 } //BTSThsEntryImpl

@@ -9,4 +9,6 @@ public interface BTSTextCorpusService extends
 	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus,
 			boolean synchronizeCorpus);
 
+	BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix);
+
 }

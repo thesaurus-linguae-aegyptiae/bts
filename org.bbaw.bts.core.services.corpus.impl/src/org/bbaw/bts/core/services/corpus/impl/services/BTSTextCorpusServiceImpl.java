@@ -161,5 +161,22 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	public List<BTSTextCorpus> listRootEntries() {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix) {
+		if (main_corpus_key.equals(corpusPrefix))
+		{
+			return (BTSTextCorpus) context.get("main_corpus");
+		}
+		List<BTSTextCorpus> corpora = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		for (BTSTextCorpus corpus : corpora)
+		{
+			if (corpus.getCorpusPrefix() != null && corpus.getCorpusPrefix().equals(corpusPrefix))
+			{
+				return corpus;
+			}
+		}
+		return null;
+	}
 	
 }

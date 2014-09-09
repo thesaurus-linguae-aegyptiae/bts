@@ -132,17 +132,7 @@ public class ApplicationStartupControllerImpl implements
 //	@Inject
 //	private BTSTextCorpusService textCorpusService;
 
-	private boolean dbPrepared;
-
-	private boolean mainProjectSet;
-
 	private String localDBUrl;
-
-	private BTSProject main_project;
-
-	private String main_corpus_key;
-
-
 
 	@Override
 	public void applicationStartup(final IEclipseContext context,
@@ -223,23 +213,22 @@ public class ApplicationStartupControllerImpl implements
 //			}
 //		}
 		System.out.println(font);
-		dbPrepared = false;
-		mainProjectSet = false;
 		splashController.setSplashPluginId(PLUGIN_ID);
 		splashController.setSplashImagePath("/" + "splash" + "/"
 				+ "btsStart.jpg");
 		splashController.open();
 		splashController.setMessage("Starting Applikation ...");
 
+		
+		
 		// The should be a better way to close the Splash
 		eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE,
 				new EventHandler() {
 					@Override
 					public void handleEvent(Event event) {
-						// inititae static access controller
-						StaticAccessController sa = context
+						context
 								.get(StaticAccessController.class);
-						PermissionsAndExpressionsEvaluationController permissionController = context
+						context
 								.get(PermissionsAndExpressionsEvaluationController.class);
 						IProvisioningAgent agent = context.get(IProvisioningAgent.class);
 						IWorkbench workbench = context.get(IWorkbench.class);
@@ -248,7 +237,20 @@ public class ApplicationStartupControllerImpl implements
 						//FIXME
 // 						checkAndInstallSoftwareUpdates(agent, workbench);
 
-						
+						// extension specific startup routines
+						ExtensionStartUpController[] conrollers = null;
+						try {
+							conrollers = loadExtensionStartUpControllers(context);
+						} catch (CoreException e) {
+							logger.error(e);
+						}
+						if (conrollers != null)
+						{
+							for (ExtensionStartUpController c : conrollers)
+							{
+								c.startup();
+							}
+						}
 						splashController.close();
 						eventBroker.unsubscribe(this);
 					}
@@ -386,7 +388,7 @@ public class ApplicationStartupControllerImpl implements
 		try {
 			splashController.setMessage("Prepare Database...");
 
-			dbPrepared = dbManager.prepareDB();
+			dbManager.prepareDB();
 		} catch (URISyntaxException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -420,12 +422,10 @@ public class ApplicationStartupControllerImpl implements
 
 			checkProjectDBCollections(projects);
 
-			 
+			context.declareModifiable(BTSCoreConstants.MAIN_PROJECT);
 			for (BTSProject p : projects) {
 				if (p.getPrefix().equals(main_project_key)) {
 					context.set(BTSCoreConstants.MAIN_PROJECT, p);
-					mainProjectSet = true;
-					main_project = p;
 					break;
 				}
 			}
@@ -435,20 +435,7 @@ public class ApplicationStartupControllerImpl implements
 //
 //			}
 			
-			// extension specific startup routines
-			ExtensionStartUpController[] conrollers = null;
-			try {
-				conrollers = loadExtensionStartUpControllers(context);
-			} catch (CoreException e) {
-				logger.error(e);
-			}
-			if (conrollers != null)
-			{
-				for (ExtensionStartUpController c : conrollers)
-				{
-					c.startup();
-				}
-			}
+			
 //			checkCorpusSelectionSettings();
 		}
 		
@@ -547,7 +534,7 @@ public class ApplicationStartupControllerImpl implements
 		if (prefs == null) return;
 
 		IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
-		IEclipsePreferences instance = InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
+		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
 	
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
 		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
@@ -559,8 +546,8 @@ public class ApplicationStartupControllerImpl implements
 
 		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR, defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
 		
-		main_corpus_key = prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
-		String mck = defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
+		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
+		defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 		
 	}
 

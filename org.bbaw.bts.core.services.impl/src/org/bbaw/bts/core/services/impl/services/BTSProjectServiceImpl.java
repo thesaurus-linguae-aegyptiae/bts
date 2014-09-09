@@ -8,6 +8,7 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -218,6 +219,35 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		collection.setIndexed(index);
 		collection.setSynchronized(synchronize);
 		return collection;
+	}
+
+	@Override
+	public boolean removeUserUserGroupFromAuthorization(BTSObject object,
+			List<BTSProject> projects) {
+		if (object == null || object.get_id() == null) return false;
+		for (BTSProject project : projects)
+		{
+			removeUserUserGroupFromAuthorizationProject(object, project);
+		}
+		return true;
+	}
+
+	private void removeUserUserGroupFromAuthorizationProject(BTSObject object,
+			BTSProject project) {
+		for (BTSProjectDBCollection coll : project.getDbCollections())
+		{
+			removeUserUserGroupFromAuthorizationDBCollection(object, coll);
+		}
+		
+	}
+
+	private void removeUserUserGroupFromAuthorizationDBCollection(
+			BTSObject object, BTSProjectDBCollection coll) {
+		for (BTSDBCollectionRoleDesc role : coll.getRoleDescriptions())
+		{
+			role.getUserNames().remove(object.get_id());
+		}
+		
 	}
 
 

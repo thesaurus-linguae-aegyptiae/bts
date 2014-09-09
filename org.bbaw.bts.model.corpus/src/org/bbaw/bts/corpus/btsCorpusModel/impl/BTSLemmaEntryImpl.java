@@ -249,5 +249,10 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 		result.append(')');
 		return result.toString();
 	}
+	
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_wlist";
+	}
 
 } //BTSLemmaEntryImpl

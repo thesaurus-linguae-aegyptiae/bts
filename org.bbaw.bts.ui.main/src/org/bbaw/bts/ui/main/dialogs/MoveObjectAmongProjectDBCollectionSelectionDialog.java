@@ -23,8 +23,10 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
+import org.eclipse.jface.viewers.CheckStateChangedEvent;
 import org.eclipse.jface.viewers.CheckboxTreeViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.ICheckStateListener;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.widgets.Button;
@@ -47,6 +49,10 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 	private AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 			factory);
 	private CheckboxTreeViewer checkboxTreeViewer;
+
+	private TreeNodeWrapper checkedProjectTreeNode;
+
+	private TreeNodeWrapper checkedDBCollTreeNode;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -134,14 +140,100 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 		checkboxTreeViewer.setContentProvider(contentProvider);
 		checkboxTreeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		
-//		checkboxTreeViewer.addFilter(new ProjectDBCollectionByPermissionAndProvidedFilterFilter());
 		checkboxTreeViewer.setInput(rootNode);
 		
 		// calculate checked elements
 		// iteratate over project + dbcollection
 		// select if dbcoll.name == object.dbkey
 		
+		TreeNodeWrapper[] selected = null;
+		for (TreeNodeWrapper tn : rootNode.getChildren())
+		{
+			if (tn.getObject() != null && tn.getObject() instanceof BTSProject && tn.getObject().equals(currentProject))
+			{
+				checkedProjectTreeNode = tn;
+				selected = new TreeNodeWrapper[]{checkedProjectTreeNode};
+				if (!checkedProjectTreeNode.getChildren().isEmpty())
+				{
+					for (TreeNodeWrapper child : checkedProjectTreeNode.getChildren())
+					{
+						if (child.getObject() != null && child.getObject() instanceof BTSProjectDBCollection 
+								&& ((BTSProjectDBCollection) child.getObject()).getCollectionName() != null
+								&& ((BTSProjectDBCollection) child.getObject()).getCollectionName().equals(object.getDBCollectionKey()))
+						{
+							checkedDBCollTreeNode = child;
+							selected = new TreeNodeWrapper[]{checkedProjectTreeNode, checkedDBCollTreeNode};
+							break;
+						}
+					}
+				}
+				break;
+			}
+		}
+		if (selected != null)
+		{
+			checkboxTreeViewer.setCheckedElements(selected);
+			checkboxTreeViewer.setExpandedElements(selected);
+		}
+		
 		// add checkstate listener to programmatically do single selection
+		checkboxTreeViewer.addCheckStateListener(new ICheckStateListener(){
+
+			@Override
+			public void checkStateChanged(CheckStateChangedEvent event) {
+				if (!event.getChecked())
+				{
+					// do nothing
+					event.getCheckable().setChecked(event.getElement(), true);
+				}
+				else
+				{
+					TreeNodeWrapper entry = (TreeNodeWrapper) event
+							.getElement();
+					if (entry.getObject() instanceof BTSProject)
+					{
+						// uncheck old
+						if (checkedProjectTreeNode != null)
+						checkboxTreeViewer.setSubtreeChecked(checkedProjectTreeNode,
+								false);
+						checkboxTreeViewer.setChecked(checkedProjectTreeNode, false);
+						
+						// set checked
+						checkedProjectTreeNode = entry;
+						
+					}
+					else if (entry.getObject() instanceof BTSProjectDBCollection)
+					{
+						// uncheck old
+						if (checkedDBCollTreeNode != null)
+						checkboxTreeViewer.setSubtreeChecked(checkedDBCollTreeNode,
+								false);
+						checkboxTreeViewer.setChecked(checkedDBCollTreeNode, false);
+						
+						// find parent
+						if (checkedDBCollTreeNode.getParent() != null && checkedDBCollTreeNode.getParent().equals(entry.getParent()))
+						{
+							// do nothing
+						}
+						else
+						{
+							checkboxTreeViewer.setSubtreeChecked(checkedDBCollTreeNode.getParent(),
+									false);
+							checkboxTreeViewer.setChecked(checkedDBCollTreeNode.getParent(), false);
+							checkedProjectTreeNode = entry.getParent();
+							checkboxTreeViewer.setChecked(checkedProjectTreeNode, true);
+
+						}
+						// set checked
+						checkedDBCollTreeNode = entry;
+					}
+	
+					
+					
+					
+				}
+				
+			}});
 	}
 
 	/**
@@ -155,6 +247,7 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
 	}
+	
 
 	/**
 	 * Return the initial size of the dialog.
@@ -165,38 +258,10 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 	}
 
 	public String getTargetDBCollectionPath() {
-		// TODO Auto-generated method stub
+		if (checkedDBCollTreeNode != null && checkedDBCollTreeNode.getObject() != null)
+		{
+			return ((BTSProjectDBCollection)checkedDBCollTreeNode.getObject()).getCollectionName();
+		}
 		return null;
 	}
-	
-//	private class ProjectDBCollectionByPermissionAndProvidedFilterFilter extends ViewerFilter
-//	{
-//		
-//
-//		@Override
-//		public boolean select(Viewer viewer, Object parentElement, Object element) {
-//			if (element instanceof TreeNodeWrapper)
-//			{
-//				Object realObject = ((TreeNodeWrapper) element).getObject();
-//				if (realObject instanceof BTSProject)
-//				{
-//					return true;
-//				}
-//				else if (realObject instanceof BTSProjectDBCollection)
-//				{
-//					if (moveDBCollectionFilter != null && !moveDBCollectionFilter.select(((BTSProjectDBCollection) realObject).getCollectionName()))
-//					{
-//						return false;
-//					}
-//					if (!permissionController.authenticatedUserMayAddToDBCollection((BTSProjectDBCollection) realObject))
-//					{
-//						return false;
-//					}
-//				}
-//
-//			}
-//			
-//			return true;
-//		}
-//	}
 }

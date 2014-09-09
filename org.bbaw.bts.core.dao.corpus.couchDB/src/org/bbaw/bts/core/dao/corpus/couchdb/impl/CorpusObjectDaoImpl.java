@@ -77,7 +77,7 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_CORPUS_OBJECTS;
 		}
-		List<String> allDocs = loadDocsFromView(viewId, path, path);
+		List<String> allDocs = loadDocsFromView(viewId, path, "project_corpus");
 		List<BTSCorpusObject> results = loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{

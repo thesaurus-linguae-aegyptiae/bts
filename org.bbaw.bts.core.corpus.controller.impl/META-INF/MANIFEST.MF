@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusControllerImpl
-Bundle-SymbolicName: org.bbaw.bts.core.corpus.controller.impl
+Bundle-SymbolicName: org.bbaw.bts.core.corpus.controller.impl;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7

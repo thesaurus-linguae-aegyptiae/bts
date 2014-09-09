@@ -8,7 +8,7 @@ public interface MoveObjectAmongProjectDBCollectionHandlerController {
 
 	TreeNodeWrapper getMoveOptionsRootNode(Object selection);
 
-	boolean move(BTSDBBaseObject selection, String targetDBCollectionPath);
+	boolean move(BTSDBBaseObject selection, String targetDBCollectionPath, String sourceDBCollectionPath);
 
 	BTSFilter getMoveDBCollectionFilter(BTSDBBaseObject selection);
 

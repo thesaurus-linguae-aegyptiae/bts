@@ -4,7 +4,7 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 
 public interface MoveObjectAmongProjectDBCollectionsService {
 	
-	boolean move(BTSDBBaseObject object, String targetDBCollectionPath);
+	boolean move(BTSDBBaseObject object, String targetDBCollectionPath, String sourceDBCollectionPath);
 
 
 }

@@ -82,4 +82,6 @@ public class BTSPluginIDs
 
 	public static final String POPMENU_LEMMA_NAVIGATOR_TREE_MENU = "org.bbaw.bts.ui.corpus.lemmanavigator.popupmenu";
 
+	public static final String CMD_MOVE_OBJECTS_AMONG_PROJECTS = "org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection";
+
 }

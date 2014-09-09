@@ -26,12 +26,13 @@ public class MoveObjectAmongProjectDBCollectionHandler {
 	public void execute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSDBBaseObject selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
 			IEclipseContext context, MoveObjectAmongProjectDBCollectionHandlerController moveController, BTSProjectController projectController,
-			@Optional @Named(BTSCoreConstants.PARAM_ID_MOVE_OBEJECT_AMONG_PROJECT_DBCOLLECTIONS) String targetDBCollectionPath) {
-		
+			@Optional @Named(BTSCoreConstants.PARAM_ID_MOVE_OBEJECT_AMONG_PROJECT_TARGET_DBCOLLECTIONS) String targetDBCollectionPath) {
+		String sourceDBCollectionPath = selection.getDBCollectionKey();
+
 		// if parameter not null
 		if (targetDBCollectionPath != null && !targetDBCollectionPath.equals(selection.getDBCollectionKey()))
 		{
-			moveController.move(selection, targetDBCollectionPath);
+			moveController.move(selection, targetDBCollectionPath, sourceDBCollectionPath);
 		}
 		else 
 		{
@@ -58,7 +59,7 @@ public class MoveObjectAmongProjectDBCollectionHandler {
 				// if not null
 				if (targetDBCollectionPath != null && !targetDBCollectionPath.equals(selection.getDBCollectionKey()))
 				{
-					moveController.move(selection, targetDBCollectionPath);
+					moveController.move(selection, targetDBCollectionPath, sourceDBCollectionPath);
 				}
 			}
 			//

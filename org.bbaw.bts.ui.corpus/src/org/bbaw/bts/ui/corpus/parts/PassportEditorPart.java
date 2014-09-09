@@ -53,8 +53,10 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryEditorComposite;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryGroupEditor;
+import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryItemEditor;
 import org.bbaw.bts.ui.main.widgets.CompoundRelationsEditorComposite;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
@@ -63,6 +65,8 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -98,6 +102,8 @@ import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.ExpandEvent;
 import org.eclipse.swt.events.ExpandListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -166,6 +172,15 @@ public class PassportEditorPart {
 	@Inject
 	private PassportConfigurationController passportConfigurationController;
 
+	@Inject
+	private ECommandService commandService;
+
+	@Inject
+	private EHandlerService handlerService;
+	
+	private ComposedAdapterFactory factory = new ComposedAdapterFactory(
+			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+	
 	private Text text;
 	private Text txtAuthortextadmin;
 	private Text txtDatetextadmin;
@@ -193,12 +208,13 @@ public class PassportEditorPart {
 	private ComboViewer visibility_viewer;
 	private ComboViewer reviewState_viewer;
 	protected boolean loading;
-	private Combo projectCMB;
-	private ComboViewer project_viewer;
-	private Combo corpusCMB;
-	private ComboViewer corpus_viewer;
+
 	private Composite parent;
 	private MPart part;
+	private Text projectText;
+	private Text corpusText;
+	private Label moveAmongProjectsButton;
+	private Label moveAmongCorporaButton;
 
 
 	@Inject
@@ -477,8 +493,7 @@ public class PassportEditorPart {
 		typeCMB_Main.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 3, 1));
 		typeCMB_Main_viewer = new ComboViewer(typeCMB_Main);
-		ComposedAdapterFactory factory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(
 				factory);
 		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(
@@ -648,60 +663,76 @@ public class PassportEditorPart {
 				false, false, 1, 1));
 		lblProject.setText("Project");
 
-		projectCMB = new Combo(compTBTM_Main, SWT.READ_ONLY);
-		projectCMB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-					false, 3, 1));
+		projectText = new Text(compTBTM_Main, SWT.READ_ONLY | SWT.BORDER);
+		projectText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+		moveAmongProjectsButton = new Label(compTBTM_Main, SWT.PUSH);
+		moveAmongProjectsButton.setImage(resourceProvider.getImage(
+				Display.getCurrent(), BTSResourceProvider.IMG_PREFERENCES));
+		moveAmongProjectsButton
+				.setToolTipText("Move object among projects and text corpora.");
+		moveAmongProjectsButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
+				false, false, 1, 1));
+		((GridData) moveAmongProjectsButton.getLayoutData()).verticalIndent = 2;
+		moveAmongProjectsButton.addMouseListener(new MouseAdapter() {
 
-		project_viewer = new ComboViewer(projectCMB);
+			@Override
+			public void mouseDown(MouseEvent e) {
+				if (PassportEditorPart.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+				}
 
-		AdapterFactoryLabelProvider labelProvider_project = new AdapterFactoryLabelProvider(
-				factory);
-		AdapterFactoryContentProvider contentProvider_project = new AdapterFactoryContentProvider(
-				factory);
-
-		project_viewer.setContentProvider(contentProvider_project);
-		project_viewer.setLabelProvider(labelProvider_project);
-		TreeNodeWrapper treenodeProjects = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-		for (BTSProject inputProject : projectController.listProjects())
-		{
-			TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-			child.setObject(inputProject);
-			child.setLabel(inputProject.getName());
-			child.setParent(treenodeProjects);
-			treenodeProjects.getChildren().add(child);
-		}
-		project_viewer.setInput(treenodeProjects);
-		
-		// corpus object corpus settings
-		
-			Label lblCorpus = new Label(compTBTM_Main, SWT.NONE);
-			lblCorpus.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER,
-					false, false, 1, 1));
-			lblCorpus.setText("Corpus");
-
-			corpusCMB = new Combo(compTBTM_Main, SWT.READ_ONLY);
-			corpusCMB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
-						false, 3, 1));
-
-			corpus_viewer = new ComboViewer(corpusCMB);
-
-			AdapterFactoryLabelProvider labelProvider_corpus = new AdapterFactoryLabelProvider(
-					factory);
-			AdapterFactoryContentProvider contentProvider_corpus = new AdapterFactoryContentProvider(
-					factory);
-
-			corpus_viewer.setContentProvider(contentProvider_corpus);
-			corpus_viewer.setLabelProvider(labelProvider_corpus);
-			TreeNodeWrapper treenode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-			for (BTSTextCorpus cor : corpusNavigatorController.listTextCorpora())
-			{
-				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				child.setObject(cor);
-				child.setLabel(cor.getName());
-				child.setParent(treenode);
-				treenode.getChildren().add(child);
 			}
-			corpus_viewer.setInput(treenode);
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				if (PassportEditorPart.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(l.getParent().getBackground());
+					moveObjectAmongProjects();
+				}
+			}
+		});
+
+		// corpus object corpus settings
+
+		Label lblCorpus = new Label(compTBTM_Main, SWT.NONE);
+		lblCorpus.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+				false, 1, 1));
+		lblCorpus.setText("Corpus");
+
+		corpusText = new Text(compTBTM_Main, SWT.READ_ONLY | SWT.BORDER);
+		corpusText.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+				false, 2, 1));
+		moveAmongCorporaButton = new Label(compTBTM_Main, SWT.PUSH);
+		moveAmongCorporaButton.setImage(resourceProvider.getImage(
+				Display.getCurrent(), BTSResourceProvider.IMG_PREFERENCES));
+		moveAmongCorporaButton
+				.setToolTipText("Move object among projects and text corpora.");
+		moveAmongCorporaButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
+				false, false, 1, 1));
+		((GridData) moveAmongCorporaButton.getLayoutData()).verticalIndent = 2;
+		moveAmongCorporaButton.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+				if (PassportEditorPart.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+				}
+
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				if (PassportEditorPart.this.userMayEdit) {
+					Label l = (Label) e.getSource();
+					l.setBackground(l.getParent().getBackground());
+					moveObjectAmongProjects();
+				}
+			}
+		});
 
 		ExpandBar expandBar = new ExpandBar(compTBTM_Main, SWT.NONE);
 		expandBar.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 8,
@@ -780,6 +811,14 @@ public class PassportEditorPart {
 		xpndtmHistory.setHeight(xpndtmHistory.getControl().computeSize(
 				SWT.DEFAULT, SWT.DEFAULT).y);
 
+	}
+
+	protected void moveObjectAmongProjects() {
+
+		ParameterizedCommand cmd = commandService.createCommand(
+				BTSPluginIDs.CMD_MOVE_OBJECTS_AMONG_PROJECTS, null);
+
+		handlerService.executeHandler(cmd);
 	}
 
 	@Inject
@@ -1169,49 +1208,39 @@ public class PassportEditorPart {
 						modelToTarget_rev);
 		
 		// project
-		EMFUpdateValueStrategy targetToModel_pro = new EMFUpdateValueStrategy();
-		targetToModel_pro.setConverter(new BTSProjectToStringConverter());
-		EMFUpdateValueStrategy modelToTarget_pro = new EMFUpdateValueStrategy();
-		modelToTarget_pro.setConverter(new BTSStringToProjectConverter(
-				project_viewer));
-		IObservableValue target_pro_viewer = ViewersObservables
-				.observeSingleSelection(project_viewer);
-		Binding binding_pro = bindingContext
-				.bindValue(
-						target_pro_viewer,
-						EMFEditProperties
-								.value(editingDomain,
-										BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__PROJECT)
-								.observe(object), targetToModel_pro,
-								modelToTarget_pro);
+		AdapterFactoryLabelProvider labelProvider_project = new AdapterFactoryLabelProvider(
+				factory);
 		
+		BTSProject project = projectController.findProjectByProjectPrefix(object.getProject());
+		if (project != null)
+		{
+			projectText.setText(labelProvider_project.getText(project));
+		}
+		else
+		{
+			projectText.setText(object.getProject());
+		}
 		// corpus
 		if (corpusObject instanceof BTSTextCorpus 
 				|| corpusObject instanceof BTSAnnotation
 				|| corpusObject instanceof BTSText
 				|| corpusObject instanceof BTSTCObject)
 		{
-			corpusCMB.setEnabled(true);
-
-			EMFUpdateValueStrategy targetToModel_cor = new EMFUpdateValueStrategy();
-			targetToModel_cor.setConverter(new BTSTextCorpusToStringConverter());
-			EMFUpdateValueStrategy modelToTarget_cor = new EMFUpdateValueStrategy();
-			modelToTarget_cor.setConverter(new BTSStringToTextCorpusConverter(
-					corpus_viewer));
-			IObservableValue target_cor_viewer = ViewersObservables
-					.observeSingleSelection(corpus_viewer);
-			Binding binding_cor = bindingContext
-					.bindValue(
-							target_cor_viewer,
-							EMFEditProperties
-									.value(editingDomain,
-											BtsCorpusModelPackage.Literals.BTS_CORPUS_OBJECT__CORPUS_PREFIX)
-									.observe(object), targetToModel_cor,
-									modelToTarget_cor);
+			AdapterFactoryLabelProvider labelProvider_corpus = new AdapterFactoryLabelProvider(
+					factory);
+			BTSTextCorpus corpus = corpusNavigatorController.findTextCorpusByPrefix(object.getCorpusPrefix());
+			if (corpus != null)
+			{
+				corpusText.setText(labelProvider_corpus.getText(corpus));
+			}
+			else
+			{
+				corpusText.setText(object.getCorpusPrefix());
+			}
 		}
 		else
 		{
-			corpusCMB.setEnabled(false);
+			corpusText.setText("");
 		}
 
 		// review and creator
@@ -1297,8 +1326,6 @@ public class PassportEditorPart {
 		if (loaded && parent != null && !parent.isDisposed())
 		{
 			text.setEditable(mayEdit);
-			corpusCMB.setEnabled(mayEdit);
-			projectCMB.setEnabled(mayEdit);
 			reviewCMB_Admin.setEnabled(mayEdit);
 			sortKey_Spin.setEnabled(mayEdit);
 			subtypeCMB_Main.setEnabled(mayEdit);
