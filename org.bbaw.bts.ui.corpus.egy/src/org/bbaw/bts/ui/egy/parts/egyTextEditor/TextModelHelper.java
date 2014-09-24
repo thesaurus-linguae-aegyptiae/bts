@@ -45,23 +45,22 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 public class TextModelHelper {
 
 	private HashMap<Position, List<Annotation>> annotationMap;
-	private BTSTextContent oldTextContent;
 	private Pattern lemmaPattern = Pattern.compile("(?:case\\s+)([^:]+)(?::\\s*)");
 
-	public void updateModelFromTextContent(BTSText text, EObject eo,
+	public BTSTextContent updateModelFromTextContent(BTSTextContent textContent, EObject eo,
 			IAnnotationModel am) {
 		if (am != null) {
 			loadAnnotationMapping(eo, am);
 		}
-		if (text.getTextContent() == null) {
-			text.setTextContent(BtsCorpusModelFactory.eINSTANCE
-					.createBTSTextContent());
+		if (textContent == null) {
+			textContent = BtsCorpusModelFactory.eINSTANCE
+					.createBTSTextContent();
+		}
+		else
+		{
+			textContent.getTextItems().clear();
+		}
 
-		}
- else {
-			oldTextContent = text.getTextContent();
-			text.getTextContent().getTextItems().clear();
-		}
 		if (eo instanceof TextContent) {
 			TextContent tc = (TextContent) eo;
 			BTSSenctence lastModelSentence = null;
@@ -77,22 +76,26 @@ public class TextModelHelper {
 					}
 					if (modelSentence == null) {
 						modelSentence = makeNewModelSentence(sentence,
-								lastModelSentence, text);
+								lastModelSentence, textContent);
+					}
+					else
+					{
+						modelSentence.getSentenceItems().clear();
 					}
 					// add model sentence to btstextcontent
 					if (lastModelSentence != null) {
-						int lastIndex = text.getTextContent().getTextItems()
+						int lastIndex =textContent.getTextItems()
 								.indexOf(lastModelSentence);
-						text.getTextContent().getTextItems()
+						textContent.getTextItems()
 								.add(lastIndex + 1, modelSentence);
 					} else {
-						text.getTextContent().getTextItems()
+						textContent.getTextItems()
 								.add(0, modelSentence);
 					}
 					BTSIdentifiableItem lastItem = null;
-					EList<BTSSentenceItem> oldSentenceItems = modelSentence
-							.getSentenceItems();
-					modelSentence.getSentenceItems().clear();
+//					EList<BTSSentenceItem> oldSentenceItems = modelSentence
+//							.getSentenceItems();
+					
 					for (SentenceItem si : sentence.getItems()) {
 
 						lastItem = updateItemFromTextContent(si, lastItem,
@@ -103,14 +106,19 @@ public class TextModelHelper {
 				}
 			}
 		}
+		return textContent;
 
 	}
 
 	private <E> ModelAnnotation getModelAnnotationFromMap(INode node,
 			Class<E> clazz) {
-		List<Annotation> list =  annotationMap
+		List<Annotation> list =  null;
+		if (annotationMap != null && node != null)
+		{
+			list = annotationMap
 				.get(new Position(node.getOffset(), node
 						.getLength()));
+		}
 		if (list == null)
 		{
 			return null;
@@ -126,7 +134,7 @@ public class TextModelHelper {
 	}
 
 	private BTSSenctence makeNewModelSentence(Sentence sentence,
-			BTSSenctence lastModelSentence, BTSText text) {
+			BTSSenctence lastModelSentence, BTSTextContent textContent) {
 		BTSSenctence newModelSentence = BtsCorpusModelFactory.eINSTANCE
 				.createBTSSenctence();
 
@@ -398,8 +406,11 @@ public class TextModelHelper {
 			BTSSenctence modelSentence) {
 		BTSWord modelWord = null;
 		INode node = NodeModelUtils.getNode(word);
+		if (node != null)
+		{
 		System.out.println("word " + node.getText() + " node offset "
 				+ node.getOffset() + " node length " + node.getLength());
+		}
 		ModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class);
 		if (ma != null && ma.getModelObject() instanceof BTSWord) {
 			modelWord = (BTSWord) ma.getModelObject();

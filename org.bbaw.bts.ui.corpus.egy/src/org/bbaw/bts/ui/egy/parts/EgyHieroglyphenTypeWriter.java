@@ -41,6 +41,7 @@ import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorControlle
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -552,6 +553,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			if (selection instanceof BTSText) {
 				currentText = (BTSText) selection;
 				part.setLabel(((BTSText) selection).getName());
+
+			} 
+			else if (selection instanceof BTSLemmaEntry) {
+//				currentText = (BTSLemmaEntry) selection;
+				part.setLabel(((BTSLemmaEntry) selection).getName());
 
 			} else {
 				currentText = null;

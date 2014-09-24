@@ -49,6 +49,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -125,11 +126,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private int counter;
 
 	@Override
-	public void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
+	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
 	{
-		if (text == null || text.getTextContent() == null)
+		if (textContent == null)
 		{
-			return;
+			throw new NullPointerException("TextContent may not be null.");
 		}
 		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
 		if (relatingObjects != null && ! relatingObjects.isEmpty() && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
@@ -138,7 +139,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		}
 			
 		StringBuilder stringBuilder = new StringBuilder();
-		for (BTSTextItems textItems : text.getTextContent().getTextItems())
+		for (BTSTextItems textItems : textContent.getTextItems())
 		{
 			if (textItems instanceof BTSSenctence)
 			{
@@ -894,9 +895,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					List<Object> glyphs = new Vector<Object>();
 					if (item instanceof BTSWord) {
 						for (BTSGraphic g : ((BTSWord) item).getGraphics()) {
-							if (!g.isIgnored()) {
+//							if (!g.isIgnored()) {
+							//TODO ignore auskommentiert: Check Klammerung, Öffnen und Schließen
 								glyphs.add(g);
-							}
+//							}
 						}
 
 					} else if (item instanceof BTSMarker) {

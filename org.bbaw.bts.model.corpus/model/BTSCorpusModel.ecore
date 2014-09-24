@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="btsCorpusModel" nsURI="http://btsCorpusModel/1.0" nsPrefix="btsCorpusModel">
-  <eClassifiers xsi:type="ecore:EClass" name="BTSCorpusObject" abstract="true" eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSObject ../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSDBBaseObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSCorpusObject" abstract="true" eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="passport" eType="#//BTSPassport"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="corpusPrefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

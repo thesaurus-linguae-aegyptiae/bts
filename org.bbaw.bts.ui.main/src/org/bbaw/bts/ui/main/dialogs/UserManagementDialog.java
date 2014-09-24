@@ -102,7 +102,7 @@ public class UserManagementDialog extends TitleAreaDialog
 	@Override
 	protected void createButtonsForButtonBar(Composite parent)
 	{
-		saveButton = createSaveButton(parent, IDialogConstants.OK_ID, "Save and Close", true);
+		saveButton = createSaveButton(parent, IDialogConstants.OK_ID, "Save/Close", true);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 	}
 

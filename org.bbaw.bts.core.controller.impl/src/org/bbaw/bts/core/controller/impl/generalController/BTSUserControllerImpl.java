@@ -122,13 +122,15 @@ public class BTSUserControllerImpl implements BTSUserController {
 	@Override
 	public boolean removeUserUserGroup(BTSObject object,
 			List<BTSProject> projects) {
+		object.setState(BTSConstants.OBJECT_STATE_TERMINATED);
 		if (object instanceof BTSUser)
 		{
-			userService.remove((BTSUser) object);
+			userService.save((BTSUser) object);
+			userService.removeDatabaseUser((BTSUser) object);
 		}
 		else if (object instanceof BTSUserGroup)
 		{
-			userGroupService.remove((BTSUserGroup) object);
+			userGroupService.save((BTSUserGroup) object);
 		}
 		projectService.removeUserUserGroupFromAuthorization(object, projects);
 		return true;

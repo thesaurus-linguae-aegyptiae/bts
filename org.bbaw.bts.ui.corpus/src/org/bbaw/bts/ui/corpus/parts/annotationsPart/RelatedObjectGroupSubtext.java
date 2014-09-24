@@ -65,7 +65,7 @@ public class RelatedObjectGroupSubtext extends RelatedObjectGroup {
 
 			AnnotationModel model = new AnnotationModel();
 
-			textController.transformToDocument((BTSText) getObject(), doc, model, null, null);
+			textController.transformToDocument(((BTSText) getObject()).getTextContent(), doc, model, null, null);
 			transcriptionText.setText(doc.get());
 		}
 		String mdc = textController.transformTextToJSeshMdCString((BTSText) getObject());
@@ -73,6 +73,7 @@ public class RelatedObjectGroupSubtext extends RelatedObjectGroup {
 		{
 			BufferedImage bim = null;
 			try {
+				System.out.println(mdc);
 				bim = textController.getImageData(mdc, 100, 100 );
 			} catch (Exception e) {
 				logger.error(e);

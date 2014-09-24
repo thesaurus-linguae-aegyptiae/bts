@@ -25,6 +25,7 @@ import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
@@ -38,6 +39,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
@@ -96,6 +98,8 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CTabFolder;
+import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
@@ -349,6 +353,22 @@ public class UserManagementPart
 
 	private Link users_addGroupMembers_groups_link;
 
+	private CTabFolder user_tabFolder;
+
+	private CTabItem user_mainTabItem;
+
+	private Composite user_mainTabItemComp;
+
+	private CTabItem user_binTabItem;
+
+	private Composite user_binTabItemComp;
+
+	private TreeViewer user_bintreeViewer;
+
+	private TreeNodeWrapper user_binRoot;
+
+	private TreeNodeWrapper user_orphanNode;
+
 
 
 	public UserManagementPart()
@@ -391,7 +411,7 @@ public class UserManagementPart
 
 		ToolBar toolBar = new ToolBar(user_composite, SWT.FLAT | SWT.RIGHT);
 		user_ToolcreateGroup = new ToolItem(toolBar, SWT.NONE);
-		user_ToolcreateGroup.setText("New Group");
+		user_ToolcreateGroup.setToolTipText("New Group");
 		user_ToolcreateGroup.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_USERS_ADD));
 		user_ToolcreateGroup.addSelectionListener(new SelectionAdapter()
@@ -414,7 +434,7 @@ public class UserManagementPart
 		});
 
 		user_ToolDeleteGroup = new ToolItem(toolBar, SWT.NONE);
-		user_ToolDeleteGroup.setText("Delete");
+		user_ToolDeleteGroup.setToolTipText("Delete");
 		user_ToolDeleteGroup.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
 		user_ToolDeleteGroup.addSelectionListener(new SelectionAdapter()
@@ -434,7 +454,7 @@ public class UserManagementPart
 		});
 
 		user_ToolUndo = new ToolItem(toolBar, SWT.NONE);
-		user_ToolUndo.setText("Undo");
+		user_ToolUndo.setToolTipText("Undo");
 		user_ToolUndo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_UNDO));
 		user_ToolUndo.addSelectionListener(new SelectionAdapter()
@@ -449,7 +469,7 @@ public class UserManagementPart
 		});
 
 		user_ToolRedo = new ToolItem(toolBar, SWT.NONE);
-		user_ToolRedo.setText("Redo");
+		user_ToolRedo.setToolTipText("Redo");
 		user_ToolRedo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_REDO));
 		user_ToolRedo.addSelectionListener(new SelectionAdapter()
@@ -489,8 +509,54 @@ public class UserManagementPart
 
 		user_sashForm = new SashForm(user_composite, SWT.NONE);
 		user_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		user_tabFolder = new CTabFolder(user_sashForm, SWT.None);
+		user_tabFolder.setSimple(false);
+		user_tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
+		
+		user_tabFolder.addSelectionListener(new SelectionAdapter() {
+			
 
-		Composite composite_left = new Composite(user_sashForm, SWT.NONE);
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				CTabItem ti = user_tabFolder.getSelection();
+				Object o = ti.getData("key");
+				Object o2 = ti.getData("loaded");
+				boolean loaded = false;
+				if (o2 != null && (boolean) o2)
+				{
+					loaded = true;
+				}
+				if (o != null && o instanceof String)
+				{
+					if (((String)o).equals("bin"))
+					{
+						if (!loaded)
+						{
+							loadBinUserTreeInput(user_bintreeViewer, user_binTabItem);
+							// ti.setData("loaded", true);
+						}
+						
+					}
+				}
+				
+			}
+		});
+
+		// create main tab item
+		user_mainTabItem = new CTabItem(user_tabFolder, SWT.NONE);
+		user_mainTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_USERS));
+		user_mainTabItem.setText("Active Users");
+		user_mainTabItem.setData("key", "main");
+
+		Composite composite_left = new Composite(user_tabFolder, SWT.NONE);
+		composite_left.setLayout(new GridLayout());
+		((GridLayout) composite_left.getLayout()).marginHeight = 0;
+		((GridLayout) composite_left.getLayout()).marginWidth = 0;
+
+		user_mainTabItem.setControl(composite_left);
+
 		composite_left.setLayout(new GridLayout(2, false));
 
 		Label lblUserGroups = new Label(composite_left, SWT.NONE);
@@ -500,10 +566,36 @@ public class UserManagementPart
 		user_tree = new Tree(composite_left, SWT.BORDER);
 		user_tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
 		user_treeViewer = new TreeViewer(user_tree);
+		user_mainTabItem.setData("tv", user_tree);
+		
+		
+		// create bin tab item
+		user_binTabItem = new CTabItem(user_tabFolder, SWT.NONE);
+		user_binTabItem.setText("Bin");
+		user_binTabItem.setData("key", "bin");
+		user_binTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_BIN));
 
+		user_binTabItemComp = new Composite(user_tabFolder, SWT.NONE);
+		user_binTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
+		user_binTabItemComp.setLayout(new GridLayout());
+		((GridLayout) user_binTabItemComp.getLayout()).marginHeight = 0;
+		((GridLayout) user_binTabItemComp.getLayout()).marginWidth = 0;
+
+		user_binTabItem.setControl(user_binTabItemComp);
+
+		user_bintreeViewer = new TreeViewer(user_binTabItemComp);
+		user_bintreeViewer.getTree().setLayoutData(new GridData(GridData.FILL_BOTH));
+		user_bintreeViewer.getTree().setLayout(new GridLayout());
+		user_binTabItemComp.setData("tv", user_bintreeViewer);
+		
+
+		
 		composite_right = new Composite(user_sashForm, SWT.NONE);
 		composite_right.setLayout(new FillLayout(SWT.HORIZONTAL));
 		user_sashForm.setWeights(new int[] { 1, 1 });
+		
+		user_tabFolder.setSelection(user_mainTabItem);
 
 		////////////////roles
 		roles_tabItem = new TabItem(tabFolder, SWT.NONE);
@@ -519,7 +611,7 @@ public class UserManagementPart
 
 		ToolBar roles_toolbar = new ToolBar(composite, SWT.FLAT | SWT.RIGHT);
 		roles_ToolcreateProject = new ToolItem(roles_toolbar, SWT.NONE);
-		roles_ToolcreateProject.setText("New Project");
+		roles_ToolcreateProject.setToolTipText("New Project");
 		roles_ToolcreateProject.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_PROJECT_ADD));
 		roles_ToolcreateProject.addSelectionListener(new SelectionAdapter()
@@ -542,7 +634,7 @@ public class UserManagementPart
 		});
 
 		roles_ToolDeleteProject = new ToolItem(roles_toolbar, SWT.NONE);
-		roles_ToolDeleteProject.setText("Delete");
+		roles_ToolDeleteProject.setToolTipText("Delete");
 		roles_ToolDeleteProject.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
 		roles_ToolDeleteProject.addSelectionListener(new SelectionAdapter()
@@ -562,7 +654,7 @@ public class UserManagementPart
 		});
 
 		roles_ToolUndo = new ToolItem(roles_toolbar, SWT.NONE);
-		roles_ToolUndo.setText("Undo");
+		roles_ToolUndo.setToolTipText("Undo");
 		roles_ToolUndo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_UNDO));
 		roles_ToolUndo.addSelectionListener(new SelectionAdapter()
@@ -577,7 +669,7 @@ public class UserManagementPart
 		});
 
 		roles_ToolRedo = new ToolItem(roles_toolbar, SWT.NONE);
-		roles_ToolRedo.setText("Redo");
+		roles_ToolRedo.setToolTipText("Redo");
 		roles_ToolRedo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_REDO));
 		roles_ToolRedo.addSelectionListener(new SelectionAdapter()
@@ -638,9 +730,60 @@ public class UserManagementPart
 
 		roles_sashForm.setWeights(new int[] { 1, 1 });
 		loadUserTree();
+		user_mainTabItem.setData("loaded", true);
+
 		loadRolesTree();
 		parent.layout();
 		parent.pack();
+	}
+
+	private void loadBinUserTreeInput(final TreeViewer treeViewer, CTabItem tabitem) {
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
+		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(adapterFactory);
+		treeViewer.setContentProvider(contentProvider);
+		treeViewer.setLabelProvider(labelProvider);
+		user_selectionListener = new ISelectionChangedListener()
+		{
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event)
+			{
+				selection = (StructuredSelection) event.getSelection();
+				if (selection.getFirstElement() instanceof TreeNodeWrapper)
+				{
+					selectedTreeNode = (TreeNodeWrapper) selection.getFirstElement();
+				}
+				handleUserTreeSelection(selection, treeViewer);
+
+			}
+
+		};
+
+		treeViewer.addSelectionChangedListener(user_selectionListener);
+		treeViewer.setSorter(new ViewerSorter()
+		{
+		});
+		
+		// Create sample data
+		List<BTSObject> terminatedUsers = new ArrayList<BTSObject>();
+
+		terminatedUsers = userManagerController.listTerminatedUsersUserGroups();
+		user_binRoot = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		if (terminatedUsers != null)
+		{
+			for (BTSObject o : terminatedUsers)
+			{
+				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				child.setObject(o);
+				child.setChildrenLoaded(false);
+				user_binRoot.getChildren().add(child);
+				user_binRoot.setChildrenLoaded(true);
+			}
+		}
+
+		// Set the writeableList as input for the viewer
+		treeViewer.setInput(user_binRoot);
+		tabitem.setData("loaded", true);
 	}
 
 	protected void editUpdaters(BTSDBBaseObject object) {
@@ -772,32 +915,71 @@ public class UserManagementPart
 		};
 
 		user_treeViewer.addSelectionChangedListener(user_selectionListener);
-		user_treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		user_treeViewer.setSorter(new BTSObjectByNameViewerSorter());
 		// Create sample data
 		userGroups = new ArrayList<BTSUserGroup>();
+		Job job = new Job("load orphans") {
+			Map map;
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				userGroups = userManagerController.listUserGroups();
+				user_root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				if (userGroups != null)
+				{
+					for (BTSUserGroup o : userGroups)
+					{
+						TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+						child.setObject(o);
+						child.setChildrenLoaded(false);
+						child.setParent(user_root);
+						user_root.getChildren().add(child);
+						user_root.setChildrenLoaded(true);
+					}
+				}
+				
+				// load orphans
+				user_orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+				user_orphanNode.setLabel(BTSConstants.ORPHANS_NODE_LABEL);
+				List<BTSObject> orphans;
+				orphans = userManagerController
+						.getUserUserGroupOrphans(user_treeViewer.getFilters());
+				if (orphans != null)
+				{
+					for (BTSObject o : orphans)
+					{
+						TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+						child.setObject(o);
+						child.setChildrenLoaded(false);
+						child.setParent(user_orphanNode);
+						user_orphanNode.getChildren().add(child);
+						user_orphanNode.setChildrenLoaded(true);
+					}
+					user_root.getChildren().add(user_orphanNode);
 
-		userGroups = userManagerController.listUserGroups();
-		user_root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-		if (userGroups != null)
-		{
-			for (BTSUserGroup o : userGroups)
-			{
-				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				child.setObject(o);
-				child.setChildrenLoaded(false);
-				user_root.getChildren().add(child);
-				user_root.setChildrenLoaded(true);
-			}
+				}
+
+				// If you want to update the UI
+				sync.asyncExec(new Runnable() {
+					@Override
+					public void run() {
+						
+						// Set the writeableList as input for the viewer
+						user_treeViewer.setInput(user_root);
+					}
+				});
+				
+
+			
+			return Status.OK_STATUS;
 		}
+	};
 
-		// Set the writeableList as input for the viewer
-		user_treeViewer.setInput(user_root);
-
+	// Start the Job
+	job.schedule();
+		
 	}
 
-	private void loadChildren(final List<TreeNodeWrapper> parents, TreeViewer treeviewer, boolean includeGrandChildren)
+	private void loadChildren(final List<TreeNodeWrapper> parents, final TreeViewer treeviewer, boolean includeGrandChildren)
 	{
 		Job job = new Job("load children")
 		{
@@ -810,7 +992,7 @@ public class UserManagementPart
 					if (!parent.isChildrenLoaded())
 					{
 						final List<BTSUser> children = userManagerController.findGroupMembers(
-								(BTSUserGroup) parent.getObject(), queryResultMap, user_treeViewer, parent,
+								(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
 								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
 						// If you want to update the UI
 						sync.asyncExec(new Runnable()

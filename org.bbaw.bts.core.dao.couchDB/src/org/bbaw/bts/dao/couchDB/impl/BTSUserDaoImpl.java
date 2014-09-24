@@ -298,4 +298,17 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 		// all checks survived
 		return true;
 	}
+
+	@Override
+	public boolean removeDatabaseUser(BTSUser user) {
+		CouchDbClient dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, _USERS);
+		try {
+			dbClient.remove(COUCHDB_USERS_PREFIX + user.getUserName());
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

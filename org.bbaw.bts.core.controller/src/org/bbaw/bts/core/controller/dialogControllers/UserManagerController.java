@@ -42,9 +42,14 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 
 /**
  * The UserManagerController manages user objects and access of the userManagerPart.
+ */
+/**
+ * @author Christoph Plutte
+ *
  */
 public interface UserManagerController
 {
@@ -114,6 +119,14 @@ public interface UserManagerController
 	 * @return true, if successful
 	 */
 	boolean saveDBBaseObject(BTSDBBaseObject dbBaseObject);
+
+	
+	/** Lists terminated users and user groups.
+	 * @return all terminated users and user groups.
+	 */
+	List<BTSObject> listTerminatedUsersUserGroups();
+
+	List<BTSObject> getUserUserGroupOrphans(ViewerFilter[] filters);
 
 
 }

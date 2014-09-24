@@ -741,9 +741,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 
 	@Override
-	public boolean objectIsLoaded(String dbPath, String objectId)
+	public boolean objectIsLoaded(String path, K key)
 	{
-		URI uri = URI.createURI(getLocalDBURL() + "/" + dbPath + "/" + objectId);
+		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key);
 		Map map = ((ResourceSetImpl) connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		if (map == null)
 		{

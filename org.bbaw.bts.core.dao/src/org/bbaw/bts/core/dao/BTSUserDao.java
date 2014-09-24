@@ -62,4 +62,12 @@ public interface BTSUserDao extends GenericDao<BTSUser, String>
 	List<BTSUser> list(String admin, String objectState, String userName,
 			String passWord);
 
+	/** Remove database user leaving the btsUser unmodified.
+	 * The idea is to remove login credentials and authentication options for the given user
+	 * but keeping information on the user and user-id.
+	 * @param user user credentials to be removed from db.
+	 * @return true if successful.
+	 */
+	boolean removeDatabaseUser(BTSUser user);
+
 }

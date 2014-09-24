@@ -84,4 +84,6 @@ public class BTSPluginIDs
 
 	public static final String CMD_MOVE_OBJECTS_AMONG_PROJECTS = "org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection";
 
+	public static final String PART_ID_EGY_LEMMAEDITOR = "org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor";
+
 }

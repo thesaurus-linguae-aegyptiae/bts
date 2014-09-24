@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_b1neUD_oEeOYuPzWUW3h3g">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:basic_1="http://www.eclipse.org/ui/2010/UIModel/application/descriptor/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_b1neUD_oEeOYuPzWUW3h3g">
   <imports xsi:type="basic:PartStack" xmi:id="_p1OfoECfEeOsGJaKBBYPLQ" elementId="org.bbaw.bts.app.partstack.middle.top">
     <children xsi:type="basic:Part" xmi:id="_gt8fMD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.egy.part.editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyptEditorPart" label="EgyptEditor" closeable="true">
       <toolbar xmi:id="_j1eQ0D_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.0"/>
@@ -27,15 +27,10 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_4YJIIAawEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.3" label="Add Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_IH9P8AaxEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.4" label="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
       </menus>
-      <toolbar xmi:id="_JTo5IFw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.text.editor.toolbar" toBeRendered="false" visible="false">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_aQhekP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.egy.texteditor.handledtoolitem.addAnnotation" label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" tooltip="Add Annotation">
-          <command href="../org.bbaw.bts.ui.corpus/fragment.e4xmi#_iWpp8JV9EeOpr8TW-P04BA"/>
-        </children>
-        <children xsi:type="menu:ToolBarSeparator" xmi:id="_N7opUAayEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.0"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_LYGAcAawEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.6" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/comment-add.png" tooltip="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_RMwGsAawEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.7" label="Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_TPR_IAawEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.8" label="Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
-      </toolbar>
+      <toolbar xmi:id="_aUjDIDptEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4"/>
+    </elements>
+    <elements xsi:type="basic:Part" xmi:id="_-bjjADpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor" label="Lemma Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma.png" tooltip="Lemma Editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart">
+      <toolbar xmi:id="_6lCkcTpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_jbc5cEt8EeO3HNJi0pp4Qg" featurename="commands" parentElementId="org.bbaw.bts.application">
@@ -69,6 +64,33 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_7RgOcIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.3" label=">" tooltip="Move selection to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_9vTtoIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.4" label=">|" tooltip="Move selection to end of line." command="_mv-EEIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_AvPCcIJ5EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.5" label=">||" tooltip="Move selection to end of document." command="_guxWoIJ4EeOX95-b2sMk-w"/>
+      </toolbar>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_rwnjUDprEeS2IaZF3I1DjA" featurename="descriptors" parentElementId="org.bbaw.bts.application">
+    <elements xsi:type="basic_1:PartDescriptor" xmi:id="_xS_mwDprEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor" label="Lemma Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma.png" tooltip="Lemma Editor" dirtyable="true" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart">
+      <toolbar xmi:id="_-4ucoDprEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
+    </elements>
+    <elements xsi:type="basic_1:PartDescriptor" xmi:id="_BlJmoDpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" label="EgyTextEditor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/texts.png" closeable="true" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart">
+      <handlers xmi:id="_Fa7lYTpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handler.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddAnnotationHandler" command="_ogEtgP0_EeOsAKche49RIg"/>
+      <handlers xmi:id="_Fa7lYjpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handler.1" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddCommentHandler" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
+      <handlers xmi:id="_Fa7lYzpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handler.2" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddRubrumHandler" command="_vMxkwAawEeSOuJcvBP3MBw"/>
+      <handlers xmi:id="_Fa7lZDpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handler.3" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddGlosseHandler" command="_1r5kUAawEeSOuJcvBP3MBw"/>
+      <menus xmi:id="_Fa7lZTpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.text.viewmenu">
+        <tags>ViewMenu</tags>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_Fa7lZjpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.1" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" command="_ogEtgP0_EeOsAKche49RIg"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_Fa7lZzpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.2" label="Add Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_Fa7laDpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.3" label="Add Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_Fa7laTpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.4" label="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
+      </menus>
+      <toolbar xmi:id="_Fa7lajpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.text.editor.toolbar">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Fa7lazpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.egy.texteditor.handledtoolitem.addAnnotation" label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotation-add.png" tooltip="Add Annotation">
+          <command href="../org.bbaw.bts.ui.corpus/fragment.e4xmi#_iWpp8JV9EeOpr8TW-P04BA"/>
+        </children>
+        <children xsi:type="menu:ToolBarSeparator" xmi:id="_Fa7lbDpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.0"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Fa7lbTpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.6" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/comment-add.png" tooltip="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Fa7lbjpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.7" label="Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_Fa7lbzpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.8" label="Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
       </toolbar>
     </elements>
   </fragments>

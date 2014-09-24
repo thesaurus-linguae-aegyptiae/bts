@@ -12,7 +12,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="revisionState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSObject" abstract="true" eSuperTypes="#//AdministrativDataObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSObject" abstract="true" eSuperTypes="#//AdministrativDataObject #//BTSDBBaseObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel" references="#//BTSObject">
       <details key="documentation" value="This is the basic managed object in BTS.&#xD;&#xA;It has basic properties such as name, type etc.&#xD;&#xA;It also has typed relations.&#xD;&#xA;&#xD;&#xA;All primary objects should extend BTSObject."/>
     </eAnnotations>
@@ -28,7 +28,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="externalReferences" upperBound="-1"
         eType="#//BTSExternalReference" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSUser" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSUser" eSuperTypes="#//BTSObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel" references="#//BTSUser">
       <details key="documentation" value="This is the user-object with user details.&#xD;&#xA;&#xD;&#xA;user credentials such as password should not be persisted in this object."/>
     </eAnnotations>
@@ -72,7 +72,7 @@
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSComment" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSComment" eSuperTypes="#//BTSObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="BTSComment is used for user comments of objects in the BTS.&#xD;&#xA;Users should be able to comment other objects that extend BTSObject.&#xD;&#xA;&#xD;&#xA;References to BTSComment-objects to commented BTSObject-objects are described as relations -> see BTSObject."/>
     </eAnnotations>
@@ -117,7 +117,7 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="certainty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSConfiguration" eSuperTypes="#//BTSDBBaseObject #//BTSConfig #//BTSObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSConfiguration" eSuperTypes="#//BTSConfig #//BTSObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="BTSConfiguration is the parent object used to hold project configuration.&#xD;&#xA;All configuration details are stored in the children list inherited from BTSConfig."/>
     </eAnnotations>
@@ -191,6 +191,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="provider" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="quality" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSReferencableItem" abstract="true"
       eSuperTypes="#//BTSObject #//BTSIdentifiableItem">
@@ -267,7 +268,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="predicateList" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSUserGroup" eSuperTypes="#//BTSDBBaseObject #//BTSObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSUserGroup" eSuperTypes="#//BTSObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="User group are part of rights management system. Users can reference user groups&#xD;&#xA;and be part of user groups and thus inherite the editing rights of the user group."/>
     </eAnnotations>
@@ -297,7 +298,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyChangeSupport"
         eType="#//PropertyChangeSupport" transient="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSProject" eSuperTypes="#//BTSObject #//BTSDBBaseObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSProject" eSuperTypes="#//BTSObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="BTSProject is the root container organizing the structure of data in the database&#xD;&#xA;and its distribution on remote databases. A database may contain several projects,&#xD;&#xA;but no project may be distributed over serveral databases (local or remote).&#xD;&#xA;&#xD;&#xA;projects contain information about their database collections and their connection &#xD;&#xA;to a remote database with which they should be synchronized."/>
     </eAnnotations>

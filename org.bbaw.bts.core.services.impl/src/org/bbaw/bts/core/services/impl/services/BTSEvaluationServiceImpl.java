@@ -287,7 +287,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 		//see highest role user in dbcollection of object
 		
 		BTSProjectDBCollection dbColl = findDBProjectCollection(object);
-		if ("admin".equals(dbColl.getCollectionName()))
+		if (dbColl != null && "admin".equals(dbColl.getCollectionName()))
 		{
 			return authenticatedUserIsDBAdmin(true);
 		}

@@ -45,6 +45,7 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
+import org.elasticsearch.action.UnavailableShardsException;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
@@ -503,10 +504,15 @@ public class CouchDBManager implements DBManager
 			//FIXME suppress credentials in logging
 			logger.info(json);
 			esClient2.index(Requests.indexRequest("_river").type(collectionName).id("_meta").source(json)).actionGet();
-		} catch (MalformedURLException e)
+		} catch (Exception e)
 		{
-			// TODO Auto-generated catch block
+			System.out.println("org.elasticsearch.action.UnavailableShardsException? " + (e instanceof org.elasticsearch.action.UnavailableShardsException));
+			
 			e.printStackTrace();
+			if (e instanceof UnavailableShardsException)
+			{
+				// TODO delete elasticsearch dir
+			}
 		}
 
 	}

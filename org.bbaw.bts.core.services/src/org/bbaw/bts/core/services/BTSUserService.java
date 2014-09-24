@@ -29,9 +29,12 @@
  */
 package org.bbaw.bts.core.services;
 
+import java.util.Collection;
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSUser;
+import org.bbaw.bts.core.commons.filter.BTSFilter;
 
 
 // TODO: Auto-generated Javadoc
@@ -80,6 +83,17 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 	 * @return the list all user objects
 	 */
 	List<BTSUser> listAll(String objectState, String userName, String passWord);
+
+	
+	/** Remove database user leaving the btsUser unmodified.
+	 * The idea is to remove login credentials and authentication options for the given user
+	 * but keeping information on the user and user-id.
+	 * @param user user credentials to be removed from db.
+	 * @return true if successful.
+	 */
+	boolean removeDatabaseUser(BTSUser user);
+
+	List<BTSObject> getUserOrphans(List<BTSFilter> btsFilters, List<BTSObject> rootEntries);
 
 
 }

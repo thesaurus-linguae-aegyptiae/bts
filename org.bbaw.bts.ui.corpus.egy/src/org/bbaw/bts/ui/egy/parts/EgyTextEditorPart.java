@@ -277,8 +277,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		((GridLayout) parent.getLayout()).marginWidth = 0;
 		contextService
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
-		eventBroker.subscribe("event_text_selection/*", this);
-		eventBroker.subscribe("event_relating_objects/*", this);
+//		eventBroker.subscribe("event_text_selection/*", this);
+//		eventBroker.subscribe("event_relating_objects/*", this);
 		
 		System.out.println("EgyEditor postconstruct");
 
@@ -301,7 +301,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				{
 					int oldSelection = tabSelection;
 					tabSelection = tabFolder.getSelectionIndex();
-					if (tabSelection == oldSelection)
+					if (tabSelection == oldSelection || text == null)
 					{
 						return;
 					} else
@@ -525,7 +525,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					});
 			EObject eo = objects.get(0);
 			if (eo instanceof TextContent) {
-				textModelHelper.updateModelFromTextContent(text, eo, am);
+				text.setTextContent(textModelHelper.updateModelFromTextContent(text.getTextContent(), eo, am));
 			}
 		}
 
@@ -547,6 +547,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	protected void loadInputTranscription(BTSText localtext, List<BTSObject> localRelatingObjects)
 	{
 		text = localtext;
+		if (localtext == null)
+		{
+			if (embeddedEditor != null)
+			{
+				embeddedEditor.getViewer().setDocument(null);
+			}
+			return;
+		}
 		if (embeddedEditorComp != null)
 		{
 			embeddedEditorComp.dispose();
@@ -562,7 +570,11 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 //		this.annotationModel = model;
-		textEditorController.transformToDocument(text, doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
+		if (localtext.getTextContent() == null)
+		{
+			localtext.setTextContent(BtsCorpusModelFactory.eINSTANCE.createBTSTextContent());
+		}
+		textEditorController.transformToDocument(localtext.getTextContent(), doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
 
 		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
 				.showAnnotations(BTSAnnotationAnnotation.TYPE,
@@ -1070,8 +1082,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	@Inject
 	@Optional
 	void eventReceivedCaretEvents(
-			@EventTopic("event_text_selection/*") Object event) {
-		if (event instanceof String && event != null) {
+			@EventTopic("event_text_selection/*") final Object event) {
+		if (text !=null && event instanceof String && event != null) {
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
 				setTextSelectionEvent((String) event);
@@ -1079,7 +1091,11 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			}
 			case 1: // signtextEditor
 			{
-				signTextEditor.setTextSelectionEvent((String) event);
+				sync.asyncExec(new Runnable() {
+					public void run() {
+						signTextEditor.setTextSelectionEvent((String) event);
+					}
+				});
 				break;
 			}
 			}
@@ -1132,7 +1148,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 				} else {
 					loadInput(null);
-					part.setLabel("EgyTextEditor");
+					if (part != null)
+					{
+						part.setLabel("EgyTextEditor");
+					}
 
 				}
 			}
@@ -1355,13 +1374,19 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	}
 
-	private void loadInputSignText(BTSText text2, List<BTSObject> localRelatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap2)
+	private void loadInputSignText(BTSText localText, List<BTSObject> localRelatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap2)
 	{
 		// if (text2 == null || text2.getTextContent() == null
 		// || text2.getTextContent().getTextItems().isEmpty())
 		// text2 = createMockUp(text2);
-		signTextEditor.setInput(text2, localRelatingObjects, relatingObjectsMap2);
-
+		if (localText != null)
+		{
+			signTextEditor.setInput(localText, localText.getTextContent(), localRelatingObjects, relatingObjectsMap2);
+		}
+		else
+		{
+			signTextEditor.setInput(null, null, localRelatingObjects, relatingObjectsMap2);
+		}
 	}
 
 	private BTSText createMockUp(BTSText text2) {
@@ -1403,24 +1428,25 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	@Focus
 	public void setFocus()
 	{
-		if (tabFolder != null)
+		if (tabFolder != null && text != null)
 		{
-		switch (tabFolder.getSelectionIndex()) {
-		case 0: {
-			embeddedEditor.getViewer().getControl().setFocus();
-			break;
-		}
-		case 1: {
-			signTextEditor.setFocus();
-			break;
-		}
-		case 2: {
-			break;
-		}
+			switch (tabFolder.getSelectionIndex()) {
+				case 0: {
+					embeddedEditor.getViewer().getControl().setFocus();
+					break;
+				}
+				case 1: {
+					signTextEditor.setFocus();
+					break;
+				}
+				case 2: {
+					break;
+				}
+			}
+			
 		}
 		evaluationController
-				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
-		}
+		.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
 	@Persist

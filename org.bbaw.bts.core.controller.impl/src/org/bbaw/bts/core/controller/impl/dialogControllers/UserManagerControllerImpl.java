@@ -3,6 +3,7 @@ package org.bbaw.bts.core.controller.impl.dialogControllers;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
@@ -13,6 +14,7 @@ import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
@@ -21,6 +23,7 @@ import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class UserManagerControllerImpl implements UserManagerController
@@ -104,6 +107,35 @@ public class UserManagerControllerImpl implements UserManagerController
 //		} else if (dbBaseObject instanceof BTSUserGroup) {
 //			return usergroupService.save((BTSUserGroup) dbBaseObject);
 //		}
+	}
+
+	@Override
+	public List<BTSObject> listTerminatedUsersUserGroups() {
+		List<BTSObject> terminatedObjects = new Vector<BTSObject>();
+		terminatedObjects.addAll(userService.list(BTSConstants.OBJECT_STATE_TERMINATED));
+		terminatedObjects.addAll(usergroupService.list(BTSConstants.OBJECT_STATE_TERMINATED));
+		return terminatedObjects;
+	}
+
+	@Override
+	public List<BTSObject> getUserUserGroupOrphans(ViewerFilter[] filters) {
+		List<BTSFilter> btsFilters = null;
+		if (filters.length > 0)
+		{
+			btsFilters = new Vector<BTSFilter>(filters.length);
+			for (ViewerFilter f : filters)
+			{
+				if (f instanceof BTSFilter)
+				{
+					btsFilters.add((BTSFilter) f);
+				}
+			}
+		}
+		List<BTSObject> orphans = new Vector<BTSObject>();
+		List<BTSObject> userGroups = new Vector<BTSObject>();
+		userGroups.addAll(usergroupService.list(BTSConstants.OBJECT_STATE_ACTIVE));
+		orphans.addAll(userService.getUserOrphans(btsFilters, userGroups)); 
+		return orphans;
 	}
 
 	

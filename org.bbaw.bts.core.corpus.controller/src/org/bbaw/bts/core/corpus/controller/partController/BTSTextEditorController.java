@@ -12,11 +12,13 @@ import java.util.Map;
 
 
 
+
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.emf.ecore.EReference;
@@ -30,7 +32,7 @@ import org.eclipse.swt.graphics.Image;
 public interface BTSTextEditorController
 {
 
-	void transformToDocument(BTSText text, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap);
+	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap);
 
 	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
 			TextViewer textViewer);

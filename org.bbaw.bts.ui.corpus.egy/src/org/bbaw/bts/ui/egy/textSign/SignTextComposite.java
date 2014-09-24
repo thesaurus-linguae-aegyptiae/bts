@@ -30,6 +30,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
@@ -74,6 +75,7 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
@@ -119,7 +121,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private Composite parentComposite;
 	private FlowLayout layout;
-	private BTSText text;
 	private Figure container;
 	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
 	private Map<String, IFigure> wordMap;
@@ -139,6 +140,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 	private List<BTSObject> continuingRelatingObjects;
 	private HashMap<String, List<ElementFigure>> relatingObjectFigureMap;
+	private BTSTextContent textContent;
+	private BTSObject btsObject;
 
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
@@ -271,10 +274,16 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		container.addKeyListener(keyListener);
 
 		canvas.setContents(container);
-
+		
 		this.layout();
 		parentComposite.layout();
 
+	}
+	
+	@Override
+	public void addFocusListener(FocusListener listener) {
+		super.addFocusListener(listener);
+		canvas.addFocusListener(listener);
 	}
 
 	private void shiftLineSelection(int shift) {
@@ -393,11 +402,12 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 	}
 
-	public void setInput(BTSText text, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
-		this.text = text;
+	public void setInput(BTSObject btsObject, BTSTextContent textContent, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
+		this.textContent = textContent;
+		this.btsObject = btsObject;
 		this.relatingObjects = relatingObjects;
 		this.relatingObjectsMap = relatingObjectsMap;
-		if (text != null) {
+		if (textContent != null) {
 			loadText();
 			this.layout();
 		}
@@ -434,7 +444,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 
 		wordMap = new HashMap<String, IFigure>();
-		for (BTSTextItems item : text.getTextContent().getTextItems()) {
+		for (BTSTextItems item : textContent.getTextItems()) {
 			if (item instanceof BTSSenctence) {
 				BTSSenctence sentence = (BTSSenctence) item;
 
@@ -461,7 +471,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					}
 					if (itemFigure != null) {
 					}
-					if (relatingObjectsMap.containsKey(senItem.get_id()))
+					if (relatingObjectsMap != null && relatingObjectsMap.containsKey(senItem.get_id()))
 					{
 						List<BTSInterTextReference> list = relatingObjectsMap.get(senItem.get_id());
 						processReferences(itemFigure, list, senItem);
@@ -957,7 +967,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			e.widget = this;
 			TypedEvent ev = new TypedEvent(e);
 			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev);
-			event.data = text;
+			event.data = textContent;
 			event.getRelatingObjects().addAll(((ElementFigure)figure).getRelatingObjects());
 			BTSIdentifiableItem item = (BTSIdentifiableItem) figure.getModelObject();
 			event.setEndId(item.get_id());
@@ -1200,7 +1210,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			// relObject ist neu
 			for (BTSRelation rel : object.getRelations()) {
 				if (rel.getObjectId() != null
-						&& rel.getObjectId().equals(text.get_id())) {
+						&& rel.getObjectId().equals(btsObject.get_id())) {
 					for (BTSInterTextReference ref : rel.getParts()) {
 							Position pos = null;
 							if (ref.getBeginId() != null

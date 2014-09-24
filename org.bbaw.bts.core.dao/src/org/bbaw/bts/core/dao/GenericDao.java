@@ -165,7 +165,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 */
 	List<E> list(String path, String objectState);
 	
-	List<E> list(String dbPath, String staticQueryId,
+	List<E> list(String path, String staticQueryId,
 			String objectState);
 	/**
 	 * List available revisions of object by id.
@@ -207,7 +207,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 * @param objectId the object id
 	 * @return true, if successful
 	 */
-	boolean objectIsLoaded(String dbPath, String objectId);
+	boolean objectIsLoaded(String path, K key);
 
 	// TODO query method with result object that can hold scoring information
 	// for each object
