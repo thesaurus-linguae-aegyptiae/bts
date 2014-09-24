@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSExternalReference#getReference <em>Reference</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSExternalReference#getProvider <em>Provider</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSExternalReference#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSExternalReference#getQuality <em>Quality</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +106,31 @@ public interface BTSExternalReference extends EObject {
 	 * @generated
 	 */
 	void setType(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Quality</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Quality</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Quality</em>' attribute.
+	 * @see #setQuality(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSExternalReference_Quality()
+	 * @model
+	 * @generated
+	 */
+	String getQuality();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSExternalReference#getQuality <em>Quality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Quality</em>' attribute.
+	 * @see #getQuality()
+	 * @generated
+	 */
+	void setQuality(String value);
 
 } // BTSExternalReference

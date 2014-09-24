@@ -40,7 +40,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSUser extends BTSDBBaseObject, BTSObject {
+public interface BTSUser extends BTSObject {
 	/**
 	 * Returns the value of the '<em><b>Group Ids</b></em>' attribute list.
 	 * The list contents are of type {@link java.lang.String}.

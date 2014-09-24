@@ -11,7 +11,6 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.StyledString;
 
 /**
@@ -21,9 +20,7 @@ import org.eclipse.emf.edit.provider.StyledString;
  * @generated
  */
 public class BTSTextSentenceItemItemProvider
-	extends BTSReferencableItemItemProvider
-	implements
-		IItemStyledLabelProvider {
+	extends BTSReferencableItemItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

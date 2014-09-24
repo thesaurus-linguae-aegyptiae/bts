@@ -2,7 +2,9 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -13,6 +15,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -22,6 +25,13 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#get_rev <em>rev</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getReaders <em>Readers</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#is_deleted <em>deleted</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getType <em>Type</em>}</li>
@@ -37,6 +47,116 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implements BTSObject
 {
+	/**
+	 * The default value of the '{@link #get_rev() <em>rev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_rev()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String _REV_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_rev() <em>rev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_rev()
+	 * @generated
+	 * @ordered
+	 */
+	protected String _rev = _REV_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROJECT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected String project = PROJECT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LOCKED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean locked = LOCKED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getUpdaters() <em>Updaters</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpdaters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> updaters;
+
+	/**
+	 * The cached value of the '{@link #getReaders() <em>Readers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReaders()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> readers;
+
+	/**
+	 * The default value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean _DELETED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean _deleted = _DELETED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConflictingRevs() <em>Conflicting Revs</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConflictingRevs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> conflictingRevs;
+
 	/**
 	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -184,6 +304,126 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	protected EClass eStaticClass()
 	{
 		return BtsmodelPackage.Literals.BTS_OBJECT;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String get_rev() {
+		return _rev;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_rev(String new_rev) {
+		String old_rev = _rev;
+		_rev = new_rev;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT__REV, old_rev, _rev));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProject() {
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProject(String newProject) {
+		String oldProject = project;
+		project = newProject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT__PROJECT, oldProject, project));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isLocked() {
+		return locked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocked(boolean newLocked) {
+		boolean oldLocked = locked;
+		locked = newLocked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT__LOCKED, oldLocked, locked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getUpdaters() {
+		if (updaters == null) {
+			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_OBJECT__UPDATERS);
+		}
+		return updaters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getReaders() {
+		if (readers == null) {
+			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_OBJECT__READERS);
+		}
+		return readers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean is_deleted() {
+		return _deleted;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_deleted(boolean new_deleted) {
+		boolean old_deleted = _deleted;
+		_deleted = new_deleted;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT__DELETED, old_deleted, _deleted));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getConflictingRevs() {
+		if (conflictingRevs == null) {
+			conflictingRevs = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS);
+		}
+		return conflictingRevs;
 	}
 
 	/**
@@ -341,6 +581,17 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getDBCollectionKey() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -360,6 +611,20 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	public Object eGet(int featureID, boolean resolve, boolean coreType)
 	{
 		switch (featureID) {
+			case BtsmodelPackage.BTS_OBJECT__REV:
+				return get_rev();
+			case BtsmodelPackage.BTS_OBJECT__PROJECT:
+				return getProject();
+			case BtsmodelPackage.BTS_OBJECT__LOCKED:
+				return isLocked();
+			case BtsmodelPackage.BTS_OBJECT__UPDATERS:
+				return getUpdaters();
+			case BtsmodelPackage.BTS_OBJECT__READERS:
+				return getReaders();
+			case BtsmodelPackage.BTS_OBJECT__DELETED:
+				return is_deleted();
+			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
+				return getConflictingRevs();
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				return getSortKey();
 			case BtsmodelPackage.BTS_OBJECT__NAME:
@@ -389,6 +654,30 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	public void eSet(int featureID, Object newValue)
 	{
 		switch (featureID) {
+			case BtsmodelPackage.BTS_OBJECT__REV:
+				set_rev((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__PROJECT:
+				setProject((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__LOCKED:
+				setLocked((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__UPDATERS:
+				getUpdaters().clear();
+				getUpdaters().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__READERS:
+				getReaders().clear();
+				getReaders().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__DELETED:
+				set_deleted((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				getConflictingRevs().addAll((Collection<? extends String>)newValue);
+				return;
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				setSortKey((Integer)newValue);
 				return;
@@ -427,6 +716,27 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	public void eUnset(int featureID)
 	{
 		switch (featureID) {
+			case BtsmodelPackage.BTS_OBJECT__REV:
+				set_rev(_REV_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__PROJECT:
+				setProject(PROJECT_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__LOCKED:
+				setLocked(LOCKED_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__UPDATERS:
+				getUpdaters().clear();
+				return;
+			case BtsmodelPackage.BTS_OBJECT__READERS:
+				getReaders().clear();
+				return;
+			case BtsmodelPackage.BTS_OBJECT__DELETED:
+				set_deleted(_DELETED_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				return;
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				setSortKey(SORT_KEY_EDEFAULT);
 				return;
@@ -463,6 +773,20 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	public boolean eIsSet(int featureID)
 	{
 		switch (featureID) {
+			case BtsmodelPackage.BTS_OBJECT__REV:
+				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
+			case BtsmodelPackage.BTS_OBJECT__PROJECT:
+				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
+			case BtsmodelPackage.BTS_OBJECT__LOCKED:
+				return locked != LOCKED_EDEFAULT;
+			case BtsmodelPackage.BTS_OBJECT__UPDATERS:
+				return updaters != null && !updaters.isEmpty();
+			case BtsmodelPackage.BTS_OBJECT__READERS:
+				return readers != null && !readers.isEmpty();
+			case BtsmodelPackage.BTS_OBJECT__DELETED:
+				return _deleted != _DELETED_EDEFAULT;
+			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
+				return conflictingRevs != null && !conflictingRevs.isEmpty();
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_OBJECT__NAME:
@@ -481,6 +805,80 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return externalReferences != null && !externalReferences.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (derivedFeatureID) {
+				case BtsmodelPackage.BTS_OBJECT__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
+				case BtsmodelPackage.BTS_OBJECT__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
+				case BtsmodelPackage.BTS_OBJECT__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
+				case BtsmodelPackage.BTS_OBJECT__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
+				case BtsmodelPackage.BTS_OBJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
+				case BtsmodelPackage.BTS_OBJECT__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
+				case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_OBJECT__REV;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_OBJECT__PROJECT;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_OBJECT__LOCKED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_OBJECT__UPDATERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_OBJECT__READERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_OBJECT__DELETED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseOperationID) {
+				case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY: return BtsmodelPackage.BTS_OBJECT___GET_DB_COLLECTION_KEY;
+				default: return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsmodelPackage.BTS_OBJECT___GET_DB_COLLECTION_KEY:
+				return getDBCollectionKey();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

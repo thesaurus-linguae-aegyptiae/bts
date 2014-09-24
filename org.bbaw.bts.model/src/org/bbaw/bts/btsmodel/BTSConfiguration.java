@@ -24,7 +24,7 @@ package org.bbaw.bts.btsmodel;
  * @model
  * @generated
  */
-public interface BTSConfiguration extends BTSDBBaseObject, BTSConfig, BTSObject {
+public interface BTSConfiguration extends BTSConfig, BTSObject {
 	/**
 	 * Returns the value of the '<em><b>Provider</b></em>' attribute.
 	 * <!-- begin-user-doc -->

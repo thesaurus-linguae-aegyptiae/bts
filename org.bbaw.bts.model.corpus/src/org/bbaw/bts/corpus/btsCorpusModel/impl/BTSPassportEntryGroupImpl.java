@@ -4,6 +4,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import java.util.Collection;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
@@ -34,7 +35,7 @@ public class BTSPassportEntryGroupImpl extends BTSPassportEntryImpl implements B
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem> items;
+	protected EList<BTSPassportEntryItem> items;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -60,9 +61,9 @@ public class BTSPassportEntryGroupImpl extends BTSPassportEntryImpl implements B
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem> getItems() {
+	public EList<BTSPassportEntryItem> getItems() {
 		if (items == null) {
-			items = new EObjectContainmentEList<org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem>(org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem.class, this, BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_GROUP__ITEMS);
+			items = new EObjectContainmentEList<BTSPassportEntryItem>(BTSPassportEntryItem.class, this, BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_GROUP__ITEMS);
 		}
 		return items;
 	}
@@ -106,7 +107,7 @@ public class BTSPassportEntryGroupImpl extends BTSPassportEntryImpl implements B
 		switch (featureID) {
 			case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_GROUP__ITEMS:
 				getItems().clear();
-				getItems().addAll((Collection<? extends org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem>)newValue);
+				getItems().addAll((Collection<? extends BTSPassportEntryItem>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

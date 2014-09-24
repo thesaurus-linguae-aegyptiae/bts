@@ -183,12 +183,12 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 				return createAdministrativDataObjectAdapter();
 			}
 			@Override
-			public Adapter caseBTSObject(BTSObject object) {
-				return createBTSObjectAdapter();
-			}
-			@Override
 			public Adapter caseBTSDBBaseObject(BTSDBBaseObject object) {
 				return createBTSDBBaseObjectAdapter();
+			}
+			@Override
+			public Adapter caseBTSObject(BTSObject object) {
+				return createBTSObjectAdapter();
 			}
 			@Override
 			public Adapter caseBTSReferencableItem(BTSReferencableItem object) {

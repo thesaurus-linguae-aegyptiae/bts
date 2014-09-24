@@ -62,7 +62,18 @@ Display
 				.getIconStringOfObjectType((BTSCorpusObject) object)));
 	}
 
-//	/**
+/**
+	 * This returns the label text for the adapted class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String getText(Object object) {
+		return ((StyledString)getStyledText(object)).getString();
+	}
+
+	//	/**
 //	 * This returns the label text for the adapted class. <!-- begin-user-doc
 //	 * --> <!-- end-user-doc -->
 //	 * 

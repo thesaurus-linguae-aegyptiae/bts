@@ -5,18 +5,13 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
-
-import org.bbaw.bts.btsmodel.provider.BTSReferencableItemItemProvider;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
-import org.eclipse.emf.edit.provider.IItemStyledLabelProvider;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -27,9 +22,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BTSLemmaSubentryItemProvider
-	extends BTSReferencableItemItemProvider
-	implements
-		IItemStyledLabelProvider {
+	extends BTSCorpusObjectItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -67,7 +60,6 @@ public class BTSLemmaSubentryItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_LEMMA_SUBENTRY__PASSPORT);
 			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_LEMMA_SUBENTRY__WORDS);
 		}
 		return childrenFeatures;
@@ -140,7 +132,6 @@ public class BTSLemmaSubentryItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSLemmaSubentry.class)) {
-			case BtsCorpusModelPackage.BTS_LEMMA_SUBENTRY__PASSPORT:
 			case BtsCorpusModelPackage.BTS_LEMMA_SUBENTRY__WORDS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
@@ -161,24 +152,8 @@ public class BTSLemmaSubentryItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_LEMMA_SUBENTRY__PASSPORT,
-				 BtsCorpusModelFactory.eINSTANCE.createBTSPassport()));
-
-		newChildDescriptors.add
-			(createChildParameter
 				(BtsCorpusModelPackage.Literals.BTS_LEMMA_SUBENTRY__WORDS,
 				 BtsCorpusModelFactory.eINSTANCE.createBTSWord()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return BTSCorpusModelEditPlugin.INSTANCE;
 	}
 
 }

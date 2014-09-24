@@ -33,7 +33,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSProject extends BTSObject, BTSDBBaseObject
+public interface BTSProject extends BTSObject
 {
 	/**
 	 * Returns the value of the '<em><b>Prefix</b></em>' attribute.

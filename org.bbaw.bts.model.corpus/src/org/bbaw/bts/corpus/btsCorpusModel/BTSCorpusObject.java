@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 
 /**
@@ -23,7 +22,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
  * @model abstract="true"
  * @generated
  */
-public interface BTSCorpusObject extends BTSObject, BTSDBBaseObject {
+public interface BTSCorpusObject extends BTSObject {
 	/**
 	 * Returns the value of the '<em><b>Passport</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

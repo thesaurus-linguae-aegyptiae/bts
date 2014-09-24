@@ -702,17 +702,8 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSLemmaSubentry_Passport() {
-		return (EReference)btsLemmaSubentryEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getBTSLemmaSubentry_Words() {
-		return (EReference)btsLemmaSubentryEClass.getEStructuralFeatures().get(1);
+		return (EReference)btsLemmaSubentryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1108,7 +1099,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		createEAttribute(btsPassportEntryEClass, BTS_PASSPORT_ENTRY__KEY);
 
 		btsLemmaSubentryEClass = createEClass(BTS_LEMMA_SUBENTRY);
-		createEReference(btsLemmaSubentryEClass, BTS_LEMMA_SUBENTRY__PASSPORT);
 		createEReference(btsLemmaSubentryEClass, BTS_LEMMA_SUBENTRY__WORDS);
 
 		btsWordEClass = createEClass(BTS_WORD);
@@ -1189,7 +1179,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 
 		// Add supertypes to classes
 		btsCorpusObjectEClass.getESuperTypes().add(theBtsmodelPackage.getBTSObject());
-		btsCorpusObjectEClass.getESuperTypes().add(theBtsmodelPackage.getBTSDBBaseObject());
 		btstcObjectEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsTextEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsLemmaEntryEClass.getESuperTypes().add(this.getBTSCorpusObject());
@@ -1199,7 +1188,7 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		btsImageEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsThsEntryEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsPassportEntryEClass.getESuperTypes().add(theBtsmodelPackage.getBTSIdentifiableItem());
-		btsLemmaSubentryEClass.getESuperTypes().add(theBtsmodelPackage.getBTSReferencableItem());
+		btsLemmaSubentryEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsWordEClass.getESuperTypes().add(theBtsmodelPackage.getBTSReferencableItem());
 		btsWordEClass.getESuperTypes().add(this.getBTSAmbivalenceItem());
 		btsWordEClass.getESuperTypes().add(this.getBTSSentenceItem());
@@ -1283,7 +1272,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		initEAttribute(getBTSPassportEntry_Key(), ecorePackage.getEInt(), "key", null, 0, 1, BTSPassportEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsLemmaSubentryEClass, BTSLemmaSubentry.class, "BTSLemmaSubentry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSLemmaSubentry_Passport(), this.getBTSPassport(), null, "passport", null, 0, 1, BTSLemmaSubentry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSLemmaSubentry_Words(), this.getBTSWord(), null, "words", null, 0, -1, BTSLemmaSubentry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsWordEClass, BTSWord.class, "BTSWord", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

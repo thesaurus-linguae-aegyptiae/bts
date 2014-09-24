@@ -67,6 +67,7 @@ public class BTSExternalReferenceItemProvider
 			addReferencePropertyDescriptor(object);
 			addProviderPropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
+			addQualityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -138,6 +139,28 @@ public class BTSExternalReferenceItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the Quality feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addQualityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSExternalReference_quality_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSExternalReference_quality_feature", "_UI_BTSExternalReference_type"),
+				 BtsmodelPackage.Literals.BTS_EXTERNAL_REFERENCE__QUALITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns BTSExternalReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -192,6 +215,7 @@ public class BTSExternalReferenceItemProvider
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__REFERENCE:
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__PROVIDER:
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__QUALITY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

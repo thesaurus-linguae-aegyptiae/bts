@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getReference <em>Reference</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getProvider <em>Provider</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSExternalReferenceImpl#getQuality <em>Quality</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,6 +88,26 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getQuality() <em>Quality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQuality()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String QUALITY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getQuality() <em>Quality</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getQuality()
+	 * @generated
+	 * @ordered
+	 */
+	protected String quality = QUALITY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,6 +196,27 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String getQuality() {
+		return quality;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setQuality(String newQuality) {
+		String oldQuality = quality;
+		quality = newQuality;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_EXTERNAL_REFERENCE__QUALITY, oldQuality, quality));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
@@ -184,6 +226,8 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 				return getProvider();
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
 				return getType();
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__QUALITY:
+				return getQuality();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -204,6 +248,9 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 				return;
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
 				setType((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__QUALITY:
+				setQuality((String)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -226,6 +273,9 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
 				setType(TYPE_EDEFAULT);
 				return;
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__QUALITY:
+				setQuality(QUALITY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -244,6 +294,8 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 				return PROVIDER_EDEFAULT == null ? provider != null : !PROVIDER_EDEFAULT.equals(provider);
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE__QUALITY:
+				return QUALITY_EDEFAULT == null ? quality != null : !QUALITY_EDEFAULT.equals(quality);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -264,6 +316,8 @@ public class BTSExternalReferenceImpl extends MinimalEObjectImpl.Container imple
 		result.append(provider);
 		result.append(", type: ");
 		result.append(type);
+		result.append(", quality: ");
+		result.append(quality);
 		result.append(')');
 		return result.toString();
 	}

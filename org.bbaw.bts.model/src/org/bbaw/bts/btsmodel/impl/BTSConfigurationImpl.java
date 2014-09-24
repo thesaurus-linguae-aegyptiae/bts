@@ -7,9 +7,10 @@ import java.beans.PropertyChangeSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
-import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -21,6 +22,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -31,12 +33,19 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#get_id <em>id</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getState <em>State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRevisionState <em>Revision State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#get_rev <em>rev</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getProject <em>Project</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#isLocked <em>Locked</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getUpdaters <em>Updaters</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getReaders <em>Readers</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#is_deleted <em>deleted</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getType <em>Type</em>}</li>
@@ -51,17 +60,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConfiguration {
-	/**
-	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getChildren()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSConfig> children;
-
+public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfiguration {
 	/**
 	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -81,6 +80,26 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * @ordered
 	 */
 	protected PropertyChangeSupport propertyChangeSupport = PROPERTY_CHANGE_SUPPORT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String _ID_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_id() <em>id</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_id()
+	 * @generated
+	 * @ordered
+	 */
+	protected String _id = _ID_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' containment reference list.
@@ -151,6 +170,116 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * @ordered
 	 */
 	protected String visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #get_rev() <em>rev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_rev()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String _REV_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #get_rev() <em>rev</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #get_rev()
+	 * @generated
+	 * @ordered
+	 */
+	protected String _rev = _REV_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String PROJECT_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getProject() <em>Project</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProject()
+	 * @generated
+	 * @ordered
+	 */
+	protected String project = PROJECT_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean LOCKED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isLocked() <em>Locked</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isLocked()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean locked = LOCKED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getUpdaters() <em>Updaters</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getUpdaters()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> updaters;
+
+	/**
+	 * The cached value of the '{@link #getReaders() <em>Readers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getReaders()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> readers;
+
+	/**
+	 * The default value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean _DELETED_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #is_deleted() <em>deleted</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #is_deleted()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean _deleted = _DELETED_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getConflictingRevs() <em>Conflicting Revs</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConflictingRevs()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> conflictingRevs;
 
 	/**
 	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
@@ -411,6 +540,126 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public String get_rev() {
+		return _rev;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_rev(String new_rev) {
+		String old_rev = _rev;
+		_rev = new_rev;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__REV, old_rev, _rev));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getProject() {
+		return project;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setProject(String newProject) {
+		String oldProject = project;
+		project = newProject;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__PROJECT, oldProject, project));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isLocked() {
+		return locked;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setLocked(boolean newLocked) {
+		boolean oldLocked = locked;
+		locked = newLocked;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__LOCKED, oldLocked, locked));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getUpdaters() {
+		if (updaters == null) {
+			updaters = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIGURATION__UPDATERS);
+		}
+		return updaters;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getReaders() {
+		if (readers == null) {
+			readers = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIGURATION__READERS);
+		}
+		return readers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean is_deleted() {
+		return _deleted;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_deleted(boolean new_deleted) {
+		boolean old_deleted = _deleted;
+		_deleted = new_deleted;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__DELETED, old_deleted, _deleted));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getConflictingRevs() {
+		if (conflictingRevs == null) {
+			conflictingRevs = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS);
+		}
+		return conflictingRevs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public int getSortKey()
 	{
 		return sortKey;
@@ -434,18 +683,6 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSConfig> getChildren() {
-		if (children == null) {
-			children = new EObjectContainmentEList<BTSConfig>(BTSConfig.class, this, BtsmodelPackage.BTS_CONFIGURATION__CHILDREN);
-		}
-		return children;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public PropertyChangeSupport getPropertyChangeSupport()
 	{
 		return propertyChangeSupport;
@@ -462,6 +699,27 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 		propertyChangeSupport = newPropertyChangeSupport;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT, oldPropertyChangeSupport, propertyChangeSupport));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String get_id() {
+		return _id;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void set_id(String new_id) {
+		String old_id = _id;
+		_id = new_id;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__ID, old_id, _id));
 	}
 
 	/**
@@ -656,8 +914,6 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
-				return ((InternalEList<?>)getChildren()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
 				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
@@ -676,10 +932,10 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
-				return getChildren();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT:
 				return getPropertyChangeSupport();
+			case BtsmodelPackage.BTS_CONFIGURATION__ID:
+				return get_id();
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
 				return getRevisions();
 			case BtsmodelPackage.BTS_CONFIGURATION__STATE:
@@ -688,6 +944,20 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return getRevisionState();
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				return getVisibility();
+			case BtsmodelPackage.BTS_CONFIGURATION__REV:
+				return get_rev();
+			case BtsmodelPackage.BTS_CONFIGURATION__PROJECT:
+				return getProject();
+			case BtsmodelPackage.BTS_CONFIGURATION__LOCKED:
+				return isLocked();
+			case BtsmodelPackage.BTS_CONFIGURATION__UPDATERS:
+				return getUpdaters();
+			case BtsmodelPackage.BTS_CONFIGURATION__READERS:
+				return getReaders();
+			case BtsmodelPackage.BTS_CONFIGURATION__DELETED:
+				return is_deleted();
+			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
+				return getConflictingRevs();
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				return getSortKey();
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
@@ -719,12 +989,11 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
-				getChildren().clear();
-				getChildren().addAll((Collection<? extends BTSConfig>)newValue);
-				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport((PropertyChangeSupport)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__ID:
+				set_id((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
 				getRevisions().clear();
@@ -738,6 +1007,30 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				setVisibility((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__REV:
+				set_rev((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__PROJECT:
+				setProject((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__LOCKED:
+				setLocked((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__UPDATERS:
+				getUpdaters().clear();
+				getUpdaters().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__READERS:
+				getReaders().clear();
+				getReaders().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__DELETED:
+				set_deleted((Boolean)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
+				getConflictingRevs().clear();
+				getConflictingRevs().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				setSortKey((Integer)newValue);
@@ -780,11 +1073,11 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
-				getChildren().clear();
-				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport(PROPERTY_CHANGE_SUPPORT_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__ID:
+				set_id(_ID_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
 				getRevisions().clear();
@@ -797,6 +1090,27 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__REV:
+				set_rev(_REV_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__PROJECT:
+				setProject(PROJECT_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__LOCKED:
+				setLocked(LOCKED_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__UPDATERS:
+				getUpdaters().clear();
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__READERS:
+				getReaders().clear();
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__DELETED:
+				set_deleted(_DELETED_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
+				getConflictingRevs().clear();
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				setSortKey(SORT_KEY_EDEFAULT);
@@ -837,10 +1151,10 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN:
-				return children != null && !children.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT:
 				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
+			case BtsmodelPackage.BTS_CONFIGURATION__ID:
+				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
 				return revisions != null && !revisions.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__STATE:
@@ -849,6 +1163,20 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				return REVISION_STATE_EDEFAULT == null ? revisionState != null : !REVISION_STATE_EDEFAULT.equals(revisionState);
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
+			case BtsmodelPackage.BTS_CONFIGURATION__REV:
+				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
+			case BtsmodelPackage.BTS_CONFIGURATION__PROJECT:
+				return PROJECT_EDEFAULT == null ? project != null : !PROJECT_EDEFAULT.equals(project);
+			case BtsmodelPackage.BTS_CONFIGURATION__LOCKED:
+				return locked != LOCKED_EDEFAULT;
+			case BtsmodelPackage.BTS_CONFIGURATION__UPDATERS:
+				return updaters != null && !updaters.isEmpty();
+			case BtsmodelPackage.BTS_CONFIGURATION__READERS:
+				return readers != null && !readers.isEmpty();
+			case BtsmodelPackage.BTS_CONFIGURATION__DELETED:
+				return _deleted != _DELETED_EDEFAULT;
+			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
+				return conflictingRevs != null && !conflictingRevs.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
@@ -878,15 +1206,15 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == BTSConfig.class) {
-			switch (derivedFeatureID) {
-				case BtsmodelPackage.BTS_CONFIGURATION__CHILDREN: return BtsmodelPackage.BTS_CONFIG__CHILDREN;
-				default: return -1;
-			}
-		}
 		if (baseClass == BTSObservableObject.class) {
 			switch (derivedFeatureID) {
 				case BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (derivedFeatureID) {
+				case BtsmodelPackage.BTS_CONFIGURATION__ID: return BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 				default: return -1;
 			}
 		}
@@ -896,6 +1224,18 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				case BtsmodelPackage.BTS_CONFIGURATION__STATE: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE;
 				case BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE;
 				case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (derivedFeatureID) {
+				case BtsmodelPackage.BTS_CONFIGURATION__REV: return BtsmodelPackage.BTSDB_BASE_OBJECT__REV;
+				case BtsmodelPackage.BTS_CONFIGURATION__PROJECT: return BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT;
+				case BtsmodelPackage.BTS_CONFIGURATION__LOCKED: return BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED;
+				case BtsmodelPackage.BTS_CONFIGURATION__UPDATERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS;
+				case BtsmodelPackage.BTS_CONFIGURATION__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
+				case BtsmodelPackage.BTS_CONFIGURATION__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
+				case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS: return BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS;
 				default: return -1;
 			}
 		}
@@ -922,15 +1262,15 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == BTSConfig.class) {
-			switch (baseFeatureID) {
-				case BtsmodelPackage.BTS_CONFIG__CHILDREN: return BtsmodelPackage.BTS_CONFIGURATION__CHILDREN;
-				default: return -1;
-			}
-		}
 		if (baseClass == BTSObservableObject.class) {
 			switch (baseFeatureID) {
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT: return BtsmodelPackage.BTS_CONFIGURATION__PROPERTY_CHANGE_SUPPORT;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID: return BtsmodelPackage.BTS_CONFIGURATION__ID;
 				default: return -1;
 			}
 		}
@@ -940,6 +1280,18 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE: return BtsmodelPackage.BTS_CONFIGURATION__STATE;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE: return BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY: return BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__REV: return BtsmodelPackage.BTS_CONFIGURATION__REV;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__PROJECT: return BtsmodelPackage.BTS_CONFIGURATION__PROJECT;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED: return BtsmodelPackage.BTS_CONFIGURATION__LOCKED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__UPDATERS: return BtsmodelPackage.BTS_CONFIGURATION__UPDATERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_CONFIGURATION__READERS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_CONFIGURATION__DELETED;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS;
 				default: return -1;
 			}
 		}
@@ -967,11 +1319,6 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass)
 	{
-		if (baseClass == BTSConfig.class) {
-			switch (baseOperationID) {
-				default: return -1;
-			}
-		}
 		if (baseClass == BTSObservableObject.class) {
 			switch (baseOperationID) {
 				case BtsmodelPackage.BTS_OBSERVABLE_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER: return BtsmodelPackage.BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
@@ -979,8 +1326,19 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 				default: return -1;
 			}
 		}
+		if (baseClass == BTSIdentifiableItem.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == AdministrativDataObject.class) {
 			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseOperationID) {
+				case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY: return BtsmodelPackage.BTS_CONFIGURATION___GET_DB_COLLECTION_KEY;
 				default: return -1;
 			}
 		}
@@ -1001,6 +1359,8 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
 		switch (operationID) {
+			case BtsmodelPackage.BTS_CONFIGURATION___GET_DB_COLLECTION_KEY:
+				return getDBCollectionKey();
 			case BtsmodelPackage.BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
@@ -1023,12 +1383,28 @@ public class BTSConfigurationImpl extends BTSDBBaseObjectImpl implements BTSConf
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (propertyChangeSupport: ");
 		result.append(propertyChangeSupport);
+		result.append(", _id: ");
+		result.append(_id);
 		result.append(", state: ");
 		result.append(state);
 		result.append(", revisionState: ");
 		result.append(revisionState);
 		result.append(", visibility: ");
 		result.append(visibility);
+		result.append(", _rev: ");
+		result.append(_rev);
+		result.append(", project: ");
+		result.append(project);
+		result.append(", locked: ");
+		result.append(locked);
+		result.append(", updaters: ");
+		result.append(updaters);
+		result.append(", readers: ");
+		result.append(readers);
+		result.append(", _deleted: ");
+		result.append(_deleted);
+		result.append(", conflictingRevs: ");
+		result.append(conflictingRevs);
 		result.append(", sortKey: ");
 		result.append(sortKey);
 		result.append(", name: ");

@@ -1051,6 +1051,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSExternalReference_Quality() {
+		return (EAttribute)btsExternalReferenceEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSReferencableItem() {
 		return btsReferencableItemEClass;
 	}
@@ -2021,6 +2030,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsExternalReferenceEClass, BTS_EXTERNAL_REFERENCE__REFERENCE);
 		createEAttribute(btsExternalReferenceEClass, BTS_EXTERNAL_REFERENCE__PROVIDER);
 		createEAttribute(btsExternalReferenceEClass, BTS_EXTERNAL_REFERENCE__TYPE);
+		createEAttribute(btsExternalReferenceEClass, BTS_EXTERNAL_REFERENCE__QUALITY);
 
 		btsReferencableItemEClass = createEClass(BTS_REFERENCABLE_ITEM);
 		createEAttribute(btsReferencableItemEClass, BTS_REFERENCABLE_ITEM__COMMENT);
@@ -2164,12 +2174,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		administrativDataObjectEClass.getESuperTypes().add(this.getBTSObservableObject());
 		administrativDataObjectEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsObjectEClass.getESuperTypes().add(this.getAdministrativDataObject());
-		btsUserEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsObjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsUserEClass.getESuperTypes().add(this.getBTSObject());
-		btsCommentEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsCommentEClass.getESuperTypes().add(this.getBTSObject());
 		btsRelationEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
-		btsConfigurationEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSConfig());
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSObject());
 		btsdbBaseObjectEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
@@ -2180,10 +2188,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsConfigItemEClass.getESuperTypes().add(this.getBTSObservableObject());
 		btsConfigItemEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsPassportEditorConfigEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
-		btsUserGroupEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsUserGroupEClass.getESuperTypes().add(this.getBTSObject());
 		btsProjectEClass.getESuperTypes().add(this.getBTSObject());
-		btsProjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsdbConnectionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsWorkflowRuleEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsOperatorEClass.getESuperTypes().add(this.getBTSWorkflowRuleItem());
@@ -2284,6 +2290,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSExternalReference_Reference(), ecorePackage.getEString(), "reference", null, 0, 1, BTSExternalReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSExternalReference_Provider(), ecorePackage.getEString(), "provider", null, 0, 1, BTSExternalReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSExternalReference_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSExternalReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSExternalReference_Quality(), ecorePackage.getEString(), "quality", null, 0, 1, BTSExternalReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsReferencableItemEClass, BTSReferencableItem.class, "BTSReferencableItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSReferencableItem_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSReferencableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

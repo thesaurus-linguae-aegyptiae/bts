@@ -124,6 +124,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__VISIBILITY = BtsmodelPackage.BTS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__REV = BtsmodelPackage.BTS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__PROJECT = BtsmodelPackage.BTS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__LOCKED = BtsmodelPackage.BTS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__UPDATERS = BtsmodelPackage.BTS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__READERS = BtsmodelPackage.BTS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__DELETED = BtsmodelPackage.BTS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__CONFLICTING_REVS = BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -196,76 +259,13 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_OBJECT__EXTERNAL_REFERENCES;
 
 	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__REV = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__PROJECT = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__LOCKED = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__UPDATERS = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__READERS = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__DELETED = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__CONFLICTING_REVS = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 6;
-
-	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__PASSPORT = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 7;
+	int BTS_CORPUS_OBJECT__PASSPORT = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
@@ -274,7 +274,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 8;
+	int BTS_CORPUS_OBJECT__CORPUS_PREFIX = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
@@ -283,7 +283,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__WORK_PHASE = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 9;
+	int BTS_CORPUS_OBJECT__WORK_PHASE = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTS Corpus Object</em>' class.
@@ -292,7 +292,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 10;
+	int BTS_CORPUS_OBJECT_FEATURE_COUNT = BtsmodelPackage.BTS_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -319,7 +319,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_OBJECT_OPERATION_COUNT + 0;
+	int BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Corpus Object</em>' class.
@@ -328,7 +328,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT_OPERATION_COUNT = BtsmodelPackage.BTS_OBJECT_OPERATION_COUNT + 1;
+	int BTS_CORPUS_OBJECT_OPERATION_COUNT = BtsmodelPackage.BTS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTCObjectImpl <em>BTSTC Object</em>}' class.
@@ -393,6 +393,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -465,69 +528,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -666,6 +666,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -736,69 +799,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -946,6 +946,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_ENTRY__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1016,69 +1079,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_ENTRY__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -1353,6 +1353,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_ANNOTATION__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1423,69 +1486,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -1851,6 +1851,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1921,69 +1984,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -2131,6 +2131,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_IMAGE__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2201,69 +2264,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -2475,6 +2475,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_THS_ENTRY__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2545,69 +2608,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_THS_ENTRY__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -2735,7 +2735,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
+	int BTS_LEMMA_SUBENTRY__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -2744,7 +2744,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
+	int BTS_LEMMA_SUBENTRY__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
@@ -2753,7 +2753,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
+	int BTS_LEMMA_SUBENTRY__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -2762,7 +2762,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
+	int BTS_LEMMA_SUBENTRY__STATE = BTS_CORPUS_OBJECT__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -2771,7 +2771,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
+	int BTS_LEMMA_SUBENTRY__REVISION_STATE = BTS_CORPUS_OBJECT__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -2780,7 +2780,70 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+	int BTS_LEMMA_SUBENTRY__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -2789,7 +2852,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
+	int BTS_LEMMA_SUBENTRY__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -2798,7 +2861,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
+	int BTS_LEMMA_SUBENTRY__NAME = BTS_CORPUS_OBJECT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -2807,7 +2870,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
+	int BTS_LEMMA_SUBENTRY__TYPE = BTS_CORPUS_OBJECT__TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2816,7 +2879,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
+	int BTS_LEMMA_SUBENTRY__SUBTYPE = BTS_CORPUS_OBJECT__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Code</b></em>' attribute.
@@ -2825,7 +2888,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
+	int BTS_LEMMA_SUBENTRY__CODE = BTS_CORPUS_OBJECT__CODE;
 
 	/**
 	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
@@ -2834,7 +2897,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
+	int BTS_LEMMA_SUBENTRY__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
@@ -2843,7 +2906,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
+	int BTS_LEMMA_SUBENTRY__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
@@ -2852,34 +2915,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
+	int BTS_LEMMA_SUBENTRY__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
 
 	/**
 	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
@@ -2888,7 +2924,25 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__PASSPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_LEMMA_SUBENTRY__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
+
+	/**
+	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY__WORK_PHASE = BTS_CORPUS_OBJECT__WORK_PHASE;
 
 	/**
 	 * The feature id for the '<em><b>Words</b></em>' containment reference list.
@@ -2897,7 +2951,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY__WORDS = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
+	int BTS_LEMMA_SUBENTRY__WORDS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>BTS Lemma Subentry</em>' class.
@@ -2906,7 +2960,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 2;
+	int BTS_LEMMA_SUBENTRY_FEATURE_COUNT = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -2915,7 +2969,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_LEMMA_SUBENTRY___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -2924,7 +2978,16 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_LEMMA_SUBENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_SUBENTRY___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Lemma Subentry</em>' class.
@@ -2933,7 +2996,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_SUBENTRY_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_LEMMA_SUBENTRY_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl <em>BTS Word</em>}' class.
@@ -2998,6 +3061,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_WORD__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -3198,6 +3324,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_WORD___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Word</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3269,6 +3404,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_ITEMS__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -3395,6 +3593,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Items</em>' class.
@@ -3543,6 +3750,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENCTENCE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
 
 	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3687,6 +3957,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENCTENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Senctence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3758,6 +4037,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_MARKER__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -3895,6 +4237,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_MARKER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Marker</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3966,6 +4317,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_SENTENCE_ITEM__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -4094,6 +4508,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Sentence Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4165,6 +4588,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_AMBIVALENCE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -4302,6 +4788,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_AMBIVALENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Ambivalence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4373,6 +4868,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_CASE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -4510,6 +5068,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_CASE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
+
+	/**
 	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4581,6 +5148,69 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_SENTENCE_ITEM__VISIBILITY = BTS_SENTENCE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__REV = BTS_SENTENCE_ITEM__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__PROJECT = BTS_SENTENCE_ITEM__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__LOCKED = BTS_SENTENCE_ITEM__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__UPDATERS = BTS_SENTENCE_ITEM__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__READERS = BTS_SENTENCE_ITEM__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__DELETED = BTS_SENTENCE_ITEM__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__CONFLICTING_REVS = BTS_SENTENCE_ITEM__CONFLICTING_REVS;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -4707,6 +5337,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___GET_DB_COLLECTION_KEY = BTS_SENTENCE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Sentence Item</em>' class.
@@ -5400,17 +6039,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBTSLemmaSubentry();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry#getPassport <em>Passport</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Passport</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry#getPassport()
-	 * @see #getBTSLemmaSubentry()
-	 * @generated
-	 */
-	EReference getBTSLemmaSubentry_Passport();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry#getWords <em>Words</em>}'.
@@ -6204,14 +6832,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BTS_LEMMA_SUBENTRY = eINSTANCE.getBTSLemmaSubentry();
-
-		/**
-		 * The meta object literal for the '<em><b>Passport</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_LEMMA_SUBENTRY__PASSPORT = eINSTANCE.getBTSLemmaSubentry_Passport();
 
 		/**
 		 * The meta object literal for the '<em><b>Words</b></em>' containment reference list feature.

@@ -80,6 +80,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				BTSObject btsObject = (BTSObject)theEObject;
 				T result = caseBTSObject(btsObject);
 				if (result == null) result = caseAdministrativDataObject(btsObject);
+				if (result == null) result = caseBTSDBBaseObject(btsObject);
 				if (result == null) result = caseBTSObservableObject(btsObject);
 				if (result == null) result = caseBTSIdentifiableItem(btsObject);
 				if (result == null) result = defaultCase(theEObject);
@@ -88,22 +89,22 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			case BtsmodelPackage.BTS_USER: {
 				BTSUser btsUser = (BTSUser)theEObject;
 				T result = caseBTSUser(btsUser);
-				if (result == null) result = caseBTSDBBaseObject(btsUser);
 				if (result == null) result = caseBTSObject(btsUser);
 				if (result == null) result = caseAdministrativDataObject(btsUser);
-				if (result == null) result = caseBTSIdentifiableItem(btsUser);
+				if (result == null) result = caseBTSDBBaseObject(btsUser);
 				if (result == null) result = caseBTSObservableObject(btsUser);
+				if (result == null) result = caseBTSIdentifiableItem(btsUser);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
 			case BtsmodelPackage.BTS_COMMENT: {
 				BTSComment btsComment = (BTSComment)theEObject;
 				T result = caseBTSComment(btsComment);
-				if (result == null) result = caseBTSDBBaseObject(btsComment);
 				if (result == null) result = caseBTSObject(btsComment);
 				if (result == null) result = caseAdministrativDataObject(btsComment);
-				if (result == null) result = caseBTSIdentifiableItem(btsComment);
+				if (result == null) result = caseBTSDBBaseObject(btsComment);
 				if (result == null) result = caseBTSObservableObject(btsComment);
+				if (result == null) result = caseBTSIdentifiableItem(btsComment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -135,12 +136,12 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			case BtsmodelPackage.BTS_CONFIGURATION: {
 				BTSConfiguration btsConfiguration = (BTSConfiguration)theEObject;
 				T result = caseBTSConfiguration(btsConfiguration);
-				if (result == null) result = caseBTSDBBaseObject(btsConfiguration);
 				if (result == null) result = caseBTSConfig(btsConfiguration);
 				if (result == null) result = caseBTSObject(btsConfiguration);
 				if (result == null) result = caseAdministrativDataObject(btsConfiguration);
-				if (result == null) result = caseBTSIdentifiableItem(btsConfiguration);
+				if (result == null) result = caseBTSDBBaseObject(btsConfiguration);
 				if (result == null) result = caseBTSObservableObject(btsConfiguration);
+				if (result == null) result = caseBTSIdentifiableItem(btsConfiguration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -175,6 +176,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				T result = caseBTSReferencableItem(btsReferencableItem);
 				if (result == null) result = caseBTSObject(btsReferencableItem);
 				if (result == null) result = caseAdministrativDataObject(btsReferencableItem);
+				if (result == null) result = caseBTSDBBaseObject(btsReferencableItem);
 				if (result == null) result = caseBTSObservableObject(btsReferencableItem);
 				if (result == null) result = caseBTSIdentifiableItem(btsReferencableItem);
 				if (result == null) result = defaultCase(theEObject);
@@ -205,11 +207,11 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			case BtsmodelPackage.BTS_USER_GROUP: {
 				BTSUserGroup btsUserGroup = (BTSUserGroup)theEObject;
 				T result = caseBTSUserGroup(btsUserGroup);
-				if (result == null) result = caseBTSDBBaseObject(btsUserGroup);
 				if (result == null) result = caseBTSObject(btsUserGroup);
 				if (result == null) result = caseAdministrativDataObject(btsUserGroup);
-				if (result == null) result = caseBTSIdentifiableItem(btsUserGroup);
+				if (result == null) result = caseBTSDBBaseObject(btsUserGroup);
 				if (result == null) result = caseBTSObservableObject(btsUserGroup);
+				if (result == null) result = caseBTSIdentifiableItem(btsUserGroup);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -229,8 +231,8 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 				BTSProject btsProject = (BTSProject)theEObject;
 				T result = caseBTSProject(btsProject);
 				if (result == null) result = caseBTSObject(btsProject);
-				if (result == null) result = caseBTSDBBaseObject(btsProject);
 				if (result == null) result = caseAdministrativDataObject(btsProject);
+				if (result == null) result = caseBTSDBBaseObject(btsProject);
 				if (result == null) result = caseBTSObservableObject(btsProject);
 				if (result == null) result = caseBTSIdentifiableItem(btsProject);
 				if (result == null) result = defaultCase(theEObject);

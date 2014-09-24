@@ -35,7 +35,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface BTSObject extends AdministrativDataObject
+public interface BTSObject extends AdministrativDataObject, BTSDBBaseObject
 {
 	/**
 	 * Returns the value of the '<em><b>Sort Key</b></em>' attribute. <!--

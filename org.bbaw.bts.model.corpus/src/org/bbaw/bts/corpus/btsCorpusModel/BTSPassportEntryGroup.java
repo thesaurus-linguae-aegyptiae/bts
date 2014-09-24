@@ -35,6 +35,6 @@ public interface BTSPassportEntryGroup extends BTSPassportEntry {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryItem> getItems();
+	EList<BTSPassportEntryItem> getItems();
 
 } // BTSPassportEntryGroup
