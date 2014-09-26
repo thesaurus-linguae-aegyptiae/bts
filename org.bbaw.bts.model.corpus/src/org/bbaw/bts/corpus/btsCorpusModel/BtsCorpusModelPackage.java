@@ -1117,22 +1117,22 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_ENTRY__IGNORE = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Subentries</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__SUBENTRIES = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Words</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_ENTRY__WORDS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 2;
+	int BTS_LEMMA_ENTRY__WORDS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Translations</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__TRANSLATIONS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTS Lemma Entry</em>' class.
@@ -2719,286 +2719,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CONTENT_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaSubentryImpl <em>BTS Lemma Subentry</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaSubentryImpl
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSLemmaSubentry()
-	 * @generated
-	 */
-	int BTS_LEMMA_SUBENTRY = 13;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__ID = BTS_CORPUS_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__STATE = BTS_CORPUS_OBJECT__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__REVISION_STATE = BTS_CORPUS_OBJECT__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__REV = BTS_CORPUS_OBJECT__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__READERS = BTS_CORPUS_OBJECT__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__DELETED = BTS_CORPUS_OBJECT__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__NAME = BTS_CORPUS_OBJECT__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__TYPE = BTS_CORPUS_OBJECT__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__SUBTYPE = BTS_CORPUS_OBJECT__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__CODE = BTS_CORPUS_OBJECT__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
-
-	/**
-	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
-
-	/**
-	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__WORK_PHASE = BTS_CORPUS_OBJECT__WORK_PHASE;
-
-	/**
-	 * The feature id for the '<em><b>Words</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY__WORDS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>BTS Lemma Subentry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY_FEATURE_COUNT = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
-
-	/**
-	 * The number of operations of the '<em>BTS Lemma Subentry</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_SUBENTRY_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl <em>BTS Word</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3006,7 +2726,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSWord()
 	 * @generated
 	 */
-	int BTS_WORD = 14;
+	int BTS_WORD = 13;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3349,7 +3069,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSTextItems()
 	 * @generated
 	 */
-	int BTS_TEXT_ITEMS = 15;
+	int BTS_TEXT_ITEMS = 14;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3620,7 +3340,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSGraphic()
 	 * @generated
 	 */
-	int BTS_GRAPHIC = 16;
+	int BTS_GRAPHIC = 15;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3693,7 +3413,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSSenctence()
 	 * @generated
 	 */
-	int BTS_SENCTENCE = 17;
+	int BTS_SENCTENCE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3982,7 +3702,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSMarker()
 	 * @generated
 	 */
-	int BTS_MARKER = 18;
+	int BTS_MARKER = 17;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -4262,7 +3982,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSSentenceItem()
 	 * @generated
 	 */
-	int BTS_SENTENCE_ITEM = 19;
+	int BTS_SENTENCE_ITEM = 18;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -4533,7 +4253,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAmbivalence()
 	 * @generated
 	 */
-	int BTS_AMBIVALENCE = 20;
+	int BTS_AMBIVALENCE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -4813,7 +4533,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSLemmaCase()
 	 * @generated
 	 */
-	int BTS_LEMMA_CASE = 21;
+	int BTS_LEMMA_CASE = 20;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -5093,7 +4813,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSTextSentenceItem()
 	 * @generated
 	 */
-	int BTS_TEXT_SENTENCE_ITEM = 22;
+	int BTS_TEXT_SENTENCE_ITEM = 21;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -5364,7 +5084,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAmbivalenceItem()
 	 * @generated
 	 */
-	int BTS_AMBIVALENCE_ITEM = 23;
+	int BTS_AMBIVALENCE_ITEM = 22;
 
 	/**
 	 * The number of structural features of the '<em>BTS Ambivalence Item</em>' class.
@@ -5393,7 +5113,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSPassportEntryItem()
 	 * @generated
 	 */
-	int BTS_PASSPORT_ENTRY_ITEM = 24;
+	int BTS_PASSPORT_ENTRY_ITEM = 23;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -5645,17 +5365,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	EAttribute getBTSLemmaEntry_Ignore();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry#getSubentries <em>Subentries</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Subentries</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry#getSubentries()
-	 * @see #getBTSLemmaEntry()
-	 * @generated
-	 */
-	EReference getBTSLemmaEntry_Subentries();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry#getWords <em>Words</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5665,6 +5374,17 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBTSLemmaEntry_Words();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry#getTranslations <em>Translations</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Translations</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry#getTranslations()
+	 * @see #getBTSLemmaEntry()
+	 * @generated
+	 */
+	EReference getBTSLemmaEntry_Translations();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport <em>BTS Passport</em>}'.
@@ -6029,27 +5749,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSPassportEntry_Key();
-
-	/**
-	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry <em>BTS Lemma Subentry</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>BTS Lemma Subentry</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry
-	 * @generated
-	 */
-	EClass getBTSLemmaSubentry();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry#getWords <em>Words</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Words</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry#getWords()
-	 * @see #getBTSLemmaSubentry()
-	 * @generated
-	 */
-	EReference getBTSLemmaSubentry_Words();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSWord <em>BTS Word</em>}'.
@@ -6518,20 +6217,20 @@ public interface BtsCorpusModelPackage extends EPackage {
 		EAttribute BTS_LEMMA_ENTRY__IGNORE = eINSTANCE.getBTSLemmaEntry_Ignore();
 
 		/**
-		 * The meta object literal for the '<em><b>Subentries</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_LEMMA_ENTRY__SUBENTRIES = eINSTANCE.getBTSLemmaEntry_Subentries();
-
-		/**
 		 * The meta object literal for the '<em><b>Words</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference BTS_LEMMA_ENTRY__WORDS = eINSTANCE.getBTSLemmaEntry_Words();
+
+		/**
+		 * The meta object literal for the '<em><b>Translations</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_LEMMA_ENTRY__TRANSLATIONS = eINSTANCE.getBTSLemmaEntry_Translations();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl <em>BTS Passport</em>}' class.
@@ -6822,24 +6521,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_PASSPORT_ENTRY__KEY = eINSTANCE.getBTSPassportEntry_Key();
-
-		/**
-		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaSubentryImpl <em>BTS Lemma Subentry</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaSubentryImpl
-		 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSLemmaSubentry()
-		 * @generated
-		 */
-		EClass BTS_LEMMA_SUBENTRY = eINSTANCE.getBTSLemmaSubentry();
-
-		/**
-		 * The meta object literal for the '<em><b>Words</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_LEMMA_SUBENTRY__WORDS = eINSTANCE.getBTSLemmaSubentry_Words();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl <em>BTS Word</em>}' class.

@@ -36,8 +36,6 @@ package org.bbaw.bts.core.dao.util;
  */
 public class DaoConstants
 {
-
-
 	/** The Constant VIEW_ALL_BTSANNOTATIONS. */
 	public static final String VIEW_ALL_BTSANNOTATIONS = "project_corpus/all_btsannotations";
 

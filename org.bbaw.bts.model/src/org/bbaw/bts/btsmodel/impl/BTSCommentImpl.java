@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -194,6 +195,11 @@ public class BTSCommentImpl extends BTSObjectImpl implements BTSComment {
 		result.append(tags);
 		result.append(')');
 		return result.toString();
+	}
+	
+	@Override
+	public String getDBCollectionKey() {
+		return getProject() + "_admin";
 	}
 
 } //BTSCommentImpl

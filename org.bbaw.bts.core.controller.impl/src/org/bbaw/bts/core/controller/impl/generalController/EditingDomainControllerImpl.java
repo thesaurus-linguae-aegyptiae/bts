@@ -63,7 +63,7 @@ public class EditingDomainControllerImpl implements EditingDomainController {
 		if (!(object instanceof EObject)) {
 			return null;
 		}
-		BTSDBBaseObject parentDBBaseObject = null;
+		EObject parentDBBaseObject = null;
 		if (object instanceof BTSDBBaseObject) {
 			parentDBBaseObject = (BTSDBBaseObject) object;
 		} else {
@@ -83,9 +83,9 @@ public class EditingDomainControllerImpl implements EditingDomainController {
 		return domain;
 	}
 
-	private BTSDBBaseObject findRecursivelyParent(EObject object) {
+	private EObject findRecursivelyParent(EObject object) {
 		if (object.eContainer() == null) {
-			return null;
+			return object;
 		} else {
 			if (object.eContainer() instanceof BTSDBBaseObject) {
 				return (BTSDBBaseObject) object.eContainer();

@@ -154,8 +154,10 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private String suffix;
 	private String mdcProposals;
 
-	public EgyHieroglyphenTypeWriter()
+	@Inject
+	public EgyHieroglyphenTypeWriter(EPartService partService)
 	{
+		part = partService.findPart(BTSPluginIDs.PART_ID_HIEROGLYPH_TW);
 	}
 
 	/**
@@ -355,7 +357,6 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		{
 			setSelection(selectionObject);
 		}
-		part = partService.findPart(BTSPluginIDs.PART_ID_HIEROGLYPH_TW);
 
 	}
 
@@ -519,7 +520,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private void shiftCaret(String eventTopic) {
 		System.out.println(eventTopic);
 		saveMdCstring(currentWord);
-		eventBroker.post(eventTopic, currentWord);
+		eventBroker.post(eventTopic, eventTopic);
 
 	}
 
@@ -568,29 +569,36 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		}
 		
 	}
+
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
-			if (!selfSelecting) {
+		if (!selfSelecting) {
 
+			if (selection != null) {
 
-				if (selection != null) {
+				if (!selection.getSelectedItems().isEmpty()
+						&& !selection.getSelectedItems().get(0)
+								.equals(selectionObject)
+						&& selection.getSelectedItems().get(0) instanceof BTSWord) {
 
-					if (loaded)
-					{
-					if (!selection.getSelectedItems().isEmpty() 
-							&& !selection.getSelectedItems().get(0).equals(selectionObject) 
-							&& selection.getSelectedItems().get(0) instanceof BTSWord) {
-
-							selectionObject = (BTSObject) selection.getSelectedItems().get(0);
-							setSelectionInteral(selection.getSelectedItems().get(0));
-							ignoreGlyph_Button.setSelection(false);
+					selectionObject = (BTSObject) selection.getSelectedItems()
+							.get(0);
+					if (loaded) {
+						setSelectionInteral(selection.getSelectedItems().get(0));
+						ignoreGlyph_Button.setSelection(false);
 					}
-					}
+
 				}
-			} else {
-				selfSelecting = false;
+				else
+				{
+					selectionObject = null;
+				}
+
 			}
+		} else {
+			selfSelecting = false;
+		}
 	}
 	
 	private void purgeAll() {
@@ -761,10 +769,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 					+ beforeImageMdC);
 			if (!normalizedMdC.equals(beforeImageMdC))
 			{
-			normalizedMdC = removeIgnoreMarker(normalizedMdC);
-			System.out.println("htw saveMdCString " + normalizedMdC);
-			textEditorController.updateBTSWordFromMdCString(word,
-					normalizedMdC, editingDomain);
+				normalizedMdC = removeIgnoreMarker(normalizedMdC);
+				System.out.println("htw saveMdCString " + normalizedMdC);
+				textEditorController.updateBTSWordFromMdCString(word,
+						normalizedMdC, editingDomain);
+				
 			}
 		}
 

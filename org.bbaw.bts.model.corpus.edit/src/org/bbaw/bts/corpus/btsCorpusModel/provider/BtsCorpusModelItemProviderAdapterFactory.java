@@ -335,29 +335,6 @@ public class BtsCorpusModelItemProviderAdapterFactory extends BtsCorpusModelAdap
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected BTSLemmaSubentryItemProvider btsLemmaSubentryItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createBTSLemmaSubentryAdapter() {
-		if (btsLemmaSubentryItemProvider == null) {
-			btsLemmaSubentryItemProvider = new BTSLemmaSubentryItemProvider(this);
-		}
-
-		return btsLemmaSubentryItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.corpus.btsCorpusModel.BTSWord} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -628,7 +605,6 @@ public class BtsCorpusModelItemProviderAdapterFactory extends BtsCorpusModelAdap
 		if (btsCorpusHeaderItemProvider != null) btsCorpusHeaderItemProvider.dispose();
 		if (btsThsEntryItemProvider != null) btsThsEntryItemProvider.dispose();
 		if (btsTextContentItemProvider != null) btsTextContentItemProvider.dispose();
-		if (btsLemmaSubentryItemProvider != null) btsLemmaSubentryItemProvider.dispose();
 		if (btsWordItemProvider != null) btsWordItemProvider.dispose();
 		if (btsGraphicItemProvider != null) btsGraphicItemProvider.dispose();
 		if (btsSenctenceItemProvider != null) btsSenctenceItemProvider.dispose();

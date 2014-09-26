@@ -198,18 +198,6 @@ public class BtsCorpusModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case BtsCorpusModelPackage.BTS_LEMMA_SUBENTRY: {
-				BTSLemmaSubentry btsLemmaSubentry = (BTSLemmaSubentry)theEObject;
-				T result = caseBTSLemmaSubentry(btsLemmaSubentry);
-				if (result == null) result = caseBTSCorpusObject(btsLemmaSubentry);
-				if (result == null) result = caseBTSObject(btsLemmaSubentry);
-				if (result == null) result = caseAdministrativDataObject(btsLemmaSubentry);
-				if (result == null) result = caseBTSDBBaseObject(btsLemmaSubentry);
-				if (result == null) result = caseBTSObservableObject(btsLemmaSubentry);
-				if (result == null) result = caseBTSIdentifiableItem(btsLemmaSubentry);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case BtsCorpusModelPackage.BTS_WORD: {
 				BTSWord btsWord = (BTSWord)theEObject;
 				T result = caseBTSWord(btsWord);
@@ -535,21 +523,6 @@ public class BtsCorpusModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSPassportEntry(BTSPassportEntry object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>BTS Lemma Subentry</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>BTS Lemma Subentry</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBTSLemmaSubentry(BTSLemmaSubentry object) {
 		return null;
 	}
 

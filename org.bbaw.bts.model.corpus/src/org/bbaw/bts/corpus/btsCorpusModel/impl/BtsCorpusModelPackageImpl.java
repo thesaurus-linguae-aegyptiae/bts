@@ -12,7 +12,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
@@ -134,13 +133,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * @generated
 	 */
 	private EClass btsPassportEntryEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass btsLemmaSubentryEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -369,7 +361,7 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSLemmaEntry_Subentries() {
+	public EReference getBTSLemmaEntry_Words() {
 		return (EReference)btsLemmaEntryEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -378,7 +370,7 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSLemmaEntry_Words() {
+	public EReference getBTSLemmaEntry_Translations() {
 		return (EReference)btsLemmaEntryEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -686,24 +678,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 */
 	public EAttribute getBTSPassportEntry_Key() {
 		return (EAttribute)btsPassportEntryEClass.getEStructuralFeatures().get(7);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getBTSLemmaSubentry() {
-		return btsLemmaSubentryEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getBTSLemmaSubentry_Words() {
-		return (EReference)btsLemmaSubentryEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1052,8 +1026,8 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 
 		btsLemmaEntryEClass = createEClass(BTS_LEMMA_ENTRY);
 		createEAttribute(btsLemmaEntryEClass, BTS_LEMMA_ENTRY__IGNORE);
-		createEReference(btsLemmaEntryEClass, BTS_LEMMA_ENTRY__SUBENTRIES);
 		createEReference(btsLemmaEntryEClass, BTS_LEMMA_ENTRY__WORDS);
+		createEReference(btsLemmaEntryEClass, BTS_LEMMA_ENTRY__TRANSLATIONS);
 
 		btsPassportEClass = createEClass(BTS_PASSPORT);
 		createEAttribute(btsPassportEClass, BTS_PASSPORT__PROTOCOL);
@@ -1097,9 +1071,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		createEReference(btsPassportEntryEClass, BTS_PASSPORT_ENTRY__LABEL);
 		createEAttribute(btsPassportEntryEClass, BTS_PASSPORT_ENTRY__NAME);
 		createEAttribute(btsPassportEntryEClass, BTS_PASSPORT_ENTRY__KEY);
-
-		btsLemmaSubentryEClass = createEClass(BTS_LEMMA_SUBENTRY);
-		createEReference(btsLemmaSubentryEClass, BTS_LEMMA_SUBENTRY__WORDS);
 
 		btsWordEClass = createEClass(BTS_WORD);
 		createEReference(btsWordEClass, BTS_WORD__TRANSLATION);
@@ -1188,7 +1159,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		btsImageEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsThsEntryEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsPassportEntryEClass.getESuperTypes().add(theBtsmodelPackage.getBTSIdentifiableItem());
-		btsLemmaSubentryEClass.getESuperTypes().add(this.getBTSCorpusObject());
 		btsWordEClass.getESuperTypes().add(theBtsmodelPackage.getBTSReferencableItem());
 		btsWordEClass.getESuperTypes().add(this.getBTSAmbivalenceItem());
 		btsWordEClass.getESuperTypes().add(this.getBTSSentenceItem());
@@ -1224,8 +1194,8 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 
 		initEClass(btsLemmaEntryEClass, BTSLemmaEntry.class, "BTSLemmaEntry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSLemmaEntry_Ignore(), ecorePackage.getEBoolean(), "ignore", null, 0, 1, BTSLemmaEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSLemmaEntry_Subentries(), this.getBTSLemmaSubentry(), null, "subentries", null, 0, -1, BTSLemmaEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSLemmaEntry_Words(), this.getBTSWord(), null, "words", null, 0, -1, BTSLemmaEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBTSLemmaEntry_Translations(), theBtsmodelPackage.getBTSTranslations(), null, "translations", null, 0, 1, BTSLemmaEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsPassportEClass, BTSPassport.class, "BTSPassport", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSPassport_Protocol(), ecorePackage.getEString(), "protocol", null, 0, 1, BTSPassport.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1270,9 +1240,6 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		initEReference(getBTSPassportEntry_Label(), theBtsmodelPackage.getBTSTranslations(), null, "label", null, 0, 1, BTSPassportEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSPassportEntry_Name(), ecorePackage.getEString(), "name", null, 0, 1, BTSPassportEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSPassportEntry_Key(), ecorePackage.getEInt(), "key", null, 0, 1, BTSPassportEntry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(btsLemmaSubentryEClass, BTSLemmaSubentry.class, "BTSLemmaSubentry", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBTSLemmaSubentry_Words(), this.getBTSWord(), null, "words", null, 0, -1, BTSLemmaSubentry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsWordEClass, BTSWord.class, "BTSWord", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSWord_Translation(), theBtsmodelPackage.getBTSTranslations(), null, "translation", null, 0, 1, BTSWord.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

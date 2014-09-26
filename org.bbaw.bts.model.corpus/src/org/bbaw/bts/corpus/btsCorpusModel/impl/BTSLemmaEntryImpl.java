@@ -3,9 +3,8 @@
 package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import java.util.Collection;
-
+import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -25,8 +24,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaEntryImpl#isIgnore <em>Ignore</em>}</li>
- *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaEntryImpl#getSubentries <em>Subentries</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaEntryImpl#getWords <em>Words</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaEntryImpl#getTranslations <em>Translations</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,16 +53,6 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 	protected boolean ignore = IGNORE_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSubentries() <em>Subentries</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSubentries()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSLemmaSubentry> subentries;
-
-	/**
 	 * The cached value of the '{@link #getWords() <em>Words</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -72,6 +61,16 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 	 * @ordered
 	 */
 	protected EList<BTSWord> words;
+
+	/**
+	 * The cached value of the '{@link #getTranslations() <em>Translations</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getTranslations()
+	 * @generated
+	 * @ordered
+	 */
+	protected BTSTranslations translations;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -118,18 +117,6 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSLemmaSubentry> getSubentries() {
-		if (subentries == null) {
-			subentries = new EObjectContainmentEList<BTSLemmaSubentry>(BTSLemmaSubentry.class, this, BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES);
-		}
-		return subentries;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<BTSWord> getWords() {
 		if (words == null) {
 			words = new EObjectContainmentEList<BTSWord>(BTSWord.class, this, BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS);
@@ -142,13 +129,56 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public BTSTranslations getTranslations() {
+		return translations;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTranslations(BTSTranslations newTranslations, NotificationChain msgs) {
+		BTSTranslations oldTranslations = translations;
+		translations = newTranslations;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS, oldTranslations, newTranslations);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTranslations(BTSTranslations newTranslations) {
+		if (newTranslations != translations) {
+			NotificationChain msgs = null;
+			if (translations != null)
+				msgs = ((InternalEObject)translations).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS, null, msgs);
+			if (newTranslations != null)
+				msgs = ((InternalEObject)newTranslations).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS, null, msgs);
+			msgs = basicSetTranslations(newTranslations, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS, newTranslations, newTranslations));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES:
-				return ((InternalEList<?>)getSubentries()).basicRemove(otherEnd, msgs);
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS:
 				return ((InternalEList<?>)getWords()).basicRemove(otherEnd, msgs);
+			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS:
+				return basicSetTranslations(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -163,10 +193,10 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 		switch (featureID) {
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__IGNORE:
 				return isIgnore();
-			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES:
-				return getSubentries();
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS:
 				return getWords();
+			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS:
+				return getTranslations();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -183,13 +213,12 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__IGNORE:
 				setIgnore((Boolean)newValue);
 				return;
-			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES:
-				getSubentries().clear();
-				getSubentries().addAll((Collection<? extends BTSLemmaSubentry>)newValue);
-				return;
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS:
 				getWords().clear();
 				getWords().addAll((Collection<? extends BTSWord>)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS:
+				setTranslations((BTSTranslations)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -206,11 +235,11 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__IGNORE:
 				setIgnore(IGNORE_EDEFAULT);
 				return;
-			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES:
-				getSubentries().clear();
-				return;
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS:
 				getWords().clear();
+				return;
+			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS:
+				setTranslations((BTSTranslations)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -226,10 +255,10 @@ public class BTSLemmaEntryImpl extends BTSCorpusObjectImpl implements BTSLemmaEn
 		switch (featureID) {
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__IGNORE:
 				return ignore != IGNORE_EDEFAULT;
-			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES:
-				return subentries != null && !subentries.isEmpty();
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS:
 				return words != null && !words.isEmpty();
+			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS:
+				return translations != null;
 		}
 		return super.eIsSet(featureID);
 	}

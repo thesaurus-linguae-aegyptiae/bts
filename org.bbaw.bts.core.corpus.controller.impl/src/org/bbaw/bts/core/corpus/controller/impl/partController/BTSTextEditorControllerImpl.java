@@ -128,10 +128,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
 	{
-		if (textContent == null)
-		{
-			throw new NullPointerException("TextContent may not be null.");
-		}
+//		if (textContent == null)
+//		{
+//			throw new NullPointerException("TextContent may not be null.");
+//		}
 		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
 		if (relatingObjects != null && ! relatingObjects.isEmpty() && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
 		{
@@ -139,6 +139,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		}
 			
 		StringBuilder stringBuilder = new StringBuilder();
+		if (textContent == null)
+		{
+			doc.set(stringBuilder.toString());
+			return;
+		}
 		for (BTSTextItems textItems : textContent.getTextItems())
 		{
 			if (textItems instanceof BTSSenctence)

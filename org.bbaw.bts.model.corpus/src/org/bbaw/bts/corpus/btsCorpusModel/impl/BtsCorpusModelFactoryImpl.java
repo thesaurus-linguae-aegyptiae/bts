@@ -67,7 +67,6 @@ public class BtsCorpusModelFactoryImpl extends EFactoryImpl implements BtsCorpus
 			case BtsCorpusModelPackage.BTS_CORPUS_HEADER: return createBTSCorpusHeader();
 			case BtsCorpusModelPackage.BTS_THS_ENTRY: return createBTSThsEntry();
 			case BtsCorpusModelPackage.BTS_TEXT_CONTENT: return createBTSTextContent();
-			case BtsCorpusModelPackage.BTS_LEMMA_SUBENTRY: return createBTSLemmaSubentry();
 			case BtsCorpusModelPackage.BTS_WORD: return createBTSWord();
 			case BtsCorpusModelPackage.BTS_GRAPHIC: return createBTSGraphic();
 			case BtsCorpusModelPackage.BTS_SENCTENCE: return createBTSSenctence();
@@ -222,17 +221,6 @@ public class BtsCorpusModelFactoryImpl extends EFactoryImpl implements BtsCorpus
 		BTSTextContentImpl btsTextContent = new BTSTextContentImpl();
 		setIdentifiableId(btsTextContent);
 		return btsTextContent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generatedNOT
-	 */
-	public BTSLemmaSubentry createBTSLemmaSubentry() {
-		BTSLemmaSubentryImpl btsLemmaSubentry = new BTSLemmaSubentryImpl();
-		setIdentifiableId(btsLemmaSubentry);
-		return btsLemmaSubentry;
 	}
 
 	/**

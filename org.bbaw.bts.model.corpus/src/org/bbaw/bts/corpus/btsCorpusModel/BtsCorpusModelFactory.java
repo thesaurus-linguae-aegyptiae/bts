@@ -112,15 +112,6 @@ public interface BtsCorpusModelFactory extends EFactory {
 	BTSThsEntry createBTSThsEntry();
 
 	/**
-	 * Returns a new object of class '<em>BTS Lemma Subentry</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>BTS Lemma Subentry</em>'.
-	 * @generated
-	 */
-	BTSLemmaSubentry createBTSLemmaSubentry();
-
-	/**
 	 * Returns a new object of class '<em>BTS Word</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

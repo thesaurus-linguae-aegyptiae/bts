@@ -264,6 +264,11 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	protected String queryId;
 	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 
+	@Inject
+	public EgyTextEditorPart(EPartService partService) {
+		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
+
+	}
 
 	/**
 	 * @param parent
@@ -491,7 +496,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		sashForm.setWeights(new int[] { 6, 1 });
 		parent.layout();
 		
-		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
 
 	}
 
@@ -547,14 +551,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	protected void loadInputTranscription(BTSText localtext, List<BTSObject> localRelatingObjects)
 	{
 		text = localtext;
-		if (localtext == null)
-		{
-			if (embeddedEditor != null)
-			{
-				embeddedEditor.getViewer().setDocument(null);
-			}
-			return;
-		}
+
 		if (embeddedEditorComp != null)
 		{
 			embeddedEditorComp.dispose();
@@ -570,12 +567,19 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 //		this.annotationModel = model;
-		if (localtext.getTextContent() == null)
+		if (localtext == null)
 		{
-			localtext.setTextContent(BtsCorpusModelFactory.eINSTANCE.createBTSTextContent());
-		}
-		textEditorController.transformToDocument(localtext.getTextContent(), doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
+			textEditorController.transformToDocument(null, doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
 
+		}
+		else
+		{
+			if (localtext.getTextContent() == null)
+			{
+				localtext.setTextContent(BtsCorpusModelFactory.eINSTANCE.createBTSTextContent());
+			}
+			textEditorController.transformToDocument(localtext.getTextContent(), doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
+		}
 		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
 				.showAnnotations(BTSAnnotationAnnotation.TYPE,
 						BTSCommentAnnotation.TYPE,
@@ -1134,14 +1138,20 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			// do nothing
 			return;
 		} else if (selection != null && !selection.equals(selectedTextItem)) {
+			
+			
 			if (selection instanceof BTSCorpusObject) {
-				purgeCache();
-				if (editingDomain != null) {
-					editingDomain.getCommandStack().removeCommandStackListener(
-							commandStackListener);
-				}
+				
 				// TODO save configurable this is autosave!!!
-				save();
+				if (text != null)
+				{
+					purgeCache();
+					if (editingDomain != null) {
+						editingDomain.getCommandStack().removeCommandStackListener(
+								commandStackListener);
+					}
+					save();
+				}
 				if (selection instanceof BTSText) {
 					loadInput((BTSCorpusObject) selection);
 					part.setLabel(selection.getName());
@@ -1152,7 +1162,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					{
 						part.setLabel("EgyTextEditor");
 					}
-
+					text = null;
 				}
 			}
 			if ((selection instanceof BTSText)) {
@@ -1358,15 +1368,15 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			relatingObjects = null;
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
-				loadInputTranscription(text, relatingObjects);
+				loadInputTranscription(null, relatingObjects);
 				break;
 			}
 			case 1: {
-				loadInputSignText(text, relatingObjects, relatingObjectsMap);
+				loadInputSignText(null, relatingObjects, relatingObjectsMap);
 				break;
 			}
 			case 2: {
-				loadInputJSesh(text, relatingObjects);
+				loadInputJSesh(null, relatingObjects);
 				break;
 			}
 			}
@@ -1419,6 +1429,11 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		modelAnnotationMap = new HashMap<String, ModelAnnotation>();
 		relatingObjectsAnnotationMap = new HashMap<EObject, List<ModelAnnotation>>();
 		localCommandCacheSet.clear();
+		if (editingDomain != null) {
+			// remove commandstacklistener from old selection
+			editingDomain.getCommandStack().removeCommandStackListener(
+					commandStackListener);
+		}
 		if (relatingObjectsMap != null)
 		{
 			relatingObjectsMap.clear();
@@ -1457,19 +1472,20 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			localCommandCacheSet.clear();
 			switch (tabFolder.getSelectionIndex())
 			{
-			case 0: {
-				updateModelFromTranscription();
-				break;
+				case 0: {
+					updateModelFromTranscription();
+					break;
+				}
+				case 1: {
+					updateModelFromSignText();
+					break;
+				}
+				case 2: {
+					updateModelFromJSesh();
+					break;
+				}
 			}
-			case 1: {
-				updateModelFromSignText();
-				break;
-			}
-			case 2: {
-				updateModelFromJSesh();
-				break;
-			}
-			}
+			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
 			dirty.setDirty(!success);
 			return success;
@@ -1494,6 +1510,23 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						workaround = true;
 						partService.activate(p);
 					}
+					if (selection instanceof BTSTextSelectionEvent && ((BTSTextSelectionEvent)selection).data instanceof EObject)
+					{
+						// remove listener from old editingDomain
+						if (editingDomain != null)
+						{
+						editingDomain.getCommandStack().removeCommandStackListener(
+								commandStackListener);
+						}
+						// get selected item, add listener to domain
+						if (!((BTSTextSelectionEvent)selection).getSelectedItems().isEmpty())
+						{
+							editingDomain = getEditingDomain((EObject)  ((BTSTextSelectionEvent)selection).getSelectedItems().get(0));
+							editingDomain.getCommandStack().addCommandStackListener(
+									getCommandStackListener());
+						}
+						
+					}
 					selectionService.setSelection(selection);
 //					processEditorSelection(selection);
 					if (workaround) {
@@ -1505,6 +1538,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		}
 	}
 
+	private EditingDomain getEditingDomain(EObject editingObject) {
+		return editingDomainController.getEditingDomain(editingObject);
+	}
+	
 	@Override
 	public void handleEvent(Event event) {
 		// System.out.println(arg0);

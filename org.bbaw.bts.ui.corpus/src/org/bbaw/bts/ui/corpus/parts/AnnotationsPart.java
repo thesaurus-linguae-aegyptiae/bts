@@ -178,10 +178,14 @@ public class AnnotationsPart implements EventHandler {
 	@Inject
 	@Optional
 	void eventReceivedRelatingObjectsLoadedEvents(
-			@EventTopic("event_text_relating_objects/*") Object event) {
+			@EventTopic("event_text_relating_objects/*") final Object event) {
 
 		if (event != null && event instanceof List) {
-			loadRelatingObjects((List<BTSObject>)event);
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					loadRelatingObjects((List<BTSObject>)event);
+				}
+			});
 
 		}
 	}

@@ -5,6 +5,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
@@ -87,8 +88,8 @@ public class BTSLemmaEntryItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__SUBENTRIES);
 			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__WORDS);
+			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__TRANSLATIONS);
 		}
 		return childrenFeatures;
 	}
@@ -170,8 +171,8 @@ Display
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__IGNORE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
-			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__SUBENTRIES:
 			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__WORDS:
+			case BtsCorpusModelPackage.BTS_LEMMA_ENTRY__TRANSLATIONS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -191,13 +192,13 @@ Display
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__SUBENTRIES,
-				 BtsCorpusModelFactory.eINSTANCE.createBTSLemmaSubentry()));
+				(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__WORDS,
+				 BtsCorpusModelFactory.eINSTANCE.createBTSWord()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__WORDS,
-				 BtsCorpusModelFactory.eINSTANCE.createBTSWord()));
+				(BtsCorpusModelPackage.Literals.BTS_LEMMA_ENTRY__TRANSLATIONS,
+				 BtsmodelFactory.eINSTANCE.createBTSTranslations()));
 	}
 
 }

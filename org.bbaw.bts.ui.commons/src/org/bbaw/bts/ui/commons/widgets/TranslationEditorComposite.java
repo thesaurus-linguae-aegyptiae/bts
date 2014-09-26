@@ -50,6 +50,7 @@ import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -144,11 +145,15 @@ public class TranslationEditorComposite extends Composite {
 	 */
 	public void load(BTSTranslations translations2,
 			EditingDomain editingDomain, boolean required) {
-		Assert.isNotNull(translations2);
-		Assert.isNotNull(editingDomain);
 		this.translations = translations2;
 		this.domain = editingDomain;
 		this.required = required;
+		if (translations == null)
+		{
+			text.setText("");
+			return;
+		}
+		
 		List ls = translations.getLanguages();
 		List<String> additionalInputs = new Vector<String>(ls.size());
 		for (Object o : ls) {
@@ -288,5 +293,28 @@ public class TranslationEditorComposite extends Composite {
 		}
 
 	}
+	
+	@Override
+	public void addFocusListener(FocusListener listener) {
+		super.addFocusListener(listener);
+		text.addFocusListener(listener);
+		combo.addFocusListener(listener);
+	}
 
+	@Override
+	public void removeFocusListener(FocusListener listener) {
+		super.removeFocusListener(listener);
+		text.removeFocusListener(listener);
+		combo.removeFocusListener(listener);
+	}
+
+	public void save() {
+		if (translations == null)
+		{
+			return;
+		}
+		BTSTranslation trans = translations.getBTSTranslation(combo.getItem(combo.getSelectionIndex()));
+		trans.setValue(text.getText());
+		
+	}
 }
