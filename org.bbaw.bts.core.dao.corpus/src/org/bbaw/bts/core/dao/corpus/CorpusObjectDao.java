@@ -15,4 +15,5 @@ public interface CorpusObjectDao extends GenericDao<BTSCorpusObject, String>
 	List<BTSPassportEntry> getPassportEntryProposals(
 			BTSQueryRequest query, String indexName, String indexType);
 
+
 }

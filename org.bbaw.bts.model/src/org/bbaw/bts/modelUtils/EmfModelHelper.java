@@ -229,7 +229,7 @@ public class EmfModelHelper
 				} else if (objectWithChanges.eIsSet(eAttribute))
 				{
 					target.eSet(getTarget(eAttribute), objectWithChanges.eGet(eAttribute));
-				} else
+				} else if(!eAttribute.isTransient())
 				{
 					Object attribute = objectWithChanges.eGet(eAttribute);
 					if (eAttribute.getEType().getInstanceTypeName().equals("java.lang.String"))

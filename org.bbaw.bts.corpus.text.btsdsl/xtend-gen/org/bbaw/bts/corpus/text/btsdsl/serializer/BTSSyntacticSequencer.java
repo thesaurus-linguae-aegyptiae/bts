@@ -3,8 +3,6 @@
  */
 package org.bbaw.bts.corpus.text.btsdsl.serializer;
 
-import org.bbaw.bts.corpus.text.btsdsl.serializer.AbstractBTSSyntacticSequencer;
-
 @SuppressWarnings("all")
-public class BTSSyntacticSequencer extends AbstractBTSSyntacticSequencer {
+public class BTSSyntacticSequencer /* implements AbstractBTSSyntacticSequencer  */{
 }

@@ -1,14 +1,18 @@
 package org.bbaw.bts.core.dao.corpus.couchdb.impl;
 
 import java.util.List;
+import java.util.Vector;
+import java.util.regex.Matcher;
 
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSThsEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 
-public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implements BTSThsEntryDao
+public class BTSThsEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSThsEntry, String> implements BTSThsEntryDao
 {
 
 	@Override
@@ -31,7 +35,7 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, "ths");
-		List<BTSThsEntry> results = loadObjectsFromStrings(allDocs, path);
+		List<BTSThsEntry> results = loadPartialObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
@@ -109,7 +113,7 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 //			allDocs = view.includeDocs(true).query();
 //		}
 		List<String> allDocs = loadDocsFromView(staticQueryId, path, "ths");
-		List<BTSThsEntry> results = loadObjectsFromStrings(allDocs, path);
+		List<BTSThsEntry> results = loadPartialObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(staticQueryId, path);
@@ -158,4 +162,11 @@ public class BTSThsEntryDaoImpl extends CouchDBDao<BTSThsEntry, String> implemen
 //		}
 //		return results;
 	}
+
+	@Override
+	protected BTSThsEntry createObject() {
+		return BtsCorpusModelFactory.eINSTANCE.createBTSThsEntry();
+	}
+	
+	
 }

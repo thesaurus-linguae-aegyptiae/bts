@@ -5,6 +5,7 @@ package org.bbaw.bts.corpus.text.egy.egyDsl.impl;
 import java.util.Collection;
 
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
+import org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle;
 import org.bbaw.bts.corpus.text.egy.egyDsl.WordPart;
 
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -12,7 +13,6 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
@@ -43,7 +43,7 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
    * @generated
    * @ordered
    */
-  protected EList<EObject> wChar;
+  protected EList<WordMiddle> wChar;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,11 +71,11 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<EObject> getWChar()
+  public EList<WordMiddle> getWChar()
   {
     if (wChar == null)
     {
-      wChar = new EObjectContainmentEList<EObject>(EObject.class, this, EgyDslPackage.WORD_PART__WCHAR);
+      wChar = new EObjectContainmentEList<WordMiddle>(WordMiddle.class, this, EgyDslPackage.WORD_PART__WCHAR);
     }
     return wChar;
   }
@@ -125,7 +125,7 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
     {
       case EgyDslPackage.WORD_PART__WCHAR:
         getWChar().clear();
-        getWChar().addAll((Collection<? extends EObject>)newValue);
+        getWChar().addAll((Collection<? extends WordMiddle>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

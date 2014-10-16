@@ -17,9 +17,9 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -45,6 +45,7 @@ import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
@@ -80,7 +81,25 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	protected String host;
 	protected int port;
 
-	private Pattern idPattern = Pattern.compile(DaoConstants.ID_PATTERN);
+	protected Pattern idPattern = Pattern.compile(DaoConstants.ID_PATTERN);
+	
+	protected Pattern namePattern = Pattern.compile(DaoConstants.NAME_PATTERN);
+
+	protected Pattern visibilityPattern = Pattern.compile(DaoConstants.VISIBILITY_PATTERN);
+	
+	protected Pattern readersPattern = Pattern.compile(DaoConstants.READERS_PATTERN);
+
+	protected Pattern updatersPattern = Pattern.compile(DaoConstants.UPDATERS_PATTERN);
+	
+	protected Pattern memberPattern = Pattern.compile(DaoConstants.MEMBER_PATTERN);
+
+	protected Pattern revisionStatePattern = Pattern.compile(DaoConstants.REVISIONSTATE_PATTERN);
+
+	protected Pattern eclassPattern = Pattern.compile(DaoConstants.ECLASS_PATTERN);
+	
+	protected Pattern typePattern = Pattern.compile(DaoConstants.TYPE_PATTERN);
+
+	protected Pattern subtypePattern = Pattern.compile(DaoConstants.SUBTYPE_PATTERN);
 
 	@SuppressWarnings("unchecked")
 	public CouchDBDao()
@@ -299,6 +318,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			Object o = resource.getContents().get(0);
 			if (o instanceof BTSDBBaseObject)
 			{
+				if (((BTSDBBaseObject) o).getDBCollectionKey() == null)
+				{
+					((BTSDBBaseObject) o).setDBCollectionKey(path);
+				}
 				checkForConflicts((BTSDBBaseObject) o, path);
 				return (E) o;
 			}
@@ -339,6 +362,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			Object o =  tempResource.getContents().iterator().next();
 			if (o instanceof BTSDBBaseObject)
 			{
+				if (((BTSDBBaseObject) o).getDBCollectionKey() == null)
+				{
+					((BTSDBBaseObject) o).setDBCollectionKey(path);
+				}
 				return (E)o;
 			}
 		}
@@ -391,6 +418,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			Object o = resource.getContents().get(0);
 			if (o instanceof BTSDBBaseObject)
 			{
+				
 				//FIXME check for conflicts , get path from uri
 //				checkForConflicts((BTSCorpusObject) o, path);
 				return (E) o;
@@ -537,114 +565,199 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		// dbClient.syncDesignDocsWithDb(); // sync all
 	}
 
-	public String extractIdFromObjectString(String objectString)
+	protected String extractIdFromObjectString(String objectString)
 	{
-
 		Matcher m = idPattern.matcher(objectString);
-
+		String s = null;
 		if (m.find())
 		{
-			logger.info(m.group(2));
+			s= m.group(2);
 		}
-		return m.group(2);
+		return s;
+	}
+	
+	protected String extractNameFromObjectString(String objectString)
+	{
+		Matcher m = namePattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+	
+	protected String extractEClassFromObjectString(String objectString)
+	{
+		Matcher m = eclassPattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
 	}
 
+	protected String extractVisibilityFromObjectString(String objectString) {
+		Matcher m = visibilityPattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+	
+	protected String extractTypeFromObjectString(String objectString) {
+		Matcher m = typePattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+	
+	protected String extractSubTypeFromObjectString(String objectString) {
+		Matcher m = subtypePattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+
+	protected List<String> extractReadersFromObjectString(String objectString) {
+		Matcher m = readersPattern.matcher(objectString);
+		if (m.find())
+		{
+			List<String> rs = new Vector<String>(4);
+			String r = m.group(3);
+			m = memberPattern.matcher(r);
+			while (m.find())
+			{
+				String rr = m.group(2);
+				rs.add(rr);
+			}
+			return rs;
+		}
+		return null;
+	}
+	
+	protected String extractRevisionSateFromObjectString(String objectString) {
+		Matcher m = revisionStatePattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+	
+	protected List<String> extractUpdatersFromObjectString(String objectString) {
+		Matcher m = updatersPattern.matcher(objectString);
+		if (m.find())
+		{
+			List<String> rs = new Vector<String>(4);
+			String r = m.group(3);
+			m = memberPattern.matcher(r);
+			while (m.find())
+			{
+				String rr = m.group(2);
+				rs.add(rr);
+			}
+			return rs;
+		}
+		return null;
+	}
+
+	
 	@Override
 	public List<E> query(BTSQueryRequest query, String indexName,
-			String indexType, String objectState, boolean registerQuery)
-	{
+			String indexType, String objectState, boolean registerQuery) {
 
-		if (query.getSearchRequestBuilder() == null)
-		{
+		if (query.getSearchRequestBuilder() == null) {
 			SearchResponse response;
-//			connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet(); 
-			if (BTSConstants.OBJECT_STATE_ACTIVE.equals(objectState)) {
-				response = connectionProvider
-						.getSearchClient(Client.class)
-						.prepareSearch(indexName)
-						.setTypes(indexType)
-						.setSearchType(SearchType.QUERY_AND_FETCH)
-						.setQuery(query.getQueryBuilder())
-						// Query
-						.setPostFilter(
-								FilterBuilders.termFilter("state",
-										BTSConstants.OBJECT_STATE_ACTIVE))
-						// // Filter
-						.setFrom(0).setSize(60).setExplain(true).execute()
-						.actionGet();
-			} else if (BTSConstants.OBJECT_STATE_TERMINATED.equals(objectState)) {
-				response = connectionProvider
-					.getSearchClient(Client.class)
+			SearchRequestBuilder srq;
+			// connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet();
+
+			srq = connectionProvider.getSearchClient(Client.class)
 					.prepareSearch(indexName)
-					.setTypes(indexType)
+					// .setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH)
-					.setQuery(query.getQueryBuilder())
-					// Query
-						.setPostFilter(
-								FilterBuilders.termFilter("state",
-										BTSConstants.OBJECT_STATE_TERMINATED))
-					// // Filter
-					.setFrom(0).setSize(60).setExplain(true).execute()
-					.actionGet();
+					.setQuery(query.getQueryBuilder());
+			// Query
+
+			// filter object state active or terminated
+			if (BTSConstants.OBJECT_STATE_ACTIVE.equals(objectState)) {
+				// .setPostFilter(
+				// FilterBuilders.termFilter("state",
+				// BTSConstants.OBJECT_STATE_ACTIVE))
+			} else if (BTSConstants.OBJECT_STATE_TERMINATED.equals(objectState)) {
+				srq.setPostFilter(FilterBuilders.termFilter("state",
+						BTSConstants.OBJECT_STATE_TERMINATED));
 			} else {
-				response = connectionProvider.getSearchClient(Client.class)
-						.prepareSearch(indexName)
-						.setTypes(indexType)
-						.setSearchType(SearchType.QUERY_AND_FETCH)
-						.setQuery(query.getQueryBuilder())
-						// Query
-						// // Filter
-						.setFrom(0).setSize(60).setExplain(true).execute()
-						.actionGet();
+				// nothing
 			}
-			List<E> result = new Vector<E>();
-			logger.info("Query result size: " + result.size());
-			for (SearchHit hit : response.getHits())
-			{
-				try {
-					Object o = loadObjectFromHit(hit, indexName);
-					if (o instanceof BTSDBBaseObject)
-					{
-						checkForConflicts((BTSDBBaseObject) o,indexName);
-					}
-					result.add((E) o);
-				} catch (Exception e) {
-					logger.info("Query exception", e);
-				}
+
+			// responsefields
+			if (query.getResponseFields() != null
+					&& query.getResponseFields().length > 0) {
+				srq = srq.addFields(query.getResponseFields());
 			}
-			if (registerQuery)
-			{
+			
+			//execute query
+			response = srq.setFrom(0).setSize(1000).setExplain(true).execute()
+					.actionGet();
+
+			List<E> result = loadResultFromSearchResponse(response, indexName);
+			if (registerQuery) {
 				registerQueryWithPercolator(query, indexName, indexType);
 			}
-
 			return result;
-		}
-		else
-		{
+		} else {
 			SearchResponse response = query.getSearchRequestBuilder()
 					.setIndices(indexName).setTypes(indexType)
 					.setSearchType(SearchType.QUERY_AND_FETCH).execute()
 					.actionGet();
-			List<E> result = new Vector<E>();
-			logger.info("Query result size: " + result.size());
-			for (SearchHit hit : response.getHits()) {
-				try {
-					Object o = loadObjectFromHit(hit, indexName);
-					if (o instanceof BTSDBBaseObject)
-					{
-						checkForConflicts((BTSDBBaseObject) o, indexName);
-					}
-					result.add((E) o);
-				} catch (Exception e) {
-					logger.info("Query exception", e);
-				}
-			}
+			List<E> result = loadResultFromSearchResponse(response, indexName);
+			
 			if (!result.isEmpty()) {
 				registerQueryWithPercolator(query, indexName, indexType);
 			}
 
 			return result;
 		}
+	}
+
+	private List<E> loadResultFromSearchResponse(SearchResponse response, String indexName) {
+		List<E> result = new Vector<E>();
+		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
+		for (SearchHit hit : response.getHits()) {
+			try {
+				E o = null;
+				URI uri = URI.createURI(getLocalDBURL() + "/" + indexName + "/" + hit.getId());
+				o = retrieveFromCache(uri, cache);
+				if (o == null)
+				{
+					o = loadObjectFromHit(hit, uri, indexName);
+				}
+				
+				//FIXME lazy check for conflicts
+//				if (o instanceof BTSDBBaseObject) {
+//					checkForConflicts((BTSDBBaseObject) o, indexName);
+//				}
+				result.add((E) o);
+			} catch (Exception e) {
+				logger.info("Query exception", e);
+			}
+		}
+		logger.info("Query result size: " + result.size());
+		return result;
+	}
+
+	protected E retrieveFromCache(URI uri, Map<URI, Resource> cache) {
+		Resource resource = cache.get(uri);
+		if (resource != null && !resource.getContents().isEmpty())
+		{
+			return (E) resource.getContents().get(0);
+		}
+		return null;
 	}
 
 	protected void registerQueryWithPercolator(final BTSQueryRequest query, final String indexName, String indexType)
@@ -703,40 +816,31 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 	}
 
-	private E loadObjectFromHit(SearchHit hit, String indexName)
+	protected E loadObjectFromHit(SearchHit hit, URI uri, String indexName)
 	{
 		if (hit.getSource() != null)
 		{
-			return loadResourceFromString(hit.getId(), hit.getSourceAsString(), indexName);
+			return loadObjectFromString(hit.getId(), indexName, uri, hit.getSourceAsString());
 		}
 		return null;
 	}
 
-	private E loadResourceFromString(String id, String sourceAsString, String indexName)
+	
+	public E loadObjectFromString(String id, String indexName, URI uri, String sourceAsString)
 	{
-		URI uri = URI.createURI(getLocalDBURL() + "/" + indexName + "/" + id);
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		fillResource(resource, sourceAsString);
 		if (!resource.getContents().isEmpty())
 		{
-			return ((E) resource.getContents().get(0));
+			E e = ((E) resource.getContents().get(0));
+			if (e.getDBCollectionKey() == null)
+			{
+				e.setDBCollectionKey(indexName);
+			}
+			checkForConflicts(e, indexName);
+			return e;
 		}
 		logger.info(sourceAsString);
-//		InputStream inputStream;
-//		try
-//		{
-//
-//			if (resource.getContents().isEmpty())
-//			{
-//				inputStream = new ByteArrayInputStream(sourceAsString.getBytes(BTSConstants.ENCODING));
-//				final JSONLoad loader = new JSONLoad(inputStream, new HashMap<Object, Object>());
-//				loader.fillResource(resource);
-//			}
-//			return ((E) resource.getContents().get(0));
-//		} catch (UnsupportedEncodingException e)
-//		{
-//			e.printStackTrace();
-//		}
 		return find((K) id, "/" + indexName + "/");
 	}
 
@@ -813,16 +917,15 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
 		try
 		{
-
 			view = dbClient.view(viewId);
-			allDocs = view.includeDocs(true).query();
+			allDocs = view.includeDocs(false).query();
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
 			System.out.println("create view, view id: " + viewId);
 			createView(path, sourcePath, viewId);
 			view = dbClient.view(viewId);
-			allDocs = view.includeDocs(true).query();
+			allDocs = view.includeDocs(false).query();
 		}
 		return allDocs;
 	}
@@ -830,21 +933,22 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	protected List<E> loadObjectsFromStrings(
 			List<String> allDocs, String path) {
 		List<E> results = new Vector<E>(allDocs.size());
+		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		for (String jo : allDocs)
 		{
-			System.out.println(jo);
+//			System.out.println(jo);
 			
 				try {
-					URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
-					// FIXME
-//				Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-					Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-					fillResource(resource, jo);
-
-					if (!resource.getContents().isEmpty())
+					String id = extractIdFromObjectString(jo);
+					URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + id);
+					E o = retrieveFromCache(uri, cache);
+					if (o == null)
 					{
-						E o = (E) resource.getContents().get(0);
-						checkForConflicts(o, path);
+						o = loadObjectFromString(id, path, uri, jo);
+					}
+
+					if (o != null)
+					{
 						results.add(o);
 					}
 				} catch (Exception e) {
@@ -857,7 +961,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return results;
 	}
 
-
+	
 
 
 	protected String getTerminatedSearchId(String searchId) {
@@ -921,7 +1025,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	public boolean isAuthorizedUser(String userName, String passWord)
 	{
-		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.ADMIN, userName,
+		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
 				passWord);
 		try
 		{
@@ -976,6 +1080,33 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return entity;
 	}
 	
-
+	@Override
+	public E loadFully(E entity) {
+		if (entity.getDBCollectionKey() == null)
+		{
+			throw new BTSDBException("DBCollectionKey may not be null. Unable to fully load object!");
+		}
+		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, entity.getDBCollectionKey());
+		InputStream sourceStream = client.find(entity.get_id());
+		URI uri = URI.createURI(getLocalDBURL() + "/temp/"
+				+ entity.get_id());
+		Resource resource = connectionProvider.getEmfResourceSet().createResource(
+				uri);
+		final JSONLoad loader = new JSONLoad(sourceStream,
+				new HashMap<Object, Object>());
+		loader.fillResource(resource);
+		E source = null;
+		if (!resource.getContents().isEmpty())
+		{
+			source = (E) resource.getContents().get(0);
+		}
+		if (source != null) {
+			entity = EmfModelHelper.mergeChanges(entity, source);
+			checkForConflicts((BTSDBBaseObject) entity,
+					entity.getDBCollectionKey());
+			return (E) entity;
+		}
+		return entity;
+	}
 	
 }

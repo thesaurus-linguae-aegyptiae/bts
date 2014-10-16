@@ -21,7 +21,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q;
 	protected AbstractElementAlias match_Case_NEWLINETerminalRuleCall_1_q;
 	protected AbstractElementAlias match_Case_NEWLINETerminalRuleCall_2_1_1_q;
-	protected AbstractElementAlias match_Sentence_NEWLINETerminalRuleCall_1_1_1_q;
+	protected AbstractElementAlias match_Sentence_NEWLINETerminalRuleCall_2_1_1_q;
 	protected AbstractElementAlias match_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q;
 	protected AbstractElementAlias match_WordPart_EqualsSignKeyword_0_q;
 	
@@ -31,7 +31,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_Ambivalence_NEWLINETerminalRuleCall_1_1_1_q = new TokenAlias(false, true, grammarAccess.getAmbivalenceAccess().getNEWLINETerminalRuleCall_1_1_1());
 		match_Case_NEWLINETerminalRuleCall_1_q = new TokenAlias(false, true, grammarAccess.getCaseAccess().getNEWLINETerminalRuleCall_1());
 		match_Case_NEWLINETerminalRuleCall_2_1_1_q = new TokenAlias(false, true, grammarAccess.getCaseAccess().getNEWLINETerminalRuleCall_2_1_1());
-		match_Sentence_NEWLINETerminalRuleCall_1_1_1_q = new TokenAlias(false, true, grammarAccess.getSentenceAccess().getNEWLINETerminalRuleCall_1_1_1());
+		match_Sentence_NEWLINETerminalRuleCall_2_1_1_q = new TokenAlias(false, true, grammarAccess.getSentenceAccess().getNEWLINETerminalRuleCall_2_1_1());
 		match_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q = new AlternativeAlias(false, true, new TokenAlias(false, false, grammarAccess.getTextContentAccess().getNEWLINETerminalRuleCall_1_1_0_1()), new TokenAlias(false, false, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0()));
 		match_WordPart_EqualsSignKeyword_0_q = new TokenAlias(false, true, grammarAccess.getWordPartAccess().getEqualsSignKeyword_0());
 	}
@@ -65,8 +65,8 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_Case_NEWLINETerminalRuleCall_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Case_NEWLINETerminalRuleCall_2_1_1_q.equals(syntax))
 				emit_Case_NEWLINETerminalRuleCall_2_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
-			else if(match_Sentence_NEWLINETerminalRuleCall_1_1_1_q.equals(syntax))
-				emit_Sentence_NEWLINETerminalRuleCall_1_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Sentence_NEWLINETerminalRuleCall_2_1_1_q.equals(syntax))
+				emit_Sentence_NEWLINETerminalRuleCall_2_1_1_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q.equals(syntax))
 				emit_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_WordPart_EqualsSignKeyword_0_q.equals(syntax))
@@ -103,7 +103,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * Syntax:
 	 *     NEWLINE?
 	 */
-	protected void emit_Sentence_NEWLINETerminalRuleCall_1_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_Sentence_NEWLINETerminalRuleCall_2_1_1_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

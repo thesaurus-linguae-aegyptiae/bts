@@ -14,6 +14,7 @@ import org.bbaw.bts.core.services.corpus.BTSTCObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTSTCObject, String> implements BTSTCObjectService, BTSObjectSearchService
 {
@@ -150,7 +151,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	}
 
 	@Override
-	public List<BTSTCObject> listRootEntries() {
+	public List<BTSTCObject> listRootEntries(IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}
 	

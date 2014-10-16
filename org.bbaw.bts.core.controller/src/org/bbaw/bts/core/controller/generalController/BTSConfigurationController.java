@@ -146,4 +146,11 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 
 	BTSConfigItem getVisibilityConfigItem();
 
+	BTSConfigItem getIdentifiersProviderConfigItemProcessedClones(
+			BTSConfigItem itemConfig2, BTSObject corpusObject);
+
+	BTSConfig getIdentifiersConfigItem();
+
+	String getIconStringOfRevisionsState(BTSObject object);
+
 }

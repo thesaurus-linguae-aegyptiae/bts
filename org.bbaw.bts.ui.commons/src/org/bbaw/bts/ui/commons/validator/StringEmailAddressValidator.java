@@ -47,7 +47,7 @@ public class StringEmailAddressValidator implements IValidator
 
 	/** The Constant regex. */
 	private static final String regex = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+			+ "[A-Za-z0-9-_]+(\\.[_A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
 	
 	/** The Constant patt. */
 	private static final Pattern patt = Pattern.compile(regex);

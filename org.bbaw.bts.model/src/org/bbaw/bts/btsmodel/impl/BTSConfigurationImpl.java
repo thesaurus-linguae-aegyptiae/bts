@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
@@ -46,6 +47,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getDBCollectionKey <em>DB Collection Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getType <em>Type</em>}</li>
@@ -280,6 +282,26 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	 * @ordered
 	 */
 	protected EList<String> conflictingRevs;
+
+	/**
+	 * The default value of the '{@link #getDBCollectionKey() <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DB_COLLECTION_KEY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDBCollectionKey() <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected String dBCollectionKey = DB_COLLECTION_KEY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
@@ -958,6 +980,8 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return is_deleted();
 			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
 				return getConflictingRevs();
+			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
+				return getDBCollectionKey();
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				return getSortKey();
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
@@ -1031,6 +1055,9 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
 				getConflictingRevs().clear();
 				getConflictingRevs().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
+				setDBCollectionKey((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				setSortKey((Integer)newValue);
@@ -1112,6 +1139,9 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
 				getConflictingRevs().clear();
 				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
+				setDBCollectionKey(DB_COLLECTION_KEY_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				setSortKey(SORT_KEY_EDEFAULT);
 				return;
@@ -1177,6 +1207,8 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return _deleted != _DELETED_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS:
 				return conflictingRevs != null && !conflictingRevs.isEmpty();
+			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
+				return DB_COLLECTION_KEY_EDEFAULT == null ? dBCollectionKey != null : !DB_COLLECTION_KEY_EDEFAULT.equals(dBCollectionKey);
 			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
 				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
@@ -1236,6 +1268,7 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				case BtsmodelPackage.BTS_CONFIGURATION__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
 				case BtsmodelPackage.BTS_CONFIGURATION__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
 				case BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS: return BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+				case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY: return BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY;
 				default: return -1;
 			}
 		}
@@ -1292,6 +1325,7 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_CONFIGURATION__READERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_CONFIGURATION__DELETED;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_CONFIGURATION__CONFLICTING_REVS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY: return BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY;
 				default: return -1;
 			}
 		}
@@ -1338,7 +1372,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		}
 		if (baseClass == BTSDBBaseObject.class) {
 			switch (baseOperationID) {
-				case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY: return BtsmodelPackage.BTS_CONFIGURATION___GET_DB_COLLECTION_KEY;
 				default: return -1;
 			}
 		}
@@ -1359,8 +1392,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
 		switch (operationID) {
-			case BtsmodelPackage.BTS_CONFIGURATION___GET_DB_COLLECTION_KEY:
-				return getDBCollectionKey();
 			case BtsmodelPackage.BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
@@ -1405,6 +1436,8 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		result.append(_deleted);
 		result.append(", conflictingRevs: ");
 		result.append(conflictingRevs);
+		result.append(", dBCollectionKey: ");
+		result.append(dBCollectionKey);
 		result.append(", sortKey: ");
 		result.append(sortKey);
 		result.append(", name: ");
@@ -1423,9 +1456,24 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		return result.toString();
 	}
 	
-	@Override
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public String getDBCollectionKey() {
-		return getProject() + "_admin";
+		return dBCollectionKey;
+	}
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDBCollectionKey(String newDBCollectionKey) {
+		String oldDBCollectionKey = dBCollectionKey;
+		dBCollectionKey = newDBCollectionKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY, oldDBCollectionKey, dBCollectionKey));
 	}
 
 } //BTSConfigurationImpl

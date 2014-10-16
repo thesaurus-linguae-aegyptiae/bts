@@ -37,6 +37,7 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId",
 				lemmaEntry.get_id()));
 		query.setQueryId("relations.objectId-" + lemmaEntry.get_id());
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
 		List<BTSLemmaEntry> obs = lemmaService.query(query,

@@ -28,7 +28,7 @@ import org.eclipse.jface.text.ITextViewer;
  * </p>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.3
+
  */
 public class TextViewerOperationAction extends TextViewerAction {
 

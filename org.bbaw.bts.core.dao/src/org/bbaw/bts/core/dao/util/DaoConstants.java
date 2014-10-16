@@ -134,8 +134,28 @@ public class DaoConstants
 	public static final String DESIGN_DOC_PATH = "designdocs";
 
 	/** The Constant ID_PATTERN. */
-	public static final String ID_PATTERN = "(\\{\"_id\":\")([A-Za-z0-9]*)(.*)";
+	public static final String ID_PATTERN = "(\\{\"_?id\":\\s*\")([A-Za-z0-9\\-\\.]*)(.*)";
+	
+	/** The Constant NAME_PATTERN. */
+	public static final String NAME_PATTERN = "(\"name\":\\s*\")([^\"]*)\"";
 
+	public static final String VISIBILITY_PATTERN = "(\"visibility\":\\s*\")([^\"]*)\"";
+
+	public static final String READERS_PATTERN = "(\"readers\":\\s*)(\\[)([^\\]]*)(\\])";
+	
+	public static final String UPDATERS_PATTERN = "(\"updaters\":\\s*)(\\[)([^\\]]*)(\\])";
+
+	public static final String MEMBER_PATTERN = "(\\s*\")([^\"]*)(\"\\s*,?)";
+
+	public static final String REVISIONSTATE_PATTERN = "(\"revisionState\":\\s*\")([^\"]*)\"";
+
+	public static final String ECLASS_PATTERN = "(\"eClass\":\\s*\")([^\"]*)\"";
+
+	public static final String TYPE_PATTERN = "(\"type\":\\s*\")([^\"]*)\"";
+
+
+	public static final String SUBTYPE_PATTERN = "(\"subtype\":\\s*\")([^\"]*)\"";
+	
 	/** The Constant CORPUS. */
 	public static final String CORPUS = "/corpus/";
 
@@ -177,7 +197,20 @@ public class DaoConstants
 
 	public static final String VIEW_LEMMA_ROOT_ENTRIES = "lemma/root_entries";
 
-	public static final String VIEW_IMAGE_ROOT_ENTRIES = "image/root_entries";;
+	public static final String VIEW_IMAGE_ROOT_ENTRIES = "image/root_entries";
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

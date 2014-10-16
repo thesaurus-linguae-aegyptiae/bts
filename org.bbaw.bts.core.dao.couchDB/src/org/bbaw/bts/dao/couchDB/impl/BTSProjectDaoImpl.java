@@ -194,7 +194,12 @@ public class BTSProjectDaoImpl extends CouchDBDao<BTSProject, String> implements
 		{
 			//remove _security
 			CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, coll.getCollectionName());
-			dbClient.remove("_security", "0");
+			try {
+				dbClient.remove("_security", "0");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 

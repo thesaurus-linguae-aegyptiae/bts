@@ -1,15 +1,20 @@
 package org.bbaw.bts.core.dao.corpus.couchdb.impl;
 
 import java.util.List;
+import java.util.Vector;
+import java.util.regex.Matcher;
 
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 
-public class BTSLemmaEntryDaoImpl extends CouchDBDao<BTSLemmaEntry, String> implements BTSLemmaEntryDao
+public class BTSLemmaEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSLemmaEntry, String> implements BTSLemmaEntryDao
 {
 
 	@Override
@@ -31,7 +36,7 @@ public class BTSLemmaEntryDaoImpl extends CouchDBDao<BTSLemmaEntry, String> impl
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, "lemma");
-		List<BTSLemmaEntry> results = loadObjectsFromStrings(allDocs, path);
+		List<BTSLemmaEntry> results = loadPartialObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
@@ -43,11 +48,20 @@ public class BTSLemmaEntryDaoImpl extends CouchDBDao<BTSLemmaEntry, String> impl
 	public List<BTSLemmaEntry> list(String dbPath, String staticQueryId,
 			String objectState) {
 		List<String> allDocs = loadDocsFromView(staticQueryId, dbPath, "lemma");
-		List<BTSLemmaEntry> results = loadObjectsFromStrings(allDocs, dbPath);
+		List<BTSLemmaEntry> results = loadPartialObjectsFromStrings(allDocs, dbPath);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
 		}
 		return results;
 	}
+
+	@Override
+	protected BTSLemmaEntry createObject() {
+		return BtsCorpusModelFactory.eINSTANCE.createBTSLemmaEntry();
+	}
+	
+	
+
+	
 }

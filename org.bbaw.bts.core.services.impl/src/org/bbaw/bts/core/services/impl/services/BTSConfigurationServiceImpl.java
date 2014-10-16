@@ -215,6 +215,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public BTSConfigItem getConfigItemOfObjectType(BTSObject object,
 			boolean strict) {
 		BTSConfigItem objectTypesCI = getObjectTypesConfigItem();
+		if (objectTypesCI == null) return null;
 		String oClass = findObjectClass((BTSObject) object);
 		for (BTSConfig c : objectTypesCI.getChildren()) {
 			if (oClass.equals(((BTSConfigItem) c).getValue())) {
@@ -425,7 +426,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 					break;
 				}
 			}
-		} else {
+		} else if (config != null) {
 			for (BTSConfig c : config.getChildren()) {
 				if (c instanceof BTSConfigItem) {
 					BTSConfigItem l1CI = (BTSConfigItem) c;
@@ -776,6 +777,23 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		}
 
 		return categories;
+	}
+
+	@Override
+	public BTSConfigItem getIdentifiersConfigItem() {
+		BTSConfiguration configuration = getActiveConfiguration();
+		if (configuration != null && configuration.getChildren() != null) {
+			for (BTSConfig c : configuration.getChildren()) {
+				if (c instanceof BTSConfigItem) {
+					BTSConfigItem ci = (BTSConfigItem) c;
+					if (ci.getValue() != null
+							&& ci.getValue().equals(BTSCoreConstants.IDENTIFIERS)) {
+						return ci;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 

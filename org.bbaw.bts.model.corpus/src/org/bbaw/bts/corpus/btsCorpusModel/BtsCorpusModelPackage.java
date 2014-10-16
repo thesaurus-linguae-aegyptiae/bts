@@ -187,6 +187,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__CONFLICTING_REVS = BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__DB_COLLECTION_KEY = BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -312,14 +321,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Corpus Object</em>' class.
@@ -458,6 +459,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTSTC_OBJECT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -582,15 +592,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTSTC Object</em>' class.
@@ -729,6 +730,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -862,15 +872,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text</em>' class.
@@ -1007,6 +1008,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -1160,15 +1170,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_ENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Lemma Entry</em>' class.
@@ -1416,6 +1417,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_ANNOTATION__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1540,15 +1550,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Annotation</em>' class.
@@ -1914,6 +1915,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2047,15 +2057,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Corpus</em>' class.
@@ -2194,6 +2195,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_IMAGE__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2327,15 +2337,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The operation id for the '<em>Get Attachement</em>' operation.
@@ -2538,6 +2539,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_THS_ENTRY__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2662,15 +2672,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_THS_ENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY___GET_DB_COLLECTION_KEY = BTS_CORPUS_OBJECT___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Ths Entry</em>' class.
@@ -2844,6 +2845,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_WORD__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
+
+	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
@@ -3043,14 +3053,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_WORD___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Word</em>' class.
@@ -3189,6 +3191,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_ITEMS__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3314,14 +3325,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Items</em>' class.
@@ -3533,6 +3536,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENCTENCE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3676,14 +3688,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_SENCTENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Senctence</em>' class.
@@ -3822,6 +3826,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_MARKER__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3956,14 +3969,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_MARKER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Marker</em>' class.
@@ -4102,6 +4107,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENTENCE_ITEM__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4227,14 +4241,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Sentence Item</em>' class.
@@ -4373,6 +4379,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_AMBIVALENCE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4507,14 +4522,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_AMBIVALENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Ambivalence</em>' class.
@@ -4653,6 +4660,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_CASE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4787,14 +4803,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_LEMMA_CASE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___GET_DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
@@ -4933,6 +4941,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM__CONFLICTING_REVS = BTS_SENTENCE_ITEM__CONFLICTING_REVS;
 
 	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__DB_COLLECTION_KEY = BTS_SENTENCE_ITEM__DB_COLLECTION_KEY;
+
+	/**
 	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5058,14 +5075,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
-	/**
-	 * The operation id for the '<em>Get DB Collection Key</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM___GET_DB_COLLECTION_KEY = BTS_SENTENCE_ITEM___GET_DB_COLLECTION_KEY;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Sentence Item</em>' class.

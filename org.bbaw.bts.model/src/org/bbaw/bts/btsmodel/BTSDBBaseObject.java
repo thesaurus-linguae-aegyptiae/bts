@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getConflictingRevs <em>Conflicting Revs</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getDBCollectionKey <em>DB Collection Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,7 +79,7 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	 * @return the value of the '<em>Project</em>' attribute.
 	 * @see #setProject(String)
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_Project()
-	 * @model
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getProject();
@@ -209,15 +210,25 @@ public interface BTSDBBaseObject extends BTSIdentifiableItem {
 	EList<String> getConflictingRevs();
 
 	/**
+	 * Returns the value of the '<em><b>DB Collection Key</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * <!-- begin-model-doc -->
-	 * This method returns the name of the actual database collection where the object
-	 * is stored. Subclasses have to implement this accordingly.
-	 * <!-- end-model-doc -->
-	 * @model kind="operation"
+	 * @return the value of the '<em>DB Collection Key</em>' attribute.
+	 * @see #setDBCollectionKey(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSDBBaseObject_DBCollectionKey()
+	 * @model transient="true"
 	 * @generated
 	 */
 	String getDBCollectionKey();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSDBBaseObject#getDBCollectionKey <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>DB Collection Key</em>' attribute.
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 */
+	void setDBCollectionKey(String value);
 
 } // BTSDBBaseObject

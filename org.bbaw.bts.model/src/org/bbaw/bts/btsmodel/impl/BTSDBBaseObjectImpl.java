@@ -2,8 +2,8 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSDBBaseObjectImpl#getDBCollectionKey <em>DB Collection Key</em>}</li>
  * </ul>
  * </p>
  *
@@ -143,6 +144,26 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	protected EList<String> conflictingRevs;
 
 	/**
+	 * The default value of the '{@link #getDBCollectionKey() <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DB_COLLECTION_KEY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDBCollectionKey() <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected String dBCollectionKey = DB_COLLECTION_KEY_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -185,10 +206,14 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	public String getProject()
 	{
+		if (dBCollectionKey != null)
+		{
+			project = dBCollectionKey.split("_")[0];
+		}
 		return project;
 	}
 
@@ -290,12 +315,21 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generatedNot
+	 * @generated
 	 */
 	public String getDBCollectionKey() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		return null;
+		return dBCollectionKey;
+	}
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDBCollectionKey(String newDBCollectionKey) {
+		String oldDBCollectionKey = dBCollectionKey;
+		dBCollectionKey = newDBCollectionKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY, oldDBCollectionKey, dBCollectionKey));
 	}
 
 	/**
@@ -320,6 +354,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return is_deleted();
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
 				return getConflictingRevs();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY:
+				return getDBCollectionKey();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -357,6 +393,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				getConflictingRevs().clear();
 				getConflictingRevs().addAll((Collection<? extends String>)newValue);
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY:
+				setDBCollectionKey((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -390,6 +429,9 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
 				getConflictingRevs().clear();
 				return;
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY:
+				setDBCollectionKey(DB_COLLECTION_KEY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -416,22 +458,10 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 				return _deleted != _DELETED_EDEFAULT;
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
 				return conflictingRevs != null && !conflictingRevs.isEmpty();
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY:
+				return DB_COLLECTION_KEY_EDEFAULT == null ? dBCollectionKey != null : !DB_COLLECTION_KEY_EDEFAULT.equals(dBCollectionKey);
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY:
-				return getDBCollectionKey();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -458,6 +488,8 @@ public abstract class BTSDBBaseObjectImpl extends BTSIdentifiableItemImpl implem
 		result.append(_deleted);
 		result.append(", conflictingRevs: ");
 		result.append(conflictingRevs);
+		result.append(", dBCollectionKey: ");
+		result.append(dBCollectionKey);
 		result.append(')');
 		return result.toString();
 	}

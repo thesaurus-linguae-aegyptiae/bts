@@ -18,8 +18,7 @@ Export-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.tempmodel
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.emf.ecore;visibility:=reexport,
- org.bbaw.bts.commons.libs.elasticsearch,
- org.apache.commons.codec
+ org.bbaw.bts.commons.libs.elasticsearch
 Bundle-ActivationPolicy: lazy
 Import-Package: com.google.gson;version="2.1.0",
  org.bbaw.bts.commons,

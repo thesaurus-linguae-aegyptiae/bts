@@ -8,6 +8,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -18,12 +19,12 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	List<E> getRootEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer treeViewer, TreeNodeWrapper root,
-			EReference treeNodeWrapperChildren, String queryID);
+			EReference treeNodeWrapperChildren, String queryID, IProgressMonitor monitor);
 
 	List<E> getDeletedEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer treeViewer, TreeNodeWrapper root,
-			EReference treeNodeWrapperChildren, String queryID);
+			EReference treeNodeWrapperChildren, String queryID, IProgressMonitor monitor);
 
 	void addRelation(E subject, String relationType,
 			TreeNodeWrapper treeNodeWrapper);
@@ -33,7 +34,7 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	List<E> findChildren(E parent,
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName);
+			EReference referenceName, IProgressMonitor monitor);
 
 	boolean handleModelUpdate(BTSModelUpdateNotification notification,
 			Map<String, BTSQueryResultAbstract> queryResultMap,
@@ -45,10 +46,14 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	
 	String getDisplayName(K id);
 
-	List<E> getOrphanEntries(Map map, ViewerFilter[] filters);
+	List<E> getOrphanEntries(Map map, ViewerFilter[] filters, IProgressMonitor monitor);
 
 	List<E> getSearchEntries(
 			BTSQueryRequest query, Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer treeViewer, TreeNodeWrapper rootNode,
-			EReference treeNodeWrapperChildren);
+			EReference treeNodeWrapperChildren, IProgressMonitor monitor);
+	
+	boolean checkAndFullyLoad(BTSCorpusObject object);
+	
+	List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor);
 }

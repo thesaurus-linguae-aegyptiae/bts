@@ -7,15 +7,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<modules>
-		<module>org.eclipse.xtext.ui</module>
-		<!--<module>org.eclipse.xtext.util</module>
+		<!--<module>org.eclipse.xtext.ui</module>
+		<module>org.eclipse.xtext.util</module>
 		<module>org.eclipse.xtext.common.types.ui</module>
 		<module>org.eclipse.xtext.ecore</module>
 		<module>org.eclipse.xtext.codetemplates.ui</module>
 		<module>org.eclipse.xtext.util</module>-->
 		
 		
-		<module>org.bbaw.bts.updatesite</module>
+		<!--<module>org.bbaw.bts.updatesite</module>
 
 		<module>com.opcoach.e4.preferences</module>
 		<module>org.bbaw.bts.app</module>
@@ -42,8 +42,10 @@
 		<module>org.bbaw.bts.core.services.corpus.impl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>
+		
+		-->
 		<!--<module>org.bbaw.bts.corpus.text.egy.egydsl.tests</module>-->
-		<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
+		<!--<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
 		<module>org.bbaw.bts.db</module>
 		<module>org.bbaw.bts.db.couchdb</module>
 		<module>org.bbaw.bts.e4.p2</module>
@@ -74,15 +76,18 @@
 		<module>org.eclipselabs.emfjson.couchdb.ui</module>
 
 		<module>org.lightcouch</module>
+		
+		<module>org.bbaw.bts.corpus.egy.feature</module>
+		<module>org.bbaw.bts.ui.font.academy</module>
+		-->
 
 		<module>org.bbaw.bts.app.product</module>
 
-		<module>org.bbaw.bts.corpus.egy.feature</module>
-		<module>org.bbaw.bts.ui.font.academy</module>
 
 
 	</modules>
 
+	
 	<properties>
 		<tycho.version>0.19.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -90,11 +95,34 @@
 	</properties>
 
 	<repositories>
+	
+		<!--<repository>
+			<id>bts-mvn-telota-all</id>
+			<name>BTS Maven local Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
+			<layout>p2</layout>
+		</repository>
+		-->
+		
+		<repository>
+			<id>bts-mvn-telota-build</id>
+			<name>BTS Maven local Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-build-rep</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>bts-mvn-telota</id>
+			<name>BTS Maven local Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
+			<layout>p2</layout>
+		</repository>
+		
 		<repository>
 			<id>kepler</id>
 			<url>${kepler-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
+		
 
 		<repository>
 			<id>e4-tools</id>
@@ -107,12 +135,7 @@
 			<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
 		</repository>
 
-		<repository>
-			<id>bts-mvn-telota</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
-			<layout>p2</layout>
-		</repository>
+		
 
 
 		<!--
@@ -165,6 +188,7 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<configuration>
 					<environments>
+						<!--
 						<environment>
 							<os>linux</os>
 							<ws>gtk</ws>
@@ -180,16 +204,20 @@
 							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
+						-->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
+						
+						<!--
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
 						</environment>
+						-->
 					</environments>
 				</configuration>
 			</plugin>

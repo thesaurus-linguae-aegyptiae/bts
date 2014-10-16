@@ -9,6 +9,7 @@ Export-Package: org.bbaw.bts.commons,
  org.bbaw.bts.commons.interfaces
 Import-Package: javax.annotation,
  javax.inject,
+ org.apache.commons.codec.binary;version="1.6.0",
  org.eclipse.core.runtime,
  org.eclipse.core.runtime.preferences;version="3.3.0",
  org.eclipse.jface.resource,
@@ -19,4 +20,5 @@ Import-Package: javax.annotation,
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.bbaw.bts.commons.BTSCommonsActivator
 Require-Bundle: org.eclipse.e4.core.services;bundle-version="1.1.0",
- org.eclipse.osgi;bundle-version="3.10.0"
+ org.eclipse.osgi;bundle-version="3.10.0",
+  org.apache.commons.codec

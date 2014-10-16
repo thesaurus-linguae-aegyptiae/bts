@@ -19,7 +19,7 @@ import org.eclipse.ui.texteditor.TextViewerDeleteLineTarget;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.3
+
  */
 public class TextViewerDeleteLineAction extends TextViewerAction {
 

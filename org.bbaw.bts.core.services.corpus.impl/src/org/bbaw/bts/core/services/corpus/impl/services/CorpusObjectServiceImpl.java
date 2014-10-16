@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -38,6 +39,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -88,7 +90,15 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	
 
 	protected String[] getActive_corpora() {
-		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
+		List<String> arr = new ArrayList<String>(4);
+		for (String s : active_corpora.split(BTSCoreConstants.SPLIT_PATTERN))
+		{
+			if (s.trim().length() > 0 && !arr.contains(s))
+			{
+				arr.add(s);
+			}
+		}
+		return arr.toArray(new String[arr.size()]);
 	}
 
 	protected void setActive_corpora(String active_corpora) {
@@ -409,7 +419,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 
 
 	@Override
-	public List<BTSCorpusObject> listRootEntries() {
+	public List<BTSCorpusObject> listRootEntries(IProgressMonitor monitor) {
 		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		List<BTSCorpusObject> roots = new Vector<BTSCorpusObject>(corpora.size());
 		for (BTSTextCorpus tc : corpora)
@@ -465,5 +475,13 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		corpusObjectDao.setDeleted(entity, sourceDBCollectionPath, true);
 		
 	}
-
+	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	{
+		if (object.eResource() == null || object.get_rev() == null)
+		{
+			corpusObjectDao.loadFully(object);
+		}
+		return false;
+		
+	}
 }

@@ -6,11 +6,14 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -36,7 +39,17 @@ import org.eclipse.swt.widgets.Display;
 public class AdministrativDataObjectItemProvider extends BTSObservableObjectItemProvider
 {
 	private BTSEvaluationService evaluationService;
+	private BTSConfigurationController configurationController;
 
+	protected BTSConfigurationController getConfigurationController()
+	{
+		if (configurationController == null)
+		{
+			configurationController = StaticAccessController
+					.getContext().get(BTSConfigurationController.class);
+		}
+		return configurationController;
+	}
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -291,6 +304,23 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 			images.add(resourceProvider.getImage(Display.getDefault(),
 					BTSResourceProvider.IMG_OVR_CONFLICTS));
 			image = new ComposedImage(images);
+		}
+		if (object instanceof BTSObject
+				&& ((BTSObject) object).getRevisionState() != null) {
+			Object o = getConfigurationController()
+					.getIconStringOfRevisionsState((BTSObject) object);
+			if (o != null)
+			{
+				o = resourceProvider.getImage(Display.getDefault(),
+					(String) o);
+			}
+			if (o != null)
+			{
+				List<Object> images = new ArrayList<Object>(2);
+				images.add(image);
+				images.add(o);
+				image = new ComposedImage(images);
+			}
 		}
 		return super.overlayImage(object, image);
 	}

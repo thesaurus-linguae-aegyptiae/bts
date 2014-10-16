@@ -286,7 +286,10 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				IEclipsePreferences preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
 				String dbdir = preferences.get(BTSPluginIDs.PREF_DB_DIR, BTSConstants.getDBInstallationDir(null));
 				ImmutableSettings.Builder elasticsearchSettings = ImmutableSettings.settingsBuilder()
-		                .put("http.enabled", ("true".equals(search_http_enabled)))
+//		                .put("http.enabled", ("true".equals(search_http_enabled)))
+						//FIXME make dynamic
+		                .put("http.enabled", true)
+
 		                .put("cluster.name", esClustername)
 		                .put("path.home", dbdir + BTSConstants.FS + esClustername)
 		                .put("path.data", dbdir + BTSConstants.FS + esClustername)
@@ -321,9 +324,9 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			{
 				Map<URI, Resource> uriResourceMap;
 				context.set(ResourceSet.class, set);
-				uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
-						context);
-//				uriResourceMap = new HashMap<URI, Resource>();
+//				uriResourceMap = ContextInjectionFactory.make(ScatteredCachingMapService.class,
+//						context);
+				uriResourceMap = new HashMap<URI, Resource>();
 				((ResourceSetImpl) set).setURIResourceMap(uriResourceMap);
 				context.set(DaoConstants.RESOURCE_SET, set);
 			} catch (Exception e)

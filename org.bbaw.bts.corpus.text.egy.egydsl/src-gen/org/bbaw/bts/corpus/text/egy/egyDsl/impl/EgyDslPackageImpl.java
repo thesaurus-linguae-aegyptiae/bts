@@ -12,22 +12,11 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Destruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DualEnding;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
-import org.bbaw.bts.corpus.text.egy.egyDsl.Ending;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.ExpandedColumn;
-import org.bbaw.bts.corpus.text.egy.egyDsl.Interfix;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixConnectionSyllabicGroup;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexion;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexionEding;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexical;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexicalEnding;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixLexical;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixNonLexical;
-import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Lacuna;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoAncientExpanded;
@@ -41,20 +30,17 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.NoPartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoRestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
-import org.bbaw.bts.corpus.text.egy.egyDsl.PluralEnding;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItem;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItemNoAmbivalence;
-import org.bbaw.bts.corpus.text.egy.egyDsl.SuffixChars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextItem;
 import org.bbaw.bts.corpus.text.egy.egyDsl.VersFrontierMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.VersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.VersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Word;
-import org.bbaw.bts.corpus.text.egy.egyDsl.WordEnding;
 import org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle;
 import org.bbaw.bts.corpus.text.egy.egyDsl.WordPart;
 
@@ -183,48 +169,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass wordEndingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass endingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass dualEndingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass pluralEndingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixFlexionEdingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixLexicalEndingEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   private EClass wordMiddleEClass = null;
 
   /**
@@ -233,62 +177,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass charsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass suffixCharsEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixLexicalEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixFlexionEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixSuffixPronomLexicalEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixPrefixNonLexicalEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixPrefixLexicalEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass interfixConnectionSyllabicGroupEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -742,136 +630,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getWordEnding()
-  {
-    return wordEndingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getEnding()
-  {
-    return endingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getEnding_Chars()
-  {
-    return (EReference)endingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getDualEnding()
-  {
-    return dualEndingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getDualEnding_Chars()
-  {
-    return (EAttribute)dualEndingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getPluralEnding()
-  {
-    return pluralEndingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getPluralEnding_Chars()
-  {
-    return (EAttribute)pluralEndingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixFlexionEding()
-  {
-    return interfixFlexionEdingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getInterfixFlexionEding_Interfix()
-  {
-    return (EReference)interfixFlexionEdingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getInterfixFlexionEding_Chars()
-  {
-    return (EReference)interfixFlexionEdingEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixLexicalEnding()
-  {
-    return interfixLexicalEndingEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getInterfixLexicalEnding_Interfix()
-  {
-    return (EReference)interfixLexicalEndingEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getInterfixLexicalEnding_Chars()
-  {
-    return (EReference)interfixLexicalEndingEClass.getEStructuralFeatures().get(1);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getWordMiddle()
   {
     return wordMiddleEClass;
@@ -895,96 +653,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
   public EAttribute getChars_Name()
   {
     return (EAttribute)charsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getSuffixChars()
-  {
-    return suffixCharsEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EAttribute getSuffixChars_Name()
-  {
-    return (EAttribute)suffixCharsEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfix()
-  {
-    return interfixEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixLexical()
-  {
-    return interfixLexicalEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixFlexion()
-  {
-    return interfixFlexionEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixSuffixPronomLexical()
-  {
-    return interfixSuffixPronomLexicalEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixPrefixNonLexical()
-  {
-    return interfixPrefixNonLexicalEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixPrefixLexical()
-  {
-    return interfixPrefixLexicalEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EClass getInterfixConnectionSyllabicGroup()
-  {
-    return interfixConnectionSyllabicGroupEClass;
   }
 
   /**
@@ -1385,46 +1053,10 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     wordPartEClass = createEClass(WORD_PART);
     createEReference(wordPartEClass, WORD_PART__WCHAR);
 
-    wordEndingEClass = createEClass(WORD_ENDING);
-
-    endingEClass = createEClass(ENDING);
-    createEReference(endingEClass, ENDING__CHARS);
-
-    dualEndingEClass = createEClass(DUAL_ENDING);
-    createEAttribute(dualEndingEClass, DUAL_ENDING__CHARS);
-
-    pluralEndingEClass = createEClass(PLURAL_ENDING);
-    createEAttribute(pluralEndingEClass, PLURAL_ENDING__CHARS);
-
-    interfixFlexionEdingEClass = createEClass(INTERFIX_FLEXION_EDING);
-    createEReference(interfixFlexionEdingEClass, INTERFIX_FLEXION_EDING__INTERFIX);
-    createEReference(interfixFlexionEdingEClass, INTERFIX_FLEXION_EDING__CHARS);
-
-    interfixLexicalEndingEClass = createEClass(INTERFIX_LEXICAL_ENDING);
-    createEReference(interfixLexicalEndingEClass, INTERFIX_LEXICAL_ENDING__INTERFIX);
-    createEReference(interfixLexicalEndingEClass, INTERFIX_LEXICAL_ENDING__CHARS);
-
     wordMiddleEClass = createEClass(WORD_MIDDLE);
 
     charsEClass = createEClass(CHARS);
     createEAttribute(charsEClass, CHARS__NAME);
-
-    suffixCharsEClass = createEClass(SUFFIX_CHARS);
-    createEAttribute(suffixCharsEClass, SUFFIX_CHARS__NAME);
-
-    interfixEClass = createEClass(INTERFIX);
-
-    interfixLexicalEClass = createEClass(INTERFIX_LEXICAL);
-
-    interfixFlexionEClass = createEClass(INTERFIX_FLEXION);
-
-    interfixSuffixPronomLexicalEClass = createEClass(INTERFIX_SUFFIX_PRONOM_LEXICAL);
-
-    interfixPrefixNonLexicalEClass = createEClass(INTERFIX_PREFIX_NON_LEXICAL);
-
-    interfixPrefixLexicalEClass = createEClass(INTERFIX_PREFIX_LEXICAL);
-
-    interfixConnectionSyllabicGroupEClass = createEClass(INTERFIX_CONNECTION_SYLLABIC_GROUP);
 
     bracketsEClass = createEClass(BRACKETS);
 
@@ -1522,9 +1154,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     markerEClass.getESuperTypes().add(this.getAbstractMarker());
     wordEClass.getESuperTypes().add(this.getSentenceItem());
     wordEClass.getESuperTypes().add(this.getSentenceItemNoAmbivalence());
-    endingEClass.getESuperTypes().add(this.getWordEnding());
-    dualEndingEClass.getESuperTypes().add(this.getWordEnding());
-    pluralEndingEClass.getESuperTypes().add(this.getWordEnding());
     charsEClass.getESuperTypes().add(this.getWordMiddle());
     charsEClass.getESuperTypes().add(this.getNoExpanded());
     charsEClass.getESuperTypes().add(this.getNoEmendation());
@@ -1536,18 +1165,6 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     charsEClass.getESuperTypes().add(this.getNoAncientExpanded());
     charsEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
     charsEClass.getESuperTypes().add(this.getNoPartialDestruction());
-    interfixEClass.getESuperTypes().add(this.getNoExpanded());
-    interfixEClass.getESuperTypes().add(this.getNoEmendation());
-    interfixEClass.getESuperTypes().add(this.getNoDisputableReading());
-    interfixEClass.getESuperTypes().add(this.getNoLacuna());
-    interfixEClass.getESuperTypes().add(this.getNoDeletion());
-    interfixEClass.getESuperTypes().add(this.getNoExpandedColumn());
-    interfixEClass.getESuperTypes().add(this.getNoRasur());
-    interfixEClass.getESuperTypes().add(this.getNoPartialDestruction());
-    interfixSuffixPronomLexicalEClass.getESuperTypes().add(this.getInterfix());
-    interfixPrefixNonLexicalEClass.getESuperTypes().add(this.getInterfix());
-    interfixPrefixLexicalEClass.getESuperTypes().add(this.getInterfix());
-    interfixConnectionSyllabicGroupEClass.getESuperTypes().add(this.getInterfix());
     bracketsEClass.getESuperTypes().add(this.getWordMiddle());
     expandedEClass.getESuperTypes().add(this.getBrackets());
     expandedEClass.getESuperTypes().add(this.getNoEmendation());
@@ -1609,48 +1226,12 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEReference(getWord_WChar(), this.getWordPart(), null, "wChar", null, 0, -1, Word.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(wordPartEClass, WordPart.class, "WordPart", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getWordPart_WChar(), ecorePackage.getEObject(), null, "wChar", null, 0, -1, WordPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(wordEndingEClass, WordEnding.class, "WordEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(endingEClass, Ending.class, "Ending", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getEnding_Chars(), this.getSuffixChars(), null, "chars", null, 0, 1, Ending.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(dualEndingEClass, DualEnding.class, "DualEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDualEnding_Chars(), ecorePackage.getEString(), "chars", null, 0, 1, DualEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(pluralEndingEClass, PluralEnding.class, "PluralEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getPluralEnding_Chars(), ecorePackage.getEString(), "chars", null, 0, 1, PluralEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(interfixFlexionEdingEClass, InterfixFlexionEding.class, "InterfixFlexionEding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getInterfixFlexionEding_Interfix(), this.getInterfixFlexion(), null, "interfix", null, 0, 1, InterfixFlexionEding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getInterfixFlexionEding_Chars(), this.getSuffixChars(), null, "chars", null, 0, 1, InterfixFlexionEding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(interfixLexicalEndingEClass, InterfixLexicalEnding.class, "InterfixLexicalEnding", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getInterfixLexicalEnding_Interfix(), this.getInterfixLexical(), null, "interfix", null, 0, 1, InterfixLexicalEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getInterfixLexicalEnding_Chars(), this.getSuffixChars(), null, "chars", null, 0, 1, InterfixLexicalEnding.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getWordPart_WChar(), this.getWordMiddle(), null, "wChar", null, 0, -1, WordPart.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(wordMiddleEClass, WordMiddle.class, "WordMiddle", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(charsEClass, Chars.class, "Chars", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getChars_Name(), ecorePackage.getEString(), "name", null, 0, 1, Chars.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(suffixCharsEClass, SuffixChars.class, "SuffixChars", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getSuffixChars_Name(), ecorePackage.getEString(), "name", null, 0, 1, SuffixChars.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(interfixEClass, Interfix.class, "Interfix", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfixLexicalEClass, InterfixLexical.class, "InterfixLexical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfixFlexionEClass, InterfixFlexion.class, "InterfixFlexion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfixSuffixPronomLexicalEClass, InterfixSuffixPronomLexical.class, "InterfixSuffixPronomLexical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfixPrefixNonLexicalEClass, InterfixPrefixNonLexical.class, "InterfixPrefixNonLexical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfixPrefixLexicalEClass, InterfixPrefixLexical.class, "InterfixPrefixLexical", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-    initEClass(interfixConnectionSyllabicGroupEClass, InterfixConnectionSyllabicGroup.class, "InterfixConnectionSyllabicGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(bracketsEClass, Brackets.class, "Brackets", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

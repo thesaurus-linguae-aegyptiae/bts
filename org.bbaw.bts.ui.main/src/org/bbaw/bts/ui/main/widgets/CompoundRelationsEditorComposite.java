@@ -168,6 +168,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 	}
 
 	private void addToListRecursively(BTSConfig relationsConfigItem) {
+		if (relationsConfigItem == null) return;
 		if (!BTSCoreConstants.RELATIONS
 				.equals(((BTSConfigItem) relationsConfigItem).getValue()))
 		{

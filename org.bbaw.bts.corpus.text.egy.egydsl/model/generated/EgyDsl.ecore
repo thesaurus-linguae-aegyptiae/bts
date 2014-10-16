@@ -36,45 +36,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WordPart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
-        eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="WordEnding"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Ending" eSuperTypes="#//WordEnding">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="chars" eType="#//SuffixChars"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="DualEnding" eSuperTypes="#//WordEnding">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chars" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="PluralEnding" eSuperTypes="#//WordEnding">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chars" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixFlexionEding">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interfix" eType="#//InterfixFlexion"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="chars" eType="#//SuffixChars"
-        containment="true"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixLexicalEnding">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="interfix" eType="#//InterfixLexical"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="chars" eType="#//SuffixChars"
-        containment="true"/>
+        eType="#//WordMiddle" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="WordMiddle"/>
   <eClassifiers xsi:type="ecore:EClass" name="Chars" eSuperTypes="#//WordMiddle #//NoExpanded #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SuffixChars">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-  </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Interfix" eSuperTypes="#//NoExpanded #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoPartialDestruction"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixLexical"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixFlexion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixSuffixPronomLexical" eSuperTypes="#//Interfix"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixPrefixNonLexical" eSuperTypes="#//Interfix"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixPrefixLexical" eSuperTypes="#//Interfix"/>
-  <eClassifiers xsi:type="ecore:EClass" name="InterfixConnectionSyllabicGroup" eSuperTypes="#//Interfix"/>
   <eClassifiers xsi:type="ecore:EClass" name="Brackets" eSuperTypes="#//WordMiddle"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expanded" eSuperTypes="#//Brackets #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"

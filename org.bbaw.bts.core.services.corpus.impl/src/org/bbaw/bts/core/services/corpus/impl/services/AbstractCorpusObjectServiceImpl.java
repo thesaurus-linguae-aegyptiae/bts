@@ -19,6 +19,7 @@ import org.bbaw.bts.core.services.corpus.GenericCorpusObjectService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
@@ -36,28 +37,45 @@ implements GenericCorpusObjectService<E, K>{
 	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
 	protected String main_corpus_key;
 	
-	public abstract List<E> listRootEntries();
+	public abstract List<E> listRootEntries(IProgressMonitor monitor);
 	
 	public List<E> getOrphanEntries(Map map,
-			List<BTSFilter> btsFilters) {
+			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
+
 		List<E> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		if (monitor != null)
+		{
+			monitor.beginTask("Calculate all Entries", allEntries.size());
+		}
 		List<E> allFilteredEntries = new Vector<E>();
 		for (E e : allEntries)
 		{
 			if (isVisible(e, btsFilters))
 			{
 				allFilteredEntries.add(e);
+				if (monitor != null)
+				{
+					monitor.worked(1);
+				}
 			}
 		}
 		
 		// load and cache root entries
-		List<E> allRootEntries = listRootEntries();
+		List<E> allRootEntries = listRootEntries(monitor);
+		if (monitor != null)
+		{
+			monitor.beginTask("Calculate all Root Entries", allRootEntries.size());
+		}
 		Set<String> allRootEntriesSet = new HashSet<String>(allRootEntries.size());
 		for (E e : allRootEntries)
 		{
 			if (isVisible(e, btsFilters))
 			{
 				allRootEntriesSet.add(e.get_id());
+				if (monitor != null)
+				{
+					monitor.worked(1);
+				}
 			}
 		}
 		
@@ -71,7 +89,10 @@ implements GenericCorpusObjectService<E, K>{
 		Map<String, List<CacheTreeNode>> awaitingHolder = new HashMap<String, List<CacheTreeNode>>();
 		// nodes that provide hold to children, key = id of child
 		Map<String, List<CacheTreeNode>> providingHold = new HashMap<String, List<CacheTreeNode>>();
-		
+		if (monitor != null)
+		{
+			monitor.beginTask("Calculate all Orphans", allFilteredEntries.size());
+		}
 		// iterate over all entries
 		for (E e : allFilteredEntries)
 		{
@@ -132,6 +153,10 @@ implements GenericCorpusObjectService<E, K>{
 				{
 					roots.put(tn.getId(), tn);
 				}
+				if (monitor != null)
+				{
+					monitor.worked(1);
+				}
 			}
 		}
 		List<E> orphans = new Vector<E>();
@@ -171,5 +196,15 @@ implements GenericCorpusObjectService<E, K>{
 			return true;
 		}
 		return true;
+	}
+	
+	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	{
+		if (object.eResource() == null || object.get_rev() == null)
+		{
+			return true;
+		}
+		return false;
+		
 	}
 }

@@ -158,14 +158,23 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				logger.info("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
 
 				BTSModelAnnotation ma = new BTSModelAnnotation(sentence);
-				
+				int len = stringBuilder.length();
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
 				{
 					appendToStringBuilder(sentenceItem, model, stringBuilder, relatingObjects, relatingObjectsMap);
 					stringBuilder.append(WS);
 				}
-				stringBuilder.replace(stringBuilder.length() - 1,
-						stringBuilder.length(), SENTENCE_SIGN);
+				
+				// check whether sentence items were added
+				if (stringBuilder.length() > len)
+				{
+					stringBuilder.replace(stringBuilder.length() - 1,stringBuilder.length(), SENTENCE_SIGN);
+				}
+				else
+				{
+					stringBuilder.append(SENTENCE_SIGN);
+				}
+						
 				stringBuilder.append("\n");
 				int length = stringBuilder.length() - start;
 				Position pos = new Position(start, length);

@@ -24,6 +24,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
@@ -158,7 +159,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	}
 
 	@Override
-	public List<BTSTextCorpus> listRootEntries() {
+	public List<BTSTextCorpus> listRootEntries(IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}
 

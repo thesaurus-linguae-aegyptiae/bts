@@ -1,6 +1,5 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -19,7 +18,6 @@ import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
-import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.codehaus.jackson.JsonNode;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -105,6 +103,12 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 	private void signalUpdate(Row feed, String docId, String dbCollection)
 	{
 		logger.info("Backend2DB listener on dbCollection: " + dbCollection + ", Changed object id: " + docId);
+		
+		//FIXME dynamisieren für Import!
+		if (true)
+		{
+			return;
+		}
 
 		BTSDBBaseObject object = null;
 		BTSModelUpdateNotification notification = new BTSModelUpdateNotification();

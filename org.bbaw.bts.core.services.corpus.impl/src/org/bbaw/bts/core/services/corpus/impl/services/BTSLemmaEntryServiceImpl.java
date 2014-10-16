@@ -15,6 +15,7 @@ import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSLemmaEntryServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSLemmaEntry, String> 
@@ -126,7 +127,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> listRootEntries() {
+	public List<BTSLemmaEntry> listRootEntries(IProgressMonitor monitor) {
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
 		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
 			entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,

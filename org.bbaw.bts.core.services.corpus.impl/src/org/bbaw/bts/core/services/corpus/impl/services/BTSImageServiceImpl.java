@@ -15,6 +15,7 @@ import org.bbaw.bts.core.services.corpus.BTSImageService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImage, String> implements BTSImageService, BTSObjectSearchService
 {
@@ -142,7 +143,7 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	
 
 	@Override
-	public List<BTSImage> listRootEntries() {
+	public List<BTSImage> listRootEntries(IProgressMonitor monitor) {
 		List<BTSImage> objects = new Vector<BTSImage>();
 		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
 		{

@@ -301,5 +301,8 @@ public class BTSCoreConstants
 
 	public static final String PARAM_ID_MOVE_OBEJECT_AMONG_PROJECT_TARGET_DBCOLLECTIONS = "org.bbaw.bts.ui.main.commandparameter.targetDBCollectionKey";
 
+	public static final String IDENTIFIERS = "Identifiers";
+
+	public static final String IDENTIFIER = "Identifier";
 
 }

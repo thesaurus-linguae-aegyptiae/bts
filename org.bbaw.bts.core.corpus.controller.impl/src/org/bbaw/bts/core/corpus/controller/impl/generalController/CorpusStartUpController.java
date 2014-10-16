@@ -11,10 +11,13 @@ import org.bbaw.bts.core.controller.generalController.ExtensionStartUpController
 import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.DefaultScope;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class CorpusStartUpController implements ExtensionStartUpController {
 
@@ -60,7 +63,50 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 				break;
 			}
 		}
-
+		
+		String active_corpora = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").get(BTSPluginIDs.PREF_ACTIVE_CORPORA, 
+				DefaultScope.INSTANCE.getNode("org.bbaw.bts.app").get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
+		boolean dirty = false;
+		if (active_corpora == null || active_corpora.trim().length() == 0)
+		{
+			active_corpora = main_corpus_key;
+			dirty = true;
+		}
+		else
+		{
+			String[] pros = active_corpora.split("\\|");
+			boolean found = false;
+			for (String p : pros)
+			{
+				if (p.equals(main_corpus_key))
+				{
+					found = true;
+					break;
+				}
+			}
+			if (!found)
+			{
+				active_corpora += "|" + main_corpus_key;
+				dirty = true;
+			}
+		}
+		if (dirty)
+		{
+			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, active_corpora);
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, active_corpora);
+			try {
+				ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
+			} catch (BackingStoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			try {
+				InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
+			} catch (BackingStoreException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

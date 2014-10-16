@@ -1,6 +1,7 @@
 package org.bbaw.bts.searchModel;
 
 import java.util.List;
+import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
@@ -21,6 +22,8 @@ public class BTSQueryRequest
 	private String autocompletePrefix;
 
 	private String requestTypeFieldValue;
+	
+	private List<String> responseFields;
 
 	public List<BTSObject> getGivenObjects()
 	{
@@ -90,6 +93,30 @@ public class BTSQueryRequest
 
 	public void setRequestTypeFieldValue(String requestTypeFieldValue) {
 		this.requestTypeFieldValue = requestTypeFieldValue;
+	}
+
+	public String[] getResponseFields() {
+		if (responseFields == null) return null;
+		return responseFields.toArray(new String[responseFields.size()]);
+	}
+
+	public void setResponseFields(String[] responseFieldsArray) {
+		this.responseFields = new Vector<String>();
+		for (String s : responseFieldsArray)
+		{
+			responseFields.add(s);
+		}
+	}
+	
+	public void addResponseFields(String responseFieldName) {
+		if (responseFields == null)
+		{
+			responseFields = new Vector<String>();
+		}
+		if (!responseFields.contains(responseFieldName))
+		{
+			responseFields.add(responseFieldName);
+		}
 	}
 
 }

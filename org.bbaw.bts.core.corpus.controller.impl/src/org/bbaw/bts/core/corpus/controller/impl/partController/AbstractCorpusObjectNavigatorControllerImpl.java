@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.GenericCorpusObjectNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -25,16 +27,20 @@ import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public abstract class AbstractCorpusObjectNavigatorControllerImpl<E extends BTSCorpusObject, K extends Serializable>
@@ -59,7 +65,7 @@ GenericCorpusObjectNavigatorController<E, K>
 	public List<E> getRootEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName, String queryID) {
+			EReference referenceName, String queryID, IProgressMonitor monitor) {
 		if (queryResultMap != null) {
 			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
 			qra.setViewer(viewer);
@@ -68,7 +74,8 @@ GenericCorpusObjectNavigatorController<E, K>
 			qra.setQueryId(queryID);
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
-		List<E> list = retrieveTypedRootEntries();//thsService.listRootEntries();
+		List<E> list = retrieveTypedRootEntries(monitor);//thsService.listRootEntries();
+		sortEntries(list);
 		List<E> result = new Vector<E>(list.size());
 		for (E t : list) {
 			result.add(t);
@@ -76,7 +83,11 @@ GenericCorpusObjectNavigatorController<E, K>
 		return result;
 	}
 
-	protected abstract List<E> retrieveTypedRootEntries();
+	protected void sortEntries(List<E> list) {
+		Collections.sort(list, new BTSObjectByNameComparator());		
+	}
+
+	protected abstract List<E> retrieveTypedRootEntries(IProgressMonitor monitor);
 
 	@Override
 	public void addRelation(E subject, String relationType,
@@ -120,10 +131,15 @@ GenericCorpusObjectNavigatorController<E, K>
 	public List<E> findChildren(E parent,
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName) {
+			EReference referenceName, IProgressMonitor monitor) {
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId",
+		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId",
 				parent.get_id()));
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
+		for (String relationType : getChildRelationTypes())
+		{
+			
+		}
 		query.setQueryId("relations.objectId-" + parent.get_id());
 		System.out.println(query.getQueryId());
 		if (queryResultMap != null) {
@@ -136,6 +152,10 @@ GenericCorpusObjectNavigatorController<E, K>
 		}
 		List<E> children = executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
+	}
+
+	protected String[] getChildRelationTypes() {
+		return new String[]{"partOf"};
 	}
 
 	protected abstract List<E> executeTypedQuery(BTSQueryRequest query, String objectState);
@@ -251,7 +271,7 @@ GenericCorpusObjectNavigatorController<E, K>
 	public List<E> getDeletedEntries(
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName, String queryID) {
+			EReference referenceName, String queryID, IProgressMonitor monitor) {
 		if (queryResultMap != null) {
 			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
 			qra.setViewer(viewer);
@@ -300,8 +320,12 @@ GenericCorpusObjectNavigatorController<E, K>
 	public abstract E find(K id);
 
 	@Override
-	public List<E> getOrphanEntries(Map map, ViewerFilter[] filters) {
+	public List<E> getOrphanEntries(Map map, ViewerFilter[] filters, IProgressMonitor monitor) {
 		List<BTSFilter> btsFilters = null;
+		if (monitor != null)
+		{
+			monitor.beginTask("Calculate Orphan Entries", 100);
+		}
 		if (filters.length > 0)
 		{
 			btsFilters = new Vector<BTSFilter>(filters.length);
@@ -313,18 +337,19 @@ GenericCorpusObjectNavigatorController<E, K>
 				}
 			}
 		}
-		return retrieveTypedOrphandEntries(map, btsFilters); //thsService.getOrphanThsEntries(map, btsFilters);
+		return retrieveTypedOrphandEntries(map, btsFilters, monitor); //thsService.getOrphanThsEntries(map, btsFilters);
 	}
 
 	protected abstract List<E> retrieveTypedOrphandEntries(Map map,
-			List<BTSFilter> btsFilters);
+			List<BTSFilter> btsFilters, IProgressMonitor monitor);
 
 	@Override
 	public List<E> getSearchEntries(BTSQueryRequest query, 
 			Map<String, BTSQueryResultAbstract> queryResultMap,
 			TreeViewer viewer, TreeNodeWrapper parentHolder,
-			EReference referenceName) {
+			EReference referenceName, IProgressMonitor monitor) {
 		System.out.println(query.getQueryId());
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		if (queryResultMap != null) {
 			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
 			qra.setViewer(viewer);
@@ -336,5 +361,117 @@ GenericCorpusObjectNavigatorController<E, K>
 		System.out.println(query);
 		List<E> children =executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE);// thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
+	}
+	
+	@Override
+	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	{
+		return corpusObjectService.checkAndFullyLoad(object);
+	}
+	
+	@Override
+	public List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor) {
+		List<TreeNodeWrapper> nodes;
+		if (monitor != null)
+		{
+			monitor.beginTask("Load Elements to Treenodes", obs.size());
+		}
+		if (obs.size() > 200)
+		{
+			nodes = new Vector<TreeNodeWrapper>();
+			System.out.println("size " + obs.size());
+
+			if (obs.size() > 2000)
+			{
+				TreeNodeWrapper tn = null;
+				TreeNodeWrapper tn2 = null;
+
+				BTSObject last = null;
+				for (int i = 0; i < obs.size(); i++) 
+				{
+					BTSObject o = obs.get(i);
+					if (tn == null || tn2 == null || i % 50 == 0)
+					{
+						if (tn == null || i % 1000 == 0)
+						{
+							if (tn != null && last != null)
+							{
+								tn.setLabel(tn.getLabel() + " - " + o.getName());
+							}
+							System.out.println("create tn");
+							tn = BtsviewmodelFactory.eINSTANCE
+										.createTreeNodeWrapper();
+							nodes.add(tn);
+							tn.setLabel(o.getName());
+						}
+						if (tn2 != null && last != null)
+						{
+							tn2.setLabel(tn2.getLabel() + " - " + o.getName());
+						}
+						System.out.println("create tn2");
+
+						tn2 = BtsviewmodelFactory.eINSTANCE
+									.createTreeNodeWrapper();
+						tn.getChildren().add(tn2);
+						tn2.setLabel(o.getName());
+					}
+					TreeNodeWrapper t = BtsviewmodelFactory.eINSTANCE
+							.createTreeNodeWrapper();
+					t.setObject(o);
+					tn2.getChildren().add(t);
+					last = o;
+					if (monitor != null)
+					{
+						monitor.worked(1);
+					}
+				}
+			}
+			else
+			{
+				TreeNodeWrapper tn = null;
+				BTSObject last = null;
+				for (int i = 0; i < obs.size(); i++) 
+				{
+					BTSObject o = obs.get(i);
+					if (tn == null || i % 50 == 0)
+					{
+						if (tn != null && last != null)
+						{
+							tn.setLabel(tn.getLabel() + " - " + o.getName());
+						}
+						System.out.println("create tn");
+
+						tn = BtsviewmodelFactory.eINSTANCE
+									.createTreeNodeWrapper();
+							nodes.add(tn);
+							tn.setLabel(o.getName());
+					}
+					TreeNodeWrapper t = BtsviewmodelFactory.eINSTANCE
+							.createTreeNodeWrapper();
+					t.setObject(o);
+					tn.getChildren().add(t);
+					last = o;
+					if (monitor != null)
+					{
+						monitor.worked(1);
+					}
+				}
+			}
+		}
+		else
+		{
+			nodes = new Vector<TreeNodeWrapper>(obs.size());
+			for (BTSObject o : obs) {
+				TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+						.createTreeNodeWrapper();
+				tn.setObject(o);
+				nodes.add(tn);
+				if (monitor != null)
+				{
+					monitor.worked(1);
+				}
+			}
+		}
+		return nodes;
 	}
 }

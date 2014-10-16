@@ -16,7 +16,7 @@ import org.eclipse.ui.texteditor.AbstractTextEditor;
  * Initially copied from IdMapEntry in {@link AbstractTextEditor}
  * 
  * @see org.eclipse.ui.texteditor.AbstractTextEditor
- * @since 2.3
+
  */
 public class ActionDefinitionToStyledTextAction {
 

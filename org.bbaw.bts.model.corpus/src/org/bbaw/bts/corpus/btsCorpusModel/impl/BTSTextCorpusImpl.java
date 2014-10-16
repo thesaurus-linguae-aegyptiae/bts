@@ -169,4 +169,8 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 		return super.eIsSet(featureID);
 	}
 
+	@Override
+	public String getCorpusPrefix() {
+		return corpusPrefix;
+	}
 } //BTSTextCorpusImpl

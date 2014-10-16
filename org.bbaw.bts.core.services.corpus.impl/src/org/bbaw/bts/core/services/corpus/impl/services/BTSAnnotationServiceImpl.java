@@ -15,6 +15,7 @@ import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSAnnotationServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSAnnotation, String> 
@@ -146,7 +147,7 @@ implements BTSAnnotationService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSAnnotation> listRootEntries() {
+	public List<BTSAnnotation> listRootEntries(IProgressMonitor monitor) {
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
 		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
 		{

@@ -144,9 +144,17 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	public String getCorpusPrefix() {
+		if (dBCollectionKey != null)
+		{
+			 String[] arr = dBCollectionKey.split("_");
+			 if (arr.length > 2)
+			 {
+				 corpusPrefix = arr[arr.length - 1];
+			 }
+		}
 		return corpusPrefix;
 	}
 
@@ -183,22 +191,6 @@ public abstract class BTSCorpusObjectImpl extends BTSObjectImpl implements BTSCo
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_CORPUS_OBJECT__WORK_PHASE, oldWorkPhase, workPhase));
 	}
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generatedNOT
-	 */
-	public String getDBCollectionKey() {
-		if (this instanceof BTSTextCorpus)
-		{
-			return getProject() + "_corpus";
-		}
-		else
-		{
-			return getProject() + "_corpus_" + getCorpusPrefix();
-		}
-		
-	}
 
 	/**
 	 * <!-- begin-user-doc -->

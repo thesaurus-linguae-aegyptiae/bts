@@ -14,6 +14,7 @@ import org.eclipse.ui.texteditor.IUpdate;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+
  */
 public class OperationHistoryListener implements IOperationHistoryListener {
 	private final IUndoContext context;

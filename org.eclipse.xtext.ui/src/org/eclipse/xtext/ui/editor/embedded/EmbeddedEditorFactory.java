@@ -85,7 +85,7 @@ import com.google.inject.Provider;
  * // work with the model 
  * </pre>
  * 
- * @since 2.2
+
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class EmbeddedEditorFactory {

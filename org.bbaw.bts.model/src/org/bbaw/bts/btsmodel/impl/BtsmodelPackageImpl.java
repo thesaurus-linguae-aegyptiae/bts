@@ -934,8 +934,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getBTSDBBaseObject__GetDBCollectionKey() {
-		return btsdbBaseObjectEClass.getEOperations().get(0);
+	public EAttribute getBTSDBBaseObject_DBCollectionKey() {
+		return (EAttribute)btsdbBaseObjectEClass.getEStructuralFeatures().get(7);
 	}
 
 	/**
@@ -2014,7 +2014,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__READERS);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__DELETED);
 		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__CONFLICTING_REVS);
-		createEOperation(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY);
+		createEAttribute(btsdbBaseObjectEClass, BTSDB_BASE_OBJECT__DB_COLLECTION_KEY);
 
 		btsRevisionEClass = createEClass(BTS_REVISION);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__REF);
@@ -2182,6 +2182,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSObject());
 		btsdbBaseObjectEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsRevisionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
+		btsExternalReferenceEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsReferencableItemEClass.getESuperTypes().add(this.getBTSObject());
 		btsReferencableItemEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsConfigItemEClass.getESuperTypes().add(this.getBTSConfig());
@@ -2267,14 +2268,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		initEClass(btsdbBaseObjectEClass, BTSDBBaseObject.class, "BTSDBBaseObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSDBBaseObject__rev(), ecorePackage.getEString(), "_rev", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSDBBaseObject_Project(), ecorePackage.getEString(), "project", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_Project(), ecorePackage.getEString(), "project", null, 0, 1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Locked(), ecorePackage.getEBoolean(), "locked", null, 0, 1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Updaters(), ecorePackage.getEString(), "updaters", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_Readers(), ecorePackage.getEString(), "readers", null, 0, -1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject__deleted(), ecorePackage.getEBoolean(), "_deleted", null, 0, 1, BTSDBBaseObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSDBBaseObject_ConflictingRevs(), ecorePackage.getEString(), "conflictingRevs", "", 0, -1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEOperation(getBTSDBBaseObject__GetDBCollectionKey(), ecorePackage.getEString(), "getDBCollectionKey", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEAttribute(getBTSDBBaseObject_DBCollectionKey(), ecorePackage.getEString(), "dBCollectionKey", null, 0, 1, BTSDBBaseObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsRevisionEClass, BTSRevision.class, "BTSRevision", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSRevision_Ref(), ecorePackage.getEInt(), "ref", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

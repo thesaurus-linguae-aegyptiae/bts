@@ -26,7 +26,7 @@ public interface WordPart extends EObject
 {
   /**
    * Returns the value of the '<em><b>WChar</b></em>' containment reference list.
-   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
+   * The list contents are of type {@link org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>WChar</em>' containment reference list isn't clear,
@@ -38,6 +38,6 @@ public interface WordPart extends EObject
    * @model containment="true"
    * @generated
    */
-  EList<EObject> getWChar();
+  EList<WordMiddle> getWChar();
 
 } // WordPart

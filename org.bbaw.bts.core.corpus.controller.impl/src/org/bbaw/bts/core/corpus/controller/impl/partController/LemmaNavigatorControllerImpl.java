@@ -1,16 +1,20 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
+import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 
 implements LemmaNavigatorController{
@@ -19,8 +23,8 @@ implements LemmaNavigatorController{
 	private BTSLemmaEntryService lemmaService;
 	
 	@Override
-	protected List<BTSLemmaEntry> retrieveTypedRootEntries() {
-		return lemmaService.listRootEntries();
+	protected List<BTSLemmaEntry> retrieveTypedRootEntries(IProgressMonitor monitor) {
+		return lemmaService.listRootEntries(monitor);
 	}
 
 	@Override
@@ -40,8 +44,8 @@ implements LemmaNavigatorController{
 
 	@Override
 	protected List<BTSLemmaEntry> retrieveTypedOrphandEntries(Map map,
-			List<BTSFilter> btsFilters) {
-		return lemmaService.getOrphanEntries(map, btsFilters);
+			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
+		return lemmaService.getOrphanEntries(map, btsFilters, monitor);
 	}
 
 	@Override
@@ -55,5 +59,12 @@ implements LemmaNavigatorController{
 		return null;
 	}
 
+	@Override
+	protected void sortEntries(List<BTSLemmaEntry> list) {
+		Collections.sort(list, new BTSEgyObjectByNameComparator());
+	}
 
+	protected String[] getChildRelationTypes() {
+		return new String[]{"partOf", "referencedBy", "referencing"};
+	}
 }

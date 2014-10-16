@@ -282,8 +282,12 @@ labelProvider));
 					if (selectedTreeNode.getObject() != null) {
 						selectedCorpusObject = (BTSObject) selectedTreeNode.getObject();
 						if (selectedCorpusObject instanceof BTSCorpusObject) {
+							corpusNavigatorController.checkAndFullyLoad((BTSCorpusObject) selectedCorpusObject);
+
 						}
 						if (!selectedTreeNode.isChildrenLoaded() || selectedTreeNode.getChildren().isEmpty()) {
+							
+							
 							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
 							parents.add(selectedTreeNode);
 							selectedTreeNode.setChildrenLoaded(true);
@@ -339,9 +343,9 @@ labelProvider));
 				List<BTSCorpusObject> obs;
 				obs = corpusNavigatorController
 						.getOrphanEntries(map,
-								treeViewer.getFilters());
+								treeViewer.getFilters(), monitor);
 				storeIntoMap(obs, parentControl);
-				final List<TreeNodeWrapper> nodes = loadNodes(obs);
+				final List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor);
 				
 				// If you want to update the UI
 				sync.asyncExec(new Runnable() {
@@ -382,7 +386,7 @@ labelProvider));
 								treeViewer,
 								rootNode,
 								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-								BTSCorpusConstants.VIEW_THS_ROOT_ENTRIES);
+								BTSCorpusConstants.VIEW_THS_ROOT_ENTRIES, monitor);
 				} else {
 					obs = corpusNavigatorController
 							.getDeletedEntries(
@@ -390,10 +394,10 @@ labelProvider));
 									treeViewer,
 									rootNode,
 									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES);
+									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES, monitor);
 				}
 				storeIntoMap(obs, parentControl);
-				List<TreeNodeWrapper> nodes = loadNodes(obs);
+				List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor);
 				rootNode.getChildren().addAll(nodes);
 				
 				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
@@ -448,7 +452,7 @@ labelProvider));
 									queryResultMap,
 									mainTreeViewer,
 									parent,
-									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
 
 					storeIntoMap(children, parentControl);
 					// If you want to update the UI
@@ -499,7 +503,10 @@ labelProvider));
 					}
 					if (map != null) {
 						for (BTSCorpusObject o : children) {
-							map.put(o.eResource().getURI(), o.eResource());
+							if (o.eResource() != null)
+							{
+								map.put(o.eResource().getURI(), o.eResource());
+							}
 						}
 					}
 				}
@@ -526,16 +533,6 @@ labelProvider));
 		treeViewer.setInput(root);
 	}
 
-	private List<TreeNodeWrapper> loadNodes(List<BTSCorpusObject> obs) {
-		List<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>(obs.size());
-		for (BTSObject o : obs) {
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-					.createTreeNodeWrapper();
-			tn.setObject(o);
-			nodes.add(tn);
-		}
-		return nodes;
-	}
 
 	@PreDestroy
 	public void preDestroy() {
@@ -749,11 +746,11 @@ labelProvider));
 								queryResultMap,
 								treeViewer,
 								rootNode,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
 				if (obs != null && obs.size() > 0)
 				{
 					storeIntoMap(obs, parentControl);
-					List<TreeNodeWrapper> nodes = loadNodes(obs);
+					List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor);
 					rootNode.getChildren().addAll(nodes);
 				}
 				else

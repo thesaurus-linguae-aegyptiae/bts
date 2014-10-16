@@ -22,7 +22,7 @@ public class BTSFontProviderBBAWLibertine implements BTSFontProvider
 
 	private static final String FONT_NAME = "BBAWLibertine";
 	private static final String[] FONT_STYLES = new String[] { "normal"};//, "bold", "italic", "bolditalic" };
-	private static final String FONT_FILE_NAME = "BBAWLibertine_ah.ttf";
+	private static final String FONT_FILE_NAME = "BBAWLibertine_ah.ttf"; //"BBAWLibertine_ah.ttf";
 	private static final String BUNDLE_NAME = "org.bbaw.bts.ui.font.academy";
 	private static final String FOLDER = "font/";
 	private static final int SIZE = 12;

@@ -58,6 +58,7 @@ public class BTSDBBaseObjectItemProvider
 			addReadersPropertyDescriptor(object);
 			add_deletedPropertyDescriptor(object);
 			addConflictingRevsPropertyDescriptor(object);
+			addDBCollectionKeyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -221,6 +222,28 @@ public class BTSDBBaseObjectItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the DB Collection Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDBCollectionKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_dBCollectionKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_dBCollectionKey_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -268,6 +291,7 @@ public class BTSDBBaseObjectItemProvider
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED:
 			case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS:
+			case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

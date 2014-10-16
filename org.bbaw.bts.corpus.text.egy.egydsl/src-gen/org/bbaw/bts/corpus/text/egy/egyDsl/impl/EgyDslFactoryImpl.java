@@ -79,22 +79,8 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.MARKER: return createMarker();
       case EgyDslPackage.WORD: return createWord();
       case EgyDslPackage.WORD_PART: return createWordPart();
-      case EgyDslPackage.WORD_ENDING: return createWordEnding();
-      case EgyDslPackage.ENDING: return createEnding();
-      case EgyDslPackage.DUAL_ENDING: return createDualEnding();
-      case EgyDslPackage.PLURAL_ENDING: return createPluralEnding();
-      case EgyDslPackage.INTERFIX_FLEXION_EDING: return createInterfixFlexionEding();
-      case EgyDslPackage.INTERFIX_LEXICAL_ENDING: return createInterfixLexicalEnding();
       case EgyDslPackage.WORD_MIDDLE: return createWordMiddle();
       case EgyDslPackage.CHARS: return createChars();
-      case EgyDslPackage.SUFFIX_CHARS: return createSuffixChars();
-      case EgyDslPackage.INTERFIX: return createInterfix();
-      case EgyDslPackage.INTERFIX_LEXICAL: return createInterfixLexical();
-      case EgyDslPackage.INTERFIX_FLEXION: return createInterfixFlexion();
-      case EgyDslPackage.INTERFIX_SUFFIX_PRONOM_LEXICAL: return createInterfixSuffixPronomLexical();
-      case EgyDslPackage.INTERFIX_PREFIX_NON_LEXICAL: return createInterfixPrefixNonLexical();
-      case EgyDslPackage.INTERFIX_PREFIX_LEXICAL: return createInterfixPrefixLexical();
-      case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP: return createInterfixConnectionSyllabicGroup();
       case EgyDslPackage.BRACKETS: return createBrackets();
       case EgyDslPackage.EXPANDED: return createExpanded();
       case EgyDslPackage.NO_EXPANDED: return createNoExpanded();
@@ -292,72 +278,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public WordEnding createWordEnding()
-  {
-    WordEndingImpl wordEnding = new WordEndingImpl();
-    return wordEnding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Ending createEnding()
-  {
-    EndingImpl ending = new EndingImpl();
-    return ending;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DualEnding createDualEnding()
-  {
-    DualEndingImpl dualEnding = new DualEndingImpl();
-    return dualEnding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PluralEnding createPluralEnding()
-  {
-    PluralEndingImpl pluralEnding = new PluralEndingImpl();
-    return pluralEnding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixFlexionEding createInterfixFlexionEding()
-  {
-    InterfixFlexionEdingImpl interfixFlexionEding = new InterfixFlexionEdingImpl();
-    return interfixFlexionEding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixLexicalEnding createInterfixLexicalEnding()
-  {
-    InterfixLexicalEndingImpl interfixLexicalEnding = new InterfixLexicalEndingImpl();
-    return interfixLexicalEnding;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public WordMiddle createWordMiddle()
   {
     WordMiddleImpl wordMiddle = new WordMiddleImpl();
@@ -373,94 +293,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     CharsImpl chars = new CharsImpl();
     return chars;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public SuffixChars createSuffixChars()
-  {
-    SuffixCharsImpl suffixChars = new SuffixCharsImpl();
-    return suffixChars;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Interfix createInterfix()
-  {
-    InterfixImpl interfix = new InterfixImpl();
-    return interfix;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixLexical createInterfixLexical()
-  {
-    InterfixLexicalImpl interfixLexical = new InterfixLexicalImpl();
-    return interfixLexical;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixFlexion createInterfixFlexion()
-  {
-    InterfixFlexionImpl interfixFlexion = new InterfixFlexionImpl();
-    return interfixFlexion;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixSuffixPronomLexical createInterfixSuffixPronomLexical()
-  {
-    InterfixSuffixPronomLexicalImpl interfixSuffixPronomLexical = new InterfixSuffixPronomLexicalImpl();
-    return interfixSuffixPronomLexical;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixPrefixNonLexical createInterfixPrefixNonLexical()
-  {
-    InterfixPrefixNonLexicalImpl interfixPrefixNonLexical = new InterfixPrefixNonLexicalImpl();
-    return interfixPrefixNonLexical;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixPrefixLexical createInterfixPrefixLexical()
-  {
-    InterfixPrefixLexicalImpl interfixPrefixLexical = new InterfixPrefixLexicalImpl();
-    return interfixPrefixLexical;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public InterfixConnectionSyllabicGroup createInterfixConnectionSyllabicGroup()
-  {
-    InterfixConnectionSyllabicGroupImpl interfixConnectionSyllabicGroup = new InterfixConnectionSyllabicGroupImpl();
-    return interfixConnectionSyllabicGroup;
   }
 
   /**

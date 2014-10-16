@@ -23,7 +23,7 @@ import org.eclipse.xtext.util.LazyStringInputStream;
 /**
  * The model access allows to obtain or manipulate the edited text.
  * 
- * @since 2.2
+
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */

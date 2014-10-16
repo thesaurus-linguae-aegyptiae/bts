@@ -38,6 +38,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.ecore.EObject;
@@ -160,11 +161,14 @@ implements CorpusNavigatorController
 	@Override
 	public List<BTSCorpusObject> findChildren(BTSCorpusObject parent,
 			Map<String, BTSQueryResultAbstract> queryResultMap, ContentViewer treeViewer,
-			TreeNodeWrapper parentWrapper, EReference referenceName)
+			TreeNodeWrapper parentWrapper, EReference referenceName, IProgressMonitor monitor)
 	{
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId", parent.get_id()));
+//		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId", parent.get_id()));
+		//FIXME
 		query.setQueryId("relations.objectId-" + parent.get_id());
+		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId", parent.get_id()));
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		logger.info(query.getQueryId());
 		if (queryResultMap != null)
 		{
@@ -376,7 +380,12 @@ implements CorpusNavigatorController
 
 	@Override
 	public List<BTSTextCorpus> listTextCorpora() {
-		return textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		for (BTSTextCorpus c : corpora)
+		{
+			checkAndFullyLoad(c);
+		}
+		return corpora;
 	}
 
 	@Override
@@ -398,7 +407,7 @@ implements CorpusNavigatorController
 	
 
 	@Override
-	protected List<BTSCorpusObject> retrieveTypedRootEntries() {
+	protected List<BTSCorpusObject> retrieveTypedRootEntries(IProgressMonitor monitor) {
 		List<BTSTextCorpus> list = textCorpusService
 				.list(BTSConstants.OBJECT_STATE_ACTIVE);
 		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
@@ -427,8 +436,8 @@ implements CorpusNavigatorController
 
 	@Override
 	protected List<BTSCorpusObject> retrieveTypedOrphandEntries(Map map,
-			List<BTSFilter> btsFilters) {
-		return corpusObjectService.getOrphanEntries(map, btsFilters);
+			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
+		return corpusObjectService.getOrphanEntries(map, btsFilters, monitor);
 	}
 
 	@Override

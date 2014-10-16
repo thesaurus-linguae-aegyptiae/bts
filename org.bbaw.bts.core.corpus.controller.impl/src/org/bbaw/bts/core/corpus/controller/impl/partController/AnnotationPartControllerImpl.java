@@ -44,6 +44,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId",
 				object.get_id()));
 		query.setQueryId("relations.objectId-" + object.get_id());
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
 		List<BTSCorpusObject> obs = corpusObjectService.query(query,

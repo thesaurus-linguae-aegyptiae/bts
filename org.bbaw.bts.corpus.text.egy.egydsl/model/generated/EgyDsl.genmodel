@@ -37,38 +37,10 @@
     <genClasses ecoreClass="EgyDsl.ecore#//WordPart">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//WordPart/wChar"/>
     </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//WordEnding"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//Ending">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Ending/chars"/>
-    </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//DualEnding">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//DualEnding/chars"/>
-    </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//PluralEnding">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//PluralEnding/chars"/>
-    </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixFlexionEding">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixFlexionEding/interfix"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixFlexionEding/chars"/>
-    </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixLexicalEnding">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixLexicalEnding/interfix"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//InterfixLexicalEnding/chars"/>
-    </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//WordMiddle"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Chars">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//Chars/name"/>
     </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//SuffixChars">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//SuffixChars/name"/>
-    </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//Interfix"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixLexical"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixFlexion"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixSuffixPronomLexical"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixPrefixNonLexical"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixPrefixLexical"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//InterfixConnectionSyllabicGroup"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Brackets"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Expanded">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Expanded/wChar"/>

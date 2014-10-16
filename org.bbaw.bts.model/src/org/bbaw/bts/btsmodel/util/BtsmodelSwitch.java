@@ -168,6 +168,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			case BtsmodelPackage.BTS_EXTERNAL_REFERENCE: {
 				BTSExternalReference btsExternalReference = (BTSExternalReference)theEObject;
 				T result = caseBTSExternalReference(btsExternalReference);
+				if (result == null) result = caseBTSIdentifiableItem(btsExternalReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

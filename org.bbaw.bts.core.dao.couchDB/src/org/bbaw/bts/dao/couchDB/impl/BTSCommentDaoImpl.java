@@ -15,5 +15,8 @@ public class BTSCommentDaoImpl extends CouchDBDao<BTSComment, String> implements
 	}
 
 	
+	
+
+	
 
 }

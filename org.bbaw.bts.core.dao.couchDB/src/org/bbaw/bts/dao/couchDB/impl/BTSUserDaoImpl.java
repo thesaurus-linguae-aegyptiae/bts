@@ -207,8 +207,8 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 		boolean valid = false;
 		if (is != null)
 		{
-			System.out.println(is.toString());
 			jso = EmfModelHelper.load(is, JsonObject.class);
+			System.out.println(jso.toString());
 			valid = checkDBUserBTSUser(jso, entity);		
 		}
 		if (valid)
@@ -216,7 +216,17 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 			return user;
 		}
 		jso = updateOrMakeNewDBUser(jso, entity, dbClient);
-		Response response = dbClient.save(jso);
+		Response response = null;
+		if (is != null)
+		{
+			response = dbClient.update(jso);
+		}
+		else
+		{
+			System.out.println("USER JSON: " + jso.toString());
+
+			response = dbClient.save(jso);
+		}
 		user.set_rev(response.getRev());
 		return user;
 	}

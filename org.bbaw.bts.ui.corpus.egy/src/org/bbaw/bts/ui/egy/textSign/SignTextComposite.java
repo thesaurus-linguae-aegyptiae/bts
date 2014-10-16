@@ -202,7 +202,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		canvas.setBackground(COLOR_CANVAS_BACKGROUND);
 		canvas.setLayout(new FillLayout());
 		container = new Figure();
-		container.setBorder(new LineBorder());
+//		container.setBorder(new LineBorder());
 
 		layout = new FlowLayout();
 		layout.setHorizontal(false);

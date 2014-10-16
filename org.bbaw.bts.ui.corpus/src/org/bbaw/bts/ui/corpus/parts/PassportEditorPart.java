@@ -54,6 +54,7 @@ import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryEditorComposite;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryGroupEditor;
 import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryItemEditor;
+import org.bbaw.bts.ui.main.widgets.CompoundIdentifiersEditorComposite;
 import org.bbaw.bts.ui.main.widgets.CompoundRelationsEditorComposite;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
@@ -158,9 +159,9 @@ public class PassportEditorPart {
 	@Inject
 	private CorpusNavigatorController corpusNavigatorController;
 	
-	@Inject
-	@Optional
-	@Named(BTSUIConstants.PART_SAVE_ON_DESELCTION)
+//	@Inject
+//	@Optional
+//	@Named(BTSUIConstants.PART_SAVE_ON_DESELCTION)
 	private boolean save_on_deselection = true;
 	
 	@Inject
@@ -244,7 +245,7 @@ public class PassportEditorPart {
 		tabFolder.setSimple(false);
 		createMainTabItem(tabFolder);
 		createRelationTabItem(tabFolder);
-
+		createIdentifiersTabItem(tabFolder);
 		// createGenericTabItems(tabFolder);
 
 		loaded = true;
@@ -287,6 +288,40 @@ public class PassportEditorPart {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
 		((GridLayout) relationsComp.getLayout()).marginWidth = 0;
 		((GridLayout) relationsComp.getLayout()).marginHeight = 0;
+
+
+	}
+	
+	private void createIdentifiersTabItem(CTabFolder folder) {
+		CTabItem tbtmMain = new CTabItem(folder, SWT.NONE);
+		tbtmMain.setText("IDs");
+		tbtmMain.setToolTipText("External Identifiers");
+		tbtmMain.setData("id", "id");
+
+		final ScrolledComposite scrollComposite = new ScrolledComposite(folder,
+				SWT.V_SCROLL | SWT.H_SCROLL | SWT.BORDER);
+		final Composite idsComp = new Composite(scrollComposite, SWT.NONE);
+		tbtmMain.setControl(scrollComposite);
+		scrollComposite.setContent(idsComp);
+		scrollComposite.setExpandVertical(true);
+		scrollComposite.setExpandHorizontal(true);
+		scrollComposite.addControlListener(new ControlAdapter() {
+			@Override
+			public void controlResized(ControlEvent e) {
+				Rectangle r = scrollComposite.getClientArea();
+				scrollComposite.setMinSize(idsComp.computeSize(r.width,
+						SWT.DEFAULT));
+			}
+		});
+
+		idsComp.setLayout(new GridLayout(8, false));
+		((GridLayout) idsComp.getLayout()).marginWidth = 0;
+		((GridLayout) idsComp.getLayout()).marginHeight = 0;
+
+		idsComp.setLayout(new GridLayout(
+				BTSUIConstants.PASSPORT_COLUMN_NUMBER, true));
+		((GridLayout) idsComp.getLayout()).marginWidth = 0;
+		((GridLayout) idsComp.getLayout()).marginHeight = 0;
 
 
 	}
@@ -391,7 +426,6 @@ public class PassportEditorPart {
 			tabItem.setControl(composite);
 		} else {
 			Control c = tabItem.getControl();
-			c.dispose();
 			tabItem.setControl(null);
 
 			composite = new ScrolledComposite(folder, SWT.V_SCROLL
@@ -454,8 +488,8 @@ public class PassportEditorPart {
 
 	private void createMainTabItem(CTabFolder folder) {
 		CTabItem tbtmMain = new CTabItem(folder, SWT.NONE);
-		tbtmMain.setText("Main");
-
+		tbtmMain.setToolTipText("Main");
+		tbtmMain.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_PASSPORT));
 		final ScrolledComposite scrollComposite = new ScrolledComposite(folder,
 				SWT.V_SCROLL | SWT.H_SCROLL | SWT.BORDER);
 		final Composite compTBTM_Main = new Composite(scrollComposite, SWT.NONE);
@@ -883,6 +917,7 @@ public class PassportEditorPart {
 			object.setPassport(BtsCorpusModelFactory.eINSTANCE.createBTSPassport());
 			setDirty(true);
 		}
+		
 		if (mainComposite == null || mainComposite.isDisposed())
 		{
 			mainComposite = new Composite(parent, SWT.NONE);
@@ -901,7 +936,11 @@ public class PassportEditorPart {
 				commandStackListener);
 		editingDomain.getCommandStack().addCommandStackListener(
 				getCommandStackListener());
-
+		if (tabFolder != null && !tabFolder.isDisposed())
+		{
+			tabFolder.dispose();
+			tabFolder = null;
+		}
 		tabFolder = new CTabFolder(mainComposite, SWT.BORDER);
 		tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(
 				SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
@@ -911,6 +950,8 @@ public class PassportEditorPart {
 		initializeDatabindingMain(object);
 
 		createRelationTabItem(tabFolder);
+
+		createIdentifiersTabItem(tabFolder);
 
 		// createAdminTabItem(tabFolder);
 		// initializeDatabindingAdmin(object);
@@ -935,6 +976,12 @@ public class PassportEditorPart {
 					Point p = sc.getSize();
 					sc.setSize(p.x, p.y + 1);
 				}
+				else if (ti.getData("id") != null) {
+					loadIdentifiersTabItem(ti, tabFolder);
+					ScrolledComposite sc = (ScrolledComposite) ti.getControl();
+					Point p = sc.getSize();
+					sc.setSize(p.x, p.y + 1);
+				}
 
 			}
 
@@ -950,6 +997,65 @@ public class PassportEditorPart {
 		}
 		setUserMayEditInteral(userMayEdit);
 
+	}
+
+	protected void loadIdentifiersTabItem(CTabItem tabItem, CTabFolder folder) {
+		ScrolledComposite composite;
+		if (tabItem == null) {
+			tabItem = new CTabItem(folder, SWT.NONE);
+			// tabItem.setImage(resourceProvider.getImage(Display.getDefault(),
+			// BTSResourceProvider.IMG_RED));
+			composite = new ScrolledComposite(folder, SWT.V_SCROLL
+					| SWT.H_SCROLL | SWT.BORDER);
+			FillLayout fillLayout = new FillLayout();
+			fillLayout.type = SWT.VERTICAL;
+			composite.setLayout(fillLayout);
+			tabItem.setControl(composite);
+		} else {
+//			Control c = tabItem.getControl();
+//			if (!c.isDisposed()) c.dispose();
+			tabItem.setControl(null);
+
+			composite = new ScrolledComposite(folder, SWT.V_SCROLL
+					| SWT.H_SCROLL | SWT.BORDER);
+			FillLayout fillLayout = new FillLayout();
+			fillLayout.type = SWT.VERTICAL;
+			composite.setLayout(fillLayout);
+			tabItem.setControl(composite);
+		}
+		final ScrolledComposite scrolledComposite = composite;
+		final Composite idsComp = new Composite(scrolledComposite,
+				SWT.NONE);
+		scrolledComposite.setContent(idsComp);
+		scrolledComposite.setExpandVertical(true);
+		scrolledComposite.setExpandHorizontal(true);
+		scrolledComposite.addControlListener(new ControlAdapter() {
+			@Override
+			public void controlResized(ControlEvent e) {
+				Rectangle r = scrolledComposite.getClientArea();
+				scrolledComposite.setMinSize(idsComp.computeSize(r.width,
+						SWT.DEFAULT));
+			}
+		});
+
+		idsComp.setLayout(new GridLayout(8, false));
+		((GridLayout) idsComp.getLayout()).marginWidth = 0;
+		((GridLayout) idsComp.getLayout()).marginHeight = 0;
+
+		IEclipseContext child = context.createChild("ids");
+		child.set(Composite.class, idsComp);
+		child.set(EditingDomain.class, editingDomain);
+		child.set(BTSObject.class, corpusObject);
+		child.set(BTSResourceProvider.class, resourceProvider);
+
+		// scrollComposite.layout();
+
+		CompoundIdentifiersEditorComposite relationsEditor = ContextInjectionFactory
+				.make(CompoundIdentifiersEditorComposite.class, child);
+
+		// foreach relation in object.relations
+		// make relation widget
+		// add plus and minus button
 	}
 
 	private CommandStackListener getCommandStackListener() {
@@ -1017,6 +1123,13 @@ public class PassportEditorPart {
 				Point p = sc.getSize();
 				sc.setSize(p.x, p.y + 1);
 			}
+			else if (tabItem.getData("id") != null) {
+				loadIdentifiersTabItem(tabItem, tabFolder);
+				ScrolledComposite sc = (ScrolledComposite) tabItem.getControl();
+				Point p = sc.getSize();
+				sc.setSize(p.x, p.y + 1);
+			}
+				
 			return;
 
 		}
@@ -1088,7 +1201,7 @@ public class PassportEditorPart {
 
 	private void setDirty(boolean dirty) {
 		this.dirty.setDirty(dirty);
-
+		System.out.println("passporteditor set dirty");
 	}
 
 	private void purgeAll() {
@@ -1233,9 +1346,13 @@ public class PassportEditorPart {
 			{
 				corpusText.setText(labelProvider_corpus.getText(corpus));
 			}
-			else
+			else if (object.getCorpusPrefix() != null)
 			{
 				corpusText.setText(object.getCorpusPrefix());
+			}
+			else
+			{
+				corpusText.setText("");
 			}
 		}
 		else

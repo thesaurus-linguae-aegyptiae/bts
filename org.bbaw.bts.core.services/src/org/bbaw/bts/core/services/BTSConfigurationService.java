@@ -197,4 +197,6 @@ public interface BTSConfigurationService extends GenericObjectService<BTSConfigu
 	 */
 	List<BTSConfigItem> getPassportCategories(BTSObject object);
 
+	BTSConfigItem getIdentifiersConfigItem();
+
 }

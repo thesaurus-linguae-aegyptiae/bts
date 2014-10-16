@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.UUID;
 
+import javax.xml.bind.DatatypeConverter;
+
+import org.apache.commons.codec.binary.Base64;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Platform;
@@ -118,6 +118,9 @@ public class BTSConstants
 	public static final String VIEW_ALL_TERMINATED_BTSPROJECTS = "admin/all_terminated_projects";
 
 	public static final String ORPHANS_NODE_LABEL = "_Orphans";
+
+	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS = new String[]{"_id", "eClass", "type", "subtype",
+		"updaters", "readers", "name", "revisionState", "visibility"};
 	private BTSConstants()
 	{
 	}
@@ -228,6 +231,13 @@ public class BTSConstants
 		String val = String.valueOf(cal.get(Calendar.YEAR));
 		val += timeFormat4.format(cal.get(Calendar.DAY_OF_YEAR));
 		val += UUID.randomUUID().toString().replaceAll("-", "");
+		val = val.replace("-", "");
+		
+		// encode Base64 to reduce size
+		byte[] array = DatatypeConverter.parseHexBinary(val);
+		val = Base64.encodeBase64URLSafeString(array);
+		val = val.replace("-", "Q");
+		val = val.replace("_", "W");
 		return val;
 	}
 }

@@ -13,6 +13,7 @@ import org.eclipse.osgi.util.NLS;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+
  */
 public class EmbeddedEditorMessages extends NLS {
 

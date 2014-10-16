@@ -20,7 +20,7 @@ import org.elasticsearch.action.search.SearchType;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.search.SearchHit;
 
-public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
+public class CorpusObjectDaoImpl extends AbstractCorpusObjectDaoImpl<BTSCorpusObject, String>
 		implements CorpusObjectDao {
 
 	@Override
@@ -267,6 +267,12 @@ public class CorpusObjectDaoImpl extends CouchDBDao<BTSCorpusObject, String>
 			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
 		}
 		return results;
+	}
+
+	@Override
+	protected BTSCorpusObject createObject() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

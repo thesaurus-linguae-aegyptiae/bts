@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.xtext;visibility:=reexport,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.common.types,
- org.eclipse.emf.mwe2.runtime;bundle-version="2.4.1",
+ org.eclipse.emf.mwe2.runtime,
  org.objectweb.asm;bundle-version="[5.0.1,6.0.0)";resolution:=optional
 Import-Package: org.apache.log4j,
  org.bbaw.bts.corpus.text.egy.validation,

@@ -75,6 +75,11 @@ public class TextModelHelper {
 						modelSentence = (BTSSenctence) ma.getModelObject();
 					}
 					if (modelSentence == null) {
+						if  (((Sentence) item).getItems().isEmpty())
+						{
+//							sentence actually empty
+							continue;
+						}
 						modelSentence = makeNewModelSentence(sentence,
 								lastModelSentence, textContent);
 					}
@@ -86,8 +91,13 @@ public class TextModelHelper {
 					if (lastModelSentence != null) {
 						int lastIndex =textContent.getTextItems()
 								.indexOf(lastModelSentence);
-						textContent.getTextItems()
-								.add(lastIndex + 1, modelSentence);
+						try {
+							textContent.getTextItems()
+									.add(lastIndex + 1, modelSentence);
+						} catch (java.lang.IllegalArgumentException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					} else {
 						textContent.getTextItems()
 								.add(0, modelSentence);

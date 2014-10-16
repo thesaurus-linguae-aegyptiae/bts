@@ -17,6 +17,7 @@ import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSThsEntryServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSThsEntry, String> 
@@ -102,7 +103,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	}
 
 	@Override
-	public List<BTSThsEntry> listRootEntries() {
+	public List<BTSThsEntry> listRootEntries(IProgressMonitor monitor) {
 		List<BTSThsEntry> entries = new Vector<BTSThsEntry>();
 		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
 			entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
@@ -122,8 +123,8 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	}
 	@Override
 	public List<BTSThsEntry> getOrphanEntries(Map map,
-			List<BTSFilter> btsFilters) {
-		return super.getOrphanEntries(map, btsFilters);
+			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
+		return super.getOrphanEntries(map, btsFilters, monitor);
 	}
 	
 }

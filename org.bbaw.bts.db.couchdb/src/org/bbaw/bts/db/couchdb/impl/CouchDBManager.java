@@ -45,6 +45,7 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
+import org.elasticsearch.ElasticsearchException;
 import org.elasticsearch.action.UnavailableShardsException;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
@@ -210,23 +211,45 @@ public class CouchDBManager implements DBManager
 	private void checkAndRemoveReplication(BTSProjectDBCollection collection, BTSDBConnection dbConnection)
 
 	{
+		ReplicatorDocument doc = null;
 		try
 		{
-			connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName()).replicator()
-					.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE)
-					.remove();
-		} catch (Exception e)
+			doc = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
+					.replicator().replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE).find();
+			
+			if (doc != null)
+			{
+				String rev = doc.getRevision();
+				connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName()).replicator()
+				.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE)
+				.replicatorDocRev(rev)
+				.remove();
+			}
+			
+		}catch (NoDocumentException e)
 		{
-			// TODO Auto-generated catch block
+		} 
+		catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 
 		try
 		{
-			connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName()).replicator()
+			doc = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
+					.replicator().replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE).find();
+			if (doc != null)
+			{
+				String rev = doc.getRevision();
+				connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName()).replicator()
 					.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE)
+					.replicatorDocRev(rev)
 					.remove();
-		} catch (Exception e)
+			}
+		}catch (NoDocumentException e)
+		{
+		} 
+		catch (Exception e)
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -438,7 +461,7 @@ public class CouchDBManager implements DBManager
 		boolean hasIndex = existsIndex(esClient, collection);
 
 		// FIXME
-		if (false && hasIndex)
+		if (true && hasIndex)
 		{
 			return true;
 		} else
@@ -674,15 +697,14 @@ public class CouchDBManager implements DBManager
 	}
 
 	private File loadCouchBaseArchive() throws URISyntaxException, IOException {
+		File file = null;
 		URL entry = Platform.getBundle("org.bbaw.bts.db.couchdb").getEntry(
 				"/db/" + DB_ARCHIVE_NAME + ".zip");
+		String fileURL = null;
 		if (entry != null) {
-			URLConnection connection;
-			connection = entry.openConnection();
-			URL fileURL = ((URLConnection) connection).getURL();
-
-			URI uri = new URI(fileURL.toString());
-			File file = new File(uri);
+			fileURL = FileLocator.toFileURL(entry).getPath();
+			fileURL = fileURL.substring(1, fileURL.length());
+			file = new File(fileURL);
 			return file;
 		} else {
 			throw new IOException("CouchDB Base Archive not found!");
@@ -1049,6 +1071,14 @@ public class CouchDBManager implements DBManager
 	}
 
 	private void prepareShutdown() {
+		Client client = connectionProvider.getSearchClient(Client.class);
+		try {
+			client.close();
+		} catch (ElasticsearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.NOTIFICATION);
 		dbClient.context().compact();
 		dbClient.shutdown();

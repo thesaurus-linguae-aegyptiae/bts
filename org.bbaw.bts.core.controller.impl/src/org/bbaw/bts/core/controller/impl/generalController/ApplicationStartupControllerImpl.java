@@ -8,6 +8,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+
 import javax.inject.Inject;
 
 import org.bbaw.bts.app.login.Login;
@@ -248,7 +249,12 @@ public class ApplicationStartupControllerImpl implements
 						{
 							for (ExtensionStartUpController c : conrollers)
 							{
-								c.startup();
+								try {
+									c.startup();
+								} catch (Exception e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
 							}
 						}
 						splashController.close();
@@ -405,6 +411,11 @@ public class ApplicationStartupControllerImpl implements
 		// prefs.
 		System.out.println("active: " + active_projects + " main: "
 				+ main_project_key);
+		if (active_projects == null || "".equals(active_projects)) // active_projects are set
+		{
+			active_projects = main_project_key;
+		}
+		
 		if (active_projects != null) // active_projects are set
 		{
 			activeProjects = new Vector<String>();
@@ -438,7 +449,13 @@ public class ApplicationStartupControllerImpl implements
 			
 //			checkCorpusSelectionSettings();
 		}
-		
+		prefs.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, active_projects);
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		
@@ -536,7 +553,6 @@ public class ApplicationStartupControllerImpl implements
 		IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
 		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
 	
-		prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_CORPORA, null));
 		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
 		
 		active_projects = prefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS,defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS, null));
@@ -547,7 +563,7 @@ public class ApplicationStartupControllerImpl implements
 		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR, defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
 		
 		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
-		defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
+//		defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 		
 	}
 
@@ -576,7 +592,6 @@ public class ApplicationStartupControllerImpl implements
 		        // set location of artifact and metadata repo
 		        operation.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
 		        operation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
-
 		        /* 2. check for updates */
 
 
@@ -716,7 +731,16 @@ public class ApplicationStartupControllerImpl implements
 	private void checkProjectsSelectionsSettings() {
 		if (activeProjects != null) {
 			for (String p : activeProjects) {
-				if (checkContains(projects, p)) {
+				if (!checkContains(projects, p)) {
+					activeProjects.add(p);
+					if ("".equals(active_projects))
+					{
+						active_projects = p;
+					}
+					else
+					{
+						active_projects += "|" + p;
+					}
 
 				}
 			}

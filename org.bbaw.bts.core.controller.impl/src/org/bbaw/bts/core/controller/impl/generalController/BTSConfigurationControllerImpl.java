@@ -488,7 +488,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		String oType = object.getType();
 		String oSubtype = object.getSubtype();
 		Set<String> references = new HashSet<String>();
-
+		if (relationConfig == null) return references;
 		if (relationConfig.getOwnerTypesMap().containsKey(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
 		{
 			Object o = relationConfig.getOwnerTypesMap().get(BTSConstants.OWNER_REFERENCED_TYPES_ANY);
@@ -562,6 +562,48 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	@Override
 	public BTSConfigItem getVisibilityConfigItem() {
 		return configService.getVisibilityConfigItem();
+	}
+
+	@Override
+	public BTSConfigItem getIdentifiersProviderConfigItemProcessedClones(
+			BTSConfigItem itemConfig, BTSObject object) {
+		BTSConfigItem config = configService.getIdentifiersConfigItem();
+		BTSObjectTypeTreeNode rootpath = null;
+		if (itemConfig != null) {
+			//FIXME update
+//			rootpath = itemConfig.getPassportEditorConfig()
+//					.getReferencedTypesPath();
+		}
+		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
+				.createBTSConfigItem();
+		configService.calculateChildrenReferncedObjectsRecurcively(rootpath, config,
+				pathClonesList,
+				object);
+
+		return pathClonesList;
+	}
+
+	@Override
+	public BTSConfig getIdentifiersConfigItem() {
+		BTSConfigItem typesCI = configService.getIdentifiersConfigItem();
+		return typesCI;
+	}
+
+	@Override
+	public String getIconStringOfRevisionsState(BTSObject object) {
+		if (object.getRevisionState() == null) return null;
+		BTSConfigItem revCI = configService.getReviewStatusConfigItem();
+		if (revCI == null) return null;
+		for (BTSConfig child : revCI.getChildren())
+		{
+			if (child instanceof BTSConfigItem && object.getRevisionState().equals(((BTSConfigItem) child).getValue()))
+			{
+				return ((BTSConfigItem) child).getSubtype();
+			}
+		}
+		return null;
+		
+		
 	}
 
 

@@ -57,7 +57,7 @@ public class SplashScreenControllerImpl implements ISplashScreenController
 
 	private Shell createSplashShell()
 	{
-		final Shell shell = new Shell(SWT.ON_TOP | SWT.NO_TRIM);
+		final Shell shell = new Shell( SWT.NO_TRIM); //SWT.ON_TOP |
 		Image image = createBackgroundImage(shell);
 		shell.setBackgroundImage(image);
 		shell.setBackgroundMode(SWT.INHERIT_DEFAULT);

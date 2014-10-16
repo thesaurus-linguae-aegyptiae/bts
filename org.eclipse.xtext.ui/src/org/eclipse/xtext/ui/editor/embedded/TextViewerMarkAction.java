@@ -8,7 +8,7 @@ import org.eclipse.jface.text.ITextViewer;
  * An action to handle emacs-like marked regions.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @since 2.3
+
  */
 public class TextViewerMarkAction extends TextViewerAction {
 

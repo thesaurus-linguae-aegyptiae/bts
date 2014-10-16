@@ -397,7 +397,13 @@ public class AnnotationsPart implements EventHandler {
 		else if (selection instanceof BTSObject)
 		{
 			relatingObjectsQueryIDMap.clear();
-			List<BTSObject> relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection);
+			List<BTSObject> relatingObjects = null;
+			try {
+				relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			queryId = "relations.objectId-" + ((BTSObject) selection).get_id();
 			relatingObjectsQueryIDMap.put(queryId, relatingObjects);
 			eventReceivedRelatingObjectsLoadedEvents(relatingObjects);

@@ -1145,7 +1145,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				// TODO save configurable this is autosave!!!
 				if (text != null)
 				{
-					purgeCache();
 					if (editingDomain != null) {
 						editingDomain.getCommandStack().removeCommandStackListener(
 								commandStackListener);
@@ -1153,10 +1152,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					save();
 				}
 				if (selection instanceof BTSText) {
+					purgeCache();
 					loadInput((BTSCorpusObject) selection);
 					part.setLabel(selection.getName());
 
 				} else {
+					purgeCache();
 					loadInput(null);
 					if (part != null)
 					{

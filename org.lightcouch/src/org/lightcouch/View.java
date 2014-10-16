@@ -693,7 +693,7 @@ public class View
 					elem = jsonElem.getAsJsonObject().get("doc");
 				}
 				String id = elem.toString();
-				System.out.println(id);
+//				System.out.println(id);
 				list.add(id);
 			}
 			return list;

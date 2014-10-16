@@ -1,6 +1,6 @@
 function(doc){
 	if (doc.relations == null){
-		emit(null, doc);
+		emit(doc._id, {"name": doc.name, "eClass": doc.eClass, "type": doc.type, "subtype": doc.subtype, "visibility": doc.visibility, "readers": doc.readers, "updaters": doc.updaters, "revisionState": doc.revisionState});
 	}
 	else
 	{
@@ -10,6 +10,6 @@ function(doc){
 				return;
 			}
 		}
-		emit(null, doc);
+		emit(doc._id, {"name": doc.name, "eClass": doc.eClass, "type": doc.type, "subtype": doc.subtype, "visibility": doc.visibility, "readers": doc.readers, "updaters": doc.updaters, "revisionState": doc.revisionState});
 	}
 }

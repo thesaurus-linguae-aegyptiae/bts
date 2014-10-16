@@ -201,7 +201,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		List<BTSCorpusObject> selections = chrosenProvider.getInputElements();
 		for (BTSCorpusObject corpus : selections)
 		{
-			if (corpus.getCorpusPrefix() != null)
+			if (corpus.getCorpusPrefix() != null && !prefixes.contains(corpus.getCorpusPrefix()))
 			{
 				prefixes.add(corpus.getCorpusPrefix());
 			}
@@ -214,27 +214,32 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		{
 			return super.performOk();
 		}
-		boolean saveRequired = false;
+		boolean dirty = false;
 		if (selectedTextCorpus != null && selectedTextCorpus.getCorpusPrefix() != null && (main_corpus_key == null || !main_corpus_key.equals(selectedTextCorpus.getCorpusPrefix())))
 		{
-			prefs.put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
+			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected
 			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
 			context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
-			saveRequired = true;
+			dirty = true;
 		}
 		String selectedProjetsString = getActiveProjectSelectionsAsString();
 		if (selectedProjetsString != null && !selectedProjetsString.equals(active_corpora))
 		{
-			prefs.put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
+			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
 			// update instance scope so that new value is injected
 			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
-			saveRequired = true;
+			dirty = true;
 		}
-		if (saveRequired)
+		if (dirty)
 		{
 			try {
-				prefs.flush();
+				ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
+			} catch (BackingStoreException e) {
+				logger.error(e);
+			}
+			try {
+				InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
 			} catch (BackingStoreException e) {
 				logger.error(e);
 			}

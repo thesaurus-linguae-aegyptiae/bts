@@ -61,6 +61,7 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 			addReadersPropertyDescriptor(object);
 			add_deletedPropertyDescriptor(object);
 			addConflictingRevsPropertyDescriptor(object);
+			addDBCollectionKeyPropertyDescriptor(object);
 			addSortKeyPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
@@ -340,6 +341,28 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 	}
 
 	/**
+	 * This adds a property descriptor for the DB Collection Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDBCollectionKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSDBBaseObject_dBCollectionKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSDBBaseObject_dBCollectionKey_feature", "_UI_BTSDBBaseObject_type"),
+				 BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
 	 * This adds a property descriptor for the Sort Key feature. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
 	 * 
@@ -515,7 +538,7 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 		if (childrenFeatures == null)
 		{
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN);
+//			childrenFeatures.add(BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN);
 		}
 		return childrenFeatures;
 	}

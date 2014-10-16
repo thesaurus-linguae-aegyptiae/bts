@@ -7,9 +7,10 @@ import org.bbaw.bts.core.dao.corpus.BTSTextCorpusDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 
-public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> implements BTSTextCorpusDao
+public class BTSTextCorpusDaoImpl extends AbstractCorpusObjectDaoImpl<BTSTextCorpus, String> implements BTSTextCorpusDao
 {
 
 	@Override
@@ -49,6 +50,11 @@ public class BTSTextCorpusDaoImpl extends CouchDBDao<BTSTextCorpus, String> impl
 			registerQueryIdWithInternalRegistry(staticQueryId, dbPath);
 		}
 		return results;
+	}
+
+	@Override
+	protected BTSTextCorpus createObject() {
+		return BtsCorpusModelFactory.eINSTANCE.createBTSTextCorpus();
 	}
 
 	

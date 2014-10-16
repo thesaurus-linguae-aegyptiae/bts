@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.emf.common.util.URI;
@@ -228,5 +229,8 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 * @param objectAsString the object as string
 	 */
 	void fillResource(Resource resource, String objectAsString);
+	
+	E loadFully(E entity);
 
+	E loadObjectFromString(String id, String path, URI uri, String sourceAsString);//E loadEntityFromString(String jo, String dbPath);
 }

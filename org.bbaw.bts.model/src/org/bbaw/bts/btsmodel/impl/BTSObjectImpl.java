@@ -2,8 +2,8 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getReaders <em>Readers</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getDBCollectionKey <em>DB Collection Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getType <em>Type</em>}</li>
@@ -156,6 +157,26 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * @ordered
 	 */
 	protected EList<String> conflictingRevs;
+
+	/**
+	 * The default value of the '{@link #getDBCollectionKey() <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String DB_COLLECTION_KEY_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getDBCollectionKey() <em>DB Collection Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDBCollectionKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected String dBCollectionKey = DB_COLLECTION_KEY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
@@ -330,9 +351,14 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
-	public String getProject() {
+	public String getProject()
+	{
+		if (dBCollectionKey != null)
+		{
+			project = dBCollectionKey.split("_")[0];
+		}
 		return project;
 	}
 
@@ -582,9 +608,19 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * @generated
 	 */
 	public String getDBCollectionKey() {
-		// TODO: implement this method
-		// Ensure that you remove @generated or mark it @generated NOT
-		throw new UnsupportedOperationException();
+		return dBCollectionKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDBCollectionKey(String newDBCollectionKey) {
+		String oldDBCollectionKey = dBCollectionKey;
+		dBCollectionKey = newDBCollectionKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY, oldDBCollectionKey, dBCollectionKey));
 	}
 
 	/**
@@ -625,6 +661,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return is_deleted();
 			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
 				return getConflictingRevs();
+			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
+				return getDBCollectionKey();
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				return getSortKey();
 			case BtsmodelPackage.BTS_OBJECT__NAME:
@@ -677,6 +715,9 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
 				getConflictingRevs().clear();
 				getConflictingRevs().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
+				setDBCollectionKey((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				setSortKey((Integer)newValue);
@@ -737,6 +778,9 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
 				getConflictingRevs().clear();
 				return;
+			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
+				setDBCollectionKey(DB_COLLECTION_KEY_EDEFAULT);
+				return;
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				setSortKey(SORT_KEY_EDEFAULT);
 				return;
@@ -787,6 +831,8 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return _deleted != _DELETED_EDEFAULT;
 			case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS:
 				return conflictingRevs != null && !conflictingRevs.isEmpty();
+			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
+				return DB_COLLECTION_KEY_EDEFAULT == null ? dBCollectionKey != null : !DB_COLLECTION_KEY_EDEFAULT.equals(dBCollectionKey);
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_OBJECT__NAME:
@@ -823,6 +869,7 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				case BtsmodelPackage.BTS_OBJECT__READERS: return BtsmodelPackage.BTSDB_BASE_OBJECT__READERS;
 				case BtsmodelPackage.BTS_OBJECT__DELETED: return BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED;
 				case BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+				case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY: return BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY;
 				default: return -1;
 			}
 		}
@@ -845,40 +892,11 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__READERS: return BtsmodelPackage.BTS_OBJECT__READERS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_OBJECT__DELETED;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS;
+				case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY: return BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY;
 				default: return -1;
 			}
 		}
 		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
-		if (baseClass == BTSDBBaseObject.class) {
-			switch (baseOperationID) {
-				case BtsmodelPackage.BTSDB_BASE_OBJECT___GET_DB_COLLECTION_KEY: return BtsmodelPackage.BTS_OBJECT___GET_DB_COLLECTION_KEY;
-				default: return -1;
-			}
-		}
-		return super.eDerivedOperationID(baseOperationID, baseClass);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
-		switch (operationID) {
-			case BtsmodelPackage.BTS_OBJECT___GET_DB_COLLECTION_KEY:
-				return getDBCollectionKey();
-		}
-		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
