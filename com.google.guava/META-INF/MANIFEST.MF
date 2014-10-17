@@ -63,7 +63,7 @@ Export-Package: com.google.common.annotations;version="15.0.0",
    com.google.common.primitives,
    com.google.common.math",
  com.google.common.xml;version="15.0.0";uses:="com.google.common.escape"
-Bundle-Version: 15.0.0.v201403281430
+Bundle-Version: 15.0.0.qualifier
 Bundle-Description: Guava is a suite of core and expanded libraries th
  at include    utility classes, google's collections, io classes, and 
  much    much more.    Guava has two code dependencies - javax.annotat
@@ -76,8 +76,7 @@ Bundle-Name: %bundleName
 Tool: Bnd-1.50.0
 Created-By: Apache Maven Bundle Plugin
 Bundle-ManifestVersion: 2
-Import-Package: javax.inject;resolution:=optional,
- sun.misc;resolution:=optional
+Import-Package: javax.inject;resolution:=optional
 
 Name: com/google/common/io/OutputSupplier.class
 SHA1-Digest: yuvjPx3TBXjsMfF4mc9WlSL1VSU=
@@ -5297,6 +5296,7 @@ SHA1-Digest: dPFAv3ms93y5MDZ2q0qfSJJ42Iw=
 Name: com/google/common/collect/TreeTraverser$BreadthFirstIterator.cla
  ss
 SHA1-Digest: 4TifDdApryIlC90puhmze++e+4o=
-Bundle-ClassPath: libs/jsr305-1.3.9.jar,
- .
+Bundle-ClassPath: .
+Require-Bundle: org.apache.servicemix.bundles.jsr305;bundle-version="1.3.9"
+
 

@@ -730,9 +730,10 @@ public class ApplicationStartupControllerImpl implements
 
 	private void checkProjectsSelectionsSettings() {
 		if (activeProjects != null) {
+			List<String> toAdd = new Vector<String>(4);
 			for (String p : activeProjects) {
 				if (!checkContains(projects, p)) {
-					activeProjects.add(p);
+					toAdd.add(p);
 					if ("".equals(active_projects))
 					{
 						active_projects = p;
@@ -741,8 +742,11 @@ public class ApplicationStartupControllerImpl implements
 					{
 						active_projects += "|" + p;
 					}
-
 				}
+			}
+			if (!toAdd.isEmpty())
+			{
+				activeProjects.addAll(toAdd);
 			}
 		}
 		if (main_project_key != null && main_project_key.trim().length() > 0) {

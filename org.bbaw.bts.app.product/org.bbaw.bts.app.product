@@ -120,8 +120,8 @@
       <feature id="org.eclipse.emf.ecore"/>
       <feature id="org.eclipse.emf.common"/>
       <feature id="org.eclipse.e4.rcp"/>
-      <feature id="org.bbaw.bts.app.feature" version="0.0.2.201410161611"/>
-      <feature id="org.bbaw.bts.corpus.egy.feature" version="0.0.2.201410161611"/>
+      <feature id="org.bbaw.bts.app.feature" version="0.0.2.201410170929"/>
+      <feature id="org.bbaw.bts.corpus.egy.feature" version="0.0.2.201410170929"/>
       <feature id="org.eclipse.equinox.p2.core.feature" version="1.3.0.v20140523-0116"/>
    </features>
 

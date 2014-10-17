@@ -12,14 +12,20 @@
 		<module>org.eclipse.xtext.common.types.ui</module>
 		<module>org.eclipse.xtext.ecore</module>
 		<module>org.eclipse.xtext.codetemplates.ui</module>
-		<module>org.eclipse.xtext.util</module>-->
+		<module>org.eclipse.xtext.util</module>
+		
+		<module>com.google.guava</module>
+		-->
 		
 		
-		<!--<module>org.bbaw.bts.updatesite</module>
+		<module>org.bbaw.bts.updatesite</module>
+		<module>org.bbaw.bts.app.feature</module>
+		<module>org.bbaw.bts.corpus.egy.feature</module>
+		<module>org.bbaw.bts.e4.p2.feature</module>
+
 
 		<module>com.opcoach.e4.preferences</module>
 		<module>org.bbaw.bts.app</module>
-		<module>org.bbaw.bts.app.feature</module>
 		<module>org.bbaw.bts.app.login</module>
 		<module>org.bbaw.bts.commons</module>
 		<module>org.bbaw.bts.commons.libs.elasticsearch</module>
@@ -42,14 +48,11 @@
 		<module>org.bbaw.bts.core.services.corpus.impl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>
-		
-		-->
-		<!--<module>org.bbaw.bts.corpus.text.egy.egydsl.tests</module>-->
-		<!--<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
+
+		<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
 		<module>org.bbaw.bts.db</module>
 		<module>org.bbaw.bts.db.couchdb</module>
 		<module>org.bbaw.bts.e4.p2</module>
-		<module>org.bbaw.bts.e4.p2.feature</module>
 		<module>org.bbaw.bts.model</module>
 		<module>org.bbaw.bts.model.edit</module>
 		<module>org.bbaw.bts.model.editor</module>
@@ -66,24 +69,15 @@
 		<module>org.bbaw.bts.ui.main</module>
 		<module>org.bbaw.bts.ui.resources</module>
 
-
 		<module>org.eclipselabs.emfjson</module>
-
 		<module>org.eclipselabs.emfjson.feature</module>
-
 		<module>org.eclipselabs.emfjson.couchdb</module>
 		<module>org.eclipselabs.emfjson.couchdb.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb.ui</module>
-
 		<module>org.lightcouch</module>
-		
-		<module>org.bbaw.bts.corpus.egy.feature</module>
 		<module>org.bbaw.bts.ui.font.academy</module>
-		-->
 
-		<module>org.bbaw.bts.app.product</module>
-
-
+		<!--<module>org.bbaw.bts.app.product</module>-->
 
 	</modules>
 
@@ -96,20 +90,13 @@
 
 	<repositories>
 	
-		<!--<repository>
+	<repository>
 			<id>bts-mvn-telota-all</id>
 			<name>BTS Maven local Rep</name>
 			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
 			<layout>p2</layout>
 		</repository>
-		-->
-		
-		<repository>
-			<id>bts-mvn-telota-build</id>
-			<name>BTS Maven local Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-rep</url>
-			<layout>p2</layout>
-		</repository>
+		<!--
 		<repository>
 			<id>bts-mvn-telota</id>
 			<name>BTS Maven local Rep</name>
@@ -122,7 +109,7 @@
 			<url>${kepler-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
-		
+		-->
 
 		<repository>
 			<id>e4-tools</id>
