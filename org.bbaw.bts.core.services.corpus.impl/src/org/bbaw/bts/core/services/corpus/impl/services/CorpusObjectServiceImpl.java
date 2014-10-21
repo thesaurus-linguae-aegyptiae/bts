@@ -206,7 +206,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 				return tcObject;
 			}
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -224,7 +224,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	public List<BTSCorpusObject> list(String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -239,7 +239,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	public List<BTSCorpusObject> getRootBTSCorpusObjects()
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -260,7 +260,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 					objectState));
 		} else
 		{
-			for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+			for (String p : getActiveProjects())
 			{
 				for (String c : getActive_corpora())
 				{
@@ -277,7 +277,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	private List<BTSCorpusObject> find(BTSQueryRequest query, String objectState)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -313,7 +313,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	public List<BTSPassportEntry> getPassportEntryProposals(
 			BTSQueryRequest query) {
 		List<BTSPassportEntry> result = new Vector<BTSPassportEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 			for (String c : getActive_corpora()
 					) {
 				result.addAll(corpusObjectDao.getPassportEntryProposals(
@@ -352,7 +352,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState,
 			boolean registerQuery) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 			for (String c : getActive_corpora()) {
 				
 				try {
@@ -389,7 +389,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 				return tcObject;
 			}
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{

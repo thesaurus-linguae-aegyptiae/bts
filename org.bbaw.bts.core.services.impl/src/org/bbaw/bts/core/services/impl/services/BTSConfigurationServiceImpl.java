@@ -84,7 +84,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			return config;
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			config = configurationDao.find(key, p + BTSCoreConstants.ADMIN_SUFFIX);
 			if (config != null)
@@ -99,7 +99,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public List<BTSConfiguration> list(String objectState)
 	{
 		List<BTSConfiguration> configs = new Vector<BTSConfiguration>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			configs.addAll(configurationDao.list(p
 					+ BTSCoreConstants.ADMIN_SUFFIX, objectState));
@@ -189,7 +189,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			String objectState, boolean registerQuery)
 	{
 		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			objects.addAll(configurationDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
 							+ BTSCoreConstants.ADMIN_SUFFIX, objectState,

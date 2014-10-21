@@ -73,7 +73,7 @@ implements BTSAnnotationService, BTSObjectSearchService
 				return anno;
 			}
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -91,7 +91,7 @@ implements BTSAnnotationService, BTSObjectSearchService
 	public List<BTSAnnotation> list(String objectState)
 	{
 		List<BTSAnnotation> annos = new Vector<BTSAnnotation>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -107,7 +107,7 @@ implements BTSAnnotationService, BTSObjectSearchService
 			boolean registerQuery)
 	{
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -131,10 +131,6 @@ implements BTSAnnotationService, BTSObjectSearchService
 	{
 		return filter(annotationDao.findByQueryId(queryId, dbPath, objectState));
 	}
-
-	protected String[] getActive_corpora() {
-		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
-	}
 	@Override
 	public String getNameOfServedClass() {
 		return "BTSAnnotation";
@@ -149,7 +145,7 @@ implements BTSAnnotationService, BTSObjectSearchService
 	@Override
 	public List<BTSAnnotation> listRootEntries(IProgressMonitor monitor) {
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{

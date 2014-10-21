@@ -419,9 +419,26 @@ public class ApplicationStartupControllerImpl implements
 		if (active_projects != null) // active_projects are set
 		{
 			activeProjects = new Vector<String>();
+			boolean reset = false;
 			for (String p : active_projects.split("\\|")) {
-				activeProjects.add(p);
+				if (!activeProjects.contains(p))
+				{
+					activeProjects.add(p);
+				}
+				else
+				{
+					reset = true;
+				}
 			}
+			if (reset)
+			{
+				active_projects = "";
+				for (String p : activeProjects) {
+					active_projects += p + "|";
+				}
+				active_projects = active_projects.substring(0, active_projects.length() - 1);
+			}
+			
 		}
 
 		if (projects != null && !projects.isEmpty()) {
@@ -729,26 +746,7 @@ public class ApplicationStartupControllerImpl implements
 	}
 
 	private void checkProjectsSelectionsSettings() {
-		if (activeProjects != null) {
-			List<String> toAdd = new Vector<String>(4);
-			for (String p : activeProjects) {
-				if (!checkContains(projects, p)) {
-					toAdd.add(p);
-					if ("".equals(active_projects))
-					{
-						active_projects = p;
-					}
-					else
-					{
-						active_projects += "|" + p;
-					}
-				}
-			}
-			if (!toAdd.isEmpty())
-			{
-				activeProjects.addAll(toAdd);
-			}
-		}
+	
 		if (main_project_key != null && main_project_key.trim().length() > 0) {
 			if (activeProjects == null)
 			{

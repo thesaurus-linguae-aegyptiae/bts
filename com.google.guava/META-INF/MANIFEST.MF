@@ -6,58 +6,50 @@ Bundle-SymbolicName: com.google.guava
 Eclipse-SourceReferences: scm:cvs:pserver:dev.eclipse.org:/cvsroot/too
  ls:org.eclipse.orbit/com.google.guava;tag=v201403281430
 Export-Package: com.google.common.annotations;version="15.0.0",
- com.google.common.base;version="15.0.0";uses:="javax.annotation",
+ com.google.common.base;version="15.0.0",
  com.google.common.cache;version="15.0.0";
   uses:="com.google.common.collect,
    com.google.common.util.concurrent,
-   javax.annotation,
    com.google.common.base,
    com.google.common.primitives,
    sun.misc",
  com.google.common.collect;version="15.0.0";
   uses:="com.google.common.base,
-   javax.annotation,
    com.google.common.primitives,
    com.google.common.math",
- com.google.common.escape;version="15.0.0";uses:="com.google.common.base,javax.annotation",
+ com.google.common.escape;version="15.0.0";uses:="com.google.common.base",
  com.google.common.eventbus;version="15.0.0";
   uses:="com.google.common.collect,
    com.google.common.cache,
-   javax.annotation,
    com.google.common.base,
    com.google.common.util.concurrent,
    com.google.common.reflect",
  com.google.common.hash;version="15.0.0";
   uses:="com.google.common.primitives,
    com.google.common.base,
-   javax.annotation,
    com.google.common.math",
- com.google.common.html;version="15.0.0";uses:="com.google.common.escape,javax.annotation",
+ com.google.common.html;version="15.0.0";uses:="com.google.common.escape",
  com.google.common.io;version="15.0.0";
-  uses:="javax.annotation,
-   com.google.common.base,
+  uses:="com.google.common.base,
    com.google.common.math,
    com.google.common.hash,
    com.google.common.collect,
    com.google.common.primitives",
- com.google.common.math;version="15.0.0";uses:="com.google.common.base,com.google.common.primitives,javax.annotation",
+ com.google.common.math;version="15.0.0";uses:="com.google.common.base,com.google.common.primitives",
  com.google.common.net;version="15.0.0";
-  uses:="javax.annotation,
-   com.google.common.base,
+  uses:="com.google.common.base,
    com.google.common.hash,
    com.google.common.io,
    com.google.common.primitives,
    com.google.common.collect,
    com.google.common.escape",
- com.google.common.primitives;version="15.0.0";uses:="javax.annotation,com.google.common.base,sun.misc",
+ com.google.common.primitives;version="15.0.0";uses:="com.google.common.base,sun.misc",
  com.google.common.reflect;version="15.0.0";
-  uses:="javax.annotation,
-   com.google.common.base,
+  uses:="com.google.common.base,
    com.google.common.collect,
    com.google.common.primitives",
  com.google.common.util.concurrent;version="15.0.0";
   uses:="com.google.common.base,
-   javax.annotation,
    com.google.common.collect,
    javax.inject,
    com.google.common.primitives,
@@ -76,7 +68,11 @@ Bundle-Name: %bundleName
 Tool: Bnd-1.50.0
 Created-By: Apache Maven Bundle Plugin
 Bundle-ManifestVersion: 2
-Import-Package: javax.inject;resolution:=optional
+Import-Package: javax.annotation;resolution:=optional,
+ javax.annotation.concurrent;resolution:=optional,
+ javax.inject;resolution:=optional
+Require-Bundle: org.bbaw.bts.javax.annotation
+ 
 
 Name: com/google/common/io/OutputSupplier.class
 SHA1-Digest: yuvjPx3TBXjsMfF4mc9WlSL1VSU=
@@ -5296,7 +5292,6 @@ SHA1-Digest: dPFAv3ms93y5MDZ2q0qfSJJ42Iw=
 Name: com/google/common/collect/TreeTraverser$BreadthFirstIterator.cla
  ss
 SHA1-Digest: 4TifDdApryIlC90puhmze++e+4o=
-Bundle-ClassPath: .
-Require-Bundle: org.apache.servicemix.bundles.jsr305;bundle-version="1.3.9"
+
 
 

@@ -24,7 +24,7 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 	public List<BTSComment> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery) {
 		List<BTSComment> objects = new Vector<BTSComment>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			objects.addAll(commentDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
 					+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
@@ -68,7 +68,7 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		{
 			return comment;
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			comment = commentDao.find(key, p + BTSCoreConstants.ADMIN_SUFFIX);
 			if (comment != null)
@@ -79,10 +79,12 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		return comment;
 	}
 
+	
+
 	@Override
 	public List<BTSComment> list(String objectState) {
 		List<BTSComment> comments = new Vector<BTSComment>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 				comments.addAll(commentDao.list(p
 						+ BTSCoreConstants.ADMIN_SUFFIX, objectState));

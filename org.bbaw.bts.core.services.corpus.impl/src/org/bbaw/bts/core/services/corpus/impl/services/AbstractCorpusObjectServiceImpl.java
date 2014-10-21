@@ -207,4 +207,8 @@ implements GenericCorpusObjectService<E, K>{
 		return false;
 		
 	}
+	
+	protected String[] getActive_corpora() {
+		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
+	}
 }

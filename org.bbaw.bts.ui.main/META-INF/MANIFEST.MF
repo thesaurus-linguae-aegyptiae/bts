@@ -54,13 +54,10 @@ Require-Bundle: org.eclipse.e4.ui.di,
  org.eclipse.equinox.p2.engine;bundle-version="2.3.0",
  com.opcoach.e4.preferences;bundle-version="1.0.0",
  org.eclipse.core.runtime;bundle-version="3.9.100",
- org.eclipse.xtext.util;bundle-version="2.6.2",
- org.eclipse.jdt.annotation;bundle-version="[1.1.0,1.9.0)"
+ org.eclipse.xtext.util;bundle-version="2.6.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: javax.annotation;version="1.0.0",
  javax.inject,
- org.bbaw.bts.corpus.text.egy.ui,
- org.bbaw.bts.corpus.text.egy.ui.internal,
  org.bbaw.bts.db,
  org.bbaw.bts.e4.p2,
  org.eclipse.e4.core.services.contributions,

@@ -66,7 +66,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		if (entry != null) {
 			return entry;
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 			entry = thsEntryDao.find(key, p + BTSCorpusConstants.THS);
 			if (entry != null) {
 				return entry;
@@ -78,7 +78,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public List<BTSThsEntry> list(String objectState) {
 		List<BTSThsEntry> entries = new Vector<BTSThsEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 			entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
 					objectState));
 		}
@@ -89,7 +89,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery) {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 
 			objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p
 					+ BTSCorpusConstants.THS, objectState, registerQuery));
@@ -105,7 +105,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public List<BTSThsEntry> listRootEntries(IProgressMonitor monitor) {
 		List<BTSThsEntry> entries = new Vector<BTSThsEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 			entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
 					DaoConstants.VIEW_THS_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
 		}

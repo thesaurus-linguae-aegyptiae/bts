@@ -29,9 +29,9 @@
 		</repository>
 		
 		<repository>
-			<id>bts-mvn-build-rep</id>
+			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-rep</url>
+			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
 			<layout>p2</layout>
 		</repository>
 		
@@ -41,6 +41,7 @@
 			<layout>p2</layout>
 		</repository>
 
+		<!--
 		<repository>
 			<id>e4-tools</id>
 			<url>http://download.vogella.com/luna/e4tools</url>
@@ -51,6 +52,7 @@
 			<id>emfjson-repository</id>
 			<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
 		</repository>
+		-->
 
 	</repositories>
 	
@@ -68,23 +70,7 @@
 				<artifactId>target-platform-configuration</artifactId>
 				<configuration>
 					<environments>
-						<!--
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86</arch>
-						</environment>
-						<environment>
-							<os>linux</os>
-							<ws>gtk</ws>
-							<arch>x86_64</arch>
-						</environment>
-						<environment>
-							<os>win32</os>
-							<ws>win32</ws>
-							<arch>x86</arch>
-						</environment>
-						-->
+					
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
@@ -96,6 +82,21 @@
 							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
 						</environment>
 						-->
 					</environments>

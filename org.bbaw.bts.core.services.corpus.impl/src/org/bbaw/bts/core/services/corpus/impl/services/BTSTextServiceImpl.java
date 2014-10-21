@@ -81,7 +81,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 				return text;
 			}
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -99,7 +99,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	public List<BTSText> list(String objectState)
 	{
 		List<BTSText> texts = new Vector<BTSText>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -115,7 +115,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 			boolean registerQuery)
 	{
 		List<BTSText> objects = new Vector<BTSText>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -156,9 +156,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		return BtsCorpusModelFactory.eINSTANCE.createBTSGraphic();
 	}
 
-	protected String[] getActive_corpora() {
-		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
-	}
+	
 	@Override
 	public String getNameOfServedClass() {
 		return "BTSText";

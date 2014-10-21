@@ -12,8 +12,6 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory;
-import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.preferences.InstanceScope;

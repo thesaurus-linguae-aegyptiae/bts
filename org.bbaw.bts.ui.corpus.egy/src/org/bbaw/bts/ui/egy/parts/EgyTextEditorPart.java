@@ -140,6 +140,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
+import com.google.common.base.Predicate;
 import com.google.inject.Injector;
 
 public class EgyTextEditorPart implements IBTSEditor, EventHandler
@@ -373,6 +374,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					StaticAccessController sa = context
 							.get(StaticAccessController.class);
 					EgyDslActivator activator = EgyDslActivator.getInstance();
+					
+					Predicate p = null;
 					Injector injector = activator
 							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
 					embeddedEditorFactory = injector

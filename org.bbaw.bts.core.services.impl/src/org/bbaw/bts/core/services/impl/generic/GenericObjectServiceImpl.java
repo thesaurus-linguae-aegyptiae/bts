@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -21,6 +22,7 @@ import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
@@ -174,7 +176,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 //				return tcObject;
 //			}
 //		}
-//		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+//		for (String p : getActiveProjects())
 //		{
 //			for (String c : getActive_corpora())
 //			{
@@ -288,6 +290,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		}
 	}
 	
+	
 	public String getDisplayName(String userId)
 	{
 		BTSObject o = null;
@@ -301,5 +304,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		return userId;
 		
 	}
-
+	protected String[] getActiveProjects() {
+		return  active_projects.split(BTSCoreConstants.SPLIT_PATTERN);
+	}
 }

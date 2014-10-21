@@ -66,7 +66,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		{
 			return entry;
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			entry = lemmaEntryDao.find(key, p + BTSCorpusConstants.WLIST);
 			if (entry != null)
@@ -81,7 +81,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	public List<BTSLemmaEntry> list(String objectState)
 	{
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
 					objectState));
@@ -93,7 +93,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			boolean registerQuery)
 	{
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 
 			objects.addAll(lemmaEntryDao.query(query,
@@ -129,7 +129,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Override
 	public List<BTSLemmaEntry> listRootEntries(IProgressMonitor monitor) {
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN)) {
+		for (String p : getActiveProjects()) {
 			entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
 					DaoConstants.VIEW_LEMMA_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
 		}

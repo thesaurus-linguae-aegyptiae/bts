@@ -71,7 +71,7 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 				return image;
 			}
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -89,7 +89,7 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	public List<BTSImage> list(String objectState)
 	{
 		List<BTSImage> images = new Vector<BTSImage>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -105,7 +105,7 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 			boolean registerQuery)
 	{
 		List<BTSImage> objects = new Vector<BTSImage>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -127,9 +127,6 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		return filter(imageDao.findByQueryId(queryId, dbPath, objectState));
 	}
 
-	protected String[] getActive_corpora() {
-		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
-	}
 	@Override
 	public String getNameOfServedClass() {
 		return "BTSImage";
@@ -145,7 +142,7 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	@Override
 	public List<BTSImage> listRootEntries(IProgressMonitor monitor) {
 		List<BTSImage> objects = new Vector<BTSImage>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{

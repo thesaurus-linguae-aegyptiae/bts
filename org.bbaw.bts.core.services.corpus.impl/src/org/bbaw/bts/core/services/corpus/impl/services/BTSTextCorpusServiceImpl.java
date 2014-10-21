@@ -83,7 +83,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		{
 			return corpus;
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			corpus = textCorpusDao.find(key, p + BTSCorpusConstants.CORPUS);
 			if (corpus != null)
@@ -98,7 +98,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	public List<BTSTextCorpus> list(String objectState)
 	{
 		List<BTSTextCorpus> list = new Vector<BTSTextCorpus>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			list.addAll(textCorpusDao.list(p + BTSCorpusConstants.CORPUS,
 					objectState));
@@ -111,7 +111,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 			boolean registerQuery)
 	{
 		List<BTSTextCorpus> objects = new Vector<BTSTextCorpus>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 
 			objects.addAll(textCorpusDao.query(query, p

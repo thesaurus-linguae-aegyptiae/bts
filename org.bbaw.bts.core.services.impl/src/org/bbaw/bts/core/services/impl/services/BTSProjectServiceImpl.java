@@ -152,7 +152,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			boolean registerQuery)
 	{
 		List<BTSProject> objects = new Vector<BTSProject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			objects.addAll(projectDao.query(query, BTSCoreConstants.ADMIN,
 					BTSCoreConstants.ADMIN, objectState, registerQuery));

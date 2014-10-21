@@ -37,7 +37,7 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.e4.ui.css.core;bundle-version="0.10.100",
  org.eclipse.osgi.services;bundle-version="3.3.100"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: javax.annotation,
+Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
  org.bbaw.bts.core.commons,

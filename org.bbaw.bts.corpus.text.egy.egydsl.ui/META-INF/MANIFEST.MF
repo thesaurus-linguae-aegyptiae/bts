@@ -16,7 +16,7 @@ Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
- com.opcoach.e4.preferences;bundle-version="1.0.0"
+ com.google.guava
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,

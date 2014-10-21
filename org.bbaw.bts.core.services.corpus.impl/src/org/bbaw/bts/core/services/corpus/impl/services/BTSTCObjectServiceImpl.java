@@ -81,7 +81,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 				return tcObject;
 			}
 		}
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -99,7 +99,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	public List<BTSTCObject> list(String objectState)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -114,7 +114,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 			boolean registerQuery)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
-		for (String p : active_projects.split(BTSCoreConstants.SPLIT_PATTERN))
+		for (String p : getActiveProjects())
 		{
 			for (String c : getActive_corpora())
 			{
@@ -134,10 +134,6 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	public List<BTSTCObject> list(String dbPath, String queryId, String objectState)
 	{
 		return filter(bTSTCObjectDao.findByQueryId(queryId, dbPath, objectState));
-	}
-
-	protected String[] getActive_corpora() {
-		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
 	}
 	@Override
 	public String getNameOfServedClass() {

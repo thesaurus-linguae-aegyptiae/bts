@@ -1,9 +1,0 @@
-{
-   "_id": "_design/admin",
-   "_rev": "9-5fbcf40bff5eedbf959d8f6ee783365d",
-   "views": {
-       "all_projects": {
-           "map": "function(doc) { if (doc.eClass == 'http://btsmodel/1.0#//BTSProject')  emit(null, doc) }"
-       }
-   }
-}
