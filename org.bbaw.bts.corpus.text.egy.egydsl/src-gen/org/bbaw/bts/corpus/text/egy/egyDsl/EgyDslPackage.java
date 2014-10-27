@@ -358,6 +358,34 @@ public interface EgyDslPackage extends EPackage
   int MARKER_FEATURE_COUNT = ABSTRACT_MARKER_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionMarkerImpl <em>Destruction Marker</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionMarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestructionMarker()
+   * @generated
+   */
+  int DESTRUCTION_MARKER = 13;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESTRUCTION_MARKER__TYPE = ABSTRACT_MARKER_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Destruction Marker</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESTRUCTION_MARKER_FEATURE_COUNT = ABSTRACT_MARKER_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.WordImpl <em>Word</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -365,7 +393,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getWord()
    * @generated
    */
-  int WORD = 13;
+  int WORD = 14;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -393,10 +421,10 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getWordPart()
    * @generated
    */
-  int WORD_PART = 14;
+  int WORD_PART = 15;
 
   /**
-   * The feature id for the '<em><b>WChar</b></em>' containment reference list.
+   * The feature id for the '<em><b>WChar</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
@@ -421,7 +449,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getWordMiddle()
    * @generated
    */
-  int WORD_MIDDLE = 15;
+  int WORD_MIDDLE = 16;
 
   /**
    * The number of structural features of the '<em>Word Middle</em>' class.
@@ -440,7 +468,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getChars()
    * @generated
    */
-  int CHARS = 16;
+  int CHARS = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -468,7 +496,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getBrackets()
    * @generated
    */
-  int BRACKETS = 17;
+  int BRACKETS = 18;
 
   /**
    * The number of structural features of the '<em>Brackets</em>' class.
@@ -480,6 +508,128 @@ public interface EgyDslPackage extends EPackage
   int BRACKETS_FEATURE_COUNT = WORD_MIDDLE_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.Cartouche2Impl <em>Cartouche2</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.Cartouche2Impl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getCartouche2()
+   * @generated
+   */
+  int CARTOUCHE2 = 19;
+
+  /**
+   * The feature id for the '<em><b>WChar</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CARTOUCHE2__WCHAR = BRACKETS_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Cartouche2</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CARTOUCHE2_FEATURE_COUNT = BRACKETS_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.SerechImpl <em>Serech</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.SerechImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getSerech()
+   * @generated
+   */
+  int SERECH = 20;
+
+  /**
+   * The feature id for the '<em><b>WChar</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERECH__WCHAR = BRACKETS_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Serech</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SERECH_FEATURE_COUNT = BRACKETS_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.CartoucheImpl <em>Cartouche</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.CartoucheImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getCartouche()
+   * @generated
+   */
+  int CARTOUCHE = 21;
+
+  /**
+   * The feature id for the '<em><b>WChar</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CARTOUCHE__WCHAR = BRACKETS_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Cartouche</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CARTOUCHE_FEATURE_COUNT = BRACKETS_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.OvalImpl <em>Oval</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.OvalImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getOval()
+   * @generated
+   */
+  int OVAL = 22;
+
+  /**
+   * The number of structural features of the '<em>Oval</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int OVAL_FEATURE_COUNT = BRACKETS_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.NoCartoucheImpl <em>No Cartouche</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.NoCartoucheImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoCartouche()
+   * @generated
+   */
+  int NO_CARTOUCHE = 23;
+
+  /**
+   * The number of structural features of the '<em>No Cartouche</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NO_CARTOUCHE_FEATURE_COUNT = 0;
+
+  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.ExpandedImpl <em>Expanded</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -487,7 +637,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getExpanded()
    * @generated
    */
-  int EXPANDED = 18;
+  int EXPANDED = 24;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -515,7 +665,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoExpanded()
    * @generated
    */
-  int NO_EXPANDED = 19;
+  int NO_EXPANDED = 25;
 
   /**
    * The number of structural features of the '<em>No Expanded</em>' class.
@@ -534,7 +684,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getEmendation()
    * @generated
    */
-  int EMENDATION = 20;
+  int EMENDATION = 26;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -562,7 +712,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoEmendation()
    * @generated
    */
-  int NO_EMENDATION = 21;
+  int NO_EMENDATION = 27;
 
   /**
    * The number of structural features of the '<em>No Emendation</em>' class.
@@ -581,7 +731,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableReading()
    * @generated
    */
-  int DISPUTABLE_READING = 22;
+  int DISPUTABLE_READING = 28;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -609,7 +759,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoDisputableReading()
    * @generated
    */
-  int NO_DISPUTABLE_READING = 23;
+  int NO_DISPUTABLE_READING = 29;
 
   /**
    * The number of structural features of the '<em>No Disputable Reading</em>' class.
@@ -628,7 +778,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getLacuna()
    * @generated
    */
-  int LACUNA = 24;
+  int LACUNA = 30;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -656,7 +806,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoLacuna()
    * @generated
    */
-  int NO_LACUNA = 25;
+  int NO_LACUNA = 31;
 
   /**
    * The number of structural features of the '<em>No Lacuna</em>' class.
@@ -675,7 +825,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletion()
    * @generated
    */
-  int DELETION = 26;
+  int DELETION = 32;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -703,7 +853,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoDeletion()
    * @generated
    */
-  int NO_DELETION = 27;
+  int NO_DELETION = 33;
 
   /**
    * The number of structural features of the '<em>No Deletion</em>' class.
@@ -722,7 +872,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getExpandedColumn()
    * @generated
    */
-  int EXPANDED_COLUMN = 28;
+  int EXPANDED_COLUMN = 34;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -750,7 +900,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoExpandedColumn()
    * @generated
    */
-  int NO_EXPANDED_COLUMN = 29;
+  int NO_EXPANDED_COLUMN = 35;
 
   /**
    * The number of structural features of the '<em>No Expanded Column</em>' class.
@@ -769,7 +919,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getRasur()
    * @generated
    */
-  int RASUR = 30;
+  int RASUR = 36;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -797,7 +947,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoRasur()
    * @generated
    */
-  int NO_RASUR = 31;
+  int NO_RASUR = 37;
 
   /**
    * The number of structural features of the '<em>No Rasur</em>' class.
@@ -816,7 +966,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getAncientExpanded()
    * @generated
    */
-  int ANCIENT_EXPANDED = 32;
+  int ANCIENT_EXPANDED = 38;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -844,7 +994,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoAncientExpanded()
    * @generated
    */
-  int NO_ANCIENT_EXPANDED = 33;
+  int NO_ANCIENT_EXPANDED = 39;
 
   /**
    * The number of structural features of the '<em>No Ancient Expanded</em>' class.
@@ -863,7 +1013,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getRestorationOverRasur()
    * @generated
    */
-  int RESTORATION_OVER_RASUR = 34;
+  int RESTORATION_OVER_RASUR = 40;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -891,7 +1041,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoRestorationOverRasur()
    * @generated
    */
-  int NO_RESTORATION_OVER_RASUR = 35;
+  int NO_RESTORATION_OVER_RASUR = 41;
 
   /**
    * The number of structural features of the '<em>No Restoration Over Rasur</em>' class.
@@ -910,7 +1060,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestruction()
    * @generated
    */
-  int PARTIAL_DESTRUCTION = 36;
+  int PARTIAL_DESTRUCTION = 42;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -938,7 +1088,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoPartialDestruction()
    * @generated
    */
-  int NO_PARTIAL_DESTRUCTION = 37;
+  int NO_PARTIAL_DESTRUCTION = 43;
 
   /**
    * The number of structural features of the '<em>No Partial Destruction</em>' class.
@@ -950,32 +1100,156 @@ public interface EgyDslPackage extends EPackage
   int NO_PARTIAL_DESTRUCTION_FEATURE_COUNT = 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionImpl <em>Destruction</em>}' class.
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixImpl <em>Interfix</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestruction()
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfix()
    * @generated
    */
-  int DESTRUCTION = 38;
+  int INTERFIX = 44;
 
   /**
-   * The feature id for the '<em><b>Comment</b></em>' attribute.
+   * The number of structural features of the '<em>Interfix</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DESTRUCTION__COMMENT = BRACKETS_FEATURE_COUNT + 0;
+  int INTERFIX_FEATURE_COUNT = WORD_MIDDLE_FEATURE_COUNT + 0;
 
   /**
-   * The number of structural features of the '<em>Destruction</em>' class.
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixLexicalImpl <em>Interfix Lexical</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixLexicalImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixLexical()
+   * @generated
+   */
+  int INTERFIX_LEXICAL = 45;
+
+  /**
+   * The number of structural features of the '<em>Interfix Lexical</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DESTRUCTION_FEATURE_COUNT = BRACKETS_FEATURE_COUNT + 1;
+  int INTERFIX_LEXICAL_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixFlexionImpl <em>Interfix Flexion</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixFlexionImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixFlexion()
+   * @generated
+   */
+  int INTERFIX_FLEXION = 46;
+
+  /**
+   * The number of structural features of the '<em>Interfix Flexion</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFIX_FLEXION_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixSuffixPronomLexicalImpl <em>Interfix Suffix Pronom Lexical</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixSuffixPronomLexicalImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixSuffixPronomLexical()
+   * @generated
+   */
+  int INTERFIX_SUFFIX_PRONOM_LEXICAL = 47;
+
+  /**
+   * The number of structural features of the '<em>Interfix Suffix Pronom Lexical</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFIX_SUFFIX_PRONOM_LEXICAL_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixNonLexicalImpl <em>Interfix Prefix Non Lexical</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixNonLexicalImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPrefixNonLexical()
+   * @generated
+   */
+  int INTERFIX_PREFIX_NON_LEXICAL = 48;
+
+  /**
+   * The number of structural features of the '<em>Interfix Prefix Non Lexical</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFIX_PREFIX_NON_LEXICAL_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixLexicalImpl <em>Interfix Prefix Lexical</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixLexicalImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPrefixLexical()
+   * @generated
+   */
+  int INTERFIX_PREFIX_LEXICAL = 49;
+
+  /**
+   * The number of structural features of the '<em>Interfix Prefix Lexical</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFIX_PREFIX_LEXICAL_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixConnectionSyllabicGroupImpl <em>Interfix Connection Syllabic Group</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixConnectionSyllabicGroupImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixConnectionSyllabicGroup()
+   * @generated
+   */
+  int INTERFIX_CONNECTION_SYLLABIC_GROUP = 50;
+
+  /**
+   * The number of structural features of the '<em>Interfix Connection Syllabic Group</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFIX_CONNECTION_SYLLABIC_GROUP_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixCompoundWordsImpl <em>Interfix Compound Words</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixCompoundWordsImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixCompoundWords()
+   * @generated
+   */
+  int INTERFIX_COMPOUND_WORDS = 51;
+
+  /**
+   * The number of structural features of the '<em>Interfix Compound Words</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int INTERFIX_COMPOUND_WORDS_FEATURE_COUNT = INTERFIX_FEATURE_COUNT + 0;
 
 
   /**
@@ -1175,6 +1449,27 @@ public interface EgyDslPackage extends EPackage
   EAttribute getMarker_Type();
 
   /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker <em>Destruction Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Destruction Marker</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker
+   * @generated
+   */
+  EClass getDestructionMarker();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker#getType()
+   * @see #getDestructionMarker()
+   * @generated
+   */
+  EAttribute getDestructionMarker_Type();
+
+  /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Word <em>Word</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1206,10 +1501,10 @@ public interface EgyDslPackage extends EPackage
   EClass getWordPart();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordPart#getWChar <em>WChar</em>}'.
+   * Returns the meta object for the containment reference '{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordPart#getWChar <em>WChar</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>WChar</em>'.
+   * @return the meta object for the containment reference '<em>WChar</em>'.
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.WordPart#getWChar()
    * @see #getWordPart()
    * @generated
@@ -1256,6 +1551,89 @@ public interface EgyDslPackage extends EPackage
    * @generated
    */
   EClass getBrackets();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2 <em>Cartouche2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cartouche2</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2
+   * @generated
+   */
+  EClass getCartouche2();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2#getWChar <em>WChar</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>WChar</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2#getWChar()
+   * @see #getCartouche2()
+   * @generated
+   */
+  EReference getCartouche2_WChar();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Serech <em>Serech</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Serech</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Serech
+   * @generated
+   */
+  EClass getSerech();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Serech#getWChar <em>WChar</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>WChar</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Serech#getWChar()
+   * @see #getSerech()
+   * @generated
+   */
+  EReference getSerech_WChar();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche <em>Cartouche</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Cartouche</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche
+   * @generated
+   */
+  EClass getCartouche();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche#getWChar <em>WChar</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>WChar</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche#getWChar()
+   * @see #getCartouche()
+   * @generated
+   */
+  EReference getCartouche_WChar();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Oval <em>Oval</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Oval</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Oval
+   * @generated
+   */
+  EClass getOval();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche <em>No Cartouche</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>No Cartouche</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche
+   * @generated
+   */
+  EClass getNoCartouche();
 
   /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Expanded <em>Expanded</em>}'.
@@ -1568,25 +1946,84 @@ public interface EgyDslPackage extends EPackage
   EClass getNoPartialDestruction();
 
   /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Destruction <em>Destruction</em>}'.
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Interfix <em>Interfix</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Destruction</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Destruction
+   * @return the meta object for class '<em>Interfix</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Interfix
    * @generated
    */
-  EClass getDestruction();
+  EClass getInterfix();
 
   /**
-   * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Destruction#getComment <em>Comment</em>}'.
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexical <em>Interfix Lexical</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Comment</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Destruction#getComment()
-   * @see #getDestruction()
+   * @return the meta object for class '<em>Interfix Lexical</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexical
    * @generated
    */
-  EAttribute getDestruction_Comment();
+  EClass getInterfixLexical();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexion <em>Interfix Flexion</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interfix Flexion</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexion
+   * @generated
+   */
+  EClass getInterfixFlexion();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical <em>Interfix Suffix Pronom Lexical</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interfix Suffix Pronom Lexical</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical
+   * @generated
+   */
+  EClass getInterfixSuffixPronomLexical();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixNonLexical <em>Interfix Prefix Non Lexical</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interfix Prefix Non Lexical</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixNonLexical
+   * @generated
+   */
+  EClass getInterfixPrefixNonLexical();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixLexical <em>Interfix Prefix Lexical</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interfix Prefix Lexical</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixLexical
+   * @generated
+   */
+  EClass getInterfixPrefixLexical();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixConnectionSyllabicGroup <em>Interfix Connection Syllabic Group</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interfix Connection Syllabic Group</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixConnectionSyllabicGroup
+   * @generated
+   */
+  EClass getInterfixConnectionSyllabicGroup();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixCompoundWords <em>Interfix Compound Words</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Interfix Compound Words</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixCompoundWords
+   * @generated
+   */
+  EClass getInterfixCompoundWords();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -1790,6 +2227,24 @@ public interface EgyDslPackage extends EPackage
     EAttribute MARKER__TYPE = eINSTANCE.getMarker_Type();
 
     /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionMarkerImpl <em>Destruction Marker</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionMarkerImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestructionMarker()
+     * @generated
+     */
+    EClass DESTRUCTION_MARKER = eINSTANCE.getDestructionMarker();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DESTRUCTION_MARKER__TYPE = eINSTANCE.getDestructionMarker_Type();
+
+    /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.WordImpl <em>Word</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -1818,7 +2273,7 @@ public interface EgyDslPackage extends EPackage
     EClass WORD_PART = eINSTANCE.getWordPart();
 
     /**
-     * The meta object literal for the '<em><b>WChar</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>WChar</b></em>' containment reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
@@ -1862,6 +2317,80 @@ public interface EgyDslPackage extends EPackage
      * @generated
      */
     EClass BRACKETS = eINSTANCE.getBrackets();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.Cartouche2Impl <em>Cartouche2</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.Cartouche2Impl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getCartouche2()
+     * @generated
+     */
+    EClass CARTOUCHE2 = eINSTANCE.getCartouche2();
+
+    /**
+     * The meta object literal for the '<em><b>WChar</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CARTOUCHE2__WCHAR = eINSTANCE.getCartouche2_WChar();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.SerechImpl <em>Serech</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.SerechImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getSerech()
+     * @generated
+     */
+    EClass SERECH = eINSTANCE.getSerech();
+
+    /**
+     * The meta object literal for the '<em><b>WChar</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SERECH__WCHAR = eINSTANCE.getSerech_WChar();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.CartoucheImpl <em>Cartouche</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.CartoucheImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getCartouche()
+     * @generated
+     */
+    EClass CARTOUCHE = eINSTANCE.getCartouche();
+
+    /**
+     * The meta object literal for the '<em><b>WChar</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference CARTOUCHE__WCHAR = eINSTANCE.getCartouche_WChar();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.OvalImpl <em>Oval</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.OvalImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getOval()
+     * @generated
+     */
+    EClass OVAL = eINSTANCE.getOval();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.NoCartoucheImpl <em>No Cartouche</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.NoCartoucheImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoCartouche()
+     * @generated
+     */
+    EClass NO_CARTOUCHE = eINSTANCE.getNoCartouche();
 
     /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.ExpandedImpl <em>Expanded</em>}' class.
@@ -2144,22 +2673,84 @@ public interface EgyDslPackage extends EPackage
     EClass NO_PARTIAL_DESTRUCTION = eINSTANCE.getNoPartialDestruction();
 
     /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionImpl <em>Destruction</em>}' class.
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixImpl <em>Interfix</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestructionImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestruction()
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfix()
      * @generated
      */
-    EClass DESTRUCTION = eINSTANCE.getDestruction();
+    EClass INTERFIX = eINSTANCE.getInterfix();
 
     /**
-     * The meta object literal for the '<em><b>Comment</b></em>' attribute feature.
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixLexicalImpl <em>Interfix Lexical</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixLexicalImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixLexical()
      * @generated
      */
-    EAttribute DESTRUCTION__COMMENT = eINSTANCE.getDestruction_Comment();
+    EClass INTERFIX_LEXICAL = eINSTANCE.getInterfixLexical();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixFlexionImpl <em>Interfix Flexion</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixFlexionImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixFlexion()
+     * @generated
+     */
+    EClass INTERFIX_FLEXION = eINSTANCE.getInterfixFlexion();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixSuffixPronomLexicalImpl <em>Interfix Suffix Pronom Lexical</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixSuffixPronomLexicalImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixSuffixPronomLexical()
+     * @generated
+     */
+    EClass INTERFIX_SUFFIX_PRONOM_LEXICAL = eINSTANCE.getInterfixSuffixPronomLexical();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixNonLexicalImpl <em>Interfix Prefix Non Lexical</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixNonLexicalImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPrefixNonLexical()
+     * @generated
+     */
+    EClass INTERFIX_PREFIX_NON_LEXICAL = eINSTANCE.getInterfixPrefixNonLexical();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixLexicalImpl <em>Interfix Prefix Lexical</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixPrefixLexicalImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPrefixLexical()
+     * @generated
+     */
+    EClass INTERFIX_PREFIX_LEXICAL = eINSTANCE.getInterfixPrefixLexical();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixConnectionSyllabicGroupImpl <em>Interfix Connection Syllabic Group</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixConnectionSyllabicGroupImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixConnectionSyllabicGroup()
+     * @generated
+     */
+    EClass INTERFIX_CONNECTION_SYLLABIC_GROUP = eINSTANCE.getInterfixConnectionSyllabicGroup();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixCompoundWordsImpl <em>Interfix Compound Words</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.InterfixCompoundWordsImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixCompoundWords()
+     * @generated
+     */
+    EClass INTERFIX_COMPOUND_WORDS = eINSTANCE.getInterfixCompoundWords();
 
   }
 

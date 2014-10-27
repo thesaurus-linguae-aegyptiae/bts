@@ -64,7 +64,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			if (lookAhead != 1) {
 				int from = input.index();
 				int to = input.size();
-				if (marked > 0) {
+				if (marked) {
 					from = firstMarker;
 				}
 				List<LookAheadTerminal> lookAheadTerminals = Lists.newArrayListWithExpectedSize(to - from);
@@ -117,7 +117,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	protected boolean mismatch;
 	protected RecoveryListener recoveryListener;
 	protected int lookAheadAddOn;
-	protected int marked = 0;
+	protected boolean marked = false;
 	protected boolean resyncing = false;
 	protected boolean strict = false;
 	protected int wasErrorCount = -1;
@@ -134,16 +134,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		super(input, state);
 		this.grammarElements = new ArrayList<EObject>();
 		this.localTrace = new ArrayList<EObject>();
-		this.followElements = new LinkedHashSet<FollowElement>() {
-			private static final long serialVersionUID = 1L;
-
-			@Override
-			public boolean add(FollowElement e) {
-				if (e == null)
-					return false;
-				return super.add(e);
-			}
-		};
+		this.followElements = new LinkedHashSet<FollowElement>();
 	}
 	
 	public AbstractInternalContentAssistParser(TokenStream input) {
@@ -271,56 +262,26 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		}
 	}
 
-	/**
-	 * @since 2.6
-	 */
-	protected void selectEofStrategy(int lookAhead) {
-		if (mismatch || !state.errorRecovery) {
-			selectEofStrategy();
-		} else if (strict && lookAhead == 1) {
-			delegate = createNoOpStrategy();
-			if (predictionLevel > 0) {
-				delegate = createPredictionStrategy();
-			}
-		} else {
-			selectEofStrategy();
-		}
-	}
-	
-	protected void selectEofStrategy() throws UnsupportedOperationException {
+	protected void selectEofStrategy() {
 		if (mismatch) {
 			delegate = createMismatchStrategy();
 		} else if (!state.errorRecovery) {
-			if (marked > 0 && state.syntaxErrors > 0 && state.lastErrorIndex >= firstMarker) {
-				delegate = createNoOpStrategy();
-				return;
-			} else {
-				delegate = createNotErrorRecoveryStrategy();
-			}
+			delegate = createNotErrorRecoveryStrategy();
 		} else {
 			delegate = createErrorRecoveryStrategy();
 		}
 		if (predictionLevel > 0) {
 			delegate = createPredictionStrategy();
-		}
+		} 
 	}
 	
-	/**
-	 * @since 2.6
-	 */
-	protected StreamAdapter createNoOpStrategy() {
-		return new StreamAdapter() {
-			public void announceEof(int lookAhead) {
-			}
-		};
-	}
+	
 
 	protected StreamAdapter createPredictionStrategy() {
 		return new StreamAdapter() {
 
 			private AbstractElement lastAddedElement;
 			private AbstractElement globalLastAddedElement;
-			private int lastKnownSyntaxErrors = Integer.MAX_VALUE;
 			private boolean wasMismatch = false;
 			private ObservableXtextTokenStream.StreamListener privateDelegate = delegate;
 			private IFollowElementFactory followElementFactory;
@@ -330,17 +291,11 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				AbstractInternalContentAssistParser.this.followElementFactory = new IFollowElementFactory() {
 					
 					public FollowElement createFollowElement(AbstractElement current, int lookAhead) {
-						if (lastKnownSyntaxErrors == Integer.MAX_VALUE || state.lastErrorIndex < 0) {
-							FollowElement result = followElementFactory.createFollowElement(current, lookAhead);
-							if (result != null) {
-								globalLastAddedElement = result.getGrammarElement();
-								if (lookAhead > 1 && isBacktracking() && lastKnownSyntaxErrors == Integer.MAX_VALUE) {
-									lastKnownSyntaxErrors = state.syntaxErrors;
-								}
-							}
-							return result;
+						FollowElement result = followElementFactory.createFollowElement(current, lookAhead);
+						if (result != null) {
+							globalLastAddedElement = result.getGrammarElement();
 						}
-						return null;
+						return result;
 					}
 				};
 			}
@@ -360,7 +315,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 										createAndAddFollowElement(current, lookAhead);
 									} 
 								} else {
-									if (globalLastAddedElement != current && state.syntaxErrors <= lastKnownSyntaxErrors)
+									if (globalLastAddedElement != current)
 										createAndAddFollowElement(current, lookAhead);
 								}
 							}
@@ -390,14 +345,12 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			}
 
 			protected void createAndAddFollowElement(AbstractElement current, int lookAhead) {
-				if (marked > 0)
+				if (marked)
 					lookAhead+=lookAheadAddOn;
 				FollowElement followElement = followElementFactory.createFollowElement(current, lookAhead);
-				if (followElement != null) {
-					followElements.add(followElement);
-					lastAddedElement = current;
-					globalLastAddedElement = current;
-				}
+				followElements.add(followElement);
+				lastAddedElement = current;
+				globalLastAddedElement = current;
 			}
 
 		};
@@ -413,7 +366,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				if (current != null
 						&& (lastAddedElement == null || 
 							!EcoreUtil.isAncestor(current, lastAddedElement))) {
-					if (marked > 0)
+					if (marked)
 						lookAhead+=lookAheadAddOn;
 					followElements.add(createFollowElement(current, lookAhead));
 					lastAddedElement = current;
@@ -427,10 +380,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		return new StreamAdapter() {
 
 			public void announceEof(int lookAhead) {
-				if (!state.errorRecovery && !mismatch && ((!isBacktracking() || marked > 0) || wasErrorCount <= 0)) {
+				if (!state.errorRecovery && !mismatch && (!isBacktracking() || marked)) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
-						if (marked > 0)
+						if (marked)
 							lookAhead+=lookAheadAddOn;
 						if (lookAhead <= getLookaheadThreshold())
 							followElements.add(createFollowElement(current, lookAhead));
@@ -451,7 +404,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 				if (!wasErrorRecovery && !mismatch) {
 					AbstractElement current = getCurrentGrammarElement();
 					if (current != null) {
-						if (marked > 0)
+						if (marked)
 							lookAhead+=lookAheadAddOn;
 						followElements.add(createFollowElement(current, lookAhead));
 					}
@@ -543,7 +496,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			logger.debug("==================================");
 		}
 		if (delegate == null) {
-			selectEofStrategy(lookAhead);
+			selectEofStrategy();
 			if (strict) {
 				wasErrorCount = state.syntaxErrors;
 			}
@@ -560,7 +513,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	public void announceConsume() {
-		if (marked <= 0)
+		if (!marked)
 			localTrace.clear();
 		else
 			lookAheadAddOn++;
@@ -578,31 +531,19 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	public void announceRewind(int marker) {
-		int useLookAhead = -1;
-		if (marker != 0 && delegate == null && strict && predictionLevel != 0 && lookAheadAddOn > 0 && state.syntaxErrors == 0
-				&& input.index() == input.size()
-				&& marker + lookAheadAddOn <= input.size()
-				&& isBacktracking()) {
-			useLookAhead = lookAheadAddOn;
-			delegate = createNotErrorRecoveryStrategy();
-			wasErrorCount = state.syntaxErrors;
-		}
 		currentMarker = marker;
 		lookAheadAddOn = currentMarker - firstMarker;
-		if (useLookAhead != -1) {
-			announceEof(useLookAhead);
-		}
-		marked --;
+		if (firstMarker == currentMarker)
+			marked = false;
 	}
 	
 	public void announceMark(int marker) {
-		if (marked <= 0) {
-			marked++;
+		if (!marked) {
+			marked = true;
 			lookAheadAddOn = 0;
 			currentMarker = marker;
 			firstMarker = marker;
 		} else {
-			marked++;
 			currentMarker = marker;
 		}
 	}

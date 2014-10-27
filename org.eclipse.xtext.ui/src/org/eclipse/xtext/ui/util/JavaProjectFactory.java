@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.util;
 
-import static org.eclipse.xtext.ui.util.JREContainerProvider.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,8 +21,6 @@ import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.ui.wizards.buildpaths.BuildPathSupport;
-import org.eclipse.jdt.launching.JavaRuntime;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkingSet;
 
@@ -55,18 +51,12 @@ public class JavaProjectFactory extends ProjectFactory {
 					classpathEntries.add(srcClasspathEntry);
 				}
 
-				IClasspathEntry defaultJREContainerEntry = getDefaultJREContainerEntry();
-				classpathEntries.add(defaultJREContainerEntry);
+				classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"))); //$NON-NLS-1$
 				addMoreClasspathEntriesTo(classpathEntries);
-				
+
 				javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
 						subMonitor.newChild(1));
 				javaProject.setOutputLocation(new Path("/" + project.getName() + "/bin"), subMonitor.newChild(1)); //$NON-NLS-1$ //$NON-NLS-2$
-				
-				String executionEnvironmentId = JavaRuntime.getExecutionEnvironmentId(defaultJREContainerEntry.getPath());
-				if (executionEnvironmentId != null) {
-					BuildPathSupport.setEEComplianceOptions(javaProject, executionEnvironmentId, null);
-				}
 			} catch (JavaModelException e) {
 				logger.error(e.getMessage(), e);
 			}

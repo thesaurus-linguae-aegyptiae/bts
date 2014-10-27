@@ -185,6 +185,16 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EgyDslPackage.DESTRUCTION_MARKER:
+      {
+        DestructionMarker destructionMarker = (DestructionMarker)theEObject;
+        T result = caseDestructionMarker(destructionMarker);
+        if (result == null) result = caseAbstractMarker(destructionMarker);
+        if (result == null) result = caseSentenceItem(destructionMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(destructionMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case EgyDslPackage.WORD:
       {
         Word word = (Word)theEObject;
@@ -213,6 +223,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         Chars chars = (Chars)theEObject;
         T result = caseChars(chars);
         if (result == null) result = caseWordMiddle(chars);
+        if (result == null) result = caseNoCartouche(chars);
         if (result == null) result = caseNoExpanded(chars);
         if (result == null) result = caseNoEmendation(chars);
         if (result == null) result = caseNoDisputableReading(chars);
@@ -234,11 +245,55 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EgyDslPackage.CARTOUCHE2:
+      {
+        Cartouche2 cartouche2 = (Cartouche2)theEObject;
+        T result = caseCartouche2(cartouche2);
+        if (result == null) result = caseBrackets(cartouche2);
+        if (result == null) result = caseWordMiddle(cartouche2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.SERECH:
+      {
+        Serech serech = (Serech)theEObject;
+        T result = caseSerech(serech);
+        if (result == null) result = caseBrackets(serech);
+        if (result == null) result = caseWordMiddle(serech);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.CARTOUCHE:
+      {
+        Cartouche cartouche = (Cartouche)theEObject;
+        T result = caseCartouche(cartouche);
+        if (result == null) result = caseBrackets(cartouche);
+        if (result == null) result = caseWordMiddle(cartouche);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.OVAL:
+      {
+        Oval oval = (Oval)theEObject;
+        T result = caseOval(oval);
+        if (result == null) result = caseBrackets(oval);
+        if (result == null) result = caseWordMiddle(oval);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.NO_CARTOUCHE:
+      {
+        NoCartouche noCartouche = (NoCartouche)theEObject;
+        T result = caseNoCartouche(noCartouche);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case EgyDslPackage.EXPANDED:
       {
         Expanded expanded = (Expanded)theEObject;
         T result = caseExpanded(expanded);
-        if (result == null) result = caseBrackets(expanded);
+        if (result == null) result = caseOval(expanded);
+        if (result == null) result = caseNoCartouche(expanded);
         if (result == null) result = caseNoEmendation(expanded);
         if (result == null) result = caseNoDisputableReading(expanded);
         if (result == null) result = caseNoLacuna(expanded);
@@ -248,6 +303,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseNoAncientExpanded(expanded);
         if (result == null) result = caseNoRestorationOverRasur(expanded);
         if (result == null) result = caseNoPartialDestruction(expanded);
+        if (result == null) result = caseBrackets(expanded);
         if (result == null) result = caseWordMiddle(expanded);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -264,6 +320,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         Emendation emendation = (Emendation)theEObject;
         T result = caseEmendation(emendation);
         if (result == null) result = caseBrackets(emendation);
+        if (result == null) result = caseNoCartouche(emendation);
         if (result == null) result = caseWordMiddle(emendation);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -280,6 +337,10 @@ public class EgyDslSwitch<T> extends Switch<T>
         DisputableReading disputableReading = (DisputableReading)theEObject;
         T result = caseDisputableReading(disputableReading);
         if (result == null) result = caseBrackets(disputableReading);
+        if (result == null) result = caseNoCartouche(disputableReading);
+        if (result == null) result = caseNoExpanded(disputableReading);
+        if (result == null) result = caseNoEmendation(disputableReading);
+        if (result == null) result = caseNoLacuna(disputableReading);
         if (result == null) result = caseWordMiddle(disputableReading);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -296,6 +357,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         Lacuna lacuna = (Lacuna)theEObject;
         T result = caseLacuna(lacuna);
         if (result == null) result = caseBrackets(lacuna);
+        if (result == null) result = caseNoCartouche(lacuna);
         if (result == null) result = caseWordMiddle(lacuna);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -312,6 +374,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         Deletion deletion = (Deletion)theEObject;
         T result = caseDeletion(deletion);
         if (result == null) result = caseBrackets(deletion);
+        if (result == null) result = caseNoCartouche(deletion);
         if (result == null) result = caseNoPartialDestruction(deletion);
         if (result == null) result = caseWordMiddle(deletion);
         if (result == null) result = defaultCase(theEObject);
@@ -329,6 +392,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         ExpandedColumn expandedColumn = (ExpandedColumn)theEObject;
         T result = caseExpandedColumn(expandedColumn);
         if (result == null) result = caseBrackets(expandedColumn);
+        if (result == null) result = caseNoCartouche(expandedColumn);
         if (result == null) result = caseWordMiddle(expandedColumn);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -345,6 +409,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         Rasur rasur = (Rasur)theEObject;
         T result = caseRasur(rasur);
         if (result == null) result = caseBrackets(rasur);
+        if (result == null) result = caseNoCartouche(rasur);
         if (result == null) result = caseWordMiddle(rasur);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -361,6 +426,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         AncientExpanded ancientExpanded = (AncientExpanded)theEObject;
         T result = caseAncientExpanded(ancientExpanded);
         if (result == null) result = caseBrackets(ancientExpanded);
+        if (result == null) result = caseNoCartouche(ancientExpanded);
         if (result == null) result = caseWordMiddle(ancientExpanded);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -377,6 +443,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         RestorationOverRasur restorationOverRasur = (RestorationOverRasur)theEObject;
         T result = caseRestorationOverRasur(restorationOverRasur);
         if (result == null) result = caseBrackets(restorationOverRasur);
+        if (result == null) result = caseNoCartouche(restorationOverRasur);
         if (result == null) result = caseWordMiddle(restorationOverRasur);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -393,6 +460,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         PartialDestruction partialDestruction = (PartialDestruction)theEObject;
         T result = casePartialDestruction(partialDestruction);
         if (result == null) result = caseBrackets(partialDestruction);
+        if (result == null) result = caseNoCartouche(partialDestruction);
         if (result == null) result = caseNoDeletion(partialDestruction);
         if (result == null) result = caseWordMiddle(partialDestruction);
         if (result == null) result = defaultCase(theEObject);
@@ -405,12 +473,162 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case EgyDslPackage.DESTRUCTION:
+      case EgyDslPackage.INTERFIX:
       {
-        Destruction destruction = (Destruction)theEObject;
-        T result = caseDestruction(destruction);
-        if (result == null) result = caseBrackets(destruction);
-        if (result == null) result = caseWordMiddle(destruction);
+        Interfix interfix = (Interfix)theEObject;
+        T result = caseInterfix(interfix);
+        if (result == null) result = caseWordMiddle(interfix);
+        if (result == null) result = caseNoCartouche(interfix);
+        if (result == null) result = caseNoExpanded(interfix);
+        if (result == null) result = caseNoEmendation(interfix);
+        if (result == null) result = caseNoDisputableReading(interfix);
+        if (result == null) result = caseNoLacuna(interfix);
+        if (result == null) result = caseNoDeletion(interfix);
+        if (result == null) result = caseNoExpandedColumn(interfix);
+        if (result == null) result = caseNoRasur(interfix);
+        if (result == null) result = caseNoAncientExpanded(interfix);
+        if (result == null) result = caseNoRestorationOverRasur(interfix);
+        if (result == null) result = caseNoPartialDestruction(interfix);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_LEXICAL:
+      {
+        InterfixLexical interfixLexical = (InterfixLexical)theEObject;
+        T result = caseInterfixLexical(interfixLexical);
+        if (result == null) result = caseInterfix(interfixLexical);
+        if (result == null) result = caseWordMiddle(interfixLexical);
+        if (result == null) result = caseNoCartouche(interfixLexical);
+        if (result == null) result = caseNoExpanded(interfixLexical);
+        if (result == null) result = caseNoEmendation(interfixLexical);
+        if (result == null) result = caseNoDisputableReading(interfixLexical);
+        if (result == null) result = caseNoLacuna(interfixLexical);
+        if (result == null) result = caseNoDeletion(interfixLexical);
+        if (result == null) result = caseNoExpandedColumn(interfixLexical);
+        if (result == null) result = caseNoRasur(interfixLexical);
+        if (result == null) result = caseNoAncientExpanded(interfixLexical);
+        if (result == null) result = caseNoRestorationOverRasur(interfixLexical);
+        if (result == null) result = caseNoPartialDestruction(interfixLexical);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_FLEXION:
+      {
+        InterfixFlexion interfixFlexion = (InterfixFlexion)theEObject;
+        T result = caseInterfixFlexion(interfixFlexion);
+        if (result == null) result = caseInterfix(interfixFlexion);
+        if (result == null) result = caseWordMiddle(interfixFlexion);
+        if (result == null) result = caseNoCartouche(interfixFlexion);
+        if (result == null) result = caseNoExpanded(interfixFlexion);
+        if (result == null) result = caseNoEmendation(interfixFlexion);
+        if (result == null) result = caseNoDisputableReading(interfixFlexion);
+        if (result == null) result = caseNoLacuna(interfixFlexion);
+        if (result == null) result = caseNoDeletion(interfixFlexion);
+        if (result == null) result = caseNoExpandedColumn(interfixFlexion);
+        if (result == null) result = caseNoRasur(interfixFlexion);
+        if (result == null) result = caseNoAncientExpanded(interfixFlexion);
+        if (result == null) result = caseNoRestorationOverRasur(interfixFlexion);
+        if (result == null) result = caseNoPartialDestruction(interfixFlexion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_SUFFIX_PRONOM_LEXICAL:
+      {
+        InterfixSuffixPronomLexical interfixSuffixPronomLexical = (InterfixSuffixPronomLexical)theEObject;
+        T result = caseInterfixSuffixPronomLexical(interfixSuffixPronomLexical);
+        if (result == null) result = caseInterfix(interfixSuffixPronomLexical);
+        if (result == null) result = caseWordMiddle(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoCartouche(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoExpanded(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoEmendation(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoDisputableReading(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoLacuna(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoDeletion(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoExpandedColumn(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoRasur(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoAncientExpanded(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoRestorationOverRasur(interfixSuffixPronomLexical);
+        if (result == null) result = caseNoPartialDestruction(interfixSuffixPronomLexical);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_PREFIX_NON_LEXICAL:
+      {
+        InterfixPrefixNonLexical interfixPrefixNonLexical = (InterfixPrefixNonLexical)theEObject;
+        T result = caseInterfixPrefixNonLexical(interfixPrefixNonLexical);
+        if (result == null) result = caseInterfix(interfixPrefixNonLexical);
+        if (result == null) result = caseWordMiddle(interfixPrefixNonLexical);
+        if (result == null) result = caseNoCartouche(interfixPrefixNonLexical);
+        if (result == null) result = caseNoExpanded(interfixPrefixNonLexical);
+        if (result == null) result = caseNoEmendation(interfixPrefixNonLexical);
+        if (result == null) result = caseNoDisputableReading(interfixPrefixNonLexical);
+        if (result == null) result = caseNoLacuna(interfixPrefixNonLexical);
+        if (result == null) result = caseNoDeletion(interfixPrefixNonLexical);
+        if (result == null) result = caseNoExpandedColumn(interfixPrefixNonLexical);
+        if (result == null) result = caseNoRasur(interfixPrefixNonLexical);
+        if (result == null) result = caseNoAncientExpanded(interfixPrefixNonLexical);
+        if (result == null) result = caseNoRestorationOverRasur(interfixPrefixNonLexical);
+        if (result == null) result = caseNoPartialDestruction(interfixPrefixNonLexical);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_PREFIX_LEXICAL:
+      {
+        InterfixPrefixLexical interfixPrefixLexical = (InterfixPrefixLexical)theEObject;
+        T result = caseInterfixPrefixLexical(interfixPrefixLexical);
+        if (result == null) result = caseInterfix(interfixPrefixLexical);
+        if (result == null) result = caseWordMiddle(interfixPrefixLexical);
+        if (result == null) result = caseNoCartouche(interfixPrefixLexical);
+        if (result == null) result = caseNoExpanded(interfixPrefixLexical);
+        if (result == null) result = caseNoEmendation(interfixPrefixLexical);
+        if (result == null) result = caseNoDisputableReading(interfixPrefixLexical);
+        if (result == null) result = caseNoLacuna(interfixPrefixLexical);
+        if (result == null) result = caseNoDeletion(interfixPrefixLexical);
+        if (result == null) result = caseNoExpandedColumn(interfixPrefixLexical);
+        if (result == null) result = caseNoRasur(interfixPrefixLexical);
+        if (result == null) result = caseNoAncientExpanded(interfixPrefixLexical);
+        if (result == null) result = caseNoRestorationOverRasur(interfixPrefixLexical);
+        if (result == null) result = caseNoPartialDestruction(interfixPrefixLexical);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP:
+      {
+        InterfixConnectionSyllabicGroup interfixConnectionSyllabicGroup = (InterfixConnectionSyllabicGroup)theEObject;
+        T result = caseInterfixConnectionSyllabicGroup(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseInterfix(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseWordMiddle(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoCartouche(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoExpanded(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoEmendation(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoDisputableReading(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoLacuna(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoDeletion(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoExpandedColumn(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoRasur(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoAncientExpanded(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoRestorationOverRasur(interfixConnectionSyllabicGroup);
+        if (result == null) result = caseNoPartialDestruction(interfixConnectionSyllabicGroup);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_COMPOUND_WORDS:
+      {
+        InterfixCompoundWords interfixCompoundWords = (InterfixCompoundWords)theEObject;
+        T result = caseInterfixCompoundWords(interfixCompoundWords);
+        if (result == null) result = caseInterfix(interfixCompoundWords);
+        if (result == null) result = caseWordMiddle(interfixCompoundWords);
+        if (result == null) result = caseNoCartouche(interfixCompoundWords);
+        if (result == null) result = caseNoExpanded(interfixCompoundWords);
+        if (result == null) result = caseNoEmendation(interfixCompoundWords);
+        if (result == null) result = caseNoDisputableReading(interfixCompoundWords);
+        if (result == null) result = caseNoLacuna(interfixCompoundWords);
+        if (result == null) result = caseNoDeletion(interfixCompoundWords);
+        if (result == null) result = caseNoExpandedColumn(interfixCompoundWords);
+        if (result == null) result = caseNoRasur(interfixCompoundWords);
+        if (result == null) result = caseNoAncientExpanded(interfixCompoundWords);
+        if (result == null) result = caseNoRestorationOverRasur(interfixCompoundWords);
+        if (result == null) result = caseNoPartialDestruction(interfixCompoundWords);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -627,6 +845,22 @@ public class EgyDslSwitch<T> extends Switch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Destruction Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Destruction Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseDestructionMarker(DestructionMarker object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Word</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -702,6 +936,86 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseBrackets(Brackets object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Cartouche2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Cartouche2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCartouche2(Cartouche2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Serech</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Serech</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSerech(Serech object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Cartouche</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Cartouche</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCartouche(Cartouche object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Oval</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Oval</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseOval(Oval object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>No Cartouche</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>No Cartouche</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNoCartouche(NoCartouche object)
   {
     return null;
   }
@@ -1027,17 +1341,129 @@ public class EgyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Destruction</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Interfix</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Destruction</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Interfix</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseDestruction(Destruction object)
+  public T caseInterfix(Interfix object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Lexical</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixLexical(InterfixLexical object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Flexion</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Flexion</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixFlexion(InterfixFlexion object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Suffix Pronom Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Suffix Pronom Lexical</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixSuffixPronomLexical(InterfixSuffixPronomLexical object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Prefix Non Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Prefix Non Lexical</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixPrefixNonLexical(InterfixPrefixNonLexical object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Prefix Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Prefix Lexical</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixPrefixLexical(InterfixPrefixLexical object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Connection Syllabic Group</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Connection Syllabic Group</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixConnectionSyllabicGroup(InterfixConnectionSyllabicGroup object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Compound Words</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Compound Words</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixCompoundWords(InterfixCompoundWords object)
   {
     return null;
   }

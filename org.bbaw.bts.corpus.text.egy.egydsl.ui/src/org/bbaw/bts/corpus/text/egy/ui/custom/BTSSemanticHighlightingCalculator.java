@@ -6,7 +6,6 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
-import org.bbaw.bts.corpus.text.egy.egyDsl.Destruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
@@ -86,10 +85,11 @@ public class BTSSemanticHighlightingCalculator implements
 				highlightAsDataType(element,
 						EgyDslPackage.Literals.PARTIAL_DESTRUCTION__WCHAR,
 						acceptor);
-			} else if (element instanceof Destruction) {
-				highlightAsDataType(element,
-						EgyDslPackage.Literals.DESTRUCTION__COMMENT, acceptor);
-			}
+			} 
+//			else if (element instanceof Destruction) {
+//				highlightAsDataType(element,
+//						EgyDslPackage.Literals.DESTRUCTION__COMMENT, acceptor);
+//			}
 		}
 	}
 
@@ -164,10 +164,10 @@ public class BTSSemanticHighlightingCalculator implements
 			acceptor.addPosition(node.getOffset(), node.getLength(),
 					BTSHighlightingConfiguration.PARTIAL_DESTRUCTION);
 		}
- else if (element instanceof Destruction) {
-			INode node = NodeModelUtils.findActualNodeFor(element);
-			acceptor.addPosition(node.getOffset(), node.getLength(),
-					BTSHighlightingConfiguration.DESTRUCTION);
-		}
+// else if (element instanceof Destruction) {
+//			INode node = NodeModelUtils.findActualNodeFor(element);
+//			acceptor.addPosition(node.getOffset(), node.getLength(),
+//					BTSHighlightingConfiguration.DESTRUCTION);
+//		}
 	}
 }

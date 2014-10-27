@@ -12,7 +12,7 @@ import org.eclipse.swt.graphics.Point;
  * 
  * This class was initially copied from {@link org.eclipse.ui.texteditor.MarkRegionTarget}.
  * 
-
+ * @since 2.3
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class MarkRegionTargetWithoutStatusline implements IMarkRegionTarget {

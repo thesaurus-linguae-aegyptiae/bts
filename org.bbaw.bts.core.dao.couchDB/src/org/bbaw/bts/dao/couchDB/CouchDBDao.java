@@ -322,7 +322,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				{
 					((BTSDBBaseObject) o).setDBCollectionKey(path);
 				}
-				checkForConflicts((BTSDBBaseObject) o, path);
 				return (E) o;
 			}
 		}
@@ -462,7 +461,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				E o = (E) resource.getContents().get(0);
 				if (o instanceof BTSDBBaseObject)
 				{
-					checkForConflicts((BTSDBBaseObject) o, path);
+					checkForConflicts((E) o, path);
 				}
 				results.add(o);
 			}
@@ -527,7 +526,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				if (copyEObject instanceof BTSDBBaseObject) {
 
 					eObject = EmfModelHelper.mergeChanges(eObject, copyEObject);
-					checkForConflicts((BTSDBBaseObject) eObject, path);
+					checkForConflicts( (E) eObject, path);
 					return (E) eObject;
 				}
 			}
@@ -545,7 +544,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		checkForConflicts(entity, entity.getDBCollectionKey());
 	}
 
-	protected void checkForConflicts(BTSDBBaseObject object, String path) {
+	@Override
+	public void checkForConflicts(E object, String path) {
 		if (object == null) return;
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, path != null ? path : object.getDBCollectionKey());
@@ -1102,7 +1102,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		if (source != null) {
 			entity = EmfModelHelper.mergeChanges(entity, source);
-			checkForConflicts((BTSDBBaseObject) entity,
+			checkForConflicts((E) entity,
 					entity.getDBCollectionKey());
 			return (E) entity;
 		}

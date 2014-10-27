@@ -37,7 +37,6 @@ import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.ModelAnnotation;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceEndFigure;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceStartFigure;
 import org.bbaw.bts.ui.egy.textSign.support.CompartementImageFigure;
@@ -635,15 +634,22 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private ElementFigure makeMarkerFigure(BTSMarker marker) {
 		String mType = marker.getType();
-		if (marker.getType().equals(BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
-			mType = VERS_FRONTER_MARKER;
-		} else if (marker.getType().equals(
-				BTSConstants.TEXT_VERS_BREAK_MARKER)) {
-			mType = VERS_BREAK_MARKER;
-		} else if (marker.getType().equals(
-				BTSConstants.BROKEN_VERS_MARKER)) {
-			mType = BROKEN_VERS_MARKER;
-		} 
+		if (mType != null)
+		{
+			if (mType.equals(BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
+				mType = VERS_FRONTER_MARKER;
+			} else if (marker.getType().equals(
+					BTSConstants.TEXT_VERS_BREAK_MARKER)) {
+				mType = VERS_BREAK_MARKER;
+			} else if (marker.getType().equals(
+					BTSConstants.BROKEN_VERS_MARKER)) {
+				mType = BROKEN_VERS_MARKER;
+			}
+		}
+		else
+		{
+			mType = "##";
+		}
 		MarkerFigure fig = new MarkerFigure(mType);
 		// add name
 		if (marker.getName() != null && !"".equals(marker.getName())) {

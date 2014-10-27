@@ -21,6 +21,12 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.AnnotationAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.CommentAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.InvisibleAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.LemmaAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.ModelAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.SubtextAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -51,13 +57,6 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.TextModelHelper;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.AnnotationAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.CommentAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.InvisibleAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.LemmaAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.ModelAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.SubtextAnnotation;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
 import org.eclipse.swt.widgets.Composite;
 
@@ -180,7 +179,6 @@ public class EgyLemmaEditorPart implements IBTSEditor, EventHandler {
 	private AnnotationPainter painter;
 	private BTSTextContent textContent;
 	private boolean loaded;
-	protected TextModelHelper textModelHelper = new TextModelHelper();
 	private List<ModelAnnotation> highlightedAnnotations = new Vector<ModelAnnotation>(4);
 	protected String queryId;
 	
@@ -499,7 +497,7 @@ public class EgyLemmaEditorPart implements IBTSEditor, EventHandler {
 					});
 			EObject eo = objects.get(0);
 			if (eo instanceof TextContent) {
-				textContent = textModelHelper.updateModelFromTextContent(textContent, eo, am);
+				textContent = lemmaEditorController.updateModelFromTextContent(textContent, eo, am);
 				
 			}
 		}

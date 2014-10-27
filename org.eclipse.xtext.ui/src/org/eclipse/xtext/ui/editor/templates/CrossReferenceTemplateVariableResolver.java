@@ -13,13 +13,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.templates.TemplateVariable;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
 import com.google.inject.Inject;
@@ -37,9 +35,6 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
-	
-	@Inject
-	private IGlobalScopeProvider globalScopeProvider;
 	
 	public CrossReferenceTemplateVariableResolver() {
 		super("CrossReference",  //$NON-NLS-1$
@@ -66,13 +61,8 @@ public class CrossReferenceTemplateVariableResolver extends AbstractTemplateVari
 					+ "' could not be resolved."); //$NON-NLS-1$
 			return Collections.emptyList();
 		}
-		IScope scope = null;
-		EObject currentModel = castedContext.getContentAssistContext().getCurrentModel();
-		if (currentModel == null) {
-			scope = globalScopeProvider.getScope(castedContext.getContentAssistContext().getResource(), reference, null);
-		} else {
-			scope = castedContext.getScopeProvider().getScope(currentModel, reference);
-		}
+		IScope scope = castedContext.getScopeProvider().getScope(
+				castedContext.getContentAssistContext().getCurrentModel(), reference);
 		Iterable<IEObjectDescription> linkingCandidates = queryScope(scope);
 
 		List<String> names = new ArrayList<String>();

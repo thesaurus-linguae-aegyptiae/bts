@@ -66,7 +66,7 @@ public class OutlineNodeFactory {
 		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, imageDescriptor, text, isLeaf);
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
-			eObjectNode.setTextRegion(parserNode.getTextRegion());
+			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		if(isLocalElement(parentNode, modelElement))
 			eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 		return eObjectNode;

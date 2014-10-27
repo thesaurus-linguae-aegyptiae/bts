@@ -1,8 +1,10 @@
-grammar org.bbaw.bts.corpus.text.egy.EgyDsl with org.eclipse.xtext.common.Terminals
+grammar org.bbaw.bts.corpus.text.egy.EgyDsl
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
 generate egyDsl "http://www.bbaw.org/bts/corpus/text/egy/EgyDsl"
 
 
+    
     
 TextContent:
 	{TextContent}
@@ -22,12 +24,14 @@ SentenceItem:
 ;
 
 AbstractMarker:
-	Marker | VersMarker
+	Marker | 
+	VersMarker |
+	DestructionMarker
 ;
-terminal WS	: (' '|'\t');
-terminal NEWLINE:
+
+terminal NEWLINE returns ecore::EString :
 // New line on DOS or Unix 
-    ('\r'|'\n'|'\r\n'|'\t');
+    ('\r'|'\n'|'\t')+;
 
 Ambivalence:
 	'%' (cases+=Case ('; ' (NEWLINE)? cases+=Case)+) '%'
@@ -37,7 +41,7 @@ Case:
 	name=CASESTRING (NEWLINE)? (items+=SentenceItemNoAmbivalence (' ' (NEWLINE)? items+=SentenceItemNoAmbivalence)*) 
 ;
 
-terminal CASESTRING:
+terminal CASESTRING returns ecore::EString:
 	'case ' (!(':'))+ ': '
 ;
 
@@ -70,23 +74,33 @@ Marker:
 	type = BETWEEN_HASHES
 ;
 
+terminal BETWEEN_HASHES  returns ecore::EString:
+	'#' (!'#')+ '#'
+;
+
+DestructionMarker:
+	type=BETWEEN_MINUS
+;
+terminal BETWEEN_MINUS  returns ecore::EString:
+	'--' (!'-')+ '--'
+;
 
 
 // word
 Word:
 	{Word}
 	
-	( wChar+=WordPart (('-')wChar+=WordPart)*)	
+	( wChar+=WordPart+)	//('-') (wChar+=WordPart)*
 ;
 
 WordPart:
-	('=')? ( wChar+= WordMiddle (wChar+=WordMiddle)* )//(wChar+=WordEnding)? (wChar+=WordEnding)?)	
+	('=')? ( wChar= WordMiddle )// (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
 ;
 
 
 WordMiddle:
 //	{WordMiddle}
-	Brackets | Chars 
+	Brackets | Chars | Interfix
 ;
 
 // Chars...
@@ -94,19 +108,18 @@ Chars:
 	name=EGYSTRING
 ;
 
-terminal BETWEEN_HASHES : '#' (!'#')* '#'//'#' ('a'|'c'|'e'|'i'|'o'|'v'|'x'|'A'|'C'|'E'|'O'|'U'|'V'|'X'|'_'|'ä'|'Ä'|'ö'|'Ö'|'ü'|'Ü'|EGYSTRING)+ '#'
-;
 
-terminal EGYSTRING:(
+terminal EGYSTRING returns ecore::EString:(
  // AlephU
  '\uA722'
  //&aleph;=
  |'\uA723'
- '\u02BE'   // spiLen
+ |'\u02BE'   // spiLen
 
 //|'\u02BE'   // SpiLenU
 |'\uA725'   // ajin
 |'\uA724'   // AjinU
+ 
  |'j'|'y'|'w'|'b'|'f'|'m'|'n'|'r'
  |'h'|'ḥ'|'ḫ'|'ẖ'|'H'|'Ḥ'|'Ḫ'|'H̱'|'H̭'
  |'z'
@@ -130,23 +143,24 @@ terminal EGYSTRING:(
  
 
 // coptic
-//	|  'Ⲁ''|''ⲁ''|''Ⲃ'|'ⲃ'|'Ⲅ'|'ⲅ'|'Ⲇ'|'ⲇ'|'Ⲉ'|'ⲉ'|'Ⲋ'|'ⲋ'|'Ⲍ'|'ⲍ'|'Ⲏ'|'ⲏ'|'Ⲑ'|'ⲑ'|'Ⲓ'|'ⲓ'|'Ⲕ'|'ⲕ'|'Ⲗ'|'ⲗ'|'Ⲙ'|'ⲙ'|'Ⲛ'|'ⲛ'|'Ⲝ'|'ⲝ'|'Ⲟ'|'ⲟ'|'Ⲡ'|'ⲡ'|'Ⲣ'|'ⲣ'|'Ⲥ'|'ⲥ'|'Ⲧ'|'ⲧ'|'Ⲩ'|'ⲩ'|'Ⲫ'|'ⲫ'|'Ⲭ'|'ⲭ'|'Ⲯ'|'ⲯ'|'Ⲱ'|'ⲱ'|'Ⲳ'|'ⲳ'|'Ⲵ'|'ⲵ'|'Ⲷ'|'ⲷ'|'Ⲹ'|'ⲹ'|'Ⲻ'|'ⲻ'|'Ⲽ'|'ⲽ'|'Ⲿ'|'ⲿ'|'Ⳁ'|'ⳁ'|'Ⳃ'|'ⳃ'|'Ⳅ'|'ⳅ'|'Ⳇ'|'ⳇ'|'Ⳉ'|'ⳉ'|'Ⳋ'|'ⳋ'|'Ⳍ'|'ⳍ'|'Ⳏ'|'ⳏ'|'Ⳑ'|'ⳑ'|'Ⳓ'|'ⳓ'|'Ⳕ'|'ⳕ'|'Ⳗ'|'ⳗ'|'Ⳙ'|'ⳙ'|'Ⳛ'|'ⳛ'|'Ⳝ'|'ⳝ'|'Ⳟ'|'ⳟ'|'Ⳡ'|'ⳡ'|'Ⳣ'|'ⳣ'|'ⳤ'|'⳥'|'⳦'|'⳧'|'⳨'|'⳩'|'⳪'|'Ⳬ'|'ⳬ'|'Ⳮ'|'ⳮ'|'⳯'|'⳰'|'⳱'|'Ⳳ'|'ⳳ'|'⳴'|'⳵'|'⳶'|'⳷'|'⳸'|'⳹'|'⳺'|'⳻'|'⳼'|'⳽'|'⳾'|'⳿'|'Ϡ'|'ϡ'|'Ϣ'|'ϣ'|'Ϥ'|'ϥ'|'Ϧ'|'ϧ'|'Ϩ'|'ϩ'|'Ϫ'|'ϫ'|'Ϭ'|'ϭ'|'Ϯ'|'ϯ'
 	|'\u2C80'..'\u2CFF'
-	//oval
-	| '\uD80C\uDE86' |'\uD80C\uDE87'
-	
-	//cartouche
-	|'\uD80C\uDF79' |'\uD80C\uDF7A'
-	|'\u13379'   // cartOn
-	|'\u1337A'   // cartOff
-	//serech
-	|'\uD80C\uDE58' | '\uD80C\uDE82'
+//	//oval
+//	| '\uD80C\uDE86' |'\uD80C\uDE87'
+//	
+//	//cartouche
+//	|'\uD80C\uDF79' |'\uD80C\uDF7A'
+//	|'\u13379'   // cartOn
+//	|'\u1337A'   // cartOff
+//	//serech
+//	|'\uD80C\uDE58' | '\uD80C\uDE82'
 	|'p'|'l' 
 	
 	//interfix :
-	|':'|'='|'\u2261'|','|'.'|'~'|'\u22ee'|'_'
+	|'='
+//	|':'|'='|'\u2261'|','|'.'|'~'|'\u22ee'
+	|'_'
 	|'\u205D'   // trplColon	
-//	//num
+	//num
 	|'0'..'9'
 	
 	// special
@@ -157,17 +171,37 @@ terminal EGYSTRING:(
 	|'\u00C6'
 )+;
 
-//terminal FULL_EGYSTRING:(
-//	('a'|'c'|'e'|'i'|'o'|'v'|'x'|'A'|'C'|'E'|'O'|'U'|'V'|'X'|'_'|'ä'|'Ä'|'ö'|'Ö'|'ü'|'Ü'|EGYSTRING)+
-//);
-
 // textual criticism brackets
 Brackets:
-	Rasur | AncientExpanded | RestorationOverRasur |
-	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | ExpandedColumn  
-	| PartialDestruction | Destruction
+	Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn |
+	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | 
+	PartialDestruction
+	|Cartouche |Cartouche2 |Oval |Serech
 ;
 
+Cartouche2:
+	'\u13379'   wChar+=NoCartouche+ '\u1337A'
+;
+
+Serech:
+	'\uD80C\uDE58' wChar+=NoCartouche+ '\uD80C\uDE82'
+;
+
+Cartouche:
+	'\uD80C\uDF79' wChar+=NoCartouche+ '\uD80C\uDF7A'
+;
+Oval:
+	{Expanded}
+	'\uD80C\uDE86'  wChar+=NoCartouche+ '\uD80C\uDE87'
+;
+
+NoCartouche:
+	Chars 
+	| Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn |
+	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | 
+	PartialDestruction  
+	| Interfix
+;
 
 Expanded:
 	{Expanded}
@@ -175,7 +209,7 @@ Expanded:
 ;
 
 NoExpanded:
-	Chars
+	Chars | Interfix | DisputableReading
 ;
 
 Emendation:
@@ -184,7 +218,7 @@ Emendation:
 	;
 
 NoEmendation:
-	Chars | Expanded  
+	Chars | Expanded  | Interfix | DisputableReading
 ;
 
 DisputableReading:
@@ -193,7 +227,7 @@ DisputableReading:
 ;
 
 NoDisputableReading:
-	 Expanded | Chars
+	 Expanded | Chars | Interfix
 ;
 
 Lacuna:
@@ -201,8 +235,8 @@ Lacuna:
 	'[' wChar+=NoLacuna+ ']'
 ;
 
-NoLacuna:
-	Expanded | Chars
+NoLacuna: 
+	Expanded | Chars | Interfix | DisputableReading
 ;
 
 Deletion:
@@ -211,7 +245,7 @@ Deletion:
 ;
 
 NoDeletion:
-	Chars | PartialDestruction | Expanded
+	Chars | PartialDestruction | Expanded | Interfix
 ;
 
 ExpandedColumn:
@@ -220,7 +254,7 @@ ExpandedColumn:
 ;
 
 NoExpandedColumn:
-	Chars | Expanded
+	Chars | Expanded | Interfix
 ;
 
 Rasur:
@@ -229,7 +263,7 @@ Rasur:
 ;
 
 NoRasur:
-	Chars | Expanded
+	Chars | Expanded | Interfix
 ;
 
 AncientExpanded:
@@ -238,7 +272,7 @@ AncientExpanded:
 ;
 
 NoAncientExpanded:
-	Chars | Expanded
+	Chars | Expanded | Interfix
 ;
 
 RestorationOverRasur:
@@ -247,7 +281,7 @@ RestorationOverRasur:
 ;
 
 NoRestorationOverRasur:
-	Chars | Expanded
+	Chars | Expanded | Interfix
 ;
 
 PartialDestruction:
@@ -256,14 +290,48 @@ PartialDestruction:
 ;
 
 NoPartialDestruction:
-	Chars | Deletion | Expanded
+	Chars | Deletion | Expanded | Interfix
 ;
 
-Destruction:
-	{Destruction}
-	'\u2013' comment=COMMNENT_EGYSTRING '\u2013'
+// textual criticism interfixes
+Interfix:
+	InterfixFlexion | InterfixLexical |
+	 InterfixSuffixPronomLexical |InterfixPrefixNonLexical |InterfixPrefixLexical
+	 | InterfixConnectionSyllabicGroup
+	 | InterfixCompoundWords
 ;
 
-terminal COMMNENT_EGYSTRING:
-	 (!'\u2013')*  // Gedankenstrich, langer Bindestrich
+InterfixLexical:
+	{InterfixLexical}
+	','
+;
+
+InterfixFlexion:
+	{InterfixFlexion}
+	'.'
+;
+
+InterfixSuffixPronomLexical:
+	{InterfixSuffixPronomLexical}
+	'\u2261'
+;
+
+InterfixPrefixNonLexical:
+	{InterfixPrefixNonLexical}
+	':'
+;
+
+InterfixPrefixLexical:
+	{InterfixPrefixLexical}
+	'\u22ee'
+;
+
+InterfixConnectionSyllabicGroup:
+	{InterfixConnectionSyllabicGroup}
+	'~'
+;
+
+InterfixCompoundWords:
+	{InterfixCompoundWords}
+	'-'
 ;

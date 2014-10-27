@@ -66,8 +66,7 @@ public class MarkerCreator {
 				return IMarker.SEVERITY_WARNING;
 			case INFO : 
 				return IMarker.SEVERITY_INFO;
-			default:
-				throw new IllegalArgumentException(String.valueOf(issue.getSeverity()));
 		}
+		throw new IllegalArgumentException();
 	}
 }

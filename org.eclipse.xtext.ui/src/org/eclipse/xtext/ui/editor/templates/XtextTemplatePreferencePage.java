@@ -16,11 +16,44 @@ import org.eclipse.ui.texteditor.templates.TemplatePreferencePage;
 
 import com.google.inject.Inject;
 
+import e4.handler.E4TemplatePreferencePage;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
-public class XtextTemplatePreferencePage extends TemplatePreferencePage {
+public class XtextTemplatePreferencePage extends E4TemplatePreferencePage {
+
+	
+	
+	//XXX added cp
+	@javax.inject.Inject
+	public XtextTemplatePreferencePage(IPreferenceStore preferenceStore)
+	{
+		setPreferenceStore(preferenceStore);
+	}
+	@Inject
+	private ContextTypeRegistry registry;
+	
+	public ContextTypeRegistry getRegistry() {
+		return registry;
+	}
+
+	public void setRegistry(ContextTypeRegistry registry) {
+		this.registry = registry;
+		setContextTypeRegistry(registry);
+	}
+
+	@Inject
+	private TemplateStore templateStoreInternal;
+	public TemplateStore getTemplateStoreInternal() {
+		return templateStoreInternal;
+	}
+
+	public void setTemplateStoreInternal(TemplateStore templateStoreInternal) {
+		this.templateStoreInternal = templateStoreInternal;
+		setTemplateStore(templateStoreInternal);
+	}
 
 	@Inject
 	public XtextTemplatePreferencePage(IPreferenceStore preferenceStore, ContextTypeRegistry registry, TemplateStore templateStore) {
@@ -53,6 +86,8 @@ public class XtextTemplatePreferencePage extends TemplatePreferencePage {
 		// set the with of the leftmost column ('name')
 		getTableViewer().getTable().getColumns()[0].pack();
 	}
+
+
 	
 	
 }

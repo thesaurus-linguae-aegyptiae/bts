@@ -77,11 +77,17 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.VERSBREAK_MARKER: return createVersbreakMarker();
       case EgyDslPackage.BROKEN_VERSBREAK_MARKER: return createBrokenVersbreakMarker();
       case EgyDslPackage.MARKER: return createMarker();
+      case EgyDslPackage.DESTRUCTION_MARKER: return createDestructionMarker();
       case EgyDslPackage.WORD: return createWord();
       case EgyDslPackage.WORD_PART: return createWordPart();
       case EgyDslPackage.WORD_MIDDLE: return createWordMiddle();
       case EgyDslPackage.CHARS: return createChars();
       case EgyDslPackage.BRACKETS: return createBrackets();
+      case EgyDslPackage.CARTOUCHE2: return createCartouche2();
+      case EgyDslPackage.SERECH: return createSerech();
+      case EgyDslPackage.CARTOUCHE: return createCartouche();
+      case EgyDslPackage.OVAL: return createOval();
+      case EgyDslPackage.NO_CARTOUCHE: return createNoCartouche();
       case EgyDslPackage.EXPANDED: return createExpanded();
       case EgyDslPackage.NO_EXPANDED: return createNoExpanded();
       case EgyDslPackage.EMENDATION: return createEmendation();
@@ -102,7 +108,14 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.NO_RESTORATION_OVER_RASUR: return createNoRestorationOverRasur();
       case EgyDslPackage.PARTIAL_DESTRUCTION: return createPartialDestruction();
       case EgyDslPackage.NO_PARTIAL_DESTRUCTION: return createNoPartialDestruction();
-      case EgyDslPackage.DESTRUCTION: return createDestruction();
+      case EgyDslPackage.INTERFIX: return createInterfix();
+      case EgyDslPackage.INTERFIX_LEXICAL: return createInterfixLexical();
+      case EgyDslPackage.INTERFIX_FLEXION: return createInterfixFlexion();
+      case EgyDslPackage.INTERFIX_SUFFIX_PRONOM_LEXICAL: return createInterfixSuffixPronomLexical();
+      case EgyDslPackage.INTERFIX_PREFIX_NON_LEXICAL: return createInterfixPrefixNonLexical();
+      case EgyDslPackage.INTERFIX_PREFIX_LEXICAL: return createInterfixPrefixLexical();
+      case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP: return createInterfixConnectionSyllabicGroup();
+      case EgyDslPackage.INTERFIX_COMPOUND_WORDS: return createInterfixCompoundWords();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -256,6 +269,17 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public DestructionMarker createDestructionMarker()
+  {
+    DestructionMarkerImpl destructionMarker = new DestructionMarkerImpl();
+    return destructionMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Word createWord()
   {
     WordImpl word = new WordImpl();
@@ -304,6 +328,61 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     BracketsImpl brackets = new BracketsImpl();
     return brackets;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Cartouche2 createCartouche2()
+  {
+    Cartouche2Impl cartouche2 = new Cartouche2Impl();
+    return cartouche2;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Serech createSerech()
+  {
+    SerechImpl serech = new SerechImpl();
+    return serech;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Cartouche createCartouche()
+  {
+    CartoucheImpl cartouche = new CartoucheImpl();
+    return cartouche;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Oval createOval()
+  {
+    OvalImpl oval = new OvalImpl();
+    return oval;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NoCartouche createNoCartouche()
+  {
+    NoCartoucheImpl noCartouche = new NoCartoucheImpl();
+    return noCartouche;
   }
 
   /**
@@ -531,10 +610,87 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Destruction createDestruction()
+  public Interfix createInterfix()
   {
-    DestructionImpl destruction = new DestructionImpl();
-    return destruction;
+    InterfixImpl interfix = new InterfixImpl();
+    return interfix;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixLexical createInterfixLexical()
+  {
+    InterfixLexicalImpl interfixLexical = new InterfixLexicalImpl();
+    return interfixLexical;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixFlexion createInterfixFlexion()
+  {
+    InterfixFlexionImpl interfixFlexion = new InterfixFlexionImpl();
+    return interfixFlexion;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixSuffixPronomLexical createInterfixSuffixPronomLexical()
+  {
+    InterfixSuffixPronomLexicalImpl interfixSuffixPronomLexical = new InterfixSuffixPronomLexicalImpl();
+    return interfixSuffixPronomLexical;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixPrefixNonLexical createInterfixPrefixNonLexical()
+  {
+    InterfixPrefixNonLexicalImpl interfixPrefixNonLexical = new InterfixPrefixNonLexicalImpl();
+    return interfixPrefixNonLexical;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixPrefixLexical createInterfixPrefixLexical()
+  {
+    InterfixPrefixLexicalImpl interfixPrefixLexical = new InterfixPrefixLexicalImpl();
+    return interfixPrefixLexical;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixConnectionSyllabicGroup createInterfixConnectionSyllabicGroup()
+  {
+    InterfixConnectionSyllabicGroupImpl interfixConnectionSyllabicGroup = new InterfixConnectionSyllabicGroupImpl();
+    return interfixConnectionSyllabicGroup;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixCompoundWords createInterfixCompoundWords()
+  {
+    InterfixCompoundWordsImpl interfixCompoundWords = new InterfixCompoundWordsImpl();
+    return interfixCompoundWords;
   }
 
   /**

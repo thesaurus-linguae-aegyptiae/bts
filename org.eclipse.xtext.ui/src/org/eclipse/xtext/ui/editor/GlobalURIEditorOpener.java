@@ -46,10 +46,13 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
 	
 	@Inject
+	private ILocationInFileProvider locationProvider;
+	
+	@Inject
 	private IStorage2UriMapper mapper;
 	
-	@Inject(optional=true) 
-	/* @Nullable */
+	//@Inject(optional=true) XXX cp uncommented
+	//@Nullable
 	private IWorkbench workbench;
 	
 	/**
@@ -107,7 +110,6 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							ILocationInFileProvider locationProvider = resource.getResourceServiceProvider().get(ILocationInFileProvider.class);
 							ITextRegion location = (crossReference != null) ? locationProvider.getSignificantTextRegion(object,
 									crossReference, indexInList) : locationProvider.getSignificantTextRegion(object);
 							if (select) {

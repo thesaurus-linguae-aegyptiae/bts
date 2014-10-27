@@ -6,13 +6,13 @@ import java.util.Collection;
 
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
-import org.bbaw.bts.corpus.text.egy.egyDsl.NoExpanded;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
@@ -41,7 +41,7 @@ public class ExpandedImpl extends BracketsImpl implements Expanded
    * @generated
    * @ordered
    */
-  protected EList<NoExpanded> wChar;
+  protected EList<EObject> wChar;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,11 +69,11 @@ public class ExpandedImpl extends BracketsImpl implements Expanded
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<NoExpanded> getWChar()
+  public EList<EObject> getWChar()
   {
     if (wChar == null)
     {
-      wChar = new EObjectContainmentEList<NoExpanded>(NoExpanded.class, this, EgyDslPackage.EXPANDED__WCHAR);
+      wChar = new EObjectContainmentEList<EObject>(EObject.class, this, EgyDslPackage.EXPANDED__WCHAR);
     }
     return wChar;
   }
@@ -123,7 +123,7 @@ public class ExpandedImpl extends BracketsImpl implements Expanded
     {
       case EgyDslPackage.EXPANDED__WCHAR:
         getWChar().clear();
-        getWChar().addAll((Collection<? extends NoExpanded>)newValue);
+        getWChar().addAll((Collection<? extends EObject>)newValue);
         return;
     }
     super.eSet(featureID, newValue);

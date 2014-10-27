@@ -15,7 +15,6 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.editor.utils.TextStyle;
@@ -46,15 +45,7 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 
 	private void initialize() {
 		attributes.clear();
-		if (Display.getCurrent() == null) {
-			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					highlightingConfig.configure(TextAttributeProvider.this);		
-				}
-			});
-		} else {
-			highlightingConfig.configure(this);
-		}
+		highlightingConfig.configure(this);
 	}
 	
 	public TextAttribute getAttribute(String id) {

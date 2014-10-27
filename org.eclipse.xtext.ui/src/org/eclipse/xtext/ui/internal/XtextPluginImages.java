@@ -36,7 +36,7 @@ import e4.handler.ImageAcces;
  * PDEPluginImages.
  * 
  * @author Peter Friese - Initial contribution and API
- * @author Dennis Hï¿½bner
+ * @author Dennis Hübner
  * 
  */
 public class XtextPluginImages {
@@ -206,48 +206,60 @@ public static final String OBJ_DESC_ERROR = NAME_PREFIX + "ERROR";
 	}
 
 	private static URL makeImageURL(String prefix, String name) {
-		URL url = Platform.getBundle("org.eclipse.xtext.ui").getEntry(
-				"/"+prefix + name);
-		if (url != null) {
-			return url;
-		}
-		String path =  "";
-		URL entry = Platform.getBundle("org.eclipse.xtext.ui").getEntry(
-				"/icons");
-		if (entry != null) {
-			String fileURL = null;
-				try {
-					fileURL = FileLocator.toFileURL(entry).getPath();
-					path = "file://" + fileURL.substring(1, fileURL.length() - 6) + prefix + name;
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-		
-//		System.out.println("path " + path + " exists " + new File(path).exists());
+		//FIXME make dynamic!!!!!!!!!!!!!!
+		String path =  "file://C:/Dokumente und Einstellungen/plutte/git/xtext_2.4.x/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/" + prefix + name; //$NON-NLS-1$
+		System.out.println("path " + path);
 
 		URL result = null;
 		try {
 			result = new URL(path);
 			return result;
 		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		Class<ImageAcces> clazz = ImageAcces.class;
 		URL dirURL = clazz.getClassLoader().getResource(path);
+		System.out.println("dirURL1 " + dirURL);
 
 		Bundle bundle = Platform.getBundle("org.eclipse.xtext.ui");
+		System.out.println("bundle " + bundle);
 
+//		return FileLocator.find(bundle, new Path(path), null);
 		URL fileURL = bundle.getEntry(path);
+		System.out.println("fileURL " + fileURL);
 		
+		System.out.println("fileURL2 " + bundle.getResource(path));
 		try {
+			System.out.println("path2: "
+					+ FileLocator.resolve(fileURL).getPath());
 			result = new URL("file:/"
 					+ FileLocator.resolve(fileURL).getPath());
+			System.out.println("path2: "
+					+ result);
 
 		} catch (IOException e1) {
+			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		return result;
+//		File file = null;
+//		try
+//		{
+//			file = new File(FileLocator.resolve(fileURL).toURI());
+//			dirURL = file.toPath().toUri().toURL();
+//
+//		} catch (URISyntaxException e1)
+//		{
+//			e1.printStackTrace();
+//		} catch (IOException e1)
+//		{
+//			e1.printStackTrace();
+//		}
+//		System.out.println("################" + dirURL.toString());
+//		return dirURL;
+		//old
+//		return FileLocator.find(Activator.getDefault().getBundle(), new Path(path), null);
 	}
 
 	public static Image manage(String key, ImageDescriptor desc) {

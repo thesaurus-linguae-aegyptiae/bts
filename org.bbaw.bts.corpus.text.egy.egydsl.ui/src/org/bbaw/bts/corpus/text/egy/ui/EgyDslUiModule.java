@@ -7,6 +7,7 @@ import org.bbaw.bts.corpus.text.egy.formatting.EgyDslFormatter;
 import org.bbaw.bts.corpus.text.egy.ui.contentassist.AbstractEgyDslProposalProvider;
 import org.bbaw.bts.corpus.text.egy.ui.contentassist.EgyDslProposalProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectDocumentationProvider;
+import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectHover;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEncodingProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSHighlightingConfiguration;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSLocationInFileProvider;
@@ -32,14 +33,14 @@ public class EgyDslUiModule extends org.bbaw.bts.corpus.text.egy.ui.AbstractEgyD
 	}
 
 	public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider() {
-		return DefaultEObjectHoverProvider.class;
+		return BTSEObjectHover.class;
 	}
 
-	//
-	// public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider()
-	// {
-	// return (Class<? extends IEObjectHoverProvider>) BTSEObjectHover.class;
-	// }
+	
+//	 public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider()
+//	 {
+//	 return (Class<? extends IEObjectHoverProvider>) BTSEObjectHover.class;
+//	 }
 
 	public Class<? extends IEObjectDocumentationProvider> bindIEObjectDocumentationProviderr() {
 		return BTSEObjectDocumentationProvider.class;
@@ -61,9 +62,9 @@ public class EgyDslUiModule extends org.bbaw.bts.corpus.text.egy.ui.AbstractEgyD
 		return BTSEncodingProvider.class;
 	}
 
-	public Class<? extends TerminalsProposalProvider> bindProposalProvider() {
-		return EgyDslProposalProvider.class;
-	}
+//	public Class<? extends TerminalsProposalProvider> bindProposalProvider() {
+//		return EgyDslProposalProvider.class;
+//	}
 
 	public Class<? extends AbstractDeclarativeFormatter> createFormatter() {
 		return EgyDslFormatter.class;
@@ -76,4 +77,5 @@ public class EgyDslUiModule extends org.bbaw.bts.corpus.text.egy.ui.AbstractEgyD
     	return EgyDslProposalProvider.class;
     }
 	
+
 }

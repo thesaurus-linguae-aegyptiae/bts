@@ -62,6 +62,9 @@ public class DefaultRenameSupport implements IRenameSupport {
 
 	private IRenameElementContext renameElementContext;
 
+	@Inject
+	private SaveHelper saveHelper;
+	
 	protected boolean initialize(IRenameElementContext renameElementContext, String newName) {
 		if (executerProvider != null && renameRefactoringProvider != null) {
 			this.renameRefactoring = renameRefactoringProvider.getRenameRefactoring(renameElementContext);
@@ -75,7 +78,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 	}
 
 	public void startRefactoringWithDialog(final boolean previewOnly) throws InterruptedException {
-		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, renameElementContext) {
+		RenameElementWizard renameElementWizard = new RenameElementWizard(renameRefactoring, saveHelper, renameElementContext) {
 			@Override
 			protected void addUserInputPages() {
 				if (!previewOnly) {

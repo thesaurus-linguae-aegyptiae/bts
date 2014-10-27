@@ -21,7 +21,7 @@ import org.eclipse.ui.IWorkbench;
  * <code>IHandler</code>.
  * </p>
  * 
- * @since 3.1
+ * @since 2.4
  */
 public final class E4ActionHandler extends AbstractHandler {
 

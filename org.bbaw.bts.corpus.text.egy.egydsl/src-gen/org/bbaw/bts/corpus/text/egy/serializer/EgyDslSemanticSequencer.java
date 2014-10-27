@@ -5,21 +5,31 @@ import com.google.inject.Provider;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
+import org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche;
+import org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
-import org.bbaw.bts.corpus.text.egy.egyDsl.Destruction;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.ExpandedColumn;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixCompoundWords;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixConnectionSyllabicGroup;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixFlexion;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixLexical;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixLexical;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixNonLexical;
+import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Lacuna;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
+import org.bbaw.bts.corpus.text.egy.egyDsl.Serech;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.egyDsl.VersFrontierMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.VersbreakMarker;
@@ -56,6 +66,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.ANCIENT_EXPANDED:
 				if(context == grammarAccess.getAncientExpandedRule() ||
 				   context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_AncientExpanded(context, (AncientExpanded) semanticObject); 
 					return; 
@@ -71,6 +82,22 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					return; 
 				}
 				else break;
+			case EgyDslPackage.CARTOUCHE:
+				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getCartoucheRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_Cartouche(context, (Cartouche) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.CARTOUCHE2:
+				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getCartouche2Rule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_Cartouche2(context, (Cartouche2) semanticObject); 
+					return; 
+				}
+				else break;
 			case EgyDslPackage.CASE:
 				if(context == grammarAccess.getCaseRule()) {
 					sequence_Case(context, (Case) semanticObject); 
@@ -80,6 +107,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.CHARS:
 				if(context == grammarAccess.getCharsRule() ||
 				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
 				   context == grammarAccess.getNoEmendationRule() ||
@@ -97,23 +125,29 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.DELETION:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getDeletionRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Deletion(context, (Deletion) semanticObject); 
 					return; 
 				}
 				else break;
-			case EgyDslPackage.DESTRUCTION:
-				if(context == grammarAccess.getBracketsRule() ||
-				   context == grammarAccess.getDestructionRule() ||
-				   context == grammarAccess.getWordMiddleRule()) {
-					sequence_Destruction(context, (Destruction) semanticObject); 
+			case EgyDslPackage.DESTRUCTION_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getDestructionMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule()) {
+					sequence_DestructionMarker(context, (DestructionMarker) semanticObject); 
 					return; 
 				}
 				else break;
 			case EgyDslPackage.DISPUTABLE_READING:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getDisputableReadingRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_DisputableReading(context, (DisputableReading) semanticObject); 
 					return; 
@@ -122,6 +156,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.EMENDATION:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getEmendationRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Emendation(context, (Emendation) semanticObject); 
 					return; 
@@ -129,8 +164,13 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.EXPANDED:
 				if(context == grammarAccess.getBracketsRule() ||
-				   context == grammarAccess.getExpandedRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_Brackets_Expanded_Oval(context, (Expanded) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getExpandedRule() ||
 				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
 				   context == grammarAccess.getNoEmendationRule() ||
@@ -138,23 +178,161 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				   context == grammarAccess.getNoLacunaRule() ||
 				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getNoRasurRule() ||
-				   context == grammarAccess.getNoRestorationOverRasurRule() ||
-				   context == grammarAccess.getWordMiddleRule()) {
+				   context == grammarAccess.getNoRestorationOverRasurRule()) {
 					sequence_Expanded(context, (Expanded) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getOvalRule()) {
+					sequence_Oval(context, (Expanded) semanticObject); 
 					return; 
 				}
 				else break;
 			case EgyDslPackage.EXPANDED_COLUMN:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getExpandedColumnRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_ExpandedColumn(context, (ExpandedColumn) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_COMPOUND_WORDS:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixCompoundWordsRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixCompoundWords(context, (InterfixCompoundWords) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixConnectionSyllabicGroupRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixConnectionSyllabicGroup(context, (InterfixConnectionSyllabicGroup) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_FLEXION:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixFlexionRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixFlexion(context, (InterfixFlexion) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_LEXICAL:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixLexicalRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixLexical(context, (InterfixLexical) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_PREFIX_LEXICAL:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixPrefixLexicalRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixPrefixLexical(context, (InterfixPrefixLexical) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_PREFIX_NON_LEXICAL:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixPrefixNonLexicalRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixPrefixNonLexical(context, (InterfixPrefixNonLexical) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.INTERFIX_SUFFIX_PRONOM_LEXICAL:
+				if(context == grammarAccess.getInterfixRule() ||
+				   context == grammarAccess.getInterfixSuffixPronomLexicalRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
+				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoEmendationRule() ||
+				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_InterfixSuffixPronomLexical(context, (InterfixSuffixPronomLexical) semanticObject); 
 					return; 
 				}
 				else break;
 			case EgyDslPackage.LACUNA:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getLacunaRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Lacuna(context, (Lacuna) semanticObject); 
 					return; 
@@ -171,6 +349,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.PARTIAL_DESTRUCTION:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getPartialDestructionRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
@@ -180,6 +359,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.RASUR:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Rasur(context, (Rasur) semanticObject); 
@@ -188,6 +368,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.RESTORATION_OVER_RASUR:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_RestorationOverRasur(context, (RestorationOverRasur) semanticObject); 
@@ -198,6 +379,14 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				if(context == grammarAccess.getSentenceRule() ||
 				   context == grammarAccess.getTextItemRule()) {
 					sequence_Sentence(context, (Sentence) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.SERECH:
+				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getSerechRule() ||
+				   context == grammarAccess.getWordMiddleRule()) {
+					sequence_Serech(context, (Serech) semanticObject); 
 					return; 
 				}
 				else break;
@@ -265,9 +454,36 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
+	 *     (wChar+=NoExpanded+ | wChar+=NoCartouche+)
+	 */
+	protected void sequence_Brackets_Expanded_Oval(EObject context, Expanded semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     {BrokenVersbreakMarker}
 	 */
 	protected void sequence_BrokenVersbreakMarker(EObject context, BrokenVersbreakMarker semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     wChar+=NoCartouche+
+	 */
+	protected void sequence_Cartouche2(EObject context, Cartouche2 semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     wChar+=NoCartouche+
+	 */
+	protected void sequence_Cartouche(EObject context, Cartouche semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -308,16 +524,16 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     comment=COMMNENT_EGYSTRING
+	 *     type=BETWEEN_MINUS
 	 */
-	protected void sequence_Destruction(EObject context, Destruction semanticObject) {
+	protected void sequence_DestructionMarker(EObject context, DestructionMarker semanticObject) {
 		if(errorAcceptor != null) {
-			if(transientValues.isValueTransient(semanticObject, EgyDslPackage.Literals.DESTRUCTION__COMMENT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EgyDslPackage.Literals.DESTRUCTION__COMMENT));
+			if(transientValues.isValueTransient(semanticObject, EgyDslPackage.Literals.DESTRUCTION_MARKER__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EgyDslPackage.Literals.DESTRUCTION_MARKER__TYPE));
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getDestructionAccess().getCommentCOMMNENT_EGYSTRINGTerminalRuleCall_2_0(), semanticObject.getComment());
+		feeder.accept(grammarAccess.getDestructionMarkerAccess().getTypeBETWEEN_MINUSTerminalRuleCall_0(), semanticObject.getType());
 		feeder.finish();
 	}
 	
@@ -360,6 +576,69 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
+	 *     {InterfixCompoundWords}
+	 */
+	protected void sequence_InterfixCompoundWords(EObject context, InterfixCompoundWords semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InterfixConnectionSyllabicGroup}
+	 */
+	protected void sequence_InterfixConnectionSyllabicGroup(EObject context, InterfixConnectionSyllabicGroup semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InterfixFlexion}
+	 */
+	protected void sequence_InterfixFlexion(EObject context, InterfixFlexion semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InterfixLexical}
+	 */
+	protected void sequence_InterfixLexical(EObject context, InterfixLexical semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InterfixPrefixLexical}
+	 */
+	protected void sequence_InterfixPrefixLexical(EObject context, InterfixPrefixLexical semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InterfixPrefixNonLexical}
+	 */
+	protected void sequence_InterfixPrefixNonLexical(EObject context, InterfixPrefixNonLexical semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {InterfixSuffixPronomLexical}
+	 */
+	protected void sequence_InterfixSuffixPronomLexical(EObject context, InterfixSuffixPronomLexical semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     wChar+=NoLacuna+
 	 */
 	protected void sequence_Lacuna(EObject context, Lacuna semanticObject) {
@@ -380,6 +659,15 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getMarkerAccess().getTypeBETWEEN_HASHESTerminalRuleCall_0(), semanticObject.getType());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     wChar+=NoCartouche+
+	 */
+	protected void sequence_Oval(EObject context, Expanded semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -421,6 +709,15 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
+	 *     wChar+=NoCartouche+
+	 */
+	protected void sequence_Serech(EObject context, Serech semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (items+=TextItem items+=TextItem*)
 	 */
 	protected void sequence_TextContent(EObject context, TextContent semanticObject) {
@@ -448,16 +745,23 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (wChar+=WordMiddle wChar+=WordMiddle*)
+	 *     wChar=WordMiddle
 	 */
 	protected void sequence_WordPart(EObject context, WordPart semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+		if(errorAcceptor != null) {
+			if(transientValues.isValueTransient(semanticObject, EgyDslPackage.Literals.WORD_PART__WCHAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, EgyDslPackage.Literals.WORD_PART__WCHAR));
+		}
+		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
+		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
+		feeder.accept(grammarAccess.getWordPartAccess().getWCharWordMiddleParserRuleCall_1_0(), semanticObject.getWChar());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * Constraint:
-	 *     (wChar+=WordPart wChar+=WordPart*)
+	 *     wChar+=WordPart+
 	 */
 	protected void sequence_Word(EObject context, Word semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

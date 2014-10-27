@@ -24,6 +24,7 @@ import static org.lightcouch.CouchDbUtil.generateUUID;
 import static org.lightcouch.CouchDbUtil.getElement;
 import static org.lightcouch.URIBuilder.builder;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -88,7 +89,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipselabs.emfjson.EMFJs;
 import org.eclipselabs.emfjson.internal.JSONSave;
 
-import com.google.common.io.CharStreams;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
@@ -506,8 +506,25 @@ abstract class CouchDbClientBase {
 		//FIXME check dynamically eobject
 		if (classType.isAssignableFrom(EObject.class))
 		{
+			String asString = "";
+
+		    try {
+
+		        String UTF8 = "utf8";
+		        int BUFFER_SIZE = 8192;
+
+		        BufferedReader br = new BufferedReader(new InputStreamReader(instream,
+		                UTF8), BUFFER_SIZE);
+		        String str;
+		        while ((str = br.readLine()) != null) {
+		            asString += str;
+		        }
+		    } catch (Exception e) {
+
+		    }
 			try {
-				return EmfModelHelper.loadFromString(CharStreams.toString(reader), classType);
+				
+				return EmfModelHelper.loadFromString(asString, classType);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

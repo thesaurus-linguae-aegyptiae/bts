@@ -71,10 +71,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public void disposeInput() {
-		resource = null;
-		if (validationJob != null) {
-			validationJob.cancel();
-		}
+		// clients may override
 	}
 
 	private final XtextDocumentLocker stateAccess = createDocumentLocker();
@@ -139,17 +136,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	protected void notifyModelListeners(XtextResource res) {
-		if (res == null || res != this.resource)
-			return;
 		List<IXtextModelListener> modelListenersCopy;
 		synchronized (modelListeners) {
 			modelListenersCopy = newArrayList(modelListeners);
 		}
 		for (IXtextModelListener listener : modelListenersCopy){
 			try {
-				if (res != this.resource) {
-					return;
-				}
 				listener.modelChanged(res);
 			} catch(Exception exc) {
 				log.error("Error in IXtextModelListener", exc);
@@ -209,7 +201,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		protected void afterModify(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
 			if(!(work instanceof ReconcilingUnitOfWork))
-				notifyModelListeners(res);
+				notifyModelListeners(resource);
 		}
 
 		@Override
@@ -272,9 +264,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	public void checkAndUpdateAnnotations() {
 		if (validationJob!=null) {
 			validationJob.cancel();
-			if (resource != null) {
-				validationJob.schedule();
-			}
+			validationJob.schedule();
 		}
 	}
 	
@@ -285,7 +275,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @since 2.1
 	 */
 	public URI getResourceURI() {
-		XtextResource resource = this.resource;
 		if (resource != null)
 			return resource.getURI();
 		return null;
@@ -293,9 +282,6 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	@SuppressWarnings("unchecked")
 	public <T> T getAdapter(Class<T> adapterType) {
-		XtextResource resource = this.resource;
-		if (resource == null)
-			return null;
 		URI uri = resource.getURI();
 		if ((adapterType == IFile.class || adapterType == IResource.class) && uri.isPlatformResource()) {
 			return (T) ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(uri.toPlatformString(true)));

@@ -16,7 +16,7 @@ Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
- com.google.guava
+ org.bbaw.bts.model.corpus
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
@@ -24,6 +24,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
 Export-Package: org.bbaw.bts.corpus.text.egy.ui,
  org.bbaw.bts.corpus.text.egy.ui.contentassist,
  org.bbaw.bts.corpus.text.egy.ui.contentassist.antlr,
+ org.bbaw.bts.corpus.text.egy.ui.custom,
  org.bbaw.bts.corpus.text.egy.ui.internal,
  org.bbaw.bts.corpus.text.egy.ui.quickfix
 Bundle-Activator: org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator

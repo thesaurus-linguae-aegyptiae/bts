@@ -2,8 +2,6 @@
  */
 package org.bbaw.bts.corpus.text.egy.egyDsl;
 
-import org.eclipse.emf.common.util.EList;
-
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -25,19 +23,29 @@ import org.eclipse.emf.ecore.EObject;
 public interface WordPart extends EObject
 {
   /**
-   * Returns the value of the '<em><b>WChar</b></em>' containment reference list.
-   * The list contents are of type {@link org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle}.
+   * Returns the value of the '<em><b>WChar</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>WChar</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>WChar</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>WChar</em>' containment reference list.
+   * @return the value of the '<em>WChar</em>' containment reference.
+   * @see #setWChar(WordMiddle)
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage#getWordPart_WChar()
    * @model containment="true"
    * @generated
    */
-  EList<WordMiddle> getWChar();
+  WordMiddle getWChar();
+
+  /**
+   * Sets the value of the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.WordPart#getWChar <em>WChar</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>WChar</em>' containment reference.
+   * @see #getWChar()
+   * @generated
+   */
+  void setWChar(WordMiddle value);
 
 } // WordPart

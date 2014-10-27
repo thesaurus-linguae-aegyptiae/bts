@@ -134,9 +134,6 @@ public class RefactoringWizardOpenOperation_NonForking {
 	private void disposeRefactoringContext(RefactoringWizard wizard) {
 		try {
 			Field refactoringContextField = getPrivateField(wizard.getClass(), "fRefactoringContext");
-			if (refactoringContextField == null) {
-				return;
-			}
 			refactoringContextField.setAccessible(true);
 			Object refactoringContext = refactoringContextField.get(wizard);
 			if(refactoringContext != null) {

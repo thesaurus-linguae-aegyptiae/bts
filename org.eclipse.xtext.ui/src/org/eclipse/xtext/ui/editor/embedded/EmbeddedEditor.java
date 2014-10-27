@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
  * and provides accessors for the {@link #getDocument() document}, 
  * the {@link #getConfiguration() source viewer configuration}, and the {@link #getViewer() viewer}.
  * 
-
+ * @since 2.2
  * @author Sebastian Zarnekow - Initial contribution and API
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
@@ -86,4 +86,5 @@ public class EmbeddedEditor {
 	public EmbeddedEditorModelAccess createPartialEditor() {
 		return createPartialEditor("", "", "", false);
 	}
+	
 }

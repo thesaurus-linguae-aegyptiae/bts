@@ -35,8 +35,10 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.corpus.controller.impl.partController.support.TextModelHelper;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.services.BTSCommentService;
+import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.core.services.corpus.BTSTextService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
@@ -45,6 +47,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
@@ -60,9 +63,24 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+//import org.eclipse.emf.compare.Comparison;
+//import org.eclipse.emf.compare.EMFCompare;
+//import org.eclipse.emf.compare.match.DefaultComparisonFactory;
+//import org.eclipse.emf.compare.match.DefaultEqualityHelperFactory;
+//import org.eclipse.emf.compare.match.DefaultMatchEngine;
+//import org.eclipse.emf.compare.match.IComparisonFactory;
+//import org.eclipse.emf.compare.match.IMatchEngine;
+//import org.eclipse.emf.compare.match.eobject.IEObjectMatcher;
+//import org.eclipse.emf.compare.scope.IComparisonScope;
+//import org.eclipse.emf.compare.utils.UseIdentifiers;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
@@ -105,6 +123,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final int GAP = 10;
 	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
 	
+	protected TextModelHelper textModelHelper = new TextModelHelper();
+
+	
 	private DrawingSpecification drawingSpecifications = new DrawingSpecificationsImplementation();
 	
 	@Inject
@@ -123,7 +144,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	
 	@Inject
 	private BTSCommentService commentService;
+	
+	@Inject
+	private BTSLemmaEntryService lemmaService;
+	
 	private int counter;
+	private HashMap<String, List<BTSModelAnnotation>> lemmaAnnotationMap;
 
 	@Override
 	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
@@ -137,6 +163,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		{
 			relatingObjectsMap = fillRelatingObjectsMap(relatingObjects);
 		}
+		lemmaAnnotationMap = new HashMap<String, List<BTSModelAnnotation>>();
 			
 		StringBuilder stringBuilder = new StringBuilder();
 		if (textContent == null)
@@ -159,10 +186,15 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 				BTSModelAnnotation ma = new BTSModelAnnotation(sentence);
 				int len = stringBuilder.length();
+				int loopLen = stringBuilder.length();
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
 				{
 					appendToStringBuilder(sentenceItem, model, stringBuilder, relatingObjects, relatingObjectsMap);
-					stringBuilder.append(WS);
+					if (stringBuilder.length() > loopLen)
+					{
+						stringBuilder.append(WS);
+						loopLen = stringBuilder.length();
+					}
 				}
 				
 				// check whether sentence items were added
@@ -184,8 +216,46 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				appendToStringBuilder(textItems, model, stringBuilder, relatingObjects, relatingObjectsMap);
 			}
 		}
+		stringBuilder.deleteCharAt(stringBuilder.length() -1);
 		logger.info("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
-		doc.set(stringBuilder.toString());
+		
+		processLemmaAnnotions(lemmaAnnotationMap);
+		doc.set(stringBuilder.toString());// + BTSConstants.EOF);
+
+	}
+
+	private void processLemmaAnnotions(
+			final HashMap<String, List<BTSModelAnnotation>> localLemmaAnnotationMap) {
+		Job job = new Job("Process Lemma Annotation") {
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				for (String lemmaId : localLemmaAnnotationMap.keySet())
+				{
+					List<BTSModelAnnotation> list = localLemmaAnnotationMap.get(lemmaId);
+					if (list != null && !list.isEmpty())
+					{
+						BTSLemmaEntry lemma = null;
+						try {
+							lemma = lemmaService.find(lemmaId);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if (lemma != null)
+						{
+							for (BTSModelAnnotation annotation : list)
+							{
+								annotation.setRelatingObject(lemma);
+							}
+						}
+					}
+				}
+				return null;
+			}
+		};
+		
+				
+		lemmaAnnotationMap = null;
 
 	}
 
@@ -464,9 +534,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private void appendWordToModel(BTSWord word, IAnnotationModel model, Position position)
 	{
 		BTSModelAnnotation annotation;
-		if (true || (word.getLKey() != null && "".equals(word.getLKey()))) {
+		if (word.getLKey() != null && !"".equals(word.getLKey())) {
 
 			annotation = new BTSLemmaAnnotation(word);
+			add2LemmaAnnotationMap(word.getLKey(), annotation);
+			
 		} else {
 			annotation = new BTSModelAnnotation(
 					(BTSIdentifiableItem) word);
@@ -475,13 +547,22 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	}
 
+	private void add2LemmaAnnotationMap(String lemmaId, BTSModelAnnotation annotation) {
+		List<BTSModelAnnotation> list = lemmaAnnotationMap.get(lemmaId);
+		if (list == null)
+		{
+			list = new Vector<BTSModelAnnotation>(4);
+		}
+		list.add(annotation);
+	}
+
 	private Position appendWordToStringBuilder(BTSWord word, StringBuilder stringBuilder)
 	{
 		Position pos = new Position(stringBuilder.length());
-		if (word.getWChar() != null)
+		if (word.getWChar() != null && !"".equals(word.getWChar().trim()))
 		{
-			stringBuilder.append(word.getWChar());
-			pos.setLength(word.getWChar().length());
+			stringBuilder.append(word.getWChar().trim());
+			pos.setLength(word.getWChar().trim().length());
 		}
 		return pos;
 	}
@@ -1154,5 +1235,37 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	public BufferedImage getImageData(String topItemList) throws MDCSyntaxError
 	{
 		return getImageData(topItemList, 200, 45);
+	}
+
+	@Override
+	public BTSTextContent updateModelFromTextContent(
+			BTSTextContent textContent, EObject eo, IAnnotationModel am) {
+		BTSTextContent result = textModelHelper.updateModelFromTextContent(textContent, eo, am);
+		
+		
+		// testing
+		EcoreUtil.EqualityHelper h = new EcoreUtil.EqualityHelper();
+		System.out.println("BTSTextEditorController.updateModelFromTextContent Model differs from original: "
+		+ h.equals(textContent, result));
+		
+//		// Configure EMF Compare
+//		IEObjectMatcher matcher = DefaultMatchEngine.createDefaultEObjectMatcher(UseIdentifiers.NEVER);
+//		IComparisonFactory comparisonFactory = new DefaultComparisonFactory(new DefaultEqualityHelperFactory());
+//		IMatchEngine matchEngine = new DefaultMatchEngine(matcher, comparisonFactory);
+////	        IMatchEngine.Factory.Registry matchEngineRegistry = EMFCompareRCPPlugin.getDefault().getMatchEngineFactoryRegistry();
+////	    IPostProcessor.Descriptor.Registry<String> postProcessorRegistry = EMFCompareRCPPlugin.getDefault().getPostProcessorRegistry();
+//		EMFCompare comparator = EMFCompare.builder()
+////	                                           .setMatchEngineFactoryRegistry(matchEngineRegistry)
+////	                                           .setPostProcessorRegistry(postProcessorRegistry)
+//	                                           .build();
+//
+//		// Compare the two models
+//		IComparisonScope scope =EMFCompare.createDefaultScope(textContent, textContent);
+//		Comparison comparison = comparator.compare(scope);
+//		
+//		System.out.println("BTSTextEditorController.updateModelFromTextContent Model differs from original: " +
+//		!comparison.getDifferences().isEmpty());
+		
+		return result;
 	}
 }

@@ -69,8 +69,6 @@ public final class XtextMarkerRulerAction extends SelectMarkerRulerAction {
 	protected boolean hasQuickFixableAnnotationInCurrentLine() {
 		try {
 			AbstractMarkerAnnotationModel annotationModel = getAnnotationModel();
-      if (annotationModel == null)
-        return false;
 			int line = ruler.getLineOfLastMouseButtonActivity();
 			IDocument document = getDocument();
 			IRegion region = document.getLineInformation(line);

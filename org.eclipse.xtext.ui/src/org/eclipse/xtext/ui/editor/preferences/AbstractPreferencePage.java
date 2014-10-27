@@ -13,6 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ProjectScope;
 import org.eclipse.core.runtime.CoreException;
@@ -95,7 +96,10 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 		if (isPropertyPage()) {
 			return preferenceStoreAccess.getWritablePreferenceStore(currentProject());
 		}
-		return preferenceStoreAccess.getWritablePreferenceStore();
+		// XXX cp changed
+		if (preferenceStoreAccess != null)System.out.println(preferenceStoreAccess.getWritablePreferenceStore());
+		return StaticAccessController.getPreferenceStore();
+//		return preferenceStoreAccess.getWritablePreferenceStore();
 	}
 
 	/**

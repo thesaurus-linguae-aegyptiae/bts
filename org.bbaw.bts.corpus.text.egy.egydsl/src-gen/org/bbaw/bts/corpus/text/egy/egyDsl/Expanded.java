@@ -4,6 +4,8 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>Expanded</b></em>'.
@@ -20,11 +22,11 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface Expanded extends Brackets, NoEmendation, NoDisputableReading, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur, NoPartialDestruction
+public interface Expanded extends Brackets, Oval, NoCartouche, NoEmendation, NoDisputableReading, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur, NoPartialDestruction
 {
   /**
    * Returns the value of the '<em><b>WChar</b></em>' containment reference list.
-   * The list contents are of type {@link org.bbaw.bts.corpus.text.egy.egyDsl.NoExpanded}.
+   * The list contents are of type {@link org.eclipse.emf.ecore.EObject}.
    * <!-- begin-user-doc -->
    * <p>
    * If the meaning of the '<em>WChar</em>' containment reference list isn't clear,
@@ -36,6 +38,6 @@ public interface Expanded extends Brackets, NoEmendation, NoDisputableReading, N
    * @model containment="true"
    * @generated
    */
-  EList<NoExpanded> getWChar();
+  EList<EObject> getWChar();
 
 } // Expanded

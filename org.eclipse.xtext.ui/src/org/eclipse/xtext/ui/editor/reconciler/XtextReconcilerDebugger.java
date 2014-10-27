@@ -68,8 +68,7 @@ public class XtextReconcilerDebugger {
 							
 						}.syncExec();
 					} else {
-						if (LOG.isDebugEnabled())
-							LOG.debug("Model and document are in sync");
+						System.out.println("Model and document are in sync");
 					}
 				}
 			}

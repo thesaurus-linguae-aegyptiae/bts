@@ -556,7 +556,9 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 
 		@Override
 		public IInformationControl doCreateInformationControl(Shell parent) {
-			return new AnnotationInformationControl(parent, "F2") { //EditorsUI.getTooltipAffordanceString()) {
+//			String str = EditorsUI.getTooltipAffordanceString();
+//			System.out.println(str);
+			return new AnnotationInformationControl(parent, "Tooltip"){ //EditorsUI.getTooltipAffordanceString()) { // XXX cp uncommented
 
 				@Override
 				public IInformationControlCreator getInformationPresenterControlCreator() {
@@ -571,7 +573,7 @@ public class AnnotationWithQuickFixesHover extends AbstractProblemHover {
 				return false;
 
 			if (control instanceof IInformationControlExtension4)
-				((IInformationControlExtension4) control).setStatusText("F2"); //cplutte replaced//EditorsUI.getTooltipAffordanceString());
+				((IInformationControlExtension4) control).setStatusText("test");  //EditorsUI.getTooltipAffordanceString())  XXX cp uncommented
 
 			return true;
 		}

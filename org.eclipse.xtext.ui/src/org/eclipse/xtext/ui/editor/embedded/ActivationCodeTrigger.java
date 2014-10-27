@@ -20,7 +20,6 @@ import org.eclipse.ui.texteditor.IUpdate;
  * VerifyKeyListener that will trigger a matching action directly instead
  * of using the key binding API.
  * @author Sebastian Zarnekow - Initial contribution and API
-
  */
 public class ActivationCodeTrigger implements VerifyKeyListener {
 

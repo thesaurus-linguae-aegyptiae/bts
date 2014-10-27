@@ -11,6 +11,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.ExpandedColumn;
+import org.bbaw.bts.corpus.text.egy.egyDsl.Interfix;
 //import org.bbaw.bts.corpus.text.egy.egyDsl.Interfix;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Lacuna;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
@@ -72,11 +73,11 @@ public class EgyDslJavaValidator extends
 				}
 				last = item;
 			}
-//			if (last instanceof Interfix) {
-//				error("Interfix may not be at the end of a word!", word,
-//						EgyDslPackage.Literals.WORD__WCHAR, index - 1);
-//			} else 
-//				if (last instanceof Brackets) {
+			if (last instanceof Interfix) {
+				error("Interfix may not be at the end of a word!", word,
+						EgyDslPackage.Literals.WORD__WCHAR, index - 1);
+			} else 
+				if (last instanceof Brackets) {
 //				if (last instanceof Expanded) {
 //					checkBracketContentLastCharNoInterfix((Expanded) last);
 //				} else if (last instanceof Emendation) {
@@ -98,7 +99,7 @@ public class EgyDslJavaValidator extends
 //				} else if (last instanceof PartialDestruction) {
 //					checkBracketContentLastCharNoInterfix((PartialDestruction) last);
 //				}
-//			}
+			}
 		}
 	}
 

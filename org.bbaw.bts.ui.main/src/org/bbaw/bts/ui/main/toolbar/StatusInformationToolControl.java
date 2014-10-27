@@ -28,12 +28,13 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
+import org.eclipse.swt.widgets.Text;
 
 public class StatusInformationToolControl {
 
 	@Inject
 	private UISynchronize sync;
-	private Label label;
+	private Text label;
 	private StatusMessage message;
 	private ComposedAdapterFactory factory = new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -52,7 +53,7 @@ public class StatusInformationToolControl {
 		parent.setLayout(new GridLayout(3, true));
 		parent.setBackground(new Color(Display.getDefault(), new RGB(155, 155, 155)));
 		parent.setBounds(100, 10, 350, 20);
-		label = new Label(parent, SWT.SMOOTH);
+		label = new Text(parent, SWT.READ_ONLY);
 		label.setText("Ready                                                                                                              ");
 		label.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 3, 1));
 		label.pack();
@@ -64,8 +65,7 @@ public class StatusInformationToolControl {
 	{
 		// make sure that object is not null and not equal with current message
 		// check that message type of new message has higher priority than the current message
-		if (object != null && object instanceof StatusMessage && (message == null || (!object.equals(this.message) 
-				&& object.getMessageType().getValue() < message.getMessageType().getValue())))
+		if (object != null && object instanceof StatusMessage && (message == null || (!object.equals(this.message) )))
 		{
 			message = object;
 			 sync.syncExec(new Runnable() {

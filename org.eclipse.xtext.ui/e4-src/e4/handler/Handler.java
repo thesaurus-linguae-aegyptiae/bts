@@ -13,6 +13,9 @@ import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.FrameworkUtil;
 
+/**
+ * @since 2.4
+ */
 public class Handler {
 	@Execute
 	public void execute() {

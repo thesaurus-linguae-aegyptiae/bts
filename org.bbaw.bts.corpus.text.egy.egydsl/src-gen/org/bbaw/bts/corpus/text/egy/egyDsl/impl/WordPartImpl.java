@@ -2,23 +2,18 @@
  */
 package org.bbaw.bts.corpus.text.egy.egyDsl.impl;
 
-import java.util.Collection;
-
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.WordMiddle;
 import org.bbaw.bts.corpus.text.egy.egyDsl.WordPart;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
-
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,14 +31,14 @@ import org.eclipse.emf.ecore.util.InternalEList;
 public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPart
 {
   /**
-   * The cached value of the '{@link #getWChar() <em>WChar</em>}' containment reference list.
+   * The cached value of the '{@link #getWChar() <em>WChar</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see #getWChar()
    * @generated
    * @ordered
    */
-  protected EList<WordMiddle> wChar;
+  protected WordMiddle wChar;
 
   /**
    * <!-- begin-user-doc -->
@@ -71,13 +66,47 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<WordMiddle> getWChar()
+  public WordMiddle getWChar()
   {
-    if (wChar == null)
-    {
-      wChar = new EObjectContainmentEList<WordMiddle>(WordMiddle.class, this, EgyDslPackage.WORD_PART__WCHAR);
-    }
     return wChar;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetWChar(WordMiddle newWChar, NotificationChain msgs)
+  {
+    WordMiddle oldWChar = wChar;
+    wChar = newWChar;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, EgyDslPackage.WORD_PART__WCHAR, oldWChar, newWChar);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setWChar(WordMiddle newWChar)
+  {
+    if (newWChar != wChar)
+    {
+      NotificationChain msgs = null;
+      if (wChar != null)
+        msgs = ((InternalEObject)wChar).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - EgyDslPackage.WORD_PART__WCHAR, null, msgs);
+      if (newWChar != null)
+        msgs = ((InternalEObject)newWChar).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - EgyDslPackage.WORD_PART__WCHAR, null, msgs);
+      msgs = basicSetWChar(newWChar, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, EgyDslPackage.WORD_PART__WCHAR, newWChar, newWChar));
   }
 
   /**
@@ -91,7 +120,7 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
     switch (featureID)
     {
       case EgyDslPackage.WORD_PART__WCHAR:
-        return ((InternalEList<?>)getWChar()).basicRemove(otherEnd, msgs);
+        return basicSetWChar(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -117,15 +146,13 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
    * <!-- end-user-doc -->
    * @generated
    */
-  @SuppressWarnings("unchecked")
   @Override
   public void eSet(int featureID, Object newValue)
   {
     switch (featureID)
     {
       case EgyDslPackage.WORD_PART__WCHAR:
-        getWChar().clear();
-        getWChar().addAll((Collection<? extends WordMiddle>)newValue);
+        setWChar((WordMiddle)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -142,7 +169,7 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
     switch (featureID)
     {
       case EgyDslPackage.WORD_PART__WCHAR:
-        getWChar().clear();
+        setWChar((WordMiddle)null);
         return;
     }
     super.eUnset(featureID);
@@ -159,7 +186,7 @@ public class WordPartImpl extends MinimalEObjectImpl.Container implements WordPa
     switch (featureID)
     {
       case EgyDslPackage.WORD_PART__WCHAR:
-        return wChar != null && !wChar.isEmpty();
+        return wChar != null;
     }
     return super.eIsSet(featureID);
   }

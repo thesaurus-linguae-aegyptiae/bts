@@ -18,7 +18,7 @@ import org.eclipse.swt.custom.StyledText;
  * line delimiters and trimming the whitespace between them.
  *
  * @author Sebastian Zarnekow - Initial contribution and API
-
+ * @since 2.3
  */
 public class TextViewerJoinLinesAction extends TextViewerAction {
 

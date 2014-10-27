@@ -140,6 +140,15 @@ public interface EgyDslFactory extends EFactory
   Marker createMarker();
 
   /**
+   * Returns a new object of class '<em>Destruction Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destruction Marker</em>'.
+   * @generated
+   */
+  DestructionMarker createDestructionMarker();
+
+  /**
    * Returns a new object of class '<em>Word</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -183,6 +192,51 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   Brackets createBrackets();
+
+  /**
+   * Returns a new object of class '<em>Cartouche2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cartouche2</em>'.
+   * @generated
+   */
+  Cartouche2 createCartouche2();
+
+  /**
+   * Returns a new object of class '<em>Serech</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Serech</em>'.
+   * @generated
+   */
+  Serech createSerech();
+
+  /**
+   * Returns a new object of class '<em>Cartouche</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Cartouche</em>'.
+   * @generated
+   */
+  Cartouche createCartouche();
+
+  /**
+   * Returns a new object of class '<em>Oval</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Oval</em>'.
+   * @generated
+   */
+  Oval createOval();
+
+  /**
+   * Returns a new object of class '<em>No Cartouche</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>No Cartouche</em>'.
+   * @generated
+   */
+  NoCartouche createNoCartouche();
 
   /**
    * Returns a new object of class '<em>Expanded</em>'.
@@ -365,13 +419,76 @@ public interface EgyDslFactory extends EFactory
   NoPartialDestruction createNoPartialDestruction();
 
   /**
-   * Returns a new object of class '<em>Destruction</em>'.
+   * Returns a new object of class '<em>Interfix</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Destruction</em>'.
+   * @return a new object of class '<em>Interfix</em>'.
    * @generated
    */
-  Destruction createDestruction();
+  Interfix createInterfix();
+
+  /**
+   * Returns a new object of class '<em>Interfix Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Lexical</em>'.
+   * @generated
+   */
+  InterfixLexical createInterfixLexical();
+
+  /**
+   * Returns a new object of class '<em>Interfix Flexion</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Flexion</em>'.
+   * @generated
+   */
+  InterfixFlexion createInterfixFlexion();
+
+  /**
+   * Returns a new object of class '<em>Interfix Suffix Pronom Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Suffix Pronom Lexical</em>'.
+   * @generated
+   */
+  InterfixSuffixPronomLexical createInterfixSuffixPronomLexical();
+
+  /**
+   * Returns a new object of class '<em>Interfix Prefix Non Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Prefix Non Lexical</em>'.
+   * @generated
+   */
+  InterfixPrefixNonLexical createInterfixPrefixNonLexical();
+
+  /**
+   * Returns a new object of class '<em>Interfix Prefix Lexical</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Prefix Lexical</em>'.
+   * @generated
+   */
+  InterfixPrefixLexical createInterfixPrefixLexical();
+
+  /**
+   * Returns a new object of class '<em>Interfix Connection Syllabic Group</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Connection Syllabic Group</em>'.
+   * @generated
+   */
+  InterfixConnectionSyllabicGroup createInterfixConnectionSyllabicGroup();
+
+  /**
+   * Returns a new object of class '<em>Interfix Compound Words</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Compound Words</em>'.
+   * @generated
+   */
+  InterfixCompoundWords createInterfixCompoundWords();
 
   /**
    * Returns the package supported by this factory.

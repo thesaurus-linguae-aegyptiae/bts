@@ -16,6 +16,7 @@ import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -61,6 +62,12 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 	@Override
 	public boolean save(BTSLemmaEntry lemmaEntry) {
 		return lemmaService.save(lemmaEntry);
+	}
+
+	@Override
+	public BTSTextContent updateModelFromTextContent(
+			BTSTextContent textContent, EObject eo, IAnnotationModel am) {
+		return textEditorController.updateModelFromTextContent(textContent, eo, am);
 	}
 
 }

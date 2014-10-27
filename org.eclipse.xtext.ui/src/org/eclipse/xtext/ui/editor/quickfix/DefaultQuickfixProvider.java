@@ -21,7 +21,6 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
-import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -85,11 +84,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		private IValueConverterService valueConverter;
 
 		public String convertToString(String replacement, String ruleName) {
-			try {
-				return valueConverter.toString(replacement, ruleName);
-			} catch (ValueConverterException e) {
-				return null;
-			}
+			return valueConverter.toString(replacement, ruleName);
 		}
 	}
 
@@ -184,9 +179,6 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 						return;
 				} else if (ruleName != null) {
 					replacement = converter.convertToString(replacement, ruleName);
-					if (replacement == null) {
-						return;
-					}
 				} else {
 					logger.error("either keyword or ruleName have to present", new IllegalStateException());
 				}

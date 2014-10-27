@@ -35,7 +35,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  * @author Holger Schill
  */
-@SuppressWarnings("deprecation")
 public class DefaultRenameElementHandler extends AbstractHandler implements IRenameElementHandler {
 
 	@Inject

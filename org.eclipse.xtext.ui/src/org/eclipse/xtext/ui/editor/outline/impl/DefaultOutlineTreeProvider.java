@@ -159,7 +159,7 @@ public class DefaultOutlineTreeProvider implements IOutlineTreeStructureProvider
 		EObjectNode eObjectNode = new EObjectNode(modelElement, parentNode, image, text, isLeaf);
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
-			eObjectNode.setTextRegion(parserNode.getTextRegion());
+			eObjectNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
 		if (isLocalElement(parentNode, modelElement))
 			eObjectNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 		return eObjectNode;

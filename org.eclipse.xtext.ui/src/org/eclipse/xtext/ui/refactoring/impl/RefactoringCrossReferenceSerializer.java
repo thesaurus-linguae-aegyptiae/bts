@@ -78,6 +78,8 @@ public class RefactoringCrossReferenceSerializer {
 							"Missconfigured language: New reference text has invalid syntax.", owner, linkTextRegion);
 				}
 			}
+			if (bestRefText == null)
+				status.add(RefactoringStatus.ERROR, "Refactoring introduces a name conflict.", owner, linkTextRegion);
 			return bestRefText;
 
 		} catch (Exception exc) {

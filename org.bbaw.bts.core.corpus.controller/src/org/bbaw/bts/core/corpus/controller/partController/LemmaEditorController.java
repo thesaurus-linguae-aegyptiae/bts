@@ -7,6 +7,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.source.IAnnotationModel;
 
@@ -15,5 +16,7 @@ public interface LemmaEditorController {
 	List<BTSObject> getRelatingObjects(BTSLemmaEntry selection);
 	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap);
 	boolean save(BTSLemmaEntry lemmaEntry);
+	BTSTextContent updateModelFromTextContent(BTSTextContent textContent,
+			EObject eo, IAnnotationModel am);
 
 }

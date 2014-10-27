@@ -9,18 +9,16 @@ package org.eclipse.xtext.ui.compare;
 
 import java.io.InputStream;
 
-import org.eclipse.compare.IEncodedStreamContentAccessor;
 import org.eclipse.compare.IResourceProvider;
 import org.eclipse.compare.IStreamContentAccessor;
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.CoreException;
 
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class StreamContentAccessorDelegate implements IResourceProvider, IEncodedStreamContentAccessor {
+public class StreamContentAccessorDelegate implements IStreamContentAccessor, IResourceProvider {
 	private IStreamContentAccessor streamContentAccessor;
 	private IResourceProvider resourceProvider;
 
@@ -49,13 +47,6 @@ public class StreamContentAccessorDelegate implements IResourceProvider, IEncode
 
 	public IResource getResource() {
 		return resourceProvider.getResource();
-	}
-
-	public String getCharset() throws CoreException {
-		if(streamContentAccessor instanceof IEncodedStreamContentAccessor)
-			return ((IEncodedStreamContentAccessor) streamContentAccessor).getCharset();
-		else 
-			return ResourcesPlugin.getEncoding();
 	}
 
 }

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.refactoring.impl;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubProgressMonitor;
@@ -24,7 +23,7 @@ import org.eclipse.text.edits.UndoEdit;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
 
@@ -35,20 +34,16 @@ import org.eclipse.xtext.ui.util.DisplayRunnableWithResult;
  */
 public class EditorDocumentUndoChange extends Change {
 
-	private static final Logger LOG = Logger.getLogger(EditorDocumentUndoChange.class);
-	
 	private String name;
 	private UndoEdit undoEdit;
 	private String editorID;
 	private IEditorInput editorInput;
-	private IWorkbenchPage page;
+	private ITextEditor editor;
 	private boolean doSave;
 
 	public EditorDocumentUndoChange(String name, ITextEditor editor, UndoEdit undoEdit, boolean doSave) {
 		this.name = name;
-		IWorkbenchPartSite site = editor.getSite();
-		this.page = site.getPage();
-		this.editorID = site.getId();
+		this.editorID = editor.getSite().getId();
 		this.editorInput = editor.getEditorInput();
 		this.undoEdit = undoEdit;
 		this.doSave = doSave;
@@ -59,19 +54,6 @@ public class EditorDocumentUndoChange extends Change {
 		return name;
 	}
 
-	protected ITextEditor getEditor() {
-		try {
-			IEditorPart editor = page.findEditor(editorInput);
-			if(editor != null && editor.getSite().getId() == editorID)
-				return (ITextEditor) editor;
-			else 
-				return (ITextEditor) page.openEditor(editorInput, editorID);
-		} catch(Exception exc) {
-			LOG.error("Error restoring editor", exc);
-			return null;
-		}
-	}
-	
 	@Override
 	public Object getModifiedElement() {
 		return null;
@@ -130,7 +112,14 @@ public class EditorDocumentUndoChange extends Change {
 		return new DisplayRunnableWithResult<IDocument>() {
 			@Override
 			protected IDocument run() throws Exception {
-				ITextEditor editor = getEditor();
+				if (editor == null) {
+					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					IEditorPart newEditor = page.findEditor(editorInput);
+					if (newEditor == null)
+						newEditor = page.openEditor(editorInput, editorID);
+					if (newEditor instanceof ITextEditor) 
+						editor = (ITextEditor) newEditor;
+				}
 				return editor != null ? editor.getDocumentProvider().getDocument(editorInput) : null;
 			}
 		}.syncExec();
@@ -138,14 +127,16 @@ public class EditorDocumentUndoChange extends Change {
 
 	protected void commit(IDocument document, IProgressMonitor pm) throws CoreException {
 		if (doSave)
-			getEditor().doSave(pm);
+			editor.doSave(pm);
 	}
 
 	protected void releaseDocument(IDocument document, IProgressMonitor pm) throws CoreException {
+		document = null;
+		editor = null;
 	}
 
 	protected Change createUndoChange(UndoEdit edit) {
-		return new EditorDocumentUndoChange(getName(), getEditor(), edit, doSave);
+		return new EditorDocumentUndoChange(getName(), editor, edit, doSave);
 	}
 
 }

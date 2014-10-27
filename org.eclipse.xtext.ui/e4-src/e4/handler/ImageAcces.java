@@ -9,6 +9,7 @@ package e4.handler;
 
 /**
  * @author plutte - Initial contribution and API
+ * @since 2.4
  */
 public class ImageAcces {
 

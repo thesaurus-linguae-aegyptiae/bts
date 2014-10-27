@@ -44,8 +44,8 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 	
 	/**
-	 * terminal NEWLINE:
-	 *     ('\r'|'\n'|'\r\n'|'\t');
+	 * terminal NEWLINE returns ecore::EString :
+	 *     ('\r'|'\n'|'\t')+;
 	 */
 	protected String getNEWLINEToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		if (node != null)
@@ -109,7 +109,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (NEWLINE | ' ')?
+	 *     (' ' | NEWLINE)?
 	 */
 	protected void emit_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

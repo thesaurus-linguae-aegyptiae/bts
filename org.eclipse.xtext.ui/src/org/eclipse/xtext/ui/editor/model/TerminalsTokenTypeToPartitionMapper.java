@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model;
 
-import org.antlr.runtime.Token;
 import org.eclipse.jface.text.IDocument;
 
 import com.google.inject.Singleton;
@@ -32,10 +31,6 @@ public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper
 	};
 	
 	public String getPartitionType(int antlrTokenType) {
-		// on lexer error return default content type
-		if (antlrTokenType == Token.INVALID_TOKEN_TYPE) {
-			return IDocument.DEFAULT_CONTENT_TYPE;
-		}
 		return getMappedValue(antlrTokenType);
 	}
 	

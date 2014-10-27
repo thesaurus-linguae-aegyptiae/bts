@@ -13,7 +13,6 @@ import org.eclipse.swt.events.VerifyEvent;
 /**
  * Utility to match keystrokes.
  * @author Sebastian Zarnekow - Initial contribution and API
-
  */
 public class ActionActivationCode {
 

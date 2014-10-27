@@ -12,7 +12,7 @@ import java.util.ResourceBundle;
 import org.eclipse.swt.custom.BusyIndicator;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-
+import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextViewer;
 
@@ -28,7 +28,7 @@ import org.eclipse.jface.text.ITextViewer;
  * </p>
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
-
+ * @since 2.3
  */
 public class TextViewerOperationAction extends TextViewerAction {
 
@@ -102,6 +102,7 @@ public class TextViewerOperationAction extends TextViewerAction {
 	 * the current operation code.
 	 */
 	@Override
+	@Execute
 	public void run() {
 		if (fOperationCode == -1 || fOperationTarget == null)
 			return;
@@ -146,7 +147,12 @@ public class TextViewerOperationAction extends TextViewerAction {
 		if (fOperationTarget == null && viewer != null && fOperationCode != -1)
 			fOperationTarget = viewer.getTextOperationTarget();
 
-		boolean isEnabled = (fOperationTarget != null && fOperationTarget.canDoOperation(fOperationCode));
+		boolean isEnabled = false;
+		try {
+			isEnabled = (fOperationTarget != null && fOperationTarget.canDoOperation(fOperationCode));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		setEnabled(isEnabled);
 	}
 
@@ -155,4 +161,5 @@ public class TextViewerOperationAction extends TextViewerAction {
 		super.setViewer(viewer);
 		fOperationTarget = null;
 	}
+	
 }

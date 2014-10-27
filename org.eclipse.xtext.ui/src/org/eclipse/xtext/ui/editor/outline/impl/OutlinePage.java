@@ -105,13 +105,8 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 			new Job("Initializing outline") {
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
-					try {
-						initializeTreeContent();
-						return Status.OK_STATUS;
-					} catch (Throwable e) {
-						LOG.error("Error initializing outline", e);
-						return Status.OK_STATUS; 
-					}
+					initializeTreeContent();
+					return Status.OK_STATUS;
 				}
 				
 			}.schedule();
@@ -155,19 +150,17 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	}
 
 	protected void configureModelListener() {
-		if (xtextDocument != null) { // possibly disposed in the meantime
-			modelListener = new IXtextModelListener() {
-				public void modelChanged(XtextResource resource) {
-					try {
-						scheduleRefresh();
-					} catch (Throwable t) {
-						LOG.error("Error refreshing outline", t);
-					}
+		modelListener = new IXtextModelListener() {
+			public void modelChanged(XtextResource resource) {
+				try {
+					scheduleRefresh();
+				} catch (Throwable t) {
+					LOG.error("Error refreshing outline", t);
 				}
-	
-			};
-			xtextDocument.addModelListener(modelListener);
-		}
+			}
+
+		};
+		xtextDocument.addModelListener(modelListener);
 	}
 
 	protected void configureActions() {

@@ -233,4 +233,6 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	E loadFully(E entity);
 
 	E loadObjectFromString(String id, String path, URI uri, String sourceAsString);//E loadEntityFromString(String jo, String dbPath);
+	
+	void checkForConflicts(E object, String path);
 }

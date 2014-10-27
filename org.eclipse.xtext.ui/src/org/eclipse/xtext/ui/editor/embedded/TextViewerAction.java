@@ -25,7 +25,7 @@ import org.eclipse.ui.texteditor.ResourceAction;
  * to check whether updating the viewer is possible.
  * </p>
  * 
-
+ * @since 2.3
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class TextViewerAction extends ResourceAction implements IUpdate {

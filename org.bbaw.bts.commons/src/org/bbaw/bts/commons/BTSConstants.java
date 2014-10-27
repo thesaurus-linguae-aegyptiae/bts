@@ -121,6 +121,8 @@ public class BTSConstants
 
 	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS = new String[]{"_id", "eClass", "type", "subtype",
 		"updaters", "readers", "name", "revisionState", "visibility"};
+
+	public static final String EOF = "\r\n";
 	private BTSConstants()
 	{
 	}

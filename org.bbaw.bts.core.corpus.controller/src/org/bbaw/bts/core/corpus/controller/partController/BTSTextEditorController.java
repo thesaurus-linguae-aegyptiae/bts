@@ -13,6 +13,7 @@ import java.util.Map;
 
 
 
+
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -21,6 +22,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
@@ -67,4 +69,7 @@ public interface BTSTextEditorController
 	BufferedImage getImageData(String topItemList, int height, int width) throws Exception;
 	
 	HashMap<String, List<BTSInterTextReference>> fillRelatingObjectsMap(List<BTSObject> relatingObjects);
+
+	BTSTextContent updateModelFromTextContent(BTSTextContent textContent,
+			EObject eo, IAnnotationModel am);
 }

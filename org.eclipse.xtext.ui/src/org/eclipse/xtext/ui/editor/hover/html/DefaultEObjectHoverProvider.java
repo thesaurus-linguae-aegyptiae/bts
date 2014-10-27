@@ -41,8 +41,6 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.ISharedImages;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -154,8 +152,6 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		public BackAction(IXtextBrowserInformationControl infoControl) {
 			fInfoControl = infoControl;
 			setText(XtextUIMessages.XtextBrowserInformationControlInput_Back);
-			
-			//cplutte commented out
 //			ISharedImages images = PlatformUI.getWorkbench().getSharedImages();
 //			setImageDescriptor(images.getImageDescriptor(ISharedImages.IMG_TOOL_BACK));
 //			setDisabledImageDescriptor(images.getImageDescriptor(ISharedImages.IMG_TOOL_BACK_DISABLED));
@@ -418,7 +414,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		 */
 		@Override
 		public IInformationControl doCreateInformationControl(Shell parent) {
-			String tooltipAffordanceString = "Press 'F2' for focus";// EditorsUI.getTooltipAffordanceString();
+			String tooltipAffordanceString = "Press 'F2' for focus";//EditorsUI.getTooltipAffordanceString();
 			if (BrowserInformationControl.isAvailable(parent)) {
 				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: PreferenceConstants.APPEARANCE_JAVADOC_FONT;
 				IXtextBrowserInformationControl iControl = new XtextBrowserInformationControl(parent, font,
@@ -447,7 +443,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				return false;
 
 			if (control instanceof IInformationControlExtension4) {
-				String tooltipAffordanceString = "Press F2 to set focus";// EditorsUI.getTooltipAffordanceString();
+				String tooltipAffordanceString = "Press 'F2' for focus";//EditorsUI.getTooltipAffordanceString();
 				((IInformationControlExtension4) control).setStatusText(tooltipAffordanceString);
 			}
 
@@ -511,7 +507,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 	}
 
 	public IInformationControlCreatorProvider getHoverInfo(final EObject object, final ITextViewer viewer, final IRegion region) {
-		return new IInformationControlCreatorProvider2() {
+		return new IInformationControlCreatorProvider() {
 
 			public IInformationControlCreator getHoverControlCreator() {
 				return DefaultEObjectHoverProvider.this.getHoverControlCreator();
@@ -519,10 +515,6 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 
 			public Object getInfo() {
 				return getHoverInfo(object, region, null);
-			}
-
-			public IInformationControlCreator getInformationPresenterControlCreator() {
-				return DefaultEObjectHoverProvider.this.getInformationPresenterControlCreator();
 			}};
 	}
 

@@ -250,9 +250,7 @@
    <extension
          point="org.eclipse.xtext.builder.participant">
       <participant
-            class="org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant"
-            fileExtensions="egydsl"
-            >
+            class="org.bbaw.bts.corpus.text.egy.ui.EgyDslExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
       </participant>
    </extension>
    <extension

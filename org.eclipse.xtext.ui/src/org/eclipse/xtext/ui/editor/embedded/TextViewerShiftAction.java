@@ -15,7 +15,7 @@ import org.eclipse.ui.texteditor.IReadOnlyDependent;
  * Action for shifting code to the right or left by one indentation level.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
-
+ * @since 2.3
  */
 public class TextViewerShiftAction extends TextViewerAction implements IReadOnlyDependent {
 

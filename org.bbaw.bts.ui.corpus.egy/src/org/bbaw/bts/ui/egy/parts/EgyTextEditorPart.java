@@ -2,6 +2,11 @@ package org.bbaw.bts.ui.egy.parts;
 
 import java.awt.Dimension;
 import java.awt.Frame;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -23,11 +28,20 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.StatusMessage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.AnnotationAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.CommentAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.InvisibleAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.LemmaAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.ModelAnnotation;
+import org.bbaw.bts.core.corpus.controller.partController.text.model.SubtextAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -39,6 +53,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
+import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectDocumentationProvider;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -59,13 +74,6 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.TextModelHelper;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.AnnotationAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.CommentAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.InvisibleAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.LemmaAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.ModelAnnotation;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.model.SubtextAnnotation;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
 import org.bbaw.bts.ui.font.BTSFontManager;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -106,7 +114,6 @@ import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.jface.text.source.OverviewRuler;
 import org.eclipse.jface.text.source.VerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
@@ -140,14 +147,10 @@ import org.eclipse.xtext.validation.Issue;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
-import com.google.common.base.Predicate;
 import com.google.inject.Injector;
 
-public class EgyTextEditorPart implements IBTSEditor, EventHandler
-{
+public class EgyTextEditorPart implements IBTSEditor, EventHandler {
 
-	@Inject
-	private BTSFontManager fontManager;
 	@Inject
 	private MDirtyable dirty;
 
@@ -164,43 +167,25 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	@Inject
 	private EContextService contextService;
 	@Inject
-	private ECommandService commandService;
-	@Inject
 	private EPartService partService;
-
-	@Inject
-	private EHandlerService handlerService;
 
 	@Inject
 	private EditingDomainController editingDomainController;
 
 	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
-	
-	@Inject
-	private EMenuService menuService;
-	
-	private static final String FONT_NAME = "FreeSans";
-	private static final int SIZE = 10;
 
 	private static final int EDITOR_PREFIX_LENGTH = 1;
-
 
 	private static final int LINE_SPACE = 8;
 
 	private BTSText text;
-	private CTabItem tbtmBtseditor;
 	private CTabFolder tabFolder;
-	private StyledText plainTextEditor;
 	private JMDCEditor jseshEditor;
 
 	protected int counter;
 
 	protected boolean loading;
-
-	private VerticalRuler verticalRuler;
-
-	private ProjectionViewer textViewer;
 
 	private Document document;
 
@@ -208,10 +193,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	protected int tabSelection;
 
-
 	private SignTextComposite signTextEditor;
-
-	private Composite btsEditorComp;
 
 	private EmbeddedEditorFactory embeddedEditorFactory;
 
@@ -226,8 +208,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private EmbeddedEditorModelAccess embeddedEditorModelAccess;
 
 	private Composite embeddedEditorParentComp;
-
-	protected TextModelHelper textModelHelper = new TextModelHelper();
 
 	private AnnotationPainter painter;
 
@@ -257,13 +237,16 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private Composite parent;
 	private MPart part;
 	private List<BTSObject> relatingObjects;
-		
+
 	@Inject
 	private Logger logger;
-	private List<ModelAnnotation> highlightedAnnotations = new Vector<ModelAnnotation>(4);
+	private List<ModelAnnotation> highlightedAnnotations = new Vector<ModelAnnotation>(
+			4);
 	private Map<EObject, List<ModelAnnotation>> relatingObjectsAnnotationMap;
 	protected String queryId;
 	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
+	private CharsetDecoder charsetDecoder;
+	private EgyLineNumberRulerColumn lineNumberRulerColumn;
 
 	@Inject
 	public EgyTextEditorPart(EPartService partService) {
@@ -274,18 +257,18 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	/**
 	 * @param parent
 	 */
+	@SuppressWarnings("restriction")
 	@PostConstruct
-	public void createComposite(Composite parent)
-	{
+	public void createComposite(Composite parent) {
 		this.parent = parent;
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
 		contextService
 				.activateContext("org.eclipse.ui.contexts.dialogAndWindow");
-//		eventBroker.subscribe("event_text_selection/*", this);
-//		eventBroker.subscribe("event_relating_objects/*", this);
-		
+		// eventBroker.subscribe("event_text_selection/*", this);
+		// eventBroker.subscribe("event_relating_objects/*", this);
+
 		System.out.println("EgyEditor postconstruct");
 
 		SashForm sashForm = new SashForm(parent, SWT.VERTICAL);
@@ -298,69 +281,58 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		{
 			tabFolder = new CTabFolder(composite, SWT.BORDER | SWT.BOTTOM);
 			tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
-			tabFolder.addSelectionListener(new SelectionAdapter()
-			{
-
+			tabFolder.addSelectionListener(new SelectionAdapter() {
 
 				@Override
-				public void widgetSelected(SelectionEvent e)
-				{
+				public void widgetSelected(SelectionEvent e) {
 					int oldSelection = tabSelection;
 					tabSelection = tabFolder.getSelectionIndex();
-					if (tabSelection == oldSelection || text == null)
-					{
+					if (tabSelection == oldSelection || text == null) {
 						return;
-					} else
-					{
-						//update model from old selection editor
-						switch (oldSelection)
-						{
-							case 0:
-							{
-								updateModelFromTranscription();
-								break;
-							}
-							case 1:
-							{
-								updateModelFromSignText();
-								break;
-							}
-							case 2:
-							{
-								updateModelFromJSesh();
-								break;
-							}
+					} else {
+						// update model from old selection editor
+						switch (oldSelection) {
+						case 0: {
+							updateModelFromTranscription();
+							break;
+						}
+						case 1: {
+							updateModelFromSignText();
+							break;
+						}
+						case 2: {
+							updateModelFromJSesh();
+							break;
+						}
 						}
 
 						// load updated model into selected editor
-						switch (tabSelection)
-						{
-							case 0:
-							{
-								contextService
-								.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
-								loadInputTranscription(text, relatingObjects);
-								break;
-							}
-							case 1:
-							{
-							
-								loadInputSignText(text, relatingObjects, relatingObjectsMap);
-								break;
-							}
-							case 2:
-							{
-								loadInputJSesh(text, relatingObjects);
-								break;
-							}
+						switch (tabSelection) {
+						case 0: {
+							contextService
+									.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
+							loadInputTranscription(text, relatingObjects);
+							break;
+						}
+						case 1: {
+
+							loadInputSignText(text, relatingObjects,
+									relatingObjectsMap);
+							break;
+						}
+						case 2: {
+							loadInputJSesh(text, relatingObjects);
+							break;
+						}
 						}
 					}
 
 				}
 			});
 
-			tabFolder.setSelectionBackground(Display.getCurrent().getSystemColor(
-					SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
+			tabFolder.setSelectionBackground(Display.getCurrent()
+					.getSystemColor(
+							SWT.COLOR_TITLE_INACTIVE_BACKGROUND_GRADIENT));
 			{
 				CTabItem tbtmPlaintext2 = new CTabItem(tabFolder, SWT.NONE);
 				tbtmPlaintext2.setText("Transliteration");
@@ -370,18 +342,112 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 							SWT.NONE | SWT.BORDER);
 					embeddedEditorParentComp.setLayout(new GridLayout());
 					tbtmPlaintext2.setControl(embeddedEditorParentComp);
-					// inititae static access controller
-					StaticAccessController sa = context
-							.get(StaticAccessController.class);
+
+					embeddedEditorComp = new Composite(
+							embeddedEditorParentComp, SWT.None);
+					embeddedEditorComp.setLayout(new GridLayout());
+					embeddedEditorComp.setLayoutData(new GridData(SWT.FILL,
+							SWT.FILL, true, true));
+
+					context.get(StaticAccessController.class);
 					EgyDslActivator activator = EgyDslActivator.getInstance();
-					
-					Predicate p = null;
-					Injector injector = activator
+
+					injector = activator
 							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
+
+					embeddedEditor = embeddedEditorFactory
+							.newEditor(xtextResourceProvider)
+							.showAnnotations(BTSAnnotationAnnotation.TYPE,
+									BTSCommentAnnotation.TYPE,
+									"org.eclipse.xtext.ui.editor.error",
+									"org.eclipse.xtext.ui.editor.warning")
+							.withParent(embeddedEditorComp);
+					embeddedEditor.getViewer().getTextWidget()
+							.setLineSpacing(LINE_SPACE);
+
+					// embeddedEditor.getViewer().getTextWidget().setFont(font);
+					// keep the partialEditor as instance var to read / write
+					// the edited
+					// text
+					embeddedEditorModelAccess = embeddedEditor
+							.createPartialEditor("", "§§", "", false);
+
+					configureEditorDrawingStrategies();
+					embeddedEditorParentComp.layout();
+					configureEditorRuler();
+
+					embeddedEditor.getViewer().getTextWidget()
+							.addCaretListener(new CaretListener() {
+
+								@Override
+								public void caretMoved(CaretEvent event) {
+									processTextSelection(event);
+									// get char right of caret and show utf-8
+									// code in status line
+									if (event.caretOffset < embeddedEditor
+											.getViewer().getTextWidget()
+											.getText().length()) {
+										String sign = embeddedEditor
+												.getViewer()
+												.getTextWidget()
+												.getText(event.caretOffset,
+														event.caretOffset);
+										if (sign != null && !"".equals(sign)) {
+											int lineIndex = embeddedEditor
+													.getViewer()
+													.getTextWidget()
+													.getLineAtOffset(
+															event.caretOffset);
+											int offset = event.caretOffset
+													- embeddedEditor
+															.getViewer()
+															.getTextWidget()
+															.getOffsetAtLine(
+																	lineIndex);
+											showCurrentSignUnicode(sign,
+													lineIndex, offset);
+										}
+									}
+								}
+							});
+					embeddedEditor.getViewer().getTextWidget()
+							.addSelectionListener(new SelectionListener() {
+
+								@Override
+								public void widgetSelected(SelectionEvent event) {
+									processTextSelection(event);
+								}
+
+								@Override
+								public void widgetDefaultSelected(
+										SelectionEvent e) {
+									// TODO Auto-generated method stub
+
+								}
+							});
 					loadInputTranscription(null, relatingObjects);
-					
+
+					embeddedEditor.getDocument().addDocumentListener(
+							new IDocumentListener() {
+
+								@Override
+								public void documentChanged(DocumentEvent event) {
+									if (!loading) {
+										setDirtyInternal();
+									}
+
+								}
+
+								@Override
+								public void documentAboutToBeChanged(
+										DocumentEvent event) {
+									// TODO Auto-generated method stub
+
+								}
+							});
+
 				}
 				CTabItem signTextTab = new CTabItem(tabFolder, SWT.NONE);
 				signTextTab.setText("Sign-Text-Editor");
@@ -407,28 +473,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					plainTextComp.setLayout(new GridLayout(2, false));
 					tbtm5.setControl(plainTextComp);
 
-					// Label l = new Label(plainTextComp, SWT.NONE);
-					// l.setText("CodeBuffer");
-					//
-					// codeBufferText = new Text(plainTextComp, SWT.BORDER);
-					// codeBufferText.addKeyListener(new KeyListener() {
-					//
-					// @Override
-					// public void keyReleased(KeyEvent e) {
-					// // TODO Auto-generated method stub
-					//
-					// }
-					//
-					// @Override
-					// public void keyPressed(KeyEvent e) {
-					// if (e.keyCode == SWT.CR) {
-					// jseshEditor.insert(codeBufferText.getText());
-					// jseshEditor.setMDCText(codeBufferText.getText());
-					// codeBufferText.setText("");
-					// }
-					//
-					// }
-					// });
 					Composite comEmbeded = new Composite(plainTextComp,
 							SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
 					comEmbeded.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
@@ -498,117 +542,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		sentenceTranslateComp.layout();
 		sashForm.setWeights(new int[] { 6, 1 });
 		parent.layout();
-		
 
 	}
 
-	protected void updateModelFromSignText()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-	protected void updateModelFromJSesh()
-	{
-		// TODO Auto-generated method stub
-
-	}
-
-
-	protected void updateModelFromTranscription()
-	{
-		if (text != null) {
-			IAnnotationModel am = embeddedEditor.getViewer()
-					.getAnnotationModel();
-			IXtextDocument document = embeddedEditor.getDocument();
-
-			EList<EObject> objects = document
-					.readOnly(new IUnitOfWork<EList<EObject>, XtextResource>() {
-						@Override
-						public EList<EObject> exec(XtextResource state)
-								throws Exception {
-							return state.getContents();
-						}
-					});
-			EObject eo = objects.get(0);
-			if (eo instanceof TextContent) {
-				text.setTextContent(textModelHelper.updateModelFromTextContent(text.getTextContent(), eo, am));
-			}
-		}
-
-	}
-
-	protected void loadInputJSesh(BTSText text2, List<BTSObject> localRelatingObjects)
-	{
-		String jseshMdc = textEditorController
-				.transformTextToJSeshMdCString(text2);
-		System.out.println(jseshMdc);
-		try {
-			jseshEditor.setMDCText(jseshMdc);
-		} catch (Exception e) {
-			logger.error(e);
-		}
-
-	}
-
-	protected void loadInputTranscription(BTSText localtext, List<BTSObject> localRelatingObjects)
-	{
-		text = localtext;
-
-		if (embeddedEditorComp != null)
-		{
-			embeddedEditorComp.dispose();
-			embeddedEditorComp = null;
-		}
-		embeddedEditorComp = new Composite(embeddedEditorParentComp, SWT.None);
-		embeddedEditorComp.setLayout(new GridLayout());
-		embeddedEditorComp.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-				true));
-
-		Document doc = new Document();
-		this.document = doc;
-
-		AnnotationModel tempAnnotationModel = new AnnotationModel();
-//		this.annotationModel = model;
-		if (localtext == null)
-		{
-			textEditorController.transformToDocument(null, doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
-
-		}
-		else
-		{
-			if (localtext.getTextContent() == null)
-			{
-				localtext.setTextContent(BtsCorpusModelFactory.eINSTANCE.createBTSTextContent());
-			}
-			textEditorController.transformToDocument(localtext.getTextContent(), doc, tempAnnotationModel, localRelatingObjects, relatingObjectsMap);
-		}
-		embeddedEditor = embeddedEditorFactory.newEditor(xtextResourceProvider)
-				.showAnnotations(BTSAnnotationAnnotation.TYPE,
-						BTSCommentAnnotation.TYPE,
-						"org.eclipse.xtext.ui.editor.error",
-						"org.eclipse.xtext.ui.editor.warning")
-				.withParent(embeddedEditorComp);
-		embeddedEditor.getViewer().getTextWidget().setLineSpacing(LINE_SPACE);
-		
-		// embeddedEditor.getViewer().getTextWidget().setFont(font);
-		// keep the partialEditor as instance var to read / write the edited
-		// text
-		embeddedEditorModelAccess = embeddedEditor.createPartialEditor(
-"\r",
-				doc.get(), "\r", false);
-		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
-
-		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
-//		annotationModel.connect(doc);
-		configureEditorDrawingStrategies();
-		embeddedEditorParentComp.layout();
-		// embeddedEditor.getViewer().getControl().setFocus();
-
+	@SuppressWarnings("restriction")
+	private void configureEditorRuler() {
 		ruler = embeddedEditorFactory.getCpAnnotationRuler();
-		ruler.setModel(annotationModel);
-		ruler.update();
-		ruler.relayout();
 
 		oruler = embeddedEditorFactory.getOverViewRuler();
 		oruler.addAnnotationType(AnnotationAnnotation.TYPE);
@@ -643,170 +582,257 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		oruler.setAnnotationTypeColor("org.eclipse.xtext.ui.editor.warning",
 				new Color(Display.getDefault(), new RGB(235, 235, 10)));
 
-		oruler.setModel(annotationModel);
-		oruler.update();
-
-		embeddedEditorParentComp.layout();
-		embeddedEditor.getViewer().getTextWidget()
-				.addCaretListener(new CaretListener() {
-
-					@Override
-					public void caretMoved(CaretEvent event) {
-						processTextSelection(event);
-
-					}
-				});
-		embeddedEditor.getViewer().getTextWidget().addSelectionListener(new SelectionListener() {
-			
-			@Override
-			public void widgetSelected(SelectionEvent event) {
-				processTextSelection(event);
-
-				
-			}
-			
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
-		LineNumberRulerColumn lineNumberRulerColumn = new EgyLineNumberRulerColumn(
-				LINE_SPACE);
+		lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
 		lineNumberRulerColumn.setModel(annotationModel);
 		embeddedEditor.getViewer()
 				.addVerticalRulerColumn(lineNumberRulerColumn);
+	}
+
+	protected void updateModelFromSignText() {
+		// TODO Auto-generated method stub
+
+	}
+
+	protected void updateModelFromJSesh() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@SuppressWarnings("restriction")
+	protected void updateModelFromTranscription() {
 		if (text != null) {
-			embeddedEditor.getDocument().addDocumentListener(
-					new IDocumentListener() {
+			IAnnotationModel am = embeddedEditor.getViewer()
+					.getAnnotationModel();
+			IXtextDocument document = embeddedEditor.getDocument();
 
-					@Override
-					public void documentChanged(DocumentEvent event) {
-							setDirtyInternal();
-
-					}
-
-					@Override
-					public void documentAboutToBeChanged(DocumentEvent event) {
-						// TODO Auto-generated method stub
-
-					}
-				});
+			EList<EObject> objects = document
+					.readOnly(new IUnitOfWork<EList<EObject>, XtextResource>() {
+						@Override
+						public EList<EObject> exec(XtextResource state)
+								throws Exception {
+							return state.getContents();
+						}
+					});
+			EObject eo = objects.get(0);
+			if (eo instanceof TextContent) {
+				text.setTextContent(textEditorController
+						.updateModelFromTextContent(text.getTextContent(), eo,
+								am));
+			}
 		}
-//		menuService.registerContextMenu(
-//				embeddedEditor.getViewer().getTextWidget(),
-//				BTSPluginIDs.POPMENU_EGY_TEXT_EDITOR_XTEXT_MENU);
-//		Object mm = embeddedEditor.getViewer().getTextWidget().getMenu();
-//		System.out.println(mm);
+
+	}
+
+	protected void loadInputJSesh(BTSText text2,
+			List<BTSObject> localRelatingObjects) {
+		String jseshMdc = textEditorController
+				.transformTextToJSeshMdCString(text2);
+		System.out.println(jseshMdc);
+		try {
+			jseshEditor.setMDCText(jseshMdc);
+		} catch (Exception e) {
+			logger.error(e);
+		}
+
+	}
+
+	protected void loadInputTranscription(BTSText localtext,
+			List<BTSObject> localRelatingObjects) {
+		text = localtext;
+		loading = true;
+
+		if (this.document == null) {
+			this.document = new Document();
+		}
+
+		AnnotationModel tempAnnotationModel = new AnnotationModel();
+		if (localtext == null) {
+			document.set("§§");
+			if (relatingObjectsMap != null) {
+				relatingObjectsMap.clear();
+			}
+		} else {
+			if (localtext.getTextContent() == null) {
+				localtext.setTextContent(BtsCorpusModelFactory.eINSTANCE
+						.createBTSTextContent());
+			}
+			textEditorController.transformToDocument(
+					localtext.getTextContent(), document, tempAnnotationModel,
+					localRelatingObjects, relatingObjectsMap);
+		}
+
+		embeddedEditorModelAccess.updateModel("\r", document.get(), "\r");
+		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
+
+		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
+		injector.getBindings();
+		if (injector != null) {
+			BTSEObjectDocumentationProvider docProvider = injector
+					.getInstance(BTSEObjectDocumentationProvider.class);
+			docProvider.setTextViewer(embeddedEditor.getViewer());
+			docProvider.setAnnotationModellAccess(embeddedEditorModelAccess);
+		}
+		configureEditorDrawingStrategies();
+		embeddedEditorParentComp.layout();
+
+		// connect ruler to annotationModel
+		ruler.setModel(annotationModel);
+		ruler.update();
+		ruler.relayout();
+
+		// connect overview ruler to annotationModel
+		oruler.setModel(annotationModel);
+		oruler.update();
+
+		loading = false;
+	}
+
+	protected void showCurrentSignUnicode(String sign, int lineIndex,
+			int caretOffset) {
+		StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
+		charsetDecoder = Charset.forName(BTSConstants.ENCODING).newDecoder();
+		byte[] b = sign.getBytes(Charset.forName(BTSConstants.ENCODING));
+		ByteBuffer in = ByteBuffer.wrap(b);
+		CharBuffer out;
+		String codes = "";
+		try {
+			out = charsetDecoder.decode(in);
+			for (int i = 0; i < out.array().length; i++) {
+				String str = Integer.toHexString(out.array()[i]).toUpperCase();
+				switch (str.length()) {
+				case 1:
+					str = "000" + str;
+					break;
+				case 2:
+					str = "00" + str;
+					break;
+				case 3:
+					str = "0" + str;
+					break;
+				default:
+					str = str.substring(0, 4);
+				}
+				codes += "U+" + str + " ";
+			}
+		} catch (CharacterCodingException e) {
+			e.printStackTrace();
+		}
+		sm.setMessage("Line: " + lineIndex + ", Offset: " + caretOffset
+				+ ", UTF-8: " + codes.trim());
+		eventBroker.post("status_info/current_text_code", sm);
 
 	}
 
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
-//		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
+		// System.out.println("Textselection x y : " + btsEvent.x + " " +
+		// btsEvent.y);
 		btsEvent.data = text;
-		List<ModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
+		List<ModelAnnotation> annotations = getModelAnnotationAtSelection(
+				btsEvent.x, btsEvent.y, btsEvent);
 		btsEvent.getTextAnnotations().addAll(annotations);
 		processSelection(annotations, false, btsEvent);
 		selectionService.setSelection(btsEvent);
-		
+
 	}
-	
+
 	protected void processEditorSelection(Object item) {
 		TypedEvent event = new TypedEvent(item);
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
-//		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
+		// System.out.println("Textselection x y : " + btsEvent.x + " " +
+		// btsEvent.y);
 		btsEvent.data = text;
-		List<ModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
+		List<ModelAnnotation> annotations = getModelAnnotationAtSelection(
+				btsEvent.x, btsEvent.y, btsEvent);
 		btsEvent.getTextAnnotations().addAll(annotations);
 		processSelection(annotations, false, btsEvent);
 		selectionService.setSelection(btsEvent);
-		
+
 	}
 
-	protected void processSelection(List<ModelAnnotation> annotations, boolean postSelection, BTSTextSelectionEvent btsEvent) {
-		List<ModelAnnotation> relatingObjectsAnnotations = new Vector<ModelAnnotation>(annotations.size());
+	protected void processSelection(List<ModelAnnotation> annotations,
+			boolean postSelection, BTSTextSelectionEvent btsEvent) {
+		List<ModelAnnotation> relatingObjectsAnnotations = new Vector<ModelAnnotation>(
+				annotations.size());
 		for (ModelAnnotation ma : annotations) {
-			if (ma != null && ma instanceof LemmaAnnotation && ma.getModelObject() != null
+			if (ma != null && ma instanceof LemmaAnnotation
+					&& ma.getModelObject() != null
 					&& ma.getModelObject() instanceof BTSObject
-					&& !ma.getModelObject().equals(selectedTextItem))
-			{
+					&& !ma.getModelObject().equals(selectedTextItem)) {
 				if (ma.getModelObject() instanceof BTSWord) {
 					setSentenceTranslation((BTSWord) ma.getModelObject());
 				} else if (ma.getModelObject() instanceof BTSSenctence) {
 					setSentenceTranslation((BTSSenctence) ma.getModelObject());
 				}
-			} 
-			else if (ma instanceof AnnotationAnnotation) {
+			} else if (ma instanceof AnnotationAnnotation) {
 				relatingObjectsAnnotations.add(ma);
-				if (btsEvent != null)
-				{
-					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
+				if (btsEvent != null) {
+					btsEvent.getInterTextReferences().add(
+							ma.getInterTextReference());
 				}
 			} else if (ma instanceof CommentAnnotation) {
 				relatingObjectsAnnotations.add(ma);
-				if (btsEvent != null)
-				{
-					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
+				if (btsEvent != null) {
+					btsEvent.getInterTextReferences().add(
+							ma.getInterTextReference());
 				}
 			} else if (ma instanceof SubtextAnnotation) {
 				relatingObjectsAnnotations.add(ma);
-				if (btsEvent != null)
-				{
-					btsEvent.getInterTextReferences().add(ma.getInterTextReference());
+				if (btsEvent != null) {
+					btsEvent.getInterTextReferences().add(
+							ma.getInterTextReference());
 				}
-			} 
-			
+			}
+
 		}
-		List<ModelAnnotation> deHighlightedAnnotations = new Vector<ModelAnnotation>(highlightedAnnotations.size());
+		List<ModelAnnotation> deHighlightedAnnotations = new Vector<ModelAnnotation>(
+				highlightedAnnotations.size());
 
 		deHighlightedAnnotations.addAll(highlightedAnnotations);
 		deHighlightedAnnotations.removeAll(relatingObjectsAnnotations);
 		highlightAnnotations(deHighlightedAnnotations, false);
 
-		if (!relatingObjectsAnnotations.isEmpty())
-		{
+		if (!relatingObjectsAnnotations.isEmpty()) {
 
 			highlightAnnotations(relatingObjectsAnnotations, true);
-			
-			List<BTSObject> relSelObjects = new Vector<BTSObject>(annotations.size());
-			for (ModelAnnotation a : relatingObjectsAnnotations)
-			{
-				if (a instanceof AnnotationAnnotation)
-				{
-					relSelObjects.add((BTSObject) ((AnnotationAnnotation) a).getAnnotation());
-				} else if (a instanceof CommentAnnotation)
-				{
-					relSelObjects.add((BTSObject) ((CommentAnnotation) a).getComment());
-				}else if (a instanceof SubtextAnnotation)
-				{
-					relSelObjects.add((BTSObject) ((SubtextAnnotation) a).getSubtext());
+
+			List<BTSObject> relSelObjects = new Vector<BTSObject>(
+					annotations.size());
+			for (ModelAnnotation a : relatingObjectsAnnotations) {
+				if (a instanceof AnnotationAnnotation) {
+					relSelObjects.add((BTSObject) ((AnnotationAnnotation) a)
+							.getAnnotation());
+				} else if (a instanceof CommentAnnotation) {
+					relSelObjects.add((BTSObject) ((CommentAnnotation) a)
+							.getComment());
+				} else if (a instanceof SubtextAnnotation) {
+					relSelObjects.add((BTSObject) ((SubtextAnnotation) a)
+							.getSubtext());
 				}
 			}
-			if (btsEvent != null)
-			{
+			if (btsEvent != null) {
 				btsEvent.setRelatingObjects(relSelObjects);
 			}
-//			if (postSelection){
-//				eventBroker.post(
-//					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
-//					relSelObjects);
-//			}
+			// if (postSelection){
+			// eventBroker.post(
+			// BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
+			// relSelObjects);
+			// }
 			highlightedAnnotations.addAll(relatingObjectsAnnotations);
 		}
-//		else if (postSelection)
-//		{
-//			eventBroker.post(
-//					BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
-//					null);
-//		}
+		// else if (postSelection)
+		// {
+		// eventBroker.post(
+		// BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
+		// null);
+		// }
 		painter.modelChanged(annotationModel);
 	}
 
 	private void highlightAnnotations(
-		List<ModelAnnotation> relatingObjectsAnnotations, boolean highlighted) {
-		for (ModelAnnotation a : relatingObjectsAnnotations)
-		{
+			List<ModelAnnotation> relatingObjectsAnnotations,
+			boolean highlighted) {
+		for (ModelAnnotation a : relatingObjectsAnnotations) {
 			a.setHighlighted(highlighted);
 		}
 	}
@@ -818,7 +844,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	}
 
-	private List<ModelAnnotation> getModelAnnotationAtSelection(int start, int end, BTSTextSelectionEvent btsEvent) {
+	private List<ModelAnnotation> getModelAnnotationAtSelection(int start,
+			int end, BTSTextSelectionEvent btsEvent) {
 		Iterator it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<ModelAnnotation> annotations = new Vector<ModelAnnotation>(4);
@@ -832,41 +859,41 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			if (a instanceof ModelAnnotation) {
 				Position pos = embeddedEditor.getViewer().getAnnotationModel()
 						.getPosition(a);
-//				System.out.println("pos " + pos.getOffset() + " " +  pos.getOffset() + pos.getLength());
-				if ((pos.getOffset() <= start
-						&& start < pos.getOffset() + pos.getLength()) || (pos.getOffset() >= start && pos.getOffset() <= end)) {
+				// System.out.println("pos " + pos.getOffset() + " " +
+				// pos.getOffset() + pos.getLength());
+				if ((pos.getOffset() <= start && start < pos.getOffset()
+						+ pos.getLength())
+						|| (pos.getOffset() >= start && pos.getOffset() <= end)) {
 					annotations.add((ModelAnnotation) a);
-					if (((ModelAnnotation)a).getModelObject() instanceof BTSSentenceItem)
-					{
-						BTSSentenceItem item = (BTSSentenceItem) ((ModelAnnotation)a).getModelObject();
+					if (((ModelAnnotation) a).getModelObject() instanceof BTSSentenceItem) {
+						BTSSentenceItem item = (BTSSentenceItem) ((ModelAnnotation) a)
+								.getModelObject();
 						textItems.add(item);
-						if (startItem == null || pos.getOffset() > startItemOffeset)
-						{
+						if (startItem == null
+								|| pos.getOffset() > startItemOffeset) {
 							startItem = item;
 							startItemOffeset = pos.getOffset();
 						}
-						if (endItem == null || pos.getOffset() + pos.getLength() < endItemOffeset)
-						{
+						if (endItem == null
+								|| pos.getOffset() + pos.getLength() < endItemOffeset) {
 							endItem = item;
 							endItemOffeset = pos.getOffset() + pos.getLength();
 						}
 					}
 
 				}
-//				else if (pos.getOffset() >= start && pos.getOffset() <= end) {
-//					annotations.add((ModelAnnotation) a);
-//
-//				}
+				// else if (pos.getOffset() >= start && pos.getOffset() <= end)
+				// {
+				// annotations.add((ModelAnnotation) a);
+				//
+				// }
 			}
 		}
-		if (btsEvent != null)
-		{
-			if (startItem != null)
-			{
+		if (btsEvent != null) {
+			if (startItem != null) {
 				btsEvent.setStartId(startItem.get_id());
 			}
-			if (endItem != null)
-			{
+			if (endItem != null) {
 				btsEvent.setEndId(endItem.get_id());
 			}
 			btsEvent.getSelectedItems().addAll(textItems);
@@ -874,6 +901,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		return annotations;
 	}
 
+	@SuppressWarnings("restriction")
 	private void configureEditorDrawingStrategies() {
 		IAnnotationAccess annotationAccess = new IAnnotationAccess() {
 			public Object getType(Annotation annotation) {
@@ -889,19 +917,15 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			}
 		};
 
-		painter = new AnnotationPainter(
-				embeddedEditor.getViewer(),
+		painter = new AnnotationPainter(embeddedEditor.getViewer(),
 				annotationAccess);
 
-		
-		//Lemma
+		// Lemma
 		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
 		painter.addTextStyleStrategy(LemmaAnnotation.TYPE, strategy);
 		painter.setAnnotationTypeColor(LemmaAnnotation.TYPE,
 				BTSUIConstants.COLOR_LEMMA);
 		painter.addAnnotationType(LemmaAnnotation.TYPE, LemmaAnnotation.TYPE);
-
-
 
 		// comment
 		CommentDrawingStrategy commentStrategy = new CommentDrawingStrategy();
@@ -910,10 +934,11 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				BTSUIConstants.COLOR_COMMENT);
 		painter.addAnnotationType(CommentAnnotation.TYPE,
 				CommentAnnotation.TYPE);
-		
+
 		// comment highlighted
 		CommentHighlightedDrawingStrategy commenthighStrategy = new CommentHighlightedDrawingStrategy();
-		painter.addDrawingStrategy(CommentAnnotation.TYPE_HIGHLIGHTED, commenthighStrategy);
+		painter.addDrawingStrategy(CommentAnnotation.TYPE_HIGHLIGHTED,
+				commenthighStrategy);
 		painter.setAnnotationTypeColor(CommentAnnotation.TYPE_HIGHLIGHTED,
 				BTSUIConstants.COLOR_COMMENT);
 		painter.addAnnotationType(CommentAnnotation.TYPE_HIGHLIGHTED,
@@ -926,15 +951,16 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				BTSUIConstants.COLOR_SUBTEXT);
 		painter.addAnnotationType(SubtextAnnotation.TYPE,
 				SubtextAnnotation.TYPE);
-		
+
 		// subtext
 		SubtextHighlightedDrawingStrategy subtexthighStrategy = new SubtextHighlightedDrawingStrategy();
-		painter.addDrawingStrategy(SubtextAnnotation.TYPE_HIGHLIGHTED, subtexthighStrategy);
+		painter.addDrawingStrategy(SubtextAnnotation.TYPE_HIGHLIGHTED,
+				subtexthighStrategy);
 		painter.setAnnotationTypeColor(SubtextAnnotation.TYPE_HIGHLIGHTED,
 				BTSUIConstants.COLOR_SUBTEXT);
 		painter.addAnnotationType(SubtextAnnotation.TYPE_HIGHLIGHTED,
 				SubtextAnnotation.TYPE_HIGHLIGHTED);
-		
+
 		// Annotation
 		AnnotationDrawingStrategy annotationStrategy = new AnnotationDrawingStrategy();
 		painter.addDrawingStrategy(AnnotationAnnotation.TYPE,
@@ -943,7 +969,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				BTSUIConstants.COLOR_ANNOTATTION);
 		painter.addAnnotationType(AnnotationAnnotation.TYPE,
 				AnnotationAnnotation.TYPE);
-		
+
 		// Annotation highlighted
 		AnnotationHighlightedDrawingStrategy annotationHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
 		painter.addDrawingStrategy(AnnotationAnnotation.TYPE_HIGHLIGHTED,
@@ -977,11 +1003,12 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			Object a = i.next();
 			Position pos = model.getPosition((Annotation) a);
 			loadSingleAnnotation2Editor(editorModel, a, pos, issue);
-			
+
 		}
 
 	}
 
+	@SuppressWarnings("restriction")
 	private void loadSingleAnnotation2Editor(IAnnotationModel editorModel,
 			Object a, Position pos, Issue issue) {
 		if (a instanceof BTSLemmaAnnotation) {
@@ -989,91 +1016,97 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				LemmaAnnotation ta = new LemmaAnnotation(
 						embeddedEditor.getDocument(), issue,
 						((BTSLemmaAnnotation) a).getModel());
-				
+
 				Position pos2 = new Position(pos.getOffset()
 						+ EDITOR_PREFIX_LENGTH, pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
-				modelAnnotationMap.put(((BTSIdentifiableItem) ta.getModelObject()).get_id(), ta);
+				modelAnnotationMap.put(
+						((BTSIdentifiableItem) ta.getModelObject()).get_id(),
+						ta);
 			}
 		} else if (a instanceof BTSAnnotationAnnotation) {
-			if (((BTSAnnotationAnnotation) a).getRelatingObject() != null 
-					&& ((BTSAnnotationAnnotation) a).getRelatingObject().getType() != null
-					&& ((BTSAnnotationAnnotation) a).getRelatingObject().getType().equalsIgnoreCase("rubrum")) {
+			if (((BTSAnnotationAnnotation) a).getRelatingObject() != null
+					&& ((BTSAnnotationAnnotation) a).getRelatingObject()
+							.getType() != null
+					&& ((BTSAnnotationAnnotation) a).getRelatingObject()
+							.getType().equalsIgnoreCase("rubrum")) {
 				AnnotationAnnotation ta = new AnnotationAnnotation(
 						embeddedEditor.getDocument(),
 						AnnotationAnnotation.TYPE_RUBRUM, issue,
 						((BTSAnnotationAnnotation) a).getModel(),
-						(BTSAnnotation) ((BTSAnnotationAnnotation) a).getRelatingObject());
-				ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+						(BTSAnnotation) ((BTSAnnotationAnnotation) a)
+								.getRelatingObject());
+				ta.setInterTextReference(((BTSModelAnnotation) a)
+						.getInterTextRefernce());
 
-//				Position pos = model.getPosition((Annotation) a);
+				// Position pos = model.getPosition((Annotation) a);
 				Position pos2 = new Position(pos.getOffset()
 						+ EDITOR_PREFIX_LENGTH, pos.getLength());
 				editorModel.addAnnotation((Annotation) ta, pos2);
-				addToRelatingObjectAnnotationMap((EObject) ta.getAnnotation(), ta);
+				addToRelatingObjectAnnotationMap((EObject) ta.getAnnotation(),
+						ta);
 			}
 			AnnotationAnnotation ta = new AnnotationAnnotation(
 					embeddedEditor.getDocument(), issue,
 					((BTSAnnotationAnnotation) a).getModel(),
-					(BTSAnnotation) ((BTSAnnotationAnnotation) a).getRelatingObject());
-//			Position pos = model.getPosition((Annotation) a);
-			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+					(BTSAnnotation) ((BTSAnnotationAnnotation) a)
+							.getRelatingObject());
+			// Position pos = model.getPosition((Annotation) a);
+			ta.setInterTextReference(((BTSModelAnnotation) a)
+					.getInterTextRefernce());
 
-			Position pos2 = new Position(pos.getOffset()
-					+ EDITOR_PREFIX_LENGTH, pos.getLength());
+			Position pos2 = new Position(
+					pos.getOffset() + EDITOR_PREFIX_LENGTH, pos.getLength());
 			editorModel.addAnnotation((Annotation) ta, pos2);
 			addToRelatingObjectAnnotationMap((EObject) ta.getAnnotation(), ta);
-
 
 		} else if (a instanceof BTSCommentAnnotation) {
 			CommentAnnotation ta = new CommentAnnotation(
 					embeddedEditor.getDocument(), issue,
 					((BTSCommentAnnotation) a).getModel(),
 					((BTSCommentAnnotation) a).getComment());
-			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+			ta.setInterTextReference(((BTSModelAnnotation) a)
+					.getInterTextRefernce());
 
-
-			Position pos2 = new Position(pos.getOffset()
-					+ EDITOR_PREFIX_LENGTH, pos.getLength());
+			Position pos2 = new Position(
+					pos.getOffset() + EDITOR_PREFIX_LENGTH, pos.getLength());
 			editorModel.addAnnotation((Annotation) ta, pos2);
 			addToRelatingObjectAnnotationMap((EObject) ta.getComment(), ta);
-
 
 		} else if (a instanceof BTSSubtextAnnotation) {
 			SubtextAnnotation ta = new SubtextAnnotation(
 					embeddedEditor.getDocument(), issue,
 					((BTSSubtextAnnotation) a).getModel(),
 					(BTSText) ((BTSSubtextAnnotation) a).getRelatingObject());
-			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+			ta.setInterTextReference(((BTSModelAnnotation) a)
+					.getInterTextRefernce());
 
-
-//			Position pos = model.getPosition((Annotation) a);
-			Position pos2 = new Position(pos.getOffset()
-					+ EDITOR_PREFIX_LENGTH, pos.getLength());
+			// Position pos = model.getPosition((Annotation) a);
+			Position pos2 = new Position(
+					pos.getOffset() + EDITOR_PREFIX_LENGTH, pos.getLength());
 			editorModel.addAnnotation((Annotation) ta, pos2);
 			addToRelatingObjectAnnotationMap((EObject) ta.getSubtext(), ta);
-
 
 		} else if (a instanceof BTSModelAnnotation) {
 			ModelAnnotation ta = new InvisibleAnnotation(
 					embeddedEditor.getDocument(), issue,
 					((BTSModelAnnotation) a).getModel());
-			ta.setInterTextReference(((BTSModelAnnotation) a).getInterTextRefernce());
+			ta.setInterTextReference(((BTSModelAnnotation) a)
+					.getInterTextRefernce());
 
-
-//			Position pos = model.getPosition((Annotation) a);
+			// Position pos = model.getPosition((Annotation) a);
 			Position pos2 = new Position(pos.getOffset(), pos.getLength());
 			editorModel.addAnnotation((Annotation) ta, pos2);
-			modelAnnotationMap.put(((BTSIdentifiableItem) ta.getModelObject()).get_id(), ta);
+			modelAnnotationMap.put(
+					((BTSIdentifiableItem) ta.getModelObject()).get_id(), ta);
 		}
-		
+
 	}
 
 	private void addToRelatingObjectAnnotationMap(EObject object,
 			ModelAnnotation ma) {
 		List<ModelAnnotation> l = relatingObjectsAnnotationMap.get(object);
-		if (l == null)
-		{
+		if (l == null) {
 			l = new Vector<ModelAnnotation>(2);
 			relatingObjectsAnnotationMap.put(object, l);
 		}
@@ -1082,15 +1115,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	@Inject
 	@Optional
-	void eventReceivedNew(@EventTopic("model_new/BTSWord*") Object object)
-	{
+	void eventReceivedNew(@EventTopic("model_new/BTSWord*") Object object) {
 	}
 
 	@Inject
 	@Optional
 	void eventReceivedCaretEvents(
 			@EventTopic("event_text_selection/*") final Object event) {
-		if (text !=null && event instanceof String && event != null) {
+		if (text != null && event instanceof String && event != null) {
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
 				setTextSelectionEvent((String) event);
@@ -1129,8 +1161,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	}
 
 	private void shiftSelection(int i) {
-		int caret = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
-		// ohne �ber annotationmodel zu gehen!!!!!
+		embeddedEditor.getViewer().getTextWidget().getCaretOffset();
 
 	}
 
@@ -1141,16 +1172,15 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			// do nothing
 			return;
 		} else if (selection != null && !selection.equals(selectedTextItem)) {
-			
-			
+
 			if (selection instanceof BTSCorpusObject) {
-				
+
 				// TODO save configurable this is autosave!!!
-				if (text != null)
-				{
+				if (text != null) {
 					if (editingDomain != null) {
-						editingDomain.getCommandStack().removeCommandStackListener(
-								commandStackListener);
+						editingDomain.getCommandStack()
+								.removeCommandStackListener(
+										commandStackListener);
 					}
 					save();
 				}
@@ -1162,8 +1192,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 				} else {
 					purgeCache();
 					loadInput(null);
-					if (part != null)
-					{
+					if (part != null) {
 						part.setLabel("EgyTextEditor");
 					}
 					text = null;
@@ -1251,8 +1280,10 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private void setSentenceItemSelected(BTSSentenceItem selectedItem) {
 		if (selectionRange != null) {
-		embeddedEditor.getViewer().getTextWidget()
-				.replaceStyleRanges(selectionRange.start,
+			embeddedEditor
+					.getViewer()
+					.getTextWidget()
+					.replaceStyleRanges(selectionRange.start,
 							selectionRange.length, preSelectionRanges);
 		}
 		ModelAnnotation annotation = getModelAnnotationAtModelObject(selectedItem);
@@ -1261,15 +1292,14 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 					.getPosition(annotation);
 			int start = pos.getOffset() - 1;
 			int len = pos.getLength();
-			selectionRange = new StyleRange(start, len,
- null,
+			selectionRange = new StyleRange(start, len, null,
 					BTSUIConstants.COLOR_SUBTEXT);
 			preSelectionRanges = embeddedEditor.getViewer().getTextWidget()
 					.getStyleRanges(start, len);
 			embeddedEditor.getViewer().getTextWidget()
 					.setStyleRange(selectionRange);
 		}
-		
+
 	}
 
 	private ModelAnnotation getModelAnnotationAtModelObject(
@@ -1284,7 +1314,6 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	private void setSentenceTranslation(BTSSenctence sentence) {
 		if (sentence != null && !sentence.equals(selectedSentence)) {
-			BTSSenctence oldSentence = selectedSentence;
 			selectedSentence = sentence;
 			if (selectedSentence.getTranslation() == null) {
 				selectedSentence.setTranslation(BtsmodelFactory.eINSTANCE
@@ -1315,20 +1344,18 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	}
 
-	private void loadInput(BTSCorpusObject o)
-	{
-		if (tabFolder != null && o instanceof BTSText)
-		{
+	private void loadInput(BTSCorpusObject o) {
+		if (tabFolder != null && o instanceof BTSText) {
 
 			this.text = (BTSText) o;
-			Job job = new Job("load children")
-			{
+			Job job = new Job("load children") {
 
 				@Override
-				protected IStatus run(IProgressMonitor monitor)
-				{
-					relatingObjects = textEditorController.getRelatingObjects(text);
-					relatingObjectsMap = textEditorController.fillRelatingObjectsMap(relatingObjects);
+				protected IStatus run(IProgressMonitor monitor) {
+					relatingObjects = textEditorController
+							.getRelatingObjects(text);
+					relatingObjectsMap = textEditorController
+							.fillRelatingObjectsMap(relatingObjects);
 					queryId = "relations.objectId-" + text.get_id();
 					return Status.OK_STATUS;
 				}
@@ -1337,37 +1364,33 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			job.schedule();
 			try {
 				job.join();
-				if (relatingObjects != null && !relatingObjects.isEmpty())
-				{
-					eventBroker.post(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED, relatingObjects);
+				if (relatingObjects != null && !relatingObjects.isEmpty()) {
+					eventBroker.post(
+							BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
+							relatingObjects);
 				}
 			} catch (InterruptedException e) {
 				logger.error(e);
 			}
 
-			switch (tabFolder.getSelectionIndex())
-			{
-				case 0:
-				{
-					loadInputTranscription(text, relatingObjects);
-					break;
-				}
-				case 1:
-				{
-					loadInputSignText(text, relatingObjects, relatingObjectsMap);
-					break;
-				}
-				case 2:
-				{
-					loadInputJSesh(text, relatingObjects);
-					break;
-				}
+			switch (tabFolder.getSelectionIndex()) {
+			case 0: {
+				loadInputTranscription(text, relatingObjects);
+				break;
+			}
+			case 1: {
+				loadInputSignText(text, relatingObjects, relatingObjectsMap);
+				break;
+			}
+			case 2: {
+				loadInputJSesh(text, relatingObjects);
+				break;
+			}
 			}
 
-			//			plainTextEditor.setText(((BTSText) o).getCode());
-		} else if (tabFolder != null && o == null)
-		{
-				purgeCache();
+			// plainTextEditor.setText(((BTSText) o).getCode());
+		} else if (tabFolder != null && o == null) {
+			purgeCache();
 			this.text = null;
 			relatingObjects = null;
 			switch (tabFolder.getSelectionIndex()) {
@@ -1388,18 +1411,18 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 
 	}
 
-	private void loadInputSignText(BTSText localText, List<BTSObject> localRelatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap2)
-	{
+	private void loadInputSignText(BTSText localText,
+			List<BTSObject> localRelatingObjects,
+			Map<String, List<BTSInterTextReference>> relatingObjectsMap2) {
 		// if (text2 == null || text2.getTextContent() == null
 		// || text2.getTextContent().getTextItems().isEmpty())
 		// text2 = createMockUp(text2);
-		if (localText != null)
-		{
-			signTextEditor.setInput(localText, localText.getTextContent(), localRelatingObjects, relatingObjectsMap2);
-		}
-		else
-		{
-			signTextEditor.setInput(null, null, localRelatingObjects, relatingObjectsMap2);
+		if (localText != null) {
+			signTextEditor.setInput(localText, localText.getTextContent(),
+					localRelatingObjects, relatingObjectsMap2);
+		} else {
+			signTextEditor.setInput(null, null, localRelatingObjects,
+					relatingObjectsMap2);
 		}
 	}
 
@@ -1411,7 +1434,8 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			text2.setTextContent(BtsCorpusModelFactory.eINSTANCE
 					.createBTSTextContent());
 		}
-		BTSSenctence sentence = BtsCorpusModelFactory.eINSTANCE.createBTSSenctence();
+		BTSSenctence sentence = BtsCorpusModelFactory.eINSTANCE
+				.createBTSSenctence();
 
 		for (int i = 0; i < 20; i++) {
 			BTSWord w = BtsCorpusModelFactory.eINSTANCE.createBTSWord();
@@ -1426,8 +1450,7 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		return text2;
 	}
 
-	private void purgeCache()
-	{
+	private void purgeCache() {
 
 		selectedSentence = null;
 		modelAnnotationMap = new HashMap<String, ModelAnnotation>();
@@ -1438,56 +1461,50 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 			editingDomain.getCommandStack().removeCommandStackListener(
 					commandStackListener);
 		}
-		if (relatingObjectsMap != null)
-		{
+		if (relatingObjectsMap != null) {
 			relatingObjectsMap.clear();
 		}
 	}
 
 	@Focus
-	public void setFocus()
-	{
-		if (tabFolder != null && text != null)
-		{
+	public void setFocus() {
+		if (tabFolder != null && text != null) {
 			switch (tabFolder.getSelectionIndex()) {
-				case 0: {
-					embeddedEditor.getViewer().getControl().setFocus();
-					break;
-				}
-				case 1: {
-					signTextEditor.setFocus();
-					break;
-				}
-				case 2: {
-					break;
-				}
+			case 0: {
+				embeddedEditor.getViewer().getControl().setFocus();
+				break;
 			}
-			
+			case 1: {
+				signTextEditor.setFocus();
+				break;
+			}
+			case 2: {
+				break;
+			}
+			}
+
 		}
 		evaluationController
-		.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
+				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
 
 	@Persist
-	public boolean save()
-	{
-		if (text != null && dirty.isDirty())
-		{
+	public boolean save() {
+		if (text != null && dirty.isDirty()) {
 			localCommandCacheSet.clear();
-			switch (tabFolder.getSelectionIndex())
-			{
-				case 0: {
-					updateModelFromTranscription();
-					break;
-				}
-				case 1: {
-					updateModelFromSignText();
-					break;
-				}
-				case 2: {
-					updateModelFromJSesh();
-					break;
-				}
+			switch (tabFolder.getSelectionIndex()) {
+			case 0: {
+				updateModelFromTranscription();
+				break;
+			}
+			case 1: {
+				updateModelFromSignText();
+				break;
+			}
+			case 2: {
+				updateModelFromJSesh();
+				break;
+			}
 			}
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
@@ -1514,25 +1531,27 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 						workaround = true;
 						partService.activate(p);
 					}
-					if (selection instanceof BTSTextSelectionEvent && ((BTSTextSelectionEvent)selection).data instanceof EObject)
-					{
+					if (selection instanceof BTSTextSelectionEvent
+							&& ((BTSTextSelectionEvent) selection).data instanceof EObject) {
 						// remove listener from old editingDomain
-						if (editingDomain != null)
-						{
-						editingDomain.getCommandStack().removeCommandStackListener(
-								commandStackListener);
+						if (editingDomain != null) {
+							editingDomain.getCommandStack()
+									.removeCommandStackListener(
+											commandStackListener);
 						}
 						// get selected item, add listener to domain
-						if (!((BTSTextSelectionEvent)selection).getSelectedItems().isEmpty())
-						{
-							editingDomain = getEditingDomain((EObject)  ((BTSTextSelectionEvent)selection).getSelectedItems().get(0));
-							editingDomain.getCommandStack().addCommandStackListener(
-									getCommandStackListener());
+						if (!((BTSTextSelectionEvent) selection)
+								.getSelectedItems().isEmpty()) {
+							editingDomain = getEditingDomain((EObject) ((BTSTextSelectionEvent) selection)
+									.getSelectedItems().get(0));
+							editingDomain.getCommandStack()
+									.addCommandStackListener(
+											getCommandStackListener());
 						}
-						
+
 					}
 					selectionService.setSelection(selection);
-//					processEditorSelection(selection);
+					// processEditorSelection(selection);
 					if (workaround) {
 						partService.activate(activePart);
 					}
@@ -1545,106 +1564,93 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 	private EditingDomain getEditingDomain(EObject editingObject) {
 		return editingDomainController.getEditingDomain(editingObject);
 	}
-	
+
 	@Override
 	public void handleEvent(Event event) {
 		// System.out.println(arg0);
-		if (event.getTopic().startsWith("event_text_selection/"))
-		{
+		if (event.getTopic().startsWith("event_text_selection/")) {
 			eventReceivedCaretEvents(event.getTopic());
 			return;
 		}
-		switch(event.getTopic())
-		{
-		case "event_text_relating_objects/loaded" :
-		{
+		switch (event.getTopic()) {
+		case "event_text_relating_objects/loaded": {
 			break;
 		}
-		case "event_relating_objects/selected" :
-		{
-			eventReceivedRelatingObjectsLoadedEvents(event.getProperty("org.eclipse.e4.data"));
+		case "event_relating_objects/selected": {
+			eventReceivedRelatingObjectsLoadedEvents(event
+					.getProperty("org.eclipse.e4.data"));
 			break;
 		}
 		}
-		
 
 	}
+
 	@Inject
 	@Optional
 	void eventReceivedRelatingObjectsLoadedEvents(
 			@EventTopic("event_relating_objects/*") Object event) {
 
 		if (event != null && event instanceof List) {
-			List<ModelAnnotation> annotations = new Vector<ModelAnnotation>(((List)event).size());
-			for (Object o : (List)event)
-			{
-				if (o instanceof BTSObject)
-				{
-					List<ModelAnnotation> a = relatingObjectsAnnotationMap.get(o);
-					if (a != null)
-					{
+			List<ModelAnnotation> annotations = new Vector<ModelAnnotation>(
+					((List) event).size());
+			for (Object o : (List) event) {
+				if (o instanceof BTSObject) {
+					List<ModelAnnotation> a = relatingObjectsAnnotationMap
+							.get(o);
+					if (a != null) {
 						annotations.addAll(a);
 					}
 				}
 			}
-			if (!annotations.isEmpty())
-			{
+			if (!annotations.isEmpty()) {
 				processSelection(annotations, false, null);
 			}
 		}
 	}
-	
+
 	@Inject
 	@Optional
-	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification notification)
-	{
-		logger.info("EgyTextEditorPart eventReceivedUpdates. object: " + notification);
-		if (notification.getQueryIds() != null){
-			for (String id : notification.getQueryIds())
-			{
-				if (id.equals(queryId))
-				{
+	void eventReceivedUpdates(
+			@EventTopic("model_update/*") BTSModelUpdateNotification notification) {
+		logger.info("EgyTextEditorPart eventReceivedUpdates. object: "
+				+ notification);
+		if (notification.getQueryIds() != null) {
+			for (String id : notification.getQueryIds()) {
+				if (id.equals(queryId)) {
 					processModelUpdate(notification, id);
 				}
 			}
 		}
-		
-		
+
 	}
 
 	private void processModelUpdate(BTSModelUpdateNotification notification,
 			String id) {
-		if (relatingObjects != null && !relatingObjects.contains(notification.getObject()))
-		{
+		if (relatingObjects != null
+				&& !relatingObjects.contains(notification.getObject())) {
 			relatingObjects.add((BTSObject) notification.getObject());
+		} else {
 		}
-		else
-		{
+		switch (tabFolder.getSelectionIndex()) {
+		case 0: {
+			addAnnotationToTranscription(notification);
+			break;
 		}
-		switch (tabFolder.getSelectionIndex())
-		{
-			case 0:
-			{
-				addAnnotationToTranscription(notification);
-				break;
-			}
-			case 1:
-			{
-				addAnnotationToSignText(notification);
-				break;
-			}
-			case 2:
-			{
-//				addAnnotationToJSesh(notification);
-				break;
-			}
+		case 1: {
+			addAnnotationToSignText(notification);
+			break;
 		}
-		
+		case 2: {
+			// addAnnotationToJSesh(notification);
+			break;
+		}
+		}
+
 	}
 
 	private void addAnnotationToSignText(BTSModelUpdateNotification notification) {
 		signTextEditor.addRelatingObjectNotification(notification);
-		
+
 	}
 
 	private void addAnnotationToTranscription(
@@ -1654,42 +1660,39 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		BTSObject object = (BTSObject) notification.getObject();
 		// remove old annotations
 		if (mas != null) {
-			for (ModelAnnotation ma : mas)
-			{
+			for (ModelAnnotation ma : mas) {
 				annotationModel.removeAnnotation(ma);
 			}
 		}
-			
+
 		// relObject ist neu
 		for (BTSRelation rel : object.getRelations()) {
 			if (rel.getObjectId() != null
 					&& rel.getObjectId().equals(text.get_id())) {
 				for (BTSInterTextReference ref : rel.getParts()) {
-						Position pos = null;
-						if (ref.getBeginId() != null
-								&& ref.getBeginId().equals(ref.getEndId())) {
-							ModelAnnotation ma1 = modelAnnotationMap.get(ref
-									.getBeginId());
-							pos = annotationModel.getPosition(ma1);
-						} else {
-							ModelAnnotation ma1 = modelAnnotationMap.get(ref
-									.getBeginId());
-							ModelAnnotation ma2 = modelAnnotationMap.get(ref
-									.getEndId());
-							pos = annotationModel.getPosition(ma1);
-							Position pos2 = annotationModel.getPosition(ma2);
-							pos.setLength((pos2.getOffset() - pos.getOffset())
-									+ pos2.getLength());
-						}
-						Issue issue;
-						issue = new Issue.IssueImpl();
-						Annotation annotation = makeAnnotation(object, issue,
-								ref);
-						if (annotation != null && pos != null)
-						{
-							annotationModel.addAnnotation(annotation, pos);
-						}
-//					}
+					Position pos = null;
+					if (ref.getBeginId() != null
+							&& ref.getBeginId().equals(ref.getEndId())) {
+						ModelAnnotation ma1 = modelAnnotationMap.get(ref
+								.getBeginId());
+						pos = annotationModel.getPosition(ma1);
+					} else {
+						ModelAnnotation ma1 = modelAnnotationMap.get(ref
+								.getBeginId());
+						ModelAnnotation ma2 = modelAnnotationMap.get(ref
+								.getEndId());
+						pos = annotationModel.getPosition(ma1);
+						Position pos2 = annotationModel.getPosition(ma2);
+						pos.setLength((pos2.getOffset() - pos.getOffset())
+								+ pos2.getLength());
+					}
+					Issue issue;
+					issue = new Issue.IssueImpl();
+					Annotation annotation = makeAnnotation(object, issue, ref);
+					if (annotation != null && pos != null) {
+						annotationModel.addAnnotation(annotation, pos);
+					}
+					// }
 				}
 			}
 		}
@@ -1697,49 +1700,39 @@ public class EgyTextEditorPart implements IBTSEditor, EventHandler
 		painter.modelChanged(annotationModel);
 	}
 
-	private Annotation makeAnnotation(BTSObject object, Issue issue, BTSInterTextReference ref) {
+	private Annotation makeAnnotation(BTSObject object, Issue issue,
+			BTSInterTextReference ref) {
 		ModelAnnotation ta = null;
 		if (object instanceof BTSAnnotation) {
-			if (((BTSAnnotation) object).getType() != null && ((BTSAnnotation) object).getType().equalsIgnoreCase(
-					"rubrum")) {
-				ta = new AnnotationAnnotation(
-						embeddedEditor.getDocument(),
-						AnnotationAnnotation.TYPE_RUBRUM, issue,
-						object,
+			if (((BTSAnnotation) object).getType() != null
+					&& ((BTSAnnotation) object).getType().equalsIgnoreCase(
+							"rubrum")) {
+				ta = new AnnotationAnnotation(embeddedEditor.getDocument(),
+						AnnotationAnnotation.TYPE_RUBRUM, issue, object,
 						(BTSAnnotation) object);
-			ta.setInterTextReference(ref);
+				ta.setInterTextReference(ref);
 				addToRelatingObjectAnnotationMap(object, ta);
 			}
-			ta = new AnnotationAnnotation(
-					embeddedEditor.getDocument(),
-					AnnotationAnnotation.TYPE, issue,
-					object,
+			ta = new AnnotationAnnotation(embeddedEditor.getDocument(),
+					AnnotationAnnotation.TYPE, issue, object,
 					(BTSAnnotation) object);
 			ta.setInterTextReference(ref);
 			addToRelatingObjectAnnotationMap(object, ta);
 
-
 		} else if (object instanceof BTSComment) {
-			ta = new CommentAnnotation(
-					embeddedEditor.getDocument(), issue,
-					object,
-					(BTSComment) object);
+			ta = new CommentAnnotation(embeddedEditor.getDocument(), issue,
+					object, (BTSComment) object);
 			ta.setInterTextReference(ref);
-
 
 			ta.setText("Comment Annotation --> here is a comment on this word.");
 			addToRelatingObjectAnnotationMap(object, ta);
 
-
 		} else if (object instanceof BTSText) {
-			if (((BTSText) object).getType().equalsIgnoreCase(
-					"subtext")) {
-			ta = new SubtextAnnotation(
-					embeddedEditor.getDocument(), issue,
-					object,
-					(BTSText) object);
-			ta.setInterTextReference(ref);
-			addToRelatingObjectAnnotationMap(object, ta);
+			if (((BTSText) object).getType().equalsIgnoreCase("subtext")) {
+				ta = new SubtextAnnotation(embeddedEditor.getDocument(), issue,
+						object, (BTSText) object);
+				ta.setInterTextReference(ref);
+				addToRelatingObjectAnnotationMap(object, ta);
 			}
 		}
 		return ta;
