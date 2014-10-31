@@ -49,10 +49,12 @@ public interface BTSProjectService extends GenericObjectService<BTSProject, Stri
 
 	/**
 	 * List remote projects.
+	 * @param password 
+	 * @param username 
 	 *
 	 * @return the list
 	 */
-	List<BTSProject> listRemoteProjects();
+	List<BTSProject> listRemoteProjects(String username, String password);
 
 	/**
 	 * Find project by project prefix.

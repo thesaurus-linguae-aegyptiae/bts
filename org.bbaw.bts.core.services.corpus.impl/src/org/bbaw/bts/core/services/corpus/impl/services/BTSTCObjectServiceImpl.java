@@ -43,6 +43,8 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 		BTSTCObject o = BtsCorpusModelFactory.eINSTANCE.createBTSTCObject();
 		setId(o);
 		setRevision(o);
+		o.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+
 		o.setCorpusPrefix(main_corpus_key);
 		return o;
 

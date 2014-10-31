@@ -28,6 +28,8 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		BTSImage image = BtsCorpusModelFactory.eINSTANCE.createBTSImage();
 		super.setId(image);
 		super.setRevision(image);
+		image.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+
 		image.setCorpusPrefix(main_corpus_key);
 		return image;
 	}

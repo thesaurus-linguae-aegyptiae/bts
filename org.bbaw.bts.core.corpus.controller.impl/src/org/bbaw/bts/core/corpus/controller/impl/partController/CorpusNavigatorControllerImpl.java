@@ -164,8 +164,7 @@ implements CorpusNavigatorController
 			TreeNodeWrapper parentWrapper, EReference referenceName, IProgressMonitor monitor)
 	{
 		BTSQueryRequest query = new BTSQueryRequest();
-//		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId", parent.get_id()));
-		//FIXME
+
 		query.setQueryId("relations.objectId-" + parent.get_id());
 		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId", parent.get_id()));
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);

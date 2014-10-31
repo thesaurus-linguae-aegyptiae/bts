@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.inject.Inject;
+
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -20,6 +23,9 @@ extends CouchDBDao<E, K>
 implements GenericDao<E, K>
 {
 
+	@Inject
+	protected Logger logger;
+	
 	protected List<E> loadPartialObjectsFromStrings(
 			List<String> allDocs, String dbPath) {
 		List<E> results = new Vector<E>(allDocs.size());
@@ -27,17 +33,26 @@ implements GenericDao<E, K>
 
 		for (String jo : allDocs)
 		{
+			System.out.println(jo);
 			String id = extractIdFromObjectString(jo);
+			logger.info(id);
 			URI uri = URI.createURI(getLocalDBURL() + "/" + dbPath + "/" + id);
 			E entity = retrieveFromCache(uri, cache);
 			if (entity == null)
 			{
 				entity = loadObjectFromString(id, dbPath, uri, jo);
+				addEntityToCache(uri, cache, entity);
 			}
 			results.add(entity);
 		}
 		return results;
 	}
+
+	
+
+
+
+
 
 	@Override
 	public E loadObjectFromString(String id, String indexName, URI uri, String sourceAsString) {

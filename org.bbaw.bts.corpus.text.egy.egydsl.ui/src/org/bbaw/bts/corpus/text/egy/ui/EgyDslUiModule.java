@@ -6,6 +6,7 @@ package org.bbaw.bts.corpus.text.egy.ui;
 import org.bbaw.bts.corpus.text.egy.formatting.EgyDslFormatter;
 import org.bbaw.bts.corpus.text.egy.ui.contentassist.AbstractEgyDslProposalProvider;
 import org.bbaw.bts.corpus.text.egy.ui.contentassist.EgyDslProposalProvider;
+import org.bbaw.bts.corpus.text.egy.ui.custom.BTSE4ToGuiceXtextSourceViewerProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectDocumentationProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectHover;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEncodingProvider;
@@ -13,16 +14,18 @@ import org.bbaw.bts.corpus.text.egy.ui.custom.BTSHighlightingConfiguration;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSLocationInFileProvider;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSSemanticHighlightingCalculator;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.common.ui.contentassist.TerminalsProposalProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.formatting.impl.AbstractDeclarativeFormatter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
+import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.hover.IEObjectHoverProvider;
-import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+
+import com.google.inject.Binder;
+import com.google.inject.Provider;
+
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -36,6 +39,12 @@ public class EgyDslUiModule extends org.bbaw.bts.corpus.text.egy.ui.AbstractEgyD
 		return BTSEObjectHover.class;
 	}
 
+	@Override
+	public void configure(Binder binder) {
+		// TODO Auto-generated method stub
+		super.configure(binder);
+		binder.bind(XtextSourceViewer.class).toProvider((Class<? extends Provider<? extends XtextSourceViewer>>) BTSE4ToGuiceXtextSourceViewerProvider.class);
+	}
 	
 //	 public Class<? extends IEObjectHoverProvider> bindIEObjectHoverProvider()
 //	 {

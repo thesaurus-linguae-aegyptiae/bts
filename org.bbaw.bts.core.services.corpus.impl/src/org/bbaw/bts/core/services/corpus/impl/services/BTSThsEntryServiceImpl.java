@@ -36,6 +36,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		BTSThsEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSThsEntry();
 		super.setId(entry);
 		super.setRevision(entry);
+		entry.setDBCollectionKey(main_project + BTSCorpusConstants.THS);
 		entry.setCorpusPrefix(main_corpus_key);
 		return entry;
 	}

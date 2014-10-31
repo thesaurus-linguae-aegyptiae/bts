@@ -31,6 +31,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		BTSLemmaEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSLemmaEntry();
 		super.setId(entry);
 		super.setRevision(entry);
+		entry.setDBCollectionKey(main_project + BTSCorpusConstants.WLIST);
+
 		entry.setCorpusPrefix(main_corpus_key);
 		return entry;
 	}

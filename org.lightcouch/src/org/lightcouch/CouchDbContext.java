@@ -22,8 +22,10 @@ import static org.lightcouch.URIBuilder.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -118,7 +120,13 @@ public class CouchDbContext {
 		InputStream instream = null;
 		try {
 			instream = dbc.get(builder(dbc.getBaseUri()).build());
-			Reader reader = new InputStreamReader(instream);
+			Reader reader = null;
+			try {
+				reader = new InputStreamReader(instream,"UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			return getElement(new JsonParser().parse(reader).getAsJsonObject(), "version");
 		} finally {
 			close(instream);

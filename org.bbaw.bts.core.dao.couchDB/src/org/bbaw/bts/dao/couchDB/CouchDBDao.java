@@ -759,7 +759,13 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		return null;
 	}
-
+	protected void addEntityToCache(URI uri, Map<URI, Resource> cache, E entity) {
+		if (cache == null || uri == null || entity == null) return;
+		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		resource.getContents().add(entity);
+		cache.put(uri, resource);
+	}
+	
 	protected void registerQueryWithPercolator(final BTSQueryRequest query, final String indexName, String indexType)
 	{
 		// register query with percolator
@@ -927,6 +933,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(false).query();
 		}
+		
+		//FIXME comment logging out!
+		for (String s : allDocs)
+		{
+			logger.info("CouchDBDao loadDocsFromView Viewid: " + viewId + " objectString: "+  s);
+		}
 		return allDocs;
 	}
 	
@@ -936,7 +948,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		for (String jo : allDocs)
 		{
-//			System.out.println(jo);
+			//FIXME suppress print to console
+			System.out.println("CouchDBDao loadObjectsFromStrings " + jo);
 			
 				try {
 					String id = extractIdFromObjectString(jo);
@@ -1087,7 +1100,13 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			throw new BTSDBException("DBCollectionKey may not be null. Unable to fully load object!");
 		}
 		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, entity.getDBCollectionKey());
-		InputStream sourceStream = client.find(entity.get_id());
+		InputStream sourceStream = null;
+		try {
+			sourceStream = client.find(entity.get_id());
+		} catch (NoDocumentException e) {
+			e.printStackTrace();
+			return entity;
+		}
 		URI uri = URI.createURI(getLocalDBURL() + "/temp/"
 				+ entity.get_id());
 		Resource resource = connectionProvider.getEmfResourceSet().createResource(

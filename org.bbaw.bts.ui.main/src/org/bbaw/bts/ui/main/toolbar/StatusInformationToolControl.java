@@ -102,7 +102,7 @@ public class StatusInformationToolControl {
 	}
 
 	private void updateStatusMessage(StatusMessage message) {
-		if (message.getMessageType() == MessageType.LOCKED)
+		if (message.getMessageType() != null && message.getMessageType() == MessageType.LOCKED)
 		{
 			BTSUser user = null;
 			try {

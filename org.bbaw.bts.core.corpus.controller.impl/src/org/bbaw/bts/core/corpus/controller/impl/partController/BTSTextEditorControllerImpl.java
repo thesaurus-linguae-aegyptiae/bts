@@ -65,6 +65,7 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
@@ -216,7 +217,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				appendToStringBuilder(textItems, model, stringBuilder, relatingObjects, relatingObjectsMap);
 			}
 		}
-		stringBuilder.deleteCharAt(stringBuilder.length() -1);
+		if (stringBuilder.length() > 0)
+		{
+			stringBuilder.deleteCharAt(stringBuilder.length() -1);
+		}
 		logger.info("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
 		
 		processLemmaAnnotions(lemmaAnnotationMap);
@@ -250,12 +254,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						}
 					}
 				}
-				return null;
+				lemmaAnnotationMap = null;
+
+				return Status.OK_STATUS;
 			}
 		};
 		
-				
-		lemmaAnnotationMap = null;
+		job.schedule();		
 
 	}
 
@@ -552,6 +557,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		if (list == null)
 		{
 			list = new Vector<BTSModelAnnotation>(4);
+			lemmaAnnotationMap.put(lemmaId, list);
 		}
 		list.add(annotation);
 	}
@@ -1245,7 +1251,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		
 		// testing
 		EcoreUtil.EqualityHelper h = new EcoreUtil.EqualityHelper();
-		System.out.println("BTSTextEditorController.updateModelFromTextContent Model differs from original: "
+		System.out.println("BTSTextEditorController.updateModelFromTextContent Model is structurally equal to original: "
 		+ h.equals(textContent, result));
 		
 //		// Configure EMF Compare

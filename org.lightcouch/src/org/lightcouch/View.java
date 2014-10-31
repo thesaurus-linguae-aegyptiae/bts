@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +37,7 @@ import java.util.List;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpResponse;
 import org.lightcouch.DesignDocument.MapReduce;
 
 import com.google.gson.Gson;
@@ -145,7 +147,8 @@ public class View
 		URI uri = uriBuilder.build();
 		if (allDocsKeys != null)
 		{ // bulk docs
-			return dbc.getStream(dbc.post(uri, allDocsKeys));
+			HttpResponse response = dbc.post(uri, allDocsKeys);
+			return dbc.getStream(response);
 		}
 		if (tempView != null)
 		{ // temp view
@@ -169,7 +172,7 @@ public class View
 		InputStream instream = null;
 		try
 		{
-			Reader reader = new InputStreamReader(instream = queryForStream());
+			Reader reader = new InputStreamReader(instream = queryForStream(), StandardCharsets.UTF_8);
 			JsonArray jsonArray = new JsonParser().parse(reader).getAsJsonObject().getAsJsonArray("rows");
 			List<T> list = new ArrayList<T>();
 			for (JsonElement jsonElem : jsonArray)
@@ -209,7 +212,7 @@ public class View
 		InputStream instream = null;
 		try
 		{
-			Reader reader = new InputStreamReader(instream = queryForStream());
+			Reader reader = new InputStreamReader(instream = queryForStream(), StandardCharsets.UTF_8);
 			JsonObject json = new JsonParser().parse(reader).getAsJsonObject();
 			ViewResult<K, V, T> vr = new ViewResult<K, V, T>();
 			vr.setTotalRows(getElementAsLong(json, "total_rows"));
@@ -279,7 +282,7 @@ public class View
 		InputStream instream = null;
 		try
 		{
-			Reader reader = new InputStreamReader(instream = queryForStream());
+			Reader reader = new InputStreamReader(instream = queryForStream(), StandardCharsets.UTF_8);
 			JsonArray array = new JsonParser().parse(reader).getAsJsonObject().get("rows").getAsJsonArray();
 			if (array.size() != 1)
 			{ // expect exactly 1 row
@@ -679,10 +682,12 @@ public class View
 	 */
 	public List<String> query()
 	{
+		// FIXME remove logging cplutte
+		log.error("View query id: " + this.key);
 		InputStream instream = null;
 		try
 		{
-			Reader reader = new InputStreamReader(instream = queryForStream());
+			Reader reader = new InputStreamReader(instream = queryForStream(), StandardCharsets.UTF_8);
 			JsonArray jsonArray = new JsonParser().parse(reader).getAsJsonObject().getAsJsonArray("rows");
 			List<String> list = new ArrayList<String>();
 			for (JsonElement jsonElem : jsonArray)
@@ -691,9 +696,12 @@ public class View
 				if (Boolean.TRUE.equals(this.includeDocs))
 				{
 					elem = jsonElem.getAsJsonObject().get("doc");
+					// FIXME remove logging cplutte
+					log.error("View query elem: " +elem);
 				}
 				String id = elem.toString();
-//				System.out.println(id);
+				// FIXME remove logging cplutte
+				log.error("View query id: " +id);
 				list.add(id);
 			}
 			return list;

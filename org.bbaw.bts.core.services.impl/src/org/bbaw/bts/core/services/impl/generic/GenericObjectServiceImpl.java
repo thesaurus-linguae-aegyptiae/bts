@@ -232,9 +232,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 			if (!((AdministrativDataObject) entity).getRevisions().isEmpty()) {
 				BTSRevision rev = ((AdministrativDataObject) entity)
-						.getRevisions().get(
-								((AdministrativDataObject) entity)
-										.getRevisions().size() - 1);
+						.getLastRevision();
 				if (rev != null
 						&& now.getTime() > (rev.getTimeStamp().getTime() + 10000)) {
 					addRevisionStatementInternal(
@@ -257,7 +255,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 			rev.setTimeStamp(now);
 			rev.setUserId(authenticatedUser.get_id());
-			entity.getRevisions().add(rev);
+			entity.addRevision(rev);
 		}
 	}
 

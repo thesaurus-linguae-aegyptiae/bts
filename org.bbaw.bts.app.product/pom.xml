@@ -29,11 +29,13 @@
 		</repository>
 		
 		<repository>
-			<id>bts-mvn-build-repository</id>
-			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<id>bts-mvn-telota-all</id>
+			<name>BTS Maven local Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
 			<layout>p2</layout>
 		</repository>
+		
+		
 		
 		<repository>
 			<id>kepler</id>
@@ -42,6 +44,13 @@
 		</repository>
 
 		<!--
+		<repository>
+			<id>bts-mvn-build-repository</id>
+			<name>BTS BUILD Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<layout>p2</layout>
+		</repository>
+		
 		<repository>
 			<id>e4-tools</id>
 			<url>http://download.vogella.com/luna/e4tools</url>

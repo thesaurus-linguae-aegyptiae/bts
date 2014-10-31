@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteGenericDao;
@@ -200,7 +202,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 //		EObjectMapper objectMapper = new EObjectMapper();
 //		InputStream stream = new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8));
 //		Object o = objectMapper.from(stream, resource, null);
-		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes()),
+		final JSONLoad loader = new JSONLoad(new ByteArrayInputStream(objectAsString.getBytes(StandardCharsets.UTF_8)),
 				new HashMap<Object, Object>());
 		loader.fillResource(resource);
 		
@@ -239,6 +241,34 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 //		}
 //		return (List<E>) results;
 	}
+	
+	@Override
+	public List<E> list(String path, String username, String password) {
+		View view;
+		List<String> allDocs = new Vector<String>();
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path, username, password);
+		try
+		{
+
+			view = dbClient.view(RemoteDaoConstants.VIEW_ALL_DOCS);
+			allDocs = view.includeDocs(true).query();
+		} catch (NoDocumentException e)
+		{
+			e.printStackTrace();
+
+			DesignDocument designDoc = dbClient.design().getFromDesk(RemoteDaoConstants.VIEW_ALL_DOCS);
+			// designDoc.new DesignDocument();//
+			dbClient.design().synchronizeWithDb(designDoc);
+			view = dbClient.view(RemoteDaoConstants.VIEW_ALL_DOCS);
+			allDocs = view.includeDocs(true).query();
+		}
+		List<E> results = loadObjectsFromStrings(allDocs, path);
+		if (!results.isEmpty())
+		{
+			registerQueryIdWithInternalRegistry(RemoteDaoConstants.VIEW_ALL_DOCS, path);
+		}
+		return results;
+	}
 
 	protected List<E> loadObjectsFromStrings(
 			List<String> allDocs, String path) {
@@ -249,7 +279,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 			if (true)
 			{
 				URI uri = URI.createURI(getRemoteDBURL() + "/" + path + "/" + extractIdFromObjectString(jo));
-				Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+				Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
 				fillResource(resource, jo);
 
 				if (!resource.getContents().isEmpty())

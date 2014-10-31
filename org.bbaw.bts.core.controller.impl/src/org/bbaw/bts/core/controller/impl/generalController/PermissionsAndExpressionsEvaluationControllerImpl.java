@@ -155,22 +155,22 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 				&& !sel.equals(this.selection)) {
 			processDeselection(this.selection);
 			this.selection = sel;
-			delayedSetSelection(selection);
+			delayedSetSelection((BTSDBBaseObject) selection);
 			
 			
 		}
 	}
 
-	private void delayedSetSelection(final Object jobSelection) {
+	private void delayedSetSelection(final BTSDBBaseObject jobSelection) {
 		Job job = new Job("Acquire Lock") {
 
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				if (selection != null) {
+				if (selection != null && selection instanceof BTSDBBaseObject) {
 					synchronized (selection) {
 
-						if (selection.equals(jobSelection)) {
-							internalSetSelection(jobSelection);
+						if (!((BTSDBBaseObject)selection).isLocked()) {
+							internalSetSelection(selection);
 						}
 					}
 				}

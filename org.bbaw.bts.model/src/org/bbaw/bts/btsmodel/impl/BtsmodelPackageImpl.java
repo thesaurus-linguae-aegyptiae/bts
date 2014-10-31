@@ -367,8 +367,44 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getAdministrativDataObject_Revisions() {
-		return (EReference)administrativDataObjectEClass.getEStructuralFeatures().get(0);
+	public EAttribute getAdministrativDataObject_Revisions() {
+		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getAdministrativDataObject__AddRevision__BTSRevision() {
+		return administrativDataObjectEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getAdministrativDataObject__AddRevision__int_String_String() {
+		return administrativDataObjectEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getAdministrativDataObject__GetRevision__int() {
+		return administrativDataObjectEClass.getEOperations().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getAdministrativDataObject__GetLastRevision() {
+		return administrativDataObjectEClass.getEOperations().get(3);
 	}
 
 	/**
@@ -377,7 +413,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EAttribute getAdministrativDataObject_State() {
-		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(1);
+		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -386,7 +422,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EAttribute getAdministrativDataObject_RevisionState() {
-		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(2);
+		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -395,7 +431,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EAttribute getAdministrativDataObject_Visibility() {
-		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(3);
+		return (EAttribute)administrativDataObjectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -972,6 +1008,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSRevision_TimeStamp() {
 		return (EAttribute)btsRevisionEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getBTSRevision__ToRevisionString() {
+		return btsRevisionEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1943,10 +1988,14 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		// Create classes and their features
 		administrativDataObjectEClass = createEClass(ADMINISTRATIV_DATA_OBJECT);
-		createEReference(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 		createEAttribute(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__STATE);
 		createEAttribute(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__REVISION_STATE);
 		createEAttribute(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__VISIBILITY);
+		createEAttribute(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__REVISIONS);
+		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION);
+		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING);
+		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT);
+		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION);
 
 		btsObjectEClass = createEClass(BTS_OBJECT);
 		createEAttribute(btsObjectEClass, BTS_OBJECT__SORT_KEY);
@@ -2020,6 +2069,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsRevisionEClass, BTS_REVISION__REF);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__USER_ID);
 		createEAttribute(btsRevisionEClass, BTS_REVISION__TIME_STAMP);
+		createEOperation(btsRevisionEClass, BTS_REVISION___TO_REVISION_STRING);
 
 		btsTimespanEClass = createEClass(BTS_TIMESPAN);
 		createEReference(btsTimespanEClass, BTS_TIMESPAN__FROM);
@@ -2203,10 +2253,23 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(administrativDataObjectEClass, AdministrativDataObject.class, "AdministrativDataObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAdministrativDataObject_Revisions(), this.getBTSRevision(), null, "revisions", null, 0, -1, AdministrativDataObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAdministrativDataObject_State(), ecorePackage.getEString(), "state", null, 0, 1, AdministrativDataObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAdministrativDataObject_RevisionState(), ecorePackage.getEString(), "revisionState", null, 0, 1, AdministrativDataObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getAdministrativDataObject_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, AdministrativDataObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getAdministrativDataObject_Revisions(), ecorePackage.getEString(), "revisions", null, 0, -1, AdministrativDataObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		EOperation op = initEOperation(getAdministrativDataObject__AddRevision__BTSRevision(), null, "addRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, this.getBTSRevision(), "revision", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getAdministrativDataObject__AddRevision__int_String_String(), null, "addRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "rev", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEDate(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "userId", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getAdministrativDataObject__GetRevision__int(), this.getBTSRevision(), "getRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEInt(), "revisionIndex", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEOperation(getAdministrativDataObject__GetLastRevision(), this.getBTSRevision(), "getLastRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(btsObjectEClass, BTSObject.class, "BTSObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSObject_SortKey(), ecorePackage.getEInt(), "sortKey", null, 0, 1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2281,6 +2344,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSRevision_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSRevision_TimeStamp(), ecorePackage.getEDate(), "timeStamp", null, 0, 1, BTSRevision.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEOperation(getBTSRevision__ToRevisionString(), ecorePackage.getEString(), "toRevisionString", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(btsTimespanEClass, BTSTimespan.class, "BTSTimespan", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTimespan_From(), this.getBTSDate(), null, "from", null, 0, 1, BTSTimespan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSTimespan_To(), this.getBTSDate(), null, "to", null, 0, 1, BTSTimespan.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2300,7 +2365,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(btsTranslationsEClass, BTSTranslations.class, "BTSTranslations", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTranslations_Translations(), this.getBTSTranslation(), null, "translations", null, 0, -1, BTSTranslations.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		EOperation op = initEOperation(getBTSTranslations__GetTranslation__String(), ecorePackage.getEString(), "getTranslation", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getBTSTranslations__GetTranslation__String(), ecorePackage.getEString(), "getTranslation", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "language", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		op = initEOperation(getBTSTranslations__SetTranslation__String_String(), ecorePackage.getEString(), "setTranslation", 0, 1, IS_UNIQUE, IS_ORDERED);

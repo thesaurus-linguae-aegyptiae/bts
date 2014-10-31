@@ -36,6 +36,8 @@ import java.util.UUID;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
@@ -51,6 +53,7 @@ import com.google.gson.JsonObject;
  */
 final class CouchDbUtil
 {
+	private static final Log log = LogFactory.getLog(CouchDbContext.class);
 
 	private CouchDbUtil()
 	{
@@ -93,7 +96,11 @@ final class CouchDbUtil
 	 */
 	public static String getElement(JsonObject j, String e)
 	{
-		return (j.get(e) == null) ? null : j.get(e).getAsString();
+		String result =  (j.get(e) == null) ? null : j.get(e).getAsString();
+		
+		//FIXME cplutte comment logging out
+		log.error("String getElement " + result);
+		return result;
 	}
 
 	public static long getElementAsLong(JsonObject j, String e)

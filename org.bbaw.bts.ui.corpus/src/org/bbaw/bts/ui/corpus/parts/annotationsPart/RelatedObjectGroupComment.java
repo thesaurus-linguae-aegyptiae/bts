@@ -96,7 +96,7 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 	protected void fillContentComposite(Composite composite) {
 		if (!getObject().getRevisions().isEmpty())
 		{
-			BTSRevision rev = getObject().getRevisions().get(0);
+			BTSRevision rev = getObject().getRevision(0);
 			setGroupTitle(userController.getUserDisplayName(rev
 					.getUserId()));
 		}

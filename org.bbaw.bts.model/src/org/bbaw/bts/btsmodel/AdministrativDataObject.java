@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import java.util.Date;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -17,10 +18,10 @@ import org.eclipse.emf.common.util.EList;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getState <em>State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevisionState <em>Revision State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevisions <em>Revisions</em>}</li>
  * </ul>
  * </p>
  *
@@ -30,20 +31,52 @@ import org.eclipse.emf.common.util.EList;
  */
 public interface AdministrativDataObject extends BTSObservableObject, BTSIdentifiableItem {
 	/**
-	 * Returns the value of the '<em><b>Revisions</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSRevision}.
+	 * Returns the value of the '<em><b>Revisions</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Revisions</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Revisions</em>' containment reference list.
+	 * @return the value of the '<em>Revisions</em>' attribute list.
 	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getAdministrativDataObject_Revisions()
-	 * @model containment="true"
+	 * @model
 	 * @generated
 	 */
-	EList<BTSRevision> getRevisions();
+	EList<String> getRevisions();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addRevision(BTSRevision revision);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void addRevision(int rev, Date timestamp, String userId);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	BTSRevision getRevision(int revisionIndex);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	BTSRevision getLastRevision();
 
 	/**
 	 * Returns the value of the '<em><b>State</b></em>' attribute.

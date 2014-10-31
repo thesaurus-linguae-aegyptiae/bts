@@ -107,4 +107,6 @@ public interface BTSUserController {
 	
 	boolean removeUserUserGroup(BTSObject object, List<BTSProject> projects);
 
+	boolean authenticatedUserIsDBAdmin(String userName, String password);
+
 }

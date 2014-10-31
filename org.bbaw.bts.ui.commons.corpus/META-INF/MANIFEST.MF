@@ -14,6 +14,9 @@ Import-Package: org.bbaw.bts.btsmodel,
  org.eclipse.core.databinding.conversion,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.emf.common.util,
- org.eclipse.jface.viewers
+ org.eclipse.jface.viewers,
+ org.eclipse.xtext.ui.editor.model
 Require-Bundle: org.eclipse.text,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.eclipse.xtext,
+ org.eclipse.xtext.ui

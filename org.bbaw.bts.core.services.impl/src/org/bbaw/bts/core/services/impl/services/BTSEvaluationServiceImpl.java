@@ -846,7 +846,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			}
 			
 		};
-		job.schedule(1000);
+		job.schedule();
 		
 		
 		

@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,6 +19,7 @@ import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSProjectDao;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 
 public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, String> implements BTSProjectService
@@ -28,6 +30,9 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Inject
 	private RemoteBTSProjectDao remoteprojectDao;
 
+	@Inject
+	private DBManager dbManager;
+	
 	@Override
 	public BTSProject createNew()
 	{
@@ -41,10 +46,23 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	public boolean save(BTSProject entity)
 	{
 		super.addRevisionStatement(entity);
+		if (entity.getDbConnection() != null) {
+			try {
+				dbManager.prepareDBSynchronization(entity);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		try {
+			dbManager.prepareDBIndexing(entity);
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		for (BTSProjectDBCollection coll : entity.getDbCollections())
 		{
 			try {
 				saveAuthorisation(entity, coll);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -166,9 +184,9 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	}
 
 	@Override
-	public List<BTSProject> listRemoteProjects()
+	public List<BTSProject> listRemoteProjects(String username, String password)
 	{
-		return remoteprojectDao.list(BTSCoreConstants.ADMIN);
+		return remoteprojectDao.list(BTSCoreConstants.ADMIN, username, password);
 	}
 
 	@Override

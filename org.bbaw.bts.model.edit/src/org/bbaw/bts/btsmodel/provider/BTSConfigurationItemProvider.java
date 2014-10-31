@@ -648,7 +648,7 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
-				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
+				 ""));
 
 		newChildDescriptors.add
 			(createChildParameter

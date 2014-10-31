@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.Date;
 
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
@@ -16,6 +17,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -36,10 +38,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <ul>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#get_id <em>id</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getState <em>State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRevisionState <em>Revision State</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getVisibility <em>Visibility</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRevisions <em>Revisions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#get_rev <em>rev</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getProject <em>Project</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#isLocked <em>Locked</em>}</li>
@@ -104,16 +106,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	protected String _id = _ID_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getRevisions()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSRevision> revisions;
-
-	/**
 	 * The default value of the '{@link #getState() <em>State</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -172,6 +164,16 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	 * @ordered
 	 */
 	protected String visibility = VISIBILITY_EDEFAULT;
+
+	/**
+	 * The cached value of the '{@link #getRevisions() <em>Revisions</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getRevisions()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> revisions;
 
 	/**
 	 * The default value of the '{@link #get_rev() <em>rev</em>}' attribute.
@@ -487,9 +489,9 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSRevision> getRevisions() {
+	public EList<String> getRevisions() {
 		if (revisions == null) {
-			revisions = new EObjectContainmentEList<BTSRevision>(BTSRevision.class, this, BtsmodelPackage.BTS_CONFIGURATION__REVISIONS);
+			revisions = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_CONFIGURATION__REVISIONS);
 		}
 		return revisions;
 	}
@@ -907,6 +909,48 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public void addRevision(BTSRevision revision) {
+		String rev = revision.toRevisionString();
+		getRevisions().add(rev);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public void addRevision(int rev, Date timestamp, String userId) {
+		BTSRevision revision = BtsmodelFactory.eINSTANCE.createBTSRevision(rev, timestamp, userId);
+		addRevision(revision);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public BTSRevision getRevision(int revisionIndex) {
+		String rev = getRevisions().get(revisionIndex);
+		BTSRevision revision = BtsmodelFactory.eINSTANCE.createBTSRevision(rev);
+		return revision;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public BTSRevision getLastRevision() {
+		String rev = getRevisions().get(getRevisions().size() -1);
+		BTSRevision revision = BtsmodelFactory.eINSTANCE.createBTSRevision(rev);
+		return revision;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener propertyChangeListener)
@@ -936,8 +980,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
-				return ((InternalEList<?>)getRevisions()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS:
 				return ((InternalEList<?>)getRelations()).basicRemove(otherEnd, msgs);
 			case BtsmodelPackage.BTS_CONFIGURATION__EXTERNAL_REFERENCES:
@@ -958,14 +1000,14 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return getPropertyChangeSupport();
 			case BtsmodelPackage.BTS_CONFIGURATION__ID:
 				return get_id();
-			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
-				return getRevisions();
 			case BtsmodelPackage.BTS_CONFIGURATION__STATE:
 				return getState();
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE:
 				return getRevisionState();
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				return getVisibility();
+			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
+				return getRevisions();
 			case BtsmodelPackage.BTS_CONFIGURATION__REV:
 				return get_rev();
 			case BtsmodelPackage.BTS_CONFIGURATION__PROJECT:
@@ -1019,10 +1061,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION__ID:
 				set_id((String)newValue);
 				return;
-			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
-				getRevisions().clear();
-				getRevisions().addAll((Collection<? extends BTSRevision>)newValue);
-				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__STATE:
 				setState((String)newValue);
 				return;
@@ -1031,6 +1069,10 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				setVisibility((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
+				getRevisions().clear();
+				getRevisions().addAll((Collection<? extends String>)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__REV:
 				set_rev((String)newValue);
@@ -1106,9 +1148,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION__ID:
 				set_id(_ID_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
-				getRevisions().clear();
-				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__STATE:
 				setState(STATE_EDEFAULT);
 				return;
@@ -1117,6 +1156,9 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				setVisibility(VISIBILITY_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
+				getRevisions().clear();
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__REV:
 				set_rev(_REV_EDEFAULT);
@@ -1185,14 +1227,14 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 			case BtsmodelPackage.BTS_CONFIGURATION__ID:
 				return _ID_EDEFAULT == null ? _id != null : !_ID_EDEFAULT.equals(_id);
-			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
-				return revisions != null && !revisions.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__STATE:
 				return STATE_EDEFAULT == null ? state != null : !STATE_EDEFAULT.equals(state);
 			case BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE:
 				return REVISION_STATE_EDEFAULT == null ? revisionState != null : !REVISION_STATE_EDEFAULT.equals(revisionState);
 			case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY:
 				return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
+			case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS:
+				return revisions != null && !revisions.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__REV:
 				return _REV_EDEFAULT == null ? _rev != null : !_REV_EDEFAULT.equals(_rev);
 			case BtsmodelPackage.BTS_CONFIGURATION__PROJECT:
@@ -1252,10 +1294,10 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		}
 		if (baseClass == AdministrativDataObject.class) {
 			switch (derivedFeatureID) {
-				case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS;
 				case BtsmodelPackage.BTS_CONFIGURATION__STATE: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE;
 				case BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE;
 				case BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY;
+				case BtsmodelPackage.BTS_CONFIGURATION__REVISIONS: return BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS;
 				default: return -1;
 			}
 		}
@@ -1309,10 +1351,10 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		}
 		if (baseClass == AdministrativDataObject.class) {
 			switch (baseFeatureID) {
-				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS: return BtsmodelPackage.BTS_CONFIGURATION__REVISIONS;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE: return BtsmodelPackage.BTS_CONFIGURATION__STATE;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE: return BtsmodelPackage.BTS_CONFIGURATION__REVISION_STATE;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY: return BtsmodelPackage.BTS_CONFIGURATION__VISIBILITY;
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS: return BtsmodelPackage.BTS_CONFIGURATION__REVISIONS;
 				default: return -1;
 			}
 		}
@@ -1367,6 +1409,10 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		}
 		if (baseClass == AdministrativDataObject.class) {
 			switch (baseOperationID) {
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION: return BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__BTSREVISION;
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING: return BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__INT_STRING_STRING;
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT: return BtsmodelPackage.BTS_CONFIGURATION___GET_REVISION__INT;
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION: return BtsmodelPackage.BTS_CONFIGURATION___GET_LAST_REVISION;
 				default: return -1;
 			}
 		}
@@ -1392,6 +1438,16 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException
 	{
 		switch (operationID) {
+			case BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__BTSREVISION:
+				addRevision((BTSRevision)arguments.get(0));
+				return null;
+			case BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__INT_STRING_STRING:
+				addRevision((Integer)arguments.get(0), (Date)arguments.get(1), (String)arguments.get(2));
+				return null;
+			case BtsmodelPackage.BTS_CONFIGURATION___GET_REVISION__INT:
+				return getRevision((Integer)arguments.get(0));
+			case BtsmodelPackage.BTS_CONFIGURATION___GET_LAST_REVISION:
+				return getLastRevision();
 			case BtsmodelPackage.BTS_CONFIGURATION___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER:
 				addPropertyChangeListener((PropertyChangeListener)arguments.get(0));
 				return null;
@@ -1422,6 +1478,8 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		result.append(revisionState);
 		result.append(", visibility: ");
 		result.append(visibility);
+		result.append(", revisions: ");
+		result.append(revisions);
 		result.append(", _rev: ");
 		result.append(_rev);
 		result.append(", project: ");
@@ -1476,4 +1534,5 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY, oldDBCollectionKey, dBCollectionKey));
 	}
 
+	
 } //BTSConfigurationImpl

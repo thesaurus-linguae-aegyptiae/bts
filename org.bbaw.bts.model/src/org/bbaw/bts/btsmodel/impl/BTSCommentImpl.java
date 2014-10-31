@@ -202,4 +202,6 @@ public class BTSCommentImpl extends BTSObjectImpl implements BTSComment {
 		return getProject() + "_admin";
 	}
 
+
+
 } //BTSCommentImpl

@@ -162,22 +162,13 @@ public interface BtsmodelPackage extends EPackage {
 	int ADMINISTRATIV_DATA_OBJECT__ID = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADMINISTRATIV_DATA_OBJECT__REVISIONS = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADMINISTRATIV_DATA_OBJECT__STATE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 2;
+	int ADMINISTRATIV_DATA_OBJECT__STATE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -186,7 +177,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMINISTRATIV_DATA_OBJECT__REVISION_STATE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 3;
+	int ADMINISTRATIV_DATA_OBJECT__REVISION_STATE = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -195,7 +186,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMINISTRATIV_DATA_OBJECT__VISIBILITY = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 4;
+	int ADMINISTRATIV_DATA_OBJECT__VISIBILITY = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT__REVISIONS = BTS_OBSERVABLE_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Administrativ Data Object</em>' class.
@@ -225,13 +225,49 @@ public interface BtsmodelPackage extends EPackage {
 	int ADMINISTRATIV_DATA_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBSERVABLE_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Administrativ Data Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 0;
+	int ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -250,15 +286,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_OBJECT__ID = ADMINISTRATIV_DATA_OBJECT__ID;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT__REVISIONS = ADMINISTRATIV_DATA_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -286,6 +313,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_OBJECT__VISIBILITY = ADMINISTRATIV_DATA_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT__REVISIONS = ADMINISTRATIV_DATA_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -459,6 +495,42 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = ADMINISTRATIV_DATA_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT___ADD_REVISION__BTSREVISION = ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT___ADD_REVISION__INT_STRING_STRING = ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT___GET_REVISION__INT = ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT___GET_LAST_REVISION = ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -556,15 +628,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER__ID = BTS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__REVISIONS = BTS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -590,6 +653,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_USER__VISIBILITY = BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__REVISIONS = BTS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -898,6 +970,42 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER___ADD_REVISION__BTSREVISION = BTS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER___GET_REVISION__INT = BTS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER___GET_LAST_REVISION = BTS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS User</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -925,15 +1033,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_COMMENT__ID = BTS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_COMMENT__REVISIONS = BTS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -959,6 +1058,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_COMMENT__VISIBILITY = BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__REVISIONS = BTS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -1148,6 +1256,42 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_COMMENT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___ADD_REVISION__BTSREVISION = BTS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___GET_REVISION__INT = BTS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT___GET_LAST_REVISION = BTS_OBJECT___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Comment</em>' class.
@@ -1535,22 +1679,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION__ID = BTS_CONFIG_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__REVISIONS = BTS_CONFIG_FEATURE_COUNT + 2;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__STATE = BTS_CONFIG_FEATURE_COUNT + 3;
+	int BTS_CONFIGURATION__STATE = BTS_CONFIG_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -1559,7 +1694,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__REVISION_STATE = BTS_CONFIG_FEATURE_COUNT + 4;
+	int BTS_CONFIGURATION__REVISION_STATE = BTS_CONFIG_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1568,7 +1703,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__VISIBILITY = BTS_CONFIG_FEATURE_COUNT + 5;
+	int BTS_CONFIGURATION__VISIBILITY = BTS_CONFIG_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__REVISIONS = BTS_CONFIG_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -1751,13 +1895,49 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CONFIG_OPERATION_COUNT + 1;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION___ADD_REVISION__BTSREVISION = BTS_CONFIG_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION___ADD_REVISION__INT_STRING_STRING = BTS_CONFIG_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION___GET_REVISION__INT = BTS_CONFIG_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION___GET_LAST_REVISION = BTS_CONFIG_OPERATION_COUNT + 5;
+
+	/**
 	 * The number of operations of the '<em>BTS Configuration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION_OPERATION_COUNT = BTS_CONFIG_OPERATION_COUNT + 2;
+	int BTS_CONFIGURATION_OPERATION_COUNT = BTS_CONFIG_OPERATION_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -1904,13 +2084,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REVISION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
+	 * The operation id for the '<em>To Revision String</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REVISION___TO_REVISION_STRING = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>BTS Revision</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REVISION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_REVISION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>From</b></em>' containment reference.
@@ -2039,15 +2228,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCABLE_ITEM__ID = BTS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_REFERENCABLE_ITEM__REVISIONS = BTS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2073,6 +2253,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_REFERENCABLE_ITEM__VISIBILITY = BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM__REVISIONS = BTS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -2271,6 +2460,42 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION = BTS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM___GET_REVISION__INT = BTS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM___GET_LAST_REVISION = BTS_OBJECT___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Referencable Item</em>' class.
@@ -2654,15 +2879,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP__ID = BTS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER_GROUP__REVISIONS = BTS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2688,6 +2904,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_USER_GROUP__VISIBILITY = BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__REVISIONS = BTS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -2879,6 +3104,42 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP___ADD_REVISION__BTSREVISION = BTS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP___GET_REVISION__INT = BTS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP___GET_LAST_REVISION = BTS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS User Group</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2916,15 +3177,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT__ID = BTS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PROJECT__REVISIONS = BTS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2950,6 +3202,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_PROJECT__VISIBILITY = BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__REVISIONS = BTS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -3157,6 +3418,42 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_PROJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT___ADD_REVISION__BTSREVISION = BTS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT___GET_REVISION__INT = BTS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT___GET_LAST_REVISION = BTS_OBJECT___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Project</em>' class.
@@ -4028,15 +4325,55 @@ public interface BtsmodelPackage extends EPackage {
 	EClass getAdministrativDataObject();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevisions <em>Revisions</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevisions <em>Revisions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Revisions</em>'.
+	 * @return the meta object for the attribute list '<em>Revisions</em>'.
 	 * @see org.bbaw.bts.btsmodel.AdministrativDataObject#getRevisions()
 	 * @see #getAdministrativDataObject()
 	 * @generated
 	 */
-	EReference getAdministrativDataObject_Revisions();
+	EAttribute getAdministrativDataObject_Revisions();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#addRevision(org.bbaw.bts.btsmodel.BTSRevision) <em>Add Revision</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Add Revision</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.AdministrativDataObject#addRevision(org.bbaw.bts.btsmodel.BTSRevision)
+	 * @generated
+	 */
+	EOperation getAdministrativDataObject__AddRevision__BTSRevision();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#addRevision(int, java.util.Date, java.lang.String) <em>Add Revision</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Add Revision</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.AdministrativDataObject#addRevision(int, java.util.Date, java.lang.String)
+	 * @generated
+	 */
+	EOperation getAdministrativDataObject__AddRevision__int_String_String();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevision(int) <em>Get Revision</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Revision</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.AdministrativDataObject#getRevision(int)
+	 * @generated
+	 */
+	EOperation getAdministrativDataObject__GetRevision__int();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getLastRevision() <em>Get Last Revision</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Last Revision</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.AdministrativDataObject#getLastRevision()
+	 * @generated
+	 */
+	EOperation getAdministrativDataObject__GetLastRevision();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getState <em>State</em>}'.
@@ -4753,6 +5090,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSRevision_TimeStamp();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSRevision#toRevisionString() <em>To Revision String</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>To Revision String</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSRevision#toRevisionString()
+	 * @generated
+	 */
+	EOperation getBTSRevision__ToRevisionString();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSTimespan <em>BTS Timespan</em>}'.
@@ -5851,12 +6198,44 @@ public interface BtsmodelPackage extends EPackage {
 		EClass ADMINISTRATIV_DATA_OBJECT = eINSTANCE.getAdministrativDataObject();
 
 		/**
-		 * The meta object literal for the '<em><b>Revisions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Revisions</b></em>' attribute list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ADMINISTRATIV_DATA_OBJECT__REVISIONS = eINSTANCE.getAdministrativDataObject_Revisions();
+		EAttribute ADMINISTRATIV_DATA_OBJECT__REVISIONS = eINSTANCE.getAdministrativDataObject_Revisions();
+
+		/**
+		 * The meta object literal for the '<em><b>Add Revision</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION = eINSTANCE.getAdministrativDataObject__AddRevision__BTSRevision();
+
+		/**
+		 * The meta object literal for the '<em><b>Add Revision</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING = eINSTANCE.getAdministrativDataObject__AddRevision__int_String_String();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Revision</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT = eINSTANCE.getAdministrativDataObject__GetRevision__int();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Last Revision</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION = eINSTANCE.getAdministrativDataObject__GetLastRevision();
 
 		/**
 		 * The meta object literal for the '<em><b>State</b></em>' attribute feature.
@@ -6405,6 +6784,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_REVISION__TIME_STAMP = eINSTANCE.getBTSRevision_TimeStamp();
+
+		/**
+		 * The meta object literal for the '<em><b>To Revision String</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_REVISION___TO_REVISION_STRING = eINSTANCE.getBTSRevision__ToRevisionString();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSTimespanImpl <em>BTS Timespan</em>}' class.

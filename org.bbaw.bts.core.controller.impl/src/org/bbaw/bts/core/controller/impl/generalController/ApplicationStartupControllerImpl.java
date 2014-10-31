@@ -135,6 +135,10 @@ public class ApplicationStartupControllerImpl implements
 
 	private String localDBUrl;
 
+
+
+	private boolean listen2Backend = true;
+
 	@Override
 	public void applicationStartup(final IEclipseContext context,
 			final BTSProjectService projectService, IApplicationContext appContext) {
@@ -184,35 +188,6 @@ public class ApplicationStartupControllerImpl implements
 		}
 		
 		System.out.println("Test sonderzeichen string: \uF0080 \uF0081 \uF0082 \u13379 \u13379a" );
-//		else
-//		{
-//			font = JFaceResources.getFontRegistry().get("Times New Roman");
-//			JFaceResources.getFontRegistry().put(
-//					JFaceResources.DEFAULT_FONT,
-//					new FontData[] {  font.getFontData()[0] });
-//			Font f = JFaceResources.getFontRegistry().get(
-//					JFaceResources.DEFAULT_FONT);
-//			 Font f2 = JFaceResources.getDefaultFont();
-//			 Font f3 = JFaceResources.getFont("BBAWLibertine");
-//			 System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
-//			 for (Object s : JFaceResources.getFontRegistry().getKeySet())
-//			 {
-//				 System.out.println(s);
-//			 }
-//		}
-//		FontData[] fds = Display.getCurrent().getFontList(null, true);
-//		{
-//			for (FontData f : fds)
-//			{
-//				System.out.println(f.toString());
-//				if (f.toString().startsWith("BBAWLibertine"))
-//				{
-//					JFaceResources.getFontRegistry().put(
-//							JFaceResources.DEFAULT_FONT,
-//							new FontData[] {  f });
-//				}
-//			}
-//		}
 		System.out.println(font);
 		splashController.setSplashPluginId(PLUGIN_ID);
 		splashController.setSplashImagePath("/" + "splash" + "/"
@@ -236,7 +211,7 @@ public class ApplicationStartupControllerImpl implements
 						logger.info("IProvisioningAgent loaded: " + (agent != null) + ", IWorkbench loaded: " + (workbench != null));
 						//automated software update
 						//FIXME
-// 						checkAndInstallSoftwareUpdates(agent, workbench);
+ 						checkAndInstallSoftwareUpdates(agent, workbench);
 
 						// extension specific startup routines
 						ExtensionStartUpController[] conrollers = null;
@@ -252,9 +227,18 @@ public class ApplicationStartupControllerImpl implements
 								try {
 									c.startup();
 								} catch (Exception e) {
-									// TODO Auto-generated catch block
 									e.printStackTrace();
 								}
+							}
+						}
+						
+						if (listen2Backend)
+						{
+							// start listening to backend updates
+							context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
+							context.modify(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES, "true");
+							for (BTSProject project : projects) {
+								backend2ClientUpdateService.startListening2Updates(project);
 							}
 						}
 						splashController.close();
@@ -281,6 +265,7 @@ public class ApplicationStartupControllerImpl implements
 		if (first_startup == null || first_startup.equals("true")
 				|| !dbManager.databaseIsInstalled(db_installation_dir)) {
 			logger.info("Application very first startup");
+			listen2Backend = false;
 
 			Display.getDefault().syncExec(new Runnable() {
 				  public void run() {
@@ -346,15 +331,24 @@ public class ApplicationStartupControllerImpl implements
 			} catch (StorageException e1) {
 				e1.printStackTrace();
 			}
-			if (rememberedUsername != null
-					&& !"".equals(rememberedUsername)
-					&& rememberedPass != null
-					&& userService
-							.setAuthentication(rememberedUsername, rememberedPass)) {
-				logger.info("Last login from remember me service. Username: " + rememberedUsername);
-				
+			boolean remembered = false;
+			if (rememberedUsername != null && !"".equals(rememberedUsername)
+					&& rememberedPass != null) {
+
 				try {
-					List<BTSUser> users = userController.listAll(rememberedUsername, rememberedPass);
+					remembered = userService.setAuthentication(rememberedUsername,
+							rememberedPass);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+			if (remembered) {
+				logger.info("Last login from remember me service. Username: "
+						+ rememberedUsername);
+
+				try {
+					List<BTSUser> users = userController.listAll(
+							rememberedUsername, rememberedPass);
 					for (BTSUser u : users) {
 						if (rememberedUsername.equals(u.getUserName())) { // FIXME
 																			// password
@@ -362,7 +356,8 @@ public class ApplicationStartupControllerImpl implements
 							// && equalsPassword(u,
 							// passWord)) {
 							logger.info("Last login from remember me service. User found.");
-							userController.setAuthentication(rememberedUsername, rememberedPass);
+							userController.setAuthentication(
+									rememberedUsername, rememberedPass);
 							userController.setAuthenticatedUser(u);
 							loggedIn = true;
 							break;
@@ -371,7 +366,7 @@ public class ApplicationStartupControllerImpl implements
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-			} 
+			}
 			if (!loggedIn){
 				sync.syncExec(new Runnable()
 				{
@@ -580,6 +575,14 @@ public class ApplicationStartupControllerImpl implements
 		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR, defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
 		
 		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
+		
+		localDBUrl =  prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
+		if (localDBUrl != null)
+		{
+			dbManager.setLocalDBUrl(localDBUrl);
+			context.set(BTSPluginIDs.PREF_LOCAL_DB_URL, localDBUrl);
+		}
+		
 //		defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 		
 	}
@@ -740,7 +743,6 @@ public class ApplicationStartupControllerImpl implements
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
-			backend2ClientUpdateService.startListening2Updates(project);
 		}
 
 	}
@@ -878,8 +880,8 @@ public class ApplicationStartupControllerImpl implements
 	}
 
 	@Override
-	public List<BTSProject> loadRemoteProjects() throws MalformedURLException {
-		return projectService.listRemoteProjects();
+	public List<BTSProject> loadRemoteProjects(String username, String password) throws MalformedURLException {
+		return projectService.listRemoteProjects(username, password);
 	}
 
 	@Override
@@ -900,6 +902,20 @@ public class ApplicationStartupControllerImpl implements
 		logger.info("Data base installed successfully: " + success + ", at: " + dbInstallationDir);
 		return success;
 	}
+	
+	@Override
+	public boolean startDB(String dbInstallationDir, String localURL) {
+		logger.info("Location " + dbInstallationDir);
+		boolean success = false;
+		try {
+			success = dbManager.startDatabase(dbInstallationDir, localURL);
+		} catch (Exception e) {
+			logger.error(e);
+			return false;
+		}
+		logger.info("Data base started successfully: " + success);
+		return success;
+	}
 
 	@Override
 	public boolean requiresDBInstallation() {
@@ -916,7 +932,6 @@ public class ApplicationStartupControllerImpl implements
 	@Override
 	public boolean synchronizeRemoteProjects(String mainProject,
 			List<String> projecsToSync, String serverurl, String localDBUrl) throws Exception {
-		dbManager.startDatabase(db_installation_dir, localDBUrl);
 		return dbManager.synchronizeRemoteProjects(mainProject, projecsToSync, serverurl, localDBUrl);
 		 
 	}

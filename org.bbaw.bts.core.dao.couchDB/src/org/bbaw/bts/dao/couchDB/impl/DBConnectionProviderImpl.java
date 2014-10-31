@@ -222,6 +222,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	private void initDBHost()
 	{
 		local_db_url = (String) context.get(BTSPluginIDs.PREF_LOCAL_DB_URL);
+		System.out.println("CouchDBDao initDBHost " + local_db_url);
 		if (local_db_url != null && local_db_url.trim().length() > 0)
 		{
 			try
@@ -230,6 +231,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				protocol = url.getProtocol();
 				host = url.getHost();
 				port = new Integer(url.getPort()).toString();
+				System.out.println("CouchDBDao initDBHost from url, protocol " + protocol + ", host " + host + ", port " + port);
 				String userInfo = url.getUserInfo();
 				if (userInfo != null && userInfo.contains(":"))
 				{
@@ -252,6 +254,8 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			port = preferences.get(
 					BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, BTSConstants.DEFAULT_LOCAL_DB_URL_PORT);
 			
+			System.out.println("CouchDBDao initDBHost form separate settings, protocol " + protocol + ", host " + host + ", port " + port);
+
 			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
 			ISecurePreferences auth = secPrefs.node("auth");
 			try {
@@ -261,7 +265,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				logger.error(e);
 			}
 		}
-		System.out.println("CouchDBDao initDBHost " + local_db_url);
+		
 
 	}
 

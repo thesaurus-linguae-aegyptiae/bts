@@ -137,7 +137,7 @@ public class ConnectToServerPage extends WizardPage
 		{
 			connectionOk = startupController.checkDBConnection(connection.getUrl(), connection.getUser(),
 					connection.getPassword());
-		} catch (MalformedURLException e1)
+		} catch (Exception e1)
 		{
 			setErrorMessage("The url you have entered is malformed or invalid.");
 
@@ -148,7 +148,8 @@ public class ConnectToServerPage extends WizardPage
 
 		} else
 		{
-			setDescription("The connection you have entered is OK. You can load data from the server.");
+			setErrorMessage(null);
+			setMessage("The connection you have entered is OK. You can load data from the server.", this.INFORMATION);
 			((InstallationWizard) getWizard()).setRemoteConnection(connection);
 		}
 		return connectionOk;
@@ -241,4 +242,15 @@ public class ConnectToServerPage extends WizardPage
 		return connection.getUrl();
 	}
 
+	@Override
+	public boolean canFlipToNextPage() {
+		if (connection != null)
+		{
+			return super.canFlipToNextPage();
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

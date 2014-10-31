@@ -46,6 +46,7 @@ import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -81,6 +82,7 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.util.EntityUtils;
+import org.apache.lucene.util.IOUtils;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.commons.BTSConstants;
@@ -235,6 +237,8 @@ abstract class CouchDbClientBase {
 		}
 		
 		}
+		//cplutte
+		System.out.println("modelToString " +  string);
 		return string;
 	}
 
@@ -468,7 +472,12 @@ abstract class CouchDbClientBase {
 	 */
 	List<Response> getResponseList(HttpResponse response) throws CouchDbException {
 		InputStream instream = getStream(response);
-		Reader reader = new InputStreamReader(instream);
+		Reader reader = null;
+		try {
+			reader = new InputStreamReader(instream, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 		return getGson().fromJson(reader, new TypeToken<List<Response>>(){}.getType());
 	}
 	
@@ -493,6 +502,12 @@ abstract class CouchDbClientBase {
 	 */
 	InputStream getStream(HttpResponse response) {
 		try { 
+			//FIXME cplutte logging added
+			log.error("##################InputStream getStream. content encoding. " + response.getEntity().getContentEncoding());
+//			HttpEntity entity = response.getEntity();
+//			String responseString = EntityUtils.toString(entity, "UTF-8");
+//			log.error("##################InputStream getStream " + responseString);
+
 			return response.getEntity().getContent();
 		} catch (Exception e) {
 			log.error("Error reading response. " + e.getMessage());
@@ -502,7 +517,13 @@ abstract class CouchDbClientBase {
 	
 	//cplutte branch inserted
 	<T> T deserialize(InputStream instream, Class<T> classType) {
-		Reader reader = new InputStreamReader(instream);
+		Reader reader = null;
+		try {
+			reader = new InputStreamReader(instream, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		//FIXME check dynamically eobject
 		if (classType.isAssignableFrom(EObject.class))
 		{
@@ -510,7 +531,7 @@ abstract class CouchDbClientBase {
 
 		    try {
 
-		        String UTF8 = "utf8";
+		        String UTF8 = "UTF-8"; //"utf8"; changed cplutte
 		        int BUFFER_SIZE = 8192;
 
 		        BufferedReader br = new BufferedReader(new InputStreamReader(instream,
@@ -519,15 +540,12 @@ abstract class CouchDbClientBase {
 		        while ((str = br.readLine()) != null) {
 		            asString += str;
 		        }
+		        
+		        // FIXME cplutte remove logging
+		        log.error("deserialize  " + asString);
 		    } catch (Exception e) {
 
 		    }
-			try {
-				
-				return EmfModelHelper.loadFromString(asString, classType);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		return getGson().fromJson(reader, classType);
 	}

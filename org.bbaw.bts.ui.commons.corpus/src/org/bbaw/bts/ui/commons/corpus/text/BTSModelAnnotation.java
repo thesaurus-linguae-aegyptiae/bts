@@ -4,32 +4,69 @@ import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
+import org.eclipse.xtext.validation.Issue;
 
-public class BTSModelAnnotation extends Annotation
+public class BTSModelAnnotation extends XtextAnnotation
 {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation";
 	
-	private BTSInterTextReference interTextRefernce;
+	private BTSInterTextReference interTextReference;
 	
 	private BTSObject relatingObject;
 	
+	protected String cachedType;
+
+	
 	public BTSModelAnnotation(BTSIdentifiableItem model)
 	{
+		super(TYPE, false, null, new Issue.IssueImpl(), false);
 		this.model = model;
 	}
-
-	public BTSModelAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference)
-	{
-		this.model = model;
-		this.interTextRefernce = interTextReference;
-	}
-	
+//
+//	public BTSModelAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference)
+//	{
+//		this.model = model;
+//		this.interTextReference = interTextReference;
+//	}
+//	
 	public BTSModelAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSObject relatingObject)
 	{
+		super(TYPE, false, null, new Issue.IssueImpl(), false);
 		this.model = model;
-		this.interTextRefernce = interTextReference;
+		this.interTextReference = interTextReference;
 		this.relatingObject = relatingObject;
+	}
+//
+//	public BTSModelAnnotation(String type, boolean isPersistent,
+//			IXtextDocument document, Issue issue, boolean isQuickfixable,
+//			Object modelObject) {
+//		super(type, isPersistent, document, issue, isQuickfixable);
+//		this.modelObject = modelObject;
+//
+//	}
+//
+	public BTSModelAnnotation(String type, boolean isPersistent,
+			IXtextDocument document, Issue issue, boolean isQuickfixable,
+			BTSIdentifiableItem modelObject) {
+		super(type, isPersistent, document, issue, isQuickfixable);
+		this.model = modelObject;
+
+	}
+
+	public BTSModelAnnotation(IXtextDocument document, Issue issue,
+			BTSIdentifiableItem modelObject) {
+		super(TYPE, false, document, issue, false);
+		this.model = modelObject;
+
+	}
+
+	public BTSModelAnnotation(String type, IXtextDocument document, Issue issue,
+			BTSIdentifiableItem modelObject) {
+		super(type, false, document, issue, false);
+		this.model = modelObject;
 	}
 
 	private BTSIdentifiableItem model;
@@ -44,12 +81,12 @@ public class BTSModelAnnotation extends Annotation
 		this.model = model;
 	}
 
-	public BTSInterTextReference getInterTextRefernce() {
-		return interTextRefernce;
+	public BTSInterTextReference getInterTextReference() {
+		return interTextReference;
 	}
 
-	public void setInterTextRefernce(BTSInterTextReference interTextRefernce) {
-		this.interTextRefernce = interTextRefernce;
+	public void setInterTextReference(BTSInterTextReference interTextRefernce) {
+		this.interTextReference = interTextRefernce;
 	}
 
 	public BTSObject getRelatingObject() {
@@ -60,4 +97,16 @@ public class BTSModelAnnotation extends Annotation
 		this.relatingObject = relatingObject;
 	}
 
+	public void setHighlighted(boolean highlighted)
+	{
+		if (highlighted)
+		{
+			if (!getType().endsWith("highlighted")) {
+				cachedType = getType();
+				setType(getType() + ".highlighted");
+			}
+		} else {
+			setType(cachedType);
+		}
+	}
 }

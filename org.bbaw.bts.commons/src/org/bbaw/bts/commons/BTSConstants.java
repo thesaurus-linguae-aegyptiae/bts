@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Properties;
 import java.util.UUID;
@@ -121,8 +122,17 @@ public class BTSConstants
 
 	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS = new String[]{"_id", "eClass", "type", "subtype",
 		"updaters", "readers", "name", "revisionState", "visibility"};
+	
+	public static final SimpleDateFormat ADMIN_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
 	public static final String EOF = "\r\n";
+
+	public static final String REVISION_STRING_SEPARATOR = "@";
+
+	public static final String REVISION_STRING_PATTERN = "(\\d*)" 
+														+ REVISION_STRING_SEPARATOR
+														+ "(\\d+-\\d+-\\d+T\\d+:\\d+:\\d+)" 
+														+ REVISION_STRING_SEPARATOR + "(.+)";
 	private BTSConstants()
 	{
 	}

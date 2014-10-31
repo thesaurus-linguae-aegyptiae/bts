@@ -29,6 +29,8 @@
  */
 package org.bbaw.bts.ui.commons.validator;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -45,12 +47,12 @@ import org.eclipse.core.runtime.IStatus;
 public class StringHttp_s_URLValidator implements IValidator
 {
 
-	/** The Constant regex. */
-	private static final String regex = "(@)?(href=')?(HREF=')?(HREF=\")?(href=\")?(http://)?[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?";
-	
-	/** The Constant patt. */
-	private static final Pattern patt = Pattern.compile(regex);
-	
+//	/** The Constant regex. */
+//	private static final String regex = "(https?://)?[a-zA-Z_0-9\\-]+(\\.\\w[a-zA-Z_0-9\\-]+)+(/[#&\\n\\-=?\\+\\%/\\.\\w]+)?";
+//	
+//	/** The Constant patt. */
+//	private static final Pattern patt = Pattern.compile(regex);
+//	
 	/** The Constant error. */
 	private static final String error = "String ist not a valid URL";
 	
@@ -98,7 +100,6 @@ public class StringHttp_s_URLValidator implements IValidator
 	@Override
 	public IStatus validate(Object value)
 	{
-		System.out.println(regex);
 		if (nullable && value == null)
 		{
 			return ValidationStatus.ok();
@@ -112,12 +113,13 @@ public class StringHttp_s_URLValidator implements IValidator
 			}
 			try
 			{
-				Matcher matcher = patt.matcher(string);
-				if (matcher.find())
-				{
+				try {
+					URL url = new URL(string);
 					return ValidationStatus.ok();
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+					return ValidationStatus.error(errorMessage);
 				}
-				return ValidationStatus.error(errorMessage);
 
 			} catch (RuntimeException e)
 			{

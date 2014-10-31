@@ -219,7 +219,23 @@ public class LoginDialog extends Dialog
 
 			}
 		});
+		passwortText.addKeyListener(new KeyListener() {
 
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.stateMask == SWT.SHIFT 
+						&&e.keyCode == 9) {
+					userText.setFocus();
+				}
+
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		rememberMeButton = new Button(userPasswortComposite, SWT.CHECK);
 		rememberMeButton
 				.setBackground(BTSUIConstants.VIEW_BACKGROUND_DESELECTED_COLOR);
@@ -318,7 +334,7 @@ public class LoginDialog extends Dialog
 				return true;
 			}
 		}
-		return false;
+		return userController.authenticatedUserIsDBAdmin(userName, passWord);
 	}
 
 	private boolean equalsPassword(BTSUser u, String passWord)

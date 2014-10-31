@@ -10,9 +10,11 @@ import java.util.Vector;
 
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.Backend2ClientUpdateListener;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
@@ -21,6 +23,7 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.codehaus.jackson.JsonNode;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -45,6 +48,8 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	protected static final String CHANGES_STYLE = "all_docs";
 
+	private static final String TRUE = "true";
+
 	@Inject
 	private DBConnectionProvider connectionProvider;
 
@@ -56,56 +61,24 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 	
 	@Inject
 	private Logger logger;
+	
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES)
+	private String listen2Updates;
+
 
 	private List<Backend2ClientUpdateListener> listeners = new Vector<Backend2ClientUpdateListener>(1);
 	private String since;
 	private HashMap<String, Changes> changesMap = new HashMap<String, Changes>();
 
-	private void tryRunnable(final String dbCollection)
-	{
-		final CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, dbCollection);
-		CouchDbInfo dbInfo = client.context().info();
-		since = dbInfo.getUpdateSeq();
-		// feed type continuous
-		Runnable runnable = new Runnable()
-		{
-			public void run()
-			{
-				Changes changes = client.changes().includeDocs(true).since(since)
-						.heartBeat(DaoConstants.CHANGES_HEARTBEAT)
-
-						.continuousChanges();
-				changesMap.put(dbCollection, changes);
-				while (changes.hasNext())
-				{
-					// System.out.println("check for changes");
-					ChangesResult.Row feed = changes.next();
-
-					if (feed != null)
-					{
-						String docId = feed.getId();
-						logger.info("Backend2DB listener has changes. Changed object id: " + docId);
-						try
-						{
-							signalUpdate(feed, docId, dbCollection);
-						} catch (Exception e)
-						{
-							logger.error("Backend2DB listener has Exception: ", e);
-						}
-					}
-				}
-			}
-		};
-		new Thread(runnable).start();
-
-	}
 
 	private void signalUpdate(Row feed, String docId, String dbCollection)
 	{
 		logger.info("Backend2DB listener on dbCollection: " + dbCollection + ", Changed object id: " + docId);
 		
 		//FIXME dynamisieren für Import!
-		if (true)
+		if (listen2Updates == null && !TRUE.equals(listen2Updates))
 		{
 			return;
 		}

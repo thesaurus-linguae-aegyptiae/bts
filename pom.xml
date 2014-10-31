@@ -77,7 +77,7 @@
 		<module>org.lightcouch</module>
 		<module>org.bbaw.bts.ui.font.academy</module>
 
-		<!--<module>org.bbaw.bts.app.product</module>-->
+		<module>org.bbaw.bts.app.product</module>
 
 	</modules>
 
@@ -89,6 +89,7 @@
 	</properties>
 
 	<repositories>
+	
 	
 	<repository>
 			<id>bts-mvn-telota-all</id>
@@ -104,12 +105,14 @@
 			<layout>p2</layout>
 		</repository>
 		
+		
+		
 		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
+			<id>bts-mvn-build-repository</id>
+			<name>BTS BUILD Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
 			<layout>p2</layout>
 		</repository>
-		-->
 
 		<repository>
 			<id>e4-tools</id>
@@ -121,11 +124,15 @@
 			<id>emfjson-repository</id>
 			<url>http://repository-ghillairet.forge.cloudbees.com/snapshot</url>
 		</repository>
+-->
 
-		
-
-
+	
 		<!--
+		<repository>
+			<id>kepler</id>
+			<url>${kepler-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
 	<repository>
 		<id>xtext-p2</id>
 		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>

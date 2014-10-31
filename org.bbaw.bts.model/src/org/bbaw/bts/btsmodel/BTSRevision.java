@@ -107,4 +107,12 @@ public interface BTSRevision extends BTSIdentifiableItem {
 	 */
 	void setTimeStamp(Date value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String toRevisionString();
+
 } // BTSRevision

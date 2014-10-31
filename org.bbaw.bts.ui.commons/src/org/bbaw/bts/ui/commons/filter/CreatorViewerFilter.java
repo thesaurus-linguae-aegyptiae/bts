@@ -28,7 +28,7 @@ public class CreatorViewerFilter extends AbstractObjectByListEntryFilter{
 				{
 					BTSUser user = (BTSUser) o;
 					if (!adminObject.getRevisions().isEmpty() && user.get_id() != null 
-							&& user.get_id().equals(adminObject.getRevisions().get(0).getUserId()))
+							&& user.get_id().equals(adminObject.getRevision(0).getUserId()))
 					{
 						return true;
 					}

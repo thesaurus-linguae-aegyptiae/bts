@@ -16,11 +16,16 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
@@ -32,6 +37,7 @@ import org.bbaw.bts.commons.OSValidator;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.db.DBManager;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -62,7 +68,9 @@ import org.lightcouch.Replicator;
 import org.lightcouch.ReplicatorDocument;
 import org.osgi.framework.Bundle;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonSyntaxException;
 
 public class CouchDBManager implements DBManager
 {
@@ -103,8 +111,12 @@ public class CouchDBManager implements DBManager
 	@Inject
 	private Backend2ClientUpdateDao backend2ClientUpdateDao;
 	
+	@Inject
+	private RemoteDBManager remoteDBManager;
+	
 	private Client esClient;
 	private Process process;
+	private Pattern urlAuthorityRemovelPattern = Pattern.compile("(https?:\\/\\/)([^@]+@)(.+)");
 
 	@Override
 	public boolean prepareDBSynchronization(BTSProject project) throws MalformedURLException
@@ -112,18 +124,30 @@ public class CouchDBManager implements DBManager
 		boolean success = true;
 		boolean notificationCollFound = false;
 
+		Map<String, ReplicatorDocument> replicationMap = loadReplicationMap();
+		
+		// make sure that user context roles are set in _replicator collection
+		if (!replicationMap.isEmpty())
+		{
+			checkAndSetSecurityContextOnReplicator();
+		}
+		boolean foundAdmin = false;
+		boolean foundUsers = false;
+
+		boolean anySync = false;
 		for (BTSProjectDBCollection collection : project.getDbCollections())
 		{
-			if (collection.isSynchronized())
+			if (!collection.getCollectionName().equals("local") && collection.isSynchronized())
 			{
-				if (checkAndSetSyncToRemote(collection, project.getDbConnection())
-						&& checkAndSetSyncFromRemote(collection, project.getDbConnection()))
+				if (checkAndSetSyncToRemote(collection.getCollectionName(), project.getDbConnection(), replicationMap)
+						&& checkAndSetSyncFromRemote(collection.getCollectionName(), project.getDbConnection(), replicationMap))
 				{
 					// fine
 				} else
 				{
 					success = false;
 				}
+				anySync = true;
 			} else if (!collection.isSynchronized())
 			{
 				checkAndRemoveReplication(collection, project.getDbConnection());
@@ -133,8 +157,36 @@ public class CouchDBManager implements DBManager
 			{
 				notificationCollFound = true;
 			}
+			if (collection.getCollectionName().equals("admin")) foundAdmin = true;
+			if (collection.getCollectionName().equals("_users")) foundUsers = true;
 
 			//TODO check and set _desing/auth docs with custom function
+		}
+		if (anySync) 
+		{
+			if (!foundAdmin)
+			{
+				if (checkAndSetSyncToRemote("admin", project.getDbConnection(), replicationMap)
+						&& checkAndSetSyncFromRemote("admin", project.getDbConnection(), replicationMap))
+				{
+					// fine
+				} else
+				{
+					success = false;
+				}
+			}
+			
+			if (!foundUsers)
+			{
+				if (checkAndSetSyncToRemote("_users", project.getDbConnection(), replicationMap)
+						&& checkAndSetSyncFromRemote("_users", project.getDbConnection(), replicationMap))
+				{
+					// fine
+				} else
+				{
+					success = false;
+				}
+			}
 		}
 		if (!notificationCollFound)
 		{
@@ -143,12 +195,66 @@ public class CouchDBManager implements DBManager
 			coll.setIndexed(true);
 			coll.setSynchronized(true);
 			project.getDbCollections().add(coll);
-			checkAndSetSyncToRemote(coll, project.getDbConnection());
-			checkAndSetSyncFromRemote(coll, project.getDbConnection());
+			checkAndSetSyncToRemote(coll.getCollectionName(), project.getDbConnection(), replicationMap);
+			checkAndSetSyncFromRemote(coll.getCollectionName(), project.getDbConnection(), replicationMap);
 			checkAndAddAuthentication(coll);
 		}
 
 		return success;
+	}
+
+	private void checkAndSetSecurityContextOnReplicator() {
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.REPLICATOR);
+		JsonObject jsonobj = dbClient.find(JsonObject.class, "_security");
+		String inner = "\"admins\":{\"names\":[\"admin\"],\"roles\":[\"_admin\"]},"
+				+ "\"members\":{\"names\":[],\"roles\":[]}";
+		String json = 
+				"{"
+					+ inner
+				+ "}";
+		
+		// check if sec from db is correct.
+		if (jsonobj != null)
+		{
+			String dbObject = dbClient.getGson().toJson(jsonobj);
+			if (dbObject != null && dbObject.equals(json))
+			{
+				// return if it is correct
+				return;
+			}
+		}
+		
+		// add id
+		 json = 
+					"{"
+					+ "\"_id\":\"_security\","
+					+ inner
+					+ "}";
+			System.out.println(json);
+
+		try {
+			// if not correct, set sec context.
+			jsonobj = dbClient.getGson().fromJson(json, JsonObject.class);
+		System.out.println(json);
+			dbClient.save(jsonobj);
+		} catch (JsonSyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	private Map<String, ReplicatorDocument> loadReplicationMap() throws MalformedURLException {
+		List<ReplicatorDocument> docs = getReplicatorDocuments(DaoConstants.ADMIN);
+		Map<String, ReplicatorDocument> map = new HashMap<String, ReplicatorDocument>();
+		if (docs != null && !docs.isEmpty())
+		{
+			for (ReplicatorDocument doc : docs)
+			{
+				map.put(doc.getId(), doc);
+			}
+		} 
+		return map;
 	}
 
 	private void checkAndAddAuthentication(BTSProjectDBCollection collection)
@@ -256,33 +362,50 @@ public class CouchDBManager implements DBManager
 		}
 	}
 
-	private boolean checkAndSetSyncFromRemote(BTSProjectDBCollection collection, BTSDBConnection dbConnection)
+	private boolean checkAndSetSyncFromRemote(String collectionName, BTSDBConnection dbConnection,
+			Map<String, ReplicatorDocument> replicationMap)
 			throws MalformedURLException
 	{
-		List<ReplicatorDocument> docs = getReplicatorDocuments(collection.getCollectionName());
-		if (docs != null && !docs.isEmpty())
+		ReplicatorDocument doc = replicationMap.get(collectionName + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
+		if (doc != null)
 		{
-			for (ReplicatorDocument doc : docs)
+			if (isValidReplicationFromRemote(doc, dbConnection, collectionName))
 			{
-				if (matchesDBConnectionFromRemote(doc, dbConnection, collection))
-				{
-					return true;
-				}
+				return true;
+			}
+			else
+			{
+				connectionProvider.getDBClient(CouchDbClient.class, collectionName)
+				.replicator().replicatorDocId(doc.getId()).replicatorDocRev(doc.getRevision()).remove();
 			}
 		}
-		String source = processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName());
+		String source = processServerAuthURL(dbConnection.getMasterServer(), collectionName);
 
 		if (source == null)
 		{
 			return false;
 		}
+		boolean createTarget = false;
 		try {
-			Replicator replicator2 = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
+			createTarget = checkUserIsDBAdmin(username, password);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		try {
+			Replicator replicator2 = connectionProvider.getDBClient(CouchDbClient.class,collectionName)
 					.replicator();
-			replicator2.target(collection.getCollectionName());
+			replicator2.target(collectionName);
 			replicator2.source(source);
 			replicator2.continuous(true);
-			replicator2.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
+			replicator2.createTarget(createTarget);
+			replicator2.userCtxName(username);
+			replicator2.userCtxRoles("_admin");
+			String docId = collectionName + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE;
+			if (docId.startsWith("_"))
+			{
+				docId = docId.substring(1);
+			}
+			replicator2.replicatorDocId(docId);
 			replicator2.save(); // triggers a replication
 		} catch (Exception e) {
 			logger.error(e);
@@ -333,48 +456,70 @@ public class CouchDBManager implements DBManager
 		{ 
 			su += ":" + server.getPort();
 		}
-		su += "/" + server.getPath();
-		su += "/" + collectionName;
+		if ( server.getPath() != null &&  server.getPath().length() > 0)
+		{
+			if (!server.getPath().startsWith("/"))
+			{
+				su += "/";
+			}
+			su += server.getPath();
+		}
+		if (!su.endsWith("/"))
+		{
+			su += "/";
+		}
+		
+		su +=  collectionName;
 		logger.info("Masterserver replicator " + su);
 		return su;
 	}
 
-	private boolean checkAndSetSyncToRemote(BTSProjectDBCollection collection, BTSDBConnection dbConnection)
+	private boolean checkAndSetSyncToRemote(String collectionName, BTSDBConnection dbConnection, Map<String, ReplicatorDocument> replicationMap)
 			throws MalformedURLException
 	{
-		List<ReplicatorDocument> docs = getReplicatorDocuments(collection.getCollectionName());
-		try
+		String docId = collectionName + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE;
+		if (docId.startsWith("_"))
 		{
-			docs = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName()).replicator()
-					.findAll();
-		} catch (NoDocumentException e)
-		{
-
+			docId = docId.substring(1);
 		}
-		if (docs != null && !docs.isEmpty())
+		ReplicatorDocument doc = replicationMap.get(docId);
+		if (doc != null)
 		{
-			for (ReplicatorDocument doc : docs)
+			if (isValidReplicationToRemote(doc, dbConnection, collectionName))
 			{
-				if (matchesDBConnectionToRemote(doc, dbConnection, collection))
-				{
-					return true;
-				}
+				return true;
+			}
+			else
+			{
+				connectionProvider.getDBClient(CouchDbClient.class, collectionName)
+				.replicator().replicatorDocId(doc.getId()).replicatorDocRev(doc.getRevision()).remove();
 			}
 		}
-		String target = processServerAuthURL(dbConnection.getMasterServer(), collection.getCollectionName());
+		String target = processServerAuthURL(dbConnection.getMasterServer(), collectionName);
 
 		if (target == null)
 		{
 			return false;
 		}
+		boolean createTarget = false;
 		try {
-			Replicator replicator = connectionProvider.getDBClient(CouchDbClient.class, collection.getCollectionName())
+			createTarget = remoteDBManager.checkUserIsDBAdmin(username, password);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		try {
+			Replicator replicator = connectionProvider.getDBClient(CouchDbClient.class, collectionName)
 					.replicator();
-			replicator.source(collection.getCollectionName());
+			replicator.source(collectionName);
 			replicator.target(target);
 			replicator.continuous(true);
-			replicator.createTarget(true);
-			replicator.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
+			replicator.createTarget(createTarget);
+			
+			replicator.userCtxName(username);
+			replicator.userCtxRoles("_admin");
+			replicator.replicatorDocId(docId);
 			replicator.save(); // triggers a replication
 		} catch (Exception e) {
 			logger.error(e);
@@ -405,24 +550,52 @@ public class CouchDBManager implements DBManager
 		return null;
 	}
 
-	private boolean matchesDBConnectionToRemote(ReplicatorDocument doc, BTSDBConnection dbConnection,
-			BTSProjectDBCollection collection)
+	private boolean isValidReplicationToRemote(ReplicatorDocument doc, BTSDBConnection dbConnection,
+			String collectionName)
 	{
-		if (doc.getTarget().equals(dbConnection.getMasterServer() + "/" + collection.getCollectionName()))
+		String target = doc.getTarget();
+		if (target.contains("@"))
 		{
-			return true;
+			Matcher m = urlAuthorityRemovelPattern.matcher(target);
+			target = m.replaceAll("$1$3");
 		}
-		return false;
+		String url = dbConnection.getMasterServer();
+		url = url.replaceAll("\\/", "\\\\/");
+		Pattern pattern = Pattern.compile(url + "\\/*" + collectionName);
+		Matcher m = pattern.matcher(target);
+		if (!m.matches())
+		{
+			return false;
+		}
+		if (doc.getReplicationState() != null && doc.getReplicationState().equals("error"))
+		{
+			return false;
+		}
+		return true;
 	}
 
-	private boolean matchesDBConnectionFromRemote(ReplicatorDocument doc, BTSDBConnection dbConnection,
-			BTSProjectDBCollection collection)
+	private boolean isValidReplicationFromRemote(ReplicatorDocument doc, BTSDBConnection dbConnection,
+			String collectionName)
 	{
-		if (doc.getSource().equals(dbConnection.getMasterServer() + "/" + collection.getCollectionName()))
+		String source = doc.getSource();
+		if (source.contains("@"))
 		{
-			return true;
+			Matcher m = urlAuthorityRemovelPattern.matcher(source);
+			source = m.replaceAll("$1$3");
 		}
-		return false;
+		String url = dbConnection.getMasterServer();
+		url = url.replaceAll("\\/", "\\\\/");
+		Pattern pattern = Pattern.compile(url + "\\/*" + collectionName);
+		Matcher m = pattern.matcher(source);
+		if (!m.matches())
+		{
+			return false;
+		}
+		if (doc.getReplicationState() != null && doc.getReplicationState().equals("error"))
+		{
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -750,14 +923,7 @@ public class CouchDBManager implements DBManager
 	@Override
 	public boolean checkConnection(String urlString, String username, String password) throws MalformedURLException
 	{
-		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
-		ISecurePreferences auth = secPrefs.node("auth");
-		try {
-			username = auth.get("username", null);
-			password = auth.get("password", null);
-		} catch (StorageException e) {
-			logger.error(e);
-		}
+
 		URL url = new URL(urlString);
 		try
 		{
@@ -768,7 +934,7 @@ public class CouchDBManager implements DBManager
 			CouchDbClient dbClient = new CouchDbClient(properties);
 		} catch (Exception e)
 		{
-			logger.warn("malformed url: "+ urlString, e);
+			logger.warn("Malformed url or invalid credentials: "+ urlString + ", Exception message: " + e.getMessage(), e);
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -787,6 +953,15 @@ public class CouchDBManager implements DBManager
 
 	@Override
 	public boolean startDatabase(String dbInsallationDir, String localDBUrl) throws IOException, InterruptedException {
+		
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+		ISecurePreferences auth = secPrefs.node("auth");
+		try {
+			username = auth.get("username", null);
+			password = auth.get("password", null);
+		} catch (StorageException e) {
+			logger.error(e);
+		}
 		try {
 			if (localDBUrl != null && !"".equals(localDBUrl)) {
 				if (checkConnection(localDBUrl, username, password)) {
@@ -924,67 +1099,97 @@ public class CouchDBManager implements DBManager
 			List<String> projecsToSync, String serverurl, String localDBUrl) throws Exception {
 		
 		boolean required = true;
+		boolean success = true;
+		connectionProvider.setLocalDBUrl(new URL(localDBUrl));
 
-		// replication from remote
-		List<ReplicatorDocument> docs;
-		try {
-			docs = getStartupReplicatorDocuments("admin", localDBUrl);
-			if (docs != null && !docs.isEmpty()) {
-				for (ReplicatorDocument doc : docs) {
-					if (doc.getSource().equals(serverurl + "/" + "admin")) {
-						required = false;
-					}
-				}
-			}
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		Map<String, ReplicatorDocument> replicationMap = loadReplicationMap();
+		
+		// make sure that user context roles are set in _replicator collection
+		if (!replicationMap.isEmpty())
+		{
+			checkAndSetSecurityContextOnReplicator();
+		}
+		BTSDBConnection dbConnection = BtsmodelFactory.eINSTANCE.createBTSDBConnection();
+		
+		dbConnection.setMasterServer(serverurl);
+		if (checkAndSetSyncToRemote("admin", dbConnection, replicationMap)
+				&& checkAndSetSyncFromRemote("admin", dbConnection, replicationMap))
+		{
+			// fine
+		} else
+		{
+			success = false;
 		}
 		
-
-		if (required) {
-			Replicator replicator2 = connectionProvider.getDBClient(
-					CouchDbClient.class, localDBUrl, "admin").replicator();
-			replicator2.target("admin");
-			replicator2.source(serverurl + "/" + "admin");
-			replicator2.continuous(true);
-			replicator2.replicatorDocId("admin"
-					+ DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
-			replicator2.save(); // triggers a replication
+		// sync users
+		if (checkAndSetSyncToRemote("_users", dbConnection, replicationMap)
+				&& checkAndSetSyncFromRemote("_users", dbConnection, replicationMap))
+		{
+			// fine
+		} else
+		{
+			success = false;
 		}
-
-		// replication to remote
-		required = true;
-		try {
-			docs = getStartupReplicatorDocuments("admin", localDBUrl);
-
-			docs = connectionProvider.getDBClient(CouchDbClient.class, localDBUrl, "admin")
-					.replicator().findAll();
-			if (docs != null && !docs.isEmpty()) {
-				for (ReplicatorDocument doc : docs) {
-					if (doc.getTarget().equals(serverurl + "/" + "admin")) {
-						required = false;
-					}
-				}
-			}
-		} catch (NoDocumentException e) {
-
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		if (required) {
-			Replicator replicator = connectionProvider.getDBClient(
-					CouchDbClient.class, localDBUrl, "admin").replicator();
-			replicator.source("admin");
-			replicator.target(serverurl + "/" + "admin");
-			replicator.continuous(true);
-			replicator.createTarget(true);
-			replicator.replicatorDocId("admin"
-					+ DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
-			replicator.save(); // triggers a replication
-		}
+//		try {
+//			docs = getStartupReplicatorDocuments("admin", localDBUrl);
+//			if (docs != null && !docs.isEmpty()) {
+//				for (ReplicatorDocument doc : docs) {
+//					if (doc.getSource().equals(serverurl + "/" + "admin")) {
+//						required = false;
+//					}
+//				}
+//			}
+//		} catch (MalformedURLException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		
+//		if (required) {
+//			ReplicatorDocument doc = connectionProvider.getDBClient(
+//					CouchDbClient.class, localDBUrl, "admin").replicator().replicatorDocId("admin"
+//					+ DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE).find();
+//			Replicator replicator2 = connectionProvider.getDBClient(
+//					CouchDbClient.class, localDBUrl, "admin").replicator();
+//			replicator2.target("admin");
+//			replicator2.source(serverurl + "/" + "admin");
+//			replicator2.continuous(true);
+//			replicator2.replicatorDocId("admin"
+//					+ DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
+//			replicator2.save(); // triggers a replication
+//		}
+//
+//		// replication to remote
+//		required = true;
+//		try {
+//			docs = getStartupReplicatorDocuments("admin", localDBUrl);
+//
+//			docs = connectionProvider.getDBClient(CouchDbClient.class, localDBUrl, "admin")
+//					.replicator().findAll();
+//			if (docs != null && !docs.isEmpty()) {
+//				for (ReplicatorDocument doc : docs) {
+//					if (doc.getTarget().equals(serverurl + "/" + "admin")) {
+//						required = false;
+//					}
+//				}
+//			}
+//		} catch (NoDocumentException e) {
+//
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		if (required) {
+//			Replicator replicator = connectionProvider.getDBClient(
+//					CouchDbClient.class, localDBUrl, "admin").replicator();
+//			replicator.source("admin");
+//			replicator.target(serverurl + "/" + "admin");
+//			replicator.continuous(true);
+//			replicator.createTarget(true);
+//			replicator.replicatorDocId("admin"
+//					+ DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
+//			replicator.save(); // triggers a replication
+//		}
 		Job sleeper = new Job("sleeper") {
 
 			@Override
@@ -1004,8 +1209,7 @@ public class CouchDBManager implements DBManager
 
 		System.out.println("slept");
 
-
-		return true;
+		return success;
 	}
 
 	private List<ReplicatorDocument> getStartupReplicatorDocuments(
@@ -1104,10 +1308,12 @@ public class CouchDBManager implements DBManager
 		try {
 			dbClient = connectionProvider.getDBClient(CouchDbClient.class, dbCollectionName);
 			dbClient.context().createDB(dbCollectionName);
+			Map<String, ReplicatorDocument> replicationMap = loadReplicationMap();
+
 			if (synchronize && project != null && collection != null)
 			{
-				if (checkAndSetSyncToRemote(collection, project.getDbConnection())
-						&& checkAndSetSyncFromRemote(collection, project.getDbConnection()))
+				if (checkAndSetSyncToRemote(collection.getCollectionName(), project.getDbConnection(), replicationMap)
+						&& checkAndSetSyncFromRemote(collection.getCollectionName(), project.getDbConnection(), replicationMap))
 				{
 				}
 				else 
@@ -1151,5 +1357,20 @@ public class CouchDBManager implements DBManager
 			exists = false;
 		}
 		return exists;
+	}
+
+	@Override
+	public boolean optimizationRequired() {
+		// check if storage is very large
+		
+		
+		// check for all db collection if compact is recommended
+		return false;
+	}
+
+	@Override
+	public boolean optimize() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -62,10 +62,12 @@ public interface ApplicationStartupController
 	boolean checkDBConnection(String url, String user, String password) throws MalformedURLException;
 
 	/** Loads projects form remote database.
+	 * @param password 
+	 * @param username 
 	 * @return list of projects from remote database
 	 * @throws MalformedURLException exception if url not valid.
 	 */
-	List<BTSProject> loadRemoteProjects() throws MalformedURLException;
+	List<BTSProject> loadRemoteProjects(String username, String password) throws MalformedURLException;
 
 	/** Sets the remote database connection 
 	 * @param url url of database
@@ -110,4 +112,6 @@ public interface ApplicationStartupController
 	 * @throws Exception if error occurs.
 	 */
 	boolean synchronizeRemoteProjects(String mainProject, List<String> projecsToSync, String serverurl, String localDBUrl) throws Exception;
+
+	boolean startDB(String dbInstallationDir, String localURL);
 }

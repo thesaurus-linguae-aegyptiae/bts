@@ -179,4 +179,16 @@ public interface DBManager
 	 */
 	boolean dbCollectionExists(String dbCollectionName);
 
+	
+	/** Checks whether optimization of Cache, logging or so is required.
+	 * @return true if optimization is required or recommended
+	 */
+	boolean optimizationRequired();
+
+	/**
+	 * optimize storage, cache and logging.
+	 * @return true if successful
+	 */
+	boolean optimize();
+
 }

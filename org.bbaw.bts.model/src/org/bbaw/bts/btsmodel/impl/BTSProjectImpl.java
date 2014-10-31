@@ -3,6 +3,7 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
+
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
@@ -358,4 +359,5 @@ public class BTSProjectImpl extends BTSObjectImpl implements BTSProject
 		result.append(')');
 		return result.toString();
 	}
+
 } //BTSProjectImpl

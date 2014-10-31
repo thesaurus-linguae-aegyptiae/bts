@@ -200,7 +200,7 @@ public class InstallationWizard extends Wizard
 				if (!startupController.installDB(location, port, localAdminName, localAdminP))
 				{
 					success = false;
-					logger.info("Installation wizard, startupController.installDB suceccessful: " + success);
+					logger.error("Installation wizard, startupController.installDB suceccessful: " + success);
 
 				}
 				// interact with user
@@ -213,10 +213,29 @@ public class InstallationWizard extends Wizard
 				        finishPage.setProgessWork(25);
 				      }
 				    });
+				
+				// start db
+				boolean started = startupController.startDB(location, localUrl);
+				if (started) System.out.println("started " + started);
+				if (!started)
+				{
+					System.out.println("not started " + started);
+					success = false;
+					logger.error("Installation wizard, startupController.installDB suceccessful: " + success);
+				}
+
+//				if (started == false);
+//				{
+//					success = false;
+//					logger.error("Installation wizard, startupController.installDB suceccessful: " + success);
+//
+//				}
+				
 				// init or load projects
 				if (welcomePage.isConnectToServer())
 				{
 					try {
+						
 						if (!startupController.synchronizeRemoteProjects(mainProject, 
 								projectPage.getActiveProjectSelectionsAsStringList(), serverURL, localUrl))
 						{
@@ -337,6 +356,22 @@ public class InstallationWizard extends Wizard
 		else if (page instanceof DBInstallationSettingsPage)
 		{
 			
+		}
+		else if (page instanceof ConnectToServerPage)
+		{
+			if (getRemoteConnection() != null)
+			{
+				return projectPage;
+			} else
+			{
+
+				return connectServerPage;
+
+			}
+		}
+		else if (page instanceof SelectProjectsPage)
+		{
+			return finishPage;
 		}
 		return super.getNextPage(page);
 	}

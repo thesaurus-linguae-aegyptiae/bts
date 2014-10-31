@@ -20,7 +20,10 @@ public class GeneralBTSObjectServiceContextFunction extends ContextFunction
 		{
 			ctx = application.getContext();
 		}
-
+		if (ctx == null)
+		{
+			ctx = context;
+		}
 		GeneralBTSObjectService service = ContextInjectionFactory.make(GeneralBTSObjectServiceImpl.class, ctx);
 		ctx.set(GeneralBTSObjectService.class, service);
 

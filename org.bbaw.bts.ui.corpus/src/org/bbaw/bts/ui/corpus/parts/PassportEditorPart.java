@@ -167,7 +167,7 @@ public class PassportEditorPart {
 	@Inject
 	@Optional
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
-	public boolean userMayEdit;
+	private Boolean userMayEdit;
 	
 	
 	@Inject
@@ -780,7 +780,7 @@ public class PassportEditorPart {
 				if (historyTable_Admin.getItemCount() == 0 && corpusObject != null
 						&& !corpusObject.getRevisions().isEmpty()) {
 					for (int i = corpusObject.getRevisions().size() - 1; i >= 0; i--) {
-						BTSRevision rev = corpusObject.getRevisions().get(i);
+						BTSRevision rev = corpusObject.getRevision(i);
 						TableItem item1 = new TableItem(historyTable_Admin,
 								SWT.NONE);
 						item1.setText(new String[] {
@@ -1362,7 +1362,7 @@ public class PassportEditorPart {
 
 		// review and creator
 		if (!object.getRevisions().isEmpty()) {
-		BTSRevision first_revision = object.getRevisions().get(0);
+		BTSRevision first_revision = object.getRevision(0);
 			if (first_revision != null) 
 			{
 				txtAuthortextadmin.setText(userController

@@ -6,11 +6,9 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
@@ -274,7 +272,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 		newChildDescriptors.add
 			(createChildParameter
 				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
-				 BtsmodelFactory.eINSTANCE.createBTSRevision()));
+				 ""));
 	}
 	@Override
 	protected Object overlayImage(Object object, Object image) {

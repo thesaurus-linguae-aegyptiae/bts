@@ -6,11 +6,23 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="This object is the basic object with administrativ data allowing to track revisions,&#xD;&#xA;status, revisionState and visibility."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="revisions" upperBound="-1"
-        eType="#//BTSRevision" containment="true"/>
+    <eOperations name="addRevision">
+      <eParameters name="revision" eType="#//BTSRevision"/>
+    </eOperations>
+    <eOperations name="addRevision">
+      <eParameters name="rev" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+      <eParameters name="userId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="getRevision" eType="#//BTSRevision">
+      <eParameters name="revisionIndex" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getLastRevision" eType="#//BTSRevision"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="state" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="revisionState" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="revisions" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSObject" abstract="true" eSuperTypes="#//AdministrativDataObject #//BTSDBBaseObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel" references="#//BTSObject">
@@ -171,6 +183,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="BTSRevision-objects hold information about user revisions.&#xD;&#xA;This includes user id, timestamp when changes were persisted,&#xD;&#xA;revision number."/>
     </eAnnotations>
+    <eOperations name="toRevisionString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="userId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeStamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>

@@ -305,4 +305,6 @@ public class BTSCoreConstants
 
 	public static final String IDENTIFIER = "Identifier";
 
+	public static final String LISTEN_TO_BACKEND_UPDATES = "listen2Updates";
+
 }

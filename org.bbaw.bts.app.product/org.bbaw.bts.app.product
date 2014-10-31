@@ -1,29 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="org.bbaw.bts.app.product" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.2.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="0.0.2.qualifier" useFeatures="true" includeLaunchers="true">
+
 
    <configIni use="default">
    </configIni>
 
    <launcherArgs>
-      <vmArgs>-Dosgi.requiredJavaVersion=1.6 -Xms40m -Xmx256m -XX:MaxPermSize=128M
+      <vmArgs>-Dosgi.requiredJavaVersion=1.6 -Xms140m -Xmx512m -XX:MaxPermSize=256M
       </vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts
       </vmArgsMac>
    </launcherArgs>
 
-   <windowImages/>
+   <windowImages i16="/org.bbaw.bts.app.product/icons/bts16.bmp" i32="/org.bbaw.bts.app.product/icons/bts32.bmp" i48="/org.bbaw.bts.app.product/icons/bts48.bmp" i64="/org.bbaw.bts.app.product/icons/bts64.bmp" i128="/org.bbaw.bts.app.product/icons/bts128.bmp" i256="/org.bbaw.bts.app.product/icons/bts256.bmp"/>
+
 
    <launcher name="BTS">
+      <macosx icon="/icons/bts.icns"/>
       <solaris/>
       <win useIco="false">
-         <bmp/>
+         <ico path="/icons/bts.ico"/>
+         <bmp
+            winSmallHigh="/org.bbaw.bts.app.product/icons/bts16.bmp"
+            winSmallLow="/org.bbaw.bts.app.product/icons/bts16-8.bmp"
+            winMediumHigh="/org.bbaw.bts.app.product/icons/bts32.bmp"
+            winMediumLow="/org.bbaw.bts.app.product/icons/bts32-8.bmp"
+            winLargeHigh="/org.bbaw.bts.app.product/icons/bts48.bmp"
+            winLargeLow="/org.bbaw.bts.app.product/icons/bts48-8.bmp"
+            winExtraLargeHigh="/org.bbaw.bts.app.product/icons/bts256.bmp"/>
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -117,21 +130,9 @@
    </plugins>
 
    <features>
-      <feature id="org.eclipse.emf.ecore"/>
-      <feature id="org.eclipse.emf.common"/>
-      <feature id="org.eclipse.e4.rcp"/>
-      <feature id="org.bbaw.bts.app.feature" version="0.0.2.201410221437"/>
-      <feature id="org.eclipse.equinox.p2.core.feature" version="1.3.0.v20140523-0116"/>
-      <feature id="org.eclipse.ecf.filetransfer.httpclient4.feature"/>
-      <feature id="org.eclipse.ecf.filetransfer.httpclient4.ssl.feature"/>
-      <feature id="org.eclipse.equinox.p2.extras.feature"/>
+      <feature id="org.bbaw.bts.app.feature"/>
       <feature id="org.bbaw.bts.e4.p2.feature"/>
-      <feature id="org.eclipse.ecf.core.feature"/>
-      <feature id="org.eclipse.equinox.p2.discovery.feature"/>
-      <feature id="org.eclipse.ecf.filetransfer.feature"/>
-      <feature id="org.eclipse.ecf.core.ssl.feature"/>
-      <feature id="org.eclipse.ecf.filetransfer.ssl.feature"/>
-      <feature id="org.bbaw.bts.corpus.egy.feature" version="0.0.2.201410221437"/>
+      <feature id="org.bbaw.bts.corpus.egy.feature"/>
    </features>
 
    <configurations>

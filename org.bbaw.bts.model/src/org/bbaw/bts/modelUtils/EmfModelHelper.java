@@ -327,29 +327,6 @@ public class EmfModelHelper
 		return false;
 	}
 
-	public static <T> T loadFromString(String inputString, Class<T> classType)
-	{
-//		System.out.println("##################### " + inputString);
-		//FIXME
-//		JSONLoad loader;
-//		try {
-//			loader = new JSONLoad(new ByteArrayInputStream(inputString.getBytes("UTF-8")),
-//					new HashMap<Object, Object>());
-//			Collection<EObject> ts =  loader.loadObjects(null);
-//			if (!ts.isEmpty())
-//			{
-//				EObject o = ts.iterator().next();
-//				return (T) o;
-//			}
-//		} catch (UnsupportedEncodingException e) {
-////System.out.println("##################### " + inputString);
-////e.printStackTrace();
-//		}
-		
-		return null;
-
-		
-	}
 	
 	 public static <T> T load(final InputStream inputStream, final Class<T> clazz) {
 	        try {

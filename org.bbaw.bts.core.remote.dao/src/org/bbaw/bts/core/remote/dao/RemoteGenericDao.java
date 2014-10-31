@@ -25,6 +25,9 @@ public interface RemoteGenericDao<E extends BTSDBBaseObject, K>
 	E reload(K key, String path);
 
 	List<E> list(String path);
+	
+	List<E> list(String path, String password, String admin);
+
 
 	List<DBRevision> listAvailableRevisions(K key, String path);
 

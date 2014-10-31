@@ -453,12 +453,15 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider
 	{
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSObject.class)) {
+		int featureID = notification.getFeatureID(BTSObject.class);
+		switch (featureID) {
 			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
 			case BtsmodelPackage.BTS_OBJECT__NAME:
+//			case BtsmodelPackage.BTSDB_BASE_OBJECT__LOCKED:
 			case BtsmodelPackage.BTS_OBJECT__TYPE:
 			case BtsmodelPackage.BTS_OBJECT__SUBTYPE:
 			case BtsmodelPackage.BTS_OBJECT__CODE:
+			case 8: // set locked
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE:

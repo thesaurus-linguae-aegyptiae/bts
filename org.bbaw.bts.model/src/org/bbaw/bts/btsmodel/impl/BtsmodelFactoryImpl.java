@@ -2,7 +2,13 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.text.ParseException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.bbaw.bts.btsmodel.*;
 import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.common.util.EList;
@@ -13,6 +19,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+
 /**
  * <!-- begin-user-doc --> An implementation of the model <b>Factory</b>. <!--
  * end-user-doc -->
@@ -20,6 +27,9 @@ import org.eclipse.emf.ecore.plugin.EcorePlugin;
  */
 public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 {
+	
+	private Pattern revisionPattern = Pattern.compile(BTSConstants.REVISION_STRING_PATTERN);
+
 	/**
 	 * Creates the default factory implementation.
 	 * <!-- begin-user-doc --> <!--
@@ -446,6 +456,43 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public static BtsmodelPackage getPackage()
 	{
 		return BtsmodelPackage.eINSTANCE;
+	}
+
+	@Override
+	public BTSRevision createBTSRevision(int rev, Date timestamp,
+			String userId) {
+		BTSRevision revision = createBTSRevision();
+		revision.setRef(rev);
+		revision.setTimeStamp(timestamp);
+		revision.setUserId(userId);
+		return null;
+	}
+
+	@Override
+	public BTSRevision createBTSRevision(String revisionString) {
+		Matcher m = revisionPattern.matcher(revisionString);
+		if (!m.matches())
+		{
+			return null;
+		}
+		String r = m.group(1);
+		String time = m.group(2);
+		String userId = m.group(3);
+		int rev = 0;
+		try {
+			rev = Integer.parseInt(r);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
+		Date timeStamp = null;
+		try {
+			timeStamp = BTSConstants.ADMIN_DATE_FORMAT.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			timeStamp = Calendar.getInstance().getTime();
+		}
+		
+		return createBTSRevision(rev, timeStamp, userId);
 	}
 
 	

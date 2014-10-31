@@ -135,4 +135,9 @@ public class BTSUserControllerImpl implements BTSUserController {
 		projectService.removeUserUserGroupFromAuthorization(object, projects);
 		return true;
 	}
+
+	@Override
+	public boolean authenticatedUserIsDBAdmin(String userName, String passWord) {
+		return userService.authenticatedUserIsDBAdmin(userName, passWord);
+	}
 }

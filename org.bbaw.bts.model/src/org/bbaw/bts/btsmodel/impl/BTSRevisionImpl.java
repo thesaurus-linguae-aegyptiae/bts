@@ -2,10 +2,14 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
+
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
@@ -170,6 +174,19 @@ public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevis
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public String toRevisionString() {
+		String rev = "" + getRef() + BTSConstants.REVISION_STRING_SEPARATOR + 
+				BTSConstants.ADMIN_DATE_FORMAT.format(getTimeStamp()) 
+				+ BTSConstants.REVISION_STRING_SEPARATOR
+				+ getUserId();
+		return rev;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -243,6 +260,20 @@ public class BTSRevisionImpl extends BTSIdentifiableItemImpl implements BTSRevis
 				return TIME_STAMP_EDEFAULT == null ? timeStamp != null : !TIME_STAMP_EDEFAULT.equals(timeStamp);
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsmodelPackage.BTS_REVISION___TO_REVISION_STRING:
+				return toRevisionString();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -30,6 +30,8 @@ implements BTSAnnotationService, BTSObjectSearchService
 		BTSAnnotation anno = BtsCorpusModelFactory.eINSTANCE.createBTSAnnotation();
 		super.setId(anno);
 		super.setRevision(anno);
+		anno.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+
 		anno.setCorpusPrefix(main_corpus_key);
 		return anno;
 	}

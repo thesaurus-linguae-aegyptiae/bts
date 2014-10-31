@@ -136,7 +136,8 @@ public class SelectProjectsPage extends WizardPage
 		}
 		try
 		{
-			projects = startupController.loadRemoteProjects();
+			projects = startupController.loadRemoteProjects(((InstallationWizard) getWizard()).getRemoteConnection().getUser(),
+					((InstallationWizard) getWizard()).getRemoteConnection().getPassword());
 			comboViewer.setInput(projects);
 			List<BTSProject> availableProjects = new Vector<BTSProject>(1);
 

@@ -49,7 +49,7 @@ public class UserManagerControllerImpl implements UserManagerController
 			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName)
 	{
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.termQuery("groupIds", group.get_id()));
+		query.setQueryBuilder(QueryBuilders.matchQuery("groupIds", group.get_id()));
 		query.setQueryId("groupIds-" + group.get_id());
 		System.out.println(query.getQueryId());
 		if (queryResultMap != null)

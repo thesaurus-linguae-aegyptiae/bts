@@ -20,6 +20,7 @@ Bundle-ActivationPolicy: lazy
 Import-Package: com.google.gson;version="2.1.0",
  javax.inject,
  org.bbaw.bts.commons,
+ org.bbaw.bts.core.remote.dao,
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.core.runtime.jobs,
  org.eclipse.e4.core.services.log,

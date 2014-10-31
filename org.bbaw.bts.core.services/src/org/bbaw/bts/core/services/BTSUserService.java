@@ -95,5 +95,7 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 
 	List<BTSObject> getUserOrphans(List<BTSFilter> btsFilters, List<BTSObject> rootEntries);
 
+	boolean authenticatedUserIsDBAdmin(String userName, String passWord);
+
 
 }

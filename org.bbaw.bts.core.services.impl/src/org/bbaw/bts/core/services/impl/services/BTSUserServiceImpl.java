@@ -21,6 +21,7 @@ import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
@@ -42,6 +43,9 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 
 	@Inject
 	private Logger logger;
+	
+	@Inject
+	private DBManager dbManager;
 
 	@Override
 	public BTSUser createNew()
@@ -336,5 +340,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 			return true;
 		}
 		return true;
+	}
+
+	@Override
+	public boolean authenticatedUserIsDBAdmin(String userName, String password) {
+		return dbManager.checkUserIsDBAdmin(userName, password);
 	}
 }

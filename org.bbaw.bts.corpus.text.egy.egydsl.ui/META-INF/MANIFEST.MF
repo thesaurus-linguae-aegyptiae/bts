@@ -16,8 +16,12 @@ Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl;visibility:=reexport,
  org.eclipse.xtext.common.types.ui,
  org.eclipse.xtext.ui.codetemplates.ui,
  org.eclipse.compare,
- org.bbaw.bts.model.corpus
+ org.bbaw.bts.model.corpus,
+ org.bbaw.bts.core.corpus.controller,
+ org.bbaw.bts.ui.commons.corpus,
+ com.google.inject
 Import-Package: org.apache.log4j,
+ org.eclipse.e4.core.contexts,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6,
  JavaSE-1.7

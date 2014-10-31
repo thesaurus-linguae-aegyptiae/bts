@@ -2,6 +2,8 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import java.util.Date;
+
 import org.eclipse.emf.ecore.EFactory;
 
 /**
@@ -94,6 +96,15 @@ public interface BtsmodelFactory extends EFactory {
 	 */
 	BTSRevision createBTSRevision();
 
+	
+	/**
+	 * Returns a new object of class '<em>BTS Revision</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Revision</em>'.
+	 * @generatedNOT
+	 */
+	BTSRevision createBTSRevision(int rev, Date timestamp, String userId);
 	/**
 	 * Returns a new object of class '<em>BTS Timespan</em>'.
 	 * <!-- begin-user-doc -->
@@ -228,5 +239,7 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	BtsmodelPackage getBtsmodelPackage();
+
+	BTSRevision createBTSRevision(String revisionString);
 
 } //BtsmodelFactory
