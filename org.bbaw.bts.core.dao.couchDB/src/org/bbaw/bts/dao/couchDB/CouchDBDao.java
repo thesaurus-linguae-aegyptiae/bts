@@ -933,12 +933,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(false).query();
 		}
-		
-		//FIXME comment logging out!
-		for (String s : allDocs)
-		{
-			logger.info("CouchDBDao loadDocsFromView Viewid: " + viewId + " objectString: "+  s);
-		}
 		return allDocs;
 	}
 	
@@ -948,9 +942,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		for (String jo : allDocs)
 		{
-			//FIXME suppress print to console
-			System.out.println("CouchDBDao loadObjectsFromStrings " + jo);
-			
 				try {
 					String id = extractIdFromObjectString(jo);
 					URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + id);
@@ -965,7 +956,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 						results.add(o);
 					}
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			

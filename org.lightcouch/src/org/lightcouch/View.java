@@ -682,8 +682,6 @@ public class View
 	 */
 	public List<String> query()
 	{
-		// FIXME remove logging cplutte
-		log.error("View query id: " + this.key);
 		InputStream instream = null;
 		try
 		{
@@ -696,12 +694,8 @@ public class View
 				if (Boolean.TRUE.equals(this.includeDocs))
 				{
 					elem = jsonElem.getAsJsonObject().get("doc");
-					// FIXME remove logging cplutte
-					log.error("View query elem: " +elem);
 				}
 				String id = elem.toString();
-				// FIXME remove logging cplutte
-				log.error("View query id: " +id);
 				list.add(id);
 			}
 			return list;

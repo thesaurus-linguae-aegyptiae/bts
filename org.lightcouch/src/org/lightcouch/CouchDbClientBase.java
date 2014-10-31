@@ -237,8 +237,6 @@ abstract class CouchDbClientBase {
 		}
 		
 		}
-		//cplutte
-		System.out.println("modelToString " +  string);
 		return string;
 	}
 
@@ -502,12 +500,6 @@ abstract class CouchDbClientBase {
 	 */
 	InputStream getStream(HttpResponse response) {
 		try { 
-			//FIXME cplutte logging added
-			log.error("##################InputStream getStream. content encoding. " + response.getEntity().getContentEncoding());
-//			HttpEntity entity = response.getEntity();
-//			String responseString = EntityUtils.toString(entity, "UTF-8");
-//			log.error("##################InputStream getStream " + responseString);
-
 			return response.getEntity().getContent();
 		} catch (Exception e) {
 			log.error("Error reading response. " + e.getMessage());
@@ -540,9 +532,6 @@ abstract class CouchDbClientBase {
 		        while ((str = br.readLine()) != null) {
 		            asString += str;
 		        }
-		        
-		        // FIXME cplutte remove logging
-		        log.error("deserialize  " + asString);
 		    } catch (Exception e) {
 
 		    }

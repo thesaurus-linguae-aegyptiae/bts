@@ -572,7 +572,7 @@ public final class CouchDbClient extends CouchDbClientBase {
 			{
 			String cons = m.group(2);
 			if (cons != null && !"".equals(conflicts)) {
-				System.out.println(cons);
+//				System.out.println(cons);
 
 				cons = cons.substring(1, cons.length() - 1);
 				String[] cs = cons.split(",");

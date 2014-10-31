@@ -96,11 +96,7 @@ final class CouchDbUtil
 	 */
 	public static String getElement(JsonObject j, String e)
 	{
-		String result =  (j.get(e) == null) ? null : j.get(e).getAsString();
-		
-		//FIXME cplutte comment logging out
-		log.error("String getElement " + result);
-		return result;
+		return (j.get(e) == null) ? null : j.get(e).getAsString();
 	}
 
 	public static long getElementAsLong(JsonObject j, String e)
