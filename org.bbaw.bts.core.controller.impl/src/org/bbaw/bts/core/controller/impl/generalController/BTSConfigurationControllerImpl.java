@@ -606,6 +606,17 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		
 	}
 
+	@Override
+	public void setActiveConfiguration(BTSConfiguration configuration) {
+		configService.setActiveConfiguration(configuration);
+		
+	}
+
+	@Override
+	public BTSConfiguration createNew(BTSConfiguration originalconfiguration) {
+		return configService.createNew(originalconfiguration);
+	}
+
 
 
 }

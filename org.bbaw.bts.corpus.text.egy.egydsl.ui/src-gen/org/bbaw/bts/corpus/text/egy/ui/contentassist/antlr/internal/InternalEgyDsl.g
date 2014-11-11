@@ -3227,11 +3227,11 @@ rule__VersFrontierMarker__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getVersFrontierMarkerAccess().getPrivateUseAreaF008DigitOneKeyword_1()); }
+{ before(grammarAccess.getVersFrontierMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc81Keyword_1()); }
 
-	'\uF0081' 
+	'\uDB80\uDC81' 
 
-{ after(grammarAccess.getVersFrontierMarkerAccess().getPrivateUseAreaF008DigitOneKeyword_1()); }
+{ after(grammarAccess.getVersFrontierMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc81Keyword_1()); }
 )
 
 ;
@@ -3292,11 +3292,11 @@ rule__VersbreakMarker__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getVersbreakMarkerAccess().getPrivateUseAreaF008DigitZeroKeyword_1()); }
+{ before(grammarAccess.getVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc80Keyword_1()); }
 
-	'\uF0080' 
+	'\uDB80\uDC80' 
 
-{ after(grammarAccess.getVersbreakMarkerAccess().getPrivateUseAreaF008DigitZeroKeyword_1()); }
+{ after(grammarAccess.getVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc80Keyword_1()); }
 )
 
 ;

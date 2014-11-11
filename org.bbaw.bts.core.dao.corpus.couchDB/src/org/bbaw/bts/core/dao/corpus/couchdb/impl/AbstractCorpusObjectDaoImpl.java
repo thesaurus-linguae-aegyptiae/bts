@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHitField;
 
 public abstract class AbstractCorpusObjectDaoImpl<E extends BTSCorpusObject, K extends Serializable> 
 extends CouchDBDao<E, K>
@@ -33,14 +34,14 @@ implements GenericDao<E, K>
 
 		for (String jo : allDocs)
 		{
-			System.out.println(jo);
+//			System.out.println(jo);
 			String id = extractIdFromObjectString(jo);
-			logger.info(id);
+//			logger.info(id);
 			URI uri = URI.createURI(getLocalDBURL() + "/" + dbPath + "/" + id);
 			E entity = retrieveFromCache(uri, cache);
 			if (entity == null)
 			{
-				entity = loadObjectFromString(id, dbPath, uri, jo);
+				entity = loadObjectFromString(id, dbPath, uri,extractEClassFromObjectString(jo), jo);
 				addEntityToCache(uri, cache, entity);
 			}
 			results.add(entity);
@@ -55,8 +56,12 @@ implements GenericDao<E, K>
 
 
 	@Override
-	public E loadObjectFromString(String id, String indexName, URI uri, String sourceAsString) {
-		E entity = createObject(extractEClassFromObjectString(sourceAsString));
+	public E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString) {
+		if (eclassString == null)
+		{
+			eclassString = extractEClassFromObjectString(sourceAsString);
+		}
+		E entity = createObject(eclassString);
 		if (entity == null)
 		{
 			System.out.println(id +  " " + sourceAsString);
@@ -109,7 +114,12 @@ implements GenericDao<E, K>
 	{
 		if (hit.getSource() != null)
 		{
-			return loadObjectFromString(hit.getId(), indexName, uri,hit.getSourceAsString());//loadResourceFromString(hit.getId(), hit.getSourceAsString(), indexName);
+			String eclass = null;
+			if (hit.getFields().containsKey("eClass"))
+			{
+				eclass = hit.getFields().get("eClass").getValue();
+			}
+			return loadObjectFromString(hit.getId(), indexName, uri, eclass, hit.getSourceAsString());//loadResourceFromString(hit.getId(), hit.getSourceAsString(), indexName);
 		}
 		else if (!hit.getFields().isEmpty())
 		{
@@ -131,7 +141,11 @@ implements GenericDao<E, K>
 		resource.getContents().add(entity);
 		entity.set_id(id);
 		
-		entity.setName(hit.getFields().get("name").getValue().toString());
+		if (hit.getFields().containsKey("name"))
+		{
+			entity.setName(hit.getFields().get("name").getValue().toString());
+		}
+		
 		
 		// type and subtype
 		if (hit.getFields().containsKey("type"))

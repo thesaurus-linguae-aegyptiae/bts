@@ -68,8 +68,15 @@ public class JSONLoad {
 
 		checkNotNull(root, "root node should not be null.");
 		checkNotNull(options, "load options parameters should not be null");
-
+		// FIXME cplutte assume, string comes from couchdb view, then use the value of value
+		if (!root.isArray() && root.get("value") != null && root.get("key") != null)
+		{
+			// parse value...
+			root = root.get("value");
+		}
 		if (!root.isArray()) {
+			
+			
 			if (root.has(EJS_TYPE_KEYWORD)) {
 				this.rootClass = getEClass(URI.createURI(root.get(EJS_TYPE_KEYWORD).getValueAsText()));
 				

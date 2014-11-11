@@ -21,7 +21,29 @@
   
   <repositories>
 	
+	
 		<repository>
+			<id>bts-mvn-build-repository</id>
+			<name>BTS BUILD Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<layout>p2</layout>
+		</repository>
+		
+		<repository>
+			<id>bts-mvn-telota-all</id>
+			<name>BTS Maven local Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>kepler</id>
+			<url>${kepler-repo.url}</url>
+			<layout>p2</layout>
+		</repository>
+
+		<!--
+		
+			<repository>
 			<id>bts-mvn-telota</id>
 			<name>BTS Maven local Rep</name>
 			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2rep</url>
@@ -34,16 +56,6 @@
 			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
 			<layout>p2</layout>
 		</repository>
-		
-		
-		
-		<repository>
-			<id>kepler</id>
-			<url>${kepler-repo.url}</url>
-			<layout>p2</layout>
-		</repository>
-
-		<!--
 		<repository>
 			<id>bts-mvn-build-repository</id>
 			<name>BTS BUILD Rep</name>
@@ -85,7 +97,11 @@
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
-						
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
 						<!--
 						<environment>
 							<os>macosx</os>

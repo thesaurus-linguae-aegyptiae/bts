@@ -215,6 +215,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 * @generatedNOT
 	 */
 	public BTSRevision getLastRevision() {
+		if (getRevisions().size() == 0) return null;
 		String rev = getRevisions().get(getRevisions().size() -1);
 		BTSRevision revision = BtsmodelFactory.eINSTANCE.createBTSRevision(rev);
 		return revision;
@@ -426,7 +427,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION:
 				addRevision((BTSRevision)arguments.get(0));
 				return null;
-			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING:
+			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING:
 				addRevision((Integer)arguments.get(0), (Date)arguments.get(1), (String)arguments.get(2));
 				return null;
 			case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT:

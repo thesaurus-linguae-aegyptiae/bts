@@ -80,8 +80,13 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> list(String objectState) {
 		List<BTSThsEntry> entries = new Vector<BTSThsEntry>();
 		for (String p : getActiveProjects()) {
-			entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
-					objectState));
+			try {
+				entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
+						objectState));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return filter(entries);
 	}
@@ -92,8 +97,13 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
 		for (String p : getActiveProjects()) {
 
-			objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p
-					+ BTSCorpusConstants.THS, objectState, registerQuery));
+			try {
+				objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p
+						+ BTSCorpusConstants.THS, objectState, registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 		return filter(objects);

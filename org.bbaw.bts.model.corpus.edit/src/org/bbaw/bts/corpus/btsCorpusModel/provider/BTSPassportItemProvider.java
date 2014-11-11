@@ -63,124 +63,9 @@ public class BTSPassportItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addProtocolPropertyDescriptor(object);
-			addBibliographyPropertyDescriptor(object);
-			addWbSlipsPropertyDescriptor(object);
-			addWbFolderPropertyDescriptor(object);
-			addProvenancePropertyDescriptor(object);
 			addCommentPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Protocol feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addProtocolPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSPassport_protocol_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassport_protocol_feature", "_UI_BTSPassport_type"),
-				 BtsCorpusModelPackage.Literals.BTS_PASSPORT__PROTOCOL,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Bibliography feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addBibliographyPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSPassport_bibliography_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassport_bibliography_feature", "_UI_BTSPassport_type"),
-				 BtsCorpusModelPackage.Literals.BTS_PASSPORT__BIBLIOGRAPHY,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Wb Slips feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addWbSlipsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSPassport_wbSlips_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassport_wbSlips_feature", "_UI_BTSPassport_type"),
-				 BtsCorpusModelPackage.Literals.BTS_PASSPORT__WB_SLIPS,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Wb Folder feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addWbFolderPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSPassport_wbFolder_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassport_wbFolder_feature", "_UI_BTSPassport_type"),
-				 BtsCorpusModelPackage.Literals.BTS_PASSPORT__WB_FOLDER,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Provenance feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addProvenancePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_BTSPassport_provenance_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSPassport_provenance_feature", "_UI_BTSPassport_type"),
-				 BtsCorpusModelPackage.Literals.BTS_PASSPORT__PROVENANCE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -267,7 +152,7 @@ public class BTSPassportItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSPassport)object).getProtocol();
+		String label = ((BTSPassport)object).getComment();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSPassport_type"), StyledString.Style.QUALIFIER_STYLER); 
@@ -289,11 +174,6 @@ public class BTSPassportItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSPassport.class)) {
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROTOCOL:
-			case BtsCorpusModelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_SLIPS:
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_FOLDER:
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROVENANCE:
 			case BtsCorpusModelPackage.BTS_PASSPORT__COMMENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;

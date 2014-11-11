@@ -13,21 +13,17 @@ public class BTSCommentAnnotation extends BTSModelAnnotation {
 	
 	private BTSComment comment;
 
-	public BTSCommentAnnotation(BTSIdentifiableItem model, BTSComment comment, BTSInterTextReference interTextReference) {
-		super(model, interTextReference, comment);
+	public BTSCommentAnnotation(String type, BTSIdentifiableItem model, BTSComment comment, BTSInterTextReference interTextReference) {
+		super(type, model, interTextReference, comment);
 		this.setComment(comment);
 	}
 
-	public BTSCommentAnnotation(IXtextDocument document, Issue issue,
+	public BTSCommentAnnotation(String type, IXtextDocument document, Issue issue,
 			BTSIdentifiableItem modelObject, BTSComment btsComment) {
-		super(TYPE, document, issue, modelObject);
+		super(type, document, issue, modelObject);
 		this.setComment(btsComment);
 	}
 
-	@Override
-	public String getType() {
-		return TYPE;
-	}
 
 	public BTSComment getComment() {
 		return comment;

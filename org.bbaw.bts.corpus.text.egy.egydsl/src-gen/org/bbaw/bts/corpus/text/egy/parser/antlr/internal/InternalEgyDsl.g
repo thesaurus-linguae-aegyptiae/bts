@@ -614,9 +614,9 @@ ruleVersFrontierMarker returns [EObject current=null]
             grammarAccess.getVersFrontierMarkerAccess().getVersFrontierMarkerAction_0(),
             $current);
     }
-)	otherlv_1='\uF0081' 
+)	otherlv_1='\uDB80\uDC81' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getVersFrontierMarkerAccess().getPrivateUseAreaF008DigitOneKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getVersFrontierMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc81Keyword_1());
     }
 )
 ;
@@ -645,9 +645,9 @@ ruleVersbreakMarker returns [EObject current=null]
             grammarAccess.getVersbreakMarkerAccess().getVersbreakMarkerAction_0(),
             $current);
     }
-)	otherlv_1='\uF0080' 
+)	otherlv_1='\uDB80\uDC80' 
     {
-    	newLeafNode(otherlv_1, grammarAccess.getVersbreakMarkerAccess().getPrivateUseAreaF008DigitZeroKeyword_1());
+    	newLeafNode(otherlv_1, grammarAccess.getVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc80Keyword_1());
     }
 )
 ;

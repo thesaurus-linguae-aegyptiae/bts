@@ -26,9 +26,14 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		List<BTSComment> objects = new Vector<BTSComment>();
 		for (String p : getActiveProjects())
 		{
-			objects.addAll(commentDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
-					+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
-					registerQuery));
+			try {
+				objects.addAll(commentDao.query(query, p + BTSCoreConstants.ADMIN_SUFFIX, p
+						+ BTSCoreConstants.ADMIN_SUFFIX, objectState,
+						registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return filter(objects);
 	}

@@ -75,13 +75,14 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 
 	private void signalUpdate(Row feed, String docId, String dbCollection)
 	{
-		logger.info("Backend2DB listener on dbCollection: " + dbCollection + ", Changed object id: " + docId);
 		
 		//FIXME dynamisieren für Import!
-		if (listen2Updates == null && !TRUE.equals(listen2Updates))
+//		System.out.println(context.get(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES));
+		if (true || listen2Updates == null && !TRUE.equals(listen2Updates))
 		{
 			return;
 		}
+		logger.info("Backend2DB listener on dbCollection: " + dbCollection + ", Changed object id: " + docId);
 
 		BTSDBBaseObject object = null;
 		BTSModelUpdateNotification notification = new BTSModelUpdateNotification();
@@ -162,15 +163,15 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao
 		URI uri = URI.createURI(connectionProvider.getLocalDBURL() + "/" + dbCollection + "/" + feed.getId());
 		System.out.println("loadFromFeed " + uri);
 		Resource resource = null;
-		try {
-			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		} catch (Exception e) {
-			logger.error(e);
-		}
-		if (resource != null && !resource.getContents().isEmpty())
-		{
-			return ((BTSDBBaseObject) resource.getContents().get(0));
-		}
+//		try {
+//			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//		} catch (Exception e) {
+//			logger.error(e);
+//		}
+//		if (resource != null && !resource.getContents().isEmpty())
+//		{
+//			return ((BTSDBBaseObject) resource.getContents().get(0));
+//		}
 		
 		resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		logger.info(jso.toString());

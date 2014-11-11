@@ -199,4 +199,8 @@ public interface BTSConfigurationService extends GenericObjectService<BTSConfigu
 
 	BTSConfigItem getIdentifiersConfigItem();
 
+	void setActiveConfiguration(BTSConfiguration configuration);
+
+	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
+
 }

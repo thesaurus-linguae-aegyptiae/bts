@@ -240,7 +240,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 1;
+	int ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING = BTS_OBSERVABLE_OBJECT_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -510,7 +510,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_OBJECT___ADD_REVISION__INT_STRING_STRING = ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING;
+	int BTS_OBJECT___ADD_REVISION__INT_DATE_STRING = ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -898,22 +898,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER__COMMENT = BTS_OBJECT_FEATURE_COUNT + 9;
 
 	/**
-	 * The feature id for the '<em><b>External Referneces</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__EXTERNAL_REFERNECES = BTS_OBJECT_FEATURE_COUNT + 10;
-
-	/**
 	 * The feature id for the '<em><b>Password</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__PASSWORD = BTS_OBJECT_FEATURE_COUNT + 11;
+	int BTS_USER__PASSWORD = BTS_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Logged In</b></em>' attribute.
@@ -922,7 +913,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__LOGGED_IN = BTS_OBJECT_FEATURE_COUNT + 12;
+	int BTS_USER__LOGGED_IN = BTS_OBJECT_FEATURE_COUNT + 11;
 
 	/**
 	 * The feature id for the '<em><b>Status</b></em>' attribute.
@@ -931,7 +922,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__STATUS = BTS_OBJECT_FEATURE_COUNT + 13;
+	int BTS_USER__STATUS = BTS_OBJECT_FEATURE_COUNT + 12;
 
 	/**
 	 * The feature id for the '<em><b>Db Admin</b></em>' attribute.
@@ -940,7 +931,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER__DB_ADMIN = BTS_OBJECT_FEATURE_COUNT + 14;
+	int BTS_USER__DB_ADMIN = BTS_OBJECT_FEATURE_COUNT + 13;
 
 	/**
 	 * The number of structural features of the '<em>BTS User</em>' class.
@@ -949,7 +940,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 15;
+	int BTS_USER_FEATURE_COUNT = BTS_OBJECT_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -985,7 +976,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+	int BTS_USER___ADD_REVISION__INT_DATE_STRING = BTS_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -1273,7 +1264,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_COMMENT___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+	int BTS_COMMENT___ADD_REVISION__INT_DATE_STRING = BTS_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -1910,7 +1901,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION___ADD_REVISION__INT_STRING_STRING = BTS_CONFIG_OPERATION_COUNT + 3;
+	int BTS_CONFIGURATION___ADD_REVISION__INT_DATE_STRING = BTS_CONFIG_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -2477,7 +2468,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+	int BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING = BTS_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -3119,7 +3110,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_USER_GROUP___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+	int BTS_USER_GROUP___ADD_REVISION__INT_DATE_STRING = BTS_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -3435,7 +3426,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT___ADD_REVISION__INT_STRING_STRING = BTS_OBJECT___ADD_REVISION__INT_STRING_STRING;
+	int BTS_PROJECT___ADD_REVISION__INT_DATE_STRING = BTS_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -4353,7 +4344,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.AdministrativDataObject#addRevision(int, java.util.Date, java.lang.String)
 	 * @generated
 	 */
-	EOperation getAdministrativDataObject__AddRevision__int_String_String();
+	EOperation getAdministrativDataObject__AddRevision__int_Date_String();
 
 	/**
 	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.AdministrativDataObject#getRevision(int) <em>Get Revision</em>}' operation.
@@ -4625,17 +4616,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getBTSUser_Comment();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.btsmodel.BTSUser#getExternalReferneces <em>External Referneces</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>External Referneces</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSUser#getExternalReferneces()
-	 * @see #getBTSUser()
-	 * @generated
-	 */
-	EReference getBTSUser_ExternalReferneces();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}'.
@@ -6219,7 +6199,7 @@ public interface BtsmodelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING = eINSTANCE.getAdministrativDataObject__AddRevision__int_String_String();
+		EOperation ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING = eINSTANCE.getAdministrativDataObject__AddRevision__int_Date_String();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Revision</b></em>' operation.
@@ -6424,14 +6404,6 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_USER__COMMENT = eINSTANCE.getBTSUser_Comment();
-
-		/**
-		 * The meta object literal for the '<em><b>External Referneces</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BTS_USER__EXTERNAL_REFERNECES = eINSTANCE.getBTSUser_ExternalReferneces();
 
 		/**
 		 * The meta object literal for the '<em><b>Password</b></em>' attribute feature.

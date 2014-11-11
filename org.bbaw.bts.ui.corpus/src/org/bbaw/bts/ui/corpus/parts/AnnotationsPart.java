@@ -18,6 +18,7 @@ import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -188,6 +189,27 @@ public class AnnotationsPart implements EventHandler {
 			});
 
 		}
+	}
+	
+	private void clearRelatingObjects() {
+		if (composite != null)
+		{
+			composite.dispose();
+		}
+		composite = null;
+		composite = new Composite(scrollComposite, SWT.None);
+		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		composite.setLayout(new GridLayout(1, false));
+		((GridLayout)composite.getLayout()).marginHeight = 0;
+		((GridLayout)composite.getLayout()).marginWidth = 0;
+		((GridLayout)composite.getLayout()).verticalSpacing = 0;
+		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		scrollComposite.setContent(composite);
+
+		Rectangle r = scrollComposite.getClientArea();
+		composite.layout();
+		scrollComposite.setMinSize(composite.computeSize(r.width,
+				SWT.DEFAULT));
 	}
 
 	
@@ -396,10 +418,26 @@ public class AnnotationsPart implements EventHandler {
 		}
 		else if (selection instanceof BTSObject)
 		{
+			// empty the panel
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					clearRelatingObjects();
+				}
+			});
 			relatingObjectsQueryIDMap.clear();
 			List<BTSObject> relatingObjects = null;
+			
+			
+
 			try {
 				relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection);
+				for (BTSObject o : relatingObjects)
+				{
+					if (o instanceof BTSCorpusObject)
+					{
+						annotationPartController.checkAndFullyLoad((BTSCorpusObject) o);
+					}
+				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

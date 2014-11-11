@@ -576,10 +576,19 @@ public class ApplicationStartupControllerImpl implements
 		
 		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
 		
+		// FIXME
 		localDBUrl =  prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
+//		prefs.put(BTSPluginIDs.PREF_LOCAL_DB_URL, "http://127.0.0.1:9086/");
+//		try {
+//			prefs.flush();
+//		} catch (BackingStoreException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		localDBUrl =  prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
+
 		if (localDBUrl != null)
 		{
-			dbManager.setLocalDBUrl(localDBUrl);
 			context.set(BTSPluginIDs.PREF_LOCAL_DB_URL, localDBUrl);
 		}
 		
@@ -705,7 +714,6 @@ public class ApplicationStartupControllerImpl implements
 		{
 			logger.info("InstallationWizard returned OK");
 			localDBUrl = installWizard.getLocalDBUrl();
-			dbManager.setLocalDBUrl(localDBUrl);
 			context.set(BTSPluginIDs.PREF_LOCAL_DB_URL, localDBUrl);
 		}
 		else

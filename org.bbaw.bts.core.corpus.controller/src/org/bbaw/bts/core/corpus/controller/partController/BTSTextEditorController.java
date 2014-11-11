@@ -72,4 +72,6 @@ public interface BTSTextEditorController
 
 	BTSTextContent updateModelFromTextContent(BTSTextContent textContent,
 			EObject eo, IAnnotationModel am);
+	
+	boolean checkAndFullyLoad(BTSCorpusObject object);
 }

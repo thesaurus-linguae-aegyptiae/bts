@@ -13,9 +13,12 @@ import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSLemmaEntry, String> 
@@ -70,7 +73,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		for (String p : getActiveProjects())
 		{
-			entry = lemmaEntryDao.find(key, p + BTSCorpusConstants.WLIST);
+			try {
+				entry = lemmaEntryDao.find(key, p + BTSCorpusConstants.WLIST);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (entry != null)
 			{
 				return entry;
@@ -85,8 +93,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
 		for (String p : getActiveProjects())
 		{
-			entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
-					objectState));
+			try {
+				entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
+						objectState));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return filter(entries);
 	}
@@ -98,9 +111,14 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		for (String p : getActiveProjects())
 		{
 
-			objects.addAll(lemmaEntryDao.query(query,
-					p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
-					objectState, registerQuery));
+			try {
+				objects.addAll(lemmaEntryDao.query(query,
+						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
+						objectState, registerQuery));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
 		return filter(objects);
@@ -137,5 +155,16 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		return filter(entries);
 //		return super.getOrphanEntries(map, btsFilters);
+	}
+
+	@Override
+	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word) {
+		BTSQueryRequest query = new BTSQueryRequest();
+		query.setQueryBuilder(QueryBuilders.matchQuery("name",
+				word.getWChar()));
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
+		System.out.println(query.getQueryId());
+		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		return children;
 	}
 }

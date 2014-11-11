@@ -133,6 +133,11 @@ public class BTSConstants
 														+ REVISION_STRING_SEPARATOR
 														+ "(\\d+-\\d+-\\d+T\\d+:\\d+:\\d+)" 
 														+ REVISION_STRING_SEPARATOR + "(.+)";
+
+	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS_TRANSLATIONS = new String[]{"_id", "eClass", "type", "subtype",
+		"updaters", "readers", "name", "revisionState", "visibility", "translations"};
+
+	public static final String OBJECT_TYPES_ARRAY = "object_types_array";
 	private BTSConstants()
 	{
 	}

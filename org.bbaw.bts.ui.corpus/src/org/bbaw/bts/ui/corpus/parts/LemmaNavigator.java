@@ -323,7 +323,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 						.getOrphanEntries(map,
 								treeViewer.getFilters(), monitor);
 				storeIntoMap(obs, parentControl);
-				final List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor);
+				final List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
 				
 				// If you want to update the UI
 				sync.asyncExec(new Runnable() {
@@ -368,7 +368,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES, monitor);
 				}
 				storeIntoMap(obs, parentControl);
-				List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor);
+				List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
 				rootNode.getChildren().addAll(nodes);
 				
 				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
@@ -693,7 +693,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 				if (obs != null && obs.size() > 0)
 				{
 					storeIntoMap(obs, parentControl);
-					List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor);
+					List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
 					rootNode.getChildren().addAll(nodes);
 				}
 				else

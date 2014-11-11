@@ -28,7 +28,6 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getMail <em>Mail</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getWebURL <em>Web URL</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getComment <em>Comment</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getExternalReferneces <em>External Referneces</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getPassword <em>Password</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#isLoggedIn <em>Logged In</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSUser#getStatus <em>Status</em>}</li>
@@ -298,22 +297,6 @@ public interface BTSUser extends BTSObject {
 	 * @generated
 	 */
 	void setComment(String value);
-
-	/**
-	 * Returns the value of the '<em><b>External Referneces</b></em>' containment reference list.
-	 * The list contents are of type {@link org.bbaw.bts.btsmodel.BTSExternalReference}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>External Referneces</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>External Referneces</em>' containment reference list.
-	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSUser_ExternalReferneces()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<BTSExternalReference> getExternalReferneces();
 
 	/**
 	 * Returns the value of the '<em><b>Password</b></em>' attribute.

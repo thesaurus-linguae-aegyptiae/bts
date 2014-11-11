@@ -1410,7 +1410,7 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		if (baseClass == AdministrativDataObject.class) {
 			switch (baseOperationID) {
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION: return BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__BTSREVISION;
-				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING: return BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__INT_STRING_STRING;
+				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING: return BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__INT_DATE_STRING;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT: return BtsmodelPackage.BTS_CONFIGURATION___GET_REVISION__INT;
 				case BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION: return BtsmodelPackage.BTS_CONFIGURATION___GET_LAST_REVISION;
 				default: return -1;
@@ -1441,7 +1441,7 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__BTSREVISION:
 				addRevision((BTSRevision)arguments.get(0));
 				return null;
-			case BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__INT_STRING_STRING:
+			case BtsmodelPackage.BTS_CONFIGURATION___ADD_REVISION__INT_DATE_STRING:
 				addRevision((Integer)arguments.get(0), (Date)arguments.get(1), (String)arguments.get(2));
 				return null;
 			case BtsmodelPackage.BTS_CONFIGURATION___GET_REVISION__INT:

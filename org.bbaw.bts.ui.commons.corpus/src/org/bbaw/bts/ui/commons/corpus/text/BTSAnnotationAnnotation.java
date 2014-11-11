@@ -8,9 +8,10 @@ import org.eclipse.xtext.validation.Issue;
 
 public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 
-	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation.annotatation";
+	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation.annotation";
 
 	public static final String TYPE_RUBRUM = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum";
+	public static final String TYPE_RUBRUM_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum.highlighted";
 	public static final String TYPE_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.highlighted";
 	
 //	public BTSAnnotationAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference,
@@ -24,9 +25,9 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 ////		this.setAnnotation(btsAnnotation);
 //	}
 	
-	public BTSAnnotationAnnotation(IXtextDocument document, Issue issue,
+	public BTSAnnotationAnnotation(String type, IXtextDocument document, Issue issue,
 			BTSIdentifiableItem modelObject, BTSAnnotation btsAnnotation) {
-		super(TYPE, document, issue, modelObject);
+		super(type, document, issue, modelObject);
 		this.setRelatingObject(btsAnnotation);
 	}
 
@@ -37,14 +38,26 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 		this.setRelatingObject(btsAnnotation);
 	}
 
-	public BTSAnnotationAnnotation(BTSIdentifiableItem item,
+	public BTSAnnotationAnnotation(String type, BTSIdentifiableItem item,
 			BTSInterTextReference interTextReference, BTSAnnotation relatingObject) {
-		super(item, interTextReference, relatingObject);
+		super(type, item, interTextReference, relatingObject);
 	}
 
 	@Override
 	public String getType() {
-		return TYPE;
+		return super.getType();
 	}
-
+	
+	public void setHighlighted(boolean highlighted)
+	{
+		if (highlighted)
+		{
+			if (!getType().endsWith("highlighted")) {
+				cachedType = getType();
+				setType(getType() + ".highlighted");
+			}
+		} else {
+			setType(cachedType);
+		}
+	}
 }

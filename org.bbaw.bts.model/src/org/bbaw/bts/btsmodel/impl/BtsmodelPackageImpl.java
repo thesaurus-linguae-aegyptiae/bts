@@ -385,7 +385,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EOperation getAdministrativDataObject__AddRevision__int_String_String() {
+	public EOperation getAdministrativDataObject__AddRevision__int_Date_String() {
 		return administrativDataObjectEClass.getEOperations().get(1);
 	}
 
@@ -619,18 +619,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getBTSUser_ExternalReferneces() {
-		return (EReference)btsUserEClass.getEStructuralFeatures().get(10);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EAttribute getBTSUser_Password()
 	{
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(11);
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(10);
 	}
 
 	/**
@@ -640,7 +631,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSUser_LoggedIn()
 	{
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(12);
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(11);
 	}
 
 	/**
@@ -650,7 +641,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getBTSUser_Status()
 	{
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(13);
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(12);
 	}
 
 	/**
@@ -659,7 +650,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EAttribute getBTSUser_DbAdmin() {
-		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(14);
+		return (EAttribute)btsUserEClass.getEStructuralFeatures().get(13);
 	}
 
 	/**
@@ -1993,7 +1984,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__VISIBILITY);
 		createEAttribute(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION);
-		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_STRING_STRING);
+		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING);
 		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT);
 		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION);
 
@@ -2018,7 +2009,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsUserEClass, BTS_USER__MAIL);
 		createEAttribute(btsUserEClass, BTS_USER__WEB_URL);
 		createEAttribute(btsUserEClass, BTS_USER__COMMENT);
-		createEReference(btsUserEClass, BTS_USER__EXTERNAL_REFERNECES);
 		createEAttribute(btsUserEClass, BTS_USER__PASSWORD);
 		createEAttribute(btsUserEClass, BTS_USER__LOGGED_IN);
 		createEAttribute(btsUserEClass, BTS_USER__STATUS);
@@ -2261,7 +2251,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		EOperation op = initEOperation(getAdministrativDataObject__AddRevision__BTSRevision(), null, "addRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, this.getBTSRevision(), "revision", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		op = initEOperation(getAdministrativDataObject__AddRevision__int_String_String(), null, "addRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
+		op = initEOperation(getAdministrativDataObject__AddRevision__int_Date_String(), null, "addRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEInt(), "rev", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEDate(), "timestamp", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "userId", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -2292,7 +2282,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSUser_Mail(), ecorePackage.getEString(), "mail", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_WebURL(), ecorePackage.getEString(), "webURL", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_Comment(), ecorePackage.getEString(), "comment", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBTSUser_ExternalReferneces(), this.getBTSExternalReference(), null, "externalReferneces", null, 0, -1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_Password(), ecorePackage.getEString(), "password", null, 0, 1, BTSUser.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_LoggedIn(), ecorePackage.getEBoolean(), "loggedIn", null, 0, 1, BTSUser.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSUser_Status(), ecorePackage.getEString(), "status", null, 0, 1, BTSUser.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

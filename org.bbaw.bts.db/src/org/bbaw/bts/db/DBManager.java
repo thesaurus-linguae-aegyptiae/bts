@@ -144,13 +144,6 @@ public interface DBManager
 	void shutdown();
 
 	/**
-	 * Sets the local db url.
-	 *
-	 * @param localDBUrl the new local db url
-	 */
-	void setLocalDBUrl(String localDBUrl);
-
-	/**
 	 * Check and create db collection.
 	 *
 	 * @param project the project
@@ -190,5 +183,9 @@ public interface DBManager
 	 * @return true if successful
 	 */
 	boolean optimize();
+
+	String getLocalDBurl();
+
+	String getLocalESGuiURL();
 
 }

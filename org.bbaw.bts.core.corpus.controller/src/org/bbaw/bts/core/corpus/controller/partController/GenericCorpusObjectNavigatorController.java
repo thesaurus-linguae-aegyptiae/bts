@@ -11,6 +11,7 @@ import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 
@@ -50,10 +51,10 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 
 	List<E> getSearchEntries(
 			BTSQueryRequest query, Map<String, BTSQueryResultAbstract> queryResultMap,
-			TreeViewer treeViewer, TreeNodeWrapper rootNode,
+			StructuredViewer structuredViewer, TreeNodeWrapper rootNode,
 			EReference treeNodeWrapperChildren, IProgressMonitor monitor);
 	
 	boolean checkAndFullyLoad(BTSCorpusObject object);
 	
-	List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor);
+	List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor, boolean asStructuredTree);
 }

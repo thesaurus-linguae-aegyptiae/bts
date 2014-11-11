@@ -315,6 +315,13 @@ public class TranslationEditorComposite extends Composite {
 		}
 		BTSTranslation trans = translations.getBTSTranslation(combo.getItem(combo.getSelectionIndex()));
 		trans.setValue(text.getText());
-		
+	}
+	
+	public void setTranslationText(String text)
+	{
+		if (text != null)
+		{
+			this.text.setText(text);
+		}
 	}
 }

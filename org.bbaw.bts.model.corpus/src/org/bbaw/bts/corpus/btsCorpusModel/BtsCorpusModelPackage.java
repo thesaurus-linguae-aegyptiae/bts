@@ -88,15 +88,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__ID = BtsmodelPackage.BTS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__REVISIONS = BtsmodelPackage.BTS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -122,6 +113,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_CORPUS_OBJECT__VISIBILITY = BtsmodelPackage.BTS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__REVISIONS = BtsmodelPackage.BTS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -323,6 +323,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT___GET_REVISION__INT = BtsmodelPackage.BTS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT___GET_LAST_REVISION = BtsmodelPackage.BTS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Corpus Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -360,15 +396,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTSTC_OBJECT__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -394,6 +421,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -594,6 +630,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTSTC_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTSTC Object</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -631,15 +703,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -665,6 +728,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -874,6 +946,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Text</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -911,15 +1019,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_ENTRY__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -945,6 +1044,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_ENTRY__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -1172,6 +1280,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_ENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Lemma Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1191,58 +1335,13 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_PASSPORT = 4;
 
 	/**
-	 * The feature id for the '<em><b>Protocol</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT__PROTOCOL = 0;
-
-	/**
-	 * The feature id for the '<em><b>Bibliography</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT__BIBLIOGRAPHY = 1;
-
-	/**
 	 * The feature id for the '<em><b>Date</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT__DATE = 2;
-
-	/**
-	 * The feature id for the '<em><b>Wb Slips</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT__WB_SLIPS = 3;
-
-	/**
-	 * The feature id for the '<em><b>Wb Folder</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT__WB_FOLDER = 4;
-
-	/**
-	 * The feature id for the '<em><b>Provenance</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PASSPORT__PROVENANCE = 5;
+	int BTS_PASSPORT__DATE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Children</b></em>' containment reference list.
@@ -1251,7 +1350,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT__CHILDREN = 6;
+	int BTS_PASSPORT__CHILDREN = 1;
 
 	/**
 	 * The feature id for the '<em><b>Comment</b></em>' attribute.
@@ -1260,7 +1359,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT__COMMENT = 7;
+	int BTS_PASSPORT__COMMENT = 2;
 
 	/**
 	 * The feature id for the '<em><b>Descriptions</b></em>' containment reference list.
@@ -1269,7 +1368,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT__DESCRIPTIONS = 8;
+	int BTS_PASSPORT__DESCRIPTIONS = 3;
 
 	/**
 	 * The number of structural features of the '<em>BTS Passport</em>' class.
@@ -1278,7 +1377,25 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_FEATURE_COUNT = 9;
+	int BTS_PASSPORT_FEATURE_COUNT = 4;
+
+	/**
+	 * The operation id for the '<em>Get Passport Entry By Path</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PASSPORT___GET_PASSPORT_ENTRY_BY_PATH__STRING = 0;
+
+	/**
+	 * The operation id for the '<em>Get Passport Entry String Value By Path</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PASSPORT___GET_PASSPORT_ENTRY_STRING_VALUE_BY_PATH__STRING = 1;
 
 	/**
 	 * The number of operations of the '<em>BTS Passport</em>' class.
@@ -1287,7 +1404,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PASSPORT_OPERATION_COUNT = 0;
+	int BTS_PASSPORT_OPERATION_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAnnotationImpl <em>BTS Annotation</em>}' class.
@@ -1318,15 +1435,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_ANNOTATION__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1352,6 +1460,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -1550,6 +1667,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Annotation</em>' class.
@@ -1816,15 +1969,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1850,6 +1994,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -2059,6 +2212,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CORPUS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Text Corpus</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2096,15 +2285,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_IMAGE__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2130,6 +2310,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -2339,6 +2528,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_IMAGE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The operation id for the '<em>Get Attachement</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2440,15 +2665,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_THS_ENTRY__ID = BTS_CORPUS_OBJECT__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2474,6 +2690,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_THS_ENTRY__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -2674,6 +2899,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_THS_ENTRY___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Ths Entry</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2748,15 +3009,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_WORD__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2782,6 +3034,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_WORD__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -3055,6 +3316,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Word</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3092,15 +3389,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_ITEMS__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3126,6 +3414,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_ITEMS__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -3327,6 +3624,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Text Items</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3437,15 +3770,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENCTENCE__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3471,6 +3795,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_SENCTENCE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -3690,6 +4023,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Senctence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3727,15 +4096,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_MARKER__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3761,6 +4121,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_MARKER__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -3971,6 +4340,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Marker</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4008,15 +4413,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_SENTENCE_ITEM__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4042,6 +4438,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_SENTENCE_ITEM__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -4243,6 +4648,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Sentence Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4280,15 +4721,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_AMBIVALENCE__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4314,6 +4746,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_AMBIVALENCE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -4524,6 +4965,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Ambivalence</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4561,15 +5038,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_CASE__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4595,6 +5063,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_CASE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -4805,6 +5282,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+
+	/**
 	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4842,15 +5355,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM__ID = BTS_SENTENCE_ITEM__ID;
 
 	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__REVISIONS = BTS_SENTENCE_ITEM__REVISIONS;
-
-	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4876,6 +5380,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_SENTENCE_ITEM__VISIBILITY = BTS_SENTENCE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__REVISIONS = BTS_SENTENCE_ITEM__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>rev</b></em>' attribute.
@@ -5075,6 +5588,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 */
 	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__BTSREVISION = BTS_SENTENCE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING = BTS_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___GET_REVISION__INT = BTS_SENTENCE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___GET_LAST_REVISION = BTS_SENTENCE_ITEM___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Sentence Item</em>' class.
@@ -5406,28 +5955,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	EClass getBTSPassport();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getProtocol <em>Protocol</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Protocol</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getProtocol()
-	 * @see #getBTSPassport()
-	 * @generated
-	 */
-	EAttribute getBTSPassport_Protocol();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getBibliography <em>Bibliography</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Bibliography</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getBibliography()
-	 * @see #getBTSPassport()
-	 * @generated
-	 */
-	EAttribute getBTSPassport_Bibliography();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getDate <em>Date</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -5437,39 +5964,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBTSPassport_Date();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getWbSlips <em>Wb Slips</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Wb Slips</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getWbSlips()
-	 * @see #getBTSPassport()
-	 * @generated
-	 */
-	EAttribute getBTSPassport_WbSlips();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getWbFolder <em>Wb Folder</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Wb Folder</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getWbFolder()
-	 * @see #getBTSPassport()
-	 * @generated
-	 */
-	EAttribute getBTSPassport_WbFolder();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getProvenance <em>Provenance</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Provenance</em>'.
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getProvenance()
-	 * @see #getBTSPassport()
-	 * @generated
-	 */
-	EAttribute getBTSPassport_Provenance();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getChildren <em>Children</em>}'.
@@ -5503,6 +5997,26 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getBTSPassport_Descriptions();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getPassportEntryByPath(java.lang.String) <em>Get Passport Entry By Path</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Passport Entry By Path</em>' operation.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getPassportEntryByPath(java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSPassport__GetPassportEntryByPath__String();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getPassportEntryStringValueByPath(java.lang.String) <em>Get Passport Entry String Value By Path</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Passport Entry String Value By Path</em>' operation.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSPassport#getPassportEntryStringValueByPath(java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSPassport__GetPassportEntryStringValueByPath__String();
 
 	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation <em>BTS Annotation</em>}'.
@@ -6252,52 +6766,12 @@ public interface BtsCorpusModelPackage extends EPackage {
 		EClass BTS_PASSPORT = eINSTANCE.getBTSPassport();
 
 		/**
-		 * The meta object literal for the '<em><b>Protocol</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT__PROTOCOL = eINSTANCE.getBTSPassport_Protocol();
-
-		/**
-		 * The meta object literal for the '<em><b>Bibliography</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT__BIBLIOGRAPHY = eINSTANCE.getBTSPassport_Bibliography();
-
-		/**
 		 * The meta object literal for the '<em><b>Date</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference BTS_PASSPORT__DATE = eINSTANCE.getBTSPassport_Date();
-
-		/**
-		 * The meta object literal for the '<em><b>Wb Slips</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT__WB_SLIPS = eINSTANCE.getBTSPassport_WbSlips();
-
-		/**
-		 * The meta object literal for the '<em><b>Wb Folder</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT__WB_FOLDER = eINSTANCE.getBTSPassport_WbFolder();
-
-		/**
-		 * The meta object literal for the '<em><b>Provenance</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_PASSPORT__PROVENANCE = eINSTANCE.getBTSPassport_Provenance();
 
 		/**
 		 * The meta object literal for the '<em><b>Children</b></em>' containment reference list feature.
@@ -6322,6 +6796,22 @@ public interface BtsCorpusModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_PASSPORT__DESCRIPTIONS = eINSTANCE.getBTSPassport_Descriptions();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Passport Entry By Path</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_PASSPORT___GET_PASSPORT_ENTRY_BY_PATH__STRING = eINSTANCE.getBTSPassport__GetPassportEntryByPath__String();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Passport Entry String Value By Path</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_PASSPORT___GET_PASSPORT_ENTRY_STRING_VALUE_BY_PATH__STRING = eINSTANCE.getBTSPassport__GetPassportEntryStringValueByPath__String();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAnnotationImpl <em>BTS Annotation</em>}' class.

@@ -635,7 +635,6 @@ public class PassportEditorPart {
 		lblAuthor.setText("Author");
 
 		txtAuthortextadmin = new Text(compTBTM_Main, SWT.BORDER | SWT.READ_ONLY);
-		txtAuthortextadmin.setText("authorText_Admin");
 		txtAuthortextadmin.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 				true, false, 3, 1));
 
@@ -1385,7 +1384,7 @@ public class PassportEditorPart {
 //				historyTable_Admin.layout();
 			}
 		}
-		return null;
+		return bindingContext;
 	}
 
 	@PreDestroy

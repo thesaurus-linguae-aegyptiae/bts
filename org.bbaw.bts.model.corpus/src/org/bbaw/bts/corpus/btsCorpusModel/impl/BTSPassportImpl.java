@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
 import org.bbaw.bts.btsmodel.BTSTimespan;
@@ -26,12 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getProtocol <em>Protocol</em>}</li>
- *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getBibliography <em>Bibliography</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getDate <em>Date</em>}</li>
- *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getWbSlips <em>Wb Slips</em>}</li>
- *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getWbFolder <em>Wb Folder</em>}</li>
- *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getProvenance <em>Provenance</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getChildren <em>Children</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getComment <em>Comment</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSPassportImpl#getDescriptions <em>Descriptions</em>}</li>
@@ -42,46 +38,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  */
 public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTSPassport {
 	/**
-	 * The default value of the '{@link #getProtocol() <em>Protocol</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProtocol()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PROTOCOL_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getProtocol() <em>Protocol</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProtocol()
-	 * @generated
-	 * @ordered
-	 */
-	protected String protocol = PROTOCOL_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getBibliography() <em>Bibliography</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBibliography()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String BIBLIOGRAPHY_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getBibliography() <em>Bibliography</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getBibliography()
-	 * @generated
-	 * @ordered
-	 */
-	protected String bibliography = BIBLIOGRAPHY_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getDate() <em>Date</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -90,66 +46,6 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @ordered
 	 */
 	protected BTSTimespan date;
-
-	/**
-	 * The default value of the '{@link #getWbSlips() <em>Wb Slips</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWbSlips()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String WB_SLIPS_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getWbSlips() <em>Wb Slips</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWbSlips()
-	 * @generated
-	 * @ordered
-	 */
-	protected String wbSlips = WB_SLIPS_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getWbFolder() <em>Wb Folder</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWbFolder()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String WB_FOLDER_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getWbFolder() <em>Wb Folder</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getWbFolder()
-	 * @generated
-	 * @ordered
-	 */
-	protected String wbFolder = WB_FOLDER_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #getProvenance() <em>Provenance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProvenance()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String PROVENANCE_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getProvenance() <em>Provenance</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getProvenance()
-	 * @generated
-	 * @ordered
-	 */
-	protected String provenance = PROVENANCE_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getChildren() <em>Children</em>}' containment reference list.
@@ -215,48 +111,6 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String getProtocol() {
-		return protocol;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setProtocol(String newProtocol) {
-		String oldProtocol = protocol;
-		protocol = newProtocol;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_PASSPORT__PROTOCOL, oldProtocol, protocol));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getBibliography() {
-		return bibliography;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setBibliography(String newBibliography) {
-		String oldBibliography = bibliography;
-		bibliography = newBibliography;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_PASSPORT__BIBLIOGRAPHY, oldBibliography, bibliography));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public BTSTimespan getDate() {
 		return date;
 	}
@@ -293,69 +147,6 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_PASSPORT__DATE, newDate, newDate));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getWbSlips() {
-		return wbSlips;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWbSlips(String newWbSlips) {
-		String oldWbSlips = wbSlips;
-		wbSlips = newWbSlips;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_PASSPORT__WB_SLIPS, oldWbSlips, wbSlips));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getWbFolder() {
-		return wbFolder;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWbFolder(String newWbFolder) {
-		String oldWbFolder = wbFolder;
-		wbFolder = newWbFolder;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_PASSPORT__WB_FOLDER, oldWbFolder, wbFolder));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getProvenance() {
-		return provenance;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setProvenance(String newProvenance) {
-		String oldProvenance = provenance;
-		provenance = newProvenance;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_PASSPORT__PROVENANCE, oldProvenance, provenance));
 	}
 
 	/**
@@ -406,6 +197,57 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public BTSPassportEntry getPassportEntryByPath(String path) {
+		if (path == null) return null;
+		String[] pathEntries = path.split(">>");
+		BTSPassportEntry entry = findPassportEntryRecursively(this.getChildren(), pathEntries, 0);
+		return entry;
+		
+	}
+
+	private BTSPassportEntry findPassportEntryRecursively(EList<BTSPassportEntry> eList, String[] pathEntries,
+			int index) {
+		if (index >= pathEntries.length || pathEntries[index] == null) return null;
+		String entryType = pathEntries[index];
+		BTSPassportEntry entry = null;
+		for (BTSPassportEntry child : eList)
+		{
+			if (entryType.equals(child.getType()))
+			{
+				entry = child;
+				break;
+			}
+		}
+		if (index == pathEntries.length + 1)
+		{
+			return entry;
+		}
+		else if (entry != null)
+		{
+			return findPassportEntryRecursively(entry.getChildren(), pathEntries, index + 1);
+		}
+		return entry;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public String getPassportEntryStringValueByPath(String path) {
+		BTSPassportEntry entry = getPassportEntryByPath(path);
+		if (entry != null)
+		{
+			return entry.getValue();
+		}
+		return null;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
@@ -429,18 +271,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROTOCOL:
-				return getProtocol();
-			case BtsCorpusModelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
-				return getBibliography();
 			case BtsCorpusModelPackage.BTS_PASSPORT__DATE:
 				return getDate();
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_SLIPS:
-				return getWbSlips();
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_FOLDER:
-				return getWbFolder();
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROVENANCE:
-				return getProvenance();
 			case BtsCorpusModelPackage.BTS_PASSPORT__CHILDREN:
 				return getChildren();
 			case BtsCorpusModelPackage.BTS_PASSPORT__COMMENT:
@@ -460,23 +292,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROTOCOL:
-				setProtocol((String)newValue);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
-				setBibliography((String)newValue);
-				return;
 			case BtsCorpusModelPackage.BTS_PASSPORT__DATE:
 				setDate((BTSTimespan)newValue);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_SLIPS:
-				setWbSlips((String)newValue);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_FOLDER:
-				setWbFolder((String)newValue);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROVENANCE:
-				setProvenance((String)newValue);
 				return;
 			case BtsCorpusModelPackage.BTS_PASSPORT__CHILDREN:
 				getChildren().clear();
@@ -501,23 +318,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROTOCOL:
-				setProtocol(PROTOCOL_EDEFAULT);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
-				setBibliography(BIBLIOGRAPHY_EDEFAULT);
-				return;
 			case BtsCorpusModelPackage.BTS_PASSPORT__DATE:
 				setDate((BTSTimespan)null);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_SLIPS:
-				setWbSlips(WB_SLIPS_EDEFAULT);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_FOLDER:
-				setWbFolder(WB_FOLDER_EDEFAULT);
-				return;
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROVENANCE:
-				setProvenance(PROVENANCE_EDEFAULT);
 				return;
 			case BtsCorpusModelPackage.BTS_PASSPORT__CHILDREN:
 				getChildren().clear();
@@ -540,18 +342,8 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROTOCOL:
-				return PROTOCOL_EDEFAULT == null ? protocol != null : !PROTOCOL_EDEFAULT.equals(protocol);
-			case BtsCorpusModelPackage.BTS_PASSPORT__BIBLIOGRAPHY:
-				return BIBLIOGRAPHY_EDEFAULT == null ? bibliography != null : !BIBLIOGRAPHY_EDEFAULT.equals(bibliography);
 			case BtsCorpusModelPackage.BTS_PASSPORT__DATE:
 				return date != null;
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_SLIPS:
-				return WB_SLIPS_EDEFAULT == null ? wbSlips != null : !WB_SLIPS_EDEFAULT.equals(wbSlips);
-			case BtsCorpusModelPackage.BTS_PASSPORT__WB_FOLDER:
-				return WB_FOLDER_EDEFAULT == null ? wbFolder != null : !WB_FOLDER_EDEFAULT.equals(wbFolder);
-			case BtsCorpusModelPackage.BTS_PASSPORT__PROVENANCE:
-				return PROVENANCE_EDEFAULT == null ? provenance != null : !PROVENANCE_EDEFAULT.equals(provenance);
 			case BtsCorpusModelPackage.BTS_PASSPORT__CHILDREN:
 				return children != null && !children.isEmpty();
 			case BtsCorpusModelPackage.BTS_PASSPORT__COMMENT:
@@ -568,21 +360,27 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 	 * @generated
 	 */
 	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsCorpusModelPackage.BTS_PASSPORT___GET_PASSPORT_ENTRY_BY_PATH__STRING:
+				return getPassportEntryByPath((String)arguments.get(0));
+			case BtsCorpusModelPackage.BTS_PASSPORT___GET_PASSPORT_ENTRY_STRING_VALUE_BY_PATH__STRING:
+				return getPassportEntryStringValueByPath((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (protocol: ");
-		result.append(protocol);
-		result.append(", bibliography: ");
-		result.append(bibliography);
-		result.append(", wbSlips: ");
-		result.append(wbSlips);
-		result.append(", wbFolder: ");
-		result.append(wbFolder);
-		result.append(", provenance: ");
-		result.append(provenance);
-		result.append(", comment: ");
+		result.append(" (comment: ");
 		result.append(comment);
 		result.append(')');
 		return result.toString();

@@ -3,18 +3,13 @@
 package org.bbaw.bts.btsmodel.impl;
 
 import java.util.Collection;
-import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +28,6 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getMail <em>Mail</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getWebURL <em>Web URL</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getComment <em>Comment</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getExternalReferneces <em>External Referneces</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getPassword <em>Password</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#isLoggedIn <em>Logged In</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSUserImpl#getStatus <em>Status</em>}</li>
@@ -233,16 +227,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 	 * @ordered
 	 */
 	protected String comment = COMMENT_EDEFAULT;
-
-	/**
-	 * The cached value of the '{@link #getExternalReferneces() <em>External Referneces</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getExternalReferneces()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<BTSExternalReference> externalReferneces;
 
 	/**
 	 * The default value of the '{@link #getPassword() <em>Password</em>}' attribute.
@@ -562,18 +546,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<BTSExternalReference> getExternalReferneces() {
-		if (externalReferneces == null) {
-			externalReferneces = new EObjectContainmentEList<BTSExternalReference>(BTSExternalReference.class, this, BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES);
-		}
-		return externalReferneces;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public String getPassword()
 	{
 		return password;
@@ -665,20 +637,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 	 * @generated
 	 */
 	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
-				return ((InternalEList<?>)getExternalReferneces()).basicRemove(otherEnd, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 			case BtsmodelPackage.BTS_USER__GROUP_IDS:
@@ -701,8 +659,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 				return getWebURL();
 			case BtsmodelPackage.BTS_USER__COMMENT:
 				return getComment();
-			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
-				return getExternalReferneces();
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				return getPassword();
 			case BtsmodelPackage.BTS_USER__LOGGED_IN:
@@ -754,10 +710,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 				return;
 			case BtsmodelPackage.BTS_USER__COMMENT:
 				setComment((String)newValue);
-				return;
-			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
-				getExternalReferneces().clear();
-				getExternalReferneces().addAll((Collection<? extends BTSExternalReference>)newValue);
 				return;
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				setPassword((String)newValue);
@@ -813,9 +765,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 			case BtsmodelPackage.BTS_USER__COMMENT:
 				setComment(COMMENT_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
-				getExternalReferneces().clear();
-				return;
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				setPassword(PASSWORD_EDEFAULT);
 				return;
@@ -860,8 +809,6 @@ public class BTSUserImpl extends BTSObjectImpl implements BTSUser {
 				return WEB_URL_EDEFAULT == null ? webURL != null : !WEB_URL_EDEFAULT.equals(webURL);
 			case BtsmodelPackage.BTS_USER__COMMENT:
 				return COMMENT_EDEFAULT == null ? comment != null : !COMMENT_EDEFAULT.equals(comment);
-			case BtsmodelPackage.BTS_USER__EXTERNAL_REFERNECES:
-				return externalReferneces != null && !externalReferneces.isEmpty();
 			case BtsmodelPackage.BTS_USER__PASSWORD:
 				return PASSWORD_EDEFAULT == null ? password != null : !PASSWORD_EDEFAULT.equals(password);
 			case BtsmodelPackage.BTS_USER__LOGGED_IN:

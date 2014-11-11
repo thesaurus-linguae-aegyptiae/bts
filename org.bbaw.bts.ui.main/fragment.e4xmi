@@ -44,6 +44,8 @@
     <elements xsi:type="commands:Handler" xmi:id="_wRgLoDK3EeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.main.handler.1" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenObjectByListEntrySelectionFilterDialogHandler" command="_p08-8DK3EeSLt-NtQ3Vu3A"/>
     <elements xsi:type="commands:Handler" xmi:id="_6tB0cDNpEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.main.handler.searchQueryDialog" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenSearchQueryDialogHandler" command="_0i50gDNpEeSLt-NtQ3Vu3A"/>
     <elements xsi:type="commands:Handler" xmi:id="_xfuKgDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.handler.moveObjectAmongProjectDBCollectionHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.MoveObjectAmongProjectDBCollectionHandler" command="_6orvkDTgEeS85dzIPjkaNA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_qZdv0GmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openFutonHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenFutonHandler" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_xOH6gGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openESGui" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenESGui" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -79,6 +81,8 @@
     <elements xsi:type="commands:Command" xmi:id="_6orvkDTgEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection" commandName="moveObjectAmongProjectDBCollection" category="_CXsjwAWjEeOJR9LhfOAE5w">
       <parameters xmi:id="_GyhPMDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.commandparameter.targetDBCollectionKey" name="targetDBCollectionKey"/>
     </elements>
+    <elements xsi:type="commands:Command" xmi:id="_dvqWsGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.command.openFuton" commandName="openFuton" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
+    <elements xsi:type="commands:Command" xmi:id="_jzQQ0GmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.command.openESGui" commandName="openElasticsearchGui" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
@@ -87,10 +91,12 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_lWcloAWjEeOJR9LhfOAE5w" featurename="children" parentElementId="org.eclipse.ui.preferences">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-edit.png" command="_EXssoAWjEeOJR9LhfOAE5w"/>
-    <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" label="TEST pref" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" label="New Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-add.png" command="_3ajhwAWXEeOmY4VxFYomZg"/>
+    <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" toBeRendered="false" visible="false" label="TEST pref" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" toBeRendered="false" visible="false" label="New Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-add.png" command="_3ajhwAWXEeOmY4VxFYomZg"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_if9qwDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handledmenuitem.openUserManager" label="Open User Manager" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/users.png" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="Preferences..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_07tpwGmmEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openFuton" label="Open Futon" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_sUKIoGmnEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openEsGui" label="Open ES GUI" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>

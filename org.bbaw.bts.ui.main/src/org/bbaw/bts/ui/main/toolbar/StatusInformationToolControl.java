@@ -102,7 +102,7 @@ public class StatusInformationToolControl {
 	}
 
 	private void updateStatusMessage(StatusMessage message) {
-		if (message.getMessageType() != null && message.getMessageType() == MessageType.LOCKED)
+		if (message != null && message.getMessageType() != null && message.getMessageType() == MessageType.LOCKED)
 		{
 			BTSUser user = null;
 			try {
@@ -118,9 +118,13 @@ public class StatusInformationToolControl {
 				label.setText(message.getMessage() + message.getUserId());
 			}
 		}
-		else
+		else if (message != null)
 		{
 			label.setText(message.getMessage());
+		}
+		else
+		{
+			return;
 		}
 		label.pack();
 		parent.layout();

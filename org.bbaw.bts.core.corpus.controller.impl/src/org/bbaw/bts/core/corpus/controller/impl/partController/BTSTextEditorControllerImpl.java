@@ -114,15 +114,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String LEMMA_CASE_INTERFIX = ": ";
 	private static final String MARKER_START_SIGN = "\u0023";
 	private static final String MARKER_END_SIGN = "\u0023";
+	
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
+	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
 
 //	private static final String MARKER_VERS_SIGN = "\u0040";
 	private static final String MARKER_INTERFIX = ": ";
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
 	private static final int GAP = 10;
-	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
 	
 	protected TextModelHelper textModelHelper = new TextModelHelper();
 
@@ -160,7 +161,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 //			throw new NullPointerException("TextContent may not be null.");
 //		}
 		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
-		if (relatingObjects != null && ! relatingObjects.isEmpty() && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
+		if (relatingObjects != null && ! relatingObjects.isEmpty())// && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
 		{
 			relatingObjectsMap = fillRelatingObjectsMap(relatingObjects);
 		}
@@ -185,7 +186,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 				logger.info("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
 
-				BTSModelAnnotation ma = new BTSModelAnnotation(sentence);
+				BTSModelAnnotation ma = new BTSModelAnnotation(BTSModelAnnotation.TYPE,sentence);
 				int len = stringBuilder.length();
 				int loopLen = stringBuilder.length();
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
@@ -383,10 +384,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					anno.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSAnnotationAnnotation(item, reference, anno);
+				modelAnnotation = new BTSAnnotationAnnotation(BTSAnnotationAnnotation.TYPE, item, reference, anno);
 				if (anno.getType() != null && anno.getType().equalsIgnoreCase("rubrum"))
 				{
 					modelAnnotation.setText( "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum");
+					modelAnnotation.setType(BTSAnnotationAnnotation.TYPE_RUBRUM);
 				}
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSText)
@@ -397,7 +399,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					text.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSSubtextAnnotation(item, reference, text);
+				modelAnnotation = new BTSSubtextAnnotation(BTSSubtextAnnotation.TYPE, item, reference, text);
 			}
 			else if (reference.eContainer().eContainer() instanceof BTSComment)
 			{
@@ -407,7 +409,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				{
 					comment.setTempSortKey(counter + GAP);
 				}
-				modelAnnotation = new BTSCommentAnnotation(item, comment, reference);
+				modelAnnotation = new BTSCommentAnnotation(BTSCommentAnnotation.TYPE, item, comment, reference);
 			}
 			counter = counter + GAP;
 		}
@@ -417,7 +419,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void appendAmbivalenceToModel(BTSAmbivalence ambivalence,
 			IAnnotationModel model, Position pos) {
-		BTSModelAnnotation annotation = new BTSModelAnnotation(
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 				(BTSIdentifiableItem) ambivalence);
 
 		model.addAnnotation(annotation, pos);
@@ -465,7 +467,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		pos.setLength(stringBuilder.length() - pos.getOffset());
 
 		// append to model
-		BTSModelAnnotation annotation = new BTSModelAnnotation(
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 				(BTSIdentifiableItem) amCase);
 
 		model.addAnnotation(annotation, pos);
@@ -496,7 +498,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private void appendMarkerToModel(BTSMarker marker, IAnnotationModel model,
 			Position pos)
 	{
-		BTSModelAnnotation annotation = new BTSModelAnnotation(
+		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 				(BTSIdentifiableItem) marker);
 
 		model.addAnnotation(annotation, pos);
@@ -541,11 +543,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		BTSModelAnnotation annotation;
 		if (word.getLKey() != null && !"".equals(word.getLKey())) {
 
-			annotation = new BTSLemmaAnnotation(word);
+			annotation = new BTSLemmaAnnotation(BTSLemmaAnnotation.TYPE, word);
 			add2LemmaAnnotationMap(word.getLKey(), annotation);
 			
 		} else {
-			annotation = new BTSModelAnnotation(
+			annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 					(BTSIdentifiableItem) word);
 		}
 		model.addAnnotation(annotation, position);
@@ -1104,7 +1106,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public List<BTSObject> getRelatingObjects(BTSText text) {
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId",
+		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId",
 				text.get_id()));
 		query.setQueryId("relations.objectId-" + text.get_id());
 		System.out.println(query.getQueryId());
@@ -1117,6 +1119,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		}
 		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true));
 		return children;
+	}
+	
+	@Override
+	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	{
+		return corpusObjectService.checkAndFullyLoad(object);
 	}
 	
 	private class AnnotationCache {

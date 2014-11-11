@@ -153,4 +153,8 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 
 	String getIconStringOfRevisionsState(BTSObject object);
 
+	void setActiveConfiguration(BTSConfiguration configuration);
+
+	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
+
 }

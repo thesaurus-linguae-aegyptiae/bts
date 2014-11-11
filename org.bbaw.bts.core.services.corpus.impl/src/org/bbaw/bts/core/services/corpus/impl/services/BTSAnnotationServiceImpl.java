@@ -16,13 +16,16 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 
 public class BTSAnnotationServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSAnnotation, String> 
 implements BTSAnnotationService, BTSObjectSearchService
 {
 	@Inject
-	BTSAnnotationDao annotationDao;
+	private BTSAnnotationDao annotationDao;
+	
+	
 
 	@Override
 	public BTSAnnotation createNew()
@@ -30,8 +33,18 @@ implements BTSAnnotationService, BTSObjectSearchService
 		BTSAnnotation anno = BtsCorpusModelFactory.eINSTANCE.createBTSAnnotation();
 		super.setId(anno);
 		super.setRevision(anno);
-		anno.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
-
+		if (isCurrentDBCollectionContextLemma())
+		{
+			anno.setDBCollectionKey(main_project + BTSCorpusConstants.WLIST);
+		}
+		else if (isCurrentDBCollectionContextThs())
+		{
+			anno.setDBCollectionKey(main_project + BTSCorpusConstants.THS);
+		}
+		else
+		{
+			anno.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+		}
 		anno.setCorpusPrefix(main_corpus_key);
 		return anno;
 	}
@@ -69,7 +82,12 @@ implements BTSAnnotationService, BTSObjectSearchService
 		}
 		for (String c : getActive_corpora())
 		{
-			anno = annotationDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+			try {
+				anno = annotationDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			if (anno != null)
 			{
 				return anno;
@@ -79,7 +97,12 @@ implements BTSAnnotationService, BTSObjectSearchService
 		{
 			for (String c : getActive_corpora())
 			{
-				anno = annotationDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				try {
+					anno = annotationDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				if (anno != null)
 				{
 					return anno;
@@ -97,8 +120,13 @@ implements BTSAnnotationService, BTSObjectSearchService
 		{
 			for (String c : getActive_corpora())
 			{
-				annos.addAll(annotationDao.list(p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
+				try {
+					annos.addAll(annotationDao.list(p
+							+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return filter(annos);
@@ -113,9 +141,14 @@ implements BTSAnnotationService, BTSObjectSearchService
 		{
 			for (String c : getActive_corpora())
 			{
-				objects.addAll(annotationDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
-						registerQuery));
+				try {
+					objects.addAll(annotationDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
+							+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+							registerQuery));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return filter(objects);
@@ -151,8 +184,13 @@ implements BTSAnnotationService, BTSObjectSearchService
 		{
 			for (String c : getActive_corpora())
 			{
-				objects.addAll(annotationDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX + c, 
-						DaoConstants.VIEW_THS_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
+				try {
+					objects.addAll(annotationDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX + c, 
+							DaoConstants.VIEW_THS_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		return filter(objects);

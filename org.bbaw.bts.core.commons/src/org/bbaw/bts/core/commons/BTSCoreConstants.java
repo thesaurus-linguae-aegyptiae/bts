@@ -307,4 +307,6 @@ public class BTSCoreConstants
 
 	public static final String LISTEN_TO_BACKEND_UPDATES = "listen2Updates";
 
+	public static final String TRANSLATIONS_SUB_DELIMITER = ";";
+
 }

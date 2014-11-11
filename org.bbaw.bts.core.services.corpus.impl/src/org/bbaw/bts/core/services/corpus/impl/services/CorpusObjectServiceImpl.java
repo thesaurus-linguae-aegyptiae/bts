@@ -352,17 +352,49 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState,
 			boolean registerQuery) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
-		for (String p : getActiveProjects()) {
-			for (String c : getActive_corpora()) {
-				
+		
+		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
+		{
+			for (String p : getActiveProjects()) {
 				try {
 					objects.addAll(corpusObjectDao.query(query, p
-							+ BTSCorpusConstants.CORPUS_INTERFIX + c, p
-							+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+							+ BTSCorpusConstants.THS, p
+							+ BTSCorpusConstants.THS, objectState,
 							registerQuery));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				}
+			}
+		}
+		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
+		{
+			for (String p : getActiveProjects()) {
+				try {
+					objects.addAll(corpusObjectDao.query(query, p
+							+ BTSCorpusConstants.WLIST, p
+							+ BTSCorpusConstants.WLIST, objectState,
+							registerQuery));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		else
+		{
+			for (String p : getActiveProjects()) {
+				for (String c : getActive_corpora()) {
+					
+					try {
+						objects.addAll(corpusObjectDao.query(query, p
+								+ BTSCorpusConstants.CORPUS_INTERFIX + c, p
+								+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+								registerQuery));
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 			}
 		}

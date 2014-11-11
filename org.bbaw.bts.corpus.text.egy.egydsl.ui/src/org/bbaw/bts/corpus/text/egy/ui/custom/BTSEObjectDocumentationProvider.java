@@ -4,7 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.bbaw.bts.btsmodel.BTSTranslation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Word;
 import org.bbaw.bts.corpus.text.egy.egyDsl.WordPart;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
@@ -16,6 +18,7 @@ import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
+
 import com.google.inject.Inject;
 
 public class BTSEObjectDocumentationProvider implements
@@ -63,8 +66,26 @@ public class BTSEObjectDocumentationProvider implements
 						BTSLemmaEntry lemma = (BTSLemmaEntry) ((BTSLemmaAnnotation) a).getRelatingObject();
 						if (lemma != null)
 						{
-							return "Lemma Id: " + lemma.get_id() + "\nLemma: " + lemma.getName();
+							doc += "Lemma Id: " + lemma.get_id() + "\nLemma: " + lemma.getName();
+							
 						}
+						if (((BTSModelAnnotation) a).getModel() instanceof BTSWord)
+						{
+							BTSWord word = (BTSWord) ((BTSModelAnnotation) a).getModel();
+							
+							if (!word.getTranslation().getTranslations().isEmpty())
+							{
+								doc += "<br/><br/>Translations:<br/>";
+								for (BTSTranslation trans : word.getTranslation().getTranslations())
+								{
+									if (trans.getValue() != null && !"".equals(trans.getValue()))
+									{
+										doc += trans.getLang() + ": " + trans.getValue() + "<br/>";
+									}
+								}
+							}
+						}
+						break;
 					}
 				}
 			}

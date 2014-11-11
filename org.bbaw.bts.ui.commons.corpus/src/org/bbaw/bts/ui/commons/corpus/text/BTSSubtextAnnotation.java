@@ -14,19 +14,15 @@ public class BTSSubtextAnnotation extends BTSModelAnnotation {
 	public static final String TYPE_HIGHLIGHTED = TYPE + ".highlighted";
 
 
-	public BTSSubtextAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSText subtext) {
-		super(model, interTextReference, subtext);
+	public BTSSubtextAnnotation(String type, BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSText subtext) {
+		super(type, model, interTextReference, subtext);
 	}
 
-	public BTSSubtextAnnotation(IXtextDocument document, Issue issue,
+	public BTSSubtextAnnotation(String type, IXtextDocument document, Issue issue,
 			BTSIdentifiableItem modelObject, BTSText subtext) {
-		super(TYPE, document, issue, modelObject);
+		super(type, document, issue, modelObject);
 		this.setRelatingObject(subtext);
 	}
-	
-	@Override
-	public String getType() {
-		return TYPE;
-	}
+
 
 }

@@ -345,7 +345,7 @@ labelProvider));
 						.getOrphanEntries(map,
 								treeViewer.getFilters(), monitor);
 				storeIntoMap(obs, parentControl);
-				final List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor);
+				final List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
 				
 				// If you want to update the UI
 				sync.asyncExec(new Runnable() {
@@ -397,7 +397,7 @@ labelProvider));
 									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES, monitor);
 				}
 				storeIntoMap(obs, parentControl);
-				List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor);
+				List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
 				rootNode.getChildren().addAll(nodes);
 				
 				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
@@ -750,7 +750,7 @@ labelProvider));
 				if (obs != null && obs.size() > 0)
 				{
 					storeIntoMap(obs, parentControl);
-					List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor);
+					List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
 					rootNode.getChildren().addAll(nodes);
 				}
 				else

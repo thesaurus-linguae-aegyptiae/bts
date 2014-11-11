@@ -465,7 +465,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 		revision.setRef(rev);
 		revision.setTimeStamp(timestamp);
 		revision.setUserId(userId);
-		return null;
+		return revision;
 	}
 
 	@Override

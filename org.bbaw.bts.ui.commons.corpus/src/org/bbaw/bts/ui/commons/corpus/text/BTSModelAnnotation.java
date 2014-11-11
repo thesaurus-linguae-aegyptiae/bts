@@ -12,6 +12,11 @@ public class BTSModelAnnotation extends XtextAnnotation
 {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation";
+	protected static final String HIGHLIGHTED = ".highlighted";
+
+	public static final String TYPE_HIGHLIGHTED = TYPE + HIGHLIGHTED;
+
+	
 	
 	private BTSInterTextReference interTextReference;
 	
@@ -20,9 +25,9 @@ public class BTSModelAnnotation extends XtextAnnotation
 	protected String cachedType;
 
 	
-	public BTSModelAnnotation(BTSIdentifiableItem model)
+	public BTSModelAnnotation(String type, BTSIdentifiableItem model)
 	{
-		super(TYPE, false, null, new Issue.IssueImpl(), false);
+		super(type, false, null, new Issue.IssueImpl(), false);
 		this.model = model;
 	}
 //
@@ -32,9 +37,9 @@ public class BTSModelAnnotation extends XtextAnnotation
 //		this.interTextReference = interTextReference;
 //	}
 //	
-	public BTSModelAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSObject relatingObject)
+	public BTSModelAnnotation(String type, BTSIdentifiableItem model, BTSInterTextReference interTextReference, BTSObject relatingObject)
 	{
-		super(TYPE, false, null, new Issue.IssueImpl(), false);
+		super(type, false, null, new Issue.IssueImpl(), false);
 		this.model = model;
 		this.interTextReference = interTextReference;
 		this.relatingObject = relatingObject;
@@ -56,12 +61,12 @@ public class BTSModelAnnotation extends XtextAnnotation
 
 	}
 
-	public BTSModelAnnotation(IXtextDocument document, Issue issue,
-			BTSIdentifiableItem modelObject) {
-		super(TYPE, false, document, issue, false);
-		this.model = modelObject;
-
-	}
+//	public BTSModelAnnotation(String type, IXtextDocument document, Issue issue,
+//			BTSIdentifiableItem modelObject) {
+//		super(type, false, document, issue, false);
+//		this.model = modelObject;
+//
+//	}
 
 	public BTSModelAnnotation(String type, IXtextDocument document, Issue issue,
 			BTSIdentifiableItem modelObject) {
@@ -101,12 +106,13 @@ public class BTSModelAnnotation extends XtextAnnotation
 	{
 		if (highlighted)
 		{
-			if (!getType().endsWith("highlighted")) {
+			if (!getType().endsWith(HIGHLIGHTED)) {
 				cachedType = getType();
-				setType(getType() + ".highlighted");
+				setType(getType() + HIGHLIGHTED);
 			}
 		} else {
 			setType(cachedType);
 		}
 	}
+	
 }

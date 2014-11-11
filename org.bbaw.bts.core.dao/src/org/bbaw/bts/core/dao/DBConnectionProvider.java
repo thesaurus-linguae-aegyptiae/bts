@@ -100,11 +100,5 @@ public interface DBConnectionProvider
 	<T> T getDBClient(Class<T> clazz, String localDBUrl,
 			String collectionName) throws MalformedURLException;
 
-	/**
-	 * Sets the local db url.
-	 *
-	 * @param url the new local db url
-	 */
-	void setLocalDBUrl(URL url);
 
 }

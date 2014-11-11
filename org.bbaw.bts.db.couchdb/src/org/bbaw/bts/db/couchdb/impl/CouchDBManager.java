@@ -1100,7 +1100,6 @@ public class CouchDBManager implements DBManager
 		
 		boolean required = true;
 		boolean success = true;
-		connectionProvider.setLocalDBUrl(new URL(localDBUrl));
 
 		Map<String, ReplicatorDocument> replicationMap = loadReplicationMap();
 		
@@ -1289,16 +1288,7 @@ public class CouchDBManager implements DBManager
 		
 	}
 
-	@Override
-	public void setLocalDBUrl(String localDBUrl) {
-		try {
-			URL url = new URL(localDBUrl);
-			connectionProvider.setLocalDBUrl(url);
-		} catch (MalformedURLException e) {
-			logger.error(e);
-		}
-		
-	}
+	
 
 	@Override
 	public boolean checkAndCreateDBCollection(BTSProject project, BTSProjectDBCollection collection, String dbCollectionName, boolean index, boolean synchronize) {
@@ -1372,5 +1362,16 @@ public class CouchDBManager implements DBManager
 	public boolean optimize() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getLocalDBurl() {
+		return connectionProvider.getLocalDBURL();
+	}
+
+	@Override
+	public String getLocalESGuiURL() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

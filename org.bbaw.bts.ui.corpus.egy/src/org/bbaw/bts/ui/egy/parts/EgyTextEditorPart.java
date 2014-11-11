@@ -705,7 +705,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
 		
 		painter.modelChanged(embeddedEditor.getViewer().getAnnotationModel());
-
 		embeddedEditorParentComp.layout();
 
 		// connect ruler to annotationModel
@@ -944,6 +943,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		issue = new Issue.IssueImpl();
 		while (i.hasNext()) {
 			Object a = i.next();
+			if (a instanceof BTSAnnotationAnnotation)
+			{
+				System.out.println(((BTSAnnotationAnnotation) a).getType());
+			}
 			Position pos = model.getPosition((Annotation) a);
 			loadSingleAnnotation2Editor(editorModel, (BTSModelAnnotation)a, pos, issue);
 
@@ -1066,7 +1069,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	private void shiftSelection(int i) {
-		embeddedEditor.getViewer().getTextWidget().getCaretOffset();
+//		embeddedEditor.getViewer().getTextWidget().getCaretOffset();
 
 	}
 
@@ -1259,6 +1262,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				protected IStatus run(IProgressMonitor monitor) {
 					relatingObjects = textEditorController
 							.getRelatingObjects(text);
+					for (BTSObject o : relatingObjects)
+					{
+						if (o instanceof BTSCorpusObject)
+						{
+							textEditorController.checkAndFullyLoad((BTSCorpusObject) o);
+						}
+					}
 					relatingObjectsMap = textEditorController
 							.fillRelatingObjectsMap(relatingObjects);
 					queryId = "relations.objectId-" + text.get_id();
@@ -1625,7 +1635,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			addToRelatingObjectAnnotationMap(object, ta);
 
 		} else if (object instanceof BTSComment) {
-			ta = new BTSCommentAnnotation(embeddedEditor.getDocument(), issue,
+			ta = new BTSCommentAnnotation(BTSCommentAnnotation.TYPE, embeddedEditor.getDocument(), issue,
 					object, (BTSComment) object);
 			ta.setInterTextReference(ref);
 
@@ -1634,7 +1644,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 		} else if (object instanceof BTSText) {
 			if (((BTSText) object).getType().equalsIgnoreCase("subtext")) {
-				ta = new BTSSubtextAnnotation(embeddedEditor.getDocument(), issue,
+				ta = new BTSSubtextAnnotation(BTSSubtextAnnotation.TYPE, embeddedEditor.getDocument(), issue,
 						object, (BTSText) object);
 				ta.setInterTextReference(ref);
 				addToRelatingObjectAnnotationMap(object, ta);

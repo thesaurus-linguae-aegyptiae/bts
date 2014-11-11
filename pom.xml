@@ -74,7 +74,9 @@
 		<module>org.eclipselabs.emfjson.couchdb</module>
 		<module>org.eclipselabs.emfjson.couchdb.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb.ui</module>
-		<module>org.lightcouch</module>
+		<!--<module>org.lightcouch</module>
+		use the one form repo bts-mvn-p2all because of constant encoding problem
+		workaround: build with eclipse, export and put into repo--> 
 		<module>org.bbaw.bts.ui.font.academy</module>
 
 		<module>org.bbaw.bts.app.product</module>
@@ -127,12 +129,13 @@
 -->
 
 	
-		<!--
+		
 		<repository>
 			<id>kepler</id>
 			<url>${kepler-repo.url}</url>
 			<layout>p2</layout>
 		</repository>
+		<!--
 	<repository>
 		<id>xtext-p2</id>
 		<url>http://download.eclipse.org/modeling/tmf/xtext/updates/releases/</url>
@@ -193,12 +196,13 @@
 							<ws>gtk</ws>
 							<arch>x86_64</arch>
 						</environment>
+						-->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
-						-->
+						
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>

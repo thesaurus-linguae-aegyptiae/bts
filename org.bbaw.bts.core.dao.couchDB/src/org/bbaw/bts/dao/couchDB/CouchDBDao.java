@@ -302,6 +302,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	public E find(K key, String path)
 	{
 		URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + key.toString());
+		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
+		E object = retrieveFromCache(uri, cache);
+		if (object != null) return object;
+		
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		Map<String, String> options = new HashMap<String, String>();
 		
@@ -401,6 +405,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public E find(URI uri)
 	{
+		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
+		E object = retrieveFromCache(uri, cache);
+		if (object != null) return object;
+		
 		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		Map<String, String> options = new HashMap<String, String>();
 		
@@ -670,10 +678,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public List<E> query(BTSQueryRequest query, String indexName,
 			String indexType, String objectState, boolean registerQuery) {
-
+		SearchResponse response;
+		SearchRequestBuilder srq;
 		if (query.getSearchRequestBuilder() == null) {
-			SearchResponse response;
-			SearchRequestBuilder srq;
+			
 			// connectionProvider.getSearchClient(Client.class).admin().cluster().prepareHealth().setWaitForGreenStatus().execute().actionGet();
 
 			srq = connectionProvider.getSearchClient(Client.class)
@@ -695,34 +703,48 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				// nothing
 			}
 
-			// responsefields
-			if (query.getResponseFields() != null
-					&& query.getResponseFields().length > 0) {
-				srq = srq.addFields(query.getResponseFields());
-			}
 			
-			//execute query
-			response = srq.setFrom(0).setSize(1000).setExplain(true).execute()
-					.actionGet();
-
-			List<E> result = loadResultFromSearchResponse(response, indexName);
-			if (registerQuery) {
-				registerQueryWithPercolator(query, indexName, indexType);
-			}
-			return result;
+			
+//			//execute query
+//			response = srq.setFrom(0).setSize(1000).setExplain(true).execute()
+//					.actionGet();
+//
+//			List<E> result = loadResultFromSearchResponse(response, indexName);
+//			if (registerQuery) {
+//				registerQueryWithPercolator(query, indexName, indexType);
+//			}
+//			return result;
 		} else {
-			SearchResponse response = query.getSearchRequestBuilder()
-					.setIndices(indexName).setTypes(indexType)
-					.setSearchType(SearchType.QUERY_AND_FETCH).execute()
-					.actionGet();
-			List<E> result = loadResultFromSearchResponse(response, indexName);
 			
-			if (!result.isEmpty()) {
-				registerQueryWithPercolator(query, indexName, indexType);
-			}
-
-			return result;
+			srq = query.getSearchRequestBuilder()
+					.setIndices(indexName)
+//					.setTypes(indexType)
+					.setSearchType(SearchType.QUERY_AND_FETCH);
+			
 		}
+		
+		// responsefields
+		if (query.getResponseFields() != null
+				&& query.getResponseFields().length > 0) {
+			srq = srq.addFields(query.getResponseFields());
+		}
+		else
+		{
+			srq = srq.addFields("eClass");
+		}
+					
+		//execute query
+		response = srq.setFrom(0)
+				.setSize(1000)
+				.setExplain(true).execute()
+				.actionGet();
+		List<E> result = loadResultFromSearchResponse(response, indexName);
+		
+		if (registerQuery && !result.isEmpty()) {
+			registerQueryWithPercolator(query, indexName, indexType);
+		}
+
+		return result;
 	}
 
 	private List<E> loadResultFromSearchResponse(SearchResponse response, String indexName) {
@@ -736,6 +758,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				if (o == null)
 				{
 					o = loadObjectFromHit(hit, uri, indexName);
+					addEntityToCache(uri, cache, o);
 				}
 				
 				//FIXME lazy check for conflicts
@@ -826,15 +849,27 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		if (hit.getSource() != null)
 		{
-			return loadObjectFromString(hit.getId(), indexName, uri, hit.getSourceAsString());
+			String eclass = null;
+			if (hit.getFields().containsKey("eClass"))
+			{
+				eclass = hit.getFields().get("eClass").getValue();
+			}
+			return loadObjectFromString(hit.getId(), indexName, uri, eclass, hit.getSourceAsString());
 		}
 		return null;
 	}
 
 	
-	public E loadObjectFromString(String id, String indexName, URI uri, String sourceAsString)
+	public E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString)
 	{
-		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		Resource resource;
+		try {
+			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		} finally {
+			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		}
 		fillResource(resource, sourceAsString);
 		if (!resource.getContents().isEmpty())
 		{
@@ -847,7 +882,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			return e;
 		}
 		logger.info(sourceAsString);
-		return find((K) id, "/" + indexName + "/");
+		return find((K) id, indexName);
 	}
 
 	@Override
@@ -948,7 +983,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 					E o = retrieveFromCache(uri, cache);
 					if (o == null)
 					{
-						o = loadObjectFromString(id, path, uri, jo);
+						o = loadObjectFromString(id, path, uri, extractEClassFromObjectString(jo), jo);
 					}
 
 					if (o != null)
@@ -1094,7 +1129,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		try {
 			sourceStream = client.find(entity.get_id());
 		} catch (NoDocumentException e) {
-			e.printStackTrace();
+			logger.error(e, "Failed to loadFully object with path: " + entity.getDBCollectionKey() + "/" + entity.get_id());
 			return entity;
 		}
 		URI uri = URI.createURI(getLocalDBURL() + "/temp/"

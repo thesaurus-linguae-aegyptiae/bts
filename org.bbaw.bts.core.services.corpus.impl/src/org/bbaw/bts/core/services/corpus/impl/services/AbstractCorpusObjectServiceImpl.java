@@ -14,12 +14,14 @@ import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.services.corpus.GenericCorpusObjectService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 
@@ -36,6 +38,8 @@ implements GenericCorpusObjectService<E, K>{
 	@Optional
 	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
 	protected String main_corpus_key;
+	
+
 	
 	public abstract List<E> listRootEntries(IProgressMonitor monitor);
 	
@@ -210,5 +214,30 @@ implements GenericCorpusObjectService<E, K>{
 	
 	protected String[] getActive_corpora() {
 		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
+	}
+	
+	protected String getCurrentDBCollectionContext()
+	{
+		return (String) context.get(BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT);
+	}
+	
+	protected boolean isCurrentDBCollectionContextThs()
+	{
+		String dbContext = getCurrentDBCollectionContext();
+		if (dbContext != null && dbContext.endsWith(BTSCorpusConstants.THS))
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	protected boolean isCurrentDBCollectionContextLemma()
+	{
+		String dbContext = getCurrentDBCollectionContext();
+		if (dbContext != null && dbContext.endsWith(BTSCorpusConstants.WLIST))
+		{
+			return true;
+		}
+		return false;
 	}
 }

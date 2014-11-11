@@ -164,13 +164,9 @@ public class InstallationWizard extends Wizard
 				preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, new Integer(port).toString());
 				
 				localUrl = BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL + "://";
-				if (localAdminName != null && localAdminP != null)
-				{
-					localUrl += localAdminName + ":" +localAdminP +"@";
-				}
 				localUrl += BTSConstants.DEFAULT_LOCAL_DB_URL_HOST + ":" + port;	
 //						
-//				preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL, localUrl);
+				preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL, localUrl);
 
 				preferences.put(BTSPluginIDs.PREF_REMOTE_DB_URL, serverURL);
 				

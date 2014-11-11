@@ -342,42 +342,52 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VersFrontierMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVersFrontierMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cPrivateUseAreaF008DigitOneKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeadSurrogateDb80TrailSurrogateDc81Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		////'\uDB80\uDC81'//'@mv'
 		//VersFrontierMarker:
-		//	{VersFrontierMarker} "1";
+		//	{VersFrontierMarker} //	'\uF0081'
+		//	//'@mv'
+		//	"󰂁";
 		public ParserRule getRule() { return rule; }
 
-		//{VersFrontierMarker} "1"
+		//{VersFrontierMarker} //	'\uF0081'
+		////'@mv'
+		//"󰂁"
 		public Group getGroup() { return cGroup; }
 
 		//{VersFrontierMarker}
 		public Action getVersFrontierMarkerAction_0() { return cVersFrontierMarkerAction_0; }
 
-		//"1"
-		public Keyword getPrivateUseAreaF008DigitOneKeyword_1() { return cPrivateUseAreaF008DigitOneKeyword_1; }
+		////	'\uF0081'
+		////'@mv'
+		//"󰂁"
+		public Keyword getLeadSurrogateDb80TrailSurrogateDc81Keyword_1() { return cLeadSurrogateDb80TrailSurrogateDc81Keyword_1; }
 	}
 
 	public class VersbreakMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "VersbreakMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cVersbreakMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cPrivateUseAreaF008DigitZeroKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeadSurrogateDb80TrailSurrogateDc80Keyword_1 = (Keyword)cGroup.eContents().get(1);
 		
-		////	'\uDB80\uDC80'//'@v'
 		//VersbreakMarker:
-		//	{VersbreakMarker} "0";
+		//	{VersbreakMarker} //	'\uF0080'
+		//	//'@v'
+		//	"󰂀";
 		public ParserRule getRule() { return rule; }
 
-		//{VersbreakMarker} "0"
+		//{VersbreakMarker} //	'\uF0080'
+		////'@v'
+		//"󰂀"
 		public Group getGroup() { return cGroup; }
 
 		//{VersbreakMarker}
 		public Action getVersbreakMarkerAction_0() { return cVersbreakMarkerAction_0; }
 
-		//"0"
-		public Keyword getPrivateUseAreaF008DigitZeroKeyword_1() { return cPrivateUseAreaF008DigitZeroKeyword_1; }
+		////	'\uF0080'
+		////'@v'
+		//"󰂀"
+		public Keyword getLeadSurrogateDb80TrailSurrogateDc80Keyword_1() { return cLeadSurrogateDb80TrailSurrogateDc80Keyword_1; }
 	}
 
 	public class BrokenVersbreakMarkerElements extends AbstractParserRuleElementFinder {
@@ -1730,9 +1740,10 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getVersMarkerAccess().getRule();
 	}
 
-	////'\uDB80\uDC81'//'@mv'
 	//VersFrontierMarker:
-	//	{VersFrontierMarker} "1";
+	//	{VersFrontierMarker} //	'\uF0081'
+	//	//'@mv'
+	//	"󰂁";
 	public VersFrontierMarkerElements getVersFrontierMarkerAccess() {
 		return (pVersFrontierMarker != null) ? pVersFrontierMarker : (pVersFrontierMarker = new VersFrontierMarkerElements());
 	}
@@ -1741,9 +1752,10 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getVersFrontierMarkerAccess().getRule();
 	}
 
-	////	'\uDB80\uDC80'//'@v'
 	//VersbreakMarker:
-	//	{VersbreakMarker} "0";
+	//	{VersbreakMarker} //	'\uF0080'
+	//	//'@v'
+	//	"󰂀";
 	public VersbreakMarkerElements getVersbreakMarkerAccess() {
 		return (pVersbreakMarker != null) ? pVersbreakMarker : (pVersbreakMarker = new VersbreakMarkerElements());
 	}

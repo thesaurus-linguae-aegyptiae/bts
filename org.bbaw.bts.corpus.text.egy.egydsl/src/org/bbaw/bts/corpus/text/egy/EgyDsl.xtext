@@ -55,14 +55,14 @@ VersMarker:
 
 VersFrontierMarker:
 	{VersFrontierMarker}
-	'\uF0081'
-	//'\uDB80\uDC81'//'@mv'
+//	'\uF0081'
+	'\uDB80\uDC81'//'@mv'
 ;
 
 VersbreakMarker:
 	{VersbreakMarker}
-	'\uF0080'
-//	'\uDB80\uDC80'//'@v'
+//	'\uF0080'
+	'\uDB80\uDC80'//'@v'
 ;
 
 BrokenVersbreakMarker:

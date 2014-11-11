@@ -110,7 +110,7 @@ public abstract class AbstractTextEditorLogic {
 		painter.addAnnotationType(BTSAnnotationAnnotation.TYPE_HIGHLIGHTED,
 				BTSAnnotationAnnotation.TYPE_HIGHLIGHTED);
 
-		// Annotation
+		// Annotation rumbrum
 		RubrumDrawingStrategy rubrumStrategy = new RubrumDrawingStrategy();
 		painter.addTextStyleStrategy(BTSAnnotationAnnotation.TYPE_RUBRUM,
 				rubrumStrategy);
@@ -118,6 +118,15 @@ public abstract class AbstractTextEditorLogic {
 				BTSUIConstants.COLOR_RUBRUM);
 		painter.addAnnotationType(BTSAnnotationAnnotation.TYPE_RUBRUM,
 				BTSAnnotationAnnotation.TYPE_RUBRUM);
+		
+		// Annotation rumbrum highlighted
+		AnnotationHighlightedDrawingStrategy rubrumHighlightedStrategy = new AnnotationHighlightedDrawingStrategy();
+		painter.addDrawingStrategy(BTSAnnotationAnnotation.TYPE_RUBRUM_HIGHLIGHTED,
+				rubrumHighlightedStrategy);
+		painter.setAnnotationTypeColor(BTSAnnotationAnnotation.TYPE_RUBRUM_HIGHLIGHTED,
+				BTSUIConstants.COLOR_RUBRUM);
+		painter.addAnnotationType(BTSAnnotationAnnotation.TYPE_RUBRUM_HIGHLIGHTED,
+				BTSAnnotationAnnotation.TYPE_RUBRUM_HIGHLIGHTED);
 
 
 	}

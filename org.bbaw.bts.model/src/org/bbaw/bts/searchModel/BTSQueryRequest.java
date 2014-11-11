@@ -24,6 +24,8 @@ public class BTSQueryRequest
 	private String requestTypeFieldValue;
 	
 	private List<String> responseFields;
+	
+	private String dbPath;
 
 	public List<BTSObject> getGivenObjects()
 	{
@@ -118,5 +120,14 @@ public class BTSQueryRequest
 			responseFields.add(responseFieldName);
 		}
 	}
+
+	public String getDbPath() {
+		return dbPath;
+	}
+
+	public void setDbPath(String dbPath) {
+		this.dbPath = dbPath;
+	}
+
 
 }

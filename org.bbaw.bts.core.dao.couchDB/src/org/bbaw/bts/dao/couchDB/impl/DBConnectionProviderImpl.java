@@ -57,29 +57,21 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	@Inject
 	private IEclipseContext context;
 
-//	@Inject
-//	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL, nodePath = "org.bbaw.bts.app")
-	private String local_db_url = null; //	"http://127.0.0.1:5985";
-
-	private String username;
-
-	private String password;
-
 	private Client searchClient;
 	
 	@Inject
 	@Preference(value = BTSPluginIDs.PREF_SEARCH_HTTP_ENABLED, nodePath = "org.bbaw.bts.app")
 	private String search_http_enabled = BTSConstants.DEFAULT_SEARCH_HTTP_ENABLED;
 	
-	@Inject
-	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL_PROTOCOL, nodePath = "org.bbaw.bts.app")
-	private String protocol = BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL;//"http";
-	@Inject
-	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL_HOST, nodePath = "org.bbaw.bts.app")
-	private String host = BTSConstants.DEFAULT_LOCAL_DB_URL_HOST;//"127.0.0.1";
-	@Inject
-	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, nodePath = "org.bbaw.bts.app")
-	private String port = BTSConstants.DEFAULT_LOCAL_DB_URL_PORT;
+//	@Inject
+//	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL_PROTOCOL, nodePath = "org.bbaw.bts.app")
+//	private String protocol = BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL;//"http";
+//	@Inject
+//	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL_HOST, nodePath = "org.bbaw.bts.app")
+//	private String host = BTSConstants.DEFAULT_LOCAL_DB_URL_HOST;//"127.0.0.1";
+//	@Inject
+//	@Preference(value = BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, nodePath = "org.bbaw.bts.app")
+//	private String port = BTSConstants.DEFAULT_LOCAL_DB_URL_PORT;
 
 	@Inject
 	private Logger logger;
@@ -95,10 +87,6 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		{
 			throw new BTSDBException("No supported DBClient type: " + clazz.getName());
 		}
-		if (port == null || username == null || password == null)
-		{
-			initDBHost();
-		}
 		Map<String, CouchDbClient> clients = (Map<String, CouchDbClient>) context.get(DaoConstants.DB_CLIENT_POOL_MAP);
 		if (clients == null)
 		{
@@ -106,9 +94,37 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 			context.set(DaoConstants.DB_CLIENT_POOL_MAP, clients);
 		}
 		CouchDbClient dbClient = clients.get(path);
+//		if (dbClient != null)
+//		{
+//			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+//			ISecurePreferences auth = secPrefs.node("auth");
+//			String username = null;
+//			String password = null;
+//			try {
+//				username = auth.get("username", null);
+//				password = auth.get("password", null);
+//			} catch (StorageException e) {
+//				logger.error(e);
+//			}
+//			if (username != null && password != null)
+//			{
+//				System.out.println(dbClient.getBaseUri());
+//				System.out.println(dbClient.getDBUri());
+//				if (dbClient.getDBUri().getAuthority() != null || !dbClient.getDBUri().getAuthority().contains(username +":" + password))
+//				{
+//					dbClient = null;
+//				}
+//			}
+//		}
 		if (dbClient == null)
 		{
-			CouchDbProperties properties = createDBProperties(path);
+			CouchDbProperties properties = null;
+			try {
+				properties = createDBProperties(path);
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			System.out.println("getDBClient protocol " + properties.getProtocol() + " username " + properties.getUsername());
 			try {
 				dbClient = new CouchDbClient(properties);
@@ -192,82 +208,137 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		
 	}
 
-	private CouchDbProperties createDBProperties(String path)
+	private CouchDbProperties createDBProperties(String path) throws MalformedURLException
 	{
 
-		logger.info("CouchDbProperties protocol: " + protocol + ", host: " + host);
+		String localDBUrl = getInternalLocalDBURL();
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+		ISecurePreferences auth = secPrefs.node("auth");
+		String username = null;
+		String password = null;
+		try {
+			username = auth.get("username", null);
+			password = auth.get("password", null);
+		} catch (StorageException e) {
+			logger.error(e);
+		}
+		URL url = new URL(localDBUrl + "/");
+
+		logger.info("CouchDbProperties createDBProperties: " + localDBUrl);
 		CouchDbProperties properties = new CouchDbProperties().setDbName(path).setCreateDbIfNotExist(true)
-				.setProtocol(protocol).setHost(host).setPort(getPort()).setMaxConnections(100).setConnectionTimeout(0);
+				.setProtocol(url.getProtocol()).setHost(url.getHost()).setPort(url.getPort());
+		if (username != null && password != null)
+		{
+			properties.setUsername(username).setPassword(password);
+		}
+		properties.setMaxConnections(100).setConnectionTimeout(0);
 		
-		if (username != null && !"".equals(username))
-		{
-			properties.setUsername(username);
-		}
-		if (password != null && !"".equals(password))
-		{
-			properties.setPassword(password);
-		}
+		
+	
 		return properties;
 	}
 
-	private int getPort() {
-		try {
-			return new Integer(port).intValue();
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		return 9086;
-	}
-
-	private void initDBHost()
-	{
-		local_db_url = (String) context.get(BTSPluginIDs.PREF_LOCAL_DB_URL);
-		System.out.println("CouchDBDao initDBHost " + local_db_url);
-		if (local_db_url != null && local_db_url.trim().length() > 0)
+	private String getInternalLocalDBURL() {
+		String url = (String) context.get(BTSPluginIDs.PREF_LOCAL_DB_URL);
+		if (url == null)
 		{
-			try
-			{
-				URL url = new URL(local_db_url);
-				protocol = url.getProtocol();
-				host = url.getHost();
-				port = new Integer(url.getPort()).toString();
-				System.out.println("CouchDBDao initDBHost from url, protocol " + protocol + ", host " + host + ", port " + port);
-				String userInfo = url.getUserInfo();
-				if (userInfo != null && userInfo.contains(":"))
-				{
-					username = userInfo.split(":")[0];
-					password = userInfo.split(":")[1];
-				}
-			} catch (MalformedURLException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			url = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
 		}
-		else
+		if (url == null)
 		{
 			IEclipsePreferences preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
-			host = preferences.get(
+			String host = preferences.get(
 					BTSPluginIDs.PREF_LOCAL_DB_URL_HOST, BTSConstants.DEFAULT_LOCAL_DB_URL_HOST);
-			protocol = preferences.get(
+			String protocol = preferences.get(
 					BTSPluginIDs.PREF_LOCAL_DB_URL_PROTOCOL, BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL);
-			port = preferences.get(
+			String port = preferences.get(
 					BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, BTSConstants.DEFAULT_LOCAL_DB_URL_PORT);
-			
-			System.out.println("CouchDBDao initDBHost form separate settings, protocol " + protocol + ", host " + host + ", port " + port);
-
-			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
-			ISecurePreferences auth = secPrefs.node("auth");
+			url = protocol + "://" + host;
+			if (port != null)
+			{
+				url += ":"+ port;
+			}
+		}
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+		ISecurePreferences auth = secPrefs.node("auth");
+		String username = null;
+		String password = null;
+		try {
+			username = auth.get("username", null);
+			password = auth.get("password", null);
+		} catch (StorageException e) {
+			logger.error(e);
+		}
+		if (username != null && password != null)
+		{
+			URL u = null;
 			try {
-				username = auth.get("username", null);
-				password = auth.get("password", null);
-			} catch (StorageException e) {
-				logger.error(e);
+				u = new URL(url);
+			} catch (MalformedURLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			url = u.getProtocol() + "://" + username + ":" + password + "@" + u.getHost();
+			if (u.getPort() > 0)
+			{
+				url += ":"+ u.getPort();
 			}
 		}
 		
-
+		return url;
 	}
+
+	
+
+//	private void initDBHost()
+//	{
+//		local_db_url = (String) context.get(BTSPluginIDs.PREF_LOCAL_DB_URL);
+//		System.out.println("CouchDBDao initDBHost " + local_db_url);
+//		if (local_db_url != null && local_db_url.trim().length() > 0)
+//		{
+//			try
+//			{
+//				URL url = new URL(local_db_url);
+//				protocol = url.getProtocol();
+//				host = url.getHost();
+//				port = new Integer(url.getPort()).toString();
+//				System.out.println("CouchDBDao initDBHost from url, protocol " + protocol + ", host " + host + ", port " + port);
+//				String userInfo = url.getUserInfo();
+//				if (userInfo != null && userInfo.contains(":"))
+//				{
+//					username = userInfo.split(":")[0];
+//					password = userInfo.split(":")[1];
+//				}
+//			} catch (MalformedURLException e)
+//			{
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
+//		else
+//		{
+//			IEclipsePreferences preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+//			host = preferences.get(
+//					BTSPluginIDs.PREF_LOCAL_DB_URL_HOST, BTSConstants.DEFAULT_LOCAL_DB_URL_HOST);
+//			protocol = preferences.get(
+//					BTSPluginIDs.PREF_LOCAL_DB_URL_PROTOCOL, BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL);
+//			port = preferences.get(
+//					BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, BTSConstants.DEFAULT_LOCAL_DB_URL_PORT);
+//			
+//			System.out.println("CouchDBDao initDBHost form separate settings, protocol " + protocol + ", host " + host + ", port " + port);
+//
+//			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+//			ISecurePreferences auth = secPrefs.node("auth");
+//			try {
+//				username = auth.get("username", null);
+//				password = auth.get("password", null);
+//			} catch (StorageException e) {
+//				logger.error(e);
+//			}
+//		}
+//		
+//
+//	}
 
 	@Override
 	public <T> T getSearchClient(Class<T> clazz)
@@ -345,36 +416,35 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	public String getLocalDBURL()
 	{
 		//FIXME dyn.
-		if (username != null && !"".equals(username))
-		{
-			if (protocol == null || host == null || port == null || password == null)
-			{
-				initDBHost();
-			}
-			return protocol + "://" + username + ":" + password + "@" + host + ":" + port;
-		}
-		if (local_db_url == null)
-		{
-			if (protocol == null || host == null || port == null)
-			{
-				initDBHost();
-			}
-			return protocol + "://" + host + ":" + port;
-		}
-		return local_db_url;
+//		if (username != null && !"".equals(username))
+//		{
+//			if (protocol == null || host == null || port == null || password == null)
+//			{
+//				initDBHost();
+//			}
+//			return protocol + "://" + username + ":" + password + "@" + host + ":" + port;
+//		}
+//		if (local_db_url == null)
+//		{
+//			if (protocol == null || host == null || port == null)
+//			{
+//				initDBHost();
+//			}
+//			return protocol + "://" + host + ":" + port;
+//		}
+//		return local_db_url;
+		
+		return getInternalLocalDBURL();
 	}
 
 	@Override
-	public <T> T getDBClient(Class<T> clazz, String path, String userName, String password)
+	public <T> T getDBClient(Class<T> clazz, String path, String username, String password)
 	{
 		if (clazz != CouchDbClient.class)
 		{
 			throw new BTSDBException("No supported DBClient type: " + clazz.getName());
 		}
-		if (protocol == null)
-		{
-			initDBHost();
-		}
+		
 		Map<String, CouchDbClient> clients = (Map<String, CouchDbClient>) context.get(DaoConstants.DB_CLIENT_POOL_MAP);
 		if (clients == null)
 		{
@@ -384,13 +454,18 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		CouchDbClient dbClient = clients.get(path);
 		if (dbClient == null)
 		{
-			CouchDbProperties properties = new CouchDbProperties().setDbName(path).setCreateDbIfNotExist(true)
-					.setProtocol(protocol).setHost(host).setPort(getPort()).setMaxConnections(100).setConnectionTimeout(0)
-					.setUsername(userName).setPassword(password);
-			dbClient = new CouchDbClient(properties);
-			registerGSONBuilder(dbClient);
+			CouchDbProperties properties = null;
+			try {
+				properties = createDBProperties(path);
+				properties.setUsername(username).setPassword(password);
+				dbClient = new CouchDbClient(properties);
+				registerGSONBuilder(dbClient);
 
-			clients.put(path, dbClient);
+				clients.put(path, dbClient);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+			
 		}
 		return (T) dbClient;
 	}
@@ -466,17 +541,5 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		System.out.println("New protocol: " + protocol);
 	}
 
-	@Override
-	public void setLocalDBUrl(URL url) {
-		local_db_url = url.toString();
-		protocol = url.getProtocol();
-		host = url.getHost();
-		port = new Integer(url.getPort()).toString();
-		String userInfo = url.getUserInfo();
-		if (userInfo != null && userInfo.contains(":"))
-		{
-			username = userInfo.split(":")[0];
-			password = userInfo.split(":")[1];
-		}
-	}
+	
 }

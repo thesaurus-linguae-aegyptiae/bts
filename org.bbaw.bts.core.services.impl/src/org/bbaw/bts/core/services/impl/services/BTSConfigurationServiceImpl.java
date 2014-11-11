@@ -11,6 +11,9 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
+import org.bbaw.bts.btsmodel.BTSTranslation;
+import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.commons.BTSConstants;
@@ -19,10 +22,14 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
 
 public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSConfiguration, String> implements
 		BTSConfigurationService
@@ -151,11 +158,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			BTSConfiguration config = createNew();
 			save(config);
+			list.add(config);
 		}
 		activeConfig = list(BTSConstants.OBJECT_STATE_ACTIVE).get(0);
 
 		for (BTSConfiguration c : list) {
-			if (active_configuration_name.equals(c.getName())) {
+			if (active_configuration_name.equals(c.get_id())) {
 				activeConfig = c;
 			}
 		}
@@ -795,6 +803,63 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		}
 		return null;
 	}
+
+	@Override
+	public void setActiveConfiguration(BTSConfiguration configuration) {
+		ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.get_id());
+		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.get_id());
+
+		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration);
+		
+	}
+
+	@Override
+	public BTSConfiguration createNew(BTSConfiguration originalconfiguration) {
+		BTSConfiguration config = createNew();
+		String dbcoll = config.getDBCollectionKey();
+		Copier copier = new Copier();
+		config = (BTSConfiguration) copier.copy(originalconfiguration);
+//		copyChildrenRecursively(config, originalconfiguration, copier);
+//		config = EmfModelHelper.mergeChanges(config, originalconfiguration);
+		config.getRevisions().clear();
+		config.getReaders().clear();
+		config.getUpdaters().clear();
+
+		config.setDBCollectionKey(dbcoll);
+		super.setId(config);
+		super.setRevision(config);
+
+		return config;
+	}
+
+//	private void copyChildrenRecursively(BTSConfig config,
+//			BTSConfig originalconfiguration, Copier copier) {
+//		for (BTSConfig c : originalconfiguration.getChildren())
+//		{
+//			BTSConfigItem ci = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
+//			String id = ci.get_id();
+//			ci = (BTSConfigItem) copier.copy(c);
+//			ci.set_id(id);
+//			config.getChildren().add(ci);
+//			copyChildrenRecursively(ci, c, copier);
+//		}
+//		if (originalconfiguration instanceof BTSConfigItem)
+//		{
+//			BTSTranslations t = ((BTSConfigItem)originalconfiguration).getDescription();
+//			BTSTranslations ti = (BTSTranslations) copier.copy(t);
+//			for (BTSTranslation tt : t.getTranslations())
+//			{
+//				BTSTranslation tti = BtsmodelFactory.eINSTANCE.createBTSTranslation();
+//				tti = (BTSTranslation) copier.copy(tt);
+//				ti.getTranslations().add(tti);
+//			}
+//			((BTSConfigItem)config).setDescription(ti);
+//			
+//			BTSPassportEditorConfig p = ((BTSConfigItem)originalconfiguration).getPassportEditorConfig();
+//			BTSPassportEditorConfig pi = (BTSPassportEditorConfig) copier.copy(p);
+//			((BTSConfigItem)config).setPassportEditorConfig(pi);
+//		}
+//	}
 
 
 	

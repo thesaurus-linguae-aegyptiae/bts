@@ -13,6 +13,7 @@ import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -32,6 +33,7 @@ import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.BTSObjectPivot;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
 import org.bbaw.bts.ui.main.objectTypeSelector.ObjectTypeSelectionTreeComposite;
 import org.bbaw.bts.ui.main.objectTypeSelector.RelationSubjectObjectTypesSelectionComposite;
+import org.bbaw.bts.ui.main.provider.ListContentProvider;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
@@ -69,7 +71,9 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -141,7 +145,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	@Inject
 	private BTSResourceProvider resourceProvider;
-	private Combo activeConfigCB;
 
 	private Tree tree;
 
@@ -235,6 +238,11 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	private TabFolder tabfolder;
 
 	private int tabFolderSelectionIndex;
+
+	private ComboViewer activeConfigcomboViewer;
+
+	protected BTSConfiguration activeConfiguration;
+
 
 
 	/**
@@ -380,10 +388,14 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				false, 1, 1));
 		activeConfigLB.setText("Currently active Configuration");
 
-		activeConfigCB = new Combo(compLeftTop, SWT.NONE);
-		activeConfigCB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
+		activeConfigcomboViewer = new ComboViewer(compLeftTop, SWT.READ_ONLY);
+		activeConfigcomboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
-
+		ComposedAdapterFactory factory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(factory);
+		activeConfigcomboViewer.setContentProvider(new AdapterFactoryContentProvider(factory));
+		activeConfigcomboViewer.setLabelProvider(labelProvider);
+		
 		Label availableConfigsLB = new Label(compLeftTop, SWT.NONE);
 		availableConfigsLB.setText("All available Configurations");
 		availableConfigsLB.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
@@ -403,8 +415,17 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		sashForm.setWeights(new int[] { 1, 1 });
 
 		BACKGROUND_COLOR = mainConfigRight.getBackground();
+		
 		loadTree();
 		return area;
+	}
+
+	protected void setActiveConfiguration(BTSConfiguration configuration) {
+
+		configurationController.setActiveConfiguration(configuration);
+		activeConfiguration = configuration;
+
+		
 	}
 
 	protected EditingDomain getEditingDomain(BTSConfig editingObject) {
@@ -441,6 +462,11 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 		List<BTSConfiguration> list = configurationController
 				.listConfigurations();
+		
+		activeConfiguration = configurationController.getActiveConfiguration();
+		TreeNodeWrapper activeConfigurationTreeNode = null;
+		
+		
 		root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 		if (list != null) {
 			for (BTSConfiguration o : list) {
@@ -448,12 +474,38 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 						.createTreeNodeWrapper();
 				child.setObject(o);
 				child.setChildrenLoaded(true);
+				
+				if (o.equals(activeConfiguration))
+				{
+					activeConfigurationTreeNode = child;
+				}
 				root.getChildren().add(child);
 				root.setChildrenLoaded(true);
 				configurations.add(o);
 			}
 		}
 
+		activeConfigcomboViewer.setInput(root);
+		if (activeConfigurationTreeNode != null)
+		{
+			activeConfigcomboViewer.setSelection(new StructuredSelection(activeConfigurationTreeNode));
+		}
+		activeConfigcomboViewer.addSelectionChangedListener(new ISelectionChangedListener()
+		{
+
+			@Override
+			public void selectionChanged(SelectionChangedEvent event)
+			{
+				Object o = event.getSelection();
+				IStructuredSelection sel = (IStructuredSelection) o;
+				TreeNodeWrapper tn = (TreeNodeWrapper) sel.getFirstElement();
+				BTSConfiguration configuration = (BTSConfiguration) tn.getObject();
+				if (activeConfiguration == null || !activeConfiguration.equals(configuration))
+				{
+					setActiveConfiguration(configuration);
+				}
+			}
+		});
 		// Set the writeableList as input for the viewer
 		treeViewer.setInput(root);
 

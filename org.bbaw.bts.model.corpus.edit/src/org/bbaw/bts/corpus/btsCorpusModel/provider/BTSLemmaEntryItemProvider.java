@@ -5,6 +5,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -132,6 +133,11 @@ Display
 	public String getText(Object object)
 	{
 		String label = ((BTSLemmaEntry) object).getName();
+		String translation = getTranslationString(object);
+		if (translation != null && !"".equals(translation))
+		{
+			label += " (" + translation + ")";
+		}
 		return label == null || label.length() == 0 ? getString("_UI_BTSLemmaEntry_type") : label;
 	}
 
@@ -151,9 +157,29 @@ Display
 		} else {
 			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
+		String translation = getTranslationString(object);
+		if (translation != null && !"".equals(translation))
+		{
+			styledLabel.append(" (" + translation + ")", StyledString.Style.QUALIFIER_STYLER);
+		}
 		styledLabel.append(" [" + ((BTSCorpusObject)object).getProject() +  "]", GREY);
 
 		return styledLabel;
+	}
+
+	private String getTranslationString(Object object) {
+		String translation = "";
+		if (object instanceof BTSLemmaEntry)
+		{
+			BTSLemmaEntry lemma = (BTSLemmaEntry) object;
+			if (lemma.getTranslations() == null) return translation;
+			translation = lemma.getTranslations().getTranslation("de");
+			if ("".equals(translation))
+			{
+				translation = lemma.getTranslations().getTranslation("en");
+			}
+		}
+		return translation;
 	}
 
 	/**

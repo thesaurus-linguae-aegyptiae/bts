@@ -20,27 +20,21 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.GenericCorpusObjectNavigatorController;
-import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
-import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
-import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public abstract class AbstractCorpusObjectNavigatorControllerImpl<E extends BTSCorpusObject, K extends Serializable>
@@ -346,7 +340,7 @@ GenericCorpusObjectNavigatorController<E, K>
 	@Override
 	public List<E> getSearchEntries(BTSQueryRequest query, 
 			Map<String, BTSQueryResultAbstract> queryResultMap,
-			TreeViewer viewer, TreeNodeWrapper parentHolder,
+			StructuredViewer viewer, TreeNodeWrapper parentHolder,
 			EReference referenceName, IProgressMonitor monitor) {
 		System.out.println(query.getQueryId());
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
@@ -370,13 +364,13 @@ GenericCorpusObjectNavigatorController<E, K>
 	}
 	
 	@Override
-	public List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor) {
+	public List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor, boolean asStructuredTree) {
 		List<TreeNodeWrapper> nodes;
 		if (monitor != null)
 		{
 			monitor.beginTask("Load Elements to Treenodes", obs.size());
 		}
-		if (obs.size() > 200)
+		if (asStructuredTree && obs.size() > 200)
 		{
 			nodes = new Vector<TreeNodeWrapper>();
 			System.out.println("size " + obs.size());
