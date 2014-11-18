@@ -48,10 +48,14 @@
 		<module>org.bbaw.bts.core.services.corpus.impl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>
-
 		<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
+		
 		<module>org.bbaw.bts.db</module>
 		<module>org.bbaw.bts.db.couchdb</module>
+		<module>org.bbaw.bts.db.couchdb.mac</module>
+		<module>org.bbaw.bts.db.couchdb.win32</module>
+		<module>org.bbaw.bts.db.couchdb.win64</module>
+		
 		<module>org.bbaw.bts.e4.p2</module>
 		<module>org.bbaw.bts.model</module>
 		<module>org.bbaw.bts.model.edit</module>
@@ -209,13 +213,13 @@
 							<arch>x86_64</arch>
 						</environment>
 						
-						<!--
+						
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
 						</environment>
-						-->
+						<!---->
 					</environments>
 				</configuration>
 			</plugin>

@@ -87,7 +87,7 @@ import com.google.gson.JsonSyntaxException;
 public class CouchDBManager implements DBManager
 {
 	//FIXME javascript korrigieren
-	private static final String VALIDATE_DOC_READ = "function(doc,userCtx,secObj){if(!doc.visibility){return;}else{if(doc.visibility=='public'||doc.visibility=='repository'||doc.visibility=='project'){return;}} if(userCtx.roles.indexOf('_admin')!==-1||userCtx.roles.indexOf('admin')!==-1){return;}else if(secObj&&secObj.admins&&secObj.admins.roles){for(var i=0,l=secObj.admins.roles.length;i<l;i++){if(userCtx.roles.indexOf(secObj.admins.roles[i])!==-1){return;}}}else{if(userCtx.roles.indexOf('editors')!==-1){return;} if(secObj&&secObj.editors&&secObj.editors.roles){for(var i=0,l=secObj.editors.roles.length;i<l;i++){if(userCtx.roles.indexOf(secObj.editors[i])!==-1){return;}}} for(var i=0,l=doc.readers.length;i<l;i++){if(doc.readers[i]==userCtx.name){return;} if(userCtx.roles.indexOf(doc.readers[i])!==-1){return;}}} throw({forbidden:secObj.admins.names[0]+secObj.editors.names[0]+'name: '+userCtx.name+userCtx.roles[0]+' '+userCtx.roles[1]+' Only admins may edit the database. Hallo Welt22. writers: '+doc.readers[0]});throw({forbidden:secObj.admins.names[0]+' hallo '+secObj.editors.names[0]+' name: '+userCtx.name+userCtx.roles[0]+' '+userCtx.roles[1]+' Only admins may edit the database. Hallo Welt22. writers: '+doc.writers[0]});}";
+	private static final String VALIDATE_DOC_READ = "function(doc,userCtx,secObj){if(!doc.visibility){return;}else{if(doc.visibility=='public'||doc.visibility=='repository'||doc.visibility=='project'){return;}} if(userCtx.roles.indexOf('_admin')!==-1||userCtx.roles.indexOf('admin')!==-1){return;}else if(secObj&&secObj.admins&&secObj.admins.roles){for(var i=0,l=secObj.admins.roles.length;i<l;i++){if(userCtx.roles.indexOf(secObj.admins.roles[i])!==-1){return;}}}else{if(userCtx.roles.indexOf('editors')!==-1){return;} if(secObj&&secObj.editors&&secObj.editors.roles){for(var i=0,l=secObj.editors.roles.length;i<l;i++){if(userCtx.roles.indexOf(secObj.editors[i])!==-1){return;}}} for(var i=0,l=doc.readers.length;i<l;i++){if(doc.readers[i]==userCtx.name){return;} if(userCtx.roles.indexOf(doc.readers[i])!==-1){return;}}} throw({forbidden:secObj.admins.names[0]+secObj.editors.names[0]+'name: '+userCtx.name+userCtx.roles[0]+' '+userCtx.roles[1]+' Only admins may edit the database. writers: '+doc.readers[0]});throw({forbidden:secObj.admins.names[0]+' hallo '+secObj.editors.names[0]+' name: '+userCtx.name+userCtx.roles[0]+' '+userCtx.roles[1]+' Only admins may edit the database. Writers: '+doc.writers[0]});}";
 	//FIXME javascript korrigieren
 	private static final String VALIDATE_DOC_UPDATE = "function(newDoc,oldDoc,userCtx,secObj){return;}";
 	
@@ -910,11 +910,21 @@ public class CouchDBManager implements DBManager
 				BufferedWriter bufwriter = new BufferedWriter(new FileWriter(
 						localIni));
 				bufwriter.write(stringBufferOfData.toString());
+				bufwriter.flush();
 				bufwriter.close();// closes the file
 			} catch (Exception e) {// if an exception occurs
 				logger.info("Error occured while attempting to write to file: "
 								+ e.getMessage());
 			}
+		}
+		
+		if (OSValidator.isMac())
+		{
+			//FIXME copy Apache CouchDB.app into Applications folder or don't!
+			
+		}
+		else if (OSValidator.isUnix())
+		{
 		}
 		logger.info("CouchDB installed");
 
@@ -1096,19 +1106,20 @@ public class CouchDBManager implements DBManager
 	}
 
 	private String getOSCouchDBStartUpFileName(String dbInsallationDir) throws FileNotFoundException {
-		String runFileName = dbInsallationDir  + BTSConstants.FS + DB_ARCHIVE_NAME + BTSConstants.FS + "bin" + BTSConstants.FS;
+		String runFileName = dbInsallationDir  + BTSConstants.FS + DB_ARCHIVE_NAME;
 		if (OSValidator.isWindows())
 		{
-			return runFileName + "couchdb.bat";
+			return runFileName  + BTSConstants.FS + "bin" + BTSConstants.FS + "couchdb.bat";
 		}
 		else if (OSValidator.isMac())
 		{
 			//FIXME
-			return runFileName + "couchdb.bat";
+			return runFileName +  BTSConstants.FS + "Apache CouchDB.app" + BTSConstants.FS 
+					+ "Contents"+ BTSConstants.FS + "MacOS" + BTSConstants.FS + "Apache CouchDB";
 		}
 		else if (OSValidator.isUnix())
 		{
-			return runFileName + "couchdb.sh";
+			return runFileName  + BTSConstants.FS + "bin" + BTSConstants.FS + "couchdb.sh";
 		}
 		
 //		File dir = new File(runFileName);

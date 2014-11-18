@@ -1175,14 +1175,14 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = RULE_EGYSTRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:16: ( ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+ )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:18: ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:16: ( ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '+' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+ )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:18: ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '+' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:18: ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:18: ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '+' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+
             int cnt5=0;
             loop5:
             do {
-                int alt5=98;
+                int alt5=99;
                 alt5 = dfa5.predict(input);
                 switch (alt5) {
             	case 1 :
@@ -1624,254 +1624,261 @@ public class InternalEgyDslLexer extends Lexer {
             	    }
             	    break;
             	case 62 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:475: '\\u010D'
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:475: '+'
+            	    {
+            	    match('+'); 
+
+            	    }
+            	    break;
+            	case 63 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:479: '\\u010D'
             	    {
             	    match('\u010D'); 
 
             	    }
             	    break;
-            	case 63 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:484: '\\u010D\\u0323'
+            	case 64 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:488: '\\u010D\\u0323'
             	    {
             	    match("\u010D\u0323"); 
 
 
             	    }
             	    break;
-            	case 64 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:499: '\\u010C'
+            	case 65 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:503: '\\u010C'
             	    {
             	    match('\u010C'); 
 
             	    }
             	    break;
-            	case 65 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:508: '\\u010C\\u0323'
+            	case 66 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:512: '\\u010C\\u0323'
             	    {
             	    match("\u010C\u0323"); 
 
 
             	    }
             	    break;
-            	case 66 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:523: 'a'
+            	case 67 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:527: 'a'
             	    {
             	    match('a'); 
 
             	    }
             	    break;
-            	case 67 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:527: 'J'
+            	case 68 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:531: 'J'
             	    {
             	    match('J'); 
 
             	    }
             	    break;
-            	case 68 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:531: 'Y'
+            	case 69 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:535: 'Y'
             	    {
             	    match('Y'); 
 
             	    }
             	    break;
-            	case 69 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:535: 'W'
+            	case 70 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:539: 'W'
             	    {
             	    match('W'); 
 
             	    }
             	    break;
-            	case 70 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:539: 'B'
+            	case 71 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:543: 'B'
             	    {
             	    match('B'); 
 
             	    }
             	    break;
-            	case 71 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:543: 'P'
+            	case 72 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:547: 'P'
             	    {
             	    match('P'); 
 
             	    }
             	    break;
-            	case 72 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:547: 'F'
+            	case 73 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:551: 'F'
             	    {
             	    match('F'); 
 
             	    }
             	    break;
-            	case 73 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:551: 'M'
+            	case 74 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:555: 'M'
             	    {
             	    match('M'); 
 
             	    }
             	    break;
-            	case 74 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:555: 'N'
+            	case 75 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:559: 'N'
             	    {
             	    match('N'); 
 
             	    }
             	    break;
-            	case 75 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:559: 'R'
+            	case 76 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:563: 'R'
             	    {
             	    match('R'); 
 
             	    }
             	    break;
-            	case 76 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:563: 'L'
+            	case 77 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:567: 'L'
             	    {
             	    match('L'); 
 
             	    }
             	    break;
-            	case 77 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:567: 'Z'
+            	case 78 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:571: 'Z'
             	    {
             	    match('Z'); 
 
             	    }
             	    break;
-            	case 78 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:571: 'Q'
+            	case 79 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:575: 'Q'
             	    {
             	    match('Q'); 
 
             	    }
             	    break;
-            	case 79 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:575: 'K'
+            	case 80 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:579: 'K'
             	    {
             	    match('K'); 
 
             	    }
             	    break;
-            	case 80 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:579: 'G'
+            	case 81 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:583: 'G'
             	    {
             	    match('G'); 
 
             	    }
             	    break;
-            	case 81 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:583: 'D'
+            	case 82 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:587: 'D'
             	    {
             	    match('D'); 
 
             	    }
             	    break;
-            	case 82 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:587: 'A'
+            	case 83 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:591: 'A'
             	    {
             	    match('A'); 
 
             	    }
             	    break;
-            	case 83 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:591: '\\u2C80' .. '\\u2CFF'
+            	case 84 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:595: '\\u2C80' .. '\\u2CFF'
             	    {
             	    matchRange('\u2C80','\u2CFF'); 
 
             	    }
             	    break;
-            	case 84 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:610: 'p'
+            	case 85 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:614: 'p'
             	    {
             	    match('p'); 
 
             	    }
             	    break;
-            	case 85 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:614: 'l'
+            	case 86 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:618: 'l'
             	    {
             	    match('l'); 
 
             	    }
             	    break;
-            	case 86 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:618: '='
+            	case 87 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:622: '='
             	    {
             	    match('='); 
 
             	    }
             	    break;
-            	case 87 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:622: '_'
+            	case 88 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:626: '_'
             	    {
             	    match('_'); 
 
             	    }
             	    break;
-            	case 88 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:626: '\\u205D'
+            	case 89 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:630: '\\u205D'
             	    {
             	    match('\u205D'); 
 
             	    }
             	    break;
-            	case 89 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:635: '0' .. '9'
+            	case 90 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:639: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
             	    }
             	    break;
-            	case 90 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:644: '\\u00D5'
+            	case 91 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:648: '\\u00D5'
             	    {
             	    match('\u00D5'); 
 
             	    }
             	    break;
-            	case 91 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:653: '\\u00E3'
+            	case 92 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:657: '\\u00E3'
             	    {
             	    match('\u00E3'); 
 
             	    }
             	    break;
-            	case 92 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:662: '\\u00DE'
+            	case 93 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:666: '\\u00DE'
             	    {
             	    match('\u00DE'); 
 
             	    }
             	    break;
-            	case 93 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:671: '!'
+            	case 94 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:675: '!'
             	    {
             	    match('!'); 
 
             	    }
             	    break;
-            	case 94 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:675: '\\u0152'
+            	case 95 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:679: '\\u0152'
             	    {
             	    match('\u0152'); 
 
             	    }
             	    break;
-            	case 95 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:684: '\\u0153'
+            	case 96 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:688: '\\u0153'
             	    {
             	    match('\u0153'); 
 
             	    }
             	    break;
-            	case 96 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:693: '\\u0178'
+            	case 97 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:697: '\\u0178'
             	    {
             	    match('\u0178'); 
 
             	    }
             	    break;
-            	case 97 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:702: '\\u00C6'
+            	case 98 :
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2838:706: '\\u00C6'
             	    {
             	    match('\u00C6'); 
 
@@ -2241,45 +2248,46 @@ public class InternalEgyDslLexer extends Lexer {
     protected DFA5 dfa5 = new DFA5(this);
     protected DFA6 dfa6 = new DFA6(this);
     static final String DFA5_eotS =
-        "\1\1\16\uffff\1\131\3\uffff\1\134\32\uffff\1\142\3\uffff\1\144"+
-        "\1\146\2\uffff\1\150\1\152\47\uffff\1\154\15\uffff";
+        "\1\1\16\uffff\1\132\3\uffff\1\135\32\uffff\1\143\3\uffff\1\145"+
+        "\1\147\3\uffff\1\151\1\153\47\uffff\1\155\15\uffff";
     static final String DFA5_eofS =
-        "\155\uffff";
+        "\156\uffff";
     static final String DFA5_minS =
         "\1\41\16\uffff\1\u032d\3\uffff\1\u032d\27\uffff\1\u032d\1\u0357"+
-        "\1\uffff\1\u032f\3\uffff\2\u032f\2\uffff\2\u0323\47\uffff\1\u032f"+
+        "\1\uffff\1\u032f\3\uffff\2\u032f\3\uffff\2\u0323\47\uffff\1\u032f"+
         "\15\uffff";
     static final String DFA5_maxS =
         "\1\ua725\16\uffff\1\u032d\3\uffff\1\u0331\27\uffff\1\u032f\1\u0357"+
-        "\1\uffff\1\u0357\3\uffff\2\u032f\2\uffff\2\u0323\47\uffff\1\u032f"+
+        "\1\uffff\1\u0357\3\uffff\2\u032f\3\uffff\2\u0323\47\uffff\1\u032f"+
         "\15\uffff";
     static final String DFA5_acceptS =
-        "\1\uffff\1\142\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13"+
+        "\1\uffff\1\143\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13"+
         "\1\14\1\15\1\uffff\1\17\1\20\1\21\1\uffff\1\23\1\24\1\27\1\30\1"+
         "\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40\1\41\1\42\1\43\1\44\1\45"+
         "\1\46\1\47\1\50\1\51\1\52\1\53\2\uffff\1\60\1\uffff\1\65\1\66\1"+
-        "\67\2\uffff\1\74\1\75\2\uffff\1\102\1\103\1\104\1\105\1\106\1\107"+
+        "\67\2\uffff\1\74\1\75\1\76\2\uffff\1\103\1\104\1\105\1\106\1\107"+
         "\1\110\1\111\1\112\1\113\1\114\1\115\1\116\1\117\1\120\1\121\1\122"+
         "\1\123\1\124\1\125\1\126\1\127\1\130\1\131\1\132\1\133\1\134\1\135"+
-        "\1\136\1\137\1\140\1\141\1\54\1\16\1\25\1\26\1\22\1\55\1\61\1\uffff"+
-        "\1\62\1\64\1\63\1\71\1\70\1\73\1\72\1\77\1\76\1\101\1\100\1\57\1"+
-        "\56";
+        "\1\136\1\137\1\140\1\141\1\142\1\54\1\16\1\25\1\26\1\22\1\55\1\61"+
+        "\1\uffff\1\62\1\64\1\63\1\71\1\70\1\73\1\72\1\100\1\77\1\102\1\101"+
+        "\1\57\1\56";
     static final String DFA5_specialS =
-        "\155\uffff}>";
+        "\156\uffff}>";
     static final String[] DFA5_transitionS = {
-            "\1\123\15\uffff\1\65\12\117\3\uffff\1\114\3\uffff\1\110\1\74"+
-            "\1\uffff\1\107\1\uffff\1\76\1\106\1\23\1\56\1\71\1\105\1\102"+
-            "\1\77\1\100\1\uffff\1\75\1\104\1\101\1\32\1\44\1\63\1\uffff"+
-            "\1\73\1\uffff\1\72\1\103\4\uffff\1\115\1\uffff\1\70\1\12\1\uffff"+
-            "\1\50\1\64\1\13\1\37\1\17\1\53\1\7\1\36\1\113\1\14\1\15\1\uffff"+
-            "\1\112\1\35\1\16\1\27\1\40\1\62\1\uffff\1\11\1\uffff\1\10\1"+
-            "\26\113\uffff\1\127\10\uffff\1\57\5\uffff\1\120\10\uffff\1\122"+
-            "\4\uffff\1\121\13\uffff\1\55\34\uffff\1\67\1\66\43\uffff\1\54"+
-            "\40\uffff\1\124\1\125\6\uffff\1\34\1\31\4\uffff\1\33\1\30\26"+
-            "\uffff\1\126\u0145\uffff\1\4\u1b4f\uffff\1\52\1\51\24\uffff"+
-            "\1\24\1\20\4\uffff\1\25\1\21\6\uffff\1\61\1\60\70\uffff\1\46"+
-            "\1\42\1\45\1\41\1\47\1\43\44\uffff\1\22\u01c6\uffff\1\116\u0c22"+
-            "\uffff\u0080\111\u7a22\uffff\1\2\1\3\1\6\1\5",
+            "\1\124\11\uffff\1\66\3\uffff\1\65\12\120\3\uffff\1\115\3\uffff"+
+            "\1\111\1\75\1\uffff\1\110\1\uffff\1\77\1\107\1\23\1\56\1\72"+
+            "\1\106\1\103\1\100\1\101\1\uffff\1\76\1\105\1\102\1\32\1\44"+
+            "\1\63\1\uffff\1\74\1\uffff\1\73\1\104\4\uffff\1\116\1\uffff"+
+            "\1\71\1\12\1\uffff\1\50\1\64\1\13\1\37\1\17\1\53\1\7\1\36\1"+
+            "\114\1\14\1\15\1\uffff\1\113\1\35\1\16\1\27\1\40\1\62\1\uffff"+
+            "\1\11\1\uffff\1\10\1\26\113\uffff\1\130\10\uffff\1\57\5\uffff"+
+            "\1\121\10\uffff\1\123\4\uffff\1\122\13\uffff\1\55\34\uffff\1"+
+            "\70\1\67\43\uffff\1\54\40\uffff\1\125\1\126\6\uffff\1\34\1\31"+
+            "\4\uffff\1\33\1\30\26\uffff\1\127\u0145\uffff\1\4\u1b4f\uffff"+
+            "\1\52\1\51\24\uffff\1\24\1\20\4\uffff\1\25\1\21\6\uffff\1\61"+
+            "\1\60\70\uffff\1\46\1\42\1\45\1\41\1\47\1\43\44\uffff\1\22\u01c6"+
+            "\uffff\1\117\u0c22\uffff\u0080\112\u7a22\uffff\1\2\1\3\1\6\1"+
+            "\5",
             "",
             "",
             "",
@@ -2294,11 +2302,11 @@ public class InternalEgyDslLexer extends Lexer {
             "",
             "",
             "",
-            "\1\130",
+            "\1\131",
             "",
             "",
             "",
-            "\1\133\3\uffff\1\132",
+            "\1\134\3\uffff\1\133",
             "",
             "",
             "",
@@ -2322,20 +2330,20 @@ public class InternalEgyDslLexer extends Lexer {
             "",
             "",
             "",
-            "\1\136\1\uffff\1\135",
-            "\1\137",
+            "\1\137\1\uffff\1\136",
+            "\1\140",
             "",
-            "\1\141\47\uffff\1\140",
+            "\1\142\47\uffff\1\141",
             "",
             "",
             "",
-            "\1\143",
-            "\1\145",
+            "\1\144",
+            "\1\146",
             "",
             "",
-            "\1\147",
-            "\1\151",
             "",
+            "\1\150",
+            "\1\152",
             "",
             "",
             "",
@@ -2374,7 +2382,8 @@ public class InternalEgyDslLexer extends Lexer {
             "",
             "",
             "",
-            "\1\153",
+            "",
+            "\1\154",
             "",
             "",
             "",
@@ -2420,7 +2429,7 @@ public class InternalEgyDslLexer extends Lexer {
             this.transition = DFA5_transition;
         }
         public String getDescription() {
-            return "()+ loopback of 2838:18: ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+";
+            return "()+ loopback of 2838:18: ( '\\uA722' | '\\uA723' | '\\u02BE' | '\\uA725' | '\\uA724' | 'j' | 'y' | 'w' | 'b' | 'f' | 'm' | 'n' | 'r' | 'h' | '\\u1E25' | '\\u1E2B' | '\\u1E96' | 'H' | '\\u1E24' | '\\u1E2A' | 'H\\u0331' | 'H\\u032D' | 'z' | 's' | '\\u0161' | '\\u015B' | 'S' | '\\u0160' | '\\u015A' | 'q' | 'k' | 'g' | 't' | '\\u1E6F' | '\\u1E6D' | '\\u1E71' | 'T' | '\\u1E6E' | '\\u1E6C' | '\\u1E70' | 'd' | '\\u1E0F' | '\\u1E0E' | 'h\\u032D' | 'i\\u032F' | '\\u0131\\u0357' | '\\u0131\\u0357\\u032F' | '\\u00EF' | 'i\\u032D' | 'I\\u0357' | 'I' | 'I\\u032F' | '\\u00CF' | '\\u1E33' | '\\u1E32' | 'u' | 'u\\u032F' | 'U' | 'U\\u032F' | 'e' | '/' | '+' | '\\u010D' | '\\u010D\\u0323' | '\\u010C' | '\\u010C\\u0323' | 'a' | 'J' | 'Y' | 'W' | 'B' | 'P' | 'F' | 'M' | 'N' | 'R' | 'L' | 'Z' | 'Q' | 'K' | 'G' | 'D' | 'A' | '\\u2C80' .. '\\u2CFF' | 'p' | 'l' | '=' | '_' | '\\u205D' | '0' .. '9' | '\\u00D5' | '\\u00E3' | '\\u00DE' | '!' | '\\u0152' | '\\u0153' | '\\u0178' | '\\u00C6' )+";
         }
     }
     static final String DFA6_eotS =
@@ -2444,32 +2453,32 @@ public class InternalEgyDslLexer extends Lexer {
         "\74\uffff}>";
     static final String[] DFA6_transitionS = {
             "\2\34\2\uffff\1\34\22\uffff\1\1\1\37\1\uffff\1\36\1\uffff\1"+
-            "\3\2\uffff\1\10\1\11\2\uffff\1\24\1\32\1\25\13\37\1\27\1\33"+
-            "\1\12\1\6\1\13\1\15\1\uffff\2\37\1\uffff\1\37\1\uffff\11\37"+
-            "\1\uffff\6\37\1\uffff\1\37\1\uffff\2\37\1\16\1\uffff\1\17\1"+
-            "\uffff\1\37\1\uffff\2\37\1\35\13\37\1\uffff\6\37\1\uffff\1\37"+
-            "\1\uffff\2\37\1\20\1\4\1\21\1\31\50\uffff\1\2\36\uffff\1\37"+
-            "\10\uffff\1\37\5\uffff\1\37\10\uffff\1\37\4\uffff\1\37\13\uffff"+
-            "\1\37\34\uffff\2\37\43\uffff\1\37\40\uffff\2\37\6\uffff\2\37"+
-            "\4\uffff\2\37\26\uffff\1\37\u0145\uffff\1\37\u1b4f\uffff\2\37"+
-            "\24\uffff\2\37\4\uffff\2\37\6\uffff\2\37\70\uffff\6\37\44\uffff"+
-            "\1\37\u01c6\uffff\1\37\u0203\uffff\1\26\u008c\uffff\1\30\u0991"+
-            "\uffff\u0080\37\u0122\uffff\1\22\1\23\12\uffff\1\14\u78f3\uffff"+
-            "\4\37\u30e6\uffff\1\7\u0373\uffff\1\5",
+            "\3\2\uffff\1\10\1\11\1\uffff\1\37\1\24\1\32\1\25\13\37\1\27"+
+            "\1\33\1\12\1\6\1\13\1\15\1\uffff\2\37\1\uffff\1\37\1\uffff\11"+
+            "\37\1\uffff\6\37\1\uffff\1\37\1\uffff\2\37\1\16\1\uffff\1\17"+
+            "\1\uffff\1\37\1\uffff\2\37\1\35\13\37\1\uffff\6\37\1\uffff\1"+
+            "\37\1\uffff\2\37\1\20\1\4\1\21\1\31\50\uffff\1\2\36\uffff\1"+
+            "\37\10\uffff\1\37\5\uffff\1\37\10\uffff\1\37\4\uffff\1\37\13"+
+            "\uffff\1\37\34\uffff\2\37\43\uffff\1\37\40\uffff\2\37\6\uffff"+
+            "\2\37\4\uffff\2\37\26\uffff\1\37\u0145\uffff\1\37\u1b4f\uffff"+
+            "\2\37\24\uffff\2\37\4\uffff\2\37\6\uffff\2\37\70\uffff\6\37"+
+            "\44\uffff\1\37\u01c6\uffff\1\37\u0203\uffff\1\26\u008c\uffff"+
+            "\1\30\u0991\uffff\u0080\37\u0122\uffff\1\22\1\23\12\uffff\1"+
+            "\14\u78f3\uffff\4\37\u30e6\uffff\1\7\u0373\uffff\1\5",
             "",
             "",
             "",
             "",
             "\1\41\1\40\1\42",
-            "\1\37\15\uffff\13\37\3\uffff\1\37\3\uffff\2\37\1\uffff\1\37"+
-            "\1\uffff\11\37\1\uffff\6\37\1\uffff\1\37\1\uffff\2\37\4\uffff"+
-            "\1\37\1\uffff\2\37\1\uffff\13\37\1\uffff\6\37\1\uffff\1\37\1"+
-            "\uffff\2\37\113\uffff\1\37\10\uffff\1\37\5\uffff\1\37\10\uffff"+
-            "\1\37\4\uffff\1\37\13\uffff\1\37\34\uffff\2\37\43\uffff\1\37"+
-            "\40\uffff\2\37\6\uffff\2\37\4\uffff\2\37\26\uffff\1\37\u0145"+
-            "\uffff\1\37\u1b4f\uffff\2\37\24\uffff\2\37\4\uffff\2\37\6\uffff"+
-            "\2\37\70\uffff\6\37\44\uffff\1\37\u01c6\uffff\1\37\u0c22\uffff"+
-            "\u0080\37\u7a22\uffff\4\37",
+            "\1\37\11\uffff\1\37\3\uffff\13\37\3\uffff\1\37\3\uffff\2\37"+
+            "\1\uffff\1\37\1\uffff\11\37\1\uffff\6\37\1\uffff\1\37\1\uffff"+
+            "\2\37\4\uffff\1\37\1\uffff\2\37\1\uffff\13\37\1\uffff\6\37\1"+
+            "\uffff\1\37\1\uffff\2\37\113\uffff\1\37\10\uffff\1\37\5\uffff"+
+            "\1\37\10\uffff\1\37\4\uffff\1\37\13\uffff\1\37\34\uffff\2\37"+
+            "\43\uffff\1\37\40\uffff\2\37\6\uffff\2\37\4\uffff\2\37\26\uffff"+
+            "\1\37\u0145\uffff\1\37\u1b4f\uffff\2\37\24\uffff\2\37\4\uffff"+
+            "\2\37\6\uffff\2\37\70\uffff\6\37\44\uffff\1\37\u01c6\uffff\1"+
+            "\37\u0c22\uffff\u0080\37\u7a22\uffff\4\37",
             "\1\44\51\uffff\1\45\3\uffff\1\50\1\51\u00f1\uffff\1\46\1\47",
             "\1\52",
             "\1\54",

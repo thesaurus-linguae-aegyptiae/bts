@@ -135,7 +135,7 @@ terminal EGYSTRING returns ecore::EString:(
  |'ḳ'|'Ḳ'
  |'u'|'u̯'|'U'|'\u0055\u032F'
  
- |'e'|'/'
+ |'e'|'/'|'+'
  
  |'č'|'č̣'|'Č'|'Č̣'
  |'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'
