@@ -14,27 +14,30 @@ import java.util.Map;
 
 
 
+
+
+
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
-import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.source.IAnnotationModel;
-import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.swt.graphics.Image;
 
 public interface BTSTextEditorController
 {
 
-	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap);
+	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
+			List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
+			Map<String, List<Object>> lemmaAnnotationMap);
 
 	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
 			TextViewer textViewer);
@@ -58,7 +61,7 @@ public interface BTSTextEditorController
 
 	String insertMarkerBehindSingleCode(String mdcString, String marker);
 	
-	List<BTSObject> getRelatingObjects(BTSText text);
+	List<BTSObject> getRelatingObjects(BTSText text, IProgressMonitor monitor);
 	
 	BTSText createNewText(BTSCorpusObject parentObject);
 	
@@ -74,4 +77,6 @@ public interface BTSTextEditorController
 			EObject eo, IAnnotationModel am);
 	
 	boolean checkAndFullyLoad(BTSCorpusObject object);
+
+	BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor);
 }

@@ -2,6 +2,8 @@ package org.bbaw.bts.core.services.corpus.impl.services;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -25,6 +27,12 @@ extends AbstractCorpusObjectServiceImpl<BTSLemmaEntry, String>
 implements BTSLemmaEntryService, BTSObjectSearchService
 {
 
+	private final static Pattern doublePointPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DOUBLE_POINT_PATTERN);
+	
+	private final static Pattern pointPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_POINT_PATTERN);
+	
+	private final static Pattern deletionPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DELETION_PATTERN);
+	
 	@Inject
 	private BTSLemmaEntryDao lemmaEntryDao;
 
@@ -63,10 +71,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public BTSLemmaEntry find(String key)
+	public BTSLemmaEntry find(String key, IProgressMonitor monitor)
 	{
 		BTSLemmaEntry entry = null;
-		entry = lemmaEntryDao.find(key, main_project + BTSCorpusConstants.WLIST);
+		try {
+			entry = lemmaEntryDao.find(key, main_project + BTSCorpusConstants.WLIST);
+		} catch (Exception e1) {
+		}
 		if (entry != null)
 		{
 			return entry;
@@ -88,7 +99,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> list(String objectState)
+	public List<BTSLemmaEntry> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
 		for (String p : getActiveProjects())
@@ -105,7 +116,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 	@Override
 	public List<BTSLemmaEntry> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
 		for (String p : getActiveProjects())
@@ -125,13 +136,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSLemmaEntry> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
 	public List<BTSLemmaEntry> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return filter(lemmaEntryDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -158,13 +169,73 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word) {
+	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor) {
+		String chars = processWordChars(word);
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.matchQuery("name",
-				word.getWChar()));
+				chars));
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
-		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
-		return children;
+		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		children = lemmaFilterReviewState(children);
+		return filter(children);
+	}
+
+	private List<BTSLemmaEntry> lemmaFilterReviewState(
+			List<BTSLemmaEntry> children) {
+		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
+		for (BTSLemmaEntry entry : children)
+		{
+			if (entry.getRevisionState() != null && !entry.getRevisionState().contains("obsolete"))
+			{
+				filtered.add(entry);
+			}
+		}
+		return filtered;
+	}
+
+	private String processWordChars(BTSWord word) {
+		String chars = word.getWChar();
+		
+		// cut left side
+		Matcher m = doublePointPattern.matcher(chars);
+		if (m.find())
+		{
+			chars = m.group(2); 
+		}
+		
+		// cut right side
+		if (chars.contains("."))
+		{
+			m = pointPattern.matcher(chars);
+			if (m.find())
+			{
+				chars = m.group(1); 
+			}
+		}
+		
+		// cut right side
+				if (chars.contains("{"))
+				{
+					m = deletionPattern.matcher(chars);
+					if (m.find())
+					{
+						chars = m.replaceAll(""); 
+					}
+				}
+		
+		// replace
+		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_POINT, ":");
+		
+		chars = chars.replaceAll(",", ".");
+		
+		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_EQUALS, "=");
+		
+		// remove brackets
+		for (String b : BTSCorpusConstants.LEMMATIZER_ESCAPED_BRACKETS_ARRAY)
+		{
+			chars = chars.replaceAll(b, "");
+		}
+		return chars;
 	}
 }

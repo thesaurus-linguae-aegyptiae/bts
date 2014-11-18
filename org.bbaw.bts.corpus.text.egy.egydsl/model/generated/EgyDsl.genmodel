@@ -45,16 +45,13 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//Chars/name"/>
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//Brackets"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//Cartouche2">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Cartouche2/wChar"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//Oval">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Oval/wChar"/>
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//Serech">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Serech/wChar"/>
     </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//Cartouche">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Cartouche/wChar"/>
-    </genClasses>
-    <genClasses ecoreClass="EgyDsl.ecore#//Oval"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//Cartouche"/>
     <genClasses ecoreClass="EgyDsl.ecore#//NoCartouche"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Expanded">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Expanded/wChar"/>
@@ -104,5 +101,6 @@
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixPrefixLexical"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixConnectionSyllabicGroup"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixCompoundWords"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//InterfixPhoneticalComplement"/>
   </genPackages>
 </genmodel:GenModel>

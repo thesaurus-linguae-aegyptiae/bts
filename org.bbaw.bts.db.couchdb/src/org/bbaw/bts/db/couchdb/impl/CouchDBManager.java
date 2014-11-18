@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +31,8 @@ import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.CopyDirectory;
@@ -52,15 +55,24 @@ import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.ElasticsearchParseException;
 import org.elasticsearch.action.UnavailableShardsException;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexResponse;
 import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
+import org.elasticsearch.action.admin.indices.refresh.RefreshRequestBuilder;
+import org.elasticsearch.action.admin.indices.stats.IndexStats;
+import org.elasticsearch.action.admin.indices.stats.IndicesStatsRequest;
+import org.elasticsearch.action.admin.indices.stats.IndicesStatsResponse;
+import org.elasticsearch.action.delete.DeleteResponse;
+import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.client.Requests;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.node.Node;
+import org.elasticsearch.river.couchdb.CouchdbRiver;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.NoDocumentException;
@@ -650,9 +662,13 @@ public class CouchDBManager implements DBManager
 		// TODO Auto-generated method stub
 
 	}
+	
+	
 
-	private void createRiver(Client esClient2, String collectionName)
+	private void createRiver(final Client esClient2, final String collectionName)
 	{
+//		CouchdbRiver r = new CouchdbRiver(arg0, arg1, arg2, arg3, arg4);
+		String json = "";
 		try
 		{
 			URL url = new URL(connectionProvider.getLocalDBURL());
@@ -666,7 +682,7 @@ public class CouchDBManager implements DBManager
 				}
 			}
 			
-			String json = "{\r\n" + "    \"type\" : \"couchdb\",\r\n" + "    \"couchdb\" : {\r\n"
+			json = "{\r\n" + "    \"type\" : \"couchdb\",\r\n" + "    \"couchdb\" : {\r\n"
 					+ "        \"user\" : \""
 					+ username
 					+ "\",\r\n"
@@ -696,7 +712,7 @@ public class CouchDBManager implements DBManager
 					+ "\"type\": \""
 					+ collectionName
 					+ "\",\r\n"
-					+ "\"bulk_size\": 100,\r\n" + "\"bulk_timeout\": \"10ms\"\r\n" + "}\r\n}";
+					+ "\"bulk_size\": 100,\r\n" + "\"bulk_timeout\": \"500ms\"\r\n" + "}\r\n}";
 			//FIXME suppress credentials in logging
 			logger.info(json);
 			esClient2.index(Requests.indexRequest("_river").type(collectionName).id("_meta").source(json)).actionGet();
@@ -707,7 +723,43 @@ public class CouchDBManager implements DBManager
 			e.printStackTrace();
 			if (e instanceof UnavailableShardsException)
 			{
-				// TODO delete elasticsearch dir
+				final String fjson = json;
+				// TODO delete elasticsearch dirasdf
+				Job sleeper = new Job("sleeper") {
+
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+				for (int i = 0; i < 5; i++)
+				{
+					try {
+						
+						esClient2.index(Requests.indexRequest("_river").type(collectionName).id("_meta").source(fjson)).actionGet();
+					} catch (Exception ee) {
+						logger.error(ee);
+					}
+					Job sleeper = new Job("sleeper") {
+
+						@Override
+						protected IStatus run(IProgressMonitor monitor) {
+							System.out.println("sleep");
+							return Status.OK_STATUS;
+						}
+
+					};
+					sleeper.schedule(1000);
+					try {
+						sleeper.join();
+					} catch (InterruptedException eee) {
+						// TODO Auto-generated catch block
+						eee.printStackTrace();
+					}
+
+					System.out.println("slept");
+				}
+				return Status.OK_STATUS;
+					}
+
+				};
 			}
 		}
 
@@ -1373,5 +1425,165 @@ public class CouchDBManager implements DBManager
 	public String getLocalESGuiURL() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public List<DBCollectionStatusInformation> getDBCollectionStatusInformations(IProgressMonitor monitor) {
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, "admin");
+		try {
+			Client esClient = getClient();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<String> allDBs = dbClient.context().getAllDbs();
+		Map<String, ReplicatorDocument> replicationMap = null;
+		try {
+			replicationMap = loadReplicationMap();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (monitor != null)
+		{
+			monitor.beginTask("Load DB Collection Information...", allDBs.size());
+		}
+		List<DBCollectionStatusInformation> dbCollectionInfos = new Vector<DBCollectionStatusInformation>(allDBs.size());
+		for (String db : allDBs)
+		{
+			DBCollectionStatusInformation info = BtsviewmodelFactory.eINSTANCE.createDBCollectionStatusInformation();
+			info.setDbCollectionName(db);
+			dbCollectionInfos.add(info);
+			
+			// db info
+			CouchDbClient collectionClient = connectionProvider.getDBClient(CouchDbClient.class, db);
+			info.setDbDiskSize(new Long(collectionClient.context().info().getDiskSize()).toString());
+			info.setDbDocCount(collectionClient.context().info().getDocCount());
+			info.setDbDocDelCount(new Long(collectionClient.context().info().getDocDelCount()).toString());
+			info.setDbPurgeSeq(new Long(collectionClient.context().info().getPurgeSeq()).toString());
+			info.setDbUpdateSeq(collectionClient.context().info().getUpdateSeq());
+			
+			// db sync
+			if (replicationMap != null)
+			{
+				ReplicatorDocument docFrom = replicationMap.get(db + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
+				if (docFrom != null)
+				{
+					info.setSyncStatusFromRemote(docFrom.getReplicationState());
+				}
+				ReplicatorDocument docTo = replicationMap.get(db + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
+				if (docTo != null)
+				{
+					info.setSyncStatusToRemote(docTo.getReplicationState());
+				}
+			}
+			
+			// index
+			try {
+				IndicesAdminClient iac = esClient.admin().indices();
+				IndicesStatsResponse isr = iac.stats(new IndicesStatsRequest()).actionGet();
+				IndexStats is = isr.getIndex(db);
+				info.setIndexDocCount(is.getTotal().docs.getCount());
+			}  
+			catch (ElasticsearchException e) {
+				info.setIndexDocCount(-1);
+				e.printStackTrace();
+			} catch (Exception e) {
+				info.setIndexDocCount(-1);
+				e.printStackTrace();
+			} finally {
+				
+			}
+			
+			try {
+//				RefreshRequestBuilder
+				IndicesAdminClient iac = esClient.admin().indices();
+				iac.prepareRefresh("_river")
+				.execute()
+				.actionGet();
+				GetResponse lastSeqGetResponse = esClient
+						.prepareGet("_river", db, "_seq")
+						.execute()
+						.actionGet();
+				 if (lastSeqGetResponse.isExists()) {
+				     Map<String, Object> couchdbState = (Map<String, Object>) lastSeqGetResponse.getSourceAsMap().get("couchdb");
+				     if (couchdbState != null) {
+				         String lastSeq = couchdbState.get("last_seq").toString(); // we know its always a string
+				         info.setIndexUpdateSeq(lastSeq);
+				     }
+				 }
+			} catch (ElasticsearchParseException e) {
+				e.printStackTrace();
+			} catch (ElasticsearchException e) {
+				e.printStackTrace();
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			// berechne index status
+			if (db.equals("_replicator") || db.equals("_users"))
+			{
+				info.setIndexStatus("SYSTEM DB");
+			}
+			else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20)
+			{
+				info.setIndexStatus("ERROR");
+			}
+			else if (info.getDbDocCount() - info.getIndexDocCount() > 4)
+			{
+				info.setIndexStatus("INDEX_BEHIND");
+			}
+			else
+			{
+				info.setIndexStatus("OK");
+			}
+			if (monitor != null)
+			{
+				monitor.worked(1);
+				if (monitor.isCanceled()) return dbCollectionInfos;
+			}
+		}
+		return dbCollectionInfos;
+	}
+
+	@Override
+	public boolean reindex(String dbCollectionName, IProgressMonitor monitor) {
+		return reIndexDBCollection(dbCollectionName, monitor);
+	}
+	
+	private boolean reIndexDBCollection(String dbCollectionName, IProgressMonitor monitor)
+	{
+		// remove index
+		try {
+			esClient = connectionProvider
+					.getSearchClient(Client.class);
+			boolean deleted = esClient.admin().indices().delete(new DeleteIndexRequest(dbCollectionName)).actionGet().isAcknowledged();
+			esClient.prepareGet("_river", dbCollectionName, "_seq").execute().actionGet();
+			DeleteResponse response = esClient.prepareDelete("_river", dbCollectionName, "_seq").execute().actionGet();
+
+		} catch (ElasticsearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// recreate index
+		try {
+			esClient = connectionProvider
+					.getSearchClient(Client.class);
+			
+			checkAndCreateIndex(dbCollectionName, esClient);
+			return true;
+
+		} catch (ElasticsearchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

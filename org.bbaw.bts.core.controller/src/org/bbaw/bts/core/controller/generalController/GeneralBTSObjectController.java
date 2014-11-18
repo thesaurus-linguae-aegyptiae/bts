@@ -34,6 +34,7 @@ import java.util.List;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * The GeneralBTSObjectController manages access to BTSObjects if their type is not specified.
@@ -49,7 +50,7 @@ public interface GeneralBTSObjectController {
 	 * @return the object proposals for
 	 */
 	List<BTSObject> getObjectProposalsFor(
-			BTSConfigItem configItem, String text, BTSObject object);
+			BTSConfigItem configItem, String text, BTSObject object, IProgressMonitor monitor);
 
 	/**
 	 * Gets the display name of the object by its id.
@@ -69,7 +70,7 @@ public interface GeneralBTSObjectController {
 	 * @return the list
 	 */
 	List<BTSObject> queryObjects(BTSQueryRequest query,
-			String objectState, boolean registerQuery, String className);
+			String objectState, boolean registerQuery, String className, IProgressMonitor monitor);
 	
 	/**
 	 * Find object by id and - if available - classname.
@@ -79,5 +80,5 @@ public interface GeneralBTSObjectController {
 	 * @param classname the classname if available of the object.
 	 * @return the BTS object
 	 */
-	BTSObject findObject(String id, String classname);
+	BTSObject findObject(String id, String classname, IProgressMonitor monitor);
 }

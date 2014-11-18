@@ -46,6 +46,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_xfuKgDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.handler.moveObjectAmongProjectDBCollectionHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.MoveObjectAmongProjectDBCollectionHandler" command="_6orvkDTgEeS85dzIPjkaNA"/>
     <elements xsi:type="commands:Handler" xmi:id="_qZdv0GmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openFutonHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenFutonHandler" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_xOH6gGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openESGui" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenESGui" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_Rr6bUGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.handler.openDBManagerDialogHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenDBManagerDialog" command="_L6KfIGvvEeSg5OVDz3RNmQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -83,6 +84,7 @@
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_dvqWsGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.command.openFuton" commandName="openFuton" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
     <elements xsi:type="commands:Command" xmi:id="_jzQQ0GmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.command.openESGui" commandName="openElasticsearchGui" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
+    <elements xsi:type="commands:Command" xmi:id="_L6KfIGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.command.openDBManagerDialog" commandName="Open DB Manager" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
@@ -94,6 +96,7 @@
     <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" toBeRendered="false" visible="false" label="TEST pref" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" toBeRendered="false" visible="false" label="New Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-add.png" command="_3ajhwAWXEeOmY4VxFYomZg"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_if9qwDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handledmenuitem.openUserManager" label="Open User Manager" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/users.png" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_aj03MGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openDBMangerDialog" label="Open Database Manager" command="_L6KfIGvvEeSg5OVDz3RNmQ"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="Preferences..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_07tpwGmmEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openFuton" label="Open Futon" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_sUKIoGmnEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openEsGui" label="Open ES GUI" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
@@ -142,11 +145,12 @@
     </elements>
     <elements xsi:type="menu:ToolControl" xmi:id="_KAuDoNzIEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.main.projecttoolcontrol" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.ProjectToolControl"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_O_kLUOuyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.bottom.main">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_O_kLUOuyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.bottom.main" positionInList="1">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_aw0L0OuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.toolbar.bottom.handledtoolitem.statusmessagedialog" label="Open Status Message Dialog" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/information.png" tooltip="Open Status Message Dialog to show last 25 messages" command="_lH4aYOu_EeOLEqD8tMK6Eg"/>
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_oVeDoOuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolbarseparator.4" toBeRendered="false" visible="false"/>
     <elements xsi:type="menu:ToolControl" xmi:id="_pL6jcOuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolcontrol.2" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.StatusBarToolControl"/>
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_8lu30OuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolbarseparator.5"/>
-    <elements xsi:type="menu:ToolControl" xmi:id="_9OpR8OuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolcontrol.3" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.StatusInformationToolControl"/>
+    <elements xsi:type="menu:ToolControl" xmi:id="_9OpR8OuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolcontrol.statusInformationTC" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.StatusInformationToolControl"/>
+    <elements xsi:type="menu:ToolBarSeparator" xmi:id="_uGlOsG5sEeSRb4HOUP92pA" elementId="org.bbaw.bts.ui.main.toolbarseparator.0"/>
   </fragments>
 </fragment:ModelFragments>

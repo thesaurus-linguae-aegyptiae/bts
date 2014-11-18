@@ -24,7 +24,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 
 	public List<BTSTCObject> getRootTCObjects()
 	{
-		return list(BTSConstants.OBJECT_STATE_ACTIVE);
+		return list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 
 	}
 
@@ -32,7 +32,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	public boolean save(BTSTCObject o)
 	{
 		super.addRevisionStatement(o);
-		bTSTCObjectDao.add(o, o.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + o.getCorpusPrefix());
+		bTSTCObjectDao.add(o, o.getDBCollectionKey());
 		return true;
 
 	}
@@ -43,7 +43,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 		BTSTCObject o = BtsCorpusModelFactory.eINSTANCE.createBTSTCObject();
 		setId(o);
 		setRevision(o);
-		o.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+		o.setDBCollectionKey(main_corpus_key);
 
 		o.setCorpusPrefix(main_corpus_key);
 		return o;
@@ -54,7 +54,7 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	public void update(BTSTCObject entity)
 	{
 		bTSTCObjectDao
-				.update(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+				.update(entity, entity.getDBCollectionKey());
 
 	}
 
@@ -62,22 +62,22 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	public void remove(BTSTCObject entity)
 	{
 		bTSTCObjectDao
-				.remove(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+				.remove(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
-	public BTSTCObject find(String key)
+	public BTSTCObject find(String key, IProgressMonitor monitor)
 	{
 		BTSTCObject tcObject = null;
-		tcObject = bTSTCObjectDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + main_corpus_key);
+		tcObject = bTSTCObjectDao.find(key, main_corpus_key);
 		if (tcObject != null)
 		{
 			return tcObject;
 		}
-		for (String c : getActive_corpora())
+		for (String c : getActive_corpora(main_project))
 		{
-			tcObject = bTSTCObjectDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+			tcObject = bTSTCObjectDao.find(key, c);
 			if (tcObject != null)
 			{
 				return tcObject;
@@ -85,9 +85,9 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 		}
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				tcObject = bTSTCObjectDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				tcObject = bTSTCObjectDao.find(key, c);
 				if (tcObject != null)
 				{
 					return tcObject;
@@ -98,14 +98,14 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	}
 
 	@Override
-	public List<BTSTCObject> list(String objectState)
+	public List<BTSTCObject> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(bTSTCObjectDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
+				objects.addAll(bTSTCObjectDao.list(c, objectState));
 			}
 		}
 		return filter(objects);
@@ -113,27 +113,26 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 
 	@Override
 	public List<BTSTCObject> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSTCObject> objects = new Vector<BTSTCObject>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(bTSTCObjectDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+				objects.addAll(bTSTCObjectDao.query(query, c, c, objectState,
 						registerQuery));
 			}
 		}
 		return filter(objects);
 	}
 	@Override
-	public List<BTSTCObject> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSTCObject> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
-	public List<BTSTCObject> list(String dbPath, String queryId, String objectState)
+	public List<BTSTCObject> list(String dbPath, String queryId, String objectState, IProgressMonitor monitor)
 	{
 		return filter(bTSTCObjectDao.findByQueryId(queryId, dbPath, objectState));
 	}

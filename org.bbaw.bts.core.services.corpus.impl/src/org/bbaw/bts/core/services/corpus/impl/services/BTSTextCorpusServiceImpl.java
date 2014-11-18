@@ -16,6 +16,7 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSTextCorpusDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.BTSProjectService;
+import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
@@ -40,6 +41,9 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 
 	@Inject
 	private BTSProjectService projectService;
+	
+	@Inject
+	private Backend2ClientUpdateService updateService;
 
 	@Override
 	public BTSTextCorpus createNew()
@@ -47,7 +51,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		BTSTextCorpus entity = BtsCorpusModelFactory.eINSTANCE.createBTSTextCorpus();
 		setId(entity);
 		setRevision(entity);
-		entity.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+		entity.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS);
 
 		entity.setCorpusPrefix(main_corpus_key);
 		return entity;
@@ -77,7 +81,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	}
 
 	@Override
-	public BTSTextCorpus find(String key)
+	public BTSTextCorpus find(String key, IProgressMonitor monitor)
 	{
 		BTSTextCorpus corpus = null;
 		corpus = textCorpusDao.find(key, main_project + BTSCorpusConstants.CORPUS);
@@ -97,7 +101,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	}
 
 	@Override
-	public List<BTSTextCorpus> list(String objectState)
+	public List<BTSTextCorpus> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSTextCorpus> list = new Vector<BTSTextCorpus>();
 		for (String p : getActiveProjects())
@@ -110,7 +114,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 
 	@Override
 	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSTextCorpus> objects = new Vector<BTSTextCorpus>();
 		for (String p : getActiveProjects())
@@ -124,13 +128,13 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		return filter(objects);
 	}
 	@Override
-	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
 	public List<BTSTextCorpus> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return filter(textCorpusDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -145,7 +149,9 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 			BTSProject project = projectService.findByProjectPrefix(corpus.getProject());
 			BTSProjectDBCollection coll = projectService.checkAndAddDBCollection(project, project.getPrefix() + BTSCorpusConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);
 
-			dbManager.checkAndCreateDBCollection(project, coll, corpus.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);
+			projectService.save(project);
+			dbManager.checkAndCreateDBCollection(project, coll, project.getPrefix() + BTSCorpusConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);
+			updateService.startListening2Updates(coll);
 		}
 		return save(corpus);
 	}
@@ -171,7 +177,7 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		{
 			return (BTSTextCorpus) context.get("main_corpus");
 		}
-		List<BTSTextCorpus> corpora = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSTextCorpus> corpora = list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		for (BTSTextCorpus corpus : corpora)
 		{
 			if (corpus.getCorpusPrefix() != null && corpus.getCorpusPrefix().equals(corpusPrefix))

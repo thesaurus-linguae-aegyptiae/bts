@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.main.parts;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
@@ -26,6 +27,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -38,6 +40,8 @@ import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -55,6 +59,7 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Link;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
@@ -79,6 +84,11 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	@Inject
 	private BTSUserController userController;
 
+	@Inject
+	@Active
+	private Shell parentShell;
+	
+		// Get UISynchronize injected as field
 	@Inject
 	private UISynchronize sync;
 
@@ -327,22 +337,52 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadAllUserGroups() {
-		List<BTSUserGroup> groups = userManagerController.listUserGroups();
-		observableLisAllUserGroups = new WritableList(groups,
-				BTSUserGroup.class);
-		userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
-		for (BTSUserGroup u : groups) {
-			userGroupMap.put(u.get_id(), u);
-		}
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
+
+					@Override
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						List<BTSUserGroup> groups = userManagerController.listUserGroups(monitor);
+						observableLisAllUserGroups = new WritableList(groups,
+								BTSUserGroup.class);
+						userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
+						for (BTSUserGroup u : groups) {
+							userGroupMap.put(u.get_id(), u);
+						}
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
+		
 	}
 
 	private void loadAllUsers() {
-		List<BTSUser> users = userManagerController.listUsers();
-		observableLisAllUsers = new WritableList(users, BTSUser.class);
-		userMap = new HashMap<String, BTSUser>(users.size());
-		for (BTSUser u : users) {
-			userMap.put(u.getUserName(), u);
-		}
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
+
+					@Override
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						List<BTSUser> users = userManagerController.listUsers(monitor);
+						observableLisAllUsers = new WritableList(users, BTSUser.class);
+						userMap = new HashMap<String, BTSUser>(users.size());
+						for (BTSUser u : users) {
+							userMap.put(u.getUserName(), u);
+						}
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
+		
 
 	}
 

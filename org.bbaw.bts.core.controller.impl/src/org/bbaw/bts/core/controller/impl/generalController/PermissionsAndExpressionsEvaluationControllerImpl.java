@@ -613,7 +613,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	private List<BTSProject> getAllProjects() {
 		if (allProjects == null)
 		{
-			allProjects = projecService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+			allProjects = projecService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		}
 		return allProjects;
 	}

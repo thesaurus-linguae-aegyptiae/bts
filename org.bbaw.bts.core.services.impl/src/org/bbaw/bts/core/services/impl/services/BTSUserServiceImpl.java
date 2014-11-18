@@ -24,6 +24,7 @@ import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
@@ -83,7 +84,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public BTSUser find(String key)
+	public BTSUser find(String key, IProgressMonitor monitor)
 	{
 		BTSUser user = null;
 		user = userDao.find(key, BTSCoreConstants.ADMIN);
@@ -95,7 +96,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public List<BTSUser> list(String objectState)
+	public List<BTSUser> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSUser> users = userDao.list(BTSCoreConstants.ADMIN, objectState);
 		return users;
@@ -103,7 +104,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 
 	@Override
 	public List<BTSUser> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSUser> objects = userDao.query(query, BTSCoreConstants.ADMIN,
 				BTSCoreConstants.ADMIN, objectState, registerQuery);
@@ -111,8 +112,8 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public List<BTSUser> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSUser> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
@@ -127,7 +128,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public List<BTSUser> list(String dbPath, String queryId, String objectState)
+	public List<BTSUser> list(String dbPath, String queryId, String objectState, IProgressMonitor monitor)
 	{
 		return filter(userDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -208,8 +209,8 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	}
 
 	@Override
-	public List<BTSObject> getUserOrphans(List<BTSFilter> btsFilters, List<BTSObject> rootEntries) {
-		List<BTSUser> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE);
+	public List<BTSObject> getUserOrphans(List<BTSFilter> btsFilters, List<BTSObject> rootEntries, IProgressMonitor monitor) {
+		List<BTSUser> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		List<BTSUser> allFilteredEntries = new Vector<BTSUser>();
 		for (BTSUser e : allEntries)
 		{

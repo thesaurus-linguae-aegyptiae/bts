@@ -8,6 +8,7 @@ import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartControll
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 
@@ -15,8 +16,8 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 	private BTSLemmaEntryService lemmaService;
 	
 	@Override
-	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word) {
-		return lemmaService.findLemmaProposals(word);
+	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor) {
+		return lemmaService.findLemmaProposals(word, monitor);
 	}
 
 }

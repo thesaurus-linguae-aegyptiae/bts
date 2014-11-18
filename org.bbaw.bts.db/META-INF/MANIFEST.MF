@@ -7,3 +7,4 @@ Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.db
 Require-Bundle: org.bbaw.bts.model
+Import-Package: org.eclipse.core.runtime

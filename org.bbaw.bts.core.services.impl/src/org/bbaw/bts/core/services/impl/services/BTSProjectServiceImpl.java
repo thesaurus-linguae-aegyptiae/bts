@@ -21,6 +21,7 @@ import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, String> implements BTSProjectService
 {
@@ -154,20 +155,20 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	}
 
 	@Override
-	public BTSProject find(String key)
+	public BTSProject find(String key, IProgressMonitor monitor)
 	{
 		return projectDao.find(key, BTSCoreConstants.ADMIN);
 	}
 
 	@Override
-	public List<BTSProject> list(String objectState)
+	public List<BTSProject> list(String objectState, IProgressMonitor monitor)
 	{
 		return projectDao.list(BTSCoreConstants.ADMIN, objectState);
 	}
 
 	@Override
 	public List<BTSProject> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSProject> objects = new Vector<BTSProject>();
 		for (String p : getActiveProjects())
@@ -179,8 +180,8 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	}
 
 	@Override
-	public List<BTSProject> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSProject> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
@@ -191,7 +192,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 
 	@Override
 	public List<BTSProject> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return filter(projectDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -202,7 +203,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		{
 			return (BTSProject) context.get(BTSCoreConstants.MAIN_PROJECT);
 		}
-		List<BTSProject> projects = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSProject> projects = list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		for (BTSProject pro : projects)
 		{
 			if (pro.getPrefix() != null && pro.getPrefix().equals(project))

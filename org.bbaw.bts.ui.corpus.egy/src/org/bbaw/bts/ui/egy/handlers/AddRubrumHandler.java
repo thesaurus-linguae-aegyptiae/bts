@@ -30,12 +30,13 @@ public class AddRubrumHandler {
 			{
 				final BTSAnnotation object = corpusNavigatorController
 						.createNewAnnotation((BTSCorpusObject) dbbaseObject);
-				object.setType("Rubrum");
+				object.setType("rubrum");
 				object.setName("Rubrum");
 				BTSRelation rel = null;
 				if (object.getRelations().isEmpty())
 				{
 					rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
+					object.getRelations().add(rel);
 				}
 				else
 				{
@@ -43,7 +44,7 @@ public class AddRubrumHandler {
 				}
 	
 				rel.setObjectId(dbbaseObject.get_id());
-				object.getRelations().add(rel);
+				
 				BTSInterTextReference ref = BtsmodelFactory.eINSTANCE.createBTSInterTextReference();
 				ref.setBeginId(event.getStartId());
 				ref.setEndId(event.getEndId());

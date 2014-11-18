@@ -91,7 +91,23 @@ public class BTSCorpusConstants {
 	public static final String VIEW_IMAGE_ROOT_ENTRIES = "image/root_entries";
 
 	public static final String VIEW_LEMMA_ROOT_ENTRIES = "lemma/root_entries";
+
+	public static final String LEMMATIZER_DOUBLE_POINT_PATTERN = "(.+:)(.+)";
 	
+	public static final String LEMMATIZER_POINT_PATTERN = "([^\\.]+)(.+)";
+	
+	public static final String LEMMATIZER_TRIPLE_POINT = new String(new char[]{'\u22ee'});
+
+	public static final String LEMMATIZER_TRIPLE_EQUALS = new String(new char[]{'\u2261'});
+
+	public static final String[] LEMMATIZER_ESCAPED_BRACKETS_ARRAY = new String[]{"\\(", "\\)", "\\{", "\\}", "\\[", "\\]", "<", ">",
+		new String(new char[]{'\u2261'}), "\\?",
+		"⸢", "⸣",
+		"𓉘", "𓊂",
+		"𓊆", "𓊇",
+		"𓍹", "𓍺"};
+
+	public static final String LEMMATIZER_DELETION_PATTERN = "(\\{[^\\}]*\\}{1,2})";
 	private BTSCorpusConstants(){}
 
 }

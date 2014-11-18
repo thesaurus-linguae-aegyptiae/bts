@@ -179,7 +179,7 @@ implements CorpusNavigatorController
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<BTSCorpusObject> children = corpusObjectService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE);
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		logger.info("Number of children found: " + children.size());
 
 		return children;
@@ -337,10 +337,10 @@ implements CorpusNavigatorController
 
 
 	@Override
-	public BTSCorpusObject find(String id) {
+	public BTSCorpusObject find(String id, IProgressMonitor monitor) {
 		BTSCorpusObject o = null;
 		try {
-			o = corpusObjectService.find(id);
+			o = corpusObjectService.find(id, monitor);
 		} catch (Exception e) {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
@@ -349,7 +349,7 @@ implements CorpusNavigatorController
 			return o;
 		} else {
 			try {
-				o = textCorpusService.find(id);
+				o = textCorpusService.find(id, monitor);
 			} catch (Exception e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
@@ -359,7 +359,7 @@ implements CorpusNavigatorController
 			return o;
 		} else {
 			try {
-				o = thsService.find(id);
+				o = thsService.find(id, monitor);
 			} catch (Exception e) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
@@ -369,7 +369,7 @@ implements CorpusNavigatorController
 			return o;
 		} else {
 			try {
-				o = wlistService.find(id);
+				o = wlistService.find(id, monitor);
 			} catch (Exception e) {
 				
 			}
@@ -378,8 +378,8 @@ implements CorpusNavigatorController
 	}
 
 	@Override
-	public List<BTSTextCorpus> listTextCorpora() {
-		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+	public List<BTSTextCorpus> listTextCorpora(IProgressMonitor monitor) {
+		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		for (BTSTextCorpus c : corpora)
 		{
 			checkAndFullyLoad(c);
@@ -400,7 +400,7 @@ implements CorpusNavigatorController
 
 	@Override
 	public String getDisplayName(String id) {
-		return corpusObjectService.getDisplayName(id);
+		return corpusObjectService.getDisplayName(id, null);
 	}
 
 	
@@ -408,7 +408,7 @@ implements CorpusNavigatorController
 	@Override
 	protected List<BTSCorpusObject> retrieveTypedRootEntries(IProgressMonitor monitor) {
 		List<BTSTextCorpus> list = textCorpusService
-				.list(BTSConstants.OBJECT_STATE_ACTIVE);
+				.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(list.size());
 		for (BTSTextCorpus t : list)
 		{
@@ -419,8 +419,8 @@ implements CorpusNavigatorController
 
 	@Override
 	protected List<BTSCorpusObject> executeTypedQuery(BTSQueryRequest query,
-			String objectState) {
-		return corpusObjectService.query(query, objectState);
+			String objectState, IProgressMonitor monitor) {
+		return corpusObjectService.query(query, objectState, monitor);
 	}
 
 	@Override
@@ -429,8 +429,8 @@ implements CorpusNavigatorController
 	}
 
 	@Override
-	protected List<BTSCorpusObject> typedListEntries(String objectState) {
-		return corpusObjectService.list(objectState);
+	protected List<BTSCorpusObject> typedListEntries(String objectState, IProgressMonitor monitor) {
+		return corpusObjectService.list(objectState, monitor);
 	}
 
 	@Override
@@ -443,6 +443,7 @@ implements CorpusNavigatorController
 	public BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix) {
 		return textCorpusService.findTextCorpusByPrefix(corpusPrefix);
 	}
+
 	
 	
 }

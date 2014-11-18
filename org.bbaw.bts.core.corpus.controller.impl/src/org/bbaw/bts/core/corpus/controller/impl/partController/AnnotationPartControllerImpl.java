@@ -17,6 +17,7 @@ import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -48,7 +49,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 	}
 
 	@Override
-	public List<BTSObject> findRelatingObjects(BTSObject object) {
+	public List<BTSObject> findRelatingObjects(BTSObject object, IProgressMonitor monitor) {
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId",
 				object.get_id()));
@@ -61,12 +62,12 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
 		List<BTSCorpusObject> obs = corpusObjectService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE);
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		for (BTSCorpusObject o : obs)
 		{
 			children.add(o);
 		}
-		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true));
+		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true, monitor));
 		return children;
 	}
 	@Override

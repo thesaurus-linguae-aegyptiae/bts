@@ -9,6 +9,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
+import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.btsviewmodel.MessageType;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -49,6 +50,13 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * @generated
 	 */
 	private EClass btsObjectTypeTreeNodeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass dbCollectionStatusInformationEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -352,6 +360,114 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDBCollectionStatusInformation() {
+		return dbCollectionStatusInformationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_DbCollectionName() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_DbDocCount() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_SyncStatusToRemote() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_SyncStatusFromRemote() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_IndexDocCount() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_IndexStatus() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_DbDiskSize() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_DbDocDelCount() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_DbPurgeSeq() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(8);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_DbUpdateSeq() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getDBCollectionStatusInformation_IndexUpdateSeq() {
+		return (EAttribute)dbCollectionStatusInformationEClass.getEStructuralFeatures().get(10);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getMessageType() {
 		return messageTypeEEnum;
 	}
@@ -450,6 +566,19 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		createEAttribute(btsObjectTypeTreeNodeEClass, BTS_OBJECT_TYPE_TREE_NODE__VALUE);
 		createEAttribute(btsObjectTypeTreeNodeEClass, BTS_OBJECT_TYPE_TREE_NODE__SELECTED);
 
+		dbCollectionStatusInformationEClass = createEClass(DB_COLLECTION_STATUS_INFORMATION);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__DB_COLLECTION_NAME);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__DB_DOC_COUNT);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__SYNC_STATUS_TO_REMOTE);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__SYNC_STATUS_FROM_REMOTE);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__INDEX_DOC_COUNT);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__INDEX_STATUS);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__DB_DISK_SIZE);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__DB_DOC_DEL_COUNT);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__DB_PURGE_SEQ);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__DB_UPDATE_SEQ);
+		createEAttribute(dbCollectionStatusInformationEClass, DB_COLLECTION_STATUS_INFORMATION__INDEX_UPDATE_SEQ);
+
 		// Create enums
 		messageTypeEEnum = createEEnum(MESSAGE_TYPE);
 
@@ -510,7 +639,7 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		initEAttribute(getStatusMessage_Message(), ecorePackage.getEString(), "message", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStatusMessage_CreationTime(), ecorePackage.getEDate(), "creationTime", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStatusMessage_UserId(), ecorePackage.getEString(), "userId", null, 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getStatusMessage_MessageType(), this.getMessageType(), "messageType", "", 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStatusMessage_MessageType(), this.getMessageType(), "messageType", "INFORMATION", 0, 1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getStatusMessage_Children(), this.getStatusMessage(), null, "children", null, 0, -1, StatusMessage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsObjectTypeTreeNodeEClass, BTSObjectTypeTreeNode.class, "BTSObjectTypeTreeNode", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -518,6 +647,19 @@ public class BtsviewmodelPackageImpl extends EPackageImpl implements Btsviewmode
 		initEReference(getBTSObjectTypeTreeNode_ReferencedTypesPath(), this.getBTSObjectTypeTreeNode(), null, "referencedTypesPath", null, 0, 1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSObjectTypeTreeNode_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSObjectTypeTreeNode_Selected(), ecorePackage.getEBoolean(), "selected", null, 0, 1, BTSObjectTypeTreeNode.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(dbCollectionStatusInformationEClass, DBCollectionStatusInformation.class, "DBCollectionStatusInformation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getDBCollectionStatusInformation_DbCollectionName(), ecorePackage.getEString(), "dbCollectionName", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_DbDocCount(), ecorePackage.getELong(), "dbDocCount", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_SyncStatusToRemote(), ecorePackage.getEString(), "syncStatusToRemote", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_SyncStatusFromRemote(), ecorePackage.getEString(), "syncStatusFromRemote", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_IndexDocCount(), ecorePackage.getELong(), "indexDocCount", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_IndexStatus(), ecorePackage.getEString(), "indexStatus", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_DbDiskSize(), ecorePackage.getEString(), "dbDiskSize", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_DbDocDelCount(), ecorePackage.getEString(), "dbDocDelCount", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_DbPurgeSeq(), ecorePackage.getEString(), "dbPurgeSeq", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_DbUpdateSeq(), ecorePackage.getEString(), "dbUpdateSeq", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getDBCollectionStatusInformation_IndexUpdateSeq(), ecorePackage.getEString(), "indexUpdateSeq", null, 0, 1, DBCollectionStatusInformation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(messageTypeEEnum, MessageType.class, "MessageType");

@@ -461,7 +461,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		configurations = new ArrayList<BTSConfiguration>();
 
 		List<BTSConfiguration> list = configurationController
-				.listConfigurations();
+				.listConfigurations(null);
 		
 		activeConfiguration = configurationController.getActiveConfiguration();
 		TreeNodeWrapper activeConfigurationTreeNode = null;

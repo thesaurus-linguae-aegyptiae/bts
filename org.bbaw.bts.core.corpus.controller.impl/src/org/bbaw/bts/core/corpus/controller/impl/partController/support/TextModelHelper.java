@@ -3,6 +3,7 @@ package org.bbaw.bts.core.corpus.controller.impl.partController.support;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,13 +45,13 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 
 public class TextModelHelper {
 
-	private HashMap<Position, List<Annotation>> annotationMap;
-	private Pattern lemmaPattern = Pattern.compile("(?:case\\s+)([^:]+)(?::\\s*)");
+	private final static Pattern lemmaPattern = Pattern.compile("(?:case\\s+)([^:]+)(?::\\s*)");
 
 	public BTSTextContent updateModelFromTextContent(BTSTextContent textContent, EObject eo,
 			IAnnotationModel am) {
+		Map<Position, List<Annotation>> annotationMap = null;
 		if (am != null) {
-			loadAnnotationMapping(eo, am);
+			annotationMap = loadAnnotationMapping(eo, am);
 		}
 		if (textContent == null) {
 			textContent = BtsCorpusModelFactory.eINSTANCE
@@ -64,12 +65,13 @@ public class TextModelHelper {
 		if (eo instanceof TextContent) {
 			TextContent tc = (TextContent) eo;
 			BTSSenctence lastModelSentence = null;
+			int counter = 0;
 			for (TextItem item : tc.getItems()) {
 				if (item instanceof Sentence) {
 					
 					// workaround: if one enters only one sentence, xtext adds a second one without items
 					// this is probably caused by grammer.
-					if (tc.getItems().size() == 2 && ((Sentence) item).getItems().isEmpty())
+					if (counter == tc.getItems().size() -1 && ((Sentence) item).getItems().isEmpty())
 					{
 						continue;
 					}
@@ -77,7 +79,7 @@ public class TextModelHelper {
 					BTSSenctence modelSentence = null;
 					INode node = NodeModelUtils.getNode(sentence);
 					
-					BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSSenctence.class);
+					BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSSenctence.class, annotationMap);
 					if (ma != null) {
 						modelSentence = (BTSSenctence) ma.getModel();
 					}
@@ -98,8 +100,13 @@ public class TextModelHelper {
 					if (lastModelSentence != null) {
 						int lastIndex = textContent.getTextItems()
 								.indexOf(lastModelSentence);
-						textContent.getTextItems()
-						.add(lastIndex + 1, modelSentence);
+						try {
+							textContent.getTextItems()
+							.add(lastIndex + 1, modelSentence);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					} else {
 						textContent.getTextItems()
 								.add(0, modelSentence);
@@ -112,10 +119,11 @@ public class TextModelHelper {
 
 						lastItem = updateItemFromTextContent(si, lastItem,
 								sentence,
-								modelSentence);
+								modelSentence, annotationMap);
 					}
 					lastModelSentence = modelSentence;
 				}
+				counter++;
 			}
 		}
 		return textContent;
@@ -123,7 +131,7 @@ public class TextModelHelper {
 	}
 
 	private <E> BTSModelAnnotation getModelAnnotationFromMap(INode node,
-			Class<E> clazz) {
+			Class<E> clazz, Map<Position, List<Annotation>> annotationMap) {
 		List<Annotation> list =  null;
 		int offset = node.getOffset();
 		if (annotationMap != null && node != null)
@@ -162,18 +170,18 @@ public class TextModelHelper {
 
 	private BTSIdentifiableItem updateItemFromTextContent(SentenceItem si,
 			BTSIdentifiableItem lastItem, Sentence sentence,
-			BTSSenctence modelSentence) {
+			BTSSenctence modelSentence, Map<Position, List<Annotation>> annotationMap) {
 		if (si instanceof Word) {
 			return updateWordFromTextContent((Word) si, lastItem, sentence,
-					modelSentence);
+					modelSentence, annotationMap);
 		} else if (si instanceof AbstractMarker) {
 			return updateMarkerFromTextContent((AbstractMarker) si, lastItem,
 					sentence,
-					modelSentence);
+					modelSentence, annotationMap);
 		} else if (si instanceof Ambivalence) {
 			return updateAmbivalenceFromTextContent((Ambivalence) si, lastItem,
 					sentence,
-					modelSentence);
+					modelSentence, annotationMap);
 		}
 		return null;
 
@@ -182,10 +190,10 @@ public class TextModelHelper {
 	private BTSIdentifiableItem updateAmbivalenceFromTextContent(
 			Ambivalence ambivalence, BTSIdentifiableItem lastItem,
 			Sentence sentence,
-			BTSSenctence modelSentence) {
+			BTSSenctence modelSentence, Map<Position, List<Annotation>> annotationMap) {
 		BTSAmbivalence modelAmbivalence = null;
 		INode node = NodeModelUtils.getNode(ambivalence);
-		BTSModelAnnotation ma = getModelAnnotationFromMap(node, BTSAmbivalence.class);
+		BTSModelAnnotation ma = getModelAnnotationFromMap(node, BTSAmbivalence.class, annotationMap);
 		if (ma != null &&  ma.getModel() instanceof BTSAmbivalence) {
 			modelAmbivalence = (BTSAmbivalence) ma.getModel();
 		}
@@ -207,7 +215,7 @@ public class TextModelHelper {
 		for (Case item : ambivalence.getCases()) {
 			BTSLemmaCase modelCase = null;
 			INode nodeCase = NodeModelUtils.getNode(item);
-			BTSModelAnnotation maCase =getModelAnnotationFromMap(nodeCase, BTSLemmaCase.class);
+			BTSModelAnnotation maCase =getModelAnnotationFromMap(nodeCase, BTSLemmaCase.class, annotationMap);
 			if (maCase != null) {
 				modelCase = (BTSLemmaCase) maCase.getModel();
 			}
@@ -230,7 +238,7 @@ public class TextModelHelper {
 			for (SentenceItemNoAmbivalence ai : item.getItems()) {
 
 				lastAmbivalenceItem = updateAmbivalenceItemFromTextContent(ai,
-						lastAmbivalenceItem, item, modelCase);
+						lastAmbivalenceItem, item, modelCase, annotationMap);
 			}
 			lastModelCase = modelCase;
 
@@ -251,23 +259,23 @@ public class TextModelHelper {
 	private BTSAmbivalenceItem updateAmbivalenceItemFromTextContent(
 			SentenceItemNoAmbivalence ai,
 			BTSAmbivalenceItem lastAmbivalenceItem,
-			Case item, BTSLemmaCase modelCase) {
+			Case item, BTSLemmaCase modelCase, Map<Position, List<Annotation>> annotationMap) {
 		if (ai instanceof Word) {
 			return updateWordFromTextAmbivalence((Word) ai,
-					lastAmbivalenceItem, item, modelCase);
+					lastAmbivalenceItem, item, modelCase, annotationMap);
 		} else if (ai instanceof Marker) {
 			return updateMarkerFromTextAmbivalence((Marker) ai,
-					lastAmbivalenceItem, item, modelCase);
+					lastAmbivalenceItem, item, modelCase, annotationMap);
 		}
 		return null;
 	}
 
 	private BTSAmbivalenceItem updateMarkerFromTextAmbivalence(Marker marker,
 			BTSAmbivalenceItem lastAmbivalenceItem, Case item,
-			BTSLemmaCase modelCase) {
+			BTSLemmaCase modelCase, Map<Position, List<Annotation>> annotationMap) {
 		BTSMarker modelMarker = null;
 		INode node = NodeModelUtils.getNode(marker);
-		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class);
+		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class, annotationMap);
 		if (ma != null) {
 			modelMarker = (BTSMarker) ma.getModel();
 		}
@@ -295,12 +303,12 @@ public class TextModelHelper {
 
 	private BTSAmbivalenceItem updateWordFromTextAmbivalence(Word word,
 			BTSAmbivalenceItem lastAmbivalenceItem, Case item,
-			BTSLemmaCase modelCase) {
+			BTSLemmaCase modelCase, Map<Position, List<Annotation>> annotationMap) {
 		BTSWord modelWord = null;
 		INode node = NodeModelUtils.getNode(word);
 		// System.out.println("word " + node.getText() + " node offset "
 		// + node.getOffset() + " node length " + node.getLength());
-		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class);
+		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class, annotationMap);
 		if (ma != null) {
 			modelWord = (BTSWord) ma.getModel();
 		}
@@ -338,10 +346,10 @@ public class TextModelHelper {
 
 	private BTSIdentifiableItem updateMarkerFromTextContent(AbstractMarker si,
 			BTSIdentifiableItem lastItem, Sentence sentence,
-			BTSSenctence modelSentence) {
+			BTSSenctence modelSentence, Map<Position, List<Annotation>> annotationMap) {
 		BTSMarker modelMarker = null;
 		INode node = NodeModelUtils.getNode(si);
-		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class);
+		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class, annotationMap);
 		System.out.println(ma);
 		if (ma != null) {
 			modelMarker = (BTSMarker) ma.getModel();
@@ -422,7 +430,7 @@ public class TextModelHelper {
 
 	private BTSIdentifiableItem updateWordFromTextContent(Word word,
 			BTSIdentifiableItem lastItem, Sentence sentence,
-			BTSSenctence modelSentence) {
+			BTSSenctence modelSentence, Map<Position, List<Annotation>> annotationMap) {
 		BTSWord modelWord = null;
 		INode node = NodeModelUtils.getNode(word);
 		if (node != null)
@@ -430,7 +438,7 @@ public class TextModelHelper {
 		System.out.println("Word " + node.getText() + " node offset "
 				+ node.getOffset() + " node length " + node.getLength());
 		}
-		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class);
+		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class, annotationMap);
 		if (ma != null && ma.getModel() instanceof BTSWord) {
 			modelWord = (BTSWord) ma.getModel();
 		}
@@ -460,8 +468,8 @@ public class TextModelHelper {
 		return newModelWord;
 	}
 
-	private void loadAnnotationMapping(EObject TextContent, IAnnotationModel am) {
-		annotationMap = new HashMap<Position, List<Annotation>>();
+	private Map<Position, List<Annotation>> loadAnnotationMapping(EObject TextContent, IAnnotationModel am) {
+		Map<Position, List<Annotation>> annotationMap = new HashMap<Position, List<Annotation>>();
 		Iterator it = am.getAnnotationIterator();
 		while (it.hasNext()) {
 			Annotation an = (Annotation) it.next();
@@ -478,6 +486,7 @@ public class TextModelHelper {
 				}
 			}
 		}
+		return annotationMap;
 
 	}
 

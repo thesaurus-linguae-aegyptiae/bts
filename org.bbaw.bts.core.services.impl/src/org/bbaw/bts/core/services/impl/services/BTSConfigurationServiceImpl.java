@@ -24,6 +24,7 @@ import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -83,7 +84,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 
 	@Override
-	public BTSConfiguration find(String key)
+	public BTSConfiguration find(String key, IProgressMonitor monitor)
 	{
 		BTSConfiguration config = null;
 		config = configurationDao.find(key, main_project + BTSCoreConstants.ADMIN_SUFFIX);
@@ -103,7 +104,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 
 	@Override
-	public List<BTSConfiguration> list(String objectState)
+	public List<BTSConfiguration> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSConfiguration> configs = new Vector<BTSConfiguration>();
 		for (String p : getActiveProjects())
@@ -153,14 +154,14 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			return (BTSConfiguration) activeConfig;
 		}
-		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		if (list == null || list.isEmpty())
 		{
 			BTSConfiguration config = createNew();
 			save(config);
 			list.add(config);
 		}
-		activeConfig = list(BTSConstants.OBJECT_STATE_ACTIVE).get(0);
+		activeConfig = list(BTSConstants.OBJECT_STATE_ACTIVE, null).get(0);
 
 		for (BTSConfiguration c : list) {
 			if (active_configuration_name.equals(c.get_id())) {
@@ -194,7 +195,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 	@Override
 	public List<BTSConfiguration> query(BTSQueryRequest query,
-			String objectState, boolean registerQuery)
+			String objectState, boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSConfiguration> objects = new Vector<BTSConfiguration>();
 		for (String p : getActiveProjects())
@@ -207,13 +208,13 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 	@Override
 	public List<BTSConfiguration> query(BTSQueryRequest query,
-			String objectState) {
-		return query(query, objectState, true);
+			String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
 	public List<BTSConfiguration> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return configurationDao.findByQueryId(queryId, dbPath,
 				objectState);
@@ -831,6 +832,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 		return config;
 	}
+
+
 
 //	private void copyChildrenRecursively(BTSConfig config,
 //			BTSConfig originalconfiguration, Copier copier) {

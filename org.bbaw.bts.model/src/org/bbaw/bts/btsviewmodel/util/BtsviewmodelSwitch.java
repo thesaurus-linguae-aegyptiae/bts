@@ -88,6 +88,12 @@ public class BtsviewmodelSwitch<T> extends Switch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BtsviewmodelPackage.DB_COLLECTION_STATUS_INFORMATION: {
+				DBCollectionStatusInformation dbCollectionStatusInformation = (DBCollectionStatusInformation)theEObject;
+				T result = caseDBCollectionStatusInformation(dbCollectionStatusInformation);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -135,6 +141,21 @@ public class BtsviewmodelSwitch<T> extends Switch<T>
 	 * @generated
 	 */
 	public T caseBTSObjectTypeTreeNode(BTSObjectTypeTreeNode object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>DB Collection Status Information</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>DB Collection Status Information</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDBCollectionStatusInformation(DBCollectionStatusInformation object) {
 		return null;
 	}
 

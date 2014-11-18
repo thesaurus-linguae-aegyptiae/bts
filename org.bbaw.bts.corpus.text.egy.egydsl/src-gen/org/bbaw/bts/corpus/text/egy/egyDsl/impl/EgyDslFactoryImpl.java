@@ -83,10 +83,9 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.WORD_MIDDLE: return createWordMiddle();
       case EgyDslPackage.CHARS: return createChars();
       case EgyDslPackage.BRACKETS: return createBrackets();
-      case EgyDslPackage.CARTOUCHE2: return createCartouche2();
+      case EgyDslPackage.OVAL: return createOval();
       case EgyDslPackage.SERECH: return createSerech();
       case EgyDslPackage.CARTOUCHE: return createCartouche();
-      case EgyDslPackage.OVAL: return createOval();
       case EgyDslPackage.NO_CARTOUCHE: return createNoCartouche();
       case EgyDslPackage.EXPANDED: return createExpanded();
       case EgyDslPackage.NO_EXPANDED: return createNoExpanded();
@@ -116,6 +115,7 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.INTERFIX_PREFIX_LEXICAL: return createInterfixPrefixLexical();
       case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP: return createInterfixConnectionSyllabicGroup();
       case EgyDslPackage.INTERFIX_COMPOUND_WORDS: return createInterfixCompoundWords();
+      case EgyDslPackage.INTERFIX_PHONETICAL_COMPLEMENT: return createInterfixPhoneticalComplement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -335,10 +335,10 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public Cartouche2 createCartouche2()
+  public Oval createOval()
   {
-    Cartouche2Impl cartouche2 = new Cartouche2Impl();
-    return cartouche2;
+    OvalImpl oval = new OvalImpl();
+    return oval;
   }
 
   /**
@@ -361,17 +361,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     CartoucheImpl cartouche = new CartoucheImpl();
     return cartouche;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Oval createOval()
-  {
-    OvalImpl oval = new OvalImpl();
-    return oval;
   }
 
   /**
@@ -691,6 +680,17 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     InterfixCompoundWordsImpl interfixCompoundWords = new InterfixCompoundWordsImpl();
     return interfixCompoundWords;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public InterfixPhoneticalComplement createInterfixPhoneticalComplement()
+  {
+    InterfixPhoneticalComplementImpl interfixPhoneticalComplement = new InterfixPhoneticalComplementImpl();
+    return interfixPhoneticalComplement;
   }
 
   /**

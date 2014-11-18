@@ -21,6 +21,7 @@ import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -39,14 +40,14 @@ public class UserManagerControllerImpl implements UserManagerController
 	private GeneralBTSObjectService objectService;
 
 	@Override
-	public List<BTSUserGroup> listUserGroups()
+	public List<BTSUserGroup> listUserGroups(IProgressMonitor monitor)
 	{
-		return usergroupService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		return usergroupService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 	}
 
 	@Override
 	public List<BTSUser> findGroupMembers(BTSUserGroup group, Map<String, BTSQueryResultAbstract> queryResultMap,
-			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName)
+			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName, IProgressMonitor monitor)
 	{
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.matchQuery("groupIds", group.get_id()));
@@ -62,7 +63,7 @@ public class UserManagerControllerImpl implements UserManagerController
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<BTSUser> children = userService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE);
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		return children;
 	}
 
@@ -92,9 +93,9 @@ public class UserManagerControllerImpl implements UserManagerController
 	}
 
 	@Override
-	public List<BTSUser> listUsers()
+	public List<BTSUser> listUsers(IProgressMonitor monitor)
 	{
-		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 	}
 
 	@Override
@@ -110,15 +111,15 @@ public class UserManagerControllerImpl implements UserManagerController
 	}
 
 	@Override
-	public List<BTSObject> listTerminatedUsersUserGroups() {
+	public List<BTSObject> listTerminatedUsersUserGroups(IProgressMonitor monitor) {
 		List<BTSObject> terminatedObjects = new Vector<BTSObject>();
-		terminatedObjects.addAll(userService.list(BTSConstants.OBJECT_STATE_TERMINATED));
-		terminatedObjects.addAll(usergroupService.list(BTSConstants.OBJECT_STATE_TERMINATED));
+		terminatedObjects.addAll(userService.list(BTSConstants.OBJECT_STATE_TERMINATED, monitor));
+		terminatedObjects.addAll(usergroupService.list(BTSConstants.OBJECT_STATE_TERMINATED, monitor));
 		return terminatedObjects;
 	}
 
 	@Override
-	public List<BTSObject> getUserUserGroupOrphans(ViewerFilter[] filters) {
+	public List<BTSObject> getUserUserGroupOrphans(ViewerFilter[] filters, IProgressMonitor monitor) {
 		List<BTSFilter> btsFilters = null;
 		if (filters.length > 0)
 		{
@@ -133,8 +134,8 @@ public class UserManagerControllerImpl implements UserManagerController
 		}
 		List<BTSObject> orphans = new Vector<BTSObject>();
 		List<BTSObject> userGroups = new Vector<BTSObject>();
-		userGroups.addAll(usergroupService.list(BTSConstants.OBJECT_STATE_ACTIVE));
-		orphans.addAll(userService.getUserOrphans(btsFilters, userGroups)); 
+		userGroups.addAll(usergroupService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor));
+		orphans.addAll(userService.getUserOrphans(btsFilters, userGroups, monitor)); 
 		return orphans;
 	}
 

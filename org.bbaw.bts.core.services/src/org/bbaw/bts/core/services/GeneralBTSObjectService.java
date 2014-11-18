@@ -35,6 +35,7 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * The Service Interface GeneralBTSObjectService provides service layer access to BTSObject-objects.
@@ -57,7 +58,7 @@ public interface GeneralBTSObjectService {
 	 * @return the list of matching objects
 	 */
 	List<BTSObject> queryObjects(BTSQueryRequest query,
-			String objectState, boolean registerQuery, String className);
+			String objectState, boolean registerQuery, String className, IProgressMonitor monitor);
 
 	/**
 	 * Gets the display name of given object. Providing a classname is not required but betters performance.
@@ -68,6 +69,8 @@ public interface GeneralBTSObjectService {
 	 */
 	String getDisplayName(String id, String className);
 	
+	String getDisplayName(String id);
+	
 	/**
 	 * Find object by id.
 	 * 
@@ -77,7 +80,7 @@ public interface GeneralBTSObjectService {
 	 * @param className the class name
 	 * @return the BTS object
 	 */
-	BTSObject findObject(String id, String className);
+	BTSObject findObject(String id, String className, IProgressMonitor monitor);
 
 	/**
 	 * Save the given object whether new or modified.
@@ -96,7 +99,7 @@ public interface GeneralBTSObjectService {
 	 * @param rev the rev
 	 * @return the BTSDB base object
 	 */
-	BTSDBBaseObject find(String id, String dbCollectionKey,  BTSDBBaseObject object, String rev);
+	BTSDBBaseObject find(String id, String dbCollectionKey,  BTSDBBaseObject object, String rev, IProgressMonitor monitor);
 
 	/**
 	 * Removes the revision of the given object.
@@ -122,7 +125,7 @@ public interface GeneralBTSObjectService {
 	 * @return the list of available revisions
 	 */
 	List<DBRevision> listAvailableRevisions(BTSDBBaseObject object,
-			boolean fetchFromRemote);
+			boolean fetchFromRemote, IProgressMonitor monitor);
 
 	/**
 	 * Find the given revision of the object by id.
@@ -135,6 +138,6 @@ public interface GeneralBTSObjectService {
 	 * @return the matching BTSDBbaseobject in the given revision
 	 */
 	BTSDBBaseObject find(String id, String dbCollectionKey,
-			String rev, BTSDBBaseObject object, boolean fromRemote);
+			String rev, BTSDBBaseObject object, boolean fromRemote, IProgressMonitor monitor);
 
 }

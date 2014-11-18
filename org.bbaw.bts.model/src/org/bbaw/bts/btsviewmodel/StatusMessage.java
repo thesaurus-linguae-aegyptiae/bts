@@ -109,7 +109,7 @@ public interface StatusMessage extends EObject {
 
 	/**
 	 * Returns the value of the '<em><b>Message Type</b></em>' attribute.
-	 * The default value is <code>""</code>.
+	 * The default value is <code>"INFORMATION"</code>.
 	 * The literals are from the enumeration {@link org.bbaw.bts.btsviewmodel.MessageType}.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -121,7 +121,7 @@ public interface StatusMessage extends EObject {
 	 * @see org.bbaw.bts.btsviewmodel.MessageType
 	 * @see #setMessageType(MessageType)
 	 * @see org.bbaw.bts.btsviewmodel.BtsviewmodelPackage#getStatusMessage_MessageType()
-	 * @model default=""
+	 * @model default="INFORMATION"
 	 * @generated
 	 */
 	MessageType getMessageType();

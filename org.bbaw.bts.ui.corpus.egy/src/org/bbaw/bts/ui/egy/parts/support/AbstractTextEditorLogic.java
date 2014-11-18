@@ -127,6 +127,7 @@ public abstract class AbstractTextEditorLogic {
 				BTSUIConstants.COLOR_RUBRUM);
 		painter.addAnnotationType(BTSAnnotationAnnotation.TYPE_RUBRUM_HIGHLIGHTED,
 				BTSAnnotationAnnotation.TYPE_RUBRUM_HIGHLIGHTED);
+		
 
 
 	}

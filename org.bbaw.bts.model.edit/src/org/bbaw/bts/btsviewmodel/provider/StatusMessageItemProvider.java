@@ -8,12 +8,11 @@ import java.util.List;
 
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
-
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
 import org.eclipse.emf.common.util.ResourceLocator;
-
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemColorProvider;
@@ -41,7 +40,9 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
 public class StatusMessageItemProvider
 	extends ItemProviderAdapter
 	implements
-		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider, IItemStyledLabelProvider {
+		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider,
+		IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, 
+		IItemColorProvider, IItemFontProvider, IItemStyledLabelProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -203,12 +204,36 @@ public class StatusMessageItemProvider
 	public String getText(Object object) {
 		return ((StyledString)getStyledText(object)).getString();
 	}
+	
+	@Override
+	public String getColumnText(Object object, int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return ((StatusMessage)object).getMessageType().getLiteral();
+		case 2:
+			return ((StatusMessage)object).getUserId();
+		case 3:
+			return BTSConstants.ADMIN_DATE_FORMAT.format(((StatusMessage)object).getCreationTime());
+		default:
+			return getText(object);
+		}
+//		return super.getColumnText(object, columnIndex);
+	}
 
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object)
+	{
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(BtsviewmodelPackage.Literals.STATUS_MESSAGE__CHILDREN);
+		}
+		return childrenFeatures;
+	}
 	/**
 	 * This returns the label styled text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	@Override
 	public Object getStyledText(Object object) {
@@ -217,7 +242,7 @@ public class StatusMessageItemProvider
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_StatusMessage_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_StatusMessage_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
 		}
 		return styledLabel;
 	}

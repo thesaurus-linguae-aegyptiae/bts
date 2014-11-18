@@ -33,7 +33,7 @@ public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 	public TreeNodeWrapper getMoveOptionsRootNode(Object selection) {
 		
 		// get projects
-		List<BTSProject> allProjects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSProject> allProjects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		
 		TreeNodeWrapper rootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 		

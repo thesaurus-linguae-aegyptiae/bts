@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.main.parts;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,18 +11,24 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
 import javax.annotation.PreDestroy;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -33,6 +40,15 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.custom.SashForm;
 
 public class ComparePart extends AbstractComparePart {
+	
+	@Inject
+	@Active
+	private Shell parentShell;
+	
+	// Get UISynchronize injected as field
+	@Inject
+	private UISynchronize sync;
+	
 	private TableViewer leftTableViewer;
 	private TableViewer rightTableViewer;
 	private Menu rightContextMenu;
@@ -178,11 +194,32 @@ public class ComparePart extends AbstractComparePart {
 	}
 
 	private void loadAvailableRevision() {
-		List<BTSDBBaseObject> conflictObjects = compareObjectsController
-				.listAvailableVersions(object, true);
-		compareRevInput = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-		compareRevInput.getChildren().addAll(loadNodes(conflictObjects));
-		rightTableViewer.setInput(compareRevInput);
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
+
+					@Override
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						List<BTSDBBaseObject> conflictObjects = compareObjectsController
+								.listAvailableVersions(object, true, monitor);
+						compareRevInput = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+						compareRevInput.getChildren().addAll(loadNodes(conflictObjects));
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								rightTableViewer.setInput(compareRevInput);
+							}
+						});
+						
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
+		
 
 	}
 

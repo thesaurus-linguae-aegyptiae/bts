@@ -10,6 +10,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
 import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.tempmodel.DBRevision;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EClass;
 
 public class CompareObjectsControllerImpl implements CompareObjectsController {
@@ -20,7 +21,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 	private GeneralBTSObjectService objectService;
 
 	@Override
-	public List<BTSDBBaseObject> listConflictingVersions(BTSDBBaseObject object) {
+	public List<BTSDBBaseObject> listConflictingVersions(BTSDBBaseObject object, IProgressMonitor monitor) {
 		List<String> conflicts = object.getConflictingRevs();
 		List<BTSDBBaseObject> conflictObjects = new Vector<BTSDBBaseObject>();
 		for (String rev : conflicts)
@@ -28,7 +29,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 			BTSDBBaseObject o = null;
 			try {
 //				String className = getSuperTypeName(object);
-				o = objectService.find(object.get_id(), object.getDBCollectionKey(), object, rev);
+				o = objectService.find(object.get_id(), object.getDBCollectionKey(), object, rev, monitor);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,8 +69,8 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 
 	@Override
 	public List<BTSDBBaseObject> listAvailableVersions(BTSDBBaseObject object,
-			boolean fetchFromRemote) {
-		List<DBRevision> revisions = objectService.listAvailableRevisions(object, fetchFromRemote);
+			boolean fetchFromRemote, IProgressMonitor monitor) {
+		List<DBRevision> revisions = objectService.listAvailableRevisions(object, fetchFromRemote, monitor);
 		List<BTSDBBaseObject> availableRevisions = new Vector<BTSDBBaseObject>();
 		int counter = 0;
 		for (DBRevision rev : revisions)
@@ -80,7 +81,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 				case DBRevision.LOCAL:
 				{
 					try {
-						o = objectService.find(object.get_id(), object.getDBCollectionKey(), object, rev.getRevision());
+						o = objectService.find(object.get_id(), object.getDBCollectionKey(), object, rev.getRevision(), monitor);
 						if (o != null)
 						{
 							availableRevisions.add(o);
@@ -94,7 +95,7 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 				case DBRevision.REMOTE:
 				{
 					try {
-						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), object, true);
+						o = objectService.find(object.get_id(), object.getDBCollectionKey(), rev.getRevision(), object, true, monitor);
 						if (o != null)
 						{
 							availableRevisions.add(o);

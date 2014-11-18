@@ -21,6 +21,7 @@ Export-Package: com.richclientgui.toolbox.duallists,
  org.bbaw.bts.ui.commons.viewerSorter,
  org.bbaw.bts.ui.commons.widgets,
  org.mihalis.opal,
+ org.mihalis.opal.breadcrumb,
  org.mihalis.opal.itemSelector,
  org.mihalis.opal.multiChoice
 Require-Bundle: org.eclipse.swt;bundle-version="3.102.0",

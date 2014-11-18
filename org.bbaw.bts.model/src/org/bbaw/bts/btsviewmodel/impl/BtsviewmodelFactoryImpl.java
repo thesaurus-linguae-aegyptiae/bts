@@ -7,6 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.Calendar;
 import java.util.Date;
+
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.DBLease;
 import org.bbaw.bts.btsviewmodel.*;
@@ -66,6 +67,7 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 			case BtsviewmodelPackage.TREE_NODE_WRAPPER: return createTreeNodeWrapper();
 			case BtsviewmodelPackage.STATUS_MESSAGE: return createStatusMessage();
 			case BtsviewmodelPackage.BTS_OBJECT_TYPE_TREE_NODE: return createBTSObjectTypeTreeNode();
+			case BtsviewmodelPackage.DB_COLLECTION_STATUS_INFORMATION: return createDBCollectionStatusInformation();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -145,6 +147,16 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 	public BTSObjectTypeTreeNode createBTSObjectTypeTreeNode() {
 		BTSObjectTypeTreeNodeImpl btsObjectTypeTreeNode = new BTSObjectTypeTreeNodeImpl();
 		return btsObjectTypeTreeNode;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DBCollectionStatusInformation createDBCollectionStatusInformation() {
+		DBCollectionStatusInformationImpl dbCollectionStatusInformation = new DBCollectionStatusInformationImpl();
+		return dbCollectionStatusInformation;
 	}
 
 	/**
@@ -292,6 +304,14 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 		m.setMessage("Object is locked at " + lease.getTimeStamp().toString() + " by user: ");
 		m.setUserId(userId);
 		m.setMessageType(MessageType.LOCKED);
+		m.setCreationTime(getTimeStamp());
+		return m;
+	}
+
+	@Override
+	public StatusMessage createInfoMessage() {
+		StatusMessage m = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
+		m.setMessageType(MessageType.INFORMATION);
 		m.setCreationTime(getTimeStamp());
 		return m;
 	}

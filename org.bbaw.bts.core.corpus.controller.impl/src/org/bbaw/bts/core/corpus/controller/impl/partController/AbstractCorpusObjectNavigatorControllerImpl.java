@@ -144,7 +144,7 @@ GenericCorpusObjectNavigatorController<E, K>
 			qra.setQueryId(query.getQueryId());
 			queryResultMap.put(query.getQueryId(), qra);
 		}
-		List<E> children = executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		List<E> children = executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
 	}
 
@@ -152,7 +152,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		return new String[]{"partOf"};
 	}
 
-	protected abstract List<E> executeTypedQuery(BTSQueryRequest query, String objectState);
+	protected abstract List<E> executeTypedQuery(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
 
 	@Override
 	public boolean handleModelUpdate(BTSModelUpdateNotification notification,
@@ -274,7 +274,7 @@ GenericCorpusObjectNavigatorController<E, K>
 			qra.setQueryId(queryID);
 			queryResultMap.put(qra.getQueryId(), qra);
 		}
-		List<E> list = typedListEntries(BTSConstants.OBJECT_STATE_TERMINATED); //thsService.list(BTSConstants.OBJECT_STATE_TERMINATED);
+		List<E> list = typedListEntries(BTSConstants.OBJECT_STATE_TERMINATED, monitor); //thsService.list(BTSConstants.OBJECT_STATE_TERMINATED);
 		List<E> result = new Vector<E>(list.size());
 		for (E t : list) {
 			result.add(t);
@@ -282,14 +282,14 @@ GenericCorpusObjectNavigatorController<E, K>
 		return result;
 	}
 
-	protected abstract List<E> typedListEntries(String objectState);
+	protected abstract List<E> typedListEntries(String objectState, IProgressMonitor monitor);
 
 	@Override
 	public String getDisplayName(K id) {
 		BTSCorpusObject o = null;
 
 			try {
-				o = find(id); //thsService.find(id);
+				o = find(id, null); //thsService.find(id);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -311,7 +311,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		return id.toString();
 	}
 
-	public abstract E find(K id);
+	public abstract E find(K id,IProgressMonitor monitor);
 
 	@Override
 	public List<E> getOrphanEntries(Map map, ViewerFilter[] filters, IProgressMonitor monitor) {
@@ -353,7 +353,7 @@ GenericCorpusObjectNavigatorController<E, K>
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		System.out.println(query);
-		List<E> children =executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE);// thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		List<E> children =executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);// thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
 		return children;
 	}
 	

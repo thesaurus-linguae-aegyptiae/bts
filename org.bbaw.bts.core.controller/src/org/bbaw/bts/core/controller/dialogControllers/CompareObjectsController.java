@@ -32,6 +32,7 @@ package org.bbaw.bts.core.controller.dialogControllers;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * The CompareObjectsController manages comparision of objects.
@@ -44,7 +45,7 @@ public interface CompareObjectsController {
 	 * @param object the object
 	 * @return the list
 	 */
-	List<BTSDBBaseObject> listConflictingVersions(BTSDBBaseObject object);
+	List<BTSDBBaseObject> listConflictingVersions(BTSDBBaseObject object, IProgressMonitor monitor);
 	
 	/**
 	 * List available versions of given object and optionally fetch additional versions from remote database.
@@ -53,7 +54,7 @@ public interface CompareObjectsController {
 	 * @param fetchFromRemote the fetch from remote
 	 * @return the list
 	 */
-	List<BTSDBBaseObject> listAvailableVersions(BTSDBBaseObject object, boolean fetchFromRemote);
+	List<BTSDBBaseObject> listAvailableVersions(BTSDBBaseObject object, boolean fetchFromRemote, IProgressMonitor monitor);
 
 
 	/**

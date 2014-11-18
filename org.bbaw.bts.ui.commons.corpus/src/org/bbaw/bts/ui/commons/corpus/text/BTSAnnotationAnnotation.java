@@ -60,4 +60,6 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 			setType(cachedType);
 		}
 	}
+	
+	
 }

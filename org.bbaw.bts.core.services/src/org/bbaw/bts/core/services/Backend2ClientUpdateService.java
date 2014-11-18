@@ -30,6 +30,7 @@
 package org.bbaw.bts.core.services;
 
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -46,4 +47,6 @@ public interface Backend2ClientUpdateService
 	 * @param project the project
 	 */
 	void startListening2Updates(BTSProject project);
+
+	void startListening2Updates(BTSProjectDBCollection coll);
 }

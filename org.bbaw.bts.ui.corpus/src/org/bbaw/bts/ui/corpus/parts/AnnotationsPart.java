@@ -430,7 +430,7 @@ public class AnnotationsPart implements EventHandler {
 			
 
 			try {
-				relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection);
+				relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection, null);
 				for (BTSObject o : relatingObjects)
 				{
 					if (o instanceof BTSCorpusObject)

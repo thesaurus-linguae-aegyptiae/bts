@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSProject;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /** The ProjectController manages all view layer access to project objects.
  * @author Christoph Plutte
@@ -55,7 +56,7 @@ public interface BTSProjectController
 	/** Lists all available projects.
 	 * @return
 	 */
-	List<BTSProject> listProjects();
+	List<BTSProject> listProjects(IProgressMonitor monitor);
 
 	/** Saves multiple projects.
 	 * @param dirtyProjects

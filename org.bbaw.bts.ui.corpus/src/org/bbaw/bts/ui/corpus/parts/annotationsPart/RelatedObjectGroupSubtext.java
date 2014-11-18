@@ -65,7 +65,7 @@ public class RelatedObjectGroupSubtext extends RelatedObjectGroup {
 
 			AnnotationModel model = new AnnotationModel();
 
-			textController.transformToDocument(((BTSText) getObject()).getTextContent(), doc, model, null, null);
+			textController.transformToDocument(((BTSText) getObject()).getTextContent(), doc, model, null, null, null);
 			transcriptionText.setText(doc.get());
 		}
 		String mdc = textController.transformTextToJSeshMdCString((BTSText) getObject());

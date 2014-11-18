@@ -56,8 +56,10 @@ public class CorpusToolControl {
 	private BTSTextCorpus mainCorpus;
 
 	@PostConstruct
-	public void postConstruct(Composite composite) {
+	public void postConstruct(Composite composite, @Optional
+			@Named(BTSPluginIDs.PREF_MAIN_CORPUS) BTSTextCorpus corpus) {
 		this.composite = composite;
+		this.mainCorpus = corpus;
 		composite.setLayout(new GridLayout(6, false));
 		Label l = new Label(composite, SWT.None);
 		l.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_CORPUS));
@@ -119,7 +121,7 @@ public class CorpusToolControl {
 			@Named(BTSPluginIDs.PREF_MAIN_CORPUS) Object corpus) {
 		
 		if (corpus instanceof BTSTextCorpus && corpus != null
-				&& !corpus.equals(this.mainCorpus)) {
+				&& (this.mainCorpus == null || !corpus.equals(this.mainCorpus))) {
 			this.mainCorpus = (BTSTextCorpus) corpus;
 			if (corpusLabel != null) {
 				if (mainCorpus != null) {

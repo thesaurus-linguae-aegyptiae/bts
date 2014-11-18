@@ -569,7 +569,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					// nothing
 					clearProposals();
 
-				} else {
+				} else if (part.isVisible()){
 					loadingLemmaProposals(currentWord);
 				}
 			}
@@ -585,6 +585,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void run() {
 				lemmaViewer.setInput(lemmaRootNode);
+				translationViewer.setInput(new String[]{});
 			}
 		});
 
@@ -611,7 +612,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				java.util.List<BTSLemmaEntry> entries = lemmatizerController
-						.findLemmaProposals(word);
+						.findLemmaProposals(word, monitor);
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}

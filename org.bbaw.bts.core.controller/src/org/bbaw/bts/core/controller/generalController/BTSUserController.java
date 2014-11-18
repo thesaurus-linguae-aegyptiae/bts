@@ -36,6 +36,7 @@ import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /** UserController manages all view access to user objects and usergroup objects.
  * @author Christoph Plutte
@@ -66,25 +67,25 @@ public interface BTSUserController {
 	 * @param query
 	 * @return
 	 */
-	List<BTSUser> query(BTSQueryRequest query);
+	List<BTSUser> query(BTSQueryRequest query, IProgressMonitor monitor);
 
 	/** Find user by id.
 	 * @param id
 	 * @return
 	 */
-	BTSUser findUser(String id);
+	BTSUser findUser(String id, IProgressMonitor monitor);
 
 	/** Find usergroup by id.
 	 * @param id
 	 * @return
 	 */
-	BTSUserGroup findUserGroup(String id);
+	BTSUserGroup findUserGroup(String id, IProgressMonitor monitor);
 
 	/** Find user or usergroup by id. If id matches to user this is returned, if id matches to usergroup the latter is returned.
 	 * @param id
 	 * @return
 	 */
-	BTSObject findUserOrUserGroup(String id);
+	BTSObject findUserOrUserGroup(String id, IProgressMonitor monitor);
 
 	/** Sets the given user to be remembered in rememberMe function, storing user credentials for next login in a secure manner.
 	 * @param validUser
@@ -94,7 +95,7 @@ public interface BTSUserController {
 	/** list all users.
 	 * @return
 	 */
-	List<BTSUser> listAll();
+	List<BTSUser> listAll(IProgressMonitor monitor);
 	
 	/** List all users without requiring previous authentication of an authorized user. This method can be used to check whether the
 	 * given credentials are valid.

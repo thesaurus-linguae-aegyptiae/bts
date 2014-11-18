@@ -396,7 +396,7 @@ public class ApplicationStartupControllerImpl implements
 		}
 
 		try {
-			projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+			projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -846,7 +846,7 @@ public class ApplicationStartupControllerImpl implements
 		
 		try {
 			projects = projectService
-					.list(BTSConstants.OBJECT_STATE_ACTIVE);
+					.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		} catch (Exception e) {
 
 		}

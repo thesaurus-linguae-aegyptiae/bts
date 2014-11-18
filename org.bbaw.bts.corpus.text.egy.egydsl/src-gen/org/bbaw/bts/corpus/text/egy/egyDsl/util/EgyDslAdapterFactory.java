@@ -170,9 +170,9 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createBracketsAdapter();
       }
       @Override
-      public Adapter caseCartouche2(Cartouche2 object)
+      public Adapter caseOval(Oval object)
       {
-        return createCartouche2Adapter();
+        return createOvalAdapter();
       }
       @Override
       public Adapter caseSerech(Serech object)
@@ -183,11 +183,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseCartouche(Cartouche object)
       {
         return createCartoucheAdapter();
-      }
-      @Override
-      public Adapter caseOval(Oval object)
-      {
-        return createOvalAdapter();
       }
       @Override
       public Adapter caseNoCartouche(NoCartouche object)
@@ -333,6 +328,11 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
       public Adapter caseInterfixCompoundWords(InterfixCompoundWords object)
       {
         return createInterfixCompoundWordsAdapter();
+      }
+      @Override
+      public Adapter caseInterfixPhoneticalComplement(InterfixPhoneticalComplement object)
+      {
+        return createInterfixPhoneticalComplementAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -642,16 +642,16 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2 <em>Cartouche2</em>}'.
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Oval <em>Oval</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche2
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Oval
    * @generated
    */
-  public Adapter createCartouche2Adapter()
+  public Adapter createOvalAdapter()
   {
     return null;
   }
@@ -682,21 +682,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCartoucheAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.Oval <em>Oval</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.Oval
-   * @generated
-   */
-  public Adapter createOvalAdapter()
   {
     return null;
   }
@@ -1132,6 +1117,21 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createInterfixCompoundWordsAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPhoneticalComplement <em>Interfix Phonetical Complement</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPhoneticalComplement
+   * @generated
+   */
+  public Adapter createInterfixPhoneticalComplementAdapter()
   {
     return null;
   }

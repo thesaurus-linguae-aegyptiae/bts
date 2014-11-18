@@ -25,8 +25,8 @@ implements ThsNavigatorController {
 
 	@Override
 	protected List<BTSThsEntry> executeTypedQuery(BTSQueryRequest query,
-			String objectState) {
-		return thsService.query(query, objectState);
+			String objectState, IProgressMonitor monitor) {
+		return thsService.query(query, objectState, monitor);
 	}
 
 	@Override
@@ -35,8 +35,8 @@ implements ThsNavigatorController {
 	}
 
 	@Override
-	protected List<BTSThsEntry> typedListEntries(String objectState) {
-		return thsService.list(objectState);
+	protected List<BTSThsEntry> typedListEntries(String objectState, IProgressMonitor monitor) {
+		return thsService.list(objectState, monitor);
 	}
 
 	@Override
@@ -46,8 +46,8 @@ implements ThsNavigatorController {
 	}
 
 	@Override
-	public BTSThsEntry find(String id) {
-		return thsService.find(id);
+	public BTSThsEntry find(String id, IProgressMonitor monitor) {
+		return thsService.find(id, monitor);
 	}
 
 

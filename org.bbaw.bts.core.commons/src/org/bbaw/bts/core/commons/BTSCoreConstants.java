@@ -309,4 +309,5 @@ public class BTSCoreConstants
 
 	public static final String TRANSLATIONS_SUB_DELIMITER = ";";
 
+	
 }

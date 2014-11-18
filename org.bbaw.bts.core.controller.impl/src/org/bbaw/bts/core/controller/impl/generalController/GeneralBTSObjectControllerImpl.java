@@ -15,6 +15,7 @@ import org.bbaw.bts.core.controller.generalController.GeneralBTSObjectController
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.FilterBuilder;
 import org.elasticsearch.index.query.FilterBuilders;
@@ -35,7 +36,7 @@ public class GeneralBTSObjectControllerImpl implements
 
 	@Override
 	public List<BTSObject> getObjectProposalsFor(
-			BTSConfigItem configItem, String text, BTSObject object) {
+			BTSConfigItem configItem, String text, BTSObject object, IProgressMonitor monitor) {
 		List<BTSObject> list = new Vector<BTSObject>();
 		
 		//FIXME aktualisieren und auf map umstellen
@@ -60,7 +61,7 @@ public class GeneralBTSObjectControllerImpl implements
 					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 
 					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-									false, "BTSThsEntry"));
+									false, "BTSThsEntry", monitor));
 //					list.addAll((Collection<? extends BTSObject>) thsService
 //							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 //									false));
@@ -79,7 +80,7 @@ public class GeneralBTSObjectControllerImpl implements
 							.toArray(new FilterBuilder[filters.size()]);
 					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-							false, "BTSCorpusObject"));
+							false, "BTSCorpusObject", monitor));
 //					
 //					list.addAll((Collection<? extends BTSObject>) corpusObjectService
 //							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
@@ -95,7 +96,7 @@ public class GeneralBTSObjectControllerImpl implements
 					sqb.setQuery(qb);
 
 					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-							false, "BTSCorpusObject"));
+							false, "BTSCorpusObject", monitor));
 					
 //					list.addAll((Collection<? extends BTSObject>) corpusObjectService
 //							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
@@ -110,9 +111,9 @@ public class GeneralBTSObjectControllerImpl implements
 	
 	@Override
 	public List<BTSObject> queryObjects(BTSQueryRequest query,
-			String objectState, boolean registerQuery, String className) {
+			String objectState, boolean registerQuery, String className, IProgressMonitor monitor) {
 		return objectService.queryObjects(query,
-				objectState, registerQuery, className);
+				objectState, registerQuery, className, monitor);
 		
 	}
 	
@@ -147,8 +148,8 @@ public class GeneralBTSObjectControllerImpl implements
 
 	}
 	@Override
-	public BTSObject findObject(String id, String className) {
-		return objectService.findObject(id, className);
+	public BTSObject findObject(String id, String className, IProgressMonitor monitor) {
+		return objectService.findObject(id, className, monitor);
 		
 	}
 }

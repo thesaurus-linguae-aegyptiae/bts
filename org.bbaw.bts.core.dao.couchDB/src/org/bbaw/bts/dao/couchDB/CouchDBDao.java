@@ -124,6 +124,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			logger.info("Resource was null, object was newly created and is persisted for the first time: " + uri.path());
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 			resource.getContents().add(entity);
+			Map<URI, Resource> cache = ((ResourceSetImpl) connectionProvider.getEmfResourceSet()).getURIResourceMap();
+			addEntityToCache(uri, cache, entity);
 		}
 		while (resource.getContents().size() > 1)
 		{
@@ -530,6 +532,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 						.add(0, new CouchDBHandler());
 
 				Resource tempResource = tempResourceSet.getResource(uri, true);
+				// if empty return old
+				if (tempResource.getContents().isEmpty()) return (E) eObject;
+				
 				EObject copyEObject = tempResource.getContents().get(0);
 				if (copyEObject instanceof BTSDBBaseObject) {
 
@@ -736,7 +741,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		//execute query
 		response = srq.setFrom(0)
 				.setSize(1000)
-				.setExplain(true).execute()
+				.setExplain(true)
+				.execute()
 				.actionGet();
 		List<E> result = loadResultFromSearchResponse(response, indexName);
 		
@@ -758,7 +764,18 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				if (o == null)
 				{
 					o = loadObjectFromHit(hit, uri, indexName);
-					addEntityToCache(uri, cache, o);
+					if (o != null)
+					{
+						addEntityToCache(uri, cache, o);
+					}
+				}
+				if (o == null)
+				{
+					o = find(uri);
+					if (o != null)
+					{
+						addEntityToCache(uri, cache, o);
+					}
 				}
 				
 				//FIXME lazy check for conflicts
@@ -793,10 +810,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	{
 		// register query with percolator
 		// Index the query = register it in the percolator
-		
-		Job job = new Job("register with percolator"){
-			@Override
-			  protected IStatus run(IProgressMonitor monitor) {
+//		
+//		Job job = new Job("register with percolator"){
+//			@Override
+//			  protected IStatus run(IProgressMonitor monitor) {
 				try
 				{
 					connectionProvider
@@ -814,10 +831,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			    return Status.OK_STATUS;
-			  }
-		};
-		job.schedule();
+//			    return Status.OK_STATUS;
+//			  }
+//		};
+//		job.schedule();
 
 	}
 
@@ -866,7 +883,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		try {
 			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			logger.info(e1);
 		} finally {
 			resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		}

@@ -12,6 +12,7 @@ import org.bbaw.bts.core.dao.BTSUserGroupDao;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGroup, String> implements
 		BTSUserGroupService, BTSObjectSearchService
@@ -52,7 +53,7 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	}
 
 	@Override
-	public BTSUserGroup find(String key)
+	public BTSUserGroup find(String key, IProgressMonitor monitor)
 	{
 		BTSUserGroup userGroup = null;
 		userGroup = userGroupDao.find(key, BTSCoreConstants.ADMIN);
@@ -64,7 +65,7 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	}
 
 	@Override
-	public List<BTSUserGroup> list(String objectState)
+	public List<BTSUserGroup> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSUserGroup> userGroups = userGroupDao.list(
 				BTSCoreConstants.ADMIN, objectState);
@@ -72,14 +73,14 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	}
 
 	@Override
-	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState)
+	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor)
 	{
-		return query(query, objectState, true);
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
 	public List<BTSUserGroup> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery) {
+			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSUserGroup> objects = userGroupDao.query(query,
 				BTSCoreConstants.ADMIN, BTSCoreConstants.ADMIN, objectState,
 				registerQuery);
@@ -87,7 +88,7 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	}
 	@Override
 	public List<BTSUserGroup> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return filter(userGroupDao.findByQueryId(queryId, dbPath, objectState));
 	}

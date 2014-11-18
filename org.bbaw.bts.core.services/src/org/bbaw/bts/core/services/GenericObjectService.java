@@ -37,6 +37,7 @@ import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 
 /**
@@ -115,7 +116,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @param key the key
 	 * @return the entity
 	 */
-	E find(K key);
+	E find(K key, IProgressMonitor monitor);
 	
 	/**
 	 * Find given revision of entity by id and database path.
@@ -125,7 +126,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @param revision the revision
 	 * @return the entity in the given revision
 	 */
-	E find(K key, String path, String revision);
+	E find(K key, String path, String revision, IProgressMonitor monitor);
 	
 	/**
 	 * Find given revision of entity by id and database path.
@@ -137,7 +138,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the entity in the given revision
 	 */
 	E find(K key, String path,
-			String revision, boolean fromRemote);
+			String revision, boolean fromRemote, IProgressMonitor monitor);
 
 	/**
 	 * List all entities of given object state.
@@ -145,7 +146,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @param objectState the object state
 	 * @return the list of entities
 	 */
-	List<E> list(String objectState);
+	List<E> list(String objectState, IProgressMonitor monitor);
 
 	/**
 	 * List all entities of given object state.
@@ -155,16 +156,17 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @param objectState the object state
 	 * @return the list of entities
 	 */
-	List<E> list(String dbPath, String queryId, String objectState);
+	List<E> list(String dbPath, String queryId, String objectState, IProgressMonitor monitor);
 
 	/**
 	 * Query objects of parametrized type.
 	 *
 	 * @param query the query
 	 * @param objectState the object state
+	 * @param monitor 
 	 * @return the list of objects matching given query
 	 */
-	List<E> query(BTSQueryRequest query, String objectState);
+	List<E> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
 
 	/**
 	 * Query objects of parametrized type.
@@ -175,7 +177,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the list of objects matching given query
 	 */
 	List<E> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery);
+			boolean registerQuery, IProgressMonitor monitor);
 
 	/**
 	 * Filter objects according to reading rights of currently authenticated user.
@@ -214,7 +216,7 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @return the list of available revisions
 	 */
 	List<DBRevision> listAvailableRevisions(BTSDBBaseObject object,
-			boolean fetchFromRemote);
+			boolean fetchFromRemote, IProgressMonitor monitor);
 
 	/**
 	 * Gets the display name of the given object by id.
@@ -222,6 +224,6 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 * @param userId the user id
 	 * @return the display name
 	 */
-	String getDisplayName(String userId);
+	String getDisplayName(String userId, IProgressMonitor monitor);
 
 }

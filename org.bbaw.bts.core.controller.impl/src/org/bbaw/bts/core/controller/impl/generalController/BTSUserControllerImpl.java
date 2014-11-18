@@ -16,6 +16,7 @@ import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.model.application.MApplication;
 
@@ -46,7 +47,7 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Override
 	public String getUserDisplayName(String userId) {
-		return userService.getDisplayName(userId);
+		return userService.getDisplayName(userId, null);
 		
 	}
 
@@ -59,7 +60,7 @@ public class BTSUserControllerImpl implements BTSUserController {
 			for (String id : validUser.getGroupIds()) {
 				BTSUserGroup g = null;
 				try {
-					g = userGroupService.find(id);
+					g = userGroupService.find(id, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -80,25 +81,25 @@ public class BTSUserControllerImpl implements BTSUserController {
 	}
 
 	@Override
-	public List<BTSUser> query(BTSQueryRequest query) {
-		return userService.query(query, BTSConstants.OBJECT_STATE_ACTIVE);
+	public List<BTSUser> query(BTSQueryRequest query, IProgressMonitor monitor) {
+		return userService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 	}
 
 	@Override
-	public BTSUser findUser(String id) {
-		return userService.find(id);
+	public BTSUser findUser(String id, IProgressMonitor monitor) {
+		return userService.find(id, monitor);
 	}
 
 	@Override
-	public BTSUserGroup findUserGroup(String id) {
-		return userGroupService.find(id);
+	public BTSUserGroup findUserGroup(String id, IProgressMonitor monitor) {
+		return userGroupService.find(id, monitor);
 	}
 
 	@Override
-	public BTSObject findUserOrUserGroup(String id) {
-		BTSObject o = userService.find(id);
+	public BTSObject findUserOrUserGroup(String id, IProgressMonitor monitor) {
+		BTSObject o = userService.find(id, monitor);
 		if (o == null) {
-			o = userGroupService.find(id);
+			o = userGroupService.find(id, monitor);
 		}
 		return o;
 	}
@@ -110,8 +111,8 @@ public class BTSUserControllerImpl implements BTSUserController {
 	}
 
 	@Override
-	public List<BTSUser> listAll() {
-		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+	public List<BTSUser> listAll(IProgressMonitor monitor) {
+		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 	}
 	
 	@Override

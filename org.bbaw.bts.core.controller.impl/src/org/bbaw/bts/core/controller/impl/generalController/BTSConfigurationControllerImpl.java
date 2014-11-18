@@ -26,6 +26,7 @@ import org.bbaw.bts.core.controller.generalController.BTSConfigurationController
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -59,9 +60,9 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	 * BTSConfigurationController#listConfigurations()
 	 */
 	@Override
-	public List<BTSConfiguration> listConfigurations()
+	public List<BTSConfiguration> listConfigurations(IProgressMonitor monitor)
 	{
-		return configService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		return configService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 	}
 
 	/*

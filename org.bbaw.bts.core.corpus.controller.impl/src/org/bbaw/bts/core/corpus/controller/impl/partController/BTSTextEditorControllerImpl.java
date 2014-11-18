@@ -151,10 +151,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private BTSLemmaEntryService lemmaService;
 	
 	private int counter;
-	private HashMap<String, List<BTSModelAnnotation>> lemmaAnnotationMap;
+	
 
 	@Override
-	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
+	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
+			List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
+			Map<String, List<Object>> lemmaAnnotationMap)
 	{
 //		if (textContent == null)
 //		{
@@ -165,7 +167,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		{
 			relatingObjectsMap = fillRelatingObjectsMap(relatingObjects);
 		}
-		lemmaAnnotationMap = new HashMap<String, List<BTSModelAnnotation>>();
+		
 			
 		StringBuilder stringBuilder = new StringBuilder();
 		if (textContent == null)
@@ -191,7 +193,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				int loopLen = stringBuilder.length();
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
 				{
-					appendToStringBuilder(sentenceItem, model, stringBuilder, relatingObjects, relatingObjectsMap);
+					appendToStringBuilder(sentenceItem, model, stringBuilder, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
 					if (stringBuilder.length() > loopLen)
 					{
 						stringBuilder.append(WS);
@@ -215,7 +217,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				model.addAnnotation(ma, pos);
 			} else
 			{
-				appendToStringBuilder(textItems, model, stringBuilder, relatingObjects, relatingObjectsMap);
+				appendToStringBuilder(textItems, model, stringBuilder, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
 			}
 		}
 		if (stringBuilder.length() > 0)
@@ -224,46 +226,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		}
 		logger.info("BTSTextEditorController text as string egydsl: " + stringBuilder.toString());
 		
-		processLemmaAnnotions(lemmaAnnotationMap);
 		doc.set(stringBuilder.toString());// + BTSConstants.EOF);
 
 	}
 
-	private void processLemmaAnnotions(
-			final HashMap<String, List<BTSModelAnnotation>> localLemmaAnnotationMap) {
-		Job job = new Job("Process Lemma Annotation") {
-			
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				for (String lemmaId : localLemmaAnnotationMap.keySet())
-				{
-					List<BTSModelAnnotation> list = localLemmaAnnotationMap.get(lemmaId);
-					if (list != null && !list.isEmpty())
-					{
-						BTSLemmaEntry lemma = null;
-						try {
-							lemma = lemmaService.find(lemmaId);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						if (lemma != null)
-						{
-							for (BTSModelAnnotation annotation : list)
-							{
-								annotation.setRelatingObject(lemma);
-							}
-						}
-					}
-				}
-				lemmaAnnotationMap = null;
-
-				return Status.OK_STATUS;
-			}
-		};
-		
-		job.schedule();		
-
-	}
+	
 
 	public HashMap<String, List<BTSInterTextReference>> fillRelatingObjectsMap(List<BTSObject> relatingObjects) {
 		HashMap<String, List<BTSInterTextReference>> relatingObjectsMap = new HashMap<String, List<BTSInterTextReference>>();
@@ -302,14 +269,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		
 	}
 
-	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap)
+	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, Map<String, List<Object>> lemmaAnnotationMap)
 	{
 		Position pos = null;
 		if (item instanceof BTSWord)
 		{
 			BTSWord word = (BTSWord) item;
 			pos = appendWordToStringBuilder(word, stringBuilder);
-			appendWordToModel(word, model, pos);
+			appendWordToModel(word, model, pos, lemmaAnnotationMap);
 
 		} else if (item instanceof BTSMarker)
 		{
@@ -319,7 +286,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		} else if (item instanceof BTSAmbivalence) {
 			BTSAmbivalence ambivalence = (BTSAmbivalence) item;
 			pos = appendAmbivalenceToStringBuilder(ambivalence, stringBuilder,
-					model, relatingObjectsMap);
+					model, relatingObjectsMap, lemmaAnnotationMap);
 			appendAmbivalenceToModel(ambivalence, model, pos);
 
 		}
@@ -428,12 +395,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private Position appendAmbivalenceToStringBuilder(
 			BTSAmbivalence ambivalence, StringBuilder stringBuilder,
-			IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
+			IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
+			Map<String, List<Object>> lemmaAnnotationMap) {
 		Position pos = new Position(stringBuilder.length());
 		stringBuilder.append(AMBIVALENCE_START_SIGN);
 		if (ambivalence.getCases() != null) {
 			for (BTSLemmaCase amCase : ambivalence.getCases()) {
-				appendLemmaCase(amCase, ambivalence, stringBuilder, model, relatingObjectsMap);
+				appendLemmaCase(amCase, ambivalence, stringBuilder, model, relatingObjectsMap, lemmaAnnotationMap);
 				stringBuilder.append(LEMMA_CASE_SEPARATOR);
 			}
 		}
@@ -447,7 +415,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void appendLemmaCase(BTSLemmaCase amCase,
 			BTSAmbivalence ambivalence, StringBuilder stringBuilder,
-			IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
+			IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap,
+			Map<String, List<Object>> lemmaAnnotationMap) {
 		Position pos = new Position(stringBuilder.length());
 		stringBuilder.append(LEMMA_CASE_TERMIAL + WS);
 		if (amCase.getName() != null) {
@@ -458,7 +427,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		if (amCase.getScenario() != null) {
 			for (BTSAmbivalenceItem item : amCase.getScenario()) {
 				appendAmbivalenceItem((BTSIdentifiableItem) item, amCase, ambivalence, stringBuilder,
-						model, relatingObjectsMap);
+						model, relatingObjectsMap, lemmaAnnotationMap);
 				stringBuilder.append(WS);
 			}
 		}
@@ -477,12 +446,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void appendAmbivalenceItem(BTSIdentifiableItem item,
 			BTSLemmaCase amCase, BTSAmbivalence ambivalence,
-			StringBuilder stringBuilder, IAnnotationModel model, Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
+			StringBuilder stringBuilder, IAnnotationModel model, 
+			Map<String, List<BTSInterTextReference>> relatingObjectsMap, Map<String, List<Object>> lemmaAnnotationMap) {
 		Position pos = null;
 		if (item instanceof BTSWord) {
 			BTSWord word = (BTSWord) item;
 			pos = appendWordToStringBuilder(word, stringBuilder);
-			appendWordToModel(word, model, pos);
+			appendWordToModel(word, model, pos, lemmaAnnotationMap);
 		} else if (item instanceof BTSMarker) {
 			BTSMarker marker = (BTSMarker) item;
 			pos = appendMarkerToStringBuilder(marker, stringBuilder);
@@ -538,13 +508,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	}
 
-	private void appendWordToModel(BTSWord word, IAnnotationModel model, Position position)
+	private void appendWordToModel(BTSWord word, IAnnotationModel model, Position position, Map<String, List<Object>> lemmaAnnotationMap)
 	{
 		BTSModelAnnotation annotation;
 		if (word.getLKey() != null && !"".equals(word.getLKey())) {
 
 			annotation = new BTSLemmaAnnotation(BTSLemmaAnnotation.TYPE, word);
-			add2LemmaAnnotationMap(word.getLKey(), annotation);
+			if (lemmaAnnotationMap != null)
+			{
+				add2LemmaAnnotationMap(word.getLKey(), annotation, lemmaAnnotationMap);
+			}
 			
 		} else {
 			annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
@@ -554,11 +527,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	}
 
-	private void add2LemmaAnnotationMap(String lemmaId, BTSModelAnnotation annotation) {
-		List<BTSModelAnnotation> list = lemmaAnnotationMap.get(lemmaId);
+	private void add2LemmaAnnotationMap(String lemmaId, BTSModelAnnotation annotation, Map<String, List<Object>> lemmaAnnotationMap) {
+		List<Object> list = lemmaAnnotationMap.get(lemmaId);
 		if (list == null)
 		{
-			list = new Vector<BTSModelAnnotation>(4);
+			list = new Vector<Object>(4);
 			lemmaAnnotationMap.put(lemmaId, list);
 		}
 		list.add(annotation);
@@ -1104,7 +1077,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	}
 
 	@Override
-	public List<BTSObject> getRelatingObjects(BTSText text) {
+	public List<BTSObject> getRelatingObjects(BTSText text, IProgressMonitor monitor) {
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.matchQuery("relations.objectId",
 				text.get_id()));
@@ -1112,12 +1085,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
 		List<BTSCorpusObject> obs = corpusObjectService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE);
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		for (BTSCorpusObject o : obs)
 		{
 			children.add(o);
 		}
-		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true));
+		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true, monitor));
 		return children;
 	}
 	
@@ -1281,5 +1254,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 //		!comparison.getDifferences().isEmpty());
 		
 		return result;
+	}
+
+
+
+	@Override
+	public BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor) {
+		return lemmaService.find(lemmaId, monitor);
 	}
 }

@@ -106,7 +106,7 @@ public class StatusInformationToolControl {
 		{
 			BTSUser user = null;
 			try {
-				user = userController.findUser(message.getUserId());
+				user = userController.findUser(message.getUserId(), null);
 			} catch (Exception e) {
 			}
 			if (user != null)

@@ -307,6 +307,133 @@ public interface BtsviewmodelPackage extends EPackage
 	int BTS_OBJECT_TYPE_TREE_NODE_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsviewmodel.impl.DBCollectionStatusInformationImpl <em>DB Collection Status Information</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsviewmodel.impl.DBCollectionStatusInformationImpl
+	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION = 3;
+
+	/**
+	 * The feature id for the '<em><b>Db Collection Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__DB_COLLECTION_NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Db Doc Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__DB_DOC_COUNT = 1;
+
+	/**
+	 * The feature id for the '<em><b>Sync Status To Remote</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__SYNC_STATUS_TO_REMOTE = 2;
+
+	/**
+	 * The feature id for the '<em><b>Sync Status From Remote</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__SYNC_STATUS_FROM_REMOTE = 3;
+
+	/**
+	 * The feature id for the '<em><b>Index Doc Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__INDEX_DOC_COUNT = 4;
+
+	/**
+	 * The feature id for the '<em><b>Index Status</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__INDEX_STATUS = 5;
+
+	/**
+	 * The feature id for the '<em><b>Db Disk Size</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__DB_DISK_SIZE = 6;
+
+	/**
+	 * The feature id for the '<em><b>Db Doc Del Count</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__DB_DOC_DEL_COUNT = 7;
+
+	/**
+	 * The feature id for the '<em><b>Db Purge Seq</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__DB_PURGE_SEQ = 8;
+
+	/**
+	 * The feature id for the '<em><b>Db Update Seq</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__DB_UPDATE_SEQ = 9;
+
+	/**
+	 * The feature id for the '<em><b>Index Update Seq</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION__INDEX_UPDATE_SEQ = 10;
+
+	/**
+	 * The number of structural features of the '<em>DB Collection Status Information</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION_FEATURE_COUNT = 11;
+
+	/**
+	 * The number of operations of the '<em>DB Collection Status Information</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DB_COLLECTION_STATUS_INFORMATION_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -314,7 +441,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getMessageType()
 	 * @generated
 	 */
-	int MESSAGE_TYPE = 3;
+	int MESSAGE_TYPE = 4;
 
 	/**
 	 * The meta object id for the '<em>BTS Object</em>' data type.
@@ -324,7 +451,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getBTSObject()
 	 * @generated
 	 */
-	int BTS_OBJECT = 4;
+	int BTS_OBJECT = 5;
 
 	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
@@ -334,7 +461,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 5;
+	int PROPERTY_CHANGE_SUPPORT = 6;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -344,7 +471,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 6;
+	int PROPERTY_CHANGE_LISTENER = 7;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -354,7 +481,7 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 7;
+	int PROPERTY_CHANGE_EVENT = 8;
 
 
 	/**
@@ -582,6 +709,137 @@ public interface BtsviewmodelPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getBTSObjectTypeTreeNode_Selected();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation <em>DB Collection Status Information</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>DB Collection Status Information</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation
+	 * @generated
+	 */
+	EClass getDBCollectionStatusInformation();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbCollectionName <em>Db Collection Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Collection Name</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbCollectionName()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_DbCollectionName();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbDocCount <em>Db Doc Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Doc Count</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbDocCount()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_DbDocCount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getSyncStatusToRemote <em>Sync Status To Remote</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sync Status To Remote</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getSyncStatusToRemote()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_SyncStatusToRemote();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getSyncStatusFromRemote <em>Sync Status From Remote</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sync Status From Remote</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getSyncStatusFromRemote()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_SyncStatusFromRemote();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getIndexDocCount <em>Index Doc Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index Doc Count</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getIndexDocCount()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_IndexDocCount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getIndexStatus <em>Index Status</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index Status</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getIndexStatus()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_IndexStatus();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbDiskSize <em>Db Disk Size</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Disk Size</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbDiskSize()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_DbDiskSize();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbDocDelCount <em>Db Doc Del Count</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Doc Del Count</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbDocDelCount()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_DbDocDelCount();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbPurgeSeq <em>Db Purge Seq</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Purge Seq</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbPurgeSeq()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_DbPurgeSeq();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbUpdateSeq <em>Db Update Seq</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Db Update Seq</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getDbUpdateSeq()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_DbUpdateSeq();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getIndexUpdateSeq <em>Index Update Seq</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Index Update Seq</em>'.
+	 * @see org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation#getIndexUpdateSeq()
+	 * @see #getDBCollectionStatusInformation()
+	 * @generated
+	 */
+	EAttribute getDBCollectionStatusInformation_IndexUpdateSeq();
 
 	/**
 	 * Returns the meta object for enum '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}'.
@@ -834,6 +1092,104 @@ public interface BtsviewmodelPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute BTS_OBJECT_TYPE_TREE_NODE__SELECTED = eINSTANCE.getBTSObjectTypeTreeNode_Selected();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsviewmodel.impl.DBCollectionStatusInformationImpl <em>DB Collection Status Information</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsviewmodel.impl.DBCollectionStatusInformationImpl
+		 * @see org.bbaw.bts.btsviewmodel.impl.BtsviewmodelPackageImpl#getDBCollectionStatusInformation()
+		 * @generated
+		 */
+		EClass DB_COLLECTION_STATUS_INFORMATION = eINSTANCE.getDBCollectionStatusInformation();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Collection Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__DB_COLLECTION_NAME = eINSTANCE.getDBCollectionStatusInformation_DbCollectionName();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Doc Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__DB_DOC_COUNT = eINSTANCE.getDBCollectionStatusInformation_DbDocCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Sync Status To Remote</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__SYNC_STATUS_TO_REMOTE = eINSTANCE.getDBCollectionStatusInformation_SyncStatusToRemote();
+
+		/**
+		 * The meta object literal for the '<em><b>Sync Status From Remote</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__SYNC_STATUS_FROM_REMOTE = eINSTANCE.getDBCollectionStatusInformation_SyncStatusFromRemote();
+
+		/**
+		 * The meta object literal for the '<em><b>Index Doc Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__INDEX_DOC_COUNT = eINSTANCE.getDBCollectionStatusInformation_IndexDocCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Index Status</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__INDEX_STATUS = eINSTANCE.getDBCollectionStatusInformation_IndexStatus();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Disk Size</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__DB_DISK_SIZE = eINSTANCE.getDBCollectionStatusInformation_DbDiskSize();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Doc Del Count</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__DB_DOC_DEL_COUNT = eINSTANCE.getDBCollectionStatusInformation_DbDocDelCount();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Purge Seq</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__DB_PURGE_SEQ = eINSTANCE.getDBCollectionStatusInformation_DbPurgeSeq();
+
+		/**
+		 * The meta object literal for the '<em><b>Db Update Seq</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__DB_UPDATE_SEQ = eINSTANCE.getDBCollectionStatusInformation_DbUpdateSeq();
+
+		/**
+		 * The meta object literal for the '<em><b>Index Update Seq</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute DB_COLLECTION_STATUS_INFORMATION__INDEX_UPDATE_SEQ = eINSTANCE.getDBCollectionStatusInformation_IndexUpdateSeq();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsviewmodel.MessageType <em>Message Type</em>}' enum.

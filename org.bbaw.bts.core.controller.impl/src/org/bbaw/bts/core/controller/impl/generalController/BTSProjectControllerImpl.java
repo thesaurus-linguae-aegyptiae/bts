@@ -9,6 +9,7 @@ import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.controller.generalController.BTSProjectController;
 import org.bbaw.bts.core.services.BTSProjectService;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSProjectControllerImpl implements BTSProjectController
 {
@@ -30,9 +31,9 @@ public class BTSProjectControllerImpl implements BTSProjectController
 	}
 
 	@Override
-	public List<BTSProject> listProjects()
+	public List<BTSProject> listProjects(IProgressMonitor monitor)
 	{
-		return projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		return projectService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 	}
 
 	@Override

@@ -81,7 +81,7 @@ public class ObjectSelectionProposalProvider implements
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				list = gernalObjectController.getObjectProposalsFor(
-						(BTSConfigItem) configItem, "", object);
+						(BTSConfigItem) configItem, "", object, monitor);
 
 				return Status.OK_STATUS;
 			}

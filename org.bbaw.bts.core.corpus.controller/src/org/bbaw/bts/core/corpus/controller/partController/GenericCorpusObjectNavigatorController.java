@@ -43,7 +43,7 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 
 	E createNew();
 	
-	E find(K id);
+	E find(K id, IProgressMonitor monitor);
 	
 	String getDisplayName(K id);
 

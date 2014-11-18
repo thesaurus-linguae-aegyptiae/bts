@@ -39,6 +39,7 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /** The ConfigurationController manages all view access to configuration modells.
  * @author Christoph Plutte
@@ -50,7 +51,7 @@ public interface BTSConfigurationController
 	/** Lists all available configurations.
 	 * @return list of configurations.
 	 */
-	List<BTSConfiguration> listConfigurations();
+	List<BTSConfiguration> listConfigurations(IProgressMonitor monitor);
 
 	/** creates a new Configuration.
 	 * @return new configuration.

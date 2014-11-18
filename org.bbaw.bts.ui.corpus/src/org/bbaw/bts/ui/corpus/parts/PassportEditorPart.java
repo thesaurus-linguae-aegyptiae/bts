@@ -1328,7 +1328,7 @@ public class PassportEditorPart {
 		{
 			projectText.setText(labelProvider_project.getText(project));
 		}
-		else
+		else if(object.getProject() != null)
 		{
 			projectText.setText(object.getProject());
 		}

@@ -28,8 +28,8 @@ implements LemmaNavigatorController{
 	}
 
 	@Override
-	protected List<BTSLemmaEntry> executeTypedQuery(BTSQueryRequest query, String objectState) {
-		return lemmaService.query(query, objectState);
+	protected List<BTSLemmaEntry> executeTypedQuery(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return lemmaService.query(query, objectState, monitor);
 	}
 
 	@Override
@@ -38,8 +38,8 @@ implements LemmaNavigatorController{
 	}
 
 	@Override
-	protected List<BTSLemmaEntry> typedListEntries(String objectState) {
-		return lemmaService.list(objectState);
+	protected List<BTSLemmaEntry> typedListEntries(String objectState, IProgressMonitor monitor) {
+		return lemmaService.list(objectState, monitor);
 	}
 
 	@Override
@@ -49,8 +49,8 @@ implements LemmaNavigatorController{
 	}
 
 	@Override
-	public BTSLemmaEntry find(String id) {
-		return lemmaService.find(id);
+	public BTSLemmaEntry find(String id, IProgressMonitor monitor) {
+		return lemmaService.find(id, monitor);
 	}
 
 	@Override

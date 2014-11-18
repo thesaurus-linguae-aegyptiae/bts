@@ -3,6 +3,8 @@
 */
 package org.bbaw.bts.corpus.text.egy.ui.labeling
 
+import org.eclipse.xtext.resource.IEObjectDescription
+
 //import org.eclipse.xtext.resource.IEObjectDescription
 
 /**

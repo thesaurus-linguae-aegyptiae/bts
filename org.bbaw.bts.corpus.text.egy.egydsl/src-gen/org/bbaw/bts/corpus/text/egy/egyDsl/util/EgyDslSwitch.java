@@ -245,12 +245,12 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case EgyDslPackage.CARTOUCHE2:
+      case EgyDslPackage.OVAL:
       {
-        Cartouche2 cartouche2 = (Cartouche2)theEObject;
-        T result = caseCartouche2(cartouche2);
-        if (result == null) result = caseBrackets(cartouche2);
-        if (result == null) result = caseWordMiddle(cartouche2);
+        Oval oval = (Oval)theEObject;
+        T result = caseOval(oval);
+        if (result == null) result = caseBrackets(oval);
+        if (result == null) result = caseWordMiddle(oval);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -272,15 +272,6 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case EgyDslPackage.OVAL:
-      {
-        Oval oval = (Oval)theEObject;
-        T result = caseOval(oval);
-        if (result == null) result = caseBrackets(oval);
-        if (result == null) result = caseWordMiddle(oval);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case EgyDslPackage.NO_CARTOUCHE:
       {
         NoCartouche noCartouche = (NoCartouche)theEObject;
@@ -292,7 +283,7 @@ public class EgyDslSwitch<T> extends Switch<T>
       {
         Expanded expanded = (Expanded)theEObject;
         T result = caseExpanded(expanded);
-        if (result == null) result = caseOval(expanded);
+        if (result == null) result = caseCartouche(expanded);
         if (result == null) result = caseNoCartouche(expanded);
         if (result == null) result = caseNoEmendation(expanded);
         if (result == null) result = caseNoDisputableReading(expanded);
@@ -321,6 +312,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseEmendation(emendation);
         if (result == null) result = caseBrackets(emendation);
         if (result == null) result = caseNoCartouche(emendation);
+        if (result == null) result = caseNoDisputableReading(emendation);
         if (result == null) result = caseWordMiddle(emendation);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -341,6 +333,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseNoExpanded(disputableReading);
         if (result == null) result = caseNoEmendation(disputableReading);
         if (result == null) result = caseNoLacuna(disputableReading);
+        if (result == null) result = caseNoPartialDestruction(disputableReading);
         if (result == null) result = caseWordMiddle(disputableReading);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -375,6 +368,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseDeletion(deletion);
         if (result == null) result = caseBrackets(deletion);
         if (result == null) result = caseNoCartouche(deletion);
+        if (result == null) result = caseNoDisputableReading(deletion);
         if (result == null) result = caseNoPartialDestruction(deletion);
         if (result == null) result = caseWordMiddle(deletion);
         if (result == null) result = defaultCase(theEObject);
@@ -629,6 +623,26 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseNoAncientExpanded(interfixCompoundWords);
         if (result == null) result = caseNoRestorationOverRasur(interfixCompoundWords);
         if (result == null) result = caseNoPartialDestruction(interfixCompoundWords);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.INTERFIX_PHONETICAL_COMPLEMENT:
+      {
+        InterfixPhoneticalComplement interfixPhoneticalComplement = (InterfixPhoneticalComplement)theEObject;
+        T result = caseInterfixPhoneticalComplement(interfixPhoneticalComplement);
+        if (result == null) result = caseInterfix(interfixPhoneticalComplement);
+        if (result == null) result = caseWordMiddle(interfixPhoneticalComplement);
+        if (result == null) result = caseNoCartouche(interfixPhoneticalComplement);
+        if (result == null) result = caseNoExpanded(interfixPhoneticalComplement);
+        if (result == null) result = caseNoEmendation(interfixPhoneticalComplement);
+        if (result == null) result = caseNoDisputableReading(interfixPhoneticalComplement);
+        if (result == null) result = caseNoLacuna(interfixPhoneticalComplement);
+        if (result == null) result = caseNoDeletion(interfixPhoneticalComplement);
+        if (result == null) result = caseNoExpandedColumn(interfixPhoneticalComplement);
+        if (result == null) result = caseNoRasur(interfixPhoneticalComplement);
+        if (result == null) result = caseNoAncientExpanded(interfixPhoneticalComplement);
+        if (result == null) result = caseNoRestorationOverRasur(interfixPhoneticalComplement);
+        if (result == null) result = caseNoPartialDestruction(interfixPhoneticalComplement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -941,17 +955,17 @@ public class EgyDslSwitch<T> extends Switch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Cartouche2</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Oval</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Cartouche2</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Oval</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseCartouche2(Cartouche2 object)
+  public T caseOval(Oval object)
   {
     return null;
   }
@@ -984,22 +998,6 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseCartouche(Cartouche object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>Oval</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Oval</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T caseOval(Oval object)
   {
     return null;
   }
@@ -1464,6 +1462,22 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseInterfixCompoundWords(InterfixCompoundWords object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Interfix Phonetical Complement</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Interfix Phonetical Complement</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseInterfixPhoneticalComplement(InterfixPhoneticalComplement object)
   {
     return null;
   }

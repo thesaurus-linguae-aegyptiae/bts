@@ -315,7 +315,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 	private void loadDBCollectionCache() {
 		dbCollectionCache = new HashMap<String, BTSProjectDBCollection>();
 		projectService = context.get(BTSProjectService.class);
-		List<BTSProject> projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSProject> projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		for (BTSProject project : projects)
 		{
 			for (BTSProjectDBCollection coll : project.getDbCollections())
@@ -381,7 +381,7 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			for (String id : user.getGroupIds()) {
 				BTSUserGroup g = null;
 				try {
-					g = userGroupService.find(id);
+					g = userGroupService.find(id, null);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

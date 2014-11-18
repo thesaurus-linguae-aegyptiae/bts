@@ -15,6 +15,7 @@ import org.bbaw.bts.core.dao.UserActionCounterDao;
 import org.bbaw.bts.core.services.UserActionCounterService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.elasticsearch.index.query.QueryBuilders;
 
@@ -54,7 +55,7 @@ public class UserActionCounterServiceImpl extends
 	}
 
 	@Override
-	public UserActionCounter find(String key) {
+	public UserActionCounter find(String key, IProgressMonitor monitor) {
 		UserActionCounter counter = null;
 		try {
 			counter = counterDao.find(key, BTSCoreConstants.LOCAL);
@@ -68,7 +69,7 @@ public class UserActionCounterServiceImpl extends
 	}
 
 	@Override
-	public List<UserActionCounter> list(String objectState) {
+	public List<UserActionCounter> list(String objectState, IProgressMonitor monitor) {
 		List<UserActionCounter> counters = new Vector<UserActionCounter>();
 		counters.addAll(counterDao.list(BTSCoreConstants.LOCAL, objectState));
 		return counters;
@@ -76,20 +77,20 @@ public class UserActionCounterServiceImpl extends
 
 	@Override
 	public List<UserActionCounter> list(String dbPath, String queryId,
-			String objectState) {
+			String objectState, IProgressMonitor monitor) {
 		return null;
 	}
 
 
 	@Override
 	public List<UserActionCounter> query(BTSQueryRequest query,
-			String objectState) {
-		return query(query, objectState, false);
+			String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, false, monitor);
 	}
 
 	@Override
 	public List<UserActionCounter> query(BTSQueryRequest query,
-			String objectState, boolean registerQuery) {
+			String objectState, boolean registerQuery, IProgressMonitor monitor) {
 		List<UserActionCounter> counters = new Vector<UserActionCounter>();
 		counters.addAll(counterDao.query(query, BTSCoreConstants.LOCAL,
 				BTSCoreConstants.LOCAL, objectState, registerQuery));
@@ -113,7 +114,7 @@ public class UserActionCounterServiceImpl extends
 		Set<UserActionCounter> toSave = new HashSet<UserActionCounter>(counters.size());
 		for (String id : counters)
 		{
-			UserActionCounter counter = find(id);
+			UserActionCounter counter = find(id, null);
 			if (counter == null)
 			{
 				counter = BtsmodelFactory.eINSTANCE
@@ -126,5 +127,8 @@ public class UserActionCounterServiceImpl extends
 		}
 		saveMultiple(toSave);
 	}
+
+
+	
 
 }

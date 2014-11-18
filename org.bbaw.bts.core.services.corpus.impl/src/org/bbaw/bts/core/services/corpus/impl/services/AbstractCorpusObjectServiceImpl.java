@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -46,7 +47,7 @@ implements GenericCorpusObjectService<E, K>{
 	public List<E> getOrphanEntries(Map map,
 			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
 
-		List<E> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<E> allEntries = list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		if (monitor != null)
 		{
 			monitor.beginTask("Calculate all Entries", allEntries.size());
@@ -160,6 +161,7 @@ implements GenericCorpusObjectService<E, K>{
 				if (monitor != null)
 				{
 					monitor.worked(1);
+					if (monitor.isCanceled()) break;
 				}
 			}
 		}
@@ -212,8 +214,16 @@ implements GenericCorpusObjectService<E, K>{
 		
 	}
 	
-	protected String[] getActive_corpora() {
-		return active_corpora.split(BTSCoreConstants.SPLIT_PATTERN);
+	protected String[] getActive_corpora(String projecPrefix) {
+		List<String>corpora = new ArrayList<String>(4);
+		for (String s : active_corpora.split(BTSCoreConstants.SPLIT_PATTERN))
+		{
+			if (s.startsWith(projecPrefix))
+			{
+				corpora.add(s);
+			}
+		}
+		return corpora.toArray(new String[corpora.size()]);
 	}
 	
 	protected String getCurrentDBCollectionContext()

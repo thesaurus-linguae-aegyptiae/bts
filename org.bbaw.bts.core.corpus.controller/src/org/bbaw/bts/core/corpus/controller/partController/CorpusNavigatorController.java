@@ -12,6 +12,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 
@@ -41,7 +42,7 @@ public interface CorpusNavigatorController extends GenericCorpusObjectNavigatorC
 //
 //	BTSCorpusObject findObject(String id);
 	
-	List<BTSTextCorpus> listTextCorpora();
+	List<BTSTextCorpus> listTextCorpora(IProgressMonitor monitor);
 	
 	boolean makeAndSaveNewTextCorpus(BTSTextCorpus corpus, boolean synchronizeCorpus);
 

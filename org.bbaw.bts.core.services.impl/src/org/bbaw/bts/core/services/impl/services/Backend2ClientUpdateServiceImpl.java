@@ -74,21 +74,24 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 				// might match
 				if (notification.isLoaded())
 				{
-					List<String> queryIds = updateDao.fingQueryIds(notification.getObject(),
-							((BTSDBBaseObject) notification.getObject()).get_id(), notification.getDbCollection());
-					notification.setQueryIds(queryIds);
-					logger.info("Notify Listener about change. size of found queryIds: " + queryIds.size());
+					if (notification.getQueryIds() != null)
+					{
+						List<String> queryIds = updateDao.fingQueryIds(notification.getObject(),
+								((BTSDBBaseObject) notification.getObject()).get_id(), notification.getDbCollection());
+						notification.setQueryIds(queryIds);
+						logger.info("Notify Listener about change. size of found queryIds: " + queryIds.size());
+					}
 
 				}
-				if (notification.getObject() != null && notification.getObject() instanceof BTSObject)
-				{
-					logger.info("Notify eventBroker about change. Object name: " + ((BTSObject) notification.getObject()).getName());
-				}
-				else
-				{
-					logger.info("Notify eventBroker about change. Object null or not BTSObject: " + (notification.getObject()));
-
-				}
+//				if (notification.getObject() != null && notification.getObject() instanceof BTSObject)
+//				{
+//					logger.info("Notify eventBroker about change. Object name: " + ((BTSObject) notification.getObject()).getName());
+//				}
+//				else
+//				{
+//					logger.info("Notify eventBroker about change. Object null or not BTSObject: " + (notification.getObject()));
+//
+//				}
 
 				eventBroker.post("model_update/async", notification);
 
@@ -103,12 +106,15 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 		updateDao.addUpdateListener(this);
 		for (BTSProjectDBCollection collection : project.getDbCollections())
 		{
-			if (collection.isSynchronized())
-			{
-				updateDao.runAndListenToUpdates(generalPurposeDao, collection.getCollectionName());
-			}
+			updateDao.runAndListenToUpdates(generalPurposeDao, collection.getCollectionName());
 		}
 
+	}
+
+	@Override
+	public void startListening2Updates(BTSProjectDBCollection collection) {
+		updateDao.runAndListenToUpdates(generalPurposeDao, collection.getCollectionName());
+		
 	}
 
 }

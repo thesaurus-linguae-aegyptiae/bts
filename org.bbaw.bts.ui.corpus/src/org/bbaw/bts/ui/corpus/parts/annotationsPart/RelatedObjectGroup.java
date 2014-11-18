@@ -338,29 +338,36 @@ public abstract class RelatedObjectGroup extends Composite{
 				reference = ref;
 			}
 		}
-		CompoundCommand compoundCommand = new CompoundCommand();
+//		CompoundCommand compoundCommand = new CompoundCommand();
 		if (reference == null)
 		{
 			// neue reference anlegen, start ziel entsprechend selection
 			reference = BtsmodelFactory.eINSTANCE.createBTSInterTextReference();
 			reference.setBeginId(selectionEvent.getStartId());
 			reference.setEndId(selectionEvent.getEndId());
-			Command c = AddCommand
-					.create(editingDomain, relation, BtsmodelPackage.BTS_RELATION__PARTS, reference);
-			compoundCommand.append(c);
+//			Command c = AddCommand
+//					.create(editingDomain, relation, BtsmodelPackage.BTS_RELATION__PARTS, reference);
+//			compoundCommand.append(c);
+			
+			// without command
+			relation.getParts().add(reference);
 		}
 		else
 		{
-			Command c = SetCommand
-					.create(editingDomain, reference, BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID, selectionEvent.getStartId());
-			compoundCommand.append(c);
-			Command cc = SetCommand
-					.create(editingDomain, reference, BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__END_ID, selectionEvent.getEndId());
-			compoundCommand.append(cc);
+//			Command c = SetCommand
+//					.create(editingDomain, reference, BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__BEGIN_ID, selectionEvent.getStartId());
+//			compoundCommand.append(c);
+//			Command cc = SetCommand
+//					.create(editingDomain, reference, BtsmodelPackage.BTS_INTER_TEXT_REFERENCE__END_ID, selectionEvent.getEndId());
+//			compoundCommand.append(cc);
+			
+			// without command
+			reference.setBeginId(selectionEvent.getStartId());
+			reference.setEndId(selectionEvent.getEndId());
 		}
-		
-		editingDomain.getCommandStack().execute(
-				compoundCommand);
+		// without command
+//		editingDomain.getCommandStack().execute(
+//				compoundCommand);
 		
 		save();
 		
@@ -396,11 +403,13 @@ public abstract class RelatedObjectGroup extends Composite{
 		reference.setBeginId(selectionEvent.getStartId());
 		reference.setEndId(selectionEvent.getEndId());
 		
-		Command compoundCommand = AddCommand
-				.create(editingDomain, relation, BtsmodelPackage.BTS_RELATION__PARTS, reference);
-		editingDomain.getCommandStack().execute(
-				compoundCommand);
+//		Command compoundCommand = AddCommand
+//				.create(editingDomain, relation, BtsmodelPackage.BTS_RELATION__PARTS, reference);
+//		editingDomain.getCommandStack().execute(
+//				compoundCommand);
 		
+		// without command
+		relation.getParts().add(reference);
 		//FIXME update Textviewer!!!!!!!!!
 		
 		save();
@@ -454,10 +463,12 @@ public abstract class RelatedObjectGroup extends Composite{
 		
 		
 		if (reference == null) return;
-		Command compoundCommand = RemoveCommand
-				.create(editingDomain, relation, BtsmodelPackage.BTS_RELATION__PARTS, reference);
-		editingDomain.getCommandStack().execute(
-				compoundCommand);
+//		Command compoundCommand = RemoveCommand
+//				.create(editingDomain, relation, BtsmodelPackage.BTS_RELATION__PARTS, reference);
+//		editingDomain.getCommandStack().execute(
+//				compoundCommand);
+		// without command
+		relation.getParts().remove(reference);
 		save();
 		
 		postUIEvent(reference);		

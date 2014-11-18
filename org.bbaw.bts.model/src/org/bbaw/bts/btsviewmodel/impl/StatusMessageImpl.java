@@ -106,7 +106,7 @@ public class StatusMessageImpl extends MinimalEObjectImpl.Container implements S
 	 * @generated
 	 * @ordered
 	 */
-	protected static final MessageType MESSAGE_TYPE_EDEFAULT = MessageType.ERROR;
+	protected static final MessageType MESSAGE_TYPE_EDEFAULT = MessageType.INFORMATION;
 
 	/**
 	 * The cached value of the '{@link #getMessageType() <em>Message Type</em>}' attribute.

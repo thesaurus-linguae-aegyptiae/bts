@@ -35,6 +35,7 @@ import java.util.List;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 
 // TODO: Auto-generated Javadoc
@@ -93,7 +94,7 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 	 */
 	boolean removeDatabaseUser(BTSUser user);
 
-	List<BTSObject> getUserOrphans(List<BTSFilter> btsFilters, List<BTSObject> rootEntries);
+	List<BTSObject> getUserOrphans(List<BTSFilter> btsFilters, List<BTSObject> rootEntries, IProgressMonitor monitor);
 
 	boolean authenticatedUserIsDBAdmin(String userName, String passWord);
 

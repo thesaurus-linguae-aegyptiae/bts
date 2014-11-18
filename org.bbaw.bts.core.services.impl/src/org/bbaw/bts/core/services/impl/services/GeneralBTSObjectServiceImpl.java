@@ -19,6 +19,7 @@ import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.emf.ecore.EClass;
 
@@ -30,18 +31,18 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 	
 	@Override
 	public List<BTSObject> queryObjects(BTSQueryRequest query,
-			String objectState, boolean registerQuery, String className) {
+			String objectState, boolean registerQuery, String className, IProgressMonitor monitor) {
 		Map<String, List<BTSObjectSearchService>> searchServices = loadServicesMap();
 		if (className != null && searchServices.containsKey(className))
 		{
 			List<BTSObjectSearchService> list = searchServices.get(className);
-			return queryObjectFromServiceList(query, objectState, className, list);
+			return queryObjectFromServiceList(query, objectState, className, list, monitor);
 		}
 		else
 		{
 			for (List<BTSObjectSearchService> list : searchServices.values())
 			{
-				List<BTSObject> obj = queryObjectFromServiceList(query, objectState, className, list);;
+				List<BTSObject> obj = queryObjectFromServiceList(query, objectState, className, list, monitor);;
 				if (obj != null) return obj;
 			}
 		}
@@ -50,13 +51,13 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 	}
 
 	private List<BTSObject> queryObjectFromServiceList(BTSQueryRequest query,
-			String objectState, String className, List<BTSObjectSearchService> list) {
+			String objectState, String className, List<BTSObjectSearchService> list, IProgressMonitor monitor) {
 		for (BTSObjectSearchService service : list)
 		{
 			if (service instanceof GenericObjectService<?, ?>)
 			{
 				GenericObjectService<?, ?> ser = (GenericObjectService<?, ?>) service;
-				Object obj = ser.query(query, objectState);
+				Object obj = ser.query(query, objectState, monitor);
 				if (obj instanceof BTSObject)
 				{
 					return (List<BTSObject>) obj;
@@ -111,7 +112,7 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 
 	@Override
 	public String getDisplayName(String id, String className) {
-		BTSObject o = findObject(id, null);
+		BTSObject o = findObject(id, className, null);
 		
 		if (o != null && o.getName() != null) {
 			return o.getName();
@@ -120,18 +121,27 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 	}
 
 	@Override
-	public BTSObject findObject(String id, String className) {
+	public String getDisplayName(String id) {
+		BTSObject o = findObject(id, null, null);
+		
+		if (o != null && o.getName() != null) {
+			return o.getName();
+		}
+		return id;
+	}
+	@Override
+	public BTSObject findObject(String id, String className, IProgressMonitor monitor) {
 		Map<String, List<BTSObjectSearchService>> searchServices = loadServicesMap();
 		if (className != null && searchServices.containsKey(className))
 		{
 			List<BTSObjectSearchService> list = searchServices.get(className);
-			return findObjectFromServiceList(list, id, className);
+			return findObjectFromServiceList(list, id, className, monitor);
 		}
 		else
 		{
 			for (List<BTSObjectSearchService> list : searchServices.values())
 			{
-				BTSObject obj = findObjectFromServiceList(list, id, className);
+				BTSObject obj = findObjectFromServiceList(list, id, className, monitor);
 				if (obj != null) return obj;
 			}
 		}
@@ -155,7 +165,7 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 	}
 
 	private BTSObject findObjectFromServiceList(List<BTSObjectSearchService> list,
-			String id, String className) {
+			String id, String className, IProgressMonitor monitor) {
 		for (BTSObjectSearchService service : list)
 		{
 			if (service instanceof GenericObjectService<?, ?>)
@@ -163,7 +173,7 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 				GenericObjectService<?, String> ser = (GenericObjectService<?, String>) service;
 				Object obj = null;
 				try {
-					obj = ser.find(id);
+					obj = ser.find(id, monitor);
 				} catch (Exception e) {
 					// do nothing because here we expect to fail with services.
 				}
@@ -214,12 +224,12 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 
 	@Override
 	public BTSDBBaseObject find(String id, String dbCollectionKey,
-			String rev, BTSDBBaseObject dbBaseObject, boolean fromRemote) {
+			String rev, BTSDBBaseObject dbBaseObject, boolean fromRemote, IProgressMonitor monitor) {
 //		Map<String, List<BTSObjectSearchService>> searchServices = loadServicesMap();
 		GenericObjectService<BTSDBBaseObject, String> service = (GenericObjectService<BTSDBBaseObject, String>) findServiceByObject(dbBaseObject);
 		if (service != null)
 		{
-			Object obj = service.find(id, dbCollectionKey, rev, fromRemote);
+			Object obj = service.find(id, dbCollectionKey, rev, fromRemote, monitor);
 			if (obj != null && obj instanceof BTSObject)
 			{
 				return (BTSDBBaseObject) obj;
@@ -243,13 +253,13 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 
 	private BTSDBBaseObject findObjectFromServiceList(
 			List<BTSObjectSearchService> list, String id,
-			String dbCollectionKey, String rev, String className, boolean fromRemote) {
+			String dbCollectionKey, String rev, String className, boolean fromRemote, IProgressMonitor monitor) {
 		for (BTSObjectSearchService service : list)
 		{
 			if (service instanceof GenericObjectService<?, ?>)
 			{
 				GenericObjectService<?, String> ser = (GenericObjectService<?, String>) service;
-				Object obj = ser.find(id, dbCollectionKey, rev, fromRemote);
+				Object obj = ser.find(id, dbCollectionKey, rev, fromRemote, monitor);
 				if (obj != null && obj instanceof BTSObject)
 				{
 					return (BTSDBBaseObject) obj;
@@ -281,20 +291,20 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 
 	@Override
 	public List<DBRevision> listAvailableRevisions(BTSDBBaseObject dbBaseObject,
-			boolean fetchFromRemote) {
+			boolean fetchFromRemote, IProgressMonitor monitor) {
 		GenericObjectService<?, String> service = findServiceByObject(dbBaseObject);
 		if (service != null)
 		{
-			return service.listAvailableRevisions(dbBaseObject, fetchFromRemote);
+			return service.listAvailableRevisions(dbBaseObject, fetchFromRemote, monitor);
 		}
 		return null;
 	}
 
 	@Override
 	public BTSDBBaseObject find(String id, String dbCollectionKey,
-			BTSDBBaseObject dbBaseObject, String rev) {
+			BTSDBBaseObject dbBaseObject, String rev, IProgressMonitor monitor) {
 
-		return find(id, dbCollectionKey, rev, dbBaseObject, false);
+		return find(id, dbCollectionKey, rev, dbBaseObject, false, monitor);
 	}
 
 		

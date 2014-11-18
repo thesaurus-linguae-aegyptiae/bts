@@ -114,5 +114,19 @@ public class BTSModelAnnotation extends XtextAnnotation
 			setType(cachedType);
 		}
 	}
-	
+	@Override
+	public String getText() {
+		if (relatingObject != null)
+		{
+			String text = "";
+			if (relatingObject.getType() != null)
+			{
+				text = relatingObject.getType() + ": ";
+			}
+			text += relatingObject.getName();
+			return text;
+			
+		}
+		return super.getText();
+	}
 }

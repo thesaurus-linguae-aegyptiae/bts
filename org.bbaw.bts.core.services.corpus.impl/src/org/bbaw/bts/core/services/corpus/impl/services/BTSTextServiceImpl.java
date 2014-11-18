@@ -38,7 +38,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		BTSText entity = BtsCorpusModelFactory.eINSTANCE.createBTSText();
 		super.setId(entity);
 		super.setRevision(entity);
-		entity.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+		entity.setDBCollectionKey(main_corpus_key);
 		entity.setCorpusPrefix(main_corpus_key);
 		return entity;
 	}
@@ -47,36 +47,36 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	public boolean save(BTSText entity)
 	{
 		super.addRevisionStatement(entity);
-		textDao.add(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		textDao.add(entity, entity.getDBCollectionKey());
 		return true;
 	}
 
 	@Override
 	public void update(BTSText entity)
 	{
-		textDao.update(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		textDao.update(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
 	public void remove(BTSText entity)
 	{
-		textDao.remove(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		textDao.remove(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
-	public BTSText find(String key)
+	public BTSText find(String key, IProgressMonitor monitor)
 	{
 		BTSText text = null;
-		text = textDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + main_corpus_key);
+		text = textDao.find(key, main_corpus_key);
 		if (text != null)
 		{
 			return text;
 		}
-		for (String c : getActive_corpora())
+		for (String c : getActive_corpora(main_project))
 		{
-			text = textDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+			text = textDao.find(key, c);
 			if (text != null)
 			{
 				return text;
@@ -84,9 +84,9 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		}
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				text = textDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				text = textDao.find(key, c);
 				if (text != null)
 				{
 					return text;
@@ -97,15 +97,14 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	}
 
 	@Override
-	public List<BTSText> list(String objectState)
+	public List<BTSText> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSText> texts = new Vector<BTSText>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				texts.addAll(textDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX
-						+ c, objectState));
+				texts.addAll(textDao.list(c, objectState));
 			}
 		}
 		return filter(texts);
@@ -113,15 +112,14 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 
 	@Override
 	public List<BTSText> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSText> objects = new Vector<BTSText>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(textDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+				objects.addAll(textDao.query(query, c, c, objectState,
 						registerQuery));
 			}
 		}
@@ -129,12 +127,12 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	}
 
 	@Override
-	public List<BTSText> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSText> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
-	public List<BTSText> list(String dbPath, String queryId, String objectState)
+	public List<BTSText> list(String dbPath, String queryId, String objectState, IProgressMonitor monitor)
 	{
 		return filter(textDao.findByQueryId(queryId, dbPath, objectState));
 	}

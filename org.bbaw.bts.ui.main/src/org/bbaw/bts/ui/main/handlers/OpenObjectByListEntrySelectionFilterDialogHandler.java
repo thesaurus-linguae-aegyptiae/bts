@@ -96,7 +96,7 @@ public class OpenObjectByListEntrySelectionFilterDialogHandler {
 		{
 			clazz = ProjectPrefixViewerFilter.class;
 			BTSProjectService projectService = context.get(BTSProjectService.class);
-			List<BTSProject> projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+			List<BTSProject> projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 			allObjects = new Vector<Object>(projects.size());
 			allObjects.addAll(projects);
 			break;
@@ -105,7 +105,7 @@ public class OpenObjectByListEntrySelectionFilterDialogHandler {
 		{
 			clazz = CreatorViewerFilter.class;
 			BTSUserService userService = context.get(BTSUserService.class);
-			List<BTSUser> users = userService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+			List<BTSUser> users = userService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 			allObjects = new Vector<Object>(users.size());
 			allObjects.addAll(users);
 			break;
@@ -114,7 +114,7 @@ public class OpenObjectByListEntrySelectionFilterDialogHandler {
 		{
 			clazz = UpdaterViewerFilter.class;
 			BTSUserService userService = context.get(BTSUserService.class);
-			List<BTSUser> users = userService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+			List<BTSUser> users = userService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 			allObjects = new Vector<Object>(users.size());
 			allObjects.addAll(users);
 			break;

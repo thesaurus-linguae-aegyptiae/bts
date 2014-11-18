@@ -33,6 +33,7 @@ import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
@@ -154,10 +155,10 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		}
 		
 	@Override
-	public abstract E find(K key);
+	public abstract E find(K key, IProgressMonitor monitor);
 
 	@Override
-	public E find(K key, String path, String revision) {
+	public E find(K key, String path, String revision, IProgressMonitor monitor) {
 		if (path != null && !"".equals(path))
 		{
 			return (E) generalPurposeDao.find((String)key, path, revision);
@@ -192,7 +193,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	}
 	
 	@Override
-	public E find(K key, String path, String revision, boolean fromRemote) {
+	public E find(K key, String path, String revision, boolean fromRemote, IProgressMonitor monitor) {
 		if (path != null && !"".equals(path))
 		{
 			if (fromRemote)
@@ -201,17 +202,17 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 			}
 			else
 			{
-				return find(key, path, revision);
+				return find(key, path, revision, monitor);
 			}
 		}
 		return null;
 	}
 
 	@Override
-	public abstract List<E> list(String objectState);
+	public abstract List<E> list(String objectState, IProgressMonitor monitor);
 
 	@Override
-	public abstract List<E> query(BTSQueryRequest query, String objectState);
+	public abstract List<E> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor);
 
 	public List<E> filter(List<E> objects)
 	{
@@ -263,7 +264,7 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	@Override
 	public List<DBRevision> listAvailableRevisions(BTSDBBaseObject object,
-			boolean fetchFromRemote) {
+			boolean fetchFromRemote, IProgressMonitor monitor) {
 		if (!fetchFromRemote)
 		{
 			return generalPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey());
@@ -289,11 +290,11 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	}
 	
 	
-	public String getDisplayName(String userId)
+	public String getDisplayName(String userId, IProgressMonitor monitor)
 	{
 		BTSObject o = null;
 		try {
-			o = (BTSObject) find((K) userId);
+			o = (BTSObject) find((K) userId, monitor);
 		} catch (Exception e) {
 		}
 		if (o != null) {

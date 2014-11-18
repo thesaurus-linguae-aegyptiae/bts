@@ -34,7 +34,7 @@ terminal NEWLINE returns ecore::EString :
     ('\r'|'\n'|'\t')+;
 
 Ambivalence:
-	'%' (cases+=Case ('; ' (NEWLINE)? cases+=Case)+) '%'
+	'%' (cases+=Case ('| ' (NEWLINE)? cases+=Case)+) '%'
 ;
 
 Case:
@@ -134,6 +134,9 @@ terminal EGYSTRING returns ecore::EString:(
  |'\u00CF'   // ITremaU
  |'ḳ'|'Ḳ'
  |'u'|'u̯'|'U'|'\u0055\u032F'
+ 
+ |'e'|'/'
+ 
  |'č'|'č̣'|'Č'|'Č̣'
  |'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'
  |'N'|'R'|'L'
@@ -176,21 +179,21 @@ Brackets:
 	Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn |
 	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | 
 	PartialDestruction
-	|Cartouche |Cartouche2 |Oval |Serech
+	|Cartouche |Oval |Serech
 ;
 
-Cartouche2:
-	'\u13379'   wChar+=NoCartouche+ '\u1337A'
-;
+//Cartouche2:
+//	'\u13379'   wChar+=NoCartouche+ '\u1337A'
+//;
 
-Serech:
+Oval: //Oval
 	'\uD80C\uDE58' wChar+=NoCartouche+ '\uD80C\uDE82'
 ;
 
-Cartouche:
+Serech:// eigentlich Serech
 	'\uD80C\uDF79' wChar+=NoCartouche+ '\uD80C\uDF7A'
 ;
-Oval:
+Cartouche:
 	{Expanded}
 	'\uD80C\uDE86'  wChar+=NoCartouche+ '\uD80C\uDE87'
 ;
@@ -227,7 +230,7 @@ DisputableReading:
 ;
 
 NoDisputableReading:
-	 Expanded | Chars | Interfix
+	 Expanded | Emendation | Deletion | Chars | Interfix
 ;
 
 Lacuna:
@@ -290,7 +293,7 @@ PartialDestruction:
 ;
 
 NoPartialDestruction:
-	Chars | Deletion | Expanded | Interfix
+	Chars | Deletion | Expanded | DisputableReading | Interfix
 ;
 
 // textual criticism interfixes
@@ -299,6 +302,7 @@ Interfix:
 	 InterfixSuffixPronomLexical |InterfixPrefixNonLexical |InterfixPrefixLexical
 	 | InterfixConnectionSyllabicGroup
 	 | InterfixCompoundWords
+	 |InterfixPhoneticalComplement
 ;
 
 InterfixLexical:
@@ -334,4 +338,9 @@ InterfixConnectionSyllabicGroup:
 InterfixCompoundWords:
 	{InterfixCompoundWords}
 	'-'
+;
+
+InterfixPhoneticalComplement:
+	{InterfixPhoneticalComplement}
+	';'
 ;

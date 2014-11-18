@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
+import org.bbaw.bts.btsviewmodel.impl.StatusMessageImpl;
 import org.bbaw.bts.core.services.BTSStatusMessageService;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
@@ -72,8 +73,8 @@ public class StatusMessageDialog extends TitleAreaDialog {
 //		tableViewer.setLabelProvider(labelProvider);
 		table = tableViewer.getTable();
 		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-		
-		
+		table.setHeaderVisible(true);
+		table.setLinesVisible(true);
 		// Define one exmaple column Columns
 		TableViewerColumn viewerColumn;
 		viewerColumn = new TableViewerColumn(tableViewer, SWT.NONE);

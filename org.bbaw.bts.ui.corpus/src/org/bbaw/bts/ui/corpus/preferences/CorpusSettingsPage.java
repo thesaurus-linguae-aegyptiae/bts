@@ -132,7 +132,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 	private void loadListInput()
 	{
 
-		corpora = corpusController.listTextCorpora();
+		corpora = corpusController.listTextCorpora(null);
 		comboViewer.setInput(corpora);
 		List<BTSCorpusObject> availableCorpora = new Vector<BTSCorpusObject>(1);
 
@@ -150,14 +150,14 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 			{
 
 				boolean found = false;
-				if (main_corpus_key != null && main_corpus_key.equals(corpus.getCorpusPrefix()))
+				if (main_corpus_key != null && main_corpus_key.equals(corpus.getDBCollectionKey() + "_" + corpus.getCorpusPrefix()))
 				{
 					selectedTextCorpus = corpus;
 					comboViewer.setSelection(new StructuredSelection(corpus));
 				}
 				for (String p : pros)
 				{
-					if (p.equals(corpus.getCorpusPrefix()))
+					if (p.equals(corpus.getDBCollectionKey()+ "_" + corpus.getCorpusPrefix()))
 					{
 						chosenCorpora.add(corpus);
 						found = true;
@@ -201,9 +201,9 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		List<BTSCorpusObject> selections = chrosenProvider.getInputElements();
 		for (BTSCorpusObject corpus : selections)
 		{
-			if (corpus.getCorpusPrefix() != null && !prefixes.contains(corpus.getCorpusPrefix()))
+			if (corpus.getDBCollectionKey() != null && !prefixes.contains(corpus.getDBCollectionKey()+ "_" + corpus.getCorpusPrefix()))
 			{
-				prefixes.add(corpus.getCorpusPrefix());
+				prefixes.add(corpus.getDBCollectionKey()+ "_" + corpus.getCorpusPrefix());
 			}
 		}
 		return prefixes;
@@ -215,11 +215,11 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 			return super.performOk();
 		}
 		boolean dirty = false;
-		if (selectedTextCorpus != null && selectedTextCorpus.getCorpusPrefix() != null && (main_corpus_key == null || !main_corpus_key.equals(selectedTextCorpus.getCorpusPrefix())))
+		if (selectedTextCorpus != null && selectedTextCorpus.getDBCollectionKey() != null && (main_corpus_key == null || !main_corpus_key.equals(selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix())))
 		{
-			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
+			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected
-			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getCorpusPrefix());
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
 			dirty = true;
 		}

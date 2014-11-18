@@ -16,6 +16,7 @@ import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -33,7 +34,7 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 	private BTSTextEditorController textEditorController;
 	
 	@Override
-	public List<BTSObject> getRelatingObjects(BTSLemmaEntry lemmaEntry) {
+	public List<BTSObject> getRelatingObjects(BTSLemmaEntry lemmaEntry, IProgressMonitor monitor) {
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.termQuery("relations.objectId",
 				lemmaEntry.get_id()));
@@ -42,20 +43,21 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
 		List<BTSLemmaEntry> obs = lemmaService.query(query,
-				BTSConstants.OBJECT_STATE_ACTIVE);
+				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		for (BTSLemmaEntry o : obs)
 		{
 			children.add(o);
 		}
-		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true));
+		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true, monitor));
 		return children;
 	}
 
 	@Override
 	public void transformToDocument(BTSTextContent textContent, Document doc,
 			IAnnotationModel model, List<BTSObject> relatingObjects,
-			Map<String, List<BTSInterTextReference>> relatingObjectsMap) {
-		textEditorController.transformToDocument(textContent, doc, model, relatingObjects, relatingObjectsMap);
+			Map<String, List<BTSInterTextReference>> relatingObjectsMap,
+			Map<String, List<Object>> lemmaAnnotationMap) {
+		textEditorController.transformToDocument(textContent, doc, model, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
 		
 	}
 
@@ -68,6 +70,11 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 	public BTSTextContent updateModelFromTextContent(
 			BTSTextContent textContent, EObject eo, IAnnotationModel am) {
 		return textEditorController.updateModelFromTextContent(textContent, eo, am);
+	}
+
+	@Override
+	public BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor) {
+		return lemmaService.find(lemmaId, monitor);
 	}
 
 }

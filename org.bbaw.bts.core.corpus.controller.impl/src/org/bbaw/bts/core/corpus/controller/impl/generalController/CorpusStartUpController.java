@@ -9,6 +9,7 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.ExtensionStartUpController;
 import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
@@ -23,6 +24,8 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 
 	@Inject
 	private BTSTextCorpusService textCorpusService;
+	@Inject
+	private CorpusObjectService corpusObjectService;
 	private Object main_project_key;
 	private IEclipseContext context;
 	private Logger logger;
@@ -53,10 +56,11 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 
 		if (main_corpus_key == null || "".equals(main_corpus_key)) return;
 
-		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		for (BTSTextCorpus cor : corpora)
 		{
-			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.equals(cor.getCorpusPrefix()))
+			corpusObjectService.checkAndFullyLoad(cor);
+			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.endsWith(cor.getCorpusPrefix()))
 			{
 				BTSTextCorpus main_corpus = cor;
 				context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);

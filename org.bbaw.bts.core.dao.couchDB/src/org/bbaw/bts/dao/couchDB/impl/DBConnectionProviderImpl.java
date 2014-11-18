@@ -368,7 +368,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		                .put("cluster.name", esClustername)
 		                .put("path.home", dbdir + BTSConstants.FS + esClustername)
 		                .put("path.data", dbdir + BTSConstants.FS + esClustername)
-		                .put("number_of_shards",0)
+		                .put("number_of_shards",1)
 				        .put("number_of_replicas",0)
 				        .put("index.routing.allocation.disable_allocation", "false");
 				

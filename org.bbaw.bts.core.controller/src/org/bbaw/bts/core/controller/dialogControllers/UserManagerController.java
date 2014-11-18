@@ -40,6 +40,7 @@ import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -59,14 +60,14 @@ public interface UserManagerController
 	 *
 	 * @return the list
 	 */
-	List<BTSUserGroup> listUserGroups();
+	List<BTSUserGroup> listUserGroups(IProgressMonitor monitor);
 
 	/**
 	 * List users.
 	 *
 	 * @return the list
 	 */
-	List<BTSUser> listUsers();
+	List<BTSUser> listUsers(IProgressMonitor monitor);
 
 	/**
 	 * Find group members.
@@ -79,7 +80,7 @@ public interface UserManagerController
 	 * @return the list
 	 */
 	List<BTSUser> findGroupMembers(BTSUserGroup group, Map<String, BTSQueryResultAbstract> queryResultMap,
-			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName);
+			ContentViewer viewer, TreeNodeWrapper parentHolder, EReference referenceName, IProgressMonitor monitor);
 
 	/**
 	 * Creates the new user.
@@ -124,9 +125,9 @@ public interface UserManagerController
 	/** Lists terminated users and user groups.
 	 * @return all terminated users and user groups.
 	 */
-	List<BTSObject> listTerminatedUsersUserGroups();
+	List<BTSObject> listTerminatedUsersUserGroups(IProgressMonitor monitor);
 
-	List<BTSObject> getUserUserGroupOrphans(ViewerFilter[] filters);
+	List<BTSObject> getUserUserGroupOrphans(ViewerFilter[] filters, IProgressMonitor monitor);
 
 
 }

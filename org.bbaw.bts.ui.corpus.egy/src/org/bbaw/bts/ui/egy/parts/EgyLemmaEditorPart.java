@@ -186,6 +186,8 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private TranslationEditorComposite lemmaTranslate_Editor;
 	private boolean reload;
 	private AnnotationPainter painter;
+	private HashMap<String, List<Object>> lemmaAnnotationMap;
+	private Job processLemmaAnnotionsJob;
 
 
 	@Inject
@@ -367,6 +369,11 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 //					editingDomain.getCommandStack().removeCommandStackListener(
 //							commandStackListener);
 //				}
+				if (processLemmaAnnotionsJob != null)
+				{
+					processLemmaAnnotionsJob.cancel();
+					processLemmaAnnotionsJob = null;
+				}
 				// manage part title
 				if (selection instanceof BTSLemmaEntry)
 				{
@@ -421,7 +428,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 				@Override
 				protected IStatus run(IProgressMonitor monitor)
 				{
-					relatingObjects = lemmaEditorController.getRelatingObjects((BTSLemmaEntry) selection);
+					relatingObjects = lemmaEditorController.getRelatingObjects((BTSLemmaEntry) selection, monitor);
 					return Status.OK_STATUS;
 				}
 			};
@@ -462,7 +469,8 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		relatingObjectsAnnotationMap = new HashMap<EObject, List<BTSModelAnnotation>>();
 		Document doc = new Document();
 		AnnotationModel tempAnnotationModel = new AnnotationModel();
-		lemmaEditorController.transformToDocument(textContent, doc, tempAnnotationModel, relatingObjects, relatingObjectsMap);
+		lemmaAnnotationMap = new HashMap<String, List<Object>>();
+		lemmaEditorController.transformToDocument(textContent, doc, tempAnnotationModel, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
 
 		embeddedEditorModelAccess.updateModel("\r",
 				doc.get(), "\r");
@@ -488,7 +496,50 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 					}
 				});
 		}
+		processLemmaAnnotions(lemmaAnnotationMap);
+	}
+	private void processLemmaAnnotions(
+			final HashMap<String, List<Object>> localLemmaAnnotationMap) {
 		
+		processLemmaAnnotionsJob = new Job("Process Lemma Annotation") {
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				for (String lemmaId : localLemmaAnnotationMap.keySet())
+				{
+					if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+					
+					List<Object> list = localLemmaAnnotationMap.get(lemmaId);
+					if (list != null && !list.isEmpty())
+					{
+						BTSLemmaEntry lemma = null;
+						try {
+							lemma = lemmaEditorController.findLemmaEntry(lemmaId, monitor);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if (lemma != null)
+						{
+							for (Object annotation : list)
+							{
+								if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+								
+								if (annotation instanceof BTSModelAnnotation)
+								{
+									((BTSModelAnnotation) annotation).setRelatingObject(lemma);
+								}
+							}
+						}
+					}
+				}
+				lemmaAnnotationMap = null;
+
+				return Status.OK_STATUS;
+			}
+		};
+		
+		processLemmaAnnotionsJob.schedule();		
+
 	}
 
 	protected void updateModelFromTranscription()

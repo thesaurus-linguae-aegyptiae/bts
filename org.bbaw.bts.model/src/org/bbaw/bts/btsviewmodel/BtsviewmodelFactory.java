@@ -50,9 +50,20 @@ public interface BtsviewmodelFactory extends EFactory
 	 */
 	BTSObjectTypeTreeNode createBTSObjectTypeTreeNode();
 
+	/**
+	 * Returns a new object of class '<em>DB Collection Status Information</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>DB Collection Status Information</em>'.
+	 * @generated
+	 */
+	DBCollectionStatusInformation createDBCollectionStatusInformation();
+
 	StatusMessage createFilteredMessage(int suppressed);
 	
 	StatusMessage createNotEditingRightsMessage();
+	
+	StatusMessage createInfoMessage();
 	
 	StatusMessage createLockedMessage(DBLease lease, String userId);
 	/**

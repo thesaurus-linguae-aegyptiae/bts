@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.corpus.parts;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
@@ -51,12 +53,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
 import org.eclipse.jface.viewers.TreePath;
+import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
@@ -69,6 +74,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 
 public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider
 {
@@ -98,6 +104,10 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	@Named(BTSUIConstants.SELECTION_TYPE)
 	private String selectionType;
 
+	@Inject
+	@Active
+	private Shell parentShell;
+	
 	@Inject
 	private Logger logger;
 	
@@ -288,7 +298,39 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 							loadOrphans(parentControl, treeViewer, tn);
 						}
 					}
+					if (selection instanceof TreeSelection)
+					{
+						TreeSelection ts = (TreeSelection) selection;
+						BTSObject[] path = null;
 
+						for (Object o : ts.getPaths())
+						{
+							
+							if (o instanceof TreePath)
+							{
+								TreePath tp = (TreePath) o;
+
+								path = new BTSObject[tp.getSegmentCount()];
+								
+								for (int i = 0; i < tp.getSegmentCount(); i++)
+								{
+									Object segment = tp.getSegment(i);
+									BTSObject btso = (BTSObject) ((TreeNodeWrapper)segment).getObject();
+									path[i] = btso;
+								}
+								break;
+							}
+							
+						}
+						if (event.getSource().equals(mainTreeViewer))
+						{
+							eventBroker.post("navigator_path_event_with_root/lemma", path);
+						}
+						else
+						{
+							eventBroker.post("navigator_path_event_no_root/lemma", path);
+						}
+					}
 				}
 			}
 		};
@@ -299,107 +341,112 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	
 	private void loadOrphans(final Control parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper localOrphanNode) {
-		
-		Job job = new Job("load orphans") {
-			Map map;
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
+					Map map;
 
-				sync.asyncExec(new Runnable() {
-					public void run() {
-						if (parentControl != null && cachingMap.get(parentControl) != null
-									&& cachingMap.get(parentControl) instanceof Map) {
-							map = (Map) cachingMap.get(parentControl);
-						}
-						else
-						{
-							map = null;
-						}
-					}
-				});
-				List<BTSLemmaEntry> obs;
-				obs = lemmaNavigatorController
-						.getOrphanEntries(map,
-								treeViewer.getFilters(), monitor);
-				storeIntoMap(obs, parentControl);
-				final List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
-				
-				// If you want to update the UI
-				sync.asyncExec(new Runnable() {
 					@Override
-					public void run() {
-						localOrphanNode.getChildren().clear();
-						localOrphanNode.getChildren().addAll(nodes);
-					}
-				});
-				return Status.OK_STATUS;
-			}
-		};
-
-		// Start the Job
-		job.schedule();
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						sync.asyncExec(new Runnable() {
+							public void run() {
+								if (parentControl != null && cachingMap.get(parentControl) != null
+											&& cachingMap.get(parentControl) instanceof Map) {
+									map = (Map) cachingMap.get(parentControl);
+								}
+								else
+								{
+									map = null;
+								}
+							}
+						});
+						List<BTSLemmaEntry> obs;
+						obs = lemmaNavigatorController
+								.getOrphanEntries(map,
+										treeViewer.getFilters(), monitor);
+						storeIntoMap(obs, parentControl);
+						final List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
+						
+						// If you want to update the UI
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								localOrphanNode.getChildren().clear();
+								localOrphanNode.getChildren().addAll(nodes);
+							}
+						});
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
 	}
 	
 	private void loadInput(final Control parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
 			final boolean deleted) {
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
-		Job job = new Job("load input") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-
-				List<BTSLemmaEntry> obs;
-				if (!deleted) {
-					obs = lemmaNavigatorController
-						.getRootEntries(
-								queryResultMap,
-								treeViewer,
-								rootNode,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-								BTSCorpusConstants.VIEW_LEMMA_ROOT_ENTRIES, monitor);
-				} else {
-					obs = lemmaNavigatorController
-							.getDeletedEntries(
-									queryResultMap,
-									treeViewer,
-									rootNode,
-									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, 
-									BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES, monitor);
-				}
-				storeIntoMap(obs, parentControl);
-				List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
-				rootNode.getChildren().addAll(nodes);
-				
-				orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				orphanNode.setLabel(BTSConstants.ORPHANS_NODE_LABEL);
-				
-				rootNode.getChildren().add(orphanNode);
-
-				// If you want to update the UI
-				sync.asyncExec(new Runnable() {
 					@Override
-					public void run() {
-						loadTree(treeViewer, rootNode, parentControl);
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						List<BTSLemmaEntry> obs;
 						if (!deleted) {
-							treeViewer.addFilter(getDeletedFilter());
+							obs = lemmaNavigatorController
+								.getRootEntries(
+										queryResultMap,
+										treeViewer,
+										rootNode,
+										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
+										BTSCorpusConstants.VIEW_LEMMA_ROOT_ENTRIES, monitor);
+						} else {
+							obs = lemmaNavigatorController
+									.getDeletedEntries(
+											queryResultMap,
+											treeViewer,
+											rootNode,
+											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, 
+											BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES, monitor);
 						}
-						else {
-							treeViewer
-									.addFilter(new SuppressNondeletedViewerFilter());
-						}
-						// register context menu on the table
-						menuService.registerContextMenu(
-								treeViewer.getControl(),
-								BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
-					}
-				});
-				return Status.OK_STATUS;
-			}
-		};
+						storeIntoMap(obs, parentControl);
+						List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
+						rootNode.getChildren().addAll(nodes);
+						
+						orphanNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+						orphanNode.setLabel(BTSConstants.ORPHANS_NODE_LABEL);
+						
+						rootNode.getChildren().add(orphanNode);
 
-		// Start the Job
-		job.schedule();
+						// If you want to update the UI
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								loadTree(treeViewer, rootNode, parentControl);
+								if (!deleted) {
+									treeViewer.addFilter(getDeletedFilter());
+								}
+								else {
+									treeViewer
+											.addFilter(new SuppressNondeletedViewerFilter());
+								}
+								// register context menu on the table
+								menuService.registerContextMenu(
+										treeViewer.getControl(),
+										BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
+							}
+						});
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
 
 	}
 	private ViewerFilter getDeletedFilter() {
@@ -411,46 +458,54 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 
 	private void loadChildren(final List<TreeNodeWrapper> parents,
 			boolean includeGrandChildren, final Control parentControl) {
-		Job job = new Job("load children") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				new Vector<>();
-				for (final TreeNodeWrapper parent : parents) {
-					final List<BTSLemmaEntry> children = lemmaNavigatorController
-							.findChildren(
-									(BTSLemmaEntry) parent.getObject(),
-									queryResultMap,
-									mainTreeViewer,
-									parent,
-									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+		
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
-					storeIntoMap(children, parentControl);
-					// If you want to update the UI
-					sync.asyncExec(new Runnable() {
+					@Override
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						for (final TreeNodeWrapper parent : parents) {
+							final List<BTSLemmaEntry> children = lemmaNavigatorController
+									.findChildren(
+											(BTSLemmaEntry) parent.getObject(),
+											queryResultMap,
+											mainTreeViewer,
+											parent,
+											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
 
-						@Override
-						public void run() {
-							System.out.println("add children" + children.size());
-							parent.getChildren().clear();
-							for (BTSObject o : children) {
-								TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-										.createTreeNodeWrapper();
-								tn.setObject(o);
-								addTooHolderMap(o, tn);
-								tn.setParent(parent);
-								// grandChildren.add(tn);
-								parent.getChildren().add(tn);
-							}
-							parent.setChildrenLoaded(true);
+							storeIntoMap(children, parentControl);
+							// If you want to update the UI
+							sync.asyncExec(new Runnable() {
+
+								@Override
+								public void run() {
+									System.out.println("add children" + children.size());
+									parent.getChildren().clear();
+									for (BTSObject o : children) {
+										TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+												.createTreeNodeWrapper();
+										tn.setObject(o);
+										addTooHolderMap(o, tn);
+										tn.setParent(parent);
+										// grandChildren.add(tn);
+										parent.getChildren().add(tn);
+									}
+									parent.setChildrenLoaded(true);
+								}
+							});
 						}
-					});
-				}
-				return Status.OK_STATUS;
-			}
-		};
-		// Start the Job
-		job.schedule();
-		refreshTreeViewer(null);
+						refreshTreeViewer(null);
+
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
+		
 	}
 
 	protected void storeIntoMap(final List<BTSLemmaEntry> children,
@@ -677,49 +732,51 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	private void searchInput(final Composite parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
 			final BTSQueryRequest query, final CTabItem searchTab) {
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
-		// // in new job, search
-		Job job = new Job("load input") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-
-				List<BTSLemmaEntry> obs;
-				obs = lemmaNavigatorController
-						.getSearchEntries(query,
-								queryResultMap,
-								treeViewer,
-								rootNode,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
-				if (obs != null && obs.size() > 0)
-				{
-					storeIntoMap(obs, parentControl);
-					List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
-					rootNode.getChildren().addAll(nodes);
-				}
-				else
-				{
-					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-					emptyNode.setLabel("Nothing found that matches your query");
-					rootNode.getChildren().add(emptyNode);
-				}
-				// If you want to update the UI
-				sync.asyncExec(new Runnable() {
 					@Override
-					public void run() {
-						loadTree(treeViewer, rootNode, parentControl);
-						treeViewer.addFilter(getDeletedFilter());
-						// register context menu on the table
-						menuService.registerContextMenu(
-								treeViewer.getControl(),
-								BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
-					}
-				});
-				return Status.OK_STATUS;
-			}
-		};
-
-		// Start the Job
-		job.schedule();
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						List<BTSLemmaEntry> obs;
+						obs = lemmaNavigatorController
+								.getSearchEntries(query,
+										queryResultMap,
+										treeViewer,
+										rootNode,
+										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+						if (obs != null && obs.size() > 0)
+						{
+							storeIntoMap(obs, parentControl);
+							List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
+							rootNode.getChildren().addAll(nodes);
+						}
+						else
+						{
+							TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+							emptyNode.setLabel("Nothing found that matches your query");
+							rootNode.getChildren().add(emptyNode);
+						}
+						// If you want to update the UI
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								loadTree(treeViewer, rootNode, parentControl);
+								treeViewer.addFilter(getDeletedFilter());
+								// register context menu on the table
+								menuService.registerContextMenu(
+										treeViewer.getControl(),
+										BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
+							}
+						});
+					}};
+		       new ProgressMonitorDialog(parentShell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
 		
 	}
 

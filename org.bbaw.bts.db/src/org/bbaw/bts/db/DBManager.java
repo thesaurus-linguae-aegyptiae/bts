@@ -36,6 +36,8 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 /**
  * The Interface DBManager provides dao layer access to basic database management functions not covered by specific dao.
@@ -187,5 +189,9 @@ public interface DBManager
 	String getLocalDBurl();
 
 	String getLocalESGuiURL();
+
+	List<DBCollectionStatusInformation> getDBCollectionStatusInformations(IProgressMonitor monitor);
+
+	boolean reindex(String dbCollectionName, IProgressMonitor monitor);
 
 }

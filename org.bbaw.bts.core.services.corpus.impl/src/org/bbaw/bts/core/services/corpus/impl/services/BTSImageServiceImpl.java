@@ -38,7 +38,7 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		}
 		else
 		{
-			image.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+			image.setDBCollectionKey(main_corpus_key);
 		}
 
 		image.setCorpusPrefix(main_corpus_key);
@@ -49,36 +49,36 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	public boolean save(BTSImage entity)
 	{
 		super.addRevisionStatement(entity);
-		imageDao.add(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		imageDao.add(entity, entity.getDBCollectionKey());
 		return true;
 	}
 
 	@Override
 	public void update(BTSImage entity)
 	{
-		imageDao.update(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		imageDao.update(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
 	public void remove(BTSImage entity)
 	{
-		imageDao.remove(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		imageDao.remove(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
-	public BTSImage find(String key)
+	public BTSImage find(String key, IProgressMonitor monitor)
 	{
 		BTSImage image = null;
-		image = imageDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + main_corpus_key);
+		image = imageDao.find(key, main_corpus_key);
 		if (image != null)
 		{
 			return image;
 		}
-		for (String c : getActive_corpora())
+		for (String c : getActive_corpora(main_project))
 		{
-			image = imageDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+			image = imageDao.find(key, c);
 			if (image != null)
 			{
 				return image;
@@ -86,9 +86,9 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		}
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				image = imageDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				image = imageDao.find(key, c);
 				if (image != null)
 				{
 					return image;
@@ -99,15 +99,14 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	}
 
 	@Override
-	public List<BTSImage> list(String objectState)
+	public List<BTSImage> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSImage> images = new Vector<BTSImage>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				images.addAll(imageDao.list(p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
+				images.addAll(imageDao.list(c, objectState));
 			}
 		}
 		return filter(images);
@@ -115,27 +114,26 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 
 	@Override
 	public List<BTSImage> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSImage> objects = new Vector<BTSImage>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(imageDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+				objects.addAll(imageDao.query(query, c, c, objectState,
 						registerQuery));
 			}
 		}
 		return filter(objects);
 	}
 	@Override
-	public List<BTSImage> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSImage> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override
-	public List<BTSImage> list(String dbPath, String queryId, String objectState)
+	public List<BTSImage> list(String dbPath, String queryId, String objectState, IProgressMonitor monitor)
 	{
 		return filter(imageDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -157,9 +155,9 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 		List<BTSImage> objects = new Vector<BTSImage>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(imageDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX + c, 
+				objects.addAll(imageDao.list(c, 
 						DaoConstants.VIEW_IMAGE_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
 			}
 		}

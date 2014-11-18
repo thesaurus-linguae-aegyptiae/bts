@@ -13,6 +13,7 @@ import org.bbaw.bts.core.dao.BTSCommentDao;
 import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, String> implements BTSCommentService, BTSObjectSearchService{
 
@@ -22,7 +23,7 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 
 	@Override
 	public List<BTSComment> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery) {
+			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSComment> objects = new Vector<BTSComment>();
 		for (String p : getActiveProjects())
 		{
@@ -43,30 +44,31 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		BTSComment comment = BtsmodelFactory.eINSTANCE.createBTSComment();
 		super.setId(comment);
 		super.setRevision(comment);
+		comment.setDBCollectionKey(main_project + BTSCoreConstants.ADMIN_SUFFIX);
 		return comment;
 	}
 
 	@Override
 	public boolean save(BTSComment entity) {
 		super.addRevisionStatement(entity);
-		commentDao.add(entity, entity.getProject() + BTSCoreConstants.ADMIN_SUFFIX);
+		commentDao.add(entity, entity.getDBCollectionKey());
 		return true;
 	}
 
 	@Override
 	public void update(BTSComment entity) {
-		commentDao.update(entity, entity.getProject() + BTSCoreConstants.ADMIN_SUFFIX);
+		commentDao.update(entity, entity.getDBCollectionKey());
 		
 	}
 
 	@Override
 	public void remove(BTSComment entity) {
-		commentDao.remove(entity, entity.getProject() + BTSCoreConstants.ADMIN_SUFFIX);
+		commentDao.remove(entity, entity.getDBCollectionKey());
 		
 	}
 
 	@Override
-	public BTSComment find(String key) {
+	public BTSComment find(String key, IProgressMonitor monitor) {
 		BTSComment comment = null;
 		comment = commentDao.find(key, main_project + BTSCoreConstants.ADMIN_SUFFIX);
 		if (comment != null)
@@ -87,7 +89,7 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 	
 
 	@Override
-	public List<BTSComment> list(String objectState) {
+	public List<BTSComment> list(String objectState, IProgressMonitor monitor) {
 		List<BTSComment> comments = new Vector<BTSComment>();
 		for (String p : getActiveProjects())
 		{
@@ -97,13 +99,13 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		return filter(comments);
 	}
 	@Override
-	public List<BTSComment> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSComment> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 
 	}
 	@Override
 	public List<BTSComment> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return filter(commentDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -117,4 +119,6 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSComment.class;
 	}
+
+	
 }

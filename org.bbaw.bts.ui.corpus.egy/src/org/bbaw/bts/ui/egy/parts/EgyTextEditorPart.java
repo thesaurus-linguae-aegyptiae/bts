@@ -7,6 +7,8 @@ import java.nio.CharBuffer;
 import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EventObject;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -49,7 +51,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSE4ToGuiceXtextSourceViewerProvider;
-import org.bbaw.bts.corpus.text.egy.ui.custom.BTSEObjectDocumentationProvider;
 import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -61,24 +62,14 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
-import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
-import org.bbaw.bts.ui.font.BTSFontManager;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.e4.core.commands.ECommandService;
-import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -90,7 +81,6 @@ import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.EContextService;
-import org.eclipse.e4.ui.services.EMenuService;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
@@ -107,13 +97,10 @@ import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.AnnotationPainter;
-import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.OverviewRuler;
-import org.eclipse.jface.text.source.VerticalRuler;
-import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.custom.CTabFolder;
@@ -122,7 +109,6 @@ import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -249,7 +235,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	private CharsetDecoder charsetDecoder;
 	private EgyLineNumberRulerColumn lineNumberRulerColumn;
 
-	
+	private HashMap<String, List<Object>> lemmaAnnotationMap;
+
+	private Job processLemmaAnnotionsJob;
 
 	
 	@Inject
@@ -667,10 +655,32 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			List<BTSObject> localRelatingObjects) {
 		text = localtext;
 		loading = true;
+		lemmaAnnotationMap = new HashMap<String, List<Object>>();
+		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
 		if (this.document == null) {
 			this.document = new Document();
 		}
+		else
+		{
+			try {
+				annotationModel.disconnect(document);
+			} catch (Exception e) {
+			}
+		}
+		
+		
+		
+		// remove old annotations
+		List<Annotation> toRemove = new Vector<Annotation>();
+//		Iterator i = annotationModel.getAnnotationIterator();
+//		while (i.hasNext()) {
+//			toRemove.add((Annotation) i.next());
+//		}
+//		for (Annotation a : toRemove)
+//		{
+//			annotationModel.removeAnnotation(a);
+//		}
 
 		AnnotationModel tempAnnotationModel = new AnnotationModel();
 		if (localtext == null) {
@@ -685,22 +695,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			textEditorController.transformToDocument(
 					localtext.getTextContent(), document, tempAnnotationModel,
-					localRelatingObjects, relatingObjectsMap);
+					localRelatingObjects, relatingObjectsMap, lemmaAnnotationMap);
 		}
 
 		embeddedEditorModelAccess.updateModel("\r", document.get(), "\r");
-		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
-		
-		// remove old annotations
-		List<Annotation> toRemove = new Vector<Annotation>();
-		Iterator i = annotationModel.getAnnotationIterator();
-		while (i.hasNext()) {
-			toRemove.add((Annotation) i.next());
-		}
-		for (Annotation a : toRemove)
-		{
-			annotationModel.removeAnnotation(a);
-		}
+//		annotationModel.connect(document);
 
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);
 		
@@ -716,12 +715,59 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		oruler.setModel(annotationModel);
 		oruler.update();
 
+		// FIXME with monitor and cancel if ...
+		processLemmaAnnotions(lemmaAnnotationMap);
+
 		loading = false;
+	}
+	
+	private void processLemmaAnnotions(
+			final HashMap<String, List<Object>> localLemmaAnnotationMap) {
+		
+		processLemmaAnnotionsJob = new Job("Process Lemma Annotation") {
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				for (String lemmaId : localLemmaAnnotationMap.keySet())
+				{
+					if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+					
+					List<Object> list = localLemmaAnnotationMap.get(lemmaId);
+					if (list != null && !list.isEmpty())
+					{
+						BTSLemmaEntry lemma = null;
+						try {
+							lemma = textEditorController.findLemmaEntry(lemmaId, monitor);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if (lemma != null)
+						{
+							for (Object annotation : list)
+							{
+								if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+								
+								if (annotation instanceof BTSModelAnnotation)
+								{
+									((BTSModelAnnotation) annotation).setRelatingObject(lemma);
+								}
+							}
+						}
+					}
+				}
+				lemmaAnnotationMap = null;
+
+				return Status.OK_STATUS;
+			}
+		};
+		
+		processLemmaAnnotionsJob.schedule();		
+
 	}
 
 	protected void showCurrentSignUnicode(String sign, int lineIndex,
 			int caretOffset) {
-		StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
+		StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
 		charsetDecoder = Charset.forName(BTSConstants.ENCODING).newDecoder();
 		byte[] b = sign.getBytes(Charset.forName(BTSConstants.ENCODING));
 		ByteBuffer in = ByteBuffer.wrap(b);
@@ -852,6 +898,23 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			// relSelObjects);
 			// }
 			highlightedAnnotations.addAll(relatingObjectsAnnotations);
+			
+			try {
+				Annotation anno = relatingObjectsAnnotations.get(0);
+				final Position pos = annotationModel.getPosition(anno);
+				if (pos != null)
+				{
+					sync.asyncExec(new Runnable() {
+						public void run() {
+							embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+						}
+					});
+				}
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		// else if (postSelection)
 		// {
@@ -882,6 +945,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		Iterator it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
+		Map<Integer, Annotation> annotationOffsetMap = new HashMap<Integer, Annotation>(4);
 		BTSSentenceItem startItem = null;
 		int startItemOffeset = 0;
 		BTSSentenceItem endItem = null;
@@ -897,18 +961,18 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				if ((pos.getOffset() <= start && start < pos.getOffset()
 						+ pos.getLength())
 						|| (pos.getOffset() >= start && pos.getOffset() <= end)) {
-					annotations.add((BTSModelAnnotation) a);
+					annotationOffsetMap.put(pos.getOffset(), a);
 					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
 						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
 								.getModel();
 						textItems.add(item);
 						if (startItem == null
-								|| pos.getOffset() > startItemOffeset) {
+								|| pos.getOffset() < startItemOffeset) {
 							startItem = item;
 							startItemOffeset = pos.getOffset();
 						}
 						if (endItem == null
-								|| pos.getOffset() + pos.getLength() < endItemOffeset) {
+								|| pos.getOffset() + pos.getLength() > endItemOffeset) {
 							endItem = item;
 							endItemOffeset = pos.getOffset() + pos.getLength();
 						}
@@ -922,6 +986,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				// }
 			}
 		}
+		
+		// sort keys and add annotations to annotationslist according to the order of their offset
+		List<Integer> offsets = new ArrayList<Integer>(annotationOffsetMap.size());
+		offsets.addAll(annotationOffsetMap.keySet());
+		Collections.sort(offsets);
+		for (Integer i : offsets)
+		{
+			annotations.add((BTSModelAnnotation) annotationOffsetMap.get(i));
+		}
+
+		
 		if (btsEvent != null) {
 			if (startItem != null) {
 				btsEvent.setStartId(startItem.get_id());
@@ -1082,7 +1157,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		} else if (selection != null && !selection.equals(selectedTextItem)) {
 
 			if (selection instanceof BTSCorpusObject) {
-
+				
+				// if a background job is running to process lemma annotations
+				// for earlier input object: kill the job
+				if (processLemmaAnnotionsJob != null)
+				{
+					processLemmaAnnotionsJob.cancel();
+					processLemmaAnnotionsJob = null;
+				}
 				// TODO save configurable this is autosave!!!
 				if (text != null) {
 					if (editingDomain != null) {
@@ -1261,7 +1343,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					relatingObjects = textEditorController
-							.getRelatingObjects(text);
+							.getRelatingObjects(text, monitor);
 					for (BTSObject o : relatingObjects)
 					{
 						if (o instanceof BTSCorpusObject)
@@ -1605,7 +1687,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					issue = new Issue.IssueImpl();
 					Annotation annotation = makeAnnotation(object, issue, ref);
 					if (annotation != null && pos != null) {
-						annotationModel.addAnnotation(annotation, pos);
+						// add 1 for sentence sign length
+						annotationModel.addAnnotation(annotation, new Position(pos.getOffset() + 1, pos.getLength()));
 					}
 					// }
 				}
@@ -1628,11 +1711,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				ta.setInterTextReference(ref);
 				addToRelatingObjectAnnotationMap(object, ta);
 			}
+			else
+			{
 			ta = new BTSAnnotationAnnotation(embeddedEditor.getDocument(),
 					BTSAnnotationAnnotation.TYPE, issue, object,
 					(BTSAnnotation) object);
 			ta.setInterTextReference(ref);
 			addToRelatingObjectAnnotationMap(object, ta);
+			}
 
 		} else if (object instanceof BTSComment) {
 			ta = new BTSCommentAnnotation(BTSCommentAnnotation.TYPE, embeddedEditor.getDocument(), issue,

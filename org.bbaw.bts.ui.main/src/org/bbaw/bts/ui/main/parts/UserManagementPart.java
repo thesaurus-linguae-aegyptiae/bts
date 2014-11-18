@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.main.parts;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -88,6 +89,8 @@ import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.databinding.viewers.ObservableListTreeContentProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
@@ -737,7 +740,7 @@ public class UserManagementPart
 		parent.pack();
 	}
 
-	private void loadBinUserTreeInput(final TreeViewer treeViewer, CTabItem tabitem) {
+	private void loadBinUserTreeInput(final TreeViewer treeViewer, final CTabItem tabitem) {
 		AdapterFactoryLabelProvider labelProvider = new AdapterFactoryLabelProvider(adapterFactory);
 		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(adapterFactory);
 		treeViewer.setContentProvider(contentProvider);
@@ -765,25 +768,44 @@ public class UserManagementPart
 		});
 		
 		// Create sample data
-		List<BTSObject> terminatedUsers = new ArrayList<BTSObject>();
+		try {
+			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
-		terminatedUsers = userManagerController.listTerminatedUsersUserGroups();
-		user_binRoot = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-		if (terminatedUsers != null)
-		{
-			for (BTSObject o : terminatedUsers)
-			{
-				TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
-				child.setObject(o);
-				child.setChildrenLoaded(false);
-				user_binRoot.getChildren().add(child);
-				user_binRoot.setChildrenLoaded(true);
-			}
-		}
+					@Override
+					public void run(IProgressMonitor monitor)
+							throws InvocationTargetException, InterruptedException 
+					{
+						final List<BTSObject> terminatedUsers =  userManagerController.listTerminatedUsersUserGroups(monitor);
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								user_binRoot = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+								if (terminatedUsers != null)
+								{
+									for (BTSObject o : terminatedUsers)
+									{
+										TreeNodeWrapper child = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+										child.setObject(o);
+										child.setChildrenLoaded(false);
+										user_binRoot.getChildren().add(child);
+										user_binRoot.setChildrenLoaded(true);
+									}
+								}
 
-		// Set the writeableList as input for the viewer
-		treeViewer.setInput(user_binRoot);
-		tabitem.setData("loaded", true);
+								// Set the writeableList as input for the viewer
+								treeViewer.setInput(user_binRoot);
+								tabitem.setData("loaded", true);
+							}
+						});
+					}};
+		       new ProgressMonitorDialog(shell).run(true, true, op);
+		    } catch (InvocationTargetException e) {
+		       // handle exception
+		    } catch (InterruptedException e) {
+		       // handle cancelation
+		    }
+		
+		
 	}
 
 	protected void editUpdaters(BTSDBBaseObject object) {
@@ -922,7 +944,7 @@ public class UserManagementPart
 			Map map;
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
-				userGroups = userManagerController.listUserGroups();
+				userGroups = userManagerController.listUserGroups(monitor);
 				user_root = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 				if (userGroups != null)
 				{
@@ -942,7 +964,7 @@ public class UserManagementPart
 				user_orphanNode.setLabel(BTSConstants.ORPHANS_NODE_LABEL);
 				List<BTSObject> orphans;
 				orphans = userManagerController
-						.getUserUserGroupOrphans(user_treeViewer.getFilters());
+						.getUserUserGroupOrphans(user_treeViewer.getFilters(), monitor);
 				if (orphans != null)
 				{
 					for (BTSObject o : orphans)
@@ -993,7 +1015,7 @@ public class UserManagementPart
 					{
 						final List<BTSUser> children = userManagerController.findGroupMembers(
 								(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN);
+								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
 						// If you want to update the UI
 						sync.asyncExec(new Runnable()
 						{
@@ -1075,7 +1097,7 @@ public class UserManagementPart
 		{
 		});
 		// Create sample data
-		projects = projectController.listProjects();
+		projects = projectController.listProjects(null);
 
 		roles_list = new WritableList(projects, BTSProject.class);
 		//		if (projects != null)
@@ -1618,7 +1640,7 @@ public class UserManagementPart
 
 	private void loadAllUserGroups()
 	{
-		List<BTSUserGroup> groups = userManagerController.listUserGroups();
+		List<BTSUserGroup> groups = userManagerController.listUserGroups(null);
 		observableLisAllUserGroups = new WritableList(groups, BTSUserGroup.class);
 		userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
 		for (BTSUserGroup u : groups)
@@ -1629,7 +1651,7 @@ public class UserManagementPart
 
 	private void loadAllUsers()
 	{
-		List<BTSUser> users = userManagerController.listUsers();
+		List<BTSUser> users = userManagerController.listUsers(null);
 		observableLisAllUsers = new WritableList(users, BTSUser.class);
 		userMap = new HashMap<String, BTSUser>(users.size());
 		for (BTSUser u : users)

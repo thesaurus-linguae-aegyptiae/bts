@@ -134,7 +134,7 @@ public class ProjectSettingsPage extends FieldEditorPreferencePage {
 	private void loadListInput()
 	{
 
-		projects = projectController.listProjects();
+		projects = projectController.listProjects(null);
 		comboViewer.setInput(projects);
 		List<BTSProject> availableProjects = new Vector<BTSProject>(1);
 

@@ -27,7 +27,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 
 	@Override
 	public List<BTSThsEntry> list(String dbPath, String queryId,
-			String objectState) {
+			String objectState, IProgressMonitor monitor) {
 		return thsEntryDao.list(dbPath, queryId,
 				objectState);
 	}
@@ -61,14 +61,20 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	}
 
 	@Override
-	public BTSThsEntry find(String key) {
+	public BTSThsEntry find(String key, IProgressMonitor monitor) {
 		BTSThsEntry entry = null;
-		entry = thsEntryDao.find(key, main_project + BTSCorpusConstants.THS);
+		try {
+			entry = thsEntryDao.find(key, main_project + BTSCorpusConstants.THS);
+		} catch (Exception e) {
+		}
 		if (entry != null) {
 			return entry;
 		}
 		for (String p : getActiveProjects()) {
-			entry = thsEntryDao.find(key, p + BTSCorpusConstants.THS);
+			try {
+				entry = thsEntryDao.find(key, p + BTSCorpusConstants.THS);
+			} catch (Exception e) {
+			}
 			if (entry != null) {
 				return entry;
 			}
@@ -77,15 +83,13 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	}
 
 	@Override
-	public List<BTSThsEntry> list(String objectState) {
+	public List<BTSThsEntry> list(String objectState, IProgressMonitor monitor) {
 		List<BTSThsEntry> entries = new Vector<BTSThsEntry>();
 		for (String p : getActiveProjects()) {
 			try {
 				entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
 						objectState));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		return filter(entries);
@@ -93,7 +97,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 
 	@Override
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery) {
+			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
 		for (String p : getActiveProjects()) {
 
@@ -109,8 +113,8 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		return filter(objects);
 	}
 	@Override
-	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 	}
 
 	@Override

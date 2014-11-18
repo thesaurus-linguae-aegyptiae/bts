@@ -43,7 +43,7 @@ implements BTSAnnotationService, BTSObjectSearchService
 		}
 		else
 		{
-			anno.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS_INTERFIX +main_corpus_key);
+			anno.setDBCollectionKey(main_corpus_key);
 		}
 		anno.setCorpusPrefix(main_corpus_key);
 		return anno;
@@ -53,37 +53,37 @@ implements BTSAnnotationService, BTSObjectSearchService
 	public boolean save(BTSAnnotation entity)
 	{
 		super.addRevisionStatement(entity);
-		annotationDao.add(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		annotationDao.add(entity, entity.getDBCollectionKey());
 		return true;
 	}
 
 	@Override
 	public void update(BTSAnnotation entity)
 	{
-		annotationDao.update(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		annotationDao.update(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
 	public void remove(BTSAnnotation entity)
 	{
-		annotationDao.remove(entity, entity.getProject() + BTSCorpusConstants.CORPUS_INTERFIX + entity.getCorpusPrefix());
+		annotationDao.remove(entity, entity.getDBCollectionKey());
 
 	}
 
 	@Override
-	public BTSAnnotation find(String key)
+	public BTSAnnotation find(String key, IProgressMonitor monitor)
 	{
 		BTSAnnotation anno = null;
-		anno = annotationDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + main_corpus_key);
+		anno = annotationDao.find(key, main_corpus_key);
 		if (anno != null)
 		{
 			return anno;
 		}
-		for (String c : getActive_corpora())
+		for (String c : getActive_corpora(main_project))
 		{
 			try {
-				anno = annotationDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				anno = annotationDao.find(key, c);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -95,10 +95,10 @@ implements BTSAnnotationService, BTSObjectSearchService
 		}
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
 				try {
-					anno = annotationDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+					anno = annotationDao.find(key, c);
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -113,16 +113,15 @@ implements BTSAnnotationService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSAnnotation> list(String objectState)
+	public List<BTSAnnotation> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSAnnotation> annos = new Vector<BTSAnnotation>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
 				try {
-					annos.addAll(annotationDao.list(p
-							+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
+					annos.addAll(annotationDao.list(c, objectState));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -134,16 +133,15 @@ implements BTSAnnotationService, BTSObjectSearchService
 
 	@Override
 	public List<BTSAnnotation> query(BTSQueryRequest query, String objectState,
-			boolean registerQuery)
+			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
 				try {
-					objects.addAll(annotationDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-							+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+					objects.addAll(annotationDao.query(query, c, c, objectState,
 							registerQuery));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
@@ -156,13 +154,13 @@ implements BTSAnnotationService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSAnnotation> query(BTSQueryRequest query, String objectState) {
-		return query(query, objectState, true);
+	public List<BTSAnnotation> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		return query(query, objectState, true, monitor);
 
 	}
 	@Override
 	public List<BTSAnnotation> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		return filter(annotationDao.findByQueryId(queryId, dbPath, objectState));
 	}
@@ -182,10 +180,10 @@ implements BTSAnnotationService, BTSObjectSearchService
 		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
 				try {
-					objects.addAll(annotationDao.list(p + BTSCorpusConstants.CORPUS_INTERFIX + c, 
+					objects.addAll(annotationDao.list(c, 
 							DaoConstants.VIEW_THS_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
 				} catch (Exception e) {
 					// TODO Auto-generated catch block

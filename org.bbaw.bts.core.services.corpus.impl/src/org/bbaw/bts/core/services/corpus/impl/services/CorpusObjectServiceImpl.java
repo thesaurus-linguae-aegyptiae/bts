@@ -89,13 +89,14 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	}
 	
 
-	protected String[] getActive_corpora() {
+	protected String[] getActive_corpora(String projecPrefix) {
 		List<String> arr = new ArrayList<String>(4);
 		for (String s : active_corpora.split(BTSCoreConstants.SPLIT_PATTERN))
 		{
-			if (s.trim().length() > 0 && !arr.contains(s))
+			if (s.startsWith(projecPrefix) && s.trim().length() > 0 && !arr.contains(s))
 			{
 				arr.add(s);
+				
 			}
 		}
 		return arr.toArray(new String[arr.size()]);
@@ -190,17 +191,23 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	}
 
 	@Override
-	public BTSCorpusObject find(String key)
+	public BTSCorpusObject find(String key, IProgressMonitor monitor)
 	{
 		BTSCorpusObject tcObject = null;
-		tcObject = corpusObjectDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + main_corpus_key);
+		try {
+			tcObject = corpusObjectDao.find(key, main_corpus_key);
+		} catch (Exception e) {
+		}
 		if (tcObject != null)
 		{
 			return tcObject;
 		}
-		for (String c : getActive_corpora())
+		for (String c : getActive_corpora(main_project))
 		{
-			tcObject = corpusObjectDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c);
+			try {
+				tcObject = corpusObjectDao.find(key, c);
+			} catch (Exception e) {
+			}
 			if (tcObject != null)
 			{
 				return tcObject;
@@ -208,9 +215,12 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		}
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				tcObject = corpusObjectDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c);
+				try {
+					tcObject = corpusObjectDao.find(key, c);
+				} catch (Exception e) {
+				}
 				if (tcObject != null)
 				{
 					return tcObject;
@@ -221,18 +231,17 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	}
 
 	@Override
-	public List<BTSCorpusObject> list(String objectState)
+	public List<BTSCorpusObject> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(corpusObjectDao.list(p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState));
+				objects.addAll(corpusObjectDao.list(c, objectState));
 			}
 		}
-		objects.addAll(textCorpusService.list(objectState));
+		objects.addAll(textCorpusService.list(objectState, monitor));
 		return filter(objects);
 	}
 
@@ -241,9 +250,9 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(corpusObjectDao.getRootBTSCorpusObjects(p + BTSCorpusConstants.CORPUS_INTERFIX + c));
+				objects.addAll(corpusObjectDao.getRootBTSCorpusObjects(c));
 			}
 		}
 		return filter(objects);
@@ -262,11 +271,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		{
 			for (String p : getActiveProjects())
 			{
-				for (String c : getActive_corpora())
+				for (String c : getActive_corpora(p))
 				{
 					objects.addAll(corpusObjectDao
-							.findByQueryId(searchId, p
-									+ BTSCorpusConstants.CORPUS_INTERFIX + c,
+							.findByQueryId(searchId, c,
 									objectState));
 				}
 			}
@@ -279,10 +287,9 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(corpusObjectDao.query(query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-						+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+				objects.addAll(corpusObjectDao.query(query, c, c, objectState,
 						false));
 			}
 		}
@@ -290,9 +297,9 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	}
 
 	@Override
-	public List<BTSCorpusObject> query(BTSQueryRequest query, String objectState)
+	public List<BTSCorpusObject> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor)
 	{
-		return query(query, objectState, true);
+		return query(query, objectState, true, monitor);
 
 	}
 
@@ -304,7 +311,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 
 	@Override
 	public List<BTSCorpusObject> list(String dbPath, String queryId,
-			String objectState)
+			String objectState, IProgressMonitor monitor)
 	{
 		throw new UnsupportedOperationException();
 	}
@@ -314,11 +321,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			BTSQueryRequest query) {
 		List<BTSPassportEntry> result = new Vector<BTSPassportEntry>();
 		for (String p : getActiveProjects()) {
-			for (String c : getActive_corpora()
+			for (String c : getActive_corpora(p)
 					) {
 				result.addAll(corpusObjectDao.getPassportEntryProposals(
-						query, p + BTSCorpusConstants.CORPUS_INTERFIX + c, p
-								+ BTSCorpusConstants.CORPUS_INTERFIX + c));
+						query, c, c));
 			}
 			result.addAll(corpusObjectDao.getPassportEntryProposals(
 					query, p + BTSCorpusConstants.THS, p
@@ -350,7 +356,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	@Override
 	public List<BTSCorpusObject> query(BTSQueryRequest query,
 			String objectState,
-			boolean registerQuery) {
+			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
 		
 		if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.THS))
@@ -384,12 +390,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		else
 		{
 			for (String p : getActiveProjects()) {
-				for (String c : getActive_corpora()) {
+				for (String c : getActive_corpora(p)) {
 					
 					try {
-						objects.addAll(corpusObjectDao.query(query, p
-								+ BTSCorpusConstants.CORPUS_INTERFIX + c, p
-								+ BTSCorpusConstants.CORPUS_INTERFIX + c, objectState,
+						objects.addAll(corpusObjectDao.query(query, c, c, objectState,
 								registerQuery));
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
@@ -402,20 +406,20 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	}
 
 	@Override
-	public BTSCorpusObject find(String key, String path, String revision) {
+	public BTSCorpusObject find(String key, String path, String revision, IProgressMonitor monitor) {
 		if (path != null && !"".equals(path))
 		{
 			return corpusObjectDao.find(key, path, revision);
 		}
 		BTSCorpusObject tcObject = null;
-		tcObject = corpusObjectDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + main_corpus_key, revision);
+		tcObject = corpusObjectDao.find(key, main_corpus_key, revision);
 		if (tcObject != null)
 		{
 			return tcObject;
 		}
-		for (String c : getActive_corpora())
+		for (String c : getActive_corpora(main_project))
 		{
-			tcObject = corpusObjectDao.find(key, main_project + BTSCorpusConstants.CORPUS_INTERFIX + c, revision);
+			tcObject = corpusObjectDao.find(key, c, revision);
 			if (tcObject != null)
 			{
 				return tcObject;
@@ -423,9 +427,9 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		}
 		for (String p : getActiveProjects())
 		{
-			for (String c : getActive_corpora())
+			for (String c : getActive_corpora(p))
 			{
-				tcObject = corpusObjectDao.find(key, p + BTSCorpusConstants.CORPUS_INTERFIX + c, revision);
+				tcObject = corpusObjectDao.find(key, c, revision);
 				if (tcObject != null)
 				{
 					return tcObject;
@@ -452,7 +456,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 
 	@Override
 	public List<BTSCorpusObject> listRootEntries(IProgressMonitor monitor) {
-		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		List<BTSCorpusObject> roots = new Vector<BTSCorpusObject>(corpora.size());
 		for (BTSTextCorpus tc : corpora)
 		{
@@ -465,17 +469,13 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	@Override
 	public boolean move(BTSDBBaseObject entity, String targetDBCollectionPath, String sourceDBCollectionPath) {
 		String oldrev = entity.get_rev();
-		String corpusPrefix = null;
-		if (targetDBCollectionPath.contains("_corpus_"))
-		{
-			corpusPrefix = targetDBCollectionPath.split("_corpus_")[1];
-		}
-		((BTSCorpusObject)entity).setCorpusPrefix(corpusPrefix);
+		((BTSCorpusObject)entity).setCorpusPrefix(targetDBCollectionPath);
+		entity.setDBCollectionKey(targetDBCollectionPath);
 		
 		// check if object with this id already exists in new target collection
 		BTSCorpusObject potentialPredecessor = null;
 		try {
-			potentialPredecessor = find(entity.get_id(), targetDBCollectionPath, null);
+			potentialPredecessor = find(entity.get_id(), targetDBCollectionPath, null, null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

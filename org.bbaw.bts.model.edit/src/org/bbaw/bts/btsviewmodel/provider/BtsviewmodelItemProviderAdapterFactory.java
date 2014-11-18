@@ -156,6 +156,29 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected DBCollectionStatusInformationItemProvider dbCollectionStatusInformationItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createDBCollectionStatusInformationAdapter() {
+		if (dbCollectionStatusInformationItemProvider == null) {
+			dbCollectionStatusInformationItemProvider = new DBCollectionStatusInformationItemProvider(this);
+		}
+
+		return dbCollectionStatusInformationItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -266,6 +289,7 @@ public class BtsviewmodelItemProviderAdapterFactory extends BtsviewmodelAdapterF
 		if (treeNodeWrapperItemProvider != null) treeNodeWrapperItemProvider.dispose();
 		if (statusMessageItemProvider != null) statusMessageItemProvider.dispose();
 		if (btsObjectTypeTreeNodeItemProvider != null) btsObjectTypeTreeNodeItemProvider.dispose();
+		if (dbCollectionStatusInformationItemProvider != null) dbCollectionStatusInformationItemProvider.dispose();
 	}
 
 }

@@ -194,13 +194,13 @@ public interface EgyDslFactory extends EFactory
   Brackets createBrackets();
 
   /**
-   * Returns a new object of class '<em>Cartouche2</em>'.
+   * Returns a new object of class '<em>Oval</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>Cartouche2</em>'.
+   * @return a new object of class '<em>Oval</em>'.
    * @generated
    */
-  Cartouche2 createCartouche2();
+  Oval createOval();
 
   /**
    * Returns a new object of class '<em>Serech</em>'.
@@ -219,15 +219,6 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   Cartouche createCartouche();
-
-  /**
-   * Returns a new object of class '<em>Oval</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Oval</em>'.
-   * @generated
-   */
-  Oval createOval();
 
   /**
    * Returns a new object of class '<em>No Cartouche</em>'.
@@ -489,6 +480,15 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   InterfixCompoundWords createInterfixCompoundWords();
+
+  /**
+   * Returns a new object of class '<em>Interfix Phonetical Complement</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Interfix Phonetical Complement</em>'.
+   * @generated
+   */
+  InterfixPhoneticalComplement createInterfixPhoneticalComplement();
 
   /**
    * Returns the package supported by this factory.

@@ -73,10 +73,9 @@ public class EgyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getBrokenVersbreakMarkerAccess().getGroup(), "rule__BrokenVersbreakMarker__Group__0");
 					put(grammarAccess.getWordAccess().getGroup(), "rule__Word__Group__0");
 					put(grammarAccess.getWordPartAccess().getGroup(), "rule__WordPart__Group__0");
-					put(grammarAccess.getCartouche2Access().getGroup(), "rule__Cartouche2__Group__0");
+					put(grammarAccess.getOvalAccess().getGroup(), "rule__Oval__Group__0");
 					put(grammarAccess.getSerechAccess().getGroup(), "rule__Serech__Group__0");
 					put(grammarAccess.getCartoucheAccess().getGroup(), "rule__Cartouche__Group__0");
-					put(grammarAccess.getOvalAccess().getGroup(), "rule__Oval__Group__0");
 					put(grammarAccess.getExpandedAccess().getGroup(), "rule__Expanded__Group__0");
 					put(grammarAccess.getEmendationAccess().getGroup(), "rule__Emendation__Group__0");
 					put(grammarAccess.getDisputableReadingAccess().getGroup(), "rule__DisputableReading__Group__0");
@@ -94,6 +93,7 @@ public class EgyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getInterfixPrefixLexicalAccess().getGroup(), "rule__InterfixPrefixLexical__Group__0");
 					put(grammarAccess.getInterfixConnectionSyllabicGroupAccess().getGroup(), "rule__InterfixConnectionSyllabicGroup__Group__0");
 					put(grammarAccess.getInterfixCompoundWordsAccess().getGroup(), "rule__InterfixCompoundWords__Group__0");
+					put(grammarAccess.getInterfixPhoneticalComplementAccess().getGroup(), "rule__InterfixPhoneticalComplement__Group__0");
 					put(grammarAccess.getTextContentAccess().getItemsAssignment_1_0(), "rule__TextContent__ItemsAssignment_1_0");
 					put(grammarAccess.getTextContentAccess().getItemsAssignment_1_1_1(), "rule__TextContent__ItemsAssignment_1_1_1");
 					put(grammarAccess.getSentenceAccess().getItemsAssignment_2_0(), "rule__Sentence__ItemsAssignment_2_0");
@@ -108,10 +108,9 @@ public class EgyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getWordAccess().getWCharAssignment_1(), "rule__Word__WCharAssignment_1");
 					put(grammarAccess.getWordPartAccess().getWCharAssignment_1(), "rule__WordPart__WCharAssignment_1");
 					put(grammarAccess.getCharsAccess().getNameAssignment(), "rule__Chars__NameAssignment");
-					put(grammarAccess.getCartouche2Access().getWCharAssignment_1(), "rule__Cartouche2__WCharAssignment_1");
+					put(grammarAccess.getOvalAccess().getWCharAssignment_1(), "rule__Oval__WCharAssignment_1");
 					put(grammarAccess.getSerechAccess().getWCharAssignment_1(), "rule__Serech__WCharAssignment_1");
-					put(grammarAccess.getCartoucheAccess().getWCharAssignment_1(), "rule__Cartouche__WCharAssignment_1");
-					put(grammarAccess.getOvalAccess().getWCharAssignment_2(), "rule__Oval__WCharAssignment_2");
+					put(grammarAccess.getCartoucheAccess().getWCharAssignment_2(), "rule__Cartouche__WCharAssignment_2");
 					put(grammarAccess.getExpandedAccess().getWCharAssignment_2(), "rule__Expanded__WCharAssignment_2");
 					put(grammarAccess.getEmendationAccess().getWCharAssignment_2(), "rule__Emendation__WCharAssignment_2");
 					put(grammarAccess.getDisputableReadingAccess().getWCharAssignment_2(), "rule__DisputableReading__WCharAssignment_2");
