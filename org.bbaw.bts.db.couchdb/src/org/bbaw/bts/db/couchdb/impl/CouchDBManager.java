@@ -51,6 +51,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.equinox.app.IApplicationContext;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
@@ -125,6 +126,9 @@ public class CouchDBManager implements DBManager
 	
 	@Inject
 	private RemoteDBManager remoteDBManager;
+	
+	@Inject
+	private IApplicationContext appContext;
 	
 	private Client esClient;
 	private Process process;
@@ -893,6 +897,7 @@ public class CouchDBManager implements DBManager
 							"\r\n");
 					stringBufferOfData.append("\r\n");
 					stringBufferOfData.append(line).append("\r\n");
+					stringBufferOfData.append("level=error").append("\r\n");
 				}
 				else if (line.trim().startsWith("[admins]")) {
 					// set local admin
@@ -1037,13 +1042,32 @@ public class CouchDBManager implements DBManager
 		} catch (Exception e) {
 			logger.error(e);
 		}
+		boolean showeConsole = false;
+		Object o = appContext.getArguments().get("application.args");
+		if (o != null && o instanceof String[])
+		{
+			String[] args = (String[]) o;
+			for (String s : args)
+			{
+				logger.info("application.args: " + s);
+				if (s != null && (s.startsWith("eclipse.log.level") || s.startsWith("-eclipse.log.level"))&& s.endsWith("DEBUG"))
+				{
+					showeConsole = true;
+				}
+			}
+		}
 		
-		String runFileName = getOSCouchDBStartUpFileName(dbInsallationDir);
+		String runFileName = getOSCouchDBStartUpFileName(dbInsallationDir, showeConsole);
 		logger.info("DB Erlang startup file: " + runFileName);
-		String[] commands;
-		//FIXME
-		logger.error("Start Database, show Console: " + logger.isInfoEnabled());
-		if (logger.isInfoEnabled())
+		String[] commands = null;
+		// show console if log level = ERROR
+		logger.error("Start Database, show Console: " + showeConsole);
+		
+		
+		
+			
+			
+		if (showeConsole)
 		{
 			commands = new String[]{runFileName};
 		}
@@ -1105,10 +1129,14 @@ public class CouchDBManager implements DBManager
 		return true;
 	}
 
-	private String getOSCouchDBStartUpFileName(String dbInsallationDir) throws FileNotFoundException {
+	private String getOSCouchDBStartUpFileName(String dbInsallationDir, boolean showeConsole) throws FileNotFoundException {
 		String runFileName = dbInsallationDir  + BTSConstants.FS + DB_ARCHIVE_NAME;
 		if (OSValidator.isWindows())
 		{
+			if (showeConsole)
+			{
+				return runFileName  + BTSConstants.FS + "bin" + BTSConstants.FS + "couchdb-d.bat";
+			}
 			return runFileName  + BTSConstants.FS + "bin" + BTSConstants.FS + "couchdb.bat";
 		}
 		else if (OSValidator.isMac())
@@ -1320,6 +1348,11 @@ public class CouchDBManager implements DBManager
 					} catch (IOException e) {
 						logger.error(e);
 					}
+					try {
+						Runtime.getRuntime().exec("taskkill /F /IM erl.exe");
+					} catch (IOException e) {
+						logger.error(e);
+					}
 				}
 				else if (OSValidator.isMac())
 				{
@@ -1460,11 +1493,28 @@ public class CouchDBManager implements DBManager
 			monitor.beginTask("Load DB Collection Information...", allDBs.size());
 		}
 		List<DBCollectionStatusInformation> dbCollectionInfos = new Vector<DBCollectionStatusInformation>(allDBs.size());
+		Map<String, DBCollectionStatusInformation> infoMap = new HashMap<String, DBCollectionStatusInformation>(allDBs.size());
+		Object o = context.get("DBCollectionStatusInformationMap");
+		Map<String, DBCollectionStatusInformation> cachedInfoMap = null;
+
+		if (o != null && o instanceof Map<?,?>)
+		{
+			try {
+				cachedInfoMap = (Map<String, DBCollectionStatusInformation>) o;
+			} catch (Exception e) {
+			}
+		}
+		else
+		{
+			cachedInfoMap =  new HashMap<String, DBCollectionStatusInformation>(allDBs.size());
+			context.set("DBCollectionStatusInformationMap", cachedInfoMap);
+		}
 		for (String db : allDBs)
 		{
 			DBCollectionStatusInformation info = BtsviewmodelFactory.eINSTANCE.createDBCollectionStatusInformation();
 			info.setDbCollectionName(db);
 			dbCollectionInfos.add(info);
+			infoMap.put(db, info);
 			
 			// db info
 			CouchDbClient collectionClient = connectionProvider.getDBClient(CouchDbClient.class, db);
@@ -1536,6 +1586,11 @@ public class CouchDBManager implements DBManager
 			{
 				info.setIndexStatus("SYSTEM DB");
 			}
+			else if (cachedInfoMap != null && cachedInfoMap.get(db) != null 
+					&& cachedInfoMap.get(db).getIndexDocCount() < info.getIndexDocCount())
+			{
+				info.setIndexStatus("INDEXING...");
+			}
 			else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20)
 			{
 				info.setIndexStatus("ERROR");
@@ -1553,6 +1608,11 @@ public class CouchDBManager implements DBManager
 				monitor.worked(1);
 				if (monitor.isCanceled()) return dbCollectionInfos;
 			}
+		}
+		if (cachedInfoMap != null)
+		{
+			cachedInfoMap.clear();
+			cachedInfoMap.putAll(infoMap);
 		}
 		return dbCollectionInfos;
 	}

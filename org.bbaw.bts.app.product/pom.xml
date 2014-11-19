@@ -10,7 +10,7 @@
   -->
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.bbaw.bts.app.product</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
  <packaging>eclipse-repository</packaging>
  
  <properties>
@@ -92,6 +92,16 @@
 				<configuration>
 					<environments>
 					
+						
+						
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						
+						<!--
+						
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
@@ -102,12 +112,7 @@
 							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
-						<!--
-						<environment>
-							<os>macosx</os>
-							<ws>cocoa</ws>
-							<arch>x86_64</arch>
-						</environment>
+						
 						<environment>
 							<os>linux</os>
 							<ws>gtk</ws>

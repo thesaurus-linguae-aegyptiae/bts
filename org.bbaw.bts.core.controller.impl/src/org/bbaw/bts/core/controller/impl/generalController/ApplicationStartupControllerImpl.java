@@ -143,8 +143,11 @@ public class ApplicationStartupControllerImpl implements
 	public void applicationStartup(final IEclipseContext context,
 			final BTSProjectService projectService, IApplicationContext appContext) {
 		this.context = context;
-		logger.info("Logging - debug, debug enabled: " + logger.isDebugEnabled());
+		logger.error("Logging - error, debug enabled: " 
+		+ logger.isDebugEnabled());
 		logger.info("Logging - info, info enabled: " + logger.isInfoEnabled());
+		logger.error("Logging - error, info enabled: " + logger.isInfoEnabled());
+
 		logger.error("Logging - error");
 		logger.warn("Logging - warn");
 		logger.trace("Logging - trace");
@@ -885,6 +888,12 @@ public class ApplicationStartupControllerImpl implements
 		prefs.put(BTSPluginIDs.PREF_REMOTE_DB_URL, url);
 		prefs.put(BTSPluginIDs.PREF_AUTHENTICATED_USER, user);
 		prefs.put(BTSPluginIDs.PREF_AUTHENTICATED_USER_PASSWORD, password);
+		try {
+			prefs.flush();
+		} catch (BackingStoreException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override

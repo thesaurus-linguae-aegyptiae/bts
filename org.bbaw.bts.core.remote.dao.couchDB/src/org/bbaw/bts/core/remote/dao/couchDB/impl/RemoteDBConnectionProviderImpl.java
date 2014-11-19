@@ -11,6 +11,9 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.util.RemoteDaoConstants;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.osgi.service.prefs.Preferences;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.common.util.URI;
@@ -81,6 +84,10 @@ public class RemoteDBConnectionProviderImpl implements RemoteDBConnectionProvide
 
 	private void initDBHost()
 	{
+		if (remote_db_url == null || remote_db_url.trim().length() == 0)
+		{
+			remote_db_url = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").get(BTSPluginIDs.PREF_REMOTE_DB_URL, null);
+		}
 		if (remote_db_url != null && remote_db_url.trim().length() > 0)
 		{
 			try

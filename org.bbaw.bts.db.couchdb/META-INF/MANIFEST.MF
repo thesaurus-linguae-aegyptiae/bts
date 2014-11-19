@@ -24,6 +24,7 @@ Import-Package: com.google.gson;version="2.1.0",
  org.eclipse.core.runtime;version="3.4.0",
  org.eclipse.core.runtime.jobs,
  org.eclipse.e4.core.services.log,
+ org.eclipse.equinox.app;version="1.1.0",
  org.eclipse.equinox.security.storage;version="1.0.0",
  org.lightcouch
 Bundle-ClassPath: .

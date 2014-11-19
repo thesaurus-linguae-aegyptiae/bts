@@ -18,7 +18,7 @@
 		-->
 		
 		
-		<module>org.bbaw.bts.updatesite</module>
+		
 		<module>org.bbaw.bts.app.feature</module>
 		<module>org.bbaw.bts.corpus.egy.feature</module>
 		<module>org.bbaw.bts.e4.p2.feature</module>
@@ -52,10 +52,11 @@
 		
 		<module>org.bbaw.bts.db</module>
 		<module>org.bbaw.bts.db.couchdb</module>
+		<!--
 		<module>org.bbaw.bts.db.couchdb.mac</module>
 		<module>org.bbaw.bts.db.couchdb.win32</module>
 		<module>org.bbaw.bts.db.couchdb.win64</module>
-		
+		-->
 		<module>org.bbaw.bts.e4.p2</module>
 		<module>org.bbaw.bts.model</module>
 		<module>org.bbaw.bts.model.edit</module>
@@ -80,10 +81,16 @@
 		<module>org.eclipselabs.emfjson.couchdb.ui</module>
 		<!--<module>org.lightcouch</module>
 		use the one form repo bts-mvn-p2all because of constant encoding problem
-		workaround: build with eclipse, export and put into repo--> 
+		workaround: build with eclipse, export and put into repo
+		
+		<module>org.bbaw.bts.updatesite</module>
+		
+		--> 
+		
+		
 		<module>org.bbaw.bts.ui.font.academy</module>
-
-		<module>org.bbaw.bts.app.product</module>
+<module>org.bbaw.bts.app.product</module>
+		
 
 	</modules>
 
@@ -103,6 +110,13 @@
 			<url>http://telota.bbaw.de/bts-update/bts-mvn-p2all</url>
 			<layout>p2</layout>
 		</repository>
+		
+		<repository>
+			<id>bts-mvn-build-repository</id>
+			<name>BTS BUILD Rep</name>
+			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
+			<layout>p2</layout>
+		</repository>
 		<!--
 		<repository>
 			<id>bts-mvn-telota</id>
@@ -113,12 +127,7 @@
 		
 		
 		
-		<repository>
-			<id>bts-mvn-build-repository</id>
-			<name>BTS BUILD Rep</name>
-			<url>http://telota.bbaw.de/bts-update/bts-build-repository</url>
-			<layout>p2</layout>
-		</repository>
+		
 
 		<repository>
 			<id>e4-tools</id>
@@ -200,7 +209,7 @@
 							<ws>gtk</ws>
 							<arch>x86_64</arch>
 						</environment>
-						-->
+						
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
@@ -212,7 +221,7 @@
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
-						
+						-->
 						
 						<environment>
 							<os>macosx</os>

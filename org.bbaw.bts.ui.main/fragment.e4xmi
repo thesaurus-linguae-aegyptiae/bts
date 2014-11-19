@@ -129,7 +129,7 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_fza6QDVsEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.preferences">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_LaH0gGHPEeOopJSr4SFGCw" elementId="org.bbaw.bts.ui.main.handledmenuitem.preferences" toBeRendered="false" visible="false" label="Preferences..." command="_4iiDcGHOEeOopJSr4SFGCw"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2i1JYOsyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second" positionInList="1">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2i1JYOsyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second" positionInList="">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_qiDCMOutEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/preferences_32.png" tooltip="Open Preferences" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_oK_AENxKEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.toolbarseparator.02">
       <tags>stretch</tags>
@@ -145,7 +145,7 @@
     </elements>
     <elements xsi:type="menu:ToolControl" xmi:id="_KAuDoNzIEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.main.projecttoolcontrol" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.ProjectToolControl"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_O_kLUOuyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.bottom.main" positionInList="1">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_O_kLUOuyEeOLEqD8tMK6Eg" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.bottom.main" positionInList="">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_aw0L0OuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.toolbar.bottom.handledtoolitem.statusmessagedialog" label="Open Status Message Dialog" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/information.png" tooltip="Open Status Message Dialog to show last 25 messages" command="_lH4aYOu_EeOLEqD8tMK6Eg"/>
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_oVeDoOuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolbarseparator.4" toBeRendered="false" visible="false"/>
     <elements xsi:type="menu:ToolControl" xmi:id="_pL6jcOuyEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolcontrol.2" toBeRendered="false" visible="false" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.StatusBarToolControl"/>

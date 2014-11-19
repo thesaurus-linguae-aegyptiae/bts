@@ -45,6 +45,8 @@ import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.eclipselabs.emfjson.internal.JSONLoad;
 import org.eclipselabs.emfjson.resource.JsResourceFactoryImpl;
 import org.elasticsearch.ElasticsearchException;
+import org.elasticsearch.action.admin.indices.exists.indices.IndicesExistsRequest;
+import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.search.SearchType;
@@ -683,6 +685,14 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	@Override
 	public List<E> query(BTSQueryRequest query, String indexName,
 			String indexType, String objectState, boolean registerQuery) {
+		
+		// check if index exists
+		boolean hasIndex = connectionProvider.getSearchClient(Client.class).admin().indices().exists(new IndicesExistsRequest(indexName)).actionGet()
+				.isExists();
+		if (!hasIndex)
+		{
+			return new Vector<E>(0);
+		}
 		SearchResponse response;
 		SearchRequestBuilder srq;
 		if (query.getSearchRequestBuilder() == null) {

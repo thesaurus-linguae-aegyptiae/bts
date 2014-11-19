@@ -5,4 +5,4 @@ Bundle-SymbolicName: org.bbaw.bts.db.couchdb.mac
 Bundle-Version: 1.0.0.qualifier
 Fragment-Host: org.bbaw.bts.db.couchdb;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Eclipse-PlatformFilter: (& (osgi.os=macosx))
+Eclipse-PlatformFilter: (& (osgi.os=macosx) (osgi.ws=cocoa) (osgi.arch=x86_64) )

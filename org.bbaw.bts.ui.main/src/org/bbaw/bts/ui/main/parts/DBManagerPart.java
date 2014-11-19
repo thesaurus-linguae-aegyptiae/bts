@@ -136,7 +136,10 @@ public class DBManagerPart {
 			            return new Color(Display.getDefault(), 255, 191, 191);
 			        }
 			        else if ("INDEX_BEHIND".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-			            return new Color(Display.getDefault(), 255, 255, 160);
+			            return new Color(Display.getDefault(), 255, 255, 190);
+			        }
+			        else if ("INDEXING...".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
+			            return new Color(Display.getDefault(), 255, 255, 140);
 			        }
 			        else if ("OK".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
 			            return new Color(Display.getDefault(), 191, 255, 191);
@@ -268,7 +271,10 @@ public class DBManagerPart {
 				            return new Color(Display.getDefault(), 255, 191, 191);
 				        }
 				        else if ("INDEX_BEHIND".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-				            return new Color(Display.getDefault(), 255, 255, 160);
+				            return new Color(Display.getDefault(), 255, 255, 190);
+				        }
+				        else if ("INDEXING...".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
+				            return new Color(Display.getDefault(), 255, 255, 140);
 				        }
 				        else if ("OK".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
 				            return new Color(Display.getDefault(), 191, 255, 191);

@@ -1,6 +1,5 @@
 package org.bbaw.bts.ui.main.preferences;
 
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Vector;
 
@@ -12,11 +11,9 @@ import org.bbaw.bts.core.controller.generalController.BTSProjectController;
 import org.bbaw.bts.ui.main.provider.BTSProjectLabelProvider;
 import org.bbaw.bts.ui.main.provider.BTSProjectRemovableContentProvider;
 import org.bbaw.bts.ui.main.provider.ListContentProvider;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -29,13 +26,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.ui.IWorkbench;
-import org.eclipse.jface.preference.ComboFieldEditor;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.osgi.framework.BundleContext;
 import org.osgi.service.prefs.BackingStoreException;
 
 import com.richclientgui.toolbox.duallists.DualListComposite;

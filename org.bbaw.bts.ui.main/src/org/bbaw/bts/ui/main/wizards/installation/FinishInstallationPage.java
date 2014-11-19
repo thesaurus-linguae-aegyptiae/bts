@@ -52,7 +52,7 @@ public class FinishInstallationPage extends WizardPage {
 		Label lblStepsYouHave = new Label(container, SWT.NONE);
 		lblStepsYouHave.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true, false, 2, 1));
 		lblStepsYouHave.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		lblStepsYouHave.setText("Steps you have to allow");
+		lblStepsYouHave.setText("Steps you have to allow (On Windows)");
 		
 		Label lblNewLabel_2 = new Label(container, SWT.NONE);
 		lblNewLabel_2.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
