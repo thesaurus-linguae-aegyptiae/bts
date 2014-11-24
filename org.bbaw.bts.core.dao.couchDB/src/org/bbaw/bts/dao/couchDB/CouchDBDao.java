@@ -133,7 +133,6 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		{
 			resource.getContents().remove(1);
 		}
-
 		try
 		{
 			resource.save(options);
@@ -811,8 +810,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 	protected void addEntityToCache(URI uri, Map<URI, Resource> cache, E entity) {
 		if (cache == null || uri == null || entity == null) return;
-		Resource resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		resource.getContents().add(entity);
+		Resource resource = entity.eResource();
+		if (resource == null)
+		{
+			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+			resource.getContents().add(entity);
+		}
 		cache.put(uri, resource);
 	}
 	
@@ -821,9 +824,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		// register query with percolator
 		// Index the query = register it in the percolator
 //		
-//		Job job = new Job("register with percolator"){
-//			@Override
-//			  protected IStatus run(IProgressMonitor monitor) {
+		Job job = new Job("register with percolator"){
+			@Override
+			  protected IStatus run(IProgressMonitor monitor) {
 				try
 				{
 					connectionProvider
@@ -841,10 +844,10 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-//			    return Status.OK_STATUS;
-//			  }
-//		};
-//		job.schedule();
+			    return Status.OK_STATUS;
+			  }
+		};
+		job.schedule();
 
 	}
 

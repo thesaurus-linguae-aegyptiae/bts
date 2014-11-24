@@ -550,7 +550,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		
 		
 		
-		ths_select_text = new Text(this, SWT.BORDER);
+		ths_select_text = new Text(this, SWT.BORDER | SWT.READ_ONLY);
 		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
 		ths_select_text.addFocusListener(new FocusAdapter() {
@@ -617,9 +617,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				IEclipseContext child = context.createChild("searchselect");
-				context.set(BTSConstants.CORPUS_OBJECT, false);
-				context.set(BTSConstants.WLIST_ENTRY, false);
-				context.set(BTSConstants.THS_ENTRY, true);
+				context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
 
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
@@ -840,7 +838,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		// label.pack();
-		combo = new Combo(this, SWT.NONE); // SWT.READ_ONLY);
+		combo = new Combo(this, SWT.NONE | SWT.READ_ONLY); // SWT.READ_ONLY);
 		combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) combo.getLayoutData()).horizontalIndent = 7;

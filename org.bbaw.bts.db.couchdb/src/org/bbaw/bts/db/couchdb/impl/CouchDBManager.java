@@ -803,6 +803,24 @@ public class CouchDBManager implements DBManager
 	@Override
 	public boolean databaseIsInstalled(String dbInstallationDir)
 	{
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+		ISecurePreferences auth = secPrefs.node("auth");
+		try {
+			username = auth.get("username", null);
+			password = auth.get("password", null);
+		} catch (StorageException e) {
+			logger.error(e);
+		} catch (SecurityException e) {
+			logger.error(e);
+			
+		}
+		try {
+			if (checkConnection(connectionProvider.getLocalDBURL(), username, password)) {
+				return true;
+			}
+		} catch (Exception e) {
+			logger.error(e);
+		}
 		String dbdir = dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME;
 		File dir = new File(dbdir);
 		File ertsDir = null;
@@ -869,9 +887,7 @@ public class CouchDBManager implements DBManager
 		// set local port and local admin
 		logger.info("CouchDB set local port " + localPort);
 
-		String localIni = dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME
-				+ BTSConstants.FS + "etc" + BTSConstants.FS + "couchdb"
-				+ BTSConstants.FS + "local.ini";
+		String localIni = getOSCouchDBLocalIniFile(dbInstallationDir);
 		File localIniFile = new File(localIni);
 		if (localIniFile.exists()) {
 			Scanner scanner = new Scanner(localIniFile);
@@ -936,6 +952,24 @@ public class CouchDBManager implements DBManager
 		return true;
 	}
 
+	private String getOSCouchDBLocalIniFile(String dbInstallationDir) {
+		if (OSValidator.isWindows()) {
+			return dbInstallationDir + BTSConstants.FS + DB_ARCHIVE_NAME
+					+ BTSConstants.FS + "etc" + BTSConstants.FS + "couchdb"
+					+ BTSConstants.FS + "local.ini";
+		} else if (OSValidator.isMac()) {
+			return dbInstallationDir + BTSConstants.FS + "Apache CouchDB.app"
+					+ BTSConstants.FS + "Contents" + BTSConstants.FS
+					+ "Resources" + BTSConstants.FS + "couchdbx-core"
+					+ BTSConstants.FS + "etc" + BTSConstants.FS + "couchdb"
+					+ BTSConstants.FS + "local.ini";
+
+		} else if (OSValidator.isUnix()) {
+		}
+
+		return null;
+	}
+
 	private File loadCouchBaseArchive() throws URISyntaxException, IOException {
 		File file = null;
 		URL entry = Platform.getBundle("org.bbaw.bts.db.couchdb").getEntry(
@@ -945,11 +979,18 @@ public class CouchDBManager implements DBManager
 			fileURL = FileLocator.toFileURL(entry).getPath();
 			fileURL = fileURL.substring(1, fileURL.length());
 			file = new File(fileURL);
-			return file;
+			System.out.println("loadCouchDB Base Archive " +fileURL);
+			
 		} else {
 			throw new IOException("CouchDB Base Archive not found!");
 		}
 
+		if (file != null && file.exists()) return file;
+		String fileName = BTSConstants.getInstallationDir() + BTSConstants.FS + DB_ARCHIVE_NAME + ".zip";
+		file = new File(fileName);
+		System.out.println("from installation dir explizitely loadCouchDB Base Archive " +fileName);
+
+		return file;
 	}
 
 	private File loadDBSetupFile(String dir) {

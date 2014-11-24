@@ -31,6 +31,7 @@ public class UserActionCounterServiceImpl extends
 	public UserActionCounter createNew() {
 		UserActionCounter counter = BtsmodelFactory.eINSTANCE
 				.createUserActionCounter();
+		counter.setDBCollectionKey(BTSCoreConstants.LOCAL);
 		return counter;
 	}
 

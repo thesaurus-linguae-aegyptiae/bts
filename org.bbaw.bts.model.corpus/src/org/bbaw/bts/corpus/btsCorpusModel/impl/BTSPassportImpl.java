@@ -220,7 +220,7 @@ public class BTSPassportImpl extends MinimalEObjectImpl.Container implements BTS
 				break;
 			}
 		}
-		if (index == pathEntries.length + 1)
+		if (index == (pathEntries.length - 1))
 		{
 			return entry;
 		}

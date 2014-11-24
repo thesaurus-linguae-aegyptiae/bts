@@ -371,6 +371,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				if (monitor != null && monitor.isCanceled()) return filter(objects);
 			}
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
@@ -385,6 +386,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+				if (monitor != null && monitor.isCanceled()) return filter(objects);
 			}
 		}
 		else
@@ -399,6 +401,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
+					if (monitor != null && monitor.isCanceled()) return filter(objects);
 				}
 			}
 		}
@@ -424,6 +427,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			{
 				return tcObject;
 			}
+			if (monitor != null && monitor.isCanceled()) return tcObject;
 		}
 		for (String p : getActiveProjects())
 		{
@@ -434,6 +438,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 				{
 					return tcObject;
 				}
+				if (monitor != null && monitor.isCanceled()) return tcObject;
 			}
 		}
 		return tcObject;

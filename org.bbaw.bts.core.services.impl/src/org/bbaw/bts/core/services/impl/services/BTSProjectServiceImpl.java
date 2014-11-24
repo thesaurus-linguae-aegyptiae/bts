@@ -40,6 +40,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		BTSProject entity = BtsmodelFactory.eINSTANCE.createBTSProject();
 		super.setId(entity);
 		super.setRevision(entity);
+		entity.setDBCollectionKey(BTSCoreConstants.ADMIN);
 		return entity;
 	}
 

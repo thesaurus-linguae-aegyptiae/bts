@@ -54,6 +54,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		BTSUser entity = BtsmodelFactory.eINSTANCE.createBTSUser();
 		super.setId(entity);
 		super.setRevision(entity);
+		entity.setDBCollectionKey(BTSCoreConstants.ADMIN);
 		return entity;
 	}
 

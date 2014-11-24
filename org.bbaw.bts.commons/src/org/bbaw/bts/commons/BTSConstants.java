@@ -202,6 +202,10 @@ public class BTSConstants
 						&& !(parent.getName().equals("configuration") && !(parent
 								.getName().equals("workspace")))) {
 					parent = parent.getParentFile();
+					if (parent != null)
+					{
+						System.out.println("BTSConstants getInstallationDir: " +parent.getAbsolutePath());
+					}
 				}
 				if (parent == null) {
 					File dir = new File(System.getProperty("user.home")
@@ -209,17 +213,21 @@ public class BTSConstants
 					if (!dir.exists()) {
 						dir.mkdirs();
 					}
+					System.out.println("BTSConstants getInstallationDir return dir: " +dir.getAbsolutePath());
 					return dir.getAbsolutePath();
 				}
 				file = parent.getParentFile();
 				String path = file.getAbsolutePath();
+				System.out.println("BTSConstants getInstallationDir return path: " +path);
 				return path;
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 		}
-		return System.getenv("user.home"); 
+		String userEnvPath = System.getenv("user.home"); 
+		System.out.println("BTSConstants getInstallationDir return userEnvPath: " +userEnvPath);
+		return userEnvPath;
 	}
 
 	

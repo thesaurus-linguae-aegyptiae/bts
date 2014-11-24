@@ -224,7 +224,10 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 
 		mainRootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 		prepareTreeViewer(mainTreeViewer, mainTabItemComp);
-		
+		if (BTSUIConstants.SELECTION_TYPE_SECONDARY
+				.equals(selectionType)) {
+			loadInput(mainTabItemComp, mainTreeViewer, mainRootNode, false);
+		}
 
 		mainTabItem.setData("tv", mainTreeViewer);
 
@@ -254,6 +257,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 
 		binTabItemComp.layout();
 		// loadInput(mainTabItemComp);
+		
 
 		tabFolder.setSelection(mainTabItem);
 		parent.layout();

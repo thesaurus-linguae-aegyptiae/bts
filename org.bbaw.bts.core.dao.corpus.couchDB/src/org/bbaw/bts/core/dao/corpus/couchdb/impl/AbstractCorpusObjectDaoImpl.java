@@ -51,7 +51,30 @@ implements GenericDao<E, K>
 
 	
 
-
+//	public E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString)
+//	{
+//		Resource resource;
+//		try {
+//			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//		} catch (Exception e1) {
+//			logger.info(e1);
+//		} finally {
+//			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+//		}
+//		fillResource(resource, sourceAsString);
+//		if (!resource.getContents().isEmpty())
+//		{
+//			E e = ((E) resource.getContents().get(0));
+//			if (e.getDBCollectionKey() == null)
+//			{
+//				e.setDBCollectionKey(indexName);
+//			}
+//			checkForConflicts(e, indexName);
+//			return e;
+//		}
+//		logger.info(sourceAsString);
+//		return find((K) id, indexName);
+//	}
 
 
 

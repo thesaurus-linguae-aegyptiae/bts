@@ -35,7 +35,7 @@ public class BTSThsEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSThsEntry,
 			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES;
 		}
 		List<String> allDocs = loadDocsFromView(viewId, path, "ths");
-		List<BTSThsEntry> results = loadPartialObjectsFromStrings(allDocs, path);
+		List<BTSThsEntry> results = super.loadObjectsFromStrings(allDocs, path);//loadPartialObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(viewId, path);
