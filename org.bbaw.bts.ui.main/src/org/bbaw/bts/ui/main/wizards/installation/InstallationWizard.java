@@ -135,6 +135,7 @@ public class InstallationWizard extends Wizard
 				String localAdminP = connectServerPage.getPassword();
 				ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
 				ISecurePreferences auth = secPrefs.node("auth");
+				System.out.println("load password");
 				try {
 					auth.put("username", localAdminName, false);
 					auth.put("password", localAdminP, true);
@@ -143,6 +144,17 @@ public class InstallationWizard extends Wizard
 					logger.error(e);
 				} catch (IOException e) {
 					logger.error(e);
+				} catch (SecurityException e)
+				{
+					try {
+						auth.put("username", localAdminName, false);
+						auth.put("password", localAdminP, false);
+						auth.flush();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 				}
 				userController.setAuthenticatedUser(getUser());
 
