@@ -415,4 +415,16 @@ public class LocalCreateUserPage extends WizardPage
 	public BTSUserGroup getUserGroup() {
 		return usergroup;
 	}
+	
+	@Override
+	public boolean canFlipToNextPage() {
+		if (user != null && "OK".equals(errorLabel.getText()))
+		{
+			return super.canFlipToNextPage();
+		}
+		else
+		{
+			return false;
+		}
+	}
 }

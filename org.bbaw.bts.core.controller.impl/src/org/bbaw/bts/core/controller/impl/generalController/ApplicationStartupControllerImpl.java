@@ -192,11 +192,15 @@ public class ApplicationStartupControllerImpl implements
 		
 		System.out.println("Test sonderzeichen string: \uF0080 \uF0081 \uF0082 \u13379 \u13379a" );
 		System.out.println(font);
-		splashController.setSplashPluginId(PLUGIN_ID);
-		splashController.setSplashImagePath("/" + "splash" + "/"
-				+ "btsStart.jpg");
-		splashController.open();
-		splashController.setMessage("Starting Applikation ...");
+		try {
+			splashController.setSplashPluginId(PLUGIN_ID);
+			splashController.setSplashImagePath("/" + "splash" + "/"
+					+ "btsStart.jpg");
+			splashController.open();
+			splashController.setMessage("Starting Applikation ...");
+		} catch (Exception e) {
+			System.out.println("Kein splash.");
+		}
 
 		
 		
@@ -265,32 +269,13 @@ public class ApplicationStartupControllerImpl implements
 			}
 		}
 
-		if (first_startup == null || first_startup.equals("true")
-				|| !dbManager.databaseIsInstalled(db_installation_dir)) {
+		if (first_startup == null || first_startup.equals("true")) {
 			logger.info("Application very first startup");
 			listen2Backend = false;
 
-			Display.getDefault().syncExec(new Runnable() {
-				  public void run() {
-					// needs to init realm
-						Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
-							public void run() {
-								boolean success = openInstallationWizard();
-								prefs.put("first_startup", "false");
-								try {
-									prefs.flush();
-								} catch (BackingStoreException e) {
-									logger.error(e);
-								}
-								if (!success)
-								{
-									System.exit(0);
-								}
-
-							}
-						});
-				  }
-				}); 			
+						
+			startInstallationWizard();
+				
 //				
 //			boolean authenticationLoaded = false;
 //			if (InternetAccessTester.accessToURLExists(null)) {
@@ -543,6 +528,31 @@ public class ApplicationStartupControllerImpl implements
 
 	}
 
+	
+	private void startInstallationWizard() {
+		Display.getDefault().syncExec(new Runnable() {
+			  public void run() {
+				// needs to init realm
+					Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
+						public void run() {
+							boolean success = openInstallationWizard();
+							prefs.put("first_startup", "false");
+							try {
+								prefs.flush();
+							} catch (BackingStoreException e) {
+								logger.error(e);
+							}
+							if (!success)
+							{
+								System.exit(0);
+							}
+
+						}
+					});
+			  }
+			}); 				
+	}
+	
 //	private void checkCorpusSelectionSettings() {
 //		main_corpus_key = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 //		logger.info("checkCorpusSelectionSettings: main_project_key : " + main_project_key + ", main_corpus_key: " + main_corpus_key);

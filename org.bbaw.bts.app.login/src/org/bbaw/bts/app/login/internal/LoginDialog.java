@@ -320,7 +320,8 @@ public class LoginDialog extends Dialog
 				return false;
 			}
 		} catch (Exception e) {
-			logger.info(e);
+			logger.info(e); 
+			//FIXME abfangen wenn datenbank korrumpiert/nicht installiert/nicht gestartet wurde
 			return false;
 		}
 		QueryBuilder dd;

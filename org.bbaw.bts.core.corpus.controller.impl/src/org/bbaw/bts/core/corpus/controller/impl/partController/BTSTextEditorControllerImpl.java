@@ -491,7 +491,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					BTSConstants.BROKEN_VERS_MARKER)) {
 //				stringBuilder.append(MARKER_VERS_SIGN);
 				stringBuilder.append(BROKEN_VERS_MARKER);
-			} else {
+				
+			} else if (marker.getType().equals(
+					BTSConstants.DESTRUCTION_MARKER)) {
+//				stringBuilder.append(MARKER_VERS_SIGN);
+				stringBuilder.append("--" + marker.getName() + "--");
+			}  
+			else {
 				pos.setOffset(pos.getOffset() +1);
 				stringBuilder.append(MARKER_START_SIGN);
 				stringBuilder.append(marker.getType());

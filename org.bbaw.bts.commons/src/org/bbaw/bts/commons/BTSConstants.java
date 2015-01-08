@@ -138,6 +138,8 @@ public class BTSConstants
 		"updaters", "readers", "name", "revisionState", "visibility", "translations"};
 
 	public static final String OBJECT_TYPES_ARRAY = "object_types_array";
+
+	public static final String DESTRUCTION_MARKER = "destruction_marker";
 	private BTSConstants()
 	{
 	}

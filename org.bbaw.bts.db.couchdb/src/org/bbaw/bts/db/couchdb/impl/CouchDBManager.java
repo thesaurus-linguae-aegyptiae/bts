@@ -803,19 +803,9 @@ public class CouchDBManager implements DBManager
 	@Override
 	public boolean databaseIsInstalled(String dbInstallationDir)
 	{
-		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
-		ISecurePreferences auth = secPrefs.node("auth");
+		
 		try {
-			username = auth.get("username", null);
-			password = auth.get("password", null);
-		} catch (StorageException e) {
-			logger.error(e);
-		} catch (SecurityException e) {
-			logger.error(e);
-			
-		}
-		try {
-			if (checkConnection(connectionProvider.getLocalDBURL(), username, password)) {
+			if (checkDBRunning(connectionProvider.getLocalDBURL())) {
 				return true;
 			}
 		} catch (Exception e) {
@@ -844,6 +834,31 @@ public class CouchDBManager implements DBManager
 			}
 		}
 		return false;
+	}
+
+	private boolean checkDBRunning(String urlString) throws MalformedURLException {
+		URL url = new URL(urlString);
+		try
+		{
+			CouchDbProperties properties = new CouchDbProperties().setDbName("admin")
+					.setCreateDbIfNotExist(false).setProtocol(url.getProtocol()).setHost(url.getHost())
+					.setPort(url.getPort()).setMaxConnections(1).setConnectionTimeout(0);
+			CouchDbClient dbClient = new CouchDbClient(properties);
+		}
+		catch (NoDocumentException e)
+		{
+			return true; // authentication
+		}
+		catch (Exception e)
+		{
+			String dmsg = e.getMessage();
+			logger.warn("db not running or connection refused : "+ urlString + ", Exception message: " + e.getMessage());
+			if (e.getMessage().contains("Status: 401 (Unauthorized"))
+				return true;
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -1062,21 +1077,14 @@ public class CouchDBManager implements DBManager
 	@Override
 	public boolean startDatabase(String dbInsallationDir, String localDBUrl) throws IOException, InterruptedException {
 		
-		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
-		ISecurePreferences auth = secPrefs.node("auth");
-		try {
-			username = auth.get("username", null);
-			password = auth.get("password", null);
-		} catch (StorageException e) {
-			logger.error(e);
-		}
+
 		try {
 			if (localDBUrl != null && !"".equals(localDBUrl)) {
-				if (checkConnection(localDBUrl, username, password)) {
+				if (checkDBRunning(localDBUrl)) {
 					return true;
 				}
 			} else {
-				if (checkConnection(connectionProvider.getLocalDBURL(), username, password)) {
+				if (checkDBRunning(connectionProvider.getLocalDBURL())) {
 					return true;
 				}
 			}

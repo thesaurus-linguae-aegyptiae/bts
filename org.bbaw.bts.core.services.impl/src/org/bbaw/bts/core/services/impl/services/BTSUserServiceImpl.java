@@ -143,15 +143,32 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		}
 		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
 		ISecurePreferences auth = secPrefs.node("auth");
+		boolean success = false;
 		try {
 			auth.put("username", userName, false);
 			auth.put("password", passWord, true);
 			auth.flush();
+			success = true;
 			return true;
 		} catch (StorageException e) {
 			logger.error(e);
 		} catch (IOException e) {
 			logger.error(e);
+		} catch (SecurityException e)
+		{
+			
+		}
+		if (!success)
+		{
+			try {
+				auth.put("username", userName, false);
+				auth.put("password", passWord, false);
+				auth.flush();
+				return true;
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		return false;

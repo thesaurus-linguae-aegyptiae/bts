@@ -25,6 +25,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.AbstractMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItem;
@@ -416,6 +417,11 @@ public class TextModelHelper {
 							BTSConstants.BROKEN_VERS_MARKER)) {
 				modelMarker.setType(BTSConstants.BROKEN_VERS_MARKER);
 			}
+		}else if (si instanceof DestructionMarker) {
+			if (modelMarker.getType() == null) {
+				modelMarker.setType(BTSConstants.DESTRUCTION_MARKER);
+			}
+			modelMarker.setName(((DestructionMarker) si).getType());
 		}
 		return modelMarker;
 
