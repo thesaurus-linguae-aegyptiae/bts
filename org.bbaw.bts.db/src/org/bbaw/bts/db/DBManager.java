@@ -62,10 +62,11 @@ public interface DBManager
 	 * Prepare database indexing .
 	 *
 	 * @param project the project
+	 * @param monitor 
 	 * @return true, if successful
 	 * @throws URISyntaxException the URI syntax exception
 	 */
-	boolean prepareDBIndexing(BTSProject project) throws URISyntaxException;
+	boolean checkDBIndexing(BTSProject project, IProgressMonitor monitor) throws URISyntaxException;
 
 	/**
 	 * Prepare database for startup.

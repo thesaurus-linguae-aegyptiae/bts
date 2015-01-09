@@ -17,9 +17,12 @@ public class OpenDBManagerDialog {
 	@Execute
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
-			IEclipseContext context) {
+			IEclipseContext context,
+			@Optional @Named("org.bbaw.bts.ui.main.commandparameter.dbManagerMessage") String message) {
+		IEclipseContext child = context.createChild("DBManager");
+		child.set("dbManagerMessage", message);
 		DBManagerDialog dialog = ContextInjectionFactory.make(
-				DBManagerDialog.class, context);
+				DBManagerDialog.class, child);
 		// context.set(UserManagementDialog.class, dialog);
 
 		if (dialog.open() == dialog.OK) {

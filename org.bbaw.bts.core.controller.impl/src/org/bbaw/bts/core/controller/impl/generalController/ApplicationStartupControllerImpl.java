@@ -1,19 +1,26 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
 import org.bbaw.bts.app.login.Login;
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
+import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -30,6 +37,8 @@ import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.ui.font.BTSFontManager;
 import org.bbaw.bts.ui.main.wizards.installation.InstallationWizard;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -46,6 +55,8 @@ import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.events.IEventBroker;
@@ -64,6 +75,8 @@ import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.jface.dialogs.ProgressMonitorDialog;
+import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
@@ -75,12 +88,11 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 import org.osgi.service.prefs.BackingStoreException;
 
+
 public class ApplicationStartupControllerImpl implements
 		ApplicationStartupController {
 
 	private static final String PLUGIN_ID = "org.bbaw.bts.app";
-
-
 
 	@Inject
 	private BTSProjectService projectService;
@@ -96,15 +108,17 @@ public class ApplicationStartupControllerImpl implements
 
 	@Inject
 	private IEventBroker eventBroker;
-	
+
 	@Inject
 	private BTSFontManager fontManager;
-	
+
 	@Inject
 	private Logger logger;
-	
+
 	@Inject
 	private UISynchronize sync;
+
+
 
 	private List<BTSProject> projects;
 
@@ -118,33 +132,32 @@ public class ApplicationStartupControllerImpl implements
 	private ISplashScreenController splashController;
 
 	// configurationscope preferences
-	private IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID);
+	private IEclipsePreferences prefs = ConfigurationScope.INSTANCE
+			.getNode(PLUGIN_ID);
 
 	private String main_project_key;
 	private String active_projects;
 	private String first_startup;
 	protected String remote_db_urls;
 	protected String db_installation_dir;
-	
-	
+
 	@Inject
 	private BTSUserController userController;
 
-//	@Inject
-//	private BTSTextCorpusService textCorpusService;
+	// @Inject
+	// private BTSTextCorpusService textCorpusService;
 
 	private String localDBUrl;
-
-
 
 	private boolean listen2Backend = true;
 
 	@Override
 	public void applicationStartup(final IEclipseContext context,
-			final BTSProjectService projectService, IApplicationContext appContext) {
+			final BTSProjectService projectService,
+			IApplicationContext appContext) {
 		this.context = context;
-		logger.error("Logging - error, debug enabled: " 
-		+ logger.isDebugEnabled());
+		logger.error("Logging - error, debug enabled: "
+				+ logger.isDebugEnabled());
 		logger.info("Logging - info, info enabled: " + logger.isInfoEnabled());
 		logger.error("Logging - error, info enabled: " + logger.isInfoEnabled());
 
@@ -152,12 +165,10 @@ public class ApplicationStartupControllerImpl implements
 		logger.warn("Logging - warn");
 		logger.trace("Logging - trace");
 
-
 		loadPreferences(context);
-		
-		//check and set application uuid
-		if (prefs.get(BTSConstants.BTS_UUID, null) == null)
-		{
+
+		// check and set application uuid
+		if (prefs.get(BTSConstants.BTS_UUID, null) == null) {
 			Calendar now = Calendar.getInstance();
 			String uuid = new Long(now.getTimeInMillis()).toString();
 			prefs.put(BTSConstants.BTS_UUID, uuid);
@@ -171,26 +182,27 @@ public class ApplicationStartupControllerImpl implements
 
 		// load font
 		Font font = null;
-		
-		font = fontManager.getFont("BBAWLibertine");//"BBAWLibertine");
+
+		font = fontManager.getFont("BBAWLibertine");// "BBAWLibertine");
 		logger.info("Font loadded - font: " + font);
-		if (font != null && font.getFontData() != null && font.getFontData()[0] != null) {
+		if (font != null && font.getFontData() != null
+				&& font.getFontData()[0] != null) {
 			font.getFontData()[0].setHeight(12);
-			JFaceResources.getFontRegistry().put(
-					JFaceResources.DEFAULT_FONT,
-					new FontData[] {  font.getFontData()[0] });
-//			Font f = JFaceResources.getFontRegistry().get(
-//					JFaceResources.DEFAULT_FONT);
-//			 Font f2 = JFaceResources.getDefaultFont();
-//			 Font f3 = JFaceResources.getFont("BBAWLibertine");
-//			 System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
-//			 for (Object s : JFaceResources.getFontRegistry().getKeySet())
-//			 {
-//				 System.out.println(s);
-//			 }
+			JFaceResources.getFontRegistry().put(JFaceResources.DEFAULT_FONT,
+					new FontData[] { font.getFontData()[0] });
+			// Font f = JFaceResources.getFontRegistry().get(
+			// JFaceResources.DEFAULT_FONT);
+			// Font f2 = JFaceResources.getDefaultFont();
+			// Font f3 = JFaceResources.getFont("BBAWLibertine");
+			// System.out.println(f +"="+ f2 +"="+ f3 +"="+ font);
+			// for (Object s : JFaceResources.getFontRegistry().getKeySet())
+			// {
+			// System.out.println(s);
+			// }
 		}
-		
-		System.out.println("Test sonderzeichen string: \uF0080 \uF0081 \uF0082 \u13379 \u13379a" );
+
+		System.out
+				.println("Test sonderzeichen string: \uF0080 \uF0081 \uF0082 \u13379 \u13379a");
 		System.out.println(font);
 		try {
 			splashController.setSplashPluginId(PLUGIN_ID);
@@ -202,23 +214,22 @@ public class ApplicationStartupControllerImpl implements
 			System.out.println("Kein splash.");
 		}
 
-		
-		
 		// The should be a better way to close the Splash
 		eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE,
 				new EventHandler() {
 					@Override
 					public void handleEvent(Event event) {
-						context
-								.get(StaticAccessController.class);
-						context
-								.get(PermissionsAndExpressionsEvaluationController.class);
-						IProvisioningAgent agent = context.get(IProvisioningAgent.class);
+						context.get(StaticAccessController.class);
+						context.get(PermissionsAndExpressionsEvaluationController.class);
+						IProvisioningAgent agent = context
+								.get(IProvisioningAgent.class);
 						IWorkbench workbench = context.get(IWorkbench.class);
-						logger.info("IProvisioningAgent loaded: " + (agent != null) + ", IWorkbench loaded: " + (workbench != null));
-						//automated software update
-						//FIXME
- 						checkAndInstallSoftwareUpdates(agent, workbench);
+						logger.info("IProvisioningAgent loaded: "
+								+ (agent != null) + ", IWorkbench loaded: "
+								+ (workbench != null));
+						// automated software update
+						// FIXME
+						checkAndInstallSoftwareUpdates(agent, workbench);
 
 						// extension specific startup routines
 						ExtensionStartUpController[] conrollers = null;
@@ -227,10 +238,8 @@ public class ApplicationStartupControllerImpl implements
 						} catch (CoreException e) {
 							logger.error(e);
 						}
-						if (conrollers != null)
-						{
-							for (ExtensionStartUpController c : conrollers)
-							{
+						if (conrollers != null) {
+							for (ExtensionStartUpController c : conrollers) {
 								try {
 									c.startup();
 								} catch (Exception e) {
@@ -238,29 +247,32 @@ public class ApplicationStartupControllerImpl implements
 								}
 							}
 						}
-						
-						if (listen2Backend)
-						{
+
+						if (listen2Backend) {
 							// start listening to backend updates
 							context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
-							context.modify(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES, "true");
+							context.modify(
+									BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
+									"false");// FIXME dev!
 							for (BTSProject project : projects) {
-								backend2ClientUpdateService.startListening2Updates(project);
+								backend2ClientUpdateService
+										.startListening2Updates(project);
 							}
 						}
 						splashController.close();
+						checkProjectIndexingDBCollections(projects);
 						eventBroker.unsubscribe(this);
 					}
 				});
 
 		logger.info("db_installation_dir " + db_installation_dir);
 
-		if (db_installation_dir == null || "".equals(db_installation_dir))
-		{
+		if (db_installation_dir == null || "".equals(db_installation_dir)) {
 			String btsInsallationDir = BTSConstants.getInstallationDir();
 			logger.info("btsInsallationDir " + btsInsallationDir);
 
-			db_installation_dir = BTSConstants.getDBInstallationDir(btsInsallationDir);
+			db_installation_dir = BTSConstants
+					.getDBInstallationDir(btsInsallationDir);
 			prefs.put(BTSPluginIDs.PREF_DB_DIR, db_installation_dir);
 			try {
 				prefs.flush();
@@ -273,21 +285,20 @@ public class ApplicationStartupControllerImpl implements
 			logger.info("Application very first startup");
 			listen2Backend = false;
 
-						
 			startInstallationWizard();
-				
-//				
-//			boolean authenticationLoaded = false;
-//			if (InternetAccessTester.accessToURLExists(null)) {
-//				
-//			} 
-//			else
-//			{
-//				logger.info("No Internet Access available");
-//			}
-//			
-//			
-//
+
+			//
+			// boolean authenticationLoaded = false;
+			// if (InternetAccessTester.accessToURLExists(null)) {
+			//
+			// }
+			// else
+			// {
+			// logger.info("No Internet Access available");
+			// }
+			//
+			//
+			//
 
 		} else
 		// subsequent start
@@ -295,27 +306,30 @@ public class ApplicationStartupControllerImpl implements
 			logger.info("Application subsequent startup");
 			// start db
 			try {
-				boolean started = dbManager.startDatabase(db_installation_dir, null);
+				boolean started = dbManager.startDatabase(db_installation_dir,
+						null);
 				logger.info("Database successfully started: " + started);
 			} catch (Exception e2) {
 				e2.printStackTrace();
 			}
 
-			//##############dev##################
-//			rememberedUsername = "admin";
-//			remembered = "admin";
-			//##############dev##################
+			// ##############dev##################
+			// rememberedUsername = "admin";
+			// remembered = "admin";
+			// ##############dev##################
 			// check for remembered
-			
+
 			boolean loggedIn = false;
-			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node(PLUGIN_ID);
+			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault()
+					.node(PLUGIN_ID);
 			ISecurePreferences rememberedMe = secPrefs.node("rememberedMe");
-			
+
 			String rememberedUsername = null;
 			String rememberedPass = null;
 			try {
-				rememberedUsername = rememberedMe.get("rememberedUsername", null);
-				rememberedPass  = rememberedMe.get("remembered", null);
+				rememberedUsername = rememberedMe.get("rememberedUsername",
+						null);
+				rememberedPass = rememberedMe.get("remembered", null);
 			} catch (StorageException e1) {
 				e1.printStackTrace();
 			}
@@ -324,8 +338,8 @@ public class ApplicationStartupControllerImpl implements
 					&& rememberedPass != null) {
 
 				try {
-					remembered = userService.setAuthentication(rememberedUsername,
-							rememberedPass);
+					remembered = userService.setAuthentication(
+							rememberedUsername, rememberedPass);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -355,25 +369,21 @@ public class ApplicationStartupControllerImpl implements
 					e.printStackTrace();
 				}
 			}
-			if (!loggedIn){
-				sync.syncExec(new Runnable()
-				{
+			if (!loggedIn) {
+				sync.syncExec(new Runnable() {
 					@Override
-					public void run()
-					{
-						Login login = ContextInjectionFactory.make(Login.class, context);
+					public void run() {
+						Login login = ContextInjectionFactory.make(Login.class,
+								context);
 						login.login(context, userController);
 
 					}
 
 				});
-				
 
 			}
 		}
 
-		
-		
 		try {
 			splashController.setMessage("Prepare Database...");
 
@@ -384,7 +394,8 @@ public class ApplicationStartupControllerImpl implements
 		}
 
 		try {
-			projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
+			projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE,
+					null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -394,34 +405,32 @@ public class ApplicationStartupControllerImpl implements
 		// prefs.
 		System.out.println("active: " + active_projects + " main: "
 				+ main_project_key);
-		if (active_projects == null || "".equals(active_projects)) // active_projects are set
+		if (active_projects == null || "".equals(active_projects)) // active_projects
+																	// are set
 		{
 			active_projects = main_project_key;
 		}
-		
+
 		if (active_projects != null) // active_projects are set
 		{
 			activeProjects = new Vector<String>();
 			boolean reset = false;
 			for (String p : active_projects.split("\\|")) {
-				if (!activeProjects.contains(p))
-				{
+				if (!activeProjects.contains(p)) {
 					activeProjects.add(p);
-				}
-				else
-				{
+				} else {
 					reset = true;
 				}
 			}
-			if (reset)
-			{
+			if (reset) {
 				active_projects = "";
 				for (String p : activeProjects) {
 					active_projects += p + "|";
 				}
-				active_projects = active_projects.substring(0, active_projects.length() - 1);
+				active_projects = active_projects.substring(0,
+						active_projects.length() - 1);
 			}
-			
+
 		}
 
 		if (projects != null && !projects.isEmpty()) {
@@ -431,7 +440,7 @@ public class ApplicationStartupControllerImpl implements
 			checkProjectsSelectionsSettings();
 			splashController.setMessage("Check Database Settings ...");
 
-			checkProjectDBCollections(projects);
+			checkProjectSynchronizationDBCollections(projects);
 
 			context.declareModifiable(BTSCoreConstants.MAIN_PROJECT);
 			for (BTSProject p : projects) {
@@ -440,14 +449,13 @@ public class ApplicationStartupControllerImpl implements
 					break;
 				}
 			}
-//			// login
-//			if (mainProjectSet) {
-//				splashController.close();
-//
-//			}
-			
-			
-//			checkCorpusSelectionSettings();
+			// // login
+			// if (mainProjectSet) {
+			// splashController.close();
+			//
+			// }
+
+			// checkCorpusSelectionSettings();
 		}
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, active_projects);
 		try {
@@ -456,13 +464,7 @@ public class ApplicationStartupControllerImpl implements
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-		
-	
-		
+
 		// Konzept:
 		// erster login bzw. keine db installiert:
 		// / als allererstes checken, ob db installiert
@@ -472,7 +474,7 @@ public class ApplicationStartupControllerImpl implements
 		//
 		// dann erst db installieren
 		// dann db starten
-		
+
 		// dann mit server synchronisieren, d.h. replicatoren erstellen für
 		// project erstellen
 		// fragen, welche projekte geholt werden sollen
@@ -516,241 +518,250 @@ public class ApplicationStartupControllerImpl implements
 		// splash schließen
 		//
 		//
-		
-		
-
-		
-		
-
-		
-
-		
 
 	}
 
-	
 	private void startInstallationWizard() {
 		Display.getDefault().syncExec(new Runnable() {
-			  public void run() {
+			public void run() {
 				// needs to init realm
-					Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
-						public void run() {
-							boolean success = openInstallationWizard();
-							prefs.put("first_startup", "false");
-							try {
-								prefs.flush();
-							} catch (BackingStoreException e) {
-								logger.error(e);
-							}
-							if (!success)
-							{
-								System.exit(0);
-							}
+				Realm.runWithDefault(
+						SWTObservables.getRealm(Display.getDefault()),
+						new Runnable() {
+							public void run() {
+								boolean success = openInstallationWizard();
+								prefs.put("first_startup", "false");
+								try {
+									prefs.flush();
+								} catch (BackingStoreException e) {
+									logger.error(e);
+								}
+								if (!success) {
+									System.exit(0);
+								}
 
-						}
-					});
-			  }
-			}); 				
+							}
+						});
+			}
+		});
 	}
-	
-//	private void checkCorpusSelectionSettings() {
-//		main_corpus_key = ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
-//		logger.info("checkCorpusSelectionSettings: main_project_key : " + main_project_key + ", main_corpus_key: " + main_corpus_key);
-//		if (main_project_key == null || "".equals(main_project_key)) return;
-//
-//		if (main_corpus_key == null || "".equals(main_corpus_key)) return;
-//		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
-//		for (BTSTextCorpus cor : corpora)
-//		{
-//			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.equals(cor.getCorpusPrefix()))
-//			{
-//				BTSTextCorpus main_corpus = cor;
-//				context.set(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);
-//				break;
-//			}
-//		}
-//		
-//	}
+
+	// private void checkCorpusSelectionSettings() {
+	// main_corpus_key =
+	// ConfigurationScope.INSTANCE.getNode(PLUGIN_ID).get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY,
+	// null);
+	// logger.info("checkCorpusSelectionSettings: main_project_key : " +
+	// main_project_key + ", main_corpus_key: " + main_corpus_key);
+	// if (main_project_key == null || "".equals(main_project_key)) return;
+	//
+	// if (main_corpus_key == null || "".equals(main_corpus_key)) return;
+	// List<BTSTextCorpus> corpora =
+	// textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE);
+	// for (BTSTextCorpus cor : corpora)
+	// {
+	// if (main_project_key.equals(cor.getProject()) && main_corpus_key != null
+	// && main_corpus_key.equals(cor.getCorpusPrefix()))
+	// {
+	// BTSTextCorpus main_corpus = cor;
+	// context.set(BTSPluginIDs.PREF_MAIN_CORPUS, main_corpus);
+	// break;
+	// }
+	// }
+	//
+	// }
 
 	private void loadPreferences(IEclipseContext context2) {
-		if (prefs == null) return;
+		if (prefs == null)
+			return;
 
-		IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
+		IEclipsePreferences defaultPrefs = DefaultScope.INSTANCE
+				.getNode("org.bbaw.bts.app");
 		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app");
-	
-		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
-		
-		active_projects = prefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS,defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS, null));
 
-		first_startup = prefs.get("first_startup", defaultPrefs.get("first_startup", null));;
-		remote_db_urls = prefs.get("remote_db_urls", defaultPrefs.get("remote_db_urls", null));
+		main_project_key = prefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY,
+				defaultPrefs.get(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
 
-		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR, defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
-		
-		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
-		
+		active_projects = prefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS,
+				defaultPrefs.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS, null));
+
+		first_startup = prefs.get("first_startup",
+				defaultPrefs.get("first_startup", null));
+		;
+		remote_db_urls = prefs.get("remote_db_urls",
+				defaultPrefs.get("remote_db_urls", null));
+
+		db_installation_dir = prefs.get(BTSPluginIDs.PREF_DB_DIR,
+				defaultPrefs.get(BTSPluginIDs.PREF_DB_DIR, null));
+
+		prefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY,
+				defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null));
+
 		// FIXME
-		localDBUrl =  prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
-//		prefs.put(BTSPluginIDs.PREF_LOCAL_DB_URL, "http://127.0.0.1:9086/");
-//		try {
-//			prefs.flush();
-//		} catch (BackingStoreException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		localDBUrl =  prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
+		localDBUrl = prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
+		// prefs.put(BTSPluginIDs.PREF_LOCAL_DB_URL, "http://127.0.0.1:9086/");
+		// try {
+		// prefs.flush();
+		// } catch (BackingStoreException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// localDBUrl = prefs.get(BTSPluginIDs.PREF_LOCAL_DB_URL, null);
 
-		if (localDBUrl != null)
-		{
+		if (localDBUrl != null) {
 			context.set(BTSPluginIDs.PREF_LOCAL_DB_URL, localDBUrl);
 		}
-		
-//		defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
-		
+
+		// defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
+
 	}
 
-	private void checkAndInstallSoftwareUpdates(final IProvisioningAgent agent, final IWorkbench workbench) {
+	private void checkAndInstallSoftwareUpdates(final IProvisioningAgent agent,
+			final IWorkbench workbench) {
 		Job j = new Job("Update Job") {
-		      private boolean doInstall = false;
+			private boolean doInstall = false;
 
-		      @Override
-		      protected IStatus run(final IProgressMonitor monitor) {
+			@Override
+			protected IStatus run(final IProgressMonitor monitor) {
 
-		        /* 1. Prepare update plumbing */
+				/* 1. Prepare update plumbing */
 
-		        final ProvisioningSession session = new ProvisioningSession(agent);
-		        final UpdateOperation operation = new UpdateOperation(session);
+				final ProvisioningSession session = new ProvisioningSession(
+						agent);
+				final UpdateOperation operation = new UpdateOperation(session);
 
-		        // create uri
-		        String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE, BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
-		        logger.info("P2_UPDATE_SITE url " + urlString);
-		        URI uri = null;
-		        try {
-		          uri = new URI(urlString);
-		        } catch (final URISyntaxException e) {
-		          return Status.CANCEL_STATUS;
-		        }
+				// create uri
+				String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
+						BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
+				logger.info("P2_UPDATE_SITE url " + urlString);
+				URI uri = null;
+				try {
+					uri = new URI(urlString);
+				} catch (final URISyntaxException e) {
+					return Status.CANCEL_STATUS;
+				}
 
-		        // set location of artifact and metadata repo
-		        operation.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
-		        operation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
-		        /* 2. check for updates */
+				// set location of artifact and metadata repo
+				operation.getProvisioningContext().setArtifactRepositories(
+						new URI[] { uri });
+				operation.getProvisioningContext().setMetadataRepositories(
+						new URI[] { uri });
+				/* 2. check for updates */
 
-
-				SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(), "Checking for application updates...", 200);
+				SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(),
+						"Checking for application updates...", 200);
 				IStatus status2 = operation.resolveModal(sub.newChild(100));
-		        logger.info("P2 Update Status : " + status2.getCode());
+				logger.info("P2 Update Status : " + status2.getCode());
 
-		        // run update checks causing I/O
-		        final IStatus status = operation.resolveModal(monitor);
+				// run update checks causing I/O
+				final IStatus status = operation.resolveModal(monitor);
 
-		        logger.info("P2 Update Status : " + status.getCode());
-		        // failed to find updates (inform user and exit)
-		        if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-		          return Status.OK_STATUS;
-		        }
+				logger.info("P2 Update Status : " + status.getCode());
+				// failed to find updates (inform user and exit)
+				if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
+					return Status.OK_STATUS;
+				}
 
-		        /* 3. Ask if updates should be installed and run installation */
+				/* 3. Ask if updates should be installed and run installation */
 
-		        // found updates, ask user if to install?
-		        if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
-		          sync.syncExec(new Runnable() {
-		            @Override
-		            public void run() {
-		              String updates = "";
-		              Update[] possibleUpdates = operation
-		                  .getPossibleUpdates();
-		              for (Update update : possibleUpdates) {
-		                updates += update + "\n";
-		              }
-		              doInstall = MessageDialog.openQuestion(new Shell(),
-		                  "Really install updates?", updates);
-		            }
-		          });
-		        }
+				// found updates, ask user if to install?
+				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
+					sync.syncExec(new Runnable() {
+						@Override
+						public void run() {
+							String updates = "";
+							Update[] possibleUpdates = operation
+									.getPossibleUpdates();
+							for (Update update : possibleUpdates) {
+								updates += update + "\n";
+							}
+							doInstall = MessageDialog.openQuestion(new Shell(),
+									"Really install updates?", updates);
+						}
+					});
+				}
 
-		        // start installation
-		        if (doInstall) {
-		          final ProvisioningJob provisioningJob = operation
-		              .getProvisioningJob(monitor);
-		          // updates cannot run from within Eclipse IDE!!!
-		          if (provisioningJob == null) {
-		            System.err
-		                .println("Running update from within Eclipse IDE? This won't work!!!");
-		            throw new NullPointerException();
-		          }
+				// start installation
+				if (doInstall) {
+					final ProvisioningJob provisioningJob = operation
+							.getProvisioningJob(monitor);
+					// updates cannot run from within Eclipse IDE!!!
+					if (provisioningJob == null) {
+						System.err
+								.println("Running update from within Eclipse IDE? This won't work!!!");
+						throw new NullPointerException();
+					}
 
-		          // register a job change listener to track
-		          // installation progress and notify user upon success
-		          provisioningJob
-		              .addJobChangeListener(new JobChangeAdapter() {
-		                @Override
-		                public void done(IJobChangeEvent event) {
-		                  if (event.getResult().isOK()) {
-		                    sync.syncExec(new Runnable() {
+					// register a job change listener to track
+					// installation progress and notify user upon success
+					provisioningJob
+							.addJobChangeListener(new JobChangeAdapter() {
+								@Override
+								public void done(IJobChangeEvent event) {
+									if (event.getResult().isOK()) {
+										sync.syncExec(new Runnable() {
 
-		                      @Override
-		                      public void run() {
-		                        boolean restart = MessageDialog
-		                            .openQuestion(new Shell(),
-		                                "Updates installed, restart?",
-		                                "Updates have been installed successfully, do you want to restart?");
-		                        if (restart) {
-		                          workbench.restart();
-		                        }
-		                      }
-		                    });
+											@Override
+											public void run() {
+												boolean restart = MessageDialog
+														.openQuestion(
+																new Shell(),
+																"Updates installed, restart?",
+																"Updates have been installed successfully, do you want to restart?");
+												if (restart) {
+													workbench.restart();
+												}
+											}
+										});
 
-		                  }
-		                  super.done(event);
-		                }
-		              });
+									}
+									super.done(event);
+								}
+							});
 
-		          provisioningJob.schedule();
-		        }
-		        return Status.OK_STATUS;
-		      }
-		    };
-		    j.schedule();
-		    try {
-				j.join();
-			} catch (InterruptedException e) {
-				logger.error(e);
+					provisioningJob.schedule();
+				}
+				return Status.OK_STATUS;
 			}
-		
+		};
+		j.schedule();
+		try {
+			j.join();
+		} catch (InterruptedException e) {
+			logger.error(e);
+		}
+
 	}
 
 	protected boolean openInstallationWizard() {
-		InstallationWizard installWizard = new InstallationWizard(context, ApplicationStartupControllerImpl.this, sync, userController);
-		WizardDialog dialog = new WizardDialog(new Shell(SWT.NO_TRIM | SWT.ON_TOP), installWizard);
-		if (dialog.open() == dialog.OK)
-		{
+		InstallationWizard installWizard = new InstallationWizard(context,
+				ApplicationStartupControllerImpl.this, sync, userController);
+		WizardDialog dialog = new WizardDialog(new Shell(SWT.NO_TRIM
+				| SWT.ON_TOP), installWizard);
+		if (dialog.open() == dialog.OK) {
 			logger.info("InstallationWizard returned OK");
 			localDBUrl = installWizard.getLocalDBUrl();
 			context.set(BTSPluginIDs.PREF_LOCAL_DB_URL, localDBUrl);
-		}
-		else
-		{
+		} else {
 			logger.info("InstallationWizard canceled");
 			return false;
 		}
-		if (installWizard.isLocalProject())
-		{
+		if (installWizard.isLocalProject()) {
 			initialProjectCreation();
 			return true;
 		}
-		
+
 		return true;
 	}
 
 	private void initialProjectCreation() {
 
 		if (createInitialProject()) {
-			
+
 		}
 	}
 
-	private void checkProjectDBCollections(List<BTSProject> projects) {
+	private void checkProjectSynchronizationDBCollections(
+			List<BTSProject> projects) {
 		for (BTSProject project : projects) {
 			if (project.getDbConnection() != null) {
 				try {
@@ -759,28 +770,112 @@ public class ApplicationStartupControllerImpl implements
 					e.printStackTrace();
 				}
 			}
-			try {
-				dbManager.prepareDBIndexing(project);
-			} catch (URISyntaxException e) {
-				e.printStackTrace();
-			}
 		}
 
 	}
 
+	private void checkProjectIndexingDBCollections(
+			final List<BTSProject> projects) {
+		Job job = new Job("timer") {
+			@Override
+			protected IStatus run(
+					final IProgressMonitor monitor) {
+				
+				final EHandlerService handlerService = context.get(EHandlerService.class);
+
+				ECommandService commandService = context.get(ECommandService.class);
+				// Activate Handler
+//				handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
+				Map map = new HashMap(1);
+				map.put("org.bbaw.bts.ui.main.commandparameter.dbManagerMessage",
+						"Some Database Collections are not properly index. Please execute appropriate re-indexing!");
+				Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_DB_MANGER);
+				final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
+				sync.asyncExec(new Runnable() {
+
+					@Override
+					public void run() {
+						handlerService.executeHandler(command);
+					}
+				});
+				
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule(8000);
+//		try {
+//			IRunnableWithProgress op = new IRunnableWithProgress() {
+//
+//				@Override
+//				public void run(final IProgressMonitor monitor)
+//						throws InvocationTargetException, InterruptedException {
+//
+//					// If you want to update the UI
+//					sync.asyncExec(new Runnable() {
+//
+//						@Override
+//						public void run() {
+//							boolean ok = true;
+//							for (BTSProject project : projects) {
+//								try {
+//									if (!dbManager.checkDBIndexing(project,
+//											monitor))
+//										ok = false;
+//								} catch (URISyntaxException e) {
+//									ok = false;
+//									e.printStackTrace();
+//								}
+//							}
+//							if (true ||!ok) {
+//								Job job = new Job("timer") {
+//									@Override
+//									protected IStatus run(
+//											final IProgressMonitor monitor) {
+//										
+//										EHandlerService handlerService = context.get(EHandlerService.class);
+//
+//										
+//										ECommandService commandService = context.get(ECommandService.class);
+//										// Activate Handler
+////										handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
+//										Map map = new HashMap(1);
+//										map.put("dbManagerMessage",
+//												"Some Database Collections are not properly index. Please execute appropriate re-indexing!");
+//										Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_DB_MANGER);
+//										ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
+//										
+//										handlerService.executeHandler(command);
+//										return Status.OK_STATUS;
+//									}
+//								};
+//								job.schedule(8000);
+//							}
+//						}
+//					});
+//
+//				}
+//			};
+//			new ProgressMonitorDialog(new Shell()).run(true, true, op);
+//		} catch (InvocationTargetException e) {
+//			// handle exception
+//		} catch (InterruptedException e) {
+//			// handle cancelation
+//		}
+
+	}
+
 	private void checkProjectsSelectionsSettings() {
-	
+
 		if (main_project_key != null && main_project_key.trim().length() > 0) {
-			if (activeProjects == null)
-			{
+			if (activeProjects == null) {
 				activeProjects = new Vector<String>();
 			}
-			if (activeProjects != null && !activeProjects.contains(main_project_key)) {
+			if (activeProjects != null
+					&& !activeProjects.contains(main_project_key)) {
 				activeProjects.add(main_project_key);
 
 			}
 			if (checkContains(projects, main_project_key)) {
-
 
 			} else {
 
@@ -798,74 +893,64 @@ public class ApplicationStartupControllerImpl implements
 		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()),
 				new Runnable() {
 					public void run() {
-						WizardDialog dialog = new WizardDialog(new Shell(SWT.NO_TRIM | SWT.ON_TOP),
-								wizard);
+						WizardDialog dialog = new WizardDialog(new Shell(
+								SWT.NO_TRIM | SWT.ON_TOP), wizard);
 						if (dialog.open() == dialog.OK) {
-							logger.info("New project created with prefix: " + project.getPrefix());
+							logger.info("New project created with prefix: "
+									+ project.getPrefix());
 							projectCreated = true;
-						}
-						else
-						{
+						} else {
 							logger.info("New project creation canceled");
 							projectCreated = false;
 						}
 					}
 				});
 		// break up if no project created
-		if (!projectCreated)
-		{
+		if (!projectCreated) {
 			return false;
 		}
-		
+
 		// continue with setting project settings
 		main_project_key = project.getPrefix();
-		if (activeProjects == null)
-		{
+		if (activeProjects == null) {
 			activeProjects = new Vector<String>();
 		}
-		if (!activeProjects.contains(main_project_key))
-		{
+		if (!activeProjects.contains(main_project_key)) {
 			activeProjects.add(main_project_key);
 		}
-		
-		if (active_projects == null || "".equals(active_projects))
-		{
+
+		if (active_projects == null || "".equals(active_projects)) {
 			active_projects = "";
-			for (String s : activeProjects)
-			{
-				active_projects += s +"|";
+			for (String s : activeProjects) {
+				active_projects += s + "|";
 			}
-			active_projects = active_projects.substring(0, active_projects.length() -1);
-		}
-		else
-		{
-			String [] tempActPros = active_projects.split("\\|");
+			active_projects = active_projects.substring(0,
+					active_projects.length() - 1);
+		} else {
+			String[] tempActPros = active_projects.split("\\|");
 			Set<String> temp = new HashSet(tempActPros.length);
 			String helper = "";
-			for (String s : tempActPros)
-			{
+			for (String s : tempActPros) {
 				temp.add(s);
-				helper += s +"|";
+				helper += s + "|";
 			}
-			for (String s : activeProjects)
-			{
-				if (!temp.contains(s))
-				{
-					helper += s +"|";
+			for (String s : activeProjects) {
+				if (!temp.contains(s)) {
+					helper += s + "|";
 				}
 			}
-			active_projects = helper.substring(0, helper.length() -1);
+			active_projects = helper.substring(0, helper.length() - 1);
 		}
-		
+
 		try {
-			projects = projectService
-					.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
+			projects = projectService.list(BTSConstants.OBJECT_STATE_ACTIVE,
+					null);
 		} catch (Exception e) {
 
 		}
-//		if (projects != null) {
-//			checkProjectsSelectionsSettings();
-//		}
+		// if (projects != null) {
+		// checkProjectsSelectionsSettings();
+		// }
 		prefs.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, main_project_key);
 		prefs.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, active_projects);
 		try {
@@ -907,7 +992,8 @@ public class ApplicationStartupControllerImpl implements
 	}
 
 	@Override
-	public List<BTSProject> loadRemoteProjects(String username, String password) throws MalformedURLException {
+	public List<BTSProject> loadRemoteProjects(String username, String password)
+			throws MalformedURLException {
 		return projectService.listRemoteProjects(username, password);
 	}
 
@@ -917,19 +1003,22 @@ public class ApplicationStartupControllerImpl implements
 	}
 
 	@Override
-	public boolean installDB(String dbInstallationDir, int localPort, String localAdminName, String localAdminpassword) {
+	public boolean installDB(String dbInstallationDir, int localPort,
+			String localAdminName, String localAdminpassword) {
 		logger.info("Location " + dbInstallationDir);
 		boolean success = false;
 		try {
-			success = dbManager.installDatabase(dbInstallationDir, localPort, localAdminName, localAdminpassword);
+			success = dbManager.installDatabase(dbInstallationDir, localPort,
+					localAdminName, localAdminpassword);
 		} catch (Exception e) {
 			logger.error(e);
 			return false;
 		}
-		logger.info("Data base installed successfully: " + success + ", at: " + dbInstallationDir);
+		logger.info("Data base installed successfully: " + success + ", at: "
+				+ dbInstallationDir);
 		return success;
 	}
-	
+
 	@Override
 	public boolean startDB(String dbInstallationDir, String localURL) {
 		logger.info("Location " + dbInstallationDir);
@@ -958,27 +1047,29 @@ public class ApplicationStartupControllerImpl implements
 
 	@Override
 	public boolean synchronizeRemoteProjects(String mainProject,
-			List<String> projecsToSync, String serverurl, String localDBUrl) throws Exception {
-		return dbManager.synchronizeRemoteProjects(mainProject, projecsToSync, serverurl, localDBUrl);
-		 
+			List<String> projecsToSync, String serverurl, String localDBUrl)
+			throws Exception {
+		return dbManager.synchronizeRemoteProjects(mainProject, projecsToSync,
+				serverurl, localDBUrl);
+
 	}
-	
-	protected ExtensionStartUpController[] loadExtensionStartUpControllers(IEclipseContext context) throws CoreException
-	{
-		IConfigurationElement[] config = ((IExtensionRegistry) context.get(IExtensionRegistry.class.getName()))
+
+	protected ExtensionStartUpController[] loadExtensionStartUpControllers(
+			IEclipseContext context) throws CoreException {
+		IConfigurationElement[] config = ((IExtensionRegistry) context
+				.get(IExtensionRegistry.class.getName()))
 				.getConfigurationElementsFor(BTSPluginIDs.EXTENSION_POINT_STARTUP_CONTROLLER);
-		List<ExtensionStartUpController> controllers = new Vector<ExtensionStartUpController>(4);
-		for (IConfigurationElement e : config)
-		{
+		List<ExtensionStartUpController> controllers = new Vector<ExtensionStartUpController>(
+				4);
+		for (IConfigurationElement e : config) {
 			final Object o = e.createExecutableExtension("class");
-			if (o instanceof ExtensionStartUpController)
-			{
+			if (o instanceof ExtensionStartUpController) {
 				controllers.add((ExtensionStartUpController) o);
 			}
 		}
-		if (!controllers.isEmpty())
-		{
-			return controllers.toArray(new ExtensionStartUpController[controllers.size()]);
+		if (!controllers.isEmpty()) {
+			return controllers
+					.toArray(new ExtensionStartUpController[controllers.size()]);
 		}
 		return null;
 	}

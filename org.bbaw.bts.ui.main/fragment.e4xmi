@@ -84,7 +84,9 @@
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_dvqWsGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.command.openFuton" commandName="openFuton" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
     <elements xsi:type="commands:Command" xmi:id="_jzQQ0GmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.command.openESGui" commandName="openElasticsearchGui" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
-    <elements xsi:type="commands:Command" xmi:id="_L6KfIGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.command.openDBManagerDialog" commandName="Open DB Manager" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
+    <elements xsi:type="commands:Command" xmi:id="_L6KfIGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.command.openDBManagerDialog" commandName="Open DB Manager" category="_R2MZsAUBEeOv5rV0xfzB3w">
+      <parameters xmi:id="_3zq9EJgDEeSuy7MZMRfslw" elementId="org.bbaw.bts.ui.main.commandparameter.dbManagerMessage" name="dbManagerMessage"/>
+    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
