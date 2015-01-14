@@ -22,5 +22,10 @@ public class DBManagerPartControllerImpl implements DBManagerPartController {
 	public boolean reIndex(String dbCollectionName, IProgressMonitor monitor) {
 		return dbManager.reindex(dbCollectionName, monitor);
 	}
+	@Override
+	public DBCollectionStatusInformation getDBCollectionStatusInformation(
+			String dbCollectionName, IProgressMonitor monitor) {
+		return dbManager.getDBCollectionStatusInformations(dbCollectionName, monitor);
+	}
 
 }

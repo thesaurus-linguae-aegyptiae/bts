@@ -665,7 +665,7 @@ public class ApplicationStartupControllerImpl implements
 
 				// found updates, ask user if to install?
 				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
-					sync.syncExec(new Runnable() {
+					sync.asyncExec(new Runnable() {
 						@Override
 						public void run() {
 							String updates = "";
@@ -698,7 +698,7 @@ public class ApplicationStartupControllerImpl implements
 								@Override
 								public void done(IJobChangeEvent event) {
 									if (event.getResult().isOK()) {
-										sync.syncExec(new Runnable() {
+										sync.asyncExec(new Runnable() {
 
 											@Override
 											public void run() {
@@ -781,86 +781,82 @@ public class ApplicationStartupControllerImpl implements
 			protected IStatus run(
 					final IProgressMonitor monitor) {
 				
-				final EHandlerService handlerService = context.get(EHandlerService.class);
-
-				ECommandService commandService = context.get(ECommandService.class);
-				// Activate Handler
-//				handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
-				Map map = new HashMap(1);
-				map.put("org.bbaw.bts.ui.main.commandparameter.dbManagerMessage",
-						"Some Database Collections are not properly index. Please execute appropriate re-indexing!");
-				Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_DB_MANGER);
-				final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
 				sync.asyncExec(new Runnable() {
 
 					@Override
 					public void run() {
-						handlerService.executeHandler(command);
-					}
-				});
+						
+					
 				
+				try {
+					IRunnableWithProgress op = new IRunnableWithProgress() {
+
+						@Override
+						public void run(final IProgressMonitor monitor)
+								throws InvocationTargetException, InterruptedException {
+
+							// If you want to update the UI
+							sync.asyncExec(new Runnable() {
+
+								@Override
+								public void run() {
+									boolean ok = true;
+									for (BTSProject project : projects) {
+										try {
+											if (!dbManager.checkDBIndexing(project,
+													monitor))
+												ok = false;
+										} catch (URISyntaxException e) {
+											ok = false;
+											e.printStackTrace();
+										}
+									}
+									if (!ok) {
+										Job job = new Job("timer") {
+											@Override
+											protected IStatus run(
+													final IProgressMonitor monitor) {
+												
+												final EHandlerService handlerService = context.get(EHandlerService.class);
+
+												ECommandService commandService = context.get(ECommandService.class);
+												// Activate Handler
+//												handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
+												Map map = new HashMap(1);
+												map.put("org.bbaw.bts.ui.main.commandparameter.dbManagerMessage",
+														"Some Database Collections are not properly index. Please execute appropriate re-indexing!");
+												Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_DB_MANGER);
+												final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
+												sync.asyncExec(new Runnable() {
+
+													@Override
+													public void run() {
+														handlerService.executeHandler(command);
+													}
+												});
+												
+												return Status.OK_STATUS;
+											}
+										};
+										job.schedule(1000);
+									}
+								}
+							});
+
+						}
+					};
+					new ProgressMonitorDialog(new Shell()).run(true, true, op);
+				} catch (InvocationTargetException e) {
+					// handle exception
+				} catch (InterruptedException e) {
+					// handle cancelation
+				}
+					}});
 				return Status.OK_STATUS;
+
 			}
 		};
 		job.schedule(8000);
-//		try {
-//			IRunnableWithProgress op = new IRunnableWithProgress() {
-//
-//				@Override
-//				public void run(final IProgressMonitor monitor)
-//						throws InvocationTargetException, InterruptedException {
-//
-//					// If you want to update the UI
-//					sync.asyncExec(new Runnable() {
-//
-//						@Override
-//						public void run() {
-//							boolean ok = true;
-//							for (BTSProject project : projects) {
-//								try {
-//									if (!dbManager.checkDBIndexing(project,
-//											monitor))
-//										ok = false;
-//								} catch (URISyntaxException e) {
-//									ok = false;
-//									e.printStackTrace();
-//								}
-//							}
-//							if (true ||!ok) {
-//								Job job = new Job("timer") {
-//									@Override
-//									protected IStatus run(
-//											final IProgressMonitor monitor) {
-//										
-//										EHandlerService handlerService = context.get(EHandlerService.class);
-//
-//										
-//										ECommandService commandService = context.get(ECommandService.class);
-//										// Activate Handler
-////										handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
-//										Map map = new HashMap(1);
-//										map.put("dbManagerMessage",
-//												"Some Database Collections are not properly index. Please execute appropriate re-indexing!");
-//										Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_DB_MANGER);
-//										ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
-//										
-//										handlerService.executeHandler(command);
-//										return Status.OK_STATUS;
-//									}
-//								};
-//								job.schedule(8000);
-//							}
-//						}
-//					});
-//
-//				}
-//			};
-//			new ProgressMonitorDialog(new Shell()).run(true, true, op);
-//		} catch (InvocationTargetException e) {
-//			// handle exception
-//		} catch (InterruptedException e) {
-//			// handle cancelation
-//		}
 
 	}
 

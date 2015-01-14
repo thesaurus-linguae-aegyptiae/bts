@@ -110,4 +110,8 @@ public interface BTSUserController {
 
 	boolean authenticatedUserIsDBAdmin(String userName, String password);
 
+	boolean isValidAuthentication(String userName, String passWord);
+
+	boolean checkAndChangeDBAdminPassword(String userName, String newPassword);
+
 }

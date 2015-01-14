@@ -57,7 +57,6 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	@Inject
 	private IEclipseContext context;
 
-	private Client searchClient;
 	
 	@Inject
 	@Preference(value = BTSPluginIDs.PREF_SEARCH_HTTP_ENABLED, nodePath = "org.bbaw.bts.app")
@@ -78,7 +77,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 
 //	@Inject
 //	@Preference(value = BTSPluginIDs.PREF_LOCAL_SEARCH_CLUSTER_NAME, nodePath = "org.bbaw.bts.app")
-	private Object esClustername = BTSConstants.DEFAULT_LOCAL_SEARCH_CLUSTER_NAME;
+	private String esClustername = BTSConstants.DEFAULT_LOCAL_SEARCH_CLUSTER_NAME;
 
 	@Override
 	public <T> T getDBClient(Class<T> clazz, String path)
@@ -345,6 +344,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	{
 		if (clazz == Client.class)
 		{
+			Client searchClient = context.get(Client.class);
 			if (searchClient == null)
 			{
 				//transport client
@@ -370,13 +370,18 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 		                .put("path.data", dbdir + BTSConstants.FS + esClustername)
 		                .put("number_of_shards",1)
 				        .put("number_of_replicas",0)
-				        .put("index.routing.allocation.disable_allocation", "false");
+				        .put("index.number_of_shards",1)
+				        .put("index.number_of_replicas",0)
+				        .put("node.name",esClustername + "BTS1")
+				        .put("index.routing.allocation.disable_allocation", "false")
+				        .put("cluster.routing.allocation.enable", "all");
 				
 				searchClient = nodeBuilder()
 		                .local(true)
 		                .settings(elasticsearchSettings.build())
+		                .clusterName(esClustername)
 		                .node().client();
-
+				context.set(Client.class, searchClient);
 			}
 			return (T) searchClient;
 
@@ -539,6 +544,17 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 	public void trackProtocolSettings(
 			@Preference(nodePath = "org.bbaw.bts.app", value = BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL) String protocol) {
 		System.out.println("New protocol: " + protocol);
+	}
+
+	@Override
+	public void purgeDBConnectionPool() {
+		Map<String, CouchDbClient> clients = (Map<String, CouchDbClient>) context.get(DaoConstants.DB_CLIENT_POOL_MAP);
+		if (clients == null)
+		{
+			return;
+		}
+		clients.clear();
+		
 	}
 
 	

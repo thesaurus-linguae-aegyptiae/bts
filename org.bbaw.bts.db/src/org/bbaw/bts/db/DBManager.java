@@ -29,6 +29,7 @@
  */
 package org.bbaw.bts.db;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -192,7 +193,12 @@ public interface DBManager
 	String getLocalESGuiURL();
 
 	List<DBCollectionStatusInformation> getDBCollectionStatusInformations(IProgressMonitor monitor);
+	
+	DBCollectionStatusInformation getDBCollectionStatusInformations(String dbCollection, IProgressMonitor monitor);
 
 	boolean reindex(String dbCollectionName, IProgressMonitor monitor);
+
+	boolean changeAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException;
+
 
 }

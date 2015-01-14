@@ -47,6 +47,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_qZdv0GmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openFutonHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenFutonHandler" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_xOH6gGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openESGui" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenESGui" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_Rr6bUGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.handler.openDBManagerDialogHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenDBManagerDialog" command="_L6KfIGvvEeSg5OVDz3RNmQ"/>
+    <elements xsi:type="commands:Handler" xmi:id="_m9mBYJvgEeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.handler.openChangePasswordDialog" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenChangePasswordDialogHandler" command="_aoLj4JvgEeSIPd7PzoRw-w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -87,6 +88,9 @@
     <elements xsi:type="commands:Command" xmi:id="_L6KfIGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.command.openDBManagerDialog" commandName="Open DB Manager" category="_R2MZsAUBEeOv5rV0xfzB3w">
       <parameters xmi:id="_3zq9EJgDEeSuy7MZMRfslw" elementId="org.bbaw.bts.ui.main.commandparameter.dbManagerMessage" name="dbManagerMessage"/>
     </elements>
+    <elements xsi:type="commands:Command" xmi:id="_aoLj4JvgEeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.command.openChangePasswordDialog" commandName="openChangePasswordDialog" category="_CXsjwAWjEeOJR9LhfOAE5w">
+      <parameters xmi:id="_d_nZwJvgEeSIPd7PzoRw-w" elementId="userId" name="userId"/>
+    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
@@ -102,6 +106,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="Preferences..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_07tpwGmmEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openFuton" label="Open Futon" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_sUKIoGmnEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openEsGui" label="Open ES GUI" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_-7UVEJv8EeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.handledmenuitem.changePassword" label="Change Password" command="_aoLj4JvgEeSIPd7PzoRw-w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>

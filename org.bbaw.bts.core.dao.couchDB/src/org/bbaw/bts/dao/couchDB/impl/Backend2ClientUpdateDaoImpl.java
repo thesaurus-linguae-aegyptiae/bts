@@ -109,7 +109,12 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 			}
 			
 			JsonObject jso = feed.getDoc();
-			queryIds = findQueryIdsInternal(jso.toString(), docId, dbCollection);
+			try {
+				queryIds = findQueryIdsInternal(jso.toString(), docId, dbCollection);
+			} catch (ElasticsearchException e1) {
+//				e1.printStackTrace();
+				return;
+			}
 			if (queryIds != null && !queryIds.isEmpty() && object == null) {
 				try {
 					object = generalPurposeDao.find(docId, dbCollection);

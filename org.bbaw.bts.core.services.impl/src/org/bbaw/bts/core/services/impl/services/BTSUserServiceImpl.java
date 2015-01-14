@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.impl.services;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -365,4 +366,21 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public boolean authenticatedUserIsDBAdmin(String userName, String password) {
 		return dbManager.checkUserIsDBAdmin(userName, password);
 	}
+
+	@Override
+	public boolean isValidAuthentication(String userName, String passWord) {
+		return userDao.isAuthorizedUser(userName, passWord);
+	}
+
+	@Override
+	public boolean checkAndChangeDBAdminPassword(String userName,
+			String newPassword) {
+		try {
+			return dbManager.changeAuthenticationDBAdmin(userName, newPassword);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 }

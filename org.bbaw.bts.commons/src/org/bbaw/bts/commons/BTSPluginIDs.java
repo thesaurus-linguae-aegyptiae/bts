@@ -88,4 +88,6 @@ public class BTSPluginIDs
 	
 	public static final String CMD_OPEN_DB_MANGER = "org.bbaw.bts.ui.main.command.openDBManagerDialog";
 
+	public static final String CMD_OPEN_CHANGE_PASSWORD = "org.bbaw.bts.ui.main.command.openChangePasswordDialog";
+
 }

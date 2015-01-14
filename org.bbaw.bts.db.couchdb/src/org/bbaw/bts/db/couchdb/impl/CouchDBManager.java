@@ -65,6 +65,7 @@ import org.elasticsearch.client.Client;
 import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.client.Requests;
 import org.elasticsearch.common.unit.TimeValue;
+import org.elasticsearch.indices.IndexMissingException;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.NoDocumentException;
@@ -688,7 +689,10 @@ public class CouchDBManager implements DBManager
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		if (dbClient == null) return false;
+		if (dbClient == null)
+		{
+			return false;
+		}
 		String dbSeq = dbClient.context().info().getUpdateSeq();
 		int dbUpdateSeq = 0;
 
@@ -699,20 +703,7 @@ public class CouchDBManager implements DBManager
 		}
 		
 		BulkProcessor bulkProcessor = makeBulkProcessor(collection, esClient, logger);
-		// index // dev
-		try {
-			IndicesAdminClient iac = esClient.admin().indices();
-			IndicesStatsResponse isr = iac.stats(new IndicesStatsRequest()).actionGet();
-			IndexStats is = isr.getIndex(collection);
-			System.out.println("Index doc count before recreate " + is.getTotal().docs.getCount());
-		}  
-		catch (ElasticsearchException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			
-		}
+		
 		boolean success = indexAllDocsInCollection(collection, bulkProcessor, esClient, dbClient, dbUpdateSeq, monitor);
 		if (success)
 		try {
@@ -767,8 +758,10 @@ public class CouchDBManager implements DBManager
 
 	private void updateRiverIndexUpdateSeq(String collection, Client esClient2,
 			int indexUpdateSeq) throws IOException {
-		IndexRequest ir = new IndexRequest(collection, "river-couchdb", "_seq")
-         .source(jsonBuilder().startObject().startObject("couchdb").field("last_seq", new Integer(indexUpdateSeq).toString()).endObject().endObject());
+		String json = "{\"couchdb\":{\"last_seq\":\""+ new Integer(indexUpdateSeq).toString() + "\"}}";
+		esClient2.index(Requests.indexRequest("_river").type(collection).id("_seq").source(json)).actionGet();
+//		IndexRequest ir = new IndexRequest("_river", collection,  "_seq")
+//         .source(jsonBuilder().startObject().startObject("couchdb").field("last_seq", new Integer(indexUpdateSeq).toString()).endObject().endObject());
 	}
 
 	private boolean indexAllDocsInCollection(String collection, BulkProcessor bulkProcessor, Client esClient,
@@ -788,6 +781,10 @@ public class CouchDBManager implements DBManager
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
+			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return false;
 			}
 		}
 		return true;
@@ -1556,7 +1553,12 @@ public class CouchDBManager implements DBManager
 		}
 		
 		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, DaoConstants.NOTIFICATION);
-		dbClient.context().compact();
+		try {
+			dbClient.context().compact();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		dbClient.shutdown();
 		
 	}
@@ -1691,98 +1693,23 @@ public class CouchDBManager implements DBManager
 		}
 		for (String db : allDBs)
 		{
-			DBCollectionStatusInformation info = BtsviewmodelFactory.eINSTANCE.createDBCollectionStatusInformation();
-			info.setDbCollectionName(db);
-			dbCollectionInfos.add(info);
-			infoMap.put(db, info);
-			
-			// db info
-			CouchDbClient collectionClient = connectionProvider.getDBClient(CouchDbClient.class, db);
-			info.setDbDiskSize(new Long(collectionClient.context().info().getDiskSize()).toString());
-			info.setDbDocCount(collectionClient.context().info().getDocCount());
-			info.setDbDocDelCount(new Long(collectionClient.context().info().getDocDelCount()).toString());
-			info.setDbPurgeSeq(new Long(collectionClient.context().info().getPurgeSeq()).toString());
-			info.setDbUpdateSeq(collectionClient.context().info().getUpdateSeq());
-			
+			ReplicatorDocument docFrom = null;
+			ReplicatorDocument docTo = null;
 			// db sync
 			if (replicationMap != null)
 			{
-				ReplicatorDocument docFrom = replicationMap.get(db + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
-				if (docFrom != null)
-				{
-					info.setSyncStatusFromRemote(docFrom.getReplicationState());
-				}
-				ReplicatorDocument docTo = replicationMap.get(db + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
-				if (docTo != null)
-				{
-					info.setSyncStatusToRemote(docTo.getReplicationState());
-				}
-			}
-			
-			// index
-			try {
-				IndicesAdminClient iac = esClient.admin().indices();
-				IndicesStatsResponse isr = iac.stats(new IndicesStatsRequest()).actionGet();
-				IndexStats is = isr.getIndex(db);
-				info.setIndexDocCount(is.getTotal().docs.getCount());
-			}  
-			catch (ElasticsearchException e) {
-				info.setIndexDocCount(-1);
-				e.printStackTrace();
-			} catch (Exception e) {
-				info.setIndexDocCount(-1);
-				e.printStackTrace();
-			} finally {
+				docFrom = replicationMap.get(db + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
 				
+				docTo = replicationMap.get(db + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
 			}
-			
-			try {
-//				RefreshRequestBuilder
-				IndicesAdminClient iac = esClient.admin().indices();
-				iac.prepareRefresh("_river")
-				.execute()
-				.actionGet();
-				GetResponse lastSeqGetResponse = esClient
-						.prepareGet("_river", db, "_seq")
-						.execute()
-						.actionGet();
-				 if (lastSeqGetResponse.isExists()) {
-				     Map<String, Object> couchdbState = (Map<String, Object>) lastSeqGetResponse.getSourceAsMap().get("couchdb");
-				     if (couchdbState != null) {
-				         String lastSeq = couchdbState.get("last_seq").toString(); // we know its always a string
-				         info.setIndexUpdateSeq(lastSeq);
-				     }
-				 }
-			} catch (ElasticsearchParseException e) {
-				e.printStackTrace();
-			} catch (ElasticsearchException e) {
-				e.printStackTrace();
-			}catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			// berechne index status
-			if (db.equals("_replicator") || db.equals("_users"))
+			DBCollectionStatusInformation cachedInfo =null;
+			if (cachedInfoMap != null && cachedInfoMap.get(db) != null)
 			{
-				info.setIndexStatus("SYSTEM DB");
+				cachedInfo  = cachedInfoMap.get(db);
 			}
-			else if (cachedInfoMap != null && cachedInfoMap.get(db) != null 
-					&& cachedInfoMap.get(db).getIndexDocCount() < info.getIndexDocCount())
-			{
-				info.setIndexStatus("INDEXING...");
-			}
-			else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20)
-			{
-				info.setIndexStatus("ERROR");
-			}
-			else if (info.getDbDocCount() - info.getIndexDocCount() > 4)
-			{
-				info.setIndexStatus("INDEX_BEHIND");
-			}
-			else
-			{
-				info.setIndexStatus("OK");
-			}
+			DBCollectionStatusInformation info = loadDBCollectionStatusInformationInternal(db, cachedInfo, monitor, docFrom, docTo);
+			dbCollectionInfos.add(info);
+			infoMap.put(db, info);
 			if (monitor != null)
 			{
 				monitor.worked(1);
@@ -1795,6 +1722,100 @@ public class CouchDBManager implements DBManager
 			cachedInfoMap.putAll(infoMap);
 		}
 		return dbCollectionInfos;
+	}
+
+	private DBCollectionStatusInformation loadDBCollectionStatusInformationInternal(
+			String db, DBCollectionStatusInformation cachedInfo, IProgressMonitor monitor, ReplicatorDocument docFrom, ReplicatorDocument docTo) {
+		DBCollectionStatusInformation info = BtsviewmodelFactory.eINSTANCE.createDBCollectionStatusInformation();
+		info.setDbCollectionName(db);
+		
+		
+		
+		// db info
+		CouchDbClient collectionClient = connectionProvider.getDBClient(CouchDbClient.class, db);
+		info.setDbDiskSize(new Long(collectionClient.context().info().getDiskSize()).toString());
+		info.setDbDocCount(collectionClient.context().info().getDocCount());
+		info.setDbDocDelCount(new Long(collectionClient.context().info().getDocDelCount()).toString());
+		info.setDbPurgeSeq(new Long(collectionClient.context().info().getPurgeSeq()).toString());
+		info.setDbUpdateSeq(collectionClient.context().info().getUpdateSeq());
+		
+		
+		if (docFrom != null)
+		{
+			info.setSyncStatusFromRemote(docFrom.getReplicationState());
+		}
+		if (docTo != null)
+		{
+			info.setSyncStatusToRemote(docTo.getReplicationState());
+		}
+		// if system db return
+		if (db.equals("_replicator") || db.equals("_users"))
+		{
+			info.setIndexStatus("SYSTEM DB");
+			return info;
+		}
+		
+		// index
+		try {
+			IndicesAdminClient iac = esClient.admin().indices();
+			IndicesStatsResponse isr = iac.stats(new IndicesStatsRequest()).actionGet();
+			IndexStats is = isr.getIndex(db);
+			info.setIndexDocCount(is.getTotal().docs.getCount());
+		}  
+		catch (ElasticsearchException e) {
+			info.setIndexDocCount(-1);
+			logger.error(e, "Error loading IndexStats of index " + db);
+		} catch (Exception e) {
+			info.setIndexDocCount(-1);
+			logger.error(e, "Error loading IndexStats of index " + db);
+		} finally {
+			
+		}
+		
+		try {
+//			RefreshRequestBuilder
+			IndicesAdminClient iac = esClient.admin().indices();
+			iac.prepareRefresh("_river")
+			.execute()
+			.actionGet();
+			GetResponse lastSeqGetResponse = esClient
+					.prepareGet("_river", db, "_seq")
+					.execute()
+					.actionGet();
+			 if (lastSeqGetResponse.isExists()) {
+			     Map<String, Object> couchdbState = (Map<String, Object>) lastSeqGetResponse.getSourceAsMap().get("couchdb");
+			     if (couchdbState != null) {
+			         String lastSeq = couchdbState.get("last_seq").toString(); // we know its always a string
+			         info.setIndexUpdateSeq(lastSeq);
+			     }
+			 }
+		} catch (ElasticsearchParseException e) {
+			logger.error(e, "Error loading last_seq value from _river of index " + db);
+		} catch (ElasticsearchException e) {
+			logger.error(e, "Error loading last_seq value from _river of index " + db);
+		}catch (Exception e) {
+			logger.error(e, "Error loading last_seq value from _river of index " + db);
+		}
+		
+		// berechne index status
+		if (cachedInfo != null 
+				&& cachedInfo.getIndexDocCount() < info.getIndexDocCount())
+		{
+			info.setIndexStatus("INDEXING...");
+		}
+		else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20)
+		{
+			info.setIndexStatus("ERROR");
+		}
+		else if (info.getDbDocCount() - info.getIndexDocCount() > 4)
+		{
+			info.setIndexStatus("INDEX_BEHIND");
+		}
+		else
+		{
+			info.setIndexStatus("OK");
+		}
+		return info;
 	}
 
 	@Override
@@ -1827,20 +1848,128 @@ public class CouchDBManager implements DBManager
 	}
 
 	private void removeIndex(String dbCollectionName, IProgressMonitor monitor) {
+		esClient = connectionProvider
+				.getSearchClient(Client.class);
+		// remove index
 		try {
-			esClient = connectionProvider
-					.getSearchClient(Client.class);
 			boolean deleted = esClient.admin().indices().delete(new DeleteIndexRequest(dbCollectionName)).actionGet().isAcknowledged();
-			GetResponse gr = esClient.prepareGet("_river", dbCollectionName, "_seq").execute().actionGet();
-			DeleteResponse response = esClient.prepareDelete("_river", dbCollectionName, "_seq").execute().actionGet();
-			DeleteResponse responseRiver = esClient.prepareDelete("_river", dbCollectionName, "_meta").execute().actionGet();
+		} catch (IndexMissingException e) {
+			// index non-existing, do nothing
 		} catch (ElasticsearchException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		// remove river
+		try {
+			DeleteResponse responseRiver = esClient.prepareDelete("_river", dbCollectionName, "_meta").execute().actionGet();
+			while (responseRiver.isFound())
+			{
+				responseRiver = esClient.prepareDelete("_river", dbCollectionName, "_meta").execute().actionGet();
+			}
+		} catch (IndexMissingException e) {
+			// index non-existing, do nothing
+		} catch (ElasticsearchException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// remove river seq
+		try {
+			DeleteResponse gr2 = esClient.prepareDelete("_river", dbCollectionName, "_seq").execute().actionGet();
+			while (gr2.isFound())
+			{
+				gr2 = esClient.prepareDelete("_river", dbCollectionName, "_seq").execute().actionGet();
+			}
+		} catch (IndexMissingException e) {
+			// index non-existing, do nothing
+		} catch (ElasticsearchException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
+
+	@Override
+	public DBCollectionStatusInformation getDBCollectionStatusInformations(
+			String dbCollection, IProgressMonitor monitor) {
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, "admin");
+		try {
+			Client esClient = getClient();
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		Map<String, ReplicatorDocument> replicationMap = null;
+		try {
+			replicationMap = loadReplicationMap();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ReplicatorDocument docFrom = null;
+		ReplicatorDocument docTo = null;
+		// db sync
+		if (replicationMap != null)
+		{
+			docFrom = replicationMap.get(dbCollection + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE);
+			
+			docTo = replicationMap.get(dbCollection + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE);
+		}
+		Object o = context.get("DBCollectionStatusInformationMap");
+		Map<String, DBCollectionStatusInformation> cachedInfoMap = null;
+		if (o != null && o instanceof Map<?,?>)
+		{
+			try {
+				cachedInfoMap = (Map<String, DBCollectionStatusInformation>) o;
+			} catch (Exception e) {
+			}
+		}
+		DBCollectionStatusInformation cachedInfo =null;
+		if (cachedInfoMap != null && cachedInfoMap.get(dbCollection) != null)
+		{
+			cachedInfo  = cachedInfoMap.get(dbCollection);
+		}
+		DBCollectionStatusInformation info = loadDBCollectionStatusInformationInternal(dbCollection, cachedInfo, monitor, docFrom, docTo);
+		return info;
+	}
+
+	@Override
+	public boolean changeAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException {
+		String localIni = getOSCouchDBLocalIniFile(BTSConstants.getDBInstallationDir(BTSConstants.getInstallationDir()));
+		File localIniFile = new File(localIni);
+		if (localIniFile.exists()) {
+			Scanner scanner = new Scanner(localIniFile);
+			StringBuffer stringBufferOfData = new StringBuffer();
+			for (String line; scanner.hasNextLine()
+					&& (line = scanner.nextLine()) != null;) {
+				// set local db port
+				if (line.trim().startsWith(userName)) {
+					// set local admin
+					stringBufferOfData.append(userName +"=" + password).append(
+							"\r\n");
+					stringBufferOfData.append("\r\n");
+				}
+				else {
+					stringBufferOfData.append(line).append("\r\n");
+				}
+			}
+			scanner.close();// this is used to release the scanner from file
+			try {
+				BufferedWriter bufwriter = new BufferedWriter(new FileWriter(
+						localIni));
+				bufwriter.write(stringBufferOfData.toString());
+				bufwriter.flush();
+				bufwriter.close();// closes the file
+			} catch (Exception e) {// if an exception occurs
+				logger.info("Error occured while attempting to write to file: "
+								+ e.getMessage());
+			}
+		}
+		return true;
+	}
+
+	
 }
