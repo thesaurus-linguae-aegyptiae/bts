@@ -12,7 +12,8 @@ import org.eclipse.swt.widgets.Display;
 public class EgyLineNumberRulerColumn extends LineNumberRulerColumn {
 
 	private int lineSpace;
-
+	private int oldLine;
+	private int counter;
 	public EgyLineNumberRulerColumn(int lineSpace) {
 		this.lineSpace = lineSpace;
 	}
@@ -27,16 +28,31 @@ public class EgyLineNumberRulerColumn extends LineNumberRulerColumn {
 	@Override
 	protected void paintLine(int line, int y, int lineheight, GC gc,
 			Display display) {
-		if (line > 0) {
-			super.paintLine(line, y + (line * lineSpace) - lineSpace,
-					lineheight, gc, display);
+		if (line <= oldLine)
+		{
+			counter = 0;
 		}
+		// multiply the lineSpace by the number of currently repainted lines.
+		super.paintLine(line, y   + (counter * lineSpace),
+				lineheight, gc, display);
+		oldLine = line;
+		counter++;
 	}
+	
+	
 
 	@Override
 	protected String createDisplayString(int line) {
 		return Integer.toString(line);
 	}
 
-
+	protected int computeNumberOfDigits() {
+		return 4;
+	}
+	@Override
+	public int getWidth() {
+		// TODO Auto-generated method stub
+		return super.getWidth();
+	}
+	
 }

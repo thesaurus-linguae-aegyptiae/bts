@@ -13,6 +13,7 @@
   <imports xsi:type="commands:Command" xmi:id="_DoUHkDTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection"/>
   <imports xsi:type="commands:Category" xmi:id="_EA_6EDdjEeSeOfuNLjhMYg" elementId="org.eclipse.ui.category.file"/>
   <imports xsi:type="menu:ToolBar" xmi:id="_UiXHMG5kEeSRb4HOUP92pA" elementId="org.bbaw.bts.app.toolbar.bottom.main"/>
+  <imports xsi:type="commands:Command" xmi:id="_qDjjUJy9EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.command.openPart"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/corpora.png">
       <handlers xmi:id="_O-CAoDdpEeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.corpus.handler.delete" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
@@ -244,7 +245,10 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dbLssNzSEeO5ZuJa34ojEQ" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second" positionInList="10"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_pr3zUPxwEeOKcob4rpjigA" featurename="children" parentElementId="org.bbaw.bts.app.partstack.right.top" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_4dLEcPxwEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.part.AnnotationsPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.AnnotationsPart" label="AnnotationsPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotations.png" closeable="true">
-      <toolbar xmi:id="_BpjUcPxxEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.toolbar.3"/>
+      <handlers xmi:id="_k1cagJzPEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.handler.deleteInAnnotationPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteInAnnotationPartHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+      <toolbar xmi:id="_BpjUcPxxEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.toolbar.3">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_G68VoJzPEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.10" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/obj16/delete.png" tooltip="Delete" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
+      </toolbar>
     </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_MG1_0DdjEeSeOfuNLjhMYg" featurename="handlers" parentElementId="org.bbaw.bts.application">
@@ -266,6 +270,14 @@
       <children xsi:type="menu:HandledToolItem" xmi:id="_W4NrYG8AEeSRb4HOUP92pA" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.9" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon32/parent-node32.png"/>
       <children xsi:type="menu:ToolBarSeparator" xmi:id="_vvVVMG5sEeSRb4HOUP92pA" elementId="org.bbaw.bts.ui.corpus.toolbarseparator.1"/>
       <children xsi:type="menu:ToolControl" xmi:id="_XcAN0G5kEeSRb4HOUP92pA" elementId="org.bbaw.bts.ui.corpus.toolcontrol.objectPath" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.toolcontrol.ObjectPathToolControl"/>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_xcqUUJy8EeSiiMU2026qjA" featurename="children" parentElementId="org.eclipse.ui.window" positionInList="10">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_JrWF4Jy9EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.openAnnotationPart" label="Open Annotation Part" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/annotations.png" command="_qDjjUJy9EeSiiMU2026qjA">
+      <parameters xmi:id="_s4dpAJy_EeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.part.AnnotationsPart"/>
+    </elements>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_lnNo8Jy_EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.openPassportEditor" label="Open Passport Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/passport.png" command="_qDjjUJy9EeSiiMU2026qjA">
+      <parameters xmi:id="_u0QAQJy_EeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.part.passportEditorPart"/>
     </elements>
   </fragments>
 </fragment:ModelFragments>

@@ -555,6 +555,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 			}
 		}
 	}
+	
+
 
 	private void setSelectionInteral(BTSWord selection) {
 		if (selection == null) {
@@ -619,7 +621,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 				final java.util.List<TreeNodeWrapper> nodes = lemmaNavigatorController
 						.loadNodes(
 								entries.subList(0,
-										Math.min(entries.size(), 500)),
+										Math.min(entries.size(), 300)),
 								monitor, false);
 				sync.asyncExec(new Runnable() {
 					@Override

@@ -47,6 +47,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 public class TextModelHelper {
 
 	private final static Pattern lemmaPattern = Pattern.compile("(?:case\\s+)([^:]+)(?::\\s*)");
+	private final static Pattern destructionMarkerPattern = Pattern.compile("--([^-]+)--");
 
 	public BTSTextContent updateModelFromTextContent(BTSTextContent textContent, EObject eo,
 			IAnnotationModel am) {
@@ -421,7 +422,11 @@ public class TextModelHelper {
 			if (modelMarker.getType() == null) {
 				modelMarker.setType(BTSConstants.DESTRUCTION_MARKER);
 			}
-			modelMarker.setName(((DestructionMarker) si).getType());
+			Matcher m = destructionMarkerPattern.matcher(((DestructionMarker) si).getType());
+			if (m.find())
+			{
+				modelMarker.setName(m.group(1));
+			}
 		}
 		return modelMarker;
 

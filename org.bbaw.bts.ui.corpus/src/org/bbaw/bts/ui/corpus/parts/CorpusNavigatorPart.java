@@ -679,7 +679,7 @@ labelProvider));
 					notification, queryResultMap,
 					viewHolderMap) && notification.getObject() instanceof BTSCorpusObject) {
 				
-				refreshTreeViewer((BTSCorpusObject) notification.getObject());
+//				refreshTreeViewer((BTSCorpusObject) notification.getObject());
 			}
 
 		}

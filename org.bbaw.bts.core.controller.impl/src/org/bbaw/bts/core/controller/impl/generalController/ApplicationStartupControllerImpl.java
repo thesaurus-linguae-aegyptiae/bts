@@ -253,7 +253,7 @@ public class ApplicationStartupControllerImpl implements
 							context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
 							context.modify(
 									BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
-									"false");// FIXME dev!
+									"true");// FIXME dev!
 							for (BTSProject project : projects) {
 								backend2ClientUpdateService
 										.startListening2Updates(project);

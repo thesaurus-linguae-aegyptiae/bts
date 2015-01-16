@@ -14,6 +14,7 @@
   <imports xsi:type="commands:Command" xmi:id="_qNsvMIJ4EeOX95-b2sMk-w" elementId="org.bbaw.bts.ui.corpus.command.editor.moveSelection.next"/>
   <imports xsi:type="commands:Command" xmi:id="_ogEtgP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.command.addAnnotation"/>
   <imports xsi:type="commands:Command" xmi:id="_GXtaUAaxEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.main.command.addComment"/>
+  <imports xsi:type="commands:Command" xmi:id="_F_FvMJzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.command.openPart"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Q_x-IEChEeOsGJaKBBYPLQ" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.top">
     <elements xsi:type="basic:Part" xmi:id="_DXXH8Fw9EeOGBIZrBx5nZQ" elementId="org.bbaw.bts.ui.corpus.egy.part.textEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextEditorPart" label="EgyTextEditor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/texts.png" closeable="true">
       <handlers xmi:id="_kYl6wP0_EeOsAKche49RIg" elementId="org.bbaw.bts.ui.corpus.egy.handler.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.AddAnnotationHandler" command="_ogEtgP0_EeOsAKche49RIg"/>
@@ -29,7 +30,7 @@
       </menus>
       <toolbar xmi:id="_aUjDIDptEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4"/>
     </elements>
-    <elements xsi:type="basic:Part" xmi:id="_-bjjADpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor" label="Lemma Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma.png" tooltip="Lemma Editor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart">
+    <elements xsi:type="basic:Part" xmi:id="_-bjjADpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart" label="Lemma Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma.png" tooltip="Lemma Editor">
       <toolbar xmi:id="_6lCkcTpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.1"/>
     </elements>
   </fragments>
@@ -92,6 +93,20 @@
         <children xsi:type="menu:HandledToolItem" xmi:id="_Fa7lbjpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.7" label="Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_Fa7lbzpsEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.8" label="Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
       </toolbar>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_9qJdgJy_EeSiiMU2026qjA" featurename="children" parentElementId="org.eclipse.ui.window" positionInList="100">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_AUNQAJzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openEgytextEditor" label="Open EgyText Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/texts.png" command="_F_FvMJzAEeSiiMU2026qjA">
+      <parameters xmi:id="_I1hw0JzAEeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.egy.part.textEditor"/>
+    </elements>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_LPqQ8JzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openLemmaEditor" label="Open Lemma Editor" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemma.png" command="_F_FvMJzAEeSiiMU2026qjA">
+      <parameters xmi:id="_N-LFoJzAEeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.egy.partdescriptor.lemmaEditor"/>
+    </elements>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_R1dgQJzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openLemmatizer" label="Open Lemmatizer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/lemmatizer.png" command="_F_FvMJzAEeSiiMU2026qjA">
+      <parameters xmi:id="_WQ5w0JzAEeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.egy.part.lemmatizer"/>
+    </elements>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_Y0H7gJzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openHieroglyphTypeWriter" label="Open Hieroglyph Type Writer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/hieroglyphetw.png" command="_F_FvMJzAEeSiiMU2026qjA">
+      <parameters xmi:id="_ck_lEJzAEeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.egy.part.hierotw"/>
     </elements>
   </fragments>
 </fragment:ModelFragments>

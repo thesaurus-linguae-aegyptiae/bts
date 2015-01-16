@@ -1,6 +1,7 @@
  
 package org.bbaw.bts.ui.corpus.parts;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -61,6 +62,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Link;
 import org.eclipse.swt.widgets.ExpandBar;
@@ -426,12 +428,13 @@ public class AnnotationsPart implements EventHandler {
 			});
 			relatingObjectsQueryIDMap.clear();
 			List<BTSObject> relatingObjects = null;
-			
+			List<BTSObject> filteredRelatingObjects = null;
 			
 
 			try {
 				relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection, null);
-				for (BTSObject o : relatingObjects)
+				filteredRelatingObjects = filterRelatingObjects(relatingObjects);
+				for (BTSObject o : filteredRelatingObjects)
 				{
 					if (o instanceof BTSCorpusObject)
 					{
@@ -443,8 +446,8 @@ public class AnnotationsPart implements EventHandler {
 				e.printStackTrace();
 			}
 			queryId = "relations.objectId-" + ((BTSObject) selection).get_id();
-			relatingObjectsQueryIDMap.put(queryId, relatingObjects);
-			eventReceivedRelatingObjectsLoadedEvents(relatingObjects);
+			relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
+			eventReceivedRelatingObjectsLoadedEvents(filteredRelatingObjects);
 		}
 		else if (selection instanceof BTSTextSelectionEvent)
 		{
@@ -453,7 +456,35 @@ public class AnnotationsPart implements EventHandler {
 		}
 	}
 	
-//	@Inject
+private List<BTSObject> filterRelatingObjects(
+			List<BTSObject> relatingObjects) {
+		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size() / 2);
+		for (BTSObject o : relatingObjects)
+		{
+			if (o instanceof BTSCorpusObject)
+			{
+				if (o instanceof BTSText)
+				{
+					// TODO hardcoded. make configurable which types are to be filtered in
+					if (o.getType() != null && (o.getType().equalsIgnoreCase("glosse")
+							|| o.getType().equalsIgnoreCase("subtext")))
+					{
+						filteredRelatingObjects.add(o);
+					}
+				}
+				else if (o instanceof BTSAnnotation)
+				{
+					filteredRelatingObjects.add(o);
+				}
+			}
+			else
+			{
+				filteredRelatingObjects.add(o);
+			}
+		}
+		return filteredRelatingObjects;
+	}
+	//	@Inject
 //	public void setSelection(
 //		@Optional	@Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
 //		if (selection != null)
@@ -520,7 +551,7 @@ public class AnnotationsPart implements EventHandler {
 			if (group != null){
 				sync.asyncExec(new Runnable() {
 					public void run() {
-						updateUIGroup(group, (BTSObject) notification.getObject());
+						updateUIGroup(group, (BTSObject) notification.getObject(), notification);
 					}
 				});
 				
@@ -528,8 +559,21 @@ public class AnnotationsPart implements EventHandler {
 		}
 		
 	}
-	private void updateUIGroup(RelatedObjectGroup group, BTSObject object) {
-		// TODO Auto-generated method stub
+	private void updateUIGroup(RelatedObjectGroup group, BTSObject object, BTSModelUpdateNotification notification) {
+		// remove
+		if (BTSConstants.OBJECT_STATE_TERMINATED.equals(object.getState()))
+		{
+			group.dispose();
+			objectWidgetMap.remove(object);
+			Rectangle r = scrollComposite.getClientArea();
+			composite.layout();
+			scrollComposite.setMinSize(composite.computeSize(r.width,
+					SWT.DEFAULT));
+		}
+		else // update
+		{
+			
+		}
 		
 	}
 	private void addObjectToViewerList(BTSObject object) {
@@ -540,9 +584,21 @@ public class AnnotationsPart implements EventHandler {
 		scrollComposite.setMinSize(composite.computeSize(r.width,
 				SWT.DEFAULT));
 	}
+	
+	
 	@Persist
 	public void save()
 	{
 		
+	}
+	
+	public BTSObject[] getSelectedObjects()
+	{
+		List<BTSObject> objects = new ArrayList<BTSObject>(internalSelectedGroup.size());
+		for (RelatedObjectGroup rog : internalSelectedGroup)
+		{
+			objects.add(rog.getObject());
+		}
+		return objects.toArray(new BTSObject[objects.size()]);
 	}
 }

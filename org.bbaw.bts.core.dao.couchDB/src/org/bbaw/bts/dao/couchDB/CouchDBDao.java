@@ -707,9 +707,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 			// filter object state active or terminated
 			if (BTSConstants.OBJECT_STATE_ACTIVE.equals(objectState)) {
-				// .setPostFilter(
-				// FilterBuilders.termFilter("state",
-				// BTSConstants.OBJECT_STATE_ACTIVE))
+				 srq.setPostFilter(
+				 FilterBuilders.termFilter("state",
+				 BTSConstants.OBJECT_STATE_ACTIVE));
 			} else if (BTSConstants.OBJECT_STATE_TERMINATED.equals(objectState)) {
 				srq.setPostFilter(FilterBuilders.termFilter("state",
 						BTSConstants.OBJECT_STATE_TERMINATED));
@@ -755,7 +755,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				.actionGet();
 		List<E> result = loadResultFromSearchResponse(response, indexName);
 		
-		if (registerQuery && !result.isEmpty()) {
+		if (registerQuery) {
 			registerQueryWithPercolator(query, indexName, indexType);
 		}
 

@@ -279,7 +279,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				public void widgetSelected(SelectionEvent e) {
 					int oldSelection = tabSelection;
 					tabSelection = tabFolder.getSelectionIndex();
-					if (tabSelection == oldSelection || text == null) {
+					if (tabSelection == oldSelection) {
 						return;
 					} else {
 						// update model from old selection editor
@@ -723,45 +723,47 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	
 	private void processLemmaAnnotions(
 			final HashMap<String, List<Object>> localLemmaAnnotationMap) {
-		
-		processLemmaAnnotionsJob = new Job("Process Lemma Annotation") {
-			
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				for (String lemmaId : localLemmaAnnotationMap.keySet())
-				{
-					if (monitor.isCanceled()) return Status.CANCEL_STATUS;
-					
-					List<Object> list = localLemmaAnnotationMap.get(lemmaId);
-					if (list != null && !list.isEmpty())
-					{
-						BTSLemmaEntry lemma = null;
-						try {
-							lemma = textEditorController.findLemmaEntry(lemmaId, monitor);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						if (lemma != null)
-						{
-							for (Object annotation : list)
-							{
-								if (monitor.isCanceled()) return Status.CANCEL_STATUS;
-								
-								if (annotation instanceof BTSModelAnnotation)
-								{
-									((BTSModelAnnotation) annotation).setRelatingObject(lemma);
-								}
-							}
-						}
-					}
-				}
-				lemmaAnnotationMap = null;
-
-				return Status.OK_STATUS;
-			}
-		};
-		
-		processLemmaAnnotionsJob.schedule();		
+		// FIXME cache map with text object
+		// clear this cache on new selection
+		// create command and handler that allows to execute this processing on user demand!
+//		processLemmaAnnotionsJob = new Job("Process Lemma Annotation") {
+//			
+//			@Override
+//			protected IStatus run(IProgressMonitor monitor) {
+//				for (String lemmaId : localLemmaAnnotationMap.keySet())
+//				{
+//					if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+//					
+//					List<Object> list = localLemmaAnnotationMap.get(lemmaId);
+//					if (list != null && !list.isEmpty())
+//					{
+//						BTSLemmaEntry lemma = null;
+//						try {
+//							lemma = textEditorController.findLemmaEntry(lemmaId, monitor);
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
+//						if (lemma != null)
+//						{
+//							for (Object annotation : list)
+//							{
+//								if (monitor.isCanceled()) return Status.CANCEL_STATUS;
+//								
+//								if (annotation instanceof BTSModelAnnotation)
+//								{
+//									((BTSModelAnnotation) annotation).setRelatingObject(lemma);
+//								}
+//							}
+//						}
+//					}
+//				}
+//				lemmaAnnotationMap = null;
+//
+//				return Status.OK_STATUS;
+//			}
+//		};
+//		
+//		processLemmaAnnotionsJob.schedule();		
 
 	}
 
@@ -1178,6 +1180,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					purgeCache();
 					loadInput((BTSCorpusObject) selection);
 					part.setLabel(selection.getName());
+					makePartActive(true);
+					bringPartToFront(true);
 
 				} else {
 					purgeCache();
@@ -1186,6 +1190,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						part.setLabel("EgyTextEditor");
 					}
 					text = null;
+					makePartActive(false);
 				}
 			}
 			if ((selection instanceof BTSText)) {
@@ -1219,6 +1224,31 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			// funktioniert daher nicht zuverl�ssig
 			// }
 		}
+	}
+
+	private void makePartActive(boolean activate) {
+		embeddedEditor.getViewer().setEditable(activate);
+		embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
+		signTextEditor.setEnabled(activate);
+		jseshEditor.setEnabled(activate);
+		sentenceTranslate_Editor.setEnabled(activate);
+		tabFolder.setEnabled(activate);
+		if (activate)
+		{
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
+		}
+		else
+		{
+			embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+			signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+		}
+		
+	}
+
+	private void bringPartToFront(boolean b) {
+		partService.bringToTop(part);
+		
 	}
 
 	private CommandStackListener getCommandStackListener() {
@@ -1661,36 +1691,43 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				annotationModel.removeAnnotation(ma);
 			}
 		}
+		if (BTSConstants.OBJECT_STATE_TERMINATED.equals(object.getState()))
+		{
+			// remove, do nothing
+		}
+		else
+		{
 
-		// relObject ist neu
-		for (BTSRelation rel : object.getRelations()) {
-			if (rel.getObjectId() != null
-					&& rel.getObjectId().equals(text.get_id())) {
-				for (BTSInterTextReference ref : rel.getParts()) {
-					Position pos = null;
-					if (ref.getBeginId() != null
-							&& ref.getBeginId().equals(ref.getEndId())) {
-						BTSModelAnnotation ma1 = modelAnnotationMap.get(ref
-								.getBeginId());
-						pos = annotationModel.getPosition(ma1);
-					} else {
-						BTSModelAnnotation ma1 = modelAnnotationMap.get(ref
-								.getBeginId());
-						BTSModelAnnotation ma2 = modelAnnotationMap.get(ref
-								.getEndId());
-						pos = annotationModel.getPosition(ma1);
-						Position pos2 = annotationModel.getPosition(ma2);
-						pos.setLength((pos2.getOffset() - pos.getOffset())
-								+ pos2.getLength());
+			// relObject ist neu
+			for (BTSRelation rel : object.getRelations()) {
+				if (rel.getObjectId() != null
+						&& rel.getObjectId().equals(text.get_id())) {
+					for (BTSInterTextReference ref : rel.getParts()) {
+						Position pos = null;
+						if (ref.getBeginId() != null
+								&& ref.getBeginId().equals(ref.getEndId())) {
+							BTSModelAnnotation ma1 = modelAnnotationMap.get(ref
+									.getBeginId());
+							pos = annotationModel.getPosition(ma1);
+						} else {
+							BTSModelAnnotation ma1 = modelAnnotationMap.get(ref
+									.getBeginId());
+							BTSModelAnnotation ma2 = modelAnnotationMap.get(ref
+									.getEndId());
+							pos = annotationModel.getPosition(ma1);
+							Position pos2 = annotationModel.getPosition(ma2);
+							pos.setLength((pos2.getOffset() - pos.getOffset())
+									+ pos2.getLength());
+						}
+						Issue issue;
+						issue = new Issue.IssueImpl();
+						Annotation annotation = makeAnnotation(object, issue, ref);
+						if (annotation != null && pos != null) {
+							// add 1 for sentence sign length
+							annotationModel.addAnnotation(annotation, new Position(pos.getOffset() + 1, pos.getLength()));
+						}
+						// }
 					}
-					Issue issue;
-					issue = new Issue.IssueImpl();
-					Annotation annotation = makeAnnotation(object, issue, ref);
-					if (annotation != null && pos != null) {
-						// add 1 for sentence sign length
-						annotationModel.addAnnotation(annotation, new Position(pos.getOffset() + 1, pos.getLength()));
-					}
-					// }
 				}
 			}
 		}
