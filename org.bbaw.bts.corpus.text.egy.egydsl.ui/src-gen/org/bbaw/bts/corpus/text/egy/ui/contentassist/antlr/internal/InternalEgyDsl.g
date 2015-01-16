@@ -2006,6 +2006,12 @@ rule__NoDeletion__Alternatives
 { after(grammarAccess.getNoDeletionAccess().getInterfixParserRuleCall_3()); }
 )
 
+    |(
+{ before(grammarAccess.getNoDeletionAccess().getDisputableReadingParserRuleCall_4()); }
+	ruleDisputableReading
+{ after(grammarAccess.getNoDeletionAccess().getDisputableReadingParserRuleCall_4()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2032,6 +2038,12 @@ rule__NoExpandedColumn__Alternatives
 { before(grammarAccess.getNoExpandedColumnAccess().getInterfixParserRuleCall_2()); }
 	ruleInterfix
 { after(grammarAccess.getNoExpandedColumnAccess().getInterfixParserRuleCall_2()); }
+)
+
+    |(
+{ before(grammarAccess.getNoExpandedColumnAccess().getDisputableReadingParserRuleCall_3()); }
+	ruleDisputableReading
+{ after(grammarAccess.getNoExpandedColumnAccess().getDisputableReadingParserRuleCall_3()); }
 )
 
 ;
@@ -2062,6 +2074,12 @@ rule__NoRasur__Alternatives
 { after(grammarAccess.getNoRasurAccess().getInterfixParserRuleCall_2()); }
 )
 
+    |(
+{ before(grammarAccess.getNoRasurAccess().getDisputableReadingParserRuleCall_3()); }
+	ruleDisputableReading
+{ after(grammarAccess.getNoRasurAccess().getDisputableReadingParserRuleCall_3()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2090,6 +2108,12 @@ rule__NoAncientExpanded__Alternatives
 { after(grammarAccess.getNoAncientExpandedAccess().getInterfixParserRuleCall_2()); }
 )
 
+    |(
+{ before(grammarAccess.getNoAncientExpandedAccess().getDisputableReadingParserRuleCall_3()); }
+	ruleDisputableReading
+{ after(grammarAccess.getNoAncientExpandedAccess().getDisputableReadingParserRuleCall_3()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2116,6 +2140,18 @@ rule__NoRestorationOverRasur__Alternatives
 { before(grammarAccess.getNoRestorationOverRasurAccess().getInterfixParserRuleCall_2()); }
 	ruleInterfix
 { after(grammarAccess.getNoRestorationOverRasurAccess().getInterfixParserRuleCall_2()); }
+)
+
+    |(
+{ before(grammarAccess.getNoRestorationOverRasurAccess().getDisputableReadingParserRuleCall_3()); }
+	ruleDisputableReading
+{ after(grammarAccess.getNoRestorationOverRasurAccess().getDisputableReadingParserRuleCall_3()); }
+)
+
+    |(
+{ before(grammarAccess.getNoRestorationOverRasurAccess().getCartoucheParserRuleCall_4()); }
+	ruleCartouche
+{ after(grammarAccess.getNoRestorationOverRasurAccess().getCartoucheParserRuleCall_4()); }
 )
 
 ;

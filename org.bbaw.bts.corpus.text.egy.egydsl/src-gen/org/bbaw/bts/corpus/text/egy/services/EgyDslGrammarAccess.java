@@ -1040,12 +1040,13 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cPartialDestructionParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cExpandedParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cInterfixParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cDisputableReadingParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//NoDeletion:
-		//	Chars | PartialDestruction | Expanded | Interfix;
+		//	Chars | PartialDestruction | Expanded | Interfix | DisputableReading;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | PartialDestruction | Expanded | Interfix
+		//Chars | PartialDestruction | Expanded | Interfix | DisputableReading
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1059,6 +1060,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Interfix
 		public RuleCall getInterfixParserRuleCall_3() { return cInterfixParserRuleCall_3; }
+
+		//DisputableReading
+		public RuleCall getDisputableReadingParserRuleCall_4() { return cDisputableReadingParserRuleCall_4; }
 	}
 
 	public class ExpandedColumnElements extends AbstractParserRuleElementFinder {
@@ -1099,12 +1103,13 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCharsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//NoExpandedColumn:
-		//	Chars | Expanded | Interfix;
+		//	Chars | Expanded | Interfix | DisputableReading;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix
+		//Chars | Expanded | Interfix | DisputableReading
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1115,6 +1120,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Interfix
 		public RuleCall getInterfixParserRuleCall_2() { return cInterfixParserRuleCall_2; }
+
+		//DisputableReading
+		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
 	}
 
 	public class RasurElements extends AbstractParserRuleElementFinder {
@@ -1155,12 +1163,13 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCharsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//NoRasur:
-		//	Chars | Expanded | Interfix;
+		//	Chars | Expanded | Interfix | DisputableReading;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix
+		//Chars | Expanded | Interfix | DisputableReading
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1171,6 +1180,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Interfix
 		public RuleCall getInterfixParserRuleCall_2() { return cInterfixParserRuleCall_2; }
+
+		//DisputableReading
+		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
 	}
 
 	public class AncientExpandedElements extends AbstractParserRuleElementFinder {
@@ -1211,12 +1223,13 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCharsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		
 		//NoAncientExpanded:
-		//	Chars | Expanded | Interfix;
+		//	Chars | Expanded | Interfix | DisputableReading;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix
+		//Chars | Expanded | Interfix | DisputableReading
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1227,6 +1240,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Interfix
 		public RuleCall getInterfixParserRuleCall_2() { return cInterfixParserRuleCall_2; }
+
+		//DisputableReading
+		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
 	}
 
 	public class RestorationOverRasurElements extends AbstractParserRuleElementFinder {
@@ -1267,12 +1283,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCharsParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cCartoucheParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//NoRestorationOverRasur:
-		//	Chars | Expanded | Interfix;
+		//	Chars | Expanded | Interfix | DisputableReading | Cartouche;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix
+		//Chars | Expanded | Interfix | DisputableReading | Cartouche
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1283,6 +1301,12 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Interfix
 		public RuleCall getInterfixParserRuleCall_2() { return cInterfixParserRuleCall_2; }
+
+		//DisputableReading
+		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
+
+		//Cartouche
+		public RuleCall getCartoucheParserRuleCall_4() { return cCartoucheParserRuleCall_4; }
 	}
 
 	public class PartialDestructionElements extends AbstractParserRuleElementFinder {
@@ -2044,7 +2068,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoDeletion:
-	//	Chars | PartialDestruction | Expanded | Interfix;
+	//	Chars | PartialDestruction | Expanded | Interfix | DisputableReading;
 	public NoDeletionElements getNoDeletionAccess() {
 		return (pNoDeletion != null) ? pNoDeletion : (pNoDeletion = new NoDeletionElements());
 	}
@@ -2064,7 +2088,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoExpandedColumn:
-	//	Chars | Expanded | Interfix;
+	//	Chars | Expanded | Interfix | DisputableReading;
 	public NoExpandedColumnElements getNoExpandedColumnAccess() {
 		return (pNoExpandedColumn != null) ? pNoExpandedColumn : (pNoExpandedColumn = new NoExpandedColumnElements());
 	}
@@ -2084,7 +2108,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoRasur:
-	//	Chars | Expanded | Interfix;
+	//	Chars | Expanded | Interfix | DisputableReading;
 	public NoRasurElements getNoRasurAccess() {
 		return (pNoRasur != null) ? pNoRasur : (pNoRasur = new NoRasurElements());
 	}
@@ -2104,7 +2128,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoAncientExpanded:
-	//	Chars | Expanded | Interfix;
+	//	Chars | Expanded | Interfix | DisputableReading;
 	public NoAncientExpandedElements getNoAncientExpandedAccess() {
 		return (pNoAncientExpanded != null) ? pNoAncientExpanded : (pNoAncientExpanded = new NoAncientExpandedElements());
 	}
@@ -2124,7 +2148,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoRestorationOverRasur:
-	//	Chars | Expanded | Interfix;
+	//	Chars | Expanded | Interfix | DisputableReading | Cartouche;
 	public NoRestorationOverRasurElements getNoRestorationOverRasurAccess() {
 		return (pNoRestorationOverRasur != null) ? pNoRestorationOverRasur : (pNoRestorationOverRasur = new NoRestorationOverRasurElements());
 	}

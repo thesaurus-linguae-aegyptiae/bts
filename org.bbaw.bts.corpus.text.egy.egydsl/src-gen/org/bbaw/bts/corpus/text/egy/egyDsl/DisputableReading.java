@@ -20,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface DisputableReading extends Brackets, NoCartouche, NoExpanded, NoEmendation, NoLacuna, NoPartialDestruction
+public interface DisputableReading extends Brackets, NoCartouche, NoExpanded, NoEmendation, NoLacuna, NoDeletion, NoExpandedColumn, NoRasur, NoAncientExpanded, NoRestorationOverRasur, NoPartialDestruction
 {
   /**
    * Returns the value of the '<em><b>WChar</b></em>' containment reference list.

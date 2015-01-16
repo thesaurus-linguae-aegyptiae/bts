@@ -54,7 +54,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoCartouche" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Cartouche" eSuperTypes="#//Brackets"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cartouche" eSuperTypes="#//Brackets #//NoRestorationOverRasur"/>
   <eClassifiers xsi:type="ecore:EClass" name="NoCartouche"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expanded" eSuperTypes="#//Brackets #//Cartouche #//NoCartouche #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
@@ -66,7 +66,7 @@
         eType="#//NoEmendation" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoEmendation"/>
-  <eClassifiers xsi:type="ecore:EClass" name="DisputableReading" eSuperTypes="#//Brackets #//NoCartouche #//NoExpanded #//NoEmendation #//NoLacuna #//NoPartialDestruction">
+  <eClassifiers xsi:type="ecore:EClass" name="DisputableReading" eSuperTypes="#//Brackets #//NoCartouche #//NoExpanded #//NoEmendation #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoDisputableReading" containment="true"/>
   </eClassifiers>

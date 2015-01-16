@@ -1453,6 +1453,7 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     ovalEClass.getESuperTypes().add(this.getBrackets());
     serechEClass.getESuperTypes().add(this.getBrackets());
     cartoucheEClass.getESuperTypes().add(this.getBrackets());
+    cartoucheEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
     expandedEClass.getESuperTypes().add(this.getBrackets());
     expandedEClass.getESuperTypes().add(this.getCartouche());
     expandedEClass.getESuperTypes().add(this.getNoCartouche());
@@ -1473,6 +1474,11 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     disputableReadingEClass.getESuperTypes().add(this.getNoExpanded());
     disputableReadingEClass.getESuperTypes().add(this.getNoEmendation());
     disputableReadingEClass.getESuperTypes().add(this.getNoLacuna());
+    disputableReadingEClass.getESuperTypes().add(this.getNoDeletion());
+    disputableReadingEClass.getESuperTypes().add(this.getNoExpandedColumn());
+    disputableReadingEClass.getESuperTypes().add(this.getNoRasur());
+    disputableReadingEClass.getESuperTypes().add(this.getNoAncientExpanded());
+    disputableReadingEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
     disputableReadingEClass.getESuperTypes().add(this.getNoPartialDestruction());
     lacunaEClass.getESuperTypes().add(this.getBrackets());
     lacunaEClass.getESuperTypes().add(this.getNoCartouche());

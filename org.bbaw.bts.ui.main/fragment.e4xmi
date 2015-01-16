@@ -48,6 +48,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_xOH6gGmiEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handler.openESGui" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenESGui" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_Rr6bUGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.handler.openDBManagerDialogHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenDBManagerDialog" command="_L6KfIGvvEeSg5OVDz3RNmQ"/>
     <elements xsi:type="commands:Handler" xmi:id="_m9mBYJvgEeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.handler.openChangePasswordDialog" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenChangePasswordDialogHandler" command="_aoLj4JvgEeSIPd7PzoRw-w"/>
+    <elements xsi:type="commands:Handler" xmi:id="_q-7RUJy7EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.handler.openPart" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenPartHandler" command="_eRDQgJy7EeSiiMU2026qjA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -91,11 +92,15 @@
     <elements xsi:type="commands:Command" xmi:id="_aoLj4JvgEeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.command.openChangePasswordDialog" commandName="openChangePasswordDialog" category="_CXsjwAWjEeOJR9LhfOAE5w">
       <parameters xmi:id="_d_nZwJvgEeSIPd7PzoRw-w" elementId="userId" name="userId"/>
     </elements>
+    <elements xsi:type="commands:Command" xmi:id="_eRDQgJy7EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.command.openPart" commandName="Open Part" category="_jAR_wJy7EeSiiMU2026qjA">
+      <parameters xmi:id="_ncK8QJy7EeSiiMU2026qjA" elementId="partId" name="partId"/>
+    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
     <elements xsi:type="commands:Category" xmi:id="_CXsjwAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.category.edit" name="Edit"/>
     <elements xsi:type="commands:Category" xmi:id="__zwJgGcMEeOBmPSxTUuwxg" elementId="org.eclipse.ui.category.file" name="File"/>
+    <elements xsi:type="commands:Category" xmi:id="_jAR_wJy7EeSiiMU2026qjA" elementId="org.eclipse.ui.category.window" name="Window"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_lWcloAWjEeOJR9LhfOAE5w" featurename="children" parentElementId="org.eclipse.ui.preferences">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-edit.png" command="_EXssoAWjEeOJR9LhfOAE5w"/>
