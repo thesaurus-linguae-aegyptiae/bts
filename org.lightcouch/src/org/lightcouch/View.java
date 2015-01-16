@@ -228,10 +228,25 @@ public class View
 				ViewResult<K, V, T>.Rows row = vr.new Rows();
 				row.setId(JsonToObject(gson, e, "id", String.class));
 				row.setKey(JsonToObject(gson, e, "key", classOfK));
-				row.setValue(JsonToObject(gson, e, "value", classOfV));
-				if (Boolean.TRUE.equals(this.includeDocs))
+				
+				// cplutte added, allow String.class as classparam to return objects as jsonString
+				if (classOfT.isAssignableFrom(String.class))
 				{
-					row.setDoc(JsonToObject(gson, e, "doc", classOfT));
+					JsonObject va = e.getAsJsonObject().getAsJsonObject("value");
+					row.setValue((V) va.toString());
+					if (Boolean.TRUE.equals(this.includeDocs))
+					{
+						va = e.getAsJsonObject().getAsJsonObject("doc");
+						row.setDoc((T) va.toString());
+					}
+				}
+				else
+				{
+					row.setValue(JsonToObject(gson, e, "value", classOfV));
+					if (Boolean.TRUE.equals(this.includeDocs))
+					{
+						row.setDoc(JsonToObject(gson, e, "doc", classOfT));
+					}
 				}
 				vr.getRows().add(row);
 			}

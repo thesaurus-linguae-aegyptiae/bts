@@ -69,6 +69,7 @@ import org.elasticsearch.indices.IndexMissingException;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.NoDocumentException;
+import org.lightcouch.Page;
 import org.lightcouch.Replicator;
 import org.lightcouch.ReplicatorDocument;
 
@@ -89,6 +90,8 @@ public class CouchDBManager implements DBManager
 	private static final int RIVER_READ_TIMEOUT = 15;
 	private static final String DB_ARCHIVE_NAME = "CouchDB";
 	private static final String DB_RUNTIME_PROCESS = "db_runtime_process";
+	private static final int NOTIFICATION_DELAY = 50;
+	private static final int DB_DOC_STEPPING = 100;
 
 	@Inject
 	@Preference(value = "local_elasticsearch_url", nodePath = "org.bbaw.bts.app")
@@ -670,6 +673,20 @@ public class CouchDBManager implements DBManager
 			     }
 			 }
 			 
+			 // be more tolerant with differences in update sequences with notification collection
+			 if (DaoConstants.NOTIFICATION.equals(collection))
+			 {
+				 if (indexUpdateSeq + NOTIFICATION_DELAY < dbUpdateSeq)
+				 {
+					return false;
+				 }
+				 else
+				{
+					 return true;
+				}
+			 }
+			 
+			 // all other collections
 			 if (indexUpdateSeq < dbUpdateSeq)
 			 {
 				return false;
@@ -760,31 +777,57 @@ public class CouchDBManager implements DBManager
 			int indexUpdateSeq) throws IOException {
 		String json = "{\"couchdb\":{\"last_seq\":\""+ new Integer(indexUpdateSeq).toString() + "\"}}";
 		esClient2.index(Requests.indexRequest("_river").type(collection).id("_seq").source(json)).actionGet();
-//		IndexRequest ir = new IndexRequest("_river", collection,  "_seq")
-//         .source(jsonBuilder().startObject().startObject("couchdb").field("last_seq", new Integer(indexUpdateSeq).toString()).endObject().endObject());
 	}
 
-	private boolean indexAllDocsInCollection(String collection, BulkProcessor bulkProcessor, Client esClient,
+	private boolean indexAllDocsInCollection(String collection,
+			BulkProcessor bulkProcessor, Client esClient,
 			CouchDbClient dbClient, int dbUpdateSeq, IProgressMonitor monitor) {
-		int indexSeq = 0;
-		List<String> allDocs = dbClient.view("_all_docs")
-				.includeDocs(true).query();
-		if (monitor != null)
-		{
-			if (monitor.isCanceled()) return false;
-			monitor.beginTask("Indexing " + collection + ", Number of docs " + allDocs.size(), allDocs.size());
+		long size = dbClient.context().info().getDocCount();
+		if (monitor != null) {
+			if (monitor.isCanceled())
+				return false;
+			monitor.beginTask("Indexing " + collection + ", Number of docs "
+					+ size, new Long(size).intValue());
 		}
-		for(String doc : allDocs)
-		{
+		
+		// load db docs via pageQuery to avoid memeory overflows!
+		Page<String> docsPage = dbClient.view("_all_docs").includeDocs(true)
+				.queryPage(DB_DOC_STEPPING, null, String.class);
+		for (String doc : docsPage.getResultList()) {
 			try {
-				CouchDBIndexHelper.indexDoc(collection, bulkProcessor, esClient, doc, monitor, logger);
+				CouchDBIndexHelper.indexDoc(collection, bulkProcessor,
+						esClient, doc.toString(), monitor, logger);
 			} catch (Exception e) {
 				e.printStackTrace();
 				return false;
 			}
-			if (monitor != null)
-			{
-				if (monitor.isCanceled()) return false;
+			if (monitor != null) {
+				monitor.worked(1);
+				if (monitor.isCanceled())
+					return false;
+			}
+		}
+		
+		// if >1 page, iterate over pages
+		while (docsPage.isHasNext()) {
+			docsPage = dbClient
+					.view("_all_docs")
+					.includeDocs(true)
+					.queryPage(DB_DOC_STEPPING, docsPage.getNextParam(),
+							String.class);
+			for (String doc : docsPage.getResultList()) {
+				try {
+					CouchDBIndexHelper.indexDoc(collection, bulkProcessor,
+							esClient, doc.toString(), monitor, logger);
+				} catch (Exception e) {
+					e.printStackTrace();
+					return false;
+				}
+				if (monitor != null) {
+					monitor.worked(1);
+					if (monitor.isCanceled())
+						return false;
+				}
 			}
 		}
 		return true;
@@ -1796,14 +1839,28 @@ public class CouchDBManager implements DBManager
 		}catch (Exception e) {
 			logger.error(e, "Error loading last_seq value from _river of index " + db);
 		}
-		
+		int dbSeq = 0;
+		try {
+			dbSeq = new Integer(info.getDbUpdateSeq());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		int indexSeq = 0;
+		try {
+			indexSeq = new Integer(info.getIndexUpdateSeq());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// berechne index status
 		if (cachedInfo != null 
 				&& cachedInfo.getIndexDocCount() < info.getIndexDocCount())
 		{
 			info.setIndexStatus("INDEXING...");
 		}
-		else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20)
+		else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20
+				|| ((DaoConstants.NOTIFICATION.equals(info.getDbCollectionName())
+						&& indexSeq + NOTIFICATION_DELAY < dbSeq) 
+						|| indexSeq < dbSeq))
 		{
 			info.setIndexStatus("ERROR");
 		}

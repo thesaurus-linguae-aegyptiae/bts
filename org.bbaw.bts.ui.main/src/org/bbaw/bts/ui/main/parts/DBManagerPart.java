@@ -313,7 +313,7 @@ public class DBManagerPart {
 		if (info != null && info.getDbCollectionName() != null)
 		{
 			MessageDialog dialog = new MessageDialog(parentShell, "Database Collection Reindexing", null,
-				    "Do you want to delete an recreate the index of this database collection? Collection: "
+				    "Do you want to delete and recreate the index of this database collection? Collection: "
 			+ info.getDbCollectionName()
 			+ "\n\nReindexing may take a while.", MessageDialog.WARNING, new String[] { "Reindex",
 				  "Cancel"}, 0);
