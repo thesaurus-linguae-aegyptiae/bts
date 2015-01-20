@@ -110,6 +110,7 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -2035,7 +2036,7 @@ public class UserManagementPart
 		}
 	}
 
-	private Composite loadUserEditComposite(BTSUser user)
+	private Composite loadUserEditComposite(final BTSUser user)
 	{
 		composite_right.dispose();
 		composite_right = null;
@@ -2130,9 +2131,30 @@ public class UserManagementPart
 		Label lblPassword = new Label(grpLogin, SWT.NONE);
 		lblPassword.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
 		lblPassword.setText("Password");
+		
+		// change password here
+		// button
+		
+		Button changePasswordButton = new Button(grpLogin, SWT.PUSH);
+		changePasswordButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		changePasswordButton.setText("Change Password");
+		changePasswordButton.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				final EHandlerService handlerService = context.get(EHandlerService.class);
 
-		textPassword_User = new Text(grpLogin, SWT.BORDER);
-		textPassword_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+				ECommandService commandService = context.get(ECommandService.class);
+				// Activate Handler
+				Map map = new HashMap(1);
+				map.put("userId", user.get_id());
+				org.eclipse.core.commands.Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_CHANGE_PASSWORD);
+				final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
+				handlerService.executeHandler(command);
+				
+			}
+		});
+		changePasswordButton.setEnabled(permissionController.authenticatedUserIsDBAdmin(false));
 
 		btnDBAdmin_User = new Button(grpLogin, SWT.CHECK);
 		btnDBAdmin_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));

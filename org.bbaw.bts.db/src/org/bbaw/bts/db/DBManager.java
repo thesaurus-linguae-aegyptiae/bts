@@ -29,6 +29,7 @@
  */
 package org.bbaw.bts.db;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -62,10 +63,11 @@ public interface DBManager
 	 * Prepare database indexing .
 	 *
 	 * @param project the project
+	 * @param monitor 
 	 * @return true, if successful
 	 * @throws URISyntaxException the URI syntax exception
 	 */
-	boolean prepareDBIndexing(BTSProject project) throws URISyntaxException;
+	boolean checkDBIndexing(BTSProject project, IProgressMonitor monitor) throws URISyntaxException;
 
 	/**
 	 * Prepare database for startup.
@@ -191,7 +193,12 @@ public interface DBManager
 	String getLocalESGuiURL();
 
 	List<DBCollectionStatusInformation> getDBCollectionStatusInformations(IProgressMonitor monitor);
+	
+	DBCollectionStatusInformation getDBCollectionStatusInformations(String dbCollection, IProgressMonitor monitor);
 
 	boolean reindex(String dbCollectionName, IProgressMonitor monitor);
+
+	boolean changeAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException;
+
 
 }

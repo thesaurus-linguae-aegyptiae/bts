@@ -11,4 +11,7 @@ public interface DBManagerPartController {
 
 	boolean reIndex(String dbCollectionName, IProgressMonitor monitor);
 
+	DBCollectionStatusInformation getDBCollectionStatusInformation(
+			String dbCollectionName, IProgressMonitor monitor);
+
 }

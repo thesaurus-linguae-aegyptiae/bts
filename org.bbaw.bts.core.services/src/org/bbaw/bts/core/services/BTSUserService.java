@@ -98,5 +98,9 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 
 	boolean authenticatedUserIsDBAdmin(String userName, String passWord);
 
+	boolean isValidAuthentication(String userName, String passWord);
+
+	boolean checkAndChangeDBAdminPassword(String userName, String newPassword);
+
 
 }

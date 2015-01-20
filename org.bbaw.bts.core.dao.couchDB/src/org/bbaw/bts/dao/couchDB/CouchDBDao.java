@@ -1106,6 +1106,25 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		{
 			return true; // authentication
 		}
+		catch (org.lightcouch.CouchDbException e) {
+			
+			// if authentication has changed and db connection pool is still based upon old authentication
+			// purge pool
+			connectionProvider.purgeDBConnectionPool();
+			client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
+					passWord);
+			try
+			{
+				Object o = client.find("test");
+				if (o != null)
+				{
+					return true;
+				}
+			} catch (NoDocumentException ee)
+			{
+				return true; // authentication
+			}
+		}
 
 		return false;
 

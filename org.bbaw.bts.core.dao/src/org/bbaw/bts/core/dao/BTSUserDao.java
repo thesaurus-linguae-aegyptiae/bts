@@ -70,4 +70,7 @@ public interface BTSUserDao extends GenericDao<BTSUser, String>
 	 */
 	boolean removeDatabaseUser(BTSUser user);
 
+	boolean changeAuthentication(String userName, String password,
+			String newPassword);
+
 }

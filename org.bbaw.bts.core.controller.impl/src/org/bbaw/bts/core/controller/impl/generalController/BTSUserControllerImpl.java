@@ -141,4 +141,16 @@ public class BTSUserControllerImpl implements BTSUserController {
 	public boolean authenticatedUserIsDBAdmin(String userName, String passWord) {
 		return userService.authenticatedUserIsDBAdmin(userName, passWord);
 	}
+
+	@Override
+	public boolean isValidAuthentication(String userName, String passWord) {
+		return userService.isValidAuthentication(userName, passWord);
+	}
+
+	@Override
+	public boolean checkAndChangeDBAdminPassword(String userName,
+			String newPassword) {
+		return userService.checkAndChangeDBAdminPassword(userName, newPassword);
+	}
+
 }

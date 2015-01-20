@@ -34,6 +34,8 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 
 	private static final String _USERS = "_users";
 	private static final String COUCHDB_USERS_PREFIX = "org.couchdb.user:";
+	
+	
 
 	@Override
 	public boolean removeBTSUser(BTSUser btsUser, String path)
@@ -236,8 +238,16 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 		{
 			jso = new JsonObject();
 			// type
-			jso.addProperty("password", entity.getPassword());
 		}
+		if (entity.getPassword() != null && entity.getPassword().length() > 0)
+		{
+			jso.addProperty("password", entity.getPassword());
+			jso.remove("password_scheme");
+			jso.remove("derived_key");
+			jso.remove("salt");
+			jso.remove("iterations");
+		}
+
 		// id
 		jso.addProperty("_id", COUCHDB_USERS_PREFIX + entity.getUserName());
 		
@@ -304,6 +314,10 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 				return false;
 			}
 		}
+		if (entity.getPassword() != null && entity.getPassword().length() > 0)
+		{
+			return false;
+		}
 		
 		// all checks survived
 		return true;
@@ -320,5 +334,12 @@ public class BTSUserDaoImpl extends CouchDBDao<BTSUser, String> implements BTSUs
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public boolean changeAuthentication(String userName, String password,
+			String newPassword) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

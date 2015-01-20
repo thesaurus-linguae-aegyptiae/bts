@@ -100,5 +100,7 @@ public interface DBConnectionProvider
 	<T> T getDBClient(Class<T> clazz, String localDBUrl,
 			String collectionName) throws MalformedURLException;
 
+	void purgeDBConnectionPool();
+
 
 }

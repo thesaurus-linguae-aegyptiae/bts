@@ -34,6 +34,7 @@ import org.elasticsearch.action.percolate.PercolateRequestBuilder;
 import org.elasticsearch.action.percolate.PercolateResponse;
 import org.elasticsearch.action.percolate.PercolateResponse.Match;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.indices.IndexMissingException;
 import org.lightcouch.Changes;
 import org.lightcouch.ChangesResult;
 import org.lightcouch.Response;
@@ -108,7 +109,12 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 			}
 			
 			JsonObject jso = feed.getDoc();
-			queryIds = findQueryIdsInternal(jso.toString(), docId, dbCollection);
+			try {
+				queryIds = findQueryIdsInternal(jso.toString(), docId, dbCollection);
+			} catch (ElasticsearchException e1) {
+//				e1.printStackTrace();
+				return;
+			}
 			if (queryIds != null && !queryIds.isEmpty() && object == null) {
 				try {
 					object = generalPurposeDao.find(docId, dbCollection);
@@ -183,8 +189,15 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 	@Override
 	public void runAndListenToUpdates(GeneralPurposeDao generalPurposeDao,
 			final String dbCollection) {
-		final CouchDbClient client = connectionProvider.getDBClient(
-				CouchDbClient.class, dbCollection);
+		CouchDbClient c = null;
+		try {
+			c = connectionProvider.getDBClient(
+					CouchDbClient.class, dbCollection);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		if (c == null) return;
+		final CouchDbClient client = c;
 		CouchDbInfo dbInfo = client.context().info();
 		since = dbInfo.getUpdateSeq();
 		// feed type continuous

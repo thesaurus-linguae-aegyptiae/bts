@@ -1,13 +1,16 @@
 package org.bbaw.bts.ui.main.dialogs;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.ui.main.parts.DBManagerPart;
 import org.bbaw.bts.ui.main.parts.UserManagementPart;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
@@ -28,6 +31,10 @@ public class DBManagerDialog extends TitleAreaDialog
 	private IEclipseContext context;
 	@Inject
 	private EPartService partService;
+	@Inject
+	@Optional
+	@Named("dbManagerMessage") 
+	private String message;
 	private DBManagerPart part;
 	private Button saveButton;
 
@@ -48,6 +55,10 @@ public class DBManagerDialog extends TitleAreaDialog
 			}
 		});
 		setTitle("Database Manager");
+		if (message != null)
+		{
+			setMessage(message, IMessageProvider.WARNING);
+		}
 
 	}
 

@@ -55,11 +55,13 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 				e.printStackTrace();
 			}
 		}
-		try {
-			dbManager.prepareDBIndexing(entity);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
+		
+		//FIXME teste ob db collections indiziert sind, sonst gibt Fehlermeldung
+//		try {
+//			dbManager.prepareDBIndexing(entity, null);
+//		} catch (URISyntaxException e) {
+//			e.printStackTrace();
+//		}
 		for (BTSProjectDBCollection coll : entity.getDbCollections())
 		{
 			try {

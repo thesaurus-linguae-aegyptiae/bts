@@ -8,12 +8,22 @@ import org.eclipse.e4.ui.workbench.IWorkbench;
 public class ExitApplicationHandler {
 	@Execute
 	  public void execute(IWorkbench workbench, DBManager dbManager) {
-		if (dbManager.optimizationRequired())
-		{
-			// ask user if optimize
-			dbManager.optimize();
+		try {
+			if (dbManager.optimizationRequired())
+			{
+				// ask user if optimize
+				dbManager.optimize();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	    dbManager.shutdown();
+	    try {
+			dbManager.shutdown();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    workbench.close();
 
 	  }
