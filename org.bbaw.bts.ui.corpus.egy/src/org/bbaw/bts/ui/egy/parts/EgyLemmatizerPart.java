@@ -137,7 +137,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private ComposedAdapterFactory factory = new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
 	private ISelectionChangedListener lemmaSelectionListener;
-	private Job loadLemmatajob;
 	private Text lemmaName_text;
 
 	@Inject
@@ -304,7 +303,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 						// editingDomain.getCommandStack().execute(command);
 						if (object instanceof BTSLemmaEntry) {
 							BTSLemmaEntry entry = (BTSLemmaEntry) object;
-							lemmaNavigatorController.checkAndFullyLoad(entry);
+							lemmaNavigatorController.checkAndFullyLoad(entry, true);
 							lemmaID_text.setText(entry.get_id());
 							lemmaName_text.setText(entry.getName());
 							loadTranslationProposals(entry);
@@ -339,7 +338,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			public void selectionChanged(SelectionChangedEvent event) {
 				StructuredSelection selection = (StructuredSelection) event
 						.getSelection();
-				System.out.println(event.getSelection());
+//				System.out.println(event.getSelection());
 				if (selection.getFirstElement() != null
 						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
 					TreeNodeWrapper tn = (TreeNodeWrapper) selection
@@ -348,7 +347,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 						BTSObject o = (BTSObject) tn.getObject();
 						if (o instanceof BTSLemmaEntry) {
 							BTSLemmaEntry entry = (BTSLemmaEntry) o;
-							lemmaNavigatorController.checkAndFullyLoad(entry);
+							lemmaNavigatorController.checkAndFullyLoad(entry, false);
 							lemmaID_text.setText(entry.get_id());
 							lemmaName_text.setText(entry.getName());
 							loadTranslationProposals(entry);
@@ -548,6 +547,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 					if (selection.getSelectedItems().get(0) instanceof BTSWord) {
 						setSelectionInteral((BTSWord) selection
 								.getSelectedItems().get(0));
+					} else if (currentWord != null)
+					{
+						saveWordData(currentWord);
+						currentWord = null;
+						clearProposals();
+						// FIXME clear gui
 					}
 				}
 			} else {
@@ -604,13 +609,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 				lemmaViewer.setInput(lemmaRootNode);
 			}
 		});
-		if (loadLemmatajob != null) {
-			loadLemmatajob.cancel();
-			// loadLemmatajob.getThread().
-		}
 
 		// fill lemmaViewer
-		loadLemmatajob = new Job("load input") {
+		Job job = new Job("load input") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				java.util.List<BTSLemmaEntry> entries = lemmatizerController
@@ -621,7 +622,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 				final java.util.List<TreeNodeWrapper> nodes = lemmaNavigatorController
 						.loadNodes(
 								entries.subList(0,
-										Math.min(entries.size(), 300)),
+										Math.min(entries.size(), 80)),
 								monitor, false);
 				sync.asyncExec(new Runnable() {
 					@Override
@@ -632,8 +633,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 				int counter = 0;
 				for (BTSLemmaEntry entry : entries) {
 					counter++;
-					lemmaNavigatorController.checkAndFullyLoad(entry);
-					if (counter > 150 || monitor.isCanceled())
+					try {
+						lemmaNavigatorController.checkAndFullyLoad(entry, false);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (counter > 40 || monitor.isCanceled())
 						break;
 
 				}
@@ -643,7 +648,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		};
 
 		// Start the Job
-		loadLemmatajob.schedule();
+		job.schedule();
 
 	}
 
@@ -729,14 +734,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	@Override
 	public void search(final BTSQueryRequest query, String queryName) {
-		if (loadLemmatajob != null) {
-			loadLemmatajob.cancel();
-			// loadLemmatajob.getThread().
-		}
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
 		// fill lemmaViewer
-		loadLemmatajob = new Job("load input") {
+		Job job = new Job("load input") {
 			// // in new job, search
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
@@ -772,7 +773,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		};
 
 		// Start the Job
-		loadLemmatajob.schedule();
+		job.schedule();
 
 	}
 }

@@ -1,13 +1,15 @@
 package org.bbaw.bts.ui.egy.textSign.support;
 
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
+import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.swt.graphics.Color;
 
 public class MarkerFigure extends ElementFigureImpl {
 
-	public static Color classColor = new Color(null, 215, 115, 206);
+	public static Color classColor = BTSUIConstants.COLOR_BACKGROUND_DISABLED;//new Color(null, 215, 115, 206);
 
 	public MarkerFigure(String name) {
 		ToolbarLayout layout = new ToolbarLayout();
@@ -18,5 +20,7 @@ public class MarkerFigure extends ElementFigureImpl {
 		org.eclipse.draw2d.Label label = new org.eclipse.draw2d.Label();
 		label.setText(name);
 		add(label);
+		super.setCornerDimensions(new Dimension(0, 0));
 	}
+	
 }

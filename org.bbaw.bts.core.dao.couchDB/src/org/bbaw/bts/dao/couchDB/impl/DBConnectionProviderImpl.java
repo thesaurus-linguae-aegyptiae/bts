@@ -132,6 +132,7 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 						+ " port: " + properties.getPort() 
 						+ "  host: " + properties.getHost() 
 						+ "  dbname: " + properties.getDbName() 
+						+ " path " + path
 						+ " username " + properties.getUsername()
 						+ " p not null: " + (properties.getPassword() != null));
 				e.printStackTrace();

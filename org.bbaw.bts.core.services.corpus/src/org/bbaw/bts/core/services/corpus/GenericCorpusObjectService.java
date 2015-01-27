@@ -16,5 +16,5 @@ extends GenericObjectService<E, K>{
 	
 	List<E> getOrphanEntries(Map map, List<BTSFilter> btsFilters, IProgressMonitor monitor);
 
-	boolean checkAndFullyLoad(BTSCorpusObject object);
+	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 }

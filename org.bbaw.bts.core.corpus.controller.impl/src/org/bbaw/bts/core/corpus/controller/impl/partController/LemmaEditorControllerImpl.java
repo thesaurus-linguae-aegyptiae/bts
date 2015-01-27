@@ -57,7 +57,7 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 			IAnnotationModel model, List<BTSObject> relatingObjects,
 			Map<String, List<BTSInterTextReference>> relatingObjectsMap,
 			Map<String, List<Object>> lemmaAnnotationMap) {
-		textEditorController.transformToDocument(textContent, doc, model, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
+		textEditorController.transformToDocument(textContent, doc, model, relatingObjects, relatingObjectsMap, lemmaAnnotationMap, null);
 		
 	}
 

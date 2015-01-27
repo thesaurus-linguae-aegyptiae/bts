@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.egy.textSign.support;
 
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
@@ -7,7 +8,7 @@ import org.eclipse.swt.graphics.Color;
 
 public class AmbivalenceEndFigure extends ElementFigureImpl {
 
-	public static Color classColor = new Color(null, 215, 15, 206);
+	public static Color classColor = BTSUIConstants.VIEW_FOREGROUND_DESELECTED_COLOR;//new Color(null, 215, 15, 206);
 
 	public AmbivalenceEndFigure(String name) {
 		ToolbarLayout layout = new ToolbarLayout();

@@ -136,20 +136,41 @@ public class TextModelHelper {
 			Class<E> clazz, Map<Position, List<Annotation>> annotationMap) {
 		List<Annotation> list =  null;
 		int offset = node.getOffset();
+		Position pos = null;
 		if (annotationMap != null && node != null)
 		{
+			pos = new Position(offset, node.getLength());
 			list = annotationMap
-				.get(new Position(offset, node
-						.getLength()));
-		}
-		if (list == null && offset > 0)
-		{
-			list = annotationMap
-					.get(new Position(offset -1, node
-							.getLength()));
+				.get(pos);
 		}
 		if (list == null)
 		{
+			if (node.getSemanticElement() instanceof Marker)
+			{
+				// cut away Marker beginnings and endings
+				list = annotationMap
+						.get(new Position(offset +1, node
+								.getLength() -1));
+			}
+			// look around if annotation before or after supposed position
+			else if (offset > 0)
+			list = annotationMap
+					.get(new Position(offset -1, node
+							.getLength()));
+			else
+			{
+				list = annotationMap
+						.get(new Position(offset +1, node
+								.getLength()));
+			}
+		}
+		if (list == null)
+		{
+			try {
+				System.out.println("no cached model found for node, node chars: " + node.getText() + "; pos offset " + pos.getOffset() + " len " + pos.getLength());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			return null;
 		}
 		for (Annotation an : list)
@@ -352,7 +373,7 @@ public class TextModelHelper {
 		BTSMarker modelMarker = null;
 		INode node = NodeModelUtils.getNode(si);
 		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSMarker.class, annotationMap);
-		System.out.println(ma);
+//		System.out.println(ma);
 		if (ma != null) {
 			modelMarker = (BTSMarker) ma.getModel();
 		}
@@ -446,8 +467,8 @@ public class TextModelHelper {
 		INode node = NodeModelUtils.getNode(word);
 		if (node != null)
 		{
-		System.out.println("Word " + node.getText() + " node offset "
-				+ node.getOffset() + " node length " + node.getLength());
+//		System.out.println("Word " + node.getText() + " node offset "
+//				+ node.getOffset() + " node length " + node.getLength());
 		}
 		BTSModelAnnotation ma =getModelAnnotationFromMap(node, BTSWord.class, annotationMap);
 		if (ma != null && ma.getModel() instanceof BTSWord) {
@@ -486,7 +507,31 @@ public class TextModelHelper {
 			Annotation an = (Annotation) it.next();
 			if (an instanceof BTSModelAnnotation) {
 				if (((BTSModelAnnotation) an).getModel() != null) {
-					Position pos = am.getPosition(an);
+					Position pos = null;
+					
+					// special treatment for sentences
+					if (((BTSModelAnnotation) an).getModel() instanceof BTSSenctence)
+					{
+						pos = am.getPosition(an);
+						int offset = pos.getOffset();
+						int len = pos.getLength();
+						if (pos.getOffset() == 1)
+						{
+							offset = 0;
+							len = len+1;
+						}
+						else
+						{
+							// old logic, superflous
+//							len = len-1;
+//							offset = pos.getOffset() + 1;
+						}
+						pos = new Position(offset, len);
+					}
+					else
+					{
+						pos = am.getPosition(an);
+					}
 					List<Annotation> list = annotationMap.get(pos);
 					if (list == null)
 					{

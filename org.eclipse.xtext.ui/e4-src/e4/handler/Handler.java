@@ -20,10 +20,6 @@ public class Handler {
 	@Execute
 	public void execute() {
 		
-		System.out.println("Hallo");
-		String prefix = null;
-		ITextViewer viewer = null;
-		int operationCode = 13;
 		TextViewerOperationAction action = null;
 		Bundle bundle = FrameworkUtil.getBundle(getClass());
 		BundleContext bundleContext = bundle.getBundleContext();

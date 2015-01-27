@@ -1,5 +1,6 @@
 package org.bbaw.bts.ui.egy.parts.egyTextEditor;
 
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.jface.text.source.CompositeRuler;
 import org.eclipse.jface.text.source.LineNumberRulerColumn;
 import org.eclipse.swt.graphics.Color;
@@ -21,7 +22,7 @@ public class EgyLineNumberRulerColumn extends LineNumberRulerColumn {
 	public Control createControl(CompositeRuler parentRuler,
 			Composite parentControl) {
 		Control control = super.createControl(parentRuler, parentControl);
-		setBackground(new Color(Display.getDefault(), new RGB(233, 233, 233)));
+		setBackground(BTSUIConstants.COLOR_RULER_COLUMN_BACKGROUND);
 		return control;
 	}
 

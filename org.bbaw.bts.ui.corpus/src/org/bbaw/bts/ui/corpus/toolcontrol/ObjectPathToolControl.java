@@ -60,7 +60,7 @@ public class ObjectPathToolControl {
 		((GridLayout) composite.getLayout()).marginWidth = 0;
 		((GridLayout) composite.getLayout()).marginHeight = 0;
 		Label l = new Label(composite, SWT.None);
-		l.setText("                                                                                                                             ");
+		l.setText("                                                                                                                                                                                                ");
 		l.setLayoutData(new GridData());
 		l.pack();
 		

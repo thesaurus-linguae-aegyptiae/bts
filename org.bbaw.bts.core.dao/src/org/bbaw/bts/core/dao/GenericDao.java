@@ -230,7 +230,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	 */
 	void fillResource(Resource resource, String objectAsString);
 	
-	E loadFully(E entity);
+	E loadFully(E entity, boolean checkForConflicts);
 
 	E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString);//E loadEntityFromString(String jo, String dbPath);
 	

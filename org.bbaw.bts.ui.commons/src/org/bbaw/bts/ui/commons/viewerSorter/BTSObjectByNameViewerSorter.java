@@ -3,10 +3,12 @@ package org.bbaw.bts.ui.commons.viewerSorter;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
 public class BTSObjectByNameViewerSorter extends ViewerSorter {
+	private AlphanumComparator alphaNumComp = new AlphanumComparator();
 
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
@@ -50,7 +52,7 @@ public class BTSObjectByNameViewerSorter extends ViewerSorter {
 		
 		if (s1 != null) {
 			if (s2 != null) {
-				return s1.compareTo(s2);
+				return alphaNumComp.compare(s1, s2);
 			} else
 				return -1;
 		}

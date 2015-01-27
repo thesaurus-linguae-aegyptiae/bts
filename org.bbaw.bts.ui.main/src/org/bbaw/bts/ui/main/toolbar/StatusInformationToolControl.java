@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.MessageType;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -51,7 +52,7 @@ public class StatusInformationToolControl {
 	public void createControls(Composite parent) {
 		this.parent = parent;
 		parent.setLayout(new GridLayout(3, true));
-		parent.setBackground(new Color(Display.getDefault(), new RGB(155, 155, 155)));
+		parent.setBackground(BTSUIConstants.COLOR_BACKGROUND_GREY);
 		parent.setBounds(100, 10, 350, 20);
 		label = new Text(parent, SWT.READ_ONLY);
 		label.setText("Ready                                                                                                              ");

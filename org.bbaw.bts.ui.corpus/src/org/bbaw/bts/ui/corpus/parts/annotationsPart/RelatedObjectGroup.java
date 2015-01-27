@@ -552,4 +552,5 @@ public abstract class RelatedObjectGroup extends Composite{
 			xpndtmNewExpanditem.setText(title);
 		}
 	}
+	
 }

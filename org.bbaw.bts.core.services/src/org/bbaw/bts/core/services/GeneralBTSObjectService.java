@@ -140,4 +140,7 @@ public interface GeneralBTSObjectService {
 	BTSDBBaseObject find(String id, String dbCollectionKey,
 			String rev, BTSDBBaseObject object, boolean fromRemote, IProgressMonitor monitor);
 
+	BTSDBBaseObject replaceCurrentWithRevision(BTSDBBaseObject current,
+			BTSDBBaseObject revision);
+
 }

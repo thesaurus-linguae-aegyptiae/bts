@@ -12,5 +12,5 @@ public interface AnnotationPartController {
 
 	List<BTSObject> findRelatingObjects(BTSObject object, IProgressMonitor monitor);
 	
-	boolean checkAndFullyLoad(BTSCorpusObject object);
+	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 }

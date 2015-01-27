@@ -16,9 +16,7 @@ public class CompareViewerFactoryPassportImpl implements CompareViewerFactory {
 	private CompareViewer compareViewer;
 	private IEclipseContext context;
 	
-	protected BTSResourceProvider resourceProvider = StaticAccessController
-			.getResourceProvider();
-
+	protected BTSResourceProvider resourceProvider = StaticAccessController.getContext().get(BTSResourceProvider.class);
 	@Override
 	public <T> boolean hasViewerForObject(Class<T> clazz) {
 		return BTSCorpusObject.class.isAssignableFrom(clazz);

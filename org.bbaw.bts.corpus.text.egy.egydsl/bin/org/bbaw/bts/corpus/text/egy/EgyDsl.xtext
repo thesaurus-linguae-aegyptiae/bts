@@ -128,7 +128,7 @@ terminal EGYSTRING returns ecore::EString:(
  |'t'|'ṯ'|'ṭ'|'ṱ'|'T'|'Ṯ'|'Ṭ'|'Ṱ'
  |'d'|'ḏ'|'Ḏ'
  |'h̭'
- |'i̯'|'ı͗'|'ı̯͗'|'ï'|'i̭'|'I͗'|'I'
+ |'i'|'i̯'|'ı͗'|'ı̯͗'|'ï'|'i̭'|'I͗'|'I'
 // |'\u0069\u032F'//iArcU
  |'\u0049\u032F' //IArcU
  |'\u00CF'   // ITremaU

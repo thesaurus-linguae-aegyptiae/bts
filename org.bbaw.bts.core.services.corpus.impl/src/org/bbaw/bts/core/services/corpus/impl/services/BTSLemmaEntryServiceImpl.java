@@ -174,7 +174,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		BTSQueryRequest query = new BTSQueryRequest();
 		query.setQueryBuilder(QueryBuilders.matchQuery("name",
 				chars));
-		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
+//		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
 		children = lemmaFilterReviewState(children);

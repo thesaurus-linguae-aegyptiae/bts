@@ -11,8 +11,7 @@ import org.eclipse.swt.widgets.Display;
 
 public class CompareViewerFactoryGeneralImpl implements CompareViewerFactory {
 
-	protected BTSResourceProvider resourceProvider = StaticAccessController
-			.getResourceProvider();
+	protected BTSResourceProvider resourceProvider = StaticAccessController.getContext().get(BTSResourceProvider.class);
 	@Override
 	public <T> boolean hasViewerForObject(Class<T> clazz) {
 		return BTSDBBaseObject.class.isAssignableFrom(clazz);

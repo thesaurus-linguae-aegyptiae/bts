@@ -92,7 +92,8 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			HTMLPrinter.insertPageProlog(buffer, 0, getStyleSheet());
 			HTMLPrinter.addPageEpilog(buffer);
 			html = buffer.toString();
-			return new XtextBrowserInformationControlInput(previous, element, html, labelProvider);
+			XtextBrowserInformationControlInput browserInput = new XtextBrowserInformationControlInput(previous, element, html, labelProvider);
+			return browserInput;
 		}
 		return null;
 	}
@@ -468,8 +469,10 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 			fgStyleSheet = loadStyleSheet();
 		String css = fgStyleSheet;
 		if (css != null) {
-			FontData fontData = JFaceResources.getFontRegistry().getFontData(fontSymbolicName)[0];
-			css = HTMLPrinter.convertTopLevelFont(css, fontData);
+			
+			// XXX cplutte commented out in order to use only font provided by stylesheet.
+//			FontData fontData = JFaceResources.getFontRegistry().getFontData(fontSymbolicName)[0];
+//			css = HTMLPrinter.convertTopLevelFont(css, fontData);
 		}
 		return css;
 	}

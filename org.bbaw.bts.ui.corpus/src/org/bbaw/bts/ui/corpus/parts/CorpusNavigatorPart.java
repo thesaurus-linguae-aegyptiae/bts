@@ -2,6 +2,7 @@
 package org.bbaw.bts.ui.corpus.parts;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -295,7 +296,7 @@ labelProvider));
 					if (selectedTreeNode.getObject() != null) {
 						selectedCorpusObject = (BTSObject) selectedTreeNode.getObject();
 						if (selectedCorpusObject instanceof BTSCorpusObject) {
-							corpusNavigatorController.checkAndFullyLoad((BTSCorpusObject) selectedCorpusObject);
+							corpusNavigatorController.checkAndFullyLoad((BTSCorpusObject) selectedCorpusObject, true);
 
 						}
 						if (!selectedTreeNode.isChildrenLoaded() || selectedTreeNode.getChildren().isEmpty()) {
@@ -328,7 +329,7 @@ labelProvider));
 				if (selection instanceof TreeSelection)
 				{
 					TreeSelection ts = (TreeSelection) selection;
-					BTSObject[] path = null;
+					List<BTSObject> path = new ArrayList<BTSObject>(4);
 
 					for (Object o : ts.getPaths())
 					{
@@ -336,14 +337,14 @@ labelProvider));
 						if (o instanceof TreePath)
 						{
 							TreePath tp = (TreePath) o;
-
-							path = new BTSObject[tp.getSegmentCount()];
-							
 							for (int i = 0; i < tp.getSegmentCount(); i++)
 							{
 								Object segment = tp.getSegment(i);
 								BTSObject btso = (BTSObject) ((TreeNodeWrapper)segment).getObject();
-								path[i] = btso;
+								if (btso != null)
+								{
+									path.add(btso);
+								}
 							}
 							break;
 						}
@@ -351,11 +352,11 @@ labelProvider));
 					}
 					if (event.getSource().equals(mainTreeViewer))
 					{
-						eventBroker.post("navigator_path_event_with_root/corpus", path);
+						eventBroker.post("navigator_path_event_with_root/corpus", path.toArray(new BTSObject[path.size()]));
 					}
 					else
 					{
-						eventBroker.post("navigator_path_event_no_root/corpus", path);
+						eventBroker.post("navigator_path_event_no_root/corpus", path.toArray(new BTSObject[path.size()]));
 					}
 				}
 			}

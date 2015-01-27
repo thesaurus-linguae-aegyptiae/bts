@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.io.FileNotFoundException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,9 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
+import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
@@ -181,7 +184,7 @@ implements CorpusNavigatorController
 		List<BTSCorpusObject> children = corpusObjectService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		logger.info("Number of children found: " + children.size());
-
+		Collections.sort(children, new BTSObjectByNameComparator());
 		return children;
 	}
 
@@ -382,7 +385,7 @@ implements CorpusNavigatorController
 		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		for (BTSTextCorpus c : corpora)
 		{
-			checkAndFullyLoad(c);
+			checkAndFullyLoad(c, true);
 		}
 		return corpora;
 	}

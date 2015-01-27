@@ -90,8 +90,9 @@ public class CouchDBManager implements DBManager
 	private static final int RIVER_READ_TIMEOUT = 15;
 	private static final String DB_ARCHIVE_NAME = "CouchDB";
 	private static final String DB_RUNTIME_PROCESS = "db_runtime_process";
-	private static final int NOTIFICATION_DELAY = 50;
+	private static final int NOTIFICATION_INDEX_UPDATE_DELAY = 50;
 	private static final int DB_DOC_STEPPING = 100;
+	private static final int MAX_INDEX_UPDATE_DELAY = 5;
 
 	@Inject
 	@Preference(value = "local_elasticsearch_url", nodePath = "org.bbaw.bts.app")
@@ -613,7 +614,8 @@ public class CouchDBManager implements DBManager
 		getClient();
 		for (BTSProjectDBCollection collection : project.getDbCollections())
 		{
-			if (collection.isIndexed() && !checkIndex(collection.getCollectionName(), esClient, monitor))
+			if (collection.isIndexed() && dbCollectionExists(collection.getCollectionName())
+					&& !checkIndex(collection.getCollectionName(), esClient, monitor))
 			{
 				return false;
 			}
@@ -676,7 +678,7 @@ public class CouchDBManager implements DBManager
 			 // be more tolerant with differences in update sequences with notification collection
 			 if (DaoConstants.NOTIFICATION.equals(collection))
 			 {
-				 if (indexUpdateSeq + NOTIFICATION_DELAY < dbUpdateSeq)
+				 if (indexUpdateSeq + NOTIFICATION_INDEX_UPDATE_DELAY < dbUpdateSeq)
 				 {
 					return false;
 				 }
@@ -687,7 +689,7 @@ public class CouchDBManager implements DBManager
 			 }
 			 
 			 // all other collections
-			 if (indexUpdateSeq < dbUpdateSeq)
+			 if (indexUpdateSeq + MAX_INDEX_UPDATE_DELAY< dbUpdateSeq)
 			 {
 				return false;
 			 }
@@ -1664,6 +1666,7 @@ public class CouchDBManager implements DBManager
 		boolean exists = true;
 		try {
 			dbClient = connectionProvider.getDBClient(CouchDbClient.class, dbCollectionName);
+			dbClient.context().info().getDocCount();
 		} catch (Exception e) {
 			exists = false;
 		}
@@ -1859,7 +1862,7 @@ public class CouchDBManager implements DBManager
 		}
 		else if (info.getIndexDocCount() == - 1 || info.getDbDocCount() - info.getIndexDocCount() > 20
 				|| ((DaoConstants.NOTIFICATION.equals(info.getDbCollectionName())
-						&& indexSeq + NOTIFICATION_DELAY < dbSeq) 
+						&& indexSeq + NOTIFICATION_INDEX_UPDATE_DELAY < dbSeq) 
 						|| indexSeq < dbSeq))
 		{
 			info.setIndexStatus("ERROR");

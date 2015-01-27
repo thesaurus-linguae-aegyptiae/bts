@@ -308,8 +308,13 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
 		E object = retrieveFromCache(uri, cache);
 		if (object != null) return object;
+		Resource resource = null;
+		try {
+			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		} catch (Exception e1) {
+			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		}
 		
-		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
 		Map<String, String> options = new HashMap<String, String>();
 		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
@@ -412,7 +417,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		E object = retrieveFromCache(uri, cache);
 		if (object != null) return object;
 		
-		Resource resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		Resource resource = null;
+		try {
+			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+		} catch (Exception e1) {
+			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+		}
 		Map<String, String> options = new HashMap<String, String>();
 		
 		options.put(XMLResource.OPTION_ENCODING, BTSConstants.ENCODING);
@@ -745,6 +755,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		else
 		{
 			srq = srq.addFields("eClass");
+			srq.setFetchSource(true);
 		}
 					
 		//execute query
@@ -770,7 +781,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				E o = null;
 				URI uri = URI.createURI(getLocalDBURL() + "/" + indexName + "/" + hit.getId());
 				o = retrieveFromCache(uri, cache);
-				if (o == null)
+				if (o != null)
+				{
+					checkAndLoadFullyFromHit(o, hit, uri, indexName);
+				}
+				else
 				{
 					o = loadObjectFromHit(hit, uri, indexName);
 					if (o != null)
@@ -796,8 +811,18 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				logger.info("Query exception", e);
 			}
 		}
-		logger.info("Query result size: " + result.size());
+		logger.info("Query indexName "+ indexName + " result size: " + result.size());
 		return result;
+	}
+
+	private void checkAndLoadFullyFromHit(E o, SearchHit hit, URI uri,
+			String indexName) {
+		// object not fully loaded and and object in hit as source string
+		if (o.get_rev() == null && hit.getSource() != null)
+		{
+			E e = loadObjectFromHit(hit, uri, indexName);
+			o = EmfModelHelper.mergeChanges(o, e);
+		}
 	}
 
 	protected E retrieveFromCache(URI uri, Map<URI, Resource> cache) {
@@ -893,13 +918,14 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	public E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString)
 	{
 		Resource resource;
-		try {
-			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
-		} catch (Exception e1) {
-			logger.info(e1);
-		} finally {
-			resource = connectionProvider.getEmfResourceSet().createResource(uri);
-		}
+//		try {
+//			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
+//		} catch (Exception e1) {
+//			logger.info(e1);
+//		} finally {
+//			resource = connectionProvider.getEmfResourceSet().createResource(uri);
+//		}
+		resource = connectionProvider.getEmfResourceSet().createResource(uri);
 		fillResource(resource, sourceAsString);
 		if (!resource.getContents().isEmpty())
 		{
@@ -908,7 +934,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			{
 				e.setDBCollectionKey(indexName);
 			}
-			checkForConflicts(e, indexName);
+//			checkForConflicts(e, indexName);
 			return e;
 		}
 		logger.info(sourceAsString);
@@ -1168,7 +1194,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	}
 	
 	@Override
-	public E loadFully(E entity) {
+	public E loadFully(E entity, boolean checkForConflicts) {
+		
 		if (entity.getDBCollectionKey() == null)
 		{
 			throw new BTSDBException("DBCollectionKey may not be null. Unable to fully load object!");
@@ -1195,8 +1222,14 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		if (source != null) {
 			entity = EmfModelHelper.mergeChanges(entity, source);
-			checkForConflicts((E) entity,
-					entity.getDBCollectionKey());
+			if (entity.get_id().equals("IBQDJYpzXIU3KUTNqZEDsSLP8AE")) // FIXME remove anno
+			{
+				System.out.println("HI");
+			}
+			if(checkForConflicts)
+			{
+				checkForConflicts((E) entity,entity.getDBCollectionKey());
+			}
 			return (E) entity;
 		}
 		return entity;

@@ -842,7 +842,7 @@ private void bringPartToFront(boolean b) {
 	}
 
 	private void loadSignText(BTSLemmaEntry lemma) {
-		signTextEditor.setInput(lemma, textContent, relatingObjects, relatingObjectsMap);
+		signTextEditor.setInput(lemma, textContent, relatingObjects, null);
 	}
 
 	private void loadTextContent(BTSLemmaEntry lemma) {

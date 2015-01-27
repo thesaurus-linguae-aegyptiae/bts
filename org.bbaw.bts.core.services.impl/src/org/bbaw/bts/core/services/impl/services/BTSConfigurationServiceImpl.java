@@ -232,12 +232,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 					return (BTSConfigItem) c;
 				} else {
 					for (BTSConfig cc : c.getChildren()) {
-						if (object.getType().equals(
+						if (object.getType().equalsIgnoreCase(
 								((BTSConfigItem) cc).getValue())) {
 							if (object.getSubtype() != null
 									&& "".equals(object.getSubtype())) {
 								for (BTSConfig ccc : cc.getChildren()) {
-									if (object.getSubtype().equals(
+									if (object.getSubtype().equalsIgnoreCase(
 											((BTSConfigItem) ccc).getValue())) {
 										return (BTSConfigItem) ccc;
 									}

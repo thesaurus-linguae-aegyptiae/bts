@@ -35,6 +35,11 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (monitor != null)
+			{
+				if (monitor.isCanceled()) return filter(objects);
+				monitor.worked(20);
+			}
 		}
 		return filter(objects);
 	}
