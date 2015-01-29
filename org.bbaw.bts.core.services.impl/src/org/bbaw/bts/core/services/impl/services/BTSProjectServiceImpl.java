@@ -1,8 +1,11 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.net.URISyntaxException;
+import java.security.Provider.Service;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
@@ -47,6 +50,12 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	@Override
 	public boolean save(BTSProject entity)
 	{
+		// clear cached project db collection map
+		Map<String, BTSProjectDBCollection> map = loadProjectDBCollectionMap();
+		if (map != null)
+		{
+			map.clear();
+		}
 		super.addRevisionStatement(entity);
 		if (entity.getDbConnection() != null) {
 			try {
@@ -270,6 +279,49 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			role.getUserNames().remove(object.get_id());
 		}
 		
+	}
+
+	@Override
+	public BTSProjectDBCollection findProjectCollection(String dbCollectionName) {
+		Map<String, BTSProjectDBCollection> map = loadProjectDBCollectionMap();
+		if (map.isEmpty())
+		{
+			fillProjectCollectionMap(map);
+		}
+		if (map != null)
+		{
+			return map.get(dbCollectionName);
+		}
+		return null;
+	}
+
+	private void fillProjectCollectionMap(
+			Map<String, BTSProjectDBCollection> map) {
+		List<BTSProject> projects = list(BTSConstants.OBJECT_STATE_ACTIVE, null);
+		if (map == null || projects == null) return;
+		for (BTSProject project : projects)
+		{
+			for (BTSProjectDBCollection coll : project.getDbCollections())
+			{
+				map.put(coll.getCollectionName(), coll);
+			}
+		}
+		
+	}
+
+	private Map<String, BTSProjectDBCollection> loadProjectDBCollectionMap() {
+		Object o = context.get(BTSCoreConstants.PROJECT_DB_COLLECTION_MAP);
+		Map<String, BTSProjectDBCollection> map = null;
+		if (o == null || !( o instanceof Map<?, ?> ))
+		{
+			map = new HashMap<String, BTSProjectDBCollection>();
+			context.set(BTSCoreConstants.PROJECT_DB_COLLECTION_MAP, map);
+		}
+		else
+		{
+			map = (Map<String, BTSProjectDBCollection>) o;
+		}
+		return map;
 	}
 
 

@@ -56,7 +56,7 @@ public class BTSTCObjectItemProvider
 	@Override
 	public Object getImage(Object object)
 	{
-		Image image = resourceProvider.getImage(Display.getDefault(),
+		Image image = getBTSResourceProvider().getImage(Display.getDefault(),
 				getConfigurationController()
 						.getIconStringOfObjectType((BTSCorpusObject) object));
 		return overlayImage(object, image);

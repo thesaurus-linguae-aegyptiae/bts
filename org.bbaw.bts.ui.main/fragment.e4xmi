@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="ASCII"?>
-<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:commands="http://www.eclipse.org/ui/2010/UIModel/application/commands" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_WN5gEADrEeOpmPWG2KRhAA">
   <imports xsi:type="commands:Command" xmi:id="_m2YhoL8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.file.exit"/>
   <imports xsi:type="commands:Command" xmi:id="_HO_yQL8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication"/>
   <imports xsi:type="commands:Command" xmi:id="_3xuZsL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart"/>
   <imports xsi:type="commands:Command" xmi:id="_S-Kp0KY5EeSMm_n5aML7dg" elementId="org.eclipse.e4.ui.perspectives.showPerspective"/>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_XCflwADrEeOpmPWG2KRhAA" featurename="children" parentElementId="org.bbaw.bts.app.perspectivestack.main">
-    <elements xsi:type="advanced:Perspective" xmi:id="_zrowcADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.ui.main.perspective.main" label="BTS Main Perspective">
-      <children xsi:type="basic:PartStack" xmi:id="_7sFY0ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.ui.main.partstack.0"/>
-    </elements>
-  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_XCflwADrEeOpmPWG2KRhAA" featurename="children" parentElementId="org.bbaw.bts.app.perspectivestack.main"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mjmYoANbEeO_KvSHBrHQXw" featurename="children" parentElementId="toolbar:org.eclipse.ui.main.toolbar">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_psHVQGcSEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.new" label="New" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/new.png" command="_6YlhUGcMEeOBmPSxTUuwxg">
       <menu xmi:id="_Y8V2MGcbEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.new.menu"/>
@@ -104,12 +100,12 @@
     <elements xsi:type="commands:Category" xmi:id="_jAR_wJy7EeSiiMU2026qjA" elementId="org.eclipse.ui.category.window" name="Window"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_lWcloAWjEeOJR9LhfOAE5w" featurename="children" parentElementId="org.eclipse.ui.preferences">
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-edit.png" command="_EXssoAWjEeOJR9LhfOAE5w"/>
-    <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" toBeRendered="false" visible="false" label="TEST pref" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" toBeRendered="false" visible="false" label="New Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/configuration-add.png" command="_3ajhwAWXEeOmY4VxFYomZg"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_if9qwDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handledmenuitem.openUserManager" label="Open User Manager" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/users.png" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/configuration-edit.png" command="_EXssoAWjEeOJR9LhfOAE5w"/>
+    <elements xsi:type="menu:DirectMenuItem" xmi:id="_dtMMkA5nEeOBWNILjo7Jaw" elementId="org.bbaw.bts.ui.main.directmenuitem.0" toBeRendered="false" visible="false" label="TEST pref" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/preferences.png" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.TESTER"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_SmEvMDVsEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.pref.newConfig" toBeRendered="false" visible="false" label="New Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/configuration-add.png" command="_3ajhwAWXEeOmY4VxFYomZg"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_if9qwDyYEeOXV-1zoP-xWw" elementId="org.bbaw.bts.ui.main.handledmenuitem.openUserManager" label="Open User Manager" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/users.png" command="_Qy4lADyYEeOXV-1zoP-xWw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_aj03MGvvEeSg5OVDz3RNmQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openDBMangerDialog" label="Open Database Manager" command="_L6KfIGvvEeSg5OVDz3RNmQ"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="Preferences..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_eOFwoNtvEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.handledmenuitem.e4Preferences" label="Preferences..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/preferences.png" command="_NRDnwNtvEeODTbKD0_l8Zw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_07tpwGmmEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openFuton" label="Open Futon" command="_dvqWsGmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_sUKIoGmnEeS2_NuBa14VTQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.openEsGui" label="Open ES GUI" command="_jzQQ0GmiEeS2_NuBa14VTQ"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_-7UVEJv8EeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.handledmenuitem.changePassword" label="Change Password" command="_aoLj4JvgEeSIPd7PzoRw-w"/>
@@ -123,7 +119,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_bO4dcJS2EeO8ZbCQ2E9L4A" elementId="org.bbaw.bts.ui.main.handledmenuitem.1" label="Edit current Project" command="_hkOGsDDQEeOcKK6bB3llFg"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="__XknkJ01EeOZQMkw1CZ_PQ" elementId="org.bbaw.bts.ui.main.handledmenuitem.7" label="Edit Updaters/Readers..." command="_pJQyUJ01EeOZQMkw1CZ_PQ"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_NIzxMOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledmenuitem.13" label="Open Conflict Dialog" command="_YmLB4OpBEeO86qCMpbd0dw"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_RpbcsOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledmenuitem.14" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources/icons/full/icon16/history.png" command="_wVCq4OsFEeOLEqD8tMK6Eg"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_RpbcsOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledmenuitem.14" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/history.png" command="_wVCq4OsFEeOLEqD8tMK6Eg"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_JRhFgDVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.file">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_l0QGMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.3" label="Insert..."/>

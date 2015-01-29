@@ -58,8 +58,13 @@ public class HieroglyphTypeWriterControllerImpl implements
 		if (counters.size() > 9) {
 			return mdc;
 		} else {
+			String c = code.substring(0,1).toUpperCase();
+			if (code.length() > 1)
+			{
+				c += code.substring(1, code.length());
+			}
 			PossibilitiesList list = hieroglyphManager
-					.getCodesStartingWith(code.toUpperCase());
+					.getCodesStartingWith(c);
 
 			int start = counters.size() + 1;
 			for (int i = 0; i < list.asList().size() && i < 10; i++) {

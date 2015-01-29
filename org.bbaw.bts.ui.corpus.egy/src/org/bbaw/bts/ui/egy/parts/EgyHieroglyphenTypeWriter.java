@@ -41,7 +41,9 @@ import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorControlle
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -377,7 +379,12 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			if (!(mdc.endsWith(":") || mdc.endsWith("-")
 					|| mdc.endsWith("<") || mdc.endsWith("*") || mdc
 					.endsWith("["))) {
-				jseshEditor.setMDCText(mdc.toUpperCase());
+				String c = mdc.substring(0,1).toUpperCase();
+				if (mdc.length() > 1)
+				{
+					c += mdc.substring(1, mdc.length());
+				}
+				jseshEditor.setMDCText(c);
 			}
 		} catch (Exception e1)
 		{
@@ -580,15 +587,20 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				if (!selection.getSelectedItems().isEmpty()
 						&& !selection.getSelectedItems().get(0)
 								.equals(selectionObject)
-						&& selection.getSelectedItems().get(0) instanceof BTSWord) {
+						&& (selection.getSelectedItems().get(0) instanceof BTSSentenceItem 
+								|| selection.getSelectedItems().get(0) instanceof BTSLemmaCase)) {
 
-					selectionObject = (BTSObject) selection.getSelectedItems()
-							.get(0);
-					if (loaded) {
-						setSelectionInteral(selection.getSelectedItems().get(0));
-						ignoreGlyph_Button.setSelection(false);
+					if (selectionObject == null || !selectionObject.equals(selection.getSelectedItems()
+							.get(0)))
+					{
+						saveMdCstring(currentWord);
+						selectionObject = (BTSObject) selection.getSelectedItems()
+								.get(0);
+						if (selection.getSelectedItems().get(0) instanceof BTSWord && loaded) {
+							setSelectionInteral(selection.getSelectedItems().get(0));
+							ignoreGlyph_Button.setSelection(false);
+						}
 					}
-
 				}
 				else
 				{

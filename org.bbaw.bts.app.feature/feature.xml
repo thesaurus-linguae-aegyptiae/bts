@@ -938,4 +938,18 @@
          version="0.0.0"
          unpack="false"/>
 
+   <plugin
+         id="org.bbaw.bts.ui.resources.impl"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.bbaw.bts.ui.corpus.egy.commons"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
 </feature>

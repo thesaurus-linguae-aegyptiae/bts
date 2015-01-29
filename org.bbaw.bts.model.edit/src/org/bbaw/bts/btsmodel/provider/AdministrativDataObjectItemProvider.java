@@ -282,7 +282,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 		      images.add(image);
 			if(getEvaluationService() != null && !getEvaluationService().authenticatedUserHasLock(object))
 			{
-				Image i = resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK);
+				Image i = getBTSResourceProvider().getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_LOCK);
 				if (i != null)
 			    {
 					images.add(i); 
@@ -290,7 +290,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 			}
 			else
 			{
-			      images.add(resourceProvider.getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_PEN)); 
+			      images.add(getBTSResourceProvider().getImage(Display.getDefault(), BTSResourceProvider.IMG_OVR_PEN)); 
 			}
 	     
 	      image = new ComposedImage(images);
@@ -299,7 +299,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 				&& !((BTSDBBaseObject) object).getConflictingRevs().isEmpty()) {
 			List<Object> images = new ArrayList<Object>(2);
 			images.add(image);
-			images.add(resourceProvider.getImage(Display.getDefault(),
+			images.add(getBTSResourceProvider().getImage(Display.getDefault(),
 					BTSResourceProvider.IMG_OVR_CONFLICTS));
 			image = new ComposedImage(images);
 		}
@@ -309,7 +309,7 @@ public class AdministrativDataObjectItemProvider extends BTSObservableObjectItem
 					.getIconStringOfRevisionsState((BTSObject) object);
 			if (o != null)
 			{
-				o = resourceProvider.getImage(Display.getDefault(),
+				o = getBTSResourceProvider().getImage(Display.getDefault(),
 					(String) o);
 			}
 			if (o != null)

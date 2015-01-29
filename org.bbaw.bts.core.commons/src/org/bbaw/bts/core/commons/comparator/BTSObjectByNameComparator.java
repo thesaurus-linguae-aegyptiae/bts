@@ -8,10 +8,22 @@ public class BTSObjectByNameComparator implements Comparator<BTSObject>{
 
 	private AlphanumComparator alphaNumComp = new AlphanumComparator();
 	@Override
-	public int compare(BTSObject arg0, BTSObject o1) {
-		if (arg0 != null && arg0.getName() != null && o1 != null && o1.getName() != null)
+	public int compare(BTSObject o0, BTSObject o1) {
+		if (o0.getSortKey() != 0 && o1.getSortKey() != 0)
 		{
-			return alphaNumComp.compare(arg0.getName(), o1.getName());
+			return o0.getSortKey() - o1.getSortKey();
+		}
+		else if (o0.getSortKey() != 0)
+		{
+			return -1;
+		}
+		else if (o1.getSortKey() != 0)
+		{
+			return 1;
+		}
+		else if (o0 != null && o0.getName() != null && o1 != null && o1.getName() != null)
+		{
+			return alphaNumComp.compare(o0.getName(), o1.getName());
 		}
 		return 0;
 	}

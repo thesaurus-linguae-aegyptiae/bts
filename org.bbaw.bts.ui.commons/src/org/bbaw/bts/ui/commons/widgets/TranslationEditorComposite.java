@@ -29,6 +29,7 @@
  */
 package org.bbaw.bts.ui.commons.widgets;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -53,12 +54,15 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
 /**
@@ -94,6 +98,8 @@ public class TranslationEditorComposite extends Composite {
 
 	/** The lang. */
 	private String lang;
+
+	private List<SelectionListener> languageSelectionListeners = new ArrayList<SelectionListener>(2);
 
 	/**
 	 * Instantiates a new translation editor composite.
@@ -246,6 +252,10 @@ public class TranslationEditorComposite extends Composite {
 			public void widgetSelected(SelectionEvent e) {
 				String lang = combo.getItem(combo.getSelectionIndex());
 				loadTranslation(lang);
+				for (SelectionListener l : languageSelectionListeners)
+				{
+					l.widgetSelected(e);
+				}
 			}
 		});
 
@@ -257,7 +267,7 @@ public class TranslationEditorComposite extends Composite {
 	 * @param lang the lang
 	 */
 	private void loadTranslation(String lang) {
-
+		if(translations == null) return;
 		this.lang = lang;
 		BTSTranslation trans = translations.getBTSTranslation(lang);
 		if (trans == null) {
@@ -321,6 +331,19 @@ public class TranslationEditorComposite extends Composite {
 		if (text != null)
 		{
 			this.text.setText(text);
+		}
+	}
+	
+	public String getLanguage()
+	{
+		return combo.getText();
+	}
+	
+	public void addLanguageSelectionListener(SelectionListener listener)
+	{
+		if (listener != null && !languageSelectionListeners .contains(listener))
+		{
+			languageSelectionListeners.add(listener);
 		}
 	}
 }

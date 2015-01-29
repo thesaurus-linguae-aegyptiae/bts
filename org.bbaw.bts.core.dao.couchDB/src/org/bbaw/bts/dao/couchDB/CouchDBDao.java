@@ -321,6 +321,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		logger.info(uri.path());
 		try {
 			resource.load(options);
+		} catch (java.io.FileNotFoundException e) {
+			logger.error("Object not found: path " + path + "/" + key.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

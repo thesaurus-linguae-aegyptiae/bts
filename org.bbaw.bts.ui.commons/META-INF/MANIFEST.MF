@@ -23,7 +23,8 @@ Export-Package: com.richclientgui.toolbox.duallists,
  org.mihalis.opal,
  org.mihalis.opal.breadcrumb,
  org.mihalis.opal.itemSelector,
- org.mihalis.opal.multiChoice
+ org.mihalis.opal.multiChoice,
+ org.mihalis.opal.promptSupport
 Require-Bundle: org.eclipse.swt;bundle-version="3.102.0",
  org.eclipse.core.databinding;bundle-version="1.4.1",
  org.eclipse.e4.tools.services;bundle-version="0.12.0",

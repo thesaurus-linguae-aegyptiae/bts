@@ -297,7 +297,6 @@ labelProvider));
 						selectedCorpusObject = (BTSObject) selectedTreeNode.getObject();
 						if (selectedCorpusObject instanceof BTSCorpusObject) {
 							corpusNavigatorController.checkAndFullyLoad((BTSCorpusObject) selectedCorpusObject, true);
-
 						}
 						if (!selectedTreeNode.isChildrenLoaded() || selectedTreeNode.getChildren().isEmpty()) {
 							
@@ -306,6 +305,19 @@ labelProvider));
 							parents.add(selectedTreeNode);
 							selectedTreeNode.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
+
+							Job j = new Job("expand") {
+								@Override
+								protected IStatus run(IProgressMonitor monitor) {
+									sync.asyncExec(new Runnable() {
+										public void run() {
+											treeViewer.setExpandedState(selectedTreeNode, true);
+										}
+									});
+									return Status.OK_STATUS;
+								}
+							};
+							j.schedule(750);
 						}
 						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 								.equals(selectionType)) {
@@ -359,7 +371,9 @@ labelProvider));
 						eventBroker.post("navigator_path_event_no_root/corpus", path.toArray(new BTSObject[path.size()]));
 					}
 				}
+
 			}
+			
 		};
 
 		treeViewer.setSorter(new BTSObjectByNameViewerSorter());

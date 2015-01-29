@@ -30,6 +30,7 @@ import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.CopyDirectory;
 import org.bbaw.bts.commons.OSValidator;
+import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.dao.Backend2ClientUpdateDao;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -67,6 +68,7 @@ import org.elasticsearch.client.Requests;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.indices.IndexMissingException;
 import org.lightcouch.CouchDbClient;
+import org.lightcouch.CouchDbException;
 import org.lightcouch.CouchDbProperties;
 import org.lightcouch.NoDocumentException;
 import org.lightcouch.Page;
@@ -123,6 +125,9 @@ public class CouchDBManager implements DBManager
 	
 	@Inject
 	private IApplicationContext appContext;
+	
+	@Inject
+	private BTSProjectDao projectDao;
 	
 	private Client esClient;
 	private Process process;
@@ -250,12 +255,28 @@ public class CouchDBManager implements DBManager
 		} catch (JsonSyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (CouchDbException e) {
+			System.out.println("you are not a database admin and are not allowed to change _security of system db.");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 	}
 
 	private Map<String, ReplicatorDocument> loadReplicationMap() throws MalformedURLException {
-		List<ReplicatorDocument> docs = getReplicatorDocuments(DaoConstants.ADMIN);
+		List<ReplicatorDocument> docs = null;
+		try {
+			docs = getReplicatorDocuments(DaoConstants.ADMIN);
+		} catch (CouchDbException e) {
+			// in case user is not admin than accessing _all_docs on system database such as _replicator
+			// is forbidden. therefore load replicator docs via doc id.
+			for(BTSProject project : projectDao.list("admin", BTSConstants.OBJECT_STATE_ACTIVE))
+			{
+				docs = getReplicatorDocumentsByProject(project);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		Map<String, ReplicatorDocument> map = new HashMap<String, ReplicatorDocument>();
 		if (docs != null && !docs.isEmpty())
 		{
@@ -265,6 +286,33 @@ public class CouchDBManager implements DBManager
 			}
 		} 
 		return map;
+	}
+
+	private List<ReplicatorDocument> getReplicatorDocumentsByProject(BTSProject project) {
+		List<ReplicatorDocument> docs = new Vector<ReplicatorDocument>();
+		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin");
+		for (BTSProjectDBCollection collection : project.getDbCollections())
+		{
+			if (!collection.getCollectionName().equals("local") && collection.isSynchronized())
+			{
+				ReplicatorDocument doc = null;
+				try {
+					doc = client.replicator()
+							.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE).find();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (doc != null) docs.add(doc);
+				try {
+					doc = client.replicator()
+							.replicatorDocId(collection.getCollectionName() + DaoConstants.REPLICATOR_SUFFIX_TO_REMOTE).find();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (doc != null) docs.add(doc);
+			}
+		}
+		return docs;
 	}
 
 	private void checkAndAddAuthentication(BTSProjectDBCollection collection)
@@ -401,6 +449,7 @@ public class CouchDBManager implements DBManager
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		String docId = null;
 		try {
 			Replicator replicator2 = connectionProvider.getDBClient(CouchDbClient.class,collectionName)
 					.replicator();
@@ -410,14 +459,16 @@ public class CouchDBManager implements DBManager
 			replicator2.createTarget(createTarget);
 			replicator2.userCtxName(username);
 			replicator2.userCtxRoles("_admin");
-			String docId = collectionName + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE;
+			docId = collectionName + DaoConstants.REPLICATOR_SUFFIX_FROM_REMOTE;
 			if (docId.startsWith("_"))
 			{
 				docId = docId.substring(1);
 			}
 			replicator2.replicatorDocId(docId);
 			replicator2.save(); // triggers a replication
-		} catch (Exception e) {
+		} catch (org.lightcouch.DocumentConflictException e) {
+			logger.error("DB Conflict with docId : " + docId);
+		}catch (Exception e) {
 			logger.error(e);
 		}
  

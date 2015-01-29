@@ -2,6 +2,7 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -184,7 +185,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	protected void internalSetSelection(Object internalSelection) {
-
+		evaluateDbContext(internalSelection);
 		if (evaluationService.acquireLockOptimistic(internalSelection))
 		{
 			otherLocked = false;
@@ -195,6 +196,23 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		}
 		hasLock = otherLocked;
 		evaluateSelectionPermissionsAndExpressions(internalSelection);
+		
+	}
+
+	private void evaluateDbContext(Object internalSelection) {
+		if (internalSelection instanceof BTSDBBaseObject)
+		{
+			if (dbCollectionContext == null 
+					|| !dbCollectionContext.equals(((BTSDBBaseObject) internalSelection).getDBCollectionKey()))
+			{
+				setDBCollectionContext(((BTSDBBaseObject) internalSelection).getDBCollectionKey());
+			}
+		}
+		
+	}
+
+	private void setDBCollectionContext(String dbCollectionKey) {
+		this.dbCollectionContext = dbCollectionKey;
 		
 	}
 
@@ -261,17 +279,18 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (authenticatedUser == null || mainProject == null) {
 
 		} else {
-			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
-				if (c.getCollectionName() != null
-						&& c.getCollectionName().equals(dbCollectionContext)) {
-					userContextRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
-					break;
-				}
-			}
+			BTSProjectDBCollection projectCollection = findProjectCollection(dbCollectionContext);
+			userContextRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(projectCollection);
 		}
 		workbenchContext.modify(
 				BTSCoreConstants.CORE_EXPRESSION_USER_CONTEXT_ROLE,
 				userContextRole);
+	}
+
+	
+	private BTSProjectDBCollection findProjectCollection(
+			String dbCollectionName) {
+		return projecService.findProjectCollection(dbCollectionName);
 	}
 
 	

@@ -37,6 +37,7 @@ import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.ui.font.BTSFontManager;
 import org.bbaw.bts.ui.main.wizards.installation.InstallationWizard;
 import org.bbaw.bts.ui.main.wizards.newProject.NewProjectWizard;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.observable.Realm;
@@ -156,6 +157,7 @@ public class ApplicationStartupControllerImpl implements
 			final BTSProjectService projectService,
 			IApplicationContext appContext) {
 		this.context = context;
+		context.get(StaticAccessController.class);
 		logger.error("Logging - error, debug enabled: "
 				+ logger.isDebugEnabled());
 		logger.info("Logging - info, info enabled: " + logger.isInfoEnabled());

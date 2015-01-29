@@ -31,10 +31,12 @@ package org.bbaw.bts.core.commons.staticAccess;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.EContextService;
@@ -52,11 +54,17 @@ public class StaticAccessController {
 
 	/** The EHandlerService. */
 	@Inject
+	@Optional
 	private static EHandlerService service;
 	
 	/** The EContextService. */
 	@Inject
+	@Optional
 	private static EContextService contextService;
+	
+	/** The resource provider. */
+	@Inject
+	private static BTSResourceProvider resourceProvider;
 	
 	/** The context. */
 	@Inject
@@ -75,6 +83,10 @@ public class StaticAccessController {
 	 * @return the service
 	 */
 	public static EHandlerService getService() {
+		if (service == null)
+		{
+			service = context.get(EHandlerService.class);
+		}
 		return service;
 	}
 
@@ -94,6 +106,10 @@ public class StaticAccessController {
 	 * @return the context service
 	 */
 	public static EContextService getContextService() {
+		if (contextService == null)
+		{
+			contextService = context.get(EContextService.class);
+		}
 		return contextService;
 	}
 
@@ -106,6 +122,14 @@ public class StaticAccessController {
 		StaticAccessController.contextService = contextService;
 	}
 
+	/**
+	 * Gets the resource provider.
+	 *
+	 * @return the resource provider
+	 */
+	public static BTSResourceProvider getResourceProvider() {
+		return resourceProvider;
+	}
 
 	/**
 	 * Gets the context.

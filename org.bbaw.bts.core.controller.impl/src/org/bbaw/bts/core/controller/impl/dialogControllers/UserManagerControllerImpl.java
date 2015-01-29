@@ -1,5 +1,7 @@
 package org.bbaw.bts.core.controller.impl.dialogControllers;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -14,6 +16,7 @@ import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.services.BTSUserGroupService;
@@ -29,6 +32,8 @@ import org.elasticsearch.index.query.QueryBuilders;
 
 public class UserManagerControllerImpl implements UserManagerController
 {
+
+	private static final Comparator<BTSObject> sorter = new BTSObjectByNameComparator();
 
 	@Inject
 	private BTSUserGroupService usergroupService;
@@ -64,7 +69,13 @@ public class UserManagerControllerImpl implements UserManagerController
 		}
 		List<BTSUser> children = userService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+		sortEntries(children);
 		return children;
+	}
+
+	private void sortEntries(List<BTSUser> list) {
+		Collections.sort(list, UserManagerControllerImpl.sorter);
+		
 	}
 
 	@Override
@@ -95,7 +106,9 @@ public class UserManagerControllerImpl implements UserManagerController
 	@Override
 	public List<BTSUser> listUsers(IProgressMonitor monitor)
 	{
-		return userService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+		List<BTSUser> users = userService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+		sortEntries(users);
+		return users;
 	}
 
 	@Override

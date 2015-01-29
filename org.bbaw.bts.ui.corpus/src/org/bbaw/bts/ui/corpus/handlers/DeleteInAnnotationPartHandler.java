@@ -77,5 +77,6 @@ public class DeleteInAnnotationPartHandler {
 		}
 	}
 	
+	// no canExecute because it would be a lot to calculate... retrieving the annotation part, then retrieving the objects from... 
 		
 }

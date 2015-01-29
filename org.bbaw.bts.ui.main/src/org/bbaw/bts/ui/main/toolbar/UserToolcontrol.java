@@ -97,9 +97,9 @@ public class UserToolcontrol {
 		roleLabel.setLayoutData(new GridData());
 		((GridData) roleLabel.getLayoutData()).horizontalSpan = 1;
 		if (userContextRole != null) {
-			roleLabel.setText(userContextRole);
+			roleLabel.setText(userContextRole + "      ");
 		} else {
-			roleLabel.setText("No Role");
+			roleLabel.setText("No Role"  + "      ");
 		}
 		roleLabel.pack();
 

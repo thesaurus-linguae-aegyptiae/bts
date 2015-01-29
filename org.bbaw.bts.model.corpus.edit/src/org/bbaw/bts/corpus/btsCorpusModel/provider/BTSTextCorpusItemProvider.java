@@ -89,7 +89,7 @@ public class BTSTextCorpusItemProvider
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, resourceProvider.getImage(
+		return overlayImage(object, getBTSResourceProvider().getImage(
 Display
 				.getDefault(), getConfigurationController()
 				.getIconStringOfObjectType((BTSCorpusObject) object)));

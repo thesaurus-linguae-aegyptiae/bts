@@ -23,8 +23,10 @@ package org.bbaw.bts.core.commons.comparator;
  *
  */
 
+import java.text.Collator;
 import java.text.RuleBasedCollator;
 import java.util.Comparator;
+import java.util.Locale;
 
 /**
  * This is an updated version with enhancements made by Daniel Migowski,
@@ -42,12 +44,21 @@ import java.util.Comparator;
 public class AlphanumComparator implements Comparator
 {
 	
-	private RuleBasedCollator collator;
+	private Collator collator;
 
-	public AlphanumComparator(){}
+	public AlphanumComparator(){
+		collator = Collator.getInstance(Locale.getDefault());
+	}
 	
-	public AlphanumComparator(RuleBasedCollator collator){
-		this.collator = collator;
+	public AlphanumComparator(Collator collator){
+		if (collator != null)
+		{
+			this.collator = collator;
+		}
+		else
+		{
+			collator = Collator.getInstance(Locale.getDefault());
+		}
 	}
     private final boolean isDigit(char ch)
     {

@@ -821,23 +821,23 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Emendation");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cEmendationAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLessThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftPointingAngleBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cWCharAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cWCharNoEmendationParserRuleCall_2_0 = (RuleCall)cWCharAssignment_2.eContents().get(0);
-		private final Keyword cGreaterThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cRightPointingAngleBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Emendation:
-		//	{Emendation} "<" wChar+=NoEmendation+ ">";
+		//	{Emendation} "〈" wChar+=NoEmendation+ "〉";
 		public ParserRule getRule() { return rule; }
 
-		//{Emendation} "<" wChar+=NoEmendation+ ">"
+		//{Emendation} "〈" wChar+=NoEmendation+ "〉"
 		public Group getGroup() { return cGroup; }
 
 		//{Emendation}
 		public Action getEmendationAction_0() { return cEmendationAction_0; }
 
-		//"<"
-		public Keyword getLessThanSignKeyword_1() { return cLessThanSignKeyword_1; }
+		//"〈"
+		public Keyword getLeftPointingAngleBracketKeyword_1() { return cLeftPointingAngleBracketKeyword_1; }
 
 		//wChar+=NoEmendation+
 		public Assignment getWCharAssignment_2() { return cWCharAssignment_2; }
@@ -845,8 +845,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//NoEmendation
 		public RuleCall getWCharNoEmendationParserRuleCall_2_0() { return cWCharNoEmendationParserRuleCall_2_0; }
 
-		//">"
-		public Keyword getGreaterThanSignKeyword_3() { return cGreaterThanSignKeyword_3; }
+		//"〉"
+		public Keyword getRightPointingAngleBracketKeyword_3() { return cRightPointingAngleBracketKeyword_3; }
 	}
 
 	public class NoEmendationElements extends AbstractParserRuleElementFinder {
@@ -1069,23 +1069,23 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ExpandedColumn");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cExpandedColumnAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLessThanSignLessThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cLeftPointingAngleBracketLeftPointingAngleBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cWCharAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cWCharNoExpandedColumnParserRuleCall_2_0 = (RuleCall)cWCharAssignment_2.eContents().get(0);
-		private final Keyword cGreaterThanSignGreaterThanSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Keyword cRightPointingAngleBracketRightPointingAngleBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//ExpandedColumn:
-		//	{ExpandedColumn} "<<" wChar+=NoExpandedColumn+ ">>";
+		//	{ExpandedColumn} "〈〈" wChar+=NoExpandedColumn+ "〉〉";
 		public ParserRule getRule() { return rule; }
 
-		//{ExpandedColumn} "<<" wChar+=NoExpandedColumn+ ">>"
+		//{ExpandedColumn} "〈〈" wChar+=NoExpandedColumn+ "〉〉"
 		public Group getGroup() { return cGroup; }
 
 		//{ExpandedColumn}
 		public Action getExpandedColumnAction_0() { return cExpandedColumnAction_0; }
 
-		//"<<"
-		public Keyword getLessThanSignLessThanSignKeyword_1() { return cLessThanSignLessThanSignKeyword_1; }
+		//"〈〈"
+		public Keyword getLeftPointingAngleBracketLeftPointingAngleBracketKeyword_1() { return cLeftPointingAngleBracketLeftPointingAngleBracketKeyword_1; }
 
 		//wChar+=NoExpandedColumn+
 		public Assignment getWCharAssignment_2() { return cWCharAssignment_2; }
@@ -1093,8 +1093,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//NoExpandedColumn
 		public RuleCall getWCharNoExpandedColumnParserRuleCall_2_0() { return cWCharNoExpandedColumnParserRuleCall_2_0; }
 
-		//">>"
-		public Keyword getGreaterThanSignGreaterThanSignKeyword_3() { return cGreaterThanSignGreaterThanSignKeyword_3; }
+		//"〉〉"
+		public Keyword getRightPointingAngleBracketRightPointingAngleBracketKeyword_3() { return cRightPointingAngleBracketRightPointingAngleBracketKeyword_3; }
 	}
 
 	public class NoExpandedColumnElements extends AbstractParserRuleElementFinder {
@@ -1907,7 +1907,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	"ꜥ" | // AjinU
 	//	"Ꜥ" | "j" | "y" | "w" | "b" | "f" | "m" | "n" | "r" | "h" | "ḥ" | "ḫ" | "ẖ" | "H" | "Ḥ" | "Ḫ" | "H̱" | "H̭" | "z" | "s"
 	//	| "š" | "ś" | "S" | "Š" | "Ś" | "q" | "k" | "g" | "t" | "ṯ" | "ṭ" | "ṱ" | "T" | "Ṯ" | "Ṭ" | "Ṱ" | "d" | "ḏ" | "Ḏ" |
-	//	"h̭" | "i̯" | "ı͗" | "ı̯͗" | "ï" | "i̭" | "I͗" | "I" | //IArcU
+	//	"h̭" | "i" | "i̯" | "ı͗" | "ı̯͗" | "ï" | "i̭" | "I͗" | "I" | //IArcU
 	//	"I̯" | // ITremaU
 	//	"Ï" | "ḳ" | "Ḳ" | "u" | "u̯" | "U" | "U̯" | "e" | "/" | "+" | "č" | "č̣" | "Č" | "Č̣" | "a" | "J" | "Y" | "W" | "B" |
 	//	"P" | "F" | "M" | "N" | "R" | "L" | "Z" | "Q" | "K" | "G" | "D" | "A" | "Ⲁ".."⳿" | "p" | "l" | "=" | "_" | // trplColon	
@@ -1998,7 +1998,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Emendation:
-	//	{Emendation} "<" wChar+=NoEmendation+ ">";
+	//	{Emendation} "〈" wChar+=NoEmendation+ "〉";
 	public EmendationElements getEmendationAccess() {
 		return (pEmendation != null) ? pEmendation : (pEmendation = new EmendationElements());
 	}
@@ -2078,7 +2078,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ExpandedColumn:
-	//	{ExpandedColumn} "<<" wChar+=NoExpandedColumn+ ">>";
+	//	{ExpandedColumn} "〈〈" wChar+=NoExpandedColumn+ "〉〉";
 	public ExpandedColumnElements getExpandedColumnAccess() {
 		return (pExpandedColumn != null) ? pExpandedColumn : (pExpandedColumn = new ExpandedColumnElements());
 	}

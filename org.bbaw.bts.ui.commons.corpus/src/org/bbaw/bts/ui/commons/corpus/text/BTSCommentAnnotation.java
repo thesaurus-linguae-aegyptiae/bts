@@ -43,7 +43,10 @@ public class BTSCommentAnnotation extends BTSModelAnnotation {
 			{
 				text=  comment.getName() + "\n";
 			}
-			text += WordUtils.wrap(comment.getComment(), 60);
+			if (comment.getComment() != null && !"".equals(comment.getComment()))
+			{
+				text += WordUtils.wrap(comment.getComment(), 60);
+			}
 			return text;
 		}
 		return super.getText();
