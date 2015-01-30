@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
-import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYConstants;
 
 public class BTSEgyObjectByNameComparator implements Comparator<BTSObject>{
 

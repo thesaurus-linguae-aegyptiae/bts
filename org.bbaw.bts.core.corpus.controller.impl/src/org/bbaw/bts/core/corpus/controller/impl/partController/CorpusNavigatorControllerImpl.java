@@ -1,27 +1,17 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
-import java.io.FileNotFoundException;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSRelation;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
-import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
@@ -36,19 +26,13 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
-import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
-import org.bbaw.bts.ui.corpus.egy.commons.comparator.BTSEgyObjectByNameComparator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
-import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.jface.viewers.ViewerFilter;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class CorpusNavigatorControllerImpl 
