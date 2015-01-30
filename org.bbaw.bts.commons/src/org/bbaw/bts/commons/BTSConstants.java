@@ -140,6 +140,10 @@ public class BTSConstants
 	public static final String OBJECT_TYPES_ARRAY = "object_types_array";
 
 	public static final String DESTRUCTION_MARKER = "destruction_marker";
+
+	public static final String BTS_SELECTION_HISTORY = "bts_object_selection_history";
+	public static final int BTS_SELECTION_HISTORY_LENGTH = 200;
+	
 	private BTSConstants()
 	{
 	}
