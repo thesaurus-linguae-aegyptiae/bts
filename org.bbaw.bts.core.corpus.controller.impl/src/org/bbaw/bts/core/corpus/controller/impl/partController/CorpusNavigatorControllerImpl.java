@@ -41,6 +41,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.bbaw.bts.ui.corpus.egy.commons.comparator.BTSEgyObjectByNameComparator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;

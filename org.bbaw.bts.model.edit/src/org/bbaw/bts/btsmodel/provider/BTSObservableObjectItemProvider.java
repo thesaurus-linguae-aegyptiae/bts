@@ -44,7 +44,15 @@ public class BTSObservableObjectItemProvider
 	implements
 		IEditingDomainItemProvider, IStructuredItemContentProvider, ITreeItemContentProvider, IItemLabelProvider, IItemPropertySource, ITableItemLabelProvider, ITableItemColorProvider, ITableItemFontProvider, IItemColorProvider, IItemFontProvider, IItemStyledLabelProvider
 {
-	protected BTSResourceProvider resourceProvider = StaticAccessController.getContext().get(BTSResourceProvider.class);
+	private BTSResourceProvider resourceProvider;
+	public BTSResourceProvider getBTSResourceProvider()
+	{
+		if (resourceProvider == null)
+		{
+			resourceProvider = StaticAccessController.getResourceProvider();
+		}
+		return resourceProvider;
+	}
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

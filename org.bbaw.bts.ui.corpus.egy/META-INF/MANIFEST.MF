@@ -31,7 +31,8 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.e4.core.contexts;bundle-version="1.3.0",
  org.eclipse.emf.databinding;bundle-version="1.3.0",
  org.eclipse.text,
- javax.inject
+ javax.inject,
+ org.bbaw.bts.ui.corpus;bundle-version="1.0.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.annotation;version="1.0.0",
@@ -39,6 +40,7 @@ Import-Package: javax.annotation;version="1.0.0",
  jsesh.editor,
  jsesh.hieroglyphs,
  org.bbaw.bts.core.commons,
+ org.bbaw.bts.core.commons.comparator,
  org.bbaw.bts.core.commons.staticAccess,
  org.bbaw.bts.core.controller.dialogControllers,
  org.bbaw.bts.core.controller.generalController,
@@ -81,4 +83,5 @@ Import-Package: javax.annotation;version="1.0.0",
  org.eclipse.ui.internal.editors.text,
  org.eclipse.ui.texteditor,
  org.eclipse.ui.texteditor.spelling,
- org.eclipse.xtext.resource
+ org.eclipse.xtext.resource,
+ org.mihalis.opal.promptSupport

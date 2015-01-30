@@ -8,12 +8,12 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.core.commons.comparator.BTSObjectByNameComparator;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
-import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.ui.corpus.egy.commons.comparator.BTSEgyObjectByNameComparator;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 

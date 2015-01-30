@@ -1512,6 +1512,7 @@ public class UserManagementPart
 						compoundCommand.append(command2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
 						roles_treeViewer.refresh(selectedDBRoleDesc);
+						manageDirtyObjects(selectedDBRoleDesc, selectedTreeObject);
 					}
 				}
 
@@ -1563,6 +1564,7 @@ public class UserManagementPart
 								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, ug.getName());
 						compoundCommand.append(command2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						manageDirtyObjects(selectedDBRoleDesc, selectedTreeObject);
 
 						roles_treeViewer.refresh(selectedDBRoleDesc);
 					}
@@ -1742,7 +1744,7 @@ public class UserManagementPart
 				Command c1 = AddCommand.create(getEditingDomain(selectedDBCollection), selectedDBCollection,
 						BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS, rolesDesc);
 				compound.append(c1);
-
+				manageDirtyObjects(selectedDBCollection, selectedTreeObject);
 				getEditingDomain(selectedDBCollection).getCommandStack().execute(compound);
 				roles_treeViewer.refresh();
 
@@ -1875,6 +1877,8 @@ public class UserManagementPart
 					Command command = AddCommand.create(getEditingDomain(selectedProject), selectedProject,
 							BtsmodelPackage.Literals.BTS_PROJECT__DB_COLLECTIONS, coll);
 					getEditingDomain(selectedProject).getCommandStack().execute(command);
+					manageDirtyObjects(selectedProject, selectedTreeObject);
+
 					roles_treeViewer.refresh();
 				}
 

@@ -79,5 +79,7 @@ public interface BTSProjectService extends GenericObjectService<BTSProject, Stri
 	boolean removeUserUserGroupFromAuthorization(BTSObject object,
 			List<BTSProject> projects);
 
+	BTSProjectDBCollection findProjectCollection(String dbCollectionName);
+
 
 }

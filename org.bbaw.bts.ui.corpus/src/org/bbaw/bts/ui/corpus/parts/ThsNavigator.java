@@ -276,7 +276,7 @@ labelProvider));
 				System.out.println(event.getSelection());
 				if (selection.getFirstElement() != null
 						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
-					TreeNodeWrapper tn = (TreeNodeWrapper) selection
+					final TreeNodeWrapper tn = (TreeNodeWrapper) selection
 							.getFirstElement();
 					if (tn.getObject() != null) {
 						BTSObject o = (BTSObject) tn.getObject();
@@ -289,6 +289,18 @@ labelProvider));
 							parents.add(tn);
 							tn.setChildrenLoaded(true);
 							loadChildren(parents, false, parentControl);
+							Job j = new Job("expand") {
+								@Override
+								protected IStatus run(IProgressMonitor monitor) {
+									sync.asyncExec(new Runnable() {
+										public void run() {
+											treeViewer.setExpandedState(tn, true);
+										}
+									});
+									return Status.OK_STATUS;
+								}
+							};
+							j.schedule(750);
 						}
 						if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 								.equals(selectionType)) {

@@ -33,7 +33,7 @@ import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.lemma.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -267,7 +267,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 				System.out.println(event.getSelection());
 				if (selection.getFirstElement() != null
 						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
-					TreeNodeWrapper tn = (TreeNodeWrapper) selection
+					final TreeNodeWrapper tn = (TreeNodeWrapper) selection
 							.getFirstElement();
 					if (tn.getObject() != null) {
 						BTSObject o = (BTSObject) tn.getObject();
@@ -279,6 +279,18 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 								parents.add(tn);
 								tn.setChildrenLoaded(true);
 								loadChildren(parents, false, parentControl);
+								Job j = new Job("expand") {
+									@Override
+									protected IStatus run(IProgressMonitor monitor) {
+										sync.asyncExec(new Runnable() {
+											public void run() {
+												treeViewer.setExpandedState(tn, true);
+											}
+										});
+										return Status.OK_STATUS;
+									}
+								};
+								j.schedule(750);
 							}
 							if (!BTSUIConstants.SELECTION_TYPE_SECONDARY
 									.equals(selectionType)) {
@@ -336,7 +348,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 			}
 		};
 
-//		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+		treeViewer.setSorter(new BTSEgyObjectByNameViewerSorter());
 		treeViewer.addSelectionChangedListener(selectionListener);
 	}
 	

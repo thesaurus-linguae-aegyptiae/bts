@@ -2,6 +2,7 @@ package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -184,7 +185,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	protected void internalSetSelection(Object internalSelection) {
-
+		evaluateDbContext(internalSelection);
 		if (evaluationService.acquireLockOptimistic(internalSelection))
 		{
 			otherLocked = false;
@@ -195,6 +196,23 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		}
 		hasLock = otherLocked;
 		evaluateSelectionPermissionsAndExpressions(internalSelection);
+		
+	}
+
+	private void evaluateDbContext(Object internalSelection) {
+		if (internalSelection instanceof BTSDBBaseObject)
+		{
+			if (dbCollectionContext == null 
+					|| !dbCollectionContext.equals(((BTSDBBaseObject) internalSelection).getDBCollectionKey()))
+			{
+				setDBCollectionContext(((BTSDBBaseObject) internalSelection).getDBCollectionKey());
+			}
+		}
+		
+	}
+
+	private void setDBCollectionContext(String dbCollectionKey) {
+		this.dbCollectionContext = dbCollectionKey;
 		
 	}
 
@@ -252,7 +270,45 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	private boolean evaluateMayTranscribe(Object internalSelection) {
-		//FIXME evaluate may transcribe
+		boolean may = !otherLocked;
+		if (may)
+		{
+			may = evaluateMayTranscribeInteral(internalSelection);
+		}
+
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_TRANSCRIBE,
+				new Boolean(may));
+		if (!may)
+		{
+//			StatusMessage m = BtsviewmodelFactory.eINSTANCE.createNotEditingRightsMessage();
+//			eventBroker.post("status_info/filtered", m);
+		}
+		return may;
+	}
+
+	private boolean evaluateMayTranscribeInteral(Object internalSelection) {
+		if (authenticatedUser == null || internalSelection == null
+				|| !(internalSelection instanceof BTSDBBaseObject)) {
+			return false;
+		} 
+		else {
+			if (evaluateUserContextRoleDisallowsTranscribing()) {
+				return false;
+			}
+			if (userRoleMayEdit()
+					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) internalSelection).getUpdaters())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean evaluateUserContextRoleDisallowsTranscribing() {
+		if (userContextRole == null 
+				|| userContextRole.equals(BTSCoreConstants.USER_ROLE_GUESTS))
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -261,17 +317,18 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (authenticatedUser == null || mainProject == null) {
 
 		} else {
-			for (BTSProjectDBCollection c : mainProject.getDbCollections()) {
-				if (c.getCollectionName() != null
-						&& c.getCollectionName().equals(dbCollectionContext)) {
-					userContextRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(c);
-					break;
-				}
-			}
+			BTSProjectDBCollection projectCollection = findProjectCollection(dbCollectionContext);
+			userContextRole = evaluationService.highestRoleOfAuthenticatedUserInDBCollection(projectCollection);
 		}
 		workbenchContext.modify(
 				BTSCoreConstants.CORE_EXPRESSION_USER_CONTEXT_ROLE,
 				userContextRole);
+	}
+
+	
+	private BTSProjectDBCollection findProjectCollection(
+			String dbCollectionName) {
+		return projecService.findProjectCollection(dbCollectionName);
 	}
 
 	
@@ -421,11 +478,25 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (authenticatedUser == null || internalSelection == null
 				|| !(internalSelection instanceof BTSDBBaseObject)) {
 			return false;
-		} else {
+		} 
+		else {
+			if (evaluateUserContextRoleDisallowsEditing()) {
+				return false;
+			}
 			if (userRoleMayEdit()
 					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) internalSelection).getUpdaters())) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	private boolean evaluateUserContextRoleDisallowsEditing() {
+		if (userContextRole == null 
+				|| userContextRole.equals(BTSCoreConstants.USER_ROLE_GUESTS)
+				|| userContextRole.equals(BTSCoreConstants.USER_ROLE_TRANSCRIBERS))
+		{
+			return true;
 		}
 		return false;
 	}
@@ -505,8 +576,11 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			String localDBCollContext = null;
 			switch (key) {
 			case BTSPluginIDs.PREF_MAIN_CORPUS_KEY: {
-				localDBCollContext = main_project_key + "_corpus_"
-						+ main_corpus_key;
+				localDBCollContext = main_corpus_key;
+				break;
+			}
+			case "corpus": {
+				localDBCollContext = main_corpus_key;
 				break;
 			}
 			case BTSCoreConstants.MAIN_WORD_LIST: {

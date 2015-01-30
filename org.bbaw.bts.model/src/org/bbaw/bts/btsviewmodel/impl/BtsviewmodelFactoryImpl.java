@@ -281,7 +281,14 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 
 	public StatusMessage createFilteredMessage(int suppressed) {
 		StatusMessage m = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
-		m.setMessage(suppressed + " objects are not shown.");
+		if (suppressed == 1)
+		{
+			m.setMessage(suppressed + " object is suppressed and not shown.");
+		}
+		else
+		{
+			m.setMessage(suppressed + " objects are suppressed and not shown.");
+		}
 		m.setMessageType(MessageType.FILTERED);
 		m.setCreationTime(getTimeStamp());
 		return m;

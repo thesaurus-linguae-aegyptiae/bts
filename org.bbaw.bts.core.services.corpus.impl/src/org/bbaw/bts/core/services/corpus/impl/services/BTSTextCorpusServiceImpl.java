@@ -106,8 +106,12 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		List<BTSTextCorpus> list = new Vector<BTSTextCorpus>();
 		for (String p : getActiveProjects())
 		{
-			list.addAll(textCorpusDao.list(p + BTSCorpusConstants.CORPUS,
-					objectState));
+			try {
+				list.addAll(textCorpusDao.list(p + BTSCorpusConstants.CORPUS,
+						objectState));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return filter(list);
 	}

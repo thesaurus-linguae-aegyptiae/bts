@@ -19,6 +19,7 @@ import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.services.IStylingEngine;
 import org.eclipse.emf.common.command.CompoundCommand;
 import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -44,6 +45,8 @@ public class CorpusToolControl {
 
 	@Inject
 	private EHandlerService handlerService;
+	@Inject 
+	private IStylingEngine engine;
 	
 	private ComposedAdapterFactory factory = new ComposedAdapterFactory(
 			ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
@@ -61,6 +64,8 @@ public class CorpusToolControl {
 		this.composite = composite;
 		this.mainCorpus = corpus;
 		composite.setLayout(new GridLayout(6, false));
+		engine.setClassname(composite, "MToolBar");
+
 		Label l = new Label(composite, SWT.None);
 		l.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_CORPUS));
 		l.setLayoutData(new GridData());

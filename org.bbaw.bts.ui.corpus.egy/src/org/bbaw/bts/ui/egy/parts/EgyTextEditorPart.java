@@ -65,6 +65,7 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
@@ -365,11 +366,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	/** The lemmata loaded. */
 	private boolean lemmataLoaded;
 
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private Boolean userMayEdit;
 	
 	/** The parent shell. */
 	@Inject
 	@Active
 	private Shell parentShell;
+
+	private boolean loaded;
 
 	
 	/**
@@ -727,6 +734,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		sashForm.setWeights(new int[] { 6, 1 });
 		parent.layout();
 
+		loaded = true;
 	}
 
 	/**
@@ -1823,6 +1831,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 										break;
 									}
 									}
+									setUserMayEditInteral(userMayEdit);
 								}
 							});
 							
@@ -2326,5 +2335,32 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 		}
 		return ta;
+	}
+	
+	@Inject
+	@Optional
+	public void setUserMayEdit(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) final boolean userMayEdit) {
+		if(userMayEdit != this.userMayEdit)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayEditInteral(userMayEdit);
+				}
+			});
+			
+		}
+	}
+
+	protected void setUserMayEditInteral(boolean mayEdit) {
+		this.userMayEdit = mayEdit;
+		if (loaded && parent != null && !parent.isDisposed())
+		{
+			embeddedEditor.getViewer().setEditable(mayEdit);
+			signTextEditor.setEnabled(mayEdit);
+			sentenceTranslate_Editor.setEnabled(mayEdit);
+		}
+		
 	}
 }

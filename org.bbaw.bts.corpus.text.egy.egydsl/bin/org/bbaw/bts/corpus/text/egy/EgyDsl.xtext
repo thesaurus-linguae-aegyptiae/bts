@@ -217,7 +217,7 @@ NoExpanded:
 
 Emendation:
 	{Emendation}
-	'<' wChar+=NoEmendation+ '>'
+	'\u2329' wChar+=NoEmendation+ '\u232A'
 	;
 
 NoEmendation:
@@ -253,7 +253,7 @@ NoDeletion:
 
 ExpandedColumn:
 	{ExpandedColumn}
-	'<<' wChar+=NoExpandedColumn+ '>>'
+	'\u2329\u2329' wChar+=NoExpandedColumn+ '\u232A\u232A'
 ;
 
 NoExpandedColumn:

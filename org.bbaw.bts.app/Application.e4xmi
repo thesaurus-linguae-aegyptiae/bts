@@ -1,23 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
   <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0.3" iconURI="platform:/plugin/org.bbaw.bts.app/icons/bts16.bmp" width="1000" height="750">
-    <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main" selectedElement="_lAwBoADxEeOpmPWG2KRhAA">
-      <children xsi:type="advanced:Perspective" xmi:id="_lAwBoADxEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspective.main" label="BTSPerspective">
-        <children xsi:type="basic:PartSashContainer" xmi:id="_1NBNMAD3EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partsashcontainer.left" horizontal="true">
-          <children xsi:type="basic:PartStack" xmi:id="_DjKeQAD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.partstack.left" containerData="25"/>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_pbqVcANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.middle.horizontal" containerData="75" horizontal="true">
-            <children xsi:type="basic:PartSashContainer" xmi:id="_yR59YANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.middle.vertical" containerData="65">
-              <children xsi:type="basic:PartStack" xmi:id="_8xzDsANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partstack.middle.top" containerData="60"/>
-              <children xsi:type="basic:PartStack" xmi:id="__gSqQANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partstack.middle.bottom" containerData="40"/>
-            </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_uXkOwANcEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partsashcontainer.right" containerData="35">
-              <children xsi:type="basic:PartStack" xmi:id="_A1-DwANdEeO_KvSHBrHQXw" elementId="org.bbaw.bts.app.partstack.right.top"/>
-            </children>
-          </children>
-        </children>
-      </children>
-    </children>
-    <mainMenu xmi:id="_3KR2AAD1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.menu.0">
+    <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main"/>
+    <mainMenu xmi:id="_3KR2AAD1EeOpmPWG2KRhAA" elementId="org.eclipse.ui.menu">
       <children xsi:type="menu:Menu" xmi:id="_N6Q08AD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.file" label="File">
         <children xsi:type="menu:MenuSeparator" xmi:id="_f1DVMAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.4"/>
         <children xsi:type="menu:Menu" xmi:id="_NDL1wDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menu.file.new" label="New"/>
@@ -45,6 +30,13 @@
       <children xsi:type="menu:ToolBar" xmi:id="_g3q6IAD2EeOpmPWG2KRhAA" elementId="toolbar:org.eclipse.ui.main.toolbar"/>
       <children xsi:type="menu:ToolControl" xmi:id="_hSo-4AD2EeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.toolcontrol.0"/>
       <children xsi:type="menu:ToolBar" xmi:id="_7-KisOvMEeOp-Id2RgOpIA" elementId="org.bbaw.bts.app.toolbar.top.second"/>
+      <children xsi:type="menu:ToolControl" xmi:id="_WtM1cKY7EeSMm_n5aML7dg" elementId="PerspectiveSpacer" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
+        <tags>stretch</tags>
+      </children>
+      <children xsi:type="menu:ToolControl" xmi:id="_YEO50KY7EeSMm_n5aML7dg" elementId="Spacer Glue" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.LayoutModifierToolControl">
+        <tags>glue</tags>
+      </children>
+      <children xsi:type="menu:ToolControl" xmi:id="_ZOLkcKY7EeSMm_n5aML7dg" elementId="PerspectiveSwitcher" contributionURI="bundleclass://org.eclipse.e4.ui.workbench.perspectiveswitcher/org.eclipse.e4.ui.workbench.perspectiveswitcher.tools.PerspectiveSwitcherSwtTrim"/>
     </trimBars>
     <trimBars xmi:id="_GCE3oOvNEeOp-Id2RgOpIA" elementId="org.bbaw.bts.app.trimbar.bottom" side="Bottom">
       <children xsi:type="menu:ToolBar" xmi:id="_Li6qAOvNEeOp-Id2RgOpIA" elementId="org.bbaw.bts.app.toolbar.bottom.main"/>

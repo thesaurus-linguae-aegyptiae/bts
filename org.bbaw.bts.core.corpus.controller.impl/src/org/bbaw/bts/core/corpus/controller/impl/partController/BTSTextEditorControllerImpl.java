@@ -875,7 +875,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				Command command = SetCommand.create(editingDomain, graphic,
 						BtsCorpusModelPackage.Literals.BTS_GRAPHIC__CODE,
-						tokens[i].toUpperCase());
+						tokens[i]);
 				compoundCommand.append(command);
 				innerSentenceOrder = graphic.getInnerSentenceOrder();
 			} else
@@ -893,7 +893,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				BTSGraphic graphic = textService.createNewGraphic();
 				createdIndex++;
-				graphic.setCode(tokens[i].toUpperCase());
+				graphic.setCode(tokens[i]);
 				graphic.setInnerSentenceOrder(innerSentenceOrder + createdIndex);
 				Command command = AddCommand.create(editingDomain, word,
 						BtsCorpusModelPackage.Literals.BTS_WORD__GRAPHICS, graphic);
@@ -943,7 +943,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 									{
 										if (item instanceof BTSWord)
 										{
-											if (!((BTSWord) leftSibbling).getGraphics().isEmpty())
+											// FIXME  org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAmbivalenceImpl cannot be cast to org.bbaw.bts.corpus.btsCorpusModel.BTSWord
+											// Ambivalence fälle bedenken!!!
+											if (leftSibbling instanceof BTSWord && !((BTSWord) leftSibbling).getGraphics().isEmpty())
 											{
 												BTSGraphic last = ((BTSWord) leftSibbling).getGraphics().get(((BTSWord) leftSibbling).getGraphics().size()- 1);
 												if (last != null)

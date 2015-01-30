@@ -341,16 +341,22 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
 					@Override
-					public void run(IProgressMonitor monitor)
+					public void run(final IProgressMonitor monitor)
 							throws InvocationTargetException, InterruptedException 
 					{
-						List<BTSUserGroup> groups = userManagerController.listUserGroups(monitor);
-						observableLisAllUserGroups = new WritableList(groups,
-								BTSUserGroup.class);
-						userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
-						for (BTSUserGroup u : groups) {
-							userGroupMap.put(u.get_id(), u);
-						}
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								List<BTSUserGroup> groups = userManagerController.listUserGroups(monitor);
+								observableLisAllUserGroups = new WritableList(groups,
+										BTSUserGroup.class);
+								userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
+								for (BTSUserGroup u : groups) {
+									userGroupMap.put(u.get_id(), u);
+								}
+							}
+						});
+						
 					}};
 		       new ProgressMonitorDialog(parentShell).run(true, true, op);
 		    } catch (InvocationTargetException e) {
@@ -366,15 +372,21 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
 					@Override
-					public void run(IProgressMonitor monitor)
+					public void run(final IProgressMonitor monitor)
 							throws InvocationTargetException, InterruptedException 
 					{
-						List<BTSUser> users = userManagerController.listUsers(monitor);
-						observableLisAllUsers = new WritableList(users, BTSUser.class);
-						userMap = new HashMap<String, BTSUser>(users.size());
-						for (BTSUser u : users) {
-							userMap.put(u.getUserName(), u);
-						}
+						sync.asyncExec(new Runnable() {
+							@Override
+							public void run() {
+								List<BTSUser> users = userManagerController.listUsers(monitor);
+								observableLisAllUsers = new WritableList(users, BTSUser.class);
+								userMap = new HashMap<String, BTSUser>(users.size());
+								for (BTSUser u : users) {
+									userMap.put(u.getUserName(), u);
+								}
+							}
+						});
+						
 					}};
 		       new ProgressMonitorDialog(parentShell).run(true, true, op);
 		    } catch (InvocationTargetException e) {

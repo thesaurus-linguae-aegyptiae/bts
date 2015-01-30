@@ -309,5 +309,7 @@ public class BTSCoreConstants
 
 	public static final String TRANSLATIONS_SUB_DELIMITER = ";";
 
+	public static final String PROJECT_DB_COLLECTION_MAP = "project_db_collection_map";
+
 	
 }

@@ -4088,11 +4088,11 @@ rule__Emendation__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getEmendationAccess().getLessThanSignKeyword_1()); }
+{ before(grammarAccess.getEmendationAccess().getLeftPointingAngleBracketKeyword_1()); }
 
-	'<' 
+	'\u2329' 
 
-{ after(grammarAccess.getEmendationAccess().getLessThanSignKeyword_1()); }
+{ after(grammarAccess.getEmendationAccess().getLeftPointingAngleBracketKeyword_1()); }
 )
 
 ;
@@ -4154,11 +4154,11 @@ rule__Emendation__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getEmendationAccess().getGreaterThanSignKeyword_3()); }
+{ before(grammarAccess.getEmendationAccess().getRightPointingAngleBracketKeyword_3()); }
 
-	'>' 
+	'\u232A' 
 
-{ after(grammarAccess.getEmendationAccess().getGreaterThanSignKeyword_3()); }
+{ after(grammarAccess.getEmendationAccess().getRightPointingAngleBracketKeyword_3()); }
 )
 
 ;
@@ -4632,11 +4632,11 @@ rule__ExpandedColumn__Group__1__Impl
     }
 :
 (
-{ before(grammarAccess.getExpandedColumnAccess().getLessThanSignLessThanSignKeyword_1()); }
+{ before(grammarAccess.getExpandedColumnAccess().getLeftPointingAngleBracketLeftPointingAngleBracketKeyword_1()); }
 
-	'<<' 
+	'\u2329\u2329' 
 
-{ after(grammarAccess.getExpandedColumnAccess().getLessThanSignLessThanSignKeyword_1()); }
+{ after(grammarAccess.getExpandedColumnAccess().getLeftPointingAngleBracketLeftPointingAngleBracketKeyword_1()); }
 )
 
 ;
@@ -4698,11 +4698,11 @@ rule__ExpandedColumn__Group__3__Impl
     }
 :
 (
-{ before(grammarAccess.getExpandedColumnAccess().getGreaterThanSignGreaterThanSignKeyword_3()); }
+{ before(grammarAccess.getExpandedColumnAccess().getRightPointingAngleBracketRightPointingAngleBracketKeyword_3()); }
 
-	'>>' 
+	'\u232A\u232A' 
 
-{ after(grammarAccess.getExpandedColumnAccess().getGreaterThanSignGreaterThanSignKeyword_3()); }
+{ after(grammarAccess.getExpandedColumnAccess().getRightPointingAngleBracketRightPointingAngleBracketKeyword_3()); }
 )
 
 ;
@@ -6198,6 +6198,6 @@ RULE_BETWEEN_HASHES : '#' ~('#')+ '#';
 
 RULE_BETWEEN_MINUS : '--' ~('-')+ '--';
 
-RULE_EGYSTRING : ('\uA722'|'\uA723'|'\u02BE'|'\uA725'|'\uA724'|'j'|'y'|'w'|'b'|'f'|'m'|'n'|'r'|'h'|'\u1E25'|'\u1E2B'|'\u1E96'|'H'|'\u1E24'|'\u1E2A'|'H\u0331'|'H\u032D'|'z'|'s'|'\u0161'|'\u015B'|'S'|'\u0160'|'\u015A'|'q'|'k'|'g'|'t'|'\u1E6F'|'\u1E6D'|'\u1E71'|'T'|'\u1E6E'|'\u1E6C'|'\u1E70'|'d'|'\u1E0F'|'\u1E0E'|'h\u032D'|'i\u032F'|'\u0131\u0357'|'\u0131\u0357\u032F'|'\u00EF'|'i\u032D'|'I\u0357'|'I'|'I\u032F'|'\u00CF'|'\u1E33'|'\u1E32'|'u'|'u\u032F'|'U'|'U\u032F'|'e'|'/'|'+'|'\u010D'|'\u010D\u0323'|'\u010C'|'\u010C\u0323'|'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'Z'|'Q'|'K'|'G'|'D'|'A'|'\u2C80'..'\u2CFF'|'p'|'l'|'='|'_'|'\u205D'|'0'..'9'|'\u00D5'|'\u00E3'|'\u00DE'|'!'|'\u0152'|'\u0153'|'\u0178'|'\u00C6')+;
+RULE_EGYSTRING : ('\uA722'|'\uA723'|'\u02BE'|'\uA725'|'\uA724'|'j'|'y'|'w'|'b'|'f'|'m'|'n'|'r'|'h'|'\u1E25'|'\u1E2B'|'\u1E96'|'H'|'\u1E24'|'\u1E2A'|'H\u0331'|'H\u032D'|'z'|'s'|'\u0161'|'\u015B'|'S'|'\u0160'|'\u015A'|'q'|'k'|'g'|'t'|'\u1E6F'|'\u1E6D'|'\u1E71'|'T'|'\u1E6E'|'\u1E6C'|'\u1E70'|'d'|'\u1E0F'|'\u1E0E'|'h\u032D'|'i'|'i\u032F'|'\u0131\u0357'|'\u0131\u0357\u032F'|'\u00EF'|'i\u032D'|'I\u0357'|'I'|'I\u032F'|'\u00CF'|'\u1E33'|'\u1E32'|'u'|'u\u032F'|'U'|'U\u032F'|'e'|'/'|'+'|'\u010D'|'\u010D\u0323'|'\u010C'|'\u010C\u0323'|'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'Z'|'Q'|'K'|'G'|'D'|'A'|'\u2C80'..'\u2CFF'|'p'|'l'|'='|'_'|'\u205D'|'0'..'9'|'\u00D5'|'\u00E3'|'\u00DE'|'!'|'\u0152'|'\u0153'|'\u0178'|'\u00C6')+;
 
 

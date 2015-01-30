@@ -19,6 +19,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
@@ -154,6 +155,11 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	
 	@Inject
 	private Logger logger;
+	
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private Boolean userMayEdit;
 
 	private Map<EObject, List<BTSModelAnnotation>> relatingObjectsAnnotationMap;
 
@@ -476,6 +482,8 @@ private void bringPartToFront(boolean b) {
 		loadSignText(selection);
 		
 		loadTranslation(selection);
+		setUserMayEditInteral(userMayEdit);
+
 		loading = false;
 	}
 
@@ -1125,6 +1133,33 @@ private void bringPartToFront(boolean b) {
 //			}
 //		}
 		
+		
+	}
+	
+	@Inject
+	@Optional
+	public void setUserMayEdit(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) final boolean userMayEdit) {
+		if(userMayEdit != this.userMayEdit)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayEditInteral(userMayEdit);
+				}
+			});
+			
+		}
+	}
+
+	protected void setUserMayEditInteral(boolean mayEdit) {
+		this.userMayEdit = mayEdit;
+		if (loaded)
+		{
+			embeddedEditor.getViewer().setEditable(mayEdit);
+			signTextEditor.setEnabled(mayEdit);
+			lemmaTranslate_Editor.setEnabled(mayEdit);
+		}
 		
 	}
 }
