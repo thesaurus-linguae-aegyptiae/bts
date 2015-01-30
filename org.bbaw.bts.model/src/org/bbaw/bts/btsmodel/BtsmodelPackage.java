@@ -2552,13 +2552,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_TRANSLATIONS___GET_LANGUAGES = 3;
 
 	/**
+	 * The operation id for the '<em>Get Translation Strict</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TRANSLATIONS___GET_TRANSLATION_STRICT__STRING = 4;
+
+	/**
 	 * The number of operations of the '<em>BTS Translations</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATIONS_OPERATION_COUNT = 4;
+	int BTS_TRANSLATIONS_OPERATION_COUNT = 5;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl <em>BTS Config Item</em>}' class.
@@ -5283,6 +5292,16 @@ public interface BtsmodelPackage extends EPackage {
 	EOperation getBTSTranslations__GetLanguages();
 
 	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSTranslations#getTranslationStrict(java.lang.String) <em>Get Translation Strict</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Translation Strict</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSTranslations#getTranslationStrict(java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSTranslations__GetTranslationStrict__String();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSConfigItem <em>BTS Config Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6924,6 +6943,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EOperation BTS_TRANSLATIONS___GET_LANGUAGES = eINSTANCE.getBTSTranslations__GetLanguages();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Translation Strict</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_TRANSLATIONS___GET_TRANSLATION_STRICT__STRING = eINSTANCE.getBTSTranslations__GetTranslationStrict__String();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl <em>BTS Config Item</em>}' class.
