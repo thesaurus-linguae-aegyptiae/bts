@@ -55,7 +55,9 @@ public class PasswordChangeDialog extends TitleAreaDialog {
 	private PermissionsAndExpressionsEvaluationController permissionController;
 	@Inject
 	private UserManagerController userManagerController;
-	private boolean authenticatedUserIsAdmin = false; 
+	private boolean authenticatedUserIsAdmin = false;
+	
+	private boolean repeatOldPassword = true;
 	
 	@Inject
 	private BTSUserController userController;
@@ -87,13 +89,21 @@ public class PasswordChangeDialog extends TitleAreaDialog {
 		{
 			user = authenticatedUser;
 		}
+		else if (authenticatedUserIsAdmin)
+		{
+			repeatOldPassword = false;
+		}
+		setTitle("Change Password of User: " + user.getUserName());
+		
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
 		container.setLayout(new GridLayout(1, false));
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
-		if (!authenticatedUserIsAdmin)
+		if (repeatOldPassword)
 		{
+			setMessage("Please enter your old password!");
+
 			Composite composite = new Composite(container, SWT.NONE);
 			composite.setLayout(new GridLayout(1, false));
 			composite.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));

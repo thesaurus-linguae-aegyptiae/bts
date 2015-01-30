@@ -37,10 +37,10 @@ public interface BTSTextEditorController
 
 	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
 			List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
-			Map<String, List<Object>> lemmaAnnotationMap);
+			Map<String, List<Object>> lemmaAnnotationMap, IProgressMonitor monitor);
 
-	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
-			TextViewer textViewer);
+//	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
+//			TextViewer textViewer);
 
 	boolean save(BTSText text);
 
@@ -76,7 +76,7 @@ public interface BTSTextEditorController
 	BTSTextContent updateModelFromTextContent(BTSTextContent textContent,
 			EObject eo, IAnnotationModel am);
 	
-	boolean checkAndFullyLoad(BTSCorpusObject object);
-
 	BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor);
+
+	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 }

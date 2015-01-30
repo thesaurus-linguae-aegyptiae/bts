@@ -62,11 +62,7 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
-import org.bbaw.bts.ui.egy.parts.support.BTSEgySourceViewerConfiguration;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -86,12 +82,8 @@ import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.Position;
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.jface.text.rules.IToken;
-import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.swt.graphics.Image;
@@ -109,7 +101,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String AMBIVALENCE_START_SIGN = "\u0025";
 	private static final String AMBIVALENCE_END_SIGN = "\u0025";
 	private static final String LEMMA_CASE_TERMIAL = "case";
-	private static final String LEMMA_CASE_SEPARATOR = "; ";
+	private static final String LEMMA_CASE_SEPARATOR = "| ";
 	private static final String WS = " ";
 	private static final String LEMMA_CASE_INTERFIX = ": ";
 	private static final String MARKER_START_SIGN = "\u0023";
@@ -156,7 +148,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
 			List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
-			Map<String, List<Object>> lemmaAnnotationMap)
+			Map<String, List<Object>> lemmaAnnotationMap, IProgressMonitor monitor)
 	{
 //		if (textContent == null)
 //		{
@@ -181,12 +173,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			{
 				BTSSenctence sentence = (BTSSenctence) textItems;
 				int start = stringBuilder.length();
-				logger.info("BTSTextEditorController before sentence sign added: " + stringBuilder.toString());
+//				logger.info("BTSTextEditorController before sentence sign added: " + stringBuilder.toString());
 
 				stringBuilder.append(SENTENCE_SIGN);
-				logger.info("BTSTextEditorController sentence sign: " + SENTENCE_SIGN);
+//				logger.info("BTSTextEditorController sentence sign: " + SENTENCE_SIGN);
 
-				logger.info("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
+//				logger.info("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
 
 				BTSModelAnnotation ma = new BTSModelAnnotation(BTSModelAnnotation.TYPE,sentence);
 				int len = stringBuilder.length();
@@ -198,6 +190,11 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					{
 						stringBuilder.append(WS);
 						loopLen = stringBuilder.length();
+					}
+					if (monitor != null)
+					{
+						if (monitor.isCanceled()) return;
+						monitor.worked(1);
 					}
 				}
 				
@@ -213,7 +210,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						
 				stringBuilder.append("\n");
 				int length = stringBuilder.length() - start;
-				Position pos = new Position(start, length);
+				// shorten sentence annotation to avoid mixing it with next sentence
+				Position pos = new Position(start, length-1); 
 				model.addAnnotation(ma, pos);
 			} else
 			{
@@ -235,6 +233,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	public HashMap<String, List<BTSInterTextReference>> fillRelatingObjectsMap(List<BTSObject> relatingObjects) {
 		HashMap<String, List<BTSInterTextReference>> relatingObjectsMap = new HashMap<String, List<BTSInterTextReference>>();
 		counter = 0;
+		if (relatingObjects == null) return relatingObjectsMap;
 		for (BTSObject o : relatingObjects)
 		{
 			o.setTempSortKey(-1);
@@ -269,7 +268,10 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		
 	}
 
-	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, StringBuilder stringBuilder, List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, Map<String, List<Object>> lemmaAnnotationMap)
+	private void appendToStringBuilder(BTSIdentifiableItem item, IAnnotationModel model, 
+			StringBuilder stringBuilder, List<BTSObject> relatingObjects, 
+			Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
+			Map<String, List<Object>> lemmaAnnotationMap)
 	{
 		Position pos = null;
 		if (item instanceof BTSWord)
@@ -325,13 +327,20 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			// 3) ref ist end
 			// annotation aus cache holen - wie?
 				AnnotationCache cache = annotationRangeMap.get(ref);
-				if (cache == null) continue;
-				Position pos2 = new Position(cache.getStart());
-				pos2.setLength((pos.offset - pos2.getOffset()) + pos.getLength());
-			// end position
-			// position und anno zu modell adden
-				model.addAnnotation(cache.getAnnotation(), pos2);
-				annotationRangeMap.remove(ref);
+				if (cache != null)
+				{
+					Position pos2 = new Position(cache.getStart());
+					pos2.setLength((pos.offset - pos2.getOffset()) + pos.getLength());
+				// end position
+				// position und anno zu modell adden
+					model.addAnnotation(cache.getAnnotation(), pos2);
+					annotationRangeMap.remove(ref);
+				}
+				else
+				{// begin element not found, only end element
+					BTSModelAnnotation modelAnnotation = createAnnotation(item, model, pos, ref);
+					model.addAnnotation(modelAnnotation, pos);
+				}
 			}
 		}
 
@@ -554,94 +563,94 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		return pos;
 	}
 
-	@Override
-	public BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
-			TextViewer textViewer)
-	{
-		BTSEgySourceViewerConfiguration configuration = new BTSEgySourceViewerConfiguration();
-		RuleBasedScanner scanner = configuration.getScanner();
-		scanner.setRange(document, 0, document.getLength());
-		IToken token = scanner.nextToken();
-		int length = document.getLength();
-		Iterator annotationIterator = annotationModel.getAnnotationIterator();
-		StringBuffer buffer = new StringBuffer(length);
-		//		StringTokenizer tokenizer= new StringTokenizer(document.get(), "\n\r><", true); //$NON-NLS-1$
-		//		while (tokenizer.hasMoreTokens()){
-		//
-		//			String token = tokenizer.nextToken();
-		//		}
-
-		int pos;
-		int len;
-		int annotationOffset = 0;
-		String content = null;
-		boolean hasToken = token != null;
-		BTSModelAnnotation annotation = null;
-		BTSSenctence sentence;
-
-		if (!text.getTextContent().getTextItems().isEmpty())
-		{
-			sentence = (BTSSenctence) text.getTextContent().getTextItems().get(0);
-			sentence.getSentenceItems().clear();
-		} else
-		{
-			sentence = textService.createNewSentence();
-			text.getTextContent().getTextItems().add(sentence);
-		}
-		BTSWord word = null;
-		int innerSentencePosition = 0;
-		while (hasToken)
-		{
-
-			pos = scanner.getTokenOffset();
-			len = scanner.getTokenLength();
-			Object o = token.getData();
-			//			annotationModel.
-			logger.info("BTSTextEditorController token " + token + " offset: " + pos + " token length: " + len);
-			try
-			{
-				content = document.get(pos, len);
-			} catch (BadLocationException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (content != null)
-			{
-
-				boolean wordFound = false;
-				if (annotationOffset <= pos)
-				{
-					annotation = getAnnotation(annotation, annotationIterator, annotationModel, content, pos, len);
-					Position position = annotationModel.getPosition(annotation);
-					if (position != null)
-					{
-						annotationOffset = position.getOffset();
-					}
-					if (annotation != null && annotationOffset == pos && position.getLength() == len)
-					{
-						word = (BTSWord) annotation.getModel();
-						word.setWChar(content);
-						sentence.getSentenceItems().add(innerSentencePosition, word);
-						wordFound = true;
-						innerSentencePosition++;
-					}
-				}
-				if (!wordFound)
-				{
-					word = createNewWord(content);
-					sentence.getSentenceItems().add(innerSentencePosition, word);
-					innerSentencePosition++;
-				}
-
-				content = null;
-			}
-
-			token = scanner.nextToken();
-			hasToken = token != null && scanner.getTokenLength() > 0;
-		}
-		return text;
-	}
+//	@Override
+//	public BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
+//			TextViewer textViewer)
+//	{
+//		BTSEgySourceViewerConfiguration configuration = new BTSEgySourceViewerConfiguration();
+//		RuleBasedScanner scanner = configuration.getScanner();
+//		scanner.setRange(document, 0, document.getLength());
+//		IToken token = scanner.nextToken();
+//		int length = document.getLength();
+//		Iterator annotationIterator = annotationModel.getAnnotationIterator();
+//		StringBuffer buffer = new StringBuffer(length);
+//		//		StringTokenizer tokenizer= new StringTokenizer(document.get(), "\n\r><", true); //$NON-NLS-1$
+//		//		while (tokenizer.hasMoreTokens()){
+//		//
+//		//			String token = tokenizer.nextToken();
+//		//		}
+//
+//		int pos;
+//		int len;
+//		int annotationOffset = 0;
+//		String content = null;
+//		boolean hasToken = token != null;
+//		BTSModelAnnotation annotation = null;
+//		BTSSenctence sentence;
+//
+//		if (!text.getTextContent().getTextItems().isEmpty())
+//		{
+//			sentence = (BTSSenctence) text.getTextContent().getTextItems().get(0);
+//			sentence.getSentenceItems().clear();
+//		} else
+//		{
+//			sentence = textService.createNewSentence();
+//			text.getTextContent().getTextItems().add(sentence);
+//		}
+//		BTSWord word = null;
+//		int innerSentencePosition = 0;
+//		while (hasToken)
+//		{
+//
+//			pos = scanner.getTokenOffset();
+//			len = scanner.getTokenLength();
+//			Object o = token.getData();
+//			//			annotationModel.
+//			logger.info("BTSTextEditorController token " + token + " offset: " + pos + " token length: " + len);
+//			try
+//			{
+//				content = document.get(pos, len);
+//			} catch (BadLocationException e)
+//			{
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//			if (content != null)
+//			{
+//
+//				boolean wordFound = false;
+//				if (annotationOffset <= pos)
+//				{
+//					annotation = getAnnotation(annotation, annotationIterator, annotationModel, content, pos, len);
+//					Position position = annotationModel.getPosition(annotation);
+//					if (position != null)
+//					{
+//						annotationOffset = position.getOffset();
+//					}
+//					if (annotation != null && annotationOffset == pos && position.getLength() == len)
+//					{
+//						word = (BTSWord) annotation.getModel();
+//						word.setWChar(content);
+//						sentence.getSentenceItems().add(innerSentencePosition, word);
+//						wordFound = true;
+//						innerSentencePosition++;
+//					}
+//				}
+//				if (!wordFound)
+//				{
+//					word = createNewWord(content);
+//					sentence.getSentenceItems().add(innerSentencePosition, word);
+//					innerSentencePosition++;
+//				}
+//
+//				content = null;
+//			}
+//
+//			token = scanner.nextToken();
+//			hasToken = token != null && scanner.getTokenLength() > 0;
+//		}
+//		return text;
+//	}
 
 	private BTSWord createNewWord(String content)
 	{
@@ -820,7 +829,6 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					res.add(next);
 					index++;
 				}
-				System.out.println(next);
 				pos = m.end() - offset;
 				last = next;
 			}
@@ -1059,7 +1067,6 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				res.add(next);
 				index++;
 			}
-			System.out.println(next);
 			pos = m.end() - offset;
 			last = next;
 		}
@@ -1096,14 +1103,19 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		{
 			children.add(o);
 		}
+		if (monitor != null)
+		{
+			if (monitor.isCanceled()) return children;
+			monitor.beginTask("Load comments", IProgressMonitor.UNKNOWN);
+		}
 		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true, monitor));
 		return children;
 	}
 	
 	@Override
-	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
-		return corpusObjectService.checkAndFullyLoad(object);
+		return corpusObjectService.checkAndFullyLoad(object, checkForConflicts);
 	}
 	
 	private class AnnotationCache {

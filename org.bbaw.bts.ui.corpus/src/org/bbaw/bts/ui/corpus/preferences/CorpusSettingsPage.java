@@ -69,7 +69,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		
 		Label lblSelectYourMain = new Label(container, SWT.NONE);
 		lblSelectYourMain.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
-		lblSelectYourMain.setText("Select your main working project");
+		lblSelectYourMain.setText("Select your main working corpus");
 
 		comboViewer = new ComboViewer(container, SWT.READ_ONLY);
 		comboViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));

@@ -3,6 +3,7 @@ package org.bbaw.bts.ui.commons.corpus.events;
 import java.util.List;
 import java.util.Vector;
 
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
@@ -19,7 +20,7 @@ public class BTSTextSelectionEvent extends Event {
 	
 	private List<BTSInterTextReference> interTextReferences = new Vector<BTSInterTextReference>(4);
 	
-	private List<BTSSentenceItem> selectedItems = new Vector<BTSSentenceItem>(4);
+	private List<BTSIdentifiableItem> selectedItems = new Vector<BTSIdentifiableItem>(4);
 	
 	private String startId;
 	
@@ -69,11 +70,11 @@ public class BTSTextSelectionEvent extends Event {
 		this.interTextReferences = interTextReferences;
 	}
 
-	public List<BTSSentenceItem> getSelectedItems() {
+	public List<BTSIdentifiableItem> getSelectedItems() {
 		return selectedItems;
 	}
 
-	public void setSelectedItems(List<BTSSentenceItem> selectedItems) {
+	public void setSelectedItems(List<BTSIdentifiableItem> selectedItems) {
 		this.selectedItems = selectedItems;
 	}
 

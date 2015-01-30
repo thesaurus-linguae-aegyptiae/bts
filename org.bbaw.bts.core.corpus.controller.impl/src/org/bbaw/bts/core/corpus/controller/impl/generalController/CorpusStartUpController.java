@@ -59,7 +59,7 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 		List<BTSTextCorpus> corpora = textCorpusService.list(BTSConstants.OBJECT_STATE_ACTIVE, null);
 		for (BTSTextCorpus cor : corpora)
 		{
-			corpusObjectService.checkAndFullyLoad(cor);
+			corpusObjectService.checkAndFullyLoad(cor, false);
 			if (main_project_key.equals(cor.getProject()) && main_corpus_key != null && main_corpus_key.endsWith(cor.getCorpusPrefix()))
 			{
 				BTSTextCorpus main_corpus = cor;

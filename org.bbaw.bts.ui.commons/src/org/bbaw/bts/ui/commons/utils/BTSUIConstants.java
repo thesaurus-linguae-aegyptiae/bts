@@ -33,6 +33,7 @@ import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * The Class BTSUIConstants provides constants on the UI level.
@@ -189,6 +190,24 @@ public class BTSUIConstants {
 	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
 	
 	/** The Constant EVENT_RELATING_OBJECTS_SELECTED. */
-	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";;
+	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";
+
+	public static final String EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA = "event_egy_text_editor_load_lemmata/load";
+
+	public static final Color COLOR_ERROR = _resources.createColor(new RGB(255, 0, 0));
+
+	public static final Color COLOR_WARNING =_resources.createColor(new RGB(235, 235, 10));
+
+	public static final Color COLOR_RULER_COLUMN_BACKGROUND = _resources.createColor(new RGB(233, 233, 233));
+
+	public static final Color COLOR_DB_MANAGER_ERROR =  _resources.createColor(new RGB( 255, 191, 191));
+
+	public static final Color COLOR_DB_MANAGER_INDEX_BEHIND = _resources.createColor(new RGB(255, 255, 190));
+
+	public static final Color COLOR_DB_MANAGER_INDEXING = _resources.createColor(new RGB(255, 255, 140));
+
+	public static final Color COLOR_DB_MANAGER_STATUS_OK = _resources.createColor(new RGB(191, 255, 191));
+
+	public static final Color COLOR_BACKGROUND_GREY = _resources.createColor(new RGB(155, 155, 155));
 
 }

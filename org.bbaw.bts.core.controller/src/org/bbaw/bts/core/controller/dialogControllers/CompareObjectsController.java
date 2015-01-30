@@ -72,4 +72,7 @@ public interface CompareObjectsController {
 	 * @param object the object
 	 */
 	void reloadConflicts(BTSDBBaseObject object);
+
+	BTSDBBaseObject replaceCurrentWithRevision(BTSDBBaseObject selectedLeftVersion,
+			BTSDBBaseObject revision);
 }

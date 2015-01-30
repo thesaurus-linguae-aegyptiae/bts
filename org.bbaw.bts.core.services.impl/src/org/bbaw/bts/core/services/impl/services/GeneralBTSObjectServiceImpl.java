@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -14,6 +15,7 @@ import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.BTSObjectSearchServiceFactory;
 import org.bbaw.bts.core.services.GeneralBTSObjectService;
 import org.bbaw.bts.core.services.GenericObjectService;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.CoreException;
@@ -305,6 +307,26 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 			BTSDBBaseObject dbBaseObject, String rev, IProgressMonitor monitor) {
 
 		return find(id, dbCollectionKey, rev, dbBaseObject, false, monitor);
+	}
+
+	@Override
+	public BTSDBBaseObject replaceCurrentWithRevision(BTSDBBaseObject current,
+			BTSDBBaseObject revision) {
+		// cach old revs
+		String rev = current.get_rev();
+		List<String> copyRevs = new Vector<String>();
+		for(String r : ((AdministrativDataObject)current).getRevisions())
+		{
+			copyRevs.add(new String(r));
+		}
+		// merge revision into current
+		BTSDBBaseObject eObject = EmfModelHelper.mergeChanges(current, revision);
+		// reset db revision and user revisions
+		eObject.set_rev(rev);
+		((AdministrativDataObject)current).getRevisions().addAll(copyRevs);
+		// save
+		save(eObject);
+		return eObject;
 	}
 
 		

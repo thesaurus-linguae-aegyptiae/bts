@@ -399,10 +399,14 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 						editingDomain.getCommandStack().addCommandStackListener(
 								getCommandStackListener());
 						loadInput((BTSLemmaEntry) selection);
+						makePartActive(true);
+						bringPartToFront(true);
 					}
 					else
 					{
 						loadInput(null);
+						makePartActive(false);
+
 						selectedLemmaEntry = null;
 					}
 				}
@@ -415,7 +419,28 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			}
 		}
 	}
+	private void makePartActive(boolean activate) {
+	embeddedEditor.getViewer().setEditable(activate);
+	embeddedEditor.getViewer().getTextWidget().setEnabled(activate);
+	signTextEditor.setEnabled(activate);
+	lemmaTranslate_Editor.setEnabled(activate);
+	if (activate)
+	{
+		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_WIHTE);
+		signTextEditor.setBackground(BTSUIConstants.COLOR_WIHTE);
+	}
+	else
+	{
+		embeddedEditor.getViewer().getTextWidget().setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+		signTextEditor.setBackground(BTSUIConstants.COLOR_BACKGROUND_DISABLED);
+	}
 	
+}
+
+private void bringPartToFront(boolean b) {
+	partService.bringToTop(part);
+	
+}
 	
 	private void loadInput(final BTSLemmaEntry selection) {
 		
@@ -817,7 +842,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	}
 
 	private void loadSignText(BTSLemmaEntry lemma) {
-		signTextEditor.setInput(lemma, textContent, relatingObjects, relatingObjectsMap);
+		signTextEditor.setInput(lemma, textContent, relatingObjects, null);
 	}
 
 	private void loadTextContent(BTSLemmaEntry lemma) {

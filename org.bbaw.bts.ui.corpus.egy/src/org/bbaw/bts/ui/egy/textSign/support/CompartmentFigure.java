@@ -15,7 +15,7 @@ public class CompartmentFigure extends Figure
 		ToolbarLayout layout = new ToolbarLayout();
 		layout.setMinorAlignment(ToolbarLayout.ALIGN_TOPLEFT);
 		layout.setStretchMinorAxis(false);
-		layout.setSpacing(2);
+		layout.setSpacing(20);
 		setLayoutManager(layout);
 		setBorder(new WordFigureBorder());
 	}

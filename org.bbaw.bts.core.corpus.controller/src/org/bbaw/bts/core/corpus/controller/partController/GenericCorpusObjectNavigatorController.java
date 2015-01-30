@@ -54,7 +54,7 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 			StructuredViewer structuredViewer, TreeNodeWrapper rootNode,
 			EReference treeNodeWrapperChildren, IProgressMonitor monitor);
 	
-	boolean checkAndFullyLoad(BTSCorpusObject object);
+	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 	
 	List<TreeNodeWrapper> loadNodes(List<E> obs, IProgressMonitor monitor, boolean asStructuredTree);
 }

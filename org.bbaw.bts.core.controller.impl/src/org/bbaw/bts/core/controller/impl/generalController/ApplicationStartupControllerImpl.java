@@ -248,17 +248,7 @@ public class ApplicationStartupControllerImpl implements
 							}
 						}
 
-						if (listen2Backend) {
-							// start listening to backend updates
-							context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
-							context.modify(
-									BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
-									"false");// FIXME dev!
-							for (BTSProject project : projects) {
-								backend2ClientUpdateService
-										.startListening2Updates(project);
-							}
-						}
+						
 						splashController.close();
 						checkProjectIndexingDBCollections(projects);
 						eventBroker.unsubscribe(this);
@@ -776,7 +766,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private void checkProjectIndexingDBCollections(
 			final List<BTSProject> projects) {
-		Job job = new Job("timer") {
+		Job jobTimer = new Job("timer") {
 			@Override
 			protected IStatus run(
 					final IProgressMonitor monitor) {
@@ -806,11 +796,13 @@ public class ApplicationStartupControllerImpl implements
 											if (!dbManager.checkDBIndexing(project,
 													monitor))
 												ok = false;
+											break;
 										} catch (URISyntaxException e) {
 											ok = false;
-											e.printStackTrace();
+											break;
 										}
 									}
+									
 									if (!ok) {
 										Job job = new Job("timer") {
 											@Override
@@ -840,6 +832,19 @@ public class ApplicationStartupControllerImpl implements
 										};
 										job.schedule(1000);
 									}
+									
+									// start listening to backend changes
+									if (listen2Backend) {
+										// start listening to backend updates
+										context.declareModifiable(BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES);
+										context.modify(
+												BTSCoreConstants.LISTEN_TO_BACKEND_UPDATES,
+												"true");// FIXME dev!
+										for (BTSProject project : projects) {
+											backend2ClientUpdateService
+													.startListening2Updates(project);
+										}
+									}
 								}
 							});
 
@@ -856,7 +861,7 @@ public class ApplicationStartupControllerImpl implements
 
 			}
 		};
-		job.schedule(8000);
+		jobTimer.schedule(8000);
 
 	}
 

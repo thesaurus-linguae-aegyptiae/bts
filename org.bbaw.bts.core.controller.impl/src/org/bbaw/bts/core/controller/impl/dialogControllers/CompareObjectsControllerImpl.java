@@ -112,4 +112,10 @@ public class CompareObjectsControllerImpl implements CompareObjectsController {
 		return availableRevisions;
 	}
 
+	@Override
+	public BTSDBBaseObject replaceCurrentWithRevision(
+			BTSDBBaseObject current, BTSDBBaseObject revision) {
+		return objectService.replaceCurrentWithRevision(current, revision);
+	}
+
 }

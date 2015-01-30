@@ -74,6 +74,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		for (E t : list) {
 			result.add(t);
 		}
+		sortEntries(result);
 		return result;
 	}
 
@@ -145,6 +146,7 @@ GenericCorpusObjectNavigatorController<E, K>
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<E> children = executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		sortEntries(children);
 		return children;
 	}
 
@@ -279,6 +281,7 @@ GenericCorpusObjectNavigatorController<E, K>
 		for (E t : list) {
 			result.add(t);
 		}
+		sortEntries(result);
 		return result;
 	}
 
@@ -354,13 +357,14 @@ GenericCorpusObjectNavigatorController<E, K>
 		}
 		System.out.println(query);
 		List<E> children =executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);// thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		sortEntries(children);
 		return children;
 	}
 	
 	@Override
-	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
-		return corpusObjectService.checkAndFullyLoad(object);
+		return corpusObjectService.checkAndFullyLoad(object, checkForConflicts);
 	}
 	
 	@Override

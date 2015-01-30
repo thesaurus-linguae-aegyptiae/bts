@@ -2,6 +2,7 @@ package org.bbaw.bts.ui.corpus.parts.annotationsPart;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang.WordUtils;
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRevision;
@@ -108,7 +109,7 @@ public class RelatedObjectGroupComment extends RelatedObjectGroup {
 		{
 			refreschContent((BTSComment) getObject());
 		}
-
+		commentText.setToolTipText( WordUtils.wrap(((BTSComment) getObject()).getComment(), 60));
 		setExpandBarIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_COMMENT));
 		setExpandBarBackground(BTSUIConstants.COLOR_WIHTE);
 	}

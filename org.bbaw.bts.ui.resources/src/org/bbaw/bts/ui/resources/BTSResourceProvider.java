@@ -615,6 +615,8 @@ public interface BTSResourceProvider extends IResourceProviderService {
 	/** The Constant IMG_RUBRUM_ADD. */
 	public static final String IMG_RUBRUM_ADD = "IMG_RUBRUM_ADD";
 	
+	public static final String IMG_FLEXION = "IMG_FLEXION";
+	
 	/** The Constant IMG_OVR_PEN. */
 	public static final String IMG_OVR_AWAITING_REVIEW = "IMG_OVR_AWAITING_REVIEW";
 	

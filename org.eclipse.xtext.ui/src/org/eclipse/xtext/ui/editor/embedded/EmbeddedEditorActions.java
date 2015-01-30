@@ -203,7 +203,6 @@ public class EmbeddedEditorActions {
 
 			viewer.getTextWidget().addFocusListener(new FocusListener() {
 				public void focusLost(FocusEvent e) {
-					System.out.println("focus lost, deactivate handler");
 					for (final E4ActionHandler handler : allHandlers.values()) {
 						handlerService.deactivateHandler(handler.getActionDefinitionId(),handler);
 					}					
@@ -211,7 +210,6 @@ public class EmbeddedEditorActions {
 				}
 
 				public void focusGained(FocusEvent e) {
-					System.out.println("focus gained, activate handler");
 					for (final E4ActionHandler handler : allHandlers.values()) {
 						handlerService.activateHandler(handler.getActionDefinitionId(),handler);
 					}

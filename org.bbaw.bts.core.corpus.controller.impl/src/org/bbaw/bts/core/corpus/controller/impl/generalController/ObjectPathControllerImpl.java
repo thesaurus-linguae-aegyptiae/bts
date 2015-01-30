@@ -13,6 +13,7 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.corpus.controller.generalController.ObjectPathController;
 import org.bbaw.bts.core.services.GenericObjectService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -24,6 +25,9 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 
 	@Inject
 	private CorpusObjectService corpusObjectService;
+	
+	@Inject
+	private BTSTextCorpusService textCorpusService;
 	
 	@Inject
 	private BTSLemmaEntryService lemmaService;
@@ -79,7 +83,17 @@ public class ObjectPathControllerImpl implements ObjectPathController {
 			{
 				Object o = null;
 				try {
-					o = service.find(rel.getObjectId(), null);
+					try {
+						o = service.find(rel.getObjectId(), null);
+					} catch (Exception e) {
+					}
+					if (o == null && service instanceof CorpusObjectService) // look in corpora
+					{
+						try {
+							o = textCorpusService.find(rel.getObjectId(), null);
+						} catch (Exception e) {
+						}
+					}
 					if (o instanceof BTSObject)
 					{
 						parents.add((BTSObject) o);

@@ -128,7 +128,7 @@ terminal EGYSTRING returns ecore::EString:(
  |'t'|'ṯ'|'ṭ'|'ṱ'|'T'|'Ṯ'|'Ṭ'|'Ṱ'
  |'d'|'ḏ'|'Ḏ'
  |'h̭'
- |'i̯'|'ı͗'|'ı̯͗'|'ï'|'i̭'|'I͗'|'I'
+ |'i'|'i̯'|'ı͗'|'ı̯͗'|'ï'|'i̭'|'I͗'|'I'
 // |'\u0069\u032F'//iArcU
  |'\u0049\u032F' //IArcU
  |'\u00CF'   // ITremaU
@@ -248,7 +248,7 @@ Deletion:
 ;
 
 NoDeletion:
-	Chars | PartialDestruction | Expanded | Interfix
+	Chars | PartialDestruction | Expanded | Interfix | DisputableReading
 ;
 
 ExpandedColumn:
@@ -257,7 +257,7 @@ ExpandedColumn:
 ;
 
 NoExpandedColumn:
-	Chars | Expanded | Interfix
+	Chars | Expanded | Interfix | DisputableReading
 ;
 
 Rasur:
@@ -266,7 +266,7 @@ Rasur:
 ;
 
 NoRasur:
-	Chars | Expanded | Interfix
+	Chars | Expanded | Interfix | DisputableReading
 ;
 
 AncientExpanded:
@@ -275,7 +275,7 @@ AncientExpanded:
 ;
 
 NoAncientExpanded:
-	Chars | Expanded | Interfix
+	Chars | Expanded | Interfix | DisputableReading
 ;
 
 RestorationOverRasur:
@@ -284,7 +284,7 @@ RestorationOverRasur:
 ;
 
 NoRestorationOverRasur:
-	Chars | Expanded | Interfix
+	Chars | Expanded | Interfix | DisputableReading |Cartouche 
 ;
 
 PartialDestruction:

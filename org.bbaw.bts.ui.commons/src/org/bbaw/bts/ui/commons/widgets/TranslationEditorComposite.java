@@ -72,8 +72,7 @@ public class TranslationEditorComposite extends Composite {
 	private Text text;
 
 	/** The resource provider. */
-	private BTSResourceProvider resourceProvider = StaticAccessController
-			.getResourceProvider();
+	private BTSResourceProvider resourceProvider = StaticAccessController.getContext().get(BTSResourceProvider.class);
 
 	/** The translations. */
 	private BTSTranslations translations;

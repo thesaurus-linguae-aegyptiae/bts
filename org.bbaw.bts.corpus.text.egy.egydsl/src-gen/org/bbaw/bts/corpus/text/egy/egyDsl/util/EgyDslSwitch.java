@@ -268,6 +268,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         Cartouche cartouche = (Cartouche)theEObject;
         T result = caseCartouche(cartouche);
         if (result == null) result = caseBrackets(cartouche);
+        if (result == null) result = caseNoRestorationOverRasur(cartouche);
         if (result == null) result = caseWordMiddle(cartouche);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -292,10 +293,10 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseNoExpandedColumn(expanded);
         if (result == null) result = caseNoRasur(expanded);
         if (result == null) result = caseNoAncientExpanded(expanded);
-        if (result == null) result = caseNoRestorationOverRasur(expanded);
         if (result == null) result = caseNoPartialDestruction(expanded);
         if (result == null) result = caseBrackets(expanded);
         if (result == null) result = caseWordMiddle(expanded);
+        if (result == null) result = caseNoRestorationOverRasur(expanded);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -333,6 +334,11 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseNoExpanded(disputableReading);
         if (result == null) result = caseNoEmendation(disputableReading);
         if (result == null) result = caseNoLacuna(disputableReading);
+        if (result == null) result = caseNoDeletion(disputableReading);
+        if (result == null) result = caseNoExpandedColumn(disputableReading);
+        if (result == null) result = caseNoRasur(disputableReading);
+        if (result == null) result = caseNoAncientExpanded(disputableReading);
+        if (result == null) result = caseNoRestorationOverRasur(disputableReading);
         if (result == null) result = caseNoPartialDestruction(disputableReading);
         if (result == null) result = caseWordMiddle(disputableReading);
         if (result == null) result = defaultCase(theEObject);

@@ -129,11 +129,16 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.DISPUTABLE_READING:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getDisputableReadingRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
 				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getNoEmendationRule() ||
 				   context == grammarAccess.getNoExpandedRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
 				   context == grammarAccess.getNoLacunaRule() ||
 				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_DisputableReading(context, (DisputableReading) semanticObject); 
 					return; 
@@ -151,6 +156,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.EXPANDED:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Brackets_Cartouche_Expanded(context, (Expanded) semanticObject); 
 					return; 
@@ -168,8 +174,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				   context == grammarAccess.getNoExpandedColumnRule() ||
 				   context == grammarAccess.getNoLacunaRule() ||
 				   context == grammarAccess.getNoPartialDestructionRule() ||
-				   context == grammarAccess.getNoRasurRule() ||
-				   context == grammarAccess.getNoRestorationOverRasurRule()) {
+				   context == grammarAccess.getNoRasurRule()) {
 					sequence_Expanded(context, (Expanded) semanticObject); 
 					return; 
 				}

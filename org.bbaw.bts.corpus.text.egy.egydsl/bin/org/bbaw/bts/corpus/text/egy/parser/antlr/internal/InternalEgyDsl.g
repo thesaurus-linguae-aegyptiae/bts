@@ -1937,6 +1937,16 @@ ruleNoDeletion returns [EObject current=null]
         $current = $this_Interfix_3.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDeletionAccess().getDisputableReadingParserRuleCall_4()); 
+    }
+    this_DisputableReading_4=ruleDisputableReading
+    { 
+        $current = $this_DisputableReading_4.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2038,6 +2048,16 @@ ruleNoExpandedColumn returns [EObject current=null]
     this_Interfix_2=ruleInterfix
     { 
         $current = $this_Interfix_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getDisputableReadingParserRuleCall_3()); 
+    }
+    this_DisputableReading_3=ruleDisputableReading
+    { 
+        $current = $this_DisputableReading_3.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -2143,6 +2163,16 @@ ruleNoRasur returns [EObject current=null]
         $current = $this_Interfix_2.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRasurAccess().getDisputableReadingParserRuleCall_3()); 
+    }
+    this_DisputableReading_3=ruleDisputableReading
+    { 
+        $current = $this_DisputableReading_3.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2246,6 +2276,16 @@ ruleNoAncientExpanded returns [EObject current=null]
         $current = $this_Interfix_2.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getDisputableReadingParserRuleCall_3()); 
+    }
+    this_DisputableReading_3=ruleDisputableReading
+    { 
+        $current = $this_DisputableReading_3.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2347,6 +2387,26 @@ ruleNoRestorationOverRasur returns [EObject current=null]
     this_Interfix_2=ruleInterfix
     { 
         $current = $this_Interfix_2.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getDisputableReadingParserRuleCall_3()); 
+    }
+    this_DisputableReading_3=ruleDisputableReading
+    { 
+        $current = $this_DisputableReading_3.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getCartoucheParserRuleCall_4()); 
+    }
+    this_Cartouche_4=ruleCartouche
+    { 
+        $current = $this_Cartouche_4.current; 
         afterParserOrEnumRuleCall();
     }
 )

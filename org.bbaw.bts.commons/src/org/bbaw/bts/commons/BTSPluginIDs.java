@@ -90,4 +90,6 @@ public class BTSPluginIDs
 
 	public static final String CMD_OPEN_CHANGE_PASSWORD = "org.bbaw.bts.ui.main.command.openChangePasswordDialog";
 
+	public static final String PART_ID_ANNOTATION_PART = "org.bbaw.bts.ui.corpus.part.AnnotationsPart";
+
 }

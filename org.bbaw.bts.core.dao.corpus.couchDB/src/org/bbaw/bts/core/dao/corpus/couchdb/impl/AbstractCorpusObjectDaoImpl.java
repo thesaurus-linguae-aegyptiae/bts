@@ -80,6 +80,10 @@ implements GenericDao<E, K>
 
 	@Override
 	public E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString) {
+		// if doc is included in hit and provided as sourceString
+		if (sourceAsString != null && sourceAsString.contains("_rev")) return super.loadObjectFromString(id, indexName, uri, eclassString, sourceAsString);
+		
+		// else load partiallly from provided fields.
 		if (eclassString == null)
 		{
 			eclassString = extractEClassFromObjectString(sourceAsString);

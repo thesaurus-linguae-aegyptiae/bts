@@ -71,8 +71,8 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		return children;
 	}
 	@Override
-	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
-		return corpusObjectService.checkAndFullyLoad(object);
+		return corpusObjectService.checkAndFullyLoad(object, checkForConflicts);
 	}
 }

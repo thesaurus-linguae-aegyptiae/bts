@@ -371,7 +371,11 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if (monitor != null && monitor.isCanceled()) return filter(objects);
+				if (monitor != null)
+				{
+					if (monitor.isCanceled()) return filter(objects);
+					monitor.worked(20);
+				}
 			}
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
@@ -386,7 +390,11 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				if (monitor != null && monitor.isCanceled()) return filter(objects);
+				if (monitor != null)
+				{
+					if (monitor.isCanceled()) return filter(objects);
+					monitor.worked(5);
+				}
 			}
 		}
 		else
@@ -401,7 +409,11 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-					if (monitor != null && monitor.isCanceled()) return filter(objects);
+					if (monitor != null)
+					{
+						if (monitor.isCanceled()) return filter(objects);
+						monitor.worked(5);
+					}
 				}
 			}
 		}
@@ -512,11 +524,11 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		corpusObjectDao.setDeleted(entity, sourceDBCollectionPath, true);
 		
 	}
-	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
 		if (object.eResource() == null || object.get_rev() == null)
 		{
-			corpusObjectDao.loadFully(object);
+			corpusObjectDao.loadFully(object, checkForConflicts);
 		}
 		return false;
 		

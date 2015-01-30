@@ -19,8 +19,7 @@ public class SearchViewerFactoryLemma implements SearchViewerFactory {
 	private SearchViewer searchViewer;
 	private IEclipseContext context;
 	
-	protected BTSResourceProvider resourceProvider = StaticAccessController
-			.getResourceProvider();
+	protected BTSResourceProvider resourceProvider = StaticAccessController.getContext().get(BTSResourceProvider.class);
 
 	@Override
 	public <T> boolean hasSearchViewerForObject(Class<T> clazz) {

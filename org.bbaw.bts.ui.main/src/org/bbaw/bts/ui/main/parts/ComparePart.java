@@ -11,6 +11,7 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 
@@ -27,6 +28,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -36,6 +38,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.events.MenuEvent;
 import org.eclipse.swt.events.MenuListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.custom.SashForm;
 
@@ -185,6 +189,39 @@ public class ComparePart extends AbstractComparePart {
 		loadInput();
 
 		tabFolder.setSelection(0);
+	}
+
+	protected void fillListContextMenu(Menu parent) {
+		 final MenuItem item = new MenuItem(parent, SWT.PUSH);
+		 item.setText("Replace current with selected revision");
+		 item.addSelectionListener(new SelectionAdapter() {
+		      public void widgetSelected(SelectionEvent e) {
+		    	  replaceCurrentWithSelectedRevision(selectedRightVersion);
+		    }
+		 });
+		
+	}
+	protected void replaceCurrentWithSelectedRevision(
+			BTSDBBaseObject revision) {
+		String messeage = "Caution! You are about to replace the current version with the selected revision!";
+		MessageDialog dialog = new MessageDialog(new Shell(), "Replace with selected revision", null,
+			    messeage , MessageDialog.QUESTION, new String[] { "Replace",
+			  "Cancel"}, 1);
+			if(dialog.open() == dialog.OK)
+			{
+				compareObjectsController.replaceCurrentWithRevision(object, revision);
+//				TreeNodeWrapper delTn = null;
+//				for (TreeNodeWrapper tn : compareRevInput.getChildren())
+//				{
+//					if (revision.equals(tn.getObject()))
+//					{
+//						delTn = tn;
+//					}
+//				}
+//				compareRevInput.getChildren().remove(delTn);
+//				compareObjectsController.reloadConflicts(object);
+			}
+		
 	}
 
 	protected void loadInput() {

@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 
 import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.core.controller.dialogControllers.DBManagerPartController;
+import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -168,18 +169,7 @@ public class DBManagerPart {
 			@Override
 			public Color getBackground(Object element) {
 				if (element instanceof DBCollectionStatusInformation) {
-			        if ("ERROR".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-			            return new Color(Display.getDefault(), 255, 191, 191);
-			        }
-			        else if ("INDEX_BEHIND".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-			            return new Color(Display.getDefault(), 255, 255, 190);
-			        }
-			        else if ("INDEXING...".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-			            return new Color(Display.getDefault(), 255, 255, 140);
-			        }
-			        else if ("OK".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-			            return new Color(Display.getDefault(), 191, 255, 191);
-			        }
+			        return getBackgroundColor((DBCollectionStatusInformation) element);
 			    }
 				return super.getBackground(element);
 			}
@@ -313,7 +303,7 @@ public class DBManagerPart {
 		if (info != null && info.getDbCollectionName() != null)
 		{
 			MessageDialog dialog = new MessageDialog(parentShell, "Database Collection Reindexing", null,
-				    "Do you want to delete an recreate the index of this database collection? Collection: "
+				    "Do you want to delete and recreate the index of this database collection? Collection: "
 			+ info.getDbCollectionName()
 			+ "\n\nReindexing may take a while.", MessageDialog.WARNING, new String[] { "Reindex",
 				  "Cancel"}, 0);
@@ -409,18 +399,7 @@ public class DBManagerPart {
 				@Override
 				public Color getBackground(Object element) {
 					if (element instanceof DBCollectionStatusInformation) {
-				        if ("ERROR".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-				            return new Color(Display.getDefault(), 255, 191, 191);
-				        }
-				        else if ("INDEX_BEHIND".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-				            return new Color(Display.getDefault(), 255, 255, 190);
-				        }
-				        else if ("INDEXING...".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-				            return new Color(Display.getDefault(), 255, 255, 140);
-				        }
-				        else if ("OK".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
-				            return new Color(Display.getDefault(), 191, 255, 191);
-				        }
+						return getBackgroundColor((DBCollectionStatusInformation)element);
 				    }
 					return super.getBackground(element);
 				}
@@ -435,6 +414,22 @@ public class DBManagerPart {
 			index++;
 		}
 		
+	}
+
+	protected Color getBackgroundColor(DBCollectionStatusInformation element) {
+		if ("ERROR".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
+            return BTSUIConstants.COLOR_DB_MANAGER_ERROR;
+        }
+        else if ("INDEX_BEHIND".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
+            return BTSUIConstants.COLOR_DB_MANAGER_INDEX_BEHIND;
+        }
+        else if ("INDEXING...".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
+            return BTSUIConstants.COLOR_DB_MANAGER_INDEXING;
+        }
+        else if ("OK".equals(((DBCollectionStatusInformation) element).getIndexStatus())) {
+            return BTSUIConstants.COLOR_DB_MANAGER_STATUS_OK;
+        }
+		return BTSUIConstants.COLOR_DB_MANAGER_ERROR;
 	}
 
 	private void loadInformations() {

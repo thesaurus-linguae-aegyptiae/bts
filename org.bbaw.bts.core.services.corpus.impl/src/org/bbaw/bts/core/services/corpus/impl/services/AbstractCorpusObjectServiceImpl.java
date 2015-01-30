@@ -204,7 +204,7 @@ implements GenericCorpusObjectService<E, K>{
 		return true;
 	}
 	
-	public boolean checkAndFullyLoad(BTSCorpusObject object)
+	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
 		if (object.eResource() == null || object.get_rev() == null)
 		{
