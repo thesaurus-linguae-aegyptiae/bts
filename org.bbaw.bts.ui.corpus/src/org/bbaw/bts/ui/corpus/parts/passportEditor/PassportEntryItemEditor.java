@@ -72,6 +72,8 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
@@ -590,6 +592,34 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		if (entry.getValue() != null) {
 			ths_select_text.setText(thsNavigatorController.getDisplayName(entry.getValue()));
 		}
+		
+		ths_select_text.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.stateMask == SWT.CTRL && e.character == 'f'){
+					// open search dialog
+					IEclipseContext child = context.createChild("searchselect");
+					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
+
+					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
+							SearchSelectObjectDialog.class, child);
+					if (dialog.open() == dialog.OK) {
+						BTSObject object = dialog.getObject();
+						System.out.println(object.get_id());
+						Command command = SetCommand.create(editingDomain,
+								entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+								object.get_id());
+						editingDomain.getCommandStack().execute(command);
+						ths_select_text.setText(object.getName());
+					}
+			    }
+			}
+		});
 
 		Label lblSearch = new Label(this, SWT.NONE);
 		lblSearch.setImage(resourceProvider.getImage(Display.getDefault(),
@@ -628,11 +658,6 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
 							object.get_id());
 					editingDomain.getCommandStack().execute(command);
-//					System.out.println("Relation with object id "
-//							+ entry.getValue());
-//					entry.setValue(object.get_id());
-//					System.out.println("Relation with object id "
-//							+ entry.getValue());
 					ths_select_text.setText(object.getName());
 				}
 				}
