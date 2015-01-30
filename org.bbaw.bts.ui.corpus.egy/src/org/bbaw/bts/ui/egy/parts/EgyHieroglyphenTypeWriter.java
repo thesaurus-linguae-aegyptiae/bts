@@ -35,6 +35,7 @@ import jsesh.mdc.utils.MDCNormalizer;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
@@ -114,6 +115,12 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
+	
+//	@Inject
+//	@Optional
+//	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_TRANSCRIBE)
+	private Boolean userMayTranscribe = new Boolean(false);
+	
 	private Text hierotw_text;
 	// private WordOccurrence wordOccurrence;
 	// private JTextAsWordsEditorPanel ramsesEditor;
@@ -359,6 +366,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		{
 			setSelection(selectionObject);
 		}
+		setUserMayTranscribeInteral(userMayTranscribe);
 
 	}
 
@@ -768,7 +776,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	private void saveMdCstring(BTSWord word)
 	{
-		if (word != null) {
+		if (userMayTranscribe && word != null) {
 			String normalizedMdC = hierotw_text.getText();
 			try {
 				normalizedMdC = mdcNormalizer.normalize(hierotw_text.getText());
@@ -906,5 +914,35 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 		eventReceivedHTWShortcutEvents(arg0.getProperty("org.eclipse.e4.data"));
 
+	}
+	
+	@Inject
+	@Optional
+	public void setUserMayTranscribe(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_TRANSCRIBE) final boolean userMayTranscribe) {
+		if(userMayTranscribe != this.userMayTranscribe)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayTranscribeInteral(userMayTranscribe);
+				}
+			});
+			
+		}
+	}
+	
+	protected void setUserMayTranscribeInteral(boolean mayTranscribe) {
+		this.userMayTranscribe = mayTranscribe;
+		if (loaded)
+		{
+			hierotw_text.setEditable(mayTranscribe);
+			glyphOrder_spinner.setEnabled(mayTranscribe);
+			firstGlyph_Button.setEnabled(mayTranscribe);
+			previousGlyph_Button.setEnabled(mayTranscribe);
+			nextGlyph_Button.setEnabled(mayTranscribe);
+			ignoreGlyph_Button.setEnabled(mayTranscribe);
+		}
+		
 	}
 }

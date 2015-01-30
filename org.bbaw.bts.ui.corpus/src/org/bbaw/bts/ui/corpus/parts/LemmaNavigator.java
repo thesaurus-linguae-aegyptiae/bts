@@ -33,7 +33,7 @@ import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.corpus.egy.commons.comparator.BTSEgyObjectByNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.lemma.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;

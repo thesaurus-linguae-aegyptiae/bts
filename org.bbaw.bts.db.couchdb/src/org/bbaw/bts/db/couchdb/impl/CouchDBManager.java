@@ -1804,7 +1804,14 @@ public class CouchDBManager implements DBManager
 			{
 				cachedInfo  = cachedInfoMap.get(db);
 			}
-			DBCollectionStatusInformation info = loadDBCollectionStatusInformationInternal(db, cachedInfo, monitor, docFrom, docTo);
+			DBCollectionStatusInformation info = null;
+			try {
+				info = loadDBCollectionStatusInformationInternal(db, cachedInfo, monitor, docFrom, docTo);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if (info == null) continue;
 			dbCollectionInfos.add(info);
 			infoMap.put(db, info);
 			if (monitor != null)

@@ -34,7 +34,7 @@ import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.corpus.egy.commons.comparator.BTSEgyObjectByNameViewerSorter;
+import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
@@ -148,10 +148,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private ISelectionChangedListener lemmaSelectionListener;
 	private Text lemmaName_text;
 
-	@Inject
-	@Optional
-	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
-	private Boolean userMayEdit;
+//	@Inject
+//	@Optional
+//	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private Boolean userMayEdit = new Boolean(false);
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -496,8 +496,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 		constructed = true;
 		parent.layout();
 		parent.pack();
-
 		part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
+		setUserMayEditInteral(userMayEdit && currentWord != null);
 
 	}
 
@@ -552,6 +552,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					if (selection instanceof BTSText) {
 						part.setLabel(selection.getName());
 						editingDomain = getEditingdomain(selection);
+						setUserMayEdit(userMayEdit);
 					} else {
 						part.setLabel("Lemmatizer");
 					}
@@ -605,6 +606,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 				} else if (part.isVisible()){
 					loadingLemmaProposals(currentWord);
 				}
+				setUserMayEdit(userMayEdit);
 			}
 		}
 
@@ -733,7 +735,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 	private void saveWordData(BTSWord word) {
-		if (word != null) {
+		if (userMayEdit &&  word != null) {
 			if (!lemmaID_text.getText().equals(word.getLKey())) {
 				if("WCN".equals(lemmaID_text.getText()))
 				{
@@ -808,5 +810,36 @@ public class EgyLemmatizerPart implements SearchViewer {
 		// Start the Job
 		job.schedule();
 
+	}
+	
+	@Inject
+	@Optional
+	public void setUserMayEdit(
+			@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT) final boolean userMayEdit) {
+		if(userMayEdit != this.userMayEdit)
+		{
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					setUserMayEditInteral(userMayEdit);
+				}
+			});
+			
+		}
+	}
+	
+	protected void setUserMayEditInteral(boolean mayEdit) {
+		if (constructed)
+		{
+			this.userMayEdit = mayEdit;
+			lemmaID_text.setEditable(mayEdit);
+			lemmaName_text.setEditable(mayEdit);
+			flex_text.setEditable(mayEdit);
+			wordTranslate_Editor.setEnabled(mayEdit);
+			lemmaViewer.getList().setEnabled(mayEdit);
+			flexionViewer.getList().setEnabled(mayEdit);
+			translationViewer.getList().setEnabled(mayEdit);
+		}
+		
 	}
 }

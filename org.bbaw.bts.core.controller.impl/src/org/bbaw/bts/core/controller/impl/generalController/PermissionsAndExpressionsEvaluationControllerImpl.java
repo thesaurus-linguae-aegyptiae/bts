@@ -270,7 +270,45 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	private boolean evaluateMayTranscribe(Object internalSelection) {
-		//FIXME evaluate may transcribe
+		boolean may = !otherLocked;
+		if (may)
+		{
+			may = evaluateMayTranscribeInteral(internalSelection);
+		}
+
+		workbenchContext.modify(BTSCoreConstants.CORE_EXPRESSION_MAY_TRANSCRIBE,
+				new Boolean(may));
+		if (!may)
+		{
+//			StatusMessage m = BtsviewmodelFactory.eINSTANCE.createNotEditingRightsMessage();
+//			eventBroker.post("status_info/filtered", m);
+		}
+		return may;
+	}
+
+	private boolean evaluateMayTranscribeInteral(Object internalSelection) {
+		if (authenticatedUser == null || internalSelection == null
+				|| !(internalSelection instanceof BTSDBBaseObject)) {
+			return false;
+		} 
+		else {
+			if (evaluateUserContextRoleDisallowsTranscribing()) {
+				return false;
+			}
+			if (userRoleMayEdit()
+					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) internalSelection).getUpdaters())) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private boolean evaluateUserContextRoleDisallowsTranscribing() {
+		if (userContextRole == null 
+				|| userContextRole.equals(BTSCoreConstants.USER_ROLE_GUESTS))
+		{
+			return true;
+		}
 		return false;
 	}
 
@@ -440,11 +478,25 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		if (authenticatedUser == null || internalSelection == null
 				|| !(internalSelection instanceof BTSDBBaseObject)) {
 			return false;
-		} else {
+		} 
+		else {
+			if (evaluateUserContextRoleDisallowsEditing()) {
+				return false;
+			}
 			if (userRoleMayEdit()
 					|| evaluationService.authenticatedUserIsMember(((BTSDBBaseObject) internalSelection).getUpdaters())) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	private boolean evaluateUserContextRoleDisallowsEditing() {
+		if (userContextRole == null 
+				|| userContextRole.equals(BTSCoreConstants.USER_ROLE_GUESTS)
+				|| userContextRole.equals(BTSCoreConstants.USER_ROLE_TRANSCRIBERS))
+		{
+			return true;
 		}
 		return false;
 	}
@@ -524,8 +576,11 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			String localDBCollContext = null;
 			switch (key) {
 			case BTSPluginIDs.PREF_MAIN_CORPUS_KEY: {
-				localDBCollContext = main_project_key + "_corpus_"
-						+ main_corpus_key;
+				localDBCollContext = main_corpus_key;
+				break;
+			}
+			case "corpus": {
+				localDBCollContext = main_corpus_key;
 				break;
 			}
 			case BTSCoreConstants.MAIN_WORD_LIST: {

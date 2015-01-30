@@ -14,6 +14,7 @@
   <imports xsi:type="commands:Category" xmi:id="_EA_6EDdjEeSeOfuNLjhMYg" elementId="org.eclipse.ui.category.file"/>
   <imports xsi:type="menu:ToolBar" xmi:id="_UiXHMG5kEeSRb4HOUP92pA" elementId="org.bbaw.bts.app.toolbar.bottom.main"/>
   <imports xsi:type="commands:Command" xmi:id="_qDjjUJy9EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.command.openPart"/>
+  <imports xsi:type="commands:Command" xmi:id="_trxTwKfMEeSXoIP1Bcbxog" elementId="org.eclipse.ui.window.preferences"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpora.png">
       <handlers xmi:id="_O-CAoDdpEeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.corpus.handler.delete" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
@@ -242,7 +243,6 @@
       </toolbar>
     </elements>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_dbLssNzSEeO5ZuJa34ojEQ" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.top.second" positionInList="10"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_pr3zUPxwEeOKcob4rpjigA" featurename="children" parentElementId="org.bbaw.bts.app.partstack.right.top" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_4dLEcPxwEeOKcob4rpjigA" elementId="org.bbaw.bts.ui.corpus.part.AnnotationsPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.AnnotationsPart" label="AnnotationsPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotations.png" closeable="true">
       <handlers xmi:id="_k1cagJzPEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.handler.deleteInAnnotationPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteInAnnotationPartHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
@@ -253,15 +253,6 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_MG1_0DdjEeSeOfuNLjhMYg" featurename="handlers" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Handler" xmi:id="_P8y9sDdjEeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.corpus.handler.refreshViewerNode" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.RefreshViewerNodeHandler" command="_6Q__oDdiEeSeOfuNLjhMYg"/>
-  </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_PGEMMDdyEeSeOfuNLjhMYg" featurename="children" parentElementId="org.eclipse.ui.main.toolbar" positionInList="after:org.bbaw.bts.app.toolbar.top.second">
-    <elements xsi:type="menu:ToolBar" xmi:id="_nbA90DdyEeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.corpus.toolbar.toolcontrol">
-      <children xsi:type="menu:ToolBarSeparator" xmi:id="_hdTeUNzSEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.corpus.toolbarseparator.0"/>
-      <children xsi:type="menu:HandledToolItem" xmi:id="_YMJ8EDd0EeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.main.handledtoolitem.0" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/preferences_32.png" tooltip="Open Preferences">
-        <command href="../org.bbaw.bts.ui.main/fragment.e4xmi#_NRDnwNtvEeODTbKD0_l8Zw"/>
-      </children>
-      <children xsi:type="menu:ToolControl" xmi:id="_iVeccNzSEeO5ZuJa34ojEQ" elementId="org.bbaw.bts.ui.corpus.toolcontrol.0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.toolcontrol.CorpusToolControl"/>
-    </elements>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_WaxaUG5kEeSRb4HOUP92pA" featurename="children" parentElementId="org.bbaw.bts.app.toolbar.bottom.main" positionInList="after:org.bbaw.bts.app.toolbar.bottom.main"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_IpR88G7_EeSRb4HOUP92pA" featurename="children" parentElementId="org.bbaw.bts.app.trimbar.bottom" positionInList="after:org.bbaw.bts.app.toolbar.bottom.main">
@@ -532,6 +523,15 @@
             </children>
           </children>
         </children>
+      </children>
+    </elements>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Dwe6YKfIEeSXoIP1Bcbxog" featurename="trimBars" parentElementId="org.bbaw.bts.trimmed">
+    <elements xsi:type="basic:TrimBar" xmi:id="_4_I64KfLEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.trimbar.0">
+      <children xsi:type="menu:ToolBar" xmi:id="_5yUEQKfLEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.toolbar.5">
+        <children xsi:type="menu:HandledToolItem" xmi:id="_kKr_EKfMEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.11" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/preferences_32.png" command="_trxTwKfMEeSXoIP1Bcbxog"/>
+        <children xsi:type="menu:ToolBarSeparator" xmi:id="_VUS58KfJEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.toolbarseparator.0465465"/>
+        <children xsi:type="menu:ToolControl" xmi:id="_Xd6R0KfJEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.toolcontrol.0656516351" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.toolcontrol.CorpusToolControl"/>
       </children>
     </elements>
   </fragments>

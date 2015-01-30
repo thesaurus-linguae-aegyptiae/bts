@@ -144,6 +144,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private BTSTextContent textContent;
 	private BTSObject btsObject;
 	private List<Image> imageList = new Vector<Image>(1000);
+	private boolean enabled;
 
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
@@ -1365,6 +1366,14 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	public void clearContent() {
 		canvas.redraw();
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		if (this.enabled != enabled)
+		{
+			this.enabled = enabled;
+		}
 	}
 
 }

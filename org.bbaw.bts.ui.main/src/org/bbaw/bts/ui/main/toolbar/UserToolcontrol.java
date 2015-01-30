@@ -12,6 +12,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.services.IStylingEngine;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.SWT;
@@ -28,6 +29,9 @@ public class UserToolcontrol {
 
 	@Inject
 	private UISynchronize sync;
+	
+	@Inject 
+	private IStylingEngine engine;
 
 	private BTSUser authenticatedUser;
 
@@ -53,6 +57,7 @@ public class UserToolcontrol {
 	public void postConstruct(Composite composite) {
 		this.composite = composite;
 		composite.setLayout(new GridLayout(6, false));
+		engine.setClassname(composite, "MToolBar");
 		Label l = new Label(composite, SWT.None);
 		l.setImage(labelProvider.getImage(authenticatedUser));
 		l.setLayoutData(new GridData());

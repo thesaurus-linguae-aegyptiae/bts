@@ -116,13 +116,27 @@ Link {
 	background-color: #FFFFFF;
 	
 }
-ToolBar {
-	background-color: #FFFFFF;
+
+MTrimBar {
+	background-color: rgb(245, 243, 237);
+}
+MToolBar {
+	background-color: rgb(245, 243, 237);
 }
 
-ToolItem {
-	background-color: #FFFFFF;
+MToolItem {
+	background-color: rgb(245, 243, 237);
 }
+CorpusToolControl {
+	background-color: rgb(245, 243, 237);
+}
+ProjectToolControl {
+	background-color: rgb(245, 243, 237);
+}
+UserToolcontrol {
+	background-color: rgb(245, 243, 237);
+}
+
 
 /* for AnnotationPart RelatedObjectGroup*/
 .unselected {

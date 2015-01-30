@@ -143,7 +143,6 @@
     <elements xsi:type="menu:ToolBarSeparator" xmi:id="_oK_AENxKEeODTbKD0_l8Zw" elementId="org.bbaw.bts.ui.main.toolbarseparator.02">
       <tags>stretch</tags>
     </elements>
-    <elements xsi:type="menu:ToolBarSeparator" xmi:id="_sJb2wOutEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.toolbarseparator.3" toBeRendered="false" visible="false"/>
     <elements xsi:type="menu:ToolControl" xmi:id="_Eh7EsJSzEeO8ZbCQ2E9L4A" elementId="org.bbaw.bts.ui.main.usertoolcontrol" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.toolbar.UserToolcontrol">
       <tags>stretch</tags>
       <tags>draggable</tags>
