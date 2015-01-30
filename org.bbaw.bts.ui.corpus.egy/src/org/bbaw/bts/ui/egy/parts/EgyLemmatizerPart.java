@@ -459,7 +459,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		((FillLayout) trans_composite.getLayout()).marginWidth = 0;
 		
 		translationViewer = new ListViewer(trans_composite, SWT.BORDER
-				| SWT.V_SCROLL);
+				| SWT.V_SCROLL | SWT.MULTI);
 		translationViewer.setContentProvider(new ArrayContentProvider());
 		translationViewer.setLabelProvider(new LabelProvider() {
 			public Image getImage(Object element) {
@@ -477,13 +477,23 @@ public class EgyLemmatizerPart implements SearchViewer {
 					public void selectionChanged(SelectionChangedEvent event) {
 						StructuredSelection selection = (StructuredSelection) event
 								.getSelection();
-						if (selection.getFirstElement() != null
-								&& selection.getFirstElement() instanceof String) {
-							String translation = (String) selection
+						List<String> list = selection.toList();
+						String translation = "";
+						if (list.size() == 1)
+						{
+							translation = (String) selection
 									.getFirstElement();
-							wordTranslate_Editor.setTranslationText(translation
-									.trim());
 						}
+						else 
+						{
+							for (String s : list)
+							{
+								translation += s + "; ";
+							}
+							translation = translation.substring(0, translation.length() -2);
+						}
+						wordTranslate_Editor.setTranslationText(translation
+								.trim());
 					}
 				});
 		translationViewer.setSorter(new BTSEgyObjectByNameViewerSorter());
@@ -749,6 +759,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			if (!flex_text.getText().equals(word.getFlexCode())) {
 				word.setFlexCode(flex_text.getText());
 			}
+			wordTranslate_Editor.save();
 		}
 
 	}
