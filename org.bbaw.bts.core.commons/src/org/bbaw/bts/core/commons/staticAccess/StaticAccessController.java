@@ -31,7 +31,6 @@ package org.bbaw.bts.core.commons.staticAccess;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.commands.EHandlerService;
@@ -61,10 +60,6 @@ public class StaticAccessController {
 	@Inject
 	@Optional
 	private static EContextService contextService;
-	
-	/** The resource provider. */
-	@Inject
-	private static BTSResourceProvider resourceProvider;
 	
 	/** The context. */
 	@Inject
@@ -122,14 +117,6 @@ public class StaticAccessController {
 		StaticAccessController.contextService = contextService;
 	}
 
-	/**
-	 * Gets the resource provider.
-	 *
-	 * @return the resource provider
-	 */
-	public static BTSResourceProvider getResourceProvider() {
-		return resourceProvider;
-	}
 
 	/**
 	 * Gets the context.
