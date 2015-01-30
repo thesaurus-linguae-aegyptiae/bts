@@ -72,6 +72,7 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseAdapter;
@@ -593,19 +594,14 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 			ths_select_text.setText(thsNavigatorController.getDisplayName(entry.getValue()));
 		}
 		
-		ths_select_text.addKeyListener(new KeyListener() {
+		ths_select_text.addKeyListener(new KeyAdapter() {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-			}
-
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.stateMask == SWT.CTRL && e.character == 'f'){
+				if(e.keyCode == SWT.CR){
 					// open search dialog
 					IEclipseContext child = context.createChild("searchselect");
 					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-
 					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 							SearchSelectObjectDialog.class, child);
 					if (dialog.open() == dialog.OK) {

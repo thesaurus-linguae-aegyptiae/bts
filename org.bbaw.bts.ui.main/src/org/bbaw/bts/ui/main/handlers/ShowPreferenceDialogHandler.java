@@ -180,7 +180,7 @@ public class ShowPreferenceDialogHandler {
 		suppressedPagesCache.add("org.eclipse.jdt.debug.ui");
 		suppressedPagesCache.add("org.eclipse.debug.ui");
 		suppressedPagesCache.add("org.eclipse.help.ui");
-		suppressedPagesCache.add("org.eclipse.e4.tools.css.editor.ui");
+//		suppressedPagesCache.add("org.eclipse.e4.tools.css.editor.ui");
 
 		suppressedPagesCache.add("org.eclipse.ui.editors");
 		suppressedPagesCache.add("org.eclipse.pde.ui");

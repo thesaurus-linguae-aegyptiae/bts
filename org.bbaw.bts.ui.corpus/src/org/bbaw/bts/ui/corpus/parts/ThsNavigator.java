@@ -108,6 +108,7 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 
 	@Inject
 	@Active
+	@Optional
 	private Shell parentShell;
 	
 	@Inject
@@ -140,6 +141,7 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	
 	@PostConstruct
 	public void postConstruct(Composite parent) {
+		if (parentShell == null ) parentShell = new Shell();
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
@@ -456,9 +458,12 @@ labelProvider));
 											.addFilter(new SuppressNondeletedViewerFilter());
 								}
 								// register context menu on the table
-								menuService.registerContextMenu(
-										treeViewer.getControl(),
-										BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
+								try {
+									menuService.registerContextMenu(
+											treeViewer.getControl(),
+											BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
+								} catch (Exception e) {
+								}
 							}
 						});
 					}};

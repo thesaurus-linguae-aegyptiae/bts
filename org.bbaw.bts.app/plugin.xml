@@ -12,8 +12,8 @@
                value="true">
          </property>
          <property
-               name="applicationCSS"
-               value="platform:/plugin/org.bbaw.bts.app/css/olive.css">
+               name="cssTheme"
+               value="org.bbaw.bts.app.theme.olive">
          </property>
          <property
                name="appName"
@@ -31,6 +31,24 @@
                value="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.lifeCycle.ApplicationLifeCyleManager">
          </property>
       </product>
+   </extension>
+   <extension
+         point="org.eclipse.e4.ui.css.swt.theme">
+      <theme
+            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/olive.css"
+            id="org.bbaw.bts.app.theme.olive"
+            label="Olive Theme">
+      </theme>
+      <theme
+            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/olive_big.css"
+            id="org.bbaw.bts.app.theme.oliveBig"
+            label="Olive Big Theme">
+      </theme>
+      <theme
+            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/olive_extra_big.css"
+            id="org.bbaw.bts.app.theme.oliveExtraBig"
+            label="Olive Extra Big Theme">
+      </theme>
    </extension>
 
 </plugin>

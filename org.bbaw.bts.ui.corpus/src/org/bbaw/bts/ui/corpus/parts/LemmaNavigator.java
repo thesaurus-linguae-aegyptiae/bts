@@ -107,6 +107,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 
 	@Inject
 	@Active
+	@Optional
 	private Shell parentShell;
 	
 	@Inject
@@ -136,6 +137,8 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	@PostConstruct
 	public void createComposite(Composite parent)
 	{
+		if (parentShell == null ) parentShell = new Shell();
+
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;

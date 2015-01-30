@@ -18,6 +18,7 @@
       </children>
       <children xsi:type="menu:Menu" xmi:id="_6OZWgDVnEeOv7cfx0AHTtw" elementId="org.eclipse.ui.window" label="Window">
         <children xsi:type="menu:MenuSeparator" xmi:id="_d7MKIDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menuseparator.5"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_AAjgMKhxEeSXoIP1Bcbxog" elementId="org.bbaw.bts.app.handledmenuitem.switchCssTheme" label="Switch Font Size/CSS Theme" command="_xEPR4KhwEeSXoIP1Bcbxog"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_pvfCcAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.preferences" label="Preferences">
         <children xsi:type="menu:MenuSeparator" xmi:id="_fAvjYAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.3"/>
@@ -42,6 +43,7 @@
       <children xsi:type="menu:ToolBar" xmi:id="_Li6qAOvNEeOp-Id2RgOpIA" elementId="org.bbaw.bts.app.toolbar.bottom.main"/>
     </trimBars>
   </children>
+  <handlers xmi:id="_2BRzoKhwEeSXoIP1Bcbxog" elementId="org.bbaw.bts.app.handler.themeSwitcherHandler" contributionURI="bundleclass://org.bbaw.bts.app/org.bbaw.bts.app.handlers.ThemeSwitcherHandler" command="_xEPR4KhwEeSXoIP1Bcbxog"/>
   <rootContext xmi:id="_AyBQAA5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.dialogAndWindow" name="In Dialog and Windows">
     <children xmi:id="_IirI4A5iEeOBWNILjo7Jaw" elementId="org.eclipse.ui.contexts.window" name="In Window">
       <children xmi:id="_AWj_QIjFEeOBD8Gt6rzlog" elementId="org.eclipse.ui.contexts.editors" name="In Editors"/>
@@ -52,6 +54,7 @@
   <commands xmi:id="_wBOgkL8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.file.exit" commandName="ExitApplication" category="_0JZP0L8fEeOwdasqUpZnTA"/>
   <commands xmi:id="_ysk3EL8gEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication" commandName="Update Application" category="__KJyEL8gEeOwdasqUpZnTA"/>
   <commands xmi:id="_05F_sL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart" commandName="Restart"/>
+  <commands xmi:id="_xEPR4KhwEeSXoIP1Bcbxog" elementId="org.bbaw.bts.app.command.themeSwitch" commandName="CSS Theme Switcher" category="_Eb0xoKhxEeSXoIP1Bcbxog"/>
   <addons xmi:id="_oEzH4gA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.core.commands.service" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_oEzH4wA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.contexts.service" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_oEzH5AA1EeOpmPWG2KRhAA" elementId="org.eclipse.e4.ui.bindings.service" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>
@@ -62,4 +65,5 @@
   <categories xmi:id="_KsMe0F2uEeOwE8UUrLWumA" elementId="org.eclipse.ui.category.edit" name="edit"/>
   <categories xmi:id="_0JZP0L8fEeOwdasqUpZnTA" elementId="org.eclipse.ui.category.file" name="file"/>
   <categories xmi:id="__KJyEL8gEeOwdasqUpZnTA" elementId="org.eclipse.ui.category.help" name="Help"/>
+  <categories xmi:id="_Eb0xoKhxEeSXoIP1Bcbxog" elementId="org.eclipse.ui.category.window" name="Window"/>
 </application:Application>

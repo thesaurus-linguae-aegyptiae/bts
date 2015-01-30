@@ -143,6 +143,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	
 	@Inject
 	@Active
+	@Optional
 	private Shell parentShell;
 
 	@Inject
@@ -151,6 +152,8 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	
 	@PostConstruct
 	public void postConstruct(Composite parent) {
+		if (parentShell == null ) parentShell = new Shell();
+
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;

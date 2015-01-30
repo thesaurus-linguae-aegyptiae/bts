@@ -73,12 +73,15 @@
 		<module>org.bbaw.bts.ui.font.egyFont</module>
 		<module>org.bbaw.bts.ui.main</module>
 		<module>org.bbaw.bts.ui.resources</module>
+		<module>org.bbaw.bts.ui.resources.impl</module>
 
 		<module>org.eclipselabs.emfjson</module>
 		<module>org.eclipselabs.emfjson.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb</module>
 		<module>org.eclipselabs.emfjson.couchdb.feature</module>
 		<module>org.eclipselabs.emfjson.couchdb.ui</module>
+		
+		<module>org.eclipse.e4.ui.workbench.perspectiveswitcher</module>
 		<!--<module>org.lightcouch</module>
 		use the one form repo bts-mvn-p2all because of constant encoding problem
 		workaround: build with eclipse, export and put into repo
