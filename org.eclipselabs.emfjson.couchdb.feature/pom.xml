@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.bbaw.bts</groupId>
     <artifactId>aaew-bts</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.2</version>
   </parent>
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.eclipselabs.emfjson.couchdb.feature</artifactId>
