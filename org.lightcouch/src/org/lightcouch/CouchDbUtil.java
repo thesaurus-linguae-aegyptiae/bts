@@ -39,6 +39,7 @@ import java.util.jar.JarFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.http.HttpResponse;
+import org.bbaw.bts.commons.OSValidator;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 
@@ -140,7 +141,9 @@ final class CouchDbUtil
 			if (entry != null)
 			{
 				fileURL = FileLocator.toFileURL(entry).getPath();
-				fileURL = fileURL.substring(1, fileURL.length());
+				// remove leading slash from absolute path when on windows
+				if (OSValidator.isWindows())
+					fileURL = fileURL.substring(1, fileURL.length());
 				file = new File(fileURL);
 			}
 			URL dirURL = file.toPath().toUri().toURL();
