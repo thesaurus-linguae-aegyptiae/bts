@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Core Commons
 Bundle-SymbolicName: org.bbaw.bts.core.commons
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.2.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Service-Component: OSGI-INF/*.xml
@@ -18,6 +18,7 @@ Bundle-ActivationPolicy: lazy
 Import-Package: javax.inject,
  org.bbaw.bts.btsmodel,
  org.bbaw.bts.searchModel,
+ org.bbaw.bts.ui.resources,
  org.eclipse.core.runtime.preferences;version="3.3.0",
  org.eclipse.e4.core.commands,
  org.eclipse.e4.core.contexts,

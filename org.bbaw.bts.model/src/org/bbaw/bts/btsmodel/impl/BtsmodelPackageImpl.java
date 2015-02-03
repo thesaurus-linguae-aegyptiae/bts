@@ -1188,6 +1188,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EOperation getBTSTranslations__GetTranslationStrict__String() {
+		return btsTranslationsEClass.getEOperations().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSConfigItem() {
 		return btsConfigItemEClass;
 	}
@@ -2083,6 +2092,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEOperation(btsTranslationsEClass, BTS_TRANSLATIONS___SET_TRANSLATION__STRING_STRING);
 		createEOperation(btsTranslationsEClass, BTS_TRANSLATIONS___GET_BTS_TRANSLATION__STRING);
 		createEOperation(btsTranslationsEClass, BTS_TRANSLATIONS___GET_LANGUAGES);
+		createEOperation(btsTranslationsEClass, BTS_TRANSLATIONS___GET_TRANSLATION_STRICT__STRING);
 
 		btsConfigItemEClass = createEClass(BTS_CONFIG_ITEM);
 		createEAttribute(btsConfigItemEClass, BTS_CONFIG_ITEM__VALUE);
@@ -2369,6 +2379,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		EGenericType g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEOperation(op, g1);
+
+		op = initEOperation(getBTSTranslations__GetTranslationStrict__String(), ecorePackage.getEString(), "getTranslationStrict", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "language", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(btsConfigItemEClass, BTSConfigItem.class, "BTSConfigItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSConfigItem_Value(), ecorePackage.getEString(), "value", null, 0, 1, BTSConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

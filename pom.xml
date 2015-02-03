@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bbaw.bts</groupId>
 	<artifactId>aaew-bts</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<packaging>pom</packaging>
 	<modules>
 		<!--<module>org.eclipse.xtext.ui</module>
@@ -212,7 +212,7 @@
 							<ws>gtk</ws>
 							<arch>x86_64</arch>
 						</environment>
-						
+						-->
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
@@ -224,14 +224,14 @@
 							<ws>win32</ws>
 							<arch>x86_64</arch>
 						</environment>
-						-->
 						
+						<!--
 						<environment>
 							<os>macosx</os>
 							<ws>cocoa</ws>
 							<arch>x86_64</arch>
 						</environment>
-						<!---->
+						-->
 					</environments>
 				</configuration>
 			</plugin>

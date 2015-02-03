@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UICommonsCorpus
 Bundle-SymbolicName: org.bbaw.bts.ui.commons.corpus
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.0.2.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Export-Package: org.bbaw.bts.ui.commons.corpus.converter,
  org.bbaw.bts.ui.commons.corpus.events,

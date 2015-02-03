@@ -76,7 +76,10 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	}
 
 	/**
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * <!-- begin-user-doc --> 
+	 * tries to return a translation, tries first for the given language, if not availabe, tries english, if not available
+	 * tries anyother language.
+	 * <!-- end-user-doc -->
 	 * 
 	 * @generatedNOT
 	 */
@@ -163,6 +166,18 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 		return langs;
 	}
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * return only the translation for the given language, or null if not available.
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getTranslationStrict(String language) {
+		BTSTranslation tr = getTranslationInternal(language);
+		if (tr != null) return tr.getValue();
+		return null;
+	}
+
 	private BTSTranslation getTranslationInternal(String language)
 	{
 		if (language != null)
@@ -174,7 +189,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 				}
 			}
 		}
- else if (getTranslations() != null && !getTranslations().isEmpty()) {
+		else if (getTranslations() != null && !getTranslations().isEmpty()) {
 			return getTranslations().get(0);
 		}
 		return null;
@@ -270,6 +285,8 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 				return getBTSTranslation((String)arguments.get(0));
 			case BtsmodelPackage.BTS_TRANSLATIONS___GET_LANGUAGES:
 				return getLanguages();
+			case BtsmodelPackage.BTS_TRANSLATIONS___GET_TRANSLATION_STRICT__STRING:
+				return getTranslationStrict((String)arguments.get(0));
 		}
 		return super.eInvoke(operationID, arguments);
 	}

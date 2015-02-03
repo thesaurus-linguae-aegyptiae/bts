@@ -92,4 +92,6 @@ public class BTSPluginIDs
 
 	public static final String PART_ID_ANNOTATION_PART = "org.bbaw.bts.ui.corpus.part.AnnotationsPart";
 
+	public static final String PART_ID_EGY_TEXTTRANSLATION = "org.bbaw.bts.ui.corpus.egy.part.translationPart";
+
 }
