@@ -26,10 +26,14 @@ import org.eclipse.equinox.p2.core.IProvisioningAgent;
 import org.eclipse.equinox.p2.engine.IProfile;
 import org.eclipse.equinox.p2.engine.IProfileRegistry;
 import org.eclipse.equinox.p2.engine.ProvisioningContext;
+import org.eclipse.equinox.p2.engine.query.UserVisibleRootQuery;
+import org.eclipse.equinox.p2.metadata.IInstallableUnit;
 import org.eclipse.equinox.p2.operations.ProvisioningJob;
 import org.eclipse.equinox.p2.operations.ProvisioningSession;
 import org.eclipse.equinox.p2.operations.Update;
 import org.eclipse.equinox.p2.operations.UpdateOperation;
+import org.eclipse.equinox.p2.query.IQuery;
+import org.eclipse.equinox.p2.query.IQueryResult;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.widgets.Shell;
 
@@ -74,8 +78,12 @@ public class UpdateApplicationHandler {
 		        operation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
 
 		        /* 2. check for updates */
-
-
+		        IProfileRegistry registry = (IProfileRegistry) agent.getService(IProfileRegistry.SERVICE_NAME) ;
+		        IProfile profile = registry.getProfile("_SELF_");
+		        IQuery<IInstallableUnit> query = new UserVisibleRootQuery();
+				IQueryResult<IInstallableUnit> queryResult = profile.query(query, null);
+				logger.info("P2 queried root ius size : " + queryResult.toUnmodifiableSet().size());
+				
 				SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(), "Checking for application updates...", 200);
 				IStatus status2 = operation.resolveModal(sub.newChild(100));
 		        logger.info("P2 Update Status : " + status2.getCode());

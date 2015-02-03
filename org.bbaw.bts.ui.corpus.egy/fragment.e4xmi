@@ -120,7 +120,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_Y0H7gJzAEeSiiMU2026qjA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openHieroglyphTypeWriter" label="Open Hieroglyph Type Writer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw.png" command="_F_FvMJzAEeSiiMU2026qjA">
       <parameters xmi:id="_ck_lEJzAEeSiiMU2026qjA" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.egy.part.hierotw"/>
     </elements>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_MhFW0KiYEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openTextTranslation" label="Open Text Translation" iconURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyTextTranslationPart" command="_F_FvMJzAEeSiiMU2026qjA">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_MhFW0KiYEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openTextTranslation" label="Open Text Translation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/locale.png" command="_F_FvMJzAEeSiiMU2026qjA">
       <parameters xmi:id="_SWpcAKiYEeSiSIb2uOkfLQ" elementId="partId" name="partId" value="org.bbaw.bts.ui.corpus.egy.part.translationPart"/>
     </elements>
   </fragments>

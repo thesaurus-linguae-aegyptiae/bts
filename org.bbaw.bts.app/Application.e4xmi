@@ -17,12 +17,10 @@
         <children xsi:type="menu:MenuSeparator" xmi:id="_r_EUkDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menuseparator.6"/>
       </children>
       <children xsi:type="menu:Menu" xmi:id="_6OZWgDVnEeOv7cfx0AHTtw" elementId="org.eclipse.ui.window" label="Window">
-        <children xsi:type="menu:MenuSeparator" xmi:id="_d7MKIDVoEeOv7cfx0AHTtw" elementId="org.bbaw.bts.app.menuseparator.5"/>
+        <children xsi:type="menu:MenuSeparator" xmi:id="_eu2qYKuvEeSL-KbihY0rDw" elementId="org.bbaw.bts.app.menuseparator.2"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_AAjgMKhxEeSXoIP1Bcbxog" elementId="org.bbaw.bts.app.handledmenuitem.switchCssTheme" label="Switch Font Size/CSS Theme" command="_xEPR4KhwEeSXoIP1Bcbxog"/>
       </children>
-      <children xsi:type="menu:Menu" xmi:id="_pvfCcAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.preferences" label="Preferences">
-        <children xsi:type="menu:MenuSeparator" xmi:id="_fAvjYAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.3"/>
-      </children>
+      <children xsi:type="menu:Menu" xmi:id="_pvfCcAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.preferences" label="Preferences"/>
       <children xsi:type="menu:Menu" xmi:id="_SBkokAD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.help" label="Help">
         <children xsi:type="menu:MenuSeparator" xmi:id="_di3QIAsrEeOKu70m8WT0_g" elementId="org.bbaw.bts.app.menuseparator.2"/>
       </children>

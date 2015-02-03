@@ -126,7 +126,7 @@
    </plugins>
 
    <features>
-      <feature id="org.bbaw.bts.app.feature"/>
+      <feature id="org.bbaw.bts.app.feature" installMode="root"/>
       <feature id="org.bbaw.bts.e4.p2.feature"/>
       <feature id="org.bbaw.bts.corpus.egy.feature"/>
    </features>
