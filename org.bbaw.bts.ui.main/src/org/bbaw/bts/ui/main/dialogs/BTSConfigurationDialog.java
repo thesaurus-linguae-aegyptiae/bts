@@ -475,7 +475,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				child.setObject(o);
 				child.setChildrenLoaded(true);
 				
-				if (o.equals(activeConfiguration))
+				if (o.get_id().equals(activeConfiguration.get_id()))
 				{
 					activeConfigurationTreeNode = child;
 				}

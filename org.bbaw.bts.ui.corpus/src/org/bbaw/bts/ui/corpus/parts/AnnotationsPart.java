@@ -482,6 +482,7 @@ public class AnnotationsPart implements EventHandler {
 			relatingObjectsQueryIDMap.clear();
 			List<BTSObject> relatingObjects = null;
 			List<BTSObject> filteredRelatingObjects = null;
+			queryId = "relations.objectId-" + ((BTSCorpusObject)selection).get_id();
 
 			// not in use because part waits to receive relationObjectLoadedEvent through eventBroker!
 //			try {

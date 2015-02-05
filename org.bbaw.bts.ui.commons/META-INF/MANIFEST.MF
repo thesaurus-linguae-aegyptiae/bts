@@ -69,3 +69,4 @@ Import-Package: javax.inject,
  org.eclipse.xtext.ui.editor.model,
  org.eclipse.xtext.ui.editor.validation,
  org.eclipse.xtext.validation
+Bundle-ActivationPolicy: lazy

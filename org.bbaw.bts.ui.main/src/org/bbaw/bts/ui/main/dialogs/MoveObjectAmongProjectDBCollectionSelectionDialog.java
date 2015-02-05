@@ -8,12 +8,16 @@ import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.core.controller.handlerController.MoveObjectAmongProjectDBCollectionHandlerController;
+import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
@@ -37,6 +41,13 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 	@Inject
 	private PermissionsAndExpressionsEvaluationController permissionController;
 	
+	
+	@Inject
+	private Logger logger;
+	
+	@Inject
+	private MoveObjectAmongProjectDBCollectionHandlerController moveController;
+	
 	private TreeNodeWrapper rootNode;
 	private BTSFilter moveDBCollectionFilter;
 	private BTSDBBaseObject object;
@@ -53,6 +64,9 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 	private TreeNodeWrapper checkedProjectTreeNode;
 
 	private TreeNodeWrapper checkedDBCollTreeNode;
+
+
+	private Button okButton;
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -141,7 +155,15 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 		checkboxTreeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		
 		checkboxTreeViewer.setInput(rootNode);
-		
+		if (rootNode != null && rootNode.getChildren() != null)
+		{
+			logger.info("Move Object among projects dialog. target projects size: " + rootNode.getChildren().size());
+		}
+		else
+		{
+			logger.info("Move Object among projects dialog. input root node is null");
+		}
+
 		// calculate checked elements
 		// iteratate over project + dbcollection
 		// select if dbcoll.name == object.dbkey
@@ -242,7 +264,7 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		createButton(parent, IDialogConstants.OK_ID, "Move Object",
+		okButton = createButton(parent, IDialogConstants.OK_ID, "Move Object",
 				true);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);

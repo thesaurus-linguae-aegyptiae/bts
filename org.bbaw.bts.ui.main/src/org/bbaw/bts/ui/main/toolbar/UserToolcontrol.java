@@ -10,6 +10,7 @@ import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.IStylingEngine;
@@ -32,6 +33,9 @@ public class UserToolcontrol {
 	
 	@Inject 
 	private IStylingEngine engine;
+	
+	@Inject
+	private IEclipseContext context;
 
 	private BTSUser authenticatedUser;
 
@@ -66,6 +70,14 @@ public class UserToolcontrol {
 		userLabel = new Label(composite, SWT.None);
 		userLabel.setLayoutData(new GridData());
 		((GridData) userLabel.getLayoutData()).horizontalSpan = 2;
+		if(authenticatedUser == null)
+		{
+			Object o =  context.get(BTSCoreConstants.AUTHENTICATED_USER);
+			if (o != null && o instanceof BTSUser)
+			{
+				authenticatedUser = (BTSUser) o;
+			}
+		}
 		if (authenticatedUser != null) {
 			userLabel.setText(labelProvider.getText(authenticatedUser));
 

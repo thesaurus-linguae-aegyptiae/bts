@@ -79,4 +79,6 @@ public interface BTSTextEditorController
 	BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor);
 
 	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
+	
+	boolean testTextValidAgainstGrammar(BTSText text);
 }

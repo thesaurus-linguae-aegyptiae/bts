@@ -565,6 +565,9 @@ public class CouchDBManager implements DBManager
 		boolean createTarget = false;
 		try {
 			createTarget = remoteDBManager.checkUserIsDBAdmin(username, password);
+		}  catch (CouchDbException e1) {
+			logger.info("user is not a db admin.");
+		
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -584,6 +587,7 @@ public class CouchDBManager implements DBManager
 			replicator.save(); // triggers a replication
 		} catch (Exception e) {
 			logger.error(e);
+			return false;
 		}
 
 		return true;
@@ -1141,9 +1145,9 @@ public class CouchDBManager implements DBManager
 				}
 				else if (line.trim().startsWith("[log]")) {
 					// set local user
-					stringBufferOfData.append(localAdminName +"=" + localAdminpassword).append(
-							"\r\n");
-					stringBufferOfData.append("\r\n");
+//					stringBufferOfData.append(localAdminName +"=" + localAdminpassword).append(
+//							"\r\n");
+//					stringBufferOfData.append("\r\n");
 					stringBufferOfData.append(line).append("\r\n");
 					stringBufferOfData.append("level=error").append("\r\n");
 				}
@@ -1272,10 +1276,20 @@ public class CouchDBManager implements DBManager
 					.setPort(url.getPort()).setMaxConnections(1).setConnectionTimeout(0).setUsername(username)
 					.setPassword(password);
 			CouchDbClient dbClient = new CouchDbClient(properties);
-		} catch (Exception e)
+		} catch (CouchDbException e)
 		{
-			logger.warn("Malformed url or invalid credentials: "+ urlString + ", Exception message: " + e.getMessage(), e);
-			System.out.println(e.getMessage());
+			if (e.getMessage() != null && e.getMessage().contains("unauthorized"))
+			{
+				logger.warn("Invalid credentials: "+ urlString + ", Exception message: " + e.getMessage());
+			}
+			else
+			{
+				logger.warn(e, "Malformed url or invalid credentials: "+ urlString + ", Exception message: " + e.getMessage());
+			}
+			return false;
+		}catch (Exception e)
+		{
+			logger.warn(e, "Malformed url or invalid credentials: "+ urlString + ", Exception message: " + e.getMessage());
 			return false;
 		}
 		return true;
@@ -1363,6 +1377,11 @@ public class CouchDBManager implements DBManager
 						logger.info("DB Erlang started");
 						return true;
 					}
+					else if (checkConnection(connectionProvider.getLocalDBURL(),
+							username, password)) {
+						logger.info("DB Erlang started");
+						return true;
+					}
 				} else {
 					if (checkConnection(connectionProvider.getLocalDBURL(),
 							username, password)) {
@@ -1403,7 +1422,7 @@ public class CouchDBManager implements DBManager
 		String runFileName = dbInsallationDir  + BTSConstants.FS + DB_ARCHIVE_NAME;
 		if (OSValidator.isWindows())
 		{
-			if (showeConsole)
+			if (!showeConsole)
 			{
 				return runFileName  + BTSConstants.FS + "bin" + BTSConstants.FS + "couchdb-d.bat";
 			}
@@ -1565,6 +1584,15 @@ public class CouchDBManager implements DBManager
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		for (BTSProject project : projectDao.list("admin", BTSConstants.OBJECT_STATE_ACTIVE)) {
+			if (project.getDbConnection() != null) {
+				try {
+					prepareDBSynchronization(project);
+				} catch (Exception e) {
+					logger.error(e, "Error while synchronizing remote projects. project name " + project.getName());
+				}
+			}
 		}
 
 		System.out.println("slept");
@@ -1864,8 +1892,15 @@ public class CouchDBManager implements DBManager
 			IndicesAdminClient iac = esClient.admin().indices();
 			IndicesStatsResponse isr = iac.stats(new IndicesStatsRequest()).actionGet();
 			IndexStats is = isr.getIndex(db);
-			info.setIndexDocCount(is.getTotal().docs.getCount());
-		}  
+			if (is == null)
+			{
+				info.setIndexDocCount(0);
+			}
+			else
+			{
+				info.setIndexDocCount(is.getTotal().docs.getCount());
+			}
+		} 
 		catch (ElasticsearchException e) {
 			info.setIndexDocCount(-1);
 			logger.error(e, "Error loading IndexStats of index " + db);
@@ -1907,10 +1942,13 @@ public class CouchDBManager implements DBManager
 			e.printStackTrace();
 		}
 		int indexSeq = 0;
+		if (info.getIndexUpdateSeq() != null)
+		{
 		try {
 			indexSeq = new Integer(info.getIndexUpdateSeq());
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
 		}
 		// berechne index status
 		if (cachedInfo != null 

@@ -267,7 +267,6 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 	public List<String> fingQueryIds(Object object, String id,
 			String dbCollection) {
 		String objectAsString = modelToString(object);
-		objectAsString = "{\r\n" + "\"doc\":" + objectAsString + "\r\n}";
 		return findQueryIdsInternal(objectAsString, id, dbCollection);
 
 	}
@@ -276,6 +275,10 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 			String dbCollection) {
 		// System.out.println("dbCollection " + dbCollection
 		// + " doc string percolate: " + objectAsString);
+		if (!objectAsString.startsWith("{\"doc\":"))
+		{
+			objectAsString = "{\r\n" + "\"doc\":" + objectAsString + "\r\n}";
+		}
 		Client client = connectionProvider.getSearchClient(Client.class);
 
 		PercolateResponse response = null;
@@ -285,7 +288,11 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 					.setIndices(dbCollection).setDocumentType(dbCollection);
 			rqb.setSource(objectAsString);
 			response = rqb.execute().actionGet();
-		} catch (ElasticsearchException e) {
+		} catch (IndexMissingException e) {
+			System.out.println("no index: "+ dbCollection);
+			return new Vector<String>(0);
+		}
+		catch (ElasticsearchException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

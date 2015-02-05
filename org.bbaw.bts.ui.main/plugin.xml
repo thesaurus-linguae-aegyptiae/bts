@@ -22,6 +22,12 @@
           id="org.bbaw.bts.ui.main.btsgeneral.page"
           name="Berlin Text System General">
     </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.main.preferences.ConfigurationPage"
+          id="org.bbaw.bts.ui.main.configuration.page"
+          name="Configuration">
+    </page>
  </extension>
  <extension
        point="com.opcoach.e4.preferences.e4PreferenceStoreProvider">

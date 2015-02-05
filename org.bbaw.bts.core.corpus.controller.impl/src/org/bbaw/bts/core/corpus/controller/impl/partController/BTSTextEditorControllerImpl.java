@@ -83,6 +83,7 @@ import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -1281,5 +1282,15 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor) {
 		return lemmaService.find(lemmaId, monitor);
+	}
+
+
+
+	@Override
+	public boolean testTextValidAgainstGrammar(BTSText text) {
+		Document doc = new Document();
+		transformToDocument(text.getTextContent(), doc, null, null, null, null, null);
+		
+		return true;
 	}
 }

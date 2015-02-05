@@ -279,7 +279,7 @@ public class DBManagerPart {
 						@Override
 						public void run() {
 							boolean ok = true;
-							monitor.setTaskName(taskName);
+							monitor.beginTask(taskName, collections.size());
 							for (DBCollectionStatusInformation info : collections) {
 								reindexInternal(info, monitor);
 								monitor.worked(1);

@@ -32,8 +32,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.osgi.service.prefs.BackingStoreException;
 import org.osgi.service.prefs.Preferences;
 
-public class InstallationWizard extends Wizard
-{
+public class InstallationWizard extends Wizard {
 
 	private WelcomePage welcomePage = new WelcomePage();
 	private ConnectToServerPage connectServerPage;
@@ -55,8 +54,9 @@ public class InstallationWizard extends Wizard
 	private BTSUserController userController;
 	private BTSUser validUser;
 
-	public InstallationWizard(IEclipseContext context, ApplicationStartupController startupController, UISynchronize sync, BTSUserController userController)
-	{
+	public InstallationWizard(IEclipseContext context,
+			ApplicationStartupController startupController, UISynchronize sync,
+			BTSUserController userController) {
 		this.context = context;
 		this.startupController = startupController;
 		this.preferences = DefaultScope.INSTANCE.getNode("org.bbaw.bts.app");
@@ -67,22 +67,24 @@ public class InstallationWizard extends Wizard
 	}
 
 	@Override
-	public void addPages()
-	{
-		connectServerPage = new ConnectToServerPage(preferences.get(BTSPluginIDs.PREF_REMOTE_DB_URL,
-				null));
+	public void addPages() {
+		connectServerPage = new ConnectToServerPage(preferences.get(
+				BTSPluginIDs.PREF_REMOTE_DB_URL, null));
 
-		projectPage = new SelectProjectsPage(preferences.get(BTSPluginIDs.PREF_ACTIVE_PROJECTS, null), preferences.get(
+		projectPage = new SelectProjectsPage(preferences.get(
+				BTSPluginIDs.PREF_ACTIVE_PROJECTS, null), preferences.get(
 				BTSPluginIDs.PREF_MAIN_PROJECT_KEY, null));
 
-		dbPage = new DBInstallationSettingsPage(startupController.getDBInstallationDir(), preferences.get(
-				BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, BTSConstants.DEFAULT_LOCAL_DB_URL_PORT));
+		dbPage = new DBInstallationSettingsPage(
+				startupController.getDBInstallationDir(), preferences.get(
+						BTSPluginIDs.PREF_LOCAL_DB_URL_PORT,
+						BTSConstants.DEFAULT_LOCAL_DB_URL_PORT));
 		userManagerController = context.get(UserManagerController.class);
 		editingDomainController = context.get(EditingDomainController.class);
-		createUserPage = new LocalCreateUserPage(userManagerController, editingDomainController);
-		
-		if (startupController.requiresDBInstallation())
-		{
+		createUserPage = new LocalCreateUserPage(userManagerController,
+				editingDomainController);
+
+		if (startupController.requiresDBInstallation()) {
 			addPage(dbPage);
 		}
 
@@ -94,332 +96,345 @@ public class InstallationWizard extends Wizard
 	}
 
 	@Override
-	public boolean performFinish()
-	{
+	public boolean performFinish() {
 		success = true;
-		logger.info("Installation wizard, start installation successful: " + success);
+		logger.info("Installation wizard, start installation successful: "
+				+ success);
 
 		installBTS();
-		
+
 		logger.info("Installation wizard, installation successful: " + success);
 		return success;
 	}
 
 	private void installBTS() {
-//		Job job = new Job("My Job") {
-//			 @Override
-//			 protected IStatus run(IProgressMonitor monitor) {
-//			  // set total number of work units
-//			  monitor.beginTask("Installation of Berlin Text System", 100);
-			  sync.syncExec(new Runnable() {
-			      @Override
-			      public void run() {
-			        finishPage.setJobLabel("Installation of Berlin Text System...");
-			        finishPage.setProgessWork(2);
-			      }
-			    });
-			//load settings
-				String location =dbPage.getDBInstallationDir();
-				int port = dbPage.getDBLocalPort();
-				if (port < 0)
-				{
-					try {
-						port = new Integer(preferences.get(
-								BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, BTSConstants.DEFAULT_LOCAL_DB_URL_PORT));
-					} catch (NumberFormatException e) {
-						port = 9086;
-					}
-					
-				}
-				String localAdminName = connectServerPage.getUserName();
-				String localAdminP = connectServerPage.getPassword();
-				ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
-				ISecurePreferences auth = secPrefs.node("auth");
-				System.out.println("load password");
-				boolean success = false;
-				try {
-					auth.put("username", localAdminName, false);
-					auth.put("password", localAdminP, true);
-					auth.flush();
-					success = true;
-				} catch (StorageException e) {
-					logger.error(e);
-				} catch (IOException e) {
-					logger.error(e);
-				} catch (SecurityException e)
-				{
-					
-				}
-				if (!success)
-				{
-					try {
-						auth.put("username", localAdminName, false);
-						auth.put("password", localAdminP, false);
-						auth.flush();
-					} catch (Exception e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-				userController.setAuthenticatedUser(getUser());
+		// Job job = new Job("My Job") {
+		// @Override
+		// protected IStatus run(IProgressMonitor monitor) {
+		// // set total number of work units
+		// monitor.beginTask("Installation of Berlin Text System", 100);
+		sync.syncExec(new Runnable() {
+			@Override
+			public void run() {
+				finishPage.setJobLabel("Installation of Berlin Text System...");
+				finishPage.setProgessWork(2);
+			}
+		});
+		// load settings
+		String location = dbPage.getDBInstallationDir();
+		int port = dbPage.getDBLocalPort();
+		if (port < 0) {
+			try {
+				port = new Integer(preferences.get(
+						BTSPluginIDs.PREF_LOCAL_DB_URL_PORT,
+						BTSConstants.DEFAULT_LOCAL_DB_URL_PORT));
+			} catch (NumberFormatException e) {
+				port = 9086;
+			}
 
-				String serverURL = connectServerPage.getServerURL();
+		}
+		String localAdminName;
+		String localAdminP;
+		if (welcomePage.isConnectToServer()) {
+			localAdminName = connectServerPage.getUserName();
+			localAdminP = connectServerPage.getPassword();
+		} else {
+			localAdminName = createUserPage.getUser().getUserName();
+			localAdminP = createUserPage.getUser().getPassword();
+		}
+		ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault()
+				.node("org.bbaw.bts.app");
+		ISecurePreferences auth = secPrefs.node("auth");
+		System.out.println("load password");
+		boolean success = false;
+		try {
+			auth.put("username", localAdminName, false);
+			auth.put("password", localAdminP, true);
+			auth.flush();
+			success = true;
+		} catch (StorageException e) {
+			logger.error(e);
+		} catch (IOException e) {
+			logger.error(e);
+		} catch (SecurityException e) {
 
-				String mainProject = projectPage.getMainProject();
-				String prefixes = projectPage.getActiveProjectSelectionsAsString();
-				
-				if (mainProject == null || "".equals(mainProject) || prefixes == null || "".equals(prefixes))
-				{
-					projectPage.loadProjects();
-				}
-				mainProject = projectPage.getMainProject();
-				prefixes = projectPage.getActiveProjectSelectionsAsString();
-//				monitor.worked(2);
-				// save new settings
-				preferences = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
-				preferences.put(BTSPluginIDs.PREF_DB_DIR, location);
-				preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, new Integer(port).toString());
-				
-				localUrl = BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL + "://";
-				localUrl += BTSConstants.DEFAULT_LOCAL_DB_URL_HOST + ":" + port;	
-//						
-				preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL, localUrl);
+		}
+		if (!success) {
+			try {
+				auth.put("username", localAdminName, false);
+				auth.put("password", localAdminP, false);
+				auth.flush();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		String mainProject = null;
+		String prefixes = null;
+		String serverURL = null;
+		preferences = ConfigurationScope.INSTANCE
+				.getNode("org.bbaw.bts.app");
+		preferences.put(BTSPluginIDs.PREF_DB_DIR, location);
+		preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL_PORT, new Integer(
+				port).toString());
 
-				preferences.put(BTSPluginIDs.PREF_REMOTE_DB_URL, serverURL);
-				
-				
-				preferences.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, mainProject);
-				preferences.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, prefixes);
-				
-//				monitor.worked(2);
+		localUrl = BTSConstants.DEFAULT_LOCAL_DB_URL_PROTOCOL + "://";
+		localUrl += BTSConstants.DEFAULT_LOCAL_DB_URL_HOST + ":" + port;
+		//
+		preferences.put(BTSPluginIDs.PREF_LOCAL_DB_URL, localUrl);
 
-				try {
-					preferences.flush();
-				} catch (BackingStoreException e) {
-					logger.error(e);
-				}
-				// interact with user
-//				monitor.worked(4);
-//				monitor.subTask("Installing database...");
-				sync.syncExec(new Runnable() {
-				      @Override
-				      public void run() {
-				        finishPage.setJobLabel("Installing database...");
-				        finishPage.setProgessWork(8);
-				      }
-				    });
-				
-				// install db
-				if (!startupController.installDB(location, port, localAdminName, localAdminP))
-				{
+		if (welcomePage.isConnectToServer()) {
+			userController.setAuthenticatedUser(getUser());
+
+			serverURL = connectServerPage.getServerURL();
+			preferences.put(BTSPluginIDs.PREF_REMOTE_DB_URL, serverURL);
+
+			mainProject = projectPage.getMainProject();
+			prefixes = projectPage.getActiveProjectSelectionsAsString();
+
+			if (mainProject == null || "".equals(mainProject)
+					|| prefixes == null || "".equals(prefixes)) {
+				projectPage.loadProjects();
+			}
+			mainProject = projectPage.getMainProject();
+			prefixes = projectPage.getActiveProjectSelectionsAsString();
+			// monitor.worked(2);
+			// save new settings
+			
+
+			preferences.put(BTSPluginIDs.PREF_MAIN_PROJECT_KEY, mainProject);
+			preferences.put(BTSPluginIDs.PREF_ACTIVE_PROJECTS, prefixes);
+
+			// monitor.worked(2);
+
+			
+		}
+		try {
+			preferences.flush();
+		} catch (BackingStoreException e) {
+			logger.error(e);
+		}
+		// interact with user
+		// monitor.worked(4);
+		// monitor.subTask("Installing database...");
+		sync.syncExec(new Runnable() {
+			@Override
+			public void run() {
+				finishPage.setJobLabel("Installing database...");
+				finishPage.setProgessWork(8);
+			}
+		});
+
+		// install db
+		if (!startupController.installDB(location, port, localAdminName,
+				localAdminP)) {
+			success = false;
+			logger.error("Installation wizard, startupController.installDB suceccessful: "
+					+ success);
+
+		}
+		// interact with user
+		// monitor.worked(25);
+		// monitor.subTask("Synchronizing projects from remote server...");
+		sync.syncExec(new Runnable() {
+			@Override
+			public void run() {
+				finishPage
+						.setJobLabel("Synchronizing projects from remote server...");
+				finishPage.setProgessWork(25);
+			}
+		});
+
+		// start db
+		boolean started = startupController.startDB(location, localUrl);
+		if (started)
+			System.out.println("started " + started);
+		if (!started) {
+			System.out.println("not started " + started);
+			success = false;
+			logger.error("Installation wizard, startupController.installDB suceccessful: "
+					+ success);
+		}
+
+		// if (started == false);
+		// {
+		// success = false;
+		// logger.error("Installation wizard, startupController.installDB suceccessful: "
+		// + success);
+		//
+		// }
+
+		// init or load projects
+		if (welcomePage.isConnectToServer()) {
+			try {
+
+				if (!startupController.synchronizeRemoteProjects(mainProject,
+						projectPage.getActiveProjectSelectionsAsStringList(),
+						serverURL, localUrl)) {
 					success = false;
-					logger.error("Installation wizard, startupController.installDB suceccessful: " + success);
-
-				}
-				// interact with user
-//				monitor.worked(25);
-//				monitor.subTask("Synchronizing projects from remote server...");
-				sync.syncExec(new Runnable() {
-				      @Override
-				      public void run() {
-				        finishPage.setJobLabel("Synchronizing projects from remote server...");
-				        finishPage.setProgessWork(25);
-				      }
-				    });
-				
-				// start db
-				boolean started = startupController.startDB(location, localUrl);
-				if (started) System.out.println("started " + started);
-				if (!started)
-				{
-					System.out.println("not started " + started);
-					success = false;
-					logger.error("Installation wizard, startupController.installDB suceccessful: " + success);
-				}
-
-//				if (started == false);
-//				{
-//					success = false;
-//					logger.error("Installation wizard, startupController.installDB suceccessful: " + success);
-//
-//				}
-				
-				// init or load projects
-				if (welcomePage.isConnectToServer())
-				{
-					try {
-						
-						if (!startupController.synchronizeRemoteProjects(mainProject, 
-								projectPage.getActiveProjectSelectionsAsStringList(), serverURL, localUrl))
-						{
-							success = false;
-							logger.info("Installation wizard, startupController.synchronizeRemoteProjects suceccessful: " + success);
-							setLocalProject(true);
-//							monitor.worked(25);
-						}
-					} catch (Exception e) {
-						success = false;
-						logger.info("Installation wizard, startupController.synchronizeRemoteProjects suceccessful: " + success);
-						setLocalProject(true);
-						logger.error(e);
-					}
-					logger.info("Installation wizard, startupController.synchronizeRemoteProjects suceccessful: " + success);
-					
-					setAuthenticatedUser(localAdminName, localAdminP, mainProject);
-				}
-				
-				else
-				{
-//					monitor.subTask("Initializing user...");
-					sync.syncExec(new Runnable() {
-					      @Override
-					      public void run() {
-					        finishPage.setJobLabel("Initializing user...");
-					        finishPage.setProgessWork(25);
-					      }
-					    });
-					// init user object
-					BTSUser user = createUserPage.getUser();
-					if (!startupController.initializeLocalUser(user.getUserName(), user.getPassword()))
-					{
-						success = false;
-						logger.info("Installation wizard, startupController.initializeLocalUser suceccessful: " + success);
-					}
-					logger.info("Installation wizard, startupController.initializeLocalUser suceccessful: " + success);
-//					monitor.worked(25);
-					Set<BTSUser> users = new HashSet<BTSUser>(1);
-					users.add(user);
-					userManagerController.saveUsers(users);
-					
-					//user group
-					BTSUserGroup usergroup = createUserPage.getUserGroup();
-					Set<BTSUserGroup> usergroups = new HashSet<BTSUserGroup>(1);
-					usergroups.add(usergroup);
-					userManagerController.saveUserGroups(usergroups);
+					logger.info("Installation wizard, startupController.synchronizeRemoteProjects suceccessful: "
+							+ success);
 					setLocalProject(true);
-//					monitor.worked(25);
-					sync.syncExec(new Runnable() {
-					      @Override
-					      public void run() {
-					        finishPage.setJobLabel("Initializing user group...");
-					        finishPage.setProgessWork(25);
-					      }
-					    });
-			   }
-			  System.out.println("Called save");
-//			  return Status.OK_STATUS;
-//			  }
-//			 };
-//			job.schedule(); 
-//		
-//			try {
-//				job.join();
-//			} catch (InterruptedException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-		
+					// monitor.worked(25);
+				}
+			} catch (Exception e) {
+				success = false;
+				logger.info("Installation wizard, startupController.synchronizeRemoteProjects suceccessful: "
+						+ success);
+				setLocalProject(true);
+				logger.error(e);
+			}
+			logger.info("Installation wizard, startupController.synchronizeRemoteProjects suceccessful: "
+					+ success);
+
+			setAuthenticatedUser(localAdminName, localAdminP, mainProject);
+		}
+
+		else {
+			// monitor.subTask("Initializing user...");
 			sync.syncExec(new Runnable() {
-			      @Override
-			      public void run() {
-			        finishPage.setJobLabel("Finishing...");
-			        finishPage.setProgessWork(25);
-			      }
-			    });
+				@Override
+				public void run() {
+					finishPage.setJobLabel("Initializing user...");
+					finishPage.setProgessWork(25);
+				}
+			});
+			// init user object
+			BTSUser user = createUserPage.getUser();
+			if (!startupController.initializeLocalUser(user.getUserName(),
+					user.getPassword())) {
+				success = false;
+				logger.info("Installation wizard, startupController.initializeLocalUser suceccessful: "
+						+ success);
+			}
+			logger.info("Installation wizard, startupController.initializeLocalUser suceccessful: "
+					+ success);
+			// monitor.worked(25);
+			Set<BTSUser> users = new HashSet<BTSUser>(1);
+			users.add(user);
+			userManagerController.saveUsers(users);
+			userController.setAuthenticatedUser(user);
+			
+			// user group
+			BTSUserGroup usergroup = createUserPage.getUserGroup();
+			Set<BTSUserGroup> usergroups = new HashSet<BTSUserGroup>(1);
+			usergroups.add(usergroup);
+			userManagerController.saveUserGroups(usergroups);
+			setLocalProject(true);
+			// monitor.worked(25);
+			sync.syncExec(new Runnable() {
+				@Override
+				public void run() {
+					finishPage.setJobLabel("Initializing user group...");
+					finishPage.setProgessWork(25);
+				}
+			});
+		}
 		
+		System.out.println("Called save");
+		// return Status.OK_STATUS;
+		// }
+		// };
+		// job.schedule();
+		//
+		// try {
+		// job.join();
+		// } catch (InterruptedException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+
+		sync.syncExec(new Runnable() {
+			@Override
+			public void run() {
+				finishPage.setJobLabel("Finishing...");
+				finishPage.setProgessWork(25);
+			}
+		});
+
 	}
 
-	private void setAuthenticatedUser(String userName,
-			String passWord, String mainProject) {
+	private void setAuthenticatedUser(String userName, String passWord,
+			String mainProject) {
 
 		List<BTSUser> users = userController.listAll(userName, passWord);
 		for (BTSUser u : users) {
-			if (userName.equals(u.getUserName()) && u.getProject() != null && u.getProject().equals(mainProject)) { // FIXME password checking
-													// && equalsPassword(u,
-													// passWord)) {
+			if (userName.equals(u.getUserName()) && (u.getProject() == null
+					|| u.getProject().equals(mainProject))) { // FIXME password
+																// checking
+				// && equalsPassword(u,
+				// passWord)) {
 				validUser = u;
-				logger.info("User found: " + u.get_id() + " userName: " + u.getUserName());
+				logger.info("User found: " + u.get_id() + " userName: "
+						+ u.getUserName());
+				break;
 
 			}
 		}
-		
+
 		userController.setAuthenticatedUser(validUser);
-		
+
 	}
 
 	@Override
-	public IWizardPage getNextPage(IWizardPage page)
-	{
-		if (page instanceof WelcomePage)
-		{
-			if (((WelcomePage) page).isConnectToServer())
-			{
+	public IWizardPage getNextPage(IWizardPage page) {
+		if (page instanceof WelcomePage) {
+			if (((WelcomePage) page).isConnectToServer()) {
 				return connectServerPage;
-			} else
-			{
+			} else {
 
 				return createUserPage;
 
 			}
-		}
-		else if (page instanceof LocalCreateUserPage)
-		{
+		} else if (page instanceof LocalCreateUserPage) {
 			return finishPage;
-		}
-		else if (page instanceof DBInstallationSettingsPage)
-		{
-			
-		}
-		else if (page instanceof ConnectToServerPage)
-		{
-			if (getRemoteConnection() != null)
-			{
+		} else if (page instanceof DBInstallationSettingsPage) {
+
+		} else if (page instanceof ConnectToServerPage) {
+			if (getRemoteConnection() != null) {
 				return projectPage;
-			} else
-			{
+			} else {
 
 				return connectServerPage;
 
 			}
-		}
-		else if (page instanceof SelectProjectsPage)
-		{
+		} else if (page instanceof SelectProjectsPage) {
 			return finishPage;
 		}
 		return super.getNextPage(page);
 	}
 
 	@Override
-	public boolean canFinish()
-	{
-		// TODO Auto-generated method stub
-		return super.canFinish();
+	public boolean canFinish() {
+		if (welcomePage.isConnectToServer()) {
+			return (dbPage.canFlipToNextPage() && projectPage
+					.canFlipToNextPage());
+		} else {
+			return createUserPage.canFlipToNextPage();
+		}
+
 	}
 
-	public ApplicationStartupController getStartupController()
-	{
+	public ApplicationStartupController getStartupController() {
 		return startupController;
 	}
 
-	public void setRemoteConnection(Connection connection)
-	{
+	public void setRemoteConnection(Connection connection) {
 		this.remoteConnection = connection;
 
 	}
 
-	public Connection getRemoteConnection()
-	{
+	public Connection getRemoteConnection() {
 		return this.remoteConnection;
 	}
 
-	public void setActiveProjects(List<String> activeProjectSelectionsAsStringList)
-	{
+	public void setActiveProjects(
+			List<String> activeProjectSelectionsAsStringList) {
 		// TODO Auto-generated method stub
 
 	}
 
-	public void setMainProject(Object mainProject)
-	{
+	public void setMainProject(Object mainProject) {
 		// TODO Auto-generated method stub
 
 	}
@@ -433,11 +448,10 @@ public class InstallationWizard extends Wizard
 	}
 
 	public BTSUser getUser() {
-		if (createUserPage.getUser() != null)
-		{
+		if (createUserPage.getUser() != null) {
 			return createUserPage.getUser();
-		}
-		else return validUser;
+		} else
+			return validUser;
 	}
 
 	public String getLocalDBUrl() {

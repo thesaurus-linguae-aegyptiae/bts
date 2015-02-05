@@ -203,9 +203,6 @@ public class ApplicationStartupControllerImpl implements
 			// }
 		}
 
-		System.out
-				.println("Test sonderzeichen string: \uF0080 \uF0081 \uF0082 \u13379 \u13379a");
-		System.out.println(font);
 		try {
 			splashController.setSplashPluginId(PLUGIN_ID);
 			splashController.setSplashImagePath("/" + "splash" + "/"
@@ -436,7 +433,7 @@ public class ApplicationStartupControllerImpl implements
 
 			context.declareModifiable(BTSCoreConstants.MAIN_PROJECT);
 			for (BTSProject p : projects) {
-				if (p.getPrefix().equals(main_project_key)) {
+				if (p.getPrefix() != null && p.getPrefix().equals(main_project_key)) {
 					context.set(BTSCoreConstants.MAIN_PROJECT, p);
 					break;
 				}

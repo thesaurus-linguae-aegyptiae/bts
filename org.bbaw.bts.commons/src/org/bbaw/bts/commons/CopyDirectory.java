@@ -76,6 +76,7 @@ public class CopyDirectory {
 			while (ze != null) {
 
 				String fileName = ze.getName();
+				System.out.println("unzip "  + fileName);
 				File newFile = new File(outputFolder + File.separator
 						+ fileName);
 				if (logger != null)

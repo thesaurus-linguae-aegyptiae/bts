@@ -16,6 +16,7 @@ import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsE
 import org.bbaw.bts.core.controller.handlerController.MoveObjectAmongProjectDBCollectionHandlerController;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.GeneralMoveObjectAmongProjectsService;
+import org.eclipse.e4.core.services.log.Logger;
 
 public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 		MoveObjectAmongProjectDBCollectionHandlerController {
@@ -29,6 +30,9 @@ public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 	@Inject
 	private PermissionsAndExpressionsEvaluationController permissionController;
 	
+	@Inject
+	private Logger logger;
+	
 	@Override
 	public TreeNodeWrapper getMoveOptionsRootNode(Object selection) {
 		
@@ -38,7 +42,7 @@ public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 		TreeNodeWrapper rootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
 		
 		BTSFilter moveDBCollectionFilter = generalMoveService.getMoveDBCollectionFilter(selection);
-		
+		logger.info("Move Object among projects, number of projects: " + allProjects.size());
 		for (BTSProject project : allProjects)
 		{
 			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
@@ -47,9 +51,13 @@ public class MoveObjectAmongProjectDBCollectionHandlerControllerImpl implements
 			boolean add = false;
 			for (BTSProjectDBCollection coll : project.getDbCollections())
 			{
+				logger.info("Move Object among projects. db collection: " + coll.getCollectionName());
+
 				if (moveDBCollectionFilter != null && moveDBCollectionFilter.select(coll) 
 						&& permissionController.authenticatedUserMayAddToDBCollection(coll))
 				{
+					logger.info("Move Object among projects. available and allowed target db collection: " + coll.getCollectionName());
+
 					add = true;
 					TreeNodeWrapper tn2 = BtsviewmodelFactory.eINSTANCE
 							.createTreeNodeWrapper();

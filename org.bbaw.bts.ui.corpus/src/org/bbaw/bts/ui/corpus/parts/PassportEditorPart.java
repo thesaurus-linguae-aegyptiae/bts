@@ -167,7 +167,7 @@ public class PassportEditorPart {
 	@Inject
 	@Optional
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
-	private Boolean userMayEdit;
+	private Boolean userMayEdit = new Boolean(false);
 	
 	
 	@Inject
