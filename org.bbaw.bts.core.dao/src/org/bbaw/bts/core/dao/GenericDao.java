@@ -34,6 +34,7 @@ import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.emf.common.util.URI;
@@ -168,6 +169,8 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 	
 	List<E> list(String path, String staticQueryId,
 			String objectState);
+	
+	List<E> listChunks(int chunkSize, String[] chunkIds,String path, String objectState);
 	/**
 	 * List available revisions of object by id.
 	 *
@@ -234,5 +237,7 @@ public interface GenericDao<E extends BTSDBBaseObject, K>
 
 	E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString);//E loadEntityFromString(String jo, String dbPath);
 	
+	E loadObjectFromStringNormally(String id, String indexName, URI uri, String eclassString, String sourceAsString);//E loadEntityFromString(String jo, String dbPath);
+
 	void checkForConflicts(E object, String path);
 }

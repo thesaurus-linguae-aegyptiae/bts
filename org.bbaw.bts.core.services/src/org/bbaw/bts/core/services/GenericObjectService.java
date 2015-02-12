@@ -34,7 +34,6 @@ import java.util.Set;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -226,4 +225,6 @@ public interface GenericObjectService<E extends BTSDBBaseObject, K>
 	 */
 	String getDisplayName(String userId, IProgressMonitor monitor);
 
+	List<E> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName, String objectStateActive,
+			IProgressMonitor monitor);
 }

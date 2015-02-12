@@ -43,6 +43,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="BTSTextCorpus" eSuperTypes="#//BTSCorpusObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="header" eType="#//BTSCorpusHeader"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="active" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        transient="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSImage" eSuperTypes="#//BTSCorpusObject">
     <eOperations name="getAttachement" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>

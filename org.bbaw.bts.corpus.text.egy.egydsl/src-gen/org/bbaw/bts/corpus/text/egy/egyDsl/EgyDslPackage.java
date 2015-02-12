@@ -273,6 +273,82 @@ public interface EgyDslPackage extends EPackage
   int VERS_MARKER_FEATURE_COUNT = ABSTRACT_MARKER_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableVersMarkerImpl <em>Disputable Vers Marker</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableVersMarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableVersMarker()
+   * @generated
+   */
+  int DISPUTABLE_VERS_MARKER = 9;
+
+  /**
+   * The number of structural features of the '<em>Disputable Vers Marker</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DISPUTABLE_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedVersMarkerImpl <em>Deleted Vers Marker</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedVersMarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedVersMarker()
+   * @generated
+   */
+  int DELETED_VERS_MARKER = 10;
+
+  /**
+   * The number of structural features of the '<em>Deleted Vers Marker</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DELETED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedVersMarkerImpl <em>Destroyed Vers Marker</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedVersMarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedVersMarker()
+   * @generated
+   */
+  int DESTROYED_VERS_MARKER = 11;
+
+  /**
+   * The number of structural features of the '<em>Destroyed Vers Marker</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int DESTROYED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingVersMarkerImpl <em>Missing Vers Marker</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingVersMarkerImpl
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getMissingVersMarker()
+   * @generated
+   */
+  int MISSING_VERS_MARKER = 12;
+
+  /**
+   * The number of structural features of the '<em>Missing Vers Marker</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MISSING_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.VersFrontierMarkerImpl <em>Vers Frontier Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -280,7 +356,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getVersFrontierMarker()
    * @generated
    */
-  int VERS_FRONTIER_MARKER = 9;
+  int VERS_FRONTIER_MARKER = 13;
 
   /**
    * The number of structural features of the '<em>Vers Frontier Marker</em>' class.
@@ -299,7 +375,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getVersbreakMarker()
    * @generated
    */
-  int VERSBREAK_MARKER = 10;
+  int VERSBREAK_MARKER = 14;
 
   /**
    * The number of structural features of the '<em>Versbreak Marker</em>' class.
@@ -318,7 +394,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getBrokenVersbreakMarker()
    * @generated
    */
-  int BROKEN_VERSBREAK_MARKER = 11;
+  int BROKEN_VERSBREAK_MARKER = 15;
 
   /**
    * The number of structural features of the '<em>Broken Versbreak Marker</em>' class.
@@ -337,7 +413,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getMarker()
    * @generated
    */
-  int MARKER = 12;
+  int MARKER = 16;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -365,7 +441,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestructionMarker()
    * @generated
    */
-  int DESTRUCTION_MARKER = 13;
+  int DESTRUCTION_MARKER = 17;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -393,7 +469,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getWord()
    * @generated
    */
-  int WORD = 14;
+  int WORD = 18;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -421,7 +497,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getWordPart()
    * @generated
    */
-  int WORD_PART = 15;
+  int WORD_PART = 19;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference.
@@ -449,7 +525,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getWordMiddle()
    * @generated
    */
-  int WORD_MIDDLE = 16;
+  int WORD_MIDDLE = 20;
 
   /**
    * The number of structural features of the '<em>Word Middle</em>' class.
@@ -468,7 +544,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getChars()
    * @generated
    */
-  int CHARS = 17;
+  int CHARS = 21;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -496,7 +572,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getBrackets()
    * @generated
    */
-  int BRACKETS = 18;
+  int BRACKETS = 22;
 
   /**
    * The number of structural features of the '<em>Brackets</em>' class.
@@ -515,7 +591,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getOval()
    * @generated
    */
-  int OVAL = 19;
+  int OVAL = 23;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -543,7 +619,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getSerech()
    * @generated
    */
-  int SERECH = 20;
+  int SERECH = 24;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -571,7 +647,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getCartouche()
    * @generated
    */
-  int CARTOUCHE = 21;
+  int CARTOUCHE = 25;
 
   /**
    * The number of structural features of the '<em>Cartouche</em>' class.
@@ -590,7 +666,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoCartouche()
    * @generated
    */
-  int NO_CARTOUCHE = 22;
+  int NO_CARTOUCHE = 26;
 
   /**
    * The number of structural features of the '<em>No Cartouche</em>' class.
@@ -609,7 +685,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getExpanded()
    * @generated
    */
-  int EXPANDED = 23;
+  int EXPANDED = 27;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -637,7 +713,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoExpanded()
    * @generated
    */
-  int NO_EXPANDED = 24;
+  int NO_EXPANDED = 28;
 
   /**
    * The number of structural features of the '<em>No Expanded</em>' class.
@@ -656,7 +732,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getEmendation()
    * @generated
    */
-  int EMENDATION = 25;
+  int EMENDATION = 29;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -684,7 +760,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoEmendation()
    * @generated
    */
-  int NO_EMENDATION = 26;
+  int NO_EMENDATION = 30;
 
   /**
    * The number of structural features of the '<em>No Emendation</em>' class.
@@ -703,7 +779,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableReading()
    * @generated
    */
-  int DISPUTABLE_READING = 27;
+  int DISPUTABLE_READING = 31;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -731,7 +807,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoDisputableReading()
    * @generated
    */
-  int NO_DISPUTABLE_READING = 28;
+  int NO_DISPUTABLE_READING = 32;
 
   /**
    * The number of structural features of the '<em>No Disputable Reading</em>' class.
@@ -750,7 +826,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getLacuna()
    * @generated
    */
-  int LACUNA = 29;
+  int LACUNA = 33;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -778,7 +854,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoLacuna()
    * @generated
    */
-  int NO_LACUNA = 30;
+  int NO_LACUNA = 34;
 
   /**
    * The number of structural features of the '<em>No Lacuna</em>' class.
@@ -797,7 +873,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletion()
    * @generated
    */
-  int DELETION = 31;
+  int DELETION = 35;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -825,7 +901,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoDeletion()
    * @generated
    */
-  int NO_DELETION = 32;
+  int NO_DELETION = 36;
 
   /**
    * The number of structural features of the '<em>No Deletion</em>' class.
@@ -844,7 +920,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getExpandedColumn()
    * @generated
    */
-  int EXPANDED_COLUMN = 33;
+  int EXPANDED_COLUMN = 37;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -872,7 +948,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoExpandedColumn()
    * @generated
    */
-  int NO_EXPANDED_COLUMN = 34;
+  int NO_EXPANDED_COLUMN = 38;
 
   /**
    * The number of structural features of the '<em>No Expanded Column</em>' class.
@@ -891,7 +967,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getRasur()
    * @generated
    */
-  int RASUR = 35;
+  int RASUR = 39;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -919,7 +995,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoRasur()
    * @generated
    */
-  int NO_RASUR = 36;
+  int NO_RASUR = 40;
 
   /**
    * The number of structural features of the '<em>No Rasur</em>' class.
@@ -938,7 +1014,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getAncientExpanded()
    * @generated
    */
-  int ANCIENT_EXPANDED = 37;
+  int ANCIENT_EXPANDED = 41;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -966,7 +1042,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoAncientExpanded()
    * @generated
    */
-  int NO_ANCIENT_EXPANDED = 38;
+  int NO_ANCIENT_EXPANDED = 42;
 
   /**
    * The number of structural features of the '<em>No Ancient Expanded</em>' class.
@@ -985,7 +1061,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getRestorationOverRasur()
    * @generated
    */
-  int RESTORATION_OVER_RASUR = 39;
+  int RESTORATION_OVER_RASUR = 43;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -1013,7 +1089,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoRestorationOverRasur()
    * @generated
    */
-  int NO_RESTORATION_OVER_RASUR = 40;
+  int NO_RESTORATION_OVER_RASUR = 44;
 
   /**
    * The number of structural features of the '<em>No Restoration Over Rasur</em>' class.
@@ -1032,7 +1108,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestruction()
    * @generated
    */
-  int PARTIAL_DESTRUCTION = 41;
+  int PARTIAL_DESTRUCTION = 45;
 
   /**
    * The feature id for the '<em><b>WChar</b></em>' containment reference list.
@@ -1060,7 +1136,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getNoPartialDestruction()
    * @generated
    */
-  int NO_PARTIAL_DESTRUCTION = 42;
+  int NO_PARTIAL_DESTRUCTION = 46;
 
   /**
    * The number of structural features of the '<em>No Partial Destruction</em>' class.
@@ -1079,7 +1155,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfix()
    * @generated
    */
-  int INTERFIX = 43;
+  int INTERFIX = 47;
 
   /**
    * The number of structural features of the '<em>Interfix</em>' class.
@@ -1098,7 +1174,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixLexical()
    * @generated
    */
-  int INTERFIX_LEXICAL = 44;
+  int INTERFIX_LEXICAL = 48;
 
   /**
    * The number of structural features of the '<em>Interfix Lexical</em>' class.
@@ -1117,7 +1193,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixFlexion()
    * @generated
    */
-  int INTERFIX_FLEXION = 45;
+  int INTERFIX_FLEXION = 49;
 
   /**
    * The number of structural features of the '<em>Interfix Flexion</em>' class.
@@ -1136,7 +1212,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixSuffixPronomLexical()
    * @generated
    */
-  int INTERFIX_SUFFIX_PRONOM_LEXICAL = 46;
+  int INTERFIX_SUFFIX_PRONOM_LEXICAL = 50;
 
   /**
    * The number of structural features of the '<em>Interfix Suffix Pronom Lexical</em>' class.
@@ -1155,7 +1231,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPrefixNonLexical()
    * @generated
    */
-  int INTERFIX_PREFIX_NON_LEXICAL = 47;
+  int INTERFIX_PREFIX_NON_LEXICAL = 51;
 
   /**
    * The number of structural features of the '<em>Interfix Prefix Non Lexical</em>' class.
@@ -1174,7 +1250,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPrefixLexical()
    * @generated
    */
-  int INTERFIX_PREFIX_LEXICAL = 48;
+  int INTERFIX_PREFIX_LEXICAL = 52;
 
   /**
    * The number of structural features of the '<em>Interfix Prefix Lexical</em>' class.
@@ -1193,7 +1269,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixConnectionSyllabicGroup()
    * @generated
    */
-  int INTERFIX_CONNECTION_SYLLABIC_GROUP = 49;
+  int INTERFIX_CONNECTION_SYLLABIC_GROUP = 53;
 
   /**
    * The number of structural features of the '<em>Interfix Connection Syllabic Group</em>' class.
@@ -1212,7 +1288,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixCompoundWords()
    * @generated
    */
-  int INTERFIX_COMPOUND_WORDS = 50;
+  int INTERFIX_COMPOUND_WORDS = 54;
 
   /**
    * The number of structural features of the '<em>Interfix Compound Words</em>' class.
@@ -1231,7 +1307,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getInterfixPhoneticalComplement()
    * @generated
    */
-  int INTERFIX_PHONETICAL_COMPLEMENT = 51;
+  int INTERFIX_PHONETICAL_COMPLEMENT = 55;
 
   /**
    * The number of structural features of the '<em>Interfix Phonetical Complement</em>' class.
@@ -1387,6 +1463,46 @@ public interface EgyDslPackage extends EPackage
    * @generated
    */
   EClass getVersMarker();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker <em>Disputable Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Disputable Vers Marker</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker
+   * @generated
+   */
+  EClass getDisputableVersMarker();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker <em>Deleted Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Deleted Vers Marker</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker
+   * @generated
+   */
+  EClass getDeletedVersMarker();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker <em>Destroyed Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Destroyed Vers Marker</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker
+   * @generated
+   */
+  EClass getDestroyedVersMarker();
+
+  /**
+   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker <em>Missing Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Missing Vers Marker</em>'.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker
+   * @generated
+   */
+  EClass getMissingVersMarker();
 
   /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.VersFrontierMarker <em>Vers Frontier Marker</em>}'.
@@ -2157,6 +2273,46 @@ public interface EgyDslPackage extends EPackage
      * @generated
      */
     EClass VERS_MARKER = eINSTANCE.getVersMarker();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableVersMarkerImpl <em>Disputable Vers Marker</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableVersMarkerImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableVersMarker()
+     * @generated
+     */
+    EClass DISPUTABLE_VERS_MARKER = eINSTANCE.getDisputableVersMarker();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedVersMarkerImpl <em>Deleted Vers Marker</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedVersMarkerImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedVersMarker()
+     * @generated
+     */
+    EClass DELETED_VERS_MARKER = eINSTANCE.getDeletedVersMarker();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedVersMarkerImpl <em>Destroyed Vers Marker</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedVersMarkerImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedVersMarker()
+     * @generated
+     */
+    EClass DESTROYED_VERS_MARKER = eINSTANCE.getDestroyedVersMarker();
+
+    /**
+     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingVersMarkerImpl <em>Missing Vers Marker</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingVersMarkerImpl
+     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getMissingVersMarker()
+     * @generated
+     */
+    EClass MISSING_VERS_MARKER = eINSTANCE.getMissingVersMarker();
 
     /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.VersFrontierMarkerImpl <em>Vers Frontier Marker</em>}' class.

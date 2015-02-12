@@ -149,6 +149,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
 	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
+	private static final String DISPUTALBE_VERS_MARKER = "\u2E2E\uDB80\uDC80?";
+	private static final String DELETED_VERS_MARKER = "{\uDB80\uDC80}";
+	private static final String DESTROYED_VERS_MARKER = "[\uDB80\uDC80]";
+	private static final String MISSING_VERS_MARKER = "\u2329\uDB80\uDC80\u232A";
 	private static final int MAX_IMAGE_SIZE = 200;
 
 	@Inject
@@ -694,6 +698,19 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			}else if (marker.getType().equals(
 					BTSConstants.DESTRUCTION_MARKER)) {
 				mType = "destruction";
+			}
+			else if (marker.getType().equals(
+					BTSConstants.DISPUTABLE_VERS_MARKER)) {
+				mType = DISPUTALBE_VERS_MARKER;
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYED_VERS_MARKER)) {
+				mType = DESTROYED_VERS_MARKER;
+			}else if (marker.getType().equals(
+					BTSConstants.DELETED_VERS_MARKER)) {
+				mType = DELETED_VERS_MARKER;
+			}else if (marker.getType().equals(
+					BTSConstants.MISSING_VERS_MARKER)) {
+				mType = MISSING_VERS_MARKER;
 			}
 		}
 		else

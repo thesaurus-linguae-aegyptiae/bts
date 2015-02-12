@@ -11,6 +11,7 @@ import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSTCObjectDao;
 import org.bbaw.bts.core.services.corpus.BTSTCObjectService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -135,6 +136,13 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	public List<BTSTCObject> list(String dbPath, String queryId, String objectState, IProgressMonitor monitor)
 	{
 		return filter(bTSTCObjectDao.findByQueryId(queryId, dbPath, objectState));
+	}
+	@Override
+	public List<BTSTCObject> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSTCObject> objects = new Vector<BTSTCObject>();
+		objects.addAll(bTSTCObjectDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
 	}
 	@Override
 	public String getNameOfServedClass() {

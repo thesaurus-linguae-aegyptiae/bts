@@ -229,7 +229,22 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
 			// update instance scope so that new value is injected
 			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
+			context.modify(BTSPluginIDs.PREF_ACTIVE_CORPORA, selectedProjetsString);
 			dirty = true;
+			for (BTSTextCorpus c : corpora)
+			{
+				boolean active = false;
+				for (String s : getActiveProjectSelectionsAsStringList())
+				{
+					if (s.equals(c.getDBCollectionKey() + "_" + c.getCorpusPrefix()))
+					{
+						active = true;
+						break;
+					}
+				}
+				c.setActive(active);
+				
+			}
 		}
 		if (dirty)
 		{

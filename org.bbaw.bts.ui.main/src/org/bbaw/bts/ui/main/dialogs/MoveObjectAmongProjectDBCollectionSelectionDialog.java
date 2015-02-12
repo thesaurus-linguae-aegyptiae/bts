@@ -155,11 +155,11 @@ public class MoveObjectAmongProjectDBCollectionSelectionDialog extends
 		checkboxTreeViewer.setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 		
 		checkboxTreeViewer.setInput(rootNode);
-		if (rootNode != null && rootNode.getChildren() != null)
+		if (logger != null && rootNode != null && rootNode.getChildren() != null)
 		{
 			logger.info("Move Object among projects dialog. target projects size: " + rootNode.getChildren().size());
 		}
-		else
+		else if (logger != null)
 		{
 			logger.info("Move Object among projects dialog. input root node is null");
 		}

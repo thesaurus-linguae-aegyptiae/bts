@@ -150,7 +150,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private String localDBUrl;
 
-	private boolean listen2Backend = true;
+	private boolean listen2Backend = false; // XXX dev!!!!!!!!!!!!!
 
 	@Override
 	public void applicationStartup(final IEclipseContext context,
@@ -429,6 +429,7 @@ public class ApplicationStartupControllerImpl implements
 			checkProjectsSelectionsSettings();
 			splashController.setMessage("Check Database Settings ...");
 
+			// FIXME development commented out
 			checkProjectSynchronizationDBCollections(projects);
 
 			context.declareModifiable(BTSCoreConstants.MAIN_PROJECT);

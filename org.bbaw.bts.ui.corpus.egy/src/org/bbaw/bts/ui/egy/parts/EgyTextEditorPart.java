@@ -514,10 +514,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							SWT.FILL, true, true));
 
 					context.get(StaticAccessController.class);
-					EgyDslActivator activator = EgyDslActivator.getInstance();
-
-					injector = activator
-							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
+					
+					// TODO old working
+//					EgyDslActivator activator = EgyDslActivator.getInstance();
+//					injector = activator
+//							.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
+					
+					// new trial
+					injector = textEditorController.findEgyDslInjector();
+					
 					embeddedEditorFactory = injector
 							.getInstance(EmbeddedEditorFactory.class);
 

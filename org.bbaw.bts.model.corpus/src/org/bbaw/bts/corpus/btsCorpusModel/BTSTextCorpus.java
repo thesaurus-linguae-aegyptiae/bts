@@ -12,6 +12,7 @@ package org.bbaw.bts.corpus.btsCorpusModel;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus#getHeader <em>Header</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus#isActive <em>Active</em>}</li>
  * </ul>
  * </p>
  *
@@ -45,5 +46,31 @@ public interface BTSTextCorpus extends BTSCorpusObject {
 	 * @generated
 	 */
 	void setHeader(BTSCorpusHeader value);
+
+	/**
+	 * Returns the value of the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Active</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Active</em>' attribute.
+	 * @see #setActive(boolean)
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage#getBTSTextCorpus_Active()
+	 * @model transient="true"
+	 * @generated
+	 */
+	boolean isActive();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus#isActive <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Active</em>' attribute.
+	 * @see #isActive()
+	 * @generated
+	 */
+	void setActive(boolean value);
 
 } // BTSTextCorpus

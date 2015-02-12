@@ -271,24 +271,24 @@ public class DBManagerPart {
 				@Override
 				public void run(final IProgressMonitor monitor)
 						throws InvocationTargetException, InterruptedException {
-
-					// If you want to update the UI
-					sync.asyncExec(new Runnable() {
-
-
-						@Override
-						public void run() {
-							boolean ok = true;
-							monitor.beginTask(taskName, collections.size());
-							for (DBCollectionStatusInformation info : collections) {
-								reindexInternal(info, monitor);
-								monitor.worked(1);
-								if (monitor.isCanceled()) break;
-							}
-							
-						}
-					});
-
+					monitor.beginTask(taskName, collections.size());
+					for (final DBCollectionStatusInformation info : collections) 
+					{
+						reindexInternal(info, monitor);
+						// If you want to update the UI
+//						sync.asyncExec(new Runnable() {
+//	
+//	
+//							@Override
+//							public void run() {
+//									
+//								}
+//							}
+//						);
+						monitor.worked(1);
+						if (monitor.isCanceled()) break;
+					}
+					
 				}
 			};
 			new ProgressMonitorDialog(new Shell()).run(true, true, op);
@@ -315,7 +315,7 @@ public class DBManagerPart {
 						@Override
 						public void run(IProgressMonitor monitor)
 								throws InvocationTargetException, InterruptedException {
-				reindexInternal(info, monitor);
+								reindexInternal(info, monitor);
 						}
 						};
 					       new ProgressMonitorDialog(parentShell).run(true, true, op);
@@ -330,36 +330,40 @@ public class DBManagerPart {
 	}
 
 	
-	private void reindexInternal(final DBCollectionStatusInformation info, IProgressMonitor monitor) {
-		
-					monitor.setTaskName("Re-indexing Database Collection: " + info.getDbCollectionName());
-					dbManagerPartController.reIndex(info.getDbCollectionName(), monitor);
-					Job job = new Job("timer") {
+	private void reindexInternal(final DBCollectionStatusInformation info,
+			IProgressMonitor monitor) {
 
-						@Override
-						public IStatus run(IProgressMonitor monitor) {
-							
-							return Status.OK_STATUS;
-						}
-						};
-						job.schedule(1000);
-						try {
-							job.join();
-						} catch (InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					sync.asyncExec(new Runnable() {
+		monitor.setTaskName("Re-indexing Database Collection: "
+				+ info.getDbCollectionName());
+		dbManagerPartController.reIndex(info.getDbCollectionName(), monitor);
+		Job job = new Job("timer") {
 
-						@Override
-						public void run() {
-								DBCollectionStatusInformation info2 = dbManagerPartController.getDBCollectionStatusInformation(info.getDbCollectionName(), null);
-						mergeInto(info, info2);
-						tableViewer.update(info, null);
-						}
-					});
-//
-//		
+			@Override
+			public IStatus run(IProgressMonitor monitor) {
+
+				return Status.OK_STATUS;
+			}
+		};
+		job.schedule(1000);
+		try {
+			job.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sync.asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				DBCollectionStatusInformation info2 = dbManagerPartController
+						.getDBCollectionStatusInformation(
+								info.getDbCollectionName(), null);
+				mergeInto(info, info2);
+				tableViewer.update(info, null);
+			}
+		});
+		//
+		//
 	}
 
 	protected void mergeInto(DBCollectionStatusInformation info,

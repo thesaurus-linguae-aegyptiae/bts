@@ -161,7 +161,7 @@ public class UserToolcontrol {
 
 				@Override
 				public void run() {
-					if (roleLabel != null) {
+					if (roleLabel != null && !roleLabel.isDisposed()) {
 						if (userContextRole != null) {
 							roleLabel.setText(userContextRole);
 						}

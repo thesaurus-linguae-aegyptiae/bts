@@ -372,7 +372,13 @@ implements CorpusNavigatorController
 		{
 			checkAndFullyLoad(c, true);
 		}
+		sortBTSTextCorpus(corpora);
 		return corpora;
+	}
+
+	private void sortBTSTextCorpus(List<BTSTextCorpus> list) {
+		Collections.sort(list, new BTSObjectByNameComparator());
+		
 	}
 
 	@Override

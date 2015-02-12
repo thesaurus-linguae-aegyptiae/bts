@@ -11,4 +11,7 @@ public interface BTSTextCorpusService extends
 
 	BTSTextCorpus findTextCorpusByPrefix(String corpusPrefix);
 
+	String[] getActive_corporaPrefixes(String projecPrefix);
+	
+	String getMainCorpusPrefix();
 }

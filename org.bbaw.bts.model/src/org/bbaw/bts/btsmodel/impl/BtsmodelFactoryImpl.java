@@ -92,6 +92,7 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 			case BtsmodelPackage.BTSDB_COLLECTION_ROLE_DESC: return createBTSDBCollectionRoleDesc();
 			case BtsmodelPackage.USER_ACTION_COUNTER: return createUserActionCounter();
 			case BtsmodelPackage.STRING_TO_STRING_LIST_MAP: return (EObject)createStringToStringListMap();
+			case BtsmodelPackage.STRING_TO_STRING_MAP: return (EObject)createStringToStringMap();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -434,6 +435,16 @@ public class BtsmodelFactoryImpl extends EFactoryImpl implements BtsmodelFactory
 	public Map.Entry<String, EList<String>> createStringToStringListMap() {
 		StringToStringListMapImpl stringToStringListMap = new StringToStringListMapImpl();
 		return stringToStringListMap;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Map createStringToStringMap() {
+		StringToStringMapImpl stringToStringMap = new StringToStringMapImpl();
+		return stringToStringMap;
 	}
 
 	/**

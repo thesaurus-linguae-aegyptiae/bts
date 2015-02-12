@@ -167,7 +167,7 @@ public class PassportEditorPart {
 	@Inject
 	@Optional
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
-	private Boolean userMayEdit = new Boolean(false);
+	private Boolean userMayEdit;
 	
 	
 	@Inject
@@ -226,6 +226,7 @@ public class PassportEditorPart {
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		this.parent = parent;
+		if (userMayEdit == null) userMayEdit = new Boolean(false);
 		GridLayout gl_parent = new GridLayout(1, false);
 
 		gl_parent.horizontalSpacing = 1;

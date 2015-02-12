@@ -33,7 +33,12 @@ public class BTSConstants
 	public static final String TEXT_VERS_BREAK_MARKER = "VersbreakMarker";
 	public static final String TEXT_VERS_FRONTIER_MARKER = "VersFrontierMarker";
 	public static final String BROKEN_VERS_MARKER = "BrokenVersbreakMarker";
+	public static final String DESTROYED_VERS_MARKER = "DestroyedVersMarker";
+	public static final String DISPUTABLE_VERS_MARKER = "DisputableVersMarker";
+	public static final String DELETED_VERS_MARKER = "DeletedVersMarker";
+	public static final String MISSING_VERS_MARKER = "MissingVersMarker";
 
+	
 	public static final String OBJECT_STATE_ACTIVE = "active";
 	public static final String OBJECT_STATE_TERMINATED = "terminated";
 	public static final String ANNOTATION = "Annotation";
@@ -143,6 +148,8 @@ public class BTSConstants
 
 	public static final String BTS_SELECTION_HISTORY = "bts_object_selection_history";
 	public static final int BTS_SELECTION_HISTORY_LENGTH = 200;
+
+	public static final String PROPERTIES_STRING_SEPARATOR = "\\|";
 	
 	private BTSConstants()
 	{

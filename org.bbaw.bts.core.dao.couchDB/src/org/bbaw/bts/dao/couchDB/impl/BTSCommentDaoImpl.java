@@ -27,6 +27,7 @@ public class BTSCommentDaoImpl extends CouchDBDao<BTSComment, String> implements
 		// TODO Auto-generated method stub
 		return super.query(query, indexName, indexType, objectState, registerQuery);
 	}
+
 	
 
 }

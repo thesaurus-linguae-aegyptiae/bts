@@ -3,6 +3,7 @@ package org.bbaw.bts.ui.main.wizards.newProject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.ui.main.dialogs.EditPropertiesDialog;
 import org.bbaw.bts.ui.main.provider.ListContentProvider;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.viewers.ColumnLabelProvider;
@@ -35,6 +36,7 @@ public class ProjectCollectionPage extends WizardPage
 	private Button btnDelete;
 	private Button btnEdit;
 	private BTSProjectDBCollection selectedCollection;
+	private Button btnEditProperties;
 
 	/**
 	 * Create the wizard.
@@ -117,6 +119,24 @@ public class ProjectCollectionPage extends WizardPage
 				if (collectionDialog.open() == collectionDialog.OK)
 				{
 					tableViewer.update(selectedCollection, null);
+				}
+
+			}
+
+		});
+		
+		btnEditProperties = new Button(grpDatabaseCollections, SWT.NONE);
+		btnEditProperties.setText("Edit Properties");
+		btnEditProperties.addSelectionListener(new SelectionAdapter()
+		{
+
+			@Override
+			public void widgetSelected(SelectionEvent e)
+			{
+				EditPropertiesDialog collectionDialog = new EditPropertiesDialog(getShell(), selectedCollection.getProperties());
+				if (collectionDialog.open() == collectionDialog.OK)
+				{
+					selectedCollection.setProperties(collectionDialog.getProperties());
 				}
 
 			}

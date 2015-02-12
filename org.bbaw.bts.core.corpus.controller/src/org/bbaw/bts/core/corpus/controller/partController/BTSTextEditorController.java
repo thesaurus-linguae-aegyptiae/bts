@@ -17,6 +17,7 @@ import java.util.Map;
 
 
 
+
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -31,6 +32,8 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.TextViewer;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.swt.graphics.Image;
+
+import com.google.inject.Injector;
 
 public interface BTSTextEditorController
 {
@@ -81,4 +84,11 @@ public interface BTSTextEditorController
 	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 	
 	boolean testTextValidAgainstGrammar(BTSText text);
+
+	Injector findEgyDslInjector();
+
+
+	List<BTSText> listAllTexts(IProgressMonitor monitor);
+
+	List<BTSText> listInAllInvalidTexts(IProgressMonitor monitor);
 }

@@ -2,17 +2,23 @@
  */
 package org.bbaw.bts.btsmodel.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Vector;
 
 import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -26,6 +32,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#isIndexed <em>Indexed</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#isSynchronized <em>Synchronized</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getRoleDescriptions <em>Role Descriptions</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getPropertyStrings <em>Property Strings</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -99,6 +107,26 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	 * @ordered
 	 */
 	protected EList<BTSDBCollectionRoleDesc> roleDescriptions;
+
+	/**
+	 * The cached value of the '{@link #getPropertyStrings() <em>Property Strings</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getPropertyStrings()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> propertyStrings;
+
+	/**
+	 * The cached value of the '{@link #getProperties() <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getProperties()
+	 * @generated
+	 * @ordered
+	 */
+	protected Map<String, String> properties;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -195,6 +223,83 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EList<String> getPropertyStrings() {
+		if (propertyStrings == null) {
+			propertyStrings = new EDataTypeUniqueEList<String>(String.class, this, BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS);
+		}
+		return propertyStrings;
+	}
+
+	
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public Map<String, String> getProperties() {
+		if (properties == null)
+		{
+			properties = new HashMap<String, String>(4);
+			for (String s : getPropertyStrings())
+			{
+				String[] prop = s.split("=");
+				if (prop != null)
+				{
+					properties.put(prop[0], prop[1]);
+				}
+			}
+		}
+		return properties;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public void setProperties(Map<String, String> newProperties) {
+		Map<String, String> oldProperties = properties;
+		properties = newProperties;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES, oldProperties, properties));
+		if(!properties.equals(oldProperties))
+		{
+			propertyStrings = new EDataTypeUniqueEList(String.class, this, BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES);
+			for (String s : properties.keySet())
+			{
+				if (properties.get(s) != null)
+				{
+					propertyStrings.add(s + "=" + properties.get(s));
+				}
+			}
+		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public void setProperty(String key, String value) {
+		properties.put(key, value);
+		propertyStrings.add(key + "=" + value);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generatedNOT
+	 */
+	public String getProperty(String key) {
+		return getProperties().get(key);
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @generated
 	 */
@@ -224,6 +329,10 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return isSynchronized();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
 				return getRoleDescriptions();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS:
+				return getPropertyStrings();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
+				return getProperties();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -250,6 +359,13 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				getRoleDescriptions().clear();
 				getRoleDescriptions().addAll((Collection<? extends BTSDBCollectionRoleDesc>)newValue);
 				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS:
+				getPropertyStrings().clear();
+				getPropertyStrings().addAll((Collection<? extends String>)newValue);
+				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
+				setProperties((Map<String, String>)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -274,6 +390,12 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
 				getRoleDescriptions().clear();
 				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS:
+				getPropertyStrings().clear();
+				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
+				setProperties((Map<String, String>)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -294,8 +416,30 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return synchronized_ != SYNCHRONIZED_EDEFAULT;
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:
 				return roleDescriptions != null && !roleDescriptions.isEmpty();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS:
+				return propertyStrings != null && !propertyStrings.isEmpty();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
+				return properties != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION___SET_PROPERTY__STRING_STRING:
+				setProperty((String)arguments.get(0), (String)arguments.get(1));
+				return null;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION___GET_PROPERTY__STRING:
+				return getProperty((String)arguments.get(0));
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**
@@ -318,5 +462,6 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 		result.append(')');
 		return result.toString();
 	}
+
 
 } //BTSProjectDBCollectionImpl

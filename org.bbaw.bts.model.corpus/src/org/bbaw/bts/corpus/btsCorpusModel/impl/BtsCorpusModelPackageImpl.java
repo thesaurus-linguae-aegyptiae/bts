@@ -487,6 +487,15 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSTextCorpus_Active() {
+		return (EAttribute)btsTextCorpusEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSImage() {
 		return btsImageEClass;
 	}
@@ -1017,6 +1026,7 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 
 		btsTextCorpusEClass = createEClass(BTS_TEXT_CORPUS);
 		createEReference(btsTextCorpusEClass, BTS_TEXT_CORPUS__HEADER);
+		createEAttribute(btsTextCorpusEClass, BTS_TEXT_CORPUS__ACTIVE);
 
 		btsImageEClass = createEClass(BTS_IMAGE);
 		createEAttribute(btsImageEClass, BTS_IMAGE__MEDIA_TYPE);
@@ -1186,6 +1196,7 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 
 		initEClass(btsTextCorpusEClass, BTSTextCorpus.class, "BTSTextCorpus", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getBTSTextCorpus_Header(), this.getBTSCorpusHeader(), null, "header", null, 0, 1, BTSTextCorpus.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSTextCorpus_Active(), ecorePackage.getEBoolean(), "active", null, 0, 1, BTSTextCorpus.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(btsImageEClass, BTSImage.class, "BTSImage", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSImage_MediaType(), ecorePackage.getEString(), "mediaType", null, 0, 1, BTSImage.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

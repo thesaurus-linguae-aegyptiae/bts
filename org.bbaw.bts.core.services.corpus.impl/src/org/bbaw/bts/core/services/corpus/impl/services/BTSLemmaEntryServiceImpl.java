@@ -14,6 +14,7 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
@@ -145,6 +146,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			String objectState, IProgressMonitor monitor)
 	{
 		return filter(lemmaEntryDao.findByQueryId(queryId, dbPath, objectState));
+	}
+	@Override
+	public List<BTSLemmaEntry> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
+		objects.addAll(lemmaEntryDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
 	}
 	@Override
 	public String getNameOfServedClass() {

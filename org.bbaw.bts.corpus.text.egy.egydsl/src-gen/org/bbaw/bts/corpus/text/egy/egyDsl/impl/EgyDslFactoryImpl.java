@@ -73,6 +73,10 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.CASE: return createCase();
       case EgyDslPackage.SENTENCE_ITEM_NO_AMBIVALENCE: return createSentenceItemNoAmbivalence();
       case EgyDslPackage.VERS_MARKER: return createVersMarker();
+      case EgyDslPackage.DISPUTABLE_VERS_MARKER: return createDisputableVersMarker();
+      case EgyDslPackage.DELETED_VERS_MARKER: return createDeletedVersMarker();
+      case EgyDslPackage.DESTROYED_VERS_MARKER: return createDestroyedVersMarker();
+      case EgyDslPackage.MISSING_VERS_MARKER: return createMissingVersMarker();
       case EgyDslPackage.VERS_FRONTIER_MARKER: return createVersFrontierMarker();
       case EgyDslPackage.VERSBREAK_MARKER: return createVersbreakMarker();
       case EgyDslPackage.BROKEN_VERSBREAK_MARKER: return createBrokenVersbreakMarker();
@@ -218,6 +222,50 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     VersMarkerImpl versMarker = new VersMarkerImpl();
     return versMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DisputableVersMarker createDisputableVersMarker()
+  {
+    DisputableVersMarkerImpl disputableVersMarker = new DisputableVersMarkerImpl();
+    return disputableVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DeletedVersMarker createDeletedVersMarker()
+  {
+    DeletedVersMarkerImpl deletedVersMarker = new DeletedVersMarkerImpl();
+    return deletedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DestroyedVersMarker createDestroyedVersMarker()
+  {
+    DestroyedVersMarkerImpl destroyedVersMarker = new DestroyedVersMarkerImpl();
+    return destroyedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MissingVersMarker createMissingVersMarker()
+  {
+    MissingVersMarkerImpl missingVersMarker = new MissingVersMarkerImpl();
+    return missingVersMarker;
   }
 
   /**

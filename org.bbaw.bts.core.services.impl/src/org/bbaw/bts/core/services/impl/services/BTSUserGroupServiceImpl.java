@@ -95,6 +95,14 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	}
 
 	@Override
+	public List<BTSUserGroup> listChunks(int chunkSize,  String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSUserGroup> userGroups = userGroupDao.listChunks(chunkSize, chunkIds,
+				BTSCoreConstants.ADMIN, objectState);
+		return filter(userGroups);
+	}
+	
+	@Override
 	public String getNameOfServedClass() {
 		return "BTSUserGroup";
 	}
@@ -103,4 +111,6 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	public <T> Class<T> getServedClass() {
 		return (Class<T>) BTSUserGroup.class;
 	}
+
+	
 }

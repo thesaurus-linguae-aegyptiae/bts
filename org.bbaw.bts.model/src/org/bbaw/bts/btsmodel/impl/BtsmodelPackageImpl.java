@@ -276,6 +276,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass stringToStringMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType propertyChangeSupportEDataType = null;
 
 	/**
@@ -1813,6 +1820,42 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSProjectDBCollection_PropertyStrings() {
+		return (EAttribute)btsProjectDBCollectionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSProjectDBCollection_Properties() {
+		return (EAttribute)btsProjectDBCollectionEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getBTSProjectDBCollection__SetProperty__String_String() {
+		return btsProjectDBCollectionEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EOperation getBTSProjectDBCollection__GetProperty__String() {
+		return btsProjectDBCollectionEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getBTSIdentifiableItem()
 	{
 		return btsIdentifiableItemEClass;
@@ -1930,6 +1973,33 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 */
 	public EAttribute getStringToStringListMap_Value() {
 		return (EAttribute)stringToStringListMapEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getStringToStringMap() {
+		return stringToStringMapEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToStringMap_Key() {
+		return (EAttribute)stringToStringMapEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getStringToStringMap_Value() {
+		return (EAttribute)stringToStringMapEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -2169,6 +2239,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__INDEXED);
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED);
 		createEReference(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS);
+		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS);
+		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__PROPERTIES);
+		createEOperation(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION___SET_PROPERTY__STRING_STRING);
+		createEOperation(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION___GET_PROPERTY__STRING);
 
 		btsIdentifiableItemEClass = createEClass(BTS_IDENTIFIABLE_ITEM);
 		createEAttribute(btsIdentifiableItemEClass, BTS_IDENTIFIABLE_ITEM__ID);
@@ -2186,6 +2260,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		stringToStringListMapEClass = createEClass(STRING_TO_STRING_LIST_MAP);
 		createEAttribute(stringToStringListMapEClass, STRING_TO_STRING_LIST_MAP__KEY);
 		createEAttribute(stringToStringListMapEClass, STRING_TO_STRING_LIST_MAP__VALUE);
+
+		stringToStringMapEClass = createEClass(STRING_TO_STRING_MAP);
+		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__KEY);
+		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__VALUE);
 
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
@@ -2464,6 +2542,20 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEAttribute(getBTSProjectDBCollection_Indexed(), ecorePackage.getEBoolean(), "indexed", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSProjectDBCollection_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSProjectDBCollection_RoleDescriptions(), this.getBTSDBCollectionRoleDesc(), null, "roleDescriptions", null, 0, -1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSProjectDBCollection_PropertyStrings(), ecorePackage.getEString(), "propertyStrings", null, 0, -1, BTSProjectDBCollection.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		g1 = createEGenericType(ecorePackage.getEMap());
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		g2 = createEGenericType(ecorePackage.getEString());
+		g1.getETypeArguments().add(g2);
+		initEAttribute(getBTSProjectDBCollection_Properties(), g1, "properties", null, 0, 1, BTSProjectDBCollection.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		op = initEOperation(getBTSProjectDBCollection__SetProperty__String_String(), null, "setProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "value", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		op = initEOperation(getBTSProjectDBCollection__GetProperty__String(), ecorePackage.getEString(), "getProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
+		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(btsIdentifiableItemEClass, BTSIdentifiableItem.class, "BTSIdentifiableItem", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSIdentifiableItem__id(), ecorePackage.getEString(), "_id", null, 0, 1, BTSIdentifiableItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2484,6 +2576,10 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getStringToStringListMap_Value(), g1, "value", null, 0, 1, Map.Entry.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(stringToStringMapEClass, Map.class, "StringToStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getStringToStringMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getStringToStringMap_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

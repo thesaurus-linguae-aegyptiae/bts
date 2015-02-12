@@ -6,6 +6,7 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSComment;
+import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
@@ -108,6 +109,15 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 		return query(query, objectState, true, monitor);
 
 	}
+	
+	@Override
+	public List<BTSComment> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSComment> comments = new Vector<BTSComment>();
+		comments.addAll(commentDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(comments);
+	}
+	
 	@Override
 	public List<BTSComment> list(String dbPath, String queryId,
 			String objectState, IProgressMonitor monitor)

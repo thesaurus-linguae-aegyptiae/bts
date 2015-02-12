@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
@@ -57,6 +58,7 @@ import org.elasticsearch.search.SearchHit;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.DesignDocument;
 import org.lightcouch.NoDocumentException;
+import org.lightcouch.Page;
 import org.lightcouch.Params;
 import org.lightcouch.Response;
 import org.lightcouch.View;
@@ -919,6 +921,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	
 	public E loadObjectFromString(String id, String indexName, URI uri, String eclassString, String sourceAsString)
 	{
+		return loadObjectFromStringNormally(id, indexName, uri, eclassString, sourceAsString);
+	}
+	
+	@Override
+	public final E loadObjectFromStringNormally(String id, String indexName, URI uri,
+			String eclassString, String sourceAsString) {
 		Resource resource;
 //		try {
 //			resource = connectionProvider.getEmfResourceSet().getResource(uri, true);
@@ -1029,6 +1037,63 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		return allDocs;
 	}
 	
+	
+	
+	@Override
+	public List<E> listChunks(int chunkSize, String[] chunkIds,
+			String path, String objectState) {
+		return listChunks(chunkSize, chunkIds, path, null, objectState);
+	}
+	
+	public List<E> listChunks(int chunkSize, String[] chunkIds,
+			String path, String queryId,String objectState) {
+		if (chunkIds == null) {
+			chunkIds = new String[3];
+		}
+		if (queryId == null) {
+			if (objectState != null
+					&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
+				queryId = BTSConstants.VIEW_ALL_ACTIVE_DOCS;
+			} else if (objectState != null
+					&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+				queryId = BTSConstants.VIEW_ALL_TERMINATED_DOCS;
+			} else {
+				queryId = BTSConstants.VIEW_ALL_DOCS;
+			}
+		}
+		Page<String> page = null;
+		try {
+			page = connectionProvider.getDBClient(CouchDbClient.class, path).view(queryId)
+					.includeDocs(true).queryPage(chunkSize, chunkIds[1], String.class);
+		} catch (Exception e) {
+			createView(path, path, queryId);
+			page = connectionProvider.getDBClient(CouchDbClient.class, path).view(queryId)
+					.includeDocs(true).queryPage(chunkSize, chunkIds[1], String.class);
+			e.printStackTrace();
+		}
+		List<String> allDocs =page.getResultList();
+		chunkIds[2] = page.getNextParam();
+		chunkIds[0] = page.getPreviousParam();
+		ArrayList<E> results = new ArrayList<E>();
+		Map<URI, Resource> cache = ((ResourceSetImpl)connectionProvider.getEmfResourceSet()).getURIResourceMap();
+
+		for (String jo : allDocs)
+		{
+			String id = extractIdFromObjectString(jo);
+			if (!id.startsWith("_"))
+			{
+				URI uri = URI.createURI(getLocalDBURL()+ "/" + path+ "/" + id);
+				E o = retrieveFromCache(uri, cache);
+				if (o == null)
+				{
+					o = loadObjectFromString(id, path, uri, extractEClassFromObjectString(jo), jo);
+				}
+				results.add(o);
+			}
+		}
+		
+		return (List<E>) results;
+	}
 	protected List<E> loadObjectsFromStrings(
 			List<String> allDocs, String path) {
 		List<E> results = new Vector<E>(allDocs.size());

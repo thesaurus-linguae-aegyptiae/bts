@@ -97,6 +97,7 @@ public class SelectProjectsPage extends WizardPage
 				if (selectedProject != null)
 				{
 					main_project = selectedProject.getPrefix();
+					setPageComplete(main_project != null);
 				}
 
 			}
@@ -264,5 +265,5 @@ public class SelectProjectsPage extends WizardPage
 			}
 		}
 	}
-
+	
 }

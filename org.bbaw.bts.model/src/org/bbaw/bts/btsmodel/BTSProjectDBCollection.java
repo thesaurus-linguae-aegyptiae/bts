@@ -2,6 +2,7 @@
  */
 package org.bbaw.bts.btsmodel;
 
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 
 
@@ -17,6 +18,8 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isIndexed <em>Indexed</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isSynchronized <em>Synchronized</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getRoleDescriptions <em>Role Descriptions</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getPropertyStrings <em>Property Strings</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperties <em>Properties</em>}</li>
  * </ul>
  * </p>
  *
@@ -119,5 +122,62 @@ public interface BTSProjectDBCollection extends BTSIdentifiableItem
 	 * @generated
 	 */
 	EList<BTSDBCollectionRoleDesc> getRoleDescriptions();
+
+	/**
+	 * Returns the value of the '<em><b>Property Strings</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Property Strings</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Property Strings</em>' attribute list.
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProjectDBCollection_PropertyStrings()
+	 * @model
+	 * @generated
+	 */
+	EList<String> getPropertyStrings();
+
+	
+
+
+	/**
+	 * Returns the value of the '<em><b>Properties</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Properties</em>' attribute.
+	 * @see #setProperties(Map)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProjectDBCollection_Properties()
+	 * @model transient="true"
+	 * @generated
+	 */
+	Map<String, String> getProperties();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperties <em>Properties</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Properties</em>' attribute.
+	 * @see #getProperties()
+	 * @generated
+	 */
+	void setProperties(Map<String, String> value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	void setProperty(String key, String value);
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model
+	 * @generated
+	 */
+	String getProperty(String key);
 
 } // BTSProjectDBCollection

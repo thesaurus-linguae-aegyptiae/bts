@@ -5,16 +5,21 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 
 /**
@@ -46,8 +51,31 @@ public class BTSTextCorpusItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addActivePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Active feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addActivePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSTextCorpus_active_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSTextCorpus_active_feature", "_UI_BTSTextCorpus_type"),
+				 BtsCorpusModelPackage.Literals.BTS_TEXT_CORPUS__ACTIVE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -89,11 +117,21 @@ public class BTSTextCorpusItemProvider
 	@Override
 	public Object getImage(Object object)
 	{
-		return overlayImage(object, getBTSResourceProvider().getImage(
-Display
-				.getDefault(), getConfigurationController()
-				.getIconStringOfObjectType((BTSCorpusObject) object)));
+		Image im = null;
+		if (((BTSTextCorpus)object).isActive())
+		{
+			im = getBTSResourceProvider().getImage(Display
+					.getDefault(), getConfigurationController()
+					.getIconStringOfObjectType((BTSCorpusObject) object));
+		}
+		else
+		{
+			im = getBTSResourceProvider().getImage(Display
+				.getDefault(), BTSResourceProvider.IMG_CORPUS_DISABLED);
+		}
+		return overlayImage(object, im);
 	}
+
 
 	/**
 	 * This returns the label text for the adapted class. <!-- begin-user-doc
@@ -120,13 +158,31 @@ Display
 		String label = ((BTSTextCorpus)object).getName();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
-			styledLabel.append(getString("_UI_BTSTextCorpus_type"), StyledString.Style.QUALIFIER_STYLER); 
+			
+				styledLabel.append(getString("_UI_BTSTextCorpus_type"), StyledString.Style.QUALIFIER_STYLER); 
+
 		} else {
-			styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
+			if (object.equals(getMainCorpus()))
+			{
+				styledLabel.append(label, UNDERLINED); 
+			}
+			else
+			{
+				styledLabel.append(label, StyledString.Style.QUALIFIER_STYLER);
+			}
 		}
-		styledLabel.append(" [" + ((BTSCorpusObject)object).getProject() +  "]", GREY);
+		styledLabel.append(" [" + ((BTSCorpusObject)object).getProject() + "\\" +  ((BTSCorpusObject)object).getCorpusPrefix() +  "]", GREY);
 
 		return styledLabel;
+	}
+
+	private BTSTextCorpus getMainCorpus() {
+		BTSTextCorpus mainCorpus = null;
+		if (mainCorpus == null)
+		{
+			mainCorpus = (BTSTextCorpus) StaticAccessController.getContext().get("main_corpus");
+		}
+		return mainCorpus;
 	}
 
 	/**
@@ -141,6 +197,9 @@ Display
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSTextCorpus.class)) {
+			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
 			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__HEADER:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;

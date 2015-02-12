@@ -14,6 +14,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSUser;
+import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -101,6 +102,13 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public List<BTSUser> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSUser> users = userDao.list(BTSCoreConstants.ADMIN, objectState);
+		return users;
+	}
+	
+	@Override
+	public List<BTSUser> listChunks(int chunkSize,  String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSUser> users = userDao.listChunks(chunkSize, chunkIds,BTSCoreConstants.ADMIN, objectState);
 		return users;
 	}
 

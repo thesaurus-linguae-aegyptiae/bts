@@ -15,6 +15,7 @@ import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -177,7 +178,13 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	{
 		return projectDao.list(BTSCoreConstants.ADMIN, objectState);
 	}
-
+	@Override
+	public List<BTSProject> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSProject> objects = projectDao.listChunks(chunkSize, chunkIds,
+				BTSCoreConstants.ADMIN, objectState);
+		return filter(objects);
+	}
 	@Override
 	public List<BTSProject> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor)

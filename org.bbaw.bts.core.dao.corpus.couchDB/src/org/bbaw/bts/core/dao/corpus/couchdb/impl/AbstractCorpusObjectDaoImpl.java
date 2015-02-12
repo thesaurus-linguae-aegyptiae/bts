@@ -4,11 +4,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.GenericDao;
+import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
@@ -26,6 +29,10 @@ implements GenericDao<E, K>
 
 	@Inject
 	protected Logger logger;
+	public static final String CORPUSPREFIX_PATTERN = "(\"corpusPrefix\":\\s*\")([^\"]*)\"";
+
+	public static final Pattern corpusPrefixPattern = Pattern.compile(CORPUSPREFIX_PATTERN);
+
 	
 	protected List<E> loadPartialObjectsFromStrings(
 			List<String> allDocs, String dbPath) {
@@ -112,6 +119,9 @@ implements GenericDao<E, K>
 		// visiblity
 		entity.setVisibility(extractVisibilityFromObjectString(sourceAsString));
 		
+		// visiblity
+		entity.setCorpusPrefix(extractCorpusPrefixFromObjectString(sourceAsString));
+				
 		// readers
 		List<String> readers = extractReadersFromObjectString(sourceAsString);
 		if (readers != null)
@@ -135,6 +145,17 @@ implements GenericDao<E, K>
 		entity.setRevisionState(extractRevisionSateFromObjectString(sourceAsString));
 		return entity;
 	}
+
+	private String extractCorpusPrefixFromObjectString(String sourceAsString) {
+		Matcher m = corpusPrefixPattern.matcher(sourceAsString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+
+
 
 	@Override
 	protected E loadObjectFromHit(SearchHit hit, URI uri, String indexName)

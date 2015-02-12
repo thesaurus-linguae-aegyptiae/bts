@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
@@ -163,6 +164,13 @@ implements BTSAnnotationService, BTSObjectSearchService
 			String objectState, IProgressMonitor monitor)
 	{
 		return filter(annotationDao.findByQueryId(queryId, dbPath, objectState));
+	}
+	@Override
+	public List<BTSAnnotation> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSAnnotation> objects = new Vector<BTSAnnotation>();
+		objects.addAll(annotationDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
 	}
 	@Override
 	public String getNameOfServedClass() {

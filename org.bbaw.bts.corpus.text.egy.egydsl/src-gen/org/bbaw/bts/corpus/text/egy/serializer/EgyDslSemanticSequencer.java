@@ -7,9 +7,12 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Expanded;
@@ -24,6 +27,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixNonLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Lacuna;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
+import org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Oval;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
@@ -106,6 +110,16 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					return; 
 				}
 				else break;
+			case EgyDslPackage.DELETED_VERS_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getDeletedVersMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule() ||
+				   context == grammarAccess.getVersMarkerRule()) {
+					sequence_DeletedVersMarker(context, (DeletedVersMarker) semanticObject); 
+					return; 
+				}
+				else break;
 			case EgyDslPackage.DELETION:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getDeletionRule() ||
@@ -114,6 +128,16 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Deletion(context, (Deletion) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.DESTROYED_VERS_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getDestroyedVersMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule() ||
+				   context == grammarAccess.getVersMarkerRule()) {
+					sequence_DestroyedVersMarker(context, (DestroyedVersMarker) semanticObject); 
 					return; 
 				}
 				else break;
@@ -144,6 +168,16 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					return; 
 				}
 				else break;
+			case EgyDslPackage.DISPUTABLE_VERS_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getDisputableVersMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule() ||
+				   context == grammarAccess.getVersMarkerRule()) {
+					sequence_DisputableVersMarker(context, (DisputableVersMarker) semanticObject); 
+					return; 
+				}
+				else break;
 			case EgyDslPackage.EMENDATION:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getEmendationRule() ||
@@ -156,6 +190,8 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.EXPANDED:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Brackets_Cartouche_Expanded(context, (Expanded) semanticObject); 
@@ -172,8 +208,6 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				   context == grammarAccess.getNoDisputableReadingRule() ||
 				   context == grammarAccess.getNoEmendationRule() ||
 				   context == grammarAccess.getNoExpandedColumnRule() ||
-				   context == grammarAccess.getNoLacunaRule() ||
-				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getNoRasurRule()) {
 					sequence_Expanded(context, (Expanded) semanticObject); 
 					return; 
@@ -358,8 +392,20 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					return; 
 				}
 				else break;
+			case EgyDslPackage.MISSING_VERS_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getMissingVersMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule() ||
+				   context == grammarAccess.getVersMarkerRule()) {
+					sequence_MissingVersMarker(context, (MissingVersMarker) semanticObject); 
+					return; 
+				}
+				else break;
 			case EgyDslPackage.OVAL:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getOvalRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Oval(context, (Oval) semanticObject); 
@@ -403,6 +449,8 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.SERECH:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoPartialDestructionRule() ||
 				   context == grammarAccess.getSerechRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Serech(context, (Serech) semanticObject); 
@@ -525,9 +573,27 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
+	 *     {DeletedVersMarker}
+	 */
+	protected void sequence_DeletedVersMarker(EObject context, DeletedVersMarker semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     wChar+=NoDeletion+
 	 */
 	protected void sequence_Deletion(EObject context, Deletion semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {DestroyedVersMarker}
+	 */
+	protected void sequence_DestroyedVersMarker(EObject context, DestroyedVersMarker semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -553,6 +619,15 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     wChar+=NoDisputableReading+
 	 */
 	protected void sequence_DisputableReading(EObject context, DisputableReading semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {DisputableVersMarker}
+	 */
+	protected void sequence_DisputableVersMarker(EObject context, DisputableVersMarker semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -678,6 +753,15 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
 		feeder.accept(grammarAccess.getMarkerAccess().getTypeBETWEEN_HASHESTerminalRuleCall_0(), semanticObject.getType());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {MissingVersMarker}
+	 */
+	protected void sequence_MissingVersMarker(EObject context, MissingVersMarker semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

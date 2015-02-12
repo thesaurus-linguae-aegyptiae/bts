@@ -2185,13 +2185,22 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__HEADER = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Active</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__ACTIVE = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>BTS Text Corpus</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_CORPUS_FEATURE_COUNT = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
+	int BTS_TEXT_CORPUS_FEATURE_COUNT = BTS_CORPUS_OBJECT_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -6071,6 +6080,17 @@ public interface BtsCorpusModelPackage extends EPackage {
 	EReference getBTSTextCorpus_Header();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus#isActive <em>Active</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Active</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus#isActive()
+	 * @see #getBTSTextCorpus()
+	 * @generated
+	 */
+	EAttribute getBTSTextCorpus_Active();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSImage <em>BTS Image</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6858,6 +6878,14 @@ public interface BtsCorpusModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_TEXT_CORPUS__HEADER = eINSTANCE.getBTSTextCorpus_Header();
+
+		/**
+		 * The meta object literal for the '<em><b>Active</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_TEXT_CORPUS__ACTIVE = eINSTANCE.getBTSTextCorpus_Active();
 
 		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSImageImpl <em>BTS Image</em>}' class.

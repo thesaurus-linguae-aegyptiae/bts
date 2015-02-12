@@ -14,6 +14,7 @@ import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.dao.corpus.BTSThsEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -30,6 +31,13 @@ implements BTSThsEntryService, BTSObjectSearchService {
 			String objectState, IProgressMonitor monitor) {
 		return thsEntryDao.list(dbPath, queryId,
 				objectState);
+	}
+	@Override
+	public List<BTSThsEntry> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
+		objects.addAll(thsEntryDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
 	}
 	@Override
 	public BTSThsEntry createNew() {

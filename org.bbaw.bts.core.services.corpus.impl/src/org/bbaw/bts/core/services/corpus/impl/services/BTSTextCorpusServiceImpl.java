@@ -21,6 +21,7 @@ import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.db.DBManager;
@@ -87,17 +88,30 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		corpus = textCorpusDao.find(key, main_project + BTSCorpusConstants.CORPUS);
 		if (corpus != null)
 		{
-			return corpus;
+			return checkCorpusActive(corpus);
 		}
 		for (String p : getActiveProjects())
 		{
 			corpus = textCorpusDao.find(key, p + BTSCorpusConstants.CORPUS);
 			if (corpus != null)
 			{
-				return corpus;
+				return checkCorpusActive(corpus);
 			}
 		}
 		return null;
+	}
+
+	private BTSTextCorpus checkCorpusActive(BTSTextCorpus corpus) {
+		for (String s : getActive_corpora(corpus.getProject()))
+		{
+			if (s.equals(corpus.getDBCollectionKey() + "_" + corpus.getCorpusPrefix()))
+			{
+				corpus.setActive(true);
+				return corpus;
+			}
+		}
+		corpus.setActive(false);
+		return corpus;
 	}
 
 	@Override
@@ -113,7 +127,27 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 				e.printStackTrace();
 			}
 		}
-		return filter(list);
+		return checkCorporaActive(filter(list));
+	}
+
+	private List<BTSTextCorpus> checkCorporaActive(List<BTSTextCorpus> corpora) {
+		String[] activCorpora = getActive_corpora(null);
+		
+		for (BTSTextCorpus c : corpora)
+		{
+			boolean active = false;
+			for (String s : activCorpora)
+			{
+				if (s.equals(c.getDBCollectionKey() + "_" + c.getCorpusPrefix()))
+				{
+					active = true;
+					break;
+				}
+			}
+			c.setActive(active);
+			
+		}
+		return corpora;
 	}
 
 	@Override
@@ -129,11 +163,11 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 					objectState, registerQuery));
 
 		}
-		return filter(objects);
+		return checkCorporaActive(filter(objects));
 	}
 	@Override
 	public List<BTSTextCorpus> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
-		return query(query, objectState, true, monitor);
+		return checkCorporaActive(filter(query(query, objectState, true, monitor)));
 	}
 
 	@Override
@@ -142,7 +176,13 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	{
 		return filter(textCorpusDao.findByQueryId(queryId, dbPath, objectState));
 	}
-
+	@Override
+	public List<BTSTextCorpus> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSTextCorpus> objects = new Vector<BTSTextCorpus>();
+		objects.addAll(textCorpusDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
+	}
 
 
 	@Override
@@ -192,4 +232,13 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		return null;
 	}
 	
+	public String[] getActive_corporaPrefixes(String projecPrefix)
+	{
+		return getActive_corpora(projecPrefix);
+	}
+	
+	public String getMainCorpusPrefix()
+	{
+		return main_corpus_key;
+	}
 }

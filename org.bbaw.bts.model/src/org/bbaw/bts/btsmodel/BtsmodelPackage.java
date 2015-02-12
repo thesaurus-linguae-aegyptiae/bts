@@ -4020,13 +4020,49 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
+	 * The feature id for the '<em><b>Property Strings</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__PROPERTIES = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
+
+	/**
 	 * The number of structural features of the '<em>BTS Project DB Collection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_DB_COLLECTION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
+	int BTS_PROJECT_DB_COLLECTION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+
+	/**
+	 * The operation id for the '<em>Set Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION___SET_PROPERTY__STRING_STRING = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get Property</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION___GET_PROPERTY__STRING = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>BTS Project DB Collection</em>' class.
@@ -4035,7 +4071,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_DB_COLLECTION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_PROJECT_DB_COLLECTION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSDBCollectionRoleDescImpl <em>BTSDB Collection Role Desc</em>}' class.
@@ -4284,6 +4320,52 @@ public interface BtsmodelPackage extends EPackage {
 	int STRING_TO_STRING_LIST_MAP_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.StringToStringMapImpl <em>String To String Map</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.StringToStringMapImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getStringToStringMap()
+	 * @generated
+	 */
+	int STRING_TO_STRING_MAP = 31;
+
+	/**
+	 * The feature id for the '<em><b>Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP__KEY = 0;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP__VALUE = 1;
+
+	/**
+	 * The number of structural features of the '<em>String To String Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP_FEATURE_COUNT = 2;
+
+	/**
+	 * The number of operations of the '<em>String To String Map</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int STRING_TO_STRING_MAP_OPERATION_COUNT = 0;
+
+	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4291,7 +4373,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 31;
+	int PROPERTY_CHANGE_SUPPORT = 32;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -4301,7 +4383,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 32;
+	int PROPERTY_CHANGE_LISTENER = 33;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -4311,7 +4393,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 33;
+	int PROPERTY_CHANGE_EVENT = 34;
 
 
 	/**
@@ -5990,6 +6072,48 @@ public interface BtsmodelPackage extends EPackage {
 	EReference getBTSProjectDBCollection_RoleDescriptions();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getPropertyStrings <em>Property Strings</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Property Strings</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#getPropertyStrings()
+	 * @see #getBTSProjectDBCollection()
+	 * @generated
+	 */
+	EAttribute getBTSProjectDBCollection_PropertyStrings();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperties <em>Properties</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Properties</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperties()
+	 * @see #getBTSProjectDBCollection()
+	 * @generated
+	 */
+	EAttribute getBTSProjectDBCollection_Properties();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#setProperty(java.lang.String, java.lang.String) <em>Set Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Set Property</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#setProperty(java.lang.String, java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSProjectDBCollection__SetProperty__String_String();
+
+	/**
+	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperty(java.lang.String) <em>Get Property</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Property</em>' operation.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperty(java.lang.String)
+	 * @generated
+	 */
+	EOperation getBTSProjectDBCollection__GetProperty__String();
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSIdentifiableItem <em>BTS Identifiable Item</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6129,6 +6253,39 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getStringToStringListMap_Value();
+
+	/**
+	 * Returns the meta object for class '{@link java.util.Map <em>String To String Map</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>String To String Map</em>'.
+	 * @see java.util.Map
+	 * @model instanceClass="java.util.Map"
+	 * @generated
+	 */
+	EClass getStringToStringMap();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map#getKey <em>Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Key</em>'.
+	 * @see java.util.Map#getKey()
+	 * @see #getStringToStringMap()
+	 * @generated
+	 */
+	EAttribute getStringToStringMap_Key();
+
+	/**
+	 * Returns the meta object for the attribute '{@link java.util.Map#getValue <em>Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Value</em>'.
+	 * @see java.util.Map#getValue()
+	 * @see #getStringToStringMap()
+	 * @generated
+	 */
+	EAttribute getStringToStringMap_Value();
 
 	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
@@ -7489,6 +7646,38 @@ public interface BtsmodelPackage extends EPackage {
 		EReference BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS = eINSTANCE.getBTSProjectDBCollection_RoleDescriptions();
 
 		/**
+		 * The meta object literal for the '<em><b>Property Strings</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS = eINSTANCE.getBTSProjectDBCollection_PropertyStrings();
+
+		/**
+		 * The meta object literal for the '<em><b>Properties</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_PROJECT_DB_COLLECTION__PROPERTIES = eINSTANCE.getBTSProjectDBCollection_Properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Set Property</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_PROJECT_DB_COLLECTION___SET_PROPERTY__STRING_STRING = eINSTANCE.getBTSProjectDBCollection__SetProperty__String_String();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Property</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation BTS_PROJECT_DB_COLLECTION___GET_PROPERTY__STRING = eINSTANCE.getBTSProjectDBCollection__GetProperty__String();
+
+		/**
 		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl <em>BTS Identifiable Item</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -7599,6 +7788,32 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_TO_STRING_LIST_MAP__VALUE = eINSTANCE.getStringToStringListMap_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.StringToStringMapImpl <em>String To String Map</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.StringToStringMapImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getStringToStringMap()
+		 * @generated
+		 */
+		EClass STRING_TO_STRING_MAP = eINSTANCE.getStringToStringMap();
+
+		/**
+		 * The meta object literal for the '<em><b>Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_STRING_MAP__KEY = eINSTANCE.getStringToStringMap_Key();
+
+		/**
+		 * The meta object literal for the '<em><b>Value</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute STRING_TO_STRING_MAP__VALUE = eINSTANCE.getStringToStringMap_Value();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
@@ -114,7 +115,13 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		}
 		return configs;
 	}
-
+	@Override
+	public List<BTSConfiguration> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSConfiguration> configs = new Vector<BTSConfiguration>();
+		configs.addAll(configurationDao.listChunks(chunkSize, chunkIds,dbCollectionName, objectState));
+		return filter(configs);
+	}
 	@Override
 	public BTSConfigItem createNewConfigItem()
 	{

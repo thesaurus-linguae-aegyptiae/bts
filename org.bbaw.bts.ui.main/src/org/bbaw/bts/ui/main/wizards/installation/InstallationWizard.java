@@ -401,14 +401,17 @@ public class InstallationWizard extends Wizard {
 		} else if (page instanceof SelectProjectsPage) {
 			return finishPage;
 		}
+		else
+		{
+			return welcomePage;
+		}
 		return super.getNextPage(page);
 	}
 
 	@Override
 	public boolean canFinish() {
 		if (welcomePage.isConnectToServer()) {
-			return (dbPage.canFlipToNextPage() && projectPage
-					.canFlipToNextPage());
+			return (connectServerPage.canFlipToNextPage() && projectPage.canFlipToNextPage());
 		} else {
 			return createUserPage.canFlipToNextPage();
 		}

@@ -7,6 +7,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.UserActionCounter;
 import org.bbaw.bts.commons.BTSConstants;
@@ -75,7 +76,13 @@ public class UserActionCounterServiceImpl extends
 		counters.addAll(counterDao.list(BTSCoreConstants.LOCAL, objectState));
 		return counters;
 	}
-
+	@Override
+	public List<UserActionCounter> listChunks(int chunkSize,  String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<UserActionCounter> counters = new Vector<UserActionCounter>();
+		counters.addAll(counterDao.listChunks(chunkSize, chunkIds,BTSCoreConstants.LOCAL, objectState));
+		return counters;
+	}
 	@Override
 	public List<UserActionCounter> list(String dbPath, String queryId,
 			String objectState, IProgressMonitor monitor) {

@@ -30,6 +30,7 @@
 package org.bbaw.bts.ui.resources;
 
 import org.eclipse.e4.tools.services.IResourceProviderService;
+import org.eclipse.swt.widgets.Display;
 
 /**
  * The Interface BTSResourceProvider provides static resource string ids.
@@ -629,5 +630,7 @@ public interface BTSResourceProvider extends IResourceProviderService {
 	public static final String IMG_OVR_REVIEWED = "IMG_OVR_REVIEWED";
 
 	public static final String IMG_OVR_NEW = "IMG_OVR_NEW";
+
+	public static final String IMG_CORPUS_DISABLED = "IMG_CORPUS_DISABLED";
 
 }

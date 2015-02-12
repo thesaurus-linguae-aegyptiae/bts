@@ -121,7 +121,7 @@ public class ObjectPathToolControl {
 	}
 
 	private BTSObject[] loadFullPath(BTSObject[] objects, boolean rootIncluded) {
-		if (rootIncluded)
+		if (rootIncluded || objects == null || objects.length == 0)
 		{
 			// first is root
 			return objects;

@@ -13,6 +13,6 @@ package org.bbaw.bts.corpus.text.egy.egyDsl;
  * @model
  * @generated
  */
-public interface Cartouche extends Brackets, NoRestorationOverRasur
+public interface Cartouche extends Brackets, NoLacuna, NoRestorationOverRasur, NoPartialDestruction
 {
 } // Cartouche

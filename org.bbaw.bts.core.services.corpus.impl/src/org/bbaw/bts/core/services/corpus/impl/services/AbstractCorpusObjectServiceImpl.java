@@ -214,11 +214,12 @@ implements GenericCorpusObjectService<E, K>{
 		
 	}
 	
-	protected String[] getActive_corpora(String projecPrefix) {
+	@Override
+	public String[] getActive_corpora(String projecPrefix) {
 		List<String>corpora = new ArrayList<String>(4);
 		for (String s : active_corpora.split(BTSCoreConstants.SPLIT_PATTERN))
 		{
-			if (s.startsWith(projecPrefix))
+			if (projecPrefix == null || s.startsWith(projecPrefix))
 			{
 				corpora.add(s);
 			}

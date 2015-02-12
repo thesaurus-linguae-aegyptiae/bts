@@ -696,7 +696,6 @@ public class CouchDBManager implements DBManager
 
 	private boolean checkIndex(String collection, Client esClient, IProgressMonitor monitor)
 	{
-		if (!existsIndex(esClient, collection)) return false;
 		CouchDbClient dbClient = null;
 		try {
 			dbClient = connectionProvider.getDBClient(CouchDbClient.class, collection);
@@ -713,7 +712,15 @@ public class CouchDBManager implements DBManager
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		
+		if (dbUpdateSeq == 0)
+		{
+			return true;
+		}
+		else if(!existsIndex(esClient, collection)) 
+		{
+			return false;
+		}
+
 			GetResponse lastSeqGetResponse = esClient
 					.prepareGet("_river", collection, "_seq")
 					.execute()
@@ -1691,14 +1698,40 @@ public class CouchDBManager implements DBManager
 
 	@Override
 	public boolean checkAndCreateDBCollection(BTSProject project, BTSProjectDBCollection collection, String dbCollectionName, boolean index, boolean synchronize) {
-		
+		if (dbCollectionName == null) return false;
 		CouchDbClient dbClient = null;
+		
 		boolean success = true;
 		try {
 			dbClient = connectionProvider.getDBClient(CouchDbClient.class, dbCollectionName);
 			dbClient.context().createDB(dbCollectionName);
 			Map<String, ReplicatorDocument> replicationMap = loadReplicationMap();
 
+			boolean collAdded = false;
+			if(project != null && collection == null)
+			{
+				for (BTSProjectDBCollection coll : project.getDbCollections())
+				{
+					if (dbCollectionName.equals(coll.getCollectionName()))
+					{
+						collection = coll;
+						break;
+					}
+				}
+			}
+			if(collection == null)
+			{
+				collection = BtsmodelFactory.eINSTANCE.createBTSProjectDBCollection();
+				collection.setCollectionName(dbCollectionName);
+				collection.setIndexed(index);
+				collection.setSynchronized(synchronize);
+				collAdded = true;
+			}
+			if (project != null && collAdded)
+			{
+					project.getDbCollections().add(collection);
+					projectDao.add(project, "admin");
+			}
 			if (synchronize && project != null && collection != null)
 			{
 				if (checkAndSetSyncToRemote(collection.getCollectionName(), project.getDbConnection(), replicationMap)
@@ -1710,6 +1743,7 @@ public class CouchDBManager implements DBManager
 					success = false;
 				}
 			}
+			
 			if (index)
 			{
 				if (!checkIndex(collection.getCollectionName(), esClient, null))

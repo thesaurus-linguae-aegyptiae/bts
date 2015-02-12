@@ -23,6 +23,7 @@ Require-Bundle: org.bbaw.bts.model;bundle-version="0.1.0",
  org.eclipse.equinox.preferences,
  org.bbaw.bts.commons.libs.elasticsearch;bundle-version="1.0.0"
 Import-Package: javax.inject,
+ org.apache.commons.codec.binary;version="1.6.0",
  org.bbaw.bts.commons,
  org.bbaw.bts.core.remote.dao,
  org.bbaw.bts.db,

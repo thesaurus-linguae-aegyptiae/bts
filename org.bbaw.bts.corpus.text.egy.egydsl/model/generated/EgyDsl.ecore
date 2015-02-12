@@ -24,6 +24,10 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SentenceItemNoAmbivalence"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersMarker" eSuperTypes="#//AbstractMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DisputableVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DestroyedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MissingVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersFrontierMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersbreakMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="BrokenVersbreakMarker" eSuperTypes="#//VersMarker"/>
@@ -46,15 +50,15 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Brackets" eSuperTypes="#//WordMiddle"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Oval" eSuperTypes="#//Brackets">
+  <eClassifiers xsi:type="ecore:EClass" name="Oval" eSuperTypes="#//Brackets #//NoLacuna #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoCartouche" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Serech" eSuperTypes="#//Brackets">
+  <eClassifiers xsi:type="ecore:EClass" name="Serech" eSuperTypes="#//Brackets #//NoLacuna #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoCartouche" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Cartouche" eSuperTypes="#//Brackets #//NoRestorationOverRasur"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cartouche" eSuperTypes="#//Brackets #//NoLacuna #//NoRestorationOverRasur #//NoPartialDestruction"/>
   <eClassifiers xsi:type="ecore:EClass" name="NoCartouche"/>
   <eClassifiers xsi:type="ecore:EClass" name="Expanded" eSuperTypes="#//Brackets #//Cartouche #//NoCartouche #//NoEmendation #//NoDisputableReading #//NoLacuna #//NoDeletion #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"

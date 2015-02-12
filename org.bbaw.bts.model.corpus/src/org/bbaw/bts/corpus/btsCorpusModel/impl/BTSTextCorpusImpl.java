@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTextCorpusImpl#getHeader <em>Header</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTextCorpusImpl#isActive <em>Active</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,6 +35,25 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 * @ordered
 	 */
 	protected BTSCorpusHeader header;
+
+	/**
+	 * The default value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean ACTIVE_EDEFAULT = false;
+	/**
+	 * The cached value of the '{@link #isActive() <em>Active</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isActive()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean active = ACTIVE_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -102,6 +122,27 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setActive(boolean newActive) {
+		boolean oldActive = active;
+		active = newActive;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE, oldActive, active));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
@@ -121,6 +162,8 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 		switch (featureID) {
 			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__HEADER:
 				return getHeader();
+			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
+				return isActive();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -135,6 +178,9 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 		switch (featureID) {
 			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__HEADER:
 				setHeader((BTSCorpusHeader)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
+				setActive((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -151,6 +197,9 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__HEADER:
 				setHeader((BTSCorpusHeader)null);
 				return;
+			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
+				setActive(ACTIVE_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -165,8 +214,26 @@ public class BTSTextCorpusImpl extends BTSCorpusObjectImpl implements BTSTextCor
 		switch (featureID) {
 			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__HEADER:
 				return header != null;
+			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
+				return active != ACTIVE_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString() {
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (active: ");
+		result.append(active);
+		result.append(')');
+		return result.toString();
 	}
 
 	@Override

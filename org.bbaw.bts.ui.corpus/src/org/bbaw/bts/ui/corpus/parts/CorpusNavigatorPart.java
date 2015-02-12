@@ -693,7 +693,32 @@ labelProvider));
 			refreshTreeViewer((BTSCorpusObject) object);
 		} else if (object instanceof BTSModelUpdateNotification) {
 			BTSModelUpdateNotification notification = (BTSModelUpdateNotification) object;
-			if (corpusNavigatorController.handleModelUpdate(
+			if (notification.getObject() instanceof BTSTextCorpus)
+			{
+				boolean found = false;
+				for (TreeNodeWrapper t : mainRootNode.getChildren())
+				{
+					if (notification.getObject().equals(t.getObject()))
+					{
+						found = true;
+						break;
+					}
+				}
+				if (!found)
+				{
+					final TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+					tn.setLabel(BTSConstants.ORPHANS_NODE_LABEL);
+					tn.setObject(notification.getObject());
+					tn.setParent(mainRootNode);
+					sync.asyncExec(new Runnable() {
+						@Override
+						public void run() {
+							mainRootNode.getChildren().add(tn);
+						}
+					});
+				}
+			}
+			else if (corpusNavigatorController.handleModelUpdate(
 					notification, queryResultMap,
 					viewHolderMap) && notification.getObject() instanceof BTSCorpusObject) {
 				
@@ -773,10 +798,20 @@ labelProvider));
 		}
 		
 		// make new tab, with queryName if name != null
-		createNewSearchTab(query, queryName);
+		createNewSearchTab(query, queryName, null);
+	}
+	
+	public void setInputList(List<BTSCorpusObject> objects, String queryName) {
+		if (objects == null)
+		{
+			return;
+		}
+		
+		// make new tab, with queryName if name != null
+		createNewSearchTab(null, queryName, objects);
 	}
 
-	private void createNewSearchTab(BTSQueryRequest query, String queryName) {
+	private void createNewSearchTab(BTSQueryRequest query, String queryName, List<BTSCorpusObject> objects) {
 		// create main tab item
 		CTabItem searchTab = new CTabItem(tabFolder, SWT.NONE);
 		searchTab.setShowClose(true);
@@ -789,7 +824,10 @@ labelProvider));
 		{
 			searchTab.setText(new Integer(tabFolder.getChildren().length - 2).toString());
 		}
-		searchTab.setData("key", query.getQueryId());
+		if (query != null)
+		{
+			searchTab.setData("key", query.getQueryId());
+		}
 
 		Composite searchTabItemComp = new Composite(tabFolder, SWT.NONE);
 		searchTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -811,13 +849,13 @@ labelProvider));
 		prepareTreeViewer(searchTreeViewer, searchTabItemComp);
 		
 		// search
-		searchInput(searchTabItemComp, searchTreeViewer, searchRootNode, query, searchTab);
+		searchInput(searchTabItemComp, searchTreeViewer, searchRootNode, query, objects, searchTab);
 
 	}
 
 	private void searchInput(final Composite parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
-			final BTSQueryRequest query, final CTabItem searchTab) {
+			final BTSQueryRequest query, final List<BTSCorpusObject> objects, final CTabItem searchTab) {
 
 		// // in new job, search
 		try {
@@ -828,12 +866,19 @@ labelProvider));
 							throws InvocationTargetException, InterruptedException 
 					{
 						List<BTSCorpusObject> obs;
-						obs = corpusNavigatorController
+						if (objects != null && !objects.isEmpty())
+						{
+							obs = objects;
+						}
+						else
+						{
+							obs = corpusNavigatorController
 								.getSearchEntries(query,
 										queryResultMap,
 										treeViewer,
 										rootNode,
 										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+						}
 						if (obs != null && obs.size() > 0)
 						{
 							storeIntoMap(obs, parentControl);

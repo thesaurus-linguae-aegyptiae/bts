@@ -104,6 +104,42 @@ public interface EgyDslFactory extends EFactory
   VersMarker createVersMarker();
 
   /**
+   * Returns a new object of class '<em>Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Disputable Vers Marker</em>'.
+   * @generated
+   */
+  DisputableVersMarker createDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Deleted Vers Marker</em>'.
+   * @generated
+   */
+  DeletedVersMarker createDeletedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  DestroyedVersMarker createDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Missing Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Missing Vers Marker</em>'.
+   * @generated
+   */
+  MissingVersMarker createMissingVersMarker();
+
+  /**
    * Returns a new object of class '<em>Vers Frontier Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

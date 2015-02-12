@@ -12,6 +12,7 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSImageDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSImageService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -137,7 +138,13 @@ public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImag
 	{
 		return filter(imageDao.findByQueryId(queryId, dbPath, objectState));
 	}
-
+	@Override
+	public List<BTSImage> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSImage> objects = new Vector<BTSImage>();
+		objects.addAll(imageDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
+	}
 	@Override
 	public String getNameOfServedClass() {
 		return "BTSImage";

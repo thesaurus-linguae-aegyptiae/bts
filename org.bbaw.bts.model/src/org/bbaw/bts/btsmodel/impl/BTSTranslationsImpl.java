@@ -170,7 +170,7 @@ public class BTSTranslationsImpl extends MinimalEObjectImpl.Container implements
 	 * <!-- begin-user-doc -->
 	 * return only the translation for the given language, or null if not available.
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generatedNOT
 	 */
 	public String getTranslationStrict(String language) {
 		BTSTranslation tr = getTranslationInternal(language);

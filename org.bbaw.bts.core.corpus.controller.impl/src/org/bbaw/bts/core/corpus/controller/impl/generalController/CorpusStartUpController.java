@@ -45,7 +45,7 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 		
 		// declare main_corpus as modifiable
 		context.declareModifiable(BTSPluginIDs.PREF_MAIN_CORPUS);
-
+		context.declareModifiable(BTSPluginIDs.PREF_ACTIVE_CORPORA);
 		
 		String main_corpus_key;
 
@@ -96,10 +96,13 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 				dirty = true;
 			}
 		}
+		context.modify(BTSPluginIDs.PREF_ACTIVE_CORPORA, active_corpora);
+
 		if (dirty)
 		{
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, active_corpora);
 			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_ACTIVE_CORPORA, active_corpora);
+
 			try {
 				ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
 			} catch (BackingStoreException e) {

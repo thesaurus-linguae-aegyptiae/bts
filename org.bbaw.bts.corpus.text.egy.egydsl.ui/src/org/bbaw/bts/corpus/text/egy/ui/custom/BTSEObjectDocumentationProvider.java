@@ -88,7 +88,7 @@ public class BTSEObjectDocumentationProvider implements
 						}
 						if (lemma != null)
 						{
-							doc += "Lemma Id: " + lemma.get_id() + "\nLemma: " + lemma.getName();
+							doc += "Lemma Id: " + lemma.get_id() + "                     " + "<br/>Lemma: " + lemma.getName();
 							
 						}
 						if (((BTSModelAnnotation) a).getModel() instanceof BTSWord)
@@ -97,7 +97,7 @@ public class BTSEObjectDocumentationProvider implements
 							
 							if (!word.getTranslation().getTranslations().isEmpty())
 							{
-								doc += "<br/><br/>Translations:<br/>";
+								doc += "<br/>";
 								for (BTSTranslation trans : word.getTranslation().getTranslations())
 								{
 									if (trans.getValue() != null && !"".equals(trans.getValue()))

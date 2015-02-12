@@ -25,6 +25,10 @@
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//SentenceItemNoAmbivalence"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//MissingVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersFrontierMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersbreakMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//BrokenVersbreakMarker"/>

@@ -25,8 +25,12 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.AbstractMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
+import org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItem;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItemNoAmbivalence;
@@ -438,6 +442,30 @@ public class TextModelHelper {
 					|| !modelMarker.getType().equals(
 							BTSConstants.BROKEN_VERS_MARKER)) {
 				modelMarker.setType(BTSConstants.BROKEN_VERS_MARKER);
+			}
+		}else if (si instanceof DestroyedVersMarker) {
+			if (modelMarker.getType() == null
+					|| !modelMarker.getType().equals(
+							BTSConstants.DESTROYED_VERS_MARKER)) {
+				modelMarker.setType(BTSConstants.DESTROYED_VERS_MARKER);
+			}
+		}else if (si instanceof DisputableVersMarker) {
+			if (modelMarker.getType() == null
+					|| !modelMarker.getType().equals(
+							BTSConstants.DISPUTABLE_VERS_MARKER)) {
+				modelMarker.setType(BTSConstants.DISPUTABLE_VERS_MARKER);
+			}
+		}else if (si instanceof DeletedVersMarker) {
+			if (modelMarker.getType() == null
+					|| !modelMarker.getType().equals(
+							BTSConstants.DELETED_VERS_MARKER)) {
+				modelMarker.setType(BTSConstants.DELETED_VERS_MARKER);
+			}
+		}else if (si instanceof MissingVersMarker) {
+			if (modelMarker.getType() == null
+					|| !modelMarker.getType().equals(
+							BTSConstants.MISSING_VERS_MARKER)) {
+				modelMarker.setType(BTSConstants.MISSING_VERS_MARKER);
 			}
 		}else if (si instanceof DestructionMarker) {
 			if (modelMarker.getType() == null) {

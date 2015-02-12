@@ -4,6 +4,7 @@ package org.bbaw.bts.btsmodel;
 
 import java.util.Date;
 
+import java.util.Map;
 import org.eclipse.emf.ecore.EFactory;
 
 /**
@@ -230,6 +231,15 @@ public interface BtsmodelFactory extends EFactory {
 	 * @generated
 	 */
 	UserActionCounter createUserActionCounter();
+
+	/**
+	 * Returns a new object of class '<em>String To String Map</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>String To String Map</em>'.
+	 * @generated
+	 */
+	Map createStringToStringMap();
 
 	/**
 	 * Returns the package supported by this factory.

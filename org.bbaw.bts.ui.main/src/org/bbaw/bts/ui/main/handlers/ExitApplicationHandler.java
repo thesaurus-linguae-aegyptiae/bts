@@ -3,11 +3,12 @@ package org.bbaw.bts.ui.main.handlers;
 
 import org.bbaw.bts.db.DBManager;
 import org.eclipse.e4.core.di.annotations.Execute;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 
 public class ExitApplicationHandler {
 	@Execute
-	  public void execute(IWorkbench workbench, DBManager dbManager) {
+	  public void execute(final IWorkbench workbench, DBManager dbManager, UISynchronize sync) {
 		try {
 			if (dbManager.optimizationRequired())
 			{
@@ -24,7 +25,13 @@ public class ExitApplicationHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	    workbench.close();
+	    sync.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				 workbench.close();
+			}
+		});
+	   
 
 	  }
 		

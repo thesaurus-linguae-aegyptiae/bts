@@ -120,6 +120,26 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createVersMarkerAdapter();
       }
       @Override
+      public Adapter caseDisputableVersMarker(DisputableVersMarker object)
+      {
+        return createDisputableVersMarkerAdapter();
+      }
+      @Override
+      public Adapter caseDeletedVersMarker(DeletedVersMarker object)
+      {
+        return createDeletedVersMarkerAdapter();
+      }
+      @Override
+      public Adapter caseDestroyedVersMarker(DestroyedVersMarker object)
+      {
+        return createDestroyedVersMarkerAdapter();
+      }
+      @Override
+      public Adapter caseMissingVersMarker(MissingVersMarker object)
+      {
+        return createMissingVersMarkerAdapter();
+      }
+      @Override
       public Adapter caseVersFrontierMarker(VersFrontierMarker object)
       {
         return createVersFrontierMarkerAdapter();
@@ -487,6 +507,66 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createVersMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker <em>Disputable Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker
+   * @generated
+   */
+  public Adapter createDisputableVersMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker <em>Deleted Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker
+   * @generated
+   */
+  public Adapter createDeletedVersMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker <em>Destroyed Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker
+   * @generated
+   */
+  public Adapter createDestroyedVersMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker <em>Missing Vers Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker
+   * @generated
+   */
+  public Adapter createMissingVersMarkerAdapter()
   {
     return null;
   }

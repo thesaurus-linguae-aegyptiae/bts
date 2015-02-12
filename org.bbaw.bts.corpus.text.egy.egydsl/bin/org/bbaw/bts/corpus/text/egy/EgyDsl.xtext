@@ -50,7 +50,28 @@ SentenceItemNoAmbivalence:
 ;
 
 VersMarker:
-	VersbreakMarker | VersFrontierMarker |BrokenVersbreakMarker
+	VersbreakMarker | VersFrontierMarker |BrokenVersbreakMarker 
+	| MissingVersMarker | DestroyedVersMarker | DeletedVersMarker | DisputableVersMarker
+;
+
+DisputableVersMarker:
+{DisputableVersMarker}
+	'\u2E2E\uDB80\uDC80?'//'@v'
+;
+
+DeletedVersMarker:
+{DeletedVersMarker}
+	'{\uDB80\uDC80}'//'@v'
+;
+
+DestroyedVersMarker:
+	{DestroyedVersMarker}
+	'[\uDB80\uDC80]'//'@v'
+;
+
+MissingVersMarker:
+	{MissingVersMarker}
+	'\u2329\uDB80\uDC80\u232A'//'@v'
 ;
 
 VersFrontierMarker:
@@ -131,6 +152,7 @@ terminal EGYSTRING returns ecore::EString:(
  |'i'|'i̯'|'ı͗'|'ı̯͗'|'ï'|'i̭'|'I͗'|'I'
 // |'\u0069\u032F'//iArcU
  |'\u0049\u032F' //IArcU
+ |'i̯̯'
  |'\u00CF'   // ITremaU
  |'ḳ'|'Ḳ'
  |'u'|'u̯'|'U'|'\u0055\u032F'
@@ -203,7 +225,7 @@ NoCartouche:
 	| Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn |
 	Expanded  | DisputableReading | Emendation | Lacuna | Deletion | 
 	PartialDestruction  
-	| Interfix
+	| Interfix 
 ;
 
 Expanded:
@@ -239,7 +261,7 @@ Lacuna:
 ;
 
 NoLacuna: 
-	Expanded | Chars | Interfix | DisputableReading
+	Expanded | Chars | Interfix | DisputableReading |Cartouche |Oval |Serech
 ;
 
 Deletion:
@@ -284,7 +306,7 @@ RestorationOverRasur:
 ;
 
 NoRestorationOverRasur:
-	Chars | Expanded | Interfix | DisputableReading |Cartouche 
+	Chars | Expanded | Interfix | DisputableReading |Cartouche
 ;
 
 PartialDestruction:
@@ -293,7 +315,7 @@ PartialDestruction:
 ;
 
 NoPartialDestruction:
-	Chars | Deletion | Expanded | DisputableReading | Interfix
+	Chars | Deletion | Expanded | DisputableReading | Interfix |Cartouche |Oval |Serech 
 ;
 
 // textual criticism interfixes

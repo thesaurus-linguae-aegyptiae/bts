@@ -89,7 +89,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	}
 	
 
-	protected String[] getActive_corpora(String projecPrefix) {
+	public String[] getActive_corpora(String projecPrefix) {
 		List<String> arr = new ArrayList<String>(4);
 		for (String s : active_corpora.split(BTSCoreConstants.SPLIT_PATTERN))
 		{
@@ -299,7 +299,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	@Override
 	public List<BTSCorpusObject> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor)
 	{
-		return query(query, objectState, true, monitor);
+		return filter(query(query, objectState, true, monitor));
 
 	}
 
@@ -314,6 +314,13 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 			String objectState, IProgressMonitor monitor)
 	{
 		throw new UnsupportedOperationException();
+	}
+	@Override
+	public List<BTSCorpusObject> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
+		objects.addAll(corpusObjectDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
 	}
 
 	@Override

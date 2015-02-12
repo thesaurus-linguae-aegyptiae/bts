@@ -10,9 +10,12 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Deletion;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableReading;
+import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslFactory;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EgyDslPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Emendation;
@@ -29,6 +32,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixPrefixNonLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.InterfixSuffixPronomLexical;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Lacuna;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
+import org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoAncientExpanded;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoCartouche;
 import org.bbaw.bts.corpus.text.egy.egyDsl.NoDeletion;
@@ -134,6 +138,34 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass versMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass disputableVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass deletedVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass destroyedVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass missingVersMarkerEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -637,6 +669,46 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
   public EClass getVersMarker()
   {
     return versMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDisputableVersMarker()
+  {
+    return disputableVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDeletedVersMarker()
+  {
+    return deletedVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getDestroyedVersMarker()
+  {
+    return destroyedVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMissingVersMarker()
+  {
+    return missingVersMarkerEClass;
   }
 
   /**
@@ -1292,6 +1364,14 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     versMarkerEClass = createEClass(VERS_MARKER);
 
+    disputableVersMarkerEClass = createEClass(DISPUTABLE_VERS_MARKER);
+
+    deletedVersMarkerEClass = createEClass(DELETED_VERS_MARKER);
+
+    destroyedVersMarkerEClass = createEClass(DESTROYED_VERS_MARKER);
+
+    missingVersMarkerEClass = createEClass(MISSING_VERS_MARKER);
+
     versFrontierMarkerEClass = createEClass(VERS_FRONTIER_MARKER);
 
     versbreakMarkerEClass = createEClass(VERSBREAK_MARKER);
@@ -1430,6 +1510,10 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     abstractMarkerEClass.getESuperTypes().add(this.getSentenceItemNoAmbivalence());
     ambivalenceEClass.getESuperTypes().add(this.getSentenceItem());
     versMarkerEClass.getESuperTypes().add(this.getAbstractMarker());
+    disputableVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    deletedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    destroyedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    missingVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
     versFrontierMarkerEClass.getESuperTypes().add(this.getVersMarker());
     versbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
     brokenVersbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
@@ -1451,9 +1535,15 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     charsEClass.getESuperTypes().add(this.getNoPartialDestruction());
     bracketsEClass.getESuperTypes().add(this.getWordMiddle());
     ovalEClass.getESuperTypes().add(this.getBrackets());
+    ovalEClass.getESuperTypes().add(this.getNoLacuna());
+    ovalEClass.getESuperTypes().add(this.getNoPartialDestruction());
     serechEClass.getESuperTypes().add(this.getBrackets());
+    serechEClass.getESuperTypes().add(this.getNoLacuna());
+    serechEClass.getESuperTypes().add(this.getNoPartialDestruction());
     cartoucheEClass.getESuperTypes().add(this.getBrackets());
+    cartoucheEClass.getESuperTypes().add(this.getNoLacuna());
     cartoucheEClass.getESuperTypes().add(this.getNoRestorationOverRasur());
+    cartoucheEClass.getESuperTypes().add(this.getNoPartialDestruction());
     expandedEClass.getESuperTypes().add(this.getBrackets());
     expandedEClass.getESuperTypes().add(this.getCartouche());
     expandedEClass.getESuperTypes().add(this.getNoCartouche());
@@ -1541,6 +1631,14 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEClass(sentenceItemNoAmbivalenceEClass, SentenceItemNoAmbivalence.class, "SentenceItemNoAmbivalence", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(versMarkerEClass, VersMarker.class, "VersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(disputableVersMarkerEClass, DisputableVersMarker.class, "DisputableVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(deletedVersMarkerEClass, DeletedVersMarker.class, "DeletedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(destroyedVersMarkerEClass, DestroyedVersMarker.class, "DestroyedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(missingVersMarkerEClass, MissingVersMarker.class, "MissingVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(versFrontierMarkerEClass, VersFrontierMarker.class, "VersFrontierMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

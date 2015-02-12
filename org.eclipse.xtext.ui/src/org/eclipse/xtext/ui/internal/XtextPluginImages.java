@@ -36,7 +36,7 @@ import e4.handler.ImageAcces;
  * PDEPluginImages.
  * 
  * @author Peter Friese - Initial contribution and API
- * @author Dennis Hübner
+ * @author Dennis Hï¿½bner
  * 
  */
 public class XtextPluginImages {
@@ -46,6 +46,8 @@ public class XtextPluginImages {
 	private static ImageRegistry PLUGIN_REGISTRY;
 
 	public final static String ICONS_PATH = "icons/"; //$NON-NLS-1$
+	
+	private static String OS = System.getProperty("os.name").toLowerCase();
 
 	/**
 	 * Set of predefined Image Descriptors.
@@ -207,8 +209,35 @@ public static final String OBJ_DESC_ERROR = NAME_PREFIX + "ERROR";
 
 	private static URL makeImageURL(String prefix, String name) {
 		//FIXME make dynamic!!!!!!!!!!!!!!
-		String path =  "file://C:/Dokumente und Einstellungen/plutte/git/xtext_2.4.x/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/" + prefix + name; //$NON-NLS-1$
-		System.out.println("path " + path);
+		URL entry = Platform.getBundle("org.eclipse.xtext.ui").getEntry(prefix+ name);
+		File file = null;
+		String path = null;
+		if (entry == null)
+		{
+			return null;
+		}
+		else
+		{
+			try {
+				path = FileLocator.toFileURL(entry).getPath();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			// remove leading slash from absolute path when on windows
+			if (isWindows())
+				path = path.substring(1, path.length());
+			file = new File(path);
+			try {
+				URL url = file.toPath().toUri().toURL();
+				return url;
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+//		String path =  "file://C:/Dokumente und Einstellungen/plutte/git/xtext_2.4.x/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/" + prefix + name; //$NON-NLS-1$
+		System.out.println("path  " + path);
 
 		URL result = null;
 		try {
@@ -260,6 +289,10 @@ public static final String OBJ_DESC_ERROR = NAME_PREFIX + "ERROR";
 //		return dirURL;
 		//old
 //		return FileLocator.find(Activator.getDefault().getBundle(), new Path(path), null);
+	}
+
+	private static boolean isWindows() {
+		return (OS.indexOf("win") >= 0);
 	}
 
 	public static Image manage(String key, ImageDescriptor desc) {

@@ -48,5 +48,6 @@ public class BTSEGYConstants {
 			 + "< M,m < N,n < R,r < L,l < H,h < Ḥ,ḥ < Ḫ,ḫ < H̭,h̭ < H̱,ẖ < Z,z "
 			 + "< S,s < Ś,ś < Š,š < Q,q < Ḳ,ḳ < K,k < G,g < T,t < Ṱ,ṱ < Ṯ,ṯ < Č,č < D,d < Ṭ,ṭ < Ḏ,ḏ < Č̣,č̣  "
 			 + "<\u00C6, ã < Õ,\u0152, \u0153 < Þ < \u0178 ");
+	public static final String EGYDSL_INJECTOR = "org.bbaw.bts.corpus.text.egy.EgyDsl.injector";
 	private BTSEGYConstants(){}
 }

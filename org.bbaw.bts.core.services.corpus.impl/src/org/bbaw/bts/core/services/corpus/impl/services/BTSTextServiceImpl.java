@@ -20,6 +20,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -110,6 +111,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		return filter(texts);
 	}
 
+	
 	@Override
 	public List<BTSText> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor)
@@ -128,7 +130,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 
 	@Override
 	public List<BTSText> query(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
-		return query(query, objectState, true, monitor);
+		return filter(query(query, objectState, true, monitor));
 	}
 
 	@Override
@@ -171,6 +173,16 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	public List<BTSText> listRootEntries(IProgressMonitor monitor) {
 		throw new UnsupportedOperationException();
 	}
+
+	@Override
+	public List<BTSText> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
+			String objectState, IProgressMonitor monitor) {
+		List<BTSText> objects = new Vector<BTSText>();
+		objects.addAll(textDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
+		return filter(objects);
+	}
+
+	
 	
 	
 }

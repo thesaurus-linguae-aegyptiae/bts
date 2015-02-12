@@ -11,6 +11,10 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DirectColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,6 +27,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
+import javax.naming.Context;
 
 import jsesh.mdc.MDCSyntaxError;
 import jsesh.mdcDisplayer.draw.MDCDrawingFacade;
@@ -56,16 +61,22 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+import org.bbaw.bts.corpus.text.egy.EgyDslStandaloneSetup;
+import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
+import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYConstants;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.common.util.URI;
 //import org.eclipse.emf.compare.Comparison;
 //import org.eclipse.emf.compare.EMFCompare;
 //import org.eclipse.emf.compare.match.DefaultComparisonFactory;
@@ -77,6 +88,7 @@ import org.eclipse.emf.common.command.CompoundCommand;
 //import org.eclipse.emf.compare.scope.IComparisonScope;
 //import org.eclipse.emf.compare.utils.UseIdentifiers;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.command.RemoveCommand;
@@ -92,7 +104,14 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.PaletteData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.xtext.parser.IParseResult;
+import org.eclipse.xtext.parser.IParser;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
 import org.elasticsearch.index.query.QueryBuilders;
+
+import com.google.inject.Injector;
 
 public class BTSTextEditorControllerImpl implements BTSTextEditorController
 {
@@ -111,12 +130,17 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
 	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
 	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
+	private static final String DISPUTALBE_VERS_MARKER = "\u2E2E\uDB80\uDC80?";
+	private static final String DELETED_VERS_MARKER = "{\uDB80\uDC80}";
+	private static final String DESTROYED_VERS_MARKER = "[\uDB80\uDC80]";
+	private static final String MISSING_VERS_MARKER = "\u2329\uDB80\uDC80\u232A";
 
 //	private static final String MARKER_VERS_SIGN = "\u0040";
 	private static final String MARKER_INTERFIX = ": ";
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
 	private static final int GAP = 10;
+	private static final int LINE_LENGTH = 70;
 	
 	protected TextModelHelper textModelHelper = new TextModelHelper();
 
@@ -128,6 +152,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	
 	@Inject
 	private Logger logger;
+	
+	@Inject
+	private IEclipseContext context;
 	
 	
 	private int idcounter = 0;
@@ -184,6 +211,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				BTSModelAnnotation ma = new BTSModelAnnotation(BTSModelAnnotation.TYPE,sentence);
 				int len = stringBuilder.length();
 				int loopLen = stringBuilder.length();
+				int lineLoop = stringBuilder.length();
+				boolean lineBreak = false;
 				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
 				{
 					appendToStringBuilder(sentenceItem, model, stringBuilder, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
@@ -191,6 +220,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					{
 						stringBuilder.append(WS);
 						loopLen = stringBuilder.length();
+						lineBreak = false;
+					}
+					
+					// calcualte 
+					if (loopLen - lineLoop > LINE_LENGTH)
+					{
+						stringBuilder.append("\n");
+						loopLen = stringBuilder.length();
+						lineLoop = stringBuilder.length();
+						lineBreak = true;
 					}
 					if (monitor != null)
 					{
@@ -200,11 +239,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				}
 				
 				// check whether sentence items were added
-				if (stringBuilder.length() > len)
+				if (stringBuilder.length() > len && lineBreak) // linebreak just appended
+				{
+					stringBuilder.replace(stringBuilder.length() - 2,stringBuilder.length(), SENTENCE_SIGN);
+				} else if (stringBuilder.length() > len) // linebreak, remove only WS
 				{
 					stringBuilder.replace(stringBuilder.length() - 1,stringBuilder.length(), SENTENCE_SIGN);
 				}
-				else
+				else // nothing appended, add only sentence sign
 				{
 					stringBuilder.append(SENTENCE_SIGN);
 				}
@@ -213,7 +255,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				int length = stringBuilder.length() - start;
 				// shorten sentence annotation to avoid mixing it with next sentence
 				Position pos = new Position(start, length-1); 
-				model.addAnnotation(ma, pos);
+				if (model != null) model.addAnnotation(ma, pos);
 			} else
 			{
 				appendToStringBuilder(textItems, model, stringBuilder, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
@@ -306,6 +348,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void createAnnotations(BTSIdentifiableItem item, IAnnotationModel model, Position pos, List<BTSInterTextReference> list) {
 		// FIXME ende einer annotation berechnen!!!!!!!!
+		if (model == null) return; 
 		for (BTSInterTextReference ref : list)
 		{
 			if (ref.getBeginId() == null || ref.getEndId() == null || ref.getBeginId().equals(ref.getEndId()))
@@ -396,6 +439,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void appendAmbivalenceToModel(BTSAmbivalence ambivalence,
 			IAnnotationModel model, Position pos) {
+		if (model == null) return;
+
 		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 				(BTSIdentifiableItem) ambivalence);
 
@@ -446,6 +491,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		pos.setLength(stringBuilder.length() - pos.getOffset());
 
 		// append to model
+		if (model == null) return;
+
 		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 				(BTSIdentifiableItem) amCase);
 
@@ -478,6 +525,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private void appendMarkerToModel(BTSMarker marker, IAnnotationModel model,
 			Position pos)
 	{
+		if (model == null) return;
 		BTSModelAnnotation annotation = new BTSModelAnnotation(BTSModelAnnotation.TYPE,
 				(BTSIdentifiableItem) marker);
 
@@ -503,6 +551,26 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 				stringBuilder.append(BROKEN_VERS_MARKER);
 				
 			} else if (marker.getType().equals(
+					BTSConstants.DESTROYED_VERS_MARKER)) {
+//				stringBuilder.append(MARKER_VERS_SIGN);
+				stringBuilder.append(DESTROYED_VERS_MARKER);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DELETED_VERS_MARKER)) {
+//				stringBuilder.append(MARKER_VERS_SIGN);
+				stringBuilder.append(DELETED_VERS_MARKER);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLE_VERS_MARKER)) {
+//				stringBuilder.append(MARKER_VERS_SIGN);
+				stringBuilder.append(DISPUTALBE_VERS_MARKER);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.MISSING_VERS_MARKER)) {
+//				stringBuilder.append(MARKER_VERS_SIGN);
+				stringBuilder.append(MISSING_VERS_MARKER);
+				
+			}else if (marker.getType().equals(
 					BTSConstants.DESTRUCTION_MARKER)) {
 //				stringBuilder.append(MARKER_VERS_SIGN);
 				stringBuilder.append("--" + marker.getName() + "--");
@@ -526,6 +594,8 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	private void appendWordToModel(BTSWord word, IAnnotationModel model, Position position, Map<String, List<Object>> lemmaAnnotationMap)
 	{
+		if (model == null) return;
+
 		BTSModelAnnotation annotation;
 		if (word.getLKey() != null && !"".equals(word.getLKey())) {
 
@@ -1288,9 +1358,89 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	@Override
 	public boolean testTextValidAgainstGrammar(BTSText text) {
-		Document doc = new Document();
-		transformToDocument(text.getTextContent(), doc, null, null, null, null, null);
-		
-		return true;
+		try {
+			Document doc = new Document();
+			transformToDocument(text.getTextContent(), doc, null, null, null, null, null);
+			Injector injector = findEgyDslInjector();
+			 XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
+			 resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+			 Resource resource = resourceSet.createResource(URI.createURI("dummy:/" + text.get_id() + ".egydsl"));
+			 InputStream in = new ByteArrayInputStream(doc.get().getBytes(Charset.forName("UTF-8")));
+			 try {
+				resource.load(in, resourceSet.getLoadOptions());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 boolean valid = resource.getErrors().isEmpty();
+			 System.out.println("testTextValidAgainstGrammar valid " + valid);
+			return valid;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+
+	@Override
+	public Injector findEgyDslInjector() {
+		Object o = context.get(BTSEGYConstants.EGYDSL_INJECTOR);
+		Injector injector;
+		if (o != null && o instanceof Injector)
+		{
+			injector = (Injector) o;
+		}
+		else
+		{
+			EgyDslActivator activator = EgyDslActivator.getInstance();
+//			new org.eclipse.emf.mwe.utils.StandaloneSetup().setPlatformUri("../");
+
+			injector = activator
+					.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
+			context.set(BTSEGYConstants.EGYDSL_INJECTOR, injector);
+		}
+		return injector;
+	}
+
+
+
+	@Override
+	public List<BTSText> listAllTexts(IProgressMonitor monitor) {
+		return textService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+	}
+
+
+
+	@Override
+	public List<BTSText> listInAllInvalidTexts(IProgressMonitor monitor) {
+		String[] params = new String[3];
+		List<BTSText> invalidtexts = new Vector<BTSText>();
+		String[] active_corpora= textService.getActive_corpora(null);
+		for (String active_corpus : active_corpora)
+		{
+			try {
+				do
+				{
+					List<BTSText> texts = textService.listChunks(100, params, active_corpus, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+					if (texts == null) break;
+					for (BTSText t : texts)
+					{
+						if (monitor.isCanceled()) break;
+						checkAndFullyLoad(t, false);
+						monitor.worked(1);
+						if (!testTextValidAgainstGrammar(t))
+						{
+							invalidtexts.add(t);
+						}
+						monitor.worked(1);
+					}
+					 params = new String[]{params[1], params[2], null};
+				}
+				while(params[1] != null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return invalidtexts;
 	}
 }

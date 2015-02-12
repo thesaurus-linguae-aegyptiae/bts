@@ -51,6 +51,10 @@ public class BTSCorpusObjectItemProvider
 			.setForegroundColor(URI.createURI("color://rgb/200/197/185"))
 			.toStyle();
 	
+	protected Style UNDERLINED = StyledString.Style.newBuilder()
+			.setUnderlineColor(URI.createURI("color://rgb/0/0/0"))
+			.toStyle();
+	
 	
 	protected BTSConfigurationController getConfigurationController()
 	{

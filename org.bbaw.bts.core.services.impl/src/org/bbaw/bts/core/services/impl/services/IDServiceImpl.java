@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.inject.Inject;
 import javax.xml.bind.DatatypeConverter;
 
+import org.apache.commons.codec.binary.Base32;
 import org.apache.commons.net.util.Base64;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
@@ -55,11 +56,13 @@ public class IDServiceImpl implements IDService
 		id = uid.randomUUID().toString();
 		id = id.replace("-", "");
 		
-		// encode Base64 to reduce size
+		// encode Base32 to reduce size
+		Base32 base32 = new Base32();
 		byte[] array = DatatypeConverter.parseHexBinary(id);
-	    id = Base64.encodeBase64URLSafeString(array);
+	    id = base32.encodeToString(array);
 	    id = id.replace("-", "Q");
 	    id = id.replace("_", "W");
+	    id = id.replace("=", "");
 //		System.out.println(id);
 		return id;
 	}
