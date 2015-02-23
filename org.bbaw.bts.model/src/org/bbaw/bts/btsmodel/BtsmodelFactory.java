@@ -242,6 +242,15 @@ public interface BtsmodelFactory extends EFactory {
 	Map createStringToStringMap();
 
 	/**
+	 * Returns a new object of class '<em>BTSID Reservation Object</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTSID Reservation Object</em>'.
+	 * @generated
+	 */
+	BTSIDReservationObject createBTSIDReservationObject();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

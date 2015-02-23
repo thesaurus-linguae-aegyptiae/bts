@@ -65,6 +65,8 @@ public interface BtsviewmodelFactory extends EFactory
 	
 	StatusMessage createInfoMessage();
 	
+	StatusMessage createRemoteDBConnnectionFailedMessage();
+	
 	StatusMessage createLockedMessage(DBLease lease, String userId);
 	/**
 	 * Returns the package supported by this factory.

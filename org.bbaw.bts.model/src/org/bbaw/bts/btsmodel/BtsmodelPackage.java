@@ -4366,6 +4366,124 @@ public interface BtsmodelPackage extends EPackage {
 	int STRING_TO_STRING_MAP_OPERATION_COUNT = 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSIDReservationObjectImpl <em>BTSID Reservation Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSIDReservationObjectImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSIDReservationObject()
+	 * @generated
+	 */
+	int BTSID_RESERVATION_OBJECT = 32;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__ID = BTSDB_BASE_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__REV = BTSDB_BASE_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__PROJECT = BTSDB_BASE_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__LOCKED = BTSDB_BASE_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__UPDATERS = BTSDB_BASE_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__READERS = BTSDB_BASE_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__DELETED = BTSDB_BASE_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__CONFLICTING_REVS = BTSDB_BASE_OBJECT__CONFLICTING_REVS;
+
+	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__DB_COLLECTION_KEY = BTSDB_BASE_OBJECT__DB_COLLECTION_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Bts UUID</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT__BTS_UUID = BTSDB_BASE_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>BTSID Reservation Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT_FEATURE_COUNT = BTSDB_BASE_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>BTSID Reservation Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSID_RESERVATION_OBJECT_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4373,7 +4491,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 32;
+	int PROPERTY_CHANGE_SUPPORT = 33;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -4383,7 +4501,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 33;
+	int PROPERTY_CHANGE_LISTENER = 34;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -4393,7 +4511,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 34;
+	int PROPERTY_CHANGE_EVENT = 35;
 
 
 	/**
@@ -6288,6 +6406,27 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getStringToStringMap_Value();
 
 	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSIDReservationObject <em>BTSID Reservation Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTSID Reservation Object</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSIDReservationObject
+	 * @generated
+	 */
+	EClass getBTSIDReservationObject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSIDReservationObject#getBtsUUID <em>Bts UUID</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Bts UUID</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSIDReservationObject#getBtsUUID()
+	 * @see #getBTSIDReservationObject()
+	 * @generated
+	 */
+	EAttribute getBTSIDReservationObject_BtsUUID();
+
+	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7814,6 +7953,24 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute STRING_TO_STRING_MAP__VALUE = eINSTANCE.getStringToStringMap_Value();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSIDReservationObjectImpl <em>BTSID Reservation Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.BTSIDReservationObjectImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSIDReservationObject()
+		 * @generated
+		 */
+		EClass BTSID_RESERVATION_OBJECT = eINSTANCE.getBTSIDReservationObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Bts UUID</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTSID_RESERVATION_OBJECT__BTS_UUID = eINSTANCE.getBTSIDReservationObject_BtsUUID();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

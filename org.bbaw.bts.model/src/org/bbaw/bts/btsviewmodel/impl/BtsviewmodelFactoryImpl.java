@@ -322,4 +322,13 @@ public class BtsviewmodelFactoryImpl extends EFactoryImpl implements Btsviewmode
 		m.setCreationTime(getTimeStamp());
 		return m;
 	}
+
+	@Override
+	public StatusMessage createRemoteDBConnnectionFailedMessage() {
+		StatusMessage m = BtsviewmodelFactory.eINSTANCE.createStatusMessage();
+		m.setMessageType(MessageType.ERROR);
+		m.setMessage("Failed to connect to remote database. Please check internet connection and server availability.");
+		m.setCreationTime(getTimeStamp());
+		return m;
+	}
 } //BtsviewmodelFactoryImpl

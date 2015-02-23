@@ -25,9 +25,10 @@ public class BTSUserGroupServiceImpl extends GenericObjectServiceImpl<BTSUserGro
 	public BTSUserGroup createNew()
 	{
 		BTSUserGroup entity = BtsmodelFactory.eINSTANCE.createBTSUserGroup();
-		super.setId(entity);
-		super.setRevision(entity);
 		entity.setDBCollectionKey(BTSCoreConstants.ADMIN);
+
+		super.setId(entity, entity.getDBCollectionKey());
+		super.setRevision(entity);
 		return entity;
 	}
 

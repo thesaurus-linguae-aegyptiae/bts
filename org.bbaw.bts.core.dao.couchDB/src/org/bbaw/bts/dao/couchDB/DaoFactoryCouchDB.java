@@ -2,6 +2,7 @@ package org.bbaw.bts.dao.couchDB;
 
 import org.bbaw.bts.core.dao.BTSCommentDao;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
+import org.bbaw.bts.core.dao.BTSIDReservationObjectDao;
 import org.bbaw.bts.core.dao.BTSProjectDao;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.dao.BTSUserGroupDao;
@@ -13,6 +14,7 @@ import org.bbaw.bts.core.dao.GeneralPurposeDao;
 import org.bbaw.bts.core.dao.UserActionCounterDao;
 import org.bbaw.bts.dao.couchDB.impl.BTSCommentDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.BTSConfigurationDaoImpl;
+import org.bbaw.bts.dao.couchDB.impl.BTSIDReservationObjectDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.BTSProjectDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.BTSUserDaoImpl;
 import org.bbaw.bts.dao.couchDB.impl.BTSUserGroupDaoImpl;
@@ -72,8 +74,16 @@ public class DaoFactoryCouchDB implements DAOFactory
 		}
 		else if (clazz == UserActionCounterDao.class) {
 			return (T) getGraphicSelectionCounterDao(context);
+		}else if (clazz == BTSIDReservationObjectDao.class) {
+			return (T) getBTSIDReservationObjectDao(context);
 		}
 		return null;
+	}
+
+	private BTSIDReservationObjectDao getBTSIDReservationObjectDao(IEclipseContext context) {
+		BTSIDReservationObjectDaoImpl dao = ContextInjectionFactory.make(
+				BTSIDReservationObjectDaoImpl.class, context);
+		return dao;
 	}
 
 	private UserActionCounterDao getGraphicSelectionCounterDao(

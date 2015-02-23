@@ -54,9 +54,10 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public BTSUser createNew()
 	{
 		BTSUser entity = BtsmodelFactory.eINSTANCE.createBTSUser();
-		super.setId(entity);
-		super.setRevision(entity);
 		entity.setDBCollectionKey(BTSCoreConstants.ADMIN);
+
+		super.setId(entity, entity.getDBCollectionKey());
+		super.setRevision(entity);
 		return entity;
 	}
 
@@ -130,7 +131,9 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	public BTSUser createNewUser(String userName)
 	{
 		BTSUser entity = BtsmodelFactory.eINSTANCE.createBTSUser();
-		super.setId(entity);
+		entity.setDBCollectionKey(BTSCoreConstants.ADMIN);
+
+		super.setId(entity, entity.getDBCollectionKey());
 		entity.set_id(userName);
 		entity.setUserName(userName);
 		super.setRevision(entity);

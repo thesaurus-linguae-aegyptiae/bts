@@ -50,11 +50,12 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	public BTSTextCorpus createNew()
 	{
 		BTSTextCorpus entity = BtsCorpusModelFactory.eINSTANCE.createBTSTextCorpus();
-		setId(entity);
-		setRevision(entity);
 		entity.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS);
 
 		entity.setCorpusPrefix(main_corpus_key);
+		setId(entity, entity.getDBCollectionKey());
+		setRevision(entity);
+
 		return entity;
 	}
 

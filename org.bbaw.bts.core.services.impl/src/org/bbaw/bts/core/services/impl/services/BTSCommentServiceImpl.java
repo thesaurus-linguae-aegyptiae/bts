@@ -48,9 +48,10 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 	@Override
 	public BTSComment createNew() {
 		BTSComment comment = BtsmodelFactory.eINSTANCE.createBTSComment();
-		super.setId(comment);
-		super.setRevision(comment);
 		comment.setDBCollectionKey(main_project + BTSCoreConstants.ADMIN_SUFFIX);
+
+		super.setId(comment, comment.getDBCollectionKey());
+		super.setRevision(comment);
 		return comment;
 	}
 

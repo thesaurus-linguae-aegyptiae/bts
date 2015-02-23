@@ -102,11 +102,11 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		
 	}
 
-	public void setId(E entity)
+	public void setId(E entity, String dbCollection)
 	{
 		if (entity instanceof BTSDBBaseObject)
 		{
-			((BTSDBBaseObject) entity).set_id(idService.createId());
+			((BTSDBBaseObject) entity).set_id(idService.createId(dbCollection));
 			entity.setProject(main_project);
 			if (authenticatedUser != null)
 			{

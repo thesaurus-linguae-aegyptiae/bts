@@ -57,7 +57,7 @@ public class RemoteDaoConstants
 
 	public static final String RESOURCE_SET = "resource_set";
 
-	public static final String DB_CLIENT_POOL_MAP = "db_client_pool_map";
+	public static final String DB_CLIENT_POOL_MAP = "remote_db_client_pool_map";
 
 	public static final String REMOTE_DAO_FACTORY_EXTENSION_POINT_ID = "org.bbaw.bts.core.remote.dao.daoFactory";
 

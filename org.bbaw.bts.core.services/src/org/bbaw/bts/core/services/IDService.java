@@ -44,5 +44,5 @@ public interface IDService
 	 *
 	 * @return the new UUID as String
 	 */
-	String createId();
+	String createId(String dbCollection);
 }

@@ -123,6 +123,10 @@ public class BTSConstants
 	/** The Constant VIEW_ALL_TERMINATED_BTSPROJECTS. */
 	public static final String VIEW_ALL_TERMINATED_BTSPROJECTS = "admin/all_terminated_projects";
 
+	public static final String VIEW_ID_RESERVATION_OBJECTS = "id_reservation/id_reservation_objects";
+
+	public static final String VIEW_ID_LAST_ID = "id_reservation/last_id";
+	
 	public static final String ORPHANS_NODE_LABEL = "_Orphans";
 
 	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS = new String[]{"_id", "eClass", "type", "subtype",
@@ -150,6 +154,28 @@ public class BTSConstants
 	public static final int BTS_SELECTION_HISTORY_LENGTH = 200;
 
 	public static final String PROPERTIES_STRING_SEPARATOR = "\\|";
+	
+	public static final String DB_COLLECTION_PROP_RESERVE_ID = "reserveID";
+
+	public static final String DB_COLLECTION_PROP_RESERVE_ID_FORCE_SERVER = "reserveID_force_server";
+	
+	public static final String DB_COLLECTION_PROP_RESERVE_ID_MIN = "reserveID_min";
+
+	public static final String DB_COLLECTION_PROP_RESERVE_ID_MAX = "reserveID_max";
+
+	public static final String DB_COLLECTION_PROP_RESERVE_ID_STEP = "reserveID_step";
+
+	public static final String DB_COLLECTION_PROP_RESERVE_ID_PREFIX = "reserveID_prefix";
+
+	public static final int DB_COLLECTION_PROP_RESERVE_ID_MIN_DEFAULT = 100;
+
+	public static final int DB_COLLECTION_PROP_RESERVE_ID_MAX_DEFAULT = 200;
+
+	public static final int DB_COLLECTION_PROP_RESERVE_ID_STEP_DEFAULT = 1;
+
+	public static final boolean DB_COLLECTION_PROP_RESERVE_ID_FORCE_SERVER_DEFAULT = true;
+
+
 	
 	private BTSConstants()
 	{

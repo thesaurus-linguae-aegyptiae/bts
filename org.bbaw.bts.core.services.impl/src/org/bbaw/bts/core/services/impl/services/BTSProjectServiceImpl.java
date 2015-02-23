@@ -1,7 +1,5 @@
 package org.bbaw.bts.core.services.impl.services;
 
-import java.net.URISyntaxException;
-import java.security.Provider.Service;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +13,6 @@ import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
-import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -42,9 +39,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 	public BTSProject createNew()
 	{
 		BTSProject entity = BtsmodelFactory.eINSTANCE.createBTSProject();
-		super.setId(entity);
-		super.setRevision(entity);
 		entity.setDBCollectionKey(BTSCoreConstants.ADMIN);
+
+		super.setId(entity, entity.getDBCollectionKey());
+		super.setRevision(entity);
 		return entity;
 	}
 
@@ -316,7 +314,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		
 	}
 
-	private Map<String, BTSProjectDBCollection> loadProjectDBCollectionMap() {
+	public Map<String, BTSProjectDBCollection> loadProjectDBCollectionMap() {
 		Object o = context.get(BTSCoreConstants.PROJECT_DB_COLLECTION_MAP);
 		Map<String, BTSProjectDBCollection> map = null;
 		if (o == null || !( o instanceof Map<?, ?> ))
@@ -327,6 +325,10 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 		else
 		{
 			map = (Map<String, BTSProjectDBCollection>) o;
+		}
+		if (map.isEmpty())
+		{
+			fillProjectCollectionMap(map);
 		}
 		return map;
 	}

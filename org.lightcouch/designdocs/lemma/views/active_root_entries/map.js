@@ -1,5 +1,5 @@
 function(doc){
-	if (doc.state != 'active')
+	if (doc.state != 'active' || doc.eClass != 'http://btsCorpusModel/1.0#//BTSLemmaEntry')
 	{
 		return
 	}

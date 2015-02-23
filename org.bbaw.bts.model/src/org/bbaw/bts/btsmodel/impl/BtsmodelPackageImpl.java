@@ -16,6 +16,7 @@ import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSDate;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
+import org.bbaw.bts.btsmodel.BTSIDReservationObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -277,6 +278,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	private EClass stringToStringMapEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsidReservationObjectEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -2007,6 +2015,24 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBTSIDReservationObject() {
+		return btsidReservationObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSIDReservationObject_BtsUUID() {
+		return (EAttribute)btsidReservationObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPropertyChangeSupport() {
 		return propertyChangeSupportEDataType;
 	}
@@ -2265,6 +2291,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__KEY);
 		createEAttribute(stringToStringMapEClass, STRING_TO_STRING_MAP__VALUE);
 
+		btsidReservationObjectEClass = createEClass(BTSID_RESERVATION_OBJECT);
+		createEAttribute(btsidReservationObjectEClass, BTSID_RESERVATION_OBJECT__BTS_UUID);
+
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
 		propertyChangeListenerEDataType = createEDataType(PROPERTY_CHANGE_LISTENER);
@@ -2328,6 +2357,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsProjectDBCollectionEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsdbCollectionRoleDescEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		userActionCounterEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsidReservationObjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(administrativDataObjectEClass, AdministrativDataObject.class, "AdministrativDataObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2580,6 +2610,9 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEClass(stringToStringMapEClass, Map.class, "StringToStringMap", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getStringToStringMap_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getStringToStringMap_Value(), ecorePackage.getEString(), "value", null, 0, 1, Map.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsidReservationObjectEClass, BTSIDReservationObject.class, "BTSIDReservationObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBTSIDReservationObject_BtsUUID(), ecorePackage.getEString(), "btsUUID", null, 0, 1, BTSIDReservationObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

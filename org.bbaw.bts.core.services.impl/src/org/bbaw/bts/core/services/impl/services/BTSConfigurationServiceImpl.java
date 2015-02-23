@@ -51,9 +51,10 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public BTSConfiguration createNew()
 	{
 		BTSConfiguration config = BtsmodelFactory.eINSTANCE.createBTSConfiguration();
-		super.setId(config);
-		super.setRevision(config);
 		config.setDBCollectionKey(main_project + BTSCoreConstants.ADMIN_SUFFIX);
+
+		super.setId(config, config.getDBCollectionKey());
+		super.setRevision(config);
 		return config;
 	}
 
@@ -834,7 +835,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		config.getUpdaters().clear();
 
 		config.setDBCollectionKey(dbcoll);
-		super.setId(config);
+		super.setId(config, config.getDBCollectionKey());
 		super.setRevision(config);
 
 		return config;

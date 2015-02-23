@@ -42,9 +42,10 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public BTSThsEntry createNew() {
 		BTSThsEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSThsEntry();
-		super.setId(entry);
-		super.setRevision(entry);
 		entry.setDBCollectionKey(main_project + BTSCorpusConstants.THS);
+
+		super.setId(entry, entry.getDBCollectionKey());
+		super.setRevision(entry);
 		entry.setCorpusPrefix(main_corpus_key);
 		return entry;
 	}

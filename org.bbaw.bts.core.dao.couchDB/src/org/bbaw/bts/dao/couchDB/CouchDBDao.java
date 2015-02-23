@@ -1017,6 +1017,26 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		}
 		return results;
 	}
+	protected List<String> loadDocsFromView(String viewId, String path,
+			String sourcePath, String startKey, String endKey) {
+		View view;
+
+		List<String> allDocs = new Vector<String>();
+		CouchDbClient dbClient = connectionProvider.getDBClient(CouchDbClient.class, path);
+		try
+		{
+			view = dbClient.view(viewId);
+			allDocs = view.includeDocs(false).startKey(startKey).endKey(endKey).query();
+		} catch (NoDocumentException e)
+		{
+			e.printStackTrace();
+			System.out.println("create view, view  id: " + viewId);
+			createView(path, sourcePath, viewId);
+			view = dbClient.view(viewId);
+			allDocs = view.includeDocs(false).startKey(startKey).endKey(endKey).query();
+		}
+		return allDocs;
+	}
 	
 	protected List<String> loadDocsFromView(String viewId, String path, String sourcePath) {
 		View view;

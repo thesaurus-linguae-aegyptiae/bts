@@ -30,6 +30,7 @@
 package org.bbaw.bts.core.services;
 
 import java.util.List;
+import java.util.Map;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
@@ -81,5 +82,6 @@ public interface BTSProjectService extends GenericObjectService<BTSProject, Stri
 
 	BTSProjectDBCollection findProjectCollection(String dbCollectionName);
 
+	Map<String, BTSProjectDBCollection> loadProjectDBCollectionMap();
 
 }

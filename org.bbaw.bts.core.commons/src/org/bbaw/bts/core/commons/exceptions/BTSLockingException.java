@@ -34,7 +34,7 @@ package org.bbaw.bts.core.commons.exceptions;
  *
  * @author Christoph Plutte
  */
-public class BTSLockingException extends RuntimeException{
+public class BTSLockingException extends BTSRuntimeException{
 
 	/**
 	 * Instantiates a new BTS locking exception.

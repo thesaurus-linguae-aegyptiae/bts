@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.remote.dao.couchDB;
 
+import org.bbaw.bts.core.remote.dao.RemoteBTSIDReservationObjectDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSProjectDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSUserDao;
 import org.bbaw.bts.core.remote.dao.RemoteBTSUserGroupDao;
@@ -8,6 +9,7 @@ import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteDBLeaseDao;
 import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.core.remote.dao.RemoteGeneralPurposeDao;
+import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSIDReservationObjectDaoImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSProjectDaoImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSUserDaoImpl;
 import org.bbaw.bts.core.remote.dao.couchDB.impl.RemoteBTSUserGroupDaoImpl;
@@ -57,8 +59,16 @@ public class RemoteDaoFactoryCouchDB implements RemoteDAOFactory
 		}else if (clazz == RemoteDBManager.class)
 		{
 			return (T) getDBManager(context);
+		}else if (clazz == RemoteBTSIDReservationObjectDao.class)
+		{
+			return (T) getRemoteBTSIDReservationObjectDao(context);
 		}
 		return null;
+	}
+
+	private RemoteBTSIDReservationObjectDao getRemoteBTSIDReservationObjectDao(IEclipseContext context) {
+		RemoteBTSIDReservationObjectDao dao = ContextInjectionFactory.make(RemoteBTSIDReservationObjectDaoImpl.class, context);
+		return dao;
 	}
 
 	private RemoteDBManager getDBManager(IEclipseContext context) {

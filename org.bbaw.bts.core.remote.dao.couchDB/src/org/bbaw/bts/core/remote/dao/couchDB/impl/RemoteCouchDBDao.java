@@ -18,6 +18,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.exceptions.BTSRemoteDBException;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteGenericDao;
 import org.bbaw.bts.core.remote.dao.util.RemoteDaoConstants;
@@ -101,7 +102,7 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw new RuntimeException("Save Resource failed");
+			throw new BTSRemoteDBException("Save Resource in remote Database failed.");
 		}
 	}
 

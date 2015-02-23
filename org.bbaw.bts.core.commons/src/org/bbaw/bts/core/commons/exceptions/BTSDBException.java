@@ -34,7 +34,7 @@ package org.bbaw.bts.core.commons.exceptions;
  *
  * @author Christoph Plutte
  */
-public class BTSDBException extends RuntimeException
+public class BTSDBException extends BTSRuntimeException
 {
 	
 	/** The Constant serialVersionUID. */

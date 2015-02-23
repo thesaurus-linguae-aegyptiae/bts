@@ -41,11 +41,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	public BTSLemmaEntry createNew()
 	{
 		BTSLemmaEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSLemmaEntry();
-		super.setId(entry);
-		super.setRevision(entry);
 		entry.setDBCollectionKey(main_project + BTSCorpusConstants.WLIST);
 
 		entry.setCorpusPrefix(main_corpus_key);
+		super.setId(entry, entry.getDBCollectionKey());
+		super.setRevision(entry);
+
 		return entry;
 	}
 

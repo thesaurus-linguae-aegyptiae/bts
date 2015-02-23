@@ -5,13 +5,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bbaw.bts.commons.BTSConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
+import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.CellEditor;
+import org.eclipse.jface.viewers.ComboBoxCellEditor;
+import org.eclipse.jface.viewers.ComboBoxViewerCellEditor;
 import org.eclipse.jface.viewers.ICellModifier;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.ITableLabelProvider;
+import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
 import org.eclipse.jface.viewers.Viewer;
@@ -35,6 +41,13 @@ public class EditPropertiesDialog extends TitleAreaDialog {
 	private static final String KEY = "Key";
 	private static final String VALUE = "Value";
 	public static final String[] PROPS = { KEY, VALUE };
+	private static final String[] PROPERTY_PROPOSALS = new String[]{
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID,
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_PREFIX,
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_MIN,
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_MAX,
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_STEP,
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_FORCE_SERVER};
 	private List<List<String>> properties;
 	
 	/**
@@ -75,8 +88,8 @@ public class EditPropertiesDialog extends TitleAreaDialog {
 	    composite.setLayout(new GridLayout(1, false));
 	    composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 	    // Add a button to create the new person
-	    Button newPerson = new Button(composite, SWT.PUSH);
-	    newPerson.setText("Create New Property");
+	    Button newProperty = new Button(composite, SWT.PUSH);
+	    newProperty.setText("Create New Property");
 
 	    // Add the TableViewer
 	    final TableViewer tv = new TableViewer(composite, SWT.FULL_SELECTION | SWT.BORDER);
@@ -103,7 +116,7 @@ public class EditPropertiesDialog extends TitleAreaDialog {
 	    table.setLinesVisible(true);
 
 	    // Add a new person when the user clicks button
-	    newPerson.addSelectionListener(new SelectionAdapter() {
+	    newProperty.addSelectionListener(new SelectionAdapter() {
 	      public void widgetSelected(SelectionEvent event) {
 	        List<String> prop = new ArrayList<String>(2);
 	        prop.add("key");
@@ -114,8 +127,13 @@ public class EditPropertiesDialog extends TitleAreaDialog {
 	    });
 
 	    // Create the cell editors
-	    CellEditor[] editors = new CellEditor[4];
-	    editors[0] = new TextCellEditor(table);
+	    CellEditor[] editors = new CellEditor[2];
+	    ComboBoxViewerCellEditor comboEditor = new ComboBoxViewerCellEditor(table);
+	    comboEditor.setContentProvider(new ArrayContentProvider());
+	    comboEditor.setLabelProvider(new LabelProvider ());
+	    comboEditor.setInput(PROPERTY_PROPOSALS);
+
+	    editors[0] = comboEditor;
 	    editors[1] = new TextCellEditor(table);
 	    
 
