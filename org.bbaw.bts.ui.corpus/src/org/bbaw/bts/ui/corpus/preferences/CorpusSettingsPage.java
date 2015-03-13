@@ -242,7 +242,10 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 						break;
 					}
 				}
-				c.setActive(active);
+				if (c.isActive() != active)
+				{
+					c.setActive(active);
+				}
 				
 			}
 		}

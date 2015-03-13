@@ -72,6 +72,9 @@ public class EgyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getDeletedVersMarkerAccess().getGroup(), "rule__DeletedVersMarker__Group__0");
 					put(grammarAccess.getDestroyedVersMarkerAccess().getGroup(), "rule__DestroyedVersMarker__Group__0");
 					put(grammarAccess.getMissingVersMarkerAccess().getGroup(), "rule__MissingVersMarker__Group__0");
+					put(grammarAccess.getRestorationOverRasurMarkerAccess().getGroup(), "rule__RestorationOverRasurMarker__Group__0");
+					put(grammarAccess.getAncientExpandedMarkerAccess().getGroup(), "rule__AncientExpandedMarker__Group__0");
+					put(grammarAccess.getRasurMarkerAccess().getGroup(), "rule__RasurMarker__Group__0");
 					put(grammarAccess.getVersFrontierMarkerAccess().getGroup(), "rule__VersFrontierMarker__Group__0");
 					put(grammarAccess.getVersbreakMarkerAccess().getGroup(), "rule__VersbreakMarker__Group__0");
 					put(grammarAccess.getBrokenVersbreakMarkerAccess().getGroup(), "rule__BrokenVersbreakMarker__Group__0");

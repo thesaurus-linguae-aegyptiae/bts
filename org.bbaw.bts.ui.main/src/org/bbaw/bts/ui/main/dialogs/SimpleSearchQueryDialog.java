@@ -68,7 +68,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	protected void okPressed() {
 		if (text.getText().trim().length() > 0)
 		{
-			queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(text.getText().trim()));
+			queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(text.getText().trim().toLowerCase()));
 			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 			queryRequest.setQueryId("timestamp-" + now.toString());
 		}

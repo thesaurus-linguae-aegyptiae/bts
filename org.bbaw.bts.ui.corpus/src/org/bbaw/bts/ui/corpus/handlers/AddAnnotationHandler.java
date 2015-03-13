@@ -12,13 +12,11 @@ import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
-import org.eclipse.swt.widgets.Shell;
 
 public class AddAnnotationHandler {
 	@Execute
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSObject selection,
-			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
 			EventBroker eventBroker,
 			CorpusNavigatorController corpusNavigatorController) {
 		if (selection instanceof BTSCorpusObject) {

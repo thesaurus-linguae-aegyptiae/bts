@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpanded;
+import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpandedMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Chars;
@@ -32,6 +33,7 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Oval;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasur;
+import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasurMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Serech;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
@@ -73,6 +75,17 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_AncientExpanded(context, (AncientExpanded) semanticObject); 
+					return; 
+				}
+				else break;
+			case EgyDslPackage.ANCIENT_EXPANDED_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getAncientExpandedMarkerRule() ||
+				   context == grammarAccess.getRasurMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule() ||
+				   context == grammarAccess.getVersMarkerRule()) {
+					sequence_AncientExpandedMarker_RasurMarker(context, (AncientExpandedMarker) semanticObject); 
 					return; 
 				}
 				else break;
@@ -440,6 +453,16 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 					return; 
 				}
 				else break;
+			case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER:
+				if(context == grammarAccess.getAbstractMarkerRule() ||
+				   context == grammarAccess.getRestorationOverRasurMarkerRule() ||
+				   context == grammarAccess.getSentenceItemRule() ||
+				   context == grammarAccess.getSentenceItemNoAmbivalenceRule() ||
+				   context == grammarAccess.getVersMarkerRule()) {
+					sequence_RestorationOverRasurMarker(context, (RestorationOverRasurMarker) semanticObject); 
+					return; 
+				}
+				else break;
 			case EgyDslPackage.SENTENCE:
 				if(context == grammarAccess.getSentenceRule() ||
 				   context == grammarAccess.getTextItemRule()) {
@@ -506,6 +529,15 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     (cases+=Case cases+=Case+)
 	 */
 	protected void sequence_Ambivalence(EObject context, Ambivalence semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {AncientExpandedMarker}
+	 */
+	protected void sequence_AncientExpandedMarker_RasurMarker(EObject context, AncientExpandedMarker semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -788,6 +820,15 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	 *     wChar+=NoRasur+
 	 */
 	protected void sequence_Rasur(EObject context, Rasur semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     {RestorationOverRasurMarker}
+	 */
+	protected void sequence_RestorationOverRasurMarker(EObject context, RestorationOverRasurMarker semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -186,6 +186,40 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER:
+      {
+        RestorationOverRasurMarker restorationOverRasurMarker = (RestorationOverRasurMarker)theEObject;
+        T result = caseRestorationOverRasurMarker(restorationOverRasurMarker);
+        if (result == null) result = caseVersMarker(restorationOverRasurMarker);
+        if (result == null) result = caseAbstractMarker(restorationOverRasurMarker);
+        if (result == null) result = caseSentenceItem(restorationOverRasurMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(restorationOverRasurMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.ANCIENT_EXPANDED_MARKER:
+      {
+        AncientExpandedMarker ancientExpandedMarker = (AncientExpandedMarker)theEObject;
+        T result = caseAncientExpandedMarker(ancientExpandedMarker);
+        if (result == null) result = caseRasurMarker(ancientExpandedMarker);
+        if (result == null) result = caseVersMarker(ancientExpandedMarker);
+        if (result == null) result = caseAbstractMarker(ancientExpandedMarker);
+        if (result == null) result = caseSentenceItem(ancientExpandedMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(ancientExpandedMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case EgyDslPackage.RASUR_MARKER:
+      {
+        RasurMarker rasurMarker = (RasurMarker)theEObject;
+        T result = caseRasurMarker(rasurMarker);
+        if (result == null) result = caseVersMarker(rasurMarker);
+        if (result == null) result = caseAbstractMarker(rasurMarker);
+        if (result == null) result = caseSentenceItem(rasurMarker);
+        if (result == null) result = caseSentenceItemNoAmbivalence(rasurMarker);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case EgyDslPackage.VERS_FRONTIER_MARKER:
       {
         VersFrontierMarker versFrontierMarker = (VersFrontierMarker)theEObject;
@@ -910,6 +944,54 @@ public class EgyDslSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseMissingVersMarker(MissingVersMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Restoration Over Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Restoration Over Rasur Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRestorationOverRasurMarker(RestorationOverRasurMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ancient Expanded Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ancient Expanded Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAncientExpandedMarker(AncientExpandedMarker object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Rasur Marker</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRasurMarker(RasurMarker object)
   {
     return null;
   }

@@ -140,6 +140,21 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createMissingVersMarkerAdapter();
       }
       @Override
+      public Adapter caseRestorationOverRasurMarker(RestorationOverRasurMarker object)
+      {
+        return createRestorationOverRasurMarkerAdapter();
+      }
+      @Override
+      public Adapter caseAncientExpandedMarker(AncientExpandedMarker object)
+      {
+        return createAncientExpandedMarkerAdapter();
+      }
+      @Override
+      public Adapter caseRasurMarker(RasurMarker object)
+      {
+        return createRasurMarkerAdapter();
+      }
+      @Override
       public Adapter caseVersFrontierMarker(VersFrontierMarker object)
       {
         return createVersFrontierMarkerAdapter();
@@ -567,6 +582,51 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMissingVersMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasurMarker <em>Restoration Over Rasur Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasurMarker
+   * @generated
+   */
+  public Adapter createRestorationOverRasurMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpandedMarker <em>Ancient Expanded Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpandedMarker
+   * @generated
+   */
+  public Adapter createAncientExpandedMarkerAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.RasurMarker <em>Rasur Marker</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.bbaw.bts.corpus.text.egy.egyDsl.RasurMarker
+   * @generated
+   */
+  public Adapter createRasurMarkerAdapter()
   {
     return null;
   }

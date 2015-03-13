@@ -7,7 +7,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
-import org.bbaw.bts.ui.commons.corpus.util.BTSEGYConstants;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
 
@@ -17,7 +17,7 @@ public class BTSEgyObjectByNameViewerSorter extends ViewerSorter {
 
 	public BTSEgyObjectByNameViewerSorter(){
 		try {
-			egyCollator =  new RuleBasedCollator(BTSEGYConstants.EGY_COLLATOR_RULE);
+			egyCollator =  new RuleBasedCollator(BTSEGYUIConstants.EGY_COLLATOR_RULE);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

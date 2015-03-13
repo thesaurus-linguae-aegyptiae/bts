@@ -210,6 +210,7 @@ public class BTSCorpusObjectItemProvider
 		switch (notification.getFeatureID(BTSCorpusObject.class)) {
 			case BtsCorpusModelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 			case BtsCorpusModelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
+			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsCorpusModelPackage.BTS_CORPUS_OBJECT__PASSPORT:

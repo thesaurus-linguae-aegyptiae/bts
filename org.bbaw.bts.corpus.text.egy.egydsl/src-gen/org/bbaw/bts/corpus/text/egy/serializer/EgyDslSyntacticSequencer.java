@@ -109,7 +109,7 @@ public class EgyDslSyntacticSequencer extends AbstractSyntacticSequencer {
 	
 	/**
 	 * Syntax:
-	 *     (' ' | NEWLINE)?
+	 *     (NEWLINE | ' ')?
 	 */
 	protected void emit_TextContent___NEWLINETerminalRuleCall_1_1_0_1_or_SpaceKeyword_1_1_0_0__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

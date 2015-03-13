@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.corpus.controller.impl.generalController;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;

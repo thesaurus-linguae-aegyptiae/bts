@@ -33,7 +33,9 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.text,
  javax.inject,
  org.bbaw.bts.ui.corpus;bundle-version="1.0.0",
- javax.annotation
+ javax.annotation,
+ com.opcoach.e4.preferences;bundle-version="1.0.0",
+ org.bbaw.bts.ui.main;bundle-version="0.0.2"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.annotation;version="1.0.0",

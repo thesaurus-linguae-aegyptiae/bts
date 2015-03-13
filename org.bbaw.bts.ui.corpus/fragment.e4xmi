@@ -42,6 +42,9 @@
           <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR6TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_fufR6jRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
           </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_UDUr4MGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.onlyActiveTextcorpora" label="Only active TextCorpora" type="Check" command="_FW7v8MGUEeSSoMDqJYVnow">
+            <parameters xmi:id="_LHgK8MGVEeSSoMDqJYVnow" elementId="navigatorParametrizedFilter" name="navigatorParametrizedFilter" value="activeTextCorpora"/>
+          </children>
         </children>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_9VxLcDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_KwSP0DTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.menuseparator.4"/>
@@ -88,6 +91,10 @@
     <elements xsi:type="commands:Command" xmi:id="_yldPUDQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.command.addNewLemmaRootEntry" commandName="addNewLemmaRootEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_4O0rkDQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.command.addNewLemmaChildEntry" commandName="addNewLemmaChildEntry" category="_u7sUsF2fEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_6Q__oDdiEeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.corpus.command.refreshViewerNode" commandName="Refresh Viewer Node" category="_EA_6EDdjEeSeOfuNLjhMYg"/>
+    <elements xsi:type="commands:Command" xmi:id="_FW7v8MGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.command.navigatorParametrizedFilter" commandName="NavigatorParametrizedFilter" category="_u7sUsF2fEeOwE8UUrLWumA">
+      <parameters xmi:id="_JfdEgMGUEeSSoMDqJYVnow" elementId="navigatorParametrizedFilter" name="Filter Param"/>
+    </elements>
+    <elements xsi:type="commands:Command" xmi:id="_QOXY4MitEeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.command.removeTokenData" commandName="removeTokenData" category="_u7sUsF2fEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="__kd84D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.passportEditorPart" containerData="10" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.PassportEditorPart" label="PassportEditorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/passport.png" closeable="true">
@@ -220,6 +227,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_uwvb8NqxEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handler.passportInheritFromParentHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.PassportInheritFromParentHandler" command="_oMmZgNqxEeO-3cFwhVZ23Q"/>
     <elements xsi:type="commands:Handler" xmi:id="_8M7f4DQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handler.3" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddNewRootLemmaHandler" command="_yldPUDQ4EeSUHvWJHIXOXA"/>
     <elements xsi:type="commands:Handler" xmi:id="_-tUZADQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handler.4" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddNewLemmaSubEntryHandler" command="_4O0rkDQ4EeSUHvWJHIXOXA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_QMztUMGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.handler.5" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.NavigatorParametrizedFilterHandler" command="_FW7v8MGUEeSSoMDqJYVnow"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5YS8cJWEEeOpr8TW-P04BA" featurename="children" parentElementId="org.bbaw.bts.ui.main.handledtoolitem.new.menu">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_TIix8JWGEeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.0" label="New Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -300,6 +308,9 @@
                 </children>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjsqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_hkFjs6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
+                </children>
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_hDRUIMGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.onlyActiveTextcorpora" label="Only active TextCorpora" type="Check" command="_FW7v8MGUEeSSoMDqJYVnow">
+                  <parameters xmi:id="_P6kRUMGVEeSSoMDqJYVnow" elementId="navigatorParametrizedFilter" name="navigatorParametrizedFilter" value="activeTextCorpora"/>
                 </children>
               </children>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjtKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>

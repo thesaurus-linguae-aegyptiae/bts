@@ -47,8 +47,12 @@ public class E4PreferencesHandler
 	{
 		PreferenceManager pm = prefReg.getPreferenceManager();
 		PreferenceDialog dialog = new PreferenceDialog(shell, pm);
+		if (pageId != null)
+		{
+			dialog.setSelectedNode(pageId);
+		}
+
 		dialog.create();
-		dialog.setSelectedNode(pageId);
 		dialog.getTreeViewer().setComparator(new ViewerComparator());
 //		dialog.getTreeViewer().expandAll();
 		dialog.open();

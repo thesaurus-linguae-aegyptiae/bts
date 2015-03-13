@@ -5,11 +5,13 @@ import org.eclipse.draw2d.ColorConstants;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.draw2d.geometry.Dimension;
+import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.swt.graphics.Color;
 
 public class MarkerFigure extends ElementFigureImpl {
 
 	public static Color classColor = BTSUIConstants.COLOR_BACKGROUND_DISABLED;//new Color(null, 215, 115, 206);
+	private String name;
 
 	public MarkerFigure(String name) {
 		ToolbarLayout layout = new ToolbarLayout();
@@ -21,6 +23,13 @@ public class MarkerFigure extends ElementFigureImpl {
 		label.setText(name);
 		add(label);
 		super.setCornerDimensions(new Dimension(0, 0));
+		this.name = name;
+	}
+	
+	public int getLength() {
+		
+		int len = this.name.length() * 5;
+		return len > 15 ? len : 15;
 	}
 	
 }

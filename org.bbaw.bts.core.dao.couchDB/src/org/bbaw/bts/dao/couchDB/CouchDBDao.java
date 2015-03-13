@@ -1131,6 +1131,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 					if (o != null)
 					{
+						addEntityToCache(uri, cache, o);
 						results.add(o);
 					}
 				} catch (Exception e) {

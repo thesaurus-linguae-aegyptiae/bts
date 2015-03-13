@@ -50,6 +50,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
@@ -384,9 +385,9 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		try
 		{
 			System.out.println(mdc);
-			if (!(mdc.endsWith(":") || mdc.endsWith("-")
+			if (mdc.length() > 0 && (!(mdc.endsWith(":") || mdc.endsWith("-")
 					|| mdc.endsWith("<") || mdc.endsWith("*") || mdc
-					.endsWith("["))) {
+					.endsWith("[")))) {
 				String c = mdc.substring(0,1).toUpperCase();
 				if (mdc.length() > 1)
 				{
@@ -725,6 +726,26 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			selectHieroglypheShortcut(index);
 
 		}
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedHTWClearHieroglyphsEvents(
+			@EventTopic(BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA + "/*") Object event) {
+		if (event instanceof String && event != null && ((String)event).endsWith("hierotw")) {
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					removeHieroglyphs();
+				}
+			});
+		}
+	}
+
+	private void removeHieroglyphs() {
+		textEditorController.updateBTSWordFromMdCString(currentWord,
+				"", editingDomain);
+		hierotw_text.setText("");
 	}
 
 	private void selectHieroglypheShortcut(int index) {

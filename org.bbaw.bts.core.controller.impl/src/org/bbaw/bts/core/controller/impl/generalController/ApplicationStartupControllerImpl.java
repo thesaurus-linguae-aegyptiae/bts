@@ -150,7 +150,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private String localDBUrl;
 
-	private boolean listen2Backend = false; // XXX dev!!!!!!!!!!!!!
+	private boolean listen2Backend = true; // XXX dev!!!!!!!!!!!!!
 
 	@Override
 	public void applicationStartup(final IEclipseContext context,
@@ -177,7 +177,6 @@ public class ApplicationStartupControllerImpl implements
 			try {
 				prefs.flush();
 			} catch (BackingStoreException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -378,7 +377,6 @@ public class ApplicationStartupControllerImpl implements
 
 			dbManager.prepareDB();
 		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 
@@ -451,7 +449,6 @@ public class ApplicationStartupControllerImpl implements
 		try {
 			prefs.flush();
 		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -987,7 +984,6 @@ public class ApplicationStartupControllerImpl implements
 		try {
 			prefs.flush();
 		} catch (BackingStoreException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -1042,7 +1038,6 @@ public class ApplicationStartupControllerImpl implements
 	@Override
 	public boolean initializeLocalUser(String localAdminName,
 			String localAdminPassword) {
-		// TODO Auto-generated method stub
 		return true;
 	}
 

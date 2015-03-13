@@ -77,6 +77,9 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.DELETED_VERS_MARKER: return createDeletedVersMarker();
       case EgyDslPackage.DESTROYED_VERS_MARKER: return createDestroyedVersMarker();
       case EgyDslPackage.MISSING_VERS_MARKER: return createMissingVersMarker();
+      case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER: return createRestorationOverRasurMarker();
+      case EgyDslPackage.ANCIENT_EXPANDED_MARKER: return createAncientExpandedMarker();
+      case EgyDslPackage.RASUR_MARKER: return createRasurMarker();
       case EgyDslPackage.VERS_FRONTIER_MARKER: return createVersFrontierMarker();
       case EgyDslPackage.VERSBREAK_MARKER: return createVersbreakMarker();
       case EgyDslPackage.BROKEN_VERSBREAK_MARKER: return createBrokenVersbreakMarker();
@@ -266,6 +269,39 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     MissingVersMarkerImpl missingVersMarker = new MissingVersMarkerImpl();
     return missingVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RestorationOverRasurMarker createRestorationOverRasurMarker()
+  {
+    RestorationOverRasurMarkerImpl restorationOverRasurMarker = new RestorationOverRasurMarkerImpl();
+    return restorationOverRasurMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AncientExpandedMarker createAncientExpandedMarker()
+  {
+    AncientExpandedMarkerImpl ancientExpandedMarker = new AncientExpandedMarkerImpl();
+    return ancientExpandedMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RasurMarker createRasurMarker()
+  {
+    RasurMarkerImpl rasurMarker = new RasurMarkerImpl();
+    return rasurMarker;
   }
 
   /**

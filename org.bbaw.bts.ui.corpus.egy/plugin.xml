@@ -9,4 +9,25 @@
           class="org.bbaw.bts.ui.egy.compare.CompareViewerFactoryEgyTextImpl">
     </compareViewerFactory>
  </extension>
+ <extension
+       point="com.opcoach.e4.preferences.e4PreferencePages">
+    <page
+    category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.egy.preferences.EgyTextEditorPage"
+          id="org.bbaw.bts.ui.corpus.egy.textEditor"
+          name="EgyTextEditor">
+    </page>
+    <page
+    category="org.bbaw.bts.ui.corpus.egy.textEditor"
+          class="org.bbaw.bts.ui.egy.preferences.SignTextEditorPage"
+          id="org.bbaw.bts.ui.corpus.egy.signTextEditor"
+          name="SignTextEditor">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.egy.preferences.LemmatizerPage"
+          id="org.bbaw.bts.ui.corpus.egy.lemmatizerPage"
+          name="Lemmatizer">
+    </page>
+ </extension>
 </plugin>

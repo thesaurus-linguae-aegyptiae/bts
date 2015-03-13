@@ -5,6 +5,7 @@ package org.bbaw.bts.corpus.text.egy.egyDsl.impl;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AbstractMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpanded;
+import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpandedMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Brackets;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Cartouche;
@@ -47,7 +48,9 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.NoRestorationOverRasur;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Oval;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestruction;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Rasur;
+import org.bbaw.bts.corpus.text.egy.egyDsl.RasurMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasur;
+import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasurMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Sentence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItem;
 import org.bbaw.bts.corpus.text.egy.egyDsl.SentenceItemNoAmbivalence;
@@ -166,6 +169,27 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
    * @generated
    */
   private EClass missingVersMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass restorationOverRasurMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass ancientExpandedMarkerEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass rasurMarkerEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -709,6 +733,36 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
   public EClass getMissingVersMarker()
   {
     return missingVersMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRestorationOverRasurMarker()
+  {
+    return restorationOverRasurMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAncientExpandedMarker()
+  {
+    return ancientExpandedMarkerEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getRasurMarker()
+  {
+    return rasurMarkerEClass;
   }
 
   /**
@@ -1372,6 +1426,12 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
 
     missingVersMarkerEClass = createEClass(MISSING_VERS_MARKER);
 
+    restorationOverRasurMarkerEClass = createEClass(RESTORATION_OVER_RASUR_MARKER);
+
+    ancientExpandedMarkerEClass = createEClass(ANCIENT_EXPANDED_MARKER);
+
+    rasurMarkerEClass = createEClass(RASUR_MARKER);
+
     versFrontierMarkerEClass = createEClass(VERS_FRONTIER_MARKER);
 
     versbreakMarkerEClass = createEClass(VERSBREAK_MARKER);
@@ -1514,6 +1574,10 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     deletedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
     destroyedVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
     missingVersMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    restorationOverRasurMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    ancientExpandedMarkerEClass.getESuperTypes().add(this.getVersMarker());
+    ancientExpandedMarkerEClass.getESuperTypes().add(this.getRasurMarker());
+    rasurMarkerEClass.getESuperTypes().add(this.getVersMarker());
     versFrontierMarkerEClass.getESuperTypes().add(this.getVersMarker());
     versbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
     brokenVersbreakMarkerEClass.getESuperTypes().add(this.getVersMarker());
@@ -1639,6 +1703,12 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     initEClass(destroyedVersMarkerEClass, DestroyedVersMarker.class, "DestroyedVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(missingVersMarkerEClass, MissingVersMarker.class, "MissingVersMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(restorationOverRasurMarkerEClass, RestorationOverRasurMarker.class, "RestorationOverRasurMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(ancientExpandedMarkerEClass, AncientExpandedMarker.class, "AncientExpandedMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(rasurMarkerEClass, RasurMarker.class, "RasurMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(versFrontierMarkerEClass, VersFrontierMarker.class, "VersFrontierMarker", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 

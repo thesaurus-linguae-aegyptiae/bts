@@ -140,6 +140,33 @@ public interface EgyDslFactory extends EFactory
   MissingVersMarker createMissingVersMarker();
 
   /**
+   * Returns a new object of class '<em>Restoration Over Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Restoration Over Rasur Marker</em>'.
+   * @generated
+   */
+  RestorationOverRasurMarker createRestorationOverRasurMarker();
+
+  /**
+   * Returns a new object of class '<em>Ancient Expanded Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ancient Expanded Marker</em>'.
+   * @generated
+   */
+  AncientExpandedMarker createAncientExpandedMarker();
+
+  /**
+   * Returns a new object of class '<em>Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rasur Marker</em>'.
+   * @generated
+   */
+  RasurMarker createRasurMarker();
+
+  /**
    * Returns a new object of class '<em>Vers Frontier Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

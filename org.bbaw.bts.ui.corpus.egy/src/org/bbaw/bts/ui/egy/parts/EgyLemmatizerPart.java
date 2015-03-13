@@ -31,9 +31,11 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
+import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
 import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
@@ -47,6 +49,8 @@ import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -56,6 +60,8 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.emf.common.command.Command;
+import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.edit.command.DeleteCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
@@ -127,6 +133,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Inject
 	private EHandlerService handlerService;
 
+	@Inject
+	@Preference(value = BTSEGYUIConstants.PREF_LEMMATIZER_FELXION_DEFAULT, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Integer defaultFlexion;
+	
 	private BTSWord currentWord;
 	private Text lemmaID_text;
 	private Text flex_text;
@@ -152,6 +162,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 //	@Optional
 //	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private Boolean userMayEdit = new Boolean(false);
+	private BTSText text;
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -159,7 +170,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 	@PostConstruct
-	public void postConstruct(Composite parent) {
+	public void postConstruct(Composite parent, @Optional @Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
 		parent.setLayout(new GridLayout(1, false));
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
@@ -509,6 +520,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 		part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
 		setUserMayEditInteral(userMayEdit && currentWord != null);
 
+		if (selection instanceof BTSText)
+		{
+			setSelection((BTSText) selection);
+		}
 	}
 
 	private void loadTranslationProposals(BTSLemmaEntry entry) {
@@ -560,6 +575,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			if (!selfSelecting) {
 				if (selection instanceof BTSCorpusObject) {
 					if (selection instanceof BTSText) {
+						text = selection;
 						part.setLabel(selection.getName());
 						editingDomain = getEditingdomain(selection);
 						setUserMayEdit(userMayEdit);
@@ -598,6 +614,41 @@ public class EgyLemmatizerPart implements SearchViewer {
 		}
 	}
 	
+	@Inject
+	@Optional
+	void eventReceivedClearLemmatizerDataEvents(
+			@EventTopic(BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA + "/*") Object event) {
+		if (event instanceof String && event != null && ((String)event).endsWith("lemmatizer")) {
+			
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					removeLemmatizerData();
+				}
+			});
+		}
+	}
+
+	private void removeLemmatizerData() {
+		if (userMayEdit &&  currentWord != null) {
+			lemmaID_text.setText("");
+			flex_text.setText("");
+			CompoundCommand compoundCommand = new CompoundCommand();
+			org.eclipse.emf.common.command.Command command = SetCommand
+					.create(editingDomain, currentWord, BtsCorpusModelPackage.Literals.BTS_WORD__LKEY, null);
+			compoundCommand.append(command);
+			
+			command = SetCommand
+					.create(editingDomain, currentWord, BtsCorpusModelPackage.Literals.BTS_WORD__FLEX_CODE, null);
+			compoundCommand.append(command);
+			
+			editingDomain.getCommandStack().execute(
+					compoundCommand);
+			wordTranslate_Editor.setTranslationText("");
+			wordTranslate_Editor.save();
+		}
+		
+	}
 
 
 	private void setSelectionInteral(BTSWord selection) {
@@ -644,10 +695,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 		sync.asyncExec(new Runnable() {
 			@Override
 			public void run() {
+				translationViewer.setInput(new String[]{});
 				lemmaViewer.setInput(lemmaRootNode);
 			}
 		});
-
+		
 		// fill lemmaViewer
 		Job job = new Job("load input") {
 			@Override
@@ -710,7 +762,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			if (word.getFlexCode() != null && !"".equals(word.getFlexCode())) {
 				flex_text.setText(word.getFlexCode());
 			} else {
-				flex_text.setText("");
+				flex_text.setText(defaultFlexion.toString());
 				isLemmatized = false;
 			}
 			loadTranslation(word);
@@ -746,18 +798,35 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	private void saveWordData(BTSWord word) {
 		if (userMayEdit &&  word != null) {
+			CompoundCommand compoundCommand = new CompoundCommand();
+
+			if (editingDomain == null)
+			{
+				editingDomain = getEditingdomain(text);
+			}
 			if (!lemmaID_text.getText().equals(word.getLKey())) {
 				if("WCN".equals(lemmaID_text.getText()))
 				{
-					word.setLKey(null);
+					org.eclipse.emf.common.command.Command command = SetCommand
+							.create(editingDomain, currentWord, BtsCorpusModelPackage.Literals.BTS_WORD__LKEY, null);
+					compoundCommand.append(command);
 				}
 				else
 				{
-					word.setLKey(lemmaID_text.getText());
+					org.eclipse.emf.common.command.Command command = SetCommand
+							.create(editingDomain, currentWord, BtsCorpusModelPackage.Literals.BTS_WORD__LKEY, lemmaID_text.getText());
+					compoundCommand.append(command);
 				}
 			}
 			if (!flex_text.getText().equals(word.getFlexCode())) {
-				word.setFlexCode(flex_text.getText());
+				org.eclipse.emf.common.command.Command command = SetCommand
+						.create(editingDomain, currentWord, BtsCorpusModelPackage.Literals.BTS_WORD__FLEX_CODE, flex_text.getText());
+				compoundCommand.append(command);
+			}
+			if(!compoundCommand.getCommandList().isEmpty())
+			{
+				editingDomain.getCommandStack().execute(
+					compoundCommand);
 			}
 			wordTranslate_Editor.save();
 		}

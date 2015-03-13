@@ -324,14 +324,17 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDestroyedVersMarkerParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cDeletedVersMarkerParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cDisputableVersMarkerParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cRestorationOverRasurMarkerParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cAncientExpandedMarkerParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
+		private final RuleCall cRasurMarkerParserRuleCall_9 = (RuleCall)cAlternatives.eContents().get(9);
 		
 		//VersMarker:
 		//	VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker | MissingVersMarker | DestroyedVersMarker |
-		//	DeletedVersMarker | DisputableVersMarker;
+		//	DeletedVersMarker | DisputableVersMarker | RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker;
 		public ParserRule getRule() { return rule; }
 
 		//VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker | MissingVersMarker | DestroyedVersMarker |
-		//DeletedVersMarker | DisputableVersMarker
+		//DeletedVersMarker | DisputableVersMarker | RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//VersbreakMarker
@@ -354,6 +357,15 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DisputableVersMarker
 		public RuleCall getDisputableVersMarkerParserRuleCall_6() { return cDisputableVersMarkerParserRuleCall_6; }
+
+		//RestorationOverRasurMarker
+		public RuleCall getRestorationOverRasurMarkerParserRuleCall_7() { return cRestorationOverRasurMarkerParserRuleCall_7; }
+
+		//AncientExpandedMarker
+		public RuleCall getAncientExpandedMarkerParserRuleCall_8() { return cAncientExpandedMarkerParserRuleCall_8; }
+
+		//RasurMarker
+		public RuleCall getRasurMarkerParserRuleCall_9() { return cRasurMarkerParserRuleCall_9; }
 	}
 
 	public class DisputableVersMarkerElements extends AbstractParserRuleElementFinder {
@@ -446,6 +458,75 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		////'@v'
 		//"〈󰂀〉"
 		public Keyword getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1() { return cLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1; }
+	}
+
+	public class RestorationOverRasurMarkerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RestorationOverRasurMarker");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cRestorationOverRasurMarkerAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftSquareBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//RestorationOverRasurMarker:
+		//	{RestorationOverRasurMarker} //'@v'
+		//	"[[󰂀]]";
+		public ParserRule getRule() { return rule; }
+
+		//{RestorationOverRasurMarker} //'@v'
+		//"[[󰂀]]"
+		public Group getGroup() { return cGroup; }
+
+		//{RestorationOverRasurMarker}
+		public Action getRestorationOverRasurMarkerAction_0() { return cRestorationOverRasurMarkerAction_0; }
+
+		////'@v'
+		//"[[󰂀]]"
+		public Keyword getLeftSquareBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightSquareBracketKeyword_1() { return cLeftSquareBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightSquareBracketKeyword_1; }
+	}
+
+	public class AncientExpandedMarkerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AncientExpandedMarker");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAncientExpandedMarkerAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftParenthesisLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisRightParenthesisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//AncientExpandedMarker:
+		//	{AncientExpandedMarker} //'@v'
+		//	"((󰂀))";
+		public ParserRule getRule() { return rule; }
+
+		//{AncientExpandedMarker} //'@v'
+		//"((󰂀))"
+		public Group getGroup() { return cGroup; }
+
+		//{AncientExpandedMarker}
+		public Action getAncientExpandedMarkerAction_0() { return cAncientExpandedMarkerAction_0; }
+
+		////'@v'
+		//"((󰂀))"
+		public Keyword getLeftParenthesisLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisRightParenthesisKeyword_1() { return cLeftParenthesisLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisRightParenthesisKeyword_1; }
+	}
+
+	public class RasurMarkerElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RasurMarker");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cAncientExpandedMarkerAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cLeftCurlyBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		
+		//RasurMarker:
+		//	{AncientExpandedMarker} //'@v'
+		//	"{{󰂀}}";
+		public ParserRule getRule() { return rule; }
+
+		//{AncientExpandedMarker} //'@v'
+		//"{{󰂀}}"
+		public Group getGroup() { return cGroup; }
+
+		//{AncientExpandedMarker}
+		public Action getAncientExpandedMarkerAction_0() { return cAncientExpandedMarkerAction_0; }
+
+		////'@v'
+		//"{{󰂀}}"
+		public Keyword getLeftCurlyBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightCurlyBracketKeyword_1() { return cLeftCurlyBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightCurlyBracketKeyword_1; }
 	}
 
 	public class VersFrontierMarkerElements extends AbstractParserRuleElementFinder {
@@ -1730,6 +1811,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private DeletedVersMarkerElements pDeletedVersMarker;
 	private DestroyedVersMarkerElements pDestroyedVersMarker;
 	private MissingVersMarkerElements pMissingVersMarker;
+	private RestorationOverRasurMarkerElements pRestorationOverRasurMarker;
+	private AncientExpandedMarkerElements pAncientExpandedMarker;
+	private RasurMarkerElements pRasurMarker;
 	private VersFrontierMarkerElements pVersFrontierMarker;
 	private VersbreakMarkerElements pVersbreakMarker;
 	private BrokenVersbreakMarkerElements pBrokenVersbreakMarker;
@@ -1903,7 +1987,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	//VersMarker:
 	//	VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker | MissingVersMarker | DestroyedVersMarker |
-	//	DeletedVersMarker | DisputableVersMarker;
+	//	DeletedVersMarker | DisputableVersMarker | RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker;
 	public VersMarkerElements getVersMarkerAccess() {
 		return (pVersMarker != null) ? pVersMarker : (pVersMarker = new VersMarkerElements());
 	}
@@ -1954,6 +2038,39 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getMissingVersMarkerRule() {
 		return getMissingVersMarkerAccess().getRule();
+	}
+
+	//RestorationOverRasurMarker:
+	//	{RestorationOverRasurMarker} //'@v'
+	//	"[[󰂀]]";
+	public RestorationOverRasurMarkerElements getRestorationOverRasurMarkerAccess() {
+		return (pRestorationOverRasurMarker != null) ? pRestorationOverRasurMarker : (pRestorationOverRasurMarker = new RestorationOverRasurMarkerElements());
+	}
+	
+	public ParserRule getRestorationOverRasurMarkerRule() {
+		return getRestorationOverRasurMarkerAccess().getRule();
+	}
+
+	//AncientExpandedMarker:
+	//	{AncientExpandedMarker} //'@v'
+	//	"((󰂀))";
+	public AncientExpandedMarkerElements getAncientExpandedMarkerAccess() {
+		return (pAncientExpandedMarker != null) ? pAncientExpandedMarker : (pAncientExpandedMarker = new AncientExpandedMarkerElements());
+	}
+	
+	public ParserRule getAncientExpandedMarkerRule() {
+		return getAncientExpandedMarkerAccess().getRule();
+	}
+
+	//RasurMarker:
+	//	{AncientExpandedMarker} //'@v'
+	//	"{{󰂀}}";
+	public RasurMarkerElements getRasurMarkerAccess() {
+		return (pRasurMarker != null) ? pRasurMarker : (pRasurMarker = new RasurMarkerElements());
+	}
+	
+	public ParserRule getRasurMarkerRule() {
+		return getRasurMarkerAccess().getRule();
 	}
 
 	//VersFrontierMarker:

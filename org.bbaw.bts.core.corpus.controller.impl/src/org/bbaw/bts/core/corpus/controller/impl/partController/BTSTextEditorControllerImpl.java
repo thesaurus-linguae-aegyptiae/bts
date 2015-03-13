@@ -70,7 +70,7 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
-import org.bbaw.bts.ui.commons.corpus.util.BTSEGYConstants;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
@@ -1299,13 +1299,19 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	}
 	public BufferedImage getImageData(String topItemList, int height, int width) throws MDCSyntaxError
 	{
-		BufferedImage result;
+		BufferedImage result = null;
 		{
 			MDCDrawingFacade facade = new MDCDrawingFacade();
 			facade.setDrawingSpecifications(drawingSpecifications);
 			facade.setMaxSize(200, 45);
 			facade.setCadratHeight(30);
-			result = facade.createImage(topItemList);
+			try {
+				result = facade.createImage(topItemList);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println(topItemList);
+			}
 		}
 		return result;
 	}
@@ -1383,7 +1389,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 	@Override
 	public Injector findEgyDslInjector() {
-		Object o = context.get(BTSEGYConstants.EGYDSL_INJECTOR);
+		Object o = context.get(BTSEGYUIConstants.EGYDSL_INJECTOR);
 		Injector injector;
 		if (o != null && o instanceof Injector)
 		{
@@ -1396,7 +1402,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 			injector = activator
 					.getInjector(EgyDslActivator.ORG_BBAW_BTS_CORPUS_TEXT_EGY_EGYDSL);
-			context.set(BTSEGYConstants.EGYDSL_INJECTOR, injector);
+			context.set(BTSEGYUIConstants.EGYDSL_INJECTOR, injector);
 		}
 		return injector;
 	}

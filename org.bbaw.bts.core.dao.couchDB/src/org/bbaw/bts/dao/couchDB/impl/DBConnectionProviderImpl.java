@@ -375,7 +375,9 @@ public class DBConnectionProviderImpl implements DBConnectionProvider
 				        .put("index.number_of_replicas",0)
 				        .put("node.name",esClustername + "BTS1")
 				        .put("index.routing.allocation.disable_allocation", "false")
-				        .put("cluster.routing.allocation.enable", "all");
+				        .put("cluster.routing.allocation.enable", "all")
+				        .put("mappings._default_.date_detection", "0");
+
 				
 				searchClient = nodeBuilder()
 		                .local(true)

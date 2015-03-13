@@ -37,6 +37,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceEndFigure;
 import org.bbaw.bts.ui.egy.textSign.support.AmbivalenceStartFigure;
@@ -68,6 +69,7 @@ import org.eclipse.draw2d.Viewport;
 import org.eclipse.draw2d.geometry.Dimension;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.draw2d.geometry.Rectangle;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
@@ -110,13 +112,43 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Inject
 	private BTSTextEditorController textEditorController;
 	@Inject
-	private EventBroker eventBroker;
-	@Inject
 	private IBTSEditor parentEditor;
 	@Inject
 	private UISynchronize sync;
 	@Inject
 	private BTSResourceProvider resourceProvider;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_HIEROGLYPHS, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showHieroglyphs;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_FLEXION, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showFlexion;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LEMMAID, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showLemmaId;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_DE, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showTransDE;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_FR, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showTransFR;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_EN, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showTransEN;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_TRANSLATION_ES, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Boolean showTransES;
+	
+	@Inject
+	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Integer lineWidth;
 
 	private ElementFigure selectedElement;
 
@@ -128,16 +160,13 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	protected int selectedIndex;
 	private Adapter notifier;
 	private LineFigure currentLineFigure;
-	private int lineIndex;
+	private int lineIndex = 1;
 	private Map<Integer, LineFigure> lineMap = new HashMap<>();
 	private MouseListener elementSelectionListener;
 	private int cachedIndex;
 	private MouseMotionListener mouseMotionListener;
 	private KeyListener keyListener;
 	private FigureCanvas canvas;
-	private LightweightSystem lightWeightSystem;
-	private int figureCounter;
-	private List<BTSObject> relatingObjects;
 	private Map<String, List<BTSInterTextReference>> relatingObjectsMap;
 	private List<BTSObject> continuingRelatingObjects;
 	private HashMap<String, List<ElementFigure>> relatingObjectFigureMap;
@@ -265,10 +294,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			@Override
 			public void keyPressed(KeyEvent ke) {
 				if (ke.keycode == SWT.ARROW_RIGHT) {
-					shiftSelection(1);
+					shiftSelection(1, true);
 				}
- else if (ke.keycode == SWT.ARROW_LEFT) {
-					shiftSelection(-1);
+				else if (ke.keycode == SWT.ARROW_LEFT) {
+					shiftSelection(-1, false);
 				} else if (ke.keycode == SWT.ARROW_DOWN) {
 					shiftLineSelection(1);
 				} else if (ke.keycode == SWT.ARROW_UP) {
@@ -309,23 +338,27 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			currentLineFigure = lineMap.get(newLineIndex);
 			lineIndex = newLineIndex;
 			if (currentIndex < currentLineFigure.getChildren().size()) {
-				ElementFigure figure = (ElementFigure) currentLineFigure
-						.getChildren().get(currentIndex);
+//				ElementFigure figure = (ElementFigure) currentLineFigure
+//						.getChildren().get(currentIndex);
 				cachedIndex = -1;
-				setSelectionInternal(figure);
+				shiftSelection(currentIndex, true);
+
+//				setSelectionInternal(figure);
 			} else {
 				cachedIndex = currentIndex;
 				currentIndex = currentLineFigure.getChildren().size() - 1;
-				ElementFigure figure = (ElementFigure) currentLineFigure
-						.getChildren().get(currentIndex);
-				setSelectionInternal(figure);
+//				ElementFigure figure = (ElementFigure) currentLineFigure
+//						.getChildren().get(currentIndex);
+//				setSelectionInternal(figure);
+				shiftSelection(currentIndex, true);
+
 			}
 
 		}
 
 	}
 
-	private void shiftSelection(int shift) {
+	private void shiftSelection(int shift, boolean forward) {
 		int currentIndex = currentLineFigure.getChildren().indexOf(
 				selectedElement);
 		int newIndex = currentIndex + shift;
@@ -334,30 +367,113 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// System.out.println("currentIndex " + currentIndex + " shift " + shift
 		// + " newIndex " + newIndex + " currentLine " + lineIndex);
 		// check if current Selection at line end
+		
+		// refactored so that next figure is a WordFigure
+		ElementFigure figure = findWordFigure(newIndex, forward);
+		
+		if (figure != null)
+		{
+			setSelectionInternal(figure);
+		}
+	}
+
+	private ElementFigure findWordFigure(int newIndex, boolean forward) {
+		ElementFigure figure = null;
 		if (newIndex >= currentLineFigure.getChildren().size()) {
 			if (lineIndex < container.getChildren().size() - 1) {
 				lineIndex++;
 				currentLineFigure = lineMap.get(lineIndex);
-				ElementFigure figure = (ElementFigure) currentLineFigure
-						.getChildren().get(0);
-				setSelectionInternal(figure);
+				newIndex = 0;
 			}
 		} else if (newIndex < 0) {
 			if (lineIndex > 0) {
 				lineIndex--;
 				currentLineFigure = lineMap.get(lineIndex);
 				newIndex = currentLineFigure.getChildren().size() - 1;
-				ElementFigure figure = (ElementFigure) currentLineFigure
-						.getChildren().get(newIndex);
-				setSelectionInternal(figure);
 			}
-		} else {
-			ElementFigure figure = (ElementFigure) currentLineFigure
+		}
+		figure = findElementFigure(newIndex);
+		while (!(figure instanceof WordFigure))
+		{
+			if (forward)
+			{
+				newIndex = newIndex + 1;
+			}
+			else
+			{
+				newIndex = newIndex - 1;
+			}
+			if (newIndex >= currentLineFigure.getChildren().size()) {
+				if (lineIndex < container.getChildren().size() - 1) {
+					lineIndex++;
+					currentLineFigure = lineMap.get(lineIndex);
+					newIndex = 0;
+				}
+				else
+				{
+					break;
+				}
+			} else if (newIndex < 0) {
+				if (lineIndex > 1) {
+					lineIndex--;
+					if (lineIndex < 1)break;
+					currentLineFigure = lineMap.get(lineIndex);
+					newIndex = currentLineFigure.getChildren().size() - 1;
+				}
+				else
+				{
+					break;
+				}
+			}
+			else
+			{
+				currentLineFigure = lineMap.get(lineIndex);
+			}
+			figure = findElementFigure(newIndex);
+			if (figure == null) break;
+		}
+		if (figure instanceof WordFigure)
+		{
+			return figure;
+		}
+		return null;
+	}
+
+	private ElementFigure findElementFigure(int newIndex) {
+		ElementFigure figure = null;
+
+//		if (newIndex >= currentLineFigure.getChildren().size()) {
+//			if (lineIndex < container.getChildren().size() - 1) {
+//				lineIndex++;
+//				currentLineFigure = lineMap.get(lineIndex);
+//				figure = (ElementFigure) currentLineFigure
+//						.getChildren().get(0);
+//			}
+//		} else if (newIndex < 0) {
+//			if (lineIndex > 0) {
+//				lineIndex--;
+//				currentLineFigure = lineMap.get(lineIndex);
+//				newIndex = currentLineFigure.getChildren().size() - 1;
+//				figure = (ElementFigure) currentLineFigure
+//						.getChildren().get(newIndex);
+//			}
+//		} else {
+//			figure = (ElementFigure) currentLineFigure
+//					.getChildren()
+//					.get(newIndex);
+//			
+//		}
+		try {
+			figure = (ElementFigure) currentLineFigure
 					.getChildren()
 					.get(newIndex);
-			setSelectionInternal(figure);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return null;
 		}
-
+		catch (IndexOutOfBoundsException e) {
+			return null;
+		}
+		return figure;
 	}
 
 	private MouseListener makeElementSelectionListener() {
@@ -413,7 +529,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	public void setInput(BTSObject btsObject, BTSTextContent textContent, List<BTSObject> relatingObjects, IProgressMonitor monitor) {
 		this.textContent = textContent;
 		this.btsObject = btsObject;
-		this.relatingObjects = relatingObjects;
 		this.relatingObjectsMap =  textEditorController
 				.fillRelatingObjectsMap(relatingObjects);
 		if (textContent != null) {
@@ -743,7 +858,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			container.removeAll();
 
 		}
-		figureCounter = 0;
 		container = null;
 		// if (canvas != null) {
 		// canvas.setContents(null);
@@ -782,9 +896,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		tl.setSpacing(5);
 		String mdc = transformWordToMdCString(word);
 
+		if (showHieroglyphs)
+		{
 		ImageFigure imageFigure = new CompartementImageFigure();
 		// System.out.println("mdc " + mdc);
-		
 			
 		if (mdc != null && !"".equals(mdc) && imageList.size() < MAX_IMAGE_SIZE)
 		{
@@ -806,24 +921,41 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// rect.getAttributesCompartment().add(imageFigure);
 		rect.setImageFigure(imageFigure);
 		rect.add(imageFigure);
+		}
 
+		if (showLemmaId)
+		{
 		// add lemma key
 		addLKeyToWordFigure(word, rect);
-
+		}
+		
+		if (showFlexion)
+		{
 		// add flexion code
 		addFCodeToWordFigure(word, rect);
+		}
 		
-
+		if (showTransDE)
+		{
+			addTransToWordFigure(word, rect, "de");
+		}
+		if (showTransEN)
+		{
+			addTransToWordFigure(word, rect, "en");
+		}
+		if (showTransFR)
+		{
+			addTransToWordFigure(word, rect, "fr");
+		}
+		if (showTransES)
+		{
+			addTransToWordFigure(word, rect, "es");
+		}
 		rect.setSize(90, 290);
 		rect.addFigureListener(new FigureListener() {
 
-			int figureMoveCounter = 0;
 			@Override
 			public void figureMoved(IFigure source) {
-				figureMoveCounter++;
-				// System.out.println("FigureListener counter "
-				// + figureMoveCounter + " all figures: " + figureCounter
-				// + " source " + source);
 
 				// Integer n = null;
 				// System.out.println(n.toString());
@@ -836,6 +968,19 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 		word.eAdapters().add(notifier);
 		return rect;
+	}
+
+	private void addTransToWordFigure(BTSWord word, WordFigure rect,
+			String language) {
+		if (word.getTranslation() != null 
+				&& word.getTranslation().getTranslation(language) != null 
+				&& !"".equals(word.getTranslation().getTranslation(language))) {
+			TypedLabel l = new TypedLabel();
+			l.setText(language + ": " + word.getTranslation().getTranslation(language));
+			l.setType(TypedLabel.TRANSLITATION);
+			rect.add(l);
+		}
+		
 	}
 
 	private void addFCodeToWordFigure(BTSWord word, WordFigure rect) {
@@ -863,7 +1008,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	private void appendFigure(ElementFigure figure) {
-		figureCounter++;
 		if (currentLineFigure == null) {
 			currentLineFigure = makeLineFigure();
 		}
@@ -1221,7 +1365,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	public void setEventBroker(EventBroker eventBroker2) {
-		this.eventBroker = eventBroker2;
 
 	}
 
@@ -1241,22 +1384,22 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			shiftLineSelection(-1);
 //			int currentIndex = currentLineFigure.getChildren().indexOf(
 //					selectedElement);
-			shiftSelection(-currentIndex);
+			shiftSelection(-currentIndex, true);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_LINE_START)) {
 //			int currentIndex = currentLineFigure.getChildren().indexOf(
 //					selectedElement);
-			shiftSelection(-currentIndex);
+			shiftSelection(-currentIndex, true);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_PREVIOUS)) {
-			shiftSelection(-1);
+			shiftSelection(-1, false);
 
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT)) {
-			shiftSelection(1);
+			shiftSelection(1, true);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_LINE_END)) {
 //			int currentIndex = currentLineFigure.getChildren().indexOf(
 //					selectedElement);
 			int shift = currentLineFigure.getChildren().size() - currentIndex
 					- 1;
-			shiftSelection(shift);
+			shiftSelection(shift, false);
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_ALL_END)) {
 			int lshift = container.getChildren().size() - lineIndex - 1;
 			shiftLineSelection(lshift);
@@ -1264,7 +1407,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 //					selectedElement);
 			int shift = currentLineFigure.getChildren().size() - currentIndex
 					- 1;
-			shiftSelection(shift);
+			shiftSelection(shift, false);
 		}
 		
 
@@ -1281,7 +1424,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			}
 			boolean lset = false;
 			boolean fset = false;
-			boolean tset = false;
 			for (Object fig : wf.getChildren()) {
 				if (fig instanceof ImageFigure) {
 					ImageFigure imf = (ImageFigure) fig;
@@ -1306,7 +1448,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						break;
 					case TypedLabel.TRANSLITATION :
 						l.setText(word.getWChar());
-						tset = true;
 						break;
 					}
 				}

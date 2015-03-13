@@ -608,6 +608,11 @@ private List<BTSObject> filterAndCutRelatingObjects(
 	}
 	private void processModelUpdate(final BTSModelUpdateNotification notification, String id) {
 		List<BTSObject> relatingObjects = relatingObjectsQueryIDMap.get(id);
+		if (relatingObjects == null)
+		{
+			relatingObjects = new Vector<BTSObject>(1);
+			relatingObjectsQueryIDMap.put(id, relatingObjects);
+		}
 		final RelatedObjectGroup group = objectWidgetMap.get(notification
 				.getObject());
 		if (group == null) {

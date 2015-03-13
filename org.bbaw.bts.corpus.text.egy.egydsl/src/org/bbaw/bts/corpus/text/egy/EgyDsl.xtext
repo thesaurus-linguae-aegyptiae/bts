@@ -52,6 +52,7 @@ SentenceItemNoAmbivalence:
 VersMarker:
 	VersbreakMarker | VersFrontierMarker |BrokenVersbreakMarker 
 	| MissingVersMarker | DestroyedVersMarker | DeletedVersMarker | DisputableVersMarker
+	| RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker
 ;
 
 DisputableVersMarker:
@@ -72,6 +73,21 @@ DestroyedVersMarker:
 MissingVersMarker:
 	{MissingVersMarker}
 	'\u2329\uDB80\uDC80\u232A'//'@v'
+;
+
+RestorationOverRasurMarker:
+	{RestorationOverRasurMarker}
+	'[[\uDB80\uDC80]]'//'@v'
+;
+
+AncientExpandedMarker:
+	{AncientExpandedMarker}
+	'((\uDB80\uDC80))'//'@v'
+;
+
+RasurMarker:
+	{AncientExpandedMarker}
+	'{{\uDB80\uDC80}}'//'@v'
 ;
 
 VersFrontierMarker:

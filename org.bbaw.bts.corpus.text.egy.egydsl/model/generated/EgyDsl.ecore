@@ -28,6 +28,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="DeletedVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="DestroyedVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="MissingVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RestorationOverRasurMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AncientExpandedMarker" eSuperTypes="#//VersMarker #//RasurMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RasurMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersFrontierMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersbreakMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="BrokenVersbreakMarker" eSuperTypes="#//VersMarker"/>

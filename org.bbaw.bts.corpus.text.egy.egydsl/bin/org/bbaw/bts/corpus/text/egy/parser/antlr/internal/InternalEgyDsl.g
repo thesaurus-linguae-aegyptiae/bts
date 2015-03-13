@@ -627,6 +627,36 @@ ruleVersMarker returns [EObject current=null]
         $current = $this_DisputableVersMarker_6.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getRestorationOverRasurMarkerParserRuleCall_7()); 
+    }
+    this_RestorationOverRasurMarker_7=ruleRestorationOverRasurMarker
+    { 
+        $current = $this_RestorationOverRasurMarker_7.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getAncientExpandedMarkerParserRuleCall_8()); 
+    }
+    this_AncientExpandedMarker_8=ruleAncientExpandedMarker
+    { 
+        $current = $this_AncientExpandedMarker_8.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getRasurMarkerParserRuleCall_9()); 
+    }
+    this_RasurMarker_9=ruleRasurMarker
+    { 
+        $current = $this_RasurMarker_9.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -750,6 +780,99 @@ ruleMissingVersMarker returns [EObject current=null]
 )	otherlv_1='\u2329\uDB80\uDC80\u232A' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getMissingVersMarkerAccess().getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleRestorationOverRasurMarker
+entryRuleRestorationOverRasurMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRestorationOverRasurMarkerRule()); }
+	 iv_ruleRestorationOverRasurMarker=ruleRestorationOverRasurMarker 
+	 { $current=$iv_ruleRestorationOverRasurMarker.current; } 
+	 EOF 
+;
+
+// Rule RestorationOverRasurMarker
+ruleRestorationOverRasurMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getRestorationOverRasurMarkerAccess().getRestorationOverRasurMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='[[\uDB80\uDC80]]' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getRestorationOverRasurMarkerAccess().getLeftSquareBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightSquareBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAncientExpandedMarker
+entryRuleAncientExpandedMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAncientExpandedMarkerRule()); }
+	 iv_ruleAncientExpandedMarker=ruleAncientExpandedMarker 
+	 { $current=$iv_ruleAncientExpandedMarker.current; } 
+	 EOF 
+;
+
+// Rule AncientExpandedMarker
+ruleAncientExpandedMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getAncientExpandedMarkerAccess().getAncientExpandedMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='((\uDB80\uDC80))' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAncientExpandedMarkerAccess().getLeftParenthesisLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisRightParenthesisKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleRasurMarker
+entryRuleRasurMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getRasurMarkerRule()); }
+	 iv_ruleRasurMarker=ruleRasurMarker 
+	 { $current=$iv_ruleRasurMarker.current; } 
+	 EOF 
+;
+
+// Rule RasurMarker
+ruleRasurMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getRasurMarkerAccess().getAncientExpandedMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='{{\uDB80\uDC80}}' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getRasurMarkerAccess().getLeftCurlyBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightCurlyBracketKeyword_1());
     }
 )
 ;

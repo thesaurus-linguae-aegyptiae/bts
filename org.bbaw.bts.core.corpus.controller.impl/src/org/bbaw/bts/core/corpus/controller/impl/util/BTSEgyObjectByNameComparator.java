@@ -6,7 +6,7 @@ import java.util.Comparator;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
-import org.bbaw.bts.ui.commons.corpus.util.BTSEGYConstants;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 
 public class BTSEgyObjectByNameComparator implements Comparator<BTSObject>{
 
@@ -16,7 +16,7 @@ public class BTSEgyObjectByNameComparator implements Comparator<BTSObject>{
 	public BTSEgyObjectByNameComparator()
 	{
 		try {
-			egyCollator =  new RuleBasedCollator(BTSEGYConstants.EGY_COLLATOR_RULE);
+			egyCollator =  new RuleBasedCollator(BTSEGYUIConstants.EGY_COLLATOR_RULE);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

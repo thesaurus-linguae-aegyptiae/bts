@@ -29,6 +29,9 @@
     <genClasses ecoreClass="EgyDsl.ecore#//DeletedVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//MissingVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//RestorationOverRasurMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//AncientExpandedMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//RasurMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersFrontierMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersbreakMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//BrokenVersbreakMarker"/>
