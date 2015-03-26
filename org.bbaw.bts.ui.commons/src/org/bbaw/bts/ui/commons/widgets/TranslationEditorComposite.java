@@ -48,6 +48,7 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
+import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.swt.SWT;
@@ -100,6 +101,8 @@ public class TranslationEditorComposite extends Composite {
 	private String lang;
 
 	private List<SelectionListener> languageSelectionListeners = new ArrayList<SelectionListener>(2);
+
+	private Binding binding;
 
 	/**
 	 * Instantiates a new translation editor composite.
@@ -155,6 +158,11 @@ public class TranslationEditorComposite extends Composite {
 		this.required = required;
 		if (translations == null)
 		{
+			if (binding != null)
+			{
+				// if old translation exists, disconnect and dispose biding
+				binding.dispose();
+			}
 			text.setText("");
 			return;
 		}
@@ -288,7 +296,7 @@ public class TranslationEditorComposite extends Composite {
 			us = new EMFUpdateValueStrategy();
 			us.setBeforeSetValidator(new StringNotEmptyValidator());
 		}
-		Binding binding = bindingContext.bindValue(
+		binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, text),
 				EMFEditProperties.value(domain,
@@ -323,7 +331,13 @@ public class TranslationEditorComposite extends Composite {
 			return;
 		}
 		BTSTranslation trans = translations.getBTSTranslation(combo.getItem(combo.getSelectionIndex()));
-		trans.setValue(text.getText());
+		if ((trans.getValue() == null && !"".equals(text.getText()))
+				|| !text.getText().equals(trans.getValue()))
+		{
+			org.eclipse.emf.common.command.Command command = SetCommand
+					.create(domain, trans, BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE, text.getText());
+			domain.getCommandStack().execute(command);
+		}
 	}
 	
 	public void setTranslationText(String text)

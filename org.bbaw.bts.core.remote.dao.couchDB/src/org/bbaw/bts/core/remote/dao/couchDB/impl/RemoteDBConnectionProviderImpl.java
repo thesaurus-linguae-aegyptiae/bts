@@ -20,6 +20,9 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.equinox.security.storage.ISecurePreferences;
+import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
+import org.eclipse.equinox.security.storage.StorageException;
 import org.eclipselabs.emfjson.couchdb.CouchDBHandler;
 import org.elasticsearch.client.Client;
 import org.elasticsearch.client.transport.TransportClient;
@@ -68,14 +71,27 @@ public class RemoteDBConnectionProviderImpl implements RemoteDBConnectionProvide
 			clients = new HashMap<String, CouchDbClient>(10);
 		}
 		CouchDbClient dbClient = clients.get(path);
+		if (user == null || password == null)
+		{
+			ISecurePreferences secPrefs = SecurePreferencesFactory.getDefault().node("org.bbaw.bts.app");
+			ISecurePreferences auth = secPrefs.node("auth");
+			try {
+				user = auth.get("username", null);
+				password = auth.get("password", null);
+			} catch (StorageException e) {
+			}
+		}
 		if (dbClient == null)
 		{
 			// FIXME check if db is set to authentication otherwise do so
 			// if it is an admin party then creating a new db if not exist will
 			// lead to http exception
 			CouchDbProperties properties = new CouchDbProperties().setDbName(path).setCreateDbIfNotExist(true)
-					.setProtocol(protocol).setHost(host).setPort(port).setMaxConnections(100).setConnectionTimeout(0)
-					.setUsername(user).setPassword(password);
+					.setProtocol(protocol).setHost(host).setPort(port).setMaxConnections(100).setConnectionTimeout(0);
+			if (user != null && password != null)
+			{
+				properties.setUsername(user).setPassword(password);
+			}
 			dbClient = new CouchDbClient(properties);
 			clients.put(path, dbClient);
 		}

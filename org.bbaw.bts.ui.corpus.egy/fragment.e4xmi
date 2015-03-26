@@ -45,6 +45,7 @@
     <elements xsi:type="commands:Command" xmi:id="_1r5kUAawEeSOuJcvBP3MBw" elementId="org.bbaw.bts.ui.corpus.egy.command.addGlosse" commandName="Add Glosse" category="_O6qLsF2gEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_AHc_cJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.command.loadLemmata" commandName="Load Lemmata" category="_O6qLsF2gEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_Yy_4YK1OEeS6odLRB00pOw" elementId="org.bbaw.bts.ui.corpus.egy.command.onlyInvalidTexts" commandName="Filter only invalid Texts" category="_O6qLsF2gEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_3NCxwMvTEeSh94K7I1pyVA" elementId="org.bbaw.bts.ui.corpus.egy.command.filterOnlyInvalidLemmata" commandName="filterOnlyInvalidLemmata" category="_O6qLsF2gEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_n8FzEEt8EeO3HNJi0pp4Qg" featurename="handlers" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Handler" xmi:id="_sw17gEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.egy.handler.insertTextModel" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.test.InsertTextModelElementHandler" command="_l81REEt8EeO3HNJi0pp4Qg"/>
@@ -54,6 +55,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_sONHoJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handler.loadLemmata" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.LoadLemmatEgyTextEditorHandler" command="_AHc_cJ_LEeS8kttfrCiCZg"/>
     <elements xsi:type="commands:Handler" xmi:id="_deL1IK1OEeS6odLRB00pOw" elementId="org.bbaw.bts.ui.corpus.egy.handler.filterOnlyInvalidTexts" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.FilterOnlyInvalidTextsHandler" command="_Yy_4YK1OEeS6odLRB00pOw"/>
     <elements xsi:type="commands:Handler" xmi:id="_-AiroMiuEeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.egy.handler.removeTokenDataHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.ClearTokenDataHandler" command="_Bfb0YMivEeS2i8kQlGMs6w"/>
+    <elements xsi:type="commands:Handler" xmi:id="_7-UvcMvTEeSh94K7I1pyVA" elementId="org.bbaw.bts.ui.corpus.egy.handler.filterOnlyInvalidLemmataHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.FilterOnlyInvalidLemmataHandler" command="_3NCxwMvTEeSh94K7I1pyVA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.corpus.text.partstack.middle.bottom" positionInList="after:org.bbaw.bts.ui.corpus.part.passportEditorPart">
     <elements xsi:type="basic:Part" xmi:id="_QSWNcH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.part.lemmatizer" containerData="0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmatizerPart" label="Lemmatizer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemmatizer.png" closeable="true">
@@ -214,5 +216,8 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_35j9MK1NEeS6odLRB00pOw" featurename="children" parentElementId="org.bbaw.bts.ui.corpus.menu.filter" positionInList="50">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_Bi-HcK1OEeS6odLRB00pOw" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.filterOnlyInvalidTexts" label="Filter only invalid Texts" command="_Yy_4YK1OEeS6odLRB00pOw"/>
+  </fragments>
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_CdQhwMvUEeSh94K7I1pyVA" featurename="children" parentElementId="org.bbaw.bts.ui.lemma.menu.filter">
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_Ryw54MvZEeSh94K7I1pyVA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.filterOnlyInvalidLemmata" label="Filter only invalid Lemmata" command="_3NCxwMvTEeSh94K7I1pyVA"/>
   </fragments>
 </fragment:ModelFragments>

@@ -268,7 +268,8 @@ DisputableReading:
 ;
 
 NoDisputableReading:
-	 Expanded | Emendation | Deletion | Chars | Interfix
+	 Expanded | Emendation | Deletion 
+	 | Chars | Interfix
 ;
 
 Lacuna:

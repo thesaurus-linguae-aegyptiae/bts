@@ -40,6 +40,7 @@ import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.corpus.controller.partController.HieroglyphTypeWriterController;
+import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
@@ -154,15 +155,25 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private Map hieroglyphSelectionCounterCacheMap = new HashMap<URI, Object>();
 	private String htwProposals;
 	private BTSObject selectionObject;
+	// boolean if object is loaded into gui
 	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;
 	private EditingDomain editingDomain;
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
-	private BTSText currentText;
+	private BTSCorpusObject corpusObject;
 	private CommandStackListener commandStackListener;
 	private MPart part;
 	
 	private String suffix;
 	private String mdcProposals;
+	
+	@Inject
+	private LemmaEditorController lemmaEditorController;
 
 	@Inject
 	public EgyHieroglyphenTypeWriter(EPartService partService)
@@ -211,7 +222,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 				if (!loading)
 				{
-					String internalSuffix = getInteralProSuffix();
+					String[] arr = getInteralProSuffix(hierotw_text.getText());
+					String internalSuffix = arr[1];
 					
 					if (internalSuffix.equals(suffix))
 					{
@@ -234,8 +246,10 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 							System.out.println(mdcProposals);
 							jseshEditorProposals.setMDCText(mdcProposals);
 						}
+						setHiertTWText(arr[0] );
+
 					}
-					setHiertTWText(hierotw_text.getText());
+					
 					
 				}
 
@@ -362,23 +376,23 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		frame.add(jseshEditor);
 
 		comEmbeded.layout();
-		loaded = true;
-		if (selectionObject != null)
+		constructed = true;
+		if (selectionCached)
 		{
-			setSelection(selectionObject);
+			setSelectionInteral(currentWord);
 		}
 		setUserMayTranscribeInteral(userMayTranscribe);
 
 	}
 
-	private String getInteralProSuffix() {
+	private String[] getInteralProSuffix(String hierotwText) {
 		String internalSuffix = "";
-		StringTokenizer tok = new StringTokenizer(hierotw_text
-				.getText(), ":-<>");
+		StringTokenizer tok = new StringTokenizer(hierotwText, ":-<>");
 		while (tok.hasMoreTokens()) {
 			internalSuffix = tok.nextToken();
 		}
-		return internalSuffix;
+		String base = hierotwText.substring(0, hierotwText.length() - internalSuffix.length());
+		return new String[]{base, internalSuffix};
 	}
 
 	private void setHiertTWText(String mdc) {
@@ -388,12 +402,16 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			if (mdc.length() > 0 && (!(mdc.endsWith(":") || mdc.endsWith("-")
 					|| mdc.endsWith("<") || mdc.endsWith("*") || mdc
 					.endsWith("[")))) {
-				String c = mdc.substring(0,1).toUpperCase();
-				if (mdc.length() > 1)
-				{
-					c += mdc.substring(1, mdc.length());
-				}
-				jseshEditor.setMDCText(c);
+//				String c = mdc.substring(0,1).toUpperCase();
+//				if (mdc.length() > 1)
+//				{
+//					c += mdc.substring(1, mdc.length());
+//				}
+				jseshEditor.setMDCText(mdc);
+			}
+			else if (mdc.length() == 0)
+			{
+				jseshEditor.clearText();
 			}
 		} catch (Exception e1)
 		{
@@ -420,11 +438,13 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		jseshEditorProposals.clearText();
 		String mdc = hierotw_text
 				.getText();
-		String suffix = getInteralProSuffix();
-		mdc = mdc.replace(suffix, part);
+		String[] arr = getInteralProSuffix(hierotw_text.getText());
+		String internalSuffix = arr[1];
+		mdc = mdc.replace(internalSuffix, part);
 		hierotw_text.setText(mdc);
 		hierotw_text.setSelection(hierotw_text.getText().length());
 		setHiertTWText(mdc);
+
 	}
 
 	private String getHieroglypheProposals(String normalizedMdC) {
@@ -559,67 +579,168 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	@Inject
 	void setSelection(
 			@Optional
-			@Named(IServiceConstants.ACTIVE_SELECTION) Object selection) {
-		if (selection != null && selection instanceof BTSCorpusObject
-				&& !selection.equals(currentText)) {
-			if (loaded) {
-			if (currentText != null) {
-				saveMdCstring(currentWord);
-				saveText();
-			}
-			if (selection instanceof BTSText) {
-				currentText = (BTSText) selection;
-				part.setLabel(((BTSText) selection).getName());
+			@Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
+		if (selection == null) return;
+		if (part == null)
+		{
+			part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
+		}
+ 		if (constructed) {
+			if (!selfSelecting) {
+				if (corpusObject == null || !selection.equals(corpusObject)) {
+					if (corpusObject != null) {
+						saveMdCstring(currentWord);
+						saveText();
+					}
+					if (selection instanceof BTSText) {
+						purgeAll();
+						corpusObject = (BTSText) selection;
+						part.setLabel(selection.getName());
+						editingDomain = getEditingDomain(corpusObject);
+						setUserMayTranscribeInteral(userMayTranscribe);
+					} else if (selection instanceof BTSLemmaEntry) {
+//						corpusObject = (BTSLemmaEntry) selection;
+						purgeAll();
+						part.setLabel(((BTSLemmaEntry) selection).getName());
+						editingDomain = getEditingDomain(corpusObject);
 
-			} 
-			else if (selection instanceof BTSLemmaEntry) {
-//				currentText = (BTSLemmaEntry) selection;
-				part.setLabel(((BTSLemmaEntry) selection).getName());
-
+					} else if (corpusObject != null){
+						corpusObject = null;
+						corpusObject = null;
+						part.setLabel("Hieroglyph Type Writer");
+						purgeAll();
+						loaded = false;
+					}
+				} 
 			} else {
-				currentText = null;
-				part.setLabel("Hieroglyph Type Writer");
-			}
-			ignoreGlyph_Button.setSelection(false);
+				selfSelecting = false;
 			}
 		}
+ 		else if (!selection.equals(corpusObject)) {
+			if (selection instanceof BTSText) {
+				corpusObject = (BTSText) selection;
+				part.setLabel(selection.getName());
+				editingDomain = getEditingDomain(corpusObject);
+
+			} else if (selection instanceof BTSLemmaEntry) {
+				corpusObject = (BTSLemmaEntry) selection;
+				part.setLabel(selection.getName());
+				editingDomain = getEditingDomain(corpusObject);
+
+			} 
+			else if (corpusObject != null){
+				corpusObject = null;
+				part.setLabel("Lemmatizer");
+				purgeAll();
+				loaded = false;
+			}
+		}
+ 		
+ 	// FIXME old delete!
+//		if (selection != null && selection instanceof BTSCorpusObject
+//				&& !selection.equals(corpusObject)) {
+//			if (loaded) {
+//			if (corpusObject != null) {
+//				saveMdCstring(currentWord);
+//				saveText();
+//			}
+//			if (selection instanceof BTSText) {
+//				corpusObject = (BTSText) selection;
+//				part.setLabel(((BTSText) selection).getName());
+//
+//			} 
+//			else if (selection instanceof BTSLemmaEntry) {
+////				corpusObject = (BTSLemmaEntry) selection;
+//				part.setLabel(((BTSLemmaEntry) selection).getName());
+//
+//			} else {
+//				corpusObject = null;
+//				part.setLabel("Hieroglyph Type Writer");
+//			}
+//			ignoreGlyph_Button.setSelection(false);
+//			}
+//		}
 		
 	}
 
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
-		if (!selfSelecting) {
-
-			if (selection != null) {
-
-				if (!selection.getSelectedItems().isEmpty()
-						&& !selection.getSelectedItems().get(0)
-								.equals(selectionObject)
-						&& (selection.getSelectedItems().get(0) instanceof BTSSentenceItem 
-								|| selection.getSelectedItems().get(0) instanceof BTSLemmaCase)) {
-
-					if (selectionObject == null || !selectionObject.equals(selection.getSelectedItems()
-							.get(0)))
-					{
-						saveMdCstring(currentWord);
+		if (constructed) {
+			if (!selfSelecting) {
+				if (selection == null) {
+					/* implementation not shown */
+				} else if (!selection.getSelectedItems().isEmpty()) {
+					if (selection.getSelectedItems().get(0) instanceof BTSWord) {
+						
+						// make sure the right text is set
+						if (selection.getParentObject() != null && !selection.getParentObject().equals(corpusObject))
+						{
+							setSelection((BTSCorpusObject) selection.getParentObject());
+						}
 						selectionObject = (BTSObject) selection.getSelectedItems()
 								.get(0);
-						if (selection.getSelectedItems().get(0) instanceof BTSWord && loaded) {
-							setSelectionInteral(selection.getSelectedItems().get(0));
-							ignoreGlyph_Button.setSelection(false);
-						}
+						setSelectionInteral((BTSWord) selection
+								.getSelectedItems().get(0));
+						ignoreGlyph_Button.setSelection(false);
+						loaded = true;
+					} else if (loaded)
+					{
+						saveMdCstring(currentWord);
+						currentWord = null;
+						purgeAll();
+						loaded = false;
+						selectionCached = false;
 					}
 				}
-				else
-				{
-					selectionObject = null;
-				}
-
+			} else {
+				selfSelecting = false;
 			}
-		} else {
-			selfSelecting = false;
 		}
+		else if (selection != null && selection.getSelectedItems() != null 
+				&& !selection.getSelectedItems().isEmpty() && selection.getSelectedItems().get(0) instanceof BTSWord)
+		{
+			if (selection.getParentObject() != null && !selection.getParentObject().equals(corpusObject))
+			{
+				setSelection((BTSCorpusObject) selection.getParentObject());
+			}
+			currentWord = (BTSWord) selection.getSelectedItems().get(0);
+			selectionCached = true;
+		}
+		// FIXME old delete!
+//		if (!selfSelecting) {
+//
+//			if (selection != null) {
+//
+//				if (!selection.getSelectedItems().isEmpty()
+//						&& !selection.getSelectedItems().get(0)
+//								.equals(selectionObject)
+//						&& (selection.getSelectedItems().get(0) instanceof BTSSentenceItem 
+//								|| selection.getSelectedItems().get(0) instanceof BTSLemmaCase)) {
+//
+//					if (selectionObject == null || !selectionObject.equals(selection.getSelectedItems()
+//							.get(0)))
+//					{
+//						saveMdCstring(currentWord);
+//						selectionObject = (BTSObject) selection.getSelectedItems()
+//								.get(0);
+//						if (selection.getSelectedItems().get(0) instanceof BTSWord && loaded) {
+//							setSelectionInteral(selection.getSelectedItems().get(0));
+//							ignoreGlyph_Button.setSelection(false);
+//						}
+////						else if (loaded) loadMdCString("");
+//					}
+//				}
+//				else
+//				{
+//					selectionObject = null;
+////					loadMdCString("");
+//				}
+//
+//			}
+//		} else {
+//			selfSelecting = false;
+//		}
 	}
 	
 	private void purgeAll() {
@@ -632,7 +753,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 					commandStackListener);
 		}
 		editingDomain = null;
-
+		ignoreGlyph_Button.setSelection(false);
+		loaded = false;
 	}
 
 	private void setSelectionInteral(Object selection)
@@ -666,14 +788,28 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 					String mdc = transformWordToMdCString(currentWord, -1);
 					loadMdCString(mdc);
 					beforeImageMdC = mdc;
+					loaded = true;
 				}
 			}
 		} finally
 		{
 			loading = false;
 		}
+		loading = false;
 	}
 
+	private EObject findRecursivelyParent(EObject object) {
+		if (object.eContainer() == null) {
+			return object;
+		} else {
+			if (object.eContainer() instanceof BTSText) {
+				return (BTSText) object.eContainer();
+			} else {
+				return findRecursivelyParent(object.eContainer());
+			}
+		}
+	}
+	
 	private CommandStackListener getCommandStackListener() {
 		if (commandStackListener == null) {
 			commandStackListener = new CommandStackListener() {
@@ -709,7 +845,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	private void updateGraphicSelectionCounter() {
 		String newMdC = hierotw_text.getText();
-		if (newMdC.equals(beforeImageMdC)) {
+		if (beforeImageMdC == null || newMdC.equals(beforeImageMdC)) {
 			// no changes
 			return;
 		}
@@ -746,6 +882,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		textEditorController.updateBTSWordFromMdCString(currentWord,
 				"", editingDomain);
 		hierotw_text.setText("");
+		setHiertTWText("");
 	}
 
 	private void selectHieroglypheShortcut(int index) {
@@ -787,7 +924,15 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	@Persist
 	public boolean saveText() {
 		if (dirty.isDirty()) {
-			textEditorController.save(currentText);
+			if (corpusObject instanceof BTSText)
+			{
+				textEditorController.save((BTSText) corpusObject);
+			}
+			else if (corpusObject instanceof BTSLemmaEntry)
+			{
+				lemmaEditorController.save((BTSLemmaEntry) corpusObject);
+			}
+				
 			localCommandCacheSet.clear();
 
 			dirty.setDirty(false);
@@ -867,7 +1012,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	// !"".equals(hierotw_text.getText()))
 	// {
 	// // word.getSpelling().setMdC();
-	// final String text = hierotw_text.getText();
+	// final String corpusObject = hierotw_text.getText();
 	//
 	// SwingUtilities.invokeLater(new Runnable()
 	// {
@@ -878,7 +1023,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	// LightSpelling oldSpelling = word.getSpelling();
 	// LightSpelling spelling = new LightSpelling(oldSpelling.getId() + 500,
 	// oldSpelling
-	// .getLabel(), text);
+	// .getLabel(), corpusObject);
 	// word.setSpelling(spelling);
 	// if (ramsesEditor != null)
 	// {
@@ -912,7 +1057,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				}
 				hierotw_text.setText(normalizedMdC);
 				hierotw_text.setSelection(hierotw_text.getText().length());
-				
+				jseshEditor.setMDCText(normalizedMdC);
 				String[] codes = textEditorController
 						.splitSignsKeepDelimeters(normalizedMdC);
 				for (String s : codes) {

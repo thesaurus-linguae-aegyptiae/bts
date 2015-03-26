@@ -3,15 +3,21 @@ package org.bbaw.bts.core.corpus.controller.impl.partController;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
+import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -66,4 +72,14 @@ implements LemmaNavigatorController{
 	protected String[] getChildRelationTypes() {
 		return new String[]{"partOf", "referencedBy", "referencing"};
 	}
+
+	@Override
+	public BTSAnnotation createNewAnnotation(BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = lemmaService
+				.createNewAnnotationRelationPartOf(annotatedObject);
+		
+		return anno;
+	}
+
+	
 }

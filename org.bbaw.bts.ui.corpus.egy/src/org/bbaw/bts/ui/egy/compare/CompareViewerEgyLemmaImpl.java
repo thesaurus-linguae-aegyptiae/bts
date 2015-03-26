@@ -1,15 +1,12 @@
-package org.bbaw.bts.ui.corpus.compare;
+package org.bbaw.bts.ui.egy.compare;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
+import org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.ui.di.Focus;
@@ -18,10 +15,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
 
-public class CompareViewerPassportImpl implements CompareViewer{
+public class CompareViewerEgyLemmaImpl implements CompareViewer{
 
 	@Inject
 	private IEclipseContext context;
@@ -32,9 +28,9 @@ public class CompareViewerPassportImpl implements CompareViewer{
 	private boolean leftEditale;
 	private BTSObject rightObject;
 	private boolean righEditable;
-	private PassportEditorPart leftPassportEditor;
+	private EgyLemmaEditorPart leftLemmaEditor;
 
-	private PassportEditorPart rightPassportEditor;
+	private EgyLemmaEditorPart rightLemmaEditor;
 
 	private Composite parent;
 
@@ -49,14 +45,14 @@ public class CompareViewerPassportImpl implements CompareViewer{
 			this.rightObject = (BTSObject) rightObject;
 			this.righEditable = rightEditable;
 
-			leftPassportEditor.setSelection((BTSObject) leftObject);
-			rightPassportEditor.setSelection((BTSObject) rightObject);
+			leftLemmaEditor.setSelection((BTSObject) leftObject);
+			rightLemmaEditor.setSelection((BTSObject) rightObject);
 		}
 		return false;
 	}
 
 	@Inject
-	public CompareViewerPassportImpl() {
+	public CompareViewerEgyLemmaImpl() {
 
 	}
 	
@@ -87,8 +83,8 @@ public class CompareViewerPassportImpl implements CompareViewer{
 		child.set(Composite.class, rightComposite);
 		child.set(BTSUIConstants.PART_SAVE_ON_DESELCTION, false);
 
-		rightPassportEditor = ContextInjectionFactory.make(
-				PassportEditorPart.class, child);
+		rightLemmaEditor = ContextInjectionFactory.make(
+				EgyLemmaEditorPart.class, child);
 		
 	}
 
@@ -97,9 +93,8 @@ public class CompareViewerPassportImpl implements CompareViewer{
 		child.set(Composite.class, leftComposite);
 		child.set(BTSUIConstants.PART_SAVE_ON_DESELCTION, false);
 
-		// FIXME active window!!!
-		leftPassportEditor = ContextInjectionFactory.make(
-				PassportEditorPart.class, child);
+		leftLemmaEditor = ContextInjectionFactory.make(
+				EgyLemmaEditorPart.class, child);
 		
 	}
 
@@ -120,6 +115,7 @@ public class CompareViewerPassportImpl implements CompareViewer{
 		return false;
 		//TODO Your code here
 	}
+	
 	@Override
 	public void dispose() {
 		parent.dispose();

@@ -9,12 +9,15 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSTranslation;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
+import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
@@ -32,10 +35,12 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
+import org.bbaw.bts.ui.commons.filter.BTSObjectNameViewerFilter;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
+import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaEntryNameTranslationViewerFilter;
 import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
@@ -61,13 +66,18 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CompoundCommand;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.DeleteCommand;
+import org.eclipse.emf.edit.command.RemoveCommand;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.layout.TableColumnLayout;
 import org.eclipse.jface.viewers.ArrayContentProvider;
+import org.eclipse.jface.viewers.ColumnLabelProvider;
+import org.eclipse.jface.viewers.ColumnWeightData;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.IBaseLabelProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -75,6 +85,9 @@ import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.ListViewer;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.TableViewerColumn;
+import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -83,6 +96,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -93,6 +107,7 @@ import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.custom.SashForm;
 import org.mihalis.opal.promptSupport.PromptSupport;
@@ -143,13 +158,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private boolean selfSelecting;
 	private BTSLemmaEntry seletectedEntry;
 
-	private Text transl_text;
-	private boolean constructed;
 	private MPart part;
 	private TranslationEditorComposite wordTranslate_Editor;
 
 	private Text textSelectedWord;
-	private ListViewer lemmaViewer;
+	private TableViewer lemmaViewer;
 	private ListViewer flexionViewer;
 	private ListViewer translationViewer;
 
@@ -163,6 +176,17 @@ public class EgyLemmatizerPart implements SearchViewer {
 //	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private Boolean userMayEdit = new Boolean(false);
 	private BTSText text;
+	
+	// boolean if object is loaded into gui
+	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;
+	private Table table;
+	private BTSLemmaEntryNameTranslationViewerFilter lemmaViewerSearchFilter = new BTSLemmaEntryNameTranslationViewerFilter();	
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -236,7 +260,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		});
 
 		lemmaName_text = new Text(grpLemma, SWT.BORDER | SWT.SEARCH);
-		lemmaName_text.setToolTipText("Lemma. Shows spelling of Lemmads.");
+		lemmaName_text.setToolTipText("Lemma. Shows spelling of Lemmads.\nEnter search text and hit RETURN to filter proposals.");
 		PromptSupport.setPrompt("Lemma", lemmaName_text);
 		lemmaName_text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false, 1, 1));
@@ -252,7 +276,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.keyCode == SWT.CR) {
-					// TODO search!
+					if (!lemmaName_text.getText().equals(lemmaViewerSearchFilter.getFilterString()))
+					{
+						lemmaViewerSearchFilter.setFilterString(lemmaName_text.getText().trim());
+						lemmaViewer.refresh(false);
+					}
 				}
 
 			}
@@ -345,13 +373,46 @@ public class EgyLemmatizerPart implements SearchViewer {
 		((FillLayout) lemma_composite.getLayout()).marginHeight = 0;
 		((FillLayout) lemma_composite.getLayout()).marginWidth = 0;
 
-		lemmaViewer = new ListViewer(lemma_composite, SWT.BORDER | SWT.V_SCROLL
-				| SWT.H_SCROLL);
-
-		AdapterFactoryLabelProvider.StyledLabelProvider labelProvider = new AdapterFactoryLabelProvider.StyledLabelProvider(
+		lemmaViewer = new TableViewer(lemma_composite, SWT.BORDER | SWT.V_SCROLL);
+		
+		final AdapterFactoryLabelProvider.StyledLabelProvider labelProvider = new AdapterFactoryLabelProvider.StyledLabelProvider(
 				factory, lemmaViewer);
 		AdapterFactoryContentProvider contentProvider = new AdapterFactoryContentProvider(
 				factory);
+		
+		table = lemmaViewer.getTable();
+		table.setHeaderVisible(false);
+		table.setLinesVisible(false);
+//		table.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		
+		// Define one exmaple column Columns
+		TableViewerColumn viewerColumn;
+		viewerColumn = new TableViewerColumn(lemmaViewer, SWT.NONE);
+		viewerColumn.getColumn().setText("Lemma Proposals");
+		viewerColumn.getColumn().setWidth(400);
+		viewerColumn.getColumn().setMoveable(true); 
+		// for simplification I use the standard labelprovider
+		viewerColumn.setLabelProvider(new ColumnLabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return labelProvider.getText(element);
+			}
+			
+			@Override
+			public Color getBackground(Object element) {
+				return super.getBackground(element);
+			}
+			
+		});
+		// alternatively use relative size
+		// last parameter defines if the column is allowed 
+		// to be resized
+		TableColumnLayout tableColumnLayout = new TableColumnLayout();
+		tableColumnLayout.setColumnData(viewerColumn.getColumn(), 
+		      new ColumnWeightData(100, 400, true));
+		
+		
+		
 		lemmaViewer.setContentProvider(contentProvider);
 		lemmaViewer.setLabelProvider(labelProvider);
 
@@ -382,7 +443,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			}
 		};
 		lemmaViewer.addSelectionChangedListener(lemmaSelectionListener);
-
+		lemmaViewer.addFilter(lemmaViewerSearchFilter );
 		SashForm flexSashForm = new SashForm(lemmaSashForm, SWT.NONE);
 		flexSashForm.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true,
 				false, 1, 1));
@@ -520,7 +581,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
 		setUserMayEditInteral(userMayEdit && currentWord != null);
 
-		if (selection instanceof BTSText)
+		if (selectionCached && selection instanceof BTSText)
 		{
 			setSelection((BTSText) selection);
 		}
@@ -542,6 +603,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 						BTSCoreConstants.TRANSLATIONS_SUB_DELIMITER);
 				clearingRequired = false;
 				translationViewer.setInput(subtranslations);
+				wordTranslate_Editor.setTranslationText(trans.getValue());
 			}
 		}
 		if (clearingRequired) {
@@ -557,6 +619,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	@Focus
 	public void onFocus() {
+		if (!loaded && selectionCached) // not yet loaded but has cached selection
+		{
+			setSelectionInteral(currentWord);
+		}
 		evaluationController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
 	}
@@ -570,24 +636,47 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	@Inject
 	void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSText selection) {
-		if (constructed) {
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSCorpusObject selection) {
+		if (selection == null) return;
+		if (part == null)
+		{
+			part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
+		}
+ 		if (constructed) {
 			if (!selfSelecting) {
-				if (selection instanceof BTSCorpusObject) {
+				if (text == null || !selection.equals(text)) {
 					if (selection instanceof BTSText) {
-						text = selection;
+						clearAllInput();
+						text = (BTSText) selection;
 						part.setLabel(selection.getName());
-						editingDomain = getEditingdomain(selection);
+						editingDomain = getEditingdomain((BTSText) selection);
 						setUserMayEdit(userMayEdit);
-					} else {
+					} else if (text != null){
+						text = null;
 						part.setLabel("Lemmatizer");
+						clearAllInput();
+						loaded = false;
 					}
-				}
+				} 
 			} else {
 				selfSelecting = false;
 			}
 		}
+ 		else if (!selection.equals(text)) {
+			if (selection instanceof BTSText) {
+				text = (BTSText) selection;
+				part.setLabel(selection.getName());
+				editingDomain = getEditingdomain((BTSText) selection);
+			} else if (text != null){
+				text = null;
+				part.setLabel("Lemmatizer");
+				clearAllInput();
+				loaded = false;
+			}
+		}
 	}
+
+	
 
 	@Inject
 	void setSelection(
@@ -598,22 +687,41 @@ public class EgyLemmatizerPart implements SearchViewer {
 					/* implementation not shown */
 				} else if (!selection.getSelectedItems().isEmpty()) {
 					if (selection.getSelectedItems().get(0) instanceof BTSWord) {
+						
+						// make sure the right text is set
+						if (selection.getParentObject() != null && !selection.getParentObject().equals(text))
+						{
+							setSelection((BTSCorpusObject) selection.getParentObject());
+						}
 						setSelectionInteral((BTSWord) selection
 								.getSelectedItems().get(0));
-					} else if (currentWord != null)
+						loaded = true;
+					} else if (loaded)
 					{
 						saveWordData(currentWord);
 						currentWord = null;
-						clearProposals();
-						// FIXME clear gui
+						clearAllInput();
+						loaded = false;
+						selectionCached = false;
 					}
 				}
 			} else {
 				selfSelecting = false;
 			}
 		}
+		else if (selection != null && selection.getSelectedItems() != null 
+				&& !selection.getSelectedItems().isEmpty() && selection.getSelectedItems().get(0) instanceof BTSWord)
+		{
+			if (selection.getParentObject() != null && !selection.getParentObject().equals(text))
+			{
+				setSelection((BTSCorpusObject) selection.getParentObject());
+			}
+			currentWord = (BTSWord) selection.getSelectedItems().get(0);
+			selectionCached = true;
+		}
 	}
 	
+		
 	@Inject
 	@Optional
 	void eventReceivedClearLemmatizerDataEvents(
@@ -642,6 +750,16 @@ public class EgyLemmatizerPart implements SearchViewer {
 					.create(editingDomain, currentWord, BtsCorpusModelPackage.Literals.BTS_WORD__FLEX_CODE, null);
 			compoundCommand.append(command);
 			
+			// remove all translations
+			for (BTSTranslation trans : currentWord.getTranslation().getTranslations())
+			{
+				command = SetCommand
+						.create(editingDomain, trans, 
+								BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE, 
+								"");
+				compoundCommand.append(command);
+			}
+			
 			editingDomain.getCommandStack().execute(
 					compoundCommand);
 			wordTranslate_Editor.setTranslationText("");
@@ -668,11 +786,29 @@ public class EgyLemmatizerPart implements SearchViewer {
 					loadingLemmaProposals(currentWord);
 				}
 				setUserMayEdit(userMayEdit);
+				
+				// FIXME anpassen an LemmaEditor!!!
+//				if (text == null)
+//				{
+//					text = (BTSText) findRecursivelyParent(currentWord);
+//				}
 			}
 		}
 
 	}
 
+	private EObject findRecursivelyParent(EObject object) {
+		if (object.eContainer() == null) {
+			return object;
+		} else {
+			if (object.eContainer() instanceof BTSText) {
+				return (BTSText) object.eContainer();
+			} else {
+				return findRecursivelyParent(object.eContainer());
+			}
+		}
+	}
+	
 	private void clearProposals() {
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
@@ -682,6 +818,26 @@ public class EgyLemmatizerPart implements SearchViewer {
 			public void run() {
 				lemmaViewer.setInput(lemmaRootNode);
 				translationViewer.setInput(new String[]{});
+			}
+		});
+
+	}
+	
+	private void clearAllInput() {
+		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
+				.createTreeNodeWrapper();
+		// If you want to update the UI
+		sync.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				lemmaViewer.setInput(lemmaRootNode);
+				translationViewer.setInput(new String[]{});
+				lemmaID_text.setText("");
+				lemmaName_text.setText("");
+				lemmaViewerSearchFilter.setFilterString("");
+				flex_text.setText("");
+				textSelectedWord.setText("");
+				loadTranslation(null);
 			}
 		});
 
@@ -916,7 +1072,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			lemmaName_text.setEditable(mayEdit);
 			flex_text.setEditable(mayEdit);
 			wordTranslate_Editor.setEnabled(mayEdit);
-			lemmaViewer.getList().setEnabled(mayEdit);
+			lemmaViewer.getTable().setEnabled(mayEdit);
 			flexionViewer.getList().setEnabled(mayEdit);
 			translationViewer.getList().setEnabled(mayEdit);
 		}

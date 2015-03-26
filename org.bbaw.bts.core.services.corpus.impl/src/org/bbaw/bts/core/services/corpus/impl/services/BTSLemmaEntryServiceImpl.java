@@ -8,12 +8,16 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
@@ -21,6 +25,8 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
@@ -34,16 +40,26 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	
 	private final static Pattern deletionPattern = Pattern.compile(BTSCorpusConstants.LEMMATIZER_DELETION_PATTERN);
 	
+
+	
 	@Inject
 	private BTSLemmaEntryDao lemmaEntryDao;
 
+	@Inject
+	private BTSAnnotationService annotationService;
+	
 	@Override
 	public BTSLemmaEntry createNew()
 	{
+		if (main_lemmaList_key == null || "".equals(main_lemmaList_key))
+		{
+			main_lemmaList_key = main_project;
+		}
 		BTSLemmaEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSLemmaEntry();
-		entry.setDBCollectionKey(main_project + BTSCorpusConstants.WLIST);
+		entry.setDBCollectionKey(main_lemmaList_key + BTSCorpusConstants.WLIST);
+		entry.setCorpusPrefix(main_lemmaList_key + BTSCorpusConstants.WLIST);
 
-		entry.setCorpusPrefix(main_corpus_key);
+		entry.setProject(main_lemmaList_key);
 		super.setId(entry, entry.getDBCollectionKey());
 		super.setRevision(entry);
 
@@ -84,7 +100,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		{
 			return entry;
 		}
-		for (String p : getActiveProjects())
+		for (String p : getActiveLemmaLists())
 		{
 			try {
 				entry = lemmaEntryDao.find(key, p + BTSCorpusConstants.WLIST);
@@ -100,11 +116,13 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		return null;
 	}
 
+	
+
 	@Override
 	public List<BTSLemmaEntry> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
-		for (String p : getActiveProjects())
+		for (String p : getActiveLemmaLists())
 		{
 			try {
 				entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
@@ -121,7 +139,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			boolean registerQuery, IProgressMonitor monitor)
 	{
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
-		for (String p : getActiveProjects())
+		for (String p : getActiveLemmaLists())
 		{
 
 			try {
@@ -169,7 +187,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Override
 	public List<BTSLemmaEntry> listRootEntries(IProgressMonitor monitor) {
 		List<BTSLemmaEntry> entries = new Vector<BTSLemmaEntry>();
-		for (String p : getActiveProjects()) {
+		for (String p : getActiveLemmaLists()) {
 			entries.addAll(lemmaEntryDao.list(p + BTSCorpusConstants.WLIST,
 					DaoConstants.VIEW_LEMMA_ROOT_ENTRIES, BTSConstants.OBJECT_STATE_ACTIVE));
 		}
@@ -246,5 +264,20 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			chars = chars.replaceAll(b, "");
 		}
 		return chars;
+	}
+
+	@Override
+	public BTSAnnotation createNewAnnotationRelationPartOf(
+			BTSCorpusObject annotatedObject) {
+		BTSAnnotation anno = annotationService
+				.createNewRelationPartOf(annotatedObject);
+		if (main_lemmaList_key == null || "".equals(main_lemmaList_key))
+		{
+			main_lemmaList_key = main_project;
+		}
+		anno.setDBCollectionKey(main_lemmaList_key + BTSCorpusConstants.WLIST);
+		anno.setCorpusPrefix(main_lemmaList_key + BTSCorpusConstants.WLIST);
+		anno.setProject(main_lemmaList_key);
+		return anno;
 	}
 }

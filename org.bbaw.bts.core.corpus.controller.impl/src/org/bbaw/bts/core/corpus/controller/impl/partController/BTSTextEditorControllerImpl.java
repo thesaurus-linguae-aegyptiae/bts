@@ -1076,6 +1076,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						} else {
 							mdc = (String) o;
 						}
+						if (mdc == null) continue;
 						if (result.length() == 0 || result.endsWith("-") || mdc.startsWith("-") || mdc.startsWith(":"))
 						{
 							result += mdc;
@@ -1363,14 +1364,14 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 
 	@Override
-	public boolean testTextValidAgainstGrammar(BTSText text) {
+	public boolean testTextValidAgainstGrammar(BTSTextContent textContent, BTSObject object) {
 		try {
 			Document doc = new Document();
-			transformToDocument(text.getTextContent(), doc, null, null, null, null, null);
+			transformToDocument(textContent, doc, null, null, null, null, null);
 			Injector injector = findEgyDslInjector();
 			 XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
 			 resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
-			 Resource resource = resourceSet.createResource(URI.createURI("dummy:/" + text.get_id() + ".egydsl"));
+			 Resource resource = resourceSet.createResource(URI.createURI("dummy:/" + object.get_id() + ".egydsl"));
 			 InputStream in = new ByteArrayInputStream(doc.get().getBytes(Charset.forName("UTF-8")));
 			 try {
 				resource.load(in, resourceSet.getLoadOptions());
@@ -1448,5 +1449,12 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			}
 		}
 		return invalidtexts;
+	}
+
+
+
+	private boolean testTextValidAgainstGrammar(BTSText t) {
+		
+		return testTextValidAgainstGrammar(t.getTextContent(), t);
 	}
 }

@@ -26,8 +26,10 @@ public class BTSTextSelectionEvent extends Event {
 	
 	private String endId;
 	private TypedEvent originalEvent;
+	
+	private BTSObject parentObject;
 
-	public BTSTextSelectionEvent(TypedEvent event) {
+	public BTSTextSelectionEvent(TypedEvent event, BTSObject parentObject) {
 		this.setOriginalEvent(event);
 		this.display = event.display;
 		this.widget = event.widget;
@@ -43,6 +45,7 @@ public class BTSTextSelectionEvent extends Event {
 			this.text = ((SelectionEvent)event).text;
 			
 		}
+		this.setParentObject(parentObject);
 	}
 
 	public List<BTSObject> getRelatingObjects() {
@@ -100,6 +103,14 @@ public class BTSTextSelectionEvent extends Event {
 
 	public void setOriginalEvent(TypedEvent originalEvent) {
 		this.originalEvent = originalEvent;
+	}
+
+	public BTSObject getParentObject() {
+		return parentObject;
+	}
+
+	public void setParentObject(BTSObject parentObject) {
+		this.parentObject = parentObject;
 	}
 	
 }

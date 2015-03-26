@@ -138,6 +138,7 @@ public class PassportEditorPart {
 	@Inject
 	private BTSResourceProvider resourceProvider;
 	@Inject
+	@Optional
 	private MDirtyable dirty;
 	@Inject
 	private EditingDomainController editingDomainController;
@@ -196,7 +197,6 @@ public class PassportEditorPart {
 	private BTSCorpusObject corpusObject;
 	private Composite mainComposite;
 	private int selectionIndex;
-	private boolean loaded;
 	private Map<BTSConfigItem, PassportEntryEditorComposite> passportCategoryMap = new HashMap<BTSConfigItem, PassportEntryEditorComposite>();
 	private EditingDomain editingDomain;
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
@@ -217,6 +217,14 @@ public class PassportEditorPart {
 	private Label moveAmongProjectsButton;
 	private Label moveAmongCorporaButton;
 
+	// boolean if object is loaded into gui
+	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;	
 
 	@Inject
 	public PassportEditorPart() {
@@ -249,8 +257,8 @@ public class PassportEditorPart {
 		createIdentifiersTabItem(tabFolder);
 		// createGenericTabItems(tabFolder);
 
-		loaded = true;
-		if (corpusObject != null) {
+		constructed = true;
+		if (selectionCached) {
 			loadInput(corpusObject);
 		}
 		partService.bringToTop(partService
@@ -861,23 +869,24 @@ public class PassportEditorPart {
 		if (selection == null) {
 			/* implementation not shown */
 		} else {
-			if (selection instanceof BTSCorpusObject) {
+			if (selection instanceof BTSCorpusObject) { // concerned by selection
 				if (selection != null && !selection.equals(corpusObject)) {
-					System.out.println("old selection " + corpusObject);
-					// TODO make save configurable this is autosave!!!
-					if (save_on_deselection)
-					{
-						save();
-					}
-					corpusObject = (BTSCorpusObject) selection;
-					if (parent != null && !parent.isDisposed())
-					{
-						delayedSetSeletction((BTSCorpusObject) selection);
-					}
 					
+					if (constructed)
+					{
+						if (loaded && save_on_deselection && corpusObject != null)
+						{
+							save();
+						}
+						corpusObject = (BTSCorpusObject) selection;
+						if (parent != null && !parent.isDisposed())
+						{
+							delayedSetSeletction((BTSCorpusObject) selection);
+						}
+					}
+
 				}
 			}
-			System.out.println("Passport selection received");
 		}
 	}
 
@@ -887,14 +896,23 @@ public class PassportEditorPart {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				synchronized (corpusObject) {
-					if (loaded && corpusObject != null) {
+					if (corpusObject != null) {
 
 						if (corpusObject.equals(jobSelection)) {
 							sync.asyncExec(new Runnable() {
 
 								@Override
 								public void run() {
-									loadInput(corpusObject);
+									if (partService.isPartVisible(part))
+									{
+										loadInput(corpusObject);
+									}
+									else
+									{
+										// cache selection
+										selectionCached = true;
+										loaded = false;
+									}
 									part.setLabel(corpusObject.getName());
 
 								}
@@ -917,7 +935,6 @@ public class PassportEditorPart {
 			object.setPassport(BtsCorpusModelFactory.eINSTANCE.createBTSPassport());
 			setDirty(true);
 		}
-		
 		if (mainComposite == null || mainComposite.isDisposed())
 		{
 			mainComposite = new Composite(parent, SWT.NONE);
@@ -996,7 +1013,7 @@ public class PassportEditorPart {
 			reloadGenericTabItem(ti);
 		}
 		setUserMayEditInteral(userMayEdit);
-
+		loaded = true;
 	}
 
 	protected void loadIdentifiersTabItem(CTabItem tabItem, CTabFolder folder) {
@@ -1071,20 +1088,26 @@ public class PassportEditorPart {
 								.getCommandStack().getUndoCommand())) {
 							// normal command or redo executed
 							localCommandCacheSet.add(mostRecentCommand);
-							if (localCommandCacheSet.isEmpty()) {
-								dirty.setDirty(false);
-							} else if (!dirty.isDirty()) {
-								dirty.setDirty(true);
+							if (dirty != null)
+							{	
+								if (localCommandCacheSet.isEmpty()) {
+									dirty.setDirty(false);
+								} else if (!dirty.isDirty()) {
+									dirty.setDirty(true);
+								}
 							}
 							// if redo, check if reload required
 							checkAndReload(mostRecentCommand);
 						} else {
 							// undo executed
-							if (localCommandCacheSet.remove(mostRecentCommand)
-									&& localCommandCacheSet.isEmpty()) {
-								dirty.setDirty(false);
-							} else if (!dirty.isDirty()) {
-								dirty.setDirty(true);
+							if (dirty != null)
+							{
+								if (localCommandCacheSet.remove(mostRecentCommand)
+										&& localCommandCacheSet.isEmpty()) {
+									dirty.setDirty(false);
+								} else if (!dirty.isDirty()) {
+									dirty.setDirty(true);
+								}
 							}
 							checkAndReload(mostRecentCommand);
 						}
@@ -1200,8 +1223,11 @@ public class PassportEditorPart {
 	}
 
 	private void setDirty(boolean dirty) {
-		this.dirty.setDirty(dirty);
-		System.out.println("passporteditor set dirty");
+		if (this.dirty != null)
+		{
+			this.dirty.setDirty(dirty);
+			System.out.println("passporteditor set dirty");
+		}
 	}
 
 	private void purgeAll() {
@@ -1395,6 +1421,10 @@ public class PassportEditorPart {
 
 	@Focus
 	public void onFocus() {
+		if (!loaded && selectionCached) // not yet loaded but has cached selection
+		{
+			delayedSetSeletction(corpusObject);
+		}
 		if (!tabFolder.isDisposed()) {
 			tabFolder.setFocus();
 
@@ -1410,7 +1440,7 @@ public class PassportEditorPart {
 
 	@Persist
 	public boolean save() {
-		if (dirty.isDirty()) {
+		if (dirty != null && dirty.isDirty()) {
 
 			boolean success = passportEditorController.save(corpusObject);
 			dirty.setDirty(!success);
@@ -1440,7 +1470,7 @@ public class PassportEditorPart {
 
 	private void setUserMayEditInteral(boolean mayEdit) {
 		this.userMayEdit = mayEdit;
-		if (loaded && parent != null && !parent.isDisposed())
+		if (constructed && parent != null && !parent.isDisposed())
 		{
 			text.setEditable(mayEdit);
 			reviewCMB_Admin.setEnabled(mayEdit);

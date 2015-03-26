@@ -25,6 +25,10 @@ public class BTSPluginIDs
 	public static final String PREF_ACTIVE_PROJECTS = "active_projects";
 
 	public static final String PREF_MAIN_PROJECT_KEY = "main_project_key";
+	
+	public static final String PREF_MAIN_LEMMALIST_KEY = "main_lemmalist_key";
+
+	public static final String PREF_ACTIVE_LEMMALISTS = "active_lemmalists";
 
 	public static final String PREF_ACTIVE_CORPORA = "active_corpora";
 
@@ -93,5 +97,6 @@ public class BTSPluginIDs
 	public static final String PART_ID_ANNOTATION_PART = "org.bbaw.bts.ui.corpus.part.AnnotationsPart";
 
 	public static final String PART_ID_EGY_TEXTTRANSLATION = "org.bbaw.bts.ui.corpus.egy.part.translationPart";
+
 
 }

@@ -7,6 +7,7 @@ Bundle-ClassPath: .
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.main.dialogs,
  org.bbaw.bts.ui.main.handlers,
+ org.bbaw.bts.ui.main.provider,
  org.bbaw.bts.ui.main.widgets,
  org.bbaw.bts.ui.main.wizards.installation,
  org.bbaw.bts.ui.main.wizards.newProject,

@@ -56,6 +56,7 @@ import javax.inject.Named;
 import jsesh.editor.JMDCEditor;
 
 import org.bbaw.bts.btsmodel.BTSComment;
+import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -124,8 +125,10 @@ import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.text.Document;
@@ -186,6 +189,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	
 
 	/** The dirty. */
+	@Optional
 	@Inject
 	private MDirtyable dirty;
 
@@ -372,11 +376,24 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	private Boolean userMayEdit;
 	
 	/** The parent shell. */
+	@Optional
 	@Inject
 	@Active
 	private Shell parentShell;
 
+	// boolean if object is loaded into gui
 	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;
+
+	@Inject
+	@Active
+	@Optional
+	private Shell shell;
 
 	
 	/**
@@ -397,7 +414,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@SuppressWarnings("restriction")
 	@PostConstruct
-	public void createComposite(Composite parent) {
+	public void postConstruct(Composite parent) {
+		
+		if (parentShell == null)
+		{
+			parentShell = new Shell();
+		}
 		this.parent = parent;
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
@@ -425,13 +447,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				public void widgetSelected(SelectionEvent e) {
 					int oldSelection = tabSelection;
 					tabSelection = tabFolder.getSelectionIndex();
+					boolean canSwitch = true;
 					if (tabSelection == oldSelection) {
 						return;
 					} else {
 						// update model from old selection editor
 						switch (oldSelection) {
 						case 0: {
-							updateModelFromTranscription();
+							canSwitch = updateModelFromTranscription();
 							break;
 						}
 						case 1: {
@@ -443,6 +466,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							updateModelFromJSesh();
 							break;
 						}
+						}
+						
+						// reset selection if switching selection is not permitted!
+						if (!canSwitch)
+						{
+							tabFolder.setSelection(oldSelection);
+							tabSelection = oldSelection;
+							return;
 						}
 
 						try{
@@ -739,7 +770,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		sashForm.setWeights(new int[] { 6, 1 });
 		parent.layout();
 
-		loaded = true;
+		constructed = true;
+		if (selectionCached)
+		{
+			loadInput(text);
+		}
 	}
 
 	/**
@@ -806,7 +841,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * Update model from transcription.
 	 */
 	@SuppressWarnings("restriction")
-	protected void updateModelFromTranscription() {
+	protected boolean updateModelFromTranscription() {
 		if (text != null) {
 			IAnnotationModel am = embeddedEditor.getViewer()
 					.getAnnotationModel();
@@ -821,6 +856,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						}
 					});
 			EObject eo = objects.get(0);
+			Resource resource = eo.eResource();
+			boolean valid = checkResourceErrors(resource);
+			if (!valid)
+			{
+				if (shell == null) shell = new Shell();
+				MessageDialog dialog = new MessageDialog(shell, "Errors in Text - Possible Data Loss", null,
+					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
+					    + "\n\nIt is not recommended to save a text which contains errors!"
+					    + "\n\nAre you sure that you want to risk data loss and save with errors?", MessageDialog.WARNING,
+					    new String[] { "Don't Save", "Save with Errors" }, 0);
+				int result = dialog.open();
+				if (result == 0) return false;
+				
+			}
+
+			
 			if (eo instanceof TextContent) {
 				text.setTextContent(textEditorController
 						.updateModelFromTextContent(text.getTextContent(), eo,
@@ -828,6 +879,26 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 		}
 
+		return true;
+	}
+
+	private boolean checkResourceErrors(Resource resource) {
+		if (resource.getErrors().isEmpty())
+		{
+			return true;
+		}
+		else if (resource.getErrors().size() == 2)
+		{
+			// exception: if errors only concern beginning and end of file
+			if (resource.getErrors().get(0).getMessage() != null 
+					&& resource.getErrors().get(0).getMessage().equals("extraneous input '\\r' expecting '§'")
+					&& resource.getErrors().get(1).getMessage() != null 
+					&& resource.getErrors().get(1).getMessage().equals("mismatched input '<EOF>' expecting '§'"))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -1043,7 +1114,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param event the event
 	 */
 	protected void processTextSelection(TypedEvent event) {
-		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
+		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
 		// System.out.println("Textselection x y : " + btsEvent.x + " " +
 		// btsEvent.y);
 		btsEvent.data = text;
@@ -1062,7 +1133,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processEditorSelection(Object item) {
 		TypedEvent event = new TypedEvent(item);
-		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
+		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
 		// System.out.println("Textselection x y : " + btsEvent.x + " " +
 		// btsEvent.y);
 		btsEvent.data = text;
@@ -1236,7 +1307,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * Sets the dirty internal.
 	 */
 	protected void setDirtyInternal() {
-		if (text != null && !dirty.isDirty()) {
+		if (text != null && dirty != null && !dirty.isDirty()) {
 			dirty.setDirty(true);
 		}
 
@@ -1541,65 +1612,59 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			return;
 		} else if (selection != null && !selection.equals(selectedTextItem)) {
 
-			if (selection instanceof BTSCorpusObject) {
-				
-				// TODO save configurable this is autosave!!!
-				if (text != null) {
-					if (editingDomain != null) {
-						editingDomain.getCommandStack()
-								.removeCommandStackListener(
-										commandStackListener);
+			if (selection instanceof BTSCorpusObject) // concered by selection event
+			{
+				if (constructed) // gui constructed
+				{
+					// TODO save configurable this is autosave!!!
+					if (loaded && text != null) {
+						save();
 					}
-					save();
-				}
-				if (selection instanceof BTSText) {
-					purgeCache();
-					part.setLabel(selection.getName());
-					makePartActive(true);
-					bringPartToFront(true);
-					loadInput((BTSCorpusObject) selection);
 					
+					if (selection instanceof BTSText) { // requires load
+						purgeCacheAndEditingDomain();
+						part.setLabel(selection.getName());
+						makePartActive(true);
+						bringPartToFront(true);
+						loadInput((BTSCorpusObject) selection);
+						editingDomain = editingDomainController
+								.getEditingDomain(text);
+						editingDomain.getCommandStack().addCommandStackListener(
+								getCommandStackListener());
 
-				} else {
-					purgeCache();
-					loadInput(null);
-					if (part != null) {
-						part.setLabel("EgyTextEditor");
+					} else if (loaded) { // requires clear
+						purgeCacheAndEditingDomain();
+						loadInput(null);
+						if (part != null) {
+							part.setLabel("EgyTextEditor");
+						}
+						text = null;
+						selectionCached = false;
+						makePartActive(false);
 					}
-					text = null;
-					makePartActive(false);
+				}
+				else if (selection instanceof BTSText)	// not constructed, cache selection
+				{
+					text = (BTSText) selection;
+					selectionCached = true;
 				}
 			}
+			
+			
 			if ((selection instanceof BTSText)) {
 				selfSelecting = false;
 			}
 
 			selectedTextItem = selection;
-			if (editingDomain != null) {
-				editingDomain.getCommandStack().removeCommandStackListener(
-						commandStackListener);
-			}
-			editingDomain = editingDomainController
-					.getEditingDomain(selectedTextItem);
-			editingDomain.getCommandStack().addCommandStackListener(
-					getCommandStackListener());
-//			if (!selfSelecting) {
-//				if (selection == null) {
-//					/* implementation not shown */
-//				} else {
-//
-//				}
-//			}
+			
+			
+
 			if (selection instanceof BTSWord) {
 				setSentenceTranslation((BTSWord) selection);
 			} else if (selection instanceof BTSSenctence) {
 				setSentenceTranslation((BTSSenctence) selection);
 			}
-			// if (selection instanceof BTSSentenceItem) {
-			// setSentenceItemSelection((BTSSentenceItem) selection);
-			// FIXME direkt �ber editor, nicht �ber annotationmodel,
-			// funktioniert daher nicht zuverl�ssig
-			// }
+
 		}
 	}
 
@@ -1635,7 +1700,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param b the b
 	 */
 	private void bringPartToFront(boolean b) {
-		partService.bringToTop(part);
+		try {
+			partService.bringToTop(part);
+		} catch (Exception e) {
+		}
 		
 	}
 
@@ -1657,17 +1725,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								.getCommandStack().getUndoCommand())) {
 							// normal command or redo executed
 							localCommandCacheSet.add(mostRecentCommand);
-							if (localCommandCacheSet.isEmpty()) {
+							if (dirty != null && localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
-							} else if (!dirty.isDirty()) {
+							} else if (dirty != null && !dirty.isDirty()) {
 								setDirtyInternal();
 							}
 						} else {
 							// undo executed
 							if (localCommandCacheSet.remove(mostRecentCommand)
-									&& localCommandCacheSet.isEmpty()) {
+									&& localCommandCacheSet.isEmpty() && dirty != null) {
 								dirty.setDirty(false);
-							} else if (!dirty.isDirty()) {
+							} else if (dirty != null && !dirty.isDirty()) {
 								setDirtyInternal();
 							}
 						}
@@ -1802,6 +1870,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		if (tabFolder != null && o instanceof BTSText) {
 
 			this.text = (BTSText) o;
+			
 			if (text != null) {
 				try {
 					IRunnableWithProgress op = new IRunnableWithProgress() {
@@ -1837,6 +1906,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									}
 									}
 									setUserMayEditInteral(userMayEdit);
+									loaded = true;
 								}
 							});
 							
@@ -1871,8 +1941,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			// plainTextEditor.setText(((BTSText) o).getCode());
 		} else if (tabFolder != null && o == null) {
-			purgeCache();
 			this.text = null;
+			loaded = false;
+
 			relatingObjects = null;
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
@@ -1947,7 +2018,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	/**
 	 * Purge cache.
 	 */
-	private void purgeCache() {
+	private void purgeCacheAndEditingDomain() {
 
 		selectedSentence = null;
 		lemmataLoaded = false;
@@ -1959,6 +2030,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			editingDomain.getCommandStack().removeCommandStackListener(
 					commandStackListener);
 		}
+		editingDomain = null;
 		if (relatingObjectsMap != null) {
 			relatingObjectsMap.clear();
 		}
@@ -1969,6 +2041,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@Focus
 	public void setFocus() {
+		if (!loaded && selectionCached) // not yet loaded but has cached selection
+		{
+			loadInput(text);
+		}
+		
+		// now set focus on specific editor pane
 		if (tabFolder != null && text != null) {
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
@@ -1996,11 +2074,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@Persist
 	public boolean save() {
-		if (text != null && dirty.isDirty()) {
-			localCommandCacheSet.clear();
+		if (text != null && dirty != null && dirty.isDirty()) {
+			boolean canSave = true;
 			switch (tabFolder.getSelectionIndex()) {
 			case 0: {
-				updateModelFromTranscription();
+				canSave = updateModelFromTranscription();
 				break;
 			}
 			case 1: {
@@ -2012,6 +2090,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				break;
 			}
 			}
+			if (!canSave)
+			{
+				return false;
+			}
+			localCommandCacheSet.clear();
+
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
 			dirty.setDirty(!success);
@@ -2152,15 +2236,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Inject
 	@Optional
 	void eventReceivedUpdates(
-			@EventTopic("model_update/*") BTSModelUpdateNotification notification) {
+			@EventTopic("model_update/*") final BTSModelUpdateNotification notification) {
 		logger.info("EgyTextEditorPart eventReceivedUpdates. object: "
 				+ notification);
 		if (notification.getQueryIds() != null) {
-			for (String id : notification.getQueryIds()) {
-				if (id.equals(queryId)) {
-					processModelUpdate(notification, id);
+			
+			sync.asyncExec(new Runnable() {
+				@Override
+				public void run() {
+					for (String id : notification.getQueryIds()) {
+						if (id.equals(queryId)) {
+							processModelUpdate(notification, id);
+						}
+					}
 				}
-			}
+			});
+			
 		}
 	}
 
@@ -2190,17 +2281,33 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	private void processModelUpdate(BTSModelUpdateNotification notification,
 			String id) {
-		if (relatingObjects != null
-				&& !relatingObjects.contains(notification.getObject())) {
-			relatingObjects.add((BTSObject) notification.getObject());
-		} else {
+		if (notification.getObject() instanceof BTSObject)
+		{
+			if (relatingObjects != null)
+			{
+				String state = ((BTSObject)notification.getObject()).getState();
+				if (BTSConstants.OBJECT_STATE_ACTIVE.equals(state))
+				{
+					if (!relatingObjects.contains(notification.getObject())) 
+					{
+						relatingObjects.add((BTSObject) notification.getObject());
+					}
+				}
+				else
+				{
+					relatingObjects.remove((BTSObject) notification.getObject());
+				}
+			}
 		}
 		switch (tabFolder.getSelectionIndex()) {
 		case 0: {
 			addAnnotationToTranscription(notification);
+			addAnnotationToSignText(notification);
+
 			break;
 		}
 		case 1: {
+			addAnnotationToTranscription(notification);
 			addAnnotationToSignText(notification);
 			break;
 		}

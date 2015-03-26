@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.corpus.controller.impl.generalController;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
@@ -13,11 +14,14 @@ import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.comparator.BTSConfigSortKeyLabelSorter;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -43,6 +47,7 @@ public class PassportConfigurationControllerImpl implements
 				}
 			}
 		}
+		Collections.sort(filteredChildren, new BTSConfigSortKeyLabelSorter(lang));
 		return filteredChildren;
 	}
 
@@ -56,7 +61,9 @@ public class PassportConfigurationControllerImpl implements
 	@Override
 	public List<BTSConfigItem> getPassportCategories(BTSCorpusObject corpusObject)
 	{
-		return configService.getPassportCategories(corpusObject);
+		List<BTSConfigItem> categories = configService.getPassportCategories(corpusObject); 
+		Collections.sort(categories, new BTSConfigSortKeyLabelSorter(lang));
+		return categories;
 		
 	}
 
@@ -102,17 +109,24 @@ public class PassportConfigurationControllerImpl implements
 	public BTSConfigItem getPathConfigItemProcessedClones(
 			BTSConfigItem itemConfig, BTSCorpusObject corpusObject) {
 		BTSConfig configuration = configService.getActiveConfiguration();
-		BTSObjectTypeTreeNode rootpath = null;
+		BTSObjectTypeTreeNode rootpath = null; //BtsviewmodelFactory.eINSTANCE.createBTSObjectTypeTreeNode();
 		
-		//FIXME update
-//		if (itemConfig != null) {
-//			rootpath = itemConfig.getPassportEditorConfig()
-//				.getReferencedTypesPath();
-//		}
 		BTSConfigItem pathClonesList = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
-		configService.calculateChildrenRecurcively(rootpath, configuration, pathClonesList,
-				corpusObject);
+		// list BTSObjectTypeTreeNodes that match given BTSCorpusObject
+		pathClonesList = configService.calculateReferencedConfigItemsProcessedClones(itemConfig, configuration, corpusObject);
+//		pathClonesList
+//		// for these BTSObjectTypeTreeNodes, walk there referenceObjects, retrieve referenced BTSConfigItem and add it to children of rootpath
+//		configService.calculateChildrenReferncedObjectsRecurcively(rootpath, configuration, pathClonesList, corpusObject);
+//		
+//		//FIXME update
+////		if (itemConfig != null) {
+////			rootpath = itemConfig.getPassportEditorConfig()
+////				.getReferencedTypesPath();
+////		}
+//
+//		configService.calculateChildrenRecurcively(rootpath, configuration, pathClonesList,
+//				corpusObject);
 
 		return pathClonesList;
 	}
@@ -131,6 +145,17 @@ public class PassportConfigurationControllerImpl implements
 			}		
 		}
 		return oClass;
+	}
+
+	@Override
+	public BTSObjectTypeSubtypeViewerFilter createObjectTypeSubtypeFilterByReferencedPath(
+			BTSCorpusObject corpusObject, BTSConfigItem itemConfig) {
+		BTSObjectTypeSubtypeViewerFilter filter = new BTSObjectTypeSubtypeViewerFilter();
+		List<String> strings = 	configService.getListOfReferencedObjectTypeSubtypesOfObject(corpusObject, itemConfig);
+		List<Object> obj = new Vector<Object>(strings.size());
+		obj.addAll(strings);
+		filter.setObjects(obj);
+		return filter;
 	}
 
 	

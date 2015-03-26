@@ -1,11 +1,14 @@
 package org.bbaw.bts.core.services.impl.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfig;
@@ -17,9 +20,11 @@ import org.bbaw.bts.btsmodel.BTSTranslation;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.comparator.BTSConfigSortKeyLabelSorter;
 import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
@@ -29,6 +34,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.EcoreUtil.Copier;
@@ -47,6 +53,10 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Inject
 	@Preference(value = BTSPluginIDs.ACTIVE_CONFIGURATION, nodePath = "org.bbaw.bts.app")
 	protected String active_configuration_name;
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_LABEL_MAP)
+	private HashMap<String, String> typeSubtypeLabelMap;
 	@Override
 	public BTSConfiguration createNew()
 	{
@@ -346,7 +356,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			String oClass = findObjectClass(object);
 			String oType = object.getType();
 			String oSubtype = object.getSubtype();
-			return objectTypesPathContainsObject(ownerTypesMap, oClass,
+			return objectTypesPathMapContainsObject(ownerTypesMap, oClass,
 					oType, oSubtype, 2);
 
 		}
@@ -479,26 +489,26 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 				{
 					if (grandGrandChild != null)
 					{
-						return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
+						return objectTypesPathMapContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
 								((BTSConfigItem) child).getValue(), 
 								((BTSConfigItem) grandChild).getValue(), 3);
 					}
-					return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
+					return objectTypesPathMapContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
 							((BTSConfigItem) child).getValue(), 
 							((BTSConfigItem) grandChild).getValue(), 3);
 				}
-				return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
+				return objectTypesPathMapContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
 						((BTSConfigItem) child).getValue(), 
 						null, 2);
 			}
-			return objectTypesPathContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
+			return objectTypesPathMapContainsObject(ownerTypesMap, ((BTSConfigItem) root).getValue(),
 					null, 
 					null, 1);
 		}
 		return false;
 	}
 	
-	private boolean objectTypesPathContainsObject(
+	private boolean objectTypesPathMapContainsObject(
 			Map<String, List<String>> ownerTypesMap, String oClass,
 			String oType, String oSubtype, int level) {
 		if (ownerTypesMap.containsKey(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
@@ -509,10 +519,20 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		{
 			return true;
 		}
+		else if (ownerTypesMap.containsKey(BTSCoreConstants.OBJECT_TYPES 
+				+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oClass))
+		{
+			return true;
+		}
 		else if (oType != null && !"".equals(oType.trim()))
 				
 		{
 			if (ownerTypesMap.containsKey(oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType))
+			{
+				return true;
+			}
+			else if (ownerTypesMap.containsKey(BTSCoreConstants.OBJECT_TYPES 
+					+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType))
 			{
 				return true;
 			}
@@ -522,10 +542,65 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			{
 				return true;
 			}
+			else if (oSubtype != null && !"".equals(oSubtype.trim()) 
+					&&ownerTypesMap.containsKey(BTSCoreConstants.OBJECT_TYPES 
+							+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR +oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType
+							+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oSubtype))
+			{
+				return true;
+			}
 		}
 		
 		return false;
 	}
+	
+	private boolean objectTypesPathStringContainsObject(
+			String ownerType, String oClass,
+			String oType, String oSubtype) {
+		if (ownerType == null) return false;
+		if (ownerType.equals(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
+		{
+			return true;
+		}
+		else if (ownerType.equals(oClass))
+		{
+			return true;
+		}
+		else if (ownerType.equals(BTSCoreConstants.OBJECT_TYPES 
+				+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oClass))
+		{
+			return true;
+		}
+		else if (oType != null && !"".equals(oType.trim()))
+				
+		{
+			if (ownerType.equals(oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType))
+			{
+				return true;
+			}
+			else if (ownerType.equals(BTSCoreConstants.OBJECT_TYPES 
+					+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType))
+			{
+				return true;
+			}
+			else if (oSubtype != null && !"".equals(oSubtype.trim()) 
+					&&ownerType.equals(oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType
+							+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oSubtype))
+			{
+				return true;
+			}
+			else if (oSubtype != null && !"".equals(oSubtype.trim()) 
+					&&ownerType.equals(BTSCoreConstants.OBJECT_TYPES 
+							+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR +oClass + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType
+							+ BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oSubtype))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 
 	@Override
 	public BTSConfigItem getReviewStateConfigItemProcessedClones(
@@ -587,6 +662,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		String className = findObjectClass(object);
 		BTSConfigItem typeClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
+		List<BTSConfig> children = new Vector<BTSConfig>();
 		boolean found = false;
 		if (typesCI != null && typesCI.getChildren() != null) {
 			for (BTSConfig c : typesCI.getChildren()) {
@@ -598,8 +674,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 							if (cc instanceof BTSConfigItem) {
 								BTSConfigItem ci = (BTSConfigItem) cc;
 								if (!ci.isIgnore()
-) {
-									typeClone.getChildren().add(
+										) {
+									children.add(
 											EcoreUtil.copy(ci));
 									if (object.getType() != null
 											&& !"".equals(object
@@ -621,14 +697,18 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 							ci.getLabel().setTranslation(
 									object.getType(), lang);
 							ci.setValue(object.getType());
-							typeClone.getChildren().add(ci);
+							children.add(ci);
 						}
+						Collections.sort(children, new BTSConfigSortKeyLabelSorter());
+						typeClone.getChildren().addAll(children);
 						return typeClone;
 					}
 				}
 			}
 		}
 
+		Collections.sort(children, new BTSConfigSortKeyLabelSorter());
+		typeClone.getChildren().addAll(children);
 		return typeClone;
 	}
 
@@ -687,6 +767,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		String className = findObjectClass(object);
 		BTSConfigItem subtypeClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
+		List<BTSConfig> children = new Vector<BTSConfig>();
+
 		boolean found = false;
 		if (typesCI != null && typesCI.getChildren() != null) {
 			for (BTSConfig c : typesCI.getChildren()) {
@@ -705,7 +787,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 										if (cc instanceof BTSConfigItem) {
 											BTSConfigItem cci = (BTSConfigItem) ccc;
 											if (!cci.isIgnore()) {
-												subtypeClone.getChildren().add(
+												children.add(
 														EcoreUtil
 														.copy(cci));
 												if (object.getSubtype() != null
@@ -743,7 +825,9 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 											.createBTSTranslations());
 									ci2.getLabel().setTranslation("", lang);
 									ci2.setValue(null);
-									subtypeClone.getChildren().add(ci2);
+									children.add(ci2);
+									Collections.sort(children, new BTSConfigSortKeyLabelSorter());
+									subtypeClone.getChildren().addAll(children);
 									return subtypeClone;
 								}
 							}
@@ -754,6 +838,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			}
 		}
 
+		Collections.sort(children, new BTSConfigSortKeyLabelSorter());
+		subtypeClone.getChildren().addAll(children);
 		return subtypeClone;
 	}
 
@@ -840,6 +926,196 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 		return config;
 	}
+
+	@Override
+	public String getLabelOfTypeSubtypeString(BTSObject object) {
+		String str = object.getType();
+		if (str == null) return null;
+		BTSConfigItem objectTypesCI = getObjectTypesConfigItem();
+		if (objectTypesCI == null) return null;
+		String oClass = findObjectClass((BTSObject) object);
+		String labelKeyString = oClass;
+		if (str != null)
+		{
+			labelKeyString+= "/" + str;
+		}
+		if (object.getSubtype() != null)
+		{
+			labelKeyString+= "/" + object.getSubtype();
+		}
+		Map<String, String> labelMap = getTypeSubtypeLabelMap();
+		if (labelMap.containsKey(labelKeyString))
+		{
+			return labelMap.get(labelKeyString);
+		}
+		for (BTSConfig c : objectTypesCI.getChildren()) {
+			if (oClass.equals(((BTSConfigItem) c).getValue())) {
+//				str = ((BTSConfigItem) c).getLabel().getTranslation(lang);
+				if (object.getType() == null || "".equals(object.getType())) {
+					return null;
+				} else {
+					for (BTSConfig cc : c.getChildren()) {
+						if (object.getType().equalsIgnoreCase(
+								((BTSConfigItem) cc).getValue())) {
+							str = ((BTSConfigItem) cc).getLabel().getTranslation(lang);
+							if (object.getSubtype() != null
+									&& "".equals(object.getSubtype())) {
+								for (BTSConfig ccc : cc.getChildren()) {
+									if (object.getSubtype().equalsIgnoreCase(
+											((BTSConfigItem) ccc).getValue())) {
+										str = str + "/" + ((BTSConfigItem) ccc).getLabel().getTranslation(lang);
+										labelMap.put(labelKeyString, str);
+										return str;
+									}
+
+								}
+								labelMap.put(labelKeyString, str);
+								return str;
+							} else {
+								labelMap.put(labelKeyString, str);
+								return str;
+							}
+						}
+
+					}
+				}
+			}
+
+		}
+		
+		return null;
+	}
+
+	private Map<String, String> getTypeSubtypeLabelMap() {
+		if (typeSubtypeLabelMap == null)
+		{
+			typeSubtypeLabelMap = new HashMap<String, String>();
+			context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_LABEL_MAP, typeSubtypeLabelMap);
+		}
+		return typeSubtypeLabelMap;
+	}
+
+	@Override
+	public BTSConfigItem calculateReferencedConfigItemsProcessedClones(
+			BTSConfigItem itemConfig, BTSConfig configuration, BTSObject object) {
+		BTSConfigItem rootItem = BtsmodelFactory.eINSTANCE.createBTSConfigItem();
+		if (itemConfig == null || object == null) return rootItem;
+		String oClass = findObjectClass(object);
+		String oType = object.getType();
+		String oSubtype = object.getSubtype();
+		for(String ownerType : itemConfig.getOwnerTypesMap().keySet())
+		{
+			if (objectTypesPathStringContainsObject(ownerType, oClass, oType, oSubtype))
+			{
+				List<String> referencedTypes = itemConfig.getOwnerTypesMap().get(ownerType);
+				if (referencedTypes != null && !referencedTypes.isEmpty())
+				{
+					for (String referencedType : referencedTypes)
+					{
+						BTSConfigItem configItem = findConfigItemByConfigPath(referencedType, configuration);
+						if (configItem != null)
+						{
+							for (BTSConfig cc : configItem.getChildren())
+							{
+								rootItem.getChildren().add(EcoreUtil.copy(cc));
+							}
+						}
+					}
+				}
+			}
+		}
+		return rootItem;
+	}
+
+	private BTSConfigItem findConfigItemByConfigPath(String referencedType, BTSConfig config) {
+		BTSConfig localConfig = null;
+		int index = 1;
+
+		if (referencedType.startsWith(BTSCoreConstants.OBJECT_TYPES))
+		{
+			localConfig = getObjectTypesConfigItem();
+		}
+		else if (config instanceof BTSConfiguration && referencedType.startsWith(((BTSConfiguration)config).get_id()))
+		{
+			localConfig = config;
+		}
+		else
+		{
+			for (BTSConfig child : config.getChildren())
+			{
+				if (child instanceof BTSConfigItem && referencedType.startsWith(((BTSConfigItem)child).getValue()))
+				{
+					localConfig = child;
+					break;
+				}
+			}
+		}
+		if (localConfig == null)
+		{
+			index = 0;
+			localConfig = getActiveConfiguration();
+		}
+		String[] path = referencedType.split("\\" + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR);
+		BTSConfigItem child = findBTSConfigItemByPath(localConfig, path, index);
+		return child;
+	}
+
+	private BTSConfigItem findBTSConfigItemByPath(BTSConfig parentConfig,
+			String[] path, int index) {
+		if (path.length <= index)
+		{
+			if (parentConfig instanceof BTSConfigItem)
+			{
+				return (BTSConfigItem) parentConfig;
+			}
+			return null;
+		}
+		String configValue = path[index];
+		for (BTSConfig child : parentConfig.getChildren())
+		{
+			if (child instanceof BTSConfigItem && configValue.equals(((BTSConfigItem)child).getValue()))
+			{
+				return findBTSConfigItemByPath(child, path, index + 1);
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public List<String> getListOfReferencedObjectTypeSubtypesOfObject(
+			BTSObject object, BTSConfigItem itemConfig) {
+		String oClass = findObjectClass(object);
+		String oType = object.getType();
+		String oSubtype = object.getSubtype();
+		List<String> result = new Vector<String>();
+		for(String ownerType : itemConfig.getOwnerTypesMap().keySet())
+		{
+			if (objectTypesPathStringContainsObject(ownerType, oClass, oType, oSubtype))
+			{
+				List<String> referencedTypes = itemConfig.getOwnerTypesMap().get(ownerType);
+				if (referencedTypes != null && !referencedTypes.isEmpty())
+				{
+					for (String referencedType : referencedTypes)
+					{
+						String path = referencedType;
+						if (path.startsWith(BTSCoreConstants.OBJECT_TYPES))
+						{
+							path = path.substring(BTSCoreConstants.OBJECT_TYPES.length() + 1);
+						}
+
+						result.add(path);
+					}
+				}
+				return result;
+
+			}
+		}
+		// find referenced List in map
+		
+		
+		return null;
+	}
+
 
 
 

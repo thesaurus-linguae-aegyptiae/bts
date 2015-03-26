@@ -591,14 +591,15 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 			default:
 				break;
 			}
-			if (localDBCollContext != null
-					&& !localDBCollContext.equals(dbCollectionContext)) {
-				dbCollectionContext = localDBCollContext;
-				workbenchContext.modify(
-						BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT,
-						dbCollectionContext);
-				evaluateSelectionPermissionsAndExpressions(selection);
-			}
+			//FIXME ist das immer noch notwendig?
+//			if (localDBCollContext != null
+//					&& !localDBCollContext.equals(dbCollectionContext)) {
+//				dbCollectionContext = localDBCollContext;
+//				workbenchContext.modify(
+//						BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT,
+//						dbCollectionContext);
+//				evaluateSelectionPermissionsAndExpressions(selection);
+//			}
 		}
 
 	}

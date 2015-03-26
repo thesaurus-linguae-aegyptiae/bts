@@ -132,6 +132,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	@Inject
 	protected LemmaEditorController lemmaEditorController;
 
+	@Optional
 	@Inject
 	private MDirtyable dirty;
 	
@@ -178,7 +179,6 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private BTSTextXtextEditedResourceProvider xtextResourceProvider = new BTSTextXtextEditedResourceProvider();
 	private Map<String, BTSModelAnnotation> modelAnnotationMap;
 	private BTSTextContent textContent;
-	private boolean loaded;
 	private List<BTSModelAnnotation> highlightedAnnotations = new Vector<BTSModelAnnotation>(4);
 	protected String queryId;
 	
@@ -190,11 +190,18 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 	private Set<Command> localCommandCacheSet = new HashSet<Command>();
 	protected boolean loading;
 	private TranslationEditorComposite lemmaTranslate_Editor;
-	private boolean reload;
 	private AnnotationPainter painter;
 	private HashMap<String, List<Object>> lemmaAnnotationMap;
 	private Job processLemmaAnnotionsJob;
 
+	// boolean if object is loaded into gui
+	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;
 
 	@Inject
 	public EgyLemmaEditorPart(EPartService partService) {
@@ -352,12 +359,10 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 				true, true));
 		lemmaTranslate_Editor.layout();
 		
-//		eventBroker.subscribe("event_text_selection/*", this);
-//		eventBroker.subscribe("event_relating_objects/*", this);
-		loaded = true;
+		constructed = true;
 		
 		// if selection is cached, load it.
-		if (selectedLemmaEntry != null)
+		if (selectionCached)
 		{
 			loadInput(selectedLemmaEntry);
 		}
@@ -371,35 +376,22 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			return;
 		} else if (selection != null && !selection.equals(selectedLemmaEntry)) {
 			if (selection instanceof BTSCorpusObject) {
-//				if (editingDomain != null) {
-//					editingDomain.getCommandStack().removeCommandStackListener(
-//							commandStackListener);
-//				}
 				if (processLemmaAnnotionsJob != null)
 				{
 					processLemmaAnnotionsJob.cancel();
 					processLemmaAnnotionsJob = null;
 				}
-				// manage part title
-				if (selection instanceof BTSLemmaEntry)
-				{
-					part.setLabel(selection.getName());
-				} else {
-					part.setLabel("LemmaEditor");
-
-				}
-
-				// TODO save configurable this is autosave!!!
-				if (loaded)
+				if (constructed)
 				{
 					//save old
-					if (selectedLemmaEntry != null)
+					if (loaded && selectedLemmaEntry != null)
 					{
-					save();
-					purgeCache();
+						save();
 					}
-					if (selection instanceof BTSLemmaEntry) {
-						
+
+					if (selection instanceof BTSLemmaEntry)	// requires load
+					{
+						purgeCacheAndEditingDomain();
 						selectedLemmaEntry = (BTSLemmaEntry) selection;
 						editingDomain = getEditingDomain(selectedLemmaEntry);
 						editingDomain.getCommandStack().addCommandStackListener(
@@ -407,20 +399,23 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 						loadInput((BTSLemmaEntry) selection);
 						makePartActive(true);
 						bringPartToFront(true);
-					}
-					else
-					{
+						loaded = true;
+						part.setLabel(selection.getName()); // manage part title
+
+					} else if (loaded){
+						part.setLabel("LemmaEditor");
+						purgeCacheAndEditingDomain();
+						loaded = false;
 						loadInput(null);
 						makePartActive(false);
-
 						selectedLemmaEntry = null;
 					}
 				}
-				// if not loaded cache selection
+				// if not constructed cache selection
 				else if (selection instanceof BTSLemmaEntry)
 				{
 					selectedLemmaEntry = (BTSLemmaEntry) selection;
-
+					selectionCached = true;
 				}
 			}
 		}
@@ -444,7 +439,10 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 }
 
 private void bringPartToFront(boolean b) {
-	partService.bringToTop(part);
+	try {
+		partService.bringToTop(part);
+	} catch (Exception e) {
+	}
 	
 }
 	
@@ -600,7 +598,7 @@ private void bringPartToFront(boolean b) {
 	}
 	
 	protected void processTextSelection(TypedEvent event) {
-		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
+		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, selectedLemmaEntry);
 //		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
 		btsEvent.data = selectedLemmaEntry;
 		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
@@ -612,7 +610,7 @@ private void bringPartToFront(boolean b) {
 	
 	protected void processEditorSelection(Object item) {
 		TypedEvent event = new TypedEvent(item);
-		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event);
+		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, selectedLemmaEntry);
 //		System.out.println("Textselection x y : " + btsEvent.x + " " + btsEvent.y);
 		btsEvent.data = selectedLemmaEntry;
 		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(btsEvent.x, btsEvent.y, btsEvent);
@@ -843,7 +841,7 @@ private void bringPartToFront(boolean b) {
 		l.add(ma);
 	}
 	protected void setDirtyInternal() {
-		if (selectedLemmaEntry != null && !dirty.isDirty()) {
+		if (selectedLemmaEntry != null && dirty != null && !dirty.isDirty()) {
 			dirty.setDirty(true);
 		}
 		
@@ -890,14 +888,14 @@ private void bringPartToFront(boolean b) {
 		{
 			translations = BtsmodelFactory.eINSTANCE.createBTSTranslations();
 			selection.setTranslations(translations);
-			dirty.setDirty(true);
+			if (dirty != null) dirty.setDirty(true);
 		}
 		lemmaTranslate_Editor.load(translations,
 				editingDomain, false);
 		
 	}
 
-	private void purgeCache() {
+	private void purgeCacheAndEditingDomain() {
 
 //		localCommandCacheSet.clear();
 		textContent = null;
@@ -922,7 +920,10 @@ private void bringPartToFront(boolean b) {
 	
 	@Focus
 	public void onFocus() {
-
+		if (!loaded && selectionCached) // not yet loaded but has cached selection
+		{
+			loadInput(selectedLemmaEntry);
+		}
 		
 
 	}
@@ -957,7 +958,7 @@ private void bringPartToFront(boolean b) {
 				textContent.getTextItems().clear();
 			}
 			// if dirty, persist
-			if (dirty.isDirty())
+			if (dirty != null && dirty.isDirty())
 			{
 				lemmaTranslate_Editor.save();
 				boolean success = lemmaEditorController.save(this.selectedLemmaEntry);
@@ -1027,18 +1028,25 @@ private void bringPartToFront(boolean b) {
 								.getCommandStack().getUndoCommand())) {
 							// normal command or redo executed
 							localCommandCacheSet.add(mostRecentCommand);
-							if (localCommandCacheSet.isEmpty()) {
-								dirty.setDirty(false);
-							} else if (!dirty.isDirty()) {
-								dirty.setDirty(true);
+							if (dirty != null)
+							{
+								if (localCommandCacheSet.isEmpty()) {
+									dirty.setDirty(false);
+								} else if (!dirty.isDirty()) {
+									dirty.setDirty(true);
+								}
 							}
 						} else {
 							// undo executed
+							if (dirty != null)
+							{
+							
 							if (localCommandCacheSet.remove(mostRecentCommand)
 									&& localCommandCacheSet.isEmpty()) {
 								dirty.setDirty(false);
 							} else if (!dirty.isDirty()) {
 								dirty.setDirty(true);
+							}
 							}
 						}
 					}
@@ -1154,7 +1162,7 @@ private void bringPartToFront(boolean b) {
 
 	protected void setUserMayEditInteral(boolean mayEdit) {
 		this.userMayEdit = mayEdit;
-		if (loaded)
+		if (constructed)
 		{
 			embeddedEditor.getViewer().setEditable(mayEdit);
 			signTextEditor.setEnabled(mayEdit);

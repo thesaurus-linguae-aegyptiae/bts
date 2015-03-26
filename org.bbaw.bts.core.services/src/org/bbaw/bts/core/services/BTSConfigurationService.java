@@ -203,4 +203,14 @@ public interface BTSConfigurationService extends GenericObjectService<BTSConfigu
 
 	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
 
+	String getLabelOfTypeSubtypeString(BTSObject object);
+
+	BTSConfigItem calculateReferencedConfigItemsProcessedClones(
+			BTSConfigItem itemConfig, BTSConfig configuration,
+			BTSObject object);
+
+	List<String> getListOfReferencedObjectTypeSubtypesOfObject(
+			BTSObject object, BTSConfigItem itemConfig);
+
+
 }

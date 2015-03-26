@@ -40,7 +40,15 @@ implements GenericCorpusObjectService<E, K>{
 	@Preference(value = BTSPluginIDs.PREF_MAIN_CORPUS_KEY, nodePath = "org.bbaw.bts.app")
 	protected String main_corpus_key;
 	
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_ACTIVE_LEMMALISTS, nodePath = "org.bbaw.bts.app")
+	protected String active_lemmaLists;
 
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_MAIN_LEMMALIST_KEY, nodePath = "org.bbaw.bts.app")
+	protected String main_lemmaList_key;
 	
 	public abstract List<E> listRootEntries(IProgressMonitor monitor);
 	
@@ -230,6 +238,14 @@ implements GenericCorpusObjectService<E, K>{
 	protected String getCurrentDBCollectionContext()
 	{
 		return (String) context.get(BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT);
+	}
+	
+	protected String[] getActiveLemmaLists() {
+		if (active_lemmaLists == null || "".equals(active_lemmaLists))
+		{
+			return getActiveProjects();
+		}
+		return  active_lemmaLists.split(BTSCoreConstants.SPLIT_PATTERN);
 	}
 	
 	protected boolean isCurrentDBCollectionContextThs()

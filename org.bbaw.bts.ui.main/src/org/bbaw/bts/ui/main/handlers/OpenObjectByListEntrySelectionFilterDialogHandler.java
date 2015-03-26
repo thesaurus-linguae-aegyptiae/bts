@@ -14,6 +14,7 @@ import org.bbaw.bts.core.commons.filter.BTSObjectsByListEntryFilter;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserService;
+import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 import org.bbaw.bts.ui.commons.filter.CreatorViewerFilter;
 import org.bbaw.bts.ui.commons.filter.ProjectPrefixViewerFilter;
 import org.bbaw.bts.ui.commons.filter.ReviewStatusViewerFilter;
@@ -133,6 +134,15 @@ public class OpenObjectByListEntrySelectionFilterDialogHandler {
 			clazz = VisibilityViewerFilter.class;
 			BTSConfigurationController configController = context.get(BTSConfigurationController.class);
 			BTSConfigItem ci = configController.getVisibilityConfigItem();
+			allObjects = new Vector<Object>(ci.getChildren().size());
+			allObjects.addAll(ci.getChildren());
+			break;
+		}
+		case BTSCoreConstants.OBJECTS_FILTER_PARAM_BY_TYPE_SUBTYPE:
+		{
+			clazz = BTSObjectTypeSubtypeViewerFilter.class;
+			BTSConfigurationController configController = context.get(BTSConfigurationController.class);
+			BTSConfigItem ci = configController.getObjectTypesConfigItem();
 			allObjects = new Vector<Object>(ci.getChildren().size());
 			allObjects.addAll(ci.getChildren());
 			break;

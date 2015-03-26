@@ -14,8 +14,11 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.core.services.BTSCommentService;
+import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -28,6 +31,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 	
 	@Inject
 	private BTSCommentService commentService;
+
 
 	@Inject
 	@Named(BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT)
@@ -61,7 +65,19 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		
 		System.out.println(query.getQueryId());
 		List<BTSObject> children = new Vector<BTSObject>();
-		List<BTSCorpusObject> obs = corpusObjectService.query(query,
+		List<BTSCorpusObject> obs;
+		if (object instanceof BTSThsEntry)
+		{
+			query.setDbPath(object.getDBCollectionKey());
+		} else if (object instanceof BTSThsEntry)
+		{
+			query.setDbPath(object.getDBCollectionKey());
+		}
+		else
+		{
+			
+		}
+		obs = corpusObjectService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		for (BTSCorpusObject o : obs)
 		{

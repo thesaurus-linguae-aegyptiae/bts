@@ -609,7 +609,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	}
 	@Inject
 	@Optional
-	void eventReceivedUpdates(@EventTopic("model_lemma_update/async") Object object) {
+	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
 		logger.info("LemmaNavigatorPart eventReceivedUpdates. object: " + object);
 
 		if (object instanceof BTSLemmaEntry && selection != null
@@ -625,7 +625,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 			if (lemmaNavigatorController.handleModelUpdate(
 					(BTSModelUpdateNotification) object, queryResultMap,
 					viewHolderMap)) {
-				refreshTreeViewer((BTSLemmaEntry) ((BTSModelUpdateNotification) object)
+				refreshTreeViewer((BTSCorpusObject) ((BTSModelUpdateNotification) object)
 						.getObject());
 			}
 
@@ -703,10 +703,10 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		}
 		
 		// make new tab, with queryName if name != null
-		createNewSearchTab(query, queryName);
+		createNewSearchTab(query, queryName, null);
 	}
 
-	private void createNewSearchTab(BTSQueryRequest query, String queryName) {
+	private void createNewSearchTab(BTSQueryRequest query, String queryName, List<BTSCorpusObject> objects) {
 		// create main tab item
 		CTabItem searchTab = new CTabItem(tabFolder, SWT.NONE);
 		searchTab.setShowClose(true);
@@ -719,7 +719,10 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		{
 			searchTab.setText(new Integer(tabFolder.getChildren().length - 2).toString());
 		}
-		searchTab.setData("key", query.getQueryId());
+		if (query != null)
+		{
+			searchTab.setData("key", query.getQueryId());
+		}
 
 		Composite searchTabItemComp = new Composite(tabFolder, SWT.NONE);
 		searchTabItemComp.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -741,13 +744,13 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		prepareTreeViewer(searchTreeViewer, searchTabItemComp);
 		
 		// search
-		searchInput(searchTabItemComp, searchTreeViewer, searchRootNode, query, searchTab);
+		searchInput(searchTabItemComp, searchTreeViewer, searchRootNode, query, objects, searchTab);
 
 	}
 
 	private void searchInput(final Composite parentControl,
 			final TreeViewer treeViewer, final TreeNodeWrapper rootNode,
-			final BTSQueryRequest query, final CTabItem searchTab) {
+			final BTSQueryRequest query, final List<BTSCorpusObject> objects, final CTabItem searchTab) {
 		try {
 			 IRunnableWithProgress op = new IRunnableWithProgress() {
 
@@ -756,12 +759,26 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 							throws InvocationTargetException, InterruptedException 
 					{
 						List<BTSLemmaEntry> obs;
-						obs = lemmaNavigatorController
+						if (objects != null && !objects.isEmpty())
+						{
+							obs = new Vector<BTSLemmaEntry>(objects.size());
+							for (BTSCorpusObject o : objects)
+							{
+								if (o instanceof BTSLemmaEntry)
+								{
+									obs.add((BTSLemmaEntry) o);
+								}
+							}
+						}
+						else
+						{
+							obs = lemmaNavigatorController
 								.getSearchEntries(query,
 										queryResultMap,
 										treeViewer,
 										rootNode,
 										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+						}
 						if (obs != null && obs.size() > 0)
 						{
 							storeIntoMap(obs, parentControl);
@@ -793,6 +810,17 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		    } catch (InterruptedException e) {
 		       // handle cancelation
 		    }
+		
+	}
+
+	public void setInputList(List<BTSCorpusObject> objects, String queryName) {
+		if (objects == null)
+		{
+			return;
+		}
+		
+		// make new tab, with queryName if name != null
+		createNewSearchTab(null, queryName, objects);
 		
 	}
 

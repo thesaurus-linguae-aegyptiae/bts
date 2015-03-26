@@ -138,6 +138,11 @@ Display
 		{
 			label += " (" + translation + ")";
 		}
+		String typeSubtype = getTypeSubtypeString(object);
+		if (typeSubtype != null && !"".equals(typeSubtype))
+		{
+			label += "{" + typeSubtype + "}";
+		}
 		return label == null || label.length() == 0 ? getString("_UI_BTSLemmaEntry_type") : label;
 	}
 
@@ -162,10 +167,17 @@ Display
 		{
 			styledLabel.append(" (" + translation + ")", StyledString.Style.QUALIFIER_STYLER);
 		}
+//		String typeSubtype = getTypeSubtypeString(object);
+//		if (typeSubtype != null && !"".equals(typeSubtype))
+//		{
+//			styledLabel.append("{" + typeSubtype + "}", StyledString.Style.QUALIFIER_STYLER);
+//		}
 		styledLabel.append(" [" + ((BTSCorpusObject)object).getProject() +  "]", GREY);
 
 		return styledLabel;
 	}
+
+	
 
 	private String getTranslationString(Object object) {
 		String translation = "";

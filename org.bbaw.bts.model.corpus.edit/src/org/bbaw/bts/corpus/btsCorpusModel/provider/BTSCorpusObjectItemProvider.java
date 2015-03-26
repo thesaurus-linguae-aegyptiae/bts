@@ -35,8 +35,7 @@ import org.eclipse.swt.graphics.TextStyle;
 public class BTSCorpusObjectItemProvider
 	extends BTSObjectItemProvider {
 	
-	private BTSConfigurationController configurationController = StaticAccessController
-			.getContext().get(BTSConfigurationController.class);
+	
 	
 	protected Styler grey = new Styler() {
 
@@ -56,15 +55,7 @@ public class BTSCorpusObjectItemProvider
 			.toStyle();
 	
 	
-	protected BTSConfigurationController getConfigurationController()
-	{
-		if (configurationController == null)
-		{
-			configurationController = StaticAccessController
-					.getContext().get(BTSConfigurationController.class);
-		}
-		return configurationController;
-	}
+	
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->

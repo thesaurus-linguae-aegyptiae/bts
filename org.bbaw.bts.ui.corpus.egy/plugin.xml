@@ -8,6 +8,9 @@
     <compareViewerFactory
           class="org.bbaw.bts.ui.egy.compare.CompareViewerFactoryEgyTextImpl">
     </compareViewerFactory>
+    <compareViewerFactory
+          class="org.bbaw.bts.ui.egy.compare.CompareViewerFactoryEgyLemmaImpl">
+    </compareViewerFactory>
  </extension>
  <extension
        point="com.opcoach.e4.preferences.e4PreferencePages">

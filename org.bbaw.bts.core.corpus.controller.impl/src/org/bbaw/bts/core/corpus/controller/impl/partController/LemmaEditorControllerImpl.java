@@ -14,7 +14,9 @@ import org.bbaw.bts.core.corpus.controller.partController.LemmaEditorController;
 import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
@@ -44,7 +46,7 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 		List<BTSObject> children = new Vector<BTSObject>();
 		List<BTSLemmaEntry> obs = lemmaService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
-		for (BTSLemmaEntry o : obs)
+		for (BTSObject o : obs)
 		{
 			children.add(o);
 		}
@@ -76,5 +78,38 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 	public BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor) {
 		return lemmaService.find(lemmaId, monitor);
 	}
+	@Override
+	public List<BTSLemmaEntry> listInAllInvalidLemmata(IProgressMonitor monitor) {
+		String[] params = new String[3];
+		List<BTSLemmaEntry> invalidLemmata = new Vector<BTSLemmaEntry>();
+		List<BTSLemmaEntry> allLemmata= lemmaService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+		for (BTSLemmaEntry l : allLemmata)
+		{
+			if (monitor.isCanceled()) break;
+			lemmaService.checkAndFullyLoad(l, false);
+			monitor.worked(1);
+			if (!testTextValidAgainstGrammar(l))
+			{
+				invalidLemmata.add(l);
+			}
+			monitor.worked(1);
+		}
+		return invalidLemmata;
+	}
 
+	private boolean testTextValidAgainstGrammar(BTSLemmaEntry lemma) {
+		if (lemma.getWords().isEmpty()) {
+			return false;
+		} else {
+			BTSTextContent textContent = BtsCorpusModelFactory.eINSTANCE
+					.createBTSTextContent();
+			BTSSenctence sentence = BtsCorpusModelFactory.eINSTANCE
+					.createBTSSenctence();
+			textContent.getTextItems().add(sentence);
+			sentence.getSentenceItems().addAll(lemma.getWords());
+			return textEditorController.testTextValidAgainstGrammar(
+					textContent, lemma);
+
+		}
+	}
 }

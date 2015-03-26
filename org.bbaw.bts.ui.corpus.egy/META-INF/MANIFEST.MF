@@ -35,7 +35,8 @@ Require-Bundle: org.eclipse.swt,
  org.bbaw.bts.ui.corpus;bundle-version="1.0.0",
  javax.annotation,
  com.opcoach.e4.preferences;bundle-version="1.0.0",
- org.bbaw.bts.ui.main;bundle-version="0.0.2"
+ org.bbaw.bts.ui.main;bundle-version="0.0.2",
+ org.eclipse.emf.edit
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.annotation;version="1.0.0",
@@ -60,6 +61,7 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.ui.commons.corpus.interfaces,
  org.bbaw.bts.ui.commons.corpus.text,
  org.bbaw.bts.ui.commons.corpus.util,
+ org.bbaw.bts.ui.commons.filter,
  org.bbaw.bts.ui.commons.navigator,
  org.bbaw.bts.ui.commons.search,
  org.bbaw.bts.ui.commons.utils,

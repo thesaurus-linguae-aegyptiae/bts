@@ -101,6 +101,8 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		}
 		return arr.toArray(new String[arr.size()]);
 	}
+	
+
 
 	protected void setActive_corpora(String active_corpora) {
 		this.active_corpora = active_corpora;
@@ -238,7 +240,12 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		{
 			for (String c : getActive_corpora(p))
 			{
-				objects.addAll(corpusObjectDao.list(c, objectState));
+				try {
+					objects.addAll(corpusObjectDao.list(c, objectState));
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		objects.addAll(textCorpusService.list(objectState, monitor));
@@ -387,7 +394,7 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		}
 		else if (query.getDbPath() != null && query.getDbPath().endsWith(BTSCorpusConstants.WLIST))
 		{
-			for (String p : getActiveProjects()) {
+			for (String p : getActiveLemmaLists()) {
 				try {
 					objects.addAll(corpusObjectDao.query(query, p
 							+ BTSCorpusConstants.WLIST, p

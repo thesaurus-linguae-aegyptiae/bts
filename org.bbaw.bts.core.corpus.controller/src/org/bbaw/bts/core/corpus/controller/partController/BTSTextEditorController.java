@@ -18,6 +18,7 @@ import java.util.Map;
 
 
 
+
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -83,7 +84,7 @@ public interface BTSTextEditorController
 
 	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 	
-	boolean testTextValidAgainstGrammar(BTSText text);
+	boolean testTextValidAgainstGrammar(BTSTextContent textContent, BTSObject object);
 
 	Injector findEgyDslInjector();
 

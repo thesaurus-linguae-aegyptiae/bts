@@ -11,6 +11,12 @@
           id="org.bbaw.bts.ui.corpus.corpussettings.page"
           name="Corpus Settings">
     </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.corpus.preferences.LemmaListSettingsPage"
+          id="org.bbaw.bts.ui.corpus.lemmalist.page"
+          name="Lemma List">
+    </page>
  </extension>
  <extension
        point="org.bbaw.bts.ui.commons.compareViewerFactory">

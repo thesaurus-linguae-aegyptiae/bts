@@ -267,17 +267,27 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	@Override
 	public BTSObjectTypeTreeNode processTreeSelectorInputPath(
-			BTSConfig parentConfig, Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes) {
+			BTSConfig parentConfig, BTSConfig parentConfigReferenced, Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes) {
 		Assert.isNotNull(parentConfig);
 		BTSObjectTypeTreeNode root = BtsviewmodelFactory.eINSTANCE.createBTSObjectTypeTreeNode();
+		if (parentConfig instanceof BTSConfiguration)
+		{
+			root.setValue(((BTSConfiguration)parentConfig).get_id());
+		}
+		else if (parentConfig instanceof BTSConfigItem)
+		{
+			root.setValue(((BTSConfigItem)parentConfig).getValue());
+
+		}
 		for (BTSConfig c : parentConfig.getChildren())
 		{
-			processChild(c, parentConfig, root, root, ownerTypesMap, includingReferencedObjectTypes, null, false);
+			processChild(c, parentConfig, parentConfigReferenced, root, root, ownerTypesMap, includingReferencedObjectTypes, null, false);
 		}
+		
 		return root;
 	}
 
-	private void processChild(BTSConfig node, BTSConfig parentConfig, BTSObjectTypeTreeNode input, BTSObjectTypeTreeNode root,
+	private void processChild(BTSConfig node, BTSConfig parentConfig, BTSConfig parentConfigReferenced, BTSObjectTypeTreeNode input, BTSObjectTypeTreeNode root,
 			Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes, List<String> referencedTypesList, boolean parentSelected) {
 		
 		BTSObjectTypeTreeNode pathChild = BtsviewmodelFactory.eINSTANCE
@@ -319,28 +329,37 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 				}
 			}
 		}
-		if (includingReferencedObjectTypes)
+		if (includingReferencedObjectTypes && parentConfigReferenced != null)
 		{
 			makeSubTree(pathChild, ownerTypesMap,
-					parentConfig);
+					parentConfig, parentConfigReferenced);
 		}
 		for (BTSConfig cc : node.getChildren()) {
 			
-			processChild(cc, parentConfig, pathChild, root, ownerTypesMap, includingReferencedObjectTypes, referencedTypesList, pathChild.isSelected());
+			processChild(cc, parentConfig, parentConfigReferenced, pathChild, root, ownerTypesMap, includingReferencedObjectTypes, referencedTypesList, pathChild.isSelected());
 		}
 
 	}
 
 
 	private void makeSubTree(BTSObjectTypeTreeNode pathChild,
-			Map<String, List<String>> ownerTypesMap, BTSConfig parentConfig) {
+			Map<String, List<String>> ownerTypesMap, BTSConfig parentConfig, BTSConfig parentConfigReferenced) {
 		String pathChildPath = determineTypesTreePath(pathChild);
 		List<String> refs = ownerTypesMap.get(pathChildPath);
 		BTSObjectTypeTreeNode refRoot = BtsviewmodelFactory.eINSTANCE.createBTSObjectTypeTreeNode();
-		pathChild.setReferencedTypesPath(refRoot);
-		for (BTSConfig c : parentConfig.getChildren())
+		if (parentConfigReferenced instanceof BTSConfiguration)
 		{
-			processChild(c, parentConfig, refRoot, refRoot, null, false, refs, false);
+			refRoot.setValue(((BTSConfiguration)parentConfigReferenced).get_id());
+		}
+		else if (parentConfigReferenced instanceof BTSConfigItem)
+		{
+			refRoot.setValue(((BTSConfigItem)parentConfigReferenced).getValue());
+
+		}
+		pathChild.setReferencedTypesPath(refRoot);
+		for (BTSConfig c : parentConfigReferenced.getChildren())
+		{
+			processChild(c, parentConfigReferenced, null, refRoot, refRoot, null, false, refs, false);
 		}
 
 		
@@ -616,6 +635,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	@Override
 	public BTSConfiguration createNew(BTSConfiguration originalconfiguration) {
 		return configService.createNew(originalconfiguration);
+	}
+
+	@Override
+	public String getLabelOfTypeSubtypeString(BTSObject object) {
+		return configService. getLabelOfTypeSubtypeString(object);
 	}
 
 

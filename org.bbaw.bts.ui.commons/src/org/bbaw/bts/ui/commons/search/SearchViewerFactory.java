@@ -30,6 +30,7 @@
 package org.bbaw.bts.ui.commons.search;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 
@@ -55,7 +56,7 @@ public interface SearchViewerFactory {
 	 * @param relationConfig the relation config
 	 * @return the search viewer
 	 */
-	SearchViewer createSearchViewer(Composite parent, int style, BTSConfigItem relationConfig);
+	SearchViewer createSearchViewer(Composite parent, int style, BTSConfigItem relationConfig, IEclipseContext context);
 	
 	/**
 	 * Gets the search viewer name.

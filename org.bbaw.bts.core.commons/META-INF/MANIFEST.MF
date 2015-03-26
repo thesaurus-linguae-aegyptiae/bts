@@ -28,6 +28,7 @@ Import-Package: javax.inject,
  org.eclipse.e4.ui.model.application.ui,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.ui.workbench,
+ org.eclipse.emf.ecore,
  org.eclipse.jface.preference,
  org.eclipse.jface.resource,
  org.eclipse.swt.graphics

@@ -1,28 +1,25 @@
 package org.bbaw.bts.ui.corpus.dialogs;
 
+import java.util.HashSet;
 import java.util.List;
-import java.util.Vector;
-
-import javax.inject.Inject;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
+import org.bbaw.bts.core.corpus.controller.generalController.CorpusCommandController;
+import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.UpdateValueStrategy;
-import org.eclipse.core.databinding.beans.BeanProperties;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.core.databinding.observable.value.WritableValue;
-import org.eclipse.core.databinding.validation.IValidator;
-import org.eclipse.core.databinding.validation.ValidationStatus;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -32,7 +29,6 @@ import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.databinding.edit.EMFEditProperties;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
 import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -41,17 +37,15 @@ import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Button;
 
 public class NewCorpusObjectDialog extends TitleAreaDialog
 {
@@ -75,6 +69,14 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	private PermissionsAndExpressionsEvaluationController permisionsController;
 
 	private UISynchronize sync;
+
+	private Button okButton;
+	
+	private Set<String> corpusPrefixSet;
+
+	private CorpusNavigatorController corpusNavigatorController;
+
+	protected Pattern prefixPattern = Pattern.compile("[a-z0-9]+");
 
 	/**
 	 * Create the dialog.
@@ -117,6 +119,14 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 
 		nameTxt = new Text(container, SWT.BORDER);
 		nameTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		nameTxt.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				okButton.setEnabled(corpusPrefixTxt.getText().trim().length() > 0 && nameTxt.getText().trim().length() > 0);
+			}
+		});
+		
 		new Label(container, SWT.NONE);
 		
 		Label lblNewLabel = new Label(container, SWT.NONE);
@@ -129,6 +139,34 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
+				if (corpusPrefixSet.contains(corpusPrefixTxt.getText()))
+				{
+					setMessage("A Corpus with this prefix exists already. Please, use different prefix.", SWT.ERROR);
+					okButton.setEnabled(false);
+					return;
+				}
+				else
+				{
+					setMessage("");
+				}
+				if (corpusPrefixTxt.getText().contains(" "))
+				{
+					setMessage("Corpus prefix may not contain whitespaces.", SWT.ERROR);
+					okButton.setEnabled(false);
+					return;
+				}
+				else
+				{
+					setMessage("");
+				}
+				Matcher m = prefixPattern.matcher(corpusPrefixTxt.getText());
+				if (!m.matches())
+				{
+					setMessage("Corpus prefix may contain only small characters and integers [a-z0-9].", SWT.ERROR);
+					okButton.setEnabled(false);
+					return;
+				}
+				okButton.setEnabled(corpusPrefixTxt.getText().trim().length() > 0 && nameTxt.getText().trim().length() > 0);
 				if (corpusPrefixTxt.getText().trim().length() > 0)
 				{
 					final boolean enabled = btnCheckButton.isEnabled();
@@ -174,6 +212,8 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 
 		bindingContext = initializeBindings();
 		
+		
+		
 		return area;
 	}
 
@@ -184,6 +224,7 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		editingDomainController = context.get(EditingDomainController.class);
 		permisionsController = context.get(PermissionsAndExpressionsEvaluationController.class);
 		editingDomain = editingDomainController.getEditingDomain(object);
+		corpusNavigatorController = context.get(CorpusNavigatorController.class);
 		DataBindingContext bindingContext = new DataBindingContext();
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
 		us.setBeforeSetValidator(new StringNotEmptyValidator());
@@ -206,6 +247,15 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 
 		btnCheckButton.setEnabled(permisionsController.authenticatedUserMaySyncDBColl(corpusPrefixTxt.getText()));
 		
+		corpusPrefixSet = new HashSet<String>();
+		List<BTSTextCorpus> allCorpora = corpusNavigatorController.listTextCorpora(null);
+		for (BTSTextCorpus c : allCorpora)
+		{
+			if (c.getCorpusPrefix() != null && c.getProject().equals(object.getProject()))
+			{
+				corpusPrefixSet.add(c.getCorpusPrefix());
+			}
+		}
 		return bindingContext;
 	}
 
@@ -217,7 +267,8 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 	@Override
 	protected void createButtonsForButtonBar(Composite parent)
 	{
-		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		okButton = createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL, true);
+		okButton.setEnabled(false);
 		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 	}
 
@@ -235,4 +286,8 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		return (synchronize);
 	}
 
+	@Override
+	protected boolean isResizable() {
+		return true;
+	}
 }

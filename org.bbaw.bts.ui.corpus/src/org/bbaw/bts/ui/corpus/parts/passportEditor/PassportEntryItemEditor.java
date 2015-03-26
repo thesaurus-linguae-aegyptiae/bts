@@ -29,6 +29,7 @@ import org.bbaw.bts.ui.commons.converter.BTSIntegerToStringConverter;
 import org.bbaw.bts.ui.commons.converter.BTSStringToBooleanConverter;
 import org.bbaw.bts.ui.commons.converter.BTSStringToConfigItemConverter;
 import org.bbaw.bts.ui.commons.converter.BTSStringToIntegerConverter;
+import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.commons.validator.StringRegexValidator;
@@ -543,7 +544,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 	}
 
-	private void loadSelectTHSWidget(BTSConfigItem itemConfig2,
+	private void loadSelectTHSWidget(final BTSConfigItem itemConfig2,
 			final BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
 		label.setText(itemConfig.getValue());
@@ -601,7 +602,10 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				if(e.keyCode == SWT.CR){
 					// open search dialog
 					IEclipseContext child = context.createChild("searchselect");
+
 					context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
+					BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
+					context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
 					SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 							SearchSelectObjectDialog.class, child);
 					if (dialog.open() == dialog.OK) {
@@ -644,7 +648,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				// open search dialog
 				IEclipseContext child = context.createChild("searchselect");
 				context.set(BTSConstants.OBJECT_TYPES_ARRAY, new String[]{BTSConstants.THS_ENTRY});
-
+				BTSObjectTypeSubtypeViewerFilter viewerFilter = passportConfigurationController.createObjectTypeSubtypeFilterByReferencedPath(corpusObject, itemConfig2);
+				context.set(BTSObjectTypeSubtypeViewerFilter.class, viewerFilter);
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
 				if (dialog.open() == dialog.OK) {

@@ -22,5 +22,5 @@ public interface LemmaEditorController {
 	BTSTextContent updateModelFromTextContent(BTSTextContent textContent,
 			EObject eo, IAnnotationModel am);
 	BTSLemmaEntry findLemmaEntry(String lemmaId, IProgressMonitor monitor);
-
+	List<BTSLemmaEntry> listInAllInvalidLemmata(IProgressMonitor monitor);
 }

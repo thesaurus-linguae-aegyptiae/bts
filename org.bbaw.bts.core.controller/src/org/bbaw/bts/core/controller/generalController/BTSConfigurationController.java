@@ -84,7 +84,7 @@ public interface BTSConfigurationController
 
 
 	BTSObjectTypeTreeNode processTreeSelectorInputPath(
-BTSConfig parentConfig,
+BTSConfig parentConfig, BTSConfig parentConfigReferenced, 
 Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes);
 
 	
@@ -157,5 +157,8 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 	void setActiveConfiguration(BTSConfiguration configuration);
 
 	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
+
+	String getLabelOfTypeSubtypeString(BTSObject object);
+
 
 }

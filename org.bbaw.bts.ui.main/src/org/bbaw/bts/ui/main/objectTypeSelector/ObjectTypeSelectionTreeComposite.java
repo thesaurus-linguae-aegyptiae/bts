@@ -1,6 +1,7 @@
 package org.bbaw.bts.ui.main.objectTypeSelector;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.core.runtime.Assert;
@@ -159,7 +161,7 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	}
 
 	public void setPathInput(BTSConfigItem input,
-			EditingDomain editingDomain, BTSConfig objectTypesConfig, boolean includeReferencedObjectTree) {
+			EditingDomain editingDomain, BTSConfig objectTypesConfig, BTSConfig inputConfigReferenced, boolean includeReferencedObjectTree) {
 		Assert.isNotNull(input);
 		inputConfigItem = input;
 		this.editingDomain = editingDomain;
@@ -169,8 +171,9 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 		}
 		if (objectTypesConfig != null) {
 			inputPath = configurationController
-					.processTreeSelectorInputPath(objectTypesConfig,
+					.processTreeSelectorInputPath(objectTypesConfig,inputConfigReferenced,
 							inputConfigItem.getOwnerTypesMap(), includeReferencedObjectTree);
+			
 			treeViewer.setInput(inputPath);
 			treeViewer.setCheckedElements(getSelectedElements(inputPath));
 			if (inputPath.isSelected())
@@ -216,8 +219,6 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	public void save() {
 
 		if (dirty) {
-			BTSObjectTypeTreeNode treePath = (BTSObjectTypeTreeNode) treeViewer
-					.getInput();
 			if (inputConfigItem != null)
 			{
 				inputConfigItem.clearOwnerTypesMap();
@@ -235,8 +236,7 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 					Command command = AddCommand.create(
 							editingDomain, inputConfigItem,
 							BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
-							configurationController
-							.processTreePathToList(treePath));
+							getSelectedNodesTreePathList());
 					editingDomain.getCommandStack().execute(command);
 //				inputConfigItem.getOwnerReferencedTypesStringList().addAll(configurationController
 //					.processTreePathToList(treePath));
@@ -247,6 +247,30 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 				inputPath.setSelected(allbutton.getSelection());
 			}
 		}
+	}
+
+	private List<String> getSelectedNodesTreePathList() {
+		BTSObjectTypeTreeNode treePath = (BTSObjectTypeTreeNode) treeViewer
+				.getInput();
+		return configurationController
+		.processTreePathToList(treePath);
+	}
+	
+	public String getSelectedNodesTreePath()
+	{
+		String path = null;
+		for (String str : getSelectedNodesTreePathList())
+		{
+			if (path == null)
+			{
+				path = str;
+			}
+			else
+			{
+				path += BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + str;
+			}
+		}
+		return path;
 	}
 
 	public TreeViewer getTreeViewer() {

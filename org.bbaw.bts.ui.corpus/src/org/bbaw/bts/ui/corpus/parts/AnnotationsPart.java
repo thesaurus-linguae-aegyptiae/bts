@@ -131,7 +131,15 @@ public class AnnotationsPart implements EventHandler {
 	private BTSObject parentObject;
 
 	private boolean allRelatedObjectsShowed;
-	
+
+	// boolean if object is loaded into gui
+	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;	
 	/** The part. */
 	private MPart part;
 
@@ -199,7 +207,7 @@ public class AnnotationsPart implements EventHandler {
 	
 	private void clearRelatingObjects(BTSCorpusObject selection) {
 		if(selection.equals(parentObject) || parentObject == null) return;
-		System.out.println("clearRelatingObjects selection: " + ((BTSCorpusObject)selection).get_id() + " parentObject " + parentObject.get_id());
+//		System.out.println("clearRelatingObjects selection: " + ((BTSCorpusObject)selection).get_id() + " parentObject " + parentObject.get_id());
 		part.setLabel("AnnotationsPart");
 		part.setTooltip("");
 		relatingObjectsQueryIDMap.clear();
@@ -409,7 +417,7 @@ public class AnnotationsPart implements EventHandler {
 		List<BTSObject> selObjects = new Vector<BTSObject>(internalSelectedGroup.size());
 		
 		// reveal
-		if (!selfselection && !internalSelectedGroup.isEmpty())
+		if (!selfselection && !internalSelectedGroup.isEmpty() && !scrollComposite.isDisposed())
 		{
 			RelatedObjectGroup first = internalSelectedGroup.get(0);
 			scrollComposite.setOrigin(first.getLocation());
@@ -474,7 +482,7 @@ public class AnnotationsPart implements EventHandler {
 		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
 		{
 			// empty the panel
-			sync.asyncExec(new Runnable() {
+			sync.syncExec(new Runnable() {
 				public void run() {
 					clearRelatingObjects((BTSCorpusObject)selection);
 				}
@@ -483,24 +491,27 @@ public class AnnotationsPart implements EventHandler {
 			List<BTSObject> relatingObjects = null;
 			List<BTSObject> filteredRelatingObjects = null;
 			queryId = "relations.objectId-" + ((BTSCorpusObject)selection).get_id();
-
-			// not in use because part waits to receive relationObjectLoadedEvent through eventBroker!
-//			try {
-//				relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection, null);
-//				filteredRelatingObjects = filterRelatingObjects(relatingObjects);
-//				for (BTSObject o : filteredRelatingObjects)
-//				{
-//					if (o instanceof BTSCorpusObject)
-//					{
-//						annotationPartController.checkAndFullyLoad((BTSCorpusObject) o);
-//					}
-//				}
-//			} catch (Exception e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
-//			eventReceivedRelatingObjectsLoadedEvents(filteredRelatingObjects);
+			parentObject = (BTSCorpusObject)selection;
+			// if BTSText wait to receive relationObjectLoadedEvent through eventBroker!
+			if (!(selection instanceof BTSText))
+			{
+				try {
+					relatingObjects = annotationPartController.findRelatingObjects((BTSObject) selection, null);
+					filteredRelatingObjects = filterAndCutRelatingObjects(relatingObjects, null);
+					for (BTSObject o : filteredRelatingObjects)
+					{
+						if (o instanceof BTSCorpusObject)
+						{
+							annotationPartController.checkAndFullyLoad((BTSCorpusObject) o, false);
+						}
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
+				eventReceivedRelatingObjectsSelectedEvents(filteredRelatingObjects);
+			}
 		}
 		else if (selection instanceof BTSTextSelectionEvent)
 		{
@@ -509,7 +520,7 @@ public class AnnotationsPart implements EventHandler {
 		}
 	}
 	
-private List<BTSObject> filterAndCutRelatingObjects(
+	private List<BTSObject> filterAndCutRelatingObjects(
 			List<BTSObject> relatingObjects, IProgressMonitor monitor) {
 		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size() / 2);
 		if (monitor != null) monitor.beginTask("Filter related objects", relatingObjects.size());
@@ -552,7 +563,7 @@ private List<BTSObject> filterAndCutRelatingObjects(
 		{
 			setSelectedInternal(null, false);
 		}
-		if (objects instanceof List<?>)
+		if (objects instanceof List<?> && !((List) objects).isEmpty())
 		{
 			List<BTSObject> os = (List<BTSObject>) objects;
 			os = filterAndCutRelatingObjects(os, null);

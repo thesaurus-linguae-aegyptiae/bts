@@ -5,6 +5,7 @@ import java.util.List;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 
 public interface PassportConfigurationController {
 
@@ -33,5 +34,8 @@ public interface PassportConfigurationController {
 
 	BTSConfigItem getPathConfigItemProcessedClones(BTSConfigItem itemConfig,
 			BTSCorpusObject corpusObject);
+
+	BTSObjectTypeSubtypeViewerFilter createObjectTypeSubtypeFilterByReferencedPath(
+			BTSCorpusObject corpusObject, BTSConfigItem itemConfig2);
 
 }

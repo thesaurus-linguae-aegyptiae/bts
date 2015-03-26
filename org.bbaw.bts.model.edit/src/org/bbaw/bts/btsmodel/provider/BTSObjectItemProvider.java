@@ -4,9 +4,12 @@ package org.bbaw.bts.btsmodel.provider;
 
 import java.util.Collection;
 import java.util.List;
+
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.ecore.EStructuralFeature;
@@ -24,7 +27,8 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  */
 public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider
 {
-
+	private BTSConfigurationController configurationController = StaticAccessController
+			.getContext().get(BTSConfigurationController.class);
 	/**
 	 * This constructs an instance from a factory and a notifier. <!--
 	 * begin-user-doc --> <!-- end-user-doc -->
@@ -422,6 +426,15 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider
 		return ((StyledString)getStyledText(object)).getString();
 	}
 
+	protected String getTypeSubtypeString(Object object) {
+		if (object instanceof BTSObject)
+		{
+			BTSObject o = (BTSObject) object;
+			String str = configurationController.getLabelOfTypeSubtypeString(o);
+			return str;
+		}
+		return null;
+	}
 	/**
 	 * This returns the label styled text for the adapted class.
 	 * <!-- begin-user-doc -->
@@ -494,5 +507,13 @@ public class BTSObjectItemProvider extends AdministrativDataObjectItemProvider
 				(BtsmodelPackage.Literals.BTS_OBJECT__EXTERNAL_REFERENCES,
 				 BtsmodelFactory.eINSTANCE.createBTSExternalReference()));
 	}
-
+	protected BTSConfigurationController getConfigurationController()
+	{
+		if (configurationController == null)
+		{
+			configurationController = StaticAccessController
+					.getContext().get(BTSConfigurationController.class);
+		}
+		return configurationController;
+	}
 }

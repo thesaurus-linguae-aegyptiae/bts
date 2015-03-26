@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Display;
 public class SearchViewerFactoryCorpus implements SearchViewerFactory {
 
 	private SearchViewer searchViewer;
-	private IEclipseContext context;
 	
 	protected BTSResourceProvider resourceProvider = StaticAccessController.getContext().get(BTSResourceProvider.class);
 
@@ -27,7 +26,7 @@ public class SearchViewerFactoryCorpus implements SearchViewerFactory {
 	}
 
 	@Override
-	public SearchViewer createSearchViewer(Composite parent, int style, BTSConfigItem relationConfig) {
+	public SearchViewer createSearchViewer(Composite parent, int style, BTSConfigItem relationConfig, IEclipseContext context) {
 		if (context == null)
 		{
 			context = StaticAccessController.getContext();

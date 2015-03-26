@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -30,6 +31,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
 import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
@@ -111,6 +113,11 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	@Optional
 	private Shell parentShell;
 	
+
+	@Inject
+	@Optional
+	private BTSConfigItem relationConfig;
+	
 	@Inject
 	private Logger logger;
 	
@@ -133,6 +140,10 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
+	
+	@Inject
+	@Optional
+	private BTSObjectTypeSubtypeViewerFilter typeSubtypeFilter;
 	
 
 	@Inject
@@ -360,6 +371,10 @@ labelProvider));
 
 		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
 		treeViewer.addSelectionChangedListener(selectionListener);
+		if (BTSUIConstants.SELECTION_TYPE_SECONDARY.equals(selectionType) && typeSubtypeFilter != null) {
+			// add Filter
+			treeViewer.addFilter(typeSubtypeFilter);
+		} 
 	}
 
 	protected void loadOrphans(final Control parentControl,

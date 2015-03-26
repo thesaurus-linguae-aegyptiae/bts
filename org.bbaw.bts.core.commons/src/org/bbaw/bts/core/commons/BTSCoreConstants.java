@@ -311,5 +311,9 @@ public class BTSCoreConstants
 
 	public static final String PROJECT_DB_COLLECTION_MAP = "project_db_collection_map";
 
+	public static final String CONTEXT_TYPE_SUBTYEPE_LABEL_MAP = "context_type_subtype_label_map";
+
+	public static final String OBJECTS_FILTER_PARAM_BY_TYPE_SUBTYPE =  "filter_by_typeSubtype";
+
 	
 }

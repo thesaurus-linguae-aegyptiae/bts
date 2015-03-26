@@ -94,7 +94,6 @@ import org.eclipse.xtext.validation.Issue;
 
 public class SignTextComposite extends Composite implements IBTSEditor {
 
-	private int max_line_length = 600;
 	private static final Color COLOR_WORD_DESELECTED = ColorConstants.white;
 	private static final Color COLOR_WORD_SELECTED = ColorConstants.yellow;
 
@@ -148,7 +147,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, nodePath = "org.bbaw.bts.ui.corpus.egy")
-	private Integer lineWidth;
+	private Integer max_line_length;
 
 	private ElementFigure selectedElement;
 
@@ -314,6 +313,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		this.layout();
 		parentComposite.layout();
+		max_line_length = canvas.getViewport().getBounds().width - 40;
 
 	}
 	
@@ -434,6 +434,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 		if (figure instanceof WordFigure)
 		{
+			return figure;
+		}
+		else if (ElementFigure.SENTENCE_END.equals(figure.getType()) && lineIndex == lineMap.size() - 1)
+		{
+			// if it is the very last figure!
 			return figure;
 		}
 		return null;
@@ -593,6 +598,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						itemFigure = makeAmbivalenceFigure(ambivalence);
 
 					}
+					
 					if (itemFigure != null) {
 						if (relatingObjectsMap != null && relatingObjectsMap.containsKey(senItem.get_id()))
 						{
@@ -1233,7 +1239,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			Event e = new Event();
 			e.widget = this;
 			TypedEvent ev = new TypedEvent(e);
-			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev);
+			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev, btsObject);
 			event.data = textContent.eContainer();
 			event.getRelatingObjects().addAll(((ElementFigure)figure).getRelatingObjects());
 			BTSIdentifiableItem item = (BTSIdentifiableItem) figure.getModelObject();
@@ -1453,14 +1459,15 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				}
 				
 			}
-			if (!lset && word.getLKey() != null && !"".equals(word.getLKey()))
+			if (showLemmaId && !lset && word.getLKey() != null && !"".equals(word.getLKey()))
 			{
 				addLKeyToWordFigure(word, wf);
 			}
-			if (!fset && word.getFlexCode() != null && !"".equals(word.getFlexCode()))
+			if (showFlexion && !fset && word.getFlexCode() != null && !"".equals(word.getFlexCode()))
 			{
 				addFCodeToWordFigure(word, wf);
 			}
+			//FIXME add hieroglyphs, translations!
 		}
 		
 	}
@@ -1475,7 +1482,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	public void addRelatingObjectNotification(
 			BTSModelUpdateNotification notification) {
-		if (notification.getObject() instanceof BTSObject)
+		if (notification.getObject() instanceof BTSObject && relatingObjectFigureMap != null)
 		{
 			BTSObject object = (BTSObject) notification.getObject();
 			List<ElementFigure> figures = relatingObjectFigureMap.get(object.get_id());

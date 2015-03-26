@@ -141,7 +141,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 
 			SearchViewer searchViewer = makeSearchViewer(
 					composite_CorpusNavigator, relationConfig,
-					"CorpusNavigator");
+					"CorpusNavigator", context);
 		}
 
 		// wlist
@@ -175,7 +175,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 			// BTSUIConstants.SELECTION_TYPE_SECONDARY);
 
 			SearchViewer searchViewer = makeSearchViewer(
-					composite_wlistNavigator, relationConfig, "LemmaNavigator");
+					composite_wlistNavigator, relationConfig, "LemmaNavigator", context);
 			// WordListNavigator wlistNavigator = ContextInjectionFactory.make(
 			// WordListNavigator.class, child_wlist);
 		}
@@ -213,7 +213,7 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 			// ThsNavigator.class, child_ths);
 
 			SearchViewer searchViewer = makeSearchViewer(
-					composite_thsNavigator, relationConfig, "ThsNavigator");
+					composite_thsNavigator, relationConfig, "ThsNavigator", context);
 
 		}
 
@@ -266,11 +266,11 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 	}
 
 	private SearchViewer makeSearchViewer(Composite composite,
-			BTSConfigItem config, String viewerName) {
+			BTSConfigItem config, String viewerName, IEclipseContext context) {
 		List<SearchViewerFactory> factories = loadSearchViewerFactory(viewerName);
 		if (factories != null) {
 			for (SearchViewerFactory factory : factories) {
-				factory.createSearchViewer(composite, SWT.None, config);
+				factory.createSearchViewer(composite, SWT.None, config, context);
 			}
 		}
 		return null;

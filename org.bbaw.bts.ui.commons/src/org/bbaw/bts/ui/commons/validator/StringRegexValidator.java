@@ -53,13 +53,26 @@ public class StringRegexValidator implements IValidator {
 	/** The pattern string. */
 	private String patternString;
 
+	private boolean force;
+
 	/**
 	 * Instantiates a new string regex validator.
 	 *
 	 * @param patternString the pattern string
 	 */
+	public StringRegexValidator(String patternString, boolean force) {
+		this.patternString = patternString;
+		this.force = force;
+		try {
+			this.pattern = Pattern.compile(patternString);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public StringRegexValidator(String patternString) {
 		this.patternString = patternString;
+		this.force = true;
 		try {
 			this.pattern = Pattern.compile(patternString);
 		} catch (Exception e) {
@@ -77,11 +90,15 @@ public class StringRegexValidator implements IValidator {
 			if (m.find()) {
 				return ValidationStatus.ok();
 			}
- else {
+			else {
 				return ValidationStatus.error(errorMessage + patternString);
 			}
 		}
-		return ValidationStatus.ok();
+		if (force)
+		{
+			return ValidationStatus.error(errorMessage + patternString);
+		}
+			return ValidationStatus.ok();
 	}
 
 }

@@ -3,6 +3,7 @@ package org.bbaw.bts.ui.main.wizards.newProject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
+import org.bbaw.bts.ui.commons.validator.StringRegexValidator;
 import org.eclipse.core.databinding.AggregateValidationStatus;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
@@ -78,6 +79,7 @@ public class ProjectNamePage extends WizardPage
 
 		txtPrefixtext = new Text(container, SWT.BORDER);
 		txtPrefixtext.setText("prefixText");
+		txtPrefixtext.setToolTipText("Enter prefix containing only small characters and integers,\nno whitespace, no special characters!");
 		txtPrefixtext.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		Label lblDescription = new Label(container, SWT.NONE);
@@ -90,6 +92,7 @@ public class ProjectNamePage extends WizardPage
 
 		errorLabelServer = new Label(container, SWT.NONE);
 		errorLabelServer.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		errorLabelServer.setText("OK");
 		initializeBindings();
 	}
 
@@ -121,9 +124,12 @@ public class ProjectNamePage extends WizardPage
 //		bindingContext.addValidationStatusProvider(binding);
 		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);
 
+		EMFUpdateValueStrategy us_prefix = new EMFUpdateValueStrategy();
+		us_prefix.setBeforeSetValidator(new StringRegexValidator("^[a-z0-9]+$"));
 		IObservableValue model2 = EMFProperties.value(BtsmodelPackage.Literals.BTS_PROJECT__PREFIX).observe(project);
 		Binding binding2 = bindingContext.bindValue(WidgetProperties.text(SWT.Modify)
-				.observeDelayed(400, txtPrefixtext), model2, us, null);
+				.observeDelayed(400, txtPrefixtext), model2, us_prefix, null);
+		
 //		bindingContext.addValidationStatusProvider(binding2);
 		BackgroundControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 		txtPrefixtext.setEnabled((project.eResource() == null));
@@ -131,7 +137,7 @@ public class ProjectNamePage extends WizardPage
 		IObservableValue model3 = EMFProperties.value(BtsmodelPackage.Literals.BTS_PROJECT__DESCRIPTION).observe(
 				project);
 		Binding binding3 = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(400, txtDescription), model3, us, null);
+				WidgetProperties.text(SWT.Modify).observeDelayed(400, txtDescription), model3, null, null);
 		bindingContext.addValidationStatusProvider(binding3);
 		ControlDecorationSupport.create(binding2, SWT.TOP | SWT.LEFT);
 
@@ -157,7 +163,7 @@ public class ProjectNamePage extends WizardPage
 						allcomplete = false;
 					}
 				}
-//				setPageComplete(allcomplete);
+				setPageComplete(allcomplete);
 
 			}
 		});

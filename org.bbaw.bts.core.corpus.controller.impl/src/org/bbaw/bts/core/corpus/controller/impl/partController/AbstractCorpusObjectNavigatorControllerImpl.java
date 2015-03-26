@@ -117,7 +117,7 @@ GenericCorpusObjectNavigatorController<E, K>
 	}
 
 	@Override
-	public void save(E o) {
+	public void save(BTSCorpusObject o) {
 		corpusObjectService.save(o);
 
 	}

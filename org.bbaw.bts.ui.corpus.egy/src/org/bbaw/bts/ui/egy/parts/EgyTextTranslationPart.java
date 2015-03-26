@@ -22,6 +22,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
@@ -39,7 +40,14 @@ public class EgyTextTranslationPart {
 	@Inject
 	private EgyTextTranslationPartController translationController;
 	private IAnnotationModel annotationModel;
+	// boolean if object is loaded into gui
 	private boolean loaded;
+
+	// boolean if gui is constructed
+	private boolean constructed;
+
+	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
+	private boolean selectionCached;
 	// FIXME integrate perferences!!!
 	private String language = "de";
 
@@ -65,7 +73,11 @@ public class EgyTextTranslationPart {
 		textViewer.setDocument(new Document());
 		annotationModel = 		textViewer.getAnnotationModel();
 
-		loaded = true;
+		constructed = true;
+		if (selectionCached)
+		{
+			loadInput(text);
+		}
 	}
 	
 	/**
@@ -81,44 +93,59 @@ public class EgyTextTranslationPart {
 			return;
 		} else if (selection != null && !selection.equals(selectedTextItem)) {
 
-			if (loaded && selection instanceof BTSCorpusObject) {
+			if (selection instanceof BTSCorpusObject) {
 				
-				
-				if (selection instanceof BTSText) {
-					purgeCache();
-					part.setLabel(selection.getName());
-					makePartActive(true);
-					loadInput((BTSText) selection);
-					this.text = (BTSText) selection;
-
-				} else {
-					purgeCache();
-					loadInput(null);
-					if (part != null) {
-						part.setLabel("TextTranslation");
+				if (constructed)
+				{
+					if (selection instanceof BTSText) {
+						purgeCache();
+						part.setLabel(selection.getName());
+						makePartActive(true);
+						loadInput((BTSText) selection);
+						this.text = (BTSText) selection;
+	
+					} else if (loaded){
+						purgeCache();
+						loadInput(null);
+						if (part != null) {
+							part.setLabel("TextTranslation");
+						}
+						text = null;
+						loaded = false;
+						makePartActive(false);
 					}
-					text = null;
-					makePartActive(false);
+				}
+				else if (selection instanceof BTSText) {
+					this.text = (BTSText) selection;
+					selectionCached = true;
 				}
 			}
 			selectedTextItem = selection;
-//			if (selection instanceof BTSWord) {
-//				setSentenceTranslation((BTSWord) selection);
-//			} else if (selection instanceof BTSSenctence) {
-//				setSentenceTranslation((BTSSenctence) selection);
-//			}
 		}
 	}
 
+	/**
+	 * Sets the focus.
+	 */
+	@Focus
+	public void setFocus() {
+		if (!loaded && selectionCached) // not yet loaded but has cached selection
+		{
+			loadInput(text);
+		}
+	}
+	
 	private void loadInput(BTSText text) {
 		if (text == null)
 		{
 			textViewer.getDocument().set("");
+			loaded = false;
 		}
 		else
 		{
 			String stringText = translationController.loadTranslation(text, language, annotationModel);
 			textViewer.getDocument().set(stringText);
+			loaded = true;
 		}
 	}
 

@@ -28,6 +28,7 @@ import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupp
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringIsRegexPatternValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.main.dialogs.btsConfigDialog.provider.BTSObjectPivot;
 import org.bbaw.bts.ui.main.handlers.NewConfigurationHandler;
@@ -84,6 +85,10 @@ import org.eclipse.ocl.examples.xtext.essentialocl.ui.internal.EssentialOCLActiv
 import org.eclipse.ocl.examples.xtext.essentialocl.ui.model.BaseDocument;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -121,9 +126,6 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	@Inject
 	private BTSConfigurationController configurationController;
-
-	@Inject
-	private BTSConfigurationDialogController configDialogController;
 
 	@Inject
 	private ECommandService commandService;
@@ -165,13 +167,11 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	private SashForm sashForm;
 
-	private Button okButton;
 	private Text valueText_CIEdit;
 	private Text typeText_CIEdit;
 	private Text subtypeText_CIEdit;
 	private TranslationEditorComposite labelText_CIEdit;
 	private TranslationEditorComposite descText_CIEdit;
-	private Text labelTextWidget_CIEdit;
 	private Text regexText_CIEdit;
 
 	private DataBindingContext configItemEditBindings;
@@ -184,21 +184,13 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	private Button ignoreBTN_CIEdit;
 
-	private Button activateBTN_CIEdit;
-
 	private Combo widgetCB_CIEdit;
 
 	private Button allowMultiBTN_CIEdit;
 
 	private Button requiredBTN_CIEdit;
 
-	private Button showBTN_CIEdit;
-
 	private Spinner hSpanSpinner_CIEdit;
-
-	private MultiChoice<String> mcOwners;
-
-	private MultiChoice<String> mcReferenced;
 
 	private TreeNodeWrapper root;
 
@@ -243,6 +235,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	protected BTSConfiguration activeConfiguration;
 
+	private ModifyListener sortKeyModificationListener;
+
 
 
 	/**
@@ -264,6 +258,9 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	@Override
 	protected Control createDialogArea(Composite parent) {
 		// initializeDIs();
+		
+		
+		
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
 		container.setLayout(new FillLayout(SWT.HORIZONTAL));
@@ -416,7 +413,20 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 		BACKGROUND_COLOR = mainConfigRight.getBackground();
 		
+		sortKeyModificationListener = new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (selectedConfig != null && selectedConfig.eContainer() != null)
+				{
+					treeViewer.refresh(selectedConfig.eContainer());
+				}
+				
+			}
+		};
 		loadTree();
+		
+		
 		return area;
 	}
 
@@ -455,8 +465,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			}
 
 		});
-		treeViewer.setSorter(new ViewerSorter() {
-		});
+		treeViewer.setSorter(new BTSObjectByNameViewerSorter(true));
 		// Create sample data
 		configurations = new ArrayList<BTSConfiguration>();
 
@@ -633,6 +642,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
 			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 					true, false, 2, 1));
+			sortSpinner_CIEdit.addModifyListener(sortKeyModificationListener);
 
 			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
 			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -866,6 +876,42 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 			}
 		});
+		newCIText_ConfigurationEdit.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.keyCode == SWT.CR) {
+					BTSConfigItem ci = configurationController
+							.createNewConfigItem(newCIText_ConfigurationEdit
+									.getText());
+					ci.setType(BTSCoreConstants.PASSPORT_CATEGORY);
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig,
+									BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+									ci);
+					compoundCommand.append(command);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							compoundCommand);
+					treeViewer.refresh(selectedConfig);
+
+
+					newCIText_ConfigurationEdit.setText("");
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		configItemEditBindings = initializePassportEditBindings(configItem);
 
 		value.setValue(configItem);
@@ -1006,6 +1052,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
 			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 					true, false, 2, 1));
+			sortSpinner_CIEdit.addModifyListener(sortKeyModificationListener);
 
 			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
 			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -1056,7 +1103,43 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 					getEditingDomain(selectedConfig).getCommandStack().execute(
 							compoundCommand);
 					treeViewer.refresh(selectedConfig);
+					newCIText_ConfigurationEdit.setText("");
+				}
+			});
+			newCIText_ConfigurationEdit.addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if (e.keyCode == SWT.CR) {
+						BTSConfigItem ci = configurationController
+								.createNewConfigItem(newCIText_ConfigurationEdit
+										.getText());
+						for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+						{
+							ci.getOwnerReferencedTypesStringList().add(s);
+						}
+						ci.setType(((BTSConfigItem) selectedConfig).getType());
+						ci.setSubtype(((BTSConfigItem) selectedConfig).getSubtype());
 
+						CompoundCommand compoundCommand = new CompoundCommand();
+						org.eclipse.emf.common.command.Command command = AddCommand
+								.create(getEditingDomain(selectedConfig),
+										selectedConfig,
+										BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+										ci);
+						compoundCommand.append(command);
+						getEditingDomain(selectedConfig).getCommandStack().execute(
+								compoundCommand);
+						treeViewer.refresh(selectedConfig);
+						newCIText_ConfigurationEdit.setText("");
+					}
+					
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
 				}
 			});
 		}// end configuration tabitem
@@ -1070,7 +1153,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
 					configurationController, ownerEditComp, SWT.NONE);
 			ownerTypeSelector.setPathInput(configItem,
-					getEditingDomain(configItem), null, false);
+					getEditingDomain(configItem), null, null, false);
 		}
 		{
 
@@ -1284,6 +1367,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
 			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 					true, false, 2, 1));
+			sortSpinner_CIEdit.addModifyListener(sortKeyModificationListener);
 
 			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
 			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -1345,7 +1429,39 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 					treeViewer.refresh(selectedConfig);
 				}
 			});
-
+			newCGroupText_ConfigurationEdit.addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if (e.keyCode == SWT.CR) {
+						BTSConfigItem ci = configurationController
+								.createNewConfigItem(newCGroupText_ConfigurationEdit
+										.getText());
+						for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+						{
+							ci.getOwnerReferencedTypesStringList().add(s);
+						}
+						ci.setType(BTSCoreConstants.PASSPORT_ENTRY_GROUP);
+						CompoundCommand compoundCommand = new CompoundCommand();
+						org.eclipse.emf.common.command.Command command = AddCommand
+								.create(getEditingDomain(selectedConfig),
+										selectedConfig,
+										BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+										ci);
+						compoundCommand.append(command);
+						getEditingDomain(selectedConfig).getCommandStack().execute(
+								compoundCommand);
+						treeViewer.refresh(selectedConfig);
+						newCGroupText_ConfigurationEdit.setText("");
+					}
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 			
 
 			Label newConfigItemLabel = new Label(configItemEditComp, SWT.NONE);
@@ -1387,6 +1503,39 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 				}
 			});
+			newCIText_ConfigurationEdit.addKeyListener(new KeyListener() {
+				
+				@Override
+				public void keyReleased(KeyEvent e) {
+					if (e.keyCode == SWT.CR) {
+						BTSConfigItem ci = configurationController
+								.createNewConfigItem(newCIText_ConfigurationEdit
+										.getText());
+						ci.setType(BTSCoreConstants.PASSPORT_ENTRY_ITEM);
+						for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+						{
+							ci.getOwnerReferencedTypesStringList().add(s);
+						}
+						CompoundCommand compoundCommand = new CompoundCommand();
+						org.eclipse.emf.common.command.Command command = AddCommand
+								.create(getEditingDomain(selectedConfig),
+										selectedConfig,
+										BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+										ci);
+						compoundCommand.append(command);
+						getEditingDomain(selectedConfig).getCommandStack().execute(
+								compoundCommand);
+						treeViewer.refresh(selectedConfig);
+						newCIText_ConfigurationEdit.setText("");
+					}
+				}
+				
+				@Override
+				public void keyPressed(KeyEvent e) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 		}// end configuration tabitem
 		{
 			TabItem ownerstabItem = new TabItem(tabfolder, SWT.NONE);
@@ -1398,7 +1547,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			ownerTypeSelector = new ObjectTypeSelectionTreeComposite(
 					configurationController, ownerEditComp, SWT.NONE);
 			ownerTypeSelector.setPathInput(configItem,
-					getEditingDomain(configItem), null, false);
+					getEditingDomain(configItem), null, null, false);
 		}
 
 		configItemEditBindings = initializePassportEntryGroupEditBindings(configItem);
@@ -1552,6 +1701,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
 		sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 				true, false, 2, 1));
+		sortSpinner_CIEdit.addModifyListener(sortKeyModificationListener);
 
 		Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
 		lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -1599,6 +1749,42 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 						compoundCommand);
 				treeViewer.refresh(selectedConfig);
 
+			}
+		});
+		newCIText_ConfigurationEdit.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.keyCode == SWT.CR) {
+					BTSConfigItem ci = configurationController
+							.createNewConfigItem(newCIText_ConfigurationEdit
+									.getText());
+					ci.setType(BTSCoreConstants.PASSPORT_CATEGORY);
+					for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+					{
+						ci.getOwnerReferencedTypesStringList().add(s);
+					}
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig,
+									BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+									ci);
+					compoundCommand.append(command);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							compoundCommand);
+					treeViewer.refresh(selectedConfig);
+
+
+					newCIText_ConfigurationEdit.setText("");
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 		configItemEditBindings = initializePassportCategoriesEditBindings(configItem);
@@ -1732,6 +1918,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			sortSpinner_CIEdit = new Spinner(configItemEditComp, SWT.BORDER);
 			sortSpinner_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 					true, false, 2, 1));
+			sortSpinner_CIEdit.addModifyListener(sortKeyModificationListener);
 
 			Label lblIgnore = new Label(configItemEditComp, SWT.NONE);
 			lblIgnore.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -1762,7 +1949,28 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			widgetCB_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 					true, false, 3, 1));
 			widgetCB_CIEdit.setItems(BTSCoreConstants.WIDGET_TYPES);
-
+			widgetCB_CIEdit.addSelectionListener(new SelectionAdapter() {
+				
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					String selection = widgetCB_CIEdit.getText();
+					if(BTSCoreConstants.WIDGET_TYPE_SELECT_THS.equals(selection))
+					{
+						relationSubjectObjectTypesEditor.setReferencedTypesRootConfigItems(configurationController
+								.getObjectTypesConfigItem());
+					}
+					else if(BTSCoreConstants.WIDGET_TYPE_SELECT_THS.equals(selection))
+					{
+						relationSubjectObjectTypesEditor.setReferencedTypesRootConfigItems(configurationController
+								.getActiveConfiguration());
+					}
+					else 
+					{
+						relationSubjectObjectTypesEditor.setReferencedTypesRootConfigItems(null);
+					}
+					
+				}
+			});
 
 			allowMultiBTN_CIEdit = new Button(grpWidgetDescription, SWT.CHECK);
 			allowMultiBTN_CIEdit.setText("Allow multiple");
@@ -1801,7 +2009,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			context.set(Integer.class, SWT.None);
 			relationSubjectObjectTypesEditor = ContextInjectionFactory.make(RelationSubjectObjectTypesSelectionComposite.class, context);
 			relationSubjectObjectTypesEditor.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
-
+			
 		}
 		configItemEditBindings = initializePassportEntryItemEditBindings(configItem);
 
@@ -2195,7 +2403,43 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 			}
 		});
+		newCIText_ConfigurationEdit.addKeyListener(new KeyListener() {
+			
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.keyCode == SWT.CR) {
+					BTSConfigItem ci = configurationController
+							.createNewConfigItem(newCIText_ConfigurationEdit
+									.getText());
+					ci.setValue(newCIText_ConfigurationEdit.getText());
+					if (selectedConfig instanceof BTSConfigItem) {
+						for (String s : ((BTSConfigItem) selectedConfig).getOwnerReferencedTypesStringList())
+						{
+							ci.getOwnerReferencedTypesStringList().add(s);
+						}
+					}
+					CompoundCommand compoundCommand = new CompoundCommand();
+					org.eclipse.emf.common.command.Command command = AddCommand
+							.create(getEditingDomain(selectedConfig),
+									selectedConfig,
+									BtsmodelPackage.Literals.BTS_CONFIG__CHILDREN,
+									ci);
+					compoundCommand.append(command);
+					getEditingDomain(selectedConfig).getCommandStack().execute(
+							compoundCommand);
+					treeViewer.refresh(selectedConfig);
 
+					newCIText_ConfigurationEdit.setText("");
+				}
+				
+			}
+			
+			@Override
+			public void keyPressed(KeyEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		configurationEditBindings = initializeConfigurationEditBindings(configuration);
 
 		value.setValue(configuration);
@@ -2242,7 +2486,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected void createButtonsForButtonBar(Composite parent) {
-		okButton = createButton(parent, IDialogConstants.OK_ID,
+		createButton(parent, IDialogConstants.OK_ID,
 				IDialogConstants.OK_LABEL, true);
 
 		createButton(parent, IDialogConstants.CANCEL_ID,

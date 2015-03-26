@@ -30,7 +30,7 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 	void addRelation(E subject, String relationType,
 			TreeNodeWrapper treeNodeWrapper);
 
-	void save(E o);
+	void save(BTSCorpusObject o);
 
 	List<E> findChildren(E parent,
 			Map<String, BTSQueryResultAbstract> queryResultMap,
