@@ -174,6 +174,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	
 	@Inject
 	private LemmaEditorController lemmaEditorController;
+	private boolean isDirty;
 
 	@Inject
 	public EgyHieroglyphenTypeWriter(EPartService partService)
@@ -229,6 +230,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 					{
 						return;
 					}
+					setDirty(true);
 					suffix = internalSuffix;
 					jseshEditorProposals.clearText();
 					String normalizedMdC = suffix;
@@ -383,6 +385,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		}
 		setUserMayTranscribeInteral(userMayTranscribe);
 
+	}
+
+	protected void setDirty(boolean dirty) {
+		this.isDirty = dirty;
+		
 	}
 
 	private String[] getInteralProSuffix(String hierotwText) {
@@ -757,11 +764,15 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		loaded = false;
 	}
 
-	private void setSelectionInteral(Object selection)
+	private void setSelectionInteral(final Object selection)
 	{
 		System.out.println("hieroglyph tw selection received: " + selection);
 
 		loading = true;
+		sync.asyncExec(new Runnable()
+		{
+			public void run()
+			{
 		try
 		{
 
@@ -795,6 +806,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		{
 			loading = false;
 		}
+			}
+		});
 		loading = false;
 	}
 
@@ -942,7 +955,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	private void saveMdCstring(BTSWord word)
 	{
-		if (userMayTranscribe && word != null) {
+		if (isDirty && userMayTranscribe && word != null) {
 			String normalizedMdC = hierotw_text.getText();
 			try {
 				normalizedMdC = mdcNormalizer.normalize(hierotw_text.getText());
@@ -953,6 +966,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			normalizedMdC = removeSelectionMarker(normalizedMdC);
 			System.out.println("new mdc " + normalizedMdC + " ::: old "
 					+ beforeImageMdC);
+			beforeImageMdC = transformWordToMdCString(word, -1);
 			if (!normalizedMdC.equals(beforeImageMdC))
 			{
 				normalizedMdC = removeIgnoreMarker(normalizedMdC);
@@ -961,6 +975,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 						normalizedMdC, editingDomain);
 				
 			}
+			setDirty(false);
 		}
 
 	}
@@ -1043,10 +1058,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	private void loadMdCString(final String mdC)
 	{
-		sync.asyncExec(new Runnable()
-		{
-			public void run()
-			{
+		
 				String normalizedMdC = mdC;
 				MDCNormalizer d = new MDCNormalizer();
 				try {
@@ -1063,8 +1075,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				for (String s : codes) {
 					System.out.println(s);
 				}
-			}
-		});
+			
 
 	}
 

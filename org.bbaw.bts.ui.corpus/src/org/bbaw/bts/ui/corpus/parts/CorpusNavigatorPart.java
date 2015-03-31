@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -31,23 +32,30 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
 import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.corpusNavigator.BTSCorpusObjectBySortKeyNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.InstanceScope;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -71,6 +79,7 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -82,6 +91,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.osgi.service.prefs.BackingStoreException;
 
 public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
 
@@ -145,6 +155,16 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	@Active
 	@Optional
 	private Shell parentShell;
+	private ViewerSorter sorter;
+	
+	@Inject
+	private IEclipseContext context;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION, nodePath = "org.bbaw.bts.app")
+	private Boolean activeMainCorpusSelection;
+	private Object mainTextCorpus;
 
 	@Inject
 	public CorpusNavigatorPart() {
@@ -296,12 +316,17 @@ labelProvider));
 						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
 					selectedTreeNode = (TreeNodeWrapper) selection
 							.getFirstElement();
+					if (!activeMainCorpusSelection) {
+						setMainCorpusSelection(selectedTreeNode);
+					}
 					if (selectedTreeNode.getObject() != null) {
 						selectedCorpusObject = (BTSObject) selectedTreeNode.getObject();
 						if (selectedCorpusObject instanceof BTSCorpusObject) {
 							corpusNavigatorController.checkAndFullyLoad((BTSCorpusObject) selectedCorpusObject, true);
 						}
-						if (!selectedTreeNode.isChildrenLoaded() || selectedTreeNode.getChildren().isEmpty()) {
+
+						if ((!(selectedCorpusObject instanceof BTSTextCorpus) || ((BTSTextCorpus)selectedCorpusObject).isActive())
+								&& !selectedTreeNode.isChildrenLoaded() || selectedTreeNode.getChildren().isEmpty()) {
 							
 							
 							List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(1);
@@ -378,9 +403,63 @@ labelProvider));
 			}
 			
 		};
+		if (sorter == null)
+		{
+			sorter = ContextInjectionFactory.make(BTSCorpusObjectBySortKeyNameViewerSorter.class, context);
+		}
 
-		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+		treeViewer.setSorter(sorter);
 		treeViewer.addSelectionChangedListener(selectionListener);
+	}
+
+	protected void setMainCorpusSelection(TreeNodeWrapper selectedTreeNode) {
+		
+		BTSTextCorpus selectedTextCorpus = null;
+		selectedTextCorpus = findParentCorpusRecursively(selectedTreeNode);
+		if (selectedTextCorpus == null || !selectedTextCorpus.isActive() 
+				|| !BTSConstants.OBJECT_STATE_ACTIVE.equals(selectedTextCorpus.getState())
+				|| selectedTextCorpus.is_deleted())
+		{
+			return;
+		}
+		
+		if (mainTextCorpus == null)
+		{
+			mainTextCorpus = context.get(BTSPluginIDs.PREF_MAIN_CORPUS);
+		}
+		if (selectedTextCorpus != null && selectedTextCorpus.getDBCollectionKey() != null
+				&& !mainTextCorpus.equals(selectedTextCorpus))
+		{
+			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
+			// update instance scope so that new value is injected
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
+			context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+			mainTextCorpus = selectedTextCorpus;
+			try {
+				ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
+			} catch (BackingStoreException e) {
+				logger.error(e);
+			}
+			try {
+				InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
+			} catch (BackingStoreException e) {
+				logger.error(e);
+			}
+		}
+		
+	}
+
+	private BTSTextCorpus findParentCorpusRecursively(
+			TreeNodeWrapper tn) {
+		if (tn.getObject() instanceof BTSTextCorpus)
+		{
+			return (BTSTextCorpus) tn.getObject();
+		}
+		else if (tn.getParent() != null)
+		{
+			return findParentCorpusRecursively(tn.getParent());
+		}
+		return null;
 	}
 
 	protected void loadOrphans(final Control parentControl,
@@ -693,7 +772,11 @@ labelProvider));
 			refreshTreeViewer((BTSCorpusObject) object);
 		} else if (object instanceof BTSModelUpdateNotification) {
 			BTSModelUpdateNotification notification = (BTSModelUpdateNotification) object;
-			if (notification.getObject() instanceof BTSTextCorpus)
+			if (notification.getObject() instanceof BTSComment)
+			{
+				// comment, do nothing
+			}
+			else if (notification.getObject() instanceof BTSTextCorpus)
 			{
 				boolean found = false;
 				for (TreeNodeWrapper t : mainRootNode.getChildren())

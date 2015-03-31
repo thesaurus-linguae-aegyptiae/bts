@@ -1339,6 +1339,10 @@ public class UserManagementPart
 								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, u.getName());
 						compoundCommand.append(c2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						if (((BTSDBCollectionRoleDesc) parentRoleDesc).eContainer() instanceof BTSProjectDBCollection)
+						{
+							((BTSProjectDBCollection) ((BTSDBCollectionRoleDesc) parentRoleDesc).eContainer()).setDirty(true);
+						}
 						roles_treeViewer.refresh(parent);
 					}
 				}
@@ -1407,6 +1411,10 @@ public class UserManagementPart
 								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES, u.getUserName());
 						compoundCommand.append(c2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						if (((BTSDBCollectionRoleDesc) parentRoleDesc).eContainer() instanceof BTSProjectDBCollection)
+						{
+							((BTSProjectDBCollection) ((BTSDBCollectionRoleDesc) parentRoleDesc).eContainer()).setDirty(true);
+						}
 						roles_treeViewer.refresh(parent);
 					}
 				}
@@ -1511,6 +1519,10 @@ public class UserManagementPart
 								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_NAMES, u.getUserName());
 						compoundCommand.append(command2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
+						if (((BTSDBCollectionRoleDesc) selectedDBRoleDesc).eContainer() instanceof BTSProjectDBCollection)
+						{
+							((BTSProjectDBCollection) ((BTSDBCollectionRoleDesc) selectedDBRoleDesc).eContainer()).setDirty(true);
+						}
 						roles_treeViewer.refresh(selectedDBRoleDesc);
 						manageDirtyObjects(selectedDBRoleDesc, selectedTreeObject);
 					}
@@ -1565,7 +1577,10 @@ public class UserManagementPart
 						compoundCommand.append(command2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
 						manageDirtyObjects(selectedDBRoleDesc, selectedTreeObject);
-
+						if (((BTSDBCollectionRoleDesc) selectedDBRoleDesc).eContainer() instanceof BTSProjectDBCollection)
+						{
+							((BTSProjectDBCollection) ((BTSDBCollectionRoleDesc) selectedDBRoleDesc).eContainer()).setDirty(true);
+						}
 						roles_treeViewer.refresh(selectedDBRoleDesc);
 					}
 				}
@@ -1588,7 +1603,7 @@ public class UserManagementPart
 					Command command = RemoveCommand.create(getEditingDomain(coll), coll,
 							BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS, selectedDBRoleDesc);
 					getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(command);
-
+					coll.setDirty(true);
 					roles_treeViewer.refresh(coll);
 
 				}
@@ -1745,6 +1760,7 @@ public class UserManagementPart
 						BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS, rolesDesc);
 				compound.append(c1);
 				manageDirtyObjects(selectedDBCollection, selectedTreeObject);
+				selectedDBCollection.setDirty(true);
 				getEditingDomain(selectedDBCollection).getCommandStack().execute(compound);
 				roles_treeViewer.refresh();
 

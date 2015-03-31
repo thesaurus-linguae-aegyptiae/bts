@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.partController.ThsNavigatorController;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -48,6 +49,14 @@ implements ThsNavigatorController {
 	@Override
 	public BTSThsEntry find(String id, IProgressMonitor monitor) {
 		return thsService.find(id, monitor);
+	}
+
+	@Override
+	public BTSAnnotation createNewAnnotation(BTSThsEntry annotatedObject) {
+		BTSAnnotation anno = thsService
+				.createNewAnnotationRelationPartOf(annotatedObject);
+		
+		return anno;
 	}
 
 

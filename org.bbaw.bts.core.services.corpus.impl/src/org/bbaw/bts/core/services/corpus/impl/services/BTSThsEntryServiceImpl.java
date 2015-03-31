@@ -13,12 +13,16 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.dao.corpus.BTSThsEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
+import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public class BTSThsEntryServiceImpl 
 extends AbstractCorpusObjectServiceImpl<BTSThsEntry, String> 
@@ -26,6 +30,19 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Inject
 	private BTSThsEntryDao thsEntryDao;
 
+	@Inject
+	private BTSAnnotationService annotationService;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_THS_DEFAULT_REVIEWSTATE, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String thsReviewState;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_THS_DEFAULT_VISIBILITY, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String thsVisibility;
+	
 	@Override
 	public List<BTSThsEntry> list(String dbPath, String queryId,
 			String objectState, IProgressMonitor monitor) {
@@ -42,11 +59,12 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public BTSThsEntry createNew() {
 		BTSThsEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSThsEntry();
-		entry.setDBCollectionKey(main_project + BTSCorpusConstants.THS);
-
+		entry.setDBCollectionKey(main_ths_key);
+		entry.setVisibility(thsVisibility);
+		entry.setRevisionState(thsReviewState);
 		super.setId(entry, entry.getDBCollectionKey());
 		super.setRevision(entry);
-		entry.setCorpusPrefix(main_corpus_key);
+		entry.setCorpusPrefix(main_ths_key);
 		return entry;
 	}
 
@@ -149,6 +167,22 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> getOrphanEntries(Map map,
 			List<BTSFilter> btsFilters, IProgressMonitor monitor) {
 		return super.getOrphanEntries(map, btsFilters, monitor);
+	}
+	@Override
+	public BTSAnnotation createNewAnnotationRelationPartOf(
+			BTSThsEntry annotatedObject) {
+		BTSAnnotation anno = annotationService
+				.createNewRelationPartOf(annotatedObject);
+		if (main_ths_key == null || "".equals(main_ths_key))
+		{
+			main_ths_key = main_project;
+		}
+		anno.setVisibility(thsVisibility);
+		anno.setRevisionState(thsReviewState);
+		anno.setDBCollectionKey(main_ths_key + BTSCorpusConstants.THS);
+		anno.setCorpusPrefix(main_ths_key + BTSCorpusConstants.THS);
+		anno.setProject(main_ths_key);
+		return anno;
 	}
 	
 }

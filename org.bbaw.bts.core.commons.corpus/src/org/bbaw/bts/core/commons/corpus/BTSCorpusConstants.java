@@ -108,6 +108,21 @@ public class BTSCorpusConstants {
 		"𓍹", "𓍺"};
 
 	public static final String LEMMATIZER_DELETION_PATTERN = "(\\{[^\\}]*\\}{1,2})";
+
+	public static final String PREF_CORPUS_NAVIGATOR_SORTBYKEY = "pref_corpus_navigator_sortbysortkey";
+	public static final String PREF_LEMMA_NAVIGATOR_SORTBYKEY = "pref_lemma_navigator_sortbysortkey";
+	public static final String PREF_THS_NAVIGATOR_SORTBYKEY = "pref_ths_navigator_sortbysortkey";
+
+	public static final String PREF_CORPUS_DEFAULT_VISIBILITY = "pref_corpus_default_visibility";
+	public static final String PREF_CORPUS_DEFAULT_REVIEWSTATE = "pref_corpus_default_reviewState";
+
+	public static final String PREF_LEMMA_DEFAULT_VISIBILITY = "pref_lemma_default_visibility";
+	public static final String PREF_LEMMA_DEFAULT_REVIEWSTATE = "pref_lemma_default_reviewState";
+
+	public static final String PREF_THS_DEFAULT_VISIBILITY = "pref_ths_default_visibility";
+	public static final String PREF_THS_DEFAULT_REVIEWSTATE = "pref_ths_default_reviewState";
+
+
 	private BTSCorpusConstants(){}
 
 }

@@ -13,6 +13,7 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -38,12 +39,16 @@ import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaBySortKeyNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.ths.BTSThsBySortKeyNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
@@ -69,6 +74,7 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -144,7 +150,9 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 	@Inject
 	@Optional
 	private BTSObjectTypeSubtypeViewerFilter typeSubtypeFilter;
-	
+	private ViewerSorter sorter;
+	@Inject
+	private IEclipseContext context;
 
 	@Inject
 	public ThsNavigator() {
@@ -368,7 +376,12 @@ labelProvider));
 				}
 			}
 		};
+		if (sorter == null)
+		{
+			sorter = ContextInjectionFactory.make(BTSThsBySortKeyNameViewerSorter.class, context);
+		}
 
+		treeViewer.setSorter(sorter);
 		treeViewer.setSorter(new BTSObjectByNameViewerSorter());
 		treeViewer.addSelectionChangedListener(selectionListener);
 		if (BTSUIConstants.SELECTION_TYPE_SECONDARY.equals(selectionType) && typeSubtypeFilter != null) {
@@ -651,7 +664,11 @@ labelProvider));
 		} else if (object instanceof BTSThsEntry) {
 			refreshTreeViewer((BTSThsEntry) object);
 		} else if (object instanceof BTSModelUpdateNotification) {
-			if (thsNavigatorController.handleModelUpdate(
+			if (((BTSModelUpdateNotification) object).getObject() instanceof BTSComment)
+			{
+				// comment, do nothing
+			}
+			else if (thsNavigatorController.handleModelUpdate(
 					(BTSModelUpdateNotification) object, queryResultMap,
 					viewHolderMap)) {
 				refreshTreeViewer((BTSThsEntry) ((BTSModelUpdateNotification) object)

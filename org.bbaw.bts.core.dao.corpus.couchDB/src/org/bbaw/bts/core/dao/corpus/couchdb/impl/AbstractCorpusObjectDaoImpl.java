@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSRelation;
+import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
@@ -30,9 +32,20 @@ implements GenericDao<E, K>
 	@Inject
 	protected Logger logger;
 	public static final String CORPUSPREFIX_PATTERN = "(\"corpusPrefix\":\\s*\")([^\"]*)\"";
-
 	public static final Pattern corpusPrefixPattern = Pattern.compile(CORPUSPREFIX_PATTERN);
+	
+	public static final String RELATION_PATTERN = "(\"relations\"\\s*:\\s*\\[\\s*)([^\\]]*)";
+	private static final Pattern relationsPattern  = Pattern.compile(RELATION_PATTERN);
 
+	public static final String RELATION_ID_PATTERN = "(\"_id\":\\s*\")([^\"]*)\"";
+	public static final Pattern relationIdPattern = Pattern.compile(RELATION_ID_PATTERN);
+	
+	public static final String RELATIONTYPE_PATTERN = "(\"type\":\\s*\")([^\"]*)\"";
+	public static final Pattern relationTypePattern = Pattern.compile(RELATIONTYPE_PATTERN);
+	
+	public static final String RELATIONOBJECTID_PATTERN = "(\"objectId\":\\s*\")([^\"]*)\"";
+	public static final Pattern relationObjectIdPattern = Pattern.compile(RELATIONOBJECTID_PATTERN);
+	
 	
 	protected List<E> loadPartialObjectsFromStrings(
 			List<String> allDocs, String dbPath) {
@@ -140,11 +153,86 @@ implements GenericDao<E, K>
 				entity.getUpdaters().add(s);
 			}
 		}
+		// relations
+		List<BTSRelation> relations = extractRelationsFromObjectString(sourceAsString);
+		if (relations != null)
+		{
+			for (BTSRelation r : relations)
+			{
+				entity.getRelations().add(r);
+			}
+		}
 
 		entity.setDBCollectionKey(indexName);
 		entity.setRevisionState(extractRevisionSateFromObjectString(sourceAsString));
 		return entity;
 	}
+
+	private List<BTSRelation> extractRelationsFromObjectString(
+			String sourceAsString) {
+		Matcher m = relationsPattern.matcher(sourceAsString);
+		if (m.find())
+		{
+			List<BTSRelation> relations = new Vector<BTSRelation>();
+			String allRelations = m.group(2);
+			if (allRelations == null || allRelations.trim().length() == 0) return null;
+			String relStrings[] = allRelations.split("\\}\\s*,\\s*\\{");
+			for (String relString : relStrings)
+			{
+				String eclass = extractEClassFromObjectString(relString);
+				if (eclass.endsWith("BTSRelation"))
+				{
+					BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
+					String object = extractRelationObjectFromObjectString(relString);
+					rel.setObjectId(object);
+					
+					String relID = extractRelationIDFromObjectString(relString);
+					rel.set_id(relID);
+					
+					String relType = extractRelationTypeFromObjectString(relString);
+					rel.setType(relType);
+					relations.add(rel);
+				}
+			}
+			return relations;
+		}
+		return null;
+	}
+
+
+
+	private String extractRelationTypeFromObjectString(String relString) {
+		Matcher m = relationTypePattern.matcher(relString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+
+
+
+	private String extractRelationIDFromObjectString(String relString) {
+		Matcher m = relationIdPattern.matcher(relString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+
+
+
+	private String extractRelationObjectFromObjectString(String relString) {
+		Matcher m = relationObjectIdPattern.matcher(relString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+
+
 
 	private String extractCorpusPrefixFromObjectString(String sourceAsString) {
 		Matcher m = corpusPrefixPattern.matcher(sourceAsString);

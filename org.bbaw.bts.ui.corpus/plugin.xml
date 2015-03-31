@@ -17,6 +17,30 @@
           id="org.bbaw.bts.ui.corpus.lemmalist.page"
           name="Lemma List">
     </page>
+    <page
+          category="org.bbaw.bts.ui.corpus.corpussettings.page"
+          class="org.bbaw.bts.ui.corpus.preferences.CorpusNavigatorSettingsPage"
+          id="org.bbaw.bts.ui.corpus.corpusnavigator.page"
+          name="corpusnavigator">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.corpus.lemmalist.page"
+          class="org.bbaw.bts.ui.corpus.preferences.LemmaNavigatorSettingsPage"
+          id="org.bbaw.bts.ui.corpus.lemmanavigator.page"
+          name="lemmanavigator">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.corpus.preferences.ThsSettingsPage"
+          id="org.bbaw.bts.ui.corpus.thssettings.page"
+          name="thssettings">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.corpus.thssettings.page"
+          class="org.bbaw.bts.ui.corpus.preferences.ThsNavigatorSettingsPage"
+          id="org.bbaw.bts.ui.corpus.thsnavigator.page"
+          name="thsnavigator">
+    </page>
  </extension>
  <extension
        point="org.bbaw.bts.ui.commons.compareViewerFactory">

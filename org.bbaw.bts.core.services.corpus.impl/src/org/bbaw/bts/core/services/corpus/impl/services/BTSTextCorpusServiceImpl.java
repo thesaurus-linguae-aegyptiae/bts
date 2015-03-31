@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
+import org.bbaw.bts.btsmodel.BTSDBCollectionRoleDesc;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
@@ -46,12 +47,23 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 	@Inject
 	private Backend2ClientUpdateService updateService;
 
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_REVIEWSTATE, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusReviewState;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_VISIBILITY, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusVisibility;
+	
 	@Override
 	public BTSTextCorpus createNew()
 	{
 		BTSTextCorpus entity = BtsCorpusModelFactory.eINSTANCE.createBTSTextCorpus();
 		entity.setDBCollectionKey(main_project + BTSCorpusConstants.CORPUS);
-
+		entity.setVisibility(corpusVisibility);
+		entity.setRevisionState(corpusReviewState);
 		entity.setCorpusPrefix(main_corpus_key);
 		setId(entity, entity.getDBCollectionKey());
 		setRevision(entity);
@@ -193,6 +205,23 @@ public class BTSTextCorpusServiceImpl extends AbstractCorpusObjectServiceImpl<BT
 		{
 			BTSProject project = projectService.findByProjectPrefix(corpus.getProject());
 			BTSProjectDBCollection coll = projectService.checkAndAddDBCollection(project, project.getPrefix() + BTSCorpusConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);
+
+			coll.setDirty(true);
+			// set rights
+			BTSDBCollectionRoleDesc roleDesc = BtsmodelFactory.eINSTANCE.createBTSDBCollectionRoleDesc();
+			roleDesc.setRoleName(BTSCoreConstants.USER_ROLE_EDITORS);
+			if (corpus.getUpdaters() != null)
+			{
+				for (String s : corpus.getUpdaters())
+				{
+					roleDesc.getUserNames().add(s);
+				}
+			}
+			coll.getRoleDescriptions().add(roleDesc);
+			
+			roleDesc = BtsmodelFactory.eINSTANCE.createBTSDBCollectionRoleDesc();
+			roleDesc.setRoleName(BTSCoreConstants.USER_ROLE_RESEARCHERS);
+			coll.getRoleDescriptions().add(roleDesc);
 
 			projectService.save(project);
 			dbManager.checkAndCreateDBCollection(project, coll, project.getPrefix() + BTSCorpusConstants.CORPUS_INTERFIX + corpus.getCorpusPrefix(), true, synchronizeCorpus);

@@ -12,6 +12,7 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSRelation;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -20,6 +21,7 @@ import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.services.corpus.GenericCorpusObjectService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -50,6 +52,16 @@ implements GenericCorpusObjectService<E, K>{
 	@Preference(value = BTSPluginIDs.PREF_MAIN_LEMMALIST_KEY, nodePath = "org.bbaw.bts.app")
 	protected String main_lemmaList_key;
 	
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_ACTIVE_THSS, nodePath = "org.bbaw.bts.app")
+	protected String active_thss;
+
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_MAIN_THS_KEY, nodePath = "org.bbaw.bts.app")
+	protected String main_ths_key;
+	
 	public abstract List<E> listRootEntries(IProgressMonitor monitor);
 	
 	public List<E> getOrphanEntries(Map map,
@@ -65,6 +77,10 @@ implements GenericCorpusObjectService<E, K>{
 		{
 			if (isVisible(e, btsFilters))
 			{
+				if (!e.eIsSet(BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS))
+				{
+					checkAndFullyLoad(e, false);
+				}
 				allFilteredEntries.add(e);
 				if (monitor != null)
 				{
@@ -84,6 +100,8 @@ implements GenericCorpusObjectService<E, K>{
 		{
 			if (isVisible(e, btsFilters))
 			{
+				checkAndFullyLoad(e, false);
+
 				allRootEntriesSet.add(e.get_id());
 				if (monitor != null)
 				{

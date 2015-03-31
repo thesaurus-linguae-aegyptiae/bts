@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getRoleDescriptions <em>Role Descriptions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getPropertyStrings <em>Property Strings</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isDirty <em>Dirty</em>}</li>
  * </ul>
  * </p>
  *
@@ -163,6 +164,32 @@ public interface BTSProjectDBCollection extends BTSIdentifiableItem
 	 * @generated
 	 */
 	void setProperties(Map<String, String> value);
+
+	/**
+	 * Returns the value of the '<em><b>Dirty</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Dirty</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Dirty</em>' attribute.
+	 * @see #setDirty(boolean)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSProjectDBCollection_Dirty()
+	 * @model transient="true"
+	 * @generated
+	 */
+	boolean isDirty();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isDirty <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Dirty</em>' attribute.
+	 * @see #isDirty()
+	 * @generated
+	 */
+	void setDirty(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

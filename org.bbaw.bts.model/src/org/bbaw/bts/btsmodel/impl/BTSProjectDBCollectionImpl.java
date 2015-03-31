@@ -31,6 +31,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getRoleDescriptions <em>Role Descriptions</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getPropertyStrings <em>Property Strings</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSProjectDBCollectionImpl#isDirty <em>Dirty</em>}</li>
  * </ul>
  * </p>
  *
@@ -124,6 +125,26 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	 * @ordered
 	 */
 	protected Map<String, String> properties;
+
+	/**
+	 * The default value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDirty()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean DIRTY_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isDirty() <em>Dirty</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isDirty()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean dirty = DIRTY_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
@@ -280,6 +301,27 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDirty() {
+		return dirty;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDirty(boolean newDirty) {
+		boolean oldDirty = dirty;
+		dirty = newDirty;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__DIRTY, oldDirty, dirty));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
 	 * @generatedNOT
 	 */
 	public void setProperty(String key, String value) {
@@ -330,6 +372,8 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return getPropertyStrings();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
 				return getProperties();
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__DIRTY:
+				return isDirty();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -363,6 +407,9 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
 				setProperties((Map<String, String>)newValue);
 				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__DIRTY:
+				setDirty((Boolean)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -393,6 +440,9 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
 				setProperties((Map<String, String>)null);
 				return;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__DIRTY:
+				setDirty(DIRTY_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -417,6 +467,8 @@ public class BTSProjectDBCollectionImpl extends BTSIdentifiableItemImpl implemen
 				return propertyStrings != null && !propertyStrings.isEmpty();
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
 				return properties != null;
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__DIRTY:
+				return dirty != DIRTY_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}

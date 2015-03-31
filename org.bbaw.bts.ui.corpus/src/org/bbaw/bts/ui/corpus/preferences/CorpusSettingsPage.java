@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -20,15 +21,21 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.preference.BooleanFieldEditor;
 import org.eclipse.jface.preference.FieldEditorPreferencePage;
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
@@ -50,6 +57,9 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 	private Logger logger;
 	private boolean loaded;
 	private BTSCorpusRemovableContentProvider chrosenProvider;
+	protected boolean activate;
+	private Boolean initialActivate;
+	private Button activateButton;
 
 	/**
 	 * Create the preference page.
@@ -58,6 +68,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		super(FLAT);
 		setTitle("Corpus Settings");
 	}
+	
 
 	/**
 	 * Create contents of the preference page.
@@ -66,6 +77,24 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 	protected void createFieldEditors() {
 		
 		Composite container = (Composite) this.getControl();
+		activateButton = new Button(container, SWT.CHECK);
+		activateButton.setText("Activate to select main working corpus.");
+		activateButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				activate = !activate;
+				comboViewer.getCombo().setEnabled(activate);
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 		
 		Label lblSelectYourMain = new Label(container, SWT.NONE);
 		lblSelectYourMain.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
@@ -125,6 +154,11 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		logger = context.get(Logger.class);
 		
 		loadListInput();
+		
+		activate = prefs.getBoolean(BTSPluginIDs.PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION, false);
+		initialActivate = new Boolean(activate);
+		comboViewer.getCombo().setEnabled(activate);
+		activateButton.setSelection(activate);
 
 	}
 	
@@ -248,6 +282,13 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 				}
 				
 			}
+		}
+		if (initialActivate == null || initialActivate.booleanValue() != activate)
+		{
+			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").putBoolean(BTSPluginIDs.PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION, activate);
+			// update instance scope so that new value is injected
+			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").putBoolean(BTSPluginIDs.PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION, activate);
+			dirty = true;
 		}
 		if (dirty)
 		{

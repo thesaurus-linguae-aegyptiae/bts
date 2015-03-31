@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.btsmodel;
 
-import java.util.List;
 
 
 /**

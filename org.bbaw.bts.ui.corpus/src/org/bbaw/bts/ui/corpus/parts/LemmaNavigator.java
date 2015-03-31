@@ -11,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
@@ -33,13 +34,17 @@ import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.corpus.parts.lemma.BTSEgyObjectByNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.corpusNavigator.BTSCorpusObjectBySortKeyNameViewerSorter;
+import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaBySortKeyNameViewerSorter;
+import org.bbaw.bts.ui.corpus.sorter.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.contexts.Active;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
@@ -65,6 +70,7 @@ import org.eclipse.jface.viewers.TreePath;
 import org.eclipse.jface.viewers.TreeSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
+import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
@@ -132,7 +138,9 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	private SuppressDeletedViewerFilter deletedFilter;
 	private boolean loaded;
 	protected TreeNodeWrapper orphanNode;
-	
+	private ViewerSorter sorter;
+	@Inject
+	private IEclipseContext context;
 	
 	@PostConstruct
 	public void createComposite(Composite parent)
@@ -350,8 +358,12 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 				}
 			}
 		};
+		if (sorter == null)
+		{
+			sorter = ContextInjectionFactory.make(BTSLemmaBySortKeyNameViewerSorter.class, context);
+		}
 
-		treeViewer.setSorter(new BTSEgyObjectByNameViewerSorter());
+		treeViewer.setSorter(sorter);
 		treeViewer.addSelectionChangedListener(selectionListener);
 	}
 	
@@ -622,7 +634,11 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		} else if (object instanceof BTSLemmaEntry) {
 			refreshTreeViewer((BTSLemmaEntry) object);
 		} else if (object instanceof BTSModelUpdateNotification) {
-			if (lemmaNavigatorController.handleModelUpdate(
+			if (((BTSModelUpdateNotification) object).getObject() instanceof BTSComment)
+			{
+				// comment, do nothing
+			}
+			else if (lemmaNavigatorController.handleModelUpdate(
 					(BTSModelUpdateNotification) object, queryResultMap,
 					viewHolderMap)) {
 				refreshTreeViewer((BTSCorpusObject) ((BTSModelUpdateNotification) object)

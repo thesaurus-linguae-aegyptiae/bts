@@ -18,6 +18,7 @@ import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -69,7 +70,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		if (object instanceof BTSThsEntry)
 		{
 			query.setDbPath(object.getDBCollectionKey());
-		} else if (object instanceof BTSThsEntry)
+		} else if (object instanceof BTSLemmaEntry)
 		{
 			query.setDbPath(object.getDBCollectionKey());
 		}

@@ -33,12 +33,24 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	@Inject
 	private BTSTextDao textDao;
 
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_REVIEWSTATE, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusReviewState;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_VISIBILITY, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusVisibility;
+	
 	@Override
 	public BTSText createNew()
 	{
 		BTSText entity = BtsCorpusModelFactory.eINSTANCE.createBTSText();
 		entity.setDBCollectionKey(main_corpus_key);
 		entity.setCorpusPrefix(main_corpus_key);
+		entity.setVisibility(corpusVisibility);
+		entity.setRevisionState(corpusReviewState);
 		super.setId(entity, entity.getDBCollectionKey());
 		super.setRevision(entity);
 

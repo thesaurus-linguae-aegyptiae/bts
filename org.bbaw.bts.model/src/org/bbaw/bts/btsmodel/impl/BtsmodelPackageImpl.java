@@ -1846,6 +1846,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSProjectDBCollection_Dirty() {
+		return (EAttribute)btsProjectDBCollectionEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getBTSProjectDBCollection__SetProperty__String_String() {
 		return btsProjectDBCollectionEClass.getEOperations().get(0);
 	}
@@ -2267,6 +2276,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEReference(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS);
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS);
 		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__PROPERTIES);
+		createEAttribute(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION__DIRTY);
 		createEOperation(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION___SET_PROPERTY__STRING_STRING);
 		createEOperation(btsProjectDBCollectionEClass, BTS_PROJECT_DB_COLLECTION___GET_PROPERTY__STRING);
 
@@ -2579,6 +2589,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		g2 = createEGenericType(ecorePackage.getEString());
 		g1.getETypeArguments().add(g2);
 		initEAttribute(getBTSProjectDBCollection_Properties(), g1, "properties", null, 0, 1, BTSProjectDBCollection.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSProjectDBCollection_Dirty(), ecorePackage.getEBoolean(), "dirty", null, 0, 1, BTSProjectDBCollection.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = initEOperation(getBTSProjectDBCollection__SetProperty__String_String(), null, "setProperty", 0, 1, IS_UNIQUE, IS_ORDERED);
 		addEParameter(op, ecorePackage.getEString(), "key", 0, 1, IS_UNIQUE, IS_ORDERED);

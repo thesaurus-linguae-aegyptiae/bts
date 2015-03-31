@@ -10,12 +10,12 @@ import org.eclipse.jface.viewers.ViewerSorter;
 
 public class BTSObjectByNameViewerSorter extends ViewerSorter {
 	private AlphanumComparator alphaNumComp = new AlphanumComparator();
-	private boolean preferSortKey;
-
+	protected boolean forceSortKey;
+	
 	public BTSObjectByNameViewerSorter(){};
 	
-	public BTSObjectByNameViewerSorter(boolean preferSortKey){
-		this.preferSortKey = preferSortKey;
+	public BTSObjectByNameViewerSorter(boolean forceSortKey){
+		this.forceSortKey = forceSortKey;
 	};
 
 	
@@ -72,12 +72,12 @@ public class BTSObjectByNameViewerSorter extends ViewerSorter {
 			}
 
 		}
-		
-		if (preferSortKey && i1 != 0 && i2 != 0) return i1 -i2;
+
 		// sort _Orphans node in tree at bottom 
 		if (BTSConstants.ORPHANS_NODE_LABEL.equals(s1)) return 1;
 		else if (BTSConstants.ORPHANS_NODE_LABEL.equals(s2)) return -1;
-		
+		else if (isForceSortKey() && i1 != i2) return i1 -i2;
+
 		if (s1 != null) {
 			if (s2 != null) {
 				return alphaNumComp.compare(s1, s2);
@@ -85,5 +85,9 @@ public class BTSObjectByNameViewerSorter extends ViewerSorter {
 				return -1;
 		}
 		return 0;
+	}
+
+	protected boolean isForceSortKey() {
+		return this.forceSortKey;
 	}
 }

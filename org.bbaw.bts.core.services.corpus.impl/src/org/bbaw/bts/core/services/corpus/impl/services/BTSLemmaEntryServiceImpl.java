@@ -48,6 +48,16 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Inject
 	private BTSAnnotationService annotationService;
 	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_LEMMA_DEFAULT_REVIEWSTATE, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String lemmaReviewState;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_LEMMA_DEFAULT_VISIBILITY, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String lemmaVisibility;
+	
 	@Override
 	public BTSLemmaEntry createNew()
 	{
@@ -58,7 +68,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		BTSLemmaEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSLemmaEntry();
 		entry.setDBCollectionKey(main_lemmaList_key + BTSCorpusConstants.WLIST);
 		entry.setCorpusPrefix(main_lemmaList_key + BTSCorpusConstants.WLIST);
-
+		entry.setVisibility(lemmaVisibility);
+		entry.setRevisionState(lemmaReviewState);
 		entry.setProject(main_lemmaList_key);
 		super.setId(entry, entry.getDBCollectionKey());
 		super.setRevision(entry);
@@ -275,6 +286,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		{
 			main_lemmaList_key = main_project;
 		}
+		anno.setVisibility(lemmaVisibility);
+		anno.setRevisionState(lemmaReviewState);
 		anno.setDBCollectionKey(main_lemmaList_key + BTSCorpusConstants.WLIST);
 		anno.setCorpusPrefix(main_lemmaList_key + BTSCorpusConstants.WLIST);
 		anno.setProject(main_lemmaList_key);

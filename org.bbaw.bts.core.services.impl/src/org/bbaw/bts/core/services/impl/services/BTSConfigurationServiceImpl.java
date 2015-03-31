@@ -611,8 +611,10 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		if (corpusObject == null)
 		{
 			for (BTSConfig c : reviewStatusCI.getChildren()) {
-				reviewStatusClone.getChildren().add(
+				if (c instanceof BTSConfigItem && !((BTSConfigItem) c).isIgnore() && ((BTSConfigItem) c).getValue() != null) {
+					reviewStatusClone.getChildren().add(
 						EcoreUtil.copy(c));
+				}
 			}
 			return reviewStatusClone;
 		}
@@ -719,6 +721,15 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		BTSConfigItem visibilityClone = BtsmodelFactory.eINSTANCE
 				.createBTSConfigItem();
 		if (object == null) {
+			for (BTSConfig c : visibilityCI.getChildren()) {
+				if (c instanceof BTSConfigItem) {
+					BTSConfigItem visCI = (BTSConfigItem) c;
+					if (!visCI.isIgnore()&& visCI.getValue() != null) {
+						visibilityClone.getChildren()
+								.add(EcoreUtil.copy(visCI));
+					}
+				}
+			}
 			return visibilityClone;
 		}
 		boolean found = false;

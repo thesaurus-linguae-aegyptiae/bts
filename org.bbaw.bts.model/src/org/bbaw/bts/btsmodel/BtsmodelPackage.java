@@ -4038,13 +4038,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT_DB_COLLECTION__PROPERTIES = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Dirty</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT_DB_COLLECTION__DIRTY = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+
+	/**
 	 * The number of structural features of the '<em>BTS Project DB Collection</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_PROJECT_DB_COLLECTION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 6;
+	int BTS_PROJECT_DB_COLLECTION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The operation id for the '<em>Set Property</em>' operation.
@@ -6212,6 +6221,17 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSProjectDBCollection_Properties();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#isDirty <em>Dirty</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Dirty</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSProjectDBCollection#isDirty()
+	 * @see #getBTSProjectDBCollection()
+	 * @generated
+	 */
+	EAttribute getBTSProjectDBCollection_Dirty();
+
+	/**
 	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSProjectDBCollection#setProperty(java.lang.String, java.lang.String) <em>Set Property</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7799,6 +7819,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_PROJECT_DB_COLLECTION__PROPERTIES = eINSTANCE.getBTSProjectDBCollection_Properties();
+
+		/**
+		 * The meta object literal for the '<em><b>Dirty</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_PROJECT_DB_COLLECTION__DIRTY = eINSTANCE.getBTSProjectDBCollection_Dirty();
 
 		/**
 		 * The meta object literal for the '<em><b>Set Property</b></em>' operation.

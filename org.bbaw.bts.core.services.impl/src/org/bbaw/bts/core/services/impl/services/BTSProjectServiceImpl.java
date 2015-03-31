@@ -63,20 +63,17 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 				e.printStackTrace();
 			}
 		}
-		
-		//FIXME teste ob db collections indiziert sind, sonst gibt Fehlermeldung
-//		try {
-//			dbManager.prepareDBIndexing(entity, null);
-//		} catch (URISyntaxException e) {
-//			e.printStackTrace();
-//		}
+
 		for (BTSProjectDBCollection coll : entity.getDbCollections())
 		{
-			try {
-				saveAuthorisation(entity, coll);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
+			if (coll.isDirty())
+			{
+				try {
+					saveAuthorisation(entity, coll);
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		projectDao.add(entity, BTSCoreConstants.ADMIN);

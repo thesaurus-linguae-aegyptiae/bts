@@ -98,5 +98,11 @@ public class BTSPluginIDs
 
 	public static final String PART_ID_EGY_TEXTTRANSLATION = "org.bbaw.bts.ui.corpus.egy.part.translationPart";
 
+	public static final String PREF_MAIN_THS_KEY = "main_ths_key";
+
+
+	public static final String PREF_ACTIVE_THSS = "active_thss";
+
+	public static final String PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION = "pref_corpus_activate_main_corpus_selection";
 
 }

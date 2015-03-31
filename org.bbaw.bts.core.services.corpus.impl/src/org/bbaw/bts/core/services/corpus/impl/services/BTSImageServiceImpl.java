@@ -17,12 +17,24 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public class BTSImageServiceImpl extends AbstractCorpusObjectServiceImpl<BTSImage, String> implements BTSImageService, BTSObjectSearchService
 {
 	@Inject
 	BTSImageDao imageDao;
 
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_REVIEWSTATE, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusReviewState;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_VISIBILITY, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusVisibility;
+	
 	@Override
 	public BTSImage createNew()
 	{

@@ -187,6 +187,7 @@ public class AnnotationsPart implements EventHandler {
 
 		scrollComposite.setContent(composite);
 		eventBroker.subscribe("event_text_relating_objects/*", this);
+		constructed = true;
 	}
 	
 	@Inject
@@ -211,6 +212,7 @@ public class AnnotationsPart implements EventHandler {
 		part.setLabel("AnnotationsPart");
 		part.setTooltip("");
 		relatingObjectsQueryIDMap.clear();
+		objectWidgetMap.clear();
 		if (composite != null)
 		{
 			composite.dispose();
@@ -470,6 +472,7 @@ public class AnnotationsPart implements EventHandler {
 	@Inject
 	public void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) final Object selection) {
+		if (constructed) {
 		if ((selection instanceof BTSAnnotation || selection instanceof BTSComment)
 				&& objectWidgetMap != null && objectWidgetMap.containsKey(selection))
 		{
@@ -509,14 +512,30 @@ public class AnnotationsPart implements EventHandler {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
-				eventReceivedRelatingObjectsSelectedEvents(filteredRelatingObjects);
+				if (filteredRelatingObjects != null && !filteredRelatingObjects.isEmpty())
+				{
+					relatingObjectsQueryIDMap.put(queryId, filteredRelatingObjects);
+					eventReceivedRelatingObjectsSelectedEvents(filteredRelatingObjects);
+				}
 			}
 		}
 		else if (selection instanceof BTSTextSelectionEvent)
 		{
 			this.textSelectionEvent = (BTSTextSelectionEvent) selection;
 			eventReceivedRelatingObjectsSelectedEvents(textSelectionEvent.getRelatingObjects());
+		}
+		}
+		else
+		{
+			if (selection instanceof BTSTextSelectionEvent)
+			{
+				this.textSelectionEvent = (BTSTextSelectionEvent) selection;
+			}
+			else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
+			{
+				parentObject = (BTSCorpusObject)selection;
+
+			}
 		}
 	}
 	

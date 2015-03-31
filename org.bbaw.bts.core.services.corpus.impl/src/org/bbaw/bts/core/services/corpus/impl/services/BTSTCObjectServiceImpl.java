@@ -16,6 +16,8 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSTCObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 
 public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTSTCObject, String> implements BTSTCObjectService, BTSObjectSearchService
 {
@@ -23,6 +25,16 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	@Inject
 	BTSTCObjectDao bTSTCObjectDao;
 
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_REVIEWSTATE, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusReviewState;
+	
+	@Inject
+	@Optional
+	@Preference(value = BTSCorpusConstants.PREF_CORPUS_DEFAULT_VISIBILITY, nodePath = "org.bbaw.bts.ui.corpus")
+	protected String corpusVisibility;
+	
 	public List<BTSTCObject> getRootTCObjects()
 	{
 		return list(BTSConstants.OBJECT_STATE_ACTIVE, null);
@@ -43,7 +55,8 @@ public class BTSTCObjectServiceImpl extends AbstractCorpusObjectServiceImpl<BTST
 	{
 		BTSTCObject o = BtsCorpusModelFactory.eINSTANCE.createBTSTCObject();
 		o.setDBCollectionKey(main_corpus_key);
-
+		o.setVisibility(corpusVisibility);
+		o.setRevisionState(corpusReviewState);
 		o.setCorpusPrefix(main_corpus_key);
 		setId(o, o.getDBCollectionKey());
 		setRevision(o);

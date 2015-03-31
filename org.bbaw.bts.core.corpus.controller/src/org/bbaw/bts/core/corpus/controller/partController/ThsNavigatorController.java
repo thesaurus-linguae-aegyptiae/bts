@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -15,6 +16,8 @@ import org.eclipse.jface.viewers.ViewerFilter;
 import org.w3c.dom.views.AbstractView;
 
 public interface ThsNavigatorController extends GenericCorpusObjectNavigatorController<BTSThsEntry, String>{
+
+	BTSAnnotation createNewAnnotation(BTSThsEntry selection);
 
 	
 }
