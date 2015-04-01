@@ -70,7 +70,7 @@ public class BTSProjectServiceImpl extends GenericObjectServiceImpl<BTSProject, 
 			{
 				try {
 					saveAuthorisation(entity, coll);
-					
+					coll.setDirty(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

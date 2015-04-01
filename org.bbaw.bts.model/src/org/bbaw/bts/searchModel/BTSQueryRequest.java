@@ -26,6 +26,10 @@ public class BTSQueryRequest
 	private List<String> responseFields;
 	
 	private String dbPath;
+	
+	private boolean idQuery;
+	
+	private String idString;
 
 	public List<BTSObject> getGivenObjects()
 	{
@@ -127,6 +131,22 @@ public class BTSQueryRequest
 
 	public void setDbPath(String dbPath) {
 		this.dbPath = dbPath;
+	}
+
+	public boolean isIdQuery() {
+		return idQuery;
+	}
+
+	public void setIdQuery(boolean idQuery) {
+		this.idQuery = idQuery;
+	}
+
+	public String getIdString() {
+		return idString;
+	}
+
+	public void setIdString(String idString) {
+		this.idString = idString;
 	}
 
 

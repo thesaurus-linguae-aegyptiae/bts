@@ -1170,4 +1170,10 @@ private void bringPartToFront(boolean b) {
 		}
 		
 	}
+
+	public void setInputObjectDirect(BTSLemmaEntry object) {
+		selectedLemmaEntry = object;
+		if (object != null) loadInput(object);
+		
+	}
 }

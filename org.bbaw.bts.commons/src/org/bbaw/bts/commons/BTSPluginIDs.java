@@ -105,4 +105,6 @@ public class BTSPluginIDs
 
 	public static final String PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION = "pref_corpus_activate_main_corpus_selection";
 
+	public static final String POPMENU_LEMMATIZER_LEMMAPROPOSAL_MENU = "org.bbaw.bts.ui.corpus.egy.lemmatizer.lemmaproposals.popupmenu";
+
 }

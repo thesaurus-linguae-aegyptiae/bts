@@ -26,6 +26,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
@@ -746,7 +747,7 @@ labelProvider));
 	@Inject
 	@Optional
 	void eventReceivedAdd(@EventTopic("model_corpus_add/*") BTSObject object) {
-		if ((object instanceof BTSCorpusObject)
+		if ((object instanceof BTSCorpusObject) && !(object instanceof BTSAnnotation)
 				&& selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
 			corpusNavigatorController.addRelation((BTSCorpusObject) object,
@@ -801,7 +802,7 @@ labelProvider));
 					});
 				}
 			}
-			else if (corpusNavigatorController.handleModelUpdate(
+			else if (!(notification.getObject() instanceof BTSAnnotation) && corpusNavigatorController.handleModelUpdate(
 					notification, queryResultMap,
 					viewHolderMap) && notification.getObject() instanceof BTSCorpusObject) {
 				

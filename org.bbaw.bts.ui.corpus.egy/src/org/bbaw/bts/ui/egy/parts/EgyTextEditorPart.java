@@ -151,13 +151,17 @@ import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.CaretEvent;
 import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.SashForm;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.events.ControlAdapter;
+import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -394,6 +398,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Active
 	@Optional
 	private Shell shell;
+
+	private ScrolledComposite scrolledCompJSesh;
 
 	
 	/**
@@ -691,35 +697,39 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					plainTextComp.pack();
 				}
 				CTabItem tbtm5 = new CTabItem(tabFolder, SWT.NONE);
-				tbtm5.setText("JseshEditor");
+				tbtm5.setText("JSeshView");
 				{
-					Composite plainTextComp = new Composite(tabFolder, SWT.NONE
-							| SWT.BORDER);
-					plainTextComp.setLayout(new GridLayout(2, false));
-					((GridLayout) plainTextComp.getLayout()).marginHeight = 0;
-					((GridLayout) plainTextComp.getLayout()).marginWidth = 0;
-					tbtm5.setControl(plainTextComp);
+					scrolledCompJSesh = new ScrolledComposite(tabFolder, SWT.HORIZONTAL
+							| SWT.VERTICAL);
+					scrolledCompJSesh.setMinWidth(100);
+					scrolledCompJSesh.setMinHeight(400);
+					scrolledCompJSesh.setExpandHorizontal(true);
 
-					Composite comEmbeded = new Composite(plainTextComp,
+					scrolledCompJSesh.setExpandVertical(true);
+					
+					tbtm5.setControl(scrolledCompJSesh);
+
+					final Composite comEmbeded = new Composite(scrolledCompJSesh,
 							SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
-					comEmbeded.setLayoutData(new GridData(SWT.FILL, SWT.FILL,
-							true, true, 2, 1));
-
-					// comEmbeded.setLayout(new FillLayout());
+					scrolledCompJSesh.setContent(comEmbeded);
+					scrolledCompJSesh.addControlListener(new ControlAdapter() {
+						@Override
+						public void controlResized(ControlEvent e) {
+							Rectangle r = scrolledCompJSesh.getClientArea();
+							scrolledCompJSesh.setMinSize(comEmbeded.computeSize(r.width,
+									SWT.DEFAULT));
+						}
+					});
 					Frame frame = SWT_AWT.new_Frame(comEmbeded);
 
 					jseshEditor = new JMDCEditor();
-					jseshEditor.setMDCText("pt:p*t");
-					// jseshEditor.setTextDirection(TextDirection.RIGHT_TO_LEFT);
-					// jseshEditor.setTextOrientation(TextOrientation.VERTICAL);
+					jseshEditor.setMDCText("");
 					jseshEditor.setPreferredSize(new Dimension(500, 500));
 					jseshEditor
 							.addKeyListener(new java.awt.event.KeyListener() {
 
 								@Override
 								public void keyTyped(java.awt.event.KeyEvent e) {
-									// TODO Auto-generated method stub
-
 								}
 
 								@Override
@@ -738,18 +748,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 								@Override
 								public void keyPressed(java.awt.event.KeyEvent e) {
-									// TODO Auto-generated method stub
 
 								}
 							});
-					// codeBufferText.setText(jseshEditor.getCodeBuffer());
 
 					frame.add(jseshEditor);
 
 					comEmbeded.layout();
 
-					plainTextComp.layout();
-					plainTextComp.pack();
+					scrolledCompJSesh.layout();
+					scrolledCompJSesh.pack();
 				}
 			}
 		}
@@ -2118,14 +2126,26 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					// workaround because selection service requires iniating
 					// part to be the active part
 					// see some bug of e4
-					MPart p = partService
-							.findPart("org.bbaw.bts.ui.corpus.egy.part.textEditor");
-					MPart activePart = partService.getActivePart();
-					boolean workaround = false;
-					if (!activePart.equals(p)) {
+					MPart p = null;
+					MPart activePart = null;
+					try {
+						p = partService
+								.findPart("org.bbaw.bts.ui.corpus.egy.part.textEditor");
+						activePart = partService.getActivePart();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					boolean workaround = true;
+					if (activePart != null && !activePart.equals(p)) {
 						workaround = true;
 						partService.activate(p);
 					}
+					else
+					{
+						workaround = false;
+					}
+					
+					
 					if (selection instanceof BTSTextSelectionEvent
 							&& ((BTSTextSelectionEvent) selection).data instanceof EObject) {
 						BTSTextSelectionEvent event = (BTSTextSelectionEvent) selection;

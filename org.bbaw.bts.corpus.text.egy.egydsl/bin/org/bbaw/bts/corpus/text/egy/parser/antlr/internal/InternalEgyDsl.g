@@ -1981,21 +1981,81 @@ ruleNoDisputableReading returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getCharsParserRuleCall_3()); 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getRasurParserRuleCall_3()); 
     }
-    this_Chars_3=ruleChars
+    this_Rasur_3=ruleRasur
     { 
-        $current = $this_Chars_3.current; 
+        $current = $this_Rasur_3.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getInterfixParserRuleCall_4()); 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getAncientExpandedParserRuleCall_4()); 
     }
-    this_Interfix_4=ruleInterfix
+    this_AncientExpanded_4=ruleAncientExpanded
     { 
-        $current = $this_Interfix_4.current; 
+        $current = $this_AncientExpanded_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getRestorationOverRasurParserRuleCall_5()); 
+    }
+    this_RestorationOverRasur_5=ruleRestorationOverRasur
+    { 
+        $current = $this_RestorationOverRasur_5.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getExpandedColumnParserRuleCall_6()); 
+    }
+    this_ExpandedColumn_6=ruleExpandedColumn
+    { 
+        $current = $this_ExpandedColumn_6.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getLacunaParserRuleCall_7()); 
+    }
+    this_Lacuna_7=ruleLacuna
+    { 
+        $current = $this_Lacuna_7.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getPartialDestructionParserRuleCall_8()); 
+    }
+    this_PartialDestruction_8=rulePartialDestruction
+    { 
+        $current = $this_PartialDestruction_8.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getCharsParserRuleCall_9()); 
+    }
+    this_Chars_9=ruleChars
+    { 
+        $current = $this_Chars_9.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getInterfixParserRuleCall_10()); 
+    }
+    this_Interfix_10=ruleInterfix
+    { 
+        $current = $this_Interfix_10.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -2262,6 +2322,26 @@ ruleNoDeletion returns [EObject current=null]
     this_DisputableReading_4=ruleDisputableReading
     { 
         $current = $this_DisputableReading_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDeletionAccess().getLacunaParserRuleCall_5()); 
+    }
+    this_Lacuna_5=ruleLacuna
+    { 
+        $current = $this_Lacuna_5.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDeletionAccess().getRestorationOverRasurParserRuleCall_6()); 
+    }
+    this_RestorationOverRasur_6=ruleRestorationOverRasur
+    { 
+        $current = $this_RestorationOverRasur_6.current; 
         afterParserOrEnumRuleCall();
     }
 )

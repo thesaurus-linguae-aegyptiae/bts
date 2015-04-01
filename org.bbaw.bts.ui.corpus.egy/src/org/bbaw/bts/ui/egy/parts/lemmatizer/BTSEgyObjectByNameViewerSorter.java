@@ -23,6 +23,8 @@ public class BTSEgyObjectByNameViewerSorter extends ViewerSorter {
 		}
 		alphaNumComp = new AlphanumComparator(egyCollator);
 	}
+	
+
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
 		String s1 = null;

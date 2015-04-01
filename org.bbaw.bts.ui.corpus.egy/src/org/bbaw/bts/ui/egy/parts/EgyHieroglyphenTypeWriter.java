@@ -606,8 +606,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 						editingDomain = getEditingDomain(corpusObject);
 						setUserMayTranscribeInteral(userMayTranscribe);
 					} else if (selection instanceof BTSLemmaEntry) {
-//						corpusObject = (BTSLemmaEntry) selection;
 						purgeAll();
+						corpusObject = (BTSLemmaEntry) selection;
 						part.setLabel(((BTSLemmaEntry) selection).getName());
 						editingDomain = getEditingDomain(corpusObject);
 
@@ -643,31 +643,6 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			}
 		}
  		
- 	// FIXME old delete!
-//		if (selection != null && selection instanceof BTSCorpusObject
-//				&& !selection.equals(corpusObject)) {
-//			if (loaded) {
-//			if (corpusObject != null) {
-//				saveMdCstring(currentWord);
-//				saveText();
-//			}
-//			if (selection instanceof BTSText) {
-//				corpusObject = (BTSText) selection;
-//				part.setLabel(((BTSText) selection).getName());
-//
-//			} 
-//			else if (selection instanceof BTSLemmaEntry) {
-////				corpusObject = (BTSLemmaEntry) selection;
-//				part.setLabel(((BTSLemmaEntry) selection).getName());
-//
-//			} else {
-//				corpusObject = null;
-//				part.setLabel("Hieroglyph Type Writer");
-//			}
-//			ignoreGlyph_Button.setSelection(false);
-//			}
-//		}
-		
 	}
 
 	@Inject
@@ -963,7 +938,12 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			if (ignoreGlyph_Button.getSelection())
+			{
+				normalizedMdC = normalizedMdC.replace("\\red", "\\i");
+			}
 			normalizedMdC = removeSelectionMarker(normalizedMdC);
+
 			System.out.println("new mdc " + normalizedMdC + " ::: old "
 					+ beforeImageMdC);
 			beforeImageMdC = transformWordToMdCString(word, -1);
@@ -973,7 +953,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				System.out.println("htw saveMdCString " + normalizedMdC);
 				textEditorController.updateBTSWordFromMdCString(word,
 						normalizedMdC, editingDomain);
-				
+				dirty.setDirty(true);
 			}
 			setDirty(false);
 		}

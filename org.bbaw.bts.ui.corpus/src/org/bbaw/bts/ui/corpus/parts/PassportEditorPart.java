@@ -261,8 +261,6 @@ public class PassportEditorPart {
 		if (selectionCached) {
 			loadInput(corpusObject);
 		}
-		partService.bringToTop(partService
-				.findPart(BTSUIConstants.PART_ID_PASSPORT_EDITOR_PART));
 		part = partService.findPart(BTSUIConstants.PART_ID_PASSPORT_EDITOR_PART);
 
 
@@ -903,7 +901,12 @@ public class PassportEditorPart {
 
 								@Override
 								public void run() {
-									if (partService.isPartVisible(part))
+									boolean isVisible = true;
+									try {
+										isVisible = partService.isPartVisible(part);
+									} catch (Exception e) {
+									}
+									if (isVisible)
 									{
 										loadInput(corpusObject);
 									}
@@ -926,6 +929,12 @@ public class PassportEditorPart {
 		job.schedule(LOADING_DELAY);
 		return;
 
+	}
+	
+	public void setInputObjectDirect(BTSCorpusObject object)
+	{
+		corpusObject = object;
+		if (object != null)loadInput(object);
 	}
 
 	private void loadInput(BTSCorpusObject object) {

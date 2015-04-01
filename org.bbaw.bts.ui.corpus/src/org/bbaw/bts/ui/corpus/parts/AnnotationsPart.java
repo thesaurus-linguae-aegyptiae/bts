@@ -159,6 +159,32 @@ public class AnnotationsPart implements EventHandler {
 		
 		part = partService
 				.findPart("org.bbaw.bts.ui.corpus.part.AnnotationsPart");
+		resizeListener = new Listener() {
+
+			@Override
+			public void handleEvent(
+					org.eclipse.swt.widgets.Event event) {
+				Rectangle r = scrollComposite
+						.getClientArea();
+				composite.layout();
+				scrollComposite.setMinSize(composite
+						.computeSize(r.width, SWT.DEFAULT));
+			}
+
+		};
+
+		selectionListener = new Listener() {
+
+			@Override
+			public void handleEvent(
+					org.eclipse.swt.widgets.Event event) {
+				RelatedObjectGroup roGroup = (RelatedObjectGroup) event.widget;
+				selfselection = true;
+				setSelectedInternal(new RelatedObjectGroup[] { roGroup }, true);
+				selfselection = false;
+			}
+
+		};
 		
 		scrollComposite = new ScrolledComposite(parent,
 				SWT.V_SCROLL | SWT.H_SCROLL);
@@ -272,32 +298,7 @@ public class AnnotationsPart implements EventHandler {
 							scrollComposite.setContent(composite);
 							objectWidgetMap = new HashMap<BTSObject, RelatedObjectGroup>(
 									list.size());
-							resizeListener = new Listener() {
-
-								@Override
-								public void handleEvent(
-										org.eclipse.swt.widgets.Event event) {
-									Rectangle r = scrollComposite
-											.getClientArea();
-									composite.layout();
-									scrollComposite.setMinSize(composite
-											.computeSize(r.width, SWT.DEFAULT));
-								}
-
-							};
-
-							selectionListener = new Listener() {
-
-								@Override
-								public void handleEvent(
-										org.eclipse.swt.widgets.Event event) {
-									RelatedObjectGroup roGroup = (RelatedObjectGroup) event.widget;
-									selfselection = true;
-									setSelectedInternal(new RelatedObjectGroup[] { roGroup }, true);
-									selfselection = false;
-								}
-
-							};
+							
 
 							Collections.sort(list,
 									new BTSObjectTempSortKeyComparator());

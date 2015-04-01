@@ -10,6 +10,7 @@ import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -21,6 +22,7 @@ import org.elasticsearch.index.query.QueryBuilders;
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Text text;
 	private BTSQueryRequest queryRequest;
+	private Button idButton;
 
 	/**
 	 * Create the dialog.
@@ -48,7 +50,11 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		
 		text = new Text(container, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-
+		
+		idButton = new Button(container, SWT.CHECK);
+		idButton.setText("Search for IDs");
+		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
 		return area;
 	}
 
@@ -68,9 +74,19 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	protected void okPressed() {
 		if (text.getText().trim().length() > 0)
 		{
-			queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(text.getText().trim().toLowerCase()));
-			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-			queryRequest.setQueryId("timestamp-" + now.toString());
+			if (idButton.getSelection())
+			{
+				queryRequest.setIdQuery(true);
+				queryRequest.setIdString(text.getText().trim());
+				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
+				queryRequest.setQueryId("timestamp-" + now.toString());
+			}
+			else
+			{
+				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(text.getText().trim().toLowerCase()));
+				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
+				queryRequest.setQueryId("timestamp-" + now.toString());
+			}
 		}
 		else
 		{

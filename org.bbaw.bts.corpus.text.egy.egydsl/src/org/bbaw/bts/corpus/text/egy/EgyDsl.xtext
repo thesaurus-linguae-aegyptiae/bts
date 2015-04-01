@@ -269,6 +269,9 @@ DisputableReading:
 
 NoDisputableReading:
 	 Expanded | Emendation | Deletion 
+	 | Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn
+	 | Lacuna 
+	 | PartialDestruction
 	 | Chars | Interfix
 ;
 
@@ -287,7 +290,7 @@ Deletion:
 ;
 
 NoDeletion:
-	Chars | PartialDestruction | Expanded | Interfix | DisputableReading
+	Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur
 ;
 
 ExpandedColumn:

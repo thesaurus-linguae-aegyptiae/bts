@@ -240,6 +240,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		{
 			for (String c : getActive_corpora(p))
 			{
+				if (monitor != null && monitor.isCanceled())
+				{
+					return objects;
+				}
 				try {
 					objects.addAll(corpusObjectDao.list(c, objectState));
 				} catch (Exception e) {
@@ -326,6 +330,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	public List<BTSCorpusObject> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
 			String objectState, IProgressMonitor monitor) {
 		List<BTSCorpusObject> objects = new Vector<BTSCorpusObject>();
+		if (monitor != null && monitor.isCanceled())
+		{
+			return objects;
+		}
 		objects.addAll(corpusObjectDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
 		return filter(objects);
 	}
@@ -491,6 +499,10 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		List<BTSCorpusObject> roots = new Vector<BTSCorpusObject>(corpora.size());
 		for (BTSTextCorpus tc : corpora)
 		{
+			if (monitor != null && monitor.isCanceled())
+			{
+				return roots;
+			}
 			roots.add(tc);
 		}
 		return roots;

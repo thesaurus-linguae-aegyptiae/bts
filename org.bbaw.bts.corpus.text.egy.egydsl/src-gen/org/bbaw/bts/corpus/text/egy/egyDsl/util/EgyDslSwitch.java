@@ -441,6 +441,8 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseLacuna(lacuna);
         if (result == null) result = caseBrackets(lacuna);
         if (result == null) result = caseNoCartouche(lacuna);
+        if (result == null) result = caseNoDisputableReading(lacuna);
+        if (result == null) result = caseNoDeletion(lacuna);
         if (result == null) result = caseWordMiddle(lacuna);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -477,6 +479,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseExpandedColumn(expandedColumn);
         if (result == null) result = caseBrackets(expandedColumn);
         if (result == null) result = caseNoCartouche(expandedColumn);
+        if (result == null) result = caseNoDisputableReading(expandedColumn);
         if (result == null) result = caseWordMiddle(expandedColumn);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -494,6 +497,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseRasur(rasur);
         if (result == null) result = caseBrackets(rasur);
         if (result == null) result = caseNoCartouche(rasur);
+        if (result == null) result = caseNoDisputableReading(rasur);
         if (result == null) result = caseWordMiddle(rasur);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -511,6 +515,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseAncientExpanded(ancientExpanded);
         if (result == null) result = caseBrackets(ancientExpanded);
         if (result == null) result = caseNoCartouche(ancientExpanded);
+        if (result == null) result = caseNoDisputableReading(ancientExpanded);
         if (result == null) result = caseWordMiddle(ancientExpanded);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -528,6 +533,8 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = caseRestorationOverRasur(restorationOverRasur);
         if (result == null) result = caseBrackets(restorationOverRasur);
         if (result == null) result = caseNoCartouche(restorationOverRasur);
+        if (result == null) result = caseNoDisputableReading(restorationOverRasur);
+        if (result == null) result = caseNoDeletion(restorationOverRasur);
         if (result == null) result = caseWordMiddle(restorationOverRasur);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -545,6 +552,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         T result = casePartialDestruction(partialDestruction);
         if (result == null) result = caseBrackets(partialDestruction);
         if (result == null) result = caseNoCartouche(partialDestruction);
+        if (result == null) result = caseNoDisputableReading(partialDestruction);
         if (result == null) result = caseNoDeletion(partialDestruction);
         if (result == null) result = caseWordMiddle(partialDestruction);
         if (result == null) result = defaultCase(theEObject);

@@ -169,8 +169,16 @@ implements CorpusNavigatorController
 		List<BTSCorpusObject> children = corpusObjectService.query(query,
 				BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		logger.info("Number of children found: " + children.size());
-		Collections.sort(children, new BTSObjectByNameComparator());
-		return children;
+		List<BTSCorpusObject> result = new Vector<BTSCorpusObject>(children.size());
+		for (BTSCorpusObject o : children)
+		{
+			if (!(o instanceof BTSAnnotation))
+			{
+				result.add(o);
+			}
+		}
+		Collections.sort(result, new BTSObjectByNameComparator());
+		return result;
 	}
 
 //	@Override

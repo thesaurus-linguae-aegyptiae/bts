@@ -23,6 +23,7 @@ import org.bbaw.bts.core.corpus.controller.partController.GenericCorpusObjectNav
 import org.bbaw.bts.core.services.Backend2ClientUpdateService;
 import org.bbaw.bts.core.services.IDService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -146,8 +147,16 @@ GenericCorpusObjectNavigatorController<E, K>
 			queryResultMap.put(query.getQueryId(), qra);
 		}
 		List<E> children = executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
-		sortEntries(children);
-		return children;
+		List<E> result = new Vector<E>(children.size());
+		for (E o : children)
+		{
+			if (!(o instanceof BTSAnnotation))
+			{
+				result.add(o);
+			}
+		}
+		sortEntries(result);
+		return result;
 	}
 
 	protected String[] getChildRelationTypes() {

@@ -78,7 +78,7 @@
         eType="#//NoDisputableReading" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoDisputableReading"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Lacuna" eSuperTypes="#//Brackets #//NoCartouche">
+  <eClassifiers xsi:type="ecore:EClass" name="Lacuna" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoLacuna" containment="true"/>
   </eClassifiers>
@@ -88,27 +88,27 @@
         eType="#//NoDeletion" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoDeletion"/>
-  <eClassifiers xsi:type="ecore:EClass" name="ExpandedColumn" eSuperTypes="#//Brackets #//NoCartouche">
+  <eClassifiers xsi:type="ecore:EClass" name="ExpandedColumn" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoExpandedColumn" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoExpandedColumn"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Rasur" eSuperTypes="#//Brackets #//NoCartouche">
+  <eClassifiers xsi:type="ecore:EClass" name="Rasur" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoRasur" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoRasur"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets #//NoCartouche">
+  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoAncientExpanded" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoAncientExpanded"/>
-  <eClassifiers xsi:type="ecore:EClass" name="RestorationOverRasur" eSuperTypes="#//Brackets #//NoCartouche">
+  <eClassifiers xsi:type="ecore:EClass" name="RestorationOverRasur" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoRestorationOverRasur" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoRestorationOverRasur"/>
-  <eClassifiers xsi:type="ecore:EClass" name="PartialDestruction" eSuperTypes="#//Brackets #//NoCartouche #//NoDeletion">
+  <eClassifiers xsi:type="ecore:EClass" name="PartialDestruction" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoPartialDestruction" containment="true"/>
   </eClassifiers>

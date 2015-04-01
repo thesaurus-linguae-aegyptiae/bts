@@ -222,11 +222,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	private List<BTSLemmaEntry> lemmaFilterReviewState(
 			List<BTSLemmaEntry> children) {
 		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
-		for (BTSLemmaEntry entry : children)
+		for (BTSCorpusObject entry : children)
 		{
-			if (entry.getRevisionState() != null && !entry.getRevisionState().contains("obsolete"))
+			if (entry instanceof BTSLemmaEntry 
+					&& entry.getRevisionState() != null && !entry.getRevisionState().contains("obsolete"))
 			{
-				filtered.add(entry);
+				filtered.add((BTSLemmaEntry) entry);
 			}
 		}
 		return filtered;

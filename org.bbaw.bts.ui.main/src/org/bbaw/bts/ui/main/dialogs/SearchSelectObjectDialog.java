@@ -223,9 +223,11 @@ public class SearchSelectObjectDialog extends TitleAreaDialog implements
 	}
 
 	private boolean showThsPanel() {
-		if (relationConfig != null && selectionObject != null) {
-			return configurationController.objectMayReferenceToThs(
-					selectionObject, relationConfig);
+		if (relationConfig != null && selectionObject != null 
+				&& configurationController.objectMayReferenceToThs(
+					selectionObject, relationConfig))
+		{
+			return true;
 		}
 		if (objectTypes != null) {
 			for (String s : objectTypes) {

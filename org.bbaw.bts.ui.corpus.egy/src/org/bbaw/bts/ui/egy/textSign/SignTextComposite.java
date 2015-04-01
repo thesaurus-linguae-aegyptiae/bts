@@ -30,7 +30,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
@@ -58,8 +57,6 @@ import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.KeyEvent;
 import org.eclipse.draw2d.KeyListener;
-import org.eclipse.draw2d.Label;
-import org.eclipse.draw2d.LightweightSystem;
 import org.eclipse.draw2d.LineBorder;
 import org.eclipse.draw2d.MouseEvent;
 import org.eclipse.draw2d.MouseListener;
@@ -75,8 +72,6 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
-import org.eclipse.jface.text.Position;
-import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.TypedEvent;
@@ -89,8 +84,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.xtext.ui.editor.model.ResourceAwareXtextDocumentProvider;
-import org.eclipse.xtext.validation.Issue;
 
 public class SignTextComposite extends Composite implements IBTSEditor {
 
@@ -1206,7 +1199,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			ElementFigure oldSelection = selectedElement;
 			setDeselected(oldSelection);
 			selectedElement = figure;
-			reveal(selectedElement);
+			try {
+				reveal(selectedElement);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
 		}
 		if (figure instanceof WordFigure) {

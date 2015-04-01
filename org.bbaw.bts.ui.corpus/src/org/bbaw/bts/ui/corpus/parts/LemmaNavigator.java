@@ -24,6 +24,7 @@ import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
@@ -635,6 +636,10 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 			refreshTreeViewer((BTSLemmaEntry) object);
 		} else if (object instanceof BTSModelUpdateNotification) {
 			if (((BTSModelUpdateNotification) object).getObject() instanceof BTSComment)
+			{
+				// comment, do nothing
+			}
+			else if (((BTSModelUpdateNotification) object).getObject() instanceof BTSAnnotation)
 			{
 				// comment, do nothing
 			}

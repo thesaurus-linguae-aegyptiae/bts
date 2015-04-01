@@ -3,6 +3,7 @@ package org.bbaw.bts.ui.corpus.dialogs;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
@@ -61,10 +62,9 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		((GridLayout) composite.getLayout()).verticalSpacing = 0;
 		IEclipseContext child = context.createChild("passportEditorDialog");
 		child.set(Composite.class, composite);
-		child.set(IServiceConstants.ACTIVE_SELECTION, selectionObject);
 		editor = ContextInjectionFactory.make(
 				PassportEditorPart.class, child);
-//		editor.setSelection(selectionObject);
+		editor.setInputObjectDirect((BTSCorpusObject) selectionObject);
 		return area;
 	}
 

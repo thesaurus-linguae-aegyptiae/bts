@@ -22,7 +22,8 @@ import org.eclipse.swt.widgets.Shell;
 public class FilterOnlyInvalidTextsHandler {
 	
 	@Execute
-	public void execute(final BTSTextEditorController textController, IEclipseContext context, @Active MPart activePart, @Active Shell shell, 
+	public void execute(final BTSTextEditorController textController, IEclipseContext context, 
+			@Active MPart activePart, @Active Shell shell, 
 			final UISynchronize sync)
 	{
 		

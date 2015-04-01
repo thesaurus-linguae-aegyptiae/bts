@@ -523,7 +523,10 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 			return references;
 		}
 		List<String> refs = relationConfig.getOwnerTypesMap().get(oClass);
-		references.addAll(refs);
+		if (refs != null)
+		{
+			references.addAll(refs);
+		}
 		if (oType != null && !"".equals(oType.trim()))
 		{
 			oClass += BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType;
