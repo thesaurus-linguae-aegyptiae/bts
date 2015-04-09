@@ -154,7 +154,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleTextContent"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:76:1: ruleTextContent returns [EObject current=null] : ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* ) ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:76:1: ruleTextContent returns [EObject current=null] : ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )? ) ;
     public final EObject ruleTextContent() throws RecognitionException {
         EObject current = null;
 
@@ -168,11 +168,11 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:79:28: ( ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* ) ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:1: ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:79:28: ( ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )? ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:1: ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )? )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:1: ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:2: () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:1: ( () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )? )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:2: () ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )?
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:80:2: ()
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:81:5: 
@@ -185,129 +185,140 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:86:2: ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:86:3: ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )*
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:86:3: ( (lv_items_1_0= ruleTextItem ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:87:1: (lv_items_1_0= ruleTextItem )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:87:1: (lv_items_1_0= ruleTextItem )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:88:3: lv_items_1_0= ruleTextItem
-            {
-             
-            	        newCompositeNode(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_0_0()); 
-            	    
-            pushFollow(FOLLOW_ruleTextItem_in_ruleTextContent141);
-            lv_items_1_0=ruleTextItem();
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:86:2: ( ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )* )?
+            int alt3=2;
+            int LA3_0 = input.LA(1);
 
-            state._fsp--;
-
-
-            	        if (current==null) {
-            	            current = createModelElementForParent(grammarAccess.getTextContentRule());
-            	        }
-                   		add(
-                   			current, 
-                   			"items",
-                    		lv_items_1_0, 
-                    		"TextItem");
-            	        afterParserOrEnumRuleCall();
-            	    
-
+            if ( (LA3_0==10) ) {
+                alt3=1;
             }
+            switch (alt3) {
+                case 1 :
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:86:3: ( (lv_items_1_0= ruleTextItem ) ) ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )*
+                    {
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:86:3: ( (lv_items_1_0= ruleTextItem ) )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:87:1: (lv_items_1_0= ruleTextItem )
+                    {
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:87:1: (lv_items_1_0= ruleTextItem )
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:88:3: lv_items_1_0= ruleTextItem
+                    {
+                     
+                    	        newCompositeNode(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_0_0()); 
+                    	    
+                    pushFollow(FOLLOW_ruleTextItem_in_ruleTextContent141);
+                    lv_items_1_0=ruleTextItem();
+
+                    state._fsp--;
 
 
-            }
+                    	        if (current==null) {
+                    	            current = createModelElementForParent(grammarAccess.getTextContentRule());
+                    	        }
+                           		add(
+                           			current, 
+                           			"items",
+                            		lv_items_1_0, 
+                            		"TextItem");
+                    	        afterParserOrEnumRuleCall();
+                    	    
 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:2: ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )*
-            loop2:
-            do {
-                int alt2=2;
-                int LA2_0 = input.LA(1);
-
-                if ( (LA2_0==RULE_NEWLINE||(LA2_0>=9 && LA2_0<=10)) ) {
-                    alt2=1;
-                }
-
-
-                switch (alt2) {
-            	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:3: (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) )
-            	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:3: (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )?
-            	    int alt1=3;
-            	    int LA1_0 = input.LA(1);
-
-            	    if ( (LA1_0==9) ) {
-            	        alt1=1;
-            	    }
-            	    else if ( (LA1_0==RULE_NEWLINE) ) {
-            	        alt1=2;
-            	    }
-            	    switch (alt1) {
-            	        case 1 :
-            	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:5: otherlv_2= ' '
-            	            {
-            	            otherlv_2=(Token)match(input,9,FOLLOW_9_in_ruleTextContent155); 
-
-            	                	newLeafNode(otherlv_2, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0());
-            	                
-
-            	            }
-            	            break;
-            	        case 2 :
-            	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:109:6: this_NEWLINE_3= RULE_NEWLINE
-            	            {
-            	            this_NEWLINE_3=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleTextContent172); 
-            	             
-            	                newLeafNode(this_NEWLINE_3, grammarAccess.getTextContentAccess().getNEWLINETerminalRuleCall_1_1_0_1()); 
-            	                
-
-            	            }
-            	            break;
-
-            	    }
-
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:113:3: ( (lv_items_4_0= ruleTextItem ) )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:114:1: (lv_items_4_0= ruleTextItem )
-            	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:114:1: (lv_items_4_0= ruleTextItem )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:115:3: lv_items_4_0= ruleTextItem
-            	    {
-            	     
-            	    	        newCompositeNode(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_1_1_0()); 
-            	    	    
-            	    pushFollow(FOLLOW_ruleTextItem_in_ruleTextContent194);
-            	    lv_items_4_0=ruleTextItem();
-
-            	    state._fsp--;
+                    }
 
 
-            	    	        if (current==null) {
-            	    	            current = createModelElementForParent(grammarAccess.getTextContentRule());
-            	    	        }
-            	           		add(
-            	           			current, 
-            	           			"items",
-            	            		lv_items_4_0, 
-            	            		"TextItem");
-            	    	        afterParserOrEnumRuleCall();
-            	    	    
+                    }
 
-            	    }
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:2: ( (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) ) )*
+                    loop2:
+                    do {
+                        int alt2=2;
+                        int LA2_0 = input.LA(1);
 
-
-            	    }
+                        if ( (LA2_0==RULE_NEWLINE||(LA2_0>=9 && LA2_0<=10)) ) {
+                            alt2=1;
+                        }
 
 
-            	    }
-            	    break;
+                        switch (alt2) {
+                    	case 1 :
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:3: (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )? ( (lv_items_4_0= ruleTextItem ) )
+                    	    {
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:3: (otherlv_2= ' ' | this_NEWLINE_3= RULE_NEWLINE )?
+                    	    int alt1=3;
+                    	    int LA1_0 = input.LA(1);
 
-            	default :
-            	    break loop2;
-                }
-            } while (true);
+                    	    if ( (LA1_0==9) ) {
+                    	        alt1=1;
+                    	    }
+                    	    else if ( (LA1_0==RULE_NEWLINE) ) {
+                    	        alt1=2;
+                    	    }
+                    	    switch (alt1) {
+                    	        case 1 :
+                    	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:104:5: otherlv_2= ' '
+                    	            {
+                    	            otherlv_2=(Token)match(input,9,FOLLOW_9_in_ruleTextContent155); 
 
+                    	                	newLeafNode(otherlv_2, grammarAccess.getTextContentAccess().getSpaceKeyword_1_1_0_0());
+                    	                
+
+                    	            }
+                    	            break;
+                    	        case 2 :
+                    	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:109:6: this_NEWLINE_3= RULE_NEWLINE
+                    	            {
+                    	            this_NEWLINE_3=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleTextContent172); 
+                    	             
+                    	                newLeafNode(this_NEWLINE_3, grammarAccess.getTextContentAccess().getNEWLINETerminalRuleCall_1_1_0_1()); 
+                    	                
+
+                    	            }
+                    	            break;
+
+                    	    }
+
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:113:3: ( (lv_items_4_0= ruleTextItem ) )
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:114:1: (lv_items_4_0= ruleTextItem )
+                    	    {
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:114:1: (lv_items_4_0= ruleTextItem )
+                    	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:115:3: lv_items_4_0= ruleTextItem
+                    	    {
+                    	     
+                    	    	        newCompositeNode(grammarAccess.getTextContentAccess().getItemsTextItemParserRuleCall_1_1_1_0()); 
+                    	    	    
+                    	    pushFollow(FOLLOW_ruleTextItem_in_ruleTextContent194);
+                    	    lv_items_4_0=ruleTextItem();
+
+                    	    state._fsp--;
+
+
+                    	    	        if (current==null) {
+                    	    	            current = createModelElementForParent(grammarAccess.getTextContentRule());
+                    	    	        }
+                    	           		add(
+                    	           			current, 
+                    	           			"items",
+                    	            		lv_items_4_0, 
+                    	            		"TextItem");
+                    	    	        afterParserOrEnumRuleCall();
+                    	    	    
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop2;
+                        }
+                    } while (true);
+
+
+                    }
+                    break;
 
             }
 
@@ -344,13 +355,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:141:2: iv_ruleTextItem= ruleTextItem EOF
             {
              newCompositeNode(grammarAccess.getTextItemRule()); 
-            pushFollow(FOLLOW_ruleTextItem_in_entryRuleTextItem233);
+            pushFollow(FOLLOW_ruleTextItem_in_entryRuleTextItem234);
             iv_ruleTextItem=ruleTextItem();
 
             state._fsp--;
 
              current =iv_ruleTextItem; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTextItem243); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleTextItem244); 
 
             }
 
@@ -384,7 +395,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
              
                     newCompositeNode(grammarAccess.getTextItemAccess().getSentenceParserRuleCall()); 
                 
-            pushFollow(FOLLOW_ruleSentence_in_ruleTextItem289);
+            pushFollow(FOLLOW_ruleSentence_in_ruleTextItem290);
             this_Sentence_0=ruleSentence();
 
             state._fsp--;
@@ -423,13 +434,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:171:2: iv_ruleSentence= ruleSentence EOF
             {
              newCompositeNode(grammarAccess.getSentenceRule()); 
-            pushFollow(FOLLOW_ruleSentence_in_entryRuleSentence323);
+            pushFollow(FOLLOW_ruleSentence_in_entryRuleSentence324);
             iv_ruleSentence=ruleSentence();
 
             state._fsp--;
 
              current =iv_ruleSentence; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSentence333); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSentence334); 
 
             }
 
@@ -480,18 +491,18 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,10,FOLLOW_10_in_ruleSentence379); 
+            otherlv_1=(Token)match(input,10,FOLLOW_10_in_ruleSentence380); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getSentenceAccess().getSectionSignKeyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:192:1: ( ( (lv_items_2_0= ruleSentenceItem ) ) (otherlv_3= ' ' (this_NEWLINE_4= RULE_NEWLINE )? ( (lv_items_5_0= ruleSentenceItem ) ) )* )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( ((LA5_0>=RULE_BETWEEN_HASHES && LA5_0<=RULE_EGYSTRING)||LA5_0==11||(LA5_0>=13 && LA5_0<=24)||LA5_0==26||LA5_0==28||LA5_0==30||LA5_0==32||LA5_0==34||LA5_0==36||LA5_0==38||LA5_0==40||LA5_0==42||LA5_0==44||LA5_0==46||LA5_0==48||(LA5_0>=50 && LA5_0<=57)) ) {
-                alt5=1;
+            if ( ((LA6_0>=RULE_BETWEEN_HASHES && LA6_0<=RULE_EGYSTRING)||LA6_0==11||(LA6_0>=13 && LA6_0<=24)||LA6_0==26||LA6_0==28||LA6_0==30||LA6_0==32||LA6_0==34||LA6_0==36||LA6_0==38||LA6_0==40||LA6_0==42||LA6_0==44||LA6_0==46||LA6_0==48||(LA6_0>=50 && LA6_0<=57)) ) {
+                alt6=1;
             }
-            switch (alt5) {
+            switch (alt6) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:192:2: ( (lv_items_2_0= ruleSentenceItem ) ) (otherlv_3= ' ' (this_NEWLINE_4= RULE_NEWLINE )? ( (lv_items_5_0= ruleSentenceItem ) ) )*
                     {
@@ -504,7 +515,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                     	        newCompositeNode(grammarAccess.getSentenceAccess().getItemsSentenceItemParserRuleCall_2_0_0()); 
                     	    
-                    pushFollow(FOLLOW_ruleSentenceItem_in_ruleSentence401);
+                    pushFollow(FOLLOW_ruleSentenceItem_in_ruleSentence402);
                     lv_items_2_0=ruleSentenceItem();
 
                     state._fsp--;
@@ -527,36 +538,36 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
 
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:210:2: (otherlv_3= ' ' (this_NEWLINE_4= RULE_NEWLINE )? ( (lv_items_5_0= ruleSentenceItem ) ) )*
-                    loop4:
+                    loop5:
                     do {
-                        int alt4=2;
-                        int LA4_0 = input.LA(1);
+                        int alt5=2;
+                        int LA5_0 = input.LA(1);
 
-                        if ( (LA4_0==9) ) {
-                            alt4=1;
+                        if ( (LA5_0==9) ) {
+                            alt5=1;
                         }
 
 
-                        switch (alt4) {
+                        switch (alt5) {
                     	case 1 :
                     	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:210:4: otherlv_3= ' ' (this_NEWLINE_4= RULE_NEWLINE )? ( (lv_items_5_0= ruleSentenceItem ) )
                     	    {
-                    	    otherlv_3=(Token)match(input,9,FOLLOW_9_in_ruleSentence414); 
+                    	    otherlv_3=(Token)match(input,9,FOLLOW_9_in_ruleSentence415); 
 
                     	        	newLeafNode(otherlv_3, grammarAccess.getSentenceAccess().getSpaceKeyword_2_1_0());
                     	        
                     	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:214:1: (this_NEWLINE_4= RULE_NEWLINE )?
-                    	    int alt3=2;
-                    	    int LA3_0 = input.LA(1);
+                    	    int alt4=2;
+                    	    int LA4_0 = input.LA(1);
 
-                    	    if ( (LA3_0==RULE_NEWLINE) ) {
-                    	        alt3=1;
+                    	    if ( (LA4_0==RULE_NEWLINE) ) {
+                    	        alt4=1;
                     	    }
-                    	    switch (alt3) {
+                    	    switch (alt4) {
                     	        case 1 :
                     	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:214:2: this_NEWLINE_4= RULE_NEWLINE
                     	            {
-                    	            this_NEWLINE_4=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleSentence426); 
+                    	            this_NEWLINE_4=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleSentence427); 
                     	             
                     	                newLeafNode(this_NEWLINE_4, grammarAccess.getSentenceAccess().getNEWLINETerminalRuleCall_2_1_1()); 
                     	                
@@ -575,7 +586,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        newCompositeNode(grammarAccess.getSentenceAccess().getItemsSentenceItemParserRuleCall_2_1_2_0()); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleSentenceItem_in_ruleSentence448);
+                    	    pushFollow(FOLLOW_ruleSentenceItem_in_ruleSentence449);
                     	    lv_items_5_0=ruleSentenceItem();
 
                     	    state._fsp--;
@@ -602,7 +613,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop4;
+                    	    break loop5;
                         }
                     } while (true);
 
@@ -612,7 +623,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_6=(Token)match(input,10,FOLLOW_10_in_ruleSentence464); 
+            otherlv_6=(Token)match(input,10,FOLLOW_10_in_ruleSentence465); 
 
                 	newLeafNode(otherlv_6, grammarAccess.getSentenceAccess().getSectionSignKeyword_3());
                 
@@ -649,13 +660,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:250:2: iv_ruleSentenceItem= ruleSentenceItem EOF
             {
              newCompositeNode(grammarAccess.getSentenceItemRule()); 
-            pushFollow(FOLLOW_ruleSentenceItem_in_entryRuleSentenceItem500);
+            pushFollow(FOLLOW_ruleSentenceItem_in_entryRuleSentenceItem501);
             iv_ruleSentenceItem=ruleSentenceItem();
 
             state._fsp--;
 
              current =iv_ruleSentenceItem; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSentenceItem510); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSentenceItem511); 
 
             }
 
@@ -691,7 +702,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:261:1: (this_Word_0= ruleWord | this_AbstractMarker_1= ruleAbstractMarker | this_Ambivalence_2= ruleAmbivalence )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:261:1: (this_Word_0= ruleWord | this_AbstractMarker_1= ruleAbstractMarker | this_Ambivalence_2= ruleAmbivalence )
-            int alt6=3;
+            int alt7=3;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
             case 23:
@@ -717,7 +728,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt6=1;
+                alt7=1;
                 }
                 break;
             case RULE_BETWEEN_HASHES:
@@ -733,29 +744,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 21:
             case 22:
                 {
-                alt6=2;
+                alt7=2;
                 }
                 break;
             case 11:
                 {
-                alt6=3;
+                alt7=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 6, 0, input);
+                    new NoViableAltException("", 7, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt6) {
+            switch (alt7) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:262:5: this_Word_0= ruleWord
                     {
                      
                             newCompositeNode(grammarAccess.getSentenceItemAccess().getWordParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleWord_in_ruleSentenceItem557);
+                    pushFollow(FOLLOW_ruleWord_in_ruleSentenceItem558);
                     this_Word_0=ruleWord();
 
                     state._fsp--;
@@ -773,7 +784,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSentenceItemAccess().getAbstractMarkerParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleAbstractMarker_in_ruleSentenceItem584);
+                    pushFollow(FOLLOW_ruleAbstractMarker_in_ruleSentenceItem585);
                     this_AbstractMarker_1=ruleAbstractMarker();
 
                     state._fsp--;
@@ -791,7 +802,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSentenceItemAccess().getAmbivalenceParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleAmbivalence_in_ruleSentenceItem611);
+                    pushFollow(FOLLOW_ruleAmbivalence_in_ruleSentenceItem612);
                     this_Ambivalence_2=ruleAmbivalence();
 
                     state._fsp--;
@@ -836,13 +847,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:300:2: iv_ruleAbstractMarker= ruleAbstractMarker EOF
             {
              newCompositeNode(grammarAccess.getAbstractMarkerRule()); 
-            pushFollow(FOLLOW_ruleAbstractMarker_in_entryRuleAbstractMarker646);
+            pushFollow(FOLLOW_ruleAbstractMarker_in_entryRuleAbstractMarker647);
             iv_ruleAbstractMarker=ruleAbstractMarker();
 
             state._fsp--;
 
              current =iv_ruleAbstractMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractMarker656); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractMarker657); 
 
             }
 
@@ -878,11 +889,11 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:311:1: (this_Marker_0= ruleMarker | this_VersMarker_1= ruleVersMarker | this_DestructionMarker_2= ruleDestructionMarker )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:311:1: (this_Marker_0= ruleMarker | this_VersMarker_1= ruleVersMarker | this_DestructionMarker_2= ruleDestructionMarker )
-            int alt7=3;
+            int alt8=3;
             switch ( input.LA(1) ) {
             case RULE_BETWEEN_HASHES:
                 {
-                alt7=1;
+                alt8=1;
                 }
                 break;
             case 13:
@@ -896,29 +907,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 21:
             case 22:
                 {
-                alt7=2;
+                alt8=2;
                 }
                 break;
             case RULE_BETWEEN_MINUS:
                 {
-                alt7=3;
+                alt8=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 7, 0, input);
+                    new NoViableAltException("", 8, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt7) {
+            switch (alt8) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:312:5: this_Marker_0= ruleMarker
                     {
                      
                             newCompositeNode(grammarAccess.getAbstractMarkerAccess().getMarkerParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleMarker_in_ruleAbstractMarker703);
+                    pushFollow(FOLLOW_ruleMarker_in_ruleAbstractMarker704);
                     this_Marker_0=ruleMarker();
 
                     state._fsp--;
@@ -936,7 +947,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAbstractMarkerAccess().getVersMarkerParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleVersMarker_in_ruleAbstractMarker730);
+                    pushFollow(FOLLOW_ruleVersMarker_in_ruleAbstractMarker731);
                     this_VersMarker_1=ruleVersMarker();
 
                     state._fsp--;
@@ -954,7 +965,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getAbstractMarkerAccess().getDestructionMarkerParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleDestructionMarker_in_ruleAbstractMarker757);
+                    pushFollow(FOLLOW_ruleDestructionMarker_in_ruleAbstractMarker758);
                     this_DestructionMarker_2=ruleDestructionMarker();
 
                     state._fsp--;
@@ -999,13 +1010,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:350:2: iv_ruleAmbivalence= ruleAmbivalence EOF
             {
              newCompositeNode(grammarAccess.getAmbivalenceRule()); 
-            pushFollow(FOLLOW_ruleAmbivalence_in_entryRuleAmbivalence792);
+            pushFollow(FOLLOW_ruleAmbivalence_in_entryRuleAmbivalence793);
             iv_ruleAmbivalence=ruleAmbivalence();
 
             state._fsp--;
 
              current =iv_ruleAmbivalence; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAmbivalence802); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAmbivalence803); 
 
             }
 
@@ -1045,7 +1056,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:361:1: (otherlv_0= '%' ( ( (lv_cases_1_0= ruleCase ) ) (otherlv_2= '| ' (this_NEWLINE_3= RULE_NEWLINE )? ( (lv_cases_4_0= ruleCase ) ) )+ ) otherlv_5= '%' )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:361:3: otherlv_0= '%' ( ( (lv_cases_1_0= ruleCase ) ) (otherlv_2= '| ' (this_NEWLINE_3= RULE_NEWLINE )? ( (lv_cases_4_0= ruleCase ) ) )+ ) otherlv_5= '%'
             {
-            otherlv_0=(Token)match(input,11,FOLLOW_11_in_ruleAmbivalence839); 
+            otherlv_0=(Token)match(input,11,FOLLOW_11_in_ruleAmbivalence840); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_0());
                 
@@ -1061,7 +1072,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getAmbivalenceAccess().getCasesCaseParserRuleCall_1_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleCase_in_ruleAmbivalence861);
+            pushFollow(FOLLOW_ruleCase_in_ruleAmbivalence862);
             lv_cases_1_0=ruleCase();
 
             state._fsp--;
@@ -1084,37 +1095,37 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:383:2: (otherlv_2= '| ' (this_NEWLINE_3= RULE_NEWLINE )? ( (lv_cases_4_0= ruleCase ) ) )+
-            int cnt9=0;
-            loop9:
+            int cnt10=0;
+            loop10:
             do {
-                int alt9=2;
-                int LA9_0 = input.LA(1);
+                int alt10=2;
+                int LA10_0 = input.LA(1);
 
-                if ( (LA9_0==12) ) {
-                    alt9=1;
+                if ( (LA10_0==12) ) {
+                    alt10=1;
                 }
 
 
-                switch (alt9) {
+                switch (alt10) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:383:4: otherlv_2= '| ' (this_NEWLINE_3= RULE_NEWLINE )? ( (lv_cases_4_0= ruleCase ) )
             	    {
-            	    otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleAmbivalence874); 
+            	    otherlv_2=(Token)match(input,12,FOLLOW_12_in_ruleAmbivalence875); 
 
             	        	newLeafNode(otherlv_2, grammarAccess.getAmbivalenceAccess().getVerticalLineSpaceKeyword_1_1_0());
             	        
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:387:1: (this_NEWLINE_3= RULE_NEWLINE )?
-            	    int alt8=2;
-            	    int LA8_0 = input.LA(1);
+            	    int alt9=2;
+            	    int LA9_0 = input.LA(1);
 
-            	    if ( (LA8_0==RULE_NEWLINE) ) {
-            	        alt8=1;
+            	    if ( (LA9_0==RULE_NEWLINE) ) {
+            	        alt9=1;
             	    }
-            	    switch (alt8) {
+            	    switch (alt9) {
             	        case 1 :
             	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:387:2: this_NEWLINE_3= RULE_NEWLINE
             	            {
-            	            this_NEWLINE_3=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleAmbivalence886); 
+            	            this_NEWLINE_3=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleAmbivalence887); 
             	             
             	                newLeafNode(this_NEWLINE_3, grammarAccess.getAmbivalenceAccess().getNEWLINETerminalRuleCall_1_1_1()); 
             	                
@@ -1133,7 +1144,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getAmbivalenceAccess().getCasesCaseParserRuleCall_1_1_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleCase_in_ruleAmbivalence908);
+            	    pushFollow(FOLLOW_ruleCase_in_ruleAmbivalence909);
             	    lv_cases_4_0=ruleCase();
 
             	    state._fsp--;
@@ -1160,18 +1171,18 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt9 >= 1 ) break loop9;
+            	    if ( cnt10 >= 1 ) break loop10;
                         EarlyExitException eee =
-                            new EarlyExitException(9, input);
+                            new EarlyExitException(10, input);
                         throw eee;
                 }
-                cnt9++;
+                cnt10++;
             } while (true);
 
 
             }
 
-            otherlv_5=(Token)match(input,11,FOLLOW_11_in_ruleAmbivalence923); 
+            otherlv_5=(Token)match(input,11,FOLLOW_11_in_ruleAmbivalence924); 
 
                 	newLeafNode(otherlv_5, grammarAccess.getAmbivalenceAccess().getPercentSignKeyword_2());
                 
@@ -1208,13 +1219,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:423:2: iv_ruleCase= ruleCase EOF
             {
              newCompositeNode(grammarAccess.getCaseRule()); 
-            pushFollow(FOLLOW_ruleCase_in_entryRuleCase959);
+            pushFollow(FOLLOW_ruleCase_in_entryRuleCase960);
             iv_ruleCase=ruleCase();
 
             state._fsp--;
 
              current =iv_ruleCase; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCase969); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCase970); 
 
             }
 
@@ -1260,7 +1271,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:435:1: (lv_name_0_0= RULE_CASESTRING )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:436:3: lv_name_0_0= RULE_CASESTRING
             {
-            lv_name_0_0=(Token)match(input,RULE_CASESTRING,FOLLOW_RULE_CASESTRING_in_ruleCase1011); 
+            lv_name_0_0=(Token)match(input,RULE_CASESTRING,FOLLOW_RULE_CASESTRING_in_ruleCase1012); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getCaseAccess().getNameCASESTRINGTerminalRuleCall_0_0()); 
             		
@@ -1281,17 +1292,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:452:2: (this_NEWLINE_1= RULE_NEWLINE )?
-            int alt10=2;
-            int LA10_0 = input.LA(1);
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA10_0==RULE_NEWLINE) ) {
-                alt10=1;
+            if ( (LA11_0==RULE_NEWLINE) ) {
+                alt11=1;
             }
-            switch (alt10) {
+            switch (alt11) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:452:3: this_NEWLINE_1= RULE_NEWLINE
                     {
-                    this_NEWLINE_1=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleCase1028); 
+                    this_NEWLINE_1=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleCase1029); 
                      
                         newLeafNode(this_NEWLINE_1, grammarAccess.getCaseAccess().getNEWLINETerminalRuleCall_1()); 
                         
@@ -1313,7 +1324,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getCaseAccess().getItemsSentenceItemNoAmbivalenceParserRuleCall_2_0_0()); 
             	    
-            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1051);
+            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1052);
             lv_items_2_0=ruleSentenceItemNoAmbivalence();
 
             state._fsp--;
@@ -1336,36 +1347,36 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:474:2: (otherlv_3= ' ' (this_NEWLINE_4= RULE_NEWLINE )? ( (lv_items_5_0= ruleSentenceItemNoAmbivalence ) ) )*
-            loop12:
+            loop13:
             do {
-                int alt12=2;
-                int LA12_0 = input.LA(1);
+                int alt13=2;
+                int LA13_0 = input.LA(1);
 
-                if ( (LA12_0==9) ) {
-                    alt12=1;
+                if ( (LA13_0==9) ) {
+                    alt13=1;
                 }
 
 
-                switch (alt12) {
+                switch (alt13) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:474:4: otherlv_3= ' ' (this_NEWLINE_4= RULE_NEWLINE )? ( (lv_items_5_0= ruleSentenceItemNoAmbivalence ) )
             	    {
-            	    otherlv_3=(Token)match(input,9,FOLLOW_9_in_ruleCase1064); 
+            	    otherlv_3=(Token)match(input,9,FOLLOW_9_in_ruleCase1065); 
 
             	        	newLeafNode(otherlv_3, grammarAccess.getCaseAccess().getSpaceKeyword_2_1_0());
             	        
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:478:1: (this_NEWLINE_4= RULE_NEWLINE )?
-            	    int alt11=2;
-            	    int LA11_0 = input.LA(1);
+            	    int alt12=2;
+            	    int LA12_0 = input.LA(1);
 
-            	    if ( (LA11_0==RULE_NEWLINE) ) {
-            	        alt11=1;
+            	    if ( (LA12_0==RULE_NEWLINE) ) {
+            	        alt12=1;
             	    }
-            	    switch (alt11) {
+            	    switch (alt12) {
             	        case 1 :
             	            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:478:2: this_NEWLINE_4= RULE_NEWLINE
             	            {
-            	            this_NEWLINE_4=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleCase1076); 
+            	            this_NEWLINE_4=(Token)match(input,RULE_NEWLINE,FOLLOW_RULE_NEWLINE_in_ruleCase1077); 
             	             
             	                newLeafNode(this_NEWLINE_4, grammarAccess.getCaseAccess().getNEWLINETerminalRuleCall_2_1_1()); 
             	                
@@ -1384,7 +1395,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getCaseAccess().getItemsSentenceItemNoAmbivalenceParserRuleCall_2_1_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1098);
+            	    pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1099);
             	    lv_items_5_0=ruleSentenceItemNoAmbivalence();
 
             	    state._fsp--;
@@ -1411,7 +1422,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop12;
+            	    break loop13;
                 }
             } while (true);
 
@@ -1451,13 +1462,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:510:2: iv_ruleSentenceItemNoAmbivalence= ruleSentenceItemNoAmbivalence EOF
             {
              newCompositeNode(grammarAccess.getSentenceItemNoAmbivalenceRule()); 
-            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_entryRuleSentenceItemNoAmbivalence1137);
+            pushFollow(FOLLOW_ruleSentenceItemNoAmbivalence_in_entryRuleSentenceItemNoAmbivalence1138);
             iv_ruleSentenceItemNoAmbivalence=ruleSentenceItemNoAmbivalence();
 
             state._fsp--;
 
              current =iv_ruleSentenceItemNoAmbivalence; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSentenceItemNoAmbivalence1147); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSentenceItemNoAmbivalence1148); 
 
             }
 
@@ -1491,29 +1502,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:521:1: (this_Word_0= ruleWord | this_AbstractMarker_1= ruleAbstractMarker )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:521:1: (this_Word_0= ruleWord | this_AbstractMarker_1= ruleAbstractMarker )
-            int alt13=2;
-            int LA13_0 = input.LA(1);
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA13_0==RULE_EGYSTRING||(LA13_0>=23 && LA13_0<=24)||LA13_0==26||LA13_0==28||LA13_0==30||LA13_0==32||LA13_0==34||LA13_0==36||LA13_0==38||LA13_0==40||LA13_0==42||LA13_0==44||LA13_0==46||LA13_0==48||(LA13_0>=50 && LA13_0<=57)) ) {
-                alt13=1;
+            if ( (LA14_0==RULE_EGYSTRING||(LA14_0>=23 && LA14_0<=24)||LA14_0==26||LA14_0==28||LA14_0==30||LA14_0==32||LA14_0==34||LA14_0==36||LA14_0==38||LA14_0==40||LA14_0==42||LA14_0==44||LA14_0==46||LA14_0==48||(LA14_0>=50 && LA14_0<=57)) ) {
+                alt14=1;
             }
-            else if ( ((LA13_0>=RULE_BETWEEN_HASHES && LA13_0<=RULE_BETWEEN_MINUS)||(LA13_0>=13 && LA13_0<=22)) ) {
-                alt13=2;
+            else if ( ((LA14_0>=RULE_BETWEEN_HASHES && LA14_0<=RULE_BETWEEN_MINUS)||(LA14_0>=13 && LA14_0<=22)) ) {
+                alt14=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("", 13, 0, input);
+                    new NoViableAltException("", 14, 0, input);
 
                 throw nvae;
             }
-            switch (alt13) {
+            switch (alt14) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:522:5: this_Word_0= ruleWord
                     {
                      
                             newCompositeNode(grammarAccess.getSentenceItemNoAmbivalenceAccess().getWordParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleWord_in_ruleSentenceItemNoAmbivalence1194);
+                    pushFollow(FOLLOW_ruleWord_in_ruleSentenceItemNoAmbivalence1195);
                     this_Word_0=ruleWord();
 
                     state._fsp--;
@@ -1531,7 +1542,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getSentenceItemNoAmbivalenceAccess().getAbstractMarkerParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleAbstractMarker_in_ruleSentenceItemNoAmbivalence1221);
+                    pushFollow(FOLLOW_ruleAbstractMarker_in_ruleSentenceItemNoAmbivalence1222);
                     this_AbstractMarker_1=ruleAbstractMarker();
 
                     state._fsp--;
@@ -1576,13 +1587,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:550:2: iv_ruleVersMarker= ruleVersMarker EOF
             {
              newCompositeNode(grammarAccess.getVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleVersMarker_in_entryRuleVersMarker1256);
+            pushFollow(FOLLOW_ruleVersMarker_in_entryRuleVersMarker1257);
             iv_ruleVersMarker=ruleVersMarker();
 
             state._fsp--;
 
              current =iv_ruleVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersMarker1266); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersMarker1267); 
 
             }
 
@@ -1632,73 +1643,73 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:561:1: (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:561:1: (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker )
-            int alt14=10;
+            int alt15=10;
             switch ( input.LA(1) ) {
             case 21:
                 {
-                alt14=1;
+                alt15=1;
                 }
                 break;
             case 20:
                 {
-                alt14=2;
+                alt15=2;
                 }
                 break;
             case 22:
                 {
-                alt14=3;
+                alt15=3;
                 }
                 break;
             case 16:
                 {
-                alt14=4;
+                alt15=4;
                 }
                 break;
             case 15:
                 {
-                alt14=5;
+                alt15=5;
                 }
                 break;
             case 14:
                 {
-                alt14=6;
+                alt15=6;
                 }
                 break;
             case 13:
                 {
-                alt14=7;
+                alt15=7;
                 }
                 break;
             case 17:
                 {
-                alt14=8;
+                alt15=8;
                 }
                 break;
             case 18:
                 {
-                alt14=9;
+                alt15=9;
                 }
                 break;
             case 19:
                 {
-                alt14=10;
+                alt15=10;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 14, 0, input);
+                    new NoViableAltException("", 15, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt14) {
+            switch (alt15) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:562:5: this_VersbreakMarker_0= ruleVersbreakMarker
                     {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getVersbreakMarkerParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleVersbreakMarker_in_ruleVersMarker1313);
+                    pushFollow(FOLLOW_ruleVersbreakMarker_in_ruleVersMarker1314);
                     this_VersbreakMarker_0=ruleVersbreakMarker();
 
                     state._fsp--;
@@ -1716,7 +1727,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getVersFrontierMarkerParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleVersFrontierMarker_in_ruleVersMarker1340);
+                    pushFollow(FOLLOW_ruleVersFrontierMarker_in_ruleVersMarker1341);
                     this_VersFrontierMarker_1=ruleVersFrontierMarker();
 
                     state._fsp--;
@@ -1734,7 +1745,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getBrokenVersbreakMarkerParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleBrokenVersbreakMarker_in_ruleVersMarker1367);
+                    pushFollow(FOLLOW_ruleBrokenVersbreakMarker_in_ruleVersMarker1368);
                     this_BrokenVersbreakMarker_2=ruleBrokenVersbreakMarker();
 
                     state._fsp--;
@@ -1752,7 +1763,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getMissingVersMarkerParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleMissingVersMarker_in_ruleVersMarker1394);
+                    pushFollow(FOLLOW_ruleMissingVersMarker_in_ruleVersMarker1395);
                     this_MissingVersMarker_3=ruleMissingVersMarker();
 
                     state._fsp--;
@@ -1770,7 +1781,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedVersMarkerParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleDestroyedVersMarker_in_ruleVersMarker1421);
+                    pushFollow(FOLLOW_ruleDestroyedVersMarker_in_ruleVersMarker1422);
                     this_DestroyedVersMarker_4=ruleDestroyedVersMarker();
 
                     state._fsp--;
@@ -1788,7 +1799,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedVersMarkerParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleDeletedVersMarker_in_ruleVersMarker1448);
+                    pushFollow(FOLLOW_ruleDeletedVersMarker_in_ruleVersMarker1449);
                     this_DeletedVersMarker_5=ruleDeletedVersMarker();
 
                     state._fsp--;
@@ -1806,7 +1817,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableVersMarkerParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableVersMarker_in_ruleVersMarker1475);
+                    pushFollow(FOLLOW_ruleDisputableVersMarker_in_ruleVersMarker1476);
                     this_DisputableVersMarker_6=ruleDisputableVersMarker();
 
                     state._fsp--;
@@ -1824,7 +1835,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getRestorationOverRasurMarkerParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleRestorationOverRasurMarker_in_ruleVersMarker1502);
+                    pushFollow(FOLLOW_ruleRestorationOverRasurMarker_in_ruleVersMarker1503);
                     this_RestorationOverRasurMarker_7=ruleRestorationOverRasurMarker();
 
                     state._fsp--;
@@ -1842,7 +1853,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getAncientExpandedMarkerParserRuleCall_8()); 
                         
-                    pushFollow(FOLLOW_ruleAncientExpandedMarker_in_ruleVersMarker1529);
+                    pushFollow(FOLLOW_ruleAncientExpandedMarker_in_ruleVersMarker1530);
                     this_AncientExpandedMarker_8=ruleAncientExpandedMarker();
 
                     state._fsp--;
@@ -1860,7 +1871,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getVersMarkerAccess().getRasurMarkerParserRuleCall_9()); 
                         
-                    pushFollow(FOLLOW_ruleRasurMarker_in_ruleVersMarker1556);
+                    pushFollow(FOLLOW_ruleRasurMarker_in_ruleVersMarker1557);
                     this_RasurMarker_9=ruleRasurMarker();
 
                     state._fsp--;
@@ -1905,13 +1916,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:670:2: iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF
             {
              newCompositeNode(grammarAccess.getDisputableVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker1591);
+            pushFollow(FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker1592);
             iv_ruleDisputableVersMarker=ruleDisputableVersMarker();
 
             state._fsp--;
 
              current =iv_ruleDisputableVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableVersMarker1601); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableVersMarker1602); 
 
             }
 
@@ -1955,7 +1966,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,13,FOLLOW_13_in_ruleDisputableVersMarker1647); 
+            otherlv_1=(Token)match(input,13,FOLLOW_13_in_ruleDisputableVersMarker1648); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDisputableVersMarkerAccess().getReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkKeyword_1());
                 
@@ -1992,13 +2003,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:701:2: iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF
             {
              newCompositeNode(grammarAccess.getDeletedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker1683);
+            pushFollow(FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker1684);
             iv_ruleDeletedVersMarker=ruleDeletedVersMarker();
 
             state._fsp--;
 
              current =iv_ruleDeletedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletedVersMarker1693); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletedVersMarker1694); 
 
             }
 
@@ -2042,7 +2053,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleDeletedVersMarker1739); 
+            otherlv_1=(Token)match(input,14,FOLLOW_14_in_ruleDeletedVersMarker1740); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDeletedVersMarkerAccess().getLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketKeyword_1());
                 
@@ -2079,13 +2090,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:732:2: iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF
             {
              newCompositeNode(grammarAccess.getDestroyedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker1775);
+            pushFollow(FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker1776);
             iv_ruleDestroyedVersMarker=ruleDestroyedVersMarker();
 
             state._fsp--;
 
              current =iv_ruleDestroyedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedVersMarker1785); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedVersMarker1786); 
 
             }
 
@@ -2129,7 +2140,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,15,FOLLOW_15_in_ruleDestroyedVersMarker1831); 
+            otherlv_1=(Token)match(input,15,FOLLOW_15_in_ruleDestroyedVersMarker1832); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDestroyedVersMarkerAccess().getLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketKeyword_1());
                 
@@ -2166,13 +2177,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:763:2: iv_ruleMissingVersMarker= ruleMissingVersMarker EOF
             {
              newCompositeNode(grammarAccess.getMissingVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker1867);
+            pushFollow(FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker1868);
             iv_ruleMissingVersMarker=ruleMissingVersMarker();
 
             state._fsp--;
 
              current =iv_ruleMissingVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMissingVersMarker1877); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMissingVersMarker1878); 
 
             }
 
@@ -2216,7 +2227,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleMissingVersMarker1923); 
+            otherlv_1=(Token)match(input,16,FOLLOW_16_in_ruleMissingVersMarker1924); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getMissingVersMarkerAccess().getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1());
                 
@@ -2253,13 +2264,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:794:2: iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF
             {
              newCompositeNode(grammarAccess.getRestorationOverRasurMarkerRule()); 
-            pushFollow(FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker1959);
+            pushFollow(FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker1960);
             iv_ruleRestorationOverRasurMarker=ruleRestorationOverRasurMarker();
 
             state._fsp--;
 
              current =iv_ruleRestorationOverRasurMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker1969); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker1970); 
 
             }
 
@@ -2303,7 +2314,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_17_in_ruleRestorationOverRasurMarker2015); 
+            otherlv_1=(Token)match(input,17,FOLLOW_17_in_ruleRestorationOverRasurMarker2016); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getRestorationOverRasurMarkerAccess().getLeftSquareBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightSquareBracketKeyword_1());
                 
@@ -2340,13 +2351,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:825:2: iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF
             {
              newCompositeNode(grammarAccess.getAncientExpandedMarkerRule()); 
-            pushFollow(FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker2051);
+            pushFollow(FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker2052);
             iv_ruleAncientExpandedMarker=ruleAncientExpandedMarker();
 
             state._fsp--;
 
              current =iv_ruleAncientExpandedMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAncientExpandedMarker2061); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAncientExpandedMarker2062); 
 
             }
 
@@ -2390,7 +2401,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,18,FOLLOW_18_in_ruleAncientExpandedMarker2107); 
+            otherlv_1=(Token)match(input,18,FOLLOW_18_in_ruleAncientExpandedMarker2108); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getAncientExpandedMarkerAccess().getLeftParenthesisLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisRightParenthesisKeyword_1());
                 
@@ -2427,13 +2438,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:856:2: iv_ruleRasurMarker= ruleRasurMarker EOF
             {
              newCompositeNode(grammarAccess.getRasurMarkerRule()); 
-            pushFollow(FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker2143);
+            pushFollow(FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker2144);
             iv_ruleRasurMarker=ruleRasurMarker();
 
             state._fsp--;
 
              current =iv_ruleRasurMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRasurMarker2153); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRasurMarker2154); 
 
             }
 
@@ -2477,7 +2488,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,19,FOLLOW_19_in_ruleRasurMarker2199); 
+            otherlv_1=(Token)match(input,19,FOLLOW_19_in_ruleRasurMarker2200); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getRasurMarkerAccess().getLeftCurlyBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightCurlyBracketKeyword_1());
                 
@@ -2514,13 +2525,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:887:2: iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF
             {
              newCompositeNode(grammarAccess.getVersFrontierMarkerRule()); 
-            pushFollow(FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker2235);
+            pushFollow(FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker2236);
             iv_ruleVersFrontierMarker=ruleVersFrontierMarker();
 
             state._fsp--;
 
              current =iv_ruleVersFrontierMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersFrontierMarker2245); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersFrontierMarker2246); 
 
             }
 
@@ -2564,7 +2575,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,20,FOLLOW_20_in_ruleVersFrontierMarker2291); 
+            otherlv_1=(Token)match(input,20,FOLLOW_20_in_ruleVersFrontierMarker2292); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getVersFrontierMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc81Keyword_1());
                 
@@ -2601,13 +2612,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:918:2: iv_ruleVersbreakMarker= ruleVersbreakMarker EOF
             {
              newCompositeNode(grammarAccess.getVersbreakMarkerRule()); 
-            pushFollow(FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker2327);
+            pushFollow(FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker2328);
             iv_ruleVersbreakMarker=ruleVersbreakMarker();
 
             state._fsp--;
 
              current =iv_ruleVersbreakMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersbreakMarker2337); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersbreakMarker2338); 
 
             }
 
@@ -2651,7 +2662,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleVersbreakMarker2383); 
+            otherlv_1=(Token)match(input,21,FOLLOW_21_in_ruleVersbreakMarker2384); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc80Keyword_1());
                 
@@ -2688,13 +2699,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:949:2: iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF
             {
              newCompositeNode(grammarAccess.getBrokenVersbreakMarkerRule()); 
-            pushFollow(FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker2419);
+            pushFollow(FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker2420);
             iv_ruleBrokenVersbreakMarker=ruleBrokenVersbreakMarker();
 
             state._fsp--;
 
              current =iv_ruleBrokenVersbreakMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker2429); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker2430); 
 
             }
 
@@ -2738,7 +2749,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,22,FOLLOW_22_in_ruleBrokenVersbreakMarker2475); 
+            otherlv_1=(Token)match(input,22,FOLLOW_22_in_ruleBrokenVersbreakMarker2476); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getBrokenVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc82Keyword_1());
                 
@@ -2775,13 +2786,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:980:2: iv_ruleMarker= ruleMarker EOF
             {
              newCompositeNode(grammarAccess.getMarkerRule()); 
-            pushFollow(FOLLOW_ruleMarker_in_entryRuleMarker2511);
+            pushFollow(FOLLOW_ruleMarker_in_entryRuleMarker2512);
             iv_ruleMarker=ruleMarker();
 
             state._fsp--;
 
              current =iv_ruleMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMarker2521); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMarker2522); 
 
             }
 
@@ -2817,7 +2828,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:992:1: (lv_type_0_0= RULE_BETWEEN_HASHES )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:993:3: lv_type_0_0= RULE_BETWEEN_HASHES
             {
-            lv_type_0_0=(Token)match(input,RULE_BETWEEN_HASHES,FOLLOW_RULE_BETWEEN_HASHES_in_ruleMarker2562); 
+            lv_type_0_0=(Token)match(input,RULE_BETWEEN_HASHES,FOLLOW_RULE_BETWEEN_HASHES_in_ruleMarker2563); 
 
             			newLeafNode(lv_type_0_0, grammarAccess.getMarkerAccess().getTypeBETWEEN_HASHESTerminalRuleCall_0()); 
             		
@@ -2867,13 +2878,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1019:2: iv_ruleDestructionMarker= ruleDestructionMarker EOF
             {
              newCompositeNode(grammarAccess.getDestructionMarkerRule()); 
-            pushFollow(FOLLOW_ruleDestructionMarker_in_entryRuleDestructionMarker2602);
+            pushFollow(FOLLOW_ruleDestructionMarker_in_entryRuleDestructionMarker2603);
             iv_ruleDestructionMarker=ruleDestructionMarker();
 
             state._fsp--;
 
              current =iv_ruleDestructionMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestructionMarker2612); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDestructionMarker2613); 
 
             }
 
@@ -2909,7 +2920,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1031:1: (lv_type_0_0= RULE_BETWEEN_MINUS )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1032:3: lv_type_0_0= RULE_BETWEEN_MINUS
             {
-            lv_type_0_0=(Token)match(input,RULE_BETWEEN_MINUS,FOLLOW_RULE_BETWEEN_MINUS_in_ruleDestructionMarker2653); 
+            lv_type_0_0=(Token)match(input,RULE_BETWEEN_MINUS,FOLLOW_RULE_BETWEEN_MINUS_in_ruleDestructionMarker2654); 
 
             			newLeafNode(lv_type_0_0, grammarAccess.getDestructionMarkerAccess().getTypeBETWEEN_MINUSTerminalRuleCall_0()); 
             		
@@ -2959,13 +2970,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1058:2: iv_ruleWord= ruleWord EOF
             {
              newCompositeNode(grammarAccess.getWordRule()); 
-            pushFollow(FOLLOW_ruleWord_in_entryRuleWord2693);
+            pushFollow(FOLLOW_ruleWord_in_entryRuleWord2694);
             iv_ruleWord=ruleWord();
 
             state._fsp--;
 
              current =iv_ruleWord; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleWord2703); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleWord2704); 
 
             }
 
@@ -3011,18 +3022,18 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             }
 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1075:2: ( (lv_wChar_1_0= ruleWordPart ) )+
-            int cnt15=0;
-            loop15:
+            int cnt16=0;
+            loop16:
             do {
-                int alt15=2;
-                int LA15_0 = input.LA(1);
+                int alt16=2;
+                int LA16_0 = input.LA(1);
 
-                if ( (LA15_0==RULE_EGYSTRING||(LA15_0>=23 && LA15_0<=24)||LA15_0==26||LA15_0==28||LA15_0==30||LA15_0==32||LA15_0==34||LA15_0==36||LA15_0==38||LA15_0==40||LA15_0==42||LA15_0==44||LA15_0==46||LA15_0==48||(LA15_0>=50 && LA15_0<=57)) ) {
-                    alt15=1;
+                if ( (LA16_0==RULE_EGYSTRING||(LA16_0>=23 && LA16_0<=24)||LA16_0==26||LA16_0==28||LA16_0==30||LA16_0==32||LA16_0==34||LA16_0==36||LA16_0==38||LA16_0==40||LA16_0==42||LA16_0==44||LA16_0==46||LA16_0==48||(LA16_0>=50 && LA16_0<=57)) ) {
+                    alt16=1;
                 }
 
 
-                switch (alt15) {
+                switch (alt16) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1076:1: (lv_wChar_1_0= ruleWordPart )
             	    {
@@ -3032,7 +3043,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getWordAccess().getWCharWordPartParserRuleCall_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleWordPart_in_ruleWord2758);
+            	    pushFollow(FOLLOW_ruleWordPart_in_ruleWord2759);
             	    lv_wChar_1_0=ruleWordPart();
 
             	    state._fsp--;
@@ -3056,12 +3067,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt15 >= 1 ) break loop15;
+            	    if ( cnt16 >= 1 ) break loop16;
                         EarlyExitException eee =
-                            new EarlyExitException(15, input);
+                            new EarlyExitException(16, input);
                         throw eee;
                 }
-                cnt15++;
+                cnt16++;
             } while (true);
 
 
@@ -3097,13 +3108,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1103:2: iv_ruleWordPart= ruleWordPart EOF
             {
              newCompositeNode(grammarAccess.getWordPartRule()); 
-            pushFollow(FOLLOW_ruleWordPart_in_entryRuleWordPart2795);
+            pushFollow(FOLLOW_ruleWordPart_in_entryRuleWordPart2796);
             iv_ruleWordPart=ruleWordPart();
 
             state._fsp--;
 
              current =iv_ruleWordPart; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleWordPart2805); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleWordPart2806); 
 
             }
 
@@ -3139,17 +3150,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1114:2: (otherlv_0= '=' )? ( (lv_wChar_1_0= ruleWordMiddle ) )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1114:2: (otherlv_0= '=' )?
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            int alt17=2;
+            int LA17_0 = input.LA(1);
 
-            if ( (LA16_0==23) ) {
-                alt16=1;
+            if ( (LA17_0==23) ) {
+                alt17=1;
             }
-            switch (alt16) {
+            switch (alt17) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1114:4: otherlv_0= '='
                     {
-                    otherlv_0=(Token)match(input,23,FOLLOW_23_in_ruleWordPart2843); 
+                    otherlv_0=(Token)match(input,23,FOLLOW_23_in_ruleWordPart2844); 
 
                         	newLeafNode(otherlv_0, grammarAccess.getWordPartAccess().getEqualsSignKeyword_0());
                         
@@ -3168,7 +3179,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
              
             	        newCompositeNode(grammarAccess.getWordPartAccess().getWCharWordMiddleParserRuleCall_1_0()); 
             	    
-            pushFollow(FOLLOW_ruleWordMiddle_in_ruleWordPart2866);
+            pushFollow(FOLLOW_ruleWordMiddle_in_ruleWordPart2867);
             lv_wChar_1_0=ruleWordMiddle();
 
             state._fsp--;
@@ -3223,13 +3234,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1146:2: iv_ruleWordMiddle= ruleWordMiddle EOF
             {
              newCompositeNode(grammarAccess.getWordMiddleRule()); 
-            pushFollow(FOLLOW_ruleWordMiddle_in_entryRuleWordMiddle2902);
+            pushFollow(FOLLOW_ruleWordMiddle_in_entryRuleWordMiddle2903);
             iv_ruleWordMiddle=ruleWordMiddle();
 
             state._fsp--;
 
              current =iv_ruleWordMiddle; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleWordMiddle2912); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleWordMiddle2913); 
 
             }
 
@@ -3265,7 +3276,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1157:1: (this_Brackets_0= ruleBrackets | this_Chars_1= ruleChars | this_Interfix_2= ruleInterfix )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1157:1: (this_Brackets_0= ruleBrackets | this_Chars_1= ruleChars | this_Interfix_2= ruleInterfix )
-            int alt17=3;
+            int alt18=3;
             switch ( input.LA(1) ) {
             case 24:
             case 26:
@@ -3281,12 +3292,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 46:
             case 48:
                 {
-                alt17=1;
+                alt18=1;
                 }
                 break;
             case RULE_EGYSTRING:
                 {
-                alt17=2;
+                alt18=2;
                 }
                 break;
             case 50:
@@ -3298,24 +3309,24 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt17=3;
+                alt18=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 17, 0, input);
+                    new NoViableAltException("", 18, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt17) {
+            switch (alt18) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1158:5: this_Brackets_0= ruleBrackets
                     {
                      
                             newCompositeNode(grammarAccess.getWordMiddleAccess().getBracketsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleBrackets_in_ruleWordMiddle2959);
+                    pushFollow(FOLLOW_ruleBrackets_in_ruleWordMiddle2960);
                     this_Brackets_0=ruleBrackets();
 
                     state._fsp--;
@@ -3333,7 +3344,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getWordMiddleAccess().getCharsParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleWordMiddle2986);
+                    pushFollow(FOLLOW_ruleChars_in_ruleWordMiddle2987);
                     this_Chars_1=ruleChars();
 
                     state._fsp--;
@@ -3351,7 +3362,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getWordMiddleAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleWordMiddle3013);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleWordMiddle3014);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -3396,13 +3407,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1196:2: iv_ruleChars= ruleChars EOF
             {
              newCompositeNode(grammarAccess.getCharsRule()); 
-            pushFollow(FOLLOW_ruleChars_in_entryRuleChars3048);
+            pushFollow(FOLLOW_ruleChars_in_entryRuleChars3049);
             iv_ruleChars=ruleChars();
 
             state._fsp--;
 
              current =iv_ruleChars; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChars3058); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleChars3059); 
 
             }
 
@@ -3438,7 +3449,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1208:1: (lv_name_0_0= RULE_EGYSTRING )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1209:3: lv_name_0_0= RULE_EGYSTRING
             {
-            lv_name_0_0=(Token)match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_ruleChars3099); 
+            lv_name_0_0=(Token)match(input,RULE_EGYSTRING,FOLLOW_RULE_EGYSTRING_in_ruleChars3100); 
 
             			newLeafNode(lv_name_0_0, grammarAccess.getCharsAccess().getNameEGYSTRINGTerminalRuleCall_0()); 
             		
@@ -3488,13 +3499,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1235:2: iv_ruleBrackets= ruleBrackets EOF
             {
              newCompositeNode(grammarAccess.getBracketsRule()); 
-            pushFollow(FOLLOW_ruleBrackets_in_entryRuleBrackets3139);
+            pushFollow(FOLLOW_ruleBrackets_in_entryRuleBrackets3140);
             iv_ruleBrackets=ruleBrackets();
 
             state._fsp--;
 
              current =iv_ruleBrackets; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBrackets3149); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBrackets3150); 
 
             }
 
@@ -3550,88 +3561,88 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1246:1: (this_Rasur_0= ruleRasur | this_AncientExpanded_1= ruleAncientExpanded | this_RestorationOverRasur_2= ruleRestorationOverRasur | this_ExpandedColumn_3= ruleExpandedColumn | this_Expanded_4= ruleExpanded | this_DisputableReading_5= ruleDisputableReading | this_Emendation_6= ruleEmendation | this_Lacuna_7= ruleLacuna | this_Deletion_8= ruleDeletion | this_PartialDestruction_9= rulePartialDestruction | this_Cartouche_10= ruleCartouche | this_Oval_11= ruleOval | this_Serech_12= ruleSerech )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1246:1: (this_Rasur_0= ruleRasur | this_AncientExpanded_1= ruleAncientExpanded | this_RestorationOverRasur_2= ruleRestorationOverRasur | this_ExpandedColumn_3= ruleExpandedColumn | this_Expanded_4= ruleExpanded | this_DisputableReading_5= ruleDisputableReading | this_Emendation_6= ruleEmendation | this_Lacuna_7= ruleLacuna | this_Deletion_8= ruleDeletion | this_PartialDestruction_9= rulePartialDestruction | this_Cartouche_10= ruleCartouche | this_Oval_11= ruleOval | this_Serech_12= ruleSerech )
-            int alt18=13;
+            int alt19=13;
             switch ( input.LA(1) ) {
             case 42:
                 {
-                alt18=1;
+                alt19=1;
                 }
                 break;
             case 44:
                 {
-                alt18=2;
+                alt19=2;
                 }
                 break;
             case 46:
                 {
-                alt18=3;
+                alt19=3;
                 }
                 break;
             case 40:
                 {
-                alt18=4;
+                alt19=4;
                 }
                 break;
             case 30:
                 {
-                alt18=5;
+                alt19=5;
                 }
                 break;
             case 34:
                 {
-                alt18=6;
+                alt19=6;
                 }
                 break;
             case 32:
                 {
-                alt18=7;
+                alt19=7;
                 }
                 break;
             case 36:
                 {
-                alt18=8;
+                alt19=8;
                 }
                 break;
             case 38:
                 {
-                alt18=9;
+                alt19=9;
                 }
                 break;
             case 48:
                 {
-                alt18=10;
+                alt19=10;
                 }
                 break;
             case 28:
                 {
-                alt18=11;
+                alt19=11;
                 }
                 break;
             case 24:
                 {
-                alt18=12;
+                alt19=12;
                 }
                 break;
             case 26:
                 {
-                alt18=13;
+                alt19=13;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 18, 0, input);
+                    new NoViableAltException("", 19, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt18) {
+            switch (alt19) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1247:5: this_Rasur_0= ruleRasur
                     {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getRasurParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleRasur_in_ruleBrackets3196);
+                    pushFollow(FOLLOW_ruleRasur_in_ruleBrackets3197);
                     this_Rasur_0=ruleRasur();
 
                     state._fsp--;
@@ -3649,7 +3660,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getAncientExpandedParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleBrackets3223);
+                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleBrackets3224);
                     this_AncientExpanded_1=ruleAncientExpanded();
 
                     state._fsp--;
@@ -3667,7 +3678,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getRestorationOverRasurParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleBrackets3250);
+                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleBrackets3251);
                     this_RestorationOverRasur_2=ruleRestorationOverRasur();
 
                     state._fsp--;
@@ -3685,7 +3696,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getExpandedColumnParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleExpandedColumn_in_ruleBrackets3277);
+                    pushFollow(FOLLOW_ruleExpandedColumn_in_ruleBrackets3278);
                     this_ExpandedColumn_3=ruleExpandedColumn();
 
                     state._fsp--;
@@ -3703,7 +3714,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getExpandedParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleBrackets3304);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleBrackets3305);
                     this_Expanded_4=ruleExpanded();
 
                     state._fsp--;
@@ -3721,7 +3732,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getDisputableReadingParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleBrackets3331);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleBrackets3332);
                     this_DisputableReading_5=ruleDisputableReading();
 
                     state._fsp--;
@@ -3739,7 +3750,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getEmendationParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleEmendation_in_ruleBrackets3358);
+                    pushFollow(FOLLOW_ruleEmendation_in_ruleBrackets3359);
                     this_Emendation_6=ruleEmendation();
 
                     state._fsp--;
@@ -3757,7 +3768,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getLacunaParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleLacuna_in_ruleBrackets3385);
+                    pushFollow(FOLLOW_ruleLacuna_in_ruleBrackets3386);
                     this_Lacuna_7=ruleLacuna();
 
                     state._fsp--;
@@ -3775,7 +3786,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getDeletionParserRuleCall_8()); 
                         
-                    pushFollow(FOLLOW_ruleDeletion_in_ruleBrackets3412);
+                    pushFollow(FOLLOW_ruleDeletion_in_ruleBrackets3413);
                     this_Deletion_8=ruleDeletion();
 
                     state._fsp--;
@@ -3793,7 +3804,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getPartialDestructionParserRuleCall_9()); 
                         
-                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleBrackets3439);
+                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleBrackets3440);
                     this_PartialDestruction_9=rulePartialDestruction();
 
                     state._fsp--;
@@ -3811,7 +3822,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getCartoucheParserRuleCall_10()); 
                         
-                    pushFollow(FOLLOW_ruleCartouche_in_ruleBrackets3466);
+                    pushFollow(FOLLOW_ruleCartouche_in_ruleBrackets3467);
                     this_Cartouche_10=ruleCartouche();
 
                     state._fsp--;
@@ -3829,7 +3840,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getOvalParserRuleCall_11()); 
                         
-                    pushFollow(FOLLOW_ruleOval_in_ruleBrackets3493);
+                    pushFollow(FOLLOW_ruleOval_in_ruleBrackets3494);
                     this_Oval_11=ruleOval();
 
                     state._fsp--;
@@ -3847,7 +3858,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getBracketsAccess().getSerechParserRuleCall_12()); 
                         
-                    pushFollow(FOLLOW_ruleSerech_in_ruleBrackets3520);
+                    pushFollow(FOLLOW_ruleSerech_in_ruleBrackets3521);
                     this_Serech_12=ruleSerech();
 
                     state._fsp--;
@@ -3892,13 +3903,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1385:2: iv_ruleOval= ruleOval EOF
             {
              newCompositeNode(grammarAccess.getOvalRule()); 
-            pushFollow(FOLLOW_ruleOval_in_entryRuleOval3555);
+            pushFollow(FOLLOW_ruleOval_in_entryRuleOval3556);
             iv_ruleOval=ruleOval();
 
             state._fsp--;
 
              current =iv_ruleOval; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOval3565); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleOval3566); 
 
             }
 
@@ -3934,23 +3945,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1396:1: (otherlv_0= '\\uD80C\\uDE58' ( (lv_wChar_1_0= ruleNoCartouche ) )+ otherlv_2= '\\uD80C\\uDE82' )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1396:3: otherlv_0= '\\uD80C\\uDE58' ( (lv_wChar_1_0= ruleNoCartouche ) )+ otherlv_2= '\\uD80C\\uDE82'
             {
-            otherlv_0=(Token)match(input,24,FOLLOW_24_in_ruleOval3602); 
+            otherlv_0=(Token)match(input,24,FOLLOW_24_in_ruleOval3603); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getOvalAccess().getLeadSurrogateD80cTrailSurrogateDe58Keyword_0());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1400:1: ( (lv_wChar_1_0= ruleNoCartouche ) )+
-            int cnt19=0;
-            loop19:
+            int cnt20=0;
+            loop20:
             do {
-                int alt19=2;
-                int LA19_0 = input.LA(1);
+                int alt20=2;
+                int LA20_0 = input.LA(1);
 
-                if ( (LA19_0==RULE_EGYSTRING||LA19_0==30||LA19_0==32||LA19_0==34||LA19_0==36||LA19_0==38||LA19_0==40||LA19_0==42||LA19_0==44||LA19_0==46||LA19_0==48||(LA19_0>=50 && LA19_0<=57)) ) {
-                    alt19=1;
+                if ( (LA20_0==RULE_EGYSTRING||LA20_0==30||LA20_0==32||LA20_0==34||LA20_0==36||LA20_0==38||LA20_0==40||LA20_0==42||LA20_0==44||LA20_0==46||LA20_0==48||(LA20_0>=50 && LA20_0<=57)) ) {
+                    alt20=1;
                 }
 
 
-                switch (alt19) {
+                switch (alt20) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1401:1: (lv_wChar_1_0= ruleNoCartouche )
             	    {
@@ -3960,7 +3971,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getOvalAccess().getWCharNoCartoucheParserRuleCall_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoCartouche_in_ruleOval3623);
+            	    pushFollow(FOLLOW_ruleNoCartouche_in_ruleOval3624);
             	    lv_wChar_1_0=ruleNoCartouche();
 
             	    state._fsp--;
@@ -3984,15 +3995,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt19 >= 1 ) break loop19;
+            	    if ( cnt20 >= 1 ) break loop20;
                         EarlyExitException eee =
-                            new EarlyExitException(19, input);
+                            new EarlyExitException(20, input);
                         throw eee;
                 }
-                cnt19++;
+                cnt20++;
             } while (true);
 
-            otherlv_2=(Token)match(input,25,FOLLOW_25_in_ruleOval3636); 
+            otherlv_2=(Token)match(input,25,FOLLOW_25_in_ruleOval3637); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getOvalAccess().getLeadSurrogateD80cTrailSurrogateDe82Keyword_2());
                 
@@ -4029,13 +4040,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1432:2: iv_ruleSerech= ruleSerech EOF
             {
              newCompositeNode(grammarAccess.getSerechRule()); 
-            pushFollow(FOLLOW_ruleSerech_in_entryRuleSerech3672);
+            pushFollow(FOLLOW_ruleSerech_in_entryRuleSerech3673);
             iv_ruleSerech=ruleSerech();
 
             state._fsp--;
 
              current =iv_ruleSerech; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSerech3682); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSerech3683); 
 
             }
 
@@ -4071,23 +4082,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1443:1: (otherlv_0= '\\uD80C\\uDF79' ( (lv_wChar_1_0= ruleNoCartouche ) )+ otherlv_2= '\\uD80C\\uDF7A' )
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1443:3: otherlv_0= '\\uD80C\\uDF79' ( (lv_wChar_1_0= ruleNoCartouche ) )+ otherlv_2= '\\uD80C\\uDF7A'
             {
-            otherlv_0=(Token)match(input,26,FOLLOW_26_in_ruleSerech3719); 
+            otherlv_0=(Token)match(input,26,FOLLOW_26_in_ruleSerech3720); 
 
                 	newLeafNode(otherlv_0, grammarAccess.getSerechAccess().getLeadSurrogateD80cTrailSurrogateDf79Keyword_0());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1447:1: ( (lv_wChar_1_0= ruleNoCartouche ) )+
-            int cnt20=0;
-            loop20:
+            int cnt21=0;
+            loop21:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt21=2;
+                int LA21_0 = input.LA(1);
 
-                if ( (LA20_0==RULE_EGYSTRING||LA20_0==30||LA20_0==32||LA20_0==34||LA20_0==36||LA20_0==38||LA20_0==40||LA20_0==42||LA20_0==44||LA20_0==46||LA20_0==48||(LA20_0>=50 && LA20_0<=57)) ) {
-                    alt20=1;
+                if ( (LA21_0==RULE_EGYSTRING||LA21_0==30||LA21_0==32||LA21_0==34||LA21_0==36||LA21_0==38||LA21_0==40||LA21_0==42||LA21_0==44||LA21_0==46||LA21_0==48||(LA21_0>=50 && LA21_0<=57)) ) {
+                    alt21=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt21) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1448:1: (lv_wChar_1_0= ruleNoCartouche )
             	    {
@@ -4097,7 +4108,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getSerechAccess().getWCharNoCartoucheParserRuleCall_1_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoCartouche_in_ruleSerech3740);
+            	    pushFollow(FOLLOW_ruleNoCartouche_in_ruleSerech3741);
             	    lv_wChar_1_0=ruleNoCartouche();
 
             	    state._fsp--;
@@ -4121,15 +4132,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt20 >= 1 ) break loop20;
+            	    if ( cnt21 >= 1 ) break loop21;
                         EarlyExitException eee =
-                            new EarlyExitException(20, input);
+                            new EarlyExitException(21, input);
                         throw eee;
                 }
-                cnt20++;
+                cnt21++;
             } while (true);
 
-            otherlv_2=(Token)match(input,27,FOLLOW_27_in_ruleSerech3753); 
+            otherlv_2=(Token)match(input,27,FOLLOW_27_in_ruleSerech3754); 
 
                 	newLeafNode(otherlv_2, grammarAccess.getSerechAccess().getLeadSurrogateD80cTrailSurrogateDf7aKeyword_2());
                 
@@ -4166,13 +4177,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1479:2: iv_ruleCartouche= ruleCartouche EOF
             {
              newCompositeNode(grammarAccess.getCartoucheRule()); 
-            pushFollow(FOLLOW_ruleCartouche_in_entryRuleCartouche3789);
+            pushFollow(FOLLOW_ruleCartouche_in_entryRuleCartouche3790);
             iv_ruleCartouche=ruleCartouche();
 
             state._fsp--;
 
              current =iv_ruleCartouche; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCartouche3799); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleCartouche3800); 
 
             }
 
@@ -4219,23 +4230,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,28,FOLLOW_28_in_ruleCartouche3845); 
+            otherlv_1=(Token)match(input,28,FOLLOW_28_in_ruleCartouche3846); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getCartoucheAccess().getLeadSurrogateD80cTrailSurrogateDe86Keyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1500:1: ( (lv_wChar_2_0= ruleNoCartouche ) )+
-            int cnt21=0;
-            loop21:
+            int cnt22=0;
+            loop22:
             do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
+                int alt22=2;
+                int LA22_0 = input.LA(1);
 
-                if ( (LA21_0==RULE_EGYSTRING||LA21_0==30||LA21_0==32||LA21_0==34||LA21_0==36||LA21_0==38||LA21_0==40||LA21_0==42||LA21_0==44||LA21_0==46||LA21_0==48||(LA21_0>=50 && LA21_0<=57)) ) {
-                    alt21=1;
+                if ( (LA22_0==RULE_EGYSTRING||LA22_0==30||LA22_0==32||LA22_0==34||LA22_0==36||LA22_0==38||LA22_0==40||LA22_0==42||LA22_0==44||LA22_0==46||LA22_0==48||(LA22_0>=50 && LA22_0<=57)) ) {
+                    alt22=1;
                 }
 
 
-                switch (alt21) {
+                switch (alt22) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1501:1: (lv_wChar_2_0= ruleNoCartouche )
             	    {
@@ -4245,7 +4256,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getCartoucheAccess().getWCharNoCartoucheParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoCartouche_in_ruleCartouche3866);
+            	    pushFollow(FOLLOW_ruleNoCartouche_in_ruleCartouche3867);
             	    lv_wChar_2_0=ruleNoCartouche();
 
             	    state._fsp--;
@@ -4269,15 +4280,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt21 >= 1 ) break loop21;
+            	    if ( cnt22 >= 1 ) break loop22;
                         EarlyExitException eee =
-                            new EarlyExitException(21, input);
+                            new EarlyExitException(22, input);
                         throw eee;
                 }
-                cnt21++;
+                cnt22++;
             } while (true);
 
-            otherlv_3=(Token)match(input,29,FOLLOW_29_in_ruleCartouche3879); 
+            otherlv_3=(Token)match(input,29,FOLLOW_29_in_ruleCartouche3880); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getCartoucheAccess().getLeadSurrogateD80cTrailSurrogateDe87Keyword_3());
                 
@@ -4314,13 +4325,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1532:2: iv_ruleNoCartouche= ruleNoCartouche EOF
             {
              newCompositeNode(grammarAccess.getNoCartoucheRule()); 
-            pushFollow(FOLLOW_ruleNoCartouche_in_entryRuleNoCartouche3915);
+            pushFollow(FOLLOW_ruleNoCartouche_in_entryRuleNoCartouche3916);
             iv_ruleNoCartouche=ruleNoCartouche();
 
             state._fsp--;
 
              current =iv_ruleNoCartouche; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoCartouche3925); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoCartouche3926); 
 
             }
 
@@ -4374,61 +4385,61 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1543:1: (this_Chars_0= ruleChars | this_Rasur_1= ruleRasur | this_AncientExpanded_2= ruleAncientExpanded | this_RestorationOverRasur_3= ruleRestorationOverRasur | this_ExpandedColumn_4= ruleExpandedColumn | this_Expanded_5= ruleExpanded | this_DisputableReading_6= ruleDisputableReading | this_Emendation_7= ruleEmendation | this_Lacuna_8= ruleLacuna | this_Deletion_9= ruleDeletion | this_PartialDestruction_10= rulePartialDestruction | this_Interfix_11= ruleInterfix )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1543:1: (this_Chars_0= ruleChars | this_Rasur_1= ruleRasur | this_AncientExpanded_2= ruleAncientExpanded | this_RestorationOverRasur_3= ruleRestorationOverRasur | this_ExpandedColumn_4= ruleExpandedColumn | this_Expanded_5= ruleExpanded | this_DisputableReading_6= ruleDisputableReading | this_Emendation_7= ruleEmendation | this_Lacuna_8= ruleLacuna | this_Deletion_9= ruleDeletion | this_PartialDestruction_10= rulePartialDestruction | this_Interfix_11= ruleInterfix )
-            int alt22=12;
+            int alt23=12;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt22=1;
+                alt23=1;
                 }
                 break;
             case 42:
                 {
-                alt22=2;
+                alt23=2;
                 }
                 break;
             case 44:
                 {
-                alt22=3;
+                alt23=3;
                 }
                 break;
             case 46:
                 {
-                alt22=4;
+                alt23=4;
                 }
                 break;
             case 40:
                 {
-                alt22=5;
+                alt23=5;
                 }
                 break;
             case 30:
                 {
-                alt22=6;
+                alt23=6;
                 }
                 break;
             case 34:
                 {
-                alt22=7;
+                alt23=7;
                 }
                 break;
             case 32:
                 {
-                alt22=8;
+                alt23=8;
                 }
                 break;
             case 36:
                 {
-                alt22=9;
+                alt23=9;
                 }
                 break;
             case 38:
                 {
-                alt22=10;
+                alt23=10;
                 }
                 break;
             case 48:
                 {
-                alt22=11;
+                alt23=11;
                 }
                 break;
             case 50:
@@ -4440,24 +4451,24 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt22=12;
+                alt23=12;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 22, 0, input);
+                    new NoViableAltException("", 23, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt22) {
+            switch (alt23) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1544:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoCartouche3972);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoCartouche3973);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -4475,7 +4486,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getRasurParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleRasur_in_ruleNoCartouche3999);
+                    pushFollow(FOLLOW_ruleRasur_in_ruleNoCartouche4000);
                     this_Rasur_1=ruleRasur();
 
                     state._fsp--;
@@ -4493,7 +4504,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getAncientExpandedParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleNoCartouche4026);
+                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleNoCartouche4027);
                     this_AncientExpanded_2=ruleAncientExpanded();
 
                     state._fsp--;
@@ -4511,7 +4522,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getRestorationOverRasurParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleNoCartouche4053);
+                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleNoCartouche4054);
                     this_RestorationOverRasur_3=ruleRestorationOverRasur();
 
                     state._fsp--;
@@ -4529,7 +4540,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getExpandedColumnParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleExpandedColumn_in_ruleNoCartouche4080);
+                    pushFollow(FOLLOW_ruleExpandedColumn_in_ruleNoCartouche4081);
                     this_ExpandedColumn_4=ruleExpandedColumn();
 
                     state._fsp--;
@@ -4547,7 +4558,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getExpandedParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoCartouche4107);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoCartouche4108);
                     this_Expanded_5=ruleExpanded();
 
                     state._fsp--;
@@ -4565,7 +4576,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getDisputableReadingParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoCartouche4134);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoCartouche4135);
                     this_DisputableReading_6=ruleDisputableReading();
 
                     state._fsp--;
@@ -4583,7 +4594,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getEmendationParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleEmendation_in_ruleNoCartouche4161);
+                    pushFollow(FOLLOW_ruleEmendation_in_ruleNoCartouche4162);
                     this_Emendation_7=ruleEmendation();
 
                     state._fsp--;
@@ -4601,7 +4612,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getLacunaParserRuleCall_8()); 
                         
-                    pushFollow(FOLLOW_ruleLacuna_in_ruleNoCartouche4188);
+                    pushFollow(FOLLOW_ruleLacuna_in_ruleNoCartouche4189);
                     this_Lacuna_8=ruleLacuna();
 
                     state._fsp--;
@@ -4619,7 +4630,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getDeletionParserRuleCall_9()); 
                         
-                    pushFollow(FOLLOW_ruleDeletion_in_ruleNoCartouche4215);
+                    pushFollow(FOLLOW_ruleDeletion_in_ruleNoCartouche4216);
                     this_Deletion_9=ruleDeletion();
 
                     state._fsp--;
@@ -4637,7 +4648,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getPartialDestructionParserRuleCall_10()); 
                         
-                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleNoCartouche4242);
+                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleNoCartouche4243);
                     this_PartialDestruction_10=rulePartialDestruction();
 
                     state._fsp--;
@@ -4655,7 +4666,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoCartoucheAccess().getInterfixParserRuleCall_11()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoCartouche4269);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoCartouche4270);
                     this_Interfix_11=ruleInterfix();
 
                     state._fsp--;
@@ -4700,13 +4711,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1672:2: iv_ruleExpanded= ruleExpanded EOF
             {
              newCompositeNode(grammarAccess.getExpandedRule()); 
-            pushFollow(FOLLOW_ruleExpanded_in_entryRuleExpanded4304);
+            pushFollow(FOLLOW_ruleExpanded_in_entryRuleExpanded4305);
             iv_ruleExpanded=ruleExpanded();
 
             state._fsp--;
 
              current =iv_ruleExpanded; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExpanded4314); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExpanded4315); 
 
             }
 
@@ -4753,23 +4764,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,30,FOLLOW_30_in_ruleExpanded4360); 
+            otherlv_1=(Token)match(input,30,FOLLOW_30_in_ruleExpanded4361); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getExpandedAccess().getLeftParenthesisKeyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1693:1: ( (lv_wChar_2_0= ruleNoExpanded ) )+
-            int cnt23=0;
-            loop23:
+            int cnt24=0;
+            loop24:
             do {
-                int alt23=2;
-                int LA23_0 = input.LA(1);
+                int alt24=2;
+                int LA24_0 = input.LA(1);
 
-                if ( (LA23_0==RULE_EGYSTRING||LA23_0==34||(LA23_0>=50 && LA23_0<=57)) ) {
-                    alt23=1;
+                if ( (LA24_0==RULE_EGYSTRING||LA24_0==34||(LA24_0>=50 && LA24_0<=57)) ) {
+                    alt24=1;
                 }
 
 
-                switch (alt23) {
+                switch (alt24) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1694:1: (lv_wChar_2_0= ruleNoExpanded )
             	    {
@@ -4779,7 +4790,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getExpandedAccess().getWCharNoExpandedParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoExpanded_in_ruleExpanded4381);
+            	    pushFollow(FOLLOW_ruleNoExpanded_in_ruleExpanded4382);
             	    lv_wChar_2_0=ruleNoExpanded();
 
             	    state._fsp--;
@@ -4803,15 +4814,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt23 >= 1 ) break loop23;
+            	    if ( cnt24 >= 1 ) break loop24;
                         EarlyExitException eee =
-                            new EarlyExitException(23, input);
+                            new EarlyExitException(24, input);
                         throw eee;
                 }
-                cnt23++;
+                cnt24++;
             } while (true);
 
-            otherlv_3=(Token)match(input,31,FOLLOW_31_in_ruleExpanded4394); 
+            otherlv_3=(Token)match(input,31,FOLLOW_31_in_ruleExpanded4395); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getExpandedAccess().getRightParenthesisKeyword_3());
                 
@@ -4848,13 +4859,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1725:2: iv_ruleNoExpanded= ruleNoExpanded EOF
             {
              newCompositeNode(grammarAccess.getNoExpandedRule()); 
-            pushFollow(FOLLOW_ruleNoExpanded_in_entryRuleNoExpanded4430);
+            pushFollow(FOLLOW_ruleNoExpanded_in_entryRuleNoExpanded4431);
             iv_ruleNoExpanded=ruleNoExpanded();
 
             state._fsp--;
 
              current =iv_ruleNoExpanded; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoExpanded4440); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoExpanded4441); 
 
             }
 
@@ -4890,11 +4901,11 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1736:1: (this_Chars_0= ruleChars | this_Interfix_1= ruleInterfix | this_DisputableReading_2= ruleDisputableReading )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1736:1: (this_Chars_0= ruleChars | this_Interfix_1= ruleInterfix | this_DisputableReading_2= ruleDisputableReading )
-            int alt24=3;
+            int alt25=3;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt24=1;
+                alt25=1;
                 }
                 break;
             case 50:
@@ -4906,29 +4917,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt24=2;
+                alt25=2;
                 }
                 break;
             case 34:
                 {
-                alt24=3;
+                alt25=3;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 24, 0, input);
+                    new NoViableAltException("", 25, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt24) {
+            switch (alt25) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1737:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoExpandedAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoExpanded4487);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoExpanded4488);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -4946,7 +4957,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoExpandedAccess().getInterfixParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoExpanded4514);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoExpanded4515);
                     this_Interfix_1=ruleInterfix();
 
                     state._fsp--;
@@ -4964,7 +4975,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoExpandedAccess().getDisputableReadingParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoExpanded4541);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoExpanded4542);
                     this_DisputableReading_2=ruleDisputableReading();
 
                     state._fsp--;
@@ -5009,13 +5020,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1775:2: iv_ruleEmendation= ruleEmendation EOF
             {
              newCompositeNode(grammarAccess.getEmendationRule()); 
-            pushFollow(FOLLOW_ruleEmendation_in_entryRuleEmendation4576);
+            pushFollow(FOLLOW_ruleEmendation_in_entryRuleEmendation4577);
             iv_ruleEmendation=ruleEmendation();
 
             state._fsp--;
 
              current =iv_ruleEmendation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEmendation4586); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEmendation4587); 
 
             }
 
@@ -5062,23 +5073,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,32,FOLLOW_32_in_ruleEmendation4632); 
+            otherlv_1=(Token)match(input,32,FOLLOW_32_in_ruleEmendation4633); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getEmendationAccess().getLeftPointingAngleBracketKeyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1796:1: ( (lv_wChar_2_0= ruleNoEmendation ) )+
-            int cnt25=0;
-            loop25:
+            int cnt26=0;
+            loop26:
             do {
-                int alt25=2;
-                int LA25_0 = input.LA(1);
+                int alt26=2;
+                int LA26_0 = input.LA(1);
 
-                if ( (LA25_0==RULE_EGYSTRING||LA25_0==30||LA25_0==34||(LA25_0>=50 && LA25_0<=57)) ) {
-                    alt25=1;
+                if ( (LA26_0==RULE_EGYSTRING||LA26_0==30||LA26_0==34||(LA26_0>=50 && LA26_0<=57)) ) {
+                    alt26=1;
                 }
 
 
-                switch (alt25) {
+                switch (alt26) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1797:1: (lv_wChar_2_0= ruleNoEmendation )
             	    {
@@ -5088,7 +5099,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getEmendationAccess().getWCharNoEmendationParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoEmendation_in_ruleEmendation4653);
+            	    pushFollow(FOLLOW_ruleNoEmendation_in_ruleEmendation4654);
             	    lv_wChar_2_0=ruleNoEmendation();
 
             	    state._fsp--;
@@ -5112,15 +5123,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt25 >= 1 ) break loop25;
+            	    if ( cnt26 >= 1 ) break loop26;
                         EarlyExitException eee =
-                            new EarlyExitException(25, input);
+                            new EarlyExitException(26, input);
                         throw eee;
                 }
-                cnt25++;
+                cnt26++;
             } while (true);
 
-            otherlv_3=(Token)match(input,33,FOLLOW_33_in_ruleEmendation4666); 
+            otherlv_3=(Token)match(input,33,FOLLOW_33_in_ruleEmendation4667); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getEmendationAccess().getRightPointingAngleBracketKeyword_3());
                 
@@ -5157,13 +5168,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1828:2: iv_ruleNoEmendation= ruleNoEmendation EOF
             {
              newCompositeNode(grammarAccess.getNoEmendationRule()); 
-            pushFollow(FOLLOW_ruleNoEmendation_in_entryRuleNoEmendation4702);
+            pushFollow(FOLLOW_ruleNoEmendation_in_entryRuleNoEmendation4703);
             iv_ruleNoEmendation=ruleNoEmendation();
 
             state._fsp--;
 
              current =iv_ruleNoEmendation; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoEmendation4712); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoEmendation4713); 
 
             }
 
@@ -5201,16 +5212,16 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1839:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1839:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
-            int alt26=4;
+            int alt27=4;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt26=1;
+                alt27=1;
                 }
                 break;
             case 30:
                 {
-                alt26=2;
+                alt27=2;
                 }
                 break;
             case 50:
@@ -5222,29 +5233,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt26=3;
+                alt27=3;
                 }
                 break;
             case 34:
                 {
-                alt26=4;
+                alt27=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 26, 0, input);
+                    new NoViableAltException("", 27, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt26) {
+            switch (alt27) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1840:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoEmendationAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoEmendation4759);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoEmendation4760);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -5262,7 +5273,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoEmendationAccess().getExpandedParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoEmendation4786);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoEmendation4787);
                     this_Expanded_1=ruleExpanded();
 
                     state._fsp--;
@@ -5280,7 +5291,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoEmendationAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoEmendation4813);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoEmendation4814);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -5298,7 +5309,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoEmendationAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoEmendation4840);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoEmendation4841);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -5343,13 +5354,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1888:2: iv_ruleDisputableReading= ruleDisputableReading EOF
             {
              newCompositeNode(grammarAccess.getDisputableReadingRule()); 
-            pushFollow(FOLLOW_ruleDisputableReading_in_entryRuleDisputableReading4875);
+            pushFollow(FOLLOW_ruleDisputableReading_in_entryRuleDisputableReading4876);
             iv_ruleDisputableReading=ruleDisputableReading();
 
             state._fsp--;
 
              current =iv_ruleDisputableReading; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableReading4885); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableReading4886); 
 
             }
 
@@ -5396,23 +5407,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,34,FOLLOW_34_in_ruleDisputableReading4931); 
+            otherlv_1=(Token)match(input,34,FOLLOW_34_in_ruleDisputableReading4932); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDisputableReadingAccess().getReversedQuestionMarkKeyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1909:1: ( (lv_wChar_2_0= ruleNoDisputableReading ) )+
-            int cnt27=0;
-            loop27:
+            int cnt28=0;
+            loop28:
             do {
-                int alt27=2;
-                int LA27_0 = input.LA(1);
+                int alt28=2;
+                int LA28_0 = input.LA(1);
 
-                if ( (LA27_0==RULE_EGYSTRING||LA27_0==30||LA27_0==32||LA27_0==36||LA27_0==38||LA27_0==40||LA27_0==42||LA27_0==44||LA27_0==46||LA27_0==48||(LA27_0>=50 && LA27_0<=57)) ) {
-                    alt27=1;
+                if ( (LA28_0==RULE_EGYSTRING||LA28_0==30||LA28_0==32||LA28_0==36||LA28_0==38||LA28_0==40||LA28_0==42||LA28_0==44||LA28_0==46||LA28_0==48||(LA28_0>=50 && LA28_0<=57)) ) {
+                    alt28=1;
                 }
 
 
-                switch (alt27) {
+                switch (alt28) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1910:1: (lv_wChar_2_0= ruleNoDisputableReading )
             	    {
@@ -5422,7 +5433,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getDisputableReadingAccess().getWCharNoDisputableReadingParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoDisputableReading_in_ruleDisputableReading4952);
+            	    pushFollow(FOLLOW_ruleNoDisputableReading_in_ruleDisputableReading4953);
             	    lv_wChar_2_0=ruleNoDisputableReading();
 
             	    state._fsp--;
@@ -5446,15 +5457,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt27 >= 1 ) break loop27;
+            	    if ( cnt28 >= 1 ) break loop28;
                         EarlyExitException eee =
-                            new EarlyExitException(27, input);
+                            new EarlyExitException(28, input);
                         throw eee;
                 }
-                cnt27++;
+                cnt28++;
             } while (true);
 
-            otherlv_3=(Token)match(input,35,FOLLOW_35_in_ruleDisputableReading4965); 
+            otherlv_3=(Token)match(input,35,FOLLOW_35_in_ruleDisputableReading4966); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getDisputableReadingAccess().getQuestionMarkKeyword_3());
                 
@@ -5491,13 +5502,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1941:2: iv_ruleNoDisputableReading= ruleNoDisputableReading EOF
             {
              newCompositeNode(grammarAccess.getNoDisputableReadingRule()); 
-            pushFollow(FOLLOW_ruleNoDisputableReading_in_entryRuleNoDisputableReading5001);
+            pushFollow(FOLLOW_ruleNoDisputableReading_in_entryRuleNoDisputableReading5002);
             iv_ruleNoDisputableReading=ruleNoDisputableReading();
 
             state._fsp--;
 
              current =iv_ruleNoDisputableReading; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoDisputableReading5011); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoDisputableReading5012); 
 
             }
 
@@ -5549,56 +5560,56 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1952:1: (this_Expanded_0= ruleExpanded | this_Emendation_1= ruleEmendation | this_Deletion_2= ruleDeletion | this_Rasur_3= ruleRasur | this_AncientExpanded_4= ruleAncientExpanded | this_RestorationOverRasur_5= ruleRestorationOverRasur | this_ExpandedColumn_6= ruleExpandedColumn | this_Lacuna_7= ruleLacuna | this_PartialDestruction_8= rulePartialDestruction | this_Chars_9= ruleChars | this_Interfix_10= ruleInterfix )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1952:1: (this_Expanded_0= ruleExpanded | this_Emendation_1= ruleEmendation | this_Deletion_2= ruleDeletion | this_Rasur_3= ruleRasur | this_AncientExpanded_4= ruleAncientExpanded | this_RestorationOverRasur_5= ruleRestorationOverRasur | this_ExpandedColumn_6= ruleExpandedColumn | this_Lacuna_7= ruleLacuna | this_PartialDestruction_8= rulePartialDestruction | this_Chars_9= ruleChars | this_Interfix_10= ruleInterfix )
-            int alt28=11;
+            int alt29=11;
             switch ( input.LA(1) ) {
             case 30:
                 {
-                alt28=1;
+                alt29=1;
                 }
                 break;
             case 32:
                 {
-                alt28=2;
+                alt29=2;
                 }
                 break;
             case 38:
                 {
-                alt28=3;
+                alt29=3;
                 }
                 break;
             case 42:
                 {
-                alt28=4;
+                alt29=4;
                 }
                 break;
             case 44:
                 {
-                alt28=5;
+                alt29=5;
                 }
                 break;
             case 46:
                 {
-                alt28=6;
+                alt29=6;
                 }
                 break;
             case 40:
                 {
-                alt28=7;
+                alt29=7;
                 }
                 break;
             case 36:
                 {
-                alt28=8;
+                alt29=8;
                 }
                 break;
             case 48:
                 {
-                alt28=9;
+                alt29=9;
                 }
                 break;
             case RULE_EGYSTRING:
                 {
-                alt28=10;
+                alt29=10;
                 }
                 break;
             case 50:
@@ -5610,24 +5621,24 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt28=11;
+                alt29=11;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 28, 0, input);
+                    new NoViableAltException("", 29, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt28) {
+            switch (alt29) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:1953:5: this_Expanded_0= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getExpandedParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoDisputableReading5058);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoDisputableReading5059);
                     this_Expanded_0=ruleExpanded();
 
                     state._fsp--;
@@ -5645,7 +5656,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getEmendationParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleEmendation_in_ruleNoDisputableReading5085);
+                    pushFollow(FOLLOW_ruleEmendation_in_ruleNoDisputableReading5086);
                     this_Emendation_1=ruleEmendation();
 
                     state._fsp--;
@@ -5663,7 +5674,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getDeletionParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleDeletion_in_ruleNoDisputableReading5112);
+                    pushFollow(FOLLOW_ruleDeletion_in_ruleNoDisputableReading5113);
                     this_Deletion_2=ruleDeletion();
 
                     state._fsp--;
@@ -5681,7 +5692,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getRasurParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleRasur_in_ruleNoDisputableReading5139);
+                    pushFollow(FOLLOW_ruleRasur_in_ruleNoDisputableReading5140);
                     this_Rasur_3=ruleRasur();
 
                     state._fsp--;
@@ -5699,7 +5710,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getAncientExpandedParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleNoDisputableReading5166);
+                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleNoDisputableReading5167);
                     this_AncientExpanded_4=ruleAncientExpanded();
 
                     state._fsp--;
@@ -5717,7 +5728,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getRestorationOverRasurParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleNoDisputableReading5193);
+                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleNoDisputableReading5194);
                     this_RestorationOverRasur_5=ruleRestorationOverRasur();
 
                     state._fsp--;
@@ -5735,7 +5746,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getExpandedColumnParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleExpandedColumn_in_ruleNoDisputableReading5220);
+                    pushFollow(FOLLOW_ruleExpandedColumn_in_ruleNoDisputableReading5221);
                     this_ExpandedColumn_6=ruleExpandedColumn();
 
                     state._fsp--;
@@ -5753,7 +5764,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getLacunaParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleLacuna_in_ruleNoDisputableReading5247);
+                    pushFollow(FOLLOW_ruleLacuna_in_ruleNoDisputableReading5248);
                     this_Lacuna_7=ruleLacuna();
 
                     state._fsp--;
@@ -5771,7 +5782,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getPartialDestructionParserRuleCall_8()); 
                         
-                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleNoDisputableReading5274);
+                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleNoDisputableReading5275);
                     this_PartialDestruction_8=rulePartialDestruction();
 
                     state._fsp--;
@@ -5789,7 +5800,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getCharsParserRuleCall_9()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoDisputableReading5301);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoDisputableReading5302);
                     this_Chars_9=ruleChars();
 
                     state._fsp--;
@@ -5807,7 +5818,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDisputableReadingAccess().getInterfixParserRuleCall_10()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoDisputableReading5328);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoDisputableReading5329);
                     this_Interfix_10=ruleInterfix();
 
                     state._fsp--;
@@ -5852,13 +5863,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2071:2: iv_ruleLacuna= ruleLacuna EOF
             {
              newCompositeNode(grammarAccess.getLacunaRule()); 
-            pushFollow(FOLLOW_ruleLacuna_in_entryRuleLacuna5363);
+            pushFollow(FOLLOW_ruleLacuna_in_entryRuleLacuna5364);
             iv_ruleLacuna=ruleLacuna();
 
             state._fsp--;
 
              current =iv_ruleLacuna; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleLacuna5373); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleLacuna5374); 
 
             }
 
@@ -5905,23 +5916,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,36,FOLLOW_36_in_ruleLacuna5419); 
+            otherlv_1=(Token)match(input,36,FOLLOW_36_in_ruleLacuna5420); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getLacunaAccess().getLeftSquareBracketKeyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2092:1: ( (lv_wChar_2_0= ruleNoLacuna ) )+
-            int cnt29=0;
-            loop29:
+            int cnt30=0;
+            loop30:
             do {
-                int alt29=2;
-                int LA29_0 = input.LA(1);
+                int alt30=2;
+                int LA30_0 = input.LA(1);
 
-                if ( (LA29_0==RULE_EGYSTRING||LA29_0==24||LA29_0==26||LA29_0==28||LA29_0==30||LA29_0==34||(LA29_0>=50 && LA29_0<=57)) ) {
-                    alt29=1;
+                if ( (LA30_0==RULE_EGYSTRING||LA30_0==24||LA30_0==26||LA30_0==28||LA30_0==30||LA30_0==34||(LA30_0>=50 && LA30_0<=57)) ) {
+                    alt30=1;
                 }
 
 
-                switch (alt29) {
+                switch (alt30) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2093:1: (lv_wChar_2_0= ruleNoLacuna )
             	    {
@@ -5931,7 +5942,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getLacunaAccess().getWCharNoLacunaParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoLacuna_in_ruleLacuna5440);
+            	    pushFollow(FOLLOW_ruleNoLacuna_in_ruleLacuna5441);
             	    lv_wChar_2_0=ruleNoLacuna();
 
             	    state._fsp--;
@@ -5955,15 +5966,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt29 >= 1 ) break loop29;
+            	    if ( cnt30 >= 1 ) break loop30;
                         EarlyExitException eee =
-                            new EarlyExitException(29, input);
+                            new EarlyExitException(30, input);
                         throw eee;
                 }
-                cnt29++;
+                cnt30++;
             } while (true);
 
-            otherlv_3=(Token)match(input,37,FOLLOW_37_in_ruleLacuna5453); 
+            otherlv_3=(Token)match(input,37,FOLLOW_37_in_ruleLacuna5454); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getLacunaAccess().getRightSquareBracketKeyword_3());
                 
@@ -6000,13 +6011,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2124:2: iv_ruleNoLacuna= ruleNoLacuna EOF
             {
              newCompositeNode(grammarAccess.getNoLacunaRule()); 
-            pushFollow(FOLLOW_ruleNoLacuna_in_entryRuleNoLacuna5489);
+            pushFollow(FOLLOW_ruleNoLacuna_in_entryRuleNoLacuna5490);
             iv_ruleNoLacuna=ruleNoLacuna();
 
             state._fsp--;
 
              current =iv_ruleNoLacuna; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoLacuna5499); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoLacuna5500); 
 
             }
 
@@ -6050,16 +6061,16 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2135:1: (this_Expanded_0= ruleExpanded | this_Chars_1= ruleChars | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche | this_Oval_5= ruleOval | this_Serech_6= ruleSerech )
             {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2135:1: (this_Expanded_0= ruleExpanded | this_Chars_1= ruleChars | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche | this_Oval_5= ruleOval | this_Serech_6= ruleSerech )
-            int alt30=7;
+            int alt31=7;
             switch ( input.LA(1) ) {
             case 30:
                 {
-                alt30=1;
+                alt31=1;
                 }
                 break;
             case RULE_EGYSTRING:
                 {
-                alt30=2;
+                alt31=2;
                 }
                 break;
             case 50:
@@ -6071,44 +6082,44 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt30=3;
+                alt31=3;
                 }
                 break;
             case 34:
                 {
-                alt30=4;
+                alt31=4;
                 }
                 break;
             case 28:
                 {
-                alt30=5;
+                alt31=5;
                 }
                 break;
             case 24:
                 {
-                alt30=6;
+                alt31=6;
                 }
                 break;
             case 26:
                 {
-                alt30=7;
+                alt31=7;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 30, 0, input);
+                    new NoViableAltException("", 31, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt30) {
+            switch (alt31) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2136:5: this_Expanded_0= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getExpandedParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoLacuna5546);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoLacuna5547);
                     this_Expanded_0=ruleExpanded();
 
                     state._fsp--;
@@ -6126,7 +6137,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getCharsParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoLacuna5573);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoLacuna5574);
                     this_Chars_1=ruleChars();
 
                     state._fsp--;
@@ -6144,7 +6155,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoLacuna5600);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoLacuna5601);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -6162,7 +6173,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoLacuna5627);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoLacuna5628);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -6180,7 +6191,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getCartoucheParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleCartouche_in_ruleNoLacuna5654);
+                    pushFollow(FOLLOW_ruleCartouche_in_ruleNoLacuna5655);
                     this_Cartouche_4=ruleCartouche();
 
                     state._fsp--;
@@ -6198,7 +6209,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getOvalParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleOval_in_ruleNoLacuna5681);
+                    pushFollow(FOLLOW_ruleOval_in_ruleNoLacuna5682);
                     this_Oval_5=ruleOval();
 
                     state._fsp--;
@@ -6216,7 +6227,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoLacunaAccess().getSerechParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleSerech_in_ruleNoLacuna5708);
+                    pushFollow(FOLLOW_ruleSerech_in_ruleNoLacuna5709);
                     this_Serech_6=ruleSerech();
 
                     state._fsp--;
@@ -6261,13 +6272,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2214:2: iv_ruleDeletion= ruleDeletion EOF
             {
              newCompositeNode(grammarAccess.getDeletionRule()); 
-            pushFollow(FOLLOW_ruleDeletion_in_entryRuleDeletion5743);
+            pushFollow(FOLLOW_ruleDeletion_in_entryRuleDeletion5744);
             iv_ruleDeletion=ruleDeletion();
 
             state._fsp--;
 
              current =iv_ruleDeletion; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletion5753); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletion5754); 
 
             }
 
@@ -6314,23 +6325,23 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,38,FOLLOW_38_in_ruleDeletion5799); 
+            otherlv_1=(Token)match(input,38,FOLLOW_38_in_ruleDeletion5800); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDeletionAccess().getLeftCurlyBracketKeyword_1());
                 
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2235:1: ( (lv_wChar_2_0= ruleNoDeletion ) )+
-            int cnt31=0;
-            loop31:
+            int cnt32=0;
+            loop32:
             do {
-                int alt31=2;
-                int LA31_0 = input.LA(1);
+                int alt32=2;
+                int LA32_0 = input.LA(1);
 
-                if ( (LA31_0==RULE_EGYSTRING||LA31_0==30||LA31_0==34||LA31_0==36||LA31_0==46||LA31_0==48||(LA31_0>=50 && LA31_0<=57)) ) {
-                    alt31=1;
+                if ( (LA32_0==RULE_EGYSTRING||LA32_0==30||LA32_0==34||LA32_0==36||LA32_0==44||LA32_0==46||LA32_0==48||(LA32_0>=50 && LA32_0<=57)) ) {
+                    alt32=1;
                 }
 
 
-                switch (alt31) {
+                switch (alt32) {
             	case 1 :
             	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2236:1: (lv_wChar_2_0= ruleNoDeletion )
             	    {
@@ -6340,7 +6351,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        newCompositeNode(grammarAccess.getDeletionAccess().getWCharNoDeletionParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoDeletion_in_ruleDeletion5820);
+            	    pushFollow(FOLLOW_ruleNoDeletion_in_ruleDeletion5821);
             	    lv_wChar_2_0=ruleNoDeletion();
 
             	    state._fsp--;
@@ -6364,15 +6375,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt31 >= 1 ) break loop31;
+            	    if ( cnt32 >= 1 ) break loop32;
                         EarlyExitException eee =
-                            new EarlyExitException(31, input);
+                            new EarlyExitException(32, input);
                         throw eee;
                 }
-                cnt31++;
+                cnt32++;
             } while (true);
 
-            otherlv_3=(Token)match(input,39,FOLLOW_39_in_ruleDeletion5833); 
+            otherlv_3=(Token)match(input,39,FOLLOW_39_in_ruleDeletion5834); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getDeletionAccess().getRightCurlyBracketKeyword_3());
                 
@@ -6409,13 +6420,13 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2267:2: iv_ruleNoDeletion= ruleNoDeletion EOF
             {
              newCompositeNode(grammarAccess.getNoDeletionRule()); 
-            pushFollow(FOLLOW_ruleNoDeletion_in_entryRuleNoDeletion5869);
+            pushFollow(FOLLOW_ruleNoDeletion_in_entryRuleNoDeletion5870);
             iv_ruleNoDeletion=ruleNoDeletion();
 
             state._fsp--;
 
              current =iv_ruleNoDeletion; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoDeletion5879); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoDeletion5880); 
 
             }
 
@@ -6433,7 +6444,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNoDeletion"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2274:1: ruleNoDeletion returns [EObject current=null] : (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2274:1: ruleNoDeletion returns [EObject current=null] : (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur | this_AncientExpanded_7= ruleAncientExpanded ) ;
     public final EObject ruleNoDeletion() throws RecognitionException {
         EObject current = null;
 
@@ -6451,29 +6462,31 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
         EObject this_RestorationOverRasur_6 = null;
 
+        EObject this_AncientExpanded_7 = null;
+
 
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2277:28: ( (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2278:1: (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2277:28: ( (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur | this_AncientExpanded_7= ruleAncientExpanded ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2278:1: (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur | this_AncientExpanded_7= ruleAncientExpanded )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2278:1: (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur )
-            int alt32=7;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2278:1: (this_Chars_0= ruleChars | this_PartialDestruction_1= rulePartialDestruction | this_Expanded_2= ruleExpanded | this_Interfix_3= ruleInterfix | this_DisputableReading_4= ruleDisputableReading | this_Lacuna_5= ruleLacuna | this_RestorationOverRasur_6= ruleRestorationOverRasur | this_AncientExpanded_7= ruleAncientExpanded )
+            int alt33=8;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt32=1;
+                alt33=1;
                 }
                 break;
             case 48:
                 {
-                alt32=2;
+                alt33=2;
                 }
                 break;
             case 30:
                 {
-                alt32=3;
+                alt33=3;
                 }
                 break;
             case 50:
@@ -6485,39 +6498,44 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt32=4;
+                alt33=4;
                 }
                 break;
             case 34:
                 {
-                alt32=5;
+                alt33=5;
                 }
                 break;
             case 36:
                 {
-                alt32=6;
+                alt33=6;
                 }
                 break;
             case 46:
                 {
-                alt32=7;
+                alt33=7;
+                }
+                break;
+            case 44:
+                {
+                alt33=8;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 32, 0, input);
+                    new NoViableAltException("", 33, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt32) {
+            switch (alt33) {
                 case 1 :
                     // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2279:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoDeletion5926);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoDeletion5927);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -6535,7 +6553,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getPartialDestructionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleNoDeletion5953);
+                    pushFollow(FOLLOW_rulePartialDestruction_in_ruleNoDeletion5954);
                     this_PartialDestruction_1=rulePartialDestruction();
 
                     state._fsp--;
@@ -6553,7 +6571,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getExpandedParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoDeletion5980);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoDeletion5981);
                     this_Expanded_2=ruleExpanded();
 
                     state._fsp--;
@@ -6571,7 +6589,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getInterfixParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoDeletion6007);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoDeletion6008);
                     this_Interfix_3=ruleInterfix();
 
                     state._fsp--;
@@ -6589,7 +6607,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getDisputableReadingParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoDeletion6034);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoDeletion6035);
                     this_DisputableReading_4=ruleDisputableReading();
 
                     state._fsp--;
@@ -6607,7 +6625,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getLacunaParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleLacuna_in_ruleNoDeletion6061);
+                    pushFollow(FOLLOW_ruleLacuna_in_ruleNoDeletion6062);
                     this_Lacuna_5=ruleLacuna();
 
                     state._fsp--;
@@ -6625,13 +6643,31 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                      
                             newCompositeNode(grammarAccess.getNoDeletionAccess().getRestorationOverRasurParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleNoDeletion6088);
+                    pushFollow(FOLLOW_ruleRestorationOverRasur_in_ruleNoDeletion6089);
                     this_RestorationOverRasur_6=ruleRestorationOverRasur();
 
                     state._fsp--;
 
                      
                             current = this_RestorationOverRasur_6; 
+                            afterParserOrEnumRuleCall();
+                        
+
+                    }
+                    break;
+                case 8 :
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2349:5: this_AncientExpanded_7= ruleAncientExpanded
+                    {
+                     
+                            newCompositeNode(grammarAccess.getNoDeletionAccess().getAncientExpandedParserRuleCall_7()); 
+                        
+                    pushFollow(FOLLOW_ruleAncientExpanded_in_ruleNoDeletion6116);
+                    this_AncientExpanded_7=ruleAncientExpanded();
+
+                    state._fsp--;
+
+                     
+                            current = this_AncientExpanded_7; 
                             afterParserOrEnumRuleCall();
                         
 
@@ -6658,7 +6694,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleExpandedColumn"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2355:1: entryRuleExpandedColumn returns [EObject current=null] : iv_ruleExpandedColumn= ruleExpandedColumn EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2365:1: entryRuleExpandedColumn returns [EObject current=null] : iv_ruleExpandedColumn= ruleExpandedColumn EOF ;
     public final EObject entryRuleExpandedColumn() throws RecognitionException {
         EObject current = null;
 
@@ -6666,17 +6702,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2356:2: (iv_ruleExpandedColumn= ruleExpandedColumn EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2357:2: iv_ruleExpandedColumn= ruleExpandedColumn EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2366:2: (iv_ruleExpandedColumn= ruleExpandedColumn EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2367:2: iv_ruleExpandedColumn= ruleExpandedColumn EOF
             {
              newCompositeNode(grammarAccess.getExpandedColumnRule()); 
-            pushFollow(FOLLOW_ruleExpandedColumn_in_entryRuleExpandedColumn6123);
+            pushFollow(FOLLOW_ruleExpandedColumn_in_entryRuleExpandedColumn6151);
             iv_ruleExpandedColumn=ruleExpandedColumn();
 
             state._fsp--;
 
              current =iv_ruleExpandedColumn; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleExpandedColumn6133); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleExpandedColumn6161); 
 
             }
 
@@ -6694,7 +6730,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleExpandedColumn"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2364:1: ruleExpandedColumn returns [EObject current=null] : ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2374:1: ruleExpandedColumn returns [EObject current=null] : ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' ) ;
     public final EObject ruleExpandedColumn() throws RecognitionException {
         EObject current = null;
 
@@ -6706,14 +6742,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2367:28: ( ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2368:1: ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2377:28: ( ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2378:1: ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2368:1: ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2368:2: () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2378:1: ( () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2378:2: () otherlv_1= '\\u2329\\u2329' ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+ otherlv_3= '\\u232A\\u232A'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2368:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2369:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2378:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2379:5: 
             {
 
                     current = forceCreateModelElement(
@@ -6723,33 +6759,33 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,40,FOLLOW_40_in_ruleExpandedColumn6179); 
+            otherlv_1=(Token)match(input,40,FOLLOW_40_in_ruleExpandedColumn6207); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getExpandedColumnAccess().getLeftPointingAngleBracketLeftPointingAngleBracketKeyword_1());
                 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2378:1: ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+
-            int cnt33=0;
-            loop33:
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2388:1: ( (lv_wChar_2_0= ruleNoExpandedColumn ) )+
+            int cnt34=0;
+            loop34:
             do {
-                int alt33=2;
-                int LA33_0 = input.LA(1);
+                int alt34=2;
+                int LA34_0 = input.LA(1);
 
-                if ( (LA33_0==RULE_EGYSTRING||LA33_0==30||LA33_0==34||(LA33_0>=50 && LA33_0<=57)) ) {
-                    alt33=1;
+                if ( (LA34_0==RULE_EGYSTRING||LA34_0==30||LA34_0==34||(LA34_0>=50 && LA34_0<=57)) ) {
+                    alt34=1;
                 }
 
 
-                switch (alt33) {
+                switch (alt34) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2379:1: (lv_wChar_2_0= ruleNoExpandedColumn )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2389:1: (lv_wChar_2_0= ruleNoExpandedColumn )
             	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2379:1: (lv_wChar_2_0= ruleNoExpandedColumn )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2380:3: lv_wChar_2_0= ruleNoExpandedColumn
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2389:1: (lv_wChar_2_0= ruleNoExpandedColumn )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2390:3: lv_wChar_2_0= ruleNoExpandedColumn
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getExpandedColumnAccess().getWCharNoExpandedColumnParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoExpandedColumn_in_ruleExpandedColumn6200);
+            	    pushFollow(FOLLOW_ruleNoExpandedColumn_in_ruleExpandedColumn6228);
             	    lv_wChar_2_0=ruleNoExpandedColumn();
 
             	    state._fsp--;
@@ -6773,15 +6809,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt33 >= 1 ) break loop33;
+            	    if ( cnt34 >= 1 ) break loop34;
                         EarlyExitException eee =
-                            new EarlyExitException(33, input);
+                            new EarlyExitException(34, input);
                         throw eee;
                 }
-                cnt33++;
+                cnt34++;
             } while (true);
 
-            otherlv_3=(Token)match(input,41,FOLLOW_41_in_ruleExpandedColumn6213); 
+            otherlv_3=(Token)match(input,41,FOLLOW_41_in_ruleExpandedColumn6241); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getExpandedColumnAccess().getRightPointingAngleBracketRightPointingAngleBracketKeyword_3());
                 
@@ -6806,7 +6842,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNoExpandedColumn"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2408:1: entryRuleNoExpandedColumn returns [EObject current=null] : iv_ruleNoExpandedColumn= ruleNoExpandedColumn EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2418:1: entryRuleNoExpandedColumn returns [EObject current=null] : iv_ruleNoExpandedColumn= ruleNoExpandedColumn EOF ;
     public final EObject entryRuleNoExpandedColumn() throws RecognitionException {
         EObject current = null;
 
@@ -6814,17 +6850,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2409:2: (iv_ruleNoExpandedColumn= ruleNoExpandedColumn EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2410:2: iv_ruleNoExpandedColumn= ruleNoExpandedColumn EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2419:2: (iv_ruleNoExpandedColumn= ruleNoExpandedColumn EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2420:2: iv_ruleNoExpandedColumn= ruleNoExpandedColumn EOF
             {
              newCompositeNode(grammarAccess.getNoExpandedColumnRule()); 
-            pushFollow(FOLLOW_ruleNoExpandedColumn_in_entryRuleNoExpandedColumn6249);
+            pushFollow(FOLLOW_ruleNoExpandedColumn_in_entryRuleNoExpandedColumn6277);
             iv_ruleNoExpandedColumn=ruleNoExpandedColumn();
 
             state._fsp--;
 
              current =iv_ruleNoExpandedColumn; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoExpandedColumn6259); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoExpandedColumn6287); 
 
             }
 
@@ -6842,7 +6878,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNoExpandedColumn"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2417:1: ruleNoExpandedColumn returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2427:1: ruleNoExpandedColumn returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) ;
     public final EObject ruleNoExpandedColumn() throws RecognitionException {
         EObject current = null;
 
@@ -6858,20 +6894,20 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2420:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2421:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2430:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2431:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2421:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
-            int alt34=4;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2431:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
+            int alt35=4;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt34=1;
+                alt35=1;
                 }
                 break;
             case 30:
                 {
-                alt34=2;
+                alt35=2;
                 }
                 break;
             case 50:
@@ -6883,29 +6919,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt34=3;
+                alt35=3;
                 }
                 break;
             case 34:
                 {
-                alt34=4;
+                alt35=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 34, 0, input);
+                    new NoViableAltException("", 35, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt34) {
+            switch (alt35) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2422:5: this_Chars_0= ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2432:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoExpandedColumn6306);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoExpandedColumn6334);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -6918,12 +6954,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2432:5: this_Expanded_1= ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2442:5: this_Expanded_1= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getExpandedParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoExpandedColumn6333);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoExpandedColumn6361);
                     this_Expanded_1=ruleExpanded();
 
                     state._fsp--;
@@ -6936,12 +6972,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2442:5: this_Interfix_2= ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2452:5: this_Interfix_2= ruleInterfix
                     {
                      
                             newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoExpandedColumn6360);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoExpandedColumn6388);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -6954,12 +6990,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2452:5: this_DisputableReading_3= ruleDisputableReading
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2462:5: this_DisputableReading_3= ruleDisputableReading
                     {
                      
                             newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoExpandedColumn6387);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoExpandedColumn6415);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -6992,7 +7028,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2468:1: entryRuleRasur returns [EObject current=null] : iv_ruleRasur= ruleRasur EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2478:1: entryRuleRasur returns [EObject current=null] : iv_ruleRasur= ruleRasur EOF ;
     public final EObject entryRuleRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7000,17 +7036,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2469:2: (iv_ruleRasur= ruleRasur EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2470:2: iv_ruleRasur= ruleRasur EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2479:2: (iv_ruleRasur= ruleRasur EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2480:2: iv_ruleRasur= ruleRasur EOF
             {
              newCompositeNode(grammarAccess.getRasurRule()); 
-            pushFollow(FOLLOW_ruleRasur_in_entryRuleRasur6422);
+            pushFollow(FOLLOW_ruleRasur_in_entryRuleRasur6450);
             iv_ruleRasur=ruleRasur();
 
             state._fsp--;
 
              current =iv_ruleRasur; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRasur6432); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRasur6460); 
 
             }
 
@@ -7028,7 +7064,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2477:1: ruleRasur returns [EObject current=null] : ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2487:1: ruleRasur returns [EObject current=null] : ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' ) ;
     public final EObject ruleRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7040,14 +7076,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2480:28: ( ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2481:1: ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2490:28: ( ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2491:1: ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2481:1: ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2481:2: () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2491:1: ( () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2491:2: () otherlv_1= '{{' ( (lv_wChar_2_0= ruleNoRasur ) )+ otherlv_3= '}}'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2481:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2482:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2491:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2492:5: 
             {
 
                     current = forceCreateModelElement(
@@ -7057,33 +7093,33 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,42,FOLLOW_42_in_ruleRasur6478); 
+            otherlv_1=(Token)match(input,42,FOLLOW_42_in_ruleRasur6506); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getRasurAccess().getLeftCurlyBracketLeftCurlyBracketKeyword_1());
                 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2491:1: ( (lv_wChar_2_0= ruleNoRasur ) )+
-            int cnt35=0;
-            loop35:
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2501:1: ( (lv_wChar_2_0= ruleNoRasur ) )+
+            int cnt36=0;
+            loop36:
             do {
-                int alt35=2;
-                int LA35_0 = input.LA(1);
+                int alt36=2;
+                int LA36_0 = input.LA(1);
 
-                if ( (LA35_0==RULE_EGYSTRING||LA35_0==30||LA35_0==34||(LA35_0>=50 && LA35_0<=57)) ) {
-                    alt35=1;
+                if ( (LA36_0==RULE_EGYSTRING||LA36_0==30||LA36_0==34||(LA36_0>=50 && LA36_0<=57)) ) {
+                    alt36=1;
                 }
 
 
-                switch (alt35) {
+                switch (alt36) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2492:1: (lv_wChar_2_0= ruleNoRasur )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2502:1: (lv_wChar_2_0= ruleNoRasur )
             	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2492:1: (lv_wChar_2_0= ruleNoRasur )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2493:3: lv_wChar_2_0= ruleNoRasur
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2502:1: (lv_wChar_2_0= ruleNoRasur )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2503:3: lv_wChar_2_0= ruleNoRasur
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getRasurAccess().getWCharNoRasurParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoRasur_in_ruleRasur6499);
+            	    pushFollow(FOLLOW_ruleNoRasur_in_ruleRasur6527);
             	    lv_wChar_2_0=ruleNoRasur();
 
             	    state._fsp--;
@@ -7107,15 +7143,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt35 >= 1 ) break loop35;
+            	    if ( cnt36 >= 1 ) break loop36;
                         EarlyExitException eee =
-                            new EarlyExitException(35, input);
+                            new EarlyExitException(36, input);
                         throw eee;
                 }
-                cnt35++;
+                cnt36++;
             } while (true);
 
-            otherlv_3=(Token)match(input,43,FOLLOW_43_in_ruleRasur6512); 
+            otherlv_3=(Token)match(input,43,FOLLOW_43_in_ruleRasur6540); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRasurAccess().getRightCurlyBracketRightCurlyBracketKeyword_3());
                 
@@ -7140,7 +7176,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNoRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2521:1: entryRuleNoRasur returns [EObject current=null] : iv_ruleNoRasur= ruleNoRasur EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2531:1: entryRuleNoRasur returns [EObject current=null] : iv_ruleNoRasur= ruleNoRasur EOF ;
     public final EObject entryRuleNoRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7148,17 +7184,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2522:2: (iv_ruleNoRasur= ruleNoRasur EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2523:2: iv_ruleNoRasur= ruleNoRasur EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2532:2: (iv_ruleNoRasur= ruleNoRasur EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2533:2: iv_ruleNoRasur= ruleNoRasur EOF
             {
              newCompositeNode(grammarAccess.getNoRasurRule()); 
-            pushFollow(FOLLOW_ruleNoRasur_in_entryRuleNoRasur6548);
+            pushFollow(FOLLOW_ruleNoRasur_in_entryRuleNoRasur6576);
             iv_ruleNoRasur=ruleNoRasur();
 
             state._fsp--;
 
              current =iv_ruleNoRasur; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoRasur6558); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoRasur6586); 
 
             }
 
@@ -7176,7 +7212,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNoRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2530:1: ruleNoRasur returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2540:1: ruleNoRasur returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) ;
     public final EObject ruleNoRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7192,20 +7228,20 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2533:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2534:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2543:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2544:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2534:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
-            int alt36=4;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2544:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
+            int alt37=4;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt36=1;
+                alt37=1;
                 }
                 break;
             case 30:
                 {
-                alt36=2;
+                alt37=2;
                 }
                 break;
             case 50:
@@ -7217,29 +7253,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt36=3;
+                alt37=3;
                 }
                 break;
             case 34:
                 {
-                alt36=4;
+                alt37=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 36, 0, input);
+                    new NoViableAltException("", 37, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt36) {
+            switch (alt37) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2535:5: this_Chars_0= ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2545:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoRasurAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoRasur6605);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoRasur6633);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -7252,12 +7288,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2545:5: this_Expanded_1= ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2555:5: this_Expanded_1= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoRasurAccess().getExpandedParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoRasur6632);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoRasur6660);
                     this_Expanded_1=ruleExpanded();
 
                     state._fsp--;
@@ -7270,12 +7306,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2555:5: this_Interfix_2= ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2565:5: this_Interfix_2= ruleInterfix
                     {
                      
                             newCompositeNode(grammarAccess.getNoRasurAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoRasur6659);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoRasur6687);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -7288,12 +7324,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2565:5: this_DisputableReading_3= ruleDisputableReading
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2575:5: this_DisputableReading_3= ruleDisputableReading
                     {
                      
                             newCompositeNode(grammarAccess.getNoRasurAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoRasur6686);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoRasur6714);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -7326,7 +7362,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAncientExpanded"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2581:1: entryRuleAncientExpanded returns [EObject current=null] : iv_ruleAncientExpanded= ruleAncientExpanded EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2591:1: entryRuleAncientExpanded returns [EObject current=null] : iv_ruleAncientExpanded= ruleAncientExpanded EOF ;
     public final EObject entryRuleAncientExpanded() throws RecognitionException {
         EObject current = null;
 
@@ -7334,17 +7370,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2582:2: (iv_ruleAncientExpanded= ruleAncientExpanded EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2583:2: iv_ruleAncientExpanded= ruleAncientExpanded EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2592:2: (iv_ruleAncientExpanded= ruleAncientExpanded EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2593:2: iv_ruleAncientExpanded= ruleAncientExpanded EOF
             {
              newCompositeNode(grammarAccess.getAncientExpandedRule()); 
-            pushFollow(FOLLOW_ruleAncientExpanded_in_entryRuleAncientExpanded6721);
+            pushFollow(FOLLOW_ruleAncientExpanded_in_entryRuleAncientExpanded6749);
             iv_ruleAncientExpanded=ruleAncientExpanded();
 
             state._fsp--;
 
              current =iv_ruleAncientExpanded; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAncientExpanded6731); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAncientExpanded6759); 
 
             }
 
@@ -7362,7 +7398,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAncientExpanded"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2590:1: ruleAncientExpanded returns [EObject current=null] : ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2600:1: ruleAncientExpanded returns [EObject current=null] : ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' ) ;
     public final EObject ruleAncientExpanded() throws RecognitionException {
         EObject current = null;
 
@@ -7374,14 +7410,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2593:28: ( ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2594:1: ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2603:28: ( ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2604:1: ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2594:1: ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2594:2: () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2604:1: ( () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2604:2: () otherlv_1= '((' ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+ otherlv_3= '))'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2594:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2595:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2604:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2605:5: 
             {
 
                     current = forceCreateModelElement(
@@ -7391,33 +7427,33 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,44,FOLLOW_44_in_ruleAncientExpanded6777); 
+            otherlv_1=(Token)match(input,44,FOLLOW_44_in_ruleAncientExpanded6805); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getAncientExpandedAccess().getLeftParenthesisLeftParenthesisKeyword_1());
                 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2604:1: ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+
-            int cnt37=0;
-            loop37:
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2614:1: ( (lv_wChar_2_0= ruleNoAncientExpanded ) )+
+            int cnt38=0;
+            loop38:
             do {
-                int alt37=2;
-                int LA37_0 = input.LA(1);
+                int alt38=2;
+                int LA38_0 = input.LA(1);
 
-                if ( (LA37_0==RULE_EGYSTRING||LA37_0==30||LA37_0==34||(LA37_0>=50 && LA37_0<=57)) ) {
-                    alt37=1;
+                if ( (LA38_0==RULE_EGYSTRING||LA38_0==30||LA38_0==34||(LA38_0>=50 && LA38_0<=57)) ) {
+                    alt38=1;
                 }
 
 
-                switch (alt37) {
+                switch (alt38) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2605:1: (lv_wChar_2_0= ruleNoAncientExpanded )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2615:1: (lv_wChar_2_0= ruleNoAncientExpanded )
             	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2605:1: (lv_wChar_2_0= ruleNoAncientExpanded )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2606:3: lv_wChar_2_0= ruleNoAncientExpanded
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2615:1: (lv_wChar_2_0= ruleNoAncientExpanded )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2616:3: lv_wChar_2_0= ruleNoAncientExpanded
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getAncientExpandedAccess().getWCharNoAncientExpandedParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoAncientExpanded_in_ruleAncientExpanded6798);
+            	    pushFollow(FOLLOW_ruleNoAncientExpanded_in_ruleAncientExpanded6826);
             	    lv_wChar_2_0=ruleNoAncientExpanded();
 
             	    state._fsp--;
@@ -7441,15 +7477,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt37 >= 1 ) break loop37;
+            	    if ( cnt38 >= 1 ) break loop38;
                         EarlyExitException eee =
-                            new EarlyExitException(37, input);
+                            new EarlyExitException(38, input);
                         throw eee;
                 }
-                cnt37++;
+                cnt38++;
             } while (true);
 
-            otherlv_3=(Token)match(input,45,FOLLOW_45_in_ruleAncientExpanded6811); 
+            otherlv_3=(Token)match(input,45,FOLLOW_45_in_ruleAncientExpanded6839); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getAncientExpandedAccess().getRightParenthesisRightParenthesisKeyword_3());
                 
@@ -7474,7 +7510,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNoAncientExpanded"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2634:1: entryRuleNoAncientExpanded returns [EObject current=null] : iv_ruleNoAncientExpanded= ruleNoAncientExpanded EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2644:1: entryRuleNoAncientExpanded returns [EObject current=null] : iv_ruleNoAncientExpanded= ruleNoAncientExpanded EOF ;
     public final EObject entryRuleNoAncientExpanded() throws RecognitionException {
         EObject current = null;
 
@@ -7482,17 +7518,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2635:2: (iv_ruleNoAncientExpanded= ruleNoAncientExpanded EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2636:2: iv_ruleNoAncientExpanded= ruleNoAncientExpanded EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2645:2: (iv_ruleNoAncientExpanded= ruleNoAncientExpanded EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2646:2: iv_ruleNoAncientExpanded= ruleNoAncientExpanded EOF
             {
              newCompositeNode(grammarAccess.getNoAncientExpandedRule()); 
-            pushFollow(FOLLOW_ruleNoAncientExpanded_in_entryRuleNoAncientExpanded6847);
+            pushFollow(FOLLOW_ruleNoAncientExpanded_in_entryRuleNoAncientExpanded6875);
             iv_ruleNoAncientExpanded=ruleNoAncientExpanded();
 
             state._fsp--;
 
              current =iv_ruleNoAncientExpanded; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoAncientExpanded6857); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoAncientExpanded6885); 
 
             }
 
@@ -7510,7 +7546,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNoAncientExpanded"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2643:1: ruleNoAncientExpanded returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2653:1: ruleNoAncientExpanded returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) ;
     public final EObject ruleNoAncientExpanded() throws RecognitionException {
         EObject current = null;
 
@@ -7526,20 +7562,20 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2646:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2647:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2656:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2657:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2647:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
-            int alt38=4;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2657:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading )
+            int alt39=4;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt38=1;
+                alt39=1;
                 }
                 break;
             case 30:
                 {
-                alt38=2;
+                alt39=2;
                 }
                 break;
             case 50:
@@ -7551,29 +7587,29 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt38=3;
+                alt39=3;
                 }
                 break;
             case 34:
                 {
-                alt38=4;
+                alt39=4;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 38, 0, input);
+                    new NoViableAltException("", 39, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt38) {
+            switch (alt39) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2648:5: this_Chars_0= ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2658:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoAncientExpanded6904);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoAncientExpanded6932);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -7586,12 +7622,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2658:5: this_Expanded_1= ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2668:5: this_Expanded_1= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getExpandedParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoAncientExpanded6931);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoAncientExpanded6959);
                     this_Expanded_1=ruleExpanded();
 
                     state._fsp--;
@@ -7604,12 +7640,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2668:5: this_Interfix_2= ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2678:5: this_Interfix_2= ruleInterfix
                     {
                      
                             newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoAncientExpanded6958);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoAncientExpanded6986);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -7622,12 +7658,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2678:5: this_DisputableReading_3= ruleDisputableReading
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2688:5: this_DisputableReading_3= ruleDisputableReading
                     {
                      
                             newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoAncientExpanded6985);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoAncientExpanded7013);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -7660,7 +7696,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRestorationOverRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2694:1: entryRuleRestorationOverRasur returns [EObject current=null] : iv_ruleRestorationOverRasur= ruleRestorationOverRasur EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2704:1: entryRuleRestorationOverRasur returns [EObject current=null] : iv_ruleRestorationOverRasur= ruleRestorationOverRasur EOF ;
     public final EObject entryRuleRestorationOverRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7668,17 +7704,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2695:2: (iv_ruleRestorationOverRasur= ruleRestorationOverRasur EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2696:2: iv_ruleRestorationOverRasur= ruleRestorationOverRasur EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2705:2: (iv_ruleRestorationOverRasur= ruleRestorationOverRasur EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2706:2: iv_ruleRestorationOverRasur= ruleRestorationOverRasur EOF
             {
              newCompositeNode(grammarAccess.getRestorationOverRasurRule()); 
-            pushFollow(FOLLOW_ruleRestorationOverRasur_in_entryRuleRestorationOverRasur7020);
+            pushFollow(FOLLOW_ruleRestorationOverRasur_in_entryRuleRestorationOverRasur7048);
             iv_ruleRestorationOverRasur=ruleRestorationOverRasur();
 
             state._fsp--;
 
              current =iv_ruleRestorationOverRasur; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRestorationOverRasur7030); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRestorationOverRasur7058); 
 
             }
 
@@ -7696,7 +7732,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRestorationOverRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2703:1: ruleRestorationOverRasur returns [EObject current=null] : ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2713:1: ruleRestorationOverRasur returns [EObject current=null] : ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' ) ;
     public final EObject ruleRestorationOverRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7708,14 +7744,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2706:28: ( ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2707:1: ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2716:28: ( ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2717:1: ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2707:1: ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2707:2: () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2717:1: ( () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2717:2: () otherlv_1= '[[' ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+ otherlv_3= ']]'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2707:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2708:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2717:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2718:5: 
             {
 
                     current = forceCreateModelElement(
@@ -7725,33 +7761,33 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,46,FOLLOW_46_in_ruleRestorationOverRasur7076); 
+            otherlv_1=(Token)match(input,46,FOLLOW_46_in_ruleRestorationOverRasur7104); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getRestorationOverRasurAccess().getLeftSquareBracketLeftSquareBracketKeyword_1());
                 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2717:1: ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+
-            int cnt39=0;
-            loop39:
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2727:1: ( (lv_wChar_2_0= ruleNoRestorationOverRasur ) )+
+            int cnt40=0;
+            loop40:
             do {
-                int alt39=2;
-                int LA39_0 = input.LA(1);
+                int alt40=2;
+                int LA40_0 = input.LA(1);
 
-                if ( (LA39_0==RULE_EGYSTRING||LA39_0==28||LA39_0==30||LA39_0==34||(LA39_0>=50 && LA39_0<=57)) ) {
-                    alt39=1;
+                if ( (LA40_0==RULE_EGYSTRING||LA40_0==28||LA40_0==30||LA40_0==34||(LA40_0>=50 && LA40_0<=57)) ) {
+                    alt40=1;
                 }
 
 
-                switch (alt39) {
+                switch (alt40) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2718:1: (lv_wChar_2_0= ruleNoRestorationOverRasur )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2728:1: (lv_wChar_2_0= ruleNoRestorationOverRasur )
             	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2718:1: (lv_wChar_2_0= ruleNoRestorationOverRasur )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2719:3: lv_wChar_2_0= ruleNoRestorationOverRasur
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2728:1: (lv_wChar_2_0= ruleNoRestorationOverRasur )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2729:3: lv_wChar_2_0= ruleNoRestorationOverRasur
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getRestorationOverRasurAccess().getWCharNoRestorationOverRasurParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoRestorationOverRasur_in_ruleRestorationOverRasur7097);
+            	    pushFollow(FOLLOW_ruleNoRestorationOverRasur_in_ruleRestorationOverRasur7125);
             	    lv_wChar_2_0=ruleNoRestorationOverRasur();
 
             	    state._fsp--;
@@ -7775,15 +7811,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt39 >= 1 ) break loop39;
+            	    if ( cnt40 >= 1 ) break loop40;
                         EarlyExitException eee =
-                            new EarlyExitException(39, input);
+                            new EarlyExitException(40, input);
                         throw eee;
                 }
-                cnt39++;
+                cnt40++;
             } while (true);
 
-            otherlv_3=(Token)match(input,47,FOLLOW_47_in_ruleRestorationOverRasur7110); 
+            otherlv_3=(Token)match(input,47,FOLLOW_47_in_ruleRestorationOverRasur7138); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getRestorationOverRasurAccess().getRightSquareBracketRightSquareBracketKeyword_3());
                 
@@ -7808,7 +7844,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNoRestorationOverRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2747:1: entryRuleNoRestorationOverRasur returns [EObject current=null] : iv_ruleNoRestorationOverRasur= ruleNoRestorationOverRasur EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2757:1: entryRuleNoRestorationOverRasur returns [EObject current=null] : iv_ruleNoRestorationOverRasur= ruleNoRestorationOverRasur EOF ;
     public final EObject entryRuleNoRestorationOverRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7816,17 +7852,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2748:2: (iv_ruleNoRestorationOverRasur= ruleNoRestorationOverRasur EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2749:2: iv_ruleNoRestorationOverRasur= ruleNoRestorationOverRasur EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2758:2: (iv_ruleNoRestorationOverRasur= ruleNoRestorationOverRasur EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2759:2: iv_ruleNoRestorationOverRasur= ruleNoRestorationOverRasur EOF
             {
              newCompositeNode(grammarAccess.getNoRestorationOverRasurRule()); 
-            pushFollow(FOLLOW_ruleNoRestorationOverRasur_in_entryRuleNoRestorationOverRasur7146);
+            pushFollow(FOLLOW_ruleNoRestorationOverRasur_in_entryRuleNoRestorationOverRasur7174);
             iv_ruleNoRestorationOverRasur=ruleNoRestorationOverRasur();
 
             state._fsp--;
 
              current =iv_ruleNoRestorationOverRasur; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoRestorationOverRasur7156); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoRestorationOverRasur7184); 
 
             }
 
@@ -7844,7 +7880,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNoRestorationOverRasur"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2756:1: ruleNoRestorationOverRasur returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2766:1: ruleNoRestorationOverRasur returns [EObject current=null] : (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche ) ;
     public final EObject ruleNoRestorationOverRasur() throws RecognitionException {
         EObject current = null;
 
@@ -7862,20 +7898,20 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2759:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2760:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2769:28: ( (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2770:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2760:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche )
-            int alt40=5;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2770:1: (this_Chars_0= ruleChars | this_Expanded_1= ruleExpanded | this_Interfix_2= ruleInterfix | this_DisputableReading_3= ruleDisputableReading | this_Cartouche_4= ruleCartouche )
+            int alt41=5;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt40=1;
+                alt41=1;
                 }
                 break;
             case 30:
                 {
-                alt40=2;
+                alt41=2;
                 }
                 break;
             case 50:
@@ -7887,34 +7923,34 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt40=3;
+                alt41=3;
                 }
                 break;
             case 34:
                 {
-                alt40=4;
+                alt41=4;
                 }
                 break;
             case 28:
                 {
-                alt40=5;
+                alt41=5;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 40, 0, input);
+                    new NoViableAltException("", 41, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt40) {
+            switch (alt41) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2761:5: this_Chars_0= ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2771:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoRestorationOverRasur7203);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoRestorationOverRasur7231);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -7927,12 +7963,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2771:5: this_Expanded_1= ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2781:5: this_Expanded_1= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getExpandedParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoRestorationOverRasur7230);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoRestorationOverRasur7258);
                     this_Expanded_1=ruleExpanded();
 
                     state._fsp--;
@@ -7945,12 +7981,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2781:5: this_Interfix_2= ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2791:5: this_Interfix_2= ruleInterfix
                     {
                      
                             newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getInterfixParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoRestorationOverRasur7257);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoRestorationOverRasur7285);
                     this_Interfix_2=ruleInterfix();
 
                     state._fsp--;
@@ -7963,12 +7999,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2791:5: this_DisputableReading_3= ruleDisputableReading
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2801:5: this_DisputableReading_3= ruleDisputableReading
                     {
                      
                             newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoRestorationOverRasur7284);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoRestorationOverRasur7312);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -7981,12 +8017,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2801:5: this_Cartouche_4= ruleCartouche
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2811:5: this_Cartouche_4= ruleCartouche
                     {
                      
                             newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getCartoucheParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleCartouche_in_ruleNoRestorationOverRasur7311);
+                    pushFollow(FOLLOW_ruleCartouche_in_ruleNoRestorationOverRasur7339);
                     this_Cartouche_4=ruleCartouche();
 
                     state._fsp--;
@@ -8019,7 +8055,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRulePartialDestruction"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2817:1: entryRulePartialDestruction returns [EObject current=null] : iv_rulePartialDestruction= rulePartialDestruction EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2827:1: entryRulePartialDestruction returns [EObject current=null] : iv_rulePartialDestruction= rulePartialDestruction EOF ;
     public final EObject entryRulePartialDestruction() throws RecognitionException {
         EObject current = null;
 
@@ -8027,17 +8063,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2818:2: (iv_rulePartialDestruction= rulePartialDestruction EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2819:2: iv_rulePartialDestruction= rulePartialDestruction EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2828:2: (iv_rulePartialDestruction= rulePartialDestruction EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2829:2: iv_rulePartialDestruction= rulePartialDestruction EOF
             {
              newCompositeNode(grammarAccess.getPartialDestructionRule()); 
-            pushFollow(FOLLOW_rulePartialDestruction_in_entryRulePartialDestruction7346);
+            pushFollow(FOLLOW_rulePartialDestruction_in_entryRulePartialDestruction7374);
             iv_rulePartialDestruction=rulePartialDestruction();
 
             state._fsp--;
 
              current =iv_rulePartialDestruction; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePartialDestruction7356); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePartialDestruction7384); 
 
             }
 
@@ -8055,7 +8091,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePartialDestruction"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2826:1: rulePartialDestruction returns [EObject current=null] : ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2836:1: rulePartialDestruction returns [EObject current=null] : ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' ) ;
     public final EObject rulePartialDestruction() throws RecognitionException {
         EObject current = null;
 
@@ -8067,14 +8103,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2829:28: ( ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2830:1: ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2839:28: ( ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2840:1: ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2830:1: ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2830:2: () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2840:1: ( () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2840:2: () otherlv_1= '\\u2E22' ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+ otherlv_3= '\\u2E23'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2830:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2831:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2840:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2841:5: 
             {
 
                     current = forceCreateModelElement(
@@ -8084,33 +8120,33 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,48,FOLLOW_48_in_rulePartialDestruction7402); 
+            otherlv_1=(Token)match(input,48,FOLLOW_48_in_rulePartialDestruction7430); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getPartialDestructionAccess().getTopLeftHalfBracketKeyword_1());
                 
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2840:1: ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+
-            int cnt41=0;
-            loop41:
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2850:1: ( (lv_wChar_2_0= ruleNoPartialDestruction ) )+
+            int cnt42=0;
+            loop42:
             do {
-                int alt41=2;
-                int LA41_0 = input.LA(1);
+                int alt42=2;
+                int LA42_0 = input.LA(1);
 
-                if ( (LA41_0==RULE_EGYSTRING||LA41_0==24||LA41_0==26||LA41_0==28||LA41_0==30||LA41_0==34||LA41_0==38||(LA41_0>=50 && LA41_0<=57)) ) {
-                    alt41=1;
+                if ( (LA42_0==RULE_EGYSTRING||LA42_0==24||LA42_0==26||LA42_0==28||LA42_0==30||LA42_0==34||LA42_0==38||(LA42_0>=50 && LA42_0<=57)) ) {
+                    alt42=1;
                 }
 
 
-                switch (alt41) {
+                switch (alt42) {
             	case 1 :
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2841:1: (lv_wChar_2_0= ruleNoPartialDestruction )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2851:1: (lv_wChar_2_0= ruleNoPartialDestruction )
             	    {
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2841:1: (lv_wChar_2_0= ruleNoPartialDestruction )
-            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2842:3: lv_wChar_2_0= ruleNoPartialDestruction
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2851:1: (lv_wChar_2_0= ruleNoPartialDestruction )
+            	    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2852:3: lv_wChar_2_0= ruleNoPartialDestruction
             	    {
             	     
             	    	        newCompositeNode(grammarAccess.getPartialDestructionAccess().getWCharNoPartialDestructionParserRuleCall_2_0()); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNoPartialDestruction_in_rulePartialDestruction7423);
+            	    pushFollow(FOLLOW_ruleNoPartialDestruction_in_rulePartialDestruction7451);
             	    lv_wChar_2_0=ruleNoPartialDestruction();
 
             	    state._fsp--;
@@ -8134,15 +8170,15 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    if ( cnt41 >= 1 ) break loop41;
+            	    if ( cnt42 >= 1 ) break loop42;
                         EarlyExitException eee =
-                            new EarlyExitException(41, input);
+                            new EarlyExitException(42, input);
                         throw eee;
                 }
-                cnt41++;
+                cnt42++;
             } while (true);
 
-            otherlv_3=(Token)match(input,49,FOLLOW_49_in_rulePartialDestruction7436); 
+            otherlv_3=(Token)match(input,49,FOLLOW_49_in_rulePartialDestruction7464); 
 
                 	newLeafNode(otherlv_3, grammarAccess.getPartialDestructionAccess().getTopRightHalfBracketKeyword_3());
                 
@@ -8167,7 +8203,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleNoPartialDestruction"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2870:1: entryRuleNoPartialDestruction returns [EObject current=null] : iv_ruleNoPartialDestruction= ruleNoPartialDestruction EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2880:1: entryRuleNoPartialDestruction returns [EObject current=null] : iv_ruleNoPartialDestruction= ruleNoPartialDestruction EOF ;
     public final EObject entryRuleNoPartialDestruction() throws RecognitionException {
         EObject current = null;
 
@@ -8175,17 +8211,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2871:2: (iv_ruleNoPartialDestruction= ruleNoPartialDestruction EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2872:2: iv_ruleNoPartialDestruction= ruleNoPartialDestruction EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2881:2: (iv_ruleNoPartialDestruction= ruleNoPartialDestruction EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2882:2: iv_ruleNoPartialDestruction= ruleNoPartialDestruction EOF
             {
              newCompositeNode(grammarAccess.getNoPartialDestructionRule()); 
-            pushFollow(FOLLOW_ruleNoPartialDestruction_in_entryRuleNoPartialDestruction7472);
+            pushFollow(FOLLOW_ruleNoPartialDestruction_in_entryRuleNoPartialDestruction7500);
             iv_ruleNoPartialDestruction=ruleNoPartialDestruction();
 
             state._fsp--;
 
              current =iv_ruleNoPartialDestruction; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNoPartialDestruction7482); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleNoPartialDestruction7510); 
 
             }
 
@@ -8203,7 +8239,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleNoPartialDestruction"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2879:1: ruleNoPartialDestruction returns [EObject current=null] : (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2889:1: ruleNoPartialDestruction returns [EObject current=null] : (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech ) ;
     public final EObject ruleNoPartialDestruction() throws RecognitionException {
         EObject current = null;
 
@@ -8227,30 +8263,30 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2882:28: ( (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2883:1: (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2892:28: ( (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2893:1: (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2883:1: (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech )
-            int alt42=8;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2893:1: (this_Chars_0= ruleChars | this_Deletion_1= ruleDeletion | this_Expanded_2= ruleExpanded | this_DisputableReading_3= ruleDisputableReading | this_Interfix_4= ruleInterfix | this_Cartouche_5= ruleCartouche | this_Oval_6= ruleOval | this_Serech_7= ruleSerech )
+            int alt43=8;
             switch ( input.LA(1) ) {
             case RULE_EGYSTRING:
                 {
-                alt42=1;
+                alt43=1;
                 }
                 break;
             case 38:
                 {
-                alt42=2;
+                alt43=2;
                 }
                 break;
             case 30:
                 {
-                alt42=3;
+                alt43=3;
                 }
                 break;
             case 34:
                 {
-                alt42=4;
+                alt43=4;
                 }
                 break;
             case 50:
@@ -8262,39 +8298,39 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 56:
             case 57:
                 {
-                alt42=5;
+                alt43=5;
                 }
                 break;
             case 28:
                 {
-                alt42=6;
+                alt43=6;
                 }
                 break;
             case 24:
                 {
-                alt42=7;
+                alt43=7;
                 }
                 break;
             case 26:
                 {
-                alt42=8;
+                alt43=8;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 42, 0, input);
+                    new NoViableAltException("", 43, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt42) {
+            switch (alt43) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2884:5: this_Chars_0= ruleChars
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2894:5: this_Chars_0= ruleChars
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getCharsParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleChars_in_ruleNoPartialDestruction7529);
+                    pushFollow(FOLLOW_ruleChars_in_ruleNoPartialDestruction7557);
                     this_Chars_0=ruleChars();
 
                     state._fsp--;
@@ -8307,12 +8343,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2894:5: this_Deletion_1= ruleDeletion
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2904:5: this_Deletion_1= ruleDeletion
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getDeletionParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleDeletion_in_ruleNoPartialDestruction7556);
+                    pushFollow(FOLLOW_ruleDeletion_in_ruleNoPartialDestruction7584);
                     this_Deletion_1=ruleDeletion();
 
                     state._fsp--;
@@ -8325,12 +8361,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2904:5: this_Expanded_2= ruleExpanded
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2914:5: this_Expanded_2= ruleExpanded
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getExpandedParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoPartialDestruction7583);
+                    pushFollow(FOLLOW_ruleExpanded_in_ruleNoPartialDestruction7611);
                     this_Expanded_2=ruleExpanded();
 
                     state._fsp--;
@@ -8343,12 +8379,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2914:5: this_DisputableReading_3= ruleDisputableReading
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2924:5: this_DisputableReading_3= ruleDisputableReading
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getDisputableReadingParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoPartialDestruction7610);
+                    pushFollow(FOLLOW_ruleDisputableReading_in_ruleNoPartialDestruction7638);
                     this_DisputableReading_3=ruleDisputableReading();
 
                     state._fsp--;
@@ -8361,12 +8397,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2924:5: this_Interfix_4= ruleInterfix
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2934:5: this_Interfix_4= ruleInterfix
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getInterfixParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoPartialDestruction7637);
+                    pushFollow(FOLLOW_ruleInterfix_in_ruleNoPartialDestruction7665);
                     this_Interfix_4=ruleInterfix();
 
                     state._fsp--;
@@ -8379,12 +8415,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2934:5: this_Cartouche_5= ruleCartouche
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2944:5: this_Cartouche_5= ruleCartouche
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getCartoucheParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleCartouche_in_ruleNoPartialDestruction7664);
+                    pushFollow(FOLLOW_ruleCartouche_in_ruleNoPartialDestruction7692);
                     this_Cartouche_5=ruleCartouche();
 
                     state._fsp--;
@@ -8397,12 +8433,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2944:5: this_Oval_6= ruleOval
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2954:5: this_Oval_6= ruleOval
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getOvalParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleOval_in_ruleNoPartialDestruction7691);
+                    pushFollow(FOLLOW_ruleOval_in_ruleNoPartialDestruction7719);
                     this_Oval_6=ruleOval();
 
                     state._fsp--;
@@ -8415,12 +8451,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2954:5: this_Serech_7= ruleSerech
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2964:5: this_Serech_7= ruleSerech
                     {
                      
                             newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getSerechParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleSerech_in_ruleNoPartialDestruction7718);
+                    pushFollow(FOLLOW_ruleSerech_in_ruleNoPartialDestruction7746);
                     this_Serech_7=ruleSerech();
 
                     state._fsp--;
@@ -8453,7 +8489,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfix"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2970:1: entryRuleInterfix returns [EObject current=null] : iv_ruleInterfix= ruleInterfix EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2980:1: entryRuleInterfix returns [EObject current=null] : iv_ruleInterfix= ruleInterfix EOF ;
     public final EObject entryRuleInterfix() throws RecognitionException {
         EObject current = null;
 
@@ -8461,17 +8497,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2971:2: (iv_ruleInterfix= ruleInterfix EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2972:2: iv_ruleInterfix= ruleInterfix EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2981:2: (iv_ruleInterfix= ruleInterfix EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2982:2: iv_ruleInterfix= ruleInterfix EOF
             {
              newCompositeNode(grammarAccess.getInterfixRule()); 
-            pushFollow(FOLLOW_ruleInterfix_in_entryRuleInterfix7753);
+            pushFollow(FOLLOW_ruleInterfix_in_entryRuleInterfix7781);
             iv_ruleInterfix=ruleInterfix();
 
             state._fsp--;
 
              current =iv_ruleInterfix; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfix7763); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfix7791); 
 
             }
 
@@ -8489,7 +8525,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfix"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2979:1: ruleInterfix returns [EObject current=null] : (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2989:1: ruleInterfix returns [EObject current=null] : (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement ) ;
     public final EObject ruleInterfix() throws RecognitionException {
         EObject current = null;
 
@@ -8513,67 +8549,67 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2982:28: ( (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2983:1: (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2992:28: ( (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2993:1: (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2983:1: (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement )
-            int alt43=8;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2993:1: (this_InterfixFlexion_0= ruleInterfixFlexion | this_InterfixLexical_1= ruleInterfixLexical | this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical | this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical | this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical | this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup | this_InterfixCompoundWords_6= ruleInterfixCompoundWords | this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement )
+            int alt44=8;
             switch ( input.LA(1) ) {
             case 51:
                 {
-                alt43=1;
+                alt44=1;
                 }
                 break;
             case 50:
                 {
-                alt43=2;
+                alt44=2;
                 }
                 break;
             case 52:
                 {
-                alt43=3;
+                alt44=3;
                 }
                 break;
             case 53:
                 {
-                alt43=4;
+                alt44=4;
                 }
                 break;
             case 54:
                 {
-                alt43=5;
+                alt44=5;
                 }
                 break;
             case 55:
                 {
-                alt43=6;
+                alt44=6;
                 }
                 break;
             case 56:
                 {
-                alt43=7;
+                alt44=7;
                 }
                 break;
             case 57:
                 {
-                alt43=8;
+                alt44=8;
                 }
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("", 43, 0, input);
+                    new NoViableAltException("", 44, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt43) {
+            switch (alt44) {
                 case 1 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2984:5: this_InterfixFlexion_0= ruleInterfixFlexion
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2994:5: this_InterfixFlexion_0= ruleInterfixFlexion
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixFlexionParserRuleCall_0()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixFlexion_in_ruleInterfix7810);
+                    pushFollow(FOLLOW_ruleInterfixFlexion_in_ruleInterfix7838);
                     this_InterfixFlexion_0=ruleInterfixFlexion();
 
                     state._fsp--;
@@ -8586,12 +8622,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:2994:5: this_InterfixLexical_1= ruleInterfixLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3004:5: this_InterfixLexical_1= ruleInterfixLexical
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixLexicalParserRuleCall_1()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixLexical_in_ruleInterfix7837);
+                    pushFollow(FOLLOW_ruleInterfixLexical_in_ruleInterfix7865);
                     this_InterfixLexical_1=ruleInterfixLexical();
 
                     state._fsp--;
@@ -8604,12 +8640,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3004:5: this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3014:5: this_InterfixSuffixPronomLexical_2= ruleInterfixSuffixPronomLexical
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixSuffixPronomLexicalParserRuleCall_2()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixSuffixPronomLexical_in_ruleInterfix7864);
+                    pushFollow(FOLLOW_ruleInterfixSuffixPronomLexical_in_ruleInterfix7892);
                     this_InterfixSuffixPronomLexical_2=ruleInterfixSuffixPronomLexical();
 
                     state._fsp--;
@@ -8622,12 +8658,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3014:5: this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3024:5: this_InterfixPrefixNonLexical_3= ruleInterfixPrefixNonLexical
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixPrefixNonLexicalParserRuleCall_3()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixPrefixNonLexical_in_ruleInterfix7891);
+                    pushFollow(FOLLOW_ruleInterfixPrefixNonLexical_in_ruleInterfix7919);
                     this_InterfixPrefixNonLexical_3=ruleInterfixPrefixNonLexical();
 
                     state._fsp--;
@@ -8640,12 +8676,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3024:5: this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3034:5: this_InterfixPrefixLexical_4= ruleInterfixPrefixLexical
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixPrefixLexicalParserRuleCall_4()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixPrefixLexical_in_ruleInterfix7918);
+                    pushFollow(FOLLOW_ruleInterfixPrefixLexical_in_ruleInterfix7946);
                     this_InterfixPrefixLexical_4=ruleInterfixPrefixLexical();
 
                     state._fsp--;
@@ -8658,12 +8694,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3034:5: this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3044:5: this_InterfixConnectionSyllabicGroup_5= ruleInterfixConnectionSyllabicGroup
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixConnectionSyllabicGroupParserRuleCall_5()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixConnectionSyllabicGroup_in_ruleInterfix7945);
+                    pushFollow(FOLLOW_ruleInterfixConnectionSyllabicGroup_in_ruleInterfix7973);
                     this_InterfixConnectionSyllabicGroup_5=ruleInterfixConnectionSyllabicGroup();
 
                     state._fsp--;
@@ -8676,12 +8712,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3044:5: this_InterfixCompoundWords_6= ruleInterfixCompoundWords
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3054:5: this_InterfixCompoundWords_6= ruleInterfixCompoundWords
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixCompoundWordsParserRuleCall_6()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixCompoundWords_in_ruleInterfix7972);
+                    pushFollow(FOLLOW_ruleInterfixCompoundWords_in_ruleInterfix8000);
                     this_InterfixCompoundWords_6=ruleInterfixCompoundWords();
 
                     state._fsp--;
@@ -8694,12 +8730,12 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3054:5: this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement
+                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3064:5: this_InterfixPhoneticalComplement_7= ruleInterfixPhoneticalComplement
                     {
                      
                             newCompositeNode(grammarAccess.getInterfixAccess().getInterfixPhoneticalComplementParserRuleCall_7()); 
                         
-                    pushFollow(FOLLOW_ruleInterfixPhoneticalComplement_in_ruleInterfix7999);
+                    pushFollow(FOLLOW_ruleInterfixPhoneticalComplement_in_ruleInterfix8027);
                     this_InterfixPhoneticalComplement_7=ruleInterfixPhoneticalComplement();
 
                     state._fsp--;
@@ -8732,7 +8768,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3070:1: entryRuleInterfixLexical returns [EObject current=null] : iv_ruleInterfixLexical= ruleInterfixLexical EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3080:1: entryRuleInterfixLexical returns [EObject current=null] : iv_ruleInterfixLexical= ruleInterfixLexical EOF ;
     public final EObject entryRuleInterfixLexical() throws RecognitionException {
         EObject current = null;
 
@@ -8740,17 +8776,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3071:2: (iv_ruleInterfixLexical= ruleInterfixLexical EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3072:2: iv_ruleInterfixLexical= ruleInterfixLexical EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3081:2: (iv_ruleInterfixLexical= ruleInterfixLexical EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3082:2: iv_ruleInterfixLexical= ruleInterfixLexical EOF
             {
              newCompositeNode(grammarAccess.getInterfixLexicalRule()); 
-            pushFollow(FOLLOW_ruleInterfixLexical_in_entryRuleInterfixLexical8034);
+            pushFollow(FOLLOW_ruleInterfixLexical_in_entryRuleInterfixLexical8062);
             iv_ruleInterfixLexical=ruleInterfixLexical();
 
             state._fsp--;
 
              current =iv_ruleInterfixLexical; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixLexical8044); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixLexical8072); 
 
             }
 
@@ -8768,7 +8804,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3079:1: ruleInterfixLexical returns [EObject current=null] : ( () otherlv_1= ',' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3089:1: ruleInterfixLexical returns [EObject current=null] : ( () otherlv_1= ',' ) ;
     public final EObject ruleInterfixLexical() throws RecognitionException {
         EObject current = null;
 
@@ -8777,14 +8813,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3082:28: ( ( () otherlv_1= ',' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3083:1: ( () otherlv_1= ',' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3092:28: ( ( () otherlv_1= ',' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3093:1: ( () otherlv_1= ',' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3083:1: ( () otherlv_1= ',' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3083:2: () otherlv_1= ','
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3093:1: ( () otherlv_1= ',' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3093:2: () otherlv_1= ','
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3083:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3084:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3093:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3094:5: 
             {
 
                     current = forceCreateModelElement(
@@ -8794,7 +8830,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,50,FOLLOW_50_in_ruleInterfixLexical8090); 
+            otherlv_1=(Token)match(input,50,FOLLOW_50_in_ruleInterfixLexical8118); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixLexicalAccess().getCommaKeyword_1());
                 
@@ -8819,7 +8855,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixFlexion"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3101:1: entryRuleInterfixFlexion returns [EObject current=null] : iv_ruleInterfixFlexion= ruleInterfixFlexion EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3111:1: entryRuleInterfixFlexion returns [EObject current=null] : iv_ruleInterfixFlexion= ruleInterfixFlexion EOF ;
     public final EObject entryRuleInterfixFlexion() throws RecognitionException {
         EObject current = null;
 
@@ -8827,17 +8863,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3102:2: (iv_ruleInterfixFlexion= ruleInterfixFlexion EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3103:2: iv_ruleInterfixFlexion= ruleInterfixFlexion EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3112:2: (iv_ruleInterfixFlexion= ruleInterfixFlexion EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3113:2: iv_ruleInterfixFlexion= ruleInterfixFlexion EOF
             {
              newCompositeNode(grammarAccess.getInterfixFlexionRule()); 
-            pushFollow(FOLLOW_ruleInterfixFlexion_in_entryRuleInterfixFlexion8126);
+            pushFollow(FOLLOW_ruleInterfixFlexion_in_entryRuleInterfixFlexion8154);
             iv_ruleInterfixFlexion=ruleInterfixFlexion();
 
             state._fsp--;
 
              current =iv_ruleInterfixFlexion; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixFlexion8136); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixFlexion8164); 
 
             }
 
@@ -8855,7 +8891,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixFlexion"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3110:1: ruleInterfixFlexion returns [EObject current=null] : ( () otherlv_1= '.' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3120:1: ruleInterfixFlexion returns [EObject current=null] : ( () otherlv_1= '.' ) ;
     public final EObject ruleInterfixFlexion() throws RecognitionException {
         EObject current = null;
 
@@ -8864,14 +8900,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3113:28: ( ( () otherlv_1= '.' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3114:1: ( () otherlv_1= '.' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3123:28: ( ( () otherlv_1= '.' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3124:1: ( () otherlv_1= '.' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3114:1: ( () otherlv_1= '.' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3114:2: () otherlv_1= '.'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3124:1: ( () otherlv_1= '.' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3124:2: () otherlv_1= '.'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3114:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3115:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3124:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3125:5: 
             {
 
                     current = forceCreateModelElement(
@@ -8881,7 +8917,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleInterfixFlexion8182); 
+            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleInterfixFlexion8210); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixFlexionAccess().getFullStopKeyword_1());
                 
@@ -8906,7 +8942,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixSuffixPronomLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3132:1: entryRuleInterfixSuffixPronomLexical returns [EObject current=null] : iv_ruleInterfixSuffixPronomLexical= ruleInterfixSuffixPronomLexical EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3142:1: entryRuleInterfixSuffixPronomLexical returns [EObject current=null] : iv_ruleInterfixSuffixPronomLexical= ruleInterfixSuffixPronomLexical EOF ;
     public final EObject entryRuleInterfixSuffixPronomLexical() throws RecognitionException {
         EObject current = null;
 
@@ -8914,17 +8950,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3133:2: (iv_ruleInterfixSuffixPronomLexical= ruleInterfixSuffixPronomLexical EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3134:2: iv_ruleInterfixSuffixPronomLexical= ruleInterfixSuffixPronomLexical EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3143:2: (iv_ruleInterfixSuffixPronomLexical= ruleInterfixSuffixPronomLexical EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3144:2: iv_ruleInterfixSuffixPronomLexical= ruleInterfixSuffixPronomLexical EOF
             {
              newCompositeNode(grammarAccess.getInterfixSuffixPronomLexicalRule()); 
-            pushFollow(FOLLOW_ruleInterfixSuffixPronomLexical_in_entryRuleInterfixSuffixPronomLexical8218);
+            pushFollow(FOLLOW_ruleInterfixSuffixPronomLexical_in_entryRuleInterfixSuffixPronomLexical8246);
             iv_ruleInterfixSuffixPronomLexical=ruleInterfixSuffixPronomLexical();
 
             state._fsp--;
 
              current =iv_ruleInterfixSuffixPronomLexical; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixSuffixPronomLexical8228); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixSuffixPronomLexical8256); 
 
             }
 
@@ -8942,7 +8978,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixSuffixPronomLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3141:1: ruleInterfixSuffixPronomLexical returns [EObject current=null] : ( () otherlv_1= '\\u2261' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3151:1: ruleInterfixSuffixPronomLexical returns [EObject current=null] : ( () otherlv_1= '\\u2261' ) ;
     public final EObject ruleInterfixSuffixPronomLexical() throws RecognitionException {
         EObject current = null;
 
@@ -8951,14 +8987,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3144:28: ( ( () otherlv_1= '\\u2261' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3145:1: ( () otherlv_1= '\\u2261' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3154:28: ( ( () otherlv_1= '\\u2261' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3155:1: ( () otherlv_1= '\\u2261' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3145:1: ( () otherlv_1= '\\u2261' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3145:2: () otherlv_1= '\\u2261'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3155:1: ( () otherlv_1= '\\u2261' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3155:2: () otherlv_1= '\\u2261'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3145:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3146:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3155:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3156:5: 
             {
 
                     current = forceCreateModelElement(
@@ -8968,7 +9004,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,52,FOLLOW_52_in_ruleInterfixSuffixPronomLexical8274); 
+            otherlv_1=(Token)match(input,52,FOLLOW_52_in_ruleInterfixSuffixPronomLexical8302); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixSuffixPronomLexicalAccess().getIdenticalToKeyword_1());
                 
@@ -8993,7 +9029,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixPrefixNonLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3163:1: entryRuleInterfixPrefixNonLexical returns [EObject current=null] : iv_ruleInterfixPrefixNonLexical= ruleInterfixPrefixNonLexical EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3173:1: entryRuleInterfixPrefixNonLexical returns [EObject current=null] : iv_ruleInterfixPrefixNonLexical= ruleInterfixPrefixNonLexical EOF ;
     public final EObject entryRuleInterfixPrefixNonLexical() throws RecognitionException {
         EObject current = null;
 
@@ -9001,17 +9037,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3164:2: (iv_ruleInterfixPrefixNonLexical= ruleInterfixPrefixNonLexical EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3165:2: iv_ruleInterfixPrefixNonLexical= ruleInterfixPrefixNonLexical EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3174:2: (iv_ruleInterfixPrefixNonLexical= ruleInterfixPrefixNonLexical EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3175:2: iv_ruleInterfixPrefixNonLexical= ruleInterfixPrefixNonLexical EOF
             {
              newCompositeNode(grammarAccess.getInterfixPrefixNonLexicalRule()); 
-            pushFollow(FOLLOW_ruleInterfixPrefixNonLexical_in_entryRuleInterfixPrefixNonLexical8310);
+            pushFollow(FOLLOW_ruleInterfixPrefixNonLexical_in_entryRuleInterfixPrefixNonLexical8338);
             iv_ruleInterfixPrefixNonLexical=ruleInterfixPrefixNonLexical();
 
             state._fsp--;
 
              current =iv_ruleInterfixPrefixNonLexical; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixPrefixNonLexical8320); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixPrefixNonLexical8348); 
 
             }
 
@@ -9029,7 +9065,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixPrefixNonLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3172:1: ruleInterfixPrefixNonLexical returns [EObject current=null] : ( () otherlv_1= ':' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3182:1: ruleInterfixPrefixNonLexical returns [EObject current=null] : ( () otherlv_1= ':' ) ;
     public final EObject ruleInterfixPrefixNonLexical() throws RecognitionException {
         EObject current = null;
 
@@ -9038,14 +9074,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3175:28: ( ( () otherlv_1= ':' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3176:1: ( () otherlv_1= ':' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3185:28: ( ( () otherlv_1= ':' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3186:1: ( () otherlv_1= ':' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3176:1: ( () otherlv_1= ':' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3176:2: () otherlv_1= ':'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3186:1: ( () otherlv_1= ':' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3186:2: () otherlv_1= ':'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3176:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3177:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3186:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3187:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9055,7 +9091,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleInterfixPrefixNonLexical8366); 
+            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleInterfixPrefixNonLexical8394); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixPrefixNonLexicalAccess().getColonKeyword_1());
                 
@@ -9080,7 +9116,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixPrefixLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3194:1: entryRuleInterfixPrefixLexical returns [EObject current=null] : iv_ruleInterfixPrefixLexical= ruleInterfixPrefixLexical EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3204:1: entryRuleInterfixPrefixLexical returns [EObject current=null] : iv_ruleInterfixPrefixLexical= ruleInterfixPrefixLexical EOF ;
     public final EObject entryRuleInterfixPrefixLexical() throws RecognitionException {
         EObject current = null;
 
@@ -9088,17 +9124,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3195:2: (iv_ruleInterfixPrefixLexical= ruleInterfixPrefixLexical EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3196:2: iv_ruleInterfixPrefixLexical= ruleInterfixPrefixLexical EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3205:2: (iv_ruleInterfixPrefixLexical= ruleInterfixPrefixLexical EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3206:2: iv_ruleInterfixPrefixLexical= ruleInterfixPrefixLexical EOF
             {
              newCompositeNode(grammarAccess.getInterfixPrefixLexicalRule()); 
-            pushFollow(FOLLOW_ruleInterfixPrefixLexical_in_entryRuleInterfixPrefixLexical8402);
+            pushFollow(FOLLOW_ruleInterfixPrefixLexical_in_entryRuleInterfixPrefixLexical8430);
             iv_ruleInterfixPrefixLexical=ruleInterfixPrefixLexical();
 
             state._fsp--;
 
              current =iv_ruleInterfixPrefixLexical; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixPrefixLexical8412); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixPrefixLexical8440); 
 
             }
 
@@ -9116,7 +9152,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixPrefixLexical"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3203:1: ruleInterfixPrefixLexical returns [EObject current=null] : ( () otherlv_1= '\\u22EE' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3213:1: ruleInterfixPrefixLexical returns [EObject current=null] : ( () otherlv_1= '\\u22EE' ) ;
     public final EObject ruleInterfixPrefixLexical() throws RecognitionException {
         EObject current = null;
 
@@ -9125,14 +9161,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3206:28: ( ( () otherlv_1= '\\u22EE' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3207:1: ( () otherlv_1= '\\u22EE' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3216:28: ( ( () otherlv_1= '\\u22EE' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3217:1: ( () otherlv_1= '\\u22EE' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3207:1: ( () otherlv_1= '\\u22EE' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3207:2: () otherlv_1= '\\u22EE'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3217:1: ( () otherlv_1= '\\u22EE' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3217:2: () otherlv_1= '\\u22EE'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3207:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3208:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3217:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3218:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9142,7 +9178,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,54,FOLLOW_54_in_ruleInterfixPrefixLexical8458); 
+            otherlv_1=(Token)match(input,54,FOLLOW_54_in_ruleInterfixPrefixLexical8486); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixPrefixLexicalAccess().getVerticalEllipsisKeyword_1());
                 
@@ -9167,7 +9203,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixConnectionSyllabicGroup"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3225:1: entryRuleInterfixConnectionSyllabicGroup returns [EObject current=null] : iv_ruleInterfixConnectionSyllabicGroup= ruleInterfixConnectionSyllabicGroup EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3235:1: entryRuleInterfixConnectionSyllabicGroup returns [EObject current=null] : iv_ruleInterfixConnectionSyllabicGroup= ruleInterfixConnectionSyllabicGroup EOF ;
     public final EObject entryRuleInterfixConnectionSyllabicGroup() throws RecognitionException {
         EObject current = null;
 
@@ -9175,17 +9211,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3226:2: (iv_ruleInterfixConnectionSyllabicGroup= ruleInterfixConnectionSyllabicGroup EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3227:2: iv_ruleInterfixConnectionSyllabicGroup= ruleInterfixConnectionSyllabicGroup EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3236:2: (iv_ruleInterfixConnectionSyllabicGroup= ruleInterfixConnectionSyllabicGroup EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3237:2: iv_ruleInterfixConnectionSyllabicGroup= ruleInterfixConnectionSyllabicGroup EOF
             {
              newCompositeNode(grammarAccess.getInterfixConnectionSyllabicGroupRule()); 
-            pushFollow(FOLLOW_ruleInterfixConnectionSyllabicGroup_in_entryRuleInterfixConnectionSyllabicGroup8494);
+            pushFollow(FOLLOW_ruleInterfixConnectionSyllabicGroup_in_entryRuleInterfixConnectionSyllabicGroup8522);
             iv_ruleInterfixConnectionSyllabicGroup=ruleInterfixConnectionSyllabicGroup();
 
             state._fsp--;
 
              current =iv_ruleInterfixConnectionSyllabicGroup; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixConnectionSyllabicGroup8504); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixConnectionSyllabicGroup8532); 
 
             }
 
@@ -9203,7 +9239,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixConnectionSyllabicGroup"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3234:1: ruleInterfixConnectionSyllabicGroup returns [EObject current=null] : ( () otherlv_1= '~' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3244:1: ruleInterfixConnectionSyllabicGroup returns [EObject current=null] : ( () otherlv_1= '~' ) ;
     public final EObject ruleInterfixConnectionSyllabicGroup() throws RecognitionException {
         EObject current = null;
 
@@ -9212,14 +9248,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3237:28: ( ( () otherlv_1= '~' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3238:1: ( () otherlv_1= '~' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3247:28: ( ( () otherlv_1= '~' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3248:1: ( () otherlv_1= '~' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3238:1: ( () otherlv_1= '~' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3238:2: () otherlv_1= '~'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3248:1: ( () otherlv_1= '~' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3248:2: () otherlv_1= '~'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3238:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3239:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3248:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3249:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9229,7 +9265,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,55,FOLLOW_55_in_ruleInterfixConnectionSyllabicGroup8550); 
+            otherlv_1=(Token)match(input,55,FOLLOW_55_in_ruleInterfixConnectionSyllabicGroup8578); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixConnectionSyllabicGroupAccess().getTildeKeyword_1());
                 
@@ -9254,7 +9290,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixCompoundWords"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3256:1: entryRuleInterfixCompoundWords returns [EObject current=null] : iv_ruleInterfixCompoundWords= ruleInterfixCompoundWords EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3266:1: entryRuleInterfixCompoundWords returns [EObject current=null] : iv_ruleInterfixCompoundWords= ruleInterfixCompoundWords EOF ;
     public final EObject entryRuleInterfixCompoundWords() throws RecognitionException {
         EObject current = null;
 
@@ -9262,17 +9298,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3257:2: (iv_ruleInterfixCompoundWords= ruleInterfixCompoundWords EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3258:2: iv_ruleInterfixCompoundWords= ruleInterfixCompoundWords EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3267:2: (iv_ruleInterfixCompoundWords= ruleInterfixCompoundWords EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3268:2: iv_ruleInterfixCompoundWords= ruleInterfixCompoundWords EOF
             {
              newCompositeNode(grammarAccess.getInterfixCompoundWordsRule()); 
-            pushFollow(FOLLOW_ruleInterfixCompoundWords_in_entryRuleInterfixCompoundWords8586);
+            pushFollow(FOLLOW_ruleInterfixCompoundWords_in_entryRuleInterfixCompoundWords8614);
             iv_ruleInterfixCompoundWords=ruleInterfixCompoundWords();
 
             state._fsp--;
 
              current =iv_ruleInterfixCompoundWords; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixCompoundWords8596); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixCompoundWords8624); 
 
             }
 
@@ -9290,7 +9326,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixCompoundWords"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3265:1: ruleInterfixCompoundWords returns [EObject current=null] : ( () otherlv_1= '-' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3275:1: ruleInterfixCompoundWords returns [EObject current=null] : ( () otherlv_1= '-' ) ;
     public final EObject ruleInterfixCompoundWords() throws RecognitionException {
         EObject current = null;
 
@@ -9299,14 +9335,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3268:28: ( ( () otherlv_1= '-' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3269:1: ( () otherlv_1= '-' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3278:28: ( ( () otherlv_1= '-' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3279:1: ( () otherlv_1= '-' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3269:1: ( () otherlv_1= '-' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3269:2: () otherlv_1= '-'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3279:1: ( () otherlv_1= '-' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3279:2: () otherlv_1= '-'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3269:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3270:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3279:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3280:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9316,7 +9352,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleInterfixCompoundWords8642); 
+            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleInterfixCompoundWords8670); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixCompoundWordsAccess().getHyphenMinusKeyword_1());
                 
@@ -9341,7 +9377,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleInterfixPhoneticalComplement"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3287:1: entryRuleInterfixPhoneticalComplement returns [EObject current=null] : iv_ruleInterfixPhoneticalComplement= ruleInterfixPhoneticalComplement EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3297:1: entryRuleInterfixPhoneticalComplement returns [EObject current=null] : iv_ruleInterfixPhoneticalComplement= ruleInterfixPhoneticalComplement EOF ;
     public final EObject entryRuleInterfixPhoneticalComplement() throws RecognitionException {
         EObject current = null;
 
@@ -9349,17 +9385,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3288:2: (iv_ruleInterfixPhoneticalComplement= ruleInterfixPhoneticalComplement EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3289:2: iv_ruleInterfixPhoneticalComplement= ruleInterfixPhoneticalComplement EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3298:2: (iv_ruleInterfixPhoneticalComplement= ruleInterfixPhoneticalComplement EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3299:2: iv_ruleInterfixPhoneticalComplement= ruleInterfixPhoneticalComplement EOF
             {
              newCompositeNode(grammarAccess.getInterfixPhoneticalComplementRule()); 
-            pushFollow(FOLLOW_ruleInterfixPhoneticalComplement_in_entryRuleInterfixPhoneticalComplement8678);
+            pushFollow(FOLLOW_ruleInterfixPhoneticalComplement_in_entryRuleInterfixPhoneticalComplement8706);
             iv_ruleInterfixPhoneticalComplement=ruleInterfixPhoneticalComplement();
 
             state._fsp--;
 
              current =iv_ruleInterfixPhoneticalComplement; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixPhoneticalComplement8688); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleInterfixPhoneticalComplement8716); 
 
             }
 
@@ -9377,7 +9413,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleInterfixPhoneticalComplement"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3296:1: ruleInterfixPhoneticalComplement returns [EObject current=null] : ( () otherlv_1= ';' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3306:1: ruleInterfixPhoneticalComplement returns [EObject current=null] : ( () otherlv_1= ';' ) ;
     public final EObject ruleInterfixPhoneticalComplement() throws RecognitionException {
         EObject current = null;
 
@@ -9386,14 +9422,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3299:28: ( ( () otherlv_1= ';' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3300:1: ( () otherlv_1= ';' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3309:28: ( ( () otherlv_1= ';' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3310:1: ( () otherlv_1= ';' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3300:1: ( () otherlv_1= ';' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3300:2: () otherlv_1= ';'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3310:1: ( () otherlv_1= ';' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3310:2: () otherlv_1= ';'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3300:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3301:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3310:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3311:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9403,7 +9439,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,57,FOLLOW_57_in_ruleInterfixPhoneticalComplement8734); 
+            otherlv_1=(Token)match(input,57,FOLLOW_57_in_ruleInterfixPhoneticalComplement8762); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getInterfixPhoneticalComplementAccess().getSemicolonKeyword_1());
                 
@@ -9437,314 +9473,315 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_9_in_ruleTextContent155 = new BitSet(new long[]{0x0000000000000610L});
     public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleTextContent172 = new BitSet(new long[]{0x0000000000000610L});
     public static final BitSet FOLLOW_ruleTextItem_in_ruleTextContent194 = new BitSet(new long[]{0x0000000000000612L});
-    public static final BitSet FOLLOW_ruleTextItem_in_entryRuleTextItem233 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTextItem243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentence_in_ruleTextItem289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentence_in_entryRuleSentence323 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSentence333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_10_in_ruleSentence379 = new BitSet(new long[]{0x03FD555555FFEDC0L});
-    public static final BitSet FOLLOW_ruleSentenceItem_in_ruleSentence401 = new BitSet(new long[]{0x0000000000000600L});
-    public static final BitSet FOLLOW_9_in_ruleSentence414 = new BitSet(new long[]{0x03FD555555FFE9D0L});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleSentence426 = new BitSet(new long[]{0x03FD555555FFE9C0L});
-    public static final BitSet FOLLOW_ruleSentenceItem_in_ruleSentence448 = new BitSet(new long[]{0x0000000000000600L});
-    public static final BitSet FOLLOW_10_in_ruleSentence464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSentenceItem_in_entryRuleSentenceItem500 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSentenceItem510 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWord_in_ruleSentenceItem557 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMarker_in_ruleSentenceItem584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAmbivalence_in_ruleSentenceItem611 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMarker_in_entryRuleAbstractMarker646 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractMarker656 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMarker_in_ruleAbstractMarker703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersMarker_in_ruleAbstractMarker730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestructionMarker_in_ruleAbstractMarker757 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAmbivalence_in_entryRuleAmbivalence792 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAmbivalence802 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleAmbivalence839 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleCase_in_ruleAmbivalence861 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleAmbivalence874 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleAmbivalence886 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_ruleCase_in_ruleAmbivalence908 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_11_in_ruleAmbivalence923 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCase_in_entryRuleCase959 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCase969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CASESTRING_in_ruleCase1011 = new BitSet(new long[]{0x03FD555555FFE1D0L});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1028 = new BitSet(new long[]{0x03FD555555FFE1D0L});
-    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1051 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_9_in_ruleCase1064 = new BitSet(new long[]{0x03FD555555FFE1D0L});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1076 = new BitSet(new long[]{0x03FD555555FFE1D0L});
-    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1098 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_entryRuleSentenceItemNoAmbivalence1137 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSentenceItemNoAmbivalence1147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWord_in_ruleSentenceItemNoAmbivalence1194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMarker_in_ruleSentenceItemNoAmbivalence1221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersMarker_in_entryRuleVersMarker1256 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersMarker1266 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersbreakMarker_in_ruleVersMarker1313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_ruleVersMarker1340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBrokenVersbreakMarker_in_ruleVersMarker1367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMissingVersMarker_in_ruleVersMarker1394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedVersMarker_in_ruleVersMarker1421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedVersMarker_in_ruleVersMarker1448 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableVersMarker_in_ruleVersMarker1475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasurMarker_in_ruleVersMarker1502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpandedMarker_in_ruleVersMarker1529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasurMarker_in_ruleVersMarker1556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker1591 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableVersMarker1601 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleDisputableVersMarker1647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker1683 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDeletedVersMarker1693 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleDeletedVersMarker1739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker1775 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedVersMarker1785 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleDestroyedVersMarker1831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker1867 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMissingVersMarker1877 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleMissingVersMarker1923 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker1959 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker1969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleRestorationOverRasurMarker2015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker2051 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAncientExpandedMarker2061 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleAncientExpandedMarker2107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker2143 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRasurMarker2153 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleRasurMarker2199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker2235 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersFrontierMarker2245 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleVersFrontierMarker2291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker2327 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersbreakMarker2337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleVersbreakMarker2383 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker2419 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker2429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleBrokenVersbreakMarker2475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMarker_in_entryRuleMarker2511 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMarker2521 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BETWEEN_HASHES_in_ruleMarker2562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestructionMarker_in_entryRuleDestructionMarker2602 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestructionMarker2612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BETWEEN_MINUS_in_ruleDestructionMarker2653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWord_in_entryRuleWord2693 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleWord2703 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWordPart_in_ruleWord2758 = new BitSet(new long[]{0x03FD555555800102L});
-    public static final BitSet FOLLOW_ruleWordPart_in_entryRuleWordPart2795 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleWordPart2805 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleWordPart2843 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleWordMiddle_in_ruleWordPart2866 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWordMiddle_in_entryRuleWordMiddle2902 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleWordMiddle2912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBrackets_in_ruleWordMiddle2959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleWordMiddle2986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleWordMiddle3013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_entryRuleChars3048 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChars3058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_EGYSTRING_in_ruleChars3099 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBrackets_in_entryRuleBrackets3139 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBrackets3149 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasur_in_ruleBrackets3196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleBrackets3223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleBrackets3250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpandedColumn_in_ruleBrackets3277 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleBrackets3304 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleBrackets3331 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEmendation_in_ruleBrackets3358 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLacuna_in_ruleBrackets3385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_ruleBrackets3412 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleBrackets3439 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCartouche_in_ruleBrackets3466 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOval_in_ruleBrackets3493 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSerech_in_ruleBrackets3520 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOval_in_entryRuleOval3555 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOval3565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_ruleOval3602 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoCartouche_in_ruleOval3623 = new BitSet(new long[]{0x03FD555557800100L});
-    public static final BitSet FOLLOW_25_in_ruleOval3636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSerech_in_entryRuleSerech3672 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSerech3682 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_ruleSerech3719 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoCartouche_in_ruleSerech3740 = new BitSet(new long[]{0x03FD55555D800100L});
-    public static final BitSet FOLLOW_27_in_ruleSerech3753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCartouche_in_entryRuleCartouche3789 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCartouche3799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_ruleCartouche3845 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoCartouche_in_ruleCartouche3866 = new BitSet(new long[]{0x03FD555575800100L});
-    public static final BitSet FOLLOW_29_in_ruleCartouche3879 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoCartouche_in_entryRuleNoCartouche3915 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoCartouche3925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoCartouche3972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasur_in_ruleNoCartouche3999 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleNoCartouche4026 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleNoCartouche4053 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpandedColumn_in_ruleNoCartouche4080 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoCartouche4107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoCartouche4134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEmendation_in_ruleNoCartouche4161 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLacuna_in_ruleNoCartouche4188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_ruleNoCartouche4215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleNoCartouche4242 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoCartouche4269 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_entryRuleExpanded4304 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExpanded4314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_ruleExpanded4360 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoExpanded_in_ruleExpanded4381 = new BitSet(new long[]{0x03FD5555D5800100L});
-    public static final BitSet FOLLOW_31_in_ruleExpanded4394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoExpanded_in_entryRuleNoExpanded4430 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoExpanded4440 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoExpanded4487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoExpanded4514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoExpanded4541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEmendation_in_entryRuleEmendation4576 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEmendation4586 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_ruleEmendation4632 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoEmendation_in_ruleEmendation4653 = new BitSet(new long[]{0x03FD555755800100L});
-    public static final BitSet FOLLOW_33_in_ruleEmendation4666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoEmendation_in_entryRuleNoEmendation4702 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoEmendation4712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoEmendation4759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoEmendation4786 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoEmendation4813 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoEmendation4840 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_entryRuleDisputableReading4875 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableReading4885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_ruleDisputableReading4931 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoDisputableReading_in_ruleDisputableReading4952 = new BitSet(new long[]{0x03FD555D55800100L});
-    public static final BitSet FOLLOW_35_in_ruleDisputableReading4965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoDisputableReading_in_entryRuleNoDisputableReading5001 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoDisputableReading5011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoDisputableReading5058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEmendation_in_ruleNoDisputableReading5085 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_ruleNoDisputableReading5112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasur_in_ruleNoDisputableReading5139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleNoDisputableReading5166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleNoDisputableReading5193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpandedColumn_in_ruleNoDisputableReading5220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLacuna_in_ruleNoDisputableReading5247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleNoDisputableReading5274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoDisputableReading5301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoDisputableReading5328 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLacuna_in_entryRuleLacuna5363 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleLacuna5373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_ruleLacuna5419 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoLacuna_in_ruleLacuna5440 = new BitSet(new long[]{0x03FD557555800100L});
-    public static final BitSet FOLLOW_37_in_ruleLacuna5453 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoLacuna_in_entryRuleNoLacuna5489 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoLacuna5499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoLacuna5546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoLacuna5573 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoLacuna5600 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoLacuna5627 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCartouche_in_ruleNoLacuna5654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOval_in_ruleNoLacuna5681 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSerech_in_ruleNoLacuna5708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_entryRuleDeletion5743 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDeletion5753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_ruleDeletion5799 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoDeletion_in_ruleDeletion5820 = new BitSet(new long[]{0x03FD55D555800100L});
-    public static final BitSet FOLLOW_39_in_ruleDeletion5833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoDeletion_in_entryRuleNoDeletion5869 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoDeletion5879 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoDeletion5926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleNoDeletion5953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoDeletion5980 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoDeletion6007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoDeletion6034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleLacuna_in_ruleNoDeletion6061 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleNoDeletion6088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpandedColumn_in_entryRuleExpandedColumn6123 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleExpandedColumn6133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_ruleExpandedColumn6179 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoExpandedColumn_in_ruleExpandedColumn6200 = new BitSet(new long[]{0x03FD575555800100L});
-    public static final BitSet FOLLOW_41_in_ruleExpandedColumn6213 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoExpandedColumn_in_entryRuleNoExpandedColumn6249 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoExpandedColumn6259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoExpandedColumn6306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoExpandedColumn6333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoExpandedColumn6360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoExpandedColumn6387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasur_in_entryRuleRasur6422 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRasur6432 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_ruleRasur6478 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoRasur_in_ruleRasur6499 = new BitSet(new long[]{0x03FD5D5555800100L});
-    public static final BitSet FOLLOW_43_in_ruleRasur6512 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoRasur_in_entryRuleNoRasur6548 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoRasur6558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoRasur6605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoRasur6632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoRasur6659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoRasur6686 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpanded_in_entryRuleAncientExpanded6721 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAncientExpanded6731 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_ruleAncientExpanded6777 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoAncientExpanded_in_ruleAncientExpanded6798 = new BitSet(new long[]{0x03FD755555800100L});
-    public static final BitSet FOLLOW_45_in_ruleAncientExpanded6811 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoAncientExpanded_in_entryRuleNoAncientExpanded6847 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoAncientExpanded6857 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoAncientExpanded6904 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoAncientExpanded6931 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoAncientExpanded6958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoAncientExpanded6985 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_entryRuleRestorationOverRasur7020 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRestorationOverRasur7030 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_ruleRestorationOverRasur7076 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoRestorationOverRasur_in_ruleRestorationOverRasur7097 = new BitSet(new long[]{0x03FDD55555800100L});
-    public static final BitSet FOLLOW_47_in_ruleRestorationOverRasur7110 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoRestorationOverRasur_in_entryRuleNoRestorationOverRasur7146 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoRestorationOverRasur7156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoRestorationOverRasur7203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoRestorationOverRasur7230 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoRestorationOverRasur7257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoRestorationOverRasur7284 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCartouche_in_ruleNoRestorationOverRasur7311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestruction_in_entryRulePartialDestruction7346 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePartialDestruction7356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rulePartialDestruction7402 = new BitSet(new long[]{0x03FD555555800100L});
-    public static final BitSet FOLLOW_ruleNoPartialDestruction_in_rulePartialDestruction7423 = new BitSet(new long[]{0x03FF555555800100L});
-    public static final BitSet FOLLOW_49_in_rulePartialDestruction7436 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNoPartialDestruction_in_entryRuleNoPartialDestruction7472 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNoPartialDestruction7482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChars_in_ruleNoPartialDestruction7529 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletion_in_ruleNoPartialDestruction7556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoPartialDestruction7583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoPartialDestruction7610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoPartialDestruction7637 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCartouche_in_ruleNoPartialDestruction7664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOval_in_ruleNoPartialDestruction7691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSerech_in_ruleNoPartialDestruction7718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfix_in_entryRuleInterfix7753 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfix7763 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixFlexion_in_ruleInterfix7810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixLexical_in_ruleInterfix7837 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixSuffixPronomLexical_in_ruleInterfix7864 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPrefixNonLexical_in_ruleInterfix7891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPrefixLexical_in_ruleInterfix7918 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixConnectionSyllabicGroup_in_ruleInterfix7945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixCompoundWords_in_ruleInterfix7972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPhoneticalComplement_in_ruleInterfix7999 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixLexical_in_entryRuleInterfixLexical8034 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixLexical8044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleInterfixLexical8090 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixFlexion_in_entryRuleInterfixFlexion8126 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixFlexion8136 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_ruleInterfixFlexion8182 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixSuffixPronomLexical_in_entryRuleInterfixSuffixPronomLexical8218 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixSuffixPronomLexical8228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleInterfixSuffixPronomLexical8274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPrefixNonLexical_in_entryRuleInterfixPrefixNonLexical8310 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixPrefixNonLexical8320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleInterfixPrefixNonLexical8366 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPrefixLexical_in_entryRuleInterfixPrefixLexical8402 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixPrefixLexical8412 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleInterfixPrefixLexical8458 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixConnectionSyllabicGroup_in_entryRuleInterfixConnectionSyllabicGroup8494 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixConnectionSyllabicGroup8504 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleInterfixConnectionSyllabicGroup8550 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixCompoundWords_in_entryRuleInterfixCompoundWords8586 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixCompoundWords8596 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleInterfixCompoundWords8642 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleInterfixPhoneticalComplement_in_entryRuleInterfixPhoneticalComplement8678 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixPhoneticalComplement8688 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_57_in_ruleInterfixPhoneticalComplement8734 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleTextItem_in_entryRuleTextItem234 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleTextItem244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentence_in_ruleTextItem290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentence_in_entryRuleSentence324 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSentence334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_10_in_ruleSentence380 = new BitSet(new long[]{0x03FD555555FFEDC0L});
+    public static final BitSet FOLLOW_ruleSentenceItem_in_ruleSentence402 = new BitSet(new long[]{0x0000000000000600L});
+    public static final BitSet FOLLOW_9_in_ruleSentence415 = new BitSet(new long[]{0x03FD555555FFE9D0L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleSentence427 = new BitSet(new long[]{0x03FD555555FFE9C0L});
+    public static final BitSet FOLLOW_ruleSentenceItem_in_ruleSentence449 = new BitSet(new long[]{0x0000000000000600L});
+    public static final BitSet FOLLOW_10_in_ruleSentence465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSentenceItem_in_entryRuleSentenceItem501 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSentenceItem511 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWord_in_ruleSentenceItem558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAbstractMarker_in_ruleSentenceItem585 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAmbivalence_in_ruleSentenceItem612 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAbstractMarker_in_entryRuleAbstractMarker647 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractMarker657 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMarker_in_ruleAbstractMarker704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersMarker_in_ruleAbstractMarker731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestructionMarker_in_ruleAbstractMarker758 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAmbivalence_in_entryRuleAmbivalence793 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAmbivalence803 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_11_in_ruleAmbivalence840 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleCase_in_ruleAmbivalence862 = new BitSet(new long[]{0x0000000000001000L});
+    public static final BitSet FOLLOW_12_in_ruleAmbivalence875 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleAmbivalence887 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_ruleCase_in_ruleAmbivalence909 = new BitSet(new long[]{0x0000000000001800L});
+    public static final BitSet FOLLOW_11_in_ruleAmbivalence924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCase_in_entryRuleCase960 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCase970 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_CASESTRING_in_ruleCase1012 = new BitSet(new long[]{0x03FD555555FFE1D0L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1029 = new BitSet(new long[]{0x03FD555555FFE1D0L});
+    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1052 = new BitSet(new long[]{0x0000000000000202L});
+    public static final BitSet FOLLOW_9_in_ruleCase1065 = new BitSet(new long[]{0x03FD555555FFE1D0L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1077 = new BitSet(new long[]{0x03FD555555FFE1D0L});
+    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1099 = new BitSet(new long[]{0x0000000000000202L});
+    public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_entryRuleSentenceItemNoAmbivalence1138 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSentenceItemNoAmbivalence1148 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWord_in_ruleSentenceItemNoAmbivalence1195 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAbstractMarker_in_ruleSentenceItemNoAmbivalence1222 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersMarker_in_entryRuleVersMarker1257 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersMarker1267 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersbreakMarker_in_ruleVersMarker1314 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_ruleVersMarker1341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBrokenVersbreakMarker_in_ruleVersMarker1368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMissingVersMarker_in_ruleVersMarker1395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestroyedVersMarker_in_ruleVersMarker1422 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletedVersMarker_in_ruleVersMarker1449 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableVersMarker_in_ruleVersMarker1476 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasurMarker_in_ruleVersMarker1503 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpandedMarker_in_ruleVersMarker1530 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasurMarker_in_ruleVersMarker1557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker1592 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableVersMarker1602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_ruleDisputableVersMarker1648 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker1684 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDeletedVersMarker1694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_ruleDeletedVersMarker1740 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker1776 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedVersMarker1786 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_ruleDestroyedVersMarker1832 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker1868 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMissingVersMarker1878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleMissingVersMarker1924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker1960 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker1970 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_ruleRestorationOverRasurMarker2016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker2052 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAncientExpandedMarker2062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_ruleAncientExpandedMarker2108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker2144 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRasurMarker2154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_ruleRasurMarker2200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker2236 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersFrontierMarker2246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_ruleVersFrontierMarker2292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker2328 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersbreakMarker2338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_ruleVersbreakMarker2384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker2420 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker2430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_ruleBrokenVersbreakMarker2476 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMarker_in_entryRuleMarker2512 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMarker2522 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BETWEEN_HASHES_in_ruleMarker2563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestructionMarker_in_entryRuleDestructionMarker2603 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDestructionMarker2613 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_BETWEEN_MINUS_in_ruleDestructionMarker2654 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWord_in_entryRuleWord2694 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleWord2704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWordPart_in_ruleWord2759 = new BitSet(new long[]{0x03FD555555800102L});
+    public static final BitSet FOLLOW_ruleWordPart_in_entryRuleWordPart2796 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleWordPart2806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_ruleWordPart2844 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleWordMiddle_in_ruleWordPart2867 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleWordMiddle_in_entryRuleWordMiddle2903 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleWordMiddle2913 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBrackets_in_ruleWordMiddle2960 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleWordMiddle2987 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleWordMiddle3014 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_entryRuleChars3049 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleChars3059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_EGYSTRING_in_ruleChars3100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBrackets_in_entryRuleBrackets3140 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBrackets3150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasur_in_ruleBrackets3197 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleBrackets3224 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleBrackets3251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpandedColumn_in_ruleBrackets3278 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleBrackets3305 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleBrackets3332 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEmendation_in_ruleBrackets3359 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLacuna_in_ruleBrackets3386 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_ruleBrackets3413 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleBrackets3440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCartouche_in_ruleBrackets3467 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOval_in_ruleBrackets3494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSerech_in_ruleBrackets3521 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOval_in_entryRuleOval3556 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleOval3566 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_ruleOval3603 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoCartouche_in_ruleOval3624 = new BitSet(new long[]{0x03FD555557800100L});
+    public static final BitSet FOLLOW_25_in_ruleOval3637 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSerech_in_entryRuleSerech3673 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSerech3683 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleSerech3720 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoCartouche_in_ruleSerech3741 = new BitSet(new long[]{0x03FD55555D800100L});
+    public static final BitSet FOLLOW_27_in_ruleSerech3754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCartouche_in_entryRuleCartouche3790 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleCartouche3800 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_ruleCartouche3846 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoCartouche_in_ruleCartouche3867 = new BitSet(new long[]{0x03FD555575800100L});
+    public static final BitSet FOLLOW_29_in_ruleCartouche3880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoCartouche_in_entryRuleNoCartouche3916 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoCartouche3926 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoCartouche3973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasur_in_ruleNoCartouche4000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleNoCartouche4027 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleNoCartouche4054 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpandedColumn_in_ruleNoCartouche4081 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoCartouche4108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoCartouche4135 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEmendation_in_ruleNoCartouche4162 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLacuna_in_ruleNoCartouche4189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_ruleNoCartouche4216 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleNoCartouche4243 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoCartouche4270 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_entryRuleExpanded4305 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExpanded4315 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_ruleExpanded4361 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoExpanded_in_ruleExpanded4382 = new BitSet(new long[]{0x03FD5555D5800100L});
+    public static final BitSet FOLLOW_31_in_ruleExpanded4395 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoExpanded_in_entryRuleNoExpanded4431 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoExpanded4441 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoExpanded4488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoExpanded4515 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoExpanded4542 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEmendation_in_entryRuleEmendation4577 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEmendation4587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_ruleEmendation4633 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoEmendation_in_ruleEmendation4654 = new BitSet(new long[]{0x03FD555755800100L});
+    public static final BitSet FOLLOW_33_in_ruleEmendation4667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoEmendation_in_entryRuleNoEmendation4703 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoEmendation4713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoEmendation4760 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoEmendation4787 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoEmendation4814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoEmendation4841 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_entryRuleDisputableReading4876 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableReading4886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_ruleDisputableReading4932 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoDisputableReading_in_ruleDisputableReading4953 = new BitSet(new long[]{0x03FD555D55800100L});
+    public static final BitSet FOLLOW_35_in_ruleDisputableReading4966 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoDisputableReading_in_entryRuleNoDisputableReading5002 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoDisputableReading5012 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoDisputableReading5059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEmendation_in_ruleNoDisputableReading5086 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_ruleNoDisputableReading5113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasur_in_ruleNoDisputableReading5140 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleNoDisputableReading5167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleNoDisputableReading5194 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpandedColumn_in_ruleNoDisputableReading5221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLacuna_in_ruleNoDisputableReading5248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleNoDisputableReading5275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoDisputableReading5302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoDisputableReading5329 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLacuna_in_entryRuleLacuna5364 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleLacuna5374 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_ruleLacuna5420 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoLacuna_in_ruleLacuna5441 = new BitSet(new long[]{0x03FD557555800100L});
+    public static final BitSet FOLLOW_37_in_ruleLacuna5454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoLacuna_in_entryRuleNoLacuna5490 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoLacuna5500 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoLacuna5547 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoLacuna5574 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoLacuna5601 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoLacuna5628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCartouche_in_ruleNoLacuna5655 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOval_in_ruleNoLacuna5682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSerech_in_ruleNoLacuna5709 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_entryRuleDeletion5744 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDeletion5754 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_38_in_ruleDeletion5800 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoDeletion_in_ruleDeletion5821 = new BitSet(new long[]{0x03FD55D555800100L});
+    public static final BitSet FOLLOW_39_in_ruleDeletion5834 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoDeletion_in_entryRuleNoDeletion5870 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoDeletion5880 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoDeletion5927 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_ruleNoDeletion5954 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoDeletion5981 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoDeletion6008 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoDeletion6035 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleLacuna_in_ruleNoDeletion6062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_ruleNoDeletion6089 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpanded_in_ruleNoDeletion6116 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpandedColumn_in_entryRuleExpandedColumn6151 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleExpandedColumn6161 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_ruleExpandedColumn6207 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoExpandedColumn_in_ruleExpandedColumn6228 = new BitSet(new long[]{0x03FD575555800100L});
+    public static final BitSet FOLLOW_41_in_ruleExpandedColumn6241 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoExpandedColumn_in_entryRuleNoExpandedColumn6277 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoExpandedColumn6287 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoExpandedColumn6334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoExpandedColumn6361 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoExpandedColumn6388 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoExpandedColumn6415 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasur_in_entryRuleRasur6450 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRasur6460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_ruleRasur6506 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoRasur_in_ruleRasur6527 = new BitSet(new long[]{0x03FD5D5555800100L});
+    public static final BitSet FOLLOW_43_in_ruleRasur6540 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoRasur_in_entryRuleNoRasur6576 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoRasur6586 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoRasur6633 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoRasur6660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoRasur6687 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoRasur6714 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpanded_in_entryRuleAncientExpanded6749 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAncientExpanded6759 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_ruleAncientExpanded6805 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoAncientExpanded_in_ruleAncientExpanded6826 = new BitSet(new long[]{0x03FD755555800100L});
+    public static final BitSet FOLLOW_45_in_ruleAncientExpanded6839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoAncientExpanded_in_entryRuleNoAncientExpanded6875 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoAncientExpanded6885 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoAncientExpanded6932 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoAncientExpanded6959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoAncientExpanded6986 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoAncientExpanded7013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasur_in_entryRuleRestorationOverRasur7048 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRestorationOverRasur7058 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_ruleRestorationOverRasur7104 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoRestorationOverRasur_in_ruleRestorationOverRasur7125 = new BitSet(new long[]{0x03FDD55555800100L});
+    public static final BitSet FOLLOW_47_in_ruleRestorationOverRasur7138 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoRestorationOverRasur_in_entryRuleNoRestorationOverRasur7174 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoRestorationOverRasur7184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoRestorationOverRasur7231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoRestorationOverRasur7258 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoRestorationOverRasur7285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoRestorationOverRasur7312 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCartouche_in_ruleNoRestorationOverRasur7339 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestruction_in_entryRulePartialDestruction7374 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePartialDestruction7384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rulePartialDestruction7430 = new BitSet(new long[]{0x03FD555555800100L});
+    public static final BitSet FOLLOW_ruleNoPartialDestruction_in_rulePartialDestruction7451 = new BitSet(new long[]{0x03FF555555800100L});
+    public static final BitSet FOLLOW_49_in_rulePartialDestruction7464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleNoPartialDestruction_in_entryRuleNoPartialDestruction7500 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleNoPartialDestruction7510 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleChars_in_ruleNoPartialDestruction7557 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletion_in_ruleNoPartialDestruction7584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleExpanded_in_ruleNoPartialDestruction7611 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableReading_in_ruleNoPartialDestruction7638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_ruleNoPartialDestruction7665 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleCartouche_in_ruleNoPartialDestruction7692 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleOval_in_ruleNoPartialDestruction7719 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSerech_in_ruleNoPartialDestruction7746 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfix_in_entryRuleInterfix7781 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfix7791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixFlexion_in_ruleInterfix7838 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixLexical_in_ruleInterfix7865 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixSuffixPronomLexical_in_ruleInterfix7892 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPrefixNonLexical_in_ruleInterfix7919 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPrefixLexical_in_ruleInterfix7946 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixConnectionSyllabicGroup_in_ruleInterfix7973 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixCompoundWords_in_ruleInterfix8000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPhoneticalComplement_in_ruleInterfix8027 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixLexical_in_entryRuleInterfixLexical8062 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixLexical8072 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleInterfixLexical8118 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixFlexion_in_entryRuleInterfixFlexion8154 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixFlexion8164 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_ruleInterfixFlexion8210 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixSuffixPronomLexical_in_entryRuleInterfixSuffixPronomLexical8246 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixSuffixPronomLexical8256 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_ruleInterfixSuffixPronomLexical8302 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPrefixNonLexical_in_entryRuleInterfixPrefixNonLexical8338 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixPrefixNonLexical8348 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleInterfixPrefixNonLexical8394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPrefixLexical_in_entryRuleInterfixPrefixLexical8430 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixPrefixLexical8440 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleInterfixPrefixLexical8486 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixConnectionSyllabicGroup_in_entryRuleInterfixConnectionSyllabicGroup8522 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixConnectionSyllabicGroup8532 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleInterfixConnectionSyllabicGroup8578 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixCompoundWords_in_entryRuleInterfixCompoundWords8614 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixCompoundWords8624 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleInterfixCompoundWords8670 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleInterfixPhoneticalComplement_in_entryRuleInterfixPhoneticalComplement8706 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleInterfixPhoneticalComplement8716 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_ruleInterfixPhoneticalComplement8762 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -204,6 +204,7 @@ public abstract class AdministrativDataObjectImpl extends BTSObservableObjectImp
 	 * @generatedNOT
 	 */
 	public BTSRevision getRevision(int revisionIndex) {
+		if (revisionIndex >= getRevisions().size()) return null;
 		String rev = getRevisions().get(revisionIndex);
 		BTSRevision revision = BtsmodelFactory.eINSTANCE.createBTSRevision(rev);
 		return revision;

@@ -429,7 +429,7 @@ labelProvider));
 			mainTextCorpus = context.get(BTSPluginIDs.PREF_MAIN_CORPUS);
 		}
 		if (selectedTextCorpus != null && selectedTextCorpus.getDBCollectionKey() != null
-				&& !mainTextCorpus.equals(selectedTextCorpus))
+				&& (mainTextCorpus == null || !mainTextCorpus.equals(selectedTextCorpus)))
 		{
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected

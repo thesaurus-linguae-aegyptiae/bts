@@ -495,7 +495,8 @@ public class PassportEditorPart {
 
 	private void createMainTabItem(CTabFolder folder) {
 		CTabItem tbtmMain = new CTabItem(folder, SWT.NONE);
-		tbtmMain.setToolTipText("Main");
+		tbtmMain.setText("Main");
+		tbtmMain.setToolTipText("Main Passport Page");
 		tbtmMain.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_PASSPORT));
 		final ScrolledComposite scrollComposite = new ScrolledComposite(folder,
 				SWT.V_SCROLL | SWT.H_SCROLL | SWT.BORDER);

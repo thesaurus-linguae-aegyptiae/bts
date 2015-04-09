@@ -15,6 +15,7 @@ import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -82,17 +83,32 @@ public class LemmaEditorControllerImpl implements LemmaEditorController{
 	public List<BTSLemmaEntry> listInAllInvalidLemmata(IProgressMonitor monitor) {
 		String[] params = new String[3];
 		List<BTSLemmaEntry> invalidLemmata = new Vector<BTSLemmaEntry>();
-		List<BTSLemmaEntry> allLemmata= lemmaService.list(BTSConstants.OBJECT_STATE_ACTIVE, monitor);
-		for (BTSLemmaEntry l : allLemmata)
+		String[] active_lemmaLists= lemmaService.getActiveLemmaLists();
+		for (String active_lemmaList : active_lemmaLists)
 		{
-			if (monitor.isCanceled()) break;
-			lemmaService.checkAndFullyLoad(l, false);
-			monitor.worked(1);
-			if (!testTextValidAgainstGrammar(l))
-			{
-				invalidLemmata.add(l);
+			try {
+				do
+				{
+					List<BTSLemmaEntry> lemmata = lemmaService.listChunks(100, params, active_lemmaList + "_wlist", BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+					if (lemmata == null) break;
+					for (BTSLemmaEntry t : lemmata)
+					{
+						if (monitor.isCanceled()) break;
+//						lemmaService.checkAndFullyLoad(t, false);
+						monitor.worked(1);
+						if (!testTextValidAgainstGrammar(t))
+						{
+							invalidLemmata.add(t);
+						}
+						monitor.worked(1);
+					}
+					 params = new String[]{params[1], params[2], null};
+				}
+				while(params[1] != null && (!monitor.isCanceled()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-			monitor.worked(1);
 		}
 		return invalidLemmata;
 	}

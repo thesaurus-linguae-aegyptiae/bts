@@ -15,6 +15,8 @@ import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.GenericDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.eclipse.e4.core.services.log.Logger;
@@ -46,6 +48,11 @@ implements GenericDao<E, K>
 	public static final String RELATIONOBJECTID_PATTERN = "(\"objectId\":\\s*\")([^\"]*)\"";
 	public static final Pattern relationObjectIdPattern = Pattern.compile(RELATIONOBJECTID_PATTERN);
 	
+	public static final String WORD_PATTERN = "(\"words\"\\s*:\\s*\\[\\s*)([^\\]]*)";
+	private static final Pattern wordsPattern  = Pattern.compile(WORD_PATTERN);
+	
+	public static final String WORD_WCHAR_PATTERN = "(\"wChar\":\\s*\")([^\"]*)\"";
+	public static final Pattern wordsWCharPattern = Pattern.compile(WORD_WCHAR_PATTERN);
 	
 	protected List<E> loadPartialObjectsFromStrings(
 			List<String> allDocs, String dbPath) {
@@ -162,11 +169,64 @@ implements GenericDao<E, K>
 				entity.getRelations().add(r);
 			}
 		}
+		
+		if (entity instanceof BTSLemmaEntry)
+		{
+			List<BTSWord> words = extractWordsFromObjectString(sourceAsString);
+			if (words != null)
+			{
+				BTSLemmaEntry lemma = (BTSLemmaEntry) entity;
+				for (BTSWord w : words)
+				{
+					lemma.getWords().add(w);
+				}
+			}
+		}
 
 		entity.setDBCollectionKey(indexName);
 		entity.setRevisionState(extractRevisionSateFromObjectString(sourceAsString));
 		return entity;
 	}
+
+	private List<BTSWord> extractWordsFromObjectString(String sourceAsString) {
+		Matcher m = wordsPattern.matcher(sourceAsString);
+		if (m.find())
+		{
+			List<BTSWord> words = new Vector<BTSWord>();
+			String allWords = m.group(2);
+			if (allWords == null || allWords.trim().length() == 0) return null;
+			String relStrings[] = allWords.split("\\}\\s*,\\s*\\{");
+			for (String wordString : relStrings)
+			{
+				String eclass = extractEClassFromObjectString(wordString);
+				if (eclass.endsWith("BTSWord"))
+				{
+					BTSWord word = BtsCorpusModelFactory.eINSTANCE.createBTSWord();
+					String relID = extractRelationIDFromObjectString(wordString);
+					word.set_id(relID);
+					
+					String wChar = extractWordwCharFromObjectString(wordString);
+					word.setWChar(wChar);
+					words.add(word);
+				}
+			}
+			return words;
+		}
+		return null;
+	}
+
+
+
+	private String extractWordwCharFromObjectString(String wordString) {
+		Matcher m = wordsWCharPattern.matcher(wordString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+
+
 
 	private List<BTSRelation> extractRelationsFromObjectString(
 			String sourceAsString) {

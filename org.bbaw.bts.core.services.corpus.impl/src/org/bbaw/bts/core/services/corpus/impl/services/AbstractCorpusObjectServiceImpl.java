@@ -258,7 +258,7 @@ implements GenericCorpusObjectService<E, K>{
 		return (String) context.get(BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT);
 	}
 	
-	protected String[] getActiveLemmaLists() {
+	public String[] getActiveLemmaLists() {
 		if (active_lemmaLists == null || "".equals(active_lemmaLists))
 		{
 			return getActiveProjects();

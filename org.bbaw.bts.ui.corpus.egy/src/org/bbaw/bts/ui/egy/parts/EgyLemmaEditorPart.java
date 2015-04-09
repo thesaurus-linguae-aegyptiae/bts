@@ -503,8 +503,14 @@ private void bringPartToFront(boolean b) {
 		lemmaAnnotationMap = new HashMap<String, List<Object>>();
 		lemmaEditorController.transformToDocument(textContent, doc, tempAnnotationModel, relatingObjects, relatingObjectsMap, lemmaAnnotationMap);
 
+		String textString = doc.get();
+		// take care of empty input
+		if (textString.length() == 0)
+		{
+			textString = "§§";
+		}
 		embeddedEditorModelAccess.updateModel("\r",
-				doc.get(), "\r");
+				textString, "\r");
 		annotationModel = embeddedEditor.getViewer().getAnnotationModel();
 
 		loadAnnotations2Editor(annotationModel, tempAnnotationModel);

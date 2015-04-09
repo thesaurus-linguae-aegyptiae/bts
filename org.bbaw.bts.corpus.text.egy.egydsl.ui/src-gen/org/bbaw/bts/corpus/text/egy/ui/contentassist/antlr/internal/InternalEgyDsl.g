@@ -2316,6 +2316,12 @@ rule__NoDeletion__Alternatives
 { after(grammarAccess.getNoDeletionAccess().getRestorationOverRasurParserRuleCall_6()); }
 )
 
+    |(
+{ before(grammarAccess.getNoDeletionAccess().getAncientExpandedParserRuleCall_7()); }
+	ruleAncientExpanded
+{ after(grammarAccess.getNoDeletionAccess().getAncientExpandedParserRuleCall_7()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
@@ -2630,7 +2636,7 @@ rule__TextContent__Group__1__Impl
 :
 (
 { before(grammarAccess.getTextContentAccess().getGroup_1()); }
-(rule__TextContent__Group_1__0)
+(rule__TextContent__Group_1__0)?
 { after(grammarAccess.getTextContentAccess().getGroup_1()); }
 )
 

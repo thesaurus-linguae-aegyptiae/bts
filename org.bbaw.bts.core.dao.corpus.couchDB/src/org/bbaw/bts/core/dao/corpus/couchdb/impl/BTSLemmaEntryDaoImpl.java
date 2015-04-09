@@ -9,6 +9,7 @@ import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.dao.couchDB.CouchDBDao;
 import org.eclipse.emf.common.util.URI;
@@ -62,6 +63,18 @@ public class BTSLemmaEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSLemmaEn
 	}
 	
 	
-
+	@Override
+	public List<BTSLemmaEntry> listChunks(int chunkSize, String[] chunkIds,
+			String path, String objectState) {
+		String viewId = "lemma/all_active_docs";
+		if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_ACTIVE)) {
+			viewId = DaoConstants.VIEW_ALL_ACTIVE_BTSLISTENTRIES;
+		} else if (objectState != null
+				&& objectState.equals(BTSConstants.OBJECT_STATE_TERMINATED)) {
+			viewId = DaoConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES;
+		}
+		return super.listChunks(chunkSize, chunkIds, path, viewId, objectState);
+	}
 	
 }

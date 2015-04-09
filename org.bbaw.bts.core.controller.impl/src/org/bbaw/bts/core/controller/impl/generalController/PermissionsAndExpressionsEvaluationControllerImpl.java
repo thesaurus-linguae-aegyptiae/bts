@@ -247,7 +247,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	
 	private boolean evaluateMayEditProjects() {
 		boolean may = false;
-		if (authenticatedUser == null) {
+		if (authenticatedUser == null  || mainProject == null) {
 			may = false;
 		} else {
 			may = evaluationService.authenticatedUserIsDBAdmin(false);
@@ -259,7 +259,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayCreateDBCollection() {
 		boolean may = false;
-		if (authenticatedUser == null) {
+		if (authenticatedUser == null || mainProject == null) {
 			may = false;
 		} else {
 			may = evaluationService.authenticatedUserIsDBAdmin(false);
@@ -347,7 +347,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayEditPermissions() {
 		boolean may = false;
-		if (authenticatedUser == null) {
+		if (authenticatedUser == null  || mainProject == null) {
 			may = false;
 		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
 			may = true;
@@ -372,7 +372,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayEditUsers() {
 		boolean may = false;
-		if (authenticatedUser == null) {
+		if (authenticatedUser == null  || mainProject == null) {
 			may = false;
 		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
 			may = true;
@@ -397,7 +397,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayMasterEditConfig() {
 		boolean may = false;
-		if (authenticatedUser == null) {
+		if (authenticatedUser == null || mainProject == null) {
 			may = false;
 		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
 			may = true;
@@ -422,7 +422,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayEditConfig() {
 		boolean may = false;
-		if (authenticatedUser == null) {
+		if (authenticatedUser == null || mainProject == null) {
 			may = false;
 		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
 			may = true;
@@ -475,7 +475,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	private boolean evaluateMayEditInteral(Object internalSelection) {
-		if (authenticatedUser == null || internalSelection == null
+		if (authenticatedUser == null || internalSelection == null  || mainProject == null
 				|| !(internalSelection instanceof BTSDBBaseObject)) {
 			return false;
 		} 
@@ -517,7 +517,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 	private boolean evaluateMayDelete(Object internalSelection) {
 		boolean may = false;
-		if (otherLocked || authenticatedUser == null || internalSelection == null
+		if (otherLocked || authenticatedUser == null || internalSelection == null  || mainProject == null
 				|| !(internalSelection instanceof BTSDBBaseObject)) {
 			may = false;
 		} else {

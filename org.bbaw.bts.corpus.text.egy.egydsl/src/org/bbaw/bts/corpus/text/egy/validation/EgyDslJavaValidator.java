@@ -286,9 +286,14 @@ public class EgyDslJavaValidator extends
 			for (EObject item : bracket.getWChar()) {
 				index++;
 				if (item.getClass().getName().equals(last)) {
-					error("Items may not repete themselves", bracket,
-							EgyDslPackage.Literals.DISPUTABLE_READING__WCHAR,
-							index - 1);
+					try {
+						error("Items may not repete themselves", bracket,
+								EgyDslPackage.Literals.DISPUTABLE_READING__WCHAR,
+								index - 1);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
 				last = item.getClass().getName();
 			}

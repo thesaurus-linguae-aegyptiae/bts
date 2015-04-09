@@ -401,6 +401,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private ScrolledComposite scrolledCompJSesh;
 
+	protected int cachedCursor;
+
 	
 	/**
 	 * Instantiates a new egy text editor part.
@@ -460,6 +462,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						// update model from old selection editor
 						switch (oldSelection) {
 						case 0: {
+							cachedCursor = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
 							canSwitch = updateModelFromTranscription();
 							break;
 						}
@@ -498,6 +501,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 											.activateContext("org.eclipse.xtext.ui.embeddedTextEditorScope");
 
 									loadInputTranscription(text, relatingObjects, monitor);
+									try {
+										embeddedEditor.getViewer().getTextWidget().setCaretOffset(cachedCursor);
+									} catch (Exception e) {
+									}
+
 									break;
 								}
 								case 1: {
@@ -983,7 +991,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					localtext.getTextContent(), document, tempAnnotationModel,
 					localRelatingObjects, relatingObjectsMap, lemmaAnnotationMap, monitor);
 		}
-		embeddedEditorModelAccess.updateModel("\r", document.get(), "\r");
+		String textString = document.get();
+		// take care of empty input
+		if (textString.length() == 0)
+		{
+			textString = "§§";
+		}
+		embeddedEditorModelAccess.updateModel("\r", textString, "\r");
 		
 		// remove painter so annotations are not painted individually
 //		embeddedEditor.getViewer().removePainter(painter);
@@ -2029,6 +2043,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	private void purgeCacheAndEditingDomain() {
 
 		selectedSentence = null;
+		cachedCursor = 0;
 		lemmataLoaded = false;
 		modelAnnotationMap = new HashMap<String, BTSModelAnnotation>();
 		relatingObjectsAnnotationMap = new HashMap<EObject, List<BTSModelAnnotation>>();

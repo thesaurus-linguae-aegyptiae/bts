@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.core.remote.dao.RemoteDBConnectionProvider;
 import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.lightcouch.CouchDbClient;
+import org.lightcouch.CouchDbException;
 
 public class RemoteDBManagerImpl implements RemoteDBManager {
 
@@ -21,7 +22,20 @@ public class RemoteDBManagerImpl implements RemoteDBManager {
 				return true; // no remote database -> only local
 			}
 			dbClient.design().getFromDb("_all_docs");
-		} catch (Exception e) {
+		} catch (CouchDbException e) {
+			e.getStackTrace();
+			// check wether db is available or not
+			// if db not available, it should not say false
+			if (e.getCause() != null
+					&& e.getCause().getMessage() != null && e.getMessage().startsWith("org.apache.http.conn.HttpHostConnectException"))
+			{
+				if (e.getCause().getMessage().contains("Connection") && e.getCause().getMessage().contains("refused"))
+				{
+					return true;
+				}
+			}
+			success = false;
+		}catch (Exception e) {
 			success = false;
 		}
 		return success;

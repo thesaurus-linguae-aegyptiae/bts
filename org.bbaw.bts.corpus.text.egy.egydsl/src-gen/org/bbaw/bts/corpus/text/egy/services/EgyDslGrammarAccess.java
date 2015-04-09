@@ -32,16 +32,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cItemsTextItemParserRuleCall_1_1_1_0 = (RuleCall)cItemsAssignment_1_1_1.eContents().get(0);
 		
 		//TextContent:
-		//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*);
+		//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?;
 		public ParserRule getRule() { return rule; }
 
-		//{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)
+		//{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?
 		public Group getGroup() { return cGroup; }
 
 		//{TextContent}
 		public Action getTextContentAction_0() { return cTextContentAction_0; }
 
-		//items+=TextItem ((" " | NEWLINE)? items+=TextItem)*
+		//(items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//items+=TextItem
@@ -1272,12 +1272,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cDisputableReadingParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cLacunaParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cRestorationOverRasurParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cAncientExpandedParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//NoDeletion:
-		//	Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur;
+		//	Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur |
+		//	AncientExpanded;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur
+		//Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur | AncientExpanded
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1300,6 +1302,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//RestorationOverRasur
 		public RuleCall getRestorationOverRasurParserRuleCall_6() { return cRestorationOverRasurParserRuleCall_6; }
+
+		//AncientExpanded
+		public RuleCall getAncientExpandedParserRuleCall_7() { return cAncientExpandedParserRuleCall_7; }
 	}
 
 	public class ExpandedColumnElements extends AbstractParserRuleElementFinder {
@@ -1926,7 +1931,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TextContent:
-	//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*);
+	//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?;
 	public TextContentElements getTextContentAccess() {
 		return (pTextContent != null) ? pTextContent : (pTextContent = new TextContentElements());
 	}
@@ -2403,7 +2408,8 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoDeletion:
-	//	Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur;
+	//	Chars | PartialDestruction | Expanded | Interfix | DisputableReading | Lacuna | RestorationOverRasur |
+	//	AncientExpanded;
 	public NoDeletionElements getNoDeletionAccess() {
 		return (pNoDeletion != null) ? pNoDeletion : (pNoDeletion = new NoDeletionElements());
 	}

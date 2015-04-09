@@ -98,7 +98,7 @@
         eType="#//NoRasur" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoRasur"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading">
+  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoAncientExpanded" containment="true"/>
   </eClassifiers>

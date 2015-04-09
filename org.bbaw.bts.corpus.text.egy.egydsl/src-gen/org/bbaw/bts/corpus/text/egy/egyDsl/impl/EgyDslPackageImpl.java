@@ -1651,6 +1651,7 @@ public class EgyDslPackageImpl extends EPackageImpl implements EgyDslPackage
     ancientExpandedEClass.getESuperTypes().add(this.getBrackets());
     ancientExpandedEClass.getESuperTypes().add(this.getNoCartouche());
     ancientExpandedEClass.getESuperTypes().add(this.getNoDisputableReading());
+    ancientExpandedEClass.getESuperTypes().add(this.getNoDeletion());
     restorationOverRasurEClass.getESuperTypes().add(this.getBrackets());
     restorationOverRasurEClass.getESuperTypes().add(this.getNoCartouche());
     restorationOverRasurEClass.getESuperTypes().add(this.getNoDisputableReading());

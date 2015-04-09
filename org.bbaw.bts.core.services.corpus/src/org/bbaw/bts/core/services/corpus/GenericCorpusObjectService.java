@@ -19,4 +19,6 @@ extends GenericObjectService<E, K>{
 	boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts);
 	
 	public String[] getActive_corpora(String projecPrefix);
+	
+	public String[] getActiveLemmaLists();
 }

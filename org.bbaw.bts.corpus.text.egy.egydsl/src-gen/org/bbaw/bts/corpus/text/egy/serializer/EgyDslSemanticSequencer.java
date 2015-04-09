@@ -73,6 +73,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				if(context == grammarAccess.getAncientExpandedRule() ||
 				   context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getNoCartoucheRule() ||
+				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_AncientExpanded(context, (AncientExpanded) semanticObject); 
@@ -870,7 +871,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     (items+=TextItem items+=TextItem*)
+	 *     ((items+=TextItem items+=TextItem*)?)
 	 */
 	protected void sequence_TextContent(EObject context, TextContent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

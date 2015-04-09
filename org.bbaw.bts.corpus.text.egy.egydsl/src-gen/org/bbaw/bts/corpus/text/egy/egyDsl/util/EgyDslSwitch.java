@@ -516,6 +516,7 @@ public class EgyDslSwitch<T> extends Switch<T>
         if (result == null) result = caseBrackets(ancientExpanded);
         if (result == null) result = caseNoCartouche(ancientExpanded);
         if (result == null) result = caseNoDisputableReading(ancientExpanded);
+        if (result == null) result = caseNoDeletion(ancientExpanded);
         if (result == null) result = caseWordMiddle(ancientExpanded);
         if (result == null) result = defaultCase(theEObject);
         return result;

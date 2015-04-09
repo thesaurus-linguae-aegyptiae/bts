@@ -294,4 +294,16 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		anno.setProject(main_lemmaList_key);
 		return anno;
 	}
+	
+	@Override
+	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
+	{
+		if (!(object instanceof BTSLemmaEntry)) return super.checkAndFullyLoad(object, checkForConflicts);
+		if (object.eResource() == null || object.get_rev() == null)
+		{
+			lemmaEntryDao.loadFully((BTSLemmaEntry) object, checkForConflicts);
+		}
+		return false;
+		
+	}
 }

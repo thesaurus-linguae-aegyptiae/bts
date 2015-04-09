@@ -128,7 +128,7 @@ ruleTextContent returns [EObject current=null]
 	    }
 
 )
-))*))
+))*)?)
 ;
 
 
@@ -2342,6 +2342,16 @@ ruleNoDeletion returns [EObject current=null]
     this_RestorationOverRasur_6=ruleRestorationOverRasur
     { 
         $current = $this_RestorationOverRasur_6.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoDeletionAccess().getAncientExpandedParserRuleCall_7()); 
+    }
+    this_AncientExpanded_7=ruleAncientExpanded
+    { 
+        $current = $this_AncientExpanded_7.current; 
         afterParserOrEnumRuleCall();
     }
 )
