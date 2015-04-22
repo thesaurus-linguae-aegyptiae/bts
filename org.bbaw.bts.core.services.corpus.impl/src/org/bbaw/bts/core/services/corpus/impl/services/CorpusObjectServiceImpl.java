@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -512,6 +513,9 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 	@Override
 	public boolean move(BTSDBBaseObject entity, String targetDBCollectionPath, String sourceDBCollectionPath) {
 		String oldrev = entity.get_rev();
+		remove((BTSCorpusObject) entity, sourceDBCollectionPath, oldrev);
+		entity.set_deleted(false);
+		entity.set_rev(null);
 		((BTSCorpusObject)entity).setCorpusPrefix(targetDBCollectionPath);
 		entity.setDBCollectionKey(targetDBCollectionPath);
 		
@@ -526,16 +530,23 @@ implements 	CorpusObjectService, BTSObjectSearchService, MoveObjectAmongProjectD
 		{
 			System.out.println("potentialPredecessor " + potentialPredecessor);
 		}
-		
 		// if yes, get it, update it with current entity, keep revision of existing object
 		entity.eResource().setURI(null);
+		entity.eResource().getContents().clear();
+//		try {
+//			entity.eResource().delete(null);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		entity.eAdapters().clear();
 		
 		// else remove revision from entity
 		boolean successful = save((BTSCorpusObject) entity);
-		if (successful)
-		{
-			remove((BTSCorpusObject) entity, sourceDBCollectionPath, oldrev);
-		}
+//		if (successful)
+//		{
+//			remove((BTSCorpusObject) entity, sourceDBCollectionPath, oldrev);
+//		}
 
 		if (entity instanceof BTSTextCorpus)
 		{

@@ -15,7 +15,11 @@ public class BTSConfigurationControllerContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSConfigurationController");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null && application.getContext() != null) {
+			ctx = application.getContext();
+		}
+
 
 		BTSConfigurationController controller = ContextInjectionFactory.make(BTSConfigurationControllerImpl.class,
 				context);

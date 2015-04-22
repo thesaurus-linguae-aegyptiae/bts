@@ -400,6 +400,8 @@ public class InstallationWizard extends Wizard {
 			}
 		} else if (page instanceof SelectProjectsPage) {
 			return finishPage;
+		} else if (page instanceof FinishInstallationPage) {
+			return finishPage;
 		}
 		else
 		{

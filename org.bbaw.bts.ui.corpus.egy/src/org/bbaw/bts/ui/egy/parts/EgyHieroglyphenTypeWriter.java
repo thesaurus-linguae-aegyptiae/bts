@@ -50,8 +50,8 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
@@ -837,7 +837,12 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			// no changes
 			return;
 		}
-		htwController.updateGraphicSelectionCounter(beforeImageMdC, newMdC);
+		try {
+			htwController.updateGraphicSelectionCounter(beforeImageMdC, newMdC);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -855,7 +860,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	@Inject
 	@Optional
 	void eventReceivedHTWClearHieroglyphsEvents(
-			@EventTopic(BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA + "/*") Object event) {
+			@EventTopic(BTSEGYUIConstants.EVENT_CLEAR_TOKEN_DATA + "/*") Object event) {
 		if (event instanceof String && event != null && ((String)event).endsWith("hierotw")) {
 			sync.asyncExec(new Runnable() {
 				@Override

@@ -871,7 +871,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 	
 	/**
 	 * Constraint:
-	 *     ((items+=TextItem items+=TextItem*)?)
+	 *     (items+=TextItem items+=TextItem*)
 	 */
 	protected void sequence_TextContent(EObject context, TextContent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);

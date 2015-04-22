@@ -32,16 +32,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cItemsTextItemParserRuleCall_1_1_1_0 = (RuleCall)cItemsAssignment_1_1_1.eContents().get(0);
 		
 		//TextContent:
-		//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?;
+		//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*);
 		public ParserRule getRule() { return rule; }
 
-		//{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?
+		//{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)
 		public Group getGroup() { return cGroup; }
 
 		//{TextContent}
 		public Action getTextContentAction_0() { return cTextContentAction_0; }
 
-		//(items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?
+		//items+=TextItem ((" " | NEWLINE)? items+=TextItem)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//items+=TextItem
@@ -1931,7 +1931,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//TextContent:
-	//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*)?;
+	//	{TextContent} (items+=TextItem ((" " | NEWLINE)? items+=TextItem)*);
 	public TextContentElements getTextContentAccess() {
 		return (pTextContent != null) ? pTextContent : (pTextContent = new TextContentElements());
 	}

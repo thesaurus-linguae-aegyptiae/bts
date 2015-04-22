@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
-import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
+import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.e4.core.contexts.Active;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -18,14 +18,14 @@ import org.eclipse.e4.ui.services.internal.events.EventBroker;
 public class ClearTokenDataHandler {
 	@Execute
 	public void execute(EventBroker eventBroker, @Active MPart activePart) {
-		String eventID = BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA;
+		String eventID = BTSEGYUIConstants.EVENT_CLEAR_TOKEN_DATA;
 		if (activePart.getElementId().equals("org.bbaw.bts.ui.corpus.egy.part.lemmatizer"))
 		{
-			eventID = BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA + "/lemmatizer";
+			eventID = BTSEGYUIConstants.EVENT_CLEAR_TOKEN_DATA + "/lemmatizer";
 		}
 		else if (activePart.getElementId().equals("org.bbaw.bts.ui.corpus.egy.part.hierotw"))
 		{
-			eventID = BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA + "/hierotw";
+			eventID = BTSEGYUIConstants.EVENT_CLEAR_TOKEN_DATA + "/hierotw";
 		}
 		eventBroker.post(eventID,
 				eventID);

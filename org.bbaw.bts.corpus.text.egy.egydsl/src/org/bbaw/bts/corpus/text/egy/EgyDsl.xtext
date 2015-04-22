@@ -8,7 +8,7 @@ generate egyDsl "http://www.bbaw.org/bts/corpus/text/egy/EgyDsl"
     
 TextContent:
 	{TextContent}
-	(items+=TextItem ((' ' | NEWLINE)?  (items+=TextItem))*)?;
+	(items+=TextItem ((' ' | NEWLINE)?  (items+=TextItem))*);
 
 
 TextItem:

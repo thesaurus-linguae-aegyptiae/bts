@@ -203,6 +203,7 @@ public class HieroglyphTypeWriterControllerImpl implements
 		String normalized;
 		while (newtok.hasMoreTokens()) {
 			s = newtok.nextToken();
+			if ("//".equals(s)) continue; // destruction // is not important
 			try {
 				normalized = mdcNormalizer.normalize(s);
 			} catch (MDCSyntaxError e) {

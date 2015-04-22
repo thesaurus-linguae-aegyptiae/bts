@@ -261,7 +261,12 @@ public class PassportEditorPart {
 		if (selectionCached) {
 			loadInput(corpusObject);
 		}
-		part = partService.findPart(BTSUIConstants.PART_ID_PASSPORT_EDITOR_PART);
+		try {
+			part = partService.findPart(BTSUIConstants.PART_ID_PASSPORT_EDITOR_PART);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 	}
@@ -347,20 +352,7 @@ public class PassportEditorPart {
 
 	private BTSPassportEntry findMatchingEntryGroup(BTSPassport passport,
 			BTSConfigItem category) {
-		Assert.isNotNull(passport);
-		Assert.isNotNull(category);
-
-		for (BTSPassportEntry group : passport.getChildren()) {
-			if (!category.isIgnore() && group.getType() != null
-					&& group.getType().equals(category.getValue())) {
-				return group;
-			}
-		}
-		BTSPassportEntryGroup defaultInput = BtsCorpusModelFactory.eINSTANCE
-				.createBTSPassportEntryGroup();
-		defaultInput.setType(category.getValue());
-		passport.getChildren().add(defaultInput);
-		return defaultInput;
+		return passportConfigurationController.findMatchingEntryGroup(passport, category);
 	}
 
 	private void createTabItem(CTabFolder folder, BTSConfigItem category,
@@ -917,7 +909,10 @@ public class PassportEditorPart {
 										selectionCached = true;
 										loaded = false;
 									}
-									part.setLabel(corpusObject.getName());
+									if (part != null)
+									{
+										part.setLabel(corpusObject.getName());
+									}
 
 								}
 							});

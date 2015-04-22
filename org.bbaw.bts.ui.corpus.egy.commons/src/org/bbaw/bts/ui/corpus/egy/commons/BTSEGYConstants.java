@@ -49,5 +49,6 @@ public class BTSEGYConstants {
 			 + "< S,s < Ś,ś < Š,š < Q,q < Ḳ,ḳ < K,k < G,g < T,t < Ṱ,ṱ < Ṯ,ṯ < Č,č < D,d < Ṭ,ṭ < Ḏ,ḏ < Č̣,č̣  "
 			 + "<\u00C6, ã < Õ,\u0152, \u0153 < Þ < \u0178 ");
 	public static final String EVENT_CLEAR_TOKEN_DATA = "event_clear_token_data";
+	public static final int JSESH_LINE_LENGTH = 40;
 	private BTSEGYConstants(){}
 }

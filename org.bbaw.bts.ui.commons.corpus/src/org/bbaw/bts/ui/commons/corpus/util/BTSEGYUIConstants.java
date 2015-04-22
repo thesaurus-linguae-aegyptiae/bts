@@ -59,5 +59,7 @@ public class BTSEGYUIConstants {
 	public static final String SIGN_TEXT_SHOW_TRANSLATION_ES = "sign-text-editor_show_translation_es";
 	public static final String SIGN_TEXT_SHOW_LINE_WIDTH = "sign-text-editor_line_width";
 	public static final String PREF_LEMMATIZER_FELXION_DEFAULT = "pref_lemmatizer_flexion_default";
+	public static final String EVENT_CLEAR_TOKEN_DATA = "event_clear_token_data";
+
 	private BTSEGYUIConstants(){}
 }

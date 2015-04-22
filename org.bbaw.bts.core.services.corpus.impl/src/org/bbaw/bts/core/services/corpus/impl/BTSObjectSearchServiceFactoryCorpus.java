@@ -3,20 +3,10 @@ package org.bbaw.bts.core.services.corpus.impl;
 import java.util.List;
 import java.util.Vector;
 
-import javax.inject.Inject;
-
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.BTSObjectSearchServiceFactory;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.services.GenericObjectService;
-import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
-import org.bbaw.bts.core.services.corpus.BTSImageService;
-import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
-import org.bbaw.bts.core.services.corpus.BTSTCObjectService;
-import org.bbaw.bts.core.services.corpus.BTSTextCorpusService;
-import org.bbaw.bts.core.services.corpus.BTSTextService;
-import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
-import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.core.services.corpus.impl.internal.CorpusSearchServiceFactoryHelper;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 

@@ -15,7 +15,11 @@ public class BTSConfigurationServiceContextFunction extends ContextFunction
 		System.out.println("Intitialize BTSConfigurationService");
 		// Add the new object to the application context
 		MApplication application = context.get(MApplication.class);
-		IEclipseContext ctx = application.getContext();
+		IEclipseContext ctx = context;
+		if (application != null && application.getContext() != null) {
+			ctx = application.getContext();
+		}
+
 
 		BTSConfigurationService service = ContextInjectionFactory.make(BTSConfigurationServiceImpl.class, context);
 		ctx.set(BTSConfigurationService.class, service);

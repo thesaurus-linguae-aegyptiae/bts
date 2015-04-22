@@ -29,12 +29,12 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_eLMOkNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_KwSP0DTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.menuseparator.4"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_XnGPcNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_jVjaoNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_jVjaoNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_kJWPENefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_lTQdcNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.15"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_A_T4wOpWEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_bzRagOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.15" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/history.png" command="_YDmDwOsGEeOLEqD8tMK6Eg"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_YKBa4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_YKBa4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_apef4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.corpus.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
         <children xsi:type="menu:Menu" xmi:id="_fufR4DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menu.filter" label="Filter">
           <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR4TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByProject" label="Filter by Project..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
@@ -69,7 +69,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_-x4N4NeUEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_xEK-sOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.2"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_X8FA8NefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_ZHIe0NefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_ZHIe0NefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_1YDbUDRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_J97l0DTiEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.corpus.menuseparator.3"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_jzkrUOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.17" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
@@ -114,6 +114,7 @@
       <parameters xmi:id="_JfdEgMGUEeSSoMDqJYVnow" elementId="navigatorParametrizedFilter" name="Filter Param"/>
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_QOXY4MitEeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.command.removeTokenData" commandName="removeTokenData" category="_u7sUsF2fEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_fIZkQOjjEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.command.checkPassportCompleteness" commandName="checkPassportCompleteness" category="_u7sUsF2fEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_8cMkYD_nEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.middle.bottom" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="__kd84D_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.passportEditorPart" containerData="10" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.PassportEditorPart" label="PassportEditorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/passport.png" closeable="true">
@@ -126,6 +127,7 @@
       </menus>
       <toolbar xmi:id="_ED6jsD_oEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.passportEditor.toolbar">
         <children xsi:type="menu:HandledToolItem" xmi:id="_ASVqcNqyEeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.6" label="Inherit" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/inherit.png" tooltip="Inherit Passport Data from Parent Object" command="_oMmZgNqxEeO-3cFwhVZ23Q"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0cEWMOjjEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.12" toBeRendered="false" visible="false" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/passport-thumb-up.png" tooltip="Check passport completeness" command="_fIZkQOjjEeSGc-cONqnFNw"/>
       </toolbar>
     </elements>
   </fragments>
@@ -141,7 +143,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_pFEtwNeVEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_WZMoANeWEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.6"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KaVTMNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw0TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw0TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw1TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_MPihUNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.13"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw0zQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
@@ -173,7 +175,7 @@
         <children xsi:type="menu:MenuSeparator" xmi:id="_S9SSQzQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menuseparator.0"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRTQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRjQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSRjQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_S9SSRzQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.menuseparator.1"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSSDQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_S9SSSTQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
@@ -200,7 +202,7 @@
         <children xsi:type="menu:MenuSeparator" xmi:id="_sSTLIOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.lemma.3"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_j7228KRUEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_dnddgKRQEeO1QoiwGMOm0Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.restore" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_KJGZcKkIEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.deletePermanently" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_KJGZcKkIEeOGFMwFKRY6Og" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.deletePermanently" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_ukZJkOvqEeOp-Id2RgOpIA" elementId="org.bbaw.bts.ui.corpus.menuseparator.1"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_2xdVgNm-EeO-3cFwhVZ23Q" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_RGkAQOpCEeO86qCMpbd0dw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.openConflict" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
@@ -215,7 +217,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_s_acYNeVEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_KpT1QNedEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.7"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_QF-AUNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-        <children xsi:type="menu:HandledMenuItem" xmi:id="_15Yl0OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+        <children xsi:type="menu:HandledMenuItem" xmi:id="_15Yl0OpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_35VEUOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
         <children xsi:type="menu:MenuSeparator" xmi:id="_RYpwMNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.14"/>
         <children xsi:type="menu:HandledMenuItem" xmi:id="_27b4sOpYEeOdl_8Ukczffw" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
@@ -268,6 +270,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_-tUZADQ4EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handler.4" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddNewLemmaSubEntryHandler" command="_4O0rkDQ4EeSUHvWJHIXOXA"/>
     <elements xsi:type="commands:Handler" xmi:id="_QMztUMGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.handler.5" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.NavigatorParametrizedFilterHandler" command="_FW7v8MGUEeSSoMDqJYVnow"/>
     <elements xsi:type="commands:Handler" xmi:id="_WZCh4NeUEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handler.addComment" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.AddCommentToCorpusObjectHandler" command="_ppthUNeUEeSkNoCa1fqIXg"/>
+    <elements xsi:type="commands:Handler" xmi:id="_lh0kcOjjEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.handler.checkPassportCompletenessHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.CheckPassportCompletenessHandler" command="_fIZkQOjjEeSGc-cONqnFNw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_5YS8cJWEEeOpr8TW-P04BA" featurename="children" parentElementId="org.bbaw.bts.ui.main.handledtoolitem.new.menu">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_TIix8JWGEeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.0" label="New Corpus" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpus-add.png" command="_gUujYD_nEeOYuPzWUW3h3g"/>
@@ -335,7 +338,7 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_1n-NoNeVEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_41TFQNeVEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.5"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_3IWsMNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjp6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjp6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_5MP2kNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_6zVwMNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.11"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjtKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
@@ -375,7 +378,7 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Rx0CoNeVEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_hkFjuKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menuseparator.2"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_1eyGUNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_zJuTcNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_zJuTcNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjvKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_hkFjvaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menuseparator.3"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjvqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.moveObjectAmongProjectDBCollection" label="Move Object among Projects..." command="_DoUHkDTiEeS85dzIPjkaNA"/>
@@ -443,7 +446,7 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Ia79YNeWEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_P_rAgNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.8"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_Ci-VYNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="__Ifcs6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="__Ifcs6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="__Ifct6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_EaScUNefEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.12"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="__IfctaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
@@ -475,7 +478,7 @@
               <children xsi:type="menu:MenuSeparator" xmi:id="__Ifcx6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menuseparator.0"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcyKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.7" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcyaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcyqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcyqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="__Ifcy6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menuseparator.1"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="__IfczKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="__IfczaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.14" label="Open Conflict Dialog" command="_LECdIOpCEeO86qCMpbd0dw"/>
@@ -536,7 +539,7 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_dGK8sNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_jNJ9xaY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menuseparator.lemma.3"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9xqY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9yKY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.deletePermanently" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9yKY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.deletePermanently" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9x6Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.restore" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_jNJ9yaY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.menuseparator.1"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9yqY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.editUpdaters" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>
@@ -552,7 +555,7 @@
               <children xsi:type="menu:HandledMenuItem" xmi:id="_iU65gNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.addComment" label="Add Comment" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" command="_ppthUNeUEeSkNoCa1fqIXg"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_l-qnYNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.9"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_oBy8wNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.lemma.delete" label="Delete" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/delete.png" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
-              <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9z6Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanenty" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
+              <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ9z6Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.10" label="Delete Permanently" command="_lOfkUKkGEeOGFMwFKRY6Og"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ906Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.6" label="Restore" command="_3DHYgKRQEeO1QoiwGMOm0Q"/>
               <children xsi:type="menu:MenuSeparator" xmi:id="_q2nNwNeeEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.corpus.menuseparator.10"/>
               <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ90aY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.11" label="Edit Updaters/Readers" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/userrole.png" command="_0MnaMNm-EeO-3cFwhVZ23Q"/>

@@ -39,7 +39,6 @@ import org.bbaw.bts.ui.commons.filter.BTSObjectNameViewerFilter;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
-import org.bbaw.bts.ui.corpus.egy.commons.BTSEGYConstants;
 import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaEntryNameTranslationViewerFilter;
 import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
@@ -264,7 +263,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		});
 
 		lemmaName_text = new Text(grpLemma, SWT.BORDER | SWT.SEARCH);
-		lemmaName_text.setToolTipText("Lemma. Shows spelling of Lemmads.\nEnter search corpusObject and hit RETURN to filter proposals.");
+		lemmaName_text.setToolTipText("Lemma. Shows spelling of Lemmata.\nIn order to filter lemma proposals, \nenter search string and press RETURN.");
 		PromptSupport.setPrompt("Lemma", lemmaName_text);
 		lemmaName_text.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false, 1, 1));
@@ -735,7 +734,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Inject
 	@Optional
 	void eventReceivedClearLemmatizerDataEvents(
-			@EventTopic(BTSEGYConstants.EVENT_CLEAR_TOKEN_DATA + "/*") Object event) {
+			@EventTopic(BTSEGYUIConstants.EVENT_CLEAR_TOKEN_DATA + "/*") Object event) {
 		if (event instanceof String && event != null && ((String)event).endsWith("lemmatizer")) {
 			
 			sync.asyncExec(new Runnable() {

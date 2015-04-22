@@ -254,7 +254,13 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected
 			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
-			context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+			try {
+				context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+			} catch (Exception e1) {
+				context.declareModifiable(BTSPluginIDs.PREF_MAIN_CORPUS);
+				context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+				e1.printStackTrace();
+			}
 			dirty = true;
 		}
 		String selectedProjetsString = getActiveProjectSelectionsAsString();

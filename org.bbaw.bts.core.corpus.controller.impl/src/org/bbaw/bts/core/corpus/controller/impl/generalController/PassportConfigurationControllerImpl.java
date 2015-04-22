@@ -21,7 +21,12 @@ import org.bbaw.bts.core.commons.comparator.BTSConfigSortKeyLabelSorter;
 import org.bbaw.bts.core.corpus.controller.generalController.PassportConfigurationController;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntryGroup;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
@@ -156,6 +161,87 @@ public class PassportConfigurationControllerImpl implements
 		obj.addAll(strings);
 		filter.setObjects(obj);
 		return filter;
+	}
+
+	@Override
+	public int checkPassportCompleteness(BTSCorpusObject corpusObject) {
+		int requiredCounter = 0;
+		int completenessCounter = 0;
+		List<BTSConfigItem> categories = getPassportCategories(corpusObject);
+		for (BTSConfigItem category : categories)
+		{
+			BTSPassportEntry group = findMatchingEntryGroup(corpusObject.getPassport(), category);
+			int[] result = checkPassportCompletenssGroup(group, category, corpusObject);
+			
+		}
+		return 0;
+	}
+
+	private int[] checkPassportCompletenssGroup(BTSPassportEntry group,
+			BTSConfigItem category, BTSCorpusObject corpusObject) {
+		int requiredCounter = 0;
+		int completenessCounter = 0;
+		List<BTSConfig> filteredChildren = getFilteredChildren(category, corpusObject);
+		for (BTSConfig child : filteredChildren) {
+			if (child instanceof BTSConfigItem
+					&& !((BTSConfigItem) child).isIgnore()) 
+			{
+				BTSConfigItem childConfig = (BTSConfigItem) child;
+				if (BTSCoreConstants.PASSPORT_ENTRY_GROUP.equals(childConfig
+						.getType())) {
+
+					List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
+							group, childConfig, null, corpusObject.getPassport(),
+							BTSCoreConstants.PASSPORT_ENTRY_GROUP);
+				} else if (BTSCoreConstants.PASSPORT_ENTRY_ITEM
+						.equals(childConfig.getType())) {
+					List<BTSPassportEntry> childEntryGroups = findMatchingEntries(
+							group, childConfig, null, corpusObject.getPassport(),
+							BTSCoreConstants.PASSPORT_ENTRY_ITEM);
+				}
+				if (group != null)
+				{
+					
+				}
+			}
+		}
+		
+		return null;
+	}
+	
+	protected List<BTSPassportEntry> findMatchingEntries(
+			BTSPassportEntry parentEntryGroup, BTSConfigItem groupConfig,
+			BTSPassportEntry grandParentEntry, BTSPassport passport, String entryType) {
+		Assert.isNotNull(parentEntryGroup);
+		Assert.isNotNull(groupConfig);
+
+		List<BTSPassportEntry> entries = new Vector<BTSPassportEntry>();
+		for (BTSPassportEntry group : parentEntryGroup.getChildren()) {
+			if (group.getType() != null
+					&& group.getType().equals(groupConfig.getValue())) {
+				entries.add(group);
+			}
+		}
+		return entries;
+	}
+
+	@Override
+	public BTSPassportEntry findMatchingEntryGroup(BTSPassport passport,
+			BTSConfigItem category) {
+		Assert.isNotNull(passport);
+		Assert.isNotNull(category);
+
+		for (BTSPassportEntry group : passport.getChildren()) {
+			if (!category.isIgnore() && group.getType() != null
+					&& group.getType().equals(category.getValue())) {
+				return group;
+			}
+		}
+		BTSPassportEntryGroup defaultInput = BtsCorpusModelFactory.eINSTANCE
+				.createBTSPassportEntryGroup();
+		defaultInput.setType(category.getValue());
+		passport.getChildren().add(defaultInput);
+		return defaultInput;
 	}
 
 	

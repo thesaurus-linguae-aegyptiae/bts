@@ -2636,7 +2636,7 @@ rule__TextContent__Group__1__Impl
 :
 (
 { before(grammarAccess.getTextContentAccess().getGroup_1()); }
-(rule__TextContent__Group_1__0)?
+(rule__TextContent__Group_1__0)
 { after(grammarAccess.getTextContentAccess().getGroup_1()); }
 )
 

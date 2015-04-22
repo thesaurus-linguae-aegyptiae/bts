@@ -61,7 +61,7 @@ public class ProjectConnectionPage extends WizardPage
 
 		Label lblConntectionType = new Label(container, SWT.NONE);
 		lblConntectionType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblConntectionType.setText("Conntection Type");
+		lblConntectionType.setText("Connection Type");
 
 		txtConnectiontype = new Text(container, SWT.BORDER);
 		txtConnectiontype.setText("connectionType");

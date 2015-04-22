@@ -10,6 +10,7 @@ import javax.inject.Named;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
@@ -18,6 +19,8 @@ import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.core.commands.EHandlerService;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IStylingEngine;
 import org.eclipse.emf.common.command.CompoundCommand;
@@ -59,7 +62,7 @@ public class CorpusToolControl {
 	private BTSTextCorpus mainCorpus;
 
 	@PostConstruct
-	public void postConstruct(Composite composite, @Optional
+	public void postConstruct(@Optional Composite composite, @Optional
 			@Named(BTSPluginIDs.PREF_MAIN_CORPUS) BTSTextCorpus corpus) {
 		this.composite = composite;
 		this.mainCorpus = corpus;

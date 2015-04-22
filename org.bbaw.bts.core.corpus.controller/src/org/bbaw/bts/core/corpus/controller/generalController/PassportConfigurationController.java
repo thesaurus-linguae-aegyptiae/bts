@@ -5,6 +5,8 @@ import java.util.List;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassport;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 
 public interface PassportConfigurationController {
@@ -37,5 +39,10 @@ public interface PassportConfigurationController {
 
 	BTSObjectTypeSubtypeViewerFilter createObjectTypeSubtypeFilterByReferencedPath(
 			BTSCorpusObject corpusObject, BTSConfigItem itemConfig2);
+
+	int checkPassportCompleteness(BTSCorpusObject corpusObject);
+
+	BTSPassportEntry findMatchingEntryGroup(BTSPassport passport,
+			BTSConfigItem category);
 
 }

@@ -23,6 +23,7 @@ import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.emf.ecore.EClass;
 
 public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
@@ -70,10 +71,22 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 	}
 
 	private Map<String, List<BTSObjectSearchService>> loadSearchServices() {
-		IConfigurationElement[] config = ((IExtensionRegistry) context.get(IExtensionRegistry.class.getName()))
+		MApplication application = context.get(MApplication.class);
+		IEclipseContext ctx = null;
+		if (application != null)
+		{
+			ctx = application.getContext();
+		}
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		IConfigurationElement[] config = ((IExtensionRegistry) ctx.get(IExtensionRegistry.class.getName()))
 				.getConfigurationElementsFor(BTSCoreConstants.EXTENSION_POINT_SEARCH_SERVICE_FACTORY);
 		List<BTSObjectSearchService> services = new Vector<BTSObjectSearchService>(4);
 		Map<String, List<BTSObjectSearchService>> serviceMap = new HashMap<String, List<BTSObjectSearchService>>(10);
+		System.out.println("loadSearchServices. config.length " + config.length);
+
 		for (IConfigurationElement e : config)
 		{
 			Object o = null;
@@ -83,8 +96,10 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			System.out.println("loadSearchServices configuration Element " + o);
 			if (o != null && o instanceof BTSObjectSearchServiceFactory)
 			{
+				System.out.println("extension point BTSObjectSearchServiceFactory created");
 				services.addAll(((BTSObjectSearchServiceFactory) o).getSearchServices());
 			}
 		}
@@ -108,7 +123,8 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 				}
 			}
 		}
-		
+		System.out.println("loadSearchServices serviceMap size " + serviceMap.size());
+
 		return serviceMap;
 	}
 

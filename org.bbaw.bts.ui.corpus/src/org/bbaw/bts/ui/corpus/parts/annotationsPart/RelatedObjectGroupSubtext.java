@@ -93,7 +93,7 @@ public class RelatedObjectGroupSubtext extends RelatedObjectGroup {
 			}
 		}
 		composite.pack();
-		setGroupTitle("Glosse");
+		setGroupTitle("Subtext/Glosse");
 		setExpandBarIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_SUBTEXT));
 		setExpandBarBackground(BTSUIConstants.COLOR_WIHTE);
 	}

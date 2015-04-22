@@ -48,6 +48,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_q-7RUJy7EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.handler.openPart" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenPartHandler" command="_eRDQgJy7EeSiiMU2026qjA"/>
     <elements xsi:type="commands:Handler" xmi:id="_K3Dg8KroEeSL-KbihY0rDw" elementId="org.ramo.klevis.p4app.handler.0" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.InstallNewSoftwareHandler" command="_BdtzAKroEeSL-KbihY0rDw"/>
     <elements xsi:type="commands:Handler" xmi:id="_LiMvsKroEeSL-KbihY0rDw" elementId="org.ramo.klevis.p4app.handler.1" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.UninstallSoftwareHandler" command="_CnznkKroEeSL-KbihY0rDw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_fSVX4OgpEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.main.handler.openWebHelpHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenWebHelpHandler" command="_AjUs4OgpEeSGc-cONqnFNw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>
@@ -96,12 +97,14 @@
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_BdtzAKroEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.command.installNewSoftware" commandName="InstallNewSoftware" category="_CXsjwAWjEeOJR9LhfOAE5w"/>
     <elements xsi:type="commands:Command" xmi:id="_CnznkKroEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.command.uninstallNewSoftware" commandName="UninstallSoftware"/>
+    <elements xsi:type="commands:Command" xmi:id="_AjUs4OgpEeSGc-cONqnFNw" elementId="org.eclipse.ui.help.displayHelp" commandName="Open Help" category="_QsJKkOgpEeSGc-cONqnFNw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_x62dIAP9EeOVO9L3NDWRFg" featurename="categories" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Category" xmi:id="_R2MZsAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.category.database" name="Database"/>
     <elements xsi:type="commands:Category" xmi:id="_CXsjwAWjEeOJR9LhfOAE5w" elementId="org.eclipse.ui.category.edit" name="Edit"/>
     <elements xsi:type="commands:Category" xmi:id="__zwJgGcMEeOBmPSxTUuwxg" elementId="org.eclipse.ui.category.file" name="File"/>
     <elements xsi:type="commands:Category" xmi:id="_jAR_wJy7EeSiiMU2026qjA" elementId="org.eclipse.ui.category.window" name="Window"/>
+    <elements xsi:type="commands:Category" xmi:id="_QsJKkOgpEeSGc-cONqnFNw" elementId="org.eclipse.ui.category.help" name="help"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_lWcloAWjEeOJR9LhfOAE5w" featurename="children" parentElementId="org.eclipse.ui.preferences">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_9LST0AWjEeOJR9LhfOAE5w" elementId="org.bbaw.bts.ui.main.handledmenuitem.editConfiguration" label="Edit Configuration..." iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/configuration-edit.png" command="_EXssoAWjEeOJR9LhfOAE5w"/>
@@ -115,7 +118,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_-7UVEJv8EeSIPd7PzoRw-w" elementId="org.bbaw.bts.ui.main.handledmenuitem.changePassword" label="Change Password" command="_aoLj4JvgEeSIPd7PzoRw-w"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Help"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Open Webhelp" tooltip="Open webhelp in external browser" command="_AjUs4OgpEeSGc-cONqnFNw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_XwpxQL8iEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.9" label="Update Application" command="_HO_yQL8hEeOwdasqUpZnTA"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_TUSzAKroEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.handledmenuitem.installNewSoftware" label="Install new Software" command="_BdtzAKroEeSL-KbihY0rDw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_HT_QkKrtEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.handledmenuitem.uninstallSoftware" label="Uninstall Software" command="_CnznkKroEeSL-KbihY0rDw"/>

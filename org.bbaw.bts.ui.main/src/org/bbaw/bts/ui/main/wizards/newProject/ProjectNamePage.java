@@ -75,7 +75,7 @@ public class ProjectNamePage extends WizardPage
 
 		Label lblProjectPreffix = new Label(container, SWT.NONE);
 		lblProjectPreffix.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblProjectPreffix.setText("Project Preffix");
+		lblProjectPreffix.setText("Project Prefix");
 
 		txtPrefixtext = new Text(container, SWT.BORDER);
 		txtPrefixtext.setText("prefixText");

@@ -224,7 +224,8 @@ public class EmfModelHelper
 				{
 					if (!objectWithChanges.eGet(eAttribute).equals(target.eGet(eAttribute)))
 					{
-						target.eSet(getTarget(eAttribute), objectWithChanges.eGet(eAttribute));
+						Object o = objectWithChanges.eGet(eAttribute);
+						target.eSet(getTarget(eAttribute), o);
 					}
 				} else if (objectWithChanges.eIsSet(eAttribute))
 				{

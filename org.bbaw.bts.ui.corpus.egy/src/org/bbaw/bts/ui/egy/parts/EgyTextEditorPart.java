@@ -126,6 +126,7 @@ import org.eclipse.emf.common.command.CommandStackListener;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
@@ -709,25 +710,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				{
 					scrolledCompJSesh = new ScrolledComposite(tabFolder, SWT.HORIZONTAL
 							| SWT.VERTICAL);
-					scrolledCompJSesh.setMinWidth(100);
+					scrolledCompJSesh.setMinWidth(800);
 					scrolledCompJSesh.setMinHeight(400);
 					scrolledCompJSesh.setExpandHorizontal(true);
-
 					scrolledCompJSesh.setExpandVertical(true);
-					
 					tbtm5.setControl(scrolledCompJSesh);
 
 					final Composite comEmbeded = new Composite(scrolledCompJSesh,
 							SWT.EMBEDDED | SWT.NO_BACKGROUND | SWT.BORDER);
 					scrolledCompJSesh.setContent(comEmbeded);
-					scrolledCompJSesh.addControlListener(new ControlAdapter() {
-						@Override
-						public void controlResized(ControlEvent e) {
-							Rectangle r = scrolledCompJSesh.getClientArea();
-							scrolledCompJSesh.setMinSize(comEmbeded.computeSize(r.width,
-									SWT.DEFAULT));
-						}
-					});
+					
 					Frame frame = SWT_AWT.new_Frame(comEmbeded);
 
 					jseshEditor = new JMDCEditor();
@@ -903,18 +895,34 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		{
 			return true;
 		}
-		else if (resource.getErrors().size() == 2)
+		else
 		{
-			// exception: if errors only concern beginning and end of file
-			if (resource.getErrors().get(0).getMessage() != null 
-					&& resource.getErrors().get(0).getMessage().equals("extraneous input '\\r' expecting '§'")
-					&& resource.getErrors().get(1).getMessage() != null 
-					&& resource.getErrors().get(1).getMessage().equals("mismatched input '<EOF>' expecting '§'"))
+			boolean valid = true;
+			for (Diagnostic error : resource.getErrors())
 			{
-				return true;
+				// exception: if errors only concern beginning and end of file
+				if (error.getMessage() != null 
+						&& error.getMessage().equals("missing EOF at '\\r'"))
+				{
+					// nothing;
+				}
+				else if (error.getMessage() != null 
+						&& error.getMessage().equals("extraneous input '\\r' expecting '§'"))
+				{
+					// nothing
+				}
+				else if (error.getMessage() != null 
+						&& error.getMessage().equals("mismatched input '<EOF>' expecting '§'"))
+				{
+					// nothing
+				}
+				else
+				{
+					valid = false;
+				}
 			}
+			return valid;
 		}
-		return false;
 	}
 
 	/**
@@ -929,7 +937,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				.transformTextToJSeshMdCString(text2);
 		System.out.println(jseshMdc);
 		try {
-			jseshEditor.setMDCText(jseshMdc);
+			jseshEditor.setMDCText(jseshMdc + "-!"); // add line break
+		} catch (Exception e) {
+			logger.error(e);
+		}
+		try {
+			java.awt.Rectangle r = jseshEditor.getBounds();
+			System.out.println("rectangle r.width,	r.height " + r.width+ " " + r.height);
+			scrolledCompJSesh.getContent().setSize(r.width,	r.height + 50);
+			scrolledCompJSesh.setMinSize(r.width,
+					r.height + 50);
+			scrolledCompJSesh.layout();
 		} catch (Exception e) {
 			logger.error(e);
 		}

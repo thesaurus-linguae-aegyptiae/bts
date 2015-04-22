@@ -1065,9 +1065,19 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						}
 
 					} else if (item instanceof BTSMarker) {
-						glyphs.add(new String("\"" + item.getType() + "\""));
+						String m = item.getType().replace("[", "(");
+						m = m.replace("]", ")");
+
+						if (m.contains("lc"))
+						{
+							glyphs.add("-!");
+						}
+						glyphs.add(new String("\"" + m + "\""));
+
 					}
 					Collections.sort(glyphs, getGlyphsStringComparator());
+					int lineLength = 0;
+					boolean inBracket = false;
 					for (int i = 0; i < glyphs.size(); i++) {
 						Object o = glyphs.get(i);
 						String mdc = "";
@@ -1075,8 +1085,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 							mdc = ((BTSGraphic) o).getCode();
 						} else {
 							mdc = (String) o;
+//							if (i == 0 && mdc.startsWith("-!"))
+//							{
+//								mdc = mdc.substring(2);
+//							}
 						}
 						if (mdc == null) continue;
+						
 						if (result.length() == 0 || result.endsWith("-") || mdc.startsWith("-") || mdc.startsWith(":"))
 						{
 							result += mdc;
@@ -1084,6 +1099,28 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 						else
 						{
 							result += "-" + mdc;
+						}
+						if (mdc.contains("<") && !mdc.contains(">"))
+						{
+							inBracket = true;
+						}
+						else if (mdc.contains(">") && !mdc.contains("<"))
+						{
+							inBracket = false;
+						}
+						
+						lineLength = lineLength + mdc.length();
+						if (result.endsWith("-!"))
+						{
+							lineLength = 0;
+						}
+						else if (!inBracket && lineLength > 40)
+						{
+							if (!result.endsWith("-!"))
+							{
+								result += "-!";
+							}
+							lineLength = 0;
 						}
 						// if (!"".equals(mdc) && !mdc.endsWith(":")
 						// && !mdc.endsWith("*") && !mdc.endsWith("<")
@@ -1093,8 +1130,13 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					}
 
 				}
-				result += "-O-";
+				result += "-O-!";
 			}
+		}
+		result = result.replace("-!-!", "-!");
+		if (result.startsWith("-!"))
+		{
+			result = result.substring(2);
 		}
 		return result;
 	}
@@ -1454,7 +1496,123 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 
 	private boolean testTextValidAgainstGrammar(BTSText t) {
-		
+		if (t.getTextContent() == null || t.getTextContent().getTextItems().isEmpty()) return true;
 		return testTextValidAgainstGrammar(t.getTextContent(), t);
+	}
+
+
+
+	@Override
+	public int[] checkTextCompleteness(BTSText text) {
+		int lemma = 0;
+		int flex = 0;
+		int hiero = 0;
+		int wordTrans = 0;
+		int sentTrans = 0;
+		int [] results= new int[5];
+		
+		int wordCount = 0;
+		int SentenceCount = 0;
+		if (text.getTextContent() == null)
+		{
+			return results;
+		}
+		for (BTSTextItems textItems : text.getTextContent().getTextItems())
+		{
+			if (textItems instanceof BTSSenctence)
+			{
+				BTSSenctence sentence = (BTSSenctence) textItems;
+				SentenceCount++;
+				if (sentence.getTranslation() != null && sentence.getTranslation().getTranslation(null) != null)
+				{
+					sentTrans++;
+				}
+				for (BTSSentenceItem sentenceItem : sentence.getSentenceItems())
+				{
+					if (sentenceItem instanceof BTSWord)
+					{
+						wordCount++;
+						BTSWord w = (BTSWord) sentenceItem;
+						if (w.getLKey() != null && !"".equals(w.getLKey()))
+						{
+							lemma++;
+						}
+						
+						if (w.getFlexCode() != null && !"".equals(w.getFlexCode()))
+						{
+							flex++;
+						}
+						
+						if (w.getGraphics() != null && !w.getGraphics().isEmpty())
+						{
+							hiero++;
+						}
+						
+						if (w.getTranslation() != null && w.getTranslation().getTranslation(null) != null)
+						{
+							wordTrans++;
+						}
+					}
+				}
+			}
+		}
+		if (wordCount == 0)
+		{
+			return new int[]{100,100,100,100,100};
+		}
+		results[0] = (lemma * 100) / wordCount ;
+		results[1] = (flex * 100) / wordCount;
+		results[2] = (hiero * 100) / wordCount;
+		results[3] = (wordTrans * 100) / wordCount;
+		
+		results[4] = (sentTrans * 100) / SentenceCount;
+		return results;
+	}
+
+
+
+	@Override
+	public List<BTSText> listInAllInCompleteTexts(IProgressMonitor monitor) {
+			String[] params = new String[3];
+			List<BTSText> invalidtexts = new Vector<BTSText>();
+			String[] active_corpora= textService.getActive_corpora(null);
+			for (String active_corpus : active_corpora)
+			{
+				try {
+					do
+					{
+						List<BTSText> texts = textService.listChunks(100, params, active_corpus, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
+						if (texts == null) break;
+						for (BTSText t : texts)
+						{
+							if (monitor.isCanceled()) break;
+							checkAndFullyLoad(t, false);
+							monitor.worked(1);
+							if (!testTextComplete(t))
+							{
+								invalidtexts.add(t);
+							}
+							monitor.worked(1);
+						}
+						 params = new String[]{params[1], params[2], null};
+					}
+					while(params[1] != null);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			return invalidtexts;
+	}
+
+
+
+	private boolean testTextComplete(BTSText t) {
+		int[] completeness = checkTextCompleteness(t);
+		for (int i : completeness)
+		{
+			if (i < 100) return false;
+		}
+		return true;
 	}
 }

@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
+import org.bbaw.bts.btsmodel.BTSIDReservationObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
@@ -122,7 +123,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		// UTF-8
 		Resource resource = entity.eResource();
 		// check if entity has resource, that is if it was newly created or not
-		if (resource == null || resource.getURI() == null)
+		if (resource == null)
 		{
 			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
 			logger.info("Resource was null, object was newly created and is persisted for the first time: " + uri.path());
@@ -130,6 +131,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			resource.getContents().add(entity);
 			Map<URI, Resource> cache = ((ResourceSetImpl) connectionProvider.getEmfResourceSet()).getURIResourceMap();
 			addEntityToCache(uri, cache, entity);
+		}
+		else if (resource.getURI() == null)
+		{
+			URI uri = URI.createURI(getLocalDBURL() + "/" + path + "/" + entity.get_id());
+			resource.setURI(uri);
 		}
 		while (resource.getContents().size() > 1)
 		{
@@ -1318,12 +1324,12 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		{
 			source = (E) resource.getContents().get(0);
 		}
-		if (source != null) {
+		if (source != null && !(source instanceof BTSIDReservationObject)) {
 			entity = EmfModelHelper.mergeChanges(entity, source);
-			if (entity.get_id().equals("IBQDJYpzXIU3KUTNqZEDsSLP8AE")) // FIXME remove anno
-			{
-				System.out.println("HI");
-			}
+//			if (entity.get_id().equals("IBQDJYpzXIU3KUTNqZEDsSLP8AE")) // FIXME remove anno
+//			{
+//				System.out.println("HI");
+//			}
 			if(checkForConflicts)
 			{
 				checkForConflicts((E) entity,entity.getDBCollectionKey());

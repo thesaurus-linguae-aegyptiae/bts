@@ -128,7 +128,7 @@ ruleTextContent returns [EObject current=null]
 	    }
 
 )
-))*)?)
+))*))
 ;
 
 

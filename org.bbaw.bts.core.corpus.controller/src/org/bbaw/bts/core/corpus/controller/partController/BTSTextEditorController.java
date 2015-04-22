@@ -92,4 +92,8 @@ public interface BTSTextEditorController
 	List<BTSText> listAllTexts(IProgressMonitor monitor);
 
 	List<BTSText> listInAllInvalidTexts(IProgressMonitor monitor);
+
+	int[] checkTextCompleteness(BTSText text);
+
+	List<BTSText> listInAllInCompleteTexts(IProgressMonitor monitor);
 }

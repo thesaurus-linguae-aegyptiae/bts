@@ -24,10 +24,12 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
@@ -158,7 +160,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	private Shell parentShell;
 	private ViewerSorter sorter;
 	
-	@Inject
+//	@Inject
 	private IEclipseContext context;
 	
 	@Inject
@@ -174,7 +176,10 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 	@PostConstruct
 	public void postConstruct(Composite parent) {
 		if (parentShell == null ) parentShell = new Shell();
-
+		// important to get the right context which is also injected into toolcontrol
+		// and which listens to modifications
+		context = StaticAccessController.getContext();
+		context.declareModifiable(BTSPluginIDs.PREF_MAIN_CORPUS);
 		parent.setLayout(new GridLayout());
 		((GridLayout) parent.getLayout()).marginHeight = 0;
 		((GridLayout) parent.getLayout()).marginWidth = 0;
@@ -230,7 +235,7 @@ public class CorpusNavigatorPart implements ScatteredCachingPart, SearchViewer, 
 		// create main tab item
 		mainTabItem = new CTabItem(tabFolder, SWT.NONE);
 		mainTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
-				BTSResourceProvider.IMG_THSS));
+				BTSResourceProvider.IMG_CORPORA));
 		mainTabItem.setText("Corpora");
 		mainTabItem.setData("key", "main");
 
@@ -434,7 +439,13 @@ labelProvider));
 			ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
 			// update instance scope so that new value is injected
 			InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, selectedTextCorpus.getDBCollectionKey()+ "_" + selectedTextCorpus.getCorpusPrefix());
-			context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+			try {
+				context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+			} catch (Exception e1) {
+				context.declareModifiable(BTSPluginIDs.PREF_MAIN_CORPUS);
+				context.modify(BTSPluginIDs.PREF_MAIN_CORPUS, selectedTextCorpus);
+				e1.printStackTrace();
+			}
 			mainTextCorpus = selectedTextCorpus;
 			try {
 				ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").flush();
@@ -747,7 +758,10 @@ labelProvider));
 	@Inject
 	@Optional
 	void eventReceivedAdd(@EventTopic("model_corpus_add/*") BTSObject object) {
-		if ((object instanceof BTSCorpusObject) && !(object instanceof BTSAnnotation)
+		if ((object instanceof BTSCorpusObject) 
+				&& !(object instanceof BTSAnnotation)
+				&& !(object instanceof BTSLemmaEntry)
+				&& !(object instanceof BTSThsEntry)
 				&& selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSCorpusObject) {
 			corpusNavigatorController.addRelation((BTSCorpusObject) object,
@@ -776,6 +790,14 @@ labelProvider));
 			if (notification.getObject() instanceof BTSComment)
 			{
 				// comment, do nothing
+			}
+			else if (notification.getObject() instanceof BTSLemmaEntry)
+			{
+				// BTSLemmaEntry, do nothing
+			}
+			else if (notification.getObject() instanceof BTSThsEntry)
+			{
+				// BTSThsEntry, do nothing
 			}
 			else if (notification.getObject() instanceof BTSTextCorpus)
 			{
@@ -996,5 +1018,5 @@ labelProvider));
 		    }
 		
 	}
-
+	
 }

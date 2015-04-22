@@ -12,6 +12,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.ui.model.application.MApplication;
 
 public class GeneralMoveObjectAmongProjectsServiceImpl implements
 		GeneralMoveObjectAmongProjectsService {
@@ -32,7 +33,17 @@ public class GeneralMoveObjectAmongProjectsServiceImpl implements
 
 	private MoveObjectsAmongProjectDBCollectionsServiceFactory getMoveServiceFactoryForObject(
 			Object object) {
-		IConfigurationElement[] config = ((IExtensionRegistry) context.get(IExtensionRegistry.class.getName()))
+		MApplication application = context.get(MApplication.class);
+		IEclipseContext ctx = null;
+		if (application != null)
+		{
+			ctx = application.getContext();
+		}
+		if (ctx == null)
+		{
+			ctx = context;
+		}
+		IConfigurationElement[] config = ((IExtensionRegistry) ctx.get(IExtensionRegistry.class.getName()))
 				.getConfigurationElementsFor(BTSCoreConstants.EXTENSION_POINT_MOVE_OBJECT_SERVICE_FACTORY);
 		for (IConfigurationElement e : config)
 		{
@@ -62,7 +73,10 @@ public class GeneralMoveObjectAmongProjectsServiceImpl implements
 		{
 			projectPrefix = targetDBCollectionPath.split("_")[0];
 		}
-		object.setProject(projectPrefix);
+		if (!object.getProject().equals(projectPrefix))
+		{
+			object.setProject(projectPrefix);
+		}
 		if (service != null)
 		{
 			return service.move(object, targetDBCollectionPath, sourceDBCollectionPath);

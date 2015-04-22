@@ -28,6 +28,7 @@
       </menus>
       <toolbar xmi:id="_aUjDIDptEeS2IaZF3I1DjA" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4">
         <children xsi:type="menu:HandledToolItem" xmi:id="_MdIisJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.loadLemmata" label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-load.png" tooltip="Load Lemmata of Text" command="_AHc_cJ_LEeS8kttfrCiCZg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_1uMbgOjaEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.18" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/text-thumb-up.png" tooltip="Check Text Lemma, Flexcode..." command="_gxso4OjZEeSGc-cONqnFNw"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_y9kDIJ_tEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.1"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_wCpCkJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.9" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotation-add.png" tooltip="Add Annotation" command="_ogEtgP0_EeOsAKche49RIg"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_2lIfMJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem." label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/rubrum-add.png" tooltip="Add Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
@@ -47,6 +48,8 @@
     <elements xsi:type="commands:Command" xmi:id="_Yy_4YK1OEeS6odLRB00pOw" elementId="org.bbaw.bts.ui.corpus.egy.command.onlyInvalidTexts" commandName="Filter only invalid Texts" category="_O6qLsF2gEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_3NCxwMvTEeSh94K7I1pyVA" elementId="org.bbaw.bts.ui.corpus.egy.command.filterOnlyInvalidLemmata" commandName="filterOnlyInvalidLemmata" category="_O6qLsF2gEeOwE8UUrLWumA"/>
     <elements xsi:type="commands:Command" xmi:id="_Sn96kNhxEeS0QuN0_feJEg" elementId="org.bbaw.bts.ui.corpus.egy.command.openLemmaEntry" commandName="openLemmaEntry" category="_O6qLsF2gEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_gxso4OjZEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.egy.command.checkText" commandName="Check Text" category="_O6qLsF2gEeOwE8UUrLWumA"/>
+    <elements xsi:type="commands:Command" xmi:id="_0u1H4OjoEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.egy.command.filterOnlyIncompleteTexts" commandName="filterOnlyIncompleteTexts" category="_O6qLsF2gEeOwE8UUrLWumA"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_n8FzEEt8EeO3HNJi0pp4Qg" featurename="handlers" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Handler" xmi:id="_sw17gEt8EeO3HNJi0pp4Qg" elementId="org.bbaw.bts.ui.corpus.egy.handler.insertTextModel" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.test.InsertTextModelElementHandler" command="_l81REEt8EeO3HNJi0pp4Qg"/>
@@ -57,6 +60,8 @@
     <elements xsi:type="commands:Handler" xmi:id="_deL1IK1OEeS6odLRB00pOw" elementId="org.bbaw.bts.ui.corpus.egy.handler.filterOnlyInvalidTexts" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.FilterOnlyInvalidTextsHandler" command="_Yy_4YK1OEeS6odLRB00pOw"/>
     <elements xsi:type="commands:Handler" xmi:id="_-AiroMiuEeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.egy.handler.removeTokenDataHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.ClearTokenDataHandler" command="_Bfb0YMivEeS2i8kQlGMs6w"/>
     <elements xsi:type="commands:Handler" xmi:id="_7-UvcMvTEeSh94K7I1pyVA" elementId="org.bbaw.bts.ui.corpus.egy.handler.filterOnlyInvalidLemmataHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.FilterOnlyInvalidLemmataHandler" command="_3NCxwMvTEeSh94K7I1pyVA"/>
+    <elements xsi:type="commands:Handler" xmi:id="_nwK24OjZEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.egy.handler.checkTextHandler" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.CheckTextHandler" command="_gxso4OjZEeSGc-cONqnFNw"/>
+    <elements xsi:type="commands:Handler" xmi:id="_4GxUEOjoEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.egy.handler.filterOnlyIncompleteTextsHanlder" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.handlers.FilterOnlyIncompleteTextsHandler" command="_0u1H4OjoEeSGc-cONqnFNw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_2eHxkFKtEeONtNt_OwxAsQ" featurename="children" parentElementId="org.bbaw.bts.corpus.text.partstack.middle.bottom" positionInList="after:org.bbaw.bts.ui.corpus.part.passportEditorPart">
     <elements xsi:type="basic:Part" xmi:id="_QSWNcH94EeOqT_H8zUFprA" elementId="org.bbaw.bts.ui.corpus.egy.part.lemmatizer" containerData="0" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyLemmatizerPart" label="Lemmatizer" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemmatizer.png" tooltip="Lemmatizer" closeable="true">
@@ -147,7 +152,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_Z8Xe0dh9EeS0QuN0_feJEg" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openLemmaEntry" label="Open Lemma Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma.png" command="_Sn96kNhxEeS0QuN0_feJEg"/>
       </menus>
       <toolbar xmi:id="_5JNokaY5EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.2">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_tET9MKZCEeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.12" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-ok.png" tooltip="Confirm current lemma editing and continue to next lemma." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_tET9MKZCEeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.12" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-ok.png" tooltip="Confirm and continue." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_dzowMMi3EeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.16" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemmatizer-delete.png" tooltip="Remove Lemma Information" command="_Bfb0YMivEeS2i8kQlGMs6w"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_sXFq0KZCEeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.2"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_5JNokqY5EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
@@ -161,7 +166,7 @@
     <elements xsi:type="basic:Part" xmi:id="_-YsnKKY5EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.part.hierotw" containerData="5" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter" label="HTW" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw.png" tooltip="Hieroglyph Type Writer" closeable="true">
       <toolbar xmi:id="_-YsnLKY5EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.3">
         <children xsi:type="menu:HandledToolItem" xmi:id="_08ilcMi3EeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.17" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw-delete.png" tooltip="Remove Hieroglyph Data" command="_Bfb0YMivEeS2i8kQlGMs6w"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_guXewKZDEeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.13" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw-ok.png" tooltip="Confirm current hieroglyph editing and continue to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_guXewKZDEeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.13" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw-ok.png" tooltip="Confirm and continue." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_gGfmcKZDEeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.4"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_-YsnLqY5EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_-YsnMKY5EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.1" label="|&lt;" tooltip="Move selection to start of line." command="_k0JQkIJ4EeOX95-b2sMk-w"/>
@@ -179,7 +184,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_NFqvoNhxEeS0QuN0_feJEg" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.openLemmaEntry" label="Open Lemma Entry" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma.png" command="_Sn96kNhxEeS0QuN0_feJEg"/>
       </menus>
       <toolbar xmi:id="_RqZwAKemEeSw3JFQ-brTMw" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.5">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_L6LTYKiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.12" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-ok.png" tooltip="Confirm current lemma editing and continue to next lemma." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_L6LTYKiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.12" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-ok.png" tooltip="Confirm and continue." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_ZOQggMi3EeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.16" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemmatizer-delete.png" tooltip="Remove Lemma Information" command="_Bfb0YMivEeS2i8kQlGMs6w"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_Mg244KiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.2"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_M9ubEKiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
@@ -192,7 +197,7 @@
     </elements>
     <elements xsi:type="basic_1:PartDescriptor" xmi:id="_TjpwoKemEeSw3JFQ-brTMw" elementId="org.bbaw.bts.ui.corpus.egy.part.hierotw" label="HTW" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw.png" tooltip="Hieroglyph Type Writer" closeable="true" contributionURI="bundleclass://org.bbaw.bts.ui.corpus.egy/org.bbaw.bts.ui.egy.parts.EgyHieroglyphenTypeWriter">
       <toolbar xmi:id="_Yc9o8KemEeSw3JFQ-brTMw" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.6">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_GAcf4KiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.13" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw-ok.png" tooltip="Confirm current hieroglyph editing and continue to next word." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_GAcf4KiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.13" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw-ok.png" tooltip="Confirm and continue." command="_qNsvMIJ4EeOX95-b2sMk-w"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_xSFF4Mi3EeS2i8kQlGMs6w" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.17" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/hieroglyphetw-delete.png" tooltip="Remove Hieroglyph Data" command="_Bfb0YMivEeS2i8kQlGMs6w"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_GigrIKiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.4"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_G5IbYKiOEeSiSIb2uOkfLQ" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.0" label="||&lt;" tooltip="Move selection to start of document." command="_bJS74IJ4EeOX95-b2sMk-w"/>
@@ -229,6 +234,7 @@
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_35j9MK1NEeS6odLRB00pOw" featurename="children" parentElementId="org.bbaw.bts.ui.corpus.menu.filter" positionInList="50">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_Bi-HcK1OEeS6odLRB00pOw" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.filterOnlyInvalidTexts" label="Filter only invalid Texts" command="_Yy_4YK1OEeS6odLRB00pOw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_uspjAOjoEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.filterOnlyIncompleteTexts" label="Filter only incomplete Texts" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/text-thumb-up.png" command="_0u1H4OjoEeSGc-cONqnFNw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_CdQhwMvUEeSh94K7I1pyVA" featurename="children" parentElementId="org.bbaw.bts.ui.lemma.menu.filter">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_Ryw54MvZEeSh94K7I1pyVA" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.filterOnlyInvalidLemmata" label="Filter only invalid Lemmata" command="_3NCxwMvTEeSh94K7I1pyVA"/>

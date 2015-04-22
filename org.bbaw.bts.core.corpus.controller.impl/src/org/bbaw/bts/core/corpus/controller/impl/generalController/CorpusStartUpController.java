@@ -26,7 +26,9 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 	private BTSTextCorpusService textCorpusService;
 	@Inject
 	private CorpusObjectService corpusObjectService;
+	
 	private Object main_project_key;
+	@Inject
 	private IEclipseContext context;
 	private Logger logger;
 
@@ -34,11 +36,12 @@ public class CorpusStartUpController implements ExtensionStartUpController {
 	public void startup() {
 		
 		context = StaticAccessController.getContext();
-		MApplication application = context.get(MApplication.class);
-		if (application != null)
-		{
-			context = application.getContext();
-		}
+//		MApplication application = context.get(MApplication.class);
+//		if (application != null)
+//		{
+//			System.out.println("CorpusStartUpController context from application");
+//			context = application.getContext();
+//		}
 		ContextInjectionFactory.inject(this, context);
 //		textCorpusService = context.get(BTSTextCorpusService.class);
 		logger = context.get(Logger.class);

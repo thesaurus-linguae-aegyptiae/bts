@@ -236,8 +236,7 @@ public static final String OBJ_DESC_ERROR = NAME_PREFIX + "ERROR";
 				e.printStackTrace();
 			}
 		}
-//		String path =  "file://C:/Dokumente und Einstellungen/plutte/git/xtext_2.4.x/org.eclipse.xtext/plugins/org.eclipse.xtext.ui/" + prefix + name; //$NON-NLS-1$
-		System.out.println("path  " + path);
+		System.out.println("XTextPluginImages makeImageURL path  " + path);
 
 		URL result = null;
 		try {
