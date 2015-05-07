@@ -1412,9 +1412,105 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					- 1;
 			shiftSelection(shift, false);
 		}
+		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNLEMMATIZED)) {
+			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, true);
+			if (figure != null)
+			{
+				setSelectionInternal(figure);
+			}
+		}
+		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNHIEROGLYPHED)) {
+			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, false);
+			if (figure != null)
+			{
+				setSelectionInternal(figure);
+			}
+		}
 		
 
 	}
+
+	private ElementFigure findUnprocessedWordFigure(int newIndex, boolean unlemmatized) {
+		ElementFigure figure = null;
+		if (newIndex >= currentLineFigure.getChildren().size()) {
+			if (lineIndex < container.getChildren().size() - 1) {
+				lineIndex++;
+				currentLineFigure = lineMap.get(lineIndex);
+				newIndex = 0;
+			}
+		} else if (newIndex < 0) {
+			if (lineIndex > 0) {
+				lineIndex--;
+				currentLineFigure = lineMap.get(lineIndex);
+				newIndex = currentLineFigure.getChildren().size() - 1;
+			}
+		}
+		figure = findElementFigure(newIndex);
+		while (!unprocessedWord(figure, unlemmatized))
+		{
+			newIndex = newIndex + 1;
+			if (newIndex >= currentLineFigure.getChildren().size()) {
+				if (lineIndex < container.getChildren().size() - 1) {
+					lineIndex++;
+					currentLineFigure = lineMap.get(lineIndex);
+					newIndex = 0;
+				}
+				else
+				{
+					break;
+				}
+			} else if (newIndex < 0) {
+				if (lineIndex > 1) {
+					lineIndex--;
+					if (lineIndex < 1)break;
+					currentLineFigure = lineMap.get(lineIndex);
+					newIndex = currentLineFigure.getChildren().size() - 1;
+				}
+				else
+				{
+					break;
+				}
+			}
+			else
+			{
+				currentLineFigure = lineMap.get(lineIndex);
+			}
+			figure = findElementFigure(newIndex);
+			if (figure == null) break;
+		}
+		if (figure instanceof WordFigure)
+		{
+			return figure;
+		}
+		else if (ElementFigure.SENTENCE_END.equals(figure.getType()) && lineIndex == lineMap.size() - 1)
+		{
+			// if it is the very last figure!
+			return figure;
+		}
+		return null;
+	}
+
+	private boolean unprocessedWord(ElementFigure figure, boolean unlemmatized) {
+		if (figure instanceof WordFigure)
+		{
+			Object o = ((WordFigure)figure).getModelObject();
+			if (o instanceof BTSWord)
+			{
+				BTSWord w = (BTSWord) o;
+				if (unlemmatized)
+				{
+					return (w.getLKey() == null || w.getLKey().trim().length() == 0);
+				}
+				else
+				{
+					return (w.getGraphics() == null || w.getGraphics().isEmpty());
+				}
+			}
+		}
+		return false;
+	}
+
+	
 
 	private void refreshFigureFromModel(IFigure figure, BTSWord word) {
 		if (figure instanceof WordFigure)

@@ -66,6 +66,10 @@ public class BTSUIConstants {
 	/** The Constant EVENT_TEXT_SELECTION_ALL_END. */
 	public static final String EVENT_TEXT_SELECTION_ALL_END = "event_text_selection/doc_end";
 	
+	public static final String EVENT_TEXT_SELECTION_NEXT_UNLEMMATIZED =  "event_text_selection/nextUnlemmatized";
+
+	public static final String EVENT_TEXT_SELECTION_NEXT_UNHIEROGLYPHED = "event_text_selection/nextUnhieroglyphed";
+
 	/** The Constant EVENT_TEXT_SELECTION. */
 	public static final String EVENT_TEXT_SELECTION = "event_text_selection";
 	
@@ -209,5 +213,7 @@ public class BTSUIConstants {
 	public static final Color COLOR_DB_MANAGER_STATUS_OK = _resources.createColor(new RGB(191, 255, 191));
 
 	public static final Color COLOR_BACKGROUND_GREY = _resources.createColor(new RGB(155, 155, 155));
+
+
 
 }
