@@ -60,6 +60,7 @@ public class BTSEGYUIConstants {
 	public static final String SIGN_TEXT_SHOW_LINE_WIDTH = "sign-text-editor_line_width";
 	public static final String PREF_LEMMATIZER_FELXION_DEFAULT = "pref_lemmatizer_flexion_default";
 	public static final String EVENT_CLEAR_TOKEN_DATA = "event_clear_token_data";
+	public static final String PREF_LEMMATIZER_AUTO_LEMMA_PROPOSAL_SELECTION = "pref_lemmatizer_auto_lemma_proposal_selection";
 
 	private BTSEGYUIConstants(){}
 }
