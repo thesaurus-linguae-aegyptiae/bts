@@ -6,6 +6,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 import java.util.Collection;
 import java.util.List;
 
+import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -143,9 +144,25 @@ Display
 		{
 			label += "{" + typeSubtype + "}";
 		}
+		String bibliography = getBibliographyString(object);
+		if (bibliography != null && !"".equals(bibliography))
+		{
+			label += " bib: " + bibliography;
+		}
 		return label == null || label.length() == 0 ? getString("_UI_BTSLemmaEntry_type") : label;
 	}
 
+
+	private String getBibliographyString(Object object) {
+		if (object instanceof BTSCorpusObject)
+		{
+			BTSCorpusObject o = (BTSCorpusObject) object;
+			if (o.getPassport() == null) return null;
+			String str = o.getPassport().getPassportEntryStringValueByPath("bibliography>>bibliographical_text_field");
+			return str;
+		}
+		return null;
+	}
 
 	/**
 	 * This returns the label styled text for the adapted class.

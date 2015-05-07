@@ -448,7 +448,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		((GridLayout) composite.getLayout()).marginHeight = 0;
 		((GridLayout) composite.getLayout()).marginWidth = 0;
 		{
-			tabFolder = new CTabFolder(composite, SWT.BORDER | SWT.BOTTOM);
+			tabFolder = new CTabFolder(composite, SWT.BORDER);
+			tabFolder.setSimple(false);
 			tabFolder.setLayoutData(new GridData(GridData.FILL_BOTH));
 			tabFolder.addSelectionListener(new SelectionAdapter() {
 
@@ -2334,41 +2335,41 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	private void processModelUpdate(BTSModelUpdateNotification notification,
 			String id) {
-		if (notification.getObject() instanceof BTSObject)
-		{
-			if (relatingObjects != null)
-			{
-				String state = ((BTSObject)notification.getObject()).getState();
-				if (BTSConstants.OBJECT_STATE_ACTIVE.equals(state))
-				{
-					if (!relatingObjects.contains(notification.getObject())) 
-					{
-						relatingObjects.add((BTSObject) notification.getObject());
+		if (notification.getObject() instanceof BTSAnnotation
+				|| notification.getObject() instanceof BTSComment
+				|| notification.getObject() instanceof BTSText) {
+			if (relatingObjects != null) {
+				String state = ((BTSObject) notification.getObject())
+						.getState();
+				if (BTSConstants.OBJECT_STATE_ACTIVE.equals(state)) {
+					if (!relatingObjects.contains(notification.getObject())) {
+						relatingObjects.add((BTSObject) notification
+								.getObject());
 					}
-				}
-				else
-				{
-					relatingObjects.remove((BTSObject) notification.getObject());
+				} else {
+					relatingObjects
+							.remove((BTSObject) notification.getObject());
 				}
 			}
-		}
-		switch (tabFolder.getSelectionIndex()) {
-		case 0: {
-			addAnnotationToTranscription(notification);
-			addAnnotationToSignText(notification);
+			switch (tabFolder.getSelectionIndex()) {
+			case 0: {
+				addAnnotationToTranscription(notification);
+				addAnnotationToSignText(notification);
 
-			break;
+				break;
+			}
+			case 1: {
+				addAnnotationToTranscription(notification);
+				addAnnotationToSignText(notification);
+				break;
+			}
+			case 2: {
+				// addAnnotationToJSesh(notification);
+				break;
+			}
+			}
 		}
-		case 1: {
-			addAnnotationToTranscription(notification);
-			addAnnotationToSignText(notification);
-			break;
-		}
-		case 2: {
-			// addAnnotationToJSesh(notification);
-			break;
-		}
-		}
+		
 
 	}
 

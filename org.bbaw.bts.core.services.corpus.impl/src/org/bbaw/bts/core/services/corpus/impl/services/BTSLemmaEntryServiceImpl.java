@@ -27,6 +27,7 @@ import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
@@ -72,7 +73,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		entry.setRevisionState(lemmaReviewState);
 		entry.setProject(main_lemmaList_key);
 		super.setId(entry, entry.getDBCollectionKey());
-		super.setRevision(entry);
+		super.addRevisionStatement(entry);
 
 		return entry;
 	}
@@ -210,11 +211,25 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor) {
 		String chars = processWordChars(word);
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.matchQuery("name",
-				chars));
+		// add .*
+		if (chars.contains("-"))
+		{
+			query.setQueryBuilder(QueryBuilders.matchQuery("name",
+					chars).operator(Operator.AND));
+		}
+		else
+		{
+			query.setQueryBuilder(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchQuery("name",chars).operator(Operator.AND))
+					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
+					);
+		}
+		
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		
+		
 		children = lemmaFilterReviewState(children);
 		return filter(children);
 	}
@@ -275,6 +290,18 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		{
 			chars = chars.replaceAll(b, "");
 		}
+		
+		// composita
+		if (chars.contains("-"))
+		{
+//			chars = chars.replaceAll("-", " AND ");
+		}
+		else
+		{
+			// add .*
+//			chars += " OR " + chars + ".*";
+		}
+		System.out.println("search for lemma proposals: "  + chars);
 		return chars;
 	}
 

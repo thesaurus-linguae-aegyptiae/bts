@@ -642,7 +642,13 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	@Override
 	public String getLabelOfTypeSubtypeString(BTSObject object) {
-		return configService. getLabelOfTypeSubtypeString(object);
+		return configService.getLabelOfTypeSubtypeString(object);
+	}
+
+	@Override
+	public boolean objectTypesPathsContainsObjectype(
+			Map<String, List<String>> ownerTypesMap, BTSObject object) {
+		return configService.objectTypesPathsContainsObjectype(ownerTypesMap, object);
 	}
 
 

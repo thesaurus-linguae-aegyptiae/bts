@@ -3,10 +3,10 @@
    <feature url="features/org.bbaw.bts.e4.p2.feature_1.0.0.qualifier.jar" id="org.bbaw.bts.e4.p2.feature" version="1.0.0.qualifier" os="linux,macosx,win32" ws="carbon,cocoa,gtk,win32" arch="x86,x86_64">
       <category name="org.bbaw.bts"/>
    </feature>
-   <feature url="features/org.bbaw.bts.app.feature_0.0.3.qualifier.jar" id="org.bbaw.bts.app.feature" version="0.0.3.qualifier" os="linux,macosx,win32" ws="carbon,cocoa,gtk,win32" arch="x86,x86_64">
+   <feature url="features/org.bbaw.bts.app.feature_1.0.6.qualifier.jar" id="org.bbaw.bts.app.feature" version="1.0.6.qualifier" os="linux,macosx,win32" ws="carbon,cocoa,gtk,win32" arch="x86,x86_64">
       <category name="org.bbaw.bts"/>
    </feature>
-   <feature url="features/org.bbaw.bts.corpus.egy.feature_0.0.3.qualifier.jar" id="org.bbaw.bts.corpus.egy.feature" version="0.0.3.qualifier" os="linux,macosx,win32" ws="carbon,cocoa,gtk,win32" arch="x86,x86_64">
+   <feature url="features/org.bbaw.bts.corpus.egy.feature_0.0.6.qualifier.jar" id="org.bbaw.bts.corpus.egy.feature" version="0.0.6.qualifier">
       <category name="org.bbaw.bts"/>
    </feature>
    <category-def name="org.bbaw.bts" label="Berlin Text System"/>

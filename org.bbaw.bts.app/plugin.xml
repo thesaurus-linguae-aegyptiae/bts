@@ -13,7 +13,7 @@
          </property>
          <property
                name="cssTheme"
-               value="org.bbaw.bts.app.theme.olive">
+               value="org.bbaw.bts.app.theme.grey">
          </property>
          <property
                name="appName"
@@ -35,19 +35,19 @@
    <extension
          point="org.eclipse.e4.ui.css.swt.theme">
       <theme
-            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/olive.css"
-            id="org.bbaw.bts.app.theme.olive"
-            label="Olive Theme">
+            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/grey.css"
+            id="org.bbaw.bts.app.theme.grey"
+            label="Grey Theme">
       </theme>
       <theme
-            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/olive_big.css"
-            id="org.bbaw.bts.app.theme.oliveBig"
-            label="Olive Big Theme">
+            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/grey_big.css"
+            id="org.bbaw.bts.app.theme.greyBig"
+            label="Grey Big Theme">
       </theme>
       <theme
-            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/olive_extra_big.css"
-            id="org.bbaw.bts.app.theme.oliveExtraBig"
-            label="Olive Extra Big Theme">
+            basestylesheeturi="platform:/plugin/org.bbaw.bts.app/css/grey_extra_big.css"
+            id="org.bbaw.bts.app.theme.greyExtraBig"
+            label="Grey Extra Big Theme">
       </theme>
    </extension>
 

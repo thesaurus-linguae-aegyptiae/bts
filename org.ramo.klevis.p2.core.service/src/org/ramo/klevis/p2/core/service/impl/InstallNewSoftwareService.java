@@ -74,6 +74,7 @@ public class InstallNewSoftwareService implements IInstallNewSoftwareService {
 		}
 
 		if (uri == null)
+			System.out.println("InstallNewSoftwareService uri " + uriString);
 			try {
 				uri = new URI(uriString);
 			} catch (URISyntaxException e1) {

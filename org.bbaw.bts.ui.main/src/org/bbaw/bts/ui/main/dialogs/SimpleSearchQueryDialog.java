@@ -17,12 +17,14 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
+import org.elasticsearch.index.query.FilterBuilders;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Text text;
 	private BTSQueryRequest queryRequest;
 	private Button idButton;
+	private Button exactButton;
 
 	/**
 	 * Create the dialog.
@@ -55,6 +57,10 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		idButton.setText("Search for IDs");
 		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
+		exactButton = new Button(container, SWT.CHECK);
+		exactButton.setText("Search for exactly this string (equals not contains)");
+		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		
 		return area;
 	}
 
@@ -78,6 +84,13 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			{
 				queryRequest.setIdQuery(true);
 				queryRequest.setIdString(text.getText().trim());
+				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
+				queryRequest.setQueryId("timestamp-" + now.toString());
+			}
+			else if (exactButton.getSelection())
+			{
+				queryRequest.setQueryBuilder(QueryBuilders.filteredQuery(QueryBuilders.termQuery("_all", text.getText().trim()),
+						FilterBuilders.termFilter("name", text.getText().trim())));
 				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 				queryRequest.setQueryId("timestamp-" + now.toString());
 			}

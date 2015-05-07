@@ -1,49 +1,154 @@
-Label {
-  font: Verdana 8px;
-  color: black;
+.MTrimmedWindow { 
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
-Composite Label {
-  color: black;
+
+.MTrimmedWindow.topLevel { 
+    margin-top: 24px;
+    margin-bottom: 2px;
+    margin-left: 12px;
+    margin-right: 12px;
 }
-Text {
-  font: Verdana 8px;
+
+.MPartStack {
+    swt-tab-renderer: url('bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering');
+    swt-unselected-tabs-color: #FFFFFF #FFFFFF #FFFFFF 100% 100%;
+    swt-outer-keyline-color: #FFFFFF;
+	swt-inner-keyline-color: #FFFFFF;
+	font-size: 10;
+	swt-simple: false;
+	padding: 0px 10px 11px;
+	swt-mru-visible: false;
+	
+	 swt-shadow-visible: true;
+	 swt-shadow-color: #EDEACA;
 }
-/* Identifies only those SWT Text elements
-appearing within a Composite */
-Composite Text {
-  background-color: white;
-  color: black;
-}
-SashForm {
-  background-color: #c1d5ef;
-}
-/* background uses a gradient */
-.MTrimBar {
-  background-color: #e3efff #c1d5ef;
-  color: white;
-  font: Verdana 8px;
-}
+
 
 Shell {
-  background-color: #e3efff #c1d5ef 60%;
+  background-color: #F5F3ED #F0ECE0 30%;
+} 
+.MPartStack.active {
+	swt-unselected-tabs-color: #E6E3C3 #EDEACA #FFFFFF 100% 100%;
+    swt-outer-keyline-color: #BFCDA4;
+	swt-inner-keyline-color: #FFFFFF;
+	swt-tab-outline: #B6BCCC;
+}
+
+MPartStack.Composite {
+	swt-unselected-tabs-color: #E6E3C3 #EDEACA #FFFFFF 100% 100%;
+    swt-outer-keyline-color: #BFCDA4;
+	swt-inner-keyline-color: #FFFFFF;
+	swt-tab-outline: #B6BCCC;
+}
+
+#PerspectiveSwitcher  {
+	background-color: #F5F3ED #F0ECE0 100%;
+	eclipse-perspective-keyline-color: #A7B680 #A7B680;
+}
+
+CTabFolder {
+	swt-selected-tabs-background: red;
+	swt-outer-keyline-color: red;
+}
+CTabItem:selected { 
+	background-color: #E6E3C3;
 } 
 
-Toolbar {
-	 background-color: #e3efff #c1d5ef 60%;
+CTabItem {
+	font-style: normal;
+	font-weight: normal;
 }
 
-ToolBarElement {
-	 background-color: #e3efff #c1d5ef 60%;
+CTabItem.busy {
+	font-style: italic;
 }
 
-.MTrimBar#org-eclipse-ui-main-toolbar {
-    background-collor:  red;
+CTabItem.highlighted {
+	font-weight: bold;
+}
+Composite {
+	background-color: #FFFFFF;
+}
+ScrolledComposite {
+	background-color: #FFFFFF;
+}
+
+Group {
+	background-color: #FFFFFF;
+}
+
+PassportEntryItemEditor {
+	background-color: #FFFFFF;
+}
+PassportEntryGroupEditor {
+	background-color: #FFFFFF;
+}
+
+Label {
+	background-color: #FFFFFF;
+	
+}
+TableItem {
+	font-family: BBAWLibertine;
+	font-size: 12px;
+}
+Table{
+	font-family: BBAWLibertine;
+	font-size: 12px;
 }
 
 Button {
-	background-color: #e3efff;
-	border-color: red;
-	border-width: 6;
-	border-style: dotted;
-	color: #FF0000;
+	background-color: #FFFFFF;
 }
+
+* {
+	font-size: 12px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+	
+}
+Text {
+	background-color: #FFFFFF;
+}
+Link {
+	background-color: #FFFFFF;
+	
+}
+
+MTrimBar {
+	background-color: rgb(245, 243, 237);
+}
+MToolBar {
+	background-color: rgb(245, 243, 237);
+}
+
+MToolItem {
+	background-color: rgb(245, 243, 237);
+}
+CorpusToolControl {
+	background-color: rgb(245, 243, 237);
+}
+ProjectToolControl {
+	background-color: rgb(245, 243, 237);
+}
+UserToolcontrol {
+	background-color: rgb(245, 243, 237);
+}
+
+
+/* for AnnotationPart RelatedObjectGroup*/
+.unselected {
+	background-color: #FFFFFF;
+}
+
+.selected {
+	background-color: #E6E3C3;
+}
+
+RelatedObjectGroup.selected {
+	background-color: #E6E3C3;
+}
+
+

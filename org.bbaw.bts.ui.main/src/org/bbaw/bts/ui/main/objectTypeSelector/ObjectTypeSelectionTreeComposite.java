@@ -130,18 +130,29 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	}
 
 	protected void setEntrySelected(BTSObjectTypeTreeNode entry, boolean checked) {
-		CompoundCommand compoundCommand = new CompoundCommand();
-		org.eclipse.emf.common.command.Command command = SetCommand.create(
-				editingDomain, entry,
-				BtsviewmodelPackage.Literals.BTS_OBJECT_TYPE_TREE_NODE__SELECTED,
-				checked);
-		for (BTSObjectTypeTreeNode child : entry.getChildren()) {
-			setChildEntrySelected((BTSObjectTypeTreeNode) child, checked,
-					compoundCommand);
-		}
+		if (editingDomain != null)
+		{
+			CompoundCommand compoundCommand = new CompoundCommand();
 
-		compoundCommand.append(command);
-		editingDomain.getCommandStack().execute(compoundCommand);
+			org.eclipse.emf.common.command.Command command = SetCommand.create(
+					editingDomain, entry,
+					BtsviewmodelPackage.Literals.BTS_OBJECT_TYPE_TREE_NODE__SELECTED,
+					checked);
+			for (BTSObjectTypeTreeNode child : entry.getChildren()) {
+				setChildEntrySelected((BTSObjectTypeTreeNode) child, checked,
+						compoundCommand);
+			}
+	
+			compoundCommand.append(command);
+			editingDomain.getCommandStack().execute(compoundCommand);
+		}
+		else
+		{
+			entry.setSelected(checked);
+			for (BTSObjectTypeTreeNode child : entry.getChildren()) {
+				setEntrySelected((BTSObjectTypeTreeNode) child, checked);
+			}
+		}
 
 	}
 
@@ -184,13 +195,16 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 		}
 	}
 
-	public void setPathInput(BTSObjectTypeTreeNode path,
+	public void setPathInput(BTSConfigItem input, BTSObjectTypeTreeNode path,
 			EditingDomain editingDomain, BTSConfig objectTypesConfig) {
 		Assert.isNotNull(path);
 		inputPath = path;
+		inputConfigItem = input;
 		this.editingDomain = editingDomain;
 		treeViewer.setInput(inputPath);
-		treeViewer.setCheckedElements(getSelectedElements(inputPath));
+		Object[] obs = getSelectedElements(inputPath);
+		treeViewer.setCheckedElements(obs);
+		treeViewer.expandAll();
 	}
 
 	private Object[] getSelectedElements(BTSObjectTypeTreeNode processedPath) {
@@ -224,22 +238,33 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 				inputConfigItem.clearOwnerTypesMap();
 				if (allbutton.getSelection())
 				{
-					Command command = AddCommand.create(
-							editingDomain, inputConfigItem,
-							BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
-							BTSConstants.OWNER_REFERENCED_TYPES_ANY);
-					editingDomain.getCommandStack().execute(command);
-//					inputConfigItem.getOwnerReferencedTypesStringList().add(BTSConstants.OWNER_REFERENCED_TYPES_ALL);
+					if (editingDomain != null)
+					{
+						Command command = AddCommand.create(
+								editingDomain, inputConfigItem,
+								BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
+								BTSConstants.OWNER_REFERENCED_TYPES_ANY);
+						editingDomain.getCommandStack().execute(command);
+					}
+					else
+					{
+						inputConfigItem.getOwnerReferencedTypesStringList().add(BTSConstants.OWNER_REFERENCED_TYPES_ANY);
+					}
 				}
 				else
 				{
-					Command command = AddCommand.create(
+					if (editingDomain != null)
+					{
+						Command command = AddCommand.create(
 							editingDomain, inputConfigItem,
 							BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
 							getSelectedNodesTreePathList());
-					editingDomain.getCommandStack().execute(command);
-//				inputConfigItem.getOwnerReferencedTypesStringList().addAll(configurationController
-//					.processTreePathToList(treePath));
+						editingDomain.getCommandStack().execute(command);
+					}
+					else
+					{
+						inputConfigItem.getOwnerReferencedTypesStringList().addAll(getSelectedNodesTreePathList());
+					}
 				}
 			}
 			else if (inputPath != null)
@@ -249,7 +274,7 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 		}
 	}
 
-	private List<String> getSelectedNodesTreePathList() {
+	public List<String> getSelectedNodesTreePathList() {
 		BTSObjectTypeTreeNode treePath = (BTSObjectTypeTreeNode) treeViewer
 				.getInput();
 		return configurationController
@@ -311,4 +336,5 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 	public boolean isDirty() {
 		return dirty;
 	}
+
 }

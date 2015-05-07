@@ -128,6 +128,17 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 	boolean objectMayReferenceToWList(BTSObject selectionObject,
 			BTSConfigItem relationConfig);
 	
+	/**
+	 * Object types paths contains objectype.
+	 *
+	 * @param ownerTypesMap the owner types map
+	 * @param object the object
+	 * @return true, if successful
+	 */
+	boolean objectTypesPathsContainsObjectype(
+			Map<String, List<String>> ownerTypesMap,
+			BTSObject object);
+	
 	Set<String> getReferenceTypesSet(BTSObject object,
 			BTSConfigItem relationConfig);
 

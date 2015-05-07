@@ -173,17 +173,21 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			return (BTSConfiguration) activeConfig;
 		}
 		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACTIVE, null);
-		if (list == null || list.isEmpty())
-		{
-			BTSConfiguration config = createNew();
-			save(config);
-			list.add(config);
-		}
+//		if (list == null || list.isEmpty())
+//		{
+//			BTSConfiguration config = createNew();
+//			save(config);
+//			list.add(config);
+//		}
 		activeConfig = list(BTSConstants.OBJECT_STATE_ACTIVE, null).get(0);
-
+		if (active_configuration_name == null)
+		{
+			active_configuration_name = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").get(BTSPluginIDs.ACTIVE_CONFIGURATION, null); 
+		}
 		for (BTSConfiguration c : list) {
-			if (active_configuration_name.equals(c.get_id())) {
+			if (active_configuration_name.equals(c.getProvider())) {
 				activeConfig = c;
+				break;
 			}
 		}
 		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, activeConfig);
@@ -912,8 +916,8 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 	@Override
 	public void setActiveConfiguration(BTSConfiguration configuration) {
-		ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.get_id());
-		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.get_id());
+		ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
+		InstanceScope.INSTANCE.getNode("org.bbaw.bts.app").put(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration.getProvider());
 
 		context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, configuration);
 		
@@ -970,7 +974,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 								((BTSConfigItem) cc).getValue())) {
 							str = ((BTSConfigItem) cc).getLabel().getTranslation(lang);
 							if (object.getSubtype() != null
-									&& "".equals(object.getSubtype())) {
+									&& !"".equals(object.getSubtype())) {
 								for (BTSConfig ccc : cc.getChildren()) {
 									if (object.getSubtype().equalsIgnoreCase(
 											((BTSConfigItem) ccc).getValue())) {

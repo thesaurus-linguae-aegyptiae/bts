@@ -403,7 +403,7 @@ GenericCorpusObjectNavigatorController<E, K>
 						{
 							if (tn != null && last != null)
 							{
-								tn.setLabel(tn.getLabel() + " - " + o.getName());
+								tn.setLabel(tn.getLabel() + " - " + last.getName());
 							}
 							System.out.println("create tn");
 							tn = BtsviewmodelFactory.eINSTANCE
@@ -413,7 +413,7 @@ GenericCorpusObjectNavigatorController<E, K>
 						}
 						if (tn2 != null && last != null)
 						{
-							tn2.setLabel(tn2.getLabel() + " - " + o.getName());
+							tn2.setLabel(tn2.getLabel() + " - " + last.getName());
 						}
 						System.out.println("create tn2");
 
@@ -444,7 +444,7 @@ GenericCorpusObjectNavigatorController<E, K>
 					{
 						if (tn != null && last != null)
 						{
-							tn.setLabel(tn.getLabel() + " - " + o.getName());
+							tn.setLabel(tn.getLabel() + " - " + last.getName());
 						}
 						System.out.println("create tn");
 

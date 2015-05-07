@@ -41,6 +41,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaEntryNameTranslationViewerFilter;
 import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSEgyObjectByNameViewerSorter;
+import org.bbaw.bts.ui.egy.parts.lemmatizer.BTSLemmatizerEgyObjectByNameViewerSorter;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.commands.ParameterizedCommand;
@@ -89,6 +90,8 @@ import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseAdapter;
@@ -108,6 +111,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Table;
+import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.custom.SashForm;
 import org.mihalis.opal.promptSupport.PromptSupport;
@@ -189,7 +193,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
 	private boolean selectionCached;
 	private Table table;
-	private BTSLemmaEntryNameTranslationViewerFilter lemmaViewerSearchFilter = new BTSLemmaEntryNameTranslationViewerFilter();	
+	private BTSLemmaEntryNameTranslationViewerFilter lemmaViewerSearchFilter = new BTSLemmaEntryNameTranslationViewerFilter();
+	private BTSLemmatizerEgyObjectByNameViewerSorter sorter;	
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -392,7 +397,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		TableViewerColumn viewerColumn;
 		viewerColumn = new TableViewerColumn(lemmaViewer, SWT.NONE);
 		viewerColumn.getColumn().setText("Lemma Proposals");
-		viewerColumn.getColumn().setWidth(400);
+		viewerColumn.getColumn().setWidth(800);
 		viewerColumn.getColumn().setMoveable(true); 
 		// for simplification I use the standard labelprovider
 		viewerColumn.setLabelProvider(new ColumnLabelProvider() {
@@ -412,14 +417,14 @@ public class EgyLemmatizerPart implements SearchViewer {
 		// to be resized
 		TableColumnLayout tableColumnLayout = new TableColumnLayout();
 		tableColumnLayout.setColumnData(viewerColumn.getColumn(), 
-		      new ColumnWeightData(100, 400, true));
+		      new ColumnWeightData(400, 800, true));
 		
 		
 		
 		lemmaViewer.setContentProvider(contentProvider);
 		lemmaViewer.setLabelProvider(labelProvider);
-
-		lemmaViewer.setSorter(new BTSEgyObjectByNameViewerSorter());
+		sorter = new BTSLemmatizerEgyObjectByNameViewerSorter();
+		lemmaViewer.setSorter(sorter);
 		lemmaSelectionListener = new ISelectionChangedListener() {
 
 
@@ -482,6 +487,21 @@ public class EgyLemmatizerPart implements SearchViewer {
 					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT);
 				}
 
+			}
+		});
+		
+		flex_text.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				flex_text.setSelection(0, flex_text.getText().length());
+				
 			}
 		});
 
@@ -580,8 +600,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 		translationViewer.setSorter(new BTSEgyObjectByNameViewerSorter());
 		flexionViewer.setContentProvider(contentProvider_flex);
 		flexionViewer.setLabelProvider(labelProvider_flex);
-		flexSashForm.setWeights(new int[] { 1, 2 });
-		lemmaSashForm.setWeights(new int[] { 2, 3 });
+		flexSashForm.setWeights(new int[] { 1, 4 });
+		lemmaSashForm.setWeights(new int[] { 1, 1 });
 		transSashForm.setWeights(new int[] { 1, 2 });
 		
 		constructed = true;
@@ -639,7 +659,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private void shiftCaret(String eventTopic) {
 		System.out.println(eventTopic);
 		saveWordData(currentWord);
-		eventBroker.post(eventTopic, currentWord);
+		eventBroker.post(eventTopic, eventTopic);
 
 	}
 
@@ -792,6 +812,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					clearProposals();
 
 				} else if (part.isVisible()){
+					lemmaViewerSearchFilter.setFilterString(null);
 					loadingLemmaProposals(currentWord);
 				}
 				setUserMayEdit(userMayEdit);
@@ -877,12 +898,19 @@ public class EgyLemmatizerPart implements SearchViewer {
 				final java.util.List<TreeNodeWrapper> nodes = lemmaNavigatorController
 						.loadNodes(
 								entries.subList(0,
-										Math.min(entries.size(), 80)),
+										Math.min(entries.size(), 120)),
 								monitor, false);
 				sync.asyncExec(new Runnable() {
 					@Override
 					public void run() {
+						sorter.setLemmatizerWord(word);
 						lemmaRootNode.getChildren().addAll(nodes);
+						lemmaViewer.refresh();
+						if (lemmaViewer.getTable().getItemCount() > 0)
+						{
+						TableItem first = lemmaViewer.getTable().getItem(0);
+						lemmaViewer.setSelection(new StructuredSelection(first.getData()));
+						}
 					}
 				});
 				int counter = 0;
@@ -926,8 +954,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 			lemmaName_text.setText("");
 			if (word.getFlexCode() != null && !"".equals(word.getFlexCode())) {
 				flex_text.setText(word.getFlexCode());
+				flex_text.setSelection(0, flex_text.getText().length());
 			} else {
 				flex_text.setText(defaultFlexion.toString());
+				flex_text.setSelection(0, flex_text.getText().length());
+
 				isLemmatized = false;
 			}
 			loadTranslation(word);

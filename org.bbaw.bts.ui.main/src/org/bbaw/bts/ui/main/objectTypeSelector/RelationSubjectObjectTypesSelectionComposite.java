@@ -240,7 +240,7 @@ public class RelationSubjectObjectTypesSelectionComposite extends Composite {
 				{
 					referencedTypeSelector.getTreeViewer().resetFilters();
 				}
-				referencedTypeSelector.setPathInput(inputPath,
+				referencedTypeSelector.setPathInput(null, inputPath,
 						getEditingDomain(configItem), referencedTypesRootConfigItems);
 				
 //				if (referencedTypesRootConfigItems instanceof BTSConfiguration)

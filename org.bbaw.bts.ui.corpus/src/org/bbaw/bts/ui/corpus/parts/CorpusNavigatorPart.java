@@ -662,6 +662,8 @@ labelProvider));
 			public void run() {
 				if (parentControl != null && children != null
 						&& !children.isEmpty()) {
+					parentControl.setData("objs", children);
+
 					Map map = null;
 					if (cachingMap.get(parentControl) != null
 							&& cachingMap.get(parentControl) instanceof Map) {
@@ -1018,5 +1020,70 @@ labelProvider));
 		    }
 		
 	}
+	@Override
+	public void reloadViewerNodes(final StructuredViewer viewer) {
+		// get nodes
+		if (viewer == null) return;
+		final Control parent = viewer.getControl().getParent();
+		if (parent == null) return;
+		Object data = parent.getData("objs");
+		List<BTSCorpusObject> objs = null;
+		if (data instanceof List<?>)
+		{
+			objs = (List<BTSCorpusObject>) data;
+		}
+		if (objs == null) return;
+		// filter nodes
+		objs = filterObjects(objs, viewer);
+		// load nodes
+		final TreeNodeWrapper rootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		if (objs != null && objs.size() > 0)
+		{
+			List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(objs, null, true);
+			rootNode.getChildren().addAll(nodes);
+		}
+		else
+		{
+			TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+			emptyNode.setLabel("Nothing found that matches your filtering");
+			rootNode.getChildren().add(emptyNode);
+		}
+		// If you want to update the UI
+		sync.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				loadTree((TreeViewer) viewer, rootNode, parent);
+			}
+		});
+		
+	}
+
+	private List<BTSCorpusObject> filterObjects(List<BTSCorpusObject> objs,
+			StructuredViewer viewer) {
+		List<BTSCorpusObject> filtered = new Vector<BTSCorpusObject>();
+		for (BTSCorpusObject e : objs)
+		{
+			if (isFiltered(e, viewer))
+			{
+				filtered.add(e);
+			}
+		}
+		return filtered;
+	}
+
+	private boolean isFiltered(BTSCorpusObject e, StructuredViewer viewer) {
+		for (ViewerFilter f : viewer.getFilters())
+		{
+			if (!f.select(viewer, null, e))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 	
+	@Override
+	public String[] getTypesFilterTerms() {
+		return new String[]{BTSConstants.TEXT, BTSConstants.TEXT_CORPUS, BTSConstants.CORPUS_OBJECT};
+	}
 }

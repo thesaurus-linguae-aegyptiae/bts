@@ -1,27 +1,22 @@
 package org.bbaw.bts.ui.main.dialogs;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSConfiguration;
-import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
-import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.beans.BeansObservables;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.emf.databinding.EMFProperties;
-import org.eclipse.emf.databinding.EMFUpdateValueStrategy;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.jface.databinding.fieldassist.ControlDecorationSupport;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.jface.viewers.ComboViewer;
@@ -30,8 +25,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -56,6 +51,9 @@ public class NewConfigurationDialog extends TitleAreaDialog
 	private Button okButton;
 	protected BTSConfiguration originalconfiguration;
 
+	private Set<String> configProviderSet;
+	private Text configProviderTxt;
+	protected Pattern prefixPattern = Pattern.compile("[a-z0-9]+");
 
 	/**
 	 * Create the dialog.
@@ -86,6 +84,45 @@ public class NewConfigurationDialog extends TitleAreaDialog
 		text = new Text(container, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
+		Label lblProvider = new Label(container, SWT.NONE);
+		lblProvider.setText("provider");
+
+		configProviderTxt = new Text(container, SWT.BORDER);
+		configProviderTxt.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		configProviderTxt.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (configProviderSet.contains(configProviderTxt.getText()))
+				{
+					setMessage("A Corpus with this prefix exists already. Please, use different prefix.", SWT.ERROR);
+					okButton.setEnabled(false);
+					return;
+				}
+				else
+				{
+					setMessage("");
+				}
+				if (configProviderTxt.getText().contains(" "))
+				{
+					setMessage("Corpus prefix may not contain whitespaces.", SWT.ERROR);
+					okButton.setEnabled(false);
+					return;
+				}
+				else
+				{
+					setMessage("");
+				}
+				Matcher m = prefixPattern.matcher(configProviderTxt.getText());
+				if (!m.matches())
+				{
+					setMessage("Corpus prefix may contain only small characters and integers [a-z0-9].", SWT.ERROR);
+					okButton.setEnabled(false);
+					return;
+				}
+				okButton.setEnabled(configProviderTxt.getText().trim().length() > 0 && text.getText().trim().length() > 0);
+			}
+		});
 		Label lblInherit = new Label(container, SWT.NONE);
 		lblInherit.setText("Based on");
 		
@@ -157,6 +194,15 @@ public class NewConfigurationDialog extends TitleAreaDialog
 				
 			}
 		});
+		
+		configProviderSet = new HashSet<String>();
+		for (BTSConfiguration c : list)
+		{
+			if (c.getProvider() != null)
+			{
+				configProviderSet.add(c.getProvider());
+			}
+		}
 
 		return bindingContext;
 	}
@@ -185,6 +231,7 @@ public class NewConfigurationDialog extends TitleAreaDialog
 			configuration = configurationController.createNew();
 		}
 		configuration.setName(text.getText());
+		configuration.setProvider(configProviderTxt.getText());
 		super.okPressed();
 	}
 

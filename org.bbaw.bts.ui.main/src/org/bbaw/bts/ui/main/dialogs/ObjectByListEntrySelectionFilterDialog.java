@@ -3,12 +3,9 @@ package org.bbaw.bts.ui.main.dialogs;
 import java.util.List;
 import java.util.Vector;
 
-import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.commons.filter.BTSObjectsByListEntryFilter;
-import org.bbaw.bts.ui.commons.filter.ProjectPrefixViewerFilter;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;

@@ -27,6 +27,7 @@ import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorControll
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
@@ -548,6 +549,8 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 				if (parentControl != null && children != null
 						&& !children.isEmpty()) {
 					Map map = null;
+					parentControl.setData("objs", children);
+
 					if (cachingMap.get(parentControl) != null
 							&& cachingMap.get(parentControl) instanceof Map) {
 						map = (Map) cachingMap.get(parentControl);
@@ -845,5 +848,69 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		
 	}
 
+	@Override
+	public void reloadViewerNodes(final StructuredViewer viewer) {
+		// get nodes
+		if (viewer == null) return;
+		final Control parent = viewer.getControl().getParent();
+		if (parent == null) return;
+		Object data = parent.getData("objs");
+		List<BTSLemmaEntry> objs = null;
+		if (data instanceof List<?>)
+		{
+			objs = (List<BTSLemmaEntry>) data;
+		}
+		if (objs == null) return;
+		// filter nodes
+		objs = filterObjects(objs, viewer);
+		// load nodes
+		final TreeNodeWrapper rootNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+		if (objs != null && objs.size() > 0)
+		{
+			List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(objs, null, true);
+			rootNode.getChildren().addAll(nodes);
+		}
+		else
+		{
+			TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE.createTreeNodeWrapper();
+			emptyNode.setLabel("Nothing found that matches your filtering");
+			rootNode.getChildren().add(emptyNode);
+		}
+		// If you want to update the UI
+		sync.asyncExec(new Runnable() {
+			@Override
+			public void run() {
+				loadTree((TreeViewer) viewer, rootNode, parent);
+			}
+		});
+		
+	}
 
+	private List<BTSLemmaEntry> filterObjects(List<BTSLemmaEntry> objs,
+			StructuredViewer viewer) {
+		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>();
+		for (BTSLemmaEntry e : objs)
+		{
+			if (isFiltered(e, viewer))
+			{
+				filtered.add(e);
+			}
+		}
+		return filtered;
+	}
+
+	private boolean isFiltered(BTSLemmaEntry e, StructuredViewer viewer) {
+		for (ViewerFilter f : viewer.getFilters())
+		{
+			if (!f.select(viewer, null, e))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+	@Override
+	public String[] getTypesFilterTerms() {
+		return new String[]{BTSConstants.WLIST_ENTRY};
+	}
 }

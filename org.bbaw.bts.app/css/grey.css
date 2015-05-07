@@ -1,0 +1,153 @@
+.MPart.busy {
+	font-style: italic;
+}
+
+.MPart.highlighted {
+	font-weight: bold;
+}
+
+* {
+	font-size: 12px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+}
+
+CTabItem:selected {
+//	color: '#org-eclipse-ui-workbench-ACTIVE_TAB_TEXT_COLOR';
+}
+
+.MTrimmedWindow {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+.MPartStack {
+//    swt-tab-renderer: url('bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering');
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_END' 100%;
+	swt-simple: false;
+	swt-mru-visible: true;
+//	color: '#org-eclipse-ui-workbench-INACTIVE_TAB_TEXT_COLOR';
+}
+
+.MPartStack.active {
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_END' 100%;
+}
+
+.MPartStack.active.noFocus {
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_END' 100%;
+}
+
+.MPartStack.active.noFocus > CTabItem:selected {
+//	color: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_TEXT_COLOR';
+}
+
+#PerspectiveSwitcher  {
+	eclipse-perspective-keyline-color: #ECE9D8 #FFFFFF;
+}
+
+.MToolControl.TrimStack {
+//	frame-image:  url(./winClassicTSFrame.png);
+//	handle-image:  url(./winClassicHandle.png);
+	frame-cuts: 5px 1px 5px 16px;
+}
+
+.MToolBar.Draggable {
+//	handle-image:  url(./dragHandle.png);
+}
+
+.MToolControl.Draggable {
+//	handle-image:  url(./dragHandle.png);
+}
+
+.DragFeedback {
+	background-color: COLOR-WIDGET-NORMAL-SHADOW;
+}
+
+.ModifiedDragFeedback {
+	background-color: #A0A000;
+}
+
+#org-eclipse-ui-editorss {
+	swt-tab-height: 8px;
+}
+//ScrolledComposite {
+//	background-color: #FFFFFF;
+//}
+//
+//Group {
+//	background-color: #FFFFFF;
+//}
+//
+//PassportEntryItemEditor {
+//	background-color: #FFFFFF;
+//}
+//PassportEntryGroupEditor {
+//	background-color: #FFFFFF;
+//}
+//
+//Label {
+//	background-color: #FFFFFF;
+//	
+//}
+//TableItem {
+//	font-family: BBAWLibertine;
+//	font-size: 12px;
+//}
+//Table{
+//	font-family: BBAWLibertine;
+//	font-size: 12px;
+//}
+
+//Button {
+//	background-color: #FFFFFF;
+//}
+
+//* {
+//	font-size: 10px;
+//	font-family: BBAWLibertine; /*FreeSerif;*/
+//	
+//}
+//Text {
+//	background-color: #FFFFFF;
+//}
+//Link {
+//	background-color: #FFFFFF;
+//	
+//}
+
+MTrimBar {
+	background-color: rgb(245, 243, 237);
+}
+MToolBar {
+	background-color: rgb(245, 243, 237);
+}
+
+MToolItem {
+	background-color: rgb(245, 243, 237);
+}
+CorpusToolControl {
+	background-color: rgb(245, 243, 237);
+}
+ProjectToolControl {
+	background-color: rgb(245, 243, 237);
+}
+UserToolcontrol {
+	background-color: rgb(245, 243, 237);
+}
+
+
+/* for AnnotationPart RelatedObjectGroup*/
+.unselected {
+	background-color: #FFFFFF;
+}
+
+.selected {
+	background-color: #E6E3C3;
+}
+
+RelatedObjectGroup.selected {
+	background-color: #E6E3C3;
+}
+
+

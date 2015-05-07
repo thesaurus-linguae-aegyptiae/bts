@@ -16,6 +16,7 @@
   <imports xsi:type="commands:Command" xmi:id="_qDjjUJy9EeSiiMU2026qjA" elementId="org.bbaw.bts.ui.main.command.openPart"/>
   <imports xsi:type="commands:Command" xmi:id="_trxTwKfMEeSXoIP1Bcbxog" elementId="org.eclipse.ui.window.preferences"/>
   <imports xsi:type="commands:Command" xmi:id="_ppthUNeUEeSkNoCa1fqIXg" elementId="org.bbaw.bts.ui.main.command.addComment"/>
+  <imports xsi:type="commands:Command" xmi:id="_pED0QPPoEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.main.command.openTypeSubtypeFilterDialog"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_ClX0AD_mEeOYuPzWUW3h3g" featurename="children" parentElementId="org.bbaw.bts.app.partstack.left" positionInList="index:0">
     <elements xsi:type="basic:Part" xmi:id="_J3qgcD_nEeOYuPzWUW3h3g" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpora.png">
       <handlers xmi:id="_O-CAoDdpEeSeOfuNLjhMYg" elementId="org.bbaw.bts.ui.corpus.handler.delete" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
@@ -52,9 +53,7 @@
           <children xsi:type="menu:HandledMenuItem" xmi:id="_QelxcNPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_QelxcdPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
           </children>
-          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR6TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
-            <parameters xmi:id="_fufR6jRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_typeSubtype"/>
-          </children>
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR6TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
           <children xsi:type="menu:HandledMenuItem" xmi:id="_UDUr4MGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.onlyActiveTextcorpora" label="Only active TextCorpora" type="Check" command="_FW7v8MGUEeSSoMDqJYVnow">
             <parameters xmi:id="_LHgK8MGVEeSSoMDqJYVnow" elementId="navigatorParametrizedFilter" name="navigatorParametrizedFilter" value="activeTextCorpora"/>
           </children>
@@ -362,9 +361,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjsqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_hkFjs6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_ZyovsNPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
-                  <parameters xmi:id="_ZyovsdPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_typeSubtype"/>
-                </children>
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_ZyovsNPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_hDRUIMGUEeSSoMDqJYVnow" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.onlyActiveTextcorpora" label="Only active TextCorpora" type="Check" command="_FW7v8MGUEeSSoMDqJYVnow">
                   <parameters xmi:id="_P6kRUMGVEeSSoMDqJYVnow" elementId="navigatorParametrizedFilter" name="navigatorParametrizedFilter" value="activeTextCorpora"/>
                 </children>
@@ -468,6 +465,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcwqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="__Ifcw6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_y7DukPPoEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
               </children>
             </menus>
             <menus xsi:type="menu:PopupMenu" xmi:id="__IfcxKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.lemmanavigator.popupmenu">
@@ -577,6 +575,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ93qY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_jNJ936Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_0Z65QPPoEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
               </children>
             </menus>
             <toolbar xmi:id="_jNJ94KY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.toolbar.2">
@@ -623,7 +622,7 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_Dwe6YKfIEeSXoIP1Bcbxog" featurename="trimBars" parentElementId="org.bbaw.bts.trimmed">
     <elements xsi:type="basic:TrimBar" xmi:id="_4_I64KfLEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.trimbar.0">
       <children xsi:type="menu:ToolBar" xmi:id="_5yUEQKfLEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.toolbar.5">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_kKr_EKfMEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.11" iconURI="platform:/plugin/org.bbaw.bts.ui.main/icons/preferences_32.png" command="_trxTwKfMEeSXoIP1Bcbxog"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_kKr_EKfMEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.handledtoolitem.11" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/preferences.png" command="_trxTwKfMEeSXoIP1Bcbxog"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_VUS58KfJEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.toolbarseparator.0465465"/>
         <children xsi:type="menu:ToolControl" xmi:id="_Xd6R0KfJEeSXoIP1Bcbxog" elementId="org.bbaw.bts.ui.corpus.toolcontrol.0656516351" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.toolcontrol.CorpusToolControl"/>
       </children>

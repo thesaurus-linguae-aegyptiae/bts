@@ -1,0 +1,70 @@
+* {
+	font-size: 10px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+	color: black;
+}
+
+Composite Label {
+	color: black;
+}
+
+#SeparatorLabel {
+	color: #1d659f;
+}
+
+Text {
+	font: Verdana 8px;
+}
+
+Composite Text {
+	background-color: white;
+	color: black;
+}
+
+
+SashForm {
+	background-color: #c1d5ef;
+}
+
+
+
+Table {
+	background-color: #e3efff #c1d5ef 60%;
+	color: black;
+	font-size: 10px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+}
+
+.MTrimBar {
+	background-color: #e3efff #c1d5ef;
+	color: white;
+	font-size: 10px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+}
+
+ETabFolder {
+	simple: true;
+}
+
+CTabItem {
+	color: black;
+	font-size: 10px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+}
+
+CTabItem:selected {
+	background-color: #e3efff #c1d5ef 60%;
+	font-weight: normal;
+	font-size: 10px;
+	font-family: BBAWLibertine; /*FreeSerif;*/
+}
+
+CTabItem.active:selected {
+	background-color: #e3efff #c1d5ef 50%;
+	color: #1d659f;
+	font: bold;
+}
+
+Shell {
+    background-color: #e3efff #c1d5ef 60%;
+}

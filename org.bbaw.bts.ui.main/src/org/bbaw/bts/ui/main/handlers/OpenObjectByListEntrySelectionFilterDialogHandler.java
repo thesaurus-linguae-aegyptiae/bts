@@ -82,8 +82,8 @@ public class OpenObjectByListEntrySelectionFilterDialogHandler {
 				} else if (!isContained) {
 					viewer.addFilter((ViewerFilter) filter);
 				} else {
-					viewer.refresh();
 				}
+				part.reloadViewerNodes(viewer);
 			}
 		}
 		

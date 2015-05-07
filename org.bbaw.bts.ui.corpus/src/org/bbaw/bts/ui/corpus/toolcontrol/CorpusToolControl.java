@@ -85,39 +85,39 @@ public class CorpusToolControl {
 		}
 		corpusLabel.pack();
 
-		Label editPrefs = new Label(composite, SWT.PUSH);
-		editPrefs.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_PREFERENCES));
-		editPrefs.setToolTipText("Edit project settings.");
-		editPrefs.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
-				false, false, 1, 1));
-		((GridData) editPrefs.getLayoutData()).verticalIndent = 2;
-		editPrefs.addMouseListener(new MouseAdapter() {
-
-
-			@Override
-			public void mouseDown(MouseEvent e) {
-				Label l = (Label) e.getSource();
-				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-
-			}
-
-			@Override
-			public void mouseUp(MouseEvent e) {
-				// Activate Handler
-				handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
-
-				Map map = new HashMap(1);
-				map.put("preferencePageId", "org.bbaw.bts.ui.corpus.corpussettings.page");
-
-				Command cmd = commandService.getCommand(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE);
-				ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
-				//				command = commandService.getCommand(BTSPluginIDs.CMD_ID_NEW_USERGROUP);
-
-				handlerService.executeHandler(command);
-				Label l = (Label) e.getSource();
-				l.setBackground(l.getParent().getBackground());
-			}
-		});
+//		Label editPrefs = new Label(composite, SWT.PUSH);
+//		editPrefs.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_PREFERENCES));
+//		editPrefs.setToolTipText("Edit project settings.");
+//		editPrefs.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
+//				false, false, 1, 1));
+//		((GridData) editPrefs.getLayoutData()).verticalIndent = 2;
+//		editPrefs.addMouseListener(new MouseAdapter() {
+//
+//
+//			@Override
+//			public void mouseDown(MouseEvent e) {
+//				Label l = (Label) e.getSource();
+//				l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+//
+//			}
+//
+//			@Override
+//			public void mouseUp(MouseEvent e) {
+//				// Activate Handler
+//				handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
+//
+//				Map map = new HashMap(1);
+//				map.put("preferencePageId", "org.bbaw.bts.ui.corpus.corpussettings.page");
+//
+//				Command cmd = commandService.getCommand(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE);
+//				ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
+//				//				command = commandService.getCommand(BTSPluginIDs.CMD_ID_NEW_USERGROUP);
+//
+//				handlerService.executeHandler(command);
+//				Label l = (Label) e.getSource();
+//				l.setBackground(l.getParent().getBackground());
+//			}
+//		});
 
 		composite.layout();
 		composite.pack();
