@@ -7,7 +7,6 @@ import java.util.Vector;
 import javax.inject.Inject;
 
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
@@ -16,7 +15,6 @@ import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -59,15 +57,22 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public BTSThsEntry createNew() {
 		BTSThsEntry entry = BtsCorpusModelFactory.eINSTANCE.createBTSThsEntry();
-		entry.setDBCollectionKey(main_ths_key);
+		entry.setDBCollectionKey(getMainThsKey() +  BTSCorpusConstants.THS);
 		entry.setVisibility(thsVisibility);
 		entry.setRevisionState(thsReviewState);
 		super.setId(entry, entry.getDBCollectionKey());
 		super.setRevision(entry);
-		entry.setCorpusPrefix(main_ths_key);
+		entry.setCorpusPrefix(main_ths_key +  BTSCorpusConstants.THS);
 		return entry;
 	}
 
+	private String getMainThsKey() {
+		if (main_ths_key == null || "".equals(main_ths_key))
+		{
+			main_ths_key = main_project;
+		}
+		return main_ths_key;
+	}
 	@Override
 	public boolean save(BTSThsEntry entity) {
 		super.addRevisionStatement(entity);

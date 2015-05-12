@@ -237,6 +237,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 
 	private ModifyListener sortKeyModificationListener;
 
+	private Text abbrText_CIEdit;
+
 
 
 	/**
@@ -1043,6 +1045,15 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 			subtypeText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
 			subtypeText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
 					true, false, 2, 1));
+			
+			Label lblAbbr = new Label(configItemEditComp, SWT.NONE);
+			lblAbbr.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
+					false, 1, 1));
+			lblAbbr.setText("Abbreviation");
+
+			abbrText_CIEdit = new Text(configItemEditComp, SWT.BORDER);
+			abbrText_CIEdit.setLayoutData(new GridData(SWT.FILL, SWT.CENTER,
+					true, false, 2, 1));
 
 			Label lblSortkey = new Label(configItemEditComp, SWT.NONE);
 			lblSortkey.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
@@ -1277,6 +1288,14 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				EMFEditProperties.value(editingDomain,
 						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__SUBTYPE)
 						.observe(configItem), us, null);
+		
+		// abbreviation
+		Binding binding_abbr = bindingContext.bindValue(
+				WidgetProperties.text(SWT.Modify).observeDelayed(
+						BTSUIConstants.DELAY, abbrText_CIEdit),
+				EMFEditProperties.value(editingDomain,
+						BtsmodelPackage.Literals.BTS_CONFIG_ITEM__ABBREVIATION)
+						.observe(configItem), null, null);
 
 		// sortkey
 		Binding binding4 = bindingContext.bindValue(

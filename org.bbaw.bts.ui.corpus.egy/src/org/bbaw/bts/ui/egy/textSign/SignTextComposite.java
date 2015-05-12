@@ -425,7 +425,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			figure = findElementFigure(newIndex);
 			if (figure == null) break;
 		}
-		if (figure instanceof WordFigure)
+		if (figure == null)
+		{
+			return null;
+		}
+		else if (figure instanceof WordFigure)
 		{
 			return figure;
 		}
@@ -1413,14 +1417,21 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			shiftSelection(shift, false);
 		}
 		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNLEMMATIZED)) {
-			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, true);
+			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, 0);
 			if (figure != null)
 			{
 				setSelectionInternal(figure);
 			}
 		}
 		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNHIEROGLYPHED)) {
-			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, false);
+			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, 1);
+			if (figure != null)
+			{
+				setSelectionInternal(figure);
+			}
+		}
+		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNFLEXIONED)) {
+			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, 2);
 			if (figure != null)
 			{
 				setSelectionInternal(figure);
@@ -1430,7 +1441,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	}
 
-	private ElementFigure findUnprocessedWordFigure(int newIndex, boolean unlemmatized) {
+	private ElementFigure findUnprocessedWordFigure(int newIndex, int type) {
 		ElementFigure figure = null;
 		if (newIndex >= currentLineFigure.getChildren().size()) {
 			if (lineIndex < container.getChildren().size() - 1) {
@@ -1446,7 +1457,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			}
 		}
 		figure = findElementFigure(newIndex);
-		while (!unprocessedWord(figure, unlemmatized))
+		while (!unprocessedWord(figure, type))
 		{
 			newIndex = newIndex + 1;
 			if (newIndex >= currentLineFigure.getChildren().size()) {
@@ -1490,20 +1501,24 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		return null;
 	}
 
-	private boolean unprocessedWord(ElementFigure figure, boolean unlemmatized) {
+	private boolean unprocessedWord(ElementFigure figure, int type ) {
 		if (figure instanceof WordFigure)
 		{
 			Object o = ((WordFigure)figure).getModelObject();
 			if (o instanceof BTSWord)
 			{
 				BTSWord w = (BTSWord) o;
-				if (unlemmatized)
+				if (type == 0)
 				{
 					return (w.getLKey() == null || w.getLKey().trim().length() == 0);
 				}
-				else
+				else if (type == 1)
 				{
 					return (w.getGraphics() == null || w.getGraphics().isEmpty());
+				}
+				else if (type == 2)
+				{
+					return (w.getFlexCode() == null || w.getFlexCode().trim().length() == 0);
 				}
 			}
 		}

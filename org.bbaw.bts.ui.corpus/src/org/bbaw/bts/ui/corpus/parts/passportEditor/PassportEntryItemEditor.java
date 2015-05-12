@@ -33,6 +33,7 @@ import org.bbaw.bts.ui.commons.filter.BTSObjectTypeSubtypeViewerFilter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
 import org.bbaw.bts.ui.commons.validator.StringRegexValidator;
+import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.main.widgets.ObjectSelectionProposalProvider;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
@@ -87,6 +88,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Spinner;
 import org.eclipse.swt.widgets.Text;
 
@@ -444,7 +446,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private void loadTextFieldWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
-		label.setText(itemConfig.getValue());
+		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER, 1));
 
@@ -547,13 +549,12 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private void loadSelectTHSWidget(final BTSConfigItem itemConfig2,
 			final BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
-		label.setText(itemConfig.getValue());
+		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
-				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
+				3, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		
-		
-		
+
 		ths_select_text = new Text(this, SWT.BORDER | SWT.READ_ONLY);
 		ths_select_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		final char[] autoActivationCharacters = new char[] { '.', '#' };
@@ -590,9 +591,13 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 				}
 			}
 		});
-
+		BTSObject object = null;
 		if (entry.getValue() != null) {
-			ths_select_text.setText(thsNavigatorController.getDisplayName(entry.getValue()));
+			object = thsNavigatorController.find(entry.getValue(), null);
+			ths_select_text.setData(object);
+		}
+		if (object != null) {
+			ths_select_text.setText(object.getName());
 		}
 		
 		ths_select_text.addKeyListener(new KeyAdapter() {
@@ -616,6 +621,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 								object.get_id());
 						editingDomain.getCommandStack().execute(command);
 						ths_select_text.setText(object.getName());
+						ths_select_text.setData(object);
+
 					}
 			    }
 			}
@@ -660,8 +667,50 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 							object.get_id());
 					editingDomain.getCommandStack().execute(command);
 					ths_select_text.setText(object.getName());
+					ths_select_text.setData(object);
+
 				}
 				}
+			}
+		});
+		
+		Label lblPassportDialog = new Label(this, SWT.NONE);
+		lblPassportDialog.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_PASSPORT));
+		lblPassportDialog.setToolTipText("Open Object in Passport Data Editor");
+		lblPassportDialog.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
+				1, 1));
+		((GridData) lblPassportDialog.getLayoutData()).verticalIndent = 3;
+		lblPassportDialog.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+				
+				Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				// open search dialog
+				Object o = ths_select_text.getData();
+				if (o != null && o instanceof BTSObject)
+				{
+					BTSObject btso = (BTSObject) o;
+					IEclipseContext child = context.createChild();
+					child.set(BTSObject.class, btso);
+					child.set(Shell.class, new Shell());
+					
+					PassportEditorDialog dialog = ContextInjectionFactory.make(
+							PassportEditorDialog.class, child);
+					if (dialog.open() == dialog.OK) {
+						
+					}
+				}
+				
 			}
 		});
 
@@ -682,7 +731,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private void loadSelectIntegerWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
-		label.setText(itemConfig.getValue());
+		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
@@ -734,7 +783,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private void loadTextSuggestWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
-		label.setText(itemConfig.getValue());
+		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
@@ -859,7 +908,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private void loadSelectConfigWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
-		label.setText(itemConfig.getValue());
+		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
@@ -925,7 +974,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 	private void loadTextWidget(BTSConfigItem itemConfig2,
 			BTSPassportEntry entry) {
 		Label label = new Label(this, SWT.NONE);
-		label.setText(itemConfig.getValue());
+		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
 				BTSUIConstants.PASSPORT_COLUMN_NUMBER / 2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
@@ -981,6 +1030,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		}
 
 	}
+
+	
 
 	@Override
 	protected void setUserMayEditInteral(boolean mayEdit) {

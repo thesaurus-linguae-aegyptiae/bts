@@ -1723,7 +1723,7 @@ public class UserManagementPart
 
 		roles_dbColl_sync_btn = new Button(roles_composite_right, SWT.CHECK);
 		roles_dbColl_sync_btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		roles_dbColl_sync_btn.setText("Syncronize with Server");
+		roles_dbColl_sync_btn.setText("Synchronize with Server");
 
 		roles_dbColl_index_btn = new Button(roles_composite_right, SWT.CHECK);
 		roles_dbColl_index_btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
@@ -1854,7 +1854,7 @@ public class UserManagementPart
 
 		Label lblConntectionType = new Label(roles_composite_right, SWT.NONE);
 		lblConntectionType.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblConntectionType.setText("Conntection Type");
+		lblConntectionType.setText("Connection Type");
 
 		roles_project_Connectiontype = new Text(roles_composite_right, SWT.BORDER);
 		roles_project_Connectiontype.setText("connectionType");
@@ -2116,14 +2116,14 @@ public class UserManagementPart
 
 		Label lblWebDescriptin = new Label(composite_UserEdit, SWT.NONE);
 		lblWebDescriptin.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblWebDescriptin.setText("Web Descriptin");
+		lblWebDescriptin.setText("Web Description");
 
 		textWebDesc_User = new Text(composite_UserEdit, SWT.BORDER);
 		textWebDesc_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 
 		Label lblSigle = new Label(composite_UserEdit, SWT.NONE);
 		lblSigle.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
-		lblSigle.setText("Sigle");
+		lblSigle.setText("Siglum");
 
 		textSigle_User = new Text(composite_UserEdit, SWT.BORDER);
 		textSigle_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
@@ -2141,22 +2141,22 @@ public class UserManagementPart
 		grpLogin.setText("Login - (Username cannot be changed)");
 
 		Label lblUsername = new Label(grpLogin, SWT.NONE);
-		lblUsername.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblUsername.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		lblUsername.setText("Username");
 
 		textUserName_User = new Text(grpLogin, SWT.BORDER);
-		textUserName_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		textUserName_User.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		textUserName_User.setEditable(false);
 
 		Label lblPassword = new Label(grpLogin, SWT.NONE);
-		lblPassword.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+		lblPassword.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false, 1, 1));
 		lblPassword.setText("Password");
 		
 		// change password here
 		// button
 		
 		Button changePasswordButton = new Button(grpLogin, SWT.PUSH);
-		changePasswordButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		changePasswordButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		changePasswordButton.setText("Change Password");
 		changePasswordButton.addSelectionListener(new SelectionAdapter() {
 			
@@ -2179,7 +2179,7 @@ public class UserManagementPart
 		btnDBAdmin_User = new Button(grpLogin, SWT.CHECK);
 		btnDBAdmin_User.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		btnDBAdmin_User.setText("User is Database Administrator");
-		
+		grpLogin.layout();
 		Label lblRequired = new Label(composite_UserEdit, SWT.NONE);
 		lblRequired.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 1, 1));
 		lblRequired.setText("* = required");
@@ -2369,18 +2369,19 @@ public class UserManagementPart
 		textComment_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
 
 		Group groupCreateUser_Group = new Group(composite_GroupEdit, SWT.NONE);
-		groupCreateUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 1));
-		groupCreateUser_Group.setLayout(new GridLayout(2, false));
+		groupCreateUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
+		groupCreateUser_Group.setLayout(new GridLayout(1, false));
 		groupCreateUser_Group.setText("Create new User");
 
 		Label lblcreateUserName_Group = new Label(groupCreateUser_Group, SWT.NONE);
-		lblcreateUserName_Group.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
+		lblcreateUserName_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, true, 1, 1));
 		lblcreateUserName_Group.setText("Enter Username");
+		
 		textCreateNewUser_Group = new Text(groupCreateUser_Group, SWT.BORDER);
 		textCreateNewUser_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		
 		Label lblcreateUserPassword_Group = new Label(groupCreateUser_Group, SWT.NONE);
-		lblcreateUserPassword_Group.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, true, 1, 1));
+		lblcreateUserPassword_Group.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, true, 1, 1));
 		lblcreateUserPassword_Group.setText("Password of New User");
 
 		textCreateNewUserPassword_Group = new Text(groupCreateUser_Group, SWT.BORDER | SWT.PASSWORD);

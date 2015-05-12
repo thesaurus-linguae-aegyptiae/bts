@@ -41,8 +41,7 @@ public final class BTSModelEditorPlugin extends EMFPlugin
 	public BTSModelEditorPlugin()
 	{
 		super
-			(new ResourceLocator [] 
-			{
+			(new ResourceLocator [] {
 			});
 	}
 

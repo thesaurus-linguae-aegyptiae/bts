@@ -71,6 +71,7 @@ import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -170,6 +171,9 @@ public class PassportEditorPart {
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private Boolean userMayEdit;
 	
+	@Inject
+	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
+	private String lang;
 	
 	@Inject
 	private PassportConfigurationController passportConfigurationController;
@@ -365,7 +369,15 @@ public class PassportEditorPart {
 			tabItem.setData("cat", category);
 			tabItem.setData("pass", btsPassport);
 			tabItem.setData("entry", entryGroup);
-			tabItem.setText(category.getValue());
+			String label = category.getLabel().getTranslation(lang);
+			if (label != null)
+			{
+				tabItem.setText(label);
+			}
+			else
+			{
+				tabItem.setText(category.getValue());
+			}
 			tabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 					BTSResourceProvider.IMG_CATEGORY));
 			composite = new ScrolledComposite(folder, SWT.V_SCROLL

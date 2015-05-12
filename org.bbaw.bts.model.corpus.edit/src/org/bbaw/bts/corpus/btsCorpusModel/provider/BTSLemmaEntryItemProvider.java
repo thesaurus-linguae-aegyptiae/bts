@@ -5,8 +5,6 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
-
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;

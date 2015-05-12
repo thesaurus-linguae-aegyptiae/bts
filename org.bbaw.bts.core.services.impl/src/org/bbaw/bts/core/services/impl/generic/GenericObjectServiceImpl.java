@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.Vector;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -271,20 +272,37 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 		}
 		else
 		{
-			List<DBRevision> revisions = generalPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey());
-			Map<String, DBRevision> localRevs = new HashMap<String, DBRevision>(revisions.size());
-			for (DBRevision rev : revisions)
-			{
-				localRevs.put(rev.getRevision(), rev);
-			}
-			for (DBRevision rev : remoteGeneralPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey()))
-			{
-				DBRevision local = localRevs.get(rev.getRevision());
-				if (local == null || local.getLocation() == DBRevision.NOT_AVAILABLE)
+			List<DBRevision> revisions = new Vector<DBRevision>();
+			Map<String, DBRevision> localRevs = new HashMap<String, DBRevision>();
+
+			try {
+				revisions.addAll(generalPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey()));
+				for (DBRevision rev : revisions)
 				{
-					revisions.add(rev);
+					localRevs.put(rev.getRevision(), rev);
 				}
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+			List<DBRevision> remoteRevisions = null;
+			try {
+				remoteRevisions = remoteGeneralPurposeDao.listAvailableRevisions(object.get_id(), object.getDBCollectionKey());
+				if (remoteRevisions != null)
+				{
+					for (DBRevision rev : remoteRevisions)
+					{
+						DBRevision local = localRevs.get(rev.getRevision());
+						if (local == null || local.getLocation() == DBRevision.NOT_AVAILABLE)
+						{
+							revisions.add(rev);
+						}
+					}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			return revisions;
 		}
 	}

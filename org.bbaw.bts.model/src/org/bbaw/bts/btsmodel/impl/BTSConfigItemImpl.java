@@ -48,6 +48,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getRules <em>Rules</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#isShowWidget <em>Show Widget</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getOwnerReferencedTypesStringList <em>Owner Referenced Types String List</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigItemImpl#getAbbreviation <em>Abbreviation</em>}</li>
  * </ul>
  * </p>
  *
@@ -250,6 +251,26 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 	 * @ordered
 	 */
 	protected EList<String> ownerReferencedTypesStringList;
+
+	/**
+	 * The default value of the '{@link #getAbbreviation() <em>Abbreviation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAbbreviation()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String ABBREVIATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getAbbreviation() <em>Abbreviation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getAbbreviation()
+	 * @generated
+	 * @ordered
+	 */
+	protected String abbreviation = ABBREVIATION_EDEFAULT;
 
 	private List<PropertyChangeListener> propertyChangeListeners = new ArrayList<PropertyChangeListener>();
 
@@ -573,6 +594,27 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 	}
 
 	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getAbbreviation() {
+		return abbreviation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setAbbreviation(String newAbbreviation) {
+		String oldAbbreviation = abbreviation;
+		abbreviation = newAbbreviation;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsmodelPackage.BTS_CONFIG_ITEM__ABBREVIATION, oldAbbreviation, abbreviation));
+	}
+
+	/**
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * 
 	 * @generatedNOT
@@ -700,6 +742,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 				return isShowWidget();
 			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST:
 				return getOwnerReferencedTypesStringList();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ABBREVIATION:
+				return getAbbreviation();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -753,6 +797,9 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 				getOwnerReferencedTypesStringList().clear();
 				getOwnerReferencedTypesStringList().addAll((Collection<? extends String>)newValue);
 				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ABBREVIATION:
+				setAbbreviation((String)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -803,6 +850,9 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST:
 				getOwnerReferencedTypesStringList().clear();
 				return;
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ABBREVIATION:
+				setAbbreviation(ABBREVIATION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -840,6 +890,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 				return showWidget != SHOW_WIDGET_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST:
 				return ownerReferencedTypesStringList != null && !ownerReferencedTypesStringList.isEmpty();
+			case BtsmodelPackage.BTS_CONFIG_ITEM__ABBREVIATION:
+				return ABBREVIATION_EDEFAULT == null ? abbreviation != null : !ABBREVIATION_EDEFAULT.equals(abbreviation);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -957,6 +1009,8 @@ public class BTSConfigItemImpl extends BTSConfigImpl implements BTSConfigItem {
 		result.append(showWidget);
 		result.append(", ownerReferencedTypesStringList: ");
 		result.append(ownerReferencedTypesStringList);
+		result.append(", abbreviation: ");
+		result.append(abbreviation);
 		result.append(')');
 		return result.toString();
 	}

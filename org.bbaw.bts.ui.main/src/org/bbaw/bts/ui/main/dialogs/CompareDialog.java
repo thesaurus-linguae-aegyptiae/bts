@@ -103,8 +103,8 @@ public class CompareDialog extends TitleAreaDialog
 	@Override
 	protected void createButtonsForButtonBar(Composite parent)
 	{
-		saveButton = createSaveButton(parent, IDialogConstants.OK_ID, "Save and Close", true);
-		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
+		saveButton = createSaveButton(parent, IDialogConstants.OK_ID, "Close", true);
+//		createButton(parent, IDialogConstants.CANCEL_ID, IDialogConstants.CANCEL_LABEL, false);
 	}
 
 	private Button createSaveButton(Composite parent, int id, String label, boolean defaultButton)
@@ -121,6 +121,8 @@ public class CompareDialog extends TitleAreaDialog
 				if (isValidInput())
 				{
 					saveInput();
+					okPressed();
+					close();
 				}
 			}
 		});
@@ -168,7 +170,10 @@ public class CompareDialog extends TitleAreaDialog
 	@Override
 	public boolean close()
 	{
-		part.dispose();
+		try {
+			part.dispose();
+		} catch (Exception e) {
+		}
 		part = null;
 		return super.close();
 	}

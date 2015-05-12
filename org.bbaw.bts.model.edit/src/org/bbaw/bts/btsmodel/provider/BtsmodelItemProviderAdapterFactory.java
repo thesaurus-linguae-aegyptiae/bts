@@ -634,6 +634,52 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link java.util.Map} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected StringToStringMapItemProvider stringToStringMapItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link java.util.Map}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createStringToStringMapAdapter() {
+		if (stringToStringMapItemProvider == null) {
+			stringToStringMapItemProvider = new StringToStringMapItemProvider(this);
+		}
+
+		return stringToStringMapItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.btsmodel.BTSIDReservationObject} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSIDReservationObjectItemProvider btsidReservationObjectItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.btsmodel.BTSIDReservationObject}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSIDReservationObjectAdapter() {
+		if (btsidReservationObjectItemProvider == null) {
+			btsidReservationObjectItemProvider = new BTSIDReservationObjectItemProvider(this);
+		}
+
+		return btsidReservationObjectItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -785,6 +831,8 @@ public class BtsmodelItemProviderAdapterFactory extends BtsmodelAdapterFactory i
 		if (btsdbCollectionRoleDescItemProvider != null) btsdbCollectionRoleDescItemProvider.dispose();
 		if (userActionCounterItemProvider != null) userActionCounterItemProvider.dispose();
 		if (stringToStringListMapItemProvider != null) stringToStringListMapItemProvider.dispose();
+		if (stringToStringMapItemProvider != null) stringToStringMapItemProvider.dispose();
+		if (btsidReservationObjectItemProvider != null) btsidReservationObjectItemProvider.dispose();
 	}
 
 }

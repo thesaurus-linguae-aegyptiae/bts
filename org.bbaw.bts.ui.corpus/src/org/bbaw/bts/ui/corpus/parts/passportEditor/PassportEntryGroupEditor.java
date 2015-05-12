@@ -173,7 +173,7 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 			((GridLayout) group.getLayout()).marginHeight = 0;
 			((GridLayout) group.getLayout()).horizontalSpacing = 0;
 			((GridLayout) group.getLayout()).verticalSpacing = 0;
-			((Group) group).setText(groupConfig.getValue());
+			((Group) group).setText(getLabel(groupConfig));
 
 			Composite composite = new Composite(group, SWT.NONE);
 			composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,

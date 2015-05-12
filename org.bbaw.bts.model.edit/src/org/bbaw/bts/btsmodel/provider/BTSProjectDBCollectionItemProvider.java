@@ -53,6 +53,9 @@ public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemP
 			addCollectionNamePropertyDescriptor(object);
 			addIndexedPropertyDescriptor(object);
 			addSynchronizedPropertyDescriptor(object);
+			addPropertyStringsPropertyDescriptor(object);
+			addPropertiesPropertyDescriptor(object);
+			addDirtyPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -118,6 +121,72 @@ public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemP
 				 getString("_UI_BTSProjectDBCollection_synchronized_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProjectDBCollection_synchronized_feature", "_UI_BTSProjectDBCollection_type"),
 				 BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Property Strings feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPropertyStringsPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSProjectDBCollection_propertyStrings_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProjectDBCollection_propertyStrings_feature", "_UI_BTSProjectDBCollection_type"),
+				 BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Properties feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPropertiesPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSProjectDBCollection_properties_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProjectDBCollection_properties_feature", "_UI_BTSProjectDBCollection_type"),
+				 BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__PROPERTIES,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Dirty feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDirtyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSProjectDBCollection_dirty_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSProjectDBCollection_dirty_feature", "_UI_BTSProjectDBCollection_type"),
+				 BtsmodelPackage.Literals.BTS_PROJECT_DB_COLLECTION__DIRTY,
 				 true,
 				 false,
 				 false,
@@ -216,6 +285,9 @@ public class BTSProjectDBCollectionItemProvider extends BTSIdentifiableItemItemP
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__COLLECTION_NAME:
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__INDEXED:
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__SYNCHRONIZED:
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTY_STRINGS:
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__PROPERTIES:
+			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__DIRTY:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsmodelPackage.BTS_PROJECT_DB_COLLECTION__ROLE_DESCRIPTIONS:

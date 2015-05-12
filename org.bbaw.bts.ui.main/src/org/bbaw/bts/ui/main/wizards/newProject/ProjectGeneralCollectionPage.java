@@ -32,6 +32,7 @@ public class ProjectGeneralCollectionPage extends WizardPage {
 	private Button btnCorpusData;
 	private Button btnThesaurusData;
 	private Button btnWordlistData;
+	private Button btnATextData;
 
 	/**
 	 * Create the wizard.
@@ -92,9 +93,22 @@ public class ProjectGeneralCollectionPage extends WizardPage {
 		});
 		new Label(container, SWT.NONE);
 		
-		
+		btnATextData = new Button(container, SWT.CHECK);
+		btnATextData.setText("Abstract Texts Data");
+		btnATextData.addSelectionListener(new SelectionAdapter() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				processAddOrRemoveAText(btnATextData.getSelection());
+			}
+		});
 	}
 	
+	protected void processAddOrRemoveAText(boolean selection) {
+		processAddOrRemoveDBColl(project.getPrefix() + "_atext", selection);
+		
+	}
+
 	@Override
 	public void setVisible(boolean visible) {
 		if(visible)

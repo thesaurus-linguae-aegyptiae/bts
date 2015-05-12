@@ -57,6 +57,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Optional
 	@Named(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_LABEL_MAP)
 	private HashMap<String, String> typeSubtypeLabelMap;
+	private Map<String, String> typeSubtypeAbbreviationLabelMap;
 	@Override
 	public BTSConfiguration createNew()
 	{
@@ -74,11 +75,23 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		if (entity != null)
 		{
 			configurationDao.add(entity, entity.getProject() + BTSCoreConstants.ADMIN_SUFFIX);
+			// purge cache
+			purgeCache();
+
 		}
 		if (active_configuration_name.equals(entity.getName())) {
 			context.set(BTSPluginIDs.ACTIVE_CONFIGURATION, entity);
 		}
+		
 		return true;
+	}
+
+	private void purgeCache() {
+		typeSubtypeLabelMap = null;
+		context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_LABEL_MAP, null);
+		typeSubtypeAbbreviationLabelMap = null;
+		context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_ABBREVIATION_LABEL_MAP, typeSubtypeAbbreviationLabelMap);
+		
 	}
 
 	@Override
@@ -283,22 +296,28 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 
 	@Override
 	public String findObjectClass(BTSObject corpusObject) {
-		if (corpusObject.eClass().getName().startsWith("BTSAnnotation")) {
+		if (corpusObject.eClass().getName().startsWith("BTSAbstractText")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[0];
-		} else if (corpusObject.eClass().getName().startsWith("BTSTCObject")) {
+		}else if (corpusObject.eClass().getName().startsWith("BTSAnnotation")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[1];
-		} else if (corpusObject.eClass().getName().startsWith("BTSImage")) {
+		}
+		else if (corpusObject.eClass().getName().startsWith("BTSTCObject")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[2];
-		} else if (corpusObject.eClass().getName().startsWith("BTSLemmaEntry")) {
+		} else if (corpusObject.eClass().getName().startsWith("BTSImage")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[3];
-		} else if (corpusObject.eClass().getName().startsWith("BTSTextCorpus")) {
-			return BTSConstants.BASIC_OBJECT_TYPES[5];
-		} else if (corpusObject.eClass().getName().startsWith("BTSText")) {
+		} else if (corpusObject.eClass().getName().startsWith("BTSLemmaEntry")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[4];
-		} else if (corpusObject.eClass().getName().startsWith("BTSThsEntry")) {
+		} 
+		else if (corpusObject.eClass().getName().startsWith("BTSTextCorpus")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[6];
-		} else if (corpusObject.eClass().getName().startsWith("BTSComment")) {
+		}
+		else if (corpusObject.eClass().getName().startsWith("BTSText")) {
+			return BTSConstants.BASIC_OBJECT_TYPES[5];
+		}
+		  else if (corpusObject.eClass().getName().startsWith("BTSThsEntry")) {
 			return BTSConstants.BASIC_OBJECT_TYPES[7];
+		} else if (corpusObject.eClass().getName().startsWith("BTSComment")) {
+			return BTSConstants.BASIC_OBJECT_TYPES[8];
 		}
 		return null;
 	}
@@ -943,7 +962,7 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	}
 
 	@Override
-	public String getLabelOfTypeSubtypeString(BTSObject object) {
+	public String getLabelOfTypeSubtypeString(BTSObject object, boolean prefereAbbreviation) {
 		String str = object.getType();
 		if (str == null) return null;
 		BTSConfigItem objectTypesCI = getObjectTypesConfigItem();
@@ -957,6 +976,10 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		if (object.getSubtype() != null)
 		{
 			labelKeyString+= "/" + object.getSubtype();
+		}
+		if (prefereAbbreviation)
+		{
+			return getInternalAbbreviationLabelOfTypeSubtypeString(object, labelKeyString, objectTypesCI, oClass);
 		}
 		Map<String, String> labelMap = getTypeSubtypeLabelMap();
 		if (labelMap.containsKey(labelKeyString))
@@ -999,6 +1022,75 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 		}
 		
 		return null;
+	}
+
+	private String getInternalAbbreviationLabelOfTypeSubtypeString(
+			BTSObject object, String labelKeyString, BTSConfig objectTypesCI, Object oClass) {
+		Map<String, String> abbreviationMap = getTypeSubtypeAbbreviationLabelMap();
+		if (abbreviationMap.containsKey(labelKeyString))
+		{
+			return abbreviationMap.get(labelKeyString);
+		}
+		String str = object.getType();
+		if (str == null) return null;
+		for (BTSConfig c : objectTypesCI.getChildren()) {
+			if (oClass.equals(((BTSConfigItem) c).getValue())) {
+//				str = ((BTSConfigItem) c).getLabel().getTranslation(lang);
+				if (object.getType() == null || "".equals(object.getType())) {
+					return null;
+				} else {
+					for (BTSConfig cc : c.getChildren()) {
+						if (object.getType().equalsIgnoreCase(
+								((BTSConfigItem) cc).getValue())) {
+							if (((BTSConfigItem) cc).getAbbreviation() != null)
+							{
+								str = ((BTSConfigItem) cc).getAbbreviation();
+							}
+							else
+							{
+								str = ((BTSConfigItem) cc).getLabel().getTranslation(lang);
+							}
+							if (object.getSubtype() != null
+									&& !"".equals(object.getSubtype())) {
+								for (BTSConfig ccc : cc.getChildren()) {
+									if (object.getSubtype().equalsIgnoreCase(
+											((BTSConfigItem) ccc).getValue())) {
+										if (((BTSConfigItem) ccc).getAbbreviation() != null)
+										{
+											str = str + "/" + ((BTSConfigItem) ccc).getAbbreviation();
+										}
+										else
+										{
+											str = str + "/" + ((BTSConfigItem) ccc).getLabel().getTranslation(lang);
+										}
+										abbreviationMap.put(labelKeyString, str);
+										return str;
+									}
+
+								}
+								abbreviationMap.put(labelKeyString, str);
+								return str;
+							} else {
+								abbreviationMap.put(labelKeyString, str);
+								return str;
+							}
+						}
+
+					}
+				}
+			}
+
+		}
+		return null;
+	}
+
+	private Map<String, String> getTypeSubtypeAbbreviationLabelMap() {
+		if (typeSubtypeAbbreviationLabelMap == null)
+		{
+			typeSubtypeAbbreviationLabelMap = new HashMap<String, String>();
+			context.set(BTSCoreConstants.CONTEXT_TYPE_SUBTYEPE_ABBREVIATION_LABEL_MAP, typeSubtypeAbbreviationLabelMap);
+		}
+		return typeSubtypeAbbreviationLabelMap;
 	}
 
 	private Map<String, String> getTypeSubtypeLabelMap() {

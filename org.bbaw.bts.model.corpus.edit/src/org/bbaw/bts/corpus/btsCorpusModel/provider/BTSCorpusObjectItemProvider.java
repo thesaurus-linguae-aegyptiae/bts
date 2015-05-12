@@ -6,8 +6,6 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 import java.util.Collection;
 import java.util.List;
 import org.bbaw.bts.btsmodel.provider.BTSObjectItemProvider;
-import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
-import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -201,7 +199,6 @@ public class BTSCorpusObjectItemProvider
 		switch (notification.getFeatureID(BTSCorpusObject.class)) {
 			case BtsCorpusModelPackage.BTS_CORPUS_OBJECT__CORPUS_PREFIX:
 			case BtsCorpusModelPackage.BTS_CORPUS_OBJECT__WORK_PHASE:
-			case BtsCorpusModelPackage.BTS_TEXT_CORPUS__ACTIVE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case BtsCorpusModelPackage.BTS_CORPUS_OBJECT__PASSPORT:

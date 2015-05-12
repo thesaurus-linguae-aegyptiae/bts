@@ -327,6 +327,25 @@ public class BtsCorpusModelSwitch<T> extends Switch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case BtsCorpusModelPackage.BTS_ABSTRACT_TEXT: {
+				BTSAbstractText btsAbstractText = (BTSAbstractText)theEObject;
+				T result = caseBTSAbstractText(btsAbstractText);
+				if (result == null) result = caseBTSCorpusObject(btsAbstractText);
+				if (result == null) result = caseBTSObject(btsAbstractText);
+				if (result == null) result = caseAdministrativDataObject(btsAbstractText);
+				if (result == null) result = caseBTSDBBaseObject(btsAbstractText);
+				if (result == null) result = caseBTSObservableObject(btsAbstractText);
+				if (result == null) result = caseBTSIdentifiableItem(btsAbstractText);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BtsCorpusModelPackage.BTS_ABSTRACT_PARAGRAPH: {
+				BTSAbstractParagraph btsAbstractParagraph = (BTSAbstractParagraph)theEObject;
+				T result = caseBTSAbstractParagraph(btsAbstractParagraph);
+				if (result == null) result = caseBTSIdentifiableItem(btsAbstractParagraph);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -688,6 +707,36 @@ public class BtsCorpusModelSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseBTSPassportEntryItem(BTSPassportEntryItem object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Abstract Text</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Abstract Text</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSAbstractText(BTSAbstractText object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>BTS Abstract Paragraph</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>BTS Abstract Paragraph</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBTSAbstractParagraph(BTSAbstractParagraph object) {
 		return null;
 	}
 

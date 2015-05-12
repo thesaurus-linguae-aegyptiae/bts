@@ -5837,6 +5837,396 @@ public interface BtsCorpusModelPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractTextImpl <em>BTS Abstract Text</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractTextImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAbstractText()
+	 * @generated
+	 */
+	int BTS_ABSTRACT_TEXT = 24;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__PROPERTY_CHANGE_SUPPORT = BTS_CORPUS_OBJECT__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__ID = BTS_CORPUS_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__STATE = BTS_CORPUS_OBJECT__STATE;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__REVISION_STATE = BTS_CORPUS_OBJECT__REVISION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__VISIBILITY = BTS_CORPUS_OBJECT__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__REVISIONS = BTS_CORPUS_OBJECT__REVISIONS;
+
+	/**
+	 * The feature id for the '<em><b>rev</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__REV = BTS_CORPUS_OBJECT__REV;
+
+	/**
+	 * The feature id for the '<em><b>Project</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__PROJECT = BTS_CORPUS_OBJECT__PROJECT;
+
+	/**
+	 * The feature id for the '<em><b>Locked</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__LOCKED = BTS_CORPUS_OBJECT__LOCKED;
+
+	/**
+	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__UPDATERS = BTS_CORPUS_OBJECT__UPDATERS;
+
+	/**
+	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__READERS = BTS_CORPUS_OBJECT__READERS;
+
+	/**
+	 * The feature id for the '<em><b>deleted</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__DELETED = BTS_CORPUS_OBJECT__DELETED;
+
+	/**
+	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__CONFLICTING_REVS = BTS_CORPUS_OBJECT__CONFLICTING_REVS;
+
+	/**
+	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__NAME = BTS_CORPUS_OBJECT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__SUBTYPE = BTS_CORPUS_OBJECT__SUBTYPE;
+
+	/**
+	 * The feature id for the '<em><b>Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__CODE = BTS_CORPUS_OBJECT__CODE;
+
+	/**
+	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__RELATIONS = BTS_CORPUS_OBJECT__RELATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__TEMP_SORT_KEY = BTS_CORPUS_OBJECT__TEMP_SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__EXTERNAL_REFERENCES = BTS_CORPUS_OBJECT__EXTERNAL_REFERENCES;
+
+	/**
+	 * The feature id for the '<em><b>Passport</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__PASSPORT = BTS_CORPUS_OBJECT__PASSPORT;
+
+	/**
+	 * The feature id for the '<em><b>Corpus Prefix</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__CORPUS_PREFIX = BTS_CORPUS_OBJECT__CORPUS_PREFIX;
+
+	/**
+	 * The feature id for the '<em><b>Work Phase</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__WORK_PHASE = BTS_CORPUS_OBJECT__WORK_PHASE;
+
+	/**
+	 * The feature id for the '<em><b>Paragraphs</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__PARAGRAPHS = BTS_CORPUS_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Abstract Text</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT_FEATURE_COUNT = BTS_CORPUS_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_CORPUS_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT___ADD_REVISION__BTSREVISION = BTS_CORPUS_OBJECT___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT___ADD_REVISION__INT_DATE_STRING = BTS_CORPUS_OBJECT___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT___GET_REVISION__INT = BTS_CORPUS_OBJECT___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT___GET_LAST_REVISION = BTS_CORPUS_OBJECT___GET_LAST_REVISION;
+
+	/**
+	 * The number of operations of the '<em>BTS Abstract Text</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT_OPERATION_COUNT = BTS_CORPUS_OBJECT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractParagraphImpl <em>BTS Abstract Paragraph</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractParagraphImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAbstractParagraph()
+	 * @generated
+	 */
+	int BTS_ABSTRACT_PARAGRAPH = 25;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Witnesses</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH__WITNESSES = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH__SORT_KEY = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH__TYPE = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH__NAME = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>BTS Abstract Paragraph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>BTS Abstract Paragraph</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_PARAGRAPH_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject <em>BTS Corpus Object</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6657,6 +7047,81 @@ public interface BtsCorpusModelPackage extends EPackage {
 	EReference getBTSPassportEntryItem_Translation();
 
 	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText <em>BTS Abstract Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Abstract Text</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText
+	 * @generated
+	 */
+	EClass getBTSAbstractText();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText#getParagraphs <em>Paragraphs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Paragraphs</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText#getParagraphs()
+	 * @see #getBTSAbstractText()
+	 * @generated
+	 */
+	EReference getBTSAbstractText_Paragraphs();
+
+	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph <em>BTS Abstract Paragraph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Abstract Paragraph</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph
+	 * @generated
+	 */
+	EClass getBTSAbstractParagraph();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getWitnesses <em>Witnesses</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Witnesses</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getWitnesses()
+	 * @see #getBTSAbstractParagraph()
+	 * @generated
+	 */
+	EReference getBTSAbstractParagraph_Witnesses();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getSortKey <em>Sort Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sort Key</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getSortKey()
+	 * @see #getBTSAbstractParagraph()
+	 * @generated
+	 */
+	EAttribute getBTSAbstractParagraph_SortKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getType()
+	 * @see #getBTSAbstractParagraph()
+	 * @generated
+	 */
+	EAttribute getBTSAbstractParagraph_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph#getName()
+	 * @see #getBTSAbstractParagraph()
+	 * @generated
+	 */
+	EAttribute getBTSAbstractParagraph_Name();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7342,6 +7807,66 @@ public interface BtsCorpusModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference BTS_PASSPORT_ENTRY_ITEM__TRANSLATION = eINSTANCE.getBTSPassportEntryItem_Translation();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractTextImpl <em>BTS Abstract Text</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractTextImpl
+		 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAbstractText()
+		 * @generated
+		 */
+		EClass BTS_ABSTRACT_TEXT = eINSTANCE.getBTSAbstractText();
+
+		/**
+		 * The meta object literal for the '<em><b>Paragraphs</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_ABSTRACT_TEXT__PARAGRAPHS = eINSTANCE.getBTSAbstractText_Paragraphs();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractParagraphImpl <em>BTS Abstract Paragraph</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAbstractParagraphImpl
+		 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAbstractParagraph()
+		 * @generated
+		 */
+		EClass BTS_ABSTRACT_PARAGRAPH = eINSTANCE.getBTSAbstractParagraph();
+
+		/**
+		 * The meta object literal for the '<em><b>Witnesses</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BTS_ABSTRACT_PARAGRAPH__WITNESSES = eINSTANCE.getBTSAbstractParagraph_Witnesses();
+
+		/**
+		 * The meta object literal for the '<em><b>Sort Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_ABSTRACT_PARAGRAPH__SORT_KEY = eINSTANCE.getBTSAbstractParagraph_SortKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_ABSTRACT_PARAGRAPH__TYPE = eINSTANCE.getBTSAbstractParagraph_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_ABSTRACT_PARAGRAPH__NAME = eINSTANCE.getBTSAbstractParagraph_Name();
 
 	}
 

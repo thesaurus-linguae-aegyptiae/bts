@@ -9,6 +9,9 @@ public class BTSCorpusConstants {
 	public static final String WLIST = "_wlist";
 
 	public static final String THS = "_ths";
+	
+	public static final String ATEXT = "_atext";
+
 
 	/** The Constant VIEW_THS_ROOT_ENTRIES. */
 	public static final String VIEW_THS_ROOT_ENTRIES = "ths/root_entries";
@@ -121,6 +124,13 @@ public class BTSCorpusConstants {
 
 	public static final String PREF_THS_DEFAULT_VISIBILITY = "pref_ths_default_visibility";
 	public static final String PREF_THS_DEFAULT_REVIEWSTATE = "pref_ths_default_reviewState";
+
+	public static final String PREF_ATEXT_DEFAULT_REVIEWSTATE = "pref_atext_default_reviewState";
+
+	public static final String PREF_ATEXT_DEFAULT_VISIBILITY = "pref_atext_default_visibility";
+
+	public static final String PREF_ATEXT_NAVIGATOR_SORTBYKEY = "pref_atext_navigator_sortbysortkey";
+
 
 
 	private BTSCorpusConstants(){}

@@ -3,6 +3,7 @@ package org.bbaw.bts.ui.corpus.dialogs;
 import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
@@ -27,11 +28,9 @@ public class PassportEditorDialog extends TitleAreaDialog {
 
 	@Inject
 	private BTSObject selectionObject;
-	private Text text;
-
+	
 	@Inject
-	private BTSResourceProvider resourceProvider;
-
+	private CorpusNavigatorController corpusNavigator;
 	private PassportEditorPart editor;
 	/**
 	 * Create the dialog.
@@ -60,6 +59,12 @@ public class PassportEditorDialog extends TitleAreaDialog {
 		((GridLayout) composite.getLayout()).marginHeight = 0;
 		((GridLayout) composite.getLayout()).horizontalSpacing = 0;
 		((GridLayout) composite.getLayout()).verticalSpacing = 0;
+		
+		if (selectionObject instanceof BTSCorpusObject)
+		{
+			corpusNavigator.checkAndFullyLoad((BTSCorpusObject) selectionObject, false);
+		}
+		
 		IEclipseContext child = context.createChild("passportEditorDialog");
 		child.set(Composite.class, composite);
 		editor = ContextInjectionFactory.make(

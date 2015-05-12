@@ -62,6 +62,16 @@ implements GenericCorpusObjectService<E, K>{
 	@Preference(value = BTSPluginIDs.PREF_MAIN_THS_KEY, nodePath = "org.bbaw.bts.app")
 	protected String main_ths_key;
 	
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_ACTIVE_ATEXTS, nodePath = "org.bbaw.bts.app")
+	protected String active_atexts;
+
+	@Inject
+	@Optional
+	@Preference(value = BTSPluginIDs.PREF_MAIN_ATEXT_KEY, nodePath = "org.bbaw.bts.app")
+	protected String main_atext_key;
+	
 	public abstract List<E> listRootEntries(IProgressMonitor monitor);
 	
 	public List<E> getOrphanEntries(Map map,

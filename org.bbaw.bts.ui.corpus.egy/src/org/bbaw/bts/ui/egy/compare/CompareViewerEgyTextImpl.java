@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.egy.parts.EgyTextEditorPart;
@@ -41,15 +42,17 @@ public class CompareViewerEgyTextImpl implements CompareViewer{
 	@Override
 	public boolean load(Object leftObject, boolean leftEditable,
 			Object rightObject, boolean rightEditable) {
-		if (leftObject instanceof BTSObject && rightObject instanceof BTSObject)
+		if (leftObject instanceof BTSText && rightObject instanceof BTSText)
 		{
 			this.leftObject = (BTSObject) leftObject;
 			this.leftEditale = leftEditable;
 			this.rightObject = (BTSObject) rightObject;
 			this.righEditable = rightEditable;
 
-			leftTextEditor.setSelection((BTSObject) leftObject);
-			rightTextEditor.setSelection((BTSObject) rightObject);
+			leftTextEditor.setInputObjectDirect((BTSText) leftObject);
+			leftTextEditor.setUserMayEdit(leftEditable);
+			rightTextEditor.setInputObjectDirect((BTSText) rightObject);
+			rightTextEditor.setUserMayEdit(rightEditable);
 		}
 		return false;
 	}

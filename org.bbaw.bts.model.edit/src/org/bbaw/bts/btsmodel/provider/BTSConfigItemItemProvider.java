@@ -72,6 +72,7 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider
 			addSubtypePropertyDescriptor(object);
 			addShowWidgetPropertyDescriptor(object);
 			addOwnerReferencedTypesStringListPropertyDescriptor(object);
+			addAbbreviationPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -273,6 +274,28 @@ public class BTSConfigItemItemProvider extends BTSConfigItemProvider
 				 getString("_UI_BTSConfigItem_ownerReferencedTypesStringList_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfigItem_ownerReferencedTypesStringList_feature", "_UI_BTSConfigItem_type"),
 				 BtsmodelPackage.Literals.BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Abbreviation feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAbbreviationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSConfigItem_abbreviation_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSConfigItem_abbreviation_feature", "_UI_BTSConfigItem_type"),
+				 BtsmodelPackage.Literals.BTS_CONFIG_ITEM__ABBREVIATION,
 				 true,
 				 false,
 				 false,

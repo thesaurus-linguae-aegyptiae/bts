@@ -47,7 +47,7 @@ public class ThsNavigatorSettingsPage extends FieldEditorPreferencePage {
 	private BTSTCObject object;
 	public ThsNavigatorSettingsPage() {
 		super(FLAT);
-		setTitle("Ths Navigator Settings");
+		setTitle("Thesaurus Navigator Settings");
 	}
 
 

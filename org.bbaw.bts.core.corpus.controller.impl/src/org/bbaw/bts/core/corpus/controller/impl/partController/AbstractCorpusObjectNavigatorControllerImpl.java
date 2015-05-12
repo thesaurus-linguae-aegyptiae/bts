@@ -86,7 +86,7 @@ GenericCorpusObjectNavigatorController<E, K>
 	protected abstract List<E> retrieveTypedRootEntries(IProgressMonitor monitor);
 
 	@Override
-	public void addRelation(E subject, String relationType,
+	public TreeNodeWrapper addRelation(E subject, String relationType,
 			TreeNodeWrapper treeNodeWrapper) {
 		Object o = treeNodeWrapper.getObject();
 		BTSObject object = null;
@@ -96,8 +96,9 @@ GenericCorpusObjectNavigatorController<E, K>
 		}
 		else
 		{
-			return;
+			return null;
 		}
+		TreeNodeWrapper childNode = null;
 		if (subject != null) {
 			BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
 			rel.setObjectId(((BTSDBBaseObject) object).get_id());
@@ -106,7 +107,7 @@ GenericCorpusObjectNavigatorController<E, K>
 			corpusObjectService.save((E) subject);
 		}
 		if (relationType != null && relationType.equals("partOf")) {
-			TreeNodeWrapper childNode = BtsviewmodelFactory.eINSTANCE
+			childNode = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			childNode.setParent(treeNodeWrapper);
 			childNode.setObject(subject);
@@ -114,6 +115,7 @@ GenericCorpusObjectNavigatorController<E, K>
 
 		}
 		eventBroker.post("model_update/async", "Hallo");
+		return childNode;
 
 	}
 

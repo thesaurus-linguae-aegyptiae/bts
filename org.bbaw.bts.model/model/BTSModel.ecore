@@ -267,6 +267,7 @@
         <details key="documentation" value="This list of Strings hold information of possible types allowed as owners of this configuration detail and &#xD;&#xA;possible types allowed as referenced object.&#xD;&#xA;&#xD;&#xA;E.g. an object of type 'corpus' may own the relation 'contains' and reference another&#xD;&#xA;object of type 'text'. The string representation should look like: corpus>text"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abbreviation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSPassportEditorConfig" eSuperTypes="#//BTSIdentifiableItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

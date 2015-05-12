@@ -322,7 +322,7 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 		grpSigntext.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		grpSigntext.setLayout(new GridLayout(1, false));
 		
-		grpSigntext.setText("Sign-Text");
+		grpSigntext.setText("Sign Text");
 		IEclipseContext child = context.createChild();
 		child.set(Composite.class, grpSigntext);
 		child.set(IBTSEditor.class, EgyLemmaEditorPart.this);
@@ -367,6 +367,8 @@ public class EgyLemmaEditorPart extends AbstractTextEditorLogic implements IBTSE
 			loadInput(selectedLemmaEntry);
 		}
 	}
+	
+	
 	
 	@Inject
 	public void setSelection(

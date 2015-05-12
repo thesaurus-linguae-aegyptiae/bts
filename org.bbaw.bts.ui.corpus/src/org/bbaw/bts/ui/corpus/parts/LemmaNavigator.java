@@ -36,6 +36,7 @@ import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.corpus.parts.corpusNavigator.BTSCorpusObjectBySortKeyNameViewerSorter;
 import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaBySortKeyNameViewerSorter;
 import org.bbaw.bts.ui.corpus.sorter.BTSEgyObjectByNameViewerSorter;
@@ -61,9 +62,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -83,6 +89,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 
 public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider
@@ -464,10 +471,37 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 									treeViewer
 											.addFilter(new SuppressNondeletedViewerFilter());
 								}
+								if (BTSUIConstants.SELECTION_TYPE_SECONDARY
+										.equals(selectionType)) {
+									// register context menu on the table
+									 MenuManager menuMgr = new MenuManager("#PopupMenu"); 
+									 menuMgr.setRemoveAllWhenShown(true);
+									 menuMgr.addMenuListener(new IMenuListener() {
+									     @Override
+									     public void menuAboutToShow(IMenuManager manager) {
+									         Action action = new Action() {
+									      public void run() {
+									                openInPassportEditorDialog(treeViewer.getSelection());
+									      }
+
+										
+									  };
+									  action.setText("Open in Passport Data Editor");
+									  manager.add(action);
+									 }
+
+									 });
+
+									 Menu menu = menuMgr.createContextMenu(treeViewer.getTree());
+									 treeViewer.getTree().setMenu(menu);
+								}
+								else
+								{
 								// register context menu on the table
 								menuService.registerContextMenu(
 										treeViewer.getControl(),
 										BTSPluginIDs.POPMENU_LEMMA_NAVIGATOR_TREE_MENU);
+								}
 							}
 						});
 					}};
@@ -477,8 +511,33 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		    } catch (InterruptedException e) {
 		       // handle cancelation
 		    }
-
 	}
+	
+	private void openInPassportEditorDialog(
+			ISelection sel) {
+		StructuredSelection localSelection = (StructuredSelection) sel;
+		if (localSelection.getFirstElement() != null
+				&& localSelection.getFirstElement() instanceof TreeNodeWrapper) {
+			TreeNodeWrapper localTreeNode = (TreeNodeWrapper) localSelection
+					.getFirstElement();
+			if (localTreeNode.getObject() != null) {
+				BTSObject localCorpusObject = (BTSObject) localTreeNode.getObject();
+				if (localCorpusObject instanceof BTSCorpusObject) {
+					lemmaNavigatorController.checkAndFullyLoad((BTSCorpusObject) localCorpusObject, true);
+					IEclipseContext child = context.createChild();
+					child.set(BTSObject.class, localCorpusObject);
+					child.set(Shell.class, new Shell());
+					child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, false);
+
+					PassportEditorDialog dialog = ContextInjectionFactory.make(
+							PassportEditorDialog.class, child);
+					dialog.open();
+				}
+			}
+		}
+	}
+	
+	
 	private ViewerFilter getDeletedFilter() {
 		if (deletedFilter == null) {
 			deletedFilter = new SuppressDeletedViewerFilter();
@@ -603,12 +662,19 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	@Optional
 	void eventReceivedNew(@EventTopic("model_lemma_new_root/*") BTSObject object) {
 		if ((object instanceof BTSLemmaEntry)) {
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+			final TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			tn.setObject(object);
 			mainRootNode.getChildren().add(tn);
 			tn.setParentObject(mainRootNode);
-			// refreshTreeViewer((BTSCorpusObject) object);
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					if (!mainTreeViewer.getTree().isDisposed())
+					{
+						mainTreeViewer.setSelection(new StructuredSelection(tn), true);
+					}
+				}
+			});
 		}
 	}
 	@Inject
@@ -617,10 +683,17 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 		if ((object instanceof BTSLemmaEntry)
 				&& selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSLemmaEntry) {
-			lemmaNavigatorController.addRelation((BTSLemmaEntry) object,
+			final TreeNodeWrapper tn = lemmaNavigatorController.addRelation((BTSLemmaEntry) object,
 					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
 					(TreeNodeWrapper) selection.getFirstElement());
-			// refreshTreeViewer((BTSCorpusObject) object);
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					if (!mainTreeViewer.getTree().isDisposed())
+					{
+						mainTreeViewer.setSelection(new StructuredSelection(tn), true);
+					}
+				}
+			});
 		}
 	}
 	@Inject
@@ -720,7 +793,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	}
 
 	@Override
-	public void search(BTSQueryRequest query, String queryName) {
+	public void search(BTSQueryRequest query, String queryName, String viewerFilterString) {
 		if (query == null)
 		{
 			return;

@@ -18,13 +18,13 @@
     category="org.bbaw.bts.ui.main.btsgeneral.page"
           class="org.bbaw.bts.ui.egy.preferences.EgyTextEditorPage"
           id="org.bbaw.bts.ui.corpus.egy.textEditor"
-          name="EgyTextEditor">
+          name="Text Editor">
     </page>
     <page
     category="org.bbaw.bts.ui.corpus.egy.textEditor"
           class="org.bbaw.bts.ui.egy.preferences.SignTextEditorPage"
           id="org.bbaw.bts.ui.corpus.egy.signTextEditor"
-          name="SignTextEditor">
+          name="Sign Text Editor">
     </page>
     <page
           category="org.bbaw.bts.ui.main.btsgeneral.page"

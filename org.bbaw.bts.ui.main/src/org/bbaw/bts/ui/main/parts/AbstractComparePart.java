@@ -54,8 +54,8 @@ public class AbstractComparePart {
 	@Inject
 	private IExtensionRegistry registry;
 	protected List<CompareViewer> compareViewers;
-	private boolean leftEditable;
-	private boolean rightEditable;
+	protected boolean leftEditable;
+	protected boolean rightEditable;
 	protected Menu leftContextMenu;
 	protected TreeNodeWrapper compareRevInput;
 

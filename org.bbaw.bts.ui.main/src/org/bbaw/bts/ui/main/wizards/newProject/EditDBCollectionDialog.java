@@ -111,7 +111,7 @@ public class EditDBCollectionDialog extends TitleAreaDialog
 		});
 		btnSyncronizeCollection = new Button(container, SWT.CHECK);
 		btnSyncronizeCollection.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		btnSyncronizeCollection.setText("Syncronize Collection");
+		btnSyncronizeCollection.setText("Synchronize Collection");
 
 		btnIndexCollectionFor = new Button(container, SWT.CHECK);
 		btnIndexCollectionFor.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));

@@ -1,5 +1,7 @@
 package org.bbaw.bts.ui.main.handlers;
 
+import javax.inject.Named;
+
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.main.dialogs.SimpleSearchQueryDialog;
@@ -8,13 +10,14 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.CanExecute;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.swt.widgets.Shell;
 
 public class OpenSearchQueryDialogHandler {
 	@Execute
 	public void execute(@Active MPart activePart, @Active Shell shell,
-			IEclipseContext context) {
+			IEclipseContext context, @Optional @Named("viewerFilter") String viewerFilterString) {
 		Object o = activePart.getObject();
 		if (o instanceof SearchViewer) {
 			SearchViewer searchViewer = (SearchViewer) o;
@@ -27,7 +30,7 @@ public class OpenSearchQueryDialogHandler {
 			if (dialog.open() == dialog.OK) {
 				query = dialog.getQueryRequest();
 				if (query != null) {
-					searchViewer.search(query, null);
+					searchViewer.search(query, null, viewerFilterString);
 				}
 			}
 		}

@@ -854,13 +854,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			for (BTSGraphic graphic : word.getGraphics())
 			{
 
+				if (graphic.getCode() != null)
+				{
 				mdc += graphic.getCode();
-				if (i == selectedGlypheIndex) {
-					mdc = insertMarkerBehindSingleCode(mdc, MDC_SELECTION);
-				} else if (graphic.isIgnored()) {
-					mdc = insertMarkerBehindSingleCode(mdc, MDC_IGNORE);
+					if (i == selectedGlypheIndex) {
+						mdc = insertMarkerBehindSingleCode(mdc, MDC_SELECTION);
+					} else if (graphic.isIgnored()) {
+						mdc = insertMarkerBehindSingleCode(mdc, MDC_IGNORE);
+					}
+					i++;
 				}
-				i++;
 			}
 		}
 

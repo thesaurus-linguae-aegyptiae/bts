@@ -39,7 +39,19 @@
           category="org.bbaw.bts.ui.corpus.thssettings.page"
           class="org.bbaw.bts.ui.corpus.preferences.ThsNavigatorSettingsPage"
           id="org.bbaw.bts.ui.corpus.thsnavigator.page"
-          name="thsnavigator">
+          name="Thesaurus Navigator Settings">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.main.btsgeneral.page"
+          class="org.bbaw.bts.ui.corpus.preferences.ATextSettingsPage"
+          id="org.bbaw.bts.ui.corpus.atextSettings"
+          name="atextSettings">
+    </page>
+    <page
+          category="org.bbaw.bts.ui.corpus.atextSettings"
+          class="org.bbaw.bts.ui.corpus.preferences.ATextNavigatorSettingsPage"
+          id="org.bbaw.bts.ui.corpus.atextnavigatorsettings"
+          name="atextnavigatorsettings">
     </page>
  </extension>
  <extension
@@ -64,6 +76,12 @@
        point="org.bbaw.bts.ui.commons.searchViewerFactory">
     <searchViewerFactory
           class="org.bbaw.bts.ui.corpus.search.SearchViewerFactoryThs">
+    </searchViewerFactory>
+ </extension>
+ <extension
+       point="org.bbaw.bts.ui.commons.searchViewerFactory">
+    <searchViewerFactory
+          class="org.bbaw.bts.ui.corpus.search.SearchViewerFactoryAText">
     </searchViewerFactory>
  </extension>
 </plugin>

@@ -5,13 +5,10 @@ import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
@@ -24,7 +21,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
 

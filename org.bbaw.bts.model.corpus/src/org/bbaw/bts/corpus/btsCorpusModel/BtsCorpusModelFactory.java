@@ -175,6 +175,24 @@ public interface BtsCorpusModelFactory extends EFactory {
 	BTSPassportEntryItem createBTSPassportEntryItem();
 
 	/**
+	 * Returns a new object of class '<em>BTS Abstract Text</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Abstract Text</em>'.
+	 * @generated
+	 */
+	BTSAbstractText createBTSAbstractText();
+
+	/**
+	 * Returns a new object of class '<em>BTS Abstract Paragraph</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>BTS Abstract Paragraph</em>'.
+	 * @generated
+	 */
+	BTSAbstractParagraph createBTSAbstractParagraph();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

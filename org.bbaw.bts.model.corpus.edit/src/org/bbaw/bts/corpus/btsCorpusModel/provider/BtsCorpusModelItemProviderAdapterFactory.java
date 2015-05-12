@@ -496,6 +496,52 @@ public class BtsCorpusModelItemProviderAdapterFactory extends BtsCorpusModelAdap
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSAbstractTextItemProvider btsAbstractTextItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSAbstractTextAdapter() {
+		if (btsAbstractTextItemProvider == null) {
+			btsAbstractTextItemProvider = new BTSAbstractTextItemProvider(this);
+		}
+
+		return btsAbstractTextItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected BTSAbstractParagraphItemProvider btsAbstractParagraphItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createBTSAbstractParagraphAdapter() {
+		if (btsAbstractParagraphItemProvider == null) {
+			btsAbstractParagraphItemProvider = new BTSAbstractParagraphItemProvider(this);
+		}
+
+		return btsAbstractParagraphItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -612,6 +658,8 @@ public class BtsCorpusModelItemProviderAdapterFactory extends BtsCorpusModelAdap
 		if (btsAmbivalenceItemProvider != null) btsAmbivalenceItemProvider.dispose();
 		if (btsLemmaCaseItemProvider != null) btsLemmaCaseItemProvider.dispose();
 		if (btsPassportEntryItemItemProvider != null) btsPassportEntryItemItemProvider.dispose();
+		if (btsAbstractTextItemProvider != null) btsAbstractTextItemProvider.dispose();
+		if (btsAbstractParagraphItemProvider != null) btsAbstractParagraphItemProvider.dispose();
 	}
 
 }

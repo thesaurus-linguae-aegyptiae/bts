@@ -48,9 +48,11 @@ public class BTSConstants
 	public static final String TEXT = "Text";
 	public static final String TEXT_CORPUS = "TextCorpus";
 	public static final String THS_ENTRY = "Thesaurus Entry";
+	public static final String ABSTRACT_TEXT = "Abstract Text";
+
 	private static final String COMMENT = "Comment";
 
-	public static final String[] BASIC_OBJECT_TYPES = new String[] {
+	public static final String[] BASIC_OBJECT_TYPES = new String[] { BTSConstants.ABSTRACT_TEXT,
 			BTSConstants.ANNOTATION, BTSConstants.CORPUS_OBJECT,
 			BTSConstants.IMAGE, BTSConstants.WLIST_ENTRY, BTSConstants.TEXT,
 			BTSConstants.TEXT_CORPUS, BTSConstants.THS_ENTRY , BTSConstants.COMMENT};
@@ -174,6 +176,7 @@ public class BTSConstants
 	public static final int DB_COLLECTION_PROP_RESERVE_ID_STEP_DEFAULT = 1;
 
 	public static final boolean DB_COLLECTION_PROP_RESERVE_ID_FORCE_SERVER_DEFAULT = true;
+
 
 
 	

@@ -58,7 +58,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		exactButton = new Button(container, SWT.CHECK);
-		exactButton.setText("Search for exactly this string (equals not contains)");
+		exactButton.setText("Search for Names only");
 		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
 		
 		return area;

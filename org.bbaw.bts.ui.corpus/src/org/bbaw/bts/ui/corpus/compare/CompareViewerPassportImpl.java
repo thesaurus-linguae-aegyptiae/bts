@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
@@ -42,15 +43,15 @@ public class CompareViewerPassportImpl implements CompareViewer{
 	@Override
 	public boolean load(Object leftObject, boolean leftEditable,
 			Object rightObject, boolean rightEditable) {
-		if (leftObject instanceof BTSObject && rightObject instanceof BTSObject)
+		if (leftObject instanceof BTSCorpusObject && rightObject instanceof BTSCorpusObject)
 		{
 			this.leftObject = (BTSObject) leftObject;
 			this.leftEditale = leftEditable;
 			this.rightObject = (BTSObject) rightObject;
 			this.righEditable = rightEditable;
 
-			leftPassportEditor.setSelection((BTSObject) leftObject);
-			rightPassportEditor.setSelection((BTSObject) rightObject);
+			leftPassportEditor.setInputObjectDirect((BTSCorpusObject) leftObject);
+			rightPassportEditor.setInputObjectDirect((BTSCorpusObject) rightObject);
 		}
 		return false;
 	}

@@ -3,7 +3,10 @@ package org.bbaw.bts.ui.egy.compare;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart;
@@ -38,15 +41,18 @@ public class CompareViewerEgyLemmaImpl implements CompareViewer{
 	@Override
 	public boolean load(Object leftObject, boolean leftEditable,
 			Object rightObject, boolean rightEditable) {
-		if (leftObject instanceof BTSObject && rightObject instanceof BTSObject)
+		if (leftObject instanceof BTSLemmaEntry && rightObject instanceof BTSLemmaEntry)
 		{
 			this.leftObject = (BTSObject) leftObject;
 			this.leftEditale = leftEditable;
 			this.rightObject = (BTSObject) rightObject;
 			this.righEditable = rightEditable;
 
-			leftLemmaEditor.setSelection((BTSObject) leftObject);
-			rightLemmaEditor.setSelection((BTSObject) rightObject);
+			leftLemmaEditor.setInputObjectDirect((BTSLemmaEntry) leftObject);
+			leftLemmaEditor.setUserMayEdit(leftEditable);
+			rightLemmaEditor.setInputObjectDirect((BTSLemmaEntry) rightObject);
+			rightLemmaEditor.setUserMayEdit(rightEditable);
+
 		}
 		return false;
 	}

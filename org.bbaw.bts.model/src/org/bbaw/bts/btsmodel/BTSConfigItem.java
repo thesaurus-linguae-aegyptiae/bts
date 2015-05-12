@@ -31,6 +31,7 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getRules <em>Rules</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#isShowWidget <em>Show Widget</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerReferencedTypesStringList <em>Owner Referenced Types String List</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.BTSConfigItem#getAbbreviation <em>Abbreviation</em>}</li>
  * </ul>
  * </p>
  *
@@ -311,6 +312,32 @@ public interface BTSConfigItem extends BTSConfig, BTSObservableObject, BTSIdenti
 	 * @generated
 	 */
 	EList<String> getOwnerReferencedTypesStringList();
+
+	/**
+	 * Returns the value of the '<em><b>Abbreviation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Abbreviation</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Abbreviation</em>' attribute.
+	 * @see #setAbbreviation(String)
+	 * @see org.bbaw.bts.btsmodel.BtsmodelPackage#getBTSConfigItem_Abbreviation()
+	 * @model
+	 * @generated
+	 */
+	String getAbbreviation();
+
+	/**
+	 * Sets the value of the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getAbbreviation <em>Abbreviation</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Abbreviation</em>' attribute.
+	 * @see #getAbbreviation()
+	 * @generated
+	 */
+	void setAbbreviation(String value);
 
 	/**
 	 * <!-- begin-user-doc -->

@@ -641,8 +641,8 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 	}
 
 	@Override
-	public String getLabelOfTypeSubtypeString(BTSObject object) {
-		return configService.getLabelOfTypeSubtypeString(object);
+	public String getLabelOfTypeSubtypeString(BTSObject object, boolean prefereAbbreviation) {
+		return configService.getLabelOfTypeSubtypeString(object, prefereAbbreviation);
 	}
 
 	@Override

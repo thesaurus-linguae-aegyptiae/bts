@@ -74,6 +74,8 @@ public class BtsCorpusModelFactoryImpl extends EFactoryImpl implements BtsCorpus
 			case BtsCorpusModelPackage.BTS_AMBIVALENCE: return createBTSAmbivalence();
 			case BtsCorpusModelPackage.BTS_LEMMA_CASE: return createBTSLemmaCase();
 			case BtsCorpusModelPackage.BTS_PASSPORT_ENTRY_ITEM: return createBTSPassportEntryItem();
+			case BtsCorpusModelPackage.BTS_ABSTRACT_TEXT: return createBTSAbstractText();
+			case BtsCorpusModelPackage.BTS_ABSTRACT_PARAGRAPH: return createBTSAbstractParagraph();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -301,6 +303,26 @@ public class BtsCorpusModelFactoryImpl extends EFactoryImpl implements BtsCorpus
 	public BTSPassportEntryItem createBTSPassportEntryItem() {
 		BTSPassportEntryItemImpl btsPassportEntryItem = new BTSPassportEntryItemImpl();
 		return btsPassportEntryItem;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSAbstractText createBTSAbstractText() {
+		BTSAbstractTextImpl btsAbstractText = new BTSAbstractTextImpl();
+		return btsAbstractText;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public BTSAbstractParagraph createBTSAbstractParagraph() {
+		BTSAbstractParagraphImpl btsAbstractParagraph = new BTSAbstractParagraphImpl();
+		return btsAbstractParagraph;
 	}
 
 	/**

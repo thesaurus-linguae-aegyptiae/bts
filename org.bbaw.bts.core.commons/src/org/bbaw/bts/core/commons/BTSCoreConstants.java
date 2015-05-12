@@ -315,5 +315,7 @@ public class BTSCoreConstants
 
 	public static final String OBJECTS_FILTER_PARAM_BY_TYPE_SUBTYPE =  "filter_by_typeSubtype";
 
+	public static final String CONTEXT_TYPE_SUBTYEPE_ABBREVIATION_LABEL_MAP = "context_type_subtype_abbreviation_label_map";
+
 	
 }

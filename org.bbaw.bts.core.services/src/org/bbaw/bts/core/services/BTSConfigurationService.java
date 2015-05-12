@@ -203,7 +203,7 @@ public interface BTSConfigurationService extends GenericObjectService<BTSConfigu
 
 	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
 
-	String getLabelOfTypeSubtypeString(BTSObject object);
+	String getLabelOfTypeSubtypeString(BTSObject object, boolean prefereAbbreviation);
 
 	BTSConfigItem calculateReferencedConfigItemsProcessedClones(
 			BTSConfigItem itemConfig, BTSConfig configuration,

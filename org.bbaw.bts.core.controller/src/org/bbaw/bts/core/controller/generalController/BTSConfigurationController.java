@@ -169,7 +169,7 @@ Map<String, List<String>> ownerTypesMap, boolean includingReferencedObjectTypes)
 
 	BTSConfiguration createNew(BTSConfiguration originalconfiguration);
 
-	String getLabelOfTypeSubtypeString(BTSObject object);
+	String getLabelOfTypeSubtypeString(BTSObject object, boolean prefereAbbreviation);
 
 
 }

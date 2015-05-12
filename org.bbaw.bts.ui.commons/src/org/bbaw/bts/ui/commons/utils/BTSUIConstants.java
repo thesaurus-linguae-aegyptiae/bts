@@ -114,7 +114,7 @@ public class BTSUIConstants {
 	
 	/** The Constant COLOR_ANNOTATTION. */
 	public static final Color COLOR_ANNOTATTION = _resources
-			.createColor(new RGB(0, 0, 0));
+			.createColor(new RGB(120, 120, 120));
 
 	/** The Constant COLOR_COMMENT. */
 	public static final Color COLOR_COMMENT = _resources.createColor(new RGB(
@@ -213,6 +213,8 @@ public class BTSUIConstants {
 	public static final Color COLOR_DB_MANAGER_STATUS_OK = _resources.createColor(new RGB(191, 255, 191));
 
 	public static final Color COLOR_BACKGROUND_GREY = _resources.createColor(new RGB(155, 155, 155));
+
+	public static final String EVENT_TEXT_SELECTION_NEXT_UNFLEXIONED = "event_text_selection/nextUnflexioned";
 
 
 

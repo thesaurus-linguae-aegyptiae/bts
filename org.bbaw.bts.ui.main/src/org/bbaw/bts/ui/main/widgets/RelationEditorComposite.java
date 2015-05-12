@@ -1,5 +1,8 @@
 package org.bbaw.bts.ui.main.widgets;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -9,6 +12,7 @@ import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
@@ -18,9 +22,12 @@ import org.bbaw.bts.ui.commons.converter.BTSStringToConfigItemConverter;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.main.dialogs.SearchSelectObjectDialog;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.core.databinding.Binding;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.value.IObservableValue;
+import org.eclipse.e4.core.commands.ECommandService;
+import org.eclipse.e4.core.commands.EHandlerService;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
@@ -75,6 +82,12 @@ public class RelationEditorComposite extends Composite {
 
 	@Inject
 	private BTSConfigurationController configurationController;
+	
+	@Inject
+	private ECommandService commandService;
+	
+	@Inject
+	private EHandlerService handlerService;
 
 	private ObjectSelectionProposalProvider itemProposalProvider;
 	private boolean makingProposalProvider;
@@ -118,7 +131,7 @@ public class RelationEditorComposite extends Composite {
 	@Inject
 	public RelationEditorComposite(Composite parent) {
 		super(parent, SWT.BORDER);
-		setLayout(new GridLayout(5, false));
+		setLayout(new GridLayout(6, false));
 		this.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
 		((GridLayout) this.getLayout()).marginWidth = 0;
 		((GridLayout) this.getLayout()).marginHeight = 0;
@@ -141,7 +154,7 @@ public class RelationEditorComposite extends Composite {
 		lblPredicate.setText("Relation");
 
 		Combo combo = new Combo(this, SWT.READ_ONLY);
-		combo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1,
+		combo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1,
 				1));
 
 		if (itemConfig2 != null && itemConfig2.getDescription() != null
@@ -231,7 +244,8 @@ public class RelationEditorComposite extends Composite {
 									proposal.getContent());
 							getEditingDomain().getCommandStack().execute(
 									command);
-
+							text.setToolTipText(proposal.getLabel());
+							text.setText(proposal.getLabel());
 						}
 					});
 				} catch (ParseException e1) {
@@ -245,6 +259,8 @@ public class RelationEditorComposite extends Composite {
 		if (relation.getObjectId() != null) {
 			text.setText(generalObjectController.getDisplayName(relation
 					.getObjectId()));
+			text.setToolTipText(text.getText());
+
 		}
 
 		Label lblSearch = new Label(this, SWT.NONE);
@@ -291,12 +307,50 @@ public class RelationEditorComposite extends Composite {
 //					System.out.println("Relation with object id "
 //							+ relation.getObjectId());
 					text.setText(object.getName());
+					text.setToolTipText(text.getText());
+
 				}
 				}
 			}
 		});
+		
+		Label lblOpenInDialog = new Label(this, SWT.NONE);
+		lblOpenInDialog.setImage(resourceProvider.getImage(Display.getDefault(),
+				BTSResourceProvider.IMG_PASSPORT));
+		lblOpenInDialog.setToolTipText("Open Object in Passport Data Editor");
+		lblOpenInDialog.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
+				1, 1));
+		((GridData) lblOpenInDialog.getLayoutData()).verticalIndent = 3;
+		lblOpenInDialog.addMouseListener(new MouseAdapter() {
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+				
+				Label l = (Label) e.getSource();
+					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+			}
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+				
+				Label l = (Label) e.getSource();
+				l.setBackground(l.getParent().getBackground());
+				// open search dialog
+				Map map = new HashMap(1);
+	              map.put("objectId", relation
+	  					.getObjectId());
+	
+	              org.eclipse.core.commands.Command cmd = commandService.getCommand(BTSPluginIDs.CMD_ID_OPEN_OBJECT_METADATA);
+	              ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
+	
+	              handlerService.executeHandler(command); 
+				
+			}
+		});
+		
 		loaded = true;
 		setUserMayEditInteral(userMayEdit);
+		layout();
 	}
 
 	private EditingDomain getEditingDomain() {

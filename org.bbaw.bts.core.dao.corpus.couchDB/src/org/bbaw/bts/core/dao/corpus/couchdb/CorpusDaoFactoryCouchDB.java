@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.dao.corpus.couchdb;
 
 import org.bbaw.bts.core.dao.DAOFactory;
+import org.bbaw.bts.core.dao.corpus.BTSAbstractTextDao;
 import org.bbaw.bts.core.dao.corpus.BTSAnnotationDao;
 import org.bbaw.bts.core.dao.corpus.BTSImageDao;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
@@ -9,6 +10,7 @@ import org.bbaw.bts.core.dao.corpus.BTSTextCorpusDao;
 import org.bbaw.bts.core.dao.corpus.BTSTextDao;
 import org.bbaw.bts.core.dao.corpus.BTSThsEntryDao;
 import org.bbaw.bts.core.dao.corpus.CorpusObjectDao;
+import org.bbaw.bts.core.dao.corpus.couchdb.impl.BTSAbstractTextDaoImpl;
 import org.bbaw.bts.core.dao.corpus.couchdb.impl.BTSAnnotationDaoImpl;
 import org.bbaw.bts.core.dao.corpus.couchdb.impl.BTSImageDaoImpl;
 import org.bbaw.bts.core.dao.corpus.couchdb.impl.BTSLemmaEntryDaoImpl;
@@ -63,11 +65,20 @@ public class CorpusDaoFactoryCouchDB implements DAOFactory
 		{
 			return (T) getCorpusObjectDao(context);
 		}
+		else if (clazz == BTSAbstractTextDao.class)
+		{
+			return (T) getBTSAbstractTextDao(context);
+		}
 		return null;
 	}
 
 
 
+
+	private BTSAbstractTextDao getBTSAbstractTextDao(IEclipseContext context) {
+		BTSAbstractTextDao dao = ContextInjectionFactory.make(BTSAbstractTextDaoImpl.class, context);
+		return dao;
+	}
 
 	private CorpusObjectDao getCorpusObjectDao(IEclipseContext context)
 	{

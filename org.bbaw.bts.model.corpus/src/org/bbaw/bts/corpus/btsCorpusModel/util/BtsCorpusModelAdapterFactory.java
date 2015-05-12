@@ -167,6 +167,14 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSPassportEntryItemAdapter();
 			}
 			@Override
+			public Adapter caseBTSAbstractText(BTSAbstractText object) {
+				return createBTSAbstractTextAdapter();
+			}
+			@Override
+			public Adapter caseBTSAbstractParagraph(BTSAbstractParagraph object) {
+				return createBTSAbstractParagraphAdapter();
+			}
+			@Override
 			public Adapter caseBTSObservableObject(BTSObservableObject object) {
 				return createBTSObservableObjectAdapter();
 			}
@@ -543,6 +551,34 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSPassportEntryItemAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText <em>BTS Abstract Text</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText
+	 * @generated
+	 */
+	public Adapter createBTSAbstractTextAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph <em>BTS Abstract Paragraph</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph
+	 * @generated
+	 */
+	public Adapter createBTSAbstractParagraphAdapter() {
 		return null;
 	}
 

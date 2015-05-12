@@ -27,7 +27,7 @@ public interface GenericCorpusObjectNavigatorController <E extends BTSCorpusObje
 			TreeViewer treeViewer, TreeNodeWrapper root,
 			EReference treeNodeWrapperChildren, String queryID, IProgressMonitor monitor);
 
-	void addRelation(E subject, String relationType,
+	TreeNodeWrapper addRelation(E subject, String relationType,
 			TreeNodeWrapper treeNodeWrapper);
 
 	void save(BTSCorpusObject o);

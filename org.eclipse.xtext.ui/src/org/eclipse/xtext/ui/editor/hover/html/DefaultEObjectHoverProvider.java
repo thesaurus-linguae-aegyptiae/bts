@@ -415,7 +415,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 		 */
 		@Override
 		public IInformationControl doCreateInformationControl(Shell parent) {
-			String tooltipAffordanceString = "Press 'F2' for focus";//EditorsUI.getTooltipAffordanceString();
+			String tooltipAffordanceString = ""; //"Press 'F2' for focus";//EditorsUI.getTooltipAffordanceString();
 			if (BrowserInformationControl.isAvailable(parent)) {
 				String font = "org.eclipse.jdt.ui.javadocfont"; // FIXME: PreferenceConstants.APPEARANCE_JAVADOC_FONT;
 				IXtextBrowserInformationControl iControl = new XtextBrowserInformationControl(parent, font,
@@ -444,7 +444,7 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				return false;
 
 			if (control instanceof IInformationControlExtension4) {
-				String tooltipAffordanceString = "Press 'F2' for focus";//EditorsUI.getTooltipAffordanceString();
+				String tooltipAffordanceString = ""; //"Press 'F2' for focus";//EditorsUI.getTooltipAffordanceString();
 				((IInformationControlExtension4) control).setStatusText(tooltipAffordanceString);
 			}
 

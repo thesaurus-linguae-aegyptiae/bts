@@ -412,7 +412,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	@Inject
 	public EgyTextEditorPart(EPartService partService) {
-		part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
+		try {
+			part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -689,7 +694,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 				}
 				CTabItem signTextTab = new CTabItem(tabFolder, SWT.NONE);
-				signTextTab.setText("Sign-Text-Editor");
+				signTextTab.setText("Sign Text Editor");
 				{
 					Composite plainTextComp = new Composite(tabFolder, SWT.NONE
 							| SWT.BORDER);
@@ -707,7 +712,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					plainTextComp.pack();
 				}
 				CTabItem tbtm5 = new CTabItem(tabFolder, SWT.NONE);
-				tbtm5.setText("JSeshView");
+				tbtm5.setText("JSesh View");
 				{
 					scrolledCompJSesh = new ScrolledComposite(tabFolder, SWT.HORIZONTAL
 							| SWT.VERTICAL);
@@ -769,7 +774,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		Group sentenceTranslateComp = new Group(sashForm, SWT.NONE);
 		sentenceTranslateComp.setLayoutData(new GridData(GridData.FILL_BOTH));
 		sentenceTranslateComp.setLayout(new GridLayout());
-		sentenceTranslateComp.setText("Translation of Sentence");
+		sentenceTranslateComp.setText("Sentence Translation");
 		sentenceTranslate_Editor = new TranslationEditorComposite(
 				sentenceTranslateComp, SWT.WRAP | SWT.MULTI | SWT.V_SCROLL
 						| SWT.BORDER, null, null, false);
@@ -1640,6 +1645,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	}
 
+	public void setInputObjectDirect(BTSText object)
+	{
+		purgeCacheAndEditingDomain();
+		text = object;
+		if (object != null)loadInput(object);
+		editingDomain = editingDomainController
+				.getEditingDomain(text);
+		editingDomain.getCommandStack().addCommandStackListener(
+				getCommandStackListener());
+	}
 	/**
 	 * Sets the selection.
 	 *
@@ -1664,7 +1679,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					
 					if (selection instanceof BTSText) { // requires load
 						purgeCacheAndEditingDomain();
-						part.setLabel(selection.getName());
+						if (part != null) {
+							part.setLabel(selection.getName());
+						}
 						makePartActive(true);
 						bringPartToFront(true);
 						loadInput((BTSCorpusObject) selection);

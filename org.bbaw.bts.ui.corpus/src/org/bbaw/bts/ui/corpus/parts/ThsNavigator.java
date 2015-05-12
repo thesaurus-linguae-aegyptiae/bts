@@ -39,8 +39,7 @@ import org.bbaw.bts.ui.commons.filter.SuppressNondeletedViewerFilter;
 import org.bbaw.bts.ui.commons.navigator.StructuredViewerProvider;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
-import org.bbaw.bts.ui.corpus.parts.lemma.BTSLemmaBySortKeyNameViewerSorter;
+import org.bbaw.bts.ui.corpus.dialogs.PassportEditorDialog;
 import org.bbaw.bts.ui.corpus.parts.ths.BTSThsBySortKeyNameViewerSorter;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -64,9 +63,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
@@ -86,6 +90,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.Shell;
 
 public class ThsNavigator implements ScatteredCachingPart, SearchViewer, StructuredViewerProvider {
@@ -218,7 +223,7 @@ public class ThsNavigator implements ScatteredCachingPart, SearchViewer, Structu
 		mainTabItem = new CTabItem(tabFolder, SWT.NONE);
 		mainTabItem.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_THSS));
-		mainTabItem.setText("Ths");
+		mainTabItem.setText("Thesauri");
 		mainTabItem.setData("key", "main");
 
 		mainTabItemComp = new Composite(tabFolder, SWT.NONE);
@@ -485,12 +490,39 @@ labelProvider));
 									treeViewer
 											.addFilter(new SuppressNondeletedViewerFilter());
 								}
+								if (BTSUIConstants.SELECTION_TYPE_SECONDARY
+										.equals(selectionType)) {
+									// register context menu on the table
+									 MenuManager menuMgr = new MenuManager("#PopupMenu"); 
+									 menuMgr.setRemoveAllWhenShown(true);
+									 menuMgr.addMenuListener(new IMenuListener() {
+									     @Override
+									     public void menuAboutToShow(IMenuManager manager) {
+									         Action action = new Action() {
+									      public void run() {
+									                openInPassportEditorDialog(treeViewer.getSelection());
+									      }
+
+									  };
+									  action.setText("Open in Passport Data Editor");
+									  manager.add(action);
+									 }
+
+									 });
+
+									 Menu menu = menuMgr.createContextMenu(treeViewer.getTree());
+									 treeViewer.getTree().setMenu(menu);
+								}
+								else
+								{
 								// register context menu on the table
 								try {
+									
 									menuService.registerContextMenu(
 											treeViewer.getControl(),
 											BTSPluginIDs.POPMENU_THS_NAVIGATOR_TREE_MENU);
 								} catch (Exception e) {
+								}
 								}
 							}
 						});
@@ -504,6 +536,30 @@ labelProvider));
 
 	}
 
+	private void openInPassportEditorDialog(
+			ISelection sel) {
+		StructuredSelection localSelection = (StructuredSelection) sel;
+		if (localSelection.getFirstElement() != null
+				&& localSelection.getFirstElement() instanceof TreeNodeWrapper) {
+			TreeNodeWrapper localTreeNode = (TreeNodeWrapper) localSelection
+					.getFirstElement();
+			if (localTreeNode.getObject() != null) {
+				BTSObject localCorpusObject = (BTSObject) localTreeNode.getObject();
+				if (localCorpusObject instanceof BTSCorpusObject) {
+					thsNavigatorController.checkAndFullyLoad((BTSCorpusObject) localCorpusObject, true);
+					IEclipseContext child = context.createChild();
+					child.set(BTSObject.class, localCorpusObject);
+					child.set(Shell.class, new Shell());
+					child.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, false);
+
+					PassportEditorDialog dialog = ContextInjectionFactory.make(
+							PassportEditorDialog.class, child);
+					dialog.open();
+				}
+			}
+		}
+	}
+	
 	private ViewerFilter getDeletedFilter() {
 		if (deletedFilter == null) {
 			deletedFilter = new SuppressDeletedViewerFilter();
@@ -628,12 +684,19 @@ labelProvider));
 	@Optional
 	void eventReceivedNew(@EventTopic("model_ths_new_root/*") BTSObject object) {
 		if ((object instanceof BTSThsEntry)) {
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+			final TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			tn.setObject(object);
 			mainRootNode.getChildren().add(tn);
 			tn.setParentObject(mainRootNode);
-			// refreshTreeViewer((BTSCorpusObject) object);
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					if (!mainTreeViewer.getTree().isDisposed())
+					{
+						mainTreeViewer.setSelection(new StructuredSelection(tn), true);
+					}
+				}
+			});
 		}
 	}
 
@@ -643,10 +706,17 @@ labelProvider));
 		if ((object instanceof BTSThsEntry)
 				&& selection != null
 				&& ((TreeNodeWrapper) selection.getFirstElement()).getObject() instanceof BTSThsEntry) {
-			thsNavigatorController.addRelation((BTSThsEntry) object,
+			final TreeNodeWrapper tn = thsNavigatorController.addRelation((BTSThsEntry) object,
 					BTSCoreConstants.BASIC_RELATIONS_PARTOF,
 					(TreeNodeWrapper) selection.getFirstElement());
-			// refreshTreeViewer((BTSCorpusObject) object);
+			sync.asyncExec(new Runnable() {
+				public void run() {
+					if (!mainTreeViewer.getTree().isDisposed())
+					{
+						mainTreeViewer.setSelection(new StructuredSelection(tn), true);
+					}
+				}
+			});
 		}
 	}
 
@@ -746,7 +816,7 @@ labelProvider));
 	}
 
 	@Override
-	public void search(BTSQueryRequest query, String queryName) {
+	public void search(BTSQueryRequest query, String queryName, String viewerFilterString) {
 		if (query == null)
 		{
 			return;

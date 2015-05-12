@@ -2706,13 +2706,22 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST = BTS_CONFIG_FEATURE_COUNT + 12;
 
 	/**
+	 * The feature id for the '<em><b>Abbreviation</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIG_ITEM__ABBREVIATION = BTS_CONFIG_FEATURE_COUNT + 13;
+
+	/**
 	 * The number of structural features of the '<em>BTS Config Item</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIG_ITEM_FEATURE_COUNT = BTS_CONFIG_FEATURE_COUNT + 13;
+	int BTS_CONFIG_ITEM_FEATURE_COUNT = BTS_CONFIG_FEATURE_COUNT + 14;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -5642,6 +5651,17 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSConfigItem_OwnerReferencedTypesStringList();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getAbbreviation <em>Abbreviation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abbreviation</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSConfigItem#getAbbreviation()
+	 * @see #getBTSConfigItem()
+	 * @generated
+	 */
+	EAttribute getBTSConfigItem_Abbreviation();
+
+	/**
 	 * Returns the meta object for the '{@link org.bbaw.bts.btsmodel.BTSConfigItem#getOwnerTypesMap() <em>Get Owner Types Map</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -7365,6 +7385,14 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST = eINSTANCE.getBTSConfigItem_OwnerReferencedTypesStringList();
+
+		/**
+		 * The meta object literal for the '<em><b>Abbreviation</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_CONFIG_ITEM__ABBREVIATION = eINSTANCE.getBTSConfigItem_Abbreviation();
 
 		/**
 		 * The meta object literal for the '<em><b>Get Owner Types Map</b></em>' operation.

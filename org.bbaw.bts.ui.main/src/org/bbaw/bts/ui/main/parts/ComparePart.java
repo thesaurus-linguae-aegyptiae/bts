@@ -2,6 +2,7 @@ package org.bbaw.bts.ui.main.parts;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import java.util.Vector;
 
 import javax.inject.Inject;
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import javax.annotation.PostConstruct;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
+import org.bbaw.bts.ui.commons.compare.CompareViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
@@ -58,6 +60,8 @@ public class ComparePart extends AbstractComparePart {
 	private Menu rightContextMenu;
 	private ISelectionChangedListener rightSelectionListener;
 	protected BTSDBBaseObject selectedLeftVersion;
+
+	protected TreeNodeWrapper rightSelectedTreeNode;
 
 	@Inject
 	public ComparePart() {
@@ -133,10 +137,11 @@ public class ComparePart extends AbstractComparePart {
 			public void selectionChanged(SelectionChangedEvent event) {
 				StructuredSelection selection = (StructuredSelection) event
 						.getSelection();
-				if (selection.getFirstElement() instanceof TreeNodeWrapper) {
-					TreeNodeWrapper tn = (TreeNodeWrapper) selection
+				if ((rightSelectedTreeNode == null || !rightSelectedTreeNode.equals(selection.getFirstElement())) 
+						&& selection.getFirstElement() instanceof TreeNodeWrapper) {
+					rightSelectedTreeNode = (TreeNodeWrapper) selection
 							.getFirstElement();
-					selectedRightVersion = (BTSDBBaseObject) tn.getObject();
+					selectedRightVersion = (BTSDBBaseObject) rightSelectedTreeNode.getObject();
 					loadRightVersion(selectedRightVersion);
 				}
 			}
@@ -209,7 +214,8 @@ public class ComparePart extends AbstractComparePart {
 			  "Cancel"}, 1);
 			if(dialog.open() == dialog.OK)
 			{
-				compareObjectsController.replaceCurrentWithRevision(object, revision);
+				BTSDBBaseObject replaced = compareObjectsController.replaceCurrentWithRevision(object, revision);
+				refreshCompareViewers(replaced, revision);
 //				TreeNodeWrapper delTn = null;
 //				for (TreeNodeWrapper tn : compareRevInput.getChildren())
 //				{
@@ -221,6 +227,14 @@ public class ComparePart extends AbstractComparePart {
 //				compareRevInput.getChildren().remove(delTn);
 //				compareObjectsController.reloadConflicts(object);
 			}
+		
+	}
+
+	private void refreshCompareViewers(BTSDBBaseObject replaced, BTSDBBaseObject revision) {
+		for (CompareViewer cv : compareViewers)
+		{
+			cv.load(replaced, leftEditable, revision, rightEditable);
+		}
 		
 	}
 

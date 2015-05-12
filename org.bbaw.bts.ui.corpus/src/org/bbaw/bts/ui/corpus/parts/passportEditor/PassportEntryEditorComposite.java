@@ -14,6 +14,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
@@ -23,6 +24,11 @@ public abstract class PassportEntryEditorComposite extends Composite {
 	@Optional
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	protected boolean userMayEdit;
+	
+	
+	@Inject
+	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
+	private String lang;
 	
 	// get UISynchronize injected as field
 	@Inject
@@ -114,4 +120,16 @@ public abstract class PassportEntryEditorComposite extends Composite {
 	}
 
 	protected abstract void setUserMayEditInteral(boolean mayEdit);
+	
+	protected String getLabel(BTSConfigItem itemconfig) {
+		String label = itemconfig.getLabel().getTranslation(lang);
+		if (label != null)
+		{
+			return label;
+		}
+		else
+		{
+			return itemconfig.getValue();
+		}
+	}
 }

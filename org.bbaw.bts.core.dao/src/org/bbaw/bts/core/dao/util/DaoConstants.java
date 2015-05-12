@@ -200,6 +200,18 @@ public class DaoConstants
 	public static final String VIEW_IMAGE_ROOT_ENTRIES = "image/root_entries";
 
 
+	public static final String VIEW_ALL_BTSABSTRACTTEXTS = "atext/all_btsabstracttexts";
+
+
+	public static final String VIEW_ALL_ACTIVE_BTSABSTRACTTEXTS = "atext/all_active_btsabstracttexts";
+
+
+	public static final String VIEW_ALL_TERMINATED_BTSABSTRACTTEXTS = "atext/all_terminated_btsabstracttexts";
+
+
+	public static final String VIEW_ATEXT_ROOT_ENTRIES = "atext/all_root_entries";
+
+
 
 
 

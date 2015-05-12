@@ -3,6 +3,8 @@
 package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractParagraph;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
@@ -210,6 +212,20 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * @generated
 	 */
 	private EClass btsPassportEntryItemEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsAbstractTextEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass btsAbstractParagraphEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -973,6 +989,69 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBTSAbstractText() {
+		return btsAbstractTextEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBTSAbstractText_Paragraphs() {
+		return (EReference)btsAbstractTextEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getBTSAbstractParagraph() {
+		return btsAbstractParagraphEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getBTSAbstractParagraph_Witnesses() {
+		return (EReference)btsAbstractParagraphEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSAbstractParagraph_SortKey() {
+		return (EAttribute)btsAbstractParagraphEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSAbstractParagraph_Type() {
+		return (EAttribute)btsAbstractParagraphEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSAbstractParagraph_Name() {
+		return (EAttribute)btsAbstractParagraphEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public BtsCorpusModelFactory getBtsCorpusModelFactory() {
 		return (BtsCorpusModelFactory)getEFactoryInstance();
 	}
@@ -1096,6 +1175,15 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__TIMESPAN);
 		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__DESCRIPTION);
 		createEReference(btsPassportEntryItemEClass, BTS_PASSPORT_ENTRY_ITEM__TRANSLATION);
+
+		btsAbstractTextEClass = createEClass(BTS_ABSTRACT_TEXT);
+		createEReference(btsAbstractTextEClass, BTS_ABSTRACT_TEXT__PARAGRAPHS);
+
+		btsAbstractParagraphEClass = createEClass(BTS_ABSTRACT_PARAGRAPH);
+		createEReference(btsAbstractParagraphEClass, BTS_ABSTRACT_PARAGRAPH__WITNESSES);
+		createEAttribute(btsAbstractParagraphEClass, BTS_ABSTRACT_PARAGRAPH__SORT_KEY);
+		createEAttribute(btsAbstractParagraphEClass, BTS_ABSTRACT_PARAGRAPH__TYPE);
+		createEAttribute(btsAbstractParagraphEClass, BTS_ABSTRACT_PARAGRAPH__NAME);
 	}
 
 	/**
@@ -1160,6 +1248,8 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSSentenceItem());
 		btsTextSentenceItemEClass.getESuperTypes().add(this.getBTSTextItems());
 		btsPassportEntryItemEClass.getESuperTypes().add(this.getBTSPassportEntry());
+		btsAbstractTextEClass.getESuperTypes().add(this.getBTSCorpusObject());
+		btsAbstractParagraphEClass.getESuperTypes().add(theBtsmodelPackage.getBTSIdentifiableItem());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(btsCorpusObjectEClass, BTSCorpusObject.class, "BTSCorpusObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1267,6 +1357,15 @@ public class BtsCorpusModelPackageImpl extends EPackageImpl implements BtsCorpus
 		initEReference(getBTSPassportEntryItem_Timespan(), theBtsmodelPackage.getBTSTimespan(), null, "timespan", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSPassportEntryItem_Description(), theBtsmodelPackage.getBTSTranslations(), null, "description", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSPassportEntryItem_Translation(), theBtsmodelPackage.getBTSTranslations(), null, "translation", null, 0, 1, BTSPassportEntryItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsAbstractTextEClass, BTSAbstractText.class, "BTSAbstractText", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBTSAbstractText_Paragraphs(), this.getBTSAbstractParagraph(), null, "paragraphs", null, 0, -1, BTSAbstractText.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsAbstractParagraphEClass, BTSAbstractParagraph.class, "BTSAbstractParagraph", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBTSAbstractParagraph_Witnesses(), theBtsmodelPackage.getBTSRelation(), null, "witnesses", null, 0, -1, BTSAbstractParagraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSAbstractParagraph_SortKey(), ecorePackage.getEInt(), "sortKey", null, 0, 1, BTSAbstractParagraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSAbstractParagraph_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSAbstractParagraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSAbstractParagraph_Name(), ecorePackage.getEString(), "name", null, 0, 1, BTSAbstractParagraph.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

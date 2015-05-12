@@ -43,5 +43,5 @@ public interface SearchViewer {
 	void dispose();
 	
 
-	void search(BTSQueryRequest query, String queryName);
+	void search(BTSQueryRequest query, String queryName, String viewerFilterString);
 }

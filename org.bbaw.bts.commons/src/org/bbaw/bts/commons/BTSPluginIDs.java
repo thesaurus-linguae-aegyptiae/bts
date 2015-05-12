@@ -11,6 +11,9 @@ public class BTSPluginIDs
 	public static final String CMD_ID_NEW_CONFIGURATION = "org.bbaw.bts.ui.main.command.createNewConfiguration";
 
 	public static final String CMD_ID_NEW_PROJECT = "org.bbaw.bts.ui.main.command.createNewProject";
+	
+	public static final String CMD_ID_OPEN_OBJECT_METADATA = "org.bbaw.bts.ui.main.command.openObjectMetadata";
+
 
 	public static final String ACTIVE_CONFIGURATION = "active_configuration";
 
@@ -106,5 +109,10 @@ public class BTSPluginIDs
 	public static final String PREF_CORPUS_ACTIVATE_MAIN_CORPUS_SELECTION = "pref_corpus_activate_main_corpus_selection";
 
 	public static final String POPMENU_LEMMATIZER_LEMMAPROPOSAL_MENU = "org.bbaw.bts.ui.corpus.egy.lemmatizer.lemmaproposals.popupmenu";
+
+	public static final String PREF_ACTIVE_ATEXTS = "active_atexts";
+
+	public static final String PREF_MAIN_ATEXT_KEY = "main_atext_key";
+
 
 }

@@ -1322,6 +1322,15 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getBTSConfigItem_Abbreviation() {
+		return (EAttribute)btsConfigItemEClass.getEStructuralFeatures().get(11);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EOperation getBTSConfigItem__GetOwnerTypesMap() {
 		return btsConfigItemEClass.getEOperations().get(0);
 	}
@@ -2211,6 +2220,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEReference(btsConfigItemEClass, BTS_CONFIG_ITEM__RULES);
 		createEAttribute(btsConfigItemEClass, BTS_CONFIG_ITEM__SHOW_WIDGET);
 		createEAttribute(btsConfigItemEClass, BTS_CONFIG_ITEM__OWNER_REFERENCED_TYPES_STRING_LIST);
+		createEAttribute(btsConfigItemEClass, BTS_CONFIG_ITEM__ABBREVIATION);
 		createEOperation(btsConfigItemEClass, BTS_CONFIG_ITEM___GET_OWNER_TYPES_MAP);
 		createEOperation(btsConfigItemEClass, BTS_CONFIG_ITEM___CLEAR_OWNER_TYPES_MAP);
 
@@ -2513,6 +2523,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEReference(getBTSConfigItem_Rules(), this.getBTSWorkflowRuleItem(), null, "rules", null, 0, -1, BTSConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSConfigItem_ShowWidget(), ecorePackage.getEBoolean(), "showWidget", null, 0, 1, BTSConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSConfigItem_OwnerReferencedTypesStringList(), ecorePackage.getEString(), "ownerReferencedTypesStringList", null, 0, -1, BTSConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSConfigItem_Abbreviation(), ecorePackage.getEString(), "abbreviation", null, 0, 1, BTSConfigItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEOperation(getBTSConfigItem__GetOwnerTypesMap(), this.getStringToStringListMap(), "getOwnerTypesMap", 0, 1, IS_UNIQUE, IS_ORDERED);
 

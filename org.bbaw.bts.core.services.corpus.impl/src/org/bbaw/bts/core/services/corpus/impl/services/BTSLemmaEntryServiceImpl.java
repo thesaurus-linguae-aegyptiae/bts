@@ -222,6 +222,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			query.setQueryBuilder(QueryBuilders.boolQuery()
 					.should(QueryBuilders.matchQuery("name",chars).operator(Operator.AND))
 					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
+					.should(QueryBuilders.wildcardQuery("name",chars + ",*"))
 					);
 		}
 		
