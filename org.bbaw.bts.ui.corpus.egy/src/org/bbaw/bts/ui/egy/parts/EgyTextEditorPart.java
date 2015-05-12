@@ -1202,41 +1202,47 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			boolean postSelection, BTSTextSelectionEvent btsEvent) {
 		List<BTSModelAnnotation> relatingObjectsAnnotations = new Vector<BTSModelAnnotation>(
 				annotations.size());
-		for (BTSModelAnnotation ma : annotations) {
-			if (ma != null && ma instanceof BTSLemmaAnnotation
-					&& ma.getModel() != null
-					&& ma.getModel() instanceof BTSObject
-					&& !ma.getModel().equals(selectedTextItem)) {
-				if (ma.getModel() instanceof BTSWord) {
-					setSentenceTranslation((BTSWord) ma.getModel());
-				} else if (ma.getModel() instanceof BTSSenctence) {
-					setSentenceTranslation((BTSSenctence) ma.getModel());
-				}
-			} else if (ma instanceof BTSAnnotationAnnotation) {
-				relatingObjectsAnnotations.add(ma);
-				if (btsEvent != null) {
-					btsEvent.getInterTextReferences().add(
-							ma.getInterTextReference());
-				}
-			} else if (ma instanceof BTSCommentAnnotation) {
-				relatingObjectsAnnotations.add(ma);
-				if (btsEvent != null) {
-					btsEvent.getInterTextReferences().add(
-							ma.getInterTextReference());
-				}
-			} else if (ma instanceof BTSSubtextAnnotation) {
-				relatingObjectsAnnotations.add(ma);
-				if (btsEvent != null) {
-					btsEvent.getInterTextReferences().add(
-							ma.getInterTextReference());
-				}
-			} else if (ma instanceof BTSModelAnnotation)
-			{
-				if (ma.getModel() instanceof BTSSenctence) {
-					setSentenceTranslation((BTSSenctence) ma.getModel());
+		if (!annotations.isEmpty())
+		{
+			for (BTSModelAnnotation ma : annotations) {
+				if (ma != null && ma instanceof BTSLemmaAnnotation
+						&& ma.getModel() != null
+						&& ma.getModel() instanceof BTSObject
+						&& !ma.getModel().equals(selectedTextItem)) {
+					if (ma.getModel() instanceof BTSWord) {
+						setSentenceTranslation((BTSWord) ma.getModel());
+					} else if (ma.getModel() instanceof BTSSenctence) {
+						setSentenceTranslation((BTSSenctence) ma.getModel());
+					}
+				} else if (ma instanceof BTSAnnotationAnnotation) {
+					relatingObjectsAnnotations.add(ma);
+					if (btsEvent != null) {
+						btsEvent.getInterTextReferences().add(
+								ma.getInterTextReference());
+					}
+				} else if (ma instanceof BTSCommentAnnotation) {
+					relatingObjectsAnnotations.add(ma);
+					if (btsEvent != null) {
+						btsEvent.getInterTextReferences().add(
+								ma.getInterTextReference());
+					}
+				} else if (ma instanceof BTSSubtextAnnotation) {
+					relatingObjectsAnnotations.add(ma);
+					if (btsEvent != null) {
+						btsEvent.getInterTextReferences().add(
+								ma.getInterTextReference());
+					}
+				} else if (ma instanceof BTSModelAnnotation)
+				{
+					if (ma.getModel() instanceof BTSSenctence) {
+						setSentenceTranslation((BTSSenctence) ma.getModel());
+					}
 				}
 			}
-
+		}
+		else
+		{
+			setSentenceTranslationActive(false);
 		}
 		List<BTSModelAnnotation> deHighlightedAnnotations = new Vector<BTSModelAnnotation>(
 				highlightedAnnotations.size());
@@ -1334,6 +1340,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// }
 		
 	}
+
+	
 
 	/**
 	 * Highlight annotations.
@@ -1887,6 +1895,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						.createBTSTranslations());
 				editingDomain.getCommandStack().execute(command);
 			}
+			sentenceTranslate_Editor.setEnabled(true);
 			sentenceTranslate_Editor.load(selectedSentence.getTranslation(),
 					editingDomain, false);
 		}
@@ -1914,16 +1923,28 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			setSentenceTranslation(sentence);
 		}
-
+		else
+		{
+			setSentenceTranslationActive(false);
+		}
 	}
-
+	private void setSentenceTranslationActive(boolean active) {
+		if(!active)
+		{
+			selectedSentence = null;
+			sentenceTranslate_Editor.load(null,
+				editingDomain, false);
+		}
+		sentenceTranslate_Editor.setEnabled(active);
+		
+	}
 	/**
 	 * Load input.
 	 *
 	 * @param o the o
 	 */
 	private void loadInput(BTSCorpusObject o) {
-		sentenceTranslate_Editor.load(null, null, false);
+		setSentenceTranslationActive(false);
 
 		if (tabFolder != null && o instanceof BTSText) {
 
@@ -2335,13 +2356,51 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Optional
 	void eventReceivedLoadLemmata(
 			@EventTopic("event_egy_text_editor_load_lemmata/*") Object o) {
-		logger.info("EgyTextEditorPart eventReceived " + BTSUIConstants.EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA);
-		if (!lemmataLoaded && lemmaAnnotationMap != null) {
-			lemmataLoaded = true;
-			// FIXME with monitor and cancel if ...
-			processLemmaAnnotions(lemmaAnnotationMap);
-		}
+		logger.info("EgyTextEditorPart eventReceived "
+				+ BTSUIConstants.EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA);
+		sync.asyncExec(new Runnable() {
+			public void run() {
+				cachedCursor = embeddedEditor.getViewer().getTextWidget()
+						.getCaretOffset();
+				boolean canUpdate = updateModelFromTranscription();
 
+				if (canUpdate) {
+					try {
+						// load updated model into selected editor
+						IRunnableWithProgress op = new IRunnableWithProgress() {
+
+							@Override
+							public void run(final IProgressMonitor monitor)
+									throws InvocationTargetException,
+									InterruptedException {
+								sync.asyncExec(new Runnable() {
+									public void run() {
+										loadInputTranscription(text,
+												relatingObjects, monitor);
+										try {
+											embeddedEditor
+													.getViewer()
+													.getTextWidget()
+													.setCaretOffset(
+															cachedCursor);
+										} catch (Exception e) {
+										}
+									}
+
+								});
+							}
+						};
+						new ProgressMonitorDialog(new Shell()).run(true, true,
+								op);
+					} catch (InvocationTargetException ee) {
+						// handle exception
+					} catch (InterruptedException ee) {
+						// handle cancelation
+					}
+				}
+			}
+
+		});
 	}
 	
 	/**

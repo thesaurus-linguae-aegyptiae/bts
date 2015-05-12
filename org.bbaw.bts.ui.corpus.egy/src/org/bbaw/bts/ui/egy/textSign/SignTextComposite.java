@@ -306,7 +306,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		this.layout();
 		parentComposite.layout();
-		max_line_length = canvas.getViewport().getBounds().width - 40;
+		Double d = (canvas.getViewport().getBounds().width ) * 1.35;
+		max_line_length = d.intValue();
 
 	}
 	
@@ -547,7 +548,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private void loadText() {
 		purgeAll();
-		max_line_length = canvas.getViewport().getBounds().width / 2;
+		Double d = (canvas.getViewport().getBounds().width ) * 1.35;
+		max_line_length = d.intValue();
 		continuingRelatingObjects = new Vector<BTSObject>();
 		// canvas = new FigureCanvas(this);
 		// canvas.setBackground(COLOR_CANVAS_BACKGROUND);

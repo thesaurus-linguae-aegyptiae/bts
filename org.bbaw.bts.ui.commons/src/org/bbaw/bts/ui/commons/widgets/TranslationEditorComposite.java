@@ -360,4 +360,11 @@ public class TranslationEditorComposite extends Composite {
 			languageSelectionListeners.add(listener);
 		}
 	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		combo.setEnabled(enabled);
+		text.setEnabled(enabled);
+		super.setEnabled(enabled);
+	}
 }

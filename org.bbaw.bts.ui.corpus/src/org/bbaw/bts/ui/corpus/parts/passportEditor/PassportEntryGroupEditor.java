@@ -226,6 +226,8 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 							BTSResourceProvider.IMG_WIDGET_GROUP_ADD));
 					addButton.setLayoutData(new GridData(SWT.RIGHT,
 							SWT.BEGINNING, false, false, 1, 1));
+					((GridData) addButton.getLayoutData()).horizontalIndent = 2;
+
 					addButton.addMouseListener(new MouseAdapter() {
 
 						@Override
@@ -266,6 +268,8 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 							BTSResourceProvider.IMG_WIDGET_GROUP_DELETE));
 					delButton.setLayoutData(new GridData(SWT.RIGHT,
 							SWT.BEGINNING, false, false, 1, 1));
+					((GridData) delButton.getLayoutData()).horizontalIndent = 2;
+
 					delButton.addMouseListener(new MouseAdapter() {
 
 						@Override
@@ -303,6 +307,8 @@ public class PassportEntryGroupEditor extends PassportEntryEditorComposite {
 							BTSResourceProvider.IMG_WIDGET_GROUP_DELETE));
 					delButton.setLayoutData(new GridData(SWT.RIGHT,
 							SWT.BEGINNING, false, false, 1, 1));
+					((GridData) delButton.getLayoutData()).horizontalIndent = 2;
+
 					delButton.addMouseListener(new MouseAdapter() {
 
 						@Override

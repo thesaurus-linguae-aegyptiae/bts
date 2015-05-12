@@ -337,4 +337,8 @@ public class ObjectTypeSelectionTreeComposite extends Composite {
 		return dirty;
 	}
 
+	public boolean isAllEntriesSelected() {
+		return allbutton.getSelection();
+	}
+
 }

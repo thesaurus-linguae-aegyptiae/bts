@@ -195,6 +195,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					delButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
 							false, false, 1, 1));
 					((GridData) delButton.getLayoutData()).verticalIndent = 2;
+					((GridData) delButton.getLayoutData()).horizontalIndent = 2;
+
 					delButton.addMouseListener(new MouseAdapter() {
 
 
@@ -228,6 +230,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					addButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
 							false, false, 1, 1));
 					((GridData) addButton.getLayoutData()).verticalIndent = 2;
+					((GridData) addButton.getLayoutData()).horizontalIndent = 2;
+
 					addButton.addMouseListener(new MouseAdapter() {
 
 
@@ -268,6 +272,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 					delButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP,
 							false, false, 1, 1));
 					((GridData) delButton.getLayoutData()).verticalIndent = 2;
+					((GridData) delButton.getLayoutData()).horizontalIndent = 2;
+
 					delButton.addMouseListener(new MouseAdapter() {
 
 						@Override
@@ -551,7 +557,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		Label label = new Label(this, SWT.NONE);
 		label.setText(getLabel(itemConfig));
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false,
-				3, 1));
+				2, 1));
 		((GridData) label.getLayoutData()).verticalIndent = 2;
 		
 
@@ -681,6 +687,8 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 		lblPassportDialog.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false, false,
 				1, 1));
 		((GridData) lblPassportDialog.getLayoutData()).verticalIndent = 3;
+		((GridData) lblPassportDialog.getLayoutData()).horizontalIndent = 3;
+
 		lblPassportDialog.addMouseListener(new MouseAdapter() {
 
 			@Override

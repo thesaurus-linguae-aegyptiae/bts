@@ -272,7 +272,7 @@
         <children xsi:type="menu:HandledMenuItem" xmi:id="_JBI1DPTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledmenuitem.4" label="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
       </menus>
       <toolbar xmi:id="_JBI1DfTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.toolbar.4">
-        <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1DvTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.loadLemmata" label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-load.png" tooltip="Load Text Lemmata" command="_AHc_cJ_LEeS8kttfrCiCZg"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1DvTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.loadLemmata" label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/lemma-load.png" tooltip="Process Text Tokens (Sentence Translation etc.)" command="_AHc_cJ_LEeS8kttfrCiCZg"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1D_TSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.18" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/text-thumb-up.png" tooltip="Check Text Lemmata, Flexcodes&#x2026;" command="_gxso4OjZEeSGc-cONqnFNw"/>
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_JBI1EPTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.1"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1EfTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.9" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotation-add.png" tooltip="Add Annotation" command="_ogEtgP0_EeOsAKche49RIg"/>
