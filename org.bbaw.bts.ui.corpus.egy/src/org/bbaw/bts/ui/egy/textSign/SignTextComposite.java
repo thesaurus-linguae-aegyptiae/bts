@@ -84,6 +84,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.ui.texteditor.ShowWhitespaceCharactersAction;
 
 public class SignTextComposite extends Composite implements IBTSEditor {
 
@@ -141,7 +142,12 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	@Inject
 	@Preference(value = BTSEGYUIConstants.SIGN_TEXT_SHOW_LINE_WIDTH, nodePath = "org.bbaw.bts.ui.corpus.egy")
 	private Integer max_line_length;
+	
 
+	@Inject
+	@Preference(value = BTSEGYUIConstants.PREF_LEMMATIZER_FELXION_DEFAULT, nodePath = "org.bbaw.bts.ui.corpus.egy")
+	private Integer defaultFlexion;
+	
 	private ElementFigure selectedElement;
 
 	private Composite parentComposite;
@@ -529,7 +535,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 	}
 
-	public void setInput(BTSObject btsObject, BTSTextContent textContent, List<BTSObject> relatingObjects, IProgressMonitor monitor) {
+	public void setInput(BTSObject btsObject, BTSTextContent textContent, List<BTSObject> relatingObjects,
+			IProgressMonitor monitor, Object localSelectedTextItem) {
 		this.textContent = textContent;
 		this.btsObject = btsObject;
 		this.relatingObjectsMap =  textEditorController
@@ -537,6 +544,15 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		if (textContent != null) {
 			loadText();
 			this.layout();
+			if (localSelectedTextItem != null && localSelectedTextItem instanceof BTSWord)
+			{
+				IFigure figure = wordMap.get(((BTSIdentifiableItem) localSelectedTextItem).get_id());
+				if (figure != null && figure instanceof ElementFigure)
+				{
+					setSelectionInternal((ElementFigure) figure);
+					reveal(figure);
+				}
+			}
 		}
 		else {
 			purgeAll();
@@ -1016,7 +1032,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		if (currentLineFigure == null) {
 			currentLineFigure = makeLineFigure();
 		}
-		int len = figure.getLength();
+		int len = calculateWordFigureLength(figure);
+		
+		System.out.println("line leng " + currentLineFigure.getSpaceLength() + len + " max " + max_line_length); 
 		if (figure.getType().equals(ElementFigure.SENTENCE_START)) {
 			currentLineFigure = makeLineFigure();
 			currentLineFigure.add(figure);
@@ -1032,6 +1050,78 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		// + currentLineFigure.getChildren().size());
 		// System.out.println("add figure "
 		// + figureCounter);
+	}
+
+	private int calculateWordFigureLength(ElementFigure figure) {
+		int len = 2;
+		
+		// if not word return len!
+		if (!(figure instanceof WordFigure && ((WordFigure)figure).getModelObject() instanceof BTSWord))
+		{
+			return figure.getLength();
+		}
+		
+		BTSWord word = (BTSWord) ((WordFigure)figure).getModelObject();
+
+		int wCharLen  = word.getWChar().length() * 2;
+		if (wCharLen > 2)
+		{
+			len = wCharLen;
+		
+		// if word calculate according to settings!
+		if (showHieroglyphs)
+		{
+			
+			int hieroLen = ((WordFigure)figure).getImageWidth();
+			if (hieroLen > len)
+			{
+				len = hieroLen;
+			}
+		}
+		if (showTransDE || showTransEN || showTransES || showTransFR)
+		{
+				int transLen = 0;
+				if (showTransDE)
+				{
+					String trans = word.getTranslation().getTranslationStrict("de");
+					if (trans != null)
+					{
+						transLen = trans.length();
+					}
+				}
+				if (showTransEN)
+				{
+					String trans = word.getTranslation().getTranslationStrict("en");
+					if (trans != null && trans.length() > transLen)
+					{
+						transLen = trans.length();
+					}
+				}
+				if (showTransES)
+				{
+					String trans = word.getTranslation().getTranslationStrict("es");
+					if (trans != null && trans.length() > transLen)
+					{
+						transLen = trans.length();
+					}
+				}
+				if (showTransFR)
+				{
+					String trans = word.getTranslation().getTranslationStrict("fr");
+					if (trans != null && trans.length() > transLen)
+					{
+						transLen = trans.length();
+					}
+				}
+				transLen = transLen * 2; // from chars to pixel length
+				if (transLen > len)
+				{
+					len = transLen;
+				}
+				len = ((WordFigure)figure).getImageWidth();}
+		}
+		System.out.println("wChar " + ((BTSWord)((WordFigure)figure).getModelObject()).getWChar() + " len " + len);
+		return len;
 	}
 
 	private LineFigure makeLineFigure() {
@@ -1520,7 +1610,20 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				}
 				else if (type == 2)
 				{
-					return (w.getFlexCode() == null || w.getFlexCode().trim().length() == 0);
+					if (w.getFlexCode() == null || w.getFlexCode().trim().length() == 0)
+					{
+						return true;
+					}
+					Integer i = null;
+					try {
+						i = new Integer(w.getFlexCode());
+					} catch (NumberFormatException e) {
+					}
+					if (i != null && i.intValue() == defaultFlexion)
+					{
+						return true;
+					}
+					return false;
 				}
 			}
 		}

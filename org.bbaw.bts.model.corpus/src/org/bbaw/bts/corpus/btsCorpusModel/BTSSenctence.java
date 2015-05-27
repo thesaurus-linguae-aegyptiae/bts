@@ -2,9 +2,7 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
 import org.bbaw.bts.btsmodel.BTSTranslations;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -24,7 +22,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSSenctence extends BTSReferencableItem, BTSTextItems {
+public interface BTSSenctence extends BTSTextItems {
 	/**
 	 * Returns the value of the '<em><b>Sentence Items</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem}.

@@ -334,4 +334,9 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		return false;
 		
 	}
+
+	@Override
+	public String processWordCharForLemmatizing(BTSWord word) {
+		return processWordChars(word);
+	}
 }

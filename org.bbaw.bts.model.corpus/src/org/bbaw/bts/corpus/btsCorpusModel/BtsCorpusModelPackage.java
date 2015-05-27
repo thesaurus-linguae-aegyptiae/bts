@@ -3000,376 +3000,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_WORD = 13;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
-
-	/**
-	 * The feature id for the '<em><b>Translation</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__TRANSLATION = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>WType</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__WTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The feature id for the '<em><b>LType</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__LTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>LKey</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__LKEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Flex Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__FLEX_CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>WChar</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__WCHAR = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 5;
-
-	/**
-	 * The feature id for the '<em><b>Value</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__VALUE = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 6;
-
-	/**
-	 * The feature id for the '<em><b>Graphics</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD__GRAPHICS = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 7;
-
-	/**
-	 * The number of structural features of the '<em>BTS Word</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 8;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
-
-	/**
-	 * The operation id for the '<em>Get Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
-
-	/**
-	 * The operation id for the '<em>Get Last Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
-
-	/**
-	 * The number of operations of the '<em>BTS Word</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_WORD_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems <em>BTS Text Items</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3380,304 +3010,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_ITEMS = 14;
 
 	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
-
-	/**
-	 * The number of structural features of the '<em>BTS Text Items</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
-
-	/**
-	 * The operation id for the '<em>Get Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
-
-	/**
-	 * The operation id for the '<em>Get Last Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
-
-	/**
-	 * The number of operations of the '<em>BTS Text Items</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSGraphicImpl <em>BTS Graphic</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3686,6 +3018,328 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 */
 	int BTS_GRAPHIC = 15;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSSenctenceImpl <em>BTS Senctence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSSenctenceImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSSenctence()
+	 * @generated
+	 */
+	int BTS_SENCTENCE = 16;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl <em>BTS Marker</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSMarker()
+	 * @generated
+	 */
+	int BTS_MARKER = 17;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem <em>BTS Sentence Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSSentenceItem()
+	 * @generated
+	 */
+	int BTS_SENTENCE_ITEM = 18;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAmbivalenceImpl <em>BTS Ambivalence</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAmbivalenceImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAmbivalence()
+	 * @generated
+	 */
+	int BTS_AMBIVALENCE = 19;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaCaseImpl <em>BTS Lemma Case</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaCaseImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSLemmaCase()
+	 * @generated
+	 */
+	int BTS_LEMMA_CASE = 20;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTextSentenceItemImpl <em>BTS Text Sentence Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTextSentenceItemImpl
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSTextSentenceItem()
+	 * @generated
+	 */
+	int BTS_TEXT_SENTENCE_ITEM = 21;
+
+	/**
+	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem
+	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAmbivalenceItem()
+	 * @generated
+	 */
+	int BTS_AMBIVALENCE_ITEM = 22;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_ITEM__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The number of structural features of the '<em>BTS Ambivalence Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_ITEM_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>BTS Ambivalence Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_ITEM_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__ID = BTS_AMBIVALENCE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Translation</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__TRANSLATION = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>WType</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__WTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>LType</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__LTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>LKey</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__LKEY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Flex Code</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__FLEX_CODE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 4;
+
+	/**
+	 * The feature id for the '<em><b>WChar</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__WCHAR = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 5;
+
+	/**
+	 * The feature id for the '<em><b>Value</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__VALUE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Graphics</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__GRAPHICS = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 7;
+
+	/**
+	 * The number of structural features of the '<em>BTS Word</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD_FEATURE_COUNT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 8;
+
+	/**
+	 * The number of operations of the '<em>BTS Word</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD_OPERATION_COUNT = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__STATE = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__REVISION_STATE = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__VISIBILITY = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__REVISIONS = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of structural features of the '<em>BTS Text Items</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 3;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___GET_REVISION__INT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 4;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS___GET_LAST_REVISION = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 5;
+
+	/**
+	 * The number of operations of the '<em>BTS Text Items</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3751,14 +3405,13 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_GRAPHIC_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSSenctenceImpl <em>BTS Senctence</em>}' class.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSSenctenceImpl
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSSenctence()
 	 * @generated
+	 * @ordered
 	 */
-	int BTS_SENCTENCE = 16;
+	int BTS_SENCTENCE__ID = BTS_TEXT_ITEMS__ID;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3767,16 +3420,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
+	int BTS_SENCTENCE__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -3785,7 +3429,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
+	int BTS_SENCTENCE__STATE = BTS_TEXT_ITEMS__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -3794,7 +3438,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
+	int BTS_SENCTENCE__REVISION_STATE = BTS_TEXT_ITEMS__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -3803,7 +3447,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+	int BTS_SENCTENCE__VISIBILITY = BTS_TEXT_ITEMS__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
@@ -3812,178 +3456,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
+	int BTS_SENCTENCE__REVISIONS = BTS_TEXT_ITEMS__REVISIONS;
 
 	/**
 	 * The feature id for the '<em><b>Sentence Items</b></em>' containment reference list.
@@ -3992,7 +3465,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__SENTENCE_ITEMS = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_SENCTENCE__SENTENCE_ITEMS = BTS_TEXT_ITEMS_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Translation</b></em>' containment reference.
@@ -4001,7 +3474,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE__TRANSLATION = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
+	int BTS_SENCTENCE__TRANSLATION = BTS_TEXT_ITEMS_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>BTS Senctence</em>' class.
@@ -4010,7 +3483,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 2;
+	int BTS_SENCTENCE_FEATURE_COUNT = BTS_TEXT_ITEMS_FEATURE_COUNT + 2;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -4019,7 +3492,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_SENCTENCE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -4028,17 +3501,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+	int BTS_SENCTENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Add Revision</em>' operation.
@@ -4047,7 +3510,16 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+	int BTS_SENCTENCE___ADD_REVISION__BTSREVISION = BTS_TEXT_ITEMS___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE___ADD_REVISION__INT_DATE_STRING = BTS_TEXT_ITEMS___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -4056,7 +3528,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+	int BTS_SENCTENCE___GET_REVISION__INT = BTS_TEXT_ITEMS___GET_REVISION__INT;
 
 	/**
 	 * The operation id for the '<em>Get Last Revision</em>' operation.
@@ -4065,7 +3537,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+	int BTS_SENCTENCE___GET_LAST_REVISION = BTS_TEXT_ITEMS___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Senctence</em>' class.
@@ -4074,26 +3546,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENCTENCE_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl <em>BTS Marker</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSMarker()
-	 * @generated
-	 */
-	int BTS_MARKER = 17;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
+	int BTS_SENCTENCE_OPERATION_COUNT = BTS_TEXT_ITEMS_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -4102,7 +3555,16 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
+	int BTS_MARKER__ID = BTS_AMBIVALENCE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__PROPERTY_CHANGE_SUPPORT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -4111,7 +3573,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
+	int BTS_MARKER__STATE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -4120,7 +3582,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
+	int BTS_MARKER__REVISION_STATE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -4129,7 +3591,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
+	int BTS_MARKER__VISIBILITY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
@@ -4138,178 +3600,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
+	int BTS_MARKER__REVISIONS = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -4318,7 +3609,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__VALUE = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_MARKER__VALUE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of structural features of the '<em>BTS Marker</em>' class.
@@ -4327,7 +3618,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
+	int BTS_MARKER_FEATURE_COUNT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -4336,7 +3627,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_MARKER___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -4345,17 +3636,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_MARKER___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
+	int BTS_MARKER___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Add Revision</em>' operation.
@@ -4364,7 +3645,16 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
+	int BTS_MARKER___ADD_REVISION__BTSREVISION = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER___ADD_REVISION__INT_DATE_STRING = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -4373,7 +3663,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
+	int BTS_MARKER___GET_REVISION__INT = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Get Last Revision</em>' operation.
@@ -4382,7 +3672,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+	int BTS_MARKER___GET_LAST_REVISION = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>BTS Marker</em>' class.
@@ -4391,26 +3681,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem <em>BTS Sentence Item</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSSentenceItem()
-	 * @generated
-	 */
-	int BTS_SENTENCE_ITEM = 18;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
+	int BTS_MARKER_OPERATION_COUNT = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -4419,214 +3690,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEM__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
+	int BTS_SENTENCE_ITEM__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
 
 	/**
 	 * The number of structural features of the '<em>BTS Sentence Item</em>' class.
@@ -4635,62 +3699,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEM_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
-
-	/**
-	 * The operation id for the '<em>Get Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
-
-	/**
-	 * The operation id for the '<em>Get Last Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENTENCE_ITEM___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
+	int BTS_SENTENCE_ITEM_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>BTS Sentence Item</em>' class.
@@ -4699,660 +3708,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEM_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAmbivalenceImpl <em>BTS Ambivalence</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSAmbivalenceImpl
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAmbivalence()
-	 * @generated
-	 */
-	int BTS_AMBIVALENCE = 19;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
-
-	/**
-	 * The feature id for the '<em><b>Cases</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE__CASES = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>BTS Ambivalence</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
-
-	/**
-	 * The operation id for the '<em>Get Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
-
-	/**
-	 * The operation id for the '<em>Get Last Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
-
-	/**
-	 * The number of operations of the '<em>BTS Ambivalence</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_AMBIVALENCE_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaCaseImpl <em>BTS Lemma Case</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSLemmaCaseImpl
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSLemmaCase()
-	 * @generated
-	 */
-	int BTS_LEMMA_CASE = 20;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROPERTY_CHANGE_SUPPORT;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__ID;
-
-	/**
-	 * The feature id for the '<em><b>State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__STATE;
-
-	/**
-	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__REVISION_STATE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISION_STATE;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__VISIBILITY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__REVISIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__REV = BtsmodelPackage.BTS_REFERENCABLE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__PROJECT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__LOCKED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__UPDATERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__READERS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__DELETED = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__CONFLICTING_REVS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__DB_COLLECTION_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__NAME = BtsmodelPackage.BTS_REFERENCABLE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__TYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__SUBTYPE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__CODE = BtsmodelPackage.BTS_REFERENCABLE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__RELATIONS = BtsmodelPackage.BTS_REFERENCABLE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__TEMP_SORT_KEY = BtsmodelPackage.BTS_REFERENCABLE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__EXTERNAL_REFERENCES = BtsmodelPackage.BTS_REFERENCABLE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__COMMENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__PARENT = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__PARENT_ID = BtsmodelPackage.BTS_REFERENCABLE_ITEM__PARENT_ID;
-
-	/**
-	 * The feature id for the '<em><b>Scenario</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE__SCENARIO = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>BTS Lemma Case</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE_FEATURE_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_FEATURE_COUNT + 1;
-
-	/**
-	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-	/**
-	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_REFERENCABLE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__BTSREVISION;
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_REFERENCABLE_ITEM___ADD_REVISION__INT_DATE_STRING;
-
-	/**
-	 * The operation id for the '<em>Get Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___GET_REVISION__INT = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_REVISION__INT;
-
-	/**
-	 * The operation id for the '<em>Get Last Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE___GET_LAST_REVISION = BtsmodelPackage.BTS_REFERENCABLE_ITEM___GET_LAST_REVISION;
-
-	/**
-	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_CASE_OPERATION_COUNT = BtsmodelPackage.BTS_REFERENCABLE_ITEM_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTextSentenceItemImpl <em>BTS Text Sentence Item</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BTSTextSentenceItemImpl
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSTextSentenceItem()
-	 * @generated
-	 */
-	int BTS_TEXT_SENTENCE_ITEM = 21;
-
-	/**
-	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
+	int BTS_SENTENCE_ITEM_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -5364,13 +3720,22 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_SENTENCE_ITEM__ID = BTS_SENTENCE_ITEM__ID;
 
 	/**
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT = BTS_SENTENCE_ITEM_FEATURE_COUNT + 0;
+
+	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__STATE = BTS_SENTENCE_ITEM__STATE;
+	int BTS_TEXT_SENTENCE_ITEM__STATE = BTS_SENTENCE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -5379,7 +3744,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__REVISION_STATE = BTS_SENTENCE_ITEM__REVISION_STATE;
+	int BTS_TEXT_SENTENCE_ITEM__REVISION_STATE = BTS_SENTENCE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -5388,7 +3753,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__VISIBILITY = BTS_SENTENCE_ITEM__VISIBILITY;
+	int BTS_TEXT_SENTENCE_ITEM__VISIBILITY = BTS_SENTENCE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
@@ -5397,178 +3762,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM__REVISIONS = BTS_SENTENCE_ITEM__REVISIONS;
-
-	/**
-	 * The feature id for the '<em><b>rev</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__REV = BTS_SENTENCE_ITEM__REV;
-
-	/**
-	 * The feature id for the '<em><b>Project</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__PROJECT = BTS_SENTENCE_ITEM__PROJECT;
-
-	/**
-	 * The feature id for the '<em><b>Locked</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__LOCKED = BTS_SENTENCE_ITEM__LOCKED;
-
-	/**
-	 * The feature id for the '<em><b>Updaters</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__UPDATERS = BTS_SENTENCE_ITEM__UPDATERS;
-
-	/**
-	 * The feature id for the '<em><b>Readers</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__READERS = BTS_SENTENCE_ITEM__READERS;
-
-	/**
-	 * The feature id for the '<em><b>deleted</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__DELETED = BTS_SENTENCE_ITEM__DELETED;
-
-	/**
-	 * The feature id for the '<em><b>Conflicting Revs</b></em>' attribute list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__CONFLICTING_REVS = BTS_SENTENCE_ITEM__CONFLICTING_REVS;
-
-	/**
-	 * The feature id for the '<em><b>DB Collection Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__DB_COLLECTION_KEY = BTS_SENTENCE_ITEM__DB_COLLECTION_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__SORT_KEY = BTS_SENTENCE_ITEM__SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__NAME = BTS_SENTENCE_ITEM__NAME;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__TYPE = BTS_SENTENCE_ITEM__TYPE;
-
-	/**
-	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__SUBTYPE = BTS_SENTENCE_ITEM__SUBTYPE;
-
-	/**
-	 * The feature id for the '<em><b>Code</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__CODE = BTS_SENTENCE_ITEM__CODE;
-
-	/**
-	 * The feature id for the '<em><b>Relations</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__RELATIONS = BTS_SENTENCE_ITEM__RELATIONS;
-
-	/**
-	 * The feature id for the '<em><b>Temp Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__TEMP_SORT_KEY = BTS_SENTENCE_ITEM__TEMP_SORT_KEY;
-
-	/**
-	 * The feature id for the '<em><b>External References</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__EXTERNAL_REFERENCES = BTS_SENTENCE_ITEM__EXTERNAL_REFERENCES;
-
-	/**
-	 * The feature id for the '<em><b>Comment</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__COMMENT = BTS_SENTENCE_ITEM__COMMENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__PARENT = BTS_SENTENCE_ITEM__PARENT;
-
-	/**
-	 * The feature id for the '<em><b>Parent Id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM__PARENT_ID = BTS_SENTENCE_ITEM__PARENT_ID;
+	int BTS_TEXT_SENTENCE_ITEM__REVISIONS = BTS_SENTENCE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>BTS Text Sentence Item</em>' class.
@@ -5577,7 +3771,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT = BTS_SENTENCE_ITEM_FEATURE_COUNT + 0;
+	int BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT = BTS_SENTENCE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -5586,7 +3780,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+	int BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -5595,17 +3789,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
-
-
-	/**
-	 * The operation id for the '<em>Add Revision</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__BTSREVISION = BTS_SENTENCE_ITEM___ADD_REVISION__BTSREVISION;
+	int BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_SENTENCE_ITEM_OPERATION_COUNT + 1;
 
 	/**
 	 * The operation id for the '<em>Add Revision</em>' operation.
@@ -5614,7 +3798,16 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING = BTS_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING;
+	int BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__BTSREVISION = BTS_SENTENCE_ITEM_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING = BTS_SENTENCE_ITEM_OPERATION_COUNT + 3;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -5623,7 +3816,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___GET_REVISION__INT = BTS_SENTENCE_ITEM___GET_REVISION__INT;
+	int BTS_TEXT_SENTENCE_ITEM___GET_REVISION__INT = BTS_SENTENCE_ITEM_OPERATION_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Get Last Revision</em>' operation.
@@ -5632,7 +3825,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM___GET_LAST_REVISION = BTS_SENTENCE_ITEM___GET_LAST_REVISION;
+	int BTS_TEXT_SENTENCE_ITEM___GET_LAST_REVISION = BTS_SENTENCE_ITEM_OPERATION_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Sentence Item</em>' class.
@@ -5641,35 +3834,178 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT = BTS_SENTENCE_ITEM_OPERATION_COUNT + 0;
+	int BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT = BTS_SENTENCE_ITEM_OPERATION_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem <em>BTS Ambivalence Item</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem
-	 * @see org.bbaw.bts.corpus.btsCorpusModel.impl.BtsCorpusModelPackageImpl#getBTSAmbivalenceItem()
-	 * @generated
-	 */
-	int BTS_AMBIVALENCE_ITEM = 22;
-
-	/**
-	 * The number of structural features of the '<em>BTS Ambivalence Item</em>' class.
+	 * The feature id for the '<em><b>id</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_AMBIVALENCE_ITEM_FEATURE_COUNT = 0;
+	int BTS_AMBIVALENCE__ID = BTS_TEXT_SENTENCE_ITEM__ID;
 
 	/**
-	 * The number of operations of the '<em>BTS Ambivalence Item</em>' class.
+	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_AMBIVALENCE_ITEM_OPERATION_COUNT = 0;
+	int BTS_AMBIVALENCE__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_SENTENCE_ITEM__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__STATE = BTS_TEXT_SENTENCE_ITEM__STATE;
+
+	/**
+	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__REVISION_STATE = BTS_TEXT_SENTENCE_ITEM__REVISION_STATE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__VISIBILITY = BTS_TEXT_SENTENCE_ITEM__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__REVISIONS = BTS_TEXT_SENTENCE_ITEM__REVISIONS;
+
+	/**
+	 * The feature id for the '<em><b>Cases</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__CASES = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Ambivalence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_FEATURE_COUNT = BTS_TEXT_SENTENCE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BTS_TEXT_SENTENCE_ITEM___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___ADD_REVISION__BTSREVISION = BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__BTSREVISION;
+
+	/**
+	 * The operation id for the '<em>Add Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___ADD_REVISION__INT_DATE_STRING = BTS_TEXT_SENTENCE_ITEM___ADD_REVISION__INT_DATE_STRING;
+
+	/**
+	 * The operation id for the '<em>Get Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___GET_REVISION__INT = BTS_TEXT_SENTENCE_ITEM___GET_REVISION__INT;
+
+	/**
+	 * The operation id for the '<em>Get Last Revision</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE___GET_LAST_REVISION = BTS_TEXT_SENTENCE_ITEM___GET_LAST_REVISION;
+
+	/**
+	 * The number of operations of the '<em>BTS Ambivalence</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE_OPERATION_COUNT = BTS_TEXT_SENTENCE_ITEM_OPERATION_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Scenario</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__SCENARIO = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Lemma Case</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 
 	/**

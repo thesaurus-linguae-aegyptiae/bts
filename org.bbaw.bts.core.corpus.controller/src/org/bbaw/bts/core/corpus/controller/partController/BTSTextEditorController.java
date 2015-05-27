@@ -19,10 +19,14 @@ import java.util.Map;
 
 
 
+
+
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
@@ -41,7 +45,7 @@ public interface BTSTextEditorController
 
 	void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
 			List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
-			Map<String, List<Object>> lemmaAnnotationMap, IProgressMonitor monitor);
+			Map<String, List<Object>> lemmaAnnotationMap, IProgressMonitor monitor, int lineLength);
 
 //	BTSText updateTextFromDocument(BTSText text, Document document, IAnnotationModel annotationModel,
 //			TextViewer textViewer);
@@ -96,4 +100,8 @@ public interface BTSTextEditorController
 	int[] checkTextCompleteness(BTSText text);
 
 	List<BTSText> listInAllInCompleteTexts(IProgressMonitor monitor);
+
+	BTSSentenceItem copySentenceItem(BTSSentenceItem copyItem);
+
+	BTSSenctence copySentence(BTSSenctence copyItem);
 }

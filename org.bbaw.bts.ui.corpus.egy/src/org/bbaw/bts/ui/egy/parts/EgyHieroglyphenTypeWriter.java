@@ -1095,8 +1095,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	}
 	
 	protected void setUserMayTranscribeInteral(boolean mayTranscribe) {
-		this.userMayTranscribe = mayTranscribe;
-		if (loaded)
+		if (constructed)
 		{
 			hierotw_text.setEditable(mayTranscribe);
 			glyphOrder_spinner.setEnabled(mayTranscribe);
@@ -1104,6 +1103,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			previousGlyph_Button.setEnabled(mayTranscribe);
 			nextGlyph_Button.setEnabled(mayTranscribe);
 			ignoreGlyph_Button.setEnabled(mayTranscribe);
+			this.userMayTranscribe = mayTranscribe;
+
 		}
 		
 	}

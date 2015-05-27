@@ -1111,29 +1111,25 @@ ruleWordPart returns [EObject current=null]
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-((	otherlv_0='=' 
-    {
-    	newLeafNode(otherlv_0, grammarAccess.getWordPartAccess().getEqualsSignKeyword_0());
-    }
-)?(
+(
 (
 		{ 
-	        newCompositeNode(grammarAccess.getWordPartAccess().getWCharWordMiddleParserRuleCall_1_0()); 
+	        newCompositeNode(grammarAccess.getWordPartAccess().getWCharWordMiddleParserRuleCall_0()); 
 	    }
-		lv_wChar_1_0=ruleWordMiddle		{
+		lv_wChar_0_0=ruleWordMiddle		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getWordPartRule());
 	        }
        		set(
        			$current, 
        			"wChar",
-        		lv_wChar_1_0, 
+        		lv_wChar_0_0, 
         		"WordMiddle");
 	        afterParserOrEnumRuleCall();
 	    }
 
 )
-))
+)
 ;
 
 
@@ -2201,6 +2197,26 @@ ruleNoLacuna returns [EObject current=null]
         $current = $this_Serech_6.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoLacunaAccess().getDeletionParserRuleCall_7()); 
+    }
+    this_Deletion_7=ruleDeletion
+    { 
+        $current = $this_Deletion_7.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoLacunaAccess().getEmendationParserRuleCall_8()); 
+    }
+    this_Emendation_8=ruleEmendation
+    { 
+        $current = $this_Emendation_8.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2467,6 +2483,46 @@ ruleNoExpandedColumn returns [EObject current=null]
         $current = $this_DisputableReading_3.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getEmendationParserRuleCall_4()); 
+    }
+    this_Emendation_4=ruleEmendation
+    { 
+        $current = $this_Emendation_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getLacunaParserRuleCall_5()); 
+    }
+    this_Lacuna_5=ruleLacuna
+    { 
+        $current = $this_Lacuna_5.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getPartialDestructionParserRuleCall_6()); 
+    }
+    this_PartialDestruction_6=rulePartialDestruction
+    { 
+        $current = $this_PartialDestruction_6.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoExpandedColumnAccess().getDeletionParserRuleCall_7()); 
+    }
+    this_Deletion_7=ruleDeletion
+    { 
+        $current = $this_Deletion_7.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2580,6 +2636,46 @@ ruleNoRasur returns [EObject current=null]
         $current = $this_DisputableReading_3.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRasurAccess().getEmendationParserRuleCall_4()); 
+    }
+    this_Emendation_4=ruleEmendation
+    { 
+        $current = $this_Emendation_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRasurAccess().getLacunaParserRuleCall_5()); 
+    }
+    this_Lacuna_5=ruleLacuna
+    { 
+        $current = $this_Lacuna_5.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRasurAccess().getPartialDestructionParserRuleCall_6()); 
+    }
+    this_PartialDestruction_6=rulePartialDestruction
+    { 
+        $current = $this_PartialDestruction_6.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRasurAccess().getDeletionParserRuleCall_7()); 
+    }
+    this_Deletion_7=ruleDeletion
+    { 
+        $current = $this_Deletion_7.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -2691,6 +2787,46 @@ ruleNoAncientExpanded returns [EObject current=null]
     this_DisputableReading_3=ruleDisputableReading
     { 
         $current = $this_DisputableReading_3.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getEmendationParserRuleCall_4()); 
+    }
+    this_Emendation_4=ruleEmendation
+    { 
+        $current = $this_Emendation_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getLacunaParserRuleCall_5()); 
+    }
+    this_Lacuna_5=ruleLacuna
+    { 
+        $current = $this_Lacuna_5.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getPartialDestructionParserRuleCall_6()); 
+    }
+    this_PartialDestruction_6=rulePartialDestruction
+    { 
+        $current = $this_PartialDestruction_6.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoAncientExpandedAccess().getDeletionParserRuleCall_7()); 
+    }
+    this_Deletion_7=ruleDeletion
+    { 
+        $current = $this_Deletion_7.current; 
         afterParserOrEnumRuleCall();
     }
 )
@@ -2814,6 +2950,46 @@ ruleNoRestorationOverRasur returns [EObject current=null]
     this_Cartouche_4=ruleCartouche
     { 
         $current = $this_Cartouche_4.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getEmendationParserRuleCall_5()); 
+    }
+    this_Emendation_5=ruleEmendation
+    { 
+        $current = $this_Emendation_5.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getLacunaParserRuleCall_6()); 
+    }
+    this_Lacuna_6=ruleLacuna
+    { 
+        $current = $this_Lacuna_6.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getPartialDestructionParserRuleCall_7()); 
+    }
+    this_PartialDestruction_7=rulePartialDestruction
+    { 
+        $current = $this_PartialDestruction_7.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoRestorationOverRasurAccess().getDeletionParserRuleCall_8()); 
+    }
+    this_Deletion_8=ruleDeletion
+    { 
+        $current = $this_Deletion_8.current; 
         afterParserOrEnumRuleCall();
     }
 )

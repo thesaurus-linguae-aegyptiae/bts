@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -20,7 +19,7 @@ import org.bbaw.bts.btsmodel.BTSReferencableItem;
  * @model
  * @generated
  */
-public interface BTSMarker extends BTSReferencableItem, BTSAmbivalenceItem, BTSTextSentenceItem, BTSTextItems, BTSSentenceItem {
+public interface BTSMarker extends BTSAmbivalenceItem, BTSTextSentenceItem, BTSTextItems, BTSSentenceItem {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

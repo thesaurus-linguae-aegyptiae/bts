@@ -167,8 +167,8 @@ public class BTSCoreConstants
 	/** The Constant VISIBILITY_GROUP. */
 	public static final String VISIBILITY_GROUP = "group";
 	
-	/** The Constant VISIBILITY_USER. */
-	public static final String VISIBILITY_USER = "user";
+	/** The Constant VISIBILITY_READER. */
+	public static final String VISIBILITY_READER = "reader";
 
 
 	/** The Constant REVIEW_STATUS_CONFIG. */

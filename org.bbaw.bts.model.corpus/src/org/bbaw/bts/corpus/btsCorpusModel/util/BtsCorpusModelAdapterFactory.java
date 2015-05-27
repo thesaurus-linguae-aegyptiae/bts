@@ -7,7 +7,6 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
 import org.bbaw.bts.corpus.btsCorpusModel.*;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -193,10 +192,6 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBTSObject(BTSObject object) {
 				return createBTSObjectAdapter();
-			}
-			@Override
-			public Adapter caseBTSReferencableItem(BTSReferencableItem object) {
-				return createBTSReferencableItemAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -649,20 +644,6 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSDBBaseObjectAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSReferencableItem <em>BTS Referencable Item</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.bbaw.bts.btsmodel.BTSReferencableItem
-	 * @generated
-	 */
-	public Adapter createBTSReferencableItemAdapter() {
 		return null;
 	}
 

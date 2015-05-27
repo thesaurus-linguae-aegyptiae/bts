@@ -79,7 +79,7 @@ implements LemmaNavigatorController{
 	}
 
 	protected String[] getChildRelationTypes() {
-		return new String[]{"partOf", "referencedBy", "referencing"};
+		return new String[]{"partOf", "referencedBy", "referencing", "rootOf"};
 	}
 
 	@Override

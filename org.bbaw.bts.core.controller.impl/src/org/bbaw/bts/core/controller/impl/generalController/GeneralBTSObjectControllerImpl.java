@@ -1,6 +1,7 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -60,8 +61,12 @@ public class GeneralBTSObjectControllerImpl implements
 							.toArray(new FilterBuilder[filters.size()]);
 					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
 
-					list.addAll(queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-									false, "BTSThsEntry", monitor));
+					List<BTSObject> result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
+							false, "BTSThsEntry", monitor);
+					if (result != null && !result.isEmpty())
+					{
+						list.addAll(result);
+					}
 //					list.addAll((Collection<? extends BTSObject>) thsService
 //							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 //									false));

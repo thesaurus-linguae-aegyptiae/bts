@@ -21,7 +21,8 @@ public class ElementFigureImpl extends RoundedRectangle implements
 
 	public int getLength() {
 		Rectangle rec = getBounds();
-		return rec.getSize().width;
+		Double d = rec.getSize().width * 0.7;
+		return d.intValue();
 	}
 
 	public Object getModelObject() {

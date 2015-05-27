@@ -268,7 +268,13 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			}
 			
 			//user roles are editor or above for given collection
-			if (userHasEditorRights(object))
+			if (BTSCoreConstants.VISIBILITY_PROJECT.equals(ao.getVisibility()) && userHasEditorRights(object))
+			{
+				return true;
+			}
+			
+			//user roles are editor or above for given collection
+			if (userHasAdminRights(object)) //FIXME
 			{
 				return true;
 			}
@@ -280,6 +286,19 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 			}
 		}
 		return false;
+	}
+
+	private boolean userHasAdminRights(BTSDBBaseObject object) {
+		//find project of current object
+		//see highest role user in dbcollection of object
+		
+		BTSProjectDBCollection dbColl = findDBProjectCollection(object);
+		if (dbColl != null && "admin".equals(dbColl.getCollectionName()))
+		{
+			return authenticatedUserIsDBAdmin(true);
+		}
+		String role = highestRoleOfAuthenticatedUserInDBCollection(dbColl);
+		return (BTSCoreConstants.USER_ROLE_ADMINS.equals(role));
 	}
 
 	private boolean userHasEditorRights(BTSDBBaseObject object) {

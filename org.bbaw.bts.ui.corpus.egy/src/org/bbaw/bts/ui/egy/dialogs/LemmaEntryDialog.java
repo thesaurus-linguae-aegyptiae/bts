@@ -114,7 +114,7 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(650, 550);
+		return new Point(750, 750);
 	}
 
 	@Override

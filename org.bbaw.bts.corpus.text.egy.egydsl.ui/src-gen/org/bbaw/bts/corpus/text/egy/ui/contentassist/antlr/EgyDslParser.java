@@ -79,7 +79,6 @@ public class EgyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getVersbreakMarkerAccess().getGroup(), "rule__VersbreakMarker__Group__0");
 					put(grammarAccess.getBrokenVersbreakMarkerAccess().getGroup(), "rule__BrokenVersbreakMarker__Group__0");
 					put(grammarAccess.getWordAccess().getGroup(), "rule__Word__Group__0");
-					put(grammarAccess.getWordPartAccess().getGroup(), "rule__WordPart__Group__0");
 					put(grammarAccess.getOvalAccess().getGroup(), "rule__Oval__Group__0");
 					put(grammarAccess.getSerechAccess().getGroup(), "rule__Serech__Group__0");
 					put(grammarAccess.getCartoucheAccess().getGroup(), "rule__Cartouche__Group__0");
@@ -113,7 +112,7 @@ public class EgyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMarkerAccess().getTypeAssignment(), "rule__Marker__TypeAssignment");
 					put(grammarAccess.getDestructionMarkerAccess().getTypeAssignment(), "rule__DestructionMarker__TypeAssignment");
 					put(grammarAccess.getWordAccess().getWCharAssignment_1(), "rule__Word__WCharAssignment_1");
-					put(grammarAccess.getWordPartAccess().getWCharAssignment_1(), "rule__WordPart__WCharAssignment_1");
+					put(grammarAccess.getWordPartAccess().getWCharAssignment(), "rule__WordPart__WCharAssignment");
 					put(grammarAccess.getCharsAccess().getNameAssignment(), "rule__Chars__NameAssignment");
 					put(grammarAccess.getOvalAccess().getWCharAssignment_1(), "rule__Oval__WCharAssignment_1");
 					put(grammarAccess.getSerechAccess().getWCharAssignment_1(), "rule__Serech__WCharAssignment_1");

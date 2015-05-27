@@ -4,10 +4,8 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 
 import java.util.Collection;
 import java.util.List;
-
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAbstractText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
@@ -57,16 +55,19 @@ public class BTSAbstractTextItemProvider extends BTSCorpusObjectItemProvider {
 	 * @generated
 	 */
 	protected void addParagraphsPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add(createItemPropertyDescriptor(
-				((ComposeableAdapterFactory) adapterFactory)
-						.getRootAdapterFactory(),
-				getResourceLocator(),
-				getString("_UI_BTSAbstractText_paragraphs_feature"),
-				getString("_UI_PropertyDescriptor_description",
-						"_UI_BTSAbstractText_paragraphs_feature",
-						"_UI_BTSAbstractText_type"),
-				BtsCorpusModelPackage.Literals.BTS_ABSTRACT_TEXT__PARAGRAPHS,
-				true, false, true, null, null, null));
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSAbstractText_paragraphs_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSAbstractText_paragraphs_feature", "_UI_BTSAbstractText_type"),
+				 BtsCorpusModelPackage.Literals.BTS_ABSTRACT_TEXT__PARAGRAPHS,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
@@ -122,11 +123,10 @@ public class BTSAbstractTextItemProvider extends BTSCorpusObjectItemProvider {
 	}
 
 	/**
-	 * This handles model notifications by calling {@link #updateChildren} to
-	 * update any cached children and by creating a viewer notification, which
-	 * it passes to {@link #fireNotifyChanged}. <!-- begin-user-doc --> <!--
+	 * This handles model notifications by calling {@link #updateChildren} to update any cached
+	 * children and by creating a viewer notification, which it passes to {@link #fireNotifyChanged}.
+	 * <!-- begin-user-doc --> <!--
 	 * end-user-doc -->
-	 * 
 	 * @generated
 	 */
 	@Override

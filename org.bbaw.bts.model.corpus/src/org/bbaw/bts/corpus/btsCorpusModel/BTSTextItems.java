@@ -2,7 +2,8 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
+import org.bbaw.bts.btsmodel.AdministrativDataObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,5 +15,5 @@ import org.bbaw.bts.btsmodel.BTSReferencableItem;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface BTSTextItems extends BTSReferencableItem {
+public interface BTSTextItems extends BTSIdentifiableItem, AdministrativDataObject {
 } // BTSTextItems

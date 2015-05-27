@@ -787,7 +787,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		List<E> result = loadResultFromSearchResponse(response, indexName);
 		
 		if (registerQuery) {
-			registerQueryWithPercolator(query, indexName, indexType);
+			try {
+				registerQueryWithPercolator(query, indexName, indexType);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		return result;

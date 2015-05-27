@@ -664,27 +664,19 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 	public class WordPartElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WordPart");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cEqualsSignKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final Assignment cWCharAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cWCharWordMiddleParserRuleCall_1_0 = (RuleCall)cWCharAssignment_1.eContents().get(0);
+		private final Assignment cWCharAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cWCharWordMiddleParserRuleCall_0 = (RuleCall)cWCharAssignment.eContents().get(0);
 		
+		//// (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
 		//WordPart:
-		//	"="? wChar=WordMiddle // (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
-		//;
+		//	wChar=WordMiddle;
 		public ParserRule getRule() { return rule; }
 
-		//"="? wChar=WordMiddle // (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)
-		public Group getGroup() { return cGroup; }
-
-		//"="?
-		public Keyword getEqualsSignKeyword_0() { return cEqualsSignKeyword_0; }
-
 		//wChar=WordMiddle
-		public Assignment getWCharAssignment_1() { return cWCharAssignment_1; }
+		public Assignment getWCharAssignment() { return cWCharAssignment; }
 
 		//WordMiddle
-		public RuleCall getWCharWordMiddleParserRuleCall_1_0() { return cWCharWordMiddleParserRuleCall_1_0; }
+		public RuleCall getWCharWordMiddleParserRuleCall_0() { return cWCharWordMiddleParserRuleCall_0; }
 	}
 
 	public class WordMiddleElements extends AbstractParserRuleElementFinder {
@@ -1200,12 +1192,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cCartoucheParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		private final RuleCall cOvalParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		private final RuleCall cSerechParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cDeletionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cEmendationParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
 		//NoLacuna:
-		//	Expanded | Chars | Interfix | DisputableReading | Cartouche | Oval | Serech;
+		//	Expanded | Chars | Interfix | DisputableReading | Cartouche | Oval | Serech | Deletion | Emendation;
 		public ParserRule getRule() { return rule; }
 
-		//Expanded | Chars | Interfix | DisputableReading | Cartouche | Oval | Serech
+		//Expanded | Chars | Interfix | DisputableReading | Cartouche | Oval | Serech | Deletion | Emendation
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Expanded
@@ -1228,6 +1222,12 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Serech
 		public RuleCall getSerechParserRuleCall_6() { return cSerechParserRuleCall_6; }
+
+		//Deletion
+		public RuleCall getDeletionParserRuleCall_7() { return cDeletionParserRuleCall_7; }
+
+		//Emendation
+		public RuleCall getEmendationParserRuleCall_8() { return cEmendationParserRuleCall_8; }
 	}
 
 	public class DeletionElements extends AbstractParserRuleElementFinder {
@@ -1346,12 +1346,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cEmendationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cLacunaParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cPartialDestructionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cDeletionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//NoExpandedColumn:
-		//	Chars | Expanded | Interfix | DisputableReading;
+		//	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix | DisputableReading
+		//Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1365,6 +1369,18 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DisputableReading
 		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
+
+		//Emendation
+		public RuleCall getEmendationParserRuleCall_4() { return cEmendationParserRuleCall_4; }
+
+		//Lacuna
+		public RuleCall getLacunaParserRuleCall_5() { return cLacunaParserRuleCall_5; }
+
+		//PartialDestruction
+		public RuleCall getPartialDestructionParserRuleCall_6() { return cPartialDestructionParserRuleCall_6; }
+
+		//Deletion
+		public RuleCall getDeletionParserRuleCall_7() { return cDeletionParserRuleCall_7; }
 	}
 
 	public class RasurElements extends AbstractParserRuleElementFinder {
@@ -1406,12 +1422,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cEmendationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cLacunaParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cPartialDestructionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cDeletionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//NoRasur:
-		//	Chars | Expanded | Interfix | DisputableReading;
+		//	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix | DisputableReading
+		//Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1425,6 +1445,18 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DisputableReading
 		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
+
+		//Emendation
+		public RuleCall getEmendationParserRuleCall_4() { return cEmendationParserRuleCall_4; }
+
+		//Lacuna
+		public RuleCall getLacunaParserRuleCall_5() { return cLacunaParserRuleCall_5; }
+
+		//PartialDestruction
+		public RuleCall getPartialDestructionParserRuleCall_6() { return cPartialDestructionParserRuleCall_6; }
+
+		//Deletion
+		public RuleCall getDeletionParserRuleCall_7() { return cDeletionParserRuleCall_7; }
 	}
 
 	public class AncientExpandedElements extends AbstractParserRuleElementFinder {
@@ -1466,12 +1498,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cExpandedParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cEmendationParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cLacunaParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cPartialDestructionParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cDeletionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
 		
 		//NoAncientExpanded:
-		//	Chars | Expanded | Interfix | DisputableReading;
+		//	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix | DisputableReading
+		//Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1485,6 +1521,18 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//DisputableReading
 		public RuleCall getDisputableReadingParserRuleCall_3() { return cDisputableReadingParserRuleCall_3; }
+
+		//Emendation
+		public RuleCall getEmendationParserRuleCall_4() { return cEmendationParserRuleCall_4; }
+
+		//Lacuna
+		public RuleCall getLacunaParserRuleCall_5() { return cLacunaParserRuleCall_5; }
+
+		//PartialDestruction
+		public RuleCall getPartialDestructionParserRuleCall_6() { return cPartialDestructionParserRuleCall_6; }
+
+		//Deletion
+		public RuleCall getDeletionParserRuleCall_7() { return cDeletionParserRuleCall_7; }
 	}
 
 	public class RestorationOverRasurElements extends AbstractParserRuleElementFinder {
@@ -1527,12 +1575,16 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cInterfixParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cDisputableReadingParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cCartoucheParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cEmendationParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cLacunaParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cPartialDestructionParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final RuleCall cDeletionParserRuleCall_8 = (RuleCall)cAlternatives.eContents().get(8);
 		
 		//NoRestorationOverRasur:
-		//	Chars | Expanded | Interfix | DisputableReading | Cartouche;
+		//	Chars | Expanded | Interfix | DisputableReading | Cartouche | Emendation | Lacuna | PartialDestruction | Deletion;
 		public ParserRule getRule() { return rule; }
 
-		//Chars | Expanded | Interfix | DisputableReading | Cartouche
+		//Chars | Expanded | Interfix | DisputableReading | Cartouche | Emendation | Lacuna | PartialDestruction | Deletion
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Chars
@@ -1549,6 +1601,18 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//Cartouche
 		public RuleCall getCartoucheParserRuleCall_4() { return cCartoucheParserRuleCall_4; }
+
+		//Emendation
+		public RuleCall getEmendationParserRuleCall_5() { return cEmendationParserRuleCall_5; }
+
+		//Lacuna
+		public RuleCall getLacunaParserRuleCall_6() { return cLacunaParserRuleCall_6; }
+
+		//PartialDestruction
+		public RuleCall getPartialDestructionParserRuleCall_7() { return cPartialDestructionParserRuleCall_7; }
+
+		//Deletion
+		public RuleCall getDeletionParserRuleCall_8() { return cDeletionParserRuleCall_8; }
 	}
 
 	public class PartialDestructionElements extends AbstractParserRuleElementFinder {
@@ -2191,9 +2255,9 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getWordAccess().getRule();
 	}
 
+	//// (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
 	//WordPart:
-	//	"="? wChar=WordMiddle // (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
-	//;
+	//	wChar=WordMiddle;
 	public WordPartElements getWordPartAccess() {
 		return (pWordPart != null) ? pWordPart : (pWordPart = new WordPartElements());
 	}
@@ -2388,7 +2452,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoLacuna:
-	//	Expanded | Chars | Interfix | DisputableReading | Cartouche | Oval | Serech;
+	//	Expanded | Chars | Interfix | DisputableReading | Cartouche | Oval | Serech | Deletion | Emendation;
 	public NoLacunaElements getNoLacunaAccess() {
 		return (pNoLacuna != null) ? pNoLacuna : (pNoLacuna = new NoLacunaElements());
 	}
@@ -2429,7 +2493,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoExpandedColumn:
-	//	Chars | Expanded | Interfix | DisputableReading;
+	//	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion;
 	public NoExpandedColumnElements getNoExpandedColumnAccess() {
 		return (pNoExpandedColumn != null) ? pNoExpandedColumn : (pNoExpandedColumn = new NoExpandedColumnElements());
 	}
@@ -2449,7 +2513,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoRasur:
-	//	Chars | Expanded | Interfix | DisputableReading;
+	//	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion;
 	public NoRasurElements getNoRasurAccess() {
 		return (pNoRasur != null) ? pNoRasur : (pNoRasur = new NoRasurElements());
 	}
@@ -2469,7 +2533,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoAncientExpanded:
-	//	Chars | Expanded | Interfix | DisputableReading;
+	//	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion;
 	public NoAncientExpandedElements getNoAncientExpandedAccess() {
 		return (pNoAncientExpanded != null) ? pNoAncientExpanded : (pNoAncientExpanded = new NoAncientExpandedElements());
 	}
@@ -2489,7 +2553,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//NoRestorationOverRasur:
-	//	Chars | Expanded | Interfix | DisputableReading | Cartouche;
+	//	Chars | Expanded | Interfix | DisputableReading | Cartouche | Emendation | Lacuna | PartialDestruction | Deletion;
 	public NoRestorationOverRasurElements getNoRestorationOverRasurAccess() {
 		return (pNoRestorationOverRasur != null) ? pNoRestorationOverRasur : (pNoRestorationOverRasur = new NoRestorationOverRasurElements());
 	}

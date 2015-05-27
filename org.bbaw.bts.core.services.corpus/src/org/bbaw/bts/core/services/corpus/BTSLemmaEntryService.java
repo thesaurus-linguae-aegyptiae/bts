@@ -16,5 +16,7 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 	BTSAnnotation createNewAnnotationRelationPartOf(
 			BTSCorpusObject annotatedObject);
 
+	String processWordCharForLemmatizing(BTSWord word);
+
 	
 }

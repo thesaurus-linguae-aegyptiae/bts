@@ -3,6 +3,14 @@ package org.bbaw.bts.ui.commons.corpus.text;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.jface.text.source.ImageUtilities;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Canvas;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.validation.Issue;
 
@@ -60,6 +68,5 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 			setType(cachedType);
 		}
 	}
-	
 	
 }

@@ -3,8 +3,7 @@
 package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import java.util.Collection;
-
-import org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl;
+import org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -28,7 +27,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class BTSLemmaCaseImpl extends BTSReferencableItemImpl implements BTSLemmaCase {
+public class BTSLemmaCaseImpl extends BTSIdentifiableItemImpl implements BTSLemmaCase {
 	/**
 	 * The cached value of the '{@link #getScenario() <em>Scenario</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

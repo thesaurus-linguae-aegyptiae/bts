@@ -2,7 +2,6 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
 import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.eclipse.emf.common.util.EList;
 
@@ -29,7 +28,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSWord extends BTSReferencableItem, BTSAmbivalenceItem, BTSSentenceItem {
+public interface BTSWord extends BTSAmbivalenceItem, BTSSentenceItem {
 	/**
 	 * Returns the value of the '<em><b>Translation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

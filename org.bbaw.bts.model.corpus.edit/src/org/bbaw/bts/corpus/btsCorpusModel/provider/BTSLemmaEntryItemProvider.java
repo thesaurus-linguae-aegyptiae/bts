@@ -145,7 +145,7 @@ Display
 		String bibliography = getBibliographyString(object);
 		if (bibliography != null && !"".equals(bibliography))
 		{
-			label += " bib: " + bibliography;
+			label += " " + bibliography;
 		}
 		return label == null || label.length() == 0 ? getString("_UI_BTSLemmaEntry_type") : label;
 	}

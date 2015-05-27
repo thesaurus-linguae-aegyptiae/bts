@@ -3,10 +3,13 @@ package org.bbaw.bts.ui.egy.parts.lemmatizer;
 import java.text.ParseException;
 import java.text.RuleBasedCollator;
 
+import javax.inject.Inject;
+
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
+import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.jface.viewers.Viewer;
@@ -16,6 +19,10 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 	private RuleBasedCollator egyCollator;
 	private AlphanumComparator alphaNumComp;
 	private BTSWord word;
+	
+	@Inject
+	private LemmatizerPartController lemmaController;
+	private String wChar;
 
 	public BTSLemmatizerEgyObjectByNameViewerSorter(){
 		try {
@@ -71,15 +78,15 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 			if (s2 != null) {
 				if (word != null)
 				{
-					if (s1.startsWith(word.getWChar()) && s2.startsWith(word.getWChar()))
+					if (s1.toLowerCase().startsWith(wChar.toLowerCase()) && s2.toLowerCase().startsWith(wChar.toLowerCase()))
 					{
 						return alphaNumComp.compare(s1, s2);
 					}
-					else if (s1.startsWith(word.getWChar()))
+					else if (s1.toLowerCase().startsWith(wChar.toLowerCase()))
 					{
 						return -1;
 					}
-					else if (s2.startsWith(word.getWChar()))
+					else if (s2.toLowerCase().startsWith(wChar.toLowerCase()))
 					{
 						return 1;
 					}
@@ -94,6 +101,7 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 
 	public void setLemmatizerWord(BTSWord word) {
 		this.word = word;
+		this.wChar = lemmaController.processWordCharForLemmatizing(word);
 		
 	}
 }

@@ -24,14 +24,10 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="revisions" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSObject" abstract="true" eSuperTypes="#//AdministrativDataObject #//BTSDBBaseObject">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSObject" abstract="true" eSuperTypes="#//AdministrativDataObject #//BTSDBBaseObject #//BTSNamedTypedObject">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel" references="#//BTSObject">
       <details key="documentation" value="This is the basic managed object in BTS.&#xD;&#xA;It has basic properties such as name, type etc.&#xD;&#xA;It also has typed relations.&#xD;&#xA;&#xD;&#xA;All primary objects should extend BTSObject."/>
     </eAnnotations>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
         eType="#//BTSRelation" containment="true"/>
@@ -423,5 +419,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSIDReservationObject" eSuperTypes="#//BTSDBBaseObject">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="btsUUID" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BTSNamedTypedObject" abstract="true"
+      eSuperTypes="#//BTSIdentifiableItem">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sortKey" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subtype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
 </ecore:EPackage>

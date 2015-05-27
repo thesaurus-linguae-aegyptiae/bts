@@ -6,7 +6,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 import java.util.Collection;
 import java.util.List;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsmodel.provider.BTSReferencableItemItemProvider;
+import org.bbaw.bts.btsmodel.provider.BTSIdentifiableItemItemProvider;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -27,7 +27,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BTSWordItemProvider
-	extends BTSReferencableItemItemProvider {
+	extends BTSIdentifiableItemItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -252,7 +252,7 @@ public class BTSWordItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSWord)object).getName();
+		String label = ((BTSWord)object).get_id();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSWord_type"), StyledString.Style.QUALIFIER_STYLER); 

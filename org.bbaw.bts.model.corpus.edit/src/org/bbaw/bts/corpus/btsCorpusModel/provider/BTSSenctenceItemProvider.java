@@ -6,7 +6,8 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 import java.util.Collection;
 import java.util.List;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.btsmodel.provider.BTSReferencableItemItemProvider;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
+import org.bbaw.bts.btsmodel.provider.BTSIdentifiableItemItemProvider;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -14,7 +15,9 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
+import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
@@ -25,7 +28,7 @@ import org.eclipse.emf.edit.provider.ViewerNotification;
  * @generated
  */
 public class BTSSenctenceItemProvider
-	extends BTSReferencableItemItemProvider {
+	extends BTSIdentifiableItemItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
@@ -47,8 +50,100 @@ public class BTSSenctenceItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addPropertyChangeSupportPropertyDescriptor(object);
+			addStatePropertyDescriptor(object);
+			addRevisionStatePropertyDescriptor(object);
+			addVisibilityPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Property Change Support feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addPropertyChangeSupportPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSObservableObject_propertyChangeSupport_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObservableObject_propertyChangeSupport_feature", "_UI_BTSObservableObject_type"),
+				 BtsmodelPackage.Literals.BTS_OBSERVABLE_OBJECT__PROPERTY_CHANGE_SUPPORT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the State feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AdministrativDataObject_state_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_state_feature", "_UI_AdministrativDataObject_type"),
+				 BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__STATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Revision State feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addRevisionStatePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AdministrativDataObject_revisionState_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_revisionState_feature", "_UI_AdministrativDataObject_type"),
+				 BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Visibility feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addVisibilityPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_AdministrativDataObject_visibility_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_AdministrativDataObject_visibility_feature", "_UI_AdministrativDataObject_type"),
+				 BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__VISIBILITY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -63,6 +158,7 @@ public class BTSSenctenceItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS);
 			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS);
 			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__TRANSLATION);
 		}
@@ -112,7 +208,7 @@ public class BTSSenctenceItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSSenctence)object).getName();
+		String label = ((BTSSenctence)object).get_id();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSSenctence_type"), StyledString.Style.QUALIFIER_STYLER); 
@@ -134,6 +230,13 @@ public class BTSSenctenceItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSSenctence.class)) {
+			case BtsCorpusModelPackage.BTS_SENCTENCE__PROPERTY_CHANGE_SUPPORT:
+			case BtsCorpusModelPackage.BTS_SENCTENCE__STATE:
+			case BtsCorpusModelPackage.BTS_SENCTENCE__REVISION_STATE:
+			case BtsCorpusModelPackage.BTS_SENCTENCE__VISIBILITY:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
+				return;
+			case BtsCorpusModelPackage.BTS_SENCTENCE__REVISIONS:
 			case BtsCorpusModelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
 			case BtsCorpusModelPackage.BTS_SENCTENCE__TRANSLATION:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -152,6 +255,11 @@ public class BTSSenctenceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(BtsmodelPackage.Literals.ADMINISTRATIV_DATA_OBJECT__REVISIONS,
+				 ""));
 
 		newChildDescriptors.add
 			(createChildParameter

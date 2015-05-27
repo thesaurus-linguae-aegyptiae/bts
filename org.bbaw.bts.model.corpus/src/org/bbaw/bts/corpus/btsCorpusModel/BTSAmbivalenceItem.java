@@ -2,7 +2,7 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.eclipse.emf.ecore.EObject;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,5 +14,5 @@ import org.eclipse.emf.ecore.EObject;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface BTSAmbivalenceItem extends EObject {
+public interface BTSAmbivalenceItem extends BTSIdentifiableItem {
 } // BTSAmbivalenceItem

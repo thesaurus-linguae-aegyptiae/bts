@@ -15,18 +15,25 @@ import org.bbaw.bts.core.dao.corpus.BTSTextDao;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSTextService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText, String> implements BTSTextService, BTSObjectSearchService
 {
@@ -193,6 +200,47 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 		List<BTSText> objects = new Vector<BTSText>();
 		objects.addAll(textDao.listChunks(chunkSize, chunkIds, dbCollectionName, objectState));
 		return filter(objects);
+	}
+
+	@Override
+	public BTSSentenceItem copySentenceItem(BTSSentenceItem copyItem) {
+		BTSSentenceItem newItem = null;
+		if (copyItem instanceof BTSWord)
+		{
+			newItem = EcoreUtil.copy(copyItem);
+			newItem.set_id(idService.createId(null));
+//			((BTSWord)newItem).getGraphics().addAll(EcoreUtil.copyAll(((BTSWord) copyItem).getGraphics()));
+//			((BTSWord)newItem).setTranslation(EcoreUtil.copy(((BTSWord) copyItem).getTranslation()));
+
+		}
+		else if (copyItem instanceof BTSMarker)
+		{
+			newItem = EcoreUtil.copy(copyItem);
+			newItem.set_id(idService.createId(null));
+		}
+		return newItem;
+	}
+
+	@Override
+	public BTSSenctence copySentence(BTSSenctence copyItem) {
+		BTSSenctence newItem = null;
+		newItem = EcoreUtil.copy(copyItem);
+		for (BTSSentenceItem item : newItem.getSentenceItems())
+		{
+			item.set_id(idService.createId(null));
+			if (item instanceof BTSAmbivalence)
+			{
+				 for (BTSLemmaCase lcase : ((BTSAmbivalence)item).getCases())
+				 {
+					 lcase.set_id(idService.createId(null));
+					 for (BTSAmbivalenceItem amItem : lcase.getScenario())
+					 {
+						 amItem.set_id(idService.createId(null));
+					 }
+				 }
+			}
+		}
+		return newItem;
 	}
 
 	

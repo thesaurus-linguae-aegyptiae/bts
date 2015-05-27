@@ -2,8 +2,6 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
-
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -22,7 +20,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSAmbivalence extends BTSReferencableItem, BTSTextSentenceItem, BTSTextItems, BTSSentenceItem {
+public interface BTSAmbivalence extends BTSTextSentenceItem, BTSTextItems, BTSSentenceItem {
 	/**
 	 * Returns the value of the '<em><b>Cases</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase}.

@@ -3,8 +3,6 @@
 package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import java.util.Collection;
-
-import org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -28,7 +26,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class BTSAmbivalenceImpl extends BTSReferencableItemImpl implements BTSAmbivalence {
+public class BTSAmbivalenceImpl extends BTSTextSentenceItemImpl implements BTSAmbivalence {
 	/**
 	 * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
 	 * <!-- begin-user-doc -->

@@ -43,11 +43,15 @@ public class WordFigure extends ElementFigureImpl
 
 	@Override
 	public int getLength() {
-		if (imageWidth > 0) {
+		if (imageFigure != null && imageWidth > 0) {
 			return imageWidth + 6;
 		} else {
 			return super.getLength();
 		}
+	}
+
+	public int getImageWidth() {
+		return imageWidth;
 	}
 
 	public String getMdc() {

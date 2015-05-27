@@ -4,7 +4,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import java.util.Collection;
 import org.bbaw.bts.btsmodel.BTSTranslations;
-import org.bbaw.bts.btsmodel.impl.BTSReferencableItemImpl;
+import org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -37,7 +37,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *
  * @generated
  */
-public class BTSWordImpl extends BTSReferencableItemImpl implements BTSWord {
+public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	/**
 	 * The cached value of the '{@link #getTranslation() <em>Translation</em>}' containment reference.
 	 * <!-- begin-user-doc -->

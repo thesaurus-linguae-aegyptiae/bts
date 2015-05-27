@@ -20,4 +20,9 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 		return lemmaService.findLemmaProposals(word, monitor);
 	}
 
+	@Override
+	public String processWordCharForLemmatizing(BTSWord word) {
+		return lemmaService.processWordCharForLemmatizing(word);
+	}
+
 }

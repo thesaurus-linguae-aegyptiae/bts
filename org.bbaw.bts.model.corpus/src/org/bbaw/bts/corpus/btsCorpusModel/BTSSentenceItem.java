@@ -2,7 +2,7 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSReferencableItem;
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 
 /**
  * <!-- begin-user-doc -->
@@ -14,5 +14,5 @@ import org.bbaw.bts.btsmodel.BTSReferencableItem;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface BTSSentenceItem extends BTSReferencableItem {
+public interface BTSSentenceItem extends BTSIdentifiableItem {
 } // BTSSentenceItem

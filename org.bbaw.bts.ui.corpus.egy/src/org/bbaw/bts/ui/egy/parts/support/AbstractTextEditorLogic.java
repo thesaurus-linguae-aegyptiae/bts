@@ -8,6 +8,7 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSSentenceAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.AnnotationDrawingStrategy;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationPainter;
+import org.eclipse.jface.text.source.AnnotationPainter.SquigglesStrategy;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
@@ -48,8 +50,12 @@ public abstract class AbstractTextEditorLogic {
 				return true;
 			}
 		};
-
 		
+		AnnotationDrawingStrategy sentenceStrategy2 = new AnnotationDrawingStrategy();
+		painter.addDrawingStrategy(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, sentenceStrategy2);
+		painter.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
+				BTSUIConstants.COLOR_SENTENCE);
+		painter.addAnnotationType(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, BTSSentenceAnnotation.TYPE_HIGHLIGHTED);
 
 		// Lemma
 		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();

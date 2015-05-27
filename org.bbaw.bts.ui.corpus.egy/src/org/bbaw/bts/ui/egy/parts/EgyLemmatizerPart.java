@@ -106,6 +106,8 @@ import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -244,6 +246,14 @@ public class EgyLemmatizerPart implements SearchViewer {
 		textSelectedWord = new Text(composite, SWT.BORDER);
 		textSelectedWord.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false, 2, 1));
+		textSelectedWord.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				 clearProposals();
+				 loadingLemmaProposals(currentWord);
+			}
+		});
 
 		Composite composite_1 = new Composite(composite, SWT.NONE);
 		composite_1.setLayout(new GridLayout(1, false));
@@ -446,7 +456,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		
 		lemmaViewer.setContentProvider(contentProvider);
 		lemmaViewer.setLabelProvider(labelProvider);
-		sorter = new BTSLemmatizerEgyObjectByNameViewerSorter();
+		sorter = ContextInjectionFactory.make(BTSLemmatizerEgyObjectByNameViewerSorter.class, context);
 		lemmaViewer.setSorter(sorter);
 		lemmaSelectionListener = new ISelectionChangedListener() {
 
@@ -473,6 +483,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 					if (!tn.isChildrenLoaded() || tn.getChildren().isEmpty()) {
 						tn.setChildrenLoaded(true);
 						loadChildren(tn, false);
+						if (!tn.getChildren().isEmpty())
+						{
+							lemmaViewer.setExpandedState(tn, true);
+						}
 					}
 				}
 			}
@@ -511,7 +525,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.keyCode == SWT.CR) {
-					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNFLEXIONED);
+					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT);
 				}
 
 			}
@@ -633,7 +647,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 							{
 								translation += s + "; ";
 							}
-							translation = translation.substring(0, translation.length() -2);
+							if (translation.length() > 1)
+							{
+								translation = translation.substring(0, translation.length() -2);
+							}
 						}
 						wordTranslate_Editor.setTranslationText(translation
 								.trim());
@@ -693,10 +710,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 					}
 				}
 				node.setChildrenLoaded(true);
+				lemmaViewer.refresh(node);
+				lemmaViewer.setExpandedState(node, true);
 			}
 		});
-		lemmaViewer.refresh(node);
-		lemmaViewer.setExpandedState(node, true);
+		
 		
 	}
 
@@ -964,6 +982,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 	private void loadingLemmaProposals(final BTSWord word) {
+		
+		if (!userMayEdit) return;
 		// empty lemmaViewer
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
@@ -987,9 +1007,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 				}
 				final java.util.List<TreeNodeWrapper> nodes = lemmaNavigatorController
 						.loadNodesWithChildren(
-								entries.subList(0,
-										Math.min(entries.size(), 120)),
+								entries.subList(0,	Math.min(entries.size(), 120)),
 								monitor, false);
+				
 				sync.asyncExec(new Runnable() {
 					@Override
 					public void run() {
@@ -1005,6 +1025,20 @@ public class EgyLemmatizerPart implements SearchViewer {
 					}
 				});
 				int counter = 0;
+				for (final TreeNodeWrapper child : nodes)
+				{
+					child.setChildrenLoaded(true);
+						loadChildren(child, false);
+//						if (!child.getChildren().isEmpty())
+//						{
+//							sync.asyncExec(new Runnable() {
+//								@Override
+//								public void run() {
+//									lemmaViewer.setExpandedState(child, true);
+//								}
+//							});
+//						}
+				}
 				for (BTSLemmaEntry entry : entries) {
 					counter++;
 					try {
@@ -1240,6 +1274,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			lemmaViewer.getTree().setEnabled(mayEdit);
 			flexionViewer.getList().setEnabled(mayEdit);
 			translationViewer.getList().setEnabled(mayEdit);
+			textSelectedWord.setEnabled(mayEdit);
 		}
 		
 	}

@@ -138,9 +138,14 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.DELETION:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getDeletionRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
 				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
 				   context == grammarAccess.getNoPartialDestructionRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Deletion(context, (Deletion) semanticObject); 
 					return; 
@@ -196,8 +201,13 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.EMENDATION:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getEmendationRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
 				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoLacunaRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Emendation(context, (Emendation) semanticObject); 
 					return; 
@@ -393,9 +403,13 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 			case EgyDslPackage.LACUNA:
 				if(context == grammarAccess.getBracketsRule() ||
 				   context == grammarAccess.getLacunaRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
 				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_Lacuna(context, (Lacuna) semanticObject); 
 					return; 
@@ -432,9 +446,13 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 				else break;
 			case EgyDslPackage.PARTIAL_DESTRUCTION:
 				if(context == grammarAccess.getBracketsRule() ||
+				   context == grammarAccess.getNoAncientExpandedRule() ||
 				   context == grammarAccess.getNoCartoucheRule() ||
 				   context == grammarAccess.getNoDeletionRule() ||
 				   context == grammarAccess.getNoDisputableReadingRule() ||
+				   context == grammarAccess.getNoExpandedColumnRule() ||
+				   context == grammarAccess.getNoRasurRule() ||
+				   context == grammarAccess.getNoRestorationOverRasurRule() ||
 				   context == grammarAccess.getPartialDestructionRule() ||
 				   context == grammarAccess.getWordMiddleRule()) {
 					sequence_PartialDestruction(context, (PartialDestruction) semanticObject); 
@@ -907,7 +925,7 @@ public class EgyDslSemanticSequencer extends AbstractDelegatingSemanticSequencer
 		}
 		INodesForEObjectProvider nodes = createNodeProvider(semanticObject);
 		SequenceFeeder feeder = createSequencerFeeder(semanticObject, nodes);
-		feeder.accept(grammarAccess.getWordPartAccess().getWCharWordMiddleParserRuleCall_1_0(), semanticObject.getWChar());
+		feeder.accept(grammarAccess.getWordPartAccess().getWCharWordMiddleParserRuleCall_0(), semanticObject.getWChar());
 		feeder.finish();
 	}
 	

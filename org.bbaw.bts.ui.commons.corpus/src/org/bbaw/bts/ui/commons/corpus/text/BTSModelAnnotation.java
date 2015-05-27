@@ -3,6 +3,10 @@ package org.bbaw.bts.ui.commons.corpus.text;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.tools.services.IResourceProviderService;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
@@ -16,7 +20,8 @@ public class BTSModelAnnotation extends XtextAnnotation
 
 	public static final String TYPE_HIGHLIGHTED = TYPE + HIGHLIGHTED;
 
-	
+	protected IResourceProviderService resourceProvider = StaticAccessController.getResourceProvider();
+
 	
 	private BTSInterTextReference interTextReference;
 	

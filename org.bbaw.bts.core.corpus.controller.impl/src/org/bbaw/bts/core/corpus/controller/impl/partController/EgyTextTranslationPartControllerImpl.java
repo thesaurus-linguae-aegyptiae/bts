@@ -4,6 +4,9 @@ import org.bbaw.bts.core.corpus.controller.partController.EgyTextTranslationPart
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
+import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSSentenceAnnotation;
+import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.IAnnotationModel;
 
 public class EgyTextTranslationPartControllerImpl implements EgyTextTranslationPartController{
@@ -23,6 +26,8 @@ public class EgyTextTranslationPartControllerImpl implements EgyTextTranslationP
 			{
 				BTSSenctence sentence = (BTSSenctence) tItem;
 				String translation = null;
+				BTSModelAnnotation ma = new BTSSentenceAnnotation(BTSSentenceAnnotation.TYPE,sentence);
+				int start = stringBuilder.length();
 				if (sentence.getTranslation() != null)
 				{
 					translation = sentence.getTranslation().getTranslationStrict(language);
@@ -32,6 +37,9 @@ public class EgyTextTranslationPartControllerImpl implements EgyTextTranslationP
 					translation = NO_TRANSLATION_OF_LANG + language + END;
 				}
 				stringBuilder.append(translation + "§\n");
+				int len = stringBuilder.length() - start;
+				Position pos = new Position(start, len); 
+				if (annotationModel != null) annotationModel.addAnnotation(ma, pos);
 			}
 		}
 		return stringBuilder.toString();

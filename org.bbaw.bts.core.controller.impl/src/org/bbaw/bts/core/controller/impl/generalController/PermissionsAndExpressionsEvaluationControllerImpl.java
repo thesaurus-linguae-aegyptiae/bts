@@ -399,7 +399,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		boolean may = false;
 		if (authenticatedUser == null || mainProject == null) {
 			may = false;
-		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
+		} else if(evaluationService.authenticatedUserIsDBAdmin(false)) {
 			may = true;
 		} else {
 			String userAdminDBRole = null;
@@ -424,7 +424,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		boolean may = false;
 		if (authenticatedUser == null || mainProject == null) {
 			may = false;
-		} else if(evaluationService.authenticatedUserIsDBAdmin(true)) {
+		} else if(evaluationService.authenticatedUserIsDBAdmin(false)) { // check if user is local admin, not remote which would require remote access
 			may = true;
 		} else {
 			String userAdminDBRole = null;

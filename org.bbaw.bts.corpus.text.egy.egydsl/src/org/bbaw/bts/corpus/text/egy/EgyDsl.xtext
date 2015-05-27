@@ -131,7 +131,7 @@ Word:
 ;
 
 WordPart:
-	('=')? ( wChar= WordMiddle )// (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
+	( wChar= WordMiddle )// (wChar+=WordMiddle)*(wChar+=WordEnding)? (wChar+=WordEnding)?)	
 ;
 
 
@@ -281,7 +281,7 @@ Lacuna:
 ;
 
 NoLacuna: 
-	Expanded | Chars | Interfix | DisputableReading |Cartouche |Oval |Serech
+	Expanded | Chars | Interfix | DisputableReading |Cartouche |Oval |Serech | Deletion | Emendation
 ;
 
 Deletion:
@@ -299,7 +299,7 @@ ExpandedColumn:
 ;
 
 NoExpandedColumn:
-	Chars | Expanded | Interfix | DisputableReading
+	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion 
 ;
 
 Rasur:
@@ -308,7 +308,7 @@ Rasur:
 ;
 
 NoRasur:
-	Chars | Expanded | Interfix | DisputableReading
+	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion 
 ;
 
 AncientExpanded:
@@ -317,7 +317,7 @@ AncientExpanded:
 ;
 
 NoAncientExpanded:
-	Chars | Expanded | Interfix | DisputableReading
+	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion 
 ;
 
 RestorationOverRasur:
@@ -326,7 +326,7 @@ RestorationOverRasur:
 ;
 
 NoRestorationOverRasur:
-	Chars | Expanded | Interfix | DisputableReading |Cartouche
+	Chars | Expanded | Interfix | DisputableReading | Cartouche | Emendation | Lacuna | PartialDestruction | Deletion 
 ;
 
 PartialDestruction:

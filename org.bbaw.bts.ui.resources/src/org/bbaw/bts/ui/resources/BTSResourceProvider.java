@@ -633,5 +633,8 @@ public interface BTSResourceProvider extends IResourceProviderService {
 
 	public static final String IMG_CORPUS_DISABLED = "IMG_CORPUS_DISABLED";
 	
+	public static final String IMG_ROOT = "IMG_ROOT";
+
+	
 
 }

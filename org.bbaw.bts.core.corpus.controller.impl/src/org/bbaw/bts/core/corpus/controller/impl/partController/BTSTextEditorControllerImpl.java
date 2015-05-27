@@ -60,6 +60,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.corpus.text.egy.EgyDslStandaloneSetup;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
@@ -69,6 +70,7 @@ import org.bbaw.bts.ui.commons.corpus.text.BTSAnnotationAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSCommentAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSLemmaAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSModelAnnotation;
+import org.bbaw.bts.ui.commons.corpus.text.BTSSentenceAnnotation;
 import org.bbaw.bts.ui.commons.corpus.text.BTSSubtextAnnotation;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -140,7 +142,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String MDC_IGNORE = "\\i";
 	private static final String MDC_SELECTION = "\\red";
 	private static final int GAP = 10;
-	private static final int LINE_LENGTH = 70;
+	private static final int DEFAULT_LINE_LENGTH = 70;
 	
 	protected TextModelHelper textModelHelper = new TextModelHelper();
 
@@ -176,12 +178,16 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	@Override
 	public void transformToDocument(BTSTextContent textContent, Document doc, IAnnotationModel model, 
 			List<BTSObject> relatingObjects, Map<String, List<BTSInterTextReference>> relatingObjectsMap, 
-			Map<String, List<Object>> lemmaAnnotationMap, IProgressMonitor monitor)
+			Map<String, List<Object>> lemmaAnnotationMap, IProgressMonitor monitor, int lineLength)
 	{
 //		if (textContent == null)
 //		{
 //			throw new NullPointerException("TextContent may not be null.");
 //		}
+		if (lineLength == 0)
+		{
+			lineLength = DEFAULT_LINE_LENGTH;
+		}
 		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
 		if (relatingObjects != null && ! relatingObjects.isEmpty())// && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
 		{
@@ -208,7 +214,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 //				logger.info("BTSTextEditorController after sentence sign added: " + stringBuilder.toString());
 
-				BTSModelAnnotation ma = new BTSModelAnnotation(BTSModelAnnotation.TYPE,sentence);
+				BTSModelAnnotation ma = new BTSSentenceAnnotation(BTSSentenceAnnotation.TYPE,sentence);
 				int len = stringBuilder.length();
 				int loopLen = stringBuilder.length();
 				int lineLoop = stringBuilder.length();
@@ -224,7 +230,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					}
 					
 					// calcualte 
-					if (loopLen - lineLoop > LINE_LENGTH)
+					if (loopLen - lineLoop > lineLength)
 					{
 						stringBuilder.append("\n");
 						loopLen = stringBuilder.length();
@@ -1412,7 +1418,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	public boolean testTextValidAgainstGrammar(BTSTextContent textContent, BTSObject object) {
 		try {
 			Document doc = new Document();
-			transformToDocument(textContent, doc, null, null, null, null, null);
+			transformToDocument(textContent, doc, null, null, null, null, null, DEFAULT_LINE_LENGTH);
 			Injector injector = findEgyDslInjector();
 			 XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
 			 resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
@@ -1617,5 +1623,19 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			if (i < 100) return false;
 		}
 		return true;
+	}
+
+
+
+	@Override
+	public BTSSentenceItem copySentenceItem(BTSSentenceItem copyItem) {
+		return textService.copySentenceItem(copyItem);
+	}
+
+
+
+	@Override
+	public BTSSenctence copySentence(BTSSenctence copyItem) {
+		return textService.copySentence(copyItem);
 	}
 }
