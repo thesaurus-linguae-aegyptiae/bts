@@ -6,6 +6,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.provider;
 import java.util.Collection;
 import java.util.List;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.provider.BTSIdentifiableItemItemProvider;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
@@ -49,6 +50,10 @@ public class BTSWordItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addNamePropertyDescriptor(object);
+			addTypePropertyDescriptor(object);
+			addSortKeyPropertyDescriptor(object);
+			addSubtypePropertyDescriptor(object);
 			addWTypePropertyDescriptor(object);
 			addLTypePropertyDescriptor(object);
 			addLKeyPropertyDescriptor(object);
@@ -57,6 +62,94 @@ public class BTSWordItemProvider
 			addValuePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
+	}
+
+	/**
+	 * This adds a property descriptor for the Name feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addNamePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSNamedTypedObject_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_name_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Type feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSNamedTypedObject_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_type_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__TYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Sort Key feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSortKeyPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSNamedTypedObject_sortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_sortKey_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__SORT_KEY,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Subtype feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addSubtypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_BTSNamedTypedObject_subtype_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_subtype_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__SUBTYPE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
 	}
 
 	/**
@@ -252,7 +345,7 @@ public class BTSWordItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSWord)object).get_id();
+		String label = ((BTSWord)object).getName();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSWord_type"), StyledString.Style.QUALIFIER_STYLER); 
@@ -274,6 +367,10 @@ public class BTSWordItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(BTSWord.class)) {
+			case BtsCorpusModelPackage.BTS_WORD__NAME:
+			case BtsCorpusModelPackage.BTS_WORD__TYPE:
+			case BtsCorpusModelPackage.BTS_WORD__SORT_KEY:
+			case BtsCorpusModelPackage.BTS_WORD__SUBTYPE:
 			case BtsCorpusModelPackage.BTS_WORD__WTYPE:
 			case BtsCorpusModelPackage.BTS_WORD__LTYPE:
 			case BtsCorpusModelPackage.BTS_WORD__LKEY:

@@ -1,20 +1,17 @@
 /**
  */
-package org.bbaw.bts.corpus.btsCorpusModel.provider;
+package org.bbaw.bts.btsmodel.provider;
 
 
 import java.util.Collection;
 import java.util.List;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
+
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.btsmodel.provider.AdministrativDataObjectItemProvider;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
-import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
-import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
+
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-import org.eclipse.emf.common.util.ResourceLocator;
-import org.eclipse.emf.ecore.EStructuralFeature;
+
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
@@ -22,20 +19,19 @@ import org.eclipse.emf.edit.provider.StyledString;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
- * This is the item provider adapter for a {@link org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence} object.
+ * This is the item provider adapter for a {@link org.bbaw.bts.btsmodel.BTSNamedTypedObject} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class BTSSenctenceItemProvider
-	extends AdministrativDataObjectItemProvider {
+public class BTSNamedTypedObjectItemProvider extends BTSIdentifiableItemItemProvider {
 	/**
 	 * This constructs an instance from a factory and a notifier.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BTSSenctenceItemProvider(AdapterFactory adapterFactory) {
+	public BTSNamedTypedObjectItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -147,48 +143,6 @@ public class BTSSenctenceItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS);
-			childrenFeatures.add(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__TRANSLATION);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns BTSSenctence.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/BTSSenctence"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -198,7 +152,7 @@ public class BTSSenctenceItemProvider
 	public String getText(Object object) {
 		return ((StyledString)getStyledText(object)).getString();
 	}
-
+	
 	/**
 	 * This returns the label styled text for the adapted class.
 	 * <!-- begin-user-doc -->
@@ -207,15 +161,15 @@ public class BTSSenctenceItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSSenctence)object).getName();
+		String label = ((BTSNamedTypedObject)object).getName();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
-			styledLabel.append(getString("_UI_BTSSenctence_type"), StyledString.Style.QUALIFIER_STYLER); 
+			styledLabel.append(getString("_UI_BTSNamedTypedObject_type"), StyledString.Style.QUALIFIER_STYLER); 
 		} else {
-			styledLabel.append(getString("_UI_BTSSenctence_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
+			styledLabel.append(getString("_UI_BTSNamedTypedObject_type"), StyledString.Style.QUALIFIER_STYLER).append(" " + label);
 		}
 		return styledLabel;
-	}
+	}	
 
 	/**
 	 * This handles model notifications by calling {@link #updateChildren} to update any cached
@@ -228,16 +182,12 @@ public class BTSSenctenceItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(BTSSenctence.class)) {
-			case BtsCorpusModelPackage.BTS_SENCTENCE__NAME:
-			case BtsCorpusModelPackage.BTS_SENCTENCE__TYPE:
-			case BtsCorpusModelPackage.BTS_SENCTENCE__SORT_KEY:
-			case BtsCorpusModelPackage.BTS_SENCTENCE__SUBTYPE:
+		switch (notification.getFeatureID(BTSNamedTypedObject.class)) {
+			case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME:
+			case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE:
+			case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY:
+			case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case BtsCorpusModelPackage.BTS_SENCTENCE__SENTENCE_ITEMS:
-			case BtsCorpusModelPackage.BTS_SENCTENCE__TRANSLATION:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -253,37 +203,6 @@ public class BTSSenctenceItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS,
-				 BtsCorpusModelFactory.eINSTANCE.createBTSWord()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS,
-				 BtsCorpusModelFactory.eINSTANCE.createBTSMarker()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__SENTENCE_ITEMS,
-				 BtsCorpusModelFactory.eINSTANCE.createBTSAmbivalence()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(BtsCorpusModelPackage.Literals.BTS_SENCTENCE__TRANSLATION,
-				 BtsmodelFactory.eINSTANCE.createBTSTranslations()));
-	}
-
-	/**
-	 * Return the resource locator for this item provider's resources.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public ResourceLocator getResourceLocator() {
-		return BTSCorpusModelEditPlugin.INSTANCE;
 	}
 
 }

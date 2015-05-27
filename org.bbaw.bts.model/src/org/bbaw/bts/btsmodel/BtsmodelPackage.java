@@ -396,22 +396,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_OBJECT__DB_COLLECTION_KEY = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 7;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_OBJECT__SORT_KEY = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 8;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_OBJECT__NAME = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 9;
+	int BTS_OBJECT__NAME = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -420,7 +411,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_OBJECT__TYPE = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 10;
+	int BTS_OBJECT__TYPE = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 9;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_OBJECT__SORT_KEY = ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -736,15 +736,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER__DB_COLLECTION_KEY = BTS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER__SORT_KEY = BTS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -761,6 +752,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_USER__TYPE = BTS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER__SORT_KEY = BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -1132,15 +1132,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_COMMENT__DB_COLLECTION_KEY = BTS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_COMMENT__SORT_KEY = BTS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1157,6 +1148,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_COMMENT__TYPE = BTS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_COMMENT__SORT_KEY = BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -1778,22 +1778,13 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_CONFIGURATION__DB_COLLECTION_KEY = BTS_CONFIG_FEATURE_COUNT + 13;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CONFIGURATION__SORT_KEY = BTS_CONFIG_FEATURE_COUNT + 14;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__NAME = BTS_CONFIG_FEATURE_COUNT + 15;
+	int BTS_CONFIGURATION__NAME = BTS_CONFIG_FEATURE_COUNT + 14;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1802,7 +1793,16 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CONFIGURATION__TYPE = BTS_CONFIG_FEATURE_COUNT + 16;
+	int BTS_CONFIGURATION__TYPE = BTS_CONFIG_FEATURE_COUNT + 15;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CONFIGURATION__SORT_KEY = BTS_CONFIG_FEATURE_COUNT + 16;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2327,15 +2327,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_REFERENCABLE_ITEM__DB_COLLECTION_KEY = BTS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_REFERENCABLE_ITEM__SORT_KEY = BTS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2352,6 +2343,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_REFERENCABLE_ITEM__TYPE = BTS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_REFERENCABLE_ITEM__SORT_KEY = BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2996,15 +2996,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_USER_GROUP__DB_COLLECTION_KEY = BTS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_USER_GROUP__SORT_KEY = BTS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3021,6 +3012,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_USER_GROUP__TYPE = BTS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_USER_GROUP__SORT_KEY = BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -3294,15 +3294,6 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_PROJECT__DB_COLLECTION_KEY = BTS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_PROJECT__SORT_KEY = BTS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3319,6 +3310,15 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_PROJECT__TYPE = BTS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_PROJECT__SORT_KEY = BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -4502,6 +4502,79 @@ public interface BtsmodelPackage extends EPackage {
 	int BTSID_RESERVATION_OBJECT_OPERATION_COUNT = BTSDB_BASE_OBJECT_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSNamedTypedObjectImpl <em>BTS Named Typed Object</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.bbaw.bts.btsmodel.impl.BTSNamedTypedObjectImpl
+	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSNamedTypedObject()
+	 * @generated
+	 */
+	int BTS_NAMED_TYPED_OBJECT = 33;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT__NAME = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT__TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT__SORT_KEY = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT__SUBTYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of structural features of the '<em>BTS Named Typed Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
+
+	/**
+	 * The number of operations of the '<em>BTS Named Typed Object</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_NAMED_TYPED_OBJECT_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '<em>Property Change Support</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4509,7 +4582,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeSupport()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_SUPPORT = 33;
+	int PROPERTY_CHANGE_SUPPORT = 34;
 
 	/**
 	 * The meta object id for the '<em>Property Change Listener</em>' data type.
@@ -4519,7 +4592,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeListener()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_LISTENER = 34;
+	int PROPERTY_CHANGE_LISTENER = 35;
 
 	/**
 	 * The meta object id for the '<em>Property Change Event</em>' data type.
@@ -4529,7 +4602,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getPropertyChangeEvent()
 	 * @generated
 	 */
-	int PROPERTY_CHANGE_EVENT = 35;
+	int PROPERTY_CHANGE_EVENT = 36;
 
 
 	/**
@@ -4635,50 +4708,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getBTSObject();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSObject#getSortKey <em>Sort Key</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Sort Key</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObject#getSortKey()
-	 * @see #getBTSObject()
-	 * @generated
-	 */
-	EAttribute getBTSObject_SortKey();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSObject#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObject#getName()
-	 * @see #getBTSObject()
-	 * @generated
-	 */
-	EAttribute getBTSObject_Name();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSObject#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Type</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObject#getType()
-	 * @see #getBTSObject()
-	 * @generated
-	 */
-	EAttribute getBTSObject_Type();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSObject#getSubtype <em>Subtype</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Subtype</em>'.
-	 * @see org.bbaw.bts.btsmodel.BTSObject#getSubtype()
-	 * @see #getBTSObject()
-	 * @generated
-	 */
-	EAttribute getBTSObject_Subtype();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSObject#getCode <em>Code</em>}'.
@@ -6467,6 +6496,60 @@ public interface BtsmodelPackage extends EPackage {
 	EAttribute getBTSIDReservationObject_BtsUUID();
 
 	/**
+	 * Returns the meta object for class '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject <em>BTS Named Typed Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>BTS Named Typed Object</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject
+	 * @generated
+	 */
+	EClass getBTSNamedTypedObject();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject#getName()
+	 * @see #getBTSNamedTypedObject()
+	 * @generated
+	 */
+	EAttribute getBTSNamedTypedObject_Name();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Type</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject#getType()
+	 * @see #getBTSNamedTypedObject()
+	 * @generated
+	 */
+	EAttribute getBTSNamedTypedObject_Type();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject#getSortKey <em>Sort Key</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Sort Key</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject#getSortKey()
+	 * @see #getBTSNamedTypedObject()
+	 * @generated
+	 */
+	EAttribute getBTSNamedTypedObject_SortKey();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject#getSubtype <em>Subtype</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Subtype</em>'.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject#getSubtype()
+	 * @see #getBTSNamedTypedObject()
+	 * @generated
+	 */
+	EAttribute getBTSNamedTypedObject_Subtype();
+
+	/**
 	 * Returns the meta object for data type '{@link java.beans.PropertyChangeSupport <em>Property Change Support</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -6605,38 +6688,6 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EClass BTS_OBJECT = eINSTANCE.getBTSObject();
-
-		/**
-		 * The meta object literal for the '<em><b>Sort Key</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_OBJECT__SORT_KEY = eINSTANCE.getBTSObject_SortKey();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_OBJECT__NAME = eINSTANCE.getBTSObject_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_OBJECT__TYPE = eINSTANCE.getBTSObject_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Subtype</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute BTS_OBJECT__SUBTYPE = eINSTANCE.getBTSObject_Subtype();
 
 		/**
 		 * The meta object literal for the '<em><b>Code</b></em>' attribute feature.
@@ -8027,6 +8078,48 @@ public interface BtsmodelPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute BTSID_RESERVATION_OBJECT__BTS_UUID = eINSTANCE.getBTSIDReservationObject_BtsUUID();
+
+		/**
+		 * The meta object literal for the '{@link org.bbaw.bts.btsmodel.impl.BTSNamedTypedObjectImpl <em>BTS Named Typed Object</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.bbaw.bts.btsmodel.impl.BTSNamedTypedObjectImpl
+		 * @see org.bbaw.bts.btsmodel.impl.BtsmodelPackageImpl#getBTSNamedTypedObject()
+		 * @generated
+		 */
+		EClass BTS_NAMED_TYPED_OBJECT = eINSTANCE.getBTSNamedTypedObject();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_NAMED_TYPED_OBJECT__NAME = eINSTANCE.getBTSNamedTypedObject_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_NAMED_TYPED_OBJECT__TYPE = eINSTANCE.getBTSNamedTypedObject_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Sort Key</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_NAMED_TYPED_OBJECT__SORT_KEY = eINSTANCE.getBTSNamedTypedObject_SortKey();
+
+		/**
+		 * The meta object literal for the '<em><b>Subtype</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute BTS_NAMED_TYPED_OBJECT__SUBTYPE = eINSTANCE.getBTSNamedTypedObject_Subtype();
 
 		/**
 		 * The meta object literal for the '<em>Property Change Support</em>' data type.

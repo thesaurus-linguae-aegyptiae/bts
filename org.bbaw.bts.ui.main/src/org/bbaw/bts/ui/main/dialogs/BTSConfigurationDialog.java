@@ -2476,7 +2476,7 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 		EMFUpdateValueStrategy us = new EMFUpdateValueStrategy();
 		us.setBeforeSetValidator(new StringNotEmptyValidator());
 		IObservableValue model = EMFEditProperties.value(editingDomain,
-				BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(
+				BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME).observe(
 				configuration);
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(

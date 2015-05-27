@@ -799,7 +799,7 @@ public class UserManagementPart
 							}
 						});
 					}};
-		       new ProgressMonitorDialog(shell).run(true, true, op);
+		       new ProgressMonitorDialog(new Shell()).run(true, true, op);
 		    } catch (InvocationTargetException e) {
 		       // handle exception
 		    } catch (InterruptedException e) {
@@ -1930,7 +1930,7 @@ public class UserManagementPart
 		EMFUpdateValueStrategy us_n = new EMFUpdateValueStrategy();
 		us_n.setBeforeSetValidator(new StringNotEmptyValidator("Project name is required."));
 
-		IObservableValue model_n = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_OBJECT__NAME)
+		IObservableValue model_n = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME)
 				.observe(project);
 		Binding binding_n = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
@@ -2532,7 +2532,7 @@ public class UserManagementPart
 		bindingContext.addValidationStatusProvider(binding_id);
 
 		// name
-		IObservableValue model = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_OBJECT__NAME)
+		IObservableValue model = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME)
 				.observe(group);
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(
@@ -2541,7 +2541,7 @@ public class UserManagementPart
 		bindingContext.addValidationStatusProvider(binding);
 
 		//type
-		IObservableValue model2 = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_OBJECT__TYPE)
+		IObservableValue model2 = EMFEditProperties.value(editingDomain, BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__TYPE)
 				.observe(group);
 		Binding binding2 = bindingContext.bindValue(
 						WidgetProperties.text(SWT.Modify).observeDelayed(
@@ -2638,7 +2638,9 @@ public class UserManagementPart
 						loadAllUserGroups();
 					}
 					observableLisAllUserGroups.add(object);
+					dirtyUserGroups.add((BTSUserGroup) object);
 				}
+				user_treeViewer.setSelection(new StructuredSelection(tn), true);
 			}
 		});
 

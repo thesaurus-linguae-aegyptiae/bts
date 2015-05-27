@@ -118,7 +118,7 @@ public class ProjectNamePage extends WizardPage
 
 		final DataBindingContext bindingContext = new DataBindingContext();
 
-		IObservableValue model = EMFProperties.value(BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(project);
+		IObservableValue model = EMFProperties.value(BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME).observe(project);
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(400, txtProjectnametext), model, us, null);
 //		bindingContext.addValidationStatusProvider(binding);

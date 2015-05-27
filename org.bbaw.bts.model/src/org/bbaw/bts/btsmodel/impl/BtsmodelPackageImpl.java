@@ -19,6 +19,7 @@ import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSIDReservationObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSOperator;
@@ -291,6 +292,13 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	private EClass btsNamedTypedObjectEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	private EDataType propertyChangeSupportEDataType = null;
 
 	/**
@@ -463,7 +471,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSObject_SortKey() {
+	public EAttribute getBTSObject_Code() {
 		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -472,44 +480,8 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getBTSObject_Name() {
-		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSObject_Type() {
-		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSObject_Subtype() {
-		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(3);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EAttribute getBTSObject_Code() {
-		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getBTSObject_Relations() {
-		return (EReference)btsObjectEClass.getEStructuralFeatures().get(5);
+		return (EReference)btsObjectEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -518,7 +490,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EAttribute getBTSObject_TempSortKey() {
-		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(6);
+		return (EAttribute)btsObjectEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -527,7 +499,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * @generated
 	 */
 	public EReference getBTSObject_ExternalReferences() {
-		return (EReference)btsObjectEClass.getEStructuralFeatures().get(7);
+		return (EReference)btsObjectEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -2051,6 +2023,51 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getBTSNamedTypedObject() {
+		return btsNamedTypedObjectEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSNamedTypedObject_Name() {
+		return (EAttribute)btsNamedTypedObjectEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSNamedTypedObject_Type() {
+		return (EAttribute)btsNamedTypedObjectEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSNamedTypedObject_SortKey() {
+		return (EAttribute)btsNamedTypedObjectEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getBTSNamedTypedObject_Subtype() {
+		return (EAttribute)btsNamedTypedObjectEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getPropertyChangeSupport() {
 		return propertyChangeSupportEDataType;
 	}
@@ -2112,10 +2129,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		createEOperation(administrativDataObjectEClass, ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION);
 
 		btsObjectEClass = createEClass(BTS_OBJECT);
-		createEAttribute(btsObjectEClass, BTS_OBJECT__SORT_KEY);
-		createEAttribute(btsObjectEClass, BTS_OBJECT__NAME);
-		createEAttribute(btsObjectEClass, BTS_OBJECT__TYPE);
-		createEAttribute(btsObjectEClass, BTS_OBJECT__SUBTYPE);
 		createEAttribute(btsObjectEClass, BTS_OBJECT__CODE);
 		createEReference(btsObjectEClass, BTS_OBJECT__RELATIONS);
 		createEAttribute(btsObjectEClass, BTS_OBJECT__TEMP_SORT_KEY);
@@ -2314,6 +2327,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsidReservationObjectEClass = createEClass(BTSID_RESERVATION_OBJECT);
 		createEAttribute(btsidReservationObjectEClass, BTSID_RESERVATION_OBJECT__BTS_UUID);
 
+		btsNamedTypedObjectEClass = createEClass(BTS_NAMED_TYPED_OBJECT);
+		createEAttribute(btsNamedTypedObjectEClass, BTS_NAMED_TYPED_OBJECT__NAME);
+		createEAttribute(btsNamedTypedObjectEClass, BTS_NAMED_TYPED_OBJECT__TYPE);
+		createEAttribute(btsNamedTypedObjectEClass, BTS_NAMED_TYPED_OBJECT__SORT_KEY);
+		createEAttribute(btsNamedTypedObjectEClass, BTS_NAMED_TYPED_OBJECT__SUBTYPE);
+
 		// Create data types
 		propertyChangeSupportEDataType = createEDataType(PROPERTY_CHANGE_SUPPORT);
 		propertyChangeListenerEDataType = createEDataType(PROPERTY_CHANGE_LISTENER);
@@ -2352,6 +2371,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		administrativDataObjectEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsObjectEClass.getESuperTypes().add(this.getAdministrativDataObject());
 		btsObjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsObjectEClass.getESuperTypes().add(this.getBTSNamedTypedObject());
 		btsUserEClass.getESuperTypes().add(this.getBTSObject());
 		btsCommentEClass.getESuperTypes().add(this.getBTSObject());
 		btsRelationEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
@@ -2378,6 +2398,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsdbCollectionRoleDescEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		userActionCounterEClass.getESuperTypes().add(this.getBTSDBBaseObject());
 		btsidReservationObjectEClass.getESuperTypes().add(this.getBTSDBBaseObject());
+		btsNamedTypedObjectEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(administrativDataObjectEClass, AdministrativDataObject.class, "AdministrativDataObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -2400,10 +2421,6 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		initEOperation(getAdministrativDataObject__GetLastRevision(), this.getBTSRevision(), "getLastRevision", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(btsObjectEClass, BTSObject.class, "BTSObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getBTSObject_SortKey(), ecorePackage.getEInt(), "sortKey", null, 0, 1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSObject_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBTSObject_Subtype(), ecorePackage.getEString(), "subtype", null, 0, 1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSObject_Code(), ecorePackage.getEString(), "code", null, 0, 1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getBTSObject_Relations(), this.getBTSRelation(), null, "relations", null, 0, -1, BTSObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getBTSObject_TempSortKey(), ecorePackage.getEInt(), "tempSortKey", null, 0, 1, BTSObject.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2635,6 +2652,12 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 
 		initEClass(btsidReservationObjectEClass, BTSIDReservationObject.class, "BTSIDReservationObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getBTSIDReservationObject_BtsUUID(), ecorePackage.getEString(), "btsUUID", null, 0, 1, BTSIDReservationObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(btsNamedTypedObjectEClass, BTSNamedTypedObject.class, "BTSNamedTypedObject", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getBTSNamedTypedObject_Name(), ecorePackage.getEString(), "name", null, 0, 1, BTSNamedTypedObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSNamedTypedObject_Type(), ecorePackage.getEString(), "type", null, 0, 1, BTSNamedTypedObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSNamedTypedObject_SortKey(), ecorePackage.getEInt(), "sortKey", null, 0, 1, BTSNamedTypedObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBTSNamedTypedObject_Subtype(), ecorePackage.getEString(), "subtype", null, 0, 1, BTSNamedTypedObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(propertyChangeSupportEDataType, PropertyChangeSupport.class, "PropertyChangeSupport", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

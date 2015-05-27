@@ -111,7 +111,7 @@ public class BTSAmbivalenceItemProvider
 	 */
 	@Override
 	public Object getStyledText(Object object) {
-		String label = ((BTSAmbivalence)object).get_id();
+		String label = ((BTSAmbivalence)object).getName();
     	StyledString styledLabel = new StyledString();
 		if (label == null || label.length() == 0) {
 			styledLabel.append(getString("_UI_BTSAmbivalence_type"), StyledString.Style.QUALIFIER_STYLER); 

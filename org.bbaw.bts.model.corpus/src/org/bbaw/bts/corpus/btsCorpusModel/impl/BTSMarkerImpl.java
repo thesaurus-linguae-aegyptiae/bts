@@ -8,6 +8,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 import java.util.Date;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -30,6 +31,10 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getSortKey <em>Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getPropertyChangeSupport <em>Property Change Support</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getState <em>State</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSMarkerImpl#getRevisionState <em>Revision State</em>}</li>
@@ -42,6 +47,86 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  * @generated
  */
 public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int sortKey = SORT_KEY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubtype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUBTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubtype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String subtype = SUBTYPE_EDEFAULT;
+
 	/**
 	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -169,6 +254,90 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	@Override
 	protected EClass eStaticClass() {
 		return BtsCorpusModelPackage.Literals.BTS_MARKER;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_MARKER__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_MARKER__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getSortKey() {
+		return sortKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSortKey(int newSortKey) {
+		int oldSortKey = sortKey;
+		sortKey = newSortKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_MARKER__SORT_KEY, oldSortKey, sortKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSubtype() {
+		return subtype;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSubtype(String newSubtype) {
+		String oldSubtype = subtype;
+		subtype = newSubtype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_MARKER__SUBTYPE, oldSubtype, subtype));
 	}
 
 	/**
@@ -362,6 +531,14 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_MARKER__NAME:
+				return getName();
+			case BtsCorpusModelPackage.BTS_MARKER__TYPE:
+				return getType();
+			case BtsCorpusModelPackage.BTS_MARKER__SORT_KEY:
+				return getSortKey();
+			case BtsCorpusModelPackage.BTS_MARKER__SUBTYPE:
+				return getSubtype();
 			case BtsCorpusModelPackage.BTS_MARKER__PROPERTY_CHANGE_SUPPORT:
 				return getPropertyChangeSupport();
 			case BtsCorpusModelPackage.BTS_MARKER__STATE:
@@ -387,6 +564,18 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_MARKER__NAME:
+				setName((String)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_MARKER__TYPE:
+				setType((String)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_MARKER__SORT_KEY:
+				setSortKey((Integer)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_MARKER__SUBTYPE:
+				setSubtype((String)newValue);
+				return;
 			case BtsCorpusModelPackage.BTS_MARKER__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport((PropertyChangeSupport)newValue);
 				return;
@@ -418,6 +607,18 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_MARKER__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case BtsCorpusModelPackage.BTS_MARKER__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+			case BtsCorpusModelPackage.BTS_MARKER__SORT_KEY:
+				setSortKey(SORT_KEY_EDEFAULT);
+				return;
+			case BtsCorpusModelPackage.BTS_MARKER__SUBTYPE:
+				setSubtype(SUBTYPE_EDEFAULT);
+				return;
 			case BtsCorpusModelPackage.BTS_MARKER__PROPERTY_CHANGE_SUPPORT:
 				setPropertyChangeSupport(PROPERTY_CHANGE_SUPPORT_EDEFAULT);
 				return;
@@ -448,6 +649,14 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_MARKER__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BtsCorpusModelPackage.BTS_MARKER__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case BtsCorpusModelPackage.BTS_MARKER__SORT_KEY:
+				return sortKey != SORT_KEY_EDEFAULT;
+			case BtsCorpusModelPackage.BTS_MARKER__SUBTYPE:
+				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsCorpusModelPackage.BTS_MARKER__PROPERTY_CHANGE_SUPPORT:
 				return PROPERTY_CHANGE_SUPPORT_EDEFAULT == null ? propertyChangeSupport != null : !PROPERTY_CHANGE_SUPPORT_EDEFAULT.equals(propertyChangeSupport);
 			case BtsCorpusModelPackage.BTS_MARKER__STATE:
@@ -471,6 +680,15 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (derivedFeatureID) {
+				case BtsCorpusModelPackage.BTS_MARKER__NAME: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
+				case BtsCorpusModelPackage.BTS_MARKER__TYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+				case BtsCorpusModelPackage.BTS_MARKER__SORT_KEY: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY;
+				case BtsCorpusModelPackage.BTS_MARKER__SUBTYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE;
+				default: return -1;
+			}
+		}
 		if (baseClass == BTSSentenceItem.class) {
 			switch (derivedFeatureID) {
 				default: return -1;
@@ -511,6 +729,15 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME: return BtsCorpusModelPackage.BTS_MARKER__NAME;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE: return BtsCorpusModelPackage.BTS_MARKER__TYPE;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY: return BtsCorpusModelPackage.BTS_MARKER__SORT_KEY;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE: return BtsCorpusModelPackage.BTS_MARKER__SUBTYPE;
+				default: return -1;
+			}
+		}
 		if (baseClass == BTSSentenceItem.class) {
 			switch (baseFeatureID) {
 				default: return -1;
@@ -551,6 +778,11 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 	 */
 	@Override
 	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
 		if (baseClass == BTSSentenceItem.class) {
 			switch (baseOperationID) {
 				default: return -1;
@@ -623,7 +855,15 @@ public class BTSMarkerImpl extends BTSIdentifiableItemImpl implements BTSMarker 
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (propertyChangeSupport: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", type: ");
+		result.append(type);
+		result.append(", sortKey: ");
+		result.append(sortKey);
+		result.append(", subtype: ");
+		result.append(subtype);
+		result.append(", propertyChangeSupport: ");
 		result.append(propertyChangeSupport);
 		result.append(", state: ");
 		result.append(state);

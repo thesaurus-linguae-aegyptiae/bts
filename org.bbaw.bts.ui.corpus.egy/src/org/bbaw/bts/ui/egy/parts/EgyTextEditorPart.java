@@ -1678,7 +1678,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		BTSSentenceItem startItem = null;
 		BTSSentenceItem endItem = null;
 		int endItemOffeset = 0;
-		List<BTSSentenceItem> textItems = new Vector<BTSSentenceItem>();
+		List<BTSIdentifiableItem> textItems = new Vector<BTSIdentifiableItem>();
 		while (it.hasNext()) {
 			Annotation a = (Annotation) it.next();
 			if (a instanceof BTSModelAnnotation) {
@@ -1696,12 +1696,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						annotationOffsetMap.put(pos.getOffset(), list);
 					}
 					list.add((BTSModelAnnotation) a);
-					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
-						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-								.getModel();
-						textItems.add(item);
-						
-					}
+					
+					textItems.add(((BTSModelAnnotation) a)
+							.getModel());
+					// nur sentenceitems oder alles?
+//					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
+//						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
+//								.getModel();
+//						textItems.add(item);
+//						
+//					}
 
 				}
 				// else if (pos.getOffset() >= start && pos.getOffset() <= end)

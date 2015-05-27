@@ -85,7 +85,7 @@
         eType="#//BTSGraphic" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSTextItems" abstract="true" interface="true"
-      eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSIdentifiableItem ../../org.bbaw.bts.model/model/BTSModel.ecore#//AdministrativDataObject"/>
+      eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//AdministrativDataObject ../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSNamedTypedObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSGraphic" eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSIdentifiableItem">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="innerSentenceOrder" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="code" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -102,12 +102,12 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BTSSentenceItem" abstract="true" interface="true"
-      eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSIdentifiableItem"/>
+      eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSNamedTypedObject"/>
   <eClassifiers xsi:type="ecore:EClass" name="BTSAmbivalence" eSuperTypes="#//BTSTextSentenceItem #//BTSTextItems #//BTSSentenceItem">
     <eStructuralFeatures xsi:type="ecore:EReference" name="cases" upperBound="-1"
         eType="#//BTSLemmaCase" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSLemmaCase" eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSIdentifiableItem">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSLemmaCase" eSuperTypes="../../org.bbaw.bts.model/model/BTSModel.ecore#//BTSNamedTypedObject">
     <eStructuralFeatures xsi:type="ecore:EReference" name="scenario" upperBound="-1"
         eType="#//BTSAmbivalenceItem" containment="true"/>
   </eClassifiers>

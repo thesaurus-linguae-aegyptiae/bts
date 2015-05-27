@@ -318,7 +318,7 @@ public class DBManagerPart {
 								reindexInternal(info, monitor);
 						}
 						};
-					       new ProgressMonitorDialog(parentShell).run(true, true, op);
+					       new ProgressMonitorDialog(new Shell()).run(true, true, op);
 					    } catch (InvocationTargetException e) {
 					       // handle exception
 					    } catch (InterruptedException e) {

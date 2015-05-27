@@ -62,9 +62,9 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 			add_deletedPropertyDescriptor(object);
 			addConflictingRevsPropertyDescriptor(object);
 			addDBCollectionKeyPropertyDescriptor(object);
-			addSortKeyPropertyDescriptor(object);
 			addNamePropertyDescriptor(object);
 			addTypePropertyDescriptor(object);
+			addSortKeyPropertyDescriptor(object);
 			addSubtypePropertyDescriptor(object);
 			addCodePropertyDescriptor(object);
 			addTempSortKeyPropertyDescriptor(object);
@@ -374,9 +374,9 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BTSObject_sortKey_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_sortKey_feature", "_UI_BTSObject_type"),
-				 BtsmodelPackage.Literals.BTS_OBJECT__SORT_KEY,
+				 getString("_UI_BTSNamedTypedObject_sortKey_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_sortKey_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__SORT_KEY,
 				 true,
 				 false,
 				 false,
@@ -397,9 +397,9 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BTSObject_name_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_name_feature", "_UI_BTSObject_type"),
-				 BtsmodelPackage.Literals.BTS_OBJECT__NAME,
+				 getString("_UI_BTSNamedTypedObject_name_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_name_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME,
 				 true,
 				 false,
 				 false,
@@ -420,9 +420,9 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BTSObject_type_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_type_feature", "_UI_BTSObject_type"),
-				 BtsmodelPackage.Literals.BTS_OBJECT__TYPE,
+				 getString("_UI_BTSNamedTypedObject_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_type_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__TYPE,
 				 true,
 				 false,
 				 false,
@@ -443,9 +443,9 @@ public class BTSConfigurationItemProvider extends BTSConfigItemProvider
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_BTSObject_subtype_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_BTSObject_subtype_feature", "_UI_BTSObject_type"),
-				 BtsmodelPackage.Literals.BTS_OBJECT__SUBTYPE,
+				 getString("_UI_BTSNamedTypedObject_subtype_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_BTSNamedTypedObject_subtype_feature", "_UI_BTSNamedTypedObject_type"),
+				 BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__SUBTYPE,
 				 true,
 				 false,
 				 false,

@@ -983,7 +983,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	private void loadingLemmaProposals(final BTSWord word) {
 		
-		if (!userMayEdit) return;
+		if (!userMayEdit || word == null) return;
 		// empty lemmaViewer
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();

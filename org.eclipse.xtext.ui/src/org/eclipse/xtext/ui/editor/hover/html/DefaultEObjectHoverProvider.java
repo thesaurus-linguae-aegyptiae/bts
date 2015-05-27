@@ -274,7 +274,9 @@ public class DefaultEObjectHoverProvider implements IEObjectHoverProvider {
 				fInfoControl.notifyDelayedInputChange(null);
 				fInfoControl.dispose();
 				if (uriEditorOpener != null)
-					uriEditorOpener.open(createURI(infoInput.getElement()), true);
+					{
+//						FIXME disabled cplutte: uriEditorOpener.open(createURI(infoInput.getElement()), true);
+					}
 			}
 		}
 	}

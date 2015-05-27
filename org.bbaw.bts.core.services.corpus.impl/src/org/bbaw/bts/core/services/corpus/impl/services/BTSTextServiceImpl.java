@@ -225,6 +225,7 @@ public class BTSTextServiceImpl extends AbstractCorpusObjectServiceImpl<BTSText,
 	public BTSSenctence copySentence(BTSSenctence copyItem) {
 		BTSSenctence newItem = null;
 		newItem = EcoreUtil.copy(copyItem);
+		newItem.set_id(idService.createId(null));
 		for (BTSSentenceItem item : newItem.getSentenceItems())
 		{
 			item.set_id(idService.createId(null));

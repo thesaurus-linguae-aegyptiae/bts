@@ -2,7 +2,7 @@
  */
 package org.bbaw.bts.corpus.btsCorpusModel;
 
-import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.eclipse.emf.common.util.EList;
 
 /**
@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface BTSLemmaCase extends BTSIdentifiableItem {
+public interface BTSLemmaCase extends BTSNamedTypedObject {
 	/**
 	 * Returns the value of the '<em><b>Scenario</b></em>' containment reference list.
 	 * The list contents are of type {@link org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem}.

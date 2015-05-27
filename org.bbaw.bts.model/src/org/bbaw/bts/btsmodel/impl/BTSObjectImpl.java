@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
@@ -33,9 +34,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getDBCollectionKey <em>DB Collection Key</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSObjectImpl#getRelations <em>Relations</em>}</li>
@@ -179,24 +180,6 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	protected String dBCollectionKey = DB_COLLECTION_KEY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getSortKey()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int SORT_KEY_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
-	 * <!-- begin-user-doc --> <!-- end-user-doc -->
-	 * @see #getSortKey()
-	 * @generated
-	 * @ordered
-	 */
-	protected int sortKey = SORT_KEY_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc --> <!-- end-user-doc -->
 	 * @see #getName()
@@ -231,6 +214,24 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc --> <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int sortKey = SORT_KEY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
@@ -663,12 +664,12 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return getConflictingRevs();
 			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
 				return getDBCollectionKey();
-			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
-				return getSortKey();
 			case BtsmodelPackage.BTS_OBJECT__NAME:
 				return getName();
 			case BtsmodelPackage.BTS_OBJECT__TYPE:
 				return getType();
+			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
+				return getSortKey();
 			case BtsmodelPackage.BTS_OBJECT__SUBTYPE:
 				return getSubtype();
 			case BtsmodelPackage.BTS_OBJECT__CODE:
@@ -719,14 +720,14 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
 				setDBCollectionKey((String)newValue);
 				return;
-			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
-				setSortKey((Integer)newValue);
-				return;
 			case BtsmodelPackage.BTS_OBJECT__NAME:
 				setName((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_OBJECT__TYPE:
 				setType((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
+				setSortKey((Integer)newValue);
 				return;
 			case BtsmodelPackage.BTS_OBJECT__SUBTYPE:
 				setSubtype((String)newValue);
@@ -781,14 +782,14 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
 				setDBCollectionKey(DB_COLLECTION_KEY_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
-				setSortKey(SORT_KEY_EDEFAULT);
-				return;
 			case BtsmodelPackage.BTS_OBJECT__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_OBJECT__TYPE:
 				setType(TYPE_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
+				setSortKey(SORT_KEY_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_OBJECT__SUBTYPE:
 				setSubtype(SUBTYPE_EDEFAULT);
@@ -833,12 +834,12 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				return conflictingRevs != null && !conflictingRevs.isEmpty();
 			case BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY:
 				return DB_COLLECTION_KEY_EDEFAULT == null ? dBCollectionKey != null : !DB_COLLECTION_KEY_EDEFAULT.equals(dBCollectionKey);
-			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
-				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_OBJECT__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case BtsmodelPackage.BTS_OBJECT__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case BtsmodelPackage.BTS_OBJECT__SORT_KEY:
+				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_OBJECT__SUBTYPE:
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_OBJECT__CODE:
@@ -873,6 +874,15 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				default: return -1;
 			}
 		}
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (derivedFeatureID) {
+				case BtsmodelPackage.BTS_OBJECT__NAME: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
+				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+				case BtsmodelPackage.BTS_OBJECT__SORT_KEY: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY;
+				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE;
+				default: return -1;
+			}
+		}
 		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
 	}
 
@@ -893,6 +903,15 @@ public abstract class BTSObjectImpl extends AdministrativDataObjectImpl implemen
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__DELETED: return BtsmodelPackage.BTS_OBJECT__DELETED;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__CONFLICTING_REVS: return BtsmodelPackage.BTS_OBJECT__CONFLICTING_REVS;
 				case BtsmodelPackage.BTSDB_BASE_OBJECT__DB_COLLECTION_KEY: return BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME: return BtsmodelPackage.BTS_OBJECT__NAME;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY: return BtsmodelPackage.BTS_OBJECT__SORT_KEY;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				default: return -1;
 			}
 		}

@@ -13,6 +13,7 @@ import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSExternalReference;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -50,9 +51,9 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#is_deleted <em>deleted</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getConflictingRevs <em>Conflicting Revs</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getDBCollectionKey <em>DB Collection Key</em>}</li>
- *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSortKey <em>Sort Key</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getCode <em>Code</em>}</li>
  *   <li>{@link org.bbaw.bts.btsmodel.impl.BTSConfigurationImpl#getRelations <em>Relations</em>}</li>
@@ -306,26 +307,6 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	protected String dBCollectionKey = DB_COLLECTION_KEY_EDEFAULT;
 
 	/**
-	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSortKey()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final int SORT_KEY_EDEFAULT = 0;
-
-	/**
-	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSortKey()
-	 * @generated
-	 * @ordered
-	 */
-	protected int sortKey = SORT_KEY_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -364,6 +345,26 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 	 * @ordered
 	 */
 	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int sortKey = SORT_KEY_EDEFAULT;
 
 	/**
 	 * The default value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
@@ -1024,12 +1025,12 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return getConflictingRevs();
 			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
 				return getDBCollectionKey();
-			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
-				return getSortKey();
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
 				return getName();
 			case BtsmodelPackage.BTS_CONFIGURATION__TYPE:
 				return getType();
+			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
+				return getSortKey();
 			case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE:
 				return getSubtype();
 			case BtsmodelPackage.BTS_CONFIGURATION__CODE:
@@ -1101,14 +1102,14 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
 				setDBCollectionKey((String)newValue);
 				return;
-			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
-				setSortKey((Integer)newValue);
-				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
 				setName((String)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__TYPE:
 				setType((String)newValue);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
+				setSortKey((Integer)newValue);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE:
 				setSubtype((String)newValue);
@@ -1184,14 +1185,14 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
 				setDBCollectionKey(DB_COLLECTION_KEY_EDEFAULT);
 				return;
-			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
-				setSortKey(SORT_KEY_EDEFAULT);
-				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
 				setName(NAME_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__TYPE:
 				setType(TYPE_EDEFAULT);
+				return;
+			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
+				setSortKey(SORT_KEY_EDEFAULT);
 				return;
 			case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE:
 				setSubtype(SUBTYPE_EDEFAULT);
@@ -1251,12 +1252,12 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				return conflictingRevs != null && !conflictingRevs.isEmpty();
 			case BtsmodelPackage.BTS_CONFIGURATION__DB_COLLECTION_KEY:
 				return DB_COLLECTION_KEY_EDEFAULT == null ? dBCollectionKey != null : !DB_COLLECTION_KEY_EDEFAULT.equals(dBCollectionKey);
-			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
-				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIGURATION__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case BtsmodelPackage.BTS_CONFIGURATION__TYPE:
 				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY:
+				return sortKey != SORT_KEY_EDEFAULT;
 			case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE:
 				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsmodelPackage.BTS_CONFIGURATION__CODE:
@@ -1314,12 +1315,17 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				default: return -1;
 			}
 		}
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (derivedFeatureID) {
+				case BtsmodelPackage.BTS_CONFIGURATION__NAME: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
+				case BtsmodelPackage.BTS_CONFIGURATION__TYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+				case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY;
+				case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE;
+				default: return -1;
+			}
+		}
 		if (baseClass == BTSObject.class) {
 			switch (derivedFeatureID) {
-				case BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY: return BtsmodelPackage.BTS_OBJECT__SORT_KEY;
-				case BtsmodelPackage.BTS_CONFIGURATION__NAME: return BtsmodelPackage.BTS_OBJECT__NAME;
-				case BtsmodelPackage.BTS_CONFIGURATION__TYPE: return BtsmodelPackage.BTS_OBJECT__TYPE;
-				case BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE: return BtsmodelPackage.BTS_OBJECT__SUBTYPE;
 				case BtsmodelPackage.BTS_CONFIGURATION__CODE: return BtsmodelPackage.BTS_OBJECT__CODE;
 				case BtsmodelPackage.BTS_CONFIGURATION__RELATIONS: return BtsmodelPackage.BTS_OBJECT__RELATIONS;
 				case BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY: return BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY;
@@ -1371,12 +1377,17 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 				default: return -1;
 			}
 		}
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME: return BtsmodelPackage.BTS_CONFIGURATION__NAME;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE: return BtsmodelPackage.BTS_CONFIGURATION__TYPE;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY: return BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE;
+				default: return -1;
+			}
+		}
 		if (baseClass == BTSObject.class) {
 			switch (baseFeatureID) {
-				case BtsmodelPackage.BTS_OBJECT__SORT_KEY: return BtsmodelPackage.BTS_CONFIGURATION__SORT_KEY;
-				case BtsmodelPackage.BTS_OBJECT__NAME: return BtsmodelPackage.BTS_CONFIGURATION__NAME;
-				case BtsmodelPackage.BTS_OBJECT__TYPE: return BtsmodelPackage.BTS_CONFIGURATION__TYPE;
-				case BtsmodelPackage.BTS_OBJECT__SUBTYPE: return BtsmodelPackage.BTS_CONFIGURATION__SUBTYPE;
 				case BtsmodelPackage.BTS_OBJECT__CODE: return BtsmodelPackage.BTS_CONFIGURATION__CODE;
 				case BtsmodelPackage.BTS_OBJECT__RELATIONS: return BtsmodelPackage.BTS_CONFIGURATION__RELATIONS;
 				case BtsmodelPackage.BTS_OBJECT__TEMP_SORT_KEY: return BtsmodelPackage.BTS_CONFIGURATION__TEMP_SORT_KEY;
@@ -1417,6 +1428,11 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 			}
 		}
 		if (baseClass == BTSDBBaseObject.class) {
+			switch (baseOperationID) {
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSNamedTypedObject.class) {
 			switch (baseOperationID) {
 				default: return -1;
 			}
@@ -1496,12 +1512,12 @@ public class BTSConfigurationImpl extends BTSConfigImpl implements BTSConfigurat
 		result.append(conflictingRevs);
 		result.append(", dBCollectionKey: ");
 		result.append(dBCollectionKey);
-		result.append(", sortKey: ");
-		result.append(sortKey);
 		result.append(", name: ");
 		result.append(name);
 		result.append(", type: ");
 		result.append(type);
+		result.append(", sortKey: ");
+		result.append(sortKey);
 		result.append(", subtype: ");
 		result.append(subtype);
 		result.append(", code: ");

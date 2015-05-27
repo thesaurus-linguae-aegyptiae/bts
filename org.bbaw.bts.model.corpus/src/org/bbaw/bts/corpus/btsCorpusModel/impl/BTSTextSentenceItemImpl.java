@@ -11,7 +11,7 @@ import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BtsmodelPackage;
-import org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl;
+import org.bbaw.bts.btsmodel.impl.BTSNamedTypedObjectImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextItems;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
@@ -38,7 +38,7 @@ import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
  *
  * @generated
  */
-public abstract class BTSTextSentenceItemImpl extends BTSIdentifiableItemImpl implements BTSTextSentenceItem {
+public abstract class BTSTextSentenceItemImpl extends BTSNamedTypedObjectImpl implements BTSTextSentenceItem {
 	/**
 	 * The default value of the '{@link #getPropertyChangeSupport() <em>Property Change Support</em>}' attribute.
 	 * <!-- begin-user-doc -->

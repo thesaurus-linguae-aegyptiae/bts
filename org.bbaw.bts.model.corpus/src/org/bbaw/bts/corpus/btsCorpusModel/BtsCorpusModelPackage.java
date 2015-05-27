@@ -196,22 +196,13 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_CORPUS_OBJECT__DB_COLLECTION_KEY = BtsmodelPackage.BTS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_CORPUS_OBJECT__SORT_KEY = BtsmodelPackage.BTS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__NAME = BtsmodelPackage.BTS_OBJECT__NAME;
+	int BTS_CORPUS_OBJECT__NAME = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -220,7 +211,16 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_CORPUS_OBJECT__TYPE = BtsmodelPackage.BTS_OBJECT__TYPE;
+	int BTS_CORPUS_OBJECT__TYPE = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_CORPUS_OBJECT__SORT_KEY = BtsmodelPackage.BTS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -504,15 +504,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTSTC_OBJECT__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTSTC_OBJECT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -529,6 +520,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTSTC_OBJECT__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTSTC_OBJECT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -811,15 +811,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -836,6 +827,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -1127,15 +1127,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_LEMMA_ENTRY__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_LEMMA_ENTRY__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1152,6 +1143,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_LEMMA_ENTRY__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_ENTRY__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -1543,15 +1543,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_ANNOTATION__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ANNOTATION__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1568,6 +1559,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ANNOTATION__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ANNOTATION__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2077,15 +2077,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_TEXT_CORPUS__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_CORPUS__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2102,6 +2093,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_CORPUS__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_CORPUS__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2402,15 +2402,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_IMAGE__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IMAGE__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2427,6 +2418,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_IMAGE__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IMAGE__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -2782,15 +2782,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_THS_ENTRY__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_THS_ENTRY__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2807,6 +2798,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_THS_ENTRY__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_THS_ENTRY__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
@@ -3126,13 +3126,49 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_WORD__ID = BTS_AMBIVALENCE_ITEM__ID;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__NAME = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__TYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__SORT_KEY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_WORD__SUBTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Translation</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__TRANSLATION = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 0;
+	int BTS_WORD__TRANSLATION = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>WType</b></em>' attribute.
@@ -3141,7 +3177,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__WTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 1;
+	int BTS_WORD__WTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>LType</b></em>' attribute.
@@ -3150,7 +3186,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__LTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 2;
+	int BTS_WORD__LTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>LKey</b></em>' attribute.
@@ -3159,7 +3195,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__LKEY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 3;
+	int BTS_WORD__LKEY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Flex Code</b></em>' attribute.
@@ -3168,7 +3204,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__FLEX_CODE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 4;
+	int BTS_WORD__FLEX_CODE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>WChar</b></em>' attribute.
@@ -3177,7 +3213,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__WCHAR = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 5;
+	int BTS_WORD__WCHAR = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 9;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3186,7 +3222,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__VALUE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 6;
+	int BTS_WORD__VALUE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 10;
 
 	/**
 	 * The feature id for the '<em><b>Graphics</b></em>' containment reference list.
@@ -3195,7 +3231,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD__GRAPHICS = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 7;
+	int BTS_WORD__GRAPHICS = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 11;
 
 	/**
 	 * The number of structural features of the '<em>BTS Word</em>' class.
@@ -3204,7 +3240,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_WORD_FEATURE_COUNT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 8;
+	int BTS_WORD_FEATURE_COUNT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 12;
 
 	/**
 	 * The number of operations of the '<em>BTS Word</em>' class.
@@ -3216,22 +3252,22 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_WORD_OPERATION_COUNT = BTS_AMBIVALENCE_ITEM_OPERATION_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_TEXT_ITEMS__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
-
-	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__ID = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__ID;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -3240,7 +3276,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS__STATE = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+	int BTS_TEXT_ITEMS__STATE = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__STATE;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -3249,7 +3285,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS__REVISION_STATE = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
+	int BTS_TEXT_ITEMS__REVISION_STATE = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISION_STATE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -3258,7 +3294,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS__VISIBILITY = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
+	int BTS_TEXT_ITEMS__VISIBILITY = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
@@ -3267,7 +3303,43 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS__REVISIONS = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 4;
+	int BTS_TEXT_ITEMS__REVISIONS = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT__REVISIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__NAME = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__TYPE = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__SORT_KEY = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_ITEMS__SUBTYPE = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>BTS Text Items</em>' class.
@@ -3276,7 +3348,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 5;
+	int BTS_TEXT_ITEMS_FEATURE_COUNT = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT_FEATURE_COUNT + 4;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -3285,7 +3357,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_TEXT_ITEMS___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Remove Property Change Listener</em>' operation.
@@ -3294,7 +3366,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 1;
+	int BTS_TEXT_ITEMS___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___REMOVE_PROPERTY_CHANGE_LISTENER__PROPERTYCHANGELISTENER;
 
 	/**
 	 * The operation id for the '<em>Add Revision</em>' operation.
@@ -3303,7 +3375,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS___ADD_REVISION__BTSREVISION = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 2;
+	int BTS_TEXT_ITEMS___ADD_REVISION__BTSREVISION = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__BTSREVISION;
 
 	/**
 	 * The operation id for the '<em>Add Revision</em>' operation.
@@ -3312,7 +3384,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 3;
+	int BTS_TEXT_ITEMS___ADD_REVISION__INT_DATE_STRING = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___ADD_REVISION__INT_DATE_STRING;
 
 	/**
 	 * The operation id for the '<em>Get Revision</em>' operation.
@@ -3321,7 +3393,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS___GET_REVISION__INT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 4;
+	int BTS_TEXT_ITEMS___GET_REVISION__INT = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_REVISION__INT;
 
 	/**
 	 * The operation id for the '<em>Get Last Revision</em>' operation.
@@ -3330,7 +3402,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS___GET_LAST_REVISION = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 5;
+	int BTS_TEXT_ITEMS___GET_LAST_REVISION = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT___GET_LAST_REVISION;
 
 	/**
 	 * The number of operations of the '<em>BTS Text Items</em>' class.
@@ -3339,7 +3411,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TEXT_ITEMS_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 6;
+	int BTS_TEXT_ITEMS_OPERATION_COUNT = BtsmodelPackage.ADMINISTRATIV_DATA_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3405,15 +3477,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_GRAPHIC_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_SENCTENCE__ID = BTS_TEXT_ITEMS__ID;
-
-	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3421,6 +3484,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_SENCTENCE__PROPERTY_CHANGE_SUPPORT = BTS_TEXT_ITEMS__PROPERTY_CHANGE_SUPPORT;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__ID = BTS_TEXT_ITEMS__ID;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -3457,6 +3529,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_SENCTENCE__REVISIONS = BTS_TEXT_ITEMS__REVISIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__NAME = BTS_TEXT_ITEMS__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__TYPE = BTS_TEXT_ITEMS__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__SORT_KEY = BTS_TEXT_ITEMS__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENCTENCE__SUBTYPE = BTS_TEXT_ITEMS__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Sentence Items</b></em>' containment reference list.
@@ -3558,13 +3666,49 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_MARKER__ID = BTS_AMBIVALENCE_ITEM__ID;
 
 	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__NAME = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__TYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__SORT_KEY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_MARKER__SUBTYPE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 3;
+
+	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__PROPERTY_CHANGE_SUPPORT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 0;
+	int BTS_MARKER__PROPERTY_CHANGE_SUPPORT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>State</b></em>' attribute.
@@ -3573,7 +3717,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__STATE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 1;
+	int BTS_MARKER__STATE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Revision State</b></em>' attribute.
@@ -3582,7 +3726,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__REVISION_STATE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 2;
+	int BTS_MARKER__REVISION_STATE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 6;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -3591,7 +3735,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__VISIBILITY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 3;
+	int BTS_MARKER__VISIBILITY = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 7;
 
 	/**
 	 * The feature id for the '<em><b>Revisions</b></em>' attribute list.
@@ -3600,7 +3744,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__REVISIONS = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 4;
+	int BTS_MARKER__REVISIONS = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 8;
 
 	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -3609,7 +3753,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER__VALUE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 5;
+	int BTS_MARKER__VALUE = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 9;
 
 	/**
 	 * The number of structural features of the '<em>BTS Marker</em>' class.
@@ -3618,7 +3762,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_MARKER_FEATURE_COUNT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 6;
+	int BTS_MARKER_FEATURE_COUNT = BTS_AMBIVALENCE_ITEM_FEATURE_COUNT + 10;
 
 	/**
 	 * The operation id for the '<em>Add Property Change Listener</em>' operation.
@@ -3690,7 +3834,43 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEM__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+	int BTS_SENTENCE_ITEM__ID = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__NAME = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__TYPE = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__SORT_KEY = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_SENTENCE_ITEM__SUBTYPE = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE;
 
 	/**
 	 * The number of structural features of the '<em>BTS Sentence Item</em>' class.
@@ -3699,7 +3879,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEM_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_SENTENCE_ITEM_FEATURE_COUNT = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>BTS Sentence Item</em>' class.
@@ -3708,7 +3888,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_SENTENCE_ITEM_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_SENTENCE_ITEM_OPERATION_COUNT = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>id</b></em>' attribute.
@@ -3718,6 +3898,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_TEXT_SENTENCE_ITEM__ID = BTS_SENTENCE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__NAME = BTS_SENTENCE_ITEM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__TYPE = BTS_SENTENCE_ITEM__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__SORT_KEY = BTS_SENTENCE_ITEM__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TEXT_SENTENCE_ITEM__SUBTYPE = BTS_SENTENCE_ITEM__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3844,6 +4060,42 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_AMBIVALENCE__ID = BTS_TEXT_SENTENCE_ITEM__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__NAME = BTS_TEXT_SENTENCE_ITEM__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__TYPE = BTS_TEXT_SENTENCE_ITEM__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__SORT_KEY = BTS_TEXT_SENTENCE_ITEM__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_AMBIVALENCE__SUBTYPE = BTS_TEXT_SENTENCE_ITEM__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Property Change Support</b></em>' attribute.
@@ -3978,7 +4230,43 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE__ID = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM__ID;
+	int BTS_LEMMA_CASE__ID = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__ID;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__NAME = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__TYPE = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__SORT_KEY = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY;
+
+	/**
+	 * The feature id for the '<em><b>Subtype</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_LEMMA_CASE__SUBTYPE = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE;
 
 	/**
 	 * The feature id for the '<em><b>Scenario</b></em>' containment reference list.
@@ -3987,7 +4275,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE__SCENARIO = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
+	int BTS_LEMMA_CASE__SCENARIO = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>BTS Lemma Case</em>' class.
@@ -3996,7 +4284,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE_FEATURE_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
+	int BTS_LEMMA_CASE_FEATURE_COUNT = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>BTS Lemma Case</em>' class.
@@ -4005,7 +4293,7 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_LEMMA_CASE_OPERATION_COUNT = BtsmodelPackage.BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
+	int BTS_LEMMA_CASE_OPERATION_COUNT = BtsmodelPackage.BTS_NAMED_TYPED_OBJECT_OPERATION_COUNT + 0;
 
 
 	/**
@@ -4309,15 +4597,6 @@ public interface BtsCorpusModelPackage extends EPackage {
 	int BTS_ABSTRACT_TEXT__DB_COLLECTION_KEY = BTS_CORPUS_OBJECT__DB_COLLECTION_KEY;
 
 	/**
-	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_ABSTRACT_TEXT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
-
-	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4334,6 +4613,15 @@ public interface BtsCorpusModelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_ABSTRACT_TEXT__TYPE = BTS_CORPUS_OBJECT__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Sort Key</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_ABSTRACT_TEXT__SORT_KEY = BTS_CORPUS_OBJECT__SORT_KEY;
 
 	/**
 	 * The feature id for the '<em><b>Subtype</b></em>' attribute.

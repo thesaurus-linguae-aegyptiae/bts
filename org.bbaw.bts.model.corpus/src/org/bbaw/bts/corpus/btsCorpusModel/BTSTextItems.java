@@ -3,7 +3,7 @@
 package org.bbaw.bts.corpus.btsCorpusModel;
 
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
-import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,5 +15,5 @@ import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface BTSTextItems extends BTSIdentifiableItem, AdministrativDataObject {
+public interface BTSTextItems extends AdministrativDataObject, BTSNamedTypedObject {
 } // BTSTextItems

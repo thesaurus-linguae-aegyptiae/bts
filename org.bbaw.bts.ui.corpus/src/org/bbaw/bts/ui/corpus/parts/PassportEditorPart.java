@@ -1277,7 +1277,7 @@ public class PassportEditorPart {
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, text),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(
+						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME).observe(
 						object), us, null);
 
 		bindingContext.addValidationStatusProvider(binding);
@@ -1295,7 +1295,7 @@ public class PassportEditorPart {
 		Binding binding2 = bindingContext.bindValue(
 				target_type_viewer,
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_OBJECT__TYPE).observe(
+						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__TYPE).observe(
 						object), targetToModel, modelToTarget);
 
 		// // subtype
@@ -1309,7 +1309,7 @@ public class PassportEditorPart {
 		Binding binding_subtype = bindingContext.bindValue(
 				target_subtype_viewer,
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_OBJECT__SUBTYPE).observe(
+						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__SUBTYPE).observe(
 						object), targetToModel2, modelToTarget2);
 
 		// id
@@ -1324,7 +1324,7 @@ public class PassportEditorPart {
 		Binding binding4 = bindingContext.bindValue(
 				WidgetProperties.selection().observeDelayed(0, sortKey_Spin),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_OBJECT__SORT_KEY).observe(
+						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__SORT_KEY).observe(
 						object), null, null);
 
 		// visibility

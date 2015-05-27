@@ -5,6 +5,7 @@ package org.bbaw.bts.corpus.btsCorpusModel.util;
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSObservableObject;
 import org.bbaw.bts.corpus.btsCorpusModel.*;
@@ -188,6 +189,10 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseBTSDBBaseObject(BTSDBBaseObject object) {
 				return createBTSDBBaseObjectAdapter();
+			}
+			@Override
+			public Adapter caseBTSNamedTypedObject(BTSNamedTypedObject object) {
+				return createBTSNamedTypedObjectAdapter();
 			}
 			@Override
 			public Adapter caseBTSObject(BTSObject object) {
@@ -644,6 +649,20 @@ public class BtsCorpusModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSDBBaseObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject <em>BTS Named Typed Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject
+	 * @generated
+	 */
+	public Adapter createBTSNamedTypedObjectAdapter() {
 		return null;
 	}
 

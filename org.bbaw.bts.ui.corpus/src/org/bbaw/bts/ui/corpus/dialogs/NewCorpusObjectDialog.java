@@ -231,7 +231,7 @@ public class NewCorpusObjectDialog extends TitleAreaDialog
 		Binding binding = bindingContext.bindValue(
 				WidgetProperties.text(SWT.Modify).observeDelayed(BTSUIConstants.DELAY, nameTxt),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_OBJECT__NAME).observe(
+						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME).observe(
 						object), us, null);
 		bindingContext.addValidationStatusProvider(binding);
 		BackgroundControlDecorationSupport.create(binding, SWT.TOP | SWT.LEFT);

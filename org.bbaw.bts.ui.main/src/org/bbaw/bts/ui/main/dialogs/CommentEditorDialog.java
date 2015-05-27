@@ -128,7 +128,7 @@ public class CommentEditorDialog extends TitleAreaDialog {
 				WidgetProperties.text(SWT.Modify).observeDelayed(
 						BTSUIConstants.DELAY, txtTitletxt),
 				EMFEditProperties.value(editingDomain,
-						BtsmodelPackage.Literals.BTS_OBJECT__NAME)
+						BtsmodelPackage.Literals.BTS_NAMED_TYPED_OBJECT__NAME)
 						.observe(comment), us, null);
 		
 		// comment

@@ -202,6 +202,10 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 				return createBTSIDReservationObjectAdapter();
 			}
 			@Override
+			public Adapter caseBTSNamedTypedObject(BTSNamedTypedObject object) {
+				return createBTSNamedTypedObjectAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -691,6 +695,20 @@ public class BtsmodelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createBTSIDReservationObjectAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.bbaw.bts.btsmodel.BTSNamedTypedObject <em>BTS Named Typed Object</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.bbaw.bts.btsmodel.BTSNamedTypedObject
+	 * @generated
+	 */
+	public Adapter createBTSNamedTypedObjectAdapter() {
 		return null;
 	}
 

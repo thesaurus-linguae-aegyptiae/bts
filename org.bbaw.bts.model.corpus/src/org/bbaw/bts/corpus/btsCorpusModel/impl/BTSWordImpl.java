@@ -3,9 +3,12 @@
 package org.bbaw.bts.corpus.btsCorpusModel.impl;
 
 import java.util.Collection;
+import org.bbaw.bts.btsmodel.BTSNamedTypedObject;
 import org.bbaw.bts.btsmodel.BTSTranslations;
+import org.bbaw.bts.btsmodel.BtsmodelPackage;
 import org.bbaw.bts.btsmodel.impl.BTSIdentifiableItemImpl;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSGraphic;
+import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.eclipse.emf.common.notify.Notification;
@@ -24,6 +27,10 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getSortKey <em>Sort Key</em>}</li>
+ *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getSubtype <em>Subtype</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getTranslation <em>Translation</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getWType <em>WType</em>}</li>
  *   <li>{@link org.bbaw.bts.corpus.btsCorpusModel.impl.BTSWordImpl#getLType <em>LType</em>}</li>
@@ -38,6 +45,86 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * @generated
  */
 public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
+	/**
+	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String NAME_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getName()
+	 * @generated
+	 * @ordered
+	 */
+	protected String name = NAME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String TYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getType() <em>Type</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getType()
+	 * @generated
+	 * @ordered
+	 */
+	protected String type = TYPE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final int SORT_KEY_EDEFAULT = 0;
+
+	/**
+	 * The cached value of the '{@link #getSortKey() <em>Sort Key</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSortKey()
+	 * @generated
+	 * @ordered
+	 */
+	protected int sortKey = SORT_KEY_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubtype()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String SUBTYPE_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getSubtype() <em>Subtype</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getSubtype()
+	 * @generated
+	 * @ordered
+	 */
+	protected String subtype = SUBTYPE_EDEFAULT;
+
 	/**
 	 * The cached value of the '{@link #getTranslation() <em>Translation</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -195,6 +282,90 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	@Override
 	protected EClass eStaticClass() {
 		return BtsCorpusModelPackage.Literals.BTS_WORD;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setName(String newName) {
+		String oldName = name;
+		name = newName;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_WORD__NAME, oldName, name));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getType() {
+		return type;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(String newType) {
+		String oldType = type;
+		type = newType;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_WORD__TYPE, oldType, type));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public int getSortKey() {
+		return sortKey;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSortKey(int newSortKey) {
+		int oldSortKey = sortKey;
+		sortKey = newSortKey;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_WORD__SORT_KEY, oldSortKey, sortKey));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSubtype() {
+		return subtype;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setSubtype(String newSubtype) {
+		String oldSubtype = subtype;
+		subtype = newSubtype;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, BtsCorpusModelPackage.BTS_WORD__SUBTYPE, oldSubtype, subtype));
 	}
 
 	/**
@@ -402,6 +573,14 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_WORD__NAME:
+				return getName();
+			case BtsCorpusModelPackage.BTS_WORD__TYPE:
+				return getType();
+			case BtsCorpusModelPackage.BTS_WORD__SORT_KEY:
+				return getSortKey();
+			case BtsCorpusModelPackage.BTS_WORD__SUBTYPE:
+				return getSubtype();
 			case BtsCorpusModelPackage.BTS_WORD__TRANSLATION:
 				return getTranslation();
 			case BtsCorpusModelPackage.BTS_WORD__WTYPE:
@@ -431,6 +610,18 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_WORD__NAME:
+				setName((String)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_WORD__TYPE:
+				setType((String)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_WORD__SORT_KEY:
+				setSortKey((Integer)newValue);
+				return;
+			case BtsCorpusModelPackage.BTS_WORD__SUBTYPE:
+				setSubtype((String)newValue);
+				return;
 			case BtsCorpusModelPackage.BTS_WORD__TRANSLATION:
 				setTranslation((BTSTranslations)newValue);
 				return;
@@ -468,6 +659,18 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_WORD__NAME:
+				setName(NAME_EDEFAULT);
+				return;
+			case BtsCorpusModelPackage.BTS_WORD__TYPE:
+				setType(TYPE_EDEFAULT);
+				return;
+			case BtsCorpusModelPackage.BTS_WORD__SORT_KEY:
+				setSortKey(SORT_KEY_EDEFAULT);
+				return;
+			case BtsCorpusModelPackage.BTS_WORD__SUBTYPE:
+				setSubtype(SUBTYPE_EDEFAULT);
+				return;
 			case BtsCorpusModelPackage.BTS_WORD__TRANSLATION:
 				setTranslation((BTSTranslations)null);
 				return;
@@ -504,6 +707,14 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+			case BtsCorpusModelPackage.BTS_WORD__NAME:
+				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+			case BtsCorpusModelPackage.BTS_WORD__TYPE:
+				return TYPE_EDEFAULT == null ? type != null : !TYPE_EDEFAULT.equals(type);
+			case BtsCorpusModelPackage.BTS_WORD__SORT_KEY:
+				return sortKey != SORT_KEY_EDEFAULT;
+			case BtsCorpusModelPackage.BTS_WORD__SUBTYPE:
+				return SUBTYPE_EDEFAULT == null ? subtype != null : !SUBTYPE_EDEFAULT.equals(subtype);
 			case BtsCorpusModelPackage.BTS_WORD__TRANSLATION:
 				return translation != null;
 			case BtsCorpusModelPackage.BTS_WORD__WTYPE:
@@ -530,11 +741,67 @@ public class BTSWordImpl extends BTSIdentifiableItemImpl implements BTSWord {
 	 * @generated
 	 */
 	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (derivedFeatureID) {
+				case BtsCorpusModelPackage.BTS_WORD__NAME: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME;
+				case BtsCorpusModelPackage.BTS_WORD__TYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE;
+				case BtsCorpusModelPackage.BTS_WORD__SORT_KEY: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY;
+				case BtsCorpusModelPackage.BTS_WORD__SUBTYPE: return BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSSentenceItem.class) {
+			switch (derivedFeatureID) {
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == BTSNamedTypedObject.class) {
+			switch (baseFeatureID) {
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__NAME: return BtsCorpusModelPackage.BTS_WORD__NAME;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__TYPE: return BtsCorpusModelPackage.BTS_WORD__TYPE;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SORT_KEY: return BtsCorpusModelPackage.BTS_WORD__SORT_KEY;
+				case BtsmodelPackage.BTS_NAMED_TYPED_OBJECT__SUBTYPE: return BtsCorpusModelPackage.BTS_WORD__SUBTYPE;
+				default: return -1;
+			}
+		}
+		if (baseClass == BTSSentenceItem.class) {
+			switch (baseFeatureID) {
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public String toString() {
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (wType: ");
+		result.append(" (name: ");
+		result.append(name);
+		result.append(", type: ");
+		result.append(type);
+		result.append(", sortKey: ");
+		result.append(sortKey);
+		result.append(", subtype: ");
+		result.append(subtype);
+		result.append(", wType: ");
 		result.append(wType);
 		result.append(", lType: ");
 		result.append(lType);
