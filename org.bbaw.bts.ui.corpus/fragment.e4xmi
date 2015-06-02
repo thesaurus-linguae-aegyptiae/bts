@@ -281,7 +281,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_iG19QJWGEeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.2" label="Add Text" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/text-add.png" command="_2I4eYEt7EeO3HNJi0pp4Qg"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_mdMScJWGEeOpr8TW-P04BA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.3" label="Add Annotation" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotation-add.png" command="_iWpp8JV9EeOpr8TW-P04BA"/>
   </fragments>
-  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_pOpCsKL1EeOuZIAmNo_Bng">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_pOpCsKL1EeOuZIAmNo_Bng" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="basic_1:PartDescriptor" xmi:id="_p07moKL1EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.part.CorpusNavigatorPart" label="CorpusNavigatorPart" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpora.png" allowMultiple="true" closeable="true" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.parts.CorpusNavigatorPart">
       <menus xmi:id="_1jDaoKL1EeOuZIAmNo_Bng" elementId="org.bbaw.bts.ui.corpus.menu.1" label="VL" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/corpus-add.png">
         <tags>ViewMenu</tags>
