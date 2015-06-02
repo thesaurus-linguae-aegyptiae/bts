@@ -150,7 +150,7 @@ public class ApplicationStartupControllerImpl implements
 
 	private String localDBUrl;
 
-	private boolean listen2Backend = false; // XXX dev!!!!!!!!!!!!!
+	private boolean listen2Backend = true; // XXX dev!!!!!!!!!!!!!
 
 	@Override
 	public void applicationStartup(final IEclipseContext context,
