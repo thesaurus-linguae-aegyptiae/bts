@@ -615,7 +615,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							.showAnnotations(BTSAnnotationAnnotation.TYPE,
 									BTSCommentAnnotation.TYPE,
 									"org.eclipse.xtext.ui.editor.error",
-									"org.eclipse.xtext.ui.editor.warning")
+									"org.eclipse.xtext.ui.editor.warning",
+									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
 							.withParent(embeddedEditorComp);
 					
 					embeddedEditorModelAccess = embeddedEditor

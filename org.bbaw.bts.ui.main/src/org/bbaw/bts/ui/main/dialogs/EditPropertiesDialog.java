@@ -47,6 +47,7 @@ public class EditPropertiesDialog extends TitleAreaDialog {
 		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_MIN,
 		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_MAX,
 		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_STEP,
+		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_BEGIN,
 		BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_FORCE_SERVER};
 	private List<List<String>> properties;
 	

@@ -15,4 +15,5 @@ public interface RemoteDBConnectionProvider
 
 	String getRemoteDBURL();
 
+	void purgeDBConnectionPool();
 }

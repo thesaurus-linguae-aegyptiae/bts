@@ -8,13 +8,16 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +27,7 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSDBConnection;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSProjectDBCollection;
+import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.DBCollectionStatusInformation;
@@ -36,6 +40,7 @@ import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.remote.dao.RemoteDBManager;
 import org.bbaw.bts.db.DBManager;
+import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -80,6 +85,7 @@ import org.lightcouch.Page;
 import org.lightcouch.Replicator;
 import org.lightcouch.ReplicatorDocument;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
@@ -179,8 +185,16 @@ public class CouchDBManager implements DBManager {
 			if (collection.getCollectionName().equals("admin"))
 				foundAdmin = true;
 			if (collection.getCollectionName().equals("_users"))
+			{
+				// check if current user is remote db admin so that _users can be syncs
+				if (!remoteDBManager.checkUserIsDBAdmin(username, password))
+				{
+					// user cannot syncs _users
+					// so, update at least _user of authenticated user
+					syncCurrentUser(username, password);
+				}
 				foundUsers = true;
-
+			}
 			// TODO check and set _desing/auth docs with custom function
 		}
 		if (anySync) {
@@ -223,6 +237,66 @@ public class CouchDBManager implements DBManager {
 		return success;
 	}
 
+	private void syncCurrentUser(String username2, String password2) {
+		//FIXME check update _users
+		CouchDbClient localdbClient = connectionProvider.getDBClient(CouchDbClient.class, "_users");
+		
+		InputStream localis = null;
+		JsonObject localJso = null;
+		try {
+			localis = localdbClient.find("org.couchdb.user:" + username2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (localis != null)
+		{
+			localJso = EmfModelHelper.load(localis, JsonObject.class);
+		}
+		
+		
+		CouchDbClient remotedbClient = remoteDBManager.getDBClient(CouchDbClient.class, "_users");
+		
+		InputStream remoteis = null;
+		JsonObject remoteJso = null;
+		try {
+			remoteis = remotedbClient.find("org.couchdb.user:" + username2);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (remoteis != null)
+		{
+			remoteJso = EmfModelHelper.load(remoteis, JsonObject.class);
+		}
+		
+		// check if local is uptodate.
+		boolean syncRequired = false;
+		if (localJso == null)
+		{
+			syncRequired = true;
+		}
+		else {
+			try {
+				String localRev = localJso.get("_rev").getAsString().split("-")[0];
+				String remoteRev = remoteJso.get("_rev").getAsString().split("-")[0];
+				int localIntRev = new Integer(localRev);
+				int remoteIntRev = new Integer(remoteRev);
+				if (localIntRev <= remoteIntRev) syncRequired = true;
+			} catch (Exception e) {
+				// if anything goes wrong, sync!
+				syncRequired = true;
+			}
+		}
+		if (syncRequired)
+		{
+			System.out.println("forebly sync user from remote " + remoteJso.getAsString());
+			localdbClient.save(remoteJso);
+		}
+				
+		
+	}
+	
 	private void checkAndSetSecurityContextOnReplicator() {
 		CouchDbClient dbClient = connectionProvider.getDBClient(
 				CouchDbClient.class, DaoConstants.REPLICATOR);

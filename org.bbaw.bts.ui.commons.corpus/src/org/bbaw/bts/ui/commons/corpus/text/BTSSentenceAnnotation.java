@@ -20,7 +20,7 @@ public class BTSSentenceAnnotation extends BTSModelAnnotation {
 	
 	@Override
 	public void paint(GC gc, Canvas canvas, Rectangle bounds) {
-		Image image = resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_SPELLING);
+		Image image = resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_LOCALE);
 		if(image != null)
 			ImageUtilities.drawImage(image, gc, canvas, bounds, SWT.CENTER, SWT.TOP);
 	}

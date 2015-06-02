@@ -187,5 +187,14 @@ public class RemoteDBConnectionProviderImpl implements RemoteDBConnectionProvide
 		}
 		return (T) dbClient;
 	}
-
+	@Override
+	public void purgeDBConnectionPool() {
+		Map<String, CouchDbClient> clients = (Map<String, CouchDbClient>) context.get(RemoteDaoConstants.DB_CLIENT_POOL_MAP);
+		if (clients == null)
+		{
+			return;
+		}
+		clients.clear();
+		
+	}
 }

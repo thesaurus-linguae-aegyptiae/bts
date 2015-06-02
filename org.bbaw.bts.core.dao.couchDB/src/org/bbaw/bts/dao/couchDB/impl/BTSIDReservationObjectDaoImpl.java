@@ -1,8 +1,10 @@
 package org.bbaw.bts.dao.couchDB.impl;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,24 +52,36 @@ public class BTSIDReservationObjectDaoImpl extends CouchDBDao<BTSIDReservationOb
 		try
 		{
 			view = dbClient.view(viewId);
-			allDocs = view.includeDocs(false).startKey(prefix + 0).reduce(true).query();
+			allDocs = view.includeDocs(false).startKey(prefix + 0).reduce(false).query();
 		} catch (NoDocumentException e)
 		{
 			e.printStackTrace();
 			System.out.println("create view, view id: " + viewId);
 			createView(collectionName, "/id_reservation/", viewId);
 			view = dbClient.view(viewId);
-			allDocs = view.includeDocs(false).startKey(prefix + 0).reduce(true).query();
+			allDocs = view.includeDocs(false).startKey(prefix + 0).reduce(false).query();
 			
 		}
-		System.out.println(allDocs);
-		String result = allDocs.toString();
-		Matcher m = VALUE_PATTERN.matcher(result);
-		if (m.find())
+		List<Integer> ids = new Vector<Integer>(allDocs.size());
+		for (String doc : allDocs)
 		{
-			return prefix+ m.group(2);
+			Matcher m = VALUE_PATTERN.matcher(doc);
+			if (m.find())
+			{
+				try {
+					Integer i = new Integer(m.group(2));
+					ids.add(i);
+				} catch (NumberFormatException e) {
+				}
+			}
 		}
-		return null;
+		Collections.sort(ids);
+		
+		String lastID = prefix+ ids.get(ids.size() -1);
+		System.out.println("last Id: " + lastID);
+
+		
+		return lastID;
 	}
 
 }

@@ -862,6 +862,25 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 
 				if (graphic.getCode() != null)
 				{
+					if (!"".equals(mdc))
+					{
+						if (!(mdc.endsWith("-")
+								|| mdc.endsWith("-")
+								|| mdc.endsWith("-"))
+								)
+						{
+							if (!"".equals(graphic.getCode()))
+							{
+								if (!(graphic.getCode().endsWith("-")
+										|| graphic.getCode().endsWith("-")
+										|| graphic.getCode().endsWith("-"))
+										)
+								{
+									mdc += "-";// add standard mdc separator
+								}
+							}
+						}
+					}
 				mdc += graphic.getCode();
 					if (i == selectedGlypheIndex) {
 						mdc = insertMarkerBehindSingleCode(mdc, MDC_SELECTION);

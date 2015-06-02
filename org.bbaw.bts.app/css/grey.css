@@ -116,7 +116,7 @@ CTabItem:selected {
 //	
 //}
 
-MTrimBar {
+/*MTrimBar {
 	background-color: rgb(245, 243, 237);
 }
 MToolBar {
@@ -136,7 +136,7 @@ UserToolcontrol {
 	background-color: rgb(245, 243, 237);
 }
 
-
+*/
 /* for AnnotationPart RelatedObjectGroup*/
 .unselected {
 	background-color: #FFFFFF;
@@ -146,8 +146,8 @@ UserToolcontrol {
 	background-color: #E6E3C3;
 }
 
-RelatedObjectGroup.selected {
+/*RelatedObjectGroup.selected {
 	background-color: #E6E3C3;
 }
 
-
+*/

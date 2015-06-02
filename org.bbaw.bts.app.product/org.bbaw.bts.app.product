@@ -15,7 +15,7 @@
 
    <windowImages i16="/org.bbaw.bts.app.product/icons/bts16.bmp" i32="/org.bbaw.bts.app.product/icons/bts32.bmp" i48="/org.bbaw.bts.app.product/icons/bts48.bmp" i64="/org.bbaw.bts.app.product/icons/bts64.bmp" i128="/org.bbaw.bts.app.product/icons/bts128.bmp" i256="/org.bbaw.bts.app.product/icons/bts256.bmp"/>
 
-   <launcher name="BTS_306">
+   <launcher name="BTS">
       <macosx icon="/icons/bts256.icns"/>
       <solaris/>
       <win useIco="false">

@@ -115,6 +115,7 @@ public interface BTSPassport extends EObject {
 
 	/**
 	 * <!-- begin-user-doc -->
+	 * path as passport path, beginning with category, group... item. separated by >>.
 	 * <!-- end-user-doc -->
 	 * @model
 	 * @generated

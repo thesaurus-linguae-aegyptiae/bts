@@ -236,7 +236,7 @@ public class AnnotationsPart implements EventHandler {
 		if(selection.equals(parentObject) || parentObject == null) return;
 //		System.out.println("clearRelatingObjects selection: " + ((BTSCorpusObject)selection).get_id() + " parentObject " + parentObject.get_id());
 		part.setLabel("AnnotationsPart");
-		part.setTooltip("");
+		part.setTooltip("AnnotationsPart");
 		relatingObjectsQueryIDMap.clear();
 		objectWidgetMap.clear();
 		if (composite != null)
@@ -315,7 +315,7 @@ public class AnnotationsPart implements EventHandler {
 							if (!allRelatedObjectsShowed)
 							{
 								try {
-									part.setLabel("? (" + event.getRelatingObjects().size() + ") " + event.getObject().getName());
+									part.setLabel(part.getLabel() + "(" + event.getRelatingObjects().size() + ")? ");
 									part.setTooltip("Not all related objects (annotations, comments etc) were loaded\n"
 											+ " because there are "+  event.getRelatingObjects().size() + " which is to many for this view.");
 								} catch (Exception e) {

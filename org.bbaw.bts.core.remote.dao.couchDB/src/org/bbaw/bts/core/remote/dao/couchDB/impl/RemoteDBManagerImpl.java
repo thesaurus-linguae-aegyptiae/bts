@@ -52,4 +52,9 @@ public class RemoteDBManagerImpl implements RemoteDBManager {
 		}
 		return exists;
 	}
+
+	@Override
+	public <T> T getDBClient(Class<T> clazz, String dbcollection) {
+		return (T) connectionProvider.getDBClient(CouchDbClient.class, dbcollection);
+	}
 }

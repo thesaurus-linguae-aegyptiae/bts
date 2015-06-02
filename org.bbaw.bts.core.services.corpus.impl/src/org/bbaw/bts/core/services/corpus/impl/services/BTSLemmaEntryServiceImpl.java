@@ -72,6 +72,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		entry.setVisibility(lemmaVisibility);
 		entry.setRevisionState(lemmaReviewState);
 		entry.setProject(main_lemmaList_key);
+		
+		// FIXME transform import
 		super.setId(entry, entry.getDBCollectionKey());
 		super.addRevisionStatement(entry);
 

@@ -1,70 +1,153 @@
+.MPart.busy {
+	font-style: italic;
+}
+
+.MPart.highlighted {
+	font-weight: bold;
+}
+
 * {
-	font-size: 10px;
-	font-family: BBAWLibertine; /*FreeSerif;*/
-	color: black;
-}
-
-Composite Label {
-	color: black;
-}
-
-#SeparatorLabel {
-	color: #1d659f;
-}
-
-Text {
-	font: Verdana 8px;
-}
-
-Composite Text {
-	background-color: white;
-	color: black;
-}
-
-
-SashForm {
-	background-color: #c1d5ef;
-}
-
-
-
-Table {
-	background-color: #e3efff #c1d5ef 60%;
-	color: black;
-	font-size: 10px;
-	font-family: BBAWLibertine; /*FreeSerif;*/
-}
-
-.MTrimBar {
-	background-color: #e3efff #c1d5ef;
-	color: white;
-	font-size: 10px;
-	font-family: BBAWLibertine; /*FreeSerif;*/
-}
-
-ETabFolder {
-	simple: true;
-}
-
-CTabItem {
-	color: black;
-	font-size: 10px;
+	font-size: 14px;
 	font-family: BBAWLibertine; /*FreeSerif;*/
 }
 
 CTabItem:selected {
-	background-color: #e3efff #c1d5ef 60%;
-	font-weight: normal;
-	font-size: 10px;
-	font-family: BBAWLibertine; /*FreeSerif;*/
+//	color: '#org-eclipse-ui-workbench-ACTIVE_TAB_TEXT_COLOR';
 }
 
-CTabItem.active:selected {
-	background-color: #e3efff #c1d5ef 50%;
-	color: #1d659f;
-	font: bold;
+.MTrimmedWindow {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	margin-left: 2px;
+	margin-right: 2px;
 }
 
-Shell {
-    background-color: #e3efff #c1d5ef 60%;
+.MPartStack {
+//    swt-tab-renderer: url('bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering');
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_END' 100%;
+	swt-simple: false;
+	swt-mru-visible: true;
+//	color: '#org-eclipse-ui-workbench-INACTIVE_TAB_TEXT_COLOR';
 }
+
+.MPartStack.active {
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_END' 100%;
+}
+
+.MPartStack.active.noFocus {
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_END' 100%;
+}
+
+.MPartStack.active.noFocus > CTabItem:selected {
+//	color: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_TEXT_COLOR';
+}
+
+#PerspectiveSwitcher  {
+	eclipse-perspective-keyline-color: #ECE9D8 #FFFFFF;
+}
+
+.MToolControl.TrimStack {
+//	frame-image:  url(./winClassicTSFrame.png);
+//	handle-image:  url(./winClassicHandle.png);
+	frame-cuts: 5px 1px 5px 16px;
+}
+
+.MToolBar.Draggable {
+//	handle-image:  url(./dragHandle.png);
+}
+
+.MToolControl.Draggable {
+//	handle-image:  url(./dragHandle.png);
+}
+
+.DragFeedback {
+	background-color: COLOR-WIDGET-NORMAL-SHADOW;
+}
+
+.ModifiedDragFeedback {
+	background-color: #A0A000;
+}
+
+#org-eclipse-ui-editorss {
+	swt-tab-height: 8px;
+}
+//ScrolledComposite {
+//	background-color: #FFFFFF;
+//}
+//
+//Group {
+//	background-color: #FFFFFF;
+//}
+//
+//PassportEntryItemEditor {
+//	background-color: #FFFFFF;
+//}
+//PassportEntryGroupEditor {
+//	background-color: #FFFFFF;
+//}
+//
+//Label {
+//	background-color: #FFFFFF;
+//	
+//}
+//TableItem {
+//	font-family: BBAWLibertine;
+//	font-size: 12px;
+//}
+//Table{
+//	font-family: BBAWLibertine;
+//	font-size: 12px;
+//}
+
+//Button {
+//	background-color: #FFFFFF;
+//}
+
+//* {
+//	font-size: 10px;
+//	font-family: BBAWLibertine; /*FreeSerif;*/
+//	
+//}
+//Text {
+//	background-color: #FFFFFF;
+//}
+//Link {
+//	background-color: #FFFFFF;
+//	
+//}
+
+/*MTrimBar {
+	background-color: rgb(245, 243, 237);
+}
+MToolBar {
+	background-color: rgb(245, 243, 237);
+}
+
+MToolItem {
+	background-color: rgb(245, 243, 237);
+}
+CorpusToolControl {
+	background-color: rgb(245, 243, 237);
+}
+ProjectToolControl {
+	background-color: rgb(245, 243, 237);
+}
+UserToolcontrol {
+	background-color: rgb(245, 243, 237);
+}
+
+*/
+/* for AnnotationPart RelatedObjectGroup*/
+.unselected {
+	background-color: #FFFFFF;
+}
+
+.selected {
+	background-color: #E6E3C3;
+}
+
+/*RelatedObjectGroup.selected {
+	background-color: #E6E3C3;
+}
+
+*/

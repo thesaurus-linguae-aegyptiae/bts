@@ -1757,6 +1757,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 				{
 					ci.getOwnerReferencedTypesStringList().add(s);
 				}
+				ci.setType(((BTSConfigItem) selectedConfig).getType());
+				ci.setSubtype(((BTSConfigItem) selectedConfig).getSubtype());
 				CompoundCommand compoundCommand = new CompoundCommand();
 				org.eclipse.emf.common.command.Command command = AddCommand
 						.create(getEditingDomain(selectedConfig),

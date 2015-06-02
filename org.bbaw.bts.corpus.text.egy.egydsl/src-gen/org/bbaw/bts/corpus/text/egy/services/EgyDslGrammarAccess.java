@@ -2317,7 +2317,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	//	"⁝" | "0".."9" | "Õ" | "ã" | "Þ" | "!" | // OElig
 	//	"Œ" | // oelig
 	//	"œ" | // Yuml
-	//	"Ÿ" | "Æ")+;
+	//	"Ÿ" | "Æ" | "*" | "ê")+;
 	public TerminalRule getEGYSTRINGRule() {
 		return (tEGYSTRING != null) ? tEGYSTRING : (tEGYSTRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "EGYSTRING"));
 	} 

@@ -7,12 +7,12 @@
 }
 
 * {
-	font-size: 10px;
+	font-size: 16px;
 	font-family: BBAWLibertine; /*FreeSerif;*/
 }
 
 CTabItem:selected {
-	color: '#org-eclipse-ui-workbench-ACTIVE_TAB_TEXT_COLOR';
+//	color: '#org-eclipse-ui-workbench-ACTIVE_TAB_TEXT_COLOR';
 }
 
 .MTrimmedWindow {
@@ -23,23 +23,23 @@ CTabItem:selected {
 }
 
 .MPartStack {
-	swt-tab-renderer: null;
-	swt-selected-tabs-background: '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_END' 100%;
+//    swt-tab-renderer: url('bundleclass://org.eclipse.e4.ui.workbench.renderers.swt/org.eclipse.e4.ui.workbench.renderers.swt.CTabRendering');
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-INACTIVE_TAB_BG_END' 100%;
 	swt-simple: false;
 	swt-mru-visible: true;
-	color: '#org-eclipse-ui-workbench-INACTIVE_TAB_TEXT_COLOR';
+//	color: '#org-eclipse-ui-workbench-INACTIVE_TAB_TEXT_COLOR';
 }
 
 .MPartStack.active {
-	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_END' 100%;
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_TAB_BG_END' 100%;
 }
 
 .MPartStack.active.noFocus {
-	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_END' 100%;
+//	swt-selected-tabs-background: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_START' '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_BG_END' 100%;
 }
 
 .MPartStack.active.noFocus > CTabItem:selected {
-	color: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_TEXT_COLOR';
+//	color: '#org-eclipse-ui-workbench-ACTIVE_NOFOCUS_TAB_TEXT_COLOR';
 }
 
 #PerspectiveSwitcher  {
@@ -90,24 +90,24 @@ CTabItem:selected {
 //	background-color: #FFFFFF;
 //	
 //}
-TableItem {
-	font-family: BBAWLibertine;
-	font-size: 12px;
-}
-Table{
-	font-family: BBAWLibertine;
-	font-size: 12px;
-}
+//TableItem {
+//	font-family: BBAWLibertine;
+//	font-size: 12px;
+//}
+//Table{
+//	font-family: BBAWLibertine;
+//	font-size: 12px;
+//}
 
 //Button {
 //	background-color: #FFFFFF;
 //}
 
-* {
-	font-size: 10px;
-	font-family: BBAWLibertine; /*FreeSerif;*/
-	
-}
+//* {
+//	font-size: 10px;
+//	font-family: BBAWLibertine; /*FreeSerif;*/
+//	
+//}
 //Text {
 //	background-color: #FFFFFF;
 //}
@@ -116,7 +116,7 @@ Table{
 //	
 //}
 
-MTrimBar {
+/*MTrimBar {
 	background-color: rgb(245, 243, 237);
 }
 MToolBar {
@@ -136,7 +136,7 @@ UserToolcontrol {
 	background-color: rgb(245, 243, 237);
 }
 
-
+*/
 /* for AnnotationPart RelatedObjectGroup*/
 .unselected {
 	background-color: #FFFFFF;
@@ -146,8 +146,8 @@ UserToolcontrol {
 	background-color: #E6E3C3;
 }
 
-RelatedObjectGroup.selected {
+/*RelatedObjectGroup.selected {
 	background-color: #E6E3C3;
 }
 
-
+*/

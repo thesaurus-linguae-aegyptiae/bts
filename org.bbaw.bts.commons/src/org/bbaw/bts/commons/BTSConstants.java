@@ -177,6 +177,10 @@ public class BTSConstants
 
 	public static final boolean DB_COLLECTION_PROP_RESERVE_ID_FORCE_SERVER_DEFAULT = true;
 
+	public static final String DB_COLLECTION_PROP_RESERVE_ID_BEGIN = "reserveID_begin";
+
+	public static final int DB_COLLECTION_PROP_RESERVE_ID_BEGIN_DEFAULT = 1000000;
+
 
 
 	

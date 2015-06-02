@@ -149,7 +149,7 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 	@Override
 	public boolean setAuthentication(String userName, String passWord)
 	{
-		if (!userDao.isAuthorizedUser(userName, passWord))
+		if (!isValidAuthentication(userName, passWord))
 		{
 			return false;
 		}
@@ -380,7 +380,15 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 
 	@Override
 	public boolean isValidAuthentication(String userName, String passWord) {
-		return userDao.isAuthorizedUser(userName, passWord);
+		if (userDao.isAuthorizedUser(userName, passWord))
+		{
+			return true;
+		}
+		try {
+			return remoteGeneralPurposeDao.isAuthorizedUser(userName, passWord);
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	@Override

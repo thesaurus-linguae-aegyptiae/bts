@@ -172,6 +172,19 @@ public class IDServiceImpl implements IDService
 			}
 		}
 		
+		// max of reservedIds
+		int begin = BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_BEGIN_DEFAULT;
+		if (coll.getProperty(BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_BEGIN) != null)
+		{
+			String s = coll.getProperty(BTSConstants.DB_COLLECTION_PROP_RESERVE_ID_BEGIN);
+			try {
+				begin = new Integer(s);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+				
+		
 		String lastID = null;
 		
 		List<BTSIDReservationObject> reserationObjects = null;
@@ -193,6 +206,7 @@ public class IDServiceImpl implements IDService
 			lastID = findLastIDInternal(coll.getCollectionName(), prefix, forceOnServer);
 			if (lastID == null)
 			{
+				lastID = new Integer(begin).toString();
 				return null;
 			}
 			reserationObjects = makeReservationObjects(btsUUID, authenticatedUser.getUserName(), coll.getCollectionName(), prefix, step, max, lastID);
