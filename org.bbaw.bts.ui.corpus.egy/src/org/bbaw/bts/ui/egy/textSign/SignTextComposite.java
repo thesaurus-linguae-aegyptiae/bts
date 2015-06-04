@@ -1078,7 +1078,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				len = hieroLen;
 			}
 		}
-		if (showTransDE || showTransEN || showTransES || showTransFR)
+		if (word != null && word.getTranslation() != null && (showTransDE || showTransEN || showTransES || showTransFR))
 		{
 				int transLen = 0;
 				if (showTransDE)

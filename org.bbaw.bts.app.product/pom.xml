@@ -17,7 +17,7 @@
 		<tycho.version>0.19.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!--<kepler-repo.url>http://download.eclipse.org/releases/luna</kepler-repo.url>-->
-		<kepler-repo.url>http://download.eclipse.org/eclipse/updates/4.5milestones</kepler-repo.url>
+		<kepler-repo.url>http://download.eclipse.org/eclipse/updates/4.4-M-builds</kepler-repo.url>
 	</properties>
   
   <repositories>
@@ -80,6 +80,20 @@
 	
    <build>
     <plugins>
+	<plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-versions-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <executions>
+            <execution>
+                <id>versions</id>
+                <phase>validate</phase>
+                <goals>
+                    <goal>update-pom</goal>
+                </goals>
+            </execution>
+        </executions>
+    </plugin>
     	<plugin>
 				<groupId>org.eclipse.tycho</groupId>
 				<artifactId>tycho-maven-plugin</artifactId>
