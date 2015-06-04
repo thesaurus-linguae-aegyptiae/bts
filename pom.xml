@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.bbaw.bts</groupId>
 	<artifactId>aaew-bts</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.7</version>
 	<packaging>pom</packaging>
 	<modules>
 		<!--<module>org.eclipse.xtext.ui</module>
