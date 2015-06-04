@@ -132,13 +132,15 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	public List<BTSConfiguration> list(String objectState, IProgressMonitor monitor)
 	{
 		List<BTSConfiguration> configs = new Vector<BTSConfiguration>();
-		for (String p : getActiveProjects())
+		for (String p : getAllProjects())
 		{
 			configs.addAll(configurationDao.list(p
 					+ BTSCoreConstants.ADMIN_SUFFIX, objectState));
 		}
 		return configs;
 	}
+	
+
 	@Override
 	public List<BTSConfiguration> listChunks(int chunkSize, String[] chunkIds, String dbCollectionName,
 			String objectState, IProgressMonitor monitor) {
@@ -186,13 +188,12 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 			return (BTSConfiguration) activeConfig;
 		}
 		List<BTSConfiguration> list = list(BTSConstants.OBJECT_STATE_ACTIVE, null);
-//		if (list == null || list.isEmpty())
-//		{
-//			BTSConfiguration config = createNew();
-//			save(config);
-//			list.add(config);
-//		}
-		activeConfig = list(BTSConstants.OBJECT_STATE_ACTIVE, null).get(0);
+		if (list == null || list.isEmpty())
+		{
+			return null;
+		}
+		
+		activeConfig = list.get(0);
 		if (active_configuration_name == null)
 		{
 			active_configuration_name = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app").get(BTSPluginIDs.ACTIVE_CONFIGURATION, null); 

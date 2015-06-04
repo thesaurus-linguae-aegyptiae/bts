@@ -102,7 +102,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 		if (entry != null) {
 			return entry;
 		}
-		for (String p : getActiveProjects()) {
+		for (String p : getActiveThss()) {
 			try {
 				entry = thsEntryDao.find(key, p + BTSCorpusConstants.THS);
 			} catch (Exception e) {
@@ -117,7 +117,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	@Override
 	public List<BTSThsEntry> list(String objectState, IProgressMonitor monitor) {
 		List<BTSThsEntry> entries = new Vector<BTSThsEntry>();
-		for (String p : getActiveProjects()) {
+		for (String p : getActiveThss()) {
 			try {
 				entries.addAll(thsEntryDao.list(p + BTSCorpusConstants.THS,
 						objectState));
@@ -131,7 +131,7 @@ implements BTSThsEntryService, BTSObjectSearchService {
 	public List<BTSThsEntry> query(BTSQueryRequest query, String objectState,
 			boolean registerQuery, IProgressMonitor monitor) {
 		List<BTSThsEntry> objects = new Vector<BTSThsEntry>();
-		for (String p : getActiveProjects()) {
+		for (String p : getActiveThss()) {
 
 			try {
 				objects.addAll(thsEntryDao.query(query, p + BTSCorpusConstants.THS, p

@@ -4,7 +4,7 @@ function(doc){
 		return
 	}
 	else if (doc.relations == null){
-		emit(doc._id, {"name": doc.name, "eClass": doc.eClass, "type": doc.type, "subtype": doc.subtype, "visibility": doc.visibility, "readers": doc.readers, "updaters": doc.updaters, "revisionState": doc.revisionState, "relations": doc.relations});
+		emit(doc._id, doc);
 	}
 	else
 	{
@@ -14,6 +14,6 @@ function(doc){
 				return;
 			}
 		}
-		emit(doc._id, {"name": doc.name, "eClass": doc.eClass, "type": doc.type, "subtype": doc.subtype, "visibility": doc.visibility, "readers": doc.readers, "updaters": doc.updaters, "revisionState": doc.revisionState, "relations": doc.relations});
+		emit(doc._id, doc);
 	}
 }

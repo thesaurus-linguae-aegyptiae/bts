@@ -813,7 +813,7 @@ public class ApplicationStartupControllerImpl implements
 //												handlerService.activateHandler(BTSPluginIDs.CMD_ID_EDIT_PREFERENCE, new E4PreferencesHandler());
 												Map map = new HashMap(1);
 												map.put("org.bbaw.bts.ui.main.commandparameter.dbManagerMessage",
-														"Some Database Collections are not properly index. Please execute appropriate re-indexing!");
+														"Some Database Collections are not properly indexed. Please execute appropriate re-indexing!");
 												Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_DB_MANGER);
 												final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
 												sync.asyncExec(new Runnable() {

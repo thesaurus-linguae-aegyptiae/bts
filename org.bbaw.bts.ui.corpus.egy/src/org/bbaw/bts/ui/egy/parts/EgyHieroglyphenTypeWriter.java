@@ -32,6 +32,7 @@ import jsesh.hieroglyphs.ManuelDeCodage;
 import jsesh.mdc.MDCSyntaxError;
 import jsesh.mdc.utils.MDCNormalizer;
 
+import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.commons.interfaces.ScatteredCachingPart;
@@ -154,7 +155,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private String beforeImageMdC;
 	private Map hieroglyphSelectionCounterCacheMap = new HashMap<URI, Object>();
 	private String htwProposals;
-	private BTSObject selectionObject;
+	private BTSIdentifiableItem selectionObject;
 	// boolean if object is loaded into gui
 	private boolean loaded;
 
@@ -175,6 +176,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	@Inject
 	private LemmaEditorController lemmaEditorController;
 	private boolean isDirty;
+	private BTSObject lastEvent;
 
 	@Inject
 	public EgyHieroglyphenTypeWriter(EPartService partService)
@@ -588,6 +590,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 			@Optional
 			@Named(IServiceConstants.ACTIVE_SELECTION) BTSObject selection) {
 		if (selection == null) return;
+		if (selection.equals(lastEvent)) return;
+		lastEvent = selection;
 		if (part == null)
 		{
 			part = partService.findPart(BTSPluginIDs.PART_ID_LEMMATIZER);
@@ -648,6 +652,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
+		if (selection == null) return;
 		if (constructed) {
 			if (!selfSelecting) {
 				if (selection == null) {
@@ -660,7 +665,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 						{
 							setSelection((BTSCorpusObject) selection.getParentObject());
 						}
-						selectionObject = (BTSObject) selection.getSelectedItems()
+						selectionObject = (BTSIdentifiableItem) selection.getSelectedItems()
 								.get(0);
 						setSelectionInteral((BTSWord) selection
 								.getSelectedItems().get(0));

@@ -105,6 +105,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	protected Pattern typePattern = Pattern.compile(DaoConstants.TYPE_PATTERN);
 
 	protected Pattern subtypePattern = Pattern.compile(DaoConstants.SUBTYPE_PATTERN);
+	
+	protected Pattern sortKeyPattern = Pattern.compile(DaoConstants.SORTKEY_PATTERN);
 
 	@SuppressWarnings("unchecked")
 	public CouchDBDao()
@@ -650,6 +652,16 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 	
 	protected String extractSubTypeFromObjectString(String objectString) {
 		Matcher m = subtypePattern.matcher(objectString);
+		if (m.find())
+		{
+			return m.group(2);
+		}
+		return null;
+	}
+	
+	protected String extractSortKeyFromObjectString(String objectString)
+	{
+		Matcher m = sortKeyPattern.matcher(objectString);
 		if (m.find())
 		{
 			return m.group(2);

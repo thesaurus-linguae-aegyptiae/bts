@@ -363,8 +363,11 @@ public class TranslationEditorComposite extends Composite {
 	
 	@Override
 	public void setEnabled(boolean enabled) {
+		if (!combo.isDisposed())
+		{
 		combo.setEnabled(enabled);
 		text.setEnabled(enabled);
+		}
 		super.setEnabled(enabled);
 	}
 }

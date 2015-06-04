@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -89,14 +90,13 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			}
 			else if (exactButton.getSelection())
 			{
-				queryRequest.setQueryBuilder(QueryBuilders.filteredQuery(QueryBuilders.termQuery("_all", text.getText().trim()),
-						FilterBuilders.termFilter("name", text.getText().trim())));
+				queryRequest.setQueryBuilder(QueryBuilders.matchQuery("name", escapeString(text.getText().trim())));
 				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 				queryRequest.setQueryId("timestamp-" + now.toString());
 			}
 			else
 			{
-				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(text.getText().trim().toLowerCase()));
+				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(escapeString(text.getText().trim().toLowerCase())));
 				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 				queryRequest.setQueryId("timestamp-" + now.toString());
 			}
@@ -106,6 +106,11 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			queryRequest = null;
 		}
 		super.okPressed();
+	}
+
+	private String escapeString(String searchString) {
+		String escapedString = QueryParser.escape(searchString);
+		return escapedString;
 	}
 
 	/**

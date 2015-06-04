@@ -564,7 +564,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private void loadText() {
 		purgeAll();
-		Double d = (canvas.getViewport().getBounds().width ) * 1.35;
+		Double d = (canvas.getViewport().getBounds().width ) * 1.25;
 		max_line_length = d.intValue();
 		continuingRelatingObjects = new Vector<BTSObject>();
 		// canvas = new FigureCanvas(this);
@@ -1581,7 +1581,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			figure = findElementFigure(newIndex);
 			if (figure == null) break;
 		}
-		if (figure instanceof WordFigure)
+		if (figure == null) return null;
+		else if (figure instanceof WordFigure)
 		{
 			return figure;
 		}

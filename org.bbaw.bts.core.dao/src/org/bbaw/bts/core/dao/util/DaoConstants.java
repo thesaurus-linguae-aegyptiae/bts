@@ -156,6 +156,9 @@ public class DaoConstants
 
 	public static final String SUBTYPE_PATTERN = "(\"subtype\":\\s*\")([^\"]*)\"";
 	
+	public static final String SORTKEY_PATTERN = "(\"sortKey\":\\s*\")([^\"]*)\"";
+
+	
 	/** The Constant CORPUS. */
 	public static final String CORPUS = "/corpus/";
 
@@ -210,6 +213,8 @@ public class DaoConstants
 
 
 	public static final String VIEW_ATEXT_ROOT_ENTRIES = "atext/all_root_entries";
+
+
 
 
 

@@ -276,6 +276,14 @@ implements GenericCorpusObjectService<E, K>{
 		return  active_lemmaLists.split(BTSCoreConstants.SPLIT_PATTERN);
 	}
 	
+	public String[] getActiveThss() {
+		if (active_thss == null || "".equals(active_thss))
+		{
+			return getActiveProjects();
+		}
+		return  active_thss.split(BTSCoreConstants.SPLIT_PATTERN);
+	}
+	
 	protected boolean isCurrentDBCollectionContextThs()
 	{
 		String dbContext = getCurrentDBCollectionContext();

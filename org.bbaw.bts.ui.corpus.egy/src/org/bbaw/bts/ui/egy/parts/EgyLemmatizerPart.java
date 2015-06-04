@@ -214,7 +214,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private Table table;
 	private BTSLemmaEntryNameTranslationViewerFilter lemmaViewerSearchFilter = new BTSLemmaEntryNameTranslationViewerFilter();
 	private BTSLemmatizerEgyObjectByNameViewerSorter sorter;
-	private DataBindingContext word_bindingContext;	
+	private DataBindingContext word_bindingContext;
+	private BTSTextSelectionEvent lastEvent;
+	private ModifyListener textSelectedWordModifyListener;	
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -246,14 +248,15 @@ public class EgyLemmatizerPart implements SearchViewer {
 		textSelectedWord = new Text(composite, SWT.BORDER);
 		textSelectedWord.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
 				false, 2, 1));
-		textSelectedWord.addModifyListener(new ModifyListener() {
+		textSelectedWordModifyListener = new ModifyListener() {
 			
 			@Override
 			public void modifyText(ModifyEvent e) {
 				 clearProposals();
 				 loadingLemmaProposals(currentWord);
 			}
-		});
+		};
+		textSelectedWord.addModifyListener(textSelectedWordModifyListener);
 
 		Composite composite_1 = new Composite(composite, SWT.NONE);
 		composite_1.setLayout(new GridLayout(1, false));
@@ -677,7 +680,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	protected void loadChildren(final TreeNodeWrapper node, boolean b) {
 		final List<BTSLemmaEntry> children = lemmaNavigatorController
-				.findChildren(
+				.findChildrenOnlySubEntries(
 						(BTSLemmaEntry) node.getObject(),
 						null,
 						lemmaViewer,
@@ -812,6 +815,9 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
+		if (selection == null) return;
+		if (selection.equals(lastEvent)) return;
+		lastEvent = selection;
 		if (constructed) {
 			if (!selfSelecting) {
 				if (selection == null) {
@@ -974,7 +980,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 					word_bindingContext.dispose();
 				}
 				word_bindingContext = new DataBindingContext();
+				textSelectedWord.removeModifyListener(textSelectedWordModifyListener);
 				textSelectedWord.setText("");
+				textSelectedWord.addModifyListener(textSelectedWordModifyListener);
+
 				loadTranslation(null);
 			}
 		});

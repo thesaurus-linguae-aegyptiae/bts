@@ -32,7 +32,6 @@ import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupComment;
 import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupImpl;
 import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupRubrum;
 import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupSubtext;
-import org.bbaw.bts.ui.corpus.parts.passportEditor.PassportEntryItemEditor;
 import org.eclipse.swt.widgets.Composite;
 
 import javax.annotation.PreDestroy;
@@ -43,8 +42,6 @@ import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
-import org.eclipse.e4.ui.css.swt.dom.WidgetElement;
-import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -57,25 +54,13 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Link;
-import org.eclipse.swt.widgets.ExpandBar;
-import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
@@ -235,8 +220,8 @@ public class AnnotationsPart implements EventHandler {
 	private void clearRelatingObjects(BTSCorpusObject selection) {
 		if(selection.equals(parentObject) || parentObject == null) return;
 //		System.out.println("clearRelatingObjects selection: " + ((BTSCorpusObject)selection).get_id() + " parentObject " + parentObject.get_id());
-		part.setLabel("AnnotationsPart");
-		part.setTooltip("AnnotationsPart");
+		part.setLabel("Annotations");
+		part.setTooltip("Annotations");
 		relatingObjectsQueryIDMap.clear();
 		objectWidgetMap.clear();
 		if (composite != null)

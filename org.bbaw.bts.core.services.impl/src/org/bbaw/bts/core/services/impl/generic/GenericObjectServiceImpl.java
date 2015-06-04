@@ -15,10 +15,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.AdministrativDataObject;
-import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSObject;
+import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSRevision;
 import org.bbaw.bts.btsmodel.BTSUser;
@@ -28,6 +28,8 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GeneralPurposeDao;
+import org.bbaw.bts.core.dao.BTSProjectDao;
+
 import org.bbaw.bts.core.remote.dao.RemoteGeneralPurposeDao;
 import org.bbaw.bts.core.services.BTSEvaluationService;
 import org.bbaw.bts.core.services.GenericObjectService;
@@ -52,6 +54,10 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	@Inject
 	protected RemoteGeneralPurposeDao remoteGeneralPurposeDao;
+	
+	@Inject
+	private BTSProjectDao projectDao;
+
 
 	@Inject
 	protected IDService idService;
@@ -77,6 +83,8 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 
 	@Inject
 	private BTSEvaluationService evaluationService;
+	
+	
 
 	@SuppressWarnings("unchecked")
 	public GenericObjectServiceImpl()
@@ -323,5 +331,19 @@ public abstract class GenericObjectServiceImpl<E extends BTSDBBaseObject, K exte
 	}
 	protected String[] getActiveProjects() {
 		return  active_projects.split(BTSCoreConstants.SPLIT_PATTERN);
+	}
+	
+	protected String[] getAllProjects() {
+		List<BTSProject> projects = projectDao.list(BTSCoreConstants.ADMIN, BTSConstants.OBJECT_STATE_ACTIVE);
+		List<String> projectPrefixes = new Vector<String>(projects.size());
+
+		if (projects != null)
+		{
+			for (BTSProject p : projects)
+			{
+				projectPrefixes.add(p.getPrefix());
+			}
+		}
+		return projectPrefixes.toArray(new String[projectPrefixes.size()]);
 	}
 }

@@ -38,7 +38,6 @@ import java.nio.charset.CharacterCodingException;
 import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.EventObject;
 import java.util.HashMap;
@@ -56,7 +55,6 @@ import javax.inject.Named;
 import jsesh.editor.JMDCEditor;
 
 import org.bbaw.bts.btsmodel.BTSComment;
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
 import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
@@ -86,7 +84,6 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSE4ToGuiceXtextSourceViewerProvider;
-import org.bbaw.bts.corpus.text.egy.ui.internal.EgyDslActivator;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsLoadingEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -131,13 +128,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.edit.command.AddCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.action.IContributionManager;
-import org.eclipse.jface.action.IMenuListener;
-import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -163,19 +155,13 @@ import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyleRange;
-import org.eclipse.swt.events.ControlAdapter;
-import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.events.MenuEvent;
 import org.eclipse.swt.events.MenuListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TypedEvent;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -1698,8 +1684,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					}
 					list.add((BTSModelAnnotation) a);
 					
-					textItems.add(((BTSModelAnnotation) a)
-							.getModel());
+					
 					// nur sentenceitems oder alles?
 //					if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
 //						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
@@ -1728,6 +1713,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			
 			// calculate the start and end item and startId and endId
 			for (BTSModelAnnotation a : list) {
+				
+				// add selected Items
+				textItems.add(((BTSModelAnnotation) a)
+						.getModel());
+				
+				// calculate start and end
 				if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
 					Position pos = embeddedEditor.getViewer().getAnnotationModel()
 							.getPosition(a);
@@ -1987,6 +1978,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 			if (selection instanceof BTSCorpusObject) // concered by selection event
 			{
+				if (selection.equals(text)) return;
+				
 				BTSCorpusObject btsObject = (BTSCorpusObject) selection;
 				if (constructed) // gui constructed
 				{
@@ -2012,7 +2005,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						purgeCacheAndEditingDomain();
 						loadInput(null);
 						if (part != null) {
-							part.setLabel("EgyTextEditor");
+							part.setLabel("Text Editor");
 						}
 						text = null;
 						selectionCached = false;
@@ -2088,6 +2081,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 				@Override
 				public void commandStackChanged(EventObject event) {
+					if (editingDomain == null)
+					{
+						if (text == null) return;
+						else editingDomain = getEditingDomain(text);
+					}
 					Command mostRecentCommand = editingDomain.getCommandStack()
 							.getMostRecentCommand();
 					if (mostRecentCommand != null) {

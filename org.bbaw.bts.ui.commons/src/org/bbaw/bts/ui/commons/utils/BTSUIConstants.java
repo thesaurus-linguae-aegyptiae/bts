@@ -114,7 +114,7 @@ public class BTSUIConstants {
 	
 	/** The Constant COLOR_ANNOTATTION. */
 	public static final Color COLOR_ANNOTATTION = _resources
-			.createColor(new RGB(120, 120, 120));
+			.createColor(new RGB(200, 200, 200));
 
 	/** The Constant COLOR_COMMENT. */
 	public static final Color COLOR_COMMENT = _resources.createColor(new RGB(

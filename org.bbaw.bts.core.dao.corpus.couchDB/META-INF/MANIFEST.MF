@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusDao-CouchDB
 Bundle-SymbolicName: org.bbaw.bts.core.dao.corpus.couchDB;singleton:=true
-Bundle-Version: 1.0.2.qualifier
+Bundle-Version: 1.0.7.qualifier
 Bundle-Activator: org.bbaw.bts.core.dao.corpus.couchdb.internal.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: com.google.gson;version="2.1.0",

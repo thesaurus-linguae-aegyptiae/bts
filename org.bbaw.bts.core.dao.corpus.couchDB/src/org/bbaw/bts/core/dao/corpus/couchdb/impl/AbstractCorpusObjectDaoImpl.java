@@ -139,8 +139,18 @@ implements GenericDao<E, K>
 		// visiblity
 		entity.setVisibility(extractVisibilityFromObjectString(sourceAsString));
 		
-		// visiblity
+		// CorpusPrefix
 		entity.setCorpusPrefix(extractCorpusPrefixFromObjectString(sourceAsString));
+		
+		// sortKey
+		String sk = extractSortKeyFromObjectString(sourceAsString);
+		if (sk != null)
+		{
+			try {
+				entity.setSortKey(new Integer(sk));
+			} catch (NumberFormatException e) {
+			}
+		}
 				
 		// readers
 		List<String> readers = extractReadersFromObjectString(sourceAsString);

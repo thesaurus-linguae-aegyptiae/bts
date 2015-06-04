@@ -27,8 +27,13 @@ import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jface.viewers.ContentViewer;
+import org.eclipse.jface.viewers.TreeViewer;
+import org.elasticsearch.index.query.QueryBuilders;
 
 public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 
 implements LemmaNavigatorController{
@@ -80,6 +85,10 @@ implements LemmaNavigatorController{
 
 	protected String[] getChildRelationTypes() {
 		return new String[]{"partOf", "referencedBy", "referencing", "rootOf"};
+	}
+	
+	protected String[] getChildSubEntryRelationTypes() {
+		return new String[]{"partOf"};
 	}
 
 	@Override
@@ -222,4 +231,38 @@ implements LemmaNavigatorController{
 		}
 		list.add(tn);
 	}
+	
+	@Override
+	public List<BTSLemmaEntry> findChildrenOnlySubEntries(BTSLemmaEntry parent, Map<String, BTSQueryResultAbstract> queryResultMap,
+			ContentViewer viewer, TreeNodeWrapper parentHolder,
+			EReference referenceName, IProgressMonitor monitor) {
+		BTSQueryRequest query = new BTSQueryRequest();
+		query.setQueryBuilder(QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("relations.objectId",
+				parent.get_id())).must(QueryBuilders.termsQuery("relations.type", getChildSubEntryRelationTypes())));
+		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
+		
+		query.setQueryId("relations.objectId-" + parent.get_id());
+		System.out.println(query.getQueryId());
+		if (queryResultMap != null) {
+			BTSQueryResultAbstract qra = new BTSQueryResultAbstract();
+			qra.setViewer(viewer);
+			qra.setParentEObject(parentHolder);
+			qra.setReferenceName(referenceName);
+			qra.setQueryId(query.getQueryId());
+			queryResultMap.put(query.getQueryId(), qra);
+		}
+		List<BTSLemmaEntry> children = executeTypedQuery(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
+		List<BTSLemmaEntry> result = new Vector<BTSLemmaEntry>(children.size());
+		for (BTSLemmaEntry o : children)
+		{
+			if (!(o instanceof BTSAnnotation))
+			{
+				result.add(o);
+			}
+		}
+		sortEntries(result);
+		return result;
+	}
+
+
 }

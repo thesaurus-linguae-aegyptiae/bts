@@ -526,6 +526,8 @@ public class EgyTextTranslationPart {
 			highlightedAnnotations.clear();
 			highlightedAnnotations.add(a);
 			highlightAnnotations(highlightedAnnotations, true);
+			Position pos = annotationModel.getPosition(a);
+			textViewer.revealRange(pos.getOffset(), pos.getLength());
 		}
 		
 	}

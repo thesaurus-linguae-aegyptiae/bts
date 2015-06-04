@@ -132,7 +132,7 @@ public class BTSConstants
 	public static final String ORPHANS_NODE_LABEL = "_Orphans";
 
 	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS = new String[]{"_id", "eClass", "type", "subtype",
-		"updaters", "readers", "name", "revisionState", "visibility"};
+		"updaters", "readers", "name", "revisionState", "visibility", "sortKey"};
 	
 	public static final SimpleDateFormat ADMIN_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 
@@ -146,7 +146,7 @@ public class BTSConstants
 														+ REVISION_STRING_SEPARATOR + "(.+)";
 
 	public static final String[] SEARCH_BASIC_RESPONSE_FIELDS_TRANSLATIONS = new String[]{"_id", "eClass", "type", "subtype",
-		"updaters", "readers", "name", "revisionState", "visibility", "translations"};
+		"updaters", "readers", "name", "revisionState", "visibility", "sortKey", "translations"};
 
 	public static final String OBJECT_TYPES_ARRAY = "object_types_array";
 

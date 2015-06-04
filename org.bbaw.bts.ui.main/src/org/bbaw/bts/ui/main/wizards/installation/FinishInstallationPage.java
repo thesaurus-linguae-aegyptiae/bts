@@ -72,4 +72,8 @@ public class FinishInstallationPage extends WizardPage {
 	{
 		progressBar.setSelection(progressBar.getSelection() + work);
 	}
+	@Override
+	public boolean canFlipToNextPage() {
+		return false;
+	}
 }

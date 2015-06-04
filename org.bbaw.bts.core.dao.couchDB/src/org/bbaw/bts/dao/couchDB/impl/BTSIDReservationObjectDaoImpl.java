@@ -25,7 +25,7 @@ public class BTSIDReservationObjectDaoImpl extends CouchDBDao<BTSIDReservationOb
 			String path, String btsUUID, String prefix) {
 		String viewId = BTSConstants.VIEW_ID_RESERVATION_OBJECTS;
 		
-		List<String> allDocs = loadDocsFromView(viewId, path, "/id_reservation/", btsUUID, btsUUID);
+		List<String> allDocs = loadDocsFromView(viewId, path, "id_reservation", btsUUID, btsUUID);
 		List<BTSIDReservationObject> results = loadObjectsFromStrings(allDocs, path);
 		
 		// filter oder mit params im view!
@@ -55,9 +55,8 @@ public class BTSIDReservationObjectDaoImpl extends CouchDBDao<BTSIDReservationOb
 			allDocs = view.includeDocs(false).startKey(prefix + 0).reduce(false).query();
 		} catch (NoDocumentException e)
 		{
-			e.printStackTrace();
 			System.out.println("create view, view id: " + viewId);
-			createView(collectionName, "/id_reservation/", viewId);
+			createView(collectionName, "id_reservation", viewId);
 			view = dbClient.view(viewId);
 			allDocs = view.includeDocs(false).startKey(prefix + 0).reduce(false).query();
 			

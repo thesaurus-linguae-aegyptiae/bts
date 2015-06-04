@@ -288,27 +288,30 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			o.setTempSortKey(-1);
 			for (BTSRelation rel : o.getRelations())
 			{
-				for (BTSInterTextReference part : rel.getParts())
+				if (rel.getParts() != null && !rel.getParts().isEmpty())
 				{
-					if (part.getBeginId() != null)
+					for (BTSInterTextReference part : rel.getParts())
 					{
-						List<BTSInterTextReference> parts = relatingObjectsMap.get(part.getBeginId());
-						if (parts == null)
+						if (part.getBeginId() != null)
 						{
-							parts = new Vector<BTSInterTextReference>(4);
-							relatingObjectsMap.put(part.getBeginId(), parts);
+							List<BTSInterTextReference> parts = relatingObjectsMap.get(part.getBeginId());
+							if (parts == null)
+							{
+								parts = new Vector<BTSInterTextReference>(4);
+								relatingObjectsMap.put(part.getBeginId(), parts);
+							}
+							parts.add(part);
 						}
-						parts.add(part);
-					}
-					if (part.getEndId() != null && !part.getEndId().equals(part.getBeginId()))
-					{
-						List<BTSInterTextReference> parts = relatingObjectsMap.get(part.getEndId());
-						if (parts == null)
+						if (part.getEndId() != null && !part.getEndId().equals(part.getBeginId()))
 						{
-							parts = new Vector<BTSInterTextReference>(4);
-							relatingObjectsMap.put(part.getEndId(), parts);
+							List<BTSInterTextReference> parts = relatingObjectsMap.get(part.getEndId());
+							if (parts == null)
+							{
+								parts = new Vector<BTSInterTextReference>(4);
+								relatingObjectsMap.put(part.getEndId(), parts);
+							}
+							parts.add(part);
 						}
-						parts.add(part);
 					}
 				}
 			}
