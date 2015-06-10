@@ -11,5 +11,7 @@ public interface LemmatizerPartController {
 	List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor);
 
 	String processWordCharForLemmatizing(BTSWord word);
+	
+	String processWordCharForLemmatizing(String wordChars);
 
 }

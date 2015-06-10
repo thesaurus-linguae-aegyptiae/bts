@@ -4,6 +4,7 @@
   <imports xsi:type="commands:Command" xmi:id="_HO_yQL8hEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.updateApplication"/>
   <imports xsi:type="commands:Command" xmi:id="_3xuZsL8lEeOwdasqUpZnTA" elementId="org.bbaw.bts.app.command.restart"/>
   <imports xsi:type="commands:Command" xmi:id="_S-Kp0KY5EeSMm_n5aML7dg" elementId="org.eclipse.e4.ui.perspectives.showPerspective"/>
+  <imports xsi:type="commands:Command" xmi:id="_1ffpsA9REeW8qKX3Cn7MOQ" elementId="e4.exit"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_XCflwADrEeOpmPWG2KRhAA" featurename="children" parentElementId="org.bbaw.bts.app.perspectivestack.main"/>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mjmYoANbEeO_KvSHBrHQXw" featurename="children" parentElementId="toolbar:org.eclipse.ui.main.toolbar">
     <elements xsi:type="menu:HandledToolItem" xmi:id="_psHVQGcSEeOBmPSxTUuwxg" elementId="org.bbaw.bts.ui.main.handledtoolitem.new" label="New" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/obj16/add.png" command="_6YlhUGcMEeOBmPSxTUuwxg">
@@ -50,6 +51,7 @@
     <elements xsi:type="commands:Handler" xmi:id="_LiMvsKroEeSL-KbihY0rDw" elementId="org.ramo.klevis.p4app.handler.1" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.UninstallSoftwareHandler" command="_CnznkKroEeSL-KbihY0rDw"/>
     <elements xsi:type="commands:Handler" xmi:id="_fSVX4OgpEeSGc-cONqnFNw" elementId="org.bbaw.bts.ui.main.handler.openWebHelpHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenWebHelpHandler" command="_AjUs4OgpEeSGc-cONqnFNw"/>
     <elements xsi:type="commands:Handler" xmi:id="_vGmF0PPlEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.main.handler.openTypeSubtypeFilterDialogHandler" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.OpenTypeSubtypeFilterDialogHandler" command="_pMfe4PPlEeSQXI5ezOq8Qg"/>
+    <elements xsi:type="commands:Handler" xmi:id="_3_PCkA9REeW8qKX3Cn7MOQ" elementId="org.bbaw.bts.ui.main.handler.2" contributionURI="bundleclass://org.bbaw.bts.ui.main/org.bbaw.bts.ui.main.handlers.ExitApplicationHandler" command="_1ffpsA9REeW8qKX3Cn7MOQ"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_mTupAAP9EeOVO9L3NDWRFg" featurename="commands" parentElementId="org.bbaw.bts.application">
     <elements xsi:type="commands:Command" xmi:id="_XRryAAUBEeOv5rV0xfzB3w" elementId="org.bbaw.bts.ui.main.command.startBackendUpdateListening" commandName="startBackendUpdateListening" category="_R2MZsAUBEeOv5rV0xfzB3w"/>

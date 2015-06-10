@@ -868,15 +868,15 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 					if (!"".equals(mdc))
 					{
 						if (!(mdc.endsWith("-")
-								|| mdc.endsWith("-")
-								|| mdc.endsWith("-"))
+								|| mdc.endsWith(":")
+								|| mdc.endsWith("*"))
 								)
 						{
 							if (!"".equals(graphic.getCode()))
 							{
-								if (!(graphic.getCode().endsWith("-")
-										|| graphic.getCode().endsWith("-")
-										|| graphic.getCode().endsWith("-"))
+								if (!(graphic.getCode().startsWith("-")
+										|| graphic.getCode().startsWith(":")
+										|| graphic.getCode().startsWith("*"))
 										)
 								{
 									mdc += "-";// add standard mdc separator

@@ -512,7 +512,7 @@ labelProvider));
 						obs = corpusNavigatorController
 								.getOrphanEntries(map,
 										treeViewer.getFilters(), monitor);
-						storeIntoMap(obs, parentControl);
+						storeIntoMap(obs, parentControl, true);
 						final List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
 						
 						// If you want to update the UI
@@ -567,7 +567,7 @@ labelProvider));
 											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
 											BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSTHSENTRIES, monitor);
 						}
-						storeIntoMap(obs, parentControl);
+						storeIntoMap(obs, parentControl, true);
 						List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
 						rootNode.getChildren().addAll(nodes);
 						
@@ -682,7 +682,7 @@ labelProvider));
 											parent,
 											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
 
-							storeIntoMap(children, parentControl);
+							storeIntoMap(children, parentControl, false);
 							// If you want to update the UI
 							sync.asyncExec(new Runnable() {
 
@@ -715,7 +715,7 @@ labelProvider));
 	}
 
 	protected void storeIntoMap(final List<BTSCorpusObject> children,
-			final Control parentControl) {
+			final Control parentControl, final boolean cacheViewerInput) {
 		if (children.isEmpty())
 		{
 			return;
@@ -724,8 +724,11 @@ labelProvider));
 			public void run() {
 				if (parentControl != null && children != null
 						&& !children.isEmpty()) {
-					parentControl.setData("objs", children);
 
+					if (cacheViewerInput)
+					{
+						parentControl.setData("objs", children);
+					}
 					Map map = null;
 					if (cachingMap.get(parentControl) != null
 							&& cachingMap.get(parentControl) instanceof Map) {
@@ -1065,7 +1068,7 @@ labelProvider));
 						}
 						if (obs != null && obs.size() > 0)
 						{
-							storeIntoMap(obs, parentControl);
+							storeIntoMap(obs, parentControl, true);
 							List<TreeNodeWrapper> nodes = corpusNavigatorController.loadNodes(obs, monitor, true);
 							rootNode.getChildren().addAll(nodes);
 						}
@@ -1079,6 +1082,7 @@ labelProvider));
 						sync.asyncExec(new Runnable() {
 							@Override
 							public void run() {
+
 								loadTree(treeViewer, rootNode, parentControl);
 								treeViewer.addFilter(getDeletedFilter());
 								// register context menu on the table

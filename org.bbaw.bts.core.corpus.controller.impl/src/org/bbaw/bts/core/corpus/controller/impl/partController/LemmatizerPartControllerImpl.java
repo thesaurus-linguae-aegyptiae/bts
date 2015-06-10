@@ -25,4 +25,9 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 		return lemmaService.processWordCharForLemmatizing(word);
 	}
 
+	@Override
+	public String processWordCharForLemmatizing(String wordChars) {
+		return lemmaService.processWordCharForLemmatizing(wordChars);
+	}
+
 }

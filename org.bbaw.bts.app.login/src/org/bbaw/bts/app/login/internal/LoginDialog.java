@@ -10,6 +10,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.core.commons.exceptions.BTSDBLocalLoginException;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.modelUtils.StringEncryption;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
@@ -19,6 +20,7 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
+import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
@@ -72,6 +74,8 @@ public class LoginDialog extends Dialog
 	private Button rememberMeButton;
 
 	private Logger logger;
+
+	private boolean restartRequired;
 
 	public LoginDialog(Shell parentShell, IEclipseContext context,
 			BTSUserController userController)
@@ -319,7 +323,20 @@ public class LoginDialog extends Dialog
 			{
 				return false;
 			}
-		} catch (Exception e) {
+		} catch (BTSDBLocalLoginException e) {
+			logger.info(e); 
+			MessageDialog.openInformation(shell, "Restart required", "First time user login on this computer "
+					+ "or credentials updated. Restart of application is required.");
+			try {
+				userController.makeUserLocalDBAdmin(userName, passWord);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				return false;
+			}
+			this.restartRequired = true;;
+			return true;
+		}catch (Exception e) {
 			logger.info(e); 
 			//FIXME abfangen wenn datenbank korrumpiert/nicht installiert/nicht gestartet wurde
 			return false;
@@ -388,6 +405,10 @@ public class LoginDialog extends Dialog
 					+ "\" is invalid, a \"missing image\" icon will be shown");
 			return ImageDescriptor.getMissingImageDescriptor();
 		}
+	}
+
+	public boolean isRestartRequired() {
+		return restartRequired;
 	}
 
 }

@@ -237,8 +237,10 @@ implements LemmaNavigatorController{
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
 			EReference referenceName, IProgressMonitor monitor) {
 		BTSQueryRequest query = new BTSQueryRequest();
-		query.setQueryBuilder(QueryBuilders.boolQuery().must(QueryBuilders.matchQuery("relations.objectId",
-				parent.get_id())).must(QueryBuilders.termsQuery("relations.type", getChildSubEntryRelationTypes())));
+		query.setQueryBuilder(QueryBuilders.boolQuery().must(
+				QueryBuilders.matchQuery("relations.objectId",	parent.get_id()))
+				.must(QueryBuilders.matchQuery("relations.type", "partOf"))
+				);
 		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		
 		query.setQueryId("relations.objectId-" + parent.get_id());

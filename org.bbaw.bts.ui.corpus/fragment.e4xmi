@@ -51,7 +51,7 @@
           <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR5zRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_fufR6DRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
           </children>
-          <children xsi:type="menu:HandledMenuItem" xmi:id="_QelxcNPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_QelxcNPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_QelxcdPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
           </children>
           <children xsi:type="menu:HandledMenuItem" xmi:id="_fufR6TRPEeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
@@ -163,7 +163,7 @@
           <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw3jQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_KEXw3zQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
           </children>
-          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw4DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_KEXw4DQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_KEXw4TQ5EeSUHvWJHIXOXA" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
           </children>
         </children>
@@ -237,7 +237,7 @@
           <children xsi:type="menu:HandledMenuItem" xmi:id="_GUiOoDNgEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_GUiOoTNgEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
           </children>
-          <children xsi:type="menu:HandledMenuItem" xmi:id="_O1HvoDNgEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+          <children xsi:type="menu:HandledMenuItem" xmi:id="_O1HvoDNgEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
             <parameters xmi:id="_O1HvoTNgEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
           </children>
         </children>
@@ -362,7 +362,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjsKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_hkFjsaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
                 </children>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjsqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_hkFjsqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_hkFjs6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_ZyovsNPKEeSjS5DrqmX77A" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
@@ -466,7 +466,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcwKY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="__IfcwaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
                 </children>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcwqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+                <children xsi:type="menu:HandledMenuItem" xmi:id="__IfcwqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="__Ifcw6Y0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_y7DukPPoEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
@@ -576,7 +576,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ93KY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_jNJ93aY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
                 </children>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ93qY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_jNJ93qY1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_jNJ936Y1EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_0Z65QPPoEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>
@@ -657,7 +657,7 @@
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKjPTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByReviewStatus" label="Filter by Review Status..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_Y9xKjfTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_reviewStatus"/>
                 </children>
-                <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKjvTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibilitys..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
+                <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKjvTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Visibility..." command="_-xZjsDK3EeSLt-NtQ3Vu3A">
                   <parameters xmi:id="_Y9xKj_TKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.parameter.0" name="objects_filter_by_param" value="filter_by_visibility"/>
                 </children>
                 <children xsi:type="menu:HandledMenuItem" xmi:id="_Y9xKkPTKEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.handledmenuitem.filterByVisibilitys" label="Filter by Types..." command="_pED0QPPoEeSQXI5ezOq8Qg"/>

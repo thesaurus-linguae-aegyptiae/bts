@@ -402,7 +402,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 						obs = lemmaNavigatorController
 								.getOrphanEntries(map,
 										treeViewer.getFilters(), monitor);
-						storeIntoMap(obs, parentControl);
+						storeIntoMap(obs, parentControl, true);
 						final List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
 						
 						// If you want to update the UI
@@ -450,7 +450,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, 
 											BTSCorpusConstants.VIEW_ALL_TERMINATED_BTSLISTENTRIES, monitor);
 						}
-						storeIntoMap(obs, parentControl);
+						storeIntoMap(obs, parentControl, true);
 						List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
 						rootNode.getChildren().addAll(nodes);
 						
@@ -564,7 +564,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 											parent,
 											BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
 
-							storeIntoMap(children, parentControl);
+							storeIntoMap(children, parentControl, false);
 							// If you want to update the UI
 							sync.asyncExec(new Runnable() {
 
@@ -598,7 +598,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 	}
 
 	protected void storeIntoMap(final List<BTSLemmaEntry> children,
-			final Control parentControl) {
+			final Control parentControl, final boolean cacheViewerInput) {
 		if (children.isEmpty())
 		{
 			return;
@@ -607,9 +607,12 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 			public void run() {
 				if (parentControl != null && children != null
 						&& !children.isEmpty()) {
-					Map map = null;
-					parentControl.setData("objs", children);
 
+					if (cacheViewerInput)
+					{
+						parentControl.setData("objs", children);
+					}
+					Map map = null;
 					if (cachingMap.get(parentControl) != null
 							&& cachingMap.get(parentControl) instanceof Map) {
 						map = (Map) cachingMap.get(parentControl);
@@ -878,7 +881,7 @@ public class LemmaNavigator implements ScatteredCachingPart, SearchViewer, Struc
 						}
 						if (obs != null && obs.size() > 0)
 						{
-							storeIntoMap(obs, parentControl);
+							storeIntoMap(obs, parentControl, true);
 							List<TreeNodeWrapper> nodes = lemmaNavigatorController.loadNodes(obs, monitor, true);
 							rootNode.getChildren().addAll(nodes);
 						}

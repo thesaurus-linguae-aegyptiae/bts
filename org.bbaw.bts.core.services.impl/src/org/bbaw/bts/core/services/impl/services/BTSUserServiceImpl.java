@@ -14,11 +14,12 @@ import javax.inject.Inject;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BTSUser;
-import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
+import org.bbaw.bts.core.commons.exceptions.BTSDBException;
+import org.bbaw.bts.core.commons.exceptions.BTSDBLocalLoginException;
 import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.dao.BTSUserDao;
 import org.bbaw.bts.core.services.BTSUserService;
@@ -33,7 +34,7 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.equinox.security.storage.ISecurePreferences;
 import org.eclipse.equinox.security.storage.SecurePreferencesFactory;
 import org.eclipse.equinox.security.storage.StorageException;
-import org.osgi.service.prefs.BackingStoreException;
+
 
 public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String> implements BTSUserService, BTSObjectSearchService
 {
@@ -384,11 +385,23 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		{
 			return true;
 		}
+		boolean authorized = false;
 		try {
-			return remoteGeneralPurposeDao.isAuthorizedUser(userName, passWord);
+			authorized = remoteGeneralPurposeDao.isAuthorizedUser(userName, passWord);
 		} catch (Exception e) {
 			return false;
 		}
+		if (authorized)
+		{
+			throw new BTSDBLocalLoginException("Failed to save updated remote _user-Object. Restart or local admin credentials required.");
+		}
+		
+		return authorized;
+	}
+
+	private void synchronizeDBUserObject(String userName, String passWord) {
+		dbManager.synchronizeDBUserObject(userName, passWord);
+		
 	}
 
 	@Override
@@ -400,6 +413,12 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 			e.printStackTrace();
 			return false;
 		}
+	}
+
+	@Override
+	public void makeUserLocalDBAdmin(String userName, String passWord) throws FileNotFoundException {
+		dbManager.addAuthenticationDBAdmin(userName, passWord);
+		
 	}
 
 }

@@ -84,6 +84,7 @@ import org.lightcouch.NoDocumentException;
 import org.lightcouch.Page;
 import org.lightcouch.Replicator;
 import org.lightcouch.ReplicatorDocument;
+import org.lightcouch.Response;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -106,6 +107,9 @@ public class CouchDBManager implements DBManager {
 	private static final int NOTIFICATION_INDEX_UPDATE_DELAY = 50;
 	private static final int DB_DOC_STEPPING = 100;
 	private static final int MAX_INDEX_UPDATE_DELAY = 5;
+	
+	private static final String _USERS = "_users";
+	private static final String COUCHDB_USERS_PREFIX = "org.couchdb.user:";
 
 	@Inject
 	@Preference(value = "local_elasticsearch_url", nodePath = "org.bbaw.bts.app")
@@ -191,7 +195,7 @@ public class CouchDBManager implements DBManager {
 				{
 					// user cannot syncs _users
 					// so, update at least _user of authenticated user
-					syncCurrentUser(username, password);
+					synchronizeDBUserObject(username, password);
 				}
 				foundUsers = true;
 			}
@@ -218,6 +222,12 @@ public class CouchDBManager implements DBManager {
 				} else {
 					success = false;
 				}
+				if (!remoteDBManager.checkUserIsDBAdmin(username, password))
+				{
+					// user cannot syncs _users
+					// so, update at least _user of authenticated user
+					synchronizeDBUserObject(username, password);
+				}
 			}
 		}
 		if (!notificationCollFound) {
@@ -237,65 +247,7 @@ public class CouchDBManager implements DBManager {
 		return success;
 	}
 
-	private void syncCurrentUser(String username2, String password2) {
-		//FIXME check update _users
-		CouchDbClient localdbClient = connectionProvider.getDBClient(CouchDbClient.class, "_users");
-		
-		InputStream localis = null;
-		JsonObject localJso = null;
-		try {
-			localis = localdbClient.find("org.couchdb.user:" + username2);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (localis != null)
-		{
-			localJso = EmfModelHelper.load(localis, JsonObject.class);
-		}
-		
-		
-		CouchDbClient remotedbClient = remoteDBManager.getDBClient(CouchDbClient.class, "_users");
-		
-		InputStream remoteis = null;
-		JsonObject remoteJso = null;
-		try {
-			remoteis = remotedbClient.find("org.couchdb.user:" + username2);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		if (remoteis != null)
-		{
-			remoteJso = EmfModelHelper.load(remoteis, JsonObject.class);
-		}
-		
-		// check if local is uptodate.
-		boolean syncRequired = false;
-		if (localJso == null)
-		{
-			syncRequired = true;
-		}
-		else {
-			try {
-				String localRev = localJso.get("_rev").getAsString().split("-")[0];
-				String remoteRev = remoteJso.get("_rev").getAsString().split("-")[0];
-				int localIntRev = new Integer(localRev);
-				int remoteIntRev = new Integer(remoteRev);
-				if (localIntRev <= remoteIntRev) syncRequired = true;
-			} catch (Exception e) {
-				// if anything goes wrong, sync!
-				syncRequired = true;
-			}
-		}
-		if (syncRequired)
-		{
-			System.out.println("forebly sync user from remote " + remoteJso.getAsString());
-			localdbClient.save(remoteJso);
-		}
-				
-		
-	}
+	
 	
 	private void checkAndSetSecurityContextOnReplicator() {
 		CouchDbClient dbClient = connectionProvider.getDBClient(
@@ -638,10 +590,15 @@ public class CouchDBManager implements DBManager {
 			if (isValidReplicationToRemote(doc, dbConnection, collectionName)) {
 				return true;
 			} else {
-				connectionProvider
-						.getDBClient(CouchDbClient.class, collectionName)
-						.replicator().replicatorDocId(doc.getId())
-						.replicatorDocRev(doc.getRevision()).remove();
+				try {
+					connectionProvider
+							.getDBClient(CouchDbClient.class, collectionName)
+							.replicator().replicatorDocId(doc.getId())
+							.replicatorDocRev(doc.getRevision()).remove();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		String target = processServerAuthURL(dbConnection.getMasterServer(),
@@ -1737,7 +1694,12 @@ public class CouchDBManager implements DBManager {
 	@Override
 	public void shutdown() {
 
-		prepareShutdown();
+		try {
+			prepareShutdown();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		try {
 			logger.info("Shutdown DB, process: " + process);
 			process = (Process) context.get(DB_RUNTIME_PROCESS);
@@ -1751,21 +1713,26 @@ public class CouchDBManager implements DBManager {
 				// presuming that when process is not null the couchdb process
 				// was startedd by bts
 				// and shall then be killed by bts
-				if (OSValidator.isWindows()) {
-					try {
-						Runtime.getRuntime().exec("taskkill /F /IM werl.exe");
-					} catch (IOException e) {
-						logger.error(e);
-					}
-					try {
-						Runtime.getRuntime().exec("taskkill /F /IM erl.exe");
-					} catch (IOException e) {
-						logger.error(e);
-					}
-				} else if (OSValidator.isMac()) {
-					// FIXME
-				} else if (OSValidator.isUnix()) {
+				
+			}
+		} catch (Exception e) {
+			logger.info("Shutdown DB failed: " + process, e);
+		}
+		try {
+			if (OSValidator.isWindows()) {
+				try {
+					Runtime.getRuntime().exec("taskkill /F /IM werl.exe");
+				} catch (IOException e) {
+					logger.error(e);
 				}
+				try {
+					Runtime.getRuntime().exec("taskkill /F /IM erl.exe");
+				} catch (IOException e) {
+					logger.error(e);
+				}
+			} else if (OSValidator.isMac()) {
+				// FIXME
+			} else if (OSValidator.isUnix()) {
 			}
 		} catch (Exception e) {
 			logger.info("Shutdown DB failed: " + process, e);
@@ -2237,7 +2204,7 @@ public class CouchDBManager implements DBManager {
 			for (String line; scanner.hasNextLine()
 					&& (line = scanner.nextLine()) != null;) {
 				// set local db port
-				if (line.trim().startsWith(userName)) {
+				if (line.trim().startsWith(userName+ "=") || line.trim().startsWith(userName+ " =")) {
 					// set local admin
 					stringBufferOfData.append(userName + "=" + password)
 							.append("\r\n");
@@ -2259,6 +2226,133 @@ public class CouchDBManager implements DBManager {
 			}
 		}
 		return true;
+	}
+
+	@Override
+	public void synchronizeDBUserObject(String userName, String passWord) {
+		//FIXME check update _users
+				CouchDbClient localdbClient = connectionProvider.getDBClient(CouchDbClient.class, _USERS);
+				
+				InputStream localis = null;
+				JsonObject localJso = null;
+				try {
+					localis = localdbClient.find(COUCHDB_USERS_PREFIX + userName);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (localis != null)
+				{
+					localJso = EmfModelHelper.load(localis, JsonObject.class);
+				}
+				
+				
+				CouchDbClient remotedbClient = null;
+				try {
+					remotedbClient = remoteDBManager.getDBClient(CouchDbClient.class, "admin");
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				String remoteString = null;
+				JsonObject remoteJso = null;
+				try {
+					remoteString = remotedbClient.getDBUserObject(userName, passWord);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if (remoteString != null)
+				{
+					try {
+						remoteJso = remotedbClient.getGson().toJsonTree(remoteString).getAsJsonObject();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				
+				// check if local is uptodate.
+				boolean syncRequired = false;
+				if (localJso == null)
+				{
+					syncRequired = true;
+				}
+				else if (remoteJso != null){
+					try {
+						String localRev = localJso.get("_rev").getAsString().split("-")[0];
+						String remoteRev = remoteJso.get("_rev").getAsString().split("-")[0];
+						int localIntRev = new Integer(localRev);
+						int remoteIntRev = new Integer(remoteRev);
+						if (localIntRev <= remoteIntRev) syncRequired = true;
+					} catch (Exception e) {
+						// if anything goes wrong, sync!
+						syncRequired = true;
+					}
+				}
+				else
+				{
+					// if anything goes wrong, sync!
+					syncRequired = true;
+				}
+				
+				if (syncRequired)
+				{
+					System.out.println("forcebly sync user from remote " + remoteString);
+					try {
+						localdbClient.save(remoteString);
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+		
+	}
+
+
+
+	@Override
+	public void addAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException {
+		String localIni = getOSCouchDBLocalIniFile(BTSConstants
+				.getDBInstallationDir(BTSConstants.getInstallationDir()));
+		File localIniFile = new File(localIni);
+		if (localIniFile.exists()) {
+			Scanner scanner = new Scanner(localIniFile);
+			StringBuffer stringBufferOfData = new StringBuffer();
+			boolean found = false;
+			for (String line; scanner.hasNextLine()
+					&& (line = scanner.nextLine()) != null;) {
+				// set local db port
+				if (line.trim().startsWith(userName+ "=") || line.trim().startsWith(userName+ " =")) {
+					// set local admin
+					stringBufferOfData.append(userName + "=" + password)
+							.append("\r\n");
+					stringBufferOfData.append("\r\n");
+					found = true;
+				} else {
+					stringBufferOfData.append(line).append("\r\n");
+				}
+			}
+			if (!found)
+			{
+				stringBufferOfData.append(userName + "=" + password)
+				.append("\r\n");
+				stringBufferOfData.append("\r\n");
+			}
+			scanner.close();// this is used to release the scanner from file
+			try {
+				BufferedWriter bufwriter = new BufferedWriter(new FileWriter(
+						localIni));
+				bufwriter.write(stringBufferOfData.toString());
+				bufwriter.flush();
+				bufwriter.close();// closes the file
+			} catch (Exception e) {// if an exception occurs
+				logger.info("Error occured while attempting to write to file: "
+						+ e.getMessage());
+			}
+		}
+		
 	}
 
 }

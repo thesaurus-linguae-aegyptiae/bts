@@ -11,6 +11,7 @@ import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.ui.commons.compare.CompareViewer;
+import org.bbaw.bts.ui.commons.viewerSorter.AdministrativDataObjectRevisionTimeStampViewerSorter;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
@@ -147,6 +148,7 @@ public class ComparePart extends AbstractComparePart {
 			}
 		};
 		rightTableViewer.addSelectionChangedListener(rightSelectionListener);
+		rightTableViewer.setSorter(new AdministrativDataObjectRevisionTimeStampViewerSorter());
 
 		rightContextMenu = new Menu(rightTableViewer.getTable());
 		rightTableViewer.getTable().setMenu(rightContextMenu);

@@ -1239,10 +1239,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 
 	public boolean isAuthorizedUser(String userName, String passWord)
 	{
-		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
-				passWord);
+		
 		try
 		{
+			CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
+					passWord);
 			Object o = client.find("test");
 			if (o != null)
 			{
@@ -1256,6 +1257,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			
 			// if authentication has changed and db connection pool is still based upon old authentication
 			// purge pool
+			CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
+					passWord);
 			connectionProvider.purgeDBConnectionPool();
 			client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
 					passWord);
@@ -1270,6 +1273,9 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 			{
 				return true; // authentication
 			}
+		}catch (Exception e)
+		{
+			return false; // no authentication
 		}
 
 		return false;

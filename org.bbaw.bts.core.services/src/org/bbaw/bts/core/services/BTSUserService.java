@@ -29,6 +29,7 @@
  */
 package org.bbaw.bts.core.services;
 
+import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.List;
 
@@ -101,6 +102,8 @@ public interface BTSUserService extends GenericObjectService<BTSUser, String>
 	boolean isValidAuthentication(String userName, String passWord);
 
 	boolean checkAndChangeDBAdminPassword(String userName, String newPassword);
+
+	void makeUserLocalDBAdmin(String userName, String passWord) throws FileNotFoundException;
 
 
 }

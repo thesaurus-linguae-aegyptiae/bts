@@ -114,4 +114,8 @@ public interface BTSUserController {
 
 	boolean checkAndChangeDBAdminPassword(String userName, String newPassword);
 
+	void makeUserLocalDBAdmin(String userName, String passWord) throws Exception;
+
+	void stopDBAndRestartApplication();
+
 }

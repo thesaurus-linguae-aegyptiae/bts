@@ -182,11 +182,11 @@ Display
 		{
 			styledLabel.append(" (" + translation + ")", StyledString.Style.QUALIFIER_STYLER);
 		}
-//		String typeSubtype = getTypeSubtypeString(object);
-//		if (typeSubtype != null && !"".equals(typeSubtype))
-//		{
-//			styledLabel.append("{" + typeSubtype + "}", StyledString.Style.QUALIFIER_STYLER);
-//		}
+		String typeSubtype = getTypeSubtypeString(object);
+		if (typeSubtype != null && !"".equals(typeSubtype))
+		{
+			styledLabel.append("{" + typeSubtype + "}", StyledString.Style.QUALIFIER_STYLER);
+		}
 		styledLabel.append(" [" + ((BTSCorpusObject)object).getProject() +  "]", GREY);
 
 		return styledLabel;

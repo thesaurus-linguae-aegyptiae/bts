@@ -103,8 +103,8 @@ public class BTSCorpusConstants {
 
 	public static final String LEMMATIZER_TRIPLE_EQUALS = new String(new char[]{'\u2261'});
 
-	public static final String[] LEMMATIZER_ESCAPED_BRACKETS_ARRAY = new String[]{"\\(", "\\)", "\\{", "\\}", "\\[", "\\]", "<", ">",
-		new String(new char[]{'\u2261'}), "\\?",
+	public static final String[] LEMMATIZER_ESCAPED_BRACKETS_ARRAY = new String[]{"\\(", "\\)", "\\{", "\\}", "\\[", "\\]", "〈", "〉",
+		"⸮", "\\?",
 		"⸢", "⸣",
 		"𓉘", "𓊂",
 		"𓊆", "𓊇",

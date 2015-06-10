@@ -390,6 +390,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				lineIndex--;
 				currentLineFigure = lineMap.get(lineIndex);
 				newIndex = currentLineFigure.getChildren().size() - 1;
+			} else if (lineIndex == 0)
+			{
+				currentLineFigure = lineMap.get(lineIndex);
+				newIndex = currentLineFigure.getChildren().size() - 1;
 			}
 		}
 		figure = findElementFigure(newIndex);
@@ -564,8 +568,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private void loadText() {
 		purgeAll();
-		Double d = (canvas.getViewport().getBounds().width ) * 1.25;
-		max_line_length = d.intValue();
+		max_line_length = canvas.getViewport().getBounds().width;
 		continuingRelatingObjects = new Vector<BTSObject>();
 		// canvas = new FigureCanvas(this);
 		// canvas.setBackground(COLOR_CANVAS_BACKGROUND);
@@ -1502,6 +1505,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		} else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_ALL_END)) {
 			int lshift = container.getChildren().size() - lineIndex - 1;
 			shiftLineSelection(lshift);
+			currentIndex = currentLineFigure.getChildren().indexOf(
+					selectedElement);
 //			int currentIndex = currentLineFigure.getChildren().indexOf(
 //					selectedElement);
 			int shift = currentLineFigure.getChildren().size() - currentIndex

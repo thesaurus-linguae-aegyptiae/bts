@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UIMain
 Bundle-SymbolicName: org.bbaw.bts.ui.main;singleton:=true
-Bundle-Version: 0.0.7.qualifier
+Bundle-Version: 0.0.8.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.main.dialogs,

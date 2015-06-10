@@ -3,14 +3,10 @@ package org.bbaw.bts.ui.egy.parts.lemmatizer;
 import java.text.ParseException;
 import java.text.RuleBasedCollator;
 
-import javax.inject.Inject;
-
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.AlphanumComparator;
-import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerSorter;
@@ -18,12 +14,8 @@ import org.eclipse.jface.viewers.ViewerSorter;
 public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 	private RuleBasedCollator egyCollator;
 	private AlphanumComparator alphaNumComp;
-	private BTSWord word;
+	private String wordChars;
 	
-	@Inject
-	private LemmatizerPartController lemmaController;
-	private String wChar;
-
 	public BTSLemmatizerEgyObjectByNameViewerSorter(){
 		try {
 			egyCollator =  new RuleBasedCollator(BTSEGYUIConstants.EGY_COLLATOR_RULE);
@@ -76,17 +68,17 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 		
 		if (s1 != null) {
 			if (s2 != null) {
-				if (word != null)
+				if (wordChars != null)
 				{
-					if (s1.toLowerCase().startsWith(wChar.toLowerCase()) && s2.toLowerCase().startsWith(wChar.toLowerCase()))
+					if (s1.toLowerCase().startsWith(wordChars.toLowerCase()) && s2.toLowerCase().startsWith(wordChars.toLowerCase()))
 					{
 						return alphaNumComp.compare(s1, s2);
 					}
-					else if (s1.toLowerCase().startsWith(wChar.toLowerCase()))
+					else if (s1.toLowerCase().startsWith(wordChars.toLowerCase()))
 					{
 						return -1;
 					}
-					else if (s2.toLowerCase().startsWith(wChar.toLowerCase()))
+					else if (s2.toLowerCase().startsWith(wordChars.toLowerCase()))
 					{
 						return 1;
 					}
@@ -99,9 +91,8 @@ public class BTSLemmatizerEgyObjectByNameViewerSorter extends ViewerSorter {
 	}
 
 
-	public void setLemmatizerWord(BTSWord word) {
-		this.word = word;
-		this.wChar = lemmaController.processWordCharForLemmatizing(word);
+	public void setLemmatizerWordChar(String wordChars) {
+		this.wordChars = wordChars;
 		
 	}
 }

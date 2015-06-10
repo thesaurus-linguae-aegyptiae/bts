@@ -152,6 +152,8 @@ public class ApplicationStartupControllerImpl implements
 
 	private boolean listen2Backend = true; // XXX dev!!!!!!!!!!!!!
 
+	protected Login login;
+
 	@Override
 	public void applicationStartup(final IEclipseContext context,
 			final BTSProjectService projectService,
@@ -222,6 +224,11 @@ public class ApplicationStartupControllerImpl implements
 						IProvisioningAgent agent = context
 								.get(IProvisioningAgent.class);
 						IWorkbench workbench = context.get(IWorkbench.class);
+						if (login != null && login.isRestartRequired())
+						{
+							dbManager.shutdown();
+							workbench.restart();
+						}
 						logger.info("IProvisioningAgent loaded: "
 								+ (agent != null) + ", IWorkbench loaded: "
 								+ (workbench != null));
@@ -361,7 +368,7 @@ public class ApplicationStartupControllerImpl implements
 				sync.syncExec(new Runnable() {
 					@Override
 					public void run() {
-						Login login = ContextInjectionFactory.make(Login.class,
+						login = ContextInjectionFactory.make(Login.class,
 								context);
 						login.login(context, userController);
 

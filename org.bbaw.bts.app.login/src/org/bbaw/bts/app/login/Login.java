@@ -39,6 +39,8 @@ public class Login
 	@Inject
 	private BTSUserController userController;
 
+	private boolean restartRequired;
+
 	public void login(IEclipseContext context, BTSUserController userController)
 	{
 		if (context == null)
@@ -68,11 +70,15 @@ public class Login
 		// context.set(E4Workbench.CSS_URI_ARG, cssURI);
 		//
 		// PartRenderingEngine.initializeStyling(shell.getDisplay(), context);
-
-		if (dialog.open() != Window.OK)
+		int returnCode =dialog.open();
+		if (returnCode != Window.OK)
 		{
 			// we don't have a workbench yet...
 			System.exit(0);
+		}
+		if (dialog.isRestartRequired())
+		{
+			this.restartRequired = true;
 		}
 	}
 
@@ -84,5 +90,10 @@ public class Login
 		int x = monitorRect.x + (monitorRect.width - shellRect.width) / 2;
 		int y = monitorRect.y + (monitorRect.height - shellRect.height) / 2;
 		shell.setLocation(x, y);
+	}
+	
+	public boolean isRestartRequired()
+	{
+		return restartRequired;
 	}
 }

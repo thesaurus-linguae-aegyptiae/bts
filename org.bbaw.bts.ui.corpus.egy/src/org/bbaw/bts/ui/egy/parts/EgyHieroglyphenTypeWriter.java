@@ -53,6 +53,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
+import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
@@ -72,6 +73,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
+import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.events.KeyEvent;
@@ -84,6 +86,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Spinner;
@@ -119,6 +122,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	@Inject
 	private PermissionsAndExpressionsEvaluationController evaluationController;
 	
+	@Inject
+	private BTSResourceProvider resourceProvider;
 //	@Inject
 //	@Optional
 //	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_TRANSCRIBE)
@@ -177,6 +182,8 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	private LemmaEditorController lemmaEditorController;
 	private boolean isDirty;
 	private BTSObject lastEvent;
+	private ControlDecoration errorDeco;
+	protected boolean validMdC;
 
 	@Inject
 	public EgyHieroglyphenTypeWriter(EPartService partService)
@@ -210,10 +217,12 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 		Label lblNewLabel = new Label(composite, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
+
 		lblNewLabel.setText("Type here");
 
 		hierotw_text = new Text(composite, SWT.BORDER);
 		hierotw_text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		((GridData)hierotw_text.getLayoutData()).horizontalIndent = 12;
 		hierotw_text.addModifyListener(new ModifyListener()
 		{
 
@@ -225,6 +234,14 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 				if (!loading)
 				{
+					validMdC = validateHieroInput(hierotw_text.getText());
+					showInvalidMessage(validMdC);
+
+					if (!validMdC)
+					{
+						return;
+					}
+					
 					String[] arr = getInteralProSuffix(hierotw_text.getText());
 					String internalSuffix = arr[1];
 					
@@ -259,6 +276,14 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 			}
 		});
+		errorDeco = new ControlDecoration(hierotw_text, SWT.TOP | SWT.LEFT);
+
+		// re-use an existing image
+		// set description and image
+		errorDeco.setDescriptionText("This Manuel de Codage string is invalid.");
+		errorDeco.setImage(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_ERROR_TSK));
+		errorDeco.hide();
+		
 		hierotw_text.addKeyListener(new KeyListener() {
 
 			@Override
@@ -387,6 +412,36 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		}
 		setUserMayTranscribeInteral(userMayTranscribe);
 
+	}
+
+	protected void showInvalidMessage(boolean valid) {
+		if (valid) errorDeco.hide();
+		else errorDeco.show();
+		
+	}
+
+	protected boolean validateHieroInput(String text) {
+		System.out.println(text);
+		if (text.contains("--")) return false;
+		if (text.contains("-:")) return false;
+		if (text.contains(":-")) return false;
+		if (text.contains("-*")) return false;
+		if (text.contains("*-")) return false;
+		if (text.contains(":*")) return false;
+		if (text.contains("*:")) return false;
+		try {
+			if (text.endsWith(":") || text.endsWith("*")) text = text.substring(0, text.length() -2); // cut away : and *
+		} catch (Exception e) {
+			return false;
+		}
+		try {
+			String normalizedMdC = mdcNormalizer.normalize(text);
+		} catch (MDCSyntaxError ee) {
+			ee.printStackTrace();
+			return false;
+		}
+		
+		return true;
 	}
 
 	protected void setDirty(boolean dirty) {
@@ -742,6 +797,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 		editingDomain = null;
 		ignoreGlyph_Button.setSelection(false);
 		loaded = false;
+		hierotw_text.setText("");
 	}
 
 	private void setSelectionInteral(final Object selection)
@@ -940,7 +996,7 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 
 	private void saveMdCstring(BTSWord word)
 	{
-		if (isDirty && userMayTranscribe && word != null) {
+		if (isDirty && userMayTranscribe && word != null && validMdC) {
 			String normalizedMdC = hierotw_text.getText();
 			try {
 				normalizedMdC = mdcNormalizer.normalize(hierotw_text.getText());
@@ -1046,17 +1102,18 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 	// });
 	// }
 
-	private void loadMdCString(final String mdC)
-	{
-		
-				String normalizedMdC = mdC;
-				MDCNormalizer d = new MDCNormalizer();
-				try {
-					normalizedMdC = d.normalize(mdC);
-				} catch (MDCSyntaxError e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	private void loadMdCString(final String mdC) {
+
+		String normalizedMdC = mdC;
+		MDCNormalizer d = new MDCNormalizer();
+		try {
+			normalizedMdC = d.normalize(mdC);
+		} catch (MDCSyntaxError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (normalizedMdC != null) {
+			try {
 				hierotw_text.setText(normalizedMdC);
 				hierotw_text.setSelection(hierotw_text.getText().length());
 				jseshEditor.setMDCText(normalizedMdC);
@@ -1065,7 +1122,11 @@ public class EgyHieroglyphenTypeWriter implements ScatteredCachingPart,
 				for (String s : codes) {
 					System.out.println(s);
 				}
-			
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	}
 

@@ -584,4 +584,33 @@ public final class CouchDbClient extends CouchDbClientBase {
 		}
 		return conflicts;
 	}
+	// cp added
+	public String getDBUserObject(String username, String password) {
+		HttpResponse response = null;
+		String responseString = null;
+
+		try {
+			URI uri = getDBUri();
+			URI furi = URI.create(uri.getScheme() + "://" + username + ":" + password + "@" + uri.getHost() + ":" +uri.getPort() );
+			HttpGet get = new HttpGet(builder(furi).path("/_users/org.couchdb.user:" + username).build());
+//			HttpEntity body = new ByteArrayEntity(string.getBytes("UTF-8"));
+//
+//			post.setEntity(body);
+			get.setHeader("Content-Type", "application/json");
+
+			response = executeRequest(get);
+			HttpEntity entity = response.getEntity();
+			responseString = EntityUtils
+					.toString(response.getEntity(), "UTF-8");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(response);
+		}
+		return responseString;
+	}
 }

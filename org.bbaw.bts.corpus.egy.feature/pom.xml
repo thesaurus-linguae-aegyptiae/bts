@@ -9,6 +9,6 @@
   </parent>
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.bbaw.bts.corpus.egy.feature</artifactId>
-  <version>0.0.7-SNAPSHOT</version>
+  <version>0.0.8-SNAPSHOT</version>
   <packaging>eclipse-feature</packaging>
 </project>

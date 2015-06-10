@@ -18,5 +18,7 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 
 	String processWordCharForLemmatizing(BTSWord word);
 
+	String processWordCharForLemmatizing(String wordChars);
+
 	
 }

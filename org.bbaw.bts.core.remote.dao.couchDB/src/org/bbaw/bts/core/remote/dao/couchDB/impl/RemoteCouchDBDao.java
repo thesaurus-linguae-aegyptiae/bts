@@ -525,10 +525,11 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 
 	public boolean isAuthorizedUser(String userName, String passWord)
 	{
-		CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
-				passWord);
+		
 		try
 		{
+			CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
+					passWord);
 			Object o = client.find("test");
 			if (o != null)
 			{
@@ -543,6 +544,8 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 			// if authentication has changed and db connection pool is still based upon old authentication
 			// purge pool
 			connectionProvider.purgeDBConnectionPool();
+			CouchDbClient client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
+					passWord);
 			client = connectionProvider.getDBClient(CouchDbClient.class, "admin", userName,
 					passWord);
 			try
@@ -556,6 +559,10 @@ public abstract class RemoteCouchDBDao<E extends BTSDBBaseObject, K extends Seri
 			{
 				return true; // authentication
 			}
+		}catch (Exception e)
+		{
+			e.printStackTrace();
+			return false; // no authentication
 		}
 
 		return false;

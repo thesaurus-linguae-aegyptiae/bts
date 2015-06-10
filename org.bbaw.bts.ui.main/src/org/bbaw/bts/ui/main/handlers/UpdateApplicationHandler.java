@@ -5,6 +5,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Set;
 
+import javax.crypto.spec.PSource;
+
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.e4.p2.P2Util;
@@ -113,14 +115,17 @@ public class UpdateApplicationHandler {
 		          sync.syncExec(new Runnable() {
 		            @Override
 		            public void run() {
-		              String updates = "";
 		              Update[] possibleUpdates = operation
 		                  .getPossibleUpdates();
-		              for (Update update : possibleUpdates) {
-		                updates += update + "\n";
+		              String message = "No Updates available.";
+		              if (possibleUpdates.length > 0)
+		              {
+		            	  message = "There is an update available. Would you like to update from "
+			                  		+ "version" + possibleUpdates[0]+" to "
+			                  		+ "version" + possibleUpdates[possibleUpdates.length -1]+"? You will have to restart the BTS after successful update.";
 		              }
 		              doInstall = MessageDialog.openQuestion(parent,
-		                  "Really install updates?", updates);
+		                  "Really install updates?", message);
 		            }
 		          });
 		        }
@@ -150,7 +155,7 @@ public class UpdateApplicationHandler {
 		                        boolean restart = MessageDialog
 		                            .openQuestion(parent,
 		                                "Updates installed, restart?",
-		                                "Updates have been installed successfully, do you want to restart?");
+		                                "Updates have been installed successfully, do you want to restart now (or later)?");
 		                        if (restart) {
 		                          workbench.restart();
 		                        }

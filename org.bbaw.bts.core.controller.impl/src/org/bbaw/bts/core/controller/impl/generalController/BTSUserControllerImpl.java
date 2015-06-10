@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Vector;
 
@@ -15,10 +16,15 @@ import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.services.BTSProjectService;
 import org.bbaw.bts.core.services.BTSUserGroupService;
 import org.bbaw.bts.core.services.BTSUserService;
+import org.bbaw.bts.db.DBManager;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
+import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.workbench.IWorkbench;
 
 public class BTSUserControllerImpl implements BTSUserController {
 
@@ -32,6 +38,20 @@ public class BTSUserControllerImpl implements BTSUserController {
 
 	@Inject
 	private BTSProjectService projectService;
+	
+	@Inject
+	@Optional
+	private IWorkbench workbench;
+	
+	@Inject
+	private DBManager dbManager;
+	
+	@Inject
+	private UISynchronize sync;
+	
+	@Inject
+	private IEclipseContext context;
+
 
 	@Inject
 	public BTSUserControllerImpl(IEclipseContext ctx) {
@@ -151,6 +171,44 @@ public class BTSUserControllerImpl implements BTSUserController {
 	public boolean checkAndChangeDBAdminPassword(String userName,
 			String newPassword) {
 		return userService.checkAndChangeDBAdminPassword(userName, newPassword);
+	}
+
+	@Override
+	public void makeUserLocalDBAdmin(String userName, String passWord) throws Exception {
+		userService.makeUserLocalDBAdmin(userName, passWord);
+		
+	}
+
+	@Override
+	public void stopDBAndRestartApplication() {
+		try {
+			if (dbManager.optimizationRequired())
+			{
+				// ask user if optimize
+				dbManager.optimize();
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    try {
+			dbManager.shutdown();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    sync.asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				if (workbench == null)
+				{
+					workbench = context.get(IWorkbench.class);
+				}
+				 workbench.restart();
+			}
+		});
+		
 	}
 
 }

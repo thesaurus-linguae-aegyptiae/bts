@@ -200,5 +200,9 @@ public interface DBManager
 
 	boolean changeAuthenticationDBAdmin(String userName, String password) throws FileNotFoundException;
 
+	void synchronizeDBUserObject(String userName, String passWord);
+
+	void addAuthenticationDBAdmin(String userName, String passWord) throws FileNotFoundException;
+
 
 }

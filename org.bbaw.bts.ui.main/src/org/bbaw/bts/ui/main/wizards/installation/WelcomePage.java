@@ -154,4 +154,5 @@ public class WelcomePage extends WizardPage
 		this.connectToServer = connectToServer;
 	}
 
+	
 }

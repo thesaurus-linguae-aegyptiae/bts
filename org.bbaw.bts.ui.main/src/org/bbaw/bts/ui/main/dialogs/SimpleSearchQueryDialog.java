@@ -93,12 +93,15 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 				queryRequest.setQueryBuilder(QueryBuilders.matchQuery("name", escapeString(text.getText().trim())));
 				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 				queryRequest.setQueryId("timestamp-" + now.toString());
+				queryRequest.setAutocompletePrefix(text.getText().trim());
+
 			}
 			else
 			{
 				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(escapeString(text.getText().trim().toLowerCase())));
 				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 				queryRequest.setQueryId("timestamp-" + now.toString());
+				queryRequest.setAutocompletePrefix(text.getText().trim());
 			}
 		}
 		else

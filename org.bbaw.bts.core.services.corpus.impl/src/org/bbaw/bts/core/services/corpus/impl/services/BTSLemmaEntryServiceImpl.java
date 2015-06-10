@@ -253,6 +253,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 
 	private String processWordChars(BTSWord word) {
 		String chars = word.getWChar();
+		return processWordCharForLemmatizing(chars);
+	}
+	
+		
+	public String processWordCharForLemmatizing(String chars) {
+		// TODO Auto-generated method stub
 		
 		// cut left side
 		Matcher m = doublePointPattern.matcher(chars);
