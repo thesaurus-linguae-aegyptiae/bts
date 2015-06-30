@@ -104,6 +104,15 @@ public interface EgyDslFactory extends EFactory
   VersMarker createVersMarker();
 
   /**
+   * Returns a new object of class '<em>Emendation Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Emendation Vers Marker</em>'.
+   * @generated
+   */
+  EmendationVersMarker createEmendationVersMarker();
+
+  /**
    * Returns a new object of class '<em>Disputable Vers Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -111,6 +120,24 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   DisputableVersMarker createDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Disputable Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Disputable Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  DisputableDestroyedVersMarker createDisputableDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Disputable Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Disputable Deleted Vers Marker</em>'.
+   * @generated
+   */
+  DisputableDeletedVersMarker createDisputableDeletedVersMarker();
 
   /**
    * Returns a new object of class '<em>Deleted Vers Marker</em>'.
@@ -122,6 +149,24 @@ public interface EgyDslFactory extends EFactory
   DeletedVersMarker createDeletedVersMarker();
 
   /**
+   * Returns a new object of class '<em>Deleted Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Deleted Disputable Vers Marker</em>'.
+   * @generated
+   */
+  DeletedDisputableVersMarker createDeletedDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Deleted Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Deleted Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  DeletedDestroyedVersMarker createDeletedDestroyedVersMarker();
+
+  /**
    * Returns a new object of class '<em>Destroyed Vers Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -131,6 +176,60 @@ public interface EgyDslFactory extends EFactory
   DestroyedVersMarker createDestroyedVersMarker();
 
   /**
+   * Returns a new object of class '<em>Destroyed Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Vers Frontier Marker</em>'.
+   * @generated
+   */
+  DestroyedVersFrontierMarker createDestroyedVersFrontierMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
+   * @generated
+   */
+  DestroyedDisputableVersFrontierMarker createDestroyedDisputableVersFrontierMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Deleted Vers Marker</em>'.
+   * @generated
+   */
+  DestroyedDeletedVersMarker createDestroyedDeletedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Partial Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Partial Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  PartialDestroyedVersMarker createPartialDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Partial Destroyed Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Partial Destroyed Disputable Vers Marker</em>'.
+   * @generated
+   */
+  PartialDestroyedDisputableVersMarker createPartialDestroyedDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Partial Destroyed Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Partial Destroyed Deleted Vers Marker</em>'.
+   * @generated
+   */
+  PartialDestroyedDeletedVersMarker createPartialDestroyedDeletedVersMarker();
+
+  /**
    * Returns a new object of class '<em>Missing Vers Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -138,6 +237,15 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   MissingVersMarker createMissingVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Missing Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Missing Disputable Vers Marker</em>'.
+   * @generated
+   */
+  MissingDisputableVersMarker createMissingDisputableVersMarker();
 
   /**
    * Returns a new object of class '<em>Restoration Over Rasur Marker</em>'.
@@ -302,6 +410,15 @@ public interface EgyDslFactory extends EFactory
   Expanded createExpanded();
 
   /**
+   * Returns a new object of class '<em>Ancient Expanded</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ancient Expanded</em>'.
+   * @generated
+   */
+  AncientExpanded createAncientExpanded();
+
+  /**
    * Returns a new object of class '<em>No Expanded</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -417,15 +534,6 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   NoRasur createNoRasur();
-
-  /**
-   * Returns a new object of class '<em>Ancient Expanded</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ancient Expanded</em>'.
-   * @generated
-   */
-  AncientExpanded createAncientExpanded();
 
   /**
    * Returns a new object of class '<em>No Ancient Expanded</em>'.

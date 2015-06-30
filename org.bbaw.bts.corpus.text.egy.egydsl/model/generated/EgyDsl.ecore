@@ -24,10 +24,24 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SentenceItemNoAmbivalence"/>
   <eClassifiers xsi:type="ecore:EClass" name="VersMarker" eSuperTypes="#//AbstractMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmendationVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="DisputableVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DisputableDestroyedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DisputableDeletedVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="DeletedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletedDisputableVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeletedDestroyedVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="DestroyedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DestroyedVersFrontierMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DestroyedDisputableVersFrontierMarker"
+      eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DestroyedDeletedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialDestroyedVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialDestroyedDisputableVersMarker"
+      eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PartialDestroyedDeletedVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="MissingVersMarker" eSuperTypes="#//VersMarker"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MissingDisputableVersMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="RestorationOverRasurMarker" eSuperTypes="#//VersMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="AncientExpandedMarker" eSuperTypes="#//VersMarker #//RasurMarker"/>
   <eClassifiers xsi:type="ecore:EClass" name="RasurMarker" eSuperTypes="#//VersMarker"/>
@@ -67,8 +81,12 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject" containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
+        eType="#//NoAncientExpanded" containment="true"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoExpanded"/>
-  <eClassifiers xsi:type="ecore:EClass" name="Emendation" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoLacuna #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur">
+  <eClassifiers xsi:type="ecore:EClass" name="Emendation" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoLacuna #//NoExpandedColumn #//NoRasur #//NoAncientExpanded #//NoRestorationOverRasur #//NoPartialDestruction">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
         eType="#//NoEmendation" containment="true"/>
   </eClassifiers>
@@ -98,10 +116,6 @@
         eType="#//NoRasur" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoRasur"/>
-  <eClassifiers xsi:type="ecore:EClass" name="AncientExpanded" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"
-        eType="#//NoAncientExpanded" containment="true"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NoAncientExpanded"/>
   <eClassifiers xsi:type="ecore:EClass" name="RestorationOverRasur" eSuperTypes="#//Brackets #//NoCartouche #//NoDisputableReading #//NoDeletion">
     <eStructuralFeatures xsi:type="ecore:EReference" name="wChar" upperBound="-1"

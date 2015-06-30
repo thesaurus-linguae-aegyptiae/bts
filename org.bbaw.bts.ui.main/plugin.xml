@@ -42,10 +42,4 @@
           class="org.bbaw.bts.ui.main.preferences.DefaultValuesInitializer">
     </initializer>
  </extension>
- <extension
-       point="org.bbaw.bts.ui.commons.compareViewerFactory">
-    <compareViewerFactory
-          class="org.bbaw.bts.ui.main.compare.CompareViewerFactoryGeneralImpl">
-    </compareViewerFactory>
- </extension>
 </plugin>

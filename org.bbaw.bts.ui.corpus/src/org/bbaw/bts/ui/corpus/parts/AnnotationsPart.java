@@ -77,13 +77,7 @@ public class AnnotationsPart implements EventHandler {
 	private EventBroker eventBroker;
 	
 	@Inject
-	private ESelectionService selectionService;
-	
-	@Inject
 	private IEclipseContext context;
-	
-	@Inject
-	private PermissionsAndExpressionsEvaluationController permissionController;
 	
 	@Inject
 	private Logger logger;
@@ -117,14 +111,9 @@ public class AnnotationsPart implements EventHandler {
 
 	private boolean allRelatedObjectsShowed;
 
-	// boolean if object is loaded into gui
-	private boolean loaded;
-
 	// boolean if gui is constructed
 	private boolean constructed;
 
-	// boolean if selection is cached and can be loaded when gui becomes visible or constructed
-	private boolean selectionCached;	
 	/** The part. */
 	private MPart part;
 

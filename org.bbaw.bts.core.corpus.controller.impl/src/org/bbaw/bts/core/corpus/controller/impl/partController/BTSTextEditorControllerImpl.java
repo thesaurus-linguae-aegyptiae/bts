@@ -129,13 +129,7 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 	private static final String MARKER_START_SIGN = "\u0023";
 	private static final String MARKER_END_SIGN = "\u0023";
 	
-	private static final String VERS_FRONTER_MARKER = "\uDB80\uDC81"; //mv
-	private static final String VERS_BREAK_MARKER = "\uDB80\uDC80"; //v
-	private static final String BROKEN_VERS_MARKER = "\uDB80\uDC82";
-	private static final String DISPUTALBE_VERS_MARKER = "\u2E2E\uDB80\uDC80?";
-	private static final String DELETED_VERS_MARKER = "{\uDB80\uDC80}";
-	private static final String DESTROYED_VERS_MARKER = "[\uDB80\uDC80]";
-	private static final String MISSING_VERS_MARKER = "\u2329\uDB80\uDC80\u232A";
+	
 
 //	private static final String MARKER_VERS_SIGN = "\u0040";
 	private static final String MARKER_INTERFIX = ": ";
@@ -548,38 +542,116 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 		Position pos = new Position(stringBuilder.length());
 		if (marker.getType() != null) {
 			if (marker.getType().equals(BTSConstants.TEXT_VERS_FRONTIER_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(VERS_FRONTER_MARKER);
+				stringBuilder.append(BTSConstants.VERS_FRONTER_MARKER_SIGN);
 			} else if (marker.getType().equals(
 					BTSConstants.TEXT_VERS_BREAK_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(VERS_BREAK_MARKER);
+				stringBuilder.append(BTSConstants.VERS_BREAK_MARKER_SIGN);
 			} else if (marker.getType().equals(
 					BTSConstants.BROKEN_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(BROKEN_VERS_MARKER);
+				stringBuilder.append(BTSConstants.BROKEN_VERS_MARKER_SIGN);
 				
 			} else if (marker.getType().equals(
 					BTSConstants.DESTROYED_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(DESTROYED_VERS_MARKER);
+				stringBuilder.append(BTSConstants.DESTROYED_VERS_MARKER_SIGN);
 				
 			}else if (marker.getType().equals(
 					BTSConstants.DELETED_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(DELETED_VERS_MARKER);
+				stringBuilder.append(BTSConstants.DELETED_VERS_MARKER_SIGN);
 				
 			}else if (marker.getType().equals(
 					BTSConstants.DISPUTABLE_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(DISPUTALBE_VERS_MARKER);
+				stringBuilder.append(BTSConstants.DISPUTALBE_VERS_MARKER_SIGN);
 				
 			}else if (marker.getType().equals(
 					BTSConstants.MISSING_VERS_MARKER)) {
-//				stringBuilder.append(MARKER_VERS_SIGN);
-				stringBuilder.append(MISSING_VERS_MARKER);
+				stringBuilder.append(BTSConstants.MISSING_VERS_MARKER_SIGN);
+				
+			}
+			
+			
+			else if (marker.getType().equals(
+					BTSConstants.DESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDVERSMARKER_SIGN);
 				
 			}else if (marker.getType().equals(
+					BTSConstants.DELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.RESTORATIONOVERRASURMARKER)) {
+				stringBuilder.append(BTSConstants.RESTORATIONOVERRASURMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.ANCIENTEXPANDEDMARKER)) {
+				stringBuilder.append(BTSConstants.ANCIENTEXPANDEDMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.RASURMARKER)) {
+				stringBuilder.append(BTSConstants.RASURMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.EMENDATIONVERSMARKER)) {
+				stringBuilder.append(BTSConstants.EMENDATIONVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDVERSFRONTIERMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDVERSFRONTIERMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.PARTIALDESTROYEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEDESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DISPUTABLEDESTROYEDVERSMARKER_SIGN);
+				
+			}
+			
+			else if (marker.getType().equals(
+					BTSConstants.DELETEDDISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DELETEDDISPUTABLEVERSMARKER_SIGN);
+				
+			}
+			else if (marker.getType().equals(
+					BTSConstants.MISSINGDISPUTABLEVERSMARKER)) {
+				stringBuilder.append(BTSConstants.MISSINGDISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEDELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DISPUTABLEDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDDELETEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DESTROYEDDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DELETEDDESTROYEDVERSMARKER)) {
+				stringBuilder.append(BTSConstants.DELETEDDESTROYEDVERSMARKER_SIGN);
+				
+			}
+			
+			
+			
+			
+			
+			
+			else if (marker.getType().equals(
 					BTSConstants.DESTRUCTION_MARKER)) {
 //				stringBuilder.append(MARKER_VERS_SIGN);
 				stringBuilder.append("--" + marker.getName() + "--");

@@ -56,7 +56,7 @@ public class ThsNavigatorSettingsPage extends FieldEditorPreferencePage {
 		// TODO Auto-generated method stub
 		Composite container = (Composite) this.getControl();
 
-		addField(new BooleanFieldEditor(BTSCorpusConstants.PREF_THS_NAVIGATOR_SORTBYKEY, "Ths Navigator sort by sort key", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
+		addField(new BooleanFieldEditor(BTSCorpusConstants.PREF_THS_NAVIGATOR_SORTBYKEY, "Ths Navigator sort by sort key (Changes require application restart)", BooleanFieldEditor.DEFAULT, getFieldEditorParent()));
 		context = StaticAccessController.getContext();
 		configurationController = context.get(PassportConfigurationController.class);
 		

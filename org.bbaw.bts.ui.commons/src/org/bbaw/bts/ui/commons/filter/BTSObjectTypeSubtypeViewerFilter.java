@@ -36,21 +36,21 @@ public class BTSObjectTypeSubtypeViewerFilter extends AbstractObjectByListEntryF
 			}
 			else
 			{
-				String className = findClassName((BTSObject) object);
+				String className = findClassName((BTSObject) object).toLowerCase();
 				if (getStringFilterSet().contains(className))
 				{
 					return true;
 				}
 				else if (((BTSObject) object).getType() != null)
 				{
-					String type = ((BTSObject) object).getType();
+					String type = ((BTSObject) object).getType().toLowerCase();
 					if (getStringFilterSet().contains(className + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR +type))
 					{
 						return true;
 					}
 					if (((BTSObject) object).getSubtype() != null)
 					{
-						String subtype = ((BTSObject) object).getSubtype();
+						String subtype = ((BTSObject) object).getSubtype().toLowerCase();
 						if (getStringFilterSet().contains(className + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR 
 								+type + BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + subtype))
 						{
@@ -81,7 +81,7 @@ public class BTSObjectTypeSubtypeViewerFilter extends AbstractObjectByListEntryF
 			{
 				if (o instanceof String)
 				{
-					stringFilterSet.add((String) o);
+					stringFilterSet.add(((String) o).toLowerCase());
 				}
 			}
 		}

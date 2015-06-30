@@ -657,6 +657,157 @@ ruleVersMarker returns [EObject current=null]
         $current = $this_RasurMarker_9.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getEmendationVersMarkerParserRuleCall_10()); 
+    }
+    this_EmendationVersMarker_10=ruleEmendationVersMarker
+    { 
+        $current = $this_EmendationVersMarker_10.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedVersFrontierMarkerParserRuleCall_11()); 
+    }
+    this_DestroyedVersFrontierMarker_11=ruleDestroyedVersFrontierMarker
+    { 
+        $current = $this_DestroyedVersFrontierMarker_11.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedVersMarkerParserRuleCall_12()); 
+    }
+    this_PartialDestroyedVersMarker_12=rulePartialDestroyedVersMarker
+    { 
+        $current = $this_PartialDestroyedVersMarker_12.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedDisputableVersMarkerParserRuleCall_13()); 
+    }
+    this_PartialDestroyedDisputableVersMarker_13=rulePartialDestroyedDisputableVersMarker
+    { 
+        $current = $this_PartialDestroyedDisputableVersMarker_13.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedDisputableVersFrontierMarkerParserRuleCall_14()); 
+    }
+    this_DestroyedDisputableVersFrontierMarker_14=ruleDestroyedDisputableVersFrontierMarker
+    { 
+        $current = $this_DestroyedDisputableVersFrontierMarker_14.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableDestroyedVersMarkerParserRuleCall_15()); 
+    }
+    this_DisputableDestroyedVersMarker_15=ruleDisputableDestroyedVersMarker
+    { 
+        $current = $this_DisputableDestroyedVersMarker_15.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedDisputableVersMarkerParserRuleCall_16()); 
+    }
+    this_DeletedDisputableVersMarker_16=ruleDeletedDisputableVersMarker
+    { 
+        $current = $this_DeletedDisputableVersMarker_16.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getMissingDisputableVersMarkerParserRuleCall_17()); 
+    }
+    this_MissingDisputableVersMarker_17=ruleMissingDisputableVersMarker
+    { 
+        $current = $this_MissingDisputableVersMarker_17.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableDeletedVersMarkerParserRuleCall_18()); 
+    }
+    this_DisputableDeletedVersMarker_18=ruleDisputableDeletedVersMarker
+    { 
+        $current = $this_DisputableDeletedVersMarker_18.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedDeletedVersMarkerParserRuleCall_19()); 
+    }
+    this_PartialDestroyedDeletedVersMarker_19=rulePartialDestroyedDeletedVersMarker
+    { 
+        $current = $this_PartialDestroyedDeletedVersMarker_19.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedDeletedVersMarkerParserRuleCall_20()); 
+    }
+    this_DestroyedDeletedVersMarker_20=ruleDestroyedDeletedVersMarker
+    { 
+        $current = $this_DestroyedDeletedVersMarker_20.current; 
+        afterParserOrEnumRuleCall();
+    }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedDestroyedVersMarkerParserRuleCall_21()); 
+    }
+    this_DeletedDestroyedVersMarker_21=ruleDeletedDestroyedVersMarker
+    { 
+        $current = $this_DeletedDestroyedVersMarker_21.current; 
+        afterParserOrEnumRuleCall();
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleEmendationVersMarker
+entryRuleEmendationVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getEmendationVersMarkerRule()); }
+	 iv_ruleEmendationVersMarker=ruleEmendationVersMarker 
+	 { $current=$iv_ruleEmendationVersMarker.current; } 
+	 EOF 
+;
+
+// Rule EmendationVersMarker
+ruleEmendationVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getEmendationVersMarkerAccess().getEmendationVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='(\uDB80\uDC80)' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getEmendationVersMarkerAccess().getLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisKeyword_1());
+    }
 )
 ;
 
@@ -687,6 +838,68 @@ ruleDisputableVersMarker returns [EObject current=null]
 )	otherlv_1='\u2E2E\uDB80\uDC80?' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getDisputableVersMarkerAccess().getReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleDisputableDestroyedVersMarker
+entryRuleDisputableDestroyedVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDisputableDestroyedVersMarkerRule()); }
+	 iv_ruleDisputableDestroyedVersMarker=ruleDisputableDestroyedVersMarker 
+	 { $current=$iv_ruleDisputableDestroyedVersMarker.current; } 
+	 EOF 
+;
+
+// Rule DisputableDestroyedVersMarker
+ruleDisputableDestroyedVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDisputableDestroyedVersMarkerAccess().getDisputableDestroyedVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='\u2E2E[\uDB80\uDC80]?' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDisputableDestroyedVersMarkerAccess().getReversedQuestionMarkLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketQuestionMarkKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleDisputableDeletedVersMarker
+entryRuleDisputableDeletedVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDisputableDeletedVersMarkerRule()); }
+	 iv_ruleDisputableDeletedVersMarker=ruleDisputableDeletedVersMarker 
+	 { $current=$iv_ruleDisputableDeletedVersMarker.current; } 
+	 EOF 
+;
+
+// Rule DisputableDeletedVersMarker
+ruleDisputableDeletedVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDisputableDeletedVersMarkerAccess().getDisputableDeletedVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='\u2E2E{\uDB80\uDC80}?' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDisputableDeletedVersMarkerAccess().getReversedQuestionMarkLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketQuestionMarkKeyword_1());
     }
 )
 ;
@@ -726,6 +939,68 @@ ruleDeletedVersMarker returns [EObject current=null]
 
 
 
+// Entry rule entryRuleDeletedDisputableVersMarker
+entryRuleDeletedDisputableVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDeletedDisputableVersMarkerRule()); }
+	 iv_ruleDeletedDisputableVersMarker=ruleDeletedDisputableVersMarker 
+	 { $current=$iv_ruleDeletedDisputableVersMarker.current; } 
+	 EOF 
+;
+
+// Rule DeletedDisputableVersMarker
+ruleDeletedDisputableVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDeletedDisputableVersMarkerAccess().getDeletedDisputableVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='{\u2E2E\uDB80\uDC80?}' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDeletedDisputableVersMarkerAccess().getLeftCurlyBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightCurlyBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleDeletedDestroyedVersMarker
+entryRuleDeletedDestroyedVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDeletedDestroyedVersMarkerRule()); }
+	 iv_ruleDeletedDestroyedVersMarker=ruleDeletedDestroyedVersMarker 
+	 { $current=$iv_ruleDeletedDestroyedVersMarker.current; } 
+	 EOF 
+;
+
+// Rule DeletedDestroyedVersMarker
+ruleDeletedDestroyedVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDeletedDestroyedVersMarkerAccess().getDeletedDestroyedVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='{[\uDB80\uDC80]}' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDeletedDestroyedVersMarkerAccess().getLeftCurlyBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightCurlyBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleDestroyedVersMarker
 entryRuleDestroyedVersMarker returns [EObject current=null] 
 	:
@@ -757,6 +1032,192 @@ ruleDestroyedVersMarker returns [EObject current=null]
 
 
 
+// Entry rule entryRuleDestroyedVersFrontierMarker
+entryRuleDestroyedVersFrontierMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDestroyedVersFrontierMarkerRule()); }
+	 iv_ruleDestroyedVersFrontierMarker=ruleDestroyedVersFrontierMarker 
+	 { $current=$iv_ruleDestroyedVersFrontierMarker.current; } 
+	 EOF 
+;
+
+// Rule DestroyedVersFrontierMarker
+ruleDestroyedVersFrontierMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDestroyedVersFrontierMarkerAccess().getDestroyedVersFrontierMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='[\uDB80\uDC81]' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDestroyedVersFrontierMarkerAccess().getLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc81RightSquareBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleDestroyedDisputableVersFrontierMarker
+entryRuleDestroyedDisputableVersFrontierMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDestroyedDisputableVersFrontierMarkerRule()); }
+	 iv_ruleDestroyedDisputableVersFrontierMarker=ruleDestroyedDisputableVersFrontierMarker 
+	 { $current=$iv_ruleDestroyedDisputableVersFrontierMarker.current; } 
+	 EOF 
+;
+
+// Rule DestroyedDisputableVersFrontierMarker
+ruleDestroyedDisputableVersFrontierMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDestroyedDisputableVersFrontierMarkerAccess().getDestroyedDisputableVersFrontierMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='[\u2E2E\uDB80\uDC81?]' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDestroyedDisputableVersFrontierMarkerAccess().getLeftSquareBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc81QuestionMarkRightSquareBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleDestroyedDeletedVersMarker
+entryRuleDestroyedDeletedVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getDestroyedDeletedVersMarkerRule()); }
+	 iv_ruleDestroyedDeletedVersMarker=ruleDestroyedDeletedVersMarker 
+	 { $current=$iv_ruleDestroyedDeletedVersMarker.current; } 
+	 EOF 
+;
+
+// Rule DestroyedDeletedVersMarker
+ruleDestroyedDeletedVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getDestroyedDeletedVersMarkerAccess().getDestroyedDeletedVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='[{\uDB80\uDC80}]' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getDestroyedDeletedVersMarkerAccess().getLeftSquareBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightSquareBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRulePartialDestroyedVersMarker
+entryRulePartialDestroyedVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPartialDestroyedVersMarkerRule()); }
+	 iv_rulePartialDestroyedVersMarker=rulePartialDestroyedVersMarker 
+	 { $current=$iv_rulePartialDestroyedVersMarker.current; } 
+	 EOF 
+;
+
+// Rule PartialDestroyedVersMarker
+rulePartialDestroyedVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getPartialDestroyedVersMarkerAccess().getPartialDestroyedVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='\u2E22\uDB80\uDC80\u2E23' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedVersMarkerAccess().getTopLeftHalfBracketLeadSurrogateDb80TrailSurrogateDc80TopRightHalfBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRulePartialDestroyedDisputableVersMarker
+entryRulePartialDestroyedDisputableVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPartialDestroyedDisputableVersMarkerRule()); }
+	 iv_rulePartialDestroyedDisputableVersMarker=rulePartialDestroyedDisputableVersMarker 
+	 { $current=$iv_rulePartialDestroyedDisputableVersMarker.current; } 
+	 EOF 
+;
+
+// Rule PartialDestroyedDisputableVersMarker
+rulePartialDestroyedDisputableVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getPartialDestroyedDisputableVersMarkerAccess().getPartialDestroyedDisputableVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='\u2E22\u2E2E\uDB80\uDC80?\u2E23' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedDisputableVersMarkerAccess().getTopLeftHalfBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkTopRightHalfBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRulePartialDestroyedDeletedVersMarker
+entryRulePartialDestroyedDeletedVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getPartialDestroyedDeletedVersMarkerRule()); }
+	 iv_rulePartialDestroyedDeletedVersMarker=rulePartialDestroyedDeletedVersMarker 
+	 { $current=$iv_rulePartialDestroyedDeletedVersMarker.current; } 
+	 EOF 
+;
+
+// Rule PartialDestroyedDeletedVersMarker
+rulePartialDestroyedDeletedVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getPartialDestroyedDeletedVersMarkerAccess().getPartialDestroyedDeletedVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='\u2E22{\uDB80\uDC80}\u2E23' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedDeletedVersMarkerAccess().getTopLeftHalfBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketTopRightHalfBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
 // Entry rule entryRuleMissingVersMarker
 entryRuleMissingVersMarker returns [EObject current=null] 
 	:
@@ -780,6 +1241,37 @@ ruleMissingVersMarker returns [EObject current=null]
 )	otherlv_1='\u2329\uDB80\uDC80\u232A' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getMissingVersMarkerAccess().getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleMissingDisputableVersMarker
+entryRuleMissingDisputableVersMarker returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getMissingDisputableVersMarkerRule()); }
+	 iv_ruleMissingDisputableVersMarker=ruleMissingDisputableVersMarker 
+	 { $current=$iv_ruleMissingDisputableVersMarker.current; } 
+	 EOF 
+;
+
+// Rule MissingDisputableVersMarker
+ruleMissingDisputableVersMarker returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getMissingDisputableVersMarkerAccess().getMissingDisputableVersMarkerAction_0(),
+            $current);
+    }
+)	otherlv_1='\u2329\u2E2E\uDB80\uDC80?\u232A' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getMissingDisputableVersMarkerAccess().getLeftPointingAngleBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightPointingAngleBracketKeyword_1());
     }
 )
 ;
@@ -1707,6 +2199,59 @@ ruleExpanded returns [EObject current=null]
 )+	otherlv_3=')' 
     {
     	newLeafNode(otherlv_3, grammarAccess.getExpandedAccess().getRightParenthesisKeyword_3());
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleAncientExpanded
+entryRuleAncientExpanded returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getAncientExpandedRule()); }
+	 iv_ruleAncientExpanded=ruleAncientExpanded 
+	 { $current=$iv_ruleAncientExpanded.current; } 
+	 EOF 
+;
+
+// Rule AncientExpanded
+ruleAncientExpanded returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+((
+    {
+        $current = forceCreateModelElement(
+            grammarAccess.getAncientExpandedAccess().getAncientExpandedAction_0(),
+            $current);
+    }
+)	otherlv_1='((' 
+    {
+    	newLeafNode(otherlv_1, grammarAccess.getAncientExpandedAccess().getLeftParenthesisLeftParenthesisKeyword_1());
+    }
+(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getAncientExpandedAccess().getWCharNoAncientExpandedParserRuleCall_2_0()); 
+	    }
+		lv_wChar_2_0=ruleNoAncientExpanded		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getAncientExpandedRule());
+	        }
+       		add(
+       			$current, 
+       			"wChar",
+        		lv_wChar_2_0, 
+        		"NoAncientExpanded");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
+)+	otherlv_3='))' 
+    {
+    	newLeafNode(otherlv_3, grammarAccess.getAncientExpandedAccess().getRightParenthesisRightParenthesisKeyword_3());
     }
 )
 ;
@@ -2683,59 +3228,6 @@ ruleNoRasur returns [EObject current=null]
 
 
 
-// Entry rule entryRuleAncientExpanded
-entryRuleAncientExpanded returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getAncientExpandedRule()); }
-	 iv_ruleAncientExpanded=ruleAncientExpanded 
-	 { $current=$iv_ruleAncientExpanded.current; } 
-	 EOF 
-;
-
-// Rule AncientExpanded
-ruleAncientExpanded returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getAncientExpandedAccess().getAncientExpandedAction_0(),
-            $current);
-    }
-)	otherlv_1='((' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getAncientExpandedAccess().getLeftParenthesisLeftParenthesisKeyword_1());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getAncientExpandedAccess().getWCharNoAncientExpandedParserRuleCall_2_0()); 
-	    }
-		lv_wChar_2_0=ruleNoAncientExpanded		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getAncientExpandedRule());
-	        }
-       		add(
-       			$current, 
-       			"wChar",
-        		lv_wChar_2_0, 
-        		"NoAncientExpanded");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)+	otherlv_3='))' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getAncientExpandedAccess().getRightParenthesisRightParenthesisKeyword_3());
-    }
-)
-;
-
-
-
-
-
 // Entry rule entryRuleNoAncientExpanded
 entryRuleNoAncientExpanded returns [EObject current=null] 
 	:
@@ -3145,6 +3637,16 @@ ruleNoPartialDestruction returns [EObject current=null]
         $current = $this_Serech_7.current; 
         afterParserOrEnumRuleCall();
     }
+
+    |
+    { 
+        newCompositeNode(grammarAccess.getNoPartialDestructionAccess().getEmendationParserRuleCall_8()); 
+    }
+    this_Emendation_8=ruleEmendation
+    { 
+        $current = $this_Emendation_8.current; 
+        afterParserOrEnumRuleCall();
+    }
 )
 ;
 
@@ -3508,6 +4010,6 @@ RULE_BETWEEN_HASHES : '#' ~('#')+ '#';
 
 RULE_BETWEEN_MINUS : '--' ~('-')+ '--';
 
-RULE_EGYSTRING : ('\uA722'|'\uA723'|'\u02BE'|'\uA725'|'\uA724'|'j'|'y'|'w'|'b'|'f'|'m'|'n'|'r'|'h'|'\u1E25'|'\u1E2B'|'\u1E96'|'H'|'\u1E24'|'\u1E2A'|'H\u0331'|'H\u032D'|'z'|'s'|'\u0161'|'\u015B'|'S'|'\u0160'|'\u015A'|'q'|'k'|'g'|'t'|'\u1E6F'|'\u1E6D'|'\u1E71'|'T'|'\u1E6E'|'\u1E6C'|'\u1E70'|'d'|'\u1E0F'|'\u1E0E'|'h\u032D'|'i'|'i\u032F'|'\u0131\u0357'|'\u0131\u0357\u032F'|'\u00EF'|'i\u032D'|'I\u0357'|'I'|'I\u032F'|'i\u032F\u032F'|'\u00CF'|'\u1E33'|'\u1E32'|'u'|'u\u032F'|'U'|'U\u032F'|'e'|'/'|'+'|'\u010D'|'\u010D\u0323'|'\u010C'|'\u010C\u0323'|'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'Z'|'Q'|'K'|'G'|'D'|'A'|'\u2C80'..'\u2CFF'|'p'|'l'|'='|'_'|'\u205D'|'0'..'9'|'\u00D5'|'\u00E3'|'\u00DE'|'!'|'\u0152'|'\u0153'|'\u0178'|'\u00C6'|'*'|'\u00EA')+;
+RULE_EGYSTRING : ('\uA722'|'\uA723'|'\u02BE'|'\uA725'|'\uA724'|'j'|'y'|'w'|'b'|'f'|'m'|'n'|'r'|'h'|'\u1E25'|'\u1E2B'|'\u1E96'|'H'|'\u1E24'|'\u1E2A'|'H\u0331'|'H\u032D'|'z'|'s'|'\u0161'|'S'|'\u0160'|'q'|'k'|'g'|'t'|'\u1E6F'|'\u1E71'|'T'|'\u1E6E'|'\u1E70'|'d'|'\u1E0F'|'\u1E0E'|'h\u032D'|'i'|'i\u032F'|'\u0131\u0357'|'\u0131\u0357\u032F'|'\u00EF'|'i\u032D'|'I\u0357'|'I'|'I\u032F'|'i\u032F\u032F'|'\u00CF'|'u'|'u\u032F'|'U'|'U\u032F'|'e'|'/'|'+'|'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'|'N'|'R'|'L'|'Z'|'Q'|'K'|'G'|'D'|'A'|'\u2C80'..'\u2CFF'|'p'|'l'|'='|'_'|'\u205D'|'0'..'9'|'\u00D5'|'\u00E3'|'\u00DE'|'!'|'\u0152'|'\u0153'|'\u0178'|'\u00C6'|'*'|'\u00EA')+;
 
 

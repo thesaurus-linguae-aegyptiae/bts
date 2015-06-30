@@ -113,7 +113,7 @@ public class BTSThsEntryDaoImpl extends AbstractCorpusObjectDaoImpl<BTSThsEntry,
 //			allDocs = view.includeDocs(true).query();
 //		}
 		List<String> allDocs = loadDocsFromView(staticQueryId, path, "ths");
-		List<BTSThsEntry> results = loadPartialObjectsFromStrings(allDocs, path);
+		List<BTSThsEntry> results = super.loadObjectsFromStrings(allDocs, path);
 		if (!results.isEmpty())
 		{
 			registerQueryIdWithInternalRegistry(staticQueryId, path);

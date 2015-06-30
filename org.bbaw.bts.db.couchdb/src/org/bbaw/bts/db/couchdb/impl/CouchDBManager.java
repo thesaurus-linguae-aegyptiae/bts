@@ -1757,6 +1757,14 @@ public class CouchDBManager implements DBManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		dbClient = connectionProvider.getDBClient(
+				CouchDbClient.class, DaoConstants.REPLICATOR);
+		try {
+			dbClient.context().compact();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		dbClient.shutdown();
 
 	}

@@ -21,6 +21,7 @@ import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparato
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -267,4 +268,36 @@ implements LemmaNavigatorController{
 	}
 
 
+	// zur liste der Kinder auch die Elemente hinzufügen, die sich aus den Relationen des Objekts selber ergeben,
+	// über Relationen iterieren und entsp. Objekte finden
+	@Override
+	public List<BTSLemmaEntry> findChildren(BTSLemmaEntry parent,
+			Map<String, BTSQueryResultAbstract> queryResultMap,
+			ContentViewer viewer, TreeNodeWrapper parentHolder,
+			EReference referenceName, IProgressMonitor monitor) {
+		// TODO Auto-generated method stub
+		List<BTSLemmaEntry> children = super.findChildren(parent, queryResultMap, viewer, parentHolder,
+				referenceName, monitor);
+		
+		if (children == null)
+		{
+			children = new Vector<BTSLemmaEntry>();
+		}
+		for (BTSRelation rel : parent.getRelations())
+		{
+			Object o = null;
+			try {
+				try {
+					o = lemmaService.find(rel.getObjectId(), null);
+				} catch (Exception e) {
+				}
+				if (o instanceof BTSLemmaEntry && !children.contains(o))
+				{
+					children.add((BTSLemmaEntry) o);
+				}
+			} catch (Exception e) {
+			}
+		}
+		return children;
+	}
 }

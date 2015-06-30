@@ -2217,7 +2217,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			else
 			{
 				Position pos = annotationModel.getPosition(am);
-				embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+				if (pos != null)
+				{
+					embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+				}
 			}
 		}
 

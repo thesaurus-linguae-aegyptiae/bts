@@ -77,6 +77,8 @@ import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.KeyAdapter;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
@@ -630,7 +632,31 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 						ths_select_text.setData(object);
 
 					}
+			    } else if (e.keyCode == SWT.BS)
+			    {
+			    	Command command = SetCommand.create(editingDomain,
+							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							null);
+					editingDomain.getCommandStack().execute(command);
+					ths_select_text.setText("");
+					ths_select_text.setData(null);
 			    }
+			}
+		});
+		
+		ths_select_text.addModifyListener(new ModifyListener() {
+			
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (ths_select_text.getText().trim().length() == 0)
+				{
+					Command command = SetCommand.create(editingDomain,
+							entry, BtsCorpusModelPackage.eINSTANCE.getBTSPassportEntry_Value(),
+							null);
+					editingDomain.getCommandStack().execute(command);
+					ths_select_text.setData(null);
+				}
+				
 			}
 		});
 

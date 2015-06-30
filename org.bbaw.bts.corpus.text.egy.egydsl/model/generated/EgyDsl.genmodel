@@ -25,10 +25,22 @@
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//SentenceItemNoAmbivalence"/>
     <genClasses ecoreClass="EgyDsl.ecore#//VersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//EmendationVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//DisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DisputableDestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DisputableDeletedVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//DeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DeletedDisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DeletedDestroyedVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersFrontierMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedDisputableVersFrontierMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedDeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedDisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedDeletedVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//MissingVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//MissingDisputableVersMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//RestorationOverRasurMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//AncientExpandedMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//RasurMarker"/>
@@ -63,6 +75,9 @@
     <genClasses ecoreClass="EgyDsl.ecore#//Expanded">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Expanded/wChar"/>
     </genClasses>
+    <genClasses ecoreClass="EgyDsl.ecore#//AncientExpanded">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//AncientExpanded/wChar"/>
+    </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//NoExpanded"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Emendation">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Emendation/wChar"/>
@@ -88,9 +103,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Rasur/wChar"/>
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//NoRasur"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//AncientExpanded">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//AncientExpanded/wChar"/>
-    </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//NoAncientExpanded"/>
     <genClasses ecoreClass="EgyDsl.ecore#//RestorationOverRasur">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//RestorationOverRasur/wChar"/>

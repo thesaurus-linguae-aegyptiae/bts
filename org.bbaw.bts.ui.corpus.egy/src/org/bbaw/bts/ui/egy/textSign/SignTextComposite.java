@@ -851,6 +851,82 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					BTSConstants.MISSING_VERS_MARKER)) {
 				mType = MISSING_VERS_MARKER;
 			}
+			else if (marker.getType().equals(
+					BTSConstants.DESTROYEDVERSMARKER)) {
+				mType = (BTSConstants.DESTROYEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DELETEDVERSMARKER)) {
+				mType = (BTSConstants.DELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEVERSMARKER)) {
+				mType = (BTSConstants.DISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.RESTORATIONOVERRASURMARKER)) {
+				mType = (BTSConstants.RESTORATIONOVERRASURMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.ANCIENTEXPANDEDMARKER)) {
+				mType = (BTSConstants.ANCIENTEXPANDEDMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.RASURMARKER)) {
+				mType = (BTSConstants.RASURMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.EMENDATIONVERSMARKER)) {
+				mType = (BTSConstants.EMENDATIONVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDVERSFRONTIERMARKER)) {
+				mType = (BTSConstants.DESTROYEDVERSFRONTIERMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDVERSMARKER)) {
+				mType = (BTSConstants.PARTIALDESTROYEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER)) {
+				mType = (BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER)) {
+				mType = (BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEDESTROYEDVERSMARKER)) {
+				mType = (BTSConstants.DISPUTABLEDESTROYEDVERSMARKER_SIGN);
+				
+			}
+			
+			else if (marker.getType().equals(
+					BTSConstants.DELETEDDISPUTABLEVERSMARKER)) {
+				mType = (BTSConstants.DELETEDDISPUTABLEVERSMARKER_SIGN);
+				
+			}
+			else if (marker.getType().equals(
+					BTSConstants.MISSINGDISPUTABLEVERSMARKER)) {
+				mType = (BTSConstants.MISSINGDISPUTABLEVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DISPUTABLEDELETEDVERSMARKER)) {
+				mType = (BTSConstants.DISPUTABLEDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER)) {
+				mType = (BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DESTROYEDDELETEDVERSMARKER)) {
+				mType = (BTSConstants.DESTROYEDDELETEDVERSMARKER_SIGN);
+				
+			}else if (marker.getType().equals(
+					BTSConstants.DELETEDDESTROYEDVERSMARKER)) {
+				mType = (BTSConstants.DELETEDDESTROYEDVERSMARKER_SIGN);
+				
+			}
 		}
 		else
 		{
@@ -1001,7 +1077,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				&& !"".equals(word.getTranslation().getTranslation(language))) {
 			TypedLabel l = new TypedLabel();
 			l.setText(language + ": " + word.getTranslation().getTranslation(language));
-			l.setType(TypedLabel.TRANSLITATION);
+			l.setType(TypedLabel.TRANSLATION);
 			rect.add(l);
 		}
 		
@@ -1123,7 +1199,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				}
 				len = ((WordFigure)figure).getImageWidth();}
 		}
-		System.out.println("wChar " + ((BTSWord)((WordFigure)figure).getModelObject()).getWChar() + " len " + len);
 		return len;
 	}
 
@@ -1673,6 +1748,21 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 						break;
 					case TypedLabel.TRANSLITATION :
 						l.setText(word.getWChar());
+						break;
+					case TypedLabel.TRANSLATION :
+						if (word.getTranslation() != null && l.getText() != null && l.getText().length() > 1)
+						{
+							String lang = l.getText().substring(0, 2);
+							String trans = word.getTranslation().getTranslation(lang);
+							if (trans == null)
+							{
+								l.setText(lang + ":");
+							}
+							else
+							{
+								l.setText(lang + ":" + trans);
+							}
+						}
 						break;
 					}
 				}

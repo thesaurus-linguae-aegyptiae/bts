@@ -9,6 +9,8 @@ import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
@@ -26,6 +28,8 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private BTSQueryRequest queryRequest;
 	private Button idButton;
 	private Button exactButton;
+	private Button wildcardButton;
+	private Button qmarksButton;
 
 	/**
 	 * Create the dialog.
@@ -45,23 +49,59 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);
-		container.setLayout(new GridLayout(1, false));
+		container.setLayout(new GridLayout(2, false));
 		container.setLayoutData(new GridData(GridData.FILL_BOTH));
 		
 		Label lblFullTextSearch = new Label(container, SWT.NONE);
 		lblFullTextSearch.setText("Full Text Search");
-		
+		lblFullTextSearch.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+
 		text = new Text(container, SWT.BORDER);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		idButton = new Button(container, SWT.CHECK);
 		idButton.setText("Search for IDs");
-		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
 		exactButton = new Button(container, SWT.CHECK);
 		exactButton.setText("Search for Names only");
-		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 		
+		wildcardButton = new Button(container, SWT.PUSH);
+		wildcardButton.setText("Add *-wildcard");
+		wildcardButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		wildcardButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				text.setText(text.getText() + "*");
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		qmarksButton = new Button(container, SWT.PUSH);
+		qmarksButton.setText("Put in \"...\"");
+		qmarksButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		qmarksButton.addSelectionListener(new SelectionListener() {
+			
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				text.setText("\"" + text.getText() + "\"");
+				
+			}
+			
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		return area;
 	}
 
@@ -112,7 +152,37 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	}
 
 	private String escapeString(String searchString) {
+		// Anführungszeichen nicht escapen!!!
+		boolean inQuots = false;
+		boolean leftTrunk = false;
+		boolean rightTrunk = false;
+
+		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
+		{
+			searchString = searchString.substring(1, searchString.length() -1);
+			inQuots = true;
+		}
+		else if (searchString.length() > 1 && searchString.startsWith("*"))
+		{
+			searchString = searchString.substring(1, searchString.length());
+			leftTrunk = true;
+		}else if (searchString.length() > 1 && searchString.endsWith("*"))
+		{
+			searchString = searchString.substring(0, searchString.length()-1);
+			rightTrunk = true;
+		}
 		String escapedString = QueryParser.escape(searchString);
+		if (inQuots)
+		{
+			escapedString = "\"" + escapedString + "\"";
+		} else if (leftTrunk)
+		{
+			escapedString = "*" + escapedString;
+		}else if (rightTrunk)
+		{
+			escapedString = escapedString+ "*";
+		}
+		
 		return escapedString;
 	}
 

@@ -261,7 +261,8 @@ public class BTSConfigurationDialog extends TitleAreaDialog {
 	protected Control createDialogArea(Composite parent) {
 		// initializeDIs();
 		
-		
+		setTitle("Configuration Dialog");
+		setMessage("You can create and edit configurations.");
 		
 		Composite area = (Composite) super.createDialogArea(parent);
 		Composite container = new Composite(area, SWT.NONE);

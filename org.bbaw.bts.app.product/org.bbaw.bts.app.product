@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.8.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.10.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>

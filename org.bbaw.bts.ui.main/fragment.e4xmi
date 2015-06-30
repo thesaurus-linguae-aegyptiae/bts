@@ -129,8 +129,8 @@
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_uwIRgDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.help">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_2hFFUDVpEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.help" label="Open Webhelp" tooltip="Open webhelp in external browser" command="_AjUs4OgpEeSGc-cONqnFNw"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_XwpxQL8iEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.9" label="Update Application" command="_HO_yQL8hEeOwdasqUpZnTA"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_TUSzAKroEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.handledmenuitem.installNewSoftware" label="Install New Software" command="_BdtzAKroEeSL-KbihY0rDw"/>
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_HT_QkKrtEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.handledmenuitem.uninstallSoftware" label="Uninstall Software" command="_CnznkKroEeSL-KbihY0rDw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_TUSzAKroEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.handledmenuitem.installNewSoftware" label="Install New Software-Components" command="_BdtzAKroEeSL-KbihY0rDw"/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_HT_QkKrtEeSL-KbihY0rDw" elementId="org.bbaw.bts.ui.main.handledmenuitem.uninstallSoftware" label="Uninstall Software-Components" command="_CnznkKroEeSL-KbihY0rDw"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_91RrsDVpEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.edit">
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_kXRK0DVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.2" label="Edit..."/>
@@ -140,7 +140,7 @@
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_RpbcsOsGEeOLEqD8tMK6Eg" elementId="org.bbaw.bts.ui.main.handledmenuitem.14" label="Open Revision History" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/history.png" command="_wVCq4OsFEeOLEqD8tMK6Eg"/>
   </fragments>
   <fragments xsi:type="fragment:StringModelFragment" xmi:id="_JRhFgDVqEeOv7cfx0AHTtw" featurename="children" parentElementId="org.eclipse.ui.file">
-    <elements xsi:type="menu:HandledMenuItem" xmi:id="_l0QGMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.3" label="Insert..."/>
+    <elements xsi:type="menu:HandledMenuItem" xmi:id="_l0QGMDVqEeOv7cfx0AHTtw" elementId="org.bbaw.bts.ui.main.handledmenuitem.3" toBeRendered="false" visible="false" label="Insert..."/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_BSbbQL8jEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.10" label="Exit BTS" command="_m2YhoL8fEeOwdasqUpZnTA"/>
     <elements xsi:type="menu:HandledMenuItem" xmi:id="_ERGEcL8mEeOwdasqUpZnTA" elementId="org.bbaw.bts.ui.main.handledmenuitem.11" label="Restart BTS" command="_3xuZsL8lEeOwdasqUpZnTA"/>
   </fragments>

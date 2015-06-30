@@ -520,7 +520,7 @@ public class EgyTextTranslationPart {
 
 	private void setSelectionInternal(BTSSenctence selection) {
 		BTSModelAnnotation a = modelAnnotationMap.get(selection.get_id());
-		if (!highlightedAnnotations.contains(a))
+		if (!highlightedAnnotations.contains(a) && annotationModel != null)
 		{
 			highlightAnnotations(highlightedAnnotations, false);
 			highlightedAnnotations.clear();

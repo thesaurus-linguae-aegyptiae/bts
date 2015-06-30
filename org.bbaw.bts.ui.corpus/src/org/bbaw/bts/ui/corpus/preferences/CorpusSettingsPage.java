@@ -78,7 +78,7 @@ public class CorpusSettingsPage extends FieldEditorPreferencePage {
 		
 		Composite container = (Composite) this.getControl();
 		activateButton = new Button(container, SWT.CHECK);
-		activateButton.setText("Activate to select main working corpus.");
+		activateButton.setText("Activate to select main working corpus. All new objects will be PHYSICALLY located in this corpus.");
 		activateButton.addSelectionListener(new SelectionListener() {
 			
 			@Override

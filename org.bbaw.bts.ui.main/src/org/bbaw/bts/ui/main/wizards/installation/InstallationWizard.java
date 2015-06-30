@@ -84,9 +84,9 @@ public class InstallationWizard extends Wizard {
 		createUserPage = new LocalCreateUserPage(userManagerController,
 				editingDomainController);
 
-		if (startupController.requiresDBInstallation()) {
+//		if (startupController.requiresDBInstallation()) {
 			addPage(dbPage);
-		}
+//		}
 
 		addPage(welcomePage);
 		addPage(createUserPage);

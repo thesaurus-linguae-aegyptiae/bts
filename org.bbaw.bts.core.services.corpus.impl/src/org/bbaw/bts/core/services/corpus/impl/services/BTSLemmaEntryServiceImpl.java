@@ -243,7 +243,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		for (BTSCorpusObject entry : children)
 		{
 			if (entry instanceof BTSLemmaEntry 
-					&& entry.getRevisionState() != null && !entry.getRevisionState().contains("obsolete"))
+					&& (entry.getRevisionState() == null || !entry.getRevisionState().contains("obsolete"))
+					&& (entry.getType() == null || !entry.getType().equals("root")))
 			{
 				filtered.add((BTSLemmaEntry) entry);
 			}

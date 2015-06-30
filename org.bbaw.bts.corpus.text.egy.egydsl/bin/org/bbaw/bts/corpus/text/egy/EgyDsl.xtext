@@ -52,7 +52,16 @@ SentenceItemNoAmbivalence:
 VersMarker:
 	VersbreakMarker | VersFrontierMarker |BrokenVersbreakMarker 
 	| MissingVersMarker | DestroyedVersMarker | DeletedVersMarker | DisputableVersMarker
-	| RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker
+	| RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker 
+	|EmendationVersMarker |DestroyedVersFrontierMarker | PartialDestroyedVersMarker | PartialDestroyedDisputableVersMarker
+	| DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker |DeletedDisputableVersMarker
+	| MissingDisputableVersMarker | DisputableDeletedVersMarker | PartialDestroyedDeletedVersMarker
+	| DestroyedDeletedVersMarker | DeletedDestroyedVersMarker
+;
+
+EmendationVersMarker:
+{EmendationVersMarker}
+	'(\uDB80\uDC80)'//'@v'
 ;
 
 DisputableVersMarker:
@@ -60,9 +69,29 @@ DisputableVersMarker:
 	'\u2E2E\uDB80\uDC80?'//'@v'
 ;
 
+DisputableDestroyedVersMarker:
+{DisputableDestroyedVersMarker}
+	'\u2E2E[\uDB80\uDC80]?'//'@v'
+;
+
+DisputableDeletedVersMarker:
+{DisputableDeletedVersMarker}
+	'\u2E2E{\uDB80\uDC80}?'//'@v'
+;
+
 DeletedVersMarker:
 {DeletedVersMarker}
 	'{\uDB80\uDC80}'//'@v'
+;
+
+DeletedDisputableVersMarker:
+{DeletedDisputableVersMarker}
+	'{\u2E2E\uDB80\uDC80?}'//'@v'
+;
+
+DeletedDestroyedVersMarker:
+{DeletedDestroyedVersMarker}
+	'{[\uDB80\uDC80]}'//'@v'
 ;
 
 DestroyedVersMarker:
@@ -70,9 +99,45 @@ DestroyedVersMarker:
 	'[\uDB80\uDC80]'//'@v'
 ;
 
+DestroyedVersFrontierMarker:
+	{DestroyedVersFrontierMarker}
+	'[\uDB80\uDC81]'//'@v'
+;
+
+DestroyedDisputableVersFrontierMarker:
+	{DestroyedDisputableVersFrontierMarker}
+	'[\u2E2E\uDB80\uDC81?]'//'@v'
+;
+
+DestroyedDeletedVersMarker:
+	{DestroyedDeletedVersMarker}
+	'[{\uDB80\uDC80}]'//'@v'
+;
+
+
+PartialDestroyedVersMarker:
+	{PartialDestroyedVersMarker}
+	'\u2E22\uDB80\uDC80\u2E23'//'@v'
+;
+
+PartialDestroyedDisputableVersMarker:
+	{PartialDestroyedDisputableVersMarker}
+	'\u2E22\u2E2E\uDB80\uDC80?\u2E23'//'@v'
+;
+
+PartialDestroyedDeletedVersMarker:
+	{PartialDestroyedDeletedVersMarker}
+	'\u2E22{\uDB80\uDC80}\u2E23'//'@v'
+;
+
 MissingVersMarker:
 	{MissingVersMarker}
 	'\u2329\uDB80\uDC80\u232A'//'@v'
+;
+
+MissingDisputableVersMarker:
+	{MissingDisputableVersMarker}
+	'\u2329\u2E2E\uDB80\uDC80?\u232A'//'@v'
 ;
 
 RestorationOverRasurMarker:
@@ -160,9 +225,10 @@ terminal EGYSTRING returns ecore::EString:(
  |'j'|'y'|'w'|'b'|'f'|'m'|'n'|'r'
  |'h'|'ḥ'|'ḫ'|'ẖ'|'H'|'Ḥ'|'Ḫ'|'H̱'|'H̭'
  |'z'
- |'s'|'š'|'ś'|'S'|'Š'|'Ś'
+ |'s'|'š'|'S'|'Š'   // Schekelsche Zeichen|'Ś'|'ś'
  |'q'|'k'|'g'
- |'t'|'ṯ'|'ṭ'|'ṱ'|'T'|'Ṯ'|'Ṭ'|'Ṱ'
+ |'t'|'ṯ'|'ṱ'|'T'|'Ṯ'|'Ṱ'
+ // Schekelsche Zeichen |'ṭ' |'Ṭ'
  |'d'|'ḏ'|'Ḏ'
  |'h̭'
  |'i'|'i̯'|'ı͗'|'ı̯͗'|'ï'|'i̭'|'I͗'|'I'
@@ -170,12 +236,12 @@ terminal EGYSTRING returns ecore::EString:(
  |'\u0049\u032F' //IArcU
  |'i̯̯'
  |'\u00CF'   // ITremaU
- |'ḳ'|'Ḳ'
+ // Schekelsche Zeichen |'ḳ'|'Ḳ'
  |'u'|'u̯'|'U'|'\u0055\u032F'
  
  |'e'|'/'|'+'
  
- |'č'|'č̣'|'Č'|'Č̣'
+ // Schekelsche Zeichen|'č'|'č̣'|'Č'|'Č̣'
  |'a'|'J'|'Y'|'W'|'B'|'P'|'F'|'M'
  |'N'|'R'|'L'
  
@@ -250,6 +316,10 @@ Expanded:
 	'(' wChar+=NoExpanded+ ')'
 ;
 
+AncientExpanded:
+	{AncientExpanded}
+	'((' wChar+=NoAncientExpanded+ '))'
+;
 NoExpanded:
 	Chars | Interfix | DisputableReading
 ;
@@ -312,10 +382,7 @@ NoRasur:
 	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion 
 ;
 
-AncientExpanded:
-	{AncientExpanded}
-	'((' wChar+=NoAncientExpanded+ '))'
-;
+
 
 NoAncientExpanded:
 	Chars | Expanded | Interfix | DisputableReading | Emendation | Lacuna | PartialDestruction | Deletion 
@@ -336,7 +403,7 @@ PartialDestruction:
 ;
 
 NoPartialDestruction:
-	Chars | Deletion | Expanded | DisputableReading | Interfix |Cartouche |Oval |Serech 
+	Chars | Deletion | Expanded | DisputableReading | Interfix |Cartouche |Oval |Serech | Emendation
 ;
 
 // textual criticism interfixes

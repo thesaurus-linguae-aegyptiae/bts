@@ -37,7 +37,59 @@ public class BTSConstants
 	public static final String DISPUTABLE_VERS_MARKER = "DisputableVersMarker";
 	public static final String DELETED_VERS_MARKER = "DeletedVersMarker";
 	public static final String MISSING_VERS_MARKER = "MissingVersMarker";
+	
+	public static final String DESTROYEDVERSMARKER   = "DestroyedVersMarker";
+	public static final String DELETEDVERSMARKER   = "DeletedVersMarker";
+	public static final String DISPUTABLEVERSMARKER  = "DisputableVersMarker";
+	public static final String  RESTORATIONOVERRASURMARKER  = "RestorationOverRasurMarker";
+	public static final String  ANCIENTEXPANDEDMARKER  = "AncientExpandedMarker";
+	public static final String  RASURMARKER  = "RasurMarker";
+	public static final String  EMENDATIONVERSMARKER  = "EmendationVersMarker";
+	public static final String  DESTROYEDVERSFRONTIERMARKER  = "DestroyedVersFrontierMarker";
+	public static final String  PARTIALDESTROYEDVERSMARKER  = "PartialDestroyedVersMarker";
+	public static final String  PARTIALDESTROYEDDISPUTABLEVERSMARKER = "PartialDestroyedDisputableVersMarker";
+	public static final String  DESTROYEDDISPUTABLEVERSFRONTIERMARKER  = "DestroyedDisputableVersFrontierMarker";
+	public static final String  DISPUTABLEDESTROYEDVERSMARKER  = "DisputableDestroyedVersMarker";
+	public static final String  DELETEDDISPUTABLEVERSMARKER = "DeletedDisputableVersMarker";
+	public static final String  MISSINGDISPUTABLEVERSMARKER  = "MissingDisputableVersMarker";
+	
+	public static final String  DISPUTABLEDELETEDVERSMARKER   = "DisputableDeletedVersMarker ";
+	public static final String  PARTIALDESTROYEDDELETEDVERSMARKER  = "PartialDestroyedDeletedVersMarker";
+	public static final String  DESTROYEDDELETEDVERSMARKER   = "DestroyedDeletedVersMarker";
+	public static final String  DELETEDDESTROYEDVERSMARKER  = "DeletedDestroyedVersMarker";
 
+
+	public static final String VERS_BREAK_MARKER_SIGN = "\uDB80\uDC80"; //v
+	public static final String VERS_FRONTER_MARKER_SIGN = "\uDB80\uDC81"; //mv
+
+	public static final String BROKEN_VERS_MARKER_SIGN = "\uDB80\uDC82";
+	public static final String DISPUTALBE_VERS_MARKER_SIGN = "\u2E2E\uDB80\uDC80?";
+	public static final String DELETED_VERS_MARKER_SIGN = "{\uDB80\uDC80}";
+	public static final String DESTROYED_VERS_MARKER_SIGN = "[\uDB80\uDC80]";
+	public static final String MISSING_VERS_MARKER_SIGN = "\u2329\uDB80\uDC80\u232A";
+	
+	public static final String DESTROYEDVERSMARKER_SIGN   = "[\uDB80\uDC80]";
+	public static final String DELETEDVERSMARKER_SIGN  = "{\uDB80\uDC80}";
+	public static final String DISPUTABLEVERSMARKER_SIGN  = "\u2E2E\uDB80\uDC80?";
+	public static final String  RESTORATIONOVERRASURMARKER_SIGN  = "[[\uDB80\uDC80]]";
+	public static final String  ANCIENTEXPANDEDMARKER_SIGN  = "((\uDB80\uDC80))";
+	public static final String  RASURMARKER_SIGN  = "{{\uDB80\uDC80}}";
+	public static final String  EMENDATIONVERSMARKER_SIGN  = "(\uDB80\uDC80)";
+	public static final String  DESTROYEDVERSFRONTIERMARKER_SIGN  = "[\uDB80\uDC81]";
+	public static final String  PARTIALDESTROYEDVERSMARKER_SIGN  = "\u2E22\uDB80\uDC80\u2E23";
+	public static final String  PARTIALDESTROYEDDISPUTABLEVERSMARKER_SIGN = "\u2E22\u2E2E\uDB80\uDC80?\u2E23";
+	public static final String  DESTROYEDDISPUTABLEVERSFRONTIERMARKER_SIGN  = "[\u2E2E\uDB80\uDC81?]";
+	public static final String  DISPUTABLEDESTROYEDVERSMARKER_SIGN  = "\u2E2E[\uDB80\uDC80]?";
+	public static final String  DELETEDDISPUTABLEVERSMARKER_SIGN = "{\u2E2E\uDB80\uDC80?}";
+	public static final String  MISSINGDISPUTABLEVERSMARKER_SIGN  = "\u2329\u2E2E\uDB80\uDC80?\u232A";
+	
+	public static final String  DISPUTABLEDELETEDVERSMARKER_SIGN   = "\u2E2E{\uDB80\uDC80}? ";
+	public static final String  PARTIALDESTROYEDDELETEDVERSMARKER_SIGN  = "\u2E22{\uDB80\uDC80}\u2E23";
+	public static final String  DESTROYEDDELETEDVERSMARKER_SIGN   = "[{\uDB80\uDC80}]";
+	public static final String  DELETEDDESTROYEDVERSMARKER_SIGN  = "{[\uDB80\uDC80]}";
+	
+	
+	
 	
 	public static final String OBJECT_STATE_ACTIVE = "active";
 	public static final String OBJECT_STATE_TERMINATED = "terminated";

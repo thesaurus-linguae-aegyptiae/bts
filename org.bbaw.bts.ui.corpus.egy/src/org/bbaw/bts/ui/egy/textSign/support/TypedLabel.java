@@ -9,6 +9,8 @@ public class TypedLabel extends Label{
 	public static final int FLEXION = 1;
 	
 	public static final int TRANSLITATION = 2;
+
+	public static final int TRANSLATION = 3;
 	
 	private int type;
 

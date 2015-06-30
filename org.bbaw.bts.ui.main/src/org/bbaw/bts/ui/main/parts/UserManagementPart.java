@@ -1728,17 +1728,27 @@ public class UserManagementPart
 		roles_dbColl_index_btn = new Button(roles_composite_right, SWT.CHECK);
 		roles_dbColl_index_btn.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		roles_dbColl_index_btn.setText("Index Collection");
+		
+		Label l = new Label(roles_composite_right, SWT.NONE);
+		l.setText("");
+		l.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 2, 10));
 
 		lblCreateNewRoles = new Label(roles_composite_right, SWT.NONE);
-		lblCreateNewRoles.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
-		lblCreateNewRoles.setText("Create New Roles Description");
+		lblCreateNewRoles.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 10));
+		lblCreateNewRoles.setText("Create New Roles Description (Select role first)");
 
+		Label lblCreateNewRoles2 = new Label(roles_composite_right, SWT.NONE);
+		lblCreateNewRoles2.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, true, 2, 1));
+		lblCreateNewRoles2.setText("Please, avoid dublicates!");
+
+		
 		roles_dbColl_newRoles_combo = new Combo(roles_composite_right, SWT.BORDER | SWT.READ_ONLY);
-		roles_dbColl_newRoles_combo.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
+		roles_dbColl_newRoles_combo.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 2, 1));
 		roles_dbColl_newRoles_combo.setItems(databaseRoles);
-
+		roles_dbColl_newRoles_combo.select(0);
+		
 		roles_dbColl_newRoles_link = new Link(roles_composite_right, SWT.NONE);
-		roles_dbColl_newRoles_link.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		roles_dbColl_newRoles_link.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, true, true, 2, 1));
 		roles_dbColl_newRoles_link.setText("<a>Add new User Roles Description</a>");
 		roles_dbColl_newRoles_link.addSelectionListener(new SelectionAdapter()
 		{
