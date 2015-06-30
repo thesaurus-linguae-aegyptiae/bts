@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/bts.transform.corpus.model/src" modelPluginID="bts.transform.corpus.model"
+    modelName="CorpusDTDneu" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
+    operationReflection="true" importOrganizing="true">
+  <genAnnotations source="http://www.eclipse.org/emf/2002/GenModel/importer/org.eclipse.xsd.ecore.importer">
+    <details key="createMap" value="true"/>
+  </genAnnotations>
+  <foreignModel>CorpusDTDneu.ecore</foreignModel>
+  <genPackages prefix="CorpusDTDneu" resource="XML" disposableProviderFactory="true"
+      ecorePackage="CorpusDTDneu.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//CategoryType">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/Provenance"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/Date"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/ObjectType"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/Depiction"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/Script"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/Language"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType/TextType"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//CategoryType1">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/Provenance"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/Date"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/ObjectType"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/Depiction"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/Script"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/Language"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/TextType"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//CategoryType1/Museum"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//LTypeType">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//LTypeType/B"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//LTypeType/D"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType/TAB"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType/EOL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType1">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType1/Start"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType1/End"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType2">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType2/Start"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType2/End"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType3">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType3/Start"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType3/End"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType4">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType4/BTS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType5">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType5/HS"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType5/NS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType6">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType6/VP"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType6/V"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType6/DVP"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType6/EOC"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType7">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType7/BTS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="CorpusDTDneu.ecore#//TypeType8">
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType8/Start"/>
+      <genEnumLiterals ecoreEnumLiteral="CorpusDTDneu.ecore#//TypeType8/End"/>
+    </genEnums>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//CategoryTypeObject"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//CategoryTypeObject1"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//LTypeTypeObject"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject1"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject2"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject3"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject4"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject5"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject6"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject7"/>
+    <genDataTypes ecoreDataType="CorpusDTDneu.ecore#//TypeTypeObject8"/>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//BausteinPassageType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//BausteinPassageType/baustein"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//BausteinPassageType/passageID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//BausteinPassageType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//DateThsType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateThsType/term"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateThsType/lowerTerm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateThsType/upperTerm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateThsType/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateThsType/yearFrom"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateThsType/yearTo"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//DateType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DateType/dateThs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateType/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DateType/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//DocumentRoot">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/xMLNSPrefixMap"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/xSISchemaLocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/author"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/bausteinPassage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/bibliography"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/code1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/code2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/codes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/date"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/dateThs"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/definition"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/depiction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyPunctuation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egySent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egySubTxt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egySzenario"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyTB1"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyTB3End"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyTB3Start"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyTxt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyTxtCorpus"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/egyWord"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/fileName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/filePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/form"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/formattingElement"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/fullName"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/glosse"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/glossePassage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/graphics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/hierarchy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/langComment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/language"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/languagePassage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/leipzigPassage"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/lineCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/lowerTerm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/museumNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/nameSort"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/note"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/notes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/objectType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/passportDataItem"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/picture"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/picturesTable"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/project"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/protocol"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/provenance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/punctuation"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/script"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCArrangement"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCCaption"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCHeader"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCLocation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCObject"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCObjPart"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCPicture"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCScene"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCSuperText"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/tCText"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/term"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/textType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/thsEntry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/translat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/translation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/upperTerm"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/wbFolder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//DocumentRoot/wbSlips"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//DocumentRoot/work"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyPunctuationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyPunctuationType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyPunctuationType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyPunctuationType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyPunctuationType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgySentType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/translat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/egySent"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/egyTB1"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/egyTB3Start"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/egyTB3End"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/egyWord"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/lineCount"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/note"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/formattingElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/languagePassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/bausteinPassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/leipzigPassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/glossePassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/punctuation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySentType/egyPunctuation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/leipzig3Modul"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySentType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgySubTxtType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySubTxtType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySubTxtType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySubTxtType/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySubTxtType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/egySubTxt"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/egySent"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/egyTB1"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/egySzenario"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/glosse"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/egyTB3Start"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySubTxtType/egyTB3End"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgySzenarioType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgySzenarioType/egySent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgySzenarioType/interneNummer"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyTB1Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB1Type/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB1Type/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB1Type/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB1Type/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/egySent"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/egyTB1"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/egyTB3Start"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/egyTB3End"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/egyWord"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/lineCount"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/note"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/formattingElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/punctuation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTB1Type/egyPunctuation"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyTB3EndType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3EndType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3EndType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3EndType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3EndType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3EndType/idRef"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyTB3StartType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3StartType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3StartType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3StartType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3StartType/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTB3StartType/idRef"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyTxtCorpusType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCHeader"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTxtCorpusType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/picturesTable"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCCaption"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCArrangement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCObject"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCObjPart"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCScene"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/tCText"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtCorpusType/egyTxt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTxtCorpusType/dTDVersion"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyTxtType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTxtType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTxtType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTxtType/comment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyTxtType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/egySubTxt"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/egySent"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/egyTB1"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/egySzenario"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/glosse"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/egyTB3Start"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//EgyTxtType/egyTB3End"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//EgyWordType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/form"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/translat"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/graphics"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/connect"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/fKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/leipzig3Modul"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/lKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/lType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/reihenfolge"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/reihenfolgeID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/script"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/status"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/wChr"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//EgyWordType/wType"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//FormattingElementType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//FormattingElementType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//FormattingElementType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//FormattingElementType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//GlossePassageType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//GlossePassageType/passageID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//GlossePassageType/script"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//GlossePassageType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//GlosseType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//GlosseType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/egySent"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/egyTB1"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/egyTB3Start"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/egyTB3End"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/egyWord"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/lineCount"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/note"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/formattingElement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/languagePassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/bausteinPassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/leipzigPassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/glossePassage"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/punctuation"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//GlosseType/egyPunctuation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//GlosseType/passageID"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//LanguagePassageType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LanguagePassageType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LanguagePassageType/passageID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LanguagePassageType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//LeipzigPassageType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LeipzigPassageType/auszeichnung"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LeipzigPassageType/passageID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LeipzigPassageType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//LineCountType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LineCountType/mixed"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LineCountType/group"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LineCountType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//LineCountType/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//NoteType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//NoteType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//NoteType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//NoteType/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//PassportDataItem">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//PassportDataItem/passportDataItem"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//PassportDataItemType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//PassportDataItemType/thsEntry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PassportDataItemType/code"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PassportDataItemType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PassportDataItemType/category"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//PicturesTableType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//PicturesTableType/picture"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//PictureType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/fileName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/filePath"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/bibliography"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/authorization"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/dpi"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/height"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/pictType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/scale"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PictureType/width"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//PunctuationType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PunctuationType/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PunctuationType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//PunctuationType/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCArrangementType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCArrangementType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCArrangementType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCArrangementType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCArrangementType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCArrangementType/tCArrangement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCArrangementType/tCObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCArrangementType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCArrangementType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCArrangementType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCCaptionType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCCaptionType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCCaptionType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCCaption"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCArrangement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCObject"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCObjPart"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCCaptionType/tCText"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCCaptionType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCCaptionType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCCaptionType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCGroupType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCGroupType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCGroupType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCGroupType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCGroupType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCGroupType/tCCaption"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCGroupType/tCGroup"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCGroupType/tCArrangement"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCGroupType/tCObject"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCGroupType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCGroupType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCGroupType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCHeaderType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCHeaderType/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCHeaderType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCHeaderType/project"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCHeaderType/title"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCHeaderType/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCLocationType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCLocationType/thsEntry"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCLocationType/museumNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCLocationType/comment"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCObjectType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCCaption"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCObject"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCObjPart"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCScene"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCSuperText"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjectType/tCText"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/bearbeitungsstand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/gIS"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/objectID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjectType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCObjPartType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjPartType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjPartType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCCaption"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCObject"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCObjPart"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCScene"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCSuperText"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCObjPartType/tCText"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjPartType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjPartType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCObjPartType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCPassportType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/definition"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/protocol"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/bibliography"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/provenance"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/date"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/objectType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/depiction"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/script"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/language"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/langComment"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/work"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/textType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/lineCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/codes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/wbFolder"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/wbSlips"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/code1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/code2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/btsCodes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/notes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/fullName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPassportType/nameSort"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCPassportType/tCLocation"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCPictureType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPictureType/mixed"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCPictureType/pictureType"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCSceneType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSceneType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSceneType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSceneType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSceneType/group"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSceneType/tCCaption"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSceneType/tCScene"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSceneType/tCSuperText"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSceneType/tCText"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSceneType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSceneType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSceneType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCSuperTextType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSuperTextType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSuperTextType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSuperTextType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCSuperTextType/tCText"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSuperTextType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSuperTextType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCSuperTextType/tCName"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//TCTextType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCTextType/tCPassport"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCTextType/tCPicture"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCTextType/tCNotebook"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CorpusDTDneu.ecore#//TCTextType/egyTxt"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCTextType/author"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCTextType/bearbeitungsstand"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCTextType/sortKey"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCTextType/tCName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//TCTextType/textID"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//ThsEntryType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//ThsEntryType/term"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//ThsEntryType/hierarchy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//ThsEntryType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//ThsEntryType/category"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//ThsEntryType/key"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//ThsEntryType/type"/>
+    </genClasses>
+    <genClasses ecoreClass="CorpusDTDneu.ecore#//WorkType">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//WorkType/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//WorkType/comment"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//WorkType/thesaurus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute CorpusDTDneu.ecore#//WorkType/versionCode"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
