@@ -1,5 +1,6 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -233,11 +234,12 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
 		
 		
-		children = lemmaFilterReviewState(children);
+		children = lemmaFilterReviewStateType(children);
+		
 		return filter(children);
 	}
 
-	private List<BTSLemmaEntry> lemmaFilterReviewState(
+	private List<BTSLemmaEntry> lemmaFilterReviewStateType(
 			List<BTSLemmaEntry> children) {
 		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
 		for (BTSCorpusObject entry : children)
@@ -311,6 +313,17 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			// add .*
 //			chars += " OR " + chars + ".*";
 		}
+		if (chars.length() > 3 && chars.startsWith("\"") && chars.endsWith("\""))
+		{
+			chars = chars.substring(1, chars.length() -1);
+		}
+		else if (chars.length() > 1 && chars.startsWith("*"))
+		{
+			chars = chars.substring(1, chars.length());
+		}else if (chars.length() > 1 && chars.endsWith("*"))
+		{
+			chars = chars.substring(0, chars.length()-1);
+		}
 		System.out.println("search for lemma proposals: "  + chars);
 		return chars;
 	}
@@ -347,5 +360,14 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Override
 	public String processWordCharForLemmatizing(BTSWord word) {
 		return processWordChars(word);
+	}
+
+	@Override
+	public List<BTSLemmaEntry> sortAndFilterLemmaProposals(
+			List<BTSLemmaEntry> obs) {
+		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(obs.size());
+		filtered = lemmaFilterReviewStateType(obs);
+		return filtered;
+
 	}
 }

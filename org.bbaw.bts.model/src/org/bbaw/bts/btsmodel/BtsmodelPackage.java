@@ -1357,13 +1357,49 @@ public interface BtsmodelPackage extends EPackage {
 	int BTS_INTER_TEXT_REFERENCE_OPERATION_COUNT = 0;
 
 	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM__ID = 0;
+
+	/**
+	 * The number of structural features of the '<em>BTS Identifiable Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT = 1;
+
+	/**
+	 * The number of operations of the '<em>BTS Identifiable Item</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT = 0;
+
+	/**
+	 * The feature id for the '<em><b>id</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BTS_TRANSLATION__ID = BTS_IDENTIFIABLE_ITEM__ID;
+
+	/**
 	 * The feature id for the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION__VALUE = 0;
+	int BTS_TRANSLATION__VALUE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1372,7 +1408,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION__TYPE = 1;
+	int BTS_TRANSLATION__TYPE = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Lang</b></em>' attribute.
@@ -1381,7 +1417,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION__LANG = 2;
+	int BTS_TRANSLATION__LANG = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>BTS Translation</em>' class.
@@ -1390,7 +1426,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION_FEATURE_COUNT = 3;
+	int BTS_TRANSLATION_FEATURE_COUNT = BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of operations of the '<em>BTS Translation</em>' class.
@@ -1399,7 +1435,7 @@ public interface BtsmodelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int BTS_TRANSLATION_OPERATION_COUNT = 0;
+	int BTS_TRANSLATION_OPERATION_COUNT = BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1463,33 +1499,6 @@ public interface BtsmodelPackage extends EPackage {
 	 * @ordered
 	 */
 	int BTS_DATE_OPERATION_COUNT = 0;
-
-	/**
-	 * The feature id for the '<em><b>id</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IDENTIFIABLE_ITEM__ID = 0;
-
-	/**
-	 * The number of structural features of the '<em>BTS Identifiable Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IDENTIFIABLE_ITEM_FEATURE_COUNT = 1;
-
-	/**
-	 * The number of operations of the '<em>BTS Identifiable Item</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BTS_IDENTIFIABLE_ITEM_OPERATION_COUNT = 0;
 
 	/**
 	 * The meta object id for the '{@link org.bbaw.bts.btsmodel.impl.BTSRelationImpl <em>BTS Relation</em>}' class.

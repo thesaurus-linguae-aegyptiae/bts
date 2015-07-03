@@ -1127,9 +1127,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					    "You are trying to save a text which contains errors, saving this text may lead to loss of data."
 					    + "\n\nIt is not recommended to save a text which contains errors!"
 					    + "\n\nAre you sure that you want to risk data loss and save with errors?", MessageDialog.WARNING,
-					    new String[] { "Don't Save", "Save with Errors" }, 0);
+					    new String[] { "Save with Errors", "Don't Save" }, 1);
 				int result = dialog.open();
-				if (result == 0) return false;
+				if (result != MessageDialog.OK) return false;
 				
 			}
 

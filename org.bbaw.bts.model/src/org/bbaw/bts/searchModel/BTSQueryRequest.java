@@ -136,6 +136,11 @@ public class BTSQueryRequest
 	}
 
 	public void setResponseFields(String[] responseFieldsArray) {
+		if (responseFieldsArray == null && this.responseFields != null)
+		{
+			this.responseFields.clear();
+			return;
+		}
 		this.responseFields = new Vector<String>();
 		for (String s : responseFieldsArray)
 		{

@@ -389,13 +389,19 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 					// run search command
 					Map map = new HashMap(1);
-					map.put("viewerFilter",
+					map.put("org.bbaw.bts.ui.main.commandparameter.viewerFilter",
 							"reviewState=new,reviewState=awaiting-review awaiting-update,"
 									+ "reviewState=reviewed,"
 									+ "reviewState=published,reviewState=published-awaiting-review,"
 									+ "reviewState=transformed_awaiting_update");
+					
+					String chars = lemmatizerController.processWordCharForLemmatizing(textSelectedWord.getText());
+					if (chars != null)
+					{
+						map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);
+					}
 					ParameterizedCommand cmd = commandService.createCommand(
-							"org.bbaw.bts.ui.main.command.search", null);
+							"org.bbaw.bts.ui.main.command.search", map);
 
 					handlerService.executeHandler(cmd);
 				}
@@ -723,7 +729,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 						node,
 						BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
 						null);
-		final List<BTSLemmaEntry> filtered = filterLemmaProposals(children);
+		final List<BTSLemmaEntry> filtered = filterLemmaProposals(children, null);
 		// If you want to update the UI
 		sync.asyncExec(new Runnable() {
 			@Override
@@ -1280,6 +1286,13 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			protected IStatus run(final IProgressMonitor monitor) {
 
+				String tempSearchString = null;
+				if (query.getAutocompletePrefix() != null) {
+					tempSearchString = lemmatizerController
+							.processWordCharForLemmatizing(query
+									.getAutocompletePrefix());
+				}
+				final String searchString = tempSearchString;
 				List<BTSLemmaEntry> obs;
 				obs = lemmaNavigatorController
 						.getSearchEntries(
@@ -1289,7 +1302,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 								lemmaRootNode,
 								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
 								monitor);
-				List<BTSLemmaEntry> filtered = filterLemmaProposals(obs);
+				List<BTSLemmaEntry> filtered = filterLemmaProposals(obs, searchString);
 
 //				Set<BTSLemmaEntry> filteredSet = new HashSet<BTSLemmaEntry>(filtered.size());
 //				filteredSet.addAll(filtered);
@@ -1309,10 +1322,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 					sync.asyncExec(new Runnable() {
 						@Override
 						public void run() {
-							if (query.getAutocompletePrefix() != null) {
-								sorter.setLemmatizerWordChar(lemmatizerController
-										.processWordCharForLemmatizing(query
-												.getAutocompletePrefix()));
+							if (searchString != null) {
+								sorter.setLemmatizerWordChar(searchString);
 							}
 							lemmaViewer.setInput(lemmaRootNode);
 							if (monitor.isCanceled())
@@ -1486,21 +1497,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 		}
 	}
 
-	protected List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs) {
-		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(obs.size());
-		for (BTSLemmaEntry lemma : obs) {
-			if ((lemma.getRevisionState() == null || !lemma.getRevisionState()
-					.contains("obsolete"))
-					&& (lemma.getType() == null || !lemma.getType().equals(
-							"root"))) {
-				filtered.add(lemma);
-			}
-			if (filtered.size() >= 120) // cut after reaching max length
-			{
-				break;
-			}
-		}
-		return filtered;
+	protected List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs, String searchString) {
+		List<BTSLemmaEntry> filtered = lemmatizerController.sortAndFilterLemmaProposals(obs, searchString);
+		return filtered.subList(0, Math.min(filtered.size() , 120));
+		
 	}
 
 	@Inject

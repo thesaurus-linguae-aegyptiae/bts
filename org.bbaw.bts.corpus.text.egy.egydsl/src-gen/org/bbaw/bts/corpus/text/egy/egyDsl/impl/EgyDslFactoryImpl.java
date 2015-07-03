@@ -72,29 +72,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.AMBIVALENCE: return createAmbivalence();
       case EgyDslPackage.CASE: return createCase();
       case EgyDslPackage.SENTENCE_ITEM_NO_AMBIVALENCE: return createSentenceItemNoAmbivalence();
-      case EgyDslPackage.VERS_MARKER: return createVersMarker();
-      case EgyDslPackage.EMENDATION_VERS_MARKER: return createEmendationVersMarker();
-      case EgyDslPackage.DISPUTABLE_VERS_MARKER: return createDisputableVersMarker();
-      case EgyDslPackage.DISPUTABLE_DESTROYED_VERS_MARKER: return createDisputableDestroyedVersMarker();
-      case EgyDslPackage.DISPUTABLE_DELETED_VERS_MARKER: return createDisputableDeletedVersMarker();
-      case EgyDslPackage.DELETED_VERS_MARKER: return createDeletedVersMarker();
-      case EgyDslPackage.DELETED_DISPUTABLE_VERS_MARKER: return createDeletedDisputableVersMarker();
-      case EgyDslPackage.DELETED_DESTROYED_VERS_MARKER: return createDeletedDestroyedVersMarker();
-      case EgyDslPackage.DESTROYED_VERS_MARKER: return createDestroyedVersMarker();
-      case EgyDslPackage.DESTROYED_VERS_FRONTIER_MARKER: return createDestroyedVersFrontierMarker();
-      case EgyDslPackage.DESTROYED_DISPUTABLE_VERS_FRONTIER_MARKER: return createDestroyedDisputableVersFrontierMarker();
-      case EgyDslPackage.DESTROYED_DELETED_VERS_MARKER: return createDestroyedDeletedVersMarker();
-      case EgyDslPackage.PARTIAL_DESTROYED_VERS_MARKER: return createPartialDestroyedVersMarker();
-      case EgyDslPackage.PARTIAL_DESTROYED_DISPUTABLE_VERS_MARKER: return createPartialDestroyedDisputableVersMarker();
-      case EgyDslPackage.PARTIAL_DESTROYED_DELETED_VERS_MARKER: return createPartialDestroyedDeletedVersMarker();
-      case EgyDslPackage.MISSING_VERS_MARKER: return createMissingVersMarker();
-      case EgyDslPackage.MISSING_DISPUTABLE_VERS_MARKER: return createMissingDisputableVersMarker();
-      case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER: return createRestorationOverRasurMarker();
-      case EgyDslPackage.ANCIENT_EXPANDED_MARKER: return createAncientExpandedMarker();
-      case EgyDslPackage.RASUR_MARKER: return createRasurMarker();
-      case EgyDslPackage.VERS_FRONTIER_MARKER: return createVersFrontierMarker();
-      case EgyDslPackage.VERSBREAK_MARKER: return createVersbreakMarker();
-      case EgyDslPackage.BROKEN_VERSBREAK_MARKER: return createBrokenVersbreakMarker();
       case EgyDslPackage.MARKER: return createMarker();
       case EgyDslPackage.DESTRUCTION_MARKER: return createDestructionMarker();
       case EgyDslPackage.WORD: return createWord();
@@ -135,6 +112,29 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.INTERFIX_CONNECTION_SYLLABIC_GROUP: return createInterfixConnectionSyllabicGroup();
       case EgyDslPackage.INTERFIX_COMPOUND_WORDS: return createInterfixCompoundWords();
       case EgyDslPackage.INTERFIX_PHONETICAL_COMPLEMENT: return createInterfixPhoneticalComplement();
+      case EgyDslPackage.VERS_MARKER: return createVersMarker();
+      case EgyDslPackage.EMENDATION_VERS_MARKER: return createEmendationVersMarker();
+      case EgyDslPackage.DISPUTABLE_VERS_MARKER: return createDisputableVersMarker();
+      case EgyDslPackage.DISPUTABLE_DESTROYED_VERS_MARKER: return createDisputableDestroyedVersMarker();
+      case EgyDslPackage.DISPUTABLE_DELETED_VERS_MARKER: return createDisputableDeletedVersMarker();
+      case EgyDslPackage.DELETED_VERS_MARKER: return createDeletedVersMarker();
+      case EgyDslPackage.DELETED_DISPUTABLE_VERS_MARKER: return createDeletedDisputableVersMarker();
+      case EgyDslPackage.DELETED_DESTROYED_VERS_MARKER: return createDeletedDestroyedVersMarker();
+      case EgyDslPackage.DESTROYED_VERS_MARKER: return createDestroyedVersMarker();
+      case EgyDslPackage.DESTROYED_VERS_FRONTIER_MARKER: return createDestroyedVersFrontierMarker();
+      case EgyDslPackage.DESTROYED_DISPUTABLE_VERS_FRONTIER_MARKER: return createDestroyedDisputableVersFrontierMarker();
+      case EgyDslPackage.DESTROYED_DELETED_VERS_MARKER: return createDestroyedDeletedVersMarker();
+      case EgyDslPackage.PARTIAL_DESTROYED_VERS_MARKER: return createPartialDestroyedVersMarker();
+      case EgyDslPackage.PARTIAL_DESTROYED_DISPUTABLE_VERS_MARKER: return createPartialDestroyedDisputableVersMarker();
+      case EgyDslPackage.PARTIAL_DESTROYED_DELETED_VERS_MARKER: return createPartialDestroyedDeletedVersMarker();
+      case EgyDslPackage.MISSING_VERS_MARKER: return createMissingVersMarker();
+      case EgyDslPackage.MISSING_DISPUTABLE_VERS_MARKER: return createMissingDisputableVersMarker();
+      case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER: return createRestorationOverRasurMarker();
+      case EgyDslPackage.ANCIENT_EXPANDED_MARKER: return createAncientExpandedMarker();
+      case EgyDslPackage.RASUR_MARKER: return createRasurMarker();
+      case EgyDslPackage.VERS_FRONTIER_MARKER: return createVersFrontierMarker();
+      case EgyDslPackage.VERSBREAK_MARKER: return createVersbreakMarker();
+      case EgyDslPackage.BROKEN_VERSBREAK_MARKER: return createBrokenVersbreakMarker();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -226,259 +226,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     SentenceItemNoAmbivalenceImpl sentenceItemNoAmbivalence = new SentenceItemNoAmbivalenceImpl();
     return sentenceItemNoAmbivalence;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VersMarker createVersMarker()
-  {
-    VersMarkerImpl versMarker = new VersMarkerImpl();
-    return versMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EmendationVersMarker createEmendationVersMarker()
-  {
-    EmendationVersMarkerImpl emendationVersMarker = new EmendationVersMarkerImpl();
-    return emendationVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DisputableVersMarker createDisputableVersMarker()
-  {
-    DisputableVersMarkerImpl disputableVersMarker = new DisputableVersMarkerImpl();
-    return disputableVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DisputableDestroyedVersMarker createDisputableDestroyedVersMarker()
-  {
-    DisputableDestroyedVersMarkerImpl disputableDestroyedVersMarker = new DisputableDestroyedVersMarkerImpl();
-    return disputableDestroyedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DisputableDeletedVersMarker createDisputableDeletedVersMarker()
-  {
-    DisputableDeletedVersMarkerImpl disputableDeletedVersMarker = new DisputableDeletedVersMarkerImpl();
-    return disputableDeletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DeletedVersMarker createDeletedVersMarker()
-  {
-    DeletedVersMarkerImpl deletedVersMarker = new DeletedVersMarkerImpl();
-    return deletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DeletedDisputableVersMarker createDeletedDisputableVersMarker()
-  {
-    DeletedDisputableVersMarkerImpl deletedDisputableVersMarker = new DeletedDisputableVersMarkerImpl();
-    return deletedDisputableVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DeletedDestroyedVersMarker createDeletedDestroyedVersMarker()
-  {
-    DeletedDestroyedVersMarkerImpl deletedDestroyedVersMarker = new DeletedDestroyedVersMarkerImpl();
-    return deletedDestroyedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestroyedVersMarker createDestroyedVersMarker()
-  {
-    DestroyedVersMarkerImpl destroyedVersMarker = new DestroyedVersMarkerImpl();
-    return destroyedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestroyedVersFrontierMarker createDestroyedVersFrontierMarker()
-  {
-    DestroyedVersFrontierMarkerImpl destroyedVersFrontierMarker = new DestroyedVersFrontierMarkerImpl();
-    return destroyedVersFrontierMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestroyedDisputableVersFrontierMarker createDestroyedDisputableVersFrontierMarker()
-  {
-    DestroyedDisputableVersFrontierMarkerImpl destroyedDisputableVersFrontierMarker = new DestroyedDisputableVersFrontierMarkerImpl();
-    return destroyedDisputableVersFrontierMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestroyedDeletedVersMarker createDestroyedDeletedVersMarker()
-  {
-    DestroyedDeletedVersMarkerImpl destroyedDeletedVersMarker = new DestroyedDeletedVersMarkerImpl();
-    return destroyedDeletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PartialDestroyedVersMarker createPartialDestroyedVersMarker()
-  {
-    PartialDestroyedVersMarkerImpl partialDestroyedVersMarker = new PartialDestroyedVersMarkerImpl();
-    return partialDestroyedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PartialDestroyedDisputableVersMarker createPartialDestroyedDisputableVersMarker()
-  {
-    PartialDestroyedDisputableVersMarkerImpl partialDestroyedDisputableVersMarker = new PartialDestroyedDisputableVersMarkerImpl();
-    return partialDestroyedDisputableVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PartialDestroyedDeletedVersMarker createPartialDestroyedDeletedVersMarker()
-  {
-    PartialDestroyedDeletedVersMarkerImpl partialDestroyedDeletedVersMarker = new PartialDestroyedDeletedVersMarkerImpl();
-    return partialDestroyedDeletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MissingVersMarker createMissingVersMarker()
-  {
-    MissingVersMarkerImpl missingVersMarker = new MissingVersMarkerImpl();
-    return missingVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MissingDisputableVersMarker createMissingDisputableVersMarker()
-  {
-    MissingDisputableVersMarkerImpl missingDisputableVersMarker = new MissingDisputableVersMarkerImpl();
-    return missingDisputableVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RestorationOverRasurMarker createRestorationOverRasurMarker()
-  {
-    RestorationOverRasurMarkerImpl restorationOverRasurMarker = new RestorationOverRasurMarkerImpl();
-    return restorationOverRasurMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public AncientExpandedMarker createAncientExpandedMarker()
-  {
-    AncientExpandedMarkerImpl ancientExpandedMarker = new AncientExpandedMarkerImpl();
-    return ancientExpandedMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public RasurMarker createRasurMarker()
-  {
-    RasurMarkerImpl rasurMarker = new RasurMarkerImpl();
-    return rasurMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VersFrontierMarker createVersFrontierMarker()
-  {
-    VersFrontierMarkerImpl versFrontierMarker = new VersFrontierMarkerImpl();
-    return versFrontierMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public VersbreakMarker createVersbreakMarker()
-  {
-    VersbreakMarkerImpl versbreakMarker = new VersbreakMarkerImpl();
-    return versbreakMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public BrokenVersbreakMarker createBrokenVersbreakMarker()
-  {
-    BrokenVersbreakMarkerImpl brokenVersbreakMarker = new BrokenVersbreakMarkerImpl();
-    return brokenVersbreakMarker;
   }
 
   /**
@@ -919,6 +666,259 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
   {
     InterfixPhoneticalComplementImpl interfixPhoneticalComplement = new InterfixPhoneticalComplementImpl();
     return interfixPhoneticalComplement;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VersMarker createVersMarker()
+  {
+    VersMarkerImpl versMarker = new VersMarkerImpl();
+    return versMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EmendationVersMarker createEmendationVersMarker()
+  {
+    EmendationVersMarkerImpl emendationVersMarker = new EmendationVersMarkerImpl();
+    return emendationVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DisputableVersMarker createDisputableVersMarker()
+  {
+    DisputableVersMarkerImpl disputableVersMarker = new DisputableVersMarkerImpl();
+    return disputableVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DisputableDestroyedVersMarker createDisputableDestroyedVersMarker()
+  {
+    DisputableDestroyedVersMarkerImpl disputableDestroyedVersMarker = new DisputableDestroyedVersMarkerImpl();
+    return disputableDestroyedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DisputableDeletedVersMarker createDisputableDeletedVersMarker()
+  {
+    DisputableDeletedVersMarkerImpl disputableDeletedVersMarker = new DisputableDeletedVersMarkerImpl();
+    return disputableDeletedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DeletedVersMarker createDeletedVersMarker()
+  {
+    DeletedVersMarkerImpl deletedVersMarker = new DeletedVersMarkerImpl();
+    return deletedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DeletedDisputableVersMarker createDeletedDisputableVersMarker()
+  {
+    DeletedDisputableVersMarkerImpl deletedDisputableVersMarker = new DeletedDisputableVersMarkerImpl();
+    return deletedDisputableVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DeletedDestroyedVersMarker createDeletedDestroyedVersMarker()
+  {
+    DeletedDestroyedVersMarkerImpl deletedDestroyedVersMarker = new DeletedDestroyedVersMarkerImpl();
+    return deletedDestroyedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DestroyedVersMarker createDestroyedVersMarker()
+  {
+    DestroyedVersMarkerImpl destroyedVersMarker = new DestroyedVersMarkerImpl();
+    return destroyedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DestroyedVersFrontierMarker createDestroyedVersFrontierMarker()
+  {
+    DestroyedVersFrontierMarkerImpl destroyedVersFrontierMarker = new DestroyedVersFrontierMarkerImpl();
+    return destroyedVersFrontierMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DestroyedDisputableVersFrontierMarker createDestroyedDisputableVersFrontierMarker()
+  {
+    DestroyedDisputableVersFrontierMarkerImpl destroyedDisputableVersFrontierMarker = new DestroyedDisputableVersFrontierMarkerImpl();
+    return destroyedDisputableVersFrontierMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public DestroyedDeletedVersMarker createDestroyedDeletedVersMarker()
+  {
+    DestroyedDeletedVersMarkerImpl destroyedDeletedVersMarker = new DestroyedDeletedVersMarkerImpl();
+    return destroyedDeletedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PartialDestroyedVersMarker createPartialDestroyedVersMarker()
+  {
+    PartialDestroyedVersMarkerImpl partialDestroyedVersMarker = new PartialDestroyedVersMarkerImpl();
+    return partialDestroyedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PartialDestroyedDisputableVersMarker createPartialDestroyedDisputableVersMarker()
+  {
+    PartialDestroyedDisputableVersMarkerImpl partialDestroyedDisputableVersMarker = new PartialDestroyedDisputableVersMarkerImpl();
+    return partialDestroyedDisputableVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public PartialDestroyedDeletedVersMarker createPartialDestroyedDeletedVersMarker()
+  {
+    PartialDestroyedDeletedVersMarkerImpl partialDestroyedDeletedVersMarker = new PartialDestroyedDeletedVersMarkerImpl();
+    return partialDestroyedDeletedVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MissingVersMarker createMissingVersMarker()
+  {
+    MissingVersMarkerImpl missingVersMarker = new MissingVersMarkerImpl();
+    return missingVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MissingDisputableVersMarker createMissingDisputableVersMarker()
+  {
+    MissingDisputableVersMarkerImpl missingDisputableVersMarker = new MissingDisputableVersMarkerImpl();
+    return missingDisputableVersMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RestorationOverRasurMarker createRestorationOverRasurMarker()
+  {
+    RestorationOverRasurMarkerImpl restorationOverRasurMarker = new RestorationOverRasurMarkerImpl();
+    return restorationOverRasurMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AncientExpandedMarker createAncientExpandedMarker()
+  {
+    AncientExpandedMarkerImpl ancientExpandedMarker = new AncientExpandedMarkerImpl();
+    return ancientExpandedMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RasurMarker createRasurMarker()
+  {
+    RasurMarkerImpl rasurMarker = new RasurMarkerImpl();
+    return rasurMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VersFrontierMarker createVersFrontierMarker()
+  {
+    VersFrontierMarkerImpl versFrontierMarker = new VersFrontierMarkerImpl();
+    return versFrontierMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public VersbreakMarker createVersbreakMarker()
+  {
+    VersbreakMarkerImpl versbreakMarker = new VersbreakMarkerImpl();
+    return versbreakMarker;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public BrokenVersbreakMarker createBrokenVersbreakMarker()
+  {
+    BrokenVersbreakMarkerImpl brokenVersbreakMarker = new BrokenVersbreakMarkerImpl();
+    return brokenVersbreakMarker;
   }
 
   /**

@@ -147,6 +147,7 @@ public class BtsmodelSwitch<T> extends Switch<T> {
 			case BtsmodelPackage.BTS_TRANSLATION: {
 				BTSTranslation btsTranslation = (BTSTranslation)theEObject;
 				T result = caseBTSTranslation(btsTranslation);
+				if (result == null) result = caseBTSIdentifiableItem(btsTranslation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}

@@ -29,7 +29,6 @@
  */
 package org.bbaw.bts.btsmodel;
 
-import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -55,7 +54,7 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface BTSTranslation extends EObject {
+public interface BTSTranslation extends BTSIdentifiableItem {
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' attribute.
 	 * <!-- begin-user-doc -->

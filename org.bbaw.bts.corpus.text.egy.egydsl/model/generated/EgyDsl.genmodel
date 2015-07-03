@@ -24,29 +24,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EgyDsl.ecore#//Case/items"/>
     </genClasses>
     <genClasses ecoreClass="EgyDsl.ecore#//SentenceItemNoAmbivalence"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//VersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//EmendationVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DisputableVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DisputableDestroyedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DisputableDeletedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DeletedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DeletedDisputableVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DeletedDestroyedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersFrontierMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedDisputableVersFrontierMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedDeletedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedDisputableVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedDeletedVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//MissingVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//MissingDisputableVersMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//RestorationOverRasurMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//AncientExpandedMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//RasurMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//VersFrontierMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//VersbreakMarker"/>
-    <genClasses ecoreClass="EgyDsl.ecore#//BrokenVersbreakMarker"/>
     <genClasses ecoreClass="EgyDsl.ecore#//Marker">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EgyDsl.ecore#//Marker/type"/>
     </genClasses>
@@ -121,5 +98,28 @@
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixConnectionSyllabicGroup"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixCompoundWords"/>
     <genClasses ecoreClass="EgyDsl.ecore#//InterfixPhoneticalComplement"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//VersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//EmendationVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DisputableDestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DisputableDeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DeletedDisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DeletedDestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedVersFrontierMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedDisputableVersFrontierMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//DestroyedDeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedDisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//PartialDestroyedDeletedVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//MissingVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//MissingDisputableVersMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//RestorationOverRasurMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//AncientExpandedMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//RasurMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//VersFrontierMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//VersbreakMarker"/>
+    <genClasses ecoreClass="EgyDsl.ecore#//BrokenVersbreakMarker"/>
   </genPackages>
 </genmodel:GenModel>

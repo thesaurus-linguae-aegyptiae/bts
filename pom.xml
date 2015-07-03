@@ -47,7 +47,7 @@
 		<module>org.bbaw.bts.core.services.corpus</module>
 		<module>org.bbaw.bts.core.services.corpus.impl</module>
 		<module>org.bbaw.bts.corpus.text.egy.egydsl</module>
-		<module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>
+		<!--<module>org.bbaw.bts.corpus.text.egy.egydsl.sdk</module>-->
 		<module>org.bbaw.bts.corpus.text.egy.egydsl.ui</module>
 		
 		<module>org.bbaw.bts.db</module>

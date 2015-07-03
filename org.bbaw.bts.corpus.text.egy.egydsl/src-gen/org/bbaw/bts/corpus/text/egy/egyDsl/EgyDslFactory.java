@@ -95,213 +95,6 @@ public interface EgyDslFactory extends EFactory
   SentenceItemNoAmbivalence createSentenceItemNoAmbivalence();
 
   /**
-   * Returns a new object of class '<em>Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Vers Marker</em>'.
-   * @generated
-   */
-  VersMarker createVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Emendation Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Emendation Vers Marker</em>'.
-   * @generated
-   */
-  EmendationVersMarker createEmendationVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Disputable Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Disputable Vers Marker</em>'.
-   * @generated
-   */
-  DisputableVersMarker createDisputableVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Disputable Destroyed Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Disputable Destroyed Vers Marker</em>'.
-   * @generated
-   */
-  DisputableDestroyedVersMarker createDisputableDestroyedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Disputable Deleted Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Disputable Deleted Vers Marker</em>'.
-   * @generated
-   */
-  DisputableDeletedVersMarker createDisputableDeletedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Deleted Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Deleted Vers Marker</em>'.
-   * @generated
-   */
-  DeletedVersMarker createDeletedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Deleted Disputable Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Deleted Disputable Vers Marker</em>'.
-   * @generated
-   */
-  DeletedDisputableVersMarker createDeletedDisputableVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Deleted Destroyed Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Deleted Destroyed Vers Marker</em>'.
-   * @generated
-   */
-  DeletedDestroyedVersMarker createDeletedDestroyedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Destroyed Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Destroyed Vers Marker</em>'.
-   * @generated
-   */
-  DestroyedVersMarker createDestroyedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Destroyed Vers Frontier Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Destroyed Vers Frontier Marker</em>'.
-   * @generated
-   */
-  DestroyedVersFrontierMarker createDestroyedVersFrontierMarker();
-
-  /**
-   * Returns a new object of class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
-   * @generated
-   */
-  DestroyedDisputableVersFrontierMarker createDestroyedDisputableVersFrontierMarker();
-
-  /**
-   * Returns a new object of class '<em>Destroyed Deleted Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Destroyed Deleted Vers Marker</em>'.
-   * @generated
-   */
-  DestroyedDeletedVersMarker createDestroyedDeletedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Partial Destroyed Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Partial Destroyed Vers Marker</em>'.
-   * @generated
-   */
-  PartialDestroyedVersMarker createPartialDestroyedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Partial Destroyed Disputable Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Partial Destroyed Disputable Vers Marker</em>'.
-   * @generated
-   */
-  PartialDestroyedDisputableVersMarker createPartialDestroyedDisputableVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Partial Destroyed Deleted Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Partial Destroyed Deleted Vers Marker</em>'.
-   * @generated
-   */
-  PartialDestroyedDeletedVersMarker createPartialDestroyedDeletedVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Missing Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Missing Vers Marker</em>'.
-   * @generated
-   */
-  MissingVersMarker createMissingVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Missing Disputable Vers Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Missing Disputable Vers Marker</em>'.
-   * @generated
-   */
-  MissingDisputableVersMarker createMissingDisputableVersMarker();
-
-  /**
-   * Returns a new object of class '<em>Restoration Over Rasur Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Restoration Over Rasur Marker</em>'.
-   * @generated
-   */
-  RestorationOverRasurMarker createRestorationOverRasurMarker();
-
-  /**
-   * Returns a new object of class '<em>Ancient Expanded Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Ancient Expanded Marker</em>'.
-   * @generated
-   */
-  AncientExpandedMarker createAncientExpandedMarker();
-
-  /**
-   * Returns a new object of class '<em>Rasur Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Rasur Marker</em>'.
-   * @generated
-   */
-  RasurMarker createRasurMarker();
-
-  /**
-   * Returns a new object of class '<em>Vers Frontier Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Vers Frontier Marker</em>'.
-   * @generated
-   */
-  VersFrontierMarker createVersFrontierMarker();
-
-  /**
-   * Returns a new object of class '<em>Versbreak Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Versbreak Marker</em>'.
-   * @generated
-   */
-  VersbreakMarker createVersbreakMarker();
-
-  /**
-   * Returns a new object of class '<em>Broken Versbreak Marker</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Broken Versbreak Marker</em>'.
-   * @generated
-   */
-  BrokenVersbreakMarker createBrokenVersbreakMarker();
-
-  /**
    * Returns a new object of class '<em>Marker</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -660,6 +453,213 @@ public interface EgyDslFactory extends EFactory
    * @generated
    */
   InterfixPhoneticalComplement createInterfixPhoneticalComplement();
+
+  /**
+   * Returns a new object of class '<em>Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Vers Marker</em>'.
+   * @generated
+   */
+  VersMarker createVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Emendation Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Emendation Vers Marker</em>'.
+   * @generated
+   */
+  EmendationVersMarker createEmendationVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Disputable Vers Marker</em>'.
+   * @generated
+   */
+  DisputableVersMarker createDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Disputable Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Disputable Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  DisputableDestroyedVersMarker createDisputableDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Disputable Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Disputable Deleted Vers Marker</em>'.
+   * @generated
+   */
+  DisputableDeletedVersMarker createDisputableDeletedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Deleted Vers Marker</em>'.
+   * @generated
+   */
+  DeletedVersMarker createDeletedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Deleted Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Deleted Disputable Vers Marker</em>'.
+   * @generated
+   */
+  DeletedDisputableVersMarker createDeletedDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Deleted Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Deleted Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  DeletedDestroyedVersMarker createDeletedDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  DestroyedVersMarker createDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Vers Frontier Marker</em>'.
+   * @generated
+   */
+  DestroyedVersFrontierMarker createDestroyedVersFrontierMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
+   * @generated
+   */
+  DestroyedDisputableVersFrontierMarker createDestroyedDisputableVersFrontierMarker();
+
+  /**
+   * Returns a new object of class '<em>Destroyed Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Destroyed Deleted Vers Marker</em>'.
+   * @generated
+   */
+  DestroyedDeletedVersMarker createDestroyedDeletedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Partial Destroyed Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Partial Destroyed Vers Marker</em>'.
+   * @generated
+   */
+  PartialDestroyedVersMarker createPartialDestroyedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Partial Destroyed Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Partial Destroyed Disputable Vers Marker</em>'.
+   * @generated
+   */
+  PartialDestroyedDisputableVersMarker createPartialDestroyedDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Partial Destroyed Deleted Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Partial Destroyed Deleted Vers Marker</em>'.
+   * @generated
+   */
+  PartialDestroyedDeletedVersMarker createPartialDestroyedDeletedVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Missing Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Missing Vers Marker</em>'.
+   * @generated
+   */
+  MissingVersMarker createMissingVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Missing Disputable Vers Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Missing Disputable Vers Marker</em>'.
+   * @generated
+   */
+  MissingDisputableVersMarker createMissingDisputableVersMarker();
+
+  /**
+   * Returns a new object of class '<em>Restoration Over Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Restoration Over Rasur Marker</em>'.
+   * @generated
+   */
+  RestorationOverRasurMarker createRestorationOverRasurMarker();
+
+  /**
+   * Returns a new object of class '<em>Ancient Expanded Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ancient Expanded Marker</em>'.
+   * @generated
+   */
+  AncientExpandedMarker createAncientExpandedMarker();
+
+  /**
+   * Returns a new object of class '<em>Rasur Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Rasur Marker</em>'.
+   * @generated
+   */
+  RasurMarker createRasurMarker();
+
+  /**
+   * Returns a new object of class '<em>Vers Frontier Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Vers Frontier Marker</em>'.
+   * @generated
+   */
+  VersFrontierMarker createVersFrontierMarker();
+
+  /**
+   * Returns a new object of class '<em>Versbreak Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Versbreak Marker</em>'.
+   * @generated
+   */
+  VersbreakMarker createVersbreakMarker();
+
+  /**
+   * Returns a new object of class '<em>Broken Versbreak Marker</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Broken Versbreak Marker</em>'.
+   * @generated
+   */
+  BrokenVersbreakMarker createBrokenVersbreakMarker();
 
   /**
    * Returns the package supported by this factory.

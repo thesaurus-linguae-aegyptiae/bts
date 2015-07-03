@@ -92,7 +92,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="beginId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="endId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="BTSTranslation">
+  <eClassifiers xsi:type="ecore:EClass" name="BTSTranslation" eSuperTypes="#//BTSIdentifiableItem">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="BTSTranslation-objects are used in all places where labels should be translated.&#xD;&#xA;Value holds the actual translation, lang the language code.&#xD;&#xA;type is used if further specification is needed, optional."/>
     </eAnnotations>

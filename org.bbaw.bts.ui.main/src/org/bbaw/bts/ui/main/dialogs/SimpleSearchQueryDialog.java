@@ -4,8 +4,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -30,6 +34,11 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Button exactButton;
 	private Button wildcardButton;
 	private Button qmarksButton;
+	
+	@Inject
+	@Optional
+	@Named("org.bbaw.bts.ui.main.commandparameter.searchString")
+	private String searchString;
 
 	/**
 	 * Create the dialog.
@@ -56,8 +65,14 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		lblFullTextSearch.setText("Full Text Search");
 		lblFullTextSearch.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
 
-		text = new Text(container, SWT.BORDER);
+		text = new Text(container, SWT.BORDER | SWT.SEARCH);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		
+		if (searchString != null)
+		{
+			text.setText(searchString);
+			text.setSelection(text.getText().length());
+		}
 		
 		idButton = new Button(container, SWT.CHECK);
 		idButton.setText("Search for IDs");
@@ -196,6 +211,16 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 
 	public BTSQueryRequest getQueryRequest() {
 		return queryRequest;
+	}
+
+	public void setSearchString(String searchString2) {
+		this.searchString = searchString2;
+		if (searchString != null)
+		{
+			text.setText(searchString);
+			text.setSelection(text.getText().length());
+
+		}
 	}
 
 }

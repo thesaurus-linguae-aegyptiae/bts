@@ -68,6 +68,8 @@ public class BTSUserServiceImpl extends GenericObjectServiceImpl<BTSUser, String
 		super.addRevisionStatement(entity);
 
 		userDao.add(entity, BTSCoreConstants.ADMIN);
+		
+		
 		//FIXME update user password if changed
 		// FIXME update user role memberships 
 		// beides in _user Object!!!!!!!!!!

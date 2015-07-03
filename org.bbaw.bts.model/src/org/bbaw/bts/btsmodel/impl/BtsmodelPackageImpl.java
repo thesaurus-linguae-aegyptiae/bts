@@ -2401,6 +2401,7 @@ public class BtsmodelPackageImpl extends EPackageImpl implements BtsmodelPackage
 		btsObjectEClass.getESuperTypes().add(this.getBTSNamedTypedObject());
 		btsUserEClass.getESuperTypes().add(this.getBTSObject());
 		btsCommentEClass.getESuperTypes().add(this.getBTSObject());
+		btsTranslationEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsRelationEClass.getESuperTypes().add(this.getBTSIdentifiableItem());
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSConfig());
 		btsConfigurationEClass.getESuperTypes().add(this.getBTSObject());

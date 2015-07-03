@@ -85,6 +85,7 @@
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_0i50gDNpEeSLt-NtQ3Vu3A" elementId="org.bbaw.bts.ui.main.command.search" commandName="Search" category="_CXsjwAWjEeOJR9LhfOAE5w">
       <parameters xmi:id="_H_nhoPfHEeSfJveqYM1rcg" elementId="org.bbaw.bts.ui.main.commandparameter.viewerFilter" name="viewerFilter"/>
+      <parameters xmi:id="_VV8fMCFsEeWVqaqjxYU-pA" elementId="org.bbaw.bts.ui.main.commandparameter.searchString" name="searchString"/>
     </elements>
     <elements xsi:type="commands:Command" xmi:id="_6orvkDTgEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.command.moveObjectAmongProjectDBCollection" commandName="moveObjectAmongProjectDBCollection" category="_CXsjwAWjEeOJR9LhfOAE5w">
       <parameters xmi:id="_GyhPMDThEeS85dzIPjkaNA" elementId="org.bbaw.bts.ui.main.commandparameter.targetDBCollectionKey" name="targetDBCollectionKey"/>

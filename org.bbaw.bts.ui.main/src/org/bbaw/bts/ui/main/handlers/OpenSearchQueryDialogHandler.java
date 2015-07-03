@@ -17,7 +17,8 @@ import org.eclipse.swt.widgets.Shell;
 public class OpenSearchQueryDialogHandler {
 	@Execute
 	public void execute(@Active MPart activePart, @Active Shell shell,
-			IEclipseContext context, @Optional @Named("viewerFilter") String viewerFilterString) {
+			IEclipseContext context, @Optional @Named("org.bbaw.bts.ui.main.commandparameter.viewerFilter") String viewerFilterString,
+			@Optional @Named("org.bbaw.bts.ui.main.commandparameter.searchString") String searchString) {
 		Object o = activePart.getObject();
 		if (o instanceof SearchViewer) {
 			SearchViewer searchViewer = (SearchViewer) o;
@@ -27,6 +28,7 @@ public class OpenSearchQueryDialogHandler {
 					query);
 			ContextInjectionFactory.inject(dialog, context);
 			dialog.create();
+			dialog.setSearchString(searchString);
 			if (dialog.open() == dialog.OK) {
 				query = dialog.getQueryRequest();
 				if (query != null) {

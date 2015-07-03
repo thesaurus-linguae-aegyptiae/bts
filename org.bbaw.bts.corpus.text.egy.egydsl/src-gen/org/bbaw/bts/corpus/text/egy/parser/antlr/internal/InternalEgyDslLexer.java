@@ -178,10 +178,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__13;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:15:7: ( '(\\uDB80\\uDC80)' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:15:9: '(\\uDB80\\uDC80)'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:15:7: ( '\\uD80C\\uDE58' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:15:9: '\\uD80C\\uDE58'
             {
-            match("(\uDB80\uDC80)"); 
+            match("\uD80C\uDE58"); 
 
 
             }
@@ -199,10 +199,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__14;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:16:7: ( '\\u2E2E\\uDB80\\uDC80?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:16:9: '\\u2E2E\\uDB80\\uDC80?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:16:7: ( '\\uD80C\\uDE82' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:16:9: '\\uD80C\\uDE82'
             {
-            match("\u2E2E\uDB80\uDC80?"); 
+            match("\uD80C\uDE82"); 
 
 
             }
@@ -220,10 +220,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__15;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:17:7: ( '\\u2E2E[\\uDB80\\uDC80]?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:17:9: '\\u2E2E[\\uDB80\\uDC80]?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:17:7: ( '\\uD80C\\uDF79' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:17:9: '\\uD80C\\uDF79'
             {
-            match("\u2E2E[\uDB80\uDC80]?"); 
+            match("\uD80C\uDF79"); 
 
 
             }
@@ -241,10 +241,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__16;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:18:7: ( '\\u2E2E{\\uDB80\\uDC80}?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:18:9: '\\u2E2E{\\uDB80\\uDC80}?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:18:7: ( '\\uD80C\\uDF7A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:18:9: '\\uD80C\\uDF7A'
             {
-            match("\u2E2E{\uDB80\uDC80}?"); 
+            match("\uD80C\uDF7A"); 
 
 
             }
@@ -262,10 +262,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__17;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:19:7: ( '{\\uDB80\\uDC80}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:19:9: '{\\uDB80\\uDC80}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:19:7: ( '\\uD80C\\uDE86' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:19:9: '\\uD80C\\uDE86'
             {
-            match("{\uDB80\uDC80}"); 
+            match("\uD80C\uDE86"); 
 
 
             }
@@ -283,10 +283,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__18;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:20:7: ( '{\\u2E2E\\uDB80\\uDC80?}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:20:9: '{\\u2E2E\\uDB80\\uDC80?}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:20:7: ( '\\uD80C\\uDE87' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:20:9: '\\uD80C\\uDE87'
             {
-            match("{\u2E2E\uDB80\uDC80?}"); 
+            match("\uD80C\uDE87"); 
 
 
             }
@@ -304,11 +304,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__19;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:21:7: ( '{[\\uDB80\\uDC80]}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:21:9: '{[\\uDB80\\uDC80]}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:21:7: ( '(' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:21:9: '('
             {
-            match("{[\uDB80\uDC80]}"); 
-
+            match('('); 
 
             }
 
@@ -325,11 +324,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__20;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:22:7: ( '[\\uDB80\\uDC80]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:22:9: '[\\uDB80\\uDC80]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:22:7: ( ')' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:22:9: ')'
             {
-            match("[\uDB80\uDC80]"); 
-
+            match(')'); 
 
             }
 
@@ -346,10 +344,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__21;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:23:7: ( '[\\uDB80\\uDC81]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:23:9: '[\\uDB80\\uDC81]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:23:7: ( '((' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:23:9: '(('
             {
-            match("[\uDB80\uDC81]"); 
+            match("(("); 
 
 
             }
@@ -367,10 +365,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__22;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:24:7: ( '[\\u2E2E\\uDB80\\uDC81?]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:24:9: '[\\u2E2E\\uDB80\\uDC81?]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:24:7: ( '))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:24:9: '))'
             {
-            match("[\u2E2E\uDB80\uDC81?]"); 
+            match("))"); 
 
 
             }
@@ -388,11 +386,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__23;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:25:7: ( '[{\\uDB80\\uDC80}]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:25:9: '[{\\uDB80\\uDC80}]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:25:7: ( '\\u2329' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:25:9: '\\u2329'
             {
-            match("[{\uDB80\uDC80}]"); 
-
+            match('\u2329'); 
 
             }
 
@@ -409,11 +406,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__24;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:26:7: ( '\\u2E22\\uDB80\\uDC80\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:26:9: '\\u2E22\\uDB80\\uDC80\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:26:7: ( '\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:26:9: '\\u232A'
             {
-            match("\u2E22\uDB80\uDC80\u2E23"); 
-
+            match('\u232A'); 
 
             }
 
@@ -430,11 +426,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__25;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:27:7: ( '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:27:9: '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:27:7: ( '\\u2E2E' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:27:9: '\\u2E2E'
             {
-            match("\u2E22\u2E2E\uDB80\uDC80?\u2E23"); 
-
+            match('\u2E2E'); 
 
             }
 
@@ -451,11 +446,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__26;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:28:7: ( '\\u2E22{\\uDB80\\uDC80}\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:28:9: '\\u2E22{\\uDB80\\uDC80}\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:28:7: ( '?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:28:9: '?'
             {
-            match("\u2E22{\uDB80\uDC80}\u2E23"); 
-
+            match('?'); 
 
             }
 
@@ -472,11 +466,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__27;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:29:7: ( '\\u2329\\uDB80\\uDC80\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:29:9: '\\u2329\\uDB80\\uDC80\\u232A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:29:7: ( '[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:29:9: '['
             {
-            match("\u2329\uDB80\uDC80\u232A"); 
-
+            match('['); 
 
             }
 
@@ -493,11 +486,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__28;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:30:7: ( '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:30:9: '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:30:7: ( ']' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:30:9: ']'
             {
-            match("\u2329\u2E2E\uDB80\uDC80?\u232A"); 
-
+            match(']'); 
 
             }
 
@@ -514,11 +506,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__29;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:31:7: ( '[[\\uDB80\\uDC80]]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:31:9: '[[\\uDB80\\uDC80]]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:31:7: ( '{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:31:9: '{'
             {
-            match("[[\uDB80\uDC80]]"); 
-
+            match('{'); 
 
             }
 
@@ -535,11 +526,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__30;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:32:7: ( '((\\uDB80\\uDC80))' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:32:9: '((\\uDB80\\uDC80))'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:32:7: ( '}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:32:9: '}'
             {
-            match("((\uDB80\uDC80))"); 
-
+            match('}'); 
 
             }
 
@@ -556,10 +546,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__31;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:33:7: ( '{{\\uDB80\\uDC80}}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:33:9: '{{\\uDB80\\uDC80}}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:33:7: ( '\\u2329\\u2329' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:33:9: '\\u2329\\u2329'
             {
-            match("{{\uDB80\uDC80}}"); 
+            match("\u2329\u2329"); 
 
 
             }
@@ -577,10 +567,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__32;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:34:7: ( '\\uDB80\\uDC81' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:34:9: '\\uDB80\\uDC81'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:34:7: ( '\\u232A\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:34:9: '\\u232A\\u232A'
             {
-            match("\uDB80\uDC81"); 
+            match("\u232A\u232A"); 
 
 
             }
@@ -598,10 +588,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__33;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:35:7: ( '\\uDB80\\uDC80' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:35:9: '\\uDB80\\uDC80'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:35:7: ( '{{' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:35:9: '{{'
             {
-            match("\uDB80\uDC80"); 
+            match("{{"); 
 
 
             }
@@ -619,10 +609,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__34;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:36:7: ( '\\uDB80\\uDC82' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:36:9: '\\uDB80\\uDC82'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:36:7: ( '}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:36:9: '}}'
             {
-            match("\uDB80\uDC82"); 
+            match("}}"); 
 
 
             }
@@ -640,10 +630,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__35;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:37:7: ( '\\uD80C\\uDE58' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:37:9: '\\uD80C\\uDE58'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:37:7: ( '[[' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:37:9: '[['
             {
-            match("\uD80C\uDE58"); 
+            match("[["); 
 
 
             }
@@ -661,10 +651,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__36;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:38:7: ( '\\uD80C\\uDE82' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:38:9: '\\uD80C\\uDE82'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:38:7: ( ']]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:38:9: ']]'
             {
-            match("\uD80C\uDE82"); 
+            match("]]"); 
 
 
             }
@@ -682,11 +672,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__37;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:39:7: ( '\\uD80C\\uDF79' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:39:9: '\\uD80C\\uDF79'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:39:7: ( '\\u2E22' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:39:9: '\\u2E22'
             {
-            match("\uD80C\uDF79"); 
-
+            match('\u2E22'); 
 
             }
 
@@ -703,11 +692,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__38;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:40:7: ( '\\uD80C\\uDF7A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:40:9: '\\uD80C\\uDF7A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:40:7: ( '\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:40:9: '\\u2E23'
             {
-            match("\uD80C\uDF7A"); 
-
+            match('\u2E23'); 
 
             }
 
@@ -724,11 +712,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__39;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:41:7: ( '\\uD80C\\uDE86' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:41:9: '\\uD80C\\uDE86'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:41:7: ( ',' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:41:9: ','
             {
-            match("\uD80C\uDE86"); 
-
+            match(','); 
 
             }
 
@@ -745,11 +732,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__40;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:42:7: ( '\\uD80C\\uDE87' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:42:9: '\\uD80C\\uDE87'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:42:7: ( '.' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:42:9: '.'
             {
-            match("\uD80C\uDE87"); 
-
+            match('.'); 
 
             }
 
@@ -766,10 +752,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__41;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:43:7: ( '(' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:43:9: '('
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:43:7: ( '\\u2261' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:43:9: '\\u2261'
             {
-            match('('); 
+            match('\u2261'); 
 
             }
 
@@ -786,10 +772,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__42;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:44:7: ( ')' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:44:9: ')'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:44:7: ( ':' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:44:9: ':'
             {
-            match(')'); 
+            match(':'); 
 
             }
 
@@ -806,11 +792,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__43;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:45:7: ( '((' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:45:9: '(('
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:45:7: ( '\\u22EE' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:45:9: '\\u22EE'
             {
-            match("(("); 
-
+            match('\u22EE'); 
 
             }
 
@@ -827,11 +812,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__44;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:46:7: ( '))' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:46:9: '))'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:46:7: ( '~' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:46:9: '~'
             {
-            match("))"); 
-
+            match('~'); 
 
             }
 
@@ -848,10 +832,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__45;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:47:7: ( '\\u2329' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:47:9: '\\u2329'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:47:7: ( '-' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:47:9: '-'
             {
-            match('\u2329'); 
+            match('-'); 
 
             }
 
@@ -868,10 +852,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__46;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:48:7: ( '\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:48:9: '\\u232A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:48:7: ( ';' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:48:9: ';'
             {
-            match('\u232A'); 
+            match(';'); 
 
             }
 
@@ -888,10 +872,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__47;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:49:7: ( '\\u2E2E' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:49:9: '\\u2E2E'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:49:7: ( '(\\uDB80\\uDC80)' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:49:9: '(\\uDB80\\uDC80)'
             {
-            match('\u2E2E'); 
+            match("(\uDB80\uDC80)"); 
+
 
             }
 
@@ -908,10 +893,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__48;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:50:7: ( '?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:50:9: '?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:50:7: ( '\\u2E2E\\uDB80\\uDC80?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:50:9: '\\u2E2E\\uDB80\\uDC80?'
             {
-            match('?'); 
+            match("\u2E2E\uDB80\uDC80?"); 
+
 
             }
 
@@ -928,10 +914,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__49;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:51:7: ( '[' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:51:9: '['
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:51:7: ( '\\u2E2E[\\uDB80\\uDC80]?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:51:9: '\\u2E2E[\\uDB80\\uDC80]?'
             {
-            match('['); 
+            match("\u2E2E[\uDB80\uDC80]?"); 
+
 
             }
 
@@ -948,10 +935,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__50;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:52:7: ( ']' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:52:9: ']'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:52:7: ( '\\u2E2E{\\uDB80\\uDC80}?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:52:9: '\\u2E2E{\\uDB80\\uDC80}?'
             {
-            match(']'); 
+            match("\u2E2E{\uDB80\uDC80}?"); 
+
 
             }
 
@@ -968,10 +956,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__51;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:53:7: ( '{' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:53:9: '{'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:53:7: ( '{\\uDB80\\uDC80}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:53:9: '{\\uDB80\\uDC80}'
             {
-            match('{'); 
+            match("{\uDB80\uDC80}"); 
+
 
             }
 
@@ -988,10 +977,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__52;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:54:7: ( '}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:54:9: '}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:54:7: ( '{\\u2E2E\\uDB80\\uDC80?}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:54:9: '{\\u2E2E\\uDB80\\uDC80?}'
             {
-            match('}'); 
+            match("{\u2E2E\uDB80\uDC80?}"); 
+
 
             }
 
@@ -1008,10 +998,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__53;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:55:7: ( '\\u2329\\u2329' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:55:9: '\\u2329\\u2329'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:55:7: ( '{[\\uDB80\\uDC80]}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:55:9: '{[\\uDB80\\uDC80]}'
             {
-            match("\u2329\u2329"); 
+            match("{[\uDB80\uDC80]}"); 
 
 
             }
@@ -1029,10 +1019,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__54;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:56:7: ( '\\u232A\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:56:9: '\\u232A\\u232A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:56:7: ( '[\\uDB80\\uDC80]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:56:9: '[\\uDB80\\uDC80]'
             {
-            match("\u232A\u232A"); 
+            match("[\uDB80\uDC80]"); 
 
 
             }
@@ -1050,10 +1040,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__55;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:57:7: ( '{{' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:57:9: '{{'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:57:7: ( '[\\uDB80\\uDC81]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:57:9: '[\\uDB80\\uDC81]'
             {
-            match("{{"); 
+            match("[\uDB80\uDC81]"); 
 
 
             }
@@ -1071,10 +1061,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__56;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:58:7: ( '}}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:58:9: '}}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:58:7: ( '[\\u2E2E\\uDB80\\uDC81?]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:58:9: '[\\u2E2E\\uDB80\\uDC81?]'
             {
-            match("}}"); 
+            match("[\u2E2E\uDB80\uDC81?]"); 
 
 
             }
@@ -1092,10 +1082,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__57;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:59:7: ( '[[' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:59:9: '[['
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:59:7: ( '[{\\uDB80\\uDC80}]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:59:9: '[{\\uDB80\\uDC80}]'
             {
-            match("[["); 
+            match("[{\uDB80\uDC80}]"); 
 
 
             }
@@ -1113,10 +1103,10 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__58;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:60:7: ( ']]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:60:9: ']]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:60:7: ( '\\u2E22\\uDB80\\uDC80\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:60:9: '\\u2E22\\uDB80\\uDC80\\u2E23'
             {
-            match("]]"); 
+            match("\u2E22\uDB80\uDC80\u2E23"); 
 
 
             }
@@ -1134,10 +1124,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__59;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:61:7: ( '\\u2E22' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:61:9: '\\u2E22'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:61:7: ( '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:61:9: '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23'
             {
-            match('\u2E22'); 
+            match("\u2E22\u2E2E\uDB80\uDC80?\u2E23"); 
+
 
             }
 
@@ -1154,10 +1145,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__60;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:62:7: ( '\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:62:9: '\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:62:7: ( '\\u2E22{\\uDB80\\uDC80}\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:62:9: '\\u2E22{\\uDB80\\uDC80}\\u2E23'
             {
-            match('\u2E23'); 
+            match("\u2E22{\uDB80\uDC80}\u2E23"); 
+
 
             }
 
@@ -1174,10 +1166,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__61;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:63:7: ( ',' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:63:9: ','
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:63:7: ( '\\u2329\\uDB80\\uDC80\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:63:9: '\\u2329\\uDB80\\uDC80\\u232A'
             {
-            match(','); 
+            match("\u2329\uDB80\uDC80\u232A"); 
+
 
             }
 
@@ -1194,10 +1187,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__62;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:64:7: ( '.' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:64:9: '.'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:64:7: ( '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:64:9: '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A'
             {
-            match('.'); 
+            match("\u2329\u2E2E\uDB80\uDC80?\u232A"); 
+
 
             }
 
@@ -1214,10 +1208,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__63;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:65:7: ( '\\u2261' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:65:9: '\\u2261'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:65:7: ( '[[\\uDB80\\uDC80]]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:65:9: '[[\\uDB80\\uDC80]]'
             {
-            match('\u2261'); 
+            match("[[\uDB80\uDC80]]"); 
+
 
             }
 
@@ -1234,10 +1229,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__64;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:66:7: ( ':' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:66:9: ':'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:66:7: ( '((\\uDB80\\uDC80))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:66:9: '((\\uDB80\\uDC80))'
             {
-            match(':'); 
+            match("((\uDB80\uDC80))"); 
+
 
             }
 
@@ -1254,10 +1250,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__65;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:67:7: ( '\\u22EE' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:67:9: '\\u22EE'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:67:7: ( '{{\\uDB80\\uDC80}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:67:9: '{{\\uDB80\\uDC80}}'
             {
-            match('\u22EE'); 
+            match("{{\uDB80\uDC80}}"); 
+
 
             }
 
@@ -1274,10 +1271,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__66;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:68:7: ( '~' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:68:9: '~'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:68:7: ( '\\uDB80\\uDC81' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:68:9: '\\uDB80\\uDC81'
             {
-            match('~'); 
+            match("\uDB80\uDC81"); 
+
 
             }
 
@@ -1294,10 +1292,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__67;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:69:7: ( '-' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:69:9: '-'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:69:7: ( '\\uDB80\\uDC80' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:69:9: '\\uDB80\\uDC80'
             {
-            match('-'); 
+            match("\uDB80\uDC80"); 
+
 
             }
 
@@ -1314,10 +1313,11 @@ public class InternalEgyDslLexer extends Lexer {
         try {
             int _type = T__68;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:70:7: ( ';' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:70:9: ';'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:70:7: ( '\\uDB80\\uDC82' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:70:9: '\\uDB80\\uDC82'
             {
-            match(';'); 
+            match("\uDB80\uDC82"); 
+
 
             }
 
@@ -2904,69 +2904,74 @@ public class InternalEgyDslLexer extends Lexer {
         }
     }
     static final String DFA6_eotS =
-        "\5\uffff\1\41\1\45\1\52\1\57\1\63\1\67\2\uffff\1\102\1\104\1\uffff"+
-        "\1\106\1\110\7\uffff\1\112\6\uffff\1\114\10\uffff\1\116\4\uffff"+
-        "\1\122\44\uffff";
+        "\6\uffff\1\47\1\51\1\55\1\57\1\63\1\uffff\1\70\1\72\1\77\1\101"+
+        "\1\105\7\uffff\1\107\14\uffff\1\114\16\uffff\1\116\6\uffff\1\122"+
+        "\27\uffff";
     static final String DFA6_eofS =
         "\123\uffff";
     static final String DFA6_minS =
-        "\1\11\4\uffff\1\50\3\133\1\173\1\u2329\1\udc80\1\ude58\1\51\1\u232a"+
-        "\1\uffff\1\135\1\175\7\uffff\1\55\6\uffff\1\udb80\10\uffff\1\udb80"+
-        "\1\uffff\1\udc80\2\uffff\1\udb80\44\uffff";
+        "\1\11\4\uffff\1\ude58\1\50\1\51\1\u2329\1\u232a\1\133\1\uffff\1"+
+        "\133\1\135\1\133\1\175\1\173\7\uffff\1\55\1\uffff\1\udc80\12\uffff"+
+        "\1\udb80\16\uffff\1\udb80\1\udc80\5\uffff\1\udb80\27\uffff";
     static final String DFA6_maxS =
-        "\1\udb80\4\uffff\6\udb80\1\udc82\1\udf7a\1\51\1\u232a\1\uffff\1"+
-        "\135\1\175\7\uffff\1\55\6\uffff\1\udb80\10\uffff\1\udb80\1\uffff"+
-        "\1\udc81\2\uffff\1\udb80\44\uffff";
+        "\1\udb80\4\uffff\1\udf7a\1\udb80\1\51\1\udb80\1\u232a\1\udb80\1"+
+        "\uffff\1\udb80\1\135\1\udb80\1\175\1\udb80\7\uffff\1\55\1\uffff"+
+        "\1\udc82\12\uffff\1\udb80\16\uffff\1\udb80\1\udc81\5\uffff\1\udb80"+
+        "\27\uffff";
     static final String DFA6_acceptS =
-        "\1\uffff\1\1\1\2\1\3\1\4\12\uffff\1\50\2\uffff\1\64\1\65\1\66\1"+
-        "\67\1\70\1\71\1\72\1\uffff\1\74\1\75\1\76\1\77\1\101\1\5\1\uffff"+
-        "\1\41\1\6\1\7\1\10\1\47\1\11\1\12\1\13\1\uffff\1\53\1\uffff\1\16"+
-        "\1\17\1\uffff\1\51\1\20\1\21\1\22\1\63\1\23\1\24\1\55\1\45\1\30"+
-        "\1\31\1\32\1\33\1\34\1\35\1\36\1\37\1\40\1\44\1\42\1\56\1\46\1\62"+
-        "\1\52\1\60\1\54\1\100\1\73\1\26\1\43\1\27\1\57\1\14\1\15\1\25\1"+
-        "\61";
+        "\1\uffff\1\1\1\2\1\3\1\4\6\uffff\1\22\5\uffff\1\36\1\37\1\40\1"+
+        "\41\1\42\1\43\1\44\1\uffff\1\46\1\uffff\1\75\1\76\1\77\1\101\1\5"+
+        "\1\6\1\7\1\10\1\11\1\12\1\uffff\1\47\1\13\1\16\1\14\1\27\1\65\1"+
+        "\66\1\17\1\30\1\20\1\50\1\51\1\52\1\21\2\uffff\1\60\1\61\1\23\1"+
+        "\34\1\24\1\uffff\1\53\1\54\1\55\1\25\1\32\1\26\1\62\1\63\1\64\1"+
+        "\35\1\100\1\45\1\72\1\73\1\74\1\70\1\15\1\67\1\33\1\56\1\57\1\71"+
+        "\1\31";
     static final String DFA6_specialS =
         "\123\uffff}>";
     static final String[] DFA6_transitionS = {
             "\2\33\2\uffff\1\33\22\uffff\1\1\1\36\1\uffff\1\35\1\uffff\1"+
-            "\3\2\uffff\1\5\1\15\2\36\1\23\1\31\1\24\13\36\1\26\1\32\1\uffff"+
-            "\1\36\1\uffff\1\17\1\uffff\2\36\1\uffff\1\36\1\uffff\11\36\1"+
-            "\uffff\6\36\1\uffff\1\36\1\uffff\2\36\1\10\1\uffff\1\20\1\uffff"+
+            "\3\2\uffff\1\6\1\7\2\36\1\22\1\30\1\23\13\36\1\25\1\31\1\uffff"+
+            "\1\36\1\uffff\1\13\1\uffff\2\36\1\uffff\1\36\1\uffff\11\36\1"+
+            "\uffff\6\36\1\uffff\1\36\1\uffff\2\36\1\14\1\uffff\1\15\1\uffff"+
             "\1\36\1\uffff\2\36\1\34\13\36\1\uffff\6\36\1\uffff\1\36\1\uffff"+
-            "\2\36\1\7\1\4\1\21\1\30\50\uffff\1\2\36\uffff\1\36\10\uffff"+
+            "\2\36\1\16\1\4\1\17\1\27\50\uffff\1\2\36\uffff\1\36\10\uffff"+
             "\1\36\5\uffff\1\36\10\uffff\1\36\4\uffff\1\36\6\uffff\1\36\4"+
             "\uffff\1\36\101\uffff\1\36\40\uffff\2\36\14\uffff\2\36\26\uffff"+
             "\1\36\u0145\uffff\1\36\u1b4f\uffff\2\36\24\uffff\2\36\4\uffff"+
             "\2\36\102\uffff\4\36\44\uffff\1\36\u01c6\uffff\1\36\u0203\uffff"+
-            "\1\25\u008c\uffff\1\27\72\uffff\1\12\1\16\u0955\uffff\u0080"+
-            "\36\u0122\uffff\1\11\1\22\12\uffff\1\6\u78f3\uffff\4\36\u30e6"+
-            "\uffff\1\14\u0373\uffff\1\13",
+            "\1\24\u008c\uffff\1\26\72\uffff\1\10\1\11\u0955\uffff\u0080"+
+            "\36\u0122\uffff\1\20\1\21\12\uffff\1\12\u78f3\uffff\4\36\u30e6"+
+            "\uffff\1\5\u0373\uffff\1\32",
             "",
             "",
             "",
             "",
-            "\1\40\udb57\uffff\1\37",
-            "\1\43\37\uffff\1\44\udb04\uffff\1\42",
-            "\1\50\37\uffff\1\51\u2db2\uffff\1\47\uad51\uffff\1\46",
-            "\1\56\37\uffff\1\55\u2db2\uffff\1\54\uad51\uffff\1\53",
-            "\1\62\u2db2\uffff\1\61\uad51\uffff\1\60",
-            "\1\66\u0b04\uffff\1\65\uad51\uffff\1\64",
-            "\1\71\1\70\1\72",
-            "\1\73\51\uffff\1\74\3\uffff\1\77\1\100\u00f1\uffff\1\75\1"+
-            "\76",
-            "\1\101",
-            "\1\103",
+            "\1\37\51\uffff\1\40\3\uffff\1\43\1\44\u00f1\uffff\1\41\1\42",
+            "\1\45\udb57\uffff\1\46",
+            "\1\50",
+            "\1\52\u0b04\uffff\1\54\uad51\uffff\1\53",
+            "\1\56",
+            "\1\61\37\uffff\1\62\udb04\uffff\1\60",
             "",
-            "\1\105",
-            "\1\107",
-            "",
-            "",
+            "\1\64\37\uffff\1\67\u2db2\uffff\1\66\uad51\uffff\1\65",
+            "\1\71",
+            "\1\76\37\uffff\1\73\u2db2\uffff\1\75\uad51\uffff\1\74",
+            "\1\100",
+            "\1\104\u2db2\uffff\1\103\uad51\uffff\1\102",
             "",
             "",
             "",
             "",
             "",
-            "\1\111",
+            "",
+            "",
+            "\1\106",
+            "",
+            "\1\111\1\110\1\112",
+            "",
+            "",
+            "",
+            "",
             "",
             "",
             "",
@@ -2982,25 +2987,20 @@ public class InternalEgyDslLexer extends Lexer {
             "",
             "",
             "",
-            "\1\115",
             "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "\1\115",
             "\1\117\1\120",
             "",
             "",
+            "",
+            "",
+            "",
             "\1\121",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
             "",
             "",
             "",

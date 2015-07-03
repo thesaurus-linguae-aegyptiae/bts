@@ -49,6 +49,7 @@ implements LemmaNavigatorController{
 
 	@Override
 	protected List<BTSLemmaEntry> executeTypedQuery(BTSQueryRequest query, String objectState, IProgressMonitor monitor) {
+		query.setResponseFields(null);
 		return lemmaService.query(query, objectState, monitor);
 	}
 
