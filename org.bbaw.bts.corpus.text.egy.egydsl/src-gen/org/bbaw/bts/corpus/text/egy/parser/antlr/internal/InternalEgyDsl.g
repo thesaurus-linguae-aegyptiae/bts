@@ -3223,96 +3223,6 @@ ruleVersMarker returns [EObject current=null]
         $current = $this_PartialDestroyedVersMarker_12.current; 
         afterParserOrEnumRuleCall();
     }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedDisputableVersMarkerParserRuleCall_13()); 
-    }
-    this_PartialDestroyedDisputableVersMarker_13=rulePartialDestroyedDisputableVersMarker
-    { 
-        $current = $this_PartialDestroyedDisputableVersMarker_13.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedDisputableVersFrontierMarkerParserRuleCall_14()); 
-    }
-    this_DestroyedDisputableVersFrontierMarker_14=ruleDestroyedDisputableVersFrontierMarker
-    { 
-        $current = $this_DestroyedDisputableVersFrontierMarker_14.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableDestroyedVersMarkerParserRuleCall_15()); 
-    }
-    this_DisputableDestroyedVersMarker_15=ruleDisputableDestroyedVersMarker
-    { 
-        $current = $this_DisputableDestroyedVersMarker_15.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedDisputableVersMarkerParserRuleCall_16()); 
-    }
-    this_DeletedDisputableVersMarker_16=ruleDeletedDisputableVersMarker
-    { 
-        $current = $this_DeletedDisputableVersMarker_16.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getMissingDisputableVersMarkerParserRuleCall_17()); 
-    }
-    this_MissingDisputableVersMarker_17=ruleMissingDisputableVersMarker
-    { 
-        $current = $this_MissingDisputableVersMarker_17.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableDeletedVersMarkerParserRuleCall_18()); 
-    }
-    this_DisputableDeletedVersMarker_18=ruleDisputableDeletedVersMarker
-    { 
-        $current = $this_DisputableDeletedVersMarker_18.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedDeletedVersMarkerParserRuleCall_19()); 
-    }
-    this_PartialDestroyedDeletedVersMarker_19=rulePartialDestroyedDeletedVersMarker
-    { 
-        $current = $this_PartialDestroyedDeletedVersMarker_19.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedDeletedVersMarkerParserRuleCall_20()); 
-    }
-    this_DestroyedDeletedVersMarker_20=ruleDestroyedDeletedVersMarker
-    { 
-        $current = $this_DestroyedDeletedVersMarker_20.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |
-    { 
-        newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedDestroyedVersMarkerParserRuleCall_21()); 
-    }
-    this_DeletedDestroyedVersMarker_21=ruleDeletedDestroyedVersMarker
-    { 
-        $current = $this_DeletedDestroyedVersMarker_21.current; 
-        afterParserOrEnumRuleCall();
-    }
 )
 ;
 
@@ -3382,68 +3292,6 @@ ruleDisputableVersMarker returns [EObject current=null]
 
 
 
-// Entry rule entryRuleDisputableDestroyedVersMarker
-entryRuleDisputableDestroyedVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getDisputableDestroyedVersMarkerRule()); }
-	 iv_ruleDisputableDestroyedVersMarker=ruleDisputableDestroyedVersMarker 
-	 { $current=$iv_ruleDisputableDestroyedVersMarker.current; } 
-	 EOF 
-;
-
-// Rule DisputableDestroyedVersMarker
-ruleDisputableDestroyedVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getDisputableDestroyedVersMarkerAccess().getDisputableDestroyedVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='\u2E2E[\uDB80\uDC80]?' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getDisputableDestroyedVersMarkerAccess().getReversedQuestionMarkLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketQuestionMarkKeyword_1());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleDisputableDeletedVersMarker
-entryRuleDisputableDeletedVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getDisputableDeletedVersMarkerRule()); }
-	 iv_ruleDisputableDeletedVersMarker=ruleDisputableDeletedVersMarker 
-	 { $current=$iv_ruleDisputableDeletedVersMarker.current; } 
-	 EOF 
-;
-
-// Rule DisputableDeletedVersMarker
-ruleDisputableDeletedVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getDisputableDeletedVersMarkerAccess().getDisputableDeletedVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='\u2E2E{\uDB80\uDC80}?' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getDisputableDeletedVersMarkerAccess().getReversedQuestionMarkLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketQuestionMarkKeyword_1());
-    }
-)
-;
-
-
-
-
-
 // Entry rule entryRuleDeletedVersMarker
 entryRuleDeletedVersMarker returns [EObject current=null] 
 	:
@@ -3467,68 +3315,6 @@ ruleDeletedVersMarker returns [EObject current=null]
 )	otherlv_1='{\uDB80\uDC80}' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getDeletedVersMarkerAccess().getLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleDeletedDisputableVersMarker
-entryRuleDeletedDisputableVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getDeletedDisputableVersMarkerRule()); }
-	 iv_ruleDeletedDisputableVersMarker=ruleDeletedDisputableVersMarker 
-	 { $current=$iv_ruleDeletedDisputableVersMarker.current; } 
-	 EOF 
-;
-
-// Rule DeletedDisputableVersMarker
-ruleDeletedDisputableVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getDeletedDisputableVersMarkerAccess().getDeletedDisputableVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='{\u2E2E\uDB80\uDC80?}' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getDeletedDisputableVersMarkerAccess().getLeftCurlyBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightCurlyBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleDeletedDestroyedVersMarker
-entryRuleDeletedDestroyedVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getDeletedDestroyedVersMarkerRule()); }
-	 iv_ruleDeletedDestroyedVersMarker=ruleDeletedDestroyedVersMarker 
-	 { $current=$iv_ruleDeletedDestroyedVersMarker.current; } 
-	 EOF 
-;
-
-// Rule DeletedDestroyedVersMarker
-ruleDeletedDestroyedVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getDeletedDestroyedVersMarkerAccess().getDeletedDestroyedVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='{[\uDB80\uDC80]}' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getDeletedDestroyedVersMarkerAccess().getLeftCurlyBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightCurlyBracketKeyword_1());
     }
 )
 ;
@@ -3599,68 +3385,6 @@ ruleDestroyedVersFrontierMarker returns [EObject current=null]
 
 
 
-// Entry rule entryRuleDestroyedDisputableVersFrontierMarker
-entryRuleDestroyedDisputableVersFrontierMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getDestroyedDisputableVersFrontierMarkerRule()); }
-	 iv_ruleDestroyedDisputableVersFrontierMarker=ruleDestroyedDisputableVersFrontierMarker 
-	 { $current=$iv_ruleDestroyedDisputableVersFrontierMarker.current; } 
-	 EOF 
-;
-
-// Rule DestroyedDisputableVersFrontierMarker
-ruleDestroyedDisputableVersFrontierMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getDestroyedDisputableVersFrontierMarkerAccess().getDestroyedDisputableVersFrontierMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='[\u2E2E\uDB80\uDC81?]' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getDestroyedDisputableVersFrontierMarkerAccess().getLeftSquareBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc81QuestionMarkRightSquareBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleDestroyedDeletedVersMarker
-entryRuleDestroyedDeletedVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getDestroyedDeletedVersMarkerRule()); }
-	 iv_ruleDestroyedDeletedVersMarker=ruleDestroyedDeletedVersMarker 
-	 { $current=$iv_ruleDestroyedDeletedVersMarker.current; } 
-	 EOF 
-;
-
-// Rule DestroyedDeletedVersMarker
-ruleDestroyedDeletedVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getDestroyedDeletedVersMarkerAccess().getDestroyedDeletedVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='[{\uDB80\uDC80}]' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getDestroyedDeletedVersMarkerAccess().getLeftSquareBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightSquareBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
 // Entry rule entryRulePartialDestroyedVersMarker
 entryRulePartialDestroyedVersMarker returns [EObject current=null] 
 	:
@@ -3692,68 +3416,6 @@ rulePartialDestroyedVersMarker returns [EObject current=null]
 
 
 
-// Entry rule entryRulePartialDestroyedDisputableVersMarker
-entryRulePartialDestroyedDisputableVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getPartialDestroyedDisputableVersMarkerRule()); }
-	 iv_rulePartialDestroyedDisputableVersMarker=rulePartialDestroyedDisputableVersMarker 
-	 { $current=$iv_rulePartialDestroyedDisputableVersMarker.current; } 
-	 EOF 
-;
-
-// Rule PartialDestroyedDisputableVersMarker
-rulePartialDestroyedDisputableVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getPartialDestroyedDisputableVersMarkerAccess().getPartialDestroyedDisputableVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='\u2E22\u2E2E\uDB80\uDC80?\u2E23' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedDisputableVersMarkerAccess().getTopLeftHalfBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkTopRightHalfBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRulePartialDestroyedDeletedVersMarker
-entryRulePartialDestroyedDeletedVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getPartialDestroyedDeletedVersMarkerRule()); }
-	 iv_rulePartialDestroyedDeletedVersMarker=rulePartialDestroyedDeletedVersMarker 
-	 { $current=$iv_rulePartialDestroyedDeletedVersMarker.current; } 
-	 EOF 
-;
-
-// Rule PartialDestroyedDeletedVersMarker
-rulePartialDestroyedDeletedVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getPartialDestroyedDeletedVersMarkerAccess().getPartialDestroyedDeletedVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='\u2E22{\uDB80\uDC80}\u2E23' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedDeletedVersMarkerAccess().getTopLeftHalfBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketTopRightHalfBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
 // Entry rule entryRuleMissingVersMarker
 entryRuleMissingVersMarker returns [EObject current=null] 
 	:
@@ -3777,37 +3439,6 @@ ruleMissingVersMarker returns [EObject current=null]
 )	otherlv_1='\u2329\uDB80\uDC80\u232A' 
     {
     	newLeafNode(otherlv_1, grammarAccess.getMissingVersMarkerAccess().getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1());
-    }
-)
-;
-
-
-
-
-
-// Entry rule entryRuleMissingDisputableVersMarker
-entryRuleMissingDisputableVersMarker returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getMissingDisputableVersMarkerRule()); }
-	 iv_ruleMissingDisputableVersMarker=ruleMissingDisputableVersMarker 
-	 { $current=$iv_ruleMissingDisputableVersMarker.current; } 
-	 EOF 
-;
-
-// Rule MissingDisputableVersMarker
-ruleMissingDisputableVersMarker returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getMissingDisputableVersMarkerAccess().getMissingDisputableVersMarkerAction_0(),
-            $current);
-    }
-)	otherlv_1='\u2329\u2E2E\uDB80\uDC80?\u232A' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getMissingDisputableVersMarkerAccess().getLeftPointingAngleBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightPointingAngleBracketKeyword_1());
     }
 )
 ;

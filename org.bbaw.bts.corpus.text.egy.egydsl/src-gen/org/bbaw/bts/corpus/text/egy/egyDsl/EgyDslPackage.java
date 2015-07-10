@@ -1224,44 +1224,6 @@ public interface EgyDslPackage extends EPackage
   int DISPUTABLE_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDestroyedVersMarkerImpl <em>Disputable Destroyed Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDestroyedVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableDestroyedVersMarker()
-   * @generated
-   */
-  int DISPUTABLE_DESTROYED_VERS_MARKER = 51;
-
-  /**
-   * The number of structural features of the '<em>Disputable Destroyed Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DISPUTABLE_DESTROYED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDeletedVersMarkerImpl <em>Disputable Deleted Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDeletedVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableDeletedVersMarker()
-   * @generated
-   */
-  int DISPUTABLE_DELETED_VERS_MARKER = 52;
-
-  /**
-   * The number of structural features of the '<em>Disputable Deleted Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DISPUTABLE_DELETED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedVersMarkerImpl <em>Deleted Vers Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1269,7 +1231,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedVersMarker()
    * @generated
    */
-  int DELETED_VERS_MARKER = 53;
+  int DELETED_VERS_MARKER = 51;
 
   /**
    * The number of structural features of the '<em>Deleted Vers Marker</em>' class.
@@ -1281,44 +1243,6 @@ public interface EgyDslPackage extends EPackage
   int DELETED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDisputableVersMarkerImpl <em>Deleted Disputable Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDisputableVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedDisputableVersMarker()
-   * @generated
-   */
-  int DELETED_DISPUTABLE_VERS_MARKER = 54;
-
-  /**
-   * The number of structural features of the '<em>Deleted Disputable Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DELETED_DISPUTABLE_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDestroyedVersMarkerImpl <em>Deleted Destroyed Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDestroyedVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedDestroyedVersMarker()
-   * @generated
-   */
-  int DELETED_DESTROYED_VERS_MARKER = 55;
-
-  /**
-   * The number of structural features of the '<em>Deleted Destroyed Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DELETED_DESTROYED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedVersMarkerImpl <em>Destroyed Vers Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1326,7 +1250,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedVersMarker()
    * @generated
    */
-  int DESTROYED_VERS_MARKER = 56;
+  int DESTROYED_VERS_MARKER = 52;
 
   /**
    * The number of structural features of the '<em>Destroyed Vers Marker</em>' class.
@@ -1345,7 +1269,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedVersFrontierMarker()
    * @generated
    */
-  int DESTROYED_VERS_FRONTIER_MARKER = 57;
+  int DESTROYED_VERS_FRONTIER_MARKER = 53;
 
   /**
    * The number of structural features of the '<em>Destroyed Vers Frontier Marker</em>' class.
@@ -1357,44 +1281,6 @@ public interface EgyDslPackage extends EPackage
   int DESTROYED_VERS_FRONTIER_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDisputableVersFrontierMarkerImpl <em>Destroyed Disputable Vers Frontier Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDisputableVersFrontierMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedDisputableVersFrontierMarker()
-   * @generated
-   */
-  int DESTROYED_DISPUTABLE_VERS_FRONTIER_MARKER = 58;
-
-  /**
-   * The number of structural features of the '<em>Destroyed Disputable Vers Frontier Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DESTROYED_DISPUTABLE_VERS_FRONTIER_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDeletedVersMarkerImpl <em>Destroyed Deleted Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDeletedVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedDeletedVersMarker()
-   * @generated
-   */
-  int DESTROYED_DELETED_VERS_MARKER = 59;
-
-  /**
-   * The number of structural features of the '<em>Destroyed Deleted Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DESTROYED_DELETED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedVersMarkerImpl <em>Partial Destroyed Vers Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1402,7 +1288,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestroyedVersMarker()
    * @generated
    */
-  int PARTIAL_DESTROYED_VERS_MARKER = 60;
+  int PARTIAL_DESTROYED_VERS_MARKER = 54;
 
   /**
    * The number of structural features of the '<em>Partial Destroyed Vers Marker</em>' class.
@@ -1414,44 +1300,6 @@ public interface EgyDslPackage extends EPackage
   int PARTIAL_DESTROYED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDisputableVersMarkerImpl <em>Partial Destroyed Disputable Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDisputableVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestroyedDisputableVersMarker()
-   * @generated
-   */
-  int PARTIAL_DESTROYED_DISPUTABLE_VERS_MARKER = 61;
-
-  /**
-   * The number of structural features of the '<em>Partial Destroyed Disputable Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARTIAL_DESTROYED_DISPUTABLE_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDeletedVersMarkerImpl <em>Partial Destroyed Deleted Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDeletedVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestroyedDeletedVersMarker()
-   * @generated
-   */
-  int PARTIAL_DESTROYED_DELETED_VERS_MARKER = 62;
-
-  /**
-   * The number of structural features of the '<em>Partial Destroyed Deleted Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARTIAL_DESTROYED_DELETED_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingVersMarkerImpl <em>Missing Vers Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1459,7 +1307,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getMissingVersMarker()
    * @generated
    */
-  int MISSING_VERS_MARKER = 63;
+  int MISSING_VERS_MARKER = 55;
 
   /**
    * The number of structural features of the '<em>Missing Vers Marker</em>' class.
@@ -1471,25 +1319,6 @@ public interface EgyDslPackage extends EPackage
   int MISSING_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
 
   /**
-   * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingDisputableVersMarkerImpl <em>Missing Disputable Vers Marker</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingDisputableVersMarkerImpl
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getMissingDisputableVersMarker()
-   * @generated
-   */
-  int MISSING_DISPUTABLE_VERS_MARKER = 64;
-
-  /**
-   * The number of structural features of the '<em>Missing Disputable Vers Marker</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MISSING_DISPUTABLE_VERS_MARKER_FEATURE_COUNT = VERS_MARKER_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.RestorationOverRasurMarkerImpl <em>Restoration Over Rasur Marker</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1497,7 +1326,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getRestorationOverRasurMarker()
    * @generated
    */
-  int RESTORATION_OVER_RASUR_MARKER = 65;
+  int RESTORATION_OVER_RASUR_MARKER = 56;
 
   /**
    * The number of structural features of the '<em>Restoration Over Rasur Marker</em>' class.
@@ -1516,7 +1345,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getAncientExpandedMarker()
    * @generated
    */
-  int ANCIENT_EXPANDED_MARKER = 66;
+  int ANCIENT_EXPANDED_MARKER = 57;
 
   /**
    * The number of structural features of the '<em>Ancient Expanded Marker</em>' class.
@@ -1535,7 +1364,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getRasurMarker()
    * @generated
    */
-  int RASUR_MARKER = 67;
+  int RASUR_MARKER = 58;
 
   /**
    * The number of structural features of the '<em>Rasur Marker</em>' class.
@@ -1554,7 +1383,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getVersFrontierMarker()
    * @generated
    */
-  int VERS_FRONTIER_MARKER = 68;
+  int VERS_FRONTIER_MARKER = 59;
 
   /**
    * The number of structural features of the '<em>Vers Frontier Marker</em>' class.
@@ -1573,7 +1402,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getVersbreakMarker()
    * @generated
    */
-  int VERSBREAK_MARKER = 69;
+  int VERSBREAK_MARKER = 60;
 
   /**
    * The number of structural features of the '<em>Versbreak Marker</em>' class.
@@ -1592,7 +1421,7 @@ public interface EgyDslPackage extends EPackage
    * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getBrokenVersbreakMarker()
    * @generated
    */
-  int BROKEN_VERSBREAK_MARKER = 70;
+  int BROKEN_VERSBREAK_MARKER = 61;
 
   /**
    * The number of structural features of the '<em>Broken Versbreak Marker</em>' class.
@@ -2357,26 +2186,6 @@ public interface EgyDslPackage extends EPackage
   EClass getDisputableVersMarker();
 
   /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDestroyedVersMarker <em>Disputable Destroyed Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Disputable Destroyed Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDestroyedVersMarker
-   * @generated
-   */
-  EClass getDisputableDestroyedVersMarker();
-
-  /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDeletedVersMarker <em>Disputable Deleted Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Disputable Deleted Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDeletedVersMarker
-   * @generated
-   */
-  EClass getDisputableDeletedVersMarker();
-
-  /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker <em>Deleted Vers Marker</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2385,26 +2194,6 @@ public interface EgyDslPackage extends EPackage
    * @generated
    */
   EClass getDeletedVersMarker();
-
-  /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDisputableVersMarker <em>Deleted Disputable Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Deleted Disputable Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDisputableVersMarker
-   * @generated
-   */
-  EClass getDeletedDisputableVersMarker();
-
-  /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDestroyedVersMarker <em>Deleted Destroyed Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Deleted Destroyed Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDestroyedVersMarker
-   * @generated
-   */
-  EClass getDeletedDestroyedVersMarker();
 
   /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker <em>Destroyed Vers Marker</em>}'.
@@ -2427,26 +2216,6 @@ public interface EgyDslPackage extends EPackage
   EClass getDestroyedVersFrontierMarker();
 
   /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDisputableVersFrontierMarker <em>Destroyed Disputable Vers Frontier Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Destroyed Disputable Vers Frontier Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDisputableVersFrontierMarker
-   * @generated
-   */
-  EClass getDestroyedDisputableVersFrontierMarker();
-
-  /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDeletedVersMarker <em>Destroyed Deleted Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Destroyed Deleted Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDeletedVersMarker
-   * @generated
-   */
-  EClass getDestroyedDeletedVersMarker();
-
-  /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedVersMarker <em>Partial Destroyed Vers Marker</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2457,26 +2226,6 @@ public interface EgyDslPackage extends EPackage
   EClass getPartialDestroyedVersMarker();
 
   /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDisputableVersMarker <em>Partial Destroyed Disputable Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Partial Destroyed Disputable Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDisputableVersMarker
-   * @generated
-   */
-  EClass getPartialDestroyedDisputableVersMarker();
-
-  /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDeletedVersMarker <em>Partial Destroyed Deleted Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Partial Destroyed Deleted Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDeletedVersMarker
-   * @generated
-   */
-  EClass getPartialDestroyedDeletedVersMarker();
-
-  /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker <em>Missing Vers Marker</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2485,16 +2234,6 @@ public interface EgyDslPackage extends EPackage
    * @generated
    */
   EClass getMissingVersMarker();
-
-  /**
-   * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.MissingDisputableVersMarker <em>Missing Disputable Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Missing Disputable Vers Marker</em>'.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.MissingDisputableVersMarker
-   * @generated
-   */
-  EClass getMissingDisputableVersMarker();
 
   /**
    * Returns the meta object for class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasurMarker <em>Restoration Over Rasur Marker</em>}'.
@@ -3266,26 +3005,6 @@ public interface EgyDslPackage extends EPackage
     EClass DISPUTABLE_VERS_MARKER = eINSTANCE.getDisputableVersMarker();
 
     /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDestroyedVersMarkerImpl <em>Disputable Destroyed Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDestroyedVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableDestroyedVersMarker()
-     * @generated
-     */
-    EClass DISPUTABLE_DESTROYED_VERS_MARKER = eINSTANCE.getDisputableDestroyedVersMarker();
-
-    /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDeletedVersMarkerImpl <em>Disputable Deleted Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DisputableDeletedVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDisputableDeletedVersMarker()
-     * @generated
-     */
-    EClass DISPUTABLE_DELETED_VERS_MARKER = eINSTANCE.getDisputableDeletedVersMarker();
-
-    /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedVersMarkerImpl <em>Deleted Vers Marker</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3294,26 +3013,6 @@ public interface EgyDslPackage extends EPackage
      * @generated
      */
     EClass DELETED_VERS_MARKER = eINSTANCE.getDeletedVersMarker();
-
-    /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDisputableVersMarkerImpl <em>Deleted Disputable Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDisputableVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedDisputableVersMarker()
-     * @generated
-     */
-    EClass DELETED_DISPUTABLE_VERS_MARKER = eINSTANCE.getDeletedDisputableVersMarker();
-
-    /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDestroyedVersMarkerImpl <em>Deleted Destroyed Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DeletedDestroyedVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDeletedDestroyedVersMarker()
-     * @generated
-     */
-    EClass DELETED_DESTROYED_VERS_MARKER = eINSTANCE.getDeletedDestroyedVersMarker();
 
     /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedVersMarkerImpl <em>Destroyed Vers Marker</em>}' class.
@@ -3336,26 +3035,6 @@ public interface EgyDslPackage extends EPackage
     EClass DESTROYED_VERS_FRONTIER_MARKER = eINSTANCE.getDestroyedVersFrontierMarker();
 
     /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDisputableVersFrontierMarkerImpl <em>Destroyed Disputable Vers Frontier Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDisputableVersFrontierMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedDisputableVersFrontierMarker()
-     * @generated
-     */
-    EClass DESTROYED_DISPUTABLE_VERS_FRONTIER_MARKER = eINSTANCE.getDestroyedDisputableVersFrontierMarker();
-
-    /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDeletedVersMarkerImpl <em>Destroyed Deleted Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.DestroyedDeletedVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getDestroyedDeletedVersMarker()
-     * @generated
-     */
-    EClass DESTROYED_DELETED_VERS_MARKER = eINSTANCE.getDestroyedDeletedVersMarker();
-
-    /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedVersMarkerImpl <em>Partial Destroyed Vers Marker</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3366,26 +3045,6 @@ public interface EgyDslPackage extends EPackage
     EClass PARTIAL_DESTROYED_VERS_MARKER = eINSTANCE.getPartialDestroyedVersMarker();
 
     /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDisputableVersMarkerImpl <em>Partial Destroyed Disputable Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDisputableVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestroyedDisputableVersMarker()
-     * @generated
-     */
-    EClass PARTIAL_DESTROYED_DISPUTABLE_VERS_MARKER = eINSTANCE.getPartialDestroyedDisputableVersMarker();
-
-    /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDeletedVersMarkerImpl <em>Partial Destroyed Deleted Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.PartialDestroyedDeletedVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getPartialDestroyedDeletedVersMarker()
-     * @generated
-     */
-    EClass PARTIAL_DESTROYED_DELETED_VERS_MARKER = eINSTANCE.getPartialDestroyedDeletedVersMarker();
-
-    /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingVersMarkerImpl <em>Missing Vers Marker</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3394,16 +3053,6 @@ public interface EgyDslPackage extends EPackage
      * @generated
      */
     EClass MISSING_VERS_MARKER = eINSTANCE.getMissingVersMarker();
-
-    /**
-     * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingDisputableVersMarkerImpl <em>Missing Disputable Vers Marker</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.MissingDisputableVersMarkerImpl
-     * @see org.bbaw.bts.corpus.text.egy.egyDsl.impl.EgyDslPackageImpl#getMissingDisputableVersMarker()
-     * @generated
-     */
-    EClass MISSING_DISPUTABLE_VERS_MARKER = eINSTANCE.getMissingDisputableVersMarker();
 
     /**
      * The meta object literal for the '{@link org.bbaw.bts.corpus.text.egy.egyDsl.impl.RestorationOverRasurMarkerImpl <em>Restoration Over Rasur Marker</em>}' class.

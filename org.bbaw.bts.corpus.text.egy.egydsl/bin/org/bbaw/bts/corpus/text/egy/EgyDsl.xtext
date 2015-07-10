@@ -225,6 +225,7 @@ NoDisputableReading:
 	 | Chars | Interfix
 ;
 
+
 Lacuna:
 	{Lacuna}
 	'[' wChar+=NoLacuna+ ']'
@@ -338,10 +339,7 @@ VersMarker:
 	VersbreakMarker | VersFrontierMarker |BrokenVersbreakMarker 
 	| MissingVersMarker | DestroyedVersMarker | DeletedVersMarker | DisputableVersMarker
 	| RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker 
-	|EmendationVersMarker |DestroyedVersFrontierMarker | PartialDestroyedVersMarker | PartialDestroyedDisputableVersMarker
-	| DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker |DeletedDisputableVersMarker
-	| MissingDisputableVersMarker | DisputableDeletedVersMarker | PartialDestroyedDeletedVersMarker
-	| DestroyedDeletedVersMarker | DeletedDestroyedVersMarker
+	|EmendationVersMarker |DestroyedVersFrontierMarker | PartialDestroyedVersMarker 
 ;
 
 EmendationVersMarker:
@@ -354,29 +352,9 @@ DisputableVersMarker:
 	'\u2E2E\uDB80\uDC80?'//'@v'
 ;
 
-DisputableDestroyedVersMarker:
-{DisputableDestroyedVersMarker}
-	'\u2E2E[\uDB80\uDC80]?'//'@v'
-;
-
-DisputableDeletedVersMarker:
-{DisputableDeletedVersMarker}
-	'\u2E2E{\uDB80\uDC80}?'//'@v'
-;
-
 DeletedVersMarker:
 {DeletedVersMarker}
 	'{\uDB80\uDC80}'//'@v'
-;
-
-DeletedDisputableVersMarker:
-{DeletedDisputableVersMarker}
-	'{\u2E2E\uDB80\uDC80?}'//'@v'
-;
-
-DeletedDestroyedVersMarker:
-{DeletedDestroyedVersMarker}
-	'{[\uDB80\uDC80]}'//'@v'
 ;
 
 DestroyedVersMarker:
@@ -389,40 +367,15 @@ DestroyedVersFrontierMarker:
 	'[\uDB80\uDC81]'//'@v'
 ;
 
-DestroyedDisputableVersFrontierMarker:
-	{DestroyedDisputableVersFrontierMarker}
-	'[\u2E2E\uDB80\uDC81?]'//'@v'
-;
-
-DestroyedDeletedVersMarker:
-	{DestroyedDeletedVersMarker}
-	'[{\uDB80\uDC80}]'//'@v'
-;
-
 
 PartialDestroyedVersMarker:
 	{PartialDestroyedVersMarker}
 	'\u2E22\uDB80\uDC80\u2E23'//'@v'
 ;
 
-PartialDestroyedDisputableVersMarker:
-	{PartialDestroyedDisputableVersMarker}
-	'\u2E22\u2E2E\uDB80\uDC80?\u2E23'//'@v'
-;
-
-PartialDestroyedDeletedVersMarker:
-	{PartialDestroyedDeletedVersMarker}
-	'\u2E22{\uDB80\uDC80}\u2E23'//'@v'
-;
-
 MissingVersMarker:
 	{MissingVersMarker}
 	'\u2329\uDB80\uDC80\u232A'//'@v'
-;
-
-MissingDisputableVersMarker:
-	{MissingDisputableVersMarker}
-	'\u2329\u2E2E\uDB80\uDC80?\u232A'//'@v'
 ;
 
 RestorationOverRasurMarker:
@@ -442,13 +395,11 @@ RasurMarker:
 
 VersFrontierMarker:
 	{VersFrontierMarker}
-//	'\uF0081'
 	'\uDB80\uDC81'//'@mv'
 ;
 
 VersbreakMarker:
 	{VersbreakMarker}
-//	'\uF0080'
 	'\uDB80\uDC80'//'@v'
 ;
 

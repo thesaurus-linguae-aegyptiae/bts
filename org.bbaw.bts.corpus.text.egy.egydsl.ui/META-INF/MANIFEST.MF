@@ -1,8 +1,8 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.bbaw.bts.corpus.text.egy.egydsl.ui
-Bundle-Vendor: My Company
-Bundle-Version: 1.0.4.qualifier
+Bundle-Vendor: BBAW
+Bundle-Version: 1.0.5.qualifier
 Bundle-SymbolicName: org.bbaw.bts.corpus.text.egy.egydsl.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.bbaw.bts.corpus.text.egy.egydsl;visibility:=reexport,

@@ -450,6 +450,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cSerechParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
 		
 		//// textual criticism brackets
+		////	|DisputableReadingRestaurationOverRasur
 		//Brackets:
 		//	Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn | Expanded | DisputableReading | Emendation | Lacuna
 		//	| Deletion | PartialDestruction | Cartouche | Oval | Serech;
@@ -901,6 +902,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cWCharNoLacunaParserRuleCall_2_0 = (RuleCall)cWCharAssignment_2.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
+		////DisputableReadingRestaurationOverRasur:
+		////	{DisputableReadingRestaurationOverRasur}
+		////	'\u2E2E[[' wChar+=NoDisputableReadingRestaurationOverRasur+ ']]' wChar+=NoDisputableReadingRestaurationOverRasur* '?'
+		////;
+		////
+		////NoDisputableReadingRestaurationOverRasur:
+		////	Chars | Interfix
+		////;
 		//Lacuna:
 		//	{Lacuna} "[" wChar+=NoLacuna+ "]";
 		public ParserRule getRule() { return rule; }
@@ -1628,31 +1637,20 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cEmendationVersMarkerParserRuleCall_10 = (RuleCall)cAlternatives.eContents().get(10);
 		private final RuleCall cDestroyedVersFrontierMarkerParserRuleCall_11 = (RuleCall)cAlternatives.eContents().get(11);
 		private final RuleCall cPartialDestroyedVersMarkerParserRuleCall_12 = (RuleCall)cAlternatives.eContents().get(12);
-		private final RuleCall cPartialDestroyedDisputableVersMarkerParserRuleCall_13 = (RuleCall)cAlternatives.eContents().get(13);
-		private final RuleCall cDestroyedDisputableVersFrontierMarkerParserRuleCall_14 = (RuleCall)cAlternatives.eContents().get(14);
-		private final RuleCall cDisputableDestroyedVersMarkerParserRuleCall_15 = (RuleCall)cAlternatives.eContents().get(15);
-		private final RuleCall cDeletedDisputableVersMarkerParserRuleCall_16 = (RuleCall)cAlternatives.eContents().get(16);
-		private final RuleCall cMissingDisputableVersMarkerParserRuleCall_17 = (RuleCall)cAlternatives.eContents().get(17);
-		private final RuleCall cDisputableDeletedVersMarkerParserRuleCall_18 = (RuleCall)cAlternatives.eContents().get(18);
-		private final RuleCall cPartialDestroyedDeletedVersMarkerParserRuleCall_19 = (RuleCall)cAlternatives.eContents().get(19);
-		private final RuleCall cDestroyedDeletedVersMarkerParserRuleCall_20 = (RuleCall)cAlternatives.eContents().get(20);
-		private final RuleCall cDeletedDestroyedVersMarkerParserRuleCall_21 = (RuleCall)cAlternatives.eContents().get(21);
 		
+		////	| PartialDestroyedDisputableVersMarker
+		////	| DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker |DeletedDisputableVersMarker
+		////	| DisputableDeletedVersMarker | PartialDestroyedDeletedVersMarker
+		////	| DestroyedDeletedVersMarker | DeletedDestroyedVersMarker
 		//VersMarker:
 		//	VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker | MissingVersMarker | DestroyedVersMarker |
 		//	DeletedVersMarker | DisputableVersMarker | RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker |
-		//	EmendationVersMarker | DestroyedVersFrontierMarker | PartialDestroyedVersMarker |
-		//	PartialDestroyedDisputableVersMarker | DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker |
-		//	DeletedDisputableVersMarker | MissingDisputableVersMarker | DisputableDeletedVersMarker |
-		//	PartialDestroyedDeletedVersMarker | DestroyedDeletedVersMarker | DeletedDestroyedVersMarker;
+		//	EmendationVersMarker | DestroyedVersFrontierMarker | PartialDestroyedVersMarker;
 		public ParserRule getRule() { return rule; }
 
 		//VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker | MissingVersMarker | DestroyedVersMarker |
 		//DeletedVersMarker | DisputableVersMarker | RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker |
-		//EmendationVersMarker | DestroyedVersFrontierMarker | PartialDestroyedVersMarker | PartialDestroyedDisputableVersMarker
-		//| DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker | DeletedDisputableVersMarker |
-		//MissingDisputableVersMarker | DisputableDeletedVersMarker | PartialDestroyedDeletedVersMarker |
-		//DestroyedDeletedVersMarker | DeletedDestroyedVersMarker
+		//EmendationVersMarker | DestroyedVersFrontierMarker | PartialDestroyedVersMarker
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//VersbreakMarker
@@ -1693,33 +1691,6 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//PartialDestroyedVersMarker
 		public RuleCall getPartialDestroyedVersMarkerParserRuleCall_12() { return cPartialDestroyedVersMarkerParserRuleCall_12; }
-
-		//PartialDestroyedDisputableVersMarker
-		public RuleCall getPartialDestroyedDisputableVersMarkerParserRuleCall_13() { return cPartialDestroyedDisputableVersMarkerParserRuleCall_13; }
-
-		//DestroyedDisputableVersFrontierMarker
-		public RuleCall getDestroyedDisputableVersFrontierMarkerParserRuleCall_14() { return cDestroyedDisputableVersFrontierMarkerParserRuleCall_14; }
-
-		//DisputableDestroyedVersMarker
-		public RuleCall getDisputableDestroyedVersMarkerParserRuleCall_15() { return cDisputableDestroyedVersMarkerParserRuleCall_15; }
-
-		//DeletedDisputableVersMarker
-		public RuleCall getDeletedDisputableVersMarkerParserRuleCall_16() { return cDeletedDisputableVersMarkerParserRuleCall_16; }
-
-		//MissingDisputableVersMarker
-		public RuleCall getMissingDisputableVersMarkerParserRuleCall_17() { return cMissingDisputableVersMarkerParserRuleCall_17; }
-
-		//DisputableDeletedVersMarker
-		public RuleCall getDisputableDeletedVersMarkerParserRuleCall_18() { return cDisputableDeletedVersMarkerParserRuleCall_18; }
-
-		//PartialDestroyedDeletedVersMarker
-		public RuleCall getPartialDestroyedDeletedVersMarkerParserRuleCall_19() { return cPartialDestroyedDeletedVersMarkerParserRuleCall_19; }
-
-		//DestroyedDeletedVersMarker
-		public RuleCall getDestroyedDeletedVersMarkerParserRuleCall_20() { return cDestroyedDeletedVersMarkerParserRuleCall_20; }
-
-		//DeletedDestroyedVersMarker
-		public RuleCall getDeletedDestroyedVersMarkerParserRuleCall_21() { return cDeletedDestroyedVersMarkerParserRuleCall_21; }
 	}
 
 	public class EmendationVersMarkerElements extends AbstractParserRuleElementFinder {
@@ -1768,58 +1739,21 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkKeyword_1() { return cReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkKeyword_1; }
 	}
 
-	public class DisputableDestroyedVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DisputableDestroyedVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDisputableDestroyedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cReversedQuestionMarkLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketQuestionMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//DisputableDestroyedVersMarker:
-		//	{DisputableDestroyedVersMarker} //'@v'
-		//	"⸮[󰂀]?";
-		public ParserRule getRule() { return rule; }
-
-		//{DisputableDestroyedVersMarker} //'@v'
-		//"⸮[󰂀]?"
-		public Group getGroup() { return cGroup; }
-
-		//{DisputableDestroyedVersMarker}
-		public Action getDisputableDestroyedVersMarkerAction_0() { return cDisputableDestroyedVersMarkerAction_0; }
-
-		////'@v'
-		//"⸮[󰂀]?"
-		public Keyword getReversedQuestionMarkLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketQuestionMarkKeyword_1() { return cReversedQuestionMarkLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketQuestionMarkKeyword_1; }
-	}
-
-	public class DisputableDeletedVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DisputableDeletedVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDisputableDeletedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cReversedQuestionMarkLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketQuestionMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//DisputableDeletedVersMarker:
-		//	{DisputableDeletedVersMarker} //'@v'
-		//	"⸮{󰂀}?";
-		public ParserRule getRule() { return rule; }
-
-		//{DisputableDeletedVersMarker} //'@v'
-		//"⸮{󰂀}?"
-		public Group getGroup() { return cGroup; }
-
-		//{DisputableDeletedVersMarker}
-		public Action getDisputableDeletedVersMarkerAction_0() { return cDisputableDeletedVersMarkerAction_0; }
-
-		////'@v'
-		//"⸮{󰂀}?"
-		public Keyword getReversedQuestionMarkLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketQuestionMarkKeyword_1() { return cReversedQuestionMarkLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketQuestionMarkKeyword_1; }
-	}
-
 	public class DeletedVersMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DeletedVersMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDeletedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
+		////DisputableDestroyedVersMarker:
+		////{DisputableDestroyedVersMarker}
+		////	'\u2E2E[\uDB80\uDC80]?'//'@v'
+		////;
+		////
+		////DisputableDeletedVersMarker:
+		////{DisputableDeletedVersMarker}
+		////	'\u2E2E{\uDB80\uDC80}?'//'@v'
+		////;
 		//DeletedVersMarker:
 		//	{DeletedVersMarker} //'@v'
 		//	"{󰂀}";
@@ -1837,58 +1771,20 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketKeyword_1() { return cLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketKeyword_1; }
 	}
 
-	public class DeletedDisputableVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DeletedDisputableVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDeletedDisputableVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//DeletedDisputableVersMarker:
-		//	{DeletedDisputableVersMarker} //'@v'
-		//	"{⸮󰂀?}";
-		public ParserRule getRule() { return rule; }
-
-		//{DeletedDisputableVersMarker} //'@v'
-		//"{⸮󰂀?}"
-		public Group getGroup() { return cGroup; }
-
-		//{DeletedDisputableVersMarker}
-		public Action getDeletedDisputableVersMarkerAction_0() { return cDeletedDisputableVersMarkerAction_0; }
-
-		////'@v'
-		//"{⸮󰂀?}"
-		public Keyword getLeftCurlyBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightCurlyBracketKeyword_1() { return cLeftCurlyBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightCurlyBracketKeyword_1; }
-	}
-
-	public class DeletedDestroyedVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DeletedDestroyedVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDeletedDestroyedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLeftCurlyBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightCurlyBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//DeletedDestroyedVersMarker:
-		//	{DeletedDestroyedVersMarker} //'@v'
-		//	"{[󰂀]}";
-		public ParserRule getRule() { return rule; }
-
-		//{DeletedDestroyedVersMarker} //'@v'
-		//"{[󰂀]}"
-		public Group getGroup() { return cGroup; }
-
-		//{DeletedDestroyedVersMarker}
-		public Action getDeletedDestroyedVersMarkerAction_0() { return cDeletedDestroyedVersMarkerAction_0; }
-
-		////'@v'
-		//"{[󰂀]}"
-		public Keyword getLeftCurlyBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightCurlyBracketKeyword_1() { return cLeftCurlyBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightCurlyBracketKeyword_1; }
-	}
-
 	public class DestroyedVersMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DestroyedVersMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cDestroyedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
+		////DeletedDisputableVersMarker:
+		////{DeletedDisputableVersMarker}
+		////	'{\u2E2E\uDB80\uDC80?}'//'@v'
+		////;
+		////DeletedDestroyedVersMarker:
+		////{DeletedDestroyedVersMarker}
+		////	'{[\uDB80\uDC80]}'//'@v'
+		////;
 		//DestroyedVersMarker:
 		//	{DestroyedVersMarker} //'@v'
 		//	"[󰂀]";
@@ -1929,58 +1825,20 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc81RightSquareBracketKeyword_1() { return cLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc81RightSquareBracketKeyword_1; }
 	}
 
-	public class DestroyedDisputableVersFrontierMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DestroyedDisputableVersFrontierMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDestroyedDisputableVersFrontierMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLeftSquareBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc81QuestionMarkRightSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//DestroyedDisputableVersFrontierMarker:
-		//	{DestroyedDisputableVersFrontierMarker} //'@v'
-		//	"[⸮󰂁?]";
-		public ParserRule getRule() { return rule; }
-
-		//{DestroyedDisputableVersFrontierMarker} //'@v'
-		//"[⸮󰂁?]"
-		public Group getGroup() { return cGroup; }
-
-		//{DestroyedDisputableVersFrontierMarker}
-		public Action getDestroyedDisputableVersFrontierMarkerAction_0() { return cDestroyedDisputableVersFrontierMarkerAction_0; }
-
-		////'@v'
-		//"[⸮󰂁?]"
-		public Keyword getLeftSquareBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc81QuestionMarkRightSquareBracketKeyword_1() { return cLeftSquareBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc81QuestionMarkRightSquareBracketKeyword_1; }
-	}
-
-	public class DestroyedDeletedVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DestroyedDeletedVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cDestroyedDeletedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLeftSquareBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightSquareBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//DestroyedDeletedVersMarker:
-		//	{DestroyedDeletedVersMarker} //'@v'
-		//	"[{󰂀}]";
-		public ParserRule getRule() { return rule; }
-
-		//{DestroyedDeletedVersMarker} //'@v'
-		//"[{󰂀}]"
-		public Group getGroup() { return cGroup; }
-
-		//{DestroyedDeletedVersMarker}
-		public Action getDestroyedDeletedVersMarkerAction_0() { return cDestroyedDeletedVersMarkerAction_0; }
-
-		////'@v'
-		//"[{󰂀}]"
-		public Keyword getLeftSquareBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightSquareBracketKeyword_1() { return cLeftSquareBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightSquareBracketKeyword_1; }
-	}
-
 	public class PartialDestroyedVersMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PartialDestroyedVersMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cPartialDestroyedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cTopLeftHalfBracketLeadSurrogateDb80TrailSurrogateDc80TopRightHalfBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
+		////DestroyedDisputableVersFrontierMarker:
+		////	{DestroyedDisputableVersFrontierMarker}
+		////	'[\u2E2E\uDB80\uDC81?]'//'@v'
+		////;
+		////DestroyedDeletedVersMarker:
+		////	{DestroyedDeletedVersMarker}
+		////	'[{\uDB80\uDC80}]'//'@v'
+		////;
 		//PartialDestroyedVersMarker:
 		//	{PartialDestroyedVersMarker} //'@v'
 		//	"⸢󰂀⸣";
@@ -1998,58 +1856,20 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		public Keyword getTopLeftHalfBracketLeadSurrogateDb80TrailSurrogateDc80TopRightHalfBracketKeyword_1() { return cTopLeftHalfBracketLeadSurrogateDb80TrailSurrogateDc80TopRightHalfBracketKeyword_1; }
 	}
 
-	public class PartialDestroyedDisputableVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PartialDestroyedDisputableVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cPartialDestroyedDisputableVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cTopLeftHalfBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkTopRightHalfBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//PartialDestroyedDisputableVersMarker:
-		//	{PartialDestroyedDisputableVersMarker} //'@v'
-		//	"⸢⸮󰂀?⸣";
-		public ParserRule getRule() { return rule; }
-
-		//{PartialDestroyedDisputableVersMarker} //'@v'
-		//"⸢⸮󰂀?⸣"
-		public Group getGroup() { return cGroup; }
-
-		//{PartialDestroyedDisputableVersMarker}
-		public Action getPartialDestroyedDisputableVersMarkerAction_0() { return cPartialDestroyedDisputableVersMarkerAction_0; }
-
-		////'@v'
-		//"⸢⸮󰂀?⸣"
-		public Keyword getTopLeftHalfBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkTopRightHalfBracketKeyword_1() { return cTopLeftHalfBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkTopRightHalfBracketKeyword_1; }
-	}
-
-	public class PartialDestroyedDeletedVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "PartialDestroyedDeletedVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cPartialDestroyedDeletedVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cTopLeftHalfBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketTopRightHalfBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//PartialDestroyedDeletedVersMarker:
-		//	{PartialDestroyedDeletedVersMarker} //'@v'
-		//	"⸢{󰂀}⸣";
-		public ParserRule getRule() { return rule; }
-
-		//{PartialDestroyedDeletedVersMarker} //'@v'
-		//"⸢{󰂀}⸣"
-		public Group getGroup() { return cGroup; }
-
-		//{PartialDestroyedDeletedVersMarker}
-		public Action getPartialDestroyedDeletedVersMarkerAction_0() { return cPartialDestroyedDeletedVersMarkerAction_0; }
-
-		////'@v'
-		//"⸢{󰂀}⸣"
-		public Keyword getTopLeftHalfBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketTopRightHalfBracketKeyword_1() { return cTopLeftHalfBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketTopRightHalfBracketKeyword_1; }
-	}
-
 	public class MissingVersMarkerElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MissingVersMarker");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cMissingVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		
+		////PartialDestroyedDisputableVersMarker:
+		////	{PartialDestroyedDisputableVersMarker}
+		////	'\u2E22\u2E2E\uDB80\uDC80?\u2E23'//'@v'
+		////;
+		////PartialDestroyedDeletedVersMarker:
+		////	{PartialDestroyedDeletedVersMarker}
+		////	'\u2E22{\uDB80\uDC80}\u2E23'//'@v'
+		////;
 		//MissingVersMarker:
 		//	{MissingVersMarker} //'@v'
 		//	"〈󰂀〉";
@@ -2065,29 +1885,6 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		////'@v'
 		//"〈󰂀〉"
 		public Keyword getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1() { return cLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1; }
-	}
-
-	public class MissingDisputableVersMarkerElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "MissingDisputableVersMarker");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cMissingDisputableVersMarkerAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cLeftPointingAngleBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightPointingAngleBracketKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		
-		//MissingDisputableVersMarker:
-		//	{MissingDisputableVersMarker} //'@v'
-		//	"〈⸮󰂀?〉";
-		public ParserRule getRule() { return rule; }
-
-		//{MissingDisputableVersMarker} //'@v'
-		//"〈⸮󰂀?〉"
-		public Group getGroup() { return cGroup; }
-
-		//{MissingDisputableVersMarker}
-		public Action getMissingDisputableVersMarkerAction_0() { return cMissingDisputableVersMarkerAction_0; }
-
-		////'@v'
-		//"〈⸮󰂀?〉"
-		public Keyword getLeftPointingAngleBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightPointingAngleBracketKeyword_1() { return cLeftPointingAngleBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightPointingAngleBracketKeyword_1; }
 	}
 
 	public class RestorationOverRasurMarkerElements extends AbstractParserRuleElementFinder {
@@ -2291,20 +2088,11 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	private VersMarkerElements pVersMarker;
 	private EmendationVersMarkerElements pEmendationVersMarker;
 	private DisputableVersMarkerElements pDisputableVersMarker;
-	private DisputableDestroyedVersMarkerElements pDisputableDestroyedVersMarker;
-	private DisputableDeletedVersMarkerElements pDisputableDeletedVersMarker;
 	private DeletedVersMarkerElements pDeletedVersMarker;
-	private DeletedDisputableVersMarkerElements pDeletedDisputableVersMarker;
-	private DeletedDestroyedVersMarkerElements pDeletedDestroyedVersMarker;
 	private DestroyedVersMarkerElements pDestroyedVersMarker;
 	private DestroyedVersFrontierMarkerElements pDestroyedVersFrontierMarker;
-	private DestroyedDisputableVersFrontierMarkerElements pDestroyedDisputableVersFrontierMarker;
-	private DestroyedDeletedVersMarkerElements pDestroyedDeletedVersMarker;
 	private PartialDestroyedVersMarkerElements pPartialDestroyedVersMarker;
-	private PartialDestroyedDisputableVersMarkerElements pPartialDestroyedDisputableVersMarker;
-	private PartialDestroyedDeletedVersMarkerElements pPartialDestroyedDeletedVersMarker;
 	private MissingVersMarkerElements pMissingVersMarker;
-	private MissingDisputableVersMarkerElements pMissingDisputableVersMarker;
 	private RestorationOverRasurMarkerElements pRestorationOverRasurMarker;
 	private AncientExpandedMarkerElements pAncientExpandedMarker;
 	private RasurMarkerElements pRasurMarker;
@@ -2552,6 +2340,7 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	} 
 
 	//// textual criticism brackets
+	////	|DisputableReadingRestaurationOverRasur
 	//Brackets:
 	//	Rasur | AncientExpanded | RestorationOverRasur | ExpandedColumn | Expanded | DisputableReading | Emendation | Lacuna
 	//	| Deletion | PartialDestruction | Cartouche | Oval | Serech;
@@ -2680,6 +2469,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getNoDisputableReadingAccess().getRule();
 	}
 
+	////DisputableReadingRestaurationOverRasur:
+	////	{DisputableReadingRestaurationOverRasur}
+	////	'\u2E2E[[' wChar+=NoDisputableReadingRestaurationOverRasur+ ']]' wChar+=NoDisputableReadingRestaurationOverRasur* '?'
+	////;
+	////
+	////NoDisputableReadingRestaurationOverRasur:
+	////	Chars | Interfix
+	////;
 	//Lacuna:
 	//	{Lacuna} "[" wChar+=NoLacuna+ "]";
 	public LacunaElements getLacunaAccess() {
@@ -2903,13 +2700,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getInterfixPhoneticalComplementAccess().getRule();
 	}
 
+	////	| PartialDestroyedDisputableVersMarker
+	////	| DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker |DeletedDisputableVersMarker
+	////	| DisputableDeletedVersMarker | PartialDestroyedDeletedVersMarker
+	////	| DestroyedDeletedVersMarker | DeletedDestroyedVersMarker
 	//VersMarker:
 	//	VersbreakMarker | VersFrontierMarker | BrokenVersbreakMarker | MissingVersMarker | DestroyedVersMarker |
 	//	DeletedVersMarker | DisputableVersMarker | RestorationOverRasurMarker | AncientExpandedMarker | RasurMarker |
-	//	EmendationVersMarker | DestroyedVersFrontierMarker | PartialDestroyedVersMarker |
-	//	PartialDestroyedDisputableVersMarker | DestroyedDisputableVersFrontierMarker | DisputableDestroyedVersMarker |
-	//	DeletedDisputableVersMarker | MissingDisputableVersMarker | DisputableDeletedVersMarker |
-	//	PartialDestroyedDeletedVersMarker | DestroyedDeletedVersMarker | DeletedDestroyedVersMarker;
+	//	EmendationVersMarker | DestroyedVersFrontierMarker | PartialDestroyedVersMarker;
 	public VersMarkerElements getVersMarkerAccess() {
 		return (pVersMarker != null) ? pVersMarker : (pVersMarker = new VersMarkerElements());
 	}
@@ -2940,28 +2738,15 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getDisputableVersMarkerAccess().getRule();
 	}
 
-	//DisputableDestroyedVersMarker:
-	//	{DisputableDestroyedVersMarker} //'@v'
-	//	"⸮[󰂀]?";
-	public DisputableDestroyedVersMarkerElements getDisputableDestroyedVersMarkerAccess() {
-		return (pDisputableDestroyedVersMarker != null) ? pDisputableDestroyedVersMarker : (pDisputableDestroyedVersMarker = new DisputableDestroyedVersMarkerElements());
-	}
-	
-	public ParserRule getDisputableDestroyedVersMarkerRule() {
-		return getDisputableDestroyedVersMarkerAccess().getRule();
-	}
-
-	//DisputableDeletedVersMarker:
-	//	{DisputableDeletedVersMarker} //'@v'
-	//	"⸮{󰂀}?";
-	public DisputableDeletedVersMarkerElements getDisputableDeletedVersMarkerAccess() {
-		return (pDisputableDeletedVersMarker != null) ? pDisputableDeletedVersMarker : (pDisputableDeletedVersMarker = new DisputableDeletedVersMarkerElements());
-	}
-	
-	public ParserRule getDisputableDeletedVersMarkerRule() {
-		return getDisputableDeletedVersMarkerAccess().getRule();
-	}
-
+	////DisputableDestroyedVersMarker:
+	////{DisputableDestroyedVersMarker}
+	////	'\u2E2E[\uDB80\uDC80]?'//'@v'
+	////;
+	////
+	////DisputableDeletedVersMarker:
+	////{DisputableDeletedVersMarker}
+	////	'\u2E2E{\uDB80\uDC80}?'//'@v'
+	////;
 	//DeletedVersMarker:
 	//	{DeletedVersMarker} //'@v'
 	//	"{󰂀}";
@@ -2973,28 +2758,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getDeletedVersMarkerAccess().getRule();
 	}
 
-	//DeletedDisputableVersMarker:
-	//	{DeletedDisputableVersMarker} //'@v'
-	//	"{⸮󰂀?}";
-	public DeletedDisputableVersMarkerElements getDeletedDisputableVersMarkerAccess() {
-		return (pDeletedDisputableVersMarker != null) ? pDeletedDisputableVersMarker : (pDeletedDisputableVersMarker = new DeletedDisputableVersMarkerElements());
-	}
-	
-	public ParserRule getDeletedDisputableVersMarkerRule() {
-		return getDeletedDisputableVersMarkerAccess().getRule();
-	}
-
-	//DeletedDestroyedVersMarker:
-	//	{DeletedDestroyedVersMarker} //'@v'
-	//	"{[󰂀]}";
-	public DeletedDestroyedVersMarkerElements getDeletedDestroyedVersMarkerAccess() {
-		return (pDeletedDestroyedVersMarker != null) ? pDeletedDestroyedVersMarker : (pDeletedDestroyedVersMarker = new DeletedDestroyedVersMarkerElements());
-	}
-	
-	public ParserRule getDeletedDestroyedVersMarkerRule() {
-		return getDeletedDestroyedVersMarkerAccess().getRule();
-	}
-
+	////DeletedDisputableVersMarker:
+	////{DeletedDisputableVersMarker}
+	////	'{\u2E2E\uDB80\uDC80?}'//'@v'
+	////;
+	////DeletedDestroyedVersMarker:
+	////{DeletedDestroyedVersMarker}
+	////	'{[\uDB80\uDC80]}'//'@v'
+	////;
 	//DestroyedVersMarker:
 	//	{DestroyedVersMarker} //'@v'
 	//	"[󰂀]";
@@ -3017,28 +2788,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getDestroyedVersFrontierMarkerAccess().getRule();
 	}
 
-	//DestroyedDisputableVersFrontierMarker:
-	//	{DestroyedDisputableVersFrontierMarker} //'@v'
-	//	"[⸮󰂁?]";
-	public DestroyedDisputableVersFrontierMarkerElements getDestroyedDisputableVersFrontierMarkerAccess() {
-		return (pDestroyedDisputableVersFrontierMarker != null) ? pDestroyedDisputableVersFrontierMarker : (pDestroyedDisputableVersFrontierMarker = new DestroyedDisputableVersFrontierMarkerElements());
-	}
-	
-	public ParserRule getDestroyedDisputableVersFrontierMarkerRule() {
-		return getDestroyedDisputableVersFrontierMarkerAccess().getRule();
-	}
-
-	//DestroyedDeletedVersMarker:
-	//	{DestroyedDeletedVersMarker} //'@v'
-	//	"[{󰂀}]";
-	public DestroyedDeletedVersMarkerElements getDestroyedDeletedVersMarkerAccess() {
-		return (pDestroyedDeletedVersMarker != null) ? pDestroyedDeletedVersMarker : (pDestroyedDeletedVersMarker = new DestroyedDeletedVersMarkerElements());
-	}
-	
-	public ParserRule getDestroyedDeletedVersMarkerRule() {
-		return getDestroyedDeletedVersMarkerAccess().getRule();
-	}
-
+	////DestroyedDisputableVersFrontierMarker:
+	////	{DestroyedDisputableVersFrontierMarker}
+	////	'[\u2E2E\uDB80\uDC81?]'//'@v'
+	////;
+	////DestroyedDeletedVersMarker:
+	////	{DestroyedDeletedVersMarker}
+	////	'[{\uDB80\uDC80}]'//'@v'
+	////;
 	//PartialDestroyedVersMarker:
 	//	{PartialDestroyedVersMarker} //'@v'
 	//	"⸢󰂀⸣";
@@ -3050,28 +2807,14 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 		return getPartialDestroyedVersMarkerAccess().getRule();
 	}
 
-	//PartialDestroyedDisputableVersMarker:
-	//	{PartialDestroyedDisputableVersMarker} //'@v'
-	//	"⸢⸮󰂀?⸣";
-	public PartialDestroyedDisputableVersMarkerElements getPartialDestroyedDisputableVersMarkerAccess() {
-		return (pPartialDestroyedDisputableVersMarker != null) ? pPartialDestroyedDisputableVersMarker : (pPartialDestroyedDisputableVersMarker = new PartialDestroyedDisputableVersMarkerElements());
-	}
-	
-	public ParserRule getPartialDestroyedDisputableVersMarkerRule() {
-		return getPartialDestroyedDisputableVersMarkerAccess().getRule();
-	}
-
-	//PartialDestroyedDeletedVersMarker:
-	//	{PartialDestroyedDeletedVersMarker} //'@v'
-	//	"⸢{󰂀}⸣";
-	public PartialDestroyedDeletedVersMarkerElements getPartialDestroyedDeletedVersMarkerAccess() {
-		return (pPartialDestroyedDeletedVersMarker != null) ? pPartialDestroyedDeletedVersMarker : (pPartialDestroyedDeletedVersMarker = new PartialDestroyedDeletedVersMarkerElements());
-	}
-	
-	public ParserRule getPartialDestroyedDeletedVersMarkerRule() {
-		return getPartialDestroyedDeletedVersMarkerAccess().getRule();
-	}
-
+	////PartialDestroyedDisputableVersMarker:
+	////	{PartialDestroyedDisputableVersMarker}
+	////	'\u2E22\u2E2E\uDB80\uDC80?\u2E23'//'@v'
+	////;
+	////PartialDestroyedDeletedVersMarker:
+	////	{PartialDestroyedDeletedVersMarker}
+	////	'\u2E22{\uDB80\uDC80}\u2E23'//'@v'
+	////;
 	//MissingVersMarker:
 	//	{MissingVersMarker} //'@v'
 	//	"〈󰂀〉";
@@ -3081,17 +2824,6 @@ public class EgyDslGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getMissingVersMarkerRule() {
 		return getMissingVersMarkerAccess().getRule();
-	}
-
-	//MissingDisputableVersMarker:
-	//	{MissingDisputableVersMarker} //'@v'
-	//	"〈⸮󰂀?〉";
-	public MissingDisputableVersMarkerElements getMissingDisputableVersMarkerAccess() {
-		return (pMissingDisputableVersMarker != null) ? pMissingDisputableVersMarker : (pMissingDisputableVersMarker = new MissingDisputableVersMarkerElements());
-	}
-	
-	public ParserRule getMissingDisputableVersMarkerRule() {
-		return getMissingDisputableVersMarkerAccess().getRule();
 	}
 
 	//RestorationOverRasurMarker:

@@ -330,29 +330,9 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createDisputableVersMarkerAdapter();
       }
       @Override
-      public Adapter caseDisputableDestroyedVersMarker(DisputableDestroyedVersMarker object)
-      {
-        return createDisputableDestroyedVersMarkerAdapter();
-      }
-      @Override
-      public Adapter caseDisputableDeletedVersMarker(DisputableDeletedVersMarker object)
-      {
-        return createDisputableDeletedVersMarkerAdapter();
-      }
-      @Override
       public Adapter caseDeletedVersMarker(DeletedVersMarker object)
       {
         return createDeletedVersMarkerAdapter();
-      }
-      @Override
-      public Adapter caseDeletedDisputableVersMarker(DeletedDisputableVersMarker object)
-      {
-        return createDeletedDisputableVersMarkerAdapter();
-      }
-      @Override
-      public Adapter caseDeletedDestroyedVersMarker(DeletedDestroyedVersMarker object)
-      {
-        return createDeletedDestroyedVersMarkerAdapter();
       }
       @Override
       public Adapter caseDestroyedVersMarker(DestroyedVersMarker object)
@@ -365,39 +345,14 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
         return createDestroyedVersFrontierMarkerAdapter();
       }
       @Override
-      public Adapter caseDestroyedDisputableVersFrontierMarker(DestroyedDisputableVersFrontierMarker object)
-      {
-        return createDestroyedDisputableVersFrontierMarkerAdapter();
-      }
-      @Override
-      public Adapter caseDestroyedDeletedVersMarker(DestroyedDeletedVersMarker object)
-      {
-        return createDestroyedDeletedVersMarkerAdapter();
-      }
-      @Override
       public Adapter casePartialDestroyedVersMarker(PartialDestroyedVersMarker object)
       {
         return createPartialDestroyedVersMarkerAdapter();
       }
       @Override
-      public Adapter casePartialDestroyedDisputableVersMarker(PartialDestroyedDisputableVersMarker object)
-      {
-        return createPartialDestroyedDisputableVersMarkerAdapter();
-      }
-      @Override
-      public Adapter casePartialDestroyedDeletedVersMarker(PartialDestroyedDeletedVersMarker object)
-      {
-        return createPartialDestroyedDeletedVersMarkerAdapter();
-      }
-      @Override
       public Adapter caseMissingVersMarker(MissingVersMarker object)
       {
         return createMissingVersMarkerAdapter();
-      }
-      @Override
-      public Adapter caseMissingDisputableVersMarker(MissingDisputableVersMarker object)
-      {
-        return createMissingDisputableVersMarkerAdapter();
       }
       @Override
       public Adapter caseRestorationOverRasurMarker(RestorationOverRasurMarker object)
@@ -1217,36 +1172,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDestroyedVersMarker <em>Disputable Destroyed Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDestroyedVersMarker
-   * @generated
-   */
-  public Adapter createDisputableDestroyedVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDeletedVersMarker <em>Disputable Deleted Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDeletedVersMarker
-   * @generated
-   */
-  public Adapter createDisputableDeletedVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker <em>Deleted Vers Marker</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1257,36 +1182,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createDeletedVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDisputableVersMarker <em>Deleted Disputable Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDisputableVersMarker
-   * @generated
-   */
-  public Adapter createDeletedDisputableVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDestroyedVersMarker <em>Deleted Destroyed Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDestroyedVersMarker
-   * @generated
-   */
-  public Adapter createDeletedDestroyedVersMarkerAdapter()
   {
     return null;
   }
@@ -1322,36 +1217,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDisputableVersFrontierMarker <em>Destroyed Disputable Vers Frontier Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDisputableVersFrontierMarker
-   * @generated
-   */
-  public Adapter createDestroyedDisputableVersFrontierMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDeletedVersMarker <em>Destroyed Deleted Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDeletedVersMarker
-   * @generated
-   */
-  public Adapter createDestroyedDeletedVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedVersMarker <em>Partial Destroyed Vers Marker</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1367,36 +1232,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDisputableVersMarker <em>Partial Destroyed Disputable Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDisputableVersMarker
-   * @generated
-   */
-  public Adapter createPartialDestroyedDisputableVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDeletedVersMarker <em>Partial Destroyed Deleted Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDeletedVersMarker
-   * @generated
-   */
-  public Adapter createPartialDestroyedDeletedVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
    * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker <em>Missing Vers Marker</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -1407,21 +1242,6 @@ public class EgyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createMissingVersMarkerAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.bbaw.bts.corpus.text.egy.egyDsl.MissingDisputableVersMarker <em>Missing Disputable Vers Marker</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.bbaw.bts.corpus.text.egy.egyDsl.MissingDisputableVersMarker
-   * @generated
-   */
-  public Adapter createMissingDisputableVersMarkerAdapter()
   {
     return null;
   }

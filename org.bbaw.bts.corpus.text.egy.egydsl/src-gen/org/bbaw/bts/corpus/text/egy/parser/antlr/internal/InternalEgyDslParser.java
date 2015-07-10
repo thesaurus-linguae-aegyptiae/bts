@@ -21,19 +21,12 @@ import java.util.ArrayList;
 @SuppressWarnings("all")
 public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_NEWLINE", "RULE_CASESTRING", "RULE_BETWEEN_HASHES", "RULE_BETWEEN_MINUS", "RULE_EGYSTRING", "' '", "'\\u00A7'", "'%'", "'| '", "'\\uD80C\\uDE58'", "'\\uD80C\\uDE82'", "'\\uD80C\\uDF79'", "'\\uD80C\\uDF7A'", "'\\uD80C\\uDE86'", "'\\uD80C\\uDE87'", "'('", "')'", "'(('", "'))'", "'\\u2329'", "'\\u232A'", "'\\u2E2E'", "'?'", "'['", "']'", "'{'", "'}'", "'\\u2329\\u2329'", "'\\u232A\\u232A'", "'{{'", "'}}'", "'[['", "']]'", "'\\u2E22'", "'\\u2E23'", "','", "'.'", "'\\u2261'", "':'", "'\\u22EE'", "'~'", "'-'", "';'", "'(\\uDB80\\uDC80)'", "'\\u2E2E\\uDB80\\uDC80?'", "'\\u2E2E[\\uDB80\\uDC80]?'", "'\\u2E2E{\\uDB80\\uDC80}?'", "'{\\uDB80\\uDC80}'", "'{\\u2E2E\\uDB80\\uDC80?}'", "'{[\\uDB80\\uDC80]}'", "'[\\uDB80\\uDC80]'", "'[\\uDB80\\uDC81]'", "'[\\u2E2E\\uDB80\\uDC81?]'", "'[{\\uDB80\\uDC80}]'", "'\\u2E22\\uDB80\\uDC80\\u2E23'", "'\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23'", "'\\u2E22{\\uDB80\\uDC80}\\u2E23'", "'\\u2329\\uDB80\\uDC80\\u232A'", "'\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A'", "'[[\\uDB80\\uDC80]]'", "'((\\uDB80\\uDC80))'", "'{{\\uDB80\\uDC80}}'", "'\\uDB80\\uDC81'", "'\\uDB80\\uDC80'", "'\\uDB80\\uDC82'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_NEWLINE", "RULE_CASESTRING", "RULE_BETWEEN_HASHES", "RULE_BETWEEN_MINUS", "RULE_EGYSTRING", "' '", "'\\u00A7'", "'%'", "'| '", "'\\uD80C\\uDE58'", "'\\uD80C\\uDE82'", "'\\uD80C\\uDF79'", "'\\uD80C\\uDF7A'", "'\\uD80C\\uDE86'", "'\\uD80C\\uDE87'", "'('", "')'", "'(('", "'))'", "'\\u2329'", "'\\u232A'", "'\\u2E2E'", "'?'", "'['", "']'", "'{'", "'}'", "'\\u2329\\u2329'", "'\\u232A\\u232A'", "'{{'", "'}}'", "'[['", "']]'", "'\\u2E22'", "'\\u2E23'", "','", "'.'", "'\\u2261'", "':'", "'\\u22EE'", "'~'", "'-'", "';'", "'(\\uDB80\\uDC80)'", "'\\u2E2E\\uDB80\\uDC80?'", "'{\\uDB80\\uDC80}'", "'[\\uDB80\\uDC80]'", "'[\\uDB80\\uDC81]'", "'\\u2E22\\uDB80\\uDC80\\u2E23'", "'\\u2329\\uDB80\\uDC80\\u232A'", "'[[\\uDB80\\uDC80]]'", "'((\\uDB80\\uDC80))'", "'{{\\uDB80\\uDC80}}'", "'\\uDB80\\uDC81'", "'\\uDB80\\uDC80'", "'\\uDB80\\uDC82'"
     };
-    public static final int T__68=68;
     public static final int RULE_BETWEEN_MINUS=7;
-    public static final int T__66=66;
-    public static final int T__67=67;
-    public static final int T__64=64;
     public static final int T__29=29;
-    public static final int T__65=65;
     public static final int T__28=28;
-    public static final int T__62=62;
     public static final int T__27=27;
-    public static final int T__63=63;
     public static final int T__26=26;
     public static final int T__25=25;
     public static final int T__24=24;
@@ -41,8 +34,6 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     public static final int T__22=22;
     public static final int T__21=21;
     public static final int T__20=20;
-    public static final int T__61=61;
-    public static final int T__60=60;
     public static final int EOF=-1;
     public static final int T__9=9;
     public static final int T__55=55;
@@ -499,7 +490,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             int alt5=2;
             int LA5_0 = input.LA(1);
 
-            if ( ((LA5_0>=RULE_BETWEEN_HASHES && LA5_0<=RULE_EGYSTRING)||LA5_0==11||LA5_0==13||LA5_0==15||LA5_0==17||LA5_0==19||LA5_0==21||LA5_0==23||LA5_0==25||LA5_0==27||LA5_0==29||LA5_0==31||LA5_0==33||LA5_0==35||LA5_0==37||(LA5_0>=39 && LA5_0<=68)) ) {
+            if ( ((LA5_0>=RULE_BETWEEN_HASHES && LA5_0<=RULE_EGYSTRING)||LA5_0==11||LA5_0==13||LA5_0==15||LA5_0==17||LA5_0==19||LA5_0==21||LA5_0==23||LA5_0==25||LA5_0==27||LA5_0==29||LA5_0==31||LA5_0==33||LA5_0==35||LA5_0==37||(LA5_0>=39 && LA5_0<=59)) ) {
                 alt5=1;
             }
             switch (alt5) {
@@ -745,15 +736,6 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 57:
             case 58:
             case 59:
-            case 60:
-            case 61:
-            case 62:
-            case 63:
-            case 64:
-            case 65:
-            case 66:
-            case 67:
-            case 68:
                 {
                 alt6=2;
                 }
@@ -920,15 +902,6 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             case 57:
             case 58:
             case 59:
-            case 60:
-            case 61:
-            case 62:
-            case 63:
-            case 64:
-            case 65:
-            case 66:
-            case 67:
-            case 68:
                 {
                 alt7=2;
                 }
@@ -1531,7 +1504,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
             if ( (LA13_0==RULE_EGYSTRING||LA13_0==13||LA13_0==15||LA13_0==17||LA13_0==19||LA13_0==21||LA13_0==23||LA13_0==25||LA13_0==27||LA13_0==29||LA13_0==31||LA13_0==33||LA13_0==35||LA13_0==37||(LA13_0>=39 && LA13_0<=46)) ) {
                 alt13=1;
             }
-            else if ( ((LA13_0>=RULE_BETWEEN_HASHES && LA13_0<=RULE_BETWEEN_MINUS)||(LA13_0>=47 && LA13_0<=68)) ) {
+            else if ( ((LA13_0>=RULE_BETWEEN_HASHES && LA13_0<=RULE_BETWEEN_MINUS)||(LA13_0>=47 && LA13_0<=59)) ) {
                 alt13=2;
             }
             else {
@@ -8771,7 +8744,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3093:1: ruleVersMarker returns [EObject current=null] : (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker | this_PartialDestroyedDisputableVersMarker_13= rulePartialDestroyedDisputableVersMarker | this_DestroyedDisputableVersFrontierMarker_14= ruleDestroyedDisputableVersFrontierMarker | this_DisputableDestroyedVersMarker_15= ruleDisputableDestroyedVersMarker | this_DeletedDisputableVersMarker_16= ruleDeletedDisputableVersMarker | this_MissingDisputableVersMarker_17= ruleMissingDisputableVersMarker | this_DisputableDeletedVersMarker_18= ruleDisputableDeletedVersMarker | this_PartialDestroyedDeletedVersMarker_19= rulePartialDestroyedDeletedVersMarker | this_DestroyedDeletedVersMarker_20= ruleDestroyedDeletedVersMarker | this_DeletedDestroyedVersMarker_21= ruleDeletedDestroyedVersMarker ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3093:1: ruleVersMarker returns [EObject current=null] : (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker ) ;
     public final EObject ruleVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -8801,60 +8774,42 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
         EObject this_PartialDestroyedVersMarker_12 = null;
 
-        EObject this_PartialDestroyedDisputableVersMarker_13 = null;
-
-        EObject this_DestroyedDisputableVersFrontierMarker_14 = null;
-
-        EObject this_DisputableDestroyedVersMarker_15 = null;
-
-        EObject this_DeletedDisputableVersMarker_16 = null;
-
-        EObject this_MissingDisputableVersMarker_17 = null;
-
-        EObject this_DisputableDeletedVersMarker_18 = null;
-
-        EObject this_PartialDestroyedDeletedVersMarker_19 = null;
-
-        EObject this_DestroyedDeletedVersMarker_20 = null;
-
-        EObject this_DeletedDestroyedVersMarker_21 = null;
-
 
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3096:28: ( (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker | this_PartialDestroyedDisputableVersMarker_13= rulePartialDestroyedDisputableVersMarker | this_DestroyedDisputableVersFrontierMarker_14= ruleDestroyedDisputableVersFrontierMarker | this_DisputableDestroyedVersMarker_15= ruleDisputableDestroyedVersMarker | this_DeletedDisputableVersMarker_16= ruleDeletedDisputableVersMarker | this_MissingDisputableVersMarker_17= ruleMissingDisputableVersMarker | this_DisputableDeletedVersMarker_18= ruleDisputableDeletedVersMarker | this_PartialDestroyedDeletedVersMarker_19= rulePartialDestroyedDeletedVersMarker | this_DestroyedDeletedVersMarker_20= ruleDestroyedDeletedVersMarker | this_DeletedDestroyedVersMarker_21= ruleDeletedDestroyedVersMarker ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3097:1: (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker | this_PartialDestroyedDisputableVersMarker_13= rulePartialDestroyedDisputableVersMarker | this_DestroyedDisputableVersFrontierMarker_14= ruleDestroyedDisputableVersFrontierMarker | this_DisputableDestroyedVersMarker_15= ruleDisputableDestroyedVersMarker | this_DeletedDisputableVersMarker_16= ruleDeletedDisputableVersMarker | this_MissingDisputableVersMarker_17= ruleMissingDisputableVersMarker | this_DisputableDeletedVersMarker_18= ruleDisputableDeletedVersMarker | this_PartialDestroyedDeletedVersMarker_19= rulePartialDestroyedDeletedVersMarker | this_DestroyedDeletedVersMarker_20= ruleDestroyedDeletedVersMarker | this_DeletedDestroyedVersMarker_21= ruleDeletedDestroyedVersMarker )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3096:28: ( (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3097:1: (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3097:1: (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker | this_PartialDestroyedDisputableVersMarker_13= rulePartialDestroyedDisputableVersMarker | this_DestroyedDisputableVersFrontierMarker_14= ruleDestroyedDisputableVersFrontierMarker | this_DisputableDestroyedVersMarker_15= ruleDisputableDestroyedVersMarker | this_DeletedDisputableVersMarker_16= ruleDeletedDisputableVersMarker | this_MissingDisputableVersMarker_17= ruleMissingDisputableVersMarker | this_DisputableDeletedVersMarker_18= ruleDisputableDeletedVersMarker | this_PartialDestroyedDeletedVersMarker_19= rulePartialDestroyedDeletedVersMarker | this_DestroyedDeletedVersMarker_20= ruleDestroyedDeletedVersMarker | this_DeletedDestroyedVersMarker_21= ruleDeletedDestroyedVersMarker )
-            int alt42=22;
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3097:1: (this_VersbreakMarker_0= ruleVersbreakMarker | this_VersFrontierMarker_1= ruleVersFrontierMarker | this_BrokenVersbreakMarker_2= ruleBrokenVersbreakMarker | this_MissingVersMarker_3= ruleMissingVersMarker | this_DestroyedVersMarker_4= ruleDestroyedVersMarker | this_DeletedVersMarker_5= ruleDeletedVersMarker | this_DisputableVersMarker_6= ruleDisputableVersMarker | this_RestorationOverRasurMarker_7= ruleRestorationOverRasurMarker | this_AncientExpandedMarker_8= ruleAncientExpandedMarker | this_RasurMarker_9= ruleRasurMarker | this_EmendationVersMarker_10= ruleEmendationVersMarker | this_DestroyedVersFrontierMarker_11= ruleDestroyedVersFrontierMarker | this_PartialDestroyedVersMarker_12= rulePartialDestroyedVersMarker )
+            int alt42=13;
             switch ( input.LA(1) ) {
-            case 67:
+            case 58:
                 {
                 alt42=1;
                 }
                 break;
-            case 66:
+            case 57:
                 {
                 alt42=2;
                 }
                 break;
-            case 68:
+            case 59:
                 {
                 alt42=3;
                 }
                 break;
-            case 61:
+            case 53:
                 {
                 alt42=4;
                 }
                 break;
-            case 54:
+            case 50:
                 {
                 alt42=5;
                 }
                 break;
-            case 51:
+            case 49:
                 {
                 alt42=6;
                 }
@@ -8864,17 +8819,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                 alt42=7;
                 }
                 break;
-            case 63:
+            case 54:
                 {
                 alt42=8;
                 }
                 break;
-            case 64:
+            case 55:
                 {
                 alt42=9;
                 }
                 break;
-            case 65:
+            case 56:
                 {
                 alt42=10;
                 }
@@ -8884,59 +8839,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
                 alt42=11;
                 }
                 break;
-            case 55:
+            case 51:
                 {
                 alt42=12;
                 }
                 break;
-            case 58:
-                {
-                alt42=13;
-                }
-                break;
-            case 59:
-                {
-                alt42=14;
-                }
-                break;
-            case 56:
-                {
-                alt42=15;
-                }
-                break;
-            case 49:
-                {
-                alt42=16;
-                }
-                break;
             case 52:
                 {
-                alt42=17;
-                }
-                break;
-            case 62:
-                {
-                alt42=18;
-                }
-                break;
-            case 50:
-                {
-                alt42=19;
-                }
-                break;
-            case 60:
-                {
-                alt42=20;
-                }
-                break;
-            case 57:
-                {
-                alt42=21;
-                }
-                break;
-            case 53:
-                {
-                alt42=22;
+                alt42=13;
                 }
                 break;
             default:
@@ -9181,168 +9091,6 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
-                case 14 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3228:5: this_PartialDestroyedDisputableVersMarker_13= rulePartialDestroyedDisputableVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedDisputableVersMarkerParserRuleCall_13()); 
-                        
-                    pushFollow(FOLLOW_rulePartialDestroyedDisputableVersMarker_in_ruleVersMarker8446);
-                    this_PartialDestroyedDisputableVersMarker_13=rulePartialDestroyedDisputableVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_PartialDestroyedDisputableVersMarker_13; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 15 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3238:5: this_DestroyedDisputableVersFrontierMarker_14= ruleDestroyedDisputableVersFrontierMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedDisputableVersFrontierMarkerParserRuleCall_14()); 
-                        
-                    pushFollow(FOLLOW_ruleDestroyedDisputableVersFrontierMarker_in_ruleVersMarker8473);
-                    this_DestroyedDisputableVersFrontierMarker_14=ruleDestroyedDisputableVersFrontierMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_DestroyedDisputableVersFrontierMarker_14; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 16 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3248:5: this_DisputableDestroyedVersMarker_15= ruleDisputableDestroyedVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableDestroyedVersMarkerParserRuleCall_15()); 
-                        
-                    pushFollow(FOLLOW_ruleDisputableDestroyedVersMarker_in_ruleVersMarker8500);
-                    this_DisputableDestroyedVersMarker_15=ruleDisputableDestroyedVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_DisputableDestroyedVersMarker_15; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 17 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3258:5: this_DeletedDisputableVersMarker_16= ruleDeletedDisputableVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedDisputableVersMarkerParserRuleCall_16()); 
-                        
-                    pushFollow(FOLLOW_ruleDeletedDisputableVersMarker_in_ruleVersMarker8527);
-                    this_DeletedDisputableVersMarker_16=ruleDeletedDisputableVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_DeletedDisputableVersMarker_16; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 18 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3268:5: this_MissingDisputableVersMarker_17= ruleMissingDisputableVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getMissingDisputableVersMarkerParserRuleCall_17()); 
-                        
-                    pushFollow(FOLLOW_ruleMissingDisputableVersMarker_in_ruleVersMarker8554);
-                    this_MissingDisputableVersMarker_17=ruleMissingDisputableVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_MissingDisputableVersMarker_17; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 19 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3278:5: this_DisputableDeletedVersMarker_18= ruleDisputableDeletedVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getDisputableDeletedVersMarkerParserRuleCall_18()); 
-                        
-                    pushFollow(FOLLOW_ruleDisputableDeletedVersMarker_in_ruleVersMarker8581);
-                    this_DisputableDeletedVersMarker_18=ruleDisputableDeletedVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_DisputableDeletedVersMarker_18; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 20 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3288:5: this_PartialDestroyedDeletedVersMarker_19= rulePartialDestroyedDeletedVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getPartialDestroyedDeletedVersMarkerParserRuleCall_19()); 
-                        
-                    pushFollow(FOLLOW_rulePartialDestroyedDeletedVersMarker_in_ruleVersMarker8608);
-                    this_PartialDestroyedDeletedVersMarker_19=rulePartialDestroyedDeletedVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_PartialDestroyedDeletedVersMarker_19; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 21 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3298:5: this_DestroyedDeletedVersMarker_20= ruleDestroyedDeletedVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getDestroyedDeletedVersMarkerParserRuleCall_20()); 
-                        
-                    pushFollow(FOLLOW_ruleDestroyedDeletedVersMarker_in_ruleVersMarker8635);
-                    this_DestroyedDeletedVersMarker_20=ruleDestroyedDeletedVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_DestroyedDeletedVersMarker_20; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
-                case 22 :
-                    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3308:5: this_DeletedDestroyedVersMarker_21= ruleDeletedDestroyedVersMarker
-                    {
-                     
-                            newCompositeNode(grammarAccess.getVersMarkerAccess().getDeletedDestroyedVersMarkerParserRuleCall_21()); 
-                        
-                    pushFollow(FOLLOW_ruleDeletedDestroyedVersMarker_in_ruleVersMarker8662);
-                    this_DeletedDestroyedVersMarker_21=ruleDeletedDestroyedVersMarker();
-
-                    state._fsp--;
-
-                     
-                            current = this_DeletedDestroyedVersMarker_21; 
-                            afterParserOrEnumRuleCall();
-                        
-
-                    }
-                    break;
 
             }
 
@@ -9364,7 +9112,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEmendationVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3324:1: entryRuleEmendationVersMarker returns [EObject current=null] : iv_ruleEmendationVersMarker= ruleEmendationVersMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3234:1: entryRuleEmendationVersMarker returns [EObject current=null] : iv_ruleEmendationVersMarker= ruleEmendationVersMarker EOF ;
     public final EObject entryRuleEmendationVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9372,17 +9120,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3325:2: (iv_ruleEmendationVersMarker= ruleEmendationVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3326:2: iv_ruleEmendationVersMarker= ruleEmendationVersMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3235:2: (iv_ruleEmendationVersMarker= ruleEmendationVersMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3236:2: iv_ruleEmendationVersMarker= ruleEmendationVersMarker EOF
             {
              newCompositeNode(grammarAccess.getEmendationVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleEmendationVersMarker_in_entryRuleEmendationVersMarker8697);
+            pushFollow(FOLLOW_ruleEmendationVersMarker_in_entryRuleEmendationVersMarker8454);
             iv_ruleEmendationVersMarker=ruleEmendationVersMarker();
 
             state._fsp--;
 
              current =iv_ruleEmendationVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEmendationVersMarker8707); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEmendationVersMarker8464); 
 
             }
 
@@ -9400,7 +9148,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEmendationVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3333:1: ruleEmendationVersMarker returns [EObject current=null] : ( () otherlv_1= '(\\uDB80\\uDC80)' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3243:1: ruleEmendationVersMarker returns [EObject current=null] : ( () otherlv_1= '(\\uDB80\\uDC80)' ) ;
     public final EObject ruleEmendationVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9409,14 +9157,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3336:28: ( ( () otherlv_1= '(\\uDB80\\uDC80)' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3337:1: ( () otherlv_1= '(\\uDB80\\uDC80)' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3246:28: ( ( () otherlv_1= '(\\uDB80\\uDC80)' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3247:1: ( () otherlv_1= '(\\uDB80\\uDC80)' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3337:1: ( () otherlv_1= '(\\uDB80\\uDC80)' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3337:2: () otherlv_1= '(\\uDB80\\uDC80)'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3247:1: ( () otherlv_1= '(\\uDB80\\uDC80)' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3247:2: () otherlv_1= '(\\uDB80\\uDC80)'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3337:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3338:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3247:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3248:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9426,7 +9174,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,47,FOLLOW_47_in_ruleEmendationVersMarker8753); 
+            otherlv_1=(Token)match(input,47,FOLLOW_47_in_ruleEmendationVersMarker8510); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getEmendationVersMarkerAccess().getLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisKeyword_1());
                 
@@ -9451,7 +9199,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3355:1: entryRuleDisputableVersMarker returns [EObject current=null] : iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3265:1: entryRuleDisputableVersMarker returns [EObject current=null] : iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF ;
     public final EObject entryRuleDisputableVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9459,17 +9207,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3356:2: (iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3357:2: iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3266:2: (iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3267:2: iv_ruleDisputableVersMarker= ruleDisputableVersMarker EOF
             {
              newCompositeNode(grammarAccess.getDisputableVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker8789);
+            pushFollow(FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker8546);
             iv_ruleDisputableVersMarker=ruleDisputableVersMarker();
 
             state._fsp--;
 
              current =iv_ruleDisputableVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableVersMarker8799); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableVersMarker8556); 
 
             }
 
@@ -9487,7 +9235,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3364:1: ruleDisputableVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3274:1: ruleDisputableVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' ) ;
     public final EObject ruleDisputableVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9496,14 +9244,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3367:28: ( ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3368:1: ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3277:28: ( ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3278:1: ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3368:1: ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3368:2: () otherlv_1= '\\u2E2E\\uDB80\\uDC80?'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3278:1: ( () otherlv_1= '\\u2E2E\\uDB80\\uDC80?' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3278:2: () otherlv_1= '\\u2E2E\\uDB80\\uDC80?'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3368:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3369:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3278:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3279:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9513,7 +9261,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,48,FOLLOW_48_in_ruleDisputableVersMarker8845); 
+            otherlv_1=(Token)match(input,48,FOLLOW_48_in_ruleDisputableVersMarker8602); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDisputableVersMarkerAccess().getReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkKeyword_1());
                 
@@ -9537,182 +9285,8 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleDisputableVersMarker"
 
 
-    // $ANTLR start "entryRuleDisputableDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3386:1: entryRuleDisputableDestroyedVersMarker returns [EObject current=null] : iv_ruleDisputableDestroyedVersMarker= ruleDisputableDestroyedVersMarker EOF ;
-    public final EObject entryRuleDisputableDestroyedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDisputableDestroyedVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3387:2: (iv_ruleDisputableDestroyedVersMarker= ruleDisputableDestroyedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3388:2: iv_ruleDisputableDestroyedVersMarker= ruleDisputableDestroyedVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getDisputableDestroyedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDisputableDestroyedVersMarker_in_entryRuleDisputableDestroyedVersMarker8881);
-            iv_ruleDisputableDestroyedVersMarker=ruleDisputableDestroyedVersMarker();
-
-            state._fsp--;
-
-             current =iv_ruleDisputableDestroyedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableDestroyedVersMarker8891); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDisputableDestroyedVersMarker"
-
-
-    // $ANTLR start "ruleDisputableDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3395:1: ruleDisputableDestroyedVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E2E[\\uDB80\\uDC80]?' ) ;
-    public final EObject ruleDisputableDestroyedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3398:28: ( ( () otherlv_1= '\\u2E2E[\\uDB80\\uDC80]?' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3399:1: ( () otherlv_1= '\\u2E2E[\\uDB80\\uDC80]?' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3399:1: ( () otherlv_1= '\\u2E2E[\\uDB80\\uDC80]?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3399:2: () otherlv_1= '\\u2E2E[\\uDB80\\uDC80]?'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3399:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3400:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getDisputableDestroyedVersMarkerAccess().getDisputableDestroyedVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,49,FOLLOW_49_in_ruleDisputableDestroyedVersMarker8937); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getDisputableDestroyedVersMarkerAccess().getReversedQuestionMarkLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketQuestionMarkKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDisputableDestroyedVersMarker"
-
-
-    // $ANTLR start "entryRuleDisputableDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3417:1: entryRuleDisputableDeletedVersMarker returns [EObject current=null] : iv_ruleDisputableDeletedVersMarker= ruleDisputableDeletedVersMarker EOF ;
-    public final EObject entryRuleDisputableDeletedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDisputableDeletedVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3418:2: (iv_ruleDisputableDeletedVersMarker= ruleDisputableDeletedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3419:2: iv_ruleDisputableDeletedVersMarker= ruleDisputableDeletedVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getDisputableDeletedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDisputableDeletedVersMarker_in_entryRuleDisputableDeletedVersMarker8973);
-            iv_ruleDisputableDeletedVersMarker=ruleDisputableDeletedVersMarker();
-
-            state._fsp--;
-
-             current =iv_ruleDisputableDeletedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDisputableDeletedVersMarker8983); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDisputableDeletedVersMarker"
-
-
-    // $ANTLR start "ruleDisputableDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3426:1: ruleDisputableDeletedVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E2E{\\uDB80\\uDC80}?' ) ;
-    public final EObject ruleDisputableDeletedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3429:28: ( ( () otherlv_1= '\\u2E2E{\\uDB80\\uDC80}?' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3430:1: ( () otherlv_1= '\\u2E2E{\\uDB80\\uDC80}?' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3430:1: ( () otherlv_1= '\\u2E2E{\\uDB80\\uDC80}?' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3430:2: () otherlv_1= '\\u2E2E{\\uDB80\\uDC80}?'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3430:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3431:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getDisputableDeletedVersMarkerAccess().getDisputableDeletedVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,50,FOLLOW_50_in_ruleDisputableDeletedVersMarker9029); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getDisputableDeletedVersMarkerAccess().getReversedQuestionMarkLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketQuestionMarkKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDisputableDeletedVersMarker"
-
-
     // $ANTLR start "entryRuleDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3448:1: entryRuleDeletedVersMarker returns [EObject current=null] : iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3296:1: entryRuleDeletedVersMarker returns [EObject current=null] : iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF ;
     public final EObject entryRuleDeletedVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9720,17 +9294,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3449:2: (iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3450:2: iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3297:2: (iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3298:2: iv_ruleDeletedVersMarker= ruleDeletedVersMarker EOF
             {
              newCompositeNode(grammarAccess.getDeletedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker9065);
+            pushFollow(FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker8638);
             iv_ruleDeletedVersMarker=ruleDeletedVersMarker();
 
             state._fsp--;
 
              current =iv_ruleDeletedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletedVersMarker9075); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletedVersMarker8648); 
 
             }
 
@@ -9748,7 +9322,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3457:1: ruleDeletedVersMarker returns [EObject current=null] : ( () otherlv_1= '{\\uDB80\\uDC80}' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3305:1: ruleDeletedVersMarker returns [EObject current=null] : ( () otherlv_1= '{\\uDB80\\uDC80}' ) ;
     public final EObject ruleDeletedVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9757,14 +9331,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3460:28: ( ( () otherlv_1= '{\\uDB80\\uDC80}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3461:1: ( () otherlv_1= '{\\uDB80\\uDC80}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3308:28: ( ( () otherlv_1= '{\\uDB80\\uDC80}' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3309:1: ( () otherlv_1= '{\\uDB80\\uDC80}' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3461:1: ( () otherlv_1= '{\\uDB80\\uDC80}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3461:2: () otherlv_1= '{\\uDB80\\uDC80}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3309:1: ( () otherlv_1= '{\\uDB80\\uDC80}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3309:2: () otherlv_1= '{\\uDB80\\uDC80}'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3461:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3462:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3309:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3310:5: 
             {
 
                     current = forceCreateModelElement(
@@ -9774,7 +9348,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleDeletedVersMarker9121); 
+            otherlv_1=(Token)match(input,49,FOLLOW_49_in_ruleDeletedVersMarker8694); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDeletedVersMarkerAccess().getLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketKeyword_1());
                 
@@ -9798,182 +9372,8 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleDeletedVersMarker"
 
 
-    // $ANTLR start "entryRuleDeletedDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3479:1: entryRuleDeletedDisputableVersMarker returns [EObject current=null] : iv_ruleDeletedDisputableVersMarker= ruleDeletedDisputableVersMarker EOF ;
-    public final EObject entryRuleDeletedDisputableVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDeletedDisputableVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3480:2: (iv_ruleDeletedDisputableVersMarker= ruleDeletedDisputableVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3481:2: iv_ruleDeletedDisputableVersMarker= ruleDeletedDisputableVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getDeletedDisputableVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDeletedDisputableVersMarker_in_entryRuleDeletedDisputableVersMarker9157);
-            iv_ruleDeletedDisputableVersMarker=ruleDeletedDisputableVersMarker();
-
-            state._fsp--;
-
-             current =iv_ruleDeletedDisputableVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletedDisputableVersMarker9167); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDeletedDisputableVersMarker"
-
-
-    // $ANTLR start "ruleDeletedDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3488:1: ruleDeletedDisputableVersMarker returns [EObject current=null] : ( () otherlv_1= '{\\u2E2E\\uDB80\\uDC80?}' ) ;
-    public final EObject ruleDeletedDisputableVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3491:28: ( ( () otherlv_1= '{\\u2E2E\\uDB80\\uDC80?}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3492:1: ( () otherlv_1= '{\\u2E2E\\uDB80\\uDC80?}' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3492:1: ( () otherlv_1= '{\\u2E2E\\uDB80\\uDC80?}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3492:2: () otherlv_1= '{\\u2E2E\\uDB80\\uDC80?}'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3492:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3493:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getDeletedDisputableVersMarkerAccess().getDeletedDisputableVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,52,FOLLOW_52_in_ruleDeletedDisputableVersMarker9213); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getDeletedDisputableVersMarkerAccess().getLeftCurlyBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightCurlyBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDeletedDisputableVersMarker"
-
-
-    // $ANTLR start "entryRuleDeletedDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3510:1: entryRuleDeletedDestroyedVersMarker returns [EObject current=null] : iv_ruleDeletedDestroyedVersMarker= ruleDeletedDestroyedVersMarker EOF ;
-    public final EObject entryRuleDeletedDestroyedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDeletedDestroyedVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3511:2: (iv_ruleDeletedDestroyedVersMarker= ruleDeletedDestroyedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3512:2: iv_ruleDeletedDestroyedVersMarker= ruleDeletedDestroyedVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getDeletedDestroyedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDeletedDestroyedVersMarker_in_entryRuleDeletedDestroyedVersMarker9249);
-            iv_ruleDeletedDestroyedVersMarker=ruleDeletedDestroyedVersMarker();
-
-            state._fsp--;
-
-             current =iv_ruleDeletedDestroyedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDeletedDestroyedVersMarker9259); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDeletedDestroyedVersMarker"
-
-
-    // $ANTLR start "ruleDeletedDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3519:1: ruleDeletedDestroyedVersMarker returns [EObject current=null] : ( () otherlv_1= '{[\\uDB80\\uDC80]}' ) ;
-    public final EObject ruleDeletedDestroyedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3522:28: ( ( () otherlv_1= '{[\\uDB80\\uDC80]}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3523:1: ( () otherlv_1= '{[\\uDB80\\uDC80]}' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3523:1: ( () otherlv_1= '{[\\uDB80\\uDC80]}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3523:2: () otherlv_1= '{[\\uDB80\\uDC80]}'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3523:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3524:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getDeletedDestroyedVersMarkerAccess().getDeletedDestroyedVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleDeletedDestroyedVersMarker9305); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getDeletedDestroyedVersMarkerAccess().getLeftCurlyBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightCurlyBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDeletedDestroyedVersMarker"
-
-
     // $ANTLR start "entryRuleDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3541:1: entryRuleDestroyedVersMarker returns [EObject current=null] : iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3327:1: entryRuleDestroyedVersMarker returns [EObject current=null] : iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF ;
     public final EObject entryRuleDestroyedVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -9981,17 +9381,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3542:2: (iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3543:2: iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3328:2: (iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3329:2: iv_ruleDestroyedVersMarker= ruleDestroyedVersMarker EOF
             {
              newCompositeNode(grammarAccess.getDestroyedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker9341);
+            pushFollow(FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker8730);
             iv_ruleDestroyedVersMarker=ruleDestroyedVersMarker();
 
             state._fsp--;
 
              current =iv_ruleDestroyedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedVersMarker9351); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedVersMarker8740); 
 
             }
 
@@ -10009,7 +9409,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3550:1: ruleDestroyedVersMarker returns [EObject current=null] : ( () otherlv_1= '[\\uDB80\\uDC80]' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3336:1: ruleDestroyedVersMarker returns [EObject current=null] : ( () otherlv_1= '[\\uDB80\\uDC80]' ) ;
     public final EObject ruleDestroyedVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10018,14 +9418,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3553:28: ( ( () otherlv_1= '[\\uDB80\\uDC80]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3554:1: ( () otherlv_1= '[\\uDB80\\uDC80]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3339:28: ( ( () otherlv_1= '[\\uDB80\\uDC80]' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3340:1: ( () otherlv_1= '[\\uDB80\\uDC80]' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3554:1: ( () otherlv_1= '[\\uDB80\\uDC80]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3554:2: () otherlv_1= '[\\uDB80\\uDC80]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3340:1: ( () otherlv_1= '[\\uDB80\\uDC80]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3340:2: () otherlv_1= '[\\uDB80\\uDC80]'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3554:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3555:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3340:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3341:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10035,7 +9435,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,54,FOLLOW_54_in_ruleDestroyedVersMarker9397); 
+            otherlv_1=(Token)match(input,50,FOLLOW_50_in_ruleDestroyedVersMarker8786); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDestroyedVersMarkerAccess().getLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketKeyword_1());
                 
@@ -10060,7 +9460,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleDestroyedVersFrontierMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3572:1: entryRuleDestroyedVersFrontierMarker returns [EObject current=null] : iv_ruleDestroyedVersFrontierMarker= ruleDestroyedVersFrontierMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3358:1: entryRuleDestroyedVersFrontierMarker returns [EObject current=null] : iv_ruleDestroyedVersFrontierMarker= ruleDestroyedVersFrontierMarker EOF ;
     public final EObject entryRuleDestroyedVersFrontierMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10068,17 +9468,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3573:2: (iv_ruleDestroyedVersFrontierMarker= ruleDestroyedVersFrontierMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3574:2: iv_ruleDestroyedVersFrontierMarker= ruleDestroyedVersFrontierMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3359:2: (iv_ruleDestroyedVersFrontierMarker= ruleDestroyedVersFrontierMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3360:2: iv_ruleDestroyedVersFrontierMarker= ruleDestroyedVersFrontierMarker EOF
             {
              newCompositeNode(grammarAccess.getDestroyedVersFrontierMarkerRule()); 
-            pushFollow(FOLLOW_ruleDestroyedVersFrontierMarker_in_entryRuleDestroyedVersFrontierMarker9433);
+            pushFollow(FOLLOW_ruleDestroyedVersFrontierMarker_in_entryRuleDestroyedVersFrontierMarker8822);
             iv_ruleDestroyedVersFrontierMarker=ruleDestroyedVersFrontierMarker();
 
             state._fsp--;
 
              current =iv_ruleDestroyedVersFrontierMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedVersFrontierMarker9443); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedVersFrontierMarker8832); 
 
             }
 
@@ -10096,7 +9496,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleDestroyedVersFrontierMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3581:1: ruleDestroyedVersFrontierMarker returns [EObject current=null] : ( () otherlv_1= '[\\uDB80\\uDC81]' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3367:1: ruleDestroyedVersFrontierMarker returns [EObject current=null] : ( () otherlv_1= '[\\uDB80\\uDC81]' ) ;
     public final EObject ruleDestroyedVersFrontierMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10105,14 +9505,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3584:28: ( ( () otherlv_1= '[\\uDB80\\uDC81]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3585:1: ( () otherlv_1= '[\\uDB80\\uDC81]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3370:28: ( ( () otherlv_1= '[\\uDB80\\uDC81]' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3371:1: ( () otherlv_1= '[\\uDB80\\uDC81]' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3585:1: ( () otherlv_1= '[\\uDB80\\uDC81]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3585:2: () otherlv_1= '[\\uDB80\\uDC81]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3371:1: ( () otherlv_1= '[\\uDB80\\uDC81]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3371:2: () otherlv_1= '[\\uDB80\\uDC81]'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3585:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3586:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3371:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3372:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10122,7 +9522,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,55,FOLLOW_55_in_ruleDestroyedVersFrontierMarker9489); 
+            otherlv_1=(Token)match(input,51,FOLLOW_51_in_ruleDestroyedVersFrontierMarker8878); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getDestroyedVersFrontierMarkerAccess().getLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc81RightSquareBracketKeyword_1());
                 
@@ -10146,182 +9546,8 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleDestroyedVersFrontierMarker"
 
 
-    // $ANTLR start "entryRuleDestroyedDisputableVersFrontierMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3603:1: entryRuleDestroyedDisputableVersFrontierMarker returns [EObject current=null] : iv_ruleDestroyedDisputableVersFrontierMarker= ruleDestroyedDisputableVersFrontierMarker EOF ;
-    public final EObject entryRuleDestroyedDisputableVersFrontierMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDestroyedDisputableVersFrontierMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3604:2: (iv_ruleDestroyedDisputableVersFrontierMarker= ruleDestroyedDisputableVersFrontierMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3605:2: iv_ruleDestroyedDisputableVersFrontierMarker= ruleDestroyedDisputableVersFrontierMarker EOF
-            {
-             newCompositeNode(grammarAccess.getDestroyedDisputableVersFrontierMarkerRule()); 
-            pushFollow(FOLLOW_ruleDestroyedDisputableVersFrontierMarker_in_entryRuleDestroyedDisputableVersFrontierMarker9525);
-            iv_ruleDestroyedDisputableVersFrontierMarker=ruleDestroyedDisputableVersFrontierMarker();
-
-            state._fsp--;
-
-             current =iv_ruleDestroyedDisputableVersFrontierMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedDisputableVersFrontierMarker9535); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDestroyedDisputableVersFrontierMarker"
-
-
-    // $ANTLR start "ruleDestroyedDisputableVersFrontierMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3612:1: ruleDestroyedDisputableVersFrontierMarker returns [EObject current=null] : ( () otherlv_1= '[\\u2E2E\\uDB80\\uDC81?]' ) ;
-    public final EObject ruleDestroyedDisputableVersFrontierMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3615:28: ( ( () otherlv_1= '[\\u2E2E\\uDB80\\uDC81?]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3616:1: ( () otherlv_1= '[\\u2E2E\\uDB80\\uDC81?]' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3616:1: ( () otherlv_1= '[\\u2E2E\\uDB80\\uDC81?]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3616:2: () otherlv_1= '[\\u2E2E\\uDB80\\uDC81?]'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3616:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3617:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getDestroyedDisputableVersFrontierMarkerAccess().getDestroyedDisputableVersFrontierMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleDestroyedDisputableVersFrontierMarker9581); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getDestroyedDisputableVersFrontierMarkerAccess().getLeftSquareBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc81QuestionMarkRightSquareBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDestroyedDisputableVersFrontierMarker"
-
-
-    // $ANTLR start "entryRuleDestroyedDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3634:1: entryRuleDestroyedDeletedVersMarker returns [EObject current=null] : iv_ruleDestroyedDeletedVersMarker= ruleDestroyedDeletedVersMarker EOF ;
-    public final EObject entryRuleDestroyedDeletedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleDestroyedDeletedVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3635:2: (iv_ruleDestroyedDeletedVersMarker= ruleDestroyedDeletedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3636:2: iv_ruleDestroyedDeletedVersMarker= ruleDestroyedDeletedVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getDestroyedDeletedVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleDestroyedDeletedVersMarker_in_entryRuleDestroyedDeletedVersMarker9617);
-            iv_ruleDestroyedDeletedVersMarker=ruleDestroyedDeletedVersMarker();
-
-            state._fsp--;
-
-             current =iv_ruleDestroyedDeletedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDestroyedDeletedVersMarker9627); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleDestroyedDeletedVersMarker"
-
-
-    // $ANTLR start "ruleDestroyedDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3643:1: ruleDestroyedDeletedVersMarker returns [EObject current=null] : ( () otherlv_1= '[{\\uDB80\\uDC80}]' ) ;
-    public final EObject ruleDestroyedDeletedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3646:28: ( ( () otherlv_1= '[{\\uDB80\\uDC80}]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3647:1: ( () otherlv_1= '[{\\uDB80\\uDC80}]' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3647:1: ( () otherlv_1= '[{\\uDB80\\uDC80}]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3647:2: () otherlv_1= '[{\\uDB80\\uDC80}]'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3647:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3648:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getDestroyedDeletedVersMarkerAccess().getDestroyedDeletedVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,57,FOLLOW_57_in_ruleDestroyedDeletedVersMarker9673); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getDestroyedDeletedVersMarkerAccess().getLeftSquareBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightSquareBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleDestroyedDeletedVersMarker"
-
-
     // $ANTLR start "entryRulePartialDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3665:1: entryRulePartialDestroyedVersMarker returns [EObject current=null] : iv_rulePartialDestroyedVersMarker= rulePartialDestroyedVersMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3389:1: entryRulePartialDestroyedVersMarker returns [EObject current=null] : iv_rulePartialDestroyedVersMarker= rulePartialDestroyedVersMarker EOF ;
     public final EObject entryRulePartialDestroyedVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10329,17 +9555,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3666:2: (iv_rulePartialDestroyedVersMarker= rulePartialDestroyedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3667:2: iv_rulePartialDestroyedVersMarker= rulePartialDestroyedVersMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3390:2: (iv_rulePartialDestroyedVersMarker= rulePartialDestroyedVersMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3391:2: iv_rulePartialDestroyedVersMarker= rulePartialDestroyedVersMarker EOF
             {
              newCompositeNode(grammarAccess.getPartialDestroyedVersMarkerRule()); 
-            pushFollow(FOLLOW_rulePartialDestroyedVersMarker_in_entryRulePartialDestroyedVersMarker9709);
+            pushFollow(FOLLOW_rulePartialDestroyedVersMarker_in_entryRulePartialDestroyedVersMarker8914);
             iv_rulePartialDestroyedVersMarker=rulePartialDestroyedVersMarker();
 
             state._fsp--;
 
              current =iv_rulePartialDestroyedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePartialDestroyedVersMarker9719); 
+            match(input,EOF,FOLLOW_EOF_in_entryRulePartialDestroyedVersMarker8924); 
 
             }
 
@@ -10357,7 +9583,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "rulePartialDestroyedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3674:1: rulePartialDestroyedVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3398:1: rulePartialDestroyedVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' ) ;
     public final EObject rulePartialDestroyedVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10366,14 +9592,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3677:28: ( ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3678:1: ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3401:28: ( ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3402:1: ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3678:1: ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3678:2: () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3402:1: ( () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3402:2: () otherlv_1= '\\u2E22\\uDB80\\uDC80\\u2E23'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3678:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3679:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3402:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3403:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10383,7 +9609,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,58,FOLLOW_58_in_rulePartialDestroyedVersMarker9765); 
+            otherlv_1=(Token)match(input,52,FOLLOW_52_in_rulePartialDestroyedVersMarker8970); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedVersMarkerAccess().getTopLeftHalfBracketLeadSurrogateDb80TrailSurrogateDc80TopRightHalfBracketKeyword_1());
                 
@@ -10407,182 +9633,8 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "rulePartialDestroyedVersMarker"
 
 
-    // $ANTLR start "entryRulePartialDestroyedDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3696:1: entryRulePartialDestroyedDisputableVersMarker returns [EObject current=null] : iv_rulePartialDestroyedDisputableVersMarker= rulePartialDestroyedDisputableVersMarker EOF ;
-    public final EObject entryRulePartialDestroyedDisputableVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_rulePartialDestroyedDisputableVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3697:2: (iv_rulePartialDestroyedDisputableVersMarker= rulePartialDestroyedDisputableVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3698:2: iv_rulePartialDestroyedDisputableVersMarker= rulePartialDestroyedDisputableVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getPartialDestroyedDisputableVersMarkerRule()); 
-            pushFollow(FOLLOW_rulePartialDestroyedDisputableVersMarker_in_entryRulePartialDestroyedDisputableVersMarker9801);
-            iv_rulePartialDestroyedDisputableVersMarker=rulePartialDestroyedDisputableVersMarker();
-
-            state._fsp--;
-
-             current =iv_rulePartialDestroyedDisputableVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePartialDestroyedDisputableVersMarker9811); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRulePartialDestroyedDisputableVersMarker"
-
-
-    // $ANTLR start "rulePartialDestroyedDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3705:1: rulePartialDestroyedDisputableVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23' ) ;
-    public final EObject rulePartialDestroyedDisputableVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3708:28: ( ( () otherlv_1= '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3709:1: ( () otherlv_1= '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3709:1: ( () otherlv_1= '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3709:2: () otherlv_1= '\\u2E22\\u2E2E\\uDB80\\uDC80?\\u2E23'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3709:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3710:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getPartialDestroyedDisputableVersMarkerAccess().getPartialDestroyedDisputableVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,59,FOLLOW_59_in_rulePartialDestroyedDisputableVersMarker9857); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedDisputableVersMarkerAccess().getTopLeftHalfBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkTopRightHalfBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "rulePartialDestroyedDisputableVersMarker"
-
-
-    // $ANTLR start "entryRulePartialDestroyedDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3727:1: entryRulePartialDestroyedDeletedVersMarker returns [EObject current=null] : iv_rulePartialDestroyedDeletedVersMarker= rulePartialDestroyedDeletedVersMarker EOF ;
-    public final EObject entryRulePartialDestroyedDeletedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_rulePartialDestroyedDeletedVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3728:2: (iv_rulePartialDestroyedDeletedVersMarker= rulePartialDestroyedDeletedVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3729:2: iv_rulePartialDestroyedDeletedVersMarker= rulePartialDestroyedDeletedVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getPartialDestroyedDeletedVersMarkerRule()); 
-            pushFollow(FOLLOW_rulePartialDestroyedDeletedVersMarker_in_entryRulePartialDestroyedDeletedVersMarker9893);
-            iv_rulePartialDestroyedDeletedVersMarker=rulePartialDestroyedDeletedVersMarker();
-
-            state._fsp--;
-
-             current =iv_rulePartialDestroyedDeletedVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRulePartialDestroyedDeletedVersMarker9903); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRulePartialDestroyedDeletedVersMarker"
-
-
-    // $ANTLR start "rulePartialDestroyedDeletedVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3736:1: rulePartialDestroyedDeletedVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2E22{\\uDB80\\uDC80}\\u2E23' ) ;
-    public final EObject rulePartialDestroyedDeletedVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3739:28: ( ( () otherlv_1= '\\u2E22{\\uDB80\\uDC80}\\u2E23' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3740:1: ( () otherlv_1= '\\u2E22{\\uDB80\\uDC80}\\u2E23' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3740:1: ( () otherlv_1= '\\u2E22{\\uDB80\\uDC80}\\u2E23' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3740:2: () otherlv_1= '\\u2E22{\\uDB80\\uDC80}\\u2E23'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3740:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3741:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getPartialDestroyedDeletedVersMarkerAccess().getPartialDestroyedDeletedVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,60,FOLLOW_60_in_rulePartialDestroyedDeletedVersMarker9949); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getPartialDestroyedDeletedVersMarkerAccess().getTopLeftHalfBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketTopRightHalfBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "rulePartialDestroyedDeletedVersMarker"
-
-
     // $ANTLR start "entryRuleMissingVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3758:1: entryRuleMissingVersMarker returns [EObject current=null] : iv_ruleMissingVersMarker= ruleMissingVersMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3420:1: entryRuleMissingVersMarker returns [EObject current=null] : iv_ruleMissingVersMarker= ruleMissingVersMarker EOF ;
     public final EObject entryRuleMissingVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10590,17 +9642,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3759:2: (iv_ruleMissingVersMarker= ruleMissingVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3760:2: iv_ruleMissingVersMarker= ruleMissingVersMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3421:2: (iv_ruleMissingVersMarker= ruleMissingVersMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3422:2: iv_ruleMissingVersMarker= ruleMissingVersMarker EOF
             {
              newCompositeNode(grammarAccess.getMissingVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker9985);
+            pushFollow(FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker9006);
             iv_ruleMissingVersMarker=ruleMissingVersMarker();
 
             state._fsp--;
 
              current =iv_ruleMissingVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMissingVersMarker9995); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMissingVersMarker9016); 
 
             }
 
@@ -10618,7 +9670,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleMissingVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3767:1: ruleMissingVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3429:1: ruleMissingVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' ) ;
     public final EObject ruleMissingVersMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10627,14 +9679,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3770:28: ( ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3771:1: ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3432:28: ( ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3433:1: ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3771:1: ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3771:2: () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3433:1: ( () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3433:2: () otherlv_1= '\\u2329\\uDB80\\uDC80\\u232A'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3771:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3772:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3433:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3434:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10644,7 +9696,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,61,FOLLOW_61_in_ruleMissingVersMarker10041); 
+            otherlv_1=(Token)match(input,53,FOLLOW_53_in_ruleMissingVersMarker9062); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getMissingVersMarkerAccess().getLeftPointingAngleBracketLeadSurrogateDb80TrailSurrogateDc80RightPointingAngleBracketKeyword_1());
                 
@@ -10668,95 +9720,8 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleMissingVersMarker"
 
 
-    // $ANTLR start "entryRuleMissingDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3789:1: entryRuleMissingDisputableVersMarker returns [EObject current=null] : iv_ruleMissingDisputableVersMarker= ruleMissingDisputableVersMarker EOF ;
-    public final EObject entryRuleMissingDisputableVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        EObject iv_ruleMissingDisputableVersMarker = null;
-
-
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3790:2: (iv_ruleMissingDisputableVersMarker= ruleMissingDisputableVersMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3791:2: iv_ruleMissingDisputableVersMarker= ruleMissingDisputableVersMarker EOF
-            {
-             newCompositeNode(grammarAccess.getMissingDisputableVersMarkerRule()); 
-            pushFollow(FOLLOW_ruleMissingDisputableVersMarker_in_entryRuleMissingDisputableVersMarker10077);
-            iv_ruleMissingDisputableVersMarker=ruleMissingDisputableVersMarker();
-
-            state._fsp--;
-
-             current =iv_ruleMissingDisputableVersMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMissingDisputableVersMarker10087); 
-
-            }
-
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "entryRuleMissingDisputableVersMarker"
-
-
-    // $ANTLR start "ruleMissingDisputableVersMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3798:1: ruleMissingDisputableVersMarker returns [EObject current=null] : ( () otherlv_1= '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A' ) ;
-    public final EObject ruleMissingDisputableVersMarker() throws RecognitionException {
-        EObject current = null;
-
-        Token otherlv_1=null;
-
-         enterRule(); 
-            
-        try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3801:28: ( ( () otherlv_1= '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3802:1: ( () otherlv_1= '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A' )
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3802:1: ( () otherlv_1= '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3802:2: () otherlv_1= '\\u2329\\u2E2E\\uDB80\\uDC80?\\u232A'
-            {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3802:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3803:5: 
-            {
-
-                    current = forceCreateModelElement(
-                        grammarAccess.getMissingDisputableVersMarkerAccess().getMissingDisputableVersMarkerAction_0(),
-                        current);
-                
-
-            }
-
-            otherlv_1=(Token)match(input,62,FOLLOW_62_in_ruleMissingDisputableVersMarker10133); 
-
-                	newLeafNode(otherlv_1, grammarAccess.getMissingDisputableVersMarkerAccess().getLeftPointingAngleBracketReversedQuestionMarkLeadSurrogateDb80TrailSurrogateDc80QuestionMarkRightPointingAngleBracketKeyword_1());
-                
-
-            }
-
-
-            }
-
-             leaveRule(); 
-        }
-         
-            catch (RecognitionException re) { 
-                recover(input,re); 
-                appendSkippedTokens();
-            } 
-        finally {
-        }
-        return current;
-    }
-    // $ANTLR end "ruleMissingDisputableVersMarker"
-
-
     // $ANTLR start "entryRuleRestorationOverRasurMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3820:1: entryRuleRestorationOverRasurMarker returns [EObject current=null] : iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3451:1: entryRuleRestorationOverRasurMarker returns [EObject current=null] : iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF ;
     public final EObject entryRuleRestorationOverRasurMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10764,17 +9729,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3821:2: (iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3822:2: iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3452:2: (iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3453:2: iv_ruleRestorationOverRasurMarker= ruleRestorationOverRasurMarker EOF
             {
              newCompositeNode(grammarAccess.getRestorationOverRasurMarkerRule()); 
-            pushFollow(FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker10169);
+            pushFollow(FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker9098);
             iv_ruleRestorationOverRasurMarker=ruleRestorationOverRasurMarker();
 
             state._fsp--;
 
              current =iv_ruleRestorationOverRasurMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker10179); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker9108); 
 
             }
 
@@ -10792,7 +9757,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRestorationOverRasurMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3829:1: ruleRestorationOverRasurMarker returns [EObject current=null] : ( () otherlv_1= '[[\\uDB80\\uDC80]]' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3460:1: ruleRestorationOverRasurMarker returns [EObject current=null] : ( () otherlv_1= '[[\\uDB80\\uDC80]]' ) ;
     public final EObject ruleRestorationOverRasurMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10801,14 +9766,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3832:28: ( ( () otherlv_1= '[[\\uDB80\\uDC80]]' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3833:1: ( () otherlv_1= '[[\\uDB80\\uDC80]]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3463:28: ( ( () otherlv_1= '[[\\uDB80\\uDC80]]' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3464:1: ( () otherlv_1= '[[\\uDB80\\uDC80]]' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3833:1: ( () otherlv_1= '[[\\uDB80\\uDC80]]' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3833:2: () otherlv_1= '[[\\uDB80\\uDC80]]'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3464:1: ( () otherlv_1= '[[\\uDB80\\uDC80]]' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3464:2: () otherlv_1= '[[\\uDB80\\uDC80]]'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3833:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3834:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3464:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3465:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10818,7 +9783,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,63,FOLLOW_63_in_ruleRestorationOverRasurMarker10225); 
+            otherlv_1=(Token)match(input,54,FOLLOW_54_in_ruleRestorationOverRasurMarker9154); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getRestorationOverRasurMarkerAccess().getLeftSquareBracketLeftSquareBracketLeadSurrogateDb80TrailSurrogateDc80RightSquareBracketRightSquareBracketKeyword_1());
                 
@@ -10843,7 +9808,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleAncientExpandedMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3851:1: entryRuleAncientExpandedMarker returns [EObject current=null] : iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3482:1: entryRuleAncientExpandedMarker returns [EObject current=null] : iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF ;
     public final EObject entryRuleAncientExpandedMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10851,17 +9816,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3852:2: (iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3853:2: iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3483:2: (iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3484:2: iv_ruleAncientExpandedMarker= ruleAncientExpandedMarker EOF
             {
              newCompositeNode(grammarAccess.getAncientExpandedMarkerRule()); 
-            pushFollow(FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker10261);
+            pushFollow(FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker9190);
             iv_ruleAncientExpandedMarker=ruleAncientExpandedMarker();
 
             state._fsp--;
 
              current =iv_ruleAncientExpandedMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAncientExpandedMarker10271); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleAncientExpandedMarker9200); 
 
             }
 
@@ -10879,7 +9844,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleAncientExpandedMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3860:1: ruleAncientExpandedMarker returns [EObject current=null] : ( () otherlv_1= '((\\uDB80\\uDC80))' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3491:1: ruleAncientExpandedMarker returns [EObject current=null] : ( () otherlv_1= '((\\uDB80\\uDC80))' ) ;
     public final EObject ruleAncientExpandedMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10888,14 +9853,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3863:28: ( ( () otherlv_1= '((\\uDB80\\uDC80))' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3864:1: ( () otherlv_1= '((\\uDB80\\uDC80))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3494:28: ( ( () otherlv_1= '((\\uDB80\\uDC80))' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3495:1: ( () otherlv_1= '((\\uDB80\\uDC80))' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3864:1: ( () otherlv_1= '((\\uDB80\\uDC80))' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3864:2: () otherlv_1= '((\\uDB80\\uDC80))'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3495:1: ( () otherlv_1= '((\\uDB80\\uDC80))' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3495:2: () otherlv_1= '((\\uDB80\\uDC80))'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3864:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3865:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3495:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3496:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10905,7 +9870,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,64,FOLLOW_64_in_ruleAncientExpandedMarker10317); 
+            otherlv_1=(Token)match(input,55,FOLLOW_55_in_ruleAncientExpandedMarker9246); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getAncientExpandedMarkerAccess().getLeftParenthesisLeftParenthesisLeadSurrogateDb80TrailSurrogateDc80RightParenthesisRightParenthesisKeyword_1());
                 
@@ -10930,7 +9895,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleRasurMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3882:1: entryRuleRasurMarker returns [EObject current=null] : iv_ruleRasurMarker= ruleRasurMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3513:1: entryRuleRasurMarker returns [EObject current=null] : iv_ruleRasurMarker= ruleRasurMarker EOF ;
     public final EObject entryRuleRasurMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10938,17 +9903,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3883:2: (iv_ruleRasurMarker= ruleRasurMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3884:2: iv_ruleRasurMarker= ruleRasurMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3514:2: (iv_ruleRasurMarker= ruleRasurMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3515:2: iv_ruleRasurMarker= ruleRasurMarker EOF
             {
              newCompositeNode(grammarAccess.getRasurMarkerRule()); 
-            pushFollow(FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker10353);
+            pushFollow(FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker9282);
             iv_ruleRasurMarker=ruleRasurMarker();
 
             state._fsp--;
 
              current =iv_ruleRasurMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRasurMarker10363); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleRasurMarker9292); 
 
             }
 
@@ -10966,7 +9931,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleRasurMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3891:1: ruleRasurMarker returns [EObject current=null] : ( () otherlv_1= '{{\\uDB80\\uDC80}}' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3522:1: ruleRasurMarker returns [EObject current=null] : ( () otherlv_1= '{{\\uDB80\\uDC80}}' ) ;
     public final EObject ruleRasurMarker() throws RecognitionException {
         EObject current = null;
 
@@ -10975,14 +9940,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3894:28: ( ( () otherlv_1= '{{\\uDB80\\uDC80}}' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3895:1: ( () otherlv_1= '{{\\uDB80\\uDC80}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3525:28: ( ( () otherlv_1= '{{\\uDB80\\uDC80}}' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3526:1: ( () otherlv_1= '{{\\uDB80\\uDC80}}' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3895:1: ( () otherlv_1= '{{\\uDB80\\uDC80}}' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3895:2: () otherlv_1= '{{\\uDB80\\uDC80}}'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3526:1: ( () otherlv_1= '{{\\uDB80\\uDC80}}' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3526:2: () otherlv_1= '{{\\uDB80\\uDC80}}'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3895:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3896:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3526:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3527:5: 
             {
 
                     current = forceCreateModelElement(
@@ -10992,7 +9957,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,65,FOLLOW_65_in_ruleRasurMarker10409); 
+            otherlv_1=(Token)match(input,56,FOLLOW_56_in_ruleRasurMarker9338); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getRasurMarkerAccess().getLeftCurlyBracketLeftCurlyBracketLeadSurrogateDb80TrailSurrogateDc80RightCurlyBracketRightCurlyBracketKeyword_1());
                 
@@ -11017,7 +9982,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersFrontierMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3913:1: entryRuleVersFrontierMarker returns [EObject current=null] : iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3544:1: entryRuleVersFrontierMarker returns [EObject current=null] : iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF ;
     public final EObject entryRuleVersFrontierMarker() throws RecognitionException {
         EObject current = null;
 
@@ -11025,17 +9990,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3914:2: (iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3915:2: iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3545:2: (iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3546:2: iv_ruleVersFrontierMarker= ruleVersFrontierMarker EOF
             {
              newCompositeNode(grammarAccess.getVersFrontierMarkerRule()); 
-            pushFollow(FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker10445);
+            pushFollow(FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker9374);
             iv_ruleVersFrontierMarker=ruleVersFrontierMarker();
 
             state._fsp--;
 
              current =iv_ruleVersFrontierMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersFrontierMarker10455); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersFrontierMarker9384); 
 
             }
 
@@ -11053,7 +10018,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersFrontierMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3922:1: ruleVersFrontierMarker returns [EObject current=null] : ( () otherlv_1= '\\uDB80\\uDC81' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3553:1: ruleVersFrontierMarker returns [EObject current=null] : ( () otherlv_1= '\\uDB80\\uDC81' ) ;
     public final EObject ruleVersFrontierMarker() throws RecognitionException {
         EObject current = null;
 
@@ -11062,14 +10027,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3925:28: ( ( () otherlv_1= '\\uDB80\\uDC81' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3926:1: ( () otherlv_1= '\\uDB80\\uDC81' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3556:28: ( ( () otherlv_1= '\\uDB80\\uDC81' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3557:1: ( () otherlv_1= '\\uDB80\\uDC81' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3926:1: ( () otherlv_1= '\\uDB80\\uDC81' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3926:2: () otherlv_1= '\\uDB80\\uDC81'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3557:1: ( () otherlv_1= '\\uDB80\\uDC81' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3557:2: () otherlv_1= '\\uDB80\\uDC81'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3926:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3927:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3557:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3558:5: 
             {
 
                     current = forceCreateModelElement(
@@ -11079,7 +10044,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,66,FOLLOW_66_in_ruleVersFrontierMarker10501); 
+            otherlv_1=(Token)match(input,57,FOLLOW_57_in_ruleVersFrontierMarker9430); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getVersFrontierMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc81Keyword_1());
                 
@@ -11104,7 +10069,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleVersbreakMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3944:1: entryRuleVersbreakMarker returns [EObject current=null] : iv_ruleVersbreakMarker= ruleVersbreakMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3575:1: entryRuleVersbreakMarker returns [EObject current=null] : iv_ruleVersbreakMarker= ruleVersbreakMarker EOF ;
     public final EObject entryRuleVersbreakMarker() throws RecognitionException {
         EObject current = null;
 
@@ -11112,17 +10077,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3945:2: (iv_ruleVersbreakMarker= ruleVersbreakMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3946:2: iv_ruleVersbreakMarker= ruleVersbreakMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3576:2: (iv_ruleVersbreakMarker= ruleVersbreakMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3577:2: iv_ruleVersbreakMarker= ruleVersbreakMarker EOF
             {
              newCompositeNode(grammarAccess.getVersbreakMarkerRule()); 
-            pushFollow(FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker10537);
+            pushFollow(FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker9466);
             iv_ruleVersbreakMarker=ruleVersbreakMarker();
 
             state._fsp--;
 
              current =iv_ruleVersbreakMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleVersbreakMarker10547); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleVersbreakMarker9476); 
 
             }
 
@@ -11140,7 +10105,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleVersbreakMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3953:1: ruleVersbreakMarker returns [EObject current=null] : ( () otherlv_1= '\\uDB80\\uDC80' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3584:1: ruleVersbreakMarker returns [EObject current=null] : ( () otherlv_1= '\\uDB80\\uDC80' ) ;
     public final EObject ruleVersbreakMarker() throws RecognitionException {
         EObject current = null;
 
@@ -11149,14 +10114,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3956:28: ( ( () otherlv_1= '\\uDB80\\uDC80' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3957:1: ( () otherlv_1= '\\uDB80\\uDC80' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3587:28: ( ( () otherlv_1= '\\uDB80\\uDC80' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3588:1: ( () otherlv_1= '\\uDB80\\uDC80' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3957:1: ( () otherlv_1= '\\uDB80\\uDC80' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3957:2: () otherlv_1= '\\uDB80\\uDC80'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3588:1: ( () otherlv_1= '\\uDB80\\uDC80' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3588:2: () otherlv_1= '\\uDB80\\uDC80'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3957:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3958:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3588:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3589:5: 
             {
 
                     current = forceCreateModelElement(
@@ -11166,7 +10131,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,67,FOLLOW_67_in_ruleVersbreakMarker10593); 
+            otherlv_1=(Token)match(input,58,FOLLOW_58_in_ruleVersbreakMarker9522); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc80Keyword_1());
                 
@@ -11191,7 +10156,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleBrokenVersbreakMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3975:1: entryRuleBrokenVersbreakMarker returns [EObject current=null] : iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3606:1: entryRuleBrokenVersbreakMarker returns [EObject current=null] : iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF ;
     public final EObject entryRuleBrokenVersbreakMarker() throws RecognitionException {
         EObject current = null;
 
@@ -11199,17 +10164,17 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3976:2: (iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3977:2: iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3607:2: (iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3608:2: iv_ruleBrokenVersbreakMarker= ruleBrokenVersbreakMarker EOF
             {
              newCompositeNode(grammarAccess.getBrokenVersbreakMarkerRule()); 
-            pushFollow(FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker10629);
+            pushFollow(FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker9558);
             iv_ruleBrokenVersbreakMarker=ruleBrokenVersbreakMarker();
 
             state._fsp--;
 
              current =iv_ruleBrokenVersbreakMarker; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker10639); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker9568); 
 
             }
 
@@ -11227,7 +10192,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleBrokenVersbreakMarker"
-    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3984:1: ruleBrokenVersbreakMarker returns [EObject current=null] : ( () otherlv_1= '\\uDB80\\uDC82' ) ;
+    // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3615:1: ruleBrokenVersbreakMarker returns [EObject current=null] : ( () otherlv_1= '\\uDB80\\uDC82' ) ;
     public final EObject ruleBrokenVersbreakMarker() throws RecognitionException {
         EObject current = null;
 
@@ -11236,14 +10201,14 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
          enterRule(); 
             
         try {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3987:28: ( ( () otherlv_1= '\\uDB80\\uDC82' ) )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3988:1: ( () otherlv_1= '\\uDB80\\uDC82' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3618:28: ( ( () otherlv_1= '\\uDB80\\uDC82' ) )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3619:1: ( () otherlv_1= '\\uDB80\\uDC82' )
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3988:1: ( () otherlv_1= '\\uDB80\\uDC82' )
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3988:2: () otherlv_1= '\\uDB80\\uDC82'
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3619:1: ( () otherlv_1= '\\uDB80\\uDC82' )
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3619:2: () otherlv_1= '\\uDB80\\uDC82'
             {
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3988:2: ()
-            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3989:5: 
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3619:2: ()
+            // ../org.bbaw.bts.corpus.text.egy.egydsl/src-gen/org/bbaw/bts/corpus/text/egy/parser/antlr/internal/InternalEgyDsl.g:3620:5: 
             {
 
                     current = forceCreateModelElement(
@@ -11253,7 +10218,7 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,68,FOLLOW_68_in_ruleBrokenVersbreakMarker10685); 
+            otherlv_1=(Token)match(input,59,FOLLOW_59_in_ruleBrokenVersbreakMarker9614); 
 
                 	newLeafNode(otherlv_1, grammarAccess.getBrokenVersbreakMarkerAccess().getLeadSurrogateDb80TrailSurrogateDc82Keyword_1());
                 
@@ -11292,10 +10257,10 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleSentence_in_ruleTextItem289 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSentence_in_entryRuleSentence323 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSentence333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_10_in_ruleSentence379 = new BitSet(new long[]{0xFFFFFFAAAAAAADC0L,0x000000000000001FL});
+    public static final BitSet FOLLOW_10_in_ruleSentence379 = new BitSet(new long[]{0x0FFFFFAAAAAAADC0L});
     public static final BitSet FOLLOW_ruleSentenceItem_in_ruleSentence401 = new BitSet(new long[]{0x0000000000000600L});
-    public static final BitSet FOLLOW_9_in_ruleSentence414 = new BitSet(new long[]{0xFFFFFFAAAAAAA9D0L,0x000000000000001FL});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleSentence426 = new BitSet(new long[]{0xFFFFFFAAAAAAA9C0L,0x000000000000001FL});
+    public static final BitSet FOLLOW_9_in_ruleSentence414 = new BitSet(new long[]{0x0FFFFFAAAAAAA9D0L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleSentence426 = new BitSet(new long[]{0x0FFFFFAAAAAAA9C0L});
     public static final BitSet FOLLOW_ruleSentenceItem_in_ruleSentence448 = new BitSet(new long[]{0x0000000000000600L});
     public static final BitSet FOLLOW_10_in_ruleSentence464 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleSentenceItem_in_entryRuleSentenceItem500 = new BitSet(new long[]{0x0000000000000000L});
@@ -11318,11 +10283,11 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_11_in_ruleAmbivalence923 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleCase_in_entryRuleCase959 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleCase969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CASESTRING_in_ruleCase1011 = new BitSet(new long[]{0xFFFFFFAAAAAAA1D0L,0x000000000000001FL});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1028 = new BitSet(new long[]{0xFFFFFFAAAAAAA1D0L,0x000000000000001FL});
+    public static final BitSet FOLLOW_RULE_CASESTRING_in_ruleCase1011 = new BitSet(new long[]{0x0FFFFFAAAAAAA1D0L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1028 = new BitSet(new long[]{0x0FFFFFAAAAAAA1D0L});
     public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1051 = new BitSet(new long[]{0x0000000000000202L});
-    public static final BitSet FOLLOW_9_in_ruleCase1064 = new BitSet(new long[]{0xFFFFFFAAAAAAA1D0L,0x000000000000001FL});
-    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1076 = new BitSet(new long[]{0xFFFFFFAAAAAAA1D0L,0x000000000000001FL});
+    public static final BitSet FOLLOW_9_in_ruleCase1064 = new BitSet(new long[]{0x0FFFFFAAAAAAA1D0L});
+    public static final BitSet FOLLOW_RULE_NEWLINE_in_ruleCase1076 = new BitSet(new long[]{0x0FFFFFAAAAAAA1D0L});
     public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_ruleCase1098 = new BitSet(new long[]{0x0000000000000202L});
     public static final BitSet FOLLOW_ruleSentenceItemNoAmbivalence_in_entryRuleSentenceItemNoAmbivalence1137 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleSentenceItemNoAmbivalence1147 = new BitSet(new long[]{0x0000000000000002L});
@@ -11588,80 +10553,44 @@ public class InternalEgyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_ruleEmendationVersMarker_in_ruleVersMarker8365 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleDestroyedVersFrontierMarker_in_ruleVersMarker8392 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulePartialDestroyedVersMarker_in_ruleVersMarker8419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestroyedDisputableVersMarker_in_ruleVersMarker8446 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedDisputableVersFrontierMarker_in_ruleVersMarker8473 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableDestroyedVersMarker_in_ruleVersMarker8500 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedDisputableVersMarker_in_ruleVersMarker8527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMissingDisputableVersMarker_in_ruleVersMarker8554 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableDeletedVersMarker_in_ruleVersMarker8581 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestroyedDeletedVersMarker_in_ruleVersMarker8608 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedDeletedVersMarker_in_ruleVersMarker8635 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedDestroyedVersMarker_in_ruleVersMarker8662 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEmendationVersMarker_in_entryRuleEmendationVersMarker8697 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEmendationVersMarker8707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_ruleEmendationVersMarker8753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker8789 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableVersMarker8799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleDisputableVersMarker8845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableDestroyedVersMarker_in_entryRuleDisputableDestroyedVersMarker8881 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableDestroyedVersMarker8891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleDisputableDestroyedVersMarker8937 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDisputableDeletedVersMarker_in_entryRuleDisputableDeletedVersMarker8973 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableDeletedVersMarker8983 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleDisputableDeletedVersMarker9029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker9065 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDeletedVersMarker9075 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_ruleDeletedVersMarker9121 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedDisputableVersMarker_in_entryRuleDeletedDisputableVersMarker9157 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDeletedDisputableVersMarker9167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleDeletedDisputableVersMarker9213 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDeletedDestroyedVersMarker_in_entryRuleDeletedDestroyedVersMarker9249 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDeletedDestroyedVersMarker9259 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_ruleDeletedDestroyedVersMarker9305 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker9341 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedVersMarker9351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_ruleDestroyedVersMarker9397 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedVersFrontierMarker_in_entryRuleDestroyedVersFrontierMarker9433 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedVersFrontierMarker9443 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_ruleDestroyedVersFrontierMarker9489 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedDisputableVersFrontierMarker_in_entryRuleDestroyedDisputableVersFrontierMarker9525 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedDisputableVersFrontierMarker9535 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_ruleDestroyedDisputableVersFrontierMarker9581 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDestroyedDeletedVersMarker_in_entryRuleDestroyedDeletedVersMarker9617 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedDeletedVersMarker9627 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_57_in_ruleDestroyedDeletedVersMarker9673 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestroyedVersMarker_in_entryRulePartialDestroyedVersMarker9709 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePartialDestroyedVersMarker9719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_58_in_rulePartialDestroyedVersMarker9765 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestroyedDisputableVersMarker_in_entryRulePartialDestroyedDisputableVersMarker9801 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePartialDestroyedDisputableVersMarker9811 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_59_in_rulePartialDestroyedDisputableVersMarker9857 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulePartialDestroyedDeletedVersMarker_in_entryRulePartialDestroyedDeletedVersMarker9893 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulePartialDestroyedDeletedVersMarker9903 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_60_in_rulePartialDestroyedDeletedVersMarker9949 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker9985 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMissingVersMarker9995 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_61_in_ruleMissingVersMarker10041 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMissingDisputableVersMarker_in_entryRuleMissingDisputableVersMarker10077 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMissingDisputableVersMarker10087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_62_in_ruleMissingDisputableVersMarker10133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker10169 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker10179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_63_in_ruleRestorationOverRasurMarker10225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker10261 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAncientExpandedMarker10271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_64_in_ruleAncientExpandedMarker10317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker10353 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRasurMarker10363 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_65_in_ruleRasurMarker10409 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker10445 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersFrontierMarker10455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_66_in_ruleVersFrontierMarker10501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker10537 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleVersbreakMarker10547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_67_in_ruleVersbreakMarker10593 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker10629 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker10639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_68_in_ruleBrokenVersbreakMarker10685 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEmendationVersMarker_in_entryRuleEmendationVersMarker8454 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEmendationVersMarker8464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleEmendationVersMarker8510 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDisputableVersMarker_in_entryRuleDisputableVersMarker8546 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDisputableVersMarker8556 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_ruleDisputableVersMarker8602 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDeletedVersMarker_in_entryRuleDeletedVersMarker8638 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDeletedVersMarker8648 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleDeletedVersMarker8694 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestroyedVersMarker_in_entryRuleDestroyedVersMarker8730 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedVersMarker8740 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleDestroyedVersMarker8786 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleDestroyedVersFrontierMarker_in_entryRuleDestroyedVersFrontierMarker8822 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleDestroyedVersFrontierMarker8832 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_ruleDestroyedVersFrontierMarker8878 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulePartialDestroyedVersMarker_in_entryRulePartialDestroyedVersMarker8914 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulePartialDestroyedVersMarker8924 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_rulePartialDestroyedVersMarker8970 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMissingVersMarker_in_entryRuleMissingVersMarker9006 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMissingVersMarker9016 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleMissingVersMarker9062 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRestorationOverRasurMarker_in_entryRuleRestorationOverRasurMarker9098 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRestorationOverRasurMarker9108 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleRestorationOverRasurMarker9154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleAncientExpandedMarker_in_entryRuleAncientExpandedMarker9190 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleAncientExpandedMarker9200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_55_in_ruleAncientExpandedMarker9246 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleRasurMarker_in_entryRuleRasurMarker9282 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleRasurMarker9292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleRasurMarker9338 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersFrontierMarker_in_entryRuleVersFrontierMarker9374 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersFrontierMarker9384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_57_in_ruleVersFrontierMarker9430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleVersbreakMarker_in_entryRuleVersbreakMarker9466 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleVersbreakMarker9476 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_58_in_ruleVersbreakMarker9522 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleBrokenVersbreakMarker_in_entryRuleBrokenVersbreakMarker9558 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleBrokenVersbreakMarker9568 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_59_in_ruleBrokenVersbreakMarker9614 = new BitSet(new long[]{0x0000000000000002L});
 
 }

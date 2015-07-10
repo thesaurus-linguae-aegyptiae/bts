@@ -115,20 +115,11 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
       case EgyDslPackage.VERS_MARKER: return createVersMarker();
       case EgyDslPackage.EMENDATION_VERS_MARKER: return createEmendationVersMarker();
       case EgyDslPackage.DISPUTABLE_VERS_MARKER: return createDisputableVersMarker();
-      case EgyDslPackage.DISPUTABLE_DESTROYED_VERS_MARKER: return createDisputableDestroyedVersMarker();
-      case EgyDslPackage.DISPUTABLE_DELETED_VERS_MARKER: return createDisputableDeletedVersMarker();
       case EgyDslPackage.DELETED_VERS_MARKER: return createDeletedVersMarker();
-      case EgyDslPackage.DELETED_DISPUTABLE_VERS_MARKER: return createDeletedDisputableVersMarker();
-      case EgyDslPackage.DELETED_DESTROYED_VERS_MARKER: return createDeletedDestroyedVersMarker();
       case EgyDslPackage.DESTROYED_VERS_MARKER: return createDestroyedVersMarker();
       case EgyDslPackage.DESTROYED_VERS_FRONTIER_MARKER: return createDestroyedVersFrontierMarker();
-      case EgyDslPackage.DESTROYED_DISPUTABLE_VERS_FRONTIER_MARKER: return createDestroyedDisputableVersFrontierMarker();
-      case EgyDslPackage.DESTROYED_DELETED_VERS_MARKER: return createDestroyedDeletedVersMarker();
       case EgyDslPackage.PARTIAL_DESTROYED_VERS_MARKER: return createPartialDestroyedVersMarker();
-      case EgyDslPackage.PARTIAL_DESTROYED_DISPUTABLE_VERS_MARKER: return createPartialDestroyedDisputableVersMarker();
-      case EgyDslPackage.PARTIAL_DESTROYED_DELETED_VERS_MARKER: return createPartialDestroyedDeletedVersMarker();
       case EgyDslPackage.MISSING_VERS_MARKER: return createMissingVersMarker();
-      case EgyDslPackage.MISSING_DISPUTABLE_VERS_MARKER: return createMissingDisputableVersMarker();
       case EgyDslPackage.RESTORATION_OVER_RASUR_MARKER: return createRestorationOverRasurMarker();
       case EgyDslPackage.ANCIENT_EXPANDED_MARKER: return createAncientExpandedMarker();
       case EgyDslPackage.RASUR_MARKER: return createRasurMarker();
@@ -706,54 +697,10 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public DisputableDestroyedVersMarker createDisputableDestroyedVersMarker()
-  {
-    DisputableDestroyedVersMarkerImpl disputableDestroyedVersMarker = new DisputableDestroyedVersMarkerImpl();
-    return disputableDestroyedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DisputableDeletedVersMarker createDisputableDeletedVersMarker()
-  {
-    DisputableDeletedVersMarkerImpl disputableDeletedVersMarker = new DisputableDeletedVersMarkerImpl();
-    return disputableDeletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public DeletedVersMarker createDeletedVersMarker()
   {
     DeletedVersMarkerImpl deletedVersMarker = new DeletedVersMarkerImpl();
     return deletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DeletedDisputableVersMarker createDeletedDisputableVersMarker()
-  {
-    DeletedDisputableVersMarkerImpl deletedDisputableVersMarker = new DeletedDisputableVersMarkerImpl();
-    return deletedDisputableVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DeletedDestroyedVersMarker createDeletedDestroyedVersMarker()
-  {
-    DeletedDestroyedVersMarkerImpl deletedDestroyedVersMarker = new DeletedDestroyedVersMarkerImpl();
-    return deletedDestroyedVersMarker;
   }
 
   /**
@@ -783,28 +730,6 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public DestroyedDisputableVersFrontierMarker createDestroyedDisputableVersFrontierMarker()
-  {
-    DestroyedDisputableVersFrontierMarkerImpl destroyedDisputableVersFrontierMarker = new DestroyedDisputableVersFrontierMarkerImpl();
-    return destroyedDisputableVersFrontierMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public DestroyedDeletedVersMarker createDestroyedDeletedVersMarker()
-  {
-    DestroyedDeletedVersMarkerImpl destroyedDeletedVersMarker = new DestroyedDeletedVersMarkerImpl();
-    return destroyedDeletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public PartialDestroyedVersMarker createPartialDestroyedVersMarker()
   {
     PartialDestroyedVersMarkerImpl partialDestroyedVersMarker = new PartialDestroyedVersMarkerImpl();
@@ -816,43 +741,10 @@ public class EgyDslFactoryImpl extends EFactoryImpl implements EgyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public PartialDestroyedDisputableVersMarker createPartialDestroyedDisputableVersMarker()
-  {
-    PartialDestroyedDisputableVersMarkerImpl partialDestroyedDisputableVersMarker = new PartialDestroyedDisputableVersMarkerImpl();
-    return partialDestroyedDisputableVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public PartialDestroyedDeletedVersMarker createPartialDestroyedDeletedVersMarker()
-  {
-    PartialDestroyedDeletedVersMarkerImpl partialDestroyedDeletedVersMarker = new PartialDestroyedDeletedVersMarkerImpl();
-    return partialDestroyedDeletedVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public MissingVersMarker createMissingVersMarker()
   {
     MissingVersMarkerImpl missingVersMarker = new MissingVersMarkerImpl();
     return missingVersMarker;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public MissingDisputableVersMarker createMissingDisputableVersMarker()
-  {
-    MissingDisputableVersMarkerImpl missingDisputableVersMarker = new MissingDisputableVersMarkerImpl();
-    return missingDisputableVersMarker;
   }
 
   /**

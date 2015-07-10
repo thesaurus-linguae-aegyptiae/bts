@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <application:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:advanced="http://www.eclipse.org/ui/2010/UIModel/application/ui/advanced" xmlns:application="http://www.eclipse.org/ui/2010/UIModel/application" xmlns:basic="http://www.eclipse.org/ui/2010/UIModel/application/ui/basic" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmi:id="_oEzH4AA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.application">
-  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0.11" iconURI="platform:/plugin/org.bbaw.bts.app/icons/bts16.bmp" width="1000" height="750">
+  <children xsi:type="basic:TrimmedWindow" xmi:id="_oEzH4QA1EeOpmPWG2KRhAA" elementId="org.bbaw.bts.trimmed" label="Berlin Text System 3.0.12" iconURI="platform:/plugin/org.bbaw.bts.app/icons/bts16.bmp" width="1000" height="750">
     <children xsi:type="advanced:PerspectiveStack" xmi:id="_l1Ug4ADrEeOpmPWG2KRhAA" elementId="org.bbaw.bts.app.perspectivestack.main"/>
     <mainMenu xmi:id="_3KR2AAD1EeOpmPWG2KRhAA" elementId="org.eclipse.ui.menu">
       <children xsi:type="menu:Menu" xmi:id="_N6Q08AD2EeOpmPWG2KRhAA" elementId="org.eclipse.ui.file" label="File">

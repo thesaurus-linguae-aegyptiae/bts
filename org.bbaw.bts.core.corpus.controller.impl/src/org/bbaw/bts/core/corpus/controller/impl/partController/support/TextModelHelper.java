@@ -9,15 +9,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.bbaw.bts.btsmodel.BTSIdentifiableItem;
-import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalence;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAmbivalenceItem;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaCase;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSMarker;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSSenctence;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSSentenceItem;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextContent;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
@@ -26,23 +23,14 @@ import org.bbaw.bts.corpus.text.egy.egyDsl.Ambivalence;
 import org.bbaw.bts.corpus.text.egy.egyDsl.AncientExpandedMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.BrokenVersbreakMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Case;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDestroyedVersMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedDisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DeletedVersMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDeletedVersMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedDisputableVersFrontierMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersFrontierMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DestructionMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDeletedVersMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableDestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.DisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.EmendationVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.Marker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.MissingDisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.MissingVersMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDeletedVersMarker;
-import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedDisputableVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.PartialDestroyedVersMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RasurMarker;
 import org.bbaw.bts.corpus.text.egy.egyDsl.RestorationOverRasurMarker;
@@ -539,63 +527,64 @@ public class TextModelHelper {
 							BTSConstants.PARTIALDESTROYEDVERSMARKER)) {
 				modelMarker.setType(BTSConstants.PARTIALDESTROYEDVERSMARKER);
 			}
-		}else if (si instanceof PartialDestroyedDisputableVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER)) {
-				modelMarker.setType(BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER);
-			}
-		}else if (si instanceof DestroyedDisputableVersFrontierMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER)) {
-				modelMarker.setType(BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER);
-			}
-		}else if (si instanceof DisputableDestroyedVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.DISPUTABLEDESTROYEDVERSMARKER)) {
-				modelMarker.setType(BTSConstants.DISPUTABLEDESTROYEDVERSMARKER);
-			}
 		}
-		
-		else if (si instanceof DeletedDisputableVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.DELETEDDISPUTABLEVERSMARKER)) {
-				modelMarker.setType(BTSConstants.DELETEDDISPUTABLEVERSMARKER);
-			}
-		}else if (si instanceof MissingDisputableVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.MISSINGDISPUTABLEVERSMARKER)) {
-				modelMarker.setType(BTSConstants.MISSINGDISPUTABLEVERSMARKER);
-			}
-		}else if (si instanceof DisputableDeletedVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.DISPUTABLEDELETEDVERSMARKER)) {
-				modelMarker.setType(BTSConstants.DISPUTABLEDELETEDVERSMARKER);
-			}
-		}else if (si instanceof PartialDestroyedDeletedVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER)) {
-				modelMarker.setType(BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER);
-			}
-		}else if (si instanceof DestroyedDeletedVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.DESTROYEDDELETEDVERSMARKER)) {
-				modelMarker.setType(BTSConstants.DESTROYEDDELETEDVERSMARKER);
-			}
-		}else if (si instanceof DeletedDestroyedVersMarker) {
-			if (modelMarker.getType() == null
-					|| !modelMarker.getType().equals(
-							BTSConstants.DELETEDDESTROYEDVERSMARKER)) {
-				modelMarker.setType(BTSConstants.DELETEDDESTROYEDVERSMARKER);
-			}
-		}
+//		else if (si instanceof PartialDestroyedDisputableVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.PARTIALDESTROYEDDISPUTABLEVERSMARKER);
+//			}
+//		}else if (si instanceof DestroyedDisputableVersFrontierMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER)) {
+//				modelMarker.setType(BTSConstants.DESTROYEDDISPUTABLEVERSFRONTIERMARKER);
+//			}
+//		}else if (si instanceof DisputableDestroyedVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.DISPUTABLEDESTROYEDVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.DISPUTABLEDESTROYEDVERSMARKER);
+//			}
+//		}
+//		
+//		else if (si instanceof DeletedDisputableVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.DELETEDDISPUTABLEVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.DELETEDDISPUTABLEVERSMARKER);
+//			}
+//		}else if (si instanceof MissingDisputableVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.MISSINGDISPUTABLEVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.MISSINGDISPUTABLEVERSMARKER);
+//			}
+//		}else if (si instanceof DisputableDeletedVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.DISPUTABLEDELETEDVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.DISPUTABLEDELETEDVERSMARKER);
+//			}
+//		}else if (si instanceof PartialDestroyedDeletedVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.PARTIALDESTROYEDDELETEDVERSMARKER);
+//			}
+//		}else if (si instanceof DestroyedDeletedVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.DESTROYEDDELETEDVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.DESTROYEDDELETEDVERSMARKER);
+//			}
+//		}else if (si instanceof DeletedDestroyedVersMarker) {
+//			if (modelMarker.getType() == null
+//					|| !modelMarker.getType().equals(
+//							BTSConstants.DELETEDDESTROYEDVERSMARKER)) {
+//				modelMarker.setType(BTSConstants.DELETEDDESTROYEDVERSMARKER);
+//			}
+//		}
 		
 		
 		else if (si instanceof DestructionMarker) {
