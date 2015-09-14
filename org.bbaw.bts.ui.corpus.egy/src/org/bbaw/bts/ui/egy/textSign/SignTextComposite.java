@@ -1072,39 +1072,36 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private void addTransToWordFigure(BTSWord word, WordFigure rect,
 			String language) {
+		TypedLabel l = new TypedLabel();
+		l.setType(TypedLabel.TRANSLATION);
 		if (word.getTranslation() != null 
 				&& word.getTranslation().getTranslation(language) != null 
-				&& !"".equals(word.getTranslation().getTranslation(language))) {
-			TypedLabel l = new TypedLabel();
+				&& !"".equals(word.getTranslation().getTranslation(language)))
 			l.setText(language + ": " + word.getTranslation().getTranslation(language));
-			l.setType(TypedLabel.TRANSLATION);
-			rect.add(l);
-		}
+		rect.add(l);
 		
 	}
 
 	private void addFCodeToWordFigure(BTSWord word, WordFigure rect) {
+		TypedLabel l = new TypedLabel();
+		l.setType(TypedLabel.FLEXION);
 		if (word.getFlexCode() != null && !"".equals(word.getFlexCode())) {
-			TypedLabel l = new TypedLabel();
 			l.setText(word.getFlexCode());
 			l.setIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_FLEXION));
-			l.setType(TypedLabel.FLEXION);
-			rect.add(l);
 		}
-		
+		rect.add(l);
 	}
 
 	private void addLKeyToWordFigure(BTSWord word, WordFigure wordfigure) {
 		// FIXME load lemma object and show lemma transliteration
+		TypedLabel l = new TypedLabel();
+		l.setType(TypedLabel.LEMMA);
 		if (word.getLKey() != null && !"".equals(word.getLKey())) {
-			TypedLabel l = new TypedLabel();
 			l.setText(word.getLKey());
 			l.setIcon(resourceProvider.getImage(Display.getCurrent(),
 					BTSResourceProvider.IMG_LEMMA));
-			l.setType(TypedLabel.LEMMA);
-			wordfigure.add(l);
 		}
-
+		wordfigure.add(l);
 	}
 
 	private void appendFigure(ElementFigure figure) {
