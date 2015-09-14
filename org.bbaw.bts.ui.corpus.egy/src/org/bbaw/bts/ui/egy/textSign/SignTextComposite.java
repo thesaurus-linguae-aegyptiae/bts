@@ -976,13 +976,24 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		relatingObjectFigureMap = null;
 	}
 
+	/**
+	 * For a {@link BTSWord}, determine which background color is to be used for rendering an unselected {@link WordFigure},
+	 * based on whether a Lemma Key is present for the given Word, i.e. whether the word has already been lemmatized. 
+	 * @param word {@link BTSWord} object
+	 * @return {@link BTSUIConstants#COLOR_LEMMA} if lemmatized, {@link #COLOR_WORD_DESELECTED} otherwise
+	 */
+	private Color colorWordDeselected(BTSWord word) {
+		return (word.getLKey() != null && !word.getLKey().isEmpty()) ? 
+				BTSUIConstants.COLOR_LEMMA : COLOR_WORD_DESELECTED;
+	}
+
 	private ElementFigure makeWordFigure(BTSWord word) {
 		TypedLabel label = new TypedLabel();
 		label.setText(word.getWChar());
 		label.setType(TypedLabel.TRANSLITATION);
 
 		final WordFigure rect = new WordFigure(label);
-		rect.setBackgroundColor(COLOR_WORD_DESELECTED);
+		rect.setBackgroundColor(colorWordDeselected(word));
 		rect.setModelObject(word);
 		rect.setType(ElementFigure.WORD);
 
@@ -1349,7 +1360,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private void setDeselected(ElementFigure figure) {
 		if (figure != null) {
 			if (figure instanceof WordFigure) {
-				figure.setBackgroundColor(COLOR_WORD_DESELECTED);
+				figure.setBackgroundColor(colorWordDeselected((BTSWord)figure.getModelObject()));
 			} else if (figure instanceof MarkerFigure) {
 				figure.setBackgroundColor(COLOR_MARKER_DESELECTED);
 			}else if (figure instanceof AmbivalenceStartFigure || figure instanceof AmbivalenceEndFigure) {
