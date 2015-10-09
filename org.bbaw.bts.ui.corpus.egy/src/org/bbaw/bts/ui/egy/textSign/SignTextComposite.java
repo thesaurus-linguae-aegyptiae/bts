@@ -157,6 +157,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private Map<String, IFigure> wordMap;
 	protected int selectedIndex;
 	private Adapter notifier;
+	private boolean notifyWords = true;
 	private LineFigure currentLineFigure;
 	private int lineIndex = 1;
 	private Map<Integer, LineFigure> lineMap = new HashMap<>();
@@ -191,6 +192,10 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		createEditor();
 
 	}
+	
+	public void setNotifyWords(boolean value) {
+		notifyWords = value;
+	}
 
 	private void createEditor() {
 		this.setLayout(new FillLayout());
@@ -205,15 +210,18 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 			@Override
 			public void notifyChanged(final Notification notification) {
-				System.out.println(" notifyChanged " + notification);
-				
-				sync.asyncExec(new Runnable()
-				{
-					public void run()
+			
+				if (notifyWords) {
+					System.out.println(" notifyChanged " + notification);
+					
+					sync.asyncExec(new Runnable()
 					{
-						updateFigureFromWord(notification);
-					}
-				});
+						public void run()
+						{
+							updateFigureFromWord(notification);
+						}
+					});
+				}
 
 			}
 

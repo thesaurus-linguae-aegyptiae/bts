@@ -2500,9 +2500,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			localCommandCacheSet.clear();
 
+			signTextEditor.setNotifyWords(false);
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
 			dirty.setDirty(!success);
+			signTextEditor.setNotifyWords(true);
 			return success;
 		}
 		return true;
