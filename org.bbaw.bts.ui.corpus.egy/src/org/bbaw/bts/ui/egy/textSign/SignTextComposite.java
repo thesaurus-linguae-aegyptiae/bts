@@ -950,9 +950,8 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		
 		// dispose all images
 		for (Image im : imageList)
-		{
-			im.dispose();
-		}
+			if (!im.isDisposed())
+				im.dispose();
 		imageList.clear();
 		if (container != null) {
 			container.removeAll();
@@ -1729,6 +1728,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 					ImageFigure imf = (ImageFigure) fig;
 					String mdc = transformWordToMdCString(word);
 					try {
+						if (imf.getImage() != null)
+							if (!imf.getImage().isDisposed())
+								imf.getImage().dispose();
 						imf.setImage(transformToSWT(getImageData(mdc)));
 					} catch (MDCSyntaxError e) {
 						// TODO Auto-generated catch block
