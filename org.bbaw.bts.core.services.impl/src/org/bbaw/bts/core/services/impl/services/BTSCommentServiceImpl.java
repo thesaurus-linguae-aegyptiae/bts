@@ -42,7 +42,7 @@ public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, 
 				monitor.worked(20);
 			}
 		}
-		return filter(objects);
+		return objects;
 	}
 
 	@Override
