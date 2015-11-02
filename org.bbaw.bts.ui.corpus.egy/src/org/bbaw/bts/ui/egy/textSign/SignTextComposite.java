@@ -983,13 +983,24 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		relatingObjectFigureMap = null;
 	}
 
+	/**
+	 * For a {@link BTSWord}, determine which background color is to be used for rendering an unselected {@link WordFigure},
+	 * based on whether a Lemma Key is present for the given Word, i.e. whether the word has already been lemmatized. 
+	 * @param word {@link BTSWord} object
+	 * @return {@link BTSUIConstants#COLOR_LEMMA} if lemmatized, {@link #COLOR_WORD_DESELECTED} otherwise
+	 */
+	private Color colorWordDeselected(BTSWord word) {
+		return (word.getLKey() != null && !word.getLKey().isEmpty()) ? 
+				BTSUIConstants.COLOR_LEMMA : COLOR_WORD_DESELECTED;
+	}
+
 	private ElementFigure makeWordFigure(BTSWord word) {
 		TypedLabel label = new TypedLabel();
 		label.setText(word.getWChar());
 		label.setType(TypedLabel.TRANSLITATION);
 
 		final WordFigure rect = new WordFigure(label);
-		rect.setBackgroundColor(COLOR_WORD_DESELECTED);
+		rect.setBackgroundColor(colorWordDeselected(word));
 		rect.setModelObject(word);
 		rect.setType(ElementFigure.WORD);
 
@@ -1079,39 +1090,36 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	private void addTransToWordFigure(BTSWord word, WordFigure rect,
 			String language) {
+		TypedLabel l = new TypedLabel();
+		l.setType(TypedLabel.TRANSLATION);
 		if (word.getTranslation() != null 
 				&& word.getTranslation().getTranslation(language) != null 
-				&& !"".equals(word.getTranslation().getTranslation(language))) {
-			TypedLabel l = new TypedLabel();
+				&& !"".equals(word.getTranslation().getTranslation(language)))
 			l.setText(language + ": " + word.getTranslation().getTranslation(language));
-			l.setType(TypedLabel.TRANSLATION);
-			rect.add(l);
-		}
+		rect.add(l);
 		
 	}
 
 	private void addFCodeToWordFigure(BTSWord word, WordFigure rect) {
+		TypedLabel l = new TypedLabel();
+		l.setType(TypedLabel.FLEXION);
 		if (word.getFlexCode() != null && !"".equals(word.getFlexCode())) {
-			TypedLabel l = new TypedLabel();
 			l.setText(word.getFlexCode());
 			l.setIcon(resourceProvider.getImage(Display.getCurrent(), BTSResourceProvider.IMG_FLEXION));
-			l.setType(TypedLabel.FLEXION);
-			rect.add(l);
 		}
-		
+		rect.add(l);
 	}
 
 	private void addLKeyToWordFigure(BTSWord word, WordFigure wordfigure) {
 		// FIXME load lemma object and show lemma transliteration
+		TypedLabel l = new TypedLabel();
+		l.setType(TypedLabel.LEMMA);
 		if (word.getLKey() != null && !"".equals(word.getLKey())) {
-			TypedLabel l = new TypedLabel();
 			l.setText(word.getLKey());
 			l.setIcon(resourceProvider.getImage(Display.getCurrent(),
 					BTSResourceProvider.IMG_LEMMA));
-			l.setType(TypedLabel.LEMMA);
-			wordfigure.add(l);
 		}
-
+		wordfigure.add(l);
 	}
 
 	private void appendFigure(ElementFigure figure) {
@@ -1359,7 +1367,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private void setDeselected(ElementFigure figure) {
 		if (figure != null) {
 			if (figure instanceof WordFigure) {
-				figure.setBackgroundColor(COLOR_WORD_DESELECTED);
+				figure.setBackgroundColor(colorWordDeselected((BTSWord)figure.getModelObject()));
 			} else if (figure instanceof MarkerFigure) {
 				figure.setBackgroundColor(COLOR_MARKER_DESELECTED);
 			}else if (figure instanceof AmbivalenceStartFigure || figure instanceof AmbivalenceEndFigure) {

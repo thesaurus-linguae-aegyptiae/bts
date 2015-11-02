@@ -4,6 +4,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.ImageFigure;
 import org.eclipse.draw2d.Label;
+import org.eclipse.draw2d.MarginBorder;
 import org.eclipse.draw2d.ToolbarLayout;
 import org.eclipse.swt.graphics.Color;
 
@@ -22,6 +23,7 @@ public class WordFigure extends ElementFigureImpl
 		layout.setSpacing(20);
 		setBackgroundColor(classColor);
 		setOpaque(true);
+		setBorder(new MarginBorder(3));
 
 		add(name);
 	}
