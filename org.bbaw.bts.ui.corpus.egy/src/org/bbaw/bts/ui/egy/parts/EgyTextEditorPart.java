@@ -2500,10 +2500,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			localCommandCacheSet.clear();
 
+			// turn word-wise graphical update on model change notifications off 
 			signTextEditor.setNotifyWords(false);
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
 			dirty.setDirty(!success);
+			// turn word-wise update back on
 			signTextEditor.setNotifyWords(true);
 			return success;
 		}
