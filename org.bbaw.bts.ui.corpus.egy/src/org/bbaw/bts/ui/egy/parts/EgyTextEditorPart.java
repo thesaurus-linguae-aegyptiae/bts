@@ -2830,25 +2830,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							BTSModelAnnotation ma2 = modelAnnotationMap.get(ref
 									.getEndId());
 							Position pos = annotationModel.getPosition(ma1);
-							offset = pos.getOffset();
 							Position pos2 = annotationModel.getPosition(ma2);
-							if (pos != null && pos2 != null)
-							{
-								len = (pos2.getOffset() - pos.getOffset())
-									+ pos2.getLength();
-							}
-							else if (pos2 != null)
-							{
-								offset = pos2.getOffset();
-								len = pos2.getLength();
-							}
+							if (pos2 != null)
+								if (pos != null) {
+									offset = pos.getOffset();
+									len = (pos2.getOffset() - pos.getOffset())
+										+ pos2.getLength();
+								} else {
+									offset = pos2.getOffset();
+									len = pos2.getLength();
+								}
 						}
 						Issue issue;
 						issue = new Issue.IssueImpl();
 						Annotation annotation = makeAnnotation(object, issue, ref);
-						if (annotation != null) {
+						if (annotation != null)
 							annotationModel.addAnnotation(annotation, new Position(offset, len));
-						}
 					}
 				}
 			}
