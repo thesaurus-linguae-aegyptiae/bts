@@ -1599,14 +1599,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				Annotation anno = relatingObjectsAnnotations.get(0);
 				final Position pos = annotationModel.getPosition(anno);
 				if (pos != null)
-				{
 					sync.asyncExec(new Runnable() {
 						@SuppressWarnings("restriction")
 						public void run() {
-							embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+							int topLeft = embeddedEditor.getViewer().getTopIndexStartOffset();
+							int botRight = embeddedEditor.getViewer().getBottomIndexEndOffset();
+							int caretPos = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
+							// consider changing displayed range if annotation exceeds current range
+							// only jump if cursor would likely remain in visible range
+							if ((topLeft > pos.offset) || (botRight < pos.offset+pos.length))
+								if (botRight - caretPos > topLeft - pos.offset)
+									embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
 						}
 					});
-				}
 				
 			} catch (Exception e) {
 				e.printStackTrace();
