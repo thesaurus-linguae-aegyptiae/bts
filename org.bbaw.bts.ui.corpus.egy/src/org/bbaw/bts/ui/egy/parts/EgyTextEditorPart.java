@@ -1602,13 +1602,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					sync.asyncExec(new Runnable() {
 						@SuppressWarnings("restriction")
 						public void run() {
-							int topLeft = embeddedEditor.getViewer().getTopIndexStartOffset();
-							int botRight = embeddedEditor.getViewer().getBottomIndexEndOffset();
+							int topLine = embeddedEditor.getViewer().getTopIndex();
+							int botLine = embeddedEditor.getViewer().getBottomIndex();
 							int caretPos = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
+							int curLine = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(caretPos);
+							int annoLineTop = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset);
+							int annoLineBot = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset+pos.length);
 							// consider changing displayed range if annotation exceeds current range
 							// only jump if cursor would likely remain in visible range
-							if ((topLeft > pos.offset) || (botRight < pos.offset+pos.length))
-								if (botRight - caretPos > topLeft - pos.offset)
+							if ((topLine > annoLineTop) || (botLine < annoLineBot))
+								if (botLine - curLine >= topLine - annoLineTop)
 									embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
 						}
 					});
