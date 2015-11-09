@@ -1586,21 +1586,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				}
 			}
 			if (btsEvent != null) {
-				btsEvent.setRelatingObjects(relSelObjects);
-			}
+				btsEvent.setRelatingObjects(new ArrayList<BTSObject>(relSelObjects));
+			} else
+				revealAnnotation(relatingObjectsAnnotations);
+
 			// if (postSelection){
 			// eventBroker.post(
 			// BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
 			// relSelObjects);
 			// }
 			
-			// XXX when text selection changes, both caret and selection events are triggered
-			// and their listener invoke this code.
-			// TODO decide whether automated revealing of annotation at cursor is desired
-			// (see https://telotadev.bbaw.de/redmine/issues/4854#change-14589)
-			// if so, don't do it in caret listener when in fact the text selection is being changed
-			/*if (!(btsEvent.getOriginalEvent() instanceof SelectionEvent))
-				revealAnnotation(relatingObjectsAnnotations);*/
 		}
 		// else if (postSelection)
 		// {
