@@ -1588,7 +1588,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			if (btsEvent != null) {
 				btsEvent.setRelatingObjects(new ArrayList<BTSObject>(relSelObjects));
 			} else
-				revealAnnotation(relatingObjectsAnnotations);
+				revealAnnotation(relatingObjectsAnnotations, true);
 
 			// if (postSelection){
 			// eventBroker.post(
@@ -1606,7 +1606,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		
 	}
 	
-	private void revealAnnotation(List<BTSModelAnnotation> relatingObjectsAnnotations) {
+	private void revealAnnotation(List<BTSModelAnnotation> relatingObjectsAnnotations, final boolean force) {
 		try {
 			// TODO annotations should be sorted based on startpos?
 			Annotation anno = relatingObjectsAnnotations.get(0);
@@ -1616,19 +1616,21 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				sync.asyncExec(new Runnable() {
 					@SuppressWarnings("restriction")
 					public void run() {
-						int topLine = embeddedEditor.getViewer().getTopIndex();
-						int botLine = embeddedEditor.getViewer().getBottomIndex();
-						int caretPos = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
-						int curLine = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(caretPos);
-						int annoLineTop = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset);
-						int annoLineBot = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset+pos.length);
-						// consider changing displayed range if annotation exceeds current range
-						// only jump if cursor would likely remain in visible range
-						if ((topLine > annoLineTop) || (botLine < annoLineBot))
-							if (botLine - curLine >= topLine - annoLineTop) {
-								embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
-								System.out.println("jump "+pos.offset);
-							}
+						XtextSourceViewer viewer = embeddedEditor.getViewer();
+						if (!force) {
+							int topLine = viewer.getTopIndex();
+							int botLine = viewer.getBottomIndex();
+							int caretPos = viewer.getTextWidget().getCaretOffset();
+							int curLine = viewer.getTextWidget().getLineAtOffset(caretPos);
+							int annoLineTop = viewer.getTextWidget().getLineAtOffset(pos.offset);
+							int annoLineBot = viewer.getTextWidget().getLineAtOffset(pos.offset+pos.length);
+							// consider changing displayed range if annotation exceeds current range
+							// only jump if cursor would likely remain in visible range
+							if ((topLine > annoLineTop) || (botLine < annoLineBot))
+								if (botLine - curLine >= topLine - annoLineTop)
+									viewer.revealRange(pos.getOffset(), pos.length);
+						} else // jump regardless of cursor position
+							viewer.revealRange(pos.getOffset(), pos.length);
 					}
 				});	
 		} catch (Exception e) {
