@@ -1594,31 +1594,13 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			// relSelObjects);
 			// }
 			
-			
-			try {
-				Annotation anno = relatingObjectsAnnotations.get(0);
-				final Position pos = annotationModel.getPosition(anno);
-				if (pos != null)
-					sync.asyncExec(new Runnable() {
-						@SuppressWarnings("restriction")
-						public void run() {
-							int topLine = embeddedEditor.getViewer().getTopIndex();
-							int botLine = embeddedEditor.getViewer().getBottomIndex();
-							int caretPos = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
-							int curLine = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(caretPos);
-							int annoLineTop = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset);
-							int annoLineBot = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset+pos.length);
-							// consider changing displayed range if annotation exceeds current range
-							// only jump if cursor would likely remain in visible range
-							if ((topLine > annoLineTop) || (botLine < annoLineBot))
-								if (botLine - curLine >= topLine - annoLineTop)
-									embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
-						}
-					});
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			// XXX when text selection changes, both caret and selection events are triggered
+			// and their listener invoke this code.
+			// TODO decide whether automated revealing of annotation at cursor is desired
+			// (see https://telotadev.bbaw.de/redmine/issues/4854#change-14589)
+			// if so, don't do it in caret listener when in fact the text selection is being changed
+			/*if (!(btsEvent.getOriginalEvent() instanceof SelectionEvent))
+				revealAnnotation(relatingObjectsAnnotations);*/
 		}
 		// else if (postSelection)
 		// {
@@ -1627,6 +1609,36 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// null);
 		// }
 		
+	}
+	
+	private void revealAnnotation(List<BTSModelAnnotation> relatingObjectsAnnotations) {
+		try {
+			// TODO annotations should be sorted based on startpos?
+			Annotation anno = relatingObjectsAnnotations.get(0);
+			final Position pos = annotationModel.getPosition(anno);
+			
+			if (pos != null)
+				sync.asyncExec(new Runnable() {
+					@SuppressWarnings("restriction")
+					public void run() {
+						int topLine = embeddedEditor.getViewer().getTopIndex();
+						int botLine = embeddedEditor.getViewer().getBottomIndex();
+						int caretPos = embeddedEditor.getViewer().getTextWidget().getCaretOffset();
+						int curLine = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(caretPos);
+						int annoLineTop = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset);
+						int annoLineBot = embeddedEditor.getViewer().getTextWidget().getLineAtOffset(pos.offset+pos.length);
+						// consider changing displayed range if annotation exceeds current range
+						// only jump if cursor would likely remain in visible range
+						if ((topLine > annoLineTop) || (botLine < annoLineBot))
+							if (botLine - curLine >= topLine - annoLineTop) {
+								embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+								System.out.println("jump "+pos.offset);
+							}
+					}
+				});	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 
 	
