@@ -1488,6 +1488,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				annotations.size());
 		if (!annotations.isEmpty())
 		{
+			BTSSenctence sentence = null;
 			for (BTSModelAnnotation ma : annotations) {
 				if (ma != null && ma instanceof BTSLemmaAnnotation
 						&& ma.getModel() != null
@@ -1496,7 +1497,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					if (ma.getModel() instanceof BTSWord) {
 						setSentenceTranslation((BTSWord) ma.getModel());
 					} else if (ma.getModel() instanceof BTSSenctence) {
-						setSentenceTranslation((BTSSenctence) ma.getModel(), true);
+						sentence = (BTSSenctence) ma.getModel();
 					}
 					selectedTextItem = ma.getModel();
 
@@ -1521,13 +1522,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				} else if (ma instanceof BTSModelAnnotation)
 				{
 					if (ma.getModel() instanceof BTSSenctence) {
-						setSentenceTranslation((BTSSenctence) ma.getModel(), true);
+						sentence = (BTSSenctence) ma.getModel();
 					} 
 					if (!ma.getModel().equals(selectedTextItem)) {
 						selectedTextItem = ma.getModel();
 					} 
 				}
 			}
+			if (sentence != null)
+				setSentenceTranslation(sentence, true);
 		}
 		else
 		{
