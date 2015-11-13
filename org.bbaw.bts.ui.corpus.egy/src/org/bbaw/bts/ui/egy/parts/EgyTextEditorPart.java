@@ -407,6 +407,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private BTSTextSelectionEvent btsTextEvent;
 
+	private long lastSelectionTimeStamp = 0;
+
 	
 	/**
 	 * Instantiates a new egy text editor part.
@@ -1434,37 +1436,44 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
-		// System.out.println("Textselection x y : " + btsEvent.x + " " +
-		// btsEvent.y);
 		btsEvent.data = text;
-		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
-				btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
-		processSelection(annotations, false, btsEvent);
-		selectionService.setSelection(btsEvent);
-		System.out.println("selectedTextItem " + selectedTextItem);
-		this.btsTextEvent = btsEvent;
+		
+		if (this.btsTextEvent == null) {
+			Job j = new Job("delay_selection_processing"){
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+					while (System.nanoTime() < lastSelectionTimeStamp + 350000000)
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							return Status.CANCEL_STATUS;
+						}
+					final BTSTextSelectionEvent btsEvent = btsTextEvent;
+					sync.asyncExec(new Runnable() {
+						
+						@Override
+						public void run() {
+							List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
+									btsEvent.x, btsEvent.y, btsEvent);							
+							btsEvent.getTextAnnotations().addAll(annotations);
+							processSelection(annotations, false, btsEvent);
+							selectionService.setSelection(btsEvent);
+							
+						}
+					});
+					btsTextEvent = null;
+					return Status.OK_STATUS;
+				}
+			};
+			j.schedule(400);
+			this.btsTextEvent = btsEvent;
+		} else if (!(event instanceof CaretEvent) || (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
+			this.btsTextEvent = btsEvent;
+		lastSelectionTimeStamp = System.nanoTime();
 	}
+	
 
-	/**
-	 * Process editor selection.
-	 *
-	 * @param item the item
-	 */
-	protected void processEditorSelection(Object item) {
-		TypedEvent event = new TypedEvent(item);
-		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
-		// System.out.println("Textselection x y : " + btsEvent.x + " " +
-		// btsEvent.y);
-		btsEvent.data = text;
-		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
-				btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
-		processSelection(annotations, false, btsEvent);
-		selectionService.setSelection(btsEvent);
-		this.btsTextEvent = btsEvent;
-
-	}
 
 	/**
 	 * Process selection.
