@@ -167,6 +167,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
@@ -605,6 +606,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
 							.withParent(embeddedEditorComp);
 					
+					// remove disposelistener attached by embedded editor factory
+					// because it causes app to freeze on shutdown
+					for (Listener l : embeddedEditorComp.getListeners(SWT.Dispose))
+						embeddedEditorComp.removeListener(SWT.Dispose, l);
+
 					embeddedEditorModelAccess = embeddedEditor
 							.createPartialEditor("", "§§", "", false);
 					embeddedEditor.getViewer().getTextWidget()
