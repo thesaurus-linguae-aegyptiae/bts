@@ -2711,6 +2711,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 													.getTextWidget()
 													.setCaretOffset(
 															cachedCursor);
+											embeddedEditor.getViewer().revealRange(cachedCursor, 0);
 										} catch (Exception e) {
 										}
 									}
