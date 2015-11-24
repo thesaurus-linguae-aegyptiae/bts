@@ -1736,26 +1736,27 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						.getModel());
 				
 				// calculate start and end
-				if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) {
-					Position pos = embeddedEditor.getViewer().getAnnotationModel()
-							.getPosition(a);
-					BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-							.getModel();
-					
-					if (startItem == null
-							// move selection offset to right if within an Ambivalence
-							|| (item.eContainer() instanceof BTSLemmaCase)) {
-						startItem = item;
-						pos.getOffset();
+				if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) 
+					if  (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class) 
+							|| a instanceof BTSLemmaAnnotation) {
+						Position pos = embeddedEditor.getViewer().getAnnotationModel()
+								.getPosition(a);
+						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
+								.getModel();
+
+						if (startItem == null
+								// move selection offset to right if within an Ambivalence
+								|| (item.eContainer() instanceof BTSLemmaCase)) {
+							startItem = item;
+						}
+						if (endItem == null
+								// move selection end to right if not within an Ambivalence
+								|| (!(item instanceof BTSAmbivalence) && pos.getOffset() + pos.getLength() > endItemOffeset)
+								|| (item.eContainer() instanceof BTSLemmaCase)) {
+							endItem = item;
+							endItemOffeset = pos.getOffset() + pos.getLength();
+						}
 					}
-					if (endItem == null
-							// move selection end to right if not within an Ambivalence
-							|| (!(item instanceof BTSAmbivalence) && pos.getOffset() + pos.getLength() > endItemOffeset)
-							|| (item.eContainer() instanceof BTSLemmaCase)) {
-						endItem = item;
-						endItemOffeset = pos.getOffset() + pos.getLength();
-					}
-				}
 			}
 		}
 
