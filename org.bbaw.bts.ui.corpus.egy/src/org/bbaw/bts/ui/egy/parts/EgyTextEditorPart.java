@@ -155,6 +155,8 @@ import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MenuEvent;
 import org.eclipse.swt.events.MenuListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -167,7 +169,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
@@ -575,6 +576,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					((GridLayout) embeddedEditorParentComp.getLayout()).marginWidth = 0;
 					tbtmPlaintext2.setControl(embeddedEditorParentComp);
 
+					embeddedEditorParentComp.addDisposeListener(new DisposeListener() {
+						@Override
+						public void widgetDisposed(DisposeEvent e) {
+							// remove editor contents (including annotation model)
+							// before xtext HighlightingHelper gets a chance
+							// to clog main thread with its painful editor dismantling.
+							loadInput(null);
+						}
+					});
+
+
 					embeddedEditorComp = new Composite(
 							embeddedEditorParentComp, SWT.None);
 					embeddedEditorComp.setLayout(new GridLayout());
@@ -606,15 +618,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
 							.withParent(embeddedEditorComp);
 					
-					// remove disposelistener attached by embedded editor factory
-					// because it causes app to freeze on shutdown
-					for (Listener l : embeddedEditorComp.getListeners(SWT.Dispose))
-						embeddedEditorComp.removeListener(SWT.Dispose, l);
-
 					embeddedEditorModelAccess = embeddedEditor
 							.createPartialEditor("", "§§", "", false);
 					embeddedEditor.getViewer().getTextWidget()
 							.setLineSpacing(LINE_SPACE);
+
 
 					// embeddedEditor.getViewer().getTextWidget().setFont(font);
 					// keep the partialEditor as instance var to read / write
