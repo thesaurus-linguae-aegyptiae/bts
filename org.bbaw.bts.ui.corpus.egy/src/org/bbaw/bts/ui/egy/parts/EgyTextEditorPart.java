@@ -1586,31 +1586,16 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				}
 			}
 			if (btsEvent != null) {
-				btsEvent.setRelatingObjects(relSelObjects);
-			}
+				btsEvent.setRelatingObjects(new ArrayList<BTSObject>(relSelObjects));
+			} else
+				revealAnnotation(relatingObjectsAnnotations, true);
+
 			// if (postSelection){
 			// eventBroker.post(
 			// BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
 			// relSelObjects);
 			// }
 			
-			
-			try {
-				Annotation anno = relatingObjectsAnnotations.get(0);
-				final Position pos = annotationModel.getPosition(anno);
-				if (pos != null)
-				{
-					sync.asyncExec(new Runnable() {
-						@SuppressWarnings("restriction")
-						public void run() {
-							embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
-						}
-					});
-				}
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
 		// else if (postSelection)
 		// {
@@ -1619,6 +1604,38 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// null);
 		// }
 		
+	}
+	
+	private void revealAnnotation(List<BTSModelAnnotation> relatingObjectsAnnotations, final boolean force) {
+		try {
+			// TODO annotations should be sorted based on startpos?
+			Annotation anno = relatingObjectsAnnotations.get(0);
+			final Position pos = annotationModel.getPosition(anno);
+			
+			if (pos != null)
+				sync.asyncExec(new Runnable() {
+					@SuppressWarnings("restriction")
+					public void run() {
+						XtextSourceViewer viewer = embeddedEditor.getViewer();
+						if (!force) {
+							int topLine = viewer.getTopIndex();
+							int botLine = viewer.getBottomIndex();
+							int caretPos = viewer.getTextWidget().getCaretOffset();
+							int curLine = viewer.getTextWidget().getLineAtOffset(caretPos);
+							int annoLineTop = viewer.getTextWidget().getLineAtOffset(pos.offset);
+							int annoLineBot = viewer.getTextWidget().getLineAtOffset(pos.offset+pos.length);
+							// consider changing displayed range if annotation exceeds current range
+							// only jump if cursor would likely remain in visible range
+							if ((topLine > annoLineTop) || (botLine < annoLineBot))
+								if (botLine - curLine >= topLine - annoLineTop)
+									viewer.revealRange(pos.getOffset(), pos.length);
+						} else // jump regardless of cursor position
+							viewer.revealRange(pos.getOffset(), pos.length);
+					}
+				});	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 
 	
@@ -2830,25 +2847,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							BTSModelAnnotation ma2 = modelAnnotationMap.get(ref
 									.getEndId());
 							Position pos = annotationModel.getPosition(ma1);
-							offset = pos.getOffset();
 							Position pos2 = annotationModel.getPosition(ma2);
-							if (pos != null && pos2 != null)
-							{
-								len = (pos2.getOffset() - pos.getOffset())
-									+ pos2.getLength();
-							}
-							else if (pos2 != null)
-							{
-								offset = pos2.getOffset();
-								len = pos2.getLength();
-							}
+							if (pos2 != null)
+								if (pos != null) {
+									offset = pos.getOffset();
+									len = (pos2.getOffset() - pos.getOffset())
+										+ pos2.getLength();
+								} else {
+									offset = pos2.getOffset();
+									len = pos2.getLength();
+								}
 						}
 						Issue issue;
 						issue = new Issue.IssueImpl();
 						Annotation annotation = makeAnnotation(object, issue, ref);
-						if (annotation != null) {
+						if (annotation != null)
 							annotationModel.addAnnotation(annotation, new Position(offset, len));
-						}
 					}
 				}
 			}
