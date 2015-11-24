@@ -263,6 +263,9 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	public String processWordCharForLemmatizing(String chars) {
 		// TODO Auto-generated method stub
 		
+		if (chars == null)
+			return null;
+		
 		// cut left side
 		Matcher m = doublePointPattern.matcher(chars);
 		if (m.find())
