@@ -409,6 +409,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private BTSTextSelectionEvent btsTextEvent;
 
+	private long lastSelectionTimeStamp = 0;
+
 	
 	/**
 	 * Instantiates a new egy text editor part.
@@ -1448,37 +1450,44 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
-		// System.out.println("Textselection x y : " + btsEvent.x + " " +
-		// btsEvent.y);
 		btsEvent.data = text;
-		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
-				btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
-		processSelection(annotations, false, btsEvent);
-		selectionService.setSelection(btsEvent);
-		System.out.println("selectedTextItem " + selectedTextItem);
-		this.btsTextEvent = btsEvent;
+		
+		if (this.btsTextEvent == null) {
+			Job j = new Job("delay_selection_processing"){
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+					while (System.nanoTime() < lastSelectionTimeStamp + 350000000)
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							return Status.CANCEL_STATUS;
+						}
+					final BTSTextSelectionEvent btsEvent = btsTextEvent;
+					sync.asyncExec(new Runnable() {
+						
+						@Override
+						public void run() {
+							List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
+									btsEvent.x, btsEvent.y, btsEvent);							
+							btsEvent.getTextAnnotations().addAll(annotations);
+							processSelection(annotations, false, btsEvent);
+							selectionService.setSelection(btsEvent);
+							
+						}
+					});
+					btsTextEvent = null;
+					return Status.OK_STATUS;
+				}
+			};
+			j.schedule(400);
+			this.btsTextEvent = btsEvent;
+		} else if (!(event instanceof CaretEvent) || (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
+			this.btsTextEvent = btsEvent;
+		lastSelectionTimeStamp = System.nanoTime();
 	}
+	
 
-	/**
-	 * Process editor selection.
-	 *
-	 * @param item the item
-	 */
-	protected void processEditorSelection(Object item) {
-		TypedEvent event = new TypedEvent(item);
-		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
-		// System.out.println("Textselection x y : " + btsEvent.x + " " +
-		// btsEvent.y);
-		btsEvent.data = text;
-		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
-				btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
-		processSelection(annotations, false, btsEvent);
-		selectionService.setSelection(btsEvent);
-		this.btsTextEvent = btsEvent;
-
-	}
 
 	/**
 	 * Process selection.
@@ -1491,8 +1500,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			boolean postSelection, BTSTextSelectionEvent btsEvent) {
 		List<BTSModelAnnotation> relatingObjectsAnnotations = new Vector<BTSModelAnnotation>(
 				annotations.size());
+		AnnotationModelEvent ev_trans = null;
 		if (!annotations.isEmpty())
 		{
+			BTSSenctence sentence = null;
 			for (BTSModelAnnotation ma : annotations) {
 				if (ma != null && ma instanceof BTSLemmaAnnotation
 						&& ma.getModel() != null
@@ -1501,7 +1512,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					if (ma.getModel() instanceof BTSWord) {
 						setSentenceTranslation((BTSWord) ma.getModel());
 					} else if (ma.getModel() instanceof BTSSenctence) {
-						setSentenceTranslation((BTSSenctence) ma.getModel(), true);
+						sentence = (BTSSenctence) ma.getModel();
 					}
 					selectedTextItem = ma.getModel();
 
@@ -1526,13 +1537,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				} else if (ma instanceof BTSModelAnnotation)
 				{
 					if (ma.getModel() instanceof BTSSenctence) {
-						setSentenceTranslation((BTSSenctence) ma.getModel(), true);
+						sentence = (BTSSenctence) ma.getModel();
 					} 
 					if (!ma.getModel().equals(selectedTextItem)) {
 						selectedTextItem = ma.getModel();
 					} 
 				}
 			}
+			if (sentence != null)
+				ev_trans = setSentenceTranslation(sentence, true);
 		}
 		else
 		{
@@ -1556,28 +1569,35 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 //		System.out.println("tobe de-highligehted: " + deHighlightedAnnotations.size());
 
 		boolean modelChanged = (!deHighlightedAnnotations.isEmpty() || !toBeHighlightedAnnotations.isEmpty());
+		modelChanged |= (ev_trans != null && !ev_trans.isEmpty());
+		
 		highlightAnnotations(deHighlightedAnnotations, false);
 		highlightAnnotations(toBeHighlightedAnnotations, true);
+		toBeHighlightedAnnotations.add(highlightedSentenceAnnotation);
 		
 		highlightedAnnotations.clear();
 		highlightedAnnotations.addAll(relatingObjectsAnnotations);
+		
 		if (modelChanged)
 		{
 			final AnnotationModelEvent ev = new AnnotationModelEvent(annotationModel);
+			// apply model changes from sentence translation highlighting
+			if (ev_trans != null)
+				for (Annotation a : ev_trans.getChangedAnnotations())
+					if (a != null) ev.annotationChanged(a);
 			for (Annotation a : deHighlightedAnnotations)
-			{
 				if (a != null) ev.annotationChanged(a);
-			}
 			for (Annotation a : toBeHighlightedAnnotations)
-			{
 				if (a != null) ev.annotationChanged(a);
-			}
 
 			sync.asyncExec(new Runnable() {
 				public void run() {
-					// TODO this can be improved in order to reduce work load repainting large texts
+					// TODO this can be improved in order to reduce work load repainting large texts					
 					painter.modelChanged(ev);
 					painter.paint(IPainter.INTERNAL);
+					ruler.update();
+					ruler.relayout();
+					oruler.update();
 					embeddedEditor.getViewer().getTextWidget().redraw();
 				}
 			});
@@ -2055,10 +2075,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				selectedTextItem = selection;
 			}
 			if (selection instanceof BTSWord) {
+				System.out.println("text editor received word/sent item selection!");
 				setSentenceTranslation((BTSWord) selection);
-			} else if (selection instanceof BTSSenctence) {
-				setSentenceTranslation((BTSSenctence) selection, false);
-			}
+			} else if (selection instanceof BTSSenctence) 
+				if (this.selectedSentence == null || !this.selectedSentence.equals(selection))
+					setSentenceTranslation((BTSSenctence) selection, false);
 
 		}
 	}
@@ -2203,7 +2224,11 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 *
 	 * @param sentence the new sentence translation
 	 */
-	private void setSentenceTranslation(BTSSenctence sentence, boolean postSelection) {
+	private AnnotationModelEvent setSentenceTranslation(BTSSenctence sentence, boolean postSelection) {
+		// TODO: allow for multiple sentence translations to be highlighted simultaneously
+		// i.e. create method setSentenceTranslation(List<BTSSentence>) which gets passed
+		// a Collection containing all sentences detected within a BTSTextSelectionEvent
+		final AnnotationModelEvent ev = new AnnotationModelEvent(annotationModel);
 		if (sentence != null && !sentence.equals(selectedSentence)) {
 			selectedSentence = sentence;
 			if (selectedSentence.getTranslation() == null) {
@@ -2220,42 +2245,48 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			BTSModelAnnotation am = modelAnnotationMap.get(sentence.get_id());
 			if (am != null)
 			{
-				if (highlightedSentenceAnnotation != null)
-				{
-					highlightedSentenceAnnotation.setHighlighted(false);
-				}
-				am.setHighlighted(true);
-				final AnnotationModelEvent ev = new AnnotationModelEvent(annotationModel);
+				if (!am.equals(highlightedSentenceAnnotation) || !am.getType().endsWith(".highlighted")) {
+					// highlight current translation
+					am.setHighlighted(true);
 					ev.annotationChanged(am);
-					if(highlightedSentenceAnnotation != null) ev.annotationChanged(highlightedSentenceAnnotation);
-
-				sync.asyncExec(new Runnable() {
-					public void run() {
-						// TODO this can be improved in order to reduce work load repainting large texts
-						painter.modelChanged(ev);
-						painter.paint(IPainter.INTERNAL);
-						embeddedEditor.getViewer().getTextWidget().redraw();
+					// remove previous highlight
+					if (highlightedSentenceAnnotation != null) { 
+						highlightedSentenceAnnotation.setHighlighted(false);
+						ev.annotationChanged(highlightedSentenceAnnotation);
 					}
-				});
-				ruler.update();
-				ruler.relayout();
-				highlightedSentenceAnnotation = am;
+					highlightedSentenceAnnotation = am;
+				}
+				if (!postSelection) {
+					// make sure annotation is visible in text editor 
+					Position pos = annotationModel.getPosition(am);
+					if (pos != null)
+						embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
+
+					// In order to limit workload, only repaint text editor (including highlight of line(s)
+					// containing this sentence) if method call seems to come from selection listener
+					// in EgyTextTranslationPart. This is indicated by postSelection being false. 
+					// (if postSelection is true, repaint has most likely already been invoked in processSelection)
+					sync.asyncExec(new Runnable() {
+						public void run() {
+							// TODO this can be improved in order to reduce work load repainting large texts
+							painter.modelChanged(ev);
+							painter.paint(IPainter.INTERNAL);
+							ruler.update();
+							ruler.relayout();
+							oruler.update();
+							embeddedEditor.getViewer().getTextWidget().redraw();
+						}
+					});
+					return null;
+				}
 				
 			}
+			
 			if (postSelection)
-			{
 				selectionService.setSelection(sentence);
-			}
-			else
-			{
-				Position pos = annotationModel.getPosition(am);
-				if (pos != null)
-				{
-					embeddedEditor.getViewer().revealRange(pos.getOffset(), pos.length);
-				}
-			}
+			return ev;
 		}
-
+		return null;
 	}
 
 	/**

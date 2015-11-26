@@ -43,6 +43,10 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.events.TypedEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.UISynchronize;
@@ -102,6 +106,9 @@ public class EgyTextTranslationPart {
 	/** The highlighted annotations. */
 	private List<BTSModelAnnotation> highlightedAnnotations = new Vector<BTSModelAnnotation>(
 			4);
+	
+	private BTSTextSelectionEvent btsTextEvent = null;
+	private long lastSelectionTimeStamp = 0;
 
 	@Inject
 	public EgyTextTranslationPart(EPartService partService) {
@@ -201,12 +208,43 @@ public class EgyTextTranslationPart {
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
 		btsEvent.data = text;
-		List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
-				btsEvent.x, btsEvent.y, btsEvent);
-		btsEvent.getTextAnnotations().addAll(annotations);
-		processSelection(annotations, false, btsEvent);
-//		selectionService.setSelection(btsEvent);
+		
+		if (btsTextEvent == null) {
+			Job j = new Job("delay_selection_processing"){
+				@Override
+				protected IStatus run(IProgressMonitor monitor) {
+					while (System.nanoTime() < lastSelectionTimeStamp + 350000000)
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							return Status.CANCEL_STATUS;
+						}
+					
+					final BTSTextSelectionEvent btsEvent = btsTextEvent;
+					sync.asyncExec(new Runnable() {
+						@Override
+						public void run() {
 
+							List<BTSModelAnnotation> annotations = getModelAnnotationAtSelection(
+									btsEvent.x, btsEvent.y, btsEvent);							
+							btsEvent.getTextAnnotations().addAll(annotations);
+							processSelection(annotations, false, btsEvent);
+//							selectionService.setSelection(btsEvent);
+							
+						}
+					});
+					btsTextEvent = null;
+					return Status.OK_STATUS;
+				}
+			};
+			j.schedule(400);
+			this.btsTextEvent = btsEvent;
+		} else 
+			if (!(event instanceof CaretEvent) || (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
+				this.btsTextEvent = btsEvent;
+		
+		lastSelectionTimeStamp  = System.nanoTime();
 	}
 	
 	private void processSelection(List<BTSModelAnnotation> annotations,
