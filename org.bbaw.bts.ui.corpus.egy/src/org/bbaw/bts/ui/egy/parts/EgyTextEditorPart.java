@@ -155,6 +155,8 @@ import org.eclipse.swt.custom.CaretListener;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.events.DisposeEvent;
+import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.events.MenuEvent;
 import org.eclipse.swt.events.MenuListener;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -574,6 +576,17 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					((GridLayout) embeddedEditorParentComp.getLayout()).marginWidth = 0;
 					tbtmPlaintext2.setControl(embeddedEditorParentComp);
 
+					embeddedEditorParentComp.addDisposeListener(new DisposeListener() {
+						@Override
+						public void widgetDisposed(DisposeEvent e) {
+							// remove editor contents (including annotation model)
+							// before xtext HighlightingHelper gets a chance
+							// to clog main thread with its painful editor dismantling.
+							loadInput(null);
+						}
+					});
+
+
 					embeddedEditorComp = new Composite(
 							embeddedEditorParentComp, SWT.None);
 					embeddedEditorComp.setLayout(new GridLayout());
@@ -609,6 +622,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							.createPartialEditor("", "§§", "", false);
 					embeddedEditor.getViewer().getTextWidget()
 							.setLineSpacing(LINE_SPACE);
+
 
 					// embeddedEditor.getViewer().getTextWidget().setFont(font);
 					// keep the partialEditor as instance var to read / write
@@ -2518,10 +2532,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			}
 			localCommandCacheSet.clear();
 
+			// turn word-wise graphical update on model change notifications off 
 			signTextEditor.setNotifyWords(false);
 			sentenceTranslate_Editor.save();
 			boolean success = textEditorController.save(this.text);
 			dirty.setDirty(!success);
+			// turn word-wise update back on
 			signTextEditor.setNotifyWords(true);
 			return success;
 		}

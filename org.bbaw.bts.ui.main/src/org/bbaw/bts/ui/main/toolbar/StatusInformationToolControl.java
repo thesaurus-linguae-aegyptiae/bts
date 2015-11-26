@@ -119,7 +119,7 @@ public class StatusInformationToolControl {
 				label.setText(message.getMessage() + message.getUserId());
 			}
 		}
-		else if (message != null)
+		else if (message != null && !label.isDisposed())
 		{
 			label.setText(message.getMessage());
 		}
