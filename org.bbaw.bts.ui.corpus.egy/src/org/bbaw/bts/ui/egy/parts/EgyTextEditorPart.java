@@ -100,6 +100,7 @@ import org.bbaw.bts.ui.commons.widgets.TranslationEditorComposite;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.BTSTextXtextEditedResourceProvider;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.EgyLineNumberRulerColumn;
 import org.bbaw.bts.ui.egy.parts.support.AbstractTextEditorLogic;
+import org.bbaw.bts.ui.egy.parts.support.DefaultInclusivePositionUpdater;
 import org.bbaw.bts.ui.egy.textSign.SignTextComposite;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -238,7 +239,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	private PermissionsAndExpressionsEvaluationController evaluationController;
 
 	/** The Constant EDITOR_PREFIX_LENGTH. */
-	private static final int EDITOR_PREFIX_LENGTH = 1;
+	public static final int EDITOR_PREFIX_LENGTH = 1;
 
 	/** The Constant LINE_SPACE. */
 	private static final int LINE_SPACE = 8;
@@ -713,10 +714,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 								@Override
 								public void documentChanged(DocumentEvent event) {
-									if (!loading) {
+									processTextModification(event);
+									if (!loading)
 										setDirtyInternal();
-									}
-
 								}
 
 								@Override
@@ -726,6 +726,24 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 								}
 							});
+					// add an inclusive position updater, because default updater won't update positions
+					// at the end of which text gets inserted
+					/*Map<Integer, DefaultPositionUpdater> defaultUpdaters = new HashMap<Integer, DefaultPositionUpdater>();
+					int counter = 0;
+					for (IPositionUpdater updater : embeddedEditor.getDocument().getPositionUpdaters()) {
+						counter += 1;
+						if (updater instanceof DefaultPositionUpdater && !updater.getClass().getSuperclass().equals(DefaultPositionUpdater.class))
+							defaultUpdaters.put(counter, (DefaultPositionUpdater)updater);
+					}
+					for (Entry<Integer, DefaultPositionUpdater> e : defaultUpdaters.entrySet()) {
+						DefaultPositionUpdater updater = e.getValue();
+						embeddedEditor.getDocument().removePositionUpdater(updater);
+						embeddedEditor.getDocument().insertPositionUpdater(new InclusivePositionUpdater(updater.get), e.getKey());
+					}*/
+							
+					embeddedEditor.getDocument().addPositionUpdater(new DefaultInclusivePositionUpdater(IDocument.DEFAULT_CATEGORY));
+					
+					
 					final Menu menu = embeddedEditor.getViewer().getTextWidget().getMenu();
 					menu.addMenuListener(new MenuListener() {
 						
@@ -1444,6 +1462,48 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	/**
+	 * For a given {@link DocumentEvent} indicating changes in editor text,
+	 * do your best to maintain consistency and mappability between text model
+	 * and data model.
+	 * @param event
+	 */
+	protected void processTextModification(DocumentEvent event) {
+		IDocument doc = event.getDocument();
+		for (IPositionUpdater pu : doc.getPositionUpdaters())
+			System.out.println(pu+"; ");
+		System.out.println();
+		String cat = IDocument.DEFAULT_CATEGORY;
+		try {
+			for (String c : doc.getPositionCategories()) {
+				System.out.print(c+": ");
+				for (Position p : doc.getPositions(c))
+					System.out.print("["+p.offset+"-"+(p.offset+p.length)+"] ");
+				System.out.println();
+			}
+		} catch (BadPositionCategoryException e) {
+			System.out.println("can't get position categories for doc");
+		}
+		System.out.println("document changed: "+event+"; "+event.fModificationStamp);
+		System.out.println(": "+event.getOffset()+", "+event.fOffset+", "+event.getText());
+		BTSTextSelectionEvent textEvent = new BTSTextSelectionEvent(new TypedEvent(event), text);
+		for (BTSModelAnnotation a : getModelAnnotationAtSelection(event.fOffset-event.getText().length(), event.getText().length(), textEvent)) {
+			System.out.println(a+" - "+a.getModel());
+			if (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class))
+					if (a instanceof BTSModelAnnotation){
+						System.out.println((BTSSentenceItem)a.getModel());
+						Position p = annotationModel.getPosition(a);
+						/*if (p.offset+p.length == event.fOffset+EgyTextEditorPart.EDITOR_PREFIX_LENGTH-event.fText.length()
+							|| p.offset == event.fOffset+EgyTextEditorPart.EDITOR_PREFIX_LENGTH-event.fText.length()) {
+							p.length += event.fText.length();
+							System.out.println("update length: "+p.length);
+						}*/
+					}
+		}
+		System.out.println(textEvent.getStartId()+" -- "+textEvent.getEndId());	
+	}
+	
+	
+	/**
 	 * Process text selection.
 	 *
 	 * @param event the event
@@ -1724,9 +1784,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						.getPosition(a);
 				// System.out.println("pos " + pos.getOffset() + " " +
 				// pos.getOffset() + pos.getLength());
-				if ((pos.getOffset() <= start && start < pos.getOffset()
+				if ((start + 1 >= pos.getOffset() && start < pos.getOffset()
 						+ pos.getLength())
-						|| (pos.getOffset() >= start && pos.getOffset() <= end)) {
+						|| (start <= pos.getOffset() && end >= pos.getOffset())) {
 					List<BTSModelAnnotation> list = annotationOffsetMap.get(pos.getOffset());
 					if (list == null)
 					{
