@@ -430,9 +430,7 @@ public class AnnotationsPart implements EventHandler {
 		{
 			RelatedObjectGroup g = objectWidgetMap.get(selection);
 			if (g != null)
-			{
-				setSelectedInternal(new RelatedObjectGroup[]{g}, false);
-			}
+				setSelectedInternal(Arrays.asList(g), false);
 		}
 		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
 		{
@@ -582,7 +580,7 @@ public class AnnotationsPart implements EventHandler {
 		}
 		
 	}
-	public BTSTextSelectionEvent getTestSelectionEvent() {
+	public BTSTextSelectionEvent getTextSelectionEvent() {
 		return textSelectionEvent;
 	}
 	
