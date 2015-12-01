@@ -114,6 +114,7 @@ import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -422,7 +423,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		try {
 			part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			logger.warn("Part Service couldn't find "+BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
 			e.printStackTrace();
 		}
 
@@ -2216,7 +2217,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param oldSelectedItem the new sentence item deselected
 	 */
 	private void setSentenceItemDeselected(BTSSentenceItem oldSelectedItem) {
-
+		// TODO
 	}
 
 	/**
@@ -2738,6 +2739,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			});
 			
 		}
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedTextRequested(
+			@UIEventTopic("request_text/*") final BTSText current) {
+		if (current == null || !current.equals(text)) 
+			if (text != null)
+				selectionService.setSelection(text);
 	}
 
 	/**
