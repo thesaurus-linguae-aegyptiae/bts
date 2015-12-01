@@ -40,12 +40,19 @@ public abstract class AbstractTextEditorLogic {
 			}
 		};
 		
+		// Sentence
 		AnnotationDrawingStrategy sentenceStrategy2 = new AnnotationDrawingStrategy();
 		painter.addDrawingStrategy(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, sentenceStrategy2);
 		painter.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
 				BTSUIConstants.COLOR_SENTENCE);
 		painter.addAnnotationType(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, BTSSentenceAnnotation.TYPE_HIGHLIGHTED);
 
+		// Word
+		ITextStyleStrategy ws = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
+		painter.addTextStyleStrategy(BTSModelAnnotation.TYPE, ws);
+		painter.setAnnotationTypeColor(BTSModelAnnotation.TYPE, BTSUIConstants.COLOR_WORD);
+		painter.addAnnotationType(BTSModelAnnotation.TYPE, BTSModelAnnotation.TYPE);
+		
 		// Lemma
 		ITextStyleStrategy strategy = new org.eclipse.jface.text.source.AnnotationPainter.HighlightingStrategy();
 		painter.addTextStyleStrategy(BTSLemmaAnnotation.TYPE, strategy);

@@ -134,8 +134,10 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.IPainter;
 import org.eclipse.jface.text.Position;
@@ -173,6 +175,8 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.embedded.EmbeddedEditor;
@@ -616,16 +620,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							.newEditor(xtextResourceProvider)
 							.showAnnotations(BTSAnnotationAnnotation.TYPE,
 									BTSCommentAnnotation.TYPE,
+									BTSModelAnnotation.TYPE,
 									"org.eclipse.xtext.ui.editor.error",
 									"org.eclipse.xtext.ui.editor.warning",
 									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
 							.withParent(embeddedEditorComp);
 					
+					
+					
 					embeddedEditorModelAccess = embeddedEditor
 							.createPartialEditor("", "§§", "", false);
 					embeddedEditor.getViewer().getTextWidget()
 							.setLineSpacing(LINE_SPACE);
-
+					
 
 					// embeddedEditor.getViewer().getTextWidget().setFont(font);
 					// keep the partialEditor as instance var to read / write

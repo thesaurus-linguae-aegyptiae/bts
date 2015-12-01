@@ -135,6 +135,9 @@ public class BTSUIConstants {
 	public static final Color COLOR_RUBRUM= _resources
 			.createColor(new RGB(255, 106, 106));
 	
+	/** Background color for recognized word objects. **/
+	public static final Color COLOR_WORD = _resources.createColor(new RGB(248, 255, 255));
+	
 	
 	/** The Constant PASSPORT_COLUMN_NUMBER. */
 	public static final int PASSPORT_COLUMN_NUMBER = 6;
