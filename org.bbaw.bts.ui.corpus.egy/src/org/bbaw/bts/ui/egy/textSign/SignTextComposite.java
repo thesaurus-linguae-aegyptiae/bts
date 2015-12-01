@@ -1566,7 +1566,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	}
 
 	public void setEventBroker(EventBroker eventBroker2) {
-
+		// TODO
 	}
 
 	@Override

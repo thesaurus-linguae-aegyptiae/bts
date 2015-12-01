@@ -1093,7 +1093,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		if (show_line_number_ruler)
 		{
 			lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
-			lineNumberRulerColumn.setModel(annotationModel);
+			//lineNumberRulerColumn.setModel(annotationModel); // does nothing
 			embeddedEditor.getViewer()
 					.addVerticalRulerColumn(lineNumberRulerColumn);
 		}
