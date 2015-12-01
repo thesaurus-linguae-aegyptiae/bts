@@ -201,7 +201,7 @@ public class EgyTextTranslationPart {
 		{
 			loadInput(text);
 		} else
-			eventBroker.post("request_text/text_editor", text);
+			eventBroker.post(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_TEXT_REQUESTED, text);
 			
 	}
 	

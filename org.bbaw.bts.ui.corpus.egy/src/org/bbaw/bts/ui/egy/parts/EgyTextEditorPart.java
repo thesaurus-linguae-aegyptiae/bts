@@ -2743,7 +2743,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Inject
 	@Optional
 	void eventReceivedTextRequested(
-			@UIEventTopic("request_text/*") final BTSText current) {
+			@UIEventTopic("event_egy_text_editor_text_requested/*") final BTSText current) {
 		if (current == null || !current.equals(text)) 
 			if (text != null)
 				selectionService.setSelection(text);
