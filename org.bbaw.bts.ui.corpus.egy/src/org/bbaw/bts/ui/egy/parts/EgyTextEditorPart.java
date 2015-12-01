@@ -726,21 +726,9 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 								}
 							});
+
 					// add an inclusive position updater, because default updater won't update positions
 					// at the end of which text gets inserted
-					/*Map<Integer, DefaultPositionUpdater> defaultUpdaters = new HashMap<Integer, DefaultPositionUpdater>();
-					int counter = 0;
-					for (IPositionUpdater updater : embeddedEditor.getDocument().getPositionUpdaters()) {
-						counter += 1;
-						if (updater instanceof DefaultPositionUpdater && !updater.getClass().getSuperclass().equals(DefaultPositionUpdater.class))
-							defaultUpdaters.put(counter, (DefaultPositionUpdater)updater);
-					}
-					for (Entry<Integer, DefaultPositionUpdater> e : defaultUpdaters.entrySet()) {
-						DefaultPositionUpdater updater = e.getValue();
-						embeddedEditor.getDocument().removePositionUpdater(updater);
-						embeddedEditor.getDocument().insertPositionUpdater(new InclusivePositionUpdater(updater.get), e.getKey());
-					}*/
-							
 					embeddedEditor.getDocument().addPositionUpdater(new DefaultInclusivePositionUpdater(IDocument.DEFAULT_CATEGORY));
 					
 					
@@ -1469,10 +1457,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processTextModification(DocumentEvent event) {
 		IDocument doc = event.getDocument();
-		for (IPositionUpdater pu : doc.getPositionUpdaters())
-			System.out.println(pu+"; ");
-		System.out.println();
-		String cat = IDocument.DEFAULT_CATEGORY;
+		System.out.println("relating objects: "+((relatingObjects != null)?relatingObjects.size():0));
+		System.out.println("relating objects map: "+((relatingObjectsMap != null)?relatingObjectsMap.size():0));
 		try {
 			for (String c : doc.getPositionCategories()) {
 				System.out.print(c+": ");
@@ -1486,22 +1472,134 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		System.out.println("document changed: "+event+"; "+event.fModificationStamp);
 		System.out.println(": "+event.getOffset()+", "+event.fOffset+", "+event.getText());
 		BTSTextSelectionEvent textEvent = new BTSTextSelectionEvent(new TypedEvent(event), text);
-		for (BTSModelAnnotation a : getModelAnnotationAtSelection(event.fOffset-event.getText().length(), event.getText().length(), textEvent)) {
-			System.out.println(a+" - "+a.getModel());
-			if (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class))
-					if (a instanceof BTSModelAnnotation){
-						System.out.println((BTSSentenceItem)a.getModel());
-						Position p = annotationModel.getPosition(a);
-						/*if (p.offset+p.length == event.fOffset+EgyTextEditorPart.EDITOR_PREFIX_LENGTH-event.fText.length()
-							|| p.offset == event.fOffset+EgyTextEditorPart.EDITOR_PREFIX_LENGTH-event.fText.length()) {
-							p.length += event.fText.length();
-							System.out.println("update length: "+p.length);
-						}*/
-					}
+		List<BTSModelAnnotation> erased = new Vector<BTSModelAnnotation>();
+		Map<String, Set<BTSModelAnnotation>> annosAtAnchor = new HashMap<String, Set<BTSModelAnnotation>>();
+		for (BTSModelAnnotation a : getModelAnnotationAtSelection(event.fOffset-event.getText().length()-1, event.fOffset+event.getText().length()+1, textEvent)) {
+			Position p = annotationModel.getPosition(a);
+			System.out.println(annoPos(a)+" "+a+" - "+a.getModel());
+			BTSInterTextReference ref = a.getInterTextReference();
+			if (ref != null) {
+				System.out.println(" "+ref.getBeginId() + " -- " + ref.getEndId());
+				Set<BTSModelAnnotation> annotations = annosAtAnchor.get(ref.getBeginId());
+				annotations = (annotations != null) ? annotations : new HashSet<BTSModelAnnotation>();
+				annotations.add(a);
+				annosAtAnchor.put(ref.getBeginId(), annotations);
+				annotations = annosAtAnchor.get(ref.getEndId());
+				annotations = (annotations != null) ? annotations : new HashSet<BTSModelAnnotation>();
+				annotations.add(a);
+				annosAtAnchor.put(ref.getEndId(), annotations);
+			}
+			
+			//if (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class)) {
+			{
+				if (p.getLength() < 1)
+					erased.add(a);
+					/*if (p.offset+p.length == event.fOffset+EgyTextEditorPart.EDITOR_PREFIX_LENGTH-event.fText.length()
+						|| p.offset == event.fOffset+EgyTextEditorPart.EDITOR_PREFIX_LENGTH-event.fText.length()) {
+						p.length += event.fText.length();
+						System.out.println("update length: "+p.length);
+					}*/
+			}
 		}
-		System.out.println(textEvent.getStartId()+" -- "+textEvent.getEndId());	
+		System.out.println(textEvent.getStartId()+" -- "+textEvent.getEndId());
+		
+		// iterate through 0-length annotations
+		for (BTSModelAnnotation a : erased) {
+			Position p = annotationModel.getPosition(a);
+			System.out.println(annoPos(a)+": "+(BTSSentenceItem)a.getModel());
+			BTSIdentifiableItem modelItem = (BTSIdentifiableItem)a.getModel();
+			String modelItemId = modelItem.get_id();
+			System.out.println(" model annotation of length 0! "+modelItemId);
+			System.out.println(" entries in relatingObjectMap: ");
+			if (relatingObjectsMap.get(modelItemId) != null)
+				for (BTSInterTextReference refs : relatingObjectsMap.get(modelItemId))
+					System.out.println("  "+refs.eContainer()+" "+refs.eContainer().eContainer());
+			//System.out.println("entries in modelAnnotationMap: ");
+			//System.out.println(" "+modelAnnotationMap.get(modelItemId));
+			boolean replaced = true;
+			System.out.println(" hooked to annotations: ");
+			if (annosAtAnchor.get(modelItemId) != null)
+				for (BTSModelAnnotation ma : annosAtAnchor.get(modelItemId)) {
+					System.out.println("  "+annoPos(ma)+": "+ma);
+					if (ma.getClass().getSuperclass().equals(BTSModelAnnotation.class)) {
+						System.out.println("   model: "+ma.getModel());
+						Position map = annotationModel.getPosition(ma);
+						if (map.length > 0) {
+							System.out.println("    remove hook");
+							replaced &= removeAnnotationHook(ma, modelItem);
+						} else {
+							System.out.println("    annotation itself needs to be removed.");
+							annotationModel.removeAnnotation(ma);
+							doc.removePosition(map);
+						}
+					}
+				}
+			if (replaced) {
+				System.out.println("    remove annotation at "+annoPos(a));
+				annotationModel.removeAnnotation(a);
+				doc.removePosition(p);
+			} else
+				System.out.println("    replacing hook failed: "+a);
+				
+				
+		}
+
 	}
 	
+
+	private String annoPos(BTSModelAnnotation a) {
+		Position p = annotationModel.getPosition(a);
+		return "["+p.offset+"-"+(p.offset+p.length)+"]";
+	}
+	
+	private boolean removeAnnotationHook(BTSModelAnnotation annotation, BTSIdentifiableItem hook) {
+		BTSInterTextReference ref = annotation.getInterTextReference();
+		boolean startHook = hook.get_id().equals(ref.getBeginId());
+		System.out.println("    annotation from "+ref.getBeginId()+"--"+ref.getEndId());
+		System.out.println("    Try to replace "+(startHook?"start":"end")+" hook "+hook);
+		Position pos = annotationModel.getPosition(annotation);
+		List<BTSModelAnnotation> includes = getModelAnnotationAtSelection(pos.offset, pos.offset+pos.length, null);
+		System.out.println("    Annotations within "+annoPos(annotation)+":");
+		
+		BTSModelAnnotation newHook = null;
+		
+		for (BTSModelAnnotation a : includes) {
+			System.out.println("     "+annoPos(a)+": "+a);
+			
+			if (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class)
+					|| a instanceof BTSLemmaAnnotation) {
+				System.out.println("     "+annoPos(a)+"hook candidate "+": "+a.getModel().get_id()+" "+a.getModel());
+				Position p = annotationModel.getPosition(a);
+				if (p.length > 0)
+					if (startHook) {
+						if (newHook == null)
+							newHook = a;
+					} else
+						newHook = a;
+			}
+			
+		}
+		
+		if (newHook != null) {
+			System.out.println("     proposed new hook "+annoPos(newHook)+": "+newHook.getModel().get_id()+" "+newHook.getModel());
+			Position p = annotationModel.getPosition(newHook);
+			if (startHook) {
+				ref.setBeginId(newHook.getModel().get_id());
+				pos.setOffset(p.offset);
+			} else {
+				ref.setEndId(newHook.getModel().get_id());
+				pos.setLength(p.offset+p.length-pos.offset);
+			}
+			System.out.println("     "+annotation.getModel());
+			System.out.println("     "+annotation.getRelatingObject());
+			// TODO save annotation via controller
+			/*if (annotation.getRelatingObject() instanceof BTSAnnotation)
+				((BTSAnnotation)annotation.getRelatingObject()).*/
+			return true;
+		}
+		
+		return false;
+	}
 	
 	/**
 	 * Process text selection.
@@ -1510,6 +1608,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
+		System.out.println("Textselection x y : " + btsEvent.x + " " +
+		 btsEvent.y);
 		btsEvent.data = text;
 		
 		if (this.btsTextEvent == null) {
@@ -1697,6 +1797,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		// BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_SELECTED,
 		// null);
 		// }
+		if (btsEvent != null)
+			System.out.println("text selection event spans "+btsEvent.getStartId()+" -- "+btsEvent.getEndId());
 		
 	}
 	
@@ -1769,6 +1871,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings("restriction")
 	private List<BTSModelAnnotation> getModelAnnotationAtSelection(int start,
 			int end, BTSTextSelectionEvent btsEvent) {
+		System.out.println("getting annotations between "+start+"--"+end);
 		Iterator it = embeddedEditor.getViewer().getAnnotationModel()
 				.getAnnotationIterator();
 		List<BTSModelAnnotation> annotations = new Vector<BTSModelAnnotation>(4);
@@ -1784,7 +1887,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						.getPosition(a);
 				// System.out.println("pos " + pos.getOffset() + " " +
 				// pos.getOffset() + pos.getLength());
-				if ((start + 1 >= pos.getOffset() && start < pos.getOffset()
+				if ((start >= pos.getOffset() && start < pos.getOffset()
 						+ pos.getLength())
 						|| (start <= pos.getOffset() && end >= pos.getOffset())) {
 					List<BTSModelAnnotation> list = annotationOffsetMap.get(pos.getOffset());
