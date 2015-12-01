@@ -1050,11 +1050,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	/**
 	 * Configure editor ruler.
 	 */
-	@SuppressWarnings("restriction")
 	private void configureEditorRuler() {
-		ruler = embeddedEditorFactory.getCpAnnotationRuler();
+		ruler = EmbeddedEditorFactory.getCpAnnotationRuler();
 
-		oruler = embeddedEditorFactory.getOverViewRuler();
+		oruler = EmbeddedEditorFactory.getOverViewRuler();
 		oruler.addAnnotationType(BTSAnnotationAnnotation.TYPE);
 		oruler.setAnnotationTypeLayer(BTSAnnotationAnnotation.TYPE, 3);
 		oruler.setAnnotationTypeColor(BTSAnnotationAnnotation.TYPE,
