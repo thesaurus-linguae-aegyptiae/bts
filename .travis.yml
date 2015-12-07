@@ -1,7 +1,8 @@
 language: java
 jdk:
-  - openjdk 7
-  - openjdk 8
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk6
 script:
-  mvn clean verify -X
+  mvn clean verify
 
