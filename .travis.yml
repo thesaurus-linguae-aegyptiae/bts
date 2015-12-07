@@ -1,0 +1,7 @@
+language: java
+jdk:
+  - openjdk 7
+  - openjdk 8
+script:
+  mvn clean verify -X
+
