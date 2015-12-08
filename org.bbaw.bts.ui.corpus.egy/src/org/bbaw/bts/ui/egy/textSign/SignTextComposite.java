@@ -1849,9 +1849,11 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 									// TODO add relating object to all figures between begin and end figure!
 									if (ref.getEndId() != null && ! ref.getEndId().equals(ref.getBeginId()))  {
 										ElementFigure figEnd = (ElementFigure) wordMap.get(ref.getEndId());
-										figEnd.addRelatingObject(object);
-										processStylingAnnotations(fig, object);
-										updateRelatingObjectFigureMap(object.get_id(), figEnd);
+										if (figEnd != null) {
+											figEnd.addRelatingObject(object);
+											processStylingAnnotations(fig, object);
+											updateRelatingObjectFigureMap(object.get_id(), figEnd);
+										}
 									} 
 								} 
 								
