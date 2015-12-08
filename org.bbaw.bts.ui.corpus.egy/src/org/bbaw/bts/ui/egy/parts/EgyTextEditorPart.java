@@ -581,10 +581,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					embeddedEditorParentComp.addDisposeListener(new DisposeListener() {
 						@Override
 						public void widgetDisposed(DisposeEvent e) {
-							// remove editor contents (including annotation model)
+							// remove translit editor contents (including annotation model)
 							// before xtext HighlightingHelper gets a chance
 							// to clog main thread with its painful editor dismantling.
-							loadInput(null);
+							loadInputTranscription(null, relatingObjects, null);
 						}
 					});
 
