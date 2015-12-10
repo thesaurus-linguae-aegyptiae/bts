@@ -898,6 +898,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			
 			cachedCursor = embeddedEditor.getViewer().getTextWidget()
 					.getCaretOffset();
+			final int len = ev.y - ev.x;
 			updateModelFromTranscription();
 			
 			//selectedTextItem
@@ -1019,6 +1020,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 												.getTextWidget()
 												.setCaretOffset(
 														cachedCursor);
+										embeddedEditor.getViewer().revealRange(cachedCursor, len);
 									} catch (Exception e) {
 									}
 								}
