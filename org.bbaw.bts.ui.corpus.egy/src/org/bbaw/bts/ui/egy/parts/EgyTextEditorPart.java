@@ -735,17 +735,18 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						public void menuShown(MenuEvent e) {
 							
 							
-							if (checkTransliterationHasNoErrors(text))
-							{
-								 MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
-					             itemCopy.setText("Copy with Lemmata" );
-					             itemCopy.addSelectionListener(new SelectionAdapter() {
+							if (checkTransliterationHasNoErrors(text)) {
+								if (!btsTextEvent.getSelectedItems().isEmpty()) {
+									MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
+						            itemCopy.setText("Copy with Lemmata" );
+						            itemCopy.addSelectionListener(new SelectionAdapter() {
 									
-									@Override
-									public void widgetSelected(SelectionEvent e) {
-										copyTextWithLemmata();
-									}
-								});
+										@Override
+										public void widgetSelected(SelectionEvent e) {
+											copyTextWithLemmata();
+										}
+						            });
+								}
 								if (deepCopyCache != null)
 								{
 									MenuItem itemPaste = new MenuItem((Menu) menu, SWT.NONE);
@@ -1165,6 +1166,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	private boolean checkTransliterationHasNoErrors(BTSText text2) {
+		// XXX irgendwo fehler: wenn vorher irgendwann man errors drin waren,
+		// bleibt das auch wenn man den text wechselt...
 		IXtextDocument document = embeddedEditor.getDocument();
 
 		EList<EObject> objects = document
