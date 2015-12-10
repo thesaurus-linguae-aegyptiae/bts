@@ -411,6 +411,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private long lastSelectionTimeStamp = 0;
 
+	private Job delaySelectionJob;
+
 	
 	/**
 	 * Instantiates a new egy text editor part.
@@ -1451,9 +1453,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
 		btsEvent.data = text;
-		
-		if (this.btsTextEvent == null) {
-			Job j = new Job("delay_selection_processing"){
+		if (this.delaySelectionJob == null) {
+			this.btsTextEvent = btsEvent;
+			Job.getJobManager().cancel(BTSTextSelectionEvent.class);
+			delaySelectionJob = new Job("delay_selection_processing"){
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					while (System.nanoTime() < lastSelectionTimeStamp + 350000000)
@@ -1476,15 +1479,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							
 						}
 					});
-					btsTextEvent = null;
+					delaySelectionJob = null;
 					return Status.OK_STATUS;
 				}
+				@Override
+				public boolean belongsTo(Object family) {
+					return family.equals(BTSTextSelectionEvent.class);
+				}
 			};
-			j.schedule(400);
+			this.delaySelectionJob.schedule(400);
+		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent != null) 
+				|| (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
 			this.btsTextEvent = btsEvent;
-		} else if (!(event instanceof CaretEvent) || (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
-			this.btsTextEvent = btsEvent;
-		lastSelectionTimeStamp = System.nanoTime();
+		this.lastSelectionTimeStamp = System.nanoTime();
 	}
 	
 
