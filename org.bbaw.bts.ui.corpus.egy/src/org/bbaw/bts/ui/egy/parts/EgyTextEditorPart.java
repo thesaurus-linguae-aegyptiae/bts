@@ -1253,6 +1253,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings({ "rawtypes", "restriction" })
 	protected void loadInputTranscription(BTSText localtext,
 			List<BTSObject> localRelatingObjects, IProgressMonitor monitor) {
+
+		if (delaySelectionJob != null)
+			delaySelectionJob.cancel();
+		delaySelectionJob = new Job("text_selection_processing_sleeping"){
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				long t = System.currentTimeMillis();
+				while (System.currentTimeMillis() < t+3000)
+					try {
+						Thread.sleep(500);
+					} catch (Exception e) {}
+				delaySelectionJob = null;
+				return Status.OK_STATUS;
+			}
+		};
+
 		text = localtext;
 		loading = true;
 		lemmaAnnotationMap = new HashMap<String, List<Object>>();
@@ -1334,6 +1350,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		oruler.update();
 
 		loading = false;
+		delaySelectionJob.schedule();
 	}
 	
 	/**
