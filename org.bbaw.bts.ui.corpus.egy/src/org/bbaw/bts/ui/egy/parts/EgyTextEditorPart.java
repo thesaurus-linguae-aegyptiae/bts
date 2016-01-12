@@ -1510,8 +1510,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				}
 			};
 			this.delaySelectionJob.schedule(400);
-		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent != null) 
-				|| (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
+		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent == null)
+			|| (this.btsTextEvent.getOriginalEvent() instanceof CaretEvent))
 			this.btsTextEvent = btsEvent;
 		this.lastSelectionTimeStamp = System.nanoTime();
 	}
