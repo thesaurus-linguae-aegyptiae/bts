@@ -44,6 +44,7 @@ import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.services.IServiceConstants;
@@ -60,6 +61,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.osgi.service.event.Event;
@@ -189,6 +191,9 @@ public class AnnotationsPart implements EventHandler {
 		scrollComposite.setContent(composite);
 		eventBroker.subscribe("event_text_relating_objects/*", this);
 		constructed = true;
+
+		context.set("org.bbaw.bts.corpus.annotationsPart.filter", 
+				new Vector<String>(Arrays.asList("comments", "glosses")));
 	}
 	
 	@Inject
@@ -537,6 +542,32 @@ public class AnnotationsPart implements EventHandler {
 			return filteredRelatingObjects.subList(0 , MAX_RELATED_OBJECTS);
 		}
 		return filteredRelatingObjects;
+	}
+
+	@Inject
+	@Optional
+	void eventReceivedRelatingObjectsFilterChanged(
+			@UIEventTopic(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER) final String filter) {
+		System.out.println("ANNO PART RECEIVED TOGGLE FILTER EVENT: "+filter);
+		Vector<String> types = (Vector<String>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
+		// toggle
+		if (types.contains(filter)) {
+			types.remove(filter);
+		} else
+			types.add(filter);
+		context.set("org.bbaw.bts.corpus.annotationsPart.filter", types);
+		for (Control c : composite.getChildren())
+			if (c instanceof RelatedObjectGroup) {
+				RelatedObjectGroup ro = (RelatedObjectGroup)c;
+				BTSObject o = ro.getObject();
+				if (ro instanceof RelatedObjectGroupSubtext) {
+					ro.setVisible(types.contains("glosses"));
+				} else if (ro instanceof RelatedObjectGroupRubrum) {
+					ro.setVisible(types.contains("rubra"));
+				} else if (ro instanceof RelatedObjectGroupComment) {
+					ro.setVisible(types.contains("comments"));
+				}
+			}
 	}
  
 	private void eventReceivedRelatingObjectsSelectedEvents(Object objects) {
