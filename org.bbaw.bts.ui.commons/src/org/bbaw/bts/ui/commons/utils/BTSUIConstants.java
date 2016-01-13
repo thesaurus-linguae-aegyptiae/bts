@@ -199,6 +199,8 @@ public class BTSUIConstants {
 	/** The Constant EVENT_TEXT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
 	
+	public static final String EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER = "event_text_relating_objects_toggle_filter";
+
 	/** The Constant EVENT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";
 
