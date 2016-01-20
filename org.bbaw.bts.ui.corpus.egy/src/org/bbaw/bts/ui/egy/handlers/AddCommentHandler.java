@@ -7,9 +7,7 @@ import org.bbaw.bts.btsmodel.BTSInterTextReference;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
-import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
-import org.bbaw.bts.core.controller.dialogControllers.CompareObjectsController;
 import org.bbaw.bts.core.controller.generalController.CommentController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -20,7 +18,7 @@ import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
-import org.eclipse.e4.ui.services.internal.events.EventBroker;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 
 public class AddCommentHandler {
@@ -28,7 +26,6 @@ public class AddCommentHandler {
 	public void execute(
 			@Named(IServiceConstants.ACTIVE_SELECTION) @Optional BTSTextSelectionEvent event,
 			@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell,
-			EventBroker eventBroker,
 			CommentController commentController, IEclipseContext context) {
 			BTSObject dbbaseObject = (BTSObject) event.data;
 		
@@ -62,10 +59,12 @@ public class AddCommentHandler {
 				CommentEditorDialog dialog = ContextInjectionFactory.make(
 						CommentEditorDialog.class, child);
 
-				if (dialog.open() == dialog.OK) {
+				if (dialog.open() == SWT.OK) {
 					
 				}
-				
+
+				child.dispose();
+
 			}
 			// FIXME eventBroker.post("model_add/BTSAnnotation", object);
 	}
