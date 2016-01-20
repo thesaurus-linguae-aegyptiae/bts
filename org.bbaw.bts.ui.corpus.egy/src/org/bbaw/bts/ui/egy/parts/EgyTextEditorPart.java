@@ -417,6 +417,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private long lastSelectionTimeStamp = 0;
 
+	private Job delaySelectionJob;
+
 	
 	/**
 	 * Instantiates a new egy text editor part.
@@ -747,17 +749,18 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						public void menuShown(MenuEvent e) {
 							
 							
-							if (checkTransliterationHasNoErrors(text))
-							{
-								 MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
-					             itemCopy.setText("Copy with Lemmata" );
-					             itemCopy.addSelectionListener(new SelectionAdapter() {
+							if (checkTransliterationHasNoErrors(text)) {
+								if (!btsTextEvent.getSelectedItems().isEmpty()) {
+									MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
+						            itemCopy.setText("Copy with Lemmata" );
+						            itemCopy.addSelectionListener(new SelectionAdapter() {
 									
-									@Override
-									public void widgetSelected(SelectionEvent e) {
-										copyTextWithLemmata();
-									}
-								});
+										@Override
+										public void widgetSelected(SelectionEvent e) {
+											copyTextWithLemmata();
+										}
+						            });
+								}
 								if (deepCopyCache != null)
 								{
 									MenuItem itemPaste = new MenuItem((Menu) menu, SWT.NONE);
@@ -910,6 +913,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			
 			cachedCursor = embeddedEditor.getViewer().getTextWidget()
 					.getCaretOffset();
+			final int len = ev.y - ev.x;
 			updateModelFromTranscription();
 			
 			//selectedTextItem
@@ -1031,6 +1035,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 												.getTextWidget()
 												.setCaretOffset(
 														cachedCursor);
+										embeddedEditor.getViewer().revealRange(cachedCursor, len);
 									} catch (Exception e) {
 									}
 								}
@@ -1174,6 +1179,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	private boolean checkTransliterationHasNoErrors(BTSText text2) {
+		// XXX irgendwo fehler: wenn vorher irgendwann man errors drin waren,
+		// bleibt das auch wenn man den text wechselt...
 		IXtextDocument document = embeddedEditor.getDocument();
 
 		EList<EObject> objects = document
@@ -1264,6 +1271,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings({ "rawtypes", "restriction" })
 	protected void loadInputTranscription(BTSText localtext,
 			List<BTSObject> localRelatingObjects, IProgressMonitor monitor) {
+
+		if (delaySelectionJob != null)
+			delaySelectionJob.cancel();
+		delaySelectionJob = new Job("text_selection_processing_sleeping"){
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				long t = System.currentTimeMillis();
+				while (System.currentTimeMillis() < t+3000)
+					try {
+						Thread.sleep(500);
+					} catch (Exception e) {}
+				delaySelectionJob = null;
+				return Status.OK_STATUS;
+			}
+		};
+
 		text = localtext;
 		loading = true;
 		lemmaAnnotationMap = new HashMap<String, List<Object>>();
@@ -1345,6 +1368,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		oruler.update();
 
 		loading = false;
+		delaySelectionJob.schedule();
 	}
 	
 	/**
@@ -1618,9 +1642,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		System.out.println("Textselection x y : " + btsEvent.x + " " +
 		 btsEvent.y);
 		btsEvent.data = text;
-		
-		if (this.btsTextEvent == null) {
-			Job j = new Job("delay_selection_processing"){
+		if (this.delaySelectionJob == null) {
+			this.btsTextEvent = btsEvent;
+			Job.getJobManager().cancel(BTSTextSelectionEvent.class);
+			delaySelectionJob = new Job("delay_selection_processing"){
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					while (System.nanoTime() < lastSelectionTimeStamp + 350000000)
@@ -1643,15 +1668,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							
 						}
 					});
-					btsTextEvent = null;
+					delaySelectionJob = null;
 					return Status.OK_STATUS;
 				}
+				@Override
+				public boolean belongsTo(Object family) {
+					return family.equals(BTSTextSelectionEvent.class);
+				}
 			};
-			j.schedule(400);
+			this.delaySelectionJob.schedule(400);
+		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent == null)
+			|| (this.btsTextEvent.getOriginalEvent() instanceof CaretEvent))
 			this.btsTextEvent = btsEvent;
-		} else if (!(event instanceof CaretEvent) || (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
-			this.btsTextEvent = btsEvent;
-		lastSelectionTimeStamp = System.nanoTime();
+		this.lastSelectionTimeStamp = System.nanoTime();
 	}
 	
 
