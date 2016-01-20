@@ -307,7 +307,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected void editReference() {
-		BTSTextSelectionEvent selectionEvent = parentPart.getTestSelectionEvent();
+		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
 		if (selectionEvent == null) return;
 		
 		// in object suchen, ob relation auf Text besteht
@@ -375,7 +375,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected void addReference() {
-		BTSTextSelectionEvent selectionEvent = parentPart.getTestSelectionEvent();
+		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
 		if (selectionEvent == null) return;
 		
 		// in object suchen, ob relation auf Text besteht
@@ -428,7 +428,7 @@ public abstract class RelatedObjectGroup extends Composite{
 	}
 
 	protected void removeReference() {
-		BTSTextSelectionEvent selectionEvent = parentPart.getTestSelectionEvent();
+		BTSTextSelectionEvent selectionEvent = parentPart.getTextSelectionEvent();
 		if (selectionEvent == null) return;
 		
 		// in object suchen, ob relation auf Text besteht

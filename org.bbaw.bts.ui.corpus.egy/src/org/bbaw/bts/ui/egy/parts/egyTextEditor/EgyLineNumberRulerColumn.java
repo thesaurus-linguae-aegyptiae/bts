@@ -44,12 +44,15 @@ public class EgyLineNumberRulerColumn extends LineNumberRulerColumn {
 
 	@Override
 	protected String createDisplayString(int line) {
-		return Integer.toString(line);
+		// enforce sufficient space after right-most digit
+		return Integer.toString(line) + " ";
 	}
 
 	protected int computeNumberOfDigits() {
-		return 4;
+		// use constant number of digit unless we really need more (10k lines or more)
+		return Math.max(super.computeNumberOfDigits()+1, 4);
 	}
+
 	@Override
 	public int getWidth() {
 		// TODO Auto-generated method stub

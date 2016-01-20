@@ -3,21 +3,22 @@ package org.bbaw.bts.ui.corpus.parts;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.annotation.PostConstruct;
 
 import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
-import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
@@ -154,7 +155,7 @@ public class AnnotationsPart implements EventHandler {
 					org.eclipse.swt.widgets.Event event) {
 				RelatedObjectGroup roGroup = (RelatedObjectGroup) event.widget;
 				selfselection = true;
-				setSelectedInternal(new RelatedObjectGroup[] { roGroup }, true);
+				setSelectedInternal(Arrays.asList(roGroup), true);
 				selfselection = false;
 			}
 
@@ -355,73 +356,49 @@ public class AnnotationsPart implements EventHandler {
 		roGroup.addSelectionListener(selectionListener);
 		return roGroup;
 	}
-	protected void setSelectedInternal(RelatedObjectGroup[] selectedGroups, boolean postSelection) {
+
+
+
+	protected void setSelectedInternal(List<RelatedObjectGroup> selectedGroups, boolean postSelection) {
+		// TODO: equals heiszt same items in same order...
 		if (internalSelectedGroup != null && internalSelectedGroup.equals(selectedGroups))
-		{
 			return;
-		}
+
+		// TODO: O(n^2) might be a bit expensive for avoidance of unnecessary deselection ...
 		for (RelatedObjectGroup roGroup : internalSelectedGroup)
-		{
-			if (!roGroup.isDisposed())
-			{
-				boolean found = false;
-				if (selectedGroups != null)
-				{
-					for (RelatedObjectGroup g :  selectedGroups)
-					{
-						if (g.equals(roGroup))
-						{
-							found = true;
-							break;
-						}
-					}
-				}
-				if (!found)
-				{
-					setDeselectGroup(roGroup);
-				}
-			}
-		}
-		internalSelectedGroup.clear();
-		if (selectedGroups == null)
-		{
+			if (!roGroup.isDisposed() && !selectedGroups.contains(roGroup))
+				setGroupSelected(roGroup, false);
+
+		if (selectedGroups == null) {
+			internalSelectedGroup.clear();
 			return;
-		}
-		for (RelatedObjectGroup g : selectedGroups)
-		{
-			internalSelectedGroup.add(g);
-		}
+		} else
+			internalSelectedGroup = selectedGroups;
 		List<BTSObject> selObjects = new Vector<BTSObject>(internalSelectedGroup.size());
 		
 		// reveal
-		if (!selfselection && !internalSelectedGroup.isEmpty() && !scrollComposite.isDisposed())
-		{
-			RelatedObjectGroup first = internalSelectedGroup.get(0);
-			scrollComposite.setOrigin(first.getLocation());
-		}
-		for (RelatedObjectGroup roGroup : internalSelectedGroup)
-		{
-			selObjects.add(roGroup.getObject());
-			setSelectGroup(roGroup);
+		if (!internalSelectedGroup.isEmpty()) {
+			// position scrollbar(s)
+			if (!selfselection && !scrollComposite.isDisposed())
+				scrollComposite.setOrigin(internalSelectedGroup.get(0).getLocation());
+			for (RelatedObjectGroup roGroup : internalSelectedGroup) {
+				selObjects.add(roGroup.getObject());
+				setGroupSelected(roGroup, true);
+			}
 		}
 		if (postSelection)
-		{
-		eventBroker.post(
-				BTSUIConstants.EVENT_RELATING_OBJECTS_SELECTED,
-				selObjects);
-		}
+			eventBroker.post(
+				BTSUIConstants.EVENT_RELATING_OBJECTS_SELECTED, selObjects);
 	}
-	private void setSelectGroup(RelatedObjectGroup roGroup) {
-//		WidgetElement.setCSSClass(roGroup.getGroup(), BTSUIConstants.CSS_SELECTED_CLASS_NAME);
-//		System.out.println("select group " + roGroup.getObject().getName());
-		roGroup.setSelected(true);
-		
-	}
-	private void setDeselectGroup(RelatedObjectGroup roGroup) {
-//		WidgetElement.setCSSClass(roGroup.getGroup(), BTSUIConstants.CSS_UNSELECTED_CLASS_NAME);
-		roGroup.setSelected(false);
+	
 
+	private void setGroupSelected(RelatedObjectGroup group, boolean select) {
+		//TODO CSS
+		//String csscls = select ? BTSUIConstants.CSS_SELECTED_CLASS_NAME : BTSUIConstants.CSS_UNSELECTED_CLASS_NAME;
+		//WidgetElement.setCSSClass(group.getGroup(), csscls);
+		group.setSelected(select);
 	}
+	
 	@PreDestroy
 	public void preDestroy() {
 		eventBroker.unsubscribe(this);
@@ -453,9 +430,7 @@ public class AnnotationsPart implements EventHandler {
 		{
 			RelatedObjectGroup g = objectWidgetMap.get(selection);
 			if (g != null)
-			{
-				setSelectedInternal(new RelatedObjectGroup[]{g}, false);
-			}
+				setSelectedInternal(Arrays.asList(g), false);
 		}
 		else if (selection instanceof BTSCorpusObject && !selection.equals(parentObject))
 		{
@@ -514,6 +489,18 @@ public class AnnotationsPart implements EventHandler {
 		}
 	}
 	
+	/**
+	 * Filters given objects by type, limits number to {@link MAX_RELATED_OBJECTS} (40).
+	 * <p>Filter conditions are currently hard-coded and as follows:
+	 * <ul><li>Anything other than {@link BTSCorpusObject} is in</li>
+	 * <li>if its a {@link BTSCorpusObject}, object must either be
+	 * <ul><li> {@link BTSText} of type "glosse" or "subtext"</li>
+	 * <li>or a {@link BTSAnnotation}.</li></ul>
+	 * to be in</li></ul>
+	 * @param relatingObjects
+	 * @param monitor can be null
+	 * @return
+	 */
 	private List<BTSObject> filterAndCutRelatingObjects(
 			List<BTSObject> relatingObjects, IProgressMonitor monitor) {
 		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size() / 2);
@@ -574,10 +561,11 @@ public class AnnotationsPart implements EventHandler {
 				{
 					RelatedObjectGroup roGroup = makeRelatedObjectGroup(
 							(BTSObject) o, composite);
-
-					objectWidgetMap.put((BTSObject) o, roGroup);
-					groups.add(roGroup);
-					resizeRequired = true;
+					if (roGroup != null) {
+						objectWidgetMap.put((BTSObject) o, roGroup);
+						groups.add(roGroup);
+						resizeRequired = true;
+					}
 				}
 			}
 			if (resizeRequired)
@@ -587,12 +575,12 @@ public class AnnotationsPart implements EventHandler {
 				scrollComposite.setMinSize(composite.computeSize(
 						r.width, SWT.DEFAULT));
 			}
-			setSelectedInternal(groups.toArray(new RelatedObjectGroup[groups.size()]), false);
+			setSelectedInternal(groups, false);
 			
 		}
 		
 	}
-	public BTSTextSelectionEvent getTestSelectionEvent() {
+	public BTSTextSelectionEvent getTextSelectionEvent() {
 		return textSelectionEvent;
 	}
 	
