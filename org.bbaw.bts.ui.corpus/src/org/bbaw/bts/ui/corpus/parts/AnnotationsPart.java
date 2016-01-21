@@ -33,10 +33,6 @@ import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupComment;
 import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupImpl;
 import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupRubrum;
 import org.bbaw.bts.ui.corpus.parts.annotationsPart.RelatedObjectGroupSubtext;
-import org.eclipse.swt.widgets.Composite;
-
-import javax.annotation.PreDestroy;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -47,23 +43,25 @@ import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
+import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
+import org.eclipse.e4.ui.model.application.ui.menu.MMenuElement;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
-import org.eclipse.e4.ui.workbench.modeling.ESelectionService;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.ControlAdapter;
 import org.eclipse.swt.events.ControlEvent;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.wb.swt.SWTResourceManager;
 import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
@@ -119,6 +117,8 @@ public class AnnotationsPart implements EventHandler {
 
 	/** The part. */
 	private MPart part;
+
+	private BTSRelatingObjectsLoadingEvent relatingObjectsEvent;
 
 	@Inject
 	public AnnotationsPart() {
@@ -192,10 +192,18 @@ public class AnnotationsPart implements EventHandler {
 		eventBroker.subscribe("event_text_relating_objects/*", this);
 		constructed = true;
 
-		context.set("org.bbaw.bts.corpus.annotationsPart.filter", 
-				new Vector<String>(Arrays.asList("comments", "glosses")));
+		// initialize filters from fragment model definition
+		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
+		for (MMenu m : part.getMenus())
+			if (m.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu"))
+				for (MMenuElement mi : m.getChildren())
+					if (mi instanceof MHandledMenuItem)
+						filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
+
+		context.set("org.bbaw.bts.corpus.annotationsPart.filter", filters); 
 	}
-	
+
+
 	@Inject
 	@Optional
 	void eventReceivedRelatingObjectsLoadedEvents(
@@ -203,6 +211,7 @@ public class AnnotationsPart implements EventHandler {
 		parentObject = event.getObject();
 		queryId = "relations.objectId-" + parentObject.get_id();
 		if (event != null && !event.getRelatingObjects().isEmpty()) {
+			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
 					loadRelatingObjects(event);
@@ -284,7 +293,7 @@ public class AnnotationsPart implements EventHandler {
 									new BTSObjectTempSortKeyComparator());
 							if (monitor != null) monitor.beginTask("Load related objects list", list.size());
 							for (Object o : list) {
-								if (o instanceof BTSObject) {
+								if (o instanceof BTSObject && isRelatedObjVisible((BTSObject)o)) {
 									RelatedObjectGroup roGroup = makeRelatedObjectGroup(
 											(BTSObject) o, composite);
 
@@ -493,19 +502,32 @@ public class AnnotationsPart implements EventHandler {
 			}
 		}
 	}
-	
-	/**
-	 * Filters given objects by type, limits number to {@link MAX_RELATED_OBJECTS} (40).
-	 * <p>Filter conditions are currently hard-coded and as follows:
-	 * <ul><li>Anything other than {@link BTSCorpusObject} is in</li>
-	 * <li>if its a {@link BTSCorpusObject}, object must either be
-	 * <ul><li> {@link BTSText} of type "glosse" or "subtext"</li>
-	 * <li>or a {@link BTSAnnotation}.</li></ul>
-	 * to be in</li></ul>
-	 * @param relatingObjects
-	 * @param monitor can be null
-	 * @return
-	 */
+
+
+	private boolean isRelatedObjVisible(BTSObject o) {
+		@SuppressWarnings("unchecked")
+		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
+		String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
+		if (o instanceof BTSCorpusObject) {
+			if (o instanceof BTSText) {
+				if (o.getType() != null)
+					if (o.getType().equalsIgnoreCase("glosse")
+							|| o.getType().equalsIgnoreCase("subtext"))
+						key += "glosse"; 
+			} else if (o instanceof BTSAnnotation) {
+				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
+					key += "rubra";
+				} else
+					return true;
+			} else if (o instanceof BTSComment) {
+				key += "comments";
+			} else
+				return true;
+		}
+		return filters.get(key);
+	}
+
+
 	private List<BTSObject> filterAndCutRelatingObjects(
 			List<BTSObject> relatingObjects, IProgressMonitor monitor) {
 		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size() / 2);
@@ -549,27 +571,15 @@ public class AnnotationsPart implements EventHandler {
 	void eventReceivedRelatingObjectsFilterChanged(
 			@UIEventTopic(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER) final String filter) {
 		System.out.println("ANNO PART RECEIVED TOGGLE FILTER EVENT: "+filter);
-		Vector<String> types = (Vector<String>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
+		@SuppressWarnings("unchecked")
+		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
 		// toggle
-		if (types.contains(filter)) {
-			types.remove(filter);
-		} else
-			types.add(filter);
-		context.set("org.bbaw.bts.corpus.annotationsPart.filter", types);
-		for (Control c : composite.getChildren())
-			if (c instanceof RelatedObjectGroup) {
-				RelatedObjectGroup ro = (RelatedObjectGroup)c;
-				BTSObject o = ro.getObject();
-				if (ro instanceof RelatedObjectGroupSubtext) {
-					ro.setVisible(types.contains("glosses"));
-				} else if (ro instanceof RelatedObjectGroupRubrum) {
-					ro.setVisible(types.contains("rubra"));
-				} else if (ro instanceof RelatedObjectGroupComment) {
-					ro.setVisible(types.contains("comments"));
-				}
-			}
+		String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + filter;
+		filters.put(key, !filters.get(key));
+		if (this.relatingObjectsEvent != null)
+			eventReceivedRelatingObjectsLoadedEvents(relatingObjectsEvent);
 	}
- 
+
 	private void eventReceivedRelatingObjectsSelectedEvents(Object objects) {
 		if (objects == null)
 		{

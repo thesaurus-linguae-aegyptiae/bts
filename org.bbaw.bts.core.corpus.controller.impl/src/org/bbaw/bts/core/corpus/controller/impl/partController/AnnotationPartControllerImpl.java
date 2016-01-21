@@ -1,7 +1,6 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 import javax.inject.Inject;
@@ -11,11 +10,8 @@ import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
-import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
 import org.bbaw.bts.core.services.BTSCommentService;
-import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
-import org.bbaw.bts.core.services.corpus.BTSThsEntryService;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -29,7 +25,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 
 	@Inject
 	private CorpusObjectService corpusObjectService;
-	
+
 	@Inject
 	private BTSCommentService commentService;
 
@@ -38,7 +34,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 	@Named(BTSCoreConstants.CURRENT_DB_COLLECTION_CONTEXT)
 	@Optional
 	private String dbcollectionContext;
-	
+
 	@Override
 	public void save(BTSObject object) {
 		if (object instanceof BTSCorpusObject)
@@ -52,6 +48,8 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		
 		
 	}
+
+
 
 	@Override
 	public List<BTSObject> findRelatingObjects(BTSObject object, IProgressMonitor monitor) {
@@ -87,6 +85,7 @@ public class AnnotationPartControllerImpl implements AnnotationPartController {
 		children.addAll(commentService.query(query, BTSConstants.OBJECT_STATE_ACTIVE, true, monitor));
 		return children;
 	}
+
 	@Override
 	public boolean checkAndFullyLoad(BTSCorpusObject object, boolean checkForConflicts)
 	{
