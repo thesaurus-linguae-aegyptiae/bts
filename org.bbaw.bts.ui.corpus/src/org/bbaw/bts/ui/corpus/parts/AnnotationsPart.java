@@ -599,7 +599,7 @@ public class AnnotationsPart implements EventHandler {
 					groups.add(g);
 				}
 				else // group not found because was not loaded earlier
-				{
+				if (isRelatedObjVisible((BTSObject)o)) {
 					RelatedObjectGroup roGroup = makeRelatedObjectGroup(
 							(BTSObject) o, composite);
 					if (roGroup != null) {
@@ -688,12 +688,14 @@ public class AnnotationsPart implements EventHandler {
 		
 	}
 	private void addObjectToViewerList(BTSObject object) {
-		RelatedObjectGroup roGroup = makeRelatedObjectGroup(object, composite);
-		objectWidgetMap.put(object, roGroup);
-		Rectangle r = scrollComposite.getClientArea();
-		composite.layout();
-		scrollComposite.setMinSize(composite.computeSize(r.width,
-				SWT.DEFAULT));
+		if (isRelatedObjVisible(object)) {
+			RelatedObjectGroup roGroup = makeRelatedObjectGroup(object, composite);
+			objectWidgetMap.put(object, roGroup);
+			Rectangle r = scrollComposite.getClientArea();
+			composite.layout();
+			scrollComposite.setMinSize(composite.computeSize(r.width,
+					SWT.DEFAULT));
+		}
 	}
 	
 	
