@@ -439,7 +439,7 @@
                   <children xsi:type="menu:HandledMenuItem" xmi:id="_rR4D8LnbEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.glosses" label="Show Glosses" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
                     <parameters xmi:id="_6CG-ELnbEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="glosses"/>
                   </children>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_gtgS4MBVEeWn7e3vTos4TQ" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_gtgS4MBVEeWn7e3vTos4TQ" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations" label="Show Annotations" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
                     <parameters xmi:id="_kjklgMBVEeWn7e3vTos4TQ" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="annotations"/>
                   </children>
                 </menus>
