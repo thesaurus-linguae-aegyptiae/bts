@@ -16,13 +16,17 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.bbaw.bts.btsmodel.BTSComment;
+import org.bbaw.bts.btsmodel.BTSConfig;
+import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
+import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
+import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsLoadingEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -42,10 +46,15 @@ import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.model.application.commands.MCommand;
+import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
+import org.eclipse.e4.ui.model.application.commands.MParameter;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuElement;
+import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.modeling.EPartService;
@@ -119,6 +128,9 @@ public class AnnotationsPart implements EventHandler {
 	private MPart part;
 
 	private BTSRelatingObjectsLoadingEvent relatingObjectsEvent;
+	
+	@Inject
+	private BTSConfigurationService confService;
 
 	@Inject
 	public AnnotationsPart() {
@@ -194,13 +206,68 @@ public class AnnotationsPart implements EventHandler {
 
 		// initialize filters from fragment model definition
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
+		MMenu viewmenu = null;
 		for (MMenu m : part.getMenus())
 			if (m.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu"))
-				for (MMenuElement mi : m.getChildren())
-					if (mi instanceof MHandledMenuItem)
-						filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
+				viewmenu = m;
+		
+		if (viewmenu != null) {
+			MCommand menuFilterCommand = null;
+			// save menu item selection flags from application model to context
+			for (MMenuElement mi : viewmenu.getChildren())
+				if (mi instanceof MHandledMenuItem) {
+					filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
+					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
+				}
 
-		context.set("org.bbaw.bts.corpus.annotationsPart.filter", filters); 
+			// populate menu items for annotation types
+			BTSAnnotation anno = BtsCorpusModelFactory.eINSTANCE.createBTSAnnotation();
+			
+			BTSConfigItem typeConf = confService.getObjectTypeConfigItemProcessedClones(anno);
+			if (!typeConf.getChildren().isEmpty()) {
+				MMenu submenu = MMenuFactory.INSTANCE.createMenu();
+				submenu.setLabel("Annotation Types");
+
+				for (BTSConfig c : typeConf.getChildren())
+					if (c instanceof BTSConfigItem) {
+						BTSConfigItem ci = (BTSConfigItem)c;
+						System.out.println(" "+ci.getValue());
+						MMenuElement mi = null;
+						anno.setType(ci.getValue());
+						BTSConfigItem subtypeConf = confService.getObjectSubtypeConfigItemProcessedClones(anno);
+						System.out.println(" annotation config item subtype: "+subtypeConf.getValue());
+						System.out.println(" children: ");
+						if (!subtypeConf.getChildren().isEmpty()) { // TODO drop null values
+							mi = MMenuFactory.INSTANCE.createMenu();
+							for (BTSConfig cc : subtypeConf.getChildren())
+								if (cc instanceof BTSConfigItem) {
+									BTSConfigItem cci = (BTSConfigItem)cc;
+									String key = ci.getValue() + "." + cci.getValue();
+									MHandledMenuItem mii = MMenuFactory.INSTANCE.createHandledMenuItem();
+									mii.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + key);
+									mii.setCommand(menuFilterCommand);
+									MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
+									menuFilterParam.setElementId("annotationsPartFilterParam");
+									menuFilterParam.setValue(key);
+									mii.getParameters().add(menuFilterParam);
+									mii.setLabel(cci.getValue());
+									((MMenu)mi).getChildren().add(mii);
+									System.out.println("  "+cci.getValue());
+								}
+						} else {
+							mi = MMenuFactory.INSTANCE.createDirectMenuItem();
+							
+						}
+						mi.setLabel(ci.getValue());
+						submenu.getChildren().add(mi);
+					}
+				viewmenu.getChildren().add(submenu);
+
+			}
+			
+		}
+		context.set("org.bbaw.bts.corpus.annotationsPart.filter", filters);
+		
 	}
 
 
