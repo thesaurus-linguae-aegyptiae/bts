@@ -50,6 +50,7 @@ import org.eclipse.e4.ui.model.application.commands.MCommand;
 import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
 import org.eclipse.e4.ui.model.application.commands.MParameter;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
+import org.eclipse.e4.ui.model.application.ui.menu.ItemType;
 import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
@@ -237,26 +238,31 @@ public class AnnotationsPart implements EventHandler {
 						BTSConfigItem subtypeConf = confService.getObjectSubtypeConfigItemProcessedClones(anno);
 						System.out.println(" annotation config item subtype: "+subtypeConf.getValue());
 						System.out.println(" children: ");
-						if (!subtypeConf.getChildren().isEmpty()) { // TODO drop null values
+						
+						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
+						for (BTSConfig cc : subtypeConf.getChildren())
+							if (cc instanceof BTSConfigItem) {
+								BTSConfigItem cci = (BTSConfigItem)cc;
+								if (cci.getValue() != null)
+									subTypeConfItems.add(cci);
+							}
+						
+						if (!subTypeConfItems.isEmpty()) {
 							mi = MMenuFactory.INSTANCE.createMenu();
-							for (BTSConfig cc : subtypeConf.getChildren())
-								if (cc instanceof BTSConfigItem) {
-									BTSConfigItem cci = (BTSConfigItem)cc;
-									String key = ci.getValue() + "." + cci.getValue();
-									MHandledMenuItem mii = MMenuFactory.INSTANCE.createHandledMenuItem();
-									mii.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + key);
-									mii.setCommand(menuFilterCommand);
-									MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
-									menuFilterParam.setElementId("annotationsPartFilterParam");
-									menuFilterParam.setValue(key);
-									mii.getParameters().add(menuFilterParam);
-									mii.setLabel(cci.getValue());
-									((MMenu)mi).getChildren().add(mii);
-									System.out.println("  "+cci.getValue());
-								}
+							String key = null;
+							for (BTSConfigItem cci : subTypeConfItems) {
+								key = ci.getValue() + "." + cci.getValue();
+								MHandledMenuItem mii = newFilterMenuItem(key);
+								mii.setCommand(menuFilterCommand);
+								mii.setLabel(cci.getValue());
+								((MMenu)mi).getChildren().add(mii);
+								System.out.println("  "+cci.getValue());
+								filters.put(mii.getElementId(), ((MHandledMenuItem)mii).isSelected());
+							}
 						} else {
-							mi = MMenuFactory.INSTANCE.createDirectMenuItem();
-							
+							mi = newFilterMenuItem(ci.getValue());
+							((MHandledMenuItem)mi).setCommand(menuFilterCommand);
+							filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
 						}
 						mi.setLabel(ci.getValue());
 						submenu.getChildren().add(mi);
@@ -270,6 +276,19 @@ public class AnnotationsPart implements EventHandler {
 		
 	}
 
+	
+	private MHandledMenuItem newFilterMenuItem(String key) {
+		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
+		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + key);
+		menuItem.setSelected(true);
+		menuItem.setType(ItemType.CHECK);
+		MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
+		menuFilterParam.setElementId("annotationsPartFilterParam");
+		menuFilterParam.setValue(key);
+		menuItem.getParameters().add(menuFilterParam);
+		return menuItem;
+	}
+	
 
 	@Inject
 	@Optional
