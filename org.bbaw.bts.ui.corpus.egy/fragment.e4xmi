@@ -32,7 +32,7 @@
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_y9kDIJ_tEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.1"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_wCpCkJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.9" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotation-add.png" tooltip="Add Annotation" command="_ogEtgP0_EeOsAKche49RIg"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_2lIfMJ_LEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem." label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/rubrum-add.png" tooltip="Add Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_VNhk0J_MEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.10" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/subtext-add.png" tooltip="Add Subtext/Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_VNhk0J_MEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.10" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/subtext-add.png" tooltip="Add Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_eGJLUJ_MEeS8kttfrCiCZg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.11" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" tooltip="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
       </toolbar>
     </elements>
@@ -277,7 +277,7 @@
         <children xsi:type="menu:ToolBarSeparator" xmi:id="_JBI1EPTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.toolbarseparator.1"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1EfTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.9" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/annotation-add.png" tooltip="Add Annotation" command="_ogEtgP0_EeOsAKche49RIg"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1EvTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem." label="" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/rubrum-add.png" tooltip="Add Rubrum" command="_vMxkwAawEeSOuJcvBP3MBw"/>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1E_TSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.10" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/subtext-add.png" tooltip="Add Subtext/Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1E_TSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.10" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/subtext-add.png" tooltip="Add Glosse" command="_1r5kUAawEeSOuJcvBP3MBw"/>
         <children xsi:type="menu:HandledToolItem" xmi:id="_JBI1FPTSEeSQXI5ezOq8Qg" elementId="org.bbaw.bts.ui.corpus.egy.handledtoolitem.11" iconURI="platform:/plugin/org.bbaw.bts.ui.resources.impl/icons/full/icon16/comment-add.png" tooltip="Add Comment" command="_GXtaUAaxEeSOuJcvBP3MBw"/>
       </toolbar>
     </elements>

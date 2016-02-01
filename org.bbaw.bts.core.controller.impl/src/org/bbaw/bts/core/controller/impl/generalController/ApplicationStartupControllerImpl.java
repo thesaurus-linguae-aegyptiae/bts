@@ -659,7 +659,7 @@ public class ApplicationStartupControllerImpl implements
 
 				// found updates, ask user if to install?
 				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
-					sync.asyncExec(new Runnable() {
+					sync.syncExec(new Runnable() {
 						@Override
 						public void run() {
 							String updates = "";

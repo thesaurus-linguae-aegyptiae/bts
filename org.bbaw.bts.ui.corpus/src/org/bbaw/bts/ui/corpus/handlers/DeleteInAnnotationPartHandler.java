@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.command.SetCommand;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.dialogs.MessageDialog;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Shell;
 
 public class DeleteInAnnotationPartHandler {
@@ -58,21 +59,22 @@ public class DeleteInAnnotationPartHandler {
 				{
 					MessageDialog dialog = new MessageDialog(shell, "Deletion not allowed", null,
 						    "You are not allowed to delete the selected objects.", MessageDialog.ERROR, new String[] { "OK" }, 0);
-					int result = dialog.open();
+					dialog.open();
 					return;
 				}
 			}
 			
 			MessageDialog dialog = new MessageDialog(shell, "Deletion", null,
-				    "You are about to delete all selected objects from AnnotationPart.\n\nAre you sure that you want to delete these objects?", MessageDialog.WARNING, new String[] { "Cancel", "Delete" }, 0);
+				    "You are about to delete all selected objects from AnnotationPart.\n\nAre you sure that you want to delete these objects?", MessageDialog.QUESTION, new String[] { "Delete", "Cancel" }, 1);
 			int result = dialog.open();
-			if (result == 0) return;
+			if (result == 1 || result == SWT.DEFAULT) 
+				return;
 			for (BTSObject o : objects)
 			{
 				((AdministrativDataObject) o)
 				.setState(BTSConstants.OBJECT_STATE_TERMINATED);
-			//General Command Controller... save!
-			commandController.save((BTSDBBaseObject) o);
+				//General Command Controller... save!
+				commandController.save((BTSDBBaseObject) o);
 			}
 		}
 	}

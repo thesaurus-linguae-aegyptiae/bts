@@ -193,6 +193,15 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	}
 	
+	/**
+	 * (De)activates {@link BTSWord}-wise graphical update on model changes.
+	 * BTWord objects currently on display in sign text editor get
+	 * notified on changes in corresponding database objects. By default, such
+	 * notifications lead to updates of the word's graphical representation.
+	 * This can temporarily disabled when update is not desirable, e.g. before
+	 * save operations. 
+	 * @param value
+	 */
 	public void setNotifyWords(boolean value) {
 		notifyWords = value;
 	}
