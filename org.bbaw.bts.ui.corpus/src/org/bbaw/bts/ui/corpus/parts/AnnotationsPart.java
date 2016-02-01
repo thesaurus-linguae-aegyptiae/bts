@@ -199,84 +199,85 @@ public class AnnotationsPart implements EventHandler {
 		((GridLayout)composite.getLayout()).marginHeight = 0;
 		((GridLayout)composite.getLayout()).marginWidth = 0;
 		((GridLayout)composite.getLayout()).verticalSpacing = 0;
-		
+
+		// populate extended annotation filter menu and initialize context node
+		extendAnnotationsFilterMenu();
 
 		scrollComposite.setContent(composite);
 		eventBroker.subscribe("event_text_relating_objects/*", this);
 		constructed = true;
+	}
 
+
+	private void extendAnnotationsFilterMenu() {
 		// initialize filters from fragment model definition
 		HashMap<String, Boolean> filters = new HashMap<String, Boolean>();
+		// retrieve annotations part viewmenu
 		MMenu viewmenu = null;
 		for (MMenu m : part.getMenus())
 			if (m.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu"))
 				viewmenu = m;
-		
 		if (viewmenu != null) {
 			MCommand menuFilterCommand = null;
 			// save menu item selection flags from application model to context
 			for (MMenuElement mi : viewmenu.getChildren())
 				if (mi instanceof MHandledMenuItem) {
 					filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
+					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
-
 			// populate menu items for annotation types
 			BTSAnnotation anno = BtsCorpusModelFactory.eINSTANCE.createBTSAnnotation();
-			
+			// retrieve configuration elements for object type annotation
 			BTSConfigItem typeConf = confService.getObjectTypeConfigItemProcessedClones(anno);
 			if (!typeConf.getChildren().isEmpty()) {
+				// initialize submenu for annotation types
 				MMenu submenu = MMenuFactory.INSTANCE.createMenu();
 				submenu.setLabel("Annotation Types");
-
+				// traverse annotation types configuration branch
 				for (BTSConfig c : typeConf.getChildren())
 					if (c instanceof BTSConfigItem) {
-						BTSConfigItem ci = (BTSConfigItem)c;
-						System.out.println(" "+ci.getValue());
-						MMenuElement mi = null;
-						anno.setType(ci.getValue());
+						BTSConfigItem confItem = (BTSConfigItem)c;
+						MMenuElement menuItemType = null;
+						anno.setType(confItem.getValue());
+						// retrieve subtype definition from configuration node
 						BTSConfigItem subtypeConf = confService.getObjectSubtypeConfigItemProcessedClones(anno);
-						System.out.println(" annotation config item subtype: "+subtypeConf.getValue());
-						System.out.println(" children: ");
-						
 						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
+						// filter attached subtype definition nodes
 						for (BTSConfig cc : subtypeConf.getChildren())
-							if (cc instanceof BTSConfigItem) {
-								BTSConfigItem cci = (BTSConfigItem)cc;
-								if (cci.getValue() != null)
-									subTypeConfItems.add(cci);
-							}
-						
+							if (cc instanceof BTSConfigItem)
+								if (((BTSConfigItem)cc).getValue() != null)
+									subTypeConfItems.add((BTSConfigItem)cc);
+						// if subtypes definitions exist, nest in submenu
 						if (!subTypeConfItems.isEmpty()) {
-							mi = MMenuFactory.INSTANCE.createMenu();
+							menuItemType = MMenuFactory.INSTANCE.createMenu();
 							String key = null;
-							for (BTSConfigItem cci : subTypeConfItems) {
-								key = ci.getValue() + "." + cci.getValue();
-								MHandledMenuItem mii = newFilterMenuItem(key);
-								mii.setCommand(menuFilterCommand);
-								mii.setLabel(cci.getValue());
-								((MMenu)mi).getChildren().add(mii);
-								System.out.println("  "+cci.getValue());
-								filters.put(mii.getElementId(), ((MHandledMenuItem)mii).isSelected());
+							for (BTSConfigItem subTypeConfItem : subTypeConfItems) {
+								key = confItem.getValue() + "." + subTypeConfItem.getValue();
+								// create annotation subtype menu entry and append to type submenu
+								MHandledMenuItem menuItemSubType = newFilterMenuItem(key);
+								menuItemSubType.setCommand(menuFilterCommand);
+								menuItemSubType.setLabel(subTypeConfItem.getValue());
+								((MMenu)menuItemType).getChildren().add(menuItemSubType);
+								filters.put(menuItemSubType.getElementId(), ((MHandledMenuItem)menuItemSubType).isSelected());
 							}
-						} else {
-							mi = newFilterMenuItem(ci.getValue());
-							((MHandledMenuItem)mi).setCommand(menuFilterCommand);
-							filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
+						} else { // create checkable menu entry for type without subtypes
+							menuItemType = newFilterMenuItem(confItem.getValue());
+							((MHandledMenuItem)menuItemType).setCommand(menuFilterCommand);
+							filters.put(menuItemType.getElementId(), ((MHandledMenuItem)menuItemType).isSelected());
 						}
-						mi.setLabel(ci.getValue());
-						submenu.getChildren().add(mi);
+						// label annotation type menu entry and append to submenu
+						menuItemType.setLabel(confItem.getValue());
+						submenu.getChildren().add(menuItemType);
 					}
 				viewmenu.getChildren().add(submenu);
-
 			}
-			
 		}
+		// save related object filter states to context
 		context.set("org.bbaw.bts.corpus.annotationsPart.filter", filters);
-		
 	}
 
-	
+
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
 		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + key);
@@ -288,7 +289,7 @@ public class AnnotationsPart implements EventHandler {
 		menuItem.getParameters().add(menuFilterParam);
 		return menuItem;
 	}
-	
+
 
 	@Inject
 	@Optional
