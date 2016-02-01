@@ -280,12 +280,12 @@ public class AnnotationsPart implements EventHandler {
 
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
-		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + key);
+		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations." + key);
 		menuItem.setSelected(true);
 		menuItem.setType(ItemType.CHECK);
 		MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
-		menuFilterParam.setElementId("annotationsPartFilterParam");
-		menuFilterParam.setValue(key);
+		menuFilterParam.setName("annotationsPartFilterParam");
+		menuFilterParam.setValue("annotations." + key);
 		menuItem.getParameters().add(menuFilterParam);
 		return menuItem;
 	}
@@ -604,14 +604,20 @@ public class AnnotationsPart implements EventHandler {
 			} else if (o instanceof BTSAnnotation) {
 				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
 					key += "rubra";
-				} else
-					return true;
+				} else { // check annotation type/subtype
+					key += "annotations";
+					if (o.getType() != null && !o.getType().isEmpty()) {
+						key += "." + o.getType();
+						if (o.getSubtype() != null && !o.getSubtype().isEmpty())
+							key += "." + o.getSubtype();
+					}
+				}
 			} else if (o instanceof BTSComment) {
 				key += "comments";
 			} else
 				return true;
 		}
-		return filters.get(key);
+		return filters.containsKey(key) ? filters.get(key) : true;
 	}
 
 
