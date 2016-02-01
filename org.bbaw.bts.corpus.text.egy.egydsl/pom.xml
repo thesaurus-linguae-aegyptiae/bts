@@ -12,6 +12,11 @@
   <version>1.0.5-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
   
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<xtext.version>2.4.3</xtext.version>
+  </properties>
+  
   <build>
   	<pluginManagement>
   		<plugins>
