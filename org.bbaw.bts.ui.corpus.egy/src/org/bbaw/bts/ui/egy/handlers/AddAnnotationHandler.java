@@ -56,7 +56,6 @@ public class AddAnnotationHandler {
 				PassportEditorDialog dialog = ContextInjectionFactory.make(
 						PassportEditorDialog.class, child);
 				int res = dialog.open();
-				System.out.println("passport edtitor: "+res);
 				if (res == SWT.DEFAULT || res == 1) {
 					// if cancelled, annotation does not get saved.
 				} else {

@@ -663,7 +663,6 @@ public class AnnotationsPart implements EventHandler {
 	@Optional
 	void eventReceivedRelatingObjectsFilterChanged(
 			@UIEventTopic(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER) final String filter) {
-		System.out.println("ANNO PART RECEIVED TOGGLE FILTER EVENT: "+filter);
 		@SuppressWarnings("unchecked")
 		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
 		// toggle
