@@ -1043,6 +1043,25 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	}
 
+	
+	private Runnable lemmaViewerLoadThread(final TreeNodeWrapper root, final String searchStr) {
+		return new Runnable() {
+			@Override
+			public void run() {
+				sorter.setLemmatizerWordChar(searchStr);
+				lemmaViewer.setInput(root);
+				lemmaViewer.refresh();
+				lemmaViewer.expandAll();
+				if (autoLemmaProposalSelection
+						&& lemmaViewer.getTree().getItemCount() > 0) {
+					TreeItem first = lemmaViewer.getTree().getItem(0);
+					lemmaViewer.setSelection(new StructuredSelection(
+							first.getData()));
+				}
+			}
+		};
+	}
+	
 	private void loadingLemmaProposals(final BTSWord word) {
 
 		if (!userMayEdit || word == null || !activateButton.getSelection())
@@ -1078,22 +1097,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 										Math.min(entries.size(), 120)),
 								monitor, false);
 
-				sync.asyncExec(new Runnable() {
-					@Override
-					public void run() {
-						sorter.setLemmatizerWordChar(lemmatizerController
-								.processWordCharForLemmatizing(word));
-						lemmaRootNode.getChildren().addAll(nodes);
-						lemmaViewer.refresh();
-						lemmaViewer.expandAll();
-						if (autoLemmaProposalSelection
-								&& lemmaViewer.getTree().getItemCount() > 0) {
-							TreeItem first = lemmaViewer.getTree().getItem(0);
-							lemmaViewer.setSelection(new StructuredSelection(
-									first.getData()));
-						}
-					}
-				});
+
 				int counter = 0;
 				for (final TreeNodeWrapper child : nodes) {
 					child.setChildrenLoaded(true);
@@ -1121,6 +1125,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 				}
 
+				lemmaRootNode.getChildren().addAll(nodes);
+
+				String wordChars = lemmatizerController.processWordCharForLemmatizing(word);
+				sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, wordChars));
+				
 				return Status.OK_STATUS;
 			}
 		};
@@ -1323,18 +1332,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 							.createTreeNodeWrapper();
 					emptyNode.setLabel("Nothing found that matches your query");
 					lemmaRootNode.getChildren().add(emptyNode);
-					sync.asyncExec(new Runnable() {
-						@Override
-						public void run() {
-							if (searchString != null) {
-								sorter.setLemmatizerWordChar(searchString);
-							}
-							lemmaViewer.setInput(lemmaRootNode);
-							if (monitor.isCanceled())
-								return;
-						}
-					});
-					return Status.OK_STATUS;
+					//sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, searchString));
+					//return Status.OK_STATUS;
 				}
 				if (monitor.isCanceled())
 					return Status.CANCEL_STATUS;
@@ -1394,31 +1393,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					return Status.CANCEL_STATUS;
 
 				// If you want to update the UI
-				sync.asyncExec(new Runnable() {
-					@Override
-					public void run() {
-
-						if (query.getAutocompletePrefix() != null) {
-							sorter.setLemmatizerWordChar(lemmatizerController
-									.processWordCharForLemmatizing(query
-											.getAutocompletePrefix()));
-						}
-						lemmaViewer.setInput(lemmaRootNode);
-						if (monitor.isCanceled())
-							return;
-
-						lemmaViewer.expandAll();
-						if (autoLemmaProposalSelection
-								&& lemmaViewer.getTree().getItemCount() > 0) {
-							TreeItem first = lemmaViewer.getTree().getItem(0);
-							lemmaViewer.setSelection(new StructuredSelection(
-									first.getData()));
-						}
-						if (monitor.isCanceled())
-							return;
-
-					}
-				});
+				sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, searchString));
 
 				// for (final TreeNodeWrapper child :
 				// lemmaRootNode.getChildren())
