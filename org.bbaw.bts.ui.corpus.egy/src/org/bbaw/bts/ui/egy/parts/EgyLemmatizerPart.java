@@ -1059,8 +1059,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 			}
 		});
 
+		if (searchjob != null) {
+			searchjob.cancel();
+			searchjob = null;
+		}
 		// fill lemmaViewer
-		Job job = new Job("load input") {
+		searchjob = new Job("load input") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				java.util.List<BTSLemmaEntry> entries = lemmatizerController
@@ -1122,7 +1126,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		};
 
 		// Start the Job
-		job.schedule();
+		searchjob.schedule();
 
 	}
 
