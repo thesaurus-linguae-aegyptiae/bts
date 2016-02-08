@@ -1476,12 +1476,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 		// Start the Job
 		searchjob.schedule();
-		try {
-			searchjob.join();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 
 	protected List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs, String searchString) {
