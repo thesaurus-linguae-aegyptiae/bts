@@ -735,16 +735,23 @@ public class EgyLemmatizerPart implements SearchViewer {
 		sync.asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("add children" + filtered.size());
+				System.out.println("add children: " + filtered.size());
+				HashSet<BTSObject> ancestors = new HashSet<BTSObject>();
+				TreeNodeWrapper anc = node;
+				while (anc != null) {
+					ancestors.add((BTSObject)anc.getObject());
+					anc = anc.getParent();
+				}
 				for (BTSObject o : filtered) {
-					boolean found = false;
-					for (TreeNodeWrapper childNode : node.getChildren()) {
-						if (childNode.getObject() != null
-								&& childNode.getObject().equals(o)) {
-							found = true;
-							break;
+					boolean found = ancestors.contains(o);
+					if (!found)
+						for (TreeNodeWrapper childNode : node.getChildren()) {
+							if (childNode.getObject() != null
+									&& childNode.getObject().equals(o)) {
+								found = true;
+								break;
+							}
 						}
-					}
 					if (!found) {
 						TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
 								.createTreeNodeWrapper();
