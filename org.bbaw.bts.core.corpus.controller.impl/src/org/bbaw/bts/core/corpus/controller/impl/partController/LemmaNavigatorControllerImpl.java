@@ -101,137 +101,49 @@ implements LemmaNavigatorController{
 		return anno;
 	}
 
+	
 	@Override
 	public List<TreeNodeWrapper> loadNodesWithChildren(
-			List<BTSLemmaEntry> obs, IProgressMonitor monitor, boolean b) {
-		List<TreeNodeWrapper> nodes;
+			List<BTSLemmaEntry> subList, IProgressMonitor monitor, boolean b) {
+		List<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>();
+		Map<String, TreeNodeWrapper> nodeReg = new HashMap<String, TreeNodeWrapper>();
 		
-		// kinder finden
-		
-		// eltern finden
-		Map<String, CacheTreeNode> roots = new HashMap<String, CacheTreeNode>();
-		// all nodes
-		Map<String, CacheTreeNode> allNodes = new HashMap<String, CacheTreeNode>();
-		// nodes that await a holder, key = id of holder
-		Map<String, List<CacheTreeNode>> awaitingHolder = new HashMap<String, List<CacheTreeNode>>();
-		// nodes that provide hold to children, key = id of child
-		Map<String, List<CacheTreeNode>> providingHold = new HashMap<String, List<CacheTreeNode>>();
-		// iterate over all entries
-		for (BTSLemmaEntry e : obs)
-		{
-			CacheTreeNode tn = new CacheTreeNode(e.get_id(), e);
-			allNodes.put(tn.getId(), tn);
-			boolean held = false;
-			List<CacheTreeNode> localHolders = providingHold.get(tn.getId());
-			if (localHolders != null)
-			{
-				for (CacheTreeNode holder : localHolders)
-				{
-					holder.getChildren().add(tn);
-					held = true;
-				}
-			}
-			List<CacheTreeNode> localAwaiting = awaitingHolder.get(tn.getId());
-			if (localAwaiting != null)
-			{
-				for (CacheTreeNode awaiting : localAwaiting)
-				{
-					tn.getChildren().add(awaiting);
-					roots.remove(awaiting.getId());
-				}
-			}
-			for (BTSRelation rel : e.getRelations())
-			{
-				if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
-				{
-					CacheTreeNode holder = allNodes.get(rel.getObjectId());
-					if (holder != null)
-					{
-						holder.getChildren().add(tn);
-						held = true;
-					}
-					else
-					{
-						addToMap(tn, rel.getObjectId(), awaitingHolder);
-					}
-				}
-				else if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType()))
-				{
-					CacheTreeNode contained = allNodes.get(rel.getObjectId());
-					if (contained != null)
-					{
-						tn.getChildren().add(contained);
-						roots.remove(contained.getId());
-					}
-					else
-					{
-						addToMap(tn, rel.getObjectId(), providingHold);
-					}
-				}
-			}
-			if (!held)
-			{
-				roots.put(tn.getId(), tn);
-			}
-			if (monitor != null)
-			{
-				monitor.worked(1);
-				if (monitor.isCanceled()) break;
-			}
-		}
-		List<TreeNodeWrapper> rootsNodes = new Vector<TreeNodeWrapper>();
-		for (CacheTreeNode cachedtn : roots.values())
-		{
-			BTSLemmaEntry e = (BTSLemmaEntry) cachedtn.getObject();
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
+		// initialize nodes registry with lemma wrappers
+		for (BTSLemmaEntry lemma : subList) {
+			TreeNodeWrapper node = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
-			tn.setObject(e);
-			rootsNodes.add(tn);
-			Set<BTSLemmaEntry> addedChildren = new HashSet<BTSLemmaEntry>();
-			for (CacheTreeNode cachedChild : cachedtn.getChildren())
-			{
-				
-				BTSLemmaEntry child = (BTSLemmaEntry) cachedChild.getObject();
-				if (!addedChildren.contains(child))
-				{
-					TreeNodeWrapper childtn = BtsviewmodelFactory.eINSTANCE
-							.createTreeNodeWrapper();
-					childtn.setObject(child);
-					tn.getChildren().add(childtn);
-					addedChildren.add(child);
-				}
-			}
+			node.setObject(lemma);
+			nodeReg.put(lemma.get_id(), node);
 		}
 		
-		// kinder von allen abziehen = wurzeln
-		
-		// kindern ihren eltern anhängen
-		
-		// zusätzliche kinder suchen und anhängen, wenn nicht schon vorhanden
-
-		nodes = new Vector<TreeNodeWrapper>(obs.size());
-		for (BTSObject o : obs) {
-			TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-					.createTreeNodeWrapper();
-			tn.setObject(o);
-			nodes.add(tn);
-			if (monitor != null)
-			{
-				monitor.worked(1);
-			}
+		// nest wrappers according to subList interrelations
+		for (BTSLemmaEntry lemma : subList) {
+			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
+			for (BTSRelation rel : lemma.getRelations())
+				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())) {
+					if (nodeReg.containsKey(rel.getObjectId())) {
+						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
+						if (!node.getChildren().contains(childNode)) {
+							node.getChildren().add(childNode);
+							childNode.setParent(node);
+						}
+					}
+				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
+					if (nodeReg.containsKey(rel.getObjectId())) {
+						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
+						if (!parentNode.getChildren().contains(node)) {
+							parentNode.getChildren().add(node);
+							node.setParent(parentNode);
+						}
+					}
 		}
-		return rootsNodes;
-	}
-
-	private void addToMap(CacheTreeNode tn,
-			String key, Map<String, List<CacheTreeNode>> map) {
-		List<CacheTreeNode> list = map.get(key);
-		if (list == null)
-		{
-			list = new Vector<CacheTreeNode>(4);
-			map.put(key, list);
-		}
-		list.add(tn);
+		
+		// extract root nodes
+		for (TreeNodeWrapper node : nodeReg.values())
+			if (node.getParent() == null)
+				nodes.add(node);
+		
+		return nodes;
 	}
 	
 	@Override
