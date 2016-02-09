@@ -215,7 +215,7 @@ public class AnnotationsPart implements EventHandler {
 		// retrieve annotations part viewmenu
 		MMenu viewmenu = null;
 		for (MMenu m : part.getMenus())
-			if (m.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu"))
+			if (m.getTags().contains("ViewMenu"))
 				viewmenu = m;
 		if (viewmenu != null) {
 			MCommand menuFilterCommand = null;
