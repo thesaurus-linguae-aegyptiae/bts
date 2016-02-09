@@ -40,6 +40,7 @@ import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.EventTopic;
+import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.di.UIEventTopic;
@@ -76,6 +77,10 @@ public class AnnotationsPart implements EventHandler {
 	
 	private static final int MAX_RELATED_OBJECTS = 40;
 
+	@Inject
+	@Preference(value = "locale_lang", nodePath = "org.bbaw.bts.app")
+	private String lang;
+	
 	@Inject
 	private AnnotationPartController annotationPartController;
 	
@@ -249,7 +254,7 @@ public class AnnotationsPart implements EventHandler {
 								// create annotation subtype menu entry and append to type submenu
 								MHandledMenuItem menuItemSubType = newFilterMenuItem(key);
 								menuItemSubType.setCommand(menuFilterCommand);
-								menuItemSubType.setLabel(subTypeConfItem.getValue());
+								menuItemSubType.setLabel(subTypeConfItem.getLabel().getTranslation(lang));
 								((MMenu)menuItemType).getChildren().add(menuItemSubType);
 								filters.put(menuItemSubType.getElementId(), ((MHandledMenuItem)menuItemSubType).isSelected());
 							}
@@ -259,7 +264,7 @@ public class AnnotationsPart implements EventHandler {
 							filters.put(menuItemType.getElementId(), ((MHandledMenuItem)menuItemType).isSelected());
 						}
 						// label annotation type menu entry and append to submenu
-						menuItemType.setLabel(confItem.getValue());
+						menuItemType.setLabel(confItem.getLabel().getTranslation(lang));
 						submenu.getChildren().add(menuItemType);
 					}
 				viewmenu.getChildren().add(submenu);
