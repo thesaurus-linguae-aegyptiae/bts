@@ -22,11 +22,9 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.comparator.BTSObjectTempSortKeyComparator;
 import org.bbaw.bts.core.corpus.controller.partController.AnnotationPartController;
-import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
-import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
 import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsLoadingEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
@@ -51,7 +49,6 @@ import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
 import org.eclipse.e4.ui.model.application.commands.MParameter;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
 import org.eclipse.e4.ui.model.application.ui.menu.ItemType;
-import org.eclipse.e4.ui.model.application.ui.menu.MDirectMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledMenuItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuElement;
@@ -129,9 +126,6 @@ public class AnnotationsPart implements EventHandler {
 	private MPart part;
 
 	private BTSRelatingObjectsLoadingEvent relatingObjectsEvent;
-	
-	@Inject
-	private BTSConfigurationService confService;
 
 	@Inject
 	public AnnotationsPart() {
@@ -227,9 +221,8 @@ public class AnnotationsPart implements EventHandler {
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
 			// populate menu items for annotation types
-			BTSAnnotation anno = BtsCorpusModelFactory.eINSTANCE.createBTSAnnotation();
 			// retrieve configuration elements for object type annotation
-			BTSConfigItem typeConf = confService.getObjectTypeConfigItemProcessedClones(anno);
+			BTSConfigItem typeConf = annotationPartController.getAnnoTypesConfigItem(); 
 			if (!typeConf.getChildren().isEmpty()) {
 				// initialize submenu for annotation types
 				MMenu submenu = MMenuFactory.INSTANCE.createMenu();
@@ -239,9 +232,8 @@ public class AnnotationsPart implements EventHandler {
 					if (c instanceof BTSConfigItem) {
 						BTSConfigItem confItem = (BTSConfigItem)c;
 						MMenuElement menuItemType = null;
-						anno.setType(confItem.getValue());
 						// retrieve subtype definition from configuration node
-						BTSConfigItem subtypeConf = confService.getObjectSubtypeConfigItemProcessedClones(anno);
+						BTSConfigItem subtypeConf = annotationPartController.getAnnoSubtypesConfigItem(confItem); 
 						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
 						// filter attached subtype definition nodes
 						for (BTSConfig cc : subtypeConf.getChildren())
