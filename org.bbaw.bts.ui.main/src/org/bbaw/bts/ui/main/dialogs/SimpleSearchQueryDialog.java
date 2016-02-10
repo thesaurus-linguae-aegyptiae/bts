@@ -136,29 +136,26 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	
 	@Override
 	protected void okPressed() {
-		if (text.getText().trim().length() > 0)
+		String searchString = text.getText().trim();
+		if (searchString.length() > 0)
 		{
+			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
+			queryRequest.setQueryId("timestamp-" + now.toString());
 			if (idButton.getSelection())
 			{
 				queryRequest.setIdQuery(true);
-				queryRequest.setIdString(text.getText().trim());
-				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-				queryRequest.setQueryId("timestamp-" + now.toString());
+				queryRequest.setIdString(searchString);
 			}
 			else if (exactButton.getSelection())
 			{
-				queryRequest.setQueryBuilder(QueryBuilders.matchQuery("name", escapeString(text.getText().trim())));
-				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-				queryRequest.setQueryId("timestamp-" + now.toString());
-				queryRequest.setAutocompletePrefix(text.getText().trim());
+				queryRequest.setQueryBuilder(QueryBuilders.matchQuery("name", escapeString(searchString)));
+				queryRequest.setAutocompletePrefix(searchString);
 
 			}
 			else
 			{
-				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(escapeString(text.getText().trim().toLowerCase())));
-				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-				queryRequest.setQueryId("timestamp-" + now.toString());
-				queryRequest.setAutocompletePrefix(text.getText().trim());
+				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(escapeString(searchString).toLowerCase()));
+				queryRequest.setAutocompletePrefix(searchString);
 			}
 		}
 		else
@@ -173,7 +170,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		boolean inQuots = false;
 		boolean leftTrunk = false;
 		boolean rightTrunk = false;
-
+		// XXX
 		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
 		{
 			searchString = searchString.substring(1, searchString.length() -1);

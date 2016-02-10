@@ -316,6 +316,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			// add .*
 //			chars += " OR " + chars + ".*";
 		}
+		// XXX
 		if (chars.length() > 3 && chars.startsWith("\"") && chars.endsWith("\""))
 		{
 			chars = chars.substring(1, chars.length() -1);
