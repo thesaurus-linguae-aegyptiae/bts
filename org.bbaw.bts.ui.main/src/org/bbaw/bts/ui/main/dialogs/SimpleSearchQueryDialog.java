@@ -89,8 +89,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				text.setText(text.getText() + "*");
-				
+				String s = text.getText();
+				s = s.endsWith("*") ? s.substring(0, s.length()-1) : s + "*";
+				text.setText(s);
 			}
 			
 			@Override
@@ -107,8 +108,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				text.setText("\"" + text.getText() + "\"");
-				
+				String s = text.getText();
+				s = s.startsWith("\"") && s.endsWith("\"") ? s.substring(1, s.length()-1) : "\"" + s + "\"";
+				text.setText(s);
 			}
 			
 			@Override
