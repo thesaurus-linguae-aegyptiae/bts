@@ -139,10 +139,12 @@ implements LemmaNavigatorController{
 		}
 		
 		// extract root nodes
-		for (TreeNodeWrapper node : nodeReg.values())
+		for (BTSLemmaEntry lemma  : subList) {
+			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
 			if (node.getParent() == null)
 				nodes.add(node);
-		
+		}
+
 		return nodes;
 	}
 	
