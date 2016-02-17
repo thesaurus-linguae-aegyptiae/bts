@@ -525,10 +525,8 @@ public class AnnotationsPart implements EventHandler {
 					}
 				}
 		} else
-			if (o instanceof BTSComment) {
+			if (o instanceof BTSComment)
 				key += "comments";
-			} else
-				return true;
 		return filters.containsKey(key) ? filters.get(key) : true;
 	}
 
