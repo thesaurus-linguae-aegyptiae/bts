@@ -511,20 +511,25 @@ public class AnnotationsPart implements EventHandler {
 		if (o instanceof BTSCorpusObject) {
 			if (o instanceof BTSText) {
 				if (o.getType() != null)
-					if (o.getType().equalsIgnoreCase("glosse")
-							|| o.getType().equalsIgnoreCase("subtext"))
-						key += "glosse"; 
-			} else if (o instanceof BTSAnnotation) {
+					if (BTSConstants.ANNOTATION_SUBTEXT.equals(o.getType()))
+						key += "glosses"; 
+			} else if (o instanceof BTSAnnotation)
 				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
 					key += "rubra";
-				} else
-					return true;
-			} else if (o instanceof BTSComment) {
+				} else { // check annotation type/subtype
+					key += "annotations";
+					if (o.getType() != null && !o.getType().isEmpty()) {
+						key += "." + o.getType();
+						if (o.getSubtype() != null && !o.getSubtype().isEmpty())
+							key += "." + o.getSubtype();
+					}
+				}
+		} else
+			if (o instanceof BTSComment) {
 				key += "comments";
 			} else
 				return true;
-		}
-		return filters.get(key);
+		return filters.containsKey(key) ? filters.get(key) : true;
 	}
 
 
