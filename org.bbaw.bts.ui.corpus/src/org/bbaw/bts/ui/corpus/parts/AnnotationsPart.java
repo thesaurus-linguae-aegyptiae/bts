@@ -595,10 +595,9 @@ public class AnnotationsPart implements EventHandler {
 		if (o instanceof BTSCorpusObject) {
 			if (o instanceof BTSText) {
 				if (o.getType() != null)
-					if (o.getType().equalsIgnoreCase("glosse")
-							|| o.getType().equalsIgnoreCase("subtext"))
-						key += "glosse"; 
-			} else if (o instanceof BTSAnnotation) {
+					if (BTSConstants.ANNOTATION_SUBTEXT.equals(o.getType()))
+						key += "glosses"; 
+			} else if (o instanceof BTSAnnotation)
 				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
 					key += "rubra";
 				} else { // check annotation type/subtype
@@ -609,11 +608,8 @@ public class AnnotationsPart implements EventHandler {
 							key += "." + o.getSubtype();
 					}
 				}
-			} else if (o instanceof BTSComment) {
-				key += "comments";
-			} else
-				return true;
-		}
+		} else if (o instanceof BTSComment)
+			key += "comments";
 		return filters.containsKey(key) ? filters.get(key) : true;
 	}
 
