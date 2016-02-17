@@ -1639,8 +1639,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 */
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
-		System.out.println("Textselection x y : " + btsEvent.x + " " +
-		 btsEvent.y);
 		btsEvent.data = text;
 		if (this.delaySelectionJob == null) {
 			this.btsTextEvent = btsEvent;
