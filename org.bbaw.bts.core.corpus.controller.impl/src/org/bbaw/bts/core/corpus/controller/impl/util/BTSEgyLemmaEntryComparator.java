@@ -45,25 +45,18 @@ public class BTSEgyLemmaEntryComparator implements Comparator<BTSLemmaEntry>{
 		if (s1 != null) {
 			if (s2 != null) {
 				if (searchString != null)
-				{
-					if (s1.toLowerCase().startsWith(searchString.toLowerCase()) && s2.toLowerCase().startsWith(searchString.toLowerCase()))
-					{
-						return alphaNumComp.compare(s1, s2);
-					}
-					else if (s1.toLowerCase().startsWith(searchString.toLowerCase()))
-					{
+					if (s1.toLowerCase().startsWith(searchString.toLowerCase())) {
+						if (s2.toLowerCase().startsWith(searchString.toLowerCase()))
+							return alphaNumComp.compare(s1, s2);
 						return -1;
-					}
-					else if (s2.toLowerCase().startsWith(searchString.toLowerCase()))
-					{
+					} else if (s2.toLowerCase().startsWith(searchString.toLowerCase()))
 						return 1;
-					}
-				}
 				return alphaNumComp.compare(s1, s2);
 			} else
 				return -1;
-		}
-		return 0;
+		} else if (s2 != null)
+			return 1;
+		return e1.get_id().compareTo(e2.get_id());
 	}
 
 }
