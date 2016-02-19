@@ -211,24 +211,9 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor) {
-		String chars = processWordChars(word);
-		BTSQueryRequest query = new BTSQueryRequest();
-		// add .*
-		if (chars.contains("-"))
-		{
-			query.setQueryBuilder(QueryBuilders.matchQuery("name",
-					chars).operator(Operator.AND));
-		}
-		else
-		{
-			query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchQuery("name",chars).operator(Operator.AND))
-					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
-					.should(QueryBuilders.wildcardQuery("name",chars + ",*"))
-					);
-		}
-		
+	public List<BTSLemmaEntry> findLemmaProposals(String word, IProgressMonitor monitor) {
+		String chars = processWordCharForLemmatizing(word);
+		BTSQueryRequest query = findLemmaProposalsQuery(chars);
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
@@ -237,6 +222,25 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		children = lemmaFilterReviewStateType(children);
 		
 		return filter(children);
+	}
+	
+	@Override
+	public BTSQueryRequest findLemmaProposalsQuery(String chars) {
+		BTSQueryRequest query = new BTSQueryRequest();
+		// composita
+		if (chars.contains("-"))
+		{
+			chars = chars.replaceAll("-", "\\\\-");
+		}
+		// add .*
+		{
+			query.setQueryBuilder(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchPhraseQuery("name",chars))
+					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
+					.should(QueryBuilders.wildcardQuery("name",chars + ",*"))
+					);
+		}
+		return query;
 	}
 
 	private List<BTSLemmaEntry> lemmaFilterReviewStateType(
@@ -254,12 +258,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		return filtered;
 	}
 
-	private String processWordChars(BTSWord word) {
-		String chars = word.getWChar();
-		return processWordCharForLemmatizing(chars);
-	}
-	
-		
+
 	public String processWordCharForLemmatizing(String chars) {
 		// TODO Auto-generated method stub
 		
@@ -306,16 +305,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			chars = chars.replaceAll(b, "");
 		}
 		
-		// composita
-		if (chars.contains("-"))
-		{
-//			chars = chars.replaceAll("-", " AND ");
-		}
-		else
-		{
-			// add .*
-//			chars += " OR " + chars + ".*";
-		}
+
 		// XXX
 		if (chars.length() > 3 && chars.startsWith("\"") && chars.endsWith("\""))
 		{
@@ -361,10 +351,6 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		
 	}
 
-	@Override
-	public String processWordCharForLemmatizing(BTSWord word) {
-		return processWordChars(word);
-	}
 
 	@Override
 	public List<BTSLemmaEntry> sortAndFilterLemmaProposals(

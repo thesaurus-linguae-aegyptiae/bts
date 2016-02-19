@@ -197,6 +197,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			escapedString = escapedString+ "*";
 		}
 		
+		System.out.println("resulting query string: "+escapedString);
 		return escapedString;
 	}
 

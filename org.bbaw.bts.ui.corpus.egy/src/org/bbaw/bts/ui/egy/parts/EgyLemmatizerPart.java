@@ -1090,12 +1090,13 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob.cancel();
 			searchjob = null;
 		}
+		final String prefix = word.getWChar();
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				java.util.List<BTSLemmaEntry> entries = lemmatizerController
-						.findLemmaProposals(word, monitor);
+						.findLemmaProposals(prefix, monitor);
 				if (monitor.isCanceled()) {
 					return Status.CANCEL_STATUS;
 				}
@@ -1131,12 +1132,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 					if (counter > 40 || monitor.isCanceled())
 						break;
 
-				}
+				}*/
 
 				lemmaRootNode.getChildren().addAll(nodes);
 
-				String wordChars = lemmatizerController.processWordCharForLemmatizing(word);
-				sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, wordChars));
+				sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, prefix));
 				
 				return Status.OK_STATUS;
 			}
