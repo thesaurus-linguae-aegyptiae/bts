@@ -29,7 +29,8 @@ public class OpenSearchQueryDialogHandler {
 			ContextInjectionFactory.inject(dialog, context);
 			dialog.create();
 			dialog.setSearchString(searchString);
-			if (dialog.open() == dialog.OK) {
+			dialog.setTitle("Object Search");
+			if (dialog.open() == SimpleSearchQueryDialog.OK) {
 				query = dialog.getQueryRequest();
 				if (query != null) {
 					searchViewer.search(query, null, viewerFilterString);

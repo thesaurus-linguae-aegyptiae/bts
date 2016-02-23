@@ -77,10 +77,33 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		idButton = new Button(container, SWT.CHECK);
 		idButton.setText("Search for IDs");
 		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		idButton.setData(false);
+		idButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				idButton.setData(idButton.getSelection());
+				exactButton.setSelection(!idButton.getSelection()
+						&& (Boolean)exactButton.getData());
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {}
+		});
 		
 		exactButton = new Button(container, SWT.CHECK);
 		exactButton.setText("Search for Names only");
 		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		exactButton.setData(false);
+		exactButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				exactButton.setData(exactButton.getSelection());
+				idButton.setSelection(!exactButton.getSelection()
+						&& (Boolean)idButton.getData());
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 		
 		wildcardButton = new Button(container, SWT.PUSH);
 		wildcardButton.setText("Add *-wildcard");
@@ -143,6 +166,7 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			queryRequest.setQueryId("timestamp-" + now.toString());
 			if (idButton.getSelection())
 			{
+				// allows DAO to retrieve object directly from DB
 				queryRequest.setIdQuery(true);
 				queryRequest.setIdString(searchString);
 			}
