@@ -246,5 +246,15 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 
 		}
 	}
+	
+	public void setNameOnly(boolean checked) {
+		exactButton.setSelection(checked);
+		exactButton.setData(checked);
+	}
+	
+	public void setIdOnly(boolean checked) {
+		idButton.setSelection(checked);
+		idButton.setData(checked);
+	}
 
 }

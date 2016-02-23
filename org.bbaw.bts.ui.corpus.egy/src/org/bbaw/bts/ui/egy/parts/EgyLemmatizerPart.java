@@ -388,14 +388,14 @@ public class EgyLemmatizerPart implements SearchViewer {
 							.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 
 					// run search command
-					Map map = new HashMap(1);
+					Map<String, Object> map = new HashMap<String, Object>(1);
 					map.put("org.bbaw.bts.ui.main.commandparameter.viewerFilter",
 							"reviewState=new,reviewState=awaiting-review awaiting-update,"
 									+ "reviewState=reviewed,"
 									+ "reviewState=published,reviewState=published-awaiting-review,"
 									+ "reviewState=transformed_awaiting_update");
-					
-					String chars = lemmatizerController.processWordCharForLemmatizing(textSelectedWord.getText());
+					map.put("org.bbaw.bts.ui.main.commandparameter.searchOptions", OPT_NAME_ONLY);
+					String chars = textSelectedWord.getText();
 					if (chars != null)
 					{
 						map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);

@@ -37,6 +37,9 @@ import org.bbaw.bts.searchModel.BTSQueryRequest;
  */
 public interface SearchViewer {
 	
+	static final String OPT_NAME_ONLY = "search_option_name_only";
+	static final String OPT_ID_ONLY = "search_option_id_only";
+	
 	/**
 	 * Dispose.
 	 */
