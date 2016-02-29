@@ -1,13 +1,8 @@
 package org.bbaw.bts.ui.main.dialogs;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -24,8 +19,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.elasticsearch.index.query.FilterBuilders;
-import org.elasticsearch.index.query.QueryBuilders;
 
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Text text;
