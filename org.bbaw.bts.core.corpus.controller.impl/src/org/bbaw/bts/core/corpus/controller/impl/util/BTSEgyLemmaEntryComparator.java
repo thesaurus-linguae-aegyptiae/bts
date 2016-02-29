@@ -22,7 +22,8 @@ public class BTSEgyLemmaEntryComparator implements Comparator<BTSLemmaEntry>{
 			e.printStackTrace();
 		}
 		alphaNumComp = new AlphanumComparator(egyCollator);
-		this.searchString = searchString;
+		this.searchString = (searchString != null) ? searchString.toLowerCase() : null;
+		System.out.println("lemma entry comparator prefix: "+searchString);
 	}
 	
 	@Override

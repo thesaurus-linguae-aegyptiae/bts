@@ -1346,55 +1346,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 				if (monitor.isCanceled())
 					return Status.CANCEL_STATUS;
 
-//				int counter = 0;
-//				for (final TreeNodeWrapper child : lemmaRootNode.getChildren()) {
-//					if (monitor.isCanceled()) {
-//						return Status.CANCEL_STATUS;
-//					}
-//					if (child.getObject() != null
-//							&& child.getObject() instanceof BTSLemmaEntry) {
-//						try {
-//							lemmaNavigatorController.checkAndFullyLoad(
-//									(BTSCorpusObject) child.getObject(), false);
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//					}
-					
-					
-//					List<BTSLemmaEntry> children = lemmaNavigatorController
-//							.findChildrenOnlySubEntries(
-//									(BTSLemmaEntry) child.getObject(),
-//									null,
-//									lemmaViewer,
-//									child,
-//									BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-//									null);
-//					final List<BTSLemmaEntry> filteredChildren = filterLemmaProposals(children);
-//
-//					counter++;
-//					
-//					if (counter > 40 || monitor.isCanceled())
-//						break;
-//
-//					for (BTSObject o : filteredChildren) {
-//						boolean found = false;
-//						// break if o is in filtered
-//						if (filteredSet.contains(o)) continue;
-//						
-//						if (counter > 40 || monitor.isCanceled())
-//							break;
-//
-//						if (!found) {
-//							TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-//									.createTreeNodeWrapper();
-//							tn.setObject(o);
-//							tn.setParent(child);
-//							// grandChildren.add(tn);
-//							child.getChildren().add(tn);
-//						}
-//					}
-//					child.setChildrenLoaded(true);
 
 //				}
 				if (monitor.isCanceled())
@@ -1402,73 +1353,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 				// If you want to update the UI
 				sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, searchString));
-
-				// for (final TreeNodeWrapper child :
-				// lemmaRootNode.getChildren())
-				// {
-				// if (monitor.isCanceled())
-				// {
-				// return Status.CANCEL_STATUS;
-				// }
-				//
-				// child.setChildrenLoaded(true);
-				// List<BTSLemmaEntry> children = lemmaNavigatorController
-				// .findChildrenOnlySubEntries(
-				// (BTSLemmaEntry) node.getObject(),
-				// null,
-				// lemmaViewer,
-				// node,
-				// BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
-				// null);
-				// final List<BTSLemmaEntry> filteredChildren =
-				// filterLemmaProposals(children);
-				// // If you want to update the UI
-				// sync.asyncExec(new Runnable() {
-				// @Override
-				// public void run() {
-				// System.out.println("add children" + filtered.size());
-				// for (BTSObject o : filtered) {
-				// boolean found = false;
-				// for (TreeNodeWrapper childNode : node.getChildren())
-				// {
-				// if (childNode.getObject() != null &&
-				// childNode.getObject().equals(o))
-				// {
-				// found = true;
-				// break;
-				// }
-				// }
-				// if (!found)
-				// {
-				// TreeNodeWrapper tn = BtsviewmodelFactory.eINSTANCE
-				// .createTreeNodeWrapper();
-				// tn.setObject(o);
-				// tn.setParent(node);
-				// // grandChildren.add(tn);
-				// node.getChildren().add(tn);
-				// }
-				// }
-				// node.setChildrenLoaded(true);
-				// lemmaViewer.refresh(node);
-				// lemmaViewer.setExpandedState(node, true);
-				// }
-				// });
-				// counter++;
-				// if (child.getObject() != null && child.getObject() instanceof
-				// BTSLemmaEntry)
-				// {
-				// try {
-				// lemmaNavigatorController.checkAndFullyLoad((BTSCorpusObject)
-				// child.getObject(), false);
-				// } catch (Exception e) {
-				// e.printStackTrace();
-				// }
-				// }
-				// if (monitor.isCanceled()) return Status.CANCEL_STATUS;
-				//
-				// if (counter > 40 || monitor.isCanceled())
-				// break;
-				// }
 
 				return Status.OK_STATUS;
 			}
