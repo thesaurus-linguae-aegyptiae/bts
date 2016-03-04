@@ -135,6 +135,9 @@ public class BTSUIConstants {
 	public static final Color COLOR_RUBRUM= _resources
 			.createColor(new RGB(255, 106, 106));
 	
+	/** Background color for recognized word objects. **/
+	public static final Color COLOR_WORD = _resources.createColor(new RGB(248, 255, 255));
+	
 	
 	/** The Constant PASSPORT_COLUMN_NUMBER. */
 	public static final int PASSPORT_COLUMN_NUMBER = 6;
@@ -196,10 +199,14 @@ public class BTSUIConstants {
 	/** The Constant EVENT_TEXT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
 	
+	public static final String EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER = "event_text_relating_objects_toggle_filter";
+
 	/** The Constant EVENT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";
 
 	public static final String EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA = "event_egy_text_editor_load_lemmata/load";
+	
+	public static final String EVENT_EGY_TEXT_EDITOR_TEXT_REQUESTED = "event_egy_text_editor_text_requested/translation_part";
 
 	public static final Color COLOR_ERROR = _resources.createColor(new RGB(255, 0, 0));
 
