@@ -855,7 +855,7 @@ labelProvider));
 	@Inject
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
-		logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
+		//logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
 
 		if (object instanceof BTSCorpusObject && selection != null
 				&& selection.getFirstElement() instanceof BTSCorpusObject) {

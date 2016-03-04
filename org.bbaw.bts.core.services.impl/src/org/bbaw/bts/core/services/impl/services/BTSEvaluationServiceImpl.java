@@ -236,7 +236,8 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 				suppressed++;
 			}
 		}
-		logger.info("Filtered objects size: " + filtered.size());
+		if (!filtered.isEmpty())
+			logger.info("Filtered objects size: " + filtered.size());
 		if (suppressed > 0)
 		{
 			StatusMessage m = BtsviewmodelFactory.eINSTANCE.createFilteredMessage(suppressed);

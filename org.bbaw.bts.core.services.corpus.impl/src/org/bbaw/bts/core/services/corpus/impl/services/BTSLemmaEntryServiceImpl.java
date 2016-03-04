@@ -156,7 +156,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
 		for (String p : getActiveLemmaLists())
 		{
-
+			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
 			try {
 				objects.addAll(lemmaEntryDao.query(query,
 						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
@@ -318,7 +318,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		{
 			chars = chars.substring(0, chars.length()-1);
 		}
-		System.out.println("search for lemma proposals: "  + chars);
+		System.out.println("search for lemma proposals for: "  + chars);
 		return chars;
 	}
 

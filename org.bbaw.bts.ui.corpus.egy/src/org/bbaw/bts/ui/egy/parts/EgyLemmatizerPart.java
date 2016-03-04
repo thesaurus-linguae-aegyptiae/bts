@@ -735,7 +735,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		sync.asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				System.out.println("add children: " + filtered.size());
+				//System.out.println("add children: " + filtered.size());
 				HashSet<BTSObject> ancestors = new HashSet<BTSObject>();
 				TreeNodeWrapper anc = node;
 				while (anc != null) {

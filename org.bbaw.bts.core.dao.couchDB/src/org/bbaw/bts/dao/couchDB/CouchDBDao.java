@@ -847,7 +847,8 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 				logger.warn("Query exception "+e.getMessage(), e);
 			}
 		}
-		logger.info("Query indexName "+ indexName + " result size: " + result.size());
+		if (!result.isEmpty())
+			logger.info("Query indexName "+ indexName + " result size: " + result.size());
 		return result;
 	}
 
