@@ -19,7 +19,7 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 
 	String processWordCharForLemmatizing(String wordChars);
 
-	List<BTSLemmaEntry> sortAndFilterLemmaProposals(List<BTSLemmaEntry> obs);
+	List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs);
 
 	BTSQueryRequest createLemmaSearchQuery(String chars);
 }

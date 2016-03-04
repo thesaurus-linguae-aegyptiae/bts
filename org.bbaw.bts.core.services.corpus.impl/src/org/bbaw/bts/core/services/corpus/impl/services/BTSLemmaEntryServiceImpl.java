@@ -211,13 +211,11 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> findLemmaProposals(String word, IProgressMonitor monitor) {
-		String chars = word;//processWordCharForLemmatizing(word);
-		BTSQueryRequest query = createLemmaSearchQuery(chars);
+	public List<BTSLemmaEntry> findLemmaProposals(String prefix, IProgressMonitor monitor) {
+		BTSQueryRequest query = createLemmaSearchQuery(prefix);
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
-		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
-		
+		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		
 		children = lemmaFilterReviewStateType(children);
 		
@@ -352,9 +350,9 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 
 
 	@Override
-	public List<BTSLemmaEntry> sortAndFilterLemmaProposals(
+	public List<BTSLemmaEntry> filterLemmaProposals(
 			List<BTSLemmaEntry> obs) {
-		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(obs.size());
+		List<BTSLemmaEntry> filtered;
 		filtered = lemmaFilterReviewStateType(obs);
 		return filtered;
 

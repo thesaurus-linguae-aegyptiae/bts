@@ -12,7 +12,7 @@ public interface LemmatizerPartController {
 
 	String processWordCharForLemmatizing(String wordChars);
 
-	List<BTSLemmaEntry> sortAndFilterLemmaProposals(List<BTSLemmaEntry> obs, String searchString);
+	List<BTSLemmaEntry> filterAndSortLemmaProposals(List<BTSLemmaEntry> obs, String searchString);
 
 	BTSQueryRequest getLemmaSearchQuery(String searchString);
 

@@ -30,10 +30,10 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 	}
 
 	@Override
-	public List<BTSLemmaEntry> sortAndFilterLemmaProposals(
+	public List<BTSLemmaEntry> filterAndSortLemmaProposals(
 			List<BTSLemmaEntry> obs, String searchString) {
-		List<BTSLemmaEntry> filtered = lemmaService.sortAndFilterLemmaProposals(obs);
-		Collections.sort(filtered, new BTSEgyLemmaEntryComparator(processWordCharForLemmatizing(searchString)));
+		List<BTSLemmaEntry> filtered = lemmaService.filterLemmaProposals(obs);
+		Collections.sort(filtered, new BTSEgyLemmaEntryComparator(searchString));
 		return filtered;
 	}
 	

@@ -730,7 +730,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 						node,
 						BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
 						null);
-		final List<BTSLemmaEntry> filtered = filterLemmaProposals(children, null);
+		final List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(children, prefix);
 		// If you want to update the UI
 		sync.asyncExec(new Runnable() {
 			@Override
@@ -1379,10 +1379,17 @@ public class EgyLemmatizerPart implements SearchViewer {
 		searchjob.schedule();
 	}
 
-	protected List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs, String searchString) {
-		List<BTSLemmaEntry> filtered = lemmatizerController.sortAndFilterLemmaProposals(obs, searchString);
+	/**
+	 * Has given list of {@link BTSLemmaEntry} objects filtered based on their review state,
+	 * brings remaining elements in an order defined by {@link BTSEgyLemmaEntryComparator} 
+	 * (which varies based on the given prefix) and returns the first 120 elements of the resulting collection.  
+	 * @param obs elements to be filtered, sorted and cut down to fixed number of items (120)
+	 * @param searchString prefix determining sort order of filtered results
+	 * @return first 120 remaining elements
+	 */
+	protected List<BTSLemmaEntry> sortAndfilterLemmaProposals(List<BTSLemmaEntry> obs, String searchString) {
+		List<BTSLemmaEntry> filtered = lemmatizerController.filterAndSortLemmaProposals(obs, searchString);
 		return filtered.subList(0, Math.min(filtered.size() , 120));
-		
 	}
 
 	@Inject
