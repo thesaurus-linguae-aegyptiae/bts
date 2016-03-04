@@ -292,8 +292,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 			@Override
 			public void modifyText(ModifyEvent e) {
-				clearProposals();
-				searchAuto(currentWord);
+				//clearProposals();
+				searchAuto(textSelectedWord.getText());
 			}
 		};
 		textSelectedWord.addModifyListener(textSelectedWordModifyListener);
@@ -1291,19 +1291,23 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	}
 
-	private void searchAuto(final BTSWord word) {
-		// abort if user unauthorized or no word selected or lemmatizer disabled
-		if (!userMayEdit || word == null || !activateButton.getSelection())
+	
+	private void searchAuto(final String input) {
+		// abort if user unauthorized or lemmatizer disabled
+		if (!userMayEdit || !activateButton.getSelection())
 			return;
-
 		// extract search string from word transliteration
-		String prefix = lemmatizerController.processWordCharForLemmatizing(word.getWChar());
+		String prefix = lemmatizerController.processWordCharForLemmatizing(input);
 		// build query based on word prefix
 		BTSQueryRequest query = lemmatizerController.getLemmaSearchQuery(prefix);
 
 		//invoke search
 		search(query, null, null);
-
+	}
+	
+	private void searchAuto(final BTSWord word) {
+		if (word != null)
+			searchAuto(word.getWChar());
 	}
 
 
