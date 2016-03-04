@@ -233,6 +233,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		System.out.println("lemma service match query: "+chars);
 		// add .*
 		query.setQueryBuilder(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars))
 					.should(QueryBuilders.matchQuery("name",chars))
 					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
 					);
