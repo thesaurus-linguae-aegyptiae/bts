@@ -293,7 +293,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			@Override
 			public void modifyText(ModifyEvent e) {
 				clearProposals();
-				loadingLemmaProposals(currentWord);
+				searchAuto(currentWord);
 			}
 		};
 		textSelectedWord.addModifyListener(textSelectedWordModifyListener);
@@ -982,7 +982,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					wordTranslate_Editor.load(translations, editingDomain,
 							false);
 					lemmaViewerSearchFilter.setFilterString(null);
-					loadingLemmaProposals(currentWord);
+					searchAuto(currentWord);
 				}
 //				setUserMayEdit(userMayEdit);
 
@@ -1291,12 +1291,30 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	}
 
+	private void searchAuto(final BTSWord word) {
+		// abort if user unauthorized or no word selected or lemmatizer disabled
+		if (!userMayEdit || word == null || !activateButton.getSelection())
+			return;
+
+		// extract search string from word transliteration
+		String prefix = lemmatizerController.processWordCharForLemmatizing(word.getWChar());
+		// build query based on word prefix
+		BTSQueryRequest query = lemmatizerController.getLemmaSearchQuery(prefix);
+
+		//invoke search
+		search(query, null, null);
+
+	}
+
+
 	@Override
 	public void search(final BTSQueryRequest query, String queryName,
 			String viewerFilterString) {
+		// create root for lemma tree view
 		final TreeNodeWrapper lemmaRootNode = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
 
+		// cancel possibly running search
 		if (searchjob != null) {
 			searchjob.cancel();
 			searchjob = null;
@@ -1308,46 +1326,59 @@ public class EgyLemmatizerPart implements SearchViewer {
 			protected IStatus run(final IProgressMonitor monitor) {
 
 				String tempSearchString = null;
-				if (query.getAutocompletePrefix() != null) {
-					tempSearchString = lemmatizerController
-							.processWordCharForLemmatizing(query
-									.getAutocompletePrefix());
-				}
+				BTSQueryRequest q = query;
+				// extract search string from query
+				if (query.getAutocompletePrefix() != null)
+					tempSearchString = query.getAutocompletePrefix();
+
 				final String searchString = tempSearchString;
 				List<BTSLemmaEntry> obs;
 				obs = lemmaNavigatorController
 						.getSearchEntries(
-								query,
+								q,
 								null,
 								lemmaViewer,
 								lemmaRootNode,
 								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
 								monitor);
-				List<BTSLemmaEntry> filtered = filterLemmaProposals(obs, searchString);
 
-//				Set<BTSLemmaEntry> filteredSet = new HashSet<BTSLemmaEntry>(filtered.size());
-//				filteredSet.addAll(filtered);
-				
+				// remove those lemma entries that are obsolete or of root type
+				// sort entries using EgyLemmaEntryComparator and processWordChar(searchString) [not anymore]
+				// limit results to 120
+				List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(obs, searchString);
+
 				if (monitor.isCanceled())
 					return Status.CANCEL_STATUS;
 
 				if (filtered != null && filtered.size() > 0) {
 					List<TreeNodeWrapper> nodes = lemmaNavigatorController
 							.loadNodesWithChildren(filtered, monitor, false);
+
+					for (final TreeNodeWrapper child : nodes) {
+						child.setChildrenLoaded(true);
+						loadChildren(child, false, searchString);
+					}
+					/*int counter = 0;
+					for (BTSLemmaEntry entry : filtered) {
+						counter++;
+						try {
+							lemmaNavigatorController
+									.checkAndFullyLoad(entry, false);
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						if (counter > 40 || monitor.isCanceled())
+							break;
+
+					}*/
 					lemmaRootNode.getChildren().addAll(nodes);
 				} else {
 					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE
 							.createTreeNodeWrapper();
 					emptyNode.setLabel("Nothing found that matches your query");
 					lemmaRootNode.getChildren().add(emptyNode);
-					//sync.asyncExec(lemmaViewerLoadThread(lemmaRootNode, searchString));
-					//return Status.OK_STATUS;
 				}
-				if (monitor.isCanceled())
-					return Status.CANCEL_STATUS;
 
-
-//				}
 				if (monitor.isCanceled())
 					return Status.CANCEL_STATUS;
 

@@ -21,7 +21,5 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 
 	List<BTSLemmaEntry> sortAndFilterLemmaProposals(List<BTSLemmaEntry> obs);
 
-	BTSQueryRequest findLemmaProposalsQuery(String chars);
-
-	
+	BTSQueryRequest createLemmaSearchQuery(String chars);
 }

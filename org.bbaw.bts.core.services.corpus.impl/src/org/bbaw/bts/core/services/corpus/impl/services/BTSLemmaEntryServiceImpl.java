@@ -212,8 +212,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 
 	@Override
 	public List<BTSLemmaEntry> findLemmaProposals(String word, IProgressMonitor monitor) {
-		String chars = processWordCharForLemmatizing(word);
-		BTSQueryRequest query = findLemmaProposalsQuery(chars);
+		String chars = word;//processWordCharForLemmatizing(word);
+		BTSQueryRequest query = createLemmaSearchQuery(chars);
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
 		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
@@ -225,21 +225,20 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 	
 	@Override
-	public BTSQueryRequest findLemmaProposalsQuery(String chars) {
+	public BTSQueryRequest createLemmaSearchQuery(String chars) {
 		BTSQueryRequest query = new BTSQueryRequest();
 		// composita
 		if (chars.contains("-"))
 		{
-			chars = chars.replaceAll("-", "\\\\-");
+			//chars = chars.replaceAll("-", "\\\\-");
 		}
+		System.out.println("lemma service match query: "+chars);
 		// add .*
-		{
-			query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchPhraseQuery("name",chars))
+		query.setQueryBuilder(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchQuery("name",chars))
 					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
-					.should(QueryBuilders.wildcardQuery("name",chars + ",*"))
 					);
-		}
+		query.setAutocompletePrefix(chars);
 		return query;
 	}
 
