@@ -1357,24 +1357,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 				if (filtered != null && filtered.size() > 0) {
 					List<TreeNodeWrapper> nodes = lemmaNavigatorController
 							.loadNodesWithChildren(filtered, monitor, false);
-
-					for (final TreeNodeWrapper child : nodes) {
-						child.setChildrenLoaded(true);
-						loadChildren(child, false, searchString);
-					}
-					/*int counter = 0;
-					for (BTSLemmaEntry entry : filtered) {
-						counter++;
-						try {
-							lemmaNavigatorController
-									.checkAndFullyLoad(entry, false);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						if (counter > 40 || monitor.isCanceled())
-							break;
-
-					}*/
 					lemmaRootNode.getChildren().addAll(nodes);
 				} else {
 					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE
