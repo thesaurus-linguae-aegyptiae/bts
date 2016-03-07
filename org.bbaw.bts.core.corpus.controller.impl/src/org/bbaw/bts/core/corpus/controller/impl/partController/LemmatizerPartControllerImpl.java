@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyLemmaEntryComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class LemmatizerPartControllerImpl implements LemmatizerPartController {
