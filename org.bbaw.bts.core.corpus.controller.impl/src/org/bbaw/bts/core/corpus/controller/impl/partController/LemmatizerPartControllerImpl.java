@@ -20,7 +20,7 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 	@Override
 	public List<BTSLemmaEntry> findLemmaProposals(String word, IProgressMonitor monitor) {
 		List<BTSLemmaEntry> filtered =  lemmaService.findLemmaProposals(word, monitor);
-		//Collections.sort(filtered, new BTSEgyLemmaEntryComparator(processWordCharForLemmatizing(word)));
+		Collections.sort(filtered, new BTSEgyLemmaEntryComparator(word));
 		return filtered;
 	}
 

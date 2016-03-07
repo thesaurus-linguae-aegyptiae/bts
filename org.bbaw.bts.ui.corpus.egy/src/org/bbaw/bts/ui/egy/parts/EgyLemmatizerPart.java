@@ -511,7 +511,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		lemmaViewer.setLabelProvider(labelProvider);
 		sorter = ContextInjectionFactory.make(
 				BTSLemmatizerEgyObjectByNameViewerSorter.class, context);
-		lemmaViewer.setSorter(sorter);
+		//lemmaViewer.setComparator(sorter); //XXX seems unstable
 		lemmaSelectionListener = new ISelectionChangedListener() {
 
 			@Override
@@ -1057,10 +1057,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 		return new Runnable() {
 			@Override
 			public void run() {
-				sorter.setLemmatizerWordChar(searchStr);
 				lemmaViewer.setInput(root);
-				lemmaViewer.refresh();
 				lemmaViewer.expandAll();
+				sorter.setLemmatizerWordChar(searchStr);
+				//lemmaViewer.setComparator(sorter);
+				lemmaViewer.refresh();
 				if (autoLemmaProposalSelection
 						&& lemmaViewer.getTree().getItemCount() > 0) {
 					TreeItem first = lemmaViewer.getTree().getItem(0);
