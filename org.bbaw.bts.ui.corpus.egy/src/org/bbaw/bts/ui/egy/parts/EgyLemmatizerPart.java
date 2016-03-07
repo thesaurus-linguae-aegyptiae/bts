@@ -31,12 +31,12 @@ import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsE
 import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.controldecoration.BackgroundControlDecorationSupport;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;

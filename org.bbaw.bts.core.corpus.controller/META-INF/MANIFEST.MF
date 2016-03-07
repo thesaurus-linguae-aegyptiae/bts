@@ -10,6 +10,7 @@ Export-Package: org.bbaw.bts.core.corpus.controller.generalController,
  org.bbaw.bts.core.corpus.controller.partController.text.model
 Import-Package: org.bbaw.bts.btsmodel,
  org.bbaw.bts.btsviewmodel,
+ org.bbaw.bts.core.dao.util,
  org.bbaw.bts.corpus.btsCorpusModel,
  org.bbaw.bts.searchModel,
  org.bbaw.bts.ui.commons.filter,
