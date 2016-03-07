@@ -970,7 +970,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			if (currentWord != null) {
 				if (loadWordData(currentWord)) {
 					// nothing
-					clearProposals();
+					//clearProposals();
 
 				} else if (part.isVisible()) {
 					BTSTranslations translations = currentWord.getTranslation();
