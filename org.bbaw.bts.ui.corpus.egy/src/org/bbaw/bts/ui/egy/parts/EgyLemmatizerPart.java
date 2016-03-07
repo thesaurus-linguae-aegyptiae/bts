@@ -383,7 +383,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 			@Override
 			public void mouseUp(MouseEvent e) {
-				if (userMayEdit) {
+				if (userMayEdit || currentWord == null) {
+					lemmaViewer.getTree().setEnabled(true);
 					lblSearch
 							.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 
