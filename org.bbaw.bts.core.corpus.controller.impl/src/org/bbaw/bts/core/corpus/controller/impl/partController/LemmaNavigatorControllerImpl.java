@@ -114,13 +114,15 @@ implements LemmaNavigatorController{
 					.createTreeNodeWrapper();
 			node.setObject(lemma);
 			nodeReg.put(lemma.get_id(), node);
+			System.out.println("lemma "+lemma.get_id()+": "+lemma.getName());
 		}
 		
 		// nest wrappers according to subList interrelations
 		for (BTSLemmaEntry lemma : subList) {
 			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
 			for (BTSRelation rel : lemma.getRelations())
-				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())) {
+				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())
+						|| "predecessor".equals(rel.getType())) {
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
 						if (!node.getChildren().contains(childNode)) {
@@ -128,7 +130,8 @@ implements LemmaNavigatorController{
 							childNode.setParent(node);
 						}
 					}
-				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType()))
+				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType())
+						|| "successor".equals(rel.getType())) {
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
 						if (!parentNode.getChildren().contains(node)) {
@@ -136,6 +139,8 @@ implements LemmaNavigatorController{
 							node.setParent(parentNode);
 						}
 					}
+				} else
+					System.out.println(lemma.get_id() + " -> "+rel.getObjectId()+": "+rel.getType());
 		}
 		
 		// extract root nodes
