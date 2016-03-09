@@ -3,9 +3,11 @@ package org.bbaw.bts.ui.egy.parts;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import javax.annotation.PostConstruct;
@@ -224,6 +226,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 	private Label lblSearch;
 	private Job searchjob;
 	private Button activateButton;
+	
+	private LinkedHashMap<String, TreeNodeWrapper> lemmaNodeRegistry;
 
 	@Inject
 	public EgyLemmatizerPart() {
@@ -1064,9 +1068,17 @@ public class EgyLemmatizerPart implements SearchViewer {
 				lemmaViewer.refresh();
 				if (autoLemmaProposalSelection
 						&& lemmaViewer.getTree().getItemCount() > 0) {
-					TreeItem first = lemmaViewer.getTree().getItem(0);
-					lemmaViewer.setSelection(new StructuredSelection(
-							first.getData()));
+					StructuredSelection selection = null;
+					if (currentWord.getLKey() != null && lemmaNodeRegistry != null) {
+						TreeNodeWrapper node = lemmaNodeRegistry.get(currentWord.getLKey());
+						if (node != null)
+							selection = new StructuredSelection(node);
+					} 
+					if (selection == null) {
+						TreeItem first = lemmaViewer.getTree().getItem(0);
+						selection = new StructuredSelection(first.getData());
+					}
+					lemmaViewer.setSelection(selection);
 				}
 			}
 		};
@@ -1281,8 +1293,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					return Status.CANCEL_STATUS;
 
 				if (filtered != null && filtered.size() > 0) {
-					List<TreeNodeWrapper> nodes = lemmaNavigatorController
-							.loadNodesWithChildren(filtered, monitor, false);
+					List<TreeNodeWrapper> nodes = loadNodesWithChildren(filtered, monitor);
 					lemmaRootNode.getChildren().addAll(nodes);
 				} else {
 					TreeNodeWrapper emptyNode = BtsviewmodelFactory.eINSTANCE
@@ -1305,6 +1316,19 @@ public class EgyLemmatizerPart implements SearchViewer {
 		searchjob.schedule();
 	}
 
+	
+	private List<TreeNodeWrapper> loadNodesWithChildren(List<BTSLemmaEntry> entries, IProgressMonitor monitor) {
+		this.lemmaNodeRegistry = lemmaNavigatorController.loadNodesWithChildren(entries, monitor, false);
+		Vector<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>();
+		// extract root nodes
+		for (BTSLemmaEntry lemma : entries) {
+			TreeNodeWrapper node = lemmaNodeRegistry.get(lemma.get_id());
+			if (node.getParent() == null)
+				nodes.add(node);
+		}
+		return nodes;
+	}
+	
 	/**
 	 * Has given list of {@link BTSLemmaEntry} objects filtered based on their review state,
 	 * brings remaining elements in an order defined by {@link BTSEgyLemmaEntryComparator} 

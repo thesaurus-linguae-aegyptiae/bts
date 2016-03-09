@@ -1,16 +1,13 @@
 package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Vector;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
@@ -20,20 +17,15 @@ import org.bbaw.bts.core.commons.filter.BTSFilter;
 import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyObjectByNameComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
-import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
-import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaSubentry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
-import org.bbaw.bts.tempmodel.CacheTreeNode;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.viewers.ContentViewer;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class LemmaNavigatorControllerImpl extends AbstractCorpusObjectNavigatorControllerImpl<BTSLemmaEntry, String> 
@@ -103,20 +95,20 @@ implements LemmaNavigatorController{
 
 	
 	@Override
-	public List<TreeNodeWrapper> loadNodesWithChildren(
+	public LinkedHashMap<String, TreeNodeWrapper> loadNodesWithChildren(
 			List<BTSLemmaEntry> subList, IProgressMonitor monitor, boolean b) {
-		List<TreeNodeWrapper> nodes = new Vector<TreeNodeWrapper>();
-		Map<String, TreeNodeWrapper> nodeReg = new HashMap<String, TreeNodeWrapper>();
-		
+		LinkedHashMap<String, TreeNodeWrapper> nodeReg = new LinkedHashMap<String, TreeNodeWrapper>();
+		if (monitor != null)
+			monitor.beginTask("Load nodes", subList.size());
+
 		// initialize nodes registry with lemma wrappers
 		for (BTSLemmaEntry lemma : subList) {
 			TreeNodeWrapper node = BtsviewmodelFactory.eINSTANCE
 					.createTreeNodeWrapper();
 			node.setObject(lemma);
 			nodeReg.put(lemma.get_id(), node);
-			System.out.println("lemma "+lemma.get_id()+": "+lemma.getName());
 		}
-		
+
 		// nest wrappers according to subList interrelations
 		for (BTSLemmaEntry lemma : subList) {
 			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
@@ -131,7 +123,7 @@ implements LemmaNavigatorController{
 						}
 					}
 				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType())
-						|| "successor".equals(rel.getType())) {
+						|| "successor".equals(rel.getType()))
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
 						if (!parentNode.getChildren().contains(node)) {
@@ -139,18 +131,11 @@ implements LemmaNavigatorController{
 							node.setParent(parentNode);
 						}
 					}
-				} else
-					System.out.println(lemma.get_id() + " -> "+rel.getObjectId()+": "+rel.getType());
-		}
-		
-		// extract root nodes
-		for (BTSLemmaEntry lemma  : subList) {
-			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
-			if (node.getParent() == null)
-				nodes.add(node);
+			if (monitor != null)
+				monitor.worked(1);
 		}
 
-		return nodes;
+		return nodeReg;
 	}
 	
 	@Override
