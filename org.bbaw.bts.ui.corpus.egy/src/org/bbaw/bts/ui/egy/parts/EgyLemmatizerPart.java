@@ -809,7 +809,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		if (!loaded && selectionCached) // not yet loaded but has cached
 										// selection
 		{
-			setSelectionInteral(currentWord);
+			setSelectionInternal(currentWord, 0);
 		}
 		evaluationController
 				.activateDBCollectionContext(BTSPluginIDs.PREF_MAIN_CORPUS_KEY);
@@ -872,48 +872,48 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	@Inject
 	void setSelection(
-			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent selection) {
-		if (selection == null)
+			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent event) {
+		if (event == null)
 			return;
-		if (selection.equals(lastEvent))
+		if (event.equals(lastEvent))
 			return;
-		lastEvent = selection;
+		lastEvent = event;
 		if (constructed) {
 			if (!selfSelecting) {
-				if (selection == null) {
-					/* implementation not shown */
-				} else if (!selection.getSelectedItems().isEmpty()) {
-					if (selection.getSelectedItems().get(0) instanceof BTSWord) {
+				if (event != null) {
+					if (!event.getSelectedItems().isEmpty())
+						if (event.getSelectedItems().get(0) instanceof BTSWord) {
 
-						// make sure the right corpusObject is set
-						if (selection.getParentObject() != null
-								&& !selection.getParentObject().equals(
-										corpusObject)) {
-							setSelection((BTSCorpusObject) selection
-									.getParentObject());
+							BTSWord w = (BTSWord)event.getSelectedItems().get(0);
+
+							// make sure the right corpusObject is set
+							if (event.getParentObject() != null
+									&& !event.getParentObject().equals(
+											corpusObject)) {
+								setSelection((BTSCorpusObject) event
+										.getParentObject());
+							}
+							setSelectionInternal((BTSWord) event
+									.getSelectedItems().get(0), event.type);
+							loaded = true;
+						} else if (loaded) {
+							saveWordData(currentWord);
+							currentWord = null;
+							clearAllInput();
+							loaded = false;
+							selectionCached = false;
 						}
-						setSelectionInteral((BTSWord) selection
-								.getSelectedItems().get(0));
-						loaded = true;
-					} else if (loaded) {
-						saveWordData(currentWord);
-						currentWord = null;
-						clearAllInput();
-						loaded = false;
-						selectionCached = false;
-					}
-				}
 			} else {
 				selfSelecting = false;
 			}
-		} else if (selection != null && selection.getSelectedItems() != null
-				&& !selection.getSelectedItems().isEmpty()
-				&& selection.getSelectedItems().get(0) instanceof BTSWord) {
-			if (selection.getParentObject() != null
-					&& !selection.getParentObject().equals(corpusObject)) {
-				setSelection((BTSCorpusObject) selection.getParentObject());
+		} else if (event != null && event.getSelectedItems() != null
+				&& !event.getSelectedItems().isEmpty()
+				&& event.getSelectedItems().get(0) instanceof BTSWord) {
+			if (event.getParentObject() != null
+					&& !event.getParentObject().equals(corpusObject)) {
+				setSelection((BTSCorpusObject) event.getParentObject());
 			}
-			currentWord = (BTSWord) selection.getSelectedItems().get(0);
+			currentWord = (BTSWord) event.getSelectedItems().get(0);
 			selectionCached = true;
 		}
 	}
@@ -963,11 +963,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	}
 
-	private void setSelectionInteral(BTSWord selection) {
+	private void setSelectionInternal(BTSWord selection, int eventType) {
 		if (selection == null) {
 		} else {
 			BTSWord oldWord = currentWord;
-			if (oldWord != null) {
+			if (oldWord != null && eventType == 1) {
 				saveWordData(oldWord);
 			}
 			currentWord = (BTSWord) selection;
