@@ -987,7 +987,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 					wordTranslate_Editor.load(translations, editingDomain,
 							false);
 					lemmaViewerSearchFilter.setFilterString(null);
-					searchAuto(currentWord);
 				}
 //				setUserMayEdit(userMayEdit);
 
@@ -1229,6 +1228,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 	}
 
+
+	private void searchAuto(final BTSWord word) {
+		if (word != null)
+			searchAuto(word.getWChar());
+	}
+
 	
 	private void searchAuto(final String input) {
 		// abort if user unauthorized or lemmatizer disabled
@@ -1241,11 +1246,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 		//invoke search
 		search(query, null, null);
-	}
-	
-	private void searchAuto(final BTSWord word) {
-		if (word != null)
-			searchAuto(word.getWChar());
 	}
 
 
