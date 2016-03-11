@@ -1254,6 +1254,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob.cancel();
 			searchjob = null;
 		}
+
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
 			// // in new job, search
@@ -1261,6 +1262,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 			protected IStatus run(final IProgressMonitor monitor) {
 
 				String tempSearchString = null;
+				// lemmafy search query if necessary
+				//BTSQueryRequest q = (query instanceof BTSLemmaQueryRequest) ? query : new BTSLemmaQueryRequest(query);
 				BTSQueryRequest q = query;
 				// extract search string from query
 				if (query.getAutocompletePrefix() != null)
