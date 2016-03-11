@@ -9,6 +9,7 @@ import org.bbaw.bts.core.corpus.controller.impl.util.BTSEgyLemmaEntryComparator;
 import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.util.BTSLemmaQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.eclipse.core.runtime.IProgressMonitor;
 
@@ -38,7 +39,7 @@ public class LemmatizerPartControllerImpl implements LemmatizerPartController {
 	}
 	
 	@Override
-	public BTSQueryRequest getLemmaSearchQuery(String searchString) {
+	public BTSLemmaQueryRequest getLemmaSearchQuery(String searchString) {
 		return lemmaService.createLemmaSearchQuery(searchString);
 	}
 

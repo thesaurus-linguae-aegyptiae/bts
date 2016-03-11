@@ -19,6 +19,7 @@ import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
+import org.bbaw.bts.core.services.corpus.util.BTSLemmaQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
@@ -224,8 +225,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 	
 	@Override
-	public BTSQueryRequest createLemmaSearchQuery(String chars) {
-		BTSQueryRequest query = new BTSQueryRequest(chars);
+	public BTSLemmaQueryRequest createLemmaSearchQuery(String chars) {
+		BTSLemmaQueryRequest query = new BTSLemmaQueryRequest(chars);
 		System.out.println("lemma service match query: "+chars);
 		query.setQueryBuilder(QueryBuilders.boolQuery()
 					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars).boost(1.5f))

@@ -3,6 +3,7 @@ package org.bbaw.bts.core.services.corpus;
 import java.util.List;
 
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.services.corpus.util.BTSLemmaQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
@@ -21,5 +22,5 @@ GenericCorpusObjectService<BTSLemmaEntry, String> {
 
 	List<BTSLemmaEntry> filterLemmaProposals(List<BTSLemmaEntry> obs);
 
-	BTSQueryRequest createLemmaSearchQuery(String chars);
+	BTSLemmaQueryRequest createLemmaSearchQuery(String chars);
 }

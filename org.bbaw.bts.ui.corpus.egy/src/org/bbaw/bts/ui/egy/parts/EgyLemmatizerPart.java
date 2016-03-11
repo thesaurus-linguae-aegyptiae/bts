@@ -30,6 +30,7 @@ import org.bbaw.bts.core.corpus.controller.partController.BTSTextEditorControlle
 import org.bbaw.bts.core.corpus.controller.partController.LemmaNavigatorController;
 import org.bbaw.bts.core.corpus.controller.partController.LemmatizerPartController;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.services.corpus.util.BTSLemmaQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSText;
@@ -1235,6 +1236,11 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob = null;
 		}
 
+		if (!(query instanceof BTSLemmaQueryRequest) && query.getAutocompletePrefix() != null) {
+			searchAuto(query.getAutocompletePrefix());
+			return;
+		}
+		
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
 			// // in new job, search
@@ -1243,11 +1249,18 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 				String tempSearchString = null;
 				// lemmafy search query if necessary
-				//BTSQueryRequest q = (query instanceof BTSLemmaQueryRequest) ? query : new BTSLemmaQueryRequest(query);
-				BTSQueryRequest q = query;
+				BTSQueryRequest q = (query instanceof BTSLemmaQueryRequest) ? query : new BTSLemmaQueryRequest(query);
+				System.out.println("searchstring: "+q.getSearchString());
+				System.out.println("id search: "+q.isIdQuery());
+				System.out.println("wildcard search: "+q.isWildcardQuery());
+				System.out.println("search in fields: "+q.getRequestFields() );
+				System.out.println("id string: "+q.getIdString());
+				
+				
+				
 				// extract search string from query
-				if (query.getAutocompletePrefix() != null)
-					tempSearchString = query.getAutocompletePrefix();
+				if (q.getAutocompletePrefix() != null)
+					tempSearchString = q.getAutocompletePrefix();
 
 				final String searchString = tempSearchString;
 				List<BTSLemmaEntry> obs;

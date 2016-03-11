@@ -50,19 +50,19 @@ public class BTSQueryRequest
 
 	private List<BTSObject> givenObjects;
 
-	private QueryBuilder queryBuilder;
+	protected QueryBuilder queryBuilder;
 
-	private SearchRequestBuilder searchRequestBuilder;
+	protected SearchRequestBuilder searchRequestBuilder;
 
 	private Set<String> requestFields;
 	
-	private String searchString;
+	protected String searchString;
 
-	private String autocompletePrefix;
+	protected String autocompletePrefix;
 	
 	private String requestTypeFieldValue;
 	
-	private List<String> responseFields;
+	protected List<String> responseFields;
 	
 	private String dbPath;
 	
