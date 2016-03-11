@@ -226,17 +226,10 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	@Override
 	public BTSQueryRequest createLemmaSearchQuery(String chars) {
 		BTSQueryRequest query = new BTSQueryRequest();
-		// composita
-		if (chars.contains("-"))
-		{
-			//chars = chars.replaceAll("-", "\\\\-");
-		}
 		System.out.println("lemma service match query: "+chars);
-		// add .*
 		query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars))
-					.should(QueryBuilders.matchQuery("name",chars))
-					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
+					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars).boost(1.5f))
+					.must(QueryBuilders.matchQuery("name",chars))
 					);
 		query.setAutocompletePrefix(chars);
 		return query;
@@ -246,14 +239,10 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			List<BTSLemmaEntry> children) {
 		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
 		for (BTSCorpusObject entry : children)
-		{
 			if (entry instanceof BTSLemmaEntry 
 					&& (entry.getRevisionState() == null || !entry.getRevisionState().contains("obsolete"))
 					&& (entry.getType() == null || !entry.getType().equals("root")))
-			{
 				filtered.add((BTSLemmaEntry) entry);
-			}
-		}
 		return filtered;
 	}
 
