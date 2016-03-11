@@ -735,7 +735,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 						node,
 						BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN,
 						null);
-		final List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(children, prefix);
+		final List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(children, prefix, 100);
 		// If you want to update the UI
 		sync.asyncExec(new Runnable() {
 			@Override
@@ -1286,8 +1286,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 				// remove those lemma entries that are obsolete or of root type
 				// sort entries using EgyLemmaEntryComparator and processWordChar(searchString) [not anymore]
-				// limit results to 120
-				List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(obs, searchString);
+				// limit results to 500
+				List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(obs, searchString, 150);
 
 				if (monitor.isCanceled())
 					return Status.CANCEL_STATUS;
@@ -1332,14 +1332,15 @@ public class EgyLemmatizerPart implements SearchViewer {
 	/**
 	 * Has given list of {@link BTSLemmaEntry} objects filtered based on their review state,
 	 * brings remaining elements in an order defined by {@link BTSEgyLemmaEntryComparator} 
-	 * (which varies based on the given prefix) and returns the first 120 elements of the resulting collection.  
-	 * @param obs elements to be filtered, sorted and cut down to fixed number of items (120)
+	 * (which varies based on the given prefix) and returns the first <code>n</code> elements of the resulting collection.  
+	 * @param obs elements to be filtered, sorted and cut down to fixed number of items
 	 * @param searchString prefix determining sort order of filtered results
-	 * @return first 120 remaining elements
+	 * @param n maximum number of elements
+	 * @return first <code>n</code> remaining elements
 	 */
-	protected List<BTSLemmaEntry> sortAndfilterLemmaProposals(List<BTSLemmaEntry> obs, String searchString) {
+	protected List<BTSLemmaEntry> sortAndfilterLemmaProposals(List<BTSLemmaEntry> obs, String searchString, int n) {
 		List<BTSLemmaEntry> filtered = lemmatizerController.filterAndSortLemmaProposals(obs, searchString);
-		return filtered.subList(0, Math.min(filtered.size() , 120));
+		return filtered.subList(0, Math.min(filtered.size(), n));
 	}
 
 	@Inject
