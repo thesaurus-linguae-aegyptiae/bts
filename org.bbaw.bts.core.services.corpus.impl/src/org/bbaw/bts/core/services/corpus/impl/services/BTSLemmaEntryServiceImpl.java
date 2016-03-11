@@ -225,11 +225,11 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	
 	@Override
 	public BTSQueryRequest createLemmaSearchQuery(String chars) {
-		BTSQueryRequest query = new BTSQueryRequest();
+		BTSQueryRequest query = new BTSQueryRequest(chars);
 		System.out.println("lemma service match query: "+chars);
 		query.setQueryBuilder(QueryBuilders.boolQuery()
 					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars).boost(1.5f))
-					.must(QueryBuilders.matchQuery("name",chars))
+					.should(QueryBuilders.termQuery("name",chars))
 					);
 		query.setAutocompletePrefix(chars);
 		return query;
