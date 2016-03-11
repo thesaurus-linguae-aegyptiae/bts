@@ -873,48 +873,41 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent event) {
-		if (event == null)
-			return;
 		if (event.equals(lastEvent))
 			return;
 		lastEvent = event;
-		if (constructed) {
-			if (!selfSelecting) {
-				if (event != null) {
-					if (!event.getSelectedItems().isEmpty())
-						if (event.getSelectedItems().get(0) instanceof BTSWord) {
-
-							BTSWord w = (BTSWord)event.getSelectedItems().get(0);
-
-							// make sure the right corpusObject is set
-							if (event.getParentObject() != null
-									&& !event.getParentObject().equals(
-											corpusObject)) {
-								setSelection((BTSCorpusObject) event
-										.getParentObject());
-							}
-							setSelectionInternal((BTSWord) event
-									.getSelectedItems().get(0), event.type);
-							loaded = true;
-						} else if (loaded) {
-							saveWordData(currentWord);
-							currentWord = null;
-							clearAllInput();
-							loaded = false;
-							selectionCached = false;
+		if (event != null && !event.getSelectedItems().isEmpty()) {
+			BTSWord w = null;
+			if (event.getSelectedItems().get(0) instanceof BTSWord)
+				w = (BTSWord)event.getSelectedItems().get(0);
+			if (constructed) {
+				if (!selfSelecting) {
+					if (w != null) {
+						// make sure the right corpusObject is set
+						if (event.getParentObject() != null
+								&& !event.getParentObject().equals(
+										corpusObject)) {
+							setSelection((BTSCorpusObject) event
+									.getParentObject());
 						}
-			} else {
-				selfSelecting = false;
+						setSelectionInternal(w, event.type);
+						loaded = true;
+					} else if (loaded) {
+						saveWordData(currentWord);
+						currentWord = null;
+						clearAllInput();
+						loaded = false;
+						selectionCached = false;
+					}
+				} else
+					selfSelecting = false;
+			} else if (w != null) {
+				if (event.getParentObject() != null
+						&& !event.getParentObject().equals(corpusObject))
+					setSelection((BTSCorpusObject) event.getParentObject());
+				currentWord = w;
+				selectionCached = true;
 			}
-		} else if (event != null && event.getSelectedItems() != null
-				&& !event.getSelectedItems().isEmpty()
-				&& event.getSelectedItems().get(0) instanceof BTSWord) {
-			if (event.getParentObject() != null
-					&& !event.getParentObject().equals(corpusObject)) {
-				setSelection((BTSCorpusObject) event.getParentObject());
-			}
-			currentWord = (BTSWord) event.getSelectedItems().get(0);
-			selectionCached = true;
 		}
 	}
 
