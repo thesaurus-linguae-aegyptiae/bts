@@ -852,40 +852,40 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Inject
 	void setSelection(
 			@Optional @Named(IServiceConstants.ACTIVE_SELECTION) BTSTextSelectionEvent event) {
-		if (event.equals(lastEvent))
-			return;
-		lastEvent = event;
-		if (event != null && !event.getSelectedItems().isEmpty()) {
-			BTSWord w = null;
-			if (event.getSelectedItems().get(0) instanceof BTSWord)
-				w = (BTSWord)event.getSelectedItems().get(0);
-			if (constructed) {
-				if (!selfSelecting) {
-					if (w != null) {
-						// make sure the right corpusObject is set
-						if (event.getParentObject() != null
-								&& !event.getParentObject().equals(
-										corpusObject)) {
-							setSelection((BTSCorpusObject) event
-									.getParentObject());
+		if (event != null && !event.equals(lastEvent)) {
+			lastEvent = event;
+			if (!event.getSelectedItems().isEmpty()) {
+				BTSWord w = null;
+				if (event.getSelectedItems().get(0) instanceof BTSWord)
+					w = (BTSWord)event.getSelectedItems().get(0);
+				if (constructed) {
+					if (!selfSelecting) {
+						if (w != null) {
+							// make sure the right corpusObject is set
+							if (event.getParentObject() != null
+									&& !event.getParentObject().equals(
+											corpusObject)) {
+								setSelection((BTSCorpusObject) event
+										.getParentObject());
+							}
+							setSelectionInternal(w, event.type);
+							loaded = true;
+						} else if (loaded) {
+							saveWordData(currentWord);
+							currentWord = null;
+							clearAllInput();
+							loaded = false;
+							selectionCached = false;
 						}
-						setSelectionInternal(w, event.type);
-						loaded = true;
-					} else if (loaded) {
-						saveWordData(currentWord);
-						currentWord = null;
-						clearAllInput();
-						loaded = false;
-						selectionCached = false;
-					}
-				} else
-					selfSelecting = false;
-			} else if (w != null) {
-				if (event.getParentObject() != null
-						&& !event.getParentObject().equals(corpusObject))
-					setSelection((BTSCorpusObject) event.getParentObject());
-				currentWord = w;
-				selectionCached = true;
+					} else
+						selfSelecting = false;
+				} else if (w != null) {
+					if (event.getParentObject() != null
+							&& !event.getParentObject().equals(corpusObject))
+						setSelection((BTSCorpusObject) event.getParentObject());
+					currentWord = w;
+					selectionCached = true;
+				}
 			}
 		}
 	}
@@ -1040,14 +1040,15 @@ public class EgyLemmatizerPart implements SearchViewer {
 				if (autoLemmaProposalSelection
 						&& lemmaViewer.getTree().getItemCount() > 0) {
 					StructuredSelection selection = null;
-					if (currentWord.getLKey() != null && lemmaNodeRegistry != null) {
-						TreeNodeWrapper node = lemmaNodeRegistry.get(currentWord.getLKey());
-						if (node != null)
-							selection = new StructuredSelection(node);
-					} else {
-						TreeItem first = lemmaViewer.getTree().getItem(0);
-						selection = new StructuredSelection(first.getData());
-					}
+					if (currentWord != null)
+						if (currentWord.getLKey() != null && lemmaNodeRegistry != null) {
+							TreeNodeWrapper node = lemmaNodeRegistry.get(currentWord.getLKey());
+							if (node != null)
+								selection = new StructuredSelection(node);
+						} else {
+							TreeItem first = lemmaViewer.getTree().getItem(0);
+							selection = new StructuredSelection(first.getData());
+						}
 					if (selection != null)
 						lemmaViewer.setSelection(selection);
 				}
