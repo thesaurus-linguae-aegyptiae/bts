@@ -117,7 +117,7 @@ implements LemmaNavigatorController{
 						|| "predecessor".equals(rel.getType())) {
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
-						if (!node.getChildren().contains(childNode)) {
+						if (!node.getChildren().contains(childNode) && !ancestors(node).contains(childNode)) {
 							node.getChildren().add(childNode);
 							childNode.setParent(node);
 						}
@@ -126,7 +126,7 @@ implements LemmaNavigatorController{
 						|| "successor".equals(rel.getType()))
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
-						if (!parentNode.getChildren().contains(node)) {
+						if (!parentNode.getChildren().contains(node) && !ancestors(parentNode).contains(node)) {
 							parentNode.getChildren().add(node);
 							node.setParent(parentNode);
 						}
@@ -138,6 +138,13 @@ implements LemmaNavigatorController{
 		return nodeReg;
 	}
 	
+	private static List<TreeNodeWrapper> ancestors(TreeNodeWrapper node) {
+		Vector<TreeNodeWrapper> anc = new Vector<TreeNodeWrapper>();
+		for (;node.getParent() != null; node = node.getParent())
+			anc.add(node.getParent());
+		return anc;
+	}
+
 	@Override
 	public List<BTSLemmaEntry> findChildrenOnlySubEntries(BTSLemmaEntry parent, Map<String, BTSQueryResultAbstract> queryResultMap,
 			ContentViewer viewer, TreeNodeWrapper parentHolder,
