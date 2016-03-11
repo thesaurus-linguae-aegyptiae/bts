@@ -1263,7 +1263,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 				// remove those lemma entries that are obsolete or of root type
 				// sort entries using EgyLemmaEntryComparator and processWordChar(searchString) [not anymore]
 				// limit results to 500
-				List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(obs, searchString, 150);
+				List<BTSLemmaEntry> filtered = sortAndfilterLemmaProposals(obs, searchString, 500);
 
 				if (monitor.isCanceled())
 					return Status.CANCEL_STATUS;
