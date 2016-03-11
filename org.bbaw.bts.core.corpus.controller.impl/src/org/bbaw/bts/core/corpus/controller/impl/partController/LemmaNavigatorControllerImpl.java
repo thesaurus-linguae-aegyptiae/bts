@@ -117,7 +117,7 @@ implements LemmaNavigatorController{
 						|| "predecessor".equals(rel.getType())) {
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
-						if (!node.getChildren().contains(childNode) && !ancestors(node).contains(childNode)) {
+						if (!node.getChildren().contains(childNode) && !ancestry(node, childNode)) {
 							node.getChildren().add(childNode);
 							childNode.setParent(node);
 						}
@@ -126,7 +126,7 @@ implements LemmaNavigatorController{
 						|| "successor".equals(rel.getType()))
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
-						if (!parentNode.getChildren().contains(node) && !ancestors(parentNode).contains(node)) {
+						if (!parentNode.getChildren().contains(node) && !ancestry(parentNode, node)) {
 							parentNode.getChildren().add(node);
 							node.setParent(parentNode);
 						}
@@ -138,11 +138,17 @@ implements LemmaNavigatorController{
 		return nodeReg;
 	}
 	
-	private static List<TreeNodeWrapper> ancestors(TreeNodeWrapper node) {
-		Vector<TreeNodeWrapper> anc = new Vector<TreeNodeWrapper>();
-		for (;node.getParent() != null; node = node.getParent())
-			anc.add(node.getParent());
-		return anc;
+	/**
+	 * Checks if <code>test</code> is an ancestor of <code>node</code>.
+	 * @param node
+	 * @param test
+	 * @return
+	 */
+	private static boolean ancestry(TreeNodeWrapper node, TreeNodeWrapper test) {
+		for (;node != null; node = node.getParent())
+			if (node.equals(test))
+				return true;
+		return false;
 	}
 
 	@Override
