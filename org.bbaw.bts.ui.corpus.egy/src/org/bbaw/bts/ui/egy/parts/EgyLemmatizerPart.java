@@ -1044,12 +1044,12 @@ public class EgyLemmatizerPart implements SearchViewer {
 						TreeNodeWrapper node = lemmaNodeRegistry.get(currentWord.getLKey());
 						if (node != null)
 							selection = new StructuredSelection(node);
-					} 
-					if (selection == null) {
+					} else {
 						TreeItem first = lemmaViewer.getTree().getItem(0);
 						selection = new StructuredSelection(first.getData());
 					}
-					lemmaViewer.setSelection(selection);
+					if (selection != null)
+						lemmaViewer.setSelection(selection);
 				}
 			}
 		};
