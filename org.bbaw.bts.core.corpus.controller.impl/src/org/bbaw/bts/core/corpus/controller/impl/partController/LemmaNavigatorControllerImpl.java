@@ -114,7 +114,7 @@ implements LemmaNavigatorController{
 			TreeNodeWrapper node = nodeReg.get(lemma.get_id());
 			for (BTSRelation rel : lemma.getRelations())
 				if (BTSCoreConstants.BASIC_RELATIONS_CONTAINS.equals(rel.getType())
-						|| "predecessor".equals(rel.getType())) {
+						|| "successor".equals(rel.getType())) {
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper childNode = nodeReg.get(rel.getObjectId());
 						if (!node.getChildren().contains(childNode) && !ancestry(node, childNode)) {
@@ -123,7 +123,7 @@ implements LemmaNavigatorController{
 						}
 					}
 				} else if (BTSCoreConstants.BASIC_RELATIONS_PARTOF.equals(rel.getType())
-						|| "successor".equals(rel.getType()))
+						|| "predecessor".equals(rel.getType()))
 					if (nodeReg.containsKey(rel.getObjectId())) {
 						TreeNodeWrapper parentNode = nodeReg.get(rel.getObjectId());
 						if (!parentNode.getChildren().contains(node) && !ancestry(parentNode, node)) {
