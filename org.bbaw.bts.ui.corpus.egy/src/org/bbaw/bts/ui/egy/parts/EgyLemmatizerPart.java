@@ -1237,7 +1237,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 		}
 
 		if (!(query instanceof BTSLemmaQueryRequest) && query.getAutocompletePrefix() != null) {
-			searchAuto(query.getAutocompletePrefix());
+			searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
 			return;
 		}
 		
