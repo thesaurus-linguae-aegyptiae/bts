@@ -1236,11 +1236,13 @@ public class EgyLemmatizerPart implements SearchViewer {
 			searchjob = null;
 		}
 
-		if (!(query instanceof BTSLemmaQueryRequest) && query.getAutocompletePrefix() != null) {
-			searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
-			return;
-		}
-		
+		if (!(query instanceof BTSLemmaQueryRequest))
+			if (!query.isIdQuery() && query.getAutocompletePrefix() != null)
+				if (query.getRequestFields().contains("name")) {
+					searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
+					return;
+				}
+
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
 			// // in new job, search
