@@ -66,11 +66,9 @@ public class BTSQueryRequest
 	
 	private String dbPath;
 	
-	private boolean idQuery;
+	protected boolean idQuery;
 	
-	private boolean wildcardQuery;
-	
-	private String idString;
+	protected boolean wildcardQuery;
 	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
@@ -100,7 +98,6 @@ public class BTSQueryRequest
 			{
 				// allows DAO to retrieve object directly from DB
 				this.setIdQuery(true);
-				this.setIdString(searchString);
 			}
 			else if (!requestFields.isEmpty())
 			{
@@ -279,21 +276,10 @@ public class BTSQueryRequest
 
 	public void setIdQuery(boolean idQuery) {
 		this.idQuery = idQuery;
-		if (idQuery)
-			this.setIdString(searchString);
 	}
 	
 	public void setWildcardQuery(boolean wildcardQuery) {
 		this.wildcardQuery = wildcardQuery;
 	}
-
-	public String getIdString() {
-		return idString;
-	}
-
-	public void setIdString(String idString) {
-		this.idString = idString;
-	}
-
 
 }

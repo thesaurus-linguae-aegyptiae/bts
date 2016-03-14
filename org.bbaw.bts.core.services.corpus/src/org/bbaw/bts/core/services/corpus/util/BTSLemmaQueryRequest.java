@@ -18,6 +18,8 @@ public class BTSLemmaQueryRequest extends BTSQueryRequest {
 		if (base.getResponseFields() != null)
 			this.responseFields = Arrays.asList(base.getResponseFields());
 		this.autocompletePrefix = base.getAutocompletePrefix();
+		this.idQuery = base.isIdQuery();
+		this.wildcardQuery = base.isWildcardQuery();
 	}
 
 	
