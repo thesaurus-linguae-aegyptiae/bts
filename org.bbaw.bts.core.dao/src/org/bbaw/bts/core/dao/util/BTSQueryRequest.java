@@ -32,6 +32,7 @@ package org.bbaw.bts.core.dao.util;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -43,6 +44,7 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.SimpleQueryStringBuilder.Operator;
 
 public class BTSQueryRequest {
 
@@ -98,6 +100,7 @@ public class BTSQueryRequest {
 	public void initQueryBuilder() {
 		if (searchString.length() > 0)
 		{
+			String escapedString = this.getSearchStringEscaped().toLowerCase();
 			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 			this.setQueryId("timestamp-" + now.toString());
 			if (idQuery)
@@ -108,17 +111,18 @@ public class BTSQueryRequest {
 			else if (!requestFields.isEmpty())
 			{
 				// "Search for Names only"
-				// XXX does not find anything for "ḥm.t-n"
 				BoolQueryBuilder qb = QueryBuilders.boolQuery();
 				for (String field : requestFields)
-					qb = qb.should(QueryBuilders.matchQuery(field, searchString));
+					qb = qb.should(wildcardQuery ?
+							QueryBuilders.wildcardQuery(field, escapedString) :
+							QueryBuilders.matchQuery(field, searchString)
+							);
 				this.setQueryBuilder(qb);
 				this.setAutocompletePrefix(searchString);
-
 			}
-			else
-			{
-				this.setQueryBuilder(QueryBuilders.simpleQueryString(this.getSearchStringEscaped().toLowerCase()));
+			else {
+				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString.replaceAll(" ", "+")).defaultOperator(Operator.AND));
+				
 				this.setAutocompletePrefix(searchString);
 			}
 		}		
@@ -203,14 +207,50 @@ public class BTSQueryRequest {
 	}
 	
 	public String getSearchStringEscaped() {
-		// Anführungszeichen nicht escapen!!!
-		String searchString = new String(this.searchString);
-		boolean inQuots = false;
-		boolean leftTrunk = false;
-		boolean rightTrunk = false;
-		List<String> specials = new Vector<String>();
+		// Anführungszeichen und * nicht escapen!!!
+		StringBuilder searchString = new StringBuilder(this.searchString);
+		LinkedList<String> specials = new LinkedList<String>();
+		String[] parts = this.searchString.split("[\"*]");
+		for (int i=0; i>0;) {
+			int j = this.searchString.substring(i).indexOf("*");
+			if (j < 0)
+				j = this.searchString.substring(i).indexOf("\"");
+			i = j;
+		}
+		System.out.print("parts: ");
+		for (String s : parts)
+			System.out.print("'"+s+"'"+" ");
+		System.out.println();
+		for (boolean loop=true; loop;) {
+			if (searchString.indexOf("*") > -1) {
+				wildcardQuery = true;
+				int pos = searchString.indexOf("*");
+				searchString.deleteCharAt(pos);
+				specials.add(pos+":*");
+				continue;
+			}
+			if (searchString.indexOf("\"") > -1) {
+				int start = searchString.indexOf("\"");
+				if (searchString.lastIndexOf("\"") > start) {
+					int end = searchString.lastIndexOf("\"");
+					searchString.deleteCharAt(end);
+					specials.add(end+":\"");
+					specials.add(start+":\"");
+				}
+				searchString.deleteCharAt(start);
+				continue;
+			}
+			loop = false;
+		}
+		searchString = new StringBuilder(QueryParser.escape(searchString.toString()));
+		while (!specials.isEmpty()) {
+			String[] entry = specials.removeLast().split(":");
+			int pos = Integer.valueOf(entry[0]);
+			String chr = entry[1];
+			searchString.insert(pos, chr);
+		}
 		// XXX
-		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
+/*		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
 		{
 			searchString = searchString.substring(1, searchString.length() -1);
 			inQuots = true;
@@ -234,9 +274,9 @@ public class BTSQueryRequest {
 		}else if (rightTrunk)
 		{
 			escapedString = escapedString+ "*";
-		}
-		
-		System.out.println("resulting query string: "+escapedString);
+		}*/
+		String escapedString = searchString.toString();
+		System.out.println("\nresulting query string: "+escapedString);
 		return escapedString;
 	}
 
