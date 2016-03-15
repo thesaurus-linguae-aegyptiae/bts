@@ -28,7 +28,7 @@
  */
 package org.bbaw.bts.ui.commons.search;
 
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 
 /**
  * The Interface SearchViewer.

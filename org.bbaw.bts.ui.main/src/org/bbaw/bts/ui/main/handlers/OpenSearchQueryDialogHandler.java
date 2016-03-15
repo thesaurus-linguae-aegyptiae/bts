@@ -2,7 +2,6 @@ package org.bbaw.bts.ui.main.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.search.SearchViewer;
 import org.bbaw.bts.ui.main.dialogs.SimpleSearchQueryDialog;
 import org.eclipse.e4.core.contexts.Active;
@@ -23,10 +22,7 @@ public class OpenSearchQueryDialogHandler {
 		Object o = activePart.getObject();
 		if (o instanceof SearchViewer) {
 			SearchViewer searchViewer = (SearchViewer) o;
-			BTSQueryRequest query = new BTSQueryRequest();
-
-			SimpleSearchQueryDialog dialog = new SimpleSearchQueryDialog(shell,
-					query);
+			SimpleSearchQueryDialog dialog = new SimpleSearchQueryDialog(shell);
 			ContextInjectionFactory.inject(dialog, context);
 			dialog.create();
 			dialog.setSearchString(searchString);
@@ -36,9 +32,8 @@ public class OpenSearchQueryDialogHandler {
 			}
 			dialog.setTitle("Object Search");
 			if (dialog.open() == SimpleSearchQueryDialog.OK) {
-				query = dialog.getQueryRequest();
-				if (query != null) {
-					searchViewer.search(query, null, viewerFilterString);
+				if (dialog.getQueryRequest() != null) {
+					searchViewer.search(dialog.getQueryRequest(), null, viewerFilterString);
 				}
 			}
 		}

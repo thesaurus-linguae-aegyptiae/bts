@@ -1,14 +1,9 @@
 package org.bbaw.bts.ui.main.dialogs;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.lucene.queryParser.QueryParser;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -24,8 +19,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.elasticsearch.index.query.FilterBuilders;
-import org.elasticsearch.index.query.QueryBuilders;
 
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Text text;
@@ -39,15 +32,14 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	@Optional
 	@Named("org.bbaw.bts.ui.main.commandparameter.searchString")
 	private String searchString;
-
+	
 	/**
 	 * Create the dialog.
 	 * @param parentShell
 	 * @param query 
 	 */
-	public SimpleSearchQueryDialog(Shell parentShell, BTSQueryRequest queryRequest) {
+	public SimpleSearchQueryDialog(Shell parentShell) {
 		super(parentShell);
-		this.queryRequest = queryRequest;
 	}
 
 	/**
@@ -162,25 +154,11 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		String searchString = text.getText().trim();
 		if (searchString.length() > 0)
 		{
-			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-			queryRequest.setQueryId("timestamp-" + now.toString());
-			if (idButton.getSelection())
-			{
-				// allows DAO to retrieve object directly from DB
-				queryRequest.setIdQuery(true);
-				queryRequest.setIdString(searchString);
-			}
-			else if (exactButton.getSelection())
-			{
-				queryRequest.setQueryBuilder(QueryBuilders.matchQuery("name", escapeString(searchString)));
-				queryRequest.setAutocompletePrefix(searchString);
-
-			}
-			else
-			{
-				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(escapeString(searchString).toLowerCase()));
-				queryRequest.setAutocompletePrefix(searchString);
-			}
+			queryRequest = new BTSQueryRequest(searchString);
+			queryRequest.setIdQuery(idButton.getSelection());
+			if (exactButton.getSelection())
+				queryRequest.addRequestField("name");
+			queryRequest.initQueryBuilder();
 		}
 		else
 		{
@@ -189,41 +167,6 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	private String escapeString(String searchString) {
-		// Anführungszeichen nicht escapen!!!
-		boolean inQuots = false;
-		boolean leftTrunk = false;
-		boolean rightTrunk = false;
-		// XXX
-		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
-		{
-			searchString = searchString.substring(1, searchString.length() -1);
-			inQuots = true;
-		}
-		else if (searchString.length() > 1 && searchString.startsWith("*"))
-		{
-			searchString = searchString.substring(1, searchString.length());
-			leftTrunk = true;
-		}else if (searchString.length() > 1 && searchString.endsWith("*"))
-		{
-			searchString = searchString.substring(0, searchString.length()-1);
-			rightTrunk = true;
-		}
-		String escapedString = QueryParser.escape(searchString);
-		if (inQuots)
-		{
-			escapedString = "\"" + escapedString + "\"";
-		} else if (leftTrunk)
-		{
-			escapedString = "*" + escapedString;
-		}else if (rightTrunk)
-		{
-			escapedString = escapedString+ "*";
-		}
-		
-		System.out.println("resulting query string: "+escapedString);
-		return escapedString;
-	}
 
 	/**
 	 * Return the initial size of the dialog.

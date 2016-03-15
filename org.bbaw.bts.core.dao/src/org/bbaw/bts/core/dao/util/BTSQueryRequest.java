@@ -27,14 +27,22 @@
  * along with Berlin Text System.  
  * If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
  */
-package org.bbaw.bts.searchModel;
+package org.bbaw.bts.core.dao.util;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 import java.util.Vector;
 
+import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSQueryRequest
 {
@@ -46,10 +54,12 @@ public class BTSQueryRequest
 
 	private SearchRequestBuilder searchRequestBuilder;
 
-	private String requestField;
+	private Set<String> requestFields;
+	
+	private String searchString;
 
 	private String autocompletePrefix;
-
+	
 	private String requestTypeFieldValue;
 	
 	private List<String> responseFields;
@@ -58,7 +68,58 @@ public class BTSQueryRequest
 	
 	private boolean idQuery;
 	
+	private boolean wildcardQuery;
+	
 	private String idString;
+	
+	public BTSQueryRequest() {
+		this.requestFields = new HashSet<String>();
+	}
+	
+	public BTSQueryRequest(String searchString) {
+		this();
+		this.searchString = searchString;
+	}
+	
+	public BTSQueryRequest(String searchString, boolean idQuery, boolean wildcardQuery) {
+		this(searchString);
+		this.idQuery = idQuery;
+		this.wildcardQuery = wildcardQuery;
+	}
+	
+	/**
+	 * Sets up a {@link QueryBuilder} according to current configuration. The result can be retrieved via {@link #getQueryBuilder()}.
+	 * 
+	 */
+	public void initQueryBuilder() {
+		if (searchString.length() > 0)
+		{
+			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
+			this.setQueryId("timestamp-" + now.toString());
+			if (idQuery)
+			{
+				// allows DAO to retrieve object directly from DB
+				this.setIdQuery(true);
+				this.setIdString(searchString);
+			}
+			else if (!requestFields.isEmpty())
+			{
+				// "Search for Names only"
+				// XXX does not find anything for "ḥm.t-n"
+				BoolQueryBuilder qb = QueryBuilders.boolQuery();
+				for (String field : requestFields)
+					qb = qb.should(QueryBuilders.matchQuery(field, searchString));
+				this.setQueryBuilder(qb);
+				this.setAutocompletePrefix(searchString);
+
+			}
+			else
+			{
+				this.setQueryBuilder(QueryBuilders.simpleQueryString(this.getSearchStringEscaped().toLowerCase()));
+				this.setAutocompletePrefix(searchString);
+			}
+		}		
+	}
 
 	public List<BTSObject> getGivenObjects()
 	{
@@ -106,12 +167,12 @@ public class BTSQueryRequest
 		this.searchRequestBuilder = searchRequestBuilder;
 	}
 
-	public String getRequestField() {
-		return requestField;
+	public Set<String> getRequestFields() {
+		return requestFields;
 	}
 
-	public void setRequestField(String requestField) {
-		this.requestField = requestField;
+	public void addRequestField(String requestField) {
+		this.requestFields.add(requestField);
 	}
 
 	public String getAutocompletePrefix() {
@@ -124,6 +185,47 @@ public class BTSQueryRequest
 
 	public String getRequestTypeFieldValue() {
 		return requestTypeFieldValue;
+	}
+	
+	public String getSearchString() {
+		return this.searchString;
+	}
+	
+	public String getSearchStringEscaped() {
+		// Anführungszeichen nicht escapen!!!
+		String searchString = new String(this.searchString);
+		boolean inQuots = false;
+		boolean leftTrunk = false;
+		boolean rightTrunk = false;
+		// XXX
+		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
+		{
+			searchString = searchString.substring(1, searchString.length() -1);
+			inQuots = true;
+		}
+		else if (searchString.length() > 1 && searchString.startsWith("*"))
+		{
+			searchString = searchString.substring(1, searchString.length());
+			leftTrunk = true;
+		}else if (searchString.length() > 1 && searchString.endsWith("*"))
+		{
+			searchString = searchString.substring(0, searchString.length()-1);
+			rightTrunk = true;
+		}
+		String escapedString = QueryParser.escape(searchString);
+		if (inQuots)
+		{
+			escapedString = "\"" + escapedString + "\"";
+		} else if (leftTrunk)
+		{
+			escapedString = "*" + escapedString;
+		}else if (rightTrunk)
+		{
+			escapedString = escapedString+ "*";
+		}
+		
+		System.out.println("resulting query string: "+escapedString);
+		return escapedString;
 	}
 
 	public void setRequestTypeFieldValue(String requestTypeFieldValue) {
@@ -170,9 +272,19 @@ public class BTSQueryRequest
 	public boolean isIdQuery() {
 		return idQuery;
 	}
+	
+	public boolean isWildcardQuery() {
+		return wildcardQuery;
+	}
 
 	public void setIdQuery(boolean idQuery) {
 		this.idQuery = idQuery;
+		if (idQuery)
+			this.setIdString(searchString);
+	}
+	
+	public void setWildcardQuery(boolean wildcardQuery) {
+		this.wildcardQuery = wildcardQuery;
 	}
 
 	public String getIdString() {

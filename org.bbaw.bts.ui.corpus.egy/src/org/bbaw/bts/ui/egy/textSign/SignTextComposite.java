@@ -84,7 +84,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
-import org.eclipse.ui.texteditor.ShowWhitespaceCharactersAction;
 
 public class SignTextComposite extends Composite implements IBTSEditor {
 
@@ -1373,10 +1372,12 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		return currentLineFigure;
 	}
 
-	private void setDeselected(ElementFigure figure) {
+	private void setDeselected(ElementFigure figure, int eventType) {
 		if (figure != null) {
 			if (figure instanceof WordFigure) {
-				figure.setBackgroundColor(colorWordDeselected((BTSWord)figure.getModelObject()));
+				figure.setBackgroundColor(
+						eventType == 1 ? BTSUIConstants.COLOR_LEMMA :  
+						colorWordDeselected((BTSWord)figure.getModelObject()));
 			} else if (figure instanceof MarkerFigure) {
 				figure.setBackgroundColor(COLOR_MARKER_DESELECTED);
 			}else if (figure instanceof AmbivalenceStartFigure || figure instanceof AmbivalenceEndFigure) {
@@ -1387,7 +1388,12 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 	}
 
+
 	private void setSelectionInternal(ElementFigure figure) {
+		setSelectionInternal(figure, 0);
+	}
+
+	private void setSelectionInternal(ElementFigure figure, int eventType) {
 		if (figure.getParent() instanceof LineFigure) {
 			if (figure.getParent() != currentLineFigure) {
 				currentLineFigure = (LineFigure) figure.getParent();
@@ -1395,7 +1401,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		}
 		if (figure != selectedElement) {
 			ElementFigure oldSelection = selectedElement;
-			setDeselected(oldSelection);
+			setDeselected(oldSelection, eventType);
 			selectedElement = figure;
 			try {
 				reveal(selectedElement);
@@ -1435,6 +1441,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			e.widget = this;
 			TypedEvent ev = new TypedEvent(e);
 			BTSTextSelectionEvent event = new BTSTextSelectionEvent(ev, btsObject);
+			event.type = eventType;
 			event.data = textContent.eContainer();
 			event.getRelatingObjects().addAll(((ElementFigure)figure).getRelatingObjects());
 			BTSIdentifiableItem item = (BTSIdentifiableItem) figure.getModelObject();
@@ -1615,23 +1622,17 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNLEMMATIZED)) {
 			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, 0);
 			if (figure != null)
-			{
-				setSelectionInternal(figure);
-			}
+				setSelectionInternal(figure, 1);
 		}
 		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNHIEROGLYPHED)) {
 			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, 1);
 			if (figure != null)
-			{
-				setSelectionInternal(figure);
-			}
+				setSelectionInternal(figure, 1);
 		}
 		else if (event.equals(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT_UNFLEXIONED)) {
 			ElementFigure figure = findUnprocessedWordFigure(currentIndex +1, 2);
 			if (figure != null)
-			{
-				setSelectionInternal(figure);
-			}
+				setSelectionInternal(figure, 1);
 		}
 		
 
