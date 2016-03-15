@@ -44,8 +44,14 @@ import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 
-public class BTSQueryRequest
-{
+public class BTSQueryRequest {
+
+	public enum BTSQueryType {
+		GENERAL, LEMMA
+	}
+
+	private BTSQueryType type;
+
 	private String queryId;
 
 	private List<BTSObject> givenObjects;
@@ -184,6 +190,14 @@ public class BTSQueryRequest
 		return requestTypeFieldValue;
 	}
 	
+	public BTSQueryType getType() {
+		return type;
+	}
+	
+	public void setType(BTSQueryType type) {
+		this.type = type;
+	}
+	
 	public String getSearchString() {
 		return this.searchString;
 	}
@@ -194,6 +208,7 @@ public class BTSQueryRequest
 		boolean inQuots = false;
 		boolean leftTrunk = false;
 		boolean rightTrunk = false;
+		List<String> specials = new Vector<String>();
 		// XXX
 		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
 		{

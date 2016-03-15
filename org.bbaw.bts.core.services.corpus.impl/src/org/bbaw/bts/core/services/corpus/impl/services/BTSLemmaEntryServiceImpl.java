@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -8,29 +7,22 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest.BTSQueryType;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
-import org.bbaw.bts.core.services.corpus.util.BTSLemmaQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
-import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
-import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
@@ -225,8 +217,9 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 	
 	@Override
-	public BTSLemmaQueryRequest createLemmaSearchQuery(String chars) {
-		BTSLemmaQueryRequest query = new BTSLemmaQueryRequest(chars);
+	public BTSQueryRequest createLemmaSearchQuery(String chars) {
+		BTSQueryRequest query = new BTSQueryRequest(chars);
+		query.setType(BTSQueryType.LEMMA);
 		System.out.println("lemma service match query: "+chars);
 		query.setQueryBuilder(QueryBuilders.boolQuery()
 					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars).boost(1.5f))
@@ -249,7 +242,6 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 
 
 	public String processWordCharForLemmatizing(String chars) {
-		// TODO Auto-generated method stub
 		
 		if (chars == null)
 			return null;
@@ -272,14 +264,14 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		
 		// cut right side
-				if (chars.contains("{"))
-				{
-					m = deletionPattern.matcher(chars);
-					if (m.find())
-					{
-						chars = m.replaceAll(""); 
-					}
-				}
+		if (chars.contains("{"))
+		{
+			m = deletionPattern.matcher(chars);
+			if (m.find())
+			{
+				chars = m.replaceAll(""); 
+			}
+		}
 		
 		// replace
 		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_POINT, ":");
