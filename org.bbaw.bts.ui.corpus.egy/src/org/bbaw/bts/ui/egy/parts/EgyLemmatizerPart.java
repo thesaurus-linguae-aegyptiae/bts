@@ -1237,13 +1237,13 @@ public class EgyLemmatizerPart implements SearchViewer {
 		}
 
 		if (query.getType() != BTSQueryType.LEMMA)
-			if (!query.isIdQuery()
-					&& !query.isWildcardQuery()
+			if (!query.isIdQuery() 
 					&& query.getAutocompletePrefix() != null)
-				if (query.getRequestFields().contains("name")) {
-					searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
-					return;
-				}
+				if (!query.isWildcardQuery())
+					if (query.getRequestFields().contains("name")) {
+						searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
+						return;
+					}
 
 		// fill lemmaViewer
 		searchjob = new Job("load input") {
@@ -1252,24 +1252,16 @@ public class EgyLemmatizerPart implements SearchViewer {
 			protected IStatus run(final IProgressMonitor monitor) {
 
 				String tempSearchString = null;
-				// lemmafy search query if necessary
-				BTSQueryRequest q = query;
-				System.out.println("searchstring: '"+q.getSearchString()+"'");
-				System.out.println("id search: "+q.isIdQuery());
-				System.out.println("wildcard search: "+q.isWildcardQuery());
-				System.out.println("search in fields: "+q.getRequestFields() );
-				
-				
-				
+
 				// extract search string from query
-				if (q.getAutocompletePrefix() != null)
-					tempSearchString = q.getAutocompletePrefix();
+				if (query.getAutocompletePrefix() != null)
+					tempSearchString = query.getSearchString();
 
 				final String searchString = tempSearchString;
 				List<BTSLemmaEntry> obs;
 				obs = lemmaNavigatorController
 						.getSearchEntries(
-								q,
+								query,
 								null,
 								lemmaViewer,
 								lemmaRootNode,

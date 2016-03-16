@@ -58,25 +58,25 @@ public class BTSQueryRequest {
 
 	private List<BTSObject> givenObjects;
 
-	protected QueryBuilder queryBuilder;
+	private QueryBuilder queryBuilder;
 
-	protected SearchRequestBuilder searchRequestBuilder;
+	private SearchRequestBuilder searchRequestBuilder;
 
 	private Set<String> requestFields;
 	
-	protected String searchString;
+	private String searchString;
 
-	protected String autocompletePrefix;
+	private String autocompletePrefix;
 	
 	private String requestTypeFieldValue;
 	
-	protected List<String> responseFields;
+	private List<String> responseFields;
 	
 	private String dbPath;
 	
-	protected boolean idQuery;
+	private boolean idQuery;
 	
-	protected boolean wildcardQuery;
+	private boolean wildcardQuery;
 	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
@@ -115,14 +115,13 @@ public class BTSQueryRequest {
 				for (String field : requestFields)
 					qb = qb.should(wildcardQuery ?
 							QueryBuilders.wildcardQuery(field, escapedString) :
-							QueryBuilders.matchQuery(field, searchString)
+							QueryBuilders.matchQuery(field, escapedString)
 							);
 				this.setQueryBuilder(qb);
 				this.setAutocompletePrefix(searchString);
 			}
 			else {
-				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString.replaceAll(" ", "+")).defaultOperator(Operator.AND));
-				
+				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString).defaultOperator(Operator.AND));
 				this.setAutocompletePrefix(searchString);
 			}
 		}		
@@ -208,9 +207,9 @@ public class BTSQueryRequest {
 	
 	public String escapeSearchString() {
 		// Anführungszeichen und * nicht escapen!!!
-		this.wildcardQuery = this.searchString.contains("*");
+		this.wildcardQuery = this.searchString.contains("*") || this.searchString.contains("?");
 		String escapedString = QueryParser.escape(this.searchString);
-		escapedString = escapedString.replaceAll("\\\\([\"*])", "$1");
+		escapedString = escapedString.replaceAll("\\\\([\"*?])", "$1");
 		System.out.println("\nresulting query string: "+escapedString);
 		return escapedString;
 	}
