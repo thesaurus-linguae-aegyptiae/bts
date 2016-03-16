@@ -100,7 +100,7 @@ public class BTSQueryRequest {
 	public void initQueryBuilder() {
 		if (searchString.length() > 0)
 		{
-			String escapedString = this.getSearchStringEscaped().toLowerCase();
+			String escapedString = this.escapeSearchString().toLowerCase();
 			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 			this.setQueryId("timestamp-" + now.toString());
 			if (idQuery)
@@ -206,76 +206,11 @@ public class BTSQueryRequest {
 		return this.searchString;
 	}
 	
-	public String getSearchStringEscaped() {
+	public String escapeSearchString() {
 		// Anführungszeichen und * nicht escapen!!!
-		StringBuilder searchString = new StringBuilder(this.searchString);
-		LinkedList<String> specials = new LinkedList<String>();
-		String[] parts = this.searchString.split("[\"*]");
-		for (int i=0; i>0;) {
-			int j = this.searchString.substring(i).indexOf("*");
-			if (j < 0)
-				j = this.searchString.substring(i).indexOf("\"");
-			i = j;
-		}
-		System.out.print("parts: ");
-		for (String s : parts)
-			System.out.print("'"+s+"'"+" ");
-		System.out.println();
-		for (boolean loop=true; loop;) {
-			if (searchString.indexOf("*") > -1) {
-				wildcardQuery = true;
-				int pos = searchString.indexOf("*");
-				searchString.deleteCharAt(pos);
-				specials.add(pos+":*");
-				continue;
-			}
-			if (searchString.indexOf("\"") > -1) {
-				int start = searchString.indexOf("\"");
-				if (searchString.lastIndexOf("\"") > start) {
-					int end = searchString.lastIndexOf("\"");
-					searchString.deleteCharAt(end);
-					specials.add(end+":\"");
-					specials.add(start+":\"");
-				}
-				searchString.deleteCharAt(start);
-				continue;
-			}
-			loop = false;
-		}
-		searchString = new StringBuilder(QueryParser.escape(searchString.toString()));
-		while (!specials.isEmpty()) {
-			String[] entry = specials.removeLast().split(":");
-			int pos = Integer.valueOf(entry[0]);
-			String chr = entry[1];
-			searchString.insert(pos, chr);
-		}
-		// XXX
-/*		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
-		{
-			searchString = searchString.substring(1, searchString.length() -1);
-			inQuots = true;
-		}
-		else if (searchString.length() > 1 && searchString.startsWith("*"))
-		{
-			searchString = searchString.substring(1, searchString.length());
-			leftTrunk = true;
-		}else if (searchString.length() > 1 && searchString.endsWith("*"))
-		{
-			searchString = searchString.substring(0, searchString.length()-1);
-			rightTrunk = true;
-		}
-		String escapedString = QueryParser.escape(searchString);
-		if (inQuots)
-		{
-			escapedString = "\"" + escapedString + "\"";
-		} else if (leftTrunk)
-		{
-			escapedString = "*" + escapedString;
-		}else if (rightTrunk)
-		{
-			escapedString = escapedString+ "*";
-		}*/
-		String escapedString = searchString.toString();
+		this.wildcardQuery = this.searchString.contains("*");
+		String escapedString = QueryParser.escape(this.searchString);
+		escapedString = escapedString.replaceAll("\\\\([\"*])", "$1");
 		System.out.println("\nresulting query string: "+escapedString);
 		return escapedString;
 	}
