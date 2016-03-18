@@ -1240,7 +1240,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			if (!query.isIdQuery() 
 					&& query.getAutocompletePrefix() != null)
 				if (!query.isWildcardQuery())
-					if (query.getRequestFields().contains("name")) {
+					if (query.getRequestFields().size() == 1 && query.getRequestFields().contains("name")) {
 						searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
 						return;
 					}
