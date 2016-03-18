@@ -220,9 +220,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	public BTSQueryRequest createLemmaSearchQuery(String chars) {
 		BTSQueryRequest query = new BTSQueryRequest(chars);
 		query.setType(BTSQueryType.LEMMA);
-		System.out.println("lemma service match query: "+chars);
 		query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchPhrasePrefixQuery("name", chars).boost(1.5f))
+					.should(QueryBuilders.matchQuery("name", chars))
 					.should(QueryBuilders.termQuery("name",chars))
 					);
 		query.setAutocompletePrefix(chars);
