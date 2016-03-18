@@ -380,7 +380,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 									+ "reviewState=published,reviewState=published-awaiting-review,"
 									+ "reviewState=transformed_awaiting_update");
 					map.put("org.bbaw.bts.ui.main.commandparameter.searchOptions", OPT_NAME_ONLY);
-					String chars = textSelectedWord.getText();
+					String chars = textSelectedWord.getText().replaceAll(",", ".");
 					if (chars != null)
 					{
 						map.put("org.bbaw.bts.ui.main.commandparameter.searchString", chars);
@@ -1241,7 +1241,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 					&& query.getAutocompletePrefix() != null)
 				if (!query.isWildcardQuery())
 					if (query.getRequestFields().size() == 1 && query.getRequestFields().contains("name")) {
-						searchAuto(query.getAutocompletePrefix().replaceAll("\\.", ","));
+						searchAuto(query.getSearchString().replaceAll("\\.", ","));
 						return;
 					}
 
