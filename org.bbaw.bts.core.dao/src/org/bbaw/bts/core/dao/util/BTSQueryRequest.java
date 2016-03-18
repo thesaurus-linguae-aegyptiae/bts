@@ -32,6 +32,7 @@ package org.bbaw.bts.core.dao.util;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -43,9 +44,16 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.SimpleQueryStringBuilder.Operator;
 
-public class BTSQueryRequest
-{
+public class BTSQueryRequest {
+
+	public enum BTSQueryType {
+		GENERAL, LEMMA
+	}
+
+	private BTSQueryType type;
+
 	private String queryId;
 
 	private List<BTSObject> givenObjects;
@@ -70,8 +78,6 @@ public class BTSQueryRequest
 	
 	private boolean wildcardQuery;
 	
-	private String idString;
-	
 	public BTSQueryRequest() {
 		this.requestFields = new HashSet<String>();
 	}
@@ -94,28 +100,28 @@ public class BTSQueryRequest
 	public void initQueryBuilder() {
 		if (searchString.length() > 0)
 		{
+			String escapedString = this.escapeSearchString().toLowerCase();
 			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
 			this.setQueryId("timestamp-" + now.toString());
 			if (idQuery)
 			{
 				// allows DAO to retrieve object directly from DB
 				this.setIdQuery(true);
-				this.setIdString(searchString);
 			}
 			else if (!requestFields.isEmpty())
 			{
 				// "Search for Names only"
-				// XXX does not find anything for "ḥm.t-n"
 				BoolQueryBuilder qb = QueryBuilders.boolQuery();
 				for (String field : requestFields)
-					qb = qb.should(QueryBuilders.matchQuery(field, searchString));
+					qb = qb.should(wildcardQuery ?
+							QueryBuilders.wildcardQuery(field, escapedString) :
+							QueryBuilders.matchQuery(field, escapedString)
+							);
 				this.setQueryBuilder(qb);
 				this.setAutocompletePrefix(searchString);
-
 			}
-			else
-			{
-				this.setQueryBuilder(QueryBuilders.simpleQueryString(this.getSearchStringEscaped().toLowerCase()));
+			else {
+				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString).defaultOperator(Operator.AND));
 				this.setAutocompletePrefix(searchString);
 			}
 		}		
@@ -187,44 +193,24 @@ public class BTSQueryRequest
 		return requestTypeFieldValue;
 	}
 	
+	public BTSQueryType getType() {
+		return type;
+	}
+	
+	public void setType(BTSQueryType type) {
+		this.type = type;
+	}
+	
 	public String getSearchString() {
 		return this.searchString;
 	}
 	
-	public String getSearchStringEscaped() {
-		// Anführungszeichen nicht escapen!!!
-		String searchString = new String(this.searchString);
-		boolean inQuots = false;
-		boolean leftTrunk = false;
-		boolean rightTrunk = false;
-		// XXX
-		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
-		{
-			searchString = searchString.substring(1, searchString.length() -1);
-			inQuots = true;
-		}
-		else if (searchString.length() > 1 && searchString.startsWith("*"))
-		{
-			searchString = searchString.substring(1, searchString.length());
-			leftTrunk = true;
-		}else if (searchString.length() > 1 && searchString.endsWith("*"))
-		{
-			searchString = searchString.substring(0, searchString.length()-1);
-			rightTrunk = true;
-		}
-		String escapedString = QueryParser.escape(searchString);
-		if (inQuots)
-		{
-			escapedString = "\"" + escapedString + "\"";
-		} else if (leftTrunk)
-		{
-			escapedString = "*" + escapedString;
-		}else if (rightTrunk)
-		{
-			escapedString = escapedString+ "*";
-		}
-		
-		System.out.println("resulting query string: "+escapedString);
+	public String escapeSearchString() {
+		// Anführungszeichen und * nicht escapen!!!
+		this.wildcardQuery = this.searchString.contains("*") || this.searchString.contains("?");
+		String escapedString = QueryParser.escape(this.searchString);
+		escapedString = escapedString.replaceAll("\\\\([\"*?])", "$1");
+		System.out.println("\nresulting query string: "+escapedString);
 		return escapedString;
 	}
 
@@ -279,21 +265,10 @@ public class BTSQueryRequest
 
 	public void setIdQuery(boolean idQuery) {
 		this.idQuery = idQuery;
-		if (idQuery)
-			this.setIdString(searchString);
 	}
 	
 	public void setWildcardQuery(boolean wildcardQuery) {
 		this.wildcardQuery = wildcardQuery;
 	}
-
-	public String getIdString() {
-		return idString;
-	}
-
-	public void setIdString(String idString) {
-		this.idString = idString;
-	}
-
 
 }

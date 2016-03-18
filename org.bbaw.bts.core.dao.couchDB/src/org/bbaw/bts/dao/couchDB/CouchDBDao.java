@@ -728,7 +728,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		if (query.isIdQuery())
 		{
 			List<E> result = new Vector<E>();
-			E o = find((K) query.getIdString(), indexName);
+			E o = find((K) query.getSearchString(), indexName);
 			result.add(o);
 			return result;
 		}
