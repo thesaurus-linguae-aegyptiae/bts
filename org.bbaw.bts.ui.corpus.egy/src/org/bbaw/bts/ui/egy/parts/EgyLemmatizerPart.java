@@ -1203,12 +1203,6 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 
-	private void searchAuto(final BTSWord word) {
-		if (word != null)
-			searchAuto(word.getWChar());
-	}
-
-	
 	private void searchAuto(final String input) {
 		// abort if user unauthorized or lemmatizer disabled
 		if (!userMayEdit || !activateButton.getSelection())
