@@ -40,7 +40,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSUserByNameViewerComparator;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
@@ -99,18 +99,14 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -764,9 +760,7 @@ public class UserManagementPart
 		};
 
 		treeViewer.addSelectionChangedListener(user_selectionListener);
-		treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		treeViewer.setComparator(new BTSUserByNameViewerComparator());
 		
 		// Create sample data
 		try {
@@ -938,7 +932,7 @@ public class UserManagementPart
 		};
 
 		user_treeViewer.addSelectionChangedListener(user_selectionListener);
-		user_treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+		user_treeViewer.setComparator(new BTSUserByNameViewerComparator());
 		// Create sample data
 		userGroups = new ArrayList<BTSUserGroup>();
 		Job job = new Job("load orphans") {
@@ -1094,9 +1088,7 @@ public class UserManagementPart
 		};
 
 		roles_treeViewer.addSelectionChangedListener(roles_selectionListener);
-		roles_treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		roles_treeViewer.setComparator(new BTSUserByNameViewerComparator());
 		// Create sample data
 		projects = projectController.listProjects(null);
 
