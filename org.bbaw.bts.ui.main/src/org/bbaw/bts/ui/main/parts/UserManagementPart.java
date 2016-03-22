@@ -998,48 +998,45 @@ public class UserManagementPart
 
 	private void loadChildren(final List<TreeNodeWrapper> parents, final TreeViewer treeviewer, boolean includeGrandChildren)
 	{
-		Job job = new Job("load children")
-		{
-			@Override
-			protected IStatus run(IProgressMonitor monitor)
-			{
-				new Vector<>();
-				for (final TreeNodeWrapper parent : parents)
-				{
-					if (!parent.isChildrenLoaded())
+		for (final TreeNodeWrapper parent : parents)
+			synchronized(parent) {
+				if (!parent.isChildrenLoaded()) {
+					Job job = new Job("load children")
 					{
-						final List<BTSUser> children = userManagerController.findGroupMembers(
-								(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
-						// If you want to update the UI
-						sync.asyncExec(new Runnable()
+						@Override
+						protected IStatus run(IProgressMonitor monitor)
 						{
-
-							@Override
-							public void run()
-							{
-								System.out.println("add children" + children.size());
-								for (BTSObject o : children)
-								{
-									TreeNodeWrapper tn = wrappObject(o);
-									tn.setParent(parent);
-									// grandChildren.add(tn);
-									parent.getChildren().add(tn);
-								}
-								parent.setChildrenLoaded(true);
-
+							if (!parent.isChildrenLoaded()) {
+								final List<BTSUser> children = userManagerController.findGroupMembers(
+										(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
+										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+								// If you want to update the UI
+								if (!parent.isChildrenLoaded())
+									sync.asyncExec(new Runnable()
+									{
+										@Override
+										public void run()
+										{
+											System.out.println("add children" + children.size());
+											for (BTSObject o : children)
+											{
+												TreeNodeWrapper tn = wrappObject(o);
+												tn.setParent(parent);
+												// grandChildren.add(tn);
+												parent.getChildren().add(tn);
+											}
+											parent.setChildrenLoaded(true);
+										}
+								});
+								// loadChildren(grandChildren, false);
 							}
-
-						});
-					}
+							return Status.OK_STATUS;
+						}
+					};
+					// Start the Job
+					job.schedule();
 				}
-				// loadChildren(grandChildren, false);
-
-				return Status.OK_STATUS;
 			}
-		};
-		// Start the Job
-		job.schedule();
 		refreshTreeViewer(treeviewer, null);
 	}
 
