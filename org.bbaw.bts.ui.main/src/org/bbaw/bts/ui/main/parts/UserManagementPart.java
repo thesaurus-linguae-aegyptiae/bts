@@ -40,7 +40,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSObjectByNameViewerSorter;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSUserManagerViewerComparator;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
@@ -99,18 +99,14 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CTabFolder;
 import org.eclipse.swt.custom.CTabItem;
 import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -764,9 +760,7 @@ public class UserManagementPart
 		};
 
 		treeViewer.addSelectionChangedListener(user_selectionListener);
-		treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		
 		// Create sample data
 		try {
@@ -938,7 +932,7 @@ public class UserManagementPart
 		};
 
 		user_treeViewer.addSelectionChangedListener(user_selectionListener);
-		user_treeViewer.setSorter(new BTSObjectByNameViewerSorter());
+		user_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		// Create sample data
 		userGroups = new ArrayList<BTSUserGroup>();
 		Job job = new Job("load orphans") {
@@ -1004,48 +998,45 @@ public class UserManagementPart
 
 	private void loadChildren(final List<TreeNodeWrapper> parents, final TreeViewer treeviewer, boolean includeGrandChildren)
 	{
-		Job job = new Job("load children")
-		{
-			@Override
-			protected IStatus run(IProgressMonitor monitor)
-			{
-				new Vector<>();
-				for (final TreeNodeWrapper parent : parents)
-				{
-					if (!parent.isChildrenLoaded())
+		for (final TreeNodeWrapper parent : parents)
+			synchronized(parent) {
+				if (!parent.isChildrenLoaded()) {
+					Job job = new Job("load children")
 					{
-						final List<BTSUser> children = userManagerController.findGroupMembers(
-								(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
-								BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
-						// If you want to update the UI
-						sync.asyncExec(new Runnable()
+						@Override
+						protected IStatus run(IProgressMonitor monitor)
 						{
-
-							@Override
-							public void run()
-							{
-								System.out.println("add children" + children.size());
-								for (BTSObject o : children)
-								{
-									TreeNodeWrapper tn = wrappObject(o);
-									tn.setParent(parent);
-									// grandChildren.add(tn);
-									parent.getChildren().add(tn);
-								}
-								parent.setChildrenLoaded(true);
-
+							if (!parent.isChildrenLoaded()) {
+								final List<BTSUser> children = userManagerController.findGroupMembers(
+										(BTSUserGroup) parent.getObject(), queryResultMap, treeviewer, parent,
+										BtsviewmodelPackage.Literals.TREE_NODE_WRAPPER__CHILDREN, monitor);
+								// If you want to update the UI
+								if (!parent.isChildrenLoaded())
+									sync.asyncExec(new Runnable()
+									{
+										@Override
+										public void run()
+										{
+											System.out.println("add children" + children.size());
+											for (BTSObject o : children)
+											{
+												TreeNodeWrapper tn = wrappObject(o);
+												tn.setParent(parent);
+												// grandChildren.add(tn);
+												parent.getChildren().add(tn);
+											}
+											parent.setChildrenLoaded(true);
+										}
+								});
+								// loadChildren(grandChildren, false);
 							}
-
-						});
-					}
+							return Status.OK_STATUS;
+						}
+					};
+					// Start the Job
+					job.schedule();
 				}
-				// loadChildren(grandChildren, false);
-
-				return Status.OK_STATUS;
 			}
-		};
-		// Start the Job
-		job.schedule();
 		refreshTreeViewer(treeviewer, null);
 	}
 
@@ -1094,9 +1085,7 @@ public class UserManagementPart
 		};
 
 		roles_treeViewer.addSelectionChangedListener(roles_selectionListener);
-		roles_treeViewer.setSorter(new ViewerSorter()
-		{
-		});
+		roles_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		// Create sample data
 		projects = projectController.listProjects(null);
 

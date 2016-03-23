@@ -132,8 +132,8 @@ public class Backend2ClientUpdateDaoImpl implements Backend2ClientUpdateDao {
 			notification.setObject(object);
 			notification.setQueryIds(queryIds);
 			for (Backend2ClientUpdateListener l : listeners) {
-				logger.info("Notify Listener about change: " + dbCollection
-						+ ", Changed object id: " + docId);
+				//logger.info("Notify Listener about change: " + dbCollection
+				//		+ ", Changed object id: " + docId);
 
 				l.handleUpdate(notification);
 			}

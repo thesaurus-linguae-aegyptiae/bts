@@ -27,17 +27,33 @@
  * along with Berlin Text System.  
  * If not, see <http://www.gnu.org/licenses/lgpl-3.0.html>.
  */
-package org.bbaw.bts.searchModel;
+package org.bbaw.bts.core.dao.util;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Set;
 import java.util.Vector;
 
+import org.apache.lucene.queryParser.QueryParser;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.elasticsearch.action.search.SearchRequestBuilder;
+import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.SimpleQueryStringBuilder.Operator;
 
-public class BTSQueryRequest
-{
+public class BTSQueryRequest {
+
+	public enum BTSQueryType {
+		GENERAL, LEMMA
+	}
+
+	private BTSQueryType type;
+
 	private String queryId;
 
 	private List<BTSObject> givenObjects;
@@ -46,10 +62,12 @@ public class BTSQueryRequest
 
 	private SearchRequestBuilder searchRequestBuilder;
 
-	private String requestField;
+	private Set<String> requestFields;
+	
+	private String searchString;
 
 	private String autocompletePrefix;
-
+	
 	private String requestTypeFieldValue;
 	
 	private List<String> responseFields;
@@ -58,7 +76,56 @@ public class BTSQueryRequest
 	
 	private boolean idQuery;
 	
-	private String idString;
+	private boolean wildcardQuery;
+	
+	public BTSQueryRequest() {
+		this.requestFields = new HashSet<String>();
+	}
+	
+	public BTSQueryRequest(String searchString) {
+		this();
+		this.searchString = searchString;
+	}
+	
+	public BTSQueryRequest(String searchString, boolean idQuery, boolean wildcardQuery) {
+		this(searchString);
+		this.idQuery = idQuery;
+		this.wildcardQuery = wildcardQuery;
+	}
+	
+	/**
+	 * Sets up a {@link QueryBuilder} according to current configuration. The result can be retrieved via {@link #getQueryBuilder()}.
+	 * 
+	 */
+	public void initQueryBuilder() {
+		if (searchString.length() > 0)
+		{
+			String escapedString = this.escapeSearchString().toLowerCase();
+			Date now = Calendar.getInstance(Locale.getDefault()).getTime();
+			this.setQueryId("timestamp-" + now.toString());
+			if (idQuery)
+			{
+				// allows DAO to retrieve object directly from DB
+				this.setIdQuery(true);
+			}
+			else if (!requestFields.isEmpty())
+			{
+				// "Search for Names only"
+				BoolQueryBuilder qb = QueryBuilders.boolQuery();
+				for (String field : requestFields)
+					qb = qb.should(wildcardQuery ?
+							QueryBuilders.wildcardQuery(field, escapedString) :
+							QueryBuilders.matchQuery(field, escapedString)
+							);
+				this.setQueryBuilder(qb);
+				this.setAutocompletePrefix(searchString);
+			}
+			else {
+				this.setQueryBuilder(QueryBuilders.simpleQueryString(escapedString).defaultOperator(Operator.AND));
+				this.setAutocompletePrefix(searchString);
+			}
+		}		
+	}
 
 	public List<BTSObject> getGivenObjects()
 	{
@@ -106,12 +173,12 @@ public class BTSQueryRequest
 		this.searchRequestBuilder = searchRequestBuilder;
 	}
 
-	public String getRequestField() {
-		return requestField;
+	public Set<String> getRequestFields() {
+		return requestFields;
 	}
 
-	public void setRequestField(String requestField) {
-		this.requestField = requestField;
+	public void addRequestField(String requestField) {
+		this.requestFields.add(requestField);
 	}
 
 	public String getAutocompletePrefix() {
@@ -124,6 +191,27 @@ public class BTSQueryRequest
 
 	public String getRequestTypeFieldValue() {
 		return requestTypeFieldValue;
+	}
+	
+	public BTSQueryType getType() {
+		return type;
+	}
+	
+	public void setType(BTSQueryType type) {
+		this.type = type;
+	}
+	
+	public String getSearchString() {
+		return this.searchString;
+	}
+	
+	public String escapeSearchString() {
+		// Anführungszeichen und * nicht escapen!!!
+		this.wildcardQuery = this.searchString.contains("*") || this.searchString.contains("?");
+		String escapedString = QueryParser.escape(this.searchString);
+		escapedString = escapedString.replaceAll("\\\\([\"*?])", "$1");
+		System.out.println("\nresulting query string: "+escapedString);
+		return escapedString;
 	}
 
 	public void setRequestTypeFieldValue(String requestTypeFieldValue) {
@@ -170,18 +258,17 @@ public class BTSQueryRequest
 	public boolean isIdQuery() {
 		return idQuery;
 	}
+	
+	public boolean isWildcardQuery() {
+		return wildcardQuery;
+	}
 
 	public void setIdQuery(boolean idQuery) {
 		this.idQuery = idQuery;
 	}
-
-	public String getIdString() {
-		return idString;
+	
+	public void setWildcardQuery(boolean wildcardQuery) {
+		this.wildcardQuery = wildcardQuery;
 	}
-
-	public void setIdString(String idString) {
-		this.idString = idString;
-	}
-
 
 }

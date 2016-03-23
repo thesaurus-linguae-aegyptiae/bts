@@ -114,6 +114,7 @@ import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.Focus;
 import org.eclipse.e4.ui.di.Persist;
+import org.eclipse.e4.ui.di.UIEventTopic;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.e4.ui.model.application.ui.basic.MPart;
@@ -411,6 +412,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 	private long lastSelectionTimeStamp = 0;
 
+	private Job delaySelectionJob;
+
 	
 	/**
 	 * Instantiates a new egy text editor part.
@@ -422,7 +425,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		try {
 			part = partService.findPart(BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			logger.warn("Part Service couldn't find "+BTSPluginIDs.PART_ID_EGY_TEXTEDITOR);
 			e.printStackTrace();
 		}
 
@@ -581,10 +584,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 					embeddedEditorParentComp.addDisposeListener(new DisposeListener() {
 						@Override
 						public void widgetDisposed(DisposeEvent e) {
-							// remove editor contents (including annotation model)
+							// remove translit editor contents (including annotation model)
 							// before xtext HighlightingHelper gets a chance
 							// to clog main thread with its painful editor dismantling.
-							loadInput(null);
+							loadInputTranscription(null, relatingObjects, null);
 						}
 					});
 
@@ -733,17 +736,18 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 						public void menuShown(MenuEvent e) {
 							
 							
-							if (checkTransliterationHasNoErrors(text))
-							{
-								 MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
-					             itemCopy.setText("Copy with Lemmata" );
-					             itemCopy.addSelectionListener(new SelectionAdapter() {
+							if (checkTransliterationHasNoErrors(text)) {
+								if (!btsTextEvent.getSelectedItems().isEmpty()) {
+									MenuItem itemCopy = new MenuItem((Menu) menu, SWT.NONE);
+						            itemCopy.setText("Copy with Lemmata" );
+						            itemCopy.addSelectionListener(new SelectionAdapter() {
 									
-									@Override
-									public void widgetSelected(SelectionEvent e) {
-										copyTextWithLemmata();
-									}
-								});
+										@Override
+										public void widgetSelected(SelectionEvent e) {
+											copyTextWithLemmata();
+										}
+						            });
+								}
 								if (deepCopyCache != null)
 								{
 									MenuItem itemPaste = new MenuItem((Menu) menu, SWT.NONE);
@@ -896,6 +900,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			
 			cachedCursor = embeddedEditor.getViewer().getTextWidget()
 					.getCaretOffset();
+			final int len = ev.y - ev.x;
 			updateModelFromTranscription();
 			
 			//selectedTextItem
@@ -1017,6 +1022,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 												.getTextWidget()
 												.setCaretOffset(
 														cachedCursor);
+										embeddedEditor.getViewer().revealRange(cachedCursor, len);
 									} catch (Exception e) {
 									}
 								}
@@ -1049,11 +1055,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	/**
 	 * Configure editor ruler.
 	 */
-	@SuppressWarnings("restriction")
 	private void configureEditorRuler() {
-		ruler = embeddedEditorFactory.getCpAnnotationRuler();
+		ruler = EmbeddedEditorFactory.getCpAnnotationRuler();
 
-		oruler = embeddedEditorFactory.getOverViewRuler();
+		oruler = EmbeddedEditorFactory.getOverViewRuler();
 		oruler.addAnnotationType(BTSAnnotationAnnotation.TYPE);
 		oruler.setAnnotationTypeLayer(BTSAnnotationAnnotation.TYPE, 3);
 		oruler.setAnnotationTypeColor(BTSAnnotationAnnotation.TYPE,
@@ -1093,7 +1098,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		if (show_line_number_ruler)
 		{
 			lineNumberRulerColumn = new EgyLineNumberRulerColumn(LINE_SPACE);
-			lineNumberRulerColumn.setModel(annotationModel);
+			//lineNumberRulerColumn.setModel(annotationModel); // does nothing
 			embeddedEditor.getViewer()
 					.addVerticalRulerColumn(lineNumberRulerColumn);
 		}
@@ -1161,6 +1166,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	}
 
 	private boolean checkTransliterationHasNoErrors(BTSText text2) {
+		// XXX irgendwo fehler: wenn vorher irgendwann man errors drin waren,
+		// bleibt das auch wenn man den text wechselt...
 		IXtextDocument document = embeddedEditor.getDocument();
 
 		EList<EObject> objects = document
@@ -1251,6 +1258,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@SuppressWarnings({ "rawtypes", "restriction" })
 	protected void loadInputTranscription(BTSText localtext,
 			List<BTSObject> localRelatingObjects, IProgressMonitor monitor) {
+
+		if (delaySelectionJob != null)
+			delaySelectionJob.cancel();
+		delaySelectionJob = new Job("text_selection_processing_sleeping"){
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				long t = System.currentTimeMillis();
+				while (System.currentTimeMillis() < t+3000)
+					try {
+						Thread.sleep(500);
+					} catch (Exception e) {}
+				delaySelectionJob = null;
+				return Status.OK_STATUS;
+			}
+		};
+
 		text = localtext;
 		loading = true;
 		lemmaAnnotationMap = new HashMap<String, List<Object>>();
@@ -1332,6 +1355,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		oruler.update();
 
 		loading = false;
+		delaySelectionJob.schedule();
 	}
 	
 	/**
@@ -1451,9 +1475,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	protected void processTextSelection(TypedEvent event) {
 		BTSTextSelectionEvent btsEvent = new BTSTextSelectionEvent(event, text);
 		btsEvent.data = text;
-		
-		if (this.btsTextEvent == null) {
-			Job j = new Job("delay_selection_processing"){
+		if (this.delaySelectionJob == null) {
+			this.btsTextEvent = btsEvent;
+			Job.getJobManager().cancel(BTSTextSelectionEvent.class);
+			delaySelectionJob = new Job("delay_selection_processing"){
 				@Override
 				protected IStatus run(IProgressMonitor monitor) {
 					while (System.nanoTime() < lastSelectionTimeStamp + 350000000)
@@ -1476,15 +1501,19 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 							
 						}
 					});
-					btsTextEvent = null;
+					delaySelectionJob = null;
 					return Status.OK_STATUS;
 				}
+				@Override
+				public boolean belongsTo(Object family) {
+					return family.equals(BTSTextSelectionEvent.class);
+				}
 			};
-			j.schedule(400);
+			this.delaySelectionJob.schedule(400);
+		} else if (!(event instanceof CaretEvent) || (this.btsTextEvent == null)
+			|| (this.btsTextEvent.getOriginalEvent() instanceof CaretEvent))
 			this.btsTextEvent = btsEvent;
-		} else if (!(event instanceof CaretEvent) || (btsTextEvent.getOriginalEvent() instanceof CaretEvent))
-			this.btsTextEvent = btsEvent;
-		lastSelectionTimeStamp = System.nanoTime();
+		this.lastSelectionTimeStamp = System.nanoTime();
 	}
 	
 
@@ -2216,7 +2245,7 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	 * @param oldSelectedItem the new sentence item deselected
 	 */
 	private void setSentenceItemDeselected(BTSSentenceItem oldSelectedItem) {
-
+		// TODO
 	}
 
 	/**
@@ -2722,8 +2751,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Optional
 	void eventReceivedUpdates(
 			@EventTopic("model_update/*") final BTSModelUpdateNotification notification) {
-		logger.info("EgyTextEditorPart eventReceivedUpdates. object: "
-				+ notification);
+		//logger.info("EgyTextEditorPart eventReceivedUpdates. object: "
+		//		+ notification);
 		if (notification.getQueryIds() != null) {
 			
 			sync.asyncExec(new Runnable() {
@@ -2738,6 +2767,15 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			});
 			
 		}
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedTextRequested(
+			@UIEventTopic("event_egy_text_editor_text_requested/*") final BTSText current) {
+		if (current == null || !current.equals(text)) 
+			if (text != null)
+				selectionService.setSelection(text);
 	}
 
 	/**

@@ -1,14 +1,9 @@
 package org.bbaw.bts.ui.main.dialogs;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.apache.lucene.queryParser.QueryParser;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -24,8 +19,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
-import org.elasticsearch.index.query.FilterBuilders;
-import org.elasticsearch.index.query.QueryBuilders;
 
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	private Text text;
@@ -39,15 +32,14 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	@Optional
 	@Named("org.bbaw.bts.ui.main.commandparameter.searchString")
 	private String searchString;
-
+	
 	/**
 	 * Create the dialog.
 	 * @param parentShell
 	 * @param query 
 	 */
-	public SimpleSearchQueryDialog(Shell parentShell, BTSQueryRequest queryRequest) {
+	public SimpleSearchQueryDialog(Shell parentShell) {
 		super(parentShell);
-		this.queryRequest = queryRequest;
 	}
 
 	/**
@@ -77,10 +69,33 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		idButton = new Button(container, SWT.CHECK);
 		idButton.setText("Search for IDs");
 		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		idButton.setData(false);
+		idButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				idButton.setData(idButton.getSelection());
+				exactButton.setSelection(!idButton.getSelection()
+						&& (Boolean)exactButton.getData());
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {}
+		});
 		
 		exactButton = new Button(container, SWT.CHECK);
 		exactButton.setText("Search for Names only");
 		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		exactButton.setData(false);
+		exactButton.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				exactButton.setData(exactButton.getSelection());
+				idButton.setSelection(!exactButton.getSelection()
+						&& (Boolean)idButton.getData());
+			}
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
 		
 		wildcardButton = new Button(container, SWT.PUSH);
 		wildcardButton.setText("Add *-wildcard");
@@ -89,8 +104,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				text.setText(text.getText() + "*");
-				
+				String s = text.getText();
+				s = s.endsWith("*") ? s.substring(0, s.length()-1) : s + "*";
+				text.setText(s);
 			}
 			
 			@Override
@@ -107,8 +123,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				text.setText("\"" + text.getText() + "\"");
-				
+				String s = text.getText();
+				s = s.startsWith("\"") && s.endsWith("\"") ? s.substring(1, s.length()-1) : "\"" + s + "\"";
+				text.setText(s);
 			}
 			
 			@Override
@@ -134,30 +151,14 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	
 	@Override
 	protected void okPressed() {
-		if (text.getText().trim().length() > 0)
+		String searchString = text.getText().trim();
+		if (searchString.length() > 0)
 		{
-			if (idButton.getSelection())
-			{
-				queryRequest.setIdQuery(true);
-				queryRequest.setIdString(text.getText().trim());
-				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-				queryRequest.setQueryId("timestamp-" + now.toString());
-			}
-			else if (exactButton.getSelection())
-			{
-				queryRequest.setQueryBuilder(QueryBuilders.matchQuery("name", escapeString(text.getText().trim())));
-				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-				queryRequest.setQueryId("timestamp-" + now.toString());
-				queryRequest.setAutocompletePrefix(text.getText().trim());
-
-			}
-			else
-			{
-				queryRequest.setQueryBuilder(QueryBuilders.simpleQueryString(escapeString(text.getText().trim().toLowerCase())));
-				Date now = Calendar.getInstance(Locale.getDefault()).getTime();
-				queryRequest.setQueryId("timestamp-" + now.toString());
-				queryRequest.setAutocompletePrefix(text.getText().trim());
-			}
+			queryRequest = new BTSQueryRequest(searchString);
+			queryRequest.setIdQuery(idButton.getSelection());
+			if (exactButton.getSelection())
+				queryRequest.addRequestField("name");
+			queryRequest.initQueryBuilder();
 		}
 		else
 		{
@@ -166,40 +167,6 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	private String escapeString(String searchString) {
-		// Anführungszeichen nicht escapen!!!
-		boolean inQuots = false;
-		boolean leftTrunk = false;
-		boolean rightTrunk = false;
-
-		if (searchString.length() > 3 && searchString.startsWith("\"") && searchString.endsWith("\""))
-		{
-			searchString = searchString.substring(1, searchString.length() -1);
-			inQuots = true;
-		}
-		else if (searchString.length() > 1 && searchString.startsWith("*"))
-		{
-			searchString = searchString.substring(1, searchString.length());
-			leftTrunk = true;
-		}else if (searchString.length() > 1 && searchString.endsWith("*"))
-		{
-			searchString = searchString.substring(0, searchString.length()-1);
-			rightTrunk = true;
-		}
-		String escapedString = QueryParser.escape(searchString);
-		if (inQuots)
-		{
-			escapedString = "\"" + escapedString + "\"";
-		} else if (leftTrunk)
-		{
-			escapedString = "*" + escapedString;
-		}else if (rightTrunk)
-		{
-			escapedString = escapedString+ "*";
-		}
-		
-		return escapedString;
-	}
 
 	/**
 	 * Return the initial size of the dialog.
@@ -221,6 +188,16 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			text.setSelection(text.getText().length());
 
 		}
+	}
+	
+	public void setNameOnly(boolean checked) {
+		exactButton.setSelection(checked);
+		exactButton.setData(checked);
+	}
+	
+	public void setIdOnly(boolean checked) {
+		idButton.setSelection(checked);
+		idButton.setData(checked);
 	}
 
 }

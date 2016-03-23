@@ -24,9 +24,9 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSDBException;
 import org.bbaw.bts.core.dao.DBConnectionProvider;
 import org.bbaw.bts.core.dao.GenericDao;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.modelUtils.EmfModelHelper;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -728,7 +728,7 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 		if (query.isIdQuery())
 		{
 			List<E> result = new Vector<E>();
-			E o = find((K) query.getIdString(), indexName);
+			E o = find((K) query.getSearchString(), indexName);
 			result.add(o);
 			return result;
 		}
@@ -844,10 +844,11 @@ public abstract class CouchDBDao<E extends BTSDBBaseObject, K extends Serializab
 //				}
 				result.add((E) o);
 			} catch (Exception e) {
-				logger.info("Query exception", e);
+				logger.warn("Query exception "+e.getMessage(), e);
 			}
 		}
-		logger.info("Query indexName "+ indexName + " result size: " + result.size());
+		if (!result.isEmpty())
+			logger.info("Query indexName "+ indexName + " result size: " + result.size());
 		return result;
 	}
 
