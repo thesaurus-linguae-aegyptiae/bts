@@ -183,10 +183,9 @@ public class BTSTextEditorControllerImpl implements BTSTextEditorController
 			lineLength = DEFAULT_LINE_LENGTH;
 		}
 		annotationRangeMap = new HashMap<BTSInterTextReference, AnnotationCache>();
-		if (relatingObjects != null && !relatingObjects.isEmpty())// && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
+		if (relatingObjects != null && ! relatingObjects.isEmpty())// && (relatingObjectsMap == null || relatingObjectsMap.isEmpty()))
 		{
-			relatingObjectsMap.clear();
-			relatingObjectsMap.putAll(fillRelatingObjectsMap(relatingObjects));
+			relatingObjectsMap = fillRelatingObjectsMap(relatingObjects);
 		}
 		
 			

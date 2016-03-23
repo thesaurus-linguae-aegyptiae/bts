@@ -184,7 +184,6 @@ public class TextModelHelper {
 		{
 			if (an instanceof BTSModelAnnotation && clazz.isInstance(((BTSModelAnnotation)an).getModel()))
 			{
-				// XXX erstbeste?
 				return (BTSModelAnnotation) an;
 			}
 		}
