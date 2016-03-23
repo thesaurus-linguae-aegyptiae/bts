@@ -40,7 +40,7 @@ import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.bbaw.bts.ui.commons.validator.StringEmailAddressValidator;
 import org.bbaw.bts.ui.commons.validator.StringHttp_s_URLValidator;
 import org.bbaw.bts.ui.commons.validator.StringNotEmptyValidator;
-import org.bbaw.bts.ui.commons.viewerSorter.BTSUserByNameViewerComparator;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSUserManagerViewerComparator;
 import org.bbaw.bts.ui.main.dialogs.ObjectUpdaterReaderEditorDialog;
 import org.bbaw.bts.ui.main.handlers.CreateNewUserGroupHandler;
 import org.bbaw.bts.ui.main.parts.userMan.support.ProjectDBCollectionTreeFactory;
@@ -760,7 +760,7 @@ public class UserManagementPart
 		};
 
 		treeViewer.addSelectionChangedListener(user_selectionListener);
-		treeViewer.setComparator(new BTSUserByNameViewerComparator());
+		treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		
 		// Create sample data
 		try {
@@ -932,7 +932,7 @@ public class UserManagementPart
 		};
 
 		user_treeViewer.addSelectionChangedListener(user_selectionListener);
-		user_treeViewer.setComparator(new BTSUserByNameViewerComparator());
+		user_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		// Create sample data
 		userGroups = new ArrayList<BTSUserGroup>();
 		Job job = new Job("load orphans") {
@@ -1085,7 +1085,7 @@ public class UserManagementPart
 		};
 
 		roles_treeViewer.addSelectionChangedListener(roles_selectionListener);
-		roles_treeViewer.setComparator(new BTSUserByNameViewerComparator());
+		roles_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 		// Create sample data
 		projects = projectController.listProjects(null);
 

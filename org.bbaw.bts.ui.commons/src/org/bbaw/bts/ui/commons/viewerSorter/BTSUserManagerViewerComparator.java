@@ -8,17 +8,17 @@ import org.bbaw.bts.btsmodel.BTSUserGroup;
 import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
-import org.eclipse.jface.viewers.ViewerSorter;
 
-public class BTSUserByNameViewerComparator extends ViewerComparator {
+public class BTSUserManagerViewerComparator extends ViewerComparator {
 
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
-		return extractSortString(e1).compareTo(extractSortString(e2));
+		return pickSortString(e1).compareTo(pickSortString(e2));
 	}
 	
-	private String extractSortString(Object o) {
+	private String pickSortString(Object o) {
 		if (o instanceof TreeNodeWrapper) {
+			// extract object from container
 			TreeNodeWrapper t = (TreeNodeWrapper)o;
 			o = t.getObject();
 			if (o == null)
