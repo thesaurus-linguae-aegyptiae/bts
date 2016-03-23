@@ -1,6 +1,5 @@
 package org.bbaw.bts.core.services.corpus.impl.services;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Matcher;
@@ -9,26 +8,21 @@ import java.util.regex.Pattern;
 import javax.inject.Inject;
 
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.commons.BTSPluginIDs;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.dao.corpus.BTSLemmaEntryDao;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest.BTSQueryType;
 import org.bbaw.bts.core.dao.util.DaoConstants;
 import org.bbaw.bts.core.services.corpus.BTSAnnotationService;
 import org.bbaw.bts.core.services.corpus.BTSLemmaEntryService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSImage;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
-import org.bbaw.bts.corpus.btsCorpusModel.BTSWord;
 import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelFactory;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
-import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.core.di.extensions.Preference;
-import org.elasticsearch.index.query.MatchQueryBuilder.Operator;
 import org.elasticsearch.index.query.QueryBuilders;
 
 public class BTSLemmaEntryServiceImpl 
@@ -156,7 +150,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		List<BTSLemmaEntry> objects = new Vector<BTSLemmaEntry>();
 		for (String p : getActiveLemmaLists())
 		{
-
+			System.out.println("search in index: "+p+BTSCorpusConstants.WLIST);
 			try {
 				objects.addAll(lemmaEntryDao.query(query,
 						p + BTSCorpusConstants.WLIST, p + BTSCorpusConstants.WLIST,
@@ -211,57 +205,42 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 	}
 
 	@Override
-	public List<BTSLemmaEntry> findLemmaProposals(BTSWord word, IProgressMonitor monitor) {
-		String chars = processWordChars(word);
-		BTSQueryRequest query = new BTSQueryRequest();
-		// add .*
-		if (chars.contains("-"))
-		{
-			query.setQueryBuilder(QueryBuilders.matchQuery("name",
-					chars).operator(Operator.AND));
-		}
-		else
-		{
-			query.setQueryBuilder(QueryBuilders.boolQuery()
-					.should(QueryBuilders.matchQuery("name",chars).operator(Operator.AND))
-					.should(QueryBuilders.wildcardQuery("name",chars + ".*"))
-					.should(QueryBuilders.wildcardQuery("name",chars + ",*"))
-					);
-		}
-		
+	public List<BTSLemmaEntry> findLemmaProposals(String prefix, IProgressMonitor monitor) {
+		BTSQueryRequest query = createLemmaSearchQuery(prefix);
 //		query.setResponseFields(BTSConstants.SEARCH_BASIC_RESPONSE_FIELDS);
 		System.out.println(query.getQueryId());
-		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor); //thsService.query(query,BTSConstants.OBJECT_STATE_ACTIVE);
-		
+		List<BTSLemmaEntry> children = query(query, BTSConstants.OBJECT_STATE_ACTIVE, monitor);
 		
 		children = lemmaFilterReviewStateType(children);
 		
 		return filter(children);
+	}
+	
+	@Override
+	public BTSQueryRequest createLemmaSearchQuery(String chars) {
+		BTSQueryRequest query = new BTSQueryRequest(chars);
+		query.setType(BTSQueryType.LEMMA);
+		query.setQueryBuilder(QueryBuilders.boolQuery()
+					.should(QueryBuilders.matchQuery("name", chars))
+					.should(QueryBuilders.termQuery("name",chars))
+					);
+		query.setAutocompletePrefix(chars);
+		return query;
 	}
 
 	private List<BTSLemmaEntry> lemmaFilterReviewStateType(
 			List<BTSLemmaEntry> children) {
 		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(children.size());
 		for (BTSCorpusObject entry : children)
-		{
 			if (entry instanceof BTSLemmaEntry 
 					&& (entry.getRevisionState() == null || !entry.getRevisionState().contains("obsolete"))
 					&& (entry.getType() == null || !entry.getType().equals("root")))
-			{
 				filtered.add((BTSLemmaEntry) entry);
-			}
-		}
 		return filtered;
 	}
 
-	private String processWordChars(BTSWord word) {
-		String chars = word.getWChar();
-		return processWordCharForLemmatizing(chars);
-	}
-	
-		
+
 	public String processWordCharForLemmatizing(String chars) {
-		// TODO Auto-generated method stub
 		
 		if (chars == null)
 			return null;
@@ -284,14 +263,14 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		}
 		
 		// cut right side
-				if (chars.contains("{"))
-				{
-					m = deletionPattern.matcher(chars);
-					if (m.find())
-					{
-						chars = m.replaceAll(""); 
-					}
-				}
+		if (chars.contains("{"))
+		{
+			m = deletionPattern.matcher(chars);
+			if (m.find())
+			{
+				chars = m.replaceAll(""); 
+			}
+		}
 		
 		// replace
 		chars = chars.replaceAll(BTSCorpusConstants.LEMMATIZER_TRIPLE_POINT, ":");
@@ -306,16 +285,8 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 			chars = chars.replaceAll(b, "");
 		}
 		
-		// composita
-		if (chars.contains("-"))
-		{
-//			chars = chars.replaceAll("-", " AND ");
-		}
-		else
-		{
-			// add .*
-//			chars += " OR " + chars + ".*";
-		}
+
+		// XXX
 		if (chars.length() > 3 && chars.startsWith("\"") && chars.endsWith("\""))
 		{
 			chars = chars.substring(1, chars.length() -1);
@@ -327,7 +298,7 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		{
 			chars = chars.substring(0, chars.length()-1);
 		}
-		System.out.println("search for lemma proposals: "  + chars);
+		System.out.println("search for lemma proposals for: "  + chars);
 		return chars;
 	}
 
@@ -360,15 +331,11 @@ implements BTSLemmaEntryService, BTSObjectSearchService
 		
 	}
 
-	@Override
-	public String processWordCharForLemmatizing(BTSWord word) {
-		return processWordChars(word);
-	}
 
 	@Override
-	public List<BTSLemmaEntry> sortAndFilterLemmaProposals(
+	public List<BTSLemmaEntry> filterLemmaProposals(
 			List<BTSLemmaEntry> obs) {
-		List<BTSLemmaEntry> filtered = new Vector<BTSLemmaEntry>(obs.size());
+		List<BTSLemmaEntry> filtered;
 		filtered = lemmaFilterReviewStateType(obs);
 		return filtered;
 

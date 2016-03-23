@@ -56,7 +56,7 @@ public class Backend2ClientUpdateServiceImpl implements Backend2ClientUpdateServ
 	public void handleUpdate(BTSModelUpdateNotification notification)
 	{
 
-		logger.info("Notify Listener about change: " + ", Changed object id: " + notification.getObject());
+		//logger.info("Notify Listener about change: " + ", Changed object id: " + notification.getObject());
 		if (notification.getObject() instanceof DBLease)
 		{
 				DBLease lease = (DBLease) notification.getObject();

@@ -2919,8 +2919,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Optional
 	void eventReceivedUpdates(
 			@EventTopic("model_update/*") final BTSModelUpdateNotification notification) {
-		logger.info("EgyTextEditorPart eventReceivedUpdates. object: "
-				+ notification);
+		//logger.info("EgyTextEditorPart eventReceivedUpdates. object: "
+		//		+ notification);
 		if (notification.getQueryIds() != null) {
 			
 			sync.asyncExec(new Runnable() {

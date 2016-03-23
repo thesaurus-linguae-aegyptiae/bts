@@ -714,7 +714,7 @@ public class AnnotationsPart implements EventHandler {
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/*") BTSModelUpdateNotification notification)
 	{
-		logger.info("AnnotationsPart eventReceivedUpdates. object: " + notification);
+		//logger.info("AnnotationsPart eventReceivedUpdates. object: " + notification);
 		if (notification.getQueryIds() != null){
 			for (String id : notification.getQueryIds())
 			{

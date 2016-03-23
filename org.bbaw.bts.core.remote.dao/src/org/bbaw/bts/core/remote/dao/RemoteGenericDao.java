@@ -3,7 +3,7 @@ package org.bbaw.bts.core.remote.dao;
 import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSDBBaseObject;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.tempmodel.DBRevision;
 
 public interface RemoteGenericDao<E extends BTSDBBaseObject, K>

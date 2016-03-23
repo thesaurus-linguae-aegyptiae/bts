@@ -35,7 +35,7 @@ import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSProject;
 import org.bbaw.bts.btsmodel.BTSUser;
 import org.bbaw.bts.btsmodel.BTSUserGroup;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /** UserController manages all view access to user objects and usergroup objects.

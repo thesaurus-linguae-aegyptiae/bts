@@ -22,7 +22,8 @@ public class BTSEgyLemmaEntryComparator implements Comparator<BTSLemmaEntry>{
 			e.printStackTrace();
 		}
 		alphaNumComp = new AlphanumComparator(egyCollator);
-		this.searchString = searchString;
+		this.searchString = (searchString != null) ? searchString.toLowerCase() : null;
+		System.out.println("lemma entry comparator prefix: "+searchString);
 	}
 	
 	@Override
@@ -33,10 +34,10 @@ public class BTSEgyLemmaEntryComparator implements Comparator<BTSLemmaEntry>{
 			BTSObject b1 = (BTSObject) e1;
 			BTSObject b2 = (BTSObject) e2;
 			if (b1.getName() != null) {
-				s1 = b1.getName();
+				s1 = b1.getName().toLowerCase();
 			}
 			if (b2.getName() != null) {
-				s2 = b2.getName();
+				s2 = b2.getName().toLowerCase();
 			}
 
 		}
@@ -45,25 +46,18 @@ public class BTSEgyLemmaEntryComparator implements Comparator<BTSLemmaEntry>{
 		if (s1 != null) {
 			if (s2 != null) {
 				if (searchString != null)
-				{
-					if (s1.toLowerCase().startsWith(searchString.toLowerCase()) && s2.toLowerCase().startsWith(searchString.toLowerCase()))
-					{
-						return alphaNumComp.compare(s1, s2);
-					}
-					else if (s1.toLowerCase().startsWith(searchString.toLowerCase()))
-					{
+					if (s1.startsWith(searchString)) {
+						if (s2.startsWith(searchString))
+							return alphaNumComp.compare(s1, s2);
 						return -1;
-					}
-					else if (s2.toLowerCase().startsWith(searchString.toLowerCase()))
-					{
+					} else if (s2.startsWith(searchString))
 						return 1;
-					}
-				}
 				return alphaNumComp.compare(s1, s2);
 			} else
 				return -1;
-		}
-		return 0;
+		} else if (s2 != null)
+			return 1;
+		return e1.get_id().compareTo(e2.get_id());
 	}
 
 }

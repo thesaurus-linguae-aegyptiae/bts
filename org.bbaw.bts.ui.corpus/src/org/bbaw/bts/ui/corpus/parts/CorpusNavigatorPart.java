@@ -27,13 +27,13 @@ import org.bbaw.bts.core.commons.corpus.BTSCorpusConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.core.corpus.controller.partController.CorpusNavigatorController;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSAnnotation;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSTextCorpus;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSThsEntry;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.searchModel.BTSQueryResultAbstract;
 import org.bbaw.bts.ui.commons.corpus.util.BTSEGYUIConstants;
 import org.bbaw.bts.ui.commons.filter.SuppressDeletedViewerFilter;
@@ -855,7 +855,7 @@ labelProvider));
 	@Inject
 	@Optional
 	void eventReceivedUpdates(@EventTopic("model_update/async") Object object) {
-		logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
+		//logger.info("CorpusNavigatorPart eventReceivedUpdates. object: " + object);
 
 		if (object instanceof BTSCorpusObject && selection != null
 				&& selection.getFirstElement() instanceof BTSCorpusObject) {

@@ -11,9 +11,9 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.BTSObjectSearchService;
 import org.bbaw.bts.core.dao.BTSCommentDao;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSCommentService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 public class BTSCommentServiceImpl extends GenericObjectServiceImpl<BTSComment, String> implements BTSCommentService, BTSObjectSearchService{

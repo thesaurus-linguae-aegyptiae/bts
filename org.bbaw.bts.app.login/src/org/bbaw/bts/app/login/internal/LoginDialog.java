@@ -13,7 +13,6 @@ import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.core.commons.exceptions.BTSDBLocalLoginException;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.modelUtils.StringEncryption;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.bbaw.bts.ui.commons.utils.BTSUIConstants;
 import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
