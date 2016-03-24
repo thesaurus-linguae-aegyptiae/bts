@@ -2772,11 +2772,27 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 	@Inject
 	@Optional
 	void eventReceivedTextRequested(
-			@UIEventTopic("event_egy_text_editor_text_requested/*") final BTSText current) {
+			@UIEventTopic(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"translation_part") final BTSText current) {
 		if (current == null || !current.equals(text)) 
 			if (text != null)
 				selectionService.setSelection(text);
 	}
+
+	@Inject
+	@Optional
+	void eventReceivedRelatedObjectsRequested(
+			@UIEventTopic(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"annotations_part") final BTSRelatingObjectsLoadingEvent e) {
+		if (e == null)
+			if (text != null) {
+				BTSRelatingObjectsLoadingEvent event = new BTSRelatingObjectsLoadingEvent(
+						text);
+				event.setRelatingObjects(relatingObjects);
+				eventBroker
+						.post(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
+								event);
+			}
+	}
+
 
 	/**
 	 * Event received load lemmata.

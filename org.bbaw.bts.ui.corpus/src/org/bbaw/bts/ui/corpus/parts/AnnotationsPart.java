@@ -203,8 +203,9 @@ public class AnnotationsPart implements EventHandler {
 		extendAnnotationsFilterMenu();
 
 		scrollComposite.setContent(composite);
-		eventBroker.subscribe("event_text_relating_objects/*", this);
 		constructed = true;
+		// request input from text editor
+		eventBroker.post(BTSUIConstants.EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED+"annotations_part", relatingObjectsEvent);
 	}
 
 
