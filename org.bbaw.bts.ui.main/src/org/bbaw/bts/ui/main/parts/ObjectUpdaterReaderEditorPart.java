@@ -470,6 +470,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_rolesDesc_users_comboViewer
 				.setContentProvider(new ObservableListContentProvider());
 		roles_rolesDesc_users_comboViewer.setLabelProvider(labelProvider);
+		roles_rolesDesc_users_comboViewer.setComparator(new BTSUserManagerViewerComparator());
 		roles_rolesDesc_users_comboViewer.setInput(observableLisAllUsers);
 
 		roles_roleDesc_assignUser_link = new Link(grpAssignUser, SWT.NONE);
