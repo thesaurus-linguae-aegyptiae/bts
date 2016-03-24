@@ -218,20 +218,28 @@ public class AnnotationsPart implements EventHandler {
 			if (m.getTags().contains("ViewMenu"))
 				viewmenu = m;
 		if (viewmenu != null) {
+			MMenu submenu = null;
 			MCommand menuFilterCommand = null;
 			// save menu item selection flags from application model to context
-			for (MMenuElement mi : viewmenu.getChildren())
+			for (MMenuElement mi : viewmenu.getChildren()) {
 				if (mi instanceof MHandledMenuItem) {
 					filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
 					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
+				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type"))
+					submenu = (MMenu) mi;
+			}
+			// remove submenu if already there
+			if (submenu != null)
+				submenu.setToBeRendered(false);
 			// populate menu items for annotation types
 			// retrieve configuration elements for object type annotation
 			BTSConfigItem typeConf = annotationPartController.getAnnoTypesConfigItem(); 
 			if (!typeConf.getChildren().isEmpty()) {
 				// initialize submenu for annotation types
-				MMenu submenu = MMenuFactory.INSTANCE.createMenu();
+				submenu = MMenuFactory.INSTANCE.createMenu();
+				submenu.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type");
 				submenu.setLabel("Annotation Types");
 				// traverse annotation types configuration branch
 				for (BTSConfig c : typeConf.getChildren())
@@ -278,12 +286,12 @@ public class AnnotationsPart implements EventHandler {
 
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
-		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations." + key);
+		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations.type." + key);
 		menuItem.setSelected(true);
 		menuItem.setType(ItemType.CHECK);
 		MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
 		menuFilterParam.setName("annotationsPartFilterParam");
-		menuFilterParam.setValue("annotations." + key);
+		menuFilterParam.setValue("annotations.type." + key);
 		menuItem.getParameters().add(menuFilterParam);
 		return menuItem;
 	}
@@ -500,7 +508,16 @@ public class AnnotationsPart implements EventHandler {
 	
 	@PreDestroy
 	public void preDestroy() {
-		eventBroker.unsubscribe(this);
+		MMenu viewmenu = null;
+		for (MMenu m : part.getMenus())
+			if (m.getTags().contains("ViewMenu"))
+				viewmenu = m;
+		if (viewmenu != null)
+			for (MMenuElement mi : viewmenu.getChildren())
+				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type")) {
+					mi.setToBeRendered(false);
+					mi.setVisible(false);
+				}
 	}
 	
 
@@ -604,7 +621,7 @@ public class AnnotationsPart implements EventHandler {
 				} else { // check annotation type/subtype
 					key += "annotations";
 					if (o.getType() != null && !o.getType().isEmpty()) {
-						key += "." + o.getType();
+						key += ".type." + o.getType();
 						if (o.getSubtype() != null && !o.getSubtype().isEmpty())
 							key += "." + o.getSubtype();
 					}
