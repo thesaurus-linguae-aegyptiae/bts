@@ -21,6 +21,7 @@ import org.bbaw.bts.btsviewmodel.TreeNodeWrapper;
 import org.bbaw.bts.core.controller.dialogControllers.UserManagerController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
+import org.bbaw.bts.ui.commons.viewerSorter.BTSUserManagerViewerComparator;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -234,6 +235,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		Tree roles_tree = roles_treeViewer.getTree();
 		roles_tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
 				1, 1));
+		roles_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(2, false));
