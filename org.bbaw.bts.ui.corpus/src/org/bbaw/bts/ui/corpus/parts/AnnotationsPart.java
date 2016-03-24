@@ -233,8 +233,11 @@ public class AnnotationsPart implements EventHandler {
 				submenu.setToBeRendered(false);
 			// populate menu items for annotation types
 			// retrieve configuration elements for object type annotation
-			BTSConfigItem typeConf = annotationPartController.getAnnoTypesConfigItem(); 
-			if (!typeConf.getChildren().isEmpty()) {
+			BTSConfigItem typeConf = null;
+			try {
+				typeConf = annotationPartController.getAnnoTypesConfigItem();
+			} catch (Exception e){};
+			if (typeConf != null && !typeConf.getChildren().isEmpty()) {
 				// initialize submenu for annotation types
 				submenu = MMenuFactory.INSTANCE.createMenu();
 				submenu.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type");
@@ -245,13 +248,18 @@ public class AnnotationsPart implements EventHandler {
 						BTSConfigItem confItem = (BTSConfigItem)c;
 						MMenuElement menuItemType = null;
 						// retrieve subtype definition from configuration node
-						BTSConfigItem subtypeConf = annotationPartController.getAnnoSubtypesConfigItem(confItem); 
+						BTSConfigItem subtypeConf = null;
+						try {
+							subtypeConf = annotationPartController.getAnnoSubtypesConfigItem(confItem);
+						} catch (Exception e){};
 						List<BTSConfigItem> subTypeConfItems = new Vector<BTSConfigItem>();
-						// filter attached subtype definition nodes
-						for (BTSConfig cc : subtypeConf.getChildren())
-							if (cc instanceof BTSConfigItem)
-								if (((BTSConfigItem)cc).getValue() != null)
-									subTypeConfItems.add((BTSConfigItem)cc);
+						if (subtypeConf != null) {
+							// filter attached subtype definition nodes
+							for (BTSConfig cc : subtypeConf.getChildren())
+								if (cc instanceof BTSConfigItem)
+									if (((BTSConfigItem)cc).getValue() != null)
+										subTypeConfItems.add((BTSConfigItem)cc);
+						}
 						// if subtypes definitions exist, nest in submenu
 						if (!subTypeConfItems.isEmpty()) {
 							menuItemType = MMenuFactory.INSTANCE.createMenu();
