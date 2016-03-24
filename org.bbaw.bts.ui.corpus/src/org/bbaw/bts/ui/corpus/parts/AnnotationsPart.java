@@ -104,8 +104,6 @@ public class AnnotationsPart implements EventHandler {
 
 	private Map<BTSObject, RelatedObjectGroup> objectWidgetMap = new HashMap<BTSObject, RelatedObjectGroup>();
 
-	private List<RelatedObjectGroup> selectedGroups = new Vector<RelatedObjectGroup>(2);
-
 	private List<RelatedObjectGroup> internalSelectedGroup = new Vector<RelatedObjectGroup>(2);
 
 	private BTSTextSelectionEvent textSelectionEvent;
@@ -134,7 +132,7 @@ public class AnnotationsPart implements EventHandler {
 
 	@Inject
 	public AnnotationsPart() {
-		//TODO Your code here
+		//
 	}
 
 	@PostConstruct
@@ -688,9 +686,12 @@ public class AnnotationsPart implements EventHandler {
 		{
 			setSelectedInternal(null, false);
 		}
-		if (objects instanceof List<?> && !((List) objects).isEmpty())
+		if (objects instanceof List<?>)
 		{
-			List<BTSObject> os = (List<BTSObject>) objects;
+			List<BTSObject> os = new Vector<BTSObject>();
+			for (Object o : (List<?>)objects)
+				if (o instanceof BTSObject)
+					os.add((BTSObject)o);
 			os = filterAndCutRelatingObjects(os, null);
 			List<RelatedObjectGroup> groups = new Vector<RelatedObjectGroup>(os.size());
 			boolean resizeRequired = false;
