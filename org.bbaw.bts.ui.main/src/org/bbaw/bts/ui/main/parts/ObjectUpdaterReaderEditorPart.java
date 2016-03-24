@@ -23,6 +23,7 @@ import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.EditingDomainController;
 import org.bbaw.bts.ui.commons.viewerSorter.BTSUserManagerViewerComparator;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
+import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.core.databinding.observable.list.WritableList;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -40,6 +41,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.jface.databinding.viewers.ObservableListContentProvider;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
@@ -169,6 +171,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	@Inject
 	public ObjectUpdaterReaderEditorPart(Composite parent) {
 		super(parent, SWT.None);
+		parentShell = parent.getShell();
 	}
 
 	private void init() {
@@ -176,6 +179,8 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		for (int i = 0; i < databaseRoles.length; i++) {
 			roleDescMap.put(databaseRoles[i], databaseRolesDescs[i]);
 		}
+		loadAllUsers();
+		loadAllUserGroups();
 
 	}
 	@PostConstruct
@@ -346,7 +351,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 					public void run(final IProgressMonitor monitor)
 							throws InvocationTargetException, InterruptedException 
 					{
-						sync.asyncExec(new Runnable() {
+						Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
 							@Override
 							public void run() {
 								List<BTSUserGroup> groups = userManagerController.listUserGroups(monitor);
@@ -361,13 +366,11 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 						
 					}};
 		       new ProgressMonitorDialog(parentShell).run(true, true, op);
-		    } catch (InvocationTargetException e) {
+		    } catch (InvocationTargetException | InterruptedException e) {
 		       // handle exception
-		    } catch (InterruptedException e) {
-		       // handle cancelation
+		    	e.printStackTrace();
 		    }
-		
-	}
+		}
 
 	private void loadAllUsers() {
 		try {
@@ -377,9 +380,9 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 					public void run(final IProgressMonitor monitor)
 							throws InvocationTargetException, InterruptedException 
 					{
-						sync.asyncExec(new Runnable() {
+						Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
 							@Override
-							public void run() {
+							public void run() {								
 								List<BTSUser> users = userManagerController.listUsers(monitor);
 								observableLisAllUsers = new WritableList(users, BTSUser.class);
 								userMap = new HashMap<String, BTSUser>(users.size());
@@ -388,19 +391,16 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 								}
 							}
 						});
-						
 					}};
 		       new ProgressMonitorDialog(parentShell).run(true, true, op);
-		    } catch (InvocationTargetException e) {
+		    } catch (InvocationTargetException | InterruptedException e) {
 		       // handle exception
-		    } catch (InterruptedException e) {
-		       // handle cancelation
+		    	e.printStackTrace();
 		    }
-		
-
 	}
 
 	private void loadDBRoleDescEditComposite() {
+		System.out.println("loadDBRoleDescEditComposite");
 		if (roles_composite_right != null) {
 			roles_composite_right.dispose();
 			roles_composite_right = null;
