@@ -758,65 +758,35 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadChildren(final List<TreeNodeWrapper> parents) {
-		Job job = new Job("load children")
+		for (TreeNodeWrapper parent : parents)
 		{
-
-			@Override
-			protected IStatus run(IProgressMonitor monitor)
+			if (!parent.isChildrenLoaded())
 			{
-				new Vector<>();
-				for (final TreeNodeWrapper parent : parents)
-				{
-					if (!parent.isChildrenLoaded())
-					{
-						//XXX hard coded make dynamic and independent from label
-						List<BTSObject> cc = new Vector<BTSObject>();
-						List<String> ids = null;
-						if (parent.getLabel().equals("Readers"))
-						{
-							ids = dbBaseObject.getReaders();
-						}else 
-						{
-							ids = dbBaseObject.getUpdaters();
-						}
-						for (String id : ids) {
-							BTSObject o = userMap.get(id);// userController.findUserOrUserGroup(id);
-							if (o == null) {
-								o = userGroupMap.get(id);
-							}
-							cc.add(o);
-						}
-						final List<BTSObject> children = cc;
-						// If you want to update the UI
-						sync.asyncExec(new Runnable()
-						{
-							@Override
-							public void run()
-							{
-								System.out.println("add children" + children.size());
-								for (BTSObject o : children)
-								{
-									TreeNodeWrapper tn = wrappObject(o);
-									tn.setParent(parent);
-									// grandChildren.add(tn);
-									parent.getChildren().add(tn);
-								}
-								parent.setChildrenLoaded(true);
-								roles_treeViewer.refresh();
-
-								// roles_treeViewer.refresh();
-							}
-						});
-					}
+				List<BTSObject> children = new Vector<BTSObject>();
+				List<String> ids = null;
+				if (parent.getLabel().equals(databaseRoles[0])) {
+					ids = dbBaseObject.getReaders();
+				}else {
+					ids = dbBaseObject.getUpdaters();
 				}
-				// loadChildren(grandChildren, false);
-
-				return Status.OK_STATUS;
+				for (String id : ids) {
+					BTSObject o = userMap.get(id);
+					o = (o == null) ? userGroupMap.get(id) : o;
+					if (o != null)
+						children.add(o);
+				}
+				for (BTSObject o : children)
+				{
+					TreeNodeWrapper tn = wrappObject(o);
+					tn.setParent(parent);
+					// grandChildren.add(tn);
+					parent.getChildren().add(tn);
+					roles_treeViewer.expandToLevel(tn, 0);
+				}
+				parent.setChildrenLoaded(true);
+				roles_treeViewer.refresh();
 			}
-		};
-		// Start the Job
-		job.schedule();
-
+		}
 	}
 
 	@Inject
