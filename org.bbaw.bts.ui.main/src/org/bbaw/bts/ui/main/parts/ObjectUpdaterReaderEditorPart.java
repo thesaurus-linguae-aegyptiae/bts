@@ -344,59 +344,30 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadAllUserGroups() {
-		try {
-			 IRunnableWithProgress op = new IRunnableWithProgress() {
-
-					@Override
-					public void run(final IProgressMonitor monitor)
-							throws InvocationTargetException, InterruptedException 
-					{
-						Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
-							@Override
-							public void run() {
-								List<BTSUserGroup> groups = userManagerController.listUserGroups(monitor);
-								observableLisAllUserGroups = new WritableList(groups,
-										BTSUserGroup.class);
-								userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
-								for (BTSUserGroup u : groups) {
-									userGroupMap.put(u.get_id(), u);
-								}
-							}
-						});
-						
-					}};
-		       new ProgressMonitorDialog(parentShell).run(true, true, op);
-		    } catch (InvocationTargetException | InterruptedException e) {
-		       // handle exception
-		    	e.printStackTrace();
-		    }
-		}
+		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
+			@Override
+			public void run() {
+				List<BTSUserGroup> groups = userManagerController.listUserGroups(null);
+				observableLisAllUserGroups = new WritableList(groups,
+						BTSUserGroup.class);
+				userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
+				for (BTSUserGroup u : groups)
+					userGroupMap.put(u.get_id(), u);
+			}
+		});
+	}
 
 	private void loadAllUsers() {
-		try {
-			 IRunnableWithProgress op = new IRunnableWithProgress() {
-
-					@Override
-					public void run(final IProgressMonitor monitor)
-							throws InvocationTargetException, InterruptedException 
-					{
-						Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
-							@Override
-							public void run() {								
-								List<BTSUser> users = userManagerController.listUsers(monitor);
-								observableLisAllUsers = new WritableList(users, BTSUser.class);
-								userMap = new HashMap<String, BTSUser>(users.size());
-								for (BTSUser u : users) {
-									userMap.put(u.getUserName(), u);
-								}
-							}
-						});
-					}};
-		       new ProgressMonitorDialog(parentShell).run(true, true, op);
-		    } catch (InvocationTargetException | InterruptedException e) {
-		       // handle exception
-		    	e.printStackTrace();
-		    }
+		Realm.runWithDefault(SWTObservables.getRealm(Display.getDefault()), new Runnable() {
+			@Override
+			public void run() {
+				List<BTSUser> users = userManagerController.listUsers(null);
+				observableLisAllUsers = new WritableList(users, BTSUser.class);
+				userMap = new HashMap<String, BTSUser>(users.size());
+				for (BTSUser u : users)
+					userMap.put(u.getUserName(), u);
+			}
+		});
 	}
 
 	private void loadDBRoleDescEditComposite() {
