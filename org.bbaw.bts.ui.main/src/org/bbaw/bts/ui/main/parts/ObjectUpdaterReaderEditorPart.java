@@ -188,11 +188,11 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		this.setLayout(new GridLayout(1, false));
 		((GridLayout) this.getLayout()).marginHeight = 0;
 		((GridLayout) this.getLayout()).marginHeight = 0;
-		this.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		GridData gridLayoutData = new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1);
+		this.setLayoutData(gridLayoutData);
 
 		composite = new Composite(this, SWT.NONE);
-		composite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1,
-				1));
+		composite.setLayoutData(gridLayoutData);
 		composite.setLayout(new GridLayout(1, false));
 
 		ToolBar roles_toolbar = new ToolBar(composite, SWT.FLAT | SWT.RIGHT);
@@ -219,12 +219,11 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				getEditingDomain(dbBaseObject).getCommandStack().redo();
-
 			}
 		});
+
 		roles_sashForm = new SashForm(composite, SWT.NONE);
-		roles_sashForm.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
-				true, 1, 1));
+		roles_sashForm.setLayoutData(gridLayoutData);
 
 		roles_composite_Left = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_Left.setLayout(new GridLayout(1, false));
@@ -237,8 +236,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 
 		roles_treeViewer = new TreeViewer(roles_composite_Left, SWT.BORDER);
 		Tree roles_tree = roles_treeViewer.getTree();
-		roles_tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true,
-				1, 1));
+		roles_tree.setLayoutData(gridLayoutData);
 		roles_treeViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
