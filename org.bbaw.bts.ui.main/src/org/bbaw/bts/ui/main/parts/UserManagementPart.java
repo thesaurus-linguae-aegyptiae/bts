@@ -936,7 +936,6 @@ public class UserManagementPart
 		// Create sample data
 		userGroups = new ArrayList<BTSUserGroup>();
 		Job job = new Job("load orphans") {
-			Map map;
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				userGroups = userManagerController.listUserGroups(monitor);
@@ -1480,6 +1479,7 @@ public class UserManagementPart
 		roles_rolesDesc_users_comboViewer.setContentProvider(new ObservableListContentProvider());
 		roles_rolesDesc_users_comboViewer.setLabelProvider(labelProvider);
 		roles_rolesDesc_users_comboViewer.setInput(observableLisAllUsers);
+		roles_rolesDesc_users_comboViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		roles_roleDesc_assignUser_link = new Link(grpAssignUser, SWT.NONE);
 		roles_roleDesc_assignUser_link.setText("<a>Assign role to user</a>");
@@ -2165,7 +2165,7 @@ public class UserManagementPart
 
 				ECommandService commandService = context.get(ECommandService.class);
 				// Activate Handler
-				Map map = new HashMap(1);
+				Map<String, Object> map = new HashMap<>(1);
 				map.put("userId", user.get_id());
 				org.eclipse.core.commands.Command cmd = commandService.getCommand(BTSPluginIDs.CMD_OPEN_CHANGE_PASSWORD);
 				final ParameterizedCommand command = ParameterizedCommand.generateCommand(cmd, map);
@@ -2437,6 +2437,7 @@ public class UserManagementPart
 		users_groupMembers_groups_comboViewer.setContentProvider(new ObservableListContentProvider());
 		users_groupMembers_groups_comboViewer.setLabelProvider(labelProvider);
 		users_groupMembers_groups_comboViewer.setInput(observableLisAllUsers);
+		users_groupMembers_groups_comboViewer.setComparator(new BTSUserManagerViewerComparator());
 
 		users_addGroupMembers_groups_link = new Link(groupSelectUser_Group, SWT.NONE);
 		users_addGroupMembers_groups_link.setText("<a>Add User to Group</a>");
