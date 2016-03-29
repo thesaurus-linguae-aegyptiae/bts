@@ -146,8 +146,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	private Text roles_rolesDesc_name_text;
 
 	private static final String[] databaseRoles = new String[] {
- "Readers",
-			"Updaters" };
+			"Readers", "Updaters"};
 
 	private static final String[] databaseRolesDescs = new String[] {
 			"Readers may view the object.", "Updaters may modify the object.", };
@@ -289,12 +288,12 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 				.createTreeNodeWrapper();
 		TreeNodeWrapper readers = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
-		readers.setLabel("Readers");
+		readers.setLabel(databaseRoles[0]); // "Readers"
 		readers.setChildrenLoaded(false);
 		roles.getChildren().add(readers);
 		TreeNodeWrapper updaters = BtsviewmodelFactory.eINSTANCE
 				.createTreeNodeWrapper();
-		updaters.setLabel("Updaters");
+		updaters.setLabel(databaseRoles[1]); // "Updaters"
 		updaters.setChildrenLoaded(false);
 
 		roles.getChildren().add(updaters);
@@ -470,25 +469,28 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 												BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN,
 												tn);
 								compoundCommand.append(c1);
-								Command command;
+								Command command = null;
 								if (selectedTreeNode.getLabel().equals(
-										"Readers")) {
+										databaseRoles[0])) { // "Readers"
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 													u.getUserName());
-								} else {
+								} else if (selectedTreeNode.getLabel().equals(
+										databaseRoles[1])) { // "Updaters"
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 												u.getUserName());
 								}
-								compoundCommand.append(command);
-								getEditingDomain(dbBaseObject)
-										.getCommandStack().execute(
-												compoundCommand);
+								if (command != null) {
+									compoundCommand.append(command);
+									getEditingDomain(dbBaseObject)
+											.getCommandStack().execute(
+													compoundCommand);
+								}
 								roles_treeViewer.refresh();
 
 							}
@@ -545,25 +547,28 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 												BtsviewmodelPackage.TREE_NODE_WRAPPER__CHILDREN,
 												tn);
 								compoundCommand.append(c1);
-								Command command;
+								Command command = null;
 								if (selectedTreeNode.getLabel().equals(
-										"Readers")) {
+										databaseRoles[0])) { // "Readers"
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 													ug.get_id());
-								} else {
+								} else if (selectedTreeNode.getLabel().equals(
+										databaseRoles[1])){ // "Updaters";
 									command = AddCommand
 											.create(getEditingDomain(dbBaseObject),
 													dbBaseObject,
 													BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 													ug.get_id());
 								}
-								compoundCommand.append(command);
-								getEditingDomain(dbBaseObject)
-										.getCommandStack().execute(
-												compoundCommand);
+								if (command != null) {
+									compoundCommand.append(command);
+									getEditingDomain(dbBaseObject)
+											.getCommandStack().execute(
+													compoundCommand);
+								}
 								roles_treeViewer.refresh();
 
 							}
@@ -622,24 +627,27 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 									getEditingDomain(dbBaseObject),
 									selectedTreeNode);
 							compoundCommand.append(c1);
-							Command command;
+							Command command = null;
 							if (((TreeNodeWrapper) parent).getLabel().equals(
-									"Readers")) {
+									databaseRoles[0])) { // "Readers"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 												u.get_id());
-							} else {
+							} else if (((TreeNodeWrapper)parent).getLabel().equals(
+									databaseRoles[1])){ // "Updaters"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 												u.get_id());
 							}
-							compoundCommand.append(command);
-							getEditingDomain(dbBaseObject).getCommandStack()
-									.execute(compoundCommand);
+							if (command != null) {
+								compoundCommand.append(command);
+								getEditingDomain(dbBaseObject).getCommandStack()
+										.execute(compoundCommand);
+							}
 							roles_treeViewer.refresh();
 						}
 
@@ -709,24 +717,27 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 									getEditingDomain(dbBaseObject),
 									selectedTreeNode);
 							compoundCommand.append(c1);
-							Command command;
+							Command command = null;
 							if (((TreeNodeWrapper) parent).getLabel().equals(
-									"Readers")) {
+									databaseRoles[0])) { // "Readers"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__READERS,
 												u.getUserName());
-							} else {
+							} else if (((TreeNodeWrapper) parent).getLabel().equals(
+									databaseRoles[1])){ // "Updaters"
 								command = RemoveCommand
 										.create(getEditingDomain(dbBaseObject),
 												dbBaseObject,
 												BtsmodelPackage.Literals.BTSDB_BASE_OBJECT__UPDATERS,
 												u.getUserName());
 							}
-							compoundCommand.append(command);
-							getEditingDomain(dbBaseObject).getCommandStack()
-									.execute(compoundCommand);
+							if (command != null) {
+								compoundCommand.append(command);
+								getEditingDomain(dbBaseObject).getCommandStack()
+										.execute(compoundCommand);
+							}
 							roles_treeViewer.refresh();
 
 						}
