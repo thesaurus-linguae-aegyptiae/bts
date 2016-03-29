@@ -203,7 +203,7 @@ public class BTSUIConstants {
 
 	public static final String EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA = "event_egy_text_editor_load_lemmata/load";
 	
-	public static final String EVENT_EGY_TEXT_EDITOR_TEXT_REQUESTED = "event_egy_text_editor_text_requested/translation_part";
+	public static final String EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED = "event_egy_text_editor_input_requested/";
 
 	public static final Color COLOR_ERROR = _resources.createColor(new RGB(255, 0, 0));
 
