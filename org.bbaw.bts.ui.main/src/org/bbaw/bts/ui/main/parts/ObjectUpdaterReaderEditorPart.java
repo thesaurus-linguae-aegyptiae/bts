@@ -202,11 +202,9 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_ToolUndo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_UNDO));
 		roles_ToolUndo.addSelectionListener(new SelectionAdapter() {
-
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				getEditingDomain(dbBaseObject).getCommandStack().undo();
-
 			}
 		});
 
@@ -215,7 +213,6 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		roles_ToolRedo.setImage(resourceProvider.getImage(Display.getDefault(),
 				BTSResourceProvider.IMG_REDO));
 		roles_ToolRedo.addSelectionListener(new SelectionAdapter() {
-
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				getEditingDomain(dbBaseObject).getCommandStack().redo();
@@ -271,12 +268,10 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 			public void selectionChanged(SelectionChangedEvent event) {
 				IStructuredSelection selection = (StructuredSelection) event
 						.getSelection();
-				if (selection.getFirstElement() instanceof TreeNodeWrapper) {
+				if (selection.getFirstElement() instanceof TreeNodeWrapper)
 					selectedTreeNode = (TreeNodeWrapper) selection
 							.getFirstElement();
-				}
 				handleRolesTreeSelection(selection);
-
 			}
 
 		};
@@ -304,37 +299,34 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 					.getFirstElement();
 			if (selectedTreeObject instanceof BTSUser) {
 				loadDBRoleDescUserEditComposite((BTSUser) selectedTreeObject);
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			} else if (selection.getFirstElement() instanceof BTSUserGroup) {
 				loadDBRoleDescUserGroupEditComposite((BTSUserGroup) selectedTreeObject);
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			}
 			if (selectedTreeObject == null
-					|| !selectedTreeObject.equals(selection.getFirstElement())) {
-				Object oldSelection = selectedTreeObject;
+					|| !selectedTreeObject.equals(selection.getFirstElement()))
 				selectedTreeObject = (BTSIdentifiableItem) selection
 						.getFirstElement();
-			}
 		} else if (selection.getFirstElement() instanceof TreeNodeWrapper) {
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection.getFirstElement();
 			selectedTreeNode = tn;
 			if (tn.getObject() == null) {
 				if (!tn.isChildrenLoaded()) {
-					List<TreeNodeWrapper> parents = new Vector<TreeNodeWrapper>(
-							1);
+					List<TreeNodeWrapper> parents = new Vector<>(1);
 					parents.add(tn);
 					loadChildren(parents);
 				}
 				loadDBRoleDescEditComposite();
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			}
 			if (tn.getObject() instanceof BTSUserGroup) {
 				loadDBRoleDescUserGroupEditComposite((BTSUserGroup) tn
 						.getObject());
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			} else if (tn.getObject() instanceof BTSUser) {
 				loadDBRoleDescUserEditComposite((BTSUser) tn.getObject());
-				enableReolesUndoRedo();
+				enableRolesUndoRedo();
 			}
 		}
 
@@ -368,17 +360,14 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 	}
 
 	private void loadDBRoleDescEditComposite() {
-		System.out.println("loadDBRoleDescEditComposite");
 		if (roles_composite_right != null) {
 			roles_composite_right.dispose();
 			roles_composite_right = null;
 		}
-		if (observableLisAllUsers == null) {
+		if (observableLisAllUsers == null)
 			loadAllUsers();
-		}
-		if (observableLisAllUserGroups == null) {
+		if (observableLisAllUserGroups == null)
 			loadAllUserGroups();
-		}
 		roles_composite_right = new Composite(roles_sashForm, SWT.NONE);
 		roles_composite_right.setLayout(new GridLayout(3, false));
 		lblUserRoleDefinition = new Label(roles_composite_right, SWT.NONE);
@@ -396,11 +385,9 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 				SWT.CENTER, true, false, 1, 1));
 		roles_rolesDesc_name_text.setEditable(false);
 		if (selectedTreeNode.getLabel() != null)
-		{
 			roles_rolesDesc_name_text
-	.setText(((TreeNodeWrapper) selectedTreeNode)
+				.setText(((TreeNodeWrapper) selectedTreeNode)
 					.getLabel());
-		}
 		// Label lblRoleDesc = new Label(roles_composite_right, SWT.NONE);
 		// lblRoleDesc.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false,
 		// false, 1, 1));
@@ -748,7 +735,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 
 	}
 
-	private void enableReolesUndoRedo() {
+	private void enableRolesUndoRedo() {
 		roles_ToolUndo.setEnabled(getEditingDomain(dbBaseObject)
 				.getCommandStack().canUndo());
 		roles_ToolRedo.setEnabled(getEditingDomain(dbBaseObject)
