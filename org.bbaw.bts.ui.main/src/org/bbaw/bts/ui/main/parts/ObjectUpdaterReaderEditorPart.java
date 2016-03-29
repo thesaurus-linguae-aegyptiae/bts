@@ -762,7 +762,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 				}
 				for (BTSObject o : children)
 				{
-					TreeNodeWrapper tn = wrappObject(o);
+					TreeNodeWrapper tn = wrapObject(o);
 					tn.setParent(parent);
 					// grandChildren.add(tn);
 					parent.getChildren().add(tn);
@@ -785,7 +785,7 @@ public class ObjectUpdaterReaderEditorPart extends Composite {
 		}
 	}
 
-	private TreeNodeWrapper wrappObject(BTSObject o) {
+	private TreeNodeWrapper wrapObject(BTSObject o) {
 		return BtsviewmodelFactory.eINSTANCE.wrappObject(o);
 	}
 
