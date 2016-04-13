@@ -1,0 +1,287 @@
+package org.bbaw.bts.core.controller.impl.generalController;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
+import javax.inject.Inject;
+
+import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.controller.generalController.ApplicationUpdateController;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
+import org.eclipse.core.runtime.jobs.IJobChangeListener;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.core.runtime.jobs.JobChangeAdapter;
+import org.eclipse.core.runtime.preferences.ConfigurationScope;
+import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.services.log.Logger;
+import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.workbench.IWorkbench;
+import org.eclipse.equinox.p2.core.IProvisioningAgent;
+import org.eclipse.equinox.p2.operations.ProvisioningJob;
+import org.eclipse.equinox.p2.operations.ProvisioningSession;
+import org.eclipse.equinox.p2.operations.Update;
+import org.eclipse.equinox.p2.operations.UpdateOperation;
+import org.eclipse.jface.dialogs.MessageDialog;
+
+@SuppressWarnings("restriction")
+public class ApplicationUpdateControllerImpl extends Job implements
+		ApplicationUpdateController {
+
+	@Inject
+	private Logger logger;
+	
+	@Inject
+	private IProvisioningAgent agent;
+	
+	@Inject
+	private UISynchronize sync;
+	
+	@Inject
+	private IWorkbench workbench;
+	
+	private Job updateJob;
+	private Update[] updates;
+	private volatile EUpdateStatusType status;
+	private boolean updatePending;
+	private long timeStamp;
+
+	private UpdateOperation updateOp;
+	
+	//public final String DEFAULT_PREF_P2_UPDATE_SITE = "http://telota.bbaw.de/bts-update/update-3.x/repository_3.0.15/";
+	public final String DEFAULT_PREF_P2_UPDATE_SITE = "file:///D:/GIT/aaew/bts-git/aaew-bts/org.bbaw.bts.app.product/target/repository/";
+	
+	public ApplicationUpdateControllerImpl() {
+		super("Application Update Check Job");
+		updateJob = null;
+		updates = null;
+		status = EUpdateStatusType.NO_UPDATE;
+		updatePending = false;
+		timeStamp = 0;
+		schedule();
+	}
+	
+	@Override
+	public boolean isUpdateAvailable() {
+		logger.info("Return Software Update availability.");
+		if (updates != null) { 
+			if (updates.length > 0) {
+				assert status == EUpdateStatusType.UPDATE_AVAILABLE;
+				return true;
+			}
+		} else {
+			scheduleCheck();
+		}
+		return false;
+	}
+
+	@Override
+	public EUpdateStatusType getStatus() {
+		return status;
+	}
+
+	@Override
+	public IStatus scheduleUpdate() {
+		logger.info("SOFTWARE UPDATE CONFIRMED.");
+		if (updates != null && updates.length > 0) {
+        	logger.info("Updates available: "+updates.length);
+        	for (Update u : updates) {
+        		logger.info(" "+u.toUpdate);
+        	}
+		}
+		
+		if (updateJob != null) {
+			updateJob.addJobChangeListener(new JobChangeAdapter() {
+				
+				@Override
+				public void sleeping(IJobChangeEvent event) {
+					// TODO Auto-generated method stub
+					super.sleeping(event);
+				}
+				
+				@Override
+				public void scheduled(IJobChangeEvent event) {
+					logger.info("update job is scheduled. "+event);
+					super.scheduled(event);
+				}
+				
+				@Override
+				public void running(IJobChangeEvent event) {
+					logger.info("update job is running. "+event);
+					status = EUpdateStatusType.UPDATE_RUNNING;
+					super.running(event);
+				}
+				
+				@Override
+				public void done(IJobChangeEvent event) {
+					logger.info("update job done. "+event);
+					status = event.getResult().isOK() ?
+							EUpdateStatusType.UPDATE_SUCCESS
+							: EUpdateStatusType.UPDATE_FAILED;
+					updatePending = false;
+					if (status == EUpdateStatusType.UPDATE_SUCCESS) {
+						sync.syncExec(new Runnable() {
+
+				            @Override
+				            public void run() {
+				              boolean restart = MessageDialog.openQuestion(null, "Updates installed, restart?",
+				                  "Updates have been installed. Do you want to restart?");
+				              if (restart) {
+				                workbench.restart();
+				              }
+				            }
+				          });
+					}
+					super.done(event);
+				}
+				
+				@Override
+				public void awake(IJobChangeEvent event) {
+					logger.info("update job awake. "+event);
+					super.awake(event);
+				}
+				
+				@Override
+				public void aboutToRun(IJobChangeEvent event) {
+					logger.info("update job about to run. "+event);
+					super.aboutToRun(event);
+				}
+			});
+			logger.info("Schedule update job");
+			updateJob.schedule();
+			logger.info("done. "+updateJob.getResult());
+		}
+		return null;
+	}
+	
+	@Override
+	public void scheduleCheck() {
+		schedule();
+	}
+
+	@Override
+	protected IStatus run(IProgressMonitor monitor) {
+		logger.info("Software Update Check Controller Job active.");
+		IStatus runStatus = checkForUpdates(monitor);
+		schedule(TIME_UNTIL_RECHECK);
+		logger.info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
+		if (status == EUpdateStatusType.UPDATE_AVAILABLE) {
+			if (!updatePending) {
+				confirmInstallation();
+			} else {
+				scheduleUpdate();
+			}
+		}
+		return runStatus;
+	}
+	
+	private void confirmInstallation() {
+		sync.syncExec(new Runnable() {
+			 
+            @Override
+            public void run() {
+                boolean performUpdate = MessageDialog.openQuestion(
+                        null,
+                        "Updates available",
+                        "There are updates available. Do you want to install them now?");
+                if (performUpdate) {
+                	updatePending = true;
+                } else {
+                	status = EUpdateStatusType.UPDATE_DECLINED;
+                }
+            }
+        });
+	}
+	
+	@Override
+	public boolean shouldSchedule() {
+		return !(status == EUpdateStatusType.CHECK_RUNNING || status == EUpdateStatusType.UPDATE_RUNNING);
+	}
+	
+	private synchronized IStatus checkForUpdates(IProgressMonitor monitor) { 
+		long now = System.currentTimeMillis();
+		// if latest check within specified time, return status
+		if (now - timeStamp < TIME_UNTIL_RECHECK) {
+			logger.info("p2 update: last checked at "+timeStamp);
+			if (updates != null) {
+				status = (updates.length > 0)
+						? EUpdateStatusType.UPDATE_AVAILABLE
+						: EUpdateStatusType.NO_UPDATE;
+				return Status.CANCEL_STATUS;
+			} else {
+				logger.warn("Check for updates anyway.");
+			}
+		}
+		// if more than specified time since latest update, re-check
+		status = EUpdateStatusType.CHECK_RUNNING;
+		timeStamp = now;
+
+		// set up provisioning services
+		ProvisioningSession session = new ProvisioningSession(agent);
+		updateOp = new UpdateOperation(session);
+
+		// lookup repository URL: try app configuration, use hard coded default
+		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
+		String url = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
+				DEFAULT_PREF_P2_UPDATE_SITE);
+
+		logger.info("P2_UPDATE_SITE url " + url);
+		URI uri = null;
+   		try {
+			uri = new URI(url);
+		} catch (URISyntaxException e) {
+			logger.warn(e, "P2 Update site invalid.");
+			e.printStackTrace();
+			status = EUpdateStatusType.CHECK_FAILED;
+			return Status.CANCEL_STATUS;
+		}
+   		
+        // set location of artifact and metadata repo
+        updateOp.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
+        updateOp.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
+        
+        // perform operation
+        IStatus updateStatus = updateOp.resolveModal(monitor);
+        logger.info("P2 Update Status : " + updateStatus.getCode());
+        
+        // if nothing to do, do nothing
+        if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
+        	status = EUpdateStatusType.NO_UPDATE;
+        	return Status.OK_STATUS;
+        }
+        
+        // abort unless status ok
+        if (!updateStatus.isOK()) {
+        	status = EUpdateStatusType.CHECK_FAILED;
+        	return Status.CANCEL_STATUS;
+        }
+        
+        // try to retrieve update job
+		if (updateOp != null) {
+			updateJob = updateOp.getProvisioningJob(monitor);
+		} else {
+			logger.error("Couldn't retrieve update job!");
+		}        
+        
+        // obtain updates list
+        updates = updateOp.getPossibleUpdates();
+        
+        if (updates != null && updates.length > 0) {
+        	logger.info("Updates available: "+updates.length);
+        	for (Update u : updates) {
+        		logger.info(" "+u.toUpdate+" >> "+u.replacement);
+        	}
+        	status = EUpdateStatusType.UPDATE_AVAILABLE;
+        	return Status.OK_STATUS;
+        }
+        
+        updates = new Update[0];
+        status = EUpdateStatusType.NO_UPDATE;
+		return Status.OK_STATUS;
+	}
+
+
+}

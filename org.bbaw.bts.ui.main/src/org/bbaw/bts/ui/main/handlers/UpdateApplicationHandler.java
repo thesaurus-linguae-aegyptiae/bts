@@ -9,6 +9,7 @@ import javax.crypto.spec.PSource;
 
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
+import org.bbaw.bts.core.controller.generalController.ApplicationUpdateController;
 import org.bbaw.bts.e4.p2.P2Util;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -46,90 +47,13 @@ public class UpdateApplicationHandler {
 		      
 
 		@CanExecute
-		public boolean canExecute(IProvisioningAgent agent, IWorkbench workbench,
-				UISynchronize sync, IEclipseContext context,
-				@Preference(nodePath = "org.bbaw.bts.app") IEclipsePreferences prefs,
-				Logger logger) {
-			long timeStamp = 0;
-			long now = System.currentTimeMillis();
-			IEclipseContext node = null;
-			Update[] updates = null;
-			// try to retrieve result of last update check
-			if (context.containsKey("p2updateStatus")) {
-				node = (IEclipseContext)context.get("p2updateStatus");
-				timeStamp = (long)node.get("timeStamp");
-				updates = (Update[])node.get("updates");
-			} else {
-				logger.warn("no update status found in context.");
-				node = context.createChild();
-				context.set("p2updateStatus", node);
-			}
-			
-			// if latest check within 10 minutes ago, return status
-			if (now - timeStamp < 10*60*1000) {
-				logger.info("p2 update: last checked at "+timeStamp);
-				return updates != null && updates.length > 0;
-			}
-			
-			// if more than 10 minutes since latest update, re-check
-			node.set("timeStamp", now);
-			ProvisioningSession session = new ProvisioningSession(agent);
-			UpdateOperation updateOp = new UpdateOperation(session);
-			
-			// lookup repository URL
-			String url = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
-					BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
-			///String url = BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE;
-	        logger.info("P2_UPDATE_SITE url " + url);
-			URI uri = null;
-       		try {
-				uri = new URI(url);
-			} catch (URISyntaxException e) {
-				logger.warn(e, "P2 Update site invalid.");
-				e.printStackTrace();
-				node.set("updates", updates);
-				return false;
-			}
-       		
-	        // set location of artifact and metadata repo
-	        updateOp.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
-	        updateOp.getProvisioningContext().setMetadataRepositories(new URI[] { uri });			
-	        
-	        // perform operation
-	        IStatus updateStatus = updateOp.resolveModal(null);
-	        node.set("operation", updateOp);
-	        logger.info("P2 Update Status : " + updateStatus.getCode());
-	        
-	        // if nothing to do, do nothing
-	        if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-	        	node.set("updates", null);
-	        	return false;
-	        }
-	        
-	        // abort unless status ok
-	        if (!updateStatus.isOK()) {
-	        	node.set("updates", null);
-	        	return false;
-	        }
-	        
-	        // obtain updates list
-	        updates = updateOp.getPossibleUpdates();
-	        node.set("updates", updates);
-	        
-	        if (updates != null && updates.length > 0) {
-	        	logger.info("Updates available: "+updates.length);
-	        	for (Update u : updates) {
-	        		logger.info(" "+u.toUpdate+" >> "+u.replacement);
-	        	}
-	        	return true;
-	        }
-	        
-			return false;
+		public boolean canExecute(ApplicationUpdateController updateController) {
+			return updateController.isUpdateAvailable();
 		}
 	
 		@Execute
 		public void exec(IEclipseContext context, IWorkbench workbench,
-				Logger logger) {
+				Logger logger, ApplicationUpdateController updateController) {
 			IEclipseContext node = null;
 			Update[] updates = null;
 			UpdateOperation operation = null;
@@ -147,25 +71,7 @@ public class UpdateApplicationHandler {
 				context.set("p2updateStatus", node);
 			}
 			
-			if (updates != null && updates.length > 0) {
-	        	logger.info("Updates available: "+updates.length);
-	        	for (Update u : updates) {
-	        		logger.info(" "+u.toUpdate);
-	        	}
-			}
-			
-			ProvisioningJob updateJob = null;
-			if (operation != null) {
-				updateJob = operation.getProvisioningJob(null);
-			} else {
-				logger.error("Couldn't retrieve update operation!");
-			}
-			
-			if (updateJob != null) {
-				logger.info("Schedule update job");
-				updateJob.runModal(null);
-				logger.info("done. "+updateJob.getResult());
-			}
+			updateController.scheduleUpdate();
 		}
 		  
 		  public void execute(final IProvisioningAgent agent, final Shell parent,
