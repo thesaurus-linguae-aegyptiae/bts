@@ -100,12 +100,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			updateJob.addJobChangeListener(new JobChangeAdapter() {
 				
 				@Override
-				public void sleeping(IJobChangeEvent event) {
-					// TODO Auto-generated method stub
-					super.sleeping(event);
-				}
-				
-				@Override
 				public void scheduled(IJobChangeEvent event) {
 					logger.info("update job is scheduled. "+event);
 					super.scheduled(event);
@@ -137,25 +131,14 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				              }
 				            }
 				          });
+					} else {
+						
 					}
 					super.done(event);
-				}
-				
-				@Override
-				public void awake(IJobChangeEvent event) {
-					logger.info("update job awake. "+event);
-					super.awake(event);
-				}
-				
-				@Override
-				public void aboutToRun(IJobChangeEvent event) {
-					logger.info("update job about to run. "+event);
-					super.aboutToRun(event);
 				}
 			});
 			logger.info("Schedule update job");
 			updateJob.schedule();
-			logger.info("done. "+updateJob.getResult());
 		}
 		return null;
 	}
