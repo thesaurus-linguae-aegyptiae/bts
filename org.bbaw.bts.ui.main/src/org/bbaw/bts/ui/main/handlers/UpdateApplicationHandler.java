@@ -19,6 +19,8 @@ import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Execute;
 import org.eclipse.e4.core.di.extensions.Preference;
 import org.eclipse.e4.core.services.log.Logger;
@@ -43,7 +45,129 @@ import org.eclipse.swt.widgets.Shell;
 public class UpdateApplicationHandler {
 		      
 
-		  @Execute
+		@CanExecute
+		public boolean canExecute(IProvisioningAgent agent, IWorkbench workbench,
+				UISynchronize sync, IEclipseContext context,
+				@Preference(nodePath = "org.bbaw.bts.app") IEclipsePreferences prefs,
+				Logger logger) {
+			long timeStamp = 0;
+			long now = System.currentTimeMillis();
+			IEclipseContext node = null;
+			Update[] updates = null;
+			// try to retrieve result of last update check
+			if (context.containsKey("p2updateStatus")) {
+				node = (IEclipseContext)context.get("p2updateStatus");
+				timeStamp = (long)node.get("timeStamp");
+				updates = (Update[])node.get("updates");
+			} else {
+				logger.warn("no update status found in context.");
+				node = context.createChild();
+				context.set("p2updateStatus", node);
+			}
+			
+			// if latest check within 10 minutes ago, return status
+			if (now - timeStamp < 10*60*1000) {
+				logger.info("p2 update: last checked at "+timeStamp);
+				return updates != null && updates.length > 0;
+			}
+			
+			// if more than 10 minutes since latest update, re-check
+			node.set("timeStamp", now);
+			ProvisioningSession session = new ProvisioningSession(agent);
+			UpdateOperation updateOp = new UpdateOperation(session);
+			
+			// lookup repository URL
+			String url = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
+					BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
+			///String url = BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE;
+	        logger.info("P2_UPDATE_SITE url " + url);
+			URI uri = null;
+       		try {
+				uri = new URI(url);
+			} catch (URISyntaxException e) {
+				logger.warn(e, "P2 Update site invalid.");
+				e.printStackTrace();
+				node.set("updates", updates);
+				return false;
+			}
+       		
+	        // set location of artifact and metadata repo
+	        updateOp.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
+	        updateOp.getProvisioningContext().setMetadataRepositories(new URI[] { uri });			
+	        
+	        // perform operation
+	        IStatus updateStatus = updateOp.resolveModal(null);
+	        node.set("operation", updateOp);
+	        logger.info("P2 Update Status : " + updateStatus.getCode());
+	        
+	        // if nothing to do, do nothing
+	        if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
+	        	node.set("updates", null);
+	        	return false;
+	        }
+	        
+	        // abort unless status ok
+	        if (!updateStatus.isOK()) {
+	        	node.set("updates", null);
+	        	return false;
+	        }
+	        
+	        // obtain updates list
+	        updates = updateOp.getPossibleUpdates();
+	        node.set("updates", updates);
+	        
+	        if (updates != null && updates.length > 0) {
+	        	logger.info("Updates available: "+updates.length);
+	        	for (Update u : updates) {
+	        		logger.info(" "+u.toUpdate+" >> "+u.replacement);
+	        	}
+	        	return true;
+	        }
+	        
+			return false;
+		}
+	
+		@Execute
+		public void exec(IEclipseContext context, IWorkbench workbench,
+				Logger logger) {
+			IEclipseContext node = null;
+			Update[] updates = null;
+			UpdateOperation operation = null;
+			// try to retrieve result of last update check
+			if (context.containsKey("p2updateStatus")) {
+				logger.info("Retrieve update status.");
+				node = (IEclipseContext)context.get("p2updateStatus");
+				updates = (Update[])node.get("updates");
+				operation = (UpdateOperation)node.get("operation");
+			} else {
+				logger.warn("no update status found in context.");
+				node = context.createChild();
+				logger.warn("store update status in node: "+node.hashCode());
+				logger.warn("context hash: "+context.hashCode());
+				context.set("p2updateStatus", node);
+			}
+			
+			if (updates != null && updates.length > 0) {
+	        	logger.info("Updates available: "+updates.length);
+	        	for (Update u : updates) {
+	        		logger.info(" "+u.toUpdate);
+	        	}
+			}
+			
+			ProvisioningJob updateJob = null;
+			if (operation != null) {
+				updateJob = operation.getProvisioningJob(null);
+			} else {
+				logger.error("Couldn't retrieve update operation!");
+			}
+			
+			if (updateJob != null) {
+				logger.info("Schedule update job");
+				updateJob.runModal(null);
+				logger.info("done. "+updateJob.getResult());
+			}
+		}
+		  
 		  public void execute(final IProvisioningAgent agent, final Shell parent,
 		      final UISynchronize sync, final IWorkbench workbench, final Logger logger,
 		      final @Preference(nodePath = "org.bbaw.bts.app") IEclipsePreferences prefs) {
