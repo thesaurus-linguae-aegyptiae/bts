@@ -69,7 +69,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	
 	@Override
 	public boolean isUpdateAvailable() {
-		logger.info("Return Software Update availability.");
+		info("Return Software Update availability.");
 		if (updates != null) { 
 			if (updates.length > 0) {
 				assert status == EUpdateStatusType.UPDATE_AVAILABLE;
@@ -88,11 +88,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	public IStatus scheduleUpdate() {
-		logger.info("SOFTWARE UPDATE CONFIRMED.");
+		info("SOFTWARE UPDATE CONFIRMED.");
 		if (updates != null && updates.length > 0) {
-        	logger.info("Updates available: "+updates.length);
+        	info("Updates available: "+updates.length);
         	for (Update u : updates) {
-        		logger.info(" "+u.toUpdate);
+        		info(" "+u.toUpdate);
         	}
 		}
 		
@@ -101,20 +101,20 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				
 				@Override
 				public void scheduled(IJobChangeEvent event) {
-					logger.info("update job is scheduled. "+event);
+					info("update job is scheduled. "+event);
 					super.scheduled(event);
 				}
 				
 				@Override
 				public void running(IJobChangeEvent event) {
-					logger.info("update job is running. "+event);
+					info("update job is running. "+event);
 					status = EUpdateStatusType.UPDATE_RUNNING;
 					super.running(event);
 				}
 				
 				@Override
 				public void done(IJobChangeEvent event) {
-					logger.info("update job done. "+event);
+					info("update job done. "+event);
 					status = event.getResult().isOK() ?
 							EUpdateStatusType.UPDATE_SUCCESS
 							: EUpdateStatusType.UPDATE_FAILED;
@@ -137,7 +137,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 					super.done(event);
 				}
 			});
-			logger.info("Schedule update job");
+			info("Schedule update job");
 			updateJob.schedule();
 		}
 		return null;
@@ -152,7 +152,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	protected IStatus run(IProgressMonitor monitor) {
 		IStatus runStatus = checkForUpdates(monitor);
 		schedule(TIME_UNTIL_RECHECK);
-		logger.info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
+		info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
 		if (status == EUpdateStatusType.UPDATE_AVAILABLE) {
 			if (!updatePending) {
 				confirmInstallation();
@@ -194,7 +194,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		long now = System.currentTimeMillis();
 		// if latest check within specified time, return status
 		if (now - timeStamp < TIME_UNTIL_RECHECK) {
-			logger.info("p2 update: last checked at "+timeStamp);
+			info("p2 update: last checked at "+timeStamp);
 			if (updates != null) {
 				status = (updates.length > 0)
 						? EUpdateStatusType.UPDATE_AVAILABLE
@@ -217,7 +217,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		String url = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
 				DEFAULT_PREF_P2_UPDATE_SITE);
 
-		logger.info("P2_UPDATE_SITE url " + url);
+		info("P2_UPDATE_SITE url " + url);
 		URI uri = null;
    		try {
 			uri = new URI(url);
@@ -234,7 +234,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
         
         // perform operation
         IStatus updateStatus = updateOp.resolveModal(monitor);
-        logger.info("P2 Update Status : " + updateStatus.getCode());
+        info("P2 Update Status : " + updateStatus.getCode());
         
         // if nothing to do, do nothing
         if (updateStatus.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
@@ -259,11 +259,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
         updates = updateOp.getPossibleUpdates();
         
         if (updates != null && updates.length > 0) {
-        	logger.info("Updates available: "+updates.length);
+        	info("Updates available: "+updates.length);
         	for (Update u : updates) {
-        		logger.info(" "+u.toUpdate+" >> "+u.replacement);
+        		info(" "+u.toUpdate+" >> "+u.replacement);
         	}
-        	logger.info(updateOp.getResolutionDetails());
+        	info(updateOp.getResolutionDetails());
         	status = EUpdateStatusType.UPDATE_AVAILABLE;
         	StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
         	sm.setMessage("Updates available: "+updates.length);
@@ -276,5 +276,12 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		return Status.OK_STATUS;
 	}
 
-
+	private void info(String msg) {
+		try {
+			logger.info(msg);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 }
