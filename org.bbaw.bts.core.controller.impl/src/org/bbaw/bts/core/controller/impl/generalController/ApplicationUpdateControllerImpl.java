@@ -5,23 +5,23 @@ import java.net.URISyntaxException;
 
 import javax.inject.Inject;
 
-import org.bbaw.bts.commons.BTSConstants;
+import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
+import org.bbaw.bts.btsviewmodel.StatusMessage;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.ApplicationUpdateController;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.IJobChangeEvent;
-import org.eclipse.core.runtime.jobs.IJobChangeListener;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.UISynchronize;
+import org.eclipse.e4.ui.services.internal.events.EventBroker;
 import org.eclipse.e4.ui.workbench.IWorkbench;
 import org.eclipse.equinox.p2.core.IProvisioningAgent;
-import org.eclipse.equinox.p2.operations.ProvisioningJob;
 import org.eclipse.equinox.p2.operations.ProvisioningSession;
 import org.eclipse.equinox.p2.operations.Update;
 import org.eclipse.equinox.p2.operations.UpdateOperation;
@@ -42,6 +42,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	
 	@Inject
 	private IWorkbench workbench;
+	
+	@Inject
+	private EventBroker eventBroker;
 	
 	private Job updateJob;
 	private Update[] updates;
@@ -164,7 +167,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		logger.info("Software Update Check Controller Job active.");
 		IStatus runStatus = checkForUpdates(monitor);
 		schedule(TIME_UNTIL_RECHECK);
 		logger.info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
@@ -183,10 +185,14 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			 
             @Override
             public void run() {
+            	String msg = "";
+            	for (Update u : updates) {
+            		msg += "\n" + u;
+            	}
                 boolean performUpdate = MessageDialog.openQuestion(
                         null,
                         "Updates available",
-                        "There are updates available. Do you want to install them now?");
+                        "There are updates available. Do you want to install them now?\n"+msg);
                 if (performUpdate) {
                 	updatePending = true;
                 } else {
@@ -274,7 +280,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
         	for (Update u : updates) {
         		logger.info(" "+u.toUpdate+" >> "+u.replacement);
         	}
+        	logger.info(updateOp.getResolutionDetails());
         	status = EUpdateStatusType.UPDATE_AVAILABLE;
+        	StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
+        	sm.setMessage("Updates available: "+updates.length);
+        	eventBroker.post("status_info/current_text_code", sm);
         	return Status.OK_STATUS;
         }
         
