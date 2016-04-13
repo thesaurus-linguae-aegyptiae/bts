@@ -26,6 +26,7 @@ import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.commons.staticAccess.StaticAccessController;
 import org.bbaw.bts.core.controller.generalController.ApplicationStartupController;
+import org.bbaw.bts.core.controller.generalController.ApplicationUpdateController;
 import org.bbaw.bts.core.controller.generalController.BTSUserController;
 import org.bbaw.bts.core.controller.generalController.ExtensionStartUpController;
 import org.bbaw.bts.core.controller.generalController.ISplashScreenController;
@@ -118,6 +119,9 @@ public class ApplicationStartupControllerImpl implements
 
 	@Inject
 	private UISynchronize sync;
+
+	@Inject
+	private ApplicationUpdateController updateController;
 
 
 
