@@ -946,7 +946,6 @@ public class CouchDBManager implements DBManager {
 				success = false;
 			}
 			if (monitor != null) {
-				monitor.worked(1);
 				if (monitor.isCanceled())
 					return false;
 			}
@@ -968,7 +967,6 @@ public class CouchDBManager implements DBManager {
 					success = false;
 				}
 				if (monitor != null) {
-					monitor.worked(1);
 					if (monitor.isCanceled())
 						return false;
 				}
