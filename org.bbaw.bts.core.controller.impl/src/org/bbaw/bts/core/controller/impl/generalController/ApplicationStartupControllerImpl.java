@@ -92,7 +92,7 @@ import org.osgi.service.prefs.BackingStoreException;
 
 
 public class ApplicationStartupControllerImpl implements
-		ApplicationStartupController {
+		ApplicationStartupController, EventHandler {
 
 	private static final String PLUGIN_ID = "org.bbaw.bts.app";
 
@@ -219,50 +219,7 @@ public class ApplicationStartupControllerImpl implements
 		}
 
 		// The should be a better way to close the Splash
-		eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE,
-				new EventHandler() {
-					@Override
-					public void handleEvent(Event event) {
-						context.get(StaticAccessController.class);
-						context.get(PermissionsAndExpressionsEvaluationController.class);
-						IProvisioningAgent agent = context
-								.get(IProvisioningAgent.class);
-						IWorkbench workbench = context.get(IWorkbench.class);
-						if (login != null && login.isRestartRequired())
-						{
-							dbManager.shutdown();
-							workbench.restart();
-						}
-						logger.info("IProvisioningAgent loaded: "
-								+ (agent != null) + ", IWorkbench loaded: "
-								+ (workbench != null));
-						// automated software update
-						// FIXME
-						checkAndInstallSoftwareUpdates(agent, workbench);
-
-						// extension specific startup routines
-						ExtensionStartUpController[] conrollers = null;
-						try {
-							conrollers = loadExtensionStartUpControllers(context);
-						} catch (CoreException e) {
-							logger.error(e);
-						}
-						if (conrollers != null) {
-							for (ExtensionStartUpController c : conrollers) {
-								try {
-									c.startup();
-								} catch (Exception e) {
-									e.printStackTrace();
-								}
-							}
-						}
-
-						
-						splashController.close();
-						checkProjectIndexingDBCollections(projects);
-						eventBroker.unsubscribe(this);
-					}
-				});
+		eventBroker.subscribe(UIEvents.UILifeCycle.ACTIVATE, this);
 
 		logger.info("db_installation_dir " + db_installation_dir);
 
@@ -612,120 +569,154 @@ public class ApplicationStartupControllerImpl implements
 		// defaultPrefs.get(BTSPluginIDs.PREF_MAIN_CORPUS_KEY, null);
 
 	}
+	
+	@Override
+	public void handleEvent(Event event) {
+		context.get(StaticAccessController.class);
+		context.get(PermissionsAndExpressionsEvaluationController.class);
+		IProvisioningAgent agent = context
+				.get(IProvisioningAgent.class);
+		IWorkbench workbench = context.get(IWorkbench.class);
+		if (login != null && login.isRestartRequired())
+		{
+			dbManager.shutdown();
+			workbench.restart();
+		}
+		logger.info("IProvisioningAgent loaded: "
+				+ (agent != null) + ", IWorkbench loaded: "
+				+ (workbench != null));
+
+		// extension specific startup routines
+		ExtensionStartUpController[] conrollers = null;
+		try {
+			conrollers = loadExtensionStartUpControllers(context);
+		} catch (CoreException e) {
+			logger.error(e);
+		}
+		if (conrollers != null) {
+			for (ExtensionStartUpController c : conrollers) {
+				try {
+					c.startup();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		// automated software update
+		// FIXME
+		updateController.isUpdateAvailable();
+
+		splashController.close();
+		checkProjectIndexingDBCollections(projects);
+		eventBroker.unsubscribe(this);
+	}
 
 	private void checkAndInstallSoftwareUpdates(final IProvisioningAgent agent,
 			final IWorkbench workbench) {
-		Job j = new Job("Update Job") {
-			private boolean doInstall = false;
+		
+		/* 1. Prepare update plumbing */
 
-			@Override
-			protected IStatus run(final IProgressMonitor monitor) {
+		final ProvisioningSession session = new ProvisioningSession(
+				agent);
+		final UpdateOperation operation = new UpdateOperation(session);
 
-				/* 1. Prepare update plumbing */
+		// create uri
+		//String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
+		//		BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
+		String urlString = BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE;
+		logger.info("P2_UPDATE_SITE url " + urlString);
+		URI uri = null;
+		try {
+			uri = new URI(urlString);
+		} catch (final URISyntaxException e) {
+			return;
+		}
 
-				final ProvisioningSession session = new ProvisioningSession(
-						agent);
-				final UpdateOperation operation = new UpdateOperation(session);
+		// set location of artifact and metadata repo
+		operation.getProvisioningContext().setArtifactRepositories(
+				new URI[] { uri });
+		operation.getProvisioningContext().setMetadataRepositories(
+				new URI[] { uri });
+		/* 2. check for updates */
 
-				// create uri
-				String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
-						BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
-				logger.info("P2_UPDATE_SITE url " + urlString);
-				URI uri = null;
-				try {
-					uri = new URI(urlString);
-				} catch (final URISyntaxException e) {
-					return Status.CANCEL_STATUS;
-				}
+		SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(),
+				"Checking for application updates...", 200);
+		IStatus status2 = operation.resolveModal(sub.newChild(100));
+		logger.info("P2 Update Status : " + status2.getCode());
 
-				// set location of artifact and metadata repo
-				operation.getProvisioningContext().setArtifactRepositories(
-						new URI[] { uri });
-				operation.getProvisioningContext().setMetadataRepositories(
-						new URI[] { uri });
-				/* 2. check for updates */
+		// run update checks causing I/O
+		final IStatus status = operation.resolveModal(null);
 
-				SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(),
-						"Checking for application updates...", 200);
-				IStatus status2 = operation.resolveModal(sub.newChild(100));
-				logger.info("P2 Update Status : " + status2.getCode());
+		logger.info("P2 Update Status : " + status.getCode());
+		// failed to find updates (inform user and exit)
+		if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
+			return;
+		}
 
-				// run update checks causing I/O
-				final IStatus status = operation.resolveModal(monitor);
+		/* 3. Ask if updates should be installed and run installation */
 
-				logger.info("P2 Update Status : " + status.getCode());
-				// failed to find updates (inform user and exit)
-				if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-					return Status.OK_STATUS;
-				}
+		boolean doInstall = false;
+		// found updates, ask user if to install?
+		if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
+					String updates = "\n";
+					Update[] possibleUpdates = operation
+							.getPossibleUpdates();
+					for (Update update : possibleUpdates) {
+						updates += update + "\n";
+					}
+					doInstall = MessageDialog.openQuestion(new Shell(),
+							"Software Update available. Install?", updates);
 
-				/* 3. Ask if updates should be installed and run installation */
+		}
 
-				// found updates, ask user if to install?
-				if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
-					sync.syncExec(new Runnable() {
+		// start installation
+		if (doInstall) {
+			final ProvisioningJob provisioningJob = operation
+					.getProvisioningJob(null);
+			// updates cannot run from within Eclipse IDE!!!
+			if (provisioningJob == null) {
+				System.err
+						.println("Running update from within Eclipse IDE? This won't work!!!");
+				throw new NullPointerException();
+			}
+
+			// register a job change listener to track
+			// installation progress and notify user upon success
+			provisioningJob
+					.addJobChangeListener(new JobChangeAdapter() {
 						@Override
-						public void run() {
-							String updates = "";
-							Update[] possibleUpdates = operation
-									.getPossibleUpdates();
-							for (Update update : possibleUpdates) {
-								updates += update + "\n";
+						public void done(IJobChangeEvent event) {
+							logger.info("job done. result: "+event.getResult());
+							if (event.getResult().isOK()) {
+								sync.asyncExec(new Runnable() {
+
+									@Override
+									public void run() {
+										boolean restart = MessageDialog
+												.openQuestion(
+														new Shell(),
+														"Updates installed, restart?",
+														"Updates have been installed successfully, do you want to restart?");
+										if (restart) {
+											workbench.restart();
+										}
+									}
+								});
+
 							}
-							doInstall = MessageDialog.openQuestion(new Shell(),
-									"Really install updates?", updates);
+							super.done(event);
 						}
 					});
-				}
 
-				// start installation
-				if (doInstall) {
-					final ProvisioningJob provisioningJob = operation
-							.getProvisioningJob(monitor);
-					// updates cannot run from within Eclipse IDE!!!
-					if (provisioningJob == null) {
-						System.err
-								.println("Running update from within Eclipse IDE? This won't work!!!");
-						throw new NullPointerException();
-					}
-
-					// register a job change listener to track
-					// installation progress and notify user upon success
-					provisioningJob
-							.addJobChangeListener(new JobChangeAdapter() {
-								@Override
-								public void done(IJobChangeEvent event) {
-									if (event.getResult().isOK()) {
-										sync.asyncExec(new Runnable() {
-
-											@Override
-											public void run() {
-												boolean restart = MessageDialog
-														.openQuestion(
-																new Shell(),
-																"Updates installed, restart?",
-																"Updates have been installed successfully, do you want to restart?");
-												if (restart) {
-													workbench.restart();
-												}
-											}
-										});
-
-									}
-									super.done(event);
-								}
-							});
-
-					provisioningJob.schedule();
-				}
-				return Status.OK_STATUS;
+			provisioningJob.schedule();
+			try {
+				provisioningJob.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
-		};
-		j.schedule();
-		try {
-			j.join();
-		} catch (InterruptedException e) {
-			logger.error(e);
+			logger.info("update done: "+provisioningJob.getResult());
 		}
 
 	}
