@@ -120,11 +120,6 @@ public class ApplicationStartupControllerImpl implements
 	@Inject
 	private UISynchronize sync;
 
-	@Inject
-	private ApplicationUpdateController updateController;
-
-
-
 	private List<BTSProject> projects;
 
 	private List<String> activeProjects;
@@ -605,6 +600,7 @@ public class ApplicationStartupControllerImpl implements
 
 		// automated software update
 		// FIXME
+		ApplicationUpdateController updateController = context.get(ApplicationUpdateController.class);
 		updateController.isUpdateAvailable();
 
 		splashController.close();
