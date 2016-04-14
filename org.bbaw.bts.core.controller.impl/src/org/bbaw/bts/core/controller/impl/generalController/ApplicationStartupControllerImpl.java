@@ -599,122 +599,12 @@ public class ApplicationStartupControllerImpl implements
 		}
 
 		// automated software update
-		// FIXME
 		ApplicationUpdateController updateController = context.get(ApplicationUpdateController.class);
 		updateController.isUpdateAvailable();
 
 		splashController.close();
 		checkProjectIndexingDBCollections(projects);
 		eventBroker.unsubscribe(this);
-	}
-
-	private void checkAndInstallSoftwareUpdates(final IProvisioningAgent agent,
-			final IWorkbench workbench) {
-		
-		/* 1. Prepare update plumbing */
-
-		final ProvisioningSession session = new ProvisioningSession(
-				agent);
-		final UpdateOperation operation = new UpdateOperation(session);
-
-		// create uri
-		//String urlString = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
-		//		BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
-		String urlString = BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE;
-		logger.info("P2_UPDATE_SITE url " + urlString);
-		URI uri = null;
-		try {
-			uri = new URI(urlString);
-		} catch (final URISyntaxException e) {
-			return;
-		}
-
-		// set location of artifact and metadata repo
-		operation.getProvisioningContext().setArtifactRepositories(
-				new URI[] { uri });
-		operation.getProvisioningContext().setMetadataRepositories(
-				new URI[] { uri });
-		/* 2. check for updates */
-
-		SubMonitor sub = SubMonitor.convert(new NullProgressMonitor(),
-				"Checking for application updates...", 200);
-		IStatus status2 = operation.resolveModal(sub.newChild(100));
-		logger.info("P2 Update Status : " + status2.getCode());
-
-		// run update checks causing I/O
-		final IStatus status = operation.resolveModal(null);
-
-		logger.info("P2 Update Status : " + status.getCode());
-		// failed to find updates (inform user and exit)
-		if (status.getCode() == UpdateOperation.STATUS_NOTHING_TO_UPDATE) {
-			return;
-		}
-
-		/* 3. Ask if updates should be installed and run installation */
-
-		boolean doInstall = false;
-		// found updates, ask user if to install?
-		if (status.isOK() && status.getSeverity() != IStatus.ERROR) {
-					String updates = "\n";
-					Update[] possibleUpdates = operation
-							.getPossibleUpdates();
-					for (Update update : possibleUpdates) {
-						updates += update + "\n";
-					}
-					doInstall = MessageDialog.openQuestion(new Shell(),
-							"Software Update available. Install?", updates);
-
-		}
-
-		// start installation
-		if (doInstall) {
-			final ProvisioningJob provisioningJob = operation
-					.getProvisioningJob(null);
-			// updates cannot run from within Eclipse IDE!!!
-			if (provisioningJob == null) {
-				System.err
-						.println("Running update from within Eclipse IDE? This won't work!!!");
-				throw new NullPointerException();
-			}
-
-			// register a job change listener to track
-			// installation progress and notify user upon success
-			provisioningJob
-					.addJobChangeListener(new JobChangeAdapter() {
-						@Override
-						public void done(IJobChangeEvent event) {
-							logger.info("job done. result: "+event.getResult());
-							if (event.getResult().isOK()) {
-								sync.asyncExec(new Runnable() {
-
-									@Override
-									public void run() {
-										boolean restart = MessageDialog
-												.openQuestion(
-														new Shell(),
-														"Updates installed, restart?",
-														"Updates have been installed successfully, do you want to restart?");
-										if (restart) {
-											workbench.restart();
-										}
-									}
-								});
-
-							}
-							super.done(event);
-						}
-					});
-
-			provisioningJob.schedule();
-			try {
-				provisioningJob.join();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			logger.info("update done: "+provisioningJob.getResult());
-		}
-
 	}
 
 	protected boolean openInstallationWizard() {
