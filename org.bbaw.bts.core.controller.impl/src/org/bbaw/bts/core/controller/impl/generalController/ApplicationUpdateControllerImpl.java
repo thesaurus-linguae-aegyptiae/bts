@@ -17,6 +17,7 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.core.runtime.jobs.JobChangeAdapter;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
+import org.eclipse.e4.core.contexts.IEclipseContext;
 import org.eclipse.e4.core.services.log.Logger;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.services.internal.events.EventBroker;
@@ -46,6 +47,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	@Inject
 	private EventBroker eventBroker;
 	
+	@Inject
+	private IEclipseContext context;
+	
 	private Job updateJob;
 	private Update[] updates;
 	private volatile EUpdateStatusType status;
@@ -72,6 +76,8 @@ public class ApplicationUpdateControllerImpl extends Job implements
 			if (updates.length > 0) {
 				assert status == EUpdateStatusType.UPDATE_AVAILABLE;
 				return true;
+			} else {
+				info("No software updates.");
 			}
 		} else {
 			scheduleCheck();
@@ -153,6 +159,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
+		agent = context.get(IProvisioningAgent.class);
 		if (workbench != null && agent != null) {
 			IStatus runStatus = checkForUpdates(monitor);
 			schedule(TIME_UNTIL_RECHECK);
