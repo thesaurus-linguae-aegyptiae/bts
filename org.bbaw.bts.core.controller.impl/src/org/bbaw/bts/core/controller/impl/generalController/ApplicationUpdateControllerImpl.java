@@ -52,8 +52,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	private boolean updatePending;
 	private long timeStamp;
 
-	private UpdateOperation updateOp;
-	
 	//public final String DEFAULT_PREF_P2_UPDATE_SITE = "http://telota.bbaw.de/bts-update/update-3.x/repository_3.0.15/";
 	public final String DEFAULT_PREF_P2_UPDATE_SITE = "file:///D:/GIT/aaew/bts-git/aaew-bts/org.bbaw.bts.app.product/target/repository/";
 	
@@ -210,7 +208,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 		// set up provisioning services
 		ProvisioningSession session = new ProvisioningSession(agent);
-		updateOp = new UpdateOperation(session);
+		UpdateOperation operation = new UpdateOperation(session);
 
 		// lookup repository URL: try app configuration, use hard coded default
 		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
@@ -229,11 +227,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		}
    		
         // set location of artifact and metadata repo
-        updateOp.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
-        updateOp.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
+        operation.getProvisioningContext().setArtifactRepositories(new URI[] { uri });
+        operation.getProvisioningContext().setMetadataRepositories(new URI[] { uri });
         
         // perform operation
-        IStatus updateStatus = updateOp.resolveModal(monitor);
+        IStatus updateStatus = operation.resolveModal(monitor);
         info("P2 Update Status : " + updateStatus.getCode());
         
         // if nothing to do, do nothing
@@ -249,21 +247,16 @@ public class ApplicationUpdateControllerImpl extends Job implements
         }
         
         // try to retrieve update job
-		if (updateOp != null) {
-			updateJob = updateOp.getProvisioningJob(monitor);
-		} else {
-			logger.error("Couldn't retrieve update job!");
-		}        
-        
         // obtain updates list
-        updates = updateOp.getPossibleUpdates();
+		updateJob = operation.getProvisioningJob(monitor);
+        updates = operation.getPossibleUpdates();
         
         if (updates != null && updates.length > 0) {
         	info("Updates available: "+updates.length);
         	for (Update u : updates) {
         		info(" "+u.toUpdate+" >> "+u.replacement);
         	}
-        	info(updateOp.getResolutionDetails());
+        	info(operation.getResolutionDetails());
         	status = EUpdateStatusType.UPDATE_AVAILABLE;
         	StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
         	sm.setMessage("Updates available: "+updates.length);
