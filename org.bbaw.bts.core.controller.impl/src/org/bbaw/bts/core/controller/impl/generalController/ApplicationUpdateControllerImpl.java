@@ -117,9 +117,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
 							EUpdateStatusType.UPDATE_SUCCESS
 							: EUpdateStatusType.UPDATE_FAILED;
 					updatePending = false;
+					updateJob = null;
 					if (status == EUpdateStatusType.UPDATE_SUCCESS) {
 						sync.syncExec(new Runnable() {
-
 				            @Override
 				            public void run() {
 				              boolean restart = MessageDialog.openQuestion(null, "Updates installed, restart?",
@@ -148,17 +148,23 @@ public class ApplicationUpdateControllerImpl extends Job implements
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		IStatus runStatus = checkForUpdates(monitor);
-		schedule(TIME_UNTIL_RECHECK);
-		info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
-		if (status == EUpdateStatusType.UPDATE_AVAILABLE) {
-			if (!updatePending) {
-				confirmInstallation();
-			} else {
-				scheduleUpdate();
+		if (workbench != null && agent != null) {
+			IStatus runStatus = checkForUpdates(monitor);
+			schedule(TIME_UNTIL_RECHECK);
+			info("Update Check Controller Status: "+status+"\nStatus of last check: "+runStatus);
+			if (status == EUpdateStatusType.UPDATE_AVAILABLE) {
+				if (!updatePending) {
+					confirmInstallation();
+				} else {
+					scheduleUpdate();
+				}
 			}
+			return runStatus;
+		} else {
+			info("Update Checker: Waiting for Workbench initialization.");
+			schedule(2000);
+			return Status.CANCEL_STATUS;
 		}
-		return runStatus;
 	}
 	
 	private void confirmInstallation() {
@@ -175,7 +181,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
                         "Updates available",
                         "There are updates available. Do you want to install them now?\n"+msg);
                 if (performUpdate) {
+                	info("Installation of Updates confirmed.");
                 	updatePending = true;
+                	scheduleUpdate();
                 } else {
                 	status = EUpdateStatusType.UPDATE_DECLINED;
                 }
