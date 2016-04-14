@@ -129,14 +129,19 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				              }
 				            }
 				          });
+						sendStatusMessage("Software Update successful.");
 					} else {
-						
+						sendStatusMessage("Software Update failed.");
 					}
 					super.done(event);
 				}
 			});
+
 			info("Schedule update job");
 			updateJob.schedule();
+		} else {
+			sendStatusMessage("Software Update failed: no job.");
+			return Status.CANCEL_STATUS;
 		}
 		return null;
 	}
@@ -266,15 +271,19 @@ public class ApplicationUpdateControllerImpl extends Job implements
         	}
         	info(operation.getResolutionDetails());
         	status = EUpdateStatusType.UPDATE_AVAILABLE;
-        	StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
-        	sm.setMessage("Updates available: "+updates.length);
-        	eventBroker.post("status_info/current_text_code", sm);
+        	sendStatusMessage("Updates available: "+updates.length);
         	return Status.OK_STATUS;
         }
         
         updates = new Update[0];
         status = EUpdateStatusType.NO_UPDATE;
 		return Status.OK_STATUS;
+	}
+
+	private void sendStatusMessage(String msg) {
+    	StatusMessage sm = BtsviewmodelFactory.eINSTANCE.createInfoMessage();
+    	sm.setMessage(msg);
+    	eventBroker.post("status_info/current_text_code", sm);
 	}
 
 	private void info(String msg) {
