@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.app.feature"
       label="Berlin Text System Core Application"
-      version="1.0.18.qualifier"
+      version="1.0.21.qualifier"
       provider-name="BBAW"
       os="linux,macosx,win32"
       ws="carbon,cocoa,gtk,win32"
@@ -242,7 +242,7 @@
          id="org.bbaw.bts.core.controller.impl"
          download-size="0"
          install-size="0"
-         version="1.0.13.qualifier"
+         version="1.0.17.qualifier"
          unpack="false"/>
 
    <plugin
@@ -319,7 +319,7 @@
          id="org.bbaw.bts.ui.main"
          download-size="0"
          install-size="0"
-         version="1.0.13.qualifier"
+         version="1.0.14.qualifier"
          unpack="false"/>
 
    <plugin
