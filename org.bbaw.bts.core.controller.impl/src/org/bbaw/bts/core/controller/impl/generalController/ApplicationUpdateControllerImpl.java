@@ -112,6 +112,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 				@Override
 				public void running(IJobChangeEvent event) {
 					info("update job is running. "+event);
+					sendStatusMessage("Installing updates...");
 					status = EUpdateStatusType.UPDATE_RUNNING;
 					super.running(event);
 				}
