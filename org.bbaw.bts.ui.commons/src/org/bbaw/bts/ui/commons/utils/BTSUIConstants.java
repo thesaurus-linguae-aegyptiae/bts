@@ -196,10 +196,14 @@ public class BTSUIConstants {
 	/** The Constant EVENT_TEXT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_TEXT_RELATING_OBJECTS_SELECTED = "event_text_relating_objects/selected";
 	
+	public static final String EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER = "event_text_relating_objects_toggle_filter";
+
 	/** The Constant EVENT_RELATING_OBJECTS_SELECTED. */
 	public static final String EVENT_RELATING_OBJECTS_SELECTED = "event_relating_objects/selected";
 
 	public static final String EVENT_EGY_TEXT_EDITOR_LOAD_LEMMATA = "event_egy_text_editor_load_lemmata/load";
+	
+	public static final String EVENT_EGY_TEXT_EDITOR_INPUT_REQUESTED = "event_egy_text_editor_input_requested/";
 
 	public static final Color COLOR_ERROR = _resources.createColor(new RGB(255, 0, 0));
 

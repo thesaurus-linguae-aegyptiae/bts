@@ -2,12 +2,13 @@ package org.bbaw.bts.core.corpus.controller.impl.partController;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.inject.Inject;
 
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.corpus.CorpusObjectService;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSPassportEntry;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
 import org.eclipse.e4.core.services.log.Logger;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.index.query.FilterBuilder;
@@ -60,7 +61,7 @@ public class PassportEditorPartControllerImpl
 		sqb.setFetchSource(field, null);
 
 		query.setSearchRequestBuilder(sqb);
-		query.setRequestField(field);
+		query.addRequestField(field);
 		query.setAutocompletePrefix(text);
 		query.setRequestTypeFieldValue(entryPath.get(entryPath.size() - 1)
 				.getType());

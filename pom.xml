@@ -30,6 +30,7 @@
 		<module>org.bbaw.bts.commons.libs.elasticsearch</module>
 		<module>org.bbaw.bts.core.commons</module>
 		<module>org.bbaw.bts.core.commons.corpus</module>
+		<module>org.bbaw.bts.core.commons.corpus.help</module>
 
 		<module>org.bbaw.bts.core.controller</module>
 		<module>org.bbaw.bts.core.controller.impl</module>

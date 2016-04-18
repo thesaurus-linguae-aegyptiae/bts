@@ -33,7 +33,7 @@ import java.util.List;
 
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.searchModel.BTSQueryRequest;
+import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.eclipse.core.runtime.IProgressMonitor;
 
 /**

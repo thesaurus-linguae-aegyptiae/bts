@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DaoCouchDB
 Bundle-SymbolicName: org.bbaw.bts.core.remote.dao.couchDB;singleton:=true
-Bundle-Version: 1.0.8.qualifier
+Bundle-Version: 1.0.9.qualifier
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.bbaw.bts.core.remote.dao;bundle-version="1.0.0",
@@ -24,6 +24,7 @@ Import-Package: com.google.gson;version="2.1.0",
  com.google.gson.reflect;version="2.1.0",
  javax.inject,
  org.apache.http.conn;version="4.2.6",
+ org.bbaw.bts.core.dao.util,
  org.eclipse.core.runtime.preferences;version="3.3.0",
  org.eclipse.emf.common.util,
  org.eclipse.emf.ecore.resource,

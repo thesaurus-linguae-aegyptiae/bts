@@ -127,6 +127,7 @@ public class BTSConstants
 	public static final String OWNER_REFERENCED_TYPES_LIST_SEPERATOR = ",";
 	public static final String OWNER_REFERENCED_TYPES_ANY = "ANY";
 	public static final String ANNOTATION_RUBRUM = "Rubrum";
+	public static final String ANNOTATION_SUBTEXT = "Subtext";
 
 	/** The Constant VIEW_ALL_DOCS. */
 	public static final String VIEW_ALL_DOCS = "objects/all_docs";

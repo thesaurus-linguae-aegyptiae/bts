@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: CorpusUI
 Bundle-SymbolicName: org.bbaw.bts.ui.corpus;singleton:=true
-Bundle-Version: 1.0.11.qualifier
+Bundle-Version: 1.0.12.qualifier
 Bundle-Activator: org.bbaw.bts.ui.corpus.internal.Activator
 Bundle-Vendor: BBAW
 Export-Package: org.bbaw.bts.ui.corpus.dialogs,
@@ -49,6 +49,7 @@ Import-Package: javax.annotation;version="1.0.0",
  org.bbaw.bts.core.commons.staticAccess,
  org.bbaw.bts.core.corpus.controller.generalController,
  org.bbaw.bts.core.corpus.controller.partController,
+ org.bbaw.bts.core.dao.util,
  org.bbaw.bts.corpus.btsCorpusModel,
  org.bbaw.bts.searchModel,
  org.bbaw.bts.ui.commons.corpus.converter,
