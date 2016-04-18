@@ -21,7 +21,6 @@
 		
 		<module>org.bbaw.bts.app.feature</module>
 		<module>org.bbaw.bts.corpus.egy.feature</module>
-		<module>org.bbaw.bts.e4.p2.feature</module>
 
 
 		<module>com.opcoach.e4.preferences</module>
@@ -57,7 +56,6 @@
 		<module>org.bbaw.bts.db.couchdb.win32</module>
 		<module>org.bbaw.bts.db.couchdb.win64</module>
 		-->
-		<module>org.bbaw.bts.e4.p2</module>
 		<module>org.bbaw.bts.model</module>
 		<module>org.bbaw.bts.model.edit</module>
 		<module>org.bbaw.bts.model.editor</module>
