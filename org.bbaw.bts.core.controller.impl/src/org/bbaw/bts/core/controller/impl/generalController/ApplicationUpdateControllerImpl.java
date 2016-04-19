@@ -125,6 +125,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 							: EUpdateStatusType.UPDATE_FAILED;
 					updatePending = false;
 					updateJob = null;
+					updates = null;
 					if (status == EUpdateStatusType.UPDATE_SUCCESS) {
 						sync.syncExec(new Runnable() {
 				            @Override
