@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Service-Impl
 Bundle-SymbolicName: org.bbaw.bts.core.services.impl;singleton:=true
-Bundle-Version: 1.0.13.qualifier
+Bundle-Version: 1.1.0.qualifier
 Bundle-Activator: org.bbaw.bts.core.services.impl.internal.Activator
 Bundle-Vendor: BBAW
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
