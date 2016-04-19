@@ -126,8 +126,8 @@
    </plugins>
 
    <features>
-      <feature id="org.bbaw.bts.app.feature" installMode="root"/>
-      <feature id="org.bbaw.bts.corpus.egy.feature"/>
+      <feature id="org.bbaw.bts.app.feature" version="2.0.0.qualifier" installMode="root"/>
+      <feature id="org.bbaw.bts.corpus.egy.feature" version="1.0.0.qualifier"/>
    </features>
 
    <configurations>

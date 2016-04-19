@@ -195,7 +195,7 @@
          id="org.bbaw.bts.commons"
          download-size="0"
          install-size="0"
-         version="1.0.11.qualifier"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
    <plugin
@@ -209,7 +209,7 @@
          id="org.bbaw.bts.model"
          download-size="0"
          install-size="0"
-         version="0.1.11.qualifier"
+         version="1.0.0.qualifier"
          unpack="false"/>
 
    <plugin
@@ -230,56 +230,56 @@
          id="org.bbaw.bts.core.controller"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.controller.impl"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.dao"
          download-size="0"
          install-size="0"
-         version="1.0.7.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.dao.couchDB"
          download-size="0"
          install-size="0"
-         version="1.0.8.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.remote.dao"
          download-size="0"
          install-size="0"
-         version="1.0.2.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.remote.dao.couchDB"
          download-size="0"
          install-size="0"
-         version="1.0.8.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.services"
          download-size="0"
          install-size="0"
-         version="1.0.8.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.services.impl"
          download-size="0"
          install-size="0"
-         version="1.0.12.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
@@ -293,14 +293,14 @@
          id="org.bbaw.bts.db.couchdb"
          download-size="0"
          install-size="0"
-         version="1.0.7.qualifier"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.commons"
          download-size="0"
          install-size="0"
-         version="1.0.8.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
@@ -314,7 +314,7 @@
          id="org.bbaw.bts.ui.main"
          download-size="0"
          install-size="0"
-         version="1.1.0.qualifier"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
