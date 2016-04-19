@@ -9,6 +9,6 @@
   </parent>
   <groupId>org.bbaw.bts</groupId>
   <artifactId>org.bbaw.bts.core.dao.couchDB</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>2.0.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 </project>
