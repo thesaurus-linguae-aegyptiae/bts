@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.btsviewmodel.StatusMessage;
+import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.controller.generalController.ApplicationUpdateController;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -56,9 +57,6 @@ public class ApplicationUpdateControllerImpl extends Job implements
 	private boolean updatePending;
 	private long timeStamp;
 
-	//public final String DEFAULT_PREF_P2_UPDATE_SITE = "http://telota.bbaw.de/bts-update/update-3.x/repository_3.0.15/";
-	public final String DEFAULT_PREF_P2_UPDATE_SITE = "file:///D:/GIT/aaew/bts-git/aaew-bts/org.bbaw.bts.app.product/target/repository/";
-	
 	public ApplicationUpdateControllerImpl() {
 		super("Application Update Check Job");
 		updateJob = null;
@@ -235,7 +233,7 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		// lookup repository URL: try app configuration, use hard coded default
 		IEclipsePreferences prefs = ConfigurationScope.INSTANCE.getNode("org.bbaw.bts.app");
 		String url = prefs.get(BTSPluginIDs.PREF_P2_UPDATE_SITE,
-				DEFAULT_PREF_P2_UPDATE_SITE);
+				BTSConstants.DEFAULT_PREF_P2_UPDATE_SITE);
 
 		info("P2_UPDATE_SITE url " + url);
 		URI uri = null;
