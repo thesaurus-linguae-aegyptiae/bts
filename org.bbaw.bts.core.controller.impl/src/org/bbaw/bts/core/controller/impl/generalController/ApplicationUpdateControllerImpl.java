@@ -214,9 +214,11 @@ public class ApplicationUpdateControllerImpl extends Job implements
 		if (now - timeStamp < TIME_UNTIL_RECHECK) {
 			info("p2 update: last checked at "+timeStamp);
 			if (updates != null) {
-				status = (updates.length > 0)
-						? EUpdateStatusType.UPDATE_AVAILABLE
-						: EUpdateStatusType.NO_UPDATE;
+				if (status != EUpdateStatusType.UPDATE_DECLINED) {
+					status = (updates.length > 0)
+							? EUpdateStatusType.UPDATE_AVAILABLE
+							: EUpdateStatusType.NO_UPDATE;
+				}
 				return Status.CANCEL_STATUS;
 			} else {
 				logger.warn("Check for updates anyway.");
@@ -277,7 +279,9 @@ public class ApplicationUpdateControllerImpl extends Job implements
         		info(" "+u.toUpdate+" >> "+u.replacement);
         	}
         	info(operation.getResolutionDetails());
-        	status = EUpdateStatusType.UPDATE_AVAILABLE;
+        	if (status != EUpdateStatusType.UPDATE_DECLINED) {
+        		status = EUpdateStatusType.UPDATE_AVAILABLE;
+        	}
         	sendStatusMessage("Updates available: "+updates.length);
         	return Status.OK_STATUS;
         }
