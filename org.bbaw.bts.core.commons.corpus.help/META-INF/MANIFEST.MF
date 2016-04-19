@@ -18,6 +18,3 @@ Import-Package: org.bbaw.bts.ui.commons.utils,
  org.eclipse.ui,
  org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
-Bundle-ClassPath: src/,
- .,
- resources/
