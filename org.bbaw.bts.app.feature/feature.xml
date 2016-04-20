@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.app.feature"
       label="Berlin Text System Core Application"
-      version="1.0.14.qualifier"
+      version="2.0.0.qualifier"
       provider-name="BBAW"
       os="linux,macosx,win32"
       ws="carbon,cocoa,gtk,win32"
@@ -30,10 +30,6 @@
 
    <includes
          id="org.eclipse.equinox.p2.core.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="org.bbaw.bts.e4.p2.feature"
          version="0.0.0"/>
 
    <requires>
@@ -82,7 +78,6 @@
       <import plugin="com.opcoach.e4.preferences" version="1.0.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.core.runtime" version="3.9.100" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.util" version="2.4.4" match="perfect"/>
-      <import plugin="org.bbaw.bts.e4.p2"/>
       <import plugin="org.eclipse.ui.workbench.texteditor" version="3.4.0" match="greaterOrEqual"/>
       <import plugin="org.eclipse.xtext.builder" version="2.4.3" match="equivalent"/>
       <import plugin="org.eclipse.swt" version="3.7.0" match="greaterOrEqual"/>
@@ -193,140 +188,140 @@
          id="org.bbaw.bts.app.login"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.commons"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.commons"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.8.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.model"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.model.edit"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.11.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.commons.libs.elasticsearch"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.controller"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.controller.impl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.dao"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.dao.couchDB"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.remote.dao"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.remote.dao.couchDB"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.services"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.services.impl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.db"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.4.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.db.couchdb"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.commons"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.font"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.main"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.resources"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
@@ -340,7 +335,7 @@
          id="org.bbaw.bts.app"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.1.0.qualifier"
          unpack="false"/>
 
    <plugin
@@ -942,14 +937,14 @@
          id="org.bbaw.bts.ui.resources.impl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.corpus.egy.commons"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin

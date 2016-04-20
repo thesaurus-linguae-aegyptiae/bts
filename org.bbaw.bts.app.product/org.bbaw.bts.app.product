@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="1.0.14.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="Berlin Text System" uid="org.bbaw.bts.app.product" id="org.bbaw.bts.app.product" application="org.eclipse.e4.ui.workbench.swt.E4Application" version="2.0.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <configIni use="default">
    </configIni>
@@ -126,9 +126,8 @@
    </plugins>
 
    <features>
-      <feature id="org.bbaw.bts.app.feature" installMode="root"/>
-      <feature id="org.bbaw.bts.e4.p2.feature"/>
-      <feature id="org.bbaw.bts.corpus.egy.feature"/>
+      <feature id="org.bbaw.bts.app.feature" version="2.0.0.qualifier" installMode="root"/>
+      <feature id="org.bbaw.bts.corpus.egy.feature" version="1.0.0.qualifier"/>
    </features>
 
    <configurations>

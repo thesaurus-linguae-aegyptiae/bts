@@ -2,7 +2,7 @@
 <feature
       id="org.bbaw.bts.corpus.egy.feature"
       label="EgyCorpusFeature"
-      version="0.0.14.qualifier"
+      version="1.0.0.qualifier"
       provider-name="BBAW">
 
    <description url="http://www.example.com/description">
@@ -115,112 +115,112 @@
          id="org.bbaw.bts.core.commons.corpus"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.8.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.corpus.controller"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.corpus.controller.impl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.dao.corpus"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.dao.corpus.couchDB"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.services.corpus"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.core.services.corpus.impl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.corpus.text.egy.egydsl"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.corpus.text.egy.egydsl.ui"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.5.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.model.corpus"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.model.corpus.edit"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.8.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.commons.corpus"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.3.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.corpus"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.corpus.egy"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="2.0.0.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.corpus.egy.commons"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
          id="org.bbaw.bts.ui.font.academy"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.2.qualifier"
          unpack="false"/>
 
    <plugin
@@ -353,7 +353,7 @@
          id="org.bbaw.bts.core.commons.corpus.help"
          download-size="0"
          install-size="0"
-         version="0.0.0"
+         version="1.0.0.qualifier"
          unpack="false"/>
 
 </feature>
