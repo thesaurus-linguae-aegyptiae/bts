@@ -3,6 +3,7 @@ package org.bbaw.bts.core.commons.corpus.help;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -21,9 +22,12 @@ public class OpenPDFManualHandler {
 		URL url = b.getEntry("resources/BTS.pdf");
 		File file = null;
 		try {
-			file = new File(FileLocator.resolve(url).toURI());
+			URL resolvedURL = FileLocator.toFileURL(url);
+			URI resolvedURI = new URI(resolvedURL.getProtocol(),
+					resolvedURL.getPath(), null); 
+			file = new File(resolvedURI);
 			OpenExternalBrowser.openURL(file.getAbsolutePath());
-		}catch (URISyntaxException | IOException e) {
+		} catch (URISyntaxException | IOException e) {
 			e.printStackTrace();
 			String errMsg = "Could not open document. "+(file != null ? file.getAbsolutePath() : "");
 			MessageDialog md = new MessageDialog(null, "Error", null, errMsg + "\n" + e.toString(),
