@@ -28,9 +28,12 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 
 	@Inject
 	private BTSLemmaEntry selectionObject;
+	
 	private PassportEditorPart passportEditor;
 
 	private EgyLemmaEditorPart lemmaEditor;
+
+	
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -82,15 +85,16 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 		((GridLayout) passportComposite.getLayout()).marginHeight = 0;
 		((GridLayout) passportComposite.getLayout()).horizontalSpacing = 0;
 		((GridLayout) passportComposite.getLayout()).verticalSpacing = 0;
+
 		IEclipseContext passportChild = context.createChild("passportEditorDialog");
 		passportChild.set(Composite.class, passportComposite);
 		passportChild.set(IServiceConstants.ACTIVE_SELECTION, null);
+		passportChild.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, new Boolean(false));
+
 		passportEditor = ContextInjectionFactory.make(
 				PassportEditorPart.class, passportChild);
 		passportEditor.setInputObjectDirect((BTSCorpusObject) selectionObject);
-//		passportEditor.setUserMayEdit(false);
 
-		
 		sashForm.setWeights(new int[] { 1, 1 });
 		return area;
 	}
