@@ -357,7 +357,7 @@ public class TranslationEditorComposite extends Composite {
 	
 	public void addLanguageSelectionListener(SelectionListener listener)
 	{
-		if (listener != null && !languageSelectionListeners .contains(listener))
+		if (listener != null && !languageSelectionListeners.contains(listener))
 		{
 			languageSelectionListeners.add(listener);
 		}
