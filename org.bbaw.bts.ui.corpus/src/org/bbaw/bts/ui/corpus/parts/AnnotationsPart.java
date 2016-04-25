@@ -309,7 +309,7 @@ public class AnnotationsPart implements EventHandler {
 			@EventTopic("event_text_relating_objects/*") final BTSRelatingObjectsLoadingEvent event) {
 		parentObject = event.getObject();
 		queryId = "relations.objectId-" + parentObject.get_id();
-		if (event != null && !event.getRelatingObjects().isEmpty()) {
+		if (event != null) {
 			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
