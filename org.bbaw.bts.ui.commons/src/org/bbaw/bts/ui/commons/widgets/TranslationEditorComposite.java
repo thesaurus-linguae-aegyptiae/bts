@@ -156,18 +156,16 @@ public class TranslationEditorComposite extends Composite {
 		this.translations = translations2;
 		this.domain = editingDomain;
 		this.required = required;
+		if (bindingContext == null) {
+			bindingContext = new DataBindingContext();
+		}
 		if (translations == null)
 		{
-			if (binding != null)
-			{
-				// if old translation exists, disconnect and dispose biding
-				binding.dispose();
-			}
 			text.setText("");
 			return;
 		}
 		
-		List ls = translations.getLanguages();
+		List<String> ls = translations.getLanguages();
 		List<String> additionalInputs = new Vector<String>(ls.size());
 		for (Object o : ls) {
 			if (o instanceof String) {
@@ -286,29 +284,33 @@ public class TranslationEditorComposite extends Composite {
 			// BtsmodelPackage.BTS_TRANSLATIONS__TRANSLATIONS, trans);
 			// domain.getCommandStack().execute(command);
 		}
-		if (bindingContext != null) {
-			bindingContext.dispose();
-		}
-		bindingContext = new DataBindingContext();
+	}
 
+	private void databindTranslation(BTSTranslation trans) {
 		EMFUpdateValueStrategy us = null;
 		if (required) {
 			us = new EMFUpdateValueStrategy();
 			us.setBeforeSetValidator(new StringNotEmptyValidator());
 		}
-		binding = bindingContext.bindValue(
-				WidgetProperties.text(SWT.Modify).observeDelayed(
-						BTSUIConstants.DELAY, text),
-				EMFEditProperties.value(domain,
-						BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE)
-						.observe(trans), us, null);
-
-		if (required) {
-			bindingContext.addValidationStatusProvider(binding);
-			BackgroundControlDecorationSupport.create(binding, SWT.TOP
-					| SWT.LEFT);
+		if (binding != null && !binding.isDisposed()) {
+			bindingContext.removeBinding(binding);
+			binding.dispose();
 		}
-
+		if (binding == null || binding.isDisposed()) {
+			binding = bindingContext.bindValue(
+					WidgetProperties.text(SWT.Modify).observeDelayed(
+							BTSUIConstants.DELAY, text),
+					EMFEditProperties.value(domain,
+							BtsmodelPackage.Literals.BTS_TRANSLATION__VALUE)
+							.observe(trans), us, null);
+	
+			if (required) {
+				bindingContext.addValidationStatusProvider(binding);
+				BackgroundControlDecorationSupport.create(binding, SWT.TOP
+						| SWT.LEFT);
+			}
+		}
+		
 	}
 	
 	@Override
