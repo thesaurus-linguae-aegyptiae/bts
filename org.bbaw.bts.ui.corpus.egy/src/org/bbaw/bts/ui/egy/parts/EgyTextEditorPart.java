@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
@@ -85,6 +86,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSE4ToGuiceXtextSourceViewerProvider;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsFilterEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsLoadingEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
@@ -2790,7 +2792,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				eventBroker
 						.post(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
 								event);
+			} 
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedRelatedObjectsFilterSet(
+			@UIEventTopic("event_anno_filters/*") final BTSRelatingObjectsFilterEvent event) {
+		if (event != null) {
+			Map<String, Boolean> filters = event.getFilters();
+			System.out.println("TEXT EDITOR RECEIVED ANNO FILTER");
+			for (Entry<String, Boolean> e : filters.entrySet()) {
+				System.out.println(e.getKey() + " --- " + e.getValue());
 			}
+		} else {
+			System.out.println("TEXT EDITOR ANNO FILTER OBLIVIOUS");
+		}
 	}
 
 
