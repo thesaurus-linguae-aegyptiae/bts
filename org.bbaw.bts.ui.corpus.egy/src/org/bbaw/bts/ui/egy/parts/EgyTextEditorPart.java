@@ -618,13 +618,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 					embeddedEditor = embeddedEditorFactory
 							.newEditor(xtextResourceProvider)
-							.showAnnotations(BTSAnnotationAnnotation.TYPE,
-									BTSCommentAnnotation.TYPE,
+							.showAnnotations(
 									"org.eclipse.xtext.ui.editor.error",
 									"org.eclipse.xtext.ui.editor.warning",
 									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
 							.withParent(embeddedEditorComp);
-					
+
 					embeddedEditorModelAccess = embeddedEditor
 							.createPartialEditor("", "§§", "", false);
 					embeddedEditor.getViewer().getTextWidget()
