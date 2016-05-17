@@ -222,11 +222,12 @@ public class AnnotationsPart implements EventHandler {
 			// save menu item selection flags from application model to context
 			for (MMenuElement mi : viewmenu.getChildren()) {
 				if (mi instanceof MHandledMenuItem) {
-					filters.put(mi.getElementId(), ((MHandledMenuItem)mi).isSelected());
+					String key = mi.getElementId().replace("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.", "");
+					filters.put(key, ((MHandledMenuItem)mi).isSelected());
 					// retrieve filter command in order to handle possible submenu entries
 					menuFilterCommand = ((MHandledMenuItem) mi).getCommand();
 				}
-				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation.type"))
+				if (mi.getElementId().equals("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type"))
 					submenu = (MMenu) mi;
 			}
 			// remove submenu if already there
@@ -266,18 +267,19 @@ public class AnnotationsPart implements EventHandler {
 							menuItemType = MMenuFactory.INSTANCE.createMenu();
 							String key = null;
 							for (BTSConfigItem subTypeConfItem : subTypeConfItems) {
-								key = confItem.getValue() + "." + subTypeConfItem.getValue();
+								key = "annotation." + confItem.getValue() + "." + subTypeConfItem.getValue();
 								// create annotation subtype menu entry and append to type submenu
 								MHandledMenuItem menuItemSubType = newFilterMenuItem(key);
 								menuItemSubType.setCommand(menuFilterCommand);
 								menuItemSubType.setLabel(subTypeConfItem.getLabel().getTranslation(lang));
 								((MMenu)menuItemType).getChildren().add(menuItemSubType);
-								filters.put(menuItemSubType.getElementId(), ((MHandledMenuItem)menuItemSubType).isSelected());
+								filters.put(key, ((MHandledMenuItem)menuItemSubType).isSelected());
 							}
 						} else { // create checkable menu entry for type without subtypes
-							menuItemType = newFilterMenuItem(confItem.getValue());
+							String key = "annotation." + confItem.getValue();
+							menuItemType = newFilterMenuItem(key);
 							((MHandledMenuItem)menuItemType).setCommand(menuFilterCommand);
-							filters.put(menuItemType.getElementId(), ((MHandledMenuItem)menuItemType).isSelected());
+							filters.put(key, ((MHandledMenuItem)menuItemType).isSelected());
 						}
 						// label annotation type menu entry and append to submenu
 						menuItemType.setLabel(confItem.getLabel().getTranslation(lang));
@@ -288,17 +290,18 @@ public class AnnotationsPart implements EventHandler {
 		}
 		// save related object filter states to context
 		context.set("org.bbaw.bts.corpus.annotationsPart.filter", filters);
+		eventBroker.post("event_anno_filters/anno_part", new BTSRelatingObjectsFilterEvent(filters));
 	}
 
 
 	private MHandledMenuItem newFilterMenuItem(String key) {
 		MHandledMenuItem menuItem = MMenuFactory.INSTANCE.createHandledMenuItem();
-		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations.type." + key);
+		menuItem.setElementId("org.bbaw.bts.ui.corpus.part.annotations.viewmenu.showType.annotation.type." + key);
 		menuItem.setSelected(true);
 		menuItem.setType(ItemType.CHECK);
 		MParameter menuFilterParam = MCommandsFactory.INSTANCE.createParameter();
 		menuFilterParam.setName("annotationsPartFilterParam");
-		menuFilterParam.setValue("annotations.type." + key);
+		menuFilterParam.setValue(key);
 		menuItem.getParameters().add(menuFilterParam);
 		return menuItem;
 	}
@@ -616,25 +619,26 @@ public class AnnotationsPart implements EventHandler {
 	private boolean isRelatedObjVisible(BTSObject o) {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
-		String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
+		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.";
+		String key = "";
 		if (o instanceof BTSCorpusObject) {
 			if (o instanceof BTSText) {
 				if (o.getType() != null)
-					if (BTSConstants.ANNOTATION_SUBTEXT.equals(o.getType()))
-						key += "glosses"; 
+					if (BTSConstants.ANNOTATION_SUBTEXT.equalsIgnoreCase(o.getType()))
+						key += "subtext"; 
 			} else if (o instanceof BTSAnnotation)
 				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
-					key += "rubra";
+					key += "rubrum";
 				} else { // check annotation type/subtype
-					key += "annotations";
+					key += "annotation";
 					if (o.getType() != null && !o.getType().isEmpty()) {
-						key += ".type." + o.getType();
+						key += "." + o.getType();
 						if (o.getSubtype() != null && !o.getSubtype().isEmpty())
 							key += "." + o.getSubtype();
 					}
 				}
 		} else if (o instanceof BTSComment)
-			key += "comments";
+			key += "comment";
 		return filters.containsKey(key) ? filters.get(key) : true;
 	}
 
