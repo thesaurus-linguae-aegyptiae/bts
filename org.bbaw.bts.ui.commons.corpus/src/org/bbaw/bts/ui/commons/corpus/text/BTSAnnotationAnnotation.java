@@ -18,8 +18,8 @@ public class BTSAnnotationAnnotation extends BTSModelAnnotation {
 
 	public static final String TYPE = "org.bbaw.bts.ui.text.modelAnnotation.annotation";
 
-	public static final String TYPE_RUBRUM = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum";
-	public static final String TYPE_RUBRUM_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.rubrum.highlighted";
+	public static final String TYPE_RUBRUM = "org.bbaw.bts.ui.text.modelAnnotation.rubrum";
+	public static final String TYPE_RUBRUM_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.rubrum.highlighted";
 	public static final String TYPE_HIGHLIGHTED = "org.bbaw.bts.ui.text.modelAnnotation.annotation.highlighted";
 	
 //	public BTSAnnotationAnnotation(BTSIdentifiableItem model, BTSInterTextReference interTextReference,
