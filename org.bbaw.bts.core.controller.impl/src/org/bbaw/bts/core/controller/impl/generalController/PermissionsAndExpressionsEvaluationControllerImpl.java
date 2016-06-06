@@ -222,7 +222,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 	}
 
 	private void evaluateSelectionPermissionsAndExpressions(Object internalSelection) {
-		evaluateUserContextRole(internalSelection);
+		evaluateUserContextRole();
 
 		evaluateMayAdd(internalSelection);
 		evaluateMayDelete(internalSelection);
@@ -312,6 +312,7 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 		return false;
 	}
 
+	private void evaluateUserContextRole() {
 	private void evaluateUserContextRole(Object internalSelection) {
 		userContextRole = BTSCoreConstants.USER_ROLE_GUESTS;
 		if (authenticatedUser == null || mainProject == null) {
