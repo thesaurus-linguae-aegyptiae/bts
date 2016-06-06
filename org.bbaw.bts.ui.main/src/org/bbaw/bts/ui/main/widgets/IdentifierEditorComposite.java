@@ -265,6 +265,7 @@ public class IdentifierEditorComposite extends Composite {
 		if (loaded && !this.isDisposed())
 		{
 			referenceText.setEditable(mayEdit);
+			typeText.setEditable(mayEdit);
 			selectComboViewer.getCombo().setEnabled(mayEdit);
 		}
 		
