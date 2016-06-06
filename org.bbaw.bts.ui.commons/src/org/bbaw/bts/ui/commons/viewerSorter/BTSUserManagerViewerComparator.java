@@ -13,7 +13,18 @@ public class BTSUserManagerViewerComparator extends ViewerComparator {
 
 	@Override
 	public int compare(Viewer viewer, Object e1, Object e2) {
-		return pickSortString(e1).compareTo(pickSortString(e2));
+		String s1 = pickSortString(e1);
+		if (s1 != null) {
+			String s2 = pickSortString(e2);
+			if (s2 != null) {
+				return s1.compareTo(s2);
+			}
+			return -1;
+		}
+		if (pickSortString(e2) != null) {
+			return 1;
+		}
+		return 0;
 	}
 	
 	private String pickSortString(Object o) {
