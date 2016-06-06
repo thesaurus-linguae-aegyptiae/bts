@@ -129,7 +129,7 @@ public class IdentifierEditorComposite extends Composite {
 	}
 
 	@PostConstruct
-	public void postContstruct() {
+	public void postConstruct() {
 
 		loadInput(itemConfig);
 
