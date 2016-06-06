@@ -1,14 +1,17 @@
 package org.bbaw.bts.ui.egy.dialogs;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.bbaw.bts.core.commons.BTSCoreConstants;
+import org.bbaw.bts.core.controller.generalController.PermissionsAndExpressionsEvaluationController;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSCorpusObject;
 import org.bbaw.bts.corpus.btsCorpusModel.BTSLemmaEntry;
 import org.bbaw.bts.ui.corpus.parts.PassportEditorPart;
 import org.bbaw.bts.ui.egy.parts.EgyLemmaEditorPart;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
+import org.eclipse.e4.core.di.annotations.Optional;
 import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -27,13 +30,21 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 	private IEclipseContext context;
 
 	@Inject
+	private PermissionsAndExpressionsEvaluationController permissionsController;
+
+	@Inject
 	private BTSLemmaEntry selectionObject;
 	
 	private PassportEditorPart passportEditor;
 
 	private EgyLemmaEditorPart lemmaEditor;
 
-	
+	@Inject
+	@Optional
+	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
+	private Boolean userMayEdit;
+
+
 	/**
 	 * Create the dialog.
 	 * @param parentShell
@@ -49,6 +60,7 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 	 */
 	@Override
 	protected Control createDialogArea(Composite parent) {
+		userMayEdit &= permissionsController.userMayEditObject(permissionsController.getAuthenticatedUser(), selectionObject);
 		Composite area = (Composite) super.createDialogArea(parent);
 
 		SashForm sashForm = new SashForm(area, SWT.VERTICAL);
@@ -67,12 +79,10 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 		((GridLayout) lemmaEdComposite.getLayout()).verticalSpacing = 0;
 		IEclipseContext lemmaChild = context.createChild("lemmaEditorDialog");
 		lemmaChild.set(Composite.class, lemmaEdComposite);
-		lemmaChild.set(IServiceConstants.ACTIVE_SELECTION, null);
 
 		lemmaEditor = ContextInjectionFactory.make(
 				EgyLemmaEditorPart.class, lemmaChild);
 		lemmaEditor.setInputObjectDirect(selectionObject);
-		lemmaEditor.setUserMayEdit(false);
 		
 		
 		Composite passportComposite = new Composite(sashForm, SWT.NONE);
@@ -89,7 +99,7 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 		IEclipseContext passportChild = context.createChild("passportEditorDialog");
 		passportChild.set(Composite.class, passportComposite);
 		passportChild.set(IServiceConstants.ACTIVE_SELECTION, null);
-		passportChild.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, new Boolean(false));
+		passportChild.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, new Boolean(userMayEdit));
 
 		passportEditor = ContextInjectionFactory.make(
 				PassportEditorPart.class, passportChild);
@@ -107,6 +117,7 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 	protected void createButtonsForButtonBar(Composite parent) {
 		createButton(parent, IDialogConstants.OK_ID, IDialogConstants.OK_LABEL,
 				true);
+		getButton(IDialogConstants.OK_ID).setEnabled(userMayEdit);
 		createButton(parent, IDialogConstants.CANCEL_ID,
 				IDialogConstants.CANCEL_LABEL, false);
 	}

@@ -572,6 +572,12 @@ public class PermissionsAndExpressionsEvaluationControllerImpl implements
 
 
 	@Override
+	public BTSUser getAuthenticatedUser() {
+		return authenticatedUser;
+	}
+
+
+	@Override
 	public void activateDBCollectionContext(String key) {
 		if (key != null) {
 			String localDBCollContext = null;
