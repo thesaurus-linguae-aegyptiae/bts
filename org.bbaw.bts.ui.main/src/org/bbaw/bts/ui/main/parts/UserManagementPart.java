@@ -2632,6 +2632,7 @@ public class UserManagementPart
 				TreeNodeWrapper tn = wrappObject(object);
 				tn.setParent(user_root);
 				user_root.getChildren().add(tn);
+				handleUserTreeSelection((IStructuredSelection) select, user_treeViewer);
 				if (object instanceof BTSUserGroup)
 				{
 					if (observableLisAllUserGroups == null) {
