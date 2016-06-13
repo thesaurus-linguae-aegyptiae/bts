@@ -1562,7 +1562,7 @@ public class UserManagementPart
 								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__CACHED_CHILDREN, tn);
 						compoundCommand.append(command);
 						Command command2 = AddCommand.create(getEditingDomain(selectedDBRoleDesc), selectedDBRoleDesc,
-								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, ug.getName());
+								BtsmodelPackage.Literals.BTSDB_COLLECTION_ROLE_DESC__USER_ROLES, ug.get_id());
 						compoundCommand.append(command2);
 						getEditingDomain(selectedDBRoleDesc).getCommandStack().execute(compoundCommand);
 						manageDirtyObjects(selectedDBRoleDesc, selectedTreeObject);
@@ -1652,7 +1652,7 @@ public class UserManagementPart
 		userGroupMap = new HashMap<String, BTSUserGroup>(groups.size());
 		for (BTSUserGroup u : groups)
 		{
-			userGroupMap.put(u.getName(), u);
+			userGroupMap.put(u.get_id(), u);
 		}
 	}
 
