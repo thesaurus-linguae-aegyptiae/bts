@@ -309,7 +309,7 @@ public class AnnotationsPart implements EventHandler {
 			@EventTopic("event_text_relating_objects/*") final BTSRelatingObjectsLoadingEvent event) {
 		parentObject = event.getObject();
 		queryId = "relations.objectId-" + parentObject.get_id();
-		if (event != null && !event.getRelatingObjects().isEmpty()) {
+		if (event != null) {
 			this.relatingObjectsEvent = event;
 			sync.syncExec(new Runnable() {
 				public void run() {
@@ -392,7 +392,7 @@ public class AnnotationsPart implements EventHandler {
 									new BTSObjectTempSortKeyComparator());
 							if (monitor != null) monitor.beginTask("Load related objects list", list.size());
 							for (Object o : list) {
-								if (o instanceof BTSObject && isRelatedObjVisible((BTSObject)o)) {
+								if (o instanceof BTSObject) {
 									RelatedObjectGroup roGroup = makeRelatedObjectGroup(
 											(BTSObject) o, composite);
 
@@ -619,7 +619,7 @@ public class AnnotationsPart implements EventHandler {
 		if (o instanceof BTSCorpusObject) {
 			if (o instanceof BTSText) {
 				if (o.getType() != null)
-					if (BTSConstants.ANNOTATION_SUBTEXT.equals(o.getType()))
+					if (BTSConstants.ANNOTATION_SUBTEXT.equalsIgnoreCase(o.getType()))
 						key += "glosses"; 
 			} else if (o instanceof BTSAnnotation)
 				if (BTSConstants.ANNOTATION_RUBRUM.equalsIgnoreCase(o.getType())) {
@@ -643,33 +643,13 @@ public class AnnotationsPart implements EventHandler {
 		List<BTSObject> filteredRelatingObjects = new Vector<BTSObject>(relatingObjects.size() / 2);
 		if (monitor != null) monitor.beginTask("Filter related objects", relatingObjects.size());
 		allRelatedObjectsShowed = true;
-		for (BTSObject o : relatingObjects)
-		{
-			if (o instanceof BTSCorpusObject)
-			{
-				if (o instanceof BTSText)
-				{
-					// TODO hardcoded. make configurable which types are to be filtered in
-					if (o.getType() != null && (o.getType().equalsIgnoreCase("glosse")
-							|| o.getType().equalsIgnoreCase("subtext")))
-					{
-						filteredRelatingObjects.add(o);
-					}
-				}
-				else if (o instanceof BTSAnnotation)
-				{
-					filteredRelatingObjects.add(o);
-				}
-			}
-			else
-			{
+		for (BTSObject o : relatingObjects) {
+			if (isRelatedObjVisible(o)) {
 				filteredRelatingObjects.add(o);
 			}
 			if (monitor != null) monitor.worked(1);
-			
 		}
-		if (filteredRelatingObjects.size() > MAX_RELATED_OBJECTS)
-		{
+		if (filteredRelatingObjects.size() > MAX_RELATED_OBJECTS) {
 			allRelatedObjectsShowed = false;
 			return filteredRelatingObjects.subList(0 , MAX_RELATED_OBJECTS);
 		}

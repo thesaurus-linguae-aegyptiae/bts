@@ -2405,26 +2405,23 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 								}
 							});
 							
-							if (relatingObjects != null
-									&& !relatingObjects.isEmpty()) {
-								Job job = new Job("post_relating_objects")
-								{
+							Job job = new Job("post_relating_objects")
+							{
 
-									@Override
-									protected IStatus run(IProgressMonitor monitor) {
-										BTSRelatingObjectsLoadingEvent event = new BTSRelatingObjectsLoadingEvent(
-												text);
-										event.setRelatingObjects(relatingObjects);
-										eventBroker
-												.post(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
-														event);
-										return Status.OK_STATUS;
-									}
-									
-								};
-								job.schedule(1000);
+								@Override
+								protected IStatus run(IProgressMonitor monitor) {
+									BTSRelatingObjectsLoadingEvent event = new BTSRelatingObjectsLoadingEvent(
+											text);
+									event.setRelatingObjects(relatingObjects);
+									eventBroker
+											.post(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
+													event);
+									return Status.OK_STATUS;
+								}
 								
-							}
+							};
+							job.schedule(1000);
+								
 						}
 					};
 					new ProgressMonitorDialog(new Shell()).run(true, true, op);
