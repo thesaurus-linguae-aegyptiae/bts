@@ -1084,12 +1084,9 @@ public class PassportEditorPart {
 
 		// scrollComposite.layout();
 
-		CompoundIdentifiersEditorComposite relationsEditor = ContextInjectionFactory
+		ContextInjectionFactory
 				.make(CompoundIdentifiersEditorComposite.class, child);
 
-		// foreach relation in object.relations
-		// make relation widget
-		// add plus and minus button
 	}
 
 	private CommandStackListener getCommandStackListener() {

@@ -53,6 +53,12 @@ public interface PermissionsAndExpressionsEvaluationController {
 	 */
 	void activateDBCollectionContext(String prefMainCorpus);
 
+
+	/**
+	 * Retrieve currently logged in {@link BTSUser}.
+	 */
+	BTSUser getAuthenticatedUser();
+
 	/**
 	 * Authenticated user is db admin.
 	 *

@@ -81,7 +81,6 @@ public class CompoundIdentifiersEditorComposite extends Composite {
 	}
 
 	private void createWidgets() {
-		// if (corpusObject.getRelations() )
 		if (!object.getExternalReferences().isEmpty())
 		{
 			for (int i = 0; i < object.getExternalReferences().size(); i++) {
@@ -201,7 +200,7 @@ public class CompoundIdentifiersEditorComposite extends Composite {
 
 		child.set(BTSObject.class, object);
 		child.set(BTSResourceProvider.class, resourceProvider);
-		IdentifierEditorComposite editor = ContextInjectionFactory.make(
+		ContextInjectionFactory.make(
 				IdentifierEditorComposite.class, child);
 		// relationMap.put(relationConfig, composite);
 
