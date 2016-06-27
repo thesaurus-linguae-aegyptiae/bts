@@ -1114,9 +1114,11 @@ public class UserManagementPart
 		{
 			public void run()
 			{
-				treeviewer.removeSelectionChangedListener(user_selectionListener);
-				treeviewer.refresh();
-				treeviewer.addSelectionChangedListener(user_selectionListener);
+				if (!treeviewer.getTree().isDisposed()) {
+					treeviewer.removeSelectionChangedListener(user_selectionListener);
+					treeviewer.refresh();
+					treeviewer.addSelectionChangedListener(user_selectionListener);
+				}
 			}
 		});
 
@@ -1124,7 +1126,9 @@ public class UserManagementPart
 
 	private void handleUserTreeSelection(IStructuredSelection selection2, TreeViewer treeViewer)
 	{
-		user_ToolDeleteGroup.setEnabled(false);
+		if (!user_ToolDeleteGroup.isDisposed()) {
+			user_ToolDeleteGroup.setEnabled(false);
+		}
 		if (selection2.getFirstElement() instanceof TreeNodeWrapper)
 		{
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection2.getFirstElement();
@@ -1138,7 +1142,9 @@ public class UserManagementPart
 					loadChildren(parents, treeViewer, false);
 				}
 				selectedGroup = (BTSUserGroup) tn.getObject();
-				user_ToolDeleteGroup.setEnabled(true);
+				if (!user_ToolDeleteGroup.isDisposed()) {
+					user_ToolDeleteGroup.setEnabled(true);
+				}
 				loadGroupEditComposite(selectedGroup);
 				enableUndoRedo(selectedTreeObject);
 			}
@@ -2326,8 +2332,13 @@ public class UserManagementPart
 		{
 			loadAllUsers();
 		}
-		composite_right.dispose();
+		if (composite_right != null && !composite_right.isDisposed()) {
+			composite_right.dispose();
+		}
 		composite_right = null;
+		if (user_sashForm.isDisposed()) {
+			return null;
+		}
 		composite_right = new Composite(user_sashForm, SWT.NONE);
 		composite_right.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -2645,7 +2656,6 @@ public class UserManagementPart
 					observableLisAllUserGroups.add(object);
 					dirtyUserGroups.add((BTSUserGroup) object);
 				}
-				user_treeViewer.setSelection(select);
 			}
 		});
 
