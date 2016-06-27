@@ -2632,6 +2632,7 @@ public class UserManagementPart
 				TreeNodeWrapper tn = wrappObject(object);
 				tn.setParent(user_root);
 				user_root.getChildren().add(tn);
+				StructuredSelection select = new StructuredSelection(tn);
 				handleUserTreeSelection((IStructuredSelection) select, user_treeViewer);
 				if (object instanceof BTSUserGroup)
 				{
@@ -2641,7 +2642,7 @@ public class UserManagementPart
 					observableLisAllUserGroups.add(object);
 					dirtyUserGroups.add((BTSUserGroup) object);
 				}
-				user_treeViewer.setSelection(new StructuredSelection(tn), true);
+				user_treeViewer.setSelection(select);
 			}
 		});
 
