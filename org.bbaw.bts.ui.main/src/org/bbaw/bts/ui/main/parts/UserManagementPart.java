@@ -876,7 +876,7 @@ public class UserManagementPart
 			dialogTitle = "Delete Usergroup";
 			dialogMessage = "Delete selected usergroup: " + labelProvider.getText(object);
 		}
-		if (!permissionController.authenticatedUserMayDeleteUserOrUserGroup((BTSObject)object))
+		if (!permissionController.userMayEditObject(permissionController.getAuthenticatedUser(), (BTSObject)object))
 		{
 			dialogTitle = "Deletion Not Allowed";
 			dialogMessage = "You are not allowed to delete the selected user or usergroup: " + labelProvider.getText(object);
