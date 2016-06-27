@@ -437,6 +437,7 @@ public class UserManagementPart
 		user_ToolDeleteGroup.setToolTipText("Delete");
 		user_ToolDeleteGroup.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
+		user_ToolDeleteGroup.setEnabled(false);
 		user_ToolDeleteGroup.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -1123,6 +1124,7 @@ public class UserManagementPart
 
 	private void handleUserTreeSelection(IStructuredSelection selection2, TreeViewer treeViewer)
 	{
+		user_ToolDeleteGroup.setEnabled(false);
 		if (selection2.getFirstElement() instanceof TreeNodeWrapper)
 		{
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection2.getFirstElement();
@@ -1136,6 +1138,7 @@ public class UserManagementPart
 					loadChildren(parents, treeViewer, false);
 				}
 				selectedGroup = (BTSUserGroup) tn.getObject();
+				user_ToolDeleteGroup.setEnabled(true);
 				loadGroupEditComposite(selectedGroup);
 				enableUndoRedo(selectedTreeObject);
 			}
