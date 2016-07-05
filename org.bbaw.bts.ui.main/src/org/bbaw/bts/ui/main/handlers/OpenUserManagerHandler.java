@@ -2,7 +2,6 @@ package org.bbaw.bts.ui.main.handlers;
 
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSDBBaseObject;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.ui.main.dialogs.UserManagementDialog;
 import org.eclipse.e4.core.contexts.ContextInjectionFactory;
@@ -20,11 +19,7 @@ public class OpenUserManagerHandler
 	public void execute(@Named(IServiceConstants.ACTIVE_SHELL) final Shell shell, IEclipseContext context)
 	{
 		UserManagementDialog dialog = ContextInjectionFactory.make(UserManagementDialog.class, context);
-		//		context.set(UserManagementDialog.class, dialog);
-
-		if (dialog.open() == dialog.OK)
-		{
-		}
+		dialog.open();
 	}
 
 	@CanExecute
