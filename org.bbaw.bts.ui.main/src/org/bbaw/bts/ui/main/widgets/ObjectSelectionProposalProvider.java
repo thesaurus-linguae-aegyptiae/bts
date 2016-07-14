@@ -74,20 +74,11 @@ public class ObjectSelectionProposalProvider implements
 		return comparator;
 	}
 
-	private void loadList() {
-		Job job = new Job("loading") {
+	private List<BTSObject> loadList(final String contents) {
 
+		return gernalObjectController.getObjectProposalsFor(
+				(BTSConfigItem) configItem, contents, object, null);
 
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				list = gernalObjectController.getObjectProposalsFor(
-						(BTSConfigItem) configItem, "", object, monitor);
-
-				return Status.OK_STATUS;
-			}
-		};
-		job.schedule();
-		// job.g
 	}
 
 	public BTSConfig getConfigItem() {
