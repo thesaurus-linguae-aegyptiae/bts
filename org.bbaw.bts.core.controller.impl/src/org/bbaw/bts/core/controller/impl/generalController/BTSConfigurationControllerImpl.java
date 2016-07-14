@@ -1,10 +1,8 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -21,15 +19,12 @@ import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
 import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
-import org.bbaw.bts.core.commons.BTSCoreConstants;
 import org.bbaw.bts.core.controller.generalController.BTSConfigurationController;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.ui.resources.BTSResourceProvider;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.e4.core.di.extensions.Preference;
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 
 public class BTSConfigurationControllerImpl implements BTSConfigurationController
 {
@@ -476,15 +471,11 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	private boolean objectMayReferenceToElementName(BTSObject object,
 			BTSConfigItem relationConfig, String... elementNames) {
-		
 
-		Set<String> references = getReferenceTypesSet(object, relationConfig);
-		
-		if (references.isEmpty())
-		{
-			return false;
-		}
-		else if(references.contains(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
+		List<String> references = configService.getListOfReferencedObjectTypeSubtypesOfObject(object,
+				relationConfig);
+
+		if(references.contains(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
 		{
 			return true; // no restriction
 		}
@@ -504,11 +495,15 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 
 	public Set<String> getReferenceTypesSet(BTSObject object,
 			BTSConfigItem relationConfig) {
+		// XXX massively problematic because occasional objectTypes. substring is not handled
 		String oClass = findObjectClass(object);
 		String oType = object.getType();
 		String oSubtype = object.getSubtype();
 		Set<String> references = new HashSet<String>();
-		if (relationConfig == null) return references;
+		if (relationConfig == null) {
+			return references;
+		}
+
 		if (relationConfig.getOwnerTypesMap().containsKey(BTSConstants.OWNER_REFERENCED_TYPES_ANY))
 		{
 			Object o = relationConfig.getOwnerTypesMap().get(BTSConstants.OWNER_REFERENCED_TYPES_ANY);
@@ -527,7 +522,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		{
 			references.addAll(refs);
 		}
-		if (oType != null && !"".equals(oType.trim()))
+		if (oType != null && !oType.trim().isEmpty())
 		{
 			oClass += BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oType;
 			List<String> trefs = relationConfig.getOwnerTypesMap().get(oClass);
@@ -540,7 +535,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 						references.add(t);
 					}
 				}
-				if (oSubtype != null && !"".equals(oSubtype.trim()))
+				if (oSubtype != null && !oSubtype.trim().isEmpty())
 				{
 					oClass += BTSConstants.OWNER_REFERENCED_TYPES_PATH_SEPERATOR + oSubtype;
 					List<String> srefs = relationConfig.getOwnerTypesMap().get(oClass);
