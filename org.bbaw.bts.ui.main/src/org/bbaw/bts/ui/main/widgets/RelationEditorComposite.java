@@ -68,7 +68,7 @@ import org.eclipse.swt.widgets.Text;
 public class RelationEditorComposite extends Composite {
 	@Inject
 	@Optional
-	private BTSConfigItem itemConfig;
+	private BTSConfigItem relationConfig;
 	
 	@Inject
 	private IEclipseContext context;
@@ -144,7 +144,7 @@ public class RelationEditorComposite extends Composite {
 	@PostConstruct
 	public void postContstruct() {
 
-		loadInput(itemConfig);
+		loadInput(relationConfig);
 
 	}
 
@@ -192,7 +192,7 @@ public class RelationEditorComposite extends Composite {
 
 		EMFUpdateValueStrategy targetToModel = new EMFUpdateValueStrategy();
 		targetToModel.setConverter(new BTSConfigItemToStringConverter());
-		// if (itemConfig.getPassportEditorConfig().isRequired()) {
+		// if (relationConfig.getPassportEditorConfig().isRequired()) {
 		// targetToModel.setBeforeSetValidator(new StringNotEmptyValidator());
 		// }
 		EMFUpdateValueStrategy modelToTarget = new EMFUpdateValueStrategy();
@@ -287,7 +287,7 @@ public class RelationEditorComposite extends Composite {
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
 				IEclipseContext child = context.createChild("searchselect");
-				context.set(BTSConfigItem.class, itemConfig);
+				context.set(BTSConfigItem.class, relationConfig);
 
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
@@ -355,17 +355,16 @@ public class RelationEditorComposite extends Composite {
 	 * Set up content proposal provider for object text field.
 	 */
 	private void createContentProposalAdapter() {
-		if (itemConfig != null) {
+		if (relationConfig != null) {
 			try {
 				KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
 				contentProposalAdapter = new ContentProposalAdapter(
 						text,
 						new TextContentAdapter(),
 						new ObjectSelectionProposalProvider(
-								generalObjectController, itemConfig, corpusObject),
+								generalObjectController, relationConfig, corpusObject),
 						keyStroke,
 						null);
-				System.out.println("proposaladapter added.");
 				contentProposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
 				contentProposalAdapter.addContentProposalListener(new IContentProposalListener() {
 					@Override
