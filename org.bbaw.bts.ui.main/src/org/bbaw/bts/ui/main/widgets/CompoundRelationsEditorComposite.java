@@ -87,8 +87,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 			for (int i = 0; i < object.getRelations().size(); i++) {
 				BTSRelation relation = object.getRelations().get(i);
 				BTSConfigItem relationConfig = getRelationConfig(relation);
-					createWidget(relation, i, relationConfig);
-	
+				createWidget(relation, i, relationConfig);
 			}
 		}
 		else
@@ -153,7 +152,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 				}
 				last = child;
 			}
-			return last;
+			return null;
 		}
 	}
 
@@ -202,8 +201,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 		child.set(BTSObject.class, object);
 		child.set(BTSResourceProvider.class, resourceProvider);
-		RelationEditorComposite editor = ContextInjectionFactory.make(
-				RelationEditorComposite.class, child);
+		ContextInjectionFactory.make(RelationEditorComposite.class, child);
 		// relationMap.put(relationConfig, composite);
 
 		if (index == 0) {
