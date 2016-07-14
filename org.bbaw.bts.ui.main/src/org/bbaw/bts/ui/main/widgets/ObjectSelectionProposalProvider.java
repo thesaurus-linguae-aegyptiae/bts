@@ -37,9 +37,10 @@ public class ObjectSelectionProposalProvider implements
 
 	@Override
 	public IContentProposal[] getProposals(String contents, int position) {
-		if (list == null || list.isEmpty()) {
-			loadList();
+		if (contents.length() > 1) {
+			list = loadList(contents);
 		}
+
 		List<ContentProposal> partialList = new Vector<ContentProposal>();
 		if (list != null && !list.isEmpty()) {
 			for (BTSObject o : list) {
