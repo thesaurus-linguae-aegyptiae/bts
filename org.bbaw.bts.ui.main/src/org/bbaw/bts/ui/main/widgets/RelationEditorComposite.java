@@ -7,7 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSObject;
 import org.bbaw.bts.btsmodel.BTSRelation;
@@ -49,7 +48,6 @@ import org.eclipse.jface.fieldassist.ControlDecoration;
 import org.eclipse.jface.fieldassist.FieldDecorationRegistry;
 import org.eclipse.jface.fieldassist.IContentProposal;
 import org.eclipse.jface.fieldassist.IContentProposalListener;
-import org.eclipse.jface.fieldassist.IContentProposalProvider;
 import org.eclipse.jface.fieldassist.TextContentAdapter;
 import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
@@ -90,7 +88,6 @@ public class RelationEditorComposite extends Composite {
 	private EHandlerService handlerService;
 
 	private ObjectSelectionProposalProvider itemProposalProvider;
-	private boolean makingProposalProvider;
 	
 	@Inject
 	private BTSResourceProvider resourceProvider;
@@ -200,7 +197,7 @@ public class RelationEditorComposite extends Composite {
 				selectComboViewer));
 		IObservableValue target_type_viewer = ViewersObservables
 				.observeSingleSelection(selectComboViewer);
-		Binding binding = bindingContext.bindValue(
+		bindingContext.bindValue(
 				target_type_viewer,
 				EMFEditProperties.value(getEditingDomain(),
 						BtsmodelPackage.Literals.BTS_RELATION__TYPE).observe(
@@ -268,7 +265,7 @@ public class RelationEditorComposite extends Composite {
 
 				SearchSelectObjectDialog dialog = ContextInjectionFactory.make(
 						SearchSelectObjectDialog.class, child);
-				if (dialog.open() == dialog.OK) {
+				if (dialog.open() == SearchSelectObjectDialog.OK) {
 					BTSObject object = dialog.getObject();
 					System.out.println(object.get_id());
 					EditingDomain ed = getEditingDomain();
@@ -311,7 +308,7 @@ public class RelationEditorComposite extends Composite {
 				Label l = (Label) e.getSource();
 				l.setBackground(l.getParent().getBackground());
 				// open search dialog
-				Map map = new HashMap(1);
+				Map<String, String> map = new HashMap<>(1);
 	              map.put("objectId", relation
 	  					.getObjectId());
 	
