@@ -115,6 +115,8 @@ public class RelationEditorComposite extends Composite {
 	
 	private Text text;
 
+	private ContentProposalAdapter contentProposalAdapter;
+
 	private boolean loaded;
 
 	private ComboViewer selectComboViewer;
@@ -217,42 +219,15 @@ public class RelationEditorComposite extends Composite {
 
 		text = new Text(this, SWT.BORDER);
 		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
-		final char[] autoActivationCharacters = new char[] { '.', '#' };
 		text.addFocusListener(new FocusAdapter() {
-
 			@Override
 			public void focusGained(FocusEvent e) {
-
-				if (RelationEditorComposite.this.userMayEdit)
-				{
-				try {
-					KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
-					ContentProposalAdapter adapter = new ContentProposalAdapter(
-							text, new TextContentAdapter(),
-							getObjectProposalProvider(itemConfig), keyStroke,
-							autoActivationCharacters);
-					adapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
-					adapter.addContentProposalListener(new IContentProposalListener() {
-
-						@Override
-						public void proposalAccepted(IContentProposal proposal) {
-							System.out.println(proposal);
-							Command command = SetCommand.create(
-									getEditingDomain(),
-									relation,
-									BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
-									proposal.getContent());
-							getEditingDomain().getCommandStack().execute(
-									command);
-							text.setToolTipText(proposal.getLabel());
-							text.setText(proposal.getLabel());
-						}
-					});
-				} catch (ParseException e1) {
-					e1.printStackTrace();
+				if (RelationEditorComposite.this.userMayEdit) {
+					// make sure we have content proposal adapter for object selection
+					if (contentProposalAdapter == null) {
+						createContentProposalAdapter();
+					}
 				}
-
-			}
 			}
 		});
 
@@ -353,18 +328,46 @@ public class RelationEditorComposite extends Composite {
 		layout();
 	}
 
-	private EditingDomain getEditingDomain() {
-		return editingDomainController.getEditingDomain(corpusObject);
+	/**
+	 * Set up content proposal provider for object text field.
+	 */
+	private void createContentProposalAdapter() {
+		char[] autoActivationCharacters = new char[] { '.', '#' };
+		try {
+			KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
+			contentProposalAdapter = new ContentProposalAdapter(
+					text,
+					new TextContentAdapter(),
+					new ObjectSelectionProposalProvider(
+							generalObjectController, itemConfig, corpusObject),
+					keyStroke,
+					autoActivationCharacters);
+			contentProposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+			contentProposalAdapter.addContentProposalListener(new IContentProposalListener() {
+				@Override
+				public void proposalAccepted(IContentProposal proposal) {
+					Command command = SetCommand.create(
+							getEditingDomain(),
+							relation,
+							BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
+							proposal.getContent());
+					getEditingDomain().getCommandStack().execute(
+							command);
+					text.setToolTipText(proposal.getLabel());
+					text.setText(proposal.getLabel());
+				}
+			});
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 	}
 
-	protected IContentProposalProvider getObjectProposalProvider(
-			BTSConfig configItem) {
-		if (itemProposalProvider == null) {
-			itemProposalProvider = new ObjectSelectionProposalProvider(
-					generalObjectController, configItem, corpusObject);
-		}
-		itemProposalProvider.setConfigItem(configItem);
-		return itemProposalProvider;
+	/**
+	 * Have {@link EditingDomainController} determine the editing domain for the currently loaded {@link BTSObject}.
+	 * @return the {@link EditingDomain} for the current object.
+	 */
+	private EditingDomain getEditingDomain() {
+		return editingDomainController.getEditingDomain(corpusObject);
 	}
 
 	@Override
