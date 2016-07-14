@@ -493,6 +493,7 @@ public class BTSConfigurationControllerImpl implements BTSConfigurationControlle
 		return false;
 	}
 
+	@Deprecated
 	public Set<String> getReferenceTypesSet(BTSObject object,
 			BTSConfigItem relationConfig) {
 		// XXX massively problematic because occasional objectTypes. substring is not handled
