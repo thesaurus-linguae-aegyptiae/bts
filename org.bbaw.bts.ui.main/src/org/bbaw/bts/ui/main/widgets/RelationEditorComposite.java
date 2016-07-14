@@ -52,6 +52,8 @@ import org.eclipse.jface.viewers.ComboViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusAdapter;
 import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Image;
@@ -112,6 +114,8 @@ public class RelationEditorComposite extends Composite {
 	private Text text;
 
 	private ContentProposalAdapter contentProposalAdapter;
+
+	private ControlDecoration textFieldInfoDeco;
 
 	private boolean loaded;
 
@@ -223,6 +227,30 @@ public class RelationEditorComposite extends Composite {
 					if (contentProposalAdapter == null) {
 						createContentProposalAdapter();
 					}
+					if (textFieldInfoDeco != null) {
+						if (text.getText().length() > 1) {
+							textFieldInfoDeco.show();
+						}
+					}
+				}
+			}
+			@Override
+			public void focusLost(FocusEvent e) {
+				super.focusLost(e);
+				if (textFieldInfoDeco != null) {
+					textFieldInfoDeco.hide();
+				}
+			}
+		});
+		text.addModifyListener(new ModifyListener() {
+			@Override
+			public void modifyText(ModifyEvent e) {
+				if (textFieldInfoDeco != null) {
+					if (text.getText().length() > 1) {
+						textFieldInfoDeco.show();
+					} else {
+						textFieldInfoDeco.hide();
+					}
 				}
 			}
 		});
@@ -231,7 +259,6 @@ public class RelationEditorComposite extends Composite {
 			text.setText(generalObjectController.getDisplayName(relation
 					.getObjectId()));
 			text.setToolTipText(text.getText());
-
 		}
 
 		Label lblSearch = new Label(this, SWT.NONE);
@@ -328,33 +355,47 @@ public class RelationEditorComposite extends Composite {
 	 * Set up content proposal provider for object text field.
 	 */
 	private void createContentProposalAdapter() {
-		char[] autoActivationCharacters = new char[] { '.', '#' };
-		try {
-			KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
-			contentProposalAdapter = new ContentProposalAdapter(
-					text,
-					new TextContentAdapter(),
-					new ObjectSelectionProposalProvider(
-							generalObjectController, itemConfig, corpusObject),
-					keyStroke,
-					autoActivationCharacters);
-			contentProposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
-			contentProposalAdapter.addContentProposalListener(new IContentProposalListener() {
-				@Override
-				public void proposalAccepted(IContentProposal proposal) {
-					Command command = SetCommand.create(
-							getEditingDomain(),
-							relation,
-							BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
-							proposal.getContent());
-					getEditingDomain().getCommandStack().execute(
-							command);
-					text.setToolTipText(proposal.getLabel());
-					text.setText(proposal.getLabel());
-				}
-			});
-		} catch (ParseException e1) {
-			e1.printStackTrace();
+		if (itemConfig != null) {
+			try {
+				KeyStroke keyStroke = KeyStroke.getInstance("Ctrl+Space");
+				contentProposalAdapter = new ContentProposalAdapter(
+						text,
+						new TextContentAdapter(),
+						new ObjectSelectionProposalProvider(
+								generalObjectController, itemConfig, corpusObject),
+						keyStroke,
+						null);
+				System.out.println("proposaladapter added.");
+				contentProposalAdapter.setProposalAcceptanceStyle(ContentProposalAdapter.PROPOSAL_REPLACE);
+				contentProposalAdapter.addContentProposalListener(new IContentProposalListener() {
+					@Override
+					public void proposalAccepted(IContentProposal proposal) {
+						Command command = SetCommand.create(
+								getEditingDomain(),
+								relation,
+								BtsmodelPackage.eINSTANCE.getBTSRelation_ObjectId(),
+								proposal.getContent());
+						getEditingDomain().getCommandStack().execute(
+								command);
+						text.setToolTipText(proposal.getLabel());
+						text.setText(proposal.getLabel());
+					}
+				});
+				// add decorator to textfield explaining all of this
+				textFieldInfoDeco = new ControlDecoration(text,
+						SWT.BOTTOM | SWT.LEFT);
+				// re-use an existing image
+				Image image = FieldDecorationRegistry
+						.getDefault()
+						.getFieldDecoration(FieldDecorationRegistry.DEC_INFORMATION)
+						.getImage();
+				// set description and image
+				textFieldInfoDeco.setDescriptionText("Hit Ctrl+Space for content assist.");
+				textFieldInfoDeco.setImage(image);
+				textFieldInfoDeco.hide();
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
