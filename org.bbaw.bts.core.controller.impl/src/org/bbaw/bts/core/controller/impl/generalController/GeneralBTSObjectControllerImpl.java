@@ -1,7 +1,6 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -67,10 +66,30 @@ public class GeneralBTSObjectControllerImpl implements
 					{
 						list.addAll(result);
 					}
+				}
+				if (configurationController.objectMayReferenceToWList(object, configItem)) {
+					BTSQueryRequest query = new BTSQueryRequest(text);
+					query.setQueryBuilder(QueryBuilders.boolQuery()
+						.should(QueryBuilders.matchQuery("name", text))
+						.should(QueryBuilders.termQuery("name", text)));
+					// try and lookup objects by id first
+					query.setIdQuery(true);
+					List<BTSObject> result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
+							false, "BTSLemmaEntry", monitor);
+					if (result != null && !result.isEmpty()) {
+						list.addAll(result);
+					} else {
+						// if id lookup fails, query object names
+						query.setIdQuery(false);
+						result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
+								false, "BTSLemmaEntry", monitor);
+						if (result != null) {
+							list.addAll(result);
+						}
+					}
 //					list.addAll((Collection<? extends BTSObject>) thsService
 //							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
 //									false));
-				} else if (configurationController.objectMayReferenceToWList(object, configItem)) {
 
 				} else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
 					BTSQueryRequest query = new BTSQueryRequest();
