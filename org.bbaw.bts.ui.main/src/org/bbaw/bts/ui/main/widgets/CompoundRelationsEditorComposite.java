@@ -202,29 +202,24 @@ public class CompoundRelationsEditorComposite extends Composite {
 		ContextInjectionFactory.make(RelationEditorComposite.class, child);
 		// relationMap.put(relationConfig, composite);
 
-		if (index == 0) {
 
-			Label delButton = new Label(this, SWT.PUSH);
-			setButtonImage(delButton, relationConfig, false);
-			delButton.setToolTipText("Remove widget");
-			delButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
-					false, 1, 1));
-			((GridData) delButton.getLayoutData()).verticalIndent = 2;
-			delButton.addMouseListener(new MouseAdapter() {
+		Label delButton = new Label(this, SWT.PUSH);
+		setButtonImage(delButton, relationConfig, false);
+		delButton.setToolTipText("Remove widget");
+		delButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false,
+				false, (index > 0) ? 2 : 1, 1));
 
-				@Override
-				public void mouseDown(MouseEvent e) {
-					if (CompoundRelationsEditorComposite.this.userMayEdit)
-					{
+		delButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseDown(MouseEvent e) {
+				if (CompoundRelationsEditorComposite.this.userMayEdit) {
 					Label l = (Label) e.getSource();
 					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-					}
 				}
-
-				@Override
-				public void mouseUp(MouseEvent e) {
-					if (CompoundRelationsEditorComposite.this.userMayEdit)
-					{
+			}
+			@Override
+			public void mouseUp(MouseEvent e) {
+				if (CompoundRelationsEditorComposite.this.userMayEdit) {
 					Label l = (Label) e.getSource();
 					l.setBackground(l.getParent().getBackground());
 					CompoundCommand compoundCommand = new CompoundCommand();
@@ -232,81 +227,44 @@ public class CompoundRelationsEditorComposite extends Composite {
 							.create(editingDomain, relation);
 					compoundCommand.append(command);
 					editingDomain.getCommandStack().execute(compoundCommand);
-					}
 				}
-			});
+			}
+		});
+
+		if (index == 0) {
 			Label addButton = new Label(this, SWT.PUSH);
 			setButtonImage(addButton, relationConfig, true);
 			addButton.setToolTipText("Add Relation");
 			addButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
 					false, 1, 1));
 			((GridData) addButton.getLayoutData()).verticalIndent = 2;
+
 			addButton.addMouseListener(new MouseAdapter() {
-
 				@Override
 				public void mouseDown(MouseEvent e) {
-					if (CompoundRelationsEditorComposite.this.userMayEdit)
-					{
-					Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
+					if (CompoundRelationsEditorComposite.this.userMayEdit) {
+						Label l = (Label) e.getSource();
+						l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
 					}
 				}
-
 				@Override
 				public void mouseUp(MouseEvent e) {
-					if (CompoundRelationsEditorComposite.this.userMayEdit)
-					{
-					Label l = (Label) e.getSource();
-					l.setBackground(l.getParent().getBackground());
-					BTSRelation rel = makeAdditionalRelation();
-					CompoundCommand compoundCommand = new CompoundCommand();
-					org.eclipse.emf.common.command.Command command = AddCommand
-							.create(editingDomain,
-									object,
-									BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
-									rel);
-					compoundCommand.append(command);
-					editingDomain.getCommandStack().execute(compoundCommand);
-					}
-				}
-			});
-		} else {
-			Label delButton = new Label(this, SWT.PUSH);
-			setButtonImage(delButton, relationConfig, false);
-
-			delButton.setToolTipText("Remove widget");
-			delButton.setLayoutData(new GridData(SWT.RIGHT, SWT.TOP, false,
-					false, 1, 1));
-			((GridData) delButton.getLayoutData()).verticalIndent = 2;
-			((GridData) delButton.getLayoutData()).horizontalSpan = 2;
-
-			delButton.addMouseListener(new MouseAdapter() {
-
-				@Override
-				public void mouseDown(MouseEvent e) {
-					if (CompoundRelationsEditorComposite.this.userMayEdit)
-					{
-					Label l = (Label) e.getSource();
-					l.setBackground(BTSUIConstants.VIEW_BACKGROUND_LABEL_PRESSED);
-					}
-				}
-
-				@Override
-				public void mouseUp(MouseEvent e) {
-					if (CompoundRelationsEditorComposite.this.userMayEdit)
-					{
-					Label l = (Label) e.getSource();
-					l.setBackground(l.getParent().getBackground());
-					CompoundCommand compoundCommand = new CompoundCommand();
-					org.eclipse.emf.common.command.Command command = DeleteCommand
-							.create(editingDomain, relation);
-					compoundCommand.append(command);
-					editingDomain.getCommandStack().execute(compoundCommand);
+					if (CompoundRelationsEditorComposite.this.userMayEdit) {
+						Label l = (Label) e.getSource();
+						l.setBackground(l.getParent().getBackground());
+						BTSRelation rel = makeAdditionalRelation();
+						CompoundCommand compoundCommand = new CompoundCommand();
+						org.eclipse.emf.common.command.Command command = AddCommand
+								.create(editingDomain,
+										object,
+										BtsmodelPackage.Literals.BTS_OBJECT__RELATIONS,
+										rel);
+						compoundCommand.append(command);
+						editingDomain.getCommandStack().execute(compoundCommand);
 					}
 				}
 			});
 		}
-
 	}
 
 	private void setButtonImage(Label button, BTSConfigItem relationConfig,
