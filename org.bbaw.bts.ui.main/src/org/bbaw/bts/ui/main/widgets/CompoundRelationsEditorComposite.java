@@ -137,20 +137,18 @@ public class CompoundRelationsEditorComposite extends Composite {
 		if (relationConfigCache.containsKey(relation.getType())) {
 			return relationConfigCache.get(relation.getType());
 		} else {
-			BTSConfigItem last = null;
 			for (BTSConfigItem child : listAllRelationConfigs()) {
-				
-				//if relation type not set
-				if (relation.getType() == null && child.getValue().equals("partOf"))
-				{
-					return child;
+				if (child.getValue() != null) {
+					relationConfigCache.put(child.getValue(), child);
+					if (relation.getType() != null) {
+						if (child.getValue().equals(relation.getType())) {
+							return child;
+						}
+					} else if (child.getValue().equals(DEFAULT_RELATION_TYPE)) {
+						//if relation type not set default to partOf
+						return child;
+					}
 				}
-				else if (child.getValue() != null
-						&& child.getValue().equals(relation.getType())) {
-					relationConfigCache.put(child.getType(), child);
-					return child;
-				}
-				last = child;
 			}
 			return null;
 		}
