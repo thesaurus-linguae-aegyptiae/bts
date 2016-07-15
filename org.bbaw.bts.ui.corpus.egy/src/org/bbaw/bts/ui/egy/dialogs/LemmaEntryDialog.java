@@ -44,6 +44,7 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 	@Named(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT)
 	private Boolean userMayEdit;
 
+	private IEclipseContext passportChild;
 
 	/**
 	 * Create the dialog.
@@ -96,7 +97,7 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 		((GridLayout) passportComposite.getLayout()).horizontalSpacing = 0;
 		((GridLayout) passportComposite.getLayout()).verticalSpacing = 0;
 
-		IEclipseContext passportChild = context.createChild("passportEditorDialog");
+		passportChild = context.createChild("passportEditorDialog");
 		passportChild.set(Composite.class, passportComposite);
 		passportChild.set(IServiceConstants.ACTIVE_SELECTION, null);
 		passportChild.set(BTSCoreConstants.CORE_EXPRESSION_MAY_EDIT, new Boolean(userMayEdit));
@@ -138,9 +139,16 @@ public class LemmaEntryDialog extends TitleAreaDialog {
 
 	@Override
 	protected void okPressed() {
-			passportEditor.save();
-			lemmaEditor.save();
+		passportEditor.save();
+		lemmaEditor.save();
+		passportChild.dispose();
 		super.okPressed();
+	}
+
+	@Override
+	protected void cancelPressed() {
+		passportChild.dispose();
+		super.cancelPressed();
 	}
 
 }
