@@ -38,6 +38,8 @@ import org.eclipse.swt.widgets.Label;
 
 public class CompoundRelationsEditorComposite extends Composite {
 
+	private static final String DEFAULT_RELATION_TYPE = "partOf";
+
 	@Inject
 	private IEclipseContext context;
 
@@ -281,6 +283,7 @@ public class CompoundRelationsEditorComposite extends Composite {
 
 	protected BTSRelation makeAdditionalRelation() {
 		BTSRelation rel = BtsmodelFactory.eINSTANCE.createBTSRelation();
+		rel.setType(DEFAULT_RELATION_TYPE);
 		return rel;
 	}
 	
