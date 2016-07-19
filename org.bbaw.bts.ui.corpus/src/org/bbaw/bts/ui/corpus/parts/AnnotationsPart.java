@@ -687,14 +687,12 @@ public class AnnotationsPart implements EventHandler {
 			@UIEventTopic(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_TOGGLE_FILTER) final String filter) {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Boolean> filters = (HashMap<String, Boolean>) context.get("org.bbaw.bts.corpus.annotationsPart.filter");
-		System.out.println(context);
 		// toggle
 		//String key = "org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show." + filter;
 		String key = filter;
 		filters.put(key, !filters.get(key));
 		if (this.relatingObjectsEvent != null)
 			eventReceivedRelatingObjectsLoadedEvents(relatingObjectsEvent);
-		System.out.println(filters);
 		BTSRelatingObjectsFilterEvent e = new BTSRelatingObjectsFilterEvent(filters);
 		eventBroker.post("event_anno_filters/anno_part", e);
 	}

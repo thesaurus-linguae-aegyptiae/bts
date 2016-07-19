@@ -2808,13 +2808,8 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			@UIEventTopic("event_anno_filters/*") final BTSRelatingObjectsFilterEvent event) {
 		if (event != null) {
 			Map<String, Boolean> filters = event.getFilters();
-			System.out.println("TEXT EDITOR RECEIVED ANNO FILTER");
-			for (Entry<String, Boolean> e : filters.entrySet()) {
-				System.out.println(e.getKey() + " --- " + e.getValue());
-			}
 			//painter.removeAllAnnotationTypes();
 			for (Entry<String, Boolean> e : filters.entrySet()) {
-				System.out.println(e.getKey() + " --- " + e.getValue());
 				String typeId = "org.bbaw.bts.ui.text.modelAnnotation."+e.getKey();
 				String strategyId = null;
 				if (e.getValue()) {
@@ -2834,8 +2829,6 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				}
 			}
 			painter.paint(IPainter.INTERNAL);
-		} else {
-			System.out.println("TEXT EDITOR ANNO FILTER OBLIVIOUS");
 		}
 	}
 
