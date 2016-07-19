@@ -2812,14 +2812,21 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			for (Entry<String, Boolean> e : filters.entrySet()) {
 				System.out.println(e.getKey() + " --- " + e.getValue());
 				String typeId = "org.bbaw.bts.ui.text.modelAnnotation."+e.getKey();
+				String strategyId = null;
 				if (e.getValue()) {
-					String strategyId = e.getKey().startsWith("annotation.") ?
+					strategyId = e.getKey().startsWith("annotation.") ?
 							"org.bbaw.bts.ui.text.modelAnnotation.annotation" :	typeId;
-					painter.addAnnotationType(typeId, strategyId);
-					painter.addAnnotationType(typeId+".highlighted", 
-							strategyId+".highlighted");
-				} else {
-					painter.removeAnnotationType(typeId);
+				}
+				// update editor painter and ruler annotation types
+				for (String suffix : ANNO_TYPES_SUFFIXES) {
+					if (strategyId != null) {
+						painter.addAnnotationType(typeId+suffix,
+								strategyId+suffix);
+						oruler.addAnnotationType(typeId+suffix);
+					} else {
+						painter.removeAnnotationType(typeId+suffix);
+						oruler.removeAnnotationType(typeId+suffix);
+					}
 				}
 			}
 			painter.paint(IPainter.INTERNAL);
