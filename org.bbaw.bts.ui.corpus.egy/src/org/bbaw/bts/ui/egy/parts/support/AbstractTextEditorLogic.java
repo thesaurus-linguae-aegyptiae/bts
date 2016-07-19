@@ -13,32 +13,16 @@ import org.bbaw.bts.ui.egy.parts.egyTextEditor.CommentHighlightedDrawingStrategy
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.RubrumDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextHighlightedDrawingStrategy;
 import org.bbaw.bts.ui.egy.parts.egyTextEditor.SubtextdrawingStrategy;
-import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.AnnotationPainter.ITextStyleStrategy;
-import org.eclipse.jface.text.source.IAnnotationAccess;
 
 public abstract class AbstractTextEditorLogic {
 	
 	protected static final String[] ANNO_TYPES_SUFFIXES = new String[]{"", ".highlighted"};
 
 
-	@SuppressWarnings("restriction")
 	protected void configureEditorDrawingStrategies(AnnotationPainter painter) {
-		IAnnotationAccess annotationAccess = new IAnnotationAccess() {
-			public Object getType(Annotation annotation) {
-				return annotation.getType();
-			}
 
-			public boolean isMultiLine(Annotation annotation) {
-				return true;
-			}
-
-			public boolean isTemporary(Annotation annotation) {
-				return true;
-			}
-		};
-		
 		AnnotationDrawingStrategy sentenceStrategy2 = new AnnotationDrawingStrategy();
 		painter.addDrawingStrategy(BTSSentenceAnnotation.TYPE_HIGHLIGHTED, sentenceStrategy2);
 		painter.setAnnotationTypeColor(BTSSentenceAnnotation.TYPE_HIGHLIGHTED,
