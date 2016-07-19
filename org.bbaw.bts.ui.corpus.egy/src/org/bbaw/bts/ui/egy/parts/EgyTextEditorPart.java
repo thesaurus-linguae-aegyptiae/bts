@@ -1077,6 +1077,10 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		oruler.setAnnotationTypeLayer(BTSSubtextAnnotation.TYPE, 2);
 		oruler.setAnnotationTypeColor(BTSSubtextAnnotation.TYPE, BTSUIConstants.COLOR_SUBTEXT);
 
+		oruler.addAnnotationType(BTSSubtextAnnotation.TYPE_HIGHLIGHTED);
+		oruler.setAnnotationTypeLayer(BTSSubtextAnnotation.TYPE_HIGHLIGHTED, 2);
+		oruler.setAnnotationTypeColor(BTSSubtextAnnotation.TYPE_HIGHLIGHTED, BTSUIConstants.COLOR_SUBTEXT);
+
 		oruler.addAnnotationType(BTSCommentAnnotation.TYPE);
 		oruler.setAnnotationTypeLayer(BTSCommentAnnotation.TYPE, 2);
 		oruler.setAnnotationTypeColor(BTSCommentAnnotation.TYPE,
