@@ -1092,7 +1092,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		rect.setLayoutManager(tl);
 		appendFigure(rect);
 
-		word.eAdapters().add(notifier);
+		if (!word.eAdapters().contains(notifier)) {
+			word.eAdapters().add(notifier);
+		}
 		return rect;
 	}
 
