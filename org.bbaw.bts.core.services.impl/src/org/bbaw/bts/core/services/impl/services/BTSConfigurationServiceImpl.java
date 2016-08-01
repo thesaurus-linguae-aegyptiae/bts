@@ -5,22 +5,18 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Vector;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.bbaw.bts.btsmodel.BTSComment;
 import org.bbaw.bts.btsmodel.BTSConfig;
 import org.bbaw.bts.btsmodel.BTSConfigItem;
 import org.bbaw.bts.btsmodel.BTSConfiguration;
 import org.bbaw.bts.btsmodel.BTSObject;
-import org.bbaw.bts.btsmodel.BTSPassportEditorConfig;
-import org.bbaw.bts.btsmodel.BTSTranslation;
-import org.bbaw.bts.btsmodel.BTSTranslations;
 import org.bbaw.bts.btsmodel.BtsmodelFactory;
 import org.bbaw.bts.btsviewmodel.BTSObjectTypeTreeNode;
-import org.bbaw.bts.btsviewmodel.BtsviewmodelFactory;
 import org.bbaw.bts.commons.BTSConstants;
 import org.bbaw.bts.commons.BTSPluginIDs;
 import org.bbaw.bts.core.commons.BTSCoreConstants;
@@ -29,7 +25,6 @@ import org.bbaw.bts.core.dao.BTSConfigurationDao;
 import org.bbaw.bts.core.dao.util.BTSQueryRequest;
 import org.bbaw.bts.core.services.BTSConfigurationService;
 import org.bbaw.bts.core.services.impl.generic.GenericObjectServiceImpl;
-import org.bbaw.bts.modelUtils.EmfModelHelper;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.preferences.ConfigurationScope;
 import org.eclipse.core.runtime.preferences.InstanceScope;
@@ -1192,36 +1187,32 @@ public class BTSConfigurationServiceImpl extends GenericObjectServiceImpl<BTSCon
 	@Override
 	public List<String> getListOfReferencedObjectTypeSubtypesOfObject(
 			BTSObject object, BTSConfigItem itemConfig) {
+
 		String oClass = findObjectClass(object);
 		String oType = object.getType();
 		String oSubtype = object.getSubtype();
 		List<String> result = new Vector<String>();
-		for(String ownerType : itemConfig.getOwnerTypesMap().keySet())
-		{
-			if (objectTypesPathStringContainsObject(ownerType, oClass, oType, oSubtype))
-			{
-				List<String> referencedTypes = itemConfig.getOwnerTypesMap().get(ownerType);
-				if (referencedTypes != null && !referencedTypes.isEmpty())
-				{
-					for (String referencedType : referencedTypes)
-					{
-						String path = referencedType;
-						if (path.startsWith(BTSCoreConstants.OBJECT_TYPES))
-						{
-							path = path.substring(BTSCoreConstants.OBJECT_TYPES.length() + 1);
-						}
 
-						result.add(path);
-					}
+		for (Entry<String, List<String>> e : itemConfig.getOwnerTypesMap().entrySet()) {
+			String domainType = e.getKey();
+			List<String> rangeTypes = e.getValue();
+			// if no range list given, consider listed type legal for relation object
+			if (rangeTypes == null) {
+				String type = domainType.startsWith(BTSCoreConstants.OBJECT_TYPES) ?
+						domainType.substring(BTSCoreConstants.OBJECT_TYPES.length() + 1) :
+						domainType;
+				result.add(type);
+			} else if (objectTypesPathStringContainsObject(domainType, oClass, oType, oSubtype)) {
+				// otherwise, find legal object types in entries containing subject type
+				for (String rangeType : rangeTypes) {
+					String type = rangeType.startsWith(BTSCoreConstants.OBJECT_TYPES) ?
+							rangeType.substring(BTSCoreConstants.OBJECT_TYPES.length() + 1) :
+							rangeType;
+					result.add(type);
 				}
-				return result;
-
 			}
 		}
-		// find referenced List in map
-		
-		
-		return null;
+		return result;
 	}
 
 

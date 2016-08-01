@@ -224,15 +224,15 @@ public class BTSQueryRequest {
 	}
 
 	public void setResponseFields(String[] responseFieldsArray) {
-		if (responseFieldsArray == null && this.responseFields != null)
-		{
-			this.responseFields.clear();
-			return;
+		if (responseFields == null) {
+			responseFields = new Vector<String>();
 		}
-		this.responseFields = new Vector<String>();
-		for (String s : responseFieldsArray)
-		{
-			responseFields.add(s);
+		this.responseFields.clear();
+		if (responseFieldsArray != null) {
+			for (String s : responseFieldsArray)
+			{
+				responseFields.add(s);
+			}
 		}
 	}
 	

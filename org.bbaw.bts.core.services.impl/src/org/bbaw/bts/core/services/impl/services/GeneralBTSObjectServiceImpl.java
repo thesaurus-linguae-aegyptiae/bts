@@ -61,7 +61,7 @@ public class GeneralBTSObjectServiceImpl implements GeneralBTSObjectService {
 			{
 				GenericObjectService<?, ?> ser = (GenericObjectService<?, ?>) service;
 				Object obj = ser.query(query, objectState, monitor);
-				if (obj instanceof BTSObject)
+				if (obj instanceof List && !((List)obj).isEmpty() && ((List)obj).get(0) instanceof BTSObject)
 				{
 					return (List<BTSObject>) obj;
 				}

@@ -1,7 +1,6 @@
 package org.bbaw.bts.core.controller.impl.generalController;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
@@ -35,42 +34,43 @@ public class GeneralBTSObjectControllerImpl implements
 	@Inject
 	private GeneralBTSObjectService objectService;
 
+	private List<BTSObject> getTypedObjectProposalsFor(String text, String className, IProgressMonitor monitor) {
+		BTSQueryRequest query = new BTSQueryRequest(text);
+		query.setQueryBuilder(QueryBuilders.boolQuery()
+			.must(QueryBuilders.matchPhrasePrefixQuery("name", text)));
+		// try and lookup objects by id first
+		query.setIdQuery(true);
+		List<BTSObject> result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
+				false, className, monitor);
+		if (result != null && !result.isEmpty()) {
+			return result;
+		} else {
+			// if id lookup fails, query object names
+			query.setIdQuery(false);
+			result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
+					false, className, monitor);
+			if (result != null) {
+				return result;
+			}
+		}
+		return new Vector<BTSObject>(0);
+	}
+
 	@Override
 	public List<BTSObject> getObjectProposalsFor(
 			BTSConfigItem configItem, String text, BTSObject object, IProgressMonitor monitor) {
 		List<BTSObject> list = new Vector<BTSObject>();
-		
+
 		//FIXME aktualisieren und auf map umstellen
-		
+
 		if (configItem != null && !configItem.getOwnerTypesMap().isEmpty()) {
 			boolean corpus = false;
 
 				if (configurationController.objectMayReferenceToThs(object, configItem)) {
-					// load
-					BTSQueryRequest query = new BTSQueryRequest();
-					QueryBuilder qb = QueryBuilders.termQuery("eClass",
-							"http://btsmodel/1.0#//BTSThsEntry"); // prefixQuery("name",
-																	// text);
-
-					SearchRequestBuilder sqb = projectService
-							.getSearchRequestBuilder();
-					sqb.setQuery(qb);
-					List<FilterBuilder> filters = makeFilterList(configItem, object);
-
-					FilterBuilder[] filterArray = filters
-							.toArray(new FilterBuilder[filters.size()]);
-					sqb.setPostFilter(FilterBuilders.orFilter(filterArray));
-
-					List<BTSObject> result = queryObjects(query, BTSConstants.OBJECT_STATE_ACTIVE,
-							false, "BTSThsEntry", monitor);
-					if (result != null && !result.isEmpty())
-					{
-						list.addAll(result);
-					}
-//					list.addAll((Collection<? extends BTSObject>) thsService
-//							.query(query, BTSConstants.OBJECT_STATE_ACTIVE,
-//									false));
-				} else if (configurationController.objectMayReferenceToWList(object, configItem)) {
+					list.addAll(getTypedObjectProposalsFor(text, "BTSThsEntry", monitor));
+				}
+				if (configurationController.objectMayReferenceToWList(object, configItem)) {
+					list.addAll(getTypedObjectProposalsFor(text, "BTSLemmaEntry", monitor));
 
 				} else if (configurationController.objectMayReferenceToCorpus(object, configItem)) {
 					BTSQueryRequest query = new BTSQueryRequest();
