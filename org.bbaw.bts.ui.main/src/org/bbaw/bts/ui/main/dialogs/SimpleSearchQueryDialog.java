@@ -12,12 +12,12 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 public class SimpleSearchQueryDialog extends TitleAreaDialog {
@@ -43,22 +43,35 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 	}
 
 	/**
+	 * Configure dialog shell to always be of at least the initial size.
+	 * @see #getInitialSize()
+	 */
+	@Override
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setMinimumSize(getInitialSize());
+	}
+
+	/**
 	 * Create contents of the dialog.
 	 * @param parent
 	 */
 	@Override
-	protected Control createDialogArea(Composite parent) {
+	protected Control createDialogArea(final Composite parent) {
 		Composite area = (Composite) super.createDialogArea(parent);
-		Composite container = new Composite(area, SWT.NONE);
-		container.setLayout(new GridLayout(2, false));
-		container.setLayoutData(new GridData(GridData.FILL_BOTH));
+		Composite containerTop = new Composite(area, SWT.NONE);
+		containerTop.setLayout(new GridLayout(2, false));
+		containerTop.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true));
+		Composite containerBot = new Composite(area, SWT.NONE);
+		containerBot.setLayout(new GridLayout(2, false));
+		containerBot.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, true));
 		
-		Label lblFullTextSearch = new Label(container, SWT.NONE);
+		Label lblFullTextSearch = new Label(containerTop, SWT.NONE);
 		lblFullTextSearch.setText("Full Text Search");
-		lblFullTextSearch.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		lblFullTextSearch.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
 
-		text = new Text(container, SWT.BORDER | SWT.SEARCH);
-		text.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		text = new Text(containerTop, SWT.BORDER | SWT.SEARCH);
+		text.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 2, 1));
 		
 		if (searchString != null)
 		{
@@ -66,9 +79,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			text.setSelection(text.getText().length());
 		}
 		
-		idButton = new Button(container, SWT.CHECK);
+		idButton = new Button(containerBot, SWT.CHECK);
 		idButton.setText("Search for IDs");
-		idButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		idButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
 		idButton.setData(false);
 		idButton.addSelectionListener(new SelectionListener() {
 			@Override
@@ -81,9 +94,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			public void widgetDefaultSelected(SelectionEvent e) {}
 		});
 		
-		exactButton = new Button(container, SWT.CHECK);
+		exactButton = new Button(containerBot, SWT.CHECK);
 		exactButton.setText("Search for Names only");
-		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 2, 1));
+		exactButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 2, 1));
 		exactButton.setData(false);
 		exactButton.addSelectionListener(new SelectionListener() {
 			@Override
@@ -97,9 +110,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			}
 		});
 		
-		wildcardButton = new Button(container, SWT.PUSH);
+		wildcardButton = new Button(containerBot, SWT.PUSH);
 		wildcardButton.setText("Add *-wildcard");
-		wildcardButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		wildcardButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1));
 		wildcardButton.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -116,9 +129,9 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 			}
 		});
 		
-		qmarksButton = new Button(container, SWT.PUSH);
+		qmarksButton = new Button(containerBot, SWT.PUSH);
 		qmarksButton.setText("Put in \"...\"");
-		qmarksButton.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1));
+		qmarksButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, true, false, 1, 1));
 		qmarksButton.addSelectionListener(new SelectionListener() {
 			
 			@Override
@@ -200,4 +213,8 @@ public class SimpleSearchQueryDialog extends TitleAreaDialog {
 		idButton.setData(checked);
 	}
 
+	@Override
+	protected boolean isResizable() {
+		return true;
+	}
 }
