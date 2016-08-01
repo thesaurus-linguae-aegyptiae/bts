@@ -437,6 +437,7 @@ public class UserManagementPart
 		user_ToolDeleteGroup.setToolTipText("Delete");
 		user_ToolDeleteGroup.setImage(resourceProvider.getImage(
 				Display.getDefault(), BTSResourceProvider.IMG_DELETE));
+		user_ToolDeleteGroup.setEnabled(false);
 		user_ToolDeleteGroup.addSelectionListener(new SelectionAdapter()
 		{
 
@@ -875,7 +876,7 @@ public class UserManagementPart
 			dialogTitle = "Delete Usergroup";
 			dialogMessage = "Delete selected usergroup: " + labelProvider.getText(object);
 		}
-		if (!permissionController.authenticatedUserMayDeleteUserOrUserGroup((BTSObject)object))
+		if (!permissionController.userMayEditObject(permissionController.getAuthenticatedUser(), (BTSObject)object))
 		{
 			dialogTitle = "Deletion Not Allowed";
 			dialogMessage = "You are not allowed to delete the selected user or usergroup: " + labelProvider.getText(object);
@@ -1113,9 +1114,11 @@ public class UserManagementPart
 		{
 			public void run()
 			{
-				treeviewer.removeSelectionChangedListener(user_selectionListener);
-				treeviewer.refresh();
-				treeviewer.addSelectionChangedListener(user_selectionListener);
+				if (!treeviewer.getTree().isDisposed()) {
+					treeviewer.removeSelectionChangedListener(user_selectionListener);
+					treeviewer.refresh();
+					treeviewer.addSelectionChangedListener(user_selectionListener);
+				}
 			}
 		});
 
@@ -1123,6 +1126,9 @@ public class UserManagementPart
 
 	private void handleUserTreeSelection(IStructuredSelection selection2, TreeViewer treeViewer)
 	{
+		if (!user_ToolDeleteGroup.isDisposed()) {
+			user_ToolDeleteGroup.setEnabled(false);
+		}
 		if (selection2.getFirstElement() instanceof TreeNodeWrapper)
 		{
 			TreeNodeWrapper tn = (TreeNodeWrapper) selection2.getFirstElement();
@@ -1136,6 +1142,9 @@ public class UserManagementPart
 					loadChildren(parents, treeViewer, false);
 				}
 				selectedGroup = (BTSUserGroup) tn.getObject();
+				if (!user_ToolDeleteGroup.isDisposed()) {
+					user_ToolDeleteGroup.setEnabled(true);
+				}
 				loadGroupEditComposite(selectedGroup);
 				enableUndoRedo(selectedTreeObject);
 			}
@@ -2323,8 +2332,13 @@ public class UserManagementPart
 		{
 			loadAllUsers();
 		}
-		composite_right.dispose();
+		if (composite_right != null && !composite_right.isDisposed()) {
+			composite_right.dispose();
+		}
 		composite_right = null;
+		if (user_sashForm.isDisposed()) {
+			return null;
+		}
 		composite_right = new Composite(user_sashForm, SWT.NONE);
 		composite_right.setLayout(new FillLayout(SWT.HORIZONTAL));
 
@@ -2632,6 +2646,8 @@ public class UserManagementPart
 				TreeNodeWrapper tn = wrappObject(object);
 				tn.setParent(user_root);
 				user_root.getChildren().add(tn);
+				StructuredSelection select = new StructuredSelection(tn);
+				handleUserTreeSelection((IStructuredSelection) select, user_treeViewer);
 				if (object instanceof BTSUserGroup)
 				{
 					if (observableLisAllUserGroups == null) {
@@ -2640,7 +2656,6 @@ public class UserManagementPart
 					observableLisAllUserGroups.add(object);
 					dirtyUserGroups.add((BTSUserGroup) object);
 				}
-				user_treeViewer.setSelection(new StructuredSelection(tn), true);
 			}
 		});
 

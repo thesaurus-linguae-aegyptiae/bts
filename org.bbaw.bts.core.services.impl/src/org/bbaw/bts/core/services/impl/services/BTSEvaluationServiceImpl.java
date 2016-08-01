@@ -360,11 +360,9 @@ public class BTSEvaluationServiceImpl implements BTSEvaluationService
 					|| userId.equals(authenticatedUser.getUserName())) {
 				return true;
 			}
-			if (userGroups != null && !userGroups.isEmpty()) {
-				for (BTSUserGroup g : userGroups) {
-					if (userId.equals(g.get_id()) || userId.equals(g.getName())) {
-						return true;
-					}
+			if (authenticatedUser.getGroupIds() != null && !authenticatedUser.getGroupIds().isEmpty()) {
+				if (authenticatedUser.getGroupIds().contains(userId)) {
+					return true;
 				}
 			}
 
