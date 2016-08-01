@@ -199,17 +199,17 @@
                 <handlers xmi:id="_qDQvYaY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.handler.deleteInAnnotationPart" contributionURI="bundleclass://org.bbaw.bts.ui.corpus/org.bbaw.bts.ui.corpus.handlers.DeleteInAnnotationPartHandler" command="_QRJZIKRPEeO1QoiwGMOm0Q"/>
                 <menus xmi:id="_foj34LlhEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu" label="Menu">
                   <tags>ViewMenu</tags>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_x8St8LlhEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.rubra" label="Show Rubra" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
-                    <parameters xmi:id="_8-OqALlkEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="rubra"/>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_x8St8LlhEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.rubrum" label="Show Rubra" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                    <parameters xmi:id="_8-OqALlkEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="rubrum"/>
                   </children>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_9oZvwLlhEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.comments" label="Show Comments" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
-                    <parameters xmi:id="__CEKALlkEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="comments"/>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_9oZvwLlhEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.comment" label="Show Comments" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                    <parameters xmi:id="__CEKALlkEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="comment"/>
                   </children>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_rR4D8LnbEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.glosses" label="Show Glosses" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
-                    <parameters xmi:id="_6CG-ELnbEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="glosses"/>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_rR4D8LnbEeWW7cLsp5AL_w" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.subtext" label="Show Glosses" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                    <parameters xmi:id="_6CG-ELnbEeWW7cLsp5AL_w" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="subtext"/>
                   </children>
-                  <children xsi:type="menu:HandledMenuItem" xmi:id="_gtgS4MBVEeWn7e3vTos4TQ" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotations" label="Show Annotations" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
-                    <parameters xmi:id="_kjklgMBVEeWn7e3vTos4TQ" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="annotations"/>
+                  <children xsi:type="menu:HandledMenuItem" xmi:id="_gtgS4MBVEeWn7e3vTos4TQ" elementId="org.bbaw.bts.ui.corpus.part.annotations.viewmenu.show.annotation" label="Show Annotations" selected="true" type="Check" command="_ecT_0LlkEeWW7cLsp5AL_w">
+                    <parameters xmi:id="_kjklgMBVEeWn7e3vTos4TQ" elementId="annotationsPartFilterParam" name="annotationsPartFilterParam" value="annotation"/>
                   </children>
                 </menus>
                 <toolbar xmi:id="_qDQvYqY0EeSMm_n5aML7dg" elementId="org.bbaw.bts.ui.corpus.toolbar.3">

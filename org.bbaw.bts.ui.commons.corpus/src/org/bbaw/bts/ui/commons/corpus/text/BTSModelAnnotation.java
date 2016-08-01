@@ -28,6 +28,8 @@ public class BTSModelAnnotation extends XtextAnnotation
 	private BTSObject relatingObject;
 	
 	protected String cachedType;
+	
+	private boolean highlighted = false;
 
 	
 	public BTSModelAnnotation(String type, BTSIdentifiableItem model)
@@ -109,16 +111,14 @@ public class BTSModelAnnotation extends XtextAnnotation
 
 	public void setHighlighted(boolean highlighted)
 	{
-		if (highlighted)
-		{
-			if (!getType().endsWith(HIGHLIGHTED)) {
-				cachedType = getType();
-				setType(getType() + HIGHLIGHTED);
-			}
-		} else {
-			setType(cachedType);
-		}
+		this.highlighted = highlighted;
 	}
+	
+	@Override
+	public String getType() {
+		return super.getType() + (this.highlighted ? HIGHLIGHTED : "");
+	}
+	
 	@Override
 	public String getText() {
 		if (relatingObject != null)

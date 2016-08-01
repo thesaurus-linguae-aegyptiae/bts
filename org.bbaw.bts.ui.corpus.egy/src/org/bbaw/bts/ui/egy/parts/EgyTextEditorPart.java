@@ -45,6 +45,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.Vector;
 
@@ -85,6 +86,7 @@ import org.bbaw.bts.corpus.btsCorpusModel.BtsCorpusModelPackage;
 import org.bbaw.bts.corpus.text.egy.egyDsl.TextContent;
 import org.bbaw.bts.corpus.text.egy.ui.custom.BTSE4ToGuiceXtextSourceViewerProvider;
 import org.bbaw.bts.searchModel.BTSModelUpdateNotification;
+import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsFilterEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSRelatingObjectsLoadingEvent;
 import org.bbaw.bts.ui.commons.corpus.events.BTSTextSelectionEvent;
 import org.bbaw.bts.ui.commons.corpus.interfaces.IBTSEditor;
@@ -616,13 +618,12 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 
 					embeddedEditor = embeddedEditorFactory
 							.newEditor(xtextResourceProvider)
-							.showAnnotations(BTSAnnotationAnnotation.TYPE,
-									BTSCommentAnnotation.TYPE,
+							.showAnnotations(
 									"org.eclipse.xtext.ui.editor.error",
 									"org.eclipse.xtext.ui.editor.warning",
 									BTSSentenceAnnotation.TYPE_HIGHLIGHTED)
 							.withParent(embeddedEditorComp);
-					
+
 					embeddedEditorModelAccess = embeddedEditor
 							.createPartialEditor("", "§§", "", false);
 					embeddedEditor.getViewer().getTextWidget()
@@ -1071,6 +1072,14 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 		oruler.setAnnotationTypeLayer(BTSAnnotationAnnotation.TYPE_RUBRUM, 3);
 		oruler.setAnnotationTypeColor(BTSAnnotationAnnotation.TYPE_RUBRUM,
 				BTSUIConstants.COLOR_RUBRUM);
+
+		oruler.addAnnotationType(BTSSubtextAnnotation.TYPE);
+		oruler.setAnnotationTypeLayer(BTSSubtextAnnotation.TYPE, 2);
+		oruler.setAnnotationTypeColor(BTSSubtextAnnotation.TYPE, BTSUIConstants.COLOR_SUBTEXT);
+
+		oruler.addAnnotationType(BTSSubtextAnnotation.TYPE_HIGHLIGHTED);
+		oruler.setAnnotationTypeLayer(BTSSubtextAnnotation.TYPE_HIGHLIGHTED, 2);
+		oruler.setAnnotationTypeColor(BTSSubtextAnnotation.TYPE_HIGHLIGHTED, BTSUIConstants.COLOR_SUBTEXT);
 
 		oruler.addAnnotationType(BTSCommentAnnotation.TYPE);
 		oruler.setAnnotationTypeLayer(BTSCommentAnnotation.TYPE, 2);
@@ -2782,7 +2791,37 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 				eventBroker
 						.post(BTSUIConstants.EVENT_TEXT_RELATING_OBJECTS_LOADED,
 								event);
+			} 
+	}
+	
+	@Inject
+	@Optional
+	void eventReceivedRelatedObjectsFilterSet(
+			@UIEventTopic("event_anno_filters/*") final BTSRelatingObjectsFilterEvent event) {
+		if (event != null) {
+			Map<String, Boolean> filters = event.getFilters();
+			//painter.removeAllAnnotationTypes();
+			for (Entry<String, Boolean> e : filters.entrySet()) {
+				String typeId = "org.bbaw.bts.ui.text.modelAnnotation."+e.getKey();
+				String strategyId = null;
+				if (e.getValue()) {
+					strategyId = e.getKey().startsWith("annotation.") ?
+							"org.bbaw.bts.ui.text.modelAnnotation.annotation" :	typeId;
+				}
+				// update editor painter and ruler annotation types
+				for (String suffix : ANNO_TYPES_SUFFIXES) {
+					if (strategyId != null) {
+						painter.addAnnotationType(typeId+suffix,
+								strategyId+suffix);
+						oruler.addAnnotationType(typeId+suffix);
+					} else {
+						painter.removeAnnotationType(typeId+suffix);
+						oruler.removeAnnotationType(typeId+suffix);
+					}
+				}
 			}
+			painter.paint(IPainter.INTERNAL);
+		}
 	}
 
 
