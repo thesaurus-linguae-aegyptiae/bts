@@ -1795,27 +1795,22 @@ public class EgyTextEditorPart extends AbstractTextEditorLogic implements IBTSEd
 			for (BTSModelAnnotation a : list) {
 				
 				// add selected Items
-				textItems.add(((BTSModelAnnotation) a)
-						.getModel());
+				textItems.add(a.getModel());
 				
 				// calculate start and end
-				if (((BTSModelAnnotation) a).getModel() instanceof BTSSentenceItem) 
+				if (a.getModel() instanceof BTSSentenceItem) 
 					if  (!a.getClass().getSuperclass().equals(BTSModelAnnotation.class) 
 							|| a instanceof BTSLemmaAnnotation) {
 						Position pos = embeddedEditor.getViewer().getAnnotationModel()
 								.getPosition(a);
-						BTSSentenceItem item = (BTSSentenceItem) ((BTSModelAnnotation) a)
-								.getModel();
+						BTSSentenceItem item = (BTSSentenceItem) a.getModel();
 
 						if (startItem == null
-								// move selection offset to right if within an Ambivalence
-								|| (item.eContainer() instanceof BTSLemmaCase)) {
+								&& !(item instanceof BTSAmbivalence)) {
 							startItem = item;
 						}
 						if (endItem == null
-								// move selection end to right if not within an Ambivalence
-								|| (!(item instanceof BTSAmbivalence) && pos.getOffset() + pos.getLength() > endItemOffeset)
-								|| (item.eContainer() instanceof BTSLemmaCase)) {
+								|| (!(item instanceof BTSAmbivalence) && pos.getOffset() + pos.getLength() > endItemOffeset)) {
 							endItem = item;
 							endItemOffeset = pos.getOffset() + pos.getLength();
 						}
