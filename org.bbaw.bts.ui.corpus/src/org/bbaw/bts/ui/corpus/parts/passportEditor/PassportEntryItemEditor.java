@@ -612,7 +612,7 @@ public class PassportEntryItemEditor extends PassportEntryEditorComposite {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if(e.keyCode == SWT.CR){
+				if(e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR){
 					// open search dialog
 					IEclipseContext child = context.createChild("searchselect");
 
