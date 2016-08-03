@@ -671,13 +671,13 @@ public class EgyLemmatizerPart implements SearchViewer {
 					public void selectionChanged(SelectionChangedEvent event) {
 						StructuredSelection selection = (StructuredSelection) event
 								.getSelection();
-						List<String> list = selection.toList();
+						List<?> list = selection.toList();
 						String translation = "";
 						if (list.size() == 1) {
 							translation = (String) selection.getFirstElement();
 						} else {
-							for (String s : list) {
-								translation += s + "; ";
+							for (Object s : list) {
+								translation += s.toString() + "; ";
 							}
 							if (translation.length() > 1) {
 								translation = translation.substring(0,
@@ -759,6 +759,10 @@ public class EgyLemmatizerPart implements SearchViewer {
 		if (entry.getTranslations() != null) {
 			BTSTranslation trans = entry.getTranslations().getBTSTranslation(
 					wordTranslate_Editor.getLanguage());
+			System.out.println("translation: "+trans);
+			System.out.println("current word translation: "+currentWord.getTranslation().getTranslations());
+			String lang = wordTranslate_Editor.getLanguage();
+			System.out.println("lang: " + lang);
 			if (trans == null) {
 				trans = entry.getTranslations().getBTSTranslation("de");
 			}
@@ -767,9 +771,21 @@ public class EgyLemmatizerPart implements SearchViewer {
 			}
 			if (trans != null) {
 				String[] subtranslations = trans.getValue().split(
-						BTSCoreConstants.TRANSLATIONS_SUB_DELIMITER);
+						BTSCoreConstants.TRANSLATIONS_SUB_DELIMITER+" ");
 				clearingRequired = false;
 				translationViewer.setInput(subtranslations);
+				if (currentWord.getTranslation() != null) {
+					String wordTrans = currentWord.getTranslation().getTranslation(lang);
+					System.out.println("current word: "+wordTrans);
+					if (wordTrans != null) {
+						for (int i=0; i<subtranslations.length; i++) {
+							System.out.println(subtranslations[i]);
+							if (subtranslations[i].equals(wordTrans)) {
+								translationViewer.getList().select(i);
+							}
+						}
+					}
+				}
 				wordTranslate_Editor.setTranslationText(trans.getValue());
 			}
 		}
