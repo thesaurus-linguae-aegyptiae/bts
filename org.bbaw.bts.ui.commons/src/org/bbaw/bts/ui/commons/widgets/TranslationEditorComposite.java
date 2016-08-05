@@ -344,12 +344,9 @@ public class TranslationEditorComposite extends Composite {
 	
 	public void setTranslationText(String text)
 	{
-		if (text != null)
-		{
-			this.text.setText(text);
-		}
+		this.text.setText(text != null ? text : "");
 	}
-	
+
 	public String getLanguage()
 	{
 		return combo.getText();

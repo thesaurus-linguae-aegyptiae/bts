@@ -163,6 +163,8 @@ public class EgyLemmatizerPart implements SearchViewer {
 	@Inject
 	private EMenuService menuService;
 
+	protected static final String TRANSLATIONS_SUB_DELIMITER = BTSCoreConstants.TRANSLATIONS_SUB_DELIMITER + " ";
+
 	private BTSWord currentWord;
 	private Text lemmaID_text;
 	private Text flex_text;
@@ -671,17 +673,17 @@ public class EgyLemmatizerPart implements SearchViewer {
 					public void selectionChanged(SelectionChangedEvent event) {
 						StructuredSelection selection = (StructuredSelection) event
 								.getSelection();
-						List<String> list = selection.toList();
+						List<?> list = selection.toList();
 						String translation = "";
 						if (list.size() == 1) {
 							translation = (String) selection.getFirstElement();
 						} else {
-							for (String s : list) {
-								translation += s + "; ";
+							for (Object s : list) {
+								translation += s.toString() + TRANSLATIONS_SUB_DELIMITER;
 							}
 							if (translation.length() > 1) {
 								translation = translation.substring(0,
-										translation.length() - 2);
+										translation.length() - TRANSLATIONS_SUB_DELIMITER.length());
 							}
 						}
 						wordTranslate_Editor.setTranslationText(translation
@@ -755,10 +757,14 @@ public class EgyLemmatizerPart implements SearchViewer {
 	}
 
 	private void loadTranslationProposals(BTSLemmaEntry entry) {
-		boolean clearingRequired = true;
+		String translationEditorText = null;
 		if (entry.getTranslations() != null) {
+			// if chosen lemma has translations, pick those for language selected
+			// in translations editor
+			String lang = wordTranslate_Editor.getLanguage();
 			BTSTranslation trans = entry.getTranslations().getBTSTranslation(
-					wordTranslate_Editor.getLanguage());
+					lang);
+			// if none found for selected language, fallback to de or en
 			if (trans == null) {
 				trans = entry.getTranslations().getBTSTranslation("de");
 			}
@@ -766,17 +772,25 @@ public class EgyLemmatizerPart implements SearchViewer {
 				trans = entry.getTranslations().getBTSTranslation("en");
 			}
 			if (trans != null) {
-				String[] subtranslations = trans.getValue().split(
-						BTSCoreConstants.TRANSLATIONS_SUB_DELIMITER);
-				clearingRequired = false;
+				// populate list viewer with translation choices
+				translationEditorText = trans.getValue();
+				String[] subtranslations = trans.getValue().split(TRANSLATIONS_SUB_DELIMITER);
 				translationViewer.setInput(subtranslations);
-				wordTranslate_Editor.setTranslationText(trans.getValue());
+				if (currentWord.getTranslation() != null) {
+					// try to autoselect current word's translation from translations list
+					String wordTrans = currentWord.getTranslation().getTranslation(lang);
+					if (wordTrans != null) {
+						translationEditorText = wordTrans;
+						for (int i=0; i<subtranslations.length; i++) {
+							if (subtranslations[i].trim().equals(wordTrans)) {
+								translationViewer.getList().select(i);
+							}
+						}
+					}
+				}
 			}
 		}
-		if (clearingRequired) {
-			// clear translations viewer
-		}
-
+		wordTranslate_Editor.setTranslationText(translationEditorText);
 	}
 
 	@PreDestroy
@@ -930,7 +944,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 			}
 
 			editingDomain.getCommandStack().execute(compoundCommand);
-			wordTranslate_Editor.setTranslationText("");
+			wordTranslate_Editor.setTranslationText(null);
 			wordTranslate_Editor.save();
 		}
 
