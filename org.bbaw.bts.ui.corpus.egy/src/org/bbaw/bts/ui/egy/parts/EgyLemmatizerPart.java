@@ -316,7 +316,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT);
 				}
 
@@ -340,7 +340,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					if (!lemmaName_text.getText().equals(
 							lemmaViewerSearchFilter.getFilterString())) {
 						lemmaViewerSearchFilter.setFilterString(lemmaName_text
@@ -560,7 +560,7 @@ public class EgyLemmatizerPart implements SearchViewer {
 
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.keyCode == SWT.CR) {
+				if (e.keyCode == SWT.CR || e.keyCode == SWT.KEYPAD_CR) {
 					shiftCaret(BTSUIConstants.EVENT_TEXT_SELECTION_NEXT);
 				}
 
