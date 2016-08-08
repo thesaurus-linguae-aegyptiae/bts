@@ -1780,11 +1780,9 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 							break;
 						case TypedLabel.TRANSLATION :
 							if (word.getTranslation() != null) {
-								System.out.println(word.getTranslation().getTranslations());
-								System.out.println(word.getTranslation().getLanguages());
-									String lang = l.getTranslationLang();
-									String trans = word.getTranslation().getTranslation(lang);
-									l.setText(lang + ":" + (trans != null ? trans : ""));
+								String lang = l.getTranslationLang();
+								String trans = word.getTranslation().getTranslation(lang);
+								l.setText(lang + ":" + (trans != null ? trans : ""));
 							}
 							break;
 					}
