@@ -551,7 +551,6 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 		if (word != null) {
 			IFigure rect = (IFigure) wordMap.get(word.get_id());
 			refreshFigureFromModel(rect, word);
-			
 		}
 	}
 
@@ -1051,14 +1050,14 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 
 		if (showLemmaId)
 		{
-		// add lemma key
-		addLKeyToWordFigure(word, rect);
+			// add lemma key
+			addLKeyToWordFigure(word, rect);
 		}
 		
 		if (showFlexion)
 		{
-		// add flexion code
-		addFCodeToWordFigure(word, rect);
+			// add flexion code
+			addFCodeToWordFigure(word, rect);
 		}
 		
 		if (showTransDE)
@@ -1101,13 +1100,13 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 	private void addTransToWordFigure(BTSWord word, WordFigure rect,
 			String language) {
 		TypedLabel l = new TypedLabel();
-		l.setType(TypedLabel.TRANSLATION);
+		l.setTranslationLang(language);
 		if (word.getTranslation() != null 
 				&& word.getTranslation().getTranslation(language) != null 
-				&& !"".equals(word.getTranslation().getTranslation(language)))
+				&& !"".equals(word.getTranslation().getTranslation(language))) {
 			l.setText(language + ": " + word.getTranslation().getTranslation(language));
+		}
 		rect.add(l);
-		
 	}
 
 	private void addFCodeToWordFigure(BTSWord word, WordFigure rect) {
@@ -1768,32 +1767,24 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 				else if (fig instanceof TypedLabel) {
 					TypedLabel l = (TypedLabel) fig;
 					switch (l.getType()) {
-					case TypedLabel.LEMMA :
-						l.setText(word.getLKey());
-						lset = true;
-						break;
-					case TypedLabel.FLEXION :
-						l.setText(word.getFlexCode());
-						fset = true;
-						break;
-					case TypedLabel.TRANSLITATION :
-						l.setText(word.getWChar());
-						break;
-					case TypedLabel.TRANSLATION :
-						if (word.getTranslation() != null && l.getText() != null && l.getText().length() > 1)
-						{
-							String lang = l.getText().substring(0, 2);
-							String trans = word.getTranslation().getTranslation(lang);
-							if (trans == null)
-							{
-								l.setText(lang + ":");
+						case TypedLabel.LEMMA :
+							l.setText(word.getLKey());
+							lset = true;
+							break;
+						case TypedLabel.FLEXION :
+							l.setText(word.getFlexCode());
+							fset = true;
+							break;
+						case TypedLabel.TRANSLITATION :
+							l.setText(word.getWChar());
+							break;
+						case TypedLabel.TRANSLATION :
+							if (word.getTranslation() != null) {
+								String lang = l.getTranslationLang();
+								String trans = word.getTranslation().getTranslation(lang);
+								l.setText(lang + ":" + (trans != null ? trans : ""));
 							}
-							else
-							{
-								l.setText(lang + ":" + trans);
-							}
-						}
-						break;
+							break;
 					}
 				}
 				
@@ -1806,7 +1797,7 @@ public class SignTextComposite extends Composite implements IBTSEditor {
 			{
 				addFCodeToWordFigure(word, wf);
 			}
-			//FIXME add hieroglyphs, translations!
+			//FIXME add hieroglyphs
 		}
 		
 	}
